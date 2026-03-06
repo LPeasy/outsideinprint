@@ -9,7 +9,7 @@
 
     <meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ with .Params.subtitle }}{{ . }}{{ else }}{{ with .Summary }}{{ . | plainify | truncate 160 }}{{ else }}Outside In Print - Essays, literature, reports, and working papers.{{ end }}{{ end }}{{ end }}" />
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
 
     {{ partial "head_fonts.html" . }}
     {{ partial "opengraph.html" . }}
@@ -30,3 +30,5 @@
     </div>
   </body>
 </html>
+
+

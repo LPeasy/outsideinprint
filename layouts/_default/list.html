@@ -9,9 +9,10 @@
         {{ with .Params.subtitle }}{{ . }} | {{ end }}
         {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
         {{ with .Params.version }} | v{{ . }}{{ end }}
-        {{ if .Params.pdf }} | <a href="{{ .Params.pdf }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+        {{ if .Params.pdf }} | <a href="{{ .Params.pdf | relURL }}" target="_blank" rel="noopener">PDF</a>{{ end }}
       </div>
     </div>
   {{ end }}
 {{ end }}
+
 
