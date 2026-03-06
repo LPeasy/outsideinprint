@@ -1,11 +1,11 @@
 ﻿{{ define "main" }}
   <section class="grid">
-    <a class="card" href="{{ "/essays/" | relURL }}"><div class="k">Section</div><div class="v">Essays</div></a>
-    <a class="card" href="{{ "/literature/" | relURL }}"><div class="k">Section</div><div class="v">Literature</div></a>
-    <a class="card" href="{{ "/reports/" | relURL }}"><div class="k">Section</div><div class="v">Reports</div></a>
-    <a class="card" href="{{ "/working-papers/" | relURL }}"><div class="k">Section</div><div class="v">Working Papers</div></a>
-    <a class="card" href="{{ "/library/" | relURL }}"><div class="k">Index</div><div class="v">Library</div></a>
-    <a class="card" href="{{ "/start-here/" | relURL }}"><div class="k">Start</div><div class="v">Start Here</div></a>
+    <a class="card" href="{{ "essays/" | relURL }}"><div class="k">Section</div><div class="v">Essays</div></a>
+    <a class="card" href="{{ "literature/" | relURL }}"><div class="k">Section</div><div class="v">Literature</div></a>
+    <a class="card" href="{{ "reports/" | relURL }}"><div class="k">Section</div><div class="v">Reports</div></a>
+    <a class="card" href="{{ "working-papers/" | relURL }}"><div class="k">Section</div><div class="v">Working Papers</div></a>
+    <a class="card" href="{{ "library/" | relURL }}"><div class="k">Index</div><div class="v">Library</div></a>
+    <a class="card" href="{{ "start-here/" | relURL }}"><div class="k">Start</div><div class="v">Start Here</div></a>
   </section>
 
   {{ $featured := where site.RegularPages "Params.featured" true }}
