@@ -1,0 +1,17 @@
+﻿{{ define "main" }}
+  <h2 class="list-title">{{ .Title }}</h2>
+
+  {{ $pages := .Pages }}
+  {{ range sort $pages "Title" "asc" }}
+    <div class="item">
+      <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+      <div class="m">
+        {{ with .Params.subtitle }}{{ . }} | {{ end }}
+        {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+        {{ with .Params.version }} | v{{ . }}{{ end }}
+        {{ if .Params.pdf }} | <a href="{{ .Params.pdf }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+      </div>
+    </div>
+  {{ end }}
+{{ end }}
+

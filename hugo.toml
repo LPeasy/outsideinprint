@@ -1,0 +1,17 @@
+baseURL = "https://outsideinprint.org/"
+title = "Outside In Print"
+languageCode = "en-us"
+
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[permalinks]
+essays = "/essays/:slug/"
+literature = "/literature/:slug/"
+reports = "/reports/:slug/"
+working-papers = "/working-papers/:slug/"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false

@@ -1,0 +1,69 @@
+﻿# Outside In Print
+
+A minimalist, print-forward Hugo site for publishing writing and **PDF editions**.
+
+## Publishing policy
+
+- See `PUBLISHING_POLICY.md` for the v1 publishing contract, tradeoff decisions, and CI enforcement rules.
+
+## Local run
+
+```sh
+hugo server -D
+```
+
+## Publishing workflow
+
+1. Create a new piece (example):
+   - `hugo new essays/my-title.md`
+2. Write, then set `draft: false` when ready.
+3. Build PDF editions locally:
+   - `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
+4. Run preflight:
+   - `powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1`
+5. Commit + push (push = publish once GitHub Pages is enabled).
+
+## Metadata conventions
+
+Each non-draft piece should include:
+
+- `section_label`
+- `version` (bump on material revision)
+- `edition` (e.g., "First digital edition")
+- `issue` (simple imprint numbering)
+- `pdf` path: `/pdfs/<slug>.pdf`
+- optional `featured: true` (shows on homepage)
+
+## Imprint upgrade (print feel)
+
+Single pages render an **edition header** plus a **Cite this** block so each page reads like a real imprint object, not a blog post.
+
+## PDF edition generation (Typst)
+
+Local:
+- Install Typst + Pandoc.
+- Run: `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
+
+CI:
+- GitHub Actions runs `scripts/build_pdfs_typst_ci.ps1` on every push to `main`.
+- Flow: Markdown -> Pandoc (Typst writer) -> Typst compile -> `static/pdfs/` -> preflight -> Hugo build -> deploy.
+
+## Verification commands
+
+Expected pass (real content):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1
+```
+
+Expected pass (fixture suite):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1 -ContentRoot .\tests\fixtures\pass\content -PdfRoot .\tests\fixtures\pass\static\pdfs
+```
+
+Expected fail (fixture suite):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1 -ContentRoot .\tests\fixtures\fail\content -PdfRoot .\tests\fixtures\fail\static\pdfs
+```

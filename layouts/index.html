@@ -1,0 +1,26 @@
+﻿{{ define "main" }}
+  <section class="grid">
+    <a class="card" href="/essays/"><div class="k">Section</div><div class="v">Essays</div></a>
+    <a class="card" href="/literature/"><div class="k">Section</div><div class="v">Literature</div></a>
+    <a class="card" href="/reports/"><div class="k">Section</div><div class="v">Reports</div></a>
+    <a class="card" href="/working-papers/"><div class="k">Section</div><div class="v">Working Papers</div></a>
+    <a class="card" href="/library/"><div class="k">Index</div><div class="v">Library</div></a>
+    <a class="card" href="/start-here/"><div class="k">Start</div><div class="v">Start Here</div></a>
+  </section>
+
+  {{ $featured := where site.RegularPages "Params.featured" true }}
+  {{ if gt (len $featured) 0 }}
+    <h2 class="list-title" style="margin-top:28px;">Selected</h2>
+    {{ range sort $featured "Title" "asc" }}
+      <div class="item">
+        <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        <div class="m">
+          {{ with .Params.section_label }}{{ . }}{{ end }}
+          {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
+          {{ with .Params.version }} | v{{ . }}{{ end }}
+        </div>
+      </div>
+    {{ end }}
+  {{ end }}
+{{ end }}
+

@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Hugo: Serve Drafts (Open Browser)",
+      "type": "shell",
+      "command": "hugo",
+      "args": [
+        "server",
+        "-D",
+        "-O"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Hugo: Serve (No Drafts)",
+      "type": "shell",
+      "command": "hugo",
+      "args": [
+        "server",
+        "-O"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Hugo: Build (Minify)",
+      "type": "shell",
+      "command": "hugo",
+      "args": [
+        "--minify"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Preflight: Check PDFs + Metadata",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\preflight.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build PDFs (Typst)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\\\build_pdfs_typst_local.ps1"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

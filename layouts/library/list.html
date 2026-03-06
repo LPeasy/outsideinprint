@@ -1,0 +1,30 @@
+﻿{{ define "main" }}
+  <h2 class="list-title">Library</h2>
+
+  {{ $sections := slice
+    (dict "key" "essays" "label" "ESSAYS")
+    (dict "key" "literature" "label" "LITERATURE")
+    (dict "key" "reports" "label" "REPORTS")
+    (dict "key" "working-papers" "label" "WORKING PAPERS")
+  }}
+
+  {{ range $section := $sections }}
+    {{ $sectionKey := index $section "key" }}
+    {{ $sectionLabel := index $section "label" }}
+    {{ $pages := where site.RegularPages "Section" $sectionKey }}
+    {{ $pages = where $pages "Params.pdf" "!=" nil }}
+
+    {{ if gt (len $pages) 0 }}
+      <h2 class="list-title" style="margin-top:22px;">{{ $sectionLabel }}</h2>
+      {{ range sort $pages "Title" "asc" }}
+        <div class="item">
+          <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+          <div class="m">
+            {{ with .Params.version }}v{{ . }} | {{ end }}
+            <a href="{{ .Params.pdf }}" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
