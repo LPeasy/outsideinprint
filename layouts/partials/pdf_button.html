@@ -1,5 +1,6 @@
 ﻿{{ if .Params.pdf }}
 <p class="pdf-download">
-  <a href="{{ strings.TrimPrefix "/" .Params.pdf | relURL }}" target="_blank" rel="noopener">Download PDF</a>
+  <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">Download PDF</a>
 </p>
 {{ end }}
+

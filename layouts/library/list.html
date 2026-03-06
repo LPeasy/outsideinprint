@@ -21,12 +21,13 @@
           <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
           <div class="m">
             {{ with .Params.version }}v{{ . }} | {{ end }}
-            <a href="{{ strings.TrimPrefix "/" .Params.pdf | relURL }}" target="_blank" rel="noopener">PDF</a>
+            <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">PDF</a>
           </div>
         </div>
       {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
+
 
 
