@@ -24,6 +24,8 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
