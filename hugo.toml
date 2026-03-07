@@ -1,4 +1,4 @@
-baseURL = "https://lpeasy.github.io/outsideinprint/"
+﻿baseURL = "https://lpeasy.github.io/outsideinprint/"
 title = "Outside In Print"
 languageCode = "en-us"
 
@@ -8,10 +8,11 @@ disableKinds = ["taxonomy", "term"]
 [permalinks]
 essays = "/essays/:slug/"
 literature = "/literature/:slug/"
-reports = "/reports/:slug/"
+syd-and-oliver = "/syd-and-oliver/:slug/"
 working-papers = "/working-papers/:slug/"
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = false
+
