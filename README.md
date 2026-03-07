@@ -1,4 +1,4 @@
-﻿# Outside In Print
+# Outside In Print
 
 A minimalist, print-forward Hugo site for publishing writing and **PDF editions**.
 
@@ -67,3 +67,43 @@ Expected fail (fixture suite):
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1 -ContentRoot .\tests\fixtures\fail\content -PdfRoot .\tests\fixtures\fail\static\pdfs
 ```
+
+## Medium migration (automated)
+
+Dry run (classification + report only, no file writes):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\import_medium_export.ps1 -ZipPath "C:\Users\lawto\OneDrive\Desktop\OutsideInPrint\medium-export-3-6-26.zip" -DryRun
+```
+
+Full import run (writes markdown + localized media):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\import_medium_export.ps1 -ZipPath "C:\Users\lawto\OneDrive\Desktop\OutsideInPrint\medium-export-3-6-26.zip"
+```
+
+Rerun behavior:
+- Existing target files are skipped and reported (`existing_target`).
+- Slugs are stabilized via `reports/medium-slug-map.json`.
+
+Post-import workflow:
+1. Generate PDFs: `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
+2. Flip selected imported essays from `draft: true` to `draft: false`
+3. Run preflight: `powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1`
+
+Fixture test harness:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\test_medium_import.ps1
+```
+
+## Essay integrity audit
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\audit_essay_integrity.ps1
+```
+## PDF build internals
+
+- Shared PDF build runner: `scripts/build_pdfs_typst_shared.ps1`
+- Local wrapper: `scripts/build_pdfs_typst_local.ps1`
+- CI wrapper: `scripts/build_pdfs_typst_ci.ps1`

@@ -228,3 +228,26 @@ button:focus-visible,
 .brand-link:focus-visible{
   border-bottom:none;
 }
+
+.item .d{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+article img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:18px auto;
+  border-radius:8px;
+}
+article figure{
+  margin:20px 0;
+}
+article figcaption{
+  color:var(--muted);
+  font-family:var(--sans);
+  font-size:12px;
+  margin-top:6px;
+}

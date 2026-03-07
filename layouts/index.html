@@ -11,14 +11,32 @@
   {{ $featured := where site.RegularPages "Params.featured" true }}
   {{ if gt (len $featured) 0 }}
     <h2 class="list-title" style="margin-top:28px;">Selected</h2>
-    {{ range sort $featured "Title" "asc" }}
+    {{ range sort $featured "Date" "desc" }}
       <div class="item">
         <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
         <div class="m">
           {{ with .Params.section_label }}{{ . }}{{ end }}
           {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
           {{ with .Params.version }} | v{{ . }}{{ end }}
+          {{ with .ReadingTime }} | {{ . }} min read{{ end }}
         </div>
+        {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
+      </div>
+    {{ end }}
+  {{ end }}
+
+  {{ $recentEssays := where site.RegularPages "Section" "essays" }}
+  {{ if gt (len $recentEssays) 0 }}
+    <h2 class="list-title" style="margin-top:30px;">Recent Essays</h2>
+    {{ range first 15 (sort $recentEssays "Date" "desc") }}
+      <div class="item">
+        <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        <div class="m">
+          {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+          {{ with .Params.version }} | v{{ . }}{{ end }}
+          {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+        </div>
+        {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
       </div>
     {{ end }}
   {{ end }}

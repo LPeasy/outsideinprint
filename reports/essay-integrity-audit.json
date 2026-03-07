@@ -1,0 +1,1212 @@
+﻿{
+    "generated_at":  "2026-03-07T00:02:09.0973735-05:00",
+    "summary":  {
+                    "essays":  117,
+                    "essays_with_mojibake":  0,
+                    "essays_with_caption_glue":  0,
+                    "total_mojibake_score":  0,
+                    "total_caption_glue":  0
+                },
+    "sample_summary":  {
+                           "sample_size":  32,
+                           "quartiles_covered":  4,
+                           "sample_with_mojibake":  0,
+                           "sample_with_caption_glue":  0
+                       },
+    "rows":  [
+                 {
+                     "file":  "2025-supreme-court-wrap-up.md",
+                     "date":  "2025-07-01",
+                     "words":  1325,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "35-years-of-yellow-the-simpsons-time-loop.md",
+                     "date":  "2025-07-01",
+                     "words":  1752,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "6-reasons-redwall-is-a-timeless-classic.md",
+                     "date":  "2025-02-20",
+                     "words":  1281,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "8-big-questions-everyone-has-about-pope-leo-xiv.md",
+                     "date":  "2025-07-10",
+                     "words":  1683,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "a-really-boring-topic.md",
+                     "date":  "2025-01-14",
+                     "words":  884,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "ai-in-education-is-a-wicked-problem.md",
+                     "date":  "2026-01-21",
+                     "words":  1065,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "altmans-law.md",
+                     "date":  "2025-02-10",
+                     "words":  1531,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "american-household-debt.md",
+                     "date":  "2024-12-09",
+                     "words":  1091,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "are-we-alone.md",
+                     "date":  "2025-02-14",
+                     "words":  2445,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md",
+                     "date":  "2025-07-08",
+                     "words":  1324,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "beyond-moores-law.md",
+                     "date":  "2025-01-23",
+                     "words":  1832,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md",
+                     "date":  "2025-03-18",
+                     "words":  2180,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "biter-the-slang-word-that-hits.md",
+                     "date":  "2025-05-09",
+                     "words":  476,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "building-for-centuries-not-election-cycles.md",
+                     "date":  "2025-02-24",
+                     "words":  1227,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md",
+                     "date":  "2025-09-07",
+                     "words":  2236,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "cpi-report-economic-analysis.md",
+                     "date":  "2024-12-11",
+                     "words":  976,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "cuomo-vs-mamdani-nyc-2025.md",
+                     "date":  "2025-06-24",
+                     "words":  552,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md",
+                     "date":  "2025-06-05",
+                     "words":  1586,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "declaring-equality.md",
+                     "date":  "2025-01-18",
+                     "words":  940,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants.md",
+                     "date":  "2025-01-29",
+                     "words":  1128,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "deference-lost.md",
+                     "date":  "2025-02-15",
+                     "words":  1070,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "dirt-is-better-than-air.md",
+                     "date":  "2025-04-27",
+                     "words":  559,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md",
+                     "date":  "2025-02-25",
+                     "words":  1025,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "etfs-and-market-concentration.md",
+                     "date":  "2024-12-14",
+                     "words":  939,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+                     "date":  "2025-12-01",
+                     "words":  2142,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "federalism-in-modern-american-society.md",
+                     "date":  "2024-12-09",
+                     "words":  1061,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "flash-flood-alley-why-flash-floods-kill.md",
+                     "date":  "2025-07-17",
+                     "words":  2731,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "generation-inflation.md",
+                     "date":  "2024-12-25",
+                     "words":  927,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "hey-sorry-for-the-delay.md",
+                     "date":  "2025-02-27",
+                     "words":  846,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "household-and-individual-wealth-in-america.md",
+                     "date":  "2024-12-14",
+                     "words":  1076,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "how-american-farm-labor-is-set-to-evolve.md",
+                     "date":  "2025-01-11",
+                     "words":  1115,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "how-did-mother-become-a-controversial-word-in-america.md",
+                     "date":  "2026-02-24",
+                     "words":  1235,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.md",
+                     "date":  "2025-02-20",
+                     "words":  863,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "how-tucson-az-plans-for-water-scarcity.md",
+                     "date":  "2025-09-22",
+                     "words":  1752,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "in-the-image-of-god.md",
+                     "date":  "2026-01-23",
+                     "words":  1716,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md",
+                     "date":  "2025-03-15",
+                     "words":  1822,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md",
+                     "date":  "2025-06-23",
+                     "words":  602,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "is-doge-legal.md",
+                     "date":  "2025-02-17",
+                     "words":  2249,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.md",
+                     "date":  "2025-02-22",
+                     "words":  1363,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "its-hard-to-condemn-what-doge-is-doing.md",
+                     "date":  "2025-02-13",
+                     "words":  1434,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.md",
+                     "date":  "2025-08-12",
+                     "words":  480,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "jack-stratton-and-the-vulfpeck-model.md",
+                     "date":  "2025-05-28",
+                     "words":  2355,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "june-27-2025-scotus-set-to-close-its-term-with-major-decisions.md",
+                     "date":  "2025-06-27",
+                     "words":  287,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "labor-force-participation-trends-in-modern-american-society.md",
+                     "date":  "2024-12-11",
+                     "words":  684,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "let-it-crash-the-opportunity-of-a-lifetime.md",
+                     "date":  "2025-04-16",
+                     "words":  1147,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "life-is-a-bull-market.md",
+                     "date":  "2026-02-16",
+                     "words":  1230,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "literacy-in-the-united-states-and-the-world.md",
+                     "date":  "2024-12-16",
+                     "words":  1256,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "make-fighter-jets-great-again-introducing-the-f-47.md",
+                     "date":  "2025-03-23",
+                     "words":  914,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "mcdonalds-faces-week-long-boycott-june-24-2025.md",
+                     "date":  "2025-06-24",
+                     "words":  799,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.md",
+                     "date":  "2025-02-01",
+                     "words":  1173,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "mingo-county-mud-in-the-water.md",
+                     "date":  "2025-03-24",
+                     "words":  1086,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "moral-momentum.md",
+                     "date":  "2025-04-18",
+                     "words":  337,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "natural-asset-companies.md",
+                     "date":  "2024-12-12",
+                     "words":  952,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.md",
+                     "date":  "2025-03-05",
+                     "words":  1641,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.md",
+                     "date":  "2025-05-17",
+                     "words":  1205,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md",
+                     "date":  "2025-07-10",
+                     "words":  1546,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "pornography-the-modern-secular-state-religion-and-american-morality.md",
+                     "date":  "2025-12-26",
+                     "words":  2037,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "presidential-elections.md",
+                     "date":  "2024-12-09",
+                     "words":  1220,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "public-vs-private-pay-who-really-earns-more.md",
+                     "date":  "2025-08-19",
+                     "words":  1745,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "rational-ignorance-in-the-u-s-presidential-electorate.md",
+                     "date":  "2024-12-09",
+                     "words":  1106,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "rethinking-coastal-retreat.md",
+                     "date":  "2024-12-15",
+                     "words":  1029,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "rethinking-invasive-species-management.md",
+                     "date":  "2025-05-15",
+                     "words":  2847,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "risk-management-vs-risk-analysis-whats-the-difference.md",
+                     "date":  "2025-09-01",
+                     "words":  1380,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.md",
+                     "date":  "2025-03-08",
+                     "words":  808,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "standard-of-living-vs-quality-of-life-what-the-numbers-miss.md",
+                     "date":  "2025-05-12",
+                     "words":  2338,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "synthetic-reasoning.md",
+                     "date":  "2025-01-29",
+                     "words":  1396,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "tariffs-protectionism-and-wishful-thinking.md",
+                     "date":  "2025-02-20",
+                     "words":  1207,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "test-essay.md",
+                     "date":  "2026-03-04",
+                     "words":  40,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-100-year-flood-is-not-what-you-think.md",
+                     "date":  "2026-02-11",
+                     "words":  803,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-cracked-pot.md",
+                     "date":  "2025-01-18",
+                     "words":  2026,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+                     "date":  "2026-01-14",
+                     "words":  2064,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-death-of-moores-law.md",
+                     "date":  "2025-01-17",
+                     "words":  1327,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "the-dolphin-company.md",
+                     "date":  "2026-01-16",
+                     "words":  4486,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-economics-of-the-mongol-empire.md",
+                     "date":  "2025-02-17",
+                     "words":  1508,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now.md",
+                     "date":  "2025-02-25",
+                     "words":  1223,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-ledger-vol-1.md",
+                     "date":  "2025-07-10",
+                     "words":  911,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-ledger-vol-2.md",
+                     "date":  "2025-08-12",
+                     "words":  935,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-ledger-vol-3.md",
+                     "date":  "2025-09-18",
+                     "words":  1124,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.md",
+                     "date":  "2025-02-25",
+                     "words":  1376,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-max-mistake-why-hbos-name-change-backfired.md",
+                     "date":  "2025-06-02",
+                     "words":  1162,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "the-national-debt-is-screwing-you-heres-how.md",
+                     "date":  "2025-03-16",
+                     "words":  1552,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-national-flood-insurance-program.md",
+                     "date":  "2024-12-15",
+                     "words":  1034,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "the-new-meta-economy.md",
+                     "date":  "2025-05-01",
+                     "words":  1076,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "the-political-economy-of-airports.md",
+                     "date":  "2025-01-27",
+                     "words":  1298,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.md",
+                     "date":  "2025-02-23",
+                     "words":  2091,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.md",
+                     "date":  "2025-03-13",
+                     "words":  1175,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-risk-management-buffet.md",
+                     "date":  "2025-10-12",
+                     "words":  1081,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-roi-of-caring.md",
+                     "date":  "2025-04-20",
+                     "words":  538,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "the-slow-way-is-the-fast-way.md",
+                     "date":  "2025-04-23",
+                     "words":  522,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "the-structure-of-modern-american-society.md",
+                     "date":  "2024-12-09",
+                     "words":  606,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.md",
+                     "date":  "2025-03-01",
+                     "words":  1260,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-three-enemies-of-positive-outcomes.md",
+                     "date":  "2025-04-17",
+                     "words":  293,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "the-undead-state.md",
+                     "date":  "2025-02-16",
+                     "words":  1126,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "the-waters-rising-what-the-data-really-says-about-extreme-weather.md",
+                     "date":  "2025-07-14",
+                     "words":  1615,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "the-world-the-un-was-built-for.md",
+                     "date":  "2026-02-05",
+                     "words":  1685,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "tiktok-the-trojan-horse-of-global-influence.md",
+                     "date":  "2025-01-23",
+                     "words":  945,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md",
+                     "date":  "2025-03-01",
+                     "words":  5817,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "u-s-russia-peace-talks.md",
+                     "date":  "2025-02-19",
+                     "words":  1483,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "u-s-shifts-ukraine-policy.md",
+                     "date":  "2025-02-18",
+                     "words":  1397,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "uncertainty-is-not-a-technical-problem.md",
+                     "date":  "2026-01-21",
+                     "words":  1364,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "uncrustables-the-billion-dollar-peanut-butter-empire.md",
+                     "date":  "2025-03-20",
+                     "words":  1256,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md",
+                     "date":  "2025-03-06",
+                     "words":  533,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "what-happened-at-camp-mystic.md",
+                     "date":  "2025-07-14",
+                     "words":  1060,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "what-i-learned-from-writing-100-essays-on-medium-in-2025.md",
+                     "date":  "2025-09-09",
+                     "words":  2789,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "what-is-risk-a-four-part-framework.md",
+                     "date":  "2025-08-29",
+                     "words":  2971,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "who-is-pascal-siakam.md",
+                     "date":  "2025-05-28",
+                     "words":  1682,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "whos-drinking-all-the-modelo.md",
+                     "date":  "2025-05-13",
+                     "words":  1590,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "whos-really-funding-terror.md",
+                     "date":  "2025-11-22",
+                     "words":  2144,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "whos-responsible-for-building-in-the-floodplain.md",
+                     "date":  "2025-07-24",
+                     "words":  1863,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 },
+                 {
+                     "file":  "why-a-return-to-the-gold-standard-would-break-the-economy.md",
+                     "date":  "2025-03-23",
+                     "words":  1727,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md",
+                     "date":  "2025-05-21",
+                     "words":  1071,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "why-oberfell-will-not-be-overturned.md",
+                     "date":  "2025-01-14",
+                     "words":  1079,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "why-superintelligence-strategy-gets-ai-governance-wrong.md",
+                     "date":  "2025-03-12",
+                     "words":  2232,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  2
+                 },
+                 {
+                     "file":  "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.md",
+                     "date":  "2025-05-18",
+                     "words":  1119,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "why-we-celebrate-memorial-day-origins-traditions-and-importance.md",
+                     "date":  "2025-05-19",
+                     "words":  1131,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  3
+                 },
+                 {
+                     "file":  "you-cant-outrun-the-calculator.md",
+                     "date":  "2025-02-12",
+                     "words":  1828,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  1
+                 },
+                 {
+                     "file":  "you-paid-for-that-ct-scan.md",
+                     "date":  "2025-12-02",
+                     "words":  761,
+                     "mojibake_score":  0,
+                     "caption_glue":  0,
+                     "quartile":  4
+                 }
+             ],
+    "sample":  [
+                   {
+                       "file":  "the-cracked-pot.md",
+                       "date":  "2025-01-18",
+                       "words":  2026,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "the-structure-of-modern-american-society.md",
+                       "date":  "2024-12-09",
+                       "words":  606,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "cpi-report-economic-analysis.md",
+                       "date":  "2024-12-11",
+                       "words":  976,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "why-oberfell-will-not-be-overturned.md",
+                       "date":  "2025-01-14",
+                       "words":  1079,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "etfs-and-market-concentration.md",
+                       "date":  "2024-12-14",
+                       "words":  939,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "the-national-flood-insurance-program.md",
+                       "date":  "2024-12-15",
+                       "words":  1034,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "the-political-economy-of-airports.md",
+                       "date":  "2025-01-27",
+                       "words":  1298,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "declaring-equality.md",
+                       "date":  "2025-01-18",
+                       "words":  940,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  1
+                   },
+                   {
+                       "file":  "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md",
+                       "date":  "2025-03-18",
+                       "words":  2180,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md",
+                       "date":  "2025-03-06",
+                       "words":  533,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.md",
+                       "date":  "2025-02-25",
+                       "words":  1376,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "6-reasons-redwall-is-a-timeless-classic.md",
+                       "date":  "2025-02-20",
+                       "words":  1281,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "u-s-shifts-ukraine-policy.md",
+                       "date":  "2025-02-18",
+                       "words":  1397,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "building-for-centuries-not-election-cycles.md",
+                       "date":  "2025-02-24",
+                       "words":  1227,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.md",
+                       "date":  "2025-03-05",
+                       "words":  1641,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "the-national-debt-is-screwing-you-heres-how.md",
+                       "date":  "2025-03-16",
+                       "words":  1552,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  2
+                   },
+                   {
+                       "file":  "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md",
+                       "date":  "2025-06-05",
+                       "words":  1586,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "who-is-pascal-siakam.md",
+                       "date":  "2025-05-28",
+                       "words":  1682,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "dirt-is-better-than-air.md",
+                       "date":  "2025-04-27",
+                       "words":  559,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "the-three-enemies-of-positive-outcomes.md",
+                       "date":  "2025-04-17",
+                       "words":  293,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.md",
+                       "date":  "2025-05-17",
+                       "words":  1205,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "whos-drinking-all-the-modelo.md",
+                       "date":  "2025-05-13",
+                       "words":  1590,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "let-it-crash-the-opportunity-of-a-lifetime.md",
+                       "date":  "2025-04-16",
+                       "words":  1147,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "cuomo-vs-mamdani-nyc-2025.md",
+                       "date":  "2025-06-24",
+                       "words":  552,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  3
+                   },
+                   {
+                       "file":  "flash-flood-alley-why-flash-floods-kill.md",
+                       "date":  "2025-07-17",
+                       "words":  2731,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   },
+                   {
+                       "file":  "the-ledger-vol-3.md",
+                       "date":  "2025-09-18",
+                       "words":  1124,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   },
+                   {
+                       "file":  "in-the-image-of-god.md",
+                       "date":  "2026-01-23",
+                       "words":  1716,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   },
+                   {
+                       "file":  "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+                       "date":  "2025-12-01",
+                       "words":  2142,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   },
+                   {
+                       "file":  "how-tucson-az-plans-for-water-scarcity.md",
+                       "date":  "2025-09-22",
+                       "words":  1752,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   },
+                   {
+                       "file":  "what-i-learned-from-writing-100-essays-on-medium-in-2025.md",
+                       "date":  "2025-09-09",
+                       "words":  2789,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   },
+                   {
+                       "file":  "life-is-a-bull-market.md",
+                       "date":  "2026-02-16",
+                       "words":  1230,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   },
+                   {
+                       "file":  "the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+                       "date":  "2026-01-14",
+                       "words":  2064,
+                       "mojibake_score":  0,
+                       "caption_glue":  0,
+                       "quartile":  4
+                   }
+               ]
+}
