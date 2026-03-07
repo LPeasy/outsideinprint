@@ -25,7 +25,7 @@ medium_source_url: "https://medium.com/@lawtonperret/rethinking-invasive-species
 <div class="section-inner sectionLayout--insetColumn">
 
 ***Florida spends millions fighting species it will never get rid
-ofâ€Šâ€”â€Šwhile the ones it could stop slip right past.***
+of — while the ones it could stop slip right past.***
 
 </div>
 
@@ -47,7 +47,7 @@ ofâ€Šâ€”â€Šwhile the ones it could stop slip right past.***
 
 ### Rethinking Invasive Species Management in Florida
 
-#### Why Floridaâ€Šâ€”â€Šand the rest of the countryâ€Šâ€”â€Škeeps spending millions managing invasives without much to show for it
+#### Why Florida — and the rest of the country — keeps spending millions managing invasives without much to show for it
 
 <figure id="2c0f" class="graf graf--figure graf-after--h4">
 <img
@@ -89,16 +89,16 @@ and slowly turns a thriving waterway into a dead zone.
 
 > One grabs headlines.
 
-***The other slips by unnoticed until itâ€™s everywhere.***
+***The other slips by unnoticed until it’s everywhere.***
 
-So hereâ€™s the question:
+So here’s the question:
 
 > **Why do we always wait until these species become disasters before we
 > do something about them?**
 
 Before we get to that,
 
-letâ€™s take a minute to make sure weâ€™re all talking about the same thing.
+let’s take a minute to make sure we’re all talking about the same thing.
 
 </div>
 
@@ -132,7 +132,7 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-**There are a lot of plants and animals in the U.S. that didnâ€™t start
+**There are a lot of plants and animals in the U.S. that didn’t start
 here.**
 
 ***Tomatoes***? Native to South America.
@@ -141,7 +141,7 @@ here.**
 
 ***Cows***? Brought over by European settlers.
 
-These are all ***non-native* species**â€Šâ€”â€Šorganisms that didnâ€™t evolve in
+These are all ***non-native* species** — organisms that didn’t evolve in
 this ecosystem but were introduced by people over time.
 
 **Not all non-native species are bad.**
@@ -155,8 +155,8 @@ data-href="https://www.invasivespeciesinfo.gov/what-are-invasive-species"
 rel="noopener" target="_blank">According to the federal government</a>,
 a species becomes invasive when it meets two criteria:
 
-1.  <span id="1f1b">**Itâ€™s not native** to the ecosystem</span>
-2.  <span id="ba6f">**It causes (or is likely to cause) harm**â€Šâ€”â€Što the
+1.  <span id="1f1b">**It’s not native** to the ecosystem</span>
+2.  <span id="ba6f">**It causes (or is likely to cause) harm** — to the
     economy, the environment, or human health.</span>
 
 That last part is key.
@@ -204,8 +204,8 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-**Florida is one of the most biologically richâ€Šâ€”â€Š*and
-vulnerable*â€Šâ€”â€Šplaces in the country.**
+**Florida is one of the most biologically rich — *and
+vulnerable* — places in the country.**
 
 Its ecosystems are wild and diverse:
 
@@ -218,7 +218,7 @@ Its ecosystems are wild and diverse:
 - <span id="10ee">**Lakes, rivers, and wetlands** that weave through the
   interior.</span>
 
-Itâ€™s beautiful. Itâ€™s delicate. And in the last hundred years, weâ€™ve
+It’s beautiful. It’s delicate. And in the last hundred years, we’ve
 re-engineered a huge chunk of it.
 
 </div>
@@ -239,18 +239,18 @@ re-engineered a huge chunk of it.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-In the early 1900s, **Floridaâ€™s wetlands were** seen as **obstacles** to
+In the early 1900s, **Florida’s wetlands were** seen as **obstacles** to
 agriculture and development.
 
-So engineers built canals, levees, and drainage systems to â€œreclaimâ€
+So engineers built canals, levees, and drainage systems to “reclaim”
 land. Entire ecosystems were drained or rerouted.
 
 > The Everglades lost more than half its original footprint.
 
-**As the stateâ€™s human population boomed**, so did the number of ways
+**As the state’s human population boomed**, so did the number of ways
 invasive species could get in.
 
-***Hereâ€™s how most of them arrived:***
+***Here’s how most of them arrived:***
 
 </div>
 
@@ -284,9 +284,9 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-**This oneâ€™s pretty infamous.**
+**This one’s pretty infamous.**
 
-***Burmese pythons***â€Šâ€”â€Šnative to Southeast Asiaâ€Šâ€”â€Šwere popular in the
+***Burmese pythons*** — native to Southeast Asia — were popular in the
 exotic pet trade.
 
 Some escaped. Others were released when they got too big to handle. They
@@ -333,8 +333,8 @@ little *too* well.
 Melaleuca spreads fast, changes soil chemistry, and is practically
 impossible to remove once established.
 
-The result? Vast walls of ghost-white trunksâ€Šâ€”â€Šdense, dry, and
-lifelessâ€Šâ€”â€Šwhere there used to be one-of-a-kind natural Florida
+The result? Vast walls of ghost-white trunks — dense, dry, and
+lifeless — where there used to be one-of-a-kind natural Florida
 wetlands.
 
 </div>
@@ -373,11 +373,11 @@ rel="noopener" target="_blank">Unsplash</a></figcaption>
 
 Ballast water from international **cargo ships** can carry **microscopic
 larvae**, eggs, or seeds. Insects hitch rides on wooden pallets or in
-shipping containers. Once theyâ€™re released into the wild, **some of them
+shipping containers. Once they’re released into the wild, **some of them
 take off.**
 
 Today, **Florida is home to more invasive species than any other state
-in the continental U.S.â€Šâ€”**â€Šand the problem isnâ€™t slowing down.
+in the continental U.S. —** and the problem isn’t slowing down.
 
 </div>
 
@@ -397,7 +397,7 @@ in the continental U.S.â€Šâ€”**â€Šand the problem isnâ€™t slow
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **What Florida Is Getting Rightâ€Šâ€”â€Šand Wrong**
+#### **What Florida Is Getting Right — and Wrong**
 
 <figure id="eae8" class="graf graf--figure graf-after--h4">
 <img
@@ -407,10 +407,10 @@ data-width="3240" data-height="2151" />
 <figcaption>Photo by Karl Callwood on Unsplash</figcaption>
 </figure>
 
-**Florida isnâ€™t ignoring the problem. Far from it.**
+**Florida isn’t ignoring the problem. Far from it.**
 
 The state has spent decades building up its invasive species
-programsâ€Šâ€”â€Šespecially for aquatic invasives.
+programs — especially for aquatic invasives.
 
 There are airboat crews, herbicide contractors, early detection
 networks, university researchers, and public education campaigns.
@@ -418,16 +418,16 @@ networks, university researchers, and public education campaigns.
 Agencies like the Florida Fish and Wildlife Conservation Commission
 (FWC) are out there every day trying to slow the spread.
 
-***But hereâ€™s the rub:***
+***But here’s the rub:***
 
 > **Most of this work happens after the invasion is already out of
 > control.**
 
 **We focus the most money and attention on species that are already
-everywhereâ€Š**â€”â€Šthe ones causing daily headaches, grabbing headlines, or
+everywhere **— the ones causing daily headaches, grabbing headlines, or
 threatening the tourism industry.
 
-***And thatâ€™s where the strategy breaks down.***
+***And that’s where the strategy breaks down.***
 
 Because when it comes to invasive species:
 
@@ -481,18 +481,18 @@ clever.**
 
 ***His eternal sentence?***
 
-Push a massive boulder up a hillâ€Šâ€”â€Šonly to watch it roll back down every
+Push a massive boulder up a hill — only to watch it roll back down every
 time he got close to the top.
 
 > No matter how hard he worked, he could never finish the job.
 
-Thatâ€™s what invasive species management becomes **when we fail to act
+That’s what invasive species management becomes **when we fail to act
 quickly.**
 
-**Once a species is fully established**â€Šâ€”â€Šspread across watersheds,
-reproducing quickly, disrupting ecosystemsâ€Šâ€”â€Š**thereâ€™s no endgame.**
+**Once a species is fully established** — spread across watersheds,
+reproducing quickly, disrupting ecosystems — **there’s no endgame.**
 
-> Youâ€™re not fixing the problem.
+> You’re not fixing the problem.
 
 Florida has entire crews whose full-time job is to manage species like
 hydrilla and lionfish, ***knowing full well the job will never end.***
@@ -523,9 +523,9 @@ hydrilla and lionfish, ***knowing full well the job will never end.***
 
 <div class="section-inner sectionLayout--insetColumn">
 
-But hereâ€™s the thing:
+But here’s the thing:
 
-***We donâ€™t have to play Sisyphus.***
+***We don’t have to play Sisyphus.***
 
 > Lets take another look at the invasion curve:
 
@@ -547,7 +547,7 @@ At that point, the fix is relatively cheap and simple:
 
 > A diver, a net, a policy change, and maybe a few thousand dollars.
 
-**But with each passing month, the costs go upâ€Šâ€”â€Šand the odds of success
+**But with each passing month, the costs go up — and the odds of success
 go down.**
 
 </div>
@@ -579,8 +579,8 @@ go down.**
 
 **When we wait too long, we inherit the curse.**
 
-> Proactive management is about catching that boulder while itâ€™s
-> smallâ€Šâ€”â€Šbefore it gains momentum.
+> Proactive management is about catching that boulder while it’s
+> small — before it gains momentum.
 
 </div>
 
@@ -604,10 +604,10 @@ go down.**
 
 ***A Tale of Two Reptiles***
 
-If you know one invasive species in Florida, itâ€™s probably the Burmese
+If you know one invasive species in Florida, it’s probably the Burmese
 python. These snakes have become the poster child for ecological
-disaster. Theyâ€™re huge, aggressive, and nearly impossible to find.
-Studies have shown theyâ€™ve wiped out up to 99% of some native mammal
+disaster. They’re huge, aggressive, and nearly impossible to find.
+Studies have shown they’ve wiped out up to 99% of some native mammal
 populations in parts of the Everglades.
 
 > But the thing about pythons?
@@ -628,8 +628,8 @@ data-width="1284" data-height="1104" />
 
 > Source: Florida Fish and Wildlife Conservation Commission (FWC)
 
-So we hunt them. Track them. Put bounties on them. **And** **weâ€™ll be
-doing that forever.** Thereâ€™s no realistic path to eradication. **Just
+So we hunt them. Track them. Put bounties on them. **And** **we’ll be
+doing that forever.** There’s no realistic path to eradication. **Just
 maintenance.**
 
 </div>
@@ -650,19 +650,19 @@ maintenance.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-**Now letâ€™s talk about another invasive reptileâ€Šâ€”â€Š**one you probably
-havenâ€™t heard of:
+**Now let’s talk about another invasive reptile — **one you probably
+haven’t heard of:
 
 > ***The Nile Monitor.***
 
-Itâ€™s a **large**, non-native **lizard**, native to Africa.
+It’s a **large**, non-native **lizard**, native to Africa.
 **Aggressive**, fast-moving, **and dangerous** to native birds and small
 mammals.
 
 Some are saying it **might actually be worse** for the ecosystem **than
 the damn pythons.**
 
-*But hereâ€™s the key difference:*
+*But here’s the key difference:*
 
 > Nile monitors are still in a limited range.
 
@@ -736,15 +736,15 @@ data-width="555" data-height="278" />
 
 <div class="section-inner sectionLayout--insetColumn">
 
-If you fish or boat in Florida, youâ€™ve probably tangled with
-**hydrilla**. This submerged aquatic plant is **everywhere**â€Šâ€”â€Šclogging
+If you fish or boat in Florida, you’ve probably tangled with
+**hydrilla**. This submerged aquatic plant is **everywhere** — clogging
 lakes, blocking boat ramps, jamming up stormwater systems.
 
 > Florida spends millions every year just to keep it under control.
 
 Hydrilla is in maintenance mode.
 
-**Weâ€™re never going to get rid of it.**
+**We’re never going to get rid of it.**
 
 </div>
 
@@ -773,16 +773,16 @@ data-width="259" data-height="194" />
 
 > Crested Floating Heart \| Source: iNaturalist
 
-This plant hasnâ€™t gone statewide yet: **crested floating heart**.
+This plant hasn’t gone statewide yet: **crested floating heart**.
 
-***Itâ€™s beautiful***â€Šâ€”â€Šbig, white flowers with frilly edges. But donâ€™t
+***It’s beautiful*** — big, white flowers with frilly edges. But don’t
 let the looks fool you.
 
 It spreads fast and forms thick surface mats that block out sunlight and
 destroy aquatic ecosystems.
 
-Right now, itâ€™s still a localized threat. Some areas in North and
-Central Florida. But itâ€™s movingâ€Šâ€”â€Šand early control efforts are
+Right now, it’s still a localized threat. Some areas in North and
+Central Florida. But it’s moving — and early control efforts are
 underfunded and understaffed.
 
 </div>
@@ -816,23 +816,23 @@ data-width="300" data-height="168" />
 
 > Invasive Lionfish \| Source: NOAA
 
-The **lionfish** is the exotic villain of Floridaâ€™s reefs. Striking red
+The **lionfish** is the exotic villain of Florida’s reefs. Striking red
 and white stripes. Poisonous spines. **No natural predators** in the
 Atlantic.
 
 > Lionfish eat everything smaller than them and reproduce year-round.
 
-Theyâ€™ve spread up and down the East Coast and throughout the Gulf of
+They’ve spread up and down the East Coast and throughout the Gulf of
 Mexico.
 
-**Weâ€™ll never get rid of themâ€Š**â€”â€Š**but we *can* manage them.** And
-because theyâ€™re flashy, dangerous, and dramatic, theyâ€™ve attracted
+**We’ll never get rid of them **— **but we *can* manage them.** And
+because they’re flashy, dangerous, and dramatic, they’ve attracted
 attention.
 
 There are lionfish derbies, awareness campaigns, and even seafood dishes
-promoting â€œ***Eat â€™em to beat â€˜em***.â€
+promoting “***Eat ’em to beat ‘em***.”
 
-But hereâ€™s a quieter success story you might have missed.
+But here’s a quieter success story you might have missed.
 
 </div>
 
@@ -865,7 +865,7 @@ In 2021, someone noticed **zebra mussels** attached to decorative moss
 balls sold in aquarium stores.
 
 Zebra mussels are **one of the most destructive aquatic invaders in the
-countryâ€Š**â€”â€Šclogging pipes, damaging water systems, and crowding out
+country **— clogging pipes, damaging water systems, and crowding out
 native species.
 
 > **Thanks to that early warning, federal and state agencies acted
@@ -876,7 +876,7 @@ response**, and likely **prevented a major new infestation.**
 
 > The point here?
 
-**Prevention works.** But it only works if someone noticesâ€Šâ€”â€Šand cares
+**Prevention works.** But it only works if someone notices — and cares
 enough to act.
 
 </div>
@@ -911,7 +911,7 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-> If early action is cheaper, smarter, and more effectiveâ€¦ why donâ€™t we
+> If early action is cheaper, smarter, and more effective… why don’t we
 > do it?
 
 **A few reasons:**
@@ -921,24 +921,24 @@ rel="noopener" target="_blank">Unsplash</a></figcaption>
 Policymakers fund the problems that are **loudest**, not the ones that
 are easiest to solve.
 
-Itâ€™s hard to get support for a species no oneâ€™s heard of
-yetâ€Šâ€”â€Šespecially when **budgets are tight.**
+It’s hard to get support for a species no one’s heard of
+yet — especially when **budgets are tight.**
 
 ***2. Public Attention***
 
 People care about pythons and lionfish because **they look scary** **or
 exotic.**
 
-You canâ€™t rally public support around a floating plant or a tiny snail
-**that no oneâ€™s seen before.**
+You can’t rally public support around a floating plant or a tiny snail
+**that no one’s seen before.**
 
 ***3. Siloed Agencies***
 
 Federal, state, and local **agencies often work in isolation.** They
 have different priorities, funding streams, and mandates.
 
-Coordination is tough. And thereâ€™s **no unified national strategy** that
-says, â€œHereâ€™s what we tackle first, and why.â€
+Coordination is tough. And there’s **no unified national strategy** that
+says, “Here’s what we tackle first, and why.”
 
 > All of this means that high-value prevention efforts often lose out to
 > low-return maintenance.
@@ -978,20 +978,20 @@ rel="noopener" target="_blank">Unsplash</a></figcaption>
 **If we want to get smarter about invasive species *we need a strategic
 shift.***
 
-- <span id="b97b">**Move money upstream:** Donâ€™t just fund cleanup crews
+- <span id="b97b">**Move money upstream:** Don’t just fund cleanup crews
   and long-term maintenance. Fund the scientists, the spotters, and the
   early responders.</span>
-- <span id="43e1">**Reward prevention:** Right now, thereâ€™s little
+- <span id="43e1">**Reward prevention:** Right now, there’s little
   political or financial incentive to stop a problem before it starts.
   That has to change.</span>
 - <span id="94c4">**Scale what works:** Big intergovernmental
-  partnershipsâ€Šâ€”â€Šespecially federal-state cost-share modelsâ€Šâ€”â€Šcould
+  partnerships — especially federal-state cost-share models — could
   stretch limited budgets further and help states like Florida act
   early, not late.</span>
 
-***This isnâ€™t about doing more.***
+***This isn’t about doing more.***
 
-> Itâ€™s about doing better.
+> It’s about doing better.
 
 </div>
 
@@ -1028,20 +1028,20 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-**Floridaâ€™s not** failing to manage invasive species because itâ€™s
-**doing nothing.** Itâ€™s failing because most of the energy and money go
-toward species that are already entrenchedâ€Šâ€”â€Šwhere **success is no
+**Florida’s not** failing to manage invasive species because it’s
+**doing nothing.** It’s failing because most of the energy and money go
+toward species that are already entrenched — where **success is no
 longer measured in wins, but in how slowly we lose.**
 
 > **But we can flip that script.**
 
-**We still have time to act on the frontierâ€Š**â€”â€Šwith species that
-havenâ€™t yet taken hold, with ecosystems that can still be protected,
+**We still have time to act on the frontier **— with species that
+haven’t yet taken hold, with ecosystems that can still be protected,
 with budgets that can stretch further.
 
-Thatâ€™s how you get ***the best bang for your buck.***
+That’s how you get ***the best bang for your buck.***
 
-And thatâ€™s the future of invasive species management.
+And that’s the future of invasive species management.
 
 > We can keep pushing boulders,\
 > or we can act now before they start rolling down the hill.
@@ -1072,7 +1072,7 @@ Subscribe to <a href="https://medium.com/the-balanced-sheet"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet" target="_blank">The
 Balance Sheet</a> for more essays that cut through the noise and explain
-how American policy, money, and systems actually workâ€Šâ€”â€Šwithout the
+how American policy, money, and systems actually work — without the
 jargon, spin, or hand-waving.
 
 </div>

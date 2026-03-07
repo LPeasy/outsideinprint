@@ -4,7 +4,7 @@ date: 2025-06-24
 draft: false
 slug: "cuomo-vs-mamdani-nyc-2025"
 section_label: "Essay"
-subtitle: "Andrew Cuomo vs. Zohran Mamdani â€” Whatâ€™s at Stake?"
+subtitle: "Andrew Cuomo vs. Zohran Mamdani — What’s at Stake?"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/cuomo-vs-mamdani-nyc-2025.pdf"
@@ -26,7 +26,7 @@ medium_source_url: "https://medium.com/@lawtonperret/cuomo-vs-mamdani-nyc-2025-8
 
 ### The 2025 New York City Democratic Mayoral Primary
 
-#### Andrew Cuomo vs. Zohran Mamdaniâ€Šâ€”â€ŠWhatâ€™s at Stake?
+#### Andrew Cuomo vs. Zohran Mamdani — What’s at Stake?
 
 <figure id="8506" class="graf graf--figure graf-after--h4">
 <img
@@ -60,10 +60,10 @@ Cuomo** against **progressive newcomer Zohran Mamdani.**
 <div class="section-inner sectionLayout--insetColumn">
 
 On **June 24, 2025**, New Yorkers are voting in the Democratic mayoral
-primary to decide the partyâ€™s nominee.
+primary to decide the party’s nominee.
 
-Itâ€™s a headâ€‘toâ€‘head match-up ~ **Andrew Cuomo**, the former governor
-making a political comeback, and **Zohran Mamdani**, the 33â€‘yearâ€‘old
+It’s a head‑to‑head match-up ~ **Andrew Cuomo**, the former governor
+making a political comeback, and **Zohran Mamdani**, the 33‑year‑old
 democratic socialist enjoying a surge in youth support.
 
 > \*\*\*Final results may take up to a week to calculate.\*\*\*
@@ -138,7 +138,7 @@ data-width="1024" data-height="1536" />
 href="https://www.vitalcitynyc.org/articles/echoes-of-1977-shape-2025-mayoral-politics-in-new-york"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.vitalcitynyc.org/articles/echoes-of-1977-shape-2025-mayoral-politics-in-new-york"
-rel="noopener" target="_blank"><strong>NYCâ€™s political strains date back
+rel="noopener" target="_blank"><strong>NYC’s political strains date back
 decades</strong></a>**,** balancing centrist governance with progressive
 demands.
 
@@ -154,7 +154,7 @@ href="https://www.nytimes.com/2025/06/10/nyregion/zohran-mamdani-interview.html"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.nytimes.com/2025/06/10/nyregion/zohran-mamdani-interview.html"
 rel="noopener" target="_blank">a rejuvenated progressive movement,</a>
-echoing the postâ€‘Sanders era.
+echoing the post‑Sanders era.
 
 #### **Suggested reads:**
 
@@ -206,10 +206,10 @@ data-width="1024" data-height="1024" />
 
 - <span id="632c">**Early June:** Cuomo leads primary polls; Mamdani
   surges into second place by the middle of the month.</span>
-- <span id="7b58">**June 23:** Lowerâ€‘polling Democrats urge voters:
-  ***â€œDonâ€™t rank Cuomo.â€*** Mamdani leads in the polls.</span>
-- <span id="d127">**June 24:** Primary day under tripleâ€‘digit
-  heatâ€Šâ€”â€Šrankedâ€‘choice ballots cast in a tight race.</span>
+- <span id="7b58">**June 23:** Lower‑polling Democrats urge voters:
+  ***“Don’t rank Cuomo.”*** Mamdani leads in the polls.</span>
+- <span id="d127">**June 24:** Primary day under triple‑digit
+  heat — ranked‑choice ballots cast in a tight race.</span>
 
 </div>
 
@@ -239,7 +239,7 @@ data-width="1024" data-height="1024" />
 <figcaption>Created by Author with ChatGPT</figcaption>
 </figure>
 
-**This contest isnâ€™t just about NYC** ~ itâ€™s a referendum on **the
+**This contest isn’t just about NYC** ~ it’s a referendum on **the
 future of the Democratic Party:**
 
 - <span id="32f6">**Experience vs. Change:** What do voters want in
@@ -267,11 +267,11 @@ future of the Democratic Party:**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Want concise, clear explainersâ€Šâ€”â€Šno hype?
+#### Want concise, clear explainers — no hype?
 
-**ðŸ‘ Clap** to see more of our breakdowns.\
-**ðŸ’¬ Share your thoughtsâ€Š**â€”â€Šprogress or pragmatism?\
-**ðŸ“¬ Follow The Balance Sheet** for balanced global and civic analysis.
+**” Clap** to see more of our breakdowns.\
+**💬 Share your thoughts **— progress or pragmatism?\
+**📬 Follow The Balance Sheet** for balanced global and civic analysis.
 
 </div>
 

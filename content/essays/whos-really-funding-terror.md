@@ -1,10 +1,10 @@
 ---
-title: "Whoâ€™s Really Funding Terror?"
+title: "Who’s Really Funding Terror?"
 date: 2025-11-22
 draft: false
 slug: "whos-really-funding-terror"
 section_label: "Essay"
-subtitle: "Inside Treasuryâ€™s 2024 Terrorist Financing Risk Assessment"
+subtitle: "Inside Treasury’s 2024 Terrorist Financing Risk Assessment"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/whos-really-funding-terror.pdf"
@@ -24,9 +24,9 @@ medium_source_url: "https://medium.com/@lawtonperret/whos-really-funding-terror-
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Whoâ€™s Really Funding Terror? TF Risk Explained
+### Who’s Really Funding Terror? TF Risk Explained
 
-#### Inside Treasuryâ€™s 2024 Terrorist Financing Risk Assessment
+#### Inside Treasury’s 2024 Terrorist Financing Risk Assessment
 
 <figure id="e12b" class="graf graf--figure graf-after--h4">
 <img
@@ -57,7 +57,7 @@ class="markup--anchor markup--p-anchor"
 data-href="https://home.treasury.gov/news/press-releases/jy2080"
 rel="noopener" target="_blank">just a link</a> on a federal website.
 
-This report quietly shapes what your bank flags as â€œsuspicious,â€ how
+This report quietly shapes what your bank flags as “suspicious,” how
 charities move money overseas, and effectively rewrites the definition
 of financial privacy every few years.
 
@@ -122,7 +122,7 @@ data-width="1536" data-height="864" />
 2.  <span id="99c8">Terrorist financing</span>
 3.  <span id="d071">Weapons Proliferation Financing</span>
 
-**Theyâ€™re the governmentâ€™s top-level map of how dirty money moves
+**They’re the government’s top-level map of how dirty money moves
 through the financial system.**
 
 #### The terrorist financing risk assessment tries to answer one simple question:
@@ -170,8 +170,8 @@ data-width="840" data-height="420" />
 On paper, the target audience is federal agencies, law enforcement, and
 financial supervisors who have to decide where to focus their attention.
 
-In practice, itâ€™s also a useful window for anyone trying to understand
-where â€œnational securityâ€ meets â€œfinancial regulation.â€
+In practice, it’s also a useful window for anyone trying to understand
+where “national security” meets “financial regulation.”
 
 </div>
 
@@ -193,7 +193,7 @@ where â€œnational securityâ€ meets â€œfinancial regulation.â€
 
 ### How Treasury thinks about risk
 
-Treasuryâ€™s risk logic is pretty straightforward.
+Treasury’s risk logic is pretty straightforward.
 
 <figure id="4cc6" class="graf graf--figure graf-after--p">
 <img
@@ -231,7 +231,7 @@ picture that decision makers can use.
 Treasury punts on any kind of quantitative analysis or specific
 estimation of risk ~
 
-> You wonâ€™t find probabilities, dollar-value loss estimates, or neat
+> You won’t find probabilities, dollar-value loss estimates, or neat
 > scorecards ranking every threat from 1 to 10.
 
 What you get instead is a **structured judgment**: a narrative that
@@ -282,8 +282,8 @@ motivated violent extremists ~ are described as posing the most
 consistent threat of both lethal and non-lethal violence.
 
 Foreign terrorist organizations are still on the radar. The assessment
-spends time on **ISIS affiliates and al-Qaâ€™ida**, which continue to
-inspire plots and fundraising even when they arenâ€™t directing
+spends time on **ISIS affiliates and al-Qa’ida**, which continue to
+inspire plots and fundraising even when they aren’t directing
 operations.
 
 The report also discusses **Hizballah, Hamas, and other Iran-backed
@@ -329,7 +329,7 @@ Disrupts Sham Overseas Charity Networks Funding Hamas and the
 PFLP</strong><br />
 <em>WASHINGTON - Today, the Department of the Treasury's Office of
 Foreign Assets Control (OFAC) is sanctioning
-fiveâ€¦</em>home.treasury.gov</a><a href="https://home.treasury.gov/news/press-releases/sb0162"
+five…</em>home.treasury.gov</a><a href="https://home.treasury.gov/news/press-releases/sb0162"
 class="js-mixtapeImage mixtapeImage mixtapeImage--empty u-ignoreBlock"
 data-media-id="c406de41b220216d1b84c4c457f2d6f0"></a>
 
@@ -362,7 +362,7 @@ relatively modest funding.
 
 **That creates a nasty problem for regulators and compliance teams.**
 
-> You canâ€™t just watch the biggest money flows and assume youâ€™re
+> You can’t just watch the biggest money flows and assume you’re
 > covering the most serious threats.
 
 </div>
@@ -428,7 +428,7 @@ and detection.
 
 Between 2020 and 2022, registered money services businesses filed the
 majority of suspicious activity reports tied to terrorist financing.
-Thatâ€™s a pretty strong hint about where a lot of concerning patterns
+That’s a pretty strong hint about where a lot of concerning patterns
 show up first.
 
 Cash and informal transfer systems matter as well, especially for
@@ -463,7 +463,7 @@ provide real relief and social services to people in extreme need.
 The report stresses that **most U.S. charities have little exposure to
 terrorist financing**, while acknowledging that **a small subset** ~
 especially some international charities and outright sham groups ~ **can
-be misused.** Treasuryâ€™s framing keeps the focus on specific risk
+be misused.** Treasury’s framing keeps the focus on specific risk
 patterns instead of treating the whole sector as suspicious by default.
 
 </div>
@@ -502,7 +502,7 @@ report clearly sees virtual assets and crowdfunding as fast-moving zones
 where risk can grow quickly if controls lag behind new business models.
 
 If you run a crypto platform or payment app, the message is simple:
-**you are on the radar, and youâ€™re expected to understand your
+**you are on the radar, and you’re expected to understand your
 exposure.**
 
 </div>
@@ -523,7 +523,7 @@ exposure.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Strengths and gaps in Treasuryâ€™s approach
+### Strengths and gaps in Treasury’s approach
 
 <figure id="d112" class="graf graf--figure graf-after--h3">
 <img
@@ -554,7 +554,7 @@ Read strictly as a risk assessment, the 2024 report gets a lot right.
 
 **First, the guiding question is broad.**
 
-The report promises to â€œidentify threats, vulnerabilities, and risksâ€ to
+The report promises to “identify threats, vulnerabilities, and risks” to
 the U.S. financial system. That description is accurate, but wide open.
 If you need to decide whether to put more staff on examining money
 transmitters or more money into tracing virtual assets, you need more
@@ -562,8 +562,8 @@ analysis.
 
 **Second, the risk picture is almost entirely qualitative.**
 
-The language leans on phrases like â€œprimary threat,â€ â€œmost pressing,â€
-and â€œlimited exposure.â€ Those terms carry meaning, and Treasury backs
+The language leans on phrases like “primary threat,” “most pressing,”
+and “limited exposure.” Those terms carry meaning, and Treasury backs
 some of them with straightforward indicators like suspicious report
 shares or investigation trends. But you will not find probabilities,
 dollar figures, or a ranking table that clearly orders one sector above
@@ -574,14 +574,14 @@ another.
 The report admits that data are incomplete, that new technologies move
 fast, and that small sums can produce large human harm. What it does not
 really do is spell out where its own judgments are strongest, where
-theyâ€™re weaker, or how new information might change the picture.
+they’re weaker, or how new information might change the picture.
 
 **From a technical risk-analysis perspective, those are all real
 limitations.**
 
 **From a political perspective, they might be intentional.**
 
-> Itâ€™s hard to imagine a public document that puts numeric odds on
+> It’s hard to imagine a public document that puts numeric odds on
 > different types of terrorist attacks and survives contact with
 > Congress or cable news.
 
@@ -616,21 +616,21 @@ If you work in the **non-profit world**, especially internationally,
 reports like this affect how banks view your accounts. The message that
 most charities are low risk, but a small slice are higher risk, is the
 tension you live inside every time a wire transfer gets held up for
-â€œreview.â€
+“review.”
 
 If you work in **policy**, the NTFRA is one more proof point that the
 United States has fully leaned into a risk-based approach to financial
-crime. The goal is not to eliminate all terrorist financing ~ thatâ€™s not
+crime. The goal is not to eliminate all terrorist financing ~ that’s not
 realistic ~ but to understand where the danger is concentrated and push
 scarce resources in that direction.
 
 So if I had to give the **2024 Terrorist Financing Risk Assessment** a
-grade, Iâ€™d call it an **A**.
+grade, I’d call it an **A**.
 
 Not because it answers every question or settles every argument, but
 because it offers a clear, structured story about:
 
-- <span id="5759">Who Treasury sees as todayâ€™s main terrorist
+- <span id="5759">Who Treasury sees as today’s main terrorist
   threats</span>
 - <span id="195c">How those actors are trying to raise and move
   money</span>
@@ -638,7 +638,7 @@ because it offers a clear, structured story about:
   where new cracks may be forming</span>
 
 > For a 100-plus-page government PDF that most people will never open,
-> thatâ€™s a lot of information hiding in plain sight.
+> that’s a lot of information hiding in plain sight.
 
 </div>
 
@@ -663,7 +663,7 @@ because it offers a clear, structured story about:
 Thanks for reading!
 
 Hope you enjoyed the essay. If you liked it, show your support by
-clapping ðŸ‘ðŸ½.
+clapping ””.
 
 Follow me for more essays like this, and subscribe to The Balance Sheet
 to get them in your email.

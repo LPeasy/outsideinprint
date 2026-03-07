@@ -1,5 +1,5 @@
 ---
-title: "Benjamin Franklin: How Americaâ€™s Funniest Founder Made Greatness Feel Possible"
+title: "Benjamin Franklin: How America’s Funniest Founder Made Greatness Feel Possible"
 date: 2025-07-08
 draft: false
 slug: "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible"
@@ -24,7 +24,7 @@ medium_source_url: "https://medium.com/@lawtonperret/benjamin-franklin-how-ameri
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Benjamin Franklin: How Americaâ€™s Funniest Founder Made Greatness Feel Possible
+### Benjamin Franklin: How America’s Funniest Founder Made Greatness Feel Possible
 
 #### A scrappy biography of the runaway apprentice who became a statesman, scientist, and master of self-improvement.
 
@@ -40,10 +40,10 @@ data-href="https://picryl.com/media/benjamin-franklin-after-jean-baptiste-greuze
 rel="noopener" target="_blank">Source: Picryl</a></figcaption>
 </figure>
 
-#### **Editorâ€™s Note**
+#### **Editor’s Note**
 
 This biography is based on *The Autobiography of Benjamin Franklin* and
-other public-domain records, including Franklinâ€™s letters, essays, and
+other public-domain records, including Franklin’s letters, essays, and
 inventions.
 
 *~ Exact phrasing varies across editions ~*
@@ -52,7 +52,7 @@ Historical images featured throughout are in the public domain.
 
 > *This is not an academic profile.*
 
-> Itâ€™s **a clear, readable account of Franklinâ€™s life and legacy**, told
+> It’s **a clear, readable account of Franklin’s life and legacy**, told
 > with the same mix of wit, curiosity, and practicality that he brought
 > to everything he touched.
 
@@ -88,7 +88,7 @@ data-href="https://www.historyoasis.com/post/4-facts-about-young-benjamin-frankl
 rel="noopener" target="_blank">Source: History Oasis</a></figcaption>
 </figure>
 
-**Before** he was ***Benjamin Franklinâ„¢*** ~ the founding father,
+**Before** he was ***Benjamin Franklin™*** ~ the founding father,
 lightning wrangler, and sage of thrift ~
 
 > **He was just Ben.**
@@ -99,8 +99,8 @@ under his arms.
 
 He writes in his *Autobiography* that he arrived
 
-> **â€œdirty from being so long in the boat, my pockets with rolls, and a
-> roll under each arm.â€**
+> **“dirty from being so long in the boat, my pockets with rolls, and a
+> roll under each arm.”**
 
 > That image ~ scrappy, self-assured, and a bit absurd ~
 
@@ -112,14 +112,14 @@ He built his life the way he built his printing empire ~
 
 > equal parts discipline and charm.
 
-A printerâ€™s apprentice by twelve, a newspaper owner by twenty-three, and
+A printer’s apprentice by twelve, a newspaper owner by twenty-three, and
 a bestselling author soon after, Franklin made his name writing as Poor
 Richard ~ a fictional old man full of homespun wisdom and dry wit.
 
-> **â€œHe that lies down with dogs shall rise up with fleas.â€***\*
-> **** *~* Poor Richardâ€™s Almanack
+> **“He that lies down with dogs shall rise up with fleas.”***\*
+> **** *~* Poor Richard’s Almanack
 
-**Franklinâ€™s advice** wasnâ€™t just usefulâ€Šâ€”â€Šit **was sly, funny, and
+**Franklin’s advice** wasn’t just useful — it **was sly, funny, and
 self-aware.**
 
 > He understood that **virtue sells better wrapped in a joke.**
@@ -156,21 +156,21 @@ data-href="https://commons.wikimedia.org/wiki/File:BenFranklinDuplessis.jpg"
 rel="noopener" target="_blank">Source: Public Domain</a></figcaption>
 </figure>
 
-> Unlike other founding fathers, **Franklin didnâ€™t posture.**
+> Unlike other founding fathers, **Franklin didn’t posture.**
 
 He poked fun at himself constantly ~
 
-> **â€œI was generally a leader in measures, but had the uncommon modesty
-> not to insist on my own opinion when others were opposed to it.â€**
+> **“I was generally a leader in measures, but had the uncommon modesty
+> not to insist on my own opinion when others were opposed to it.”**
 
 That balance ~ between confidence and comedy, ambition and humility ~
 made him universally likable and extraordinarily effective.
 
-> Franklin â€œretiredâ€ from printing in his 40s and turned to science,
+> Franklin “retired” from printing in his 40s and turned to science,
 > diplomacy, and public service.
 
-He studied electricity with his famous kite experiment (no, he didnâ€™t
-get struck by lightning ~ thatâ€™s a myth!).
+He studied electricity with his famous kite experiment (no, he didn’t
+get struck by lightning ~ that’s a myth!).
 
 He founded libraries, hospitals, fire departments, and the postal
 system.
@@ -222,12 +222,12 @@ Behind his wit and charm were two things:
 2.  <span id="0b01">Relentless self-improvement</span>
 
 Franklin kept a journal tracking his progress toward 13 personal virtues
-~ from *Temperance* and *Industry* to *Humility* (***â€œImitate Jesus and
-Socrates,â€*** he wrote, with signature modesty).
+~ from *Temperance* and *Industry* to *Humility* (***“Imitate Jesus and
+Socrates,”*** he wrote, with signature modesty).
 
-**He never mastered themâ€¦ never even came close.**
+**He never mastered them… never even came close.**
 
-> **That wasnâ€™t the point.**
+> **That wasn’t the point.**
 
 </div>
 
@@ -247,7 +247,7 @@ Socrates,â€*** he wrote, with signature modesty).
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **Franklinâ€™s virtue table that he used to track his moral performance:**
+#### **Franklin’s virtue table that he used to track his moral performance:**
 
 <figure id="44fb" class="graf graf--figure graf-after--h4">
 <img
@@ -261,9 +261,9 @@ data-href="https://wp.unil.ch/moral-accounting/en/art-of-virtue-benjamin-frankli
 rel="noopener" target="_blank">Source: Public Domain</a></figcaption>
 </figure>
 
-> **â€œI wished to live without committing any fault at any time, but I
+> **“I wished to live without committing any fault at any time, but I
 > soon found I had undertaken a task of more difficulty than I had
-> imagined.â€**
+> imagined.”**
 
 **He believed people could improve themselves.**
 
@@ -323,9 +323,9 @@ presided over the Pennsylvania Society for the Abolition of Slavery.
 
 **Voltaire had called him ~**
 
-> â€œthe genius who freed America and shed light over Europe.â€
+> “the genius who freed America and shed light over Europe.”
 
-> Franklinâ€™s legacy echoes across American society.
+> Franklin’s legacy echoes across American society.
 
 His belief in accessible education, public infrastructure, and civic
 responsibility formed the bones of modern American public service and
@@ -351,7 +351,7 @@ economic thought.
 
 **Franklin wrote his own epitaph:**
 
-> â€œThe Body of B. Franklin, Printer;*\*
+> “The Body of B. Franklin, Printer;*\*
 > Like the Cover of an old Book,*\*
 > Its Contents torn out,*\*
 > And stript of its Lettering and Gilding,*\*
@@ -359,7 +359,7 @@ economic thought.
 > But the Work shall not be lost,*\*
 > For it will, as he believed, appear once more*\*
 > In a new and more perfect Edition*\*
-> Corrected and amended by the Author.â€
+> Corrected and amended by the Author.”
 
 **When he died, crowds lined the streets of Philadelphia ~ not because
 he was a great man, but because he made greatness feel achievable.**
@@ -396,11 +396,11 @@ data-href="http://www.benjamin-franklin-history.org/poor-richards-almanac/"
 rel="noopener" target="_blank">Source: Public Domain</a></figcaption>
 </figure>
 
-- <span id="3e9d">**Poor Richardâ€™s Almanack ~** Witty, wildly popular
-  yearly publication (1732â€“1758)</span>
+- <span id="3e9d">**Poor Richard’s Almanack ~** Witty, wildly popular
+  yearly publication (1732–1758)</span>
 - <span id="f7f5">**The Autobiography of Benjamin Franklin** ~
   Unfinished but legendary memoir</span>
-- <span id="f54a">**Library Company of Philadelphia** ~ Americaâ€™s first
+- <span id="f54a">**Library Company of Philadelphia** ~ America’s first
   public lending library</span>
 - <span id="0430">**Inventions** ~ Bifocals, Franklin stove, lightning
   rod, glass armonica</span>
@@ -443,19 +443,19 @@ data-width="1024" data-height="1024" />
 
 He gave us lines like:
 
-> *â€œA penny saved is a penny earned.â€\
-> â€œWell done is better than well said.â€*
+> *“A penny saved is a penny earned.”\
+> “Well done is better than well said.”*
 
-> **But he didnâ€™t lecture.**
+> **But he didn’t lecture.**
 
 **He preferred persuasion to preaching, and humor to hubris.**
 
-His famous list of 13 virtues wasnâ€™t a moral checklist, but a life
+His famous list of 13 virtues wasn’t a moral checklist, but a life
 experiment.
 
-> **â€œHuman felicity is produced not so much by great pieces of good
+> **“Human felicity is produced not so much by great pieces of good
 > fortune that seldom happen, as by little advantages that occur every
-> day.â€**
+> day.”**
 
 </div>
 
@@ -477,18 +477,18 @@ experiment.
 
 ### Explore More
 
-ðŸ“˜ <a href="https://www.gutenberg.org/ebooks/148"
+📘 <a href="https://www.gutenberg.org/ebooks/148"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.gutenberg.org/ebooks/148" rel="noopener"
 target="_blank"><em>The Autobiography of Benjamin Franklin</em> (full
 text): Project Gutenberg</a>\
-ðŸŽ§ <a
+🎧 <a
 href="https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up"
 class="markup--anchor markup--p-anchor"
 data-href="https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up"
 rel="noopener" target="_blank">Audio version (LibriVox): Listen on
 Archive.org</a>\
-ðŸ“º <a href="https://www.youtube.com/watch?v=v7wowg6Fy4I"
+📺 <a href="https://www.youtube.com/watch?v=v7wowg6Fy4I"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.youtube.com/watch?v=v7wowg6Fy4I" rel="noopener"
 target="_blank">PBS Documentary: <em>Benjamin Franklin</em> by Ken

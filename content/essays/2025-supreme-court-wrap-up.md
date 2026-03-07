@@ -44,7 +44,7 @@ civil rights, education, and online access.**
 
 *but a packed weekend pushed our wrap-up to Tuesday.)*
 
-> **Hereâ€™s where the Court landed â€”**
+> **Here’s where the Court landed —**
 
 > **and where it left things undecided.**
 
@@ -91,7 +91,7 @@ rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 President **Trump issued an executive order seeking to end birthright
 citizenship** for the children of undocumented immigrants, and multiple
 **district courts blocked the policy** from taking
-effectâ€Šâ€”**â€Šnationwide.**
+effect —** nationwide.**
 
 The **Trump** administration **challenged** this practice, **arguing
 that district judges should only grant relief to the specific
@@ -102,9 +102,9 @@ rulings.**
   necessary check on judicial overreach.</span>
 - <span id="d9a7">Critics argued that limiting nationwide injunctions
   could let unconstitutional policies remain in effect until challenged
-  in every jurisdictionâ€Šâ€”â€Ša high bar in practice.</span>
+  in every jurisdiction — a high bar in practice.</span>
 
-**The Court didnâ€™t rule on the constitutionality of Trumpâ€™s order
+**The Court didn’t rule on the constitutionality of Trump’s order
 itself.**
 
 > However, it did **narrow the power of lower courts to block
@@ -113,8 +113,8 @@ itself.**
 **Majority Opinion**
 
 - <span id="15ca">**Justice Amy Coney Barrett** wrote that universal
-  injunctions â€œlikely exceed the equitable authority that Congress has
-  given to federal courts.â€</span>
+  injunctions “likely exceed the equitable authority that Congress has
+  given to federal courts.”</span>
 
 > ***The decision limits relief to the actual plaintiffs, not the entire
 > country.***
@@ -122,14 +122,14 @@ itself.**
 **Dissents**
 
 - <span id="8784">**Justice Jackson** warned the ruling is an
-  â€œexistential threat to the rule of law.â€</span>
-- <span id="d535">**Justice Sotomayor** called the decision â€œa
-  travesty.â€</span>
+  “existential threat to the rule of law.”</span>
+- <span id="d535">**Justice Sotomayor** called the decision “a
+  travesty.”</span>
 
 <a href="https://www.supremecourt.gov/opinions/24pdf/24a884_8n59.pdf"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.supremecourt.gov/opinions/24pdf/24a884_8n59.pdf"
-rel="noopener" target="_blank">ðŸ“Ž Read the full opinion (PDF)</a>
+rel="noopener" target="_blank">📎 Read the full opinion (PDF)</a>
 
 </div>
 
@@ -172,7 +172,7 @@ rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 > privacy rights.
 
 **In 2023, Texas passed a law requiring pornographic websites to verify
-usersâ€™ ages** before granting access.
+users’ ages** before granting access.
 
 **The Free Speech Coalition challenged the law**, arguing that it
 imposed unconstitutional burdens on speech and set a precedent for
@@ -184,7 +184,7 @@ imposed unconstitutional burdens on speech and set a precedent for
 #### **Majority Opinion**
 
 - <span id="a3a8">**Justice Clarence Thomas** found the law
-  *â€œappropriately tailoredâ€* and not overly burdensome on adult
+  *“appropriately tailored”* and not overly burdensome on adult
   speech.</span>
 
 **Dissents**
@@ -197,7 +197,7 @@ imposed unconstitutional burdens on speech and set a precedent for
 <a href="https://www.supremecourt.gov/opinions/24pdf/23-1122_3e04.pdf"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.supremecourt.gov/opinions/24pdf/23-1122_3e04.pdf"
-rel="noopener" target="_blank">ðŸ“Ž Read the full opinion (PDF)</a>
+rel="noopener" target="_blank">📎 Read the full opinion (PDF)</a>
 
 </div>
 
@@ -248,7 +248,7 @@ The families argued the curriculum conflicted with their religious
 beliefs and that the denial violated their First Amendment rights.
 
 > **The Court agreed,** ruling that **schools must allow opt-outs** when
-> there are â€œdeeply held religious objections.â€
+> there are “deeply held religious objections.”
 
 Supporters of the decision viewed it as a win for religious liberty,
 while critics warned it undermines inclusive education and opens the
@@ -274,7 +274,7 @@ controversial or sensitive content.**
 <a href="https://www.supremecourt.gov/opinions/24pdf/24-297_4f14.pdf"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.supremecourt.gov/opinions/24pdf/24-297_4f14.pdf"
-rel="noopener" target="_blank">ðŸ“Ž Read the full opinion (PDF)</a>
+rel="noopener" target="_blank">📎 Read the full opinion (PDF)</a>
 
 </div>
 
@@ -313,11 +313,11 @@ data-href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral"
 rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-> This redistricting case had the potential to reshape Louisianaâ€™s
-> congressional delegationâ€Šâ€”â€Šand to clarify the reach of the Voting
+> This redistricting case had the potential to reshape Louisiana’s
+> congressional delegation — and to clarify the reach of the Voting
 > Rights Act.
 
-At issue was **whether Louisianaâ€™s current map unfairly diluted Black
+At issue was **whether Louisiana’s current map unfairly diluted Black
 voting power** by failing to include a second majority-Black district.
 
 **Civil rights groups sued**, arguing that the map violated federal law.
@@ -337,14 +337,14 @@ decision with immediate consequences.**
 
 #### **Notes**
 
-- <span id="2688">**The case was deferred** until the next termâ€Šâ€”â€Š**no
+- <span id="2688">**The case was deferred** until the next term — **no
   final ruling** was issued.</span>
 - <span id="17ed">The current redistricting map remains in place.</span>
 
 <a href="https://www.supremecourt.gov/opinions/24pdf/24-109_l53m.pdf"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.supremecourt.gov/opinions/24pdf/24-109_l53m.pdf"
-rel="noopener" target="_blank">ðŸ“Ž Read the full opinion (PDF)</a>
+rel="noopener" target="_blank">📎 Read the full opinion (PDF)</a>
 
 </div>
 
@@ -429,7 +429,7 @@ contested executive actions.
 <div class="section-inner sectionLayout--insetColumn">
 
 **In *Free Speech Coalition v. Paxton*,** the ruling **reinforces
-statesâ€™ ability to impose content restrictions in the name of protecting
+states’ ability to impose content restrictions in the name of protecting
 minors.**
 
 The decision is likely to influence how states approach internet
@@ -476,10 +476,10 @@ School districts may need to revise opt-out policies to comply.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-**In *Callais v. Louisiana*,** the Courtâ€™s deferral leaves **unresolved
+**In *Callais v. Louisiana*,** the Court’s deferral leaves **unresolved
 questions about racial representation in redistricting.**
 
-The case will return next term; **Louisianaâ€™s current map remains** in
+The case will return next term; **Louisiana’s current map remains** in
 use.
 
 </div>
@@ -503,7 +503,7 @@ use.
 ### **Like getting smart, bias-free breakdowns of the biggest decisions in government?**
 
 ***Clap this piece*** to help more readers find it, ***drop a comment***
-if youâ€™ve got questions or insights, and ***hit the subscribe button***
+if you’ve got questions or insights, and ***hit the subscribe button***
 to get our next policy explainer straight to your inbox.
 
 > ***No spin.***

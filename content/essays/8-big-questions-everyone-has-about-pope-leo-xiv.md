@@ -116,11 +116,11 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*uoo
 <div class="section-inner sectionLayout--insetColumn">
 
 **This follow-up piece** offers brief, factual responses to the **eight
-most common questions** weâ€™ve received since his election in May 2025.
+most common questions** we’ve received since his election in May 2025.
 
 > Here are **the questions** readers want answered:
 
-1.  <span id="c148">**Why did he choose the name â€œLeo XIVâ€?**</span>
+1.  <span id="c148">**Why did he choose the name “Leo XIV”?**</span>
 2.  <span id="d7d0">**Was he close to Pope Francis?**</span>
 3.  <span id="14d5">**What are his main priorities as pope?**</span>
 4.  <span id="4152">**Will he make changes to Church leadership or
@@ -133,7 +133,7 @@ most common questions** weâ€™ve received since his election in May 2025.
     Latin America, and the Vatican?**</span>
 8.  <span id="36b2">**What kind of pope will he be?**</span>
 
-> Letâ€™s take them one at a time:
+> Let’s take them one at a time:
 
 </div>
 
@@ -156,20 +156,20 @@ most common questions** weâ€™ve received since his election in May 2025.
 ### **1.** Why Did Pope Leo XIV Choose His Name?
 
 **Pope Leo XIV chose his name to honor Pope Leo XIII,** whose 1891
-encyclical *Rerum Novarum* defended workersâ€™ rights during the first
+encyclical *Rerum Novarum* defended workers’ rights during the first
 Industrial Revolution.
 
-> **â€œPope Leo XIII in his historic Encyclical *Rerum Novarum* addressed
+> **“Pope Leo XIII in his historic Encyclical *Rerum Novarum* addressed
 > the social question in the context of the first great industrial
 > revolution. In our own day, the Church offers to everyone the treasury
 > of her social teaching in response to another industrial revolution
 > and to developments in the field of artificial intelligence that pose
 > new challenges for the defence of human dignity, justice and
-> labour.â€**
+> labour.”**
 
 > **~ Vatican.va**
 
-> By taking the name Leo XIV, heâ€™s signaling a renewed focus on Catholic
+> By taking the name Leo XIV, he’s signaling a renewed focus on Catholic
 > social teaching in the digital age.
 
 </div>
@@ -190,7 +190,7 @@ Industrial Revolution.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **2.** What Was Pope Leo XIVâ€™s Relationship With Pope Francis?
+### **2.** What Was Pope Leo XIV’s Relationship With Pope Francis?
 
 **Cardinal Robert Prevost was a trusted Francis appointee** who led the
 powerful Dicastery for Bishops beginning in 2023.
@@ -198,19 +198,19 @@ powerful Dicastery for Bishops beginning in 2023.
 > Pope Francis hand-picked him for the role.
 
 Upon his election, Pope Leo XIV offered this tribute from the St.
-Peterâ€™s balcony:
+Peter’s balcony:
 
-> **â€œThat weak but always courageous voice of Pope Francis who blessed
-> Romeâ€¦ Allow me to follow up on that same blessing: God cares for us,
-> God loves all of us, and evil will not prevail!â€**
-
-> **~ Reuters**
-
-> **â€œThank you, Pope Francis!â€**
+> **“That weak but always courageous voice of Pope Francis who blessed
+> Rome… Allow me to follow up on that same blessing: God cares for us,
+> God loves all of us, and evil will not prevail!”**
 
 > **~ Reuters**
 
-> He later confirmed his intent to â€œcontinue on the journeyâ€ laid out by
+> **“Thank you, Pope Francis!”**
+
+> **~ Reuters**
+
+> He later confirmed his intent to “continue on the journey” laid out by
 > his predecessor ~
 
 > a signal of spiritual and strategic continuity.
@@ -233,7 +233,7 @@ Peterâ€™s balcony:
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **3.** What Are Pope Leo XIVâ€™s Main Priorities as Leader of the Catholic Church?
+### **3.** What Are Pope Leo XIV’s Main Priorities as Leader of the Catholic Church?
 
 > In his first address to the cardinals, Leo XIV laid out a
 > **missionary, unifying, and justice-focused vision**.
@@ -241,23 +241,23 @@ Peterâ€™s balcony:
 He cited values from *Evangelii Gaudium* and the post-Vatican II reform
 spirit:
 
-> **â€œThe return to the primacy of Christ in proclamation; the missionary
+> **“The return to the primacy of Christ in proclamation; the missionary
 > conversion of the entire Christian community; growth in collegiality
-> and synodalityâ€¦ loving care for the least and the rejected; courageous
-> and trusting dialogue with the contemporary world.â€**
+> and synodality… loving care for the least and the rejected; courageous
+> and trusting dialogue with the contemporary world.”**
 
 > **~ Vatican.va**
 
 > And from the square in Rome, this image:
 
-> **â€œWe have to be a church that works together to build bridges and to
-> keep our arms open, like this very piazza, welcoming.â€**
+> **“We have to be a church that works together to build bridges and to
+> keep our arms open, like this very piazza, welcoming.”**
 
 > **~ ABC News**
 
 > His very first words as pope?
 
-> **â€œPeace be with all of you.â€**
+> **“Peace be with all of you.”**
 
 > **~ AP**
 
@@ -286,24 +286,24 @@ spirit:
 Pope Leo XIV reconfirmed most top officials, opting for **cautious
 continuity**.
 
-> **â€œThe closest collaborators of the Popeâ€¦ your support has proved a
+> **“The closest collaborators of the Pope… your support has proved a
 > great comfort to me in accepting a yoke clearly far beyond my own
-> powers.â€**
+> powers.”**
 
 > **~ Vatican.va**
 
-> **Heâ€™s a team-builder, not a solo act.**
+> **He’s a team-builder, not a solo act.**
 
 He emphasizes **shared leadership** and **synodality** (walking together
-in the faith), continuing Pope Francisâ€™s reforms on transparency and
+in the faith), continuing Pope Francis’s reforms on transparency and
 consultation.
 
-> **â€œWe want to be a synodal Church, a Church that walksâ€¦ always seeking
-> peace, charity, and closeness to those who suffer.â€**
+> **“We want to be a synodal Church, a Church that walks… always seeking
+> peace, charity, and closeness to those who suffer.”**
 
 > **~ Reuters**
 
-**Heâ€™s unlikely to reverse traditional teachings, and change will come
+**He’s unlikely to reverse traditional teachings, and change will come
 through collaboration ~ not edict.**
 
 </div>
@@ -330,28 +330,28 @@ through collaboration ~ not edict.**
 > href="https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html"
 > class="markup--anchor markup--pullquote-anchor"
 > data-href="https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html"
-> rel="noopener" target="_blank"><em>Laudato Siâ€™</em></a> and the
+> rel="noopener" target="_blank"><em>Laudato Si’</em></a> and the
 > Francis environmental legacy.
 
-> **â€œToday â€¦ we live in a world that is burning, both because of global
-> warming and armed conflicts.â€**
+> **“Today … we live in a world that is burning, both because of global
+> warming and armed conflicts.”**
 
 > **~ Reuters**
 
-> **â€œWe have to pray for the conversion of many people â€¦ who still do
-> not see the urgency of caring for our common home.â€**
+> **“We have to pray for the conversion of many people … who still do
+> not see the urgency of caring for our common home.”**
 
 > **~ Reuters**
 
 > He urged Catholics to speak out ~
 
-> **â€œEven when it requires the courage to oppose the destructive power
-> of the princes of this world.â€**
+> **“Even when it requires the courage to oppose the destructive power
+> of the princes of this world.”**
 
 > **~ Reuters**
 
-> Heâ€™s likely to continue Francisâ€™s push for emissions cuts, ecological
-> reform, and a â€œGreen Church.â€
+> He’s likely to continue Francis’s push for emissions cuts, ecological
+> reform, and a “Green Church.”
 
 </div>
 
@@ -371,16 +371,16 @@ through collaboration ~ not edict.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **6.** What Is Pope Leo XIVâ€™s Stance on AI, Gender, and Digital Ethics?
+### **6.** What Is Pope Leo XIV’s Stance on AI, Gender, and Digital Ethics?
 
 #### **Artificial Intelligence**
 
-> **â€œArtificial intelligence functions as a tool for the good of human
-> beings, not to diminish them or even to replace them.â€**
+> **“Artificial intelligence functions as a tool for the good of human
+> beings, not to diminish them or even to replace them.”**
 
 > **~ Reuters**
 
-> **â€œOur personal life has greater value than any algorithm.â€**
+> **“Our personal life has greater value than any algorithm.”**
 
 > **~ Reuters**
 
@@ -406,20 +406,20 @@ through collaboration ~ not edict.**
 
 #### **Gender and Sexuality**
 
-> As a bishop in Peru, he opposed â€œgender ideologyâ€ and echoed Church
+> As a bishop in Peru, he opposed “gender ideology” and echoed Church
 > teaching on marriage.
 
-> **â€œThe promotion of gender ideology is confusing, because it seeks to
-> create genders that donâ€™t exist.â€**
+> **“The promotion of gender ideology is confusing, because it seeks to
+> create genders that don’t exist.”**
 
 > **~ People**
 
-Still, he supports Francisâ€™s outreach to LGBT Catholics and is seen as a
+Still, he supports Francis’s outreach to LGBT Catholics and is seen as a
 **pastoral centrist**.
 
 > One insider described him as a
 
-> **â€œdignified middle of the roadâ€** voice.
+> **“dignified middle of the road”** voice.
 
 </div>
 
@@ -441,8 +441,8 @@ Still, he supports Francisâ€™s outreach to LGBT Catholics and is seen as a
 
 #### **Digital Ethics**
 
-> **â€œWe must say â€˜noâ€™ to the war of words and imagesâ€¦ disarm
-> communication of all prejudice and resentment.â€**
+> **“We must say ‘no’ to the war of words and images… disarm
+> communication of all prejudice and resentment.”**
 
 > **~ Reuters**
 
@@ -450,7 +450,7 @@ Leo XIV wants a **truthful and charitable media culture**, rooted in
 dignity over division.
 
 > Expect him to speak out on misinformation, polarization, and online
-> crueltyâ€Šâ€”â€Šespecially where it harms the poor or the young.
+> cruelty — especially where it harms the poor or the young.
 
 </div>
 
@@ -476,11 +476,11 @@ dignity over division.
 
 > Widespread celebration of the first American pope.
 
-> **â€œAn historic and hopeful moment for Catholics in America.â€**
+> **“An historic and hopeful moment for Catholics in America.”**
 
 > **~ George W. Bush, AP**
 
-> **â€œA great honor for our country.â€**
+> **“A great honor for our country.”**
 
 > **~ Donald Trump, AP**
 
@@ -488,8 +488,8 @@ dignity over division.
 
 > He served over 20 years in Peru, and the region claims him proudly.
 
-> **â€œA greetingâ€¦ particularly to my beloved diocese of Chiclayo, in
-> Peru, where a faithful people have accompanied their bishop.â€**
+> **“A greeting… particularly to my beloved diocese of Chiclayo, in
+> Peru, where a faithful people have accompanied their bishop.”**
 
 > **~ Reuters**
 
@@ -497,8 +497,8 @@ dignity over division.
 
 > The Curia welcomed his gentle tone and message of unity.
 
-> **â€œWalk with you, as a united Churchâ€¦ faithful to Jesus Christ,
-> without fear.â€**
+> **“Walk with you, as a united Church… faithful to Jesus Christ,
+> without fear.”**
 
 > **~ Reuters**
 
@@ -526,32 +526,32 @@ dignity over division.
 
 > **Pastoral**.
 
-> **â€œDown-to-earth,â€ â€œhumble,â€ â€œa good listener.â€**
+> **“Down-to-earth,” “humble,” “a good listener.”**
 
 > **~ People**
 
-> **â€œA voice of common sense and practical concerns for the Churchâ€™s
-> outreach to the poor.â€**
+> **“A voice of common sense and practical concerns for the Church’s
+> outreach to the poor.”**
 
 > **~ Reuters**
 
-> He wants to **â€œenlarge the tentâ€** of the Church and walk side-by-side
+> He wants to **“enlarge the tent”** of the Church and walk side-by-side
 > with his flock.
 
-> **â€œWith you I am a Christian and for you a bishop.â€**
+> **“With you I am a Christian and for you a bishop.”**
 
 > **~ Reuters**
 
-> **â€œA missionary Churchâ€¦ always open to receive \[people\], like this
-> square, with open arms.â€**
+> **“A missionary Church… always open to receive \[people\], like this
+> square, with open arms.”**
 
 > **~ Reuters**
 
 > As Father James Martin put it:
 
-> **â€œKind, open, humble, modest, decisive, hard-working,
-> straightforward, trustworthy, and down-to-earthâ€¦ A brilliant
-> choice.â€**
+> **“Kind, open, humble, modest, decisive, hard-working,
+> straightforward, trustworthy, and down-to-earth… A brilliant
+> choice.”**
 
 > **~ People**
 
@@ -612,7 +612,7 @@ whole Catholic world?**
 
 #### **We want to hear from you!**
 
-> Whatâ€™s surprised you about Pope Leo XIV so far?
+> What’s surprised you about Pope Leo XIV so far?
 
 > What do you hope he focuses on in the years ahead?
 

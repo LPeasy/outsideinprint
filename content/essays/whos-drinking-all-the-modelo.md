@@ -1,5 +1,5 @@
 ---
-title: "Whoâ€™s Drinking All the Modelo?"
+title: "Who’s Drinking All the Modelo?"
 date: 2025-05-13
 draft: false
 slug: "whos-drinking-all-the-modelo"
@@ -24,10 +24,10 @@ medium_source_url: "https://medium.com/@lawtonperret/whos-drinking-all-the-model
 
 <div class="section-inner sectionLayout--insetColumn">
 
-**â€œEvery once in a while, a person comes along who defies the odds, who
-defies logic, and fulfills an incredible dream.â€**
+**“Every once in a while, a person comes along who defies the odds, who
+defies logic, and fulfills an incredible dream.”**
 
-â€” *The Mayor of Philadelphia celebrating Rocky Balboa in Rocky III*
+— *The Mayor of Philadelphia celebrating Rocky Balboa in Rocky III*
 
 </div>
 
@@ -47,7 +47,7 @@ defies logic, and fulfills an incredible dream.â€**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **Whoâ€™s Drinking All the Modelo?**
+### **Who’s Drinking All the Modelo?**
 
 #### Especial Report
 
@@ -85,7 +85,7 @@ rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **How Modelo Became Americaâ€™s Best-Selling Beer**
+#### **How Modelo Became America’s Best-Selling Beer**
 
 <figure id="a381" class="graf graf--figure graf-after--h4">
 <img src="https://cdn-images-1.medium.com/max/800/0*qC97rJHQTP_uYDbp"
@@ -108,23 +108,23 @@ out.**
 ***In May 2023****,* **Modelo Especial knocked them off the top spot**
 in the American Beer Market.
 
-**The blame?** Headlines pinned it on **Bud Lightâ€™s marketing misstep**
+**The blame?** Headlines pinned it on **Bud Light’s marketing misstep**
 with Dylan Mulvaney
 <a href="https://en.wikipedia.org/wiki/Bud_Light_boycott"
 class="markup--anchor markup--p-anchor"
 data-href="https://en.wikipedia.org/wiki/Bud_Light_boycott"
 rel="noopener" target="_blank"><em>(you know the one)</em></a>*.*
 
-> But Modelo wasnâ€™t just waiting in the wings.
+> But Modelo wasn’t just waiting in the wings.
 
 *Its been climbing steadily*, powered by **double-digit growth**,
 c**lear branding**, and **expanding demographic tailwinds**.
 
 **Its rise was predictable.**
 
-What wasnâ€™t? ***The timing.***
+What wasn’t? ***The timing.***
 
-A culture war skirmish cracked open Bud Lightâ€™s armor, and Modelo struck
+A culture war skirmish cracked open Bud Light’s armor, and Modelo struck
 while the iron was hot.
 
 They were doing something most brands had forgotten how to do: ***feel
@@ -132,7 +132,7 @@ cool.***
 
 > So where is all this Modelo being sold?
 
-> And whoâ€™s drinking it?
+> And who’s drinking it?
 
 </div>
 
@@ -152,7 +152,7 @@ cool.***
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **Modeloâ€™s Stronghold: Top Markets Driving the Surge**
+#### **Modelo’s Stronghold: Top Markets Driving the Surge**
 
 <figure id="abdb" class="graf graf--figure graf-after--h4">
 <img src="https://cdn-images-1.medium.com/max/800/0*FaifkWnDT__ogR1r"
@@ -169,21 +169,21 @@ data-href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral"
 rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-Modelo Especialâ€™s surge is concentrated in a few high-octane
-marketsâ€Šâ€”â€Šmost notably **California, Texas, and Illinois.** These three
+Modelo Especial’s surge is concentrated in a few high-octane
+markets — most notably **California, Texas, and Illinois.** These three
 states account for a significant share of national beer sales, and in
-all of them, Modelo is a top-three brand. **In California, itâ€™s \#1.**
+all of them, Modelo is a top-three brand. **In California, it’s \#1.**
 
-In cities like Los Angeles, Dallas, and Chicago, Modelo Especial isnâ€™t
-just a beerâ€Šâ€”â€Š**itâ€™s *the* beer.** Modeloâ€™s also gaining ground in
-northern regions like Minnesota and upstate New Yorkâ€Šâ€”â€Šmarkets far from
-its Latino baseâ€Šâ€”â€Šthanks to its **national-scale distribution** and
+In cities like Los Angeles, Dallas, and Chicago, Modelo Especial isn’t
+just a beer — **it’s *the* beer.** Modelo’s also gaining ground in
+northern regions like Minnesota and upstate New York — markets far from
+its Latino base — thanks to its **national-scale distribution** and
 **cross-demographic appeal.**
 
-Whether itâ€™s stocked at taquerias, corner stores, backyard parties, or
+Whether it’s stocked at taquerias, corner stores, backyard parties, or
 bar patios, its **about as common as water.**
 
-> And that saturation didnâ€™t happen by accident.
+> And that saturation didn’t happen by accident.
 
 </div>
 
@@ -203,7 +203,7 @@ bar patios, its **about as common as water.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **Inside Modeloâ€™s Explosive Growth Strategy**
+#### **Inside Modelo’s Explosive Growth Strategy**
 
 <figure id="71b7" class="graf graf--figure graf-after--h4">
 <img src="https://cdn-images-1.medium.com/max/800/0*29Ko8cbJ6iPpKQDI"
@@ -224,11 +224,11 @@ rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 rights to Modelo, reported nearly **\$7.5 billion in beer sales in
 FY2023**, up 11% from the previous year.
 
-> Constellationâ€™s rise began with a twist of fate.
+> Constellation’s rise began with a twist of fate.
 
 When AB InBev acquired Grupo Modelo in 2013, **U.S. antitrust regulators
 forced the company to divest domestic rights.** Constellation picked
-them upâ€Šâ€”â€Šand turned that legal quirk into ***a \$45 billion success
+them up — and turned that legal quirk into ***a \$45 billion success
 story.***
 
 Modelo Especial drove much of that growth, with sales up 14%
@@ -239,12 +239,12 @@ year-over-year.
 A deadly combination of **marketing savvy**, **distributive firepower**,
 and **brand clarity**.
 
-Modeloâ€™s partnership with ***Reyes Beverage Groupâ€Š***â€”â€Šthe largest beer
-distributor in Americaâ€Šâ€”â€Šgives it unmatched retail reach. While Bud
+Modelo’s partnership with ***Reyes Beverage Group ***— the largest beer
+distributor in America — gives it unmatched retail reach. While Bud
 Light floundered with identity crises, Modelo kept things simple:
-â€œ**Fighting Spirit**,â€ **beach scenes**, and **gold foil**.
+“**Fighting Spirit**,” **beach scenes**, and **gold foil**.
 
-You know exactly what youâ€™re getting: **delicious beer with no strings
+You know exactly what you’re getting: **delicious beer with no strings
 attached.**
 
 > What happens when a legacy brand stumbles?
@@ -269,7 +269,7 @@ attached.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **From the Octagon to the Backyard: Modeloâ€™s Crossover Moment**
+#### **From the Octagon to the Backyard: Modelo’s Crossover Moment**
 
 <figure id="b32a" class="graf graf--figure graf-after--h4">
 <img src="https://cdn-images-1.medium.com/max/800/0*6hTEfjOrKbekM-qS"
@@ -286,7 +286,7 @@ data-href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral"
 rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-Modelo didnâ€™t just ride with the cultureâ€Šâ€”**â€Šit took an active role.**
+Modelo didn’t just ride with the culture —** it took an active role.**
 
 The brand became ***the official beer of the UFC***, a partnership that
 helped it dominate among younger, male consumers and cemented its image
@@ -299,23 +299,23 @@ college football properties only extended its reach.
 These sponsorships put Modelo front and center on *game day*,
 *tailgates*, and *barroom TVs* across the country. **And they worked.**
 
-Analysts credit Modeloâ€™s brand success to its *consistent image*:
-**tough**, **active**, and **authentic**â€Šâ€”â€Šqualities that cut through
+Analysts credit Modelo’s brand success to its *consistent image*:
+**tough**, **active**, and **authentic** — qualities that cut through
 the crowded beer aisle.
 
 While its marketing leans into Mexican pride and iconography, Modelo has
 managed to **celebrate its heritage without getting boxed in** by
-itâ€Šâ€”â€Šwalking a cultural line few brands can manage.
+it — walking a cultural line few brands can manage.
 
-> Itâ€™s the everymanâ€™s import:
+> It’s the everyman’s import:
 
 > Familiar but foreign, premium but not pretentious.
 
-That crossover appeal isnâ€™t hypothetical.
+That crossover appeal isn’t hypothetical.
 
 In 2023, *more non-Hispanic households (61%)* bought Modelo *than
 Hispanic ones (39%)*. **Even craft breweries are chasing the same
-lane**, rolling out their own â€œ***Mexican lagers***â€ to ride the wave.
+lane**, rolling out their own “***Mexican lagers***” to ride the wave.
 
 </div>
 
@@ -335,20 +335,20 @@ lane**, rolling out their own â€œ***Mexican lagers***â€ to ride the wave.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-Modeloâ€™s rise *wasnâ€™t just about brandingâ€Š*â€”â€Š**it was about reading the
+Modelo’s rise *wasn’t just about branding *— **it was about reading the
 map.**
 
-Americaâ€™s Latino population has grown from roughly ***12.5% in 2000***
+America’s Latino population has grown from roughly ***12.5% in 2000***
 to ***nearly 20% today***.
 
 And Hispanic consumers punch well above their weight, driving **39% of
-Modeloâ€™s U.S. sales.**
+Modelo’s U.S. sales.**
 
-> Thatâ€™s not just loyaltyâ€Šâ€”â€Šitâ€™s strategic alignment.
+> That’s not just loyalty — it’s strategic alignment.
 
-Modelo *didnâ€™t just catch a demographic tailwind.*
+Modelo *didn’t just catch a demographic tailwind.*
 
-It **bet on long-term population dynamics**â€Šâ€”â€Šand ***now itâ€™s cashing
+It **bet on long-term population dynamics** — and ***now it’s cashing
 in.***
 
 </div>
@@ -369,21 +369,21 @@ in.***
 
 <div class="section-inner sectionLayout--insetColumn">
 
-But hereâ€™s the twist:
+But here’s the twist:
 
 > **Bud Light is fighting back.**
 
 In late 2023, **Anheuser-Busch signed a multiyear deal** to make ***Bud
-Light*** the **new official beer of the UFC**â€Šâ€”â€Šreplacing Modelo.
+Light*** the **new official beer of the UFC** — replacing Modelo.
 
-**Itâ€™s a comeback cage match** for a brand still reeling from a *30%
+**It’s a comeback cage match** for a brand still reeling from a *30%
 drop in sales.*
 
-***Bud Light*** *was once a fixture* in the UFCâ€™s early days, before it
+***Bud Light*** *was once a fixture* in the UFC’s early days, before it
 *stepped away in 2017.*
 
-> Now itâ€™s back in the ring, gloves on, betting that fans are ready to
-> forgiveâ€Šâ€”â€Šand forget.
+> Now it’s back in the ring, gloves on, betting that fans are ready to
+> forgive — and forget.
 
 </div>
 
@@ -422,20 +422,20 @@ rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 
 Modelo is riding ***the crest of a much larger wave***:
 
-> **Americaâ€™s growing thirst for Mexican beer.**
+> **America’s growing thirst for Mexican beer.**
 
 *Mexican beers now dominate* the U.S. import market, accounting for
-**80% of all foreign beer sales**â€Šâ€”â€Ša massive jump from just 17% in the
-early â€˜90s.
+**80% of all foreign beer sales** — a massive jump from just 17% in the
+early ‘90s.
 
-**But itâ€™s not all sunshine and lime wedges.**
+**But it’s not all sunshine and lime wedges.**
 
 In 2025, ***Constellation Brands*** warned of **slowing beer growth** in
 key markets due to **aluminum tariffs** and **reduced demand** from
 Hispanic consumers, partially **linked to** **anti-immigration
 sentiment** and broader political tensions.
 
-**Modelo is brewed exclusively in Mexico**â€Šâ€”â€Šone of its selling points,
+**Modelo is brewed exclusively in Mexico** — one of its selling points,
 but also ***potentially a liability*** if anti-Mexico rhetoric
 escalates.
 
@@ -457,7 +457,7 @@ escalates.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **What Modeloâ€™s Success Teaches About Brand Strategy**
+#### **What Modelo’s Success Teaches About Brand Strategy**
 
 <figure id="67c4" class="graf graf--figure graf-after--h4">
 <img src="https://cdn-images-1.medium.com/max/800/0*xUy53KOxLpWEzgxn"
@@ -475,9 +475,9 @@ data-href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral"
 rel="photo-source noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-> Modeloâ€™s ascent isnâ€™t just a story about beer.
+> Modelo’s ascent isn’t just a story about beer.
 
-*Itâ€™s a* ***case study*** *in* **what happens when a brand** **knows who
+*It’s a* ***case study*** *in* **what happens when a brand** **knows who
 it is**, **chooses its battles**, and **smartly invests** in
 distribution and marketing **in key markets**.
 
@@ -507,14 +507,14 @@ While **Bud Light** and **Michelob Ultra** scrambled to stay relevant,
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **Authorâ€™s Note**
+#### **Author’s Note**
 
 Like stories that cut through the froth? Follow
 <a href="https://medium.com/the-balanced-sheet"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet"
 target="_blank"><strong><em>The Balance Sheet</em></strong></a> for more
-essays on business, brands, and the real economyâ€Šâ€”â€Šserved cold, just
+essays on business, brands, and the real economy — served cold, just
 like your favorite beer.
 
 </div>
@@ -567,7 +567,7 @@ Light slips again, falling behind Modelo and Michelob Ultra after
 boycott</strong><br />
 <em>More than a year after a boycott drained the sales of what was once
 the most popular beer, Bud Light tumbled in
-theâ€¦</em>www.usatoday.com</a><a
+the…</em>www.usatoday.com</a><a
 href="https://www.usatoday.com/story/money/2024/07/18/bud-light-beer-sales-ranking-boycott/74463050007/"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="3a0c7378e2323ce77aad0351e52e0fc3"
@@ -586,7 +586,7 @@ data-href="https://www.forbes.com/sites/dontse/2024/11/01/how-modelo-became-the-
 title="https://www.forbes.com/sites/dontse/2024/11/01/how-modelo-became-the-no-1-beer-brand-in-america/"><strong>How
 Modelo Became The No. 1 Beer Brand In America</strong><br />
 <em>In June 2023, Modelo Especial overtook Bud Light to become the best
-selling beer brand in America. Since then, theâ€¦</em>www.forbes.com</a><a
+selling beer brand in America. Since then, the…</em>www.forbes.com</a><a
 href="https://www.forbes.com/sites/dontse/2024/11/01/how-modelo-became-the-no-1-beer-brand-in-america/"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="68728558676546931010f3355300a272"

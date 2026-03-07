@@ -4,7 +4,7 @@ date: 2025-08-12
 draft: false
 slug: "the-ledger-vol-2"
 section_label: "Essay"
-subtitle: "Floods, Flashpoints, and Floridaâ€™s Wild Side"
+subtitle: "Floods, Flashpoints, and Florida’s Wild Side"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-ledger-vol-2.pdf"
@@ -26,7 +26,7 @@ medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-2-15ae0fff9e
 
 ## The Ledger, Vol. 2
 
-#### Floods, Flashpoints, and Floridaâ€™s Wild Side
+#### Floods, Flashpoints, and Florida’s Wild Side
 
 **August 12th, 2025**
 
@@ -39,7 +39,7 @@ data-width="1284" data-height="1268" data-is-featured="true" />
 Joint</strong></figcaption>
 </figure>
 
-> **A few short essays you mightâ€™ve missed ~ from a deadly night in
+> **A few short essays you might’ve missed ~ from a deadly night in
 > Texas to a quiet fight against invasive species.**
 
 </div>
@@ -68,14 +68,14 @@ River that struck Camp Mystic.
 
 > Over four essays, we explored what happened, why flash floods are so
 > dangerous in the Texas Hill Country, the data behind extreme weather,
-> and the limits of federal power to keep people out of harmâ€™s way.
+> and the limits of federal power to keep people out of harm’s way.
 
 We also want to showcase two essays that you may be interested in ~ one
-on **Sir David Attenborough**â€™s lifelong impact on conservation, and one
+on **Sir David Attenborough**’s lifelong impact on conservation, and one
 on **why Florida should rethink its approach to invasive species**.
 
 Whether the focus is a summer camp in Texas, nature documentaries, or
-Nile monitors in Floridaâ€™s backyard, one question echoes:
+Nile monitors in Florida’s backyard, one question echoes:
 
 > How do we balance knowledge, action,
 
@@ -123,9 +123,9 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*UbI
 A narrative retelling of the night the flood came through, killing 27
 people and cutting power, water, and communications in the dark.
 
-Itâ€™s not just a timeline ~
+It’s not just a timeline ~
 
-Itâ€™s an attempt to place the reader there, in the cabins, as the water
+It’s an attempt to place the reader there, in the cabins, as the water
 rose.
 
 </div>
@@ -146,7 +146,7 @@ rose.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### The Waterâ€™s Rising: What the Data Really Says About Extreme Weather
+### The Water’s Rising: What the Data Really Says About Extreme Weather
 
 <div id="6439" class="graf graf--mixtapeEmbed graf-after--h3">
 
@@ -155,9 +155,9 @@ href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-real
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 title="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"><strong>The
-Waterâ€™s Rising: What the Data Really Says About Extreme
+Water’s Rising: What the Data Really Says About Extreme
 Weather</strong><br />
-<em>â€œThe weatherâ€™s never been like this!â€</em>medium.com</a><a
+<em>“The weather’s never been like this!”</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="a2cbc9c74b9b4bd9c344c25b1dd116a2"
@@ -168,11 +168,11 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*t7a
 
 We took on a question that often gets waved away with slogans:
 
-> **â€œAre storms getting worse?â€**
+> **“Are storms getting worse?”**
 
 Using rainfall records and peer-reviewed studies, this piece focuses on
 **trends in U.S. weather, especially Texas,** and how the numbers do
-(and donâ€™t) line up with public perception.
+(and don’t) line up with public perception.
 
 </div>
 
@@ -214,7 +214,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*trF
 
 **Part history, part geography lesson.**
 
-The Hill Countryâ€™s steep slopes, thin soil, and narrow valleys create
+The Hill Country’s steep slopes, thin soil, and narrow valleys create
 one of the fastest-draining ~ and most dangerous ~ flood environments in
 the country.
 
@@ -239,7 +239,7 @@ a wall of water.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Whoâ€™s Responsible for Building in the Floodplain?
+### Who’s Responsible for Building in the Floodplain?
 
 <div id="452c" class="graf graf--mixtapeEmbed graf-after--h3">
 
@@ -247,7 +247,7 @@ a wall of water.
 href="https://medium.com/the-balanced-sheet/whos-responsible-for-building-in-the-floodplain-b468f42f536d"
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/whos-responsible-for-building-in-the-floodplain-b468f42f536d"
-title="https://medium.com/the-balanced-sheet/whos-responsible-for-building-in-the-floodplain-b468f42f536d"><strong>Whoâ€™s
+title="https://medium.com/the-balanced-sheet/whos-responsible-for-building-in-the-floodplain-b468f42f536d"><strong>Who’s
 Responsible for Building in the Floodplain?</strong><br />
 <em>Camp Mystic, Zoning Laws, and the Limits of Federal
 Power</em>medium.com</a><a
@@ -263,7 +263,7 @@ A look at the **limits of federal authority** over zoning and
 development.
 
 Why the U.S. government can map flood zones and offer insurance, but
-canâ€™t simply ban a camp or subdivision from being built there.
+can’t simply ban a camp or subdivision from being built there.
 
 </div>
 
@@ -349,7 +349,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*tlP
 </div>
 
 An argument for **shifting from reactive control to proactive
-prevention**, using the **â€œinvasion curveâ€** to explain why the cheapest
+prevention**, using the **“invasion curve”** to explain why the cheapest
 and most effective solutions are often the ones we act on too late.
 
 </div>
@@ -370,7 +370,7 @@ and most effective solutions are often the ones we act on too late.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Next month, weâ€™re publishing two new essays for sure:
+#### Next month, we’re publishing two new essays for sure:
 
 1.  <span id="bf48">**Millennials vs. Boomers at 35** ~ Timing, assets,
     and opportunity across generations.</span>
@@ -398,7 +398,7 @@ and most effective solutions are often the ones we act on too late.
 
 ### **Thanks for reading ~**
 
-> ***Whether youâ€™ve been following since the beginning or if you just
+> ***Whether you’ve been following since the beginning or if you just
 > landed here, I appreciate your time ~***
 
 > ***and I hope one or two of these pieces spark something for you.***

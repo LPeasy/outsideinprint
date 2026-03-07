@@ -4,7 +4,7 @@ date: 2025-12-02
 draft: false
 slug: "you-paid-for-that-ct-scan"
 section_label: "Essay"
-subtitle: "You Should Be Able To See Itâ€¦ Right?"
+subtitle: "You Should Be Able To See It… Right?"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/you-paid-for-that-ct-scan.pdf"
@@ -26,7 +26,7 @@ medium_source_url: "https://medium.com/@lawtonperret/you-paid-for-that-ct-scan-7
 
 ### You Paid For That CT Scan.
 
-#### You Should Be Able To See Itâ€¦ Right?
+#### You Should Be Able To See It… Right?
 
 <figure id="ebda" class="graf graf--figure graf-after--h4">
 <img
@@ -47,11 +47,11 @@ rel="noopener" target="_blank">Source</a></figcaption>
 > You can videotape your dog super-slo-mo, in 4k @ 120 fps!
 
 But if you get a CT scan of your own body, you walk away with a
-jargon-heavy PDF and (after picking it up from the â€œmedical records
-departmentâ€) a useless CD. For something that costs thousands of dollars
+jargon-heavy PDF and (after picking it up from the “medical records
+department”) a useless CD. For something that costs thousands of dollars
 and can change your life ~ **that is absurd.**
 
-#### Whatâ€™s the rationale??
+#### What’s the rationale??
 
 The truth is that the ossified and defunct medical industrial complex in
 America could use a flamethrower treatment from DOGE a la Mr. Musk and
@@ -83,13 +83,13 @@ in emergencies. The hardware ~ storage, RAM, graphics ~ is more than
 enough to load and scroll through CT slices.
 
 Do phones fail the strict standards radiologists use for making official
-diagnoses? Yes. The screen isnâ€™t calibrated, the room is too bright, and
-the grayscale isnâ€™t as perfect as a medical screen.
+diagnoses? Yes. The screen isn’t calibrated, the room is too bright, and
+the grayscale isn’t as perfect as a medical screen.
 
-#### But youâ€™re not trying to act as a radiologist.
+#### But you’re not trying to act as a radiologist.
 
-Youâ€™re trying to understand whatâ€™s inside your own body, and good luck
-finding a doctor who will give you a straight answerâ€¦ if he gives you
+You’re trying to understand what’s inside your own body, and good luck
+finding a doctor who will give you a straight answer… if he gives you
 more than 15 minutes you should feel blessed by Hippocrates himself.
 
 We need an app that lets you see where the kidney stone is, how big the
@@ -116,23 +116,23 @@ EVERYWHERE ON OUR CELLULAR DEVICES.**
 
 ### Fear and Habit
 
-> So why doesnâ€™t this app exist?
+> So why doesn’t this app exist?
 
 #### Because everyone in the system is scared of blame.
 
 If a company gives patients a CT viewer, and one bonehead misreads what
 they see, delays care, and has a bad outcome, lawyers may start asking
-who â€œletâ€ that person see the images.
+who “let” that person see the images.
 
-Regulators add another layer: the second you say your app â€œhelps
-diagnose,â€ youâ€™re in medical-device territory with years of paperwork.
+Regulators add another layer: the second you say your app “helps
+diagnose,” you’re in medical-device territory with years of paperwork.
 
 #### So we get a weird compromise:
 
-> Doctors get slick tools. Patients get â€œunremarkableâ€ reports and
+> Doctors get slick tools. Patients get “unremarkable” reports and
 > plastic discs.
 
-Not because itâ€™s impossible!
+Not because it’s impossible!
 
 Because nobody wants to actually improve outcomes for real people.
 
@@ -163,11 +163,11 @@ The fix is straightforward:
 - <span id="b067">Let people scroll their own images with simple
   controls ~ brightness, contrast, basic presets.</span>
 - <span id="768f">Add clear labels for organs and structures so the
-  picture isnâ€™t just gray noise.</span>
-- <span id="fdc7">Link the radiology report to the pictures: tap â€œkidney
-  stoneâ€ in the text, jump to the slice that shows it.</span>
+  picture isn’t just gray noise.</span>
+- <span id="fdc7">Link the radiology report to the pictures: tap “kidney
+  stone” in the text, jump to the slice that shows it.</span>
 
-### Thatâ€™s it.
+### That’s it.
 
 #### No AI, no promise to find cancer, just the scans you already paid for.
 
@@ -193,7 +193,7 @@ The fix is straightforward:
 
 > This is about respect as much as tech.
 
-If we say patients â€œownâ€ their medical data, that should mean more than
+If we say patients “own” their medical data, that should mean more than
 a download button and a confusing PDF. Being able to actually *see* your
 own insides ~ on the same phone you use for everything else ~ is a basic
 step toward treating people like partners in care, not bystanders.
@@ -227,7 +227,7 @@ Thanks for taking the time to read this short essay. If you like what
 you see, give me a follow here on Medium. Subscribe to my newsletter,
 The Balance Sheet, for essays just like this directly in your inbox.
 Clap if you enjoyed the piece, comment your own experiences, and if you
-know how to build appsâ€¦ lets talk!
+know how to build apps… lets talk!
 
 ***Best,***
 

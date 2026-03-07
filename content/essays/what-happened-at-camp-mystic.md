@@ -36,10 +36,10 @@ data-width="1318" data-height="765" data-is-featured="true" />
 <figcaption>Inundation Map | Source: CNN</figcaption>
 </figure>
 
-> **â€œThey were just screaming and praying. The water was moving too fast
-> to do anything.â€**
+> **“They were just screaming and praying. The water was moving too fast
+> to do anything.”**
 
-> **â€” *Rescuer, CNN interview***
+> **— *Rescuer, CNN interview***
 
 <span class="graf-dropCap">On</span> the night of July 4th, while
 fireworks lit up the Texas Hill Country, a dangerous storm stalled over
@@ -47,7 +47,7 @@ the Guadalupe River Basin.
 
 > By sunrise, it turned deadly.
 
-**Camp Mystic,** a century-old girlsâ€™ camp nestled along the riverbank
+**Camp Mystic,** a century-old girls’ camp nestled along the riverbank
 near **Hunt, Texas,** was among the hardest hit.
 
 > Just after 5:00 a.m., rising water surged into parts of the camp.
@@ -57,11 +57,11 @@ minutes, counselors shouting through darkness, girls scrambling barefoot
 toward higher ground.
 
 This was a tragedy ~ and a failure of risk communication, hazard
-awareness, and safety planning. And itâ€™s raising tough questions:
+awareness, and safety planning. And it’s raising tough questions:
 
 > **How did a youth camp end up in a mapped floodway?**
 
-> **Why wasnâ€™t the threat better understood?**
+> **Why wasn’t the threat better understood?**
 
 > **Who is responsible ~ the camp, the parents, the government, or all
 > the above?**
@@ -84,17 +84,17 @@ awareness, and safety planning. And itâ€™s raising tough questions:
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Authorâ€™s Note
+#### Author’s Note
 
 I work as a life safety consequences specialist with the U.S. Army Corps
 of Engineers. Our team models life loss from levee and dam breaches
 across the country ~ mapping out how floods kill, where, and why.
 
-While this event wasnâ€™t caused by a structural failure, the conditions
+While this event wasn’t caused by a structural failure, the conditions
 were eerily familiar: low warning time, rapid inundation, and vulnerable
 populations with limited escape options.
 
-In my upcoming piece, Iâ€™ll walk through the flood in detail: what
+In my upcoming piece, I’ll walk through the flood in detail: what
 happened, why it happened, and how we can learn from it.
 
 Because this flood was no fluke.\
@@ -125,7 +125,7 @@ It was a warning ~ and next time, the water may rise somewhere else.
 
 ### **Combined Full Timeline**
 
-#### **July 1â€“5 Texas Flood & Camp Mystic Tragedy**
+#### **July 1–5 Texas Flood & Camp Mystic Tragedy**
 
 **Sources:** CNN, USA TODAY, KSAT, NWS, Floodbase, TDEM, USGS, and local
 reporting
@@ -153,7 +153,7 @@ data-width="627" data-height="850" />
 
 > The Guadalupe River rose more than 25 feet in under 90 minutes.
 
-> Thatâ€™s not a typo.
+> That’s not a typo.
 
 </div>
 
@@ -176,7 +176,7 @@ data-width="627" data-height="850" />
 ### **How the Camp Mystic Flood Became a Catastrophe**
 
 > The flood that overtook Camp Mystic in the early hours of July 4
-> wasnâ€™t just a natural disaster.
+> wasn’t just a natural disaster.
 
 **It was a system failure on multiple levels ~ hydrological,
 bureaucratic, and human.**
@@ -213,13 +213,13 @@ data-width="1404" data-height="772" />
 By the time the first official **Flash Flood Warning** was issued at
 **1:14 a.m.**, the rain had already intensified.
 
-A **full Flash Flood Emergency** wasnâ€™t declared until **4:03 a.m.** ~
+A **full Flash Flood Emergency** wasn’t declared until **4:03 a.m.** ~
 just an hour before a 20-foot wall of water tore through the camp.
 
 At **4:22 a.m.**, a firefighter requested activation of the **CodeRED
 alert system** for Hunt, TX. But protocol required supervisor sign-off.
 
-**Some residents didnâ€™t receive alerts until 10 a.m.** ~ long after the
+**Some residents didn’t receive alerts until 10 a.m.** ~ long after the
 river had crested.
 
 > **Camp Mystic lost power before dawn.**
@@ -260,7 +260,7 @@ River and Cypress Creek, **was obliterated.**
 
 ### **History Repeating Itself**
 
-#### This wasnâ€™t the first time the Guadalupe River flooded.
+#### This wasn’t the first time the Guadalupe River flooded.
 
 It was the <a
 href="https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/"
@@ -305,7 +305,7 @@ van was swept away in another Guadalupe River flood.</strong></a>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-**Most summer camps donâ€™t plan for a 20-foot wall of water arriving in
+**Most summer camps don’t plan for a 20-foot wall of water arriving in
 the dark with power out and no real-time alerts.**
 
 > Maybe they should.
@@ -330,10 +330,10 @@ the dark with power out and no real-time alerts.**
 
 ### Deep Dive Teaser
 
-Next weeek, Iâ€™ll break down the flood in full ~ with **maps, warning
+Next weeek, I’ll break down the flood in full ~ with **maps, warning
 gaps**, and a **risk-informed analysis** of what went wrong.
 
-Iâ€™ll be publishing additional primers <a
+I’ll be publishing additional primers <a
 href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
@@ -347,9 +347,9 @@ href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-real
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 title="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"><strong>The
-Waterâ€™s Rising: What the Data Really Says About Extreme
+Water’s Rising: What the Data Really Says About Extreme
 Weather</strong><br />
-<em>â€œThe weatherâ€™s never been like this!â€</em>medium.com</a><a
+<em>“The weather’s never been like this!”</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="a2cbc9c74b9b4bd9c344c25b1dd116a2"

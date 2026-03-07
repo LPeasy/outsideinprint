@@ -4,7 +4,7 @@ date: 2026-01-16
 draft: false
 slug: "the-dolphin-company"
 section_label: "Essay"
-subtitle: "The Rise and Fall of the Worldâ€™s Largest Dolphin Empire"
+subtitle: "The Rise and Fall of the World’s Largest Dolphin Empire"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-dolphin-company.pdf"
@@ -26,7 +26,7 @@ medium_source_url: "https://medium.com/@lawtonperret/the-dolphin-company-47f1945
 
 ### The Dolphin Company
 
-#### The Rise and Fall of the Worldâ€™s Largest Dolphin Empire
+#### The Rise and Fall of the World’s Largest Dolphin Empire
 
 <figure id="bd87" class="graf graf--figure graf-after--h4">
 <img
@@ -38,9 +38,9 @@ data-width="2400" data-height="1200" data-is-featured="true" />
 
 ### A Tragedy and a Filing
 
-> **â€œJett, a 14-year-old bottlenose dolphin, died from acute head trauma
-> in March 2025.â€\**
-> â€Šâ€”â€ŠUSDA inspection report, quoted in Panama City News Herald
+> **“Jett, a 14-year-old bottlenose dolphin, died from acute head trauma
+> in March 2025.”\**
+>  — USDA inspection report, quoted in Panama City News Herald
 
 On a beautiful spring afternoon in 2025, families gathered at Gulf World
 Marine Park in Panama City Beach, Florida, expecting a classic
@@ -56,25 +56,25 @@ data-href="https://www.fox35orlando.com/news/gulf-world-marine-park-florida-dolp
 rel="noopener" target="_blank">March 4th USDA inspection</a>
 
 According to a March 4th USDA inspection, the tank where he died was so
-clouded with algae that ***â€œit was difficult to see the dolphins if they
-are approximately three feet below the water.â€***
+clouded with algae that ***“it was difficult to see the dolphins if they
+are approximately three feet below the water.”***
 
-USDA described the cause of death as ***â€œblunt force trauma to his
-rostrum and skull.â€***
+USDA described the cause of death as ***“blunt force trauma to his
+rostrum and skull.”***
 
 > It was the fourth dolphin death at Gulf World in a year.
 
 #### On March 27th, 2025, Florida agents raided the park.
 
-Days later, the parkâ€™s parent company filed for Chapter 11 bankruptcy in
+Days later, the park’s parent company filed for Chapter 11 bankruptcy in
 Delaware. **The Dolphin Company**, a Mexico-based conglomerate that once
-called itself *â€œthe worldâ€™s largest dolphin family,â€* was on the brink
+called itself *“the world’s largest dolphin family,”* was on the brink
 of collapse with **more than \$200 million in liabilities.**
 
-**The collapse wasnâ€™t just about mistreatment of dolphins ~**
+**The collapse wasn’t just about mistreatment of dolphins ~**
 
 This is what happens when a business is built on leveraged debt scales
-like Uberâ€¦
+like Uber…
 
 and then collides with changing social norms and economic reality.
 
@@ -127,9 +127,9 @@ falls down.
 
 ### From Motel Pools to Marine Parks
 
-> **â€œFour bottlenose dolphinsâ€¦ were housed at a motel pool for
-> training.â€\**
-> â€Šâ€”â€ŠPanama City News Herald, 1969
+> **“Four bottlenose dolphins… were housed at a motel pool for
+> training.”\**
+>  — Panama City News Herald, 1969
 
 <figure id="9c53" class="graf graf--figure graf-after--blockquote">
 <img
@@ -148,7 +148,7 @@ rel="noopener" target="_blank">Panama City News Article, September 10th,
 beginning.**
 
 Gulf World opened its doors in 1970, the brainchild of five Alabama
-businessmen. **The parkâ€™s first performers werenâ€™t born in captivity ~
+businessmen. **The park’s first performers weren’t born in captivity ~
 they were captured in the wild.**
 
 <figure id="d0cb" class="graf graf--figure graf-after--p">
@@ -185,7 +185,7 @@ title="https://www.mmc.gov/about-the-commission/our-mission/marine-mammal-protec
 Mammal Protection Act - Marine Mammal Commission</strong><br />
 <em>The Marine Mammal Protection Act (MMPA) established a national
 policy to prevent marine mammal species and
-populationâ€¦</em>www.mmc.gov</a><a
+population…</em>www.mmc.gov</a><a
 href="https://www.mmc.gov/about-the-commission/our-mission/marine-mammal-protection-act/"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="bb520d15250eb3f4d67d1fda98c7f7ee"
@@ -262,9 +262,9 @@ rel="noopener" target="_blank">Source</a></figcaption>
 
 ### A Mexican Dolphin Dynasty Emerges
 
-> **â€œSince 1994, The Dolphin Company has contributed to the study and
-> conservation of marine mammals.â€\**
-> â€Šâ€”â€ŠCompany press release
+> **“Since 1994, The Dolphin Company has contributed to the study and
+> conservation of marine mammals.”\**
+>  — Company press release
 
 <figure id="1bf1" class="graf graf--figure graf-after--blockquote">
 <img
@@ -280,7 +280,7 @@ target="_blank">Source</a></figcaption>
 
 Meanwhile, across the Gulf of Mexico, a different vision for the dolphin
 business was taking shape. In 1994, Mexican entrepreneur Eduardo Albor
-launched Dolphin Discovery in CancÃºn. His model was simple and
+launched Dolphin Discovery in Cancún. His model was simple and
 aggressive: tie dolphin encounters directly to resort tourism and build
 a captive-breeding pipeline to meet demand.
 
@@ -334,14 +334,14 @@ and rapid cross-border expansion.
 
 ### The Growth Playbook ~ Debt and Branding
 
-> **â€œLeisure Investments and 14 affiliatesâ€¦ filed for bankruptcy last
-> month, burdened by over \$200 million in debt.â€\**
-> â€Šâ€”â€ŠLaw360
+> **“Leisure Investments and 14 affiliates… filed for bankruptcy last
+> month, burdened by over \$200 million in debt.”\**
+>  — Law360
 
 From the outside, The Dolphin Company looked ascendant.
 
-Websites and brochures called it â€œthe worldâ€™s largest dolphin familyâ€
-and â€œthe \#1 dolphin company in the world.â€ Behind the curtain, the
+Websites and brochures called it “the world’s largest dolphin family”
+and “the \#1 dolphin company in the world.” Behind the curtain, the
 engine was debt-fueled expansion.
 
 By early 2025, the company owed about \$200 million to lenders including
@@ -349,8 +349,8 @@ Prudential and Cigna. To keep things moving, money was shuffled between
 affiliates ~ one park helping to cover another.
 
 That worked for a while, but it also masked growing stress across the
-group. In Jamaica, for instance, Dolphin Coveâ€™s stock traded on promises
-that were underwritten by the parent companyâ€™s support.
+group. In Jamaica, for instance, Dolphin Cove’s stock traded on promises
+that were underwritten by the parent company’s support.
 
 Bringing Marineland under the brand in 2019 was a triumphant moment for
 the company ~ an iconic American oceanarium joining the portfolio.
@@ -379,19 +379,19 @@ marketing copy and reality widened.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Whatâ€™s a â€œroll-up,â€ in plain English?
+#### What’s a “roll-up,” in plain English?
 
 > A roll-up is when a company grows by buying many smaller properties
 > and bundling them under one brand and one financial structure. It can
 > look smooth in good times ~ more locations, more revenue, more
-> â€œscale.â€ The risk is that a shared debt load and shared reputation can
+> “scale.” The risk is that a shared debt load and shared reputation can
 > turn one troubled property into a portfolio-wide problem.
 
-You donâ€™t have to call The Dolphin Company a â€œroll-upâ€ to see the
+You don’t have to call The Dolphin Company a “roll-up” to see the
 pattern.
 
 **Its operational footprint spread across multiple countries, and the
-companyâ€™s liabilities and brand reputation were exposed to the world.**
+company’s liabilities and brand reputation were exposed to the world.**
 
 </div>
 
@@ -428,11 +428,11 @@ rel="noopener" target="_blank">Source</a></figcaption>
 
 #### Eduardo Albor has been the driving force behind The Dolphin Company since its founding.
 
-Trained as a lawyer in MÃ©rida, with an MBA in corporate law from
-Universidad AnÃ¡huac, Albor brought a business-minded approach to the
+Trained as a lawyer in Mérida, with an MBA in corporate law from
+Universidad Anáhuac, Albor brought a business-minded approach to the
 dolphin tourism industry.
 
-In 1994, he launched **Dolphin Discovery** in CancÃºn, betting that
+In 1994, he launched **Dolphin Discovery** in Cancún, betting that
 resort guests would pay a premium for close encounters with captive
 dolphins. That bet paid off, and within two decades the company had
 expanded across the Caribbean.
@@ -440,14 +440,14 @@ expanded across the Caribbean.
 Albor has often framed the business as a mission, not just a commercial
 venture. He told reporters this while defending his record in 2024 ~
 
-> **â€œOther than people safety, animal health care comes first. We donâ€™t
-> look at this as strictly business. This is a mission that we have.â€**
+> **“Other than people safety, animal health care comes first. We don’t
+> look at this as strictly business. This is a mission that we have.”**
 
 In CEO letters during the pandemic, he promised that both dolphins and
 staff were ready to welcome visitors again. When Miami-Dade County moved
 to evict his company from the Seaquarium, Albor struck a defiant tone,
-arguing the lawsuit was taken ***â€œwith heavy hearts but clear mindsâ€***
-to protect the companyâ€™s legacy.
+arguing the lawsuit was taken ***“with heavy hearts but clear minds”***
+to protect the company’s legacy.
 
 Those words contrasted sharply with growing criticism and public outcry.
 
@@ -481,7 +481,7 @@ title="https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-n
 Whale Lolita Dies Ahead of Release Back Into Natural Habitat: 'We Are
 Heartbroken'</strong><br />
 <em>Lolita, the orca who has been at the Miami Seaquarium for 53 years,
-died from what experts believed to be "a renalâ€¦</em>people.com</a><a
+died from what experts believed to be "a renal…</em>people.com</a><a
 href="https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="b13f4810a02d1917153b1d1e6ed19eb4"
@@ -493,7 +493,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*1iF
 Albor embodied the entrepreneurial vision of Mexican tourism. At the
 same time, Albor was the face of a business model whose time had passed.
 
-**His story mirrors the companyâ€™s arc: ambitious, expansionist, and
+**His story mirrors the company’s arc: ambitious, expansionist, and
 ultimately trapped between a dream and shifting cultural landscapes.**
 
 </div>
@@ -516,9 +516,9 @@ ultimately trapped between a dream and shifting cultural landscapes.**
 
 ### Warning Signs
 
-> **â€œThe Countyâ€¦ filed a lawsuit to evict The Dolphin Companyâ€¦ to ensure
-> the safety and wellbeing of the animals.â€\**
-> â€Šâ€”â€ŠMiami-Dade County filing, 2024
+> **“The County… filed a lawsuit to evict The Dolphin Company… to ensure
+> the safety and wellbeing of the animals.”\**
+>  — Miami-Dade County filing, 2024
 
 <figure id="5557" class="graf graf--figure graf-after--blockquote">
 <img
@@ -535,7 +535,7 @@ After the 2013 documentary
 class="markup--anchor markup--p-anchor"
 data-href="https://www.rottentomatoes.com/m/blackfish_2013"
 rel="noopener" target="_blank">Blackfish</a>, marine parks around the
-world faced sharper scrutiny. The Dolphin Company didnâ€™t house killer
+world faced sharper scrutiny. The Dolphin Company didn’t house killer
 whales, but the tide was shifting ~ concrete pools with performing
 animals began to seem less and less humane for a growing share of the
 public.
@@ -572,7 +572,7 @@ data-href="https://missionblue.org/2013/08/blackfish-a-killer-documentary/"
 rel="noopener" target="_blank">Source</a></figcaption>
 </figure>
 
-> The 2013 documentary Blackfish focused on SeaWorldâ€™s treatment of
+> The 2013 documentary Blackfish focused on SeaWorld’s treatment of
 > orcas, but its impact reached far beyond one company. It reframed the
 > way millions of people thought about marine parks, turning what once
 > felt like wholesome entertainment into a symbol of cruelty. Attendance
@@ -593,7 +593,7 @@ title="https://www.rottentomatoes.com/m/blackfish_2013"><strong>Blackfish
 (2013) | Rotten Tomatoes</strong><br />
 <em>Discover reviews, ratings, and trailers for Blackfish (2013) on
 Rotten Tomatoes. Stay updated with critic and
-audienceâ€¦</em>www.rottentomatoes.com</a><a href="https://www.rottentomatoes.com/m/blackfish_2013"
+audience…</em>www.rottentomatoes.com</a><a href="https://www.rottentomatoes.com/m/blackfish_2013"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="eaabee487d631cc69112536ea08e38f7"
 data-thumbnail-img-id="0*cb7HviVbRBdAixu0"
@@ -619,11 +619,11 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*cb7
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### This is the â€œ<a
+#### This is the “<a
 href="https://www.sciencedirect.com/science/article/pii/S0301420725000303"
 class="markup--anchor markup--h4-anchor"
 data-href="https://www.sciencedirect.com/science/article/pii/S0301420725000303"
-rel="noopener" target="_blank">social license</a>â€ problem.
+rel="noopener" target="_blank">social license</a>” problem.
 
 **A business can be legal *and still lose its cultural permission
 slip.*** Once that permission slip starts tearing, every operational
@@ -634,7 +634,7 @@ Regulators grew less forgiving. In early 2024,
 <a href="http://youtube.com/watch?v=jbvwCaQS2XE"
 class="markup--anchor markup--p-anchor"
 data-href="http://youtube.com/watch?v=jbvwCaQS2XE" rel="noopener"
-target="_blank">Miami-Dade County moved to evict the Seaquariumâ€™s
+target="_blank">Miami-Dade County moved to evict the Seaquarium’s
 operator</a>, citing repeated welfare and safety issues.
 
 In Panama City Beach, federal inspectors were already documenting
@@ -657,7 +657,7 @@ data-href="https://www.scribd.com/document/842707541/PST-Inspection-Report-Gulf-
 title="https://www.scribd.com/document/842707541/PST-Inspection-Report-Gulf-World-Marine-Park-Inc"><strong>PST
 Inspection Report Gulf World Marine Park Inc</strong><br />
 <em>The inspection report for Gulf World Marine Park Inc on January 8,
-2025, highlights multiple issues with facilityâ€¦</em>www.scribd.com</a><a
+2025, highlights multiple issues with facility…</em>www.scribd.com</a><a
 href="https://www.scribd.com/document/842707541/PST-Inspection-Report-Gulf-World-Marine-Park-Inc"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="d792111163ea00df51ecb3d74815872b"
@@ -687,7 +687,7 @@ World Marine Park: Florida opens criminal investigation into dolphin
 deaths</strong><br />
 <em>Several dolphins have reportedly died over the span of five months
 at a Florida marine park and aquarium,
-promptingâ€¦</em>www.fox35orlando.com</a><a
+prompting…</em>www.fox35orlando.com</a><a
 href="https://www.fox35orlando.com/news/gulf-world-marine-park-florida-dolphin-deaths"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="a89fa149a175a74c860c49a7d87ba2db"
@@ -737,14 +737,14 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*-iB
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **Marketâ€™s reacted to the news almost immediately.**
+#### **Market’s reacted to the news almost immediately.**
 
-The Dolphin Companyâ€™s listed affiliate in Jamaica,
+The Dolphin Company’s listed affiliate in Jamaica,
 <a href="https://www.dolphincoveja.com/"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.dolphincoveja.com/" rel="noopener"
 target="_blank">Dolphin Cove</a>, saw selling pressure mount as
-stakeholders began to demand information about the parent companyâ€™s debt
+stakeholders began to demand information about the parent company’s debt
 and exposure.
 
 <div id="232c" class="graf graf--mixtapeEmbed graf-after--p">
@@ -756,7 +756,7 @@ title="https://www.dolphincoveja.com/"><strong>Dolphin Cove
 Jamaica</strong><br />
 <em>Dolphin Cove is the best swim with Dolphins in Jamaica tours! Come
 and live the experience in five significant
-habitatsâ€¦</em>www.dolphincoveja.com</a><a href="https://www.dolphincoveja.com/"
+habitats…</em>www.dolphincoveja.com</a><a href="https://www.dolphincoveja.com/"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="ad5af1eebf2f0081ac6fb1dcf53aa3a7"
 data-thumbnail-img-id="0*W_kbsIUn1uzS2FcS"
@@ -764,7 +764,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*W_k
 
 </div>
 
-**When the news broke about the companyâ€™s U.S. bankruptcy filings, the
+**When the news broke about the company’s U.S. bankruptcy filings, the
 narrative became clearer than, well, than the dolphin tanks at Gulf
 World.**
 
@@ -788,9 +788,9 @@ World.**
 
 ### Breaking Point ~ Dolphin Deaths + Bankruptcy
 
-> **â€œToday, at my direction, FDLE and FWC executed a search warrant at
-> Gulf World Marine Park.â€\**
-> â€Šâ€”â€ŠFlorida Attorney General Ashley Moody, press release, March 2025
+> **“Today, at my direction, FDLE and FWC executed a search warrant at
+> Gulf World Marine Park.”\**
+>  — Florida Attorney General Ashley Moody, press release, March 2025
 
 <figure id="28bd" class="graf graf--figure graf-after--blockquote">
 <img
@@ -812,7 +812,7 @@ police-taped investigation site.
 **In October 2024 the park lost three dolphins** ~ Gus, Turk, and Nate.
 **In March 2025, Jett died mid-show** after striking the pool wall.
 
-**On March 28, 2025,** the Attorney Generalâ€™s Office, Fish & Wildlife,
+**On March 28, 2025,** the Attorney General’s Office, Fish & Wildlife,
 and state investigators executed a search warrant after the park refused
 wellness checks. Agents reported algae-clogged pools, broken pumps, and
 inadequate staffing.
@@ -853,7 +853,7 @@ dozen animals.
 > off, a Chapter 11 debtor negotiates with creditors under court
 > supervision. Think of it like a reset button: the company gets time
 > and legal protection to try and survive, while lenders line up to see
-> how much theyâ€™ll eventually recover.
+> how much they’ll eventually recover.
 
 </div>
 
@@ -885,7 +885,7 @@ title="https://www.wjhg.com/2025/07/08/gulf-world-marine-park-may-be-permanently
 World Marine Park may be permanently closed- its website has been
 deleted</strong><br />
 <em>Gulf World Marine Park has been shut down to the public since May,
-and now, it looks like that may a permanentâ€¦</em>www.wjhg.com</a><a
+and now, it looks like that may a permanent…</em>www.wjhg.com</a><a
 href="https://www.wjhg.com/2025/07/08/gulf-world-marine-park-may-be-permanently-closed-its-website-has-been-deleted/"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="18f45b589b4687ad1f8887fc9f904f4b"
@@ -900,7 +900,7 @@ years.**
 To many onlookers, the transfers looked less like rescue and more like a
 reshuffling of pieces on an overleveraged board.
 
-When the park closed, the surviving animals didnâ€™t just vanish ~ they
+When the park closed, the surviving animals didn’t just vanish ~ they
 were quickly moved to other facilities owned by The Dolphin Company.
 
 Under the law, captive marine mammals are both living beings and
@@ -939,9 +939,9 @@ data-width="1536" data-height="1024" />
 <figcaption>Art by author with gpt4-o</figcaption>
 </figure>
 
-> **â€œThis is to acknowledge the May 29, 2025 request for an emergency
-> waiver to transport 7 bottlenose dolphins.â€\**
-> â€Šâ€”â€ŠNOAA emergency waiver
+> **“This is to acknowledge the May 29, 2025 request for an emergency
+> waiver to transport 7 bottlenose dolphins.”\**
+>  — NOAA emergency waiver
 
 Chapter 11 gave the company breathing room to keep operating while it
 reworked its capital stack, backed by \$8 million in
@@ -955,7 +955,7 @@ animal care.
 > firm, so the court allows DIP lenders to jump to the front of the
 > repayment line. That priority makes the risk worth taking. In
 > practice, a DIP loan works like emergency life support ~ it pays for
-> payroll, utilities, or in this case, dolphin food ~ but it doesnâ€™t
+> payroll, utilities, or in this case, dolphin food ~ but it doesn’t
 > solve the deeper problems that caused the collapse.
 
 Once the Delaware court recognized new leadership for the U.S.
@@ -997,7 +997,7 @@ The U.S. Chapter 11 filing sat beside a parallel Mexican process ~ a
 <a href="https://hmhlegal.com/blog/mexican-bankruptcy-guide/"
 class="markup--anchor markup--p-anchor"
 data-href="https://hmhlegal.com/blog/mexican-bankruptcy-guide/"
-rel="noopener" target="_blank"><strong><em>â€œquiebraâ€</em></strong></a>
+rel="noopener" target="_blank"><strong><em>“quiebra”</em></strong></a>
 reorganization initiated in late February 2025 grouped dozens of
 subsidiaries under court oversight. Reports described a footprint of 30
 dolphinariums across eight countries.
@@ -1012,7 +1012,7 @@ U.S. Creditor's Guide to Mexican Bankruptcy: Navigating Concurso
 Mercantil and Quiebra</strong><br />
 <em>This guide helps foreign creditors understand proceedings,
 restrictions, vendor treatment, and contracts, and
-avoidâ€¦</em>hmhlegal.com</a><a href="https://hmhlegal.com/blog/mexican-bankruptcy-guide/"
+avoid…</em>hmhlegal.com</a><a href="https://hmhlegal.com/blog/mexican-bankruptcy-guide/"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="791da56bfadb1a44c2609be38985f601"
 data-thumbnail-img-id="0*3NtHbCALdrLMQ3ic"
@@ -1061,9 +1061,9 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*Kph
 
 ### Collision Course ~ Finance Meets Ethics
 
-> **â€œThe debtors are seeking approval of an \$8 millionâ€¦ DIP facility to
-> support operations.â€\**
-> â€Šâ€”â€ŠDelaware bankruptcy filing
+> **“The debtors are seeking approval of an \$8 million… DIP facility to
+> support operations.”\**
+>  — Delaware bankruptcy filing
 
 <figure id="deaa" class="graf graf--figure graf-after--blockquote">
 <img
@@ -1079,24 +1079,24 @@ snapped into sharp focus during the bankruptcy filings.
 In court, dolphins are recognized as capital property ~ the same
 category as land, pumps, and machinery.
 
-**On paper, theyâ€™re assets** ~ assets that will be used to satisfy \$200
+**On paper, they’re assets** ~ assets that will be used to satisfy \$200
 million in claims backed by institutional lenders like Prudential and
 Cigna.
 
-**In the real world, theyâ€™re living animals** ~ intelligent beings used
+**In the real world, they’re living animals** ~ intelligent beings used
 as collateral in a multinational restructuring of a failed business
 empire.
 
 #### You can see both sides in the paperwork.
 
 Debtor-in-possession credit keeps the lights on and pays the staff, and
-it preserves â€œvalueâ€ for creditors. Regulators signed off on transfers
+it preserves “value” for creditors. Regulators signed off on transfers
 to Marineland, Dolphin Connection, and Clearwater. Those moves kept the
 animals inside the same corporate network ~ a solution that made sense
 for operational continuity but reads like balance-sheet shuffling to
 critics.
 
-#### The Dolphin Companyâ€™s collapse was bigger than any single park.
+#### The Dolphin Company’s collapse was bigger than any single park.
 
 The Mexican quiebra rolled dozens of subsidiaries into one process
 across eight countries, which meant every decision about care, custody,
@@ -1107,24 +1107,24 @@ comes to marine mammals ~
 
 > Under existing law, animals are property.
 
-> Theyâ€™re treated like any other asset ~
+> They’re treated like any other asset ~
 
-> â€œThingsâ€ not â€œPeopleâ€
+> “Things” not “People”
 
 #### The Mexican Quiebra Process
 
 > Alongside the U.S. Chapter 11 filing, The Dolphin Company entered a
-> â€œquiebraâ€ proceeding in Mexico. Quiebra is the Mexican legal framework
+> “quiebra” proceeding in Mexico. Quiebra is the Mexican legal framework
 > for corporate insolvency, similar to Chapter 11 but run under local
 > courts.\
 > It let the company group dozens of subsidiaries into one process, from
-> CancÃºn resorts to dolphinariums abroad.\
+> Cancún resorts to dolphinariums abroad.\
 > In effect, The Dolphin Company was fighting the same battle on two
 > fronts ~ Delaware and Mexico City ~ with creditors and regulators
 > watching closely.
 
 **Once a living creature is treated as property inside a distressed
-capital structure, every â€œcareâ€ decision becomes a â€œvalueâ€ decision.**
+capital structure, every “care” decision becomes a “value” decision.**
 
 </div>
 
@@ -1146,9 +1146,9 @@ capital structure, every â€œcareâ€ decision becomes a â€œvalueâ€ d
 
 ### Aftermath and Legacy
 
-> **â€œSeven bottlenose dolphinsâ€¦ received at Marineland Dolphin Adventure
-> and Dolphin Connection.â€\**
-> â€Šâ€”â€ŠFlorida Fish & Wildlife Commission statement
+> **“Seven bottlenose dolphins… received at Marineland Dolphin Adventure
+> and Dolphin Connection.”\**
+>  — Florida Fish & Wildlife Commission statement
 
 <figure id="ff85" class="graf graf--figure graf-after--blockquote">
 <img
@@ -1168,8 +1168,8 @@ rel="noopener" target="_blank">Steven Strom and Robert Wagstaff</a> ~
 was brought in to steady the restructuring. Their mandate was simple:
 keep operations stable, animals alive, and creditors calm.
 
-The Dolphin Companyâ€™s meteoric rise was **fueled by decadent excesses**
-of the second millenium. The companyâ€™s dramatic fall and collapse were
+The Dolphin Company’s meteoric rise was **fueled by decadent excesses**
+of the second millenium. The company’s dramatic fall and collapse were
 precipitated by an **evolving zeitgeist and risky business practices.**
 
 **For decades, marine parks sold an experience *that felt good*** ~
@@ -1191,7 +1191,7 @@ intelligent creatures. **Once** **the zeitgeist shifted**, people
 stopped watching the amazing aquatic acrobatics on display ~
 
 > Focusing instead on the concrete tanks, algae-green water, and deep
-> sadness in the animalsâ€™ eyes.
+> sadness in the animals’ eyes.
 
 #### The Dolphin Company used leveraged debt to grow as fast as possible.
 
@@ -1200,9 +1200,9 @@ punishes hesitation. But what happens when the customers decide that
 they fundamentally disagree with the business?
 
 In a normal tourism business, a bad season hurts. In a levered
-captive-animal business, downturns force tradeoffs you canâ€™t hide.
+captive-animal business, downturns force tradeoffs you can’t hide.
 Filtration upgrades, staffing depth, and preventive care are the first
-things to go. animals pay first because they canâ€™t just walk away.
+things to go. animals pay first because they can’t just walk away.
 
 **Staff are asked to do more with less, and customers are sold a lie.**
 
@@ -1217,13 +1217,13 @@ becomes radioactive, the brand can route animals, money, and attention
 elsewhere. The Dolphin Company built a system designed to extract value
 even as the moral basis for their product collapsed.
 
-#### Thatâ€™s the legacy.
+#### That’s the legacy.
 
-Entertainment didnâ€™t just â€œgo wrong.â€
+Entertainment didn’t just “go wrong.”
 
 The fundamental business proposition (dolphins as captive entertainers)
-tailspun into decline as the companyâ€™s debt model required more and more
-growth. When those forces collide ~ the audienceâ€™s conscience and the
+tailspun into decline as the company’s debt model required more and more
+growth. When those forces collide ~ the audience’s conscience and the
 balance sheet ~ something has to give.
 
 </div>
@@ -1246,9 +1246,9 @@ balance sheet ~ something has to give.
 
 ### Closing Reflection
 
-> **â€œState investigation under wayâ€¦ after four dolphins died in the past
-> six months.â€\**
-> â€Šâ€”â€ŠFlorida Department of Agriculture & Consumer Services, 2025
+> **“State investigation under way… after four dolphins died in the past
+> six months.”\**
+>  — Florida Department of Agriculture & Consumer Services, 2025
 
 <figure id="c465" class="graf graf--figure graf-after--blockquote">
 <img
@@ -1260,12 +1260,12 @@ data-width="1536" data-height="1024" />
 
 #### What comes next?
 
-The courts will wring value from whatâ€™s left. Politicians will posture
+The courts will wring value from what’s left. Politicians will posture
 and rail against animal cruelty. Some parks may rebrand or quietly wind
 down.
 
 The larger takeaway is simple ~ Financial engineering can stretch an old
-model for a surprisingly long time, but it canâ€™t reverse a cultural
+model for a surprisingly long time, but it can’t reverse a cultural
 turn.
 
 > When the pools stop drawing crowds ~
@@ -1277,7 +1277,7 @@ of documents: inspections, warrants, waivers, and filings.
 
 *Different agencies, different styles, same story.*
 
-**When the paper trail gets thick, the ending usually isnâ€™t a comeback
+**When the paper trail gets thick, the ending usually isn’t a comeback
 story.**
 
 <figure id="7d13"
@@ -1306,14 +1306,14 @@ data-width="1400" data-height="2756" />
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Authorâ€™s Note
+### Author’s Note
 
 ***Thanks for reading!***
 
 This story was inspired by the incredible work of the Florida Department
 of Business and Professional Regulations (DBPR). The DBPR prosecuted
 Gulf World and stripped them of their operating license. Investigations
-revealed serious medical malpractice in the veterinarianâ€™s office at the
+revealed serious medical malpractice in the veterinarian’s office at the
 facility.
 
 If you found this story interesting, **please give it a *clap!***

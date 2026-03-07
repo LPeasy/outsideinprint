@@ -38,7 +38,7 @@ data-width="1456" data-height="953" />
 > Risk is a framework for decision making.
 
 **In everyday choices and technical work, four key terms help us define
-and articulate â€œrisk.â€**
+and articulate “risk.”**
 
 #### The Four-Part Risk Framework
 
@@ -51,21 +51,21 @@ about timing, severity, and human behavior.
 
 **Pathway:** how does it reach the target?
 
-**Consequence:** whatâ€™s the damage if it hits?
+**Consequence:** what’s the damage if it hits?
 
 **Uncertainty:** what do you NOT know about?
 
-> Hereâ€™s a mneumonic that helps me remember:
+> Here’s a mneumonic that helps me remember:
 
-#### Harry Potter Can Use â†’ Magic!
+#### Harry Potter Can Use → Magic!
 
-> H â†’ Harry â†’ Hazard
+> H → Harry → Hazard
 
-> P â†’ Potter â†’ Pathway
+> P → Potter → Pathway
 
-> C â†’ Can â†’ Consequence
+> C → Can → Consequence
 
-> U â†’ Use â†’ Uncertainty
+> U → Use → Uncertainty
 
 > \*Magic\* ~ this simple framework provides a straightforward way to
 > think about risk.
@@ -126,7 +126,7 @@ contexts.</figcaption>
 
 ### Hazard
 
-#### **â€œThe source of potential harm.â€**
+#### **“The source of potential harm.”**
 
 If you own a home in a floodzone, then you probably already know of
 atleast one individual level hazard: ***fast water.***
@@ -135,13 +135,13 @@ Heavy rainfall, swollen rivers, and coastal surge can push water above
 finished floors.
 
 **Lets say you own a cabin on a lake in Maine.** The property is in the
-â€œ100-Year Floodplain.â€
+“100-Year Floodplain.”
 
 100 years sounds pretty unlikely. ***Right?***
 
 > *As a rule of thumb,* ***a 1% annual chance of flooding*** ***stacks
 > to roughly 26% over 30 years. So something like a 1 in 4 chance your
-> digs flood before youâ€™ve paid off the mortgage.***
+> digs flood before you’ve paid off the mortgage.***
 
 </div>
 
@@ -236,7 +236,7 @@ deterioration are all potential failure modes.
 > latent defects can become system-level threats under the right (or
 > perhaps I should say wrong) conditions.*
 
-#### Read an inspiring story about levee management here â†’
+#### Read an inspiring story about levee management here →
 
 <div id="be99"
 class="graf graf--mixtapeEmbed graf-after--h4 graf--trailing">
@@ -283,8 +283,8 @@ class="markup--anchor markup--p-anchor"
 data-href="https://www.brookings.edu/articles/cape-town-lessons-from-managing-water-scarcity/"
 rel="noopener" target="_blank">Capetown, South Africa</a> taking their
 **municipal water supplies** to the brink of disaster. If not for a
-miraculous rain event ending the â€œ400-year droughtâ€ *(the drought lasted
-roughly four years)*, the city would have reached â€œDay 0â€ ~ completely
+miraculous rain event ending the “400-year drought” *(the drought lasted
+roughly four years)*, the city would have reached “Day 0” ~ completely
 running out of water with no realistic plan to acquire more.
 
 In this context, **you might identify *climate change in general* as the
@@ -302,8 +302,8 @@ many regions</a>.
 **Back in 2022,** <a href="https://www.youtube.com/watch?v=fuKDBPw8wQA"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.youtube.com/watch?v=fuKDBPw8wQA" rel="noopener"
-target="_blank"><strong>Panama</strong></a> **experienced their â€œworst
-drought ever.â€**
+target="_blank"><strong>Panama</strong></a> **experienced their “worst
+drought ever.”**
 
 <figure id="e35f" class="graf graf--figure graf-after--p">
 <img
@@ -317,12 +317,12 @@ data-href="https://www.royalcaribbean.com/guides/panama-canal-cruise-tips-before
 rel="noopener" target="_blank">RoyalCarribean</a></figcaption>
 </figure>
 
-The Panama Canalâ€™s locks run on freshwater from the upland GatÃºn and
-Alhajuela lakes. Prolonged dry seasons and El NiÃ±o patterns can push
+The Panama Canal’s locks run on freshwater from the upland Gatún and
+Alhajuela lakes. Prolonged dry seasons and El Niño patterns can push
 those reservoirs too low to lift ships through the extensive lock
 system.
 
-**Hereâ€™s a diagram of the system:**
+**Here’s a diagram of the system:**
 
 <figure id="a42e" class="graf graf--figure graf-after--p">
 <img
@@ -333,7 +333,7 @@ data-width="649" data-height="267" />
 
 In a normal year, **the PCA operates within narrow margins** ~ every
 drop of rain gets used. The same water that moves boats up and down the
-systemâ€™s locks also serves roughly two million people, Indigenous
+system’s locks also serves roughly two million people, Indigenous
 communities, farms, and hydropower facilities ~ **prolonged droughts can
 squeeze a** **shared supply** and force decision makers into tough
 positions.
@@ -359,7 +359,7 @@ in 2022).
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://www.newsecuritybeat.org/2024/07/no-the-panama-canal-is-not-running-dry/"
 > rel="noopener" target="_blank">Newsecuritybeat</a> article linked here
-> if youâ€™d like to know more â†’ <a
+> if you’d like to know more → <a
 > href="https://www.newsecuritybeat.org/2024/07/no-the-panama-canal-is-not-running-dry/"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://www.newsecuritybeat.org/2024/07/no-the-panama-canal-is-not-running-dry/"
@@ -384,8 +384,8 @@ Panamanian drought** that could cause shipping delays (or in extreme
 cases a complete shutdown of the canal).
 
 In either case *(megacities and droughts affecting major shipping
-lanes)* the hazard can be described simply: **â€œnot having enough
-water.â€**
+lanes)* the hazard can be described simply: **“not having enough
+water.”**
 
 </div>
 
@@ -407,22 +407,22 @@ water.â€**
 
 ### Pathway
 
-**â€œThe specific chain of events that must occur for the hazard to lead
-to a consequence.â€**
+**“The specific chain of events that must occur for the hazard to lead
+to a consequence.”**
 
-#### Letâ€™s think about our lakehouse in Maine.
+#### Let’s think about our lakehouse in Maine.
 
 The cabin sits in a mapped flood zone, but it is up on 8-foot stilts.
-Itâ€™s not the nicest thing ever, but itâ€™s pretty awesome. Youâ€™ve put some
+It’s not the nicest thing ever, but it’s pretty awesome. You’ve put some
 money into it, but if a freak storm comes through ~ dumping a bunch of
-rain upstream ~ youâ€™ll probably flood.
+rain upstream ~ you’ll probably flood.
 
 **The pathway lives where meteorology meets local hydraulics:**
 
-> Storm Tracks Over Watershed â†’ Short, Intense Rainfall Builds Runoff â†’
-> Lake Level Rises With Wind Setup at Shoreline â†’ Drainage/Outfalls
-> Overwhelmed or Backed Up â†’ Water Crosses the Threshold at Stairs/Doors
-> â†’
+> Storm Tracks Over Watershed → Short, Intense Rainfall Builds Runoff →
+> Lake Level Rises With Wind Setup at Shoreline → Drainage/Outfalls
+> Overwhelmed or Backed Up → Water Crosses the Threshold at Stairs/Doors
+> →
 
 > Interior Flooding.
 
@@ -449,9 +449,9 @@ rain upstream ~ youâ€™ll probably flood.
 
 #### For our friend who owns the levee, his pathway unfolds as a progression inside the structure.
 
-> Elevated stages apply sustained load â†’ Seepage concentrates along weak
-> zones â†’ Fine soils begin to move (piping) â†’ The pipe enlarges under
-> flow â†’
+> Elevated stages apply sustained load → Seepage concentrates along weak
+> zones → Fine soils begin to move (piping) → The pipe enlarges under
+> flow →
 
 > A section fails and a breach opens.
 
@@ -479,11 +479,11 @@ rain upstream ~ youâ€™ll probably flood.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### The Panama Canal Authorityâ€™s pathway is linear:
+#### The Panama Canal Authority’s pathway is linear:
 
-> Prolonged Dry Season/El NiÃ±o â†’ Inflows to GatÃºn & Alhajuela Decline
-> (ie: less rain) â†’ Reservoirs Drop Toward Operating Limits â†’ Draft
-> Limits & Daily Transit Caps Imposed â†’ Vessel Queues and Rerouting â†’
+> Prolonged Dry Season/El Niño → Inflows to Gatún & Alhajuela Decline
+> (ie: less rain) → Reservoirs Drop Toward Operating Limits → Draft
+> Limits & Daily Transit Caps Imposed → Vessel Queues and Rerouting →
 
 > Delays and Higher Shipping Costs.
 
@@ -491,8 +491,8 @@ rain upstream ~ youâ€™ll probably flood.
 > cost per shipping container ~ eventually raising the price of
 > everything that arrives by boat.*
 
-Now lets shift from **â€œhow the trouble finds youâ€** to â€œ**what happens
-when it arrives?â€**
+Now lets shift from **“how the trouble finds you”** to “**what happens
+when it arrives?”**
 
 </div>
 
@@ -514,8 +514,8 @@ when it arrives?â€**
 
 ### Consequence
 
-**â€œThe specific harm, loss, or missed benefit that could occur if the
-hazard materializes.â€**
+**“The specific harm, loss, or missed benefit that could occur if the
+hazard materializes.”**
 
 **On an individual level**, a flood will wreck the stuff under the cabin
 first ~ storage, power panel, water heater, pumps, stairs, deck, dock,
@@ -580,7 +580,7 @@ rebuild trust.
 
 > Soil samples go to the lab; emails pile up; the high-water line dries
 > on porch posts ~ a brutal testimony to the flood. Locals say they
-> wonâ€™t trust the levees next time around. And unfortunately,
+> won’t trust the levees next time around. And unfortunately,
 
 > ***Trust moves a lot slower than water****.*
 
@@ -589,7 +589,7 @@ rebuild trust.
 
 > ***Truth is, some questions may never disappear ~***
 
-> ***and some memories wonâ€™t ever fade.***
+> ***and some memories won’t ever fade.***
 
 </div>
 
@@ -610,7 +610,7 @@ rebuild trust.
 <div class="section-inner sectionLayout--insetColumn">
 
 **At a global scale,** an extended drought hits the Panama Canal the
-same way a flood hits a cabin ~ **it goes for whatâ€™s exposed first.**
+same way a flood hits a cabin ~ **it goes for what’s exposed first.**
 
 > Traffic through the canal slows down.
 
@@ -627,7 +627,7 @@ Freight **rates tick up**, shipping **schedules slip up**, and existing
 **Warehouse teams sit idle** while the boxes they need to stack are
 stuck floating out on the water. **Shoppers may find odd gaps** in the
 aisles of their local grocery stores ~ products replaced with signs that
-say ***â€œOut of Stock.â€***
+say ***“Out of Stock.”***
 
 > Describing the complete set of consequences for a canal shut down is
 > beyond the scope of this essay.
@@ -660,7 +660,7 @@ rel="noopener" target="_blank">Source: Woodwell Climate</a></figcaption>
 
 **If we had perfect information about the present ~ and the future ~**
 
-> we would make the â€œrightâ€ decision everytime.
+> we would make the “right” decision everytime.
 
 In reality, **perfect information is incredibly rare** and next to
 impossible to achieve in practice.
@@ -670,7 +670,7 @@ the consequences ~**
 
 **the nature of the hazard itself may be in doubt.**
 
-> â€œThere is no risk without uncertainty.â€
+> “There is no risk without uncertainty.”
 
 </div>
 
@@ -692,12 +692,12 @@ the consequences ~**
 
 ### Uncertainty
 
-**â€œThe most important information you donâ€™t know.â€**
+**“The most important information you don’t know.”**
 
 > ***Uncertainty is more than just noise*** *at the edge of the problem
 > ~*
 
-> ***You canâ€™t have risk without uncertainty.***
+> ***You can’t have risk without uncertainty.***
 
 In each of our examples, the key unknowns are different, but they play
 the same role:
@@ -725,9 +725,9 @@ the same role:
 #### For the Panama Canal Authority:
 
 1.  <span id="8a5a">**When seasonal rains arrive** ~ how much ends up
-    **in GatÃºn/Alhajuela?**</span>
-2.  <span id="dd69">**How strong and how long** the next *El NiÃ±o/La
-    NiÃ±a* cycle runs.</span>
+    **in Gatún/Alhajuela?**</span>
+2.  <span id="dd69">**How strong and how long** the next *El Niño/La
+    Niña* cycle runs.</span>
 3.  <span id="47e5">**Net inflows vs. outflows** ~ watershed runoff,
     evaporation, and operational use.</span>
 4.  <span id="e184">**Will** **new storage** <a
@@ -757,7 +757,7 @@ rel="noopener" target="_blank">The universe itself is governed by
 immutable rules of probability and chance.</a>
 
 **One more** **study** ~ one more round of analysis and discussion ~
-**can help reduce uncertainty.** You can **â€œbuy downâ€ risk by** spending
+**can help reduce uncertainty.** You can **“buy down” risk by** spending
 additional time, money, and resources **learning more about current
 conditions.**
 
@@ -773,14 +773,14 @@ rel="noopener" target="_blank">especially open systems like the
 weather.</a>
 
 **A responsible modeler will provide a *range of possibilities* to
-reflect** **the *uncertainty that remains*** ~ baked into the modelâ€™s
+reflect** **the *uncertainty that remains*** ~ baked into the model’s
 assumptions and data inputs.
 
 > ***Every organization*** *(public, corporate, individual households)*
 > ***makes decisions ~ (*usually*) in an environment dominated by*
 > uncertainty*.***
 
-> In the real world, leaders canâ€™t always punt on critical decisions and
+> In the real world, leaders can’t always punt on critical decisions and
 > wait for new information or better data.
 
 The purpose of risk analysis is to **support decision-making when
@@ -808,18 +808,18 @@ choices and inform leaders, not to claim certainty.
 ### So what should we do about all this uncertainty?
 
 > The practical move is to **use a range of possible values** for the
-> things you arenâ€™t sure about.
+> things you aren’t sure about.
 
 **Look for new information that can help narrow those ranges.**
 
-> â€œWhen in doubt, test it out.â€
+> “When in doubt, test it out.”
 
 <a
 href="https://www.sciencedirect.com/topics/engineering/sensitivity-analysis"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.sciencedirect.com/topics/engineering/sensitivity-analysis"
 rel="noopener" target="_blank"><strong><em>Sensitivity
-analysis</em></strong></a> is a kind of â€œwhat-ifâ€ technique that studies
+analysis</em></strong></a> is a kind of “what-if” technique that studies
 how changing inputs or assumptions in a model affect its outputs.
 
 **Document choices and assumptions** so if you predict the wrong future
@@ -848,7 +848,7 @@ thinking.**
 
 We do what we can to identify the risks:
 
-1.  <span id="7b66">**Name the hazard** so something obvious doesnâ€™t
+1.  <span id="7b66">**Name the hazard** so something obvious doesn’t
     catch you off guard.</span>
 2.  <span id="1d28">**Trace the pathway** so you can block or narrow
     routes.</span>
@@ -881,22 +881,22 @@ We do what we can to identify the risks:
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Iâ€™ll leave you with this mneumonic to help you remember our 4-part framework:
+#### I’ll leave you with this mneumonic to help you remember our 4-part framework:
 
-### Harry Potter Can Use â†’ Magic!
+### Harry Potter Can Use → Magic!
 
-> H â†’ Harry â†’ Hazard
+> H → Harry → Hazard
 
-> P â†’ Potter â†’ Pathway
+> P → Potter → Pathway
 
-> C â†’ Can â†’ Consequence
+> C → Can → Consequence
 
-> U â†’ Use â†’ Uncertainty
+> U → Use → Uncertainty
 
 > \*Magic\* ~ this simple framework provides a straightforward way to
 > think about risk.
 
-> **Try â€œHarry Potter Can Use Magicâ€ on a risk you are facing this
+> **Try “Harry Potter Can Use Magic” on a risk you are facing this
 > week.**
 
 **Name the hazard, trace the pathway, estimate consequences, and
@@ -922,7 +922,7 @@ identify uncertainties ~**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Authorâ€™s Note
+#### Author’s Note
 
 ***Thanks for reading to the end!***
 
@@ -932,7 +932,7 @@ learn about the exciting, emerging science of risk!
 
 **If this framework helps you** understand risk, ***follow me* here on
 Medium,** ***share this* with a colleague**, and **drop a *comment* with
-your *HP Can Use â†’ Magic!* example.**
+your *HP Can Use → Magic!* example.**
 
 #### ***Want more like this?***
 

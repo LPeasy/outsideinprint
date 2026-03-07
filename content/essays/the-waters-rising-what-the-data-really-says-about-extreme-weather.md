@@ -1,10 +1,10 @@
 ---
-title: "The Waterâ€™s Rising: What the Data Really Says About Extreme Weather"
+title: "The Water’s Rising: What the Data Really Says About Extreme Weather"
 date: 2025-07-14
 draft: false
 slug: "the-waters-rising-what-the-data-really-says-about-extreme-weather"
 section_label: "Essay"
-subtitle: "â€œThe weatherâ€™s never been like this!â€"
+subtitle: "“The weather’s never been like this!”"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-waters-rising-what-the-data-really-says-about-extreme-weather.pdf"
@@ -24,9 +24,9 @@ medium_source_url: "https://medium.com/@lawtonperret/the-waters-rising-what-the-
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### The Waterâ€™s Rising: What the Data Really Says About Extreme Weather
+### The Water’s Rising: What the Data Really Says About Extreme Weather
 
-> *â€œThe weatherâ€™s never been like this!â€*
+> *“The weather’s never been like this!”*
 
 **It feels like you hear this after every flood**, fire, or storm
 lately.
@@ -40,7 +40,7 @@ Texas, **something about the weather seems off.**
 
 > **Less predictable.**
 
-> *So whatâ€™s really going on?*
+> *So what’s really going on?*
 
 > <a
 > href="https://apnews.com/article/texas-floods-extreme-weather-attitudes-preparations-cc9d55c1f2440d78e01dcc65ec748112"
@@ -139,11 +139,11 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*UbI
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### So, is the weather actually getting worse over time? Wellâ€¦
+#### So, is the weather actually getting worse over time? Well…
 
 ### **It Depends on the Timeframe**
 
-> Whether itâ€™s â€œgetting worseâ€ or not dependsâ€¦
+> Whether it’s “getting worse” or not depends…
 
 > on how far back you look.
 
@@ -154,7 +154,7 @@ data-href="https://www.reddit.com/r/AskPhysics/comments/1dw5hjf/why_is_it_so_har
 rel="noopener" target="_blank"><strong>Weather is chaotic</strong></a>
 **by nature.**
 
-Some years bring dozens of disasters. And some yearsâ€¦ nothing.
+Some years bring dozens of disasters. And some years… nothing.
 
 That randomness is why **short time windows can be misleading** ~ like
 trying to understand the stock market by watching a single trading day.
@@ -165,9 +165,9 @@ Climate scientists say
 <a href="https://www.sciencedaily.com/releases/2012/11/121129143504.htm"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.sciencedaily.com/releases/2012/11/121129143504.htm"
-rel="noopener" target="_blank">the â€œsignalâ€ of human-caused warming</a>
-has now emerged from the â€œnoiseâ€ of natural variation. **Over the last
-30â€“40 years,** weâ€™ve <a
+rel="noopener" target="_blank">the “signal” of human-caused warming</a>
+has now emerged from the “noise” of natural variation. **Over the last
+30–40 years,** we’ve <a
 href="https://www.sciencealert.com/two-major-studies-agree-earth-is-entering-frightening-new-climate-phase"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.sciencealert.com/two-major-studies-agree-earth-is-entering-frightening-new-climate-phase"
@@ -176,17 +176,17 @@ one where **the odds have changed.**
 
 Think of it like this:
 
-> **We arenâ€™t getting a lot more storms.**
+> **We aren’t getting a lot more storms.**
 
 > **Just more storms that we consider disasters.**
 
-Or if youâ€™re a stats guy:
+Or if you’re a stats guy:
 
-> **The curve hasnâ€™t shifted much.**
+> **The curve hasn’t shifted much.**
 
 > **But the tail got fatter ~**
 
-> **and thatâ€™s where the damage lives.**
+> **and that’s where the damage lives.**
 
 </div>
 
@@ -206,23 +206,23 @@ Or if youâ€™re a stats guy:
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### What the Data Can \*and Canâ€™t\* Tell Us
+### What the Data Can \*and Can’t\* Tell Us
 
 > ***Most national climate trend data starts around 1980.***
 
-**Thatâ€™s not arbitrary** ~ itâ€™s when we began getting consistent
+**That’s not arbitrary** ~ it’s when we began getting consistent
 satellite coverage, Doppler radar, and standardized instrumentation
-across the country. But it does mean **weâ€™re working with a limited
+across the country. But it does mean **we’re working with a limited
 window.**
 
 > Older floods, fires, and heatwaves may be missing from the record or
-> measured inconsistentlyâ€¦ and
+> measured inconsistently… and
 
 > That makes long-term comparisons tricky.
 
-**Thereâ€™s also that other question people like to ask:**
+**There’s also that other question people like to ask:**
 
-> ***Whatâ€™s driving the change?***
+> ***What’s driving the change?***
 
 **Is it human activity? Is it natural variation? Is it a houx?
 HAARP???**
@@ -230,7 +230,7 @@ HAARP???**
 > That debate matters in ***ivory towers and political theatre,***
 
 **On the ground,** ~ for engineers, planners, and emergency responders ~
-**itâ€™s beside the point.**
+**it’s beside the point.**
 
 > The trend is real. The consequences are mounting.
 
@@ -256,7 +256,7 @@ HAARP???**
 
 ### **The Extremes Are Escalating**
 
-> **Hereâ€™s what the U.S. data shows:**
+> **Here’s what the U.S. data shows:**
 
 - <span id="c59a">**Nine of the ten wettest years on record have** <a
   href="https://www.epa.gov/climate-indicators/climate-change-indicators-heavy-precipitation"
@@ -270,7 +270,7 @@ HAARP???**
   data-href="https://www.epa.gov/climate-indicators/climate-change-indicators-us-and-global-precipitation"
   rel="noopener" target="_blank"><strong>grown about 0.5% per
   decade</strong></a> **since 1910.**\
-  *Thatâ€™s a slow rise, but a relentless one ~ and most of the increase
+  *That’s a slow rise, but a relentless one ~ and most of the increase
   has come since 1980.*</span>
 - <span id="c164"><a
   href="https://www.noaa.gov/stories/ask-scientist-extreme-rainfall-why-it-happens-and-how-we-predict-it"
@@ -334,7 +334,7 @@ href="https://texas2036.org/wp-content/uploads/2023/06/2024_ClimateReport.pdf"
 class="markup--anchor markup--p-anchor"
 data-href="https://texas2036.org/wp-content/uploads/2023/06/2024_ClimateReport.pdf"
 rel="noopener" target="_blank">But the past few decades have reshaped
-the stateâ€™s rainfall</a> profile in <a
+the state’s rainfall</a> profile in <a
 href="https://safe.menlosecurity.com/doc/docview/viewer/docND5C23B390CAE83985ff2cb1fccae954fe252ce497b5eaf0faa01364a95e88d9af5876e587d78"
 class="markup--anchor markup--p-anchor"
 data-href="https://safe.menlosecurity.com/doc/docview/viewer/docND5C23B390CAE83985ff2cb1fccae954fe252ce497b5eaf0faa01364a95e88d9af5876e587d78"
@@ -376,7 +376,7 @@ data-href="https://www.texyhills.com/texas-hill-country-map.html"
 rel="noopener" target="_blank">Source</a></figcaption>
 </figure>
 
-**The 2025 Guadalupe River flood wasnâ€™t just intense ~**
+**The 2025 Guadalupe River flood wasn’t just intense ~**
 
 **It was one of the most violent floods in over a century of records.**
 
@@ -411,7 +411,7 @@ rel="noopener" target="_blank">Source: Reuters</a></figcaption>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **Whatâ€™s Getting Worse ~ and Whatâ€™s Just Noise?**
+### **What’s Getting Worse ~ and What’s Just Noise?**
 
 > **Not every type of extreme event is on the rise.**
 
@@ -421,7 +421,7 @@ rel="noopener" target="_blank">Source: Reuters</a></figcaption>
 
 > **Others are harder to pin down.**
 
-**Hereâ€™s a rough breakdown:**
+**Here’s a rough breakdown:**
 
 <figure id="9287" class="graf graf--figure graf-after--p">
 <img
@@ -443,7 +443,7 @@ rel="noopener" target="_blank"><strong>uncertainty</strong></a>
 
 **The big takeaway:**
 
-> **Weâ€™re not just more exposedâ€¦**
+> **We’re not just more exposed…**
 
 > The events themselves ~ the deadly kind, the kind that kill and
 > displace ~ are getting worse.
@@ -475,7 +475,7 @@ rel="noopener" target="_blank"><strong>uncertainty</strong></a>
 > rel="noopener" target="_blank"><strong>The Guadalupe River rose more
 > than 25 feet in under 90 minutes.</strong></a>
 
-> â€œThatâ€™s not normal.â€
+> “That’s not normal.”
 
 > **Right?**
 
@@ -496,8 +496,8 @@ data-href="https://climatexas.tamu.edu/products/ASSESSMENT-of-HISTORIC-and-FUTUR
 rel="noopener" target="_blank"><strong>Texas State Climatologist John
 Nielsen-Gammon</strong></a> **projects that by 2036, Texas could see:**
 
-- <span id="1da0">**6â€“10% higher rainfall intensity**</span>
-- <span id="9d07">**30â€“50% more frequent extreme rain events**</span>
+- <span id="1da0">**6–10% higher rainfall intensity**</span>
+- <span id="9d07">**30–50% more frequent extreme rain events**</span>
 
 </div>
 
@@ -522,7 +522,7 @@ Nielsen-Gammon</strong></a> **projects that by 2036, Texas could see:**
 > **What does all this mean for planning, insurance, infrastructure, and
 > safety?**
 
-It means **the old numbers wonâ€™t hold up.**
+It means **the old numbers won’t hold up.**
 
 - <span id="5a90">**Flood maps based on historical records** <a
   href="https://www.cbsnews.com/news/fema-maps-flash-flood-risks-homeowners-unprepared/"
@@ -550,13 +550,13 @@ Questionably placed buildings were **grandfathered in.**
 
 **Generations of campers** slept there.
 
-> But this isnâ€™t just about one camp.
+> But this isn’t just about one camp.
 
-**Itâ€™s about the quiet assumptions,** baked into zoning laws and
+**It’s about the quiet assumptions,** baked into zoning laws and
 insurance tables, **the** **belief that the future will behave like the
 past.**
 
-> Unfortunately, it wonâ€™t.
+> Unfortunately, it won’t.
 
 **The baseline has shifted. The playbook needs to change.**
 
@@ -578,15 +578,15 @@ past.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **Whatâ€™s Next**
+### **What’s Next**
 
-> ***In the next piece, Iâ€™ll break down the Camp Mystic flood in
+> ***In the next piece, I’ll break down the Camp Mystic flood in
 > detail:***
 
 - <span id="2d21">Why the **warnings failed**</span>
 - <span id="60b3">How buildings ended up in a **known danger
   zone**</span>
-- <span id="3ded">What a **risk-informed approach** wouldâ€™ve done
+- <span id="3ded">What a **risk-informed approach** would’ve done
   differently</span>
 
 ***Because what happened at Camp Mystic could happen again,***
