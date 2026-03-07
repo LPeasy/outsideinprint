@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "A fake series finale and the cartoon that somehow predicted 9/11, COVID, and President Donald Trump on an escalator."
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/35-years-of-yellow-the-simpsons-time-loop.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/35-years-of-yellow-the-simpsons-time-loop-50f72b5bff6b"
@@ -38,17 +37,17 @@ data-width="1024" data-height="1536" />
 </figure>
 
 In April 2024, ***The Simpsons*** aired a special episode called
-***Homer’s Crossing*** ***that looked like a series finale.***
+***Homerâ€™s Crossing*** ***that looked like a series finale.***
 
 The episode follows Homer as he walks across Springfield, gradually
-encountering each of the show’s hundreds of recurring characters in a
+encountering each of the showâ€™s hundreds of recurring characters in a
 long, nostalgic goodbye.
 
 > It felt like a curtain call.
 
 > A send-off.
 
-> Maybe even… the end?
+> Maybe evenâ€¦ the end?
 
 **And then the camera pulled back,** ***looped time in on itself,***
 **and dropped us right back at the kitchen table.**
@@ -57,14 +56,14 @@ The family sat exactly where they always sit.
 
 Bart, looking dead into the camera, grinned and said:
 
-> “What, you thought the show was going to end?”
+> â€œWhat, you thought the show was going to end?â€
 
-**And that’s the joke. Not just of the episode, but of the entire
+**And thatâ€™s the joke. Not just of the episode, but of the entire
 series.**
 
-> ***The Simpsons* doesn’t end.** It reboots. It resets. It outlasts.
+> ***The Simpsons* doesnâ€™t end.** It reboots. It resets. It outlasts.
 
-It’s a living paradox ~ **an aging cartoon frozen in time.** One that
+Itâ€™s a living paradox ~ **an aging cartoon frozen in time.** One that
 watches America evolve while it stays ***(more or less)*** the same.
 
 </div>
@@ -102,11 +101,11 @@ rel="noopener" target="_blank">Reddit</a></figcaption>
 </figure>
 
 **Matt Groening** came up with ***The Simpsons*** in the lobby of James
-L. Brooks’s office in the late 1980s. He was originally going to pitch a
-cartoon based on his *Life in Hell* comic, but didn’t want to give up
+L. Brooksâ€™s office in the late 1980s. He was originally going to pitch a
+cartoon based on his *Life in Hell* comic, but didnâ€™t want to give up
 the rights. **So he invented a suburban family on the spot**, naming the
-characters after his own parents and sisters ~ **except “Bart,” an
-anagram for “brat,” stood in for Matt.**
+characters after his own parents and sisters ~ **except â€œBart,â€ an
+anagram for â€œbrat,â€ stood in for Matt.**
 
 **The family first appeared on *The Tracey Ullman Show* in 1987** as
 one-minute bumpers. The animation was crude ~ Groening expected the
@@ -115,27 +114,27 @@ characters caught on. **Two years later, they got their own show.**
 
 ***The Simpsons* premiered on December 17, 1989** with a Christmas
 episode called *Simpsons Roasting on an Open Fire*. The animation was
-better, but still rough. The show’s tone, though, was crystal clear:
+better, but still rough. The showâ€™s tone, though, was crystal clear:
 **irreverent, smart, rebellious, *and just subversive enough to freak
 out parents.***
 
 **Bart was really the big hit.**
 
-With catchphrases like ***“Eat my shorts”*** and ***“Don’t have a cow,
-man,”*** he was **marketed as a countercultural icon.**
+With catchphrases like ***â€œEat my shortsâ€*** and ***â€œDonâ€™t have a cow,
+man,â€*** he was **marketed as a countercultural icon.**
 
 > Kids loved him.
 
 > Schools banned the merchandise.
 
 **President George H. W. Bush** even used the show as a punching bag,
-saying families should be ***“more like the Waltons and less like the
-Simpsons.”***
+saying families should be ***â€œmore like the Waltons and less like the
+Simpsons.â€***
 
 **In 1990,** *The Simpsons* became so popular that **Fox moved it to
 Thursday nights to go head-to-head with *The Cosby Show*.**
 
-The media billed it as *“Bill vs. Bart.”*
+The media billed it as *â€œBill vs. Bart.â€*
 
 > *The Simpsons* lost the ratings battle but won the war...
 
@@ -165,12 +164,12 @@ The media billed it as *“Bill vs. Bart.”*
 The Simpsons Cultural Relevance
 
 A big part of what kept *The Simpsons* alive was its **cultural scope.**
-The show wasn’t just about Homer, Marge, Bart, Lisa, and Maggie.
+The show wasnâ€™t just about Homer, Marge, Bart, Lisa, and Maggie.
 
 > It was about everyone and everything.
 
 It skewered politics, religion, celebrity, technology, education,
-healthcare, and even itself. **Springfield** wasn’t just a town ~ it
+healthcare, and even itself. **Springfield** wasnâ€™t just a town ~ it
 **was America**, compressed into a cul-de-sac and painted yellow.
 
 The characters became avatars for different slices of American life.
@@ -179,7 +178,7 @@ The characters became avatars for different slices of American life.
 - <span id="3890">Marge, the overburdened mom with no outlet.</span>
 - <span id="728b">Lisa, the voice of reason who never wins.</span>
 - <span id="2d91">Bart, the rebel without a cause.</span>
-- <span id="03e9">And Maggie, the mute baby who always knows what’s
+- <span id="03e9">And Maggie, the mute baby who always knows whatâ€™s
   going on.</span>
 
 **Over the decades, the show became a guestbook of pop culture:**
@@ -200,13 +199,13 @@ And more recently:
 
 **And while the characters never aged, the show kept time.**
 
-1990s Springfield feels different from 2024 Springfield, but it’s built
+1990s Springfield feels different from 2024 Springfield, but itâ€™s built
 on the same grid. The town updates with the times ~ *they have
 smartphones now* ~ but the stories stay familiar.
 
-**That’s the big trick.**
+**Thatâ€™s the big trick.**
 
-> The Simpsons isn’t timeless. It’s time-looped.
+> The Simpsons isnâ€™t timeless. Itâ€™s time-looped.
 
 </div>
 
@@ -245,7 +244,7 @@ rel="noopener" target="_blank">UPROXX</a></figcaption>
 **The most absurd part of *The Simpsons* legacy is the long,
 increasingly bizarre list of things the show somehow predicted.**
 
-> **While some of those connections are overblown, others are… hard to
+> **While some of those connections are overblown, others areâ€¦ hard to
 > ignore.**
 
 </div>
@@ -268,9 +267,9 @@ increasingly bizarre list of things the show somehow predicted.**
 
 #### **9/11 (1997)**
 
-In the 1997 episode ***“The City of New York vs. Homer Simpson”*,** Bart
+In the 1997 episode ***â€œThe City of New York vs. Homer Simpsonâ€*,** Bart
 holds up a brochure advertising a \$9 bus fare to Manhattan. Behind the
-“9” are the Twin Towers ~ forming a visual “9/11.”
+â€œ9â€ are the Twin Towers ~ forming a visual â€œ9/11.â€
 
 > ***The scene lasted one second. Four years later, it became internet
 > lore.***
@@ -285,13 +284,13 @@ data-width="1536" data-height="1024" />
 <figcaption>Made by Author with ChatGPT</figcaption>
 </figure>
 
-In ***“Bart to the Future”*** (Season 11), a grown-up Lisa becomes
-president and says, *“We’ve inherited quite a budget crunch from
-President Trump.”*
+In ***â€œBart to the Futureâ€*** (Season 11), a grown-up Lisa becomes
+president and says, *â€œWeâ€™ve inherited quite a budget crunch from
+President Trump.â€*
 
-> But it didn’t stop there.
+> But it didnâ€™t stop there.
 
-In 2015, **the show recreated Trump’s infamous golden escalator
+In 2015, **the show recreated Trumpâ€™s infamous golden escalator
 announcement almost shot-for-shot** **~** ***before the real video even
 aired.***
 
@@ -326,16 +325,16 @@ data-width="1536" data-height="1024" />
 <figcaption>Made by Author with ChatGPT</figcaption>
 </figure>
 
-The 1993 episode ***“Marge in Chains”*** features an “Osaka Flu” that
+The 1993 episode ***â€œMarge in Chainsâ€*** features an â€œOsaka Fluâ€ that
 spreads through Springfield after being shipped in from Asia.
 
 Citizens panic, hospitals overflow, and chaos ensues.
 
-One guy shouts, *“You have to believe me ~ there’s a cure!”* before the
+One guy shouts, *â€œYou have to believe me ~ thereâ€™s a cure!â€* before the
 crowd tips over a delivery truck.
 
 > ***We watched the same scene play out in real life nearly 30 years
-> later…***
+> laterâ€¦***
 
 </div>
 
@@ -363,8 +362,8 @@ crowd tips over a delivery truck.
   1998)</span>
 - <span id="0d53">The Higgs Boson equation (shown in a 1998 chalkboard
   gag)</span>
-- <span id="f5ba">Autocorrect errors (featured in 1994’s *“Lisa on
-  Ice”*)</span>
+- <span id="f5ba">Autocorrect errors (featured in 1994â€™s *â€œLisa on
+  Iceâ€*)</span>
 - <span id="098d">The FIFA corruption scandal (predicted in 2014)</span>
 - <span id="e9ee">The Siegfried and Roy tiger attack (fictionalized in
   1993, real in 2003)</span>
@@ -373,9 +372,9 @@ To be fair, the show makes **thousands of jokes a year.**
 
 ***Some are bound to come true.***
 
-> The real story isn’t that *The Simpsons* is psychic…
+> The real story isnâ€™t that *The Simpsons* is psychicâ€¦
 
-> It’s that the world keeps catching up to its satire.
+> Itâ€™s that the world keeps catching up to its satire.
 
 </div>
 
@@ -441,11 +440,11 @@ Some with grace, some with pain.
 
 ***The Simpsons* just kept airing Sundays at 8pm.**
 
-For some, it’s background noise. For others, it’s their last regularly
-scheduled programming. But either way, **it’s not just a TV show
+For some, itâ€™s background noise. For others, itâ€™s their last regularly
+scheduled programming. But either way, **itâ€™s not just a TV show
 anymore.**
 
-> It’s collective memory.
+> Itâ€™s collective memory.
 
 > ***A familiar voice, always there, quietly narrating America in real
 > time.***
@@ -480,7 +479,7 @@ data-width="1536" data-height="1024" data-is-featured="true" />
 <figcaption>Source: Fox</figcaption>
 </figure>
 
-> When *Homer’s Crossing* aired in 2024,
+> When *Homerâ€™s Crossing* aired in 2024,
 
 > it felt like the curtain was falling.
 
@@ -494,11 +493,11 @@ down to dinner.
 
 And Bart looked at the audience with a smirk:
 
-> “What, you thought the show was going to end?”
+> â€œWhat, you thought the show was going to end?â€
 
-**That wasn’t just a punchline ~ it was a thesis statement.**
+**That wasnâ€™t just a punchline ~ it was a thesis statement.**
 
-*The Simpsons* isn’t a story with a climax. **It’s an acid fueled fever
+*The Simpsons* isnâ€™t a story with a climax. **Itâ€™s an acid fueled fever
 dream.** **A series of time loops. A very yellow lens** pointed at
 whatever version of America happens to be flickering on the screen that
 week.
@@ -506,7 +505,7 @@ week.
 In an entertainment industry obsessed with sticking the landing, *The
 Simpsons* offers something stranger:
 
-> No landing at all —
+> No landing at all â€”
 
 > It just keeps floating.
 
@@ -533,7 +532,7 @@ turnover ~ **it just keeps going and going and going.**
 
 #### **Will it ever really end?**
 
-> Maybe it fades out when no one’s watching.
+> Maybe it fades out when no oneâ€™s watching.
 
 > Maybe it gets rebooted, shinier and fatter ~
 
@@ -562,7 +561,7 @@ turnover ~ **it just keeps going and going and going.**
 If you enjoyed this piece, ***give it a few claps*** so more readers can
 find it.
 
-***Drop a comment*** with your favorite Simpsons moment — or prediction.
+***Drop a comment*** with your favorite Simpsons momentâ€Šâ€”â€Šor prediction.
 
 **Follow *The Balance Sheet*** for more sharp, strange, and *sometimes
 yellow* takes on the American story.
@@ -572,3 +571,4 @@ yellow* takes on the American story.
 </div>
 
 </div>
+

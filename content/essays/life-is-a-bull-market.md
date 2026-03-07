@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "Why Panic Selling Your Own Life Is a Bad Trade"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/life-is-a-bull-market.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/life-is-a-bull-market-db4524bf5431"
@@ -93,7 +92,7 @@ Social capital follows. Trust. Relationships. Reputation. Being known as
 someone who shows up, does what they say, and learns from mistakes. This
 capital compounds quietly.
 
-You don’t notice it building until one day, doors seem to open by
+You donâ€™t notice it building until one day, doors seem to open by
 themselves ~ automatic.
 
 Financial capital is the most visible form. Income, savings,
@@ -134,7 +133,7 @@ If life is a bull market, why does it feel so volatile?
 
 Because all bull markets have drawdowns.
 
-Markets don’t move in straight lines, and neither do people. Careers
+Markets donâ€™t move in straight lines, and neither do people. Careers
 stall. Bodies break. Relationships fracture. Plans fail. These are not
 anomalies ~ they are features of any long-running system under stress.
 
@@ -197,7 +196,7 @@ partners, projects, and tradeoffs. Even physical decline, when managed
 well, does not erase this accumulation.
 
 Health matters enormously here. It is the carrying capacity of the
-entire system. You can’t compound human or social capital if the
+entire system. You canâ€™t compound human or social capital if the
 underlying hardware collapses.
 
 This is why health investments punch far above their weight. They
@@ -235,7 +234,7 @@ Reputation works the same way. A single failure rarely destroys it.
 Patterns do. Over time, consistency dominates moments.
 
 This is why early-life status anxiety is often misplaced. The market
-hasn’t had time to work yet. The compounding hasn’t shown up on the
+hasnâ€™t had time to work yet. The compounding hasnâ€™t shown up on the
 statement.
 
 </div>
@@ -264,7 +263,7 @@ the illusion that it is the primary scorecard.
 In reality, financial capital is mostly a trailing indicator. It
 reflects prior human and social investments more than it creates them.
 
-This doesn’t make it irrelevant. It makes it contextual.
+This doesnâ€™t make it irrelevant. It makes it contextual.
 
 People who fixate on money while neglecting skills, health, judgment,
 and relationships are optimizing the wrong line item. They look rich on
@@ -302,7 +301,7 @@ Calling life a bull market is not denial.
 It does not dismiss suffering or pretend outcomes are guaranteed.
 
 Bull markets crash. Some recover slowly. Some leave scars. Some end
-early for reasons outside anyone’s control.
+early for reasons outside anyoneâ€™s control.
 
 What this metaphor offers is proportionality ~
 
@@ -345,9 +344,9 @@ If you treat every downturn as a verdict, you will underperform your own
 potential. If you treat your life as a long bull market with inevitable
 drawdowns, you give compounding time to do its work.
 
-That isn’t optimism.
+That isnâ€™t optimism.
 
-It’s realism in the limit ~ looking at a longer chart.
+Itâ€™s realism in the limit ~ looking at a longer chart.
 
 </div>
 
@@ -367,7 +366,7 @@ It’s realism in the limit ~ looking at a longer chart.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Author’s Note
+### Authorâ€™s Note
 
 If this perspective resonated, consider following The Balance Sheet. I
 write about economics, capital, risk, and the structural forces shaping
@@ -380,3 +379,4 @@ Long charts. Clear thinking. Real tradeoffs.
 </div>
 
 </div>
+

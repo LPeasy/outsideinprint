@@ -7,7 +7,6 @@
   title: "",
   subtitle: "",
   section_label: "Piece",
-  issue: "Issue 001",
   date: "",
   version: "1.0",
   edition: "First digital edition",
@@ -32,7 +31,7 @@
     stroke: 0.5pt + gray,
     radius: 4pt,
     [
-      #smallcaps(section_label)       #issue       #date       Version #version       #edition
+      #smallcaps(section_label)       #date       Version #version       #edition
     ]
   )
 
@@ -53,4 +52,5 @@
     ]
   )
 }
+
 

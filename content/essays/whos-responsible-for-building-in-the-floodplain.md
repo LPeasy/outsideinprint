@@ -1,5 +1,5 @@
 ---
-title: "Who’s Responsible for Building in the Floodplain?"
+title: "Whoâ€™s Responsible for Building in the Floodplain?"
 date: 2025-07-24
 draft: false
 slug: "whos-responsible-for-building-in-the-floodplain"
@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/whos-responsible-for-building-in-the-floodplain.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-responsible-for-building-in-the-floodplain-b468f42f536d"
@@ -25,7 +24,7 @@ medium_source_url: "https://medium.com/@lawtonperret/whos-responsible-for-buildi
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Who’s Responsible for Building in the Floodplain?
+### Whoâ€™s Responsible for Building in the Floodplain?
 
 #### Camp Mystic, Zoning Laws, and the Limits of Federal Power
 
@@ -37,13 +36,13 @@ data-width="1024" data-height="1536" />
 </figure>
 
 > After 27 people died at Camp Mystic on July 4, a colleague told me
-> something I haven’t stopped thinking about:
+> something I havenâ€™t stopped thinking about:
 
-> **“The federal government is ultimately to blame. They knew the risks.
-> They should’ve stopped people from living or camping in the
-> floodplain.”**
+> **â€œThe federal government is ultimately to blame. They knew the risks.
+> They shouldâ€™ve stopped people from living or camping in the
+> floodplain.â€**
 
-> It’s an emotionally compelling idea.
+> Itâ€™s an emotionally compelling idea.
 
 > **The government knew.**
 
@@ -51,11 +50,11 @@ data-width="1024" data-height="1536" />
 
 > **They issued the warnings.**
 
-> **Camp Mystic still stood in harm’s way.**
+> **Camp Mystic still stood in harmâ€™s way.**
 
-> But here’s the hard truth:
+> But hereâ€™s the hard truth:
 
-**The United States just doesn’t work like that.**
+**The United States just doesnâ€™t work like that.**
 
 </div>
 
@@ -77,9 +76,9 @@ data-width="1024" data-height="1536" />
 
 #### A Brief Aside, Continue Reading Below ~
 
-This essay looks at **what the federal government can (and can’t) do**
+This essay looks at **what the federal government can (and canâ€™t) do**
 to prevent tragedies like this one. We examine the **complicated system
-of shared responsibility** that governs how we live — and die — in
+of shared responsibility** that governs how we liveâ€Šâ€”â€Šand dieâ€Šâ€”â€Šin
 dangerous places.
 
 > Disclaimer: The views expressed here are my own and do not represent
@@ -106,19 +105,19 @@ dangerous places.
 
 **New here?**
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > target="_blank">Essay #1</a>: What Happened at Camp Mystic?
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-> target="_blank">Essay #2</a>: The Water’s Rising
+> target="_blank">Essay #2</a>: The Waterâ€™s Rising
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
@@ -144,7 +143,7 @@ dangerous places.
 
 ### Who Controls Where We Build?
 
-> The federal government doesn’t control zoning and development law.
+> The federal government doesnâ€™t control zoning and development law.
 
 <figure id="d700" class="graf graf--figure graf-after--pullquote">
 <img
@@ -160,7 +159,7 @@ data-width="1280" data-height="886" />
 > rel="noopener" target="_blank">CBS News</a>
 
 **That power belongs to local governments ~** counties, cities, and
-towns ~ acting under authority granted by the states. It’s been that way
+towns ~ acting under authority granted by the states. Itâ€™s been that way
 since a **1926 Supreme Court case** (*Village of Euclid v. Ambler
 Realty*) **upheld zoning as a legitimate local safety tool.**
 
@@ -172,17 +171,17 @@ Realty*) **upheld zoning as a legitimate local safety tool.**
 In places like Kerr County, where Camp Mystic is located, zoning
 authority is relatively weak.
 
-**Kerr County does participate in FEMA’s National Flood Insurance
+**Kerr County does participate in FEMAâ€™s National Flood Insurance
 Program (NFIP),** which requires it to regulate construction in flood
 zones.
 
-> The county designated the Guadalupe River as “extremely hazardous.”
+> The county designated the Guadalupe River as â€œextremely hazardous.â€
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
-> target="_blank">Essay #3</a> includes a map showing Camp Mystic’s
+> target="_blank">Essay #3</a> includes a map showing Camp Mysticâ€™s
 > cabins inside the floodway.
 
 </div>
@@ -203,7 +202,7 @@ zones.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-If that’s true, then
+If thatâ€™s true, then
 
 > why were cabins in the floodway?
 
@@ -211,10 +210,10 @@ Some were built decades ago and were likely grandfathered in.
 
 Others were approved as part of more recent expansions.
 
-Some were removed from FEMA’s official flood maps through a technical
+Some were removed from FEMAâ€™s official flood maps through a technical
 appeals process.
 
-> The Federal Government’s role is to effectively communicate flood risk
+> The Federal Governmentâ€™s role is to effectively communicate flood risk
 > ~ think FEMA flood maps and NWS alerts.
 
 The federal government does not have the authority to restrict
@@ -242,9 +241,9 @@ That being said,
 
 **They sign off** on emergency preparedness plans.
 
-They inspect the buildings, they dot the i’s,
+They inspect the buildings, they dot the iâ€™s,
 
-> and they cross the t’s.
+> and they cross the tâ€™s.
 
 > ***All FEMA can do is communicate the risk.***
 
@@ -268,23 +267,23 @@ They inspect the buildings, they dot the i’s,
 
 ### What does FEMA Actually Do?
 
-> FEMA doesn’t tell people where to build.
+> FEMA doesnâ€™t tell people where to build.
 
 Instead, **it sets the rules for federally backed flood insurance.**
 
-If a community **adopts FEMA’s minimum standards**,
+If a community **adopts FEMAâ€™s minimum standards**,
 
 then its residents become **eligible for coverage.**
 
-> ***If they don’t, they’re cut off.***
+> ***If they donâ€™t, theyâ€™re cut off.***
 
-> That’s the deal:
+> Thatâ€™s the deal:
 
 > Subsidized flood insurance for minimum flood risk reduction measures.
 
 Those minimum standards are often based on outdated assumptions ~
 
-**Like the idea of a “100-year flood,” which assumes historical patterns
+**Like the idea of a â€œ100-year flood,â€ which assumes historical patterns
 will hold true.**
 
 </div>
@@ -305,16 +304,16 @@ will hold true.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Wait ~ what’s a “100-year flood”?
+#### Wait ~ whatâ€™s a â€œ100-year floodâ€?
 
-> It doesn’t mean a flood that happens once every 100 years.
+> It doesnâ€™t mean a flood that happens once every 100 years.
 
 It means **a flood that has a 1% chance of happening in any given
 year.**
 
-> These aren’t expiration dates.
+> These arenâ€™t expiration dates.
 
-**You could have two “100-year” floods back-to-back.**
+**You could have two â€œ100-yearâ€ floods back-to-back.**
 
 > In fact, some Texas towns have.
 
@@ -322,7 +321,7 @@ The problem is that **these numbers rely on historical data ~**
 
 assuming the past is a good guide to the future.
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
@@ -362,9 +361,9 @@ A wall of water.
 
 Heartbreak.
 
-> FEMA didn’t prevent the tragedy.
+> FEMA didnâ€™t prevent the tragedy.
 
-> But it didn’t approve the construction of the camp either.
+> But it didnâ€™t approve the construction of the camp either.
 
 **FEMA provides information about risk and offers a risk informed
 framework for understanding it.**
@@ -405,7 +404,7 @@ class="graf-image" data-image-id="1*GZ2NhOp9jNOKARGFLNJ_Vw@2x.jpeg"
 data-width="1024" data-height="1169" />
 </figure>
 
-> The federal government doesn’t control how local agencies warn their
+> The federal government doesnâ€™t control how local agencies warn their
 > residents.
 
 The National Weather Service issued its **first flash flood warning at
@@ -418,13 +417,13 @@ out a CodeRED** alert to residents in Hunt, TX.
 
 > **No local emergency alerts were issued until much later.**
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > target="_blank">Essay #1</a> lays out the full warning timeline.
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
@@ -452,7 +451,7 @@ By the time Camp Mystic **began evacuating around 4:45 a.m.**, it was
 
 <div class="section-inner sectionLayout--insetColumn">
 
-**Here’s how it is supposed to work:**
+**Hereâ€™s how it is supposed to work:**
 
 1.  <span id="d0fb">The National Weather Service issues the
     alerts.</span>
@@ -486,14 +485,14 @@ By the time Camp Mystic **began evacuating around 4:45 a.m.**, it was
 The federal government ***can*** ***incentivize*** relocation by funding
 voluntary buyouts or limiting future disaster aid.
 
-It ***can’t force*** local governments to evacuate a town, shut down a
+It ***canâ€™t force*** local governments to evacuate a town, shut down a
 summer camp, or relocate a community in advance of a storm.
 
 > Why?
 
-Under current law, **the feds don’t have zoning authority.**
+Under current law, **the feds donâ€™t have zoning authority.**
 
-They **can’t commandeer states to enforce land use policies** (New York
+They **canâ€™t commandeer states to enforce land use policies** (New York
 v. United States, 1992).
 
 > Even after Hurricane Katrina, the government relied on voluntary
@@ -508,7 +507,7 @@ construction,
 
 > not immediate flood safety.
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
@@ -573,7 +572,7 @@ data-width="1023" data-height="794" />
 - <span id="3092">Approved the site plan,</span>
 - <span id="4345">Had the power to require better planning or
   elevation,</span>
-- <span id="deca">Didn’t send out an alert in time.</span>
+- <span id="deca">Didnâ€™t send out an alert in time.</span>
 
 </div>
 
@@ -632,9 +631,9 @@ data-width="1023" data-height="794" />
 
 #### **No one party is to blame.**
 
-> It’s all just a part of the picture.
+> Itâ€™s all just a part of the picture.
 
-Parents don’t approve site plans or read flood maps…
+Parents donâ€™t approve site plans or read flood mapsâ€¦
 
 And **they are often told**
 
@@ -670,24 +669,24 @@ And this time,
 
 <div class="section-inner sectionLayout--insetColumn">
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > target="_blank">In Essay #1</a>, we covered what happened that night.
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 > target="_blank">In Essay #2</a>, we explained why storms like this are
 > more common now.
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
-> target="_blank">In Essay #3</a>, we unpacked how the Hill Country’s
+> target="_blank">In Essay #3</a>, we unpacked how the Hill Countryâ€™s
 > terrain turns storms into killers.
 
 </div>
@@ -717,7 +716,7 @@ Texas is considering new rules for youth camps and floodplain occupancy.
 
 > Kerr County must upgrade its emergency communication protocols.
 
-There is no national rule that says “you can’t put kids in a floodway.”
+There is no national rule that says â€œyou canâ€™t put kids in a floodway.â€
 
 > That is unlikely to change.
 
@@ -772,19 +771,19 @@ The parents?
 
 #### Catch up on the full Camp Mystic series ~
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > target="_blank">Essay #1</a>: What Happened at Camp Mystic?
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-> target="_blank">Essay #2</a>: The Water’s Rising
+> target="_blank">Essay #2</a>: The Waterâ€™s Rising
 
-> 👉 <a
+> ðŸ‘‰ <a
 > href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
@@ -793,14 +792,15 @@ The parents?
 **Follow *The Balance Sheet*** for more essays on U.S. public policy,
 flood risk, and the economics of resilience.
 
-💬 Share your thoughts in the comments.
+ðŸ’¬ Share your thoughts in the comments.
 
-👏 Clap if you learned something new.
+ðŸ‘ Clap if you learned something new.
 
-📩 Subscribe to get the next piece delivered directly.
-
-</div>
+ðŸ“© Subscribe to get the next piece delivered directly.
 
 </div>
 
 </div>
+
+</div>
+

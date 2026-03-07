@@ -1,9 +1,8 @@
-{{ define "main" }}
+﻿{{ define "main" }}
 
   <div class="imprint-header" role="note" aria-label="Edition metadata">
     <div class="row">
       <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
-      <span>{{ with .Params.issue }}Issue <b>{{ . }}</b>{{ end }}</span>
       <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
       <span>{{ with .Params.version }}Version <b>{{ . }}</b>{{ end }}</span>
       <span>{{ with .Params.edition }}Edition <b>{{ . }}</b>{{ end }}</span>

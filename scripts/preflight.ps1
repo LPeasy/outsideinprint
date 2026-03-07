@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 Write-Host "Outside In Print ~ Preflight" -ForegroundColor Cyan
 
 $AllowedSections = @("essays", "literature", "reports", "working-papers")
-$RequiredFields = @("title", "date", "section_label", "version", "edition", "issue", "pdf", "draft")
+$RequiredFields = @("title", "date", "section_label", "version", "edition", "pdf", "draft")
 $fail = $false
 $slugSources = @{}
 
@@ -176,6 +176,7 @@ if ($fail) {
 }
 
 Write-Host "`nPreflight PASSED." -ForegroundColor Green
+
 
 
 

@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/jack-stratton-and-the-vulfpeck-model.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/jack-stratton-and-the-vulfpeck-model-00813f3ac8bf"
@@ -45,7 +44,7 @@ data-width="840" data-height="560" />
 > data-href="https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band"
 > rel="noopener" target="_blank">Source: Michelle Shiers</a>
 
-**Minimalist funk isn’t supposed to fill a room.**
+**Minimalist funk isnâ€™t supposed to fill a room.**
 
 <a href="https://www.youtube.com/watch?v=KXvncV79LXk"
 class="markup--anchor markup--p-anchor"
@@ -96,11 +95,11 @@ best known as the founder and creative leader of the funk/soul band
 
 <div class="section-inner sectionLayout--insetColumn">
 
-**Stratton shapes Vulf’s distinctive** **sound**, **directs the**
+**Stratton shapes Vulfâ€™s distinctive** **sound**, **directs the**
 **business**, and contributes as a **multi-instrumentalist** on drums,
 keyboard, guitar, and bass.
 
-Stratton’s philosophy, production approach, and outlook on music ~
+Strattonâ€™s philosophy, production approach, and outlook on music ~
 ***and life*** ~ shine in an October 2024 interview with writer *Josh
 Fischel*, published in ***The Believer***.
 
@@ -129,7 +128,7 @@ music.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Jack Stratton’s Early Life and Musical Education
+#### Jack Strattonâ€™s Early Life and Musical Education
 
 <figure id="5708" class="graf graf--figure graf-after--h4">
 <img
@@ -147,7 +146,7 @@ data-width="2400" data-height="1600" />
 > Stratton grew up in Cleveland Heights, Ohio.
 
 He started playing drums early and performed in a variety of musical
-contexts, including his father’s klezmer band, *Yiddishe Cup*.
+contexts, including his fatherâ€™s klezmer band, *Yiddishe Cup*.
 
 After cutting his teeth with Bert, he formed his own group: *Yiddishe
 Pirat*.
@@ -173,17 +172,17 @@ Pirat*.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-He enrolled at the *University of Michigan’s School of Music*, **where**
+He enrolled at the *University of Michiganâ€™s School of Music*, **where**
 **he studied music technology** **and met** **his future** **Vulfpeck
 collaborators:**
 
 ***Theo Katzman****,* ***Woody Goss, and Joe Dart****.*
 
-> “All that was gonna seep into the Vulf universe with time.”
+> â€œAll that was gonna seep into the Vulf universe with time.â€
 
-> — Jack Stratton
+> â€” Jack Stratton
 
-Stratton’s **formal training**, combined with these **early
+Strattonâ€™s **formal training**, combined with these **early
 influences**, laid the foundation for a group that would blend
 **technical discipline** with **humor**, **rhythm**, and **minimalism**.
 
@@ -221,12 +220,12 @@ data-width="840" data-height="540" />
 > rel="noopener" target="_blank">Source: StubHub</a>
 
 Vulfpeck was conceived in 2011 as *an imagined German rhythm section*,
-**modeled on American session musicians** of the 1960s and ’70s ~ like
+**modeled on American session musicians** of the 1960s and â€™70s ~ like
 the *Funk Brothers* and the *Wrecking Crew*.
 
 Stratton has credited a Reinhold Mack interview as the creative spark.
 
-> The band released its first track, “Beastly,” in April 2011, followed
+> The band released its first track, â€œBeastly,â€ in April 2011, followed
 > by four EPs between 2011 and 2014.
 
 </div>
@@ -254,15 +253,15 @@ admission-free tour.
 The stunt **earned over \$20,000** and drew international media coverage
 before being removed by the platform.
 
-> “No one knows what’s gonna happen when you do these stunts… It’s
-> fairly unique to Vulf, but people kind of expect it ~ it’s in our
-> wheelhouse.”
+> â€œNo one knows whatâ€™s gonna happen when you do these stuntsâ€¦ Itâ€™s
+> fairly unique to Vulf, but people kind of expect it ~ itâ€™s in our
+> wheelhouse.â€
 
-> — Jack Stratton
+> â€” Jack Stratton
 
-As Vulfpeck’s reputation grew, Stratton stepped into the role of
+As Vulfpeckâ€™s reputation grew, Stratton stepped into the role of
 **producer**, **director**, and **logistical** **architect** **of the
-band**’s operations.
+band**â€™s operations.
 
 </div>
 
@@ -282,7 +281,7 @@ band**’s operations.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Jack Stratton’s Role in Vulfpeck as Bandleader and Producer
+#### Jack Strattonâ€™s Role in Vulfpeck as Bandleader and Producer
 
 <figure id="a749" class="graf graf--figure graf-after--h4">
 <img
@@ -296,27 +295,27 @@ data-width="950" data-height="634" />
 > data-href="https://www.last.fm/music/Vulfpeck/+wiki" rel="noopener"
 > target="_blank">Source: Last.fm</a>
 
-Stratton serves as Vulfpeck’s **central organizer and creative
+Stratton serves as Vulfpeckâ€™s **central organizer and creative
 director.** He oversees recording sessions, mixing, editing, video
 production, and live show design.
 
 Though he plays multiple instruments, **his musical identity is rooted
 in rhythm**, and he often approaches keys or guitar like a drummer.
 
-> “I think that’s my main advantage on keyboards… I approach it pretty
+> â€œI think thatâ€™s my main advantage on keyboardsâ€¦ I approach it pretty
 > rhythmically. Joey \[Dosik\] and Woody \[Goss\] will run laps around
-> me ear-wise, so I have to compensate with impeccable rhythm.”
+> me ear-wise, so I have to compensate with impeccable rhythm.â€
 
-> — Jack Stratton
+> â€” Jack Stratton
 
 **This rhythmic foundation** shapes his entire production philosophy ~
 one built on **balance and feel** rather than complexity.
 
-Stratton’s onstage demeanor ~ **head bobbing** slightly off-grid, **eyes
+Strattonâ€™s onstage demeanor ~ **head bobbing** slightly off-grid, **eyes
 darting** to the drummer ~ is **half stage manager, *half mad
 scientist.***
 
-> Fans know the face he makes when he’s in ‘goose mode.’
+> Fans know the face he makes when heâ€™s in â€˜goose mode.â€™
 
 </div>
 
@@ -336,7 +335,7 @@ scientist.***
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Inside Jack Stratton’s Production Style and Sound Philosophy
+#### Inside Jack Strattonâ€™s Production Style and Sound Philosophy
 
 <figure id="3201" class="graf graf--figure graf-after--h4">
 <img
@@ -345,13 +344,13 @@ class="graf-image" data-image-id="1*gNW-5bRZ4WCcYppPvhe_IA@2x.jpeg"
 data-width="674" data-height="595" />
 </figure>
 
-> Jack’s Mixing Masterclass \| <a
+> Jackâ€™s Mixing Masterclass \| <a
 > href="https://www.musicradar.com/news/jack-stratton-mixing-masterclass"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://www.musicradar.com/news/jack-stratton-mixing-masterclass"
 > rel="noopener" target="_blank">Source: Music Radar</a>
 
-Stratton’s approach to mixing emphasizes **warmth, clarity, and
+Strattonâ€™s approach to mixing emphasizes **warmth, clarity, and
 simplicity.**
 
 Influenced by engineers like *Willie Mitchell* and *Geoff Emerick*, he
@@ -361,14 +360,14 @@ environments.
 His **Vulf Compressor** plug-in, developed in coordination with
 *Goodhertz*, is widely used by producers seeking a vintage sound.
 
-> “I use computers and plug-ins to mimic a lot of older sounds that
-> would have been made analog… I’ve always thought, How can I enhance
-> the funk through the mix?”
+> â€œI use computers and plug-ins to mimic a lot of older sounds that
+> would have been made analogâ€¦ Iâ€™ve always thought, How can I enhance
+> the funk through the mix?â€
 
-> — Jack Stratton
+> â€” Jack Stratton
 
 **His sonic signature**, rooted in minimal overdubbing and live
-tracking, **became a hallmark of the band’s catalog** ~ and their sound
+tracking, **became a hallmark of the bandâ€™s catalog** ~ and their sound
 is ***perfect for live shows.***
 
 </div>
@@ -404,7 +403,7 @@ data-width="1480" data-height="832" />
 > data-href="https://www.jambase.com/article/vulfpeck-madison-square-garden-chris-thile-dave-koz"
 > rel="noopener" target="_blank">Source: Jambase</a>
 
-Under Stratton’s leadership, Vulfpeck has released **six studio albums,
+Under Strattonâ€™s leadership, Vulfpeck has released **six studio albums,
 a compilation, and multiple live albums.**
 
 > Every show is a little derby ~ equal parts precision, chaos, and funky
@@ -416,16 +415,16 @@ Garden *without a manager or major label.***
 > That concert was released as ***Live at Madison Square Garden*** as a
 > film and a record.
 
-Live at MSG might’ve been their most impressive show, but real fans
+Live at MSG mightâ€™ve been their most impressive show, but real fans
 remember ***the first time a crowd sang the Dean Town bassline without
 being prompted.***
 
 > Dublin, 2016. Lightning in a bottle.
 
 **Their journey** ~ from *tight-knit Michigan venues* to one of the
-world’s biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
+worldâ€™s biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
 
-> Their next project would show the world just how far they’d come,
+> Their next project would show the world just how far theyâ€™d come,
 > musically and creatively.
 
 </div>
@@ -461,25 +460,25 @@ data-width="944" data-height="476" />
 > data-href="https://preview.redd.it/vkcd7763xkhe1.png?width=944&amp;format=png&amp;auto=webp&amp;s=c4db621337eff49d5729ebfea066f76193238085&amp;app_web_view=ios"
 > rel="noopener" target="_blank">Source: Vulfpeck</a>
 
-> “Oh that’s real baby. That’s real life. We’re getting into real life.”
+> â€œOh thatâ€™s real baby. Thatâ€™s real life. Weâ€™re getting into real life.â€
 
-> — Jack Stratton, lying on a shakti mat
+> â€” Jack Stratton, lying on a shakti mat
 
 *In March 2025*, Vulfpeck unveiled ***Clarity of Cal***, a live album
 that stands as **a testament to their musical evolution** and has been
 **hailed by fans** as perhaps their finest work to date.
 
 Recorded during performances at *The UC Theatre in Berkeley* and the
-*Hollywood Palladium in Los Angeles*, this album captures the band’s
+*Hollywood Palladium in Los Angeles*, this album captures the bandâ€™s
 dynamic energy and tight-knit synergy on stage.
 
-The tracklist features standout songs such as **“Big Dipper,” “Tender
-Defender,” “New Beastly,” “The Heist,” “Memories,” “August 26,”** and
-**“This Is Not the Song I Wrote.”**
+The tracklist features standout songs such as **â€œBig Dipper,â€ â€œTender
+Defender,â€ â€œNew Beastly,â€ â€œThe Heist,â€ â€œMemories,â€ â€œAugust 26,â€** and
+**â€œThis Is Not the Song I Wrote.â€**
 
-Each track showcases **Vulfpeck’s signature blend of funk, soul, and
-playful experimentation**, with **“*Tender Defender*”** highlighting
-**Theo Katzman’s** *impassioned vocals* and **“New Beastly”** delivering
+Each track showcases **Vulfpeckâ€™s signature blend of funk, soul, and
+playful experimentation**, with **â€œ*Tender Defender*â€** highlighting
+**Theo Katzmanâ€™s** *impassioned vocals* and **â€œNew Beastlyâ€** delivering
 *a modern twist on a timeless sound.*
 
 <figure id="c611" class="graf graf--figure graf--iframe graf-after--p">
@@ -491,10 +490,10 @@ href="https://www.youtube.com/embed/8bLinctYcno?feature=oembed">https://www.yout
 > *Carter Knopik*, offering fans **an immersive experience of the live
 > performances.**
 
-The film includes **candid moments**, such as *Jack Stratton’s relaxed
-pre-show meditation*, and provides insight into the band’s creative
-process. Stratton explains the album’s title, sharing that ***“Clarity
-of Cal”*** was a phrase his father often repeated, originating from a
+The film includes **candid moments**, such as *Jack Strattonâ€™s relaxed
+pre-show meditation*, and provides insight into the bandâ€™s creative
+process. Stratton explains the albumâ€™s title, sharing that ***â€œClarity
+of Calâ€*** was a phrase his father often repeated, originating from a
 *Jack Kerouac* prose poem.
 
 > Critics and fans alike have praised the album for its vibrant energy
@@ -502,9 +501,9 @@ of Cal”*** was a phrase his father often repeated, originating from a
 
 ***One reviewer on Reddit noted:***
 
-> ***“I’ve had it on repeat! I agree it’s their best yet. Very Earth,
-> Wind & Fire / CHIC vibes. More gospel-y in general, which I’m all
-> about!”***
+> ***â€œIâ€™ve had it on repeat! I agree itâ€™s their best yet. Very Earth,
+> Wind & Fire / CHIC vibes. More gospel-y in general, which Iâ€™m all
+> about!â€***
 
 <figure id="c6c7" class="graf graf--figure graf-after--blockquote">
 <img
@@ -519,11 +518,11 @@ data-width="640" data-height="357" />
 > data-href="https://youtu.be/py-HPosf8s8?si=sMv_N5Dve4LfSjGS"
 > rel="noopener" target="_blank">Source: Vulf on YouTube</a>
 
-The live recording captures ***the essence of Vulfpeck’s
-performances,*** making listeners feel as though they’re *part of the
+The live recording captures ***the essence of Vulfpeckâ€™s
+performances,*** making listeners feel as though theyâ€™re *part of the
 audience.*
 
-***Clarity of Cal*** *solidifies Vulfpeck’s reputation* as a powerhouse
+***Clarity of Cal*** *solidifies Vulfpeckâ€™s reputation* as a powerhouse
 in the independent music scene and *offers a fresh perspective on their
 artistry.*
 
@@ -531,8 +530,8 @@ As the album continues to resonate with audiences, it invites both
 longtime fans and newcomers to experience ***the infectious groove***
 ***and innovative spirit*** that define Vulfpeck.
 
-> Clarity of Cal might be the band’s most cohesive statement yet, but
-> Stratton’s vision doesn’t end with Vulfpeck.
+> Clarity of Cal might be the bandâ€™s most cohesive statement yet, but
+> Strattonâ€™s vision doesnâ€™t end with Vulfpeck.
 
 ***His extended musical family stretches across projects, genres, and
 continents.***
@@ -555,7 +554,7 @@ continents.***
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Jack Stratton’s Side Projects and Vulfpeck Collaborators
+#### Jack Strattonâ€™s Side Projects and Vulfpeck Collaborators
 
 <figure id="d58e" class="graf graf--figure graf-after--h4">
 <img
@@ -570,23 +569,23 @@ data-width="1200" data-height="630" />
 > data-href="https://liveforlivemusic.com/features/the-fearless-flyers-iv-vulfpeck-interview-2024/"
 > rel="noopener" target="_blank">Source: Dervon Douglas</a>
 
-Stratton also produces for the ***Fearless Flyers ***— a Vulf Records
-offshoot featuring *Cory Wong and Nate Smith *— and releases **solo
+Stratton also produces for the ***Fearless Flyersâ€Š***â€”â€Ša Vulf Records
+offshoot featuring *Cory Wong and Nate Smithâ€Š*â€”â€Šand releases **solo
 material** under the name ***Vulfmon***.
 
-> Stratton doesn’t just bring in collaborators — he curates them like
+> Stratton doesnâ€™t just bring in collaboratorsâ€Šâ€”â€Šhe curates them like
 > vintage records, turning each guest appearance into a signature
 > seasoning.
 
 He works frequently with **vocalists** like ***Antwaun Stanley, Joey
-Dosik,*** and ***Monica Martin*** — and brings in **legends** like
+Dosik,*** and ***Monica Martin***â€Šâ€”â€Šand brings in **legends** like
 ***David T. Walker, James Gadson,*** and ***Bernard Purdie***.
 
-> “It’s kind of a joke now — the collective Vulf sphere of what I have
-> access to as a producer… People can just do things. They don’t even
-> work that hard at it.”
+> â€œItâ€™s kind of a joke nowâ€Šâ€”â€Šthe collective Vulf sphere of what I have
+> access to as a producerâ€¦ People can just do things. They donâ€™t even
+> work that hard at it.â€
 
-> — Jack Stratton
+> â€”â€ŠJack Stratton
 
 The strength of these **relationships** leads to a **creative
 environment** where distinct musical voices are **given space to
@@ -610,7 +609,7 @@ shine.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Jack Stratton’s Musical Influences and Songwriting Approach
+#### Jack Strattonâ€™s Musical Influences and Songwriting Approach
 
 <figure id="8759" class="graf graf--figure graf-after--h4">
 <img
@@ -628,18 +627,18 @@ data-width="740" data-height="390" />
 > Stratton has long cited ***Bernard Purdie*** as a foundational
 > influence.
 
-He’s drawn to **groove-forward arrangements** and **minimalist
+Heâ€™s drawn to **groove-forward arrangements** and **minimalist
 structures**, often favoring the **rhythmic interplay** of a few
 well-placed parts **over dense layering.**
 
 His **lyrics**, when present, are chosen **for sound and rhythm** rather
 than storytelling.
 
-> “I wanted to write expensive, depth-filled, Radiohead lyrics… There’s
-> a similar thing in literature too — lofty, biblical writing. Just
-> thinking like that in a lyrical sense is kind of a new idea.”
+> â€œI wanted to write expensive, depth-filled, Radiohead lyricsâ€¦ Thereâ€™s
+> a similar thing in literature tooâ€Šâ€”â€Šlofty, biblical writing. Just
+> thinking like that in a lyrical sense is kind of a new idea.â€
 
-> — Jack Stratton
+> â€” Jack Stratton
 
 His evolving creative interests have also shaped **how he engages with
 the industry at large.**
@@ -671,7 +670,7 @@ class="graf-image" data-image-id="1*edXhn0T7L1jqsrVfpRpdCg@2x.jpeg"
 data-width="675" data-height="380" />
 </figure>
 
-> Vulfpeck’s Silent Album \| <a
+> Vulfpeckâ€™s Silent Album \| <a
 > href="https://www.wnycstudios.org/podcasts/otm/articles/vulfpeck-made-serious-bank-sleepify"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://www.wnycstudios.org/podcasts/otm/articles/vulfpeck-made-serious-bank-sleepify"
@@ -683,14 +682,14 @@ especially in streaming and ticketing.
 > In 2021, he proposed a listener-based royalty model, and more
 > recently, he has advocated for artist-controlled ticketing systems.
 
-**Vulfpeck’s 2023 residency**, ***The Schvitz***, was designed to test
+**Vulfpeckâ€™s 2023 residency**, ***The Schvitz***, was designed to test
 direct ticketing and logistics without third-party promoters.
 
-> “There are just these layers of industry people between you and the
-> actual ticketing portal… It’s simple stuff, but artists are in the
-> dark.”
+> â€œThere are just these layers of industry people between you and the
+> actual ticketing portalâ€¦ Itâ€™s simple stuff, but artists are in the
+> dark.â€
 
-> — Jack Stratton
+> â€” Jack Stratton
 
 His business decisions reflect the same philosophy as his music:
 **minimize waste**, **maximize control**, and **trust the audience.**
@@ -718,7 +717,7 @@ His business decisions reflect the same philosophy as his music:
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### What’s Next for Jack Stratton and Vulfpeck in 2025
+#### Whatâ€™s Next for Jack Stratton and Vulfpeck in 2025
 
 <figure id="7cd5" class="graf graf--figure graf-after--h4">
 <img
@@ -733,7 +732,7 @@ data-width="900" data-height="584" />
 > data-href="https://bluefunkymamma.wordpress.com/2018/01/13/vulfpeck-banda/"
 > rel="noopener" target="_blank">Source</a>
 
-Stratton continues to guide Vulfpeck’s creative output, manage its
+Stratton continues to guide Vulfpeckâ€™s creative output, manage its
 independent label, and develop new collaborative projects.
 
 > The band has <a
@@ -743,17 +742,17 @@ independent label, and develop new collaborative projects.
 > rel="noopener" target="_blank">two tour dates</a> announced for 2025:
 > Red Rocks on July 5th and MSG on September 13th.
 
-Jack’s model ~ built around restraint, rhythm, and mutual respect ~ has
+Jackâ€™s model ~ built around restraint, rhythm, and mutual respect ~ has
 helped define one of the most successful independent bands of the
 streaming era.
 
-> “We’re an internet band using all sorts of technology, but we’re the
-> most get-in-a-room, humans-playing-together Luddite art form.”
+> â€œWeâ€™re an internet band using all sorts of technology, but weâ€™re the
+> most get-in-a-room, humans-playing-together Luddite art form.â€
 
-> — Jack Stratton
+> â€” Jack Stratton
 
 From studio to stage, and from composition to ticketing, Stratton is the
-force behind Vulfpeck’s distinct and enduring identity.
+force behind Vulfpeckâ€™s distinct and enduring identity.
 
 > Call it what you want: jam band, studio collective, funk pranksters.
 
@@ -777,13 +776,13 @@ force behind Vulfpeck’s distinct and enduring identity.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### So what’s your favorite Vulf moment?
+#### So whatâ€™s your favorite Vulf moment?
 
-Was it hearing “<a
+Was it hearing â€œ<a
 href="https://www.youtube.com/watch?v=rhxQoDlt2AU&amp;pp=0gcJCdgAo7VqN5tD"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.youtube.com/watch?v=rhxQoDlt2AU&amp;pp=0gcJCdgAo7VqN5tD"
-rel="noopener" target="_blank"><strong><em>Dean Town</em></strong></a>”
+rel="noopener" target="_blank"><strong><em>Dean Town</em></strong></a>â€
 for the first time? <a
 href="https://www.youtube.com/watch?v=hvYnw9Fse2U&amp;pp=0gcJCdgAo7VqN5tD"
 class="markup--anchor markup--p-anchor"
@@ -791,16 +790,16 @@ data-href="https://www.youtube.com/watch?v=hvYnw9Fse2U&amp;pp=0gcJCdgAo7VqN5tD"
 rel="noopener" target="_blank"><strong><em>Beastly?</em></strong></a>
 
 Watching MSG go wild during
-“<a href="https://www.youtube.com/watch?v=jHWE4rFvaI4"
+â€œ<a href="https://www.youtube.com/watch?v=jHWE4rFvaI4"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.youtube.com/watch?v=jHWE4rFvaI4" rel="noopener"
-target="_blank"><strong><em>Animal Spirits</em></strong></a>”?
+target="_blank"><strong><em>Animal Spirits</em></strong></a>â€?
 
 > Or was it dancing in the crowd and catching a bigger-than-life
 > Stratton grin mid-solo?
 
 **Drop your favorite lyric, moment, or Stratton theory in the
-comments** — and while you’re at it, queue up <a
+comments**â€Šâ€”â€Šand while youâ€™re at it, queue up <a
 href="https://www.youtube.com/watch?v=8bLinctYcno&amp;pp=0gcJCdgAo7VqN5tD"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.youtube.com/watch?v=8bLinctYcno&amp;pp=0gcJCdgAo7VqN5tD"
@@ -826,3 +825,4 @@ modern era.
 </div>
 
 </div>
+

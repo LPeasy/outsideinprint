@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "Marriage is a Fundamental Right"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/why-oberfell-will-not-be-overturned.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-oberfell-will-not-be-overturned-00153db59a5e"
@@ -17,7 +16,7 @@ Why Obergefell v. Hodges Is Unlikely to Be Overturned by the Conservative Suprem
 
 ![](https://cdn-images-1.medium.com/max/800/1*FzFST7z5_BoHeLSOKUFIow@2x.jpeg)
 
-In light of the Supreme Court’s recent decision in Dobbs v. Jackson Women’s Health Organization (2022), which overturned Roe v. Wade, questions have arisen about the future of other landmark cases rooted in substantive due process.
+In light of the Supreme Courtâ€™s recent decision in Dobbs v. Jackson Womenâ€™s Health Organization (2022), which overturned Roe v. Wade, questions have arisen about the future of other landmark cases rooted in substantive due process.
 
 Among these, Obergefell v. Hodges (2015), which legalized same-sex marriage nationwide, appears particularly vulnerable. However, key distinctions in the legal foundations and societal acceptance of Obergefell make it far less likely to be overturned.
 
@@ -31,7 +30,7 @@ The principle of substantive due process, which protects certain fundamental lib
 
 Critics of substantive due process often argue that it allows the judiciary to create rights not explicitly enumerated in the Constitution. 
 
-This critique formed the backbone of the Dobbs majority opinion, which asserted that abortion was not a right “deeply rooted in the Nation’s history and traditions.”
+This critique formed the backbone of the Dobbs majority opinion, which asserted that abortion was not a right â€œdeeply rooted in the Nationâ€™s history and traditions.â€
 
 The same argument could, in theory, be applied to same-sex marriage.
 
@@ -53,9 +52,9 @@ In addition to substantive due process, Obergefell relies on the Equal Protectio
 
 The Court in Obergefell emphasized that excluding same-sex couples from marriage was inherently discriminatory, relegating them to second-class citizenship.
 
-This dual reliance on both due process and equal protection strengthens Obergefell’s foundation.
+This dual reliance on both due process and equal protection strengthens Obergefellâ€™s foundation.
 
-To overturn Obergefell, the Court would need to revisit not only substantive due process but also long-standing precedents affirming equality under the law — a much broader and more legally fraught endeavor.
+To overturn Obergefell, the Court would need to revisit not only substantive due process but also long-standing precedents affirming equality under the lawâ€Šâ€”â€Ša much broader and more legally fraught endeavor.
 
 ![](https://cdn-images-1.medium.com/max/800/1*-c6rXOxKAdDJqeOBZaa-2Q@2x.jpeg)
 
@@ -75,16 +74,17 @@ Court Legitimacy and Public Backlash
 
 ![](https://cdn-images-1.medium.com/max/800/1*UnMbTSRallSxwzixi4NUjw@2x.jpeg)
 
-The Supreme Court’s legitimacy depends, in part, on its ability to maintain public confidence. Overturning Obergefell would likely provoke widespread backlash, further eroding the Court’s credibility. In contrast to abortion, which remains a deeply divisive issue, marriage equality enjoys broad support across political and demographic groups, making it politically and socially risky for the Court to revisit the ruling.
+The Supreme Courtâ€™s legitimacy depends, in part, on its ability to maintain public confidence. Overturning Obergefell would likely provoke widespread backlash, further eroding the Courtâ€™s credibility. In contrast to abortion, which remains a deeply divisive issue, marriage equality enjoys broad support across political and demographic groups, making it politically and socially risky for the Court to revisit the ruling.
 
-The Conservative Court’s Approach Post-Dobbs
+The Conservative Courtâ€™s Approach Post-Dobbs
 
-Although the Dobbs decision raised concerns about the future of substantive due process, the majority opinion explicitly limited its reasoning to abortion. Justice Samuel Alito emphasized that abortion is “fundamentally different” because it involves the potential life of an unborn child, a factor not present in cases like Obergefell. While Justice Clarence Thomas’s concurrence suggested revisiting other substantive due process precedents, including Obergefell, this view did not command a majority of the Court.
+Although the Dobbs decision raised concerns about the future of substantive due process, the majority opinion explicitly limited its reasoning to abortion. Justice Samuel Alito emphasized that abortion is â€œfundamentally differentâ€ because it involves the potential life of an unborn child, a factor not present in cases like Obergefell. While Justice Clarence Thomasâ€™s concurrence suggested revisiting other substantive due process precedents, including Obergefell, this view did not command a majority of the Court.
 
-The Court’s decision in 303 Creative LLC v. Elenis (2023), while controversial, reflects a commitment to balancing competing constitutional rights rather than an intent to narrow the scope of LGBTQ+ rights. By ruling that compelling speech in support of same-sex weddings could violate the First Amendment, the Court focused on the principle of individual expression rather than questioning the legitimacy of same-sex marriage itself. Importantly, the decision does not diminish the legal protections established in Obergefell v. Hodges but instead delineates the boundaries of how those protections interact with other constitutional freedoms. This approach suggests that the Court is more focused on resolving conflicts at the margins of constitutional rights than dismantling core precedents, reinforcing its role as an arbiter of competing liberties rather than an agent of restriction.
+The Courtâ€™s decision in 303 Creative LLC v. Elenis (2023), while controversial, reflects a commitment to balancing competing constitutional rights rather than an intent to narrow the scope of LGBTQ+ rights. By ruling that compelling speech in support of same-sex weddings could violate the First Amendment, the Court focused on the principle of individual expression rather than questioning the legitimacy of same-sex marriage itself. Importantly, the decision does not diminish the legal protections established in Obergefell v. Hodges but instead delineates the boundaries of how those protections interact with other constitutional freedoms. This approach suggests that the Court is more focused on resolving conflicts at the margins of constitutional rights than dismantling core precedents, reinforcing its role as an arbiter of competing liberties rather than an agent of restriction.
 
 Conclusion
 
-While the overturning of Roe v. Wade in Dobbs has fueled speculation about the fate of other substantive due process cases, Obergefell v. Hodges is unlikely to face the same fate. Unlike Roe, Obergefell rests on a long-recognized fundamental right — the right to marry — and is further strengthened by its reliance on both substantive due process and the Equal Protection Clause. Additionally, Obergefell enjoys overwhelming public support, with a majority of Americans embracing marriage equality as a settled part of modern life.
+While the overturning of Roe v. Wade in Dobbs has fueled speculation about the fate of other substantive due process cases, Obergefell v. Hodges is unlikely to face the same fate. Unlike Roe, Obergefell rests on a long-recognized fundamental rightâ€Šâ€”â€Šthe right to marryâ€Šâ€”â€Šand is further strengthened by its reliance on both substantive due process and the Equal Protection Clause. Additionally, Obergefell enjoys overwhelming public support, with a majority of Americans embracing marriage equality as a settled part of modern life.
 
-The Supreme Court’s cautious approach to LGBTQ+ rights post-Dobbs, as demonstrated in 303 Creative LLC v. Elenis, suggests a preference for resolving conflicts at the margins rather than dismantling core precedents like Obergefell. By focusing on balancing competing constitutional rights, the Court avoids the widespread legal and societal disruption that would follow a reversal of marriage equality. In a legal and cultural landscape where same-sex marriage has become deeply entrenched, the decision appears secure for the foreseeable future.
+The Supreme Courtâ€™s cautious approach to LGBTQ+ rights post-Dobbs, as demonstrated in 303 Creative LLC v. Elenis, suggests a preference for resolving conflicts at the margins rather than dismantling core precedents like Obergefell. By focusing on balancing competing constitutional rights, the Court avoids the widespread legal and societal disruption that would follow a reversal of marriage equality. In a legal and cultural landscape where same-sex marriage has become deeply entrenched, the decision appears secure for the foreseeable future.
+

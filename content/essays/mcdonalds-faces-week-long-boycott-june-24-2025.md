@@ -1,13 +1,12 @@
 ---
-title: "McDonald’s Faces Week‑Long Boycott"
+title: "McDonaldâ€™s Faces Weekâ€‘Long Boycott"
 date: 2025-06-24
 draft: false
 slug: "mcdonalds-faces-week-long-boycott-june-24-2025"
 section_label: "Essay"
-subtitle: "Why? What is going on with the McDonald’s Boycott?"
+subtitle: "Why? What is going on with the McDonaldâ€™s Boycott?"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/mcdonalds-faces-week-long-boycott-june-24-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
@@ -25,9 +24,9 @@ medium_source_url: "https://medium.com/@lawtonperret/mcdonalds-faces-week-long-b
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### McDonald’s Faces Week‑Long Boycott
+### McDonaldâ€™s Faces Weekâ€‘Long Boycott
 
-#### Why? What is going on with the McDonald’s Boycott?
+#### Why? What is going on with the McDonaldâ€™s Boycott?
 
 <figure id="99b4" class="graf graf--figure graf-after--h4">
 <img
@@ -37,12 +36,12 @@ data-width="1536" data-height="1024" />
 <figcaption>Created by Author with ChatGPT</figcaption>
 </figure>
 
-**The People’s Union USA is urging a boycott of McDonald’s this week.**
+**The Peopleâ€™s Union USA is urging a boycott of McDonaldâ€™s this week.**
 
-They cite rolled‑back DEI initiatives, price gouging, worker
-exploitation — and declining U.S. sales.
+They cite rolledâ€‘back DEI initiatives, price gouging, worker
+exploitationâ€Šâ€”â€Šand declining U.S. sales.
 
-**McDonald’s denies gouging, *saying prices are set by franchisees.***
+**McDonaldâ€™s denies gouging, *saying prices are set by franchisees.***
 
 </div>
 
@@ -62,11 +61,11 @@ exploitation — and declining U.S. sales.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-Activist group **The People’s Union USA** has launched
+Activist group **The Peopleâ€™s Union USA** has launched
 <a href="https://www.cnn.com/2025/06/24/food/mcdonalds-boycott"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.cnn.com/2025/06/24/food/mcdonalds-boycott"
-rel="noopener" target="_blank">a week‑long boycott of McDonald’s</a>
+rel="noopener" target="_blank">a weekâ€‘long boycott of McDonaldâ€™s</a>
 starting **June 24, 2025**, calling out the company for dismantling its
 diversity, equity, and inclusion (<a
 href="https://www.usatoday.com/story/money/2025/06/23/mcdonalds-2025-dei-boycott/84321975007/"
@@ -80,7 +79,7 @@ data-href="https://www.independent.co.uk/news/world/americas/mcdonalds-boycott-2
 rel="noopener" target="_blank">exploitative labor practices.</a>
 
 No violent or safety incidents have been reported **~** **the action is
-intended to hit McDonald’s profit and public image.**
+intended to hit McDonaldâ€™s profit and public image.**
 
 This comes amid a broader wave of corporate protests following the
 rollback of <a
@@ -112,7 +111,7 @@ year.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### A Brief History — (With Links)
+### A Brief Historyâ€Šâ€”â€Š(With Links)
 
 <figure id="67ce" class="graf graf--figure graf-after--h3">
 <img
@@ -135,8 +134,8 @@ U.S. consumer activism grows as rollback of DEI policies intensifies:
   class="markup--anchor markup--li-anchor"
   data-href="https://www.newsweek.com/boycott-economy-target-mcdonalds-walmart-amazon-2078140"
   rel="noopener" target="_blank">Similar boycotts</a> have targeted
-  Target, Walmart, Amazon, Nestlé and others.</span>
-- <span id="b1c4">The People’s Union USA, <a
+  Target, Walmart, Amazon, NestlÃ© and others.</span>
+- <span id="b1c4">The Peopleâ€™s Union USA, <a
   href="https://www.cbsnews.com/news/who-is-john-schwarz-man-behind-todays-feb-28-economic-blackout-and-founder-of-peoples-union-usa/"
   class="markup--anchor markup--li-anchor"
   data-href="https://www.cbsnews.com/news/who-is-john-schwarz-man-behind-todays-feb-28-economic-blackout-and-founder-of-peoples-union-usa/"
@@ -189,7 +188,7 @@ data-width="1024" data-height="1536" />
 
 #### Fall 2024 ~ E. coli Outbreak
 
-McDonald’s faced an <a
+McDonaldâ€™s faced an <a
 href="https://www.cidrap.umn.edu/e-coli/feds-say-probe-e-coli-outbreak-tied-mcdonalds-over#:~:text=The%20outbreak%20of%20E%20coli,on%20McDonald%27s%20Quarter%20Pounder%20hamburgers."
 class="markup--anchor markup--p-anchor"
 data-href="https://www.cidrap.umn.edu/e-coli/feds-say-probe-e-coli-outbreak-tied-mcdonalds-over#:~:text=The%20outbreak%20of%20E%20coli,on%20McDonald&#39;s%20Quarter%20Pounder%20hamburgers."
@@ -199,22 +198,22 @@ consumer trust.
 
 #### February 28, 2025 ~ Economic Blackout
 
-The People’s Union USA organized <a
+The Peopleâ€™s Union USA organized <a
 href="https://www.npr.org/2025/02/27/nx-s1-5311972/economic-blackout-february-28-explainer"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.npr.org/2025/02/27/nx-s1-5311972/economic-blackout-february-28-explainer"
-rel="noopener" target="_blank"><strong>a 24-hour countrywide “Economic
-Blackout” against companies rolling back DEI policies,</strong></a>
-including Amazon, Walmart, Target and McDonald’s.
+rel="noopener" target="_blank"><strong>a 24-hour countrywide â€œEconomic
+Blackoutâ€ against companies rolling back DEI policies,</strong></a>
+including Amazon, Walmart, Target and McDonaldâ€™s.
 
-#### March 28, 2025 ~ Follow‑up Boycott
+#### March 28, 2025 ~ Followâ€‘up Boycott
 
 They announced <a
 href="https://www.newsweek.com/nationwide-economic-blackout-starts-stores-that-are-exempt-boycott-2061474"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.newsweek.com/nationwide-economic-blackout-starts-stores-that-are-exempt-boycott-2061474"
-rel="noopener" target="_blank"><strong>a repeat “Economic
-Blackout”</strong></a> aimed at the same corporations — again targeting
+rel="noopener" target="_blank"><strong>a repeat â€œEconomic
+Blackoutâ€</strong></a> aimed at the same corporationsâ€Šâ€”â€Šagain targeting
 DEI rollback.
 
 #### January 7, 2025 ~ DEI Rollback & Franchise Lawsuit
@@ -223,13 +222,13 @@ DEI rollback.
 href="https://finance.yahoo.com/news/mcdonald-scales-back-dei-initiatives-100927172.html"
 class="markup--anchor markup--p-anchor"
 data-href="https://finance.yahoo.com/news/mcdonald-scales-back-dei-initiatives-100927172.html"
-rel="noopener" target="_blank"><strong>McDonald’s officially scaled back
+rel="noopener" target="_blank"><strong>McDonaldâ€™s officially scaled back
 DEI efforts,</strong></a> dropping targets like leadership
 representation goals and supplier diversity commitments.
 
 #### **June 23, 2025 ~ Week-Long Boycott Initiated**
 
-*People’s Union USA announces boycott*, citing “false DEI promises,”
+*Peopleâ€™s Union USA announces boycott*, citing â€œfalse DEI promises,â€
 worker mistreatment, tax evasion, and price hikes.
 
 On the 24th,
@@ -267,12 +266,12 @@ discrimination and joined the boycott.
 > <a href="https://www.instagram.com/reel/DLLmvwlJX9S/"
 > class="markup--anchor markup--pullquote-anchor"
 > data-href="https://www.instagram.com/reel/DLLmvwlJX9S/" rel="noopener"
-> target="_blank"><strong>“Let them feel it. Let them hear
-> us.”</strong></a>
+> target="_blank"><strong>â€œLet them feel it. Let them hear
+> us.â€</strong></a>
 
 #### ***Official response:***
 
-> McDonald’s claims core DEI commitments remain, denies price‑gouging,
+> McDonaldâ€™s claims core DEI commitments remain, denies priceâ€‘gouging,
 > and says that their franchisees set prices.
 
 </div>
@@ -303,15 +302,15 @@ data-width="1024" data-height="1536" data-is-featured="true" />
 <figcaption>Created by Author with ChatGPT</figcaption>
 </figure>
 
-**This isn’t just a fast food protest **— it’s part of **a larger wave
+**This isnâ€™t just a fast food protestâ€Š**â€”â€Šitâ€™s part of **a larger wave
 of consumer activism** pushing back on major U.S. corporations:
 
-- <span id="f075">**Financial pressure**: Boycotts aim to hit McDonald’s
+- <span id="f075">**Financial pressure**: Boycotts aim to hit McDonaldâ€™s
   margins at a critical time ~ <a
   href="https://www.cnbc.com/2025/05/01/mcdonalds-mcd-q1-2025-earnings.html"
   class="markup--anchor markup--li-anchor"
   data-href="https://www.cnbc.com/2025/05/01/mcdonalds-mcd-q1-2025-earnings.html"
-  rel="noopener" target="_blank">U.S. same‑store sales have declined.</a></span>
+  rel="noopener" target="_blank">U.S. sameâ€‘store sales have declined.</a></span>
 - <span id="0050">**DEI implications**: If consumer backlash grows,
   companies might think twice before reversing inclusion
   policies.</span>
@@ -324,7 +323,7 @@ of consumer activism** pushing back on major U.S. corporations:
 
 > Could this escalate into union-led campaigns?
 
-> Will McDonald’s reverse course — or dig in?
+> Will McDonaldâ€™s reverse courseâ€Šâ€”â€Šor dig in?
 
 > Will franchisees react if U.S. sales dip?
 
@@ -348,9 +347,9 @@ of consumer activism** pushing back on major U.S. corporations:
 
 ### Want news that respects your time?
 
-**👏 Clap** if you want more straight‑to‑the‑point explainers.\
-**💬 What’s your take?** We read every comment.\
-**📬 Follow** <a href="https://medium.com/the-balanced-sheet"
+**ðŸ‘ Clap** if you want more straightâ€‘toâ€‘theâ€‘point explainers.\
+**ðŸ’¬ Whatâ€™s your take?** We read every comment.\
+**ðŸ“¬ Follow** <a href="https://medium.com/the-balanced-sheet"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet"
 target="_blank"><strong>The Balance Sheet</strong></a> for sharp
@@ -361,3 +360,4 @@ coverage.
 </div>
 
 </div>
+

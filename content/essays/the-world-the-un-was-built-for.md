@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "How Postwar Human Rights, Migration Norms, and Global Institutions Were Designed for Europe ~ and Applied to a Very Different World"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/the-world-the-un-was-built-for.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-world-the-un-was-built-for-335093881846"
@@ -60,7 +59,7 @@ rel="noopener" target="_blank">NATO</a> ~ that still defines global
 order.
 
 These ideas were not abstract. They were shaped by specific societies,
-experiences, and assumptions. The West’s mistake was assuming they could
+experiences, and assumptions. The Westâ€™s mistake was assuming they could
 be applied indefinitely, without friction, and to populations that do
 not share the historical memory or moral foundations that made them
 work.
@@ -89,7 +88,7 @@ the Third World was neither neutral nor free of consequence**.
 
 ### The Postwar World That Shaped the United Nations
 
-The UN’s founding in 1945 was as much trauma response as diplomacy.
+The UNâ€™s founding in 1945 was as much trauma response as diplomacy.
 Europe had just endured industrial slaughter, mass displacement, and
 state collapse. Cities lay in ruins. Populations were hungry. The
 architects of the system understood how fragile order could be.
@@ -138,7 +137,7 @@ Images</a></figcaption>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Who Built the UN ~ and Who Didn’t
+### Who Built the UN ~ and Who Didnâ€™t
 
 <figure id="7995" class="graf graf--figure graf-after--h3">
 <img
@@ -150,7 +149,7 @@ decade.</em></strong> <em>Most of Africa, the Middle East, and South
 Asia were not yet sovereign states in 1945 and were not represented
 at</em> <a href="http://UN.org"
 class="markup--anchor markup--figure-anchor" data-href="http://UN.org"
-rel="noopener" target="_blank"><em>the system</em></a><em>’s
+rel="noopener" target="_blank"><em>the system</em></a><em>â€™s
 founding.</em></figcaption>
 </figure>
 
@@ -193,7 +192,7 @@ of power and survival.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Japan’s Choice ~ How a Non-Western State Made Western Institutions Work
+### Japanâ€™s Choice ~ How a Non-Western State Made Western Institutions Work
 
 Japan complicates the story in a useful way.
 
@@ -202,7 +201,7 @@ tools of survival rather than moral obligation. Following the Meiji
 Restoration and the devastation of World War II, Japan made a deliberate
 choice ~ preserve national continuity by internalizing Western legal,
 economic, and political forms faster and more thoroughly than its peers.
-This wasn’t submission ~ *it was strategy.*
+This wasnâ€™t submission ~ *it was strategy.*
 
 Japan adopted constitutional governance, independent courts,
 bureaucratic professionalism, property rights, contract enforcement, and
@@ -211,7 +210,7 @@ because they worked*. These institutions were not forced onto an alien
 society. They were embedded within one that already valued hierarchy,
 obligation, discipline, and social cohesion.
 
-Western law didn’t replace Japanese culture ~ it locked into it.
+Western law didnâ€™t replace Japanese culture ~ it locked into it.
 
 Japan arguably protects core Western institutional values more
 rigorously than many Western states themselves. The rule of law
@@ -228,7 +227,7 @@ are absorbed by societies willing and able to uphold them in good faith.
 
 Japan is not an exception to the argument.
 
-It’s evidence for it.
+Itâ€™s evidence for it.
 
 </div>
 
@@ -248,7 +247,7 @@ It’s evidence for it.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### What the “Third World” Actually Means ~ State Formation and Power
+### What the â€œThird Worldâ€ Actually Means ~ State Formation and Power
 
 The term *Third World* remains analytically useful because it describes
 a shared historical and structural condition, not a moral category.
@@ -345,7 +344,7 @@ The result is moral asymmetry.
 Western states increasingly treat humanitarian rules as unconditional,
 while some migrants arrive from systems where trust is low and politics
 is routinely zero-sum. In such environments, the rational strategy is to
-secure one’s group first, because the state cannot be relied upon to
+secure oneâ€™s group first, because the state cannot be relied upon to
 enforce rules impartially or consistently.
 
 Host societies absorb risk as newcomers gain leverage inside systems
@@ -388,7 +387,7 @@ Western societies increasingly behave as if prosperity and stability are
 permanent rather than contingent. That mismatch cannot hold.
 
 Order depends on shared assumptions about authority, obligation, and
-belonging. And when those assumptions don’t hold true?
+belonging. And when those assumptions donâ€™t hold true?
 
 > Institutions collapse.
 
@@ -421,7 +420,7 @@ of their citizens. When they do not, legitimate rule is dead.
 The postwar order assumed a common moral floor.\
 That assumption was faulty from the start.
 
-Japan’s postwar path reminds us that global order is built through
+Japanâ€™s postwar path reminds us that global order is built through
 disciplined adoption by societies that preserve internal cohesion.
 
 Global orders do not fail in a vacuum ~ they fall when great societies
@@ -445,13 +444,13 @@ forget their bloody past.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Author’s Note
+### Authorâ€™s Note
 
 This essay is an attempt to describe how global institutions actually
 formed ~ not how we wish they had.
 
-It’s not a policy prescription, nor an argument for retreat or
-exclusion. It’s a structural diagnosis of a system built under specific
+Itâ€™s not a policy prescription, nor an argument for retreat or
+exclusion. Itâ€™s a structural diagnosis of a system built under specific
 historical conditions and later extended far beyond them.
 
 If you disagree, I welcome it ~ but only on the merits of the argument
@@ -464,3 +463,4 @@ Read closely. Question the assumptions. Engage in good faith.
 </div>
 
 </div>
+

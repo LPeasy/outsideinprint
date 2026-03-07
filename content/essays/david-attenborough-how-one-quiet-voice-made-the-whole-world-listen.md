@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "From black-and-white BBC to the edge of extinction and back"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen-89a9b46c27d5"
@@ -36,7 +35,7 @@ class="graf-image" data-image-id="1*pVDY0N3q1nmhQoCfyVkTYg@2x.jpeg"
 data-width="1110" data-height="982" />
 </figure>
 
-**Minimalist narration isn’t supposed to change the world.**
+**Minimalist narration isnâ€™t supposed to change the world.**
 
 > ***But it did.***
 
@@ -57,7 +56,7 @@ again and again:
 
 Broadcaster, naturalist, author, and planetary conscience.
 
-> He was born in 1926, and he’s been showing the world to itself ever
+> He was born in 1926, and heâ€™s been showing the world to itself ever
 > since.
 
 </div>
@@ -100,15 +99,15 @@ He boiled down animal bones.
 
 He mapped local wildlife ranges before he hit puberty.
 
-> “I was quite obsessive about natural history,” he later admitted.
-> “That was the beginning of everything.”
+> â€œI was quite obsessive about natural history,â€ he later admitted.
+> â€œThat was the beginning of everything.â€
 
 He studied Natural Sciences at Cambridge, specializing in geology and
 zoology.
 
 After two years in the Royal Navy, he stumbled into a BBC training
 program in 1952 ~ not because he dreamed of being on TV, but because
-**he was “mildly irritated by the way animals were being presented.”**
+**he was â€œmildly irritated by the way animals were being presented.â€**
 
 ***So he rewrote the script.***
 
@@ -130,7 +129,7 @@ program in 1952 ~ not because he dreamed of being on TV, but because
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### The Zoo Quest Years (1954–1963): Travel, Teeth, and Film Canisters
+#### The Zoo Quest Years (1954â€“1963): Travel, Teeth, and Film Canisters
 
 <figure id="d217" class="graf graf--figure graf-after--h4">
 <img
@@ -141,15 +140,15 @@ data-width="539" data-height="549" />
 
 > Attenborough with Zoo Quest \| Source: BBC
 
-**Attenborough’s first breakthrough was Zoo Quest, a documentary series
+**Attenboroughâ€™s first breakthrough was Zoo Quest, a documentary series
 that combined wildlife footage with on-location travelogues.**
 
 > This was the 1950s.
 
-Flying to Borneo to film orangutans wasn’t just rare ~ ***it was
+Flying to Borneo to film orangutans wasnâ€™t just rare ~ ***it was
 radical.***
 
-He didn’t narrate from a sound booth. He hiked the jungle with a 16mm
+He didnâ€™t narrate from a sound booth. He hiked the jungle with a 16mm
 camera, dodging mosquitoes and malaria while talking directly to the
 lens.
 
@@ -157,12 +156,12 @@ lens.
 
 One episode drew criticism for showing a monkey being fed to a snake.
 
-> “I was accused of promoting cruelty,” he recalled.
+> â€œI was accused of promoting cruelty,â€ he recalled.
 
-> “But that was nature doing what it does.”
+> â€œBut that was nature doing what it does.â€
 
 **It was the beginning of a lifelong theme: *show nature honestly, even
-when it’s hard to watch.***
+when itâ€™s hard to watch.***
 
 </div>
 
@@ -182,7 +181,7 @@ when it’s hard to watch.***
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Building the BBC’s Natural History Unit: The Big Picture
+#### Building the BBCâ€™s Natural History Unit: The Big Picture
 
 <figure id="780d" class="graf graf--figure graf-after--h4">
 <img
@@ -193,11 +192,11 @@ data-width="976" data-height="549" />
 
 > Attenborough as Director \| Source: BBC
 
-**In the 1970s, Attenborough wasn’t just hosting programs ~ *he was
+**In the 1970s, Attenborough wasnâ€™t just hosting programs ~ *he was
 shaping the network.***
 
 As Controller of BBC Two and later Director of Programming, he
-commissioned landmark shows like Monty Python’s Flying Circus and
+commissioned landmark shows like Monty Pythonâ€™s Flying Circus and
 Civilisation, while quietly building the most ambitious wildlife
 production team in history.
 
@@ -242,9 +241,9 @@ class="graf-image" data-image-id="1*MF9cQfbxNEEqm55Dh5P9lA@2x.jpeg"
 data-width="528" data-height="549" />
 </figure>
 
-> Everyone’s Favorite Nature Uncle \| Source: BBC
+> Everyoneâ€™s Favorite Nature Uncle \| Source: BBC
 
-**Attenborough didn’t shout. He didn’t moralize. He didn’t even raise
+**Attenborough didnâ€™t shout. He didnâ€™t moralize. He didnâ€™t even raise
 his eyebrows.**
 
 Instead, ***he whispered awe into the script.***
@@ -268,8 +267,8 @@ collapse.
 
 In the booth, Attenborough records the final line:
 
-> “I never wanted to be the star,” he once said. “The animals are the
-> stars.”
+> â€œI never wanted to be the star,â€ he once said. â€œThe animals are the
+> stars.â€
 
 **But somehow, *his voice always feels like the soul of the scene.***
 
@@ -291,7 +290,7 @@ In the booth, Attenborough records the final line:
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Planet Earth (2006–2016): Peak Nature
+#### Planet Earth (2006â€“2016): Peak Nature
 
 <figure id="f412" class="graf graf--figure graf-after--h4">
 <img
@@ -315,15 +314,15 @@ showed nature*** not just as subject, but ***as a spectacle***.
 
 > It was cinema with feathers.
 
-Attenborough didn’t just narrate the facts.
+Attenborough didnâ€™t just narrate the facts.
 
 ***He made you feel them:***
 
-> “In the forest canopy, time slows…
+> â€œIn the forest canopy, time slowsâ€¦
 
-> The sun filters through like ancient, stained glass.”
+> The sun filters through like ancient, stained glass.â€
 
-It wasn’t just data and images.
+It wasnâ€™t just data and images.
 
 > ***It was reverence. A meditation.***
 
@@ -376,7 +375,7 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-**Attenborough always respected nature’s systems.**
+**Attenborough always respected natureâ€™s systems.**
 
 But around 2000, ***something shifted.***
 
@@ -384,22 +383,22 @@ But around 2000, ***something shifted.***
 
 In State of the Planet (2000), he asked:
 
-> “Can we go on living like this?”
+> â€œCan we go on living like this?â€
 
-By 2020, he’d stopped asking that question.
+By 2020, heâ€™d stopped asking that question.
 
-In A Life on Our Planet, Attenborough gave what he called his “witness
-statement.” He laid out the damage: rainforest loss, warming seas, mass
+In A Life on Our Planet, Attenborough gave what he called his â€œwitness
+statement.â€ He laid out the damage: rainforest loss, warming seas, mass
 extinction.
 
 Then he did something rare in environmental media: he offered a path
 back:
 
-> “Rewild the world,” he said.
+> â€œRewild the world,â€ he said.
 
-> “It’s not too late.”
+> â€œItâ€™s not too late.â€
 
-It wasn’t a threat. ***It was an invitation.***
+It wasnâ€™t a threat. ***It was an invitation.***
 
 </div>
 
@@ -433,7 +432,7 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-**Attenborough’s documentaries don’t just inform.**
+**Attenboroughâ€™s documentaries donâ€™t just inform.**
 
 > They breathe.
 
@@ -452,7 +451,7 @@ He watches the cut, sits in a sound booth, and begins to speak.
 
 > The tone is never hysterical.
 
-This isn’t panic porn. ***It’s planetary storytelling.***
+This isnâ€™t panic porn. ***Itâ€™s planetary storytelling.***
 
 </div>
 
@@ -483,7 +482,7 @@ data-width="555" data-height="549" />
 
 > Attenborough Late Years \| Source: BBC
 
-**Attenborough’s work has won nearly every award you can name:**
+**Attenboroughâ€™s work has won nearly every award you can name:**
 
 > Emmys, BAFTAs, the Order of Merit, two knighthoods (the second from
 > Queen Elizabeth in 1985, and a Knight Grand Cross from King Charles in
@@ -497,10 +496,10 @@ In 2021, a new research vessel was nearly named ***Boaty McBoatface***,
 but public outcry led to the more sensible **RRS Sir David
 Attenborough.**
 
-He’s been spoofed by The Simpsons, memed by Gen Z, and revered by
+Heâ€™s been spoofed by The Simpsons, memed by Gen Z, and revered by
 climate scientists around the world.
 
-> And he’s still working.
+> And heâ€™s still working.
 
 In 2024, at **age 98**, he helped narrate a UN-backed rewilding campaign
 and gave a closing speech at COP29 that was streamed to schools across
@@ -553,7 +552,7 @@ Not with that voice, that track record, and that moral weight.
 
 > He just showed us what we were losing and asked us to care.
 
-He didn’t just narrate nature.
+He didnâ€™t just narrate nature.
 
 **He gave it a voice.**
 
@@ -575,7 +574,7 @@ He didn’t just narrate nature.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Author’s Note
+#### Authorâ€™s Note
 
 <figure id="5698" class="graf graf--figure graf-after--h4">
 <img
@@ -592,10 +591,10 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-If Attenborough ever moved you ~ even once ~ drop a 🌍 in the comments.
+If Attenborough ever moved you ~ even once ~ drop a ðŸŒ in the comments.
 
-I’m building a collection of modern bios that read like stories, not
-résumés. If you enjoyed this one, hit the 👏🏽 and follow along.
+Iâ€™m building a collection of modern bios that read like stories, not
+rÃ©sumÃ©s. If you enjoyed this one, hit the ðŸ‘ðŸ½ and follow along.
 
 There are plenty more voices worth hearing ~ before they fade out.
 
@@ -606,3 +605,4 @@ Who should I profile next? Let me know below.
 </div>
 
 </div>
+

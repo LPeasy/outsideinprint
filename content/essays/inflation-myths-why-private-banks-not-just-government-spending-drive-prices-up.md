@@ -4,10 +4,9 @@ date: 2025-03-15
 draft: false
 slug: "inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up"
 section_label: "Essay"
-subtitle: "Politicians blame deficits — but what if the real culprit is the banking system?"
+subtitle: "Politicians blame deficits â€” but what if the real culprit is the banking system?"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up-a59f477e0d5c"
@@ -15,17 +14,17 @@ medium_source_url: "https://medium.com/@lawtonperret/inflation-myths-why-private
 
 Inflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up
 
-Politicians blame deficits — but what if the real culprit is the banking system?
+Politicians blame deficitsâ€Šâ€”â€Šbut what if the real culprit is the banking system?
 
 ![](https://cdn-images-1.medium.com/max/800/1*GhEmY85-n4L3S2C_SjZVLw@2x.jpeg)
 
 Photo by Elimende Inagella on Unsplash
 
-Inflation dominates headlines, but most people misunderstand what’s really driving it.
+Inflation dominates headlines, but most people misunderstand whatâ€™s really driving it.
 
-Turn on any financial news channel, and you’ll hear it:
+Turn on any financial news channel, and youâ€™ll hear it:
 
-“Inflation?Government spending!THE DEFICIT!THE DEBT!”The argument is simple — Washington prints money, deficits grow, and prices rise.
+â€œInflation?Government spending!THE DEFICIT!THE DEBT!â€The argument is simpleâ€Šâ€”â€ŠWashington prints money, deficits grow, and prices rise.
 
 But is that the full story?
 
@@ -33,23 +32,23 @@ What if banks, not just Washington, are fueling inflation?
 
 Every time a bank issues a loan, it creates new money.
 
-When you deposit money, the bank doesn’t just store it — it loans it out, multiplying the money supply in the process.
+When you deposit money, the bank doesnâ€™t just store itâ€Šâ€”â€Šit loans it out, multiplying the money supply in the process.
 
-They don’t have to keep all of your money “in the bank” so to say.
+They donâ€™t have to keep all of your money â€œin the bankâ€ so to say.
 
-In fact, the bank doesn’t have to keep ANY of your money in the vault.
+In fact, the bank doesnâ€™t have to keep ANY of your money in the vault.
 
-This process — multiplied across millions of loans — drives inflation just as government spending does.
+This processâ€Šâ€”â€Šmultiplied across millions of loansâ€Šâ€”â€Šdrives inflation just as government spending does.
 
-Unlike government spending — debated, voted on, and publicly scrutinized — private credit expands invisibly, behind the scenes, shaping inflation with little oversight.
+Unlike government spendingâ€Šâ€”â€Šdebated, voted on, and publicly scrutinizedâ€Šâ€”â€Šprivate credit expands invisibly, behind the scenes, shaping inflation with little oversight.
 
-This essay takes a hard look at the conventional wisdom on inflation — specifically, the idea that government spending is always the main culprit.
+This essay takes a hard look at the conventional wisdom on inflationâ€Šâ€”â€Šspecifically, the idea that government spending is always the main culprit.
 
-Instead of accepting the usual talking points, we examine how government deficits, private credit creation, and Federal Reserve policy have shaped inflation across different economic eras: 1965 — 1985, pre- and post-2008, and 2020 — present.
+Instead of accepting the usual talking points, we examine how government deficits, private credit creation, and Federal Reserve policy have shaped inflation across different economic eras: 1965â€Šâ€”â€Š1985, pre- and post-2008, and 2020â€Šâ€”â€Špresent.
 
 Along the way, we explore how supply chain breakdowns and financial deregulation have influenced inflation in ways that rarely make the headlines.
 
-The goal?To move beyond simplistic explanations and uncover what’s really driving inflation — because when politicians and pundits reduce it to just government spending, they’re leaving out half the story.
+The goal?To move beyond simplistic explanations and uncover whatâ€™s really driving inflationâ€Šâ€”â€Šbecause when politicians and pundits reduce it to just government spending, theyâ€™re leaving out half the story.
 
 How Money Supply Grows
 
@@ -71,9 +70,9 @@ Commercial banks create money through fractional reserve lending.
 
 When banks issue loans, they expand the money supply beyond what exists in reserves, increasing the total amount of money in circulation.
 
-Both mechanisms cause inflation if the money supply grows faster than the real economy’s productive capacity.However, the relative impact of these forces varies across different time periods.
+Both mechanisms cause inflation if the money supply grows faster than the real economyâ€™s productive capacity.However, the relative impact of these forces varies across different time periods.
 
-The Inflation Crisis of 1965 — 1985
+The Inflation Crisis of 1965â€Šâ€”â€Š1985
 
 ![](https://cdn-images-1.medium.com/max/800/1*1DPFXwlRZcRh-KFEaZ5Vkw@2x.jpeg)
 
@@ -85,13 +84,13 @@ Many attribute this inflationary era to government spending, particularly on the
 
 While government spending played a role, the private sector also contributed to inflation through an explosion in mortgage lending and corporate debt. The 1970s saw a rapid expansion of consumer credit, as financial institutions pushed new forms of loans.
 
-Easy access to credit increased spending power, raising demand for housing, consumer goods, and services — all of which drove up prices alongside federal deficits and oil shocks.
+Easy access to credit increased spending power, raising demand for housing, consumer goods, and servicesâ€Šâ€”â€Šall of which drove up prices alongside federal deficits and oil shocks.
 
 Federal Reserve policies under Arthur Burns and G. William Miller failed to rein in inflation, as interest rates remained too low relative to money supply growth.
 
-It wasn’t until Paul Volcker’s aggressive rate hikes in the early 1980s that inflation was brought under control — at the cost of a severe recession.
+It wasnâ€™t until Paul Volckerâ€™s aggressive rate hikes in the early 1980s that inflation was brought under controlâ€Šâ€”â€Šat the cost of a severe recession.
 
-While government deficits grew significantly during this period, private credit creation played an equally critical role in amplifying inflation.Fast forward a few decades, and a new kind of inflationary crisis loomed — only this time, the private sector took center stage.
+While government deficits grew significantly during this period, private credit creation played an equally critical role in amplifying inflation.Fast forward a few decades, and a new kind of inflationary crisis loomedâ€Šâ€”â€Šonly this time, the private sector took center stage.
 
 The 2008 Financial Crisis and Private Debt Collapse
 
@@ -111,15 +110,15 @@ This made it easier for financial institutions to expand credit aggressively, fu
 
 When the bubble burst, private debt contraction led to deflationary pressures, despite federal stimulus efforts.
 
-The Federal Reserve responded with quantitative easing (QE) — purchasing financial assets to inject liquidity into the economy.
+The Federal Reserve responded with quantitative easing (QE)â€Šâ€”â€Špurchasing financial assets to inject liquidity into the economy.
 
 However, because banks were unwilling to lend aggressively, much of this new money remained in reserves rather than entering circulation.
 
 Private credit contraction had a greater impact on inflation than government stimulus.Despite record deficits, inflation remained low because private money creation declined.
 
-While the 2008 crisis saw inflation subdued due to the collapse of private lending, the COVID-19 era presented a stark contrast —
+While the 2008 crisis saw inflation subdued due to the collapse of private lending, the COVID-19 era presented a stark contrastâ€Šâ€”
 
-Government stimulus and private credit expansion occurred simultaneously; the perfect conditions for inflation to take off.2020 — Present: A Perfect Storm for Inflation
+Government stimulus and private credit expansion occurred simultaneously; the perfect conditions for inflation to take off.2020â€Šâ€”â€ŠPresent: A Perfect Storm for Inflation
 
 ![](https://cdn-images-1.medium.com/max/800/1*fPl5hh-YWtl0T5Xjgjhnww@2x.jpeg)
 
@@ -129,25 +128,25 @@ The COVID-19 pandemic introduced a new inflationary environment, as both governm
 
 - Trillions in stimulus checks, enhanced unemployment benefits, and PPP loans funneled money directly into the economy.
 - At the same time, near-zero interest rates encouraged a private sector borrowing boom, particularly in housing and financial markets.
-The U.S. government injected approximately $5 trillion in pandemic relief spending, while mortgage lending skyrocketed — home prices surged 20% in 2021 alone.
+The U.S. government injected approximately $5 trillion in pandemic relief spending, while mortgage lending skyrocketedâ€Šâ€”â€Šhome prices surged 20% in 2021 alone.
 
 By 2021, inflation hit its highest level in four decades, exceeding 9% year-over-year.Unlike the post-2008 period, where monetary expansion remained largely in financial markets, COVID-era stimulus reached consumers and businesses directly, driving up demand.
 
 Meanwhile, global supply chain disruptions further constrained supply, intensifying price pressures.
 
-The inflation spike of 2020 — 2023 was driven by both government stimulus and private credit expansion, making it one of the rare periods where both forces contributed significantly to money supply growth.
+The inflation spike of 2020â€Šâ€”â€Š2023 was driven by both government stimulus and private credit expansion, making it one of the rare periods where both forces contributed significantly to money supply growth.
 
-The Federal Reserve’s Role in Private Debt Creation
+The Federal Reserveâ€™s Role in Private Debt Creation
 
 ![](https://cdn-images-1.medium.com/max/800/1*ZaOVJ3pZadqQXOuUnYh6Tg@2x.jpeg)
 
 Photo by Etienne Martin on Unsplash
 
-One of the most significant levers affecting private credit creation is the Federal Reserve’s interest rate policy.
+One of the most significant levers affecting private credit creation is the Federal Reserveâ€™s interest rate policy.
 
 The Fed sets the federal funds rate, which influences borrowing costs across the economy.
 
-Low interest rates encourage borrowing by reducing the cost of loans, leading to increased private sector credit creation.This can accelerate economic growth…
+Low interest rates encourage borrowing by reducing the cost of loans, leading to increased private sector credit creation.This can accelerate economic growthâ€¦
 
 It can also fuel inflation if lending expands too quickly.
 
@@ -157,7 +156,7 @@ During periods of inflation, the Fed typically raises interest rates to curb exc
 
 - For example, in the early 1980s, Paul Volcker aggressively increased rates to over 20%, triggering a recession but ultimately bringing inflation under control.
 - Conversely, the near-zero interest rates following the 2008 crisis and during the COVID-19 pandemic contributed to private credit expansion, fueling economic activity but also raising inflation risks.
-The Federal Reserve’s interest rate decisions have a direct impact on private debt creation, influencing whether inflationary pressures intensify or subside.
+The Federal Reserveâ€™s interest rate decisions have a direct impact on private debt creation, influencing whether inflationary pressures intensify or subside.
 
 Supply Chain Shocks and Post-COVID Inflation
 
@@ -175,9 +174,9 @@ The semiconductor shortage, which crippled the auto and electronics industries, 
 
 While government stimulus and private credit growth fueled demand-side inflation, supply constraints played a major role in limiting economic output, further pushing prices higher.
 
-Inflation post-2020 was not just a monetary phenomenon — it was also a function of severe supply constraints caused by global production and logistics breakdowns.
+Inflation post-2020 was not just a monetary phenomenonâ€Šâ€”â€Šit was also a function of severe supply constraints caused by global production and logistics breakdowns.
 
-Supply shortages set the stage — but some corporations didn’t just adjust prices, they exploited the moment, padding their profits while consumers suffered.
+Supply shortages set the stageâ€Šâ€”â€Šbut some corporations didnâ€™t just adjust prices, they exploited the moment, padding their profits while consumers suffered.
 
 Greedflation and Corporate Pricing Power
 
@@ -185,7 +184,7 @@ Greedflation and Corporate Pricing Power
 
 Photo by Alexander Grey on Unsplash
 
-While supply chain constraints were a major driver of inflation, some corporations capitalized on the crisis — amplifying inflation even further.
+While supply chain constraints were a major driver of inflation, some corporations capitalized on the crisisâ€Šâ€”â€Šamplifying inflation even further.
 
 Many industries, particularly those dominated by a few large firms, saw profit margins rise as
 
@@ -197,25 +196,25 @@ Conclusion: Rethinking Inflation Narratives
 
 Photo by Sushil Nash on Unsplash
 
-The idea that government spending alone drives inflation is misleading.While deficits contribute, private credit expansion often plays an even larger role — especially when borrowing is cheap and banks are eager to lend.
+The idea that government spending alone drives inflation is misleading.While deficits contribute, private credit expansion often plays an even larger roleâ€Šâ€”â€Šespecially when borrowing is cheap and banks are eager to lend.
 
-The 2008 crisis showed that inflation doesn’t always follow government stimulus, while the post-COVID era proved that when government spending and private lending surge together, inflation can spiral out of control.
+The 2008 crisis showed that inflation doesnâ€™t always follow government stimulus, while the post-COVID era proved that when government spending and private lending surge together, inflation can spiral out of control.
 
 Politicians and media figures reduce this complexity to a soundbite:
 
-“Government spending causes inflation.”It’s a half-truth that distorts public understanding and leads to bad policy.
+â€œGovernment spending causes inflation.â€Itâ€™s a half-truth that distorts public understanding and leads to bad policy.
 
 If people believe deficits are the sole cause, they may support harmful austerity measures (think deep spending cuts that weaken public investment) while ignoring financial deregulation, reckless lending, and private sector credit booms.
 
-Inflation isn’t just about government spending — it’s a system where private credit, Fed policy, and supply shocks all interact.The next time a politician blames inflation on government deficits alone, recognize it for what it is:
+Inflation isnâ€™t just about government spendingâ€Šâ€”â€Šitâ€™s a system where private credit, Fed policy, and supply shocks all interact.The next time a politician blames inflation on government deficits alone, recognize it for what it is:
 
-A misleading half-truth.The real story is more complex — and the sooner we understand it, the sooner we can demand better solutions.
+A misleading half-truth.The real story is more complexâ€Šâ€”â€Šand the sooner we understand it, the sooner we can demand better solutions.
 
 About the Author
 
 Lawton is an economist who writes about markets, policy, and the forces shaping American life. His essays blend historical insight with data-driven analysis, covering everything from trade wars and inflation to labor markets and financial bubbles.
 
-When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
+When he isnâ€™t writing essays, heâ€™s making music, cooking food, and hanging out with his cat, Boudin.
 
 Read more of his work on Medium.
 
@@ -225,7 +224,8 @@ Photo by Sincerely Media on Unsplash
 
 M2
 View data of a measure of the U.S. money supply that includes all components of M1 plus several less-liquid assets.fred.stlouisfed.orgSupply- and Demand-Driven PCE Inflation - San Francisco Fed
-Supply- and Demand-Driven PCE Inflation updates data on the contributions to personal consumption expenditures (PCE)…www.frbsf.orgBudget and Economic Data
-CBO regularly publishes data to accompany some of its key reports. These data have been published in the Budget and…www.cbo.govFederal Funds Effective Rate
-View data of the Effective Federal Funds Rate, or the interest rate depository institutions charge each other for…fred.stlouisfed.orgEconomic Research Data
+Supply- and Demand-Driven PCE Inflation updates data on the contributions to personal consumption expenditures (PCE)â€¦www.frbsf.orgBudget and Economic Data
+CBO regularly publishes data to accompany some of its key reports. These data have been published in the Budget andâ€¦www.cbo.govFederal Funds Effective Rate
+View data of the Effective Federal Funds Rate, or the interest rate depository institutions charge each other forâ€¦fred.stlouisfed.orgEconomic Research Data
 The Federal Reserve Board of Governors in Washington DC.www.federalreserve.gov
+

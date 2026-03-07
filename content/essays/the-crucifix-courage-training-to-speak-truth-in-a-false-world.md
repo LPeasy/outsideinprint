@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "The Christian image does something to the human nervous system ~"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/the-crucifix-courage-training-to-speak-truth-in-a-false-world.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-crucifix-courage-training-to-speak-truth-in-a-false-world-b38c9294f3c9"
@@ -35,27 +34,27 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h4">
 src="https://cdn-images-1.medium.com/max/800/1*BD9RfIJ3mk3o1YGQFDhi_g.png"
 class="graf-image" data-image-id="1*BD9RfIJ3mk3o1YGQFDhi_g.png"
 data-width="1024" data-height="1536" />
-<figcaption>“The Crucifix” ~ art by author with gpt4-o</figcaption>
+<figcaption>â€œThe Crucifixâ€ ~ art by author with gpt4-o</figcaption>
 </figure>
 
-Walk into a hospital, a church, or your grandmother’s living room and
+Walk into a hospital, a church, or your grandmotherâ€™s living room and
 you might see it: **a crucifix on the wall.**
 
-Not an “empty cross,” not a tasteful logo ~ ***the crucifix.***
+Not an â€œempty cross,â€ not a tasteful logo ~ ***the crucifix.***
 
 > A body. Wounds. Humiliation. Public execution.
 
-It’s quite strange when you really think about it.
+Itâ€™s quite strange when you really think about it.
 
 Christians made the central symbol of their faith an instrument of
-torture — and they refused to sanitize it. They didn’t pick a sunrise.
-They didn’t pick a crown. No rainbows. No moral slogans.
+tortureâ€Šâ€”â€Šand they refused to sanitize it. They didnâ€™t pick a sunrise.
+They didnâ€™t pick a crown. No rainbows. No moral slogans.
 
 **They picked the worst thing possible ~ and made it their
 cornerstone.**
 
 People talk about the crucifix as a reminder of love, sacrifice,
-forgiveness, salvation. All true. Still, there’s another dimension that
+forgiveness, salvation. All true. Still, thereâ€™s another dimension that
 feels obvious once you say it out loud, and weirdly absent from most
 discussions.
 
@@ -66,7 +65,7 @@ leaders! When we look at his body, pierced and bleeding, we see the
 worst possible consequence imaginable. And we are called to speak the
 truth as well.
 
-> **“… take up your cross and follow me.”\
+> **â€œâ€¦ take up your cross and follow me.â€\
 > - Matthew 16:24**
 
 **Jesus calls us to speak the truth even when we know the cost** ~ when
@@ -99,15 +98,15 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
 src="https://cdn-images-1.medium.com/max/800/1*K95sTW7beSb9u43evrxfpQ.png"
 class="graf-image" data-image-id="1*K95sTW7beSb9u43evrxfpQ.png"
 data-width="1536" data-height="1024" />
-<figcaption>“Exposure Therapy” ~ art by author with gpt4-o</figcaption>
+<figcaption>â€œExposure Therapyâ€ ~ art by author with gpt4-o</figcaption>
 </figure>
 
-In psychotherapy, there’s a well-known idea called <a
+In psychotherapy, thereâ€™s a well-known idea called <a
 href="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"
 rel="noopener" target="_blank"><strong>exposure therapy</strong></a>. In
-simple terms, it’s a structured process where a person gradually and
+simple terms, itâ€™s a structured process where a person gradually and
 repeatedly faces what they fear, until the fear response loses its grip
 and avoidance stops running their life.
 
@@ -136,7 +135,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*1mF
 You can think of it like this: **fear thrives in the dark.** Avoidance
 feeds it. **Exposure changes the relationship.**
 
-A person learns, over time, “I can face this. It doesn’t own me.”
+A person learns, over time, â€œI can face this. It doesnâ€™t own me.â€
 
 > Now take that idea and look at the crucifix again.
 
@@ -166,7 +165,7 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
 src="https://cdn-images-1.medium.com/max/800/1*RcPMBxzXBffmwHXWShK72Q.png"
 class="graf-image" data-image-id="1*RcPMBxzXBffmwHXWShK72Q.png"
 data-width="1536" data-height="1024" />
-<figcaption>“All Eyes on Christ” ~ art by author with
+<figcaption>â€œAll Eyes on Christâ€ ~ art by author with
 gpt4-o</figcaption>
 </figure>
 
@@ -178,34 +177,34 @@ You are not promised safety.
 
 Jesus says it directly:
 
-> **“If the world hates you, you know that it hated Me before it hated
-> you.”\
+> **â€œIf the world hates you, you know that it hated Me before it hated
+> you.â€\
 > - John 15:18**
 
-That’s not poetic fluff. It’s a promise.
+Thatâ€™s not poetic fluff. Itâ€™s a promise.
 
 The crucifix is the visual representation of that promise ~ raw exposure
-to what “hate” looks like when it wins in the short run.
+to what â€œhateâ€ looks like when it wins in the short run.
 
-The image doesn’t let you pretend the truth is always rewarded.\
-It doesn’t let you pretend that goodness always gets applause.
+The image doesnâ€™t let you pretend the truth is always rewarded.\
+It doesnâ€™t let you pretend that goodness always gets applause.
 
-It doesn’t let you believe the lie that “if I’m kind and reasonable,
-people will be kind and reasonable back.”
+It doesnâ€™t let you believe the lie that â€œif Iâ€™m kind and reasonable,
+people will be kind and reasonable back.â€
 
-Sometimes they won’t. Sometimes they’ll do the opposite.
+Sometimes they wonâ€™t. Sometimes theyâ€™ll do the opposite.
 
-**The crucifix says: “The most holy man to ever live, God incarnate on
+**The crucifix says: â€œThe most holy man to ever live, God incarnate on
 Earth, was murdered for speaking the truth. This is what will happen to
-you, too, my son.”**
+you, too, my son.â€**
 
 The world is essentially a false place, and those who control this
 earthly realm will do anything within their power to avoid being exposed
 by the truth. Part of our calling as followers of Christ is to recognize
-and refuse the world’s lies and deceit.
+and refuse the worldâ€™s lies and deceit.
 
-> **“Woe to you, scribes and Pharisees, hypocrites! For you shut up the
-> kingdom of heaven against men; for you neither go in yourselves…”\
+> **â€œWoe to you, scribes and Pharisees, hypocrites! For you shut up the
+> kingdom of heaven against men; for you neither go in yourselvesâ€¦â€\
 > - Matthew 23:13**
 
 The Word of God exists in us ~ accepting the lies of this world
@@ -231,7 +230,7 @@ crowd, and it will almost always upset the people in power.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Truth-telling is the offense ~ not “meanness”
+### Truth-telling is the offense ~ not â€œmeannessâ€
 
 <figure id="c212"
 class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
@@ -239,23 +238,23 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
 src="https://cdn-images-1.medium.com/max/800/1*nif-260LdnJX0YkIRtLemQ.png"
 class="graf-image" data-image-id="1*nif-260LdnJX0YkIRtLemQ.png"
 data-width="1536" data-height="1024" />
-<figcaption>“Truth to Power” ~ art by author with gpt4-o</figcaption>
+<figcaption>â€œTruth to Powerâ€ ~ art by author with gpt4-o</figcaption>
 </figure>
 
 A lot of modern moral life is built around a social rule that goes
-something like: **“Be a good person, and everyone will love you.”**
+something like: **â€œBe a good person, and everyone will love you.â€**
 
 People treat conflict as proof that you did something wrong. If you get
 punished, then (obviously) you must have deserved it.
 
 The gospels demonstrate the naivety of that kind of simple logic.
 
-Jesus wasn’t executed because He was “rude.” He was executed because the
+Jesus wasnâ€™t executed because He was â€œrude.â€ He was executed because the
 truth threatened people who were invested in a counterfeit moral order.
 
 #### He talks about truth as liberation:
 
-> **“You shall know the truth, and the truth shall make you free.”\
+> **â€œYou shall know the truth, and the truth shall make you free.â€\
 > - John 8:32**
 
 **The truth is not neutral.** It breaks the spell. It dissolves a lot of
@@ -264,10 +263,10 @@ profitable arrangements ~ social, religious, political, personal.
 If you are a person whose identity and authority depend on that worldly
 spell, *you will always hate the one breaking it.*
 
-That’s one reason the crucifix matters so much as an image.\
-The message of the crucifix isn’t just that “suffering happened.”
+Thatâ€™s one reason the crucifix matters so much as an image.\
+The message of the crucifix isnâ€™t just that â€œsuffering happened.â€
 
-**It’s that “suffering happened *because the truth was spoken*.”**
+**Itâ€™s that â€œsuffering happened *because the truth was spoken*.â€**
 
 </div>
 
@@ -287,7 +286,7 @@ The message of the crucifix isn’t just that “suffering happened.”
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### The parables weren’t just cute stories ~ Jesus was speaking over the crowd’s head
+### The parables werenâ€™t just cute stories ~ Jesus was speaking over the crowdâ€™s head
 
 <figure id="b499"
 class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
@@ -295,7 +294,7 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
 src="https://cdn-images-1.medium.com/max/800/1*WxmsIUuQVIfbLa_ce5mEpg.png"
 class="graf-image" data-image-id="1*WxmsIUuQVIfbLa_ce5mEpg.png"
 data-width="1536" data-height="1024" />
-<figcaption>“Over their heads” ~ art by author with gpt4-o</figcaption>
+<figcaption>â€œOver their headsâ€ ~ art by author with gpt4-o</figcaption>
 </figure>
 
 Jesus spoke in parables that largely masked meaning from the masses,
@@ -303,8 +302,8 @@ while religious leaders clearly understood, and they hated Him for it.
 
 #### Jesus gives a pretty blunt statement about the parables functioning as both revelation and concealment:
 
-> **“Because it has been given to you to know the mysteries of the
-> kingdom of heaven, but to them it has not been given.”\
+> **â€œBecause it has been given to you to know the mysteries of the
+> kingdom of heaven, but to them it has not been given.â€\
 > - Matthew 13:11**
 
 A person can be highly trained and still closed ~ and that kind of
@@ -314,7 +313,7 @@ new information out of hand is especially pernicious when found in
 places of authority.
 
 (Generally, I find when one raises their hackles in response to even
-cursory questioning… they are concealing some deep seated deceit or
+cursory questioningâ€¦ they are concealing some deep seated deceit or
 falsehood that may undergird their entire belief system or power
 structure.)
 
@@ -349,32 +348,32 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
 src="https://cdn-images-1.medium.com/max/800/1*dC-ijTBVEKSFCR1hTeqGsw.png"
 class="graf-image" data-image-id="1*dC-ijTBVEKSFCR1hTeqGsw.png"
 data-width="1536" data-height="1024" data-is-featured="true" />
-<figcaption>“INRI” ~ art by author with gpt4-o</figcaption>
+<figcaption>â€œINRIâ€ ~ art by author with gpt4-o</figcaption>
 </figure>
 
 Jesus does not form His people by teaching them to despise their
 enemies. He teaches the opposite:
 
-> **“But I say to you, love your enemies…”\
+> **â€œBut I say to you, love your enemiesâ€¦â€\
 > - Matthew 5:44**
 
-He also gives a public “tell” for what His followers should look like in
+He also gives a public â€œtellâ€ for what His followers should look like in
 real life:
 
-> **“By this all will know that you are My disciples, if you have love
-> for one another.”\
+> **â€œBy this all will know that you are My disciples, if you have love
+> for one another.â€\
 > - John 13:35**
 
 So when people try to paint Christianity as a tribal hate machine,
-they’re either ignorant of the text, lying about it, or reacting to
-Christians who have drifted from their Master’s core teachings.
+theyâ€™re either ignorant of the text, lying about it, or reacting to
+Christians who have drifted from their Masterâ€™s core teachings.
 
 #### **The crucifix itself is the rebuttal.**
 
-It’s an innocent man absorbing violence, refusing retaliation, and
-praying through betrayal. **It’s not the banner of a lynch mob.**
+Itâ€™s an innocent man absorbing violence, refusing retaliation, and
+praying through betrayal. **Itâ€™s not the banner of a lynch mob.**
 
-> It’s the banner of self-sacrifice.
+> Itâ€™s the banner of self-sacrifice.
 
 </div>
 
@@ -402,12 +401,12 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
 src="https://cdn-images-1.medium.com/max/800/1*xqu6MKWmrpk85w7-7MWSug.png"
 class="graf-image" data-image-id="1*xqu6MKWmrpk85w7-7MWSug.png"
 data-width="1536" data-height="1024" />
-<figcaption>“Marx’s Burning Book” ~ art by author with
+<figcaption>â€œMarxâ€™s Burning Bookâ€ ~ art by author with
 gpt4-o</figcaption>
 </figure>
 
-A large slice of modern “morality” is downstream from Marxist categories
-~ even when the speakers don’t use Marx’s name.
+A large slice of modern â€œmoralityâ€ is downstream from Marxist categories
+~ even when the speakers donâ€™t use Marxâ€™s name.
 
 #### The frame is familiar:
 
@@ -417,33 +416,33 @@ A large slice of modern “morality” is downstream from Marxist categories
 2.  <span id="90af">History is interpreted as domination</span>
 3.  <span id="ad76">Guilt and innocence get assigned by identity rather
     than personal action</span>
-4.  <span id="5345">Speech becomes “violence” when it threatens this
+4.  <span id="5345">Speech becomes â€œviolenceâ€ when it threatens this
     story.</span>
 
 That moral language can feel righteous. However it is fundamentally
-cruel and false because it gives people a clean excuse to hate “Nazis”
+cruel and false because it gives people a clean excuse to hate â€œNazisâ€
 while claiming ultimate virtue.
 
 #### Christianity does something that clashes with that frame at its most fundamental level.
 
-> **It says “the line between good and evil runs through every heart.”\
+> **It says â€œthe line between good and evil runs through every heart.â€\
 > - Aleksandr Solzhenitsyn**
 
-It says you can’t purchase righteousness by joining the correct crowd.
+It says you canâ€™t purchase righteousness by joining the correct crowd.
 It says truth is not created by power ~ truth judges power. It says,
 
-> “**There is one Lawgiver, who is able to save and to destroy. Who are
-> you to judge another?**”\
+> â€œ**There is one Lawgiver, who is able to save and to destroy. Who are
+> you to judge another?**â€\
 > - **James 4:12**
 
 That is why the crucifix hits so hard. It reminds you that the crowd can
 be wrong, the authorities can be wrong, the moral majority can be wrong
-~ and most importantly… you can be wrong!
+~ and most importantlyâ€¦ you can be wrong!
 
-**Yet, we are required by God to speak and live what’s true.**
+**Yet, we are required by God to speak and live whatâ€™s true.**
 
-If your personal ethic is “I will say what keeps me safe,” then you
-don’t need a crucifix. **You need to revisit the Gospels.**
+If your personal ethic is â€œI will say what keeps me safe,â€ then you
+donâ€™t need a crucifix. **You need to revisit the Gospels.**
 
 </div>
 
@@ -471,7 +470,7 @@ class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
 src="https://cdn-images-1.medium.com/max/800/1*vfpwPEQV4jPJF5aCYhc0SQ.png"
 class="graf-image" data-image-id="1*vfpwPEQV4jPJF5aCYhc0SQ.png"
 data-width="1536" data-height="1024" />
-<figcaption>“Will you speak the truth?” ~ art by author with
+<figcaption>â€œWill you speak the truth?â€ ~ art by author with
 gpt4-o</figcaption>
 </figure>
 
@@ -488,17 +487,17 @@ Fear of paying a price.**
 
 #### Jesus names the stakes with no sentimentality:
 
-> **“Do not be afraid of those who kill the body, and after that have no
-> more that they can do.”\
+> **â€œDo not be afraid of those who kill the body, and after that have no
+> more that they can do.â€\
 > - Luke 12:4**
 
 #### And He pairs realism with a command to stand upright anyway:
 
-> **“In the world you will have tribulation; but be of good cheer, I
-> have overcome the world.”\
+> **â€œIn the world you will have tribulation; but be of good cheer, I
+> have overcome the world.â€\
 > - John 16:33**
 
-**So here’s what I’m asking myself, and maybe you should ask yourself
+**So hereâ€™s what Iâ€™m asking myself, and maybe you should ask yourself
 too ~ believer, skeptic, somewhere-in-between:**
 
 When you look at Christ on the cross,
@@ -507,17 +506,17 @@ When you look at Christ on the cross,
 
 Do you flinch?\
 Do you avert your eyes?\
-Do you rush past it like background décor?
+Do you rush past it like background dÃ©cor?
 
 *Or do you let it do what it was meant to do:* **to confront you with
 the cost of truth, and then to steel your mind and body towards
 Christ.**
 
-Because the crucifix doesn’t merely say, “You are forgiven.”
+Because the crucifix doesnâ€™t merely say, â€œYou are forgiven.â€
 
-It says, “This is what it looks like to refuse the lie. This is what it
+It says, â€œThis is what it looks like to refuse the lie. This is what it
 costs.\
-This is what love does. Now go, and speak truth.”
+This is what love does. Now go, and speak truth.â€
 
 </div>
 
@@ -540,11 +539,11 @@ This is what love does. Now go, and speak truth.”
 ### **Note from the Author**
 
 If this essay gave you a clearer way to name what the crucifix is doing
-~ not just in theology, but in your mind and your spine ~ **I’d love
+~ not just in theology, but in your mind and your spine ~ **Iâ€™d love
 your help getting it in front of more readers.**
 
 Leave a **clap**, drop a **comment** with your reaction (or pushback),
-and **share** it with someone who’s been trying to speak truth in a
+and **share** it with someone whoâ€™s been trying to speak truth in a
 noisy culture.
 
 If you want more essays like this on faith, courage, and the moral
@@ -555,3 +554,4 @@ pressures of modern life, **follow my work here on Medium.**
 </div>
 
 </div>
+

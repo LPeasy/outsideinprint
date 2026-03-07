@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "Why Risk Models Reward Confidence Over Truth"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/uncertainty-is-not-a-technical-problem.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/uncertainty-is-not-a-technical-problem-96e558b67be1"
@@ -66,7 +65,7 @@ over responsibility*
 <div class="section-inner sectionLayout--insetColumn">
 
 We expect risk models to tell us what will happen.\
-When they don’t, we assume something went wrong.
+When they donâ€™t, we assume something went wrong.
 
 But many of the failures we attribute to bad modeling have nothing to do
 with technical mistakes. They come from a deeper misunderstanding of
@@ -110,7 +109,7 @@ We tend to treat uncertainty as a failure of knowledge. If only we had
 better data, better models, better tools ~ then the answer would reveal
 itself.
 
-Sometimes that’s true. Some uncertainty reflects limits in what we know:
+Sometimes thatâ€™s true. Some uncertainty reflects limits in what we know:
 missing data, outdated assumptions, imperfect measurements. In
 principle, that kind of uncertainty can be reduced.
 
@@ -192,7 +191,7 @@ neatly into briefings, tables, and approval memos. They penalize
 caveats, ranges, and statements that admit limits. A clean estimate is
 easier to defend than an honest one.
 
-Precision simplifies responsibility. If a number is “the estimate,” then
+Precision simplifies responsibility. If a number is â€œthe estimate,â€ then
 accountability can be traced to the method rather than the decision.
 When outcomes diverge from expectations, the failure can be framed as
 technical rather than judgmental.
@@ -259,7 +258,7 @@ that cover dissolves.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Why Better Data Doesn’t Always Improve Decisions
+### Why Better Data Doesnâ€™t Always Improve Decisions
 
 Modern systems are very good at reducing certain kinds of uncertainty.
 They can refine measurements, update inventories, recalibrate models,
@@ -305,7 +304,7 @@ It is an incentive problem.
 
 ### When Risk Estimates Erode Public Trust
 
-Public trust erodes not ‘cause estimates are wrong, but because
+Public trust erodes not â€˜cause estimates are wrong, but because
 expectations are misaligned.
 
 When a precise number is presented, people assume it carries a promise:
@@ -415,7 +414,7 @@ sand.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Author’s Note
+### Authorâ€™s Note
 
 This essay draws on concepts from decision and risk analysis,
 particularly the distinction between **knowledge uncertainty**
@@ -441,3 +440,4 @@ which judgment must operate.
 </div>
 
 </div>
+

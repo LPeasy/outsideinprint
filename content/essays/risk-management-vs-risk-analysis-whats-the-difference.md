@@ -1,13 +1,12 @@
 ---
-title: "Risk Management vs Risk Analysis: What’s the Difference?"
+title: "Risk Management vs Risk Analysis: Whatâ€™s the Difference?"
 date: 2025-09-01
 draft: false
 slug: "risk-management-vs-risk-analysis-whats-the-difference"
 section_label: "Essay"
-subtitle: "A coastal city’s disaster forces them to rethink their EM protocols"
+subtitle: "A coastal cityâ€™s disaster forces them to rethink their EM protocols"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/risk-management-vs-risk-analysis-whats-the-difference.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/risk-management-vs-risk-analysis-whats-the-difference-d42c64c49dfa"
@@ -25,9 +24,9 @@ medium_source_url: "https://medium.com/@lawtonperret/risk-management-vs-risk-ana
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Risk Management vs Risk Analysis: What’s the Difference?
+### Risk Management vs Risk Analysis: Whatâ€™s the Difference?
 
-#### A coastal city’s disaster forces them to rethink their EM protocols
+#### A coastal cityâ€™s disaster forces them to rethink their EM protocols
 
 <figure id="a34c" class="graf graf--figure graf-after--h4">
 <img
@@ -76,7 +75,7 @@ than expected.*
 
 ***We were too slow.***
 
-*Our hurricane plan is twenty years old. It tells us to “consider”
+*Our hurricane plan is twenty years old. It tells us to â€œconsiderâ€
 evacuation.*
 
 ***That word slowed us down!***
@@ -85,11 +84,11 @@ evacuation.*
 messages. Too many maybes. No mention of climate change or adaptive
 management.*
 
-***I didn’t know if I could make the call, or even who to call.***
+***I didnâ€™t know if I could make the call, or even who to call.***
 
-**So I write down what’s got to change:**
+**So I write down whatâ€™s got to change:**
 
-- <span id="d322">Update the flood picture to today’s sea level.</span>
+- <span id="d322">Update the flood picture to todayâ€™s sea level.</span>
 - <span id="5f0d">Re-time how long it takes the city to clear out ~
   weekends, bridges, schools, rentals and all.</span>
 - <span id="ba92">Split the island into zones with plain go/no-go
@@ -125,11 +124,11 @@ all turned south, and finally what it will take to fix it.
 
 They decided I was right. And then they fired me.
 
-Before I handed in my badge, I left two things on the desk: last night’s
+Before I handed in my badge, I left two things on the desk: last nightâ€™s
 timeline ~ *every call, every minute* ~ and a sticky note on a copy of
 the old emergency plan that read:
 
-> **“No more consider. Call it by the trigger.”**
+> **â€œNo more consider. Call it by the trigger.â€**
 
 </div>
 
@@ -161,15 +160,15 @@ From here, the **council sets policy** and authorizes funds; the **city
 manager** **runs the work** and carries it out; the **consultant builds
 the analysis** and drafts the plan.
 
-> ***Council → hires the city manager.***
+> ***Council â†’ hires the city manager.***
 
 > The council is the boss. It sets priorities, passes resolutions, and
 > controls the purse.
 
-> ***City manager → hires the consultant.***
+> ***City manager â†’ hires the consultant.***
 
 > The manager writes the scope, runs procurement, and directs the
-> analyst’s day-to-day work.
+> analystâ€™s day-to-day work.
 
 ### Clear split of duties
 
@@ -205,11 +204,11 @@ responsibilities</figcaption>
 
 > *The new city manager opens with a short kickoff meeting. The council
 > sets the goal and guardrails ~ what risks the city will live with,
-> what it won’t, and when decisions must be made. The manager turns that
+> what it wonâ€™t, and when decisions must be made. The manager turns that
 > into a scope and contract, then hands the consultant the data and
 > people they need.*
 
-The consultants update the flood picture to today’s sea level and local
+The consultants update the flood picture to todayâ€™s sea level and local
 geography. They also rebuild the evacuation timeline ~ weekends,
 rentals, bridges, schools, nursing homes.
 
@@ -255,7 +254,7 @@ The storm story is local. The split between roles ~ people performing
 risk analysis and people ultimately making the decisions ~ is near
 universal.
 
-Whether you’re talking about floods, wildfires, cyberattacks, or public
+Whether youâ€™re talking about floods, wildfires, cyberattacks, or public
 health, the same two jobs show up:
 
 #### **Risk analysis**
@@ -269,9 +268,9 @@ explains the uncertainty instead of hiding it.
 #### **Risk management**
 
 ***Risk management is the set of choices and actions used to handle that
-hazard.*** It sets the line the organization won’t cross, picks options
+hazard.*** It sets the line the organization wonâ€™t cross, picks options
 to reduce or live with the risk, funds the work, and owns the outcome.
-Assessments inform the choice; they don’t make it. That’s the job of
+Assessments inform the choice; they donâ€™t make it. Thatâ€™s the job of
 risk management.
 
 > **Analysis = *what could happen and how sure we are.***
@@ -336,17 +335,17 @@ data-width="955" data-height="290" />
 **This story started with a bad call, three lives lost, and a help
 wanted ad.**
 
-The way to address risk isn’t some magic model that can predict the
-future: **It’s risk analysis and risk management.**
+The way to address risk isnâ€™t some magic model that can predict the
+future: **Itâ€™s risk analysis and risk management.**
 
 > *The council sets the priorities and funds the effort. The city
 > manager builds the team, brings the plan forward, and owns the clock.
 > The analyst sharpens the picture so the people with authority can
 > decide what to do.*
 
-> Risk analysis and risk management aren’t twins ~
+> Risk analysis and risk management arenâ€™t twins ~
 
-> they’re partners.
+> theyâ€™re partners.
 
 **Analysis explains what could happen, how bad, how often, and how sure
 we are ~ and it shows the reasons behind those answers.**
@@ -384,7 +383,7 @@ same handshake, same relationship between analyst and manager.
 
 ### Like this piece?
 
-If this helped, **tap the 👏 up to 50** to push it to more readers.\
+If this helped, **tap the ðŸ‘ up to 50** to push it to more readers.\
 **Follow and subscribe** **to *The Balance Sheet*** for straight shots
 on risk, policy, and the real economy.
 
@@ -400,3 +399,4 @@ If you work in EM or analysis, where do the roles blur in real life?
 </div>
 
 </div>
+

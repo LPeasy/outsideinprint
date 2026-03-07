@@ -7,10 +7,10 @@ section_label: "Working Paper"
 subtitle: ""
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/{{ .Name }}.pdf"
 featured: false
 
 topics: []
 series: []
 ---
+

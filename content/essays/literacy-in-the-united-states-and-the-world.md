@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "An Exploration"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/literacy-in-the-united-states-and-the-world.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/literacy-in-the-united-states-and-the-world-be3059c7a9e9"
@@ -21,19 +20,19 @@ Disparities, Causes, and Implications
 
 I. Introduction
 
-Literacy is the foundation for personal growth, social participation, and economic development. The Program for the International Assessment of Adult Competencies (PIAAC) defines literacy as “the ability to understand, evaluate, use, and engage with written text to participate in society, to achieve one’s goals, and to develop one’s knowledge and potential.” Although the United States and many other nations have made significant progress in raising basic literacy rates, challenges remain in achieving functional literacy and addressing disparities across different demographics and regions. This paper examines the current state of literacy in the United States, compares its performance to global trends, identifies the key causes of literacy gaps, and proposes targeted solutions for improvement.
+Literacy is the foundation for personal growth, social participation, and economic development. The Program for the International Assessment of Adult Competencies (PIAAC) defines literacy as â€œthe ability to understand, evaluate, use, and engage with written text to participate in society, to achieve oneâ€™s goals, and to develop oneâ€™s knowledge and potential.â€ Although the United States and many other nations have made significant progress in raising basic literacy rates, challenges remain in achieving functional literacy and addressing disparities across different demographics and regions. This paper examines the current state of literacy in the United States, compares its performance to global trends, identifies the key causes of literacy gaps, and proposes targeted solutions for improvement.
 
 II. The Current State of Literacy in the United States
 
 ![](https://cdn-images-1.medium.com/max/800/1*i0pkIvvSlsu2_M3NgVqkPQ@2x.jpeg)
 
-The United States faces significant literacy challenges despite decades of educational reforms. According to PIAAC data, twenty-one percent of U.S. adults — representing approximately 43 million people — struggle with low English literacy skills. Within this group, 8.4 million adults score below Level 1, meaning they are functionally illiterate and unable to determine the meaning of sentences or locate single pieces of information in short texts. An additional 26.5 million adults score at Level 1, demonstrating only basic literacy skills, such as identifying vocabulary or deriving meaning from simple sentences. At the higher end, seventy-nine percent of adults score at Level 2 or above, which means they can perform basic comprehension tasks such as paraphrasing and making low-level inferences. These statistics highlight both the progress the U.S. has made and the gaps that persist.
+The United States faces significant literacy challenges despite decades of educational reforms. According to PIAAC data, twenty-one percent of U.S. adultsâ€Šâ€”â€Šrepresenting approximately 43 million peopleâ€Šâ€”â€Šstruggle with low English literacy skills. Within this group, 8.4 million adults score below Level 1, meaning they are functionally illiterate and unable to determine the meaning of sentences or locate single pieces of information in short texts. An additional 26.5 million adults score at Level 1, demonstrating only basic literacy skills, such as identifying vocabulary or deriving meaning from simple sentences. At the higher end, seventy-nine percent of adults score at Level 2 or above, which means they can perform basic comprehension tasks such as paraphrasing and making low-level inferences. These statistics highlight both the progress the U.S. has made and the gaps that persist.
 
 ![](https://cdn-images-1.medium.com/max/800/1*NsfgvbfA0f1p1ufoOoDnHg@2x.jpeg)
 
 Demographic factors play a significant role in shaping literacy outcomes. Among U.S. adults with low literacy skills, 66 percent were born in the United States, while 34 percent are foreign-born. This proportion is striking given that foreign-born adults account for just 15 percent of the total population, illustrating their overrepresentation in low-literacy categories. Additionally, racial and ethnic disparities persist. White, U.S.-born adults make up 35 percent of low-literacy adults, the largest single group, while Hispanic adults account for 34 percent, with the majority of this group being foreign-born. These figures reveal the complex intersection of race, ethnicity, and immigration in shaping literacy outcomes.
 
-Geographic disparities further exacerbate literacy challenges in the United States. States like Minnesota and New Hampshire have the highest average literacy scores at 279, reflecting their successful educational policies and relatively strong economic conditions. In contrast, Louisiana, Mississippi, and New Mexico report the lowest average scores at 252, pointing to systemic challenges in education funding, poverty, and access to resources. The literacy landscape becomes even more fragmented when analyzed at the county level. Pockets of low literacy — termed “literacy deserts” — are particularly pronounced in the South, Southwest, and rural parts of the West, where average scores often fall below 226. Meanwhile, more proficient regions in the Northeast and Midwest showcase higher literacy achievements, demonstrating significant regional inequalities.
+Geographic disparities further exacerbate literacy challenges in the United States. States like Minnesota and New Hampshire have the highest average literacy scores at 279, reflecting their successful educational policies and relatively strong economic conditions. In contrast, Louisiana, Mississippi, and New Mexico report the lowest average scores at 252, pointing to systemic challenges in education funding, poverty, and access to resources. The literacy landscape becomes even more fragmented when analyzed at the county level. Pockets of low literacyâ€Šâ€”â€Štermed â€œliteracy desertsâ€â€Šâ€”â€Šare particularly pronounced in the South, Southwest, and rural parts of the West, where average scores often fall below 226. Meanwhile, more proficient regions in the Northeast and Midwest showcase higher literacy achievements, demonstrating significant regional inequalities.
 
 III. The United States in a Global Context
 
@@ -47,7 +46,7 @@ When compared to other OECD countries, the United States performs modestly. PIAA
 
 IV. Causes of Literacy Challenges
 
-The root causes of literacy gaps in the United States are multifaceted, shaped by systemic inequalities, geographic disparities, and immigrant challenges. Underfunded public education systems disproportionately affect low-income and minority communities, where schools often lack the resources to provide effective literacy instruction. In rural areas, geographic isolation further limits access to quality education and literacy programs. Generational cycles of low literacy compound these issues, as parents with limited literacy skills are often unable to support their children’s educational progress.
+The root causes of literacy gaps in the United States are multifaceted, shaped by systemic inequalities, geographic disparities, and immigrant challenges. Underfunded public education systems disproportionately affect low-income and minority communities, where schools often lack the resources to provide effective literacy instruction. In rural areas, geographic isolation further limits access to quality education and literacy programs. Generational cycles of low literacy compound these issues, as parents with limited literacy skills are often unable to support their childrenâ€™s educational progress.
 
 For immigrants, language barriers and the undervaluation of foreign-acquired education present significant obstacles. Data from the International Adult Literacy Survey (IALS) reveals that immigrants consistently demonstrate lower literacy levels compared to native-born adults. Language fluency, rather than cognitive skills alone, often determines literacy scores, particularly for those from non-English-speaking regions. These literacy gaps translate directly into economic outcomes, as immigrants with lower literacy skills face reduced earnings and limited job opportunities. According to the IALS, approximately 50 percent of the earnings gap between immigrants and native-born workers can be attributed to differences in literacy levels. These challenges highlight the importance of addressing immigrant-specific barriers to literacy.
 
@@ -59,7 +58,7 @@ VI. Solutions and Policy Recommendations
 
 Addressing literacy gaps in the United States requires a comprehensive and targeted approach. Expanding adult education and literacy programs is essential, particularly for populations at Level 1 or below. English as a Second Language (ESL) programs should be expanded to support immigrant populations who face unique literacy barriers. Recognizing and bridging foreign-acquired credentials can also help integrate immigrants more effectively into the workforce.
 
-At the regional level, tools like the PIAAC skills map can help policymakers identify literacy deserts and allocate resources to the areas most in need. Local governments can use this data to inform workforce planning, as seen in initiatives like Houston’s Adult Literacy Blueprint and Kentucky’s targeted workforce education programs. Finally, the United States can learn from global leaders such as Japan and Finland, where investments in early childhood education, teacher training, and lifelong learning have produced exceptional literacy outcomes.
+At the regional level, tools like the PIAAC skills map can help policymakers identify literacy deserts and allocate resources to the areas most in need. Local governments can use this data to inform workforce planning, as seen in initiatives like Houstonâ€™s Adult Literacy Blueprint and Kentuckyâ€™s targeted workforce education programs. Finally, the United States can learn from global leaders such as Japan and Finland, where investments in early childhood education, teacher training, and lifelong learning have produced exceptional literacy outcomes.
 
 VII. Conclusion
 
@@ -76,3 +75,4 @@ References
 4.	USAFACTS.
 
 5.	Our World in Data.
+

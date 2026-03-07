@@ -1,13 +1,12 @@
 ---
-title: "Why More People Are Choosing Chili’s Over McDonald’s in 2025"
+title: "Why More People Are Choosing Chiliâ€™s Over McDonaldâ€™s in 2025"
 date: 2025-05-21
 draft: false
 slug: "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025"
 section_label: "Essay"
-subtitle: "Chili’s isn’t just competing with fast food ~ it’s eating their lunch."
+subtitle: "Chiliâ€™s isnâ€™t just competing with fast food ~ itâ€™s eating their lunch."
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025-55ca02bd03b7"
@@ -25,11 +24,11 @@ medium_source_url: "https://medium.com/@lawtonperret/why-more-people-are-choosin
 
 <div class="section-inner sectionLayout--insetColumn">
 
-> Chili’s isn’t just competing with fast food ~ it’s eating their lunch.
+> Chiliâ€™s isnâ€™t just competing with fast food ~ itâ€™s eating their lunch.
 
-### Why More People Are Choosing Chili’s Over McDonald’s in 2025
+### Why More People Are Choosing Chiliâ€™s Over McDonaldâ€™s in 2025
 
-#### As Fast Food Prices Surge, Chili’s \$13 Meal Deal Brings Diners Back
+#### As Fast Food Prices Surge, Chiliâ€™s \$13 Meal Deal Brings Diners Back
 
 <figure id="93af" class="graf graf--figure graf-after--h4">
 <img
@@ -38,31 +37,31 @@ class="graf-image" data-image-id="1*kH7UWZEuYQr3_KgTL6EIdA@2x.jpeg"
 data-width="1536" data-height="1024" />
 </figure>
 
-> McDonald’s vs Chili’s \| Source: User with ChatGPT
+> McDonaldâ€™s vs Chiliâ€™s \| Source: User with ChatGPT
 
 #### Fast Food Prices Are Driving Customers Away
 
 **Fast food used to mean cheap food.**
 
-***It*** ***wasn’t*** ***gourmet***, but it was **quick, easy, and
+***It*** ***wasnâ€™t*** ***gourmet***, but it was **quick, easy, and
 affordable.** You could grab lunch for five or six bucks and get back to
 work.
 
-> That’s a thing of the past.
+> Thatâ€™s a thing of the past.
 
 As of 2025, the average combo meal at a fast food chain costs \$13.09 ~
 up more than 50% since 2019. And people are noticing. TikTok and Twitter
 are full of angry receipts and disbelief:
 
-> “How is McDonald’s more expensive than Chili’s?”
+> â€œHow is McDonaldâ€™s more expensive than Chiliâ€™s?â€
 
-> “I just paid \$14 for a burger and fries in a paper bag.”
+> â€œI just paid \$14 for a burger and fries in a paper bag.â€
 
-> “Is fast food even fast or cheap anymore?”
+> â€œIs fast food even fast or cheap anymore?â€
 
-It’s not just about the money. **It’s the value.**
+Itâ€™s not just about the money. **Itâ€™s the value.**
 
-If you’re paying sit-down prices, you want sit-down service. But fast
+If youâ€™re paying sit-down prices, you want sit-down service. But fast
 food still gives you the same paper bag, no refills, no table ~ **and
 now, no deal.**
 
@@ -87,7 +86,7 @@ now, no deal.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Chili’s Comeback: The Casual Dining Option Beating Fast Food
+#### Chiliâ€™s Comeback: The Casual Dining Option Beating Fast Food
 
 <figure id="4208" class="graf graf--figure graf-after--h4">
 <img
@@ -104,34 +103,34 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-> For years, casual dining chains like Chili’s have felt like they’re
+> For years, casual dining chains like Chiliâ€™s have felt like theyâ€™re
 > just not worth it.
 
-**They’re not trendy** like food trucks.
+**Theyâ€™re not trendy** like food trucks.
 
-**They’re not fast** like drive-thrus.
+**Theyâ€™re not fast** like drive-thrus.
 
-**And they’re not cheap** enough to compete with Taco Bell or Wendy’s.
+**And theyâ€™re not cheap** enough to compete with Taco Bell or Wendyâ€™s.
 
 **Then, *during Covid*, indoor dining collapsed.**
 
-Chili’s locations went dark. People got used to eating in their cars and
+Chiliâ€™s locations went dark. People got used to eating in their cars and
 ordering through apps. **It looked like the end of the sit-down burger
 era.**
 
 > But something weird happened.
 
 As **inflation pushed fast food prices up**, people started looking
-around. And **Chili’s was still there ~** serving full meals, on real
+around. And **Chiliâ€™s was still there ~** serving full meals, on real
 plates, with actual waiters.
 
-> The food hadn’t changed much. But the price? Suddenly it looked like a
+> The food hadnâ€™t changed much. But the price? Suddenly it looked like a
 > deal.
 
-When a Big Mac meal hits \$13, and a Chili’s burger with chips, salsa,
+When a Big Mac meal hits \$13, and a Chiliâ€™s burger with chips, salsa,
 and a drink costs the same, it flips the equation.
 
-> You don’t just get more food ~ you get more bang for your buck.
+> You donâ€™t just get more food ~ you get more bang for your buck.
 
 </div>
 
@@ -151,7 +150,7 @@ and a drink costs the same, it flips the equation.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Chili’s “3 for Me” Deal Is Beating Fast Food on Value and Convenience
+#### Chiliâ€™s â€œ3 for Meâ€ Deal Is Beating Fast Food on Value and Convenience
 
 <figure id="4663" class="graf graf--figure graf-after--h4">
 <img
@@ -160,34 +159,34 @@ class="graf-image" data-image-id="1*WfpApZpDOE0JpNcYUDMwRA@2x.jpeg"
 data-width="1280" data-height="720" />
 </figure>
 
-> 3 for Me Advertisement \| Source: Chili’s
+> 3 for Me Advertisement \| Source: Chiliâ€™s
 
-> Chili’s didn’t undercut fast food…
+> Chiliâ€™s didnâ€™t undercut fast foodâ€¦
 
 > Their price just makes sense.
 
-The secret weapon is the “3 for Me” menu. It’s not flashy ~ but it
+The secret weapon is the â€œ3 for Meâ€ menu. Itâ€™s not flashy ~ but it
 delivers:
 
 - <span id="2e4b">One drink</span>
 - <span id="ea5e">One appetizer (like soup, salad, or fries)</span>
-- <span id="1e09">One entrée (like a cheeseburger, chicken tenders, or a
+- <span id="1e09">One entrÃ©e (like a cheeseburger, chicken tenders, or a
   salad)</span>
 - <span id="f290">A big bag of chips and a cup of salsa</span>
 
 > ***All for \$10.99 to \$13.99, depending on what you pick.***
 
-And here’s the kicker: ***you don’t have to dine in.* You can order it
+And hereâ€™s the kicker: ***you donâ€™t have to dine in.* You can order it
 to go.**
 
 That means **you get the portions of a sit-down restaurant ~** without
-committing to the full sit-down experience. If you’re on your lunch
-break or just want to eat at home, you can still grab the same Chili’s
+committing to the full sit-down experience. If youâ€™re on your lunch
+break or just want to eat at home, you can still grab the same Chiliâ€™s
 meal, packaged up, ready to roll.
 
-> Compare this to McDonald’s:
+> Compare this to McDonaldâ€™s:
 
-**Big Mac Combo ~ \$13.00**
+**Big Mac Combo ~â€Š\$13.00**
 
 - <span id="a7f4">Big Mac</span>
 - <span id="ad53">Medium fries</span>
@@ -195,7 +194,7 @@ meal, packaged up, ready to roll.
 
 > (In a paper bag, no refills, no service)
 
-**Whether you sit down or take it home, Chili’s feels like a real
+**Whether you sit down or take it home, Chiliâ€™s feels like a real
 meal.**
 
 > Fast food feels like a ripoff.
@@ -227,7 +226,7 @@ Life</strong></a>**)**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### How Chili’s Is Winning the Fast Food vs. Sit-Down Battle
+#### How Chiliâ€™s Is Winning the Fast Food vs. Sit-Down Battle
 
 <figure id="5727" class="graf graf--figure graf-after--h4">
 <img
@@ -236,26 +235,26 @@ class="graf-image" data-image-id="1*BV64tblUzul8EOoWmGqJBg@2x.jpeg"
 data-width="1536" data-height="1024" />
 </figure>
 
-> McDonald’s vs Chili’s \| Source: User with ChatGPT
+> McDonaldâ€™s vs Chiliâ€™s \| Source: User with ChatGPT
 
-> This isn’t just luck. Chili’s made a few smart moves that paid off.
+> This isnâ€™t just luck. Chiliâ€™s made a few smart moves that paid off.
 
 First, **they simplified the menu**. Fewer items. Faster prep. Lower
 overhead. That let them hold prices steady while other chains kept
 creeping up.
 
-Second, **they protected the experience ~** but didn’t gate it behind a
-table. If you want to eat inside, great. But if you’re busy, you can
-still grab a full meal to go ~ something that used to be fast food’s
+Second, **they protected the experience ~** but didnâ€™t gate it behind a
+table. If you want to eat inside, great. But if youâ€™re busy, you can
+still grab a full meal to go ~ something that used to be fast foodâ€™s
 entire pitch.
 
 > In 2025, that flexibility is gold.
 
 It lets people choose: slow it down or keep it moving. Either way, you
-don’t feel ripped off.
+donâ€™t feel ripped off.
 
 > In a time when fast food is less about speed and more about sticker
-> shock, Chili’s stands out.
+> shock, Chiliâ€™s stands out.
 
 </div>
 
@@ -275,7 +274,7 @@ don’t feel ripped off.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### What Chili’s Resurgence Reveals About Changing Spending Habits
+#### What Chiliâ€™s Resurgence Reveals About Changing Spending Habits
 
 <figure id="4c1a" class="graf graf--figure graf-after--h4">
 <img
@@ -294,15 +293,15 @@ rel="noopener" target="_blank">Unsplash</a></figcaption>
 
 > This is bigger than one chain.
 
-It’s a sign that **the old rules of spending are cracking.** We used to
-chase whatever was cheapest. Now we’re asking:
+Itâ€™s a sign that **the old rules of spending are cracking.** We used to
+chase whatever was cheapest. Now weâ€™re asking:
 
 > What do I get for my money?
 
-**That’s why Chili’s is winning.** Not because it’s the lowest price.
+**Thatâ€™s why Chiliâ€™s is winning.** Not because itâ€™s the lowest price.
 B**ecause it feels like a good deal.**
 
-You’re **seeing the same thing at places like Aldi and Costco.** People
+Youâ€™re **seeing the same thing at places like Aldi and Costco.** People
 are fine spending money ~ if it feels like they got something.
 
 > A full plate.
@@ -311,9 +310,9 @@ are fine spending money ~ if it feels like they got something.
 
 > A little dignity.
 
-That’s the shift: **value isn’t just about numbers.**
+Thatâ€™s the shift: **value isnâ€™t just about numbers.**
 
-> It’s about feeling like you got your money’s worth.
+> Itâ€™s about feeling like you got your moneyâ€™s worth.
 
 </div>
 
@@ -333,7 +332,7 @@ That’s the shift: **value isn’t just about numbers.**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Author’s Note
+#### Authorâ€™s Note
 
 If you enjoyed this piece, **hit the clap button** so more people see
 it. Got a story about fast food sticker shock or your own go-to \$13
@@ -350,3 +349,4 @@ economy.
 </div>
 
 </div>
+

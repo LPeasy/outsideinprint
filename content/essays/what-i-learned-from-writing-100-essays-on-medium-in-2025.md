@@ -4,10 +4,9 @@ date: 2025-09-09
 draft: false
 slug: "what-i-learned-from-writing-100-essays-on-medium-in-2025"
 section_label: "Essay"
-subtitle: "From zero followers to breakout stories ~ one writer’s honest experience"
+subtitle: "From zero followers to breakout stories ~ one writerâ€™s honest experience"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/what-i-learned-from-writing-100-essays-on-medium-in-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/what-i-learned-from-writing-100-essays-on-medium-in-2025-ca5812b6e261"
@@ -27,7 +26,7 @@ medium_source_url: "https://medium.com/@lawtonperret/what-i-learned-from-writing
 
 ## Writing 100 Essays on Medium
 
-#### From zero followers to breakout stories ~ one writer’s honest experience
+#### From zero followers to breakout stories ~ one writerâ€™s honest experience
 
 <figure id="c91a" class="graf graf--figure graf-after--h4">
 <img
@@ -36,18 +35,18 @@ class="graf-image" data-image-id="1*qwEvQgSNUPs73MuAd92KPA.png"
 data-width="1536" data-height="1024" data-is-featured="true" />
 </figure>
 
-> “I didn’t set out to build an audience ~
+> â€œI didnâ€™t set out to build an audience ~
 
 > I just kept asking questions,
 
-> and I couldn’t find any honest answers.”
+> and I couldnâ€™t find any honest answers.â€
 
 **The internet is noisy with hot takes and thin on verifiable facts.**
 
 Sometime around December of 2024, I realized that quickly answering a
-question on the internet just wasn’t the same as it used to be.
+question on the internet just wasnâ€™t the same as it used to be.
 
-I’d have to read five or six articles, and then still end up digging
+Iâ€™d have to read five or six articles, and then still end up digging
 into FRED or Census tables just to ground truth claims.
 
 Eventually I decided to start writing the essays I was a searching for:
@@ -57,11 +56,11 @@ Eventually I decided to start writing the essays I was a searching for:
 > More readable than a journal article.***
 
 **No followers. No plan.** Just a list of questions ~\
-and the knowledge that, hey, **if it’s no good *then who cares
+and the knowledge that, hey, **if itâ€™s no good *then who cares
 anyway?\***
 So I asked myself,
 
-> “What do you have to lose?”
+> â€œWhat do you have to lose?â€
 
 </div>
 
@@ -83,7 +82,7 @@ So I asked myself,
 
 #### **What follows is a brief narrative of my first year publishing essays, biographies, geopolitical analyses, and more on Medium.**
 
-I’ll present data pulled from the weekly emails Medium sends out and the
+Iâ€™ll present data pulled from the weekly emails Medium sends out and the
 internal stats found on my Medium stats page.
 
 > **Note: This essay marks my one hundredth essay published on Medium!**
@@ -94,7 +93,7 @@ internal stats found on my Medium stats page.
 - <span id="1ef3">**Total Reads:** 4,535</span>
 - <span id="1d5a">**Read Ratio:** 63.4%</span>
 
-#### **Here’s how that performance looked week by week — a steady climb with some big jumps after breakout pieces went live.**
+#### **Hereâ€™s how that performance looked week by weekâ€Šâ€”â€Ša steady climb with some big jumps after breakout pieces went live.**
 
 > The line is jagged, not smooth ~ readers came in waves.\
 > Breakouts show up as sudden leaps.
@@ -133,7 +132,7 @@ date.</figcaption>
 
 > Zero followers, no catalog.
 
-Honestly, I wasn’t really sure what I wanted to say.
+Honestly, I wasnâ€™t really sure what I wanted to say.
 
 I wrote about <a
 href="https://medium.com/@lawtonperret/rational-ignorance-in-the-u-s-presidential-electorate-e207c24d0306"
@@ -147,7 +146,7 @@ target="_blank">Household Debt in 2025,</a> a truly novel concept <a
 href="https://medium.com/@lawtonperret/natural-asset-companies-20bb2458ffa7"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/@lawtonperret/natural-asset-companies-20bb2458ffa7"
-target="_blank">“Natural Asset Companies,”</a> and a fairly detailed
+target="_blank">â€œNatural Asset Companies,â€</a> and a fairly detailed
 breakdown of <a
 href="https://medium.com/@lawtonperret/the-national-flood-insurance-program-b400678e86c2"
 class="markup--anchor markup--p-anchor"
@@ -208,19 +207,19 @@ target="_blank">Why Obergefell will not be Overturned</a> to <a
 href="https://medium.com/the-balanced-sheet/the-death-of-moores-law-12cb19a75cd8"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-death-of-moores-law-12cb19a75cd8"
-target="_blank">The Death of Moore’s Law</a> and <a
+target="_blank">The Death of Mooreâ€™s Law</a> and <a
 href="https://medium.com/the-balanced-sheet/the-political-economy-of-airports-aef07847fa60"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-political-economy-of-airports-aef07847fa60"
 target="_blank">The Political Economy of Airports</a> ~ I was having a
-lot of fun exploring the internet and trying to find the truth… or
+lot of fun exploring the internet and trying to find the truthâ€¦ or
 something close to it.
 
 **The early posts were quiet. A handful of views.**
 
 A couple of reads here and there.
 
-**I don’t think I was even looking at the stats page on Medium at this
+**I donâ€™t think I was even looking at the stats page on Medium at this
 point.**
 
 > I was publishing to practice in public ~
@@ -289,7 +288,7 @@ data-width="2380" data-height="1180" />
 
 > In February I went all in: twenty essays in a single month.
 
-**No “hustle”** for its own sake ~ **just energy**, curiosity, and a
+**No â€œhustleâ€** for its own sake ~ **just energy**, curiosity, and a
 backlog of ideas.
 
 I spent the month of February writing about <a
@@ -300,7 +299,7 @@ target="_blank">The End of Federal Agency Deference</a>, I asked <a
 href="https://medium.com/the-balanced-sheet/is-doge-legal-6bcb518f9293"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/is-doge-legal-6bcb518f9293"
-target="_blank">whether DOGE’s actions were legal,</a> and explained <a
+target="_blank">whether DOGEâ€™s actions were legal,</a> and explained <a
 href="https://medium.com/the-balanced-sheet/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data-677ae19bb7e0"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data-677ae19bb7e0"
@@ -339,8 +338,8 @@ data-href="https://medium.com/the-balanced-sheet/the-future-of-ai-and-technical-
 title="https://medium.com/the-balanced-sheet/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now-c8f4081f0c46"><strong>The
 Future of AI and Technical Jobs: Why Review Work Is Your Best Bet (For
 Now)</strong><br />
-<em>AI is automating technical work — but human reviewers still matter.
-Here’s why.</em>medium.com</a><a
+<em>AI is automating technical workâ€Šâ€”â€Šbut human reviewers still matter.
+Hereâ€™s why.</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now-c8f4081f0c46"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="bf5b66392a0df80e6585e251f16033c4"
@@ -349,7 +348,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*NLS
 
 </div>
 
-#### I started to look at Medium’s stats page and I noticed a few things.
+#### I started to look at Mediumâ€™s stats page and I noticed a few things.
 
 > Activity = Exposure
 
@@ -390,8 +389,8 @@ data-href="https://medium.com/the-balanced-sheet"
 title="https://medium.com/the-balanced-sheet"><strong>The Balance
 Sheet</strong><br />
 <em>The Balance Sheet breaks down U.S. economics, policy, and current
-events with clarity and fairness. No spin — just
-real…</em>medium.com</a><a href="https://medium.com/the-balanced-sheet"
+events with clarity and fairness. No spinâ€Šâ€”â€Šjust
+realâ€¦</em>medium.com</a><a href="https://medium.com/the-balanced-sheet"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="9db14c115ba9f442ececb96eab232985"
 data-thumbnail-img-id="1*Urdx3Utw7hX9jTlz51mjPQ.png"
@@ -399,8 +398,8 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*Urd
 
 </div>
 
-I’m still publishing on The Balance Sheet!\
-It’s been a blast building my little publication from scratch.
+Iâ€™m still publishing on The Balance Sheet!\
+Itâ€™s been a blast building my little publication from scratch.
 
 **Recently I added my first contributor to the pub:**
 <a href="https://medium.com/@officialkennethkau"
@@ -442,10 +441,10 @@ within the first few weeks after publishing.
 href="https://medium.com/the-balanced-sheet/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
-title="https://medium.com/the-balanced-sheet/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"><strong>Russia’s
-Slow Surrender: How China is Turning Putin’s War into a Power
+title="https://medium.com/the-balanced-sheet/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"><strong>Russiaâ€™s
+Slow Surrender: How China is Turning Putinâ€™s War into a Power
 Play</strong><br />
-<em>Putin fights in Ukraine, Beijing tightens its grip on Russia’s
+<em>Putin fights in Ukraine, Beijing tightens its grip on Russiaâ€™s
 future</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
@@ -457,7 +456,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*PHM
 
 **That spike tickled me a bit** and made me think
 
-> “Hey! Maybe I can be a writer…”
+> â€œHey! Maybe I can be a writerâ€¦â€
 
 **Other essays started slower.\**
 Some of them, like <a
@@ -469,8 +468,8 @@ href="https://medium.com/the-balanced-sheet/why-a-return-to-the-gold-standard-wo
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
 target="_blank">Why A Return to the Gold Standard would Break the
-Economy</a> started to get a few reads every day or two but never “broke
-out.”
+Economy</a> started to get a few reads every day or two but never â€œbroke
+out.â€
 
 **I tried publishing different kinds of stories like biographies:**
 
@@ -481,7 +480,7 @@ href="https://medium.com/the-balanced-sheet/benjamin-franklin-how-americas-funni
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible-07e2ee19813d"
 title="https://medium.com/the-balanced-sheet/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible-07e2ee19813d"><strong>Benjamin
-Franklin: How America’s Funniest Founder Made Greatness Feel
+Franklin: How Americaâ€™s Funniest Founder Made Greatness Feel
 Possible</strong><br />
 <em>A scrappy biography of the runaway apprentice who became a
 statesman, scientist, and master of self-improvement.</em>medium.com</a><a
@@ -546,8 +545,8 @@ data-width="1707" data-height="1057" />
 
 ### Breakouts vs Evergreen Essays ~ How Medium Stories Perform Over Time
 
-**If you’re writing on Medium, it may help to think in two lanes.\**
-The trick isn’t to pick one lane over the other, but to **balance
+**If youâ€™re writing on Medium, it may help to think in two lanes.\**
+The trick isnâ€™t to pick one lane over the other, but to **balance
 both.**
 
 ***Breakouts* boost your reach.**\
@@ -556,14 +555,14 @@ after the headlines move on.
 
 #### Breakouts *~ Boosters*
 
-Some essays are **built to** **ride the wave** of the moment ~ they’ll
+Some essays are **built to** **ride the wave** of the moment ~ theyâ€™ll
 spike fast, get shared, and then disappear.
 
 The geopolitical explainer <a
 href="https://medium.com/the-balanced-sheet/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
-target="_blank">Russia’s Slow Surrender</a> became the most-viewed and
+target="_blank">Russiaâ€™s Slow Surrender</a> became the most-viewed and
 most-read story in my catalog.
 
 The historical explainer <a
@@ -580,7 +579,7 @@ href="https://medium.com/the-balanced-sheet/nottoway-plantation-burns-down-in-fi
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion-24c8fff8aa3d"
 title="https://medium.com/the-balanced-sheet/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion-24c8fff8aa3d"><strong>Nottoway
-Plantation Burns Down in Fire: History and Legacy of the South’s Largest
+Plantation Burns Down in Fire: History and Legacy of the Southâ€™s Largest
 Mansion</strong><br />
 <em>A brief explainer about what the house was, how it evolved, and why
 its destruction sparked so many different reactions</em>medium.com</a><a
@@ -619,8 +618,8 @@ class="graf graf--figure graf-after--blockquote graf--trailing">
 src="https://cdn-images-1.medium.com/max/800/1*g8BcWl9QwxOMFiZh4ClbOw.png"
 class="graf-image" data-image-id="1*g8BcWl9QwxOMFiZh4ClbOw.png"
 data-width="3132" data-height="1101" />
-<figcaption><strong>Top 10 stories by reads</strong> | Russia’s and
-Nottoway were breakouts | R-Word and Moore’s Law are
+<figcaption><strong>Top 10 stories by reads</strong> | Russiaâ€™s and
+Nottoway were breakouts | R-Word and Mooreâ€™s Law are
 evergreen</figcaption>
 </figure>
 
@@ -651,7 +650,7 @@ search, recommendations, or ongoing relevance.
 href="https://medium.com/the-balanced-sheet/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again-d804460f9464"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again-d804460f9464"
-target="_blank">The Rise, Fall, and Reemergence of the R-Word</a> didn’t
+target="_blank">The Rise, Fall, and Reemergence of the R-Word</a> didnâ€™t
 spike ~ it simmered, steadily drawing new readers week after week.
 
 <div id="a60f" class="graf graf--mixtapeEmbed graf-after--p">
@@ -661,7 +660,7 @@ href="https://medium.com/the-balanced-sheet/the-rise-fall-and-reemergence-of-the
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again-d804460f9464"
 title="https://medium.com/the-balanced-sheet/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again-d804460f9464"><strong>The
-Rise, Fall, and Reemergence of the R-Word: Why Is It “Okay” to say
+Rise, Fall, and Reemergence of the R-Word: Why Is It â€œOkayâ€ to say
 Retard Again?</strong><br />
 <em>How a Once-Taboo Term is Making a Controversial Comeback in Online
 Culture</em>medium.com</a><a
@@ -681,7 +680,7 @@ target="_blank">Why a Return to the Gold Standard Would Break the
 Economy</a> was another evergreen essay that slowly brought in reads and
 views over time.
 
-> ***Here’s how those different lifecycles look when charted side by
+> ***Hereâ€™s how those different lifecycles look when charted side by
 > side.***
 
 <figure id="e838" class="graf graf--figure graf-after--blockquote">
@@ -689,17 +688,17 @@ views over time.
 src="https://cdn-images-1.medium.com/max/800/1*-obQYCmlyU_uII9Vz5GCmg.png"
 class="graf-image" data-image-id="1*-obQYCmlyU_uII9Vz5GCmg.png"
 data-width="2038" data-height="1101" />
-<figcaption>This chart shows two very different lifecycles. “Russia’s
-Slow Surrender” drew immediate attention, spiking to 1,500 reads almost
-overnight before stalling out. In contrast, “The R-Word” and “Gold
-Standard” never broke big but continue to collect steady reads week
+<figcaption>This chart shows two very different lifecycles. â€œRussiaâ€™s
+Slow Surrenderâ€ drew immediate attention, spiking to 1,500 reads almost
+overnight before stalling out. In contrast, â€œThe R-Wordâ€ and â€œGold
+Standardâ€ never broke big but continue to collect steady reads week
 after week. Breakout stories deliver a burst of visibility, while
 evergreen essays pay out slowly over time.</figcaption>
 </figure>
 
 #### Key highlights:
 
-- <span id="4f68">**Russia’s Slow Surrender** ~ 1,800 views, 1,500
+- <span id="4f68">**Russiaâ€™s Slow Surrender** ~ 1,800 views, 1,500
   reads, 83.3% engagement</span>
 - <span id="3597">**Nottoway Plantation Burns** ~ 890 views, 577 reads,
   64.8% engagement</span>
@@ -735,7 +734,7 @@ evergreen essays pay out slowly over time.</figcaption>
 
 #### **2) Write about topics while people are searching for them.**
 
-#### 3) Keep your essays in the 4–9 minute range
+#### 3) Keep your essays in the 4â€“9 minute range
 
 </div>
 
@@ -833,7 +832,7 @@ surprised by this) **the quality of my essays improved dramatically.**
 
 **Communication in my life has become richer and more dynamic.**
 
-#### ***And that’s the real case for starting a blog:***
+#### ***And thatâ€™s the real case for starting a blog:***
 
 > Becoming a writer enriches your life across the board.
 
@@ -868,24 +867,24 @@ date.</figcaption>
 
 I am honestly quite proud of my essays. The traffic has been fun to
 watch ~ pretty cool to think some people are finding my writing when
-they google “why don’t we go back to the gold standard.” I would
+they google â€œwhy donâ€™t we go back to the gold standard.â€ I would
 describe overall traffic as modest but respectable for a new writer.
 
-**It isn’t a firework show** ~ but the numbers keep moving up because my
+**It isnâ€™t a firework show** ~ but the numbers keep moving up because my
 portfolio is built on well researched, nuanced essays covering modern
 topics of interest for the regular guy.
 
 I wrote these essays to answer the questions that keep me up at night. I
-wrote them because I couldn’t find real answers to these questions
+wrote them because I couldnâ€™t find real answers to these questions
 online.
 
 Ultimately, I did all this for just one reason: ***for my own
 satisfaction.*** And I believe thats why I was able to do it! I had a
 lot of fun ~ and I am officially a nerd.
 
-If you’re thinking about starting a Medium account, I say go for it ~
-but don’t expect overnight superstardom. Medium is not tik tok. But if
-you enjoy writing and you’re looking for a place to discuss ideas with a
+If youâ€™re thinking about starting a Medium account, I say go for it ~
+but donâ€™t expect overnight superstardom. Medium is not tik tok. But if
+you enjoy writing and youâ€™re looking for a place to discuss ideas with a
 bit of nuance, Medium might just be the place for you in 2025.
 
 </div>
@@ -917,16 +916,16 @@ bit of nuance, Medium might just be the place for you in 2025.
   immediately**</span>
 - <span id="413a">**There are no advertisements.**</span>
 
-> *I’ve considered moving my content to something like a ghost website
+> *Iâ€™ve considered moving my content to something like a ghost website
 > or Substack.*
 
-> For now, I’ll stick with Medium.
+> For now, Iâ€™ll stick with Medium.
 
-**I’m not in it for the money,** so I don’t paywall any of my stories or
-worry about the partner program earnings. If you’re trying to monetize,
+**Iâ€™m not in it for the money,** so I donâ€™t paywall any of my stories or
+worry about the partner program earnings. If youâ€™re trying to monetize,
 you may or may not want to do it on Medium. (If I was trying to make
 money off of this writing hobby I would start my own website ~ **but
-that’s just me.)**
+thatâ€™s just me.)**
 
 </div>
 
@@ -950,14 +949,14 @@ that’s just me.)**
 
 > You should do it!
 
-**Writing is one of life’s most satisfying hobbies**.\
+**Writing is one of lifeâ€™s most satisfying hobbies**.\
 You build something tangible, grow as a person, and learn interesting
-things while you’re at it.
+things while youâ€™re at it.
 
-#### **If you’re on the fence, start small.**
+#### **If youâ€™re on the fence, start small.**
 
-Pick a question that you’ve been asking yourself and write the clearest
-answer you can. **Don’t worry about it being perfect ~**
+Pick a question that youâ€™ve been asking yourself and write the clearest
+answer you can. **Donâ€™t worry about it being perfect ~**
 
 > It never is.
 
@@ -983,16 +982,16 @@ answer you can. **Don’t worry about it being perfect ~**
 
 <a href="https://medium.com/the-balanced-sheet"
 class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet" target="_blank">→
+data-href="https://medium.com/the-balanced-sheet" target="_blank">â†’
 Follow The Balance Sheet</a> and drop a comment about your own
 experience writing in 2025!\
-→ Clap 50 times to show your support!\
-→ Share this story with a friend!\
-→ Thinking of starting your own blog? Comment with your first idea!
+â†’ Clap 50 times to show your support!\
+â†’ Share this story with a friend!\
+â†’ Thinking of starting your own blog? Comment with your first idea!
 
 ### Thanks for Reading
 
-Thanks for sticking with me through this period of growth! I’m looking
+Thanks for sticking with me through this period of growth! Iâ€™m looking
 forward to **many more months ~**
 
 > I hope you are too ~
@@ -1002,3 +1001,4 @@ forward to **many more months ~**
 </div>
 
 </div>
+

@@ -32,7 +32,6 @@ Each published piece is treated as an edition object, not a blog post.
 - `section_label`
 - `version`
 - `edition`
-- `issue`
 - `pdf`
 - `draft`
 
@@ -52,7 +51,7 @@ And the generated file must exist at:
 `version` must be manually bumped for any material change to:
 - body content
 - title or subtitle
-- citation-relevant metadata (`author`, `date`, `edition`, `issue`)
+- citation-relevant metadata (`author`, `date`, `edition`)
 
 Suggested convention:
 - major changes: `2.0`, `3.0`, ...
@@ -94,5 +93,6 @@ CI workflow order:
 
 ## Change Control
 Policy changes require explicit update to this file in the same PR as any CI rule changes.
+
 
 

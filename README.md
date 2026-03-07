@@ -1,4 +1,4 @@
-# Outside In Print
+﻿# Outside In Print
 
 A minimalist, print-forward Hugo site for publishing writing and **PDF editions**.
 
@@ -30,7 +30,6 @@ Each non-draft piece should include:
 - `section_label`
 - `version` (bump on material revision)
 - `edition` (e.g., "First digital edition")
-- `issue` (simple imprint numbering)
 - `pdf` path: `/pdfs/<slug>.pdf`
 - optional `featured: true` (shows on homepage)
 

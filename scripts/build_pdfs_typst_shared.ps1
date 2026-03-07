@@ -164,14 +164,12 @@ foreach ($file in $mdFiles) {
   $subtitle = $frontMatter["subtitle"]
   $version = $frontMatter["version"]
   $edition = $frontMatter["edition"]
-  $issue = $frontMatter["issue"]
   $sectionLabel = $frontMatter["section_label"]
   $date = $frontMatter["date"]
 
   if ([string]::IsNullOrWhiteSpace($title)) { $title = $slug }
   if ([string]::IsNullOrWhiteSpace($version)) { $version = "1.0" }
   if ([string]::IsNullOrWhiteSpace($edition)) { $edition = "First digital edition" }
-  if ([string]::IsNullOrWhiteSpace($issue)) { $issue = "Issue 001" }
   if ([string]::IsNullOrWhiteSpace($sectionLabel)) { $sectionLabel = "Piece" }
 
   $pdfPath = Join-Path $PdfOutDir "$safeSlug.pdf"
@@ -189,7 +187,6 @@ foreach ($file in $mdFiles) {
   $escapedTitle = Escape-TypstString -Value $title
   $escapedSubtitle = Escape-TypstString -Value $subtitle
   $escapedSectionLabel = Escape-TypstString -Value $sectionLabel
-  $escapedIssue = Escape-TypstString -Value $issue
   $escapedDate = Escape-TypstString -Value $date
   $escapedVersion = Escape-TypstString -Value $version
   $escapedEdition = Escape-TypstString -Value $edition
@@ -209,7 +206,6 @@ foreach ($file in $mdFiles) {
   title: "$escapedTitle",
   subtitle: "$escapedSubtitle",
   section_label: "$escapedSectionLabel",
-  issue: "$escapedIssue",
   date: "$escapedDate",
   version: "$escapedVersion",
   edition: "$escapedEdition",
@@ -249,7 +245,6 @@ foreach ($file in $mdFiles) {
   title: "$escapedTitle",
   subtitle: "$escapedSubtitle",
   section_label: "$escapedSectionLabel",
-  issue: "$escapedIssue",
   date: "$escapedDate",
   version: "$escapedVersion",
   edition: "$escapedEdition",
@@ -273,4 +268,5 @@ foreach ($file in $mdFiles) {
 }
 
 Write-Host "`n$Mode PDF build complete." -ForegroundColor Cyan
+
 

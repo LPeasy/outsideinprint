@@ -1,5 +1,5 @@
 ---
-title: "It’s tough to weigh short term costs against what people perceive as low probability events."
+title: "Itâ€™s tough to weigh short term costs against what people perceive as low probability events."
 date: 2025-08-12
 draft: false
 slug: "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events"
@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: ""
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events-e7d758198c66"
@@ -26,7 +25,7 @@ class="section section section--body section--first section--last">
 
 <div class="section-inner sectionLayout--insetColumn">
 
-It’s tough to weigh short term costs against what people perceive as low
+Itâ€™s tough to weigh short term costs against what people perceive as low
 probability events.\
 \
 Kind of a different thing, but the way our country has let the national
@@ -35,7 +34,7 @@ discounting long term costs / unlikely but extremely costly
 consequences.\
 \
 Part of the problem is the disconnect between technical analysts and
-decision makers… its unclear whether the Kerr County emergency
+decision makersâ€¦ its unclear whether the Kerr County emergency
 management office actually employed anyone with technical expertise in
 risk management / emergency preparedness based on their website\
 \
@@ -44,7 +43,7 @@ https://kerrcountytx.gov/kerr-county-all-departments/emergency-management#gsc.ta
 From the sheriffs website ~ description of Kerr County Emergency
 Coordinator and volunteer team of first responders\
 \
-“W.B. "Dub" Thomas, Emergency Management Coordinator/Deputy Sheriff for
+â€œW.B. "Dub" Thomas, Emergency Management Coordinator/Deputy Sheriff for
 Kerr County and the City of Ingram\
 \
 Graduated from Sam Houston State with a BS degree in Criminal Justice
@@ -53,7 +52,7 @@ Previous employment: Texas Department of Public Safety, Highway Patrol
 Service from 1985 until 2010. Retired as Texas Highway Patrol
 Lieutenant.\
 \
-Responsible for 7 Sergeant Areas with 70 Troopers, 6 K-9’s, admin staff,
+Responsible for 7 Sergeant Areas with 70 Troopers, 6 K-9â€™s, admin staff,
 Presidential Security at the Western Whitehouse, RADAR and Laser
 Instructor as well as recruit school instructor.\
 \
@@ -83,18 +82,18 @@ A volunteer group that will work to assist and support the Kerr County
 Sheriff's Office. This group consists of citizens who have received the
 20 hour basic CERT training class. This group will also attend
 in-service training periodically to remain refreshed on the knowledge
-acquired during this training.”\
+acquired during this training.â€\
 \
 \
 \_\_\_\
 \
 \
-(Acknowledging that rural counties shouldn’t be expected to have
+(Acknowledging that rural counties shouldnâ€™t be expected to have
 professional risk managers/emergency management professionals in their
 office)\
 \
 Without someone who understands the technical language used by FEMA and
-(sometimes) NWS it’s not too surprising that the effort to build that
+(sometimes) NWS itâ€™s not too surprising that the effort to build that
 siren warning system failed since it seemed too expensive for what the
 community perceived as a low risk situation.\
 \
@@ -105,3 +104,4 @@ Tragic.
 </div>
 
 </div>
+

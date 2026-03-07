@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "Inside the life of Robert Prevost, the Augustinian priest who made history"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a"
@@ -67,9 +66,9 @@ data-width="1024" data-height="658" />
 <figcaption>1950s Chicago | Source: Wikimedia Commons</figcaption>
 </figure>
 
-> **“Before Pope Leo XIV, he was just Rob Prevost — a kid from the South
+> **â€œBefore Pope Leo XIV, he was just Rob Prevostâ€Šâ€”â€Ša kid from the South
 > Side of Chicago with a daily Mass habit playing priest in the living
-> room.”**
+> room.â€**
 
 > **Pope Leo XIV was born Robert Francis Prevost on September 14, 1955,
 > in Chicago, Illinois.**
@@ -84,7 +83,7 @@ involved in their local parish.
   superintendent, passed down a legacy of discipline and public
   service.</span>
 - <span id="08ed">Mildred, a Spanish Creole librarian and schoolteacher,
-  helped shape her son’s deep spirituality through regular Mass
+  helped shape her sonâ€™s deep spirituality through regular Mass
   attendance and community involvement.</span>
 
 Rob was the youngest of three brothers and is said to have taken to
@@ -92,12 +91,12 @@ religion early. **He served as an altar boy, sang in the choir, and even
 play-acted Masses at home.**
 
 Family members have recalled a childhood fascination with the
-priesthood, joking that he always wanted to “play church.”
+priesthood, joking that he always wanted to â€œplay church.â€
 
 > According to one neighbor, his friends used to joke that he would one
 > day become the first American pope.
 
-> Little did they know…
+> Little did they knowâ€¦
 
 </div>
 
@@ -130,8 +129,8 @@ data-width="1024" data-height="614" />
 
 > and he remained committed to the priesthood throughout his youth.
 
-> **“He graduated from Villanova University in 1977 with a mathematics
-> degree — an uncommon path for a future pope.”**
+> **â€œHe graduated from Villanova University in 1977 with a mathematics
+> degreeâ€Šâ€”â€Šan uncommon path for a future pope.â€**
 
 **That same year, he began his novitiate with the Augustinian Order.**
 
@@ -179,8 +178,8 @@ data-width="640" data-height="391" />
 **He became a beloved pastor**, seminary rector, professor, and canon
 lawyer **in the Archdiocese of Trujillo.**
 
-> **“He celebrated Mass in tin-roof chapels, walked to visit the sick,
-> and led with quiet discipline.”**
+> **â€œHe celebrated Mass in tin-roof chapels, walked to visit the sick,
+> and led with quiet discipline.â€**
 
 **This chapter of his life left a permanent mark.**
 
@@ -215,7 +214,7 @@ Chiclayo.**
 src="https://cdn-images-1.medium.com/max/800/1*4feQh-E76pyVG45PwPTilw.jpeg"
 class="graf-image" data-image-id="1*4feQh-E76pyVG45PwPTilw.jpeg"
 data-width="1024" data-height="633" />
-<figcaption>Pope Leo’s Inauguration | Source: Wikimedia
+<figcaption>Pope Leoâ€™s Inauguration | Source: Wikimedia
 Commons</figcaption>
 </figure>
 
@@ -223,10 +222,10 @@ Commons</figcaption>
 > Chicago.
 
 **Two years later,** his global peers chose him as **Prior General of
-the worldwide Augustinian Order **— a role he held for 12 years.
+the worldwide Augustinian Orderâ€Š**â€”â€Ša role he held for 12 years.
 
-> **“As leader of the Augustinians, he visited friars on every continent
-> and honed a collaborative leadership style.”**
+> **â€œAs leader of the Augustinians, he visited friars on every continent
+> and honed a collaborative leadership style.â€**
 
 After finishing his term in 2013, he returned to seminary formation work
 in Chicago.
@@ -267,19 +266,19 @@ Commons</figcaption>
 **In 2014,** the Pope appointed Prevost as **Apostolic Administrator of
 Chiclayo, Peru,** ***later naming him bishop.***
 
-> **“His episcopal motto ~ ‘In the One, we are one’ ~ reflected his
-> emphasis on unity and synodality (walking together in the faith).”**
+> **â€œHis episcopal motto ~ â€˜In the One, we are oneâ€™ ~ reflected his
+> emphasis on unity and synodality (walking together in the faith).â€**
 
 **He was a leader** in Latin American circles and served as **vice
-president of the Peruvian Bishops’ Conference.**
+president of the Peruvian Bishopsâ€™ Conference.**
 
 **In 2023, he was called to Rome to lead the Vatican Dicastery for
-Bishops,** one of the Church’s most influential offices.
+Bishops,** one of the Churchâ€™s most influential offices.
 
 > He was made a cardinal later that year.
 
 **As Prefect, he oversaw the appointment of bishops worldwide and
-participated in high-level reforms** aligned with Pope Francis’s
+participated in high-level reforms** aligned with Pope Francisâ€™s
 priorities.
 
 </div>
@@ -317,22 +316,22 @@ Van</a></figcaption>
 > Pope Francis passed away in April 2025.
 
 During the conclave that followed, **Prevost was not widely seen as a
-frontrunner **— largely because he was American.
+frontrunnerâ€Š**â€”â€Šlargely because he was American.
 
 **But after four rounds of voting, on May 8, 2025, he was elected the
 267th pope, choosing the name Leo XIV.**
 
-> **“He wore a plain white cassock and asked the crowd to pray for
-> him — a gesture of continuity with his predecessor’s humility.”**
+> **â€œHe wore a plain white cassock and asked the crowd to pray for
+> himâ€Šâ€”â€Ša gesture of continuity with his predecessorâ€™s humility.â€**
 
 > He became the first American, the first Augustinian, and the second
 > pope to come from the new world.
 
-**In his first blessing** from the balcony of St. Peter’s Basilica,
+**In his first blessing** from the balcony of St. Peterâ€™s Basilica,
 
 **he greeted the world simply:**
 
-> **“Peace be with you.”**
+> **â€œPeace be with you.â€**
 
 </div>
 
@@ -399,15 +398,15 @@ data-width="1024" data-height="737" />
 2.  <span id="e1ce">**Peacemaking**</span>
 
 **He introduced a new liturgical rite** focused on **environmental
-care** and celebrated a public **“Mass for Creation”** while on retreat
+care** and celebrated a public **â€œMass for Creationâ€** while on retreat
 at Castel Gandolfo.
 
-> **“Today, we live in a world that is burning — both from global
-> warming and from armed conflicts.”**
+> **â€œToday, we live in a world that is burningâ€Šâ€”â€Šboth from global
+> warming and from armed conflicts.â€**
 
 In homilies, **he has warned bluntly about climate inaction**
 
-> referring to “a world that is burning.”
+> referring to â€œa world that is burning.â€
 
 **On diplomacy,** **he offered the Vatican as a neutral host for peace
 negotiations in Ukraine.**
@@ -451,17 +450,17 @@ state and the poor.
 
 As a former missionary, he prioritizes proximity over prestige.
 
-> **“You cannot wash the feet of the poor from a palace.”**
+> **â€œYou cannot wash the feet of the poor from a palace.â€**
 
-> He’s also known for having trademark “humble humor.”
+> Heâ€™s also known for having trademark â€œhumble humor.â€
 
 At a Vatican reception, he joked with Latin American cardinals:
 
-> **“Careful now, I have to remain neutral — I’m Pope!”**
+> **â€œCareful now, I have to remain neutralâ€Šâ€”â€ŠIâ€™m Pope!â€**
 
 > Even in high office,
 
-> his friends still call him “**Padre Bob.”**
+> his friends still call him â€œ**Padre Bob.â€**
 
 </div>
 
@@ -488,7 +487,7 @@ At a Vatican reception, he joked with Latin American cardinals:
 src="https://cdn-images-1.medium.com/max/800/1*efFckIbSU7uG3MzkG_wIBA.jpeg"
 class="graf-image" data-image-id="1*efFckIbSU7uG3MzkG_wIBA.jpeg"
 data-width="1024" data-height="682" />
-<figcaption>St. Peter’s Basilica | Source: Wikimedia
+<figcaption>St. Peterâ€™s Basilica | Source: Wikimedia
 Commons</figcaption>
 </figure>
 
@@ -499,9 +498,9 @@ He supports greater **lay participation**, commissioned **ethical
 reviews of Vatican finances**, and hinted at **exploring digital
 ethics** in the future.
 
-It’s still early in his tenure, but his approach is clear:
+Itâ€™s still early in his tenure, but his approach is clear:
 
-> **“Bridge divides, walk humbly, act boldly.”**
+> **â€œBridge divides, walk humbly, act boldly.â€**
 
 His **background in both law and science,** paired with years of
 pastoral experience, suggests he may be **uniquely positioned to tackle
@@ -595,3 +594,4 @@ with a friend.
 </div>
 
 </div>
+

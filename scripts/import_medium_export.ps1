@@ -1,4 +1,4 @@
-param(
+﻿param(
   [Parameter(Mandatory = $true)] [string]$ZipPath,
   [string]$ContentOut = "./content/essays",
   [string]$MediaOut = "./static/images/medium",
@@ -416,7 +416,6 @@ try {
         ('subtitle: "{0}"' -f (Escape-Yaml $post.subtitle)),
         'version: "1.0"',
         'edition: "First digital edition"',
-        'issue: "Issue 001"',
         ('pdf: "/pdfs/{0}.pdf"' -f $slug),
         'featured: false',
         ('medium_source_url: "{0}"' -f (Escape-Yaml $post.canonical_url)),

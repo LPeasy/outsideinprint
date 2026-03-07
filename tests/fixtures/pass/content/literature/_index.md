@@ -1,3 +1,3 @@
-﻿---
+---
 title: "Fixture Literature Index"
 ---

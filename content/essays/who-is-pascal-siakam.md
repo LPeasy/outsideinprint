@@ -4,10 +4,9 @@ date: 2025-05-28
 draft: false
 slug: "who-is-pascal-siakam"
 section_label: "Essay"
-subtitle: "How “Spicy P” Went from Douala Dreamer to Pacers Playoff Powerhouse"
+subtitle: "How â€œSpicy Pâ€ Went from Douala Dreamer to Pacers Playoff Powerhouse"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/who-is-pascal-siakam.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/who-is-pascal-siakam-7b1ed9f4f69a"
@@ -27,7 +26,7 @@ medium_source_url: "https://medium.com/@lawtonperret/who-is-pascal-siakam-7b1ed9
 
 ## Who Is Pascal Siakam?
 
-#### How “Spicy P” Went from Douala Dreamer to Playoff Powerhouse
+#### How â€œSpicy Pâ€ Went from Douala Dreamer to Playoff Powerhouse
 
 <figure id="d761" class="graf graf--figure graf-after--h4">
 <img
@@ -39,7 +38,7 @@ data-width="250" data-height="318" />
 > Pascal Siakam \| Source: Basketball Wiki
 
 **Pascal Siakam** ~ from childhood in Cameroon to NBA All-Star, and his
-pivotal role in Indiana’s 2025 playoff run ~ ***in his own words.***
+pivotal role in Indianaâ€™s 2025 playoff run ~â€Š***in his own words.***
 
 > Whenever you see a block quote, it comes directly from one of these
 > three sources:
@@ -54,7 +53,7 @@ title="https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-
 a Chance on the Unknown | By Pascal Siakam</strong><br />
 <em>I was playing for my dad now. I was playing for his dream of having
 a son in the NBA. From that day forward, I felt
-like…</em>www.theplayerstribune.com</a><a
+likeâ€¦</em>www.theplayerstribune.com</a><a
 href="https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="749ed027e6706c1abebbc5228030b991"
@@ -72,7 +71,7 @@ data-href="https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-h
 title="https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents"><strong>Pascal
 Siakam Reveals Why Pacers Have Major Edge Over Opponents</strong><br />
 <em>This current iteration of the Indiana Pacers represent the spirit in
-what the game of basketball was predicated upon…</em>www.si.com</a><a
+what the game of basketball was predicated uponâ€¦</em>www.si.com</a><a
 href="https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="f3d8ca1a57b0399c497ff0a9f0eaa1c4"
@@ -133,11 +132,11 @@ data-width="960" data-height="480" />
 
 Born April 2, 1994, in **Douala, Cameroon**, Pascal was the youngest of
 four brothers in a devout Catholic household. **At 11, his father sent
-him to St. Andrew’s Seminary** in Bafia, where the daily schedule
+him to St. Andrewâ€™s Seminary** in Bafia, where the daily schedule
 included prayer, classes, and chores.
 
-> “I was only 11 years old… I missed my family. I missed playing soccer
-> with my friends. I missed home.”
+> â€œI was only 11 years oldâ€¦ I missed my family. I missed playing soccer
+> with my friends. I missed home.â€
 
 He bristled at the strict routines, but the discipline he picked up
 there paved the way for his success.
@@ -178,14 +177,14 @@ data-width="5000" data-height="3333" />
 Soccer was king in Douala, and basketball was an afterthought ~ until
 one year, **Luc Mbah a Moute** ran a basketball camp in town.
 
-> He recognized Pascal’s potential.
+> He recognized Pascalâ€™s potential.
 
 Basketball Without Borders invited him to play, and Pascal realized for
 the first time that the NBA could be within reach.
 
-> “That was the moment I realized maybe I could play.”
+> â€œThat was the moment I realized maybe I could play.â€
 
-At 18, he departed Cameroon for God’s Academy in Lewisville, Texas.
+At 18, he departed Cameroon for Godâ€™s Academy in Lewisville, Texas.
 
 </div>
 
@@ -226,9 +225,9 @@ points** and **8.6 rebounds**, earning **WAC Player of the Year.**
 
 Not too shabby.
 
-> “Talking to \[Coach Marvin Menzies\] was always easy. It didn’t feel
+> â€œTalking to \[Coach Marvin Menzies\] was always easy. It didnâ€™t feel
 > like I was being recruited. It just felt like I was being welcomed
-> home.”
+> home.â€
 
 That sense of belonging unlocked his confidence.
 
@@ -269,10 +268,10 @@ rookie season in the G League.
 Instead of pouting, **he dominated ~** averaging over 18 points,
 **winning** **a** D-League **title**, and **earning Finals MVP.**
 
-> “Spending time in the G League taught me patience and work ethic. I
-> knew I had to earn everything.”
+> â€œSpending time in the G League taught me patience and work ethic. I
+> knew I had to earn everything.â€
 
-Those long bus rides and back-to-back games forged the toughness he’d
+Those long bus rides and back-to-back games forged the toughness heâ€™d
 need on NBA courts.
 
 </div>
@@ -304,18 +303,18 @@ data-width="1200" data-height="675" />
 
 > Pascal as a Champion in 2019 \| Source: Raptors HQ
 
-“Spicy P” flourished in Toronto.
+â€œSpicy Pâ€ flourished in Toronto.
 
 In **2019** he was a **full-time starter**, averaging **16.9 points and
-6.9 rebounds** in the playoffs en route to the franchise’s first **NBA
+6.9 rebounds** in the playoffs en route to the franchiseâ€™s first **NBA
 championship.**
 
 > He became the first player to win Most Improved and a title in the
 > same season.
 
-> “Toronto made me feel like I belonged from day one. I loved the
-> diversity… discovering all of that let me take my guard down and be
-> me… I’ll always be a part of this community.”
+> â€œToronto made me feel like I belonged from day one. I loved the
+> diversityâ€¦ discovering all of that let me take my guard down and be
+> meâ€¦ Iâ€™ll always be a part of this community.â€
 
 #### Pascal Siakam Pacers Playoff Performance
 
@@ -331,7 +330,7 @@ data-width="1200" data-height="800" />
 Pascal was traded to Indiana in January of 2024. The Pacers missed the
 playoffs, but the next season the team went to work.
 
-The 24–25 season saw the Pacers jump dramatically to 50 wins. Fifty
+The 24â€“25 season saw the Pacers jump dramatically to 50 wins. Fifty
 wins!
 
 They defeated their first two playoff matchups with relative ease and
@@ -341,11 +340,11 @@ Finals.
 In Game 2 Conference Finals Siakam erupted for 39 points.
 
 On May 28, 2025, he helped seal a win over Knicks to give the Pacers a
-commanding 3 — 1 series lead — just one win away from the Finals.
+commanding 3â€Šâ€”â€Š1 series leadâ€Šâ€”â€Šjust one win away from the Finals.
 
-> “What makes us special as a team is just we have different weapons.
-> We’re not consumed with who’s gonna do what. However the game presents
-> itself, that’s how we go and take it. It doesn’t matter who scores.”
+> â€œWhat makes us special as a team is just we have different weapons.
+> Weâ€™re not consumed with whoâ€™s gonna do what. However the game presents
+> itself, thatâ€™s how we go and take it. It doesnâ€™t matter who scores.â€
 
 </div>
 
@@ -380,13 +379,13 @@ The Pacers organization is kinda hot right now.
 
 On the Pat McAfee Show, **Shams Charania** praised Indiana:
 
-> “\[The Pacers\] are turning into a real destination. I think players
+> â€œ\[The Pacers\] are turning into a real destination. I think players
 > look at Tyrese Haliburton, look at Pascal Siakam, and what this front
-> office has done such a good job of… they’ve done everything they can
-> to scout players that they know wanna win and wanna compete.”
+> office has done such a good job ofâ€¦ theyâ€™ve done everything they can
+> to scout players that they know wanna win and wanna compete.â€
 
 From a 35-47 record in 2023 to a 3-1 conference finals lead in 2025,
-Indiana’s transformation owes a lot to Pascal’s presence and leadership.
+Indianaâ€™s transformation owes a lot to Pascalâ€™s presence and leadership.
 
 </div>
 
@@ -414,7 +413,7 @@ class="markup--anchor markup--p-anchor"
 data-href="https://www.ps43foundation.com" rel="noopener"
 target="_blank"><strong>PS43 Foundation.</strong></a>
 
-> The charity supports education and youth sports in Cameroon and
+> The charityâ€Šsupports education and youth sports in Cameroon and
 > Canada.
 
 </div>
@@ -435,7 +434,7 @@ target="_blank"><strong>PS43 Foundation.</strong></a>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### What’s Next for Pascal Siakam
+#### Whatâ€™s Next for Pascal Siakam
 
 <figure id="4727" class="graf graf--figure graf-after--h4">
 <img
@@ -449,22 +448,22 @@ data-width="960" data-height="640" />
 At 31, Pascal straddles veteran savvy and prime athleticism.
 
 Three All-Star nods, two All-NBA selections, a championship, and a G
-League title…
+League titleâ€¦
 
-but he insists the story isn’t over ~ not even close:
+but he insists the story isnâ€™t over ~ not even close:
 
-> “Every year I try to get better — to be more consistent, especially in
+> â€œEvery year I try to get betterâ€Šâ€”â€Što be more consistent, especially in
 > big moments. I still want to push my game, help this team win, and
-> show people what we can do.”
+> show people what we can do.â€
 
 As Indiana steps onto the Finals stage for the first time since 2000,
-“Spicy P” will be at the center of it all.
+â€œSpicy Pâ€ will be at the center of it all.
 
-It’s been a long climb from seminary dorms to these moments under the
-brightest lights. Pascal Siakam’s journey is proof that grit and
+Itâ€™s been a long climb from seminary dorms to these moments under the
+brightest lights. Pascal Siakamâ€™s journey is proof that grit and
 curiosity can rewrite any story.
 
-Now, as he knocks on the door of basketball’s biggest stage, he
+Now, as he knocks on the door of basketballâ€™s biggest stage, he
 remembers the discipline he learned back in the seminary.
 
 The way his college team felt like a family.
@@ -475,7 +474,7 @@ He grew from those experiences ~ and the whole league is watching.
 
 Whether he ends up hoisting the trophy or not:
 
-> His story’s far from over.
+> His storyâ€™s far from over.
 
 </div>
 
@@ -495,14 +494,14 @@ Whether he ends up hoisting the trophy or not:
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Author’s Note
+#### Authorâ€™s Note
 
-Enjoyed Pascal’s story? Subscribe to
+Enjoyed Pascalâ€™s story? Subscribe to
 <a href="https://medium.com/the-balanced-sheet"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet" target="_blank">The
 Balance Sheet</a> for more deep dives on the people and moments shaping
-today’s economy and culture.
+todayâ€™s economy and culture.
 
 </div>
 
@@ -531,9 +530,9 @@ class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://en.wikipedia.org/wiki/Pascal_Siakam"
 title="https://en.wikipedia.org/wiki/Pascal_Siakam"><strong>Pascal
 Siakam - Wikipedia</strong><br />
-<em>Pascal Siakam ( see-AH-kəm ; born 2 April 1994) is a Cameroonian
+<em>Pascal Siakam ( see-AH-kÉ™m ; born 2 April 1994) is a Cameroonian
 professional basketball player for the Indiana
-Pacers…</em>en.wikipedia.org</a><a href="https://en.wikipedia.org/wiki/Pascal_Siakam"
+Pacersâ€¦</em>en.wikipedia.org</a><a href="https://en.wikipedia.org/wiki/Pascal_Siakam"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="0a34ed7f81095639707e78dfe6981d6e"
 data-thumbnail-img-id="0*HYxnwYAyWG1KRolH.jpg"
@@ -551,7 +550,7 @@ title="https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-
 a Chance on the Unknown | By Pascal Siakam</strong><br />
 <em>I was playing for my dad now. I was playing for his dream of having
 a son in the NBA. From that day forward, I felt
-like…</em>www.theplayerstribune.com</a><a
+likeâ€¦</em>www.theplayerstribune.com</a><a
 href="https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="749ed027e6706c1abebbc5228030b991"
@@ -569,7 +568,7 @@ data-href="https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-h
 title="https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents"><strong>Pascal
 Siakam Reveals Why Pacers Have Major Edge Over Opponents</strong><br />
 <em>This current iteration of the Indiana Pacers represent the spirit in
-what the game of basketball was predicated upon…</em>www.si.com</a><a
+what the game of basketball was predicated uponâ€¦</em>www.si.com</a><a
 href="https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="f3d8ca1a57b0399c497ff0a9f0eaa1c4"
@@ -608,7 +607,7 @@ title="https://www.nba.com/player/1627783/pascal-siakam"><strong>Pascal
 Siakam | Forward | Indiana Pacers | NBA.com</strong><br />
 <em>Pascal Siakam bio, latest news, videos, and exclusive content.
 Discover his awards, honors, and career
-achievements.…</em>www.nba.com</a><a href="https://www.nba.com/player/1627783/pascal-siakam"
+achievements.â€¦</em>www.nba.com</a><a href="https://www.nba.com/player/1627783/pascal-siakam"
 class="js-mixtapeImage mixtapeImage mixtapeImage--empty u-ignoreBlock"
 data-media-id="7c98448c182253708d2ff0903cfaa703"></a>
 
@@ -619,3 +618,4 @@ data-media-id="7c98448c182253708d2ff0903cfaa703"></a>
 </div>
 
 </div>
+

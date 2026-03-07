@@ -1,5 +1,5 @@
 ---
-title: "June 27, 2025 — SCOTUS Set to Close Its Term with Major Decisions"
+title: "June 27, 2025 â€” SCOTUS Set to Close Its Term with Major Decisions"
 date: 2025-06-27
 draft: false
 slug: "june-27-2025-scotus-set-to-close-its-term-with-major-decisions"
@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "What to Watch as the Supreme Court Wraps Its Term"
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/june-27-2025-scotus-set-to-close-its-term-with-major-decisions.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/june-27-2025-scotus-set-to-close-its-term-with-major-decisions-a183e7bb38b3"
@@ -26,7 +25,7 @@ class="section section section--body section--first section--last">
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **June 27, 2025 — SCOTUS Set to Close Its Term with Major Decisions**
+### **June 27, 2025â€Šâ€”â€ŠSCOTUS Set to Close Its Term with Major Decisions**
 
 #### **What to Watch as the Supreme Court Wraps Its Term**
 
@@ -41,7 +40,7 @@ The Supreme Court is set to release its final opinions of the term
 today, starting at 10 a.m. Eastern. Several major rulings are still
 pending.
 
-***Here’s what to watch:***
+***Hereâ€™s what to watch:***
 
 #### **1. Education and Parental Rights**
 
@@ -77,16 +76,17 @@ An executive order issued under the Trump administration challenged
 > The Court may decide whether the case can proceed and whether federal
 > courts can issue broad national injunctions against such policies.
 
-> ***We’ll return this evening with a full breakdown of the decisions
+> ***Weâ€™ll return this evening with a full breakdown of the decisions
 > and what they could mean.***
 
 #### **Stay Tuned**
 
 *Follow* ***The Balance Sheet*** *for clear, measured analysis of
-today’s headlines — and the forces behind them.*
+todayâ€™s headlinesâ€Šâ€”â€Šand the forces behind them.*
 
 </div>
 
 </div>
 
 </div>
+

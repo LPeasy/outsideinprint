@@ -1,5 +1,5 @@
 ---
-title: "Iran Fires Missiles at U.S. Base in Qatar — What Just Happened?"
+title: "Iran Fires Missiles at U.S. Base in Qatar â€” What Just Happened?"
 date: 2025-06-23
 draft: false
 slug: "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened"
@@ -7,7 +7,6 @@ section_label: "Essay"
 subtitle: "Missiles intercepted. No casualties. Flash in the Pan."
 version: "1.0"
 edition: "First digital edition"
-issue: "Issue 001"
 pdf: "/pdfs/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened-a3ed00113ff0"
@@ -25,7 +24,7 @@ medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Iran Fires Missiles at U.S. Base in Qatar — What Just Happened?
+### Iran Fires Missiles at U.S. Base in Qatarâ€Šâ€”â€ŠWhat Just Happened?
 
 #### ***Missiles intercepted. No casualties. Flash in the Pan.***
 
@@ -75,9 +74,9 @@ airstrikes, Iranian retaliation, and direct U.S. involvement.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### A Brief History — (With Links)
+### A Brief Historyâ€Šâ€”â€Š(With Links)
 
-U.S.–Iran tensions go back over **40 years**,
+U.S.â€“Iran tensions go back over **40 years**,
 <a href="https://en.wikipedia.org/wiki/Iran_hostage_crisis"
 class="markup--anchor markup--p-anchor"
 data-href="https://en.wikipedia.org/wiki/Iran_hostage_crisis"
@@ -85,7 +84,7 @@ rel="noopener" target="_blank">sparked by the 1979 Iranian Revolution
 and the U.S. embassy hostage crisis.</a>
 
 A cold war of **proxy battles**, **economic pressure**, and **nuclear
-standoffs** have shaped every administration’s relationship with Iran
+standoffs** have shaped every administrationâ€™s relationship with Iran
 since.
 
 The <a href="https://www.cfr.org/backgrounder/what-iran-nuclear-deal"
@@ -99,9 +98,9 @@ data-href="https://trumpwhitehouse.archives.gov/briefings-statements/president-d
 rel="noopener" target="_blank">U.S. withdrew</a> in 2018 and reset the
 clock.
 
-*The history of the U.S. — Iran relationship is far too complicated for
+*The history of the U.S.â€Šâ€”â€ŠIran relationship is far too complicated for
 a 3 minute explainer. Here are some additional sources for a deeper
-dive…*
+diveâ€¦*
 
 <a href="https://www.congress.gov/crs-product/R47321"
 class="markup--anchor markup--p-anchor"
@@ -117,7 +116,7 @@ rel="noopener" target="_blank">Full Timeline</a>
 href="https://www.aljazeera.com/news/2025/6/23/history-of-us-iran-relations-from-the-1953-regime-change-to-trump-strikes"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.aljazeera.com/news/2025/6/23/history-of-us-iran-relations-from-the-1953-regime-change-to-trump-strikes"
-rel="noopener" target="_blank">AlJazeera’s Timeline</a>
+rel="noopener" target="_blank">AlJazeeraâ€™s Timeline</a>
 
 </div>
 
@@ -152,8 +151,8 @@ claiming urgent security threats. **Iran struck back.**
 
 *The two nations have exchanged strikes almost daily since June 12.*
 
-**Then the** **U.S. launched airstrikes on June 21st** targeting Iran’s
-nuclear infrastructure — precision hits: underground centrifuges and
+**Then the** **U.S. launched airstrikes on June 21st** targeting Iranâ€™s
+nuclear infrastructureâ€Šâ€”â€Šprecision hits: underground centrifuges and
 enrichment sites.
 
 That brings us to **June 23**, when **Iran launched at least six
@@ -165,8 +164,8 @@ ballistic missiles at Al-Udeid Air Base** in Qatar.
 - <span id="20f2">**Qatar was warned in advance**, helping avoid
   escalation.</span>
 
-Iran called it ***“Operation Annunciation of Victory”*,** framing the
-strike as retaliation — not provocation.
+Iran called it ***â€œOperation Annunciation of Victoryâ€*,** framing the
+strike as retaliationâ€Šâ€”â€Šnot provocation.
 
 Qatar condemned the strike and temporarily **closed its airspace**.
 
@@ -190,7 +189,7 @@ Qatar condemned the strike and temporarily **closed its airspace**.
 
 ### Why It Matters
 
-This wasn’t a warning shot —** it was a message,** carefully calibrated
+This wasnâ€™t a warning shotâ€Šâ€”**â€Šit was a message,** carefully calibrated
 to avoid deaths while testing defenses and resolve. **Risky though.** If
 Americans are killed by an Iranian missile strike, I shudder to think
 what will happen next.
@@ -198,7 +197,7 @@ what will happen next.
 Questions remain:
 
 - <span id="97c4">**What if a missile slips through?**</span>
-- <span id="4dae">**What if warnings aren’t shared next time?**</span>
+- <span id="4dae">**What if warnings arenâ€™t shared next time?**</span>
 - <span id="e666">**What if this turns from symbolic to
   strategic?**</span>
 
@@ -239,14 +238,14 @@ rel="noopener" target="_blank">Xi is calling for a ceasefire</a>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### 📰 Want news that respects your time?
+### ðŸ“° Want news that respects your time?
 
-👏 *Clap if you want more explainers that skip the outrage and get to
+ðŸ‘ *Clap if you want more explainers that skip the outrage and get to
 the point.*
 
-💬 *What’s your take? We read every comment.*
+ðŸ’¬ *Whatâ€™s your take? We read every comment.*
 
-📬 *Follow* ***The Balance Sheet*** *for smart, plainspoken coverage of
+ðŸ“¬ *Follow* ***The Balance Sheet*** *for smart, plainspoken coverage of
 global conflict, U.S. defense, and economic power plays.*
 
 </div>
@@ -254,3 +253,4 @@ global conflict, U.S. defense, and economic power plays.*
 </div>
 
 </div>
+
