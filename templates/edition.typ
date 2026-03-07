@@ -19,10 +19,10 @@
   set document(title: title, author: author, date: doc_date)
 
   align(center)[
-    text(size: 20pt, weight: "bold")[#title]
+    #text(size: 20pt, weight: "bold")[#title]
   ]
   if subtitle != "" {
-    align(center)[emph(subtitle)]
+    align(center)[#emph[#subtitle]]
   }
 
   v(16pt)
@@ -49,7 +49,8 @@
     [
       *Citation*
 
-      #author. "#title." _Outside In Print_, #date.       Version #version.       #url
+      #(author + ". \"" + title + ".\" _Outside In Print_, " + date + ". Version " + version + ". " + url)
     ]
   )
 }
+
