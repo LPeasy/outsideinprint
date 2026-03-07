@@ -3,7 +3,6 @@ title: 'History Pushes Back'
 date: 2026-02-12T17:00:11Z
 draft: false
 section_label: 'Syd and Oliver'
-subtitle: 'Dialogues on truth, power, and meaning'
 source_url: 'https://syd-and-oliver.ghost.io/history-pushes-back/'
 ---
 
@@ -172,3 +171,4 @@ But as Syd walked away, Oliver noticed something he hadn’t before ~ how easily
 History, Oliver thought, does not forget.
 
 Neither, he knew, would he.
+

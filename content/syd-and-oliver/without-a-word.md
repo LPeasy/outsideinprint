@@ -3,7 +3,6 @@ title: 'Without A Word'
 date: 2026-02-22T23:16:21Z
 draft: false
 section_label: 'Syd and Oliver'
-subtitle: 'Dialogues on truth, power, and meaning'
 source_url: 'https://syd-and-oliver.ghost.io/without-a-word/'
 ---
 
@@ -104,3 +103,4 @@ They stepped onto the sidewalk together. At the corner, they paused.
 Oliver looked down the street. Syd looked the other way.
 
 They departed without a word.
+

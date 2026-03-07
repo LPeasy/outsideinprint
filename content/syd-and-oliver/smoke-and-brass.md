@@ -3,7 +3,6 @@ title: 'Smoke and Brass'
 date: 2026-02-12T02:42:07Z
 draft: false
 section_label: 'Syd and Oliver'
-subtitle: 'Dialogues on truth, power, and meaning'
 source_url: 'https://syd-and-oliver.ghost.io/smoke-and-brass/'
 ---
 
@@ -174,3 +173,4 @@ Syd stood, slipped his jacket on, already somewhere else.
 “Good talk,” he said, and meant it.
 
 Oliver watched him go, the words echoing long after Syd had forgotten them.
+

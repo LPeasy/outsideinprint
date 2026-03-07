@@ -3,7 +3,6 @@ title: 'The Weight of Promises'
 date: 2026-02-13T17:00:54Z
 draft: false
 section_label: 'Syd and Oliver'
-subtitle: 'Dialogues on truth, power, and meaning'
 source_url: 'https://syd-and-oliver.ghost.io/the-weight-of-promises/'
 ---
 
@@ -172,3 +171,4 @@ He stood, slipped his jacket on, and moved easily toward the door.
 He left.
 
 Oliver stayed where he was.
+

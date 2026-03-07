@@ -3,7 +3,6 @@ title: 'Willful Ignorance'
 date: 2026-02-21T02:39:53Z
 draft: false
 section_label: 'Syd and Oliver'
-subtitle: 'Dialogues on truth, power, and meaning'
 source_url: 'https://syd-and-oliver.ghost.io/willful-ignorance/'
 ---
 
@@ -189,3 +188,4 @@ Syd rose as well.
 They stepped into the night ~ heading different directions.
 
 The door closed behind them.
+

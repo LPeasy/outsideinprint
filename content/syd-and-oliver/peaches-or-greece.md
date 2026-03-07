@@ -3,7 +3,6 @@ title: 'Peaches or Greece'
 date: 2026-02-16T17:00:35Z
 draft: false
 section_label: 'Syd and Oliver'
-subtitle: 'Dialogues on truth, power, and meaning'
 source_url: 'https://syd-and-oliver.ghost.io/peaches-or-greece/'
 ---
 
@@ -153,3 +152,4 @@ Syd laughed as they approached the curb. “Who cares?"
 
 They parted at the street ~ walking in opposite directions.   
 Neither man hurrying nor looking back.
+

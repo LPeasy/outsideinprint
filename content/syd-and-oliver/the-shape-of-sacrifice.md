@@ -3,7 +3,6 @@ title: 'The Shape of Sacrifice'
 date: 2026-02-16T17:00:09Z
 draft: false
 section_label: 'Syd and Oliver'
-subtitle: 'Dialogues on truth, power, and meaning'
 source_url: 'https://syd-and-oliver.ghost.io/the-shape-of-sacrifice/'
 ---
 
@@ -274,3 +273,4 @@ The disco ball kept turning.
 Syd walked toward the door beneath what had once been stained glass.
 
 Oliver stayed, looking up.
+
