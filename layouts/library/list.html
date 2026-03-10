@@ -1,5 +1,10 @@
 {{ define "main" }}
   <h2 class="list-title">Library</h2>
+  <div class="library-search">
+    <label class="library-search-label" for="library-search">Search the library</label>
+    <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, and versions" autocomplete="off" spellcheck="false" />
+  </div>
+  <div id="library-search-empty" class="library-empty" hidden>No matching pieces found.</div>
 
   {{ $sections := slice
     (dict "key" "essays" "label" "ESSAYS")
@@ -14,19 +19,56 @@
     {{ $pages := where site.RegularPages "Section" $sectionKey }}
 
     {{ if gt (len $pages) 0 }}
-      <h2 class="list-title" style="margin-top:22px;">{{ $sectionLabel }}</h2>
-      {{ range sort $pages "Title" "asc" }}
-        <div class="item">
-          <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
-          <div class="m">
-            {{ with .Params.version }}v{{ . }}{{ end }}
-            {{ if .Params.pdf }}
-              {{ with .Params.version }} | {{ end }}
-              <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">PDF</a>
-            {{ end }}
+      <section class="library-group" data-library-group>
+        <h2 class="list-title" style="margin-top:22px;">{{ $sectionLabel }}</h2>
+        {{ range sort $pages "Title" "asc" }}
+          {{ $searchText := printf "%s %s %s %s" .Title $sectionLabel (.Params.section_label | default "") (.Params.version | default "") }}
+          <div class="item" data-library-item data-search='{{ $searchText | lower | jsonify | safeHTMLAttr }}'>
+            <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+            <div class="m">
+              {{ with .Params.version }}v{{ . }}{{ end }}
+              {{ if .Params.pdf }}
+                {{ with .Params.version }} | {{ end }}
+                <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">PDF</a>
+              {{ end }}
+            </div>
           </div>
-        </div>
-      {{ end }}
+        {{ end }}
+      </section>
     {{ end }}
   {{ end }}
+
+  <script>
+    (function () {
+      var input = document.getElementById('library-search');
+      if (!input) return;
+
+      var items = Array.prototype.slice.call(document.querySelectorAll('[data-library-item]'));
+      var groups = Array.prototype.slice.call(document.querySelectorAll('[data-library-group]'));
+      var empty = document.getElementById('library-search-empty');
+
+      function applyFilter() {
+        var query = input.value.trim().toLowerCase();
+        var anyVisible = false;
+
+        items.forEach(function (item) {
+          var haystack = item.getAttribute('data-search') || '';
+          var match = !query || haystack.indexOf(query) !== -1;
+          item.hidden = !match;
+          if (match) anyVisible = true;
+        });
+
+        groups.forEach(function (group) {
+          var visibleItems = group.querySelectorAll('[data-library-item]:not([hidden])').length;
+          group.hidden = visibleItems === 0;
+        });
+
+        if (empty) {
+          empty.hidden = anyVisible || !query;
+        }
+      }
+
+      input.addEventListener('input', applyFilter);
+    }());
+  </script>
 {{ end }}
