@@ -353,3 +353,111 @@ article figcaption{
 .collection-start-here{
   border-top:1px solid var(--hair);
 }
+
+.start-here-page{
+  margin-top:2px;
+}
+.start-here-content{
+  margin-top:10px;
+}
+.start-here-content h2{
+  margin-top:42px;
+  margin-bottom:14px;
+  font-size:21px;
+  line-height:1.3;
+}
+.start-here-content h3{
+  margin:0;
+  font-size:22px;
+  line-height:1.25;
+}
+.start-here-content p{
+  margin:0 0 14px;
+}
+.start-here-content ul{
+  margin:0;
+  padding-left:20px;
+}
+.start-here-content li + li{
+  margin-top:10px;
+}
+.start-here-intro{
+  margin:0 0 8px;
+}
+.start-here-intro p{
+  font-size:18px;
+  line-height:1.72;
+}
+.start-here-grid{
+  display:grid;
+  gap:14px;
+  margin-top:16px;
+}
+.start-here-card{
+  padding:16px 16px 14px;
+  border:1px solid var(--hair);
+  border-radius:10px;
+  background:rgba(232,226,216,.015);
+}
+.start-here-card p{
+  margin-top:10px;
+}
+.start-here-card h3 a{
+  border-bottom:none;
+}
+.start-here-card h3 a:hover,
+.start-here-card h3 a:focus-visible{
+  color:var(--fg);
+  border-bottom:none;
+}
+.start-here-meta{
+  margin-top:12px;
+  color:var(--muted);
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.start-here-links a{
+  border-bottom-color:rgba(232,226,216,.22);
+}
+.start-here-links a:hover,
+.start-here-links a:focus-visible{
+  border-bottom-color:rgba(232,226,216,.6);
+}
+.start-here-action{
+  margin-top:8px;
+}
+.start-here-action a{
+  display:inline-block;
+  padding:10px 12px;
+  border:1px solid rgba(232,226,216,.25);
+  border-radius:10px;
+  font-family:var(--sans);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.start-here-action a:hover,
+.start-here-action a:focus-visible{
+  border-color:rgba(232,226,216,.55);
+}
+.start-here-closing{
+  margin-top:26px;
+  color:var(--muted);
+  font-style:italic;
+}
+@media (max-width:640px){
+  .start-here-content h2{
+    margin-top:36px;
+  }
+  .start-here-intro p{
+    font-size:17px;
+  }
+  .start-here-card{
+    padding:14px 14px 12px;
+  }
+  .start-here-content h3{
+    font-size:20px;
+  }
+}
