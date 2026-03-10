@@ -1,8 +1,11 @@
-﻿---
+---
 title: 'The Sound Of Authority'
 date: 2026-02-16T00:38:23Z
 draft: false
 section_label: 'Syd and Oliver'
+version: '1.0'
+edition: 'First digital edition'
+pdf: '/pdfs/the-sound-of-authorit.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/the-sound-of-authorit/'
 ---
 
@@ -165,4 +168,5 @@ Syd glanced once toward the stage, where the singer held the last note without s
 They walked toward the door together, the blues carrying them partway out before dissolving behind the velvet curtains.
 
 The lounge continued without them.
+
 

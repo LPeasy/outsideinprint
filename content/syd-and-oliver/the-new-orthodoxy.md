@@ -1,8 +1,11 @@
-﻿---
+---
 title: 'The New Orthodoxy'
 date: 2026-02-18T17:00:48Z
 draft: false
 section_label: 'Syd and Oliver'
+version: '1.0'
+edition: 'First digital edition'
+pdf: '/pdfs/the-new-orthodoxy.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/the-new-orthodoxy/'
 ---
 
@@ -193,4 +196,5 @@ Oliver waited.
 Syd walked toward the door.
 
 He nodded to the doorman, donned his cap, and shouldered his way into the cold, bitter night.
+
 

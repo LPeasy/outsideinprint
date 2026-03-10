@@ -1,4 +1,4 @@
-﻿param(
+param(
   [string]$Mode = "Local"
 )
 
@@ -10,7 +10,7 @@ Write-Host "Outside In Print ~ $Mode Typst PDF Builder" -ForegroundColor Cyan
 $ContentRoot = "./content"
 $PdfOutDir = "./static/pdfs"
 $TempDir = "./resources/typst_build"
-$AllowedSections = @("essays", "literature", "reports", "working-papers")
+$AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
 $EditionTemplatePath = "./templates/edition.typ"
 
 New-Item -ItemType Directory -Force -Path $PdfOutDir | Out-Null
@@ -268,5 +268,6 @@ foreach ($file in $mdFiles) {
 }
 
 Write-Host "`n$Mode PDF build complete." -ForegroundColor Cyan
+
 
 

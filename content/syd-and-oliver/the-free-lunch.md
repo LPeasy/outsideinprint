@@ -1,8 +1,11 @@
-﻿---
+---
 title: 'The Free Lunch'
 date: 2026-02-21T15:00:45Z
 draft: false
 section_label: 'Syd and Oliver'
+version: '1.0'
+edition: 'First digital edition'
+pdf: '/pdfs/the-free-lunch.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/the-free-lunch/'
 ---
 
@@ -281,4 +284,5 @@ Oliver did not respond. The two men finished their drinks silently.
 They slid out of the booth and left the bar.
 
 Televisions continued streaming ~ flickering on the walls ~ regularly scheduled programming.
+
 

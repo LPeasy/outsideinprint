@@ -1,8 +1,11 @@
-﻿---
+---
 title: 'All Time Highs'
 date: 2026-02-14T06:31:48Z
 draft: false
 section_label: 'Syd and Oliver'
+version: '1.0'
+edition: 'First digital edition'
+pdf: '/pdfs/all-ti.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/all-ti/'
 ---
 
@@ -159,4 +162,5 @@ Oliver paused.
 He stepped out into the night. The door closed with a whoosh, and the room resumed its low hum. 
 
 On Syd's phone, the green line was still climbing toward the upper right.
+
 
