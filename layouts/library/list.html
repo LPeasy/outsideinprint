@@ -1,9 +1,9 @@
-﻿{{ define "main" }}
+{{ define "main" }}
   <h2 class="list-title">Library</h2>
 
   {{ $sections := slice
     (dict "key" "essays" "label" "ESSAYS")
-    (dict "key" "literature" "label" "LITERATURE")
+    (dict "key" "literature" "label" "BOOKS")
     (dict "key" "syd-and-oliver" "label" "SYD AND OLIVER")
     (dict "key" "working-papers" "label" "WORKING PAPERS")
   }}
@@ -12,7 +12,6 @@
     {{ $sectionKey := index $section "key" }}
     {{ $sectionLabel := index $section "label" }}
     {{ $pages := where site.RegularPages "Section" $sectionKey }}
-    {{ $pages = where $pages "Params.pdf" "!=" nil }}
 
     {{ if gt (len $pages) 0 }}
       <h2 class="list-title" style="margin-top:22px;">{{ $sectionLabel }}</h2>
@@ -20,15 +19,14 @@
         <div class="item">
           <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
           <div class="m">
-            {{ with .Params.version }}v{{ . }} | {{ end }}
-            <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">PDF</a>
+            {{ with .Params.version }}v{{ . }}{{ end }}
+            {{ if .Params.pdf }}
+              {{ with .Params.version }} | {{ end }}
+              <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">PDF</a>
+            {{ end }}
           </div>
         </div>
       {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
-
-
-
-
