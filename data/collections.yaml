@@ -1,0 +1,35 @@
+collections:
+  - slug: the-ledger
+    title: The Ledger
+    description: Newsletter-style dispatches that gather recent essays, themes, and recurring concerns into one archival thread.
+    featured: true
+    weight: 10
+    start_here: the-ledger-vol-1
+    metadata:
+      - label: Format
+        value: Newsletter
+      - label: Scope
+        value: Essays, themes, and cultural dispatches
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
+  - slug: syd-and-oliver-dialogues
+    title: Syd and Oliver Dialogues
+    description: A conversational archive of pieces on truth, power, money, obligation, and meaning.
+    featured: true
+    weight: 20
+    start_here: without-a-word
+    metadata:
+      - label: Format
+        value: Dialogues
+      - label: Scope
+        value: Truth, power, and moral imagination
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections:
+        - syd-and-oliver

@@ -1,0 +1,44 @@
+﻿{{ define "main" }}
+  {{ $definitions := sort (sort (default (slice) site.Data.collections.collections) "title" "asc") "weight" "asc" }}
+  {{ $featured := slice }}
+  {{ range $definitions }}
+    {{ if .featured }}
+      {{ $featured = $featured | append . }}
+    {{ end }}
+  {{ end }}
+
+  <h2 class="list-title">Collections</h2>
+  {{ if gt (len $featured) 0 }}
+    <section class="grid collection-grid">
+      {{ range $featured }}
+        {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+        <a class="card collection-card" href="{{ printf "collections/%s/" .slug | absURL }}">
+          <div class="k">Featured Collection</div>
+          <div class="v">{{ .title }}</div>
+          {{ with .description }}<div class="d">{{ . }}</div>{{ end }}
+          <div class="collection-meta">
+            <span>{{ len $items }} pieces</span>
+            {{ with .start_here }}<span>Start Here Ready</span>{{ end }}
+          </div>
+        </a>
+      {{ end }}
+    </section>
+  {{ end }}
+
+  {{ if gt (len $definitions) 0 }}
+    <h2 class="list-title" style="margin-top:28px;">All Collections</h2>
+    {{ range $definitions }}
+      {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+      <div class="item">
+        <div class="t"><a href="{{ printf "collections/%s/" .slug | absURL }}">{{ .title }}</a></div>
+        <div class="m">{{ len $items }} pieces{{ with .start_here }} | start here available{{ end }}</div>
+        {{ with .description }}<div class="d">{{ . }}</div>{{ end }}
+      </div>
+    {{ end }}
+  {{ else }}
+    <div class="item">
+      <div class="t">No collections defined yet.</div>
+      <div class="m">Add definitions to <code>data/collections.yaml</code>.</div>
+    </div>
+  {{ end }}
+{{ end }}

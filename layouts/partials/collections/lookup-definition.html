@@ -1,0 +1,9 @@
+﻿{{ $slug := lower (printf "%v" .) }}
+{{ $found := dict }}
+{{ $definitions := default (slice) site.Data.collections.collections }}
+{{ range $definitions }}
+  {{ if eq (lower (printf "%v" .slug)) $slug }}
+    {{ $found = . }}
+  {{ end }}
+{{ end }}
+{{ return $found }}

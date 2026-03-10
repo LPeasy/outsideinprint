@@ -3,12 +3,14 @@ title: "The Ledger, Vol. 1"
 date: 2025-07-10
 draft: false
 slug: "the-ledger-vol-1"
-section_label: "Essay"
+section_label: "Newsletter"
 subtitle: "Popes, Prime Time, and Political Games"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-ledger-vol-1.pdf"
 featured: false
+collections:
+  - the-ledger
 medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-1-cfe2c7d6e054"
 ---
 

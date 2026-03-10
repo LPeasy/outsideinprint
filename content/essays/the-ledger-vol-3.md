@@ -3,12 +3,14 @@ title: "The Ledger, Vol. 3"
 date: 2025-09-18
 draft: false
 slug: "the-ledger-vol-3"
-section_label: "Essay"
+section_label: "Newsletter"
 subtitle: "100 Essays on Medium, How Hawai’i became America’s Largest Aircraft Carrier, and a new series on Risk Management ~"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-ledger-vol-3.pdf"
 featured: false
+collections:
+  - the-ledger
 medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-3-3fa3cd513467"
 ---
 

@@ -10,9 +10,11 @@ essays = "/essays/:slug/"
 literature = "/literature/:slug/"
 syd-and-oliver = "/syd-and-oliver/:slug/"
 working-papers = "/working-papers/:slug/"
+collections = "/collections/:slug/"
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = false
+
 

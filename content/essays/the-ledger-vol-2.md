@@ -3,12 +3,14 @@ title: "The Ledger, Vol. 2"
 date: 2025-08-12
 draft: false
 slug: "the-ledger-vol-2"
-section_label: "Essay"
+section_label: "Newsletter"
 subtitle: "Floods, Flashpoints, and Florida’s Wild Side"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-ledger-vol-2.pdf"
 featured: false
+collections:
+  - the-ledger
 medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-2-15ae0fff9eeb"
 ---
 

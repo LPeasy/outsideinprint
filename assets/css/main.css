@@ -304,3 +304,52 @@ article figcaption{
   font-size:12px;
   margin-top:6px;
 }
+.collection-grid{
+  margin-top:6px;
+}
+.collection-card{
+  display:block;
+}
+.collection-card .d{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:14px;
+}
+.collection-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 14px;
+  margin-top:12px;
+  color:var(--muted);
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.collection-meta-block{
+  margin:0 0 24px;
+  padding:12px 14px;
+  border:1px solid var(--hair);
+  border-radius:10px;
+}
+.collection-meta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 12px;
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.collection-meta-row + .collection-meta-row{
+  margin-top:8px;
+}
+.collection-meta-label{
+  color:var(--muted);
+}
+.collection-meta-value{
+  color:var(--fg);
+}
+.collection-start-here{
+  border-top:1px solid var(--hair);
+}
