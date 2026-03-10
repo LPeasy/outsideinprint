@@ -1,4 +1,4 @@
-﻿{{ define "main" }}
+{{ define "main" }}
 
   <div class="imprint-header" role="note" aria-label="Edition metadata">
     <div class="row">
@@ -18,9 +18,11 @@
 
   {{ partial "pdf_button.html" . }}
 
-  <aside class="citation" role="note" aria-label="How to cite this page">
-    <div class="k">Cite this</div>
-    <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
-  </aside>
+  {{ if ne .Params.show_citation false }}
+    <aside class="citation" role="note" aria-label="How to cite this page">
+      <div class="k">Cite this</div>
+      <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+    </aside>
+  {{ end }}
 
 {{ end }}

@@ -1,6 +1,7 @@
 ---
 title: "Start Here"
 draft: false
+show_citation: false
 ---
 
 Welcome to **Outside In Print** ~ a digital imprint for essays with free, print-ready PDF editions.
