@@ -1,8 +1,4 @@
 {{ define "main" }}
-  {{ $librarySections := slice "essays" "literature" "syd-and-oliver" "working-papers" }}
-  {{ $libraryPages := where site.RegularPages "Section" "in" $librarySections }}
-  {{ $libraryPages = where $libraryPages "Params.pdf" "!=" nil }}
-
   <section class="grid">
     <a class="card" href="{{ "start-here/" | absURL }}"><div class="k">Start</div><div class="v">Start Here</div></a>
     <a class="card" href="{{ "about/" | absURL }}"><div class="k">Info</div><div class="v">About</div></a>
@@ -11,29 +7,8 @@
     <a class="card" href="{{ "syd-and-oliver/" | absURL }}"><div class="k">Section</div><div class="v">Syd and Oliver</div></a>
     <a class="card" href="{{ "working-papers/" | absURL }}"><div class="k">Section</div><div class="v">Working Papers</div></a>
     <a class="card" href="{{ "library/" | absURL }}"><div class="k">Index</div><div class="v">Library</div></a>
-    <a class="card" id="random-library-link" href="{{ "library/" | absURL }}"><div class="k">Explore</div><div class="v">Random</div></a>
+    <a class="card" href="{{ "random/" | absURL }}"><div class="k">Explore</div><div class="v">Random</div></a>
   </section>
-
-  <script>
-    (function () {
-      var randomLink = document.getElementById('random-library-link');
-      if (!randomLink) return;
-
-      var libraryUrls = [
-        {{- range $index, $page := sort $libraryPages "Title" "asc" -}}
-          {{- if gt $index 0 }}, {{ end -}}"{{ $page.RelPermalink }}"
-        {{- end -}}
-      ];
-
-      if (!libraryUrls.length) return;
-
-      randomLink.addEventListener('click', function (event) {
-        event.preventDefault();
-        var randomUrl = libraryUrls[Math.floor(Math.random() * libraryUrls.length)];
-        window.location.href = randomUrl;
-      });
-    }());
-  </script>
 
   {{ $featured := where site.RegularPages "Params.featured" true }}
   {{ if gt (len $featured) 0 }}
