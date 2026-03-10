@@ -8,7 +8,7 @@ subtitle: "Why the 100-year flood happens more than once in a century ~"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-100-year-flood-is-not-what-you-think.pdf"
-featured: false
+featured: true
 medium_source_url: "https://medium.com/@lawtonperret/the-100-year-flood-is-not-what-you-think-bcdadc6c395c"
 ---
 
@@ -287,4 +287,5 @@ Follow *The Balance Sheet* for more plain-English breakdowns.
 </div>
 
 </div>
+
 

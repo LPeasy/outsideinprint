@@ -8,7 +8,7 @@ subtitle: "What Glitters Isn’t Always Gold"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/why-a-return-to-the-gold-standard-would-break-the-economy.pdf"
-featured: false
+featured: true
 medium_source_url: "https://medium.com/@lawtonperret/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
 ---
 
@@ -213,4 +213,5 @@ Read more of his work here on Medium.
 
 The Balance Sheet
 The Balance Sheet breaks down U.S. economics, policy, and current events with clarity and fairness. No spin — just real…medium.com
+
 

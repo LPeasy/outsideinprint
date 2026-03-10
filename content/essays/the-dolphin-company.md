@@ -8,7 +8,7 @@ subtitle: "The Rise and Fall of the World’s Largest Dolphin Empire"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-dolphin-company.pdf"
-featured: false
+featured: true
 medium_source_url: "https://medium.com/@lawtonperret/the-dolphin-company-47f1945e2c0f"
 ---
 
@@ -1331,4 +1331,5 @@ And ***follow* me here on Medium** for more stories like this.
 </div>
 
 </div>
+
 
