@@ -29,6 +29,22 @@ function Invoke-NativeOrThrow {
   if ($LASTEXITCODE -ne 0) { throw "Command failed: $Command $($Arguments -join ' ')" }
 }
 
+function Read-Utf8Text {
+  param([string]$Path)
+  return [System.IO.File]::ReadAllText((Resolve-Path $Path), [System.Text.Encoding]::UTF8)
+}
+
+function Write-Utf8Text {
+  param([string]$Path,[string]$Value)
+  [System.IO.File]::WriteAllText($Path, $Value, [System.Text.UTF8Encoding]::new($false))
+}
+
+function Remove-UnsupportedControlChars {
+  param([string]$Value)
+  if ($null -eq $Value) { return "" }
+  return [regex]::Replace($Value, "[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]", "")
+}
+
 function Get-FrontMatterMap {
   param([string]$Raw)
   $map = @{}
@@ -102,7 +118,7 @@ function Escape-TypstString {
 function Get-SiteBaseUrl {
   param([string]$ConfigPath)
   if (-not (Test-Path -Path $ConfigPath -PathType Leaf)) { return "" }
-  $config = Get-Content -Path $ConfigPath -Raw
+  $config = Read-Utf8Text -Path $ConfigPath
   $match = [regex]::Match($config, '(?m)^\s*baseURL\s*=\s*"(.*?)"\s*$')
   if (-not $match.Success) { return "" }
   $base = $match.Groups[1].Value.Trim()
@@ -125,14 +141,14 @@ function Get-TypstDateExpression {
 function Normalize-TypstBody {
   param([string]$Path)
   if (-not (Test-Path -Path $Path -PathType Leaf)) { return }
-  $body = Get-Content -Path $Path -Raw
+  $body = Read-Utf8Text -Path $Path
   $body = $body -replace '(?m)^#horizontalrule\s*$', '#line(length: 100%)'
   $body = [regex]::Replace($body, '#box\(image\("https?://[^"\r\n]+"\)\)', '#emph[Image omitted in PDF edition]')
   $body = [regex]::Replace($body, '#image\("https?://[^"\r\n]+"\)', '#emph[Image omitted in PDF edition]')
   $body = [regex]::Replace($body, '#cite\([^\)]*\)', '')
   $body = $body -replace '(?m)^\s*<[^>\r\n]+>\s*$', ''
   $body = $body -replace '(?m)\s+<[^>\r\n]+>\s*$', ''
-  Set-Content -Path $Path -Value $body -Encoding utf8
+  Write-Utf8Text -Path $Path -Value $body
 }
 
 Require-NativeCommand -Name "pandoc"
@@ -148,7 +164,7 @@ $mdFiles = Get-ChildItem -Path $ContentRoot -Recurse -File -Filter "*.md" |
   }
 
 foreach ($file in $mdFiles) {
-  $raw = Get-Content -Path $file.FullName -Raw
+  $raw = Read-Utf8Text -Path $file.FullName
   $frontMatter = Get-FrontMatterMap -Raw $raw
 
   if (Is-TrueValue -Value ($frontMatter["draft"])) {
@@ -173,11 +189,15 @@ foreach ($file in $mdFiles) {
   if ([string]::IsNullOrWhiteSpace($sectionLabel)) { $sectionLabel = "Piece" }
 
   $pdfPath = Join-Path $PdfOutDir "$safeSlug.pdf"
+  $sanitizedSourcePath = Join-Path $TempDir "$safeSlug.source.md"
   $typBodyPath = Join-Path $TempDir "$safeSlug.body.typ"
   $typDocPath = Join-Path $TempDir "$safeSlug.typ"
 
+  $sanitizedSource = Remove-UnsupportedControlChars -Value $raw
+  Write-Utf8Text -Path $sanitizedSourcePath -Value $sanitizedSource
+
   Invoke-NativeOrThrow -Command "pandoc" -Arguments @(
-    $file.FullName,
+    $sanitizedSourcePath,
     "-f", "markdown+yaml_metadata_block+raw_attribute",
     "-t", "typst",
     "-o", $typBodyPath
@@ -216,7 +236,7 @@ foreach ($file in $mdFiles) {
 )
 "@
 
-  Set-Content -Path $typDocPath -Value $doc -Encoding utf8
+  Write-Utf8Text -Path $typDocPath -Value $doc
 
   try {
     Invoke-NativeOrThrow -Command "typst" -Arguments @(
@@ -234,7 +254,7 @@ foreach ($file in $mdFiles) {
     $fallbackDocPath = Join-Path $TempDir "$safeSlug.fallback.typ"
 
     $fallbackBody = "#emph[PDF fallback edition]`n`n#parbreak()`n`nThe original article body contained markup that could not be rendered automatically in Typst."
-    Set-Content -Path $fallbackBodyPath -Value $fallbackBody -Encoding utf8
+    Write-Utf8Text -Path $fallbackBodyPath -Value $fallbackBody
 
     $fallbackFileName = "$safeSlug.fallback.body.typ"
     $fallbackDoc = @"
@@ -254,7 +274,7 @@ foreach ($file in $mdFiles) {
   body: article_body
 )
 "@
-    Set-Content -Path $fallbackDocPath -Value $fallbackDoc -Encoding utf8
+    Write-Utf8Text -Path $fallbackDocPath -Value $fallbackDoc
 
     Invoke-NativeOrThrow -Command "typst" -Arguments @(
       "compile",
@@ -268,6 +288,3 @@ foreach ($file in $mdFiles) {
 }
 
 Write-Host "`n$Mode PDF build complete." -ForegroundColor Cyan
-
-
-

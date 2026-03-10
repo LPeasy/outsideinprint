@@ -1,4 +1,4 @@
-﻿param(
+param(
   [string]$ContentRoot = "./content",
   [string]$PdfRoot = "./static/pdfs"
 )
@@ -7,10 +7,15 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Outside In Print ~ Preflight" -ForegroundColor Cyan
 
-$AllowedSections = @("essays", "literature", "reports", "working-papers")
+$AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
 $RequiredFields = @("title", "date", "section_label", "version", "edition", "pdf", "draft")
 $fail = $false
 $slugSources = @{}
+
+function Read-Utf8Text {
+  param([string]$Path)
+  return [System.IO.File]::ReadAllText((Resolve-Path $Path), [System.Text.Encoding]::UTF8)
+}
 
 function Get-FrontMatterMap {
   param([string]$Raw)
@@ -116,7 +121,7 @@ $mdFiles = Get-ChildItem -Path $ContentRoot -Recurse -File -Filter "*.md" |
   }
 
 foreach ($file in $mdFiles) {
-  $raw = Get-Content -Path $file.FullName -Raw
+  $raw = Read-Utf8Text -Path $file.FullName
   $frontMatter = Get-FrontMatterMap -Raw $raw
 
   if ($frontMatter.Count -eq 0) {
@@ -176,7 +181,3 @@ if ($fail) {
 }
 
 Write-Host "`nPreflight PASSED." -ForegroundColor Green
-
-
-
-
