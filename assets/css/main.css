@@ -4,6 +4,8 @@
   --muted:#b8b0a6;
   --hair:#2a2a2a;
   --link:#e8e2d8;
+  --paper-warm:rgba(232,226,216,.032);
+  --paper-fleck:rgba(232,226,216,.045);
   --max: 780px;
   --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", Times, serif;
   --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -13,7 +15,16 @@
 html,body{ height:100%; }
 body{
   margin:0;
-  background:var(--bg);
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(circle at 18% 16%, var(--paper-warm) 0, rgba(232,226,216,0) 24%),
+    radial-gradient(circle at 82% 8%, rgba(232,226,216,.02) 0, rgba(232,226,216,0) 20%),
+    radial-gradient(circle at 50% 100%, rgba(232,226,216,.025) 0, rgba(232,226,216,0) 28%),
+    repeating-linear-gradient(0deg, rgba(232,226,216,.015) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(232,226,216,.012) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 1px 1px, var(--paper-fleck) 0 1px, transparent 1.35px);
+  background-size:auto, auto, auto, auto, auto, 18px 18px;
+  background-attachment:fixed;
   color:var(--fg);
   font-family:var(--serif);
   line-height:1.65;
