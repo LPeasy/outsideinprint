@@ -5,25 +5,24 @@ draft: false
 show_citation: false
 ---
 
-<div class="start-here-intro">
-  <p>Outside In Print is a digital imprint for essays, investigations, stories, and literature.</p>
-  <p>Each piece is published as a permanent edition with a free, print-ready PDF. The aim is simple: writing that can be read online, archived, cited, and shared without platform lock-in.</p>
-  <p>This site is the permanent home of the work.</p>
-</div>
+Outside In Print is a digital imprint for essays, investigations, stories, and literature.
+
+Each piece is published as a permanent edition with a free, print-ready PDF. The aim is simple: writing that can be read online, archived, cited, and shared without platform lock-in.
+
+This site is the permanent home of the work.
 
 ## How to Navigate
 
-<ul class="start-here-links">
-  <li><strong><a href="../essays/">Essays</a></strong> ~ shorter pieces on economics, risk, policy, and culture.</li>
-  <li><strong><a href="../literature/">Books</a></strong> ~ longform investigations and major projects.</li>
-  <li><strong><a href="../syd-and-oliver/">Syd and Oliver</a></strong> ~ narrative fiction.</li>
-  <li><strong><a href="../collections/">Collections</a></strong> ~ grouped essays, literary collections, and recurring threads of work.</li>
-  <li><strong><a href="../library/">Library</a></strong> ~ the complete archive of published editions.</li>
-  <li><strong><a href="../random/">Random</a></strong> ~ open a piece at random.</li>
-</ul>
+- **[Essays](../essays/)** ~ shorter pieces on economics, risk, policy, and culture.
+- **[Books](../literature/)** ~ longform investigations and major projects.
+- **[Syd and Oliver](../syd-and-oliver/)** ~ narrative fiction.
+- **[Collections](../collections/)** ~ grouped essays, literary collections, and recurring threads of work.
+- **[Library](../library/)** ~ the complete archive of published editions.
+- **[Random](../random/)** ~ open a piece at random.
 
 ## Suggested Starting Points
 
+{{< rawhtml >}}
 <div class="start-here-grid">
   <div class="start-here-card">
     <h3><a href="../essays/the-100-year-flood-is-not-what-you-think/">The 100-Year Flood Is Not What You Think</a></h3>
@@ -41,43 +40,42 @@ show_citation: false
     <p class="start-here-meta">Investigation | Longform</p>
   </div>
 </div>
+{{< /rawhtml >}}
 
 ## Explore by Collection
 
-<p>Some pieces belong to larger threads of work ~ recurring themes, dossiers, and series that develop over time.</p>
+Some pieces belong to larger threads of work ~ recurring themes, dossiers, and series that develop over time.
 
-<ul class="start-here-links">
-  <li><a href="../collections/the-ledger/">The Ledger</a></li>
-  <li><a href="../collections/syd-and-oliver-dialogues/">Syd and Oliver Dialogues</a></li>
-  <li>Risk and Infrastructure</li>
-  <li>American Political Economy</li>
-</ul>
+- [The Ledger](../collections/the-ledger/)
+- [Syd and Oliver Dialogues](../collections/syd-and-oliver-dialogues/)
+- Risk and Infrastructure
+- American Political Economy
 
-<p>Use <a href="../collections/">Collections</a> to follow a line of thought across sections.</p>
+Use [Collections](../collections/) to follow a line of thought across sections.
 
 ## About the Editions
 
-<p>Each piece on this site is published as an edition.</p>
+Each piece on this site is published as an edition.
 
-<p>Editions typically include:</p>
+Editions typically include:
 
-<ul class="start-here-links">
-  <li>publication date</li>
-  <li>version number</li>
-  <li>estimated reading time</li>
-  <li>downloadable PDF</li>
-</ul>
+- publication date
+- version number
+- estimated reading time
+- downloadable PDF
 
-<p>The PDFs are designed for printing, saving, and offline reading.</p>
+The PDFs are designed for printing, saving, and offline reading.
 
 ## Looking for Something Specific?
 
-<p>The <a href="../library/">Library</a> page lists every edition published on the site. Use it to browse the full archive.</p>
+The [Library](../library/) page lists every edition published on the site. Use it to browse the full archive.
 
 ## Not Sure Where to Begin?
 
-<p>Open a piece at random and explore the archive sideways.</p>
+Open a piece at random and explore the archive sideways.
 
+{{< rawhtml >}}
 <p class="start-here-action"><a href="../random/">Read Something Random</a></p>
+{{< /rawhtml >}}
 
-<p class="start-here-closing">Start anywhere.</p>
+Start anywhere.
