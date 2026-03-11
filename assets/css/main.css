@@ -465,18 +465,18 @@ article figcaption{
 .single-page{
   margin-top:2px;
 }
-.single-page .running-header,
+.running-header,
 .single-page h1,
 .single-page .subtitle,
 .single-page .imprint-header,
-.single-page .edition-download,
+.edition-download,
 .single-page .single-content,
-.single-page .article-closing,
+.article-closing,
 .single-page .citation{
   width:100%;
   max-width:68ch;
 }
-.single-page .running-header{
+.running-header{
   margin:0 0 1.5rem;
   font-family:var(--sans);
   font-size:0.75rem;
@@ -484,22 +484,22 @@ article figcaption{
   text-transform:uppercase;
   opacity:0.7;
 }
-.single-page .running-header__inner{
+.running-header__inner{
   display:flex;
   flex-wrap:wrap;
   justify-content:space-between;
   align-items:center;
   gap:0.5rem 1rem;
 }
-.single-page .running-header__home{
+.running-header__home{
   color:inherit;
   border-bottom:none;
   text-decoration:none;
 }
-.single-page .running-header__home:hover{
+.running-header__home:hover{
   text-decoration:underline;
 }
-.single-page .running-header__context{
+.running-header__context{
   color:var(--muted);
   text-align:right;
 }
@@ -512,11 +512,11 @@ article figcaption{
 .single-page .imprint-header{
   margin:0 0 0.75rem;
 }
-.single-page .edition-download{
+.edition-download{
   margin-top:0.75rem;
   margin-bottom:1.5rem;
 }
-.single-page .edition-download__button{
+.edition-download__button{
   display:inline-block;
   padding:0.45rem 0.75rem;
   border:1px solid currentColor;
@@ -528,7 +528,7 @@ article figcaption{
   text-decoration:none;
   text-transform:uppercase;
 }
-.single-page .edition-download__button:hover{
+.edition-download__button:hover{
   border-color:rgba(232,226,216,.65);
 }
 .single-page .single-content{
@@ -567,13 +567,13 @@ article figcaption{
   border-left:1px solid var(--hair);
   color:var(--muted);
 }
-.single-page .article-closing{
+.article-closing{
   margin-top:3rem;
   margin-bottom:2rem;
   text-align:center;
   opacity:0.6;
 }
-.single-page .article-closing__ornament{
+.article-closing__ornament{
   display:inline-block;
   letter-spacing:0.24em;
 }
@@ -582,17 +582,17 @@ article figcaption{
 }
 
 @media (max-width:640px){
-  .single-page .running-header{
+  .running-header{
     margin-bottom:1.25rem;
   }
-  .single-page .running-header__inner{
+  .running-header__inner{
     align-items:flex-start;
   }
-  .single-page .running-header__context{
+  .running-header__context{
     width:100%;
     text-align:left;
   }
-  .single-page .edition-download__button{
+  .edition-download__button{
     padding:0.55rem 0.85rem;
   }
   .single-page .single-content{
