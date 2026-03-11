@@ -1,15 +1,17 @@
 {{ define "main" }}
-  <section class="start-here-page">
+  <section class="single-page start-here-page">
+    {{ partial "running_header.html" . }}
+
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+
     <div class="imprint-header" role="note" aria-label="Page label">
       <div class="row">
         <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
       </div>
     </div>
 
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
-
-    <article class="start-here-content">
+    <article class="single-content start-here-content">
       {{ .Content }}
     </article>
   </section>

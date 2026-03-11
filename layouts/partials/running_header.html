@@ -1,0 +1,21 @@
+{{ $label := "" }}
+{{ with .Params.section_label }}{{ $label = upper (printf "%v" .) }}{{ end }}
+{{ if eq $label "" }}
+  {{ with .Params.label }}{{ $label = upper (printf "%v" .) }}{{ end }}
+{{ end }}
+{{ if eq $label "" }}
+  {{ with .Section }}{{ $label = upper (humanize .) }}{{ end }}
+{{ end }}
+{{ if eq $label "" }}
+  {{ with .Type }}{{ $label = upper (humanize .) }}{{ end }}
+{{ end }}
+{{ if eq $label "" }}
+  {{ $label = upper .Title }}
+{{ end }}
+
+<header class="running-header">
+  <div class="running-header__inner">
+    <a class="running-header__home" href="{{ "/" | relURL }}">Outside In Print</a>
+    <span class="running-header__context">{{ $label }}</span>
+  </div>
+</header>

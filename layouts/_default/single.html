@@ -1,28 +1,34 @@
 {{ define "main" }}
+  <section class="single-page">
+    {{ partial "running_header.html" . }}
 
-  <div class="imprint-header" role="note" aria-label="Edition metadata">
-    <div class="row">
-      <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
-      <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
-      <span>{{ with .Params.version }}Version <b>{{ . }}</b>{{ end }}</span>
-      <span>{{ with .Params.edition }}Edition <b>{{ . }}</b>{{ end }}</span>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+
+    <div class="imprint-header" role="note" aria-label="Edition metadata">
+      <div class="row">
+        <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
+        <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
+        <span>{{ with .Params.version }}Version <b>{{ . }}</b>{{ end }}</span>
+        <span>{{ with .Params.edition }}Edition <b>{{ . }}</b>{{ end }}</span>
+      </div>
     </div>
-  </div>
 
-  <h1>{{ .Title }}</h1>
-  {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+    {{ partial "pdf_button.html" . }}
 
-  <article>
-    {{ .Content }}
-  </article>
+    <article class="single-content">
+      {{ .Content }}
+    </article>
 
-  {{ partial "pdf_button.html" . }}
+    {{ if ne .Params.show_citation false }}
+      <div class="article-closing" aria-hidden="true">
+        <span class="article-closing__ornament">•••</span>
+      </div>
 
-  {{ if ne .Params.show_citation false }}
-    <aside class="citation" role="note" aria-label="How to cite this page">
-      <div class="k">Cite this</div>
-      <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
-    </aside>
-  {{ end }}
-
+      <aside class="citation" role="note" aria-label="How to cite this page">
+        <div class="k">Cite this</div>
+        <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+      </aside>
+    {{ end }}
+  </section>
 {{ end }}
