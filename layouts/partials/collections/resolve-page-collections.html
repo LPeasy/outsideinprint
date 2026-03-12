@@ -1,0 +1,45 @@
+{{ $page := .page }}
+{{ $publicOnly := default false .publicOnly }}
+{{ $definitions := sort (sort (default (slice) site.Data.collections.collections) "title" "asc") "weight" "asc" }}
+{{ $explicit := partial "collections/normalize-values.html" (dict "value" $page.Params.collections "limit" 2) }}
+{{ $matches := slice }}
+
+{{ range $definitions }}
+  {{ $slug := lower (printf "%v" .slug) }}
+  {{ $include := false }}
+
+  {{ if gt (len $explicit) 0 }}
+    {{ $include = in $explicit $slug }}
+  {{ else }}
+    {{ $include = partial "collections/fallback-match.html" (dict "page" $page "collection" .) }}
+  {{ end }}
+
+  {{ if $include }}
+    {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+    {{ $state := partial "collections/get-state.html" (dict "collection" . "items" $items) }}
+    {{ $collectionPage := site.GetPage (printf "/collections/%s" .slug) }}
+    {{ if $publicOnly }}
+      {{ if and $state.visible $collectionPage }}
+        {{ $matches = $matches | append (dict
+          "collection" .
+          "items" $items
+          "state" $state
+          "page" $collectionPage
+        ) }}
+      {{ end }}
+    {{ else }}
+      {{ $matches = $matches | append (dict
+        "collection" .
+        "items" $items
+        "state" $state
+        "page" $collectionPage
+      ) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $matches) 2 }}
+  {{ $matches = first 2 $matches }}
+{{ end }}
+
+{{ return $matches }}

@@ -1,0 +1,23 @@
+{{ $entries := partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
+{{ if gt (len $entries) 0 }}
+  {{ $currentSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
+  <aside class="collection-membership" aria-label="Collection membership">
+    <div class="k">Part of this collection</div>
+    {{ range $entries }}
+      {{ $url := printf "collections/%s/" .collection.slug | absURL }}
+      {{ with .page }}
+        {{ $url = .RelPermalink }}
+      {{ end }}
+      <div class="collection-membership__row">
+        <div class="collection-membership__title"><a href="{{ $url }}">{{ .collection.title }}</a></div>
+        <div class="collection-membership__meta">
+          <span>{{ title .state.kind }}</span>
+          <span>{{ .state.count }} pieces</span>
+          {{ if eq $currentSlug (lower (printf "%v" (.collection.start_here | default ""))) }}
+            <span>Start Here</span>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </aside>
+{{ end }}

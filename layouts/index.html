@@ -9,6 +9,34 @@
     <a class="card card-center" href="{{ "random/" | absURL }}"><div class="k">Explore</div><div class="v">Random</div></a>
   </section>
 
+  {{ $collectionEntries := partial "collections/get-public-entries.html" . }}
+  {{ $featuredCollections := slice }}
+  {{ range $collectionEntries }}
+    {{ if .collection.featured }}
+      {{ $featuredCollections = $featuredCollections | append . }}
+    {{ end }}
+  {{ end }}
+  {{ if gt (len $featuredCollections) 0 }}
+    <h2 class="list-title" style="margin-top:28px;">Featured Collections</h2>
+    <section class="grid collection-grid">
+      {{ range $featuredCollections }}
+        {{ $url := printf "collections/%s/" .collection.slug | absURL }}
+        {{ with .page }}
+          {{ $url = .RelPermalink }}
+        {{ end }}
+        <a class="card collection-card" href="{{ $url }}">
+          <div class="k">{{ title .state.kind }}</div>
+          <div class="v">{{ .collection.title }}</div>
+          {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
+          <div class="collection-meta">
+            <span>{{ .state.count }} pieces</span>
+            {{ with .collection.start_here }}<span>Start Here</span>{{ end }}
+          </div>
+        </a>
+      {{ end }}
+    </section>
+  {{ end }}
+
   {{ $featured := where site.RegularPages "Params.featured" true }}
   {{ if gt (len $featured) 0 }}
     <h2 class="list-title" style="margin-top:28px;">Selected</h2>

@@ -1,0 +1,38 @@
+{{ $page := .page }}
+{{ $collection := .collection }}
+{{ $match := false }}
+
+{{ if not $collection.explicit_only }}
+  {{ $seriesFallback := partial "collections/normalize-values.html" (dict "value" $collection.fallback.series) }}
+  {{ $topicsFallback := partial "collections/normalize-values.html" (dict "value" $collection.fallback.topics) }}
+  {{ $tagsFallback := partial "collections/normalize-values.html" (dict "value" $collection.fallback.tags) }}
+  {{ $sectionsFallback := partial "collections/normalize-values.html" (dict "value" $collection.fallback.sections) }}
+
+  {{ $seriesValue := lower (printf "%v" ($page.Params.series | default "")) }}
+  {{ if and $seriesValue (in $seriesFallback $seriesValue) }}
+    {{ $match = true }}
+  {{ end }}
+
+  {{ if not $match }}
+    {{ $pageTopics := partial "collections/normalize-values.html" (dict "value" $page.Params.topics) }}
+    {{ if gt (len (intersect $pageTopics $topicsFallback)) 0 }}
+      {{ $match = true }}
+    {{ end }}
+  {{ end }}
+
+  {{ if not $match }}
+    {{ $pageTags := partial "collections/normalize-values.html" (dict "value" $page.Params.tags) }}
+    {{ if gt (len (intersect $pageTags $tagsFallback)) 0 }}
+      {{ $match = true }}
+    {{ end }}
+  {{ end }}
+
+  {{ if not $match }}
+    {{ $sectionValue := lower $page.Section }}
+    {{ if and $sectionValue (in $sectionsFallback $sectionValue) }}
+      {{ $match = true }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $match }}

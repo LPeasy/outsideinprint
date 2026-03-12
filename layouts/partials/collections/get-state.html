@@ -1,0 +1,20 @@
+{{ $collection := .collection }}
+{{ $items := default (slice) .items }}
+{{ $kind := lower (printf "%v" ($collection.kind | default "topic")) }}
+{{ $defaultMin := cond (eq $kind "series") 2 3 }}
+{{ $minItems := int (default $defaultMin $collection.min_items) }}
+{{ $publicRequested := default false $collection.public }}
+{{ $forcePublic := default false $collection.force_public }}
+{{ $count := len $items }}
+{{ $meetsMin := ge $count $minItems }}
+{{ $visible := and $publicRequested (or $meetsMin $forcePublic) }}
+
+{{ return (dict
+  "kind" $kind
+  "count" $count
+  "min_items" $minItems
+  "public" $publicRequested
+  "force_public" $forcePublic
+  "meets_min" $meetsMin
+  "visible" $visible
+) }}

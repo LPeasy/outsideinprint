@@ -1,5 +1,5 @@
-﻿{{ $slug := lower (printf "%v" .) }}
-{{ $found := dict }}
+{{ $slug := lower (printf "%v" .) }}
+{{ $found := false }}
 {{ $definitions := default (slice) site.Data.collections.collections }}
 {{ range $definitions }}
   {{ if eq (lower (printf "%v" .slug)) $slug }}

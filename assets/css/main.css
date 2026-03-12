@@ -372,6 +372,59 @@ article figcaption{
 .collection-start-here{
   border-top:1px solid var(--hair);
 }
+.collection-items{
+  margin:0;
+  padding-left:20px;
+}
+.collection-item{
+  padding-left:4px;
+}
+.collection-pill{
+  display:inline-block;
+  margin-right:8px;
+  padding:2px 7px;
+  border:1px solid rgba(232,226,216,.22);
+  border-radius:999px;
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.collection-membership{
+  width:100%;
+  max-width:68ch;
+  margin-top:2rem;
+  padding:14px 14px 12px;
+  border:1px solid var(--hair);
+  border-radius:10px;
+  background:rgba(232,226,216,.012);
+}
+.collection-membership .k{
+  font-family:var(--sans);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+.collection-membership__row + .collection-membership__row{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid rgba(232,226,216,.08);
+}
+.collection-membership__title{
+  font-size:17px;
+}
+.collection-membership__meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 14px;
+  margin-top:6px;
+  color:var(--muted);
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
 
 .start-here-page{
   margin-top:2px;

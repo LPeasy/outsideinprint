@@ -20,9 +20,11 @@
       {{ .Content }}
     </article>
 
+    {{ partial "collections/page-membership-block.html" . }}
+
     {{ if ne .Params.show_citation false }}
       <div class="article-closing" aria-hidden="true">
-        <span class="article-closing__ornament">•••</span>
+        <span class="article-closing__ornament">â€¢â€¢â€¢</span>
       </div>
 
       <aside class="citation" role="note" aria-label="How to cite this page">

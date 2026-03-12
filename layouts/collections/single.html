@@ -1,4 +1,4 @@
-﻿{{ define "main" }}
+{{ define "main" }}
   {{ $slug := .Params.slug | default .File.BaseFileName }}
   {{ $definition := partial "collections/lookup-definition.html" $slug }}
   {{ if not $definition }}
@@ -9,8 +9,9 @@
     </div>
   {{ else }}
     {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition) }}
+    {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
     {{ $startHereSlug := lower (printf "%v" ($definition.start_here | default "")) }}
-    {{ $startHere := dict }}
+    {{ $startHere := false }}
     {{ if $startHereSlug }}
       {{ range $items }}
         {{ if eq (lower (printf "%v" (.Params.slug | default .File.BaseFileName))) $startHereSlug }}
@@ -22,13 +23,16 @@
     <h1>{{ $definition.title }}</h1>
     {{ with $definition.description }}<p class="subtitle">{{ . }}</p>{{ end }}
 
-    {{ with $definition.metadata }}
-      <div class="collection-meta-block">
+    <div class="collection-meta-block">
+      <div class="collection-meta-row"><span class="collection-meta-label">Kind</span><span class="collection-meta-value">{{ title $state.kind }}</span></div>
+      <div class="collection-meta-row"><span class="collection-meta-label">Pieces</span><span class="collection-meta-value">{{ $state.count }}</span></div>
+      <div class="collection-meta-row"><span class="collection-meta-label">Minimum To List</span><span class="collection-meta-value">{{ $state.min_items }}</span></div>
+      {{ with $definition.metadata }}
         {{ range . }}
           <div class="collection-meta-row"><span class="collection-meta-label">{{ .label }}</span><span class="collection-meta-value">{{ .value }}</span></div>
         {{ end }}
-      </div>
-    {{ end }}
+      {{ end }}
+    </div>
 
     {{ with $startHere }}
       <h2 class="list-title" style="margin-top:28px;">Start Here</h2>
@@ -45,15 +49,15 @@
       </div>
     {{ end }}
 
-    <h2 class="list-title" style="margin-top:30px;">Items</h2>
-    {{ $listed := 0 }}
-    {{ range $items }}
-      {{ $itemSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
-      {{ if ne $itemSlug $startHereSlug }}
-        {{ $listed = add $listed 1 }}
-        <div class="item">
+    <h2 class="list-title" style="margin-top:30px;">In This Collection</h2>
+    {{ if gt (len $items) 0 }}
+      <ol class="collection-items">
+      {{ range $items }}
+        {{ $itemSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
+        <li class="item collection-item">
           <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
           <div class="m">
+            {{ if eq $itemSlug $startHereSlug }}<span class="collection-pill">Start Here</span>{{ end }}
             {{ with .Params.section_label }}{{ . }}{{ end }}
             {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
             {{ with .Params.version }} | v{{ . }}{{ end }}
@@ -61,10 +65,10 @@
             {{ if .Params.pdf }} | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">PDF</a>{{ end }}
           </div>
           {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-        </div>
+        </li>
       {{ end }}
-    {{ end }}
-    {{ if and (eq $listed 0) (not $startHere) }}
+      </ol>
+    {{ else }}
       <div class="item">
         <div class="t">No items matched this collection.</div>
         <div class="m">Adjust explicit <code>collections</code> or the fallback rules in <code>data/collections.yaml</code>.</div>

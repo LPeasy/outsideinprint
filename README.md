@@ -1,4 +1,4 @@
-﻿# Outside In Print
+# Outside In Print
 
 A minimalist, print-forward Hugo site for publishing writing and **PDF editions**.
 
@@ -106,3 +106,12 @@ powershell -ExecutionPolicy Bypass -File .\scripts\audit_essay_integrity.ps1
 - Shared PDF build runner: `scripts/build_pdfs_typst_shared.ps1`
 - Local wrapper: `scripts/build_pdfs_typst_local.ps1`
 - CI wrapper: `scripts/build_pdfs_typst_ci.ps1`
+
+## Collections
+
+- Maintainer guide: `docs/collections-system.md`
+- Audit/report script:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\audit_collections.ps1
+```

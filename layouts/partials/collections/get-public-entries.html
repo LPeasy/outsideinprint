@@ -1,0 +1,18 @@
+{{ $definitions := sort (sort (default (slice) site.Data.collections.collections) "title" "asc") "weight" "asc" }}
+{{ $entries := slice }}
+
+{{ range $definitions }}
+  {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+  {{ $state := partial "collections/get-state.html" (dict "collection" . "items" $items) }}
+  {{ if $state.visible }}
+    {{ $page := site.GetPage (printf "/collections/%s" .slug) }}
+    {{ $entries = $entries | append (dict
+      "collection" .
+      "items" $items
+      "state" $state
+      "page" $page
+    ) }}
+  {{ end }}
+{{ end }}
+
+{{ return $entries }}

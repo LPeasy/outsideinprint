@@ -4,13 +4,14 @@ date: 2025-09-18
 draft: false
 slug: "the-ledger-vol-3"
 section_label: "Newsletter"
-subtitle: "100 Essays on Medium, How Hawai’i became America’s Largest Aircraft Carrier, and a new series on Risk Management ~"
+subtitle: "100 Essays on Medium, How Hawaiâ€™i became Americaâ€™s Largest Aircraft Carrier, and a new series on Risk Management ~"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-ledger-vol-3.pdf"
 featured: false
 collections:
   - the-ledger
+collection_weight: 30
 medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-3-3fa3cd513467"
 ---
 
@@ -28,7 +29,7 @@ medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-3-3fa3cd5134
 
 ### The Ledger, Vol. 3
 
-#### 100 Essays on Medium, How Hawai’i became America’s Largest Aircraft Carrier, and a new series on Risk Management
+#### 100 Essays on Medium, How Hawaiâ€™i became Americaâ€™s Largest Aircraft Carrier, and a new series on Risk Management
 
 **September 17th, 2025**
 
@@ -41,8 +42,8 @@ data-width="1024" data-height="1024" data-is-featured="true" />
 Joint</strong></figcaption>
 </figure>
 
-> **A few short essays you might’ve missed ~ from risk management to
-> Hawai’i’s burgeoning role in maritime power projection across the
+> **A few short essays you mightâ€™ve missed ~ from risk management to
+> Hawaiâ€™iâ€™s burgeoning role in maritime power projection across the
 > globe.**
 
 </div>
@@ -94,10 +95,10 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*4kt
 > href="https://medium.com/the-balanced-sheet/hawai-is-strategic-role-in-countering-china-s-pacific-influence-5a3a6607f88f"
 > class="markup--anchor markup--blockquote-anchor"
 > data-href="https://medium.com/the-balanced-sheet/hawai-is-strategic-role-in-countering-china-s-pacific-influence-5a3a6607f88f"
-> target="_blank"><em>Hawai’i’s strategic role in the Pacific</em></a>*,
+> target="_blank"><em>Hawaiâ€™iâ€™s strategic role in the Pacific</em></a>*,
 > connecting history, geography, and modern geopolitics.*
 
-I’ve been searching for like minded writers for a while now, and its
+Iâ€™ve been searching for like minded writers for a while now, and its
 exciting to bring on someone like Ken ~ you readers are in for a treat!
 Ken is bright thinker with a unique perspective.
 
@@ -124,7 +125,7 @@ Ken is bright thinker with a unique perspective.
 
 ### Recent Essays
 
-#### **Hawai’i’s Strategic Role in Countering China’s Pacific Influence**
+#### **Hawaiâ€™iâ€™s Strategic Role in Countering Chinaâ€™s Pacific Influence**
 
 *By Kenneth Kau*
 
@@ -134,9 +135,9 @@ Ken is bright thinker with a unique perspective.
 href="https://medium.com/the-balanced-sheet/hawai-is-strategic-role-in-countering-china-s-pacific-influence-5a3a6607f88f"
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/hawai-is-strategic-role-in-countering-china-s-pacific-influence-5a3a6607f88f"
-title="https://medium.com/the-balanced-sheet/hawai-is-strategic-role-in-countering-china-s-pacific-influence-5a3a6607f88f"><strong>Hawai‘i’s
-Strategic Role in Countering China’s Pacific Influence</strong><br />
-<em>How paradise became the world’s largest aircraft
+title="https://medium.com/the-balanced-sheet/hawai-is-strategic-role-in-countering-china-s-pacific-influence-5a3a6607f88f"><strong>Hawaiâ€˜iâ€™s
+Strategic Role in Countering Chinaâ€™s Pacific Influence</strong><br />
+<em>How paradise became the worldâ€™s largest aircraft
 carrier</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/hawai-is-strategic-role-in-countering-china-s-pacific-influence-5a3a6607f88f"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
@@ -147,7 +148,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*aPN
 </div>
 
 > *A native Hawaiian and U.S. Army veteran explains why (and how)
-> Hawai’i became more than a vacation postcard ~ it’s the world’s
+> Hawaiâ€™i became more than a vacation postcard ~ itâ€™s the worldâ€™s
 > largest aircraft carrier and the beating heart of U.S. Indo-Pacific
 > Command.*
 
@@ -181,7 +182,7 @@ class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/what-i-learned-from-writing-100-essays-on-medium-in-2025-ca5812b6e261"
 title="https://medium.com/the-balanced-sheet/what-i-learned-from-writing-100-essays-on-medium-in-2025-ca5812b6e261"><strong>What
 I Learned from Writing 100 Essays on Medium in 2025</strong><br />
-<em>From zero followers to breakout stories ~ one writer’s honest
+<em>From zero followers to breakout stories ~ one writerâ€™s honest
 experience</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/what-i-learned-from-writing-100-essays-on-medium-in-2025-ca5812b6e261"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
@@ -236,12 +237,12 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*Hgb
 
 </div>
 
-> *An expert’s reconstruction of the deadly Texas flood that claimed
-> campers’ lives. Why half an hour of warning makes all the difference ~
+> *An expertâ€™s reconstruction of the deadly Texas flood that claimed
+> campersâ€™ lives. Why half an hour of warning makes all the difference ~
 > and why official timelines reported in the news matter for the next
 > disaster.*
 
-#### **Risk Management vs Risk Analysis: What’s the Difference?**
+#### **Risk Management vs Risk Analysis: Whatâ€™s the Difference?**
 
 *By LP*
 
@@ -252,8 +253,8 @@ href="https://medium.com/the-balanced-sheet/risk-management-vs-risk-analysis-wha
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/risk-management-vs-risk-analysis-whats-the-difference-d42c64c49dfa"
 title="https://medium.com/the-balanced-sheet/risk-management-vs-risk-analysis-whats-the-difference-d42c64c49dfa"><strong>Risk
-Management vs Risk Analysis: What’s the Difference?</strong><br />
-<em>A coastal city’s disaster forces them to rethink their EM
+Management vs Risk Analysis: Whatâ€™s the Difference?</strong><br />
+<em>A coastal cityâ€™s disaster forces them to rethink their EM
 protocols</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/risk-management-vs-risk-analysis-whats-the-difference-d42c64c49dfa"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
@@ -351,7 +352,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*oDv
 </div>
 
 > *A data-driven look at wages, benefits, and work-life balance across
-> sectors.* ***Spoiler:*** *the answer isn’t as simple as most headlines
+> sectors.* ***Spoiler:*** *the answer isnâ€™t as simple as most headlines
 > suggest.*
 
 </div>
@@ -397,7 +398,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*cXf
 
 </div>
 
-From silent albums to sold out arenas ~ Jack Stratton’s life explained
+From silent albums to sold out arenas ~ Jack Strattonâ€™s life explained
 through his answers to a few different interviews. The article discusses
 his early life, unorthodox style, and recent live album triumph:
 <a href="https://www.youtube.com/watch?v=8bLinctYcno"
@@ -423,7 +424,7 @@ target="_blank">Clarity of Cal.</a>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **Who’s Drinking all the Modelo? ~ *Especial Report***
+#### **Whoâ€™s Drinking all the Modelo? ~ *Especial Report***
 
 *By LP*
 
@@ -433,7 +434,7 @@ target="_blank">Clarity of Cal.</a>
 href="https://medium.com/the-balanced-sheet/whos-drinking-all-the-modelo-659302786ed9"
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/whos-drinking-all-the-modelo-659302786ed9"
-title="https://medium.com/the-balanced-sheet/whos-drinking-all-the-modelo-659302786ed9"><strong>Who’s
+title="https://medium.com/the-balanced-sheet/whos-drinking-all-the-modelo-659302786ed9"><strong>Whoâ€™s
 Drinking All the Modelo?</strong><br />
 <em>Especial Report</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/whos-drinking-all-the-modelo-659302786ed9"
@@ -446,7 +447,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*xUy
 
 This essay follows the story of the mexican beer Modelo and how the
 brand became the number one selling beer in America. Where is all this
-cerveza going? And who’s drinking it?
+cerveza going? And whoâ€™s drinking it?
 
 </div>
 
@@ -471,7 +472,7 @@ cerveza going? And who’s drinking it?
 October will bring more essays on economics, risk management, and maybe
 even a Halloween special *(Why do people bob for apples??)*.
 
-We’re also hoping to add atleast one more staff writer to the pub in
+Weâ€™re also hoping to add atleast one more staff writer to the pub in
 October. <a
 href="https://medium.com/the-balanced-sheet/want-to-write-for-the-balance-sheet-df7d4ab5aacb"
 class="markup--anchor markup--p-anchor"
@@ -499,7 +500,7 @@ Balance Sheet!</a>
 
 ### Thanks, as always, for reading.
 
-If you’ve been following along, **consider sharing *The Balance Sheet***
+If youâ€™ve been following along, **consider sharing *The Balance Sheet***
 with a friend or colleague who might enjoy it.
 
 **Comment with topics you are interested in!** We are curious thinkers

@@ -1,0 +1,25 @@
+{{ $values := slice }}
+{{ with .value }}
+  {{ if reflect.IsSlice . }}
+    {{ range . }}
+      {{ $values = $values | append (lower (printf "%v" .)) }}
+    {{ end }}
+  {{ else }}
+    {{ $values = $values | append (lower (printf "%v" .)) }}
+  {{ end }}
+{{ end }}
+
+{{ $normalized := slice }}
+{{ range $values }}
+  {{ $candidate := strings.TrimSpace . }}
+  {{ if and $candidate (not (in $normalized $candidate)) }}
+    {{ $normalized = $normalized | append $candidate }}
+  {{ end }}
+{{ end }}
+
+{{ $limit := default 0 .limit }}
+{{ if and (gt $limit 0) (gt (len $normalized) $limit) }}
+  {{ $normalized = first $limit $normalized }}
+{{ end }}
+
+{{ return $normalized }}

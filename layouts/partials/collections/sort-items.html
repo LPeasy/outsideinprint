@@ -1,0 +1,23 @@
+{{ $weighted := slice }}
+{{ $dated := slice }}
+
+{{ range default (slice) .items }}
+  {{ if isset .Params "collection_weight" }}
+    {{ $weighted = $weighted | append . }}
+  {{ else }}
+    {{ $dated = $dated | append . }}
+  {{ end }}
+{{ end }}
+
+{{ $weighted = sort (sort $weighted "Date" "desc") "Params.collection_weight" "asc" }}
+{{ $dated = sort $dated "Date" "desc" }}
+
+{{ $ordered := slice }}
+{{ range $weighted }}
+  {{ $ordered = $ordered | append . }}
+{{ end }}
+{{ range $dated }}
+  {{ $ordered = $ordered | append . }}
+{{ end }}
+
+{{ return $ordered }}

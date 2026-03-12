@@ -8,7 +8,9 @@ subtitle: "The obvious connection explained"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/pornography-the-modern-secular-state-religion-and-american-morality.pdf"
-featured: false
+featured: false
+collections:
+  - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/pornography-the-modern-secular-state-religion-and-american-morality-412bb849d7e0"
 ---
 
@@ -38,31 +40,31 @@ shepherd with his sheep to a neon fueled modern moral
 hell-scape.</figcaption>
 </figure>
 
-America didn’t vote to become a porn-saturated culture.\
+America didnâ€™t vote to become a porn-saturated culture.\
 It drifted there ~ bit by bit ~ as old guardrails collapsed and the
 children of decadence learned how to speak a new moral language.
 
-Porn isn’t “speech,” or “private taste,” or “just a guilty pleasure.”
-For many users it’s clinically addictive. It’s destructive to trust and
-intimacy. It’s morally bankrupt. It trains the mind towards falseness
+Porn isnâ€™t â€œspeech,â€ or â€œprivate taste,â€ or â€œjust a guilty pleasure.â€
+For many users itâ€™s clinically addictive. Itâ€™s destructive to trust and
+intimacy. Itâ€™s morally bankrupt. It trains the mind towards falseness
 and relational dysfunction.
 
 In the modern digital environment, fundamentally coercive ~ not because
 anyone is literally forced to click, but because children and teens are
 exposed early, often, and long before they can understand what they are
-seeing. Pornography reaches into childhood by design, so “consensual”
-doesn’t really seem like a fair description.
+seeing. Pornography reaches into childhood by design, so â€œconsensualâ€
+doesnâ€™t really seem like a fair description.
 
 At the same time, the moral authority that used to tell Americans what
 sex was for ~ and what the family was for ~ has been steadily hollowed
 out.
 
 The old moral story was simple: sex creates children, and families bind
-societies together. Or at least, that’s what they told us until the
-sexual revolution of the 60’s and 70’s.
+societies together. Or at least, thatâ€™s what they told us until the
+sexual revolution of the 60â€™s and 70â€™s.
 
 In the moral vacuum that followed, a secular state religion rose in
-God’s place: an identity-centered moral framework that functions like a
+Godâ€™s place: an identity-centered moral framework that functions like a
 public creed across schools, HR departments, media, and professional
 life. It offers rules, taboos, confessions, heresies, and
 excommunications. It tells people what they must affirm out loud to be
@@ -104,12 +106,12 @@ data-width="1536" data-height="1024" />
 harder to disseminate and access.</figcaption>
 </figure>
 
-For much of American history, explicit material wasn’t treated as a
+For much of American history, explicit material wasnâ€™t treated as a
 quirky consumer category. It was treated as corrosive. Law, religion,
 and social stigma formed a tight net that made the market hard to scale.
 
 The Comstock-era regime is the blunt example people still cite: federal
-law restricted the distribution of “obscene” materials through the mail,
+law restricted the distribution of â€œobsceneâ€ materials through the mail,
 and enforcement was serious business.
 
 You can argue that the older regime went too far. Still, the basic
@@ -149,7 +151,7 @@ data-width="1536" data-height="1024" />
 guidance from community leaders across society.</figcaption>
 </figure>
 
-The cultural shift wasn’t just vibes and Woodstock posters.
+The cultural shift wasnâ€™t just vibes and Woodstock posters.
 
 > **It was institutional.**
 
@@ -162,7 +164,7 @@ treated as a private matter the public has no standing to judge.
 Once that logic becomes normal, stigmas fade, enforcement becomes
 harder, and distribution gets easier.
 
-Then the internet shows up, and the scale “problem” gets solved.
+Then the internet shows up, and the scale â€œproblemâ€ gets solved.
 
 </div>
 
@@ -195,11 +197,11 @@ Porn used to require effort: a theater, a magazine, a store, a VHS, a
 desktop computer in a shared room. The phone erased effort. Porn became
 frictionless, private, portable, and cheap.
 
-The old adult compromise ~ “do what you want, just keep it away from
-children” ~ is pretty hard to take seriously in the smartphone era.
+The old adult compromise ~ â€œdo what you want, just keep it away from
+childrenâ€ ~ is pretty hard to take seriously in the smartphone era.
 
-Common Sense Media’s nationally representative survey reported that 73%
-of teens ages 13 — 17 had seen pornography online, and 54% reported
+Common Sense Mediaâ€™s nationally representative survey reported that 73%
+of teens ages 13â€Šâ€”â€Š17 had seen pornography online, and 54% reported
 first exposure by age 13. The report also notes that some teens
 encounter it by age 10 or younger.
 
@@ -207,7 +209,7 @@ Daniel Cox at the Survey Center on American Life summarizes the modern
 reality in plain terms: young people are exposed earlier, and spend more
 time watching porn than prior generations.
 
-That’s where “coercive” enters the conversation. Not in the dramatic
+Thatâ€™s where â€œcoerciveâ€ enters the conversation. Not in the dramatic
 sense ~ more of an environmental sense. A market that predictably
 reaches children through default exposure is not operating inside a
 clean adult-only consent framework, even if it tells itself it is.
@@ -242,10 +244,10 @@ data-width="840" data-height="1556" />
 As porn access became effortless, Christian identification and
 institutional religious participation fell hard.
 
-Pew’s long-run view is striking: as recently as the early 1990s, about
-90% of U.S. adults identified as Christian. Today, it’s about
+Pewâ€™s long-run view is striking: as recently as the early 1990s, about
+90% of U.S. adults identified as Christian. Today, itâ€™s about
 two-thirds, driven largely by people leaving the religions they were
-raised in. Pew’s newer reporting suggests the decline may have slowed
+raised in. Pewâ€™s newer reporting suggests the decline may have slowed
 since 2020, but at a much lower level than the mid-century norm.
 
 Gallup documents a related milestone: U.S. membership in a church,
@@ -262,7 +264,7 @@ data-width="1220" data-height="1174" />
 So what fills the gap when a culture stops sharing a thick moral
 vocabulary about sex, duty, restraint, and family?
 
-It doesn’t become morally neutral. It becomes morally reorganized.
+It doesnâ€™t become morally neutral. It becomes morally reorganized.
 
 </div>
 
@@ -292,7 +294,7 @@ data-width="1536" data-height="1024" />
 <figcaption>The modern secular state religion</figcaption>
 </figure>
 
-Call it “woke,” “identity politics,” “DEI,” or “the new orthodoxy.”\
+Call it â€œwoke,â€ â€œidentity politics,â€ â€œDEI,â€ or â€œthe new orthodoxy.â€\
 Labels are the least interesting part.
 
 The structure of belief is as old as humanity itself.
@@ -303,12 +305,12 @@ State religion offers a moral calendar. It sorts people into innocent
 and guilty categories. It treats dissent as moral contamination rather
 than good-faith disagreement.
 
-John McWhorter’s framing is useful precisely because he’s not preaching
+John McWhorterâ€™s framing is useful precisely because heâ€™s not preaching
 from a pulpit. In his discussion of Woke Racism, he describes modern
-antiracist activism as “not a progressive ideology, but a religion,”
-complete with “original sin,” heresy, and punishment for dissent.
+antiracist activism as â€œnot a progressive ideology, but a religion,â€
+complete with â€œoriginal sin,â€ heresy, and punishment for dissent.
 
-That doesn’t mean every person who supports social justice causes is a
+That doesnâ€™t mean every person who supports social justice causes is a
 zealot. It means our public moral language increasingly acts like a
 creed that institutions enforce.
 
@@ -316,13 +318,13 @@ Now pair that with a porn-saturated consumer culture, and you get a
 strange mix:
 
 - <span id="4665">**Private appetite becomes harder to restrict** in
-  practice, even for minors, because restriction reads as “judgmental”
-  or “prudish.”</span>
+  practice, even for minors, because restriction reads as â€œjudgmentalâ€
+  or â€œprudish.â€</span>
 - <span id="cba7">**Public speech becomes easier to restrict** in elite
   settings, because restriction signals moral seriousness.</span>
 
-One side of the moral ledger says “don’t police desire.” The other says
-“police language.” That combination does not produce cohesion.
+One side of the moral ledger says â€œdonâ€™t police desire.â€ The other says
+â€œpolice language.â€ That combination does not produce cohesion.
 
 > It produces fragmentation.
 
@@ -365,7 +367,7 @@ Marriage, stable two-parent households, and shared moral norms are not
 quaint traditions. They are the very fabric of our social
 infrastructure.
 
-When they weaken, people don’t become “freer.”
+When they weaken, people donâ€™t become â€œfreer.â€
 
 They become more isolated, anxious, and dependent on substitutes ~ often
 online, tribal, and brittle.
@@ -399,7 +401,7 @@ class="graf-image" data-image-id="1*Z2UEe_2CRhEhmN5zjWU8Zg@2x.jpeg"
 data-width="1080" data-height="1182" />
 </figure>
 
-Even if you reject porn as a causal driver, it’s hard to deny it can
+Even if you reject porn as a causal driver, itâ€™s hard to deny it can
 train expectations and habits that undermine intimacy ~ especially when
 it becomes a frequent private routine and an early formative exposure.
 
@@ -433,7 +435,7 @@ class="graf-image" data-image-id="1*NyKF4A1Drk08Cl7aXmIhvw.png"
 data-width="1536" data-height="1024" />
 </figure>
 
-A society can’t run indefinitely on two contradictory principles:
+A society canâ€™t run indefinitely on two contradictory principles:
 
 - <span id="332a">**First:** desire is private, untouchable, morally
   off-limits to judge.</span>
@@ -441,22 +443,22 @@ A society can’t run indefinitely on two contradictory principles:
   mandatory to affirm.</span>
 
 When porn becomes ambience, kids are exposed early, relationships
-weaken, and community trust thins out, people don’t become calm
+weaken, and community trust thins out, people donâ€™t become calm
 libertarians. They become anxious and atomized.
 
 They look for belonging. They join cults. They treat politics as
 salvation and others as infidels.
 
-That’s the long-run risk: not porn, not the ideologies, but full-on
-institutional moral theater… eventually: civil war and bloody
+Thatâ€™s the long-run risk: not porn, not the ideologies, but full-on
+institutional moral theaterâ€¦ eventually: civil war and bloody
 revolution.
 
 What do we do when a fourteen-year-old has seen more explicit content
 than any prior generation has in their whole lives, and the adults
-around them can’t even agree on whether that is a crisis or something
+around them canâ€™t even agree on whether that is a crisis or something
 that should be protected???
 
-**That’s the moral vacuum. Vacuums get filled.**
+**Thatâ€™s the moral vacuum. Vacuums get filled.**
 
 **I**nstitutionalized moral theater ~ enforced and detached from shared
 humanity ~ is a sad way for the West to crumble. Is this how Democracy
@@ -466,7 +468,7 @@ Christian moral philosophies on supposed humanitarian grounds?
 
 I tremble at the idea of a future where any other moral philosophy
 reigns supreme. I pray that we do not live to see Christian moral
-leadership’s final death knoll in this world.
+leadershipâ€™s final death knoll in this world.
 
 </div>
 
@@ -495,11 +497,11 @@ constrain?**
 Leave a comment with your take ~ I read them and I respond.
 
 If this piece earned it, give it a clap, follow The Balance Sheet, and
-subscribe so you don’t miss the next one!
+subscribe so you donâ€™t miss the next one!
 
 > Thanks for reading.
 
-> — LP
+> â€” LP
 
 </div>
 
@@ -521,33 +523,33 @@ subscribe so you don’t miss the next one!
 
 ### Sources
 
-- <span id="7bdd">Pew Research Center ~ “How U.S. religious composition
+- <span id="7bdd">Pew Research Center ~ â€œHow U.S. religious composition
   has changed in recent
-  decades” — https://www.pewresearch.org/religion/2022/09/13/how-u-s-religious-composition-has-changed-in-recent-decades/</span>
-- <span id="2984">Pew Research Center ~ “Decline of Christianity in the
+  decadesâ€â€Šâ€”â€Šhttps://www.pewresearch.org/religion/2022/09/13/how-u-s-religious-composition-has-changed-in-recent-decades/</span>
+- <span id="2984">Pew Research Center ~ â€œDecline of Christianity in the
   U.S. has
-  slowed…” — https://www.pewresearch.org/religion/2025/02/26/decline-of-christianity-in-the-us-has-slowed-may-have-leveled-off/</span>
-- <span id="5b5e">Pew Research Center ~ “Religion holds steady in
-  America” — https://www.pewresearch.org/religion/2025/12/08/religion-holds-steady-in-america/</span>
-- <span id="81bb">Gallup ~ “U.S. Church Membership Falls Below Majority
+  slowedâ€¦â€â€Šâ€”â€Šhttps://www.pewresearch.org/religion/2025/02/26/decline-of-christianity-in-the-us-has-slowed-may-have-leveled-off/</span>
+- <span id="5b5e">Pew Research Center ~ â€œReligion holds steady in
+  Americaâ€â€Šâ€”â€Šhttps://www.pewresearch.org/religion/2025/12/08/religion-holds-steady-in-america/</span>
+- <span id="81bb">Gallup ~ â€œU.S. Church Membership Falls Below Majority
   for First
-  Time” — https://news.gallup.com/poll/341963/church-membership-falls-below-majority-first-time.aspx</span>
-- <span id="6653">Common Sense Media ~ “Teens and Pornography” (press
-  release) — https://www.commonsensemedia.org/press-releases/new-report-reveals-truths-about-how-teens-engage-with-pornography</span>
-- <span id="69bd">Common Sense Media ~ “Teens and Pornography”
-  (report) — https://www.commonsensemedia.org/research/teens-and-pornography</span>
-- <span id="7e38">Survey Center on American Life (Daniel Cox) ~ “The
+  Timeâ€â€Šâ€”â€Šhttps://news.gallup.com/poll/341963/church-membership-falls-below-majority-first-time.aspx</span>
+- <span id="6653">Common Sense Media ~ â€œTeens and Pornographyâ€ (press
+  release)â€Šâ€”â€Šhttps://www.commonsensemedia.org/press-releases/new-report-reveals-truths-about-how-teens-engage-with-pornography</span>
+- <span id="69bd">Common Sense Media ~ â€œTeens and Pornographyâ€
+  (report)â€Šâ€”â€Šhttps://www.commonsensemedia.org/research/teens-and-pornography</span>
+- <span id="7e38">Survey Center on American Life (Daniel Cox) ~ â€œThe
   Pornography
-  Problem” — https://www.americansurveycenter.org/newsletter/the-pornography-problem/</span>
-- <span id="9fc3">Columbia News ~ McWhorter on ‘woke
-  racism’ — https://news.columbia.edu/content/woke-racism-how-new-religion-has-betrayed-black-america</span>
+  Problemâ€â€Šâ€”â€Šhttps://www.americansurveycenter.org/newsletter/the-pornography-problem/</span>
+- <span id="9fc3">Columbia News ~ McWhorter on â€˜woke
+  racismâ€™â€Šâ€”â€Šhttps://news.columbia.edu/content/woke-racism-how-new-religion-has-betrayed-black-america</span>
 - <span id="27ea">Justia ~ Stanley v. Georgia
-  (1969) — https://supreme.justia.com/cases/federal/us/394/557/</span>
-- <span id="71ed">NCFMR (BGSU) ~ “Divorce: More than a Century of
+  (1969)â€Šâ€”â€Šhttps://supreme.justia.com/cases/federal/us/394/557/</span>
+- <span id="71ed">NCFMR (BGSU) ~ â€œDivorce: More than a Century of
   Change,
-  1900–2018” — https://www.bgsu.edu/ncfmr/resources/data/family-profiles/schweizer-divorce-century-change-1900-2018-fp-20-22.html</span>
+  1900â€“2018â€â€Šâ€”â€Šhttps://www.bgsu.edu/ncfmr/resources/data/family-profiles/schweizer-divorce-century-change-1900-2018-fp-20-22.html</span>
 - <span id="8466">PubMed ~ Perry (2018) on pornography use and marital
-  separation — https://pubmed.ncbi.nlm.nih.gov/28936726/</span>
+  separationâ€Šâ€”â€Šhttps://pubmed.ncbi.nlm.nih.gov/28936726/</span>
 
 </div>
 

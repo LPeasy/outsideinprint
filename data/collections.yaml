@@ -1,15 +1,22 @@
 collections:
   - slug: the-ledger
     title: The Ledger
-    description: Newsletter-style dispatches that gather recent essays, themes, and recurring concerns into one archival thread.
+    kind: series
+    public: true
+    force_public: false
+    min_items: 2
+    explicit_only: true
     featured: true
     weight: 10
     start_here: the-ledger-vol-1
+    description: Newsletter-style dispatches that gather recent essays, themes, and recurring concerns into one archival thread.
     metadata:
       - label: Format
         value: Newsletter
       - label: Scope
         value: Essays, themes, and cultural dispatches
+      - label: Lane
+        value: Editorial series
     fallback:
       series: []
       topics: []
@@ -18,18 +25,206 @@ collections:
 
   - slug: syd-and-oliver-dialogues
     title: Syd and Oliver Dialogues
-    description: A conversational archive of pieces on truth, power, money, obligation, and meaning.
+    kind: series
+    public: true
+    force_public: false
+    min_items: 2
+    explicit_only: false
     featured: true
     weight: 20
     start_here: without-a-word
+    description: A conversational archive of pieces on truth, power, money, obligation, and meaning.
     metadata:
       - label: Format
         value: Dialogues
       - label: Scope
         value: Truth, power, and moral imagination
+      - label: Lane
+        value: Conversational series
     fallback:
       series: []
       topics: []
       tags: []
       sections:
         - syd-and-oliver
+
+  - slug: risk-uncertainty
+    title: Risk, Uncertainty, and Decision-Making
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: true
+    weight: 30
+    start_here: what-is-risk-a-four-part-framework
+    description: Essays about uncertainty, tradeoffs, risk framing, and decision-making under imperfect information.
+    metadata:
+      - label: Format
+        value: Essays
+      - label: Scope
+        value: Risk, uncertainty, and decisions
+    fallback:
+      series: []
+      topics:
+        - risk
+        - uncertainty
+        - decision-making
+        - risk management
+      tags:
+        - risk
+        - uncertainty
+        - decision
+      sections: []
+
+  - slug: floods-water-built-environment
+    title: Floods, Water, and the Built Environment
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: true
+    weight: 40
+    start_here: what-happened-at-camp-mystic
+    description: Reporting and essays on flood risk, water systems, riverine disasters, and the places we keep building anyway.
+    metadata:
+      - label: Format
+        value: Essays and field cases
+      - label: Scope
+        value: Floods, water, and infrastructure
+    fallback:
+      series: []
+      topics:
+        - flood
+        - water
+        - levee
+        - drought
+        - floodplain
+        - camp mystic
+      tags:
+        - flood
+        - water
+        - infrastructure
+        - resilience
+      sections: []
+
+  - slug: technology-ai-machine-future
+    title: Technology, AI, and the Machine Future
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: true
+    weight: 50
+    start_here: synthetic-reasoning
+    description: Essays on artificial intelligence, compute, machine systems, and the social future they are dragging into view.
+    metadata:
+      - label: Format
+        value: Essays
+      - label: Scope
+        value: AI, compute, and machine systems
+    fallback:
+      series: []
+      topics:
+        - ai
+        - artificial intelligence
+        - machine future
+        - moores law
+        - deepseek
+      tags:
+        - ai
+        - compute
+        - machine
+        - alignment
+      sections: []
+
+  - slug: moral-religious-philosophical-essays
+    title: Moral, Religious, and Philosophical Essays
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 60
+    start_here: in-the-image-of-god
+    description: Essays on moral formation, religion, conscience, and the philosophical habits needed to see clearly.
+    metadata:
+      - label: Format
+        value: Essays
+      - label: Scope
+        value: Moral, religious, and philosophical reflection
+    fallback:
+      series: []
+      topics:
+        - morality
+        - religion
+        - philosophy
+        - god
+        - catholic
+        - christian
+      tags:
+        - moral
+        - religious
+        - philosophical
+      sections: []
+
+  - slug: reported-case-studies
+    title: Reported Case Studies
+    kind: series
+    public: true
+    force_public: false
+    min_items: 2
+    explicit_only: true
+    featured: false
+    weight: 70
+    start_here: what-happened-at-camp-mystic
+    description: Tightly reported case studies that stay with one event, institution, or failure long enough to learn something durable.
+    metadata:
+      - label: Format
+        value: Case studies
+      - label: Scope
+        value: Reported events and institutional failures
+    fallback:
+      series: []
+      topics:
+        - case study
+        - camp mystic
+        - dolphin
+        - crash
+        - timeline
+        - plantation
+      tags:
+        - case-study
+        - reporting
+        - investigation
+      sections: []
+
+  - slug: civic-institutions-and-public-power
+    title: Civic Institutions and Public Power
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 90
+    start_here: ""
+    description: A staged lane for essays on courts, federalism, and public institutions once the body of work is coherent enough to publish.
+    metadata:
+      - label: Format
+        value: Essays
+      - label: Scope
+        value: Courts, institutions, and public power
+    fallback:
+      series: []
+      topics:
+        - federalism
+        - courts
+        - institutions
+      tags:
+        - governance
+        - institutions
+      sections: []

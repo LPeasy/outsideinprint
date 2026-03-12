@@ -1,72 +1,15 @@
-﻿{{ $collection := .collection }}
+{{ $collection := .collection }}
 {{ $slug := lower (printf "%v" $collection.slug) }}
-{{ $seriesFallback := slice }}
-{{ range default (slice) $collection.fallback.series }}
-  {{ $seriesFallback = $seriesFallback | append (lower (printf "%v" .)) }}
-{{ end }}
-{{ $topicsFallback := slice }}
-{{ range default (slice) $collection.fallback.topics }}
-  {{ $topicsFallback = $topicsFallback | append (lower (printf "%v" .)) }}
-{{ end }}
-{{ $tagsFallback := slice }}
-{{ range default (slice) $collection.fallback.tags }}
-  {{ $tagsFallback = $tagsFallback | append (lower (printf "%v" .)) }}
-{{ end }}
-{{ $sectionsFallback := slice }}
-{{ range default (slice) $collection.fallback.sections }}
-  {{ $sectionsFallback = $sectionsFallback | append (lower (printf "%v" .)) }}
-{{ end }}
-
 {{ $items := slice }}
-{{ range site.RegularPages }}
-  {{ $explicit := slice }}
-  {{ with .Params.collections }}
-    {{ if reflect.IsSlice . }}
-      {{ range . }}
-        {{ $explicit = $explicit | append (lower (printf "%v" .)) }}
-      {{ end }}
-    {{ else }}
-      {{ $explicit = $explicit | append (lower (printf "%v" .)) }}
-    {{ end }}
-  {{ end }}
 
+{{ range site.RegularPages }}
+  {{ $explicit := partial "collections/normalize-values.html" (dict "value" .Params.collections "limit" 2) }}
   {{ $include := false }}
+
   {{ if gt (len $explicit) 0 }}
     {{ $include = in $explicit $slug }}
-  {{ else }}
-    {{ $seriesValue := lower (printf "%v" (.Params.series | default "")) }}
-    {{ if and $seriesValue (in $seriesFallback $seriesValue) }}
-      {{ $include = true }}
-    {{ else }}
-      {{ $pageTopics := slice }}
-      {{ with .Params.topics }}
-        {{ if reflect.IsSlice . }}
-          {{ range . }}
-            {{ $pageTopics = $pageTopics | append (lower (printf "%v" .)) }}
-          {{ end }}
-        {{ else }}
-          {{ $pageTopics = $pageTopics | append (lower (printf "%v" .)) }}
-        {{ end }}
-      {{ end }}
-      {{ $pageTags := slice }}
-      {{ with .Params.tags }}
-        {{ if reflect.IsSlice . }}
-          {{ range . }}
-            {{ $pageTags = $pageTags | append (lower (printf "%v" .)) }}
-          {{ end }}
-        {{ else }}
-          {{ $pageTags = $pageTags | append (lower (printf "%v" .)) }}
-        {{ end }}
-      {{ end }}
-      {{ if or (gt (len (intersect $pageTopics $topicsFallback)) 0) (gt (len (intersect $pageTags $tagsFallback)) 0) }}
-        {{ $include = true }}
-      {{ else }}
-        {{ $sectionValue := lower .Section }}
-        {{ if and $sectionValue (in $sectionsFallback $sectionValue) }}
-          {{ $include = true }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
+  {{ else if not $collection.explicit_only }}
+    {{ $include = partial "collections/fallback-match.html" (dict "page" . "collection" $collection) }}
   {{ end }}
 
   {{ if $include }}
@@ -74,4 +17,4 @@
   {{ end }}
 {{ end }}
 
-{{ return (sort $items "Date" "desc") }}
+{{ return (partial "collections/sort-items.html" (dict "items" $items)) }}
