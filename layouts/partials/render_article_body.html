@@ -1,6 +1,19 @@
-{{- $content := .Content -}}
+﻿{{- $content := .Content -}}
+{{- if .Params.medium_source_url -}}
+  {{- $escapePattern := `([\\.^$|?*+(){}\[\]])` -}}
+  {{- $escapedTitle := replaceRE $escapePattern `\\$1` .Title -}}
+  {{- $leadPattern := `(?s)^\s*(?:<!-- raw HTML omitted -->\s*)*(?:<hr>\s*(?:<!-- raw HTML omitted -->\s*)*)?` -}}
+  {{- if .Params.subtitle -}}
+    {{- $escapedSubtitle := replaceRE $escapePattern `\\$1` .Params.subtitle -}}
+    {{- $content = replaceRE (printf `%s<h[23][^>]*>\s*%s\s*</h[23]>\s*(?:<!-- raw HTML omitted -->\s*)*<h[34][^>]*>\s*%s\s*</h[34]>\s*` $leadPattern $escapedTitle $escapedSubtitle) `` $content -}}
+  {{- else -}}
+    {{- $content = replaceRE (printf `%s<h[23][^>]*>\s*%s\s*</h[23]>\s*` $leadPattern $escapedTitle) `` $content -}}
+  {{- end -}}
+  {{- $content = replaceRE `(?s)^\s*(?:<!-- raw HTML omitted -->\s*)*<hr>\s*(?:<!-- raw HTML omitted -->\s*)*` `` $content -}}
+{{- end -}}
 {{- $content = replaceRE `(?s)<blockquote>\s*<p>\s*Source:\s*(.*?)</p>\s*</blockquote>` `<p class="article-source"><span class="article-source__label">Source</span> $1</p>` $content -}}
 {{- $content = replaceRE `(?s)<p>\s*Source:\s*(.*?)</p>` `<p class="article-source"><span class="article-source__label">Source</span> $1</p>` $content -}}
+{{- $content = replaceRE `(?s)<p>\s*(<img[^>]+>)\s*</p>\s*<p class="article-source">(.*?)</p>` `<figure class="article-figure">$1<figcaption class="article-source-caption">$2</figcaption></figure>` $content -}}
 {{- $content = replaceRE `(?i)<h([2-4])([^>]*)>\s*(Works Cited|References|Sources|Bibliography|Note from the Author|Author Note)\s*</h[2-4]>` `<h$1$2 class="article-aftermatter-heading">$3</h$1>` $content -}}
 {{- $content = replaceRE `(?i)<p>\s*(Works Cited|References|Sources|Bibliography|Note from the Author|Author Note)\s*</p>` `<h2 class="article-aftermatter-heading">$1</h2>` $content -}}
 {{- $content | safeHTML -}}

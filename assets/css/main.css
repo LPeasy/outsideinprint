@@ -1,4 +1,4 @@
-:root{
+﻿:root{
   --bg:#0b0b0b;
   --fg:#e8e2d8;
   --muted:#b8b0a6;
@@ -783,8 +783,8 @@ article figcaption{
 .piece-body{
   width:100%;
   max-width:72ch;
-  font-size:1.03rem;
-  line-height:1.76;
+  font-size:1.02rem;
+  line-height:1.74;
   hyphens:auto;
   text-wrap:pretty;
 }
@@ -815,20 +815,20 @@ article figcaption{
   color:var(--muted);
   text-align:right;
 }
-.single-page h1{
-  margin:0 0 0.7rem;
+.piece-header h1{
+  margin:0 0 0.6rem;
   text-align:center;
 }
-.single-page .subtitle{
-  margin:0 0 1.1rem;
+.piece-header .subtitle{
+  margin:0 0 1rem;
   text-align:center;
 }
-.single-page .imprint-header{
+.piece-header .imprint-header{
   margin:0 0 0.75rem;
 }
 .edition-download{
   margin-top:0.75rem;
-  margin-bottom:1.65rem;
+  margin-bottom:1.55rem;
 }
 .edition-download__button{
   display:inline-block;
@@ -858,23 +858,23 @@ article figcaption{
 .piece-body figure,
 .piece-body hr{
   margin-top:0;
-  margin-bottom:1.3rem;
+  margin-bottom:1.22rem;
 }
 .piece-body h2,
 .piece-body h3,
 .piece-body h4{
-  margin:2.8rem 0 0.85rem;
-  line-height:1.28;
+  margin:2.45rem 0 0.72rem;
+  line-height:1.24;
   text-wrap:balance;
 }
 .piece-body h2{
-  font-size:1.7rem;
+  font-size:1.62rem;
 }
 .piece-body h3{
-  font-size:1.38rem;
+  font-size:1.32rem;
 }
 .piece-body h4{
-  font-size:1.08rem;
+  font-size:1.05rem;
 }
 .piece-body p + h2,
 .piece-body p + h3,
@@ -888,96 +888,100 @@ article figcaption{
 .piece-body blockquote + h2,
 .piece-body blockquote + h3,
 .piece-body blockquote + h4{
-  margin-top:2.95rem;
+  margin-top:2.3rem;
+}
+.piece-body figure + h2,
+.piece-body figure + h3,
+.piece-body figure + h4,
+.piece-body hr + h2,
+.piece-body hr + h3,
+.piece-body hr + h4{
+  margin-top:2rem;
 }
 .piece-body ul,
 .piece-body ol{
-  padding-left:1.25rem;
+  margin-left:0;
+  padding-left:1.2rem;
 }
 .piece-body li{
-  padding-left:0.35rem;
+  padding-left:0.28rem;
 }
 .piece-body li + li{
-  margin-top:0.45rem;
+  margin-top:0.4rem;
 }
 .piece-body li > p:last-child{
   margin-bottom:0;
 }
 .piece-body blockquote{
-  padding:0.15rem 0 0.15rem 1.1rem;
+  padding:0.12rem 0 0.12rem 1rem;
   border-left:1px solid rgba(232,226,216,.16);
   color:var(--muted);
 }
 .piece-body hr{
-  width:5.5rem;
+  width:4.75rem;
   height:1px;
   border:0;
-  background:linear-gradient(90deg, rgba(232,226,216,0) 0%, rgba(232,226,216,.26) 18%, rgba(232,226,216,.26) 82%, rgba(232,226,216,0) 100%);
-}
-.piece-body hr + h2,
-.piece-body hr + h3,
-.piece-body hr + h4{
-  margin-top:0;
+  background:linear-gradient(90deg, rgba(232,226,216,0) 0%, rgba(232,226,216,.24) 18%, rgba(232,226,216,.24) 82%, rgba(232,226,216,0) 100%);
 }
 .piece-body a{
   text-decoration:none;
   text-underline-offset:0.14em;
 }
-.piece-body img,
-.piece-body p > img{
+.piece-body img{
   display:block;
   max-width:100%;
   height:auto;
   margin:0 auto;
   border-radius:8px;
 }
-.piece-body figure{
-  margin:1.8rem 0 1.15rem;
+.piece-body figure,
+.piece-body .article-figure{
+  margin:1.85rem 0 1rem;
 }
 .piece-body figcaption,
-.piece-body .article-source{
+.piece-body .article-source,
+.piece-body .article-source-caption{
   color:var(--muted);
   font-family:var(--sans);
-  font-size:0.75rem;
-  line-height:1.55;
+  font-size:0.74rem;
+  line-height:1.6;
 }
-.piece-body figcaption{
-  margin-top:0.75rem;
+.piece-body figcaption,
+.piece-body .article-source-caption{
+  margin-top:0.72rem;
 }
 .piece-body .article-source{
-  margin-top:-0.45rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
+  margin:0 0 1.35rem;
+}
+.piece-body figure + .article-source{
+  margin-top:-0.2rem;
 }
 .article-source__label{
+  display:inline-block;
   margin-right:0.45rem;
   color:var(--fg);
+  font-size:0.67rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
 }
 .piece-body .article-aftermatter-heading{
-  margin-top:3.1rem;
-  padding-top:1.15rem;
+  margin-top:2.85rem;
+  padding-top:1.05rem;
   border-top:1px solid rgba(232,226,216,.08);
   color:var(--muted);
   font-family:var(--sans);
-  font-size:0.78rem;
+  font-size:0.76rem;
   letter-spacing:0.16em;
   text-transform:uppercase;
 }
-.single-page--imported .piece-body > hr:first-of-type,
-.single-page--imported .piece-body > hr:first-of-type + h3,
-.single-page--imported .piece-body > hr:first-of-type + h2,
-.single-page--imported .piece-body > hr:first-of-type + h3 + h4,
-.single-page--imported .piece-body > hr:first-of-type + h2 + h3{
-  display:none;
-}
 .piece-aftermatter{
-  margin-top:2.7rem;
+  margin-top:2.55rem;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 .piece-aftermatter > * + *{
-  margin-top:2.1rem;
+  margin-top:1.95rem;
 }
 .article-closing{
   margin:0;
@@ -988,12 +992,12 @@ article figcaption{
   display:inline-block;
   letter-spacing:0.24em;
 }
-.single-page .citation{
+.piece-aftermatter .citation{
   margin-top:0;
 }
 .read-next{
   margin-top:0;
-  padding-top:0.9rem;
+  padding-top:0.85rem;
   border-top:1px solid rgba(232,226,216,.06);
 }
 .read-next__inner{
@@ -1070,7 +1074,7 @@ article figcaption{
   }
   .piece-body{
     font-size:1rem;
-    line-height:1.72;
+    line-height:1.7;
   }
   .piece-body p,
   .piece-body ul,
@@ -1078,39 +1082,54 @@ article figcaption{
   .piece-body blockquote,
   .piece-body figure,
   .piece-body hr{
-    margin-bottom:1.15rem;
+    margin-bottom:1.1rem;
   }
   .piece-body h2,
   .piece-body h3,
   .piece-body h4{
-    margin-top:2.35rem;
+    margin-top:2.15rem;
   }
   .piece-body h2{
-    font-size:1.45rem;
+    font-size:1.4rem;
   }
   .piece-body h3{
-    font-size:1.22rem;
+    font-size:1.18rem;
   }
   .piece-body h4{
     font-size:1rem;
+  }
+  .piece-body p + h2,
+  .piece-body p + h3,
+  .piece-body p + h4,
+  .piece-body ul + h2,
+  .piece-body ul + h3,
+  .piece-body ul + h4,
+  .piece-body ol + h2,
+  .piece-body ol + h3,
+  .piece-body ol + h4,
+  .piece-body blockquote + h2,
+  .piece-body blockquote + h3,
+  .piece-body blockquote + h4{
+    margin-top:2rem;
   }
   .piece-body ul,
   .piece-body ol{
     padding-left:1.05rem;
   }
-  .piece-body .article-source,
   .piece-body figcaption,
+  .piece-body .article-source,
+  .piece-body .article-source-caption,
   .piece-body .article-aftermatter-heading{
     font-size:0.72rem;
   }
   .piece-aftermatter{
-    margin-top:2.3rem;
+    margin-top:2.2rem;
   }
   .piece-aftermatter > * + *{
-    margin-top:1.8rem;
+    margin-top:1.7rem;
   }
   .read-next{
-    padding-top:0.8rem;
+    padding-top:0.75rem;
   }
   .read-next__title{
     font-size:0.9rem;
