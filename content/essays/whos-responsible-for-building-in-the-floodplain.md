@@ -8,34 +8,14 @@ subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/whos-responsible-for-building-in-the-floodplain.pdf"
-featured: false
+featured: false
+
 collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/whos-responsible-for-building-in-the-floodplain-b468f42f536d"
 ---
 
-<div id="8da9" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Who’s Responsible for Building in the Floodplain?
-
-#### Camp Mystic, Zoning Laws, and the Limits of Federal Power
-
-<figure id="fb60" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*dyJQhc2PImFOrOZv9eNC4w@2x.jpeg"
-class="graf-image" data-image-id="1*dyJQhc2PImFOrOZv9eNC4w@2x.jpeg"
-data-width="1024" data-height="1536" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*dyJQhc2PImFOrOZv9eNC4w@2x.jpeg)
 
 > After 27 people died at Camp Mystic on July 4, a colleague told me
 > something I haven’t stopped thinking about:
@@ -58,24 +38,6 @@ data-width="1024" data-height="1536" />
 
 **The United States just doesn’t work like that.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="569b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### A Brief Aside, Continue Reading Below ~
 
 This essay looks at **what the federal government can (and can’t) do**
@@ -87,72 +49,19 @@ dangerous places.
 > the official policy or position of the U.S. Army Corps of Engineers,
 > the Department of Defense, or the United States Government.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="71ed" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **New here?**
 
-> 👉 <a
-> href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-> target="_blank">Essay #1</a>: What Happened at Camp Mystic?
-
-> 👉 <a
-> href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-> target="_blank">Essay #2</a>: The Water’s Rising
-
-> 👉 <a
-> href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
-> target="_blank">Essay #3</a>: Flash Flood Alley
-
-</div>
-
-</div>
-
-</div>
-
-<div id="994b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+> [Essay #1](https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27): What Happened at Camp Mystic?
+>
+> [Essay #2](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8): The Water?s Rising
+>
+> [Essay #3](https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a): Flash Flood Alley
 
 ### Who Controls Where We Build?
 
 > The federal government doesn’t control zoning and development law.
 
-<figure id="d700" class="graf graf--figure graf-after--pullquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*s1YZ3DPZ-5fdxbGRHphSqQ@2x.jpeg"
-class="graf-image" data-image-id="1*s1YZ3DPZ-5fdxbGRHphSqQ@2x.jpeg"
-data-width="1280" data-height="886" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*s1YZ3DPZ-5fdxbGRHphSqQ@2x.jpeg)
 
 > Source: <a
 > href="https://www.cbsnews.com/amp/news/maps-texas-flash-flooding-camp-mystic/"
@@ -186,24 +95,6 @@ zones.
 > target="_blank">Essay #3</a> includes a map showing Camp Mystic’s
 > cabins inside the floodway.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="3433" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 If that’s true, then
 
 > why were cabins in the floodway?
@@ -224,10 +115,10 @@ construction on private and state owned property.
 There are numerous examples of obviously risky places where people
 choose to live:
 
-- <span id="8d87">Any barrier island along the intercoastal waterway
-  (Hurricanes, Coastal Inundation)</span>
-- <span id="d800">The cliffs of California (fires, earthquakes)</span>
-- <span id="3279">Tornado Alley (you guessed it)</span>
+- Any barrier island along the intercoastal waterway
+  (Hurricanes, Coastal Inundation)
+- The cliffs of California (fires, earthquakes)
+- Tornado Alley (you guessed it)
 
 The feds CAN offer (or withhold) funding and support for key programs to
 influence localities.
@@ -249,24 +140,6 @@ They inspect the buildings, they dot the i’s,
 
 > ***All FEMA can do is communicate the risk.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="263a" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### What does FEMA Actually Do?
 
 > FEMA doesn’t tell people where to build.
@@ -287,24 +160,6 @@ Those minimum standards are often based on outdated assumptions ~
 
 **Like the idea of a “100-year flood,” which assumes historical patterns
 will hold true.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="3d94" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### Wait ~ what’s a “100-year flood”?
 
@@ -329,24 +184,6 @@ assuming the past is a good guide to the future.
 > data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 > target="_blank">In Essay #2</a>, we explored how climate change has
 > made those assumptions unreliable.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="bd22" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 **On the 4th of July, the water**
 
@@ -377,34 +214,11 @@ framework for understanding it.**
 
 > tolerates risk.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="71b4" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Warning vs. Action
 
 #### During an Emergency
 
-<figure id="20ff" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*GZ2NhOp9jNOKARGFLNJ_Vw@2x.jpeg"
-class="graf-image" data-image-id="1*GZ2NhOp9jNOKARGFLNJ_Vw@2x.jpeg"
-data-width="1024" data-height="1169" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*GZ2NhOp9jNOKARGFLNJ_Vw@2x.jpeg)
 
 > The federal government doesn’t control how local agencies warn their
 > residents.
@@ -435,50 +249,14 @@ out a CodeRED** alert to residents in Hunt, TX.
 By the time Camp Mystic **began evacuating around 4:45 a.m.**, it was
 **already too late** for many.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="c745" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **Here’s how it is supposed to work:**
 
-1.  <span id="d0fb">The National Weather Service issues the
-    alerts.</span>
-2.  <span id="b7b1">Local officials get the message to the people on the
-    ground.</span>
-3.  <span id="4380">Individuals and organizations (like Camp Mystic)
-    respond to the alerts.</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="18d3" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+1.  The National Weather Service issues the
+    alerts.
+2.  Local officials get the message to the people on the
+    ground.
+3.  Individuals and organizations (like Camp Mystic)
+    respond to the alerts.
 
 ### Can the Federal Government Force People to Move?
 
@@ -516,118 +294,41 @@ construction,
 > target="_blank">In Essay #2</a>, we showed how the risks of flooding
 > are increasing even as those tools remain voluntary.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5aca" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### So Who Is Responsible?
 
-<figure id="385b" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*3yLs6cEig3eGTsJ5qWiUzA@2x.jpeg"
-class="graf-image" data-image-id="1*3yLs6cEig3eGTsJ5qWiUzA@2x.jpeg"
-data-width="1023" data-height="794" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*3yLs6cEig3eGTsJ5qWiUzA@2x.jpeg)
 
 **The federal government?**
 
-- <span id="5258">Issued the warnings,</span>
-- <span id="35f8">Mapped the floodplain,</span>
-- <span id="4e8c">Funded the insurance program,</span>
-- <span id="5fb2">Approved the flood zone removals.</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="651b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+- Issued the warnings,
+- Mapped the floodplain,
+- Funded the insurance program,
+- Approved the flood zone removals.
 
 **The county?**
 
-- <span id="1378">Knew the area was hazardous,</span>
-- <span id="3092">Approved the site plan,</span>
-- <span id="4345">Had the power to require better planning or
-  elevation,</span>
-- <span id="deca">Didn’t send out an alert in time.</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="6207" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+- Knew the area was hazardous,
+- Approved the site plan,
+- Had the power to require better planning or
+  elevation,
+- Didn’t send out an alert in time.
 
 **The camp?**
 
-- <span id="7ad9">Expanded into the floodplain,</span>
-- <span id="f256">Failed to train its staff on emergency
-  procedures,</span>
-- <span id="9dd3">Had no one awake in the hours preceding 4:45
-  a.m.,</span>
-- <span id="bde1">Lost power before getting everyone to safety.</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="2f00" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+- Expanded into the floodplain,
+- Failed to train its staff on emergency
+  procedures,
+- Had no one awake in the hours preceding 4:45
+  a.m.,
+- Lost power before getting everyone to safety.
 
 **The parents?**
 
-- <span id="57af">Entrusted their children to the camp,</span>
-- <span id="8ead">Assumed it was safe,</span>
-- <span id="bdf1">May not have known it was in a designated
-  floodway,</span>
-- <span id="33dd">And may not have asked.</span>
+- Entrusted their children to the camp,
+- Assumed it was safe,
+- May not have known it was in a designated
+  floodway,
+- And may not have asked.
 
 ### The truth is:
 
@@ -653,24 +354,6 @@ And this time,
 
 > The system let them down.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6f96" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 > 👉 <a
 > href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 > class="markup--anchor markup--blockquote-anchor"
@@ -691,24 +374,6 @@ And this time,
 > target="_blank">In Essay #3</a>, we unpacked how the Hill Country’s
 > terrain turns storms into killers.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5cf5" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### What Happens Now?
 
 > FEMA is currently on the chopping block as an agency with public talks
@@ -721,24 +386,6 @@ Texas is considering new rules for youth camps and floodplain occupancy.
 There is no national rule that says “you can’t put kids in a floodway.”
 
 > That is unlikely to change.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="7546" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### What do you think?
 
@@ -753,56 +400,10 @@ The local government?
 
 The parents?
 
-</div>
-
-</div>
-
-</div>
-
-<div id="4fd8" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Catch up on the full Camp Mystic series ~
 
-> 👉 <a
-> href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-> target="_blank">Essay #1</a>: What Happened at Camp Mystic?
-
-> 👉 <a
-> href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-> target="_blank">Essay #2</a>: The Water’s Rising
-
-> 👉 <a
-> href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
-> target="_blank">Essay #3</a>: Flash Flood Alley
-
-**Follow *The Balance Sheet*** for more essays on U.S. public policy,
-flood risk, and the economics of resilience.
-
-💬 Share your thoughts in the comments.
-
-” Clap if you learned something new.
-
-📩 Subscribe to get the next piece delivered directly.
-
-</div>
-
-</div>
-
-</div>
-
+> [Essay #1](https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27): What Happened at Camp Mystic?
+>
+> [Essay #2](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8): The Water?s Rising
+>
+> [Essay #3](https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a): Flash Flood Alley

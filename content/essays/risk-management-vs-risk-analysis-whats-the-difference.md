@@ -16,28 +16,7 @@ collection_weight: 20
 medium_source_url: "https://medium.com/@lawtonperret/risk-management-vs-risk-analysis-whats-the-difference-d42c64c49dfa"
 ---
 
-<div id="52b7" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Risk Management vs Risk Analysis: What’s the Difference?
-
-#### A coastal city’s disaster forces them to rethink their EM protocols
-
-<figure id="a34c" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*ot3MQbiYVUNNieFYUVlJ8Q.png"
-class="graf-image" data-image-id="1*ot3MQbiYVUNNieFYUVlJ8Q.png"
-data-width="1024" data-height="1024" data-is-featured="true" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*ot3MQbiYVUNNieFYUVlJ8Q.png)
 
 This essay lays out the roles, responsibilities, and day-to-day
 realities of risk managers and risk analysts.
@@ -47,24 +26,6 @@ lives, and now wants a new hurricane evacuation protocol ~
 
 Then we explicitly discuss the roles, responsibilities, and motivations
 of risk managers and risk analysts in general.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="ed4e" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### The city manager: morning after the storm
 
@@ -92,34 +53,16 @@ management.*
 
 **So I write down what’s got to change:**
 
-- <span id="d322">Update the flood picture to today’s sea level.</span>
-- <span id="5f0d">Re-time how long it takes the city to clear out ~
-  weekends, bridges, schools, rentals and all.</span>
-- <span id="ba92">Split the island into zones with plain go/no-go
-  triggers tied to forecast water and time.</span>
-- <span id="75ef">Prepare messages in English and Spanish we can send in
-  minutes.</span>
-- <span id="9d7d">Test out traffic patterns that move people out as
-  quickly as possible.</span>
-- <span id="2132">Start an internal drainage study ASAP.</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="035c" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+- Update the flood picture to today’s sea level.
+- Re-time how long it takes the city to clear out ~
+  weekends, bridges, schools, rentals and all.
+- Split the island into zones with plain go/no-go
+  triggers tied to forecast water and time.
+- Prepare messages in English and Spanish we can send in
+  minutes.
+- Test out traffic patterns that move people out as
+  quickly as possible.
+- Start an internal drainage study ASAP.
 
 That night, I faced the council. The room was packed.
 
@@ -133,24 +76,6 @@ timeline ~ *every call, every minute* ~ and a sticky note on a copy of
 the old emergency plan that read:
 
 > **“No more consider. Call it by the trigger.”**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="2872" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### What happens next?
 
@@ -176,33 +101,9 @@ the analysis** and drafts the plan.
 
 ### Clear split of duties
 
-<figure id="1790"
-class="graf graf--figure graf-after--h3 graf--trailing">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*3hETRUzbxy--CgUo3kEWUg.png"
-class="graf-image" data-image-id="1*3hETRUzbxy--CgUo3kEWUg.png"
-data-width="961" data-height="699" />
-<figcaption>The three players involved and their roles and
-responsibilities</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*3hETRUzbxy--CgUo3kEWUg.png)
 
-</div>
-
-</div>
-
-</div>
-
-<div id="acce" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+*The three players involved and their roles and responsibilities*
 
 ### How the work actually runs ~ Analysis + Management, start to finish
 
@@ -233,24 +134,6 @@ act on those triggers without another meeting.
 
 Before hurricane season, the city runs a drill, tightens the triggers,
 and starts a decision log so the next round moves faster and cleaner.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="17a9" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### From one city to everywhere: Risk Management vs Risk Analysis Explained
 
@@ -284,55 +167,23 @@ risk management.
 > Definitions adapted from Aven (2018), Aven & Zio (2014), and the SRA
 > Glossary (2018).
 
-</div>
-
-</div>
-
-</div>
-
-<div id="d2c8" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Responsibilities of Risk Managers and Risk Analysts
 
-<figure id="04ff" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*lqTMPkfMiw_gtrkl35CqtQ.png"
-class="graf-image" data-image-id="1*lqTMPkfMiw_gtrkl35CqtQ.png"
-data-width="955" data-height="311" />
-<figcaption>Risk Analysts and Risk Managers and their
-responsibilities.</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*lqTMPkfMiw_gtrkl35CqtQ.png)
+
+*Risk Analysts and Risk Managers and their responsibilities.*
 
 ### Motivations and Incentives
 
-<figure id="0a87" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*d83P2wQ0BQYYjkTQvJXwbg.png"
-class="graf-image" data-image-id="1*d83P2wQ0BQYYjkTQvJXwbg.png"
-data-width="948" data-height="305" />
-<figcaption>Motivations for each in typical relationships between
-managers and analysts</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*d83P2wQ0BQYYjkTQvJXwbg.png)
+
+*Motivations for each in typical relationships between managers and analysts*
 
 ### Common Failures
 
-<figure id="bbe6" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*QO4eg1eS7O2WNqAnScnI9g.png"
-class="graf-image" data-image-id="1*QO4eg1eS7O2WNqAnScnI9g.png"
-data-width="955" data-height="290" />
-<figcaption>Common failures seen when dealing with risk.</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*QO4eg1eS7O2WNqAnScnI9g.png)
+
+*Common failures seen when dealing with risk.*
 
 ### Conclusion
 
@@ -366,41 +217,3 @@ same handshake, same relationship between analyst and manager.
 > **Risk Analysis tells you what could happen and how sure we are.**
 
 > **Risk Management tells you what we will do and why.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="dbcf" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Like this piece?
-
-If this helped, **tap the ” up to 50** to push it to more readers.\
-**Follow and subscribe** **to *The Balance Sheet*** for straight shots
-on risk, policy, and the real economy.
-
-**And jump in the comments ~\**
-\
-How does your city handle go/no-go triggers?\
-If you work in EM or analysis, where do the roles blur in real life?
-
-**I read every note.**
-
-</div>
-
-</div>
-
-</div>
-

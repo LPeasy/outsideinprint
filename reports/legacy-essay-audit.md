@@ -1,260 +1,245 @@
 # Legacy Essay Audit
 
-- Generated: 2026-03-12 04:28:13
-- Scanned files: 126
-- Affected files: 115
+- Generated: 2026-03-12 10:02:05
+- Scanned files: 115
+- Affected files: 109
 
 ## Issue Categories
 
-- embed_remnants: 103
-- pseudo_headings: 94
-- duplicated_title: 62
-- ornamental_breaks: 45
-- medium_cta: 41
-- fake_lists: 30
+- pseudo_headings: 92
+- fake_lists: 46
+- duplicated_title: 24
+- medium_cta: 21
+- escaped_linebreaks: 17
 - manual_bullets: 16
-- source_dumps: 16
-- author_note: 5
-- escaped_linebreaks: 2
+- source_dumps: 15
+- embed_remnants: 13
+- ornamental_breaks: 5
+- author_note: 3
 
 ## BATCH 1
 
-- `essays/the-dolphin-company.md` :: priority 108, severity 12 :: homepage_selected, start_here_direct, featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, escaped_linebreaks
-- `essays/the-100-year-flood-is-not-what-you-think.md` :: priority 108, severity 9 :: homepage_selected, start_here_direct, featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, escaped_linebreaks
-- `essays/why-a-return-to-the-gold-standard-would-break-the-economy.md` :: priority 63, severity 13 :: homepage_selected, featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings, duplicated_title
-- `essays/what-happened-at-camp-mystic.md` :: priority 58, severity 13 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/the-ledger-vol-1.md` :: priority 58, severity 12 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
+- `essays/the-dolphin-company.md` :: priority 108, severity 8 :: homepage_selected, start_here_direct, featured_collection_member, newer_imported_piece :: pseudo_headings, duplicated_title, escaped_linebreaks
+- `essays/the-100-year-flood-is-not-what-you-think.md` :: priority 108, severity 6 :: homepage_selected, start_here_direct, featured_collection_member, newer_imported_piece :: author_note, fake_lists
 
 ## BATCH 2
 
-- `essays/what-is-risk-a-four-part-framework.md` :: priority 58, severity 10 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title
-- `essays/synthetic-reasoning.md` :: priority 58, severity 7 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/in-the-image-of-god.md` :: priority 48, severity 12 :: collection_start_here, featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/rethinking-invasive-species-management.md` :: priority 23, severity 21 :: featured_collection_member, newer_imported_piece :: medium_cta, author_note, embed_remnants, pseudo_headings, source_dumps, duplicated_title, ornamental_breaks
-- `essays/whos-really-funding-terror.md` :: priority 23, severity 21 :: featured_collection_member, newer_imported_piece :: medium_cta, author_note, embed_remnants, pseudo_headings, source_dumps, duplicated_title, ornamental_breaks
-- `essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md` :: priority 23, severity 19 :: featured_collection_member, newer_imported_piece :: medium_cta, author_note, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/you-paid-for-that-ct-scan.md` :: priority 23, severity 19 :: featured_collection_member, newer_imported_piece :: medium_cta, author_note, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/whos-responsible-for-building-in-the-floodplain.md` :: priority 23, severity 18 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, source_dumps, duplicated_title, ornamental_breaks
-- `essays/biter-the-slang-word-that-hits.md` :: priority 23, severity 17 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, fake_lists, pseudo_headings, duplicated_title
-- `essays/the-new-meta-economy.md` :: priority 23, severity 17 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, fake_lists, pseudo_headings, duplicated_title
-- `essays/35-years-of-yellow-the-simpsons-time-loop.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/ai-in-education-is-a-wicked-problem.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/flash-flood-alley-why-flash-floods-kill.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-death-of-moores-law.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, fake_lists, pseudo_headings, source_dumps
-- `essays/the-max-mistake-why-hbos-name-change-backfired.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/pornography-the-modern-secular-state-religion-and-american-morality.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, author_note, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/who-is-pascal-siakam.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md` :: priority 23, severity 16 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/altmans-law.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/let-it-crash-the-opportunity-of-a-lifetime.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, manual_bullets, fake_lists, pseudo_headings
-- `essays/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, fake_lists, pseudo_headings
-- `essays/moral-momentum.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/the-national-debt-is-screwing-you-heres-how.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, fake_lists, pseudo_headings
-- `essays/the-roi-of-caring.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/the-three-enemies-of-positive-outcomes.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/why-superintelligence-strategy-gets-ai-governance-wrong.md` :: priority 23, severity 14 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, fake_lists, pseudo_headings
-- `essays/2025-supreme-court-wrap-up.md` :: priority 23, severity 13 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/a-really-boring-topic.md` :: priority 23, severity 13 :: featured_collection_member, newer_imported_piece :: embed_remnants, manual_bullets, fake_lists, pseudo_headings, duplicated_title
-- `essays/jack-stratton-and-the-vulfpeck-model.md` :: priority 23, severity 13 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.md` :: priority 23, severity 13 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings, source_dumps
-- `essays/cuomo-vs-mamdani-nyc-2025.md` :: priority 23, severity 13 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/the-risk-management-buffet.md` :: priority 23, severity 13 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/why-we-celebrate-memorial-day-origins-traditions-and-importance.md` :: priority 23, severity 13 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/how-did-mother-become-a-controversial-word-in-america.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/is-doge-legal.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings, source_dumps
-- `essays/life-is-a-bull-market.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/public-vs-private-pay-who-really-earns-more.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-ledger-vol-2.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-political-economy-of-airports.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, source_dumps, duplicated_title
-- `essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/uncertainty-is-not-a-technical-problem.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/generation-inflation.md` :: priority 18, severity 17 :: featured_collection_member :: medium_cta, embed_remnants, manual_bullets, pseudo_headings, duplicated_title
-- `essays/the-national-flood-insurance-program.md` :: priority 18, severity 15 :: featured_collection_member :: embed_remnants, fake_lists, pseudo_headings, source_dumps, duplicated_title
+- `essays/why-a-return-to-the-gold-standard-would-break-the-economy.md` :: priority 63, severity 6 :: homepage_selected, featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/what-is-risk-a-four-part-framework.md` :: priority 58, severity 6 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: author_note, pseudo_headings
+- `essays/the-ledger-vol-1.md` :: priority 58, severity 3 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/what-happened-at-camp-mystic.md` :: priority 58, severity 2 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: escaped_linebreaks
+- `essays/in-the-image-of-god.md` :: priority 48, severity 5 :: collection_start_here, featured_collection_member, newer_imported_piece :: pseudo_headings, escaped_linebreaks
+- `essays/flash-flood-alley-why-flash-floods-kill.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, duplicated_title, escaped_linebreaks
+- `essays/pornography-the-modern-secular-state-religion-and-american-morality.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: medium_cta, author_note, fake_lists, escaped_linebreaks
+- `essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/whos-responsible-for-building-in-the-floodplain.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings, source_dumps
+- `essays/generation-inflation.md` :: priority 18, severity 13 :: featured_collection_member :: medium_cta, manual_bullets, pseudo_headings, duplicated_title
 
 ## BATCH 3
 
-- `essays/8-big-questions-everyone-has-about-pope-leo-xiv.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: embed_remnants, source_dumps, duplicated_title, ornamental_breaks
-- `essays/dirt-is-better-than-air.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings
-- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings
 - `essays/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: embed_remnants, source_dumps, duplicated_title, ornamental_breaks
-- `essays/the-economics-of-the-mongol-empire.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings
-- `essays/the-undead-state.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings
-- `essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: embed_remnants, source_dumps, duplicated_title, ornamental_breaks
-- `essays/you-cant-outrun-the-calculator.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings
-- `essays/are-we-alone.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, manual_bullets, pseudo_headings
-- `essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/building-for-centuries-not-election-cycles.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/declaring-equality.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, manual_bullets, pseudo_headings
-- `essays/how-american-farm-labor-is-set-to-evolve.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, manual_bullets, pseudo_headings
-- `essays/mingo-county-mud-in-the-water.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/tariffs-protectionism-and-wishful-thinking.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-slow-way-is-the-fast-way.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, duplicated_title
-- `essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/u-s-shifts-ukraine-policy.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, manual_bullets, fake_lists, pseudo_headings
-- `essays/u-s-russia-peace-talks.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/uncrustables-the-billion-dollar-peanut-butter-empire.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings
-- `essays/beyond-moores-law.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, source_dumps
-- `essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, source_dumps
-- `essays/deference-lost.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, source_dumps
-- `essays/how-tucson-az-plans-for-water-scarcity.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/june-27-2025-scotus-set-to-close-its-term-with-major-decisions.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/mcdonalds-faces-week-long-boycott-june-24-2025.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/risk-management-vs-risk-analysis-whats-the-difference.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/the-ledger-vol-3.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
+- `essays/who-is-pascal-siakam.md` :: priority 23, severity 11 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants, pseudo_headings
+- `essays/altmans-law.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, duplicated_title
+- `essays/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, duplicated_title
+- `essays/let-it-crash-the-opportunity-of-a-lifetime.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, manual_bullets, fake_lists, pseudo_headings
+- `essays/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, fake_lists, pseudo_headings
+- `essays/moral-momentum.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, duplicated_title
+- `essays/rethinking-invasive-species-management.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, source_dumps, escaped_linebreaks
+- `essays/the-national-debt-is-screwing-you-heres-how.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, fake_lists, pseudo_headings
+- `essays/the-roi-of-caring.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, duplicated_title
+- `essays/the-three-enemies-of-positive-outcomes.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, duplicated_title
+- `essays/why-superintelligence-strategy-gets-ai-governance-wrong.md` :: priority 23, severity 10 :: featured_collection_member, newer_imported_piece :: medium_cta, fake_lists, pseudo_headings
+- `essays/a-really-boring-topic.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: manual_bullets, fake_lists, pseudo_headings, duplicated_title
+- `essays/biter-the-slang-word-that-hits.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, duplicated_title
+- `essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, source_dumps
+- `essays/the-new-meta-economy.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, duplicated_title
 - `essays/the-world-the-un-was-built-for.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/whos-drinking-all-the-modelo.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
 - `essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
+- `essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, escaped_linebreaks
+- `essays/35-years-of-yellow-the-simpsons-time-loop.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/jack-stratton-and-the-vulfpeck-model.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants
+- `essays/is-doge-legal.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, source_dumps
 - `essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: embed_remnants, source_dumps, ornamental_breaks
-- `essays/6-reasons-redwall-is-a-timeless-classic.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/its-hard-to-condemn-what-doge-is-doing.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/make-fighter-jets-great-again-introducing-the-f-47.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/tiktok-the-trojan-horse-of-global-influence.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/why-oberfell-will-not-be-overturned.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings
-- `essays/literacy-in-the-united-states-and-the-world.md` :: priority 18, severity 10 :: featured_collection_member :: embed_remnants, pseudo_headings, duplicated_title
+- `essays/public-vs-private-pay-who-really-earns-more.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/the-death-of-moores-law.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, source_dumps
+- `essays/the-political-economy-of-airports.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: pseudo_headings, source_dumps, duplicated_title
+- `essays/uncertainty-is-not-a-technical-problem.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: pseudo_headings, duplicated_title, escaped_linebreaks
+- `essays/whos-really-funding-terror.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, source_dumps
+- `essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists
+- `essays/dirt-is-better-than-air.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
+- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
+- `essays/the-economics-of-the-mongol-empire.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
+- `essays/the-undead-state.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
+- `essays/you-cant-outrun-the-calculator.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
+- `essays/are-we-alone.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: manual_bullets, pseudo_headings
+- `essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/building-for-centuries-not-election-cycles.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/declaring-equality.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: manual_bullets, pseudo_headings
+- `essays/how-american-farm-labor-is-set-to-evolve.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: manual_bullets, pseudo_headings
+- `essays/mingo-county-mud-in-the-water.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/tariffs-protectionism-and-wishful-thinking.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/the-ledger-vol-2.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: pseudo_headings, duplicated_title
+- `essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/the-slow-way-is-the-fast-way.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: pseudo_headings, duplicated_title
+- `essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/u-s-shifts-ukraine-policy.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: manual_bullets, fake_lists, pseudo_headings
+- `essays/u-s-russia-peace-talks.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/uncrustables-the-billion-dollar-peanut-butter-empire.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/you-paid-for-that-ct-scan.md` :: priority 23, severity 6 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
+- `essays/the-national-flood-insurance-program.md` :: priority 18, severity 11 :: featured_collection_member :: fake_lists, pseudo_headings, source_dumps, duplicated_title
+- `essays/ai-in-education-is-a-wicked-problem.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: pseudo_headings, escaped_linebreaks
+- `essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: pseudo_headings, escaped_linebreaks
+- `essays/beyond-moores-law.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: pseudo_headings, source_dumps
+- `essays/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: pseudo_headings, source_dumps
+- `essays/deference-lost.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: pseudo_headings, source_dumps
+- `essays/how-tucson-az-plans-for-water-scarcity.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: fake_lists, escaped_linebreaks
+- `essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: source_dumps, duplicated_title
 - `essays/rethinking-coastal-retreat.md` :: priority 18, severity 10 :: featured_collection_member :: medium_cta, manual_bullets, pseudo_headings
+- `essays/8-big-questions-everyone-has-about-pope-leo-xiv.md` :: priority 23, severity 4 :: featured_collection_member, newer_imported_piece :: embed_remnants
+- `essays/cuomo-vs-mamdani-nyc-2025.md` :: priority 23, severity 4 :: featured_collection_member, newer_imported_piece :: embed_remnants
 - `essays/natural-asset-companies.md` :: priority 18, severity 9 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings, duplicated_title
 - `essays/presidential-elections.md` :: priority 18, severity 9 :: featured_collection_member :: fake_lists, pseudo_headings, duplicated_title
+- `essays/2025-supreme-court-wrap-up.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: fake_lists
+- `essays/6-reasons-redwall-is-a-timeless-classic.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/how-did-mother-become-a-controversial-word-in-america.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/its-hard-to-condemn-what-doge-is-doing.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/life-is-a-bull-market.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/make-fighter-jets-great-again-introducing-the-f-47.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/risk-management-vs-risk-analysis-whats-the-difference.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: fake_lists
+- `essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/the-max-mistake-why-hbos-name-change-backfired.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/tiktok-the-trojan-horse-of-global-influence.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/whos-drinking-all-the-modelo.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: duplicated_title
+- `essays/why-oberfell-will-not-be-overturned.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/cpi-report-economic-analysis.md` :: priority 18, severity 8 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings, source_dumps
+- `essays/the-risk-management-buffet.md` :: priority 23, severity 2 :: featured_collection_member, newer_imported_piece :: ornamental_breaks, escaped_linebreaks
 - `essays/american-household-debt.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/etfs-and-market-concentration.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/labor-force-participation-trends-in-modern-american-society.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
+- `essays/literacy-in-the-united-states-and-the-world.md` :: priority 18, severity 6 :: featured_collection_member :: pseudo_headings, duplicated_title
 - `essays/rational-ignorance-in-the-u-s-presidential-electorate.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, pseudo_headings
 - `essays/the-structure-of-modern-american-society.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, pseudo_headings
 - `essays/federalism-in-modern-american-society.md` :: priority 18, severity 3 :: featured_collection_member :: pseudo_headings
-- `syd-and-oliver/the-new-orthodoxy.md` :: priority 18, severity 3 :: featured_collection_member :: pseudo_headings
 
 ## Manual Review Candidates
 
-- `essays/the-dolphin-company.md` :: embed_remnants, pseudo_headings, duplicated_title, escaped_linebreaks
-- `essays/the-100-year-flood-is-not-what-you-think.md` :: embed_remnants, fake_lists, escaped_linebreaks
-- `essays/why-a-return-to-the-gold-standard-would-break-the-economy.md` :: embed_remnants, fake_lists, pseudo_headings, duplicated_title
-- `essays/what-happened-at-camp-mystic.md` :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/the-ledger-vol-1.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/what-is-risk-a-four-part-framework.md` :: embed_remnants, pseudo_headings, duplicated_title
-- `essays/synthetic-reasoning.md` :: embed_remnants, pseudo_headings
-- `essays/in-the-image-of-god.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/rethinking-invasive-species-management.md` :: medium_cta, author_note, embed_remnants, pseudo_headings, source_dumps, duplicated_title, ornamental_breaks
-- `essays/whos-really-funding-terror.md` :: medium_cta, author_note, embed_remnants, pseudo_headings, source_dumps, duplicated_title, ornamental_breaks
-- `essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md` :: medium_cta, author_note, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/you-paid-for-that-ct-scan.md` :: medium_cta, author_note, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/whos-responsible-for-building-in-the-floodplain.md` :: medium_cta, embed_remnants, pseudo_headings, source_dumps, duplicated_title, ornamental_breaks
-- `essays/biter-the-slang-word-that-hits.md` :: medium_cta, embed_remnants, fake_lists, pseudo_headings, duplicated_title
-- `essays/the-new-meta-economy.md` :: medium_cta, embed_remnants, fake_lists, pseudo_headings, duplicated_title
-- `essays/35-years-of-yellow-the-simpsons-time-loop.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/ai-in-education-is-a-wicked-problem.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/flash-flood-alley-why-flash-floods-kill.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-death-of-moores-law.md` :: medium_cta, embed_remnants, fake_lists, pseudo_headings, source_dumps
-- `essays/the-max-mistake-why-hbos-name-change-backfired.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/pornography-the-modern-secular-state-religion-and-american-morality.md` :: medium_cta, author_note, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/who-is-pascal-siakam.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/altmans-law.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/let-it-crash-the-opportunity-of-a-lifetime.md` :: medium_cta, embed_remnants, manual_bullets, fake_lists, pseudo_headings
-- `essays/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.md` :: medium_cta, embed_remnants, fake_lists, pseudo_headings
-- `essays/moral-momentum.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/the-national-debt-is-screwing-you-heres-how.md` :: medium_cta, embed_remnants, fake_lists, pseudo_headings
-- `essays/the-roi-of-caring.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/the-three-enemies-of-positive-outcomes.md` :: medium_cta, embed_remnants, pseudo_headings, duplicated_title
-- `essays/why-superintelligence-strategy-gets-ai-governance-wrong.md` :: medium_cta, embed_remnants, fake_lists, pseudo_headings
-- `essays/2025-supreme-court-wrap-up.md` :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/a-really-boring-topic.md` :: embed_remnants, manual_bullets, fake_lists, pseudo_headings, duplicated_title
-- `essays/jack-stratton-and-the-vulfpeck-model.md` :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.md` :: medium_cta, embed_remnants, pseudo_headings, source_dumps
-- `essays/cuomo-vs-mamdani-nyc-2025.md` :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/the-risk-management-buffet.md` :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/why-we-celebrate-memorial-day-origins-traditions-and-importance.md` :: medium_cta, embed_remnants, duplicated_title, ornamental_breaks
-- `essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/generation-inflation.md` :: medium_cta, embed_remnants, manual_bullets, pseudo_headings, duplicated_title
-- `essays/how-did-mother-become-a-controversial-word-in-america.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/is-doge-legal.md` :: embed_remnants, fake_lists, pseudo_headings, source_dumps
-- `essays/life-is-a-bull-market.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/public-vs-private-pay-who-really-earns-more.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-ledger-vol-2.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/the-political-economy-of-airports.md` :: embed_remnants, pseudo_headings, source_dumps, duplicated_title
-- `essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/uncertainty-is-not-a-technical-problem.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md` :: embed_remnants, pseudo_headings, duplicated_title, ornamental_breaks
-- `essays/8-big-questions-everyone-has-about-pope-leo-xiv.md` :: embed_remnants, source_dumps, duplicated_title, ornamental_breaks
-- `essays/dirt-is-better-than-air.md` :: medium_cta, embed_remnants, pseudo_headings
-- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: medium_cta, embed_remnants, pseudo_headings
+- `essays/the-dolphin-company.md` :: pseudo_headings, duplicated_title, escaped_linebreaks
+- `essays/the-100-year-flood-is-not-what-you-think.md` :: author_note, fake_lists
+- `essays/why-a-return-to-the-gold-standard-would-break-the-economy.md` :: fake_lists, pseudo_headings
+- `essays/what-is-risk-a-four-part-framework.md` :: author_note, pseudo_headings
+- `essays/the-ledger-vol-1.md` :: pseudo_headings
+- `essays/in-the-image-of-god.md` :: pseudo_headings, escaped_linebreaks
+- `essays/flash-flood-alley-why-flash-floods-kill.md` :: embed_remnants, fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md` :: medium_cta, pseudo_headings, duplicated_title, escaped_linebreaks
+- `essays/pornography-the-modern-secular-state-religion-and-american-morality.md` :: medium_cta, author_note, fake_lists, escaped_linebreaks
+- `essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md` :: embed_remnants, fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/whos-responsible-for-building-in-the-floodplain.md` :: embed_remnants, fake_lists, pseudo_headings, source_dumps
 - `essays/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.md` :: embed_remnants, source_dumps, duplicated_title, ornamental_breaks
-- `essays/the-economics-of-the-mongol-empire.md` :: medium_cta, embed_remnants, pseudo_headings
-- `essays/the-undead-state.md` :: medium_cta, embed_remnants, pseudo_headings
-- `essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.md` :: embed_remnants, source_dumps, duplicated_title, ornamental_breaks
-- `essays/you-cant-outrun-the-calculator.md` :: medium_cta, embed_remnants, pseudo_headings
-- `essays/are-we-alone.md` :: embed_remnants, manual_bullets, pseudo_headings
-- `essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/building-for-centuries-not-election-cycles.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/declaring-equality.md` :: embed_remnants, manual_bullets, pseudo_headings
-- `essays/how-american-farm-labor-is-set-to-evolve.md` :: embed_remnants, manual_bullets, pseudo_headings
-- `essays/mingo-county-mud-in-the-water.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/tariffs-protectionism-and-wishful-thinking.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-national-flood-insurance-program.md` :: embed_remnants, fake_lists, pseudo_headings, source_dumps, duplicated_title
-- `essays/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/the-slow-way-is-the-fast-way.md` :: embed_remnants, pseudo_headings, duplicated_title
-- `essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/u-s-shifts-ukraine-policy.md` :: embed_remnants, manual_bullets, fake_lists, pseudo_headings
-- `essays/u-s-russia-peace-talks.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/uncrustables-the-billion-dollar-peanut-butter-empire.md` :: embed_remnants, fake_lists, pseudo_headings
-- `essays/beyond-moores-law.md` :: embed_remnants, pseudo_headings, source_dumps
-- `essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md` :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants.md` :: embed_remnants, pseudo_headings, source_dumps
-- `essays/deference-lost.md` :: embed_remnants, pseudo_headings, source_dumps
-- `essays/how-tucson-az-plans-for-water-scarcity.md` :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/june-27-2025-scotus-set-to-close-its-term-with-major-decisions.md` :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/mcdonalds-faces-week-long-boycott-june-24-2025.md` :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/risk-management-vs-risk-analysis-whats-the-difference.md` :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/the-ledger-vol-3.md` :: embed_remnants, duplicated_title, ornamental_breaks
+- `essays/who-is-pascal-siakam.md` :: medium_cta, embed_remnants, pseudo_headings
+- `essays/altmans-law.md` :: medium_cta, pseudo_headings, duplicated_title
+- `essays/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.md` :: medium_cta, pseudo_headings, duplicated_title
+- `essays/let-it-crash-the-opportunity-of-a-lifetime.md` :: medium_cta, manual_bullets, fake_lists, pseudo_headings
+- `essays/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.md` :: medium_cta, fake_lists, pseudo_headings
+- `essays/moral-momentum.md` :: medium_cta, pseudo_headings, duplicated_title
+- `essays/rethinking-invasive-species-management.md` :: fake_lists, pseudo_headings, source_dumps, escaped_linebreaks
+- `essays/the-national-debt-is-screwing-you-heres-how.md` :: medium_cta, fake_lists, pseudo_headings
+- `essays/the-roi-of-caring.md` :: medium_cta, pseudo_headings, duplicated_title
+- `essays/the-three-enemies-of-positive-outcomes.md` :: medium_cta, pseudo_headings, duplicated_title
+- `essays/why-superintelligence-strategy-gets-ai-governance-wrong.md` :: medium_cta, fake_lists, pseudo_headings
+- `essays/a-really-boring-topic.md` :: manual_bullets, fake_lists, pseudo_headings, duplicated_title
+- `essays/biter-the-slang-word-that-hits.md` :: fake_lists, pseudo_headings, duplicated_title
+- `essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.md` :: medium_cta, pseudo_headings, source_dumps
+- `essays/the-new-meta-economy.md` :: fake_lists, pseudo_headings, duplicated_title
 - `essays/the-world-the-un-was-built-for.md` :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/whos-drinking-all-the-modelo.md` :: embed_remnants, duplicated_title, ornamental_breaks
 - `essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md` :: embed_remnants, duplicated_title, ornamental_breaks
+- `essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md` :: embed_remnants, pseudo_headings, escaped_linebreaks
+- `essays/35-years-of-yellow-the-simpsons-time-loop.md` :: fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md` :: fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/generation-inflation.md` :: medium_cta, manual_bullets, pseudo_headings, duplicated_title
+- `essays/jack-stratton-and-the-vulfpeck-model.md` :: medium_cta, embed_remnants
+- `essays/is-doge-legal.md` :: fake_lists, pseudo_headings, source_dumps
 - `essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.md` :: embed_remnants, source_dumps, ornamental_breaks
-- `essays/6-reasons-redwall-is-a-timeless-classic.md` :: embed_remnants, pseudo_headings
-- `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: embed_remnants, pseudo_headings
-- `essays/its-hard-to-condemn-what-doge-is-doing.md` :: embed_remnants, pseudo_headings
-- `essays/make-fighter-jets-great-again-introducing-the-f-47.md` :: embed_remnants, pseudo_headings
-- `essays/nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.md` :: embed_remnants, pseudo_headings
-- `essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.md` :: embed_remnants, pseudo_headings
-- `essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.md` :: embed_remnants, pseudo_headings
-- `essays/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.md` :: embed_remnants, pseudo_headings
-- `essays/tiktok-the-trojan-horse-of-global-influence.md` :: embed_remnants, pseudo_headings
-- `essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md` :: embed_remnants, pseudo_headings
-- `essays/why-oberfell-will-not-be-overturned.md` :: embed_remnants, pseudo_headings
-- `essays/literacy-in-the-united-states-and-the-world.md` :: embed_remnants, pseudo_headings, duplicated_title
+- `essays/public-vs-private-pay-who-really-earns-more.md` :: fake_lists, pseudo_headings, escaped_linebreaks
+- `essays/the-death-of-moores-law.md` :: fake_lists, pseudo_headings, source_dumps
+- `essays/the-political-economy-of-airports.md` :: pseudo_headings, source_dumps, duplicated_title
+- `essays/uncertainty-is-not-a-technical-problem.md` :: pseudo_headings, duplicated_title, escaped_linebreaks
+- `essays/whos-really-funding-terror.md` :: fake_lists, pseudo_headings, source_dumps
+- `essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md` :: embed_remnants, fake_lists
+- `essays/dirt-is-better-than-air.md` :: medium_cta, pseudo_headings
+- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: medium_cta, pseudo_headings
+- `essays/the-economics-of-the-mongol-empire.md` :: medium_cta, pseudo_headings
+- `essays/the-undead-state.md` :: medium_cta, pseudo_headings
+- `essays/you-cant-outrun-the-calculator.md` :: medium_cta, pseudo_headings
+- `essays/are-we-alone.md` :: manual_bullets, pseudo_headings
+- `essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md` :: fake_lists, pseudo_headings
+- `essays/building-for-centuries-not-election-cycles.md` :: fake_lists, pseudo_headings
+- `essays/declaring-equality.md` :: manual_bullets, pseudo_headings
+- `essays/how-american-farm-labor-is-set-to-evolve.md` :: manual_bullets, pseudo_headings
+- `essays/mingo-county-mud-in-the-water.md` :: fake_lists, pseudo_headings
+- `essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md` :: fake_lists, pseudo_headings
+- `essays/tariffs-protectionism-and-wishful-thinking.md` :: fake_lists, pseudo_headings
+- `essays/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now.md` :: fake_lists, pseudo_headings
+- `essays/the-ledger-vol-2.md` :: pseudo_headings, duplicated_title
+- `essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.md` :: fake_lists, pseudo_headings
+- `essays/the-national-flood-insurance-program.md` :: fake_lists, pseudo_headings, source_dumps, duplicated_title
+- `essays/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.md` :: fake_lists, pseudo_headings
+- `essays/the-slow-way-is-the-fast-way.md` :: pseudo_headings, duplicated_title
+- `essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md` :: fake_lists, pseudo_headings
+- `essays/u-s-shifts-ukraine-policy.md` :: manual_bullets, fake_lists, pseudo_headings
+- `essays/u-s-russia-peace-talks.md` :: fake_lists, pseudo_headings
+- `essays/uncrustables-the-billion-dollar-peanut-butter-empire.md` :: fake_lists, pseudo_headings
+- `essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md` :: fake_lists, pseudo_headings
+- `essays/you-paid-for-that-ct-scan.md` :: fake_lists, pseudo_headings
+- `essays/ai-in-education-is-a-wicked-problem.md` :: pseudo_headings, escaped_linebreaks
+- `essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md` :: pseudo_headings, escaped_linebreaks
+- `essays/beyond-moores-law.md` :: pseudo_headings, source_dumps
+- `essays/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants.md` :: pseudo_headings, source_dumps
+- `essays/deference-lost.md` :: pseudo_headings, source_dumps
+- `essays/how-tucson-az-plans-for-water-scarcity.md` :: fake_lists, escaped_linebreaks
 - `essays/rethinking-coastal-retreat.md` :: medium_cta, manual_bullets, pseudo_headings
+- `essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.md` :: source_dumps, duplicated_title
+- `essays/8-big-questions-everyone-has-about-pope-leo-xiv.md` :: embed_remnants
 - `essays/natural-asset-companies.md` :: manual_bullets, fake_lists, pseudo_headings, duplicated_title
 - `essays/presidential-elections.md` :: fake_lists, pseudo_headings, duplicated_title
+- `essays/cuomo-vs-mamdani-nyc-2025.md` :: embed_remnants
+- `essays/2025-supreme-court-wrap-up.md` :: fake_lists
+- `essays/6-reasons-redwall-is-a-timeless-classic.md` :: pseudo_headings
 - `essays/cpi-report-economic-analysis.md` :: manual_bullets, fake_lists, pseudo_headings, source_dumps
+- `essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md` :: pseudo_headings
+- `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: pseudo_headings
+- `essays/how-did-mother-become-a-controversial-word-in-america.md` :: pseudo_headings
+- `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: pseudo_headings
+- `essays/its-hard-to-condemn-what-doge-is-doing.md` :: pseudo_headings
+- `essays/life-is-a-bull-market.md` :: pseudo_headings
+- `essays/make-fighter-jets-great-again-introducing-the-f-47.md` :: pseudo_headings
+- `essays/nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.md` :: pseudo_headings
+- `essays/risk-management-vs-risk-analysis-whats-the-difference.md` :: fake_lists
+- `essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.md` :: pseudo_headings
+- `essays/the-max-mistake-why-hbos-name-change-backfired.md` :: pseudo_headings
+- `essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.md` :: pseudo_headings
+- `essays/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.md` :: pseudo_headings
+- `essays/tiktok-the-trojan-horse-of-global-influence.md` :: pseudo_headings
+- `essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md` :: pseudo_headings
+- `essays/why-oberfell-will-not-be-overturned.md` :: pseudo_headings
 - `essays/american-household-debt.md` :: manual_bullets, fake_lists, pseudo_headings
 - `essays/etfs-and-market-concentration.md` :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: manual_bullets, fake_lists, pseudo_headings
 - `essays/labor-force-participation-trends-in-modern-american-society.md` :: manual_bullets, fake_lists, pseudo_headings
+- `essays/literacy-in-the-united-states-and-the-world.md` :: pseudo_headings, duplicated_title
 - `essays/rational-ignorance-in-the-u-s-presidential-electorate.md` :: manual_bullets, pseudo_headings
 - `essays/the-structure-of-modern-american-society.md` :: manual_bullets, pseudo_headings
 - `essays/federalism-in-modern-american-society.md` :: pseudo_headings
-- `syd-and-oliver/the-new-orthodoxy.md` :: pseudo_headings

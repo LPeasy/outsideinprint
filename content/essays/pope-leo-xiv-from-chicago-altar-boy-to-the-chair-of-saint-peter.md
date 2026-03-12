@@ -12,59 +12,15 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a"
 ---
 
-<div id="83ba" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*uoof4Dj5a5dexVkGBtOjwQ.png)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Who Is Pope Leo XIV? Chicago-Born Priest Becomes First American Pope
-
-#### Inside the life of Robert Prevost, the Augustinian priest who made history
-
-<figure id="9f1e"
-class="graf graf--figure graf-after--h4 graf--trailing">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*uoof4Dj5a5dexVkGBtOjwQ.png"
-class="graf-image" data-image-id="1*uoof4Dj5a5dexVkGBtOjwQ.png"
-data-width="1087" data-height="491" />
-<figcaption>Pope Leo Waving to the Vatican | Source: Wikimedia
-Commons</figcaption>
-</figure>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="cf7b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+*Pope Leo Waving to the Vatican | Source: Wikimedia Commons*
 
 ### **Early Life and Family Roots**
 
-<figure id="cb5f" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*38tZ5mFXTqHRvcX2v2snNQ.png"
-class="graf-image" data-image-id="1*38tZ5mFXTqHRvcX2v2snNQ.png"
-data-width="1024" data-height="658" />
-<figcaption>1950s Chicago | Source: Wikimedia Commons</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*38tZ5mFXTqHRvcX2v2snNQ.png)
+
+*1950s Chicago | Source: Wikimedia Commons*
 
 > **“Before Pope Leo XIV, he was just Rob Prevost — a kid from the South
 > Side of Chicago with a daily Mass habit playing priest in the living
@@ -79,12 +35,12 @@ suburb south of the city.
 His parents, **Louis and Mildred Prevost**, were both educators deeply
 involved in their local parish.
 
-- <span id="b182">Louis, a World War II Navy veteran and school
+- Louis, a World War II Navy veteran and school
   superintendent, passed down a legacy of discipline and public
-  service.</span>
-- <span id="08ed">Mildred, a Spanish Creole librarian and schoolteacher,
+  service.
+- Mildred, a Spanish Creole librarian and schoolteacher,
   helped shape her son’s deep spirituality through regular Mass
-  attendance and community involvement.</span>
+  attendance and community involvement.
 
 Rob was the youngest of three brothers and is said to have taken to
 religion early. **He served as an altar boy, sang in the choir, and even
@@ -98,32 +54,9 @@ priesthood, joking that he always wanted to “play church.”
 
 > Little did they know…
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1b78" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Education and Religious Formation**
 
-<figure id="2962" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*RhFWw3XgpI6yCc4Mq5ghnQ.png"
-class="graf-image" data-image-id="1*RhFWw3XgpI6yCc4Mq5ghnQ.png"
-data-width="1024" data-height="614" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*RhFWw3XgpI6yCc4Mq5ghnQ.png)
 
 > Prevost entered a minor seminary in Michigan at the tender age of 14,
 
@@ -144,33 +77,11 @@ advanced studies in Rome.**
 By the late 1980s, he developed a reputation for his intellect,
 humility, and multilingual fluency.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="360f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Missionary Work in Peru**
 
-<figure id="d096" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*heKhcVrsHSB4pQ1DyOpdIQ.jpeg"
-class="graf-image" data-image-id="1*heKhcVrsHSB4pQ1DyOpdIQ.jpeg"
-data-width="640" data-height="391" />
-<figcaption>Prevost in 2012 | Source: Wikimedia Commons</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*heKhcVrsHSB4pQ1DyOpdIQ.jpeg)
+
+*Prevost in 2012 | Source: Wikimedia Commons*
 
 > **From 1985 to 1998, Fr. Prevost served as a missionary in northern
 > Peru.**
@@ -189,34 +100,11 @@ Chiclayo.**
 
 > He became a naturalized Peruvian citizen in 2015.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="be62" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Global Leadership in the Augustinian Order**
 
-<figure id="6a69" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*4feQh-E76pyVG45PwPTilw.jpeg"
-class="graf-image" data-image-id="1*4feQh-E76pyVG45PwPTilw.jpeg"
-data-width="1024" data-height="633" />
-<figcaption>Pope Leo’s Inauguration | Source: Wikimedia
-Commons</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*4feQh-E76pyVG45PwPTilw.jpeg)
+
+*Pope Leo’s Inauguration | Source: Wikimedia Commons*
 
 > In 1999, he was elected Provincial Prior of the Augustinians in
 > Chicago.
@@ -232,34 +120,11 @@ in Chicago.
 
 > He expected a quieter chapter ahead.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a0db" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Return to Peru and Rise in the Vatican**
 
-<figure id="29e6" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*vXSNEwT4MwAOdgnCEDy6Dw.jpeg"
-class="graf-image" data-image-id="1*vXSNEwT4MwAOdgnCEDy6Dw.jpeg"
-data-width="1024" data-height="839" />
-<figcaption>Catedral de Chiclayo | Source: Wikimedia
-Commons</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*vXSNEwT4MwAOdgnCEDy6Dw.jpeg)
+
+*Catedral de Chiclayo | Source: Wikimedia Commons*
 
 > Pope Francis had other plans.
 
@@ -281,37 +146,11 @@ Bishops,** one of the Church’s most influential offices.
 participated in high-level reforms** aligned with Pope Francis’s
 priorities.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5106" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Papal Election and Inauguration**
 
-<figure id="8851" class="graf graf--figure graf-after--h3">
-<img src="https://cdn-images-1.medium.com/max/800/0*hMXnu-8NVxWCX7BK"
-class="graf-image" data-image-id="0*hMXnu-8NVxWCX7BK" data-width="4000"
-data-height="2667" data-unsplash-photo-id="u84rwkq30ig" />
-<figcaption>Vatican City | Source: <a
-href="https://unsplash.com/@kbendakhlia?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/@kbendakhlia?utm_source=medium&amp;utm_medium=referral"
-rel="photo-creator noopener" target="_blank">Karim Ben
-Van</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*hMXnu-8NVxWCX7BK)
+
+*Vatican City | Source: [Karim Ben Van](https://unsplash.com/@kbendakhlia?utm_source=medium&amp;utm_medium=referral)*
 
 > Pope Francis passed away in April 2025.
 
@@ -333,69 +172,24 @@ frontrunner **— largely because he was American.
 
 > **“Peace be with you.”**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1b9c" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Timeline of Key Life Events**
 
-<figure id="ec91"
-class="graf graf--figure graf-after--h3 graf--trailing">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*CdWSB4Ubr8YSnmUk0gj6og.png"
-class="graf-image" data-image-id="1*CdWSB4Ubr8YSnmUk0gj6og.png"
-data-width="1739" data-height="1661" />
-<figcaption>Made by Author with ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*CdWSB4Ubr8YSnmUk0gj6og.png)
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1126" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+*Made by Author with ChatGPT*
 
 ### **Early Papacy: Climate, Peace, and Public Presence**
 
-<figure id="0567" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*5wCcu2tYZdhLOX57G4WsLQ.jpeg"
-class="graf-image" data-image-id="1*5wCcu2tYZdhLOX57G4WsLQ.jpeg"
-data-width="1024" data-height="737" />
-<figcaption>Cathedral Interior | Source: Wikimedia Commons</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*5wCcu2tYZdhLOX57G4WsLQ.jpeg)
+
+*Cathedral Interior | Source: Wikimedia Commons*
 
 **Since taking office,**
 
 > Pope Leo XIV has emphasized two key themes:
 
-1.  <span id="f0a1">**Climate action**</span>
-2.  <span id="e1ce">**Peacemaking**</span>
+1.  **Climate action**
+2.  **Peacemaking**
 
 **He introduced a new liturgical rite** focused on **environmental
 care** and celebrated a public **“Mass for Creation”** while on retreat
@@ -415,33 +209,11 @@ He has also **revived public traditions** like papal retreats and
 informal catechesis, **using them as platforms for education**,
 ecological dialogue, and moral leadership.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="45e2" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Character and Style**
 
-<figure id="0dd8" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*-nUKNJLLX2xF3tcMWA1nKQ.jpeg"
-class="graf-image" data-image-id="1*-nUKNJLLX2xF3tcMWA1nKQ.jpeg"
-data-width="1024" data-height="1365" />
-<figcaption>Pope Leo in 2023 | Source: Wikimedia Commons</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*-nUKNJLLX2xF3tcMWA1nKQ.jpeg)
+
+*Pope Leo in 2023 | Source: Wikimedia Commons*
 
 > Pope Leo XIV is described as gentle, steady, and principled.
 
@@ -462,34 +234,11 @@ At a Vatican reception, he joked with Latin American cardinals:
 
 > his friends still call him “**Padre Bob.”**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="49dc" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **What Comes Next**
 
-<figure id="a8ee" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*efFckIbSU7uG3MzkG_wIBA.jpeg"
-class="graf-image" data-image-id="1*efFckIbSU7uG3MzkG_wIBA.jpeg"
-data-width="1024" data-height="682" />
-<figcaption>St. Peter’s Basilica | Source: Wikimedia
-Commons</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*efFckIbSU7uG3MzkG_wIBA.jpeg)
+
+*St. Peter’s Basilica | Source: Wikimedia Commons*
 
 > Leo XIV has signaled that his papacy will be both pastoral and
 > reform-minded.
@@ -514,84 +263,6 @@ prisoners,**
 
 > Not for grandeur, but for service.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e2bb" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### *Still have questions?*
 
-#### *Read our follow-up:* <a
-href="https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"
-class="markup--anchor markup--h4-anchor"
-data-href="https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"
-rel="noopener" target="_blank"><em>8 Big Questions About Pope Leo
-XIV</em></a>
-
-<div id="91d7"
-class="graf graf--mixtapeEmbed graf-after--h4 graf--trailing">
-
-<a
-href="https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"
-class="markup--anchor markup--mixtapeEmbed-anchor"
-data-href="https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"
-title="https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"><strong>8
-Big Questions Everyone Has About Pope Leo XIV</strong><br />
-<em>AI, gender, tradition, power ~ how will he lead?</em>medium.com</a><a
-href="https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"
-class="js-mixtapeImage mixtapeImage u-ignoreBlock"
-data-media-id="443c81c6dafc2c861e715939c099d218"
-data-thumbnail-img-id="1*3ivMVbPE4itqtOHJ6VlYUA.jpeg"
-style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*3ivMVbPE4itqtOHJ6VlYUA.jpeg);"></a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="c4db" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Enjoy this piece?
-
-**Follow** for more explainer essays on faith, public life, and global
-leadership.
-
-If this helped clarify something for you, **leave a comment and share**
-with a friend.
-
-**Subscribe** to ***The Balance Sheet*** for email notifications!
-
-> Thanks for reading!
-
-</div>
-
-</div>
-
-</div>
-
+#### *Read our follow-up:* [*8 Big Questions About Pope Leo XIV*](https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708)

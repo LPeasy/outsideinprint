@@ -8,43 +8,24 @@ subtitle: "A Primer on the July 4, 2025 Texas Flood Tragedy"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
-featured: false
+featured: false
+
 collections:
   - floods-water-built-environment
   - reported-case-studies
 medium_source_url: "https://medium.com/@lawtonperret/what-happened-at-camp-mystic-8f61de2d0f27"
 ---
 
-<div id="c33c" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*UbIf-QBbcbAel-xIPO0WIA.png)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### **What Happened at Camp Mystic?**
-
-#### *A Primer on the July 4, 2025 Texas Flood Tragedy*
-
-<figure id="a2cb" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*UbIf-QBbcbAel-xIPO0WIA.png"
-class="graf-image" data-image-id="1*UbIf-QBbcbAel-xIPO0WIA.png"
-data-width="1318" data-height="765" data-is-featured="true" />
-<figcaption>Inundation Map | Source: CNN</figcaption>
-</figure>
+*Inundation Map | Source: CNN*
 
 > **“They were just screaming and praying. The water was moving too fast
 > to do anything.”**
 
 > **— *Rescuer, CNN interview***
 
-<span class="graf-dropCap">On</span> the night of July 4th, while
+On the night of July 4th, while
 fireworks lit up the Texas Hill Country, a dangerous storm stalled over
 the Guadalupe River Basin.
 
@@ -69,24 +50,6 @@ awareness, and safety planning. And it’s raising tough questions:
 > **Who is responsible ~ the camp, the parents, the government, or all
 > the above?**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="86a2" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Author’s Note
 
 I work as a life safety consequences specialist with the U.S. Army Corps
@@ -108,24 +71,6 @@ It was a warning ~ and next time, the water may rise somewhere else.
 > Corps of Engineers, the Department of Defense, or the United States
 > Government.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="d277" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Combined Full Timeline**
 
 #### **July 1–5 Texas Flood & Camp Mystic Tragedy**
@@ -133,48 +78,15 @@ It was a warning ~ and next time, the water may rise somewhere else.
 **Sources:** CNN, USA TODAY, KSAT, NWS, Floodbase, TDEM, USGS, and local
 reporting
 
-<figure id="cd0e" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*fx2SfFS3E6BPsi7z65uuWg.png"
-class="graf-image" data-image-id="1*fx2SfFS3E6BPsi7z65uuWg.png"
-data-width="622" data-height="691" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*fx2SfFS3E6BPsi7z65uuWg.png)
 
-<figure id="66a9" class="graf graf--figure graf-after--figure">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*F96zazQyKeR1kxA3b1KFLA.png"
-class="graf-image" data-image-id="1*F96zazQyKeR1kxA3b1KFLA.png"
-data-width="627" data-height="842" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*F96zazQyKeR1kxA3b1KFLA.png)
 
-<figure id="2a17" class="graf graf--figure graf-after--figure">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*87hviodgqkOjbu6VeJ3MSA.png"
-class="graf-image" data-image-id="1*87hviodgqkOjbu6VeJ3MSA.png"
-data-width="627" data-height="850" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*87hviodgqkOjbu6VeJ3MSA.png)
 
 > The Guadalupe River rose more than 25 feet in under 90 minutes.
 
 > That’s not a typo.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="c6f1" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### **How the Camp Mystic Flood Became a Catastrophe**
 
@@ -205,13 +117,9 @@ floodway*.**
 
 > Geography only tells part of the story.
 
-<figure id="e9ae" class="graf graf--figure graf-after--pullquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*1PTwmLd8qUcWIs5AZTsbMw.png"
-class="graf-image" data-image-id="1*1PTwmLd8qUcWIs5AZTsbMw.png"
-data-width="1404" data-height="772" />
-<figcaption>Guadalupe River Inundation Curve: Source | CNN</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*1PTwmLd8qUcWIs5AZTsbMw.png)
+
+*Guadalupe River Inundation Curve: Source | CNN*
 
 By the time the first official **Flash Flood Warning** was issued at
 **1:14 a.m.**, the rain had already intensified.
@@ -243,41 +151,14 @@ River and Cypress Creek, **was obliterated.**
 > **Survivors were pulled from rooftops, trees, and wreckage by
 > helicopter.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="c2f2" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **History Repeating Itself**
 
 #### This wasn’t the first time the Guadalupe River flooded.
 
-It was the <a
-href="https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/"
-rel="noopener" target="_blank">second mass casualty event</a> related to
+It was the [second mass casualty event](https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/) related to
 flooding in the area.
 
-**In 1987,** <a
-href="https://www.everettpost.com/national/deadly-floods-at-camp-mystic-how-the-tragedy-compares-to-a-similar-event-in-1987"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.everettpost.com/national/deadly-floods-at-camp-mystic-how-the-tragedy-compares-to-a-similar-event-in-1987"
-rel="noopener" target="_blank"><strong>ten teenagers died after their
-van was swept away in another Guadalupe River flood.</strong></a>
+**In 1987,** [**ten teenagers died after their van was swept away in another Guadalupe River flood.**](https://www.everettpost.com/national/deadly-floods-at-camp-mystic-how-the-tragedy-compares-to-a-similar-event-in-1987)
 
 > That tragedy prompted calls for better planning and safer
 > infrastructure.
@@ -290,89 +171,20 @@ van was swept away in another Guadalupe River flood.</strong></a>
 
 **People forgot about the risk.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="99ff" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **Most summer camps don’t plan for a 20-foot wall of water arriving in
 the dark with power out and no real-time alerts.**
 
 > Maybe they should.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="0a91" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Deep Dive Teaser
 
 Next weeek, I’ll break down the flood in full ~ with **maps, warning
 gaps**, and a **risk-informed analysis** of what went wrong.
 
-I’ll be publishing additional primers <a
-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-target="_blank">like this</a> throughout the week to provide background
+I’ll be publishing additional primers [like this](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8) throughout the week to provide background
 information you might be interested in.
 
-<div id="1cec" class="graf graf--mixtapeEmbed graf-after--p">
+- [The Water’s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
 
-<a
-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-class="markup--anchor markup--mixtapeEmbed-anchor"
-data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-title="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"><strong>The
-Water’s Rising: What the Data Really Says About Extreme
-Weather</strong><br />
-<em>“The weather’s never been like this!”</em>medium.com</a><a
-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-class="js-mixtapeImage mixtapeImage u-ignoreBlock"
-data-media-id="a2cbc9c74b9b4bd9c344c25b1dd116a2"
-data-thumbnail-img-id="1*t7a79R6gScPI4huiLajBJw.png"
-style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*t7a79R6gScPI4huiLajBJw.png);"></a>
-
-</div>
-
-**Follow *The Balance Sheet* to get notified when it drops.**
-
-**Clap for this story** if you learned anything new!
-
-**Share with a friend** and **comment your thoughts!** All voices are
-welcome.
 
 > Thanks for reading!
-
-</div>
-
-</div>
-
-</div>
-

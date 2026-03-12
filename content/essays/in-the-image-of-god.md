@@ -8,34 +8,14 @@ subtitle: "An introduction to Catholic social teaching"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/in-the-image-of-god.pdf"
-featured: false
+featured: false
+
 collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/in-the-image-of-god-bd1806aee9d4"
 ---
 
-<div id="dc85" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-## In The Image of God
-
-#### An introduction to Catholic social teaching
-
-<figure id="c282" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/0*2eeaLDOOeVcw8EBb.jpg"
-class="graf-image" data-image-id="0*2eeaLDOOeVcw8EBb.jpg"
-data-width="1200" data-height="600" data-is-featured="true" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*2eeaLDOOeVcw8EBb.jpg)
 
 #### Author’s Note
 
@@ -51,24 +31,6 @@ data-width="1200" data-height="600" data-is-featured="true" />
 > What follows is my own effort to understand, articulate, and reflect
 > on those teachings as they were presented.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="2b16" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 Most conversations about religion and society begin in the wrong places
 ~
 
@@ -80,12 +42,7 @@ Accusations…
 
 ~ and they stop listening.
 
-<figure id="e462" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*ySreNhiP4IH4YH1A29GvVQ@2x.jpeg"
-class="graf-image" data-image-id="1*ySreNhiP4IH4YH1A29GvVQ@2x.jpeg"
-data-width="1920" data-height="1080" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*ySreNhiP4IH4YH1A29GvVQ@2x.jpeg)
 
 #### **The Church asks us to be radically different.**
 
@@ -110,11 +67,7 @@ In all of history, this may be the most radical three-word sentence that
 anyone ever said. And **everything that follows** ~ every social
 principle, every moral obligation ~ **flows directly from it.**
 
-<figure id="bc5d" class="graf graf--figure graf-after--p">
-<img src="https://cdn-images-1.medium.com/max/800/0*dSB4kntOgJPQE900"
-class="graf-image" data-image-id="0*dSB4kntOgJPQE900" data-width="682"
-data-height="519" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*dSB4kntOgJPQE900)
 
 #### Love, before anything else
 
@@ -166,32 +119,9 @@ It’s the Church’s most concrete social statement.
 
 > (John 15:13, NRSV-CE)
 
-</div>
-
-</div>
-
-</div>
-
-<div id="c7fd" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### “It is not good that the man should be alone”
 
-<figure id="73ee" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/0*pYHsexsXyOLtuuuk.jpg"
-class="graf-image" data-image-id="0*pYHsexsXyOLtuuuk.jpg"
-data-width="356" data-height="234" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*pYHsexsXyOLtuuuk.jpg)
 
 The Bible’s first explicit social claim appears before any potential
 play partners existed!
@@ -232,24 +162,6 @@ It flows directly from God.
 
 > From Love.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a21c" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Dignity is Divine
 
 Human beings are made in God’s image, and their worth cannot be granted
@@ -285,32 +197,9 @@ It refuses to reduce people to categories.
 
 > Human Dignity is from God.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="4719" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Scripture does not allow selective concern
 
-<figure id="6041" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*Ijyj4CJzBDKbj9jezROj6g@2x.jpeg"
-class="graf-image" data-image-id="1*Ijyj4CJzBDKbj9jezROj6g@2x.jpeg"
-data-width="1920" data-height="1281" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*Ijyj4CJzBDKbj9jezROj6g@2x.jpeg)
 
 Jesus does not speak about social responsibility in abstract terms.
 
@@ -348,32 +237,9 @@ layered onto faith:
 
 It’s an encounter with Christ Himself.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5e84" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### The Church offers principles, not blueprints
 
-<figure id="ceaa" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*PYghovCRjfTwYB0Q1bAf4A@2x.jpeg"
-class="graf-image" data-image-id="1*PYghovCRjfTwYB0Q1bAf4A@2x.jpeg"
-data-width="1920" data-height="1685" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*PYghovCRjfTwYB0Q1bAf4A@2x.jpeg)
 
 One of the most persistent misunderstandings Matthew addresses is the
 idea that the Church exists to issue policy prescriptions.
@@ -391,14 +257,14 @@ domain.
 From that competence emerge four foundational themes that will recur
 throughout this series:
 
-1.  <span id="a057">**Human dignity** ~ every person possesses inherent
-    worth</span>
-2.  <span id="62a5">**The common good** ~ social arrangements must serve
-    all, not a few</span>
-3.  <span id="efcb">**Subsidiarity** ~ decisions should be made at the
-    most local level capable of addressing them</span>
-4.  <span id="aef6">**Solidarity** ~ we are responsible for one another,
-    not merely ourselves</span>
+1.  **Human dignity** ~ every person possesses inherent
+    worth
+2.  **The common good** ~ social arrangements must serve
+    all, not a few
+3.  **Subsidiarity** ~ decisions should be made at the
+    most local level capable of addressing them
+4.  **Solidarity** ~ we are responsible for one another,
+    not merely ourselves
 
 These are not slogans.\
 They’re foundational.\
@@ -411,32 +277,9 @@ these principles in concrete ways.
 
 > Indifference is not.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="4910" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Why this matters now
 
-<figure id="164b" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*xruVbWFUxkxZ91_xn8GsNA@2x.jpeg"
-class="graf-image" data-image-id="1*xruVbWFUxkxZ91_xn8GsNA@2x.jpeg"
-data-width="2244" data-height="1470" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*xruVbWFUxkxZ91_xn8GsNA@2x.jpeg)
 
 Modern public life oscillates between two extremes ~ **technocratic
 detachment and moral outrage.**
@@ -459,24 +302,6 @@ None of these topics are distractions from faith ~
 
 > They’re the practical applications of faith.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="9463" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### A quiet invitation
 
 This series is not an argument. It’s an exploration of a moral tradition
@@ -493,32 +318,9 @@ and resists both cynicism and utopianism.
 If you would like to continue this journey, I invite you to follow the
 series as it unfolds week by week.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="ff30" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### A closing prayer
 
-<figure id="a073" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*dCiHMr1bsztSiEsxt9TSnw@2x.jpeg"
-class="graf-image" data-image-id="1*dCiHMr1bsztSiEsxt9TSnw@2x.jpeg"
-data-width="1470" data-height="980" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*dCiHMr1bsztSiEsxt9TSnw@2x.jpeg)
 
 **Father**
 
@@ -547,10 +349,3 @@ Show us the truth,
 God is alive.
 
 > **Amen**.
-
-</div>
-
-</div>
-
-</div>
-

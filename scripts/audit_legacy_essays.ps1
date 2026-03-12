@@ -365,7 +365,7 @@ foreach ($page in $pages) {
   $issueCounts = [ordered]@{
     medium_cta = Count-Matches -Text $body -Patterns $ctaPatterns
     author_note = Count-Matches -Text $body -Patterns @('(?im)^\s{0,3}(?:#+\s*)?(?:author''?s note|note from the author)\b')
-    embed_remnants = Count-Matches -Text $body -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','medium\.com/','raw HTML omitted')
+    embed_remnants = Count-Matches -Text $body -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','raw HTML omitted')
     mojibake = Count-Matches -Text $body -Patterns $mojibakePatterns
     manual_bullets = Count-Matches -Text $body -Patterns @('(?m)^\s*(?:\u2022|\u00E2\u20AC\u00A2)\s+')
     fake_lists = Count-Matches -Text $body -Patterns @('(?m)^\s*-\s+[A-Z][^\n]{0,90}$','(?m)^\s*\d+\)\s+')

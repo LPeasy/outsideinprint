@@ -8,11 +8,13 @@ subtitle: "How the Limits of Physics Are Reshaping the Future of Computing"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-death-of-moores-law.pdf"
-featured: false
+featured: false
+
 collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/the-death-of-moores-law-12cb19a75cd8"
 ---
+
 When Did It End, and What Comes Next?
 
 ![](https://cdn-images-1.medium.com/max/800/1*n7Cbf73cfSBGZ6P6x--1Sg@2x.jpeg)
@@ -135,11 +137,6 @@ Rather than mourning the end of Moore’s Law, we should view it as a natural ev
 
 The legacy of Moore’s Law isn’t just about transistors; it’s the enduring belief that ingenuity can overcome even the most daunting challenges.In the post-Moore’s Law world opportunities are endless, and the next great leap forward is just beyond the horizon.
 
-About the Author
-
-Want more stories like this?
-
-Subscribe to The Balance Sheet for smart, accessible takes on how policy, money, and the environment shape everyday life in America. No buzzwords. No fluff. Just the real economics behind the headlines.
 
 What is Moore's Law?
 Exponential growth is at the heart of the rapid increase of computing capabilities.ourworldindata.orgThe Death of Moore's Law: What it means and what might fill the gap going forward
@@ -147,5 +144,3 @@ In 1965, engineer and businessman Gordon Moore observed a trend that would go on
 Semiconductors are likely to continue their transformational role | Technology Quarterlywww.economist.comWhat is Quantum Computing? - Quantum Computing Explained - AWS
 Find out what is Quantum Computing and how to use Amazon Web Services for Quantum Computingaws.amazon.comGordon Moore | Biography & Facts | Britannica
 Gordon Moore, American engineer who cofounded (with Robert Noyce) Intel Corporation and devised Moore's law, which…www.britannica.com
-
-

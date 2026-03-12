@@ -8,34 +8,14 @@ subtitle: "Why medicine, public health, and institutions stopped using one of hi
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/how-did-mother-become-a-controversial-word-in-america.pdf"
-featured: false
+featured: false
+
 collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/how-did-mother-become-a-controversial-word-in-america-2af8cb3562b0"
 ---
 
-<div id="66fe" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-## How did “Mother” Become a Controversial Word in America?
-
-#### Why medicine, public health, and institutions stopped using one of history’s most revered terms
-
-<figure id="c8f2" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*Gygd582a5T1240JTiEj1Vw@2x.jpeg"
-class="graf-image" data-image-id="1*Gygd582a5T1240JTiEj1Vw@2x.jpeg"
-data-width="1536" data-height="1024" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*Gygd582a5T1240JTiEj1Vw@2x.jpeg)
 
 For most of human history, the word mother required no clarification. It
 described a biological reality, a medical category, a social role, and a
@@ -56,24 +36,6 @@ it asks a simple question with far-reaching consequences:
 
 **How did “mother” become offensive, and what does that change reveal
 about how modern America understands sex, care, and responsibility?**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="8229" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### Mother as a Sacred and Social Category
 
@@ -99,32 +61,9 @@ Motherhood was honored because it was costly ~ physically, socially, and
 emotionally. Societies survived by recognizing that cost, not pretending
 it was abstract.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1c78" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Motherhood as Medical Reality in Early Obstetrics
 
-<figure id="f532" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*j_p9PbZZDUlhS3gkvfHecw@2x.jpeg"
-class="graf-image" data-image-id="1*j_p9PbZZDUlhS3gkvfHecw@2x.jpeg"
-data-width="1536" data-height="1024" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*j_p9PbZZDUlhS3gkvfHecw@2x.jpeg)
 
 > “The health of the mother determines the health of the child.”
 
@@ -147,24 +86,6 @@ recovery ~ precisely because motherhood imposed real biological burdens
 that society preferred to ignore.
 
 To name the mother was to name the risk.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="8835" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### Why American Institutions Replaced “Mother” with Gender-Neutral Language
 
@@ -190,32 +111,9 @@ adopted similar constructions. Medical journals followed suit.
 
 Biology did not change ~ language did.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1e17" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### From Maternal Health to “Birthing Person” ~ The Medical Language Shift
 
-<figure id="c343" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*y4t10TE99FzJeOSYeHBGXg.png"
-class="graf-image" data-image-id="1*y4t10TE99FzJeOSYeHBGXg.png"
-data-width="1536" data-height="1024" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*y4t10TE99FzJeOSYeHBGXg.png)
 
 > “Terms like ‘mother’ may exclude transgender and non-binary patients.”
 
@@ -239,24 +137,6 @@ recovery, lactation.
 Language shapes attention. When we stop naming mothers, we do not stop
 dealing with motherhood. We just deal with it poorly.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="acab" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### How “Mother” Became a Politically Risky Word on the American Left
 
 > “Motherhood should not be presumed.”
@@ -271,24 +151,6 @@ female experience in history.
 This isn’t about excluding anybody ~
 
 It’s about the truth.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="2519" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### We Stopped Saying “Mother”
 
@@ -330,24 +192,6 @@ are trying to place it.
 
 **Mothers did not change** ~ *our language did.*
 
-</div>
-
-</div>
-
-</div>
-
-<div id="657d" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Author’s Note
 
 If language shapes how we think about risk, biology, and responsibility,
@@ -363,10 +207,3 @@ institutions draw the line between inclusion and clarity? What is more
 important ~ comfort or truth?
 
 Let’s talk about it!
-
-</div>
-
-</div>
-
-</div>
-

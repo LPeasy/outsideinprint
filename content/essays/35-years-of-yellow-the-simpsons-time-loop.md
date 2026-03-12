@@ -12,29 +12,9 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/35-years-of-yellow-the-simpsons-time-loop-50f72b5bff6b"
 ---
 
-<div id="161e" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*6addWxBCEhPSZQnnD9vnsg.png)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### 35 Years of Yellow: *The Simpsons Time Loop*
-
-#### **A fake series finale and the cartoon that somehow predicted 9/11, COVID, and President Donald Trump on an escalator.**
-
-<figure id="3696" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*6addWxBCEhPSZQnnD9vnsg.png"
-class="graf-image" data-image-id="1*6addWxBCEhPSZQnnD9vnsg.png"
-data-width="1024" data-height="1536" />
-<figcaption>Made by Author with ChatGPT</figcaption>
-</figure>
+*Made by Author with ChatGPT*
 
 In April 2024, ***The Simpsons*** aired a special episode called
 ***Homer’s Crossing*** ***that looked like a series finale.***
@@ -66,39 +46,13 @@ series.**
 It’s a living paradox ~ **an aging cartoon frozen in time.** One that
 watches America evolve while it stays ***(more or less)*** the same.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="b5b6" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **How a Crude Sketch Became a Global Standard**
 
 #### History of the Simpsons
 
-<figure id="6cad" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*-9_wCAtWCE45n_ZZrH4BXA.png"
-class="graf-image" data-image-id="1*-9_wCAtWCE45n_ZZrH4BXA.png"
-data-width="713" data-height="600" />
-<figcaption>Source: <a
-href="https://www.reddit.com/r/FuckImOld/comments/12shvlf/the_simpsons_shorts_first_aired_on_fox_on_april/"
-class="markup--anchor markup--figure-anchor"
-data-href="https://www.reddit.com/r/FuckImOld/comments/12shvlf/the_simpsons_shorts_first_aired_on_fox_on_april/"
-rel="noopener" target="_blank">Reddit</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*-9_wCAtWCE45n_ZZrH4BXA.png)
+
+*Source: [Reddit](https://www.reddit.com/r/FuckImOld/comments/12shvlf/the_simpsons_shorts_first_aired_on_fox_on_april/)*
 
 **Matt Groening** came up with ***The Simpsons*** in the lobby of James
 L. Brooks’s office in the late 1980s. He was originally going to pitch a
@@ -141,24 +95,6 @@ The media billed it as *“Bill vs. Bart.”*
 > The Cosbys faded away while the Simpsons kept eating dinner on that
 > same old crusty couch.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="709a" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **The American Cartoon That Became America Itself**
 
 The Simpsons Cultural Relevance
@@ -174,24 +110,24 @@ healthcare, and even itself. **Springfield** wasn’t just a town ~ it
 
 The characters became avatars for different slices of American life.
 
-- <span id="c60d">Homer, the perpetually distracted working dad.</span>
-- <span id="3890">Marge, the overburdened mom with no outlet.</span>
-- <span id="728b">Lisa, the voice of reason who never wins.</span>
-- <span id="2d91">Bart, the rebel without a cause.</span>
-- <span id="03e9">And Maggie, the mute baby who always knows what’s
-  going on.</span>
+- Homer, the perpetually distracted working dad.
+- Marge, the overburdened mom with no outlet.
+- Lisa, the voice of reason who never wins.
+- Bart, the rebel without a cause.
+- And Maggie, the mute baby who always knows what’s
+  going on.
 
 **Over the decades, the show became a guestbook of pop culture:**
 
-- <span id="0a0c">Leonard Nimoy</span>
-- <span id="e26f">Johnny Cash</span>
-- <span id="b4fa">Paul McCartney</span>
-- <span id="33dd">Lady Gaga</span>
-- <span id="f024">Stephen Hawking</span>
+- Leonard Nimoy
+- Johnny Cash
+- Paul McCartney
+- Lady Gaga
+- Stephen Hawking
 
 And more recently:
 
-- <span id="b5be">Billie Eilish and Lizzo.</span>
+- Billie Eilish and Lizzo.
 
 > Presidents were parodied. Corporations were dragged.
 
@@ -207,63 +143,19 @@ smartphones now* ~ but the stories stay familiar.
 
 > The Simpsons isn’t timeless. It’s time-looped.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="069c" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Wait, Did They Really Predict 9/11?**
 
 #### The Simpsons Predicts the Future
 
-<figure id="05c4" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*LHSTWaXCdN2dWYPF8xIEKw.png"
-class="graf-image" data-image-id="1*LHSTWaXCdN2dWYPF8xIEKw.png"
-data-width="624" data-height="258" />
-<figcaption>Source: <a
-href="https://uproxx.com/tv/the-simpsons-911-prediction/"
-class="markup--anchor markup--figure-anchor"
-data-href="https://uproxx.com/tv/the-simpsons-911-prediction/"
-rel="noopener" target="_blank">UPROXX</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*LHSTWaXCdN2dWYPF8xIEKw.png)
+
+*Source: [UPROXX](https://uproxx.com/tv/the-simpsons-911-prediction/)*
 
 **The most absurd part of *The Simpsons* legacy is the long,
 increasingly bizarre list of things the show somehow predicted.**
 
 > **While some of those connections are overblown, others are… hard to
 > ignore.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="d801" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### **9/11 (1997)**
 
@@ -276,13 +168,9 @@ holds up a brochure advertising a \$9 bus fare to Manhattan. Behind the
 
 **President Trump (2000)**
 
-<figure id="d767" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*0DyUkC1AfwcuxnFXRByGZQ.png"
-class="graf-image" data-image-id="1*0DyUkC1AfwcuxnFXRByGZQ.png"
-data-width="1536" data-height="1024" />
-<figcaption>Made by Author with ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*0DyUkC1AfwcuxnFXRByGZQ.png)
+
+*Made by Author with ChatGPT*
 
 In ***“Bart to the Future”*** (Season 11), a grown-up Lisa becomes
 president and says, *“We’ve inherited quite a budget crunch from
@@ -297,33 +185,11 @@ aired.***
 > *When the real thing happened months later,* ***it looked like a
 > live-action parody of* The Simpsons***, not the other way around.*
 
-</div>
-
-</div>
-
-</div>
-
-<div id="7f7e" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **The Pandemic (1993)**
 
-<figure id="0fa7" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*kk6hGyJg7GQCSPvR3HINNQ.png"
-class="graf-image" data-image-id="1*kk6hGyJg7GQCSPvR3HINNQ.png"
-data-width="1536" data-height="1024" />
-<figcaption>Made by Author with ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*kk6hGyJg7GQCSPvR3HINNQ.png)
+
+*Made by Author with ChatGPT*
 
 The 1993 episode ***“Marge in Chains”*** features an “Osaka Flu” that
 spreads through Springfield after being shipped in from Asia.
@@ -336,37 +202,19 @@ crowd tips over a delivery truck.
 > ***We watched the same scene play out in real life nearly 30 years
 > later…***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5ad1" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **Other Hits**
 
-- <span id="fb34">Smartwatches (predicted in 1995, released in
-  2014)</span>
-- <span id="d6f5">Disney buying 20th Century Fox (joked about in
-  1998)</span>
-- <span id="0d53">The Higgs Boson equation (shown in a 1998 chalkboard
-  gag)</span>
-- <span id="f5ba">Autocorrect errors (featured in 1994’s *“Lisa on
-  Ice”*)</span>
-- <span id="098d">The FIFA corruption scandal (predicted in 2014)</span>
-- <span id="e9ee">The Siegfried and Roy tiger attack (fictionalized in
-  1993, real in 2003)</span>
+- Smartwatches (predicted in 1995, released in
+  2014)
+- Disney buying 20th Century Fox (joked about in
+  1998)
+- The Higgs Boson equation (shown in a 1998 chalkboard
+  gag)
+- Autocorrect errors (featured in 1994’s *“Lisa on
+  Ice”*)
+- The FIFA corruption scandal (predicted in 2014)
+- The Siegfried and Roy tiger attack (fictionalized in
+  1993, real in 2003)
 
 To be fair, the show makes **thousands of jokes a year.**
 
@@ -376,35 +224,13 @@ To be fair, the show makes **thousands of jokes a year.**
 
 > It’s that the world keeps catching up to its satire.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6953" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### **Immortality in Syndication**
 
 #### The Simpsons: 35 Years and Counting
 
-<figure id="07f2" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*yQmT6NifxCKfqTGewO8I-A.png"
-class="graf-image" data-image-id="1*yQmT6NifxCKfqTGewO8I-A.png"
-data-width="1024" data-height="1024" />
-<figcaption>Made by Author with ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*yQmT6NifxCKfqTGewO8I-A.png)
+
+*Made by Author with ChatGPT*
 
 **With more than 750 episodes** under its belt, *The Simpsons* holds the
 title for ***the longest-running scripted primetime series in American
@@ -423,12 +249,12 @@ parodying VHS-era dads to riffing on influencers and streaming culture.
 
 #### **The milestones stack up:**
 
-- <span id="879b">Longest-running American sitcom (since 2009)</span>
-- <span id="f0b3">One theatrical feature film (2007)</span>
-- <span id="f955">A Guinness World Record for most guest stars</span>
-- <span id="5a8d">A theme park ride, mobile games, and LEGO sets</span>
-- <span id="d598">Streaming syndication rights that helped anchor
-  Disney+</span>
+- Longest-running American sitcom (since 2009)
+- One theatrical feature film (2007)
+- A Guinness World Record for most guest stars
+- A theme park ride, mobile games, and LEGO sets
+- Streaming syndication rights that helped anchor
+  Disney+
 
 **Homer outlasted everyone.**\
 *The Cosby Show.* *Seinfeld.* *Friends.* *The Office.* *The Sopranos.*
@@ -449,35 +275,13 @@ anymore.**
 > ***A familiar voice, always there, quietly narrating America in real
 > time.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5569" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Conclusion
 
 #### **-That Was the Joke-**
 
-<figure id="d5d9" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*bmy4570LCH7IUvf4DrKtfg.png"
-class="graf-image" data-image-id="1*bmy4570LCH7IUvf4DrKtfg.png"
-data-width="1536" data-height="1024" data-is-featured="true" />
-<figcaption>Source: Fox</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*bmy4570LCH7IUvf4DrKtfg.png)
+
+*Source: Fox*
 
 > When *Homer’s Crossing* aired in 2024,
 
@@ -512,24 +316,6 @@ Simpsons* offers something stranger:
 Through wars, recessions, presidencies, new platforms, and generational
 turnover ~ **it just keeps going and going and going.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="59ae" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **Will it ever really end?**
 
 > Maybe it fades out when no one’s watching.
@@ -539,36 +325,3 @@ turnover ~ **it just keeps going and going and going.**
 > same voices ~ new skins.
 
 ### **Maybe it never ends.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="001f" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-If you enjoyed this piece, ***give it a few claps*** so more readers can
-find it.
-
-***Drop a comment*** with your favorite Simpsons moment — or prediction.
-
-**Follow *The Balance Sheet*** for more sharp, strange, and *sometimes
-yellow* takes on the American story.
-
-</div>
-
-</div>
-
-</div>
-

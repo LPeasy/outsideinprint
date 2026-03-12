@@ -12,31 +12,10 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/public-vs-private-pay-who-really-earns-more-aafec1def048"
 ---
 
-<div id="a963" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Public vs Private Pay: Who Really Earns More?
-
-#### *Jobs, Benefits, and Work-Life Trade-Offs Across Sectors*
-
 > The government can’t outbid Silicon Valley for engineers, but it will
 > pay a school custodian a whole lot more than a hotel would pay a maid.
 
-<figure id="ea48" class="graf graf--figure graf-after--pullquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*oDvsCfwRpZG43zFlI20N_g.png"
-class="graf-image" data-image-id="1*oDvsCfwRpZG43zFlI20N_g.png"
-data-width="1536" data-height="1024" data-is-featured="true" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*oDvsCfwRpZG43zFlI20N_g.png)
 
 The custodian at your local public school probably makes more ~ **per
 hour, with benefits** ~ than the guy who just cleaned your hotel room.
@@ -72,55 +51,33 @@ not always where you’d expect.
 
 > **Pay isn’t just wages; it’s the whole package.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="4a97" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Job-by-Job: Public vs Private Pay Compared
 
 > Let’s stack up a few familiar jobs side by side.
 
-<figure id="4cc7" class="graf graf--figure graf-after--pullquote">
-<img src="https://cdn-images-1.medium.com/max/800/0*_YODUx2AJYPvf6a1"
-class="graf-image" data-image-id="0*_YODUx2AJYPvf6a1" data-width="1429"
-data-height="848" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*_YODUx2AJYPvf6a1)
 
-- <span id="c079">**Teachers**: A **public K–12 teacher makes more than
+- **Teachers**: A **public K–12 teacher makes more than
   a private** school teacher. Not just in salary ~ the pension and
   health insurance bump that advantage even further. If you’re eyeing a
   teaching career, this is why public schools attract and keep more
-  talent.</span>
-- <span id="7f98">**Nurses**: Many government-employed nurses work for
+  talent.
+- **Nurses**: Many government-employed nurses work for
   VA hospitals or county systems. The paychecks are bigger, and the
   retirement packages can be generous. **For nurses, public often beats
-  private.**</span>
-- <span id="61ec">**Engineers**: Civil engineers in the **public sector
+  private.**
+- **Engineers**: Civil engineers in the **public sector
   edge out their private peers in wages, and benefits push them further
   ahead.** But ***the higher up you go*** in private firms ~ especially
   in tech or energy ~ the ***golden handcuffs of bonuses and equity***
-  start to outweigh the public advantage.</span>
-- <span id="614a">**Economists**: The **private sector pays better,**
+  start to outweigh the public advantage.
+- **Economists**: The **private sector pays better,**
   especially in finance and consulting. Federal agencies compete
   decently, but state and local economist jobs usually trail far
-  behind.</span>
-- <span id="b7ea">**Maintenance Workers**: This is the clearest divide.
+  behind.
+- **Maintenance Workers**: This is the clearest divide.
   Custodians and maintenance crews on the **public payroll earn more in
-  base pay and enjoy far more reliable benefits.**</span>
+  base pay and enjoy far more reliable benefits.**
 
 Of course, nobody picks a career based on one comparison chart.
 
@@ -128,41 +85,18 @@ Of course, nobody picks a career based on one comparison chart.
 
 > Take a step back and sector-wide patterns emerge.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="2473" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Sector-Wide Pay Patterns: Education, STEM, Healthcare, Service
 
 Widen the lens, and you see consistent patterns.
 
-- <span id="68b6">Public-sector workers dominate in education,
-  healthcare support, and service jobs.</span>
-- <span id="6a54">Private-sector workers excel in high-end professional
-  and executive roles.</span>
+- Public-sector workers dominate in education,
+  healthcare support, and service jobs.
+- Private-sector workers excel in high-end professional
+  and executive roles.
 
-<figure id="1f3b" class="graf graf--figure graf-after--li">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*_txkO8SaSCuIDHBKM_5zzA.png"
-class="graf-image" data-image-id="1*_txkO8SaSCuIDHBKM_5zzA.png"
-data-width="908" data-height="344" />
-<figcaption>Who pays more? Private or Public Total Compensation by Broad
-Sector</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*_txkO8SaSCuIDHBKM_5zzA.png)
+
+*Who pays more? Private or Public Total Compensation by Broad Sector*
 
 > The structure of compensation matters.
 
@@ -174,19 +108,19 @@ fewer safety nets.
 
 Take three snapshots:
 
-1.  <span id="d915">**Nurses**: A VA hospital nurse might out-earn a
+1.  **Nurses**: A VA hospital nurse might out-earn a
     private hospital nurse, thanks to higher wages and guaranteed
     retirement. But the doctor down the hall is almost always better
-    paid in private practice.</span>
-2.  <span id="32b9">**Engineers**: A civil engineer at a state DOT will
+    paid in private practice.
+2.  **Engineers**: A civil engineer at a state DOT will
     likely earn less than a software engineer in Silicon Valley. But
     when you add in pensions, healthcare, and stability, the
     public-sector engineer may end up more secure over the long
-    haul.</span>
-3.  <span id="8aaf">**Custodians**: The custodian at the county
+    haul.
+3.  **Custodians**: The custodian at the county
     courthouse usually makes more ~ and has stronger benefits ~ than the
     custodian at a chain hotel. The difference isn’t skill or effort;
-    it’s the public sector’s wage floor and access to unions.</span>
+    it’s the public sector’s wage floor and access to unions.
 
 Some say **that split** ~ education vs STEM, public vs private ~
 
@@ -195,37 +129,13 @@ Some say **that split** ~ education vs STEM, public vs private ~
 > The real divide in American work is between blue-collar and
 > white-collar jobs.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6e38" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Blue-Collar vs White-Collar Pay: The Real Divide in Public and Private Work
 
 > Zooming out, the patterns show up clearly in the averages.
 
-<figure id="db2a" class="graf graf--figure graf-after--pullquote">
-<img src="https://cdn-images-1.medium.com/max/800/0*aMWf73JXfDIQyPIm"
-class="graf-image" data-image-id="0*aMWf73JXfDIQyPIm" data-width="1021"
-data-height="578" />
-<figcaption>On average, government jobs pay far more for blue-collar
-work, while white-collar pay is closer but still leans public. In elite
-roles, private compensation often dwarfs public. Source: BLS ECEC, March
-2025.</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*aMWf73JXfDIQyPIm)
+
+*On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public. In elite roles, private compensation often dwarfs public. Source: BLS ECEC, March 2025.*
 
 > ***Here’s what the numbers show:***
 
@@ -250,12 +160,7 @@ the government can match.
 > Elite private-sector jobs in finance, tech, or consulting can pay
 > multiples more.
 
-<figure id="9175" class="graf graf--figure graf-after--pullquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*pprDUfeBMm4KRodaGcy74g.png"
-class="graf-image" data-image-id="1*pprDUfeBMm4KRodaGcy74g.png"
-data-width="1569" data-height="1180" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*pprDUfeBMm4KRodaGcy74g.png)
 
 **Blue collar workers earn substantially higher wages in public roles
 across the board with few exceptions.**
@@ -286,24 +191,6 @@ guaranteed retirement, health insurance benefits, and paid time off.
 
 > What actually counts as “pay”?
 
-</div>
-
-</div>
-
-</div>
-
-<div id="36bb" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Wages vs Benefits: What Counts as Pay?
 
 > Paychecks only tell part of the story.
@@ -311,30 +198,21 @@ guaranteed retirement, health insurance benefits, and paid time off.
 **The real differences** between public and private jobs **show up in
 benefits.**
 
-- <span id="d5d4">**Public workers** give up some cash wages but gain
-  far more in guaranteed benefits.</span>
-- <span id="c2e9">**Private workers** take home a larger paycheck, but
-  the benefits package is thinner and often riskier.</span>
+- **Public workers** give up some cash wages but gain
+  far more in guaranteed benefits.
+- **Private workers** take home a larger paycheck, but
+  the benefits package is thinner and often riskier.
 
 *Some public workers get a smaller paycheck ~ but a bigger bag overall.*
 
-<figure id="8c8d" class="graf graf--figure graf-after--p">
-<img src="https://cdn-images-1.medium.com/max/800/0*iKpEuvFN4llizRwl"
-class="graf-image" data-image-id="0*iKpEuvFN4llizRwl" data-width="1430"
-data-height="744" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*iKpEuvFN4llizRwl)
 
-- <span id="44d0">**Public Sector** ~ 62% wages, 38% benefits</span>
-- <span id="f02d">**Private Sector** ~ 71% wages, 29% benefits</span>
+- **Public Sector** ~ 62% wages, 38% benefits
+- **Private Sector** ~ 71% wages, 29% benefits
 
-<figure id="3047" class="graf graf--figure graf-after--li">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*Z2gDqf1UHZBBQpz6zwEgPg.png"
-class="graf-image" data-image-id="1*Z2gDqf1UHZBBQpz6zwEgPg.png"
-data-width="811" data-height="355" />
-<figcaption>Breakdown of Average Distribution of Pay: Public vs Private
-Sectors</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*Z2gDqf1UHZBBQpz6zwEgPg.png)
+
+*Breakdown of Average Distribution of Pay: Public vs Private Sectors*
 
 For many state and federal employees, retirement isn’t just a 401(k)
 match ~ it’s a defined pension. That can mean decades of guaranteed
@@ -350,24 +228,6 @@ In other words,
 
 **The percentages in the table might feel a bit abstract ~ until you see
 how they shape real careers.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="d27e" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Job Trade-Offs: Stability vs Upside in Public and Private Sectors
 
@@ -401,30 +261,12 @@ scales.
 
 > its also the promise of tomorrow.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1e28" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### The Bottom Line: Public vs Private Pay Isn’t One-Size-Fits-All
 
-- <span id="2e15">**Public-sector jobs offer more security and stronger
-  benefits.**</span>
-- <span id="dbc8">**Private-sector jobs offer higher upside with more
-  risk.**</span>
+- **Public-sector jobs offer more security and stronger
+  benefits.**
+- **Private-sector jobs offer higher upside with more
+  risk.**
 
 > The trade-off isn’t just economic ~ it’s structural.
 
@@ -438,78 +280,14 @@ The only real answer is:
 
 > What kind of life are you trying to build?
 
-</div>
-
-</div>
-
-</div>
-
-<div id="0533" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **Sources**
 
-- <span id="ffa5">U.S. Bureau of Labor Statistics, Occupational
+- U.S. Bureau of Labor Statistics, Occupational
   Employment and Wage Statistics (OEWS) →
-  <a href="https://www.bls.gov/oes/"
-  class="markup--anchor markup--li-anchor"
-  data-href="https://www.bls.gov/oes/" rel="noopener"
-  target="_blank">https://www.bls.gov/oes/</a></span>
-- <span id="46b4">BLS Employer Costs for Employee Compensation (ECEC) →
-  <a href="https://www.bls.gov/ncs/ect/"
-  class="markup--anchor markup--li-anchor"
-  data-href="https://www.bls.gov/ncs/ect/" rel="noopener"
-  target="_blank">https://www.bls.gov/ncs/ect/</a></span>
-- <span id="2ec5">Congressional Budget Office →
-  <a href="https://www.cbo.gov/" class="markup--anchor markup--li-anchor"
-  data-href="https://www.cbo.gov/" rel="noopener"
-  target="_blank">https://www.cbo.gov/</a></span>
-- <span id="2917">Economic Policy Institute →
-  <a href="https://www.epi.org/" class="markup--anchor markup--li-anchor"
-  data-href="https://www.epi.org/" rel="noopener"
-  target="_blank">https://www.epi.org/</a></span>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="38a4" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-#### **Did you like this essay?**
-
-Follow *The Balance Sheet* for more clear-eyed analysis of work, wages,
-and the real economy.\
-🗨” Join the conversation ~ **drop a comment** if there’s a job or sector
-you’d like us to add in a future comparison.\
-📬 Share it forward ~ if you know a teacher, nurse, or engineer who’d
-have thoughts on this, **send it** their way.\
-”” **Clap and subscribe** to help us keep bringing you data-driven
-stories that cut through the noise.
-
-</div>
-
-</div>
-
-</div>
-
+  [https://www.bls.gov/oes/](https://www.bls.gov/oes/)
+- BLS Employer Costs for Employee Compensation (ECEC) →
+  [https://www.bls.gov/ncs/ect/](https://www.bls.gov/ncs/ect/)
+- Congressional Budget Office →
+  [https://www.cbo.gov/](https://www.cbo.gov/)
+- Economic Policy Institute →
+  [https://www.epi.org/](https://www.epi.org/)

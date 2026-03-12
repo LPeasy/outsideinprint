@@ -16,10 +16,6 @@ Glasses that see what you see. Bots that sell what you want.
 
 Welcome to The New Meta Economy.
 
-The New Meta Economy
-
-Ads, Bots, and the End of Work
-
 ![](https://cdn-images-1.medium.com/max/800/0*7bXe0ch7DKf6XUUi)
 
 Photo by Dima Solomin on Unsplash
@@ -135,8 +131,4 @@ They’ll sell the economy back to itself — one personalized prompt at a t
 ![](https://cdn-images-1.medium.com/max/800/0*8A80GHAevkNzgLCt)
 
 Photo by Unseen Studio on Unsplash
-
-If you’re into stories about the real economy, not just the stock market version — follow The Balance Sheet for more.
-
-Essays weekly. Sarcasm optional. Analysis guaranteed.
 

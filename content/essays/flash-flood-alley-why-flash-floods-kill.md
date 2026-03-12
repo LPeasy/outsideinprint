@@ -8,39 +8,16 @@ subtitle: "Texas Hill Country and the Limits of Early Warning"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/flash-flood-alley-why-flash-floods-kill.pdf"
-featured: false
+featured: false
+
 collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
 ---
 
-<div id="51b8" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*trFdxNApCNZvOb-chJeCRQ.png)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### **Flash Flood Alley: Why Flash Floods Kill**
-
-#### **Texas Hill Country and the Limits of Early Warning**
-
-<figure id="c416" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*trFdxNApCNZvOb-chJeCRQ.png"
-class="graf-image" data-image-id="1*trFdxNApCNZvOb-chJeCRQ.png"
-data-width="1090" data-height="1037" data-is-featured="true" />
-<figcaption>Flash Flood Alley | Source: <a
-href="https://www.austinchronicle.com/news/2015-08-14/after-the-flood-before-the-flood/"
-class="markup--anchor markup--figure-anchor"
-data-href="https://www.austinchronicle.com/news/2015-08-14/after-the-flood-before-the-flood/"
-rel="noopener" target="_blank">Austin Chronicle</a></figcaption>
-</figure>
+*Flash Flood Alley | Source: [Austin Chronicle](https://www.austinchronicle.com/news/2015-08-14/after-the-flood-before-the-flood/)*
 
 #### Why Flash Floods in the Texas Hill Country Are So Dangerous
 
@@ -65,24 +42,6 @@ It runs off, **racing downhill** into dry creeks and narrow rivers.
 > That’s how a shallow stream can become a 20-foot wall of water in
 > under an hour.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a58f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ***“Flash Flood Alley”*** is a nickname, not an official term, but
 hydrologists and emergency managers use it all the same.
 
@@ -92,37 +51,28 @@ common, and the terrain makes those events far more dangerous.
 
 **This region has history:**
 
-- <span id="b296">**Blanco River, 2015:** Rose over 30 feet in 3 hours,
+- **Blanco River, 2015:** Rose over 30 feet in 3 hours,
   killing 13 people in Wimberley and sweeping homes from their
-  foundations.</span>
-- <span id="bcdc">**Llano River, 2018:** Crested at a record 39.9 feet,
-  snapping the 85-year-old FM 2900 bridge in half.</span>
-- <span id="b370">**Guadalupe River, 1987:** A church van was swept away
-  in Hunt, killing 10 teenagers.</span>
+  foundations.
+- **Llano River, 2018:** Crested at a record 39.9 feet,
+  snapping the 85-year-old FM 2900 bridge in half.
+- **Guadalupe River, 1987:** A church van was swept away
+  in Hunt, killing 10 teenagers.
 
 Here’s an example of **what happens when it floods in the Hill
 Country:**
 
-<figure id="3f7a" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*DPSJDDpBLdt-8uOshMSqRw.png"
-class="graf-image" data-image-id="1*DPSJDDpBLdt-8uOshMSqRw.png"
-data-width="531" data-height="718" />
-<figcaption>2015 Blanco RIver Flood | Source: San Antonio
-Express-News</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*DPSJDDpBLdt-8uOshMSqRw.png)
+
+*2015 Blanco RIver Flood | Source: San Antonio Express-News*
 
 > ***Devastation along the Blanco River after the 2015 flash
 > flood — homes swept away, vegetation stripped bare, and infrastructure
 > destroyed by a wall of water.***
 
-<figure id="ee53" class="graf graf--figure graf-after--blockquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*h_M-u8MV186k59hnSLZPdg.png"
-class="graf-image" data-image-id="1*h_M-u8MV186k59hnSLZPdg.png"
-data-width="1208" data-height="933" />
-<figcaption>Blanco River, 2018 | Source: USGS/NWS</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*h_M-u8MV186k59hnSLZPdg.png)
+
+*Blanco River, 2018 | Source: USGS/NWS*
 
 > ***Hydrograph of the Blanco River at Wimberley during Memorial Day
 > weekend 2015 — the river surged from ~5 feet to over 40 feet in just a
@@ -137,24 +87,6 @@ along the river’s edge.
 
 > “People think flash floods just mean lots of water. In the Hill
 > Country, the water *runs you down*.”
-
-</div>
-
-</div>
-
-</div>
-
-<div id="55c5" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### Quick Aside ~ Continue Reading Below
 
@@ -173,39 +105,12 @@ human lives at risk ~
 > and how we can do better.
 
 **If you missed the earlier essays, catch up here:**\
-” <a
-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-target="_blank">What Happened at Camp Mystic?</a>\
-” <a
-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-target="_blank">The Water’s Rising: What the Data Really Says About
-Extreme Weather</a>
+” [What Happened at Camp Mystic?](https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27)\
+” [The Water’s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
 
 > **Disclaimer:** The views expressed here are my own and do not
 > represent the official policy or position of the U.S. Army Corps of
 > Engineers, the Department of Defense, or the United States Government.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="bbaf" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### How Flash Floods Work ~ and Why They’re More Deadly Than You Think
 
@@ -229,33 +134,9 @@ they don’t need days of rain to cause damage.
 
 > Take a look at this graph:
 
-<figure id="dd2c"
-class="graf graf--figure graf-after--pullquote graf--trailing">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*YlauLqxAOEdZUgqohvfj7w.png"
-class="graf-image" data-image-id="1*YlauLqxAOEdZUgqohvfj7w.png"
-data-width="1024" data-height="1024" />
-<figcaption>Flood Timing Comparison | Made by Author with
-ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*YlauLqxAOEdZUgqohvfj7w.png)
 
-</div>
-
-</div>
-
-</div>
-
-<div id="f0b7" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+*Flood Timing Comparison | Made by Author with ChatGPT*
 
 #### Why Nighttime Flash Floods Are Especially Dangerous
 
@@ -268,24 +149,6 @@ ChatGPT</figcaption>
 **Evacuation becomes a race against the clock ~ *and against the
 water.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e90f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### How the Flash Flood Warning System Works (and Where It Breaks Down)
 
 #### **Theory and Practice**
@@ -295,13 +158,9 @@ a straightforward path from the NWS to the public.
 
 **Here’s a flowchart:**
 
-<figure id="362f" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*vGkHc90KK6P_mMGeHS-ubg.png"
-class="graf-image" data-image-id="1*vGkHc90KK6P_mMGeHS-ubg.png"
-data-width="1536" data-height="1024" />
-<figcaption>NWS Alert Process | Made by Author with ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*vGkHc90KK6P_mMGeHS-ubg.png)
+
+*NWS Alert Process | Made by Author with ChatGPT*
 
 > The flash flood alert system has multiple layers ~
 
@@ -312,36 +171,33 @@ data-width="1536" data-height="1024" />
 
 **These alerts follow a standard progression:**
 
-1.  <span id="6427">**Flash Flood Watch**: Conditions are favorable for
-    a flash flood</span>
-2.  <span id="e17a">**Flash Flood Warning**: A flash flood is imminent
-    or occurring</span>
-3.  <span id="4231">**Flash Flood Emergency**: A rare, highest-tier
+1.  **Flash Flood Watch**: Conditions are favorable for
+    a flash flood
+2.  **Flash Flood Warning**: A flash flood is imminent
+    or occurring
+3.  **Flash Flood Emergency**: A rare, highest-tier
     alert for catastrophic flooding and life-threatening
-    conditions</span>
+    conditions
 
 > *Once these alerts are issued, i****t’s up to local officials to
 > trigger mass notification systems****, like*
-> <a href="https://codered.crisis24.com"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://codered.crisis24.com" rel="noopener"
-> target="_blank"><em>CodeRed</em></a> *or Wireless Emergency Alerts
+> [class="markup--anchor markup--blockquote-anchor" > data-href="https://codered.crisis24.com" rel="noopener" > target="_blank">*CodeRed*](https://codered.crisis24.com) *or Wireless Emergency Alerts
 > (WEAs).*
 
 > **Delays cost lives when every minute counts.**
 
 #### **Potential Failure Points**
 
-- <span id="77a2">**Some systems require manual approval** from county
-  emergency managers</span>
-- <span id="9caa">**Not all residents are enrolled** in opt-in systems
-  like CodeRED</span>
-- <span id="2191">**Cell coverage and power outages** can delay or block
-  delivery</span>
-- <span id="3dc0">**Lack of communication** between the NWS and the
-  local community</span>
-- <span id="0426">**Individuals with the authority** to make an
-  evacuation call may be asleep or otherwise incapacitated</span>
+- **Some systems require manual approval** from county
+  emergency managers
+- **Not all residents are enrolled** in opt-in systems
+  like CodeRED
+- **Cell coverage and power outages** can delay or block
+  delivery
+- **Lack of communication** between the NWS and the
+  local community
+- **Individuals with the authority** to make an
+  evacuation call may be asleep or otherwise incapacitated
 
 #### **Potential Solutions**
 
@@ -350,41 +206,23 @@ with **better systems, faster protocols, and smarter communication.**
 
 > **Here’s where experts say progress is possible:**
 
-1.  <span id="cb07">**Automate local alert triggers** when NWS issues a
-    Flash Flood Emergency</span>
-2.  <span id="149c">**Increase gauge density** in rural areas prone to
-    flash floods</span>
-3.  <span id="0579">**Require passive opt-in for CodeRED-style alerts**
+1.  **Automate local alert triggers** when NWS issues a
+    Flash Flood Emergency
+2.  **Increase gauge density** in rural areas prone to
+    flash floods
+3.  **Require passive opt-in for CodeRED-style alerts**
     during camp registration or school enrollment (You could even
     geofence areas and send alerts to everyone within the designated
-    flood risk zone)</span>
-4.  <span id="1fff">**Design elevation-based evacuation plans** at camps
-    and rehearse them like fire drills</span>
-5.  <span id="4a4f">**Invest in offline alert backups**, such as
-    **sirens or radio**, where cell service is unreliable</span>
+    flood risk zone)
+4.  **Design elevation-based evacuation plans** at camps
+    and rehearse them like fire drills
+5.  **Invest in offline alert backups**, such as
+    **sirens or radio**, where cell service is unreliable
 
 > *There’s no silver bullet.*
 
 > *But these changes would make the system faster, more reliable, and
 > more likely to save lives ~ especially in the middle of the night.*
-
-</div>
-
-</div>
-
-</div>
-
-<div id="4c58" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Camp Mystic Flood Timeline: How the Alert System Failed
 
@@ -396,34 +234,16 @@ with **better systems, faster protocols, and smarter communication.**
 Overnight and leading into the morning of July 4th the official warning
 timeline looked something like this:
 
-- <span id="8d24">**1:14 a.m.**: **First Flash Flood Warning** issued by
-  NWS</span>
-- <span id="a08a">**4:03 a.m.**: Upgraded to **Flash Flood
-  Emergency**</span>
-- <span id="e9bb">**4:22 a.m.**: A local firefighter requested CodeRED
+- **1:14 a.m.**: **First Flash Flood Warning** issued by
+  NWS
+- **4:03 a.m.**: Upgraded to **Flash Flood
+  Emergency**
+- **4:22 a.m.**: A local firefighter requested CodeRED
   alert activation for Hunt, TX, but it required supervisor
-  approval</span>
-- <span id="aeaf">**~4:45 a.m.:** Camp Mystic began evacuating</span>
-- <span id="c0f4">**5:15 a.m.**: The Guadalupe River surged through the
-  camp</span>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="927d" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+  approval
+- **~4:45 a.m.:** Camp Mystic began evacuating
+- **5:15 a.m.**: The Guadalupe River surged through the
+  camp
 
 **Camp Mystic lost power** sometime between **4:30 and 5:00 a.m.**
 
@@ -449,24 +269,6 @@ fast enough.
 
 > A 15-minute delay can mean the difference between life and death.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="3581" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Why Camp Mystic Couldn’t Evacuate in Time
 
 **It’s easy to say people should’ve evacuated.**
@@ -488,20 +290,11 @@ this case, the flood was much worse.**
 
 ### **Flood Risk at Camp Mystic (FEMA FIRM Panel)**
 
-<figure id="6edf" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*zwZ8eZGrTQudlDRYjW3Z1A.png"
-class="graf-image" data-image-id="1*zwZ8eZGrTQudlDRYjW3Z1A.png"
-data-width="1404" data-height="676" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*zwZ8eZGrTQudlDRYjW3Z1A.png)
 
-<figure id="294b" class="graf graf--figure graf-after--figure">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*cUmDU7QZ8Y6coDym23T6yQ.png"
-class="graf-image" data-image-id="1*cUmDU7QZ8Y6coDym23T6yQ.png"
-data-width="1404" data-height="369" />
-<figcaption>Fema FIRM Panel | Source: FEMA</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*cUmDU7QZ8Y6coDym23T6yQ.png)
+
+*Fema FIRM Panel | Source: FEMA*
 
 > *Several cabins and roads sit within Zone AE — a high-risk flood zone
 > with a known base flood elevation. Zone AE indicates a 1-in-100 chance
@@ -526,49 +319,27 @@ It’s not that people didn’t try to evacuate…
 
 > nearly impossible.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="3fe7" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### How Multiple System Failures Turned a Flash Flood Into a Tragedy
 
 **Flash floods test emergency response systems at every level.**
 
 > On July 4th, the system failed:
 
-- <span id="66e8">**Alert systems were too slow**</span>
-- <span id="2c51">**Rain gauges weren’t functioning**</span>
-- <span id="ed39">**Emergency communications were fragmented**</span>
-- <span id="b6cb">**Site planning placed kids in harm’s way**</span>
-- <span id="d0ed">**The camp was totally unprepared for an emergency**
+- **Alert systems were too slow**
+- **Rain gauges weren’t functioning**
+- **Emergency communications were fragmented**
+- **Site planning placed kids in harm’s way**
+- **The camp was totally unprepared for an emergency**
   (Despite having their emergency plan approved by the county on July
-  2nd)</span>
+  2nd)
 
 > ***This diagram illustrates how problems at each tier ~* from hazard
 > awareness to on-the-ground response *~ compounded into a deadly
 > outcome.***
 
-<figure id="e066" class="graf graf--figure graf-after--blockquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*76E5vKRlKowWKRwHMwugFA.png"
-class="graf-image" data-image-id="1*76E5vKRlKowWKRwHMwugFA.png"
-data-width="1024" data-height="1536" />
-<figcaption>Made by User with ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*76E5vKRlKowWKRwHMwugFA.png)
+
+*Made by User with ChatGPT*
 
 > ***It wasn’t just one agency or one decision.***
 
@@ -577,24 +348,6 @@ data-width="1024" data-height="1536" />
 ***~ about weather, flood maps, warning time, and planning margins ~***
 
 > **catching up all at once.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="49cd" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Flash Flood Safety Lessons for Camps, Officials, and Hill Country Residents
 
@@ -609,36 +362,18 @@ It’s about **how fast** it hits, how **the terrain** moves it, **and**
 > ***If you run a camp, park, or group facility in a flood-prone
 > area:***
 
-- <span id="e812">**Know your flood zone.** Make sure other people
-  know.</span>
-- <span id="2fe0">**Plan for nighttime floods** ~ including evacuation
-  routes in total darkness.</span>
-- <span id="71bf">**Rehearse flood evacuation drills** like you would
-  fire drills.</span>
-- <span id="ad3e">Push for **better alerts, faster protocols, and backup
-  plans** that don’t require power or cell service.</span>
+- **Know your flood zone.** Make sure other people
+  know.
+- **Plan for nighttime floods** ~ including evacuation
+  routes in total darkness.
+- **Rehearse flood evacuation drills** like you would
+  fire drills.
+- Push for **better alerts, faster protocols, and backup
+  plans** that don’t require power or cell service.
 
 > Because next time, the warnings might come late ~
 
 > or not at all.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="ee40" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### **How Planning Decisions Put Camp Mystic in Harm’s Way**
 
@@ -647,12 +382,12 @@ It’s about **how fast** it hits, how **the terrain** moves it, **and**
 In the next article, I’ll zoom in on the site-level decisions that
 shaped this tragedy:
 
-- <span id="15c5">How **cabins** ended up **in a mapped
-  floodway**</span>
-- <span id="2bc2">A full analysis of the **communication breakdown
-  between NWS and Camp Mystic**</span>
-- <span id="c190">The **responsibilities of** (and relationship between)
-  **the federal and local governments**</span>
+- How **cabins** ended up **in a mapped
+  floodway**
+- A full analysis of the **communication breakdown
+  between NWS and Camp Mystic**
+- The **responsibilities of** (and relationship between)
+  **the federal and local governments**
 
 **This wasn’t the first deadly Hill Country flood.**
 
@@ -661,24 +396,6 @@ shaped this tragedy:
 > **Because** “in the hill country,
 
 > the water runs you down.”
-
-</div>
-
-</div>
-
-</div>
-
-<div id="e676" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### *Frequently Asked Questions* ***About the July 4 Texas Flood and Flash Flood All*ey**
 
@@ -751,76 +468,8 @@ structures, especially those with children.
 feet** near Camp Mystic. This type of sudden rise is typical in the Hill
 Country and leaves little time for evacuation.
 
-</div>
 
-</div>
+### Related Reading
 
-</div>
-
-<div id="3476" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Want more essays like this?
-
-> **Follow The Balance Sheet** for more explainers on U.S. public
-> policy, risk analysis, and the economics of resilience.
-
-**Clap** if you learned something new.
-
-**Share** with a friend.
-
-**Comment** if you’ve lived through something like this.
-
-> Thanks for reading!
-
-<div id="1c80" class="graf graf--mixtapeEmbed graf-after--pullquote">
-
-<a
-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-class="markup--anchor markup--mixtapeEmbed-anchor"
-data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-title="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"><strong>What
-Happened at Camp Mystic?</strong><br />
-<em>A Primer on the July 4, 2025 Texas Flood Tragedy</em>medium.com</a><a
-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
-class="js-mixtapeImage mixtapeImage u-ignoreBlock"
-data-media-id="8a90d49a1287d6a6cc9d6a1b0629c80e"
-data-thumbnail-img-id="1*UbIf-QBbcbAel-xIPO0WIA.png"
-style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*UbIf-QBbcbAel-xIPO0WIA.png);"></a>
-
-</div>
-
-<div id="3555"
-class="graf graf--mixtapeEmbed graf-after--mixtapeEmbed graf--trailing">
-
-<a
-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-class="markup--anchor markup--mixtapeEmbed-anchor"
-data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-title="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"><strong>The
-Water’s Rising: What the Data Really Says About Extreme
-Weather</strong><br />
-<em>“The weather’s never been like this!”</em>medium.com</a><a
-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-class="js-mixtapeImage mixtapeImage u-ignoreBlock"
-data-media-id="a2cbc9c74b9b4bd9c344c25b1dd116a2"
-data-thumbnail-img-id="1*t7a79R6gScPI4huiLajBJw.png"
-style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*t7a79R6gScPI4huiLajBJw.png);"></a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+- [What Happened at Camp Mystic?](https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27)
+- [The Water?s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)

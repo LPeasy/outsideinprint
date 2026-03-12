@@ -8,23 +8,12 @@ subtitle: "What we know about the crash and what it reveals about risk, diplomac
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.pdf"
-featured: false
+featured: false
+
 collections:
   - reported-case-studies
 medium_source_url: "https://medium.com/@lawtonperret/why-the-mexican-navy-ship-cuauht%C3%A9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e"
 ---
-
-<div id="34ff" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ***Not all collisions leave wreckage in the water — some leave questions
 in their wake.***
@@ -33,20 +22,14 @@ in their wake.***
 
 #### A goodwill tour turned deadly. Here’s what we know about the crash, the symbolism of the ship, and what it reveals about risk, diplomacy, and responsibility.
 
-<figure id="8cf9" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/d4ac2578972d0ab429bdc550e9efe6207616d5d9f20255765c44440108966e92.jpeg"
-class="graf-image" data-image-id="1*gl0bsDmn1rZXWCAvp-zdwQ@2x.jpeg"
-data-width="640" data-height="480" />
-</figure>
+![](/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/d4ac2578972d0ab429bdc550e9efe6207616d5d9f20255765c44440108966e92.jpeg)
 
 > Source: The NYC Walking Show
 
 #### The Cuauhtémoc Crash: What Happened on the East River
 
 <figure id="12b8" class="graf graf--figure graf--iframe graf-after--h4">
-<p>[Embedded media: <a
-href="https://www.youtube.com/embed/d34Qh69IuuY?feature=oembed">https://www.youtube.com/embed/d34Qh69IuuY?feature=oembed</a>]</p>
+[Embedded media: [https://www.youtube.com/embed/d34Qh69IuuY?feature=oembed](https://www.youtube.com/embed/d34Qh69IuuY?feature=oembed)]
 </figure>
 
 **On a quiet Saturday evening**, a majestic, triple-masted tall ship
@@ -67,32 +50,9 @@ suspended in harnesses, waiting to be pulled down.
 > The ship lost power and drifted in reverse into the bridge. The
 > Cuauhtémoc’s masts shattered; the bridge suffered only minor damage.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="ce9d" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### A Mexican Navy Training Ship With Global Symbolism
 
-<figure id="1870" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/e45f00bdc3fb225293978dbadc239553d5c4c849f4c0e4a3bbee280ff22a28b8.jpeg"
-class="graf-image" data-image-id="1*SVty5MYAxAl5k-zsoqvMpw@2x.jpeg"
-data-width="1284" data-height="833" />
-</figure>
+![](/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/e45f00bdc3fb225293978dbadc239553d5c4c849f4c0e4a3bbee280ff22a28b8.jpeg)
 
 > Source: Sail Training International
 
@@ -111,11 +71,7 @@ culture, and project goodwill.
 **Cuauhtémoc** is still celebrated in Mexico as a national hero — **a
 symbol of resistance against conquest.**
 
-The vessel that bears his name was built in 1982 and <a
-href="https://en.m.wikipedia.org/wiki/German_training_ship_Gorch_Fock_%281958%29"
-class="markup--anchor markup--p-anchor"
-data-href="https://en.m.wikipedia.org/wiki/German_training_ship_Gorch_Fock_(1958)"
-rel="noopener" target="_blank">modeled after Germany’s Gorch Fock I</a>,
+The vessel that bears his name was built in 1982 and [modeled after Germany’s Gorch Fock I](https://en.m.wikipedia.org/wiki/German_training_ship_Gorch_Fock_(1958)),
 a tall ship designed to impress.
 
 With its towering masts, 2,377 square meters of sail, and home port in
@@ -124,12 +80,7 @@ Veracruz, the Cuauhtémoc makes a spectacle of every arrival.
 > Cadets stand on the yards as it enters port, transforming the ship
 > itself into a stage for naval pageantry.
 
-<figure id="37e5" class="graf graf--figure graf-after--pullquote">
-<img
-src="/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/c7579db64606868b7f023c05258bbe607619ba00bdc0adca3688b514b2f75b87.jpeg"
-class="graf-image" data-image-id="1*VNnlZ7HMyTjyd-lRX0rMDw@2x.jpeg"
-data-width="848" data-height="477" />
-</figure>
+![](/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/c7579db64606868b7f023c05258bbe607619ba00bdc0adca3688b514b2f75b87.jpeg)
 
 > Source: Mexican Navy
 
@@ -160,40 +111,11 @@ tide.
 **Not the planners** who approved the ship’s route through the East
 Coast’s most trafficked waterway.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1b1b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Risk Management vs. Ceremony: When Goodwill Missions Go Wrong
 
-<figure id="41de" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/89b07c16089974d0c52a829afe0d621b2b904bf5e881c2136b6cc2f78fddba9f.jpeg"
-class="graf-image" data-image-id="1*7SItg95678FVSw6rPUsClg@2x.jpeg"
-data-width="3240" data-height="2430" />
-<figcaption>Photo by <a href="http://inkypixelsdesign.com"
-class="markup--anchor markup--figure-anchor"
-data-href="http://inkypixelsdesign.com" rel="noopener"
-target="_blank">Kelly Sikkema</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/89b07c16089974d0c52a829afe0d621b2b904bf5e881c2136b6cc2f78fddba9f.jpeg)
+
+*Photo by [Kelly Sikkema](http://inkypixelsdesign.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 > This wasn’t just a mechanical failure.
 
@@ -212,37 +134,11 @@ culture, and international diplomacy.
 
 > But goodwill doesn’t bend steel.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="c6ad" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Who’s Responsible for the Cuauhtémoc Accident?
 
-<figure id="bc45" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/4471e4322a86ffd3377d90bec6a0b6b7281648441fcbc561212ef6006312fbd9.jpeg"
-class="graf-image" data-image-id="1*rCJrjCeV_RW0K4PaEvl32w@2x.jpeg"
-data-width="3240" data-height="2169" />
-<figcaption>Photo by Nik on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/4471e4322a86ffd3377d90bec6a0b6b7281648441fcbc561212ef6006312fbd9.jpeg)
+
+*Photo by Nik on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **The investigation is ongoing,** and early reports point to a power
 loss followed by human error.
@@ -258,41 +154,11 @@ The U.S. Coast Guard and Mexican Navy are reviewing the incident — but
 **it’s unclear how these decisions were allowed to stack up so
 precariously.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1772" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### What the Crash of the Cuauhtémoc Tells Us About Public Sector Risk
 
-<figure id="accf" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/dcf2abe10316787a0493d665956f9a43a82d5cdb295811b684aaa4bd374be81a.jpeg"
-class="graf-image" data-image-id="1*e0BfmnTzjkPykRHHyycc9Q@2x.jpeg"
-data-width="3240" data-height="2556" />
-<figcaption>Photo by <a
-href="https://www.facebook.com/K.MitchHodgePhotos/"
-class="markup--anchor markup--figure-anchor"
-data-href="https://www.facebook.com/K.MitchHodgePhotos/" rel="noopener"
-target="_blank">K. Mitch Hodge</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/dcf2abe10316787a0493d665956f9a43a82d5cdb295811b684aaa4bd374be81a.jpeg)
+
+*Photo by [K. Mitch Hodge](https://www.facebook.com/K.MitchHodgePhotos/) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 > This wasn’t bad luck. It was a systems failure — in operations,
 > planning, and coordination.
@@ -307,32 +173,9 @@ The damage isn’t limited to ships or schedules — it extends to
 history shows — from peacetime naval reviews to national parades gone
 awry — **ceremonial risk is real, and often underestimated.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="d143" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### After the Brooklyn Bridge Crash: What Comes Next?
 
-<figure id="f9df" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/2b89ebd0933c0b1187de7e13ce3ecc1da60fb30487c9160bb7d4d36d2e1122ca.jpeg"
-class="graf-image" data-image-id="1*VzqHlGVa465-p8PBUDaHJg@2x.jpeg"
-data-width="750" data-height="909" />
-</figure>
+![](/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/2b89ebd0933c0b1187de7e13ce3ecc1da60fb30487c9160bb7d4d36d2e1122ca.jpeg)
 
 > Cuauhtémoc, The Last Aztec Emperor \| Source: Painting by Jesus de la
 > Helguera
@@ -354,42 +197,4 @@ But the lesson stands:
 just choreography.***
 
 > What good is a goodwill tour that forgets to steer?
-
-</div>
-
-</div>
-
-</div>
-
-<div id="2828" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-#### Author’s Note:
-
-If you found this explainer helpful, **I’d love to hear your thoughts in
-the comments.**
-
-> Do you think incidents like this change how governments plan
-> ceremonial missions — or do they just fade into memory?
-
-<a href="https://medium.com/the-balanced-sheet"
-class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet" target="_blank">Follow
-The Balance Sheet</a> for more essays that break down the intersection
-of economics, government, and real life — without the fluff.
-
-</div>
-
-</div>
-
-</div>
 

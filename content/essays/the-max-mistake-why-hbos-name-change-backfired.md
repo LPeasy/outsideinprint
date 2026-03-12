@@ -12,33 +12,9 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"
 ---
 
-<div id="f019" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*lBhW7HvXG9Ri-0NKm7AuRg@2x.jpeg)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-## The Max Mistake: Why HBO’s Name Change Backfired
-
-#### A corporate identity crisis in real time, brought to you by the people who forgot what “Home Box Office” really means
-
-<figure id="eb34" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*lBhW7HvXG9Ri-0NKm7AuRg@2x.jpeg"
-class="graf-image" data-image-id="1*lBhW7HvXG9Ri-0NKm7AuRg@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by Oleksandra Bardash on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+*Photo by Oleksandra Bardash on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 ***If you’re confused, you’re not alone.***
 
@@ -61,32 +37,9 @@ identity shift, and a sheepish backpedal.
 And in doing so, they reminded us **why *HBO* was so great in the first
 place.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="fe29" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### From Prestige to Platform: A Quick Timeline
 
-<figure id="52c0" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*a4ecbxx_FOBr-SHfbM9xeA@2x.jpeg"
-class="graf-image" data-image-id="1*a4ecbxx_FOBr-SHfbM9xeA@2x.jpeg"
-data-width="1024" data-height="414" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*a4ecbxx_FOBr-SHfbM9xeA@2x.jpeg)
 
 > HBO Logo Timeline \| Source: Me lol
 
@@ -115,40 +68,11 @@ thing as just “***Max***.”
 
 > It didn’t go well.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e2d5" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### What Were They Thinking?
 
-<figure id="d56f" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*3PA53XO0E1qIhz0nPZYsvQ@2x.jpeg"
-class="graf-image" data-image-id="1*3PA53XO0E1qIhz0nPZYsvQ@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by <a href="http://timmossholder.com"
-class="markup--anchor markup--figure-anchor"
-data-href="http://timmossholder.com" rel="noopener" target="_blank">Tim
-Mossholder</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*3PA53XO0E1qIhz0nPZYsvQ@2x.jpeg)
+
+*Photo by [Tim Mossholder](http://timmossholder.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **The logic was this:**
 
@@ -186,32 +110,9 @@ quality entertainment in your living room***.
 “***Max***,” on the other hand, sounds like a protein shake or what your
 college roommate called his pet dog.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5b34" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### What HBO Really Means
 
-<figure id="4f15" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*jTSQm1zIbTyd3uIZ9oZJFw@2x.jpeg"
-class="graf-image" data-image-id="1*jTSQm1zIbTyd3uIZ9oZJFw@2x.jpeg"
-data-width="1536" data-height="1024" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*jTSQm1zIbTyd3uIZ9oZJFw@2x.jpeg)
 
 > HBO Classic Titles \| Source: User with ChatGPT
 
@@ -239,37 +140,11 @@ It was **a cultural institution**.
 
 > Dropping the name didn’t simplify things ~ it severed their identity.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="dc38" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### What Went Wrong
 
-<figure id="ab33" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*Ay78oRHGQ37USrL-7W-WAA@2x.jpeg"
-class="graf-image" data-image-id="1*Ay78oRHGQ37USrL-7W-WAA@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by Sarah Kilian on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*Ay78oRHGQ37USrL-7W-WAA@2x.jpeg)
+
+*Photo by Sarah Kilian on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 “**Max**” was too generic.
 
@@ -300,32 +175,9 @@ As The Verge put it:
 
 ***Ouch.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="832c" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### The Return of HBO Max
 
-<figure id="c9b3" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*uvk81WTVIUNzZHVEb30zNQ@2x.jpeg"
-class="graf-image" data-image-id="1*uvk81WTVIUNzZHVEb30zNQ@2x.jpeg"
-data-width="640" data-height="358" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*uvk81WTVIUNzZHVEb30zNQ@2x.jpeg)
 
 > Tommy Boy Classic Quote \| Source: Movieclips.com
 
@@ -354,40 +206,11 @@ memes, played the self-deprecating card, and even dropped the viral
 
 > It was a rare moment of corporate humility. And oddly… it landed.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="2b81" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### What This Tells Us About Streaming Strategy
 
-<figure id="e3ff" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*UA84F64CK6LdnMDD3pqAuw@2x.jpeg"
-class="graf-image" data-image-id="1*UA84F64CK6LdnMDD3pqAuw@2x.jpeg"
-data-width="3240" data-height="2157" />
-<figcaption>Photo by <a href="https://abgeknipst.de"
-class="markup--anchor markup--figure-anchor"
-data-href="https://abgeknipst.de" rel="noopener" target="_blank">Glenn
-Carstens-Peters</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*UA84F64CK6LdnMDD3pqAuw@2x.jpeg)
+
+*Photo by [Glenn Carstens-Peters](https://abgeknipst.de) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **This wasn’t just a name swap.**
 
@@ -405,47 +228,3 @@ specificity is power.
 
 > Trying to turn a boutique into a big-box store doesn’t make loyal
 > customers stick around ~ it just makes the boutique harder to find.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="5259" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-#### Clap Back (In the Comments)
-
-> What do you think?
-
-**Did Warner Bros. Discovery blow it with Max?**
-
-**Could Max have worked if they’d doubled down on messaging?**
-
-***Or was ditching HBO always a losing play?***
-
-> 👇 Sound off in the comments.
-
-> 💬 Share your thoughts.
-
-> ” Clap if you’ve ever loved an HBO show.
-
-> 📌 Follow The Balance Sheet for more pop-business essays like this
-> one.
-
-</div>
-
-</div>
-
-</div>
-

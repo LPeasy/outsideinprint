@@ -11,6 +11,7 @@ pdf: "/pdfs/biter-the-slang-word-that-hits.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/biter-the-slang-word-that-hits-c543669e0189"
 ---
+
 ![](https://cdn-images-1.medium.com/max/800/0*B28O7hH4PKuEfoYy)
 
 Photo by Markus Spiske on Unsplash
@@ -96,7 +97,4 @@ Respect the community.
 Biters aren’t part of the culture.They’re feeding off it.If you made it this far, you’re not a biter.
 
 You’re someone who actually cares about where creativity comes from — and where it’s going.
-
-Follow The Balance Sheet for more stories they won’t teach you in school.
-
 

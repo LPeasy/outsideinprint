@@ -12,33 +12,9 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible-07e2ee19813d"
 ---
 
-<div id="61c7" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*Z-dpG1Zilp-XUSJgQdYWKQ.jpeg)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Benjamin Franklin: How America’s Funniest Founder Made Greatness Feel Possible
-
-#### A scrappy biography of the runaway apprentice who became a statesman, scientist, and master of self-improvement.
-
-<figure id="faf8" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*Z-dpG1Zilp-XUSJgQdYWKQ.jpeg"
-class="graf-image" data-image-id="1*Z-dpG1Zilp-XUSJgQdYWKQ.jpeg"
-data-width="813" data-height="1024" />
-<figcaption><a
-href="https://picryl.com/media/benjamin-franklin-after-jean-baptiste-greuze-2074a4"
-class="markup--anchor markup--figure-anchor"
-data-href="https://picryl.com/media/benjamin-franklin-after-jean-baptiste-greuze-2074a4"
-rel="noopener" target="_blank">Source: Picryl</a></figcaption>
-</figure>
+*[Source: Picryl](https://picryl.com/media/benjamin-franklin-after-jean-baptiste-greuze-2074a4)*
 
 #### **Editor’s Note**
 
@@ -56,37 +32,11 @@ Historical images featured throughout are in the public domain.
 > with the same mix of wit, curiosity, and practicality that he brought
 > to everything he touched.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="3986" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### From Ben to Benjamin
 
-<figure id="d80a" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*Y0uFsH585mD8uOULMYkfLQ.png"
-class="graf-image" data-image-id="1*Y0uFsH585mD8uOULMYkfLQ.png"
-data-width="2574" data-height="1361" />
-<figcaption><a
-href="https://www.historyoasis.com/post/4-facts-about-young-benjamin-franklin-that-you-didnt-know"
-class="markup--anchor markup--figure-anchor"
-data-href="https://www.historyoasis.com/post/4-facts-about-young-benjamin-franklin-that-you-didnt-know"
-rel="noopener" target="_blank">Source: History Oasis</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*Y0uFsH585mD8uOULMYkfLQ.png)
+
+*[Source: History Oasis](https://www.historyoasis.com/post/4-facts-about-young-benjamin-franklin-that-you-didnt-know)*
 
 **Before** he was ***Benjamin Franklin™*** ~ the founding father,
 lightning wrangler, and sage of thrift ~
@@ -124,37 +74,11 @@ self-aware.**
 
 > He understood that **virtue sells better wrapped in a joke.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="83bf" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Founding Father, Reluctant Hero
 
-<figure id="3f3c" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*D5fiOM6zMqfnFJrb8YBp_w.jpeg"
-class="graf-image" data-image-id="1*D5fiOM6zMqfnFJrb8YBp_w.jpeg"
-data-width="2403" data-height="2971" />
-<figcaption><a
-href="https://commons.wikimedia.org/wiki/File:BenFranklinDuplessis.jpg"
-class="markup--anchor markup--figure-anchor"
-data-href="https://commons.wikimedia.org/wiki/File:BenFranklinDuplessis.jpg"
-rel="noopener" target="_blank">Source: Public Domain</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*D5fiOM6zMqfnFJrb8YBp_w.jpeg)
+
+*[Source: Public Domain](https://commons.wikimedia.org/wiki/File:BenFranklinDuplessis.jpg)*
 
 > Unlike other founding fathers, **Franklin didn’t posture.**
 
@@ -182,44 +106,18 @@ As ambassador to France, he charmed the salons of Paris in a raccoon-fur
 hat, winning support for the Revolution with a raised glass and a
 twinkle in his eye.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="57c7" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### A Life of Experiments
 
-<figure id="434f" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*V1KqtPMwHJ6DP7w-LbzE6g.jpeg"
-class="graf-image" data-image-id="1*V1KqtPMwHJ6DP7w-LbzE6g.jpeg"
-data-width="382" data-height="600" />
-<figcaption><a
-href="https://picryl.com/media/dr-d-jaynes-family-medicine-3092770187-dd7fac"
-class="markup--anchor markup--figure-anchor"
-data-href="https://picryl.com/media/dr-d-jaynes-family-medicine-3092770187-dd7fac"
-rel="noopener" target="_blank">Source: Picryl</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*V1KqtPMwHJ6DP7w-LbzE6g.jpeg)
+
+*[Source: Picryl](https://picryl.com/media/dr-d-jaynes-family-medicine-3092770187-dd7fac)*
 
 > Franklin made life look easy.
 
 Behind his wit and charm were two things:
 
-1.  <span id="2e04">A really good attitude</span>
-2.  <span id="0b01">Relentless self-improvement</span>
+1.  A really good attitude
+2.  Relentless self-improvement
 
 Franklin kept a journal tracking his progress toward 13 personal virtues
 ~ from *Temperance* and *Industry* to *Humility* (***“Imitate Jesus and
@@ -229,37 +127,11 @@ Socrates,”*** he wrote, with signature modesty).
 
 > **That wasn’t the point.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="fcdd" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **Franklin’s virtue table that he used to track his moral performance:**
 
-<figure id="44fb" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*5cdRR504GIiCo8Nnvw7GYQ.png"
-class="graf-image" data-image-id="1*5cdRR504GIiCo8Nnvw7GYQ.png"
-data-width="787" data-height="909" />
-<figcaption><a
-href="https://wp.unil.ch/moral-accounting/en/art-of-virtue-benjamin-franklin/"
-class="markup--anchor markup--figure-anchor"
-data-href="https://wp.unil.ch/moral-accounting/en/art-of-virtue-benjamin-franklin/"
-rel="noopener" target="_blank">Source: Public Domain</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*5cdRR504GIiCo8Nnvw7GYQ.png)
+
+*[Source: Public Domain](https://wp.unil.ch/moral-accounting/en/art-of-virtue-benjamin-franklin/)*
 
 > **“I wished to live without committing any fault at any time, but I
 > soon found I had undertaken a task of more difficulty than I had
@@ -273,37 +145,11 @@ tinkering.
 > ***He made self-discipline seem playful, progress seem possible, and
 > morality seem fun.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e4b1" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Legacy & Last Days
 
-<figure id="fe14" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*-grAuUIH1kG3NCD1wFQKbg.jpeg"
-class="graf-image" data-image-id="1*-grAuUIH1kG3NCD1wFQKbg.jpeg"
-data-width="1024" data-height="1378" data-is-featured="true" />
-<figcaption><a
-href="https://commons.wikimedia.org/wiki/File:Franklin-Benjamin-LOC.jpg"
-class="markup--anchor markup--figure-anchor"
-data-href="https://commons.wikimedia.org/wiki/File:Franklin-Benjamin-LOC.jpg"
-rel="noopener" target="_blank">Source: Public Domain</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*-grAuUIH1kG3NCD1wFQKbg.jpeg)
+
+*[Source: Public Domain](https://commons.wikimedia.org/wiki/File:Franklin-Benjamin-LOC.jpg)*
 
 > *Franklin spent his final years reading voraciously, toying with
 > ideas, writing letters, and fighting for civil liberties.*
@@ -331,24 +177,6 @@ His belief in accessible education, public infrastructure, and civic
 responsibility formed the bones of modern American public service and
 economic thought.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5ccf" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **Franklin wrote his own epitaph:**
 
 > “The Body of B. Franklin, Printer;*\*
@@ -364,80 +192,32 @@ economic thought.
 **When he died, crowds lined the streets of Philadelphia ~ not because
 he was a great man, but because he made greatness feel achievable.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6825" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Key Projects & Works
 
-<figure id="47a2" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*AB5B5MuhIf6qQq_m332pGA.jpeg"
-class="graf-image" data-image-id="1*AB5B5MuhIf6qQq_m332pGA.jpeg"
-data-width="500" data-height="257" />
-<figcaption><a
-href="http://www.benjamin-franklin-history.org/poor-richards-almanac/"
-class="markup--anchor markup--figure-anchor"
-data-href="http://www.benjamin-franklin-history.org/poor-richards-almanac/"
-rel="noopener" target="_blank">Source: Public Domain</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*AB5B5MuhIf6qQq_m332pGA.jpeg)
 
-- <span id="3e9d">**Poor Richard’s Almanack ~** Witty, wildly popular
-  yearly publication (1732–1758)</span>
-- <span id="f7f5">**The Autobiography of Benjamin Franklin** ~
-  Unfinished but legendary memoir</span>
-- <span id="f54a">**Library Company of Philadelphia** ~ America’s first
-  public lending library</span>
-- <span id="0430">**Inventions** ~ Bifocals, Franklin stove, lightning
-  rod, glass armonica</span>
-- <span id="95b6">**Founding Documents** ~ Helped draft both the
-  Declaration of Independence and the Constitution</span>
-- <span id="8f2b">**Postmaster General** ~ Revolutionized communication
-  in the colonies</span>
-- <span id="fa9c">**Ambassador to France** ~ Secured vital French
-  support during the Revolution</span>
+*[Source: Public Domain](http://www.benjamin-franklin-history.org/poor-richards-almanac/)*
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1040" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+- **Poor Richard’s Almanack ~** Witty, wildly popular
+  yearly publication (1732–1758)
+- **The Autobiography of Benjamin Franklin** ~
+  Unfinished but legendary memoir
+- **Library Company of Philadelphia** ~ America’s first
+  public lending library
+- **Inventions** ~ Bifocals, Franklin stove, lightning
+  rod, glass armonica
+- **Founding Documents** ~ Helped draft both the
+  Declaration of Independence and the Constitution
+- **Postmaster General** ~ Revolutionized communication
+  in the colonies
+- **Ambassador to France** ~ Secured vital French
+  support during the Revolution
 
 ### Philosophy & Mindset
 
-<figure id="08ed" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*s9T2j_rnHDgBBOJ7WtLXRA.png"
-class="graf-image" data-image-id="1*s9T2j_rnHDgBBOJ7WtLXRA.png"
-data-width="1024" data-height="1024" />
-<figcaption>Made by Author with ChatGPT</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*s9T2j_rnHDgBBOJ7WtLXRA.png)
+
+*Made by Author with ChatGPT*
 
 > Franklin believed in the betterment of self and society.
 
@@ -457,72 +237,8 @@ experiment.
 > fortune that seldom happen, as by little advantages that occur every
 > day.”**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="f2ee" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Explore More
 
-📘 <a href="https://www.gutenberg.org/ebooks/148"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.gutenberg.org/ebooks/148" rel="noopener"
-target="_blank"><em>The Autobiography of Benjamin Franklin</em> (full
-text): Project Gutenberg</a>\
-🎧 <a
-href="https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up"
-class="markup--anchor markup--p-anchor"
-data-href="https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up"
-rel="noopener" target="_blank">Audio version (LibriVox): Listen on
-Archive.org</a>\
-📺 <a href="https://www.youtube.com/watch?v=v7wowg6Fy4I"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.youtube.com/watch?v=v7wowg6Fy4I" rel="noopener"
-target="_blank">PBS Documentary: <em>Benjamin Franklin</em> by Ken
-Burns: Watch Trailer</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="098a" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Did you enjoy this story?
-
-> **Clap *to show love.****\*
-> **Comment *to share your thoughts.****\*
-> **Follow The Balance Sheet** *for more smart, sharp essays every
-> week.\*
-> **Subscribe** *so you never miss a new post.*
-
-</div>
-
-</div>
-
-</div>
-
+📘 [*The Autobiography of Benjamin Franklin* (full text): Project Gutenberg](https://www.gutenberg.org/ebooks/148)\
+🎧 [Audio version (LibriVox): Listen on Archive.org](https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up)\
+📺 [PBS Documentary: *Benjamin Franklin* by Ken Burns: Watch Trailer](https://www.youtube.com/watch?v=v7wowg6Fy4I)

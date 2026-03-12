@@ -16,57 +16,12 @@ collection_weight: 40
 medium_source_url: "https://medium.com/@lawtonperret/uncertainty-is-not-a-technical-problem-96e558b67be1"
 ---
 
-<div id="1424" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*AuptgV2EhuTAXw0VmElNpQ@2x.jpeg)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Uncertainty Is Not a Technical Problem
-
-#### **Why Risk Models Reward Confidence Over Truth**
-
-<figure id="af67" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*AuptgV2EhuTAXw0VmElNpQ@2x.jpeg"
-class="graf-image" data-image-id="1*AuptgV2EhuTAXw0VmElNpQ@2x.jpeg"
-data-width="3240" data-height="2157" />
-<figcaption>Photo by <a href="https://loicleray.com/links"
-class="markup--anchor markup--figure-anchor"
-data-href="https://loicleray.com/links" rel="noopener"
-target="_blank">Loic Leray</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+*Photo by [Loic Leray](https://loicleray.com/links) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 *On uncertainty, risk modeling, and the incentives that reward precision
 over responsibility*
-
-</div>
-
-</div>
-
-</div>
-
-<div id="c6bb" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 We expect risk models to tell us what will happen.\
 When they don’t, we assume something went wrong.
@@ -88,24 +43,6 @@ comfort ~ even when it misrepresents reality.
 This essay argues that uncertainty is not a technical problem.
 
 It is a moral and institutional one.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="403e" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Uncertainty Is Not the Same as Ignorance
 
@@ -133,24 +70,6 @@ measurement. When reality proves otherwise, frustration sets in.
 
 Someone must have done something wrong.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="ba61" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Why We Confuse Precision With Truth
 
 A precise number feels accountable. It looks like work has been done. It
@@ -167,24 +86,6 @@ They are moral ones.
 
 And modern systems are not designed to answer them well. So instead, we
 ask numbers to do the work of judgment for us.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="6ea2" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Why Institutions Reward False Precision
 
@@ -208,24 +109,6 @@ So uncertainty is compressed.
 
 Not eliminated ~ just hidden.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="8255" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### How Precision Shifts Responsibility
 
 Precision does more than describe reality. It distributes blame.
@@ -243,24 +126,6 @@ It offers moral cover.
 But when reality diverges ~ and it always does ~
 
 that cover dissolves.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="4de0" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Why Better Data Doesn’t Always Improve Decisions
 
@@ -288,24 +153,6 @@ This is not a technical failure.
 
 It is an incentive problem.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="9b05" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### When Risk Estimates Erode Public Trust
 
 Public trust erodes not ‘cause estimates are wrong, but because
@@ -329,24 +176,6 @@ The failure was not analytical.
 
 It was translational.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6812" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### A Better Way to Think About Risk and Uncertainty
 
 Instead of asking whether an estimate is right, a better question is ~
@@ -365,24 +194,6 @@ Analysis cannot eliminate judgment ~ but it can inform it ~
 
 if we are honest about the uncertainty.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="b3af" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### What Risk Models Are Asked to Hide
 
 Uncertainty is not a flaw in the system. It is a feature of reality.
@@ -399,24 +210,6 @@ incentives that shape how expertise is expressed.
 Until we confront that, we will keep demanding certainty where it cannot
 exist ~ and losing trust when God laughs at our scribble, lines in the
 sand.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="548f" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Author’s Note
 
@@ -438,10 +231,3 @@ So does honesty.
 
 The tension between the two is not a flaw ~ it is the condition under
 which judgment must operate.
-
-</div>
-
-</div>
-
-</div>
-

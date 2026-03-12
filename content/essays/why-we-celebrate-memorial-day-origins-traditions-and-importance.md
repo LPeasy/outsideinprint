@@ -12,36 +12,12 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-we-celebrate-memorial-day-origins-traditions-and-importance-ba6ea0d8ed39"
 ---
 
-<div id="d268" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ***Have you ever stood among the headstones and wondered what stories
 lie behind each flag?***
 
-### Why We Celebrate Memorial Day: Origins, Traditions, and Importance
+![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/ff5282d7bd36ea86362477bec408be437387519e4fe6b73ee9caa9170a6d6b26.jpeg)
 
-#### The history of Memorial Day, its key observances, and why every American pauses to honor our fallen service members.
-
-<figure id="daec" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/ff5282d7bd36ea86362477bec408be437387519e4fe6b73ee9caa9170a6d6b26.jpeg"
-class="graf-image" data-image-id="1*34Xk-j9lRR5XaWDOhB-0iA@2x.jpeg"
-data-width="3240" data-height="2313" />
-<figcaption>Photo by Justin Casey on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+*Photo by Justin Casey on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 #### What Is Memorial Day? Understanding the Holiday’s Purpose
 
@@ -57,40 +33,11 @@ rel="noopener" target="_blank">Unsplash</a></figcaption>
 That simple question sums up Memorial Day: more than a long weekend,
 ***it’s our promise to remember those who died serving our country.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="9d76" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Memorial Day History: From Decoration Day to National Observance
 
-<figure id="897d" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/81bd4267541304d0e06fe38cb98b64e6da7a20bc3aeeb5930259fa7f804475e2.jpeg"
-class="graf-image" data-image-id="1*3NOQ88B90kSo5z53KjEI_w@2x.jpeg"
-data-width="3240" data-height="2208" />
-<figcaption>Photo by <a href="http://aaronburden.com"
-class="markup--anchor markup--figure-anchor"
-data-href="http://aaronburden.com" rel="noopener" target="_blank">Aaron
-Burden</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/81bd4267541304d0e06fe38cb98b64e6da7a20bc3aeeb5930259fa7f804475e2.jpeg)
+
+*Photo by [Aaron Burden](http://aaronburden.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **Long before “Memorial Day”** was on the calendar, towns across America
 held **springtime events to honor soldiers who died in the Civil War**
@@ -124,33 +71,11 @@ Veterans read the Gettysburg Address. Bands played music. People prayed.
 > It was simple but powerful ~ and it set the stage for a national
 > tradition.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5ecf" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Memorial Day Meaning: Honoring All U.S. War Dead
 
-<figure id="283a" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/08dd261a4bd612599336820c7ed49cc3a33bb57b2ecc0aa75ecb54eb085c8bd9.jpeg"
-class="graf-image" data-image-id="1*2xwADdfs2-ygWBYjRnRZSg@2x.jpeg"
-data-width="3240" data-height="1773" />
-<figcaption>Photo by Greg Bulla on Unsplash</figcaption>
-</figure>
+![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/08dd261a4bd612599336820c7ed49cc3a33bb57b2ecc0aa75ecb54eb085c8bd9.jpeg)
+
+*Photo by Greg Bulla on Unsplash*
 
 **At first, Decoration Day focused on Civil War soldiers ~** more than
 600,000 lives lost. But ***after World War I,*** Americans wanted to
@@ -163,37 +88,11 @@ making it a ***three-day weekend***.
 > That change helped people plan trips and parties without losing
 > workdays.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="eb71" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Top Memorial Day Traditions: Flags, Parades, and the 3 p.m. Moment of Silence
 
-<figure id="7e17" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/a8c85048a0b7950ee1f6d87e20cf3e1387f5b808bdffb63cc52a611d71469119.jpeg"
-class="graf-image" data-image-id="1*6nn6_WCkYMs5_TbtA749bw@2x.jpeg"
-data-width="3240" data-height="2163" />
-<figcaption>Photo by Tanner Ross on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/a8c85048a0b7950ee1f6d87e20cf3e1387f5b808bdffb63cc52a611d71469119.jpeg)
+
+*Photo by Tanner Ross on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **Memorial Day often means barbecues, beach trips, and sales.**
 
@@ -211,40 +110,11 @@ Families **place wreaths**. Bands **play taps.**
 
 > It’s a day of both celebration and quiet respect.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="51b9" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Why Memorial Day Matters: Connecting Past Sacrifice to Today
 
-<figure id="d764" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/bee0bce45482dcb1636c874782021fa083450499023dfca33ff38635384ed453.jpeg"
-class="graf-image" data-image-id="1*i_Ut9yBFSRZgc8dgQNXzqA@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by <a href="http://www.thinktreemedia.com"
-class="markup--anchor markup--figure-anchor"
-data-href="http://www.thinktreemedia.com" rel="noopener"
-target="_blank">Brandon Day</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/bee0bce45482dcb1636c874782021fa083450499023dfca33ff38635384ed453.jpeg)
+
+*Photo by [Brandon Day](http://www.thinktreemedia.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **It’s easy to hang a flag or pause for a minute.** But those actions
 mean a lot.
@@ -268,24 +138,6 @@ When kids place flags at graves or hear taps at school, they learn
 history in a real way. They’ll ask: ***Who was that soldier? Why did
 they serve?***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1c10" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Memorial Day vs. Veterans Day: Key Differences Explained
 
 ***Is Memorial Day the same as Veterans Day?***
@@ -301,40 +153,11 @@ they serve?***
 > gather with family and friends. Barbecues and picnics fit the holiday
 > vibe, even though they’re not part of the official observance.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="72f7" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Bringing It Back Home
 
-<figure id="87cf" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/df454c05f9eda575e5d6461261630dbde73949f81b042bd96af28504994f127d.jpeg"
-class="graf-image" data-image-id="1*jsFG1gY5Sk4n722u78Jbjw@2x.jpeg"
-data-width="3240" data-height="4125" />
-<figcaption>Photo by <a href="http://www.sagredophotography.com"
-class="markup--anchor markup--figure-anchor"
-data-href="http://www.sagredophotography.com" rel="noopener"
-target="_blank">Richard Sagredo</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/df454c05f9eda575e5d6461261630dbde73949f81b042bd96af28504994f127d.jpeg)
+
+*Photo by [Richard Sagredo](http://www.sagredophotography.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 Next time you see flags or hear taps in the breeze, ***think of that
 first Decoration Day in 1868.***
@@ -357,52 +180,3 @@ Let the laughter and waves fade.
 That’s why we celebrate Memorial Day ~ not just for the long weekend,
 but for the promise carried by each flag and flower on a soldier’s
 grave.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="fef0" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-#### Author’s Note
-
-I’d love to hear from you! ***Drop a comment*** below, give this piece a
-***clap if it resonated***, and ***subscribe for more*** clear, concise
-essays every week!
-
-<div id="6336"
-class="graf graf--mixtapeEmbed graf-after--p graf--trailing">
-
-<a href="https://medium.com/the-balanced-sheet"
-class="markup--anchor markup--mixtapeEmbed-anchor"
-data-href="https://medium.com/the-balanced-sheet"
-title="https://medium.com/the-balanced-sheet"><strong>The Balance
-Sheet</strong><br />
-<em>The Balance Sheet breaks down U.S. economics, policy, and current
-events with clarity and fairness. No spin — just
-real…</em>medium.com</a><a href="https://medium.com/the-balanced-sheet"
-class="js-mixtapeImage mixtapeImage u-ignoreBlock"
-data-media-id="b83feb4bceea9884f339875c3a6f8feb"
-data-thumbnail-img-id="1*Urdx3Utw7hX9jTlz51mjPQ.png"
-style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*Urdx3Utw7hX9jTlz51mjPQ.png);"></a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-

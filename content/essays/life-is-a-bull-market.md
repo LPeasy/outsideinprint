@@ -12,28 +12,7 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/life-is-a-bull-market-db4524bf5431"
 ---
 
-<div id="2a6f" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Life Is a Bull Market
-
-#### Why Panic Selling Your Own Life Is Almost Always a Bad Trade
-
-<figure id="a132" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*1ibbdO6E5h1l8qqEFQDSPg@2x.jpeg"
-class="graf-image" data-image-id="1*1ibbdO6E5h1l8qqEFQDSPg@2x.jpeg"
-data-width="1536" data-height="1024" data-is-featured="true" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*1ibbdO6E5h1l8qqEFQDSPg@2x.jpeg)
 
 Most people talk about life as something fragile ~ one bad break away
 from collapse. A missed opportunity. A wrong turn.
@@ -52,24 +31,6 @@ more like a long-running bull market.
 
 Not a smooth one. Not a painless one. But an ever upward trend driven by
 continuous accumulation of capital.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="6014" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### The personal balance sheet
 
@@ -109,24 +70,6 @@ Add it all up and the pattern is hard to ignore.
 For most people, capital accumulation continues well into middle age and
 often beyond.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1bce" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Why life looks bearish from the inside
 
 If life is a bull market, why does it feel so volatile?
@@ -154,32 +97,9 @@ They withdraw effort. They stop investing in health. They isolate
 socially. They avoid risk entirely. In market terms, they go to cash and
 stay there far too long.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="735f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Human capital never stops compounding
 
-<figure id="6091" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*mHxN-rEGGixumWP62rOm3g@2x.jpeg"
-class="graf-image" data-image-id="1*mHxN-rEGGixumWP62rOm3g@2x.jpeg"
-data-width="1536" data-height="1024" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*mHxN-rEGGixumWP62rOm3g@2x.jpeg)
 
 One of the least appreciated facts about adulthood is how late-life
 human capital accrual actually peaks.
@@ -202,24 +122,6 @@ underlying hardware collapses.
 This is why health investments punch far above their weight. They
 preserve optionality across every other domain.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6c75" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Social capital is the quiet multiplier
 
 Social capital is slower to build and harder to fake. It is also the
@@ -237,24 +139,6 @@ This is why early-life status anxiety is often misplaced. The market
 hasn’t had time to work yet. The compounding hasn’t shown up on the
 statement.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="716b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Financial capital gets too much blame and too much credit
 
 Money is loud. It fluctuates daily. It invites comparison. It creates
@@ -269,32 +153,9 @@ People who fixate on money while neglecting skills, health, judgment,
 and relationships are optimizing the wrong line item. They look rich on
 paper and fragile in practice.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="f99e" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Long-term optimism without denial
 
-<figure id="b9df" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*1giorNpjt9JERAT0x_6mQQ@2x.jpeg"
-class="graf-image" data-image-id="1*1giorNpjt9JERAT0x_6mQQ@2x.jpeg"
-data-width="1536" data-height="1024" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*1giorNpjt9JERAT0x_6mQQ@2x.jpeg)
 
 Calling life a bull market is not denial.
 
@@ -311,24 +172,6 @@ see net accumulation over time.
 
 The danger is not struggle. The danger is misreading struggle as
 failure.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="806b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Stay invested
 
@@ -347,36 +190,3 @@ drawdowns, you give compounding time to do its work.
 That isn’t optimism.
 
 It’s realism in the limit ~ looking at a longer chart.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="dcb5" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Author’s Note
-
-If this perspective resonated, consider following The Balance Sheet. I
-write about economics, capital, risk, and the structural forces shaping
-everyday life ~ without hype and without despair.
-
-Long charts. Clear thinking. Real tradeoffs.
-
-</div>
-
-</div>
-
-</div>
-

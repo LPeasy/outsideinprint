@@ -12,57 +12,13 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/rethinking-invasive-species-management-5cb634cca5be"
 ---
 
-<div id="0132" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ***Florida spends millions fighting species it will never get rid
 of — while the ones it could stop slip right past.***
 
-</div>
 
-</div>
+![](https://cdn-images-1.medium.com/max/800/1*tlPkpjfNhEiNjmVGIf9gSw@2x.jpeg)
 
-</div>
-
-<div id="8bdd" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Rethinking Invasive Species Management in Florida
-
-#### Why Florida — and the rest of the country — keeps spending millions managing invasives without much to show for it
-
-<figure id="2c0f" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*tlPkpjfNhEiNjmVGIf9gSw@2x.jpeg"
-class="graf-image" data-image-id="1*tlPkpjfNhEiNjmVGIf9gSw@2x.jpeg"
-data-width="3240" data-height="2157" />
-<figcaption>Photo by <a href="https://www.wakingupwild.com"
-class="markup--anchor markup--figure-anchor"
-data-href="https://www.wakingupwild.com" rel="noopener"
-target="_blank">Michael Jerrard</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+*Photo by [Michael Jerrard](https://www.wakingupwild.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **They call it a python hunt, but it feels more like a safari.**
 
@@ -72,12 +28,7 @@ wrong step, and the apex of the Everglades might wrap around your leg.
 
 **Now picture something smaller.**
 
-<figure id="9c49" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg"
-class="graf-image" data-image-id="1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg"
-data-width="259" data-height="194" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg)
 
 > Crested Floating Heart \| Source: iNaturalist
 
@@ -100,37 +51,11 @@ Before we get to that,
 
 let’s take a minute to make sure we’re all talking about the same thing.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="64ee" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **What Even *Is* an Invasive Species?**
 
-<figure id="faff" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*QDDlXkevaEIjcSJIWXAkGw@2x.jpeg"
-class="graf-image" data-image-id="1*QDDlXkevaEIjcSJIWXAkGw@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by Joshua J. Cotten on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*QDDlXkevaEIjcSJIWXAkGw@2x.jpeg)
+
+*Photo by Joshua J. Cotten on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **There are a lot of plants and animals in the U.S. that didn’t start
 here.**
@@ -149,15 +74,12 @@ this ecosystem but were introduced by people over time.
 > In fact, most of our food is non-native.
 
 But an ***invasive* species** is a different story.
-<a href="https://www.invasivespeciesinfo.gov/what-are-invasive-species"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.invasivespeciesinfo.gov/what-are-invasive-species"
-rel="noopener" target="_blank">According to the federal government</a>,
+[According to the federal government](https://www.invasivespeciesinfo.gov/what-are-invasive-species),
 a species becomes invasive when it meets two criteria:
 
-1.  <span id="1f1b">**It’s not native** to the ecosystem</span>
-2.  <span id="ba6f">**It causes (or is likely to cause) harm** — to the
-    economy, the environment, or human health.</span>
+1.  **It’s not native** to the ecosystem
+2.  **It causes (or is likely to cause) harm** — to the
+    economy, the environment, or human health.
 
 That last part is key.
 
@@ -169,75 +91,28 @@ animals, or damages infrastructure, it crosses the line.
 > anyways and then eat all the food, knock over the furniture, and set
 > fire to the rug.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="9823" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **How Florida Became Invasive Ground Zero**
 
-<figure id="e1cb" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*UfjpBpU4qI6UlnyWZH6-Hg@2x.jpeg"
-class="graf-image" data-image-id="1*UfjpBpU4qI6UlnyWZH6-Hg@2x.jpeg"
-data-width="3240" data-height="2592" />
-<figcaption>Photo by <a href="http://www.sagredophotography.com"
-class="markup--anchor markup--figure-anchor"
-data-href="http://www.sagredophotography.com" rel="noopener"
-target="_blank">Richard Sagredo</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*UfjpBpU4qI6UlnyWZH6-Hg@2x.jpeg)
+
+*Photo by [Richard Sagredo](http://www.sagredophotography.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **Florida is one of the most biologically rich — *and
 vulnerable* — places in the country.**
 
 Its ecosystems are wild and diverse:
 
-- <span id="cd55">The **Everglades**, with their slow-moving river of
-  grass.</span>
-- <span id="74a9">**Thousands of freshwater springs** that bubble up
-  from underground.</span>
-- <span id="fde1">**A vast coastline** dotted with mangroves and
-  estuaries.</span>
-- <span id="10ee">**Lakes, rivers, and wetlands** that weave through the
-  interior.</span>
+- The **Everglades**, with their slow-moving river of
+  grass.
+- **Thousands of freshwater springs** that bubble up
+  from underground.
+- **A vast coastline** dotted with mangroves and
+  estuaries.
+- **Lakes, rivers, and wetlands** that weave through the
+  interior.
 
 It’s beautiful. It’s delicate. And in the last hundred years, we’ve
 re-engineered a huge chunk of it.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="e137" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 In the early 1900s, **Florida’s wetlands were** seen as **obstacles** to
 agriculture and development.
@@ -252,37 +127,11 @@ invasive species could get in.
 
 ***Here’s how most of them arrived:***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a58a" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **1. The Pet and Aquarium Trade**
 
-<figure id="7b7a" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*6jWU3bdBvfmxfb_GC2p10g@2x.jpeg"
-class="graf-image" data-image-id="1*6jWU3bdBvfmxfb_GC2p10g@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by Joshua J. Cotten on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*6jWU3bdBvfmxfb_GC2p10g@2x.jpeg)
+
+*Photo by Joshua J. Cotten on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **This one’s pretty infamous.**
 
@@ -295,32 +144,9 @@ found a perfect home in the Everglades and started breeding.
 > Same with lionfish (dumped from aquariums), invasive snails, and
 > dozens of other fish and aquatic plants.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a1f9" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **2. Intentional Introductions**
 
-<figure id="6d7c" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*dduNHtYNbK9RPrKRQCEmRA@2x.jpeg"
-class="graf-image" data-image-id="1*dduNHtYNbK9RPrKRQCEmRA@2x.jpeg"
-data-width="2400" data-height="1800" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*dduNHtYNbK9RPrKRQCEmRA@2x.jpeg)
 
 > Melaleuca Trees in South Florida \| Source: UF-IFAS
 
@@ -337,37 +163,11 @@ The result? Vast walls of ghost-white trunks — dense, dry, and
 lifeless — where there used to be one-of-a-kind natural Florida
 wetlands.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="ae65" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **3. Global Trade and Accidental Invaders**
 
-<figure id="2387" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*89i6dHy1TAV6mP0X0bA-uw@2x.jpeg"
-class="graf-image" data-image-id="1*89i6dHy1TAV6mP0X0bA-uw@2x.jpeg"
-data-width="3240" data-height="2163" />
-<figcaption>Photo by william william on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*89i6dHy1TAV6mP0X0bA-uw@2x.jpeg)
+
+*Photo by william william on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **Shipping ports are another pathway.**
 
@@ -379,33 +179,11 @@ take off.**
 Today, **Florida is home to more invasive species than any other state
 in the continental U.S. —** and the problem isn’t slowing down.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="fc6e" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **What Florida Is Getting Right — and Wrong**
 
-<figure id="eae8" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*295JaOzvm-cdUu-tQjWJkw@2x.jpeg"
-class="graf-image" data-image-id="1*295JaOzvm-cdUu-tQjWJkw@2x.jpeg"
-data-width="3240" data-height="2151" />
-<figcaption>Photo by Karl Callwood on Unsplash</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*295JaOzvm-cdUu-tQjWJkw@2x.jpeg)
+
+*Photo by Karl Callwood on Unsplash*
 
 **Florida isn’t ignoring the problem. Far from it.**
 
@@ -435,46 +213,15 @@ Because when it comes to invasive species:
 
 **Take a look at this graph:**
 
-<figure id="d9ac" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg"
-class="graf-image" data-image-id="1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg"
-data-width="555" data-height="278" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg)
 
 > The Invasion Curve \| Source: Cornell Cooperative Extension
 
-</div>
-
-</div>
-
-</div>
-
-<div id="58f5" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **The Invasion Curve: Why Timing Is Everything**
 
-<figure id="55bf" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*jZvB_EUa6-iQpbnb2EMknw@2x.jpeg"
-class="graf-image" data-image-id="1*jZvB_EUa6-iQpbnb2EMknw@2x.jpeg"
-data-width="3240" data-height="2430" />
-<figcaption>Photo by Vicky Sim on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*jZvB_EUa6-iQpbnb2EMknw@2x.jpeg)
+
+*Photo by Vicky Sim on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **In Greek mythology, Sisyphus was punished by the gods for being too
 clever.**
@@ -505,36 +252,13 @@ hydrilla and lionfish, ***knowing full well the job will never end.***
 
 **The boulder rolls back down the hill.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5676" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 But here’s the thing:
 
 ***We don’t have to play Sisyphus.***
 
 > Lets take another look at the invasion curve:
 
-<figure id="9560" class="graf graf--figure graf-after--blockquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg"
-class="graf-image" data-image-id="1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg"
-data-width="555" data-height="278" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg)
 
 > The Invasion Curve \| Source: Cornell Cooperative Extension
 
@@ -550,30 +274,12 @@ At that point, the fix is relatively cheap and simple:
 **But with each passing month, the costs go up — and the odds of success
 go down.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a593" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **Invasions have four management stages:**
 
-1.  <span id="3530">Prevention</span>
-2.  <span id="887f">Early Detection & Rapid Response</span>
-3.  <span id="1695">Containment</span>
-4.  <span id="f890">Long-Term Control</span>
+1.  Prevention
+2.  Early Detection & Rapid Response
+3.  Containment
+4.  Long-Term Control
 
 **If we act early, we can change the story.**
 
@@ -581,24 +287,6 @@ go down.**
 
 > Proactive management is about catching that boulder while it’s
 > small — before it gains momentum.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="32e9" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### **Case Study 1: Burmese Pythons vs. Nile Monitors**
 
@@ -619,36 +307,13 @@ already breeding across hundreds of square miles.
 
 > Burmese Python Range \| FL FWC \| 2019
 
-<figure id="7b71" class="graf graf--figure graf-after--blockquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*2fAMvFLYqxGhaci3vRCZCw@2x.jpeg"
-class="graf-image" data-image-id="1*2fAMvFLYqxGhaci3vRCZCw@2x.jpeg"
-data-width="1284" data-height="1104" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*2fAMvFLYqxGhaci3vRCZCw@2x.jpeg)
 
 > Source: Florida Fish and Wildlife Conservation Commission (FWC)
 
 So we hunt them. Track them. Put bounties on them. **And** **we’ll be
 doing that forever.** There’s no realistic path to eradication. **Just
 maintenance.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="210c" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 **Now let’s talk about another invasive reptile — **one you probably
 haven’t heard of:
@@ -678,63 +343,17 @@ from colonizing the Everglades.**
 
 > Nile Monitor Sightings \| EDDMapS \| 2025
 
-<figure id="754f" class="graf graf--figure graf-after--blockquote">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*OyXzv4py69NoMTneU1DIZQ@2x.jpeg"
-class="graf-image" data-image-id="1*OyXzv4py69NoMTneU1DIZQ@2x.jpeg"
-data-width="1263" data-height="1537" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*OyXzv4py69NoMTneU1DIZQ@2x.jpeg)
 
 > Source: EDDMapS
-
-</div>
-
-</div>
-
-</div>
-
-<div id="e56f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 **Case Study 2: Hydrilla vs. Crested Floating Heart**
 
 ***Pretty Flowers, Ugly Consequences***
 
-<figure id="9a47" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*F1V2KVCZY1IFWCfgqWDbTQ@2x.jpeg"
-class="graf-image" data-image-id="1*F1V2KVCZY1IFWCfgqWDbTQ@2x.jpeg"
-data-width="555" data-height="278" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*F1V2KVCZY1IFWCfgqWDbTQ@2x.jpeg)
 
 > Hydrilla infestation \| Source: Cornell
-
-</div>
-
-</div>
-
-</div>
-
-<div id="cc69" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 If you fish or boat in Florida, you’ve probably tangled with
 **hydrilla**. This submerged aquatic plant is **everywhere** — clogging
@@ -746,30 +365,7 @@ Hydrilla is in maintenance mode.
 
 **We’re never going to get rid of it.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="308c" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-<figure id="17d6" class="graf graf--figure graf--leading">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg"
-class="graf-image" data-image-id="1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg"
-data-width="259" data-height="194" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg)
 
 > Crested Floating Heart \| Source: iNaturalist
 
@@ -785,34 +381,11 @@ Right now, it’s still a localized threat. Some areas in North and
 Central Florida. But it’s moving — and early control efforts are
 underfunded and understaffed.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="db7f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 **Case Study 3: Lionfish vs. Zebra Mussels in Retail**
 
 ***Derby on the Reef, Disaster in a Bag***
 
-<figure id="e003" class="graf graf--figure graf-after--p">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*jIEWyJe7hWIdUba9bF5j2g@2x.jpeg"
-class="graf-image" data-image-id="1*jIEWyJe7hWIdUba9bF5j2g@2x.jpeg"
-data-width="300" data-height="168" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*jIEWyJe7hWIdUba9bF5j2g@2x.jpeg)
 
 > Invasive Lionfish \| Source: NOAA
 
@@ -834,30 +407,7 @@ promoting “***Eat ’em to beat ‘em***.”
 
 But here’s a quieter success story you might have missed.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e589" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-<figure id="8e4d" class="graf graf--figure graf--leading">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*eTVXJMMazAzwZYREXIAPkw@2x.jpeg"
-class="graf-image" data-image-id="1*eTVXJMMazAzwZYREXIAPkw@2x.jpeg"
-data-width="2272" data-height="1704" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*eTVXJMMazAzwZYREXIAPkw@2x.jpeg)
 
 > Zebra Mussels \| Source: NOAA
 
@@ -879,37 +429,11 @@ response**, and likely **prevented a major new infestation.**
 **Prevention works.** But it only works if someone notices — and cares
 enough to act.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="89a5" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **Why We Keep Fighting the Wrong Battles**
 
-<figure id="a783" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*_mI-nnaTrRjjFIJvp38aGw@2x.jpeg"
-class="graf-image" data-image-id="1*_mI-nnaTrRjjFIJvp38aGw@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by AZGAN MjESHTRI on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*_mI-nnaTrRjjFIJvp38aGw@2x.jpeg)
+
+*Photo by AZGAN MjESHTRI on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 > If early action is cheaper, smarter, and more effective… why don’t we
 > do it?
@@ -943,90 +467,35 @@ says, “Here’s what we tackle first, and why.”
 > All of this means that high-value prevention efforts often lose out to
 > low-return maintenance.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a5e0" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **What Needs to Change**
 
-<figure id="6720" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*3VCtxE1Q_VGEfh-FT6MGUw@2x.jpeg"
-class="graf-image" data-image-id="1*3VCtxE1Q_VGEfh-FT6MGUw@2x.jpeg"
-data-width="3240" data-height="2160" />
-<figcaption>Photo by hayleigh b on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*3VCtxE1Q_VGEfh-FT6MGUw@2x.jpeg)
+
+*Photo by hayleigh b on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **If we want to get smarter about invasive species *we need a strategic
 shift.***
 
-- <span id="b97b">**Move money upstream:** Don’t just fund cleanup crews
+- **Move money upstream:** Don’t just fund cleanup crews
   and long-term maintenance. Fund the scientists, the spotters, and the
-  early responders.</span>
-- <span id="43e1">**Reward prevention:** Right now, there’s little
+  early responders.
+- **Reward prevention:** Right now, there’s little
   political or financial incentive to stop a problem before it starts.
-  That has to change.</span>
-- <span id="94c4">**Scale what works:** Big intergovernmental
+  That has to change.
+- **Scale what works:** Big intergovernmental
   partnerships — especially federal-state cost-share models — could
   stretch limited budgets further and help states like Florida act
-  early, not late.</span>
+  early, not late.
 
 ***This isn’t about doing more.***
 
 > It’s about doing better.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a97f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### **Hope Lies on the Frontier**
 
-<figure id="2f0b" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*LzSbq5aUiq6LuJobhWOVIQ@2x.jpeg"
-class="graf-image" data-image-id="1*LzSbq5aUiq6LuJobhWOVIQ@2x.jpeg"
-data-width="3240" data-height="2157" />
-<figcaption>Photo by <a href="http://www.sagredophotography.com"
-class="markup--anchor markup--figure-anchor"
-data-href="http://www.sagredophotography.com" rel="noopener"
-target="_blank">Richard Sagredo</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*LzSbq5aUiq6LuJobhWOVIQ@2x.jpeg)
+
+*Photo by [Richard Sagredo](http://www.sagredophotography.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **Florida’s not** failing to manage invasive species because it’s
 **doing nothing.** It’s failing because most of the energy and money go
@@ -1045,39 +514,3 @@ And that’s the future of invasive species management.
 
 > We can keep pushing boulders,\
 > or we can act now before they start rolling down the hill.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="5b8e" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-#### Authors Note
-
-Like this kind of clear, honest breakdown?
-
-Subscribe to <a href="https://medium.com/the-balanced-sheet"
-class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet" target="_blank">The
-Balance Sheet</a> for more essays that cut through the noise and explain
-how American policy, money, and systems actually work — without the
-jargon, spin, or hand-waving.
-
-</div>
-
-</div>
-
-</div>
-

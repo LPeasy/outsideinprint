@@ -8,36 +8,16 @@ subtitle: "~ And Why We Can’t Figure it Out"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/ai-in-education-is-a-wicked-problem.pdf"
-featured: false
+featured: false
+
 collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/ai-in-education-is-a-wicked-problem-6c01a68b48ec"
 ---
 
-<div id="e307" class="section section section--body section--first">
+![](https://cdn-images-1.medium.com/max/800/1*fqGIkSDfeiM_GRHsHLJMmw.png)
 
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### AI in Education Is a Wicked Problem
-
-#### ~ And Why We Can’t Figure it Out
-
-<figure id="74b8"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*fqGIkSDfeiM_GRHsHLJMmw.png"
-class="graf-image" data-image-id="1*fqGIkSDfeiM_GRHsHLJMmw.png"
-data-width="1536" data-height="1024" data-is-featured="true" />
-<figcaption>“In My Voice” | Art by Author</figcaption>
-</figure>
+*“In My Voice” | Art by Author*
 
 #### The misuse debate misses the point.
 
@@ -51,12 +31,7 @@ Tech companies keep building faster tools for both.
 
 > *Every attempt at regulation fixes one issue and creates another.*
 
-That’s what makes this a <a
-href="https://academic.oup.com/policyandsociety/article/36/3/385/6407931"
-class="markup--anchor markup--p-anchor"
-data-href="https://academic.oup.com/policyandsociety/article/36/3/385/6407931"
-rel="noopener" target="_blank"><strong><em>wicked
-problem</em></strong></a> ~ **something that can’t be solved because the
+That’s what makes this a [***wicked problem***](https://academic.oup.com/policyandsociety/article/36/3/385/6407931) ~ **something that can’t be solved because the
 act of solving it changes what it is.**
 
 AI misuse in education isn’t a passing issue ~ **it’s unmanageable by
@@ -66,24 +41,6 @@ design.**
 
 > It revealed how automated it already was.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="0ce6" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Why AI Misuse in Education Can’t Be Solved Like Other School Problems
 
 Most school problems can be managed with clear rules or metrics ~ test
@@ -92,24 +49,6 @@ scores, attendance, or budgets.
 > AI doesn’t fit the mold.
 
 **It moves too fast and cuts across every layer of the system.**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="5a00" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### Understanding ‘Wicked Problems’ ~ and Why AI Fits the Definition
 
@@ -126,32 +65,9 @@ Coined by Horst Rittel and Melvin Webber (1973), a wicked problem ~
 > Poverty, climate change, social media addiction ~ and now, AI in the
 > classroom.
 
-<figure id="c909"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--pullquote graf--trailing">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*1uSh6N8hLgHGHMtFH5vvww.png"
-class="graf-image" data-image-id="1*1uSh6N8hLgHGHMtFH5vvww.png"
-data-width="1536" data-height="1024" />
-<figcaption>“The Wicked Problem Loop” | Created by Author</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*1uSh6N8hLgHGHMtFH5vvww.png)
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1d90" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+*“The Wicked Problem Loop” | Created by Author*
 
 ### Why No One Owns the AI Problem in Education
 
@@ -168,24 +84,6 @@ Tech companies want more users.
 The answer to ***“what counts as learning?”***
 
 > depends on who’s answering.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="997e" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### Teachers Use AI Too ~ And That’s the Real Story
 
@@ -213,34 +111,11 @@ authorship.***
 
 **AI offers relief, and *both sides take it.***
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1478" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Why Detection and Governance Fail for the Same Reason
 
-<figure id="f74e"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*uGkgPMqIPQHhlAZstOBilQ.png"
-class="graf-image" data-image-id="1*uGkgPMqIPQHhlAZstOBilQ.png"
-data-width="1536" data-height="1024" />
-<figcaption>“The Futility of Control” | Created by Author</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*uGkgPMqIPQHhlAZstOBilQ.png)
+
+*“The Futility of Control” | Created by Author*
 
 > Every attempt at control creates a new loophole.
 
@@ -267,34 +142,11 @@ fail for the same reason ~
 
 > Responsibility diffuses until it disappears.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e8e7" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### How AI Is Replacing Judgment ~ Not Just Labor
 
-<figure id="5a73"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*kibCWTnDnURswRHQEglrjA.png"
-class="graf-image" data-image-id="1*kibCWTnDnURswRHQEglrjA.png"
-data-width="1536" data-height="1024" />
-<figcaption>“The Erosion of Judgement” | Created by Author</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*kibCWTnDnURswRHQEglrjA.png)
+
+*“The Erosion of Judgement” | Created by Author*
 
 When a student asks AI to “write an essay in my voice,” they’re not just
 skipping work. They’re giving away the decision of what counts as
@@ -314,34 +166,11 @@ system that can’t read nuance or intent.
 Education already rewards output over process ~ AI is just the next
 logical iteration.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a8c1" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Why the AI Misuse Problem Can’t Be Solved ~ Only Redefined
 
-<figure id="2337"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*_FuUDifbXPz_TfDGhbDjUg.png"
-class="graf-image" data-image-id="1*_FuUDifbXPz_TfDGhbDjUg.png"
-data-width="1536" data-height="1024" />
-<figcaption>“The Reflection of Learning” | Art by Author</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*_FuUDifbXPz_TfDGhbDjUg.png)
+
+*“The Reflection of Learning” | Art by Author*
 
 > Rules always trail behavior.
 
@@ -371,35 +200,3 @@ reasoning, or collaboration.
 **If we don’t like what we see, *maybe the issue isn’t the machine ~***
 
 > maybe it’s that we stopped thinking for ourselves.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="1904" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-#### Author’s Note
-
-Thanks so much for reading! What do you think about AI in education?
-**Share your thoughts** below in the comments. **Clap a few times** if
-you liked the essay, and **follow me for more** like this here on
-Medium.
-
-</div>
-
-</div>
-
-</div>
-

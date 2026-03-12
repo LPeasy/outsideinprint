@@ -8,36 +8,18 @@ subtitle: "The Christian image does something to the human nervous system ~"
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-crucifix-courage-training-to-speak-truth-in-a-false-world.pdf"
-featured: false
+featured: false
+
 collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/the-crucifix-courage-training-to-speak-truth-in-a-false-world-b38c9294f3c9"
 ---
 
-<div id="878b" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### The Crucifix: Courage Training to Speak Truth in a False World
-
 #### *The Christian image does something to the human nervous system ~*
 
-<figure id="cc31"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*BD9RfIJ3mk3o1YGQFDhi_g.png"
-class="graf-image" data-image-id="1*BD9RfIJ3mk3o1YGQFDhi_g.png"
-data-width="1024" data-height="1536" />
-<figcaption>“The Crucifix” ~ art by author with gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*BD9RfIJ3mk3o1YGQFDhi_g.png)
+
+*“The Crucifix” ~ art by author with gpt4-o*
 
 Walk into a hospital, a church, or your grandmother’s living room and
 you might see it: **a crucifix on the wall.**
@@ -74,40 +56,13 @@ truth as well.
 you know the world will despise you ~ and when we know the powers of
 this world will attempt to destroy us for exposing their lies.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a95a" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Exposure therapy, in plain English
 
-<figure id="1e87"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*K95sTW7beSb9u43evrxfpQ.png"
-class="graf-image" data-image-id="1*K95sTW7beSb9u43evrxfpQ.png"
-data-width="1536" data-height="1024" />
-<figcaption>“Exposure Therapy” ~ art by author with gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*K95sTW7beSb9u43evrxfpQ.png)
 
-In psychotherapy, there’s a well-known idea called <a
-href="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"
-rel="noopener" target="_blank"><strong>exposure therapy</strong></a>. In
+*“Exposure Therapy” ~ art by author with gpt4-o*
+
+In psychotherapy, there’s a well-known idea called [**exposure therapy**](https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy). In
 simple terms, it’s a structured process where a person gradually and
 repeatedly faces what they fear, until the fear response loses its grip
 and avoidance stops running their life.
@@ -116,23 +71,7 @@ The American Psychological Association describes exposure therapy as a
 method developed to help people confront fears, in a safe setting,
 through exposure to feared objects, activities, or situations.
 
-<div id="8c2a" class="graf graf--mixtapeEmbed graf-after--p">
-
-<a
-href="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"
-class="markup--anchor markup--mixtapeEmbed-anchor"
-data-href="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"
-title="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"><strong>What
-Is Exposure Therapy?</strong><br />
-<em>Exposure therapy is a psychological treatment that was developed to
-help people confront their fears.</em>www.apa.org</a><a
-href="https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy"
-class="js-mixtapeImage mixtapeImage u-ignoreBlock"
-data-media-id="ec28cf54df06a7ca3705ed067c317fe3"
-data-thumbnail-img-id="0*1mFvSE6f2NjBxY5p"
-style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*1mFvSE6f2NjBxY5p);"></a>
-
-</div>
+- [What Is Exposure Therapy?](https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy)
 
 You can think of it like this: **fear thrives in the dark.** Avoidance
 feeds it. **Exposure changes the relationship.**
@@ -141,35 +80,11 @@ A person learns, over time, “I can face this. It doesn’t own me.”
 
 > Now take that idea and look at the crucifix again.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="7bc7" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### The crucifix is a forced look at the worst-case outcome
 
-<figure id="465c"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*RcPMBxzXBffmwHXWShK72Q.png"
-class="graf-image" data-image-id="1*RcPMBxzXBffmwHXWShK72Q.png"
-data-width="1536" data-height="1024" />
-<figcaption>“All Eyes on Christ” ~ art by author with
-gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*RcPMBxzXBffmwHXWShK72Q.png)
+
+*“All Eyes on Christ” ~ art by author with gpt4-o*
 
 If you follow Jesus, you are not promised comfort.\
 You are not promised status.\
@@ -214,34 +129,11 @@ diminishes our spirit and leaves us disconnected from the Spirit of
 Truth and Goodness. Sometimes speaking the truth is going to upset the
 crowd, and it will almost always upset the people in power.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="9784" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Truth-telling is the offense ~ not “meanness”
 
-<figure id="c212"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*nif-260LdnJX0YkIRtLemQ.png"
-class="graf-image" data-image-id="1*nif-260LdnJX0YkIRtLemQ.png"
-data-width="1536" data-height="1024" />
-<figcaption>“Truth to Power” ~ art by author with gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*nif-260LdnJX0YkIRtLemQ.png)
+
+*“Truth to Power” ~ art by author with gpt4-o*
 
 A lot of modern moral life is built around a social rule that goes
 something like: **“Be a good person, and everyone will love you.”**
@@ -270,34 +162,11 @@ The message of the crucifix isn’t just that “suffering happened.”
 
 **It’s that “suffering happened *because the truth was spoken*.”**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1f07" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### The parables weren’t just cute stories ~ Jesus was speaking over the crowd’s head
 
-<figure id="b499"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*WxmsIUuQVIfbLa_ce5mEpg.png"
-class="graf-image" data-image-id="1*WxmsIUuQVIfbLa_ce5mEpg.png"
-data-width="1536" data-height="1024" />
-<figcaption>“Over their heads” ~ art by author with gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*WxmsIUuQVIfbLa_ce5mEpg.png)
+
+*“Over their heads” ~ art by author with gpt4-o*
 
 Jesus spoke in parables that largely masked meaning from the masses,
 while religious leaders clearly understood, and they hated Him for it.
@@ -324,34 +193,11 @@ in their moral superiority are also the most likely to punish dissent.
 
 **Jesus ran into that. So will anyone who tries to walk with Him.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="221f" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Christianity is not a permission slip for hate
 
-<figure id="d4ef"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*dC-ijTBVEKSFCR1hTeqGsw.png"
-class="graf-image" data-image-id="1*dC-ijTBVEKSFCR1hTeqGsw.png"
-data-width="1536" data-height="1024" data-is-featured="true" />
-<figcaption>“INRI” ~ art by author with gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*dC-ijTBVEKSFCR1hTeqGsw.png)
+
+*“INRI” ~ art by author with gpt4-o*
 
 Jesus does not form His people by teaching them to despise their
 enemies. He teaches the opposite:
@@ -377,49 +223,25 @@ praying through betrayal. **It’s not the banner of a lynch mob.**
 
 > It’s the banner of self-sacrifice.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="9126" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### The modern temptation ~ the new moral language of Karl Marx
 
-<figure id="db88"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*xqu6MKWmrpk85w7-7MWSug.png"
-class="graf-image" data-image-id="1*xqu6MKWmrpk85w7-7MWSug.png"
-data-width="1536" data-height="1024" />
-<figcaption>“Marx’s Burning Book” ~ art by author with
-gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*xqu6MKWmrpk85w7-7MWSug.png)
+
+*“Marx’s Burning Book” ~ art by author with gpt4-o*
 
 A large slice of modern “morality” is downstream from Marxist categories
 ~ even when the speakers don’t use Marx’s name.
 
 #### The frame is familiar:
 
-1.  <span id="40c8">Society is primarily a struggle between oppressor
+1.  Society is primarily a struggle between oppressor
     groups and oppressed groups; moral status attaches to group
-    position</span>
-2.  <span id="90af">History is interpreted as domination</span>
-3.  <span id="ad76">Guilt and innocence get assigned by identity rather
-    than personal action</span>
-4.  <span id="5345">Speech becomes “violence” when it threatens this
-    story.</span>
+    position
+2.  History is interpreted as domination
+3.  Guilt and innocence get assigned by identity rather
+    than personal action
+4.  Speech becomes “violence” when it threatens this
+    story.
 
 That moral language can feel righteous. However it is fundamentally
 cruel and false because it gives people a clean excuse to hate “Nazis”
@@ -446,35 +268,11 @@ be wrong, the authorities can be wrong, the moral majority can be wrong
 If your personal ethic is “I will say what keeps me safe,” then you
 don’t need a crucifix. **You need to revisit the Gospels.**
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e5a9" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### A final look ~ and the question the image asks
 
-<figure id="cbc0"
-class="graf graf--figure graf--startsWithDoubleQuote graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*vfpwPEQV4jPJF5aCYhc0SQ.png"
-class="graf-image" data-image-id="1*vfpwPEQV4jPJF5aCYhc0SQ.png"
-data-width="1536" data-height="1024" />
-<figcaption>“Will you speak the truth?” ~ art by author with
-gpt4-o</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*vfpwPEQV4jPJF5aCYhc0SQ.png)
+
+*“Will you speak the truth?” ~ art by author with gpt4-o*
 
 The crucifix is a kind of spiritual exposure therapy: repeated contact
 with the fears we spend our lives trying to dodge.
@@ -519,41 +317,3 @@ Because the crucifix doesn’t merely say, “You are forgiven.”
 It says, “This is what it looks like to refuse the lie. This is what it
 costs.\
 This is what love does. Now go, and speak truth.”
-
-</div>
-
-</div>
-
-</div>
-
-<div id="017f" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### **Note from the Author**
-
-If this essay gave you a clearer way to name what the crucifix is doing
-~ not just in theology, but in your mind and your spine ~ **I’d love
-your help getting it in front of more readers.**
-
-Leave a **clap**, drop a **comment** with your reaction (or pushback),
-and **share** it with someone who’s been trying to speak truth in a
-noisy culture.
-
-If you want more essays like this on faith, courage, and the moral
-pressures of modern life, **follow my work here on Medium.**
-
-</div>
-
-</div>
-
-</div>
-

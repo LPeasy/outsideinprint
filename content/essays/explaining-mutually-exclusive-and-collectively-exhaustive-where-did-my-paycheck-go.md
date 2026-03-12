@@ -12,31 +12,11 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go-09e07ae87e3c"
 ---
 
-<div id="2f20" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Where Did My Paycheck Go? Explaining Mutually Exclusive and Collectively Exhaustive
-
-#### How your monthly budget can explain two core ideas from probability, risk, and economics ~
-
 ### Mutual Exclusivity and Collective Exhaustion
 
-<figure id="5b6c" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e.png"
-class="graf-image" data-image-id="1*1PL2Ebp1ED0kHTiydKhVHQ.png"
-data-width="1024" data-height="1024" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e.png)
+
+*Created by Author with GPT-4o*
 
 #### **Your paycheck hits your account on the first of the month.**
 
@@ -57,41 +37,19 @@ food, gas, fun, savings.
 
 Behind that exercise sit two phrases that sound like textbook trivia:
 
-- <span id="1c80">**Mutually exclusive**</span>
-- <span id="a97e">**Collectively exhaustive**</span>
+- **Mutually exclusive**
+- **Collectively exhaustive**
 
 They show up in probability, risk, and economics, but they also describe
 what you’re trying to do every time you build a budget.
 
 Once you see them in that setting, things start making a lot more cents.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="c606" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Building a Simple Paycheck Budget With Clear Spending Categories
 
-<figure id="ba9c" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a.png"
-class="graf-image" data-image-id="1*17Qmd65yyz0ifNePnn5N7Q.png"
-data-width="1024" data-height="1024" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a.png)
+
+*Created by Author with GPT-4o*
 
 #### Say you bring home \$3,000.
 
@@ -99,62 +57,40 @@ data-width="1024" data-height="1024" />
 
 > Maybe you pick:
 
-- <span id="3eda">Housing</span>
-- <span id="cb6d">Groceries and household supplies</span>
-- <span id="95c4">Transportation</span>
-- <span id="e6fc">Debt payments</span>
-- <span id="c0c0">Subscriptions and monthly bills</span>
-- <span id="332f">Fun and dining out</span>
-- <span id="32a9">Savings and investing</span>
+- Housing
+- Groceries and household supplies
+- Transportation
+- Debt payments
+- Subscriptions and monthly bills
+- Fun and dining out
+- Savings and investing
 
 You pull up your bank history and begin dropping each transaction from
 last month into each of the buckets.
 
 Even if you never say it out loud, you’re aiming for two things:
 
-1.  <span id="3a75">Each dollar should land in **one** bucket, not
-    several at once.</span>
-2.  <span id="a5d3">Every dollar should land in **some** bucket, with
-    nothing leftover.</span>
+1.  Each dollar should land in **one** bucket, not
+    several at once.
+2.  Every dollar should land in **some** bucket, with
+    nothing leftover.
 
 #### Those two simple aims are the heart of the fancy terms
 
-- <span id="d44a">**Mutually exclusive** ~ categories do not overlap for
-  a single item.</span>
-- <span id="9b4c">**Collectively exhaustive** ~ together, the categories
-  cover everything that matters in the picture.</span>
+- **Mutually exclusive** ~ categories do not overlap for
+  a single item.
+- **Collectively exhaustive** ~ together, the categories
+  cover everything that matters in the picture.
 
 You already care about both ideas whenever you ask, “Where did it all
 go?” The math vocabulary just gives names to habits you are trying to
 build anyway.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6ef9" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Mutually Exclusive Categories: One Dollar, One Budget Bucket
 
-<figure id="58bc" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286.png"
-class="graf-image" data-image-id="1*Qxgg3KzIiEdKoatGWf81rw.png"
-data-width="1024" data-height="1024" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286.png)
+
+*Created by Author with GPT-4o*
 
 #### Take the first idea: no overlaps.
 
@@ -190,33 +126,11 @@ Once you decide, keep it consistent and locked in.
 
 > That’s all “mutually exclusive” really means in this context.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="a658" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Collectively Exhaustive Categories: Making Sure Every Dollar Is Counted
 
-<figure id="6f7e" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0.png"
-class="graf-image" data-image-id="1*qkG7z5ZaLG8r2KiM2HDQYA.png"
-data-width="1024" data-height="1024" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0.png)
+
+*Created by Author with GPT-4o*
 
 #### Now let’s look at the second idea: no gaps.
 
@@ -235,11 +149,11 @@ something…
 
 #### Maybe you forgot:
 
-- <span id="07e0">Cash withdrawals</span>
-- <span id="4d1a">A one-off car repair</span>
-- <span id="e374">An annual fee that hit this month</span>
-- <span id="4b37">A Venmo payment you mentally tagged as “we’ll square
-  up later” and then forgot</span>
+- Cash withdrawals
+- A one-off car repair
+- An annual fee that hit this month
+- A Venmo payment you mentally tagged as “we’ll square
+  up later” and then forgot
 
 Those dollars still left your account?\
 Leaving them out of the list only hides where the money went.
@@ -259,33 +173,11 @@ small and boring, not giant and mysterious.
 > If half your spending is in “Other,” you do not have a budget ~ you’ve
 > got a shrug.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="8703" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Common Budget Mistakes: Overlapping and Missing Categories
 
-<figure id="e0cc" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564.png"
-class="graf-image" data-image-id="1*71iaK6mli2c1YFi9ud4zew.png"
-data-width="1024" data-height="1024" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564.png)
+
+*Created by Author with GPT-4o*
 
 When you understand mutual exclusivity and collective exhaustion ***~ no
 overlap, no gaps ~*** you start noticing how often personal budgets fail
@@ -331,33 +223,11 @@ Overlapping categories make some problems look bigger than they are.
 Missing categories make other problems vanish until they turn into a
 crisis.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="28c0" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Your Budget as a Model: How Category Design Shapes What You See
 
-<figure id="38d0" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443.png"
-class="graf-image" data-image-id="1*uhm15cIK3pqqohkHDT5WTg.png"
-data-width="1024" data-height="1024" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443.png)
+
+*Created by Author with GPT-4o*
 
 #### When you design categories for your own paycheck, you’re building a model of your financial life.
 
@@ -395,60 +265,38 @@ there’s a long (and often painful) debate about where to draw the lines.
 
 > Your own budget is smaller, but the same.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="dcb6" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### From Personal Budgeting to Economics and Risk Analysis
 
-<figure id="e4b0" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f.png"
-class="graf-image" data-image-id="1*hPlsi4tVYd88Ts1giaGXQg.png"
-data-width="1024" data-height="1024" data-is-featured="true" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f.png)
+
+*Created by Author with GPT-4o*
 
 > Once these ideas feel natural in your own money tracking, it becomes
 > easier to see them in news stories and reports.
 
 #### A few examples:
 
-- <span id="d2ac">A news article breaks the economy into “manufacturing,
+- A news article breaks the economy into “manufacturing,
   services, and everything else.” You can ask yourself: could the same
   dollar of output be counted in more than one of these? If so, the
   categories are not mutually exclusive. Is “everything else” huge? If
-  so, the list is not very exhaustive.</span>
-- <span id="74fd">A company earnings report splits revenue into
+  so, the list is not very exhaustive.
+- A company earnings report splits revenue into
   “domestic, international, and digital.” A single sale to a customer
   overseas through an app might be domestic to the firm, international
   by customer, and digital by channel. If that one sale can sit in
   several buckets, the totals by segment are trickier than they
-  look.</span>
-- <span id="2154">A risk assessment lays out three paths for next year:
-  “baseline,” “upside,” and “downside.”</span>
+  look.
+- A risk assessment lays out three paths for next year:
+  “baseline,” “upside,” and “downside.”
 
 #### Ask yourself two questions:
 
-1.  <span id="cd94">Could more than one of these happen at the same
-    time?</span>
-2.  <span id="1484">Do these three stories cover most of what might
+1.  Could more than one of these happen at the same
+    time?
+2.  Do these three stories cover most of what might
     realistically occur, or are there missing pieces to the
-    puzzle?</span>
+    puzzle?
 
 > Those are the simple mutually exclusive and collectively exhaustive
 > checks laid out in plain language.
@@ -458,43 +306,21 @@ they shape scenarios, count losses, or assign probabilities. The terms
 sound formal, but in practice they’re the same two gut checks you use on
 your own budget: does anything double count? Did we leave anything out?
 
-</div>
-
-</div>
-
-</div>
-
-<div id="ed35" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### A Simple Rule for Mutually Exclusive and Collectively Exhaustive Thinking
 
-<figure id="814e" class="graf graf--figure graf-after--h3">
-<img
-src="/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5.png"
-class="graf-image" data-image-id="1*gyATPVLf4yK64H4Y1lnP-w.png"
-data-width="1024" data-height="1024" />
-<figcaption>Created by Author with GPT-4o</figcaption>
-</figure>
+![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5.png)
+
+*Created by Author with GPT-4o*
 
 #### If you want an easy way to remember, think about this:
 
 > *Whenever you slice something into categories ~ money, time, causes,
 > scenarios ~ ask yourself two questions.*
 
-1.  <span id="987b">**Does any single item clearly belong in more than
-    one bucket at once?**</span>
-2.  <span id="37b4">**Does anything important have nowhere to
-    go?**</span>
+1.  **Does any single item clearly belong in more than
+    one bucket at once?**
+2.  **Does anything important have nowhere to
+    go?**
 
 If the first answer is “no” and the second is also “no,” you’re in good
 shape.
@@ -511,49 +337,3 @@ just textbook phrases ~ they’re habits of mind:
 And the next time you pull up your bank app and wonder where your
 paycheck went, you’ll have more than just a shrug. You’ll have a clearly
 carved pie and a better shot at being honest with yourself.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="fb7d" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### Note from the Author
-
-If this helped make “mutually exclusive and collectively exhaustive”
-make a bit more sense, I’d be grateful for a few claps on Medium ~ it
-really does tell the algorithm this piece was worth your time.
-
-You can follow *The Balance Sheet* for more plain-English essays on
-risk, money, and the real economy, and hit subscribe if you want new
-pieces to show up in your inbox instead of getting lost in the feed.
-
-Most of all, I’d love to hear how *you* slice up your own budget.
-
-~ Drop a comment with the categories you use, where you think you might
-be double-counting, or what still feels fuzzy.
-
-**I read every comment and it helps shape what I write next.**
-
-> Thanks a lot!
-
-> ~ LP
-
-</div>
-
-</div>
-
-</div>
-
