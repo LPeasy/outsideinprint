@@ -2,19 +2,26 @@
   <section class="single-page start-here-page">
     {{ partial "running_header.html" . }}
 
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
-
-    <div class="imprint-header" role="note" aria-label="Page label">
-      <div class="row">
-        <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
-      </div>
-    </div>
+    <header class="start-here-header">
+      {{ with .Params.section_label }}<p class="start-here-kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+    </header>
 
     <article class="single-content start-here-content">
       {{ .Content }}
     </article>
 
-    {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page") }}
+    {{ partial "newsletter_signup.html" (dict
+      "page" .
+      "class" "newsletter-signup--page newsletter-signup--start-here"
+      "eyebrow" "Letter"
+      "title" "Weekly letter"
+      "dek" "New editions, notes, and selected work from Outside In Print."
+      "note" "Sent quietly, once a week."
+      "buttonLabel" "Join"
+    ) }}
+
+    <p class="start-here-closing">Begin where the thread catches.</p>
   </section>
 {{ end }}

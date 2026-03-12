@@ -1,23 +1,29 @@
 {{ $page := .page }}
 {{ $newsletter := $page.Site.Params.newsletter }}
 {{ $provider := lower (default "" $newsletter.provider) }}
+{{ $eyebrow := default "Newsletter" .eyebrow }}
+{{ $title := default "Get the weekly letter" .title }}
+{{ $dek := default "Essays, new editions, and notes from Outside In Print. One email a week. Free." .dek }}
+{{ $buttonLabel := default "Subscribe" .buttonLabel }}
+{{ $note := default "New editions and occasional notes. No spam." .note }}
+{{ $inputID := printf "bd-email-%s" (replace (replace ($page.RelPermalink | default "newsletter") "/" "-") "--" "-") }}
 
 {{ with $newsletter.buttondown_username }}
   {{ if eq $provider "buttondown" }}
     <section class="newsletter-signup{{ with $.class }} {{ . }}{{ end }}" aria-labelledby="newsletter-signup-title">
       <div class="newsletter-signup__inner">
-        <p class="newsletter-signup__eyebrow">Newsletter</p>
-        <h2 id="newsletter-signup-title" class="newsletter-signup__title">Get the weekly letter</h2>
-        <p class="newsletter-signup__dek">Essays, new editions, and notes from Outside In Print. One email a week. Free.</p>
+        <p class="newsletter-signup__eyebrow">{{ $eyebrow }}</p>
+        <h2 id="newsletter-signup-title" class="newsletter-signup__title">{{ $title }}</h2>
+        <p class="newsletter-signup__dek">{{ $dek }}</p>
 
         <form
           action="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"
           method="post"
           class="newsletter-signup__form"
         >
-          <label for="bd-email" class="newsletter-signup__label">Email address</label>
+          <label for="{{ $inputID }}" class="newsletter-signup__label">Email address</label>
           <input
-            id="bd-email"
+            id="{{ $inputID }}"
             type="email"
             name="email"
             class="newsletter-signup__input"
@@ -29,10 +35,10 @@
           {{ with $newsletter.tag }}
             <input type="hidden" name="tag" value="{{ . }}" />
           {{ end }}
-          <button type="submit" class="newsletter-signup__button">Subscribe</button>
+          <button type="submit" class="newsletter-signup__button">{{ $buttonLabel }}</button>
         </form>
 
-        <p class="newsletter-signup__note">New editions and occasional notes. No spam.</p>
+        <p class="newsletter-signup__note">{{ $note }}</p>
       </div>
     </section>
   {{ end }}
