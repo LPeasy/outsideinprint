@@ -33,6 +33,8 @@
       </aside>
     {{ end }}
 
+    {{ partial "read_next.html" . }}
+
     {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page") }}
   </section>
 {{ end }}

@@ -1,0 +1,158 @@
+{{ $page := . }}
+{{ $limit := 3 }}
+{{ $minimum := 2 }}
+{{ $excludedSections := slice "collections" "library" "random" "start-here" }}
+{{ if and .IsPage (eq .Kind "page") (not (in $excludedSections .Section)) }}
+  {{ $selected := slice }}
+  {{ $selectedKeys := slice }}
+  {{ $collectionEntries := slice }}
+  {{ $explicitCollections := partial "collections/normalize-values.html" (dict "value" $page.Params.collections) }}
+  {{ if gt (len $explicitCollections) 0 }}
+    {{ range $explicitCollections }}
+      {{ $definition := partial "collections/lookup-definition.html" . }}
+      {{ with $definition }}
+        {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+        {{ $state := partial "collections/get-state.html" (dict "collection" . "items" $items) }}
+        {{ $collectionPage := site.GetPage (printf "/collections/%s" .slug) }}
+        {{ if and $state.visible $collectionPage }}
+          {{ $collectionEntries = $collectionEntries | append (dict "collection" . "items" $items "state" $state "page" $collectionPage) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ $collectionEntries = partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) }}
+  {{ end }}
+  {{ range $collectionEntries }}
+    {{ if lt (len $selected) $limit }}
+      {{ $pool := slice }}
+      {{ range .items }}
+        {{ if and (ne .RelPermalink $page.RelPermalink) (not (in $excludedSections .Section)) (not (in $selectedKeys .RelPermalink)) }}
+          {{ $pool = $pool | append . }}
+        {{ end }}
+      {{ end }}
+      {{ $featuredPool := slice }}
+      {{ $datedPool := slice }}
+      {{ range $pool }}
+        {{ if .Params.featured }}
+          {{ $featuredPool = $featuredPool | append . }}
+        {{ else }}
+          {{ $datedPool = $datedPool | append . }}
+        {{ end }}
+      {{ end }}
+      {{ $featuredPool = sort (sort $featuredPool "Title" "asc") "Date" "desc" }}
+      {{ $datedPool = sort (sort $datedPool "Title" "asc") "Date" "desc" }}
+      {{ $orderedPool := slice }}
+      {{ range $featuredPool }}
+        {{ $orderedPool = $orderedPool | append . }}
+      {{ end }}
+      {{ range $datedPool }}
+        {{ $orderedPool = $orderedPool | append . }}
+      {{ end }}
+      {{ range $orderedPool }}
+        {{ if lt (len $selected) $limit }}
+          {{ if not (in $selectedKeys .RelPermalink) }}
+            {{ $selected = $selected | append . }}
+            {{ $selectedKeys = $selectedKeys | append .RelPermalink }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if lt (len $selected) $limit }}
+    {{ $sectionPool := slice }}
+    {{ range $page.Site.RegularPages }}
+      {{ if and (eq .Section $page.Section) (ne .RelPermalink $page.RelPermalink) (not (in $selectedKeys .RelPermalink)) (not (in $excludedSections .Section)) }}
+        {{ $sectionPool = $sectionPool | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $featuredPool := slice }}
+    {{ $datedPool := slice }}
+    {{ range $sectionPool }}
+      {{ if .Params.featured }}
+        {{ $featuredPool = $featuredPool | append . }}
+      {{ else }}
+        {{ $datedPool = $datedPool | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $featuredPool = sort (sort $featuredPool "Title" "asc") "Date" "desc" }}
+    {{ $datedPool = sort (sort $datedPool "Title" "asc") "Date" "desc" }}
+    {{ $orderedPool := slice }}
+    {{ range $featuredPool }}
+      {{ $orderedPool = $orderedPool | append . }}
+    {{ end }}
+    {{ range $datedPool }}
+      {{ $orderedPool = $orderedPool | append . }}
+    {{ end }}
+    {{ range $orderedPool }}
+      {{ if lt (len $selected) $limit }}
+        {{ if not (in $selectedKeys .RelPermalink) }}
+          {{ $selected = $selected | append . }}
+          {{ $selectedKeys = $selectedKeys | append .RelPermalink }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if lt (len $selected) $minimum }}
+    {{ $sitePool := slice }}
+    {{ range $page.Site.RegularPages }}
+      {{ if and (ne .RelPermalink $page.RelPermalink) (not (in $selectedKeys .RelPermalink)) (not (in $excludedSections .Section)) }}
+        {{ $sitePool = $sitePool | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $featuredPool := slice }}
+    {{ $datedPool := slice }}
+    {{ range $sitePool }}
+      {{ if .Params.featured }}
+        {{ $featuredPool = $featuredPool | append . }}
+      {{ else }}
+        {{ $datedPool = $datedPool | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $featuredPool = sort (sort $featuredPool "Title" "asc") "Date" "desc" }}
+    {{ $datedPool = sort (sort $datedPool "Title" "asc") "Date" "desc" }}
+    {{ $orderedPool := slice }}
+    {{ range $featuredPool }}
+      {{ $orderedPool = $orderedPool | append . }}
+    {{ end }}
+    {{ range $datedPool }}
+      {{ $orderedPool = $orderedPool | append . }}
+    {{ end }}
+    {{ range $orderedPool }}
+      {{ if lt (len $selected) $minimum }}
+        {{ if not (in $selectedKeys .RelPermalink) }}
+          {{ $selected = $selected | append . }}
+          {{ $selectedKeys = $selectedKeys | append .RelPermalink }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if ge (len $selected) $minimum }}
+    <section class="read-next" aria-labelledby="read-next-title">
+      <div class="read-next__inner">
+        <h2 id="read-next-title" class="read-next__title">Read Next</h2>
+        <div class="read-next__items">
+          {{ range first $limit $selected }}
+            {{ $sectionLabel := .Params.section_label }}
+            {{ if not $sectionLabel }}
+              {{ if eq .Section "working-papers" }}
+                {{ $sectionLabel = "Working Paper" }}
+              {{ else }}
+                {{ $sectionLabel = humanize .Section }}
+              {{ end }}
+            {{ end }}
+            {{ $detail := "" }}
+            {{ if and (eq .Section "working-papers") .Params.version }}
+              {{ $detail = printf "Version %v" .Params.version }}
+            {{ else if .Date }}
+              {{ $detail = .Date.Format "Jan 2006" }}
+            {{ end }}
+            <article class="read-next__item">
+              <h3 class="read-next__item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+              <p class="read-next__meta">{{ $sectionLabel }}{{ with $detail }} &middot; {{ . }}{{ end }}</p>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
