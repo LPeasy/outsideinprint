@@ -670,9 +670,11 @@ article figcaption{
 }
 .single-page h1{
   margin:0 0 0.7rem;
+  text-align:center;
 }
 .single-page .subtitle{
   margin:0 0 1.1rem;
+  text-align:center;
 }
 .single-page .imprint-header{
   margin:0 0 0.75rem;
