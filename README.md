@@ -107,6 +107,17 @@ powershell -ExecutionPolicy Bypass -File .\scripts\audit_essay_integrity.ps1
 - Local wrapper: `scripts/build_pdfs_typst_local.ps1`
 - CI wrapper: `scripts/build_pdfs_typst_ci.ps1`
 
+
+## Article-body conventions
+
+For cleaner web and PDF rendering, prefer:
+
+- true Markdown headings instead of standalone title-case paragraphs
+- true ordered and unordered lists instead of manual bullets or numbered paragraphs
+- `---` for thematic breaks instead of improvised separator strings
+- image captions or source lines placed directly under the image
+- no duplicated title or dek inside the body when front matter already carries them
+
 ## Collections
 
 - Maintainer guide: `docs/collections-system.md`

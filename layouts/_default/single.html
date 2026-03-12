@@ -1,40 +1,48 @@
 {{ define "main" }}
-  <section class="single-page">
-    {{ partial "running_header.html" . }}
+  {{ $pageClass := "piece single-page" }}
+  {{ if .Params.medium_source_url }}
+    {{ $pageClass = printf "%s single-page--imported" $pageClass }}
+  {{ end }}
+  <article class="{{ $pageClass }}">
+    <header class="piece-header">
+      {{ partial "running_header.html" . }}
 
-    <div class="imprint-header" role="note" aria-label="Edition metadata">
-      <div class="row">
-        <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
-        <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
-        <span>{{ with .Params.version }}Version <b>{{ . }}</b>{{ end }}</span>
-        <span>{{ with .Params.edition }}Edition <b>{{ . }}</b>{{ end }}</span>
+      <div class="imprint-header" role="note" aria-label="Edition metadata">
+        <div class="row">
+          <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
+          <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
+          <span>{{ with .Params.version }}Version <b>{{ . }}</b>{{ end }}</span>
+          <span>{{ with .Params.edition }}Edition <b>{{ . }}</b>{{ end }}</span>
+        </div>
       </div>
+
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+
+      {{ partial "pdf_button.html" . }}
+    </header>
+
+    <div class="piece-body single-content">
+      {{ partial "render_article_body.html" . }}
     </div>
 
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+    <div class="piece-aftermatter">
+      {{ partial "collections/page-membership-block.html" . }}
 
-    {{ partial "pdf_button.html" . }}
+      {{ if ne .Params.show_citation false }}
+        <div class="article-closing" aria-hidden="true">
+          <span class="article-closing__ornament">&bull;&bull;&bull;</span>
+        </div>
 
-    <article class="single-content">
-      {{ .Content }}
-    </article>
+        <aside class="citation" role="note" aria-label="How to cite this page">
+          <div class="k">Cite this</div>
+          <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+        </aside>
+      {{ end }}
 
-    {{ partial "collections/page-membership-block.html" . }}
+      {{ partial "read_next.html" . }}
 
-    {{ if ne .Params.show_citation false }}
-      <div class="article-closing" aria-hidden="true">
-        <span class="article-closing__ornament">&bull;&bull;&bull;</span>
-      </div>
-
-      <aside class="citation" role="note" aria-label="How to cite this page">
-        <div class="k">Cite this</div>
-        <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
-      </aside>
-    {{ end }}
-
-    {{ partial "read_next.html" . }}
-
-    {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page") }}
-  </section>
+      {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page") }}
+    </div>
+  </article>
 {{ end }}

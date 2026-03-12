@@ -1,0 +1,6 @@
+{{- $content := .Content -}}
+{{- $content = replaceRE `(?s)<blockquote>\s*<p>\s*Source:\s*(.*?)</p>\s*</blockquote>` `<p class="article-source"><span class="article-source__label">Source</span> $1</p>` $content -}}
+{{- $content = replaceRE `(?s)<p>\s*Source:\s*(.*?)</p>` `<p class="article-source"><span class="article-source__label">Source</span> $1</p>` $content -}}
+{{- $content = replaceRE `(?i)<h([2-4])([^>]*)>\s*(Works Cited|References|Sources|Bibliography|Note from the Author|Author Note)\s*</h[2-4]>` `<h$1$2 class="article-aftermatter-heading">$3</h$1>` $content -}}
+{{- $content = replaceRE `(?i)<p>\s*(Works Cited|References|Sources|Bibliography|Note from the Author|Author Note)\s*</p>` `<h2 class="article-aftermatter-heading">$1</h2>` $content -}}
+{{- $content | safeHTML -}}
