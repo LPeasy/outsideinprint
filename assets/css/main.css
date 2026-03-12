@@ -245,6 +245,95 @@ h2{ margin-top:30px; }
   background:transparent;
 }
 
+.newsletter-signup{
+  width:100%;
+  max-width:52rem;
+  margin:2.5rem auto 0;
+}
+.newsletter-signup--home{
+  margin-top:2rem;
+  margin-bottom:0.5rem;
+}
+.newsletter-signup--page{
+  margin-top:2.75rem;
+}
+.newsletter-signup__inner{
+  padding:1.4rem 1.45rem 1.3rem;
+  border:1px solid var(--hair);
+  border-radius:10px;
+  background:rgba(232,226,216,.018);
+}
+.newsletter-signup__eyebrow{
+  margin:0;
+  color:var(--muted);
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.newsletter-signup__title{
+  margin:0.45rem 0 0;
+  font-size:1.75rem;
+  line-height:1.2;
+}
+.newsletter-signup__dek{
+  max-width:38rem;
+  margin:0.75rem 0 0;
+  color:var(--muted);
+  font-size:15px;
+}
+.newsletter-signup__form{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:0.75rem;
+  align-items:end;
+  margin-top:1.15rem;
+}
+.newsletter-signup__label{
+  grid-column:1 / -1;
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.newsletter-signup__input{
+  min-width:0;
+  width:100%;
+  padding:0.8rem 0.9rem;
+  border:1px solid rgba(232,226,216,.18);
+  border-radius:10px;
+  background:rgba(11,11,11,.72);
+  color:var(--fg);
+  font-family:var(--sans);
+  font-size:15px;
+}
+.newsletter-signup__input::placeholder{
+  color:rgba(184,176,166,.72);
+}
+.newsletter-signup__button{
+  padding:0.82rem 1.15rem;
+  border:1px solid rgba(232,226,216,.28);
+  border-radius:10px;
+  background:rgba(232,226,216,.035);
+  color:var(--fg);
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.newsletter-signup__button:hover{
+  border-color:rgba(232,226,216,.55);
+  background:rgba(232,226,216,.06);
+}
+.newsletter-signup__note{
+  margin:0.9rem 0 0;
+  color:var(--muted);
+  font-family:var(--sans);
+  font-size:12px;
+}
+
 /* Footer */
 .footer{
   margin-top:44px;
@@ -544,7 +633,8 @@ article figcaption{
 .edition-download,
 .single-page .single-content,
 .article-closing,
-.single-page .citation{
+.single-page .citation,
+.single-page .newsletter-signup{
   width:100%;
   max-width:68ch;
 }
@@ -654,6 +744,21 @@ article figcaption{
 }
 
 @media (max-width:640px){
+  .newsletter-signup{
+    margin-top:2.2rem;
+  }
+  .newsletter-signup__inner{
+    padding:1.2rem 1rem 1.1rem;
+  }
+  .newsletter-signup__title{
+    font-size:1.45rem;
+  }
+  .newsletter-signup__form{
+    grid-template-columns:1fr;
+  }
+  .newsletter-signup__button{
+    width:100%;
+  }
   .running-header{
     margin-bottom:1.25rem;
   }
@@ -671,3 +776,4 @@ article figcaption{
     line-height:1.7;
   }
 }
+

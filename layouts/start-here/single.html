@@ -14,5 +14,7 @@
     <article class="single-content start-here-content">
       {{ .Content }}
     </article>
+
+    {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page") }}
   </section>
 {{ end }}

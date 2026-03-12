@@ -1,0 +1,39 @@
+{{ $page := .page }}
+{{ $newsletter := $page.Site.Params.newsletter }}
+{{ $provider := lower (default "" $newsletter.provider) }}
+
+{{ with $newsletter.buttondown_username }}
+  {{ if eq $provider "buttondown" }}
+    <section class="newsletter-signup{{ with $.class }} {{ . }}{{ end }}" aria-labelledby="newsletter-signup-title">
+      <div class="newsletter-signup__inner">
+        <p class="newsletter-signup__eyebrow">Newsletter</p>
+        <h2 id="newsletter-signup-title" class="newsletter-signup__title">Get the weekly letter</h2>
+        <p class="newsletter-signup__dek">Essays, new editions, and notes from Outside In Print. One email a week. Free.</p>
+
+        <form
+          action="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"
+          method="post"
+          class="newsletter-signup__form"
+        >
+          <label for="bd-email" class="newsletter-signup__label">Email address</label>
+          <input
+            id="bd-email"
+            type="email"
+            name="email"
+            class="newsletter-signup__input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          />
+          <input type="hidden" name="embed" value="1" />
+          {{ with $newsletter.tag }}
+            <input type="hidden" name="tag" value="{{ . }}" />
+          {{ end }}
+          <button type="submit" class="newsletter-signup__button">Subscribe</button>
+        </form>
+
+        <p class="newsletter-signup__note">New editions and occasional notes. No spam.</p>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}

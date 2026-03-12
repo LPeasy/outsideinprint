@@ -32,5 +32,7 @@
         <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
       </aside>
     {{ end }}
+
+    {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page") }}
   </section>
 {{ end }}

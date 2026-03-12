@@ -17,4 +17,8 @@ collections = "/collections/:slug/"
     [markup.goldmark.renderer]
       unsafe = false
 
-
+[params.newsletter]
+provider = "buttondown"
+# Set this to your real Buttondown username to enable the signup form.
+buttondown_username = "OutsideInPrint"
+tag = "outside-in-print"

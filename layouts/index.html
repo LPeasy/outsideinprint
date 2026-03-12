@@ -9,6 +9,8 @@
     <a class="card card-center" href="{{ "random/" | absURL }}"><div class="k">Explore</div><div class="v">Random</div></a>
   </section>
 
+  {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--home") }}
+
   {{ $collectionEntries := partial "collections/get-public-entries.html" . }}
   {{ $featuredCollections := slice }}
   {{ range $collectionEntries }}
