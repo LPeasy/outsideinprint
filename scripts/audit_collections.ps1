@@ -54,7 +54,7 @@ function Convert-Scalar {
 
 function Parse-CollectionRegistry {
   param([string]$Path)
-  $lines = Get-Content $Path
+  $lines = [System.IO.File]::ReadAllLines($Path, [System.Text.Encoding]::UTF8)
   $collections = New-Object System.Collections.Generic.List[object]
   $current = $null
   $mode = ''
@@ -161,7 +161,7 @@ function Get-RelativePath {
 }
 function Get-FrontMatter {
   param([string]$Path)
-  $content = Get-Content $Path -Raw
+  $content = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
   $matches = [regex]::Matches($content, '(?m)^---\s*$')
   if ($matches.Count -lt 2) { return $null }
   $start = $matches[0].Index + $matches[0].Length

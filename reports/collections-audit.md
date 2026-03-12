@@ -2,7 +2,7 @@
 
 This report is read-only. It suggests candidate memberships but does not write front matter changes.
 
-Generated: 2026-03-11 22:48:10
+Generated: 2026-03-11 23:05:46
 
 ## Public Collection Status
 

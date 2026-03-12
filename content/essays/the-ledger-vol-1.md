@@ -41,7 +41,7 @@ data-width="1024" data-height="1024" data-is-featured="true" />
 <figcaption>The Ledger: A Balance Sheet Joint</figcaption>
 </figure>
 
-> **A few short essays you mightâ€™ve missed ~ from Vatican intrigue to
+> **A few short essays you might’ve missed ~ from Vatican intrigue to
 > corporate rebrands and Supreme Court drama.**
 
 </div>
@@ -65,25 +65,25 @@ data-width="1024" data-height="1024" data-is-featured="true" />
 > **Welcome to the first edition of The Ledger,** a monthly roundup of
 > recent essays from *The Balance Sheet*.
 
-Over the past few months, **Iâ€™ve been writing about everything** from
+Over the past few months, **I’ve been writing about everything** from
 geopolitics and pop culture to church history and corporate branding ~
-not because thereâ€™s a grand plan, but because **Iâ€™m a curious guy.**
+not because there’s a grand plan, but because **I’m a curious guy.**
 
 > Writing these essays has been a lot of fun ~
 
 > and often quite surprising.
 
-One day Iâ€™m **deep-diving into the gold standard**, and the next Iâ€™m
+One day I’m **deep-diving into the gold standard**, and the next I’m
 **unpacking *The Simpsons*.**
 
 > Each essay is a small attempt to understand how the world actually
 > works ~ and where we all fit into it.
 
-**If youâ€™ve read any of these already:**
+**If you’ve read any of these already:**
 
 > ***Thank you!***
 
-***If not,* hereâ€™s a quick guide to what you mightâ€™ve missed.**
+***If not,* here’s a quick guide to what you might’ve missed.**
 
 </div>
 
@@ -200,7 +200,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*bmy
 href="https://medium.com/the-balanced-sheet/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
 class="markup--anchor markup--h3-anchor"
 data-href="https://medium.com/the-balanced-sheet/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
-target="_blank">McDonaldâ€™s Faces a Week-Long Boycott</a>
+target="_blank">McDonald’s Faces a Week-Long Boycott</a>
 
 <div id="4324" class="graf graf--mixtapeEmbed graf-after--h3">
 
@@ -208,9 +208,9 @@ target="_blank">McDonaldâ€™s Faces a Week-Long Boycott</a>
 href="https://medium.com/the-balanced-sheet/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
-title="https://medium.com/the-balanced-sheet/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"><strong>McDonaldâ€™s
-Faces Weekâ€‘Long Boycott</strong><br />
-<em>Why? What is going on with the McDonaldâ€™s
+title="https://medium.com/the-balanced-sheet/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"><strong>McDonald’s
+Faces Week‑Long Boycott</strong><br />
+<em>Why? What is going on with the McDonald’s
 Boycott?</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
@@ -222,7 +222,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*FX-
 
 **What happens when french fries meet foreign policy?**
 
-> A short explainer on the sudden McDonaldâ€™s boycott and what it says
+> A short explainer on the sudden McDonald’s boycott and what it says
 > about consumer protest in 2025.
 
 </div>
@@ -247,7 +247,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*FX-
 href="https://medium.com/the-balanced-sheet/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"
 class="markup--anchor markup--h3-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"
-target="_blank">The Max Mistake: Why HBOâ€™s Name Change Backfired</a>
+target="_blank">The Max Mistake: Why HBO’s Name Change Backfired</a>
 
 <div id="c350" class="graf graf--mixtapeEmbed graf-after--h3">
 
@@ -256,9 +256,9 @@ href="https://medium.com/the-balanced-sheet/the-max-mistake-why-hbos-name-change
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"
 title="https://medium.com/the-balanced-sheet/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"><strong>The
-Max Mistake: Why HBOâ€™s Name Change Backfired</strong><br />
+Max Mistake: Why HBO’s Name Change Backfired</strong><br />
 <em>A corporate identity crisis in real time, brought to you by the
-people who forgot what â€œHome Box Officeâ€ really means</em>medium.com</a><a
+people who forgot what “Home Box Office” really means</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="e4b43fcc5c030bf24ce8815ea2ed182b"
@@ -314,9 +314,9 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/0*8h6
 </div>
 
 **A lightning-fast summary of where the highest court landed this term ~
-and whatâ€™s at stake heading into 2026.**
+and what’s at stake heading into 2026.**
 
-> A clean recap for anyone who doesnâ€™t want to wade through 500 pages of
+> A clean recap for anyone who doesn’t want to wade through 500 pages of
 > legalese.
 
 </div>
@@ -404,7 +404,7 @@ class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
 title="https://medium.com/the-balanced-sheet/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"><strong>Why
 a Return to the Gold Standard Would Break the Economy</strong><br />
-<em>What Glitters Isnâ€™t Always Gold: The Case Against a Gold-Backed
+<em>What Glitters Isn’t Always Gold: The Case Against a Gold-Backed
 Dollar</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
@@ -414,7 +414,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*Qvc
 
 </div>
 
-**An 8-minute breakdown of a nostalgic idea that wonâ€™t die.**
+**An 8-minute breakdown of a nostalgic idea that won’t die.**
 
 > Why the gold standard absolutely should not come back.
 
@@ -438,7 +438,7 @@ style="background-image: url(https://cdn-images-1.medium.com/fit/c/160/160/1*Qvc
 
 ### **Thanks for reading.**
 
-> ***Whether youâ€™ve been following since the beginning or if you just
+> ***Whether you’ve been following since the beginning or if you just
 > landed here, I appreciate your time ~***
 
 > ***and I hope one or two of these pieces spark something for you.***

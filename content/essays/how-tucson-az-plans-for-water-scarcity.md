@@ -112,7 +112,7 @@ target="_blank">Lake Mead</a> and
 class="markup--anchor markup--p-anchor"
 data-href="https://www.nps.gov/cany/planyourvisit/lakelevels.htm"
 rel="noopener" target="_blank">Lake Powell</a>, the twin reservoirs that
-store the riverâ€™s flow, are now **half-empty bathtubs ~ pale rings
+store the river’s flow, are now **half-empty bathtubs ~ pale rings
 visible.**
 
 <figure id="d7ba"
@@ -153,7 +153,7 @@ it provides. That means cities like Tucson must prepare for a future in
 which their water supply is less predictable, and potentially much
 smaller.
 
-> Thereâ€™s no blueprint for managing this kind of uncertainty.
+> There’s no blueprint for managing this kind of uncertainty.
 
 **Risk management models** offer different ways of thinking about
 problems that stretch across decades and affect a vast array of
@@ -178,7 +178,7 @@ water scarcity risk as they apply to cities in the American Southwest.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Tucsonâ€™s Water Reality
+### Tucson’s Water Reality
 
 <figure id="218a" class="graf graf--figure graf-after--h3">
 <img
@@ -203,7 +203,7 @@ The city banks unused CAP water underground as
 <a href="https://www.azwater.gov/recharge/accounting"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.azwater.gov/recharge/accounting" rel="noopener"
-target="_blank">â€œstorage creditsâ€</a> for the future. It uses block rate
+target="_blank">“storage credits”</a> for the future. It uses block rate
 pricing to encourage conservation, and it has launched innovative
 projects like
 <a href="https://tucsononewater.com/arizona-pure-water-tucson/"
@@ -216,7 +216,7 @@ recycle wastewater directly into the drinking supply by the 2030s.**
 Even with these efforts, the city lives under the shadow of the Colorado
 River Compact and the Bureau of Reclamation shortage declarations.
 
-> For Tucson, with more than half a million people, this isnâ€™t an
+> For Tucson, with more than half a million people, this isn’t an
 > abstract crisis ~
 
 **The city is forced to think about risk**, and not just for the next
@@ -242,7 +242,7 @@ budget cycle, but **for the next 50 years and beyond.**
 
 ### Four Generic Frameworks for Risk Management
 
-> Risk management isnâ€™t just technical ~ Itâ€™s philosophical.
+> Risk management isn’t just technical ~ It’s philosophical.
 
 #### Big Questions ~
 
@@ -278,7 +278,7 @@ budget cycle, but **for the next 50 years and beyond.**
 3.  <span id="1117">**Adaptive**</span>
 4.  <span id="a0e9">**Scenario**</span>
 
-> **Tucsonâ€™s One Water 2100 plan draws on all four traditions,** but
+> **Tucson’s One Water 2100 plan draws on all four traditions,** but
 > each general framework would steer the city in a different direction.
 
 <figure id="3d8a"
@@ -309,21 +309,21 @@ Precautionary, Adaptive, and Scenario.</figcaption>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Tucsonâ€™s One Water 2100 Plan
+### Tucson’s One Water 2100 Plan
 
 <figure id="db81" class="graf graf--figure graf-after--h3">
 <img
 src="https://cdn-images-1.medium.com/max/800/1*FSOHLRRnXhM9SYMzqpErww@2x.jpeg"
 class="graf-image" data-image-id="1*FSOHLRRnXhM9SYMzqpErww@2x.jpeg"
 data-width="1090" data-height="1396" />
-<figcaption>Tucsonâ€™s grand plan for the next 75 years | <a
+<figcaption>Tucson’s grand plan for the next 75 years | <a
 href="https://tucsononewater.com"
 class="markup--anchor markup--figure-anchor"
 data-href="https://tucsononewater.com" rel="noopener"
 target="_blank">Source</a></figcaption>
 </figure>
 
-**Tucson Waterâ€™s guiding document** is itâ€™s
+**Tucson Water’s guiding document** is it’s
 <a href="https://tucsononewater.com/making-progress-one-water-2100/"
 class="markup--anchor markup--p-anchor"
 data-href="https://tucsononewater.com/making-progress-one-water-2100/"
@@ -335,7 +335,7 @@ plan</strong></a>**,** released in stages over the past decade.
 1.  <span id="47cf">**Diversification** ~ expanding reclaimed water,
     remediated groundwater, and eventually potable reuse.</span>
 2.  <span id="2705">**Adaptation** ~ a cycle of monitoring and
-    adjustment every 5â€“10 years.</span>
+    adjustment every 5–10 years.</span>
 3.  <span id="8a37">**Scenario Planning** ~ building strategies that can
     survive a range of futures.</span>
 
@@ -356,14 +356,14 @@ href="https://www.youtube.com/embed/UnWqUbrS5Tg?feature=oembed">https://www.yout
 > **Each scenario is tested against demand forecasts and river supply
 > projections.**
 
-**The city prioritizes policies that work â€œwell enoughâ€ in all
+**The city prioritizes policies that work “well enough” in all
 scenarios.**
 
-#### Thatâ€™s why reclaimed water and underground storage are emphasized:
+#### That’s why reclaimed water and underground storage are emphasized:
 
 > They provide buffers across all potential futures.
 
-Tucsonâ€™s plan calls for **periodic review** of their risk management
+Tucson’s plan calls for **periodic review** of their risk management
 decisions and process. **Every decade**, the city plans to re-run its
 models, check CAP deliveries against projections, and update
 conservation programs.
@@ -407,9 +407,9 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-> Now that we have discussed Tucsonâ€™s actual plan, lets apply each of
+> Now that we have discussed Tucson’s actual plan, lets apply each of
 > the generic frameworks to understand how each might influence the
-> cityâ€™s decisions.
+> city’s decisions.
 
 #### Conventional
 
@@ -436,7 +436,7 @@ in reuse and recharge.
 
 A **scenario/robust plan** would chart multiple futures and design
 measures that works across them. Tucson developed narratives like
-â€œSustainable Oasisâ€ and â€œThirsty Desertâ€ to help policymakers and the
+“Sustainable Oasis” and “Thirsty Desert” to help policymakers and the
 public visualize different outcomes.
 
 </div>
@@ -457,7 +457,7 @@ public visualize different outcomes.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### **These risk management frameworks arenâ€™t mutually exclusive.**
+#### **These risk management frameworks aren’t mutually exclusive.**
 
 ***In practice,* Tucson blends the adaptive and scenario frameworks.**\
 Its planning documents include scenario names to engage the public,
@@ -502,7 +502,7 @@ data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
 rel="noopener" target="_blank">Unsplash</a></figcaption>
 </figure>
 
-> ***The Colorado River is more than just Tucsonâ€™s lifeline.***
+> ***The Colorado River is more than just Tucson’s lifeline.***
 
 The river **irrigates 5 million acres of farmland** and **supplies water
 to 40 million people.**
@@ -533,7 +533,7 @@ when you count agriculture, energy, and urban growth.
 #### But the river is stretched thin ~
 
 The 1922 Compact assigned rights to 16.5 million acre-feet a year, when
-the riverâ€™s long-term average is closer to 13â€“14 million.
+the river’s long-term average is closer to 13–14 million.
 
 > If the millennial drought continues, it may fall to 11 million.
 
@@ -578,10 +578,10 @@ data-href="https://www.visittucson.org/plan-your-visit/about-tucson/tucson-distr
 rel="noopener" target="_blank">Source</a></figcaption>
 </figure>
 
-> The lesson isnâ€™t that one framework or model for risk management is
+> The lesson isn’t that one framework or model for risk management is
 > best ~
 
-#### **Itâ€™s that each lens adds value.**
+#### **It’s that each lens adds value.**
 
 - <span id="6448">**Conventional risk-cost analysis keeps projects
   accountable.**</span>
@@ -596,7 +596,7 @@ For Tucson, blending adaptive and scenario models has allowed the city
 to stretch every gallon. It banks water underground, treats wastewater
 as a resource, and frames futures that residents can imagine and debate.
 
-**Tucsonâ€™s experience can serve as a model for how other mid-size cities
+**Tucson’s experience can serve as a model for how other mid-size cities
 might successfully approach long-term uncertainty in the desert.**
 
 </div>
@@ -647,8 +647,8 @@ at the economy, public policy, and the systems that shape our lives.
   documents and summaries).</span>
 - <span id="6067">Bureau of Reclamation, Colorado River Basin
   reports.</span>
-- <span id="f5af">â€œThe Colorado River at a Crossroads: Water, Power, and
-  an Uncertain Future.â€</span>
+- <span id="f5af">“The Colorado River at a Crossroads: Water, Power, and
+  an Uncertain Future.”</span>
 - <span id="a692">Central Arizona Project (CAP) public data and
   history.</span>
 

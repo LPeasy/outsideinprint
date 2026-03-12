@@ -55,14 +55,14 @@ Tourists come for the picturesque rivers and limestone cliffs.
 
 > **Locals know how fast those rivers rise.**
 
-The regionâ€™s **steep slopes and limestone bedrock** make it one of the
+The region’s **steep slopes and limestone bedrock** make it one of the
 fastest-draining flood environments in the country.
 
-**Rain doesnâ€™t soak in.**
+**Rain doesn’t soak in.**
 
 It runs off, **racing downhill** into dry creeks and narrow rivers.
 
-> Thatâ€™s how a shallow stream can become a 20-foot wall of water in
+> That’s how a shallow stream can become a 20-foot wall of water in
 > under an hour.
 
 </div>
@@ -83,7 +83,7 @@ It runs off, **racing downhill** into dry creeks and narrow rivers.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-***â€œFlash Flood Alleyâ€*** is a nickname, not an official term, but
+***“Flash Flood Alley”*** is a nickname, not an official term, but
 hydrologists and emergency managers use it all the same.
 
 The term refers to **the I-35 corridor from San Antonio to Dallas**,
@@ -100,7 +100,7 @@ common, and the terrain makes those events far more dangerous.
 - <span id="b370">**Guadalupe River, 1987:** A church van was swept away
   in Hunt, killing 10 teenagers.</span>
 
-Hereâ€™s an example of **what happens when it floods in the Hill
+Here’s an example of **what happens when it floods in the Hill
 Country:**
 
 <figure id="3f7a" class="graf graf--figure graf-after--p">
@@ -113,7 +113,7 @@ Express-News</figcaption>
 </figure>
 
 > ***Devastation along the Blanco River after the 2015 flash
-> floodâ€Šâ€”â€Šhomes swept away, vegetation stripped bare, and infrastructure
+> flood — homes swept away, vegetation stripped bare, and infrastructure
 > destroyed by a wall of water.***
 
 <figure id="ee53" class="graf graf--figure graf-after--blockquote">
@@ -125,7 +125,7 @@ data-width="1208" data-height="933" />
 </figure>
 
 > ***Hydrograph of the Blanco River at Wimberley during Memorial Day
-> weekend 2015â€Šâ€”â€Šthe river surged from ~5 feet to over 40 feet in just a
+> weekend 2015 — the river surged from ~5 feet to over 40 feet in just a
 > few hours.***
 
 The hydrograph shows the Blanco River rising from base flow (~5 ft) to
@@ -133,10 +133,10 @@ catastrophic levels (~40 ft) **in just four hours ~** **a classic Hill
 Country surge.**
 
 The aerial image captures the aftermath: entire neighborhoods wiped out
-along the riverâ€™s edge.
+along the river’s edge.
 
-> â€œPeople think flash floods just mean lots of water. In the Hill
-> Country, the water *runs you down*.â€
+> “People think flash floods just mean lots of water. In the Hill
+> Country, the water *runs you down*.”
 
 </div>
 
@@ -173,16 +173,16 @@ human lives at risk ~
 > and how we can do better.
 
 **If you missed the earlier essays, catch up here:**\
-â€ <a
+” <a
 href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27"
 target="_blank">What Happened at Camp Mystic?</a>\
-â€ <a
+” <a
 href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
-target="_blank">The Waterâ€™s Rising: What the Data Really Says About
+target="_blank">The Water’s Rising: What the Data Really Says About
 Extreme Weather</a>
 
 > **Disclaimer:** The views expressed here are my own and do not
@@ -207,7 +207,7 @@ Extreme Weather</a>
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### How Flash Floods Work ~ and Why Theyâ€™re More Deadly Than You Think
+### How Flash Floods Work ~ and Why They’re More Deadly Than You Think
 
 > Most people think of floods as slow ~ a creeping up, inching higher,
 > day by day until the river is fit to burst.
@@ -217,10 +217,10 @@ Maybe they think of a coastal flood ~
 **Hurricane driven storm surge** pushed in by winds with **plenty of
 advance notice** and ample opportunity to evacuate.
 
-#### Flash floods arenâ€™t like that.
+#### Flash floods aren’t like that.
 
 **They arrive fast,** often with **less than an hour of warning**, and
-they donâ€™t need days of rain to cause damage.
+they don’t need days of rain to cause damage.
 
 > A single thunderstorm stalling over the wrong ridge can fill a
 > riverbed in minutes.
@@ -293,7 +293,7 @@ water.***
 In theory, the **National Weather Service (NWS) alert process** follows
 a straightforward path from the NWS to the public.
 
-**Hereâ€™s a flowchart:**
+**Here’s a flowchart:**
 
 <figure id="362f" class="graf graf--figure graf-after--p">
 <img
@@ -320,7 +320,7 @@ data-width="1536" data-height="1024" />
     alert for catastrophic flooding and life-threatening
     conditions</span>
 
-> *Once these alerts are issued, i****tâ€™s up to local officials to
+> *Once these alerts are issued, i****t’s up to local officials to
 > trigger mass notification systems****, like*
 > <a href="https://codered.crisis24.com"
 > class="markup--anchor markup--blockquote-anchor"
@@ -345,10 +345,10 @@ data-width="1536" data-height="1024" />
 
 #### **Potential Solutions**
 
-Some problems canâ€™t be solved overnight. But others can be addressed
+Some problems can’t be solved overnight. But others can be addressed
 with **better systems, faster protocols, and smarter communication.**
 
-> **Hereâ€™s where experts say progress is possible:**
+> **Here’s where experts say progress is possible:**
 
 1.  <span id="cb07">**Automate local alert triggers** when NWS issues a
     Flash Flood Emergency</span>
@@ -363,7 +363,7 @@ with **better systems, faster protocols, and smarter communication.**
 5.  <span id="4a4f">**Invest in offline alert backups**, such as
     **sirens or radio**, where cell service is unreliable</span>
 
-> *Thereâ€™s no silver bullet.*
+> *There’s no silver bullet.*
 
 > *But these changes would make the system faster, more reliable, and
 > more likely to save lives ~ especially in the middle of the night.*
@@ -391,7 +391,7 @@ with **better systems, faster protocols, and smarter communication.**
 > A flash flood watch was issued on July 3rd.
 
 > ***This should have signaled to everyone in the area that they should
-> be on their toes ~ ready to act at a momentâ€™s notice.***
+> be on their toes ~ ready to act at a moment’s notice.***
 
 Overnight and leading into the morning of July 4th the official warning
 timeline looked something like this:
@@ -430,21 +430,21 @@ timeline looked something like this:
 **Gauges failed as the stormwater swelled** ~ the last reading was 28
 feet.
 
-**Wireless alerts didnâ€™t reach everyone** ~ and even some emergency
+**Wireless alerts didn’t reach everyone** ~ and even some emergency
 officials later said they never got the warnings.
 
-> **â€œWe didnâ€™t get the emergency alert until 10 a.m.â€\
+> **“We didn’t get the emergency alert until 10 a.m.”\
 > ~ *Kerr County resident, CNN interview***
 
 There were **no physical warning sirens** near the camp.
 
-*(There were discussions about this years agoâ€¦ more to come on that in
+*(There were discussions about this years ago… more to come on that in
 the next essay.)*
 
-> **â€œThere was no warning. There was no siren. Just the river.â€\
-> *â€Šâ€”â€ŠParent of a Camp Mystic camper***
+> **“There was no warning. There was no siren. Just the river.”\
+> * — Parent of a Camp Mystic camper***
 
-While Kerr County did eventually issue **CodeRED** alerts, it wasnâ€™t
+While Kerr County did eventually issue **CodeRED** alerts, it wasn’t
 fast enough.
 
 > A 15-minute delay can mean the difference between life and death.
@@ -467,11 +467,11 @@ fast enough.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### Why Camp Mystic Couldnâ€™t Evacuate in Time
+### Why Camp Mystic Couldn’t Evacuate in Time
 
-**Itâ€™s easy to say people shouldâ€™ve evacuated.**
+**It’s easy to say people should’ve evacuated.**
 
-> But evacuating isnâ€™t always simple ~
+> But evacuating isn’t always simple ~
 
 Especially **in the dark**, when **people are asleep**, and **floodwater
 is rising** outside your door.
@@ -503,7 +503,7 @@ data-width="1404" data-height="369" />
 <figcaption>Fema FIRM Panel | Source: FEMA</figcaption>
 </figure>
 
-> *Several cabins and roads sit within Zone AEâ€Šâ€”â€Ša high-risk flood zone
+> *Several cabins and roads sit within Zone AE — a high-risk flood zone
 > with a known base flood elevation. Zone AE indicates a 1-in-100 chance
 > of flooding each year.*
 
@@ -516,11 +516,11 @@ risk.***
 > Once the power failed, staff had to rely on flashlights,
 > walkie-talkies, and muscle to get girls to higher ground.
 
-> **â€œThey were just screaming and praying. The water was moving too fast
-> to do anything.â€**\
+> **“They were just screaming and praying. The water was moving too fast
+> to do anything.”**\
 > **~ *Rescuer, CNN***
 
-Itâ€™s not that people didnâ€™t try to evacuateâ€¦
+It’s not that people didn’t try to evacuate…
 
 > The timeline and terrain made it
 
@@ -551,9 +551,9 @@ Itâ€™s not that people didnâ€™t try to evacuateâ€¦
 > On July 4th, the system failed:
 
 - <span id="66e8">**Alert systems were too slow**</span>
-- <span id="2c51">**Rain gauges werenâ€™t functioning**</span>
+- <span id="2c51">**Rain gauges weren’t functioning**</span>
 - <span id="ed39">**Emergency communications were fragmented**</span>
-- <span id="b6cb">**Site planning placed kids in harmâ€™s way**</span>
+- <span id="b6cb">**Site planning placed kids in harm’s way**</span>
 - <span id="d0ed">**The camp was totally unprepared for an emergency**
   (Despite having their emergency plan approved by the county on July
   2nd)</span>
@@ -570,7 +570,7 @@ data-width="1024" data-height="1536" />
 <figcaption>Made by User with ChatGPT</figcaption>
 </figure>
 
-> ***It wasnâ€™t just one agency or one decision.***
+> ***It wasn’t just one agency or one decision.***
 
 > **It was decades of assumptions**
 
@@ -603,7 +603,7 @@ data-width="1024" data-height="1536" />
 > The consequences of a flash flood are about more than just how much
 > rain falls
 
-Itâ€™s about **how fast** it hits, how **the terrain** moves it, **and**
+It’s about **how fast** it hits, how **the terrain** moves it, **and**
 **how prepared** (and aware) **the people are.**
 
 > ***If you run a camp, park, or group facility in a flood-prone
@@ -616,7 +616,7 @@ Itâ€™s about **how fast** it hits, how **the terrain** moves it, **and**
 - <span id="71bf">**Rehearse flood evacuation drills** like you would
   fire drills.</span>
 - <span id="ad3e">Push for **better alerts, faster protocols, and backup
-  plans** that donâ€™t require power or cell service.</span>
+  plans** that don’t require power or cell service.</span>
 
 > Because next time, the warnings might come late ~
 
@@ -640,11 +640,11 @@ Itâ€™s about **how fast** it hits, how **the terrain** moves it, **and**
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### **How Planning Decisions Put Camp Mystic in Harmâ€™s Way**
+### **How Planning Decisions Put Camp Mystic in Harm’s Way**
 
-#### **Whatâ€™s Coming in the Next Piece**
+#### **What’s Coming in the Next Piece**
 
-In the next article, Iâ€™ll zoom in on the site-level decisions that
+In the next article, I’ll zoom in on the site-level decisions that
 shaped this tragedy:
 
 - <span id="15c5">How **cabins** ended up **in a mapped
@@ -654,13 +654,13 @@ shaped this tragedy:
 - <span id="c190">The **responsibilities of** (and relationship between)
   **the federal and local governments**</span>
 
-**This wasnâ€™t the first deadly Hill Country flood.**
+**This wasn’t the first deadly Hill Country flood.**
 
-> ***And if nothing changes, it wonâ€™t be the last.***
+> ***And if nothing changes, it won’t be the last.***
 
-> **Because** â€œin the hill country,
+> **Because** “in the hill country,
 
-> the water runs you down.â€
+> the water runs you down.”
 
 </div>
 
@@ -697,9 +697,9 @@ flash floods in decades.
 
 #### **Where is Camp Mystic located?**
 
-Camp Mystic is a private Christian girlsâ€™ summer camp **located on the
+Camp Mystic is a private Christian girls’ summer camp **located on the
 Guadalupe River near Hunt, Texas** ~ part of the Texas Hill Country,
-also known as â€œFlash Flood Alley.â€
+also known as “Flash Flood Alley.”
 
 #### **Is the Guadalupe River man-made?**
 
@@ -710,25 +710,25 @@ camping.
 
 #### **What is Flash Flood Alley?**
 
-â€œ**Flash Flood Alley**â€ refers to the stretch of Central Texas between
-**San Antonio and Dallas**, especially the Hill Country. Itâ€™s not an
-official designation, but experts use the term to describe the regionâ€™s
+“**Flash Flood Alley**” refers to the stretch of Central Texas between
+**San Antonio and Dallas**, especially the Hill Country. It’s not an
+official designation, but experts use the term to describe the region’s
 **extreme flash flood risk**. The combination of rocky terrain, steep
 slopes, and narrow river valleys creates the perfect conditions for
 sudden, dangerous floods.
 
 #### **Why do flash floods happen so fast in the Hill Country?**
 
-The ground here is made of **limestone**, which doesnâ€™t absorb water.
+The ground here is made of **limestone**, which doesn’t absorb water.
 When heavy rain hits, it runs off fast ~ rushing into dry creeks and
 riverbeds. In the right conditions, a trickle can become a **20-foot
 wall of water** in less than an hour.
 
-#### **Why didnâ€™t Camp Mystic evacuate sooner?**
+#### **Why didn’t Camp Mystic evacuate sooner?**
 
-Itâ€™s a mix of delayed warnings, **offline gauges**, **power outages**,
+It’s a mix of delayed warnings, **offline gauges**, **power outages**,
 and **poor communication**. Flash Flood Warnings were issued starting at
-1:14 a.m., but evacuation didnâ€™t begin until close to 4:45 a.m. By 5:15
+1:14 a.m., but evacuation didn’t begin until close to 4:45 a.m. By 5:15
 a.m., it was too late.
 
 #### **What is a Flash Flood Emergency?**
@@ -778,7 +778,7 @@ Country and leaves little time for evacuation.
 
 **Share** with a friend.
 
-**Comment** if youâ€™ve lived through something like this.
+**Comment** if you’ve lived through something like this.
 
 > Thanks for reading!
 
@@ -807,9 +807,9 @@ href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-real
 class="markup--anchor markup--mixtapeEmbed-anchor"
 data-href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 title="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"><strong>The
-Waterâ€™s Rising: What the Data Really Says About Extreme
+Water’s Rising: What the Data Really Says About Extreme
 Weather</strong><br />
-<em>â€œThe weatherâ€™s never been like this!â€</em>medium.com</a><a
+<em>“The weather’s never been like this!”</em>medium.com</a><a
 href="https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8"
 class="js-mixtapeImage mixtapeImage u-ignoreBlock"
 data-media-id="a2cbc9c74b9b4bd9c344c25b1dd116a2"

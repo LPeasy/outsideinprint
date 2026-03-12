@@ -37,14 +37,14 @@ class="graf-image" data-image-id="0*2eeaLDOOeVcw8EBb.jpg"
 data-width="1200" data-height="600" data-is-featured="true" />
 </figure>
 
-#### Authorâ€™s Note
+#### Author’s Note
 
 > This essay draws from a weekly social teaching course taught by
 > Matthew, a Catholic educator and parish instructor whose ministry
 > focuses on helping ordinary people understand how the Church thinks
 > about society, politics, and moral responsibility.
 
-> His teaching is grounded in Scripture, the Catechism, and the Churchâ€™s
+> His teaching is grounded in Scripture, the Catechism, and the Church’s
 > social doctrine, and is offered not as personal opinion but as
 > faithful explanation of what the Church actually professes.
 
@@ -76,7 +76,7 @@ They start with policies and parties
 
 or slogans.
 
-Accusationsâ€¦
+Accusations…
 
 ~ and they stop listening.
 
@@ -97,12 +97,12 @@ world.
 > You are a Child of God. Therefore, your dignity is infinite and comes
 > from Him alone ~ not from any earthly power.
 
-The Church doesnâ€™t open with economics, healthcare, climate policy, or
+The Church doesn’t open with economics, healthcare, climate policy, or
 voting strategies.
 
 **It opens with a sentence so simple, and so sweet:**
 
-> **â€œGod is love.â€**
+> **“God is love.”**
 
 > **(1 John 4:8, NRSV-CE)**
 
@@ -120,7 +120,7 @@ data-height="519" />
 
 If God is love, then love is no feeling or preference!
 
-It canâ€™t be reduced to kindness, tolerance, nor personal fulfillment.
+It can’t be reduced to kindness, tolerance, nor personal fulfillment.
 
 Love is creativity moving over the waters of chaos bringing order and
 goodness into the world.
@@ -137,9 +137,9 @@ Love is the warm embrace of your wife and children after a long day.
 
 Paul said,
 
-> â€œIf I have prophetic powers, and understand all mysteries and all
+> “If I have prophetic powers, and understand all mysteries and all
 > knowledge, and if I have all faith, so as to remove mountains, but do
-> not have love, I am nothing.â€
+> not have love, I am nothing.”
 
 > (1 Corinthians 13:2, NRSV-CE)
 
@@ -158,11 +158,11 @@ Love of his friends.
 
 **And that is why the crucifix is at the center of our attention.**
 
-The crucifix is not decorative. Itâ€™s not sentimental.\
-Itâ€™s the Churchâ€™s most concrete social statement.
+The crucifix is not decorative. It’s not sentimental.\
+It’s the Church’s most concrete social statement.
 
-> â€œNo one has greater love than this, to lay down oneâ€™s life for oneâ€™s
-> friends.â€
+> “No one has greater love than this, to lay down one’s life for one’s
+> friends.”
 
 > (John 15:13, NRSV-CE)
 
@@ -184,7 +184,7 @@ Itâ€™s the Churchâ€™s most concrete social statement.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-### â€œIt is not good that the man should be aloneâ€
+### “It is not good that the man should be alone”
 
 <figure id="73ee" class="graf graf--figure graf-after--h3">
 <img
@@ -193,13 +193,13 @@ class="graf-image" data-image-id="0*pYHsexsXyOLtuuuk.jpg"
 data-width="356" data-height="234" />
 </figure>
 
-The Bibleâ€™s first explicit social claim appears before any potential
+The Bible’s first explicit social claim appears before any potential
 play partners existed!
 
 **Everything in creation is declared good ~ light, land, sea, animals.**
 
-> **â€œThen the Lord God said, â€˜It is not good that the man should be
-> alone.â€™â€**
+> **“Then the Lord God said, ‘It is not good that the man should be
+> alone.’”**
 
 > **(Genesis 2:18, NRSV-CE)**
 
@@ -210,7 +210,7 @@ other!
 The Church draws a decisive conclusion from this: **society is not an
 artificial construct.**
 
-#### **Itâ€™s a moral reality.**
+#### **It’s a moral reality.**
 
 We need community to discover meaning, survive hardships, and find
 salvation.
@@ -225,7 +225,7 @@ God is not solitary.
 
 God is Trinity ~ a communion of persons.
 
-To be made in Godâ€™s image is to be oriented toward relationship. Social
+To be made in God’s image is to be oriented toward relationship. Social
 concern is not a political hobby layered on top of faith ~
 
 It flows directly from God.
@@ -252,21 +252,21 @@ It flows directly from God.
 
 ### Dignity is Divine
 
-Human beings are made in Godâ€™s image, and their worth cannot be granted
+Human beings are made in God’s image, and their worth cannot be granted
 ~ or revoked ~ by governments, markets, productivity, or popularity.
 
-This is one of Catholic social teachingâ€™s most consistent claims:
+This is one of Catholic social teaching’s most consistent claims:
 
 > Human dignity is inherent, not earned.
 
-> **â€œSo God created humankind in his image, in the image of God he
-> created them.â€**
+> **“So God created humankind in his image, in the image of God he
+> created them.”**
 
 > **(Genesis 1:27, NRSV-CE)**
 
 **Dignity does not depend on capacity.**
 
-It doesnâ€™t depend on age, intelligence, usefulness, citizenship, health,
+It doesn’t depend on age, intelligence, usefulness, citizenship, health,
 or moral track record.
 
 Recent Church teaching has used the phrase ***infinite dignity***
@@ -322,21 +322,21 @@ and left for dead on the side of the road. Two religious officials pass
 by and avert their gaze. A Samaritan, of all people! ~ an outsider ~
 stops, tends to his wounds, pays for his care, and promises to return.
 
-> **â€œWhich of these three, do you think, was a neighbor to the man who
-> fell into the hands of the robbers?â€**
+> **“Which of these three, do you think, was a neighbor to the man who
+> fell into the hands of the robbers?”**
 
 > **(Luke 10:36, NRSV-CE)**
 
-The Good Samaritan doesnâ€™t ask whether an injured man shares his
-beliefs. He doesnâ€™t need to consult a system. Instead he responds to
+The Good Samaritan doesn’t ask whether an injured man shares his
+beliefs. He doesn’t need to consult a system. Instead he responds to
 need when he witnesses it! Church tradition goes further and sees Christ
 himself as the Greatest Samaritan ~ lifting humanity toward restoration
 and the true path of fellowship.
 
 Matthew 25 removes any remaining ambiguity:
 
-> **â€œTruly I tell you, just as you did it to one of the least of these
-> who are members of my family, you did it to me.â€**
+> **“Truly I tell you, just as you did it to one of the least of these
+> who are members of my family, you did it to me.”**
 
 > **(Matthew 25:40, NRSV-CE)**
 
@@ -346,7 +346,7 @@ Christ came to be the least of us. He is the hungry, the sick, the
 imprisoned, and the poor. Social concern is not requisite charity
 layered onto faith:
 
-Itâ€™s an encounter with Christ Himself.
+It’s an encounter with Christ Himself.
 
 </div>
 
@@ -382,8 +382,8 @@ It does not.
 
 Catholic social teaching operates at the level of principles ~ durable
 moral guideposts that can be applied across cultures, economies, and
-political systems. The Church does not prescribe tax rates. It doesnâ€™t
-endorse parties. It doesnâ€™t claim technical expertise in every policy
+political systems. The Church does not prescribe tax rates. It doesn’t
+endorse parties. It doesn’t claim technical expertise in every policy
 domain.
 
 > What it does claim is moral competence.
@@ -401,7 +401,7 @@ throughout this series:
     not merely ourselves</span>
 
 These are not slogans.\
-Theyâ€™re foundational.\
+They’re foundational.\
 They prevent moral outsourcing.
 
 Citizens, lawmakers, and institutions remain responsible for applying
@@ -457,7 +457,7 @@ love requires.**
 
 None of these topics are distractions from faith ~
 
-> Theyâ€™re the practical applications of faith.
+> They’re the practical applications of faith.
 
 </div>
 
@@ -479,11 +479,11 @@ None of these topics are distractions from faith ~
 
 ### A quiet invitation
 
-This series is not an argument. Itâ€™s an exploration of a moral tradition
+This series is not an argument. It’s an exploration of a moral tradition
 that refuses simplification and rewards patience. If you follow along,
 you may not agree with every conclusion.
 
-Thatâ€™s not the point.
+That’s not the point.
 
 The point is to develop a framework that takes human dignity seriously
 and resists both cynicism and utopianism.
@@ -530,7 +530,7 @@ Though night may fall and darkness surround us
 
 The sun will rise in the morning
 
-You give us courage when we are â€˜fraid,
+You give us courage when we are ‘fraid,
 
 Lift heavy burdens from our shoulders
 

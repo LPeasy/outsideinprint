@@ -1,5 +1,5 @@
 ---
-title: "Nottoway Plantation Burns Down in Fire: History and Legacy of the Southâ€™s Largest Mansion"
+title: "Nottoway Plantation Burns Down in Fire: History and Legacy of the South’s Largest Mansion"
 date: 2025-05-17
 draft: false
 slug: "nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion"
@@ -26,10 +26,10 @@ medium_source_url: "https://medium.com/@lawtonperret/nottoway-plantation-burns-d
 
 <div class="section-inner sectionLayout--insetColumn">
 
-***It was the largest plantation home in the Southâ€Šâ€”â€Šbuilt by the
+***It was the largest plantation home in the South — built by the
 enslaved, sold as a resort, and burned to the ground in 2025.***
 
-### Nottoway Plantation Burns Down: History and Legacy of the Southâ€™s Largest Mansion
+### Nottoway Plantation Burns Down: History and Legacy of the South’s Largest Mansion
 
 #### A brief explainer about what the house was, how it evolved, and why its destruction sparked so many different reactions
 
@@ -50,8 +50,8 @@ mansion in White Castle, Louisiana. The fire spread fast, overtaking the
 entire structure. By morning, <a href="https://www.nottoway.com"
 class="markup--anchor markup--p-anchor"
 data-href="https://www.nottoway.com" rel="noopener"
-target="_blank"><strong>Nottoway Plantation</strong></a>â€Šâ€”â€Š***the
-largest antebellum mansion in the American Southâ€Š*â€”**â€Šwas gone.
+target="_blank"><strong>Nottoway Plantation</strong></a> — ***the
+largest antebellum mansion in the American South *—** was gone.
 
 <figure id="4310" class="graf graf--figure graf-after--p">
 <img
@@ -70,7 +70,7 @@ data-width="1024" data-height="768" />
 
 > For others, it was a reckoning.
 
-What burned that night wasnâ€™t just a building.
+What burned that night wasn’t just a building.
 
 > It was **a symbol.**
 
@@ -78,7 +78,7 @@ It stood for Southern elegance and heritage.
 
 It was a monument to slavery and selective memory.
 
-**This is the story of Nottowayâ€Š**â€”â€Šwhat it was, how it evolved, and why
+**This is the story of Nottoway **— what it was, how it evolved, and why
 its destruction stirred so many different reactions.
 
 </div>
@@ -127,11 +127,11 @@ become the largest antebellum home in the South. Randolph named it
 > styles, with a 65-foot-long ballroom, gas lighting, indoor plumbing,
 > and a 10,000-gallon copper water tank.
 
-Randolph built Nottoway in just two years. Well, he didnâ€™t build it
-himself. Slave laborers didâ€Šâ€”â€Šhundreds of them. By 1860, Randolph owned
+Randolph built Nottoway in just two years. Well, he didn’t build it
+himself. Slave laborers did — hundreds of them. By 1860, Randolph owned
 155 slaves and controlled more than 6,000 acres.
 
-Behind the house, the slave quarters were arranged in rowsâ€Šâ€”â€Šjust far
+Behind the house, the slave quarters were arranged in rows — just far
 enough to stay out of sight but close enough to be watched.
 
 After emancipation, many of them stayed on the property. Some had
@@ -139,7 +139,7 @@ nowhere to go. Others had family still living on the land. Most entered
 into sharecropping agreements, trading bondage for debt.
 
 > Decades later, that same house would be reborn as a tourist
-> attractionâ€Šâ€”â€Šits grandeur preserved, its history tucked away out of
+> attraction — its grandeur preserved, its history tucked away out of
 > sight.
 
 </div>
@@ -175,7 +175,7 @@ data-width="768" data-height="432" />
 > data-href="https://www.nottoway.com/weddings" rel="noopener"
 > target="_blank">Source</a>
 
-> Unlike many plantations, Nottoway wasnâ€™t destroyed during the Civil
+> Unlike many plantations, Nottoway wasn’t destroyed during the Civil
 > War.
 
 It changed hands a few times over the decades that followed, staying in
@@ -186,14 +186,14 @@ weddings, and overnight stays.
 From that point forward, **Nottoway was marketed** not as a plantation,
 but **as a resort.** Later owners expanded it, adding guest rooms, a
 restaurant, and conference facilities. **Tourists** came to **marvel**
-at the white columns, oak-lined drive, and lavish interiorsâ€Šâ€”â€Š**without
+at the white columns, oak-lined drive, and lavish interiors — **without
 hearing** about the hundreds of people who lived, worked, and died on
 the land.
 
 While Nottoway was **added to the National Register of Historic Places**
 in 1980, its interpretive materials often **downplayed or ignored its
-origins.** The official websiteâ€™s history page focused entirely on the
-propertyâ€™s oak trees.
+origins.** The official website’s history page focused entirely on the
+property’s oak trees.
 
 </div>
 
@@ -215,16 +215,16 @@ propertyâ€™s oak trees.
 
 #### Why the Nottoway Fire Divided Public Opinion
 
-> Public reaction to Nottowayâ€™s destruction has been mixedâ€Šâ€”â€Šand deeply
+> Public reaction to Nottoway’s destruction has been mixed — and deeply
 > revealing.
 
 **On Reddit and Twitter,** users shared stories of the resort silencing
 mentions of slavery and forbidding guides from discussing their own
 ancestry.
 
-One user posted, â€œ*They even gave the trees names*,â€ in reference to the
-plantationâ€™s official history page. Another noted that the site leaned
-heavily into â€œ*heritage*,â€ but not hers.
+One user posted, “*They even gave the trees names*,” in reference to the
+plantation’s official history page. Another noted that the site leaned
+heavily into “*heritage*,” but not hers.
 
 <figure id="56ad" class="graf graf--figure graf-after--p">
 <img
@@ -240,7 +240,7 @@ class="graf-image" data-image-id="1*qz0TEqeIHcq_9g9WH48hjQ@2x.jpeg"
 data-width="1284" data-height="380" />
 </figure>
 
-> Reddit users react to Nottowayâ€™s fire, pointing to historical erasure
+> Reddit users react to Nottoway’s fire, pointing to historical erasure
 > and censored narratives.
 
 > **In other spaces, like Facebook,** the tone was more mournful.
@@ -263,7 +263,7 @@ data-width="1284" data-height="2341" />
 
 > **Both reactions are legitimate.**
 
-Each says something about **what the place meantâ€Š**â€”â€Š**or didnâ€™t**â€Šâ€”â€Što
+Each says something about **what the place meant **— **or didn’t** — to
 the people who encountered it.
 
 **Plantation houses like Nottoway carry *two legacies:***
@@ -276,7 +276,7 @@ class="markup--anchor markup--p-anchor"
 data-href="https://whitneyplantation.org" rel="noopener"
 target="_blank">Whitney Plantation</a>, have chosen to center the
 stories of enslaved people. Others leave that history in the
-backgroundâ€Šâ€”â€Šif they acknowledge it at all.
+background — if they acknowledge it at all.
 
 </div>
 
@@ -311,9 +311,9 @@ data-width="1024" data-height="768" />
 > data-href="https://www.reddit.com/r/l4d2/s/ZWunTFT3GF" rel="noopener"
 > target="_blank">Source</a>
 
-> The house is gone. The history isnâ€™t.
+> The house is gone. The history isn’t.
 
-Even in ashes, **Nottoway raises questions** that wonâ€™t burn away:
+Even in ashes, **Nottoway raises questions** that won’t burn away:
 
 - <span id="d9c3">***Who gets to decide how history is
   remembered?***</span>
@@ -322,7 +322,7 @@ Even in ashes, **Nottoway raises questions** that wonâ€™t burn away:
 - <span id="d57a">***What happens when we preserve the architecture but
   not the truth?***</span>
 
-Local officials called the fire a lossâ€Šâ€”â€Šfor the parish, for tourism,
+Local officials called the fire a loss — for the parish, for tourism,
 for heritage.
 
 Others called it justice, retribution, or at least an uncomfortable kind
@@ -336,12 +336,12 @@ structure reduced to ruins, the future of the property is uncertain.
 What remains are the records, the photos, the census counts, the
 architecture journals, the family oral histories.
 
-> The stories people remember from when they visitedâ€Šâ€”â€Šand the ones they
+> The stories people remember from when they visited — and the ones they
 > never heard.
 
 **Nottoway is gone, but the questions around it are not.**
 
-> Thatâ€™s the thing about history: you can burn down the walls, but the
+> That’s the thing about history: you can burn down the walls, but the
 > foundation will still be there, smoldering.
 
 </div>
@@ -362,13 +362,13 @@ architecture journals, the family oral histories.
 
 <div class="section-inner sectionLayout--insetColumn">
 
-#### Authorâ€™s Note
+#### Author’s Note
 
 **How do you feel about the Nottoway Fire?** Share in the comments
 below.
 
 ***If you want more clear, honest writing on the American economy,
-history, and societyâ€Šâ€”â€Šfollow***
+history, and society — follow***
 <a href="https://medium.com/the-balanced-sheet"
 class="markup--anchor markup--p-anchor"
 data-href="https://medium.com/the-balanced-sheet"
