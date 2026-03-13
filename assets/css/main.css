@@ -517,13 +517,19 @@ article figcaption{
 
 .start-here-page{
   margin-top:2px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 .start-here-header,
 .start-here-content,
 .start-here-page .newsletter-signup,
 .start-here-closing{
   width:100%;
-  max-width:68ch;
+  max-width:62ch;
+  margin-left:auto;
+  margin-right:auto;
 }
 .start-here-header{
   margin:0 0 0.7rem;
@@ -547,15 +553,13 @@ article figcaption{
   font-size:15px;
 }
 .start-here-content{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  display:block;
   margin-top:0.5rem;
 }
 .start-here-section{
   width:100%;
-  max-width:62ch;
-  margin:0 auto;
+  max-width:none;
+  margin:0;
 }
 .start-here-section + .start-here-section{
   margin-top:3.35rem;
