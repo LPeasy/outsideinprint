@@ -1,14 +1,14 @@
 # Legacy Essay Audit
 
-- Generated: 2026-03-13 01:30:43
+- Generated: 2026-03-13 01:48:03
 - Scanned files: 115
-- Affected files: 101
+- Affected files: 100
 
 ## Issue Categories
 
-- pseudo_headings: 92
+- pseudo_headings: 91
 - fake_lists: 46
-- duplicated_title: 21
+- duplicated_title: 20
 - medium_cta: 19
 - manual_bullets: 16
 - escaped_linebreaks: 15
@@ -21,15 +21,15 @@
 
 - SAFE_AUTO: 0
 - ASSISTED_REVIEW: 0
-- MANUAL_LIGHT: 64
+- MANUAL_LIGHT: 63
 - MANUAL_FIRST: 37
 
 ## Status Counts
 
-- CLEAN: 14
+- CLEAN: 15
 - READY_SAFE_AUTO: 0
 - READY_ASSISTED_REVIEW: 0
-- READY_MANUAL_LIGHT: 64
+- READY_MANUAL_LIGHT: 63
 - READY_MANUAL_FIRST: 37
 
 ## BATCH 1
@@ -137,7 +137,6 @@
 - `essays/etfs-and-market-concentration.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/labor-force-participation-trends-in-modern-american-society.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
-- `essays/literacy-in-the-united-states-and-the-world.md` :: priority 18, severity 6 :: featured_collection_member :: pseudo_headings, duplicated_title
 - `essays/rational-ignorance-in-the-u-s-presidential-electorate.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, pseudo_headings
 - `essays/the-structure-of-modern-american-society.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, pseudo_headings
 - `essays/federalism-in-modern-american-society.md` :: priority 18, severity 3 :: featured_collection_member :: pseudo_headings
@@ -241,7 +240,6 @@
 - `essays/etfs-and-market-concentration.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
 - `essays/labor-force-participation-trends-in-modern-american-society.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
-- `essays/literacy-in-the-united-states-and-the-world.md` :: MANUAL_LIGHT :: pseudo_headings, duplicated_title
 - `essays/rational-ignorance-in-the-u-s-presidential-electorate.md` :: MANUAL_LIGHT :: manual_bullets, pseudo_headings
 - `essays/the-structure-of-modern-american-society.md` :: MANUAL_LIGHT :: manual_bullets, pseudo_headings
 - `essays/federalism-in-modern-american-society.md` :: MANUAL_LIGHT :: pseudo_headings

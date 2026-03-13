@@ -12,9 +12,6 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/literacy-in-the-united-states-and-the-world-be3059c7a9e9"
 ---
 
-The State of Literacy in the United States and the World
-
-Disparities, Causes, and Implications
 
 ![](https://cdn-images-1.medium.com/max/800/1*nvbVOGmiXoJA1BxlyMQ67g@2x.jpeg)
 
@@ -64,7 +61,7 @@ VII. Conclusion
 
 The United States faces significant literacy challenges, with 21 percent of adults struggling to perform basic literacy tasks. These challenges disproportionately affect immigrants, racial minorities, and residents of underfunded regions, exacerbating social and economic inequalities. While the U.S. performs slightly above the OECD average, it still lags behind top-performing nations. Targeted policies, expanded adult education programs, and lessons from global leaders are essential to closing literacy gaps and ensuring that all Americans can participate fully in society and the economy. Addressing these issues is not only a matter of equity but also a foundation for sustainable economic growth and social cohesion.
 
-References
+### References
 
 1.	Program for the International Assessment of Adult Competencies (PIAAC).
 
