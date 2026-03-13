@@ -1,34 +1,34 @@
 # Legacy Essay Audit
 
-- Generated: 2026-03-13 01:02:35
+- Generated: 2026-03-13 01:30:43
 - Scanned files: 115
-- Affected files: 102
+- Affected files: 101
 
 ## Issue Categories
 
 - pseudo_headings: 92
 - fake_lists: 46
 - duplicated_title: 21
-- medium_cta: 21
+- medium_cta: 19
 - manual_bullets: 16
 - escaped_linebreaks: 15
 - source_dumps: 15
-- embed_remnants: 9
+- embed_remnants: 8
 - author_note: 3
 - ornamental_breaks: 2
 
 ## Risk Tiers
 
 - SAFE_AUTO: 0
-- ASSISTED_REVIEW: 1
+- ASSISTED_REVIEW: 0
 - MANUAL_LIGHT: 64
 - MANUAL_FIRST: 37
 
 ## Status Counts
 
-- CLEAN: 13
+- CLEAN: 14
 - READY_SAFE_AUTO: 0
-- READY_ASSISTED_REVIEW: 1
+- READY_ASSISTED_REVIEW: 0
 - READY_MANUAL_LIGHT: 64
 - READY_MANUAL_FIRST: 37
 
@@ -71,7 +71,6 @@
 - `essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, escaped_linebreaks
 - `essays/35-years-of-yellow-the-simpsons-time-loop.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
 - `essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
-- `essays/jack-stratton-and-the-vulfpeck-model.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: medium_cta, embed_remnants
 - `essays/is-doge-legal.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, source_dumps
 - `essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: embed_remnants, source_dumps, ornamental_breaks
 - `essays/public-vs-private-pay-who-really-earns-more.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
@@ -81,7 +80,6 @@
 - `essays/whos-really-funding-terror.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, source_dumps
 - `essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists
 - `essays/dirt-is-better-than-air.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
-- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
 - `essays/the-economics-of-the-mongol-empire.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
 - `essays/the-undead-state.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
 - `essays/you-cant-outrun-the-calculator.md` :: priority 23, severity 7 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings
@@ -120,6 +118,7 @@
 - `essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/how-did-mother-become-a-controversial-word-in-america.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
+- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/its-hard-to-condemn-what-doge-is-doing.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/life-is-a-bull-market.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
@@ -176,7 +175,6 @@
 - `essays/35-years-of-yellow-the-simpsons-time-loop.md` :: MANUAL_FIRST :: fake_lists, pseudo_headings, escaped_linebreaks
 - `essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md` :: MANUAL_FIRST :: fake_lists, pseudo_headings, escaped_linebreaks
 - `essays/generation-inflation.md` :: MANUAL_FIRST :: medium_cta, manual_bullets, pseudo_headings, duplicated_title
-- `essays/jack-stratton-and-the-vulfpeck-model.md` :: ASSISTED_REVIEW :: medium_cta, embed_remnants
 - `essays/is-doge-legal.md` :: MANUAL_FIRST :: fake_lists, pseudo_headings, source_dumps
 - `essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.md` :: MANUAL_LIGHT :: embed_remnants, source_dumps, ornamental_breaks
 - `essays/public-vs-private-pay-who-really-earns-more.md` :: MANUAL_FIRST :: fake_lists, pseudo_headings, escaped_linebreaks
@@ -186,7 +184,6 @@
 - `essays/whos-really-funding-terror.md` :: MANUAL_FIRST :: fake_lists, pseudo_headings, source_dumps
 - `essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md` :: MANUAL_LIGHT :: embed_remnants, fake_lists
 - `essays/dirt-is-better-than-air.md` :: MANUAL_LIGHT :: medium_cta, pseudo_headings
-- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: MANUAL_LIGHT :: medium_cta, pseudo_headings
 - `essays/the-economics-of-the-mongol-empire.md` :: MANUAL_LIGHT :: medium_cta, pseudo_headings
 - `essays/the-undead-state.md` :: MANUAL_LIGHT :: medium_cta, pseudo_headings
 - `essays/you-cant-outrun-the-calculator.md` :: MANUAL_LIGHT :: medium_cta, pseudo_headings
@@ -226,6 +223,7 @@
 - `essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/how-did-mother-become-a-controversial-word-in-america.md` :: MANUAL_LIGHT :: pseudo_headings
+- `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/its-hard-to-condemn-what-doge-is-doing.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/life-is-a-bull-market.md` :: MANUAL_LIGHT :: pseudo_headings

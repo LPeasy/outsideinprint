@@ -330,7 +330,8 @@ $ctaPatterns = @(
   '\bcomment your thoughts\b',
   '\bcomments below\b',
   '\boriginally appeared on\b',
-  '\bpublished in\b',
+  '\boriginally published in\b',
+  '\bpublished in\b(?=[^\r\n]{0,80}\bon medium\b)',
   '\bmember-only\b',
   '\bi read every comment\b',
   '\bshare this (?:story|piece)\b'

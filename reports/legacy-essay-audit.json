@@ -1,15 +1,15 @@
 {
-    "generated_at":  "2026-03-13T01:02:35.6078286-04:00",
+    "generated_at":  "2026-03-13T01:30:43.4595799-04:00",
     "scanned_sections":  [
                              "essays"
                          ],
     "totals":  {
                    "scanned_files":  115,
-                   "affected_files":  102,
+                   "affected_files":  101,
                    "imported_files":  115,
                    "batch_1":  2,
                    "batch_2":  10,
-                   "batch_3":  90
+                   "batch_3":  89
                },
     "issue_categories":  [
                              {
@@ -22,7 +22,7 @@
                              },
                              {
                                  "issue_type":  "embed_remnants",
-                                 "affected_files":  9
+                                 "affected_files":  8
                              },
                              {
                                  "issue_type":  "escaped_linebreaks",
@@ -38,7 +38,7 @@
                              },
                              {
                                  "issue_type":  "medium_cta",
-                                 "affected_files":  21
+                                 "affected_files":  19
                              },
                              {
                                  "issue_type":  "ornamental_breaks",
@@ -60,7 +60,7 @@
                        },
                        {
                            "risk_tier":  "ASSISTED_REVIEW",
-                           "file_count":  1
+                           "file_count":  0
                        },
                        {
                            "risk_tier":  "MANUAL_LIGHT",
@@ -74,7 +74,7 @@
     "status_counts":  [
                           {
                               "status":  "CLEAN",
-                              "file_count":  13
+                              "file_count":  14
                           },
                           {
                               "status":  "READY_SAFE_AUTO",
@@ -82,7 +82,7 @@
                           },
                           {
                               "status":  "READY_ASSISTED_REVIEW",
-                              "file_count":  1
+                              "file_count":  0
                           },
                           {
                               "status":  "READY_MANUAL_LIGHT",
@@ -1784,7 +1784,7 @@
                       "collections":  [
                                           "syd-and-oliver-dialogues"
                                       ],
-                      "has_medium_cta":  true,
+                      "has_medium_cta":  false,
                       "has_author_note":  false,
                       "has_embed_remnants":  false,
                       "has_encoding_damage":  false,
@@ -1793,7 +1793,7 @@
                       "has_source_dump":  false,
                       "has_duplicated_title":  false,
                       "has_separator_residue":  false,
-                      "medium_cta_count":  1,
+                      "medium_cta_count":  0,
                       "author_note_count":  0,
                       "embed_remnant_count":  0,
                       "encoding_damage_count":  0,
@@ -1802,14 +1802,11 @@
                       "source_dump_count":  0,
                       "duplicated_title_count":  0,
                       "separator_residue_count":  0,
-                      "issue_types":  [
-                                          "medium_cta",
-                                          "pseudo_headings"
-                                      ],
-                      "issue_type_count":  2,
-                      "severity_score":  7,
+                      "issue_types":  "pseudo_headings",
+                      "issue_type_count":  1,
+                      "severity_score":  3,
                       "priority_score":  23,
-                      "cleanup_score":  30,
+                      "cleanup_score":  26,
                       "batch":  "batch_3",
                       "risk_tier":  "MANUAL_LIGHT",
                       "status":  "READY_MANUAL_LIGHT",
@@ -2076,40 +2073,39 @@
                       "collections":  [
                                           "syd-and-oliver-dialogues"
                                       ],
-                      "has_medium_cta":  true,
+                      "has_medium_cta":  false,
                       "has_author_note":  false,
-                      "has_embed_remnants":  true,
+                      "has_embed_remnants":  false,
                       "has_encoding_damage":  false,
                       "has_manual_bullets":  false,
                       "has_pseudo_headings":  false,
                       "has_source_dump":  false,
                       "has_duplicated_title":  false,
                       "has_separator_residue":  false,
-                      "medium_cta_count":  1,
+                      "medium_cta_count":  0,
                       "author_note_count":  0,
-                      "embed_remnant_count":  13,
+                      "embed_remnant_count":  0,
                       "encoding_damage_count":  0,
                       "manual_bullet_count":  0,
                       "pseudo_heading_count":  0,
                       "source_dump_count":  0,
                       "duplicated_title_count":  0,
                       "separator_residue_count":  0,
-                      "issue_types":  [
-                                          "medium_cta",
-                                          "embed_remnants"
-                                      ],
-                      "issue_type_count":  2,
-                      "severity_score":  8,
+                      "issue_types":  {
+
+                                      },
+                      "issue_type_count":  0,
+                      "severity_score":  0,
                       "priority_score":  23,
-                      "cleanup_score":  31,
-                      "batch":  "batch_3",
-                      "risk_tier":  "ASSISTED_REVIEW",
-                      "status":  "READY_ASSISTED_REVIEW",
+                      "cleanup_score":  23,
+                      "batch":  "clean",
+                      "risk_tier":  null,
+                      "status":  "CLEAN",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
                                            ],
-                      "manual_review":  true
+                      "manual_review":  false
                   },
                   {
                       "path":  "essays/june-27-2025-scotus-set-to-close-its-term-with-major-decisions.md",
