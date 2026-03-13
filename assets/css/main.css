@@ -1,4 +1,4 @@
-﻿:root{
+:root{
   --bg:#0b0b0b;
   --fg:#e8e2d8;
   --muted:#b8b0a6;
@@ -547,15 +547,20 @@ article figcaption{
   font-size:15px;
 }
 .start-here-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   margin-top:0.5rem;
 }
 .start-here-section{
+  width:100%;
   max-width:62ch;
+  margin:0 auto;
 }
 .start-here-section + .start-here-section{
   margin-top:3.35rem;
   padding-top:1.85rem;
-  border-top:1px solid rgba(232,226,216,.07);
+  border-top:1px solid rgba(232,226,216,.12);
 }
 .start-here-content h2{
   margin:0 0 0.8rem;
@@ -590,10 +595,10 @@ article figcaption{
   grid-template-columns:minmax(118px, 154px) minmax(0, 1fr);
   gap:0.75rem 1.15rem;
   padding:0.8rem 0;
-  border-top:1px solid rgba(232,226,216,.07);
+  border-top:1px solid rgba(232,226,216,.12);
 }
 .start-here-map-row:last-child{
-  border-bottom:1px solid rgba(232,226,216,.07);
+  border-bottom:1px solid rgba(232,226,216,.12);
 }
 .start-here-map dt,
 .start-here-map dd{
@@ -621,10 +626,10 @@ article figcaption{
 }
 .start-here-feature{
   padding:1rem 0 1.05rem;
-  border-top:1px solid rgba(232,226,216,.085);
+  border-top:1px solid rgba(232,226,216,.14);
 }
 .start-here-feature:last-child{
-  border-bottom:1px solid rgba(232,226,216,.085);
+  border-bottom:1px solid rgba(232,226,216,.14);
 }
 .start-here-feature p{
   max-width:55ch;
@@ -683,17 +688,18 @@ article figcaption{
 }
 .start-here-edition-list li{
   padding-top:0.65rem;
-  border-top:1px solid rgba(232,226,216,.07);
+  border-top:1px solid rgba(232,226,216,.12);
   font-family:var(--sans);
   font-size:11px;
   letter-spacing:.1em;
   text-transform:uppercase;
 }
 .newsletter-signup--start-here{
+  width:100%;
   max-width:60ch;
-  margin-top:3.2rem;
+  margin:0 auto 3.2rem;
   padding-top:1.6rem;
-  border-top:1px solid rgba(232,226,216,.07);
+  border-top:1px solid rgba(232,226,216,.12);
 }
 .newsletter-signup--start-here .newsletter-signup__inner{
   padding:0.8rem 0 0;
@@ -754,7 +760,7 @@ article figcaption{
     grid-template-columns:1fr;
   }
   .newsletter-signup--start-here{
-    margin-top:2.7rem;
+    margin:0 auto 2.7rem;
     padding-top:1.45rem;
   }
 }

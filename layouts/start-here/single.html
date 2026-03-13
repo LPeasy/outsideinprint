@@ -12,16 +12,6 @@
       {{ .Content }}
     </article>
 
-    {{ partial "newsletter_signup.html" (dict
-      "page" .
-      "class" "newsletter-signup--page newsletter-signup--start-here"
-      "eyebrow" "Letter"
-      "title" "Weekly letter"
-      "dek" "New editions, notes, and selected work from Outside In Print."
-      "note" "Sent quietly, once a week."
-      "buttonLabel" "Join"
-    ) }}
-
     <p class="start-here-closing">Begin where the thread catches.</p>
   </section>
 {{ end }}

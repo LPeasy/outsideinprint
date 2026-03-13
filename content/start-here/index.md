@@ -11,9 +11,12 @@ section_label: "A Map of the Imprint"
 <section class="start-here-section start-here-intro">
   <p>Outside In Print is a digital imprint for essays, investigations, stories, and literature.</p>
   <p>The site is built around a simple idea: writing should be publishable, citable, printable, and worth returning to. Each piece appears here as an edition, with a stable home on the web and a free PDF for offline reading.</p>
-  <p>This is the permanent home of the work.</p>
 </section>
+{{< /rawhtml >}}
 
+{{< newsletter_signup class="newsletter-signup--page newsletter-signup--start-here" eyebrow="Letter" title="Weekly letter" dek="New editions, notes, and selected work from Outside In Print." note="Sent quietly, once a week." buttonLabel="Join" >}}
+
+{{< rawhtml >}}
 <section class="start-here-section start-here-map-section">
   <h2>How to Read the Site</h2>
   <dl class="start-here-map">
