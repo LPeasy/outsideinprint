@@ -442,7 +442,26 @@ foreach ($page in $pages) {
     'batch_3'
   }
 
-  $manualReview = @($issueTypes | Where-Object { $_ -in @('embed_remnants','pseudo_headings','source_dumps','fake_lists') }).Count -gt 0
+  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','ornamental_breaks')
+  $assistedReviewIssues = @('medium_cta','escaped_linebreaks') + $safeAutoIssues
+  $riskTier = $null
+  if ($hasIssues) {
+    if (@($issueTypes | Where-Object { $_ -notin $safeAutoIssues }).Count -eq 0) {
+      $riskTier = 'SAFE_AUTO'
+    } elseif (@($issueTypes | Where-Object { $_ -notin $assistedReviewIssues }).Count -eq 0) {
+      $riskTier = 'ASSISTED_REVIEW'
+    } else {
+      $riskTier = 'MANUAL_FIRST'
+    }
+  }
+
+  $status = switch ($riskTier) {
+    'SAFE_AUTO' { 'READY_SAFE_AUTO' }
+    'ASSISTED_REVIEW' { 'READY_ASSISTED_REVIEW' }
+    'MANUAL_FIRST' { 'READY_MANUAL_FIRST' }
+    default { 'CLEAN' }
+  }
+  $manualReview = $hasIssues -and ($riskTier -ne 'SAFE_AUTO')
 
   $rows.Add([pscustomobject]@{
     path = $page.RelativePath
@@ -480,6 +499,8 @@ foreach ($page in $pages) {
     priority_score = $priorityScore
     cleanup_score = $cleanupScore
     batch = $batch
+    risk_tier = $riskTier
+    status = $status
     priority_reasons = $priorityReasons.ToArray()
     manual_review = [bool]$manualReview
   })
@@ -497,6 +518,18 @@ foreach ($row in $affected) {
 $issueSummaryRows = foreach ($key in ($issueSummary.Keys | Sort-Object)) {
   [pscustomobject]@{ issue_type = $key; affected_files = $issueSummary[$key] }
 }
+$riskTierSummaryRows = foreach ($tier in @('SAFE_AUTO','ASSISTED_REVIEW','MANUAL_FIRST')) {
+  [pscustomobject]@{
+    risk_tier = $tier
+    file_count = @($affected | Where-Object { $_.risk_tier -eq $tier }).Count
+  }
+}
+$statusSummaryRows = foreach ($statusName in @('CLEAN','READY_SAFE_AUTO','READY_ASSISTED_REVIEW','READY_MANUAL_FIRST')) {
+  [pscustomobject]@{
+    status = $statusName
+    file_count = @($rowsArray | Where-Object { $_.status -eq $statusName }).Count
+  }
+}
 
 $report = [pscustomobject]@{
   generated_at = (Get-Date).ToString('o')
@@ -510,6 +543,8 @@ $report = [pscustomobject]@{
     batch_3 = @($affected | Where-Object { $_.batch -eq 'batch_3' }).Count
   }
   issue_categories = $issueSummaryRows
+  risk_tiers = $riskTierSummaryRows
+  status_counts = $statusSummaryRows
   priority_logic = @(
     'homepage_selected = featured: true',
     'start_here_direct = linked from content/start-here/index.md',
@@ -527,7 +562,7 @@ $csvPath = "$ReportBasePath.csv"
 $mdPath = "$ReportBasePath.md"
 Write-TextNoBom $jsonPath ($report | ConvertTo-Json -Depth 8)
 $rowsArray |
-  Select-Object path,title,section,date,imported,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,manual_review,has_medium_cta,has_author_note,has_embed_remnants,has_encoding_damage,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue |
+  Select-Object path,title,section,date,imported,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_author_note,has_embed_remnants,has_encoding_damage,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue |
   Export-Csv -Path $csvPath -NoTypeInformation -Encoding utf8
 
 $issueSort = @(
@@ -556,6 +591,18 @@ $lines.Add('')
 foreach ($item in ($issueSummaryRows | Sort-Object -Property $issueSort)) {
   $lines.Add("- $($item.issue_type): $($item.affected_files)")
 }
+$lines.Add('')
+$lines.Add('## Risk Tiers')
+$lines.Add('')
+foreach ($item in $riskTierSummaryRows) {
+  $lines.Add("- $($item.risk_tier): $($item.file_count)")
+}
+$lines.Add('')
+$lines.Add('## Status Counts')
+$lines.Add('')
+foreach ($item in $statusSummaryRows) {
+  $lines.Add("- $($item.status): $($item.file_count)")
+}
 foreach ($batchName in @('batch_1','batch_2','batch_3')) {
   $pretty = $batchName.Replace('_',' ').ToUpperInvariant()
   $batchRows = @($affected | Where-Object { $_.batch -eq $batchName } | Sort-Object -Property $fileSort)
@@ -580,7 +627,7 @@ if ($manualRows.Count -eq 0) {
   $lines.Add('- None flagged.')
 } else {
   foreach ($row in $manualRows) {
-    $lines.Add("- ``$($row.path)`` :: $($row.issue_types -join ', ')")
+    $lines.Add("- ``$($row.path)`` :: $($row.risk_tier) :: $($row.issue_types -join ', ')")
   }
 }
 Write-TextNoBom $mdPath (($lines -join "`r`n") + "`r`n")
