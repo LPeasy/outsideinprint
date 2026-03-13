@@ -1,15 +1,15 @@
 {
-    "generated_at":  "2026-03-12T22:56:46.8375964-04:00",
+    "generated_at":  "2026-03-12T23:28:55.4570998-04:00",
     "scanned_sections":  [
                              "essays"
                          ],
     "totals":  {
                    "scanned_files":  115,
-                   "affected_files":  107,
+                   "affected_files":  104,
                    "imported_files":  115,
                    "batch_1":  2,
                    "batch_2":  11,
-                   "batch_3":  94
+                   "batch_3":  91
                },
     "issue_categories":  [
                              {
@@ -18,11 +18,11 @@
                              },
                              {
                                  "issue_type":  "duplicated_title",
-                                 "affected_files":  23
+                                 "affected_files":  21
                              },
                              {
                                  "issue_type":  "embed_remnants",
-                                 "affected_files":  12
+                                 "affected_files":  9
                              },
                              {
                                  "issue_type":  "escaped_linebreaks",
@@ -42,7 +42,7 @@
                              },
                              {
                                  "issue_type":  "ornamental_breaks",
-                                 "affected_files":  5
+                                 "affected_files":  3
                              },
                              {
                                  "issue_type":  "pseudo_headings",
@@ -56,7 +56,7 @@
     "risk_tiers":  [
                        {
                            "risk_tier":  "SAFE_AUTO",
-                           "file_count":  3
+                           "file_count":  0
                        },
                        {
                            "risk_tier":  "ASSISTED_REVIEW",
@@ -74,11 +74,11 @@
     "status_counts":  [
                           {
                               "status":  "CLEAN",
-                              "file_count":  8
+                              "file_count":  11
                           },
                           {
                               "status":  "READY_SAFE_AUTO",
-                              "file_count":  3
+                              "file_count":  0
                           },
                           {
                               "status":  "READY_ASSISTED_REVIEW",
@@ -261,7 +261,7 @@
                                       ],
                       "has_medium_cta":  false,
                       "has_author_note":  false,
-                      "has_embed_remnants":  true,
+                      "has_embed_remnants":  false,
                       "has_encoding_damage":  false,
                       "has_manual_bullets":  false,
                       "has_pseudo_headings":  false,
@@ -270,21 +270,23 @@
                       "has_separator_residue":  false,
                       "medium_cta_count":  0,
                       "author_note_count":  0,
-                      "embed_remnant_count":  2,
+                      "embed_remnant_count":  0,
                       "encoding_damage_count":  0,
                       "manual_bullet_count":  0,
                       "pseudo_heading_count":  0,
                       "source_dump_count":  0,
                       "duplicated_title_count":  0,
                       "separator_residue_count":  0,
-                      "issue_types":  "embed_remnants",
-                      "issue_type_count":  1,
-                      "severity_score":  4,
+                      "issue_types":  {
+
+                                      },
+                      "issue_type_count":  0,
+                      "severity_score":  0,
                       "priority_score":  23,
-                      "cleanup_score":  27,
-                      "batch":  "batch_3",
-                      "risk_tier":  "SAFE_AUTO",
-                      "status":  "READY_SAFE_AUTO",
+                      "cleanup_score":  23,
+                      "batch":  "clean",
+                      "risk_tier":  null,
+                      "status":  "CLEAN",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4639,34 +4641,32 @@
                                       ],
                       "has_medium_cta":  false,
                       "has_author_note":  false,
-                      "has_embed_remnants":  true,
+                      "has_embed_remnants":  false,
                       "has_encoding_damage":  false,
                       "has_manual_bullets":  false,
                       "has_pseudo_headings":  false,
                       "has_source_dump":  false,
-                      "has_duplicated_title":  true,
-                      "has_separator_residue":  true,
+                      "has_duplicated_title":  false,
+                      "has_separator_residue":  false,
                       "medium_cta_count":  0,
                       "author_note_count":  0,
-                      "embed_remnant_count":  26,
+                      "embed_remnant_count":  0,
                       "encoding_damage_count":  0,
                       "manual_bullet_count":  0,
                       "pseudo_heading_count":  0,
                       "source_dump_count":  0,
-                      "duplicated_title_count":  2,
-                      "separator_residue_count":  10,
-                      "issue_types":  [
-                                          "embed_remnants",
-                                          "duplicated_title",
-                                          "ornamental_breaks"
-                                      ],
-                      "issue_type_count":  3,
-                      "severity_score":  9,
+                      "duplicated_title_count":  0,
+                      "separator_residue_count":  0,
+                      "issue_types":  {
+
+                                      },
+                      "issue_type_count":  0,
+                      "severity_score":  0,
                       "priority_score":  23,
-                      "cleanup_score":  32,
-                      "batch":  "batch_3",
-                      "risk_tier":  "SAFE_AUTO",
-                      "status":  "READY_SAFE_AUTO",
+                      "cleanup_score":  23,
+                      "batch":  "clean",
+                      "risk_tier":  null,
+                      "status":  "CLEAN",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -5429,34 +5429,32 @@
                                       ],
                       "has_medium_cta":  false,
                       "has_author_note":  false,
-                      "has_embed_remnants":  true,
+                      "has_embed_remnants":  false,
                       "has_encoding_damage":  false,
                       "has_manual_bullets":  false,
                       "has_pseudo_headings":  false,
                       "has_source_dump":  false,
-                      "has_duplicated_title":  true,
-                      "has_separator_residue":  true,
+                      "has_duplicated_title":  false,
+                      "has_separator_residue":  false,
                       "medium_cta_count":  0,
                       "author_note_count":  0,
-                      "embed_remnant_count":  18,
+                      "embed_remnant_count":  0,
                       "encoding_damage_count":  0,
                       "manual_bullet_count":  0,
                       "pseudo_heading_count":  0,
                       "source_dump_count":  0,
-                      "duplicated_title_count":  2,
-                      "separator_residue_count":  6,
-                      "issue_types":  [
-                                          "embed_remnants",
-                                          "duplicated_title",
-                                          "ornamental_breaks"
-                                      ],
-                      "issue_type_count":  3,
-                      "severity_score":  9,
+                      "duplicated_title_count":  0,
+                      "separator_residue_count":  0,
+                      "issue_types":  {
+
+                                      },
+                      "issue_type_count":  0,
+                      "severity_score":  0,
                       "priority_score":  23,
-                      "cleanup_score":  32,
-                      "batch":  "batch_3",
-                      "risk_tier":  "SAFE_AUTO",
-                      "status":  "READY_SAFE_AUTO",
+                      "cleanup_score":  23,
+                      "batch":  "clean",
+                      "risk_tier":  null,
+                      "status":  "CLEAN",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"

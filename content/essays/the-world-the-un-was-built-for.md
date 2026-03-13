@@ -12,22 +12,6 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-world-the-un-was-built-for-335093881846"
 ---
 
-<div id="862d" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-### The World the UN Was Built For
-
-#### How Postwar Human Rights, Migration Norms, and Global Institutions Were Designed for Europe ~ and Applied to a Very Different World
-
 <figure id="32d9" class="graf graf--figure graf-after--h4">
 <img
 src="https://cdn-images-1.medium.com/max/800/1*NVaPWu3fjquEpPay7rQusQ.png"
@@ -38,24 +22,7 @@ data-width="1536" data-height="1024" data-is-featured="true" />
 In the years after World War II, the victors attempted something new.
 After two global wars in a single generation, they agreed to a set of
 rules meant to prevent a third. The result was a postwar framework ~ the
-<a
-href="https://www.archives.gov/milestone-documents/united-nations-charter"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.archives.gov/milestone-documents/united-nations-charter"
-rel="noopener" target="_blank">United Nations</a>, <a
-href="https://www.un.org/en/about-us/universal-declaration-of-human-rights"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.un.org/en/about-us/universal-declaration-of-human-rights"
-rel="noopener" target="_blank">the <strong>Universal Declaration of
-Human Rights</strong></a>, <a
-href="https://www.unhcr.org/about-unhcr/overview/1951-refugee-convention"
-class="markup--anchor markup--p-anchor"
-data-href="https://www.unhcr.org/about-unhcr/overview/1951-refugee-convention"
-rel="noopener" target="_blank">refugee conventions</a>, and <a
-href="https://mzv.gov.cz/nato.brussels/en/nato/official_documents_and_sources/dokumenty_a_zdroje.html"
-class="markup--anchor markup--p-anchor"
-data-href="https://mzv.gov.cz/nato.brussels/en/nato/official_documents_and_sources/dokumenty_a_zdroje.html"
-rel="noopener" target="_blank">NATO</a> ~ that still defines global
+[United Nations](https://www.archives.gov/milestone-documents/united-nations-charter), [the **Universal Declaration of Human Rights**](https://www.un.org/en/about-us/universal-declaration-of-human-rights), [refugee conventions](https://www.unhcr.org/about-unhcr/overview/1951-refugee-convention), and [NATO](https://mzv.gov.cz/nato.brussels/en/nato/official_documents_and_sources/dokumenty_a_zdroje.html) ~ that still defines global
 order.
 
 These ideas were not abstract. They were shaped by specific societies,
@@ -67,24 +34,6 @@ work.
 This essay makes a narrow claim: **the postwar global order was built
 for Western Europe and its Atlantic allies, and its later extension to
 the Third World was neither neutral nor free of consequence**.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="74b8" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### The Postwar World That Shaped the United Nations
 
@@ -111,31 +60,8 @@ class="graf graf--figure graf-after--p graf--trailing">
 class="graf-image" data-image-id="0*8odgxtxn9Xk2eo2f" data-width="1920"
 data-height="960" />
 <figcaption>Allied leaders during World War II. The postwar global order
-emerged from total war, not peaceful consensus. <a
-href="https://www.photo12.com/en/image/arp07101_390004800"
-class="markup--anchor markup--figure-anchor"
-data-href="https://www.photo12.com/en/image/arp07101_390004800"
-rel="noopener" target="_blank">Ann Ronan Pictures/Print Collector/Getty
-Images</a></figcaption>
+emerged from total war, not peaceful consensus. [Ann Ronan Pictures/Print Collector/Getty Images](https://www.photo12.com/en/image/arp07101_390004800)</figcaption>
 </figure>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="82da" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Who Built the UN ~ and Who Didn’t
 
@@ -147,9 +73,7 @@ data-width="1480" data-height="625" />
 <figcaption><strong><em>United Nations membership by
 decade.</em></strong> <em>Most of Africa, the Middle East, and South
 Asia were not yet sovereign states in 1945 and were not represented
-at</em> <a href="http://UN.org"
-class="markup--anchor markup--figure-anchor" data-href="http://UN.org"
-rel="noopener" target="_blank"><em>the system</em></a><em>’s
+at</em> [*the system*](http://UN.org)<em>’s
 founding.</em></figcaption>
 </figure>
 
@@ -173,24 +97,6 @@ Only later ~ through decolonization and Cold War expansion ~ were these
 frameworks extended wholesale to societies with different political
 traditions, stronger kin or religious authority, and foreign expressions
 of power and survival.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="b0f5" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Japan’s Choice ~ How a Non-Western State Made Western Institutions Work
 
@@ -229,24 +135,6 @@ Japan is not an exception to the argument.
 
 It’s evidence for it.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="b2b1" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### What the “Third World” Actually Means ~ State Formation and Power
 
 The term *Third World* remains analytically useful because it describes
@@ -268,24 +156,6 @@ That assumption, rather than universality itself, would prove costly.
 
 So, why did universal human rights behave so differently once extended
 beyond their original institutional context?
-
-</div>
-
-</div>
-
-</div>
-
-<div id="33b0" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Human Rights Without Preconditions ~ When Universality Breaks
 
@@ -314,24 +184,6 @@ fallen sharply.
 Nowhere would that cost become more visible than in the application of
 universal rights across borders.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="2fb1" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Migration and Moral Asymmetry ~ When Humanitarian Norms Outrun State Capacity
 
 Refugee protections were originally designed to manage temporary
@@ -358,24 +210,6 @@ In doing so, the West has forgotten that freedom is not guaranteed, and
 that citizenship is a scarce and hard-won inheritance ~ not an
 entitlement.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="7351" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Most of the World Never Forgot That Power Matters
 
 Most of the world still remembers that life is harsh ~ that power,
@@ -390,24 +224,6 @@ Order depends on shared assumptions about authority, obligation, and
 belonging. And when those assumptions don’t hold true?
 
 > Institutions collapse.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="5eea" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 ### Values Are Practiced Before They Are Protected
 
@@ -426,24 +242,6 @@ disciplined adoption by societies that preserve internal cohesion.
 Global orders do not fail in a vacuum ~ they fall when great societies
 forget their bloody past.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="1686" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 ### Author’s Note
 
 This essay is an attempt to describe how global institutions actually
@@ -457,10 +255,3 @@ If you disagree, I welcome it ~ but only on the merits of the argument
 itself.
 
 Read closely. Question the assumptions. Engage in good faith.
-
-</div>
-
-</div>
-
-</div>
-

@@ -18,12 +18,7 @@ medium_source_url: "https://medium.com/@lawtonperret/8-big-questions-everyone-ha
 
 > New to the story?
 
-> <a
-> href="https://medium.com/the-balanced-sheet/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://medium.com/the-balanced-sheet/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a"
-> target="_blank">**Read our full biography of Pope Leo XIV to learn
-> about his life, ministry, and path to the papacy.**</a>
+> [**Read our full biography of Pope Leo XIV to learn about his life, ministry, and path to the papacy.**](https://medium.com/the-balanced-sheet/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a)
 
 - [Who Is Pope Leo XIV? Chicago-Born Priest Becomes First American Pope](https://medium.com/the-balanced-sheet/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a)
 
@@ -157,11 +152,7 @@ through collaboration ~ not edict.**
 
 ### **5.** Where Does Pope Leo XIV Stand on Climate Change and the Environment?
 
-> Strongly aligned with <a
-> href="https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html"
-> class="markup--anchor markup--pullquote-anchor"
-> data-href="https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html"
-> rel="noopener" target="_blank">*Laudato Si’*</a> and the
+> Strongly aligned with [*Laudato Si’*](https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html) and the
 > Francis environmental legacy.
 
 > **“Today … we live in a world that is burning, both because of global

@@ -12,24 +12,6 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025-55ca02bd03b7"
 ---
 
-<div id="1334" class="section section section--body section--first">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
-> Chili’s isn’t just competing with fast food ~ it’s eating their lunch.
-
-### Why More People Are Choosing Chili’s Over McDonald’s in 2025
-
-#### As Fast Food Prices Surge, Chili’s \$13 Meal Deal Brings Diners Back
-
 <figure id="93af" class="graf graf--figure graf-after--h4">
 <img
 src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg"
@@ -68,24 +50,6 @@ now, no deal.**
 > The fallback has become a frustration. And that opens the door for a
 > comeback nobody saw coming.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="5e5d" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Chili’s Comeback: The Casual Dining Option Beating Fast Food
 
 <figure id="4208" class="graf graf--figure graf-after--h4">
@@ -93,14 +57,7 @@ now, no deal.**
 src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/faeba248f5c4b477b0279bce3e50a3e56ca29c1c3505b077b7c671397ec43d73.jpeg"
 class="graf-image" data-image-id="1*R6HszRlUrig3LPQKwFnnbA@2x.jpeg"
 data-width="3240" data-height="3240" />
-<figcaption>Photo by <a href="https://mockup.graphics"
-class="markup--anchor markup--figure-anchor"
-data-href="https://mockup.graphics" rel="noopener"
-target="_blank">Mockup Graphics</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
+<figcaption>Photo by [Mockup Graphics](https://mockup.graphics) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)</figcaption>
 </figure>
 
 > For years, casual dining chains like Chili’s have felt like they’re
@@ -131,24 +88,6 @@ When a Big Mac meal hits \$13, and a Chili’s burger with chips, salsa,
 and a drink costs the same, it flips the equation.
 
 > You don’t just get more food ~ you get more bang for your buck.
-
-</div>
-
-</div>
-
-</div>
-
-<div id="83a0" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
 
 #### Chili’s “3 for Me” Deal Is Beating Fast Food on Value and Convenience
 
@@ -201,30 +140,7 @@ meal.**
 
 > **That feeling that you got a deal matters more than ever.**
 
-**(Related:** <a
-href="https://medium.com/the-balanced-sheet/standard-of-living-vs-quality-of-life-what-the-numbers-miss-9a9200cdea84"
-class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet/standard-of-living-vs-quality-of-life-what-the-numbers-miss-9a9200cdea84"
-target="_blank"><strong>Standard of Living vs Quality of
-Life</strong></a>**)**
-
-</div>
-
-</div>
-
-</div>
-
-<div id="7355" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
+**(Related:** [**Standard of Living vs Quality of Life**](https://medium.com/the-balanced-sheet/standard-of-living-vs-quality-of-life-what-the-numbers-miss-9a9200cdea84)**)**
 
 #### How Chili’s Is Winning the Fast Food vs. Sit-Down Battle
 
@@ -256,24 +172,6 @@ don’t feel ripped off.
 > In a time when fast food is less about speed and more about sticker
 > shock, Chili’s stands out.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="6b2b" class="section section section--body">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### What Chili’s Resurgence Reveals About Changing Spending Habits
 
 <figure id="4c1a" class="graf graf--figure graf-after--h4">
@@ -281,14 +179,7 @@ don’t feel ripped off.
 src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/e6f02b7dea2c25bb1d1cd6f81822282ce09eb2a4dc70e1b20f53fd5f96ad4de3.jpeg"
 class="graf-image" data-image-id="1*3fjG5KnfV_GYzl0AL_eJHA@2x.jpeg"
 data-width="3240" data-height="4050" />
-<figcaption>Photo by <a href="https://coso.me/jjjordan"
-class="markup--anchor markup--figure-anchor"
-data-href="https://coso.me/jjjordan" rel="noopener"
-target="_blank">Pickled Stardust</a> on <a
-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-class="markup--anchor markup--figure-anchor"
-data-href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral"
-rel="noopener" target="_blank">Unsplash</a></figcaption>
+<figcaption>Photo by [Pickled Stardust](https://coso.me/jjjordan) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)</figcaption>
 </figure>
 
 > This is bigger than one chain.
@@ -314,39 +205,10 @@ That’s the shift: **value isn’t just about numbers.**
 
 > It’s about feeling like you got your money’s worth.
 
-</div>
-
-</div>
-
-</div>
-
-<div id="e0a5" class="section section section--body section--last">
-
-<div class="section-divider">
-
-------------------------------------------------------------------------
-
-</div>
-
-<div class="section-content">
-
-<div class="section-inner sectionLayout--insetColumn">
-
 #### Author’s Note
 
 If you enjoyed this piece, **hit the clap button** so more people see
 it. Got a story about fast food sticker shock or your own go-to \$13
 meal? ***Drop it in the comments.*** And if you want more essays like
-this, follow <a
-href="https://medium.com/the-balanced-sheet?source=home---two_column_layout_nav-----------------------------------------"
-class="markup--anchor markup--p-anchor"
-data-href="https://medium.com/the-balanced-sheet?source=home---two_column_layout_nav-----------------------------------------"
-target="_blank">The Balance Sheet</a> for straight talk on the real
+this, follow [The Balance Sheet](https://medium.com/the-balanced-sheet?source=home---two_column_layout_nav-----------------------------------------) for straight talk on the real
 economy.
-
-</div>
-
-</div>
-
-</div>
-

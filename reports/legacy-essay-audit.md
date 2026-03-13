@@ -1,33 +1,33 @@
 # Legacy Essay Audit
 
-- Generated: 2026-03-12 22:56:46
+- Generated: 2026-03-12 23:28:55
 - Scanned files: 115
-- Affected files: 107
+- Affected files: 104
 
 ## Issue Categories
 
 - pseudo_headings: 92
 - fake_lists: 46
-- duplicated_title: 23
+- duplicated_title: 21
 - medium_cta: 21
 - escaped_linebreaks: 17
 - manual_bullets: 16
 - source_dumps: 15
-- embed_remnants: 12
-- ornamental_breaks: 5
+- embed_remnants: 9
 - author_note: 3
+- ornamental_breaks: 3
 
 ## Risk Tiers
 
-- SAFE_AUTO: 3
+- SAFE_AUTO: 0
 - ASSISTED_REVIEW: 3
 - MANUAL_LIGHT: 64
 - MANUAL_FIRST: 37
 
 ## Status Counts
 
-- CLEAN: 8
-- READY_SAFE_AUTO: 3
+- CLEAN: 11
+- READY_SAFE_AUTO: 0
 - READY_ASSISTED_REVIEW: 3
 - READY_MANUAL_LIGHT: 64
 - READY_MANUAL_FIRST: 37
@@ -69,8 +69,6 @@
 - `essays/biter-the-slang-word-that-hits.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, duplicated_title
 - `essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, source_dumps
 - `essays/the-new-meta-economy.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, duplicated_title
-- `essays/the-world-the-un-was-built-for.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
-- `essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, duplicated_title, ornamental_breaks
 - `essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md` :: priority 23, severity 9 :: featured_collection_member, newer_imported_piece :: embed_remnants, pseudo_headings, escaped_linebreaks
 - `essays/35-years-of-yellow-the-simpsons-time-loop.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
 - `essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md` :: priority 23, severity 8 :: featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings, escaped_linebreaks
@@ -116,7 +114,6 @@
 - `essays/how-tucson-az-plans-for-water-scarcity.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: fake_lists, escaped_linebreaks
 - `essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.md` :: priority 23, severity 5 :: featured_collection_member, newer_imported_piece :: source_dumps, duplicated_title
 - `essays/rethinking-coastal-retreat.md` :: priority 18, severity 10 :: featured_collection_member :: medium_cta, manual_bullets, pseudo_headings
-- `essays/8-big-questions-everyone-has-about-pope-leo-xiv.md` :: priority 23, severity 4 :: featured_collection_member, newer_imported_piece :: embed_remnants
 - `essays/natural-asset-companies.md` :: priority 18, severity 9 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings, duplicated_title
 - `essays/presidential-elections.md` :: priority 18, severity 9 :: featured_collection_member :: fake_lists, pseudo_headings, duplicated_title
 - `essays/2025-supreme-court-wrap-up.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: fake_lists
