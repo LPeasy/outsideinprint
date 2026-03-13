@@ -1,15 +1,15 @@
 {
-    "generated_at":  "2026-03-12T23:28:55.4570998-04:00",
+    "generated_at":  "2026-03-13T01:02:35.6078286-04:00",
     "scanned_sections":  [
                              "essays"
                          ],
     "totals":  {
                    "scanned_files":  115,
-                   "affected_files":  104,
+                   "affected_files":  102,
                    "imported_files":  115,
                    "batch_1":  2,
-                   "batch_2":  11,
-                   "batch_3":  91
+                   "batch_2":  10,
+                   "batch_3":  90
                },
     "issue_categories":  [
                              {
@@ -26,7 +26,7 @@
                              },
                              {
                                  "issue_type":  "escaped_linebreaks",
-                                 "affected_files":  17
+                                 "affected_files":  15
                              },
                              {
                                  "issue_type":  "fake_lists",
@@ -42,7 +42,7 @@
                              },
                              {
                                  "issue_type":  "ornamental_breaks",
-                                 "affected_files":  3
+                                 "affected_files":  2
                              },
                              {
                                  "issue_type":  "pseudo_headings",
@@ -60,7 +60,7 @@
                        },
                        {
                            "risk_tier":  "ASSISTED_REVIEW",
-                           "file_count":  3
+                           "file_count":  1
                        },
                        {
                            "risk_tier":  "MANUAL_LIGHT",
@@ -74,7 +74,7 @@
     "status_counts":  [
                           {
                               "status":  "CLEAN",
-                              "file_count":  11
+                              "file_count":  13
                           },
                           {
                               "status":  "READY_SAFE_AUTO",
@@ -82,7 +82,7 @@
                           },
                           {
                               "status":  "READY_ASSISTED_REVIEW",
-                              "file_count":  3
+                              "file_count":  1
                           },
                           {
                               "status":  "READY_MANUAL_LIGHT",
@@ -4254,7 +4254,7 @@
                       "has_pseudo_headings":  false,
                       "has_source_dump":  false,
                       "has_duplicated_title":  false,
-                      "has_separator_residue":  true,
+                      "has_separator_residue":  false,
                       "medium_cta_count":  0,
                       "author_note_count":  0,
                       "embed_remnant_count":  0,
@@ -4263,23 +4263,22 @@
                       "pseudo_heading_count":  0,
                       "source_dump_count":  0,
                       "duplicated_title_count":  0,
-                      "separator_residue_count":  23,
-                      "issue_types":  [
-                                          "ornamental_breaks",
-                                          "escaped_linebreaks"
-                                      ],
-                      "issue_type_count":  2,
-                      "severity_score":  2,
+                      "separator_residue_count":  0,
+                      "issue_types":  {
+
+                                      },
+                      "issue_type_count":  0,
+                      "severity_score":  0,
                       "priority_score":  23,
-                      "cleanup_score":  25,
-                      "batch":  "batch_3",
-                      "risk_tier":  "ASSISTED_REVIEW",
-                      "status":  "READY_ASSISTED_REVIEW",
+                      "cleanup_score":  23,
+                      "batch":  "clean",
+                      "risk_tier":  null,
+                      "status":  "CLEAN",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
                                            ],
-                      "manual_review":  true
+                      "manual_review":  false
                   },
                   {
                       "path":  "essays/the-roi-of-caring.md",
@@ -5037,7 +5036,7 @@
                       "has_pseudo_headings":  false,
                       "has_source_dump":  false,
                       "has_duplicated_title":  false,
-                      "has_separator_residue":  true,
+                      "has_separator_residue":  false,
                       "medium_cta_count":  0,
                       "author_note_count":  0,
                       "embed_remnant_count":  0,
@@ -5046,21 +5045,23 @@
                       "pseudo_heading_count":  0,
                       "source_dump_count":  0,
                       "duplicated_title_count":  0,
-                      "separator_residue_count":  1,
-                      "issue_types":  "escaped_linebreaks",
-                      "issue_type_count":  1,
-                      "severity_score":  2,
+                      "separator_residue_count":  0,
+                      "issue_types":  {
+
+                                      },
+                      "issue_type_count":  0,
+                      "severity_score":  0,
                       "priority_score":  58,
-                      "cleanup_score":  60,
-                      "batch":  "batch_2",
-                      "risk_tier":  "ASSISTED_REVIEW",
-                      "status":  "READY_ASSISTED_REVIEW",
+                      "cleanup_score":  58,
+                      "batch":  "clean",
+                      "risk_tier":  null,
+                      "status":  "CLEAN",
                       "priority_reasons":  [
                                                "featured_collection_start_here",
                                                "featured_collection_member",
                                                "newer_imported_piece"
                                            ],
-                      "manual_review":  true
+                      "manual_review":  false
                   },
                   {
                       "path":  "essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md",

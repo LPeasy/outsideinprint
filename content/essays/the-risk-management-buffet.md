@@ -27,21 +27,21 @@ surrounded by endless options.
 The salad bar is lined with leafy greens (nature-based solutions), the
 carving station offers heavy entrées (hard structures), and there’s a
 dessert counter piled high with sweets (non-structural measures,
-mitigation for environmental effects).\
-\
-Each different plate you could make is a unique plan of action ~\
+mitigation for environmental effects).
+
+Each different plate you could make is a unique plan of action ~
 what we’d call an **RMO**, or **Risk Management Option.**
 
 #### **What’s an RMO?**
 
 > *A Risk Management Option (RMO) is a plan or strategy chosen to
-> reduce, transfer, or accept risk.\
+> reduce, transfer, or accept risk.
 > RMOs balance cost, effectiveness, and the decision-maker’s risk
 > appetite.*
 
 Now, here’s the problem: there are fifty different dishes under the heat
-lamps, and you’re not sure which ones are good.\
-\
+lamps, and you’re not sure which ones are good.
+
 Some are fresh out of the oven; others have been sitting there for hours
 ~ drying out and crusting up.
 
@@ -51,8 +51,8 @@ Some are fresh out of the oven; others have been sitting there for hours
 </figure>
 
 And if you’re smart, you know better than to fill your plate on the
-first pass.\
-\
+first pass.
+
 You start small ~ only grab the stuff you know you’ll like, while
 keeping an eye on the buffet to see what’s changing.
 
@@ -78,11 +78,11 @@ consequence** of a bad outcome.
 
 *Golden Corral’s Extensive Dinner Menu | [Source](https://www.goldencorral.com/wp-content/uploads/2021/01/GC_Print-Menu-for-Web-1.pdf)*
 
-A spoonful of mashed potatoes might be a minor regulatory change.\
-A scoop of salad could be a public education campaign.\
-A slice of steak could be a major capital investment in infrastructure.\
-\
-You can’t eat everything, and you can’t try everything at once.\
+A spoonful of mashed potatoes might be a minor regulatory change.
+A scoop of salad could be a public education campaign.
+A slice of steak could be a major capital investment in infrastructure.
+
+You can’t eat everything, and you can’t try everything at once.
 You have limited appetite, limited time, and only one plate at a time.
 
 #### **That means you need to make a deliberate choice.**
@@ -153,11 +153,11 @@ round. **Go get seconds!**
 #### **Eventually, we all go back for seconds.**
 
 Isn’t that one of the best things about buffets? The promise of a second
-round ~ a chance to **look at the options again and make a new plate.**\
-\
+round ~ a chance to **look at the options again and make a new plate.**
+
 Good risk management doesn’t chase perfection. It’s curious and
-flexible.\
-\
+flexible.
+
 Recognize when it’s time to clean off the plate and start fresh.
 Sometimes that crab rangoon has less crab than we thought. Sometimes you
 see them bring out a tray of hot, steamin’ ’n’ crispy fried chicken.

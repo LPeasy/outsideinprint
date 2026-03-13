@@ -63,7 +63,7 @@ populations with limited escape options.
 In my upcoming piece, I’ll walk through the flood in detail: what
 happened, why it happened, and how we can learn from it.
 
-Because this flood was no fluke.\
+Because this flood was no fluke.
 It was a warning ~ and next time, the water may rise somewhere else.
 
 > ***Disclaimer:*** ***The views expressed in this article are my own

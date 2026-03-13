@@ -1,8 +1,8 @@
 # Legacy Essay Audit
 
-- Generated: 2026-03-12 23:28:55
+- Generated: 2026-03-13 01:02:35
 - Scanned files: 115
-- Affected files: 104
+- Affected files: 102
 
 ## Issue Categories
 
@@ -10,25 +10,25 @@
 - fake_lists: 46
 - duplicated_title: 21
 - medium_cta: 21
-- escaped_linebreaks: 17
 - manual_bullets: 16
+- escaped_linebreaks: 15
 - source_dumps: 15
 - embed_remnants: 9
 - author_note: 3
-- ornamental_breaks: 3
+- ornamental_breaks: 2
 
 ## Risk Tiers
 
 - SAFE_AUTO: 0
-- ASSISTED_REVIEW: 3
+- ASSISTED_REVIEW: 1
 - MANUAL_LIGHT: 64
 - MANUAL_FIRST: 37
 
 ## Status Counts
 
-- CLEAN: 11
+- CLEAN: 13
 - READY_SAFE_AUTO: 0
-- READY_ASSISTED_REVIEW: 3
+- READY_ASSISTED_REVIEW: 1
 - READY_MANUAL_LIGHT: 64
 - READY_MANUAL_FIRST: 37
 
@@ -42,7 +42,6 @@
 - `essays/why-a-return-to-the-gold-standard-would-break-the-economy.md` :: priority 63, severity 6 :: homepage_selected, featured_collection_member, newer_imported_piece :: fake_lists, pseudo_headings
 - `essays/what-is-risk-a-four-part-framework.md` :: priority 58, severity 6 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: author_note, pseudo_headings
 - `essays/the-ledger-vol-1.md` :: priority 58, severity 3 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: pseudo_headings
-- `essays/what-happened-at-camp-mystic.md` :: priority 58, severity 2 :: featured_collection_start_here, featured_collection_member, newer_imported_piece :: escaped_linebreaks
 - `essays/in-the-image-of-god.md` :: priority 48, severity 5 :: collection_start_here, featured_collection_member, newer_imported_piece :: pseudo_headings, escaped_linebreaks
 - `essays/flash-flood-alley-why-flash-floods-kill.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: embed_remnants, fake_lists, pseudo_headings, escaped_linebreaks
 - `essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md` :: priority 23, severity 12 :: featured_collection_member, newer_imported_piece :: medium_cta, pseudo_headings, duplicated_title, escaped_linebreaks
@@ -135,7 +134,6 @@
 - `essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/why-oberfell-will-not-be-overturned.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/cpi-report-economic-analysis.md` :: priority 18, severity 8 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings, source_dumps
-- `essays/the-risk-management-buffet.md` :: priority 23, severity 2 :: featured_collection_member, newer_imported_piece :: ornamental_breaks, escaped_linebreaks
 - `essays/american-household-debt.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/etfs-and-market-concentration.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
@@ -152,7 +150,6 @@
 - `essays/why-a-return-to-the-gold-standard-would-break-the-economy.md` :: MANUAL_FIRST :: fake_lists, pseudo_headings
 - `essays/what-is-risk-a-four-part-framework.md` :: MANUAL_FIRST :: author_note, pseudo_headings
 - `essays/the-ledger-vol-1.md` :: MANUAL_FIRST :: pseudo_headings
-- `essays/what-happened-at-camp-mystic.md` :: ASSISTED_REVIEW :: escaped_linebreaks
 - `essays/in-the-image-of-god.md` :: MANUAL_FIRST :: pseudo_headings, escaped_linebreaks
 - `essays/flash-flood-alley-why-flash-floods-kill.md` :: MANUAL_FIRST :: embed_remnants, fake_lists, pseudo_headings, escaped_linebreaks
 - `essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md` :: MANUAL_FIRST :: medium_cta, pseudo_headings, duplicated_title, escaped_linebreaks
@@ -242,7 +239,6 @@
 - `essays/tiktok-the-trojan-horse-of-global-influence.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/why-oberfell-will-not-be-overturned.md` :: MANUAL_LIGHT :: pseudo_headings
-- `essays/the-risk-management-buffet.md` :: ASSISTED_REVIEW :: ornamental_breaks, escaped_linebreaks
 - `essays/american-household-debt.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
 - `essays/etfs-and-market-concentration.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
