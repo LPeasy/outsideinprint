@@ -1,12 +1,12 @@
 # Legacy Essay Audit
 
-- Generated: 2026-03-13 02:49:33
+- Generated: 2026-03-13 02:55:12
 - Scanned files: 115
-- Affected files: 97
+- Affected files: 96
 
 ## Issue Categories
 
-- pseudo_headings: 88
+- pseudo_headings: 87
 - fake_lists: 46
 - duplicated_title: 20
 - medium_cta: 19
@@ -21,15 +21,15 @@
 
 - SAFE_AUTO: 0
 - ASSISTED_REVIEW: 0
-- MANUAL_LIGHT: 60
+- MANUAL_LIGHT: 59
 - MANUAL_FIRST: 37
 
 ## Status Counts
 
-- CLEAN: 18
+- CLEAN: 19
 - READY_SAFE_AUTO: 0
 - READY_ASSISTED_REVIEW: 0
-- READY_MANUAL_LIGHT: 60
+- READY_MANUAL_LIGHT: 59
 - READY_MANUAL_FIRST: 37
 
 ## BATCH 1
@@ -119,7 +119,6 @@
 - `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/how-did-mother-become-a-controversial-word-in-america.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
-- `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/its-hard-to-condemn-what-doge-is-doing.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/life-is-a-bull-market.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
 - `essays/make-fighter-jets-great-again-introducing-the-f-47.md` :: priority 23, severity 3 :: featured_collection_member, newer_imported_piece :: pseudo_headings
@@ -220,7 +219,6 @@
 - `essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/how-did-mother-become-a-controversial-word-in-america.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.md` :: MANUAL_LIGHT :: pseudo_headings
-- `essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/its-hard-to-condemn-what-doge-is-doing.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/life-is-a-bull-market.md` :: MANUAL_LIGHT :: pseudo_headings
 - `essays/make-fighter-jets-great-again-introducing-the-f-47.md` :: MANUAL_LIGHT :: pseudo_headings
