@@ -1,7 +1,5 @@
 {{ define "main" }}
   <section class="single-page start-here-page">
-    {{ partial "running_header.html" . }}
-
     <header class="start-here-header">
       {{ with .Params.section_label }}<p class="start-here-kicker">{{ . }}</p>{{ end }}
       <h1>{{ .Title }}</h1>
