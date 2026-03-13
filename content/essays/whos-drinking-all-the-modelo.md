@@ -17,7 +17,6 @@ defies logic, and fulfills an incredible dream.”**
 
 — *The Mayor of Philadelphia celebrating Rocky Balboa in Rocky III*
 
-### **Who’s Drinking All the Modelo?**
 ![](https://cdn-images-1.medium.com/max/800/0*j77amzneutwZ8s7R)
 
 *Photo by [Soliman Cifuentes](https://unsplash.com/@aleexcif?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*

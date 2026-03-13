@@ -54,23 +54,11 @@ echoing the post‑Sanders era.
 
 #### **Suggested reads:**
 
-> <a
-> href="https://www.msnbc.com/opinion/msnbc-opinion/new-york-city-mayor-andrew-cuomo-zohran-mamdani-democratic-primary-rcna214600"
-> class="markup--anchor markup--pullquote-anchor"
-> data-href="https://www.msnbc.com/opinion/msnbc-opinion/new-york-city-mayor-andrew-cuomo-zohran-mamdani-democratic-primary-rcna214600"
-> rel="noopener" target="_blank">MSNBC Opinion Piece</a>
+> [MSNBC Opinion Piece](https://www.msnbc.com/opinion/msnbc-opinion/new-york-city-mayor-andrew-cuomo-zohran-mamdani-democratic-primary-rcna214600)
 
-> <a
-> href="https://www.politico.com/news/2025/06/19/cuomo-mamdani-nyc-mayor-00414606"
-> class="markup--anchor markup--pullquote-anchor"
-> data-href="https://www.politico.com/news/2025/06/19/cuomo-mamdani-nyc-mayor-00414606"
-> rel="noopener" target="_blank">Politico Platform Breakdown</a>
+> [Politico Platform Breakdown](https://www.politico.com/news/2025/06/19/cuomo-mamdani-nyc-mayor-00414606)
 
-> <a
-> href="https://apnews.com/article/andrew-cuomo-zohran-mamdani-new-york-mayor-0d39764944e7e55a7e26a988d4136a86"
-> class="markup--anchor markup--pullquote-anchor"
-> data-href="https://apnews.com/article/andrew-cuomo-zohran-mamdani-new-york-mayor-0d39764944e7e55a7e26a988d4136a86"
-> rel="noopener" target="_blank">AP News Reporting</a>
+> [AP News Reporting](https://apnews.com/article/andrew-cuomo-zohran-mamdani-new-york-mayor-0d39764944e7e55a7e26a988d4136a86)
 
 ### **June 2025**
 
