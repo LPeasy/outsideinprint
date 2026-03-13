@@ -17,7 +17,7 @@ medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-
 
 *Source: [NYT](https://www.nytimes.com/live/2025/06/23/world/iran-trump-israel-news#udeid-qatar-base)*
 
-***Rising tensions between Iran and the U.S.***
+### Rising tensions between Iran and the U.S.
 
 **Iran just fired missiles at** [**a major U.S. military base in Qatar.**](https://www.nytimes.com/2025/06/23/world/middleeast/udeid-qatar-base.html?smid=url-share)
 
@@ -87,7 +87,7 @@ to avoid deaths while testing defenses and resolve. **Risky though.** If
 Americans are killed by an Iranian missile strike, I shudder to think
 what will happen next.
 
-Questions remain:
+#### Questions remain:
 
 - **What if a missile slips through?**
 - **What if warnings aren’t shared next time?**
