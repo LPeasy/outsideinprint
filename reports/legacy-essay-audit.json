@@ -1,5 +1,5 @@
 {
-    "generated_at":  "2026-03-12T21:54:44.6891329-04:00",
+    "generated_at":  "2026-03-12T22:56:46.8375964-04:00",
     "scanned_sections":  [
                              "essays"
                          ],
@@ -63,8 +63,12 @@
                            "file_count":  3
                        },
                        {
+                           "risk_tier":  "MANUAL_LIGHT",
+                           "file_count":  64
+                       },
+                       {
                            "risk_tier":  "MANUAL_FIRST",
-                           "file_count":  101
+                           "file_count":  37
                        }
                    ],
     "status_counts":  [
@@ -81,8 +85,12 @@
                               "file_count":  3
                           },
                           {
+                              "status":  "READY_MANUAL_LIGHT",
+                              "file_count":  64
+                          },
+                          {
                               "status":  "READY_MANUAL_FIRST",
-                              "file_count":  101
+                              "file_count":  37
                           }
                       ],
     "priority_logic":  [
@@ -133,8 +141,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -229,8 +237,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -376,8 +384,8 @@
                       "priority_score":  23,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -426,8 +434,8 @@
                       "priority_score":  23,
                       "cleanup_score":  33,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -524,8 +532,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -573,8 +581,8 @@
                       "priority_score":  23,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -623,8 +631,8 @@
                       "priority_score":  23,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -672,8 +680,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -771,8 +779,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -822,8 +830,8 @@
                       "priority_score":  23,
                       "cleanup_score":  30,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -966,8 +974,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1015,8 +1023,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1065,8 +1073,8 @@
                       "priority_score":  23,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1114,8 +1122,8 @@
                       "priority_score":  23,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1164,8 +1172,8 @@
                       "priority_score":  23,
                       "cleanup_score":  30,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1210,8 +1218,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1355,8 +1363,8 @@
                       "priority_score":  18,
                       "cleanup_score":  21,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member"
                                            ],
@@ -1554,8 +1562,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1601,8 +1609,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1651,8 +1659,8 @@
                       "priority_score":  23,
                       "cleanup_score":  33,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1701,8 +1709,8 @@
                       "priority_score":  23,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1801,8 +1809,8 @@
                       "priority_score":  23,
                       "cleanup_score":  30,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1847,8 +1855,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -1993,8 +2001,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2044,8 +2052,8 @@
                       "priority_score":  23,
                       "cleanup_score":  31,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2287,8 +2295,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2336,8 +2344,8 @@
                       "priority_score":  18,
                       "cleanup_score":  24,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member"
                                            ],
@@ -2381,8 +2389,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2530,8 +2538,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2581,8 +2589,8 @@
                       "priority_score":  23,
                       "cleanup_score":  33,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2678,8 +2686,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2730,8 +2738,8 @@
                       "priority_score":  23,
                       "cleanup_score":  34,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2779,8 +2787,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -2979,8 +2987,8 @@
                       "priority_score":  18,
                       "cleanup_score":  24,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member"
                                            ],
@@ -3029,8 +3037,8 @@
                       "priority_score":  18,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member"
                                            ],
@@ -3126,8 +3134,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3172,8 +3180,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3221,8 +3229,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3320,8 +3328,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3625,8 +3633,8 @@
                       "priority_score":  23,
                       "cleanup_score":  30,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3675,8 +3683,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3773,8 +3781,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3871,8 +3879,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -3917,8 +3925,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4167,8 +4175,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4213,8 +4221,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4313,8 +4321,8 @@
                       "priority_score":  23,
                       "cleanup_score":  33,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4362,8 +4370,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4411,8 +4419,8 @@
                       "priority_score":  18,
                       "cleanup_score":  24,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member"
                                            ],
@@ -4456,8 +4464,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4506,8 +4514,8 @@
                       "priority_score":  23,
                       "cleanup_score":  33,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4555,8 +4563,8 @@
                       "priority_score":  23,
                       "cleanup_score":  30,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4703,8 +4711,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4752,8 +4760,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4801,8 +4809,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4902,8 +4910,8 @@
                       "priority_score":  23,
                       "cleanup_score":  31,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4951,8 +4959,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -4997,8 +5005,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -5096,8 +5104,8 @@
                       "priority_score":  23,
                       "cleanup_score":  32,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -5197,8 +5205,8 @@
                       "priority_score":  23,
                       "cleanup_score":  34,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -5493,8 +5501,8 @@
                       "priority_score":  23,
                       "cleanup_score":  26,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -5594,8 +5602,8 @@
                       "priority_score":  23,
                       "cleanup_score":  28,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -5691,8 +5699,8 @@
                       "priority_score":  23,
                       "cleanup_score":  30,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"
@@ -5740,8 +5748,8 @@
                       "priority_score":  23,
                       "cleanup_score":  29,
                       "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_FIRST",
-                      "status":  "READY_MANUAL_FIRST",
+                      "risk_tier":  "MANUAL_LIGHT",
+                      "status":  "READY_MANUAL_LIGHT",
                       "priority_reasons":  [
                                                "featured_collection_member",
                                                "newer_imported_piece"

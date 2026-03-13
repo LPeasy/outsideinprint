@@ -444,12 +444,29 @@ foreach ($page in $pages) {
 
   $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','ornamental_breaks')
   $assistedReviewIssues = @('medium_cta','escaped_linebreaks') + $safeAutoIssues
+  $manualLightIssues = @('author_note','manual_bullets','fake_lists','pseudo_headings','source_dumps') + $assistedReviewIssues
+  $highSensitivity = $page.Featured -or
+    ($startHereEssaySlugs -contains $page.Slug) -or
+    ($featuredCollectionStartHere.Count -gt 0) -or
+    ($collectionStartHere.Count -gt 0)
+  $highStructuralAmbiguity =
+    ($severityScore -ge 12) -or
+    (
+      @($issueTypes | Where-Object { $_ -in @('pseudo_headings','fake_lists','source_dumps') }).Count -ge 2 -and
+      $issueTypes.Count -ge 3
+    )
   $riskTier = $null
   if ($hasIssues) {
     if (@($issueTypes | Where-Object { $_ -notin $safeAutoIssues }).Count -eq 0) {
       $riskTier = 'SAFE_AUTO'
     } elseif (@($issueTypes | Where-Object { $_ -notin $assistedReviewIssues }).Count -eq 0) {
       $riskTier = 'ASSISTED_REVIEW'
+    } elseif (
+      @($issueTypes | Where-Object { $_ -notin $manualLightIssues }).Count -eq 0 -and
+      -not $highSensitivity -and
+      -not $highStructuralAmbiguity
+    ) {
+      $riskTier = 'MANUAL_LIGHT'
     } else {
       $riskTier = 'MANUAL_FIRST'
     }
@@ -458,6 +475,7 @@ foreach ($page in $pages) {
   $status = switch ($riskTier) {
     'SAFE_AUTO' { 'READY_SAFE_AUTO' }
     'ASSISTED_REVIEW' { 'READY_ASSISTED_REVIEW' }
+    'MANUAL_LIGHT' { 'READY_MANUAL_LIGHT' }
     'MANUAL_FIRST' { 'READY_MANUAL_FIRST' }
     default { 'CLEAN' }
   }
@@ -518,13 +536,13 @@ foreach ($row in $affected) {
 $issueSummaryRows = foreach ($key in ($issueSummary.Keys | Sort-Object)) {
   [pscustomobject]@{ issue_type = $key; affected_files = $issueSummary[$key] }
 }
-$riskTierSummaryRows = foreach ($tier in @('SAFE_AUTO','ASSISTED_REVIEW','MANUAL_FIRST')) {
+$riskTierSummaryRows = foreach ($tier in @('SAFE_AUTO','ASSISTED_REVIEW','MANUAL_LIGHT','MANUAL_FIRST')) {
   [pscustomobject]@{
     risk_tier = $tier
     file_count = @($affected | Where-Object { $_.risk_tier -eq $tier }).Count
   }
 }
-$statusSummaryRows = foreach ($statusName in @('CLEAN','READY_SAFE_AUTO','READY_ASSISTED_REVIEW','READY_MANUAL_FIRST')) {
+$statusSummaryRows = foreach ($statusName in @('CLEAN','READY_SAFE_AUTO','READY_ASSISTED_REVIEW','READY_MANUAL_LIGHT','READY_MANUAL_FIRST')) {
   [pscustomobject]@{
     status = $statusName
     file_count = @($rowsArray | Where-Object { $_.status -eq $statusName }).Count
