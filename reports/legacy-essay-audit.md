@@ -1,18 +1,18 @@
 # Legacy Essay Audit
 
-- Generated: 2026-03-13 02:38:18
+- Generated: 2026-03-13 02:49:33
 - Scanned files: 115
-- Affected files: 98
+- Affected files: 97
 
 ## Issue Categories
 
-- pseudo_headings: 89
+- pseudo_headings: 88
 - fake_lists: 46
 - duplicated_title: 20
 - medium_cta: 19
 - escaped_linebreaks: 15
-- manual_bullets: 15
 - source_dumps: 15
+- manual_bullets: 14
 - embed_remnants: 8
 - author_note: 3
 - ornamental_breaks: 2
@@ -21,15 +21,15 @@
 
 - SAFE_AUTO: 0
 - ASSISTED_REVIEW: 0
-- MANUAL_LIGHT: 61
+- MANUAL_LIGHT: 60
 - MANUAL_FIRST: 37
 
 ## Status Counts
 
-- CLEAN: 17
+- CLEAN: 18
 - READY_SAFE_AUTO: 0
 - READY_ASSISTED_REVIEW: 0
-- READY_MANUAL_LIGHT: 61
+- READY_MANUAL_LIGHT: 60
 - READY_MANUAL_FIRST: 37
 
 ## BATCH 1
@@ -137,7 +137,6 @@
 - `essays/etfs-and-market-concentration.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
 - `essays/labor-force-participation-trends-in-modern-american-society.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, fake_lists, pseudo_headings
-- `essays/the-structure-of-modern-american-society.md` :: priority 18, severity 6 :: featured_collection_member :: manual_bullets, pseudo_headings
 
 ## Manual Review Candidates
 
@@ -238,4 +237,3 @@
 - `essays/etfs-and-market-concentration.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
 - `essays/household-and-individual-wealth-in-america.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
 - `essays/labor-force-participation-trends-in-modern-american-society.md` :: MANUAL_FIRST :: manual_bullets, fake_lists, pseudo_headings
-- `essays/the-structure-of-modern-american-society.md` :: MANUAL_LIGHT :: manual_bullets, pseudo_headings

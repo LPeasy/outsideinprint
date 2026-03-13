@@ -1,15 +1,15 @@
 {
-    "generated_at":  "2026-03-13T02:38:17.9488513-04:00",
+    "generated_at":  "2026-03-13T02:49:33.3160008-04:00",
     "scanned_sections":  [
                              "essays"
                          ],
     "totals":  {
                    "scanned_files":  115,
-                   "affected_files":  98,
+                   "affected_files":  97,
                    "imported_files":  115,
                    "batch_1":  2,
                    "batch_2":  10,
-                   "batch_3":  86
+                   "batch_3":  85
                },
     "issue_categories":  [
                              {
@@ -34,7 +34,7 @@
                              },
                              {
                                  "issue_type":  "manual_bullets",
-                                 "affected_files":  15
+                                 "affected_files":  14
                              },
                              {
                                  "issue_type":  "medium_cta",
@@ -46,7 +46,7 @@
                              },
                              {
                                  "issue_type":  "pseudo_headings",
-                                 "affected_files":  89
+                                 "affected_files":  88
                              },
                              {
                                  "issue_type":  "source_dumps",
@@ -64,7 +64,7 @@
                        },
                        {
                            "risk_tier":  "MANUAL_LIGHT",
-                           "file_count":  61
+                           "file_count":  60
                        },
                        {
                            "risk_tier":  "MANUAL_FIRST",
@@ -74,7 +74,7 @@
     "status_counts":  [
                           {
                               "status":  "CLEAN",
-                              "file_count":  17
+                              "file_count":  18
                           },
                           {
                               "status":  "READY_SAFE_AUTO",
@@ -86,7 +86,7 @@
                           },
                           {
                               "status":  "READY_MANUAL_LIGHT",
-                              "file_count":  61
+                              "file_count":  60
                           },
                           {
                               "status":  "READY_MANUAL_FIRST",
@@ -4393,8 +4393,8 @@
                       "has_author_note":  false,
                       "has_embed_remnants":  false,
                       "has_encoding_damage":  false,
-                      "has_manual_bullets":  true,
-                      "has_pseudo_headings":  true,
+                      "has_manual_bullets":  false,
+                      "has_pseudo_headings":  false,
                       "has_source_dump":  false,
                       "has_duplicated_title":  false,
                       "has_separator_residue":  false,
@@ -4402,26 +4402,25 @@
                       "author_note_count":  0,
                       "embed_remnant_count":  0,
                       "encoding_damage_count":  0,
-                      "manual_bullet_count":  15,
-                      "pseudo_heading_count":  5,
+                      "manual_bullet_count":  0,
+                      "pseudo_heading_count":  0,
                       "source_dump_count":  0,
                       "duplicated_title_count":  0,
                       "separator_residue_count":  0,
-                      "issue_types":  [
-                                          "manual_bullets",
-                                          "pseudo_headings"
-                                      ],
-                      "issue_type_count":  2,
-                      "severity_score":  6,
+                      "issue_types":  {
+
+                                      },
+                      "issue_type_count":  0,
+                      "severity_score":  0,
                       "priority_score":  18,
-                      "cleanup_score":  24,
-                      "batch":  "batch_3",
-                      "risk_tier":  "MANUAL_LIGHT",
-                      "status":  "READY_MANUAL_LIGHT",
+                      "cleanup_score":  18,
+                      "batch":  "clean",
+                      "risk_tier":  null,
+                      "status":  "CLEAN",
                       "priority_reasons":  [
                                                "featured_collection_member"
                                            ],
-                      "manual_review":  true
+                      "manual_review":  false
                   },
                   {
                       "path":  "essays/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.md",
