@@ -1,6 +1,6 @@
 ---
 title: "Start Here"
-subtitle: "An editorial welcome to the archive."
+subtitle: "Welcome to the archive."
 description: "An editorial welcome to Outside In Print and a measured guide into the archive."
 draft: false
 show_citation: false
@@ -10,7 +10,7 @@ section_label: "A Map of the Imprint"
 {{< rawhtml >}}
 <section class="start-here-section start-here-intro">
   <p>Outside In Print is a digital imprint for essays, investigations, stories, and literature.</p>
-  <p>The site is built around a simple idea: writing should be publishable, citable, printable, and worth returning to. Each piece appears here as an edition, with a stable home on the web and a free PDF for offline reading.</p>
+  <p>The site is built around a simple idea: writing should be publishable, citable, printable, and worth reading. Each piece appears here as an edition, with a stable home on the web and a free PDF for offline reading.</p>
 </section>
 {{< /rawhtml >}}
 

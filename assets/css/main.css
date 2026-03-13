@@ -586,6 +586,7 @@ article figcaption{
 }
 .start-here-intro{
   max-width:58ch;
+  text-align:center;
 }
 .start-here-intro p{
   font-size:18px;
