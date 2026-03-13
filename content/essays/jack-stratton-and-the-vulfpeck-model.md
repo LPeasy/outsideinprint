@@ -18,11 +18,7 @@ System***
 
 ![](https://cdn-images-1.medium.com/max/800/1*cXfu1mgs_mlB6UhXEDB8ig@2x.jpeg)
 
-> Jack Stratton on stage \| <a
-> href="https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band"
-> rel="noopener" target="_blank">Source: Michelle Shiers</a>
+> Jack Stratton on stage \| [Source: Michelle Shiers](https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band)
 
 **Minimalist funk isn’t supposed to fill a room.**
 
@@ -55,11 +51,7 @@ music.
 
 ![](https://cdn-images-1.medium.com/max/800/1*lnZzSPtgNq5i73LamdlqSg@2x.jpeg)
 
-> Jack and His Dad, Bert \| <a
-> href="https://www.cleveland.com/entertainment/2022/06/vulfpecks-jack-stratton-and-his-dad-yiddishe-cups-bert-stratton-talk-cleveland-klezmer-music-qa.html?outputType=amp"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://www.cleveland.com/entertainment/2022/06/vulfpecks-jack-stratton-and-his-dad-yiddishe-cups-bert-stratton-talk-cleveland-klezmer-music-qa.html?outputType=amp"
-> rel="noopener" target="_blank">Source: Bert Stratton</a>
+> Jack and His Dad, Bert \| [Source: Bert Stratton](https://www.cleveland.com/entertainment/2022/06/vulfpecks-jack-stratton-and-his-dad-yiddishe-cups-bert-stratton-talk-cleveland-klezmer-music-qa.html?outputType=amp)
 
 > Stratton grew up in Cleveland Heights, Ohio.
 
@@ -90,8 +82,7 @@ influences**, laid the foundation for a group that would blend
 
 ![](https://cdn-images-1.medium.com/max/800/1*uR53vijRxCnenFS8XS0_nA@2x.jpeg)
 
-> Cory Wong, Jack, and Joe Dart \|
-> [class="markup--anchor markup--blockquote-anchor" > data-href="https://www.stubhub.com/vulfpeck-tickets/performer/1501197" > rel="noopener" target="_blank">Source: StubHub](https://www.stubhub.com/vulfpeck-tickets/performer/1501197)
+> Cory Wong, Jack, and Joe Dart \| [Source: StubHub](https://www.stubhub.com/vulfpeck-tickets/performer/1501197)
 
 Vulfpeck was conceived in 2011 as *an imagined German rhythm section*,
 **modeled on American session musicians** of the 1960s and ’70s ~ like
@@ -123,7 +114,7 @@ band**’s operations.
 
 ![](https://cdn-images-1.medium.com/max/800/1*JDslTi8dDZQO7HT4rLXsCQ@2x.jpeg)
 
-> Vulfpeck \| [class="markup--anchor markup--blockquote-anchor" > data-href="https://www.last.fm/music/Vulfpeck/+wiki" rel="noopener" > target="_blank">Source: Last.fm](https://www.last.fm/music/Vulfpeck/+wiki)
+> Vulfpeck \| [Source: Last.fm](https://www.last.fm/music/Vulfpeck/+wiki)
 
 Stratton serves as Vulfpeck’s **central organizer and creative
 director.** He oversees recording sessions, mixing, editing, video
@@ -151,11 +142,7 @@ scientist.***
 
 ![](https://cdn-images-1.medium.com/max/800/1*gNW-5bRZ4WCcYppPvhe_IA@2x.jpeg)
 
-> Jack’s Mixing Masterclass \| <a
-> href="https://www.musicradar.com/news/jack-stratton-mixing-masterclass"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://www.musicradar.com/news/jack-stratton-mixing-masterclass"
-> rel="noopener" target="_blank">Source: Music Radar</a>
+> Jack’s Mixing Masterclass \| [Source: Music Radar](https://www.musicradar.com/news/jack-stratton-mixing-masterclass)
 
 Stratton’s approach to mixing emphasizes **warmth, clarity, and
 simplicity.**
@@ -181,11 +168,7 @@ is ***perfect for live shows.***
 
 ![](https://cdn-images-1.medium.com/max/800/1*mAIf7vb715rQ_ROVMi9DlA@2x.jpeg)
 
-> Vulfpeck at MSG \| <a
-> href="https://www.jambase.com/article/vulfpeck-madison-square-garden-chris-thile-dave-koz"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://www.jambase.com/article/vulfpeck-madison-square-garden-chris-thile-dave-koz"
-> rel="noopener" target="_blank">Source: Jambase</a>
+> Vulfpeck at MSG \| [Source: Jambase](https://www.jambase.com/article/vulfpeck-madison-square-garden-chris-thile-dave-koz)
 
 Under Stratton’s leadership, Vulfpeck has released **six studio albums,
 a compilation, and multiple live albums.**
@@ -215,11 +198,7 @@ world’s biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
 
 ![](https://cdn-images-1.medium.com/max/800/1*vPmnhnpwkzzF-2HRZViBtg@2x.jpeg)
 
-> Clarity of Cal Album Images \| <a
-> href="https://preview.redd.it/vkcd7763xkhe1.png?width=944&amp;format=png&amp;auto=webp&amp;s=c4db621337eff49d5729ebfea066f76193238085&amp;app_web_view=ios"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://preview.redd.it/vkcd7763xkhe1.png?width=944&amp;format=png&amp;auto=webp&amp;s=c4db621337eff49d5729ebfea066f76193238085&amp;app_web_view=ios"
-> rel="noopener" target="_blank">Source: Vulfpeck</a>
+> Clarity of Cal Album Images \| [Source: Vulfpeck](https://preview.redd.it/vkcd7763xkhe1.png?width=944&amp;format=png&amp;auto=webp&amp;s=c4db621337eff49d5729ebfea066f76193238085&amp;app_web_view=ios)
 
 > “Oh that’s real baby. That’s real life. We’re getting into real life.”
 
@@ -267,8 +246,7 @@ of Cal”*** was a phrase his father often repeated, originating from a
 
 ![](https://cdn-images-1.medium.com/max/800/1*A78n7P8ZW7NWwuurDzSAtg@2x.jpeg)
 
-> Documentary Trailer \|
-> [class="markup--anchor markup--blockquote-anchor" > data-href="https://youtu.be/py-HPosf8s8?si=sMv_N5Dve4LfSjGS" > rel="noopener" target="_blank">Source: Vulf on YouTube](https://youtu.be/py-HPosf8s8?si=sMv_N5Dve4LfSjGS)
+> Documentary Trailer \| [Source: Vulf on YouTube](https://youtu.be/py-HPosf8s8?si=sMv_N5Dve4LfSjGS)
 
 The live recording captures ***the essence of Vulfpeck’s
 performances,*** making listeners feel as though they’re *part of the
@@ -292,11 +270,7 @@ continents.***
 
 ![](https://cdn-images-1.medium.com/max/800/1*HPdIaz-nJI22AJJinTxWxg@2x.jpeg)
 
-> The Fearless Flyers \| <a
-> href="https://liveforlivemusic.com/features/the-fearless-flyers-iv-vulfpeck-interview-2024/"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://liveforlivemusic.com/features/the-fearless-flyers-iv-vulfpeck-interview-2024/"
-> rel="noopener" target="_blank">Source: Dervon Douglas</a>
+> The Fearless Flyers \| [Source: Dervon Douglas](https://liveforlivemusic.com/features/the-fearless-flyers-iv-vulfpeck-interview-2024/)
 
 Stratton also produces for the ***Fearless Flyers ***— a Vulf Records
 offshoot featuring *Cory Wong and Nate Smith *— and releases **solo
@@ -324,11 +298,7 @@ shine.**
 
 ![](https://cdn-images-1.medium.com/max/800/1*CUW6V5fww5rBzouBC4wfFQ@2x.jpeg)
 
-> Jack and Cory Wong \| <a
-> href="https://liveforlivemusic.com/news/vulfpeck-you-got-to-be-you-on-wongs-cafe/"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://liveforlivemusic.com/news/vulfpeck-you-got-to-be-you-on-wongs-cafe/"
-> rel="noopener" target="_blank">Source: Brandon Well</a>
+> Jack and Cory Wong \| [Source: Brandon Well](https://liveforlivemusic.com/news/vulfpeck-you-got-to-be-you-on-wongs-cafe/)
 
 > Stratton has long cited ***Bernard Purdie*** as a foundational
 > influence.
@@ -353,11 +323,7 @@ the industry at large.**
 
 ![](https://cdn-images-1.medium.com/max/800/1*edXhn0T7L1jqsrVfpRpdCg@2x.jpeg)
 
-> Vulfpeck’s Silent Album \| <a
-> href="https://www.wnycstudios.org/podcasts/otm/articles/vulfpeck-made-serious-bank-sleepify"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://www.wnycstudios.org/podcasts/otm/articles/vulfpeck-made-serious-bank-sleepify"
-> rel="noopener" target="_blank">Source: WNYC Media</a>
+> Vulfpeck’s Silent Album \| [Source: WNYC Media](https://www.wnycstudios.org/podcasts/otm/articles/vulfpeck-made-serious-bank-sleepify)
 
 Stratton is a **vocal critic of opaque music industry systems**,
 especially in streaming and ticketing.
@@ -386,20 +352,12 @@ His business decisions reflect the same philosophy as his music:
 
 ![](https://cdn-images-1.medium.com/max/800/1*Qha_9O1iAQnHnaRTi_ee7w@2x.jpeg)
 
-> Vulf on stage \| <a
-> href="https://bluefunkymamma.wordpress.com/2018/01/13/vulfpeck-banda/"
-> class="markup--anchor markup--blockquote-anchor"
-> data-href="https://bluefunkymamma.wordpress.com/2018/01/13/vulfpeck-banda/"
-> rel="noopener" target="_blank">Source</a>
+> Vulf on stage \| [Source](https://bluefunkymamma.wordpress.com/2018/01/13/vulfpeck-banda/)
 
 Stratton continues to guide Vulfpeck’s creative output, manage its
 independent label, and develop new collaborative projects.
 
-> The band has <a
-> href="https://www.instagram.com/p/DEh_IAaP3w9/?igsh=MXB6MHNhamtqY2p1Mw=="
-> class="markup--anchor markup--pullquote-anchor"
-> data-href="https://www.instagram.com/p/DEh_IAaP3w9/?igsh=MXB6MHNhamtqY2p1Mw=="
-> rel="noopener" target="_blank">two tour dates</a> announced for 2025:
+> The band has [two tour dates](https://www.instagram.com/p/DEh_IAaP3w9/?igsh=MXB6MHNhamtqY2p1Mw==) announced for 2025:
 > Red Rocks on July 5th and MSG on September 13th.
 
 Jack’s model ~ built around restraint, rhythm, and mutual respect ~ has
