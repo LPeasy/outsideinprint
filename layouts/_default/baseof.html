@@ -22,13 +22,23 @@
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="wrap">
-      {{ partial "masthead.html" . }}
+      {{ if site.Params.dashboard.site }}
+        {{ partial "masthead_dashboard.html" . }}
+      {{ else }}
+        {{ partial "masthead.html" . }}
+      {{ end }}
       <main id="main-content">
         {{ block "main" . }}{{ end }}
       </main>
-      {{ partial "footer.html" . }}
+      {{ if site.Params.dashboard.site }}
+        {{ partial "footer_dashboard.html" . }}
+      {{ else }}
+        {{ partial "footer.html" . }}
+      {{ end }}
     </div>
-    {{ partial "analytics.html" . }}
+    {{ if not site.Params.dashboard.site }}
+      {{ partial "analytics.html" . }}
+    {{ end }}
   </body>
 </html>
 

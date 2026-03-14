@@ -1,0 +1,14 @@
+{{ $publicSiteURL := site.Params.dashboard.public_site_url | default "https://lpeasy.github.io/outsideinprint/" }}
+<header class="masthead masthead--dashboard">
+  <a class="brand-link" href="{{ "" | absURL }}" aria-label="Outside In Print Dashboard home">
+    <div class="title">
+      <span class="top">OUTSIDE IN PRINT</span>
+      <span class="bottom">DASHBOARD</span>
+    </div>
+    <div class="subtitle">Analytics Snapshot</div>
+  </a>
+
+  <nav class="nav" aria-label="Dashboard links">
+    <a href="{{ $publicSiteURL }}">Public Site</a>
+  </nav>
+</header>

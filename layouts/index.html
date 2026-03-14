@@ -1,4 +1,7 @@
 {{ define "main" }}
+  {{ if site.Params.dashboard.site }}
+    {{ partial "dashboard/render.html" . }}
+  {{ else }}
   <section class="grid">
     <a class="card" href="{{ "start-here/" | absURL }}"><div class="k">Start</div><div class="v">Start Here</div></a>
     <a class="card" href="{{ "essays/" | absURL }}"><div class="k">Section</div><div class="v">Essays</div></a>
@@ -74,5 +77,6 @@
         {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
       </div>
     {{ end }}
+  {{ end }}
   {{ end }}
 {{ end }}

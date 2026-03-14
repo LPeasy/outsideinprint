@@ -135,3 +135,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\audit_collections.ps1
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics
 ```
+
+- Public site note:
+  The public Outside In Print site does not publish the dashboard.
+  Dashboard snapshots are built separately with `hugo-dashboard.toml` and published to `LPeasy/OutsideInPrintDashboard`.

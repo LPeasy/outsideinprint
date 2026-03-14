@@ -11,6 +11,11 @@ Outside In Print uses a static, privacy-friendly analytics setup:
 
 If Plausible is not configured, the site still builds and the dashboard still renders from the committed sample data.
 
+The dashboard is published separately from the public reading site:
+
+- public site repo: `LPeasy/outsideinprint`
+- dashboard publish repo: `LPeasy/OutsideInPrintDashboard`
+
 ## Quick Start
 
 If you are maintaining this for the first time, use this order:
@@ -23,9 +28,20 @@ If you are maintaining this for the first time, use this order:
 powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics
 ```
 
-4. Start Hugo locally and review `/dashboard/`.
+4. Start the dashboard build locally and review the dashboard site.
 5. Commit the updated `data/analytics/*.json` files.
-6. Push to `main` and let the normal GitHub Pages workflow deploy.
+6. Push to `main` and let the dashboard publish workflow update `OutsideInPrintDashboard`.
+
+## Where The Dashboard Lives
+
+The dashboard no longer ships on the public Outside In Print website.
+
+- The public site build uses `hugo.toml`.
+- The dashboard build uses `hugo-dashboard.toml`.
+- Dashboard content lives in `content-dashboard/`.
+- The built dashboard is published into `LPeasy/OutsideInPrintDashboard`.
+
+This keeps analytics reporting available without exposing it on the public-facing reading site.
 
 ## What Gets Tracked
 
@@ -168,10 +184,16 @@ Optional variables:
 
 ## Local Testing
 
-Normal local run with analytics off:
+Public site only:
 
 ```powershell
 hugo server -D
+```
+
+Dashboard site only:
+
+```powershell
+hugo --config hugo-dashboard.toml server --disableFastRender
 ```
 
 Local run with analytics on:
@@ -187,7 +209,7 @@ After local testing, clear those environment variables if you do not want future
 
 ## Dashboard Data Files
 
-The dashboard at `/dashboard/` reads these committed files:
+The separate dashboard site reads these committed files:
 
 - `data/analytics/overview.json`
 - `data/analytics/essays.json`
@@ -287,6 +309,21 @@ Missing sections are allowed. The importer fills them with safe empty defaults.
 - `pdf_downloads`
 - `newsletter_submits`
 
+## Dashboard Publishing Setup
+
+The publish workflow is in:
+
+- `.github/workflows/publish-dashboard.yml`
+
+One-time GitHub setup:
+
+1. Create or confirm the target repository: `LPeasy/OutsideInPrintDashboard`.
+2. In the current source repo, add a secret named `DASHBOARD_REPO_TOKEN`.
+3. Use a fine-grained GitHub token with `contents: write` access to `LPeasy/OutsideInPrintDashboard`.
+4. In the target repo, enable GitHub Pages from the `main` branch root.
+
+The workflow builds the dashboard with `hugo-dashboard.toml`, copies the generated files into the target repo, and pushes them to `main`.
+
 ## A Simple Monthly Workflow
 
 Use this once per month:
@@ -294,14 +331,15 @@ Use this once per month:
 1. Export Plausible reports into a working folder such as `imports/analytics/`.
 2. Make sure you have at least `overview`, `essays`, `sources`, `modules`, or `periods` in CSV or JSON. Missing files are okay.
 3. Run the importer.
-4. Open the site locally and review `/dashboard/`.
+4. Open the dashboard locally and review it.
 5. Spot-check:
    - overview cards
    - top essays
    - modules and source labels
    - recent period values
 6. Commit the updated `data/analytics/*.json` files.
-7. Push to GitHub Pages.
+7. Push to `main`.
+8. Let the dashboard publish workflow update `OutsideInPrintDashboard`.
 
 ## Plausible Export Suggestions
 
@@ -375,7 +413,7 @@ Keep these rules:
 
 - Export current analytics reports.
 - Run `scripts/import_analytics.ps1`.
-- Review `/dashboard/` locally.
+- Review the dashboard locally with `hugo --config hugo-dashboard.toml server --disableFastRender`.
 - Confirm sample-looking nonsense did not overwrite real labels.
 - Commit updated `data/analytics/*.json`.
-- Push and verify the deployed dashboard.
+- Push and verify the deployed `OutsideInPrintDashboard` site.

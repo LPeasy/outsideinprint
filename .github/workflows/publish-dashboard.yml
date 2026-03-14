@@ -1,0 +1,94 @@
+name: Build And Publish Dashboard
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/publish-dashboard.yml"
+      - "assets/css/**"
+      - "content-dashboard/**"
+      - "data/analytics/**"
+      - "docs/analytics-system.md"
+      - "hugo-dashboard.toml"
+      - "layouts/_default/baseof.html"
+      - "layouts/dashboard/**"
+      - "layouts/index.html"
+      - "layouts/partials/analytics.html"
+      - "layouts/partials/dashboard/**"
+      - "layouts/partials/footer_dashboard.html"
+      - "layouts/partials/head_fonts.html"
+      - "layouts/partials/masthead_dashboard.html"
+      - "scripts/import_analytics.ps1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Source Repo
+        uses: actions/checkout@v4
+
+      - name: Verify Dashboard Token
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${DASHBOARD_REPO_TOKEN:-}" ]; then
+            echo "DASHBOARD_REPO_TOKEN is not configured."
+            echo "Add a fine-grained token with contents:write access to LPeasy/OutsideInPrintDashboard."
+            exit 1
+          fi
+        env:
+          DASHBOARD_REPO_TOKEN: ${{ secrets.DASHBOARD_REPO_TOKEN }}
+
+      - name: Setup Hugo (extended)
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.157.0"
+          extended: true
+
+      - name: Build Dashboard Site
+        run: hugo --config hugo-dashboard.toml --gc --minify --destination .dashboard-public
+
+      - name: Prepare Publish Repo
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .dashboard-repo
+          cd .dashboard-repo
+          git init
+          git checkout -B main
+          git remote add origin "https://x-access-token:${DASHBOARD_REPO_TOKEN}@github.com/LPeasy/OutsideInPrintDashboard.git"
+          if git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
+            git fetch origin main
+            git reset --hard origin/main
+          fi
+        env:
+          DASHBOARD_REPO_TOKEN: ${{ secrets.DASHBOARD_REPO_TOKEN }}
+
+      - name: Sync Built Files
+        shell: bash
+        run: |
+          set -euo pipefail
+          find .dashboard-repo -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cp -R .dashboard-public/. .dashboard-repo/
+          touch .dashboard-repo/.nojekyll
+
+      - name: Commit And Push
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd .dashboard-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet --exit-code; then
+            echo "No dashboard changes to publish."
+            exit 0
+          fi
+          git commit -m "Publish dashboard snapshot"
+          git push --force-with-lease origin HEAD:main

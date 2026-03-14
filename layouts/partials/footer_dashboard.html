@@ -1,0 +1,5 @@
+{{ $sourceRepoURL := site.Params.dashboard.source_repo_url | default "https://github.com/LPeasy/outsideinprint" }}
+<footer class="footer">
+  <div>&copy; {{ now.Format "2006" }} Outside In Print Dashboard</div>
+  <div class="footer-note">Published separately from the public reading site. Source data lives in <a href="{{ $sourceRepoURL }}">the main repository</a>.</div>
+</footer>

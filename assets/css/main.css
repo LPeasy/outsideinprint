@@ -77,6 +77,9 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
 .masthead--sticky .nav{
   margin:14px 0 18px;
 }
+.masthead--dashboard .nav{
+  margin-bottom:18px;
+}
 
 /* Nav */
 .nav{
@@ -343,6 +346,9 @@ h2{ margin-top:30px; }
   font-family:var(--sans);
   color:var(--muted);
   font-size:12px;
+}
+.footer-note{
+  margin-top:8px;
 }
 
 /* Accessibility */

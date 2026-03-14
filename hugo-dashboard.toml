@@ -1,0 +1,25 @@
+baseURL = "https://lpeasy.github.io/OutsideInPrintDashboard/"
+title = "Outside In Print Dashboard"
+languageCode = "en-us"
+contentDir = "content-dashboard"
+
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^PLAUSIBLE_']
+
+[params.analytics]
+enabled = false
+allow_local = false
+
+[params.dashboard]
+site = true
+public_site_url = "https://lpeasy.github.io/outsideinprint/"
+source_repo_url = "https://github.com/LPeasy/outsideinprint"
