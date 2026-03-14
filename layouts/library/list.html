@@ -29,7 +29,7 @@
               {{ with .Params.version }}v{{ . }}{{ end }}
               {{ if .Params.pdf }}
                 {{ with .Params.version }} | {{ end }}
-                <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">PDF</a>
+                <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener" {{ partial "analytics/link-attrs.html" (dict "sourceSlot" "library_index" "format" "pdf" "page" .) }}>PDF</a>
               {{ end }}
             </div>
           </div>

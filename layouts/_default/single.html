@@ -3,7 +3,7 @@
   {{ if .Params.medium_source_url }}
     {{ $pageClass = printf "%s single-page--imported" $pageClass }}
   {{ end }}
-  <article class="{{ $pageClass }}">
+  <article class="{{ $pageClass }}" data-analytics-eligible-read="true">
     <header class="piece-header">
       {{ partial "running_header.html" . }}
 
@@ -42,7 +42,7 @@
 
       {{ partial "read_next.html" . }}
 
-      {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page") }}
+      {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page" "sourceSlot" "page_newsletter") }}
     </div>
   </article>
 {{ end }}

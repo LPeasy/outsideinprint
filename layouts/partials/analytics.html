@@ -1,0 +1,91 @@
+{{ $analytics := site.Params.analytics | default (dict) }}
+{{ $plausible := dict }}
+{{ if isset $analytics "plausible" }}
+  {{ $plausible = index $analytics "plausible" }}
+{{ end }}
+
+{{ $enabled := false }}
+{{ if isset $analytics "enabled" }}
+  {{ $enabled = index $analytics "enabled" }}
+{{ end }}
+
+{{ $allowLocal := false }}
+{{ if isset $analytics "allow_local" }}
+  {{ $allowLocal = index $analytics "allow_local" }}
+{{ end }}
+
+{{ $domain := "" }}
+{{ if isset $plausible "domain" }}
+  {{ $domain = index $plausible "domain" }}
+{{ end }}
+{{ with getenv "PLAUSIBLE_DOMAIN" }}
+  {{ $domain = . }}
+{{ end }}
+
+{{ $scriptSrc := "https://plausible.io/js/script.js" }}
+{{ if isset $plausible "script_src" }}
+  {{ $scriptSrc = index $plausible "script_src" }}
+{{ end }}
+{{ with getenv "PLAUSIBLE_SCRIPT_SRC" }}
+  {{ $scriptSrc = . }}
+{{ end }}
+
+{{ $apiHost := "https://plausible.io" }}
+{{ if isset $plausible "api_host" }}
+  {{ $apiHost = index $plausible "api_host" }}
+{{ end }}
+{{ with getenv "PLAUSIBLE_API_HOST" }}
+  {{ $apiHost = . }}
+{{ end }}
+
+{{ $envEnabled := lower (trim (getenv "ANALYTICS_ENABLED") " ") }}
+{{ if eq $envEnabled "true" }}
+  {{ $enabled = true }}
+{{ else if eq $envEnabled "false" }}
+  {{ $enabled = false }}
+{{ end }}
+
+{{ $envAllowLocal := lower (trim (getenv "ANALYTICS_ALLOW_LOCAL") " ") }}
+{{ if eq $envAllowLocal "true" }}
+  {{ $allowLocal = true }}
+{{ else if eq $envAllowLocal "false" }}
+  {{ $allowLocal = false }}
+{{ end }}
+
+{{ $eligibleRead := and .IsPage (eq .Kind "page") (not (in (slice "collections" "library" "random" "start-here" "dashboard") .Section)) }}
+{{ $pageSlug := "" }}
+{{ if .IsPage }}
+  {{ $pageSlug = .Params.slug | default .File.BaseFileName }}
+{{ end }}
+{{ $pageSection := "" }}
+{{ if .IsPage }}
+  {{ $pageSection = .Params.section_label | default (humanize .Section) }}
+{{ end }}
+
+{{ $active := and $enabled (ne $domain "") (or (eq hugo.Environment "production") $allowLocal) }}
+{{ $config := dict
+  "enabled" $active
+  "page" (dict
+    "kind" .Kind
+    "isPage" .IsPage
+    "section" $pageSection
+    "slug" $pageSlug
+    "title" .Title
+    "path" .RelPermalink
+    "eligibleRead" $eligibleRead
+  )
+}}
+
+{{ if $active }}
+  <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)};</script>
+  <script
+    defer
+    data-domain="{{ $domain }}"
+    {{ if ne $apiHost "https://plausible.io" }}data-api="{{ printf "%s/api/event" $apiHost }}"{{ end }}
+    src="{{ $scriptSrc }}"
+  ></script>
+{{ end }}
+
+<script>window.oipAnalytics={{ $config | jsonify | safeJS }};</script>
+{{ $analyticsScript := resources.Get "js/analytics.js" | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $analyticsScript.RelPermalink }}" integrity="{{ $analyticsScript.Data.Integrity }}"></script>

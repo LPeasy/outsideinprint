@@ -8,8 +8,12 @@
       {{ with .page }}
         {{ $url = .RelPermalink }}
       {{ end }}
+      {{ $path := printf "/collections/%s/" .collection.slug }}
+      {{ with .page }}
+        {{ $path = .RelPermalink }}
+      {{ end }}
       <div class="collection-membership__row">
-        <div class="collection-membership__title"><a href="{{ $url }}">{{ .collection.title }}</a></div>
+        <div class="collection-membership__title"><a href="{{ $url }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "related_content" "collection" .collection.slug "slug" .collection.slug "title" .collection.title "section" "Collections" "path" $path) }}>{{ .collection.title }}</a></div>
         <div class="collection-membership__meta">
           <span>{{ title .state.kind }}</span>
           <span>{{ .state.count }} pieces</span>

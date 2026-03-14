@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Last 7 days",
+    "pageviews": 1240,
+    "unique_visitors": 880,
+    "reads": 173,
+    "read_rate": 13.9,
+    "pdf_downloads": 31,
+    "newsletter_submits": 7
+  },
+  {
+    "label": "Last 30 days",
+    "pageviews": 5420,
+    "unique_visitors": 3840,
+    "reads": 742,
+    "read_rate": 13.7,
+    "pdf_downloads": 118,
+    "newsletter_submits": 19
+  },
+  {
+    "label": "All time",
+    "pageviews": 18420,
+    "unique_visitors": 12980,
+    "reads": 2470,
+    "read_rate": 13.4,
+    "pdf_downloads": 412,
+    "newsletter_submits": 63
+  }
+]

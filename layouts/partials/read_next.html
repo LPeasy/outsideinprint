@@ -147,7 +147,7 @@
               {{ $detail = .Date.Format "Jan 2006" }}
             {{ end }}
             <article class="read-next__item">
-              <h3 class="read-next__item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+              <h3 class="read-next__item-title"><a href="{{ .RelPermalink }}" {{ partial "analytics/link-attrs.html" (dict "event" "internal_promo_click" "sourceSlot" "related_content" "page" .) }}>{{ .Title }}</a></h3>
               <p class="read-next__meta">{{ $sectionLabel }}{{ with $detail }} &middot; {{ . }}{{ end }}</p>
             </article>
           {{ end }}

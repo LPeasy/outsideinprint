@@ -1,0 +1,47 @@
+[
+  {
+    "source": "newsletter",
+    "medium": "email",
+    "campaign": "weekly-letter",
+    "content": "lead-essay",
+    "visitors": 1420,
+    "pageviews": 2050,
+    "reads": 318
+  },
+  {
+    "source": "medium",
+    "medium": "referral",
+    "campaign": "cross-post",
+    "content": "author-bio-link",
+    "visitors": 1165,
+    "pageviews": 1710,
+    "reads": 224
+  },
+  {
+    "source": "x",
+    "medium": "social",
+    "campaign": "launch-thread",
+    "content": "hero-quote",
+    "visitors": 984,
+    "pageviews": 1342,
+    "reads": 177
+  },
+  {
+    "source": "google",
+    "medium": "organic",
+    "campaign": "",
+    "content": "",
+    "visitors": 4170,
+    "pageviews": 6180,
+    "reads": 851
+  },
+  {
+    "source": "guest-post",
+    "medium": "referral",
+    "campaign": "policy-roundup",
+    "content": "bio-link",
+    "visitors": 502,
+    "pageviews": 733,
+    "reads": 101
+  }
+]

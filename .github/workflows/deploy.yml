@@ -20,6 +20,11 @@ jobs:
     timeout-minutes: 20
     env:
       HUGO_ENVIRONMENT: production
+      ANALYTICS_ENABLED: ${{ vars.ANALYTICS_ENABLED }}
+      ANALYTICS_ALLOW_LOCAL: ${{ vars.ANALYTICS_ALLOW_LOCAL }}
+      PLAUSIBLE_DOMAIN: ${{ vars.PLAUSIBLE_DOMAIN }}
+      PLAUSIBLE_SCRIPT_SRC: ${{ vars.PLAUSIBLE_SCRIPT_SRC }}
+      PLAUSIBLE_API_HOST: ${{ vars.PLAUSIBLE_API_HOST }}
 
     steps:
       - name: Checkout

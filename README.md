@@ -126,3 +126,12 @@ For cleaner web and PDF rendering, prefer:
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\audit_collections.ps1
 ```
+
+## Analytics
+
+- Maintainer guide: `docs/analytics-system.md`
+- Import normalized dashboard data:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics
+```

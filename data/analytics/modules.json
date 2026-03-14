@@ -1,0 +1,32 @@
+[
+  {
+    "slot": "homepage_featured_collection",
+    "collection": "technology-ai-machine-future",
+    "clicks": 188,
+    "downstream_reads": 52
+  },
+  {
+    "slot": "homepage_selected",
+    "collection": "",
+    "clicks": 164,
+    "downstream_reads": 47
+  },
+  {
+    "slot": "homepage_recent",
+    "collection": "",
+    "clicks": 143,
+    "downstream_reads": 39
+  },
+  {
+    "slot": "collection_page",
+    "collection": "risk-uncertainty",
+    "clicks": 102,
+    "downstream_reads": 28
+  },
+  {
+    "slot": "related_content",
+    "collection": "",
+    "clicks": 81,
+    "downstream_reads": 23
+  }
+]

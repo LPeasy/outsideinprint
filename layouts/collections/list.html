@@ -15,7 +15,11 @@
         {{ with .page }}
           {{ $url = .RelPermalink }}
         {{ end }}
-        <a class="card collection-card" href="{{ $url }}">
+        {{ $path := printf "/collections/%s/" .collection.slug }}
+        {{ with .page }}
+          {{ $path = .RelPermalink }}
+        {{ end }}
+        <a class="card collection-card" href="{{ $url }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "collection_page" "collection" .collection.slug "slug" .collection.slug "title" .collection.title "section" "Collections" "path" $path) }}>
           <div class="k">Featured {{ title .state.kind }}</div>
           <div class="v">{{ .collection.title }}</div>
           {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
@@ -37,7 +41,11 @@
         {{ $url = .RelPermalink }}
       {{ end }}
       <div class="item">
-        <div class="t"><a href="{{ $url }}">{{ .collection.title }}</a></div>
+        {{ $path := printf "/collections/%s/" .collection.slug }}
+        {{ with .page }}
+          {{ $path = .RelPermalink }}
+        {{ end }}
+        <div class="t"><a href="{{ $url }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "collection_page" "collection" .collection.slug "slug" .collection.slug "title" .collection.title "section" "Collections" "path" $path) }}>{{ .collection.title }}</a></div>
         <div class="m">{{ title .state.kind }} | {{ .state.count }} pieces{{ with .collection.start_here }} | start here available{{ end }}</div>
         {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
       </div>

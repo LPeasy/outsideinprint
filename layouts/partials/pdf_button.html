@@ -1,5 +1,5 @@
 {{ if .Params.pdf }}
 <div class="edition-download">
-  <a class="edition-download__button" href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener">Download Edition (PDF)</a>
+  <a class="edition-download__button" href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener" {{ partial "analytics/link-attrs.html" (dict "sourceSlot" "article_pdf" "format" "pdf" "page" .) }}>Download Edition (PDF)</a>
 </div>
 {{ end }}
