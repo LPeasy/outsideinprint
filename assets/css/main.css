@@ -1076,10 +1076,27 @@ article figcaption{
   flex-wrap:wrap;
   gap:0.6rem 1rem;
   color:var(--muted);
+  align-items:center;
   font-family:var(--sans);
   font-size:11px;
   letter-spacing:.12em;
   text-transform:uppercase;
+}
+.dashboard-freshness{
+  display:inline-flex;
+  align-items:center;
+  padding:0.2rem 0.5rem;
+  border:1px solid rgba(232,226,216,.12);
+  border-radius:999px;
+  line-height:1;
+}
+.dashboard-freshness--current{
+  color:var(--fg);
+  border-color:rgba(232,226,216,.18);
+}
+.dashboard-freshness--stale{
+  color:#d2b48c;
+  border-color:rgba(210,180,140,.38);
 }
 .dashboard-section{
   display:grid;

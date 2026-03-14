@@ -257,6 +257,79 @@ You can point `-InputPath` at either:
 
 Missing sections are allowed. The importer fills them with safe empty defaults.
 
+## Automatic Refresh
+
+The automated refresh workflow is in:
+
+- `.github/workflows/refresh-analytics.yml`
+
+It runs once per day and can also be launched manually with `workflow_dispatch`.
+
+What it does:
+
+1. Fetches a fresh analytics snapshot from Plausible.
+2. Writes raw section files into a temporary folder.
+3. Runs `scripts/import_analytics.ps1` to normalize the data into `data/analytics/*.json`.
+4. Commits and pushes only if the normalized files actually changed.
+5. Dispatches `.github/workflows/publish-dashboard.yml` so the separate dashboard site is republished.
+
+The dashboard remains static throughout this flow. Hugo never makes live API calls.
+
+### Automatic Refresh Configuration
+
+Required GitHub configuration for the refresh workflow:
+
+- repository secret: `PLAUSIBLE_API_KEY`
+- repository variable: `PLAUSIBLE_SITE_ID`
+
+You can reuse the existing `PLAUSIBLE_DOMAIN` repository variable instead of `PLAUSIBLE_SITE_ID` if your Plausible site identifier is the domain.
+
+Optional:
+
+- repository variable: `PLAUSIBLE_API_HOST`
+  Use this only if you are self-hosting Plausible or querying a non-default API host.
+
+The publish step still depends on the existing dashboard publish setup:
+
+- repository secret: `DASHBOARD_DEPLOY_KEY`
+
+### Manual Refresh Run
+
+1. Open `LPeasy/outsideinprint` on GitHub.
+2. Go to `Actions`.
+3. Open `Refresh Analytics Data`.
+4. Choose `Run workflow`.
+5. After it finishes, check for either:
+   - `No analytics changes detected.`
+   - a new `Refresh analytics snapshot` commit plus a triggered `Build And Publish Dashboard` run
+
+### Plausible Requirements For Automation
+
+The automated fetch expects the Plausible site to expose:
+
+- pageview and visitor metrics for the site
+- custom event goals named:
+  - `essay_read`
+  - `pdf_download`
+  - `newsletter_submit`
+  - `internal_promo_click`
+  - `collection_click`
+- custom event properties used by the dashboard reports:
+  - `path`
+  - `slug`
+  - `title`
+  - `section`
+  - `source_slot`
+  - `collection`
+
+If those goals or properties are missing in Plausible, the refresh workflow will fail clearly instead of writing partial data silently.
+
+### Why The Refresh Workflow Dispatches The Publish Workflow
+
+The refresh workflow commits `data/analytics/*.json` back to `main`, but it also explicitly dispatches `publish-dashboard.yml` afterward.
+
+That keeps `publish-dashboard.yml` as the one publishing mechanism for the dashboard while avoiding a brittle dependency on workflow fan-out from an Actions-authored git push.
+
 ### What The Importer Writes
 
 `overview.json`
@@ -366,6 +439,7 @@ You can remove the old `DASHBOARD_REPO_TOKEN` secret once the SSH-based workflow
 Missing secret
 
 - If the workflow fails immediately with `DASHBOARD_DEPLOY_KEY is not configured`, add the private key to `LPeasy/outsideinprint` under `Settings` -> `Secrets and variables` -> `Actions`.
+- If the refresh workflow fails with `PLAUSIBLE_API_KEY is not configured` or `PLAUSIBLE_SITE_ID is not configured`, add the missing Plausible secret or variable in the same repository settings area.
 
 SSH auth failure
 
@@ -382,6 +456,7 @@ No-op publish
 
 - If the workflow logs `No dashboard changes to publish.`, that means the generated output matched the current contents of the target repo.
 - This is expected when no dashboard files changed.
+- If the refresh workflow logs `No analytics changes detected.`, that means the normalized snapshot matched the current committed data files, so no dashboard publish was needed.
 
 Manual workflow_dispatch test
 
@@ -394,6 +469,8 @@ Manual workflow_dispatch test
 ## First Live Deployment Checklist
 
 - Save `DASHBOARD_DEPLOY_KEY` in `LPeasy/outsideinprint`.
+- Save `PLAUSIBLE_API_KEY` in `LPeasy/outsideinprint` if you want automated refreshes.
+- Save `PLAUSIBLE_SITE_ID` in `LPeasy/outsideinprint`, or reuse the existing `PLAUSIBLE_DOMAIN` variable.
 - Install the matching public deploy key on `LPeasy/OutsideInPrintDashboard` with write access.
 - Enable GitHub Pages on `LPeasy/OutsideInPrintDashboard` from the `main` branch root.
 - Run the workflow manually once with `workflow_dispatch`.

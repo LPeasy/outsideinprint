@@ -21,6 +21,21 @@
 {{ if isset $overview "updated_at" }}{{ $updatedAt = index $overview "updated_at" }}{{ end }}
 {{ $rangeLabel := "Snapshot" }}
 {{ if isset $overview "range_label" }}{{ $rangeLabel = index $overview "range_label" }}{{ end }}
+{{ $freshnessLabel := "" }}
+{{ $freshnessClass := "dashboard-freshness" }}
+{{ with $updatedAt }}
+  {{ $snapshotTime := time.AsTime . }}
+  {{ $ageSeconds := sub now.Unix $snapshotTime.Unix }}
+  {{ if ge $ageSeconds 0 }}
+    {{ if gt $ageSeconds 172800 }}
+      {{ $freshnessLabel = "stale" }}
+      {{ $freshnessClass = "dashboard-freshness dashboard-freshness--stale" }}
+    {{ else }}
+      {{ $freshnessLabel = "current" }}
+      {{ $freshnessClass = "dashboard-freshness dashboard-freshness--current" }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 
 <section class="dashboard">
   <header class="dashboard-header">
@@ -29,7 +44,8 @@
     <p class="subtitle">Static, privacy-friendly reporting backed by committed data files in <code>data/analytics</code>.</p>
     <div class="dashboard-meta">
       <span>{{ $rangeLabel }}</span>
-      {{ with $updatedAt }}<span>Updated {{ . }}</span>{{ end }}
+      {{ with $updatedAt }}<span>updated {{ . }}</span>{{ end }}
+      {{ with $freshnessLabel }}<span class="{{ $freshnessClass }}">{{ . }}</span>{{ end }}
     </div>
   </header>
 

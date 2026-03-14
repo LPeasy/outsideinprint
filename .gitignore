@@ -8,5 +8,6 @@
 /.tmp-dashboard/
 /.dashboard-public/
 /.dashboard-repo/
+/.analytics-refresh/
 /dashboard_deploy_key
 /dashboard_deploy_key.pub

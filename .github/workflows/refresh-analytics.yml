@@ -1,0 +1,132 @@
+name: Refresh Analytics Data
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  # contents: write is required to commit refreshed data/analytics snapshots.
+  # actions: write is required to dispatch the existing dashboard publish workflow.
+  contents: write
+  actions: write
+
+concurrency:
+  group: refresh-analytics
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    # ETL pipeline:
+    # 1. Extract raw analytics from Plausible.
+    # 2. Transform them into the repo's normalized Hugo data model.
+    # 3. Load only changed snapshots into git, then dispatch the static dashboard publish workflow.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PLAUSIBLE_API_KEY: ${{ secrets.PLAUSIBLE_API_KEY }}
+      PLAUSIBLE_SITE_ID: ${{ vars.PLAUSIBLE_SITE_ID || vars.PLAUSIBLE_DOMAIN }}
+      PLAUSIBLE_API_HOST: ${{ vars.PLAUSIBLE_API_HOST }}
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Prepare Refresh Workspace
+        shell: pwsh
+        run: |
+          Remove-Item -Recurse -Force ./.analytics-refresh -ErrorAction SilentlyContinue
+
+      - name: Verify Analytics Configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${PLAUSIBLE_API_KEY:-}" ]; then
+            echo "PLAUSIBLE_API_KEY is not configured."
+            exit 1
+          fi
+
+          if [ -z "${PLAUSIBLE_SITE_ID:-}" ]; then
+            echo "PLAUSIBLE_SITE_ID is not configured."
+            echo "Set PLAUSIBLE_SITE_ID or reuse the existing PLAUSIBLE_DOMAIN repository variable."
+            exit 1
+          fi
+
+      - name: Fetch Analytics Snapshot
+        shell: pwsh
+        run: |
+          ./scripts/fetch_analytics_plausible.ps1 -OutputDir ./.analytics-refresh/raw
+
+      - name: Normalize Analytics Data
+        shell: pwsh
+        run: |
+          ./scripts/import_analytics.ps1 -InputPath ./.analytics-refresh/raw -OutputDir ./data/analytics
+
+      - name: Analytics Import Summary
+        shell: pwsh
+        run: |
+          $overview = Get-Content ./data/analytics/overview.json -Raw | ConvertFrom-Json
+          $essays = Get-Content ./data/analytics/essays.json -Raw | ConvertFrom-Json
+          $trackedPages = @($essays).Count
+          $totalViews = [int][double]$overview.pageviews
+          $rangeLabel = [string]$overview.range_label
+          $updatedAt = [string]$overview.updated_at
+
+          @"
+          ## Analytics Snapshot
+          - Pages tracked: $trackedPages
+          - Total views imported: $totalViews
+          - Time range: $rangeLabel
+          - Snapshot date: $updatedAt
+          "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+
+      - name: Clean Temporary Analytics Files
+        if: always()
+        shell: pwsh
+        run: |
+          Remove-Item -Recurse -Force ./.analytics-refresh -ErrorAction SilentlyContinue
+
+      - name: Commit Analytics Snapshot
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/analytics; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No analytics changes detected." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "Updated analytics files:" >> "$GITHUB_STEP_SUMMARY"
+          git status --short -- data/analytics | tee -a "$GITHUB_STEP_SUMMARY"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/analytics
+          git commit -m "Refresh analytics snapshot"
+          git push origin HEAD:main
+
+      - name: Trigger Dashboard Publish
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/publish-dashboard.yml/dispatches \
+            -d '{"ref":"main"}'
+          echo "Triggered publish-dashboard.yml for the refreshed analytics snapshot." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Refresh Summary
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Analytics refresh finished for ${PLAUSIBLE_SITE_ID}." >> "$GITHUB_STEP_SUMMARY"
