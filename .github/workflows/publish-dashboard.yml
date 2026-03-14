@@ -26,6 +26,7 @@ permissions:
 
 jobs:
   publish:
+    # The dashboard is published from a separate repo so the public reading site never exposes /dashboard/.
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -33,17 +34,39 @@ jobs:
       - name: Checkout Source Repo
         uses: actions/checkout@v4
 
-      - name: Verify Dashboard Token
+      - name: Verify Dashboard Deploy Key
         shell: bash
         run: |
           set -euo pipefail
-          if [ -z "${DASHBOARD_REPO_TOKEN:-}" ]; then
-            echo "DASHBOARD_REPO_TOKEN is not configured."
-            echo "Add a fine-grained token with contents:write access to LPeasy/OutsideInPrintDashboard."
+          if [ -z "${DASHBOARD_DEPLOY_KEY:-}" ]; then
+            echo "DASHBOARD_DEPLOY_KEY is not configured."
+            echo "Add the private SSH deploy key for LPeasy/OutsideInPrintDashboard as a repository secret."
             exit 1
           fi
         env:
-          DASHBOARD_REPO_TOKEN: ${{ secrets.DASHBOARD_REPO_TOKEN }}
+          DASHBOARD_DEPLOY_KEY: ${{ secrets.DASHBOARD_DEPLOY_KEY }}
+
+      - name: Configure SSH For Dashboard Publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Use a repo-scoped deploy key instead of a broader personal access token.
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${DASHBOARD_DEPLOY_KEY}" > ~/.ssh/dashboard_deploy_key
+          chmod 600 ~/.ssh/dashboard_deploy_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          cat <<'EOF' > ~/.ssh/config
+          Host github.com
+            IdentityFile ~/.ssh/dashboard_deploy_key
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+            UserKnownHostsFile ~/.ssh/known_hosts
+          EOF
+          chmod 600 ~/.ssh/config
+        env:
+          DASHBOARD_DEPLOY_KEY: ${{ secrets.DASHBOARD_DEPLOY_KEY }}
 
       - name: Setup Hugo (extended)
         uses: peaceiris/actions-hugo@v2
@@ -58,22 +81,21 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p .dashboard-repo
+          # Publish into the generated-output repo over SSH using the matching writable deploy key.
+          git clone git@github.com:LPeasy/OutsideInPrintDashboard.git .dashboard-repo
           cd .dashboard-repo
-          git init
-          git checkout -B main
-          git remote add origin "https://x-access-token:${DASHBOARD_REPO_TOKEN}@github.com/LPeasy/OutsideInPrintDashboard.git"
-          if git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
-            git fetch origin main
-            git reset --hard origin/main
+          if git show-ref --verify --quiet refs/remotes/origin/main; then
+            git checkout -B main origin/main
+          else
+            git checkout -B main
           fi
-        env:
-          DASHBOARD_REPO_TOKEN: ${{ secrets.DASHBOARD_REPO_TOKEN }}
 
       - name: Sync Built Files
         shell: bash
         run: |
           set -euo pipefail
+          # The target repository is generated output only.
+          # Each successful build replaces the published site contents while preserving .git metadata.
           find .dashboard-repo -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           cp -R .dashboard-public/. .dashboard-repo/
           touch .dashboard-repo/.nojekyll
@@ -91,4 +113,6 @@ jobs:
             exit 0
           fi
           git commit -m "Publish dashboard snapshot"
-          git push --force-with-lease origin HEAD:main
+          # Normal push is enough here because this workflow starts from the current remote main branch.
+          # If the target repo changes unexpectedly, a non-fast-forward failure is safer than overwriting it.
+          git push origin HEAD:main

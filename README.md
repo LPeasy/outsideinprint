@@ -139,3 +139,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPa
 - Public site note:
   The public Outside In Print site does not publish the dashboard.
   Dashboard snapshots are built separately with `hugo-dashboard.toml` and published to `LPeasy/OutsideInPrintDashboard`.
+- Deploy key note:
+  Keep `dashboard_deploy_key` and `dashboard_deploy_key.pub` local only.
+  Store the private key as the `DASHBOARD_DEPLOY_KEY` secret in `LPeasy/outsideinprint`, install the matching public key on `LPeasy/OutsideInPrintDashboard`, and publish that target repo with GitHub Pages from the `main` branch root.
+  These key files must remain local only and must never be committed to this repo.

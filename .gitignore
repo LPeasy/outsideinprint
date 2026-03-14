@@ -4,3 +4,9 @@
 /.hugo_build.lock
 
 /.tools/
+/.tmp-public/
+/.tmp-dashboard/
+/.dashboard-public/
+/.dashboard-repo/
+/dashboard_deploy_key
+/dashboard_deploy_key.pub

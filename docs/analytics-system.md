@@ -318,11 +318,86 @@ The publish workflow is in:
 One-time GitHub setup:
 
 1. Create or confirm the target repository: `LPeasy/OutsideInPrintDashboard`.
-2. In the current source repo, add a secret named `DASHBOARD_REPO_TOKEN`.
-3. Use a fine-grained GitHub token with `contents: write` access to `LPeasy/OutsideInPrintDashboard`.
-4. In the target repo, enable GitHub Pages from the `main` branch root.
+2. In the target repo, enable GitHub Pages from the `main` branch root.
+3. Generate an SSH deploy key pair.
+4. Install the public key as a writable deploy key on `LPeasy/OutsideInPrintDashboard`.
+5. Store the private key as a secret named `DASHBOARD_DEPLOY_KEY` in `LPeasy/outsideinprint`.
 
 The workflow builds the dashboard with `hugo-dashboard.toml`, copies the generated files into the target repo, and pushes them to `main`.
+
+The target dashboard repo should be treated as generated output only. Do not edit its published files manually, because each successful publish replaces them from the source repo build.
+
+### Generate The Deploy Key
+
+Create a dedicated key pair for this workflow:
+
+```bash
+ssh-keygen -t ed25519 -C "outsideinprint-dashboard-publish" -f ./dashboard_deploy_key -N ""
+```
+
+This gives you:
+
+- `dashboard_deploy_key`
+  This is the private key. Store its full contents in the source repo secret `DASHBOARD_DEPLOY_KEY`.
+- `dashboard_deploy_key.pub`
+  This is the public key. Add it to the dashboard repo as a deploy key with write access.
+
+Keep both files local only while you are setting this up. They are secret material and should never be committed to the repository.
+
+### Install The Deploy Key
+
+1. Open `LPeasy/OutsideInPrintDashboard` on GitHub.
+2. Go to `Settings` -> `Deploy keys`.
+3. Add a new deploy key using the contents of `dashboard_deploy_key.pub`.
+4. Turn on `Allow write access`.
+5. Open `LPeasy/outsideinprint`.
+6. Go to `Settings` -> `Secrets and variables` -> `Actions`.
+7. Add a repository secret named `DASHBOARD_DEPLOY_KEY`.
+8. Paste in the full private key from `dashboard_deploy_key`.
+
+The workflow connects to GitHub over SSH and clones:
+
+- `git@github.com:LPeasy/OutsideInPrintDashboard.git`
+
+You can remove the old `DASHBOARD_REPO_TOKEN` secret once the SSH-based workflow has been tested successfully.
+
+## Troubleshooting
+
+Missing secret
+
+- If the workflow fails immediately with `DASHBOARD_DEPLOY_KEY is not configured`, add the private key to `LPeasy/outsideinprint` under `Settings` -> `Secrets and variables` -> `Actions`.
+
+SSH auth failure
+
+- If clone or push fails with `Permission denied (publickey)`, confirm the public key was added to `LPeasy/OutsideInPrintDashboard` as a deploy key.
+- Make sure `Allow write access` is enabled on that deploy key.
+- Make sure the private key stored in `DASHBOARD_DEPLOY_KEY` exactly matches that public key.
+
+Target repo Pages not enabled
+
+- If the workflow succeeds but the dashboard URL does not update, check `LPeasy/OutsideInPrintDashboard` -> `Settings` -> `Pages`.
+- The site should publish from the `main` branch root.
+
+No-op publish
+
+- If the workflow logs `No dashboard changes to publish.`, that means the generated output matched the current contents of the target repo.
+- This is expected when no dashboard files changed.
+
+Manual workflow_dispatch test
+
+1. Open `LPeasy/outsideinprint` on GitHub.
+2. Go to `Actions`.
+3. Open `Build And Publish Dashboard`.
+4. Choose `Run workflow`.
+5. After it finishes, open the dashboard URL and confirm the latest snapshot is live.
+
+## First Live Deployment Checklist
+
+- Save `DASHBOARD_DEPLOY_KEY` in `LPeasy/outsideinprint`.
+- Install the matching public deploy key on `LPeasy/OutsideInPrintDashboard` with write access.
+- Enable GitHub Pages on `LPeasy/OutsideInPrintDashboard` from the `main` branch root.
+- Run the workflow manually once with `workflow_dispatch`.
+- Confirm the dashboard URL resolves and the public site still does not expose `/dashboard/`.
 
 ## A Simple Monthly Workflow
 
