@@ -1,25 +1,7 @@
 [
   {
     "source": "internal",
-    "medium": "/essays/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 2.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
     "medium": "/syd-and-oliver/smoke-and-brass/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
-    "medium": "/syd-and-oliver/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -33,6 +15,15 @@
     "content": "",
     "visitors": 1.0,
     "pageviews": 4.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/syd-and-oliver/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   },
   {
@@ -55,20 +46,29 @@
   },
   {
     "source": "internal",
-    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
     "medium": "/collections/risk-uncertainty/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
     "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/essays/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   }
 ]
