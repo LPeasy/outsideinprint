@@ -404,6 +404,22 @@ function Get-GoatCounterHeaderInfo {
   }
 }
 
+function Test-HasHeaderAlias {
+  param(
+    [string[]]$Headers,
+    [string[]]$Aliases
+  )
+
+  $normalizedHeaders = @($Headers | ForEach-Object { Normalize-Key $_ })
+  foreach ($alias in $Aliases) {
+    if ($normalizedHeaders -contains (Normalize-Key $alias)) {
+      return $true
+    }
+  }
+
+  return $false
+}
+
 function Read-GoatCounterBundle {
   param([string]$DirectoryPath)
 
@@ -444,6 +460,20 @@ function Read-GoatCounterBundle {
     Write-Warning "GoatCounter export version '$headerVersion' is not explicitly known, but the required columns were found. Continuing with column-based import."
   }
 
+  $requiredColumnAliases = @(
+    @{ Name = "Path"; Aliases = @("Path", "1Path", "2Path") }
+    @{ Name = "Event"; Aliases = @("Event") }
+    @{ Name = "Session"; Aliases = @("Session") }
+    @{ Name = "Referrer"; Aliases = @("Referrer") }
+    @{ Name = "Date"; Aliases = @("Date") }
+  )
+
+  foreach ($requiredColumn in $requiredColumnAliases) {
+    if (-not (Test-HasHeaderAlias -Headers $headerNames -Aliases $requiredColumn.Aliases)) {
+      throw "GoatCounter export in $csvPath is missing the required '$($requiredColumn.Name)' column."
+    }
+  }
+
   $metadataPath = Join-Path $DirectoryPath "metadata.json"
   $metadata = @{}
   if (Test-Path $metadataPath) {
@@ -451,14 +481,6 @@ function Read-GoatCounterBundle {
   }
 
   $rows = Import-Csv -Path $csvPath
-  if ($rows.Count -gt 0) {
-    $firstRow = @($rows)[0]
-    foreach ($requiredColumn in @("Path", "Event", "Session", "Referrer", "Date")) {
-      if ($null -eq (Get-FieldValue -Row $firstRow -Aliases @($requiredColumn))) {
-        throw "GoatCounter export in $csvPath is missing the required '$requiredColumn' column."
-      }
-    }
-  }
 
   return @{
     source = "goatcounter"
