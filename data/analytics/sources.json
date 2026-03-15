@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "source": "path=%2Foutsideinprint%2Fsyd-and-oliver%2Fsmoke-and-brass%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "path=%2Foutsideinprint%2Fessays%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "path=%2Foutsideinprint%2Fessays%2F35-years-of-yellow-the-simpsons-time-loop%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "path=%2Foutsideinprint%2Fcollections%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "path=%2Foutsideinprint%2Fsyd-and-oliver%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "path=%2Foutsideinprint%2Frandom%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 4.0,
+    "reads": 0.0
+  },
+  {
+    "source": "path=%2Foutsideinprint%2Fessays%2Fhow-did-mother-become-a-controversial-word-in-america%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "path=%2Foutsideinprint%2Fcollections%2Frisk-uncertainty%2F",
+    "medium": "other",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  }
+]

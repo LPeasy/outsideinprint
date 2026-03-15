@@ -1,29 +1,29 @@
 [
   {
     "label": "Last 7 days",
-    "pageviews": 0.0,
-    "unique_visitors": 0.0,
+    "pageviews": 14.0,
+    "unique_visitors": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
-    "pdf_downloads": 0.0,
+    "pdf_downloads": 1.0,
     "newsletter_submits": 0.0
   },
   {
     "label": "Last 30 days",
-    "pageviews": 0.0,
-    "unique_visitors": 0.0,
+    "pageviews": 14.0,
+    "unique_visitors": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
-    "pdf_downloads": 0.0,
+    "pdf_downloads": 1.0,
     "newsletter_submits": 0.0
   },
   {
     "label": "All time",
-    "pageviews": 0.0,
-    "unique_visitors": 0.0,
+    "pageviews": 14.0,
+    "unique_visitors": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
-    "pdf_downloads": 0.0,
+    "pdf_downloads": 1.0,
     "newsletter_submits": 0.0
   }
 ]
