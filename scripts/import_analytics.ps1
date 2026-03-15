@@ -367,6 +367,43 @@ function Read-StructuredFile {
   }
 }
 
+function Get-GoatCounterHeaderInfo {
+  param([string]$HeaderLine)
+
+  $line = Convert-ToText $HeaderLine
+  if (-not $line) {
+    return $null
+  }
+
+  if ($line[0] -eq [char]0xFEFF) {
+    $line = $line.Substring(1)
+  }
+
+  $tokens = @(
+    $line.Split(",") |
+      ForEach-Object { (Convert-ToText $_).Trim('"') } |
+      Where-Object { $null -ne $_ }
+  )
+
+  if ($tokens.Count -eq 0) {
+    return $null
+  }
+
+  $version = $null
+  if ($tokens.Count -ge 2 -and $tokens[0] -match '^\d+$' -and $tokens[1] -eq "Path") {
+    $version = [int]$tokens[0]
+    $tokens = @($tokens | Select-Object -Skip 1)
+  } elseif ($tokens[0] -match '^(?<version>\d+)Path$') {
+    $version = [int]$Matches["version"]
+    $tokens[0] = "Path"
+  }
+
+  return @{
+    version = $version
+    headers = $tokens
+  }
+}
+
 function Read-GoatCounterBundle {
   param([string]$DirectoryPath)
 
@@ -388,17 +425,23 @@ function Read-GoatCounterBundle {
     throw "GoatCounter export is empty: $csvPath"
   }
 
-  $headerVersion = $null
-  if ($headerLine -match '^(?<version>\d+),Path,') {
-    $headerVersion = [int]$Matches["version"]
+  $headerInfo = Get-GoatCounterHeaderInfo -HeaderLine $headerLine
+  if ($null -eq $headerInfo -or @($headerInfo.headers).Count -eq 0) {
+    throw "Unsupported GoatCounter export header in $csvPath. The file is missing a readable CSV header row."
   }
 
-  if ($null -eq $headerVersion) {
-    throw "Unsupported GoatCounter export header in $csvPath. Expected a versioned Path header such as '2,Path'."
+  $headerNames = @($headerInfo.headers)
+  if (-not ($headerNames -contains "Path")) {
+    $preview = Convert-ToText $headerLine
+    if ($preview.Length -gt 120) {
+      $preview = $preview.Substring(0, 120) + "..."
+    }
+    throw "Unsupported GoatCounter export header in $csvPath. Expected a CSV header containing 'Path'. First line: $preview"
   }
 
-  if ($headerVersion -notin @(1, 2)) {
-    throw "Unsupported GoatCounter export version '$headerVersion' in $csvPath. Update scripts/import_analytics.ps1 for the new format."
+  $headerVersion = $headerInfo.version
+  if ($null -ne $headerVersion -and $headerVersion -notin @(1, 2)) {
+    Write-Warning "GoatCounter export version '$headerVersion' is not explicitly known, but the required columns were found. Continuing with column-based import."
   }
 
   $metadataPath = Join-Path $DirectoryPath "metadata.json"
@@ -410,7 +453,7 @@ function Read-GoatCounterBundle {
   $rows = Import-Csv -Path $csvPath
   if ($rows.Count -gt 0) {
     $firstRow = @($rows)[0]
-    foreach ($requiredColumn in @("Event", "Session", "Referrer", "Date")) {
+    foreach ($requiredColumn in @("Path", "Event", "Session", "Referrer", "Date")) {
       if ($null -eq (Get-FieldValue -Row $firstRow -Aliases @($requiredColumn))) {
         throw "GoatCounter export in $csvPath is missing the required '$requiredColumn' column."
       }
