@@ -51,6 +51,40 @@ function Write-Utf8Json {
   [System.IO.File]::WriteAllText([System.IO.Path]::GetFullPath($Path), $json + [Environment]::NewLine, $encoding)
 }
 
+function Get-ResponseDetails {
+  param([object]$Response)
+
+  if ($null -eq $Response) {
+    return ""
+  }
+
+  try {
+    if ($Response.PSObject.Properties.Name -contains "Content" -and $null -ne $Response.Content) {
+      $content = $Response.Content
+
+      if ($content -is [string]) {
+        return $content
+      }
+
+      if ($content.PSObject.Methods.Name -contains "ReadAsStringAsync") {
+        return $content.ReadAsStringAsync().GetAwaiter().GetResult()
+      }
+    }
+
+    if ($Response.PSObject.Methods.Name -contains "GetResponseStream") {
+      $stream = $Response.GetResponseStream()
+      if ($null -ne $stream) {
+        $reader = New-Object System.IO.StreamReader($stream)
+        return $reader.ReadToEnd()
+      }
+    }
+  } catch {
+    return ""
+  }
+
+  return ""
+}
+
 function Invoke-GoatCounterRequest {
   param(
     [string]$Method,
@@ -90,9 +124,11 @@ function Invoke-GoatCounterRequest {
       $statusCode = 0
       $details = ""
       if ($_.Exception.Response) {
-        $statusCode = [int]$_.Exception.Response.StatusCode.value__
-        $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
-        $details = $reader.ReadToEnd()
+        $response = $_.Exception.Response
+        if ($response.StatusCode) {
+          $statusCode = [int]$response.StatusCode
+        }
+        $details = Get-ResponseDetails -Response $response
       }
 
       $isRetryable = ($statusCode -eq 0 -or $statusCode -eq 429 -or $statusCode -eq 502 -or $statusCode -eq 503 -or $statusCode -eq 504)
