@@ -68,20 +68,28 @@ jobs:
         run: |
           ./scripts/import_analytics.ps1 -InputPath ./.analytics-refresh/raw -OutputDir ./data/analytics
 
+      - name: Validate Refreshed Analytics Snapshot Contract
+        shell: pwsh
+        run: |
+          ./tests/test_analytics_snapshot_contract.ps1 -DataDir ./data/analytics
+
       - name: Analytics Import Summary
         shell: pwsh
         run: |
           $overview = Get-Content ./data/analytics/overview.json -Raw | ConvertFrom-Json
           $essays = Get-Content ./data/analytics/essays.json -Raw | ConvertFrom-Json
+          $daily = Get-Content ./data/analytics/timeseries_daily.json -Raw | ConvertFrom-Json
           $trackedPages = @($essays).Count
           $totalViews = [int][double]$overview.pageviews
           $rangeLabel = [string]$overview.range_label
           $updatedAt = [string]$overview.updated_at
+          $dailyPoints = @($daily).Count
 
           @"
           ## Analytics Snapshot
           - Pages tracked: $trackedPages
           - Total views imported: $totalViews
+          - Daily points imported: $dailyPoints
           - Time range: $rangeLabel
           - Snapshot date: $updatedAt
           "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8

@@ -1,0 +1,42 @@
+[
+    {
+        "section":  "Working Papers",
+        "pageviews":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "newsletter_submits":  0,
+        "sparkline_pageviews":  [
+                                    0,
+                                    0,
+                                    1,
+                                    0
+                                ],
+        "sparkline_reads":  [
+                                0,
+                                0,
+                                1,
+                                0
+                            ]
+    },
+    {
+        "section":  "Essays",
+        "pageviews":  7,
+        "reads":  5,
+        "read_rate":  71.4,
+        "pdf_downloads":  3,
+        "newsletter_submits":  1,
+        "sparkline_pageviews":  [
+                                    2,
+                                    2,
+                                    2,
+                                    1
+                                ],
+        "sparkline_reads":  [
+                                2,
+                                1,
+                                1,
+                                1
+                            ]
+    }
+]

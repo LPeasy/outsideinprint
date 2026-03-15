@@ -1,0 +1,82 @@
+[
+    {
+        "date":  "2026-03-03",
+        "source_type":  "external",
+        "source":  "duckduckgo.com / referral",
+        "pageviews":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "newsletter_submits":  0
+    },
+    {
+        "date":  "2026-03-03",
+        "source_type":  "campaign",
+        "source":  "letter / email / weekly / issue-3",
+        "pageviews":  1,
+        "reads":  0,
+        "read_rate":  0,
+        "pdf_downloads":  1,
+        "newsletter_submits":  0
+    },
+    {
+        "date":  "2026-03-02",
+        "source_type":  "external",
+        "source":  "news.ycombinator.com / referral",
+        "pageviews":  1,
+        "reads":  0,
+        "read_rate":  0,
+        "pdf_downloads":  0,
+        "newsletter_submits":  0
+    },
+    {
+        "date":  "2026-03-02",
+        "source_type":  "direct",
+        "source":  "direct",
+        "pageviews":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "newsletter_submits":  1
+    },
+    {
+        "date":  "2026-03-03",
+        "source_type":  "internal",
+        "source":  "internal /",
+        "pageviews":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "newsletter_submits":  0
+    },
+    {
+        "date":  "2026-03-04",
+        "source_type":  "external",
+        "source":  "google.com / referral",
+        "pageviews":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  1,
+        "newsletter_submits":  0
+    },
+    {
+        "date":  "2026-03-01",
+        "source_type":  "external",
+        "source":  "google.com / referral",
+        "pageviews":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  1,
+        "newsletter_submits":  0
+    },
+    {
+        "date":  "2026-03-01",
+        "source_type":  "internal",
+        "source":  "internal /collections/risk-uncertainty/",
+        "pageviews":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "newsletter_submits":  0
+    }
+]

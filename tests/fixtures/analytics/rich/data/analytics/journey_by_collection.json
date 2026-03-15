@@ -1,0 +1,42 @@
+[
+    {
+        "collection_label":  "editor-notes",
+        "discovery_type":  "internal-module",
+        "discovery_mode":  "module-driven",
+        "module_slot":  "homepage_lede",
+        "collection":  "editor-notes",
+        "section":  "Working Papers",
+        "slug":  "",
+        "path":  "",
+        "title":  "",
+        "views":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "pdf_rate":  0,
+        "newsletter_submits":  0,
+        "newsletter_rate":  0,
+        "approximate_downstream":  true,
+        "attribution_note":  "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+    },
+    {
+        "collection_label":  "risk-uncertainty",
+        "discovery_type":  "internal-module",
+        "discovery_mode":  "module-driven",
+        "module_slot":  "collection_feature",
+        "collection":  "risk-uncertainty",
+        "section":  "Essays",
+        "slug":  "",
+        "path":  "",
+        "title":  "",
+        "views":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "pdf_rate":  0,
+        "newsletter_submits":  0,
+        "newsletter_rate":  0,
+        "approximate_downstream":  true,
+        "attribution_note":  "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+    }
+]

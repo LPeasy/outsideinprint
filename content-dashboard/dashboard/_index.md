@@ -1,5 +1,5 @@
 ---
 title: "Performance Dashboard"
-description: "A static snapshot of analytics and engagement metrics for Outside In Print."
+description: "A static, insight-first readership dashboard for Outside In Print."
 url: "/"
 ---

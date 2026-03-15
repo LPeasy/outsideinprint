@@ -23,6 +23,14 @@ The analytics path is:
    - `data/analytics/sources.json`
    - `data/analytics/modules.json`
    - `data/analytics/periods.json`
+   - `data/analytics/timeseries_daily.json`
+   - `data/analytics/sections.json`
+   - `data/analytics/essays_timeseries.json`
+   - `data/analytics/journeys.json`
+   - `data/analytics/journey_by_source.json`
+   - `data/analytics/journey_by_collection.json`
+   - `data/analytics/journey_by_essay.json`
+   - `data/analytics/sources_timeseries.json`
 5. The workflow commits changed snapshot files and then explicitly dispatches `publish-dashboard.yml`.
 6. `publish-dashboard.yml` builds the dashboard with `hugo-dashboard.toml` and publishes it to `LPeasy/OutsideInPrintDashboard`.
 
@@ -107,6 +115,12 @@ The normalized dashboard continues to expose:
 - read event rate
 - PDF downloads
 - newsletter submits
+- daily trend windows
+- section-level summaries
+- essay sparklines
+- discovery-to-read journeys
+- journey rollups by source, collection/module, and essay
+- source-quality time mix
 - top essays
 - referrers and campaigns
 - module / collection click totals
@@ -119,6 +133,42 @@ The current GoatCounter-based meanings are:
 - `unique_visitors` are derived from distinct GoatCounter session IDs in the exported pageview rows
 - `sources.json` is derived from normalized referrer data and campaign tags
 - `modules.json.downstream_reads` is inferred from same-session click-to-read sequences in the export, not from first-class attribution fields
+- `journeys.json.views` are measured pageview anchors; `reads`, `pdf_downloads`, and `newsletter_submits` are approximate same-session downstream events
+- `journey_by_source.json`, `journey_by_collection.json`, and `journey_by_essay.json` are rollups of those same measured pageview anchors plus approximate downstream events
+- `timeseries_daily.json` is date-filled only across the exported range; missing days inside that range render as explicit zero rows
+
+## Dashboard Drill-Down State
+
+Dashboard V2 keeps drill-down exploration shareable through query-string state rather than a live API.
+
+- `selectedSection` opens the in-page section explorer for a specific section
+- `selectedEssay` opens the essay explorer for a specific piece path
+- `compareSections` keeps up to four sections in the compact comparison strip
+- `compareEssays` keeps up to four essays in the compact comparison strip
+
+These controls only change presentation state in the static dashboard. They do not request more analytics data at runtime.
+
+## Maintainer Validation
+
+For local hardening checks, the smallest useful validation loop is:
+
+1. `pwsh -File ./tests/test_analytics_import.ps1`
+2. `pwsh -File ./tests/test_analytics_snapshot_contract.ps1`
+3. `node --test tests/*.test.mjs`
+4. `pwsh -File ./tests/test_dashboard_build.ps1`
+
+What each step protects:
+
+- the import test verifies the ETL still emits the expected normalized files
+- the snapshot contract test fails fast if a required JSON snapshot is missing, empty, malformed, or contains `NaN` / `undefined`
+- the Node test suite covers empty, sparse, rich, malformed-but-recoverable, filter, journey, and drill-down logic
+- the Hugo smoke build checks that the static dashboard still renders expected explorer sections without leaking invalid values into HTML
+
+The dashboard intentionally stays conservative when sample sizes are tiny:
+
+- deterministic insight cards fall back to a small-sample note for fragile windows
+- journey and conversion copy continues to label approximate downstream attribution explicitly
+- malformed snapshot values are coerced to safe defaults so the page degrades instead of crashing
 
 ## Historical Notes
 
@@ -216,6 +266,14 @@ Dashboard site only:
 
 ```powershell
 hugo --config hugo-dashboard.toml server --disableFastRender
+```
+
+Dashboard V2 smoke tests:
+
+```powershell
+node --test .\tests\dashboard_v2_logic.test.mjs
+powershell -ExecutionPolicy Bypass -File .\tests\test_analytics_import.ps1
+powershell -ExecutionPolicy Bypass -File .\tests\test_dashboard_build.ps1
 ```
 
 Local public-site tracking test:
@@ -337,6 +395,149 @@ The importer still accepts the older section-based CSV/JSON structure for manual
 - `read_rate`
 - `pdf_downloads`
 - `newsletter_submits`
+
+`timeseries_daily.json`
+
+- `date`
+- `pageviews`
+- `unique_visitors`
+- `reads`
+- `read_rate`
+- `pdf_downloads`
+- `newsletter_submits`
+
+`sections.json`
+
+- `section`
+- `pageviews`
+- `reads`
+- `read_rate`
+- `pdf_downloads`
+- `newsletter_submits`
+- `sparkline_pageviews`
+- `sparkline_reads`
+
+`essays_timeseries.json`
+
+- `slug`
+- `path`
+- `title`
+- `section`
+- `series[]`
+  Each series row contains:
+  - `date`
+  - `pageviews`
+  - `reads`
+  - `pdf_downloads`
+  - `newsletter_submits`
+
+`journeys.json`
+
+- `discovery_source`
+- `discovery_type`
+- `module_slot`
+- `collection`
+- `slug`
+- `path`
+- `title`
+- `section`
+- `views`
+- `reads`
+- `pdf_downloads`
+- `newsletter_submits`
+- `approximate_downstream`
+- `attribution_note`
+
+`journey_by_source.json`
+
+- `discovery_source`
+- `discovery_type`
+- `discovery_mode`
+- `views`
+- `reads`
+- `read_rate`
+- `pdf_downloads`
+- `pdf_rate`
+- `newsletter_submits`
+- `newsletter_rate`
+- `approximate_downstream`
+- `attribution_note`
+
+`journey_by_collection.json`
+
+- `collection_label`
+- `discovery_type`
+- `discovery_mode`
+- `module_slot`
+- `collection`
+- `section`
+- `views`
+- `reads`
+- `read_rate`
+- `pdf_downloads`
+- `pdf_rate`
+- `newsletter_submits`
+- `newsletter_rate`
+- `approximate_downstream`
+- `attribution_note`
+
+`journey_by_essay.json`
+
+- `title`
+- `section`
+- `slug`
+- `path`
+- `views`
+- `reads`
+- `read_rate`
+- `pdf_downloads`
+- `pdf_rate`
+- `newsletter_submits`
+- `newsletter_rate`
+- `approximate_downstream`
+- `attribution_note`
+
+`sources_timeseries.json`
+
+- `date`
+- `source_type`
+- `source`
+- `pageviews`
+- `reads`
+- `read_rate`
+- `pdf_downloads`
+- `newsletter_submits`
+
+## Dashboard V2 Semantics
+
+The dashboard is still static Hugo output, but the page is now progressively enhanced with local JavaScript:
+
+- hero KPI cards show current-window totals, previous-window deltas, and sparklines
+- the main trend panel uses `timeseries_daily.json`
+- section comparison cards use `sections.json`
+- essay leaderboard sparklines use `essays_timeseries.json`
+- funnel and pathway views use `journeys.json`
+- source, collection, and essay journey comparison panels use the journey rollup files
+- source quality ranking and mix use `sources.json` plus `sources_timeseries.json`
+
+No dashboard-side network requests are made at runtime.
+
+Honesty rules:
+
+- if daily files are empty, the dashboard shows the committed aggregate snapshot and an explicit empty-state note
+- pageview totals are treated as directly measured
+- downstream read / PDF / newsletter pathways are labeled approximate because they are inferred from same-session order, not deterministic user identity stitching
+- step-through rates shown in the journey rollups are calculated from measured pageviews divided into approximate downstream step counts from those same journey buckets
+- no metric is backfilled from aggregate snapshots when the raw export is missing the underlying daily granularity
+
+## Dashboard Presentation Conventions
+
+The Dashboard V2 polish layer keeps one visual language across cards, charts, and tables:
+
+- dashboard-specific design tokens live under `.dashboard-v2` in [`assets/css/main.css`](C:\Users\lawto\OneDrive\Desktop\OutsideInPrint\outsideinprint\assets\css\main.css)
+- warm neutrals remain the base; the restrained gold accent is reserved for emphasis, annotation, and active state cues
+- delta badges, signal sidebars, and funnel badges use typography and border treatment before color so the dashboard still reads well in low-saturation or reduced-contrast contexts
+- approximate journey stages are visually distinct with dashed framing and explicit labels rather than warning colors
 
 The dashboard handles:
 

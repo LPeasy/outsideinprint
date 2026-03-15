@@ -1,0 +1,14 @@
+[
+    {
+        "slot":  "homepage_lede",
+        "collection":  "editor-notes",
+        "clicks":  1,
+        "downstream_reads":  1
+    },
+    {
+        "slot":  "collection_feature",
+        "collection":  "risk-uncertainty",
+        "clicks":  1,
+        "downstream_reads":  1
+    }
+]

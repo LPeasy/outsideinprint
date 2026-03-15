@@ -36,7 +36,10 @@
         {{ partial "footer.html" . }}
       {{ end }}
     </div>
-    {{ if not site.Params.dashboard.site }}
+    {{ if site.Params.dashboard.site }}
+      {{ $dashboardJS := resources.Get "js/dashboard.mjs" | js.Build (dict "targetPath" "js/dashboard.js" "minify" true) | resources.Fingerprint }}
+      <script src="{{ $dashboardJS.RelPermalink }}" integrity="{{ $dashboardJS.Data.Integrity }}" defer></script>
+    {{ else }}
       {{ partial "analytics.html" . }}
     {{ end }}
   </body>

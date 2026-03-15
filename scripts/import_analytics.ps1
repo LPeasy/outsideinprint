@@ -6,10 +6,25 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$Sections = @("overview", "essays", "sources", "modules", "periods")
+$Sections = @(
+  "overview",
+  "essays",
+  "sources",
+  "modules",
+  "periods",
+  "timeseries_daily",
+  "sections",
+  "essays_timeseries",
+  "journeys",
+  "journey_by_source",
+  "journey_by_collection",
+  "journey_by_essay",
+  "sources_timeseries"
+)
 $EssayPathPattern = "^/(essays|literature|syd-and-oliver|working-papers)/[^/]+/?$"
 $AllTimeLabel = "All time"
 $GoatCounterExportNames = @("goatcounter-export.csv", "export.csv")
+$DashboardSparklineDays = 14
 
 function Read-Utf8Text {
   param([string]$Path)
@@ -785,6 +800,201 @@ function Get-UniqueSessionCount {
   return [double]$sessions.Count
 }
 
+function Get-DateKey {
+  param([datetimeoffset]$OccurredAt)
+
+  if ($null -eq $OccurredAt) {
+    return ""
+  }
+
+  return $OccurredAt.UtcDateTime.ToString("yyyy-MM-dd")
+}
+
+function Get-DateRangeKeys {
+  param([object[]]$Rows)
+
+  $datedRows = @($Rows | Where-Object { $_.occurred_at })
+  if ($datedRows.Count -eq 0) {
+    return ,@()
+  }
+
+  $startDate = ($datedRows | Sort-Object -Property occurred_at | Select-Object -First 1).occurred_at.UtcDateTime.Date
+  $endDate = ($datedRows | Sort-Object -Property occurred_at | Select-Object -Last 1).occurred_at.UtcDateTime.Date
+  $keys = @()
+  $cursor = $startDate
+
+  while ($cursor -le $endDate) {
+    $keys += $cursor.ToString("yyyy-MM-dd")
+    $cursor = $cursor.AddDays(1)
+  }
+
+  return ,$keys
+}
+
+function New-DailyMetricBucket {
+  return @{
+    pageviews = 0.0
+    reads = 0.0
+    pdf_downloads = 0.0
+    newsletter_submits = 0.0
+    sessions = New-Object "System.Collections.Generic.HashSet[string]"
+  }
+}
+
+function Get-OrCreateBucket {
+  param(
+    [hashtable]$Map,
+    [string]$Key
+  )
+
+  if (-not $Map.ContainsKey($Key)) {
+    $Map[$Key] = New-DailyMetricBucket
+  }
+
+  return $Map[$Key]
+}
+
+function Get-SafeMetricRate {
+  param(
+    [double]$Numerator,
+    [double]$Denominator
+  )
+
+  if ($Denominator -le 0) {
+    return 0.0
+  }
+
+  return [Math]::Round(($Numerator / $Denominator) * 100, 1)
+}
+
+function Get-JourneyDiscoveryMode {
+  param(
+    [string]$DiscoveryType,
+    [string]$ModuleSlot,
+    [string]$Collection
+  )
+
+  if ((Convert-ToText $ModuleSlot) -or (Convert-ToText $Collection) -or (Convert-ToText $DiscoveryType) -eq "internal-module") {
+    return "module-driven"
+  }
+
+  return "article-discovery"
+}
+
+function New-JourneyAggregate {
+  param(
+    [string]$Label,
+    [string]$DiscoveryType = "",
+    [string]$DiscoveryMode = "",
+    [string]$ModuleSlot = "",
+    [string]$Collection = "",
+    [string]$Section = "",
+    [string]$Slug = "",
+    [string]$Path = "",
+    [string]$Title = ""
+  )
+
+  return @{
+    label = $Label
+    discovery_type = $DiscoveryType
+    discovery_mode = $DiscoveryMode
+    module_slot = $ModuleSlot
+    collection = $Collection
+    section = $Section
+    slug = $Slug
+    path = $Path
+    title = $Title
+    views = 0.0
+    reads = 0.0
+    pdf_downloads = 0.0
+    newsletter_submits = 0.0
+  }
+}
+
+function Convert-JourneyAggregateToRecord {
+  param(
+    [hashtable]$Aggregate,
+    [string]$LabelFieldName = "label"
+  )
+
+  $views = [double]$Aggregate.views
+  $reads = [double]$Aggregate.reads
+  $pdfDownloads = [double]$Aggregate.pdf_downloads
+  $newsletterSubmits = [double]$Aggregate.newsletter_submits
+
+  $record = [ordered]@{}
+  $record[$LabelFieldName] = Convert-ToText $Aggregate.label
+  if ($Aggregate.ContainsKey("discovery_type")) { $record["discovery_type"] = Convert-ToText $Aggregate.discovery_type }
+  if ($Aggregate.ContainsKey("discovery_mode")) { $record["discovery_mode"] = Convert-ToText $Aggregate.discovery_mode }
+  if ($Aggregate.ContainsKey("module_slot")) { $record["module_slot"] = Convert-ToText $Aggregate.module_slot }
+  if ($Aggregate.ContainsKey("collection")) { $record["collection"] = Convert-ToText $Aggregate.collection }
+  if ($Aggregate.ContainsKey("section")) { $record["section"] = Convert-ToText $Aggregate.section }
+  if ($Aggregate.ContainsKey("slug")) { $record["slug"] = Convert-ToText $Aggregate.slug }
+  if ($Aggregate.ContainsKey("path")) { $record["path"] = Convert-ToText $Aggregate.path }
+  if ($Aggregate.ContainsKey("title")) { $record["title"] = Convert-ToText $Aggregate.title }
+  $record["views"] = $views
+  $record["reads"] = $reads
+  $record["read_rate"] = Get-SafeMetricRate -Numerator $reads -Denominator $views
+  $record["pdf_downloads"] = $pdfDownloads
+  $record["pdf_rate"] = Get-SafeMetricRate -Numerator $pdfDownloads -Denominator $views
+  $record["newsletter_submits"] = $newsletterSubmits
+  $record["newsletter_rate"] = Get-SafeMetricRate -Numerator $newsletterSubmits -Denominator $views
+  $record["approximate_downstream"] = $true
+  $record["attribution_note"] = "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+
+  return $record
+}
+
+function Get-SourceType {
+  param([object]$Attribution)
+
+  $source = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("source"))
+  $medium = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("medium"))
+  $campaign = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("campaign"))
+
+  if ($source -eq "internal") {
+    return "internal"
+  }
+
+  if ($source -eq "direct") {
+    return "direct"
+  }
+
+  if ($campaign -or $medium -eq "campaign" -or $medium -eq "generated") {
+    return "campaign"
+  }
+
+  if (-not $source) {
+    return "unknown"
+  }
+
+  return "external"
+}
+
+function Get-DailySparkline {
+  param(
+    [hashtable]$DailyMap,
+    [string[]]$DateKeys,
+    [string]$MetricName,
+    [int]$Window = $DashboardSparklineDays
+  )
+
+  if ($DateKeys.Count -eq 0) {
+    return ,@()
+  }
+
+  $selectedKeys = @($DateKeys | Select-Object -Last $Window)
+  return ,@(
+    foreach ($dateKey in $selectedKeys) {
+      if ($DailyMap.ContainsKey($dateKey)) {
+        [double](Convert-ToNumber $DailyMap[$dateKey].$MetricName)
+      } else {
+        0.0
+      }
+    }
+  )
+}
+
 function Get-GoatCounterOverview {
   param(
     [object[]]$PageRows,
@@ -1060,6 +1270,484 @@ function Get-GoatCounterPeriods {
   )
 }
 
+function Get-GoatCounterDailyTimeseries {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $dateKeys = Get-DateRangeKeys -Rows @($PageRows + $EventRows)
+  if ($dateKeys.Count -eq 0) {
+    return ,@()
+  }
+
+  $dailyMap = @{}
+
+  foreach ($dateKey in $dateKeys) {
+    $dailyMap[$dateKey] = New-DailyMetricBucket
+  }
+
+  foreach ($row in $PageRows | Where-Object { $_.occurred_at }) {
+    $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+    $bucket = Get-OrCreateBucket -Map $dailyMap -Key $dateKey
+    $bucket.pageviews += 1
+    if ($row.session) {
+      [void]$bucket.sessions.Add($row.session)
+    }
+  }
+
+  foreach ($row in $EventRows | Where-Object { $_.occurred_at }) {
+    $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+    $bucket = Get-OrCreateBucket -Map $dailyMap -Key $dateKey
+
+    switch ($row.event_name) {
+      "essay_read" { $bucket.reads += 1 }
+      "pdf_download" { $bucket.pdf_downloads += 1 }
+      "newsletter_submit" { $bucket.newsletter_submits += 1 }
+    }
+  }
+
+  return ,@(
+    foreach ($dateKey in $dateKeys) {
+      $bucket = $dailyMap[$dateKey]
+      [ordered]@{
+        date = $dateKey
+        pageviews = [double]$bucket.pageviews
+        unique_visitors = [double]$bucket.sessions.Count
+        reads = [double]$bucket.reads
+        read_rate = Get-SafeMetricRate -Numerator $bucket.reads -Denominator $bucket.pageviews
+        pdf_downloads = [double]$bucket.pdf_downloads
+        newsletter_submits = [double]$bucket.newsletter_submits
+      }
+    }
+  )
+}
+
+function Get-GoatCounterSections {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $sections = @{}
+  $dateKeys = Get-DateRangeKeys -Rows @($PageRows + $EventRows)
+
+  foreach ($row in $PageRows | Where-Object { $_.content_path -match $EssayPathPattern }) {
+    $section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+    if (-not $section) {
+      continue
+    }
+
+    if (-not $sections.ContainsKey($section)) {
+      $sections[$section] = @{
+        section = $section
+        pageviews = 0.0
+        reads = 0.0
+        pdf_downloads = 0.0
+        newsletter_submits = 0.0
+        daily = @{}
+      }
+    }
+
+    $sections[$section].pageviews += 1
+    if ($row.occurred_at) {
+      $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+      $bucket = Get-OrCreateBucket -Map $sections[$section].daily -Key $dateKey
+      $bucket.pageviews += 1
+    }
+  }
+
+  foreach ($row in $EventRows | Where-Object { $_.content_path -match $EssayPathPattern }) {
+    $section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+    if (-not $section) {
+      continue
+    }
+
+    if (-not $sections.ContainsKey($section)) {
+      $sections[$section] = @{
+        section = $section
+        pageviews = 0.0
+        reads = 0.0
+        pdf_downloads = 0.0
+        newsletter_submits = 0.0
+        daily = @{}
+      }
+    }
+
+    if ($row.event_name -eq "essay_read") {
+      $sections[$section].reads += 1
+    }
+
+    if ($row.event_name -eq "pdf_download") {
+      $sections[$section].pdf_downloads += 1
+    }
+
+    if ($row.event_name -eq "newsletter_submit") {
+      $sections[$section].newsletter_submits += 1
+    }
+
+    if ($row.occurred_at) {
+      $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+      $bucket = Get-OrCreateBucket -Map $sections[$section].daily -Key $dateKey
+      switch ($row.event_name) {
+        "essay_read" { $bucket.reads += 1 }
+        "pdf_download" { $bucket.pdf_downloads += 1 }
+        "newsletter_submit" { $bucket.newsletter_submits += 1 }
+      }
+    }
+  }
+
+  return ,@(
+    foreach ($entry in $sections.Values) {
+      [ordered]@{
+        section = $entry.section
+        pageviews = [double]$entry.pageviews
+        reads = [double]$entry.reads
+        read_rate = Get-SafeMetricRate -Numerator $entry.reads -Denominator $entry.pageviews
+        pdf_downloads = [double]$entry.pdf_downloads
+        newsletter_submits = [double]$entry.newsletter_submits
+        sparkline_pageviews = Get-DailySparkline -DailyMap $entry.daily -DateKeys $dateKeys -MetricName "pageviews"
+        sparkline_reads = Get-DailySparkline -DailyMap $entry.daily -DateKeys $dateKeys -MetricName "reads"
+      }
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.pageviews }; Descending = $true }, @{ Expression = { $_.reads }; Descending = $true }
+}
+
+function Get-GoatCounterEssayTimeseries {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $essayMap = @{}
+  $dateKeys = Get-DateRangeKeys -Rows @($PageRows + $EventRows)
+
+  foreach ($row in $PageRows | Where-Object { $_.content_path -match $EssayPathPattern -and $_.occurred_at }) {
+    $key = $row.content_path
+    if (-not $essayMap.ContainsKey($key)) {
+      $essayMap[$key] = @{
+        slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
+        path = $row.content_path
+        title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
+        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        daily = @{}
+        views = 0.0
+      }
+    }
+
+    $essayMap[$key].views += 1
+    $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+    $bucket = Get-OrCreateBucket -Map $essayMap[$key].daily -Key $dateKey
+    $bucket.pageviews += 1
+  }
+
+  foreach ($row in $EventRows | Where-Object { $_.content_path -match $EssayPathPattern -and $_.occurred_at }) {
+    $key = $row.content_path
+    if (-not $essayMap.ContainsKey($key)) {
+      $essayMap[$key] = @{
+        slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
+        path = $row.content_path
+        title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
+        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        daily = @{}
+        views = 0.0
+      }
+    }
+
+    $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+    $bucket = Get-OrCreateBucket -Map $essayMap[$key].daily -Key $dateKey
+    switch ($row.event_name) {
+      "essay_read" { $bucket.reads += 1 }
+      "pdf_download" { $bucket.pdf_downloads += 1 }
+      "newsletter_submit" { $bucket.newsletter_submits += 1 }
+    }
+  }
+
+  return ,@(
+    foreach ($entry in ($essayMap.Values | Sort-Object -Property @{ Expression = { $_.views }; Descending = $true } | Select-Object -First 16)) {
+      [ordered]@{
+        slug = $entry.slug
+        path = $entry.path
+        title = $entry.title
+        section = $entry.section
+        series = @(
+          foreach ($dateKey in $dateKeys) {
+            $bucket = if ($entry.daily.ContainsKey($dateKey)) { $entry.daily[$dateKey] } else { New-DailyMetricBucket }
+            [ordered]@{
+              date = $dateKey
+              pageviews = [double]$bucket.pageviews
+              reads = [double]$bucket.reads
+              pdf_downloads = [double]$bucket.pdf_downloads
+              newsletter_submits = [double]$bucket.newsletter_submits
+            }
+          }
+        )
+      }
+    }
+  )
+}
+
+function Get-GoatCounterJourneys {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $journeyMap = @{}
+  $sessions = @{}
+
+  foreach ($row in ($PageRows + $EventRows) | Where-Object { $_.session -and $_.occurred_at } | Group-Object -Property session) {
+    $sessions[$row.Name] = @($row.Group | Sort-Object -Property occurred_at, raw_path)
+  }
+
+  foreach ($sessionKey in $sessions.Keys) {
+    $ordered = $sessions[$sessionKey]
+    $recentModuleByPath = @{}
+    $anchorByPath = @{}
+
+    foreach ($row in $ordered) {
+      if ($row.event_name -in @("internal_promo_click", "collection_click") -and $row.content_path) {
+        $recentModuleByPath[$row.content_path] = $row
+        continue
+      }
+
+      if (-not $row.content_path -or $row.content_path -notmatch $EssayPathPattern) {
+        continue
+      }
+
+      if (-not $row.is_event) {
+        $module = $null
+        if ($recentModuleByPath.ContainsKey($row.content_path)) {
+          $module = $recentModuleByPath[$row.content_path]
+        }
+
+        $discoverySource = Convert-ToText $row.attribution.label "direct"
+        $discoveryType = Get-SourceType -Attribution $row.attribution
+        $slot = ""
+        $collection = ""
+        if ($null -ne $module) {
+          $slot = Convert-ToText $module.source_slot
+          $collection = Convert-ToText $module.collection
+          if ($slot -or $collection) {
+            $discoverySource = if ($collection) { "$slot / $collection" } else { $slot }
+            $discoveryType = "internal-module"
+          }
+        }
+
+        $journeyKey = Get-Key @($discoverySource, $discoveryType, $slot, $collection, $row.content_path)
+        if (-not $journeyMap.ContainsKey($journeyKey)) {
+          $journeyMap[$journeyKey] = @{
+            discovery_source = $discoverySource
+            discovery_type = $discoveryType
+            module_slot = $slot
+            collection = $collection
+            slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
+            path = $row.content_path
+            title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
+            section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+            views = 0.0
+            reads = 0.0
+            pdf_downloads = 0.0
+            newsletter_submits = 0.0
+          }
+        }
+
+        $journeyMap[$journeyKey].views += 1
+        $anchorByPath[$row.content_path] = $journeyKey
+        continue
+      }
+
+      if (-not $anchorByPath.ContainsKey($row.content_path)) {
+        continue
+      }
+
+      $journeyKey = $anchorByPath[$row.content_path]
+      switch ($row.event_name) {
+        "essay_read" { $journeyMap[$journeyKey].reads += 1 }
+        "pdf_download" { $journeyMap[$journeyKey].pdf_downloads += 1 }
+        "newsletter_submit" { $journeyMap[$journeyKey].newsletter_submits += 1 }
+      }
+    }
+  }
+
+  return ,@(
+    foreach ($entry in $journeyMap.Values) {
+      $discoveryMode = Get-JourneyDiscoveryMode -DiscoveryType $entry.discovery_type -ModuleSlot $entry.module_slot -Collection $entry.collection
+      [ordered]@{
+        discovery_source = $entry.discovery_source
+        discovery_type = $entry.discovery_type
+        discovery_mode = $discoveryMode
+        module_slot = $entry.module_slot
+        collection = $entry.collection
+        slug = $entry.slug
+        path = $entry.path
+        title = $entry.title
+        section = $entry.section
+        views = [double]$entry.views
+        reads = [double]$entry.reads
+        read_rate = Get-SafeMetricRate -Numerator $entry.reads -Denominator $entry.views
+        pdf_downloads = [double]$entry.pdf_downloads
+        pdf_rate = Get-SafeMetricRate -Numerator $entry.pdf_downloads -Denominator $entry.views
+        newsletter_submits = [double]$entry.newsletter_submits
+        newsletter_rate = Get-SafeMetricRate -Numerator $entry.newsletter_submits -Denominator $entry.views
+        approximate_downstream = $true
+        attribution_note = "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+      }
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.views }; Descending = $true }, @{ Expression = { $_.reads }; Descending = $true } | Select-Object -First 60
+}
+
+function Get-GoatCounterJourneyBySource {
+  param([object[]]$Journeys)
+
+  $aggregateMap = @{}
+  foreach ($row in $Journeys) {
+    $label = Convert-ToText $row.discovery_source "direct"
+    $type = Convert-ToText $row.discovery_type
+    $mode = Convert-ToText $row.discovery_mode
+    $key = Get-Key @($label, $type, $mode)
+    if (-not $aggregateMap.ContainsKey($key)) {
+      $aggregateMap[$key] = New-JourneyAggregate -Label $label -DiscoveryType $type -DiscoveryMode $mode
+    }
+
+    $aggregateMap[$key].views += Convert-ToNumber $row.views
+    $aggregateMap[$key].reads += Convert-ToNumber $row.reads
+    $aggregateMap[$key].pdf_downloads += Convert-ToNumber $row.pdf_downloads
+    $aggregateMap[$key].newsletter_submits += Convert-ToNumber $row.newsletter_submits
+  }
+
+  return ,@(
+    foreach ($aggregate in $aggregateMap.Values) {
+      Convert-JourneyAggregateToRecord -Aggregate $aggregate -LabelFieldName "discovery_source"
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.views }; Descending = $true }, @{ Expression = { $_.reads }; Descending = $true }
+}
+
+function Get-GoatCounterJourneyByCollection {
+  param([object[]]$Journeys)
+
+  $aggregateMap = @{}
+  foreach ($row in $Journeys | Where-Object { (Convert-ToText $_.collection) -or (Convert-ToText $_.module_slot) }) {
+    $label = if (Convert-ToText $row.collection) { Convert-ToText $row.collection } else { Convert-ToText $row.module_slot "Unlabeled module" }
+    $type = Convert-ToText $row.discovery_type
+    $mode = Convert-ToText $row.discovery_mode
+    $slot = Convert-ToText $row.module_slot
+    $collection = Convert-ToText $row.collection
+    $section = Convert-ToText $row.section
+    $key = Get-Key @($label, $slot, $collection, $section)
+    if (-not $aggregateMap.ContainsKey($key)) {
+      $aggregateMap[$key] = New-JourneyAggregate -Label $label -DiscoveryType $type -DiscoveryMode $mode -ModuleSlot $slot -Collection $collection -Section $section
+    }
+
+    $aggregateMap[$key].views += Convert-ToNumber $row.views
+    $aggregateMap[$key].reads += Convert-ToNumber $row.reads
+    $aggregateMap[$key].pdf_downloads += Convert-ToNumber $row.pdf_downloads
+    $aggregateMap[$key].newsletter_submits += Convert-ToNumber $row.newsletter_submits
+  }
+
+  return ,@(
+    foreach ($aggregate in $aggregateMap.Values) {
+      Convert-JourneyAggregateToRecord -Aggregate $aggregate -LabelFieldName "collection_label"
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.reads }; Descending = $true }, @{ Expression = { $_.views }; Descending = $true }
+}
+
+function Get-GoatCounterJourneyByEssay {
+  param([object[]]$Journeys)
+
+  $aggregateMap = @{}
+  foreach ($row in $Journeys) {
+    $slug = Convert-ToText $row.slug
+    $path = Convert-ToText $row.path
+    $key = Get-Key @($slug, $path)
+    if (-not $aggregateMap.ContainsKey($key)) {
+      $aggregateMap[$key] = New-JourneyAggregate -Label (Convert-ToText $row.title "Untitled") -Section (Convert-ToText $row.section) -Slug $slug -Path $path -Title (Convert-ToText $row.title "Untitled")
+    }
+
+    $aggregateMap[$key].views += Convert-ToNumber $row.views
+    $aggregateMap[$key].reads += Convert-ToNumber $row.reads
+    $aggregateMap[$key].pdf_downloads += Convert-ToNumber $row.pdf_downloads
+    $aggregateMap[$key].newsletter_submits += Convert-ToNumber $row.newsletter_submits
+  }
+
+  return ,@(
+    foreach ($aggregate in $aggregateMap.Values) {
+      Convert-JourneyAggregateToRecord -Aggregate $aggregate -LabelFieldName "title"
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.views }; Descending = $true }, @{ Expression = { $_.read_rate }; Descending = $true }
+}
+
+function Get-GoatCounterSourcesTimeseries {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $dateKeys = Get-DateRangeKeys -Rows @($PageRows + $EventRows)
+  if ($dateKeys.Count -eq 0) {
+    return ,@()
+  }
+
+  $seriesMap = @{}
+
+  foreach ($row in $PageRows | Where-Object { $_.occurred_at }) {
+    $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+    $sourceType = Get-SourceType -Attribution $row.attribution
+    $key = Get-Key @($dateKey, $sourceType, $row.attribution.label)
+    if (-not $seriesMap.ContainsKey($key)) {
+      $seriesMap[$key] = @{
+        date = $dateKey
+        source_type = $sourceType
+        source = Convert-ToText $row.attribution.label
+        pageviews = 0.0
+        reads = 0.0
+        pdf_downloads = 0.0
+        newsletter_submits = 0.0
+      }
+    }
+
+    $seriesMap[$key].pageviews += 1
+  }
+
+  foreach ($row in $EventRows | Where-Object { $_.occurred_at }) {
+    $dateKey = Get-DateKey -OccurredAt $row.occurred_at
+    $sourceType = Get-SourceType -Attribution $row.attribution
+    $key = Get-Key @($dateKey, $sourceType, $row.attribution.label)
+    if (-not $seriesMap.ContainsKey($key)) {
+      $seriesMap[$key] = @{
+        date = $dateKey
+        source_type = $sourceType
+        source = Convert-ToText $row.attribution.label
+        pageviews = 0.0
+        reads = 0.0
+        pdf_downloads = 0.0
+        newsletter_submits = 0.0
+      }
+    }
+
+    switch ($row.event_name) {
+      "essay_read" { $seriesMap[$key].reads += 1 }
+      "pdf_download" { $seriesMap[$key].pdf_downloads += 1 }
+      "newsletter_submit" { $seriesMap[$key].newsletter_submits += 1 }
+    }
+  }
+
+  return ,@(
+    foreach ($entry in $seriesMap.Values) {
+      [ordered]@{
+        date = $entry.date
+        source_type = $entry.source_type
+        source = $entry.source
+        pageviews = [double]$entry.pageviews
+        reads = [double]$entry.reads
+        read_rate = Get-SafeMetricRate -Numerator $entry.reads -Denominator $entry.pageviews
+        pdf_downloads = [double]$entry.pdf_downloads
+        newsletter_submits = [double]$entry.newsletter_submits
+      }
+    }
+  ) | Sort-Object -Property date, source_type, @{ Expression = { $_.pageviews }; Descending = $true }
+}
+
 function Normalize-GoatCounter {
   param(
     [object[]]$Rows,
@@ -1082,12 +1770,22 @@ function Normalize-GoatCounter {
     throw "GoatCounter export rows were loaded but none could be normalized into pageviews or events. Check the export header version and column aliases."
   }
 
+  $journeys = Get-GoatCounterJourneys -PageRows $pageRows -EventRows $eventRows
+
   return @{
     overview = Get-GoatCounterOverview -PageRows $pageRows -EventRows $eventRows -Metadata $Metadata
     essays = Get-GoatCounterEssays -PageRows $pageRows -EventRows $eventRows
     sources = Get-GoatCounterSources -PageRows $pageRows -EventRows $eventRows
     modules = Get-GoatCounterModules -EventRows $eventRows
     periods = Get-GoatCounterPeriods -PageRows $pageRows -EventRows $eventRows
+    timeseries_daily = Get-GoatCounterDailyTimeseries -PageRows $pageRows -EventRows $eventRows
+    sections = Get-GoatCounterSections -PageRows $pageRows -EventRows $eventRows
+    essays_timeseries = Get-GoatCounterEssayTimeseries -PageRows $pageRows -EventRows $eventRows
+    journeys = $journeys
+    journey_by_source = Get-GoatCounterJourneyBySource -Journeys $journeys
+    journey_by_collection = Get-GoatCounterJourneyByCollection -Journeys $journeys
+    journey_by_essay = Get-GoatCounterJourneyByEssay -Journeys $journeys
+    sources_timeseries = Get-GoatCounterSourcesTimeseries -PageRows $pageRows -EventRows $eventRows
   }
 }
 
@@ -1255,6 +1953,152 @@ function Normalize-Periods {
   return ,$normalized
 }
 
+function Normalize-TimeseriesDaily {
+  param([object]$InputData)
+
+  if ($null -eq $InputData) {
+    return ,@()
+  }
+
+  $rows = @($InputData)
+  if ($rows.Count -eq 1 -and $null -eq $rows[0]) {
+    return ,@()
+  }
+
+  return ,@(
+    foreach ($row in $rows) {
+      [ordered]@{
+        date = Convert-ToText (Get-FieldValue -Row $row -Aliases @("date", "day"))
+        pageviews = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pageviews", "views"))
+        unique_visitors = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("unique_visitors", "visitors"))
+        reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
+        read_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("read_rate"))
+        pdf_downloads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_downloads", "downloads"))
+        newsletter_submits = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_submits", "submits"))
+      }
+    }
+  )
+}
+
+function Normalize-Sections {
+  param(
+    [object]$InputData,
+    [object[]]$Essays
+  )
+
+  if ($null -ne $InputData) {
+    $rows = @($InputData)
+    if (-not ($rows.Count -eq 1 -and $null -eq $rows[0])) {
+      return ,@(
+        foreach ($row in $rows) {
+          [ordered]@{
+            section = Convert-ToText (Get-FieldValue -Row $row -Aliases @("section"))
+            pageviews = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pageviews", "views"))
+            reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
+            read_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("read_rate"))
+            pdf_downloads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_downloads", "downloads"))
+            newsletter_submits = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_submits", "submits"))
+            sparkline_pageviews = @()
+            sparkline_reads = @()
+          }
+        }
+      )
+    }
+  }
+
+  $sectionMap = @{}
+  foreach ($essay in $Essays) {
+    $section = Convert-ToText $essay.section "Unlabeled"
+    if (-not $sectionMap.ContainsKey($section)) {
+      $sectionMap[$section] = @{
+        section = $section
+        pageviews = 0.0
+        reads = 0.0
+        pdf_downloads = 0.0
+      }
+    }
+
+    $sectionMap[$section].pageviews += Convert-ToNumber $essay.views
+    $sectionMap[$section].reads += Convert-ToNumber $essay.reads
+    $sectionMap[$section].pdf_downloads += Convert-ToNumber $essay.pdf_downloads
+  }
+
+  return ,@(
+    foreach ($entry in $sectionMap.Values) {
+      [ordered]@{
+        section = $entry.section
+        pageviews = [double]$entry.pageviews
+        reads = [double]$entry.reads
+        read_rate = Get-SafeMetricRate -Numerator $entry.reads -Denominator $entry.pageviews
+        pdf_downloads = [double]$entry.pdf_downloads
+        newsletter_submits = 0.0
+        sparkline_pageviews = @()
+        sparkline_reads = @()
+      }
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.pageviews }; Descending = $true }
+}
+
+function Normalize-EssaysTimeseries {
+  param([object]$InputData)
+
+  if ($null -eq $InputData) {
+    return ,@()
+  }
+
+  return ,@($InputData)
+}
+
+function Normalize-Journeys {
+  param([object]$InputData)
+
+  if ($null -eq $InputData) {
+    return ,@()
+  }
+
+  return ,@($InputData)
+}
+
+function Normalize-JourneyBySource {
+  param([object]$InputData)
+
+  if ($null -eq $InputData) {
+    return ,@()
+  }
+
+  return ,@($InputData)
+}
+
+function Normalize-JourneyByCollection {
+  param([object]$InputData)
+
+  if ($null -eq $InputData) {
+    return ,@()
+  }
+
+  return ,@($InputData)
+}
+
+function Normalize-JourneyByEssay {
+  param([object]$InputData)
+
+  if ($null -eq $InputData) {
+    return ,@()
+  }
+
+  return ,@($InputData)
+}
+
+function Normalize-SourcesTimeseries {
+  param([object]$InputData)
+
+  if ($null -eq $InputData) {
+    return ,@()
+  }
+
+  return ,@($InputData)
+}
+
 Write-Host "Outside In Print ~ Import Analytics" -ForegroundColor Cyan
 
 $rawInput = Read-RawAnalyticsInput -Path $InputPath
@@ -1263,12 +2107,21 @@ if ($rawInput.source -eq "goatcounter") {
   $normalized = Normalize-GoatCounter -Rows $rawInput.rows -Metadata $rawInput.metadata
 } else {
   $legacySections = $rawInput.sections
+  $normalizedEssays = Normalize-Essays -InputData $legacySections["essays"]
   $normalized = @{
     overview = Normalize-Overview -InputData $legacySections["overview"]
-    essays = Normalize-Essays -InputData $legacySections["essays"]
+    essays = $normalizedEssays
     sources = Normalize-Sources -InputData $legacySections["sources"]
     modules = Normalize-Modules -InputData $legacySections["modules"]
     periods = Normalize-Periods -InputData $legacySections["periods"]
+    timeseries_daily = Normalize-TimeseriesDaily -InputData $legacySections["timeseries_daily"]
+    sections = Normalize-Sections -InputData $legacySections["sections"] -Essays $normalizedEssays
+    essays_timeseries = Normalize-EssaysTimeseries -InputData $legacySections["essays_timeseries"]
+    journeys = Normalize-Journeys -InputData $legacySections["journeys"]
+    journey_by_source = Normalize-JourneyBySource -InputData $legacySections["journey_by_source"]
+    journey_by_collection = Normalize-JourneyByCollection -InputData $legacySections["journey_by_collection"]
+    journey_by_essay = Normalize-JourneyByEssay -InputData $legacySections["journey_by_essay"]
+    sources_timeseries = Normalize-SourcesTimeseries -InputData $legacySections["sources_timeseries"]
   }
 }
 

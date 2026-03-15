@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/publish-dashboard.yml"
       - "assets/css/**"
+      - "assets/js/**"
       - "content-dashboard/**"
       - "data/analytics/**"
       - "docs/analytics-system.md"
@@ -19,6 +20,7 @@ on:
       - "layouts/partials/head_fonts.html"
       - "layouts/partials/masthead_dashboard.html"
       - "scripts/import_analytics.ps1"
+      - "tests/**"
   workflow_dispatch:
 
 permissions:
@@ -73,6 +75,31 @@ jobs:
         with:
           hugo-version: "0.157.0"
           extended: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate Committed Analytics Snapshot Contract
+        shell: pwsh
+        run: ./tests/test_analytics_snapshot_contract.ps1
+
+      - name: Run Dashboard Logic Tests
+        shell: bash
+        run: node --test tests/*.test.mjs
+
+      - name: Run Analytics Import Test
+        shell: pwsh
+        run: ./tests/test_analytics_import.ps1
+
+      - name: Run Analytics Snapshot Contract Test
+        shell: pwsh
+        run: ./tests/test_analytics_snapshot_contract.ps1
+
+      - name: Run Dashboard Build Smoke Tests
+        shell: pwsh
+        run: ./tests/test_dashboard_build.ps1
 
       - name: Build Dashboard Site
         run: hugo --config hugo-dashboard.toml --gc --minify --destination .dashboard-public

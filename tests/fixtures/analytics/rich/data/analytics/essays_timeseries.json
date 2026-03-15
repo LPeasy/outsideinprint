@@ -1,0 +1,110 @@
+[
+    {
+        "slug":  "signal-garden",
+        "path":  "/essays/signal-garden/",
+        "title":  "Signal Garden",
+        "section":  "Essays",
+        "series":  [
+                       {
+                           "date":  "2026-03-01",
+                           "pageviews":  2,
+                           "reads":  2,
+                           "pdf_downloads":  1,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-02",
+                           "pageviews":  1,
+                           "reads":  1,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  1
+                       },
+                       {
+                           "date":  "2026-03-03",
+                           "pageviews":  0,
+                           "reads":  0,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-04",
+                           "pageviews":  1,
+                           "reads":  1,
+                           "pdf_downloads":  1,
+                           "newsletter_submits":  0
+                       }
+                   ]
+    },
+    {
+        "slug":  "paper-radio",
+        "path":  "/essays/paper-radio/",
+        "title":  "Paper Radio",
+        "section":  "Essays",
+        "series":  [
+                       {
+                           "date":  "2026-03-01",
+                           "pageviews":  0,
+                           "reads":  0,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-02",
+                           "pageviews":  1,
+                           "reads":  0,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-03",
+                           "pageviews":  2,
+                           "reads":  1,
+                           "pdf_downloads":  1,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-04",
+                           "pageviews":  0,
+                           "reads":  0,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       }
+                   ]
+    },
+    {
+        "slug":  "summer-notes",
+        "path":  "/working-papers/summer-notes/",
+        "title":  "Summer Notes",
+        "section":  "Working Papers",
+        "series":  [
+                       {
+                           "date":  "2026-03-01",
+                           "pageviews":  0,
+                           "reads":  0,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-02",
+                           "pageviews":  0,
+                           "reads":  0,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-03",
+                           "pageviews":  1,
+                           "reads":  1,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       },
+                       {
+                           "date":  "2026-03-04",
+                           "pageviews":  0,
+                           "reads":  0,
+                           "pdf_downloads":  0,
+                           "newsletter_submits":  0
+                       }
+                   ]
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "slug":  "summer-notes",
+        "path":  "/working-papers/summer-notes/",
+        "title":  "Summer Notes",
+        "section":  "Working Papers",
+        "views":  1,
+        "reads":  1,
+        "read_rate":  100,
+        "pdf_downloads":  0,
+        "primary_source":  "internal /"
+    },
+    {
+        "slug":  "signal-garden",
+        "path":  "/essays/signal-garden/",
+        "title":  "Signal Garden",
+        "section":  "Essays",
+        "views":  4,
+        "reads":  4,
+        "read_rate":  100,
+        "pdf_downloads":  2,
+        "primary_source":  "google.com / referral"
+    },
+    {
+        "slug":  "paper-radio",
+        "path":  "/essays/paper-radio/",
+        "title":  "Paper Radio",
+        "section":  "Essays",
+        "views":  3,
+        "reads":  1,
+        "read_rate":  33.3,
+        "pdf_downloads":  1,
+        "primary_source":  "news.ycombinator.com / referral"
+    }
+]
