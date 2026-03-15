@@ -85,6 +85,83 @@ function Get-ResponseDetails {
   return ""
 }
 
+function Invoke-GoatCounterDownload {
+  param(
+    [string]$Uri,
+    [string]$OutFile
+  )
+
+  $headers = @{
+    Authorization = "Bearer $ApiKey"
+  }
+
+  $attempt = 0
+  $delaySeconds = [Math]::Max(1, $InitialRetryDelaySeconds)
+
+  while ($true) {
+    $attempt += 1
+
+    try {
+      Invoke-WebRequest -Method Get -Uri $Uri -Headers $headers -OutFile $OutFile
+      return
+    } catch {
+      $statusCode = 0
+      $details = ""
+      if ($_.Exception.Response) {
+        $response = $_.Exception.Response
+        if ($response.StatusCode) {
+          $statusCode = [int]$response.StatusCode
+        }
+        $details = Get-ResponseDetails -Response $response
+      }
+
+      $isRetryable = ($statusCode -eq 0 -or $statusCode -eq 429 -or $statusCode -eq 502 -or $statusCode -eq 503 -or $statusCode -eq 504)
+      if ($attempt -lt $MaxRetries -and $isRetryable) {
+        Write-Warning ("GoatCounter download attempt {0}/{1} failed with status {2}. Retrying in {3}s." -f $attempt, $MaxRetries, $(if ($statusCode) { $statusCode } else { "network" }), $delaySeconds)
+        Start-Sleep -Seconds $delaySeconds
+        $delaySeconds = [Math]::Min($delaySeconds * 2, 30)
+        continue
+      }
+
+      throw "GoatCounter download failed after $attempt attempt(s). $details"
+    }
+  }
+}
+
+function Expand-DownloadedCsv {
+  param(
+    [string]$InputPath,
+    [string]$OutputPath
+  )
+
+  $bytes = [System.IO.File]::ReadAllBytes((Resolve-Path $InputPath))
+  $encoding = [System.Text.UTF8Encoding]::new($false)
+
+  if ($bytes.Length -ge 2 -and $bytes[0] -eq 0x1f -and $bytes[1] -eq 0x8b) {
+    $inputStream = [System.IO.File]::OpenRead((Resolve-Path $InputPath))
+    try {
+      $gzipStream = New-Object System.IO.Compression.GzipStream($inputStream, [System.IO.Compression.CompressionMode]::Decompress)
+      try {
+        $outputStream = [System.IO.File]::Create([System.IO.Path]::GetFullPath($OutputPath))
+        try {
+          $gzipStream.CopyTo($outputStream)
+        } finally {
+          $outputStream.Dispose()
+        }
+      } finally {
+        $gzipStream.Dispose()
+      }
+    } finally {
+      $inputStream.Dispose()
+    }
+
+    return
+  }
+
+  $text = [System.Text.Encoding]::UTF8.GetString($bytes)
+  [System.IO.File]::WriteAllText([System.IO.Path]::GetFullPath($OutputPath), $text, $encoding)
+}
+
 function Invoke-GoatCounterRequest {
   param(
     [string]$Method,
@@ -184,10 +261,11 @@ if ($null -eq $completedExport) {
   throw ("GoatCounter export {0} did not finish after {1} attempts with a {2}s poll interval." -f $exportId, $MaxPollAttempts, $PollIntervalSeconds)
 }
 
-$download = Invoke-GoatCounterRequest -Method Get -Uri "$apiBaseUrl/export/$exportId/download" -RawResponse
+$downloadPath = Join-Path $OutputDir "goatcounter-export.download"
 $csvPath = Join-Path $OutputDir "goatcounter-export.csv"
-$encoding = [System.Text.UTF8Encoding]::new($false)
-[System.IO.File]::WriteAllText([System.IO.Path]::GetFullPath($csvPath), $download.Content, $encoding)
+Invoke-GoatCounterDownload -Uri "$apiBaseUrl/export/$exportId/download" -OutFile $downloadPath
+Expand-DownloadedCsv -InputPath $downloadPath -OutputPath $csvPath
+Remove-Item $downloadPath -Force -ErrorAction SilentlyContinue
 
 $metadata = [ordered]@{
   source = "goatcounter"
