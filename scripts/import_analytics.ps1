@@ -317,6 +317,39 @@ function Format-SourceLabel {
   return ($parts -join " / ")
 }
 
+function New-InternalAttribution {
+  param([string]$Path)
+
+  $normalizedPath = Normalize-Path -Path $Path
+  $labelSuffix = if ($normalizedPath -eq "/") { "/" } else { $normalizedPath }
+
+  return [ordered]@{
+    source = "internal"
+    medium = $normalizedPath
+    campaign = ""
+    content = ""
+    key = Get-Key @("internal", $normalizedPath, "", "")
+    label = "internal $labelSuffix"
+  }
+}
+
+function Try-GetInternalReferrerPath {
+  param([string]$Referrer)
+
+  $referrerText = Convert-ToText $Referrer
+  if (-not $referrerText) {
+    return $null
+  }
+
+  foreach ($prefix in @("internal:path=", "path=")) {
+    if ($referrerText.StartsWith($prefix)) {
+      return [System.Uri]::UnescapeDataString($referrerText.Substring($prefix.Length))
+    }
+  }
+
+  return $null
+}
+
 function Read-StructuredFile {
   param([string]$Path)
 
@@ -531,27 +564,11 @@ function Parse-AttributionReferrer {
   }
 
   if ($referrer.StartsWith("internal:path=")) {
-    $path = Normalize-Path ([System.Uri]::UnescapeDataString($referrer.Substring("internal:path=".Length)))
-    return [ordered]@{
-      source = "internal"
-      medium = $path
-      campaign = ""
-      content = ""
-      key = Get-Key @("internal", $path, "", "")
-      label = "internal / $path"
-    }
+    return New-InternalAttribution -Path ([System.Uri]::UnescapeDataString($referrer.Substring("internal:path=".Length)))
   }
 
   if ($referrer.StartsWith("path=")) {
-    $path = Normalize-Path ([System.Uri]::UnescapeDataString($referrer.Substring("path=".Length)))
-    return [ordered]@{
-      source = "internal"
-      medium = $path
-      campaign = ""
-      content = ""
-      key = Get-Key @("internal", $path, "", "")
-      label = "internal / $path"
-    }
+    return New-InternalAttribution -Path ([System.Uri]::UnescapeDataString($referrer.Substring("path=".Length)))
   }
 
   if ($referrer.StartsWith("source=")) {
@@ -583,15 +600,7 @@ function Parse-AttributionReferrer {
   $uri = $null
   if ([System.Uri]::TryCreate($referrer, [System.UriKind]::Absolute, [ref]$uri)) {
     if (Test-IsPublicSiteUri -Uri $uri) {
-      $normalizedInternalPath = Normalize-Path -Path $uri.AbsolutePath
-      return [ordered]@{
-        source = "internal"
-        medium = $normalizedInternalPath
-        campaign = ""
-        content = ""
-        key = Get-Key @("internal", $normalizedInternalPath, "", "")
-        label = "internal / $normalizedInternalPath"
-      }
+      return New-InternalAttribution -Path $uri.AbsolutePath
     }
 
     $hostName = Convert-ToText $uri.Host
@@ -622,6 +631,11 @@ function Parse-AttributionReferrer {
     "g" { "generated" }
     "o" { "other" }
     default { "" }
+  }
+
+  $internalPath = Try-GetInternalReferrerPath -Referrer $source
+  if ($null -ne $internalPath) {
+    return New-InternalAttribution -Path $internalPath
   }
 
   return [ordered]@{

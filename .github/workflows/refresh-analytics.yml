@@ -45,7 +45,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          guidance="Add GoatCounter to the source repo (LPeasy/outsideinprint) under Settings -> Secrets and variables -> Actions. Save GOATCOUNTER_API_KEY as a repository secret. Optionally save GOATCOUNTER_SITE_URL as a repository variable if you need to override the default https://outsideinprint.goatcounter.com site."
+          guidance="Add GoatCounter to the source repo (LPeasy/outsideinprint) under Settings -> Secrets and variables -> Actions. Save GOATCOUNTER_API_KEY as a repository secret. Optionally save GOATCOUNTER_SITE_URL, GOATCOUNTER_SITE_BASE_PATH, or GOATCOUNTER_PUBLIC_SITE_URL as repository variables if the analytics site URL or public-site path/origin differs from the defaults."
 
           if [ -z "${GOATCOUNTER_API_KEY:-}" ]; then
             echo "GOATCOUNTER_API_KEY is not configured."
