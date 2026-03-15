@@ -26,6 +26,7 @@ jobs:
     env:
       GOATCOUNTER_API_KEY: ${{ secrets.GOATCOUNTER_API_KEY }}
       GOATCOUNTER_SITE_URL: ${{ vars.GOATCOUNTER_SITE_URL }}
+      GOATCOUNTER_SITE_BASE_PATH: ${{ vars.GOATCOUNTER_SITE_BASE_PATH }}
 
     steps:
       - name: Checkout Repo

@@ -140,6 +140,8 @@ function Convert-ToText {
   return $text.Trim()
 }
 
+$SiteBasePath = Convert-ToText $env:GOATCOUNTER_SITE_BASE_PATH "/outsideinprint"
+
 function Convert-ToBoolean {
   param(
     [object]$Value,
@@ -192,6 +194,24 @@ function Normalize-Path {
   $uri = $null
   if ([System.Uri]::TryCreate($value, [System.UriKind]::Absolute, [ref]$uri)) {
     $value = $uri.AbsolutePath
+  }
+
+  if (-not $value.StartsWith("/")) {
+    $value = "/$value"
+  }
+
+  $basePath = Convert-ToText $SiteBasePath
+  if ($basePath) {
+    if (-not $basePath.StartsWith("/")) {
+      $basePath = "/$basePath"
+    }
+    $basePath = $basePath.TrimEnd("/")
+
+    if ($basePath -and $value -eq $basePath) {
+      $value = "/"
+    } elseif ($basePath -and $value.StartsWith("$basePath/")) {
+      $value = $value.Substring($basePath.Length)
+    }
   }
 
   if (-not $value.StartsWith("/")) {
@@ -472,6 +492,44 @@ function Parse-AttributionReferrer {
       content = ""
       key = Get-Key @("internal", $path, "", "")
       label = "internal / $path"
+    }
+  }
+
+  if ($referrer.StartsWith("path=")) {
+    $path = Normalize-Path ([System.Uri]::UnescapeDataString($referrer.Substring("path=".Length)))
+    return [ordered]@{
+      source = "internal"
+      medium = $path
+      campaign = ""
+      content = ""
+      key = Get-Key @("internal", $path, "", "")
+      label = "internal / $path"
+    }
+  }
+
+  if ($referrer.StartsWith("source=")) {
+    $data = @{}
+    foreach ($part in $referrer.Split("|")) {
+      $equalsIndex = $part.IndexOf("=")
+      if ($equalsIndex -lt 1) {
+        continue
+      }
+
+      $data[(Normalize-Key $part.Substring(0, $equalsIndex))] = [System.Uri]::UnescapeDataString($part.Substring($equalsIndex + 1))
+    }
+
+    $source = Convert-ToText $data["source"] "campaign"
+    $medium = Convert-ToText $data["medium"]
+    $campaign = Convert-ToText $data["campaign"]
+    $content = Convert-ToText $data["content"]
+
+    return [ordered]@{
+      source = $source
+      medium = $medium
+      campaign = $campaign
+      content = $content
+      key = Get-Key @($source, $medium, $campaign, $content)
+      label = Format-SourceLabel -Source $source -Medium $medium -Campaign $campaign -Content $content
     }
   }
 

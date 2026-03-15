@@ -140,6 +140,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPa
   Save `GOATCOUNTER_API_KEY` in `LPeasy/outsideinprint` if you want scheduled dashboard refreshes.
 - Optional public-site variable:
   Use `GOATCOUNTER_SITE_URL` only if you need to override the default `https://outsideinprint.goatcounter.com`.
+- Optional refresh/import variable:
+  Use `GOATCOUNTER_SITE_BASE_PATH` only if the public site ever moves away from the current `/outsideinprint` GitHub Pages base path.
 
 - Public site note:
   The public Outside In Print site does not publish the dashboard.

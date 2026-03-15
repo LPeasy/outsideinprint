@@ -177,6 +177,9 @@ Optional:
 
 - repository variable: `GOATCOUNTER_SITE_URL`
   Use this only if the analytics site URL changes from the default
+- repository variable: `GOATCOUNTER_SITE_BASE_PATH`
+  Default: `/outsideinprint`
+  Use this only if the deployed public site moves to a different GitHub Pages base path
 
 The refresh workflow is in:
 
@@ -264,6 +267,12 @@ That folder can contain:
 
 - `goatcounter-export.csv`
 - optional `metadata.json`
+
+By default, the importer normalizes exported paths against the current project-site base path:
+
+- `/outsideinprint`
+
+If the public site base path ever changes, set `GOATCOUNTER_SITE_BASE_PATH` before running the importer or refresh workflow.
 
 The importer still accepts the older section-based CSV/JSON structure for manual backfills, but GoatCounter export folders are now the canonical input.
 
