@@ -130,11 +130,16 @@ powershell -ExecutionPolicy Bypass -File .\scripts\audit_collections.ps1
 ## Analytics
 
 - Maintainer guide: `docs/analytics-system.md`
-- Import normalized dashboard data:
+- Import normalized dashboard data from a GoatCounter export folder:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics
 ```
+
+- Automated refresh secret:
+  Save `GOATCOUNTER_API_KEY` in `LPeasy/outsideinprint` if you want scheduled dashboard refreshes.
+- Optional public-site variable:
+  Use `GOATCOUNTER_SITE_URL` only if you need to override the default `https://outsideinprint.goatcounter.com`.
 
 - Public site note:
   The public Outside In Print site does not publish the dashboard.

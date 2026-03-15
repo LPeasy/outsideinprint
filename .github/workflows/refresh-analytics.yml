@@ -18,15 +18,14 @@ concurrency:
 jobs:
   refresh:
     # ETL pipeline:
-    # 1. Extract raw analytics from Plausible.
+    # 1. Extract raw analytics from GoatCounter.
     # 2. Transform them into the repo's normalized Hugo data model.
     # 3. Load only changed snapshots into git, then dispatch the static dashboard publish workflow.
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      PLAUSIBLE_API_KEY: ${{ secrets.PLAUSIBLE_API_KEY }}
-      PLAUSIBLE_SITE_ID: ${{ vars.PLAUSIBLE_SITE_ID || vars.PLAUSIBLE_DOMAIN }}
-      PLAUSIBLE_API_HOST: ${{ vars.PLAUSIBLE_API_HOST }}
+      GOATCOUNTER_API_KEY: ${{ secrets.GOATCOUNTER_API_KEY }}
+      GOATCOUNTER_SITE_URL: ${{ vars.GOATCOUNTER_SITE_URL }}
 
     steps:
       - name: Checkout Repo
@@ -44,21 +43,23 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ -z "${PLAUSIBLE_API_KEY:-}" ]; then
-            echo "PLAUSIBLE_API_KEY is not configured."
-            exit 1
-          fi
+          guidance="Add GoatCounter to the source repo (LPeasy/outsideinprint) under Settings -> Secrets and variables -> Actions. Save GOATCOUNTER_API_KEY as a repository secret. Optionally save GOATCOUNTER_SITE_URL as a repository variable if you need to override the default https://outsideinprint.goatcounter.com site."
 
-          if [ -z "${PLAUSIBLE_SITE_ID:-}" ]; then
-            echo "PLAUSIBLE_SITE_ID is not configured."
-            echo "Set PLAUSIBLE_SITE_ID or reuse the existing PLAUSIBLE_DOMAIN repository variable."
+          if [ -z "${GOATCOUNTER_API_KEY:-}" ]; then
+            echo "GOATCOUNTER_API_KEY is not configured."
+            echo "$guidance"
+            {
+              echo "## Missing Analytics Configuration"
+              echo "- GOATCOUNTER_API_KEY is missing."
+              echo "- $guidance"
+            } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
       - name: Fetch Analytics Snapshot
         shell: pwsh
         run: |
-          ./scripts/fetch_analytics_plausible.ps1 -OutputDir ./.analytics-refresh/raw
+          ./scripts/fetch_analytics_goatcounter.ps1 -OutputDir ./.analytics-refresh/raw
 
       - name: Normalize Analytics Data
         shell: pwsh
@@ -129,4 +130,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo "Analytics refresh finished for ${PLAUSIBLE_SITE_ID}." >> "$GITHUB_STEP_SUMMARY"
+          site_url="${GOATCOUNTER_SITE_URL:-https://outsideinprint.goatcounter.com}"
+          echo "Analytics refresh finished for ${site_url}." >> "$GITHUB_STEP_SUMMARY"

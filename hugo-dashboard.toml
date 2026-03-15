@@ -13,7 +13,7 @@ disableKinds = ["taxonomy", "term"]
 
 [security]
   [security.funcs]
-    getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^PLAUSIBLE_']
+    getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^GOATCOUNTER_']
 
 [params.analytics]
 enabled = false

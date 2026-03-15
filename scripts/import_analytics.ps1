@@ -7,6 +7,9 @@ param(
 $ErrorActionPreference = "Stop"
 
 $Sections = @("overview", "essays", "sources", "modules", "periods")
+$EssayPathPattern = "^/(essays|literature|syd-and-oliver|working-papers)/[^/]+/?$"
+$AllTimeLabel = "All time"
+$GoatCounterExportNames = @("goatcounter-export.csv", "export.csv")
 
 function Read-Utf8Text {
   param([string]$Path)
@@ -29,9 +32,12 @@ function Write-Utf8Json {
     $json = "{}"
   } elseif ($Value -is [array] -and $Value.Count -eq 0) {
     $json = "[]"
+  } elseif ($Value -is [array]) {
+    $json = ConvertTo-Json -InputObject @($Value) -Depth 20
   } else {
     $json = ConvertTo-Json -InputObject $Value -Depth 20
   }
+
   $encoding = [System.Text.UTF8Encoding]::new($false)
   [System.IO.File]::WriteAllText([System.IO.Path]::GetFullPath($Path), $json + [Environment]::NewLine, $encoding)
 }
@@ -134,6 +140,107 @@ function Convert-ToText {
   return $text.Trim()
 }
 
+function Convert-ToBoolean {
+  param(
+    [object]$Value,
+    [bool]$Default = $false
+  )
+
+  if ($null -eq $Value) {
+    return $Default
+  }
+
+  if ($Value -is [bool]) {
+    return [bool]$Value
+  }
+
+  switch -Regex (([string]$Value).Trim().ToLowerInvariant()) {
+    "^(1|true|yes|y)$" { return $true }
+    "^(0|false|no|n)$" { return $false }
+    default { return $Default }
+  }
+}
+
+function Convert-ToDateTime {
+  param([object]$Value)
+
+  if ($null -eq $Value) {
+    return $null
+  }
+
+  $text = Convert-ToText $Value
+  if (-not $text) {
+    return $null
+  }
+
+  $parsed = [datetimeoffset]::MinValue
+  if ([datetimeoffset]::TryParse($text, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AssumeUniversal, [ref]$parsed)) {
+    return $parsed
+  }
+
+  return $null
+}
+
+function Normalize-Path {
+  param([string]$Path)
+
+  if ([string]::IsNullOrWhiteSpace($Path)) {
+    return ""
+  }
+
+  $value = $Path.Trim()
+  $uri = $null
+  if ([System.Uri]::TryCreate($value, [System.UriKind]::Absolute, [ref]$uri)) {
+    $value = $uri.AbsolutePath
+  }
+
+  if (-not $value.StartsWith("/")) {
+    $value = "/$value"
+  }
+
+  if (-not $value.EndsWith("/")) {
+    $value = "$value/"
+  }
+
+  return $value
+}
+
+function Get-SlugFromPath {
+  param([string]$Path)
+
+  $normalized = Normalize-Path -Path $Path
+  if (-not $normalized) {
+    return ""
+  }
+
+  return [System.IO.Path]::GetFileName($normalized.TrimEnd("/"))
+}
+
+function Get-SectionLabelFromPath {
+  param([string]$Path)
+
+  switch -Regex (Normalize-Path -Path $Path) {
+    "^/essays/" { return "Essays" }
+    "^/literature/" { return "Books" }
+    "^/syd-and-oliver/" { return "Syd and Oliver" }
+    "^/working-papers/" { return "Working Papers" }
+    "^/collections/" { return "Collections" }
+    default { return "" }
+  }
+}
+
+function Get-TitleFallbackFromPath {
+  param([string]$Path)
+
+  $slug = Get-SlugFromPath -Path $Path
+  if (-not $slug) {
+    return "Untitled"
+  }
+
+  $title = ($slug -replace "[-_]+", " ").Trim()
+  return [System.Globalization.CultureInfo]::InvariantCulture.TextInfo.ToTitleCase($title)
+}
+
 function Get-SectionSlug {
   param([string]$SectionLabel)
 
@@ -142,6 +249,33 @@ function Get-SectionSlug {
   }
 
   return (($SectionLabel.Trim().ToLowerInvariant() -replace "&", "and") -replace "[^a-z0-9]+", "-").Trim("-")
+}
+
+function Get-Key {
+  param([string[]]$Values)
+
+  return (($Values | ForEach-Object { Convert-ToText $_ }) -join "|")
+}
+
+function Format-SourceLabel {
+  param(
+    [string]$Source,
+    [string]$Medium,
+    [string]$Campaign,
+    [string]$Content
+  )
+
+  $source = Convert-ToText $Source
+  $medium = Convert-ToText $Medium
+  $campaign = Convert-ToText $Campaign
+  $content = Convert-ToText $Content
+
+  if (-not $source) {
+    return ""
+  }
+
+  $parts = @($source, $medium, $campaign, $content) | Where-Object { $_ }
+  return ($parts -join " / ")
 }
 
 function Read-StructuredFile {
@@ -161,6 +295,35 @@ function Read-StructuredFile {
   }
 }
 
+function Read-GoatCounterBundle {
+  param([string]$DirectoryPath)
+
+  $csvPath = $null
+  foreach ($candidate in $GoatCounterExportNames) {
+    $resolvedCandidate = Join-Path $DirectoryPath $candidate
+    if (Test-Path $resolvedCandidate) {
+      $csvPath = $resolvedCandidate
+      break
+    }
+  }
+
+  if (-not $csvPath) {
+    return $null
+  }
+
+  $metadataPath = Join-Path $DirectoryPath "metadata.json"
+  $metadata = @{}
+  if (Test-Path $metadataPath) {
+    $metadata = Read-StructuredFile -Path $metadataPath
+  }
+
+  return @{
+    source = "goatcounter"
+    metadata = $metadata
+    rows = Import-Csv -Path $csvPath
+  }
+}
+
 function Read-RawAnalyticsInput {
   param([string]$Path)
 
@@ -173,6 +336,11 @@ function Read-RawAnalyticsInput {
   $raw = @{}
 
   if ($item.PSIsContainer) {
+    $goatcounter = Read-GoatCounterBundle -DirectoryPath $item.FullName
+    if ($null -ne $goatcounter) {
+      return $goatcounter
+    }
+
     foreach ($section in $Sections) {
       $sectionFile = @(
         (Join-Path $item.FullName "$section.json"),
@@ -184,7 +352,10 @@ function Read-RawAnalyticsInput {
       }
     }
 
-    return $raw
+    return @{
+      source = "legacy"
+      sections = $raw
+    }
   }
 
   if ([System.IO.Path]::GetExtension($item.FullName).ToLowerInvariant() -ne ".json") {
@@ -198,7 +369,526 @@ function Read-RawAnalyticsInput {
     }
   }
 
-  return $raw
+  return @{
+    source = "legacy"
+    sections = $raw
+  }
+}
+
+function Parse-GoatCounterEventPath {
+  param([string]$Path)
+
+  $path = Convert-ToText $Path
+  if (-not $path) {
+    return @{
+      name = ""
+      metadata = @{}
+    }
+  }
+
+  if (-not $path.StartsWith("oip:")) {
+    return @{
+      name = $path
+      metadata = @{}
+    }
+  }
+
+  $parts = $path.Split("|")
+  $name = Convert-ToText $parts[0].Substring(4)
+  $metadata = @{}
+
+  foreach ($part in $parts | Select-Object -Skip 1) {
+    $equalsIndex = $part.IndexOf("=")
+    if ($equalsIndex -lt 1) {
+      continue
+    }
+
+    $key = Normalize-Key $part.Substring(0, $equalsIndex)
+    $value = [System.Uri]::UnescapeDataString($part.Substring($equalsIndex + 1))
+    if ($key) {
+      $metadata[$key] = $value
+    }
+  }
+
+  return @{
+    name = $name
+    metadata = $metadata
+  }
+}
+
+function Parse-AttributionReferrer {
+  param(
+    [string]$Referrer,
+    [string]$ReferrerScheme
+  )
+
+  $referrer = Convert-ToText $Referrer
+  $scheme = Convert-ToText $ReferrerScheme
+
+  if (-not $referrer) {
+    return [ordered]@{
+      source = "direct"
+      medium = ""
+      campaign = ""
+      content = ""
+      key = Get-Key @("direct", "", "", "")
+      label = "direct"
+    }
+  }
+
+  if ($referrer.StartsWith("campaign:")) {
+    $payload = $referrer.Substring("campaign:".Length)
+    $data = @{}
+    foreach ($part in $payload.Split("|")) {
+      $equalsIndex = $part.IndexOf("=")
+      if ($equalsIndex -lt 1) {
+        continue
+      }
+
+      $data[(Normalize-Key $part.Substring(0, $equalsIndex))] = [System.Uri]::UnescapeDataString($part.Substring($equalsIndex + 1))
+    }
+
+    $source = Convert-ToText $data["source"] "campaign"
+    $medium = Convert-ToText $data["medium"]
+    $campaign = Convert-ToText $data["campaign"]
+    $content = Convert-ToText $data["content"]
+
+    return [ordered]@{
+      source = $source
+      medium = $medium
+      campaign = $campaign
+      content = $content
+      key = Get-Key @($source, $medium, $campaign, $content)
+      label = Format-SourceLabel -Source $source -Medium $medium -Campaign $campaign -Content $content
+    }
+  }
+
+  if ($referrer.StartsWith("internal:path=")) {
+    $path = Normalize-Path ([System.Uri]::UnescapeDataString($referrer.Substring("internal:path=".Length)))
+    return [ordered]@{
+      source = "internal"
+      medium = $path
+      campaign = ""
+      content = ""
+      key = Get-Key @("internal", $path, "", "")
+      label = "internal / $path"
+    }
+  }
+
+  $uri = $null
+  if ([System.Uri]::TryCreate($referrer, [System.UriKind]::Absolute, [ref]$uri)) {
+    $hostName = Convert-ToText $uri.Host
+    if ($hostName.StartsWith("www.")) {
+      $hostName = $hostName.Substring(4)
+    }
+
+    $medium = switch ($scheme) {
+      "g" { "generated" }
+      "o" { "other" }
+      "c" { "campaign" }
+      default { "referral" }
+    }
+
+    return [ordered]@{
+      source = $hostName
+      medium = $medium
+      campaign = ""
+      content = ""
+      key = Get-Key @($hostName, $medium, "", "")
+      label = Format-SourceLabel -Source $hostName -Medium $medium -Campaign "" -Content ""
+    }
+  }
+
+  $source = $referrer
+  $medium = switch ($scheme) {
+    "c" { "campaign" }
+    "g" { "generated" }
+    "o" { "other" }
+    default { "" }
+  }
+
+  return [ordered]@{
+    source = $source
+    medium = $medium
+    campaign = ""
+    content = ""
+    key = Get-Key @($source, $medium, "", "")
+    label = Format-SourceLabel -Source $source -Medium $medium -Campaign "" -Content ""
+  }
+}
+
+function Convert-GoatCounterRow {
+  param([object]$Row)
+
+  $path = Convert-ToText (Get-FieldValue -Row $Row -Aliases @("2Path", "1Path", "Path"))
+  if (-not $path) {
+    return $null
+  }
+
+  $isEvent = Convert-ToBoolean (Get-FieldValue -Row $Row -Aliases @("Event"))
+  $eventInfo = Parse-GoatCounterEventPath -Path $path
+  $metadata = $eventInfo.metadata
+
+  $contentPath = ""
+  if ($isEvent -and $metadata.ContainsKey("path")) {
+    $contentPath = Normalize-Path -Path $metadata["path"]
+  } elseif (-not $isEvent -and $path.StartsWith("/")) {
+    $contentPath = Normalize-Path -Path $path
+  }
+
+  $title = Convert-ToText (Get-FieldValue -Row $Row -Aliases @("Title"))
+  if (-not $title -and $contentPath) {
+    $title = Get-TitleFallbackFromPath -Path $contentPath
+  }
+
+  $section = Convert-ToText $metadata["section"]
+  if (-not $section -and $contentPath) {
+    $section = Get-SectionLabelFromPath -Path $contentPath
+  }
+
+  $slug = Convert-ToText $metadata["slug"]
+  if (-not $slug -and $contentPath) {
+    $slug = Get-SlugFromPath -Path $contentPath
+  }
+
+  $referrer = Convert-ToText (Get-FieldValue -Row $Row -Aliases @("Referrer"))
+  $referrerScheme = Convert-ToText (Get-FieldValue -Row $Row -Aliases @("Referrer scheme"))
+  $attribution = Parse-AttributionReferrer -Referrer $referrer -ReferrerScheme $referrerScheme
+
+  return [pscustomobject]@{
+    raw_path = $path
+    content_path = $contentPath
+    title = $title
+    is_event = $isEvent
+    event_name = Convert-ToText $eventInfo.name
+    slug = $slug
+    section = $section
+    source_slot = Convert-ToText $metadata["source_slot"]
+    collection = Convert-ToText $metadata["collection"]
+    format = Convert-ToText $metadata["format"]
+    session = Convert-ToText (Get-FieldValue -Row $Row -Aliases @("Session"))
+    is_bot = (Convert-ToNumber (Get-FieldValue -Row $Row -Aliases @("Bot"))) -ne 0
+    referrer = $referrer
+    referrer_scheme = $referrerScheme
+    attribution = $attribution
+    first_visit = Convert-ToBoolean (Get-FieldValue -Row $Row -Aliases @("FirstVisit"))
+    occurred_at = Convert-ToDateTime (Get-FieldValue -Row $Row -Aliases @("Date"))
+  }
+}
+
+function Get-UniqueSessionCount {
+  param([object[]]$Rows)
+
+  $sessions = @(
+    $Rows |
+      ForEach-Object { Convert-ToText $_.session } |
+      Where-Object { $_ } |
+      Sort-Object -Unique
+  )
+
+  return [double]$sessions.Count
+}
+
+function Get-GoatCounterOverview {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows,
+    [object]$Metadata
+  )
+
+  $updatedAt = Convert-ToText (Get-FieldValue -Row $Metadata -Aliases @("exported_at", "finished_at", "updated_at"))
+  if (-not $updatedAt) {
+    $updatedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd")
+  } else {
+    $parsedUpdatedAt = Convert-ToDateTime $updatedAt
+    if ($null -ne $parsedUpdatedAt) {
+      $updatedAt = $parsedUpdatedAt.UtcDateTime.ToString("yyyy-MM-dd")
+    }
+  }
+
+  $reads = @($EventRows | Where-Object { $_.event_name -eq "essay_read" }).Count
+  $pageviews = @($PageRows).Count
+
+  return [ordered]@{
+    range_label = $AllTimeLabel
+    updated_at = $updatedAt
+    pageviews = [double]$pageviews
+    unique_visitors = Get-UniqueSessionCount -Rows $PageRows
+    reads = [double]$reads
+    read_rate = if ($pageviews -gt 0) { [Math]::Round(($reads / $pageviews) * 100, 1) } else { 0.0 }
+    pdf_downloads = [double](@($EventRows | Where-Object { $_.event_name -eq "pdf_download" }).Count)
+    newsletter_submits = [double](@($EventRows | Where-Object { $_.event_name -eq "newsletter_submit" }).Count)
+  }
+}
+
+function Get-GoatCounterEssays {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $essayMap = @{}
+
+  foreach ($row in $PageRows | Where-Object { $_.content_path -match $EssayPathPattern }) {
+    if (-not $essayMap.ContainsKey($row.content_path)) {
+      $essayMap[$row.content_path] = @{
+        slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
+        path = $row.content_path
+        title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
+        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        views = 0.0
+        reads = 0.0
+        pdf_downloads = 0.0
+        primary_sources = @{}
+      }
+    }
+
+    $essayMap[$row.content_path].views += 1
+    if ($row.attribution.label) {
+      if (-not $essayMap[$row.content_path].primary_sources.ContainsKey($row.attribution.label)) {
+        $essayMap[$row.content_path].primary_sources[$row.attribution.label] = 0
+      }
+      $essayMap[$row.content_path].primary_sources[$row.attribution.label] += 1
+    }
+  }
+
+  foreach ($row in $EventRows | Where-Object { $_.content_path -match $EssayPathPattern }) {
+    if (-not $essayMap.ContainsKey($row.content_path)) {
+      $essayMap[$row.content_path] = @{
+        slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
+        path = $row.content_path
+        title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
+        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        views = 0.0
+        reads = 0.0
+        pdf_downloads = 0.0
+        primary_sources = @{}
+      }
+    }
+
+    if ($row.event_name -eq "essay_read") {
+      $essayMap[$row.content_path].reads += 1
+    }
+
+    if ($row.event_name -eq "pdf_download") {
+      $essayMap[$row.content_path].pdf_downloads += 1
+    }
+  }
+
+  return ,@(
+    foreach ($entry in $essayMap.Values) {
+      $topSource = ""
+      if ($entry.primary_sources.Count -gt 0) {
+        $topSource = @($entry.primary_sources.GetEnumerator() | Sort-Object -Property Value -Descending | Select-Object -First 1)[0].Key
+      }
+
+      [ordered]@{
+        slug = $entry.slug
+        path = $entry.path
+        title = $entry.title
+        section = $entry.section
+        views = [double]$entry.views
+        reads = [double]$entry.reads
+        read_rate = if ($entry.views -gt 0) { [Math]::Round(($entry.reads / $entry.views) * 100, 1) } else { 0.0 }
+        pdf_downloads = [double]$entry.pdf_downloads
+        primary_source = $topSource
+      }
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.views }; Descending = $true }, @{ Expression = { $_.reads }; Descending = $true } | Select-Object -First 100
+}
+
+function New-SourceAggregate {
+  param([object]$Attribution)
+
+  return @{
+    source = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("source"))
+    medium = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("medium"))
+    campaign = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("campaign"))
+    content = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("content"))
+    pageviews = 0.0
+    reads = 0.0
+    sessions = New-Object "System.Collections.Generic.HashSet[string]"
+  }
+}
+
+function Get-GoatCounterSources {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $sourceMap = @{}
+
+  foreach ($row in $PageRows) {
+    $key = $row.attribution.key
+    if (-not $sourceMap.ContainsKey($key)) {
+      $sourceMap[$key] = New-SourceAggregate -Attribution $row.attribution
+    }
+
+    $sourceMap[$key].pageviews += 1
+    if ($row.session) {
+      [void]$sourceMap[$key].sessions.Add($row.session)
+    }
+  }
+
+  foreach ($row in $EventRows | Where-Object { $_.event_name -eq "essay_read" }) {
+    $key = $row.attribution.key
+    if (-not $sourceMap.ContainsKey($key)) {
+      $sourceMap[$key] = New-SourceAggregate -Attribution $row.attribution
+    }
+
+    $sourceMap[$key].reads += 1
+  }
+
+  return ,@(
+    foreach ($entry in $sourceMap.Values) {
+      [ordered]@{
+        source = $entry.source
+        medium = $entry.medium
+        campaign = $entry.campaign
+        content = $entry.content
+        visitors = [double]$entry.sessions.Count
+        pageviews = [double]$entry.pageviews
+        reads = [double]$entry.reads
+      }
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.pageviews }; Descending = $true }, @{ Expression = { $_.reads }; Descending = $true } | Select-Object -First 50
+}
+
+function Get-GoatCounterModules {
+  param([object[]]$EventRows)
+
+  $moduleMap = @{}
+  $clickEvents = @($EventRows | Where-Object { $_.event_name -in @("internal_promo_click", "collection_click") })
+
+  foreach ($row in $clickEvents) {
+    $slot = Convert-ToText $row.source_slot
+    if (-not $slot) {
+      continue
+    }
+
+    $key = Get-Key @($slot, $row.collection)
+    if (-not $moduleMap.ContainsKey($key)) {
+      $moduleMap[$key] = @{
+        slot = $slot
+        collection = Convert-ToText $row.collection
+        clicks = 0.0
+        downstream_reads = 0.0
+      }
+    }
+
+    $moduleMap[$key].clicks += 1
+  }
+
+  foreach ($sessionGroup in ($EventRows | Where-Object { $_.session -and $_.occurred_at } | Group-Object -Property session)) {
+    $recentClicksByPath = @{}
+    $ordered = @($sessionGroup.Group | Sort-Object -Property occurred_at, raw_path)
+
+    foreach ($row in $ordered) {
+      if ($row.event_name -in @("internal_promo_click", "collection_click")) {
+        if ($row.content_path) {
+          $recentClicksByPath[$row.content_path] = $row
+        }
+        continue
+      }
+
+      if ($row.event_name -ne "essay_read" -or -not $row.content_path) {
+        continue
+      }
+
+      if (-not $recentClicksByPath.ContainsKey($row.content_path)) {
+        continue
+      }
+
+      $click = $recentClicksByPath[$row.content_path]
+      $key = Get-Key @($click.source_slot, $click.collection)
+      if ($moduleMap.ContainsKey($key)) {
+        $moduleMap[$key].downstream_reads += 1
+      }
+
+      $recentClicksByPath.Remove($row.content_path)
+    }
+  }
+
+  return ,@(
+    foreach ($entry in $moduleMap.Values) {
+      [ordered]@{
+        slot = $entry.slot
+        collection = $entry.collection
+        clicks = [double]$entry.clicks
+        downstream_reads = [double]$entry.downstream_reads
+      }
+    }
+  ) | Sort-Object -Property @{ Expression = { $_.clicks }; Descending = $true }, @{ Expression = { $_.downstream_reads }; Descending = $true } | Select-Object -First 50
+}
+
+function Get-GoatCounterPeriodSnapshot {
+  param(
+    [string]$Label,
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $pageviews = @($PageRows).Count
+  $reads = @($EventRows | Where-Object { $_.event_name -eq "essay_read" }).Count
+
+  return [ordered]@{
+    label = $Label
+    pageviews = [double]$pageviews
+    unique_visitors = Get-UniqueSessionCount -Rows $PageRows
+    reads = [double]$reads
+    read_rate = if ($pageviews -gt 0) { [Math]::Round(($reads / $pageviews) * 100, 1) } else { 0.0 }
+    pdf_downloads = [double](@($EventRows | Where-Object { $_.event_name -eq "pdf_download" }).Count)
+    newsletter_submits = [double](@($EventRows | Where-Object { $_.event_name -eq "newsletter_submit" }).Count)
+  }
+}
+
+function Get-GoatCounterPeriods {
+  param(
+    [object[]]$PageRows,
+    [object[]]$EventRows
+  )
+
+  $now = [datetimeoffset]::UtcNow
+
+  $last7Cutoff = $now.AddDays(-7)
+  $last30Cutoff = $now.AddDays(-30)
+
+  $pageRowsWithDate = @($PageRows | Where-Object { $_.occurred_at })
+  $eventRowsWithDate = @($EventRows | Where-Object { $_.occurred_at })
+
+  return ,@(
+    Get-GoatCounterPeriodSnapshot -Label "Last 7 days" -PageRows @($pageRowsWithDate | Where-Object { $_.occurred_at -ge $last7Cutoff }) -EventRows @($eventRowsWithDate | Where-Object { $_.occurred_at -ge $last7Cutoff })
+    Get-GoatCounterPeriodSnapshot -Label "Last 30 days" -PageRows @($pageRowsWithDate | Where-Object { $_.occurred_at -ge $last30Cutoff }) -EventRows @($eventRowsWithDate | Where-Object { $_.occurred_at -ge $last30Cutoff })
+    Get-GoatCounterPeriodSnapshot -Label $AllTimeLabel -PageRows $PageRows -EventRows $EventRows
+  )
+}
+
+function Normalize-GoatCounter {
+  param(
+    [object[]]$Rows,
+    [object]$Metadata
+  )
+
+  $parsedRows = @(
+    foreach ($row in $Rows) {
+      $parsed = Convert-GoatCounterRow -Row $row
+      if ($null -ne $parsed -and -not $parsed.is_bot) {
+        $parsed
+      }
+    }
+  )
+
+  $pageRows = @($parsedRows | Where-Object { -not $_.is_event -and $_.content_path })
+  $eventRows = @($parsedRows | Where-Object { $_.is_event })
+
+  return @{
+    overview = Get-GoatCounterOverview -PageRows $pageRows -EventRows $eventRows -Metadata $Metadata
+    essays = Get-GoatCounterEssays -PageRows $pageRows -EventRows $eventRows
+    sources = Get-GoatCounterSources -PageRows $pageRows -EventRows $eventRows
+    modules = Get-GoatCounterModules -EventRows $eventRows
+    periods = Get-GoatCounterPeriods -PageRows $pageRows -EventRows $eventRows
+  }
 }
 
 function Normalize-Overview {
@@ -368,12 +1058,18 @@ function Normalize-Periods {
 Write-Host "Outside In Print ~ Import Analytics" -ForegroundColor Cyan
 
 $rawInput = Read-RawAnalyticsInput -Path $InputPath
-$normalized = @{
-  overview = Normalize-Overview -InputData $rawInput["overview"]
-  essays = Normalize-Essays -InputData $rawInput["essays"]
-  sources = Normalize-Sources -InputData $rawInput["sources"]
-  modules = Normalize-Modules -InputData $rawInput["modules"]
-  periods = Normalize-Periods -InputData $rawInput["periods"]
+
+if ($rawInput.source -eq "goatcounter") {
+  $normalized = Normalize-GoatCounter -Rows $rawInput.rows -Metadata $rawInput.metadata
+} else {
+  $legacySections = $rawInput.sections
+  $normalized = @{
+    overview = Normalize-Overview -InputData $legacySections["overview"]
+    essays = Normalize-Essays -InputData $legacySections["essays"]
+    sources = Normalize-Sources -InputData $legacySections["sources"]
+    modules = Normalize-Modules -InputData $legacySections["modules"]
+    periods = Normalize-Periods -InputData $legacySections["periods"]
+  }
 }
 
 foreach ($section in $Sections) {

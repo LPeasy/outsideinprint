@@ -1,6 +1,8 @@
 (function () {
   var config = window.oipAnalytics || {};
   var pageContext = config.page || {};
+  var pendingCounts = [];
+  var flushTimer = 0;
 
   function cleanProps(input) {
     var props = {};
@@ -22,11 +24,24 @@
   }
 
   function track(eventName, props) {
-    if (!config.enabled || typeof window.plausible !== "function") {
+    var payload;
+
+    if (!config.enabled) {
       return;
     }
 
-    window.plausible(eventName, { props: cleanProps(props || {}) });
+    payload = buildEventPayload(eventName, cleanProps(props || {}));
+    if (!payload) {
+      return;
+    }
+
+    if (isGoatCounterReady()) {
+      window.goatcounter.count(payload);
+      return;
+    }
+
+    pendingCounts.push(payload);
+    ensureFlushTimer();
   }
 
   function parseUrl(href) {
@@ -44,6 +59,74 @@
       section: pageContext.section,
       path: pageContext.path
     });
+  }
+
+  function isGoatCounterReady() {
+    return !!(window.goatcounter && typeof window.goatcounter.count === "function");
+  }
+
+  function buildEventPath(eventName, props) {
+    var keys = ["path", "slug", "section", "source_slot", "collection", "format"];
+    var parts = ["oip:" + eventName];
+
+    keys.forEach(function (key) {
+      if (!props[key]) {
+        return;
+      }
+
+      parts.push(key + "=" + encodeURIComponent(String(props[key])));
+    });
+
+    return parts.join("|");
+  }
+
+  function getReferrer() {
+    if (typeof window.oipAnalyticsReferrer === "function") {
+      return window.oipAnalyticsReferrer() || "";
+    }
+
+    return document.referrer || "";
+  }
+
+  function buildEventPayload(eventName, props) {
+    var path = buildEventPath(eventName, props);
+
+    if (!path) {
+      return null;
+    }
+
+    return {
+      path: path,
+      title: props.title || pageContext.title || eventName,
+      referrer: getReferrer(),
+      event: true
+    };
+  }
+
+  function flushPendingCounts() {
+    var payload;
+
+    if (!isGoatCounterReady()) {
+      return;
+    }
+
+    while (pendingCounts.length > 0) {
+      payload = pendingCounts.shift();
+      window.goatcounter.count(payload);
+    }
+
+    if (flushTimer) {
+      window.clearInterval(flushTimer);
+      flushTimer = 0;
+    }
+  }
+
+  function ensureFlushTimer() {
+    if (flushTimer) {
+      return;
+    }
+
+    flushTimer = window.setInterval(flushPendingCounts, 250);
   }
 
   function datasetProps(node) {
@@ -238,4 +321,6 @@
   );
 
   trackReadProgress();
+  flushPendingCounts();
+  window.addEventListener("load", flushPendingCounts);
 }());

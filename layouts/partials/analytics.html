@@ -1,7 +1,7 @@
 {{ $analytics := site.Params.analytics | default (dict) }}
-{{ $plausible := dict }}
-{{ if isset $analytics "plausible" }}
-  {{ $plausible = index $analytics "plausible" }}
+{{ $goatcounter := dict }}
+{{ if isset $analytics "goatcounter" }}
+  {{ $goatcounter = index $analytics "goatcounter" }}
 {{ end }}
 
 {{ $enabled := false }}
@@ -14,28 +14,20 @@
   {{ $allowLocal = index $analytics "allow_local" }}
 {{ end }}
 
-{{ $domain := "" }}
-{{ if isset $plausible "domain" }}
-  {{ $domain = index $plausible "domain" }}
+{{ $siteURL := "" }}
+{{ if isset $goatcounter "site_url" }}
+  {{ $siteURL = index $goatcounter "site_url" }}
 {{ end }}
-{{ with getenv "PLAUSIBLE_DOMAIN" }}
-  {{ $domain = . }}
+{{ with getenv "GOATCOUNTER_SITE_URL" }}
+  {{ $siteURL = . }}
 {{ end }}
 
-{{ $scriptSrc := "https://plausible.io/js/script.js" }}
-{{ if isset $plausible "script_src" }}
-  {{ $scriptSrc = index $plausible "script_src" }}
+{{ $scriptSrc := "https://gc.zgo.at/count.js" }}
+{{ if isset $goatcounter "script_src" }}
+  {{ $scriptSrc = index $goatcounter "script_src" }}
 {{ end }}
-{{ with getenv "PLAUSIBLE_SCRIPT_SRC" }}
+{{ with getenv "GOATCOUNTER_SCRIPT_SRC" }}
   {{ $scriptSrc = . }}
-{{ end }}
-
-{{ $apiHost := "https://plausible.io" }}
-{{ if isset $plausible "api_host" }}
-  {{ $apiHost = index $plausible "api_host" }}
-{{ end }}
-{{ with getenv "PLAUSIBLE_API_HOST" }}
-  {{ $apiHost = . }}
 {{ end }}
 
 {{ $envEnabled := lower (trim (getenv "ANALYTICS_ENABLED") " ") }}
@@ -62,9 +54,16 @@
   {{ $pageSection = .Params.section_label | default (humanize .Section) }}
 {{ end }}
 
-{{ $active := and $enabled (ne $domain "") (or (eq hugo.Environment "production") $allowLocal) }}
+{{ $siteURL = strings.TrimSuffix "/" $siteURL }}
+{{ $countURL := "" }}
+{{ if ne $siteURL "" }}
+  {{ $countURL = printf "%s/count" $siteURL }}
+{{ end }}
+
+{{ $active := and $enabled (ne $countURL "") (or (eq hugo.Environment "production") $allowLocal) }}
 {{ $config := dict
   "enabled" $active
+  "siteUrl" $siteURL
   "page" (dict
     "kind" .Kind
     "isPage" .IsPage
@@ -77,11 +76,65 @@
 }}
 
 {{ if $active }}
-  <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)};</script>
+  <script>
+    window.oipAnalyticsReferrer = function () {
+      var params;
+      var source;
+      var medium;
+      var campaign;
+      var content;
+      var referrerUrl;
+
+      try {
+        params = new URLSearchParams(window.location.search || "");
+      } catch (error) {
+        params = null;
+      }
+
+      if (params) {
+        source = params.get("utm_source") || params.get("ref") || params.get("src") || params.get("source") || "";
+        medium = params.get("utm_medium") || "";
+        campaign = params.get("utm_campaign") || "";
+        content = params.get("utm_content") || "";
+
+        if (source || medium || campaign || content) {
+          return [
+            "campaign:",
+            "source=", encodeURIComponent(source),
+            "|medium=", encodeURIComponent(medium),
+            "|campaign=", encodeURIComponent(campaign),
+            "|content=", encodeURIComponent(content)
+          ].join("");
+        }
+      }
+
+      if (!document.referrer) {
+        return "";
+      }
+
+      try {
+        referrerUrl = new URL(document.referrer, window.location.href);
+        if (referrerUrl.origin === window.location.origin) {
+          return "internal:path=" + encodeURIComponent(referrerUrl.pathname || "/");
+        }
+      } catch (error) {
+        return document.referrer;
+      }
+
+      return document.referrer;
+    };
+
+    window.goatcounter = window.goatcounter || {};
+    window.goatcounter.no_events = true;
+    window.goatcounter.allow_local = {{ $allowLocal | jsonify }};
+    window.goatcounter.referrer = function (referrer) {
+      var derived = typeof window.oipAnalyticsReferrer === "function" ? window.oipAnalyticsReferrer() : "";
+      return derived || referrer;
+    };
+  </script>
   <script
-    defer
-    data-domain="{{ $domain }}"
-    {{ if ne $apiHost "https://plausible.io" }}data-api="{{ printf "%s/api/event" $apiHost }}"{{ end }}
+    async
+    data-goatcounter="{{ $countURL }}"
     src="{{ $scriptSrc }}"
   ></script>
 {{ end }}

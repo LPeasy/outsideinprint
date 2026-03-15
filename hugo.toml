@@ -19,7 +19,7 @@ collections = "/collections/:slug/"
 
 [security]
   [security.funcs]
-    getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^PLAUSIBLE_']
+    getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^GOATCOUNTER_']
 
 [params.newsletter]
 provider = "buttondown"
@@ -31,7 +31,6 @@ tag = "outside-in-print"
 enabled = false
 allow_local = false
 
-[params.analytics.plausible]
-domain = ""
-script_src = "https://plausible.io/js/script.js"
-api_host = "https://plausible.io"
+[params.analytics.goatcounter]
+site_url = "https://outsideinprint.goatcounter.com"
+script_src = "https://gc.zgo.at/count.js"

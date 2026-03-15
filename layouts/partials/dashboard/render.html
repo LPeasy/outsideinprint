@@ -24,6 +24,8 @@
 {{ $freshnessLabel := "" }}
 {{ $freshnessClass := "dashboard-freshness" }}
 {{ with $updatedAt }}
+  {{ $updatedAtPattern := `^\d{4}-\d{2}-\d{2}$` }}
+  {{ if gt (len (findRE $updatedAtPattern . 1)) 0 }}
   {{ $snapshotTime := time.AsTime . }}
   {{ $ageSeconds := sub now.Unix $snapshotTime.Unix }}
   {{ if ge $ageSeconds 0 }}
@@ -35,13 +37,14 @@
       {{ $freshnessClass = "dashboard-freshness dashboard-freshness--current" }}
     {{ end }}
   {{ end }}
+  {{ end }}
 {{ end }}
 
 <section class="dashboard">
   <header class="dashboard-header">
     <p class="list-title">Analytics</p>
     <h1>{{ .Title }}</h1>
-    <p class="subtitle">Static, privacy-friendly reporting backed by committed data files in <code>data/analytics</code>.</p>
+    <p class="subtitle">Static, privacy-friendly reporting backed by GoatCounter exports committed to <code>data/analytics</code>.</p>
     <div class="dashboard-meta">
       <span>{{ $rangeLabel }}</span>
       {{ with $updatedAt }}<span>updated {{ . }}</span>{{ end }}
@@ -61,11 +64,11 @@
         <div class="dashboard-card__value">{{ printf "%.0f" $uniqueVisitors }}</div>
       </article>
       <article class="dashboard-card">
-        <div class="dashboard-card__label">Reads</div>
+        <div class="dashboard-card__label">Read Events</div>
         <div class="dashboard-card__value">{{ printf "%.0f" $reads }}</div>
       </article>
       <article class="dashboard-card">
-        <div class="dashboard-card__label">Read Rate</div>
+        <div class="dashboard-card__label">Read Event Rate</div>
         <div class="dashboard-card__value">{{ printf "%.1f%%" $readRate }}</div>
       </article>
       <article class="dashboard-card">
@@ -88,10 +91,10 @@
             <th scope="col">Title</th>
             <th scope="col">Section</th>
             <th scope="col">Views</th>
-            <th scope="col">Reads</th>
-            <th scope="col">Read Rate</th>
+            <th scope="col">Read Events</th>
+            <th scope="col">Read Event Rate</th>
             <th scope="col">PDF Downloads</th>
-            <th scope="col">Primary Source</th>
+            <th scope="col">Top Referrer</th>
           </tr>
         </thead>
         <tbody>
@@ -178,7 +181,7 @@
   </section>
 
   <section class="dashboard-section" aria-labelledby="dashboard-sources-title">
-    <h2 id="dashboard-sources-title" class="list-title">Traffic Sources</h2>
+    <h2 id="dashboard-sources-title" class="list-title">Referrers And Campaigns</h2>
     <div class="dashboard-table-wrap">
       <table class="dashboard-table">
         <thead>
@@ -189,7 +192,7 @@
             <th scope="col">Content</th>
             <th scope="col">Visitors</th>
             <th scope="col">Pageviews</th>
-            <th scope="col">Reads</th>
+            <th scope="col">Read Events</th>
           </tr>
         </thead>
         <tbody>
@@ -238,8 +241,8 @@
             <th scope="col">Period</th>
             <th scope="col">Pageviews</th>
             <th scope="col">Unique Visitors</th>
-            <th scope="col">Reads</th>
-            <th scope="col">Read Rate</th>
+            <th scope="col">Read Events</th>
+            <th scope="col">Read Event Rate</th>
             <th scope="col">PDF Downloads</th>
             <th scope="col">Newsletter Submits</th>
           </tr>
