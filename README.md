@@ -142,6 +142,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPa
   Use `GOATCOUNTER_SITE_URL` only if you need to override the default `https://outsideinprint.goatcounter.com`.
 - Optional refresh/import variable:
   Use `GOATCOUNTER_SITE_BASE_PATH` only if the public site ever moves away from the current `/outsideinprint` GitHub Pages base path.
+- Optional refresh/import variable:
+  Use `GOATCOUNTER_PUBLIC_SITE_URL` only if the public site origin ever moves away from `https://lpeasy.github.io/outsideinprint/` and you still want same-site referrers normalized as internal traffic.
 
 - Public site note:
   The public Outside In Print site does not publish the dashboard.

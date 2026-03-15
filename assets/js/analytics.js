@@ -81,8 +81,8 @@
   }
 
   function getReferrer() {
-    if (typeof window.oipAnalyticsReferrer === "function") {
-      return window.oipAnalyticsReferrer() || "";
+    if (typeof window.oipAnalyticsEventReferrer === "function") {
+      return window.oipAnalyticsEventReferrer() || "";
     }
 
     return document.referrer || "";

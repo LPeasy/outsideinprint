@@ -180,6 +180,9 @@ Optional:
 - repository variable: `GOATCOUNTER_SITE_BASE_PATH`
   Default: `/outsideinprint`
   Use this only if the deployed public site moves to a different GitHub Pages base path
+- repository variable: `GOATCOUNTER_PUBLIC_SITE_URL`
+  Default: `https://lpeasy.github.io/outsideinprint/`
+  Use this only if the public site origin changes and you still want internal referrers grouped as `internal / <path>`
 
 The refresh workflow is in:
 
@@ -273,6 +276,7 @@ By default, the importer normalizes exported paths against the current project-s
 - `/outsideinprint`
 
 If the public site base path ever changes, set `GOATCOUNTER_SITE_BASE_PATH` before running the importer or refresh workflow.
+If the public site origin changes, set `GOATCOUNTER_PUBLIC_SITE_URL` as well so absolute same-site referrers still normalize as internal traffic.
 
 The importer still accepts the older section-based CSV/JSON structure for manual backfills, but GoatCounter export folders are now the canonical input.
 

@@ -141,6 +141,11 @@ function Convert-ToText {
 }
 
 $SiteBasePath = Convert-ToText $env:GOATCOUNTER_SITE_BASE_PATH "/outsideinprint"
+$PublicSiteUrl = Convert-ToText $env:GOATCOUNTER_PUBLIC_SITE_URL "https://lpeasy.github.io/outsideinprint/"
+$PublicSiteUri = $null
+if ($PublicSiteUrl) {
+  [void][System.Uri]::TryCreate($PublicSiteUrl, [System.UriKind]::Absolute, [ref]$PublicSiteUri)
+}
 
 function Convert-ToBoolean {
   param(
@@ -181,6 +186,20 @@ function Convert-ToDateTime {
   }
 
   return $null
+}
+
+function Test-IsPublicSiteUri {
+  param([System.Uri]$Uri)
+
+  if ($null -eq $Uri -or $null -eq $PublicSiteUri) {
+    return $false
+  }
+
+  return (
+    $Uri.Scheme.Equals($PublicSiteUri.Scheme, [System.StringComparison]::OrdinalIgnoreCase) -and
+    $Uri.Host.Equals($PublicSiteUri.Host, [System.StringComparison]::OrdinalIgnoreCase) -and
+    $Uri.Port -eq $PublicSiteUri.Port
+  )
 }
 
 function Normalize-Path {
@@ -331,16 +350,44 @@ function Read-GoatCounterBundle {
     return $null
   }
 
+  $headerLine = Get-Content -Path $csvPath -TotalCount 1
+  if (-not $headerLine) {
+    throw "GoatCounter export is empty: $csvPath"
+  }
+
+  $headerVersion = $null
+  if ($headerLine -match '^(?<version>\d+),Path,') {
+    $headerVersion = [int]$Matches["version"]
+  }
+
+  if ($null -eq $headerVersion) {
+    throw "Unsupported GoatCounter export header in $csvPath. Expected a versioned Path header such as '2,Path'."
+  }
+
+  if ($headerVersion -notin @(1, 2)) {
+    throw "Unsupported GoatCounter export version '$headerVersion' in $csvPath. Update scripts/import_analytics.ps1 for the new format."
+  }
+
   $metadataPath = Join-Path $DirectoryPath "metadata.json"
   $metadata = @{}
   if (Test-Path $metadataPath) {
     $metadata = Read-StructuredFile -Path $metadataPath
   }
 
+  $rows = Import-Csv -Path $csvPath
+  if ($rows.Count -gt 0) {
+    $firstRow = @($rows)[0]
+    foreach ($requiredColumn in @("Event", "Session", "Referrer", "Date")) {
+      if ($null -eq (Get-FieldValue -Row $firstRow -Aliases @($requiredColumn))) {
+        throw "GoatCounter export in $csvPath is missing the required '$requiredColumn' column."
+      }
+    }
+  }
+
   return @{
     source = "goatcounter"
     metadata = $metadata
-    rows = Import-Csv -Path $csvPath
+    rows = $rows
   }
 }
 
@@ -535,6 +582,18 @@ function Parse-AttributionReferrer {
 
   $uri = $null
   if ([System.Uri]::TryCreate($referrer, [System.UriKind]::Absolute, [ref]$uri)) {
+    if (Test-IsPublicSiteUri -Uri $uri) {
+      $normalizedInternalPath = Normalize-Path -Path $uri.AbsolutePath
+      return [ordered]@{
+        source = "internal"
+        medium = $normalizedInternalPath
+        campaign = ""
+        content = ""
+        key = Get-Key @("internal", $normalizedInternalPath, "", "")
+        label = "internal / $normalizedInternalPath"
+      }
+    }
+
     $hostName = Convert-ToText $uri.Host
     if ($hostName.StartsWith("www.")) {
       $hostName = $hostName.Substring(4)
@@ -939,6 +998,10 @@ function Normalize-GoatCounter {
 
   $pageRows = @($parsedRows | Where-Object { -not $_.is_event -and $_.content_path })
   $eventRows = @($parsedRows | Where-Object { $_.is_event })
+
+  if (@($Rows).Count -gt 0 -and $pageRows.Count -eq 0 -and $eventRows.Count -eq 0) {
+    throw "GoatCounter export rows were loaded but none could be normalized into pageviews or events. Check the export header version and column aliases."
+  }
 
   return @{
     overview = Get-GoatCounterOverview -PageRows $pageRows -EventRows $eventRows -Metadata $Metadata

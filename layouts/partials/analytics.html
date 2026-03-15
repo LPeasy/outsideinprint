@@ -77,13 +77,12 @@
 
 {{ if $active }}
   <script>
-    window.oipAnalyticsReferrer = function () {
+    window.oipAnalyticsCampaignReferrer = function () {
       var params;
       var source;
       var medium;
       var campaign;
       var content;
-      var referrerUrl;
 
       try {
         params = new URLSearchParams(window.location.search || "");
@@ -108,6 +107,21 @@
         }
       }
 
+      return "";
+    };
+
+    window.oipAnalyticsEventReferrer = function () {
+      var campaignReferrer;
+      var referrerUrl;
+
+      campaignReferrer = typeof window.oipAnalyticsCampaignReferrer === "function"
+        ? window.oipAnalyticsCampaignReferrer()
+        : "";
+
+      if (campaignReferrer) {
+        return campaignReferrer;
+      }
+
       if (!document.referrer) {
         return "";
       }
@@ -128,8 +142,10 @@
     window.goatcounter.no_events = true;
     window.goatcounter.allow_local = {{ $allowLocal | jsonify }};
     window.goatcounter.referrer = function (referrer) {
-      var derived = typeof window.oipAnalyticsReferrer === "function" ? window.oipAnalyticsReferrer() : "";
-      return derived || referrer;
+      var campaignReferrer = typeof window.oipAnalyticsCampaignReferrer === "function"
+        ? window.oipAnalyticsCampaignReferrer()
+        : "";
+      return campaignReferrer || referrer;
     };
   </script>
   <script
