@@ -33,4 +33,6 @@ allow_local = false
 
 [params.analytics.goatcounter]
 site_url = "https://outsideinprint.goatcounter.com"
-script_src = "https://gc.zgo.at/count.js"
+script_src = "https://gc.zgo.at/count.v5.js"
+script_integrity = "sha384-atnOLvQb9t+jTSipvd75X2yginT4PjVbqDdlJAmxMm+wYElFmeR6EmLP5bYeoRVQ"
+script_crossorigin = "anonymous"

@@ -30,6 +30,22 @@
   {{ $scriptSrc = . }}
 {{ end }}
 
+{{ $scriptIntegrity := "" }}
+{{ if isset $goatcounter "script_integrity" }}
+  {{ $scriptIntegrity = index $goatcounter "script_integrity" }}
+{{ end }}
+{{ with getenv "GOATCOUNTER_SCRIPT_INTEGRITY" }}
+  {{ $scriptIntegrity = . }}
+{{ end }}
+
+{{ $scriptCrossorigin := "" }}
+{{ if isset $goatcounter "script_crossorigin" }}
+  {{ $scriptCrossorigin = index $goatcounter "script_crossorigin" }}
+{{ end }}
+{{ with getenv "GOATCOUNTER_SCRIPT_CROSSORIGIN" }}
+  {{ $scriptCrossorigin = . }}
+{{ end }}
+
 {{ $envEnabled := lower (trim (getenv "ANALYTICS_ENABLED") " ") }}
 {{ if eq $envEnabled "true" }}
   {{ $enabled = true }}
@@ -151,6 +167,8 @@
   <script
     async
     data-goatcounter="{{ $countURL }}"
+    {{ with $scriptCrossorigin }}crossorigin="{{ . }}"{{ end }}
+    {{ with $scriptIntegrity }}integrity="{{ . }}"{{ end }}
     src="{{ $scriptSrc }}"
   ></script>
 {{ end }}

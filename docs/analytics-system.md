@@ -152,7 +152,11 @@ Optional:
 - repository variable: `GOATCOUNTER_SITE_URL`
   Default: `https://outsideinprint.goatcounter.com`
 - repository variable: `GOATCOUNTER_SCRIPT_SRC`
-  Default: `https://gc.zgo.at/count.js`
+  Default: `https://gc.zgo.at/count.v5.js`
+- repository variable: `GOATCOUNTER_SCRIPT_INTEGRITY`
+  Default: GoatCounter v5 SRI hash from the official docs
+- repository variable: `GOATCOUNTER_SCRIPT_CROSSORIGIN`
+  Default: `anonymous`
 - repository variable: `ANALYTICS_ALLOW_LOCAL=true`
   Only for deliberate local tracking tests
 
@@ -166,6 +170,8 @@ The relevant params are:
 - `params.analytics.allow_local`
 - `params.analytics.goatcounter.site_url`
 - `params.analytics.goatcounter.script_src`
+- `params.analytics.goatcounter.script_integrity`
+- `params.analytics.goatcounter.script_crossorigin`
 
 ### Refresh workflow
 
