@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "date": "2026-03-15",
+    "pageviews": 15.0,
+    "unique_visitors": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "pageviews": 14.0,
+    "unique_visitors": 2.0,
+    "reads": 2.0,
+    "read_rate": 14.3,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  }
+]

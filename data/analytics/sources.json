@@ -1,5 +1,32 @@
 [
   {
+    "source": "lpeasy.github.io/outsideinprint/literature",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/collections/risk-uncertainty/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
     "source": "internal",
     "medium": "/syd-and-oliver/smoke-and-brass/",
     "campaign": "",
@@ -9,17 +36,35 @@
     "reads": 0.0
   },
   {
-    "source": "internal",
-    "medium": "/random/",
+    "source": "direct",
+    "medium": "",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
-    "pageviews": 4.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   },
   {
     "source": "internal",
-    "medium": "/syd-and-oliver/",
+    "medium": "/collections/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/start-here",
+    "medium": "",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -37,20 +82,92 @@
   },
   {
     "source": "internal",
-    "medium": "/collections/",
+    "medium": "/random/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
-    "pageviews": 2.0,
+    "pageviews": 4.0,
+    "reads": 1.0
+  },
+  {
+    "source": "internal",
+    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   },
   {
     "source": "internal",
-    "medium": "/collections/risk-uncertainty/",
+    "medium": "/syd-and-oliver/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 4.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/library",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "campaign": "",
+    "content": "",
+    "visitors": 0.0,
+    "pageviews": 0.0,
+    "reads": 1.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
     "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   },
   {
@@ -60,15 +177,6 @@
     "content": "",
     "visitors": 1.0,
     "pageviews": 2.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
-    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
     "reads": 0.0
   }
 ]
