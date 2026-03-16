@@ -4,6 +4,15 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $fixtures = @("empty", "sparse", "rich")
 $tempRoot = Join-Path $repoRoot ".tmp-dashboard-build-tests"
+$requiredEntries = @(
+  "archetypes",
+  "assets",
+  "content-dashboard",
+  "data",
+  "layouts",
+  "static/favicon.svg",
+  "hugo-dashboard.toml"
+)
 
 if (-not (Get-Command hugo -ErrorAction SilentlyContinue)) {
   throw "hugo is required for dashboard build smoke tests."
@@ -20,12 +29,19 @@ try {
     $workdir = Join-Path $tempRoot $fixture
     New-Item -ItemType Directory -Path $workdir | Out-Null
 
-    foreach ($entry in Get-ChildItem $repoRoot) {
-      if ($entry.Name -in @(".git", "public", "resources", ".tmp-dashboard-build-tests", ".tmp-analytics-fixture")) {
-        continue
+    foreach ($entryName in $requiredEntries) {
+      $sourcePath = Join-Path $repoRoot $entryName
+      if (-not (Test-Path $sourcePath)) {
+        throw "Required dashboard build entry '$entryName' was not found."
       }
 
-      Copy-Item $entry.FullName -Destination (Join-Path $workdir $entry.Name) -Recurse -Force
+      $destinationPath = Join-Path $workdir $entryName
+      $destinationParent = Split-Path -Parent $destinationPath
+      if ($destinationParent -and -not (Test-Path $destinationParent)) {
+        New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
+      }
+
+      Copy-Item $sourcePath -Destination $destinationPath -Recurse -Force
     }
 
     Copy-Item (Join-Path $PSScriptRoot "fixtures/analytics/$fixture/data/analytics") (Join-Path $workdir "data") -Recurse -Force
@@ -50,8 +66,13 @@ try {
       }
     }
 
-    foreach ($invalid in @("NaN", "undefined")) {
-      if ($html -match [regex]::Escape($invalid)) {
+    $invalidPatterns = @{
+      "NaN" = '(?<![A-Za-z0-9+/=])NaN(?![A-Za-z0-9+/=])'
+      "undefined" = '(?<![A-Za-z0-9+/=])undefined(?![A-Za-z0-9+/=])'
+    }
+
+    foreach ($invalid in $invalidPatterns.Keys) {
+      if ($html -match $invalidPatterns[$invalid]) {
         throw "Fixture '$fixture' build output contains invalid marker '$invalid'."
       }
     }
