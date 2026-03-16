@@ -1,14 +1,14 @@
 [
   {
-    "section": "Syd and Oliver",
-    "pageviews": 1.0,
+    "section": "Essays",
+    "pageviews": 15.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0,
     "sparkline_pageviews": [
-      1.0,
-      0.0
+      7.0,
+      8.0
     ],
     "sparkline_reads": [
       0.0,
@@ -32,15 +32,15 @@
     ]
   },
   {
-    "section": "Essays",
-    "pageviews": 15.0,
+    "section": "Syd and Oliver",
+    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0,
     "sparkline_pageviews": [
-      7.0,
-      8.0
+      1.0,
+      0.0
     ],
     "sparkline_reads": [
       0.0,

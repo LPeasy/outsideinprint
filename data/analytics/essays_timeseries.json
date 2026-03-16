@@ -22,21 +22,21 @@
     ]
   },
   {
-    "slug": "the-ledger-vol-3",
-    "path": "/essays/the-ledger-vol-3/",
-    "title": "The Ledger, Vol. 3 | Outside In Print",
+    "slug": "6-reasons-redwall-is-a-timeless-classic",
+    "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
+    "title": "6 Reasons Redwall Is a Timeless Classic | Outside In Print",
     "section": "Essays",
     "series": [
       {
         "date": "2026-03-15",
-        "pageviews": 1.0,
+        "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-16",
-        "pageviews": 0.0,
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
@@ -44,31 +44,9 @@
     ]
   },
   {
-    "slug": "smoke-and-brass",
-    "path": "/syd-and-oliver/smoke-and-brass/",
-    "title": "Smoke and Brass | Outside In Print",
-    "section": "Syd and Oliver",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "the-dolphin-company",
-    "path": "/essays/the-dolphin-company/",
-    "title": "The Dolphin Company | Outside In Print",
+    "slug": "the-national-flood-insurance-program",
+    "path": "/essays/the-national-flood-insurance-program/",
+    "title": "The National Flood Insurance Program | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -82,50 +60,6 @@
         "date": "2026-03-16",
         "pageviews": 1.0,
         "reads": 1.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e",
-    "path": "/essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/",
-    "title": "Why did the Mexican Navy Ship Cuauhtémoc Crash Into the Brooklyn Bridge? | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "35-years-of-yellow-the-simpsons-time-loop",
-    "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "title": "35 Years of Yellow: The Simpsons Time Loop | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       }
@@ -154,10 +88,32 @@
     ]
   },
   {
-    "slug": "how-did-mother-become-a-controversial-word-in-america",
-    "path": "/essays/how-did-mother-become-a-controversial-word-in-america/",
-    "title": "How did “Mother” Become a Controversial Word in America? | Outside In Print",
+    "slug": "why-a-return-to-the-gold-standard-would-break-the-economy",
+    "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "title": "Returning to the Gold Standard Will Break the Economy | Outside In Print",
     "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "smoke-and-brass",
+    "path": "/syd-and-oliver/smoke-and-brass/",
+    "title": "Smoke and Brass | Outside In Print",
+    "section": "Syd and Oliver",
     "series": [
       {
         "date": "2026-03-15",
@@ -198,31 +154,9 @@
     ]
   },
   {
-    "slug": "why-a-return-to-the-gold-standard-would-break-the-economy",
-    "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
-    "title": "Returning to the Gold Standard Will Break the Economy | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "6-reasons-redwall-is-a-timeless-classic",
-    "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
-    "title": "6 Reasons Redwall Is a Timeless Classic | Outside In Print",
+    "slug": "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e",
+    "path": "/essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/",
+    "title": "Why did the Mexican Navy Ship Cuauhtémoc Crash Into the Brooklyn Bridge? | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -264,6 +198,72 @@
     ]
   },
   {
+    "slug": "the-dolphin-company",
+    "path": "/essays/the-dolphin-company/",
+    "title": "The Dolphin Company | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 1.0,
+        "reads": 1.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "how-did-mother-become-a-controversial-word-in-america",
+    "path": "/essays/how-did-mother-become-a-controversial-word-in-america/",
+    "title": "How did “Mother” Become a Controversial Word in America? | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "35-years-of-yellow-the-simpsons-time-loop",
+    "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "title": "35 Years of Yellow: The Simpsons Time Loop | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
     "slug": "you-paid-for-that-ct-scan",
     "path": "/essays/you-paid-for-that-ct-scan/",
     "title": "You Paid For That CT Scan. | Outside In Print",
@@ -286,22 +286,22 @@
     ]
   },
   {
-    "slug": "the-national-flood-insurance-program",
-    "path": "/essays/the-national-flood-insurance-program/",
-    "title": "The National Flood Insurance Program | Outside In Print",
+    "slug": "the-ledger-vol-3",
+    "path": "/essays/the-ledger-vol-3/",
+    "title": "The Ledger, Vol. 3 | Outside In Print",
     "section": "Essays",
     "series": [
       {
         "date": "2026-03-15",
-        "pageviews": 0.0,
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-16",
-        "pageviews": 1.0,
-        "reads": 1.0,
+        "pageviews": 0.0,
+        "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       }
