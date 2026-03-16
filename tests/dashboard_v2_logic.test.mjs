@@ -11,6 +11,15 @@ import {
 } from "../assets/js/dashboard-core.mjs";
 
 const fixtureRoot = path.resolve("tests/fixtures/analytics");
+const SCALABLE_METRICS = new Set([
+  "pageviews",
+  "views",
+  "unique_visitors",
+  "visitors",
+  "reads",
+  "pdf_downloads",
+  "newsletter_submits"
+]);
 
 function loadFixture(name) {
   const analyticsDir = path.join(fixtureRoot, name, "data", "analytics");
@@ -28,6 +37,26 @@ function loadFixture(name) {
     journey_by_essay: JSON.parse(fs.readFileSync(path.join(analyticsDir, "journey_by_essay.json"), "utf8")),
     sources_timeseries: JSON.parse(fs.readFileSync(path.join(analyticsDir, "sources_timeseries.json"), "utf8"))
   };
+}
+
+function amplifyFixture(value, factor) {
+  if (Array.isArray(value)) {
+    return value.map((item) => amplifyFixture(item, factor));
+  }
+
+  if (!value || typeof value !== "object") {
+    return value;
+  }
+
+  return Object.fromEntries(
+    Object.entries(value).map(([key, entryValue]) => {
+      if (typeof entryValue === "number" && SCALABLE_METRICS.has(key)) {
+        return [key, entryValue * factor];
+      }
+
+      return [key, amplifyFixture(entryValue, factor)];
+    })
+  );
 }
 
 test("empty analytics data yields stable zero-state cards and signals", () => {
@@ -55,7 +84,7 @@ test("sparse analytics data stays filterable and exportable", () => {
 });
 
 test("rich analytics data derives trends, insights, and shareable filter state", () => {
-  const raw = loadFixture("rich");
+  const raw = amplifyFixture(loadFixture("rich"), 4);
   const normalized = normalizeDashboardData(raw);
   const model = buildDashboardModel(raw, "?period=all&section=Essays&metric=reads&scale=rate&sort=read_rate");
 
@@ -64,6 +93,7 @@ test("rich analytics data derives trends, insights, and shareable filter state",
   assert.ok(model.kpis.find((metric) => metric.key === "reads").value >= 5);
   assert.ok(model.scatter.points.some((point) => point.quadrant.includes("completion")));
   assert.ok(model.insights.length >= 4);
+  assert.ok(model.insights.every((insight) => !/Sample still too small/.test(insight.title)));
   assert.ok(model.sources.rows.length >= 1);
   assert.ok(model.funnel.sourceFunnel.some((row) => row.label === "external"));
   assert.ok(model.funnel.collectionLeaders.some((row) => row.label === "risk-uncertainty"));
