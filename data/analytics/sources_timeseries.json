@@ -2,68 +2,8 @@
   {
     "date": "2026-03-16",
     "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /collections/risk-uncertainty/",
+    "source": "lpeasy.github.io/outsideinprint",
     "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /syd-and-oliver/smoke-and-brass/",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "internal",
-    "source": "internal /essays/",
-    "pageviews": 0.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -91,10 +31,40 @@
   },
   {
     "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/literature",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
     "source_type": "internal",
-    "source": "internal /random/",
+    "source": "internal /essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
     "pageviews": 0.0,
     "reads": 1.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework",
+    "pageviews": 1.0,
+    "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0
@@ -107,6 +77,46 @@
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "internal",
+    "source": "internal /essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "internal",
+    "source": "internal /collections/risk-uncertainty/",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
     "newsletter_submits": 0.0
   },
   {
@@ -131,9 +141,19 @@
   },
   {
     "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint",
-    "pageviews": 2.0,
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 1.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -141,9 +161,29 @@
   },
   {
     "date": "2026-03-15",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework",
+    "source_type": "internal",
+    "source": "internal /essays/how-did-mother-become-a-controversial-word-in-america/",
     "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "internal",
+    "source": "internal /essays/",
+    "pageviews": 0.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -160,19 +200,9 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-16",
+    "date": "2026-03-15",
     "source_type": "internal",
-    "source": "internal /essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
-    "pageviews": 0.0,
-    "reads": 1.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/literature",
+    "source": "internal /syd-and-oliver/smoke-and-brass/",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -194,36 +224,6 @@
     "source_type": "external",
     "source": "lpeasy.github.io/outsideinprint/random",
     "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /essays/how-did-mother-become-a-controversial-word-in-america/",
-    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,

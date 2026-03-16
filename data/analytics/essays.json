@@ -11,17 +11,6 @@
     "primary_source": "internal /random/"
   },
   {
-    "slug": "why-a-return-to-the-gold-standard-would-break-the-economy",
-    "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
-    "title": "Returning to the Gold Standard Will Break the Economy | Outside In Print",
-    "section": "Essays",
-    "views": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "primary_source": "lpeasy.github.io/outsideinprint/random"
-  },
-  {
     "slug": "smoke-and-brass",
     "path": "/syd-and-oliver/smoke-and-brass/",
     "title": "Smoke and Brass | Outside In Print",
@@ -31,39 +20,6 @@
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "primary_source": "internal /syd-and-oliver/"
-  },
-  {
-    "slug": "35-years-of-yellow-the-simpsons-time-loop",
-    "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "title": "35 Years of Yellow: The Simpsons Time Loop | Outside In Print",
-    "section": "Essays",
-    "views": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "primary_source": "internal /essays/"
-  },
-  {
-    "slug": "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e",
-    "path": "/essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/",
-    "title": "Why did the Mexican Navy Ship Cuauhtémoc Crash Into the Brooklyn Bridge? | Outside In Print",
-    "section": "Essays",
-    "views": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "primary_source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company"
-  },
-  {
-    "slug": "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen",
-    "path": "/essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/",
-    "title": "David Attenborough: How One Quiet Voice Made the Whole World Listen | Outside In Print",
-    "section": "Essays",
-    "views": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "primary_source": "internal /random/"
   },
   {
     "slug": "the-dolphin-company",
@@ -77,37 +33,26 @@
     "primary_source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy"
   },
   {
-    "slug": "dirt-is-better-than-air",
-    "path": "/essays/dirt-is-better-than-air/",
-    "title": "Dirt Is Better Than Air | Outside In Print",
+    "slug": "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e",
+    "path": "/essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/",
+    "title": "Why did the Mexican Navy Ship Cuauhtémoc Crash Into the Brooklyn Bridge? | Outside In Print",
     "section": "Essays",
     "views": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
-    "primary_source": "lpeasy.github.io/outsideinprint/essays"
+    "primary_source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company"
   },
   {
-    "slug": "6-reasons-redwall-is-a-timeless-classic",
-    "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
-    "title": "6 Reasons Redwall Is a Timeless Classic | Outside In Print",
+    "slug": "35-years-of-yellow-the-simpsons-time-loop",
+    "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "title": "35 Years of Yellow: The Simpsons Time Loop | Outside In Print",
     "section": "Essays",
     "views": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
-    "primary_source": "lpeasy.github.io/outsideinprint/library"
-  },
-  {
-    "slug": "the-national-flood-insurance-program",
-    "path": "/essays/the-national-flood-insurance-program/",
-    "title": "The National Flood Insurance Program | Outside In Print",
-    "section": "Essays",
-    "views": 1.0,
-    "reads": 1.0,
-    "read_rate": 100.0,
-    "pdf_downloads": 0.0,
-    "primary_source": "lpeasy.github.io/outsideinprint/random"
+    "primary_source": "internal /essays/"
   },
   {
     "slug": "what-is-risk-a-four-part-framework",
@@ -121,15 +66,59 @@
     "primary_source": "internal /collections/risk-uncertainty/"
   },
   {
-    "slug": "you-paid-for-that-ct-scan",
-    "path": "/essays/you-paid-for-that-ct-scan/",
-    "title": "You Paid For That CT Scan. | Outside In Print",
+    "slug": "dirt-is-better-than-air",
+    "path": "/essays/dirt-is-better-than-air/",
+    "title": "Dirt Is Better Than Air | Outside In Print",
+    "section": "Essays",
+    "views": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "primary_source": "lpeasy.github.io/outsideinprint/essays"
+  },
+  {
+    "slug": "how-did-mother-become-a-controversial-word-in-america",
+    "path": "/essays/how-did-mother-become-a-controversial-word-in-america/",
+    "title": "How did “Mother” Become a Controversial Word in America? | Outside In Print",
     "section": "Essays",
     "views": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "primary_source": "internal /random/"
+  },
+  {
+    "slug": "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen",
+    "path": "/essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/",
+    "title": "David Attenborough: How One Quiet Voice Made the Whole World Listen | Outside In Print",
+    "section": "Essays",
+    "views": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "primary_source": "internal /random/"
+  },
+  {
+    "slug": "why-a-return-to-the-gold-standard-would-break-the-economy",
+    "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "title": "Returning to the Gold Standard Will Break the Economy | Outside In Print",
+    "section": "Essays",
+    "views": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "primary_source": "lpeasy.github.io/outsideinprint/random"
+  },
+  {
+    "slug": "6-reasons-redwall-is-a-timeless-classic",
+    "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
+    "title": "6 Reasons Redwall Is a Timeless Classic | Outside In Print",
+    "section": "Essays",
+    "views": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "primary_source": "lpeasy.github.io/outsideinprint/library"
   },
   {
     "slug": "why-we-celebrate-memorial-day-origins-traditions-and-importance",
@@ -143,14 +132,25 @@
     "primary_source": "lpeasy.github.io/outsideinprint/random"
   },
   {
-    "slug": "how-did-mother-become-a-controversial-word-in-america",
-    "path": "/essays/how-did-mother-become-a-controversial-word-in-america/",
-    "title": "How did “Mother” Become a Controversial Word in America? | Outside In Print",
+    "slug": "you-paid-for-that-ct-scan",
+    "path": "/essays/you-paid-for-that-ct-scan/",
+    "title": "You Paid For That CT Scan. | Outside In Print",
     "section": "Essays",
     "views": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "primary_source": "internal /random/"
+  },
+  {
+    "slug": "the-national-flood-insurance-program",
+    "path": "/essays/the-national-flood-insurance-program/",
+    "title": "The National Flood Insurance Program | Outside In Print",
+    "section": "Essays",
+    "views": 1.0,
+    "reads": 1.0,
+    "read_rate": 100.0,
+    "pdf_downloads": 0.0,
+    "primary_source": "lpeasy.github.io/outsideinprint/random"
   }
 ]

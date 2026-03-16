@@ -1,7 +1,7 @@
 [
   {
-    "source": "lpeasy.github.io/outsideinprint/literature",
-    "medium": "",
+    "source": "internal",
+    "medium": "/syd-and-oliver/smoke-and-brass/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -9,7 +9,7 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
     "medium": "",
     "campaign": "",
     "content": "",
@@ -27,8 +27,26 @@
     "reads": 0.0
   },
   {
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 4.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
     "source": "internal",
-    "medium": "/syd-and-oliver/smoke-and-brass/",
+    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -45,7 +63,16 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
+    "source": "lpeasy.github.io/outsideinprint/essays",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/library",
     "medium": "",
     "campaign": "",
     "content": "",
@@ -55,11 +82,20 @@
   },
   {
     "source": "internal",
-    "medium": "/collections/",
+    "medium": "/random/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
-    "pageviews": 2.0,
+    "pageviews": 4.0,
+    "reads": 1.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   },
   {
@@ -81,17 +117,8 @@
     "reads": 0.0
   },
   {
-    "source": "internal",
-    "medium": "/random/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 4.0,
-    "reads": 1.0
-  },
-  {
-    "source": "internal",
-    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "source": "lpeasy.github.io/outsideinprint/literature",
+    "medium": "",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -100,7 +127,16 @@
   },
   {
     "source": "internal",
-    "medium": "/syd-and-oliver/",
+    "medium": "/essays/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
+    "medium": "",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -117,26 +153,8 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint/essays",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 4.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/library",
-    "medium": "",
+    "source": "internal",
+    "medium": "/syd-and-oliver/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -153,26 +171,8 @@
     "reads": 1.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 2.0,
-    "pageviews": 2.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
     "source": "internal",
-    "medium": "/essays/",
+    "medium": "/collections/",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
