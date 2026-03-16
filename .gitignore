@@ -6,8 +6,12 @@
 /.tools/
 /.tmp-public/
 /.tmp-dashboard/
+/.tmp-dashboard-publish/
 /.dashboard-public/
 /.dashboard-repo/
 /.analytics-refresh/
+/assets/jsconfig.json
+/qa/artifacts/
+/qa/post-deploy-report.md
 /dashboard_deploy_key
 /dashboard_deploy_key.pub
