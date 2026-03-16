@@ -35,7 +35,7 @@
 {{ $updatedAt := "" }}{{ if isset $overview "updated_at" }}{{ $updatedAt = index $overview "updated_at" }}{{ end }}
 {{ $rangeLabel := "Snapshot" }}{{ if isset $overview "range_label" }}{{ $rangeLabel = index $overview "range_label" }}{{ end }}
 
-<script id="dashboard-data" type="application/json">{{ $dashboardData | jsonify }}</script>
+<script id="dashboard-data" type="application/json">{{ $dashboardData | jsonify | safeJS }}</script>
 
 <section class="dashboard dashboard-v2" data-dashboard-shell>
   <header class="dashboard-header dashboard-hero">

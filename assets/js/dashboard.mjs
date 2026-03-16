@@ -17,7 +17,8 @@ function readJsonScript(id) {
   }
 
   try {
-    return JSON.parse(node.textContent || "{}");
+    const parsed = JSON.parse(node.textContent || "{}");
+    return typeof parsed === "string" ? JSON.parse(parsed) : parsed;
   } catch (error) {
     return {};
   }

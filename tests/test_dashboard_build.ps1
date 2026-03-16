@@ -66,6 +66,10 @@ try {
       }
     }
 
+    if ($html -match 'id=dashboard-data type=application/json>"\{') {
+      throw "Fixture '$fixture' build output still double-encodes dashboard-data as a JSON string."
+    }
+
     $invalidPatterns = @{
       "NaN" = '(?<![A-Za-z0-9+/=])NaN(?![A-Za-z0-9+/=])'
       "undefined" = '(?<![A-Za-z0-9+/=])undefined(?![A-Za-z0-9+/=])'
