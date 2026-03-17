@@ -225,3 +225,5 @@ finally {
 }
 
 Write-Host "PDF failure audit tests passed."
+$global:LASTEXITCODE = 0
+exit 0

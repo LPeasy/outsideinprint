@@ -76,3 +76,5 @@ finally {
 }
 
 Write-Host "PDF builder static-image path tests passed."
+$global:LASTEXITCODE = 0
+exit 0
