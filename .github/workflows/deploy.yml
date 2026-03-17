@@ -80,10 +80,33 @@ jobs:
         run: |
           ./scripts/verify_pdf_pipeline.ps1
 
+      - name: Audit PDF Failures
+        shell: pwsh
+        run: |
+          ./scripts/audit_pdf_failures.ps1
+
+      - name: Test PDF Failure Audit
+        shell: pwsh
+        run: |
+          ./tests/test_pdf_failure_audit.ps1
+
+      - name: Test PDF Builder Static Image Paths
+        shell: pwsh
+        run: |
+          ./tests/test_pdf_builder_static_image_paths.ps1
+
       - name: Preflight Validation
         shell: pwsh
         run: |
           ./scripts/preflight.ps1
+
+      - name: Upload PDF audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-failure-audit
+          path: |
+            ./reports/pdf-failure-audit.json
+            ./reports/pdf-failure-audit.md
 
       - name: Build Hugo
         run: hugo --gc --minify

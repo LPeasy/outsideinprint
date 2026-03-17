@@ -19,9 +19,47 @@ $AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "worki
 $EditionTemplatePath = "./templates/edition.typ"
 $CatalogSyncScript = "./scripts/sync_pdf_catalog.ps1"
 $RepoRoot = (Resolve-Path ".").Path
+$IsWindowsHost = if (Get-Variable -Name IsWindows -ErrorAction SilentlyContinue) {
+  [bool]$IsWindows
+}
+else {
+  $env:OS -eq "Windows_NT"
+}
 
 New-Item -ItemType Directory -Force -Path $PdfOutDir | Out-Null
 New-Item -ItemType Directory -Force -Path $TempDir | Out-Null
+
+function Repair-ProcessPathEnvironment {
+  if (-not $IsWindowsHost) {
+    return
+  }
+
+  $processVars = [System.Environment]::GetEnvironmentVariables()
+  $pathValue = $null
+  $hasCanonicalPath = $false
+  $hasUpperPath = $false
+
+  foreach ($key in $processVars.Keys) {
+    $name = [string]$key
+    if ($name -ceq "Path") {
+      $hasCanonicalPath = $true
+      $pathValue = [string]$processVars[$key]
+    }
+    elseif ($name -ceq "PATH") {
+      $hasUpperPath = $true
+      if ([string]::IsNullOrWhiteSpace($pathValue)) {
+        $pathValue = [string]$processVars[$key]
+      }
+    }
+  }
+
+  if ($hasCanonicalPath -and $hasUpperPath) {
+    [System.Environment]::SetEnvironmentVariable("Path", $pathValue, "Process")
+    [System.Environment]::SetEnvironmentVariable("PATH", $null, "Process")
+  }
+}
+
+Repair-ProcessPathEnvironment
 
 function Require-NativeCommand {
   param([string]$Name)
@@ -35,7 +73,13 @@ function Invoke-NativeOrThrow {
   param([string]$Command,[string[]]$Arguments)
 
   & $Command @Arguments
-  if ($LASTEXITCODE -ne 0) {
+  $exitCode = if (Get-Variable -Name LASTEXITCODE -Scope Global -ErrorAction SilentlyContinue) {
+    $global:LASTEXITCODE
+  }
+  else {
+    0
+  }
+  if ($exitCode -ne 0) {
     throw "Command failed: $Command $($Arguments -join ' ')"
   }
 }
@@ -57,7 +101,7 @@ function Invoke-NativeCapture {
     RedirectStandardOutput = $stdoutPath
     RedirectStandardError = $stderrPath
   }
-  if ($IsWindows) {
+  if ($IsWindowsHost) {
     $startProcessArgs.WindowStyle = 'Hidden'
   }
   $process = Start-Process @startProcessArgs
@@ -434,24 +478,26 @@ function Get-TypstFailureCause {
   )
 
   $errorText = "$Stderr`n$Body"
-  if ($errorText -match '(?is)<iframe\b|graf--iframe|youtube\.com|youtu\.be|spotify\.com|soundcloud\.com|Web-only embed') {
-    return "embed"
+  $hasImagePlaceholder = $errorText -match 'Image kept on web edition only\.'
+  $hasImageLookupFailure = ($Stderr -match '(?is)error:\s+file not found') -and ($errorText -match '(?is)image\("')
+  if ($hasImagePlaceholder -or $hasImageLookupFailure) {
+    return "image_ref"
   }
 
-  if ((Get-TextArtifactScore -Value $errorText) -gt 0) {
-    return "mojibake"
+  if ($errorText -match '(?is)<iframe\b|graf--iframe|youtube\.com|youtu\.be|spotify\.com|soundcloud\.com|Web-only embed|\[Embedded media:') {
+    return "embed"
   }
 
   if ($errorText -match '(?is)<(?:div|span|figure|figcaption|iframe|picture|video|audio|details|summary|section|article)\b') {
     return "raw_html"
   }
 
-  if ($errorText -match '(?is)image\("|Image kept on web edition only\.') {
-    return "image_ref"
-  }
-
   if ($null -ne $Profile -and $Profile.RawHtmlScore -ge 14) {
     return "raw_html"
+  }
+
+  if ((Get-TextArtifactScore -Value $errorText) -gt 0) {
+    return "mojibake"
   }
 
   return "unknown"
@@ -520,7 +566,52 @@ function Get-RelativePathBetween {
   param([string]$FromPath,[string]$ToPath)
 
   $fromDirectory = Split-Path -Path $FromPath -Parent
-  return ([System.IO.Path]::GetRelativePath($fromDirectory, $ToPath) -replace '\\', '/')
+  $getRelativePath = [System.IO.Path].GetMethod('GetRelativePath', [Type[]]@([string], [string]))
+  if ($null -ne $getRelativePath) {
+    return ([System.IO.Path]::GetRelativePath($fromDirectory, $ToPath) -replace '\\', '/')
+  }
+
+  $fromResolved = [System.IO.Path]::GetFullPath($fromDirectory)
+  $toResolved = [System.IO.Path]::GetFullPath($ToPath)
+  if (-not $fromResolved.EndsWith([System.IO.Path]::DirectorySeparatorChar)) {
+    $fromResolved += [System.IO.Path]::DirectorySeparatorChar
+  }
+
+  $fromUri = [System.Uri]::new($fromResolved)
+  $toUri = [System.Uri]::new($toResolved)
+  $relativeUri = $fromUri.MakeRelativeUri($toUri)
+  if ($relativeUri.IsAbsoluteUri) {
+    return ($toResolved -replace '\\', '/')
+  }
+
+  return ([System.Uri]::UnescapeDataString($relativeUri.ToString()) -replace '\\', '/')
+}
+
+function Get-TypstPlaceholderBlock {
+  return '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#emph[Image kept on web edition only.]]]'
+}
+
+function Resolve-TypstStaticAssetPath {
+  param(
+    [string]$AssetPath,
+    [string]$TypstSourcePath
+  )
+
+  if ([string]::IsNullOrWhiteSpace($AssetPath) -or -not $AssetPath.StartsWith('/')) {
+    return ""
+  }
+
+  $candidate = Join-Path $RepoRoot ("static/" + $AssetPath.TrimStart('/'))
+  try {
+    $resolved = [System.IO.Path]::GetFullPath($candidate)
+    if (Test-Path -Path $resolved -PathType Leaf) {
+      return Get-RelativePathBetween -FromPath $TypstSourcePath -ToPath $resolved
+    }
+  }
+  catch {
+  }
+
+  return ""
 }
 
 function Get-SectionFromFile {
@@ -1056,16 +1147,30 @@ function Normalize-TypstBody {
   $placeholderState = @{
     Count = 0
   }
+  $staticAssetState = @{
+    Rewrites = 0
+  }
 
   $body = $body -replace '(?m)^#horizontalrule\s*$', ''
   $body = $body -replace '(?m)^#line\(length: 100%\)\s*$', ''
   $body = [regex]::Replace($body, '#box\(image\("https?://[^"\r\n]+"\)\)', {
       $placeholderState.Count++
-      '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#set text(size: 9pt, style: "italic", fill: luma(120))[Image kept on web edition only.]]]'
+      Get-TypstPlaceholderBlock
     })
   $body = [regex]::Replace($body, '#image\("https?://[^"\r\n]+"\)', {
       $placeholderState.Count++
-      '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#set text(size: 9pt, style: "italic", fill: luma(120))[Image kept on web edition only.]]]'
+      Get-TypstPlaceholderBlock
+    })
+  $body = [regex]::Replace($body, 'image\("(?<path>/[^"\r\n]+)"\)', {
+      param($match)
+
+      $resolved = Resolve-TypstStaticAssetPath -AssetPath $match.Groups['path'].Value -TypstSourcePath $Path
+      if ([string]::IsNullOrWhiteSpace($resolved)) {
+        return $match.Value
+      }
+
+      $staticAssetState.Rewrites++
+      return ('image("{0}")' -f $resolved)
     })
   $body = [regex]::Replace($body, '#cite\([^\)]*\)', '')
   $body = [regex]::Replace($body, '(?ms)#block\[\s*[^#\[\]]*?www\.[^\]]*?\]', '')
@@ -1078,7 +1183,7 @@ function Normalize-TypstBody {
   $body = [regex]::Replace($body, '(?m)^[^\p{L}\p{N}\[]+(?=Read the full (?:opinion|report) \(PDF\))', '')
   $body = $body.Replace([string][char]0x00C2, '')
   $body = $body.Replace([string][char]0xFFFD, '')
-  $body = [regex]::Replace($body, '(?m)^\s*Image kept on web edition only\.\s*$', '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#set text(size: 9pt, style: "italic", fill: luma(120))[Image kept on web edition only.]]]')
+  $body = [regex]::Replace($body, '(?m)^\s*Image kept on web edition only\.\s*$', (Get-TypstPlaceholderBlock))
 
   if (-not [string]::IsNullOrWhiteSpace($Title)) {
     $escapedTitle = [regex]::Escape((Repair-CommonTextArtifacts -Value $Title).Trim())
@@ -1103,6 +1208,7 @@ function Normalize-TypstBody {
     Body = $body
     HeadingCount = $headingCount
     PlaceholderCount = $placeholderState.Count
+    StaticAssetRewriteCount = $staticAssetState.Rewrites
   }
 }
 
@@ -1364,20 +1470,26 @@ foreach ($file in $mdFiles) {
   $references = Get-ReferenceEntries -Raw $raw -FrontMatter $frontMatter
   $buildMeta = [ordered]@{
     slug = $slug
+    source_file = $file.FullName
+    source_relative_path = (Get-RelativePath -RootPath $ContentRoot -FullPath $file.FullName)
     engine = $engine
     variant = $variant
+    output_path = [System.IO.Path]::GetFullPath($pdfPath)
     auto_engine_selected = $autoEngineSelected
     raw_html_score = $complexityProfile.RawHtmlScore
+    result = "pending"
     render_status = "unknown"
     show_toc = $false
     placeholder_count = 0
+    static_asset_rewrites = 0
     omitted_remote_images = 0
     localized_remote_images = 0
     embed_count = $complexityProfile.EmbedCount
     local_image_count = 0
-    reference_count = $references.Count
+    reference_count = @($references).Count
     failure_cause = ""
     failure_detail = ""
+    failure_message = ""
     failure_stderr = ""
     warnings = @()
   }
@@ -1454,6 +1566,7 @@ foreach ($file in $mdFiles) {
 
   $normalizedBody = Normalize-TypstBody -Path $typBodyPath -Title $title -Subtitle $subtitle
   $buildMeta.placeholder_count = $normalizedBody.PlaceholderCount
+  $buildMeta.static_asset_rewrites = $normalizedBody.StaticAssetRewriteCount
   $referencesContent = Get-ReferencesTypContent -References $references
   Write-Utf8Text -Path $typRefsPath -Value $referencesContent
 
@@ -1524,7 +1637,9 @@ foreach ($file in $mdFiles) {
   ) -CaptureStem "$safeSlug.primary-compile"
 
   if ($primaryCompile.ExitCode -eq 0 -and (Test-Path -Path $pdfPath -PathType Leaf)) {
+    $buildMeta.result = "success"
     $buildMeta.render_status = "primary"
+    $buildMeta.failure_message = ""
     Write-Host "Built: $pdfPath" -ForegroundColor Green
   }
   else {
@@ -1601,7 +1716,9 @@ foreach ($file in $mdFiles) {
       throw "Fallback PDF compile failed for '$slug'. $fallbackDetail"
     }
 
+    $buildMeta.result = "success"
     $buildMeta.render_status = "fallback"
+    $buildMeta.failure_message = "Primary Typst render failed: $($buildMeta.failure_detail). A simplified archival edition was generated."
     $buildMeta.warnings += "fallback_render"
     Write-Host "Built (fallback): $pdfPath" -ForegroundColor Yellow
   }
@@ -1619,9 +1736,11 @@ if ($htmlJobs.Count -gt 0) {
     }
 
     $buildMeta = $job.build_meta
+    $buildMeta.result = "success"
     $buildMeta.render_status = "primary"
     $buildMeta.source_path = [string]$result.route
     $buildMeta.source_url = [string]$result.url
+    $buildMeta.failure_message = ""
     Write-JsonFile -Path $job.build_meta_path -Value $buildMeta
     Write-Host "Built (html): $($job.pdf_path)" -ForegroundColor Green
   }
