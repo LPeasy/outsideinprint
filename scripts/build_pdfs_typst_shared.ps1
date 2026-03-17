@@ -1256,9 +1256,8 @@ function Get-HtmlRenderUnavailableReason {
   }
 
   $probe = Invoke-NativeCapture -Command "node" -Arguments @(
-    '--input-type=module',
-    '-e',
-    "import('playwright').then(async ({ chromium }) => { const browser = await chromium.launch({ headless: true }); await browser.close(); }).catch((error) => { console.error(error && error.message ? error.message : String(error)); process.exit(1); });"
+    $HtmlRendererScript,
+    '--probe'
   ) -CaptureStem "html-renderer-probe"
 
   if ($probe.ExitCode -eq 0) {

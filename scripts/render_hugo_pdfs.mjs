@@ -22,14 +22,21 @@ const MIME_TYPES = new Map([
   [".xml", "application/xml; charset=utf-8"]
 ]);
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const args = {};
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index];
     if (!value.startsWith("--")) {
       continue;
     }
-    args[value.slice(2)] = argv[index + 1];
+
+    const nextValue = argv[index + 1];
+    if (!nextValue || nextValue.startsWith("--")) {
+      args[value.slice(2)] = true;
+      continue;
+    }
+
+    args[value.slice(2)] = nextValue;
     index += 1;
   }
   return args;
@@ -165,8 +172,18 @@ export async function renderPdfBatch(manifest) {
   }
 }
 
+export async function probePlaywright() {
+  const browser = await chromium.launch({ headless: true });
+  await browser.close();
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (args.probe) {
+    await probePlaywright();
+    return;
+  }
+
   if (!args.manifest) {
     throw new Error("Missing --manifest <path>.");
   }

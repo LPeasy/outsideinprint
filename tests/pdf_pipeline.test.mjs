@@ -77,6 +77,14 @@ test("README documents the browser-print workflow for html PDFs", () => {
   assert.match(readme, /pdf_engine: typst \| html/);
 });
 
+test("renderer script supports a bare --probe flag without consuming the next argument", async () => {
+  const renderer = await import("../scripts/render_hugo_pdfs.mjs");
+  const parsed = renderer.parseArgs(["--probe", "--manifest", "fixture.json"]);
+
+  assert.equal(parsed.probe, true);
+  assert.equal(parsed.manifest, "fixture.json");
+});
+
 test("print CSS hides site chrome while leaving edition metadata visible", () => {
   const css = fs.readFileSync(cssPath, "utf8");
 
