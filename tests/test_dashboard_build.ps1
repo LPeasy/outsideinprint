@@ -70,6 +70,24 @@ try {
       throw "Fixture '$fixture' build output still double-encodes dashboard-data as a JSON string."
     }
 
+    $payloadMatch = [regex]::Match($html, '<script id="dashboard-data" type="application/json">(.*?)</script>', [System.Text.RegularExpressions.RegexOptions]::Singleline)
+    if (-not $payloadMatch.Success) {
+      throw "Fixture '$fixture' build output is missing the dashboard-data payload."
+    }
+
+    try {
+      $payload = $payloadMatch.Groups[1].Value | ConvertFrom-Json
+    }
+    catch {
+      throw "Fixture '$fixture' dashboard-data payload is not valid JSON."
+    }
+
+    foreach ($key in @("overview", "essays", "sections", "timeseries_daily", "journeys")) {
+      if ($null -eq $payload.PSObject.Properties[$key]) {
+        throw "Fixture '$fixture' dashboard-data payload is missing key '$key'."
+      }
+    }
+
     $invalidPatterns = @{
       "NaN" = '(?<![A-Za-z0-9+/=])NaN(?![A-Za-z0-9+/=])'
       "undefined" = '(?<![A-Za-z0-9+/=])undefined(?![A-Za-z0-9+/=])'

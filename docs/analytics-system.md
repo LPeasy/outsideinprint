@@ -31,7 +31,7 @@ The analytics path is:
    - `data/analytics/journey_by_collection.json`
    - `data/analytics/journey_by_essay.json`
    - `data/analytics/sources_timeseries.json`
-5. The workflow commits changed snapshot files and then explicitly dispatches `publish-dashboard.yml`.
+5. The workflow commits changed snapshot files to `main`.
 6. `publish-dashboard.yml` builds the dashboard with `hugo-dashboard.toml` and publishes it to `LPeasy/OutsideInPrintDashboard`.
 
 The public reading site and the dashboard stay separate:
@@ -137,6 +137,22 @@ The current GoatCounter-based meanings are:
 - `journey_by_source.json`, `journey_by_collection.json`, and `journey_by_essay.json` are rollups of those same measured pageview anchors plus approximate downstream events
 - `timeseries_daily.json` is date-filled only across the exported range; missing days inside that range render as explicit zero rows
 
+## Analytics Contract
+
+The dashboard now treats the analytics handoff as one shared contract across three boundaries:
+
+1. `scripts/import_analytics.ps1` writes normalized snapshot files in `data/analytics/*.json`
+2. [`layouts/partials/dashboard/render.html`](C:\Users\lawto\OneDrive\Desktop\OutsideInPrint\outsideinprint\layouts\partials\dashboard\render.html) emits those snapshots into the inline `dashboard-data` payload
+3. [`assets/js/dashboard-core.mjs`](C:\Users\lawto\OneDrive\Desktop\OutsideInPrint\outsideinprint\assets\js\dashboard-core.mjs) normalizes that payload for runtime filtering and drill-down rendering
+
+Contract rules:
+
+- `dashboard-data` must be emitted as a JSON object payload, not as a JSON string literal
+- required payload keys are checked in the build smoke test: `overview`, `essays`, `sections`, `timeseries_daily`, and `journeys`
+- snapshot files must stay valid JSON and must not contain `NaN` or `undefined`
+- section taxonomy is canonicalized at import and runtime so legacy drift like `Essay` vs `Essays` collapses into `Essays`
+- the runtime still defensively double-parses `dashboard-data` if it ever arrives as a string again, but that path is compatibility protection rather than the intended contract
+
 ## Dashboard Drill-Down State
 
 Dashboard V2 keeps drill-down exploration shareable through query-string state rather than a live API.
@@ -150,19 +166,32 @@ These controls only change presentation state in the static dashboard. They do n
 
 ## Maintainer Validation
 
-For local hardening checks, the smallest useful validation loop is:
+For local hardening checks, the preferred single entry point is:
+
+```powershell
+pwsh -File ./scripts/verify_dashboard.ps1
+```
+
+That script runs the full verification sequence when the required tools are present and reports any checks it had to skip.
+
+The underlying validation loop is:
 
 1. `pwsh -File ./tests/test_analytics_import.ps1`
 2. `pwsh -File ./tests/test_analytics_snapshot_contract.ps1`
 3. `node --test tests/*.test.mjs`
 4. `pwsh -File ./tests/test_dashboard_build.ps1`
+5. `hugo --config hugo-dashboard.toml --gc --minify --destination .dashboard-public`
+6. `hugo --minify --baseURL "https://lpeasy.github.io/outsideinprint/"`
+7. `pwsh -File ./tests/test_dashboard_browser_smoke.ps1`
 
 What each step protects:
 
 - the import test verifies the ETL still emits the expected normalized files
 - the snapshot contract test fails fast if a required JSON snapshot is missing, empty, malformed, or contains `NaN` / `undefined`
-- the Node test suite covers empty, sparse, rich, malformed-but-recoverable, filter, journey, and drill-down logic
-- the Hugo smoke build checks that the static dashboard still renders expected explorer sections without leaking invalid values into HTML
+- the snapshot contract test also checks the required field shape for each snapshot type and catches duplicate canonical section labels
+- the Node test suite covers empty, sparse, rich, malformed-but-recoverable, filter, journey, drill-down, and section-taxonomy normalization logic
+- the Hugo smoke build checks that the static dashboard still renders expected explorer sections without leaking invalid values into HTML or a malformed `dashboard-data` payload
+- the browser smoke test verifies that the built site actually hydrates in a real browser and honors a shareable drill-down query state
 
 The dashboard intentionally stays conservative when sample sizes are tiny:
 
@@ -273,7 +302,9 @@ Dashboard V2 smoke tests:
 ```powershell
 node --test .\tests\dashboard_v2_logic.test.mjs
 powershell -ExecutionPolicy Bypass -File .\tests\test_analytics_import.ps1
+powershell -ExecutionPolicy Bypass -File .\tests\test_analytics_snapshot_contract.ps1
 powershell -ExecutionPolicy Bypass -File .\tests\test_dashboard_build.ps1
+powershell -ExecutionPolicy Bypass -File .\tests\test_dashboard_browser_smoke.ps1
 ```
 
 Local public-site tracking test:
@@ -299,8 +330,8 @@ It also preserves:
 - step-summary reporting
 - cleanup of temporary working folders
 - no-op commits when `data/analytics` has not changed
-- explicit dispatch of `publish-dashboard.yml` after a successful data refresh
-- minimum required workflow permissions for commit + dispatch
+- automatic dashboard publish via the normal push-to-main trigger when analytics files changed
+- minimum required workflow permissions for committing refreshed snapshots
 
 What it does:
 
@@ -308,7 +339,7 @@ What it does:
 2. Fetches a GoatCounter export into `./.analytics-refresh/raw`
 3. Runs `scripts/import_analytics.ps1`
 4. Commits `data/analytics` only when the normalized files changed
-5. Dispatches `publish-dashboard.yml`
+5. Relies on the resulting push to `main` to trigger `publish-dashboard.yml`
 
 If configuration is missing, the workflow fails with an actionable message in both logs and the step summary.
 
@@ -322,7 +353,7 @@ GitHub Actions:
 4. Choose `Run workflow`
 5. Review the step summary for either:
    - `No analytics changes detected.`
-   - a refreshed snapshot commit plus a triggered dashboard publish
+  - a refreshed snapshot commit that triggers the normal dashboard publish workflow
 
 Local ETL run from a raw GoatCounter export folder:
 
@@ -576,8 +607,8 @@ Dashboard freshness looks stale:
 
 No publish after refresh:
 
-- `publish-dashboard.yml` is dispatched only when `data/analytics` changed.
-- If the refresh workflow says `No analytics changes detected.`, the dashboard publish step is correctly skipped.
+- `publish-dashboard.yml` runs on pushes to `main` that touch the dashboard inputs, including `data/analytics/**`.
+- If the refresh workflow says `No analytics changes detected.`, no new push is created and the dashboard publish workflow is correctly not triggered.
 
 SSH publish failure:
 

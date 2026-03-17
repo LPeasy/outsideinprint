@@ -27,8 +27,44 @@ permissions:
   contents: read
 
 jobs:
+  browser_smoke:
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Source Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo (extended)
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.157.0"
+          extended: true
+
+      - name: Build Dashboard Site For Browser Smoke
+        shell: pwsh
+        run: |
+          $destination = Join-Path (Get-Location) ".dashboard-public-browser"
+          $baseUrl = ([System.Uri]((Resolve-Path .).Path + [System.IO.Path]::DirectorySeparatorChar + ".dashboard-public-browser" + [System.IO.Path]::DirectorySeparatorChar)).AbsoluteUri
+          hugo --config hugo-dashboard.toml --gc --minify --baseURL $baseUrl --destination .dashboard-public-browser
+
+      - name: Run Dashboard Browser Smoke Test
+        shell: pwsh
+        run: ./tests/test_dashboard_browser_smoke.ps1 -SiteDir ./.dashboard-public-browser
+
+      - name: Upload Browser Smoke Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-browser-smoke
+          path: |
+            .tmp-dashboard-browser-smoke
+            .dashboard-public-browser
+          if-no-files-found: ignore
+
   publish:
     # The dashboard is published from a separate repo so the public reading site never exposes /dashboard/.
+    needs: browser_smoke
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -80,10 +116,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-
-      - name: Validate Committed Analytics Snapshot Contract
-        shell: pwsh
-        run: ./tests/test_analytics_snapshot_contract.ps1
 
       - name: Run Dashboard Logic Tests
         shell: bash

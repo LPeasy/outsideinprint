@@ -37,6 +37,32 @@ function asArray(value) {
   return Array.isArray(value) ? value : [];
 }
 
+function normalizeSectionLabel(value, fallback = "Unlabeled") {
+  const text = safeText(value).trim();
+  if (!text) {
+    return fallback;
+  }
+
+  const normalized = text.toLowerCase();
+  if (normalized === "essay" || normalized === "essays") {
+    return "Essays";
+  }
+  if (normalized === "book" || normalized === "books") {
+    return "Books";
+  }
+  if (normalized === "working paper" || normalized === "working papers" || normalized === "working-paper" || normalized === "working-papers") {
+    return "Working Papers";
+  }
+  if (normalized === "syd and oliver" || normalized === "syd & oliver") {
+    return "Syd and Oliver";
+  }
+  if (normalized === "collection" || normalized === "collections") {
+    return "Collections";
+  }
+
+  return text;
+}
+
 function sortByDate(rows) {
   return [...rows].sort((left, right) => safeText(left.date).localeCompare(safeText(right.date)));
 }
@@ -175,7 +201,7 @@ function normalizeJourneyMetricRow(row, labelField) {
     discovery_mode: safeText(row.discovery_mode),
     module_slot: safeText(row.module_slot),
     collection: safeText(row.collection),
-    section: safeText(row.section, "Unlabeled"),
+    section: normalizeSectionLabel(row.section),
     slug: safeText(row.slug),
     path: safeText(row.path),
     title: safeText(row.title, safeText(row[labelField], "Untitled")),
@@ -199,7 +225,7 @@ function normalizeEssay(row, essaySeriesMap) {
     slug: safeText(row.slug),
     path,
     title: safeText(row.title, "Untitled"),
-    section: safeText(row.section, "Unlabeled"),
+    section: normalizeSectionLabel(row.section),
     views,
     reads,
     read_rate: safeNumber(row.read_rate) || rateMetric(reads, views),
@@ -230,16 +256,36 @@ export function normalizeDashboardData(raw = {}) {
   );
 
   const essays = asArray(raw.essays).map((row) => normalizeEssay(row, essaySeriesMap));
-  const sections = asArray(raw.sections).map((row) => ({
-    section: safeText(row.section, "Unlabeled"),
-    pageviews: safeNumber(row.pageviews || row.views),
-    reads: safeNumber(row.reads),
-    read_rate: safeNumber(row.read_rate),
-    pdf_downloads: safeNumber(row.pdf_downloads),
-    newsletter_submits: safeNumber(row.newsletter_submits),
-    sparkline_pageviews: Array.isArray(row.sparkline_pageviews) ? row.sparkline_pageviews.map(safeNumber) : [],
-    sparkline_reads: Array.isArray(row.sparkline_reads) ? row.sparkline_reads.map(safeNumber) : []
-  }));
+  const sectionMap = asArray(raw.sections).reduce((map, row) => {
+    const section = normalizeSectionLabel(row.section);
+    const existing = map.get(section) || {
+      section,
+      pageviews: 0,
+      reads: 0,
+      pdf_downloads: 0,
+      newsletter_submits: 0,
+      sparkline_pageviews: [],
+      sparkline_reads: []
+    };
+    const nextViews = Array.isArray(row.sparkline_pageviews) ? row.sparkline_pageviews.map(safeNumber) : [];
+    const nextReads = Array.isArray(row.sparkline_reads) ? row.sparkline_reads.map(safeNumber) : [];
+    const sparklineLength = Math.max(existing.sparkline_pageviews.length, nextViews.length);
+
+    existing.pageviews += safeNumber(row.pageviews || row.views);
+    existing.reads += safeNumber(row.reads);
+    existing.pdf_downloads += safeNumber(row.pdf_downloads);
+    existing.newsletter_submits += safeNumber(row.newsletter_submits);
+    existing.sparkline_pageviews = Array.from({ length: sparklineLength }, (_, index) => safeNumber(existing.sparkline_pageviews[index]) + safeNumber(nextViews[index]));
+    existing.sparkline_reads = Array.from({ length: sparklineLength }, (_, index) => safeNumber(existing.sparkline_reads[index]) + safeNumber(nextReads[index]));
+    map.set(section, existing);
+    return map;
+  }, new Map());
+  const sections = [...sectionMap.values()]
+    .map((row) => ({
+      ...row,
+      read_rate: safeNumber(row.pageviews) > 0 ? rateMetric(row.reads, row.pageviews) : 0
+    }))
+    .sort((left, right) => right.pageviews - left.pageviews || right.reads - left.reads);
 
   const journeys = asArray(raw.journeys).map((row) => ({
     discovery_source: safeText(row.discovery_source, "Direct"),
@@ -250,7 +296,7 @@ export function normalizeDashboardData(raw = {}) {
     slug: safeText(row.slug),
     path: safeText(row.path),
     title: safeText(row.title, "Untitled"),
-    section: safeText(row.section, "Unlabeled"),
+    section: normalizeSectionLabel(row.section),
     views: safeNumber(row.views),
     reads: safeNumber(row.reads),
     pdf_downloads: safeNumber(row.pdf_downloads),
@@ -316,6 +362,10 @@ export function createState(data, query = "") {
   });
 
   if (!data.sectionOptions.includes(state.section) && state.section !== "all") {
+    state.section = normalizeSectionLabel(state.section, "");
+  }
+
+  if (!data.sectionOptions.includes(state.section) && state.section !== "all") {
     state.section = "all";
   }
 
@@ -327,11 +377,12 @@ export function createState(data, query = "") {
     state.metric = DEFAULT_STATE.metric;
   }
 
+  state.selectedSection = normalizeSectionLabel(state.selectedSection, "");
   if (!data.sectionOptions.includes(state.selectedSection)) {
     state.selectedSection = "";
   }
 
-  state.compareSections = normalizeList(state.compareSections, data.sectionOptions);
+  state.compareSections = normalizeList(state.compareSections.map((value) => normalizeSectionLabel(value, "")), data.sectionOptions);
 
   const essayPaths = data.essays.map((row) => row.path);
   if (!essayPaths.includes(state.selectedEssay)) {

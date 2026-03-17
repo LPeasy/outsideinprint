@@ -54,6 +54,10 @@ try {
     throw "Expected an Essays section summary."
   }
 
+  if (@($sections | Group-Object section | Where-Object { $_.Count -gt 1 }).Count -gt 0) {
+    throw "Expected importer output to collapse duplicate section labels."
+  }
+
   if (-not (@($journeys | Where-Object { $_.discovery_type -eq "internal-module" }).Count -ge 1)) {
     throw "Expected at least one inferred internal-module journey."
   }

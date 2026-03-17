@@ -155,6 +155,27 @@ function Convert-ToText {
   return $text.Trim()
 }
 
+function Normalize-SectionLabel {
+  param(
+    [object]$Value,
+    [string]$Fallback = "Unlabeled"
+  )
+
+  $text = Convert-ToText $Value
+  if (-not $text) {
+    return $Fallback
+  }
+
+  switch -Regex ($text.Trim().ToLowerInvariant()) {
+    '^essay(s)?$' { return "Essays" }
+    '^book(s)?$' { return "Books" }
+    '^working[\s-]?paper(s)?$' { return "Working Papers" }
+    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "Syd and Oliver" }
+    '^collection(s)?$' { return "Collections" }
+    default { return $text.Trim() }
+  }
+}
+
 $SiteBasePath = Convert-ToText $env:GOATCOUNTER_SITE_BASE_PATH "/outsideinprint"
 $PublicSiteUrl = Convert-ToText $env:GOATCOUNTER_PUBLIC_SITE_URL "https://lpeasy.github.io/outsideinprint/"
 $PublicSiteUri = $null
@@ -752,7 +773,7 @@ function Convert-GoatCounterRow {
     $title = Get-TitleFallbackFromPath -Path $contentPath
   }
 
-  $section = Convert-ToText $metadata["section"]
+  $section = Normalize-SectionLabel -Value $metadata["section"] -Fallback ""
   if (-not $section -and $contentPath) {
     $section = Get-SectionLabelFromPath -Path $contentPath
   }
@@ -1041,7 +1062,7 @@ function Get-GoatCounterEssays {
         slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
         path = $row.content_path
         title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
-        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        section = Normalize-SectionLabel -Value $row.section -Fallback (Get-SectionLabelFromPath -Path $row.content_path)
         views = 0.0
         reads = 0.0
         pdf_downloads = 0.0
@@ -1064,7 +1085,7 @@ function Get-GoatCounterEssays {
         slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
         path = $row.content_path
         title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
-        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        section = Normalize-SectionLabel -Value $row.section -Fallback (Get-SectionLabelFromPath -Path $row.content_path)
         views = 0.0
         reads = 0.0
         pdf_downloads = 0.0
@@ -1333,7 +1354,7 @@ function Get-GoatCounterSections {
   $dateKeys = Get-DateRangeKeys -Rows @($PageRows + $EventRows)
 
   foreach ($row in $PageRows | Where-Object { $_.content_path -match $EssayPathPattern }) {
-    $section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+    $section = Normalize-SectionLabel -Value $row.section -Fallback (Get-SectionLabelFromPath -Path $row.content_path)
     if (-not $section) {
       continue
     }
@@ -1358,7 +1379,7 @@ function Get-GoatCounterSections {
   }
 
   foreach ($row in $EventRows | Where-Object { $_.content_path -match $EssayPathPattern }) {
-    $section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+    $section = Normalize-SectionLabel -Value $row.section -Fallback (Get-SectionLabelFromPath -Path $row.content_path)
     if (-not $section) {
       continue
     }
@@ -1429,7 +1450,7 @@ function Get-GoatCounterEssayTimeseries {
         slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
         path = $row.content_path
         title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
-        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        section = Normalize-SectionLabel -Value $row.section -Fallback (Get-SectionLabelFromPath -Path $row.content_path)
         daily = @{}
         views = 0.0
       }
@@ -1448,7 +1469,7 @@ function Get-GoatCounterEssayTimeseries {
         slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
         path = $row.content_path
         title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
-        section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+        section = Normalize-SectionLabel -Value $row.section -Fallback (Get-SectionLabelFromPath -Path $row.content_path)
         daily = @{}
         views = 0.0
       }
@@ -1544,7 +1565,7 @@ function Get-GoatCounterJourneys {
             slug = Convert-ToText $row.slug (Get-SlugFromPath -Path $row.content_path)
             path = $row.content_path
             title = Convert-ToText $row.title (Get-TitleFallbackFromPath -Path $row.content_path)
-            section = Convert-ToText $row.section (Get-SectionLabelFromPath -Path $row.content_path)
+            section = Normalize-SectionLabel -Value $row.section -Fallback (Get-SectionLabelFromPath -Path $row.content_path)
             views = 0.0
             reads = 0.0
             pdf_downloads = 0.0
@@ -1633,7 +1654,7 @@ function Get-GoatCounterJourneyByCollection {
     $mode = Convert-ToText $row.discovery_mode
     $slot = Convert-ToText $row.module_slot
     $collection = Convert-ToText $row.collection
-    $section = Convert-ToText $row.section
+    $section = Normalize-SectionLabel -Value $row.section -Fallback ""
     $key = Get-Key @($label, $slot, $collection, $section)
     if (-not $aggregateMap.ContainsKey($key)) {
       $aggregateMap[$key] = New-JourneyAggregate -Label $label -DiscoveryType $type -DiscoveryMode $mode -ModuleSlot $slot -Collection $collection -Section $section
@@ -1661,7 +1682,7 @@ function Get-GoatCounterJourneyByEssay {
     $path = Convert-ToText $row.path
     $key = Get-Key @($slug, $path)
     if (-not $aggregateMap.ContainsKey($key)) {
-      $aggregateMap[$key] = New-JourneyAggregate -Label (Convert-ToText $row.title "Untitled") -Section (Convert-ToText $row.section) -Slug $slug -Path $path -Title (Convert-ToText $row.title "Untitled")
+      $aggregateMap[$key] = New-JourneyAggregate -Label (Convert-ToText $row.title "Untitled") -Section (Normalize-SectionLabel -Value $row.section -Fallback "Unlabeled") -Slug $slug -Path $path -Title (Convert-ToText $row.title "Untitled")
     }
 
     $aggregateMap[$key].views += Convert-ToNumber $row.views
@@ -1846,7 +1867,7 @@ function Normalize-Essays {
   foreach ($row in $rows) {
     $slug = Convert-ToText (Get-FieldValue -Row $row -Aliases @("slug", "page_slug"))
     $title = Convert-ToText (Get-FieldValue -Row $row -Aliases @("title", "page_title"))
-    $section = Convert-ToText (Get-FieldValue -Row $row -Aliases @("section", "section_label")) "Essays"
+    $section = Normalize-SectionLabel -Value (Get-FieldValue -Row $row -Aliases @("section", "section_label")) -Fallback "Essays"
     $path = Convert-ToText (Get-FieldValue -Row $row -Aliases @("path", "rel_permalink", "permalink"))
 
     if (-not $path -and $slug) {
@@ -1992,7 +2013,7 @@ function Normalize-Sections {
       return ,@(
         foreach ($row in $rows) {
           [ordered]@{
-            section = Convert-ToText (Get-FieldValue -Row $row -Aliases @("section"))
+            section = Normalize-SectionLabel -Value (Get-FieldValue -Row $row -Aliases @("section"))
             pageviews = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pageviews", "views"))
             reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
             read_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("read_rate"))
@@ -2008,7 +2029,7 @@ function Normalize-Sections {
 
   $sectionMap = @{}
   foreach ($essay in $Essays) {
-    $section = Convert-ToText $essay.section "Unlabeled"
+    $section = Normalize-SectionLabel -Value $essay.section -Fallback "Unlabeled"
     if (-not $sectionMap.ContainsKey($section)) {
       $sectionMap[$section] = @{
         section = $section

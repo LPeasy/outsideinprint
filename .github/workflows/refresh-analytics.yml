@@ -7,9 +7,7 @@ on:
 
 permissions:
   # contents: write is required to commit refreshed data/analytics snapshots.
-  # actions: write is required to dispatch the existing dashboard publish workflow.
   contents: write
-  actions: write
 
 concurrency:
   group: refresh-analytics
@@ -20,7 +18,7 @@ jobs:
     # ETL pipeline:
     # 1. Extract raw analytics from GoatCounter.
     # 2. Transform them into the repo's normalized Hugo data model.
-    # 3. Load only changed snapshots into git, then dispatch the static dashboard publish workflow.
+    # 3. Commit only changed snapshots; the push to main triggers the static dashboard publish workflow.
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -120,21 +118,6 @@ jobs:
           git commit -m "Refresh analytics snapshot"
           git push origin HEAD:main
 
-      - name: Trigger Dashboard Publish
-        if: steps.commit.outputs.changed == 'true'
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl --fail --silent --show-error \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/publish-dashboard.yml/dispatches \
-            -d '{"ref":"main"}'
-          echo "Triggered publish-dashboard.yml for the refreshed analytics snapshot." >> "$GITHUB_STEP_SUMMARY"
-
       - name: Refresh Summary
         if: always()
         shell: bash
@@ -142,3 +125,4 @@ jobs:
           set -euo pipefail
           site_url="${GOATCOUNTER_SITE_URL:-https://outsideinprint.goatcounter.com}"
           echo "Analytics refresh finished for ${site_url}." >> "$GITHUB_STEP_SUMMARY"
+          echo "Dashboard publish runs automatically on the resulting push to main when analytics files change." >> "$GITHUB_STEP_SUMMARY"

@@ -167,3 +167,29 @@ test("tiny windows produce conservative insight copy", () => {
   assert.equal(model.insights.length, 1);
   assert.match(model.insights[0].title, /Sample still too small/);
 });
+
+test("section taxonomy is canonicalized across drifted snapshot labels", () => {
+  const model = buildDashboardModel({
+    overview: { pageviews: 2, reads: 1 },
+    essays: [
+      { path: "/essays/one/", slug: "one", title: "One", section: "Essays", views: 2, reads: 1, pdf_downloads: 0, primary_source: "direct" }
+    ],
+    sections: [
+      { section: "Essay", pageviews: 0, reads: 1, pdf_downloads: 0, newsletter_submits: 0, sparkline_pageviews: [0], sparkline_reads: [1] },
+      { section: "Essays", pageviews: 2, reads: 0, pdf_downloads: 0, newsletter_submits: 0, sparkline_pageviews: [2], sparkline_reads: [0] }
+    ]
+  });
+
+  assert.deepEqual(model.data.sectionOptions, ["Essays"]);
+  assert.equal(model.data.sections.length, 1);
+  assert.equal(model.data.sections[0].section, "Essays");
+  assert.equal(model.data.sections[0].reads, 1);
+  assert.equal(model.data.sections[0].pageviews, 2);
+});
+
+test("legacy section query aliases still resolve to canonical section state", () => {
+  const model = buildDashboardModel(loadFixture("rich"), "?section=Essay&selectedSection=Essay");
+
+  assert.equal(model.state.section, "Essays");
+  assert.equal(model.state.selectedSection, "Essays");
+});

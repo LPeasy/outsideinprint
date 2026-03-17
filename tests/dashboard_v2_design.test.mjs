@@ -47,7 +47,8 @@ test("dashboard JS renders refined hero-card and annotation classes", () => {
     "renderSectionExplorer",
     "renderEssayExplorer",
     "data-reset-drilldown",
-    "aria-pressed"
+    "aria-pressed",
+    "escapeHtml"
   ]) {
     assert.match(js, new RegExp(marker));
   }

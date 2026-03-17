@@ -2,29 +2,13 @@
   {
     "section": "Essays",
     "pageviews": 15.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
+    "reads": 2.0,
+    "read_rate": 13.3,
+    "pdf_downloads": 1.0,
     "newsletter_submits": 0.0,
     "sparkline_pageviews": [
       7.0,
       8.0
-    ],
-    "sparkline_reads": [
-      0.0,
-      0.0
-    ]
-  },
-  {
-    "section": "Essay",
-    "pageviews": 0.0,
-    "reads": 2.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0,
-    "sparkline_pageviews": [
-      0.0,
-      0.0
     ],
     "sparkline_reads": [
       0.0,

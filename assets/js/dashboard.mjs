@@ -9,6 +9,17 @@ import {
 
 const DOT = "&middot;";
 const MAX_COMPARE = 4;
+const HTML_ESCAPES = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;"
+};
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (character) => HTML_ESCAPES[character]);
+}
 
 function readJsonScript(id) {
   const node = document.getElementById(id);
@@ -104,9 +115,9 @@ function comparisonStrip(rows, type) {
             : metricSummary([`${row.pageviews} views`, `${row.read_rate.toFixed(1)}% read rate`, `${row.reads} reads`]);
           return `
             <article class="dashboard-compare-card">
-              <p class="dashboard-compare-card__eyebrow">${type === "essay" ? row.section : "Section comparison"}</p>
-              <h4>${title}</h4>
-              <p class="dashboard-compare-card__meta">${summary}</p>
+              <p class="dashboard-compare-card__eyebrow">${escapeHtml(type === "essay" ? row.section : "Section comparison")}</p>
+              <h4>${escapeHtml(title)}</h4>
+              <p class="dashboard-compare-card__meta">${escapeHtml(summary)}</p>
               ${sparkline(sparklineValues, "dashboard-inline-sparkline")}
             </article>
           `;
@@ -135,8 +146,8 @@ function renderKpis(root, model) {
       (metric) => `
         <article class="dashboard-kpi" aria-label="${metric.summary}">
           <div class="dashboard-kpi__header">
-            <p class="dashboard-kpi__label">${metric.label}</p>
-            <p class="dashboard-kpi__delta ${deltaTone(metric.deltaText)}">${metric.deltaText}</p>
+            <p class="dashboard-kpi__label">${escapeHtml(metric.label)}</p>
+            <p class="dashboard-kpi__delta ${deltaTone(metric.deltaText)}">${escapeHtml(metric.deltaText)}</p>
           </div>
           <p class="dashboard-kpi__value">${formatMetricValue(metric, metric.value)}</p>
           <p class="dashboard-kpi__subtext">Selected window summary</p>
@@ -195,7 +206,7 @@ function renderSmallMultiples(root, multiples) {
     .map(
       (metric) => `
         <article class="dashboard-mini">
-          <p class="dashboard-mini__label">${metric.label}</p>
+          <p class="dashboard-mini__label">${escapeHtml(metric.label)}</p>
           <p class="dashboard-mini__value">${formatMetricValue(metric, metric.total)}</p>
           ${sparkline(metric.values, "dashboard-mini-sparkline")}
         </article>
@@ -213,8 +224,8 @@ function renderInsights(root, insights) {
       (insight) => `
         <article class="dashboard-signal">
           <p class="dashboard-signal__kicker">Signal</p>
-          <h3>${insight.title}</h3>
-          <p>${insight.body}</p>
+          <h3>${escapeHtml(insight.title)}</h3>
+          <p>${escapeHtml(insight.body)}</p>
         </article>
       `
     )
@@ -228,17 +239,17 @@ function scatterDetails(point) {
 
   return `
     <p class="dashboard-detail-card__eyebrow">Selected essay</p>
-    <h3>${point.title}</h3>
-    <p class="dashboard-detail-card__summary">${point.quadrant}</p>
+    <h3>${escapeHtml(point.title)}</h3>
+    <p class="dashboard-detail-card__summary">${escapeHtml(point.quadrant)}</p>
     <dl class="dashboard-detail-list">
       <div><dt>Views</dt><dd>${point.views}</dd></div>
       <div><dt>Read rate</dt><dd>${point.read_rate.toFixed(1)}%</dd></div>
       <div><dt>PDF downloads</dt><dd>${point.pdf_downloads}</dd></div>
-      <div><dt>Section</dt><dd>${point.section}</dd></div>
+      <div><dt>Section</dt><dd>${escapeHtml(point.section)}</dd></div>
     </dl>
     <div class="dashboard-inline-actions">
-      <button type="button" class="dashboard-text-button" data-select-section="${point.section}">Open section</button>
-      <button type="button" class="dashboard-text-button" data-compare-essay="${point.path}">Compare essay</button>
+      <button type="button" class="dashboard-text-button" data-select-section="${escapeHtml(point.section)}">Open section</button>
+      <button type="button" class="dashboard-text-button" data-compare-essay="${escapeHtml(point.path)}">Compare essay</button>
     </div>
   `;
 }
@@ -271,9 +282,9 @@ function renderScatter(root, detailsRoot, state, data) {
               type="button"
               class="dashboard-scatter__point${selected.path === point.path ? " is-active" : ""}"
               style="left:${left}%;top:${top}%;width:${point.size}px;height:${point.size}px"
-              data-select-essay="${point.path}"
+              data-select-essay="${escapeHtml(point.path)}"
               aria-pressed="${selected.path === point.path ? "true" : "false"}"
-              aria-label="${point.title}: ${point.views} views, ${point.read_rate.toFixed(1)} percent read rate">
+              aria-label="${escapeHtml(`${point.title}: ${point.views} views, ${point.read_rate.toFixed(1)} percent read rate`)}">
             </button>
           `;
         })
@@ -329,12 +340,12 @@ function renderLeaderboard(root, model) {
             (essay) => `
               <tr>
                 <td>
-                  <button type="button" class="dashboard-table__button" data-select-essay="${essay.path}">${essay.title}</button>
-                  <span class="dashboard-table__subtext">${essay.primary_source}</span>
+                  <button type="button" class="dashboard-table__button" data-select-essay="${escapeHtml(essay.path)}">${escapeHtml(essay.title)}</button>
+                  <span class="dashboard-table__subtext">${escapeHtml(essay.primary_source)}</span>
                   ${sparkline(essay.trend, "dashboard-inline-sparkline")}
                 </td>
                 <td>
-                  <button type="button" class="dashboard-table__button dashboard-table__button--muted" data-select-section="${essay.section}">${essay.section}</button>
+                  <button type="button" class="dashboard-table__button dashboard-table__button--muted" data-select-section="${escapeHtml(essay.section)}">${escapeHtml(essay.section)}</button>
                 </td>
                 <td>
                   <span>${essay.views}</span>
@@ -344,8 +355,8 @@ function renderLeaderboard(root, model) {
                 <td>${essay.read_rate.toFixed(1)}%</td>
                 <td>${essay.pdf_downloads}</td>
                 <td>
-                  <span class="dashboard-table__muted">${essay.primary_source}</span>
-                  <button type="button" class="dashboard-table__button dashboard-table__button--tiny" data-compare-essay="${essay.path}">Compare</button>
+                  <span class="dashboard-table__muted">${escapeHtml(essay.primary_source)}</span>
+                  <button type="button" class="dashboard-table__button dashboard-table__button--tiny" data-compare-essay="${escapeHtml(essay.path)}">Compare</button>
                 </td>
               </tr>
             `
@@ -376,9 +387,9 @@ function renderSectionExplorer(root, model) {
               <button
                 type="button"
                 class="dashboard-chip${row.isSelected ? " is-active" : ""}"
-                data-select-section="${row.section}"
+                data-select-section="${escapeHtml(row.section)}"
                 aria-pressed="${row.isSelected ? "true" : "false"}">
-                ${row.section}
+                ${escapeHtml(row.section)}
               </button>
             `
           )
@@ -386,16 +397,16 @@ function renderSectionExplorer(root, model) {
       </div>
       <div class="dashboard-inline-actions">
         <button type="button" class="dashboard-text-button" data-reset-drilldown>Reset to overview</button>
-        <button type="button" class="dashboard-text-button" data-compare-section="${selected.section}" aria-pressed="${model.state.compareSections.includes(selected.section) ? "true" : "false"}">${model.state.compareSections.includes(selected.section) ? "Remove from compare" : "Compare section"}</button>
+        <button type="button" class="dashboard-text-button" data-compare-section="${escapeHtml(selected.section)}" aria-pressed="${model.state.compareSections.includes(selected.section) ? "true" : "false"}">${model.state.compareSections.includes(selected.section) ? "Remove from compare" : "Compare section"}</button>
       </div>
     </div>
     <div class="dashboard-drilldown-layout">
       <article class="dashboard-drilldown-card">
         <p class="dashboard-detail-card__eyebrow">Selected section</p>
-        <h3>${selected.section}</h3>
-        <p class="dashboard-detail-card__summary">${metricSummary([`${selected.pageviews} views`, `${selected.reads} reads`, `${selected.read_rate.toFixed(1)}% read rate`])}</p>
+        <h3>${escapeHtml(selected.section)}</h3>
+        <p class="dashboard-detail-card__summary">${escapeHtml(metricSummary([`${selected.pageviews} views`, `${selected.reads} reads`, `${selected.read_rate.toFixed(1)}% read rate`]))}</p>
         ${sparkline((selected.trend || []).map((point) => point.pageviews), "dashboard-sparkline dashboard-sparkline--framed")}
-        <p class="dashboard-drilldown-card__note">${selected.note}</p>
+        <p class="dashboard-drilldown-card__note">${escapeHtml(selected.note)}</p>
       </article>
       <div class="dashboard-drilldown-stack">
         <section class="dashboard-drilldown-subpanel">
@@ -407,9 +418,9 @@ function renderSectionExplorer(root, model) {
             ? selected.topEssays
                 .map(
                   (essay) => `
-                    <button type="button" class="dashboard-ranked-row" data-select-essay="${essay.path}">
+                    <button type="button" class="dashboard-ranked-row" data-select-essay="${escapeHtml(essay.path)}">
                       <span>
-                        <strong>${essay.title}</strong>
+                        <strong>${escapeHtml(essay.title)}</strong>
                         <small>${essay.views} views ${DOT} ${essay.reads} reads</small>
                       </span>
                       <span>${essay.read_rate.toFixed(1)}%</span>
@@ -428,9 +439,9 @@ function renderSectionExplorer(root, model) {
             ? selected.completionLeaders
                 .map(
                   (essay) => `
-                    <button type="button" class="dashboard-ranked-row" data-select-essay="${essay.path}">
+                    <button type="button" class="dashboard-ranked-row" data-select-essay="${escapeHtml(essay.path)}">
                       <span>
-                        <strong>${essay.title}</strong>
+                        <strong>${escapeHtml(essay.title)}</strong>
                         <small>${essay.views} views ${DOT} ${essay.pdf_downloads} PDFs</small>
                       </span>
                       <span>${essay.read_rate.toFixed(1)}%</span>
@@ -451,7 +462,7 @@ function renderSectionExplorer(root, model) {
                   (source) => `
                     <article class="dashboard-ranked-row dashboard-ranked-row--static">
                       <span>
-                        <strong>${source.label}</strong>
+                        <strong>${escapeHtml(source.label)}</strong>
                         <small>${source.views} views ${DOT} ${source.reads} reads</small>
                       </span>
                       <span>${source.read_rate.toFixed(1)}%</span>
@@ -489,25 +500,25 @@ function renderEssayExplorer(root, model) {
     <div class="dashboard-panel__header">
       <div>
         <p class="dashboard-detail-card__eyebrow">Selected essay</p>
-        <h3>${selected.title}</h3>
-        <p class="dashboard-detail-card__summary">${metricSummary([selected.section, `${selected.views} views`, `${selected.read_rate.toFixed(1)}% read rate`, `${selected.pdf_downloads} PDFs`])}</p>
+        <h3>${escapeHtml(selected.title)}</h3>
+        <p class="dashboard-detail-card__summary">${escapeHtml(metricSummary([selected.section, `${selected.views} views`, `${selected.read_rate.toFixed(1)}% read rate`, `${selected.pdf_downloads} PDFs`]))}</p>
       </div>
       <div class="dashboard-inline-actions">
         <button type="button" class="dashboard-text-button" data-reset-drilldown>Reset to overview</button>
-        <button type="button" class="dashboard-text-button" data-select-section="${selected.section}">Open section</button>
-        <button type="button" class="dashboard-text-button" data-compare-essay="${selected.path}" aria-pressed="${model.state.compareEssays.includes(selected.path) ? "true" : "false"}">${model.state.compareEssays.includes(selected.path) ? "Remove from compare" : "Compare essay"}</button>
+        <button type="button" class="dashboard-text-button" data-select-section="${escapeHtml(selected.section)}">Open section</button>
+        <button type="button" class="dashboard-text-button" data-compare-essay="${escapeHtml(selected.path)}" aria-pressed="${model.state.compareEssays.includes(selected.path) ? "true" : "false"}">${model.state.compareEssays.includes(selected.path) ? "Remove from compare" : "Compare essay"}</button>
       </div>
     </div>
     <div class="dashboard-drilldown-layout">
       <article class="dashboard-drilldown-card">
         ${sparkline((selected.trend || []).map((point) => point.pageviews), "dashboard-sparkline dashboard-sparkline--framed")}
         <dl class="dashboard-detail-list">
-          <div><dt>Primary source</dt><dd>${selected.primary_source}</dd></div>
+          <div><dt>Primary source</dt><dd>${escapeHtml(selected.primary_source)}</dd></div>
           <div><dt>Reads</dt><dd>${selected.reads}</dd></div>
           <div><dt>PDF rate</dt><dd>${selected.views ? ((selected.pdf_downloads / selected.views) * 100).toFixed(1) : "0.0"}%</dd></div>
           <div><dt>Recent views</dt><dd>${selected.recent_views}</dd></div>
         </dl>
-        <p class="dashboard-callout${selected.journeyRecord?.approximate_downstream ? " is-approximate" : ""}">${journeyNote}</p>
+        <p class="dashboard-callout${selected.journeyRecord?.approximate_downstream ? " is-approximate" : ""}">${escapeHtml(journeyNote)}</p>
       </article>
       <div class="dashboard-drilldown-stack">
         <section class="dashboard-drilldown-subpanel">
@@ -521,7 +532,7 @@ function renderEssayExplorer(root, model) {
                   (source) => `
                     <article class="dashboard-ranked-row dashboard-ranked-row--static">
                       <span>
-                        <strong>${source.label}</strong>
+                        <strong>${escapeHtml(source.label)}</strong>
                         <small>${source.views} views ${DOT} ${source.reads} reads</small>
                       </span>
                       <span>${source.read_rate.toFixed(1)}%</span>
@@ -540,9 +551,9 @@ function renderEssayExplorer(root, model) {
             ? selected.related
                 .map(
                   (essay) => `
-                    <button type="button" class="dashboard-ranked-row" data-select-essay="${essay.path}">
+                    <button type="button" class="dashboard-ranked-row" data-select-essay="${escapeHtml(essay.path)}">
                       <span>
-                        <strong>${essay.title}</strong>
+                        <strong>${escapeHtml(essay.title)}</strong>
                         <small>${essay.views} views ${DOT} ${essay.read_rate.toFixed(1)}% read rate</small>
                       </span>
                       <span>${essay.pdf_downloads} PDFs</span>
@@ -637,7 +648,7 @@ function renderFunnelRefined(root, model) {
               (row) => `
                 <article class="dashboard-journey-table__row">
                   <div>
-                    <h4>${row.label || row.title}</h4>
+                    <h4>${escapeHtml(row.label || row.title)}</h4>
                     <p>${row.views} views ${DOT} ${row.reads} reads ${DOT} ${row.read_rate.toFixed(1)}% read rate</p>
                   </div>
                   <div class="dashboard-journey-table__metric">${metricLabel === "rate" ? `${row.read_rate.toFixed(1)}%` : row.reads}</div>
@@ -678,7 +689,7 @@ function renderFunnelRefined(root, model) {
                 (row) => `
                   <article class="dashboard-journey-bar">
                     <div class="dashboard-journey-bar__topline">
-                      <span>${row.label}</span>
+                      <span>${escapeHtml(row.label)}</span>
                       <span>${row.read_rate.toFixed(1)}%</span>
                     </div>
                     <div class="dashboard-journey-bar__track"><span style="width:${(row.views / maxSourceViews) * 100}%"></span></div>
@@ -726,9 +737,9 @@ function renderFunnelRefined(root, model) {
                   (path) => `
                     <article class="dashboard-journey">
                       <div>
-                        <p class="dashboard-journey__kicker">${path.discovery_type.replace(/-/g, " ")}</p>
-                        <h3>${path.discovery_source}</h3>
-                        <p>${path.title}</p>
+                        <p class="dashboard-journey__kicker">${escapeHtml(path.discovery_type.replace(/-/g, " "))}</p>
+                        <h3>${escapeHtml(path.discovery_source)}</h3>
+                        <p>${escapeHtml(path.title)}</p>
                       </div>
                       <p class="dashboard-journey__meta">${path.views} views ${DOT} ${path.reads} reads ${DOT} ${path.pdf_downloads} PDFs</p>
                     </article>
@@ -756,7 +767,7 @@ function renderSourcesRefined(root, model, state) {
                 <article class="dashboard-source">
                   <div>
                     <p class="dashboard-source__kicker">${state.scale === "rate" ? "Efficiency" : "Scale"}</p>
-                    <h3>${source.source}</h3>
+                    <h3>${escapeHtml(source.source)}</h3>
                     <p>${label}</p>
                   </div>
                   <div class="dashboard-source__meta">${source.reads} reads ${DOT} ${source.visitors} visitors</div>
@@ -844,10 +855,10 @@ function initDashboard() {
   };
 
   controls.section.innerHTML = `<option value="all">All sections</option>${data.sectionOptions
-    .map((section) => `<option value="${section}">${section}</option>`)
+    .map((section) => `<option value="${escapeHtml(section)}">${escapeHtml(section)}</option>`)
     .join("")}`;
   controls.sourceType.innerHTML = `<option value="all">All source types</option>${data.sourceTypeOptions
-    .map((type) => `<option value="${type}">${type}</option>`)
+    .map((type) => `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`)
     .join("")}`;
 
   let state = createState(data, window.location.search);
