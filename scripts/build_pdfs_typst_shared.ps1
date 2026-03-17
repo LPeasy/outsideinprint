@@ -36,6 +36,26 @@ function Invoke-NativeOrThrow {
   }
 }
 
+function Invoke-NativeCapture {
+  param(
+    [string]$Command,
+    [string[]]$Arguments,
+    [string]$CaptureStem
+  )
+
+  $stdoutPath = Join-Path $TempDir "$CaptureStem.stdout.txt"
+  $stderrPath = Join-Path $TempDir "$CaptureStem.stderr.txt"
+  $process = Start-Process -FilePath $Command -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+  $stdout = if (Test-Path -Path $stdoutPath -PathType Leaf) { Get-Content -Path $stdoutPath -Raw } else { "" }
+  $stderr = if (Test-Path -Path $stderrPath -PathType Leaf) { Get-Content -Path $stderrPath -Raw } else { "" }
+
+  return [pscustomobject]@{
+    ExitCode = $process.ExitCode
+    Stdout = $stdout
+    Stderr = $stderr
+  }
+}
+
 function Read-Utf8Text {
   param([string]$Path)
   return [System.IO.File]::ReadAllText((Resolve-Path $Path), [System.Text.Encoding]::UTF8)
@@ -94,7 +114,344 @@ function Repair-CommonTextArtifacts {
   $fixed = $fixed.Replace([string][char]0x2026, "...")
   $fixed = $fixed.Replace([string][char]0x2212, "-")
   $fixed = $fixed.Replace([string][char]0x00A0, " ")
+  $fixed = $fixed.Replace([string][char]0x00C2, "")
+  $fixed = $fixed.Replace([string][char]0xFFFD, "")
   return $fixed
+}
+
+function Get-TextArtifactScore {
+  param([string]$Value)
+
+  if ([string]::IsNullOrWhiteSpace($Value)) {
+    return 0
+  }
+
+  $score = 0
+  foreach ($marker in @(
+      [string][char]0x00C2,
+      [string][char]0x00C3,
+      [string][char]0x00E2,
+      [string][char]0x00F0,
+      [string][char]0xFFFD
+    )) {
+    $score += ([regex]::Matches($Value, [regex]::Escape($marker))).Count
+  }
+
+  return $score
+}
+
+function Get-PlainTextFromHtml {
+  param([string]$Value)
+
+  if ([string]::IsNullOrWhiteSpace($Value)) {
+    return ""
+  }
+
+  $text = [System.Net.WebUtility]::HtmlDecode($Value)
+  $text = [regex]::Replace($text, '(?is)<br\s*/?>', "`n")
+  $text = [regex]::Replace($text, '(?is)</p\s*>', "`n`n")
+  $text = [regex]::Replace($text, '(?is)<[^>]+>', ' ')
+  $text = [regex]::Replace($text, '\s+', ' ').Trim()
+  return (Repair-CommonTextArtifacts -Value $text)
+}
+
+function Get-StringSha256 {
+  param([string]$Value)
+
+  $sha = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($Value)
+    $hash = $sha.ComputeHash($bytes)
+    return ([System.BitConverter]::ToString($hash).Replace('-', '').ToLowerInvariant())
+  }
+  finally {
+    $sha.Dispose()
+  }
+}
+
+function Get-FileBytesSignatureExtension {
+  param([string]$Path)
+
+  if (-not (Test-Path -Path $Path -PathType Leaf)) {
+    return ""
+  }
+
+  $stream = [System.IO.File]::OpenRead($Path)
+  try {
+    $buffer = New-Object byte[] 12
+    $read = $stream.Read($buffer, 0, $buffer.Length)
+  }
+  finally {
+    $stream.Dispose()
+  }
+
+  if ($read -ge 8 -and $buffer[0] -eq 0x89 -and $buffer[1] -eq 0x50 -and $buffer[2] -eq 0x4E -and $buffer[3] -eq 0x47) {
+    return ".png"
+  }
+
+  if ($read -ge 3 -and $buffer[0] -eq 0xFF -and $buffer[1] -eq 0xD8 -and $buffer[2] -eq 0xFF) {
+    return ".jpg"
+  }
+
+  if ($read -ge 6) {
+    $header = [System.Text.Encoding]::ASCII.GetString($buffer, 0, [Math]::Min($read, 6))
+    if ($header -in @("GIF87a", "GIF89a")) {
+      return ".gif"
+    }
+  }
+
+  if ($read -ge 12) {
+    $riff = [System.Text.Encoding]::ASCII.GetString($buffer, 0, 4)
+    $webp = [System.Text.Encoding]::ASCII.GetString($buffer, 8, 4)
+    if ($riff -eq "RIFF" -and $webp -eq "WEBP") {
+      return ".webp"
+    }
+  }
+
+  return ""
+}
+
+function Test-ControlledRemoteImageUrl {
+  param([string]$Value)
+
+  if ([string]::IsNullOrWhiteSpace($Value)) {
+    return $false
+  }
+
+  try {
+    $uri = [Uri]$Value
+    return $uri.Host -match '(^|\.)medium\.com$|(^|\.)cdn-images-\d+\.medium\.com$|(^|\.)miro\.medium\.com$'
+  }
+  catch {
+    return $false
+  }
+}
+
+function Get-RemoteImageCachePath {
+  param(
+    [string]$Url,
+    [string]$CacheNamespace
+  )
+
+  $cacheRoot = Join-Path $TempDir "__remote_cache"
+  $namespace = if ([string]::IsNullOrWhiteSpace($CacheNamespace)) { "shared" } else { $CacheNamespace }
+  $targetDirectory = Join-Path $cacheRoot $namespace
+  New-Item -ItemType Directory -Force -Path $targetDirectory | Out-Null
+
+  $hash = Get-StringSha256 -Value $Url
+  $path = [Uri]$Url
+  $extension = [System.IO.Path]::GetExtension($path.AbsolutePath)
+  if ([string]::IsNullOrWhiteSpace($extension) -or $extension.Length -gt 5) {
+    $extension = ".img"
+  }
+
+  return [pscustomobject]@{
+    TempPath = Join-Path $targetDirectory "$hash.download"
+    FinalPath = Join-Path $targetDirectory "$hash$extension"
+  }
+}
+
+function Try-LocalizeRemoteImage {
+  param(
+    [string]$Url,
+    [string]$TempSourcePath,
+    [string]$CacheNamespace
+  )
+
+  if (-not (Test-ControlledRemoteImageUrl -Value $Url)) {
+    return ""
+  }
+
+  $cachePaths = Get-RemoteImageCachePath -Url $Url -CacheNamespace $CacheNamespace
+  if (Test-Path -Path $cachePaths.FinalPath -PathType Leaf) {
+    return Get-RelativePathBetween -FromPath $TempSourcePath -ToPath $cachePaths.FinalPath
+  }
+
+  try {
+    Invoke-WebRequest -UseBasicParsing -Uri $Url -OutFile $cachePaths.TempPath -TimeoutSec 25 | Out-Null
+    $sniffedExtension = Get-FileBytesSignatureExtension -Path $cachePaths.TempPath
+    $finalPath = $cachePaths.FinalPath
+
+    if ($sniffedExtension) {
+      $finalPath = [System.IO.Path]::ChangeExtension($cachePaths.FinalPath, $sniffedExtension)
+    }
+
+    if (Test-Path -Path $finalPath -PathType Leaf) {
+      Remove-Item -Path $finalPath -Force
+    }
+
+    Move-Item -Path $cachePaths.TempPath -Destination $finalPath
+    return Get-RelativePathBetween -FromPath $TempSourcePath -ToPath $finalPath
+  }
+  catch {
+    if (Test-Path -Path $cachePaths.TempPath -PathType Leaf) {
+      Remove-Item -Path $cachePaths.TempPath -Force -ErrorAction SilentlyContinue
+    }
+    return ""
+  }
+}
+
+function Convert-HtmlAnchorToMarkdown {
+  param([System.Text.RegularExpressions.Match]$Match)
+
+  $url = (Repair-CommonTextArtifacts -Value $Match.Groups["url"].Value).Trim()
+  if ([string]::IsNullOrWhiteSpace($url)) {
+    return Get-PlainTextFromHtml -Value $Match.Groups["text"].Value
+  }
+
+  $text = Get-PlainTextFromHtml -Value $Match.Groups["text"].Value
+  if ([string]::IsNullOrWhiteSpace($text)) {
+    $text = $url
+  }
+
+  return "[$text]($url)"
+}
+
+function Get-FigureCaptionMarkdown {
+  param([string]$Caption)
+
+  $cleanCaption = Get-PlainTextFromHtml -Value $Caption
+  if ([string]::IsNullOrWhiteSpace($cleanCaption)) {
+    return ""
+  }
+
+  return "`r`n> $cleanCaption"
+}
+
+function Convert-HtmlFigureToMarkdown {
+  param(
+    [System.Text.RegularExpressions.Match]$Match,
+    [System.IO.FileInfo]$SourceFile,
+    [string]$TempSourcePath,
+    [string]$CacheNamespace,
+    [hashtable]$State
+  )
+
+  $content = $Match.Groups["content"].Value
+  $captionMatch = [regex]::Match($content, '(?is)<figcaption\b[^>]*>(?<caption>.*?)</figcaption>')
+  $captionMarkdown = Get-FigureCaptionMarkdown -Caption $captionMatch.Groups["caption"].Value
+
+  if ($content -match '(?is)<iframe\b|graf--iframe|<video\b|<audio\b|<script\b') {
+    $State.Embeds++
+    return "> Web-only embed preserved in the HTML edition.$captionMarkdown`r`n"
+  }
+
+  $imgMatch = [regex]::Match($content, '(?is)<img\b(?<attrs>[^>]*)/?\s*>')
+  if (-not $imgMatch.Success) {
+    return $captionMarkdown
+  }
+
+  $attrs = $imgMatch.Groups["attrs"].Value
+  $srcMatch = [regex]::Match($attrs, '(?is)\bsrc\s*=\s*["''](?<src>[^"'']+)["'']')
+  if (-not $srcMatch.Success) {
+    return $captionMarkdown
+  }
+
+  $imageRef = (Repair-CommonTextArtifacts -Value $srcMatch.Groups["src"].Value).Trim()
+  $altMatch = [regex]::Match($attrs, '(?is)\balt\s*=\s*["''](?<alt>[^"'']*)["'']')
+  $alt = Get-PlainTextFromHtml -Value $altMatch.Groups["alt"].Value
+  $resolved = Resolve-ImageSourcePath -ImageRef $imageRef -SourceFile $SourceFile -TempSourcePath $TempSourcePath
+
+  if (-not $resolved -and (Test-RemoteUrl -Value $imageRef)) {
+    $localized = Try-LocalizeRemoteImage -Url $imageRef -TempSourcePath $TempSourcePath -CacheNamespace $CacheNamespace
+    if ($localized) {
+      $resolved = $localized
+      $State.LocalizedRemote++
+    }
+  }
+
+  if ($resolved) {
+    $State.Local++
+    return "![${alt}]($resolved)$captionMarkdown`r`n"
+  }
+
+  if (Test-RemoteUrl -Value $imageRef) {
+    $State.Remote++
+    return "> Image kept on web edition only.$captionMarkdown`r`n"
+  }
+
+  return $captionMarkdown
+}
+
+function Get-ContentComplexityProfile {
+  param([string]$RawBody)
+
+  $htmlBlockCount = ([regex]::Matches($RawBody, '(?im)^\s*</?(?:div|figure|figcaption|iframe|img|picture|video|audio|details|summary|span|a)\b')).Count
+  $embedCount = ([regex]::Matches($RawBody, '(?is)<iframe\b|graf--iframe|youtube\.com|youtu\.be|spotify\.com|soundcloud\.com|substackcdn\.com')).Count
+  $wrapperCount = ([regex]::Matches($RawBody, '(?is)graf--|section-inner|section-content|section-divider|markup--anchor|js-mixtapeImage')).Count
+  $remoteImageCount = ([regex]::Matches($RawBody, '!\[[^\]]*\]\((?<url>https?://[^)\s]+)')).Count + ([regex]::Matches($RawBody, '(?is)<img\b[^>]*\bsrc\s*=\s*["'']https?://')).Count
+  $mojibakeCount = Get-TextArtifactScore -Value $RawBody
+  $rawHtmlScore = ($htmlBlockCount * 2) + ($embedCount * 4) + $wrapperCount + $remoteImageCount + [Math]::Min($mojibakeCount * 2, 8)
+
+  return [pscustomobject]@{
+    HtmlBlockCount = $htmlBlockCount
+    EmbedCount = $embedCount
+    WrapperCount = $wrapperCount
+    RemoteImageCount = $remoteImageCount
+    MojibakeCount = $mojibakeCount
+    RawHtmlScore = $rawHtmlScore
+    ShouldUseHtml = ($rawHtmlScore -ge 14) -or ($embedCount -ge 2) -or (($htmlBlockCount -ge 6) -and ($remoteImageCount -ge 2))
+  }
+}
+
+function Get-TypstFailureDetail {
+  param([string]$Stderr)
+
+  if ([string]::IsNullOrWhiteSpace($Stderr)) {
+    return ""
+  }
+
+  $lineMatch = [regex]::Match($Stderr, ':(?<line>\d+):(?<column>\d+)')
+  $firstLine = ($Stderr -split "\r?\n" | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -First 1)
+
+  if ($lineMatch.Success) {
+    return "line $($lineMatch.Groups['line'].Value):$($lineMatch.Groups['column'].Value) - $firstLine".Trim()
+  }
+
+  return $firstLine.Trim()
+}
+
+function Get-TypstFailureCause {
+  param(
+    [string]$Stderr,
+    [string]$Body,
+    [pscustomobject]$Profile
+  )
+
+  $errorText = "$Stderr`n$Body"
+  if ($errorText -match '(?is)<iframe\b|graf--iframe|youtube\.com|youtu\.be|spotify\.com|soundcloud\.com|Web-only embed') {
+    return "embed"
+  }
+
+  if ((Get-TextArtifactScore -Value $errorText) -gt 0) {
+    return "mojibake"
+  }
+
+  if ($errorText -match '(?is)<(?:div|span|figure|figcaption|iframe|picture|video|audio|details|summary|section|article)\b') {
+    return "raw_html"
+  }
+
+  if ($errorText -match '(?is)image\("|Image kept on web edition only\.') {
+    return "image_ref"
+  }
+
+  if ($null -ne $Profile -and $Profile.RawHtmlScore -ge 14) {
+    return "raw_html"
+  }
+
+  return "unknown"
+}
+
+function Get-FailureCauseLabel {
+  param([string]$Cause)
+
+  switch ($Cause) {
+    "raw_html" { return "complex imported HTML" }
+    "embed" { return "unsupported embedded media" }
+    "mojibake" { return "text encoding artifacts" }
+    "image_ref" { return "image handling issues" }
+    default { return "" }
+  }
 }
 
 function Get-FrontMatterMap {
@@ -407,7 +764,7 @@ function Get-PdfEngine {
     return $FrontMatter["pdf_engine"].Trim().ToLowerInvariant()
   }
 
-  return "typst"
+  return ""
 }
 
 function Get-PdfVariant {
@@ -534,16 +891,73 @@ function Normalize-PandocSource {
   param(
     [string]$RawBody,
     [System.IO.FileInfo]$SourceFile,
-    [string]$TempSourcePath
+    [string]$TempSourcePath,
+    [string]$CacheNamespace
   )
 
   $source = Remove-UnsupportedControlChars -Value $RawBody
   $source = Repair-CommonTextArtifacts -Value $source
+  $state = @{
+    Local = 0
+    Remote = 0
+    LocalizedRemote = 0
+    Embeds = 0
+  }
+
+  $source = [regex]::Replace($source, '(?is)<a\b[^>]*href=["''](?<url>[^"'']+)["''][^>]*>(?<text>.*?)</a>', {
+      param($match)
+      Convert-HtmlAnchorToMarkdown -Match $match
+    })
+
+  $source = [regex]::Replace($source, '(?is)<figure\b[^>]*>(?<content>.*?)</figure>', {
+      param($match)
+      Convert-HtmlFigureToMarkdown -Match $match -SourceFile $SourceFile -TempSourcePath $TempSourcePath -CacheNamespace $CacheNamespace -State $state
+    })
+
+  $source = [regex]::Replace($source, '(?is)<img\b(?<attrs>[^>]*)/?\s*>', {
+      param($match)
+
+      $attrs = $match.Groups["attrs"].Value
+      $srcMatch = [regex]::Match($attrs, '(?is)\bsrc\s*=\s*["''](?<src>[^"'']+)["'']')
+      if (-not $srcMatch.Success) {
+        return ''
+      }
+
+      $imageRef = (Repair-CommonTextArtifacts -Value $srcMatch.Groups["src"].Value).Trim()
+      $altMatch = [regex]::Match($attrs, '(?is)\balt\s*=\s*["''](?<alt>[^"'']*)["'']')
+      $alt = Get-PlainTextFromHtml -Value $altMatch.Groups["alt"].Value
+      $resolved = Resolve-ImageSourcePath -ImageRef $imageRef -SourceFile $SourceFile -TempSourcePath $TempSourcePath
+
+      if (-not $resolved -and (Test-RemoteUrl -Value $imageRef)) {
+        $localized = Try-LocalizeRemoteImage -Url $imageRef -TempSourcePath $TempSourcePath -CacheNamespace $CacheNamespace
+        if ($localized) {
+          $resolved = $localized
+          $state.LocalizedRemote++
+        }
+      }
+
+      if ($resolved) {
+        $state.Local++
+        return "![${alt}]($resolved)"
+      }
+
+      if (Test-RemoteUrl -Value $imageRef) {
+        $state.Remote++
+        return "> Image kept on web edition only."
+      }
+
+      return ''
+    })
+
+  $source = [regex]::Replace($source, '(?is)</?(?:div|span|section|article)\b[^>]*>', '')
+  $source = [regex]::Replace($source, '(?im)^\s*-{20,}\s*$', '')
   $source = $source -replace '(?m)^\s*(Read more|Continue reading|Read the full story)\b.*$', ''
   $source = $source -replace '(?m)^\s*(class=|data-href=|target=|markup--|js-mixtapeImage).*$',''
   $source = $source -replace '(?m)^\s*\[\s*\]\(\s*[^)]*\)\s*$', ''
   $source = $source -replace '(?m)\[\s*([^\]]+?)\s*\]\(\s*\)', '$1'
   $source = $source -replace '(?m)^[\u2022]\s+', '- '
+  $source = $source -replace '(?m)^\s*</?(?:figcaption|figure|iframe|picture|video|audio|details|summary)\b[^>]*>\s*$', ''
+  $source = $source -replace '(?m)^\s*(?:Read the full opinion \(PDF\)|Read More)\s*$', '$0'
 
   $lines = $source -split "\r?\n"
   $normalizedLines = [System.Collections.Generic.List[string]]::new()
@@ -565,11 +979,6 @@ function Normalize-PandocSource {
   $source = ($normalizedLines -join "`r`n")
   $source = Convert-StandaloneSectionLines -Text $source
 
-  $state = @{
-    Local = 0
-    Remote = 0
-  }
-
   $imagePattern = '!\[(?<alt>[^\]]*)\]\((?<url>[^)\s]+)(?<tail>[^)]*)\)'
   $source = [regex]::Replace($source, $imagePattern, {
       param($match)
@@ -582,12 +991,24 @@ function Normalize-PandocSource {
       }
 
       if (Test-RemoteUrl -Value $url) {
+        $localized = Try-LocalizeRemoteImage -Url $url -TempSourcePath $TempSourcePath -CacheNamespace $CacheNamespace
+        if ($localized) {
+          $state.Local++
+          $state.LocalizedRemote++
+          return ('![{0}]({1}{2})' -f $match.Groups["alt"].Value, $localized, $match.Groups["tail"].Value)
+        }
+
         $state.Remote++
+        return "> Image kept on web edition only."
       }
 
       return $match.Value
     })
 
+  $source = $source -replace '(?m)^\s*>\s*Image kept on web edition only\.\s*>\s*Image kept on web edition only\.\s*$', '> Image kept on web edition only.'
+  $source = [regex]::Replace($source, '(?m)^[^\p{L}\p{N}\[]+(?=Read the full (?:opinion|report) \(PDF\))', '')
+  $source = $source -replace '(?m)^\s*Read the full opinion \(PDF\)\s*\[(?<url>https?://[^\]]+)\]$', '[Read the full opinion (PDF)](${url})'
+  $source = [regex]::Replace($source, '(?m)^\s*(Read the full opinion \(PDF\)|Read the full report \(PDF\))\s*$', '$1')
   $source = [regex]::Replace($source, '(?:\r?\n){3,}', "`r`n`r`n")
   $source = $source.Trim() + "`r`n"
 
@@ -595,6 +1016,8 @@ function Normalize-PandocSource {
     Source = $source
     LocalImageCount = $state.Local
     RemoteImageCount = $state.Remote
+    LocalizedRemoteImageCount = $state.LocalizedRemote
+    EmbedCount = $state.Embeds
   }
 }
 
@@ -631,9 +1054,16 @@ function Normalize-TypstBody {
     })
   $body = [regex]::Replace($body, '#cite\([^\)]*\)', '')
   $body = [regex]::Replace($body, '(?ms)#block\[\s*[^#\[\]]*?www\.[^\]]*?\]', '')
+  $body = [regex]::Replace($body, '(?m)^\s*</?(?:div|span|figure|figcaption|iframe|picture|video|audio|details|summary|section|article)[^>]*>\s*$', '')
+  $body = [regex]::Replace($body, '(?is)<(?:div|span|figure|figcaption|iframe|picture|video|audio|details|summary|section|article)\b[^>]*>', '')
+  $body = [regex]::Replace($body, '(?is)</(?:div|span|figure|figcaption|iframe|picture|video|audio|details|summary|section|article)>', '')
   $body = [regex]::Replace($body, '(?m)^<[A-Za-z0-9_.-]+>\s*$', '')
   $body = $body -replace '\\~', '~'
   $body = $body -replace '(?m)^[\u2022]\s+', '+ '
+  $body = [regex]::Replace($body, '(?m)^[^\p{L}\p{N}\[]+(?=Read the full (?:opinion|report) \(PDF\))', '')
+  $body = $body.Replace([string][char]0x00C2, '')
+  $body = $body.Replace([string][char]0xFFFD, '')
+  $body = [regex]::Replace($body, '(?m)^\s*Image kept on web edition only\.\s*$', '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#set text(size: 9pt, style: "italic", fill: luma(120))[Image kept on web edition only.]]]')
 
   if (-not [string]::IsNullOrWhiteSpace($Title)) {
     $escapedTitle = [regex]::Escape((Repair-CommonTextArtifacts -Value $Title).Trim())
@@ -785,7 +1215,16 @@ foreach ($file in $mdFiles) {
   $sectionLabel = Repair-CommonTextArtifacts -Value $frontMatter['section_label']
   $date = Repair-CommonTextArtifacts -Value $frontMatter['date']
   $summary = Repair-CommonTextArtifacts -Value $frontMatter['pdf_summary']
-  $engine = Get-PdfEngine -FrontMatter $frontMatter
+  $rawBody = Get-BodyWithoutFrontMatter -Raw $raw
+  $complexityProfile = Get-ContentComplexityProfile -RawBody $rawBody
+  $declaredEngine = Get-PdfEngine -FrontMatter $frontMatter
+  $forceTypst = Is-TrueValue -Value ($frontMatter['pdf_force_typst'])
+  $autoEngineSelected = $false
+  $engine = if ($declaredEngine) { $declaredEngine } else { "typst" }
+  if ((-not $declaredEngine) -and (-not $forceTypst) -and $complexityProfile.ShouldUseHtml) {
+    $engine = "html"
+    $autoEngineSelected = $true
+  }
   $variant = Get-PdfVariant -FrontMatter $frontMatter -Section $section -Engine $engine
 
   if ([string]::IsNullOrWhiteSpace($title)) { $title = $slug }
@@ -805,13 +1244,24 @@ foreach ($file in $mdFiles) {
     slug = $slug
     engine = $engine
     variant = $variant
+    auto_engine_selected = $autoEngineSelected
+    raw_html_score = $complexityProfile.RawHtmlScore
     render_status = "unknown"
     show_toc = $false
     placeholder_count = 0
     omitted_remote_images = 0
+    localized_remote_images = 0
+    embed_count = $complexityProfile.EmbedCount
     local_image_count = 0
     reference_count = $references.Count
+    failure_cause = ""
+    failure_detail = ""
+    failure_stderr = ""
     warnings = @()
+  }
+
+  if ($autoEngineSelected) {
+    $buildMeta.warnings += "auto_engine_html"
   }
 
   if ($engine -eq 'html') {
@@ -849,11 +1299,16 @@ foreach ($file in $mdFiles) {
   $typRefsPath = Join-Path $TempDir "$safeSlug.refs.typ"
   $typDocPath = Join-Path $TempDir "$safeSlug.typ"
 
-  $normalizedSource = Normalize-PandocSource -RawBody (Get-BodyWithoutFrontMatter -Raw $raw) -SourceFile $file -TempSourcePath $sanitizedSourcePath
+  $normalizedSource = Normalize-PandocSource -RawBody $rawBody -SourceFile $file -TempSourcePath $sanitizedSourcePath -CacheNamespace $safeSlug
   $buildMeta.local_image_count = $normalizedSource.LocalImageCount
   $buildMeta.omitted_remote_images = $normalizedSource.RemoteImageCount
+  $buildMeta.localized_remote_images = $normalizedSource.LocalizedRemoteImageCount
+  $buildMeta.embed_count = $normalizedSource.EmbedCount
   if ($normalizedSource.RemoteImageCount -gt 0) {
     $buildMeta.warnings += "remote_images_omitted"
+  }
+  if ($normalizedSource.LocalizedRemoteImageCount -gt 0) {
+    $buildMeta.warnings += "remote_images_localized"
   }
 
   Write-Utf8Text -Path $sanitizedSourcePath -Value $normalizedSource.Source
@@ -928,22 +1383,32 @@ foreach ($file in $mdFiles) {
 
   Write-Utf8Text -Path $typDocPath -Value $doc
 
-  try {
-    Invoke-NativeOrThrow -Command "typst" -Arguments @(
-      'compile',
-      '--root', '.',
-      $typDocPath,
-      $pdfPath
-    )
+  $primaryCompile = Invoke-NativeCapture -Command "typst" -Arguments @(
+    'compile',
+    '--root', '.',
+    $typDocPath,
+    $pdfPath
+  ) -CaptureStem "$safeSlug.primary-compile"
+
+  if ($primaryCompile.ExitCode -eq 0 -and (Test-Path -Path $pdfPath -PathType Leaf)) {
     $buildMeta.render_status = "primary"
     Write-Host "Built: $pdfPath" -ForegroundColor Green
   }
-  catch {
+  else {
+    $buildMeta.failure_cause = Get-TypstFailureCause -Stderr $primaryCompile.Stderr -Body $normalizedBody.Body -Profile $complexityProfile
+    $buildMeta.failure_detail = Get-TypstFailureDetail -Stderr $primaryCompile.Stderr
+    $buildMeta.failure_stderr = ($primaryCompile.Stderr | Out-String).Trim()
     Write-Warning "Primary PDF render failed for '$slug'. Generating fallback PDF."
 
     $fallbackBodyPath = Join-Path $TempDir "$safeSlug.fallback.body.typ"
     $fallbackRefsPath = Join-Path $TempDir "$safeSlug.fallback.refs.typ"
     $fallbackDocPath = Join-Path $TempDir "$safeSlug.fallback.typ"
+    $failureLabel = Get-FailureCauseLabel -Cause $buildMeta.failure_cause
+    $fallbackDetailLine = if ([string]::IsNullOrWhiteSpace($failureLabel)) {
+      "The original article body contained markup that could not be rendered automatically in Typst. A simplified archival edition was generated instead."
+    } else {
+      "The original article body included $failureLabel that could not be rendered automatically in Typst. A simplified archival edition was generated instead."
+    }
 
     $fallbackBody = @"
 #block(
@@ -956,7 +1421,7 @@ foreach ($file in $mdFiles) {
   #set text(size: 9.25pt)
   #strong[Reading edition notice]
   #v(0.45em)
-  The original article body contained markup that could not be rendered automatically in Typst. A simplified archival edition was generated instead.
+  $fallbackDetailLine
 ]
 "@
     Write-Utf8Text -Path $fallbackBodyPath -Value $fallbackBody
@@ -991,12 +1456,17 @@ foreach ($file in $mdFiles) {
 "@
     Write-Utf8Text -Path $fallbackDocPath -Value $fallbackDoc
 
-    Invoke-NativeOrThrow -Command "typst" -Arguments @(
+    $fallbackCompile = Invoke-NativeCapture -Command "typst" -Arguments @(
       'compile',
       '--root', '.',
       $fallbackDocPath,
       $pdfPath
-    )
+    ) -CaptureStem "$safeSlug.fallback-compile"
+
+    if ($fallbackCompile.ExitCode -ne 0 -or -not (Test-Path -Path $pdfPath -PathType Leaf)) {
+      $fallbackDetail = Get-TypstFailureDetail -Stderr $fallbackCompile.Stderr
+      throw "Fallback PDF compile failed for '$slug'. $fallbackDetail"
+    }
 
     $buildMeta.render_status = "fallback"
     $buildMeta.warnings += "fallback_render"

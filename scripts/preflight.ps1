@@ -11,8 +11,17 @@ Write-Host "Outside In Print ~ Preflight" -ForegroundColor Cyan
 
 $AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
 $RequiredFields = @("title", "date", "section_label", "version", "edition", "pdf", "draft")
+$RawHtmlScoreThreshold = 14
 $fail = $false
 $slugSources = @{}
+$qualitySummary = [ordered]@{
+  fallback_pdfs = 0
+  html_pdfs = 0
+  auto_html_pdfs = 0
+  placeholder_figures = 0
+  remote_image_placeholders = 0
+  raw_html_heavy_typst_pdfs = 0
+}
 
 function Read-Utf8Text {
   param([string]$Path)
@@ -242,7 +251,7 @@ foreach ($file in $mdFiles) {
     }
   }
 
-  foreach ($booleanField in @("pdf_disable_toc", "pdf_allow_fallback", "pdf_allow_placeholder_figures")) {
+  foreach ($booleanField in @("pdf_disable_toc", "pdf_allow_fallback", "pdf_allow_placeholder_figures", "pdf_force_typst")) {
     if ($frontMatter.ContainsKey($booleanField) -and -not (Test-BooleanLike -Value $frontMatter[$booleanField])) {
       Write-Host "INVALID boolean field '$booleanField': $($file.FullName)" -ForegroundColor Yellow
       $fail = $true
@@ -301,12 +310,43 @@ foreach ($file in $mdFiles) {
       continue
     }
 
+    if (($catalogEntry.PSObject.Properties.Name -contains "engine") -and ($catalogEntry.engine -eq "html")) {
+      $qualitySummary.html_pdfs++
+    }
+
+    if (($catalogEntry.PSObject.Properties.Name -contains "auto_engine_selected") -and [bool]$catalogEntry.auto_engine_selected) {
+      $qualitySummary.auto_html_pdfs++
+    }
+
+    if (
+      ($catalogEntry.PSObject.Properties.Name -contains "render_status") -and
+      ($catalogEntry.render_status -eq "fallback")
+    ) {
+      $qualitySummary.fallback_pdfs++
+    }
+
     if (
       ($catalogEntry.PSObject.Properties.Name -contains "render_status") -and
       ($catalogEntry.render_status -eq "fallback") -and
       (-not (Is-TrueValue -Value $frontMatter["pdf_allow_fallback"]))
     ) {
-      Register-QualityIssue -Message "FALLBACK PDF DETECTED for '$slug': $($file.FullName)"
+      $failureCause = if ($catalogEntry.PSObject.Properties.Name -contains "failure_cause") { [string]$catalogEntry.failure_cause } else { "" }
+      $failureDetail = if ($catalogEntry.PSObject.Properties.Name -contains "failure_detail") { [string]$catalogEntry.failure_detail } else { "" }
+      $detailSuffix = ""
+      if (-not [string]::IsNullOrWhiteSpace($failureCause)) {
+        $detailSuffix = " cause=$failureCause"
+      }
+      if (-not [string]::IsNullOrWhiteSpace($failureDetail)) {
+        $detailSuffix += " detail=$failureDetail"
+      }
+      Register-QualityIssue -Message "FALLBACK PDF DETECTED for '$slug': $($file.FullName)$detailSuffix"
+    }
+
+    if (
+      ($catalogEntry.PSObject.Properties.Name -contains "placeholder_count") -and
+      ([int]$catalogEntry.placeholder_count -gt 0)
+    ) {
+      $qualitySummary.placeholder_figures += [int]$catalogEntry.placeholder_count
     }
 
     if (
@@ -316,8 +356,30 @@ foreach ($file in $mdFiles) {
     ) {
       Register-QualityIssue -Message "PLACEHOLDER FIGURES DETECTED for '$slug': $($file.FullName)"
     }
+
+    if (($catalogEntry.PSObject.Properties.Name -contains "omitted_remote_images") -and ([int]$catalogEntry.omitted_remote_images -gt 0)) {
+      $qualitySummary.remote_image_placeholders += [int]$catalogEntry.omitted_remote_images
+    }
+
+    if (
+      ($catalogEntry.PSObject.Properties.Name -contains "raw_html_score") -and
+      ([int]$catalogEntry.raw_html_score -ge $RawHtmlScoreThreshold) -and
+      ($catalogEntry.PSObject.Properties.Name -contains "engine") -and
+      ($catalogEntry.engine -eq "typst")
+    ) {
+      $qualitySummary.raw_html_heavy_typst_pdfs++
+      Register-QualityIssue -Message "RAW HTML-HEAVY ARTICLE STILL ON TYPST for '$slug': $($file.FullName)"
+    }
   }
 }
+
+Write-Host "`nPDF quality summary:" -ForegroundColor Cyan
+Write-Host "  Fallback PDFs: $($qualitySummary.fallback_pdfs)"
+Write-Host "  HTML PDFs: $($qualitySummary.html_pdfs)"
+Write-Host "  Auto-routed HTML PDFs: $($qualitySummary.auto_html_pdfs)"
+Write-Host "  Placeholder figures: $($qualitySummary.placeholder_figures)"
+Write-Host "  Remote-image placeholders: $($qualitySummary.remote_image_placeholders)"
+Write-Host "  Raw HTML-heavy PDFs still on Typst: $($qualitySummary.raw_html_heavy_typst_pdfs)"
 
 if ($fail) {
   Write-Host "`nPreflight FAILED. Fix issues above before publishing." -ForegroundColor Red

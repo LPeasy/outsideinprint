@@ -197,13 +197,17 @@ function Format-FileSizeLabel {
 }
 
 function Get-PdfVariant {
-  param([hashtable]$FrontMatter,[string]$Section)
+  param([hashtable]$FrontMatter,[string]$Section,[string]$Engine,[object]$BuildMeta)
+
+  if ($null -ne $BuildMeta -and $BuildMeta.PSObject.Properties.Name -contains "variant" -and -not [string]::IsNullOrWhiteSpace([string]$BuildMeta.variant)) {
+    return ([string]$BuildMeta.variant).Trim().ToLowerInvariant()
+  }
 
   if ($FrontMatter.ContainsKey("pdf_variant") -and -not [string]::IsNullOrWhiteSpace($FrontMatter["pdf_variant"])) {
     return $FrontMatter["pdf_variant"].Trim().ToLowerInvariant()
   }
 
-  if ($FrontMatter.ContainsKey("pdf_engine") -and ($FrontMatter["pdf_engine"].Trim().ToLowerInvariant() -eq "html")) {
+  if ($Engine -eq "html") {
     return "visual"
   }
 
@@ -215,7 +219,11 @@ function Get-PdfVariant {
 }
 
 function Get-PdfEngine {
-  param([hashtable]$FrontMatter)
+  param([hashtable]$FrontMatter,[object]$BuildMeta)
+
+  if ($null -ne $BuildMeta -and $BuildMeta.PSObject.Properties.Name -contains "engine" -and -not [string]::IsNullOrWhiteSpace([string]$BuildMeta.engine)) {
+    return ([string]$BuildMeta.engine).Trim().ToLowerInvariant()
+  }
 
   if ($FrontMatter.ContainsKey("pdf_engine") -and -not [string]::IsNullOrWhiteSpace($FrontMatter["pdf_engine"])) {
     return $FrontMatter["pdf_engine"].Trim().ToLowerInvariant()
@@ -306,11 +314,11 @@ foreach ($file in $mdFiles) {
   $pdfInfo = Get-Item -LiteralPath $pdfPath
   $pageCount = Get-PdfPageCount -Path $pdfPath
   $wordCount = Get-ApproximateWordCount -Raw $raw
-  $engine = Get-PdfEngine -FrontMatter $frontMatter
-  $variant = Get-PdfVariant -FrontMatter $frontMatter -Section $section
-  $summary = Get-ArticleSummary -FrontMatter $frontMatter -Raw $raw
   $buildMetaPath = Join-Path $BuildMetaRoot "$slug.pdfmeta.json"
   $buildMeta = Read-BuildMeta -Path $buildMetaPath
+  $engine = Get-PdfEngine -FrontMatter $frontMatter -BuildMeta $buildMeta
+  $variant = Get-PdfVariant -FrontMatter $frontMatter -Section $section -Engine $engine -BuildMeta $buildMeta
+  $summary = Get-ArticleSummary -FrontMatter $frontMatter -Raw $raw
   $referenceCount = 0
   if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "reference_count") {
     $referenceCount = [int]$buildMeta.reference_count
@@ -337,8 +345,13 @@ foreach ($file in $mdFiles) {
     render_status = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "render_status") { [string]$buildMeta.render_status } else { "unknown" }
     placeholder_count = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "placeholder_count") { [int]$buildMeta.placeholder_count } else { 0 }
     omitted_remote_images = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "omitted_remote_images") { [int]$buildMeta.omitted_remote_images } else { 0 }
+    localized_remote_images = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "localized_remote_images") { [int]$buildMeta.localized_remote_images } else { 0 }
     local_image_count = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "local_image_count") { [int]$buildMeta.local_image_count } else { 0 }
     reference_count = $referenceCount
+    failure_cause = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "failure_cause") { [string]$buildMeta.failure_cause } else { "" }
+    failure_detail = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "failure_detail") { [string]$buildMeta.failure_detail } else { "" }
+    auto_engine_selected = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "auto_engine_selected") { [bool]$buildMeta.auto_engine_selected } else { $false }
+    raw_html_score = if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "raw_html_score") { [int]$buildMeta.raw_html_score } else { 0 }
     value_props = Get-ValueProps -Variant $variant -HasReferences ($referenceCount -gt 0) -Engine $engine
   }
 
