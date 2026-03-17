@@ -993,6 +993,40 @@ article figcaption{
   margin:0 auto;
   border-radius:8px;
 }
+.piece-body pre,
+.piece-body table{
+  margin:1.4rem 0;
+}
+.piece-body pre{
+  overflow-x:auto;
+  padding:0.9rem 1rem;
+  border:1px solid rgba(232,226,216,.12);
+  border-radius:12px;
+  background:rgba(232,226,216,.035);
+  font-size:0.92rem;
+  line-height:1.6;
+}
+.piece-body code{
+  font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size:0.92em;
+}
+.piece-body table{
+  width:100%;
+  border-collapse:collapse;
+  font-family:var(--sans);
+  font-size:0.9rem;
+}
+.piece-body th,
+.piece-body td{
+  padding:0.55rem 0.6rem;
+  border:1px solid rgba(232,226,216,.14);
+  text-align:left;
+  vertical-align:top;
+}
+.piece-body th{
+  color:var(--fg);
+  background:rgba(232,226,216,.05);
+}
 .piece-body figure,
 .piece-body .article-figure{
   margin:1.85rem 0 1rem;
@@ -2068,10 +2102,18 @@ button.dashboard-chip{
   }
 }
 @media print{
+  :root{
+    --bg:#fff;
+    --fg:#111;
+    --muted:#57524b;
+    --hair:#d7d0c7;
+    --link:#111;
+  }
   body{
     background:#fff;
     color:#111;
   }
+  .skip-link,
   .site-header,
   .site-footer,
   .newsletter-signup,
@@ -2091,18 +2133,39 @@ button.dashboard-chip{
     margin:0;
     padding:0;
   }
+  .wrap{
+    max-width:none;
+    padding:0;
+  }
+  .running-header,
+  .imprint-header,
+  .citation{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
   .piece-body{
     font-size:11pt;
-    line-height:1.55;
+    line-height:1.58;
   }
   .piece-body h2,
   .piece-body h3,
   .piece-body h4,
   .piece-body blockquote,
   .piece-body figure,
-  .piece-body img{
+  .piece-body img,
+  .piece-body pre,
+  .piece-body table{
     break-inside:avoid;
     page-break-inside:avoid;
+  }
+  .piece-body pre{
+    white-space:pre-wrap;
+    border-color:#d8d1c8;
+    background:#f8f5f1;
+  }
+  .piece-body th,
+  .piece-body td{
+    border-color:#d8d1c8;
   }
   a,
   a:visited{

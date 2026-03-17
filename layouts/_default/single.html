@@ -3,7 +3,7 @@
   {{ if .Params.medium_source_url }}
     {{ $pageClass = printf "%s single-page--imported" $pageClass }}
   {{ end }}
-  <article class="{{ $pageClass }}" data-analytics-eligible-read="true">
+  <article class="{{ $pageClass }}" data-analytics-eligible-read="true" data-pdf-render-root>
     <header class="piece-header">
       {{ partial "running_header.html" . }}
 

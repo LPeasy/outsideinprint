@@ -19,9 +19,11 @@ hugo server -D
 2. Write, then set `draft: false` when ready.
 3. Build PDF editions locally:
    - `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
-4. Run preflight:
+4. Verify generated PDFs:
+   - `powershell -ExecutionPolicy Bypass -File .\scripts\verify_pdf_pipeline.ps1`
+5. Run preflight:
    - `powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1`
-5. Commit + push (push = publish once GitHub Pages is enabled).
+6. Commit + push (push = publish once GitHub Pages is enabled).
 
 ## Metadata conventions
 
@@ -40,17 +42,36 @@ Each non-draft piece should include:
 
 Single pages render an **edition header** plus a **Cite this** block so each page reads like a real imprint object, not a blog post.
 
-## PDF edition generation (Typst)
+## PDF edition generation
+
+`pdf_engine: html` now prints the fully rendered Hugo page through headless Chromium/Playwright on `localhost`, so layout-sensitive editions use the real site markup and print CSS instead of HTML cleanup heuristics. `pdf_engine: typst` remains available for text-first/report pieces.
 
 Local:
 - Install Typst + Pandoc.
+- Run `npm install`
+- Run `npx playwright install chromium`
 - Run: `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
 
 CI:
 - GitHub Actions runs `scripts/build_pdfs_typst_ci.ps1` on every push to `main`.
 - Flow: Markdown -> Typst or browser-print render -> `static/pdfs/` -> `scripts/sync_pdf_catalog.ps1` -> preflight -> Hugo build -> deploy.
+- The workflow installs Node dependencies plus Playwright Chromium before the PDF build so the HTML path stays headless and deterministic on `ubuntu-latest`.
+
+If the HTML path is unavailable locally, the builder will tell you to run `npm install` and `npx playwright install chromium`.
 
 ## Verification commands
+
+Node/browser tests:
+
+```powershell
+npm test
+```
+
+PDF pipeline verification:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\verify_pdf_pipeline.ps1
+```
 
 Expected pass (real content):
 

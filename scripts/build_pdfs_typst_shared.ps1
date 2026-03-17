@@ -1,5 +1,10 @@
 param(
-  [string]$Mode = "Local"
+  [string]$Mode = "Local",
+  [string]$ContentRoot = "./content",
+  [string]$PdfOutDir = "./static/pdfs",
+  [string]$TempDir = "./resources/typst_build",
+  [string]$PdfCatalogPath = "./data/pdfs/catalog.json",
+  [string]$HtmlRendererScript = "./scripts/render_hugo_pdfs.mjs"
 )
 
 $ErrorActionPreference = "Stop"
@@ -7,10 +12,9 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 Write-Host "Outside In Print ~ $Mode Hybrid PDF Builder" -ForegroundColor Cyan
 
-$ContentRoot = "./content"
-$PdfOutDir = "./static/pdfs"
-$TempDir = "./resources/typst_build"
 $HtmlSiteDir = Join-Path $TempDir "__html_site"
+$HtmlManifestPath = Join-Path $TempDir "__html_pdf_jobs.json"
+$HtmlResultsPath = Join-Path $TempDir "__html_pdf_results.json"
 $AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
 $EditionTemplatePath = "./templates/edition.typ"
 $CatalogSyncScript = "./scripts/sync_pdf_catalog.ps1"
@@ -1121,46 +1125,46 @@ function Resolve-CoverImagePath {
   return $resolved
 }
 
-function Get-BrowserPath {
-  $pathCandidates = @(
-    "C:\Program Files\Google\Chrome\Application\chrome.exe",
-    "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
-    "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
-    "C:\Program Files\Microsoft\Edge\Application\msedge.exe",
-    "/usr/bin/google-chrome",
-    "/usr/bin/google-chrome-stable",
-    "/usr/bin/chromium",
-    "/usr/bin/chromium-browser",
-    "/usr/bin/microsoft-edge",
-    "/usr/bin/msedge"
-  )
-
-  $pathMatch = $pathCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
-  if ($pathMatch) {
-    return $pathMatch
+function Get-AvailableTcpPort {
+  $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, 0)
+  try {
+    $listener.Start()
+    return ([System.Net.IPEndPoint]$listener.LocalEndpoint).Port
   }
-
-  foreach ($commandName in @("google-chrome", "google-chrome-stable", "chromium", "chromium-browser", "microsoft-edge", "msedge")) {
-    $command = Get-Command $commandName -ErrorAction SilentlyContinue | Select-Object -First 1
-    if ($null -ne $command) {
-      return $command.Source
-    }
+  finally {
+    $listener.Stop()
   }
-
-  return ""
 }
 
-function Ensure-HtmlSiteBuild {
-  if (Test-Path -Path $HtmlSiteDir -PathType Container) {
-    return
+function Get-HtmlRenderUnavailableReason {
+  if (-not (Get-Command "node" -ErrorAction SilentlyContinue)) {
+    return "node is not available in PATH"
   }
 
-  Require-NativeCommand -Name "hugo"
-  Invoke-NativeOrThrow -Command "hugo" -Arguments @(
-    '--destination', $HtmlSiteDir,
-    '--baseURL', '/',
-    '--quiet'
-  )
+  if (-not (Get-Command "hugo" -ErrorAction SilentlyContinue)) {
+    return "hugo is not available in PATH"
+  }
+
+  if (-not (Test-Path -Path $HtmlRendererScript -PathType Leaf)) {
+    return "the Playwright renderer script is missing at $HtmlRendererScript"
+  }
+
+  $probe = Invoke-NativeCapture -Command "node" -Arguments @(
+    '--input-type=module',
+    '-e',
+    "import('playwright').then(async ({ chromium }) => { const browser = await chromium.launch({ headless: true }); await browser.close(); }).catch((error) => { console.error(error && error.message ? error.message : String(error)); process.exit(1); });"
+  ) -CaptureStem "html-renderer-probe"
+
+  if ($probe.ExitCode -eq 0) {
+    return ""
+  }
+
+  $detail = ($probe.Stderr, $probe.Stdout | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -First 1)
+  if ($detail) {
+    return "$($detail.Trim()) Run 'npm install' and 'npx playwright install chromium'."
+  }
+
+  return "Playwright/Chromium could not be started. Run 'npm install' and 'npx playwright install chromium'."
 }
 
 function Resolve-HtmlOutputPath {
@@ -1181,51 +1185,129 @@ function Resolve-HtmlOutputPath {
   return ""
 }
 
-function Invoke-BrowserPdfRender {
+function Get-HtmlPageRoute {
+  param([string]$HtmlPath)
+
+  $relativePath = Get-RelativePath -RootPath $HtmlSiteDir -FullPath $HtmlPath
+  $webPath = ($relativePath -replace '\\', '/').TrimStart('/')
+
+  if ($webPath.EndsWith('/index.html')) {
+    return "/" + $webPath.Substring(0, $webPath.Length - '/index.html'.Length) + "/"
+  }
+
+  if ($webPath -eq 'index.html') {
+    return "/"
+  }
+
+  return "/" + $webPath
+}
+
+function Invoke-HtmlPdfBatchRender {
   param(
-    [string]$BrowserPath,
-    [string]$HtmlPath,
-    [string]$PdfPath,
-    [string]$SafeSlug
+    [System.Collections.IList]$Jobs
   )
 
-  $stdoutPath = Join-Path $TempDir "$SafeSlug.html-render.stdout.txt"
-  $stderrPath = Join-Path $TempDir "$SafeSlug.html-render.stderr.txt"
-  $htmlUri = ([Uri](Resolve-Path $HtmlPath)).AbsoluteUri
-  $args = @(
-    '--headless=new',
-    '--disable-gpu',
-    '--no-first-run',
-    '--no-default-browser-check',
-    '--disable-crash-reporter',
-    '--disable-breakpad',
-    '--virtual-time-budget=15000',
-    '--print-to-pdf-no-header',
-    "--print-to-pdf=$PdfPath",
-    $htmlUri
-  )
+  if ($Jobs.Count -eq 0) {
+    return @{}
+  }
 
-  $startProcessArgs = @{
-    FilePath = $BrowserPath
-    ArgumentList = $args
-    Wait = $true
-    PassThru = $true
-    RedirectStandardOutput = $stdoutPath
-    RedirectStandardError = $stderrPath
+  Require-NativeCommand -Name "node"
+  Require-NativeCommand -Name "hugo"
+
+  if (Test-Path -Path $HtmlSiteDir -PathType Container) {
+    Remove-Item -Recurse -Force $HtmlSiteDir
   }
-  if ($IsWindows) {
-    $startProcessArgs.WindowStyle = 'Hidden'
+  New-Item -ItemType Directory -Force -Path $HtmlSiteDir | Out-Null
+
+  $port = Get-AvailableTcpPort
+  $baseUrl = "http://127.0.0.1:$port/"
+
+  $priorAnalyticsEnabled = $env:ANALYTICS_ENABLED
+  $priorAnalyticsAllowLocal = $env:ANALYTICS_ALLOW_LOCAL
+  try {
+    $env:ANALYTICS_ENABLED = "false"
+    $env:ANALYTICS_ALLOW_LOCAL = "false"
+
+    Invoke-NativeOrThrow -Command "hugo" -Arguments @(
+      '--contentDir', $ContentRoot,
+      '--destination', $HtmlSiteDir,
+      '--baseURL', $baseUrl,
+      '--quiet'
+    )
   }
-  $process = Start-Process @startProcessArgs
-  if ($process.ExitCode -ne 0 -or -not (Test-Path -Path $PdfPath -PathType Leaf)) {
-    $stderr = if (Test-Path -Path $stderrPath -PathType Leaf) { Get-Content -Raw $stderrPath } else { "" }
-    throw "HTML-to-PDF render failed for $HtmlPath. $stderr"
+  finally {
+    $env:ANALYTICS_ENABLED = $priorAnalyticsEnabled
+    $env:ANALYTICS_ALLOW_LOCAL = $priorAnalyticsAllowLocal
   }
+
+  $manifestJobs = New-Object System.Collections.Generic.List[object]
+  foreach ($job in $Jobs) {
+    $htmlPath = Resolve-HtmlOutputPath -Section $job.section -Slug $job.slug
+    if (-not $htmlPath) {
+      throw "Could not locate built HTML for $($job.section)/$($job.slug)"
+    }
+
+    $manifestJobs.Add([ordered]@{
+      slug = $job.slug
+      route = Get-HtmlPageRoute -HtmlPath $htmlPath
+      outputPath = $job.pdf_path
+      waitForSelector = '[data-pdf-render-root]'
+    })
+  }
+
+  Write-JsonFile -Path $HtmlManifestPath -Value ([ordered]@{
+      outputDir = $HtmlSiteDir
+      baseUrl = $baseUrl
+      timeoutMs = 45000
+      viewport = [ordered]@{
+        width = 1400
+        height = 1900
+      }
+      pdf = [ordered]@{
+        format = 'Letter'
+        printBackground = $true
+        preferCSSPageSize = $true
+        margin = [ordered]@{
+          top = '0.55in'
+          right = '0.6in'
+          bottom = '0.65in'
+          left = '0.6in'
+        }
+      }
+      jobs = $manifestJobs
+    })
+
+  $render = Invoke-NativeCapture -Command "node" -Arguments @(
+    $HtmlRendererScript,
+    '--manifest', $HtmlManifestPath,
+    '--results', $HtmlResultsPath
+  ) -CaptureStem "html-renderer"
+
+  if ($render.ExitCode -ne 0) {
+    $detail = ($render.Stderr, $render.Stdout | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -First 1)
+    if (-not $detail) {
+      $detail = "Unknown Playwright rendering error."
+    }
+    throw "HTML PDF rendering failed. $($detail.Trim())"
+  }
+
+  $results = Get-Content -Raw $HtmlResultsPath | ConvertFrom-Json
+  $bySlug = @{}
+  foreach ($result in $results.results) {
+    if (-not [bool]$result.ok) {
+      throw "HTML PDF rendering failed for '$($result.slug)'. $($result.error)"
+    }
+
+    $bySlug[[string]$result.slug] = $result
+  }
+
+  return $bySlug
 }
 
 $siteBaseUrl = Get-SiteBaseUrl -ConfigPath "./hugo.toml"
 $typstReady = $false
-$browserPath = $null
+$htmlRendererUnavailableReason = $null
+$htmlJobs = New-Object System.Collections.Generic.List[object]
 
 $mdFiles = Get-ChildItem -Path $ContentRoot -Recurse -File -Filter "*.md" |
   Where-Object {
@@ -1305,22 +1387,13 @@ foreach ($file in $mdFiles) {
   }
 
   if ($engine -eq 'html') {
-    $htmlUnavailableReason = ""
-
-    if (-not $browserPath) {
-      $browserPath = Get-BrowserPath
-      if (-not $browserPath) {
-        $htmlUnavailableReason = "no supported browser was found"
-      }
+    if ($null -eq $htmlRendererUnavailableReason) {
+      $htmlRendererUnavailableReason = Get-HtmlRenderUnavailableReason
     }
 
-    if (($engine -eq 'html') -and [string]::IsNullOrWhiteSpace($htmlUnavailableReason) -and -not (Get-Command "hugo" -ErrorAction SilentlyContinue)) {
-      $htmlUnavailableReason = "hugo is not available in PATH"
-    }
-
-    if (($engine -eq 'html') -and -not [string]::IsNullOrWhiteSpace($htmlUnavailableReason)) {
+    if (-not [string]::IsNullOrWhiteSpace($htmlRendererUnavailableReason)) {
       if ($autoEngineSelected) {
-        Write-Warning "Auto-selected HTML PDF rendering is unavailable for '$slug' because $htmlUnavailableReason. Falling back to Typst."
+        Write-Warning "Auto-selected HTML PDF rendering is unavailable for '$slug' because $htmlRendererUnavailableReason. Falling back to Typst."
         $engine = "typst"
         $variant = Get-PdfVariant -FrontMatter $frontMatter -Section $section -Engine $engine
         $buildMeta.engine = $engine
@@ -1329,21 +1402,18 @@ foreach ($file in $mdFiles) {
         $buildMeta.warnings += "auto_html_unavailable"
       }
       else {
-        throw "HTML PDF rendering is unavailable because $htmlUnavailableReason."
+        throw "HTML PDF rendering is unavailable because $htmlRendererUnavailableReason."
       }
     }
 
     if ($engine -eq 'html') {
-      Ensure-HtmlSiteBuild
-      $htmlPath = Resolve-HtmlOutputPath -Section $section -Slug $slug
-      if (-not $htmlPath) {
-        throw "Could not locate built HTML for $section/$slug"
-      }
-
-      Invoke-BrowserPdfRender -BrowserPath $browserPath -HtmlPath $htmlPath -PdfPath $pdfPath -SafeSlug $safeSlug
-      $buildMeta.render_status = "primary"
-      Write-Host "Built (html): $pdfPath" -ForegroundColor Green
-      Write-JsonFile -Path $buildMetaPath -Value $buildMeta
+      $htmlJobs.Add([ordered]@{
+        slug = $slug
+        section = $section
+        pdf_path = $pdfPath
+        build_meta_path = $buildMetaPath
+        build_meta = $buildMeta
+      })
       continue
     }
   }
@@ -1539,8 +1609,26 @@ foreach ($file in $mdFiles) {
   Write-JsonFile -Path $buildMetaPath -Value $buildMeta
 }
 
+if ($htmlJobs.Count -gt 0) {
+  $htmlResults = Invoke-HtmlPdfBatchRender -Jobs $htmlJobs
+
+  foreach ($job in $htmlJobs) {
+    $result = $htmlResults[$job.slug]
+    if ($null -eq $result) {
+      throw "HTML PDF rendering completed without a result entry for '$($job.slug)'."
+    }
+
+    $buildMeta = $job.build_meta
+    $buildMeta.render_status = "primary"
+    $buildMeta.source_path = [string]$result.route
+    $buildMeta.source_url = [string]$result.url
+    Write-JsonFile -Path $job.build_meta_path -Value $buildMeta
+    Write-Host "Built (html): $($job.pdf_path)" -ForegroundColor Green
+  }
+}
+
 if (Test-Path -Path $CatalogSyncScript -PathType Leaf) {
-  & $CatalogSyncScript -ContentRoot $ContentRoot -PdfRoot $PdfOutDir -BuildMetaRoot $TempDir | Out-Null
+  & $CatalogSyncScript -ContentRoot $ContentRoot -PdfRoot $PdfOutDir -BuildMetaRoot $TempDir -OutputPath $PdfCatalogPath | Out-Null
 }
 
 Write-Host "`n$Mode PDF build complete." -ForegroundColor Cyan

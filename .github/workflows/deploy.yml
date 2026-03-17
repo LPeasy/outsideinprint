@@ -32,8 +32,19 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
+
+      - name: Setup Hugo (extended)
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.157.0'
+          extended: true
 
       - name: Install Pandoc
         shell: bash
@@ -42,28 +53,37 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends pandoc
 
+      - name: Install Node dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install
+          npx playwright install --with-deps chromium
+
       - name: Verify Toolchain
         shell: bash
         run: |
           set -euo pipefail
+          node --version
+          npm --version
           typst --version
+          hugo version
           pandoc --version | head -n 2
 
-      - name: Build PDF Editions (Typst)
+      - name: Build PDF Editions
         shell: pwsh
         run: |
           ./scripts/build_pdfs_typst_ci.ps1
+
+      - name: Verify PDF Pipeline
+        shell: pwsh
+        run: |
+          ./scripts/verify_pdf_pipeline.ps1
 
       - name: Preflight Validation
         shell: pwsh
         run: |
           ./scripts/preflight.ps1
-
-      - name: Setup Hugo (extended)
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.157.0'
-          extended: true
 
       - name: Build Hugo
         run: hugo --gc --minify

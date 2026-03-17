@@ -1,5 +1,5 @@
 {{ $stickyMasthead := and .IsPage (not (in (slice "collections" "random") .Section)) }}
-<header class="masthead{{ if $stickyMasthead }} masthead--sticky{{ end }}">
+<header class="masthead site-header{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <a class="brand-link" href="{{ "" | absURL }}" aria-label="Outside In Print home">
     <div class="title">
       <span class="top">OUTSIDE</span>
