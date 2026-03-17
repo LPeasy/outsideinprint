@@ -1122,14 +1122,32 @@ function Resolve-CoverImagePath {
 }
 
 function Get-BrowserPath {
-  $candidates = @(
+  $pathCandidates = @(
     "C:\Program Files\Google\Chrome\Application\chrome.exe",
     "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
     "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
-    "C:\Program Files\Microsoft\Edge\Application\msedge.exe"
+    "C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+    "/usr/bin/google-chrome",
+    "/usr/bin/google-chrome-stable",
+    "/usr/bin/chromium",
+    "/usr/bin/chromium-browser",
+    "/usr/bin/microsoft-edge",
+    "/usr/bin/msedge"
   )
 
-  return ($candidates | Where-Object { Test-Path $_ } | Select-Object -First 1)
+  $pathMatch = $pathCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+  if ($pathMatch) {
+    return $pathMatch
+  }
+
+  foreach ($commandName in @("google-chrome", "google-chrome-stable", "chromium", "chromium-browser", "microsoft-edge", "msedge")) {
+    $command = Get-Command $commandName -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($null -ne $command) {
+      return $command.Source
+    }
+  }
+
+  return ""
 }
 
 function Ensure-HtmlSiteBuild {
@@ -1287,24 +1305,47 @@ foreach ($file in $mdFiles) {
   }
 
   if ($engine -eq 'html') {
+    $htmlUnavailableReason = ""
+
     if (-not $browserPath) {
       $browserPath = Get-BrowserPath
       if (-not $browserPath) {
-        throw "No supported browser was found for html PDF rendering."
+        $htmlUnavailableReason = "no supported browser was found"
       }
     }
 
-    Ensure-HtmlSiteBuild
-    $htmlPath = Resolve-HtmlOutputPath -Section $section -Slug $slug
-    if (-not $htmlPath) {
-      throw "Could not locate built HTML for $section/$slug"
+    if (($engine -eq 'html') -and [string]::IsNullOrWhiteSpace($htmlUnavailableReason) -and -not (Get-Command "hugo" -ErrorAction SilentlyContinue)) {
+      $htmlUnavailableReason = "hugo is not available in PATH"
     }
 
-    Invoke-BrowserPdfRender -BrowserPath $browserPath -HtmlPath $htmlPath -PdfPath $pdfPath -SafeSlug $safeSlug
-    $buildMeta.render_status = "primary"
-    Write-Host "Built (html): $pdfPath" -ForegroundColor Green
-    Write-JsonFile -Path $buildMetaPath -Value $buildMeta
-    continue
+    if (($engine -eq 'html') -and -not [string]::IsNullOrWhiteSpace($htmlUnavailableReason)) {
+      if ($autoEngineSelected) {
+        Write-Warning "Auto-selected HTML PDF rendering is unavailable for '$slug' because $htmlUnavailableReason. Falling back to Typst."
+        $engine = "typst"
+        $variant = Get-PdfVariant -FrontMatter $frontMatter -Section $section -Engine $engine
+        $buildMeta.engine = $engine
+        $buildMeta.variant = $variant
+        $buildMeta.auto_engine_selected = $false
+        $buildMeta.warnings += "auto_html_unavailable"
+      }
+      else {
+        throw "HTML PDF rendering is unavailable because $htmlUnavailableReason."
+      }
+    }
+
+    if ($engine -eq 'html') {
+      Ensure-HtmlSiteBuild
+      $htmlPath = Resolve-HtmlOutputPath -Section $section -Slug $slug
+      if (-not $htmlPath) {
+        throw "Could not locate built HTML for $section/$slug"
+      }
+
+      Invoke-BrowserPdfRender -BrowserPath $browserPath -HtmlPath $htmlPath -PdfPath $pdfPath -SafeSlug $safeSlug
+      $buildMeta.render_status = "primary"
+      Write-Host "Built (html): $pdfPath" -ForegroundColor Green
+      Write-JsonFile -Path $buildMetaPath -Value $buildMeta
+      continue
+    }
   }
 
   if (-not $typstReady) {
