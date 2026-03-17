@@ -41,7 +41,7 @@ jobs:
         uses: typst-community/setup-typst@v4
 
       - name: Setup Hugo (extended)
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.157.0'
           extended: true
@@ -81,6 +81,8 @@ jobs:
           ./scripts/verify_pdf_pipeline.ps1
 
       - name: Audit PDF Failures
+        id: pdf_audit
+        continue-on-error: true
         shell: pwsh
         run: |
           ./scripts/audit_pdf_failures.ps1
@@ -100,7 +102,18 @@ jobs:
         run: |
           ./scripts/preflight.ps1
 
+      - name: Summarize PDF audit
+        if: always()
+        shell: bash
+        run: |
+          if [ "${{ steps.pdf_audit.outcome }}" = "success" ]; then
+            echo "PDF audit passed." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "PDF audit reported pipeline regressions. See the uploaded pdf-failure-audit artifact." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Upload PDF audit artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: pdf-failure-audit
