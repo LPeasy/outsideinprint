@@ -615,17 +615,19 @@ function Normalize-TypstBody {
 
   $body = Read-Utf8Text -Path $Path
   $body = Repair-CommonTextArtifacts -Value $body
-  $placeholderCount = 0
+  $placeholderState = @{
+    Count = 0
+  }
 
   $body = $body -replace '(?m)^#horizontalrule\s*$', ''
   $body = $body -replace '(?m)^#line\(length: 100%\)\s*$', ''
   $body = [regex]::Replace($body, '#box\(image\("https?://[^"\r\n]+"\)\)', {
-      $script:placeholderCount++
-      '#pdf_figure_placeholder(note: "Image kept on web edition only.")'
+      $placeholderState.Count++
+      '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#set text(size: 9pt, style: "italic", fill: luma(120))[Image kept on web edition only.]]]'
     })
   $body = [regex]::Replace($body, '#image\("https?://[^"\r\n]+"\)', {
-      $script:placeholderCount++
-      '#pdf_figure_placeholder(note: "Image kept on web edition only.")'
+      $placeholderState.Count++
+      '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#set text(size: 9pt, style: "italic", fill: luma(120))[Image kept on web edition only.]]]'
     })
   $body = [regex]::Replace($body, '#cite\([^\)]*\)', '')
   $body = [regex]::Replace($body, '(?ms)#block\[\s*[^#\[\]]*?www\.[^\]]*?\]', '')
@@ -655,7 +657,7 @@ function Normalize-TypstBody {
   return @{
     Body = $body
     HeadingCount = $headingCount
-    PlaceholderCount = $placeholderCount
+    PlaceholderCount = $placeholderState.Count
   }
 }
 
@@ -944,10 +946,18 @@ foreach ($file in $mdFiles) {
     $fallbackDocPath = Join-Path $TempDir "$safeSlug.fallback.typ"
 
     $fallbackBody = @"
-#pdf_callout(
-  title: [Reading edition notice],
-  body: [The original article body contained markup that could not be rendered automatically in Typst. A simplified archival edition was generated instead.]
-)
+#block(
+  inset: 14pt,
+  stroke: 0.45pt + luma(120),
+  radius: 4pt,
+  above: 1.2em,
+  below: 1.2em,
+)[
+  #set text(size: 9.25pt)
+  #strong[Reading edition notice]
+  #v(0.45em)
+  The original article body contained markup that could not be rendered automatically in Typst. A simplified archival edition was generated instead.
+]
 "@
     Write-Utf8Text -Path $fallbackBodyPath -Value $fallbackBody
     Write-Utf8Text -Path $fallbackRefsPath -Value $referencesContent
