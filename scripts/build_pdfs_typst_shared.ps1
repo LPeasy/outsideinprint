@@ -45,7 +45,18 @@ function Invoke-NativeCapture {
 
   $stdoutPath = Join-Path $TempDir "$CaptureStem.stdout.txt"
   $stderrPath = Join-Path $TempDir "$CaptureStem.stderr.txt"
-  $process = Start-Process -FilePath $Command -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+  $startProcessArgs = @{
+    FilePath = $Command
+    ArgumentList = $Arguments
+    Wait = $true
+    PassThru = $true
+    RedirectStandardOutput = $stdoutPath
+    RedirectStandardError = $stderrPath
+  }
+  if ($IsWindows) {
+    $startProcessArgs.WindowStyle = 'Hidden'
+  }
+  $process = Start-Process @startProcessArgs
   $stdout = if (Test-Path -Path $stdoutPath -PathType Leaf) { Get-Content -Path $stdoutPath -Raw } else { "" }
   $stderr = if (Test-Path -Path $stderrPath -PathType Leaf) { Get-Content -Path $stderrPath -Raw } else { "" }
 
@@ -1176,7 +1187,18 @@ function Invoke-BrowserPdfRender {
     $htmlUri
   )
 
-  $process = Start-Process -FilePath $BrowserPath -ArgumentList $args -Wait -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+  $startProcessArgs = @{
+    FilePath = $BrowserPath
+    ArgumentList = $args
+    Wait = $true
+    PassThru = $true
+    RedirectStandardOutput = $stdoutPath
+    RedirectStandardError = $stderrPath
+  }
+  if ($IsWindows) {
+    $startProcessArgs.WindowStyle = 'Hidden'
+  }
+  $process = Start-Process @startProcessArgs
   if ($process.ExitCode -ne 0 -or -not (Test-Path -Path $PdfPath -PathType Leaf)) {
     $stderr = if (Test-Path -Path $stderrPath -PathType Leaf) { Get-Content -Raw $stderrPath } else { "" }
     throw "HTML-to-PDF render failed for $HtmlPath. $stderr"
