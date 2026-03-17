@@ -66,7 +66,7 @@
   }
 
   function buildEventPath(eventName, props) {
-    var keys = ["path", "slug", "section", "source_slot", "collection", "format"];
+    var keys = ["path", "slug", "section", "source_slot", "collection", "format", "engine", "variant", "length_bucket"];
     var parts = ["oip:" + eventName];
 
     keys.forEach(function (key) {
@@ -141,6 +141,9 @@
       source_slot: node.dataset.analyticsSourceSlot,
       collection: node.dataset.analyticsCollection,
       format: node.dataset.analyticsFormat,
+      engine: node.dataset.analyticsEngine,
+      variant: node.dataset.analyticsVariant,
+      length_bucket: node.dataset.analyticsLengthBucket,
       path: node.dataset.analyticsPath
     });
   }

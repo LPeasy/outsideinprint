@@ -1,6 +1,8 @@
 param(
   [string]$ContentRoot = "./content",
-  [string]$PdfRoot = "./static/pdfs"
+  [string]$PdfRoot = "./static/pdfs",
+  [string]$PdfCatalogPath = "./data/pdfs/catalog.json",
+  [switch]$StrictPdfQuality
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,6 +17,16 @@ $slugSources = @{}
 function Read-Utf8Text {
   param([string]$Path)
   return [System.IO.File]::ReadAllText((Resolve-Path $Path), [System.Text.Encoding]::UTF8)
+}
+
+function Read-JsonFile {
+  param([string]$Path)
+
+  if (-not (Test-Path -Path $Path -PathType Leaf)) {
+    return $null
+  }
+
+  return (Read-Utf8Text -Path $Path | ConvertFrom-Json)
 }
 
 function Get-FrontMatterMap {
@@ -114,6 +126,73 @@ function Is-TrueValue {
   return $Value.Trim() -match "^(?i:true|yes|1)$"
 }
 
+function Test-BooleanLike {
+  param([string]$Value)
+
+  if ([string]::IsNullOrWhiteSpace($Value)) {
+    return $true
+  }
+
+  return ($Value.Trim() -match "^(?i:true|false|yes|no|1|0)$")
+}
+
+function Test-ContainsMojibake {
+  param([string]$Text)
+
+  if ([string]::IsNullOrWhiteSpace($Text)) {
+    return $false
+  }
+
+  foreach ($marker in @(
+      [string][char]0x00C3,
+      [string][char]0x00C2,
+      [string][char]0x00E2,
+      [string][char]0xFFFD
+    )) {
+    if ($Text.Contains($marker)) {
+      return $true
+    }
+  }
+
+  return $false
+}
+
+function Register-QualityIssue {
+  param(
+    [string]$Message,
+    [switch]$AlwaysFail
+  )
+
+  if ($AlwaysFail -or $StrictPdfQuality) {
+    Write-Host $Message -ForegroundColor Yellow
+    $script:fail = $true
+    return
+  }
+
+  Write-Host "QUALITY WARNING: $Message" -ForegroundColor DarkYellow
+}
+
+function Test-StaticAssetExists {
+  param([string]$PathValue)
+
+  if ([string]::IsNullOrWhiteSpace($PathValue)) {
+    return $true
+  }
+
+  if ($PathValue -match '^https?://') {
+    return $true
+  }
+
+  if (-not $PathValue.StartsWith('/')) {
+    return $true
+  }
+
+  $candidate = Join-Path "." ("static/" + $PathValue.TrimStart('/'))
+  return (Test-Path -Path $candidate -PathType Leaf)
+}
+
+$pdfCatalog = Read-JsonFile -Path $PdfCatalogPath
+
 $mdFiles = Get-ChildItem -Path $ContentRoot -Recurse -File -Filter "*.md" |
   Where-Object {
     $_.Name -ne "_index.md" -and
@@ -147,6 +226,39 @@ foreach ($file in $mdFiles) {
     $fail = $true
   }
 
+  if ($frontMatter.ContainsKey("pdf_engine")) {
+    $engine = $frontMatter["pdf_engine"].Trim().ToLowerInvariant()
+    if ($engine -notin @("typst", "html")) {
+      Write-Host "INVALID pdf_engine '$engine': $($file.FullName)" -ForegroundColor Yellow
+      $fail = $true
+    }
+  }
+
+  if ($frontMatter.ContainsKey("pdf_variant")) {
+    $variant = $frontMatter["pdf_variant"].Trim().ToLowerInvariant()
+    if ($variant -notin @("essay", "report", "visual")) {
+      Write-Host "INVALID pdf_variant '$variant': $($file.FullName)" -ForegroundColor Yellow
+      $fail = $true
+    }
+  }
+
+  foreach ($booleanField in @("pdf_disable_toc", "pdf_allow_fallback", "pdf_allow_placeholder_figures")) {
+    if ($frontMatter.ContainsKey($booleanField) -and -not (Test-BooleanLike -Value $frontMatter[$booleanField])) {
+      Write-Host "INVALID boolean field '$booleanField': $($file.FullName)" -ForegroundColor Yellow
+      $fail = $true
+    }
+  }
+
+  if ($frontMatter.ContainsKey("pdf_cover_image") -and -not (Test-StaticAssetExists -PathValue $frontMatter["pdf_cover_image"])) {
+    Write-Host "MISSING pdf_cover_image asset '$($frontMatter["pdf_cover_image"])': $($file.FullName)" -ForegroundColor Yellow
+    $fail = $true
+  }
+
+  $declaredVariant = if ($frontMatter.ContainsKey("pdf_variant")) { $frontMatter["pdf_variant"].Trim().ToLowerInvariant() } else { "" }
+  if ($declaredVariant -eq "visual" -and [string]::IsNullOrWhiteSpace($frontMatter["pdf_summary"])) {
+    Register-QualityIssue -Message "VISUAL PDF missing pdf_summary: $($file.FullName)"
+  }
+
   $slug = Get-ResolvedSlug -File $file -FrontMatterSlug ($frontMatter["slug"])
   if ([string]::IsNullOrWhiteSpace($slug)) {
     Write-Host "UNRESOLVABLE slug: $($file.FullName)" -ForegroundColor Red
@@ -172,6 +284,38 @@ foreach ($file in $mdFiles) {
   if (-not (Test-Path -Path $pdfPath -PathType Leaf)) {
     Write-Host "MISSING PDF file: $pdfPath (referenced by $($file.FullName))" -ForegroundColor Red
     $fail = $true
+  }
+
+  if (Test-ContainsMojibake -Text $raw) {
+    Register-QualityIssue -Message "MOJIBAKE DETECTED in source: $($file.FullName)"
+  }
+
+  if ($null -ne $pdfCatalog) {
+    $catalogEntry = $null
+    if ($pdfCatalog.PSObject.Properties.Name -contains $slug) {
+      $catalogEntry = $pdfCatalog.$slug
+    }
+
+    if ($null -eq $catalogEntry) {
+      Register-QualityIssue -Message "PDF catalog entry missing for '$slug': $($file.FullName)"
+      continue
+    }
+
+    if (
+      ($catalogEntry.PSObject.Properties.Name -contains "render_status") -and
+      ($catalogEntry.render_status -eq "fallback") -and
+      (-not (Is-TrueValue -Value $frontMatter["pdf_allow_fallback"]))
+    ) {
+      Register-QualityIssue -Message "FALLBACK PDF DETECTED for '$slug': $($file.FullName)"
+    }
+
+    if (
+      ($catalogEntry.PSObject.Properties.Name -contains "placeholder_count") -and
+      ([int]$catalogEntry.placeholder_count -gt 0) -and
+      (-not (Is-TrueValue -Value $frontMatter["pdf_allow_placeholder_figures"]))
+    ) {
+      Register-QualityIssue -Message "PLACEHOLDER FIGURES DETECTED for '$slug': $($file.FullName)"
+    }
   }
 }
 

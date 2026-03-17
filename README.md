@@ -32,6 +32,9 @@ Each non-draft piece should include:
 - `edition` (e.g., "First digital edition")
 - `pdf` path: `/pdfs/<slug>.pdf`
 - optional `featured: true` (shows on homepage)
+- optional `pdf_engine: typst | html` (`typst` default; reserve `html` for layout-sensitive pieces)
+- optional `pdf_variant: essay | report | visual`
+- optional `pdf_summary`, `pdf_cta_label`, `pdf_cover_image`, `pdf_disable_toc`
 
 ## Imprint upgrade (print feel)
 
@@ -45,7 +48,7 @@ Local:
 
 CI:
 - GitHub Actions runs `scripts/build_pdfs_typst_ci.ps1` on every push to `main`.
-- Flow: Markdown -> Pandoc (Typst writer) -> Typst compile -> `static/pdfs/` -> preflight -> Hugo build -> deploy.
+- Flow: Markdown -> Typst or browser-print render -> `static/pdfs/` -> `scripts/sync_pdf_catalog.ps1` -> preflight -> Hugo build -> deploy.
 
 ## Verification commands
 
@@ -106,6 +109,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\audit_essay_integrity.ps1
 - Shared PDF build runner: `scripts/build_pdfs_typst_shared.ps1`
 - Local wrapper: `scripts/build_pdfs_typst_local.ps1`
 - CI wrapper: `scripts/build_pdfs_typst_ci.ps1`
+- Catalog sync: `scripts/sync_pdf_catalog.ps1`
 
 
 ## Article-body conventions
