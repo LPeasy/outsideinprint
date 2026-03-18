@@ -1417,6 +1417,9 @@ function Normalize-TypstBody {
 
   $body = $body -replace '(?m)^#horizontalrule\s*$', ''
   $body = $body -replace '(?m)^#line\(length: 100%\)\s*$', ''
+  # Pandoc's Typst writer has emitted both quote and blockquote across versions.
+  $body = [regex]::Replace($body, '(?m)^(\s*)#blockquote\s*\(', '$1#quote(')
+  $body = [regex]::Replace($body, '(?m)^(\s*)#blockquote\s*\[', '$1#quote(block: true)[')
   $body = [regex]::Replace($body, '#box\(image\("(?<path>https?://[^"\r\n]+)"\)\)', {
       param($match)
 

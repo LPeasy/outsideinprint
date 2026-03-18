@@ -21,6 +21,7 @@
 #show heading.where(level: 2): set block(above: 1.5em, below: 0.55em)
 #show heading.where(level: 2): set text(size: 12.5pt, weight: "semibold")
 #show quote: set block(inset: (left: 1.2em), above: 0.9em, below: 0.9em)
+#let blockquote = quote
 
 #let running-header(title) = context {
   let current = counter(page).get().first()
