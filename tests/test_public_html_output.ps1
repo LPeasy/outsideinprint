@@ -12,9 +12,17 @@ function Get-RepoRelativePath {
     [string]$Path
   )
 
-  $repoUri = [System.Uri]((Resolve-Path $RepoRoot).Path + [System.IO.Path]::DirectorySeparatorChar)
-  $pathUri = [System.Uri](Resolve-Path $Path).Path
-  return [System.Uri]::UnescapeDataString($repoUri.MakeRelativeUri($pathUri).ToString()).Replace('/', '\')
+  $repoRootFull = [System.IO.Path]::GetFullPath((Resolve-Path -LiteralPath $RepoRoot).Path)
+  $pathFull = [System.IO.Path]::GetFullPath((Resolve-Path -LiteralPath $Path).Path)
+  $getRelativePath = [System.IO.Path].GetMethod('GetRelativePath', [Type[]]@([string], [string]))
+
+  if ($null -ne $getRelativePath) {
+    return ([System.IO.Path]::GetRelativePath($repoRootFull, $pathFull) -replace '\\', '/')
+  }
+
+  $repoRootUri = [System.Uri]($repoRootFull.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar)
+  $pathUri = [System.Uri]$pathFull
+  return ([System.Uri]::UnescapeDataString($repoRootUri.MakeRelativeUri($pathUri).ToString()) -replace '\\', '/')
 }
 
 function Format-SampleList {
@@ -113,14 +121,14 @@ foreach ($file in $htmlFiles) {
   }
 
   if (
-    $relativePath.EndsWith('public\index.html', [System.StringComparison]::OrdinalIgnoreCase) -and
+    $relativePath.EndsWith('public/index.html', [System.StringComparison]::OrdinalIgnoreCase) -and
     $content -match 'data-analytics-event=(?:"internal_promo_click"|internal_promo_click)' -and
     $content -match 'data-analytics-source-slot=(?:"random_link"|random_link)'
   ) {
     $hasHomepageAnalytics = $true
   }
 
-  if ($relativePath.EndsWith('public\library\index.html', [System.StringComparison]::OrdinalIgnoreCase) -and $content -match 'data-analytics-format=(?:"pdf"|pdf)') {
+  if ($relativePath.EndsWith('public/library/index.html', [System.StringComparison]::OrdinalIgnoreCase) -and $content -match 'data-analytics-format=(?:"pdf"|pdf)') {
     $hasLibraryPdfAnalytics = $true
   }
 }
