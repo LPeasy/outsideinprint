@@ -1,0 +1,30 @@
+{
+  "blocking_pipeline_problem_codes": [
+    "build_invocation_failed",
+    "tool_missing",
+    "invalid_typst_placeholder",
+    "root_relative_image_resolution",
+    "auto_html_renderer_unavailable",
+    "unclassified_failure_reason"
+  ],
+  "blocking_failure_reason_codes": [
+    "remote_image_placeholder_typst",
+    "local_image_path_missing",
+    "metadata_missing",
+    "pdf_missing",
+    "unknown_fallback"
+  ],
+  "warning_failure_reason_codes": [
+    "raw_html_complexity",
+    "embed_remnant",
+    "mojibake_content"
+  ],
+  "manual_diagnostic_sections": [
+    "content_problems",
+    "representative_failures"
+  ],
+  "notes": {
+    "blocking": "Pipeline and render-path defects that make production PDF validation untrustworthy must block deploys.",
+    "warning": "Known content-driven degradations remain visible in the audit but do not block Session 2 deploys unless FailOnContentIssues is set."
+  }
+}

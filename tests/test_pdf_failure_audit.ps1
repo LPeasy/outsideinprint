@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $auditScript = Join-Path $repoRoot "scripts/audit_pdf_failures.ps1"
+$policyPath = Join-Path $repoRoot "data/pdfs/validation-policy.json"
 $shellCommand = Get-Command pwsh -ErrorAction SilentlyContinue
 if ($null -eq $shellCommand) {
   $shellCommand = Get-Command powershell.exe -ErrorAction SilentlyContinue
@@ -136,6 +137,7 @@ function Invoke-Audit {
     -BuildContentRoot (Join-Path $Root "content") `
     -PdfRoot $pdfRoot `
     -BuildMetaRoot $buildMetaRoot `
+    -PolicyPath $policyPath `
     -JsonOutputPath $jsonPath `
     -MarkdownOutputPath $markdownPath `
     -SkipToolChecks 2>&1 | Out-String
@@ -157,6 +159,23 @@ function Assert-True {
 
 $rootsToClean = New-Object System.Collections.Generic.List[string]
 try {
+  $successRoot = New-TestRoot
+  $rootsToClean.Add($successRoot)
+  $successEssayRoot = Join-Path $successRoot "content/essays"
+  $successPdfRoot = Join-Path $successRoot "static/pdfs"
+  $successMetaRoot = Join-Path $successRoot "resources/typst_build"
+  New-Item -ItemType Directory -Force -Path $successPdfRoot | Out-Null
+
+  Write-TestMarkdown -EssayRoot $successEssayRoot -Slug "primary-case"
+  Write-ValidPdf -Path (Join-Path $successPdfRoot "primary-case.pdf")
+  Write-PrimaryMeta -BuildMetaRoot $successMetaRoot -Slug "primary-case"
+  Write-Stderr -BuildMetaRoot $successMetaRoot -Slug "primary-case" -Value ""
+
+  $successAudit = Invoke-Audit -Root $successRoot
+  Assert-True ($successAudit.ExitCode -eq 0) "Expected success audit fixture to exit cleanly. Output:`n$($successAudit.Output)"
+  $successReport = Get-Content $successAudit.JsonPath -Raw | ConvertFrom-Json
+  Assert-True ([string]$successReport.summary.validation_status -eq "success") "Expected success fixture to report validation_status=success."
+
   $contentOnlyRoot = New-TestRoot
   $rootsToClean.Add($contentOnlyRoot)
   $essayRoot = Join-Path $contentOnlyRoot "content/essays"
@@ -186,6 +205,9 @@ try {
 
   $contentOnlyReport = Get-Content $contentOnlyAudit.JsonPath -Raw | ConvertFrom-Json
   $contentReasonCodes = @($contentOnlyReport.failures | ForEach-Object { [string]$_.reason_code })
+  Assert-True ([string]$contentOnlyReport.summary.validation_status -eq "degraded_allowed") "Expected content-only audit fixture to report validation_status=degraded_allowed."
+  Assert-True ([int]$contentOnlyReport.summary.blocking_pipeline_problems -eq 0) "Expected no blocking pipeline problems for content-only fixture."
+  Assert-True ([int]$contentOnlyReport.summary.warning_failures -eq 3) "Expected three warning-only failures for content-only fixture."
   Assert-True ($contentReasonCodes -contains "raw_html_complexity") "Expected raw_html_complexity reason code."
   Assert-True ($contentReasonCodes -contains "embed_remnant") "Expected embed_remnant reason code."
   Assert-True ($contentReasonCodes -contains "mojibake_content") "Expected mojibake_content reason code."
@@ -213,6 +235,8 @@ try {
 
   $pipelineReport = Get-Content $pipelineAudit.JsonPath -Raw | ConvertFrom-Json
   $pipelineReasonCodes = @($pipelineReport.failures | ForEach-Object { [string]$_.reason_code })
+  Assert-True ([string]$pipelineReport.summary.validation_status -eq "blocking") "Expected pipeline fixture to report validation_status=blocking."
+  Assert-True ([int]$pipelineReport.summary.blocking_pipeline_problems -ge 2) "Expected blocking pipeline problems to be counted for the pipeline fixture."
   Assert-True ($pipelineReasonCodes -contains "remote_image_placeholder_typst") "Expected remote_image_placeholder_typst reason code."
   Assert-True ($pipelineReasonCodes -contains "local_image_path_missing") "Expected local_image_path_missing reason code."
 }

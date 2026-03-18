@@ -136,6 +136,17 @@ try {
   Assert-True ($success.ExitCode -eq 0) "Expected success fixture to pass verification. Output:`n$($success.Output)"
   Assert-True ($success.Output -match "PDF pipeline verification PASSED") "Expected pass output for success fixture."
 
+  $degradedRoot = New-TestRoot
+  $rootsToClean.Add($degradedRoot)
+  Write-TestMarkdown -ContentRoot (Join-Path $degradedRoot "content") -Section "reports" -Slug "degraded-piece" -Engine "typst"
+  New-Item -ItemType Directory -Force -Path (Join-Path $degradedRoot "static/pdfs") | Out-Null
+  Write-ValidPdf -Path (Join-Path $degradedRoot "static/pdfs/degraded-piece.pdf")
+  Write-BuildMeta -BuildMetaRoot (Join-Path $degradedRoot "resources/typst_build") -Slug "degraded-piece" -Engine "typst" -RenderStatus "fallback" -FailureCause "raw_html" -FailureDetail "fixture fallback"
+
+  $degraded = Invoke-Verify -Root $degradedRoot
+  Assert-True ($degraded.ExitCode -eq 0) "Expected explained fallback fixture to pass structural verification. Output:`n$($degraded.Output)"
+  Assert-True ($degraded.Output -match "PASSED with degraded renders observed") "Expected degraded verification status output."
+
   $missingRoot = New-TestRoot
   $rootsToClean.Add($missingRoot)
   Write-TestMarkdown -ContentRoot (Join-Path $missingRoot "content") -Section "essays" -Slug "missing-piece" -Engine "html"

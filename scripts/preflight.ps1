@@ -2,6 +2,7 @@ param(
   [string]$ContentRoot = "./content",
   [string]$PdfRoot = "./static/pdfs",
   [string]$PdfCatalogPath = "./data/pdfs/catalog.json",
+  [string]$BuildMetaRoot = "./resources/typst_build",
   [switch]$StrictPdfQuality
 )
 
@@ -13,6 +14,7 @@ $AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "worki
 $RequiredFields = @("title", "date", "section_label", "version", "edition", "pdf", "draft")
 $RawHtmlScoreThreshold = 14
 $fail = $false
+$qualityWarningCount = 0
 $slugSources = @{}
 $qualitySummary = [ordered]@{
   fallback_pdfs = 0
@@ -36,6 +38,16 @@ function Read-JsonFile {
   }
 
   return (Read-Utf8Text -Path $Path | ConvertFrom-Json)
+}
+
+function Read-BuildMetaRecord {
+  param(
+    [string]$RootPath,
+    [string]$Slug
+  )
+
+  $metaPath = Join-Path $RootPath "$Slug.pdfmeta.json"
+  return Read-JsonFile -Path $metaPath
 }
 
 function Get-FrontMatterMap {
@@ -172,6 +184,8 @@ function Register-QualityIssue {
     [switch]$AlwaysFail
   )
 
+  $script:qualityWarningCount++
+
   if ($AlwaysFail -or $StrictPdfQuality) {
     Write-Host $Message -ForegroundColor Yellow
     $script:fail = $true
@@ -299,39 +313,42 @@ foreach ($file in $mdFiles) {
     Register-QualityIssue -Message "MOJIBAKE DETECTED in source: $($file.FullName)"
   }
 
-  if ($null -ne $pdfCatalog) {
-    $catalogEntry = $null
-    if ($pdfCatalog.PSObject.Properties.Name -contains $slug) {
-      $catalogEntry = $pdfCatalog.$slug
-    }
+  $buildMeta = Read-BuildMetaRecord -RootPath $BuildMetaRoot -Slug $slug
+  $qualityRecord = $null
+  if ($null -ne $buildMeta) {
+    $qualityRecord = $buildMeta
+  }
+  elseif ($null -ne $pdfCatalog -and ($pdfCatalog.PSObject.Properties.Name -contains $slug)) {
+    $qualityRecord = $pdfCatalog.$slug
+  }
 
-    if ($null -eq $catalogEntry) {
-      Register-QualityIssue -Message "PDF catalog entry missing for '$slug': $($file.FullName)"
-      continue
-    }
+  if ($null -eq $qualityRecord) {
+    Register-QualityIssue -Message "No PDF quality metadata found for '$slug': $($file.FullName)"
+    continue
+  }
 
-    if (($catalogEntry.PSObject.Properties.Name -contains "engine") -and ($catalogEntry.engine -eq "html")) {
+  if (($qualityRecord.PSObject.Properties.Name -contains "engine") -and ($qualityRecord.engine -eq "html")) {
       $qualitySummary.html_pdfs++
     }
 
-    if (($catalogEntry.PSObject.Properties.Name -contains "auto_engine_selected") -and [bool]$catalogEntry.auto_engine_selected) {
+    if (($qualityRecord.PSObject.Properties.Name -contains "auto_engine_selected") -and [bool]$qualityRecord.auto_engine_selected) {
       $qualitySummary.auto_html_pdfs++
     }
 
     if (
-      ($catalogEntry.PSObject.Properties.Name -contains "render_status") -and
-      ($catalogEntry.render_status -eq "fallback")
+      ($qualityRecord.PSObject.Properties.Name -contains "render_status") -and
+      ($qualityRecord.render_status -eq "fallback")
     ) {
       $qualitySummary.fallback_pdfs++
     }
 
     if (
-      ($catalogEntry.PSObject.Properties.Name -contains "render_status") -and
-      ($catalogEntry.render_status -eq "fallback") -and
+      ($qualityRecord.PSObject.Properties.Name -contains "render_status") -and
+      ($qualityRecord.render_status -eq "fallback") -and
       (-not (Is-TrueValue -Value $frontMatter["pdf_allow_fallback"]))
     ) {
-      $failureCause = if ($catalogEntry.PSObject.Properties.Name -contains "failure_cause") { [string]$catalogEntry.failure_cause } else { "" }
-      $failureDetail = if ($catalogEntry.PSObject.Properties.Name -contains "failure_detail") { [string]$catalogEntry.failure_detail } else { "" }
+      $failureCause = if ($qualityRecord.PSObject.Properties.Name -contains "failure_cause") { [string]$qualityRecord.failure_cause } else { "" }
+      $failureDetail = if ($qualityRecord.PSObject.Properties.Name -contains "failure_detail") { [string]$qualityRecord.failure_detail } else { "" }
       $detailSuffix = ""
       if (-not [string]::IsNullOrWhiteSpace($failureCause)) {
         $detailSuffix = " cause=$failureCause"
@@ -343,34 +360,33 @@ foreach ($file in $mdFiles) {
     }
 
     if (
-      ($catalogEntry.PSObject.Properties.Name -contains "placeholder_count") -and
-      ([int]$catalogEntry.placeholder_count -gt 0)
+      ($qualityRecord.PSObject.Properties.Name -contains "placeholder_count") -and
+      ([int]$qualityRecord.placeholder_count -gt 0)
     ) {
-      $qualitySummary.placeholder_figures += [int]$catalogEntry.placeholder_count
+      $qualitySummary.placeholder_figures += [int]$qualityRecord.placeholder_count
     }
 
     if (
-      ($catalogEntry.PSObject.Properties.Name -contains "placeholder_count") -and
-      ([int]$catalogEntry.placeholder_count -gt 0) -and
+      ($qualityRecord.PSObject.Properties.Name -contains "placeholder_count") -and
+      ([int]$qualityRecord.placeholder_count -gt 0) -and
       (-not (Is-TrueValue -Value $frontMatter["pdf_allow_placeholder_figures"]))
     ) {
       Register-QualityIssue -Message "PLACEHOLDER FIGURES DETECTED for '$slug': $($file.FullName)"
     }
 
-    if (($catalogEntry.PSObject.Properties.Name -contains "omitted_remote_images") -and ([int]$catalogEntry.omitted_remote_images -gt 0)) {
-      $qualitySummary.remote_image_placeholders += [int]$catalogEntry.omitted_remote_images
+    if (($qualityRecord.PSObject.Properties.Name -contains "omitted_remote_images") -and ([int]$qualityRecord.omitted_remote_images -gt 0)) {
+      $qualitySummary.remote_image_placeholders += [int]$qualityRecord.omitted_remote_images
     }
 
     if (
-      ($catalogEntry.PSObject.Properties.Name -contains "raw_html_score") -and
-      ([int]$catalogEntry.raw_html_score -ge $RawHtmlScoreThreshold) -and
-      ($catalogEntry.PSObject.Properties.Name -contains "engine") -and
-      ($catalogEntry.engine -eq "typst")
+      ($qualityRecord.PSObject.Properties.Name -contains "raw_html_score") -and
+      ([int]$qualityRecord.raw_html_score -ge $RawHtmlScoreThreshold) -and
+      ($qualityRecord.PSObject.Properties.Name -contains "engine") -and
+      ($qualityRecord.engine -eq "typst")
     ) {
       $qualitySummary.raw_html_heavy_typst_pdfs++
       Register-QualityIssue -Message "RAW HTML-HEAVY ARTICLE STILL ON TYPST for '$slug': $($file.FullName)"
     }
-  }
 }
 
 Write-Host "`nPDF quality summary:" -ForegroundColor Cyan
@@ -384,6 +400,11 @@ Write-Host "  Raw HTML-heavy PDFs still on Typst: $($qualitySummary.raw_html_hea
 if ($fail) {
   Write-Host "`nPreflight FAILED. Fix issues above before publishing." -ForegroundColor Red
   exit 1
+}
+
+if ($qualityWarningCount -gt 0) {
+  Write-Host "`nPreflight PASSED with PDF quality warnings." -ForegroundColor Yellow
+  exit 0
 }
 
 Write-Host "`nPreflight PASSED." -ForegroundColor Green

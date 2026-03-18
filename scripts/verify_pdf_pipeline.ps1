@@ -349,4 +349,9 @@ if ($failures.Count -gt 0) {
   exit 1
 }
 
+if ($summary.typst_fallback -gt 0) {
+  Write-Host "`nPDF pipeline verification PASSED with degraded renders observed. Structural checks passed, but $($summary.typst_fallback) fallback PDF(s) require audit review." -ForegroundColor Yellow
+  exit 0
+}
+
 Write-Host "`nPDF pipeline verification PASSED." -ForegroundColor Green

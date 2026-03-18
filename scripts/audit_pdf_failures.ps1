@@ -4,6 +4,7 @@ param(
   [string]$PdfRoot = "./static/pdfs",
   [string]$BuildMetaRoot = "./resources/typst_build",
   [string]$PdfCatalogPath = "./data/pdfs/catalog.json",
+  [string]$PolicyPath = "./data/pdfs/validation-policy.json",
   [string]$LegacyAuditPath = "./reports/legacy-essay-audit.json",
   [string]$JsonOutputPath = "./reports/pdf-failure-audit.json",
   [string]$MarkdownOutputPath = "./reports/pdf-failure-audit.md",
@@ -91,6 +92,52 @@ function Read-JsonFile {
   }
 
   return (Read-Utf8Text -Path $Path | ConvertFrom-Json)
+}
+
+$policy = Read-JsonFile -Path $PolicyPath
+if ($null -eq $policy) {
+  throw "Missing PDF validation policy at '$PolicyPath'."
+}
+
+function Get-PolicyCodes {
+  param(
+    [object]$Policy,
+    [string]$Name
+  )
+
+  if ($null -eq $Policy -or -not ($Policy.PSObject.Properties.Name -contains $Name)) {
+    return @()
+  }
+
+  return @(
+    $Policy.$Name |
+      ForEach-Object { [string]$_ } |
+      Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+      ForEach-Object { $_.Trim().ToLowerInvariant() }
+  )
+}
+
+function Get-ValidationStatus {
+  param(
+    [int]$BlockingPipelineProblemCount,
+    [int]$BlockingFailureCount,
+    [int]$WarningFailureCount,
+    [switch]$TreatWarningsAsBlocking
+  )
+
+  if ($BlockingPipelineProblemCount -gt 0 -or $BlockingFailureCount -gt 0) {
+    return "blocking"
+  }
+
+  if ($TreatWarningsAsBlocking -and $WarningFailureCount -gt 0) {
+    return "blocking"
+  }
+
+  if ($WarningFailureCount -gt 0) {
+    return "degraded_allowed"
+  }
+
+  return "success"
 }
 
 function Get-MetaStringValue {
@@ -336,6 +383,56 @@ if ($autoHtmlBlocked -gt 0) {
     })
 }
 
+$blockingPipelineProblemCodes = @(Get-PolicyCodes -Policy $policy -Name "blocking_pipeline_problem_codes")
+$blockingFailureReasonCodes = @(Get-PolicyCodes -Policy $policy -Name "blocking_failure_reason_codes")
+$warningFailureReasonCodes = @(Get-PolicyCodes -Policy $policy -Name "warning_failure_reason_codes")
+$manualDiagnosticSections = @(Get-PolicyCodes -Policy $policy -Name "manual_diagnostic_sections")
+
+$unclassifiedFailures = @(
+  $failures | Where-Object {
+    $reasonCode = ([string]$_.reason_code).Trim().ToLowerInvariant()
+    ($blockingFailureReasonCodes -notcontains $reasonCode) -and
+    ($warningFailureReasonCodes -notcontains $reasonCode)
+  }
+)
+
+if ($unclassifiedFailures.Count -gt 0) {
+  $unknownReasonCodes = @(
+    $unclassifiedFailures |
+      ForEach-Object { ([string]$_.reason_code).Trim().ToLowerInvariant() } |
+      Sort-Object -Unique
+  )
+  $pipelineProblems.Add([pscustomobject]@{
+      code = "unclassified_failure_reason"
+      count = $unclassifiedFailures.Count
+      message = "Audit failures used reason codes that are not classified by '$PolicyPath': $($unknownReasonCodes -join ', ')."
+    })
+}
+
+$blockingPipelineProblems = @(
+  $pipelineProblems | Where-Object {
+    $blockingPipelineProblemCodes -contains ([string]$_.code).Trim().ToLowerInvariant()
+  }
+)
+
+$blockingFailures = @(
+  $failures | Where-Object {
+    $blockingFailureReasonCodes -contains ([string]$_.reason_code).Trim().ToLowerInvariant()
+  }
+)
+
+$warningFailures = @(
+  $failures | Where-Object {
+    $warningFailureReasonCodes -contains ([string]$_.reason_code).Trim().ToLowerInvariant()
+  }
+)
+
+$validationStatus = Get-ValidationStatus `
+  -BlockingPipelineProblemCount $blockingPipelineProblems.Count `
+  -BlockingFailureCount $blockingFailures.Count `
+  -WarningFailureCount $warningFailures.Count `
+  -TreatWarningsAsBlocking:$FailOnContentIssues
+
 $representativeFailures = @(
   $failures |
     Sort-Object @{ Expression = "reason_code"; Ascending = $true }, @{ Expression = "raw_html_score"; Descending = $true }, @{ Expression = "omitted_remote_images"; Descending = $true }, @{ Expression = "slug"; Ascending = $true } |
@@ -363,6 +460,14 @@ if ($null -ne $legacyAudit) {
 $report = [ordered]@{
   generated_at = (Get-Date).ToString("o")
   scope = "essays"
+  policy = [ordered]@{
+    path = $PolicyPath
+    blocking_pipeline_problem_codes = $blockingPipelineProblemCodes
+    blocking_failure_reason_codes = $blockingFailureReasonCodes
+    warning_failure_reason_codes = $warningFailureReasonCodes
+    manual_diagnostic_sections = $manualDiagnosticSections
+    fail_on_content_issues = [bool]$FailOnContentIssues
+  }
   toolchain = [ordered]@{
     powershell_host = $PSVersionTable.PSVersion.ToString()
     commands = $toolStatus
@@ -375,6 +480,10 @@ $report = [ordered]@{
     primary = @($rows | Where-Object { $_.render_status -eq "primary" }).Count
     fallback = @($rows | Where-Object { $_.render_status -eq "fallback" }).Count
     auto_html_candidates_blocked = $autoHtmlBlocked
+    validation_status = $validationStatus
+    blocking_pipeline_problems = $blockingPipelineProblems.Count
+    blocking_failures = $blockingFailures.Count
+    warning_failures = $warningFailures.Count
   }
   top_failure_categories = $topCategories
   pipeline_problems = $pipelineProblems
@@ -396,6 +505,19 @@ $markdown = New-Object System.Text.StringBuilder
 [void]$markdown.AppendLine("- Primary renders: $($report.summary.primary)")
 [void]$markdown.AppendLine("- Fallback renders: $($report.summary.fallback)")
 [void]$markdown.AppendLine("- Auto-HTML candidates blocked by missing renderer: $($report.summary.auto_html_candidates_blocked)")
+[void]$markdown.AppendLine("- Validation status: $($report.summary.validation_status)")
+[void]$markdown.AppendLine("- Blocking pipeline problems: $($report.summary.blocking_pipeline_problems)")
+[void]$markdown.AppendLine("- Blocking failures: $($report.summary.blocking_failures)")
+[void]$markdown.AppendLine("- Warning-only failures: $($report.summary.warning_failures)")
+[void]$markdown.AppendLine()
+[void]$markdown.AppendLine("## Validation Policy")
+[void]$markdown.AppendLine()
+[void]$markdown.AppendLine("- Policy file: $PolicyPath")
+[void]$markdown.AppendLine("- Blocking pipeline problem codes: $($blockingPipelineProblemCodes -join ', ')")
+[void]$markdown.AppendLine("- Blocking failure reason codes: $($blockingFailureReasonCodes -join ', ')")
+[void]$markdown.AppendLine("- Warning-only failure reason codes: $($warningFailureReasonCodes -join ', ')")
+[void]$markdown.AppendLine("- Manual diagnostics: $($manualDiagnosticSections -join ', ')")
+[void]$markdown.AppendLine("- Fail on content issues override: $([bool]$FailOnContentIssues)")
 [void]$markdown.AppendLine()
 [void]$markdown.AppendLine("## Top Failure Categories")
 [void]$markdown.AppendLine()
@@ -439,15 +561,22 @@ Write-Utf8Text -Path $MarkdownOutputPath -Value $markdown.ToString()
 
 Write-Host "JSON report: $JsonOutputPath"
 Write-Host "Markdown report: $MarkdownOutputPath"
+Write-Host "Validation status: $validationStatus"
+Write-Host "  Blocking pipeline problems: $($blockingPipelineProblems.Count)"
+Write-Host "  Blocking failures: $($blockingFailures.Count)"
+Write-Host "  Warning-only failures: $($warningFailures.Count)"
 
-$shouldFail = $pipelineProblems.Count -gt 0
-if ($FailOnContentIssues -and $failures.Count -gt 0) {
-  $shouldFail = $true
+switch ($validationStatus) {
+  "blocking" {
+    Write-Host "`nPDF failure audit status: BLOCKING." -ForegroundColor Red
+    exit 1
+  }
+  "degraded_allowed" {
+    Write-Host "`nPDF failure audit status: DEGRADED_ALLOWED." -ForegroundColor Yellow
+    exit 0
+  }
+  default {
+    Write-Host "`nPDF failure audit status: SUCCESS." -ForegroundColor Green
+    exit 0
+  }
 }
-
-if ($shouldFail) {
-  Write-Host "`nPDF failure audit detected pipeline regressions." -ForegroundColor Red
-  exit 1
-}
-
-Write-Host "`nPDF failure audit completed without pipeline regressions." -ForegroundColor Green

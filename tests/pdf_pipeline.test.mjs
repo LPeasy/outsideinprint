@@ -69,6 +69,15 @@ test("deploy workflow installs Node and Playwright before the PDF build", () => 
   assert.match(workflow, /Build PDF Editions/);
 });
 
+test("deploy workflow treats the PDF audit as a blocking gate", () => {
+  const workflow = fs.readFileSync(workflowPath, "utf8");
+
+  assert.match(workflow, /- name: Audit PDF Failures/);
+  assert.doesNotMatch(workflow, /- name: Audit PDF Failures[\s\S]*?continue-on-error:\s*true/);
+  assert.match(workflow, /scripts\/audit_pdf_failures\.ps1/);
+  assert.match(workflow, /PDF audit status:/);
+});
+
 test("README documents the browser-print workflow for html PDFs", () => {
   const readme = fs.readFileSync(readmePath, "utf8");
 
