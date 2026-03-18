@@ -4,7 +4,8 @@ param(
   [string]$PdfOutDir = "./static/pdfs",
   [string]$TempDir = "./resources/typst_build",
   [string]$PdfCatalogPath = "./data/pdfs/catalog.json",
-  [string]$HtmlRendererScript = "./scripts/render_hugo_pdfs.mjs"
+  [string]$HtmlRendererScript = "./scripts/render_hugo_pdfs.mjs",
+  [string]$LegacyEssayAuditPath = "./reports/legacy-essay-audit.json"
 )
 
 $ErrorActionPreference = "Stop"
@@ -129,6 +130,16 @@ function Write-JsonFile {
   param([string]$Path,[object]$Value)
   $json = $Value | ConvertTo-Json -Depth 8
   Write-Utf8Text -Path $Path -Value $json
+}
+
+function Read-JsonFile {
+  param([string]$Path)
+
+  if (-not (Test-Path -Path $Path -PathType Leaf)) {
+    return $null
+  }
+
+  return (Get-Content -Path $Path -Raw | ConvertFrom-Json)
 }
 
 function Remove-UnsupportedControlChars {
@@ -1021,6 +1032,7 @@ function Get-PdfEngineDecision {
     [string]$DeclaredEngine,
     [switch]$ForceTypst,
     [pscustomobject]$ComplexityProfile,
+    [switch]$LegacyPrefersHtml,
     [string]$HtmlRendererUnavailableReason
   )
 
@@ -1038,7 +1050,7 @@ function Get-PdfEngineDecision {
     }
   }
 
-  $shouldUseHtml = ($null -ne $ComplexityProfile) -and [bool]$ComplexityProfile.ShouldUseHtml
+  $shouldUseHtml = (($null -ne $ComplexityProfile) -and [bool]$ComplexityProfile.ShouldUseHtml) -or $LegacyPrefersHtml
   if ($shouldUseHtml -and [string]::IsNullOrWhiteSpace($HtmlRendererUnavailableReason)) {
     return [pscustomobject]@{
       Engine = "html"
@@ -1050,6 +1062,71 @@ function Get-PdfEngineDecision {
     Engine = "typst"
     AutoSelected = $false
   }
+}
+
+function Get-LegacyEssayAuditMap {
+  param([string]$Path)
+
+  $map = @{}
+  $audit = Read-JsonFile -Path $Path
+  if ($null -eq $audit -or -not ($audit.PSObject.Properties.Name -contains "files")) {
+    return $map
+  }
+
+  foreach ($entry in @($audit.files)) {
+    $pathValue = [string]$entry.path
+    if (-not [string]::IsNullOrWhiteSpace($pathValue)) {
+      $normalizedPath = $pathValue.Trim().Replace('\', '/').ToLowerInvariant()
+      $map["path:$normalizedPath"] = $entry
+    }
+
+    $slugValue = [string]$entry.slug
+    if (-not [string]::IsNullOrWhiteSpace($slugValue)) {
+      $map["slug:$($slugValue.Trim().ToLowerInvariant())"] = $entry
+    }
+  }
+
+  return $map
+}
+
+function Get-LegacyEssayAuditEntry {
+  param(
+    [hashtable]$AuditMap,
+    [string]$RelativePath,
+    [string]$Slug
+  )
+
+  if ($null -eq $AuditMap) {
+    return $null
+  }
+
+  if (-not [string]::IsNullOrWhiteSpace($RelativePath)) {
+    $normalizedPath = $RelativePath.Trim().Replace('\', '/').ToLowerInvariant()
+    $pathKey = "path:$normalizedPath"
+    if ($AuditMap.ContainsKey($pathKey)) {
+      return $AuditMap[$pathKey]
+    }
+  }
+
+  if (-not [string]::IsNullOrWhiteSpace($Slug)) {
+    $slugKey = "slug:$($Slug.Trim().ToLowerInvariant())"
+    if ($AuditMap.ContainsKey($slugKey)) {
+      return $AuditMap[$slugKey]
+    }
+  }
+
+  return $null
+}
+
+function Test-LegacyAuditEntryPrefersHtml {
+  param([object]$Entry)
+
+  if ($null -eq $Entry) {
+    return $false
+  }
+
+  $riskTier = [string]$Entry.risk_tier
+  return $riskTier.Trim().ToUpperInvariant() -eq "MANUAL_FIRST"
 }
 
 function Get-PdfVariant {
@@ -1634,6 +1711,7 @@ $siteBaseUrl = $script:SiteBaseUrl
 $typstReady = $false
 $htmlRendererUnavailableReason = $null
 $htmlJobs = New-Object System.Collections.Generic.List[object]
+$legacyEssayAuditMap = Get-LegacyEssayAuditMap -Path $LegacyEssayAuditPath
 
 $mdFiles = Get-ChildItem -Path $ContentRoot -Recurse -File -Filter "*.md" |
   Where-Object {
@@ -1654,6 +1732,7 @@ foreach ($file in $mdFiles) {
 
   $section = Get-SectionFromFile -RootPath $ContentRoot -File $file
   $slug = Get-ResolvedSlug -File $file -FrontMatterSlug ($frontMatter['slug'])
+  $sourceRelativePath = Get-RelativePath -RootPath $ContentRoot -FullPath $file.FullName
   $safeSlug = Get-SafeFileSlug -Slug $slug
 
   $title = Repair-CommonTextArtifacts -Value $frontMatter['title']
@@ -1667,8 +1746,10 @@ foreach ($file in $mdFiles) {
   $complexityProfile = Get-ContentComplexityProfile -RawBody $rawBody
   $declaredEngine = Get-PdfEngine -FrontMatter $frontMatter
   $forceTypst = Is-TrueValue -Value ($frontMatter['pdf_force_typst'])
+  $legacyAuditEntry = Get-LegacyEssayAuditEntry -AuditMap $legacyEssayAuditMap -RelativePath $sourceRelativePath -Slug $slug
+  $legacyPrefersHtml = Test-LegacyAuditEntryPrefersHtml -Entry $legacyAuditEntry
   $htmlRendererUnavailableReasonForDecision = ""
-  if ((-not $declaredEngine) -and (-not $forceTypst) -and $complexityProfile.ShouldUseHtml) {
+  if ((-not $declaredEngine) -and (-not $forceTypst) -and ($complexityProfile.ShouldUseHtml -or $legacyPrefersHtml)) {
     if ($null -eq $htmlRendererUnavailableReason) {
       $htmlRendererUnavailableReason = Get-HtmlRenderUnavailableReason
     }
@@ -1678,6 +1759,7 @@ foreach ($file in $mdFiles) {
     -DeclaredEngine $declaredEngine `
     -ForceTypst:$forceTypst `
     -ComplexityProfile $complexityProfile `
+    -LegacyPrefersHtml:$legacyPrefersHtml `
     -HtmlRendererUnavailableReason $htmlRendererUnavailableReasonForDecision
   $engine = $engineDecision.Engine
   $autoEngineSelected = $engineDecision.AutoSelected
@@ -1699,7 +1781,7 @@ foreach ($file in $mdFiles) {
   $buildMeta = [ordered]@{
     slug = $slug
     source_file = $file.FullName
-    source_relative_path = (Get-RelativePath -RootPath $ContentRoot -FullPath $file.FullName)
+    source_relative_path = $sourceRelativePath
     engine = $engine
     variant = $variant
     output_path = [System.IO.Path]::GetFullPath($pdfPath)
