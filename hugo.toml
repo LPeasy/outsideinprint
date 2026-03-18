@@ -15,7 +15,7 @@ collections = "/collections/:slug/"
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = false
+      unsafe = true
 
 [security]
   [security.funcs]

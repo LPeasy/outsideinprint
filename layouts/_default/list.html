@@ -9,7 +9,18 @@
         {{ with .Params.subtitle }}{{ . }} | {{ end }}
         {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
         {{ with .Params.version }} | v{{ . }}{{ end }}
-        {{ if .Params.pdf }} | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener" {{ partial "analytics/link-attrs.html" (dict "sourceSlot" "section_list" "format" "pdf" "page" .) }}>PDF</a>{{ end }}
+        {{ if .Params.pdf }}
+          {{ $slug := .Params.slug | default .File.BaseFileName }}
+          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+          | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener"
+            data-analytics-source-slot="section_list"
+            data-analytics-format="pdf"
+            data-analytics-slug="{{ $slug }}"
+            data-analytics-title="{{ .Title }}"
+            data-analytics-section="{{ $sectionLabel }}"
+            data-analytics-path="{{ .RelPermalink }}"
+          >PDF</a>
+        {{ end }}
       </div>
     </div>
   {{ end }}

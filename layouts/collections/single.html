@@ -37,13 +37,31 @@
     {{ with $startHere }}
       <h2 class="list-title" style="margin-top:28px;">Start Here</h2>
       <div class="item collection-start-here">
-        <div class="t"><a href="{{ .RelPermalink }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "collection_page" "collection" $definition.slug "page" .) }}>{{ .Title }}</a></div>
+        {{ $slug := .Params.slug | default .File.BaseFileName }}
+        {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+        <div class="t"><a href="{{ .RelPermalink }}"
+          data-analytics-event="collection_click"
+          data-analytics-source-slot="collection_page"
+          data-analytics-collection="{{ $definition.slug }}"
+          data-analytics-slug="{{ $slug }}"
+          data-analytics-title="{{ .Title }}"
+          data-analytics-section="{{ $sectionLabel }}"
+          data-analytics-path="{{ .RelPermalink }}"
+        >{{ .Title }}</a></div>
         <div class="m">
           {{ with .Params.section_label }}{{ . }}{{ end }}
           {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
           {{ with .Params.version }} | v{{ . }}{{ end }}
           {{ with .ReadingTime }} | {{ . }} min read{{ end }}
-          {{ if .Params.pdf }} | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener" {{ partial "analytics/link-attrs.html" (dict "sourceSlot" "collection_page" "format" "pdf" "collection" $definition.slug "page" .) }}>PDF</a>{{ end }}
+          {{ if .Params.pdf }} | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener"
+            data-analytics-source-slot="collection_page"
+            data-analytics-format="pdf"
+            data-analytics-collection="{{ $definition.slug }}"
+            data-analytics-slug="{{ $slug }}"
+            data-analytics-title="{{ .Title }}"
+            data-analytics-section="{{ $sectionLabel }}"
+            data-analytics-path="{{ .RelPermalink }}"
+          >PDF</a>{{ end }}
         </div>
         {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
       </div>
@@ -55,14 +73,32 @@
       {{ range $items }}
         {{ $itemSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
         <li class="item collection-item">
-          <div class="t"><a href="{{ .RelPermalink }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "collection_page" "collection" $definition.slug "page" .) }}>{{ .Title }}</a></div>
+          {{ $slug := .Params.slug | default .File.BaseFileName }}
+          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+          <div class="t"><a href="{{ .RelPermalink }}"
+            data-analytics-event="collection_click"
+            data-analytics-source-slot="collection_page"
+            data-analytics-collection="{{ $definition.slug }}"
+            data-analytics-slug="{{ $slug }}"
+            data-analytics-title="{{ .Title }}"
+            data-analytics-section="{{ $sectionLabel }}"
+            data-analytics-path="{{ .RelPermalink }}"
+          >{{ .Title }}</a></div>
           <div class="m">
             {{ if eq $itemSlug $startHereSlug }}<span class="collection-pill">Start Here</span>{{ end }}
             {{ with .Params.section_label }}{{ . }}{{ end }}
             {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
             {{ with .Params.version }} | v{{ . }}{{ end }}
             {{ with .ReadingTime }} | {{ . }} min read{{ end }}
-            {{ if .Params.pdf }} | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener" {{ partial "analytics/link-attrs.html" (dict "sourceSlot" "collection_page" "format" "pdf" "collection" $definition.slug "page" .) }}>PDF</a>{{ end }}
+            {{ if .Params.pdf }} | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener"
+              data-analytics-source-slot="collection_page"
+              data-analytics-format="pdf"
+              data-analytics-collection="{{ $definition.slug }}"
+              data-analytics-slug="{{ $slug }}"
+              data-analytics-title="{{ .Title }}"
+              data-analytics-section="{{ $sectionLabel }}"
+              data-analytics-path="{{ .RelPermalink }}"
+            >PDF</a>{{ end }}
           </div>
           {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
         </li>

@@ -124,6 +124,11 @@ jobs:
       - name: Build Hugo
         run: hugo --gc --minify
 
+      - name: Test Public HTML Output
+        shell: pwsh
+        run: |
+          ./tests/test_public_html_output.ps1
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

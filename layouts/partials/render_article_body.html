@@ -1,4 +1,8 @@
-﻿{{- $content := .Content -}}
+{{- $content := .Content -}}
+{{- $homePath := site.Home.RelPermalink -}}
+{{- $content = replace $content `src="/images/` (printf `src="%simages/` $homePath) -}}
+{{- $content = replace $content `src='/images/` (printf `src='%simages/` $homePath) -}}
+{{- $content = replace $content `src=/images/` (printf `src=%simages/` $homePath) -}}
 {{- if .Params.medium_source_url -}}
   {{- $escapePattern := `([\\.^$|?*+(){}\[\]])` -}}
   {{- $escapedTitle := replaceRE $escapePattern `\\$1` .Title -}}

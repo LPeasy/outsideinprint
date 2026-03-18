@@ -1,0 +1,5 @@
+{{- $destination := .Destination -}}
+{{- if and (hasPrefix $destination "/") (not (hasPrefix $destination "//")) -}}
+  {{- $destination = printf "%s%s" site.Home.RelPermalink (strings.TrimPrefix "/" $destination) -}}
+{{- end -}}
+<img src="{{ $destination }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>

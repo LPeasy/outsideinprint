@@ -147,7 +147,16 @@
               {{ $detail = .Date.Format "Jan 2006" }}
             {{ end }}
             <article class="read-next__item">
-              <h3 class="read-next__item-title"><a href="{{ .RelPermalink }}" {{ partial "analytics/link-attrs.html" (dict "event" "internal_promo_click" "sourceSlot" "related_content" "page" .) }}>{{ .Title }}</a></h3>
+              {{ $slug := .Params.slug | default .File.BaseFileName }}
+              {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+              <h3 class="read-next__item-title"><a href="{{ .RelPermalink }}"
+                data-analytics-event="internal_promo_click"
+                data-analytics-source-slot="related_content"
+                data-analytics-slug="{{ $slug }}"
+                data-analytics-title="{{ .Title }}"
+                data-analytics-section="{{ $sectionLabel }}"
+                data-analytics-path="{{ .RelPermalink }}"
+              >{{ .Title }}</a></h3>
               <p class="read-next__meta">{{ $sectionLabel }}{{ with $detail }} &middot; {{ . }}{{ end }}</p>
             </article>
           {{ end }}

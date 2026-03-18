@@ -13,7 +13,15 @@
         {{ $path = .RelPermalink }}
       {{ end }}
       <div class="collection-membership__row">
-        <div class="collection-membership__title"><a href="{{ $url }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "related_content" "collection" .collection.slug "slug" .collection.slug "title" .collection.title "section" "Collections" "path" $path) }}>{{ .collection.title }}</a></div>
+        <div class="collection-membership__title"><a href="{{ $url }}"
+          data-analytics-event="collection_click"
+          data-analytics-source-slot="related_content"
+          data-analytics-collection="{{ .collection.slug }}"
+          data-analytics-slug="{{ .collection.slug }}"
+          data-analytics-title="{{ .collection.title }}"
+          data-analytics-section="Collections"
+          data-analytics-path="{{ $path }}"
+        >{{ .collection.title }}</a></div>
         <div class="collection-membership__meta">
           <span>{{ title .state.kind }}</span>
           <span>{{ .state.count }} pieces</span>

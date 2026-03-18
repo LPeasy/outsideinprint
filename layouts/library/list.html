@@ -29,7 +29,16 @@
               {{ with .Params.version }}v{{ . }}{{ end }}
               {{ if .Params.pdf }}
                 {{ with .Params.version }} | {{ end }}
-                <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener" {{ partial "analytics/link-attrs.html" (dict "sourceSlot" "library_index" "format" "pdf" "page" .) }}>PDF</a>
+                {{ $slug := .Params.slug | default .File.BaseFileName }}
+                {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+                <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener"
+                  data-analytics-source-slot="library_index"
+                  data-analytics-format="pdf"
+                  data-analytics-slug="{{ $slug }}"
+                  data-analytics-title="{{ .Title }}"
+                  data-analytics-section="{{ $sectionLabel }}"
+                  data-analytics-path="{{ .RelPermalink }}"
+                >PDF</a>
               {{ end }}
             </div>
           </div>

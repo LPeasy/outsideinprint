@@ -19,7 +19,15 @@
         {{ with .page }}
           {{ $path = .RelPermalink }}
         {{ end }}
-        <a class="card collection-card" href="{{ $url }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "collection_page" "collection" .collection.slug "slug" .collection.slug "title" .collection.title "section" "Collections" "path" $path) }}>
+        <a class="card collection-card" href="{{ $url }}"
+          data-analytics-event="collection_click"
+          data-analytics-source-slot="collection_page"
+          data-analytics-collection="{{ .collection.slug }}"
+          data-analytics-slug="{{ .collection.slug }}"
+          data-analytics-title="{{ .collection.title }}"
+          data-analytics-section="Collections"
+          data-analytics-path="{{ $path }}"
+        >
           <div class="k">Featured {{ title .state.kind }}</div>
           <div class="v">{{ .collection.title }}</div>
           {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
@@ -45,7 +53,15 @@
         {{ with .page }}
           {{ $path = .RelPermalink }}
         {{ end }}
-        <div class="t"><a href="{{ $url }}" {{ partial "analytics/link-attrs.html" (dict "event" "collection_click" "sourceSlot" "collection_page" "collection" .collection.slug "slug" .collection.slug "title" .collection.title "section" "Collections" "path" $path) }}>{{ .collection.title }}</a></div>
+        <div class="t"><a href="{{ $url }}"
+          data-analytics-event="collection_click"
+          data-analytics-source-slot="collection_page"
+          data-analytics-collection="{{ .collection.slug }}"
+          data-analytics-slug="{{ .collection.slug }}"
+          data-analytics-title="{{ .collection.title }}"
+          data-analytics-section="Collections"
+          data-analytics-path="{{ $path }}"
+        >{{ .collection.title }}</a></div>
         <div class="m">{{ title .state.kind }} | {{ .state.count }} pieces{{ with .collection.start_here }} | start here available{{ end }}</div>
         {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
       </div>
