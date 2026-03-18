@@ -587,6 +587,150 @@ function Get-RelativePathBetween {
   return ([System.Uri]::UnescapeDataString($relativeUri.ToString()) -replace '\\', '/')
 }
 
+function Get-SiteBasePath {
+  param([string]$BaseUrl)
+
+  if ([string]::IsNullOrWhiteSpace($BaseUrl)) {
+    return ""
+  }
+
+  try {
+    $uri = [System.Uri]$BaseUrl
+  }
+  catch {
+    return ""
+  }
+
+  $path = $uri.AbsolutePath
+  if ([string]::IsNullOrWhiteSpace($path) -or $path -eq "/") {
+    return ""
+  }
+
+  if (-not $path.EndsWith('/')) {
+    $path += '/'
+  }
+
+  return $path
+}
+
+function Test-StaticImageReference {
+  param([string]$Reference)
+
+  if ([string]::IsNullOrWhiteSpace($Reference)) {
+    return $false
+  }
+
+  $cleanRef = $Reference.Trim().Trim('<', '>')
+  if ([string]::IsNullOrWhiteSpace($cleanRef)) {
+    return $false
+  }
+
+  if ($cleanRef.StartsWith('/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+    return $true
+  }
+
+  $siteBasePath = Get-SiteBasePath -BaseUrl $script:SiteBaseUrl
+  if ($cleanRef.StartsWith('/') -and $siteBasePath -and $cleanRef.StartsWith($siteBasePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+    $relativePath = $cleanRef.Substring($siteBasePath.Length).TrimStart('/')
+    return $relativePath.StartsWith('images/', [System.StringComparison]::OrdinalIgnoreCase)
+  }
+
+  if (-not (Test-RemoteUrl -Value $cleanRef)) {
+    return $false
+  }
+
+  try {
+    $uri = [System.Uri]$cleanRef
+    $siteUri = if ([string]::IsNullOrWhiteSpace($script:SiteBaseUrl)) { $null } else { [System.Uri]$script:SiteBaseUrl }
+    if ($null -eq $siteUri -or $uri.Host -ne $siteUri.Host) {
+      return $false
+    }
+
+    if ($uri.AbsolutePath.StartsWith('/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+      return $true
+    }
+
+    if ($siteBasePath -and $uri.AbsolutePath.StartsWith($siteBasePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+      $relativePath = $uri.AbsolutePath.Substring($siteBasePath.Length).TrimStart('/')
+      return $relativePath.StartsWith('images/', [System.StringComparison]::OrdinalIgnoreCase)
+    }
+  }
+  catch {
+    return $false
+  }
+
+  return $false
+}
+
+function Normalize-StaticAssetReference {
+  param([string]$Reference)
+
+  if ([string]::IsNullOrWhiteSpace($Reference)) {
+    return ""
+  }
+
+  $cleanRef = $Reference.Trim().Trim('<', '>')
+  if ([string]::IsNullOrWhiteSpace($cleanRef)) {
+    return ""
+  }
+
+  if (-not (Test-StaticImageReference -Reference $cleanRef)) {
+    return $cleanRef
+  }
+
+  $siteBasePath = Get-SiteBasePath -BaseUrl $script:SiteBaseUrl
+  if (Test-RemoteUrl -Value $cleanRef) {
+    try {
+      $uri = [System.Uri]$cleanRef
+      $candidatePath = $uri.AbsolutePath
+      if ($siteBasePath -and $candidatePath.StartsWith($siteBasePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+        $relativePath = $candidatePath.Substring($siteBasePath.Length).TrimStart('/')
+        if ($relativePath.StartsWith('images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+          return "/$relativePath"
+        }
+      }
+
+      if ($candidatePath.StartsWith('/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $candidatePath
+      }
+    }
+    catch {
+    }
+
+    return $cleanRef
+  }
+
+  if ($cleanRef.StartsWith('/') -and $siteBasePath -and $cleanRef.StartsWith($siteBasePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+    $relativePath = $cleanRef.Substring($siteBasePath.Length).TrimStart('/')
+    if ($relativePath.StartsWith('images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+      return "/$relativePath"
+    }
+  }
+
+  return $cleanRef
+}
+
+function Resolve-StaticAssetPath {
+  param([string]$AssetRef)
+
+  $normalizedRef = Normalize-StaticAssetReference -Reference $AssetRef
+  if ([string]::IsNullOrWhiteSpace($normalizedRef) -or -not $normalizedRef.StartsWith('/')) {
+    return ""
+  }
+
+  $candidate = Join-Path $RepoRoot ("static/" + $normalizedRef.TrimStart('/'))
+  try {
+    $resolved = [System.IO.Path]::GetFullPath($candidate)
+    if (Test-Path -Path $resolved -PathType Leaf) {
+      return $resolved
+    }
+  }
+  catch {
+  }
+
+  return ""
+}
+
 function Get-TypstPlaceholderBlock {
   return '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#emph[Image kept on web edition only.]]]'
 }
@@ -597,18 +741,13 @@ function Resolve-TypstStaticAssetPath {
     [string]$TypstSourcePath
   )
 
-  if ([string]::IsNullOrWhiteSpace($AssetPath) -or -not $AssetPath.StartsWith('/')) {
+  if ([string]::IsNullOrWhiteSpace($AssetPath)) {
     return ""
   }
 
-  $candidate = Join-Path $RepoRoot ("static/" + $AssetPath.TrimStart('/'))
-  try {
-    $resolved = [System.IO.Path]::GetFullPath($candidate)
-    if (Test-Path -Path $resolved -PathType Leaf) {
-      return Get-RelativePathBetween -FromPath $TypstSourcePath -ToPath $resolved
-    }
-  }
-  catch {
+  $resolved = Resolve-StaticAssetPath -AssetRef $AssetPath
+  if (-not [string]::IsNullOrWhiteSpace($resolved)) {
+    return Get-RelativePathBetween -FromPath $TypstSourcePath -ToPath $resolved
   }
 
   return ""
@@ -873,6 +1012,42 @@ function Get-PdfEngine {
   return ""
 }
 
+function Get-PdfEngineDecision {
+  param(
+    [string]$DeclaredEngine,
+    [switch]$ForceTypst,
+    [pscustomobject]$ComplexityProfile,
+    [string]$HtmlRendererUnavailableReason
+  )
+
+  if (-not [string]::IsNullOrWhiteSpace($DeclaredEngine)) {
+    return [pscustomobject]@{
+      Engine = $DeclaredEngine
+      AutoSelected = $false
+    }
+  }
+
+  if ($ForceTypst) {
+    return [pscustomobject]@{
+      Engine = "typst"
+      AutoSelected = $false
+    }
+  }
+
+  $shouldUseHtml = ($null -ne $ComplexityProfile) -and [bool]$ComplexityProfile.ShouldUseHtml
+  if ($shouldUseHtml -and [string]::IsNullOrWhiteSpace($HtmlRendererUnavailableReason)) {
+    return [pscustomobject]@{
+      Engine = "html"
+      AutoSelected = $true
+    }
+  }
+
+  return [pscustomobject]@{
+    Engine = "typst"
+    AutoSelected = $false
+  }
+}
+
 function Get-PdfVariant {
   param([hashtable]$FrontMatter,[string]$Section,[string]$Engine)
 
@@ -907,7 +1082,12 @@ function Resolve-ImageSourcePath {
     return ""
   }
 
-  $cleanRef = $ImageRef.Trim().Trim('<', '>')
+  $cleanRef = Normalize-StaticAssetReference -Reference $ImageRef
+  $staticAssetPath = Resolve-StaticAssetPath -AssetRef $cleanRef
+  if (-not [string]::IsNullOrWhiteSpace($staticAssetPath)) {
+    return Get-RelativePathBetween -FromPath $TempSourcePath -ToPath $staticAssetPath
+  }
+
   if (Test-RemoteUrl -Value $cleanRef) {
     return ""
   }
@@ -1153,18 +1333,49 @@ function Normalize-TypstBody {
 
   $body = $body -replace '(?m)^#horizontalrule\s*$', ''
   $body = $body -replace '(?m)^#line\(length: 100%\)\s*$', ''
-  $body = [regex]::Replace($body, '#box\(image\("https?://[^"\r\n]+"\)\)', {
-      $placeholderState.Count++
-      Get-TypstPlaceholderBlock
-    })
-  $body = [regex]::Replace($body, '#image\("https?://[^"\r\n]+"\)', {
-      $placeholderState.Count++
-      Get-TypstPlaceholderBlock
-    })
-  $body = [regex]::Replace($body, 'image\("(?<path>/[^"\r\n]+)"\)', {
+  $body = [regex]::Replace($body, '#box\(image\("(?<path>https?://[^"\r\n]+)"\)\)', {
       param($match)
 
-      $resolved = Resolve-TypstStaticAssetPath -AssetPath $match.Groups['path'].Value -TypstSourcePath $Path
+      $assetPath = $match.Groups['path'].Value
+      $resolved = Resolve-TypstStaticAssetPath -AssetPath $assetPath -TypstSourcePath $Path
+      if (-not [string]::IsNullOrWhiteSpace($resolved)) {
+        $staticAssetState.Rewrites++
+        return ('#box(image("{0}"))' -f $resolved)
+      }
+
+      if (Test-StaticImageReference -Reference $assetPath) {
+        return $match.Value
+      }
+
+      $placeholderState.Count++
+      Get-TypstPlaceholderBlock
+    })
+  $body = [regex]::Replace($body, '#image\("(?<path>https?://[^"\r\n]+)"\)', {
+      param($match)
+
+      $assetPath = $match.Groups['path'].Value
+      $resolved = Resolve-TypstStaticAssetPath -AssetPath $assetPath -TypstSourcePath $Path
+      if (-not [string]::IsNullOrWhiteSpace($resolved)) {
+        $staticAssetState.Rewrites++
+        return ('#image("{0}")' -f $resolved)
+      }
+
+      if (Test-StaticImageReference -Reference $assetPath) {
+        return $match.Value
+      }
+
+      $placeholderState.Count++
+      Get-TypstPlaceholderBlock
+    })
+  $body = [regex]::Replace($body, 'image\("(?<path>/[^"\r\n]+|https?://[^"\r\n]+)"\)', {
+      param($match)
+
+      $assetPath = $match.Groups['path'].Value
+      if (-not (Test-StaticImageReference -Reference $assetPath)) {
+        return $match.Value
+      }
+
+      $resolved = Resolve-TypstStaticAssetPath -AssetPath $assetPath -TypstSourcePath $Path
       if ([string]::IsNullOrWhiteSpace($resolved)) {
         return $match.Value
       }
@@ -1409,7 +1620,8 @@ function Invoke-HtmlPdfBatchRender {
   return $bySlug
 }
 
-$siteBaseUrl = Get-SiteBaseUrl -ConfigPath "./hugo.toml"
+$script:SiteBaseUrl = Get-SiteBaseUrl -ConfigPath "./hugo.toml"
+$siteBaseUrl = $script:SiteBaseUrl
 $typstReady = $false
 $htmlRendererUnavailableReason = $null
 $htmlJobs = New-Object System.Collections.Generic.List[object]
@@ -1446,12 +1658,20 @@ foreach ($file in $mdFiles) {
   $complexityProfile = Get-ContentComplexityProfile -RawBody $rawBody
   $declaredEngine = Get-PdfEngine -FrontMatter $frontMatter
   $forceTypst = Is-TrueValue -Value ($frontMatter['pdf_force_typst'])
-  $autoEngineSelected = $false
-  $engine = if ($declaredEngine) { $declaredEngine } else { "typst" }
+  $htmlRendererUnavailableReasonForDecision = ""
   if ((-not $declaredEngine) -and (-not $forceTypst) -and $complexityProfile.ShouldUseHtml) {
-    $engine = "html"
-    $autoEngineSelected = $true
+    if ($null -eq $htmlRendererUnavailableReason) {
+      $htmlRendererUnavailableReason = Get-HtmlRenderUnavailableReason
+    }
+    $htmlRendererUnavailableReasonForDecision = $htmlRendererUnavailableReason
   }
+  $engineDecision = Get-PdfEngineDecision `
+    -DeclaredEngine $declaredEngine `
+    -ForceTypst:$forceTypst `
+    -ComplexityProfile $complexityProfile `
+    -HtmlRendererUnavailableReason $htmlRendererUnavailableReasonForDecision
+  $engine = $engineDecision.Engine
+  $autoEngineSelected = $engineDecision.AutoSelected
   $variant = Get-PdfVariant -FrontMatter $frontMatter -Section $section -Engine $engine
 
   if ([string]::IsNullOrWhiteSpace($title)) { $title = $slug }

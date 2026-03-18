@@ -95,6 +95,11 @@ jobs:
         run: |
           ./tests/test_pdf_builder_static_image_paths.ps1
 
+      - name: Test PDF Engine Selection
+        shell: pwsh
+        run: |
+          ./tests/test_pdf_engine_selection.ps1
+
       - name: Preflight Validation
         shell: pwsh
         run: |

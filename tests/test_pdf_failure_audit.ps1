@@ -21,10 +21,15 @@ function New-TestRoot {
 function Write-TestMarkdown {
   param(
     [string]$EssayRoot,
-    [string]$Slug
+    [string]$Slug,
+    [string]$Engine = ""
   )
 
   New-Item -ItemType Directory -Force -Path $EssayRoot | Out-Null
+  $engineLine = ""
+  if (-not [string]::IsNullOrWhiteSpace($Engine)) {
+    $engineLine = "pdf_engine: $Engine`r`n"
+  }
   @"
 ---
 title: "$Slug"
@@ -35,7 +40,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "Fixture edition"
 pdf: "/pdfs/$Slug.pdf"
----
+${engineLine}---
 
 Fixture body for $Slug.
 "@ | Set-Content -Path (Join-Path $EssayRoot "$Slug.md") -Encoding UTF8
@@ -93,13 +98,14 @@ function Write-BuildMeta {
 function Write-PrimaryMeta {
   param(
     [string]$BuildMetaRoot,
-    [string]$Slug
+    [string]$Slug,
+    [string]$Engine = "typst"
   )
 
   New-Item -ItemType Directory -Force -Path $BuildMetaRoot | Out-Null
   $meta = [ordered]@{
     slug = $Slug
-    engine = "typst"
+    engine = $Engine
     variant = "essay"
     render_status = "primary"
     failure_cause = ""
@@ -124,7 +130,11 @@ function Write-Stderr {
 }
 
 function Invoke-Audit {
-  param([string]$Root)
+  param(
+    [string]$Root,
+    [switch]$SkipToolChecks,
+    [string[]]$AvailableTools = @()
+  )
 
   $contentRoot = Join-Path $Root "content/essays"
   $pdfRoot = Join-Path $Root "static/pdfs"
@@ -132,15 +142,50 @@ function Invoke-Audit {
   $jsonPath = Join-Path $Root "reports/pdf-failure-audit.json"
   $markdownPath = Join-Path $Root "reports/pdf-failure-audit.md"
 
-  $output = & $shellCommand.Source -NoProfile -ExecutionPolicy Bypass -File $auditScript `
-    -ContentRoot $contentRoot `
-    -BuildContentRoot (Join-Path $Root "content") `
-    -PdfRoot $pdfRoot `
-    -BuildMetaRoot $buildMetaRoot `
-    -PolicyPath $policyPath `
-    -JsonOutputPath $jsonPath `
-    -MarkdownOutputPath $markdownPath `
-    -SkipToolChecks 2>&1 | Out-String
+  $toolBin = Join-Path $Root ".tool-bin"
+  if (Test-Path $toolBin) {
+    Remove-Item -Recurse -Force $toolBin
+  }
+  New-Item -ItemType Directory -Force -Path $toolBin | Out-Null
+  foreach ($tool in $AvailableTools) {
+    Set-Content -Path (Join-Path $toolBin "$tool.cmd") -Value "@echo off`r`nexit /b 0`r`n" -Encoding ASCII
+  }
+
+  $commandArgs = @(
+    "-NoProfile",
+    "-ExecutionPolicy",
+    "Bypass",
+    "-File",
+    $auditScript,
+    "-ContentRoot",
+    $contentRoot,
+    "-BuildContentRoot",
+    (Join-Path $Root "content"),
+    "-PdfRoot",
+    $pdfRoot,
+    "-BuildMetaRoot",
+    $buildMetaRoot,
+    "-PolicyPath",
+    $policyPath,
+    "-JsonOutputPath",
+    $jsonPath,
+    "-MarkdownOutputPath",
+    $markdownPath
+  )
+  if ($SkipToolChecks) {
+    $commandArgs += "-SkipToolChecks"
+  }
+
+  $priorPath = $env:PATH
+  try {
+    if (-not $SkipToolChecks) {
+      $env:PATH = $toolBin
+    }
+    $output = & $shellCommand.Source @commandArgs 2>&1 | Out-String
+  }
+  finally {
+    $env:PATH = $priorPath
+  }
 
   return [pscustomobject]@{
     ExitCode = $LASTEXITCODE
@@ -171,10 +216,58 @@ try {
   Write-PrimaryMeta -BuildMetaRoot $successMetaRoot -Slug "primary-case"
   Write-Stderr -BuildMetaRoot $successMetaRoot -Slug "primary-case" -Value ""
 
-  $successAudit = Invoke-Audit -Root $successRoot
+  $successAudit = Invoke-Audit -Root $successRoot -SkipToolChecks
   Assert-True ($successAudit.ExitCode -eq 0) "Expected success audit fixture to exit cleanly. Output:`n$($successAudit.Output)"
   $successReport = Get-Content $successAudit.JsonPath -Raw | ConvertFrom-Json
   Assert-True ([string]$successReport.summary.validation_status -eq "success") "Expected success fixture to report validation_status=success."
+
+  $typstOnlyToolRoot = New-TestRoot
+  $rootsToClean.Add($typstOnlyToolRoot)
+  $typstOnlyEssayRoot = Join-Path $typstOnlyToolRoot "content/essays"
+  $typstOnlyPdfRoot = Join-Path $typstOnlyToolRoot "static/pdfs"
+  $typstOnlyMetaRoot = Join-Path $typstOnlyToolRoot "resources/typst_build"
+  New-Item -ItemType Directory -Force -Path $typstOnlyPdfRoot | Out-Null
+
+  Write-TestMarkdown -EssayRoot $typstOnlyEssayRoot -Slug "typst-only-case"
+  Write-ValidPdf -Path (Join-Path $typstOnlyPdfRoot "typst-only-case.pdf")
+  Write-PrimaryMeta -BuildMetaRoot $typstOnlyMetaRoot -Slug "typst-only-case"
+  Write-Stderr -BuildMetaRoot $typstOnlyMetaRoot -Slug "typst-only-case" -Value ""
+
+  $typstOnlyAudit = Invoke-Audit -Root $typstOnlyToolRoot -AvailableTools @("pandoc", "typst")
+  Assert-True ($typstOnlyAudit.ExitCode -eq 0) "Expected typst-only audit fixture to pass when only typst tools are available. Output:`n$($typstOnlyAudit.Output)"
+  $typstOnlyReport = Get-Content $typstOnlyAudit.JsonPath -Raw | ConvertFrom-Json
+  $typstToolStatus = @{}
+  foreach ($tool in $typstOnlyReport.toolchain.commands) {
+    $typstToolStatus[[string]$tool.name] = $tool
+  }
+  Assert-True ([bool]$typstToolStatus["pandoc"].required) "Expected pandoc to remain required for a typst-only corpus."
+  Assert-True ([bool]$typstToolStatus["typst"].required) "Expected typst to remain required for a typst-only corpus."
+  Assert-True (-not [bool]$typstToolStatus["node"].required) "Expected node to be optional for a typst-only corpus."
+  Assert-True (-not [bool]$typstToolStatus["hugo"].required) "Expected hugo to be optional for a typst-only corpus."
+  Assert-True ([int]$typstOnlyReport.summary.blocking_pipeline_problems -eq 0) "Expected no blocking pipeline problems for a typst-only corpus when typst tools are available."
+
+  $htmlToolRoot = New-TestRoot
+  $rootsToClean.Add($htmlToolRoot)
+  $htmlEssayRoot = Join-Path $htmlToolRoot "content/essays"
+  $htmlPdfRoot = Join-Path $htmlToolRoot "static/pdfs"
+  $htmlMetaRoot = Join-Path $htmlToolRoot "resources/typst_build"
+  New-Item -ItemType Directory -Force -Path $htmlPdfRoot | Out-Null
+
+  Write-TestMarkdown -EssayRoot $htmlEssayRoot -Slug "html-case" -Engine "html"
+  Write-ValidPdf -Path (Join-Path $htmlPdfRoot "html-case.pdf")
+  Write-PrimaryMeta -BuildMetaRoot $htmlMetaRoot -Slug "html-case" -Engine "html"
+  Write-Stderr -BuildMetaRoot $htmlMetaRoot -Slug "html-case" -Value ""
+
+  $htmlAudit = Invoke-Audit -Root $htmlToolRoot -AvailableTools @("pandoc", "typst")
+  Assert-True ($htmlAudit.ExitCode -ne 0) "Expected html-engine audit fixture to fail when html renderer tools are unavailable."
+  $htmlReport = Get-Content $htmlAudit.JsonPath -Raw | ConvertFrom-Json
+  $htmlToolStatus = @{}
+  foreach ($tool in $htmlReport.toolchain.commands) {
+    $htmlToolStatus[[string]$tool.name] = $tool
+  }
+  Assert-True ([bool]$htmlToolStatus["node"].required) "Expected node to be required when content explicitly declares the html engine."
+  Assert-True ([bool]$htmlToolStatus["hugo"].required) "Expected hugo to be required when content explicitly declares the html engine."
+  Assert-True ([int]$htmlReport.summary.blocking_pipeline_problems -ge 2) "Expected missing html renderer tools to remain blocking."
 
   $contentOnlyRoot = New-TestRoot
   $rootsToClean.Add($contentOnlyRoot)
@@ -198,7 +291,7 @@ try {
   Write-Stderr -BuildMetaRoot $metaRoot -Slug "mojibake-case" -Value "error: fallback fixture"
   Write-Stderr -BuildMetaRoot $metaRoot -Slug "primary-case" -Value ""
 
-  $contentOnlyAudit = Invoke-Audit -Root $contentOnlyRoot
+  $contentOnlyAudit = Invoke-Audit -Root $contentOnlyRoot -SkipToolChecks
   Assert-True ($contentOnlyAudit.ExitCode -eq 0) "Expected content-only audit fixture to exit cleanly. Output:`n$($contentOnlyAudit.Output)"
   Assert-True (Test-Path $contentOnlyAudit.JsonPath) "Expected JSON report to be written."
   Assert-True (Test-Path $contentOnlyAudit.MarkdownPath) "Expected Markdown report to be written."
@@ -230,7 +323,7 @@ try {
   Write-BuildMeta -BuildMetaRoot $pipelineMetaRoot -Slug "local-image-case" -FailureCause "mojibake" -RawHtmlScore 4 -EmbedCount 0 -OmittedRemoteImages 0
   Write-Stderr -BuildMetaRoot $pipelineMetaRoot -Slug "local-image-case" -Value "error: file not found`n#box(image(""/images/fixture.jpeg""))"
 
-  $pipelineAudit = Invoke-Audit -Root $pipelineRoot
+  $pipelineAudit = Invoke-Audit -Root $pipelineRoot -SkipToolChecks
   Assert-True ($pipelineAudit.ExitCode -ne 0) "Expected pipeline audit fixture to fail with a non-zero exit code."
 
   $pipelineReport = Get-Content $pipelineAudit.JsonPath -Raw | ConvertFrom-Json

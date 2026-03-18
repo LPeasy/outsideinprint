@@ -84,6 +84,21 @@ function Get-ResolvedSlug {
   return [System.IO.Path]::GetFileNameWithoutExtension($File.Name)
 }
 
+function Get-DeclaredPdfEngine {
+  param([hashtable]$FrontMatter)
+
+  if ($null -eq $FrontMatter -or -not $FrontMatter.ContainsKey("pdf_engine")) {
+    return ""
+  }
+
+  $value = [string]$FrontMatter["pdf_engine"]
+  if ([string]::IsNullOrWhiteSpace($value)) {
+    return ""
+  }
+
+  return $value.Trim().ToLowerInvariant()
+}
+
 function Read-JsonFile {
   param([string]$Path)
 
@@ -138,6 +153,33 @@ function Get-ValidationStatus {
   }
 
   return "success"
+}
+
+function Get-RequiredToolMap {
+  param([System.Collections.IEnumerable]$Rows)
+
+  $requiresTypstToolchain = $false
+  $requiresHtmlRenderer = $false
+
+  foreach ($row in $Rows) {
+    $expectedEngine = [string]$row.expected_engine
+    $builtEngine = [string]$row.engine
+
+    if (($expectedEngine -eq "html") -or ($builtEngine -eq "html") -or [bool]$row.auto_html_unavailable) {
+      $requiresHtmlRenderer = $true
+    }
+
+    if (($expectedEngine -eq "typst") -or ($builtEngine -eq "typst") -or [string]::IsNullOrWhiteSpace($expectedEngine)) {
+      $requiresTypstToolchain = $true
+    }
+  }
+
+  return [ordered]@{
+    pandoc = $requiresTypstToolchain
+    typst = $requiresTypstToolchain
+    node = $requiresHtmlRenderer
+    hugo = $requiresHtmlRenderer
+  }
 }
 
 function Get-MetaStringValue {
@@ -276,24 +318,6 @@ if ($Rebuild) {
   }
 }
 
-$toolStatus = @()
-if (-not $SkipToolChecks) {
-  foreach ($name in @("pandoc", "typst", "node", "hugo")) {
-    $available = $null -ne (Get-Command $name -ErrorAction SilentlyContinue)
-    $toolStatus += [pscustomobject]@{
-      name = $name
-      available = $available
-    }
-    if (-not $available) {
-      $pipelineProblems.Add([pscustomobject]@{
-          code = "tool_missing"
-          count = 1
-          message = "Missing required command '$name' in PATH."
-        })
-    }
-  }
-}
-
 $legacyAudit = Read-JsonFile -Path $LegacyAuditPath
 $legacyBySlug = @{}
 if ($null -ne $legacyAudit -and $legacyAudit.PSObject.Properties.Name -contains "files") {
@@ -308,6 +332,7 @@ $rows = New-Object System.Collections.Generic.List[object]
 foreach ($file in $essayFiles) {
   $raw = Read-Utf8Text -Path $file.FullName
   $frontMatter = Get-FrontMatterMap -Raw $raw
+  $declaredEngine = Get-DeclaredPdfEngine -FrontMatter $frontMatter
   $slug = Get-ResolvedSlug -File $file -FrontMatterSlug ($frontMatter["slug"])
   $pdfPath = Join-Path $PdfRoot "$slug.pdf"
   $metaPath = Join-Path $BuildMetaRoot "$slug.pdfmeta.json"
@@ -326,6 +351,8 @@ foreach ($file in $essayFiles) {
       file = $file.Name
       slug = $slug
       title = [string]$frontMatter["title"]
+      declared_engine = $declaredEngine
+      expected_engine = if ([string]::IsNullOrWhiteSpace($declaredEngine)) { "typst" } else { $declaredEngine }
       pdf_exists = $pdfExists
       engine = Get-MetaStringValue -Meta $meta -Name "engine"
       render_status = Get-MetaStringValue -Meta $meta -Name "render_status"
@@ -340,6 +367,27 @@ foreach ($file in $essayFiles) {
       legacy_issue_types = if ($null -ne $legacy) { [string]$legacy.issue_types } else { "" }
       legacy_risk_tier = if ($null -ne $legacy) { [string]$legacy.risk_tier } else { "" }
     })
+}
+
+$requiredTools = Get-RequiredToolMap -Rows $rows
+$toolStatus = @()
+if (-not $SkipToolChecks) {
+  foreach ($name in @("pandoc", "typst", "node", "hugo")) {
+    $required = [bool]$requiredTools[$name]
+    $available = $null -ne (Get-Command $name -ErrorAction SilentlyContinue)
+    $toolStatus += [pscustomobject]@{
+      name = $name
+      required = $required
+      available = $available
+    }
+    if ($required -and -not $available) {
+      $pipelineProblems.Add([pscustomobject]@{
+          code = "tool_missing"
+          count = 1
+          message = "Missing required command '$name' in PATH."
+        })
+    }
+  }
 }
 
 $failures = @($rows | Where-Object { -not [string]::IsNullOrWhiteSpace($_.reason_code) })
@@ -470,6 +518,11 @@ $report = [ordered]@{
   }
   toolchain = [ordered]@{
     powershell_host = $PSVersionTable.PSVersion.ToString()
+    required_commands = @(
+      $requiredTools.GetEnumerator() |
+        Where-Object { [bool]$_.Value } |
+        ForEach-Object { [string]$_.Key }
+    )
     commands = $toolStatus
   }
   summary = [ordered]@{
@@ -509,6 +562,11 @@ $markdown = New-Object System.Text.StringBuilder
 [void]$markdown.AppendLine("- Blocking pipeline problems: $($report.summary.blocking_pipeline_problems)")
 [void]$markdown.AppendLine("- Blocking failures: $($report.summary.blocking_failures)")
 [void]$markdown.AppendLine("- Warning-only failures: $($report.summary.warning_failures)")
+[void]$markdown.AppendLine()
+[void]$markdown.AppendLine("## Tool Requirements")
+[void]$markdown.AppendLine()
+[void]$markdown.AppendLine("- Required commands for this corpus: $((@($requiredTools.GetEnumerator() | Where-Object { [bool]$_.Value } | ForEach-Object { [string]$_.Key }) -join ', '))")
+[void]$markdown.AppendLine("- Optional commands for this corpus: $((@($requiredTools.GetEnumerator() | Where-Object { -not [bool]$_.Value } | ForEach-Object { [string]$_.Key }) -join ', '))")
 [void]$markdown.AppendLine()
 [void]$markdown.AppendLine("## Validation Policy")
 [void]$markdown.AppendLine()
