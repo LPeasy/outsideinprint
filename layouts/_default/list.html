@@ -1,31 +1,31 @@
-﻿{{ define "main" }}
-  <h2 class="list-title">{{ .Title }}</h2>
+{{ define "main" }}
+  <header class="page-header">
+    <h1 id="page-title" class="list-title">{{ .Title }}</h1>
+  </header>
 
   {{ $pages := .Pages }}
-  {{ range sort $pages "Title" "asc" }}
-    <div class="item">
-      <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
-      <div class="m">
-        {{ with .Params.subtitle }}{{ . }} | {{ end }}
-        {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
-        {{ with .Params.version }} | v{{ . }}{{ end }}
-        {{ if .Params.pdf }}
-          {{ $slug := .Params.slug | default .File.BaseFileName }}
-          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-          | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener"
-            data-analytics-source-slot="section_list"
-            data-analytics-format="pdf"
-            data-analytics-slug="{{ $slug }}"
-            data-analytics-title="{{ .Title }}"
-            data-analytics-section="{{ $sectionLabel }}"
-            data-analytics-path="{{ .RelPermalink }}"
-          >PDF</a>
-        {{ end }}
+  <section aria-labelledby="page-title">
+    {{ range sort $pages "Title" "asc" }}
+      <div class="item">
+        <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        <div class="m">
+          {{ with .Params.subtitle }}{{ . }} | {{ end }}
+          {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+          {{ with .Params.version }} | v{{ . }}{{ end }}
+          {{ if .Params.pdf }}
+            {{ $slug := .Params.slug | default .File.BaseFileName }}
+            {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+            | <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener"
+              data-analytics-source-slot="section_list"
+              data-analytics-format="pdf"
+              data-analytics-slug="{{ $slug }}"
+              data-analytics-title="{{ .Title }}"
+              data-analytics-section="{{ $sectionLabel }}"
+              data-analytics-path="{{ .RelPermalink }}"
+            >PDF</a>
+          {{ end }}
+        </div>
       </div>
-    </div>
-  {{ end }}
+    {{ end }}
+  </section>
 {{ end }}
-
-
-
-

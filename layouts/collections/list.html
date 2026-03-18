@@ -7,65 +7,72 @@
     {{ end }}
   {{ end }}
 
-  <h2 class="list-title">Collections</h2>
+  <header class="page-header">
+    <h1 id="collections-title" class="list-title">Collections</h1>
+  </header>
   {{ if gt (len $featured) 0 }}
-    <section class="grid collection-grid">
-      {{ range $featured }}
-        {{ $url := printf "collections/%s/" .collection.slug | absURL }}
-        {{ with .page }}
-          {{ $url = .RelPermalink }}
+    <section aria-labelledby="featured-collections-title">
+      <h2 id="featured-collections-title" class="visually-hidden">Featured Collections</h2>
+      <div class="grid collection-grid">
+        {{ range $featured }}
+          {{ $url := printf "collections/%s/" .collection.slug | absURL }}
+          {{ with .page }}
+            {{ $url = .RelPermalink }}
+          {{ end }}
+          {{ $path := printf "/collections/%s/" .collection.slug }}
+          {{ with .page }}
+            {{ $path = .RelPermalink }}
+          {{ end }}
+          <a class="card collection-card" href="{{ $url }}"
+            data-analytics-event="collection_click"
+            data-analytics-source-slot="collection_page"
+            data-analytics-collection="{{ .collection.slug }}"
+            data-analytics-slug="{{ .collection.slug }}"
+            data-analytics-title="{{ .collection.title }}"
+            data-analytics-section="Collections"
+            data-analytics-path="{{ $path }}"
+          >
+            <div class="k">Featured {{ title .state.kind }}</div>
+            <div class="v">{{ .collection.title }}</div>
+            {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
+            <div class="collection-meta">
+              <span>{{ .state.count }} pieces</span>
+              <span>{{ title .state.kind }}</span>
+              {{ with .collection.start_here }}<span>Start Here</span>{{ end }}
+            </div>
+          </a>
         {{ end }}
-        {{ $path := printf "/collections/%s/" .collection.slug }}
-        {{ with .page }}
-          {{ $path = .RelPermalink }}
-        {{ end }}
-        <a class="card collection-card" href="{{ $url }}"
-          data-analytics-event="collection_click"
-          data-analytics-source-slot="collection_page"
-          data-analytics-collection="{{ .collection.slug }}"
-          data-analytics-slug="{{ .collection.slug }}"
-          data-analytics-title="{{ .collection.title }}"
-          data-analytics-section="Collections"
-          data-analytics-path="{{ $path }}"
-        >
-          <div class="k">Featured {{ title .state.kind }}</div>
-          <div class="v">{{ .collection.title }}</div>
-          {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
-          <div class="collection-meta">
-            <span>{{ .state.count }} pieces</span>
-            <span>{{ title .state.kind }}</span>
-            {{ with .collection.start_here }}<span>Start Here</span>{{ end }}
-          </div>
-        </a>
-      {{ end }}
+      </div>
     </section>
   {{ end }}
 
   {{ if gt (len $entries) 0 }}
-    <h2 class="list-title" style="margin-top:28px;">All Collections</h2>
-    {{ range $entries }}
-      {{ $url := printf "collections/%s/" .collection.slug | absURL }}
-      {{ with .page }}
-        {{ $url = .RelPermalink }}
-      {{ end }}
-      <div class="item">
-        {{ $path := printf "/collections/%s/" .collection.slug }}
+    <section aria-labelledby="all-collections-title">
+      <h2 id="all-collections-title" class="list-title" style="margin-top:28px;">All Collections</h2>
+      {{ range $entries }}
+        {{ $url := printf "collections/%s/" .collection.slug | absURL }}
         {{ with .page }}
-          {{ $path = .RelPermalink }}
+          {{ $url = .RelPermalink }}
         {{ end }}
-        <div class="t"><a href="{{ $url }}"
-          data-analytics-event="collection_click"
-          data-analytics-source-slot="collection_page"
-          data-analytics-collection="{{ .collection.slug }}"
-          data-analytics-slug="{{ .collection.slug }}"
-          data-analytics-title="{{ .collection.title }}"
-          data-analytics-section="Collections"
-          data-analytics-path="{{ $path }}"
-        >{{ .collection.title }}</a></div>
-        <div class="m">{{ title .state.kind }} | {{ .state.count }} pieces{{ with .collection.start_here }} | start here available{{ end }}</div>
-        {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
-      </div>
-    {{ end }}
+        <div class="item">
+          {{ $path := printf "/collections/%s/" .collection.slug }}
+          {{ with .page }}
+            {{ $path = .RelPermalink }}
+          {{ end }}
+          <div class="t"><a href="{{ $url }}"
+            data-analytics-event="collection_click"
+            data-analytics-source-slot="collection_page"
+            data-analytics-collection="{{ .collection.slug }}"
+            data-analytics-slug="{{ .collection.slug }}"
+            data-analytics-title="{{ .collection.title }}"
+            data-analytics-section="Collections"
+            data-analytics-path="{{ $path }}"
+          >{{ .collection.title }}</a></div>
+          <div class="m">{{ title .state.kind }} | {{ .state.count }} pieces{{ with .collection.start_here }} | start here available{{ end }}</div>
+          {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
+        </div>
+      {{ end }}
+    </section>
   {{ else }}
     <div class="item">
       <div class="t">No public collections are ready yet.</div>

@@ -2,20 +2,23 @@
   {{ if site.Params.dashboard.site }}
     {{ partial "dashboard/render.html" . }}
   {{ else }}
-  <section class="grid">
-    <a class="card" href="{{ "start-here/" | absURL }}"><div class="k">Start</div><div class="v">Start Here</div></a>
-    <a class="card" href="{{ "essays/" | absURL }}"><div class="k">Section</div><div class="v">Essays</div></a>
-    <a class="card" href="{{ "literature/" | absURL }}"><div class="k">Section</div><div class="v">Books</div></a>
-    <a class="card" href="{{ "syd-and-oliver/" | absURL }}"><div class="k">Section</div><div class="v">Syd and Oliver</div></a>
-    <a class="card" href="{{ "collections/" | absURL }}"><div class="k">Section</div><div class="v">Collections</div></a>
-    <a class="card" href="{{ "library/" | absURL }}"><div class="k">Index</div><div class="v">Library</div></a>
-    <a class="card card-center" href="{{ "random/" | absURL }}"
-      data-analytics-event="internal_promo_click"
-      data-analytics-source-slot="random_link"
-      data-analytics-title="Random"
-      data-analytics-section="Utility"
-      data-analytics-path="/random/"
-    ><div class="k">Explore</div><div class="v">Random</div></a>
+  <section aria-labelledby="home-explore-title">
+    <h2 id="home-explore-title" class="visually-hidden">Explore the archive</h2>
+    <div class="grid">
+      <a class="card" href="{{ "start-here/" | absURL }}"><div class="k">Start</div><div class="v">Start Here</div></a>
+      <a class="card" href="{{ "essays/" | absURL }}"><div class="k">Section</div><div class="v">Essays</div></a>
+      <a class="card" href="{{ "literature/" | absURL }}"><div class="k">Section</div><div class="v">Books</div></a>
+      <a class="card" href="{{ "syd-and-oliver/" | absURL }}"><div class="k">Section</div><div class="v">Syd and Oliver</div></a>
+      <a class="card" href="{{ "collections/" | absURL }}"><div class="k">Section</div><div class="v">Collections</div></a>
+      <a class="card" href="{{ "library/" | absURL }}"><div class="k">Index</div><div class="v">Library</div></a>
+      <a class="card card-center" href="{{ "random/" | absURL }}"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="random_link"
+        data-analytics-title="Random"
+        data-analytics-section="Utility"
+        data-analytics-path="/random/"
+      ><div class="k">Explore</div><div class="v">Random</div></a>
+    </div>
   </section>
 
   {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--home" "sourceSlot" "homepage_newsletter") }}
@@ -28,87 +31,93 @@
     {{ end }}
   {{ end }}
   {{ if gt (len $featuredCollections) 0 }}
-    <h2 class="list-title" style="margin-top:28px;">Featured Collections</h2>
-    <section class="grid collection-grid">
-      {{ range $featuredCollections }}
-        {{ $url := printf "collections/%s/" .collection.slug | absURL }}
-        {{ with .page }}
-          {{ $url = .RelPermalink }}
+    <section aria-labelledby="home-featured-collections-title">
+      <h2 id="home-featured-collections-title" class="list-title" style="margin-top:28px;">Featured Collections</h2>
+      <div class="grid collection-grid">
+        {{ range $featuredCollections }}
+          {{ $url := printf "collections/%s/" .collection.slug | absURL }}
+          {{ with .page }}
+            {{ $url = .RelPermalink }}
+          {{ end }}
+          {{ $path := printf "/collections/%s/" .collection.slug }}
+          {{ with .page }}
+            {{ $path = .RelPermalink }}
+          {{ end }}
+          <a class="card collection-card" href="{{ $url }}"
+            data-analytics-event="collection_click"
+            data-analytics-source-slot="homepage_featured_collection"
+            data-analytics-collection="{{ .collection.slug }}"
+            data-analytics-slug="{{ .collection.slug }}"
+            data-analytics-title="{{ .collection.title }}"
+            data-analytics-section="Collections"
+            data-analytics-path="{{ $path }}"
+          >
+            <div class="k">{{ title .state.kind }}</div>
+            <div class="v">{{ .collection.title }}</div>
+            {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
+            <div class="collection-meta">
+              <span>{{ .state.count }} pieces</span>
+              {{ with .collection.start_here }}<span>Start Here</span>{{ end }}
+            </div>
+          </a>
         {{ end }}
-        {{ $path := printf "/collections/%s/" .collection.slug }}
-        {{ with .page }}
-          {{ $path = .RelPermalink }}
-        {{ end }}
-        <a class="card collection-card" href="{{ $url }}"
-          data-analytics-event="collection_click"
-          data-analytics-source-slot="homepage_featured_collection"
-          data-analytics-collection="{{ .collection.slug }}"
-          data-analytics-slug="{{ .collection.slug }}"
-          data-analytics-title="{{ .collection.title }}"
-          data-analytics-section="Collections"
-          data-analytics-path="{{ $path }}"
-        >
-          <div class="k">{{ title .state.kind }}</div>
-          <div class="v">{{ .collection.title }}</div>
-          {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
-          <div class="collection-meta">
-            <span>{{ .state.count }} pieces</span>
-            {{ with .collection.start_here }}<span>Start Here</span>{{ end }}
-          </div>
-        </a>
-      {{ end }}
+      </div>
     </section>
   {{ end }}
 
   {{ $featured := where site.RegularPages "Params.featured" true }}
   {{ if gt (len $featured) 0 }}
-    <h2 class="list-title" style="margin-top:28px;">Selected</h2>
-    {{ range sort $featured "Date" "desc" }}
-      <div class="item">
-        {{ $slug := .Params.slug | default .File.BaseFileName }}
-        {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-        <div class="t"><a href="{{ .RelPermalink }}"
-          data-analytics-event="internal_promo_click"
-          data-analytics-source-slot="homepage_selected"
-          data-analytics-slug="{{ $slug }}"
-          data-analytics-title="{{ .Title }}"
-          data-analytics-section="{{ $sectionLabel }}"
-          data-analytics-path="{{ .RelPermalink }}"
-        >{{ .Title }}</a></div>
-        <div class="m">
-          {{ with .Params.section_label }}{{ . }}{{ end }}
-          {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
-          {{ with .Params.version }} | v{{ . }}{{ end }}
-          {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+    <section aria-labelledby="home-selected-title">
+      <h2 id="home-selected-title" class="list-title" style="margin-top:28px;">Selected</h2>
+      {{ range sort $featured "Date" "desc" }}
+        <div class="item">
+          {{ $slug := .Params.slug | default .File.BaseFileName }}
+          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+          <div class="t"><a href="{{ .RelPermalink }}"
+            data-analytics-event="internal_promo_click"
+            data-analytics-source-slot="homepage_selected"
+            data-analytics-slug="{{ $slug }}"
+            data-analytics-title="{{ .Title }}"
+            data-analytics-section="{{ $sectionLabel }}"
+            data-analytics-path="{{ .RelPermalink }}"
+          >{{ .Title }}</a></div>
+          <div class="m">
+            {{ with .Params.section_label }}{{ . }}{{ end }}
+            {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
+            {{ with .Params.version }} | v{{ . }}{{ end }}
+            {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+          </div>
+          {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
         </div>
-        {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-      </div>
-    {{ end }}
+      {{ end }}
+    </section>
   {{ end }}
 
   {{ $recentEssays := where site.RegularPages "Section" "essays" }}
   {{ if gt (len $recentEssays) 0 }}
-    <h2 class="list-title" style="margin-top:30px;">Recent Essays</h2>
-    {{ range first 15 (sort $recentEssays "Date" "desc") }}
-      <div class="item">
-        {{ $slug := .Params.slug | default .File.BaseFileName }}
-        {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-        <div class="t"><a href="{{ .RelPermalink }}"
-          data-analytics-event="internal_promo_click"
-          data-analytics-source-slot="homepage_recent"
-          data-analytics-slug="{{ $slug }}"
-          data-analytics-title="{{ .Title }}"
-          data-analytics-section="{{ $sectionLabel }}"
-          data-analytics-path="{{ .RelPermalink }}"
-        >{{ .Title }}</a></div>
-        <div class="m">
-          {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
-          {{ with .Params.version }} | v{{ . }}{{ end }}
-          {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+    <section aria-labelledby="home-recent-essays-title">
+      <h2 id="home-recent-essays-title" class="list-title" style="margin-top:30px;">Recent Essays</h2>
+      {{ range first 15 (sort $recentEssays "Date" "desc") }}
+        <div class="item">
+          {{ $slug := .Params.slug | default .File.BaseFileName }}
+          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+          <div class="t"><a href="{{ .RelPermalink }}"
+            data-analytics-event="internal_promo_click"
+            data-analytics-source-slot="homepage_recent"
+            data-analytics-slug="{{ $slug }}"
+            data-analytics-title="{{ .Title }}"
+            data-analytics-section="{{ $sectionLabel }}"
+            data-analytics-path="{{ .RelPermalink }}"
+          >{{ .Title }}</a></div>
+          <div class="m">
+            {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+            {{ with .Params.version }} | v{{ . }}{{ end }}
+            {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+          </div>
+          {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
         </div>
-        {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-      </div>
-    {{ end }}
+      {{ end }}
+    </section>
   {{ end }}
   {{ end }}
 {{ end }}
