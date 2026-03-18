@@ -12,6 +12,29 @@ if ($null -eq $shellCommand) {
   throw "A PowerShell host executable is required to run PDF failure audit tests."
 }
 
+function Test-IsWindowsHost {
+  return [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)
+}
+
+function New-CommandShim {
+  param(
+    [string]$Directory,
+    [string]$Name
+  )
+
+  if (Test-IsWindowsHost) {
+    Set-Content -Path (Join-Path $Directory "$Name.cmd") -Value "@echo off`r`nexit /b 0`r`n" -Encoding ASCII
+    return
+  }
+
+  $shimPath = Join-Path $Directory $Name
+  Set-Content -Path $shimPath -Value "#!/bin/sh`nexit 0`n" -Encoding ASCII
+  & chmod +x $shimPath
+  if ($LASTEXITCODE -ne 0) {
+    throw "Could not mark tool shim '$shimPath' executable."
+  }
+}
+
 function New-TestRoot {
   $root = Join-Path ([System.IO.Path]::GetTempPath()) ("oip-pdf-audit-" + [guid]::NewGuid().ToString("N"))
   New-Item -ItemType Directory -Force -Path $root | Out-Null
@@ -148,7 +171,7 @@ function Invoke-Audit {
   }
   New-Item -ItemType Directory -Force -Path $toolBin | Out-Null
   foreach ($tool in $AvailableTools) {
-    Set-Content -Path (Join-Path $toolBin "$tool.cmd") -Value "@echo off`r`nexit /b 0`r`n" -Encoding ASCII
+    New-CommandShim -Directory $toolBin -Name $tool
   }
 
   $commandArgs = @(
