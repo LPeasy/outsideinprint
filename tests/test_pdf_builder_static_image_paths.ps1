@@ -47,6 +47,7 @@ foreach ($name in @(
     "Test-StaticImageReference",
     "Normalize-StaticAssetReference",
     "Resolve-StaticAssetPath",
+    "Get-PdfFigurePlaceholderMarker",
     "Get-TypstPlaceholderBlock",
     "Resolve-TypstStaticAssetPath",
     "Test-RemoteUrl",
@@ -103,6 +104,9 @@ try {
 #image("https://lpeasy.github.io/outsideinprint/images/fixture.jpg")
 #image("../static/images/already-relative.jpg")
 #image("https://example.com/remote.png")
+#quote(block: true)[
+OIP_PDF_FIGURE_PLACEHOLDER
+]
 '@ | Set-Content -Path $bodyPath -Encoding UTF8
 
   $normalized = Normalize-TypstBody -Path $bodyPath -Title "" -Subtitle ""
@@ -116,7 +120,8 @@ try {
   Assert-True (([regex]::Matches($normalizedBody, '#image\("\.\./\.\./static/images/fixture\.jpg"\)')).Count -eq 3) "Expected Normalize-TypstBody to rewrite all targeted static image references to relative compile paths."
   Assert-True ($normalizedBody -match '#image\("\.\./static/images/already-relative\.jpg"\)') "Expected Normalize-TypstBody to leave an already-relative Typst image path unchanged."
   Assert-True ($normalizedBody -notmatch 'https://example\.com/remote\.png') "Expected Normalize-TypstBody to replace unresolved external remote images with placeholders."
-  Assert-True ($normalizedBody -match 'Image kept on web edition only\.') "Expected Normalize-TypstBody to preserve a web-only placeholder for unresolved external remote images."
+  Assert-True ($normalizedBody -match '#block\[#align\(center\)\[#emph\[Image kept on web edition only\.\]\]\]') "Expected Normalize-TypstBody to emit the simplified Typst placeholder block for unresolved external remote images."
+  Assert-True ($normalizedBody -notmatch '#quote\(block:\s*true\)\[\s*(?:Image kept on web edition only\.|OIP_PDF_FIGURE_PLACEHOLDER)') "Expected Normalize-TypstBody not to leave quote-wrapped placeholder markers behind."
 
   $sourceFilePath = Join-Path $contentDir "fixture.md"
   @'
@@ -135,7 +140,7 @@ try {
   Assert-True ($normalizedSource.RemoteImageCount -eq 1) "Expected Normalize-PandocSource to leave non-local remote images as web-only placeholders."
   Assert-True ($normalizedSource.LocalizedRemoteImageCount -eq 0) "Expected Normalize-PandocSource not to count unresolved remote images as localized."
   Assert-True (([regex]::Matches($normalizedSource.Source, '\.\./\.\./static/images/fixture\.jpg')).Count -eq 3) "Expected Normalize-PandocSource to rewrite all local markdown images to compile-time relative paths."
-  Assert-True (([regex]::Matches($normalizedSource.Source, '> Image kept on web edition only\.')).Count -eq 1) "Expected Normalize-PandocSource to emit a single web-only placeholder for the unresolved remote image."
+  Assert-True (([regex]::Matches($normalizedSource.Source, [regex]::Escape((Get-PdfFigurePlaceholderMarker)))).Count -eq 1) "Expected Normalize-PandocSource to emit a single placeholder marker for the unresolved remote image."
 }
 finally {
   if (Test-Path $testRoot) {

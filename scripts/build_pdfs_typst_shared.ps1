@@ -377,6 +377,10 @@ function Get-FigureCaptionMarkdown {
   return "`r`n> $cleanCaption"
 }
 
+function Get-PdfFigurePlaceholderMarker {
+  return "OIP_PDF_FIGURE_PLACEHOLDER"
+}
+
 function Convert-HtmlFigureToMarkdown {
   param(
     [System.Text.RegularExpressions.Match]$Match,
@@ -426,7 +430,7 @@ function Convert-HtmlFigureToMarkdown {
 
   if (Test-RemoteUrl -Value $imageRef) {
     $State.Remote++
-    return "> Image kept on web edition only.$captionMarkdown`r`n"
+    return "$(Get-PdfFigurePlaceholderMarker)$captionMarkdown`r`n"
   }
 
   return $captionMarkdown
@@ -732,7 +736,7 @@ function Resolve-StaticAssetPath {
 }
 
 function Get-TypstPlaceholderBlock {
-  return '#block(inset: 12pt, stroke: 0.45pt + luma(175), radius: 4pt, above: 1.1em, below: 1.1em)[#align(center)[#emph[Image kept on web edition only.]]]'
+  return '#block[#align(center)[#emph[Image kept on web edition only.]]]'
 }
 
 function Resolve-TypstStaticAssetPath {
@@ -1229,7 +1233,7 @@ function Normalize-PandocSource {
 
       if (Test-RemoteUrl -Value $imageRef) {
         $state.Remote++
-        return "> Image kept on web edition only."
+        return Get-PdfFigurePlaceholderMarker
       }
 
       return ''
@@ -1285,13 +1289,14 @@ function Normalize-PandocSource {
         }
 
         $state.Remote++
-        return "> Image kept on web edition only."
+        return Get-PdfFigurePlaceholderMarker
       }
 
       return $match.Value
     })
 
-  $source = $source -replace '(?m)^\s*>\s*Image kept on web edition only\.\s*>\s*Image kept on web edition only\.\s*$', '> Image kept on web edition only.'
+  $placeholderMarker = [regex]::Escape((Get-PdfFigurePlaceholderMarker))
+  $source = [regex]::Replace($source, "(?m)^\s*$placeholderMarker\s*$placeholderMarker\s*$", (Get-PdfFigurePlaceholderMarker))
   $source = [regex]::Replace($source, '(?m)^[^\p{L}\p{N}\[]+(?=Read the full (?:opinion|report) \(PDF\))', '')
   $source = $source -replace '(?m)^\s*Read the full opinion \(PDF\)\s*\[(?<url>https?://[^\]]+)\]$', '[Read the full opinion (PDF)](${url})'
   $source = [regex]::Replace($source, '(?m)^\s*(Read the full opinion \(PDF\)|Read the full report \(PDF\))\s*$', '$1')
@@ -1330,6 +1335,8 @@ function Normalize-TypstBody {
   $staticAssetState = @{
     Rewrites = 0
   }
+  $placeholderMarker = [regex]::Escape((Get-PdfFigurePlaceholderMarker))
+  $placeholderBlock = Get-TypstPlaceholderBlock
 
   $body = $body -replace '(?m)^#horizontalrule\s*$', ''
   $body = $body -replace '(?m)^#line\(length: 100%\)\s*$', ''
@@ -1348,7 +1355,7 @@ function Normalize-TypstBody {
       }
 
       $placeholderState.Count++
-      Get-TypstPlaceholderBlock
+      $placeholderBlock
     })
   $body = [regex]::Replace($body, '#image\("(?<path>https?://[^"\r\n]+)"\)', {
       param($match)
@@ -1365,7 +1372,7 @@ function Normalize-TypstBody {
       }
 
       $placeholderState.Count++
-      Get-TypstPlaceholderBlock
+      $placeholderBlock
     })
   $body = [regex]::Replace($body, 'image\("(?<path>/[^"\r\n]+|https?://[^"\r\n]+)"\)', {
       param($match)
@@ -1394,7 +1401,9 @@ function Normalize-TypstBody {
   $body = [regex]::Replace($body, '(?m)^[^\p{L}\p{N}\[]+(?=Read the full (?:opinion|report) \(PDF\))', '')
   $body = $body.Replace([string][char]0x00C2, '')
   $body = $body.Replace([string][char]0xFFFD, '')
-  $body = [regex]::Replace($body, '(?m)^\s*Image kept on web edition only\.\s*$', (Get-TypstPlaceholderBlock))
+  $body = [regex]::Replace($body, "(?ms)#quote\(block:\s*true\)\[\s*(?:$placeholderMarker|Image kept on web edition only\.)\s*\]", $placeholderBlock)
+  $body = [regex]::Replace($body, "(?m)^\s*$placeholderMarker\s*$", $placeholderBlock)
+  $body = [regex]::Replace($body, '(?m)^\s*Image kept on web edition only\.\s*$', $placeholderBlock)
 
   if (-not [string]::IsNullOrWhiteSpace($Title)) {
     $escapedTitle = [regex]::Escape((Repair-CommonTextArtifacts -Value $Title).Trim())
