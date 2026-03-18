@@ -12,29 +12,6 @@ if ($null -eq $shellCommand) {
   throw "A PowerShell host executable is required to run PDF failure audit tests."
 }
 
-function Test-IsWindowsHost {
-  return [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)
-}
-
-function New-CommandShim {
-  param(
-    [string]$Directory,
-    [string]$Name
-  )
-
-  if (Test-IsWindowsHost) {
-    Set-Content -Path (Join-Path $Directory "$Name.cmd") -Value "@echo off`r`nexit /b 0`r`n" -Encoding ASCII
-    return
-  }
-
-  $shimPath = Join-Path $Directory $Name
-  Set-Content -Path $shimPath -Value "#!/bin/sh`nexit 0`n" -Encoding ASCII
-  & chmod +x $shimPath
-  if ($LASTEXITCODE -ne 0) {
-    throw "Could not mark tool shim '$shimPath' executable."
-  }
-}
-
 function New-TestRoot {
   $root = Join-Path ([System.IO.Path]::GetTempPath()) ("oip-pdf-audit-" + [guid]::NewGuid().ToString("N"))
   New-Item -ItemType Directory -Force -Path $root | Out-Null
@@ -165,15 +142,6 @@ function Invoke-Audit {
   $jsonPath = Join-Path $Root "reports/pdf-failure-audit.json"
   $markdownPath = Join-Path $Root "reports/pdf-failure-audit.md"
 
-  $toolBin = Join-Path $Root ".tool-bin"
-  if (Test-Path $toolBin) {
-    Remove-Item -Recurse -Force $toolBin
-  }
-  New-Item -ItemType Directory -Force -Path $toolBin | Out-Null
-  foreach ($tool in $AvailableTools) {
-    New-CommandShim -Directory $toolBin -Name $tool
-  }
-
   $commandArgs = @(
     "-NoProfile",
     "-ExecutionPolicy",
@@ -198,17 +166,12 @@ function Invoke-Audit {
   if ($SkipToolChecks) {
     $commandArgs += "-SkipToolChecks"
   }
+  if ((-not $SkipToolChecks) -and $AvailableTools.Count -gt 0) {
+    $commandArgs += "-AvailableToolsOverride"
+    $commandArgs += ($AvailableTools -join ",")
+  }
 
-  $priorPath = $env:PATH
-  try {
-    if (-not $SkipToolChecks) {
-      $env:PATH = $toolBin
-    }
-    $output = & $shellCommand.Source @commandArgs 2>&1 | Out-String
-  }
-  finally {
-    $env:PATH = $priorPath
-  }
+  $output = & $shellCommand.Source @commandArgs 2>&1 | Out-String
 
   return [pscustomobject]@{
     ExitCode = $LASTEXITCODE

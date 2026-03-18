@@ -10,7 +10,8 @@ param(
   [string]$MarkdownOutputPath = "./reports/pdf-failure-audit.md",
   [switch]$Rebuild,
   [switch]$SkipToolChecks,
-  [switch]$FailOnContentIssues
+  [switch]$FailOnContentIssues,
+  [string[]]$AvailableToolsOverride = @()
 )
 
 Set-StrictMode -Version Latest
@@ -372,9 +373,26 @@ foreach ($file in $essayFiles) {
 $requiredTools = Get-RequiredToolMap -Rows $rows
 $toolStatus = @()
 if (-not $SkipToolChecks) {
+  $hasToolOverride = $PSBoundParameters.ContainsKey('AvailableToolsOverride')
+  $overrideTools = @{}
+  if ($hasToolOverride) {
+    foreach ($toolName in $AvailableToolsOverride) {
+      foreach ($parsedToolName in ([string]$toolName -split ',')) {
+        if (-not [string]::IsNullOrWhiteSpace($parsedToolName)) {
+          $overrideTools[$parsedToolName.Trim().ToLowerInvariant()] = $true
+        }
+      }
+    }
+  }
+
   foreach ($name in @("pandoc", "typst", "node", "hugo")) {
     $required = [bool]$requiredTools[$name]
-    $available = $null -ne (Get-Command $name -ErrorAction SilentlyContinue)
+    $available = if ($hasToolOverride) {
+      $overrideTools.ContainsKey($name.ToLowerInvariant())
+    }
+    else {
+      $null -ne (Get-Command $name -ErrorAction SilentlyContinue)
+    }
     $toolStatus += [pscustomobject]@{
       name = $name
       required = $required
