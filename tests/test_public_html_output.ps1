@@ -160,6 +160,7 @@ $runningHeaderIssues = New-Object System.Collections.Generic.List[string]
 $rootRelativeImageIssues = New-Object System.Collections.Generic.List[string]
 $zgotmplzIssues = New-Object System.Collections.Generic.List[string]
 $semanticIssues = New-Object System.Collections.Generic.List[string]
+$importedMediaIssues = New-Object System.Collections.Generic.List[string]
 $hasHomepageAnalytics = $false
 $hasLibraryPdfAnalytics = $false
 $localizedMediumImageCount = 0
@@ -178,11 +179,16 @@ $optionalDefaultListPages = @(
   'public/working-papers/index.html'
 )
 
+$requiredImportedMediaPages = @(
+  'public/essays/biter-the-slang-word-that-hits/index.html',
+  'public/essays/rethinking-invasive-species-management/index.html'
+)
+
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Path $file.FullName -Raw
   $relativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $file.FullName
 
-  if ($requiredSemanticPages.Contains($relativePath) -or ($optionalDefaultListPages -contains $relativePath)) {
+  if ($requiredSemanticPages.Contains($relativePath) -or ($optionalDefaultListPages -contains $relativePath) -or ($requiredImportedMediaPages -contains $relativePath)) {
     $targetPageHtml[$relativePath] = $content
   }
 
@@ -271,6 +277,39 @@ foreach ($relativePath in $optionalDefaultListPages) {
   }
 }
 
+$requiredImportedMediaChecks = @(
+  @{
+    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
+    Pattern = '(?s)<figure class=article-figure><img[^>]+><figcaption class=article-source-caption>Photo by Markus Spiske on Unsplash</figcaption></figure>'
+    Message = 'expected imported photo-credit media to render as a figure with figcaption'
+  },
+  @{
+    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
+    Pattern = '(?s)<p>\s*Photo by Markus Spiske on Unsplash\s*</p>'
+    Message = 'expected imported photo credits not to remain as loose paragraphs after image rendering'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/rethinking-invasive-species-management/index.html'
+    Pattern = '(?s)<figure class=article-figure><img[^>]+><figcaption class=article-source-caption>Crested Floating Heart \| Source: iNaturalist</figcaption></figure>'
+    Message = 'expected descriptive imported image captions to render as figure captions'
+  }
+)
+
+foreach ($check in $requiredImportedMediaChecks) {
+  $relativePath = [string]$check.Path
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $importedMediaIssues.Add("Missing generated page required for imported media regression coverage: $relativePath")
+    continue
+  }
+
+  $isNegative = [bool]($check.ContainsKey('ShouldNotMatch') -and $check.ShouldNotMatch)
+  $matches = $targetPageHtml[$relativePath] -match ([string]$check.Pattern)
+  if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
+    $importedMediaIssues.Add("$relativePath => $($check.Message)")
+  }
+}
+
 if ($runningHeaderMatches -eq 0) {
   throw "Did not find any running-header home links in generated HTML."
 }
@@ -301,6 +340,10 @@ if (-not $hasLibraryPdfAnalytics) {
 
 if ($semanticIssues.Count -gt 0) {
   throw ("Found semantic accessibility regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $semanticIssues))
+}
+
+if ($importedMediaIssues.Count -gt 0) {
+  throw ("Found imported media rendering regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $importedMediaIssues))
 }
 
 Write-Host "Public HTML output regression test passed."

@@ -11,9 +11,12 @@
     {{- $escapedSubtitle := replaceRE $escapePattern `\\$1` .Params.subtitle -}}
     {{- $content = replaceRE (printf `%s<h[23][^>]*>\s*%s\s*</h[23]>\s*(?:<!-- raw HTML omitted -->\s*)*<h[34][^>]*>\s*%s\s*</h[34]>\s*` $leadPattern $escapedTitle $escapedSubtitle) `` $content -}}
   {{- else -}}
-    {{- $content = replaceRE (printf `%s<h[23][^>]*>\s*%s\s*</h[23]>\s*` $leadPattern $escapedTitle) `` $content -}}
+  {{- $content = replaceRE (printf `%s<h[23][^>]*>\s*%s\s*</h[23]>\s*` $leadPattern $escapedTitle) `` $content -}}
   {{- end -}}
   {{- $content = replaceRE `(?s)^\s*(?:<!-- raw HTML omitted -->\s*)*<hr>\s*(?:<!-- raw HTML omitted -->\s*)*` `` $content -}}
+  {{- $content = replaceRE `(?s)<p>\s*(<img[^>]+>)\s*</p>\s*<p>\s*(Photo by .*? on Unsplash)\s*</p>` `<figure class="article-figure">$1<figcaption class="article-source-caption">$2</figcaption></figure>` $content -}}
+  {{- $content = replaceRE `(?s)<p>\s*(<img[^>]+>)\s*</p>\s*<blockquote>\s*<p>\s*((?:Photo by .*? on Unsplash)|(?:[^<]+?\|.+?))\s*</p>\s*</blockquote>` `<figure class="article-figure">$1<figcaption class="article-source-caption">$2</figcaption></figure>` $content -}}
+  {{- $content = replaceRE `(?s)<blockquote>\s*<p>\s*([^<]+?\|.+?)\s*</p>\s*</blockquote>\s*<figure class="article-figure">\s*(<img[^>]+>)\s*<figcaption class="article-source-caption">.*?</figcaption>\s*</figure>` `<figure class="article-figure">$2<figcaption class="article-source-caption">$1</figcaption></figure>` $content -}}
 {{- end -}}
 {{- $content = replaceRE `(?s)<blockquote>\s*<p>\s*Source:\s*(.*?)</p>\s*</blockquote>` `<p class="article-source"><span class="article-source__label">Source</span> $1</p>` $content -}}
 {{- $content = replaceRE `(?s)<p>\s*Source:\s*(.*?)</p>` `<p class="article-source"><span class="article-source__label">Source</span> $1</p>` $content -}}

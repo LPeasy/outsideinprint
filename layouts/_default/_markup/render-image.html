@@ -2,4 +2,11 @@
 {{- if and (hasPrefix $destination "/") (not (hasPrefix $destination "//")) -}}
   {{- $destination = printf "%s%s" site.Home.RelPermalink (strings.TrimPrefix "/" $destination) -}}
 {{- end -}}
+{{- if and .Page.Params.medium_source_url .Title -}}
+<figure class="article-figure">
+  <img src="{{ $destination }}" alt="{{ .PlainText }}">
+  <figcaption class="article-source-caption">{{ .Title }}</figcaption>
+</figure>
+{{- else -}}
 <img src="{{ $destination }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- end -}}

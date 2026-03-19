@@ -58,6 +58,27 @@ function Escape-Yaml([string]$Value) {
   (($Value -replace "\\", "\\\\") -replace '"', '\\"')
 }
 
+function Get-HtmlAttributeValue([string]$Tag, [string]$Name) {
+  if (-not $Tag -or -not $Name) { return "" }
+
+  $pattern = '\b' + [regex]::Escape($Name) + '\s*=\s*(?:"([^"]*)"|''([^'']*)''|([^\s>]+))'
+  $match = [regex]::Match($Tag, $pattern, 'IgnoreCase')
+  if (-not $match.Success) { return "" }
+
+  foreach ($index in 1..3) {
+    if ($match.Groups[$index].Success) {
+      return Decode-Html $match.Groups[$index].Value
+    }
+  }
+
+  ""
+}
+
+function Escape-HtmlAttribute([string]$Value) {
+  if ($null -eq $Value) { return "" }
+  [System.Net.WebUtility]::HtmlEncode($Value)
+}
+
 function Get-WordCount([string]$Text) {
   if (-not $Text) { return 0 }
   (($Text -split "\s+") | Where-Object { $_ -match "\w" }).Count
@@ -195,15 +216,196 @@ function Parse-Post([string]$Html, [string]$FileName) {
   }
 }
 
+function Normalize-ImportedCaptionText([string]$Value) {
+  if ($null -eq $Value) { return "" }
+
+  $clean = Decode-Html $Value
+  $clean = $clean -replace '\[([^\]]+)\]\([^)]+\)', '$1'
+  $clean = $clean -replace '^\s*>\s*', ''
+  $clean = $clean -replace '\s+', ' '
+  (Repair-Mojibake $clean).Trim()
+}
+
+function Test-DescriptiveCaptionSegment([string]$Value) {
+  $clean = Normalize-ImportedCaptionText $Value
+  if ([string]::IsNullOrWhiteSpace($clean)) { return $false }
+  if ($clean.Length -lt 6 -or $clean.Length -gt 120) { return $false }
+  if ($clean -match '^(?i)(photo by|source:|courtesy of|image courtesy of|image source:)') { return $false }
+  if ($clean -match '^(?i)https?://') { return $false }
+  return @($clean -split '\s+' | Where-Object { $_ }).Count -ge 2
+}
+
+function Get-ImportedImageCaptionMetadata([string]$Caption) {
+  $clean = Normalize-ImportedCaptionText $Caption
+  $result = [ordered]@{
+    is_caption = $false
+    caption = $clean
+    alt_fallback = ""
+  }
+
+  if ([string]::IsNullOrWhiteSpace($clean)) {
+    return [pscustomobject]$result
+  }
+
+  if ($clean -match '^(?i)photo by .+ on unsplash$') {
+    $result.is_caption = $true
+    return [pscustomobject]$result
+  }
+
+  if ($clean -match '^(?i)(source:|courtesy of |image courtesy of |image source:)') {
+    $result.is_caption = $true
+    return [pscustomobject]$result
+  }
+
+  if ($clean.Contains('|')) {
+    $segments = @($clean -split '\|' | ForEach-Object { (Normalize-ImportedCaptionText $_) } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    if ($segments.Count -ge 2) {
+      $result.is_caption = $true
+      if (Test-DescriptiveCaptionSegment $segments[0]) {
+        $result.alt_fallback = $segments[0]
+      }
+      return [pscustomobject]$result
+    }
+  }
+
+  return [pscustomobject]$result
+}
+
+function Set-ImageAltIfMissing([string]$ImgHtml, [string]$AltText) {
+  if ([string]::IsNullOrWhiteSpace($ImgHtml) -or [string]::IsNullOrWhiteSpace($AltText)) {
+    return $ImgHtml
+  }
+
+  $existingAlt = Get-HtmlAttributeValue -Tag $ImgHtml -Name 'alt'
+  if (-not [string]::IsNullOrWhiteSpace($existingAlt)) {
+    return $ImgHtml
+  }
+
+  $escapedAlt = Escape-HtmlAttribute $AltText
+  if ($ImgHtml -match '(?i)\balt\s*(?:=\s*(?:""|' + "''" + '))?') {
+    return [regex]::Replace($ImgHtml, '(?i)\balt\s*(?:=\s*(?:""|' + "''" + '))?', ('alt="{0}"' -f $escapedAlt), 1)
+  }
+
+  return [regex]::Replace($ImgHtml, '\s*/?>$', (' alt="{0}"$0' -f $escapedAlt), 1)
+}
+
+function Escape-MarkdownImageText([string]$Value, [switch]$ForTitle) {
+  if ($null -eq $Value) { return "" }
+
+  $text = $Value -replace "`r?`n", ' '
+  $text = $text -replace '\s+', ' '
+  $text = $text.Trim()
+
+  if ($ForTitle) {
+    return ($text -replace '"', '\"')
+  }
+
+  return (($text -replace '\\', '\\\\') -replace '\]', '\]')
+}
+
+function New-MarkdownImage([string]$Alt, [string]$Src, [string]$Title) {
+  $escapedAlt = Escape-MarkdownImageText -Value $Alt
+  $escapedTitle = Escape-MarkdownImageText -Value $Title -ForTitle
+  if ([string]::IsNullOrWhiteSpace($escapedTitle)) {
+    return ('![{0}]({1})' -f $escapedAlt, $Src)
+  }
+
+  return ('![{0}]({1} "{2}")' -f $escapedAlt, $Src, $escapedTitle)
+}
+
+function Wrap-ImportedFigureCaptionsInHtml([string]$BodyHtml) {
+  if ([string]::IsNullOrWhiteSpace($BodyHtml)) { return "" }
+
+  $wrapped = $BodyHtml
+  $imageWithParagraphCaptionPattern = '(?is)<p>\s*(?<img><img\b[^>]*>)\s*</p>\s*<p>\s*(?<caption>.*?)\s*</p>'
+  $imageWithBlockquoteCaptionPattern = '(?is)<p>\s*(?<img><img\b[^>]*>)\s*</p>\s*<blockquote>\s*<p>\s*(?<caption>.*?)\s*</p>\s*</blockquote>'
+
+  $wrapEvaluator = {
+    param($match)
+
+    $captionHtml = $match.Groups['caption'].Value.Trim()
+    $metadata = Get-ImportedImageCaptionMetadata (Strip-Html $captionHtml)
+    if (-not $metadata.is_caption) {
+      return $match.Value
+    }
+
+    $imgHtml = $match.Groups['img'].Value
+    if (-not [string]::IsNullOrWhiteSpace($metadata.alt_fallback)) {
+      $imgHtml = Set-ImageAltIfMissing -ImgHtml $imgHtml -AltText $metadata.alt_fallback
+    }
+
+    return ('<figure>{0}<figcaption>{1}</figcaption></figure>' -f $imgHtml, $captionHtml)
+  }
+
+  $wrapped = [regex]::Replace($wrapped, $imageWithBlockquoteCaptionPattern, $wrapEvaluator)
+  $wrapped = [regex]::Replace($wrapped, $imageWithParagraphCaptionPattern, $wrapEvaluator)
+  $wrapped
+}
+
+function Merge-ImportedImageCaptions([string]$Markdown) {
+  if ([string]::IsNullOrWhiteSpace($Markdown)) { return "" }
+
+  $pattern = '(?ms)^(?<image>!\[(?<alt>[^\]]*)\]\((?<inner>[^\r\n]+)\))\s*\n+(?<caption>(?:>\s*)?[^\n]+?)\s*(?<separator>\n{2,}|\z)'
+  [regex]::Replace($Markdown, $pattern, {
+      param($match)
+
+      $inner = $match.Groups['inner'].Value.Trim()
+      $innerMatch = [regex]::Match($inner, '^(?<url>\S+?)(?:\s+"(?<title>[^"]*)")?$')
+      if (-not $innerMatch.Success) {
+        return $match.Value
+      }
+
+      $title = $innerMatch.Groups['title'].Value
+      if (-not [string]::IsNullOrWhiteSpace($title)) {
+        return $match.Value
+      }
+
+      $metadata = Get-ImportedImageCaptionMetadata $match.Groups['caption'].Value
+      if (-not $metadata.is_caption) {
+        return $match.Value
+      }
+
+      $alt = $match.Groups['alt'].Value
+      if ([string]::IsNullOrWhiteSpace($alt) -and -not [string]::IsNullOrWhiteSpace($metadata.alt_fallback)) {
+        $alt = $metadata.alt_fallback
+      }
+
+      return (New-MarkdownImage -Alt $alt -Src $innerMatch.Groups['url'].Value -Title $metadata.caption) + $match.Groups['separator'].Value
+    })
+}
+
 function Convert-HtmlFallback([string]$BodyHtml) {
   $m = $BodyHtml
-  $m = $m -replace '(?i)<figure\b[^>]*>', "`n`n"
-  $m = $m -replace '(?i)</figure>', "`n`n"
-  $m = $m -replace '(?i)<figcaption\b[^>]*>', "`n`n"
-  $m = $m -replace '(?i)</figcaption>', "`n`n"
-  $m = [regex]::Replace($m, '(?i)<img\b[^>]*src="([^"]+)"[^>]*alt="([^"]*)"[^>]*>', '![$2]($1)')
-  $m = [regex]::Replace($m, '(?i)<img\b[^>]*alt="([^"]*)"[^>]*src="([^"]+)"[^>]*>', '![$1]($2)')
-  $m = [regex]::Replace($m, '(?i)<img\b[^>]*src="([^"]+)"[^>]*>', '![]($1)')
+  $m = [regex]::Replace($m, '(?is)<figure\b[^>]*>\s*(?<img><img\b[^>]*>)\s*(?:<figcaption\b[^>]*>(?<caption>.*?)</figcaption>)?\s*</figure>', {
+      param($match)
+
+      $imgTag = $match.Groups['img'].Value
+      $src = Get-HtmlAttributeValue -Tag $imgTag -Name 'src'
+      if ([string]::IsNullOrWhiteSpace($src)) {
+        return "`n`n"
+      }
+
+      $alt = Get-HtmlAttributeValue -Tag $imgTag -Name 'alt'
+      $caption = Normalize-ImportedCaptionText (Strip-Html $match.Groups['caption'].Value)
+      $metadata = Get-ImportedImageCaptionMetadata $caption
+      if ([string]::IsNullOrWhiteSpace($alt) -and -not [string]::IsNullOrWhiteSpace($metadata.alt_fallback)) {
+        $alt = $metadata.alt_fallback
+      }
+
+      return ("`n`n{0}`n`n" -f (New-MarkdownImage -Alt $alt -Src $src -Title $caption))
+    })
+  $m = [regex]::Replace($m, '(?is)<img\b[^>]*>', {
+      param($match)
+
+      $tag = $match.Value
+      $src = Get-HtmlAttributeValue -Tag $tag -Name 'src'
+      if ([string]::IsNullOrWhiteSpace($src)) {
+        return ''
+      }
+
+      $alt = Get-HtmlAttributeValue -Tag $tag -Name 'alt'
+      return New-MarkdownImage -Alt $alt -Src $src -Title ''
+    })
   $m = $m -replace '(?i)<br\s*/?>', "`n"
   $m = $m -replace '(?i)</p>', "`n`n"
   $m = $m -replace '(?i)<li[^>]*>', '- '
@@ -220,7 +422,8 @@ function Convert-HtmlFallback([string]$BodyHtml) {
 function Convert-BodyToMarkdown([string]$BodyHtml, [string]$TempRoot, [string]$FileStem) {
   $htmlPath = Join-Path $TempRoot ($FileStem + '.body.html')
   $mdPath = Join-Path $TempRoot ($FileStem + '.body.md')
-  Set-Content -Path $htmlPath -Value $BodyHtml -Encoding UTF8
+  $normalizedHtml = Wrap-ImportedFigureCaptionsInHtml $BodyHtml
+  Set-Content -Path $htmlPath -Value $normalizedHtml -Encoding UTF8
 
   $pandoc = Get-Command pandoc -ErrorAction SilentlyContinue
   if ($pandoc) {
@@ -234,6 +437,7 @@ function Convert-BodyToMarkdown([string]$BodyHtml, [string]$TempRoot, [string]$F
   $md = $md -replace "`r`n", "`n"
   $md = $md -replace "[ `t]+$", ""
   $md = $md -replace "`n{3,}", "`n`n"
+  $md = Merge-ImportedImageCaptions $md
   Repair-Mojibake ($md.Trim() + "`n")
 }
 
