@@ -2,10 +2,14 @@
   "name": "outsideinprint",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  },
   "scripts": {
     "test": "node --test"
   },
   "devDependencies": {
-    "playwright": "^1.53.1"
+    "playwright": "1.53.1"
   }
 }

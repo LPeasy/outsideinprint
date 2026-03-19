@@ -35,7 +35,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
 
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
@@ -57,8 +57,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          npm install
+          npm install --include=dev --no-audit --no-fund
           npx playwright install --with-deps chromium
+
+      - name: Test CI Contract
+        shell: pwsh
+        run: |
+          ./tests/test_ci_contract.ps1
 
       - name: Verify Toolchain
         shell: bash

@@ -48,16 +48,17 @@ Single pages render an **edition header** plus a **Cite this** block so each pag
 
 Local:
 - Install Typst + Pandoc.
-- Run `npm install`
+- Use Node 20 (`.nvmrc` pins the repo default).
+- Run `npm install --include=dev --no-audit --no-fund`
 - Run `npx playwright install chromium`
 - Run: `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
 
 CI:
 - GitHub Actions runs `scripts/build_pdfs_typst_ci.ps1` on every push to `main`.
 - Flow: Markdown -> Typst or browser-print render -> `static/pdfs/` -> `scripts/sync_pdf_catalog.ps1` -> preflight -> Hugo build -> deploy.
-- The workflow installs Node dependencies plus Playwright Chromium before the PDF build so the HTML path stays headless and deterministic on `ubuntu-latest`.
+- The repo standardizes on Node 20 via `.nvmrc`, and the workflow installs Node dependencies plus Playwright Chromium before the PDF build so the HTML path stays headless and deterministic on `ubuntu-latest`.
 
-If the HTML path is unavailable locally, the builder will tell you to run `npm install` and `npx playwright install chromium`.
+If the HTML path is unavailable locally, the builder will tell you to run `npm install --include=dev --no-audit --no-fund` and `npx playwright install chromium`.
 
 ## Verification commands
 

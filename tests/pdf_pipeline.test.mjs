@@ -64,8 +64,10 @@ test("deploy workflow installs Node and Playwright before the PDF build", () => 
   const workflow = fs.readFileSync(workflowPath, "utf8");
 
   assert.match(workflow, /actions\/setup-node@v4/);
-  assert.match(workflow, /npm install/);
+  assert.match(workflow, /node-version-file:\s*['"]\.nvmrc['"]/);
+  assert.match(workflow, /npm install --include=dev --no-audit --no-fund/);
   assert.match(workflow, /npx playwright install --with-deps chromium/);
+  assert.match(workflow, /tests\/test_ci_contract\.ps1/);
   assert.match(workflow, /Build PDF Editions/);
 });
 
@@ -83,6 +85,8 @@ test("README documents the browser-print workflow for html PDFs", () => {
 
   assert.match(readme, /Playwright/i);
   assert.match(readme, /npx playwright install chromium/i);
+  assert.match(readme, /\.nvmrc/);
+  assert.match(readme, /Node 20/i);
   assert.match(readme, /pdf_engine: typst \| html/);
 });
 

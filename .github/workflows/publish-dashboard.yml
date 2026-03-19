@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - ".github/workflows/publish-dashboard.yml"
+      - ".nvmrc"
       - "assets/css/**"
       - "assets/js/**"
       - "content-dashboard/**"
@@ -19,6 +20,7 @@ on:
       - "layouts/partials/footer_dashboard.html"
       - "layouts/partials/head_fonts.html"
       - "layouts/partials/masthead_dashboard.html"
+      - "package.json"
       - "scripts/import_analytics.ps1"
       - "tests/**"
   workflow_dispatch:
@@ -115,7 +117,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version-file: ".nvmrc"
+
+      - name: Test CI Contract
+        shell: pwsh
+        run: ./tests/test_ci_contract.ps1
 
       - name: Run Dashboard Logic Tests
         shell: bash
