@@ -824,6 +824,25 @@ function downloadCsv(filename, content) {
   URL.revokeObjectURL(url);
 }
 
+function syncDashboardHistory(query, historyMode, lastQuery) {
+  const nextUrl = new URL(window.location.href);
+  nextUrl.search = query ? `?${query}` : "";
+  nextUrl.hash = window.location.hash;
+
+  try {
+    if (historyMode === "push" && query !== lastQuery) {
+      window.history.pushState({ query }, "", nextUrl.toString());
+    } else if (historyMode !== "skip") {
+      window.history.replaceState({ query }, "", nextUrl.toString());
+    }
+  } catch (error) {
+    // Chromium restricts session-history rewrites on file:// URLs, which is how the CI smoke build is opened.
+    if (window.location.protocol !== "file:") {
+      throw error;
+    }
+  }
+}
+
 function initDashboard() {
   const shell = document.querySelector("[data-dashboard-shell]");
   if (!shell) {
@@ -871,12 +890,7 @@ function initDashboard() {
 
   function render(historyMode = "replace") {
     const query = serializeState(state);
-    const nextUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
-    if (historyMode === "push" && query !== lastQuery) {
-      window.history.pushState({ query }, "", nextUrl);
-    } else if (historyMode !== "skip") {
-      window.history.replaceState({ query }, "", nextUrl);
-    }
+    syncDashboardHistory(query, historyMode, lastQuery);
     lastQuery = query;
 
     [controls.period.value, controls.section.value, controls.sourceType.value, controls.scale.value, controls.sort.value] = [
