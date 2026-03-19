@@ -72,8 +72,7 @@ jobs:
       - name: Build Dashboard Site For Browser Smoke
         shell: pwsh
         run: |
-          $destination = Join-Path (Get-Location) ".dashboard-public-browser"
-          $baseUrl = ([System.Uri]((Resolve-Path .).Path + [System.IO.Path]::DirectorySeparatorChar + ".dashboard-public-browser" + [System.IO.Path]::DirectorySeparatorChar)).AbsoluteUri
+          $baseUrl = "http://127.0.0.1:41713/"
           hugo --config hugo-dashboard.toml --gc --minify --baseURL $baseUrl --destination .dashboard-public-browser
 
       - name: Run Dashboard Browser Smoke Test

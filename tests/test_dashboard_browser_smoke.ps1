@@ -3,7 +3,8 @@ param(
   [string]$AnalyticsDir = (Join-Path (Split-Path -Parent $PSScriptRoot) "data/analytics"),
   [string]$OutputDir = (Join-Path (Split-Path -Parent $PSScriptRoot) ".tmp-dashboard-browser-smoke"),
   [string]$BrowserPath,
-  [string]$ProfileRoot
+  [string]$ProfileRoot,
+  [string]$BaseUrl = "http://127.0.0.1:41713/"
 )
 
 Set-StrictMode -Version Latest
@@ -85,6 +86,104 @@ function Invoke-BrowserCapture {
   return $stdout
 }
 
+function Start-StaticSiteServer {
+  param(
+    [string]$RootPath,
+    [string]$Prefix
+  )
+
+  $job = Start-Job -ScriptBlock {
+    param($InnerRootPath, $InnerPrefix)
+
+    Set-StrictMode -Version Latest
+    $ErrorActionPreference = "Stop"
+
+    function Get-InnerContentType {
+      param([string]$InnerPath)
+
+      switch ([System.IO.Path]::GetExtension($InnerPath).ToLowerInvariant()) {
+        ".css" { return "text/css; charset=utf-8" }
+        ".js" { return "application/javascript; charset=utf-8" }
+        ".json" { return "application/json; charset=utf-8" }
+        ".svg" { return "image/svg+xml" }
+        ".png" { return "image/png" }
+        ".jpg" { return "image/jpeg" }
+        ".jpeg" { return "image/jpeg" }
+        ".ico" { return "image/x-icon" }
+        ".txt" { return "text/plain; charset=utf-8" }
+        default { return "text/html; charset=utf-8" }
+      }
+    }
+
+    $listener = [System.Net.HttpListener]::new()
+    $listener.Prefixes.Add($InnerPrefix)
+    $listener.Start()
+
+    try {
+      while ($listener.IsListening) {
+        $context = $listener.GetContext()
+        $requestPath = [System.Uri]::UnescapeDataString($context.Request.Url.AbsolutePath)
+
+        if ($requestPath -eq "/__shutdown__") {
+          $context.Response.StatusCode = 204
+          $context.Response.Close()
+          break
+        }
+
+        $relativePath = $requestPath.TrimStart("/")
+        if ([string]::IsNullOrWhiteSpace($relativePath)) {
+          $relativePath = "index.html"
+        }
+
+        $localPath = Join-Path $InnerRootPath ($relativePath -replace "/", [System.IO.Path]::DirectorySeparatorChar)
+        if (Test-Path $localPath -PathType Container) {
+          $localPath = Join-Path $localPath "index.html"
+        }
+
+        if (-not (Test-Path $localPath -PathType Leaf)) {
+          $context.Response.StatusCode = 404
+          $context.Response.Close()
+          continue
+        }
+
+        $bytes = [System.IO.File]::ReadAllBytes($localPath)
+        $context.Response.ContentType = Get-InnerContentType -InnerPath $localPath
+        $context.Response.ContentLength64 = $bytes.Length
+        $context.Response.OutputStream.Write($bytes, 0, $bytes.Length)
+        $context.Response.OutputStream.Close()
+        $context.Response.Close()
+      }
+    }
+    finally {
+      if ($listener.IsListening) {
+        $listener.Stop()
+      }
+      $listener.Close()
+    }
+  } -ArgumentList $RootPath, $Prefix
+
+  Start-Sleep -Milliseconds 500
+  return $job
+}
+
+function Stop-StaticSiteServer {
+  param(
+    [System.Management.Automation.Job]$Job,
+    [string]$Prefix
+  )
+
+  try {
+    Invoke-WebRequest -Uri ($Prefix.TrimEnd("/") + "/__shutdown__") -UseBasicParsing | Out-Null
+  }
+  catch {
+  }
+
+  if ($Job) {
+    Wait-Job -Job $Job -Timeout 10 | Out-Null
+    Remove-Job -Job $Job -Force -ErrorAction SilentlyContinue
+  }
+}
+
 if (-not (Test-Path $SiteDir)) {
   throw "Built dashboard site directory was not found: $SiteDir"
 }
@@ -118,14 +217,16 @@ New-Item -ItemType Directory -Path $OutputDir | Out-Null
 $screensDir = Join-Path $OutputDir "screenshots"
 New-Item -ItemType Directory -Path $screensDir | Out-Null
 
+$serverJob = $null
+
 try {
   if (Test-Path $ProfileRoot) {
     Remove-Item -Recurse -Force $ProfileRoot
   }
   New-Item -ItemType Directory -Path $ProfileRoot | Out-Null
 
-  $indexUri = [System.Uri]::new((Resolve-Path (Join-Path $SiteDir "index.html")).Path)
-  $baseUrl = $indexUri.AbsoluteUri
+  $serverJob = Start-StaticSiteServer -RootPath (Resolve-Path $SiteDir).Path -Prefix $BaseUrl
+  $baseUrl = $BaseUrl
   $drilldownUrl = if ($selectedSection -and $selectedEssay) {
     $baseUrl + "?selectedSection=$([System.Uri]::EscapeDataString([string]$selectedSection))&selectedEssay=$([System.Uri]::EscapeDataString([string]$selectedEssay))"
   } else {
@@ -163,6 +264,7 @@ try {
   }
 }
 finally {
+  Stop-StaticSiteServer -Job $serverJob -Prefix $BaseUrl
   if (Test-Path $ProfileRoot) {
     Remove-Item -Recurse -Force $ProfileRoot -ErrorAction SilentlyContinue
   }
