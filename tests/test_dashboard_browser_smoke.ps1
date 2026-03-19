@@ -1,7 +1,9 @@
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) ".dashboard-public-browser"),
   [string]$AnalyticsDir = (Join-Path (Split-Path -Parent $PSScriptRoot) "data/analytics"),
-  [string]$OutputDir = (Join-Path (Split-Path -Parent $PSScriptRoot) ".tmp-dashboard-browser-smoke")
+  [string]$OutputDir = (Join-Path (Split-Path -Parent $PSScriptRoot) ".tmp-dashboard-browser-smoke"),
+  [string]$BrowserPath,
+  [string]$ProfileRoot
 )
 
 Set-StrictMode -Version Latest
@@ -10,15 +12,10 @@ if (Get-Variable -Name PSNativeCommandUseErrorActionPreference -ErrorAction Sile
   $PSNativeCommandUseErrorActionPreference = $false
 }
 
-function Get-BrowserPath {
-  $candidates = @(
-    "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
-    "C:\Program Files\Microsoft\Edge\Application\msedge.exe",
-    "C:\Program Files\Google\Chrome\Application\chrome.exe",
-    "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-  )
+. (Join-Path (Split-Path -Parent $PSScriptRoot) "scripts/dashboard_process_tools.ps1")
 
-  return $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+if ([string]::IsNullOrWhiteSpace($ProfileRoot)) {
+  $ProfileRoot = New-DashboardScratchPath -Prefix "oip-dashboard-browser"
 }
 
 function Invoke-BrowserCapture {
@@ -34,10 +31,14 @@ function Invoke-BrowserCapture {
   if (Test-Path $UserDataDir) {
     Remove-Item -Recurse -Force $UserDataDir
   }
-  New-Item -ItemType Directory -Path $UserDataDir | Out-Null
+  $userDataParent = Split-Path -Parent $UserDataDir
+  if ($userDataParent -and -not (Test-Path $userDataParent)) {
+    New-Item -ItemType Directory -Path $userDataParent -Force | Out-Null
+  }
 
   $args = @(
     "--headless=new",
+    "--no-sandbox",
     "--disable-gpu",
     "--no-first-run",
     "--no-default-browser-check",
@@ -57,14 +58,24 @@ function Invoke-BrowserCapture {
   }
 
   $args += $TargetUrl
-  $stdoutPath = Join-Path $UserDataDir "stdout.txt"
-  $stderrPath = Join-Path $UserDataDir "stderr.txt"
-  $process = Start-Process -FilePath $BrowserPath -ArgumentList $args -Wait -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
-  $stdout = if (Test-Path $stdoutPath) { Get-Content $stdoutPath -Raw } else { "" }
-  $stderr = if (Test-Path $stderrPath) { Get-Content $stderrPath -Raw } else { "" }
+  $result = Invoke-CapturedProcess -FilePath $BrowserPath -ArgumentList $args
+  $stdout = [string]$result.StdOut
+  $stderr = [string]$result.StdErr
 
-  if ($process.ExitCode -ne 0) {
-    throw "Browser smoke capture failed for $TargetUrl. $stderr"
+  if ($result.ExitCode -ne 0) {
+    $details = @(
+      "Browser smoke capture failed for $TargetUrl.",
+      "Browser: $BrowserPath",
+      "User data dir: $UserDataDir",
+      "Exit code: $($result.ExitCode)"
+    )
+    if (-not [string]::IsNullOrWhiteSpace($stderr)) {
+      $details += "stderr: $($stderr.Trim())"
+    }
+    if (-not [string]::IsNullOrWhiteSpace($stdout)) {
+      $details += "stdout: $($stdout.Trim())"
+    }
+    throw ($details -join " ")
   }
 
   if (-not $DumpDom -and -not (Test-Path $ShotPath)) {
@@ -78,10 +89,12 @@ if (-not (Test-Path $SiteDir)) {
   throw "Built dashboard site directory was not found: $SiteDir"
 }
 
-$browserPath = Get-BrowserPath
-if (-not $browserPath) {
-  throw "No Edge/Chrome browser was found for dashboard browser smoke tests."
+$browserResolution = Resolve-DashboardBrowserPath -PreferredPath $BrowserPath
+if (-not $browserResolution.Found) {
+  throw ("No Edge/Chrome browser was found for dashboard browser smoke tests. Checked: {0}" -f ($browserResolution.CheckedPaths -join "; "))
 }
+$browserPath = $browserResolution.Path
+Write-Host "Using browser: $browserPath"
 
 $overview = Get-Content (Join-Path $AnalyticsDir "overview.json") -Raw | ConvertFrom-Json
 $sections = Get-Content (Join-Path $AnalyticsDir "sections.json") -Raw | ConvertFrom-Json
@@ -105,41 +118,53 @@ New-Item -ItemType Directory -Path $OutputDir | Out-Null
 $screensDir = Join-Path $OutputDir "screenshots"
 New-Item -ItemType Directory -Path $screensDir | Out-Null
 
-$indexUri = [System.Uri]::new((Resolve-Path (Join-Path $SiteDir "index.html")).Path)
-$baseUrl = $indexUri.AbsoluteUri
-$drilldownUrl = if ($selectedSection -and $selectedEssay) {
-  $baseUrl + "?selectedSection=$([System.Uri]::EscapeDataString([string]$selectedSection))&selectedEssay=$([System.Uri]::EscapeDataString([string]$selectedEssay))"
-} else {
-  $baseUrl
+try {
+  if (Test-Path $ProfileRoot) {
+    Remove-Item -Recurse -Force $ProfileRoot
+  }
+  New-Item -ItemType Directory -Path $ProfileRoot | Out-Null
+
+  $indexUri = [System.Uri]::new((Resolve-Path (Join-Path $SiteDir "index.html")).Path)
+  $baseUrl = $indexUri.AbsoluteUri
+  $drilldownUrl = if ($selectedSection -and $selectedEssay) {
+    $baseUrl + "?selectedSection=$([System.Uri]::EscapeDataString([string]$selectedSection))&selectedEssay=$([System.Uri]::EscapeDataString([string]$selectedEssay))"
+  } else {
+    $baseUrl
+  }
+
+  $dom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-dom") -TargetUrl $drilldownUrl -WindowSize "1440,2200" -DumpDom
+  $dom | Set-Content -Path (Join-Path $OutputDir "dashboard-dom.html")
+
+  Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-desktop") -TargetUrl $baseUrl -WindowSize "1440,2200" -ShotPath (Join-Path $screensDir "desktop.png") | Out-Null
+  Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-mobile") -TargetUrl $baseUrl -WindowSize "390,1200" -ShotPath (Join-Path $screensDir "mobile.png") | Out-Null
+
+  if ($dom -notmatch 'data-dashboard-shell') {
+    throw "Hydrated dashboard DOM is missing data-dashboard-shell."
+  }
+
+  if ($dom -notmatch 'dashboard-kpi__delta') {
+    throw "Hydrated dashboard DOM is missing KPI delta markup."
+  }
+
+  $pageviewsPattern = 'dashboard-kpi__label">Pageviews</p>\s*<p class="dashboard-kpi__value">' + $expectedPageviews + '<'
+  if ($expectedPageviews -gt 0 -and $dom -notmatch $pageviewsPattern) {
+    throw "Hydrated dashboard DOM does not show the expected nonzero pageviews KPI ($expectedPageviews)."
+  }
+
+  if ($selectedSection -and $dom -notmatch [regex]::Escape("<h3>$selectedSection</h3>")) {
+    throw "Hydrated dashboard DOM does not reflect the selected section drill-down state."
+  }
+
+  if ($selectedEssay) {
+    $essayTitle = @($essays | Where-Object { $_.path -eq $selectedEssay } | Select-Object -First 1)[0].title
+    if ($essayTitle -and $dom -notmatch [regex]::Escape($essayTitle)) {
+      throw "Hydrated dashboard DOM does not reflect the selected essay drill-down state."
+    }
+  }
 }
-
-$dom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $OutputDir "profile-dom") -TargetUrl $drilldownUrl -WindowSize "1440,2200" -DumpDom
-$dom | Set-Content -Path (Join-Path $OutputDir "dashboard-dom.html")
-
-Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $OutputDir "profile-desktop") -TargetUrl $baseUrl -WindowSize "1440,2200" -ShotPath (Join-Path $screensDir "desktop.png") | Out-Null
-Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $OutputDir "profile-mobile") -TargetUrl $baseUrl -WindowSize "390,1200" -ShotPath (Join-Path $screensDir "mobile.png") | Out-Null
-
-if ($dom -notmatch 'data-dashboard-shell') {
-  throw "Hydrated dashboard DOM is missing data-dashboard-shell."
-}
-
-if ($dom -notmatch 'dashboard-kpi__delta') {
-  throw "Hydrated dashboard DOM is missing KPI delta markup."
-}
-
-$pageviewsPattern = 'dashboard-kpi__label">Pageviews</p>\s*<p class="dashboard-kpi__value">' + $expectedPageviews + '<'
-if ($expectedPageviews -gt 0 -and $dom -notmatch $pageviewsPattern) {
-  throw "Hydrated dashboard DOM does not show the expected nonzero pageviews KPI ($expectedPageviews)."
-}
-
-if ($selectedSection -and $dom -notmatch [regex]::Escape("<h3>$selectedSection</h3>")) {
-  throw "Hydrated dashboard DOM does not reflect the selected section drill-down state."
-}
-
-if ($selectedEssay) {
-  $essayTitle = @($essays | Where-Object { $_.path -eq $selectedEssay } | Select-Object -First 1)[0].title
-  if ($essayTitle -and $dom -notmatch [regex]::Escape($essayTitle)) {
-    throw "Hydrated dashboard DOM does not reflect the selected essay drill-down state."
+finally {
+  if (Test-Path $ProfileRoot) {
+    Remove-Item -Recurse -Force $ProfileRoot -ErrorAction SilentlyContinue
   }
 }
 

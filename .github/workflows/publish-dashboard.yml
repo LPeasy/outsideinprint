@@ -21,6 +21,7 @@ on:
       - "layouts/partials/head_fonts.html"
       - "layouts/partials/masthead_dashboard.html"
       - "package.json"
+      - "scripts/dashboard_process_tools.ps1"
       - "scripts/import_analytics.ps1"
       - "tests/**"
   workflow_dispatch:
@@ -42,6 +43,10 @@ jobs:
         with:
           hugo-version: "0.157.0"
           extended: true
+
+      - name: Run Dashboard Process Tool Tests
+        shell: pwsh
+        run: ./tests/test_dashboard_process_tools.ps1
 
       - name: Build Dashboard Site For Browser Smoke
         shell: pwsh
