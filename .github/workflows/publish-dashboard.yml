@@ -57,6 +57,18 @@ jobs:
         shell: pwsh
         run: ./tests/test_dashboard_process_tools.ps1
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Install Playwright Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --include=dev --no-audit --no-fund
+          npx playwright install chromium
+
       - name: Build Dashboard Site For Browser Smoke
         shell: pwsh
         run: |
@@ -66,7 +78,12 @@ jobs:
 
       - name: Run Dashboard Browser Smoke Test
         shell: pwsh
-        run: ./tests/test_dashboard_browser_smoke.ps1 -SiteDir ./.dashboard-public-browser
+        run: |
+          $browserPath = node --input-type=module -e "import { chromium } from 'playwright'; console.log(chromium.executablePath())"
+          if ([string]::IsNullOrWhiteSpace($browserPath)) {
+            throw "Failed to resolve the Playwright Chromium executable path."
+          }
+          ./tests/test_dashboard_browser_smoke.ps1 -SiteDir ./.dashboard-public-browser -BrowserPath $browserPath.Trim()
 
       - name: Upload Browser Smoke Artifacts
         if: always()
