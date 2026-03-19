@@ -1,0 +1,20 @@
+{{- $description := partial "metadata_description.html" . -}}
+{{- $image := partial "metadata_image.html" . -}}
+{{- $title := cond .IsHome site.Title .Title -}}
+<meta itemprop="name" content="{{ $title }}">
+<meta itemprop="description" content="{{ $description }}">
+<meta itemprop="url" content="{{ .Permalink }}">
+{{- with $image }}
+<meta itemprop="image" content="{{ . }}">
+{{- end }}
+{{- if .IsPage }}
+  {{- with .Date }}
+<meta itemprop="datePublished" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- end }}
+  {{- with .Lastmod }}
+<meta itemprop="dateModified" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- end }}
+  {{- with .WordCount }}
+<meta itemprop="wordCount" content="{{ . }}">
+  {{- end }}
+{{- end }}

@@ -33,21 +33,27 @@ if ($dry.totals.converted -ne 2) { throw "Expected 2 converted in dry run, got $
 if ($dry.totals.skipped -lt 3) { throw "Expected at least 3 skipped in dry run, got $($dry.totals.skipped)" }
 
 $reportWrite = Join-Path $reportsDir "write.json"
-if (Get-Command pandoc -ErrorAction SilentlyContinue) {
-  powershell -ExecutionPolicy Bypass -File (Join-Path $repo "scripts/import_medium_export.ps1") `
-    -ZipPath $zipPath `
-    -ContentOut $contentOut `
-    -MediaOut $mediaOut `
-    -ReportOut $reportWrite `
-    -SlugMapPath $slugMap
+powershell -ExecutionPolicy Bypass -File (Join-Path $repo "scripts/import_medium_export.ps1") `
+  -ZipPath $zipPath `
+  -ContentOut $contentOut `
+  -MediaOut $mediaOut `
+  -ReportOut $reportWrite `
+  -SlugMapPath $slugMap
 
-  $write = Get-Content $reportWrite -Raw | ConvertFrom-Json
-  if ($write.totals.converted -ne 2) { throw "Expected 2 converted in write run, got $($write.totals.converted)" }
+$write = Get-Content $reportWrite -Raw | ConvertFrom-Json
+if ($write.totals.converted -ne 2) { throw "Expected 2 converted in write run, got $($write.totals.converted)" }
 
-  $mdFiles = Get-ChildItem -Path $contentOut -File -Filter *.md
-  if ($mdFiles.Count -ne 2) { throw "Expected 2 markdown files, got $($mdFiles.Count)" }
-} else {
-  Write-Host "pandoc not found; skipped write-mode fixture validation." -ForegroundColor Yellow
+$mdFiles = Get-ChildItem -Path $contentOut -File -Filter *.md
+if ($mdFiles.Count -ne 2) { throw "Expected 2 markdown files, got $($mdFiles.Count)" }
+
+$subtitleImport = Get-Content (Join-Path $contentOut "essay-with-subtitle-and-image.md") -Raw
+if ($subtitleImport -notmatch '(?m)^description: "Subtitle line ~ keep exact"$') {
+  throw "Expected imported subtitle fixture to preserve the subtitle as description front matter."
+}
+
+$longImport = Get-Content (Join-Path $contentOut "long-essay-for-import.md") -Raw
+if ($longImport -notmatch '(?m)^description: "This is a longform sentence for migration testing with stable meaning and preserved tilde ~ punctuation') {
+  throw "Expected subtitle-free import fixture to derive a conservative description from the first meaningful paragraph."
 }
 
 Write-Host "Fixture migration tests passed." -ForegroundColor Green

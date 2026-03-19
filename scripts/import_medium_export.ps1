@@ -79,6 +79,36 @@ function Escape-HtmlAttribute([string]$Value) {
   [System.Net.WebUtility]::HtmlEncode($Value)
 }
 
+function Normalize-MetadataDescriptionText([string]$Value) {
+  if ($null -eq $Value) { return "" }
+
+  $clean = Decode-Html $Value
+  $clean = $clean -replace '!\[[^\]]*\]\([^)]+\)', ' '
+  $clean = $clean -replace '\[([^\]]+)\]\([^)]+\)', '$1'
+  $clean = $clean -replace '\[Embedded media:\s*[^\]]+\]', ' '
+  $clean = Strip-Html $clean
+  $clean = $clean -replace '(?m)^\s*>\s*', ''
+  $clean = $clean -replace '\s+', ' '
+  (Repair-Mojibake $clean).Trim()
+}
+
+function Trim-MetadataDescription([string]$Value, [int]$MaxLength = 160) {
+  $clean = Normalize-MetadataDescriptionText $Value
+  if ([string]::IsNullOrWhiteSpace($clean)) { return "" }
+  if ($clean.Length -le $MaxLength) { return $clean }
+
+  $sliceLength = [Math]::Min($clean.Length, $MaxLength + 1)
+  $truncated = $clean.Substring(0, $sliceLength)
+  $boundary = $truncated.LastIndexOf(' ')
+  if ($boundary -ge [Math]::Floor($MaxLength * 0.6)) {
+    $truncated = $truncated.Substring(0, $boundary)
+  } else {
+    $truncated = $clean.Substring(0, $MaxLength)
+  }
+
+  $truncated.Trim().TrimEnd(' ', ',', ';', '-', ':', '~', '.', '!')
+}
+
 function Get-WordCount([string]$Text) {
   if (-not $Text) { return 0 }
   (($Text -split "\s+") | Where-Object { $_ -match "\w" }).Count
@@ -374,6 +404,34 @@ function Merge-ImportedImageCaptions([string]$Markdown) {
     })
 }
 
+function Get-ImportedDescriptionFromMarkdown([string]$Markdown) {
+  if ([string]::IsNullOrWhiteSpace($Markdown)) { return "" }
+
+  $blocks = [regex]::Split($Markdown.Trim(), '(?:\r?\n){2,}')
+  foreach ($block in $blocks) {
+    $clean = Normalize-MetadataDescriptionText $block
+    if ([string]::IsNullOrWhiteSpace($clean)) { continue }
+    if ($clean -match '^(?i)(photo by .+ on unsplash|source:|courtesy of |image courtesy of |image source:|embedded media:)') { continue }
+
+    $captionMetadata = Get-ImportedImageCaptionMetadata $clean
+    if ([bool]$captionMetadata.is_caption) { continue }
+    if ($clean.Length -lt 40) { continue }
+
+    return (Trim-MetadataDescription $clean)
+  }
+
+  return ""
+}
+
+function Get-ImportedPostDescription([string]$Subtitle, [string]$Markdown) {
+  $subtitleDescription = Trim-MetadataDescription $Subtitle
+  if (-not [string]::IsNullOrWhiteSpace($subtitleDescription)) {
+    return $subtitleDescription
+  }
+
+  return (Get-ImportedDescriptionFromMarkdown $Markdown)
+}
+
 function Convert-HtmlFallback([string]$BodyHtml) {
   $m = $BodyHtml
   $m = [regex]::Replace($m, '(?is)<figure\b[^>]*>\s*(?<img><img\b[^>]*>)\s*(?:<figcaption\b[^>]*>(?<caption>.*?)</figcaption>)?\s*</figure>', {
@@ -609,8 +667,9 @@ try {
 
       $markdown = ''
       if (-not $DryRun) { $markdown = Convert-BodyToMarkdown -BodyHtml $bodyHtml -TempRoot $tempRoot -FileStem $slug }
+      $description = Get-ImportedPostDescription -Subtitle $post.subtitle -Markdown $markdown
 
-      $front = @(
+      $frontLines = @(
         '---',
         ('title: "{0}"' -f (Escape-Yaml $post.title)),
         ('date: {0}' -f $post.published_dto.ToString('yyyy-MM-dd')),
@@ -622,9 +681,12 @@ try {
         'edition: "First digital edition"',
         ('pdf: "/pdfs/{0}.pdf"' -f $slug),
         'featured: false',
-        ('medium_source_url: "{0}"' -f (Escape-Yaml $post.canonical_url)),
-        '---'
-      ) -join "`n"
+        ('medium_source_url: "{0}"' -f (Escape-Yaml $post.canonical_url))
+      )
+      if (-not [string]::IsNullOrWhiteSpace($description)) {
+        $frontLines += ('description: "{0}"' -f (Escape-Yaml $description))
+      }
+      $front = (@($frontLines) + '---') -join "`n"
 
       if (-not $DryRun) { Write-TextNoBom $destPath ($front + "`n`n" + $markdown) }
 

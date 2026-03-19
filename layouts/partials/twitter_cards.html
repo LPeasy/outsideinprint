@@ -1,0 +1,9 @@
+{{- $description := partial "metadata_description.html" . -}}
+{{- $image := partial "metadata_image.html" . -}}
+{{- $title := cond .IsHome site.Title .Title -}}
+<meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{- with $image }}
+<meta name="twitter:image" content="{{ . }}">
+{{- end }}

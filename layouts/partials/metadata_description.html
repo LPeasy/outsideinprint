@@ -1,0 +1,39 @@
+{{- $siteDescription := site.Params.description | default "Outside In Print is a digital imprint for essays, literature, dialogues, and working papers published as stable web editions and free PDFs." -}}
+{{- $description := "" -}}
+
+{{- with .Params.description -}}
+  {{- $description = . -}}
+{{- end -}}
+
+{{- if not $description -}}
+  {{- with .Params.subtitle -}}
+    {{- $description = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $description -}}
+  {{- $fallback := "" -}}
+  {{- if and .Params.medium_source_url .Plain -}}
+    {{- $fallback = .Plain -}}
+  {{- else if .Summary -}}
+    {{- $fallback = .Summary | plainify -}}
+  {{- else if .Plain -}}
+    {{- $fallback = .Plain -}}
+  {{- end -}}
+
+  {{- if $fallback -}}
+    {{- $fallback = replaceRE `(?im)^\s*Photo by .+? on Unsplash\s*$` " " $fallback -}}
+    {{- $fallback = replaceRE `(?im)^\s*(?:Source:|Courtesy of |Image courtesy of |Image source:).*$` " " $fallback -}}
+    {{- $fallback = replaceRE `(?im)^\s*\[Embedded media:[^\n]+\]\s*$` " " $fallback -}}
+    {{- $fallback = replaceRE `(?im)^\s*[^.\n]{3,120}\s*\|\s*[^.\n]{1,120}(?:\s*\|\s*[^.\n]{1,120})?\s*$` " " $fallback -}}
+    {{- $fallback = strings.TrimSpace (replaceRE `\s+` " " $fallback) -}}
+    {{- $description = $fallback -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $description -}}
+  {{- $description = $siteDescription -}}
+{{- end -}}
+
+{{- $description = strings.TrimSpace (replaceRE `\s+` " " ($description | plainify)) -}}
+{{- $description | truncate 165 -}}

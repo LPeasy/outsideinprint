@@ -68,6 +68,37 @@ function Get-OpenTags {
   return @([regex]::Matches($Html, '<' + [regex]::Escape($TagName) + '\b[^>]*>', 'IgnoreCase') | ForEach-Object { $_.Value })
 }
 
+function Get-MetaContent {
+  param(
+    [string]$Html,
+    [string]$AttributeName,
+    [string]$AttributeValue
+  )
+
+  foreach ($tag in (Get-OpenTags -Html $Html -TagName 'meta')) {
+    if ((Get-AttributeValue -Tag $tag -Name $AttributeName) -eq $AttributeValue) {
+      return (Get-AttributeValue -Tag $tag -Name 'content')
+    }
+  }
+
+  return $null
+}
+
+function Get-LinkHrefByRel {
+  param(
+    [string]$Html,
+    [string]$Rel
+  )
+
+  foreach ($tag in (Get-OpenTags -Html $Html -TagName 'link')) {
+    if ((Get-AttributeValue -Tag $tag -Name 'rel') -eq $Rel) {
+      return (Get-AttributeValue -Tag $tag -Name 'href')
+    }
+  }
+
+  return $null
+}
+
 function Test-TagHasClass {
   param(
     [string]$Tag,
@@ -161,6 +192,7 @@ $rootRelativeImageIssues = New-Object System.Collections.Generic.List[string]
 $zgotmplzIssues = New-Object System.Collections.Generic.List[string]
 $semanticIssues = New-Object System.Collections.Generic.List[string]
 $importedMediaIssues = New-Object System.Collections.Generic.List[string]
+$metadataIssues = New-Object System.Collections.Generic.List[string]
 $hasHomepageAnalytics = $false
 $hasLibraryPdfAnalytics = $false
 $localizedMediumImageCount = 0
@@ -184,11 +216,48 @@ $requiredImportedMediaPages = @(
   'public/essays/rethinking-invasive-species-management/index.html'
 )
 
+$requiredMetadataPages = [ordered]@{
+  'public/index.html' = @{
+    Title = 'Outside In Print'
+    Description = 'Outside In Print is a digital imprint for essays, literature, dialogues, and working papers published as stable web editions and free PDFs.'
+    Canonical = 'https://lpeasy.github.io/outsideinprint/'
+  }
+  'public/start-here/index.html' = @{
+    Title = 'Start Here'
+    Description = 'An editorial welcome to Outside In Print and a measured guide into the archive.'
+    Canonical = 'https://lpeasy.github.io/outsideinprint/start-here/'
+  }
+  'public/library/index.html' = @{
+    Title = 'Library'
+    Description = 'The full catalog of published editions from Outside In Print, searchable by title, section, and version.'
+    Canonical = 'https://lpeasy.github.io/outsideinprint/library/'
+  }
+  'public/collections/index.html' = @{
+    Title = 'Collections'
+    Description = 'Curated collections that gather essays, projects, and recurring questions into coherent reading threads.'
+    Canonical = 'https://lpeasy.github.io/outsideinprint/collections/'
+  }
+  'public/essays/biter-the-slang-word-that-hits/index.html' = @{
+    Title = 'Biter'
+    Description = 'A word to describe artistic thieves'
+    Canonical = 'https://lpeasy.github.io/outsideinprint/essays/biter-the-slang-word-that-hits/'
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    Title = 'The Risk Management Buffet'
+    Canonical = 'https://lpeasy.github.io/outsideinprint/essays/the-risk-management-buffet/'
+  }
+}
+
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Path $file.FullName -Raw
   $relativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $file.FullName
 
-  if ($requiredSemanticPages.Contains($relativePath) -or ($optionalDefaultListPages -contains $relativePath) -or ($requiredImportedMediaPages -contains $relativePath)) {
+  if (
+    $requiredSemanticPages.Contains($relativePath) -or
+    ($optionalDefaultListPages -contains $relativePath) -or
+    ($requiredImportedMediaPages -contains $relativePath) -or
+    $requiredMetadataPages.Contains($relativePath)
+  ) {
     $targetPageHtml[$relativePath] = $content
   }
 
@@ -310,6 +379,71 @@ foreach ($check in $requiredImportedMediaChecks) {
   }
 }
 
+foreach ($relativePath in $requiredMetadataPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $metadataIssues.Add("Missing generated page required for metadata regression coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredMetadataPages[$relativePath]
+  $canonical = Get-LinkHrefByRel -Html $html -Rel 'canonical'
+  $metaDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'description'
+  $ogUrl = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:url'
+  $ogTitle = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:title'
+  $ogDescription = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:description'
+  $twitterCard = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:card'
+  $twitterTitle = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:title'
+  $twitterDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:description'
+  $itempropDescription = Get-MetaContent -Html $html -AttributeName 'itemprop' -AttributeValue 'description'
+
+  if ($canonical -ne [string]$expected.Canonical) {
+    $metadataIssues.Add("$relativePath => expected canonical $($expected.Canonical), found $canonical")
+  }
+
+  if ($ogUrl -ne [string]$expected.Canonical) {
+    $metadataIssues.Add("$relativePath => expected og:url to match canonical")
+  }
+
+  if ($ogTitle -ne [string]$expected.Title) {
+    $metadataIssues.Add("$relativePath => expected og:title '$($expected.Title)', found '$ogTitle'")
+  }
+
+  if ($twitterTitle -ne [string]$expected.Title) {
+    $metadataIssues.Add("$relativePath => expected twitter:title '$($expected.Title)', found '$twitterTitle'")
+  }
+
+  if ([string]::IsNullOrWhiteSpace($twitterCard)) {
+    $metadataIssues.Add("$relativePath => expected twitter:card metadata")
+  }
+
+  if ($expected.Contains('Description')) {
+    $expectedDescription = [string]$expected.Description
+    if ($metaDescription -ne $expectedDescription) {
+      $metadataIssues.Add("$relativePath => expected meta description '$expectedDescription', found '$metaDescription'")
+    }
+    if ($ogDescription -ne $expectedDescription) {
+      $metadataIssues.Add("$relativePath => expected og:description '$expectedDescription', found '$ogDescription'")
+    }
+    if ($twitterDescription -ne $expectedDescription) {
+      $metadataIssues.Add("$relativePath => expected twitter:description '$expectedDescription', found '$twitterDescription'")
+    }
+    if ($itempropDescription -ne $expectedDescription) {
+      $metadataIssues.Add("$relativePath => expected itemprop description '$expectedDescription', found '$itempropDescription'")
+    }
+  } else {
+    if ([string]::IsNullOrWhiteSpace($metaDescription) -or [string]::IsNullOrWhiteSpace($ogDescription) -or [string]::IsNullOrWhiteSpace($twitterDescription)) {
+      $metadataIssues.Add("$relativePath => expected non-empty description metadata across meta, og, and twitter tags")
+    }
+    if (($metaDescription -ne $ogDescription) -or ($metaDescription -ne $twitterDescription) -or ($metaDescription -ne $itempropDescription)) {
+      $metadataIssues.Add("$relativePath => expected meta, og, twitter, and schema descriptions to stay in sync")
+    }
+    if ($metaDescription -match 'Photo by .+ on Unsplash|Golden Corral in Fredericksburg, VA \| Source|\[Embedded media:') {
+      $metadataIssues.Add("$relativePath => expected metadata description to exclude imported media caption noise")
+    }
+  }
+}
+
 if ($runningHeaderMatches -eq 0) {
   throw "Did not find any running-header home links in generated HTML."
 }
@@ -344,6 +478,10 @@ if ($semanticIssues.Count -gt 0) {
 
 if ($importedMediaIssues.Count -gt 0) {
   throw ("Found imported media rendering regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $importedMediaIssues))
+}
+
+if ($metadataIssues.Count -gt 0) {
+  throw ("Found metadata regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $metadataIssues))
 }
 
 Write-Host "Public HTML output regression test passed."

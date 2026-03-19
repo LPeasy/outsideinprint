@@ -1,0 +1,32 @@
+{{- $description := partial "metadata_description.html" . -}}
+{{- $image := partial "metadata_image.html" . -}}
+{{- $title := cond .IsHome site.Title .Title -}}
+{{- $locale := replace (site.Language.LanguageCode | default "en-us") "-" "_" | lower -}}
+{{- $sectionLabel := "" -}}
+{{- with .Params.section_label -}}
+  {{- $sectionLabel = . -}}
+{{- else -}}
+  {{- if .Section -}}
+  {{- $sectionLabel = humanize .Section -}}
+  {{- end -}}
+{{- end -}}
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:locale" content="{{ $locale }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+{{- with $image }}
+<meta property="og:image" content="{{ . }}">
+{{- end }}
+{{- if .IsPage }}
+  {{- with $sectionLabel }}
+<meta property="article:section" content="{{ . }}">
+  {{- end }}
+  {{- with .Date }}
+<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- end }}
+  {{- with .Lastmod }}
+<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- end }}
+{{- end }}

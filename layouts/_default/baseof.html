@@ -1,13 +1,14 @@
 ﻿<!doctype html>
 <html lang="{{ site.Language.LanguageCode | default "en" }}">
   <head>
+    {{- $metaDescription := partial "metadata_description.html" . -}}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
     <link rel="canonical" href="{{ .Permalink }}" />
 
-    <meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ with .Params.subtitle }}{{ . }}{{ else }}{{ with .Summary }}{{ . | plainify | truncate 160 }}{{ else }}Outside In Print - Essays, literature, Syd and Oliver dialogues, and working papers.{{ end }}{{ end }}{{ end }}" />
+    <meta name="description" content="{{ $metaDescription }}" />
 
     <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
 

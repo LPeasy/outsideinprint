@@ -1,0 +1,27 @@
+{{- $image := "" -}}
+
+{{- with .Params.images -}}
+  {{- with index . 0 -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $image -}}
+  {{- with .Params.image -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $image -}}
+  {{- with .Params.featured_image -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $image -}}
+  {{- if or (hasPrefix $image "http://") (hasPrefix $image "https://") -}}
+    {{- $image -}}
+  {{- else -}}
+    {{- ($image | strings.TrimPrefix "/" | absURL) -}}
+  {{- end -}}
+{{- end -}}
