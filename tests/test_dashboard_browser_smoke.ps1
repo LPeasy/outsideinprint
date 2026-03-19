@@ -247,7 +247,7 @@ try {
     throw "Hydrated dashboard DOM is missing KPI delta markup."
   }
 
-  $pageviewsPattern = 'dashboard-kpi__label">Pageviews</p>\s*<p class="dashboard-kpi__value">' + $expectedPageviews + '<'
+  $pageviewsPattern = '(?s)dashboard-kpi__label">Pageviews</p>.*?<p class="dashboard-kpi__value">' + $expectedPageviews + '<'
   if ($expectedPageviews -gt 0 -and $dom -notmatch $pageviewsPattern) {
     throw "Hydrated dashboard DOM does not show the expected nonzero pageviews KPI ($expectedPageviews)."
   }
