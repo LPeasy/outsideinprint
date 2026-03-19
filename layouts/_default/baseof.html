@@ -18,7 +18,7 @@
     {{ partial "schema.html" . }}
 
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    <link rel="stylesheet" href="{{ if site.Params.dashboard.site }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}" integrity="{{ $css.Data.Integrity }}" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -39,7 +39,7 @@
     </div>
     {{ if site.Params.dashboard.site }}
       {{ $dashboardJS := resources.Get "js/dashboard.mjs" | js.Build (dict "targetPath" "js/dashboard.js" "minify" true) | resources.Fingerprint }}
-      <script src="{{ $dashboardJS.RelPermalink }}" integrity="{{ $dashboardJS.Data.Integrity }}" defer></script>
+      <script src="{{ $dashboardJS.Permalink }}" integrity="{{ $dashboardJS.Data.Integrity }}" defer></script>
     {{ else }}
       {{ partial "analytics.html" . }}
     {{ end }}
