@@ -119,5 +119,14 @@
       {{ end }}
     </section>
   {{ end }}
+  {{ partial "journey_links.html" (dict
+    "class" "journey-links--home"
+    "eyebrow" "Browse next"
+    "links" (slice
+      (dict "href" ("essays/" | absURL) "label" "Browse all essays")
+      (dict "href" ("collections/" | absURL) "label" "Follow a collection")
+      (dict "href" ("library/" | absURL) "label" "Search the library")
+    )
+  ) }}
   {{ end }}
 {{ end }}

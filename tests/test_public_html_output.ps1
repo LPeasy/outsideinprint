@@ -193,6 +193,7 @@ $zgotmplzIssues = New-Object System.Collections.Generic.List[string]
 $semanticIssues = New-Object System.Collections.Generic.List[string]
 $importedMediaIssues = New-Object System.Collections.Generic.List[string]
 $metadataIssues = New-Object System.Collections.Generic.List[string]
+$uxIssues = New-Object System.Collections.Generic.List[string]
 $hasHomepageAnalytics = $false
 $hasLibraryPdfAnalytics = $false
 $localizedMediumImageCount = 0
@@ -248,6 +249,15 @@ $requiredMetadataPages = [ordered]@{
   }
 }
 
+$requiredUxPages = @(
+  'public/index.html',
+  'public/essays/index.html',
+  'public/library/index.html',
+  'public/collections/index.html',
+  'public/collections/risk-uncertainty/index.html',
+  'public/essays/the-risk-management-buffet/index.html'
+)
+
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Path $file.FullName -Raw
   $relativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $file.FullName
@@ -256,7 +266,8 @@ foreach ($file in $htmlFiles) {
     $requiredSemanticPages.Contains($relativePath) -or
     ($optionalDefaultListPages -contains $relativePath) -or
     ($requiredImportedMediaPages -contains $relativePath) -or
-    $requiredMetadataPages.Contains($relativePath)
+    $requiredMetadataPages.Contains($relativePath) -or
+    ($requiredUxPages -contains $relativePath)
   ) {
     $targetPageHtml[$relativePath] = $content
   }
@@ -444,6 +455,71 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
   }
 }
 
+$requiredUxChecks = @(
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)journey-links.*?/outsideinprint/essays/.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Message = 'expected the homepage to expose browse-next links for essays, collections, and the library'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '(?s)journey-links.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Message = 'expected the default list template to expose collection and library next steps'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '>Read PDF<'
+    Message = 'expected section list pages to label PDF affordances as Read PDF'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '(?s)journey-links.*?/outsideinprint/collections/.*?/outsideinprint/start-here/'
+    Message = 'expected the library page to expose collection and Start Here navigation'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'No matching pieces found\.\s*Try a broader term,\s*browse\s*<a href=(?:https://lpeasy\.github\.io)?/outsideinprint/collections/>Collections</a>,\s*or start with\s*<a href=(?:https://lpeasy\.github\.io)?/outsideinprint/start-here/>Start Here</a>\.'
+    Message = 'expected the library empty state to point readers toward collections and Start Here'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '>Read PDF<'
+    Message = 'expected the library index to label PDF affordances as Read PDF'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)journey-links.*?/outsideinprint/library/.*?/outsideinprint/start-here/'
+    Message = 'expected the collections index to expose library and Start Here navigation'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '(?s)journey-links.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Message = 'expected collection pages to expose follow-on navigation back to collections and the library'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '>Read PDF<'
+    Message = 'expected collection pages to label PDF affordances as Read PDF'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)journey-links.*?/outsideinprint/essays/.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Message = 'expected article chrome to expose section, collections, and library next steps near the top of the page'
+  }
+)
+
+foreach ($check in $requiredUxChecks) {
+  $relativePath = [string]$check.Path
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $uxIssues.Add("Missing generated page required for UX regression coverage: $relativePath")
+    continue
+  }
+
+  if ($targetPageHtml[$relativePath] -notmatch ([string]$check.Pattern)) {
+    $uxIssues.Add("$relativePath => $($check.Message)")
+  }
+}
+
 if ($runningHeaderMatches -eq 0) {
   throw "Did not find any running-header home links in generated HTML."
 }
@@ -482,6 +558,10 @@ if ($importedMediaIssues.Count -gt 0) {
 
 if ($metadataIssues.Count -gt 0) {
   throw ("Found metadata regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $metadataIssues))
+}
+
+if ($uxIssues.Count -gt 0) {
+  throw ("Found UX/navigation regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $uxIssues))
 }
 
 Write-Host "Public HTML output regression test passed."

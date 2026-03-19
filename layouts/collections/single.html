@@ -61,7 +61,7 @@
             data-analytics-title="{{ .Title }}"
             data-analytics-section="{{ $sectionLabel }}"
             data-analytics-path="{{ .RelPermalink }}"
-          >PDF</a>{{ end }}
+          >Read PDF</a>{{ end }}
         </div>
         {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
       </div>
@@ -98,7 +98,7 @@
               data-analytics-title="{{ .Title }}"
               data-analytics-section="{{ $sectionLabel }}"
               data-analytics-path="{{ .RelPermalink }}"
-            >PDF</a>{{ end }}
+            >Read PDF</a>{{ end }}
           </div>
           {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
         </li>
@@ -110,5 +110,13 @@
         <div class="m">Adjust explicit <code>collections</code> or the fallback rules in <code>data/collections.yaml</code>.</div>
       </div>
     {{ end }}
+    {{ partial "journey_links.html" (dict
+      "class" "journey-links--page"
+      "eyebrow" "Browse next"
+      "links" (slice
+        (dict "href" ("collections/" | absURL) "label" "Browse all collections")
+        (dict "href" ("library/" | absURL) "label" "Search the library")
+      )
+    ) }}
   {{ end }}
 {{ end }}

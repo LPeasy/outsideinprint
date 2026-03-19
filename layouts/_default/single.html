@@ -3,6 +3,13 @@
   {{ if .Params.medium_source_url }}
     {{ $pageClass = printf "%s single-page--imported" $pageClass }}
   {{ end }}
+  {{ $sectionPage := .CurrentSection }}
+  {{ $journeyLinks := slice }}
+  {{ with $sectionPage }}
+    {{ $journeyLinks = $journeyLinks | append (dict "href" .RelPermalink "label" (printf "All %s" .Title)) }}
+  {{ end }}
+  {{ $journeyLinks = $journeyLinks | append (dict "href" ("collections/" | absURL) "label" "Browse collections") }}
+  {{ $journeyLinks = $journeyLinks | append (dict "href" ("library/" | absURL) "label" "Search the library") }}
   <article class="{{ $pageClass }}" data-analytics-eligible-read="true" data-pdf-render-root>
     <header class="piece-header">
       {{ partial "running_header.html" . }}
@@ -20,6 +27,11 @@
       {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
 
       {{ partial "pdf_button.html" . }}
+      {{ partial "journey_links.html" (dict
+        "class" "journey-links--article"
+        "eyebrow" "Keep reading"
+        "links" $journeyLinks
+      ) }}
     </header>
 
     <div class="piece-body single-content">

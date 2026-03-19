@@ -1,0 +1,13 @@
+{{ $links := .links | default (slice) }}
+{{ if gt (len $links) 0 }}
+  <nav class="journey-links{{ with .class }} {{ . }}{{ end }}" aria-label="{{ .ariaLabel | default "Next steps" }}">
+    {{ with .eyebrow }}<p class="journey-links__eyebrow">{{ . }}</p>{{ end }}
+    <div class="journey-links__items">
+      {{ range $links }}
+        {{ if and .href .label }}
+          <a class="journey-links__link" href="{{ .href }}">{{ .label }}</a>
+        {{ end }}
+      {{ end }}
+    </div>
+  </nav>
+{{ end }}

@@ -9,7 +9,16 @@
 
   <header class="page-header">
     <h1 id="collections-title" class="list-title">Collections</h1>
+    {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
   </header>
+  {{ partial "journey_links.html" (dict
+    "class" "journey-links--page"
+    "eyebrow" "Browse next"
+    "links" (slice
+      (dict "href" ("library/" | absURL) "label" "Search the library")
+      (dict "href" ("start-here/" | absURL) "label" "Read Start Here")
+    )
+  ) }}
   {{ if gt (len $featured) 0 }}
     <section aria-labelledby="featured-collections-title">
       <h2 id="featured-collections-title" class="visually-hidden">Featured Collections</h2>
