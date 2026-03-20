@@ -7,13 +7,13 @@
   },
   {
     "slot": "related_content",
-    "collection": "floods-water-built-environment",
+    "collection": "",
     "clicks": 1.0,
     "downstream_reads": 0.0
   },
   {
     "slot": "related_content",
-    "collection": "",
+    "collection": "floods-water-built-environment",
     "clicks": 1.0,
     "downstream_reads": 0.0
   }

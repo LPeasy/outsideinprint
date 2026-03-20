@@ -43,10 +43,10 @@
     ]
   },
   {
-    "slug": "history-pushes-back",
-    "path": "/syd-and-oliver/history-pushes-back/",
-    "title": "History Pushes Back | Outside In Print",
-    "section": "Syd and Oliver",
+    "slug": "the-dolphin-company",
+    "path": "/essays/the-dolphin-company/",
+    "title": "The Dolphin Company | Outside In Print",
+    "section": "Essays",
     "series": [
       {
         "date": "2026-03-15",
@@ -57,14 +57,14 @@
       },
       {
         "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
+        "pageviews": 1.0,
+        "reads": 1.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-17",
-        "pageviews": 3.0,
+        "pageviews": 2.0,
         "reads": 0.0,
         "pdf_downloads": 2.0,
         "newsletter_submits": 0.0
@@ -129,10 +129,10 @@
     ]
   },
   {
-    "slug": "the-structure-of-modern-american-society",
-    "path": "/essays/the-structure-of-modern-american-society/",
-    "title": "Wealth and Governance in Modern American Society | Outside In Print",
-    "section": "Essays",
+    "slug": "history-pushes-back",
+    "path": "/syd-and-oliver/history-pushes-back/",
+    "title": "History Pushes Back | Outside In Print",
+    "section": "Syd and Oliver",
     "series": [
       {
         "date": "2026-03-15",
@@ -172,9 +172,9 @@
     ]
   },
   {
-    "slug": "the-dolphin-company",
-    "path": "/essays/the-dolphin-company/",
-    "title": "The Dolphin Company | Outside In Print",
+    "slug": "the-structure-of-modern-american-society",
+    "path": "/essays/the-structure-of-modern-american-society/",
+    "title": "Wealth and Governance in Modern American Society | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -186,14 +186,14 @@
       },
       {
         "date": "2026-03-16",
-        "pageviews": 1.0,
-        "reads": 1.0,
+        "pageviews": 0.0,
+        "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-17",
-        "pageviews": 2.0,
+        "pageviews": 3.0,
         "reads": 0.0,
         "pdf_downloads": 2.0,
         "newsletter_submits": 0.0
@@ -258,9 +258,9 @@
     ]
   },
   {
-    "slug": "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data",
-    "path": "/essays/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data/",
-    "title": "The Privacy Paradox: Why Americans Feel Powerless Over Their Personal Data | Outside In Print",
+    "slug": "how-tucson-az-plans-for-water-scarcity",
+    "path": "/essays/how-tucson-az-plans-for-water-scarcity/",
+    "title": "How Tucson, AZ Plans for Water Scarcity | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -279,14 +279,14 @@
       },
       {
         "date": "2026-03-17",
-        "pageviews": 2.0,
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 1.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-18",
-        "pageviews": 0.0,
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
@@ -301,95 +301,9 @@
     ]
   },
   {
-    "slug": "2025-supreme-court-wrap-up",
-    "path": "/essays/2025-supreme-court-wrap-up/",
-    "title": "2025 Supreme Court Wrap-Up | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 2.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life",
-    "path": "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/",
-    "title": "The Little Prince: 10 Powerful Quotes That Will Change How You See Life | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 2.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "peaches-or-greece",
-    "path": "/syd-and-oliver/peaches-or-greece/",
-    "title": "Peaches or Greece | Outside In Print",
+    "slug": "willful-ignorance",
+    "path": "/syd-and-oliver/willful-ignorance/",
+    "title": "Willful Ignorance | Outside In Print",
     "section": "Syd and Oliver",
     "series": [
       {
@@ -408,55 +322,12 @@
       },
       {
         "date": "2026-03-17",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 2.0,
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 1.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "you-paid-for-that-ct-scan",
-    "path": "/essays/you-paid-for-that-ct-scan/",
-    "title": "You Paid For That CT Scan. | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
         "date": "2026-03-18",
         "pageviews": 0.0,
         "reads": 0.0,
@@ -467,7 +338,7 @@
         "date": "2026-03-19",
         "pageviews": 1.0,
         "reads": 0.0,
-        "pdf_downloads": 0.0,
+        "pdf_downloads": 1.0,
         "newsletter_submits": 0.0
       }
     ]
@@ -516,9 +387,52 @@
     ]
   },
   {
-    "slug": "are-we-alone",
-    "path": "/essays/are-we-alone/",
-    "title": "Are We Alone? | Outside In Print",
+    "slug": "life-is-a-bull-market",
+    "path": "/essays/life-is-a-bull-market/",
+    "title": "Life Is a Bull Market | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data",
+    "path": "/essays/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data/",
+    "title": "The Privacy Paradox: Why Americans Feel Powerless Over Their Personal Data | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -602,9 +516,52 @@
     ]
   },
   {
-    "slug": "how-tucson-az-plans-for-water-scarcity",
-    "path": "/essays/how-tucson-az-plans-for-water-scarcity/",
-    "title": "How Tucson, AZ Plans for Water Scarcity | Outside In Print",
+    "slug": "peaches-or-greece",
+    "path": "/syd-and-oliver/peaches-or-greece/",
+    "title": "Peaches or Greece | Outside In Print",
+    "section": "Syd and Oliver",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life",
+    "path": "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/",
+    "title": "The Little Prince: 10 Powerful Quotes That Will Change How You See Life | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -623,31 +580,31 @@
       },
       {
         "date": "2026-03-17",
-        "pageviews": 1.0,
+        "pageviews": 0.0,
         "reads": 0.0,
-        "pdf_downloads": 1.0,
+        "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-18",
-        "pageviews": 1.0,
+        "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-19",
-        "pageviews": 0.0,
+        "pageviews": 2.0,
         "reads": 0.0,
-        "pdf_downloads": 0.0,
+        "pdf_downloads": 1.0,
         "newsletter_submits": 0.0
       }
     ]
   },
   {
-    "slug": "declaring-equality",
-    "path": "/essays/declaring-equality/",
-    "title": "Declaring Equality? | Outside In Print",
+    "slug": "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction",
+    "path": "/essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction/",
+    "title": "Is Trump Seriously Asking for Ukraine’s Mineral Rights — Or Is This Just a Distraction? | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -668,12 +625,55 @@
         "date": "2026-03-17",
         "pageviews": 2.0,
         "reads": 0.0,
-        "pdf_downloads": 1.0,
+        "pdf_downloads": 2.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-18",
         "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-national-debt-is-screwing-you-heres-how",
+    "path": "/essays/the-national-debt-is-screwing-you-heres-how/",
+    "title": "The National Debt Is Screwing You — Here’s How | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
