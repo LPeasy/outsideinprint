@@ -54,6 +54,33 @@ function Assert-ArrayShape {
   }
 }
 
+function Convert-JsonDocument {
+  param([string]$Json)
+
+  $trimmed = $Json.Trim()
+  $isArrayDocument = $trimmed.StartsWith("[") -and $trimmed.EndsWith("]")
+
+  if ($isArrayDocument -and $trimmed -match '^\[\s*\]$') {
+    return ,@()
+  }
+
+  $convertFromJson = Get-Command ConvertFrom-Json -ErrorAction Stop
+  if ($convertFromJson.Parameters.ContainsKey("NoEnumerate")) {
+    return ($Json | ConvertFrom-Json -NoEnumerate)
+  }
+
+  $parsed = $Json | ConvertFrom-Json
+  if ($isArrayDocument -and $null -eq $parsed) {
+    return ,@()
+  }
+
+  if ($isArrayDocument -and ($parsed -is [string] -or $parsed -isnot [System.Collections.IEnumerable])) {
+    return ,$parsed
+  }
+
+  return $parsed
+}
+
 $requiredFiles = @(
   "overview.json",
   "essays.json",
@@ -83,7 +110,7 @@ foreach ($file in $requiredFiles) {
   }
 
   try {
-    $parsed[$file] = $raw | ConvertFrom-Json
+    $parsed[$file] = Convert-JsonDocument -Json $raw
   }
   catch {
     throw "Analytics snapshot file is not valid JSON: $file"
