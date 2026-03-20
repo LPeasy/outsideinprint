@@ -75,6 +75,29 @@ if ($dashboardWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
   throw "publish-dashboard.yml must run the CI contract test."
 }
 
+$dashboardLogicTestsIndex = $dashboardWorkflow.IndexOf("Run Dashboard Logic Tests")
+$dashboardNpmInstallIndex = $dashboardWorkflow.IndexOf("npm ci --include=dev --no-audit --no-fund")
+if ($dashboardNpmInstallIndex -lt 0) {
+  $dashboardNpmInstallIndex = $dashboardWorkflow.IndexOf("npm install --include=dev --no-audit --no-fund")
+}
+$dashboardPlaywrightInstallIndex = $dashboardWorkflow.IndexOf("npx playwright install --with-deps chromium")
+
+if ($dashboardLogicTestsIndex -lt 0) {
+  throw "publish-dashboard.yml must run the Node dashboard logic test suite."
+}
+
+if ($dashboardNpmInstallIndex -lt 0) {
+  throw "publish-dashboard.yml must install Node dependencies before the Node dashboard logic tests."
+}
+
+if ($dashboardPlaywrightInstallIndex -lt 0) {
+  throw "publish-dashboard.yml must provision Playwright Chromium before the Node dashboard logic tests."
+}
+
+if ($dashboardNpmInstallIndex -gt $dashboardLogicTestsIndex -or $dashboardPlaywrightInstallIndex -gt $dashboardLogicTestsIndex) {
+  throw "publish-dashboard.yml must install Node dependencies and Playwright before running the Node dashboard logic tests."
+}
+
 foreach ($requiredPathTrigger in @('".nvmrc"', '"package.json"')) {
   if ($dashboardWorkflow -notmatch [regex]::Escape($requiredPathTrigger)) {
     throw "publish-dashboard.yml must trigger when $requiredPathTrigger changes."

@@ -149,6 +149,17 @@ jobs:
         with:
           node-version-file: ".nvmrc"
 
+      - name: Install Node dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then
+            npm ci --include=dev --no-audit --no-fund
+          else
+            npm install --include=dev --no-audit --no-fund
+          fi
+          npx playwright install --with-deps chromium
+
       - name: Test CI Contract
         shell: pwsh
         run: ./tests/test_ci_contract.ps1
