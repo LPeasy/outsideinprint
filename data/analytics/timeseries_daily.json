@@ -16,5 +16,32 @@
     "read_rate": 14.3,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "pageviews": 70.0,
+    "unique_visitors": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 29.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "pageviews": 14.0,
+    "unique_visitors": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 2.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "pageviews": 26.0,
+    "unique_visitors": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 6.0,
+    "newsletter_submits": 0.0
   }
 ]
