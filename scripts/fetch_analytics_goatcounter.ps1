@@ -85,6 +85,129 @@ function Get-ResponseDetails {
   return ""
 }
 
+function Normalize-ErrorText {
+  param(
+    [string]$Value,
+    [int]$MaxLength = 600
+  )
+
+  $text = Convert-ToText $Value
+  if (-not $text) {
+    return ""
+  }
+
+  $text = [regex]::Replace($text, "\s+", " ").Trim()
+  if ($text.Length -le $MaxLength) {
+    return $text
+  }
+
+  return ($text.Substring(0, $MaxLength).TrimEnd() + " ...")
+}
+
+function Get-ResponseStatusCode {
+  param([object]$Response)
+
+  if ($null -eq $Response) {
+    return 0
+  }
+
+  try {
+    if ($Response.PSObject.Properties.Name -contains "StatusCode" -and $null -ne $Response.StatusCode) {
+      return [int]$Response.StatusCode
+    }
+  } catch {
+    return 0
+  }
+
+  return 0
+}
+
+function Get-ResponseReasonPhrase {
+  param([object]$Response)
+
+  if ($null -eq $Response) {
+    return ""
+  }
+
+  if ($Response.PSObject.Properties.Name -contains "ReasonPhrase" -and $Response.ReasonPhrase) {
+    return Convert-ToText $Response.ReasonPhrase
+  }
+
+  if ($Response.PSObject.Properties.Name -contains "StatusDescription" -and $Response.StatusDescription) {
+    return Convert-ToText $Response.StatusDescription
+  }
+
+  return ""
+}
+
+function Get-ResponseUri {
+  param(
+    [object]$Response,
+    [string]$FallbackUri
+  )
+
+  if ($null -ne $Response) {
+    if ($Response.PSObject.Properties.Name -contains "RequestMessage" -and $null -ne $Response.RequestMessage) {
+      if ($Response.RequestMessage.RequestUri) {
+        return Convert-ToText ([string]$Response.RequestMessage.RequestUri) $FallbackUri
+      }
+    }
+
+    if ($Response.PSObject.Properties.Name -contains "ResponseUri" -and $Response.ResponseUri) {
+      return Convert-ToText ([string]$Response.ResponseUri) $FallbackUri
+    }
+  }
+
+  return $FallbackUri
+}
+
+function Format-GoatCounterFailure {
+  param(
+    [string]$Operation,
+    [string]$Method,
+    [string]$Uri,
+    [int]$Attempt,
+    [System.Exception]$Exception,
+    [object]$Response
+  )
+
+  $statusCode = Get-ResponseStatusCode -Response $Response
+  $reasonPhrase = Normalize-ErrorText (Get-ResponseReasonPhrase -Response $Response) 120
+  $requestUri = Normalize-ErrorText (Get-ResponseUri -Response $Response -FallbackUri $Uri) 300
+  $exceptionMessage = Normalize-ErrorText $Exception.Message 300
+  $details = Normalize-ErrorText (Get-ResponseDetails -Response $Response)
+
+  $parts = @(
+    ("GoatCounter {0} failed after {1} attempt(s)." -f $Operation, $Attempt),
+    ("method={0}" -f $Method),
+    ("uri={0}" -f $requestUri)
+  )
+
+  if ($statusCode -gt 0) {
+    $parts += ("status={0}" -f $statusCode)
+  }
+
+  if ($reasonPhrase) {
+    $parts += ("reason={0}" -f $reasonPhrase)
+  }
+
+  if ($exceptionMessage) {
+    $parts += ("error={0}" -f $exceptionMessage)
+  }
+
+  if ($details) {
+    $parts += ("body={0}" -f $details)
+  }
+
+  if ($statusCode -in @(401, 403)) {
+    $parts += "Check GOATCOUNTER_API_KEY and confirm it has access to this GoatCounter site and export endpoint."
+  } elseif ($statusCode -eq 404) {
+    $parts += "Check GOATCOUNTER_SITE_URL. The fetch script expects the site root and appends /api/v0/export itself."
+  }
+
+  return ($parts -join " ")
+}
+
 function Invoke-GoatCounterDownload {
   param(
     [string]$Uri,
@@ -105,25 +228,18 @@ function Invoke-GoatCounterDownload {
       Invoke-WebRequest -Method Get -Uri $Uri -Headers $headers -OutFile $OutFile
       return
     } catch {
-      $statusCode = 0
-      $details = ""
-      if ($_.Exception.Response) {
-        $response = $_.Exception.Response
-        if ($response.StatusCode) {
-          $statusCode = [int]$response.StatusCode
-        }
-        $details = Get-ResponseDetails -Response $response
-      }
-
-      $isRetryable = ($statusCode -eq 0 -or $statusCode -eq 429 -or $statusCode -eq 502 -or $statusCode -eq 503 -or $statusCode -eq 504)
+      $response = if ($_.Exception.Response) { $_.Exception.Response } else { $null }
+      $statusCode = Get-ResponseStatusCode -Response $response
+      $isRetryable = ($statusCode -eq 0 -or $statusCode -eq 408 -or $statusCode -eq 429 -or $statusCode -eq 500 -or $statusCode -eq 502 -or $statusCode -eq 503 -or $statusCode -eq 504)
       if ($attempt -lt $MaxRetries -and $isRetryable) {
-        Write-Warning ("GoatCounter download attempt {0}/{1} failed with status {2}. Retrying in {3}s." -f $attempt, $MaxRetries, $(if ($statusCode) { $statusCode } else { "network" }), $delaySeconds)
+        $reason = Get-ResponseReasonPhrase -Response $response
+        Write-Warning ("GoatCounter download attempt {0}/{1} failed for GET {2} with status {3}{4}. Retrying in {5}s." -f $attempt, $MaxRetries, $Uri, $(if ($statusCode) { $statusCode } else { "network" }), $(if ($reason) { " ($reason)" } else { "" }), $delaySeconds)
         Start-Sleep -Seconds $delaySeconds
         $delaySeconds = [Math]::Min($delaySeconds * 2, 30)
         continue
       }
 
-      throw "GoatCounter download failed after $attempt attempt(s). $details"
+      throw (Format-GoatCounterFailure -Operation "download" -Method "GET" -Uri $Uri -Attempt $attempt -Exception $_.Exception -Response $response)
     }
   }
 }
@@ -198,25 +314,18 @@ function Invoke-GoatCounterRequest {
 
       return Invoke-RestMethod @invokeParams
     } catch {
-      $statusCode = 0
-      $details = ""
-      if ($_.Exception.Response) {
-        $response = $_.Exception.Response
-        if ($response.StatusCode) {
-          $statusCode = [int]$response.StatusCode
-        }
-        $details = Get-ResponseDetails -Response $response
-      }
-
-      $isRetryable = ($statusCode -eq 0 -or $statusCode -eq 429 -or $statusCode -eq 502 -or $statusCode -eq 503 -or $statusCode -eq 504)
+      $response = if ($_.Exception.Response) { $_.Exception.Response } else { $null }
+      $statusCode = Get-ResponseStatusCode -Response $response
+      $isRetryable = ($statusCode -eq 0 -or $statusCode -eq 408 -or $statusCode -eq 429 -or $statusCode -eq 500 -or $statusCode -eq 502 -or $statusCode -eq 503 -or $statusCode -eq 504)
       if ($attempt -lt $MaxRetries -and $isRetryable) {
-        Write-Warning ("GoatCounter request attempt {0}/{1} failed with status {2}. Retrying in {3}s." -f $attempt, $MaxRetries, $(if ($statusCode) { $statusCode } else { "network" }), $delaySeconds)
+        $reason = Get-ResponseReasonPhrase -Response $response
+        Write-Warning ("GoatCounter request attempt {0}/{1} failed for {2} {3} with status {4}{5}. Retrying in {6}s." -f $attempt, $MaxRetries, $Method, $Uri, $(if ($statusCode) { $statusCode } else { "network" }), $(if ($reason) { " ($reason)" } else { "" }), $delaySeconds)
         Start-Sleep -Seconds $delaySeconds
         $delaySeconds = [Math]::Min($delaySeconds * 2, 30)
         continue
       }
 
-      throw "GoatCounter request failed after $attempt attempt(s). $details"
+      throw (Format-GoatCounterFailure -Operation "request" -Method $Method -Uri $Uri -Attempt $attempt -Exception $_.Exception -Response $response)
     }
   }
 }
@@ -227,6 +336,21 @@ if ([string]::IsNullOrWhiteSpace($ApiKey)) {
 
 $SiteUrl = Convert-ToText $SiteUrl "https://outsideinprint.goatcounter.com"
 $SiteUrl = $SiteUrl.TrimEnd("/")
+
+try {
+  $siteUri = [System.Uri]$SiteUrl
+} catch {
+  throw "GOATCOUNTER_SITE_URL must be an absolute http(s) URL. Found '$SiteUrl'."
+}
+
+if (-not $siteUri.IsAbsoluteUri -or $siteUri.Scheme -notin @("http", "https")) {
+  throw "GOATCOUNTER_SITE_URL must be an absolute http(s) URL. Found '$SiteUrl'."
+}
+
+if ($siteUri.AbsolutePath.TrimEnd("/") -eq "/api/v0") {
+  throw "GOATCOUNTER_SITE_URL must point at the GoatCounter site root, not the API base. Use a value like 'https://outsideinprint.goatcounter.com'."
+}
+
 $apiBaseUrl = "$SiteUrl/api/v0"
 
 Write-Host "Outside In Print ~ Fetch GoatCounter Analytics" -ForegroundColor Cyan
