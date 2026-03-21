@@ -6,6 +6,12 @@ import {
   rowsToCsv,
   serializeState
 } from "./dashboard-core.mjs";
+import {
+  DEFAULT_CATEGORY,
+  applyDashboardCategoryView,
+  getDashboardCategory,
+  resolveDashboardCategory
+} from "./dashboard-categories.mjs";
 
 const DOT = "&middot;";
 const MAX_COMPARE = 4;
@@ -248,7 +254,7 @@ function scatterDetails(point) {
       <div><dt>Section</dt><dd>${escapeHtml(point.section)}</dd></div>
     </dl>
     <div class="dashboard-inline-actions">
-      <button type="button" class="dashboard-text-button" data-select-section="${escapeHtml(point.section)}">Open section</button>
+      <button type="button" class="dashboard-text-button" data-select-section="${escapeHtml(point.section)}" data-open-category="sections">Open section</button>
       <button type="button" class="dashboard-text-button" data-compare-essay="${escapeHtml(point.path)}">Compare essay</button>
     </div>
   `;
@@ -309,6 +315,95 @@ function leaderboardRows(model) {
     pdf_downloads: essay.pdf_downloads,
     primary_source: essay.primary_source
   }));
+}
+
+function sectionRows(model) {
+  return model.sectionExplorer.cards.map((section) => ({
+    section: section.section,
+    pageviews: section.pageviews,
+    reads: section.reads,
+    read_rate: section.read_rate.toFixed(1),
+    pdf_downloads: section.pdf_downloads,
+    newsletter_submits: section.newsletter_submits
+  }));
+}
+
+function essayRows(model) {
+  const selected = model.essayExplorer.selected;
+  if (!selected) {
+    return [];
+  }
+
+  return [
+    {
+      title: selected.title,
+      section: selected.section,
+      views: selected.views,
+      reads: selected.reads,
+      read_rate: selected.read_rate.toFixed(1),
+      pdf_downloads: selected.pdf_downloads,
+      primary_source: selected.primary_source
+    }
+  ];
+}
+
+function journeyRows(model) {
+  return model.funnel.paths.map((path) => ({
+    discovery_source: path.discovery_source,
+    discovery_type: path.discovery_type,
+    title: path.title,
+    views: path.views,
+    reads: path.reads,
+    pdf_downloads: path.pdf_downloads,
+    newsletter_submits: path.newsletter_submits
+  }));
+}
+
+function sourceRows(model) {
+  return model.sources.rows.map((source) => ({
+    source: source.source,
+    visitors: source.visitors,
+    pageviews: source.pageviews,
+    reads: source.reads,
+    read_rate: source.read_rate.toFixed(1)
+  }));
+}
+
+function exportPayloadForCategory(activeCategory, model) {
+  const exportKind = getDashboardCategory(activeCategory).exportKind;
+
+  switch (exportKind) {
+    case "leaderboard":
+      return {
+        filename: "outside-in-print-content-performance.csv",
+        rows: leaderboardRows(model)
+      };
+    case "sections":
+      return {
+        filename: "outside-in-print-sections.csv",
+        rows: sectionRows(model)
+      };
+    case "essay":
+      return {
+        filename: "outside-in-print-essay-detail.csv",
+        rows: essayRows(model)
+      };
+    case "journey":
+      return {
+        filename: "outside-in-print-reader-journey.csv",
+        rows: journeyRows(model)
+      };
+    case "sources":
+      return {
+        filename: "outside-in-print-traffic-sources.csv",
+        rows: sourceRows(model)
+      };
+    default:
+      return {
+        filename: "",
+        rows: []
+      };
+  }
 }
 
 function renderLeaderboard(root, model) {
@@ -418,7 +513,7 @@ function renderSectionExplorer(root, model) {
             ? selected.topEssays
                 .map(
                   (essay) => `
-                    <button type="button" class="dashboard-ranked-row" data-select-essay="${escapeHtml(essay.path)}">
+                    <button type="button" class="dashboard-ranked-row" data-select-essay="${escapeHtml(essay.path)}" data-open-category="essays">
                       <span>
                         <strong>${escapeHtml(essay.title)}</strong>
                         <small>${essay.views} views ${DOT} ${essay.reads} reads</small>
@@ -439,7 +534,7 @@ function renderSectionExplorer(root, model) {
             ? selected.completionLeaders
                 .map(
                   (essay) => `
-                    <button type="button" class="dashboard-ranked-row" data-select-essay="${escapeHtml(essay.path)}">
+                    <button type="button" class="dashboard-ranked-row" data-select-essay="${escapeHtml(essay.path)}" data-open-category="essays">
                       <span>
                         <strong>${escapeHtml(essay.title)}</strong>
                         <small>${essay.views} views ${DOT} ${essay.pdf_downloads} PDFs</small>
@@ -505,7 +600,7 @@ function renderEssayExplorer(root, model) {
       </div>
       <div class="dashboard-inline-actions">
         <button type="button" class="dashboard-text-button" data-reset-drilldown>Reset to overview</button>
-        <button type="button" class="dashboard-text-button" data-select-section="${escapeHtml(selected.section)}">Open section</button>
+        <button type="button" class="dashboard-text-button" data-select-section="${escapeHtml(selected.section)}" data-open-category="sections">Open section</button>
         <button type="button" class="dashboard-text-button" data-compare-essay="${escapeHtml(selected.path)}" aria-pressed="${model.state.compareEssays.includes(selected.path) ? "true" : "false"}">${model.state.compareEssays.includes(selected.path) ? "Remove from compare" : "Compare essay"}</button>
       </div>
     </div>
@@ -780,40 +875,6 @@ function renderSourcesRefined(root, model, state) {
   `;
 }
 
-function onceWhenVisible(node, renderFn) {
-  if (!node) {
-    return;
-  }
-
-  const nearViewport = node.getBoundingClientRect().top <= window.innerHeight + 180;
-  if (node.dataset.dashboardVisible === "true" || nearViewport) {
-    node.dataset.dashboardVisible = "true";
-    renderFn();
-    return;
-  }
-
-  if (!("IntersectionObserver" in window)) {
-    node.dataset.dashboardVisible = "true";
-    renderFn();
-    return;
-  }
-
-  if (node._dashboardObserver) {
-    node._dashboardObserver.disconnect();
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    if (entries.some((entry) => entry.isIntersecting)) {
-      observer.disconnect();
-      node.dataset.dashboardVisible = "true";
-      renderFn();
-    }
-  }, { rootMargin: "180px 0px" });
-
-  node._dashboardObserver = observer;
-  observer.observe(node);
-}
-
 function downloadCsv(filename, content) {
   const blob = new Blob([content], { type: "text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -824,16 +885,17 @@ function downloadCsv(filename, content) {
   URL.revokeObjectURL(url);
 }
 
-function syncDashboardHistory(query, historyMode, lastQuery) {
+function syncDashboardHistory(query, activeCategory, historyMode, lastLocationState) {
   const nextUrl = new URL(window.location.href);
   nextUrl.search = query ? `?${query}` : "";
-  nextUrl.hash = window.location.hash;
+  nextUrl.hash = `#${activeCategory}`;
 
   try {
-    if (historyMode === "push" && query !== lastQuery) {
-      window.history.pushState({ query }, "", nextUrl.toString());
+    const stateChanged = query !== lastLocationState.query || activeCategory !== lastLocationState.category;
+    if (historyMode === "push" && stateChanged) {
+      window.history.pushState({ query, category: activeCategory }, "", nextUrl.toString());
     } else if (historyMode !== "skip") {
-      window.history.replaceState({ query }, "", nextUrl.toString());
+      window.history.replaceState({ query, category: activeCategory }, "", nextUrl.toString());
     }
   } catch (error) {
     // Chromium restricts session-history rewrites on file:// URLs, which is how the CI smoke build is opened.
@@ -851,7 +913,12 @@ function initDashboard() {
 
   const rawData = readJsonScript("dashboard-data");
   const data = buildDashboardModel(rawData, window.location.search).data;
+  shell.classList.add("is-enhanced");
   const roots = {
+    activeTitle: document.querySelector("[data-dashboard-active-title]"),
+    activeDescription: document.querySelector("[data-dashboard-active-description]"),
+    categoryLinks: [...document.querySelectorAll("[data-dashboard-category-link]")],
+    categoryPanels: [...document.querySelectorAll("[data-dashboard-category-panel]")],
     kpis: document.querySelector("[data-dashboard-kpis]"),
     trend: document.querySelector("[data-dashboard-trend]"),
     multiples: document.querySelector("[data-dashboard-multiples]"),
@@ -865,6 +932,12 @@ function initDashboard() {
     sources: document.querySelector("[data-dashboard-sources]")
   };
   const controls = {
+    periodWrap: document.querySelector('[data-dashboard-control-wrap="period"]'),
+    sectionWrap: document.querySelector('[data-dashboard-control-wrap="section"]'),
+    sourceTypeWrap: document.querySelector('[data-dashboard-control-wrap="sourceType"]'),
+    scaleWrap: document.querySelector('[data-dashboard-control-wrap="scale"]'),
+    sortWrap: document.querySelector('[data-dashboard-control-wrap="sort"]'),
+    exportWrap: document.querySelector('[data-dashboard-control-wrap="export"]'),
     period: document.querySelector("[data-dashboard-period]"),
     section: document.querySelector("[data-dashboard-section]"),
     sourceType: document.querySelector("[data-dashboard-source-type]"),
@@ -881,17 +954,25 @@ function initDashboard() {
     .join("")}`;
 
   let state = createState(data, window.location.search);
-  let lastQuery = serializeState(state);
+  let activeCategory = resolveDashboardCategory(window.location.hash);
+  let lastLocationState = {
+    query: serializeState(state),
+    category: activeCategory
+  };
 
-  function applyState(nextState, historyMode = "push") {
+  function applyState(nextState, historyMode = "push", nextCategory = activeCategory) {
     state = createState(data, `?${serializeState(nextState)}`);
+    activeCategory = resolveDashboardCategory(nextCategory);
     render(historyMode);
   }
 
   function render(historyMode = "replace") {
     const query = serializeState(state);
-    syncDashboardHistory(query, historyMode, lastQuery);
-    lastQuery = query;
+    syncDashboardHistory(query, activeCategory, historyMode, lastLocationState);
+    lastLocationState = {
+      query,
+      category: activeCategory
+    };
 
     [controls.period.value, controls.section.value, controls.sourceType.value, controls.scale.value, controls.sort.value] = [
       state.period,
@@ -904,6 +985,23 @@ function initDashboard() {
     const model = buildDashboardModel(rawData, `?${query}`);
     state = model.state;
 
+    const categoryView = applyDashboardCategoryView(activeCategory, {
+      shell,
+      activeTitle: roots.activeTitle,
+      activeDescription: roots.activeDescription,
+      links: roots.categoryLinks,
+      panels: roots.categoryPanels,
+      controls: {
+        period: controls.periodWrap,
+        section: controls.sectionWrap,
+        sourceType: controls.sourceTypeWrap,
+        scale: controls.scaleWrap,
+        sort: controls.sortWrap
+      },
+      exportControl: controls.exportWrap
+    });
+    activeCategory = categoryView.activeCategory;
+
     renderKpis(roots.kpis, model);
     renderTrend(roots.trend, state, model.trend);
     renderSmallMultiples(roots.multiples, model.smallMultiples);
@@ -912,8 +1010,8 @@ function initDashboard() {
     renderEssayExplorer(roots.essayExplorer, model);
     renderScatter(roots.scatter, roots.scatterDetails, state, model);
     renderLeaderboard(roots.leaderboard, model);
-    onceWhenVisible(roots.funnel, () => renderFunnelRefined(roots.funnel, model));
-    onceWhenVisible(roots.sources, () => renderSourcesRefined(roots.sources, model, state));
+    renderFunnelRefined(roots.funnel, model);
+    renderSourcesRefined(roots.sources, model, state);
 
     document.querySelectorAll("[data-metric]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -925,13 +1023,15 @@ function initDashboard() {
       button.addEventListener("click", () => {
         const selectedPath = button.getAttribute("data-select-essay") || "";
         const essay = model.data.essays.find((row) => row.path === selectedPath);
+        const nextCategory = button.getAttribute("data-open-category") || activeCategory;
         applyState(
           {
             ...state,
             selectedEssay: selectedPath,
             selectedSection: essay?.section || state.selectedSection
           },
-          "push"
+          "push",
+          nextCategory
         );
       });
     });
@@ -939,6 +1039,7 @@ function initDashboard() {
     document.querySelectorAll("[data-select-section]").forEach((button) => {
       button.addEventListener("click", () => {
         const selectedSection = button.getAttribute("data-select-section") || "";
+        const nextCategory = button.getAttribute("data-open-category") || activeCategory;
         const leadEssay = [...model.data.essays]
           .filter((row) => row.section === selectedSection)
           .sort((left, right) => right.views - left.views)[0];
@@ -948,7 +1049,8 @@ function initDashboard() {
             selectedSection,
             selectedEssay: leadEssay?.path || ""
           },
-          "push"
+          "push",
+          nextCategory
         );
       });
     });
@@ -993,7 +1095,10 @@ function initDashboard() {
     });
 
     controls.exportCsv.onclick = () => {
-      downloadCsv("outside-in-print-dashboard.csv", rowsToCsv(leaderboardRows(model)));
+      const payload = exportPayloadForCategory(activeCategory, model);
+      if (payload.rows.length) {
+        downloadCsv(payload.filename, rowsToCsv(payload.rows));
+      }
     };
   }
 
@@ -1009,12 +1114,22 @@ function initDashboard() {
     });
   });
 
+  roots.categoryLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      applyState(state, "push", link.dataset.dashboardCategoryLink || DEFAULT_CATEGORY);
+    });
+  });
+
   window.addEventListener("popstate", () => {
     state = createState(data, window.location.search);
+    activeCategory = resolveDashboardCategory(window.location.hash);
     render("skip");
   });
 
   render("replace");
 }
 
-initDashboard();
+if (typeof document !== "undefined") {
+  initDashboard();
+}

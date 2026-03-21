@@ -232,9 +232,12 @@ try {
   } else {
     $baseUrl
   }
+  $sourcesUrl = $baseUrl + "#sources"
 
   $dom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-dom") -TargetUrl $drilldownUrl -WindowSize "1440,2200" -DumpDom
   $dom | Set-Content -Path (Join-Path $OutputDir "dashboard-dom.html")
+  $sourcesDom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-sources-dom") -TargetUrl $sourcesUrl -WindowSize "1440,2200" -DumpDom
+  $sourcesDom | Set-Content -Path (Join-Path $OutputDir "dashboard-sources-dom.html")
 
   Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-desktop") -TargetUrl $baseUrl -WindowSize "1440,2200" -ShotPath (Join-Path $screensDir "desktop.png") | Out-Null
   Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-mobile") -TargetUrl $baseUrl -WindowSize "390,1200" -ShotPath (Join-Path $screensDir "mobile.png") | Out-Null
@@ -243,8 +246,28 @@ try {
     throw "Hydrated dashboard DOM is missing data-dashboard-shell."
   }
 
+  if ($dom -notmatch 'data-dashboard-category-link="overview"') {
+    throw "Hydrated dashboard DOM is missing the category chooser links."
+  }
+
+  if ($dom -notmatch 'data-dashboard-active-title">Overview<') {
+    throw "Hydrated dashboard DOM does not default to the overview category."
+  }
+
+  if ($dom -notmatch '(data-dashboard-category-panel="performance"[^>]*hidden|hidden[^>]*data-dashboard-category-panel="performance")') {
+    throw "Hydrated dashboard DOM is not hiding non-active category panels by default."
+  }
+
   if ($dom -notmatch 'dashboard-kpi__delta') {
     throw "Hydrated dashboard DOM is missing KPI delta markup."
+  }
+
+  if ($sourcesDom -notmatch 'data-dashboard-active-title">Traffic sources<') {
+    throw "Hydrated dashboard DOM does not switch categories when a hash deep link is used."
+  }
+
+  if ($sourcesDom -notmatch 'data-dashboard-category-panel="sources"') {
+    throw "Hydrated dashboard DOM is missing the traffic sources category panel."
   }
 
   $pageviewsPattern = '(?s)dashboard-kpi__label">Pageviews</p>.*?<p class="dashboard-kpi__value">' + $expectedPageviews + '<'

@@ -60,7 +60,7 @@ try {
     }
 
     $html = Get-Content $indexPath -Raw
-    foreach ($needle in @("Key readership totals", "Reader momentum over time", "dashboard-data", "Section Explorer", "Essay Explorer")) {
+    foreach ($needle in @("Choose A Data Category", "Key readership totals", "dashboard-data", "data-dashboard-category-link", "data-dashboard-category-panel")) {
       if ($html -notmatch [regex]::Escape($needle)) {
         throw "Fixture '$fixture' build is missing expected marker '$needle'."
       }
