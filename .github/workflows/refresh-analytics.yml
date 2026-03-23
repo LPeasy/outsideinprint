@@ -24,6 +24,7 @@ jobs:
     env:
       GOATCOUNTER_API_KEY: ${{ secrets.GOATCOUNTER_API_KEY }}
       GOATCOUNTER_SITE_URL: ${{ vars.GOATCOUNTER_SITE_URL }}
+      GOATCOUNTER_API_URL: ${{ vars.GOATCOUNTER_API_URL }}
       GOATCOUNTER_SITE_BASE_PATH: ${{ vars.GOATCOUNTER_SITE_BASE_PATH }}
       GOATCOUNTER_PUBLIC_SITE_URL: ${{ vars.GOATCOUNTER_PUBLIC_SITE_URL }}
 
@@ -43,7 +44,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          guidance="Add GoatCounter to the source repo (LPeasy/outsideinprint) under Settings -> Secrets and variables -> Actions. Save GOATCOUNTER_API_KEY as a repository secret. Optionally save GOATCOUNTER_SITE_URL, GOATCOUNTER_SITE_BASE_PATH, or GOATCOUNTER_PUBLIC_SITE_URL as repository variables if the analytics site URL or public-site path/origin differs from the defaults."
+          guidance="Add GoatCounter to the source repo (LPeasy/outsideinprint) under Settings -> Secrets and variables -> Actions. Save GOATCOUNTER_API_KEY as a repository secret. Optionally save GOATCOUNTER_SITE_URL, GOATCOUNTER_API_URL, GOATCOUNTER_SITE_BASE_PATH, or GOATCOUNTER_PUBLIC_SITE_URL as repository variables if the public tracking URL, API host, or public-site path/origin differs from the defaults."
 
           if [ -z "${GOATCOUNTER_API_KEY:-}" ]; then
             echo "GOATCOUNTER_API_KEY is not configured."
@@ -124,5 +125,7 @@ jobs:
         run: |
           set -euo pipefail
           site_url="${GOATCOUNTER_SITE_URL:-https://outsideinprint.goatcounter.com}"
+          api_url="${GOATCOUNTER_API_URL:-$site_url/api/v0}"
           echo "Analytics refresh finished for ${site_url}." >> "$GITHUB_STEP_SUMMARY"
+          echo "GoatCounter API base used: ${api_url}." >> "$GITHUB_STEP_SUMMARY"
           echo "Dashboard publish runs automatically on the resulting push to main when analytics files change." >> "$GITHUB_STEP_SUMMARY"

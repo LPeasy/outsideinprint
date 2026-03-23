@@ -1,6 +1,7 @@
 param(
   [string]$ApiKey = $env:GOATCOUNTER_API_KEY,
   [string]$SiteUrl = $(if ($env:GOATCOUNTER_SITE_URL) { $env:GOATCOUNTER_SITE_URL } else { "https://outsideinprint.goatcounter.com" }),
+  [string]$ApiUrl = $env:GOATCOUNTER_API_URL,
   [string]$OutputDir = "./.analytics-refresh/raw",
   [int]$MaxRetries = 3,
   [int]$InitialRetryDelaySeconds = 2,
@@ -26,6 +27,73 @@ function Convert-ToText {
   }
 
   return $text.Trim()
+}
+
+function Set-UriPath {
+  param(
+    [System.Uri]$Uri,
+    [string]$Path
+  )
+
+  $builder = [System.UriBuilder]::new($Uri)
+  $builder.Path = if ([string]::IsNullOrWhiteSpace($Path)) { "/" } else { $Path }
+  $builder.Query = ""
+  $builder.Fragment = ""
+  return $builder.Uri.AbsoluteUri.TrimEnd("/")
+}
+
+function Get-NormalizedGoatCounterUri {
+  param(
+    [string]$Value,
+    [string]$Role
+  )
+
+  $text = Convert-ToText $Value
+  if (-not $text) {
+    return ""
+  }
+
+  $text = $text.TrimEnd("/")
+
+  try {
+    $uri = [System.Uri]$text
+  } catch {
+    throw "GOATCOUNTER_$Role must be an absolute http(s) URL. Found '$text'."
+  }
+
+  if (-not $uri.IsAbsoluteUri -or $uri.Scheme -notin @("http", "https")) {
+    throw "GOATCOUNTER_$Role must be an absolute http(s) URL. Found '$text'."
+  }
+
+  $path = $uri.AbsolutePath.TrimEnd("/")
+  $normalizedPath = $path
+
+  if ($Role -eq "SITE_URL") {
+    if ($normalizedPath -match '/count$') {
+      $normalizedPath = $normalizedPath -replace '/count$', ""
+    }
+    if ($normalizedPath -match '/api/v0/export$') {
+      $normalizedPath = $normalizedPath -replace '/api/v0/export$', ""
+    } elseif ($normalizedPath -match '/api/v0$') {
+      $normalizedPath = $normalizedPath -replace '/api/v0$', ""
+    }
+  } elseif ($Role -eq "API_URL") {
+    if ($normalizedPath -match '/api/v0/export$') {
+      $normalizedPath = $normalizedPath -replace '/export$', ""
+    } elseif ($normalizedPath -notmatch '/api/v0$') {
+      $normalizedPath = (($normalizedPath.TrimEnd("/")) + "/api/v0").TrimStart("/")
+      if (-not $normalizedPath.StartsWith("/")) {
+        $normalizedPath = "/$normalizedPath"
+      }
+    }
+  }
+
+  $normalized = Set-UriPath -Uri $uri -Path $normalizedPath
+  if ($normalized -ne $text) {
+    Write-Warning ("Normalized GOATCOUNTER_{0} from '{1}' to '{2}'." -f $Role, $text, $normalized)
+  }
+
+  return $normalized
 }
 
 function Write-Utf8Json {
@@ -202,7 +270,7 @@ function Format-GoatCounterFailure {
   if ($statusCode -in @(401, 403)) {
     $parts += "Check GOATCOUNTER_API_KEY and confirm it has access to this GoatCounter site and export endpoint."
   } elseif ($statusCode -eq 404) {
-    $parts += "Check GOATCOUNTER_SITE_URL. The fetch script expects the site root and appends /api/v0/export itself."
+    $parts += "Check GOATCOUNTER_SITE_URL. The fetch script expects the public site root and appends /api/v0/export itself. If the GoatCounter API lives on a different host or base path than the public tracking URL, set GOATCOUNTER_API_URL."
   }
 
   return ($parts -join " ")
@@ -334,27 +402,12 @@ if ([string]::IsNullOrWhiteSpace($ApiKey)) {
   throw "GOATCOUNTER_API_KEY is required."
 }
 
-$SiteUrl = Convert-ToText $SiteUrl "https://outsideinprint.goatcounter.com"
-$SiteUrl = $SiteUrl.TrimEnd("/")
-
-try {
-  $siteUri = [System.Uri]$SiteUrl
-} catch {
-  throw "GOATCOUNTER_SITE_URL must be an absolute http(s) URL. Found '$SiteUrl'."
-}
-
-if (-not $siteUri.IsAbsoluteUri -or $siteUri.Scheme -notin @("http", "https")) {
-  throw "GOATCOUNTER_SITE_URL must be an absolute http(s) URL. Found '$SiteUrl'."
-}
-
-if ($siteUri.AbsolutePath.TrimEnd("/") -eq "/api/v0") {
-  throw "GOATCOUNTER_SITE_URL must point at the GoatCounter site root, not the API base. Use a value like 'https://outsideinprint.goatcounter.com'."
-}
-
-$apiBaseUrl = "$SiteUrl/api/v0"
+$SiteUrl = Get-NormalizedGoatCounterUri -Value (Convert-ToText $SiteUrl "https://outsideinprint.goatcounter.com") -Role "SITE_URL"
+$apiBaseUrl = Get-NormalizedGoatCounterUri -Value (Convert-ToText $ApiUrl $SiteUrl) -Role "API_URL"
 
 Write-Host "Outside In Print ~ Fetch GoatCounter Analytics" -ForegroundColor Cyan
 Write-Host ("Site: {0}" -f $SiteUrl) -ForegroundColor DarkCyan
+Write-Host ("API base: {0}" -f $apiBaseUrl) -ForegroundColor DarkCyan
 
 New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
 

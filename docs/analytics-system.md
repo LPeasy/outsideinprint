@@ -262,6 +262,9 @@ Optional:
 
 - repository variable: `GOATCOUNTER_SITE_URL`
   Use this only if the analytics site URL changes from the default
+- repository variable: `GOATCOUNTER_API_URL`
+  Default: `<GOATCOUNTER_SITE_URL>/api/v0`
+  Use this only if GoatCounter tracking and the authenticated export API live on different hosts or base paths
 - repository variable: `GOATCOUNTER_SITE_BASE_PATH`
   Default: `/outsideinprint`
   Use this only if the deployed public site moves to a different GitHub Pages base path
@@ -317,6 +320,16 @@ hugo server -D
 ```
 
 Clear those environment variables afterward if you do not want future local sessions to emit analytics.
+
+Local refresh test:
+
+```powershell
+$env:GOATCOUNTER_API_KEY = "replace-me"
+$env:GOATCOUNTER_SITE_URL = "https://outsideinprint.goatcounter.com"
+# Only set this if the export API is not rooted under GOATCOUNTER_SITE_URL.
+$env:GOATCOUNTER_API_URL = "https://outsideinprint.goatcounter.com/api/v0"
+powershell -ExecutionPolicy Bypass -File .\scripts\fetch_analytics_goatcounter.ps1 -OutputDir .\.analytics-refresh\raw
+```
 
 ## Refresh Workflow
 
@@ -592,6 +605,7 @@ Export fetch failure:
 
 - Confirm the API key belongs to the correct GoatCounter site.
 - Confirm the site URL is correct if you overrode `GOATCOUNTER_SITE_URL`.
+- If the request fails with `404` on `/api/v0/export`, set `GOATCOUNTER_API_URL` to the authenticated GoatCounter API host or base instead of assuming it matches the public tracking URL.
 - Retry transient failures; the fetch script already uses retry/backoff for 429 and common 5xx/network issues.
 
 Unexpectedly empty dashboard data:
