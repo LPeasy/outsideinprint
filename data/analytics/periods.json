@@ -1,29 +1,29 @@
 [
   {
     "label": "Last 7 days",
-    "pageviews": 139.0,
-    "unique_visitors": 12.0,
-    "reads": 2.0,
-    "read_rate": 1.4,
-    "pdf_downloads": 38.0,
+    "pageviews": 78.0,
+    "unique_visitors": 11.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 25.0,
     "newsletter_submits": 0.0
   },
   {
     "label": "Last 30 days",
-    "pageviews": 139.0,
-    "unique_visitors": 12.0,
+    "pageviews": 163.0,
+    "unique_visitors": 17.0,
     "reads": 2.0,
-    "read_rate": 1.4,
-    "pdf_downloads": 38.0,
+    "read_rate": 1.2,
+    "pdf_downloads": 49.0,
     "newsletter_submits": 0.0
   },
   {
     "label": "All time",
-    "pageviews": 139.0,
-    "unique_visitors": 12.0,
+    "pageviews": 163.0,
+    "unique_visitors": 17.0,
     "reads": 2.0,
-    "read_rate": 1.4,
-    "pdf_downloads": 38.0,
+    "read_rate": 1.2,
+    "pdf_downloads": 49.0,
     "newsletter_submits": 0.0
   }
 ]
