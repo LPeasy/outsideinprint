@@ -43,8 +43,8 @@
   {{ if lt (len ($selectedScratch.Get "pages")) 8 }}
     {{ $key := .RelPermalink }}
     {{ if not (in ($selectedScratch.Get "keys") $key) }}
-      {{ $selectedScratch.Set "pages" (append ($selectedScratch.Get "pages") .) }}
-      {{ $selectedScratch.Set "keys" (append ($selectedScratch.Get "keys") $key) }}
+      {{ $selectedScratch.Set "pages" (($selectedScratch.Get "pages") | append .) }}
+      {{ $selectedScratch.Set "keys" (($selectedScratch.Get "keys") | append $key) }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -53,8 +53,8 @@
   {{ if lt (len ($selectedScratch.Get "pages")) 8 }}
     {{ $key := .RelPermalink }}
     {{ if not (in ($selectedScratch.Get "keys") $key) }}
-      {{ $selectedScratch.Set "pages" (append ($selectedScratch.Get "pages") .) }}
-      {{ $selectedScratch.Set "keys" (append ($selectedScratch.Get "keys") $key) }}
+      {{ $selectedScratch.Set "pages" (($selectedScratch.Get "pages") | append .) }}
+      {{ $selectedScratch.Set "keys" (($selectedScratch.Get "keys") | append $key) }}
     {{ end }}
   {{ end }}
 {{ end }}
