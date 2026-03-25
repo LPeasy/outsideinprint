@@ -6,6 +6,7 @@ $packagePath = Join-Path $repoRoot "package.json"
 $nvmrcPath = Join-Path $repoRoot ".nvmrc"
 $deployWorkflowPath = Join-Path $repoRoot ".github/workflows/deploy.yml"
 $dashboardWorkflowPath = Join-Path $repoRoot ".github/workflows/publish-dashboard.yml"
+$refreshWorkflowPath = Join-Path $repoRoot ".github/workflows/refresh-analytics.yml"
 
 if (-not (Test-Path $packagePath -PathType Leaf)) {
   throw "package.json is required for the CI contract test."
@@ -19,6 +20,7 @@ $package = Get-Content -Path $packagePath -Raw | ConvertFrom-Json
 $recommendedNodeVersion = (Get-Content -Path $nvmrcPath -Raw).Trim()
 $deployWorkflow = Get-Content -Path $deployWorkflowPath -Raw
 $dashboardWorkflow = Get-Content -Path $dashboardWorkflowPath -Raw
+$refreshWorkflow = Get-Content -Path $refreshWorkflowPath -Raw
 
 if ([string]::IsNullOrWhiteSpace($recommendedNodeVersion)) {
   throw ".nvmrc must contain a Node major version."
@@ -73,6 +75,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
 
 if ($dashboardWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
   throw "publish-dashboard.yml must run the CI contract test."
+}
+
+if ($refreshWorkflow -notmatch "GOATCOUNTER_API_URL:\s*\$\{\{\s*vars\.GOATCOUNTER_API_URL\s*\}\}") {
+  throw "refresh-analytics.yml must pass GOATCOUNTER_API_URL through to the fetch step."
 }
 
 $dashboardLogicTestsIndex = $dashboardWorkflow.IndexOf("Run Dashboard Logic Tests")

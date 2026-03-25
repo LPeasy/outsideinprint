@@ -9,6 +9,7 @@ version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/why-a-return-to-the-gold-standard-would-break-the-economy.pdf"
 featured: true
+homepage_rank: 1
 medium_source_url: "https://medium.com/@lawtonperret/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
 ---
 

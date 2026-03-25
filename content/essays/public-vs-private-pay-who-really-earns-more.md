@@ -9,6 +9,7 @@ version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/public-vs-private-pay-who-really-earns-more.pdf"
 featured: false
+homepage_rank: 7
 medium_source_url: "https://medium.com/@lawtonperret/public-vs-private-pay-who-really-earns-more-aafec1def048"
 ---
 

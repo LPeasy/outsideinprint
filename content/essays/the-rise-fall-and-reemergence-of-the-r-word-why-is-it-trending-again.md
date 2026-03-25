@@ -9,6 +9,7 @@ version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.pdf"
 featured: false
+homepage_rank: 3
 medium_source_url: "https://medium.com/@lawtonperret/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again-d804460f9464"
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*wQTI3-SOsgbcBKQzSLWlVg@2x.jpeg)
@@ -165,5 +166,4 @@ Former President Donald Trump made an offensive remark about Vice President Kama
 Rosa's Law changes references to "mental retardation" in Federal law to "intellectual disability" or "intellectual…www.federalregister.govUse of the Slur "retard" Triples on X After Elon Musk Shares the Word in a Post
 A joint study released Jan. 10, 2025 from Montclair State University faculty in the Joetta Di Bella and Fred C. Sautter…www.montclair.eduResurgence Of 'R-Word' Alarms Disability Advocates
 For a decade, disability advocates led a concerted effort to stomp out use of the word "retard." Now they're concerned…www.disabilityscoop.com
-
 

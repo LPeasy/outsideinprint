@@ -9,6 +9,7 @@ version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-economics-of-the-mongol-empire.pdf"
 featured: false
+homepage_rank: 6
 medium_source_url: "https://medium.com/@lawtonperret/the-economics-of-the-mongol-empire-c258d2179605"
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*khYdqb0OmvTtWQeCsofc3Q@2x.jpeg)
@@ -173,5 +174,4 @@ and subscribe to my publication The Balance Sheet
 
 The Balance Sheet
 The Balance Sheet breaks down economics, policy, and current events with clarity and fairness. No spin — just real…medium.comThanks for reading!
-
 

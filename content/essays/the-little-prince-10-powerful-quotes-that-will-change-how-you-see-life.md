@@ -9,6 +9,7 @@ version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.pdf"
 featured: false
+homepage_rank: 8
 medium_source_url: "https://medium.com/@lawtonperret/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life-330d3adaf0e6"
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*7PUnG80mmYgTZA1Xl1KL8A@2x.jpeg)
@@ -161,5 +162,4 @@ My reviews focus on storytelling, themes, and impact — whether it’s a gr
 When I’m not reading, I’m making music, analyzing coastal risk, or debating the merits of AI personhood.
 
 Follow for honest, engaging reviews that never stop.
-
 

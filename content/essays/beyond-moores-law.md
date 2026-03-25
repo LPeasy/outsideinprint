@@ -8,7 +8,8 @@ subtitle: "Examining the Parallels Between Compute Power, Renewable Energy, and 
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/beyond-moores-law.pdf"
-featured: false
+featured: false
+homepage_rank: 4
 collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/beyond-moores-law-b7838e31b905"
