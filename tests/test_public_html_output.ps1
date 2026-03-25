@@ -478,7 +478,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = 'No matching pieces found\.\s*Try a broader term,\s*browse\s*<a href="(?:https://outsideinprint\.org)?/collections/">Collections</a>,\s*or start with\s*<a href="(?:https://outsideinprint\.org)?/start-here/">Start Here</a>\.'
+    Pattern = 'No matching pieces found\.\s*Try a broader term,\s*browse\s*<a\b[^>]*href="(?:https://outsideinprint\.org)?/collections/"[^>]*>\s*Collections\s*</a>,\s*or start with\s*<a\b[^>]*href="(?:https://outsideinprint\.org)?/start-here/"[^>]*>\s*Start Here\s*</a>\.'
     Message = 'expected the library empty state to point readers toward collections and Start Here'
   },
   @{
