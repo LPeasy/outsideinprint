@@ -6,7 +6,7 @@ slug: "the-risk-management-buffet"
 section_label: "Essay"
 subtitle: "Making Strategic Choices When Everything’s on the Table"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-risk-management-buffet.pdf"
 featured: false
 

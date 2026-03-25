@@ -6,7 +6,7 @@ slug: "the-crucifix-courage-training-to-speak-truth-in-a-false-world"
 section_label: "Essay"
 subtitle: "The Christian image does something to the human nervous system ~"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-crucifix-courage-training-to-speak-truth-in-a-false-world.pdf"
 featured: false
 

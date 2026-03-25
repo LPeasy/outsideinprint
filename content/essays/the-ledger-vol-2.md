@@ -6,7 +6,7 @@ slug: "the-ledger-vol-2"
 section_label: "Newsletter"
 subtitle: "Floods, Flashpoints, and Florida’s Wild Side"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-ledger-vol-2.pdf"
 featured: false
 collections:

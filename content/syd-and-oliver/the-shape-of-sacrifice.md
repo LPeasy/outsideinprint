@@ -4,7 +4,7 @@ date: 2026-02-16T17:00:09Z
 draft: false
 section_label: 'Syd and Oliver'
 version: '1.0'
-edition: 'First digital edition'
+edition: 'First web edition'
 pdf: '/pdfs/the-shape-of-sacrifice.pdf'
 featured: true
 source_url: 'https://syd-and-oliver.ghost.io/the-shape-of-sacrifice/'

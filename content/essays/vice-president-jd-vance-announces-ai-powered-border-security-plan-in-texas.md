@@ -6,7 +6,7 @@ slug: "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texa
 section_label: "Essay"
 subtitle: "Vance unveils AI-driven surveillance strategy to track illegal crossings, enhance national security, and reinforce U.S. border enforcement."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas-8c9a3e0de595"

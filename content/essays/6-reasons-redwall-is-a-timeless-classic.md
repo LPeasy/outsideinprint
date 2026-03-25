@@ -6,7 +6,7 @@ slug: "6-reasons-redwall-is-a-timeless-classic"
 section_label: "Essay"
 subtitle: "(And Why It Still Captivates Readers Today)"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/6-reasons-redwall-is-a-timeless-classic.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/6-reasons-redwall-is-a-timeless-classic-9a15a991a20a"

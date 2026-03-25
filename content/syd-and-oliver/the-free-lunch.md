@@ -4,7 +4,7 @@ date: 2026-02-21T15:00:45Z
 draft: false
 section_label: 'Syd and Oliver'
 version: '1.0'
-edition: 'First digital edition'
+edition: 'First web edition'
 pdf: '/pdfs/the-free-lunch.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/the-free-lunch/'
 ---

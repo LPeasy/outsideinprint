@@ -6,7 +6,7 @@ slug: "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-p
 section_label: "Essay"
 subtitle: ""
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.pdf"
 featured: false
 

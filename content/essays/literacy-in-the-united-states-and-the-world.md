@@ -6,7 +6,7 @@ slug: "literacy-in-the-united-states-and-the-world"
 section_label: "Essay"
 subtitle: "An Exploration"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/literacy-in-the-united-states-and-the-world.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/literacy-in-the-united-states-and-the-world-be3059c7a9e9"

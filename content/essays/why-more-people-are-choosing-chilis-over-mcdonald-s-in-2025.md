@@ -6,7 +6,7 @@ slug: "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025"
 section_label: "Essay"
 subtitle: "Chili’s isn’t just competing with fast food ~ it’s eating their lunch."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025-55ca02bd03b7"

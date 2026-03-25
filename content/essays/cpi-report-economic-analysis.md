@@ -6,7 +6,7 @@ slug: "cpi-report-economic-analysis"
 section_label: "Essay"
 subtitle: "December 11th, 2024"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/cpi-report-economic-analysis.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/cpi-report-economic-analysis-745a9397f5be"

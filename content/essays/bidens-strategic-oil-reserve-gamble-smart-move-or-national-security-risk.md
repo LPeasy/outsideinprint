@@ -6,7 +6,7 @@ slug: "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk"
 section_label: "Essay"
 subtitle: "Draining America’s emergency oil stash to curb gas prices — short-term fix or long-term peril?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk-5f4dbd688765"

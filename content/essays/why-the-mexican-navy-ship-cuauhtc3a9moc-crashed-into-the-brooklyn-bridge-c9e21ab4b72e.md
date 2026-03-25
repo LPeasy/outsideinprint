@@ -6,7 +6,7 @@ slug: "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-
 section_label: "Essay"
 subtitle: "What we know about the crash and what it reveals about risk, diplomacy, and responsibility."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.pdf"
 featured: false
 

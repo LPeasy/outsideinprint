@@ -6,7 +6,7 @@ slug: "8-big-questions-everyone-has-about-pope-leo-xiv"
 section_label: "Essay"
 subtitle: "AI, gender, tradition, power ~ how will he lead?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/8-big-questions-everyone-has-about-pope-leo-xiv.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"

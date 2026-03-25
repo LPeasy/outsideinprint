@@ -6,7 +6,7 @@ slug: "are-we-alone"
 section_label: "Essay"
 subtitle: "The psychological connection between belief in evolution and aliens"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/are-we-alone.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/are-we-alone-110e6402d692"

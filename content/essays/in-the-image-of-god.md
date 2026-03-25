@@ -6,7 +6,7 @@ slug: "in-the-image-of-god"
 section_label: "Essay"
 subtitle: "An introduction to Catholic social teaching"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/in-the-image-of-god.pdf"
 featured: false
 

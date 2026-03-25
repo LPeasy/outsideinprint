@@ -6,7 +6,7 @@ slug: "jack-stratton-and-the-vulfpeck-model"
 section_label: "Essay"
 subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/jack-stratton-and-the-vulfpeck-model.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/jack-stratton-and-the-vulfpeck-model-00813f3ac8bf"

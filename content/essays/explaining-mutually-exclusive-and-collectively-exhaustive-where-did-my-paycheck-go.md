@@ -6,7 +6,7 @@ slug: "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-pa
 section_label: "Essay"
 subtitle: "How your monthly budget can explain two core ideas from probability, risk, and economics ~"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go-09e07ae87e3c"

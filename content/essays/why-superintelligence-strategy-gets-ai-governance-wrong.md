@@ -6,7 +6,7 @@ slug: "why-superintelligence-strategy-gets-ai-governance-wrong"
 section_label: "Essay"
 subtitle: "A deep dive into why AI governance frameworks like MAIM fail — and why superintelligence can’t be contained."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/why-superintelligence-strategy-gets-ai-governance-wrong.pdf"
 featured: false
 collections:

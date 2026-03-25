@@ -6,7 +6,7 @@ slug: "what-is-risk-a-four-part-framework"
 section_label: "Essay"
 subtitle: "A practical way to use hazard, pathway, consequence, and uncertainty"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/what-is-risk-a-four-part-framework.pdf"
 featured: false
 

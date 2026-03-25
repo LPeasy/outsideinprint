@@ -6,7 +6,7 @@ slug: "generation-inflation"
 section_label: "Essay"
 subtitle: "An Exploration"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/generation-inflation.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/generation-inflation-a18fa175fb5b"

@@ -6,7 +6,7 @@ slug: "household-and-individual-wealth-in-america"
 section_label: "Essay"
 subtitle: "Dec. 14th, 2024"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/household-and-individual-wealth-in-america.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/household-and-individual-wealth-in-america-15fcc36ff456"

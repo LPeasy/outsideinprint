@@ -6,7 +6,7 @@ slug: "the-new-meta-economy"
 section_label: "Essay"
 subtitle: "Ads, Bots, and the End of Work: Meta’s Q1 Earnings Report Explained"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-new-meta-economy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-new-meta-economy-587359ef25db"

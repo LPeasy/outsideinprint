@@ -6,7 +6,7 @@ slug: "u-s-russia-peace-talks"
 section_label: "Essay"
 subtitle: "Global Power Shift and America’s Pivot to Asia"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/u-s-russia-peace-talks.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/u-s-russia-peace-talks-6201189d23c9"

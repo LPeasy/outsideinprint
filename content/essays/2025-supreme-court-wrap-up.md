@@ -6,7 +6,7 @@ slug: "2025-supreme-court-wrap-up"
 section_label: "Essay"
 subtitle: "Final Rulings from the 2025 Term"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/2025-supreme-court-wrap-up.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/2025-supreme-court-wrap-up-10de7f8206cb"

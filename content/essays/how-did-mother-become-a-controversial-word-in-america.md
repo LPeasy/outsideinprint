@@ -6,7 +6,7 @@ slug: "how-did-mother-become-a-controversial-word-in-america"
 section_label: "Essay"
 subtitle: "Why medicine, public health, and institutions stopped using one of history’s most revered terms"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/how-did-mother-become-a-controversial-word-in-america.pdf"
 featured: false
 

@@ -6,7 +6,7 @@ slug: "the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-
 section_label: "Essay"
 subtitle: "AI is automating technical work — but human reviewers still matter. Here’s why."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now.pdf"
 featured: false
 collections:

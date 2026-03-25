@@ -6,7 +6,7 @@ slug: "35-years-of-yellow-the-simpsons-time-loop"
 section_label: "Essay"
 subtitle: "A fake series finale and the cartoon that somehow predicted 9/11, COVID, and President Donald Trump on an escalator."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/35-years-of-yellow-the-simpsons-time-loop.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/35-years-of-yellow-the-simpsons-time-loop-50f72b5bff6b"

@@ -6,7 +6,7 @@ slug: "american-household-debt"
 section_label: "Essay"
 subtitle: "December 9th, 2024"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/american-household-debt.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/american-household-debt-12a4116b0ade"

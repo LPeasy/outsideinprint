@@ -6,7 +6,7 @@ slug: "the-three-enemies-of-positive-outcomes"
 section_label: "Essay"
 subtitle: "Things fail for a reason. It’s usually one of these."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-three-enemies-of-positive-outcomes.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-three-enemies-of-positive-outcomes-795f353dcdfa"

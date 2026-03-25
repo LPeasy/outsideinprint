@@ -6,8 +6,7 @@ draft: true
 section_label: "Essay"
 subtitle: ""
 version: "1.0"
-edition: "First digital edition"
-pdf: "/pdfs/{{ .Name }}.pdf"
+edition: "First web edition"
 featured: false
 
 topics: []

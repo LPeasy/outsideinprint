@@ -6,7 +6,7 @@ slug: "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possi
 section_label: "Essay"
 subtitle: "A scrappy biography of the runaway apprentice who became a statesman, scientist, and master of self-improvement."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible-07e2ee19813d"

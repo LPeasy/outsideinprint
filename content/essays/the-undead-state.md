@@ -6,7 +6,7 @@ slug: "the-undead-state"
 section_label: "Essay"
 subtitle: "Why Bureaucracy Refuses to Die"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-undead-state.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-undead-state-825daec47c37"

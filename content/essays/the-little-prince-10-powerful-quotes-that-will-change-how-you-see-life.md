@@ -6,7 +6,7 @@ slug: "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life"
 section_label: "Essay"
 subtitle: "Life, Love, and the Lessons Hidden in This Classic Tale"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life.pdf"
 featured: false
 homepage_rank: 8

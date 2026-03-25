@@ -6,7 +6,7 @@ slug: "uncertainty-is-not-a-technical-problem"
 section_label: "Essay"
 subtitle: "Why Risk Models Reward Confidence Over Truth"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/uncertainty-is-not-a-technical-problem.pdf"
 featured: false
 

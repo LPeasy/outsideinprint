@@ -6,7 +6,7 @@ slug: "the-world-the-un-was-built-for"
 section_label: "Essay"
 subtitle: "How Postwar Human Rights, Migration Norms, and Global Institutions Were Designed for Europe ~ and Applied to a Very Different World"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-world-the-un-was-built-for.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-world-the-un-was-built-for-335093881846"

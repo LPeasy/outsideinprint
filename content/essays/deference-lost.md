@@ -6,7 +6,7 @@ slug: "deference-lost"
 section_label: "Essay"
 subtitle: "Why Loper Bright Slowed Down Agency Responsiveness"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/deference-lost.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/deference-lost-817a69f92a91"

@@ -45,12 +45,12 @@ if ([string]::IsNullOrWhiteSpace($npmEngine)) {
   throw "package.json must declare an npm engine range for CI/tooling clarity."
 }
 
-if ($deployWorkflow -notmatch "node-version-file:\s*['""]?\.nvmrc['""]?") {
-  throw "deploy.yml must read the Node version from .nvmrc."
-}
-
 if ($dashboardWorkflow -notmatch "node-version-file:\s*['""]?\.nvmrc['""]?") {
   throw "publish-dashboard.yml must read the Node version from .nvmrc."
+}
+
+if (($deployWorkflow -match "actions/setup-node@") -and ($deployWorkflow -notmatch "node-version-file:\s*['""]?\.nvmrc['""]?")) {
+  throw "deploy.yml must read the Node version from .nvmrc whenever it provisions Node."
 }
 
 if ($deployWorkflow -match "node-version:\s*['""]?\d") {
@@ -59,14 +59,6 @@ if ($deployWorkflow -match "node-version:\s*['""]?\d") {
 
 if ($dashboardWorkflow -match "node-version:\s*['""]?\d") {
   throw "publish-dashboard.yml should not hardcode a separate node-version once .nvmrc is the contract."
-}
-
-if ($deployWorkflow -notmatch "npm install --include=dev --no-audit --no-fund") {
-  throw "deploy.yml must use the deterministic npm install flags documented by the repo."
-}
-
-if ($deployWorkflow -notmatch "npx playwright install --with-deps chromium") {
-  throw "deploy.yml must continue provisioning the Playwright Chromium browser explicitly."
 }
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {

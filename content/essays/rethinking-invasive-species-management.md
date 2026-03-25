@@ -6,7 +6,7 @@ slug: "rethinking-invasive-species-management"
 section_label: "Essay"
 subtitle: "Why Florida keeps spending millions managing invasives without much to show for it"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/rethinking-invasive-species-management.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/rethinking-invasive-species-management-5cb634cca5be"

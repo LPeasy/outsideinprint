@@ -6,7 +6,7 @@ slug: "its-hard-to-condemn-what-doge-is-doing"
 section_label: "Essay"
 subtitle: "The Wrecking Ball We Deserve?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/its-hard-to-condemn-what-doge-is-doing.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/its-hard-to-condemn-what-doge-is-doing-b8ed0ff6e3f8"

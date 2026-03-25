@@ -6,7 +6,7 @@ slug: "flash-flood-alley-why-flash-floods-kill"
 section_label: "Essay"
 subtitle: "Texas Hill Country and the Limits of Early Warning"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/flash-flood-alley-why-flash-floods-kill.pdf"
 featured: false
 

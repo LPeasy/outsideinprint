@@ -6,7 +6,7 @@ slug: "natural-asset-companies"
 section_label: "Essay"
 subtitle: "A Critique"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/natural-asset-companies.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/natural-asset-companies-20bb2458ffa7"

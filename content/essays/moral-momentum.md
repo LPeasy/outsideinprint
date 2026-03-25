@@ -6,7 +6,7 @@ slug: "moral-momentum"
 section_label: "Essay"
 subtitle: "What it takes to build honest, world-changing energy—together."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/moral-momentum.pdf"
 featured: false
 collections:

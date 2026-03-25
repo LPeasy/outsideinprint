@@ -6,7 +6,7 @@ slug: "beyond-moores-law"
 section_label: "Essay"
 subtitle: "Examining the Parallels Between Compute Power, Renewable Energy, and Battery Technology"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/beyond-moores-law.pdf"
 featured: false
 homepage_rank: 4

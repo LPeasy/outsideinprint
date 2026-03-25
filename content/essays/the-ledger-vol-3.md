@@ -6,7 +6,7 @@ slug: "the-ledger-vol-3"
 section_label: "Newsletter"
 subtitle: "100 Essays on Medium, How Hawai’i became America’s Largest Aircraft Carrier, and a new series on Risk Management ~"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-ledger-vol-3.pdf"
 featured: false
 collections:

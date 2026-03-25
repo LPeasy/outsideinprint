@@ -1,4 +1,4 @@
-﻿name: Build PDFs, Build Hugo, Deploy to GitHub Pages
+name: Build Hugo, Deploy to GitHub Pages
 
 on:
   push:
@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     env:
       HUGO_ENVIRONMENT: production
       ANALYTICS_ENABLED: ${{ vars.ANALYTICS_ENABLED }}
@@ -32,33 +32,11 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Setup Typst
-        uses: typst-community/setup-typst@v4
-
       - name: Setup Hugo (extended)
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.157.0'
+          hugo-version: "0.157.0"
           extended: true
-
-      - name: Install Pandoc
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends pandoc
-
-      - name: Install Node dependencies
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm install --include=dev --no-audit --no-fund
-          npx playwright install --with-deps chromium
 
       - name: Test CI Contract
         shell: pwsh
@@ -69,86 +47,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          node --version
-          npm --version
-          typst --version
           hugo version
-          pandoc --version | head -n 2
-
-      - name: Build PDF Editions
-        shell: pwsh
-        run: |
-          ./scripts/build_pdfs_typst_ci.ps1
-
-      - name: Verify PDF Pipeline
-        shell: pwsh
-        run: |
-          ./scripts/verify_pdf_pipeline.ps1
-
-      - name: Test PDF Failure Audit
-        shell: pwsh
-        run: |
-          ./tests/test_pdf_failure_audit.ps1
-
-      - name: Test PDF Preflight
-        shell: pwsh
-        run: |
-          ./tests/test_pdf_preflight.ps1
-
-      - name: Test PDF Builder Static Image Paths
-        shell: pwsh
-        run: |
-          ./tests/test_pdf_builder_static_image_paths.ps1
-
-      - name: Test PDF Engine Selection
-        shell: pwsh
-        run: |
-          ./tests/test_pdf_engine_selection.ps1
-
-      - name: Preflight Validation
-        shell: pwsh
-        run: |
-          ./scripts/preflight.ps1
-
-      - name: Audit PDF Failures
-        id: pdf_audit
-        shell: pwsh
-        run: |
-          ./scripts/audit_pdf_failures.ps1
-
-      - name: Summarize PDF audit
-        if: always()
-        shell: pwsh
-        run: |
-          $reportPath = "./reports/pdf-failure-audit.json"
-          if (-not (Test-Path -Path $reportPath -PathType Leaf)) {
-            Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "PDF audit report was not generated."
-            exit 0
-          }
-
-          $report = Get-Content -Path $reportPath -Raw | ConvertFrom-Json
-          $summaryLines = @(
-            "PDF audit status: $($report.summary.validation_status)",
-            "",
-            "- blocking pipeline problems: $($report.summary.blocking_pipeline_problems)",
-            "- blocking failures: $($report.summary.blocking_failures)",
-            "- warning failures: $($report.summary.warning_failures)",
-            "- fallback renders: $($report.summary.fallback)",
-            "- auto-HTML candidates blocked: $($report.summary.auto_html_candidates_blocked)"
-          )
-          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value ($summaryLines -join [System.Environment]::NewLine)
-
-      - name: Upload PDF audit artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pdf-failure-audit
-          path: |
-            ./reports/pdf-failure-audit.json
-            ./reports/pdf-failure-audit.md
 
       - name: Build Hugo
         run: hugo --gc --minify
+
+      - name: Remove public PDF artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf ./public/pdfs
 
       - name: Test Public HTML Output
         shell: pwsh

@@ -6,7 +6,7 @@ slug: "building-for-centuries-not-election-cycles"
 section_label: "Essay"
 subtitle: "The Case for Slow, Steady, and Smart Federal Infrastructure Planning"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/building-for-centuries-not-election-cycles.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/building-for-centuries-not-election-cycles-84e7c379272c"

@@ -6,7 +6,7 @@ slug: "why-a-return-to-the-gold-standard-would-break-the-economy"
 section_label: "Essay"
 subtitle: "What Glitters Isn’t Always Gold"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/why-a-return-to-the-gold-standard-would-break-the-economy.pdf"
 featured: true
 homepage_rank: 1

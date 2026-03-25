@@ -4,7 +4,7 @@ date: 2026-02-16T17:00:35Z
 draft: false
 section_label: 'Syd and Oliver'
 version: '1.0'
-edition: 'First digital edition'
+edition: 'First web edition'
 pdf: '/pdfs/peaches-or-greece.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/peaches-or-greece/'
 ---

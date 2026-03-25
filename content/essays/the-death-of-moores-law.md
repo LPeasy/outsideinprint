@@ -6,7 +6,7 @@ slug: "the-death-of-moores-law"
 section_label: "Essay"
 subtitle: "How the Limits of Physics Are Reshaping the Future of Computing"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-death-of-moores-law.pdf"
 featured: false
 

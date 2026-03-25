@@ -6,7 +6,7 @@ slug: "the-political-economy-of-airports"
 section_label: "Essay"
 subtitle: "Why is everything so expensive??"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-political-economy-of-airports.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-political-economy-of-airports-aef07847fa60"

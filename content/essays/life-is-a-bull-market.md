@@ -6,7 +6,7 @@ slug: "life-is-a-bull-market"
 section_label: "Essay"
 subtitle: "Why Panic Selling Your Own Life Is a Bad Trade"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/life-is-a-bull-market.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/life-is-a-bull-market-db4524bf5431"

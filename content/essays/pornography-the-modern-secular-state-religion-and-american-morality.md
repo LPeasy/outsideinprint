@@ -6,7 +6,7 @@ slug: "pornography-the-modern-secular-state-religion-and-american-morality"
 section_label: "Essay"
 subtitle: "The obvious connection explained"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/pornography-the-modern-secular-state-religion-and-american-morality.pdf"
 featured: false
 

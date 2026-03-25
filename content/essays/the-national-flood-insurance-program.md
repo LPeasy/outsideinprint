@@ -6,7 +6,7 @@ slug: "the-national-flood-insurance-program"
 section_label: "Essay"
 subtitle: "An Exploration"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-national-flood-insurance-program.pdf"
 featured: false
 

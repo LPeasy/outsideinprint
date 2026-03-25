@@ -6,7 +6,7 @@ slug: "the-roi-of-caring"
 section_label: "Essay"
 subtitle: "A logical case for why giving a damn makes everything better"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-roi-of-caring.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-roi-of-caring-b5d58bd92d7a"

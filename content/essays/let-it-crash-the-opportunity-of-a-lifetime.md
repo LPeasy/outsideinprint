@@ -6,7 +6,7 @@ slug: "let-it-crash-the-opportunity-of-a-lifetime"
 section_label: "Essay"
 subtitle: "If you’ve got a job and no assets, a market crash might be the best thing that ever happens to you."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/let-it-crash-the-opportunity-of-a-lifetime.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/let-it-crash-the-opportunity-of-a-lifetime-2c0f11995cee"

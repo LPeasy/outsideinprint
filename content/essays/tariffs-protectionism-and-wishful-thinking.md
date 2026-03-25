@@ -6,7 +6,7 @@ slug: "tariffs-protectionism-and-wishful-thinking"
 section_label: "Essay"
 subtitle: "A Historical Look at Economic Nationalism’s Unintended Consequences:"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/tariffs-protectionism-and-wishful-thinking.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/tariffs-protectionism-and-wishful-thinking-e24c7c45838c"

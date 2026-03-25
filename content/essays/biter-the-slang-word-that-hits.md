@@ -6,7 +6,7 @@ slug: "biter-the-slang-word-that-hits"
 section_label: "Essay"
 subtitle: "A word to describe artistic thieves"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/biter-the-slang-word-that-hits.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/biter-the-slang-word-that-hits-c543669e0189"

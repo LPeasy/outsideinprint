@@ -6,7 +6,7 @@ slug: "the-structure-of-modern-american-society"
 section_label: "Essay"
 subtitle: "A Commentary"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-structure-of-modern-american-society.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-structure-of-modern-american-society-f25890114b1d"

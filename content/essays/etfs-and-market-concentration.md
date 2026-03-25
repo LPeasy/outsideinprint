@@ -6,7 +6,7 @@ slug: "etfs-and-market-concentration"
 section_label: "Essay"
 subtitle: "An Exploration"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/etfs-and-market-concentration.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/etfs-and-market-concentration-f144383a5d85"

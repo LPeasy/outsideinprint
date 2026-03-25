@@ -195,7 +195,7 @@ $importedMediaIssues = New-Object System.Collections.Generic.List[string]
 $metadataIssues = New-Object System.Collections.Generic.List[string]
 $uxIssues = New-Object System.Collections.Generic.List[string]
 $hasHomepageAnalytics = $false
-$hasLibraryPdfAnalytics = $false
+$publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
 $targetPageHtml = @{}
 
@@ -220,7 +220,7 @@ $requiredImportedMediaPages = @(
 $requiredMetadataPages = [ordered]@{
   'public/index.html' = @{
     Title = 'Outside In Print'
-    Description = 'Outside In Print is a digital imprint for essays, literature, dialogues, and working papers published as stable web editions and free PDFs.'
+    Description = 'Outside In Print is a digital imprint for essays, literature, dialogues, and working papers published for the web with stable URLs and versioned records.'
     Canonical = 'https://outsideinprint.org/'
   }
   'public/start-here/index.html' = @{
@@ -230,7 +230,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/library/index.html' = @{
     Title = 'Library'
-    Description = 'The full catalog of published editions from Outside In Print, searchable by title, section, and version.'
+    Description = 'The full catalog of published work from Outside In Print, searchable by title, section, and version.'
     Canonical = 'https://outsideinprint.org/library/'
   }
   'public/collections/index.html' = @{
@@ -319,8 +319,12 @@ foreach ($file in $htmlFiles) {
     $hasHomepageAnalytics = $true
   }
 
-  if ($relativePath.EndsWith('public/library/index.html', [System.StringComparison]::OrdinalIgnoreCase) -and $content -match 'data-analytics-format=(?:"pdf"|pdf)') {
-    $hasLibraryPdfAnalytics = $true
+  if (
+    ($content -match 'data-analytics-format=(?:"pdf"|pdf)') -or
+    ($content -match '>Read PDF<') -or
+    ($content -match 'edition-download')
+  ) {
+    $publicPdfAffordanceHits.Add($relativePath)
   }
 }
 
@@ -469,7 +473,8 @@ $requiredUxChecks = @(
   @{
     Path = 'public/essays/index.html'
     Pattern = '>Read PDF<'
-    Message = 'expected section list pages to label PDF affordances as Read PDF'
+    Message = 'expected section list pages to avoid PDF affordances'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/library/index.html'
@@ -484,7 +489,8 @@ $requiredUxChecks = @(
   @{
     Path = 'public/library/index.html'
     Pattern = '>Read PDF<'
-    Message = 'expected the library index to label PDF affordances as Read PDF'
+    Message = 'expected the library index to avoid PDF affordances'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/index.html'
@@ -499,7 +505,25 @@ $requiredUxChecks = @(
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
     Pattern = '>Read PDF<'
-    Message = 'expected collection pages to label PDF affordances as Read PDF'
+    Message = 'expected collection pages to avoid PDF affordances'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'edition-download'
+    Message = 'expected article pages to avoid PDF download blocks'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'Edition <b>First web edition</b>'
+    Message = 'expected article headers to normalize legacy digital-edition labels for the web'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'First digital edition'
+    Message = 'expected article headers not to expose legacy digital-edition wording'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
@@ -527,8 +551,12 @@ foreach ($check in $requiredUxChecks) {
       $uxIssues.Add("$relativePath => $($check.Message)")
     }
   }
-  elseif ($targetPageHtml[$relativePath] -notmatch ([string]$check.Pattern)) {
-    $uxIssues.Add("$relativePath => $($check.Message)")
+  else {
+    $isNegative = [bool]($check.ContainsKey('ShouldNotMatch') -and $check.ShouldNotMatch)
+    $matches = $targetPageHtml[$relativePath] -match ([string]$check.Pattern)
+    if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
+      $uxIssues.Add("$relativePath => $($check.Message)")
+    }
   }
 }
 
@@ -556,10 +584,9 @@ if (-not $hasHomepageAnalytics) {
   throw "Homepage random-card analytics attributes were not emitted as expected in public/index.html."
 }
 
-if (-not $hasLibraryPdfAnalytics) {
-  throw "Library PDF analytics attributes were not emitted as expected in public/library/index.html."
+if ($publicPdfAffordanceHits.Count -gt 0) {
+  throw ("Found public HTML that still exposes PDF affordances. Samples: {0}" -f (Format-SampleList -Items $publicPdfAffordanceHits))
 }
-
 if ($semanticIssues.Count -gt 0) {
   throw ("Found semantic accessibility regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $semanticIssues))
 }

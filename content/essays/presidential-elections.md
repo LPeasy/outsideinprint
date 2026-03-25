@@ -6,7 +6,7 @@ slug: "presidential-elections"
 section_label: "Essay"
 subtitle: "A Circus"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/presidential-elections.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/presidential-elections-bd1cc0d054f8"

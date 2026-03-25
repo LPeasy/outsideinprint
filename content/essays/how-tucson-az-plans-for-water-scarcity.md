@@ -6,7 +6,7 @@ slug: "how-tucson-az-plans-for-water-scarcity"
 section_label: "Essay"
 subtitle: "Four Ways to Manage Risk in a Desert City ~ and how tucson plans to water its lawns for the next century"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/how-tucson-az-plans-for-water-scarcity.pdf"
 featured: false
 

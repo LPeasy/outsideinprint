@@ -1,5 +1,5 @@
 ---
 title: "Working Papers"
-description: "Working papers and developing pieces published in edition form."
+description: "Working papers and developing pieces from Outside In Print."
 draft: false
 ---

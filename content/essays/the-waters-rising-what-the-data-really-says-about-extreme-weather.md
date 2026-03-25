@@ -6,7 +6,7 @@ slug: "the-waters-rising-what-the-data-really-says-about-extreme-weather"
 section_label: "Essay"
 subtitle: "“The weather’s never been like this!”"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-waters-rising-what-the-data-really-says-about-extreme-weather.pdf"
 featured: false
 

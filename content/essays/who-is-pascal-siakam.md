@@ -6,7 +6,7 @@ slug: "who-is-pascal-siakam"
 section_label: "Essay"
 subtitle: "How “Spicy P” Went from Douala Dreamer to Pacers Playoff Powerhouse"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/who-is-pascal-siakam.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/who-is-pascal-siakam-7b1ed9f4f69a"

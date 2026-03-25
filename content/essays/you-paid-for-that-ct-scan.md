@@ -6,7 +6,7 @@ slug: "you-paid-for-that-ct-scan"
 section_label: "Essay"
 subtitle: "You Should Be Able To See It… Right?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/you-paid-for-that-ct-scan.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/you-paid-for-that-ct-scan-7c38e9a1c08c"

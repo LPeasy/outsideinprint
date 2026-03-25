@@ -6,7 +6,7 @@ slug: "how-american-farm-labor-is-set-to-evolve"
 section_label: "Essay"
 subtitle: "Again"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/how-american-farm-labor-is-set-to-evolve.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/how-american-farm-labor-is-set-to-evolve-c8f6fdaa24ff"

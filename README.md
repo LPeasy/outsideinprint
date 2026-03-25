@@ -1,10 +1,10 @@
 # Outside In Print
 
-A minimalist, print-forward Hugo site for publishing writing and **PDF editions**.
+A minimalist Hugo site for publishing essays, literature, dialogues, and working papers as durable web publications.
 
 ## Publishing policy
 
-- See `PUBLISHING_POLICY.md` for the v1 publishing contract, tradeoff decisions, and CI enforcement rules.
+- See `PUBLISHING_POLICY.md` for the current web-first publishing contract.
 
 ## Local run
 
@@ -14,16 +14,19 @@ hugo server -D
 
 ## Publishing workflow
 
-1. Create a new piece (example):
+1. Create a new piece:
    - `hugo new essays/my-title.md`
 2. Write, then set `draft: false` when ready.
-3. Build PDF editions locally:
-   - `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
-4. Verify generated PDFs:
-   - `powershell -ExecutionPolicy Bypass -File .\scripts\verify_pdf_pipeline.ps1`
-5. Run preflight:
-   - `powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1`
-6. Commit + push (push = publish once GitHub Pages is enabled).
+3. Build the site locally:
+   - `hugo --gc --minify`
+4. Run the Node/browser test suite:
+   - `npm test`
+5. Commit + push.
+
+## PDF status
+
+- PDF generation is paused and not part of the public site or deploy workflow.
+- Legacy PDF scripts remain in the repo for possible future revival, but they are outside the current publishing contract.
 
 ## Metadata conventions
 
@@ -31,34 +34,13 @@ Each non-draft piece should include:
 
 - `section_label`
 - `version` (bump on material revision)
-- `edition` (e.g., "First digital edition")
-- `pdf` path: `/pdfs/<slug>.pdf`
-- optional `featured: true` (shows on homepage)
-- optional `pdf_engine: typst | html` (`typst` default; reserve `html` for layout-sensitive pieces)
-- optional `pdf_variant: essay | report | visual`
-- optional `pdf_summary`, `pdf_cta_label`, `pdf_cover_image`, `pdf_disable_toc`
+- `edition` (for example, `"First web edition"`)
+- optional `featured: true`
+- optional `homepage_rank: 1-8` for curated homepage placement
 
-## Imprint upgrade (print feel)
+## Imprint upgrade
 
-Single pages render an **edition header** plus a **Cite this** block so each page reads like a real imprint object, not a blog post.
-
-## PDF edition generation
-
-`pdf_engine: html` now prints the fully rendered Hugo page through headless Chromium/Playwright on `localhost`, so layout-sensitive editions use the real site markup and print CSS instead of HTML cleanup heuristics. `pdf_engine: typst` remains available for text-first/report pieces.
-
-Local:
-- Install Typst + Pandoc.
-- Use Node 20 (`.nvmrc` pins the repo default).
-- Run `npm install --include=dev --no-audit --no-fund`
-- Run `npx playwright install chromium`
-- Run: `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
-
-CI:
-- GitHub Actions runs `scripts/build_pdfs_typst_ci.ps1` on every push to `main`.
-- Flow: Markdown -> Typst or browser-print render -> `static/pdfs/` -> `scripts/sync_pdf_catalog.ps1` -> preflight -> Hugo build -> deploy.
-- The repo standardizes on Node 20 via `.nvmrc`, and the workflow installs Node dependencies plus Playwright Chromium before the PDF build so the HTML path stays headless and deterministic on `ubuntu-latest`.
-
-If the HTML path is unavailable locally, the builder will tell you to run `npm install --include=dev --no-audit --no-fund` and `npx playwright install chromium`.
+Single pages render a publication header plus a `Cite this` block so each page reads like a durable imprint object, not a blog post.
 
 ## Verification commands
 
@@ -68,31 +50,14 @@ Node/browser tests:
 npm test
 ```
 
-PDF pipeline verification:
+Public build smoke:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\verify_pdf_pipeline.ps1
+hugo --gc --minify
+powershell -ExecutionPolicy Bypass -File .\tests\test_public_html_output.ps1
 ```
 
-Expected pass (real content):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1
-```
-
-Expected pass (fixture suite):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1 -ContentRoot .\tests\fixtures\pass\content -PdfRoot .\tests\fixtures\pass\static\pdfs
-```
-
-Expected fail (fixture suite):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1 -ContentRoot .\tests\fixtures\fail\content -PdfRoot .\tests\fixtures\fail\static\pdfs
-```
-
-## Medium migration (automated)
+## Medium migration
 
 Dry run (classification + report only, no file writes):
 
@@ -107,13 +72,15 @@ powershell -ExecutionPolicy Bypass -File .\scripts\import_medium_export.ps1 -Zip
 ```
 
 Rerun behavior:
+
 - Existing target files are skipped and reported (`existing_target`).
 - Slugs are stabilized via `reports/medium-slug-map.json`.
 
 Post-import workflow:
-1. Generate PDFs: `powershell -ExecutionPolicy Bypass -File .\scripts\build_pdfs_typst_local.ps1`
-2. Flip selected imported essays from `draft: true` to `draft: false`
-3. Run preflight: `powershell -ExecutionPolicy Bypass -File .\scripts\preflight.ps1`
+
+1. Review imported markdown and localized media.
+2. Flip selected imported essays from `draft: true` to `draft: false`.
+3. Build the site locally with `hugo --gc --minify`.
 
 Fixture test harness:
 
@@ -126,17 +93,10 @@ powershell -ExecutionPolicy Bypass -File .\scripts\test_medium_import.ps1
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\audit_essay_integrity.ps1
 ```
-## PDF build internals
-
-- Shared PDF build runner: `scripts/build_pdfs_typst_shared.ps1`
-- Local wrapper: `scripts/build_pdfs_typst_local.ps1`
-- CI wrapper: `scripts/build_pdfs_typst_ci.ps1`
-- Catalog sync: `scripts/sync_pdf_catalog.ps1`
-
 
 ## Article-body conventions
 
-For cleaner web and PDF rendering, prefer:
+For cleaner web rendering, prefer:
 
 - true Markdown headings instead of standalone title-case paragraphs
 - true ordered and unordered lists instead of manual bullets or numbered paragraphs

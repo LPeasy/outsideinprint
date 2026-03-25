@@ -6,7 +6,7 @@ slug: "risk-management-vs-risk-analysis-whats-the-difference"
 section_label: "Essay"
 subtitle: "A coastal city’s disaster forces them to rethink their EM protocols"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/risk-management-vs-risk-analysis-whats-the-difference.pdf"
 featured: false
 

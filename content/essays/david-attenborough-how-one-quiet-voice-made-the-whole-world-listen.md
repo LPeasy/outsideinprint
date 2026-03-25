@@ -6,7 +6,7 @@ slug: "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen"
 section_label: "Essay"
 subtitle: "From black-and-white BBC to the edge of extinction and back"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen-89a9b46c27d5"

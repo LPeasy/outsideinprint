@@ -6,7 +6,7 @@ slug: "you-cant-outrun-the-calculator"
 section_label: "Essay"
 subtitle: "SuperHuman Coding Agents in 2025? Altman’s Law in real time"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/you-cant-outrun-the-calculator.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/you-cant-outrun-the-calculator-fc4a5c608f1c"

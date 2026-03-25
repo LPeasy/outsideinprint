@@ -6,7 +6,7 @@ slug: "the-national-debt-is-screwing-you-heres-how"
 section_label: "Essay"
 subtitle: "America maxed out its credit card — and left you to pay for it."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-national-debt-is-screwing-you-heres-how.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-national-debt-is-screwing-you-heres-how-a8d79c0d6431"

@@ -6,7 +6,7 @@ slug: "june-27-2025-scotus-set-to-close-its-term-with-major-decisions"
 section_label: "Essay"
 subtitle: "What to Watch as the Supreme Court Wraps Its Term"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/june-27-2025-scotus-set-to-close-its-term-with-major-decisions.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/june-27-2025-scotus-set-to-close-its-term-with-major-decisions-a183e7bb38b3"

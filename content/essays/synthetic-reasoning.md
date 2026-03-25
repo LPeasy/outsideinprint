@@ -6,7 +6,7 @@ slug: "synthetic-reasoning"
 section_label: "Essay"
 subtitle: "The Dawn of Self-Evolving AI"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/synthetic-reasoning.pdf"
 featured: false
 

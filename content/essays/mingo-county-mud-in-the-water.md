@@ -6,7 +6,7 @@ slug: "mingo-county-mud-in-the-water"
 section_label: "Essay"
 subtitle: "What one West Virginia town reveals about America’s crumbling water systems"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/mingo-county-mud-in-the-water.pdf"
 featured: false
 collections:

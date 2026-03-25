@@ -6,7 +6,7 @@ slug: "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter"
 section_label: "Essay"
 subtitle: "Inside the life of Robert Prevost, the Augustinian priest who made history"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a"

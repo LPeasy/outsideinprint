@@ -6,7 +6,7 @@ slug: "why-oberfell-will-not-be-overturned"
 section_label: "Essay"
 subtitle: "Marriage is a Fundamental Right"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/why-oberfell-will-not-be-overturned.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-oberfell-will-not-be-overturned-00153db59a5e"

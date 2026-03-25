@@ -3,9 +3,9 @@
 {{ $provider := lower (default "" $newsletter.provider) }}
 {{ $eyebrow := default "Newsletter" .eyebrow }}
 {{ $title := default "Get the weekly letter" .title }}
-{{ $dek := default "Essays, new editions, and notes from Outside In Print. One email a week. Free." .dek }}
+{{ $dek := default "New writing, notes, and selected work from Outside In Print. One email a week. Free." .dek }}
 {{ $buttonLabel := default "Subscribe" .buttonLabel }}
-{{ $note := default "New editions and occasional notes. No spam." .note }}
+{{ $note := default "New work and occasional notes. No spam." .note }}
 {{ $inputID := printf "bd-email-%s" (replace (replace ($page.RelPermalink | default "newsletter") "/" "-") "--" "-") }}
 {{ $sourceSlot := default "newsletter_module" .sourceSlot }}
 

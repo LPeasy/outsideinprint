@@ -6,7 +6,7 @@ slug: "the-dolphin-company"
 section_label: "Essay"
 subtitle: "The Rise and Fall of the World’s Largest Dolphin Empire"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-dolphin-company.pdf"
 featured: true
 

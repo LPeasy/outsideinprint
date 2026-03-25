@@ -6,7 +6,7 @@ slug: "whos-really-funding-terror"
 section_label: "Essay"
 subtitle: "Inside Treasury’s 2024 Terrorist Financing Risk Assessment"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/whos-really-funding-terror.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-really-funding-terror-c9268e4f1bb4"

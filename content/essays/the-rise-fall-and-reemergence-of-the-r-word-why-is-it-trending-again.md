@@ -6,7 +6,7 @@ slug: "the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again"
 section_label: "Essay"
 subtitle: "How a Once-Taboo Term is Making a Controversial Comeback in Online Culture"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.pdf"
 featured: false
 homepage_rank: 3

@@ -6,7 +6,7 @@ slug: "standard-of-living-vs-quality-of-life-what-the-numbers-miss"
 section_label: "Essay"
 subtitle: "GDP is UP… So Why Does Life Still Feel So Hard?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/standard-of-living-vs-quality-of-life-what-the-numbers-miss.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/standard-of-living-vs-quality-of-life-what-the-numbers-miss-9a9200cdea84"

@@ -6,7 +6,7 @@ slug: "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-d
 section_label: "Essay"
 subtitle: "(They might actually make a deal)"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction-de6711fe7ecf"

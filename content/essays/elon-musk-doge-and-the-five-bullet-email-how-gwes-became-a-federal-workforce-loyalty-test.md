@@ -6,7 +6,7 @@ slug: "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workfo
 section_label: "Essay"
 subtitle: "Musk’s Management Tactics Hit the Federal Workforce"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test-4d7e7341f666"

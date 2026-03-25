@@ -6,7 +6,7 @@ slug: "the-100-year-flood-is-not-what-you-think"
 section_label: "Essay"
 subtitle: "Why the 100-year flood happens more than once in a century ~"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-100-year-flood-is-not-what-you-think.pdf"
 featured: true
 

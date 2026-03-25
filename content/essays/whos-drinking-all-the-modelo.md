@@ -6,7 +6,7 @@ slug: "whos-drinking-all-the-modelo"
 section_label: "Essay"
 subtitle: "Especial Report"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/whos-drinking-all-the-modelo.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-drinking-all-the-modelo-659302786ed9"

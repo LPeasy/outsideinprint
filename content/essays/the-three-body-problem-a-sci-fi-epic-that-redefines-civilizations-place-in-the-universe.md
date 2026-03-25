@@ -6,7 +6,7 @@ slug: "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-i
 section_label: "Essay"
 subtitle: "Should you read this viral book? (Yes)"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe-8292352732cc"

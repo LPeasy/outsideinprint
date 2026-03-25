@@ -38,19 +38,6 @@
             <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
             <div class="m">
               {{ with .Params.version }}v{{ . }}{{ end }}
-              {{ if .Params.pdf }}
-                {{ with .Params.version }} | {{ end }}
-                {{ $slug := .Params.slug | default .File.BaseFileName }}
-                {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-                <a href="{{ strings.TrimPrefix "/" .Params.pdf | absURL }}" target="_blank" rel="noopener"
-                  data-analytics-source-slot="library_index"
-                  data-analytics-format="pdf"
-                  data-analytics-slug="{{ $slug }}"
-                  data-analytics-title="{{ .Title }}"
-                  data-analytics-section="{{ $sectionLabel }}"
-                  data-analytics-path="{{ .RelPermalink }}"
-                >Read PDF</a>
-              {{ end }}
             </div>
           </div>
         {{ end }}

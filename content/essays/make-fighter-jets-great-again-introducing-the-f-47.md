@@ -6,7 +6,7 @@ slug: "make-fighter-jets-great-again-introducing-the-f-47"
 section_label: "Essay"
 subtitle: "Everything We Know About Trump’s Sixth-Generation Fighter Jet"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/make-fighter-jets-great-again-introducing-the-f-47.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/make-fighter-jets-great-again-introducing-the-f-47-3428bba1e27c"

@@ -6,7 +6,7 @@ slug: "u-s-shifts-ukraine-policy"
 section_label: "Essay"
 subtitle: "Secretary Hegseth’s NATO Warning and China Pivot"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/u-s-shifts-ukraine-policy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/u-s-shifts-ukraine-policy-1817b72eb1c7"

@@ -6,7 +6,7 @@ slug: "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-does
 section_label: "Essay"
 subtitle: "If we’re living in a simulation, Nietzsche has one question: So what?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.pdf"
 featured: false
 collections:

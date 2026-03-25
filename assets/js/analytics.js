@@ -66,7 +66,7 @@
   }
 
   function buildEventPath(eventName, props) {
-    var keys = ["path", "slug", "section", "source_slot", "collection", "format", "engine", "variant", "length_bucket"];
+    var keys = ["path", "slug", "section", "source_slot", "collection"];
     var parts = ["oip:" + eventName];
 
     keys.forEach(function (key) {
@@ -140,10 +140,6 @@
       section: node.dataset.analyticsSection,
       source_slot: node.dataset.analyticsSourceSlot,
       collection: node.dataset.analyticsCollection,
-      format: node.dataset.analyticsFormat,
-      engine: node.dataset.analyticsEngine,
-      variant: node.dataset.analyticsVariant,
-      length_bucket: node.dataset.analyticsLengthBucket,
       path: node.dataset.analyticsPath
     });
   }
@@ -167,20 +163,6 @@
     });
 
     return merged;
-  }
-
-  function isPdfLink(anchor, url) {
-    var href = "";
-
-    if (anchor && anchor.getAttribute) {
-      href = anchor.getAttribute("href") || "";
-    }
-
-    return (
-      (anchor && anchor.dataset && anchor.dataset.analyticsFormat === "pdf") ||
-      /\.pdf(?:$|[?#])/i.test(href) ||
-      (url && /\.pdf(?:$|[?#])/i.test(url.pathname || ""))
-    );
   }
 
   function isExternalLink(url) {
@@ -297,15 +279,6 @@
       }
 
       url = parseUrl(anchor.getAttribute("href"));
-
-      if (isPdfLink(anchor, url)) {
-        props = mergeProps(datasetProps(anchor), currentPageProps());
-        if (!props.format) {
-          props.format = "pdf";
-        }
-        track("pdf_download", props);
-        return;
-      }
 
       if (isExternalLink(url)) {
         track("external_link_click", mergeProps(datasetProps(anchor), currentPageProps()));

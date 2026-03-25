@@ -6,7 +6,7 @@ slug: "the-max-mistake-why-hbos-name-change-backfired"
 section_label: "Essay"
 subtitle: "A corporate identity crisis in real time, brought to you by the people who forgot what “Home Box Office” really means"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-max-mistake-why-hbos-name-change-backfired.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"

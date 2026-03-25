@@ -6,7 +6,7 @@ slug: "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis"
 section_label: "Essay"
 subtitle: "Mark Zuckerberg’s latest earnings call was more than a routine financial update — it was a declaration of intent. Meta is staking its claim…"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.pdf"
 featured: false
 collections:

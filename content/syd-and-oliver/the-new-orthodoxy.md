@@ -4,7 +4,7 @@ date: 2026-02-18T17:00:48Z
 draft: false
 section_label: 'Syd and Oliver'
 version: '1.0'
-edition: 'First digital edition'
+edition: 'First web edition'
 pdf: '/pdfs/the-new-orthodoxy.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/the-new-orthodoxy/'
 ---

@@ -6,7 +6,7 @@ slug: "altmans-law"
 section_label: "Essay"
 subtitle: "The Super-Exponential Acceleration of AI Advancement"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/altmans-law.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/altmans-law-a48b005e52cd"

@@ -6,7 +6,7 @@ slug: "rational-ignorance-in-the-u-s-presidential-electorate"
 section_label: "Essay"
 subtitle: "An Exploration"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/rational-ignorance-in-the-u-s-presidential-electorate.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/rational-ignorance-in-the-u-s-presidential-electorate-e207c24d0306"

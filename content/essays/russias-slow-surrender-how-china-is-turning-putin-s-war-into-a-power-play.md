@@ -6,7 +6,7 @@ slug: "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play
 section_label: "Essay"
 subtitle: "Putin fights in Ukraine, Beijing tightens its grip on Russia’s future"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.pdf"
 featured: false
 homepage_rank: 2

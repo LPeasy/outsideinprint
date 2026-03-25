@@ -6,7 +6,7 @@ slug: "rethinking-coastal-retreat"
 section_label: "Essay"
 subtitle: "An Exploration"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/rethinking-coastal-retreat.pdf"
 featured: false
 collections:

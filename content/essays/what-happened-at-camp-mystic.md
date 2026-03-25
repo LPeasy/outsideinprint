@@ -6,7 +6,7 @@ slug: "what-happened-at-camp-mystic"
 section_label: "Essay"
 subtitle: "A Primer on the July 4, 2025 Texas Flood Tragedy"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
 featured: false
 

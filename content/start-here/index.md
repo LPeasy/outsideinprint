@@ -10,11 +10,11 @@ section_label: "A Map of the Imprint"
 {{< rawhtml >}}
 <section class="start-here-section start-here-intro">
   <p>Outside In Print is a digital imprint for essays, investigations, stories, and literature.</p>
-  <p>The site is built around a simple idea: writing should be publishable, citable, printable, and worth reading. Each piece appears here as an edition, with a stable home on the web and a free PDF for offline reading.</p>
+  <p>The site is built around a simple idea: writing should be publishable, citable, and worth reading. Each piece lives at a stable address on the web with a clear publication record.</p>
 </section>
 {{< /rawhtml >}}
 
-{{< newsletter_signup class="newsletter-signup--page newsletter-signup--start-here" eyebrow="Letter" title="Weekly letter" dek="New editions, notes, and selected work from Outside In Print." note="Sent quietly, once a week." buttonLabel="Join" >}}
+{{< newsletter_signup class="newsletter-signup--page newsletter-signup--start-here" eyebrow="Letter" title="Weekly letter" dek="New writing, notes, and selected work from Outside In Print." note="Sent quietly, once a week." buttonLabel="Join" >}}
 
 {{< rawhtml >}}
 <section class="start-here-section start-here-map-section">
@@ -38,7 +38,7 @@ section_label: "A Map of the Imprint"
     </div>
     <div class="start-here-map-row">
       <dt><a href="../library/">Library</a></dt>
-      <dd>The full catalog of published editions.</dd>
+      <dd>The full catalog of published work.</dd>
     </div>
     <div class="start-here-map-row">
       <dt><a href="../random/">Random</a></dt>
@@ -97,19 +97,18 @@ section_label: "A Map of the Imprint"
 </section>
 
 <section class="start-here-section start-here-editions">
-  <h2>About the Editions</h2>
-  <p>Each piece on this site appears as an edition. Editions carry a publication date, version number, estimated reading time, and a downloadable PDF. The PDF is not an extra. It is part of the publishing model: something to save, cite, print, and read offline.</p>
+  <h2>Publication Details</h2>
+  <p>Each piece carries a publication date, version number, and estimated reading time. The page itself is the canonical publication, and those details make the archive easier to cite and revisit.</p>
   <ul class="start-here-edition-list">
     <li>Publication date</li>
     <li>Version number</li>
     <li>Estimated reading time</li>
-    <li>Downloadable PDF</li>
   </ul>
 </section>
 
 <section class="start-here-section start-here-archive">
   <h2>The Archive</h2>
-  <p>The <a href="../library/">Library</a> gathers every published edition in one place. It is the full catalog of the imprint.</p>
+  <p>The <a href="../library/">Library</a> gathers every published piece in one place. It is the full catalog of the imprint.</p>
   <p>If you are looking for a title, a date, or the shape of the catalog, begin with the <a href="../library/">Library</a>. If you would rather enter by drift, try <a href="../random/">Random</a>.</p>
 </section>
 {{< /rawhtml >}}

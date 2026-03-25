@@ -6,7 +6,7 @@ slug: "the-economics-of-the-mongol-empire"
 section_label: "Essay"
 subtitle: "How Genghis Khan Created the First Global Trade Network"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-economics-of-the-mongol-empire.pdf"
 featured: false
 homepage_rank: 6

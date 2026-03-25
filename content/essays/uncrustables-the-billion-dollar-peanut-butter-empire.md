@@ -6,7 +6,7 @@ slug: "uncrustables-the-billion-dollar-peanut-butter-empire"
 section_label: "Essay"
 subtitle: "No Crust, No Fuss, No Limits: The Unstoppable Rise of Uncrustables"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/uncrustables-the-billion-dollar-peanut-butter-empire.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/uncrustables-the-billion-dollar-peanut-butter-empire-05f687f1f19e"

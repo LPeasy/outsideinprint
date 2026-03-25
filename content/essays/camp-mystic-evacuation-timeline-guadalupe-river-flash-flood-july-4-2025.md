@@ -6,7 +6,7 @@ slug: "camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025"
 section_label: "Essay"
 subtitle: "Why 30 Minutes Matters ~ Testing the Official Accounts Against the USGS Hunt Gauge"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.pdf"
 featured: false
 

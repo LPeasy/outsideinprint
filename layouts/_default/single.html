@@ -10,11 +10,11 @@
   {{ end }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("collections/" | absURL) "label" "Browse collections") }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("library/" | absURL) "label" "Search the library") }}
-  <article class="{{ $pageClass }}" data-analytics-eligible-read="true" data-pdf-render-root>
+  <article class="{{ $pageClass }}" data-analytics-eligible-read="true">
     <header class="piece-header">
       {{ partial "running_header.html" . }}
 
-      <div class="imprint-header" role="note" aria-label="Edition metadata">
+      <div class="imprint-header" role="note" aria-label="Publication details">
         <div class="row">
           <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
           <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
@@ -26,7 +26,6 @@
       <h1>{{ .Title }}</h1>
       {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
 
-      {{ partial "pdf_button.html" . }}
       {{ partial "journey_links.html" (dict
         "class" "journey-links--article"
         "eyebrow" "Keep reading"

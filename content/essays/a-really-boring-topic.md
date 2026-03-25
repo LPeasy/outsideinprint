@@ -6,7 +6,7 @@ slug: "a-really-boring-topic"
 section_label: "Essay"
 subtitle: "Tunneling Machines"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/a-really-boring-topic.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/a-really-boring-topic-94a325d809b7"

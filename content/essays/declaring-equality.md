@@ -6,7 +6,7 @@ slug: "declaring-equality"
 section_label: "Essay"
 subtitle: "Biden claims that the ERA is the law of the land."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/declaring-equality.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/declaring-equality-6fc0cf085d13"

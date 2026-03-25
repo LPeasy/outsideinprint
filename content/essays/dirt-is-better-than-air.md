@@ -6,7 +6,7 @@ slug: "dirt-is-better-than-air"
 section_label: "Essay"
 subtitle: "Build heavy. Before you need it."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/dirt-is-better-than-air.pdf"
 featured: false
 collections:

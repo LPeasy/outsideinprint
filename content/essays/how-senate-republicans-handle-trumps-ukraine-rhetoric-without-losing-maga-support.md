@@ -6,7 +6,7 @@ slug: "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga
 section_label: "Essay"
 subtitle: "Hedging Their Bets"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support-7c8f018911df"

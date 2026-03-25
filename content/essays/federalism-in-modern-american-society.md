@@ -6,7 +6,7 @@ slug: "federalism-in-modern-american-society"
 section_label: "Essay"
 subtitle: "An exploration"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/federalism-in-modern-american-society.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/federalism-in-modern-american-society-5d57521a3616"

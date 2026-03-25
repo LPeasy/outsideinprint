@@ -6,7 +6,7 @@ slug: "cuomo-vs-mamdani-nyc-2025"
 section_label: "Essay"
 subtitle: "Andrew Cuomo vs. Zohran Mamdani — What’s at Stake?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/cuomo-vs-mamdani-nyc-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/cuomo-vs-mamdani-nyc-2025-853ac23c8eaa"

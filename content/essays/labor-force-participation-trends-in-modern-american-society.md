@@ -6,7 +6,7 @@ slug: "labor-force-participation-trends-in-modern-american-society"
 section_label: "Essay"
 subtitle: "2000-2025"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/labor-force-participation-trends-in-modern-american-society.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/labor-force-participation-trends-in-modern-american-society-4ec72f06c1ec"

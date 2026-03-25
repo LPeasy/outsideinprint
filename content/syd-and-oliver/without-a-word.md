@@ -4,7 +4,7 @@ date: 2026-02-22T23:16:21Z
 draft: false
 section_label: 'Syd and Oliver'
 version: '1.0'
-edition: 'First digital edition'
+edition: 'First web edition'
 pdf: '/pdfs/without-a-word.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/without-a-word/'
 ---

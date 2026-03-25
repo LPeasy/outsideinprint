@@ -6,7 +6,7 @@ slug: "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of
 section_label: "Essay"
 subtitle: "Why America is Retreating from Global Climate Policy Leadership"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy-238c2fe84b5d"

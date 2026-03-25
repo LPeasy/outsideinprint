@@ -6,7 +6,7 @@ slug: "tiktok-the-trojan-horse-of-global-influence"
 section_label: "Essay"
 subtitle: "TikTok has redefined how people engage with the digital world. With its addictive algorithm, short-form videos, and vast user base, the…"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/tiktok-the-trojan-horse-of-global-influence.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/tiktok-the-trojan-horse-of-global-influence-4167ea0e329d"

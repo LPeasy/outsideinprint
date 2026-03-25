@@ -6,7 +6,7 @@ slug: "the-cracked-pot"
 section_label: "Essay"
 subtitle: ""
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-cracked-pot.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-cracked-pot-bf4f0a13419e"

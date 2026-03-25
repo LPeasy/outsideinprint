@@ -6,7 +6,7 @@ slug: "mcdonalds-faces-week-long-boycott-june-24-2025"
 section_label: "Essay"
 subtitle: "Why? What is going on with the McDonald’s Boycott?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/mcdonalds-faces-week-long-boycott-june-24-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"

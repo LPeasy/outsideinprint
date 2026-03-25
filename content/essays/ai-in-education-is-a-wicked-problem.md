@@ -6,7 +6,7 @@ slug: "ai-in-education-is-a-wicked-problem"
 section_label: "Essay"
 subtitle: "~ And Why We Can’t Figure it Out"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/ai-in-education-is-a-wicked-problem.pdf"
 featured: false
 

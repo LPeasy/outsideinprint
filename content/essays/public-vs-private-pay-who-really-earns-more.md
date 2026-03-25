@@ -6,7 +6,7 @@ slug: "public-vs-private-pay-who-really-earns-more"
 section_label: "Essay"
 subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/public-vs-private-pay-who-really-earns-more.pdf"
 featured: false
 homepage_rank: 7

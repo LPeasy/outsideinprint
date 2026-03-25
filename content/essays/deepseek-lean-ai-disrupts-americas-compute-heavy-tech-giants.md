@@ -6,7 +6,7 @@ slug: "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants"
 section_label: "Essay"
 subtitle: "STaR: The Method Behind DeepSeek"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants.pdf"
 featured: false
 collections:

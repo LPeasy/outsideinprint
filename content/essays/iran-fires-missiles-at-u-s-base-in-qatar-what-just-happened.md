@@ -6,7 +6,7 @@ slug: "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened"
 section_label: "Essay"
 subtitle: "Missiles intercepted. No casualties. Flash in the Pan."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened-a3ed00113ff0"

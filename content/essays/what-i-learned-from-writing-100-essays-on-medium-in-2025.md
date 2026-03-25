@@ -6,7 +6,7 @@ slug: "what-i-learned-from-writing-100-essays-on-medium-in-2025"
 section_label: "Essay"
 subtitle: "From zero followers to breakout stories ~ one writer’s honest experience"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/what-i-learned-from-writing-100-essays-on-medium-in-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/what-i-learned-from-writing-100-essays-on-medium-in-2025-ca5812b6e261"

@@ -6,7 +6,7 @@ slug: "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data
 section_label: "Essay"
 subtitle: "Your Data Is Everywhere, and Nobody Cares (Especially Not You)"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data-677ae19bb7e0"

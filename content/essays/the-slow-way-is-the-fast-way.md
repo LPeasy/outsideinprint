@@ -6,7 +6,7 @@ slug: "the-slow-way-is-the-fast-way"
 section_label: "Essay"
 subtitle: "When we rush through life’s big decisions, we often find ourselves circling back to where we started."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/the-slow-way-is-the-fast-way.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-slow-way-is-the-fast-way-166b36df04ae"

@@ -6,7 +6,7 @@ slug: "why-we-celebrate-memorial-day-origins-traditions-and-importance"
 section_label: "Essay"
 subtitle: "The history of Memorial Day, its key observances, and why every American pauses to honor our fallen service members."
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/why-we-celebrate-memorial-day-origins-traditions-and-importance.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-we-celebrate-memorial-day-origins-traditions-and-importance-ba6ea0d8ed39"

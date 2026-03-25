@@ -1,7 +1,6 @@
 {{ define "main" }}
   {{ $librarySections := slice "essays" "literature" "syd-and-oliver" "working-papers" }}
   {{ $libraryPages := where site.RegularPages "Section" "in" $librarySections }}
-  {{ $libraryPages = where $libraryPages "Params.pdf" "!=" nil }}
   {{ $urls := slice }}
   {{ range $libraryPages }}
     {{ $urls = $urls | append .Permalink }}

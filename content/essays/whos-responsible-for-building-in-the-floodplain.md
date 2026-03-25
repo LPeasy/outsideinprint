@@ -6,7 +6,7 @@ slug: "whos-responsible-for-building-in-the-floodplain"
 section_label: "Essay"
 subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/whos-responsible-for-building-in-the-floodplain.pdf"
 featured: false
 

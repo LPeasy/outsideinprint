@@ -6,7 +6,7 @@ slug: "is-doge-legal"
 section_label: "Essay"
 subtitle: "Trump, Musk, and the Constitutional Fight Over Executive Power"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/is-doge-legal.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/is-doge-legal-6bcb518f9293"

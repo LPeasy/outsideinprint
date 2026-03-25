@@ -6,7 +6,7 @@ slug: "inflation-myths-why-private-banks-not-just-government-spending-drive-pric
 section_label: "Essay"
 subtitle: "Politicians blame deficits — but what if the real culprit is the banking system?"
 version: "1.0"
-edition: "First digital edition"
+edition: "First web edition"
 pdf: "/pdfs/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up-a59f477e0d5c"

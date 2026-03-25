@@ -1,64 +1,69 @@
-﻿# Outside In Print Publishing Policy v1
+# Outside In Print Publishing Policy
 
 ## Purpose
-This policy defines the minimum editorial and technical standards for publishing a digital imprint edition (web page + PDF) from a single Markdown source.
+
+This policy defines the current editorial and technical standards for publishing a web publication from a single Markdown source.
 
 ## Scope
+
 Applies to all non-draft content in:
+
 - `content/essays/`
 - `content/literature/`
 - `content/reports/`
 - `content/working-papers/`
 
-Section index files (`_index.md`) are excluded from edition checks.
+Section index files (`_index.md`) are excluded.
 
-## Canonical Model
-One Markdown file produces two synchronized artifacts:
+## Canonical model
+
+One Markdown file produces one public artifact:
+
 - Web artifact: Hugo page
-- Print artifact: Typst PDF at `static/pdfs/<slug>.pdf`
 
-Each published piece is treated as an edition object, not a blog post.
+Each published piece is treated as a durable publication record, not a blog post.
 
-## Tradeoff Decisions (Locked for v1)
-1. PDF generation policy: Build all PDFs on every push to `main`.
-2. Metadata strictness: Hard-fail missing required publication metadata.
-3. Version discipline: Manual version bumps are required for material edits.
-4. Content scope: Constrained Markdown subset for renderer parity.
+## Tradeoff decisions
 
-## Required Front Matter (Non-Draft Pieces)
+1. Web-first publishing: the public site centers on the reading experience of the page itself.
+2. Metadata discipline: published pieces should carry stable publication metadata.
+3. Version discipline: manual version bumps are required for material edits.
+4. Content scope: authors should prefer a constrained Markdown subset that renders cleanly on the web.
+
+## Required front matter for non-draft pieces
+
 - `title`
 - `date`
 - `slug` (optional override; if omitted, filename slug is used)
 - `section_label`
 - `version`
 - `edition`
-- `pdf`
 - `draft`
 
 Optional fields:
+
 - `subtitle`
 - `description`
 - `featured`
+- `homepage_rank`
 
-## PDF Path Rule
-`pdf` must equal:
-- `/pdfs/<slug>.pdf`
+## Versioning rule
 
-And the generated file must exist at:
-- `static/pdfs/<slug>.pdf`
+`version` should be manually bumped for any material change to:
 
-## Versioning Rule
-`version` must be manually bumped for any material change to:
 - body content
 - title or subtitle
 - citation-relevant metadata (`author`, `date`, `edition`)
 
 Suggested convention:
+
 - major changes: `2.0`, `3.0`, ...
 - editorial or substantive revisions: `1.1`, `1.2`, ...
 
-## Supported Markdown Subset (v1)
+## Supported Markdown subset
+
 Allowed and expected:
+
 - headings (`#` to `###`)
 - paragraphs
 - ordered and unordered lists
@@ -68,31 +73,29 @@ Allowed and expected:
 - fenced code blocks
 - footnotes
 
-Anything outside this subset should be treated as experimental and must not be relied on for production parity until tested in both Hugo and Typst outputs.
+Anything outside this subset should be treated as experimental until it has been reviewed in the live web output.
 
-## CI Enforcement Requirements
-CI must fail when any non-draft piece violates these checks:
-1. Missing required front matter fields.
-2. `pdf` field does not match `/pdfs/<slug>.pdf`.
-3. Expected `static/pdfs/<slug>.pdf` is missing after PDF build.
-4. Hugo build fails.
+## CI enforcement requirements
 
-CI workflow order:
-1. Build all PDFs.
-2. Run preflight validation gates.
-3. Build Hugo site.
-4. Deploy Pages artifact.
+Current CI must fail when:
 
-## Local Author Workflow
-1. Create/edit content Markdown file.
+1. The CI contract drifts from the repo's documented tooling assumptions.
+2. The Hugo build fails.
+3. The generated public HTML fails regression checks.
+
+## Local author workflow
+
+1. Create or edit a content Markdown file.
 2. Ensure required front matter is complete.
-3. Run local PDF builder.
-4. Run preflight script.
-5. Review web + PDF artifacts.
+3. Build Hugo locally.
+4. Review the relevant web pages.
+5. Run the applicable tests.
 6. Commit and push to `main`.
 
-## Change Control
-Policy changes require explicit update to this file in the same PR as any CI rule changes.
+## Paused work
 
+The PDF workflow is paused and outside the current publishing contract.
 
+## Change control
 
+Policy changes require an explicit update to this file in the same PR as any related CI or publishing-rule changes.

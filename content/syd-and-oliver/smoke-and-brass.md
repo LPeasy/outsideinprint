@@ -4,7 +4,7 @@ date: 2026-02-12T02:42:07Z
 draft: false
 section_label: 'Syd and Oliver'
 version: '1.0'
-edition: 'First digital edition'
+edition: 'First web edition'
 pdf: '/pdfs/smoke-and-brass.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/smoke-and-brass/'
 ---
