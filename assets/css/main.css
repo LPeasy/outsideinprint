@@ -114,20 +114,8 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
   position:sticky;
   top:0;
   z-index:30;
-  margin-top:0;
-  padding-top:12px;
   background:linear-gradient(180deg, rgba(11,11,11,.97) 0%, rgba(11,11,11,.92) 78%, rgba(11,11,11,0) 100%);
   backdrop-filter:blur(8px);
-}
-.masthead--sticky .title{
-  font-size:15px;
-}
-.masthead--sticky .subtitle{
-  margin-top:8px;
-  font-size:10px;
-}
-.masthead--sticky .nav{
-  margin:14px 0 18px;
 }
 .masthead--dashboard .nav{
   margin-bottom:18px;
@@ -179,6 +167,11 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
   gap:14px 18px;
 }
 @media (max-width:640px){
+  .masthead--sticky{
+    position:static;
+    background:none;
+    backdrop-filter:none;
+  }
   .selected-hero__title{
     font-size:1.5rem;
   }
