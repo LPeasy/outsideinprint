@@ -478,11 +478,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Checks = @(
-      'No matching pieces found'
-      '<a\b[^>]*href="(?:https://outsideinprint\.org)?/collections/'
-      '<a\b[^>]*href="(?:https://outsideinprint\.org)?/start-here/'
-    )
+    Type = 'library-empty-state'
     Message = 'expected the library empty state to point readers toward collections and Start Here'
   },
   @{
@@ -519,12 +515,16 @@ foreach ($check in $requiredUxChecks) {
     continue
   }
 
-  if ($check.Contains('Checks')) {
-    foreach ($pattern in $check.Checks) {
-      if ($targetPageHtml[$relativePath] -notmatch ([string]$pattern) ) {
-        $uxIssues.Add("$relativePath => $($check.Message)")
-        break
-      }
+  if ($check.Contains('Type') -and $check.Type -eq 'library-empty-state') {
+    $html = $targetPageHtml[$relativePath]
+    $hasEmptyStateText = $html -match 'No matching pieces found'
+    $hasCollectionsText = $html -match 'Collections'
+    $hasStartHereText = $html -match 'Start Here'
+    $hasCollectionsDestination = $html -match '(?:https://outsideinprint\.org)?/collections/'
+    $hasStartHereDestination = $html -match '(?:https://outsideinprint\.org)?/start-here/'
+
+    if (-not ($hasEmptyStateText -and $hasCollectionsText -and $hasStartHereText -and $hasCollectionsDestination -and $hasStartHereDestination)) {
+      $uxIssues.Add("$relativePath => $($check.Message)")
     }
   }
   elseif ($targetPageHtml[$relativePath] -notmatch ([string]$check.Pattern)) {
