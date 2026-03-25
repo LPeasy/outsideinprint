@@ -1,8 +1,6 @@
 {{ $stickyMasthead := and .IsPage (not (in (slice "collections" "random") .Section)) }}
-<header class="masthead site-header{{ if $stickyMasthead }} masthead--sticky{{ end }}{{ if .IsHome }} masthead--home{{ end }}">
-  {{ if .IsHome }}
-    <div class="masthead-preface" aria-hidden="true"></div>
-  {{ end }}
+<header class="masthead site-header masthead--editorial{{ if $stickyMasthead }} masthead--sticky{{ end }}">
+  <div class="masthead-preface" aria-hidden="true"></div>
   <a class="brand-link" href="{{ "" | absURL }}" aria-label="Outside In Print home">
     {{ if .IsHome }}
       <h1 class="title">
@@ -18,7 +16,7 @@
     <div class="subtitle">A Digital Imprint</div>
   </a>
 
-  <nav class="nav{{ if .IsHome }} nav--home{{ end }}" aria-label="Primary">
+  <nav class="nav nav--section-rail" aria-label="Primary">
     <a href="{{ "start-here/" | absURL }}">Start Here</a><span class="dot">&bull;</span>
     <a href="{{ "essays/" | absURL }}">Essays</a><span class="dot">&bull;</span>
     <a href="{{ "literature/" | absURL }}">Books</a><span class="dot">&bull;</span>
