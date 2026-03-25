@@ -8,7 +8,8 @@ subtitle: "A brief explainer about what the house was, how it evolved, and why i
 version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.pdf"
-featured: false
+featured: false
+homepage_rank: 5
 collections:
   - reported-case-studies
 medium_source_url: "https://medium.com/@lawtonperret/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion-24c8fff8aa3d"

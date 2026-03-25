@@ -65,57 +65,36 @@
     </section>
   {{ end }}
 
-  {{ $featured := where site.RegularPages "Params.featured" true }}
-  {{ if gt (len $featured) 0 }}
-    <section aria-labelledby="home-selected-title">
-      <h2 id="home-selected-title" class="list-title" style="margin-top:28px;">Selected</h2>
-      {{ range sort $featured "Date" "desc" }}
-        <div class="item">
-          {{ $slug := .Params.slug | default .File.BaseFileName }}
-          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-          <div class="t"><a href="{{ .RelPermalink }}"
-            data-analytics-event="internal_promo_click"
-            data-analytics-source-slot="homepage_selected"
-            data-analytics-slug="{{ $slug }}"
-            data-analytics-title="{{ .Title }}"
-            data-analytics-section="{{ $sectionLabel }}"
-            data-analytics-path="{{ .RelPermalink }}"
-          >{{ .Title }}</a></div>
-          <div class="m">
-            {{ with .Params.section_label }}{{ . }}{{ end }}
-            {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
-            {{ with .Params.version }} | v{{ . }}{{ end }}
-            {{ with .ReadingTime }} | {{ . }} min read{{ end }}
-          </div>
-          {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-        </div>
-      {{ end }}
-    </section>
-  {{ end }}
+  {{ partial "home_selected.html" . }}
+  {{ $selectedKeys := .Scratch.Get "home_selected_keys" | default (slice) }}
 
   {{ $recentEssays := where site.RegularPages "Section" "essays" }}
   {{ if gt (len $recentEssays) 0 }}
-    <section aria-labelledby="home-recent-essays-title">
+    <section class="home-recent-essays" aria-labelledby="home-recent-essays-title">
       <h2 id="home-recent-essays-title" class="list-title" style="margin-top:30px;">Recent Essays</h2>
-      {{ range first 15 (sort $recentEssays "Date" "desc") }}
-        <div class="item">
-          {{ $slug := .Params.slug | default .File.BaseFileName }}
-          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-          <div class="t"><a href="{{ .RelPermalink }}"
-            data-analytics-event="internal_promo_click"
-            data-analytics-source-slot="homepage_recent"
-            data-analytics-slug="{{ $slug }}"
-            data-analytics-title="{{ .Title }}"
-            data-analytics-section="{{ $sectionLabel }}"
-            data-analytics-path="{{ .RelPermalink }}"
-          >{{ .Title }}</a></div>
-          <div class="m">
-            {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
-            {{ with .Params.version }} | v{{ . }}{{ end }}
-            {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+      {{ $recentCount := 0 }}
+      {{ range sort $recentEssays "Date" "desc" }}
+        {{ if and (lt $recentCount 6) (not (in $selectedKeys .RelPermalink)) }}
+          <div class="item">
+            {{ $slug := .Params.slug | default .File.BaseFileName }}
+            {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+            <div class="t"><a href="{{ .RelPermalink }}"
+              data-analytics-event="internal_promo_click"
+              data-analytics-source-slot="homepage_recent"
+              data-analytics-slug="{{ $slug }}"
+              data-analytics-title="{{ .Title }}"
+              data-analytics-section="{{ $sectionLabel }}"
+              data-analytics-path="{{ .RelPermalink }}"
+            >{{ .Title }}</a></div>
+            <div class="m">
+              {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+              {{ with .Params.version }} | v{{ . }}{{ end }}
+              {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+            </div>
+            {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
           </div>
-          {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-        </div>
+          {{ $recentCount = add $recentCount 1 }}
+        {{ end }}
       {{ end }}
     </section>
   {{ end }}

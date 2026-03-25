@@ -9,6 +9,7 @@ version: "1.0"
 edition: "First digital edition"
 pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.pdf"
 featured: false
+homepage_rank: 2
 medium_source_url: "https://medium.com/@lawtonperret/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*PHMYPcymIjnHm77IGxy--w@2x.jpeg)
@@ -94,5 +95,4 @@ America maxed out its credit card — and left you to pay for it.medium.comT
 How a Once-Taboo Term is Making a Controversial Comeback in Online Culturemedium.comElon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test
 Musk’s Management Tactics Hit the Federal Workforcemedium.comInflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up
 Politicians blame deficits — but what if the real culprit is the banking system?medium.com
-
 
