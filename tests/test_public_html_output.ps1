@@ -1,6 +1,6 @@
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) "public"),
-  [string]$ExpectedHomePath = "/outsideinprint/"
+  [string]$ExpectedHomePath = "/"
 )
 
 Set-StrictMode -Version Latest
@@ -221,31 +221,31 @@ $requiredMetadataPages = [ordered]@{
   'public/index.html' = @{
     Title = 'Outside In Print'
     Description = 'Outside In Print is a digital imprint for essays, literature, dialogues, and working papers published as stable web editions and free PDFs.'
-    Canonical = 'https://lpeasy.github.io/outsideinprint/'
+    Canonical = 'https://outsideinprint.org/'
   }
   'public/start-here/index.html' = @{
     Title = 'Start Here'
     Description = 'An editorial welcome to Outside In Print and a measured guide into the archive.'
-    Canonical = 'https://lpeasy.github.io/outsideinprint/start-here/'
+    Canonical = 'https://outsideinprint.org/start-here/'
   }
   'public/library/index.html' = @{
     Title = 'Library'
     Description = 'The full catalog of published editions from Outside In Print, searchable by title, section, and version.'
-    Canonical = 'https://lpeasy.github.io/outsideinprint/library/'
+    Canonical = 'https://outsideinprint.org/library/'
   }
   'public/collections/index.html' = @{
     Title = 'Collections'
     Description = 'Curated collections that gather essays, projects, and recurring questions into coherent reading threads.'
-    Canonical = 'https://lpeasy.github.io/outsideinprint/collections/'
+    Canonical = 'https://outsideinprint.org/collections/'
   }
   'public/essays/biter-the-slang-word-that-hits/index.html' = @{
     Title = 'Biter'
     Description = 'A word to describe artistic thieves'
-    Canonical = 'https://lpeasy.github.io/outsideinprint/essays/biter-the-slang-word-that-hits/'
+    Canonical = 'https://outsideinprint.org/essays/biter-the-slang-word-that-hits/'
   }
   'public/essays/the-risk-management-buffet/index.html' = @{
     Title = 'The Risk Management Buffet'
-    Canonical = 'https://lpeasy.github.io/outsideinprint/essays/the-risk-management-buffet/'
+    Canonical = 'https://outsideinprint.org/essays/the-risk-management-buffet/'
   }
 }
 
@@ -298,11 +298,11 @@ foreach ($file in $htmlFiles) {
       continue
     }
 
-    if ($src.StartsWith('/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+    if ($src.StartsWith('/outsideinprint/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
       $rootRelativeImageIssues.Add("$relativePath => $src")
     }
 
-    if ($src.StartsWith('/outsideinprint/images/medium/', [System.StringComparison]::OrdinalIgnoreCase)) {
+    if ($src.StartsWith('/images/medium/', [System.StringComparison]::OrdinalIgnoreCase)) {
       $localizedMediumImageCount++
     }
   }
@@ -360,7 +360,7 @@ foreach ($relativePath in $optionalDefaultListPages) {
 $requiredImportedMediaChecks = @(
   @{
     Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
-    Pattern = '(?s)<figure class=article-figure><img[^>]+><figcaption class=article-source-caption>Photo by Markus Spiske on Unsplash</figcaption></figure>'
+    Pattern = '(?s)<figure class="?article-figure"?><img[^>]+><figcaption class="?article-source-caption"?>Photo by Markus Spiske on Unsplash</figcaption></figure>'
     Message = 'expected imported photo-credit media to render as a figure with figcaption'
   },
   @{
@@ -371,7 +371,7 @@ $requiredImportedMediaChecks = @(
   },
   @{
     Path = 'public/essays/rethinking-invasive-species-management/index.html'
-    Pattern = '(?s)<figure class=article-figure><img[^>]+><figcaption class=article-source-caption>Crested Floating Heart \| Source: iNaturalist</figcaption></figure>'
+    Pattern = '(?s)<figure class="?article-figure"?><img[^>]+><figcaption class="?article-source-caption"?>Crested Floating Heart \| Source: iNaturalist</figcaption></figure>'
     Message = 'expected descriptive imported image captions to render as figure captions'
   }
 )
@@ -458,12 +458,12 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
 $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)journey-links.*?/outsideinprint/essays/.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected the homepage to expose browse-next links for essays, collections, and the library'
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)journey-links.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected the default list template to expose collection and library next steps'
   },
   @{
@@ -473,12 +473,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = '(?s)journey-links.*?/outsideinprint/collections/.*?/outsideinprint/start-here/'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/start-here/'
     Message = 'expected the library page to expose collection and Start Here navigation'
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = 'No matching pieces found\.\s*Try a broader term,\s*browse\s*<a href=(?:https://lpeasy\.github\.io)?/outsideinprint/collections/>Collections</a>,\s*or start with\s*<a href=(?:https://lpeasy\.github\.io)?/outsideinprint/start-here/>Start Here</a>\.'
+    Pattern = 'No matching pieces found\.\s*Try a broader term,\s*browse\s*<a href="(?:https://outsideinprint\.org)?/collections/">Collections</a>,\s*or start with\s*<a href="(?:https://outsideinprint\.org)?/start-here/">Start Here</a>\.'
     Message = 'expected the library empty state to point readers toward collections and Start Here'
   },
   @{
@@ -488,12 +488,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)journey-links.*?/outsideinprint/library/.*?/outsideinprint/start-here/'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/start-here/'
     Message = 'expected the collections index to expose library and Start Here navigation'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = '(?s)journey-links.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected collection pages to expose follow-on navigation back to collections and the library'
   },
   @{
@@ -503,7 +503,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)journey-links.*?/outsideinprint/essays/.*?/outsideinprint/collections/.*?/outsideinprint/library/'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected article chrome to expose section, collections, and library next steps near the top of the page'
   }
 )
@@ -529,11 +529,11 @@ if ($runningHeaderIssues.Count -gt 0) {
 }
 
 if ($rootRelativeImageIssues.Count -gt 0) {
-  throw ('Found root-relative <img src="/images/..."> paths in generated HTML. Samples: {0}' -f (Format-SampleList -Items $rootRelativeImageIssues))
+  throw ('Found stale project-path <img src="/outsideinprint/images/..."> paths in generated HTML. Samples: {0}' -f (Format-SampleList -Items $rootRelativeImageIssues))
 }
 
 if ($localizedMediumImageCount -eq 0) {
-  throw "Did not find any base-path-safe localized /outsideinprint/images/medium/ image URLs in generated HTML."
+  throw "Did not find any base-path-safe localized /images/medium/ image URLs in generated HTML."
 }
 
 if ($zgotmplzIssues.Count -gt 0) {
