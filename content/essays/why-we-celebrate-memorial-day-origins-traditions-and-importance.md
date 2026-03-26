@@ -17,7 +17,7 @@ lie behind each flag?***
 
 ![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/ff5282d7bd36ea86362477bec408be437387519e4fe6b73ee9caa9170a6d6b26.jpeg)
 
-*Photo by Justin Casey on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
+Photo by Justin Casey on Unsplash
 
 #### What Is Memorial Day? Understanding the Holiday’s Purpose
 
@@ -37,7 +37,7 @@ That simple question sums up Memorial Day: more than a long weekend,
 
 ![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/81bd4267541304d0e06fe38cb98b64e6da7a20bc3aeeb5930259fa7f804475e2.jpeg)
 
-*Photo by [Aaron Burden](http://aaronburden.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
+Photo by Aaron Burden on Unsplash
 
 **Long before “Memorial Day”** was on the calendar, towns across America
 held **springtime events to honor soldiers who died in the Civil War**
@@ -75,7 +75,7 @@ Veterans read the Gettysburg Address. Bands played music. People prayed.
 
 ![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/08dd261a4bd612599336820c7ed49cc3a33bb57b2ecc0aa75ecb54eb085c8bd9.jpeg)
 
-*Photo by Greg Bulla on Unsplash*
+Photo by Greg Bulla on Unsplash
 
 **At first, Decoration Day focused on Civil War soldiers ~** more than
 600,000 lives lost. But ***after World War I,*** Americans wanted to
@@ -92,7 +92,7 @@ making it a ***three-day weekend***.
 
 ![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/a8c85048a0b7950ee1f6d87e20cf3e1387f5b808bdffb63cc52a611d71469119.jpeg)
 
-*Photo by Tanner Ross on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
+Photo by Tanner Ross on Unsplash
 
 **Memorial Day often means barbecues, beach trips, and sales.**
 
@@ -114,7 +114,7 @@ Families **place wreaths**. Bands **play taps.**
 
 ![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/bee0bce45482dcb1636c874782021fa083450499023dfca33ff38635384ed453.jpeg)
 
-*Photo by [Brandon Day](http://www.thinktreemedia.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
+Photo by Brandon Day on Unsplash
 
 **It’s easy to hang a flag or pause for a minute.** But those actions
 mean a lot.
@@ -157,7 +157,7 @@ they serve?***
 
 ![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/df454c05f9eda575e5d6461261630dbde73949f81b042bd96af28504994f127d.jpeg)
 
-*Photo by [Richard Sagredo](http://www.sagredophotography.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
+Photo by Richard Sagredo on Unsplash
 
 Next time you see flags or hear taps in the breeze, ***think of that
 first Decoration Day in 1868.***

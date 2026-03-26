@@ -19,13 +19,13 @@ defies logic, and fulfills an incredible dream.”**
 
 ![](https://cdn-images-1.medium.com/max/800/0*j77amzneutwZ8s7R)
 
-*Photo by [Soliman Cifuentes](https://unsplash.com/@aleexcif?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+Photo by Soliman Cifuentes on Unsplash
 
 #### **How Modelo Became America’s Best-Selling Beer**
 
 ![](https://cdn-images-1.medium.com/max/800/0*qC97rJHQTP_uYDbp)
 
-*Photo by [Jon Parry](https://unsplash.com/@zn35pjqq?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+Photo by Jon Parry on Unsplash
 
 After more than 20 years on the throne, **Bud Light finally tapped
 out.**
@@ -60,7 +60,7 @@ cool.***
 
 ![](https://cdn-images-1.medium.com/max/800/0*FaifkWnDT__ogR1r)
 
-*Photo by [Wil Stewart](https://unsplash.com/@wilstewart3?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+Photo by Wil Stewart on Unsplash
 
 Modelo Especial’s surge is concentrated in a few high-octane
 markets — most notably **California, Texas, and Illinois.** These three
@@ -82,7 +82,7 @@ bar patios, its **about as common as water.**
 
 ![](https://cdn-images-1.medium.com/max/800/0*29Ko8cbJ6iPpKQDI)
 
-*Photo by [kazuend](https://unsplash.com/@kazuend?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+Photo by kazuend on Unsplash
 
 ***Constellation Brands***, the company that holds the exclusive U.S.
 rights to Modelo, reported nearly **\$7.5 billion in beer sales in
@@ -119,7 +119,7 @@ attached.**
 
 ![](https://cdn-images-1.medium.com/max/800/0*6hTEfjOrKbekM-qS)
 
-*Photo by [Redd Francisco](https://unsplash.com/@reddfrancisco?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+Photo by Redd Francisco on Unsplash
 
 Modelo didn’t just ride with the culture —** it took an active role.**
 
@@ -188,7 +188,7 @@ drop in sales.*
 
 ![](https://cdn-images-1.medium.com/max/800/0*NvEIGn_B8zlmn7sd)
 
-*Photo by [Lance Anderson](https://unsplash.com/@lanceanderson?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+Photo by Lance Anderson on Unsplash
 
 Modelo is riding ***the crest of a much larger wave***:
 
@@ -213,7 +213,7 @@ escalates.
 
 ![](https://cdn-images-1.medium.com/max/800/0*xUy53KOxLpWEzgxn)
 
-*Photo by [Arturo Esparza](https://unsplash.com/@arturoeg_foto?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
+Photo by Arturo Esparza on Unsplash
 
 > Modelo’s ascent isn’t just a story about beer.
 

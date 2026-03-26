@@ -18,7 +18,7 @@ medium_source_url: "https://medium.com/@lawtonperret/what-happened-at-camp-mysti
 
 ![](https://cdn-images-1.medium.com/max/800/1*UbIf-QBbcbAel-xIPO0WIA.png)
 
-*Inundation Map | Source: CNN*
+> Inundation Map | Source: CNN
 
 > **“They were just screaming and praying. The water was moving too fast
 > to do anything.”**
@@ -119,7 +119,7 @@ floodway*.**
 
 ![](https://cdn-images-1.medium.com/max/800/1*1PTwmLd8qUcWIs5AZTsbMw.png)
 
-*Guadalupe River Inundation Curve: Source | CNN*
+> Guadalupe River Inundation Curve: Source | CNN
 
 By the time the first official **Flash Flood Warning** was issued at
 **1:14 a.m.**, the rain had already intensified.
@@ -185,6 +185,5 @@ I’ll be publishing additional primers [like this](https://medium.com/the-balan
 information you might be interested in.
 
 - [The Water’s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
-
 
 > Thanks for reading!

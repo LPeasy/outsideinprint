@@ -12,12 +12,7 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-world-the-un-was-built-for-335093881846"
 ---
 
-<figure id="32d9" class="graf graf--figure graf-after--h4">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*NVaPWu3fjquEpPay7rQusQ.png"
-class="graf-image" data-image-id="1*NVaPWu3fjquEpPay7rQusQ.png"
-data-width="1536" data-height="1024" data-is-featured="true" />
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*NVaPWu3fjquEpPay7rQusQ.png)
 
 In the years after World War II, the victors attempted something new.
 After two global wars in a single generation, they agreed to a set of
@@ -54,28 +49,15 @@ They were trying to contain it.
 
 The system worked ~ **within the societies it was designed for**.
 
-<figure id="711d"
-class="graf graf--figure graf-after--p graf--trailing">
-<img src="https://cdn-images-1.medium.com/max/800/0*8odgxtxn9Xk2eo2f"
-class="graf-image" data-image-id="0*8odgxtxn9Xk2eo2f" data-width="1920"
-data-height="960" />
-<figcaption>Allied leaders during World War II. The postwar global order
-emerged from total war, not peaceful consensus. [Ann Ronan Pictures/Print Collector/Getty Images](https://www.photo12.com/en/image/arp07101_390004800)</figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/0*8odgxtxn9Xk2eo2f)
+
+*Allied leaders during World War II. The postwar global order emerged from total war, not peaceful consensus. [Ann Ronan Pictures/Print Collector/Getty Images](https://www.photo12.com/en/image/arp07101_390004800)*
 
 ### Who Built the UN ~ and Who Didn’t
 
-<figure id="7995" class="graf graf--figure graf-after--h3">
-<img
-src="https://cdn-images-1.medium.com/max/800/1*tUi42cVpOhyR96irBPXoIQ.png"
-class="graf-image" data-image-id="1*tUi42cVpOhyR96irBPXoIQ.png"
-data-width="1480" data-height="625" />
-<figcaption><strong><em>United Nations membership by
-decade.</em></strong> <em>Most of Africa, the Middle East, and South
-Asia were not yet sovereign states in 1945 and were not represented
-at</em> [*the system*](http://UN.org)<em>’s
-founding.</em></figcaption>
-</figure>
+![](https://cdn-images-1.medium.com/max/800/1*tUi42cVpOhyR96irBPXoIQ.png)
+
+***United Nations membership by decade.*** *Most of Africa, the Middle East, and South Asia were not yet sovereign states in 1945 and were not represented at* [*the system*](http://UN.org)*’s founding.*
 
 The early UN was dominated by Western Europe, North America, Latin
 America, and a small group of Commonwealth and Allied states. Africa,

@@ -65,6 +65,18 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
   throw "deploy.yml must run the CI contract test."
 }
 
+if ($deployWorkflow -notmatch "fetch-depth:\s*0") {
+  throw "deploy.yml must fetch full history so changed-file guardrails can diff essay edits."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_essay_guardrails\.ps1") {
+  throw "deploy.yml must run the essay guardrail regression test."
+}
+
+if ($deployWorkflow -notmatch "\.\/scripts\/check_essay_guardrails\.ps1") {
+  throw "deploy.yml must run the essay guardrail check before building the site."
+}
+
 if ($dashboardWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
   throw "publish-dashboard.yml must run the CI contract test."
 }

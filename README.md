@@ -19,9 +19,11 @@ hugo server -D
 2. Write, then set `draft: false` when ready.
 3. Build the site locally:
    - `hugo --gc --minify`
-4. Run the Node/browser test suite:
+4. Run the essay guardrails on the files you changed:
+   - `npm run check:essays -- -Paths .\content\essays\my-title.md`
+5. Run the Node/browser test suite:
    - `npm test`
-5. Commit + push.
+6. Commit + push.
 
 ## PDF status
 
@@ -32,6 +34,7 @@ hugo server -D
 
 Each non-draft piece should include:
 
+- `description`
 - `section_label`
 - `version` (bump on material revision)
 - `edition` (for example, `"First web edition"`)
@@ -79,14 +82,69 @@ Rerun behavior:
 Post-import workflow:
 
 1. Review imported markdown and localized media.
-2. Flip selected imported essays from `draft: true` to `draft: false`.
-3. Build the site locally with `hugo --gc --minify`.
+2. Run the legacy normalizer on imported essays that still carry Medium residue.
+   - `.\.tools\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md`
+3. Re-run the legacy audit to confirm the cleanup queue shrank.
+   - `powershell -ExecutionPolicy Bypass -File .\scripts\audit_legacy_essays.ps1`
+4. Flip selected imported essays from `draft: true` to `draft: false`.
+5. Build the site locally with `hugo --gc --minify`.
 
 Fixture test harness:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\test_medium_import.ps1
 ```
+
+Legacy normalization regression test:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tests\test_legacy_essay_normalization.ps1
+```
+
+## Legacy essay audit
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\audit_legacy_essays.ps1
+```
+
+This report now highlights the safe-auto residue categories the normalizer is meant to clear:
+
+- embedded media placeholders and raw HTML media wrappers
+- loose image and source captions that have not been normalized into the article-body patterns
+- duplicated lead metadata carried over from Medium
+
+## Essay guardrails
+
+Default behavior checks only changed essay files in the working tree and fails on high-confidence residue:
+
+```powershell
+npm run check:essays
+```
+
+Explicit-path review for one or more essays:
+
+```powershell
+npm run check:essays -- -Paths .\content\essays\my-title.md,.\content\essays\another-title.md
+```
+
+CI or branch-diff review between two refs:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -BaseRef <base-sha> -HeadRef <head-sha>
+```
+
+What blocks by default:
+
+- duplicated lead title or dek in the body
+- raw HTML and embedded-media import residue
+- mojibake and obvious Medium call-to-action leftovers
+
+What warns by default:
+
+- loose image-caption residue the normalizer already knows how to clean
+- pseudo-headings and malformed list patterns
+- source dumps, ornamental separators, and escaped line-break residue
+- missing `description` on non-draft essays
 
 ## Essay integrity audit
 

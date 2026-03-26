@@ -1,7 +1,8 @@
 param(
   [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
   [string]$ReportBasePath,
-  [string[]]$Sections = @('essays','literature','syd-and-oliver','working-papers')
+  [string[]]$Sections = @('essays','literature','syd-and-oliver','working-papers'),
+  [string[]]$Paths = @()
 )
 
 $ErrorActionPreference = 'Stop'
@@ -70,6 +71,52 @@ function Get-RelativePath {
     return $targetResolved.Substring($baseResolved.Length).TrimStart('\').Replace('\','/')
   }
   return $targetResolved.Replace('\','/')
+}
+
+function Resolve-ScopedPaths {
+  param([string]$RepoRoot,[string[]]$InputPaths)
+  $resolved = New-Object System.Collections.Generic.List[object]
+  foreach ($rawValue in ($InputPaths | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })) {
+    foreach ($value in @($rawValue -split ',' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })) {
+      $candidate = $value.Trim()
+      if (-not [System.IO.Path]::IsPathRooted($candidate)) {
+        $candidate = Join-Path $RepoRoot $candidate
+      }
+      if (-not (Test-Path $candidate)) { continue }
+      $fullPath = (Resolve-Path $candidate).Path
+      $resolved.Add([pscustomobject]@{
+        Path = [System.IO.Path]::GetFullPath($fullPath)
+        IsDirectory = [bool](Test-Path $fullPath -PathType Container)
+      })
+    }
+  }
+  return $resolved.ToArray()
+}
+
+function Test-MatchesScopedPaths {
+  param([string]$Path,[object[]]$ScopedPaths)
+  if (-not $ScopedPaths -or $ScopedPaths.Count -eq 0) { return $true }
+
+  $fullPath = [System.IO.Path]::GetFullPath($Path)
+  foreach ($scope in $ScopedPaths) {
+    if ($scope.IsDirectory) {
+      $scopeRoot = $scope.Path.TrimEnd('\', '/')
+      $scopePrefix = $scopeRoot + [System.IO.Path]::DirectorySeparatorChar
+      if (
+        $fullPath.Equals($scopeRoot, [System.StringComparison]::OrdinalIgnoreCase) -or
+        $fullPath.StartsWith($scopePrefix, [System.StringComparison]::OrdinalIgnoreCase)
+      ) {
+        return $true
+      }
+      continue
+    }
+
+    if ($fullPath.Equals($scope.Path, [System.StringComparison]::OrdinalIgnoreCase)) {
+      return $true
+    }
+  }
+
+  return $false
 }
 
 function Get-FrontMatterAndBody {
@@ -176,8 +223,10 @@ function Parse-PageFrontMatter {
     RelativePath = Get-RelativePath $ContentRoot $Path
     Section = ''
     Title = ''
+    Description = ''
     Slug = ''
     Date = ''
+    Draft = $false
     Featured = $false
     MediumSourceUrl = ''
     SourceUrl = ''
@@ -199,8 +248,10 @@ function Parse-PageFrontMatter {
       $activeList = ''
       switch ($key) {
         'title' { $front.Title = [string](Convert-Scalar $raw) }
+        'description' { $front.Description = [string](Convert-Scalar $raw) }
         'slug' { $front.Slug = Normalize-Token ([string](Convert-Scalar $raw)) }
         'date' { $front.Date = [string](Convert-Scalar $raw) }
+        'draft' { $front.Draft = [bool](Convert-Scalar $raw) }
         'featured' { $front.Featured = [bool](Convert-Scalar $raw) }
         'medium_source_url' { $front.MediumSourceUrl = [string](Convert-Scalar $raw) }
         'source_url' { $front.SourceUrl = [string](Convert-Scalar $raw) }
@@ -294,6 +345,70 @@ function Get-TopBodyWindow {
   return (($Body -split "`r?`n") | Select-Object -First $LineCount) -join "`n"
 }
 
+function Strip-WrappingEmphasis {
+  param([string]$Value)
+  $text = $Value.Trim()
+  while (
+    $text.Length -ge 2 -and (
+      ($text.StartsWith('*') -and $text.EndsWith('*')) -or
+      ($text.StartsWith('_') -and $text.EndsWith('_'))
+    )
+  ) {
+    $candidate = $text.Substring(1, $text.Length - 2).Trim()
+    if (-not $candidate -or $candidate -eq $text) { break }
+    $text = $candidate
+  }
+  return $text
+}
+
+function Remove-MarkdownLinks {
+  param([string]$Value)
+  return [regex]::Replace($Value, '\[([^\]]+)\]\([^)]+\)', '$1')
+}
+
+function Get-CaptionResidueCount {
+  param([string]$Body)
+  $count = 0
+  $lines = $Body -split "`r?`n"
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    $line = $lines[$i].Trim()
+    if ($line -notmatch '^!\[[^\]]*\]\(\S+(?:\s+"[^"]*")?\)\s*$') { continue }
+    if ($line -match '\s+"[^"]*"\)\s*$') { continue }
+
+    $j = $i + 1
+    while ($j -lt $lines.Count -and -not $lines[$j].Trim()) { $j++ }
+    if ($j -ge $lines.Count) { continue }
+
+    $candidate = $lines[$j].Trim()
+    if (
+      $candidate -match '^>' -or
+      $candidate -match '^(?i)source:' -or
+      $candidate -match '^(?i)photo by .+ on unsplash$'
+    ) {
+      continue
+    }
+
+    $unwrapped = Strip-WrappingEmphasis $candidate
+    $plain = Remove-MarkdownLinks $unwrapped
+    $plain = ($plain -replace '\s+', ' ').Trim()
+    if (
+      ($candidate -ne $unwrapped) -and (
+        $plain -match '^(?i)photo by\b' -or
+        $plain -match '^(?i)(source:|courtesy of |image courtesy of |image source:)' -or
+        $plain.Contains('|')
+      )
+    ) {
+      $count++
+      continue
+    }
+
+    if ($candidate -match '^(?i)photo by .+\[(?:unsplash|pexels)\]') {
+      $count++
+    }
+  }
+  return $count
+}
+
 function Build-IssueSummary {
   param($Counts)
   $types = New-Object System.Collections.Generic.List[string]
@@ -308,6 +423,7 @@ $collectionsPath = Join-Path $Root 'data\collections.yaml'
 $startHerePath = Join-Path $Root 'content\start-here\index.md'
 $collections = Parse-CollectionRegistry $collectionsPath
 $startHereEssaySlugs = Get-StartHereEssaySlugs $startHerePath
+$scopedPaths = Resolve-ScopedPaths -RepoRoot $Root -InputPaths $Paths
 $pages = New-Object System.Collections.Generic.List[object]
 
 foreach ($section in $Sections) {
@@ -315,7 +431,11 @@ foreach ($section in $Sections) {
   if (-not (Test-Path $sectionRoot -PathType Container)) { continue }
   Get-ChildItem -Path $sectionRoot -File -Filter '*.md' -Recurse |
     Where-Object { $_.Name -ne '_index.md' } |
-    ForEach-Object { $pages.Add((Parse-PageFrontMatter -Path $_.FullName -ContentRoot $rootContent)) }
+    ForEach-Object {
+      if (Test-MatchesScopedPaths -Path $_.FullName -ScopedPaths $scopedPaths) {
+        $pages.Add((Parse-PageFrontMatter -Path $_.FullName -ContentRoot $rootContent))
+      }
+    }
 }
 
 $ctaPatterns = @(
@@ -366,8 +486,9 @@ foreach ($page in $pages) {
   $issueCounts = [ordered]@{
     medium_cta = Count-Matches -Text $body -Patterns $ctaPatterns
     author_note = Count-Matches -Text $body -Patterns @('(?im)^\s{0,3}(?:#+\s*)?(?:author''?s note|note from the author)\b')
-    embed_remnants = Count-Matches -Text $body -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','raw HTML omitted')
+    embed_remnants = Count-Matches -Text $body -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','raw HTML omitted','(?im)^\s*\[Embedded media:','<figure\b','<img\b')
     mojibake = Count-Matches -Text $body -Patterns $mojibakePatterns
+    caption_residue = Get-CaptionResidueCount -Body $body
     manual_bullets = Count-Matches -Text $body -Patterns @('(?m)^\s*(?:\u2022|\u00E2\u20AC\u00A2)\s+')
     fake_lists = Count-Matches -Text $body -Patterns @('(?m)^\s*-\s+[A-Z][^\n]{0,90}$','(?m)^\s*\d+\)\s+')
     pseudo_headings = Get-PseudoHeadingCount -Body $body
@@ -426,6 +547,7 @@ foreach ($page in $pages) {
     (3 * [Math]::Min(1, $issueCounts.author_note)) +
     (4 * [Math]::Min(1, $issueCounts.embed_remnants)) +
     (5 * [Math]::Min(1, $issueCounts.mojibake)) +
+    (3 * [Math]::Min(1, $issueCounts.caption_residue)) +
     (3 * [Math]::Min(1, ($issueCounts.manual_bullets + $issueCounts.fake_lists))) +
     (3 * [Math]::Min(1, $issueCounts.pseudo_headings)) +
     (2 * [Math]::Min(1, $issueCounts.source_dumps)) +
@@ -443,7 +565,7 @@ foreach ($page in $pages) {
     'batch_3'
   }
 
-  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','ornamental_breaks')
+  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','caption_residue','ornamental_breaks')
   $assistedReviewIssues = @('medium_cta','escaped_linebreaks') + $safeAutoIssues
   $manualLightIssues = @('author_note','manual_bullets','fake_lists','pseudo_headings','source_dumps') + $assistedReviewIssues
   $highSensitivity = $page.Featured -or
@@ -488,7 +610,9 @@ foreach ($page in $pages) {
     slug = $page.Slug
     section = $page.Section
     date = $page.Date
+    draft = [bool]$page.Draft
     imported = [bool]($page.MediumSourceUrl -or $page.SourceUrl)
+    has_description = [bool](-not [string]::IsNullOrWhiteSpace($page.Description))
     featured = [bool]$page.Featured
     start_here_direct = [bool]($startHereEssaySlugs -contains $page.Slug)
     collection_start_here = [bool]($collectionStartHere.Count -gt 0)
@@ -498,6 +622,7 @@ foreach ($page in $pages) {
     has_author_note = [bool]($issueCounts.author_note -gt 0)
     has_embed_remnants = [bool]($issueCounts.embed_remnants -gt 0)
     has_encoding_damage = [bool]($issueCounts.mojibake -gt 0)
+    has_caption_residue = [bool]($issueCounts.caption_residue -gt 0)
     has_manual_bullets = [bool](($issueCounts.manual_bullets + $issueCounts.fake_lists) -gt 0)
     has_pseudo_headings = [bool]($issueCounts.pseudo_headings -gt 0)
     has_source_dump = [bool]($issueCounts.source_dumps -gt 0)
@@ -507,6 +632,7 @@ foreach ($page in $pages) {
     author_note_count = $issueCounts.author_note
     embed_remnant_count = $issueCounts.embed_remnants
     encoding_damage_count = $issueCounts.mojibake
+    caption_residue_count = $issueCounts.caption_residue
     manual_bullet_count = ($issueCounts.manual_bullets + $issueCounts.fake_lists)
     pseudo_heading_count = $issueCounts.pseudo_headings
     source_dump_count = $issueCounts.source_dumps
@@ -561,6 +687,9 @@ $report = [pscustomobject]@{
     batch_2 = @($affected | Where-Object { $_.batch -eq 'batch_2' }).Count
     batch_3 = @($affected | Where-Object { $_.batch -eq 'batch_3' }).Count
   }
+  front_matter = [pscustomobject]@{
+    missing_description = @($rowsArray | Where-Object { -not $_.has_description }).Count
+  }
   issue_categories = $issueSummaryRows
   risk_tiers = $riskTierSummaryRows
   status_counts = $statusSummaryRows
@@ -581,7 +710,7 @@ $csvPath = "$ReportBasePath.csv"
 $mdPath = "$ReportBasePath.md"
 Write-TextNoBom $jsonPath ($report | ConvertTo-Json -Depth 8)
 $rowsArray |
-  Select-Object path,title,section,date,imported,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_author_note,has_embed_remnants,has_encoding_damage,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue |
+  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue |
   Export-Csv -Path $csvPath -NoTypeInformation -Encoding utf8
 
 $issueSort = @(
@@ -610,6 +739,10 @@ $lines.Add('')
 foreach ($item in ($issueSummaryRows | Sort-Object -Property $issueSort)) {
   $lines.Add("- $($item.issue_type): $($item.affected_files)")
 }
+$lines.Add('')
+$lines.Add('## Front Matter Gaps')
+$lines.Add('')
+$lines.Add("- missing_description: $($report.front_matter.missing_description)")
 $lines.Add('')
 $lines.Add('## Risk Tiers')
 $lines.Add('')

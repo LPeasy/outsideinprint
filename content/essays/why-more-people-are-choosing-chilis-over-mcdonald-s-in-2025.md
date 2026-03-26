@@ -12,12 +12,7 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025-55ca02bd03b7"
 ---
 
-<figure id="93af" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg"
-class="graf-image" data-image-id="1*kH7UWZEuYQr3_KgTL6EIdA@2x.jpeg"
-data-width="1536" data-height="1024" />
-</figure>
+![](/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg)
 
 > McDonald’s vs Chili’s \| Source: User with ChatGPT
 
@@ -52,13 +47,9 @@ now, no deal.**
 
 #### Chili’s Comeback: The Casual Dining Option Beating Fast Food
 
-<figure id="4208" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/faeba248f5c4b477b0279bce3e50a3e56ca29c1c3505b077b7c671397ec43d73.jpeg"
-class="graf-image" data-image-id="1*R6HszRlUrig3LPQKwFnnbA@2x.jpeg"
-data-width="3240" data-height="3240" />
-<figcaption>Photo by [Mockup Graphics](https://mockup.graphics) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)</figcaption>
-</figure>
+![](/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/faeba248f5c4b477b0279bce3e50a3e56ca29c1c3505b077b7c671397ec43d73.jpeg)
+
+Photo by Mockup Graphics on Unsplash
 
 > For years, casual dining chains like Chili’s have felt like they’re
 > just not worth it.
@@ -91,12 +82,7 @@ and a drink costs the same, it flips the equation.
 
 #### Chili’s “3 for Me” Deal Is Beating Fast Food on Value and Convenience
 
-<figure id="4663" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/49a824aaa757837624628865eb8e1e54243ca6307c0564676841840f49487725.jpeg"
-class="graf-image" data-image-id="1*WfpApZpDOE0JpNcYUDMwRA@2x.jpeg"
-data-width="1280" data-height="720" />
-</figure>
+![](/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/49a824aaa757837624628865eb8e1e54243ca6307c0564676841840f49487725.jpeg)
 
 > 3 for Me Advertisement \| Source: Chili’s
 
@@ -107,11 +93,11 @@ data-width="1280" data-height="720" />
 The secret weapon is the “3 for Me” menu. It’s not flashy ~ but it
 delivers:
 
-- <span id="2e4b">One drink</span>
-- <span id="ea5e">One appetizer (like soup, salad, or fries)</span>
-- <span id="1e09">One entrée (like a cheeseburger, chicken tenders, or a
-  salad)</span>
-- <span id="f290">A big bag of chips and a cup of salsa</span>
+- One drink
+- One appetizer (like soup, salad, or fries)
+- One entrée (like a cheeseburger, chicken tenders, or a
+  salad)
+- A big bag of chips and a cup of salsa
 
 > ***All for \$10.99 to \$13.99, depending on what you pick.***
 
@@ -127,9 +113,9 @@ meal, packaged up, ready to roll.
 
 **Big Mac Combo ~ \$13.00**
 
-- <span id="a7f4">Big Mac</span>
-- <span id="ad53">Medium fries</span>
-- <span id="6ede">Soft drink</span>
+- Big Mac
+- Medium fries
+- Soft drink
 
 > (In a paper bag, no refills, no service)
 
@@ -144,12 +130,7 @@ meal.**
 
 #### How Chili’s Is Winning the Fast Food vs. Sit-Down Battle
 
-<figure id="5727" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg"
-class="graf-image" data-image-id="1*BV64tblUzul8EOoWmGqJBg@2x.jpeg"
-data-width="1536" data-height="1024" />
-</figure>
+![](/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg)
 
 > McDonald’s vs Chili’s \| Source: User with ChatGPT
 
@@ -174,13 +155,9 @@ don’t feel ripped off.
 
 #### What Chili’s Resurgence Reveals About Changing Spending Habits
 
-<figure id="4c1a" class="graf graf--figure graf-after--h4">
-<img
-src="/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/e6f02b7dea2c25bb1d1cd6f81822282ce09eb2a4dc70e1b20f53fd5f96ad4de3.jpeg"
-class="graf-image" data-image-id="1*3fjG5KnfV_GYzl0AL_eJHA@2x.jpeg"
-data-width="3240" data-height="4050" />
-<figcaption>Photo by [Pickled Stardust](https://coso.me/jjjordan) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)</figcaption>
-</figure>
+![](/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/e6f02b7dea2c25bb1d1cd6f81822282ce09eb2a4dc70e1b20f53fd5f96ad4de3.jpeg)
+
+Photo by Pickled Stardust on Unsplash
 
 > This is bigger than one chain.
 

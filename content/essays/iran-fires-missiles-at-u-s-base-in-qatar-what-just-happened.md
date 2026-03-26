@@ -12,10 +12,9 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened-a3ed00113ff0"
 ---
 
-
 ![](https://cdn-images-1.medium.com/max/800/1*au1vRXxA-I7QS2jfJW_O0w.png)
 
-*Source: [NYT](https://www.nytimes.com/live/2025/06/23/world/iran-trump-israel-news#udeid-qatar-base)*
+Source: [NYT](https://www.nytimes.com/live/2025/06/23/world/iran-trump-israel-news#udeid-qatar-base)
 
 ### Rising tensions between Iran and the U.S.
 

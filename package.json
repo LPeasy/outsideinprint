@@ -7,7 +7,9 @@
     "npm": "10.x"
   },
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "audit:essays": "pwsh -File ./scripts/audit_legacy_essays.ps1",
+    "check:essays": "pwsh -File ./scripts/check_essay_guardrails.ps1"
   },
   "devDependencies": {
     "playwright": "1.53.1"

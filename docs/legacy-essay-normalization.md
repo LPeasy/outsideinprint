@@ -24,11 +24,17 @@ This generates:
 .\.tools\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md
 ```
 
-The normalizer is intentionally conservative. It is safe for repeated use on Medium-style imports that still contain wrapper HTML, duplicated title blocks, obvious mojibake, and stripped link-card remnants.
+The normalizer is intentionally conservative. It is safe for repeated use on Medium-style imports that still contain wrapper HTML, duplicated lead metadata, obvious mojibake, stripped link-card remnants, `[Embedded media: ...]` placeholders, and loose image/source caption lines that should be expressed in the article-body patterns already supported by Hugo.
 
 4. Finish each piece with a manual editorial pass for anything the script cannot infer safely.
 
 5. Re-run the audit after cleanup so the queue reflects the new state.
+
+6. Run the essay guardrails on the cleaned files before publishing changes.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\some-piece.md
+```
 
 ## Priority Signals
 
@@ -64,6 +70,7 @@ Use these rules in order.
 
 - Preserve images.
 - Convert broken figure wrappers or stripped card embeds into plain markdown images and short captions when possible.
+- Normalize italic caption lines after imported markdown images into either `Source:` paragraphs or blockquote captions so the article-body partial can render them consistently.
 - Prefer concise captions, `Source:` lines, or short read-more bullets over scraped card remnants.
 - Treat long source dumps as aftermatter and give them a heading when the piece clearly transitions into references.
 
@@ -98,3 +105,9 @@ Use small batches. A good batch is 3 to 6 essays that share similar import damag
 - clean one ranked batch
 - re-run audit
 - move anything ambiguous into the manual-review queue
+
+## Regression Check
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tests\test_legacy_essay_normalization.ps1
+```

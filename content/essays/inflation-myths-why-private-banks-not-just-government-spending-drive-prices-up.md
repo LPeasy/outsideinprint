@@ -45,7 +45,7 @@ Along the way, we explore how supply chain breakdowns and financial deregulation
 
 The goal?To move beyond simplistic explanations and uncover what’s really driving inflation — because when politicians and pundits reduce it to just government spending, they’re leaving out half the story.
 
-How Money Supply Grows
+### How Money Supply Grows
 
 ![](https://cdn-images-1.medium.com/max/800/1*qbJSlEkF3WDmOTHn3z3aoA@2x.jpeg)
 
@@ -67,7 +67,7 @@ When banks issue loans, they expand the money supply beyond what exists in reser
 
 Both mechanisms cause inflation if the money supply grows faster than the real economy’s productive capacity.However, the relative impact of these forces varies across different time periods.
 
-The Inflation Crisis of 1965 — 1985
+### The Inflation Crisis of 1965 — 1985
 
 ![](https://cdn-images-1.medium.com/max/800/1*1DPFXwlRZcRh-KFEaZ5Vkw@2x.jpeg)
 
@@ -87,7 +87,7 @@ It wasn’t until Paul Volcker’s aggressive rate hikes in the early 1980s that
 
 While government deficits grew significantly during this period, private credit creation played an equally critical role in amplifying inflation.Fast forward a few decades, and a new kind of inflationary crisis loomed — only this time, the private sector took center stage.
 
-The 2008 Financial Crisis and Private Debt Collapse
+### The 2008 Financial Crisis and Private Debt Collapse
 
 ![](https://cdn-images-1.medium.com/max/800/1*3AYLqwvlzKonbwb5BvSbKg@2x.jpeg)
 
@@ -131,7 +131,7 @@ Meanwhile, global supply chain disruptions further constrained supply, intensify
 
 The inflation spike of 2020 — 2023 was driven by both government stimulus and private credit expansion, making it one of the rare periods where both forces contributed significantly to money supply growth.
 
-The Federal Reserve’s Role in Private Debt Creation
+### The Federal Reserve’s Role in Private Debt Creation
 
 ![](https://cdn-images-1.medium.com/max/800/1*ZaOVJ3pZadqQXOuUnYh6Tg@2x.jpeg)
 
@@ -153,7 +153,7 @@ During periods of inflation, the Fed typically raises interest rates to curb exc
 - Conversely, the near-zero interest rates following the 2008 crisis and during the COVID-19 pandemic contributed to private credit expansion, fueling economic activity but also raising inflation risks.
 The Federal Reserve’s interest rate decisions have a direct impact on private debt creation, influencing whether inflationary pressures intensify or subside.
 
-Supply Chain Shocks and Post-COVID Inflation
+### Supply Chain Shocks and Post-COVID Inflation
 
 ![](https://cdn-images-1.medium.com/max/800/1*VuCwaC-Dntoq7cDDWZ_DWw@2x.jpeg)
 
@@ -173,7 +173,7 @@ Inflation post-2020 was not just a monetary phenomenon — it was also a fun
 
 Supply shortages set the stage — but some corporations didn’t just adjust prices, they exploited the moment, padding their profits while consumers suffered.
 
-Greedflation and Corporate Pricing Power
+### Greedflation and Corporate Pricing Power
 
 ![](https://cdn-images-1.medium.com/max/800/1*-IRyS92gsciDUihbbYY04g@2x.jpeg)
 
@@ -185,7 +185,7 @@ Many industries, particularly those dominated by a few large firms, saw profit m
 
 Companies used inflation fears to increase prices beyond their actual cost increases.Federal Reserve data suggests that corporate profits as a share of GDP surged in 2021, signaling that some firms used inflation as cover for price hikes unrelated to supply shortages.
 
-Conclusion: Rethinking Inflation Narratives
+### Conclusion: Rethinking Inflation Narratives
 
 ![](https://cdn-images-1.medium.com/max/800/1*KSLbYqDv2_ZhreXEZpPd2w@2x.jpeg)
 
@@ -205,7 +205,7 @@ Inflation isn’t just about government spending — it’s a system where p
 
 A misleading half-truth.The real story is more complex — and the sooner we understand it, the sooner we can demand better solutions.
 
-About the Author
+### About the Author
 
 Lawton is an economist who writes about markets, policy, and the forces shaping American life. His essays blend historical insight with data-driven analysis, covering everything from trade wars and inflation to labor markets and financial bubbles.
 
@@ -223,5 +223,4 @@ Supply- and Demand-Driven PCE Inflation updates data on the contributions to per
 CBO regularly publishes data to accompany some of its key reports. These data have been published in the Budget and…www.cbo.govFederal Funds Effective Rate
 View data of the Effective Federal Funds Rate, or the interest rate depository institutions charge each other for…fred.stlouisfed.orgEconomic Research Data
 The Federal Reserve Board of Governors in Washington DC.www.federalreserve.gov
-
 

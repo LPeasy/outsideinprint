@@ -14,7 +14,7 @@ medium_source_url: "https://medium.com/@lawtonperret/8-big-questions-everyone-ha
 
 ![](https://cdn-images-1.medium.com/max/800/1*3ivMVbPE4itqtOHJ6VlYUA.jpeg)
 
-*[Official Portrait of Pope Leo XIV | Source: Vatican](https://www.vatican.va/content/dam/vatican/leone-xiv/Foto-Ufficiale-Papa-Leone-XIV_Copyright-VATICAN-MEDIA.jpg)*
+> [Official Portrait of Pope Leo XIV | Source: Vatican](https://www.vatican.va/content/dam/vatican/leone-xiv/Foto-Ufficiale-Papa-Leone-XIV_Copyright-VATICAN-MEDIA.jpg)
 
 > New to the story?
 

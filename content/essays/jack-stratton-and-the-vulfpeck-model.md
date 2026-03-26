@@ -221,9 +221,7 @@ playful experimentation**, with **“*Tender Defender*”** highlighting
 **Theo Katzman’s** *impassioned vocals* and **“New Beastly”** delivering
 *a modern twist on a timeless sound.*
 
-<figure id="c611" class="graf graf--figure graf--iframe graf-after--p">
-[Embedded media: [https://www.youtube.com/embed/8bLinctYcno?feature=oembed](https://www.youtube.com/embed/8bLinctYcno?feature=oembed)]
-</figure>
+- [Embedded media](https://www.youtube.com/embed/8bLinctYcno?feature=oembed)
 
 > Accompanying the album is a concert film directed and edited by
 > *Carter Knopik*, offering fans **an immersive experience of the live
