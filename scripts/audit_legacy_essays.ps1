@@ -65,10 +65,10 @@ function Convert-Scalar {
 
 function Get-RelativePath {
   param([string]$BasePath,[string]$TargetPath)
-  $baseResolved = (Resolve-Path $BasePath).Path.TrimEnd('\')
+  $baseResolved = (Resolve-Path $BasePath).Path.TrimEnd('\', '/')
   $targetResolved = (Resolve-Path $TargetPath).Path
   if ($targetResolved.StartsWith($baseResolved, [System.StringComparison]::OrdinalIgnoreCase)) {
-    return $targetResolved.Substring($baseResolved.Length).TrimStart('\').Replace('\','/')
+    return $targetResolved.Substring($baseResolved.Length).TrimStart('\', '/').Replace('\','/')
   }
   return $targetResolved.Replace('\','/')
 }
