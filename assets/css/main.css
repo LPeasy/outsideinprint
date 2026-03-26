@@ -184,22 +184,11 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
     gap:0;
   }
   .grid{ grid-template-columns:1fr; }
-  .card-center{
-    grid-column:auto;
-    max-width:none;
-    justify-self:stretch;
-  }
 }
 .card{
   padding:14px 14px 12px;
   border:1px solid var(--hair);
   border-radius:10px;
-}
-.card-center{
-  grid-column:1 / -1;
-  width:100%;
-  max-width:calc((100% - 18px) / 2);
-  justify-self:center;
 }
 .card .k{
   font-family:var(--sans);
@@ -209,8 +198,10 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
   color:var(--muted);
 }
 .card .v{
-  margin-top:6px;
   font-size:16px;
+}
+.card .k + .v{
+  margin-top:6px;
 }
 
 .library-search{

@@ -18,6 +18,16 @@ test("homepage no longer promotes the retired books section", () => {
   assert.doesNotMatch(homepage, />Books</);
 });
 
+test("homepage cards keep only the main titles and use the shared grid flow", () => {
+  assert.doesNotMatch(homepage, /<div class="k">(Start|Section|Index|Explore)<\/div>/);
+  assert.doesNotMatch(homepage, /card-center/);
+  assert.match(homepage, /<a class="card" href="\{\{ "random\/" \| absURL \}\}"/);
+  assert.match(css, /\.grid\{\s*display:grid;\s*grid-template-columns:1fr 1fr;/);
+  assert.doesNotMatch(css, /\.card-center\{/);
+  assert.match(css, /\.card \.v\{\s*font-size:16px;\s*\}/);
+  assert.match(css, /\.card \.k \+ \.v\{\s*margin-top:6px;\s*\}/);
+});
+
 test("sticky editorial chrome pins only the compact section rail", () => {
   assert.match(css, /#main-content\{\s*scroll-margin-top:56px;\s*\}/);
   assert.match(css, /\.masthead--sticky \.nav--section-rail\{\s*position:sticky;\s*top:0;/);
