@@ -9,7 +9,7 @@ section_label: "A Map of the Imprint"
 
 {{< rawhtml >}}
 <section class="start-here-section start-here-intro">
-  <p>Outside In Print is a digital imprint for essays, investigations, stories, and literature.</p>
+  <p>Outside In Print is a digital imprint for essays, investigations, stories, and working papers.</p>
   <p>The site is built around a simple idea: writing should be publishable, citable, and worth reading. Each piece lives at a stable address on the web with a clear publication record.</p>
 </section>
 {{< /rawhtml >}}
@@ -25,11 +25,7 @@ section_label: "A Map of the Imprint"
       <dd>Shorter pieces on economics, risk, culture, and public life.</dd>
     </div>
     <div class="start-here-map-row">
-      <dt><a href="../literature/">Books</a></dt>
-      <dd>Longform projects, investigations, and larger works in progress.</dd>
-    </div>
-    <div class="start-here-map-row">
-      <dt><a href="../syd-and-oliver/">Syd and Oliver</a></dt>
+      <dt><a href="../syd-and-oliver/">S and O</a></dt>
       <dd>Fiction and dialogue from a recurring narrative world.</dd>
     </div>
     <div class="start-here-map-row">
@@ -60,8 +56,8 @@ section_label: "A Map of the Imprint"
     <article class="start-here-feature">
       <p class="start-here-feature-kicker">Narrative opening</p>
       <h3><a href="../syd-and-oliver/the-shape-of-sacrifice/">The Shape of Sacrifice</a></h3>
-      <p>A first passage into the Syd and Oliver world: intimate, atmospheric, and attentive to the moral pressure carried by conversation.</p>
-      <p class="start-here-meta">Syd and Oliver | 5 min read | Fiction</p>
+      <p>A first passage into the S and O world: intimate, atmospheric, and attentive to the moral pressure carried by conversation.</p>
+      <p class="start-here-meta">S and O | 5 min read | Fiction</p>
     </article>
     <article class="start-here-feature">
       <p class="start-here-feature-kicker">Reported study</p>

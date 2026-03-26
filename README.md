@@ -1,6 +1,6 @@
 # Outside In Print
 
-A minimalist Hugo site for publishing essays, literature, dialogues, and working papers as durable web publications.
+A minimalist Hugo site for publishing essays, fiction, dialogues, and working papers as durable web publications.
 
 ## Publishing policy
 

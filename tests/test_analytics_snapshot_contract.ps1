@@ -15,9 +15,9 @@ function Normalize-SectionLabel {
 
   switch -Regex ($text.Trim().ToLowerInvariant()) {
     '^essay(s)?$' { return "Essays" }
-    '^book(s)?$' { return "Books" }
     '^working[\s-]?paper(s)?$' { return "Working Papers" }
-    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "Syd and Oliver" }
+    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "S and O" }
+    '^s(?:\s+and\s+|\s*&\s*)o$' { return "S and O" }
     '^collection(s)?$' { return "Collections" }
     default { return $text.Trim() }
   }

@@ -21,7 +21,7 @@ $Sections = @(
   "journey_by_essay",
   "sources_timeseries"
 )
-$EssayPathPattern = "^/(essays|literature|syd-and-oliver|working-papers)/[^/]+/?$"
+$EssayPathPattern = "^/(essays|syd-and-oliver|working-papers)/[^/]+/?$"
 $AllTimeLabel = "All time"
 $GoatCounterExportNames = @("goatcounter-export.csv", "export.csv")
 $DashboardSparklineDays = 14
@@ -168,9 +168,9 @@ function Normalize-SectionLabel {
 
   switch -Regex ($text.Trim().ToLowerInvariant()) {
     '^essay(s)?$' { return "Essays" }
-    '^book(s)?$' { return "Books" }
     '^working[\s-]?paper(s)?$' { return "Working Papers" }
-    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "Syd and Oliver" }
+    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "S and O" }
+    '^s(?:\s+and\s+|\s*&\s*)o$' { return "S and O" }
     '^collection(s)?$' { return "Collections" }
     default { return $text.Trim() }
   }
@@ -296,8 +296,7 @@ function Get-SectionLabelFromPath {
 
   switch -Regex (Normalize-Path -Path $Path) {
     "^/essays/" { return "Essays" }
-    "^/literature/" { return "Books" }
-    "^/syd-and-oliver/" { return "Syd and Oliver" }
+    "^/syd-and-oliver/" { return "S and O" }
     "^/working-papers/" { return "Working Papers" }
     "^/collections/" { return "Collections" }
     default { return "" }

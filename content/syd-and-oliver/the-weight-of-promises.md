@@ -2,7 +2,7 @@
 title: 'The Weight of Promises'
 date: 2026-02-13T17:00:54Z
 draft: false
-section_label: 'Syd and Oliver'
+section_label: 'S and O'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-weight-of-promises.pdf'

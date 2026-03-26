@@ -2,7 +2,7 @@
 title: 'Willful Ignorance'
 date: 2026-02-21T02:39:53Z
 draft: false
-section_label: 'Syd and Oliver'
+section_label: 'S and O'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/willful-ignorance.pdf'

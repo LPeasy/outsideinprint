@@ -1,7 +1,7 @@
 param(
   [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
   [string]$ReportBasePath,
-  [string[]]$Sections = @('essays','literature','syd-and-oliver','working-papers'),
+  [string[]]$Sections = @('essays','syd-and-oliver','working-papers'),
   [string[]]$Paths = @()
 )
 

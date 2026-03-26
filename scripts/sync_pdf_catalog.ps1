@@ -7,7 +7,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
+$AllowedSections = @("essays", "reports", "syd-and-oliver", "working-papers")
 
 function Read-Utf8Text {
   param([string]$Path)

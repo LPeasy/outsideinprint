@@ -47,14 +47,11 @@ function normalizeSectionLabel(value, fallback = "Unlabeled") {
   if (normalized === "essay" || normalized === "essays") {
     return "Essays";
   }
-  if (normalized === "book" || normalized === "books") {
-    return "Books";
-  }
   if (normalized === "working paper" || normalized === "working papers" || normalized === "working-paper" || normalized === "working-papers") {
     return "Working Papers";
   }
-  if (normalized === "syd and oliver" || normalized === "syd & oliver") {
-    return "Syd and Oliver";
+  if (normalized === "syd and oliver" || normalized === "syd & oliver" || normalized === "s and o" || normalized === "s & o") {
+    return "S and O";
   }
   if (normalized === "collection" || normalized === "collections") {
     return "Collections";

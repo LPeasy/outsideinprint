@@ -2,7 +2,7 @@
 title: 'The Sound Of Authority'
 date: 2026-02-16T00:38:23Z
 draft: false
-section_label: 'Syd and Oliver'
+section_label: 'S and O'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-sound-of-authorit.pdf'

@@ -44,7 +44,6 @@ test("archetypes and public templates no longer depend on pdf front matter", () 
   for (const relativePath of [
     "archetypes/default.md",
     "archetypes/essays.md",
-    "archetypes/literature.md",
     "archetypes/reports.md",
     "archetypes/working-papers.md"
   ]) {

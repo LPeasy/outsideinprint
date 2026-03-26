@@ -11,7 +11,7 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Outside In Print ~ Verify PDF Pipeline" -ForegroundColor Cyan
 
-$AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
+$AllowedSections = @("essays", "reports", "syd-and-oliver", "working-papers")
 $HtmlSiteDir = Join-Path $BuildMetaRoot "__html_site"
 $failures = New-Object System.Collections.Generic.List[object]
 $summary = [ordered]@{

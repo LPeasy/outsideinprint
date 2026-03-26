@@ -9,7 +9,6 @@ This policy defines the current editorial and technical standards for publishing
 Applies to all non-draft content in:
 
 - `content/essays/`
-- `content/literature/`
 - `content/reports/`
 - `content/working-papers/`
 

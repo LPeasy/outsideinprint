@@ -194,6 +194,7 @@ $semanticIssues = New-Object System.Collections.Generic.List[string]
 $importedMediaIssues = New-Object System.Collections.Generic.List[string]
 $metadataIssues = New-Object System.Collections.Generic.List[string]
 $uxIssues = New-Object System.Collections.Generic.List[string]
+$retiredRouteIssues = New-Object System.Collections.Generic.List[string]
 $hasHomepageAnalytics = $false
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
@@ -207,7 +208,6 @@ $requiredSemanticPages = [ordered]@{
 }
 
 $optionalDefaultListPages = @(
-  'public/literature/index.html',
   'public/syd-and-oliver/index.html',
   'public/working-papers/index.html'
 )
@@ -220,7 +220,7 @@ $requiredImportedMediaPages = @(
 $requiredMetadataPages = [ordered]@{
   'public/index.html' = @{
     Title = 'Outside In Print'
-    Description = 'Outside In Print is a digital imprint for essays, literature, dialogues, and working papers published for the web with stable URLs and versioned records.'
+    Description = 'Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records.'
     Canonical = 'https://outsideinprint.org/'
   }
   'public/start-here/index.html' = @{
@@ -325,6 +325,10 @@ foreach ($file in $htmlFiles) {
     ($content -match 'edition-download')
   ) {
     $publicPdfAffordanceHits.Add($relativePath)
+  }
+
+  if ($content -match '(?:https://outsideinprint\.org)?/literature/') {
+    $retiredRouteIssues.Add("$relativePath => literature route leaked into generated HTML")
   }
 }
 
@@ -466,6 +470,17 @@ $requiredUxChecks = @(
     Message = 'expected the homepage to expose browse-next links for essays, collections, and the library'
   },
   @{
+    Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*S and O\s*<'
+    Message = 'expected the homepage masthead to expose the S and O label'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/literature/'
+    Message = 'expected the homepage masthead not to expose the retired literature section'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/essays/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected the default list template to expose collection and library next steps'
@@ -529,6 +544,17 @@ $requiredUxChecks = @(
     Path = 'public/essays/the-risk-management-buffet/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected article chrome to expose section, collections, and library next steps near the top of the page'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*S and O\s*<'
+    Message = 'expected article pages to keep the compact S and O masthead link visible'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/literature/'
+    Message = 'expected article mastheads not to expose the retired literature section'
+    ShouldNotMatch = $true
   }
 )
 
@@ -587,6 +613,11 @@ if (-not $hasHomepageAnalytics) {
 if ($publicPdfAffordanceHits.Count -gt 0) {
   throw ("Found public HTML that still exposes PDF affordances. Samples: {0}" -f (Format-SampleList -Items $publicPdfAffordanceHits))
 }
+
+if ($retiredRouteIssues.Count -gt 0) {
+  throw ("Found retired literature routes in generated HTML. Samples: {0}" -f (Format-SampleList -Items $retiredRouteIssues))
+}
+
 if ($semanticIssues.Count -gt 0) {
   throw ("Found semantic accessibility regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $semanticIssues))
 }

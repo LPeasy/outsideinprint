@@ -10,7 +10,7 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Outside In Print ~ Preflight" -ForegroundColor Cyan
 
-$AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
+$AllowedSections = @("essays", "reports", "syd-and-oliver", "working-papers")
 $RequiredFields = @("title", "date", "section_label", "version", "edition", "pdf", "draft")
 $RawHtmlScoreThreshold = 14
 $fail = $false

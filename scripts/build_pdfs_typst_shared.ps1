@@ -16,7 +16,7 @@ Write-Host "Outside In Print ~ $Mode Hybrid PDF Builder" -ForegroundColor Cyan
 $HtmlSiteDir = Join-Path $TempDir "__html_site"
 $HtmlManifestPath = Join-Path $TempDir "__html_pdf_jobs.json"
 $HtmlResultsPath = Join-Path $TempDir "__html_pdf_results.json"
-$AllowedSections = @("essays", "literature", "reports", "syd-and-oliver", "working-papers")
+$AllowedSections = @("essays", "reports", "syd-and-oliver", "working-papers")
 $EditionTemplatePath = "./templates/edition.typ"
 $CatalogSyncScript = "./scripts/sync_pdf_catalog.ps1"
 $RepoRoot = (Resolve-Path ".").Path

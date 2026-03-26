@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ $librarySections := slice "essays" "literature" "syd-and-oliver" "working-papers" }}
+  {{ $librarySections := slice "essays" "syd-and-oliver" "working-papers" }}
   {{ $libraryPages := where site.RegularPages "Section" "in" $librarySections }}
   {{ $urls := slice }}
   {{ range $libraryPages }}

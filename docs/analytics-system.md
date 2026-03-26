@@ -92,7 +92,6 @@ That metadata is parsed later during normalization.
 Read tracking is limited to:
 
 - essays
-- literature
 - syd-and-oliver
 - working-papers
 
