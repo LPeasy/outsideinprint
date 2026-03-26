@@ -184,6 +184,42 @@ function Stop-StaticSiteServer {
   }
 }
 
+function Assert-DashboardActiveCategory {
+  param(
+    [string]$Dom,
+    [string]$ExpectedCategory,
+    [string]$ExpectedTitle,
+    [string]$Scenario
+  )
+
+  $categoryPattern = 'data-dashboard-category=(?:"' + [regex]::Escape($ExpectedCategory) + '"|' + [regex]::Escape($ExpectedCategory) + ')'
+  if ($Dom -notmatch $categoryPattern) {
+    throw "Hydrated dashboard DOM did not set the active category to '$ExpectedCategory' for $Scenario."
+  }
+
+  $titlePattern = '(?s)data-dashboard-active-title[^>]*>\s*' + [regex]::Escape($ExpectedTitle) + '<'
+  if ($Dom -notmatch $titlePattern) {
+    throw "Hydrated dashboard DOM did not show the active category title '$ExpectedTitle' for $Scenario."
+  }
+}
+
+function Normalize-DashboardSectionLabel {
+  param([string]$Value)
+
+  $text = [string]$Value
+  if ([string]::IsNullOrWhiteSpace($text)) {
+    return ""
+  }
+
+  switch -Regex ($text.Trim().ToLowerInvariant()) {
+    '^(essay|essays)$' { return "Essays" }
+    '^(working paper|working papers|working-paper|working-papers)$' { return "Working Papers" }
+    '^(syd and oliver|syd & oliver|s and o|s & o)$' { return "S and O" }
+    '^(collection|collections)$' { return "Collections" }
+    default { return $text }
+  }
+}
+
 if (-not (Test-Path $SiteDir)) {
   throw "Built dashboard site directory was not found: $SiteDir"
 }
@@ -208,6 +244,7 @@ if ($selectedEssayRow.Count -eq 0) {
   $selectedEssayRow = @($essayRows | Select-Object -First 1)
 }
 $selectedEssay = if ($selectedEssayRow.Count -gt 0) { [string]$selectedEssayRow[0].path } else { "" }
+$expectedSelectedSection = Normalize-DashboardSectionLabel -Value $selectedSection
 
 if (Test-Path $OutputDir) {
   Remove-Item -Recurse -Force $OutputDir
@@ -234,54 +271,52 @@ try {
   }
   $sourcesUrl = $baseUrl + "#sources"
 
-  $dom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-dom") -TargetUrl $drilldownUrl -WindowSize "1440,2200" -DumpDom
-  $dom | Set-Content -Path (Join-Path $OutputDir "dashboard-dom.html")
+  $overviewDom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-overview-dom") -TargetUrl $baseUrl -WindowSize "1440,2200" -DumpDom
+  $overviewDom | Set-Content -Path (Join-Path $OutputDir "dashboard-overview-dom.html")
+  $drilldownDom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-dom") -TargetUrl $drilldownUrl -WindowSize "1440,2200" -DumpDom
+  $drilldownDom | Set-Content -Path (Join-Path $OutputDir "dashboard-dom.html")
   $sourcesDom = Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-sources-dom") -TargetUrl $sourcesUrl -WindowSize "1440,2200" -DumpDom
   $sourcesDom | Set-Content -Path (Join-Path $OutputDir "dashboard-sources-dom.html")
 
   Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-desktop") -TargetUrl $baseUrl -WindowSize "1440,2200" -ShotPath (Join-Path $screensDir "desktop.png") | Out-Null
   Invoke-BrowserCapture -BrowserPath $browserPath -UserDataDir (Join-Path $ProfileRoot "profile-mobile") -TargetUrl $baseUrl -WindowSize "390,1200" -ShotPath (Join-Path $screensDir "mobile.png") | Out-Null
 
-  if ($dom -notmatch 'data-dashboard-shell') {
+  if ($overviewDom -notmatch 'data-dashboard-shell') {
     throw "Hydrated dashboard DOM is missing data-dashboard-shell."
   }
 
-  if ($dom -notmatch 'data-dashboard-category-link="overview"') {
+  if ($overviewDom -notmatch 'data-dashboard-category-link=(?:"overview"|overview)') {
     throw "Hydrated dashboard DOM is missing the category chooser links."
   }
 
-  if ($dom -notmatch 'data-dashboard-active-title">Overview<') {
-    throw "Hydrated dashboard DOM does not default to the overview category."
-  }
+  Assert-DashboardActiveCategory -Dom $overviewDom -ExpectedCategory "overview" -ExpectedTitle "Overview" -Scenario "the default load"
 
-  if ($dom -notmatch '(data-dashboard-category-panel="performance"[^>]*hidden|hidden[^>]*data-dashboard-category-panel="performance")') {
+  if ($overviewDom -notmatch '(data-dashboard-category-panel=(?:"performance"|performance)[^>]*hidden|hidden[^>]*data-dashboard-category-panel=(?:"performance"|performance))') {
     throw "Hydrated dashboard DOM is not hiding non-active category panels by default."
   }
 
-  if ($dom -notmatch 'dashboard-kpi__delta') {
+  if ($overviewDom -notmatch 'dashboard-kpi__delta') {
     throw "Hydrated dashboard DOM is missing KPI delta markup."
   }
 
-  if ($sourcesDom -notmatch 'data-dashboard-active-title">Traffic sources<') {
-    throw "Hydrated dashboard DOM does not switch categories when a hash deep link is used."
-  }
+  Assert-DashboardActiveCategory -Dom $sourcesDom -ExpectedCategory "sources" -ExpectedTitle "Traffic sources" -Scenario "a hash deep link"
 
-  if ($sourcesDom -notmatch 'data-dashboard-category-panel="sources"') {
+  if ($sourcesDom -notmatch 'data-dashboard-category-panel=(?:"sources"|sources)') {
     throw "Hydrated dashboard DOM is missing the traffic sources category panel."
   }
 
-  $pageviewsPattern = '(?s)dashboard-kpi__label">Pageviews</p>.*?<p class="dashboard-kpi__value">' + $expectedPageviews + '<'
-  if ($expectedPageviews -gt 0 -and $dom -notmatch $pageviewsPattern) {
+  $pageviewsPattern = '(?s)<p[^>]*dashboard-kpi__label[^>]*>\s*Pageviews</p>.*?<p[^>]*dashboard-kpi__value[^>]*>' + $expectedPageviews + '<'
+  if ($expectedPageviews -gt 0 -and $overviewDom -notmatch $pageviewsPattern) {
     throw "Hydrated dashboard DOM does not show the expected nonzero pageviews KPI ($expectedPageviews)."
   }
 
-  if ($selectedSection -and $dom -notmatch [regex]::Escape("<h3>$selectedSection</h3>")) {
+  if ($expectedSelectedSection -and $drilldownDom -notmatch [regex]::Escape("<h3>$expectedSelectedSection</h3>")) {
     throw "Hydrated dashboard DOM does not reflect the selected section drill-down state."
   }
 
   if ($selectedEssay) {
     $essayTitle = @($essays | Where-Object { $_.path -eq $selectedEssay } | Select-Object -First 1)[0].title
-    if ($essayTitle -and $dom -notmatch [regex]::Escape($essayTitle)) {
+    if ($essayTitle -and $drilldownDom -notmatch [regex]::Escape($essayTitle)) {
       throw "Hydrated dashboard DOM does not reflect the selected essay drill-down state."
     }
   }
