@@ -6,27 +6,43 @@
 
 {{- if .Params.section_label -}}
   {{- $sectionLabel = .Params.section_label -}}
-{{- else if $section -}}
-  {{- $sectionLabel = humanize $section -}}
+{{- else -}}
+  {{- if $section -}}
+    {{- $sectionLabel = humanize $section -}}
+  {{- end -}}
 {{- end -}}
 
 {{- if .IsHome -}}
   {{- $name = "home" -}}
-{{- else if and .IsPage (in (slice "essays" "syd-and-oliver" "working-papers") $section) -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsPage (in (slice "essays" "syd-and-oliver" "working-papers") $section) -}}
   {{- $name = "article" -}}
   {{- $socialType = "article" -}}
   {{- $isArticleLike = true -}}
-{{- else if and .IsPage (eq $section "collections") -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsPage (eq $section "collections") -}}
   {{- $name = "collection" -}}
-{{- else if and .IsSection (eq $section "collections") -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsSection (eq $section "collections") -}}
   {{- $name = "collection-list" -}}
-{{- else if and .IsSection (eq $section "library") -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsSection (eq $section "library") -}}
   {{- $name = "library" -}}
-{{- else if and .IsPage (eq $section "start-here") -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsPage (eq $section "start-here") -}}
   {{- $name = "start-here" -}}
-{{- else if and .IsPage (eq $section "random") -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsPage (eq $section "random") -}}
   {{- $name = "utility" -}}
-{{- else if and .IsSection $section -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsSection $section -}}
   {{- $name = "section-list" -}}
 {{- end -}}
 
