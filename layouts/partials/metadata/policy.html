@@ -1,6 +1,15 @@
 {{- $page := .page | default . -}}
 {{- $route := .route | default (partial "metadata/route.html" $page) -}}
 {{- $collection := .collection | default false -}}
+{{- if and (eq $route.name "collection") (not $collection) -}}
+  {{- $slug := "" -}}
+  {{- with $page.File -}}
+    {{- $slug = $page.Params.slug | default .BaseFileName -}}
+  {{- end -}}
+  {{- if $slug -}}
+    {{- $collection = partial "collections/lookup-definition.html" $slug -}}
+  {{- end -}}
+{{- end -}}
 
 {{- $indexable := true -}}
 {{- $inSitemap := true -}}

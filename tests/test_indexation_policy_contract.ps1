@@ -19,6 +19,7 @@ foreach ($relativePath in $requiredFiles) {
 $policyPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/policy.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "metadata/route.html"',
+  'partial "collections/lookup-definition.html"',
   'eq $route.name "utility"',
   'eq $route.name "section-list"',
   'slice "noindex" "follow"',
