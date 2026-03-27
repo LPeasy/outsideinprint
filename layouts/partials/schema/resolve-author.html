@@ -64,7 +64,8 @@
   {{- $refs = $refs | append (dict "@id" $nodeID) -}}
 {{- end -}}
 
-{{- return (dict
+{{- $result := dict
   "refs" $refs
   "nodes" $nodes
 ) -}}
+{{- return $result -}}

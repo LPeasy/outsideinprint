@@ -46,10 +46,11 @@
   {{- $name = "section-list" -}}
 {{- end -}}
 
-{{- return (dict
+{{- $result := dict
   "name" $name
   "social_type" $socialType
   "is_article_like" $isArticleLike
   "section" $section
   "section_label" $sectionLabel
 ) -}}
+{{- return $result -}}

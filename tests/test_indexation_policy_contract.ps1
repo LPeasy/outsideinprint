@@ -57,7 +57,7 @@ foreach ($requiredLine in @('User-agent: *', 'Allow: /', 'Sitemap: {{ "sitemap.x
 $sitemapTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/sitemap.xml') -Raw
 foreach ($requiredSnippet in @(
   'where site.Pages "Kind" "in" (slice "home" "page" "section")',
-  'partial "metadata/policy.html" .',
+  'partial "metadata/policy.html" (dict "page" .)',
   '$policy.in_sitemap',
   '<loc>{{ .Permalink }}</loc>'
 )) {

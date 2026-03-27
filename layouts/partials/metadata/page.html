@@ -30,7 +30,7 @@
 {{- $description := partial "metadata_description.html" . -}}
 {{- $image := partial "metadata_image.html" . -}}
 
-{{- return (dict
+{{- $result := dict
   "route" $route
   "policy" $policy
   "collection" $collection
@@ -41,3 +41,4 @@
   "canonical" .Permalink
   "robots" $policy.robots
 ) -}}
+{{- return $result -}}

@@ -60,4 +60,5 @@
   {{- end -}}
 {{- end -}}
 
-{{- return (uniq $links) -}}
+{{- $uniqueLinks := uniq $links -}}
+{{- return $uniqueLinks -}}

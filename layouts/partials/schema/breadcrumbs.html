@@ -44,8 +44,9 @@
   ) -}}
 {{- end -}}
 
-{{- return (dict
+{{- $node := dict
   "@id" (printf "%s#breadcrumb" $meta.canonical)
   "@type" "BreadcrumbList"
   "itemListElement" $listItems
 ) -}}
+{{- return $node -}}

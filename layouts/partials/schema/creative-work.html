@@ -54,7 +54,8 @@
   {{- $node = merge $node (dict "author" $authorRefs) -}}
 {{- end -}}
 
-{{- return (dict
+{{- $result := dict
   "node" $node
   "author_nodes" ($author.nodes | default (slice))
 ) -}}
+{{- return $result -}}

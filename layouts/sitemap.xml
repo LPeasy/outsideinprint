@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{- range sort (where site.Pages "Kind" "in" (slice "home" "page" "section")) "Permalink" -}}
-    {{- $policy := partial "metadata/policy.html" . -}}
+    {{- $policy := partial "metadata/policy.html" (dict "page" .) -}}
     {{- if $policy.in_sitemap -}}
       <url>
         <loc>{{ .Permalink }}</loc>

@@ -41,10 +41,11 @@
   {{- $reason = "missing-collection-definition" -}}
 {{- end -}}
 
-{{- return (dict
+{{- $result := dict
   "indexable" $indexable
   "in_sitemap" $inSitemap
   "robots" $robots
   "reason" $reason
   "regular_page_count" $regularPageCount
 ) -}}
+{{- return $result -}}

@@ -17,4 +17,5 @@
   {{ end }}
 {{ end }}
 
-{{ return (partial "collections/sort-items.html" (dict "items" $items)) }}
+{{ $ordered := partial "collections/sort-items.html" (dict "items" $items) }}
+{{ return $ordered }}

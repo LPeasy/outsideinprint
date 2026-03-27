@@ -9,7 +9,7 @@
 {{ $meetsMin := ge $count $minItems }}
 {{ $visible := and $publicRequested (or $meetsMin $forcePublic) }}
 
-{{ return (dict
+{{ $state := dict
   "kind" $kind
   "count" $count
   "min_items" $minItems
@@ -18,3 +18,4 @@
   "meets_min" $meetsMin
   "visible" $visible
 ) }}
+{{ return $state }}
