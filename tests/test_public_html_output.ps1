@@ -693,19 +693,19 @@ $requiredLegacyCleanupChecks = @(
   },
   @{
     Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
-    Pattern = '[\x{00E2}\x{00C3}\x{00C2}]'
+    Pattern = '[\u00E2\u00C3\u00C2]'
     Message = 'expected representative imported essays not to expose mojibake characters in rendered HTML'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '[\x{00E2}\x{00C3}\x{00C2}]'
+    Pattern = '[\u00E2\u00C3\u00C2]'
     Message = 'expected localized imported essays not to expose mojibake characters in rendered HTML'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
-    Pattern = '[\x{00E2}\x{00C3}\x{00C2}]'
+    Pattern = '[\u00E2\u00C3\u00C2]'
     Message = 'expected imported longform essays not to expose mojibake characters in rendered HTML'
     ShouldNotMatch = $true
   }
