@@ -1,11 +1,12 @@
 {{- $meta := .meta -}}
-{{- if not $meta.image -}}
-  {{- return false -}}
+{{- $node := false -}}
+
+{{- if $meta.image -}}
+  {{- $node = dict
+    "@id" (printf "%s#primaryimage" $meta.canonical)
+    "@type" "ImageObject"
+    "url" $meta.image
+  -}}
 {{- end -}}
 
-{{- $node := dict
-  "@id" (printf "%s#primaryimage" $meta.canonical)
-  "@type" "ImageObject"
-  "url" $meta.image
--}}
 {{- return $node -}}

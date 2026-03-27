@@ -3,59 +3,59 @@
 {{- $organization := .organization -}}
 {{- $image := .image -}}
 {{- $author := .author -}}
+{{- $result := false -}}
 
-{{- if not $meta.route.is_article_like -}}
-  {{- return false -}}
-{{- end -}}
+{{- if $meta.route.is_article_like -}}
+  {{- $workType := cond (eq $meta.route.section "syd-and-oliver") "CreativeWork" "Article" -}}
+  {{- $node := dict
+    "@id" (printf "%s#primaryentity" $meta.canonical)
+    "@type" $workType
+    "headline" $meta.title
+    "name" $meta.title
+    "description" $meta.description
+    "url" $meta.canonical
+    "mainEntityOfPage" (dict "@id" (printf "%s#webpage" $meta.canonical))
+    "publisher" (dict "@id" (index $organization "@id"))
+    "inLanguage" ($page.Site.Language.LanguageCode | default "en-US")
+  -}}
 
-{{- $workType := cond (eq $meta.route.section "syd-and-oliver") "CreativeWork" "Article" -}}
-{{- $node := dict
-  "@id" (printf "%s#primaryentity" $meta.canonical)
-  "@type" $workType
-  "headline" $meta.title
-  "name" $meta.title
-  "description" $meta.description
-  "url" $meta.canonical
-  "mainEntityOfPage" (dict "@id" (printf "%s#webpage" $meta.canonical))
-  "publisher" (dict "@id" (index $organization "@id"))
-  "inLanguage" ($page.Site.Language.LanguageCode | default "en-US")
--}}
-
-{{- if eq $workType "Article" -}}
-  {{- with $meta.route.section_label -}}
-    {{- $node = merge $node (dict "articleSection" .) -}}
+  {{- if eq $workType "Article" -}}
+    {{- with $meta.route.section_label -}}
+      {{- $node = merge $node (dict "articleSection" .) -}}
+    {{- end -}}
   {{- end -}}
+
+  {{- with $page.Date -}}
+    {{- $node = merge $node (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+
+  {{- with $page.Lastmod -}}
+    {{- $node = merge $node (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+
+  {{- with $page.Params.version -}}
+    {{- $node = merge $node (dict "version" (printf "%v" .)) -}}
+  {{- end -}}
+
+  {{- with $page.Params.medium_source_url -}}
+    {{- $node = merge $node (dict "isBasedOn" .) -}}
+  {{- end -}}
+
+  {{- with $image -}}
+    {{- $node = merge $node (dict "image" (dict "@id" (index . "@id"))) -}}
+  {{- end -}}
+
+  {{- $authorRefs := $author.refs | default (slice) -}}
+  {{- if eq (len $authorRefs) 1 -}}
+    {{- $node = merge $node (dict "author" (index $authorRefs 0)) -}}
+  {{- else if gt (len $authorRefs) 1 -}}
+    {{- $node = merge $node (dict "author" $authorRefs) -}}
+  {{- end -}}
+
+  {{- $result = dict
+    "node" $node
+    "author_nodes" ($author.nodes | default (slice))
+  -}}
 {{- end -}}
 
-{{- with $page.Date -}}
-  {{- $node = merge $node (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) -}}
-{{- end -}}
-
-{{- with $page.Lastmod -}}
-  {{- $node = merge $node (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00")) -}}
-{{- end -}}
-
-{{- with $page.Params.version -}}
-  {{- $node = merge $node (dict "version" (printf "%v" .)) -}}
-{{- end -}}
-
-{{- with $page.Params.medium_source_url -}}
-  {{- $node = merge $node (dict "isBasedOn" .) -}}
-{{- end -}}
-
-{{- with $image -}}
-  {{- $node = merge $node (dict "image" (dict "@id" (index . "@id"))) -}}
-{{- end -}}
-
-{{- $authorRefs := $author.refs | default (slice) -}}
-{{- if eq (len $authorRefs) 1 -}}
-  {{- $node = merge $node (dict "author" (index $authorRefs 0)) -}}
-{{- else if gt (len $authorRefs) 1 -}}
-  {{- $node = merge $node (dict "author" $authorRefs) -}}
-{{- end -}}
-
-{{- $result := dict
-  "node" $node
-  "author_nodes" ($author.nodes | default (slice))
--}}
 {{- return $result -}}

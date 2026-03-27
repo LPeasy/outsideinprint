@@ -1,52 +1,50 @@
 {{- $page := .page -}}
 {{- $meta := .meta -}}
+{{- $node := false -}}
 
-{{- if $page.IsHome -}}
-  {{- return false -}}
-{{- end -}}
-
-{{- $items := slice (dict
-  "name" site.Title
-  "url" site.Home.Permalink
-) -}}
-
-{{- if eq $meta.route.name "article" -}}
-  {{- with $page.CurrentSection -}}
-    {{- $items = $items | append (dict
-      "name" .Title
-      "url" .Permalink
-    ) -}}
-  {{- end -}}
-  {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
-{{- else if eq $meta.route.name "collection" -}}
-  {{- with site.GetPage "/collections" -}}
-    {{- $items = $items | append (dict
-      "name" .Title
-      "url" .Permalink
-    ) -}}
-  {{- end -}}
-  {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
-{{- else if or (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "start-here") (eq $meta.route.name "utility") (eq $meta.route.name "section-list") (eq $meta.route.name "page") -}}
-  {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
-{{- end -}}
-
-{{- if le (len $items) 1 -}}
-  {{- return false -}}
-{{- end -}}
-
-{{- $listItems := slice -}}
-{{- range $index, $item := $items -}}
-  {{- $listItems = $listItems | append (dict
-    "@type" "ListItem"
-    "position" (add $index 1)
-    "name" $item.name
-    "item" $item.url
+{{- if not $page.IsHome -}}
+  {{- $items := slice (dict
+    "name" site.Title
+    "url" site.Home.Permalink
   ) -}}
+
+  {{- if eq $meta.route.name "article" -}}
+    {{- with $page.CurrentSection -}}
+      {{- $items = $items | append (dict
+        "name" .Title
+        "url" .Permalink
+      ) -}}
+    {{- end -}}
+    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
+  {{- else if eq $meta.route.name "collection" -}}
+    {{- with site.GetPage "/collections" -}}
+      {{- $items = $items | append (dict
+        "name" .Title
+        "url" .Permalink
+      ) -}}
+    {{- end -}}
+    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
+  {{- else if or (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "start-here") (eq $meta.route.name "utility") (eq $meta.route.name "section-list") (eq $meta.route.name "page") -}}
+    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
+  {{- end -}}
+
+  {{- if gt (len $items) 1 -}}
+    {{- $listItems := slice -}}
+    {{- range $index, $item := $items -}}
+      {{- $listItems = $listItems | append (dict
+        "@type" "ListItem"
+        "position" (add $index 1)
+        "name" $item.name
+        "item" $item.url
+      ) -}}
+    {{- end -}}
+
+    {{- $node = dict
+      "@id" (printf "%s#breadcrumb" $meta.canonical)
+      "@type" "BreadcrumbList"
+      "itemListElement" $listItems
+    -}}
+  {{- end -}}
 {{- end -}}
 
-{{- $node := dict
-  "@id" (printf "%s#breadcrumb" $meta.canonical)
-  "@type" "BreadcrumbList"
-  "itemListElement" $listItems
--}}
 {{- return $node -}}

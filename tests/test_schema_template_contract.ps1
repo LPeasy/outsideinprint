@@ -66,6 +66,25 @@ if ($routeHelper -notmatch '"social_type"') {
   throw 'Expected WS-01 route helper to remain available for schema routing.'
 }
 
+$schemaReturnFiles = @(
+  'layouts/partials/schema/breadcrumbs.html',
+  'layouts/partials/schema/creative-work.html',
+  'layouts/partials/schema/image.html',
+  'layouts/partials/schema/organization.html',
+  'layouts/partials/schema/resolve-author.html',
+  'layouts/partials/schema/significant-links.html',
+  'layouts/partials/schema/webpage.html',
+  'layouts/partials/schema/website.html'
+)
+
+foreach ($relativePath in $schemaReturnFiles) {
+  $content = Get-Content -Path (Join-Path $repoRoot $relativePath) -Raw
+  $returnMatches = @([regex]::Matches($content, '\{\{[-\s]*return(?:\s+[^}]*)?\}\}'))
+  if ($returnMatches.Count -gt 1) {
+    throw "Expected $relativePath to contain at most one template return statement."
+  }
+}
+
 Write-Host 'Schema template contract test passed.'
 $global:LASTEXITCODE = 0
 exit 0
