@@ -116,6 +116,15 @@ foreach ($requiredSnippet in @(
   }
 }
 
+$mastheadPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/masthead.html') -Raw
+if ($mastheadPartial -match '<h1 class="title">') {
+  throw 'Expected the editorial masthead brand to remain non-heading markup so homepage heading ownership stays in layouts/index.html.'
+}
+
+if ($mastheadPartial -notmatch '<div class="title">') {
+  throw 'Expected layouts/partials/masthead.html to keep the shared non-heading title container for the editorial brand.'
+}
+
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw
 if ($collectionCardPartial -notmatch 'Recommended entry point') {
   throw 'Expected discovery/collection-card.html to surface the collection start-here link when present.'
