@@ -867,7 +867,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/start-here/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/syd-and-oliver/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected Start Here to expose direct navigation into the site’s major discovery lanes'
+    Message = 'expected Start Here to expose direct navigation into the site''s major discovery lanes'
   },
   @{
     Path = 'public/essays/index.html'
