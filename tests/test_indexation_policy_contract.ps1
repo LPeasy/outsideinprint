@@ -29,6 +29,17 @@ foreach ($requiredSnippet in @(
   }
 }
 
+$routeHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/route.html') -Raw
+foreach ($requiredSnippet in @(
+  'strings.HasSuffix $relPermalink "/random/"',
+  '$isRandomRoute',
+  '$name = "utility"'
+)) {
+  if ($routeHelper -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected metadata/route.html to contain: $requiredSnippet"
+  }
+}
+
 $pageMetaPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/page.html') -Raw
 if ($pageMetaPartial -notmatch [regex]::Escape('partial "metadata/policy.html"')) {
   throw 'Expected metadata/page.html to delegate route policy to metadata/policy.html.'

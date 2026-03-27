@@ -1,8 +1,10 @@
 {{- $section := .Section | default "" -}}
+{{- $relPermalink := .RelPermalink | default "" -}}
 {{- $name := "page" -}}
 {{- $socialType := "website" -}}
 {{- $isArticleLike := false -}}
 {{- $sectionLabel := "" -}}
+{{- $isRandomRoute := false -}}
 
 {{- if .Params.section_label -}}
   {{- $sectionLabel = .Params.section_label -}}
@@ -10,6 +12,14 @@
   {{- if $section -}}
     {{- $sectionLabel = humanize $section -}}
   {{- end -}}
+{{- end -}}
+
+{{- if eq $section "random" -}}
+  {{- $isRandomRoute = true -}}
+{{- end -}}
+
+{{- if and (not $isRandomRoute) $relPermalink (strings.HasSuffix $relPermalink "/random/") -}}
+  {{- $isRandomRoute = true -}}
 {{- end -}}
 
 {{- if .IsHome -}}
@@ -38,7 +48,7 @@
   {{- $name = "start-here" -}}
 {{- end -}}
 
-{{- if and (eq $name "page") .IsPage (eq $section "random") -}}
+{{- if and (eq $name "page") $isRandomRoute -}}
   {{- $name = "utility" -}}
 {{- end -}}
 
