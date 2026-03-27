@@ -105,6 +105,17 @@ foreach ($requiredSnippet in @(
   }
 }
 
+$pageSummaryPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/page-summary.html') -Raw
+foreach ($requiredSnippet in @(
+  'reflect.IsMap',
+  'index . "page"',
+  'partial "metadata_description.html" $page'
+)) {
+  if ($pageSummaryPartial -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected discovery/page-summary.html to contain: $requiredSnippet"
+  }
+}
+
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw
 if ($collectionCardPartial -notmatch 'Recommended entry point') {
   throw 'Expected discovery/collection-card.html to surface the collection start-here link when present.'

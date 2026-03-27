@@ -1,4 +1,9 @@
-{{- $page := .page | default . -}}
+{{- $page := . -}}
+{{- if reflect.IsMap . -}}
+  {{- with index . "page" -}}
+    {{- $page = . -}}
+  {{- end -}}
+{{- end -}}
 {{- $siteDescription := site.Params.description | default "Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records." -}}
 {{- $summary := "" -}}
 
