@@ -1,0 +1,43 @@
+{{- $route := partial "metadata/route.html" . -}}
+{{- $slug := "" -}}
+{{- with .File -}}
+  {{- $slug = $.Params.slug | default .BaseFileName -}}
+{{- end -}}
+
+{{- $collection := false -}}
+{{- if and (eq $route.name "collection") $slug -}}
+  {{- $collection = partial "collections/lookup-definition.html" $slug -}}
+{{- end -}}
+
+{{- $policy := partial "metadata/policy.html" (dict
+  "page" .
+  "route" $route
+  "collection" $collection
+) -}}
+
+{{- $title := cond .IsHome site.Title .Title -}}
+{{- with $collection -}}
+  {{- with .title -}}
+    {{- $title = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $fullTitle := $title -}}
+{{- if not .IsHome -}}
+  {{- $fullTitle = printf "%s | %s" $title site.Title -}}
+{{- end -}}
+
+{{- $description := partial "metadata_description.html" . -}}
+{{- $image := partial "metadata_image.html" . -}}
+
+{{- return (dict
+  "route" $route
+  "policy" $policy
+  "collection" $collection
+  "title" $title
+  "full_title" $fullTitle
+  "description" $description
+  "image" $image
+  "canonical" .Permalink
+  "robots" $policy.robots
+) -}}

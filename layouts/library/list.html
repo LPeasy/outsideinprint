@@ -3,6 +3,25 @@
     <h1 id="library-title" class="list-title">Library</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
   </header>
+  {{ $sections := slice
+    (dict "key" "essays" "label" "ESSAYS")
+    (dict "key" "syd-and-oliver" "label" "S AND O")
+    (dict "key" "working-papers" "label" "WORKING PAPERS")
+  }}
+  {{ $librarySections := slice }}
+  {{ $totalPages := 0 }}
+  {{ range $section := $sections }}
+    {{ $sectionKey := index $section "key" }}
+    {{ $pages := where site.RegularPages "Section" $sectionKey }}
+    {{ if gt (len $pages) 0 }}
+      {{ $librarySections = $librarySections | append (merge $section (dict
+        "page" (site.GetPage (printf "/%s" $sectionKey))
+        "pages" $pages
+      )) }}
+      {{ $totalPages = add $totalPages (len $pages) }}
+    {{ end }}
+  {{ end }}
+  {{ if gt $totalPages 0 }}<p class="page-intro">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $librarySections }} active lanes.</p>{{ end }}
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"
     "eyebrow" "Use the library, or take a guided path"
@@ -17,27 +36,30 @@
   </div>
   <div id="library-search-empty" class="library-empty" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or start with <a href="{{ "start-here/" | absURL }}">Start Here</a>.</div>
 
-  {{ $sections := slice
-    (dict "key" "essays" "label" "ESSAYS")
-    (dict "key" "syd-and-oliver" "label" "S AND O")
-    (dict "key" "working-papers" "label" "WORKING PAPERS")
-  }}
-
-  {{ range $section := $sections }}
+  {{ range $section := $librarySections }}
     {{ $sectionKey := index $section "key" }}
     {{ $sectionLabel := index $section "label" }}
-    {{ $pages := where site.RegularPages "Section" $sectionKey }}
+    {{ $sectionPage := index $section "page" }}
+    {{ $pages := index $section "pages" }}
 
     {{ if gt (len $pages) 0 }}
-      <section class="library-group" data-library-group>
-        <h2 class="list-title" style="margin-top:22px;">{{ $sectionLabel }}</h2>
+      <section class="library-group" data-library-group aria-labelledby="library-group-{{ $sectionKey }}">
+        <h2 id="library-group-{{ $sectionKey }}" class="list-title" style="margin-top:22px;">{{ with $sectionPage }}{{ .Title }}{{ else }}{{ $sectionLabel }}{{ end }}</h2>
+        {{ with $sectionPage.Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+        <p class="m">{{ len $pages }} pieces in this lane.</p>
         {{ range sort $pages "Title" "asc" }}
-          {{ $searchText := printf "%s %s %s %s" .Title $sectionLabel (.Params.section_label | default "") (.Params.version | default "") }}
-          <div class="item" data-library-item data-search='{{ $searchText | lower | jsonify | safeHTMLAttr }}'>
-            <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
-            <div class="m">
-              {{ with .Params.version }}v{{ . }}{{ end }}
-            </div>
+          {{ $matches := partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
+          {{ $collectionTitles := slice }}
+          {{ range $matches }}
+            {{ $collectionTitles = $collectionTitles | append .collection.title }}
+          {{ end }}
+          {{ $searchText := printf "%s %s %s %s %s %s" .Title $sectionLabel (.Params.section_label | default "") (.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" .) }}
+          <div data-library-item data-search='{{ $searchText | lower | jsonify | safeHTMLAttr }}'>
+            {{ partial "discovery/page-list-item.html" (dict
+              "page" .
+              "showCollections" true
+              "showSectionLabel" false
+            ) }}
           </div>
         {{ end }}
       </section>

@@ -1,0 +1,63 @@
+{{- $page := .page -}}
+{{- $analyticsEvent := .analyticsEvent | default "internal_promo_click" -}}
+{{- $analyticsSourceSlot := .analyticsSourceSlot | default "" -}}
+{{- $analyticsCollection := .analyticsCollection | default "" -}}
+{{- $showCollections := .showCollections | default false -}}
+{{- $showSummary := ne .showSummary false -}}
+{{- $showSectionLabel := ne .showSectionLabel false -}}
+{{- $class := .class | default "" -}}
+{{- $slug := $page.Params.slug | default $page.File.BaseFileName -}}
+{{- $sectionLabel := $page.Params.section_label | default (humanize $page.Section) -}}
+{{- $summary := "" -}}
+{{- $metaParts := slice -}}
+{{- if $showSummary -}}
+  {{- $summary = partial "discovery/page-summary.html" $page -}}
+{{- end -}}
+{{- $collections := slice -}}
+{{- if $showCollections -}}
+  {{- $collections = partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) -}}
+{{- end -}}
+{{- if $showSectionLabel -}}
+  {{- with $sectionLabel -}}
+    {{- $metaParts = $metaParts | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $page.Date -}}
+  {{- $metaParts = $metaParts | append (.Format "Jan 2, 2006") -}}
+{{- end -}}
+{{- with $page.Params.version -}}
+  {{- $metaParts = $metaParts | append (printf "v%s" .) -}}
+{{- end -}}
+{{- with $page.ReadingTime -}}
+  {{- $metaParts = $metaParts | append (printf "%s min read" .) -}}
+{{- end -}}
+
+<article class="item{{ with $class }} {{ . }}{{ end }}">
+  <div class="t"><a href="{{ $page.RelPermalink }}"
+    {{- if $analyticsSourceSlot }}
+      data-analytics-event="{{ $analyticsEvent }}"
+      data-analytics-source-slot="{{ $analyticsSourceSlot }}"
+      data-analytics-slug="{{ $slug }}"
+      data-analytics-title="{{ $page.Title }}"
+      data-analytics-section="{{ $sectionLabel }}"
+      data-analytics-path="{{ $page.RelPermalink }}"
+      {{- with $analyticsCollection }}
+        data-analytics-collection="{{ . }}"
+      {{- end }}
+    {{- end }}
+  >{{ $page.Title }}</a></div>
+  {{- if gt (len $metaParts) 0 }}<div class="m">{{ delimit $metaParts " | " }}</div>{{ end }}
+  {{- if gt (len $collections) 0 }}
+    <div class="d">
+      {{- range $index, $match := $collections -}}
+        {{- if gt $index 0 }} &middot; {{ end -}}
+        {{- with $match.page -}}
+          <a href="{{ .RelPermalink }}">{{ $match.collection.title }}</a>
+        {{- else -}}
+          {{ $match.collection.title }}
+        {{- end -}}
+      {{- end -}}
+    </div>
+  {{- end }}
+  {{- with $summary }}<div class="d">{{ . }}</div>{{ end }}
+</article>

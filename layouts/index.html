@@ -2,21 +2,47 @@
   {{ if site.Params.dashboard.site }}
     {{ partial "dashboard/render.html" . }}
   {{ else }}
+  {{ $siteDescription := site.Params.description | default "Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records." }}
+  {{ $exploreRoutes := slice
+    (dict "page" (site.GetPage "/start-here") "label" "Start Here")
+    (dict "page" (site.GetPage "/essays") "label" "Essays")
+    (dict "page" (site.GetPage "/syd-and-oliver") "label" "S and O")
+    (dict "page" (site.GetPage "/collections") "label" "Collections")
+    (dict "page" (site.GetPage "/library") "label" "Library")
+    (dict "label" "Random" "href" ("random/" | absURL) "description" "Enter the archive by chance. This route is useful for exploration, not as a canonical destination.")
+  }}
+  <header class="page-header">
+    <h1 class="title">Outside In Print</h1>
+    <p class="page-intro">{{ $siteDescription }}</p>
+    <p class="page-intro">Read by guided path, curated collection, section landing page, or the full catalog.</p>
+  </header>
+
   <section aria-labelledby="home-explore-title">
-    <h2 id="home-explore-title" class="visually-hidden">Explore the archive</h2>
+    <h2 id="home-explore-title" class="list-title">Read by Path</h2>
     <div class="grid">
-      <a class="card" href="{{ "start-here/" | absURL }}"><div class="v">Start Here</div></a>
-      <a class="card" href="{{ "essays/" | absURL }}"><div class="v">Essays</div></a>
-      <a class="card" href="{{ "syd-and-oliver/" | absURL }}"><div class="v">S and O</div></a>
-      <a class="card" href="{{ "collections/" | absURL }}"><div class="v">Collections</div></a>
-      <a class="card" href="{{ "library/" | absURL }}"><div class="v">Library</div></a>
-      <a class="card" href="{{ "random/" | absURL }}"
-        data-analytics-event="internal_promo_click"
-        data-analytics-source-slot="random_link"
-        data-analytics-title="Random"
-        data-analytics-section="Utility"
-        data-analytics-path="/random/"
-      ><div class="v">Random</div></a>
+      {{ range $exploreRoutes }}
+        {{ $page := .page | default false }}
+        {{ $href := .href | default "" }}
+        {{ $title := .label }}
+        {{ $description := .description | default "" }}
+        {{ if $page }}
+          {{ $href = $page.RelPermalink }}
+          {{ $title = $page.Title }}
+          {{ $description = $page.Params.description | default $description }}
+        {{ end }}
+        <a class="card" href="{{ $href }}"
+          {{- if eq .label "Random" }}
+            data-analytics-event="internal_promo_click"
+            data-analytics-source-slot="random_link"
+            data-analytics-title="Random"
+            data-analytics-section="Utility"
+            data-analytics-path="/random/"
+          {{- end }}
+        >
+          <div class="v">{{ $title }}</div>
+          {{ with $description }}<div class="d">{{ . }}</div>{{ end }}
+        </a>
+      {{ end }}
     </div>
   </section>
 
@@ -34,31 +60,11 @@
       <h2 id="home-featured-collections-title" class="list-title" style="margin-top:28px;">Featured Collections</h2>
       <div class="grid collection-grid">
         {{ range $featuredCollections }}
-          {{ $url := printf "collections/%s/" .collection.slug | absURL }}
-          {{ with .page }}
-            {{ $url = .RelPermalink }}
-          {{ end }}
-          {{ $path := printf "/collections/%s/" .collection.slug }}
-          {{ with .page }}
-            {{ $path = .RelPermalink }}
-          {{ end }}
-          <a class="card collection-card" href="{{ $url }}"
-            data-analytics-event="collection_click"
-            data-analytics-source-slot="homepage_featured_collection"
-            data-analytics-collection="{{ .collection.slug }}"
-            data-analytics-slug="{{ .collection.slug }}"
-            data-analytics-title="{{ .collection.title }}"
-            data-analytics-section="Collections"
-            data-analytics-path="{{ $path }}"
-          >
-            <div class="k">{{ title .state.kind }}</div>
-            <div class="v">{{ .collection.title }}</div>
-            {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
-            <div class="collection-meta">
-              <span>{{ .state.count }} pieces</span>
-              {{ with .collection.start_here }}<span>Start Here</span>{{ end }}
-            </div>
-          </a>
+          {{ partial "discovery/collection-card.html" (dict
+            "entry" .
+            "variant" "grid"
+            "analyticsSourceSlot" "homepage_featured_collection"
+          ) }}
         {{ end }}
       </div>
     </section>
@@ -74,24 +80,12 @@
       {{ $recentCount := 0 }}
       {{ range sort $recentEssays "Date" "desc" }}
         {{ if and (lt $recentCount 6) (not (in $selectedKeys .RelPermalink)) }}
-          <div class="item">
-            {{ $slug := .Params.slug | default .File.BaseFileName }}
-            {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-            <div class="t"><a href="{{ .RelPermalink }}"
-              data-analytics-event="internal_promo_click"
-              data-analytics-source-slot="homepage_recent"
-              data-analytics-slug="{{ $slug }}"
-              data-analytics-title="{{ .Title }}"
-              data-analytics-section="{{ $sectionLabel }}"
-              data-analytics-path="{{ .RelPermalink }}"
-            >{{ .Title }}</a></div>
-            <div class="m">
-              {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
-              {{ with .Params.version }} | v{{ . }}{{ end }}
-              {{ with .ReadingTime }} | {{ . }} min read{{ end }}
-            </div>
-            {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-          </div>
+          {{ partial "discovery/page-list-item.html" (dict
+            "page" .
+            "analyticsSourceSlot" "homepage_recent"
+            "showCollections" true
+            "showSectionLabel" false
+          ) }}
           {{ $recentCount = add $recentCount 1 }}
         {{ end }}
       {{ end }}

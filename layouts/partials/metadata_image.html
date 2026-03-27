@@ -1,4 +1,5 @@
 {{- $image := "" -}}
+{{- $route := partial "metadata/route.html" . -}}
 
 {{- with .Params.images -}}
   {{- with index . 0 -}}
@@ -15,6 +16,19 @@
 {{- if not $image -}}
   {{- with .Params.featured_image -}}
     {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and (not $image) $route.is_article_like -}}
+  {{- $rawContent := .RawContent | default "" -}}
+  {{- $localMarkdownImageMatches := findRESubmatch `!\[[^\]]*\]\((/images/[^)\s]+)` $rawContent 1 -}}
+  {{- if gt (len $localMarkdownImageMatches) 0 -}}
+    {{- $image = index (index $localMarkdownImageMatches 0) 1 -}}
+  {{- else -}}
+    {{- $localHtmlImageMatches := findRESubmatch `<img[^>]+src="(/images/[^"]+)"` $rawContent 1 -}}
+    {{- if gt (len $localHtmlImageMatches) 0 -}}
+      {{- $image = index (index $localHtmlImageMatches 0) 1 -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

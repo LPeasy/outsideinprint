@@ -1,0 +1,41 @@
+{{- $content := . -}}
+
+{{- $replacements := slice
+  (dict "from" "â€Šâ€”â€Š" "to" " &#8212; ")
+  (dict "from" "â€Šâ€“â€Š" "to" " &#8211; ")
+  (dict "from" "â€™" "to" "&#8217;")
+  (dict "from" "â€˜" "to" "&#8216;")
+  (dict "from" "â€œ" "to" "&#8220;")
+  (dict "from" "â€" "to" "&#8221;")
+  (dict "from" "â€”" "to" "&#8212;")
+  (dict "from" "â€“" "to" "&#8211;")
+  (dict "from" "â€¦" "to" "&#8230;")
+  (dict "from" "â€¢" "to" "&#8226;")
+  (dict "from" "â†’" "to" "&#8594;")
+  (dict "from" "â€Š" "to" " ")
+  (dict "from" "Ã" "to" "&#193;")
+  (dict "from" "Ã‰" "to" "&#201;")
+  (dict "from" "Ã" "to" "&#205;")
+  (dict "from" "Ã‘" "to" "&#209;")
+  (dict "from" "Ã“" "to" "&#211;")
+  (dict "from" "Ãš" "to" "&#218;")
+  (dict "from" "Ã¡" "to" "&#225;")
+  (dict "from" "Ã©" "to" "&#233;")
+  (dict "from" "Ã¨" "to" "&#232;")
+  (dict "from" "Ãª" "to" "&#234;")
+  (dict "from" "Ã­" "to" "&#237;")
+  (dict "from" "Ã±" "to" "&#241;")
+  (dict "from" "Ã³" "to" "&#243;")
+  (dict "from" "Ã¶" "to" "&#246;")
+  (dict "from" "Ãº" "to" "&#250;")
+  (dict "from" "Ã¼" "to" "&#252;")
+  (dict "from" "Â®" "to" "&#174;")
+  (dict "from" "Â°" "to" "&#176;")
+  (dict "from" "Â" "to" "")
+-}}
+
+{{- range $replacements -}}
+  {{- $content = replace $content .from .to -}}
+{{- end -}}
+
+{{- return $content -}}

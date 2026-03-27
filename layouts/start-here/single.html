@@ -4,7 +4,19 @@
       {{ with .Params.section_label }}<p class="start-here-kicker">{{ . }}</p>{{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
     </header>
+
+    {{ partial "journey_links.html" (dict
+      "class" "journey-links--page"
+      "eyebrow" "Choose a path into the archive"
+      "links" (slice
+        (dict "href" ("essays/" | absURL) "label" "Browse Essays")
+        (dict "href" ("syd-and-oliver/" | absURL) "label" "Enter S and O")
+        (dict "href" ("collections/" | absURL) "label" "Follow a Collection")
+        (dict "href" ("library/" | absURL) "label" "Search the Library")
+      )
+    ) }}
 
     <article class="single-content start-here-content">
       {{ .Content }}

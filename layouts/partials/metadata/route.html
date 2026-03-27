@@ -1,0 +1,39 @@
+{{- $section := .Section | default "" -}}
+{{- $name := "page" -}}
+{{- $socialType := "website" -}}
+{{- $isArticleLike := false -}}
+{{- $sectionLabel := "" -}}
+
+{{- with .Params.section_label -}}
+  {{- $sectionLabel = . -}}
+{{- else if $section -}}
+  {{- $sectionLabel = humanize $section -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+  {{- $name = "home" -}}
+{{- else if and .IsPage (in (slice "essays" "syd-and-oliver" "working-papers") $section) -}}
+  {{- $name = "article" -}}
+  {{- $socialType = "article" -}}
+  {{- $isArticleLike = true -}}
+{{- else if and .IsPage (eq $section "collections") -}}
+  {{- $name = "collection" -}}
+{{- else if and .IsSection (eq $section "collections") -}}
+  {{- $name = "collection-list" -}}
+{{- else if and .IsSection (eq $section "library") -}}
+  {{- $name = "library" -}}
+{{- else if and .IsPage (eq $section "start-here") -}}
+  {{- $name = "start-here" -}}
+{{- else if and .IsPage (eq $section "random") -}}
+  {{- $name = "utility" -}}
+{{- else if and .IsSection $section -}}
+  {{- $name = "section-list" -}}
+{{- end -}}
+
+{{- return (dict
+  "name" $name
+  "social_type" $socialType
+  "is_article_like" $isArticleLike
+  "section" $section
+  "section_label" $sectionLabel
+) -}}

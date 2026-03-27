@@ -1,29 +1,13 @@
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) "public"),
-  [string]$ExpectedHomePath = "/"
+  [string]$ExpectedHomePath = "/",
+  [switch]$RequireFreshBuild
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-function Get-RepoRelativePath {
-  param(
-    [string]$RepoRoot,
-    [string]$Path
-  )
-
-  $repoRootFull = [System.IO.Path]::GetFullPath((Resolve-Path -LiteralPath $RepoRoot).Path)
-  $pathFull = [System.IO.Path]::GetFullPath((Resolve-Path -LiteralPath $Path).Path)
-  $getRelativePath = [System.IO.Path].GetMethod('GetRelativePath', [Type[]]@([string], [string]))
-
-  if ($null -ne $getRelativePath) {
-    return ([System.IO.Path]::GetRelativePath($repoRootFull, $pathFull) -replace '\\', '/')
-  }
-
-  $repoRootUri = [System.Uri]($repoRootFull.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar)
-  $pathUri = [System.Uri]$pathFull
-  return ([System.Uri]::UnescapeDataString($repoRootUri.MakeRelativeUri($pathUri).ToString()) -replace '\\', '/')
-}
+. (Join-Path $PSScriptRoot 'helpers/public_output_common.ps1')
 
 function Format-SampleList {
   param(
@@ -97,6 +81,70 @@ function Get-LinkHrefByRel {
   }
 
   return $null
+}
+
+function Get-JsonLdObjects {
+  param([string]$Html)
+
+  $results = New-Object System.Collections.Generic.List[object]
+  $matches = [regex]::Matches($Html, "(?is)<script\b[^>]*type\s*=\s*(?:""application/ld\+json""|'application/ld\+json')[^>]*>(.*?)</script>")
+
+  foreach ($match in $matches) {
+    $json = $match.Groups[1].Value.Trim()
+    if ([string]::IsNullOrWhiteSpace($json)) {
+      continue
+    }
+
+    $results.Add(($json | ConvertFrom-Json -Depth 50))
+  }
+
+  return $results.ToArray()
+}
+
+function Get-JsonLdNodes {
+  param([object[]]$Objects)
+
+  $nodes = New-Object System.Collections.Generic.List[object]
+  foreach ($object in $Objects) {
+    if ($null -eq $object) {
+      continue
+    }
+
+    if ($null -ne $object.'@graph') {
+      foreach ($node in @($object.'@graph')) {
+        $nodes.Add($node)
+      }
+    }
+    else {
+      $nodes.Add($object)
+    }
+  }
+
+  return $nodes.ToArray()
+}
+
+function Get-JsonLdNodesByType {
+  param(
+    [object[]]$Nodes,
+    [string]$Type
+  )
+
+  return @(
+    $Nodes | Where-Object {
+      $nodeType = $_.'@type'
+      if ($nodeType -is [System.Array]) {
+        return $nodeType -contains $Type
+      }
+
+      return $nodeType -eq $Type
+    }
+  )
+}
+
+function Get-SitemapLocs {
+  param([string]$Xml)
+
+  return @([regex]::Matches($Xml, '(?is)<loc>\s*([^<]+)\s*</loc>') | ForEach-Object { $_.Groups[1].Value.Trim() })
 }
 
 function Test-TagHasClass {
@@ -177,8 +225,17 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-if (-not (Test-Path $SiteDir -PathType Container)) {
-  throw "Site output directory not found: $SiteDir"
+$freshness = Test-PublicBuildFreshness -RepoRoot $repoRoot -SiteDir $SiteDir
+if (-not $freshness.IsFresh) {
+  $message = "Generated-output regression test requires a fresh Hugo build. $($freshness.Reason)"
+  if ($RequireFreshBuild) {
+    throw $message
+  }
+
+  Write-Host ("Skipping generated-output regression test: {0}" -f $freshness.Reason)
+  Write-Host "Template-contract tests remain authoritative until public/ is rebuilt."
+  $global:LASTEXITCODE = 0
+  exit 0
 }
 
 $htmlFiles = @(Get-ChildItem -Path $SiteDir -Recurse -File -Filter "*.html")
@@ -193,7 +250,10 @@ $zgotmplzIssues = New-Object System.Collections.Generic.List[string]
 $semanticIssues = New-Object System.Collections.Generic.List[string]
 $importedMediaIssues = New-Object System.Collections.Generic.List[string]
 $metadataIssues = New-Object System.Collections.Generic.List[string]
+$structuredDataIssues = New-Object System.Collections.Generic.List[string]
+$indexationIssues = New-Object System.Collections.Generic.List[string]
 $uxIssues = New-Object System.Collections.Generic.List[string]
+$legacyCleanupIssues = New-Object System.Collections.Generic.List[string]
 $retiredRouteIssues = New-Object System.Collections.Generic.List[string]
 $hasHomepageAnalytics = $false
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
@@ -214,7 +274,9 @@ $optionalDefaultListPages = @(
 
 $requiredImportedMediaPages = @(
   'public/essays/biter-the-slang-word-that-hits/index.html',
-  'public/essays/rethinking-invasive-species-management/index.html'
+  'public/essays/rethinking-invasive-species-management/index.html',
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
 )
 
 $requiredMetadataPages = [ordered]@{
@@ -222,40 +284,153 @@ $requiredMetadataPages = [ordered]@{
     Title = 'Outside In Print'
     Description = 'Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records.'
     Canonical = 'https://outsideinprint.org/'
+    OgType = 'website'
+    TwitterCard = 'summary'
   }
   'public/start-here/index.html' = @{
     Title = 'Start Here'
     Description = 'An editorial welcome to Outside In Print and a measured guide into the archive.'
     Canonical = 'https://outsideinprint.org/start-here/'
+    OgType = 'website'
+    TwitterCard = 'summary'
   }
   'public/library/index.html' = @{
     Title = 'Library'
     Description = 'The full catalog of published work from Outside In Print, searchable by title, section, and version.'
     Canonical = 'https://outsideinprint.org/library/'
+    OgType = 'website'
+    TwitterCard = 'summary'
   }
   'public/collections/index.html' = @{
     Title = 'Collections'
     Description = 'Curated collections that gather essays, projects, and recurring questions into coherent reading threads.'
     Canonical = 'https://outsideinprint.org/collections/'
+    OgType = 'website'
+    TwitterCard = 'summary'
+  }
+  'public/collections/risk-uncertainty/index.html' = @{
+    Title = 'Risk, Uncertainty, and Decision-Making'
+    Description = 'Essays about uncertainty, tradeoffs, risk framing, and decision-making under imperfect information.'
+    Canonical = 'https://outsideinprint.org/collections/risk-uncertainty/'
+    OgType = 'website'
+    TwitterCard = 'summary'
+  }
+  'public/random/index.html' = @{
+    Title = 'Random'
+    Description = 'A random path into the Outside In Print archive. If the random route is not useful, browse the full library instead.'
+    Canonical = 'https://outsideinprint.org/random/'
+    OgType = 'website'
+    TwitterCard = 'summary'
   }
   'public/essays/biter-the-slang-word-that-hits/index.html' = @{
     Title = 'Biter'
     Description = 'A word to describe artistic thieves'
     Canonical = 'https://outsideinprint.org/essays/biter-the-slang-word-that-hits/'
+    OgType = 'article'
   }
   'public/essays/the-risk-management-buffet/index.html' = @{
     Title = 'The Risk Management Buffet'
     Canonical = 'https://outsideinprint.org/essays/the-risk-management-buffet/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
 }
 
+$requiredStructuredDataPages = [ordered]@{
+  'public/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
+    RequirePublisherNode = $true
+  }
+  'public/start-here/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/library/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/collections/risk-uncertainty/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'Article', 'ImageObject')
+    ForbiddenTypes = @('CollectionPage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireWorkPublisher = $true
+    RequireWorkAuthor = $true
+  }
+}
+
+$requiredIndexationPages = [ordered]@{
+  'public/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
+  'public/start-here/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
+  'public/library/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
+  'public/collections/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
+  'public/collections/risk-uncertainty/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
+  'public/random/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+  'public/working-papers/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+}
+
+$requiredSitemapInclusions = @(
+  'https://outsideinprint.org/',
+  'https://outsideinprint.org/essays/',
+  'https://outsideinprint.org/essays/the-risk-management-buffet/',
+  'https://outsideinprint.org/syd-and-oliver/',
+  'https://outsideinprint.org/collections/',
+  'https://outsideinprint.org/collections/risk-uncertainty/',
+  'https://outsideinprint.org/library/',
+  'https://outsideinprint.org/start-here/'
+)
+
+$requiredSitemapExclusions = @(
+  'https://outsideinprint.org/random/',
+  'https://outsideinprint.org/working-papers/',
+  'https://outsideinprint.org/literature/'
+)
+
 $requiredUxPages = @(
   'public/index.html',
+  'public/start-here/index.html',
   'public/essays/index.html',
   'public/library/index.html',
   'public/collections/index.html',
   'public/collections/risk-uncertainty/index.html',
   'public/essays/the-risk-management-buffet/index.html'
+)
+
+$requiredLegacyCleanupPages = @(
+  'public/essays/biter-the-slang-word-that-hits/index.html',
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
 )
 
 foreach ($file in $htmlFiles) {
@@ -267,6 +442,8 @@ foreach ($file in $htmlFiles) {
     ($optionalDefaultListPages -contains $relativePath) -or
     ($requiredImportedMediaPages -contains $relativePath) -or
     $requiredMetadataPages.Contains($relativePath) -or
+    $requiredStructuredDataPages.Contains($relativePath) -or
+    ($requiredLegacyCleanupPages -contains $relativePath) -or
     ($requiredUxPages -contains $relativePath)
   ) {
     $targetPageHtml[$relativePath] = $content
@@ -411,10 +588,12 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
   $ogUrl = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:url'
   $ogTitle = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:title'
   $ogDescription = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:description'
+  $ogType = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:type'
+  $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
   $twitterCard = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:card'
   $twitterTitle = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:title'
   $twitterDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:description'
-  $itempropDescription = Get-MetaContent -Html $html -AttributeName 'itemprop' -AttributeValue 'description'
+  $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
 
   if ($canonical -ne [string]$expected.Canonical) {
     $metadataIssues.Add("$relativePath => expected canonical $($expected.Canonical), found $canonical")
@@ -432,8 +611,17 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
     $metadataIssues.Add("$relativePath => expected twitter:title '$($expected.Title)', found '$twitterTitle'")
   }
 
-  if ([string]::IsNullOrWhiteSpace($twitterCard)) {
+  if ($expected.Contains('TwitterCard')) {
+    if ($twitterCard -ne [string]$expected.TwitterCard) {
+      $metadataIssues.Add("$relativePath => expected twitter:card '$($expected.TwitterCard)', found '$twitterCard'")
+    }
+  }
+  elseif ([string]::IsNullOrWhiteSpace($twitterCard)) {
     $metadataIssues.Add("$relativePath => expected twitter:card metadata")
+  }
+
+  if ($expected.Contains('OgType') -and $ogType -ne [string]$expected.OgType) {
+    $metadataIssues.Add("$relativePath => expected og:type '$($expected.OgType)', found '$ogType'")
   }
 
   if ($expected.Contains('Description')) {
@@ -447,23 +635,219 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
     if ($twitterDescription -ne $expectedDescription) {
       $metadataIssues.Add("$relativePath => expected twitter:description '$expectedDescription', found '$twitterDescription'")
     }
-    if ($itempropDescription -ne $expectedDescription) {
-      $metadataIssues.Add("$relativePath => expected itemprop description '$expectedDescription', found '$itempropDescription'")
-    }
   } else {
     if ([string]::IsNullOrWhiteSpace($metaDescription) -or [string]::IsNullOrWhiteSpace($ogDescription) -or [string]::IsNullOrWhiteSpace($twitterDescription)) {
       $metadataIssues.Add("$relativePath => expected non-empty description metadata across meta, og, and twitter tags")
     }
-    if (($metaDescription -ne $ogDescription) -or ($metaDescription -ne $twitterDescription) -or ($metaDescription -ne $itempropDescription)) {
-      $metadataIssues.Add("$relativePath => expected meta, og, twitter, and schema descriptions to stay in sync")
+    if (($metaDescription -ne $ogDescription) -or ($metaDescription -ne $twitterDescription)) {
+      $metadataIssues.Add("$relativePath => expected meta, og, and twitter descriptions to stay in sync")
     }
     if ($metaDescription -match 'Photo by .+ on Unsplash|Golden Corral in Fredericksburg, VA \| Source|\[Embedded media:') {
       $metadataIssues.Add("$relativePath => expected metadata description to exclude imported media caption noise")
     }
   }
+
+  if ($expected.Contains('RequireImage') -and [bool]$expected.RequireImage) {
+    if ([string]::IsNullOrWhiteSpace($ogImage) -or [string]::IsNullOrWhiteSpace($twitterImage)) {
+      $metadataIssues.Add("$relativePath => expected og:image and twitter:image metadata")
+    }
+    elseif ($ogImage -ne $twitterImage) {
+      $metadataIssues.Add("$relativePath => expected og:image and twitter:image metadata to stay in sync")
+    }
+  }
+}
+
+$requiredLegacyCleanupChecks = @(
+  @{
+    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
+    Pattern = '(?is)\[Embedded media'
+    Message = 'expected imported article pages not to expose raw embedded-media placeholder text'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?is)\[Embedded media'
+    Message = 'expected list-style embedded-media remnants to be normalized in imported essays'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
+    Pattern = '(?is)\[Embedded media'
+    Message = 'expected raw HTML figure-based embedded-media remnants to be normalized in imported essays'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
+    Pattern = '(?is)class="?article-embed"?'
+    Message = 'expected imported articles with omitted media to render a semantic embedded-media notice'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?is)class="?article-embed"?'
+    Message = 'expected imported essays with list-style embeds to render a semantic embedded-media notice'
+  },
+  @{
+    Path = 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
+    Pattern = '(?is)class="?article-embed"?'
+    Message = 'expected imported essays with raw figure embeds to render a semantic embedded-media notice'
+  },
+  @{
+    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
+    Pattern = '[\x{00E2}\x{00C3}\x{00C2}]'
+    Message = 'expected representative imported essays not to expose mojibake characters in rendered HTML'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '[\x{00E2}\x{00C3}\x{00C2}]'
+    Message = 'expected localized imported essays not to expose mojibake characters in rendered HTML'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
+    Pattern = '[\x{00E2}\x{00C3}\x{00C2}]'
+    Message = 'expected imported longform essays not to expose mojibake characters in rendered HTML'
+    ShouldNotMatch = $true
+  }
+)
+
+foreach ($check in $requiredLegacyCleanupChecks) {
+  $relativePath = [string]$check.Path
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $legacyCleanupIssues.Add("Missing generated page required for legacy cleanup regression coverage: $relativePath")
+    continue
+  }
+
+  $isNegative = [bool]($check.ContainsKey('ShouldNotMatch') -and $check.ShouldNotMatch)
+  $matches = $targetPageHtml[$relativePath] -match ([string]$check.Pattern)
+  if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
+    $legacyCleanupIssues.Add("$relativePath => $($check.Message)")
+  }
+}
+
+# These checks validate the generated JSON-LD once public/ is refreshed from the current templates.
+foreach ($relativePath in $requiredStructuredDataPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $structuredDataIssues.Add("Missing generated page required for JSON-LD regression coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredStructuredDataPages[$relativePath]
+  $jsonLdObjects = @(Get-JsonLdObjects -Html $html)
+  if ($jsonLdObjects.Count -eq 0) {
+    $structuredDataIssues.Add("$relativePath => expected at least one application/ld+json block")
+    continue
+  }
+
+  $nodes = @(Get-JsonLdNodes -Objects $jsonLdObjects)
+  foreach ($requiredType in @($expected.RequiredTypes)) {
+    if ((Get-JsonLdNodesByType -Nodes $nodes -Type ([string]$requiredType)).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected JSON-LD node type '$requiredType'")
+    }
+  }
+
+  foreach ($forbiddenType in @($expected.ForbiddenTypes)) {
+    if ((Get-JsonLdNodesByType -Nodes $nodes -Type ([string]$forbiddenType)).Count -gt 0) {
+      $structuredDataIssues.Add("$relativePath => did not expect JSON-LD node type '$forbiddenType'")
+    }
+  }
+
+  $organizationNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Organization')
+  if ($expected.Contains('RequirePublisherNode') -and [bool]$expected.RequirePublisherNode) {
+    if (@($organizationNodes | Where-Object { $_.name -eq 'Outside In Print' }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected an Organization node named 'Outside In Print'")
+    }
+  }
+
+  if ($expected.Contains('RequireBreadcrumb') -and [bool]$expected.RequireBreadcrumb) {
+    if ((Get-JsonLdNodesByType -Nodes $nodes -Type 'BreadcrumbList').Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected BreadcrumbList JSON-LD")
+    }
+  }
+
+  $workNode = @(
+    (Get-JsonLdNodesByType -Nodes $nodes -Type 'Article') +
+    (Get-JsonLdNodesByType -Nodes $nodes -Type 'CreativeWork')
+  ) | Select-Object -First 1
+
+  if ($expected.Contains('RequireWorkPublisher') -and [bool]$expected.RequireWorkPublisher) {
+    if ($null -eq $workNode -or $null -eq $workNode.publisher) {
+      $structuredDataIssues.Add("$relativePath => expected the primary work node to include publisher")
+    }
+  }
+
+  if ($expected.Contains('RequireWorkAuthor') -and [bool]$expected.RequireWorkAuthor) {
+    if ($null -eq $workNode -or $null -eq $workNode.author) {
+      $structuredDataIssues.Add("$relativePath => expected the primary work node to include author")
+    }
+  }
+}
+
+# These checks validate the generated route-policy output once public/ is refreshed from the current templates.
+foreach ($relativePath in $requiredIndexationPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $indexationIssues.Add("Missing generated page required for indexation regression coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredIndexationPages[$relativePath]
+  $robotsMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'robots'
+
+  if ([bool]$expected.ExpectRobotsMeta) {
+    if ($robotsMeta -ne [string]$expected.Robots) {
+      $indexationIssues.Add("$relativePath => expected robots meta '$($expected.Robots)', found '$robotsMeta'")
+    }
+  }
+  elseif (-not [string]::IsNullOrWhiteSpace($robotsMeta)) {
+    $indexationIssues.Add("$relativePath => did not expect a page-level robots meta tag, found '$robotsMeta'")
+  }
+}
+
+$robotsTxtPath = Join-Path $SiteDir 'robots.txt'
+if (-not (Test-Path $robotsTxtPath -PathType Leaf)) {
+  $indexationIssues.Add('Missing generated robots.txt output.')
+}
+else {
+  $robotsTxt = Get-Content -Path $robotsTxtPath -Raw
+  foreach ($requiredLine in @('User-agent: *', 'Allow: /', 'Sitemap: https://outsideinprint.org/sitemap.xml')) {
+    if ($robotsTxt -notmatch [regex]::Escape($requiredLine)) {
+      $indexationIssues.Add("robots.txt => expected line '$requiredLine'")
+    }
+  }
+}
+
+$sitemapPath = Join-Path $SiteDir 'sitemap.xml'
+if (-not (Test-Path $sitemapPath -PathType Leaf)) {
+  $indexationIssues.Add('Missing generated sitemap.xml output.')
+}
+else {
+  $sitemapLocs = @(Get-SitemapLocs -Xml (Get-Content -Path $sitemapPath -Raw))
+  foreach ($requiredLoc in $requiredSitemapInclusions) {
+    if ($sitemapLocs -notcontains $requiredLoc) {
+      $indexationIssues.Add("sitemap.xml => expected sitemap inclusion '$requiredLoc'")
+    }
+  }
+
+  foreach ($excludedLoc in $requiredSitemapExclusions) {
+    if ($sitemapLocs -contains $excludedLoc) {
+      $indexationIssues.Add("sitemap.xml => did not expect sitemap inclusion '$excludedLoc'")
+    }
+  }
 }
 
 $requiredUxChecks = @(
+  @{
+    Path = 'public/index.html'
+    Pattern = '<h1 class="title">Outside In Print</h1>'
+    Message = 'expected the homepage to expose a visible h1 for the imprint'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Read by Path'
+    Message = 'expected the homepage to label its primary discovery grid as a browsable path chooser'
+  },
   @{
     Path = 'public/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
@@ -481,6 +865,11 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/start-here/index.html'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/syd-and-oliver/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Message = 'expected Start Here to expose direct navigation into the site’s major discovery lanes'
+  },
+  @{
     Path = 'public/essays/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected the default list template to expose collection and library next steps'
@@ -490,6 +879,16 @@ $requiredUxChecks = @(
     Pattern = '>Read PDF<'
     Message = 'expected section list pages to avoid PDF affordances'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'The library is the full catalog of the imprint'
+    Message = 'expected the library page to explain its catalog role in visible copy'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'Fiction and dialogue from the recurring world of Syd and Oliver'
+    Message = 'expected the library page to surface lane descriptions from section metadata'
   },
   @{
     Path = 'public/library/index.html'
@@ -511,6 +910,16 @@ $requiredUxChecks = @(
     Path = 'public/collections/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/start-here/'
     Message = 'expected the collections index to expose library and Start Here navigation'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'How to Use This Collection'
+    Message = 'expected collection detail pages to include a visible overview section explaining how to use the collection'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'Related Collections'
+    Message = 'expected collection detail pages to link onward to related collections'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
@@ -628,6 +1037,18 @@ if ($importedMediaIssues.Count -gt 0) {
 
 if ($metadataIssues.Count -gt 0) {
   throw ("Found metadata regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $metadataIssues))
+}
+
+if ($structuredDataIssues.Count -gt 0) {
+  throw ("Found structured-data regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $structuredDataIssues))
+}
+
+if ($indexationIssues.Count -gt 0) {
+  throw ("Found indexation-policy regressions in generated output. Samples: {0}" -f (Format-SampleList -Items $indexationIssues))
+}
+
+if ($legacyCleanupIssues.Count -gt 0) {
+  throw ("Found legacy content-cleanup regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $legacyCleanupIssues))
 }
 
 if ($uxIssues.Count -gt 0) {

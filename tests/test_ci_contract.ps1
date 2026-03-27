@@ -7,6 +7,10 @@ $nvmrcPath = Join-Path $repoRoot ".nvmrc"
 $deployWorkflowPath = Join-Path $repoRoot ".github/workflows/deploy.yml"
 $dashboardWorkflowPath = Join-Path $repoRoot ".github/workflows/publish-dashboard.yml"
 $refreshWorkflowPath = Join-Path $repoRoot ".github/workflows/refresh-analytics.yml"
+$publicOutputHelperPath = Join-Path $repoRoot "tests/helpers/public_output_common.ps1"
+$publicManifestWriterPath = Join-Path $repoRoot "tests/write_public_build_manifest.ps1"
+$publicOutputTestPath = Join-Path $repoRoot "tests/test_public_html_output.ps1"
+$legacyRenderContractPath = Join-Path $repoRoot "tests/test_legacy_render_contract.ps1"
 
 if (-not (Test-Path $packagePath -PathType Leaf)) {
   throw "package.json is required for the CI contract test."
@@ -16,11 +20,20 @@ if (-not (Test-Path $nvmrcPath -PathType Leaf)) {
   throw ".nvmrc is required so local and CI Node versions stay aligned."
 }
 
+foreach ($requiredValidationPath in @($publicOutputHelperPath, $publicManifestWriterPath, $publicOutputTestPath, $legacyRenderContractPath)) {
+  if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
+    throw "Missing SEO validation helper: $requiredValidationPath"
+  }
+}
+
 $package = Get-Content -Path $packagePath -Raw | ConvertFrom-Json
 $recommendedNodeVersion = (Get-Content -Path $nvmrcPath -Raw).Trim()
 $deployWorkflow = Get-Content -Path $deployWorkflowPath -Raw
 $dashboardWorkflow = Get-Content -Path $dashboardWorkflowPath -Raw
 $refreshWorkflow = Get-Content -Path $refreshWorkflowPath -Raw
+$publicOutputHelper = Get-Content -Path $publicOutputHelperPath -Raw
+$publicManifestWriter = Get-Content -Path $publicManifestWriterPath -Raw
+$publicOutputTest = Get-Content -Path $publicOutputTestPath -Raw
 
 if ([string]::IsNullOrWhiteSpace($recommendedNodeVersion)) {
   throw ".nvmrc must contain a Node major version."
@@ -73,8 +86,36 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_essay_guardrails\.ps1") {
   throw "deploy.yml must run the essay guardrail regression test."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_schema_template_contract\.ps1") {
+  throw "deploy.yml must run the schema template contract test."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_indexation_policy_contract\.ps1") {
+  throw "deploy.yml must run the indexation policy contract test."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_discovery_surface_contract\.ps1") {
+  throw "deploy.yml must run the discovery surface contract test."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_legacy_render_contract\.ps1") {
+  throw "deploy.yml must run the legacy render contract test."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/write_public_build_manifest\.ps1") {
+  throw "deploy.yml must write a fresh-build manifest before running generated-output validation."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_public_html_output\.ps1\s+-RequireFreshBuild") {
+  throw "deploy.yml must run the generated-output regression test with -RequireFreshBuild."
+}
+
 if ($deployWorkflow -notmatch "\.\/scripts\/check_essay_guardrails\.ps1") {
   throw "deploy.yml must run the essay guardrail check before building the site."
+}
+
+if ($deployWorkflow -notmatch "needs:\s*contracts") {
+  throw "deploy.yml must separate contract tests from the Hugo build by making the build job depend on the contracts job."
 }
 
 if ($dashboardWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
@@ -83,6 +124,26 @@ if ($dashboardWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
 
 if ($refreshWorkflow -notmatch "GOATCOUNTER_API_URL:\s*\$\{\{\s*vars\.GOATCOUNTER_API_URL\s*\}\}") {
   throw "refresh-analytics.yml must pass GOATCOUNTER_API_URL through to the fetch step."
+}
+
+if ($publicOutputHelper -notmatch 'function\s+Test-PublicBuildFreshness') {
+  throw "tests/helpers/public_output_common.ps1 must expose Test-PublicBuildFreshness."
+}
+
+if ($publicManifestWriter -notmatch 'Write-PublicBuildManifest') {
+  throw "tests/write_public_build_manifest.ps1 must write the public build manifest."
+}
+
+if ($publicOutputTest -notmatch '\[switch\]\$RequireFreshBuild') {
+  throw "tests/test_public_html_output.ps1 must accept -RequireFreshBuild."
+}
+
+if ($publicOutputTest -notmatch 'Test-PublicBuildFreshness') {
+  throw "tests/test_public_html_output.ps1 must verify fresh build state before asserting generated output."
+}
+
+if ($publicOutputTest -notmatch 'Skipping generated-output regression test') {
+  throw "tests/test_public_html_output.ps1 must explain when generated-output validation is skipped outside a fresh build."
 }
 
 $dashboardLogicTestsIndex = $dashboardWorkflow.IndexOf("Run Dashboard Logic Tests")

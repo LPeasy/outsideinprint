@@ -1,8 +1,28 @@
 {{- $siteDescription := site.Params.description | default "Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records." -}}
+{{- $route := partial "metadata/route.html" . -}}
 {{- $description := "" -}}
+{{- $slug := "" -}}
+
+{{- with .File -}}
+  {{- $slug = $.Params.slug | default .BaseFileName -}}
+{{- end -}}
 
 {{- with .Params.description -}}
   {{- $description = . -}}
+{{- end -}}
+
+{{- if and (not $description) (eq $route.name "collection") $slug -}}
+  {{- with partial "collections/lookup-definition.html" $slug -}}
+    {{- with .description -}}
+      {{- $description = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $description -}}
+  {{- if eq $route.name "utility" -}}
+    {{- $description = "A random path into the Outside In Print archive. If the random route is not useful, browse the full library instead." -}}
+  {{- end -}}
 {{- end -}}
 
 {{- if not $description -}}

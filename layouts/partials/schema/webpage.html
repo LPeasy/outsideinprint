@@ -1,0 +1,45 @@
+{{- $page := .page -}}
+{{- $meta := .meta -}}
+{{- $website := .website -}}
+{{- $image := .image -}}
+{{- $breadcrumb := .breadcrumb -}}
+{{- $significantLinks := partial "schema/significant-links.html" (dict "page" $page "meta" $meta) -}}
+
+{{- $pageType := "WebPage" -}}
+{{- if or (eq $meta.route.name "collection") (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "section-list") -}}
+  {{- $pageType = "CollectionPage" -}}
+{{- end -}}
+
+{{- $node := dict
+  "@id" (printf "%s#webpage" $meta.canonical)
+  "@type" $pageType
+  "url" $meta.canonical
+  "name" $meta.title
+  "description" $meta.description
+  "isPartOf" (dict "@id" (index $website "@id"))
+  "inLanguage" ($page.Site.Language.LanguageCode | default "en-US")
+-}}
+
+{{- if $meta.route.is_article_like -}}
+  {{- $node = merge $node (dict "mainEntity" (dict
+    "@id" (printf "%s#primaryentity" $meta.canonical)
+  )) -}}
+{{- end -}}
+
+{{- with $image -}}
+  {{- $node = merge $node (dict "primaryImageOfPage" (dict
+    "@id" (index . "@id")
+  )) -}}
+{{- end -}}
+
+{{- with $breadcrumb -}}
+  {{- $node = merge $node (dict "breadcrumb" (dict
+    "@id" (index . "@id")
+  )) -}}
+{{- end -}}
+
+{{- if gt (len $significantLinks) 0 -}}
+  {{- $node = merge $node (dict "significantLink" $significantLinks) -}}
+{{- end -}}
+
+{{- return $node -}}

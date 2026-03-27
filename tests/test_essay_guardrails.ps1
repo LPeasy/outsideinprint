@@ -53,6 +53,8 @@ Blocker Essay
 Blocker Subtitle
 
 [Embedded media: https://example.com/embed]
+
+The warning came in â€œlate.â€
 '@ | Set-Content -Path (Join-Path $essayRoot "blocker.md") -Encoding UTF8
 
   @'
@@ -102,6 +104,7 @@ This paragraph is fine.
   Assert-True ($blockerOutput.Contains("BLOCKER essays/blocker.md")) "Expected blocker output to identify the failing essay."
   Assert-True ($blockerOutput.Contains("duplicated_title")) "Expected blocker output to include duplicated_title."
   Assert-True ($blockerOutput.Contains("embed_remnants")) "Expected blocker output to include embed_remnants."
+  Assert-True ($blockerOutput.Contains("mojibake")) "Expected blocker output to include mojibake."
 
   $warningOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" 2>&1 | Out-String
   $warningExit = $LASTEXITCODE

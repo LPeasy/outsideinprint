@@ -1,0 +1,50 @@
+{{- $page := .page | default . -}}
+{{- $route := .route | default (partial "metadata/route.html" $page) -}}
+{{- $collection := .collection | default false -}}
+
+{{- $indexable := true -}}
+{{- $inSitemap := true -}}
+{{- $robots := slice -}}
+{{- $reason := "indexable-canonical" -}}
+
+{{- $explicitNoindex := false -}}
+{{- with $page.Params.noindex -}}
+  {{- if . -}}
+    {{- $explicitNoindex = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $regularPageCount := 0 -}}
+{{- if $page.IsSection -}}
+  {{- $regularPageCount = len ($page.RegularPagesRecursive | default (slice)) -}}
+{{- end -}}
+
+{{- if $explicitNoindex -}}
+  {{- $indexable = false -}}
+  {{- $inSitemap = false -}}
+  {{- $robots = slice "noindex" "follow" -}}
+  {{- $reason = "explicit-noindex" -}}
+{{- else if eq $route.name "utility" -}}
+  {{- $indexable = false -}}
+  {{- $inSitemap = false -}}
+  {{- $robots = slice "noindex" "follow" -}}
+  {{- $reason = "utility-route" -}}
+{{- else if and (eq $route.name "section-list") (eq $regularPageCount 0) -}}
+  {{- $indexable = false -}}
+  {{- $inSitemap = false -}}
+  {{- $robots = slice "noindex" "follow" -}}
+  {{- $reason = "empty-section-list" -}}
+{{- else if and (eq $route.name "collection") (not $collection) -}}
+  {{- $indexable = false -}}
+  {{- $inSitemap = false -}}
+  {{- $robots = slice "noindex" "follow" -}}
+  {{- $reason = "missing-collection-definition" -}}
+{{- end -}}
+
+{{- return (dict
+  "indexable" $indexable
+  "in_sitemap" $inSitemap
+  "robots" $robots
+  "reason" $reason
+  "regular_page_count" $regularPageCount
+) -}}

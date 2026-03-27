@@ -1,0 +1,6 @@
+authors:
+  editorial:
+    type: Organization
+    name: Outside In Print Editorial
+    url: https://outsideinprint.org/
+    parent_organization: true

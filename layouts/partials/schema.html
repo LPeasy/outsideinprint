@@ -1,20 +1,48 @@
-{{- $description := partial "metadata_description.html" . -}}
-{{- $image := partial "metadata_image.html" . -}}
-{{- $title := cond .IsHome site.Title .Title -}}
-<meta itemprop="name" content="{{ $title }}">
-<meta itemprop="description" content="{{ $description }}">
-<meta itemprop="url" content="{{ .Permalink }}">
-{{- with $image }}
-<meta itemprop="image" content="{{ . }}">
-{{- end }}
-{{- if .IsPage }}
-  {{- with .Date }}
-<meta itemprop="datePublished" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
-  {{- end }}
-  {{- with .Lastmod }}
-<meta itemprop="dateModified" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
-  {{- end }}
-  {{- with .WordCount }}
-<meta itemprop="wordCount" content="{{ . }}">
-  {{- end }}
-{{- end }}
+{{- $page := .page -}}
+{{- $meta := .meta -}}
+{{- $organization := partial "schema/organization.html" (dict "page" $page "meta" $meta) -}}
+{{- $website := partial "schema/website.html" (dict "page" $page "meta" $meta "organization" $organization) -}}
+{{- $image := partial "schema/image.html" (dict "page" $page "meta" $meta) -}}
+{{- $breadcrumb := partial "schema/breadcrumbs.html" (dict "page" $page "meta" $meta) -}}
+{{- $webpage := partial "schema/webpage.html" (dict
+  "page" $page
+  "meta" $meta
+  "website" $website
+  "image" $image
+  "breadcrumb" $breadcrumb
+) -}}
+{{- $author := partial "schema/resolve-author.html" (dict
+  "page" $page
+  "meta" $meta
+  "organization" $organization
+) -}}
+{{- $creativeWork := partial "schema/creative-work.html" (dict
+  "page" $page
+  "meta" $meta
+  "organization" $organization
+  "image" $image
+  "author" $author
+) -}}
+
+{{- $graph := slice $organization $website $webpage -}}
+
+{{- with $image -}}
+  {{- $graph = $graph | append . -}}
+{{- end -}}
+
+{{- with $breadcrumb -}}
+  {{- $graph = $graph | append . -}}
+{{- end -}}
+
+{{- with $creativeWork -}}
+  {{- with .author_nodes -}}
+    {{- range . -}}
+      {{- $graph = $graph | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with .node -}}
+    {{- $graph = $graph | append . -}}
+  {{- end -}}
+{{- end -}}
+
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>

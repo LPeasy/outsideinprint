@@ -1,0 +1,30 @@
+{{- $page := .page | default . -}}
+{{- $siteDescription := site.Params.description | default "Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records." -}}
+{{- $summary := "" -}}
+
+{{- with $page.Params.dek -}}
+  {{- $summary = . -}}
+{{- end -}}
+
+{{- if not $summary -}}
+  {{- with $page.Params.subtitle -}}
+    {{- $summary = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $summary -}}
+  {{- with $page.Params.description -}}
+    {{- $summary = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $summary -}}
+  {{- $summary = partial "metadata_description.html" $page -}}
+{{- end -}}
+
+{{- $summary = strings.TrimSpace ($summary | plainify) -}}
+{{- if eq $summary $siteDescription -}}
+  {{- $summary = "" -}}
+{{- end -}}
+
+{{- return $summary -}}

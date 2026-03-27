@@ -1,21 +1,24 @@
 ﻿<!doctype html>
 <html lang="{{ site.Language.LanguageCode | default "en" }}">
   <head>
-    {{- $metaDescription := partial "metadata_description.html" . -}}
+    {{- $meta := partial "metadata/page.html" . -}}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
-    <link rel="canonical" href="{{ .Permalink }}" />
+    <title>{{ $meta.full_title }}</title>
+    <link rel="canonical" href="{{ $meta.canonical }}" />
 
-    <meta name="description" content="{{ $metaDescription }}" />
+    <meta name="description" content="{{ $meta.description }}" />
+    {{- with $meta.robots }}
+    <meta name="robots" content="{{ delimit . ", " }}" />
+    {{- end }}
 
     <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
 
     {{ partial "head_fonts.html" . }}
-    {{ partial "opengraph.html" . }}
-    {{ partial "twitter_cards.html" . }}
-    {{ partial "schema.html" . }}
+    {{ partial "opengraph.html" (dict "page" . "meta" $meta) }}
+    {{ partial "twitter_cards.html" (dict "page" . "meta" $meta) }}
+    {{ partial "schema.html" (dict "page" . "meta" $meta) }}
 
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ if site.Params.dashboard.site }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}" integrity="{{ $css.Data.Integrity }}" />

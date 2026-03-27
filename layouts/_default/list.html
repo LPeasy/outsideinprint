@@ -1,7 +1,13 @@
 {{ define "main" }}
+  {{ $pages := .Pages }}
+  {{ $latest := false }}
+  {{ if gt (len $pages) 0 }}
+    {{ $latest = index (sort $pages "Date" "desc") 0 }}
+  {{ end }}
   <header class="page-header">
     <h1 id="page-title" class="list-title">{{ .Title }}</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    {{ if gt (len $pages) 0 }}<p class="page-intro">{{ len $pages }} published pieces{{ with $latest }}. Latest: {{ .Date.Format "Jan 2, 2006" }}{{ end }}.</p>{{ end }}
   </header>
 
   {{ partial "journey_links.html" (dict
@@ -10,19 +16,23 @@
     "links" (slice
       (dict "href" ("collections/" | absURL) "label" "Browse collections")
       (dict "href" ("library/" | absURL) "label" "Search the library")
+      (dict "href" ("start-here/" | absURL) "label" "Read Start Here")
     )
   ) }}
 
-  {{ $pages := .Pages }}
   <section aria-labelledby="page-title">
-    {{ range sort $pages "Title" "asc" }}
+    {{ if gt (len $pages) 0 }}
+      {{ range sort $pages "Title" "asc" }}
+        {{ partial "discovery/page-list-item.html" (dict
+          "page" .
+          "showCollections" true
+          "showSectionLabel" false
+        ) }}
+      {{ end }}
+    {{ else }}
       <div class="item">
-        <div class="t"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
-        <div class="m">
-          {{ with .Params.subtitle }}{{ . }} | {{ end }}
-          {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
-          {{ with .Params.version }} | v{{ . }}{{ end }}
-        </div>
+        <div class="t">No published pieces are listed here yet.</div>
+        <div class="m">This lane is still taking shape. Browse <a href="{{ "collections/" | absURL }}">Collections</a> or the full <a href="{{ "library/" | absURL }}">Library</a> in the meantime.</div>
       </div>
     {{ end }}
   </section>

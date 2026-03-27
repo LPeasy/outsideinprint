@@ -1,0 +1,63 @@
+{{- $entry := .entry -}}
+{{- $variant := .variant | default "grid" -}}
+{{- $sourceSlot := .analyticsSourceSlot | default "collection_page" -}}
+{{- $label := .label | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $url := printf "collections/%s/" $entry.collection.slug | absURL -}}
+{{- with $entry.page -}}
+  {{- $url = .RelPermalink -}}
+{{- end -}}
+{{- $path := printf "/collections/%s/" $entry.collection.slug -}}
+{{- with $entry.page -}}
+  {{- $path = .RelPermalink -}}
+{{- end -}}
+
+{{- $startHereSlug := lower (printf "%v" ($entry.collection.start_here | default "")) -}}
+{{- $startHere := false -}}
+{{- if $startHereSlug -}}
+  {{- range $entry.items -}}
+    {{- if eq (lower (printf "%v" (.Params.slug | default .File.BaseFileName))) $startHereSlug -}}
+      {{- $startHere = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $variant "item" -}}
+  <article class="item{{ with $class }} {{ . }}{{ end }}">
+    <div class="t"><a href="{{ $url }}"
+      data-analytics-event="collection_click"
+      data-analytics-source-slot="{{ $sourceSlot }}"
+      data-analytics-collection="{{ $entry.collection.slug }}"
+      data-analytics-slug="{{ $entry.collection.slug }}"
+      data-analytics-title="{{ $entry.collection.title }}"
+      data-analytics-section="Collections"
+      data-analytics-path="{{ $path }}"
+    >{{ $entry.collection.title }}</a></div>
+    <div class="m">{{ title $entry.state.kind }} | {{ $entry.state.count }} pieces{{ with $startHere }} | Start with {{ .Title }}{{ end }}</div>
+    {{ with $entry.collection.description }}<div class="d">{{ . }}</div>{{ end }}
+    {{ with $startHere }}<div class="d">Recommended entry point: <a href="{{ .RelPermalink }}">{{ .Title }}</a></div>{{ end }}
+  </article>
+{{- else -}}
+  <a class="card collection-card{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"
+    data-analytics-event="collection_click"
+    data-analytics-source-slot="{{ $sourceSlot }}"
+    data-analytics-collection="{{ $entry.collection.slug }}"
+    data-analytics-slug="{{ $entry.collection.slug }}"
+    data-analytics-title="{{ $entry.collection.title }}"
+    data-analytics-section="Collections"
+    data-analytics-path="{{ $path }}"
+  >
+    {{- if $label -}}
+      <div class="k">{{ $label }}</div>
+    {{- else -}}
+      <div class="k">{{ title $entry.state.kind }}</div>
+    {{- end -}}
+    <div class="v">{{ $entry.collection.title }}</div>
+    {{ with $entry.collection.description }}<div class="d">{{ . }}</div>{{ end }}
+    <div class="collection-meta">
+      <span>{{ $entry.state.count }} pieces</span>
+      <span>{{ title $entry.state.kind }}</span>
+      {{ with $startHere }}<span>Start with {{ .Title }}</span>{{ end }}
+    </div>
+  </a>
+{{- end -}}

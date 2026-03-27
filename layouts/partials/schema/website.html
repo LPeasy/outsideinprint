@@ -1,0 +1,13 @@
+{{- $organization := .organization -}}
+{{- $organizationID := index $organization "@id" -}}
+{{- $organizationData := site.Data.organization -}}
+{{- $node := dict
+  "@id" (printf "%s#website" (strings.TrimSuffix "/" site.BaseURL))
+  "@type" "WebSite"
+  "url" site.BaseURL
+  "name" site.Title
+  "description" ($organizationData.description | default "")
+  "publisher" (dict "@id" $organizationID)
+  "inLanguage" (site.Language.LanguageCode | default "en-US")
+-}}
+{{- return $node -}}

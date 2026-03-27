@@ -1,0 +1,10 @@
+{{- $meta := .meta -}}
+{{- if not $meta.image -}}
+  {{- return false -}}
+{{- end -}}
+
+{{- return (dict
+  "@id" (printf "%s#primaryimage" $meta.canonical)
+  "@type" "ImageObject"
+  "url" $meta.image
+) -}}

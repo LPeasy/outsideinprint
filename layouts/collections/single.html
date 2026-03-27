@@ -20,78 +20,96 @@
       {{ end }}
     {{ end }}
 
-    <h1>{{ $definition.title }}</h1>
-    {{ with $definition.description }}<p class="subtitle">{{ . }}</p>{{ end }}
-
-    <div class="collection-meta-block">
-      <div class="collection-meta-row"><span class="collection-meta-label">Kind</span><span class="collection-meta-value">{{ title $state.kind }}</span></div>
-      <div class="collection-meta-row"><span class="collection-meta-label">Pieces</span><span class="collection-meta-value">{{ $state.count }}</span></div>
-      <div class="collection-meta-row"><span class="collection-meta-label">Minimum To List</span><span class="collection-meta-value">{{ $state.min_items }}</span></div>
-      {{ with $definition.metadata }}
-        {{ range . }}
-          <div class="collection-meta-row"><span class="collection-meta-label">{{ .label }}</span><span class="collection-meta-value">{{ .value }}</span></div>
+    {{ $primaryRelatedCollections := slice }}
+    {{ $secondaryRelatedCollections := slice }}
+    {{ range partial "collections/get-public-entries.html" . }}
+      {{ if ne .collection.slug $definition.slug }}
+        {{ if eq .state.kind $state.kind }}
+          {{ $primaryRelatedCollections = $primaryRelatedCollections | append . }}
+        {{ else }}
+          {{ $secondaryRelatedCollections = $secondaryRelatedCollections | append . }}
         {{ end }}
       {{ end }}
-    </div>
+    {{ end }}
+    {{ $relatedCollections := first 3 (append $primaryRelatedCollections $secondaryRelatedCollections) }}
+
+    <header class="page-header">
+      <h1>{{ $definition.title }}</h1>
+      {{ with $definition.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+      <p class="page-intro">This {{ $state.kind }} gathers {{ $state.count }} published pieces into one reading thread{{ with $startHere }} and points first-time readers to <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}.</p>
+    </header>
+
+    <section aria-labelledby="collection-overview-title">
+      <h2 id="collection-overview-title" class="list-title">How to Use This Collection</h2>
+      <dl class="collection-meta-block">
+        <div class="collection-meta-row"><dt class="collection-meta-label">Kind</dt><dd class="collection-meta-value">{{ title $state.kind }}</dd></div>
+        <div class="collection-meta-row"><dt class="collection-meta-label">Pieces</dt><dd class="collection-meta-value">{{ $state.count }}</dd></div>
+        <div class="collection-meta-row"><dt class="collection-meta-label">Minimum To List</dt><dd class="collection-meta-value">{{ $state.min_items }}</dd></div>
+        {{ with $startHere }}
+          <div class="collection-meta-row"><dt class="collection-meta-label">Recommended Entry</dt><dd class="collection-meta-value"><a href="{{ .RelPermalink }}">{{ .Title }}</a></dd></div>
+        {{ end }}
+      {{ with $definition.metadata }}
+        {{ range . }}
+          <div class="collection-meta-row"><dt class="collection-meta-label">{{ .label }}</dt><dd class="collection-meta-value">{{ .value }}</dd></div>
+        {{ end }}
+      {{ end }}
+      </dl>
+    </section>
 
     {{ with $startHere }}
-      <h2 class="list-title" style="margin-top:28px;">Start Here</h2>
-      <div class="item collection-start-here">
-        {{ $slug := .Params.slug | default .File.BaseFileName }}
-        {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-        <div class="t"><a href="{{ .RelPermalink }}"
-          data-analytics-event="collection_click"
-          data-analytics-source-slot="collection_page"
-          data-analytics-collection="{{ $definition.slug }}"
-          data-analytics-slug="{{ $slug }}"
-          data-analytics-title="{{ .Title }}"
-          data-analytics-section="{{ $sectionLabel }}"
-          data-analytics-path="{{ .RelPermalink }}"
-        >{{ .Title }}</a></div>
-        <div class="m">
-          {{ with .Params.section_label }}{{ . }}{{ end }}
-          {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
-          {{ with .Params.version }} | v{{ . }}{{ end }}
-          {{ with .ReadingTime }} | {{ . }} min read{{ end }}
-        </div>
-        {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-      </div>
+      <section aria-labelledby="collection-start-here-title">
+        <h2 id="collection-start-here-title" class="list-title" style="margin-top:28px;">Start Here</h2>
+        {{ partial "discovery/page-list-item.html" (dict
+          "page" .
+          "class" "collection-start-here"
+          "analyticsEvent" "collection_click"
+          "analyticsSourceSlot" "collection_page"
+          "analyticsCollection" $definition.slug
+          "showCollections" false
+        ) }}
+      </section>
     {{ end }}
 
-    <h2 class="list-title" style="margin-top:30px;">In This Collection</h2>
-    {{ if gt (len $items) 0 }}
-      <ol class="collection-items">
-      {{ range $items }}
-        {{ $itemSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
-        <li class="item collection-item">
-          {{ $slug := .Params.slug | default .File.BaseFileName }}
-          {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
-          <div class="t"><a href="{{ .RelPermalink }}"
-            data-analytics-event="collection_click"
-            data-analytics-source-slot="collection_page"
-            data-analytics-collection="{{ $definition.slug }}"
-            data-analytics-slug="{{ $slug }}"
-            data-analytics-title="{{ .Title }}"
-            data-analytics-section="{{ $sectionLabel }}"
-            data-analytics-path="{{ .RelPermalink }}"
-          >{{ .Title }}</a></div>
-          <div class="m">
-            {{ if eq $itemSlug $startHereSlug }}<span class="collection-pill">Start Here</span>{{ end }}
-            {{ with .Params.section_label }}{{ . }}{{ end }}
-            {{ with .Date }} | {{ .Format "Jan 2, 2006" }}{{ end }}
-            {{ with .Params.version }} | v{{ . }}{{ end }}
-            {{ with .ReadingTime }} | {{ . }} min read{{ end }}
-          </div>
-          {{ with .Params.subtitle }}<div class="d">{{ . }}</div>{{ end }}
-        </li>
+    <section aria-labelledby="collection-items-title">
+      <h2 id="collection-items-title" class="list-title" style="margin-top:30px;">In This Collection</h2>
+      {{ if gt (len $items) 0 }}
+        <ol class="collection-items">
+        {{ range $items }}
+          {{ $itemSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
+          <li class="collection-item">
+            {{ partial "discovery/page-list-item.html" (dict
+              "page" .
+              "analyticsEvent" "collection_click"
+              "analyticsSourceSlot" "collection_page"
+              "analyticsCollection" $definition.slug
+              "showCollections" false
+              "class" (cond (eq $itemSlug $startHereSlug) "collection-item--start-here" "")
+            ) }}
+            {{ if eq $itemSlug $startHereSlug }}<div class="m"><span class="collection-pill">Start Here</span>Recommended entry point for this collection.</div>{{ end }}
+          </li>
+        {{ end }}
+        </ol>
+      {{ else }}
+        <div class="item">
+          <div class="t">No items matched this collection.</div>
+          <div class="m">Adjust explicit <code>collections</code> or the fallback rules in <code>data/collections.yaml</code>.</div>
+        </div>
       {{ end }}
-      </ol>
-    {{ else }}
-      <div class="item">
-        <div class="t">No items matched this collection.</div>
-        <div class="m">Adjust explicit <code>collections</code> or the fallback rules in <code>data/collections.yaml</code>.</div>
-      </div>
+    </section>
+
+    {{ if gt (len $relatedCollections) 0 }}
+      <section aria-labelledby="related-collections-title">
+        <h2 id="related-collections-title" class="list-title" style="margin-top:30px;">Related Collections</h2>
+        {{ range $relatedCollections }}
+          {{ partial "discovery/collection-card.html" (dict
+            "entry" .
+            "variant" "item"
+            "analyticsSourceSlot" "collection_related"
+          ) }}
+        {{ end }}
+      </section>
     {{ end }}
+
     {{ partial "journey_links.html" (dict
       "class" "journey-links--page"
       "eyebrow" "Browse next"

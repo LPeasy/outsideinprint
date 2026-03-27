@@ -1,15 +1,18 @@
 {{ define "main" }}
   {{ $entries := partial "collections/get-public-entries.html" . }}
   {{ $featured := slice }}
+  {{ $totalPieces := 0 }}
   {{ range $entries }}
     {{ if .collection.featured }}
       {{ $featured = $featured | append . }}
     {{ end }}
+    {{ $totalPieces = add $totalPieces .state.count }}
   {{ end }}
 
   <header class="page-header">
     <h1 id="collections-title" class="list-title">Collections</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    {{ if gt (len $entries) 0 }}<p class="page-intro">Collections are curated reading threads across the archive: {{ len $entries }} public collections linking {{ $totalPieces }} published pieces.</p>{{ end }}
   </header>
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"
@@ -21,35 +24,14 @@
   ) }}
   {{ if gt (len $featured) 0 }}
     <section aria-labelledby="featured-collections-title">
-      <h2 id="featured-collections-title" class="visually-hidden">Featured Collections</h2>
+      <h2 id="featured-collections-title" class="list-title">Featured Collections</h2>
       <div class="grid collection-grid">
         {{ range $featured }}
-          {{ $url := printf "collections/%s/" .collection.slug | absURL }}
-          {{ with .page }}
-            {{ $url = .RelPermalink }}
-          {{ end }}
-          {{ $path := printf "/collections/%s/" .collection.slug }}
-          {{ with .page }}
-            {{ $path = .RelPermalink }}
-          {{ end }}
-          <a class="card collection-card" href="{{ $url }}"
-            data-analytics-event="collection_click"
-            data-analytics-source-slot="collection_page"
-            data-analytics-collection="{{ .collection.slug }}"
-            data-analytics-slug="{{ .collection.slug }}"
-            data-analytics-title="{{ .collection.title }}"
-            data-analytics-section="Collections"
-            data-analytics-path="{{ $path }}"
-          >
-            <div class="k">Featured {{ title .state.kind }}</div>
-            <div class="v">{{ .collection.title }}</div>
-            {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
-            <div class="collection-meta">
-              <span>{{ .state.count }} pieces</span>
-              <span>{{ title .state.kind }}</span>
-              {{ with .collection.start_here }}<span>Start Here</span>{{ end }}
-            </div>
-          </a>
+          {{ partial "discovery/collection-card.html" (dict
+            "entry" .
+            "variant" "grid"
+            "label" (printf "Featured %s" (title .state.kind))
+          ) }}
         {{ end }}
       </div>
     </section>
@@ -59,27 +41,10 @@
     <section aria-labelledby="all-collections-title">
       <h2 id="all-collections-title" class="list-title" style="margin-top:28px;">All Collections</h2>
       {{ range $entries }}
-        {{ $url := printf "collections/%s/" .collection.slug | absURL }}
-        {{ with .page }}
-          {{ $url = .RelPermalink }}
-        {{ end }}
-        <div class="item">
-          {{ $path := printf "/collections/%s/" .collection.slug }}
-          {{ with .page }}
-            {{ $path = .RelPermalink }}
-          {{ end }}
-          <div class="t"><a href="{{ $url }}"
-            data-analytics-event="collection_click"
-            data-analytics-source-slot="collection_page"
-            data-analytics-collection="{{ .collection.slug }}"
-            data-analytics-slug="{{ .collection.slug }}"
-            data-analytics-title="{{ .collection.title }}"
-            data-analytics-section="Collections"
-            data-analytics-path="{{ $path }}"
-          >{{ .collection.title }}</a></div>
-          <div class="m">{{ title .state.kind }} | {{ .state.count }} pieces{{ with .collection.start_here }} | start here available{{ end }}</div>
-          {{ with .collection.description }}<div class="d">{{ . }}</div>{{ end }}
-        </div>
+        {{ partial "discovery/collection-card.html" (dict
+          "entry" .
+          "variant" "item"
+        ) }}
       {{ end }}
     </section>
   {{ else }}

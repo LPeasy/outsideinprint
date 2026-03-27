@@ -82,7 +82,7 @@
           data-analytics-path="{{ $hero.RelPermalink }}"
         >{{ $hero.Title }}</a>
       </h3>
-      {{ with or $hero.Description $hero.Params.subtitle $hero.Params.dek }}
+      {{ with (partial "discovery/page-summary.html" $hero) }}
         <div class="d selected-hero__dek">{{ . }}</div>
       {{ end }}
       <div class="m">
