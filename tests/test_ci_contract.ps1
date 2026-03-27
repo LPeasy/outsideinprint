@@ -147,6 +147,8 @@ if ($publicOutputTest -notmatch 'Skipping generated-output regression test') {
 }
 
 $templateSyntaxGuardPaths = @(
+  (Join-Path $repoRoot 'layouts/partials/article'),
+  (Join-Path $repoRoot 'layouts/partials/discovery'),
   (Join-Path $repoRoot 'layouts/partials/collections'),
   (Join-Path $repoRoot 'layouts/partials/metadata'),
   (Join-Path $repoRoot 'layouts/partials/schema')
@@ -170,6 +172,16 @@ foreach ($guardPath in $templateSyntaxGuardPaths) {
           break
         }
       }
+    }
+  }
+}
+
+foreach ($guardPath in $templateSyntaxGuardPaths) {
+  foreach ($templatePath in @(Get-ChildItem -Path $guardPath -Recurse -File)) {
+    $templateContent = Get-Content -Path $templatePath.FullName -Raw
+    if ($templateContent -match '\{\{-\s*return\s+[^}]+-\}\}') {
+      $relativeTemplatePath = $templatePath.FullName.Substring($repoRoot.Length + 1).Replace('\', '/')
+      throw "Found trim-marked Hugo return syntax in $relativeTemplatePath; use plain {{ return ... }} for value-returning partials."
     }
   }
 }
