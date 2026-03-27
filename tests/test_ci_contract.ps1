@@ -146,6 +146,34 @@ if ($publicOutputTest -notmatch 'Skipping generated-output regression test') {
   throw "tests/test_public_html_output.ps1 must explain when generated-output validation is skipped outside a fresh build."
 }
 
+$templateSyntaxGuardPaths = @(
+  (Join-Path $repoRoot 'layouts/partials/collections'),
+  (Join-Path $repoRoot 'layouts/partials/metadata'),
+  (Join-Path $repoRoot 'layouts/partials/schema')
+)
+
+foreach ($guardPath in $templateSyntaxGuardPaths) {
+  foreach ($templatePath in @(Get-ChildItem -Path $guardPath -Recurse -File)) {
+    $lines = @(Get-Content -Path $templatePath.FullName)
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+      if ($lines[$i] -notmatch '\$\w+\s*:?=\s*dict\s*$') {
+        continue
+      }
+
+      for ($j = $i + 1; $j -lt $lines.Count; $j++) {
+        if ($lines[$j] -match '\}\}') {
+          if ($lines[$j] -match '^\s*\)\s*-?\}\}\s*$') {
+            $relativeTemplatePath = $templatePath.FullName.Substring($repoRoot.Length + 1).Replace('\', '/')
+            throw "Found malformed Hugo dict assignment with a dangling closing parenthesis in $relativeTemplatePath."
+          }
+
+          break
+        }
+      }
+    }
+  }
+}
+
 $dashboardLogicTestsIndex = $dashboardWorkflow.IndexOf("Run Dashboard Logic Tests")
 $dashboardNpmInstallIndex = $dashboardWorkflow.IndexOf("npm ci --include=dev --no-audit --no-fund")
 if ($dashboardNpmInstallIndex -lt 0) {
