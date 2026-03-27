@@ -1,8 +1,8 @@
 [
   {
-    "slug": "the-100-year-flood-is-not-what-you-think",
-    "path": "/essays/the-100-year-flood-is-not-what-you-think/",
-    "title": "The 100-Year Flood Is Not What You Think | Outside In Print",
+    "slug": "2025-supreme-court-wrap-up",
+    "path": "/essays/2025-supreme-court-wrap-up/",
+    "title": "2025 Supreme Court Wrap-Up | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -28,7 +28,7 @@
       },
       {
         "date": "2026-03-18",
-        "pageviews": 1.0,
+        "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
@@ -42,9 +42,9 @@
       },
       {
         "date": "2026-03-20",
-        "pageviews": 2.0,
+        "pageviews": 0.0,
         "reads": 0.0,
-        "pdf_downloads": 1.0,
+        "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
@@ -67,357 +67,30 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "the-dolphin-company",
-    "path": "/essays/the-dolphin-company/",
-    "title": "The Dolphin Company | Outside In Print",
-    "section": "Essays",
-    "series": [
+      },
       {
-        "date": "2026-03-15",
+        "date": "2026-03-24",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-16",
-        "pageviews": 1.0,
-        "reads": 1.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 2.0,
-        "reads": 0.0,
-        "pdf_downloads": 2.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
+        "date": "2026-03-25",
+        "pageviews": 3.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "risk-management-vs-risk-analysis-whats-the-difference",
-    "path": "/essays/risk-management-vs-risk-analysis-whats-the-difference/",
-    "title": "Risk Management vs Risk Analysis: What’s the Difference? | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
+        "date": "2026-03-26",
         "pageviews": 4.0,
         "reads": 0.0,
-        "pdf_downloads": 2.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "the-structure-of-modern-american-society",
-    "path": "/essays/the-structure-of-modern-american-society/",
-    "title": "Wealth and Governance in Modern American Society | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 3.0,
-        "reads": 0.0,
-        "pdf_downloads": 2.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "history-pushes-back",
-    "path": "/syd-and-oliver/history-pushes-back/",
-    "title": "History Pushes Back | Outside In Print",
-    "section": "Syd and Oliver",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 3.0,
-        "reads": 0.0,
-        "pdf_downloads": 2.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "how-tucson-az-plans-for-water-scarcity",
-    "path": "/essays/how-tucson-az-plans-for-water-scarcity/",
-    "title": "How Tucson, AZ Plans for Water Scarcity | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
+        "date": "2026-03-27",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
@@ -493,6 +166,1024 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 3.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "risk-management-vs-risk-analysis-whats-the-difference",
+    "path": "/essays/risk-management-vs-risk-analysis-whats-the-difference/",
+    "title": "Risk Management vs Risk Analysis: What’s the Difference? | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 4.0,
+        "reads": 0.0,
+        "pdf_downloads": 2.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-100-year-flood-is-not-what-you-think",
+    "path": "/essays/the-100-year-flood-is-not-what-you-think/",
+    "title": "The 100-Year Flood Is Not What You Think | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-structure-of-modern-american-society",
+    "path": "/essays/the-structure-of-modern-american-society/",
+    "title": "Wealth and Governance in Modern American Society | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 3.0,
+        "reads": 0.0,
+        "pdf_downloads": 2.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "history-pushes-back",
+    "path": "/syd-and-oliver/history-pushes-back/",
+    "title": "History Pushes Back | Outside In Print",
+    "section": "S and O",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 3.0,
+        "reads": 0.0,
+        "pdf_downloads": 2.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-national-flood-insurance-program",
+    "path": "/essays/the-national-flood-insurance-program/",
+    "title": "The National Flood Insurance Program | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 1.0,
+        "reads": 1.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 3.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "without-a-word",
+    "path": "/syd-and-oliver/without-a-word/",
+    "title": "Without A Word | Outside In Print",
+    "section": "S and O",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "ai-in-education-is-a-wicked-problem",
+    "path": "/essays/ai-in-education-is-a-wicked-problem/",
+    "title": "AI in Education Is a Wicked Problem | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 3.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "why-a-return-to-the-gold-standard-would-break-the-economy",
+    "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "title": "Returning to the Gold Standard Will Break the Economy | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-dolphin-company",
+    "path": "/essays/the-dolphin-company/",
+    "title": "The Dolphin Company | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 1.0,
+        "reads": 1.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 2.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "peaches-or-greece",
+    "path": "/syd-and-oliver/peaches-or-greece/",
+    "title": "Peaches or Greece | Outside In Print",
+    "section": "S and O",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
@@ -564,13 +1255,41 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
   {
-    "slug": "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy",
-    "path": "/essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/",
-    "title": "Trump’s Energy Revolution: Fossil Fuels, Climate Rollbacks, and the Future of U.S. Policy | Outside In Print",
+    "slug": "life-is-a-bull-market",
+    "path": "/essays/life-is-a-bull-market/",
+    "title": "Life Is a Bull Market | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -635,73 +1354,30 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "in-the-image-of-god",
-    "path": "/essays/in-the-image-of-god/",
-    "title": "In The Image of God | Outside In Print",
-    "section": "Essays",
-    "series": [
+      },
       {
-        "date": "2026-03-15",
+        "date": "2026-03-24",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-16",
+        "date": "2026-03-25",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-17",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 2.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
+        "date": "2026-03-27",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
@@ -710,9 +1386,9 @@
     ]
   },
   {
-    "slug": "are-we-alone",
-    "path": "/essays/are-we-alone/",
-    "title": "Are We Alone? | Outside In Print",
+    "slug": "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction",
+    "path": "/essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction/",
+    "title": "Is Trump Seriously Asking for Ukraine’s Mineral Rights — Or Is This Just a Distraction? | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -733,7 +1409,7 @@
         "date": "2026-03-17",
         "pageviews": 2.0,
         "reads": 0.0,
-        "pdf_downloads": 1.0,
+        "pdf_downloads": 2.0,
         "newsletter_submits": 0.0
       },
       {
@@ -777,13 +1453,41 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
   {
-    "slug": "6-reasons-redwall-is-a-timeless-classic",
-    "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
-    "title": "6 Reasons Redwall Is a Timeless Classic | Outside In Print",
+    "slug": "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life",
+    "path": "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/",
+    "title": "The Little Prince: 10 Powerful Quotes That Will Change How You See Life | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -795,7 +1499,7 @@
       },
       {
         "date": "2026-03-16",
-        "pageviews": 1.0,
+        "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
@@ -816,83 +1520,12 @@
       },
       {
         "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "peaches-or-greece",
-    "path": "/syd-and-oliver/peaches-or-greece/",
-    "title": "Peaches or Greece | Outside In Print",
-    "section": "Syd and Oliver",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
         "pageviews": 2.0,
         "reads": 0.0,
         "pdf_downloads": 1.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
         "date": "2026-03-20",
         "pageviews": 0.0,
         "reads": 0.0,
@@ -919,215 +1552,30 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "dirt-is-better-than-air",
-    "path": "/essays/dirt-is-better-than-air/",
-    "title": "Dirt Is Better Than Air | Outside In Print",
-    "section": "Essays",
-    "series": [
+      },
       {
-        "date": "2026-03-15",
+        "date": "2026-03-24",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-16",
+        "date": "2026-03-25",
         "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-17",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
+        "date": "2026-03-26",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "the-national-debt-is-screwing-you-heres-how",
-    "path": "/essays/the-national-debt-is-screwing-you-heres-how/",
-    "title": "The National Debt Is Screwing You — Here’s How | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "declaring-equality",
-    "path": "/essays/declaring-equality/",
-    "title": "Declaring Equality? | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 2.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
+        "date": "2026-03-27",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,

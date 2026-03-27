@@ -1,7 +1,52 @@
 [
   {
+    "source": "outsideinprint.org/essays/the-national-debt-is-screwing-you-heres-how",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
     "source": "internal",
-    "medium": "/syd-and-oliver/",
+    "medium": "/random/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 4.0,
+    "reads": 1.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
+    "pageviews": 3.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/building-for-centuries-not-election-cycles",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/syd-and-oliver/smoke-and-brass/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/what-happened-at-camp-mystic",
+    "medium": "",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
@@ -18,12 +63,39 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/OutsideInPrintDashboard",
+    "source": "outsideinprint.org/essays/mingo-county-mud-in-the-water",
     "medium": "",
     "campaign": "",
     "content": "",
-    "visitors": 2.0,
-    "pageviews": 3.0,
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/essays/how-did-mother-become-a-controversial-word-in-america/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/random",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 6.0,
+    "pageviews": 62.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   },
   {
@@ -36,7 +108,16 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think",
+    "source": "lpeasy.github.io/OutsideInPrintDashboard",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
+    "pageviews": 3.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/ai-in-education-is-a-wicked-problem",
     "medium": "",
     "campaign": "",
     "content": "",
@@ -45,11 +126,20 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint/start-here",
+    "source": "lpeasy.github.io/outsideinprint/literature",
     "medium": "",
     "campaign": "",
     "content": "",
-    "visitors": 5.0,
+    "visitors": 2.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/literature",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 3.0,
     "pageviews": 5.0,
     "reads": 0.0
   },
@@ -72,195 +162,6 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 2.0,
-    "pageviews": 2.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/uncrustables-the-billion-dollar-peanut-butter-empire",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/peaches-or-greece",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 2.0,
-    "pageviews": 2.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/collections/floods-water-built-environment",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 6.0,
-    "pageviews": 9.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 2.0,
-    "pageviews": 3.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/in-the-image-of-god",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
-    "medium": "/syd-and-oliver/smoke-and-brass/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/library",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 2.0,
-    "pageviews": 2.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
-    "medium": "/random/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 4.0,
-    "reads": 1.0
-  },
-  {
-    "source": "internal",
-    "medium": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
-    "campaign": "",
-    "content": "",
-    "visitors": 0.0,
-    "pageviews": 0.0,
-    "reads": 1.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 3.0,
-    "pageviews": 3.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
-    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/collections",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 3.0,
-    "pageviews": 4.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/the-structure-of-modern-american-society",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/what-happened-at-camp-mystic",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "internal",
-    "medium": "/essays/",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 2.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 12.0,
-    "pageviews": 81.0,
-    "reads": 0.0
-  },
-  {
     "source": "lpeasy.github.io/outsideinprint/collections/risk-uncertainty",
     "medium": "",
     "campaign": "",
@@ -270,16 +171,7 @@
     "reads": 0.0
   },
   {
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/the-new-orthodoxy",
-    "medium": "",
-    "campaign": "",
-    "content": "",
-    "visitors": 1.0,
-    "pageviews": 1.0,
-    "reads": 0.0
-  },
-  {
-    "source": "lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes",
+    "source": "lpeasy.github.io/outsideinprint/essays/uncrustables-the-billion-dollar-peanut-butter-empire",
     "medium": "",
     "campaign": "",
     "content": "",
@@ -297,6 +189,69 @@
     "reads": 0.0
   },
   {
+    "source": "outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/tariffs-protectionism-and-wishful-thinking",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/the-new-orthodoxy",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "campaign": "",
+    "content": "",
+    "visitors": 0.0,
+    "pageviews": 0.0,
+    "reads": 1.0
+  },
+  {
+    "source": "internal",
+    "medium": "/essays/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 5.0,
+    "reads": 0.0
+  },
+  {
     "source": "internal",
     "medium": "/collections/risk-uncertainty/",
     "campaign": "",
@@ -306,17 +261,404 @@
     "reads": 0.0
   },
   {
-    "source": "direct",
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/peaches-or-greece",
     "medium": "",
     "campaign": "",
     "content": "",
-    "visitors": 12.0,
-    "pageviews": 17.0,
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/in-the-image-of-god",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 5.0,
+    "pageviews": 66.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/collections/syd-and-oliver-dialogues",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/the-national-flood-insurance-program",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/library",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 4.0,
+    "pageviews": 12.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/start-here",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 5.0,
+    "pageviews": 5.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/let-it-crash-the-opportunity-of-a-lifetime",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/syd-and-oliver/the-sound-of-authority",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/syd-and-oliver",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 3.0,
+    "pageviews": 15.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/why-oberfell-will-not-be-overturned",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/what-is-risk-a-four-part-framework",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
+    "pageviews": 3.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/risk-management-vs-risk-analysis-whats-the-difference",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 3.0,
+    "pageviews": 3.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/collections",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 3.0,
+    "pageviews": 22.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/flash-flood-alley-why-flash-floods-kill",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/the-roi-of-caring",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/public-vs-private-pay-who-really-earns-more",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
     "reads": 0.0
   },
   {
     "source": "internal",
-    "medium": "/essays/how-did-mother-become-a-controversial-word-in-america/",
+    "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "internal",
+    "medium": "/syd-and-oliver/",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
+    "pageviews": 2.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/syd-and-oliver/without-a-word",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/altmans-law",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/u-s-russia-peace-talks",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/rational-ignorance-in-the-u-s-presidential-electorate",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 8.0,
+    "pageviews": 13.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/collections",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 3.0,
+    "pageviews": 4.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/syd-and-oliver/peaches-or-greece",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/biter-the-slang-word-that-hits",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/the-structure-of-modern-american-society",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 13.0,
+    "pageviews": 87.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/essays/2025-supreme-court-wrap-up",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 4.0,
+    "pageviews": 5.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/collections/floods-water-built-environment",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 1.0,
+    "pageviews": 1.0,
+    "reads": 0.0
+  },
+  {
+    "source": "outsideinprint.org/start-here",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 2.0,
+    "pageviews": 20.0,
+    "reads": 0.0
+  },
+  {
+    "source": "direct",
+    "medium": "",
+    "campaign": "",
+    "content": "",
+    "visitors": 32.0,
+    "pageviews": 53.0,
+    "reads": 0.0
+  },
+  {
+    "source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "medium": "",
     "campaign": "",
     "content": "",
     "visitors": 1.0,
