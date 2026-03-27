@@ -4,8 +4,8 @@
 {{- $isArticleLike := false -}}
 {{- $sectionLabel := "" -}}
 
-{{- with .Params.section_label -}}
-  {{- $sectionLabel = . -}}
+{{- if .Params.section_label -}}
+  {{- $sectionLabel = .Params.section_label -}}
 {{- else if $section -}}
   {{- $sectionLabel = humanize $section -}}
 {{- end -}}
