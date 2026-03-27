@@ -842,7 +842,7 @@ else {
 $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
-    Pattern = '<h1 class="title">Outside In Print</h1>'
+    Pattern = '(?s)<h1 class="?title"?>\s*Outside In Print\s*</h1>'
     Message = 'expected the homepage to expose a visible h1 for the imprint'
   },
   @{
