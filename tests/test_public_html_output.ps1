@@ -129,7 +129,7 @@ function Get-JsonLdNodesByType {
     [string]$Type
   )
 
-  return @(
+  $matches = @(
     $Nodes | Where-Object {
       $nodeType = $_.'@type'
       if ($nodeType -is [System.Array]) {
@@ -139,6 +139,8 @@ function Get-JsonLdNodesByType {
       return $nodeType -eq $Type
     }
   )
+
+  return ,$matches
 }
 
 function Get-SitemapLocs {
