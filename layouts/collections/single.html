@@ -2,10 +2,12 @@
   {{ $slug := .Params.slug | default .File.BaseFileName }}
   {{ $definition := partial "collections/lookup-definition.html" $slug }}
   {{ if not $definition }}
-    <h2 class="list-title">Collection</h2>
-    <div class="item">
-      <div class="t">Collection definition not found.</div>
-      <div class="m">Add <code>{{ $slug }}</code> to <code>data/collections.yaml</code>.</div>
+    <div class="page-shell page-shell--reading">
+      <h2 class="list-title">Collection</h2>
+      <div class="item">
+        <div class="t">Collection definition not found.</div>
+        <div class="m">Add <code>{{ $slug }}</code> to <code>data/collections.yaml</code>.</div>
+      </div>
     </div>
   {{ else }}
     {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition) }}
@@ -33,13 +35,13 @@
     {{ end }}
     {{ $relatedCollections := first 3 (append $primaryRelatedCollections $secondaryRelatedCollections) }}
 
-    <header class="page-header">
+    <header class="page-header page-shell page-shell--wide">
       <h1>{{ $definition.title }}</h1>
       {{ with $definition.description }}<p class="page-intro">{{ . }}</p>{{ end }}
       <p class="page-intro">This {{ $state.kind }} gathers {{ $state.count }} published pieces into one reading thread{{ with $startHere }} and points first-time readers to <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}.</p>
     </header>
 
-    <section aria-labelledby="collection-overview-title">
+    <section class="page-shell page-shell--reading" aria-labelledby="collection-overview-title">
       <h2 id="collection-overview-title" class="list-title">How to Use This Collection</h2>
       <dl class="collection-meta-block">
         <div class="collection-meta-row"><dt class="collection-meta-label">Kind</dt><dd class="collection-meta-value">{{ title $state.kind }}</dd></div>
@@ -57,7 +59,7 @@
     </section>
 
     {{ with $startHere }}
-      <section aria-labelledby="collection-start-here-title">
+      <section class="page-shell page-shell--reading" aria-labelledby="collection-start-here-title">
         <h2 id="collection-start-here-title" class="list-title" style="margin-top:28px;">Start Here</h2>
         {{ partial "discovery/page-list-item.html" (dict
           "page" .
@@ -70,7 +72,7 @@
       </section>
     {{ end }}
 
-    <section aria-labelledby="collection-items-title">
+    <section class="page-shell page-shell--reading" aria-labelledby="collection-items-title">
       <h2 id="collection-items-title" class="list-title" style="margin-top:30px;">In This Collection</h2>
       {{ if gt (len $items) 0 }}
         <ol class="collection-items">
@@ -98,7 +100,7 @@
     </section>
 
     {{ if gt (len $relatedCollections) 0 }}
-      <section aria-labelledby="related-collections-title">
+      <section class="page-shell page-shell--reading" aria-labelledby="related-collections-title">
         <h2 id="related-collections-title" class="list-title" style="margin-top:30px;">Related Collections</h2>
         {{ range $relatedCollections }}
           {{ partial "discovery/collection-card.html" (dict

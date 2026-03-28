@@ -4,7 +4,7 @@
   {{ if gt (len $pages) 0 }}
     {{ $latest = index (sort $pages "Date" "desc") 0 }}
   {{ end }}
-  <header class="page-header">
+  <header class="page-header page-shell page-shell--wide">
     <h1 id="page-title" class="list-title">{{ .Title }}</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
     {{ if gt (len $pages) 0 }}<p class="page-intro">{{ len $pages }} published pieces{{ with $latest }}. Latest: {{ .Date.Format "Jan 2, 2006" }}{{ end }}.</p>{{ end }}
@@ -20,7 +20,7 @@
     )
   ) }}
 
-  <section aria-labelledby="page-title">
+  <section class="page-shell page-shell--reading" aria-labelledby="page-title">
     {{ if gt (len $pages) 0 }}
       {{ range sort $pages "Title" "asc" }}
         {{ partial "discovery/page-list-item.html" (dict
