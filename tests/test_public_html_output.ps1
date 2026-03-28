@@ -263,7 +263,7 @@ $localizedMediumImageCount = 0
 $targetPageHtml = @{}
 $manifestoSupportArrowPattern = [regex]::Escape([string][char]0x2192)
 $manifestoSupportLinePattern = ('Support independent journalism\s*' + $manifestoSupportArrowPattern)
-$manifestoPlacementPattern = '(?s)page-intro.*?home-manifesto.*?home-front-page__stories'
+$manifestoPlacementPattern = '(?s)home-manifesto.*?data-home-front-page-region=(?:"lead"|lead)'
 $manifestoLinkPattern = ('(?s)home-manifesto__line--support.*?home-manifesto__support-link.*?#newsletter-signup-title.*?Support independent journalism\s*' + $manifestoSupportArrowPattern + '</a>')
 
 $requiredSemanticPages = [ordered]@{
@@ -851,8 +851,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'Front Page'
-    Message = 'expected the homepage not to retain the retired visible Front Page label'
+    Pattern = '(?s)<p[^>]*class=(?:"[^"]*\blist-title\b[^"]*"|''[^'']*\blist-title\b[^'']*''|[^>]*\blist-title\b[^>]*)[^>]*>\s*Front Page\s*</p>'
+    Message = 'expected the homepage not to retain the retired visible Front Page label block'
     ShouldNotMatch = $true
   },
   @{
