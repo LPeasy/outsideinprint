@@ -8,7 +8,6 @@ subtitle: ""
 description: ""
 version: "1.0"
 edition: "First web edition"
-pdf: ""
 featured: false
 
 collections: []
