@@ -106,9 +106,16 @@ test("homepage editorial layout stays scoped to home modules", () => {
   assert.match(css, /\.home-recent-work \.item \.d\{\s*display:block;\s*\}/);
   assert.match(css, /\.newsletter-signup--home \.newsletter-signup__inner\{[\s\S]*padding:0;[\s\S]*border:none;[\s\S]*background:none;/);
   assert.match(css, /\.home-browse__grid \.card\{[\s\S]*border:none;[\s\S]*border-top:1px solid rgba\(236,231,223,.1\);[\s\S]*border-radius:0;/);
+  assert.match(css, /\.piece-header\{[\s\S]*width:100%;[\s\S]*max-width:var\(--measure-wide\);[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);
+  assert.match(css, /\.piece-body,\s*\.piece-aftermatter\{[\s\S]*width:100%;[\s\S]*max-width:var\(--measure-reading\);[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);
+  assert.match(css, /\.piece-body figure\{[\s\S]*width:100%;[\s\S]*max-width:100%;[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);
+  assert.match(css, /\.piece-body > img\{[\s\S]*display:block;[\s\S]*width:100%;[\s\S]*max-width:100%;[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);
+  assert.match(css, /\.piece-body figure img\{\s*width:100%;\s*\}/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body\{[\s\S]*max-width:var\(--measure-reading\);[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;[\s\S]*font-size:1\.03rem;[\s\S]*line-height:1\.78;/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body :is\(p, ul, ol, blockquote, figure, hr\)\{[\s\S]*width:100%;[\s\S]*max-width:none;[\s\S]*margin-bottom:1\.1rem;/);
-  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body img\{[\s\S]*max-width:100%;[\s\S]*height:auto;[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body figure\{\s*margin-left:0;\s*margin-right:0;\s*\}/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body > img\{[\s\S]*display:block;[\s\S]*width:100%;[\s\S]*max-width:100%;[\s\S]*margin-left:0;[\s\S]*margin-right:0;/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body img\{[\s\S]*display:block;[\s\S]*width:100%;[\s\S]*max-width:100%;[\s\S]*height:auto;[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body :is\(figcaption, \.article-source-caption\)\{[\s\S]*width:100%;[\s\S]*max-width:100%;/);
   assert.match(css, /\.newsletter-signup__input\{[\s\S]*font-family:var\(--font-ui\);/);
   assert.match(css, /\.newsletter-signup__button\{[\s\S]*background:var\(--accent-soft\);/);
