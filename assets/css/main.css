@@ -1876,6 +1876,10 @@ button.dashboard-chip{
     max-width:none;
     margin-bottom:1.1rem;
   }
+  .piece-body figure{
+    margin-left:0;
+    margin-right:0;
+  }
   .piece-body > img{
     display:block;
     width:auto;
