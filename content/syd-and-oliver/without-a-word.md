@@ -2,7 +2,7 @@
 title: 'Without A Word'
 date: 2026-02-22T23:16:21Z
 draft: false
-section_label: 'S and O'
+section_label: 'Dialogues'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/without-a-word.pdf'

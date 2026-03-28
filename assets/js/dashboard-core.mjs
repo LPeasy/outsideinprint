@@ -50,8 +50,11 @@ function normalizeSectionLabel(value, fallback = "Unlabeled") {
   if (normalized === "working paper" || normalized === "working papers" || normalized === "working-paper" || normalized === "working-papers") {
     return "Working Papers";
   }
+  if (normalized === "dialogue" || normalized === "dialogues") {
+    return "Dialogues";
+  }
   if (normalized === "syd and oliver" || normalized === "syd & oliver" || normalized === "s and o" || normalized === "s & o") {
-    return "S and O";
+    return "Dialogues";
   }
   if (normalized === "collection" || normalized === "collections") {
     return "Collections";

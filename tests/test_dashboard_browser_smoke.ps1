@@ -214,7 +214,8 @@ function Normalize-DashboardSectionLabel {
   switch -Regex ($text.Trim().ToLowerInvariant()) {
     '^(essay|essays)$' { return "Essays" }
     '^(working paper|working papers|working-paper|working-papers)$' { return "Working Papers" }
-    '^(syd and oliver|syd & oliver|s and o|s & o)$' { return "S and O" }
+    '^(dialogue|dialogues)$' { return "Dialogues" }
+    '^(syd and oliver|syd & oliver|s and o|s & o)$' { return "Dialogues" }
     '^(collection|collections)$' { return "Collections" }
     default { return $text }
   }

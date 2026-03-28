@@ -2,7 +2,7 @@
 title: 'Peaches or Greece'
 date: 2026-02-16T17:00:35Z
 draft: false
-section_label: 'S and O'
+section_label: 'Dialogues'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/peaches-or-greece.pdf'

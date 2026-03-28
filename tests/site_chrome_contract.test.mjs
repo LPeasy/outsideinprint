@@ -9,14 +9,27 @@ const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
 const homeRecentWork = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
+const startHereTemplate = fs.readFileSync(path.resolve("layouts/start-here/single.html"), "utf8");
+const startHereContent = fs.readFileSync(path.resolve("content/start-here/index.md"), "utf8");
+const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
 const config = fs.readFileSync(path.resolve("hugo.toml"), "utf8");
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
 
-test("masthead removes books and shortens the Syd and Oliver label", () => {
-  assert.match(masthead, />S and O</);
+test("masthead removes books and uses the Dialogues label", () => {
+  assert.match(masthead, />Dialogues</);
+  assert.doesNotMatch(masthead, />S and O</);
   assert.doesNotMatch(masthead, />Syd and Oliver</);
   assert.doesNotMatch(masthead, />Books</);
   assert.match(masthead, /aria-current="page"/);
+});
+
+test("dialogues rename is wired through the section landing and start-here prompts", () => {
+  assert.match(dialoguesSection, /title: "Dialogues"/);
+  assert.match(dialoguesSection, /description: "Dialogues and fiction from the recurring world of Syd and Oliver\."/);
+  assert.match(startHereTemplate, /"label" "Enter Dialogues"/);
+  assert.match(startHereContent, />Dialogues</);
+  assert.match(startHereContent, /Dialogues \| 5 min read \| Fiction/);
+  assert.doesNotMatch(startHereContent, /S and O/);
 });
 
 test("homepage no longer promotes the retired books section", () => {

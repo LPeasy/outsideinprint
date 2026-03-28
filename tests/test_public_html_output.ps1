@@ -915,8 +915,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*S and O\s*<'
-    Message = 'expected the homepage masthead to expose the S and O label'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*Dialogues\s*<'
+    Message = 'expected the homepage masthead to expose the Dialogues label'
   },
   @{
     Path = 'public/index.html'
@@ -947,8 +947,24 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = 'Fiction and dialogue from the recurring world of Syd and Oliver'
+    Pattern = 'Dialogues and fiction from the recurring world of Syd and Oliver'
     Message = 'expected the library page to surface lane descriptions from section metadata'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = '(?s)<h1[^>]*>\s*Dialogues\s*</h1>'
+    Message = 'expected the /syd-and-oliver/ route to render the renamed Dialogues section title'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'Dialogues \| 5 min read \| Fiction'
+    Message = 'expected Start Here to use the Dialogues label in featured lane metadata'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'S and O'
+    Message = 'expected Start Here not to retain the retired S and O label'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/library/index.html'
@@ -1016,8 +1032,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*S and O\s*<'
-    Message = 'expected article pages to keep the compact S and O masthead link visible'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*Dialogues\s*<'
+    Message = 'expected article pages to keep the Dialogues masthead link visible'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'

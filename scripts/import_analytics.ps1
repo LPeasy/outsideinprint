@@ -169,8 +169,9 @@ function Normalize-SectionLabel {
   switch -Regex ($text.Trim().ToLowerInvariant()) {
     '^essay(s)?$' { return "Essays" }
     '^working[\s-]?paper(s)?$' { return "Working Papers" }
-    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "S and O" }
-    '^s(?:\s+and\s+|\s*&\s*)o$' { return "S and O" }
+    '^dialogue(s)?$' { return "Dialogues" }
+    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "Dialogues" }
+    '^s(?:\s+and\s+|\s*&\s*)o$' { return "Dialogues" }
     '^collection(s)?$' { return "Collections" }
     default { return $text.Trim() }
   }
@@ -296,7 +297,7 @@ function Get-SectionLabelFromPath {
 
   switch -Regex (Normalize-Path -Path $Path) {
     "^/essays/" { return "Essays" }
-    "^/syd-and-oliver/" { return "S and O" }
+    "^/syd-and-oliver/" { return "Dialogues" }
     "^/working-papers/" { return "Working Papers" }
     "^/collections/" { return "Collections" }
     default { return "" }
@@ -320,6 +321,12 @@ function Get-SectionSlug {
 
   if ([string]::IsNullOrWhiteSpace($SectionLabel)) {
     return ""
+  }
+
+  switch -Regex ($SectionLabel.Trim().ToLowerInvariant()) {
+    '^dialogue(s)?$' { return "syd-and-oliver" }
+    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "syd-and-oliver" }
+    '^s(?:\s+and\s+|\s*&\s*)o$' { return "syd-and-oliver" }
   }
 
   return (($SectionLabel.Trim().ToLowerInvariant() -replace "&", "and") -replace "[^a-z0-9]+", "-").Trim("-")

@@ -2,7 +2,7 @@
 title: 'The Free Lunch'
 date: 2026-02-21T15:00:45Z
 draft: false
-section_label: 'S and O'
+section_label: 'Dialogues'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-free-lunch.pdf'

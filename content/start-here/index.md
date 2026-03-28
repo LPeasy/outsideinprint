@@ -25,8 +25,8 @@ section_label: "A Map of the Imprint"
       <dd>Shorter pieces on economics, risk, culture, and public life.</dd>
     </div>
     <div class="start-here-map-row">
-      <dt><a href="../syd-and-oliver/">S and O</a></dt>
-      <dd>Fiction and dialogue from a recurring narrative world.</dd>
+      <dt><a href="../syd-and-oliver/">Dialogues</a></dt>
+      <dd>Dialogues and fiction from a recurring narrative world.</dd>
     </div>
     <div class="start-here-map-row">
       <dt><a href="../collections/">Collections</a></dt>
@@ -56,8 +56,8 @@ section_label: "A Map of the Imprint"
     <article class="start-here-feature">
       <p class="start-here-feature-kicker">Narrative opening</p>
       <h3><a href="../syd-and-oliver/the-shape-of-sacrifice/">The Shape of Sacrifice</a></h3>
-      <p>A first passage into the S and O world: intimate, atmospheric, and attentive to the moral pressure carried by conversation.</p>
-      <p class="start-here-meta">S and O | 5 min read | Fiction</p>
+      <p>A first passage into the dialogue world of Syd and Oliver: intimate, atmospheric, and attentive to the moral pressure carried by conversation.</p>
+      <p class="start-here-meta">Dialogues | 5 min read | Fiction</p>
     </article>
     <article class="start-here-feature">
       <p class="start-here-feature-kicker">Reported study</p>

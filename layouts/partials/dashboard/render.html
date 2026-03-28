@@ -282,7 +282,7 @@
                   {{ range first 12 $essays }}
                     <tr>
                       <td>{{ index . "title" }}</td>
-                      <td>{{ if eq (index . "section") "Syd and Oliver" }}S and O{{ else }}{{ index . "section" }}{{ end }}</td>
+                      <td>{{ if eq (index . "section") "Syd and Oliver" }}Dialogues{{ else }}{{ index . "section" }}{{ end }}</td>
                       <td>{{ printf "%.0f" (index . "views") }}</td>
                       <td>{{ printf "%.0f" (index . "reads") }}</td>
                       <td>{{ printf "%.1f%%" (index . "read_rate") }}</td>
@@ -313,7 +313,7 @@
               <div class="dashboard-chip-row">
                 {{ if gt (len $sections) 0 }}
                   {{ range first 6 $sections }}
-                    <span class="dashboard-chip">{{ if eq (index . "section") "Syd and Oliver" }}S and O{{ else }}{{ index . "section" }}{{ end }}</span>
+                    <span class="dashboard-chip">{{ if eq (index . "section") "Syd and Oliver" }}Dialogues{{ else }}{{ index . "section" }}{{ end }}</span>
                   {{ end }}
                 {{ else }}
                   <span class="dashboard-chip">No section snapshot yet</span>
@@ -323,7 +323,7 @@
                 {{ if gt (len $sections) 0 }}
                   {{ $firstSection := index $sections 0 }}
                   <p class="dashboard-detail-card__eyebrow">Section snapshot</p>
-                  <h3>{{ if eq (index $firstSection "section") "Syd and Oliver" }}S and O{{ else }}{{ index $firstSection "section" }}{{ end }}</h3>
+                  <h3>{{ if eq (index $firstSection "section") "Syd and Oliver" }}Dialogues{{ else }}{{ index $firstSection "section" }}{{ end }}</h3>
                   <dl class="dashboard-detail-list">
                     <div><dt>Pageviews</dt><dd>{{ printf "%.0f" (index $firstSection "pageviews") }}</dd></div>
                     <div><dt>Reads</dt><dd>{{ printf "%.0f" (index $firstSection "reads") }}</dd></div>
@@ -354,7 +354,7 @@
                 <div class="dashboard-detail-card">
                   <p class="dashboard-detail-card__eyebrow">Essay snapshot</p>
                   <h3>{{ index $firstEssay "title" }}</h3>
-                  <p class="dashboard-detail-card__summary">{{ if eq (index $firstEssay "section") "Syd and Oliver" }}S and O{{ else }}{{ index $firstEssay "section" }}{{ end }}</p>
+                  <p class="dashboard-detail-card__summary">{{ if eq (index $firstEssay "section") "Syd and Oliver" }}Dialogues{{ else }}{{ index $firstEssay "section" }}{{ end }}</p>
                   <dl class="dashboard-detail-list">
                     <div><dt>Views</dt><dd>{{ printf "%.0f" (index $firstEssay "views") }}</dd></div>
                     <div><dt>Reads</dt><dd>{{ printf "%.0f" (index $firstEssay "reads") }}</dd></div>

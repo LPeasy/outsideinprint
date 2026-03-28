@@ -16,8 +16,9 @@ function Normalize-SectionLabel {
   switch -Regex ($text.Trim().ToLowerInvariant()) {
     '^essay(s)?$' { return "Essays" }
     '^working[\s-]?paper(s)?$' { return "Working Papers" }
-    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "S and O" }
-    '^s(?:\s+and\s+|\s*&\s*)o$' { return "S and O" }
+    '^dialogue(s)?$' { return "Dialogues" }
+    '^syd(\s+and\s+|\s*&\s*)oliver$' { return "Dialogues" }
+    '^s(?:\s+and\s+|\s*&\s*)o$' { return "Dialogues" }
     '^collection(s)?$' { return "Collections" }
     default { return $text.Trim() }
   }
@@ -148,6 +149,30 @@ Assert-ArrayShape -Value $parsed["sources_timeseries.json"] -Keys @("date", "sou
 $canonicalSections = @($parsed["sections.json"]) | ForEach-Object { Normalize-SectionLabel -Value $_.section }
 if (@($canonicalSections | Group-Object | Where-Object { $_.Count -gt 1 }).Count -gt 0) {
   throw "sections.json contains duplicate canonical section labels. Normalize section taxonomy in ETL output."
+}
+
+$sectionBearingFiles = @(
+  "essays.json",
+  "essays_timeseries.json",
+  "journeys.json",
+  "journey_by_essay.json",
+  "sections.json"
+)
+
+foreach ($file in $sectionBearingFiles) {
+  $staleRows = @($parsed[$file] | Where-Object { [string]$_.section -eq "S and O" })
+  if ($staleRows.Count -gt 0) {
+    throw "$file contains stale 'S and O' section labels. Commit the Dialogues rename to the analytics snapshot."
+  }
+}
+
+$dialogueEssays = @($parsed["essays.json"] | Where-Object { [string]$_.path -like "/syd-and-oliver/*" })
+if ($dialogueEssays.Count -eq 0) {
+  throw "essays.json is missing the /syd-and-oliver/ route coverage required for the Dialogues section."
+}
+
+if (@($dialogueEssays | Where-Object { (Normalize-SectionLabel -Value $_.section) -ne "Dialogues" }).Count -gt 0) {
+  throw "essays.json must keep the /syd-and-oliver/ routes while labeling that section as Dialogues."
 }
 
 Write-Host "Analytics snapshot contract test passed."
