@@ -719,6 +719,14 @@ h2{ margin-top:34px; }
   font-size:0.78rem;
   line-height:1.6;
 }
+.article-embed__label{
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:0.67rem;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+}
 .piece-body .article-embed__link a{
   color:inherit;
 }

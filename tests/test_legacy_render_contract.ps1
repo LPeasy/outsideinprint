@@ -62,7 +62,7 @@ foreach ($requiredSnippet in @(
 
 foreach ($requiredSnippet in @(
   '.piece-body .article-embed',
-  'article-embed__label',
+  '.article-embed__label',
   '.piece-body .article-embed__link',
   '.piece-body .article-embed__caption'
 )) {
