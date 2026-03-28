@@ -49,7 +49,9 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.equal((homeFrontPage.match(/data-home-front-page-region="lead"/g) || []).length, 1);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="secondary"/g) || []).length, 1);
   assert.match(homeFrontPage, /home-front-page__secondary-item/);
-  assert.match(homeFrontPage, /A curated front page from Outside In Print/);
+  assert.match(homeFrontPage, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
+  assert.doesNotMatch(homeFrontPage, />Front Page</);
+  assert.doesNotMatch(homeFrontPage, /A curated front page from Outside In Print/);
   assert.match(homeFrontPage, /class="home-manifesto"/);
   assert.match(homeFrontPage, /A digital imprint of essays, reports, dialogues, and literature\./);
   assert.match(homeFrontPage, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
@@ -68,7 +70,7 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.doesNotMatch(homeRecentWork, /home-recent-essays/);
   assert.match(config, /\[params\.homepage\]/);
   assert.match(config, /imprint_statement = "/);
-  assert.ok(homeFrontPage.indexOf('class="page-intro"') < homeFrontPage.indexOf('class="home-manifesto"'));
+  assert.ok(homeFrontPage.indexOf('id="home-front-page-title"') < homeFrontPage.indexOf('class="home-manifesto"'));
   assert.ok(homeFrontPage.indexOf('class="home-manifesto"') < homeFrontPage.indexOf('class="home-front-page__stories"'));
   assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(homepage.indexOf('partial "home_imprint_statement.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
@@ -80,7 +82,12 @@ test("homepage composition promotes front page and imprint before lower-priority
 });
 
 test("homepage editorial layout stays scoped to home modules", () => {
+  assert.doesNotMatch(css, /\.home-front-page__header\{/);
+  assert.doesNotMatch(css, /\.home-front-page__header > \.list-title\{/);
+  assert.doesNotMatch(css, /\.home-front-page__header \.title\{/);
+  assert.doesNotMatch(css, /\.home-front-page__header \.page-intro\{/);
   assert.match(css, /\.home-manifesto__inner\{[\s\S]*max-width:42rem;[\s\S]*margin:0 auto;[\s\S]*border-top:1px solid rgba\(232,226,216,.14\);[\s\S]*border-bottom:1px solid rgba\(232,226,216,.12\);[\s\S]*text-align:center;/);
+  assert.match(css, /\.home-manifesto\{\s*margin:0\.35rem 0 0;\s*\}/);
   assert.match(css, /\.home-manifesto__line--primary\{[\s\S]*font-size:clamp\(1\.15rem, 1\.02rem \+ 0\.68vw, 1\.3rem\);/);
   assert.match(css, /\.home-manifesto__line--secondary\{[\s\S]*font-size:clamp\(1\.4rem, 1\.12rem \+ 1\.1vw, 1\.7rem\);/);
   assert.match(css, /\.home-manifesto__line--support\{[\s\S]*font-family:var\(--sans\);[\s\S]*font-size:0\.78rem;/);

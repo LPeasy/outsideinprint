@@ -93,6 +93,9 @@ test("homepage partial is essays-only and no longer depends on featured or hard-
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
   assert.match(frontPageSource, /range \$secondary/);
+  assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
+  assert.doesNotMatch(frontPageSource, />Front Page</);
+  assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
   assert.match(frontPageSource, /class="home-manifesto"/);
   assert.match(frontPageSource, /A digital imprint of essays, reports, dialogues, and literature\./);
   assert.match(frontPageSource, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
@@ -163,12 +166,12 @@ test("front page stays structurally primary to recent work", () => {
   const recentWorkSource = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
 
   assert.match(frontPageSource, /id="home-front-page-title"/);
-  assert.match(frontPageSource, /<h1 class="title">\{\{ site\.Title \}\}<\/h1>/);
+  assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
   assert.match(frontPageSource, /Read essay &rarr;/);
-  assert.match(frontPageSource, /A curated front page from Outside In Print/);
-  assert.ok(frontPageSource.indexOf('class="page-intro"') < frontPageSource.indexOf('class="home-manifesto"'));
+  assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
+  assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-manifesto"'));
   assert.ok(frontPageSource.indexOf('class="home-manifesto"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$lead/);
   assert.match(partialSource, /"secondary" \$secondary/);

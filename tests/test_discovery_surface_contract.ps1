@@ -69,7 +69,7 @@ $supportLine = 'Support independent journalism ' + [string][char]0x2192
 
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
-  '<h1 class="title">{{ site.Title }}</h1>',
+  '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
   'class="home-manifesto"',
   'A digital imprint of essays, reports, dialogues, and literature.',
   'Color over the lines. Read beyond the feed. Think for yourself.',
@@ -87,7 +87,7 @@ if ($homeFrontPageTemplate -notmatch [regex]::Escape($supportLine)) {
 }
 
 $manifestoOrder = @(
-  'class="page-intro"',
+  'id="home-front-page-title"',
   'class="home-manifesto"',
   'class="home-front-page__stories"'
 )
@@ -100,7 +100,7 @@ foreach ($snippet in $manifestoOrder) {
   }
 
   if ($currentIndex -le $lastManifestoIndex) {
-    throw "Expected the homepage manifesto strip to remain between the intro block and the story grid in layouts/partials/home_front_page.html."
+    throw "Expected the homepage manifesto strip to remain between the hidden homepage heading and the story grid in layouts/partials/home_front_page.html."
   }
 
   $lastManifestoIndex = $currentIndex
@@ -108,6 +108,15 @@ foreach ($snippet in $manifestoOrder) {
 
 if ($homeFrontPageTemplate -notmatch '<a class="home-manifesto__support-link" href="#newsletter-signup-title">') {
   throw 'Expected the homepage manifesto support line to render as a real link targeting the newsletter module.'
+}
+
+foreach ($retiredSnippet in @(
+  '>Front Page<',
+  'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below.'
+)) {
+  if ($homeFrontPageTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/partials/home_front_page.html to remove the retired visible front-page intro block snippet: $retiredSnippet"
+  }
 }
 
 $homeImprintTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_imprint_statement.html') -Raw

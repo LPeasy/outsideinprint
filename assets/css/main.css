@@ -306,30 +306,8 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
 .home-front-page{
   margin-top:0.2rem;
 }
-.home-front-page__header{
-  margin:0 0 1.1rem;
-}
-.home-front-page__header > .list-title{
-  margin-bottom:0.8rem;
-}
-.home-front-page__header .title{
-  margin:0;
-  color:var(--muted);
-  font-family:var(--sans);
-  font-size:11px;
-  letter-spacing:.18em;
-  line-height:1.35;
-  text-transform:uppercase;
-}
-.home-front-page__header .page-intro{
-  margin:0.5rem 0 0;
-  max-width:40rem;
-  color:rgba(232,226,216,.74);
-  font-size:15px;
-  line-height:1.72;
-}
 .home-manifesto{
-  margin:1.7rem 0 0;
+  margin:0.35rem 0 0;
 }
 .home-manifesto__inner{
   max-width:42rem;
@@ -2489,9 +2467,6 @@ button.dashboard-chip{
   .dashboard-panel,
   .dashboard-hero{
     padding:0.9rem;
-  }
-  .home-front-page__header .page-intro{
-    font-size:14px;
   }
   .home-manifesto__inner{
     max-width:42rem;

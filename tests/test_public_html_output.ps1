@@ -846,18 +846,19 @@ else {
 $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<h1 class="?title"?>\s*Outside In Print\s*</h1>'
-    Message = 'expected the homepage to expose a visible h1 for the site title'
+    Pattern = '(?s)<h1[^>]*class=(?:"[^"]*\btitle\b[^"]*"|''[^'']*\btitle\b[^'']*''|[^>]*\btitle\b[^>]*)[^>]*>\s*Outside In Print\s*</h1>'
+    Message = 'expected the homepage to expose a semantic h1 for the site title'
   },
   @{
     Path = 'public/index.html'
     Pattern = 'Front Page'
-    Message = 'expected the homepage to expose a front-page heading above the editorial lead'
+    Message = 'expected the homepage not to retain the retired visible Front Page label'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)Front Page.*?Imprint.*?Selected Collections.*?Recent Work.*?The weekly letter.*?Browse the Archive'
-    Message = 'expected the homepage to preserve the editorial module order from front page through archive browse'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?Imprint.*?Selected Collections.*?Recent Work.*?The weekly letter.*?Browse the Archive'
+    Message = 'expected the homepage to preserve the editorial module order from the story grid through archive browse'
   },
   @{
     Path = 'public/index.html'
@@ -887,12 +888,18 @@ $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
     Pattern = $manifestoPlacementPattern
-    Message = 'expected the homepage manifesto strip to appear between the intro block and the story grid'
+    Message = 'expected the homepage manifesto strip to appear above the story grid'
   },
   @{
     Path = 'public/index.html'
     Pattern = $manifestoLinkPattern
     Message = 'expected the homepage manifesto support line to render as a real text link to the newsletter module'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below\.'
+    Message = 'expected the homepage not to retain the retired front-page intro blurb'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'

@@ -2,18 +2,14 @@
 {{ $lead := index $frontPage "lead" }}
 {{ $secondary := index $frontPage "secondary" | default (slice) }}
 <section class="home-front-page" aria-labelledby="home-front-page-title">
-  <header class="page-header home-front-page__header">
-    <p id="home-front-page-title" class="list-title">Front Page</p>
-    <h1 class="title">{{ site.Title }}</h1>
-    <p class="page-intro">A curated front page from Outside In Print, with selected collections, recent work, and archive paths below.</p>
-    <section class="home-manifesto" aria-label="Editorial statement">
-      <div class="home-manifesto__inner">
-        <p class="home-manifesto__line home-manifesto__line--primary">A digital imprint of essays, reports, dialogues, and literature.</p>
-        <p class="home-manifesto__line home-manifesto__line--secondary">Color over the lines. Read beyond the feed. Think for yourself.</p>
-        <p class="home-manifesto__line home-manifesto__line--support"><a class="home-manifesto__support-link" href="#newsletter-signup-title">Support independent journalism →</a></p>
-      </div>
-    </section>
-  </header>
+  <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
+  <section class="home-manifesto" aria-label="Editorial statement">
+    <div class="home-manifesto__inner">
+      <p class="home-manifesto__line home-manifesto__line--primary">A digital imprint of essays, reports, dialogues, and literature.</p>
+      <p class="home-manifesto__line home-manifesto__line--secondary">Color over the lines. Read beyond the feed. Think for yourself.</p>
+      <p class="home-manifesto__line home-manifesto__line--support"><a class="home-manifesto__support-link" href="#newsletter-signup-title">Support independent journalism →</a></p>
+    </div>
+  </section>
   {{ with $lead }}
     {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
     {{ $leadSection := .Params.section_label | default (humanize .Section) }}
