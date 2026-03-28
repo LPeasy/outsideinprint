@@ -1,0 +1,70 @@
+{{ $frontPage := partial "home_selected.html" . }}
+{{ $lead := index $frontPage "lead" }}
+{{ $secondary := index $frontPage "secondary" | default (slice) }}
+<section class="home-front-page" aria-labelledby="home-front-page-title">
+  <header class="page-header home-front-page__header">
+    <h1 class="title">{{ site.Title }}</h1>
+    <p class="page-intro">A curated front page from Outside In Print, with selected collections, recent work, and archive paths below.</p>
+  </header>
+
+  <h2 id="home-front-page-title" class="list-title">Front Page</h2>
+  {{ with $lead }}
+    {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
+    {{ $leadSection := .Params.section_label | default (humanize .Section) }}
+    <div class="home-front-page__stories">
+      <article class="home-front-page__lead" data-home-front-page-region="lead">
+        <p class="list-title home-front-page__kicker">{{ $leadSection }}{{ with .Date }} / {{ .Format "Jan 2, 2006" }}{{ end }}</p>
+        <h3 class="home-front-page__lead-title">
+          <a href="{{ .RelPermalink }}"
+            data-analytics-event="internal_promo_click"
+            data-analytics-source-slot="homepage_selected_hero"
+            data-analytics-slug="{{ $leadSlug }}"
+            data-analytics-title="{{ .Title }}"
+            data-analytics-section="{{ $leadSection }}"
+            data-analytics-path="{{ .RelPermalink }}"
+          >{{ .Title }}</a>
+        </h3>
+        {{ with (partial "discovery/page-summary.html" .) }}
+          <div class="d home-front-page__lead-dek">{{ . }}</div>
+        {{ end }}
+        <div class="m home-front-page__lead-meta">
+          {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+          {{ with .Params.version }} | v{{ . }}{{ end }}
+          {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+        </div>
+        <p class="m home-front-page__lead-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
+      </article>
+
+      {{ if gt (len $secondary) 0 }}
+        <div class="home-front-page__secondary" aria-label="Secondary stories" data-home-front-page-region="secondary">
+          {{ range $secondary }}
+            {{ $slug := .Params.slug | default .File.BaseFileName }}
+            {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+            <article class="home-front-page__secondary-item">
+              <p class="list-title home-front-page__secondary-kicker">{{ $sectionLabel }}{{ with .Date }} / {{ .Format "Jan 2, 2006" }}{{ end }}</p>
+              <h3 class="home-front-page__secondary-title">
+                <a href="{{ .RelPermalink }}"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="homepage_selected_core"
+                  data-analytics-slug="{{ $slug }}"
+                  data-analytics-title="{{ .Title }}"
+                  data-analytics-section="{{ $sectionLabel }}"
+                  data-analytics-path="{{ .RelPermalink }}"
+                >{{ .Title }}</a>
+              </h3>
+              {{ with (partial "discovery/page-summary.html" .) }}
+                <div class="d home-front-page__secondary-dek">{{ . }}</div>
+              {{ end }}
+              <div class="m home-front-page__secondary-meta">
+                {{ with .Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+                {{ with .Params.version }} | v{{ . }}{{ end }}
+                {{ with .ReadingTime }} | {{ . }} min read{{ end }}
+              </div>
+              <p class="m home-front-page__secondary-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
+            </article>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+</section>

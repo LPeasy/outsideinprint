@@ -1,0 +1,9 @@
+{{ $statement := site.Params.homepage.imprint_statement | default "" }}
+{{ if $statement }}
+  <aside class="home-imprint-statement" aria-labelledby="home-imprint-statement-title">
+    <div class="home-imprint-statement__inner">
+      <p id="home-imprint-statement-title" class="list-title">Imprint</p>
+      <p class="home-imprint-statement__copy">{{ $statement }}</p>
+    </div>
+  </aside>
+{{ end }}

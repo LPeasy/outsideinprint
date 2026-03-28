@@ -2,7 +2,6 @@
   {{ if site.Params.dashboard.site }}
     {{ partial "dashboard/render.html" . }}
   {{ else }}
-  {{ $siteDescription := site.Params.description | default "Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records." }}
   {{ $exploreRoutes := slice
     (dict "page" (site.GetPage "/start-here") "label" "Start Here")
     (dict "page" (site.GetPage "/essays") "label" "Essays")
@@ -11,15 +10,28 @@
     (dict "page" (site.GetPage "/library") "label" "Library")
     (dict "label" "Random" "href" ("random/" | absURL) "description" "Enter the archive by chance. This route is useful for exploration, not as a canonical destination.")
   }}
-  <header class="page-header">
-    <h1 class="title">Outside In Print</h1>
-    <p class="page-intro">{{ $siteDescription }}</p>
-    <p class="page-intro">Read by guided path, curated collection, section landing page, or the full catalog.</p>
-  </header>
+  {{ partial "home_front_page.html" . }}
+  {{ partial "home_imprint_statement.html" . }}
+  {{ partial "home_selected_collections.html" . }}
+  {{ partial "home_recent_work.html" . }}
 
-  <section aria-labelledby="home-explore-title">
-    <h2 id="home-explore-title" class="list-title">Read by Path</h2>
-    <div class="grid">
+  {{ partial "newsletter_signup.html" (dict
+    "page" .
+    "class" "newsletter-signup--home"
+    "sourceSlot" "homepage_newsletter"
+    "eyebrow" "Letter"
+    "title" "The weekly letter"
+    "dek" "New essays, editorial notes, and selected archive work from Outside In Print. One quiet email a week."
+    "buttonLabel" "Subscribe"
+    "note" "New work and occasional notes. Free to join, easy to leave."
+  ) }}
+
+  <section class="home-browse home-browse--utility" aria-labelledby="home-browse-title">
+    <header class="home-browse__header">
+      <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
+      <p class="home-browse__dek">Use the section landings, collections, library, or a random route when you want to move beyond the front page.</p>
+    </header>
+    <div class="grid home-browse__grid">
       {{ range $exploreRoutes }}
         {{ $page := .page | default false }}
         {{ $href := .href | default "" }}
@@ -45,60 +57,5 @@
       {{ end }}
     </div>
   </section>
-
-  {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--home" "sourceSlot" "homepage_newsletter") }}
-
-  {{ $collectionEntries := partial "collections/get-public-entries.html" . }}
-  {{ $featuredCollections := slice }}
-  {{ range $collectionEntries }}
-    {{ if .collection.featured }}
-      {{ $featuredCollections = $featuredCollections | append . }}
-    {{ end }}
-  {{ end }}
-  {{ if gt (len $featuredCollections) 0 }}
-    <section aria-labelledby="home-featured-collections-title">
-      <h2 id="home-featured-collections-title" class="list-title" style="margin-top:28px;">Featured Collections</h2>
-      <div class="grid collection-grid">
-        {{ range $featuredCollections }}
-          {{ partial "discovery/collection-card.html" (dict
-            "entry" .
-            "variant" "grid"
-            "analyticsSourceSlot" "homepage_featured_collection"
-          ) }}
-        {{ end }}
-      </div>
-    </section>
-  {{ end }}
-
-  {{ partial "home_selected.html" . }}
-  {{ $selectedKeys := .Scratch.Get "home_selected_keys" | default (slice) }}
-
-  {{ $recentEssays := where site.RegularPages "Section" "essays" }}
-  {{ if gt (len $recentEssays) 0 }}
-    <section class="home-recent-essays" aria-labelledby="home-recent-essays-title">
-      <h2 id="home-recent-essays-title" class="list-title" style="margin-top:30px;">Recent Essays</h2>
-      {{ $recentCount := 0 }}
-      {{ range sort $recentEssays "Date" "desc" }}
-        {{ if and (lt $recentCount 6) (not (in $selectedKeys .RelPermalink)) }}
-          {{ partial "discovery/page-list-item.html" (dict
-            "page" .
-            "analyticsSourceSlot" "homepage_recent"
-            "showCollections" true
-            "showSectionLabel" false
-          ) }}
-          {{ $recentCount = add $recentCount 1 }}
-        {{ end }}
-      {{ end }}
-    </section>
-  {{ end }}
-  {{ partial "journey_links.html" (dict
-    "class" "journey-links--home"
-    "eyebrow" "Browse next"
-    "links" (slice
-      (dict "href" ("essays/" | absURL) "label" "Browse all essays")
-      (dict "href" ("collections/" | absURL) "label" "Follow a collection")
-      (dict "href" ("library/" | absURL) "label" "Search the library")
-    )
-  ) }}
   {{ end }}
 {{ end }}

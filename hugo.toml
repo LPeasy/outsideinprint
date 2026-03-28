@@ -20,6 +20,9 @@ collections = "/collections/:slug/"
   [security.funcs]
     getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^GOATCOUNTER_']
 
+[params.homepage]
+imprint_statement = "Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records."
+
 [params.newsletter]
 provider = "buttondown"
 # Set this to your real Buttondown username to enable the signup form.
