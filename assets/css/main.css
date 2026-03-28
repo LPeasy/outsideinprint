@@ -1871,15 +1871,10 @@ button.dashboard-chip{
     font-size:1.03rem;
     line-height:1.78;
   }
-  .piece-body :is(p, ul, ol, hr){
+  .piece-body :is(p, ul, ol, blockquote, figure, hr){
     width:100%;
     max-width:none;
-  }
-  .piece-body figure{
-    width:fit-content;
-    max-width:100%;
-    margin-left:auto;
-    margin-right:auto;
+    margin-bottom:1.1rem;
   }
   .piece-body > img{
     display:block;
@@ -1892,13 +1887,12 @@ button.dashboard-chip{
     display:block;
     max-width:100%;
     height:auto;
+    margin-left:auto;
+    margin-right:auto;
   }
   .piece-body :is(figcaption, .article-source-caption){
     width:100%;
     max-width:100%;
-  }
-  .piece-body :is(p, ul, ol, blockquote, figure, hr){
-    margin-bottom:1.1rem;
   }
   .piece-body h2,
   .piece-body h3,
