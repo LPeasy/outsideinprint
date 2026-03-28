@@ -97,9 +97,9 @@ test("homepage partial is essays-only and no longer depends on featured or hard-
   assert.doesNotMatch(frontPageSource, />Front Page</);
   assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
   assert.match(frontPageSource, /class="home-manifesto"/);
-  assert.match(frontPageSource, /A digital imprint for essays, reports, dialogues, and literature\./);
-  assert.match(frontPageSource, /Published for the web with stable URLs, versioned records, and room for sustained attention\./);
-  assert.match(frontPageSource, /<a class="home-manifesto__support-link" href="#newsletter-signup-title">Receive the weekly letter &rarr;<\/a>/);
+  assert.match(frontPageSource, /A digital imprint of essays, reports, dialogues, and literature\./);
+  assert.match(frontPageSource, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
+  assert.match(frontPageSource, /<a class="home-manifesto__support-link" href="#newsletter-signup-title">Support independent journalism \u2192<\/a>/);
   assert.match(frontPageSource, /home-front-page__secondary-label/);
   assert.doesNotMatch(frontPageSource, /Read by guided path/);
   assert.match(indexSource, /home_front_page\.html/);

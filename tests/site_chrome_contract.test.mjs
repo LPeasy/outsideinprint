@@ -54,9 +54,9 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.doesNotMatch(homeFrontPage, />Front Page</);
   assert.doesNotMatch(homeFrontPage, /A curated front page from Outside In Print/);
   assert.match(homeFrontPage, /class="home-manifesto"/);
-  assert.match(homeFrontPage, /A digital imprint for essays, reports, dialogues, and literature\./);
-  assert.match(homeFrontPage, /Published for the web with stable URLs, versioned records, and room for sustained attention\./);
-  assert.match(homeFrontPage, /<a class="home-manifesto__support-link" href="#newsletter-signup-title">Receive the weekly letter &rarr;<\/a>/);
+  assert.match(homeFrontPage, /A digital imprint of essays, reports, dialogues, and literature\./);
+  assert.match(homeFrontPage, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
+  assert.match(homeFrontPage, /<a class="home-manifesto__support-link" href="#newsletter-signup-title">Support independent journalism \u2192<\/a>/);
   assert.match(homeFrontPage, /home-front-page__secondary-label/);
   assert.match(homeFrontPage, /Also on the front page/);
   assert.match(homeFrontPage, /Read essay &rarr;/);
