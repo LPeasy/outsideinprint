@@ -139,10 +139,19 @@ jobs:
           DASHBOARD_DEPLOY_KEY: ${{ secrets.DASHBOARD_DEPLOY_KEY }}
 
       - name: Setup Hugo (extended)
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.157.0"
-          extended: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="0.157.0"
+          tools_dir="${RUNNER_TEMP}/hugo-${version}"
+          archive_path="${RUNNER_TEMP}/hugo_extended_${version}_linux-amd64.tar.gz"
+          download_url="https://github.com/gohugoio/hugo/releases/download/v${version}/hugo_extended_${version}_linux-amd64.tar.gz"
+          rm -rf "${tools_dir}"
+          mkdir -p "${tools_dir}"
+          curl -fL --retry 5 --retry-all-errors --retry-delay 5 -o "${archive_path}" "${download_url}"
+          tar -xzf "${archive_path}" -C "${tools_dir}"
+          echo "${tools_dir}" >> "${GITHUB_PATH}"
+          "${tools_dir}/hugo" version
 
       - name: Setup Node
         uses: actions/setup-node@v4
