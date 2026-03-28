@@ -261,10 +261,10 @@ $hasHomepageAnalytics = $false
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
 $targetPageHtml = @{}
-$manifestoSupportArrowPattern = [regex]::Escape([string][char]0x2192)
-$manifestoSupportLinePattern = ('Support independent journalism\s*' + $manifestoSupportArrowPattern)
+$manifestoSupportArrowPattern = ('(?:&rarr;|&#8594;|&#x2192;|' + [regex]::Escape([string][char]0x2192) + ')')
+$manifestoSupportLinePattern = ('Receive the weekly letter\s*' + $manifestoSupportArrowPattern)
 $manifestoPlacementPattern = '(?s)home-manifesto.*?data-home-front-page-region=(?:"lead"|lead)'
-$manifestoLinkPattern = ('(?s)home-manifesto__line--support.*?home-manifesto__support-link.*?#newsletter-signup-title.*?Support independent journalism\s*' + $manifestoSupportArrowPattern + '</a>')
+$manifestoLinkPattern = ('(?s)home-manifesto__line--support.*?home-manifesto__support-link.*?#newsletter-signup-title.*?Receive the weekly letter\s*' + $manifestoSupportArrowPattern + '</a>')
 
 $requiredSemanticPages = [ordered]@{
   'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
@@ -872,12 +872,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.'
+    Pattern = 'A digital imprint for essays, reports, dialogues, and literature\.'
     Message = 'expected the homepage to render the manifesto''s first line'
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'Color over the lines\. Read beyond the feed\. Think for yourself\.'
+    Pattern = 'Published for the web with stable URLs, versioned records, and room for sustained attention\.'
     Message = 'expected the homepage to render the manifesto''s second line'
   },
   @{
