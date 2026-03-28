@@ -309,6 +309,9 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
 .home-front-page__header{
   margin:0 0 1.1rem;
 }
+.home-front-page__header > .list-title{
+  margin-bottom:0.8rem;
+}
 .home-front-page__header .title{
   margin:0;
   color:var(--muted);
@@ -325,10 +328,51 @@ a:hover{ border-bottom-color:rgba(232,226,216,.65); }
   font-size:15px;
   line-height:1.72;
 }
-.home-front-page > .list-title{
-  margin-bottom:1.15rem;
-  padding-top:0.95rem;
-  border-top:1px solid rgba(232,226,216,.16);
+.home-manifesto{
+  margin:1.7rem 0 0;
+}
+.home-manifesto__inner{
+  max-width:42rem;
+  margin:0 auto;
+  padding:1.25rem 0 1.35rem;
+  border-top:1px solid rgba(232,226,216,.14);
+  border-bottom:1px solid rgba(232,226,216,.12);
+  text-align:center;
+}
+.home-manifesto__line{
+  margin:0;
+  text-wrap:balance;
+}
+.home-manifesto__line--primary,
+.home-manifesto__line--secondary{
+  font-family:var(--serif);
+  font-style:normal;
+}
+.home-manifesto__line--primary{
+  color:rgba(232,226,216,.82);
+  font-size:clamp(1.15rem, 1.02rem + 0.68vw, 1.3rem);
+  line-height:1.46;
+}
+.home-manifesto__line--secondary{
+  margin-top:0.75rem;
+  color:rgba(232,226,216,.92);
+  font-size:clamp(1.4rem, 1.12rem + 1.1vw, 1.7rem);
+  line-height:1.36;
+}
+.home-manifesto__line--support{
+  margin-top:0.9rem;
+  font-family:var(--sans);
+  font-size:0.78rem;
+  letter-spacing:.08em;
+  line-height:1.6;
+}
+.home-manifesto__support-link{
+  color:rgba(232,226,216,.68);
+  border-bottom:1px solid transparent;
+}
+.home-manifesto__support-link:hover{
+  color:rgba(232,226,216,.9);
+  border-bottom-color:rgba(232,226,216,.28);
 }
 .home-front-page__stories{
   display:grid;
@@ -2449,7 +2493,22 @@ button.dashboard-chip{
   .home-front-page__header .page-intro{
     font-size:14px;
   }
-  .home-front-page > .list-title,
+  .home-manifesto__inner{
+    max-width:42rem;
+    padding:1.05rem 0 1.15rem;
+  }
+  .home-manifesto__line--primary{
+    font-size:1.08rem;
+  }
+  .home-manifesto__line--secondary{
+    margin-top:0.6rem;
+    font-size:1.28rem;
+    line-height:1.38;
+  }
+  .home-manifesto__line--support{
+    margin-top:0.75rem;
+    font-size:0.72rem;
+  }
   .home-selected-collections__header,
   .home-recent-work__header,
   .home-browse__header,

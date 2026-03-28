@@ -93,6 +93,10 @@ test("homepage partial is essays-only and no longer depends on featured or hard-
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
   assert.match(frontPageSource, /range \$secondary/);
+  assert.match(frontPageSource, /class="home-manifesto"/);
+  assert.match(frontPageSource, /A digital imprint of essays, reports, dialogues, and literature\./);
+  assert.match(frontPageSource, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
+  assert.match(frontPageSource, /<a class="home-manifesto__support-link" href="#newsletter-signup-title">Support independent journalism \u2192<\/a>/);
   assert.doesNotMatch(frontPageSource, /Read by guided path/);
   assert.match(indexSource, /home_front_page\.html/);
   assert.match(indexSource, /home_recent_work\.html/);
@@ -164,6 +168,8 @@ test("front page stays structurally primary to recent work", () => {
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
   assert.match(frontPageSource, /Read essay &rarr;/);
   assert.match(frontPageSource, /A curated front page from Outside In Print/);
+  assert.ok(frontPageSource.indexOf('class="page-intro"') < frontPageSource.indexOf('class="home-manifesto"'));
+  assert.ok(frontPageSource.indexOf('class="home-manifesto"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$lead/);
   assert.match(partialSource, /"secondary" \$secondary/);
   assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_recent_work.html"'));

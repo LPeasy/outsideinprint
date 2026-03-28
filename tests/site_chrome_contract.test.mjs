@@ -50,6 +50,10 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.equal((homeFrontPage.match(/data-home-front-page-region="secondary"/g) || []).length, 1);
   assert.match(homeFrontPage, /home-front-page__secondary-item/);
   assert.match(homeFrontPage, /A curated front page from Outside In Print/);
+  assert.match(homeFrontPage, /class="home-manifesto"/);
+  assert.match(homeFrontPage, /A digital imprint of essays, reports, dialogues, and literature\./);
+  assert.match(homeFrontPage, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
+  assert.match(homeFrontPage, /<a class="home-manifesto__support-link" href="#newsletter-signup-title">Support independent journalism \u2192<\/a>/);
   assert.match(homeFrontPage, /Read essay &rarr;/);
   assert.match(homeImprintStatement, /<aside class="home-imprint-statement"/);
   assert.match(homeImprintStatement, /home-imprint-statement__inner/);
@@ -64,6 +68,8 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.doesNotMatch(homeRecentWork, /home-recent-essays/);
   assert.match(config, /\[params\.homepage\]/);
   assert.match(config, /imprint_statement = "/);
+  assert.ok(homeFrontPage.indexOf('class="page-intro"') < homeFrontPage.indexOf('class="home-manifesto"'));
+  assert.ok(homeFrontPage.indexOf('class="home-manifesto"') < homeFrontPage.indexOf('class="home-front-page__stories"'));
   assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(homepage.indexOf('partial "home_imprint_statement.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
   assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('partial "home_recent_work.html"'));
@@ -74,6 +80,11 @@ test("homepage composition promotes front page and imprint before lower-priority
 });
 
 test("homepage editorial layout stays scoped to home modules", () => {
+  assert.match(css, /\.home-manifesto__inner\{[\s\S]*max-width:42rem;[\s\S]*margin:0 auto;[\s\S]*border-top:1px solid rgba\(232,226,216,.14\);[\s\S]*border-bottom:1px solid rgba\(232,226,216,.12\);[\s\S]*text-align:center;/);
+  assert.match(css, /\.home-manifesto__line--primary\{[\s\S]*font-size:clamp\(1\.15rem, 1\.02rem \+ 0\.68vw, 1\.3rem\);/);
+  assert.match(css, /\.home-manifesto__line--secondary\{[\s\S]*font-size:clamp\(1\.4rem, 1\.12rem \+ 1\.1vw, 1\.7rem\);/);
+  assert.match(css, /\.home-manifesto__line--support\{[\s\S]*font-family:var\(--sans\);[\s\S]*font-size:0\.78rem;/);
+  assert.match(css, /\.home-manifesto__support-link\{[\s\S]*border-bottom:1px solid transparent;/);
   assert.match(css, /\.home-front-page__stories\{\s*display:grid;\s*grid-template-columns:minmax\(0, 1\.65fr\) minmax\(0, 1fr\);/);
   assert.match(css, /\.home-front-page__lead\{[\s\S]*border-right:1px solid rgba\(232,226,216,.12\);/);
   assert.match(css, /\.home-imprint-statement__inner\{[\s\S]*grid-template-columns:minmax\(110px, 136px\) minmax\(0, 1fr\);[\s\S]*border-top:1px solid rgba\(232,226,216,.14\);/);
@@ -83,6 +94,7 @@ test("homepage editorial layout stays scoped to home modules", () => {
   assert.match(css, /\.newsletter-signup--home \.newsletter-signup__inner\{[\s\S]*padding:0;[\s\S]*border:none;[\s\S]*background:none;/);
   assert.match(css, /\.home-browse__grid \.card\{[\s\S]*border:none;[\s\S]*border-top:1px solid rgba\(232,226,216,.12\);[\s\S]*border-radius:0;/);
   assert.match(css, /@media \(max-width:900px\)\{[\s\S]*\.home-front-page__stories\{\s*grid-template-columns:1fr;\s*\}/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-manifesto__inner\{[\s\S]*max-width:42rem;[\s\S]*padding:1\.05rem 0 1\.15rem;/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-imprint-statement__inner\{\s*grid-template-columns:1fr;/);
   assert.doesNotMatch(css, /\.selected-hero\{/);
   assert.doesNotMatch(css, /\.selected-core\{/);

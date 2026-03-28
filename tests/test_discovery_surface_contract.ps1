@@ -65,9 +65,14 @@ foreach ($snippet in $homepageOrder) {
   $lastIndex = $currentIndex
 }
 
-$homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw
+$supportLine = 'Support independent journalism ' + [string][char]0x2192
+
+$homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
   '<h1 class="title">{{ site.Title }}</h1>',
+  'class="home-manifesto"',
+  'A digital imprint of essays, reports, dialogues, and literature.',
+  'Color over the lines. Read beyond the feed. Think for yourself.',
   'id="home-front-page-title"',
   'data-home-front-page-region="lead"',
   'data-home-front-page-region="secondary"'
@@ -75,6 +80,34 @@ foreach ($requiredSnippet in @(
   if ($homeFrontPageTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/partials/home_front_page.html to contain: $requiredSnippet"
   }
+}
+
+if ($homeFrontPageTemplate -notmatch [regex]::Escape($supportLine)) {
+  throw "Expected layouts/partials/home_front_page.html to contain: $supportLine"
+}
+
+$manifestoOrder = @(
+  'class="page-intro"',
+  'class="home-manifesto"',
+  'class="home-front-page__stories"'
+)
+
+$lastManifestoIndex = -1
+foreach ($snippet in $manifestoOrder) {
+  $currentIndex = $homeFrontPageTemplate.IndexOf($snippet, [System.StringComparison]::Ordinal)
+  if ($currentIndex -lt 0) {
+    throw "Expected layouts/partials/home_front_page.html to contain ordered manifesto snippet: $snippet"
+  }
+
+  if ($currentIndex -le $lastManifestoIndex) {
+    throw "Expected the homepage manifesto strip to remain between the intro block and the story grid in layouts/partials/home_front_page.html."
+  }
+
+  $lastManifestoIndex = $currentIndex
+}
+
+if ($homeFrontPageTemplate -notmatch '<a class="home-manifesto__support-link" href="#newsletter-signup-title">') {
+  throw 'Expected the homepage manifesto support line to render as a real link targeting the newsletter module.'
 }
 
 $homeImprintTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_imprint_statement.html') -Raw

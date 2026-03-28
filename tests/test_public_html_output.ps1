@@ -261,6 +261,10 @@ $hasHomepageAnalytics = $false
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
 $targetPageHtml = @{}
+$manifestoSupportArrowPattern = [regex]::Escape([string][char]0x2192)
+$manifestoSupportLinePattern = ('Support independent journalism\s*' + $manifestoSupportArrowPattern)
+$manifestoPlacementPattern = '(?s)page-intro.*?home-manifesto.*?home-front-page__stories'
+$manifestoLinkPattern = ('(?s)home-manifesto__line--support.*?home-manifesto__support-link.*?#newsletter-signup-title.*?Support independent journalism\s*' + $manifestoSupportArrowPattern + '</a>')
 
 $requiredSemanticPages = [ordered]@{
   'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
@@ -843,7 +847,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
     Pattern = '(?s)<h1 class="?title"?>\s*Outside In Print\s*</h1>'
-    Message = 'expected the homepage to expose a visible h1 for the imprint'
+    Message = 'expected the homepage to expose a visible h1 for the site title'
   },
   @{
     Path = 'public/index.html'
@@ -864,6 +868,31 @@ $requiredUxChecks = @(
     Path = 'public/index.html'
     Pattern = 'data-home-front-page-region=(?:"secondary"|secondary)'
     Message = 'expected the homepage to render a secondary editorial rail'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.'
+    Message = 'expected the homepage to render the manifesto''s first line'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Color over the lines\. Read beyond the feed\. Think for yourself\.'
+    Message = 'expected the homepage to render the manifesto''s second line'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = $manifestoSupportLinePattern
+    Message = 'expected the homepage to render the manifesto''s support line'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = $manifestoPlacementPattern
+    Message = 'expected the homepage manifesto strip to appear between the intro block and the story grid'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = $manifestoLinkPattern
+    Message = 'expected the homepage manifesto support line to render as a real text link to the newsletter module'
   },
   @{
     Path = 'public/index.html'
