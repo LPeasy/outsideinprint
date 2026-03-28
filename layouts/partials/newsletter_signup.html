@@ -7,6 +7,7 @@
 {{ $buttonLabel := default "Subscribe" .buttonLabel }}
 {{ $note := default "New work and occasional notes. No spam." .note }}
 {{ $inputID := printf "bd-email-%s" (replace (replace ($page.RelPermalink | default "newsletter") "/" "-") "--" "-") }}
+{{ $noteID := printf "%s-note" $inputID }}
 {{ $sourceSlot := default "newsletter_module" .sourceSlot }}
 
 {{ with $newsletter.buttondown_username }}
@@ -32,6 +33,10 @@
             class="newsletter-signup__input"
             placeholder="you@example.com"
             autocomplete="email"
+            autocapitalize="off"
+            inputmode="email"
+            spellcheck="false"
+            aria-describedby="{{ $noteID }}"
             required
           />
           <input type="hidden" name="embed" value="1" />
@@ -41,7 +46,7 @@
           <button type="submit" class="newsletter-signup__button">{{ $buttonLabel }}</button>
         </form>
 
-        <p class="newsletter-signup__note">{{ $note }}</p>
+        <p id="{{ $noteID }}" class="newsletter-signup__note">{{ $note }}</p>
       </div>
     </section>
   {{ end }}

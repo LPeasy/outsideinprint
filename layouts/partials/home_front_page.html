@@ -5,9 +5,9 @@
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
   <section class="home-manifesto" aria-label="Editorial statement">
     <div class="home-manifesto__inner">
-      <p class="home-manifesto__line home-manifesto__line--primary">A digital imprint of essays, reports, dialogues, and literature.</p>
-      <p class="home-manifesto__line home-manifesto__line--secondary">Color over the lines. Read beyond the feed. Think for yourself.</p>
-      <p class="home-manifesto__line home-manifesto__line--support"><a class="home-manifesto__support-link" href="#newsletter-signup-title">Support independent journalism →</a></p>
+      <p class="home-manifesto__line home-manifesto__line--primary">A digital imprint for essays, reports, dialogues, and literature.</p>
+      <p class="home-manifesto__line home-manifesto__line--secondary">Published for the web with stable URLs, versioned records, and room for sustained attention.</p>
+      <p class="home-manifesto__line home-manifesto__line--support"><a class="home-manifesto__support-link" href="#newsletter-signup-title">Receive the weekly letter &rarr;</a></p>
     </div>
   </section>
   {{ with $lead }}
@@ -15,7 +15,7 @@
     {{ $leadSection := .Params.section_label | default (humanize .Section) }}
     <div class="home-front-page__stories">
       <article class="home-front-page__lead" data-home-front-page-region="lead">
-        <p class="list-title home-front-page__kicker">{{ $leadSection }}{{ with .Date }} / {{ .Format "Jan 2, 2006" }}{{ end }}</p>
+        <p class="list-title home-front-page__kicker">{{ $leadSection }}</p>
         <h3 class="home-front-page__lead-title">
           <a href="{{ .RelPermalink }}"
             data-analytics-event="internal_promo_click"
@@ -39,11 +39,12 @@
 
       {{ if gt (len $secondary) 0 }}
         <div class="home-front-page__secondary" aria-label="Secondary stories" data-home-front-page-region="secondary">
+          <p class="home-front-page__secondary-label">Also on the front page</p>
           {{ range $secondary }}
             {{ $slug := .Params.slug | default .File.BaseFileName }}
             {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
             <article class="home-front-page__secondary-item">
-              <p class="list-title home-front-page__secondary-kicker">{{ $sectionLabel }}{{ with .Date }} / {{ .Format "Jan 2, 2006" }}{{ end }}</p>
+              <p class="list-title home-front-page__secondary-kicker">{{ $sectionLabel }}</p>
               <h3 class="home-front-page__secondary-title">
                 <a href="{{ .RelPermalink }}"
                   data-analytics-event="internal_promo_click"

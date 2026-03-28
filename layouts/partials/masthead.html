@@ -1,4 +1,10 @@
 {{ $stickyMasthead := and .IsPage (not (in (slice "collections" "random") .Section)) }}
+{{ $isStartHere := or (eq .RelPermalink "/start-here/") (eq .Section "start-here") }}
+{{ $isEssays := eq .Section "essays" }}
+{{ $isSydAndOliver := eq .Section "syd-and-oliver" }}
+{{ $isCollections := eq .Section "collections" }}
+{{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
+{{ $isRandom := eq .Section "random" }}
 <header class="masthead site-header masthead--editorial{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-preface" aria-hidden="true"></div>
   <a class="brand-link" href="{{ "" | absURL }}" aria-label="Outside In Print home">
@@ -10,11 +16,11 @@
   </a>
 
   <nav class="nav nav--section-rail" aria-label="Primary">
-    <a href="{{ "start-here/" | absURL }}">Start Here</a><span class="dot">&bull;</span>
-    <a href="{{ "essays/" | absURL }}">Essays</a><span class="dot">&bull;</span>
-    <a href="{{ "syd-and-oliver/" | absURL }}">S and O</a><span class="dot">&bull;</span>
-    <a href="{{ "collections/" | absURL }}">Collections</a><span class="dot">&bull;</span>
-    <a href="{{ "library/" | absURL }}">Library</a><span class="dot">&bull;</span>
-    <a href="{{ "random/" | absURL }}">Random</a>
+    <a href="{{ "start-here/" | absURL }}"{{ if $isStartHere }} aria-current="page"{{ end }}>Start Here</a><span class="dot">&bull;</span>
+    <a href="{{ "essays/" | absURL }}"{{ if $isEssays }} aria-current="page"{{ end }}>Essays</a><span class="dot">&bull;</span>
+    <a href="{{ "syd-and-oliver/" | absURL }}"{{ if $isSydAndOliver }} aria-current="page"{{ end }}>S and O</a><span class="dot">&bull;</span>
+    <a href="{{ "collections/" | absURL }}"{{ if $isCollections }} aria-current="page"{{ end }}>Collections</a><span class="dot">&bull;</span>
+    <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
+    <a href="{{ "random/" | absURL }}"{{ if $isRandom }} aria-current="page"{{ end }}>Random</a>
   </nav>
 </header>
