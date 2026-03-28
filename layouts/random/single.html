@@ -6,9 +6,11 @@
     {{ $urls = $urls | append .Permalink }}
   {{ end }}
 
-  <div class="item">
-    <div class="t">Finding a random piece...</div>
-    <div class="m"><a href="{{ "library/" | absURL }}">Library</a></div>
+  <div class="page-shell page-shell--reading">
+    <div class="item">
+      <div class="t">Finding a random piece...</div>
+      <div class="m"><a href="{{ "library/" | absURL }}">Library</a></div>
+    </div>
   </div>
 
   <script>
@@ -27,8 +29,10 @@
   </script>
 
   <noscript>
-    <div class="item">
-      <div class="t"><a href="{{ "library/" | absURL }}">Open the Library</a></div>
+    <div class="page-shell page-shell--reading">
+      <div class="item">
+        <div class="t"><a href="{{ "library/" | absURL }}">Open the Library</a></div>
+      </div>
     </div>
   </noscript>
 {{ end }}

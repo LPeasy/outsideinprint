@@ -1,6 +1,6 @@
 {{ define "main" }}
   <section class="single-page start-here-page">
-    <header class="start-here-header">
+    <header class="start-here-header page-shell page-shell--wide">
       {{ with .Params.section_label }}<p class="start-here-kicker">{{ . }}</p>{{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
@@ -18,10 +18,10 @@
       )
     ) }}
 
-    <article class="single-content start-here-content">
+    <article class="single-content start-here-content page-shell page-shell--reading">
       {{ .Content }}
     </article>
 
-    <p class="start-here-closing">Begin where the thread catches.</p>
+    <p class="start-here-closing page-shell page-shell--reading">Begin where the thread catches.</p>
   </section>
 {{ end }}

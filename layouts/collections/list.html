@@ -9,7 +9,7 @@
     {{ $totalPieces = add $totalPieces .state.count }}
   {{ end }}
 
-  <header class="page-header">
+  <header class="page-header page-shell page-shell--wide">
     <h1 id="collections-title" class="list-title">Collections</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
     {{ if gt (len $entries) 0 }}<p class="page-intro">Collections are curated reading threads across the archive: {{ len $entries }} public collections linking {{ $totalPieces }} published pieces.</p>{{ end }}
@@ -23,7 +23,7 @@
     )
   ) }}
   {{ if gt (len $featured) 0 }}
-    <section aria-labelledby="featured-collections-title">
+    <section class="page-shell page-shell--grid" aria-labelledby="featured-collections-title">
       <h2 id="featured-collections-title" class="list-title">Featured Collections</h2>
       <div class="grid collection-grid">
         {{ range $featured }}
@@ -38,7 +38,7 @@
   {{ end }}
 
   {{ if gt (len $entries) 0 }}
-    <section aria-labelledby="all-collections-title">
+    <section class="page-shell page-shell--reading" aria-labelledby="all-collections-title">
       <h2 id="all-collections-title" class="list-title" style="margin-top:28px;">All Collections</h2>
       {{ range $entries }}
         {{ partial "discovery/collection-card.html" (dict
@@ -48,9 +48,11 @@
       {{ end }}
     </section>
   {{ else }}
-    <div class="item">
-      <div class="t">No public collections are ready yet.</div>
-      <div class="m">Collections need a public flag and enough pieces to clear their minimum threshold.</div>
+    <div class="page-shell page-shell--reading">
+      <div class="item">
+        <div class="t">No public collections are ready yet.</div>
+        <div class="m">Collections need a public flag and enough pieces to clear their minimum threshold.</div>
+      </div>
     </div>
   {{ end }}
 {{ end }}

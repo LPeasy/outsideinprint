@@ -27,11 +27,11 @@
   ) }}
 
   <section class="home-browse home-browse--utility" aria-labelledby="home-browse-title">
-    <header class="home-browse__header">
+    <header class="home-browse__header page-shell page-shell--wide">
       <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
       <p class="home-browse__dek">Use the section landings, collections, library, or a random route when you want to move beyond the front page.</p>
     </header>
-    <div class="grid home-browse__grid">
+    <div class="grid home-browse__grid page-shell page-shell--grid">
       {{ range $exploreRoutes }}
         {{ $page := .page | default false }}
         {{ $href := .href | default "" }}

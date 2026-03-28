@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <header class="page-header">
+  <header class="page-header page-shell page-shell--wide">
     <h1 id="library-title" class="list-title">Library</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
   </header>
@@ -21,7 +21,7 @@
       {{ $totalPages = add $totalPages (len $pages) }}
     {{ end }}
   {{ end }}
-  {{ if gt $totalPages 0 }}<p class="page-intro">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $librarySections }} active lanes.</p>{{ end }}
+  {{ if gt $totalPages 0 }}<p class="page-intro page-shell page-shell--wide">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $librarySections }} active lanes.</p>{{ end }}
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"
     "eyebrow" "Use the library, or take a guided path"
@@ -30,11 +30,11 @@
       (dict "href" ("start-here/" | absURL) "label" "Read Start Here")
     )
   ) }}
-  <div class="library-search">
+  <div class="library-search page-shell page-shell--feature">
     <label class="library-search-label" for="library-search">Search the library</label>
     <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, and versions" autocomplete="off" spellcheck="false" />
   </div>
-  <div id="library-search-empty" class="library-empty" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or start with <a href="{{ "start-here/" | absURL }}">Start Here</a>.</div>
+  <div id="library-search-empty" class="library-empty page-shell page-shell--feature" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or start with <a href="{{ "start-here/" | absURL }}">Start Here</a>.</div>
 
   {{ range $section := $librarySections }}
     {{ $sectionKey := index $section "key" }}
@@ -43,7 +43,7 @@
     {{ $pages := index $section "pages" }}
 
     {{ if gt (len $pages) 0 }}
-      <section class="library-group" data-library-group aria-labelledby="library-group-{{ $sectionKey }}">
+      <section class="library-group page-shell page-shell--reading" data-library-group aria-labelledby="library-group-{{ $sectionKey }}">
         <h2 id="library-group-{{ $sectionKey }}" class="list-title" style="margin-top:22px;">{{ with $sectionPage }}{{ .Title }}{{ else }}{{ $sectionLabel }}{{ end }}</h2>
         {{ with $sectionPage.Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
         <p class="m">{{ len $pages }} pieces in this lane.</p>

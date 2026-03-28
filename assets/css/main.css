@@ -384,6 +384,10 @@ textarea{
 .journey-links--home{
   margin-top:1.2rem;
 }
+.journey-links--page{
+  margin-left:auto;
+  margin-right:auto;
+}
 .journey-links--article{
   max-width:34rem;
   margin:0 auto 1.45rem;
@@ -675,6 +679,53 @@ textarea{
 
 .home-recent-work .item .d{
   display:block;
+}
+
+.page-shell{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+.page-shell--wide{
+  max-width:var(--measure-wide);
+}
+.page-shell--reading{
+  max-width:var(--measure-reading);
+}
+.page-shell--feature{
+  max-width:42rem;
+}
+.page-shell--grid{
+  max-width:64rem;
+}
+
+.start-here-header{
+  margin-bottom:1.85rem;
+}
+.start-here-kicker{
+  margin:0 0 .65rem;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.start-here-content > :first-child{
+  margin-top:0;
+}
+.start-here-content > :last-child{
+  margin-bottom:0;
+}
+.start-here-closing{
+  margin-top:2.2rem;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-align:center;
+  text-transform:uppercase;
 }
 
 @media (max-width:900px){
