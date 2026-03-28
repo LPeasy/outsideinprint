@@ -106,7 +106,7 @@ test("homepage editorial layout stays scoped to home modules", () => {
   assert.match(css, /\.home-recent-work \.item \.d\{\s*display:block;\s*\}/);
   assert.match(css, /\.newsletter-signup--home \.newsletter-signup__inner\{[\s\S]*padding:0;[\s\S]*border:none;[\s\S]*background:none;/);
   assert.match(css, /\.home-browse__grid \.card\{[\s\S]*border:none;[\s\S]*border-top:1px solid rgba\(236,231,223,.1\);[\s\S]*border-radius:0;/);
-  assert.match(css, /\.piece-body\{[\s\S]*max-width:var\(--measure-reading\);[\s\S]*font-size:clamp\(1\.08rem, 1.04rem + \.26vw, 1.18rem\);/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body\{[\s\S]*max-width:var\(--measure-reading\);[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;[\s\S]*font-size:1\.03rem;[\s\S]*line-height:1\.78;/);
   assert.match(css, /\.newsletter-signup__input\{[\s\S]*font-family:var\(--font-ui\);/);
   assert.match(css, /\.newsletter-signup__button\{[\s\S]*background:var\(--accent-soft\);/);
   assert.match(css, /@media \(max-width:900px\)\{[\s\S]*\.home-front-page__stories\{\s*grid-template-columns:1fr;\s*\}/);
