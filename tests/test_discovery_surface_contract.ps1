@@ -10,6 +10,10 @@ $requiredFiles = @(
   'layouts/collections/single.html',
   'layouts/library/list.html',
   'layouts/start-here/single.html',
+  'layouts/partials/home_front_page.html',
+  'layouts/partials/home_imprint_statement.html',
+  'layouts/partials/home_selected_collections.html',
+  'layouts/partials/home_recent_work.html',
   'layouts/partials/discovery/page-summary.html',
   'layouts/partials/discovery/page-list-item.html',
   'layouts/partials/discovery/collection-card.html',
@@ -25,14 +29,83 @@ foreach ($relativePath in $requiredFiles) {
 
 $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -Raw
 foreach ($requiredSnippet in @(
-  '<h1 class="title">Outside In Print</h1>',
-  'Read by Path',
-  'partial "discovery/collection-card.html"',
+  'partial "home_front_page.html"',
+  'partial "home_imprint_statement.html"',
+  'partial "home_selected_collections.html"',
+  'partial "home_recent_work.html"',
+  'partial "newsletter_signup.html"',
   'site.GetPage "/collections"',
   'site.GetPage "/library"'
 )) {
   if ($indexTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/index.html to contain: $requiredSnippet"
+  }
+}
+
+$homepageOrder = @(
+  'partial "home_front_page.html"',
+  'partial "home_imprint_statement.html"',
+  'partial "home_selected_collections.html"',
+  'partial "home_recent_work.html"',
+  'partial "newsletter_signup.html"',
+  'home-browse-title'
+)
+
+$lastIndex = -1
+foreach ($snippet in $homepageOrder) {
+  $currentIndex = $indexTemplate.IndexOf($snippet, [System.StringComparison]::Ordinal)
+  if ($currentIndex -lt 0) {
+    throw "Expected layouts/index.html to contain ordered homepage snippet: $snippet"
+  }
+
+  if ($currentIndex -le $lastIndex) {
+    throw "Expected homepage composition in layouts/index.html to preserve editorial order through: $snippet"
+  }
+
+  $lastIndex = $currentIndex
+}
+
+$homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw
+foreach ($requiredSnippet in @(
+  '<h1 class="title">{{ site.Title }}</h1>',
+  'id="home-front-page-title"',
+  'data-home-front-page-region="lead"',
+  'data-home-front-page-region="secondary"'
+)) {
+  if ($homeFrontPageTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/home_front_page.html to contain: $requiredSnippet"
+  }
+}
+
+$homeImprintTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_imprint_statement.html') -Raw
+foreach ($requiredSnippet in @(
+  'site.Params.homepage.imprint_statement',
+  'id="home-imprint-statement-title"'
+)) {
+  if ($homeImprintTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/home_imprint_statement.html to contain: $requiredSnippet"
+  }
+}
+
+$homeSelectedCollectionsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_selected_collections.html') -Raw
+foreach ($requiredSnippet in @(
+  'partial "collections/get-public-entries.html"',
+  'partial "discovery/collection-card.html"',
+  '"variant" "item"'
+)) {
+  if ($homeSelectedCollectionsTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/home_selected_collections.html to contain: $requiredSnippet"
+  }
+}
+
+$homeRecentWorkTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_recent_work.html') -Raw
+foreach ($requiredSnippet in @(
+  'home_selected_keys',
+  'partial "discovery/page-list-item.html"',
+  'lt $recentCount 6'
+)) {
+  if ($homeRecentWorkTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/home_recent_work.html to contain: $requiredSnippet"
   }
 }
 
@@ -118,7 +191,7 @@ foreach ($requiredSnippet in @(
 
 $mastheadPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/masthead.html') -Raw
 if ($mastheadPartial -match '<h1 class="title">') {
-  throw 'Expected the editorial masthead brand to remain non-heading markup so homepage heading ownership stays in layouts/index.html.'
+  throw 'Expected the editorial masthead brand to remain non-heading markup so homepage heading ownership stays in layouts/partials/home_front_page.html.'
 }
 
 if ($mastheadPartial -notmatch '<div class="title">') {

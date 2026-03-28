@@ -847,13 +847,35 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'Read by Path'
-    Message = 'expected the homepage to label its primary discovery grid as a browsable path chooser'
+    Pattern = 'Front Page'
+    Message = 'expected the homepage to expose a front-page heading above the editorial lead'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected the homepage to expose browse-next links for essays, collections, and the library'
+    Pattern = '(?s)Front Page.*?Imprint.*?Selected Collections.*?Recent Work.*?The weekly letter.*?Browse the Archive'
+    Message = 'expected the homepage to preserve the editorial module order from front page through archive browse'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-front-page-region=(?:"lead"|lead)'
+    Message = 'expected the homepage to render a dedicated lead-story region'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-front-page-region=(?:"secondary"|secondary)'
+    Message = 'expected the homepage to render a secondary editorial rail'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Read by Path'
+    Message = 'expected the homepage not to retain the retired path-chooser heading'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'journey-links'
+    Message = 'expected the homepage not to retain the old browse-next journey-links module'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
