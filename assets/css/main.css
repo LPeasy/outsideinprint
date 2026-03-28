@@ -685,17 +685,20 @@ textarea{
   margin-right:auto;
 }
 .piece-body figure{
-  width:fit-content;
+  width:100%;
   max-width:100%;
   margin-left:auto;
   margin-right:auto;
 }
 .piece-body > img{
   display:block;
-  width:auto;
+  width:100%;
   max-width:100%;
   margin-left:auto;
   margin-right:auto;
+}
+.piece-body figure img{
+  width:100%;
 }
 .piece-body img{
   display:block;
@@ -1920,13 +1923,14 @@ button.dashboard-chip{
   }
   .piece-body > img{
     display:block;
-    width:auto;
+    width:100%;
     max-width:100%;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left:0;
+    margin-right:0;
   }
   .piece-body img{
     display:block;
+    width:100%;
     max-width:100%;
     height:auto;
     margin-left:auto;
