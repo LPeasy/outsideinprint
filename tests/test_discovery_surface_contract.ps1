@@ -65,14 +65,14 @@ foreach ($snippet in $homepageOrder) {
   $lastIndex = $currentIndex
 }
 
-$supportLine = 'Support independent journalism ' + [string][char]0x2192
+$supportLine = 'Receive the weekly letter &rarr;'
 
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
   'class="home-manifesto"',
-  'A digital imprint of essays, reports, dialogues, and literature.',
-  'Color over the lines. Read beyond the feed. Think for yourself.',
+  'A digital imprint for essays, reports, dialogues, and literature.',
+  'Published for the web with stable URLs, versioned records, and room for sustained attention.',
   'id="home-front-page-title"',
   'data-home-front-page-region="lead"',
   'data-home-front-page-region="secondary"'
