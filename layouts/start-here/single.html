@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="single-page start-here-page">
+  <section class="start-here-page">
     <header class="start-here-header page-shell page-shell--wide">
       {{ with .Params.section_label }}<p class="start-here-kicker">{{ . }}</p>{{ end }}
       <h1>{{ .Title }}</h1>
@@ -8,7 +8,7 @@
     </header>
 
     {{ partial "journey_links.html" (dict
-      "class" "journey-links--page"
+      "class" "journey-links--page start-here-journey-links"
       "eyebrow" "Choose a path into the archive"
       "links" (slice
         (dict "href" ("essays/" | absURL) "label" "Browse Essays")
@@ -18,7 +18,7 @@
       )
     ) }}
 
-    <article class="single-content start-here-content page-shell page-shell--reading">
+    <article class="start-here-content page-shell page-shell--reading">
       {{ .Content }}
     </article>
 

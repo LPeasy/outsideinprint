@@ -87,7 +87,7 @@
               "showCollections" false
               "class" (cond (eq $itemSlug $startHereSlug) "collection-item--start-here" "")
             ) }}
-            {{ if eq $itemSlug $startHereSlug }}<div class="m"><span class="collection-pill">Start Here</span>Recommended entry point for this collection.</div>{{ end }}
+            {{ if eq $itemSlug $startHereSlug }}<div class="collection-item-note"><span class="collection-pill">Start Here</span><span>Recommended entry point for this collection.</span></div>{{ end }}
           </li>
         {{ end }}
         </ol>

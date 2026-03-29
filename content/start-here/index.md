@@ -17,7 +17,7 @@ section_label: "A Map of the Imprint"
 {{< newsletter_signup class="newsletter-signup--page newsletter-signup--start-here" eyebrow="Letter" title="Weekly letter" dek="New writing, notes, and selected work from Outside In Print." note="Sent quietly, once a week." buttonLabel="Join" >}}
 
 {{< rawhtml >}}
-<section class="start-here-section start-here-map-section">
+<section class="start-here-section">
   <h2>How to Read the Site</h2>
   <dl class="start-here-map">
     <div class="start-here-map-row">
@@ -43,9 +43,9 @@ section_label: "A Map of the Imprint"
   </dl>
 </section>
 
-<section class="start-here-section start-here-featured">
+<section class="start-here-section">
   <h2>Begin Here</h2>
-  <p class="start-here-section-intro start-here-featured-intro">Three openings into the work: one piece of public explanation, one narrative threshold, and one longer reported study.</p>
+  <p class="start-here-section-intro">Three openings into the work: one piece of public explanation, one narrative threshold, and one longer reported study.</p>
   <div class="start-here-feature-list">
     <article class="start-here-feature">
       <p class="start-here-feature-kicker">Explanatory essay</p>
@@ -68,7 +68,7 @@ section_label: "A Map of the Imprint"
   </div>
 </section>
 
-<section class="start-here-section start-here-collections">
+<section class="start-here-section">
   <h2>Follow a Thread</h2>
   <p>Some pieces stand alone. Others belong to larger threads: recurring questions, projects, dossiers, and narrative cycles that gather force over time.</p>
   <div class="start-here-threads">
@@ -92,7 +92,7 @@ section_label: "A Map of the Imprint"
   <p class="start-here-thread-note">Read collections not as categories but as lines of return.</p>
 </section>
 
-<section class="start-here-section start-here-editions">
+<section class="start-here-section">
   <h2>Publication Details</h2>
   <p>Each piece carries a publication date, version number, and estimated reading time. The page itself is the canonical publication, and those details make the archive easier to cite and revisit.</p>
   <ul class="start-here-edition-list">
@@ -102,7 +102,7 @@ section_label: "A Map of the Imprint"
   </ul>
 </section>
 
-<section class="start-here-section start-here-archive">
+<section class="start-here-section">
   <h2>The Archive</h2>
   <p>The <a href="../library/">Library</a> gathers every published piece in one place. It is the full catalog of the imprint.</p>
   <p>If you are looking for a title, a date, or the shape of the catalog, begin with the <a href="../library/">Library</a>. If you would rather enter by drift, try <a href="../random/">Random</a>.</p>
