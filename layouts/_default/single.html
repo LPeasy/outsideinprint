@@ -1,8 +1,4 @@
 {{ define "main" }}
-  {{ $pageClass := "piece single-page" }}
-  {{ if .Params.medium_source_url }}
-    {{ $pageClass = printf "%s single-page--imported" $pageClass }}
-  {{ end }}
   {{ $sectionPage := .CurrentSection }}
   {{ $journeyLinks := slice }}
   {{ with $sectionPage }}
@@ -10,7 +6,7 @@
   {{ end }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("collections/" | absURL) "label" "Browse collections") }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("library/" | absURL) "label" "Search the library") }}
-  <article class="{{ $pageClass }}" data-analytics-eligible-read="true">
+  <article class="piece" data-analytics-eligible-read="true">
     <header class="piece-header">
       {{ partial "running_header.html" . }}
 
@@ -33,7 +29,7 @@
       ) }}
     </header>
 
-    <div class="piece-body single-content">
+    <div class="piece-body">
       {{ partial "render_article_body.html" . }}
     </div>
 

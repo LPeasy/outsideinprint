@@ -2,7 +2,7 @@
 {{ if gt (len $entries) 0 }}
   {{ $currentSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
   <aside class="collection-membership" aria-label="Collection membership">
-    <div class="k">Part of this collection</div>
+    <div class="collection-membership__eyebrow">Part of this collection</div>
     {{ range $entries }}
       {{ $url := printf "collections/%s/" .collection.slug | absURL }}
       {{ with .page }}
