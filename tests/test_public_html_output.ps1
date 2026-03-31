@@ -951,6 +951,17 @@ $requiredUxChecks = @(
     Message = 'expected the library page to surface lane descriptions from section metadata'
   },
   @{
+    Path = 'public/library/index.html'
+    Pattern = '\|\s*\d+\s+min read'
+    Message = 'expected the library page to render numeric reading-time metadata in list rows'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '%![sS]\(int=\d+\)\s+min read'
+    Message = 'expected the library page not to expose Go-formatting error strings in reading-time metadata'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/syd-and-oliver/index.html'
     Pattern = '(?s)<h1[^>]*>\s*Dialogues\s*</h1>'
     Message = 'expected the /syd-and-oliver/ route to render the renamed Dialogues section title'
