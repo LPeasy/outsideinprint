@@ -29,7 +29,7 @@
   {{- $metaParts = $metaParts | append (printf "v%s" .) -}}
 {{- end -}}
 {{- with $page.ReadingTime -}}
-  {{- $metaParts = $metaParts | append (printf "%s min read" .) -}}
+  {{- $metaParts = $metaParts | append (printf "%d min read" .) -}}
 {{- end -}}
 
 <article class="item{{ with $class }} {{ . }}{{ end }}">
