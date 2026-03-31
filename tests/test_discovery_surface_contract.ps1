@@ -213,11 +213,16 @@ $pageListItemPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/
 foreach ($requiredSnippet in @(
   'partial "discovery/page-summary.html"',
   'partial "collections/resolve-page-collections.html"',
-  'data-analytics-source-slot'
+  'data-analytics-source-slot',
+  'printf "%d min read"'
 )) {
   if ($pageListItemPartial -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected discovery/page-list-item.html to contain: $requiredSnippet"
   }
+}
+
+if ($pageListItemPartial -match [regex]::Escape('printf "%s min read"')) {
+  throw 'Expected discovery/page-list-item.html to format ReadingTime as an integer, not a string.'
 }
 
 $pageSummaryPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/page-summary.html') -Raw
