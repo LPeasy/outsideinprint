@@ -1,30 +1,18 @@
 [
   {
     "slot": "related_content",
+    "collection": "",
+    "clicks": 5.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "homepage_featured_collection",
     "collection": "floods-water-built-environment",
     "clicks": 1.0,
     "downstream_reads": 0.0
   },
   {
     "slot": "related_content",
-    "collection": "",
-    "clicks": 1.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "homepage_selected_hero",
-    "collection": "",
-    "clicks": 2.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "homepage_selected_core",
-    "collection": "",
-    "clicks": 1.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "collection_page",
     "collection": "floods-water-built-environment",
     "clicks": 1.0,
     "downstream_reads": 0.0
@@ -33,6 +21,36 @@
     "slot": "collection_page",
     "collection": "syd-and-oliver-dialogues",
     "clicks": 2.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "homepage_selected_core",
+    "collection": "",
+    "clicks": 2.0,
+    "downstream_reads": 1.0
+  },
+  {
+    "slot": "random_link",
+    "collection": "",
+    "clicks": 2.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_page",
+    "collection": "floods-water-built-environment",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_page",
+    "collection": "technology-ai-machine-future",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "homepage_selected_hero",
+    "collection": "",
+    "clicks": 3.0,
     "downstream_reads": 0.0
   }
 ]
