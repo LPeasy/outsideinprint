@@ -48,6 +48,34 @@ collections:
       sections:
         - syd-and-oliver
 
+  - slug: modern-bios
+    title: Modern Bios
+    kind: series
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 25
+    start_here: pope-francis-how-a-plainspoken-pope-reframed-moral-authority
+    description: Archival civic biographies of recent public figures, written as restrained record-driven essays for the imprint.
+    metadata:
+      - label: Format
+        value: Civic biographies
+      - label: Scope
+        value: Public lives, institutions, and cultural memory
+      - label: Lane
+        value: Essay series
+    fallback:
+      series:
+        - modern bios
+        - modernbios
+      topics: []
+      tags:
+        - modern-bios
+        - biography
+      sections: []
+
   - slug: risk-uncertainty
     title: Risk, Uncertainty, and Decision-Making
     kind: topic
