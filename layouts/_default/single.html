@@ -1,12 +1,20 @@
 {{ define "main" }}
   {{ $sectionPage := .CurrentSection }}
+  {{ $articleVariant := partial "article/variant-key.html" . }}
+  {{ $articleClasses := slice "piece" }}
+  {{ with .Params.style_variant }}
+    {{ $articleClasses = $articleClasses | append (printf "style-variant-%s" (urlize (printf "%v" .))) }}
+  {{ end }}
+  {{ if $articleVariant }}
+    {{ $articleClasses = $articleClasses | append (printf "article-variant-%s" $articleVariant) }}
+  {{ end }}
   {{ $journeyLinks := slice }}
   {{ with $sectionPage }}
     {{ $journeyLinks = $journeyLinks | append (dict "href" .RelPermalink "label" (printf "All %s" .Title)) }}
   {{ end }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("collections/" | absURL) "label" "Browse collections") }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("library/" | absURL) "label" "Search the library") }}
-  <article class="piece" data-analytics-eligible-read="true">
+  <article class="{{ delimit $articleClasses " " }}" data-analytics-eligible-read="true">
     <header class="piece-header">
       {{ partial "running_header.html" . }}
 
@@ -19,8 +27,15 @@
         </div>
       </div>
 
+      {{ if eq $articleVariant "modernbio" }}
+        <p class="piece-series-marker">Modern Bios</p>
+      {{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+      {{ if eq $articleVariant "modernbio" }}
+        {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
+        {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
+      {{ end }}
 
       {{ partial "journey_links.html" (dict
         "class" "journey-links--article"
@@ -34,6 +49,9 @@
     </div>
 
     <div class="piece-aftermatter">
+      {{ if eq $articleVariant "modernbio" }}
+        {{ partial "article/modernbio-record.html" . }}
+      {{ end }}
       {{ partial "collections/page-membership-block.html" . }}
 
       {{ if ne .Params.show_citation false }}

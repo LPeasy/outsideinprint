@@ -37,5 +37,8 @@
 {{- if .Params.medium_source_url -}}
   {{- $content = partial "article/repair_mojibake.html" $content -}}
 {{- end -}}
+{{- if .Params.repair_mojibake -}}
+  {{- $content = partial "article/repair_mojibake.html" $content -}}
+{{- end -}}
 {{- $content = replaceRE `(?s)<p>\s*</p>` `` $content -}}
 {{- $content | safeHTML -}}

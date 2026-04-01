@@ -1,0 +1,34 @@
+{{- $rows := slice -}}
+{{- with .Params.record_entries -}}
+  {{- range . -}}
+    {{- $label := strings.TrimSpace (printf "%v" (.label | default "")) -}}
+    {{- $value := strings.TrimSpace (printf "%v" (.value | default "")) -}}
+    {{- if and $label $value -}}
+      {{- $rows = $rows | append (dict "label" $label "value" $value) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq (len $rows) 0 -}}
+  {{- with .Params.person_name -}}
+    {{- $rows = $rows | append (dict "label" "Name" "value" (printf "%v" .)) -}}
+  {{- end -}}
+  {{- with .Params.life_dates -}}
+    {{- $rows = $rows | append (dict "label" "Life" "value" (printf "%v" .)) -}}
+  {{- end -}}
+  {{- with partial "article/record-line.html" . -}}
+    {{- $rows = $rows | append (dict "label" "Public record" "value" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt (len $rows) 0 -}}
+  <aside class="article-record" aria-labelledby="article-record-title">
+    <h2 id="article-record-title" class="article-record__title">Record</h2>
+    <dl class="article-record__rows">
+      {{- range $rows -}}
+        <div class="article-record__row">
+          <dt class="article-record__label">{{ .label }}</dt>
+          <dd class="article-record__value">{{ .value }}</dd>
+        </div>
+      {{- end -}}
+    </dl>
+  </aside>
+{{- end -}}

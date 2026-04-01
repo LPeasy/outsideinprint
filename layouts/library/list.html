@@ -53,7 +53,8 @@
           {{ range $matches }}
             {{ $collectionTitles = $collectionTitles | append .collection.title }}
           {{ end }}
-          {{ $searchText := printf "%s %s %s %s %s %s" .Title $sectionLabel (.Params.section_label | default "") (.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" .) }}
+          {{ $seriesTerms := partial "collections/normalize-values.html" (dict "value" .Params.series) }}
+          {{ $searchText := printf "%s %s %s %s %s %s %s %s %s" .Title $sectionLabel (.Params.section_label | default "") (.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" .) (.Params.person_name | default "") (delimit $seriesTerms " ") (.Params.article_variant | default "") }}
           <div data-library-item data-search='{{ $searchText | lower | jsonify | safeHTMLAttr }}'>
             {{ partial "discovery/page-list-item.html" (dict
               "page" .

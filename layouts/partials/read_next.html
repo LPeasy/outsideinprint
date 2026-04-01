@@ -132,6 +132,7 @@
         <h2 id="read-next-title" class="read-next__title">Read Next</h2>
         <div class="read-next__items">
           {{ range first $limit $selected }}
+            {{ $articleVariant := partial "article/variant-key.html" . }}
             {{ $sectionLabel := .Params.section_label }}
             {{ if not $sectionLabel }}
               {{ if eq .Section "working-papers" }}
@@ -140,15 +141,23 @@
                 {{ $sectionLabel = humanize .Section }}
               {{ end }}
             {{ end }}
+            {{ $metaParts := slice $sectionLabel }}
+            {{ if eq $articleVariant "modernbio" }}
+              {{ $metaParts = $metaParts | append "Modern Bios" }}
+            {{ end }}
             {{ $detail := "" }}
             {{ if and (eq .Section "working-papers") .Params.version }}
               {{ $detail = printf "Version %v" .Params.version }}
             {{ else if .Date }}
               {{ $detail = .Date.Format "Jan 2006" }}
             {{ end }}
-            <article class="read-next__item">
+            {{ with $detail }}
+              {{ $metaParts = $metaParts | append . }}
+            {{ end }}
+            <article class="read-next__item{{ if $articleVariant }} read-next__item--variant-{{ $articleVariant }}{{ end }}">
               {{ $slug := .Params.slug | default .File.BaseFileName }}
               {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+              {{ if eq $articleVariant "modernbio" }}<p class="read-next__marker">Modern Bios</p>{{ end }}
               <h3 class="read-next__item-title"><a href="{{ .RelPermalink }}"
                 data-analytics-event="internal_promo_click"
                 data-analytics-source-slot="related_content"
@@ -157,7 +166,7 @@
                 data-analytics-section="{{ $sectionLabel }}"
                 data-analytics-path="{{ .RelPermalink }}"
               >{{ .Title }}</a></h3>
-              <p class="read-next__meta">{{ $sectionLabel }}{{ with $detail }} &middot; {{ . }}{{ end }}</p>
+              <p class="read-next__meta">{{ delimit $metaParts " &middot; " | safeHTML }}</p>
             </article>
           {{ end }}
         </div>
