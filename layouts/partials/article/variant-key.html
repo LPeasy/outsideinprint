@@ -1,8 +1,0 @@
-{{- $variant := lower (strings.TrimSpace (printf "%v" (.Params.article_variant | default ""))) -}}
-{{- if eq $variant "" -}}
-  {{- $style := lower (strings.TrimSpace (printf "%v" (.Params.style_variant | default ""))) -}}
-  {{- if or (eq $style "modernbio") (eq $style "modern-bio") -}}
-    {{- $variant = "modernbio" -}}
-  {{- end -}}
-{{- end -}}
-{{- return $variant -}}

@@ -6,8 +6,6 @@
 {{- $showSummary := ne .showSummary false -}}
 {{- $showSectionLabel := ne .showSectionLabel false -}}
 {{- $class := .class | default "" -}}
-{{- $articleVariant := partial "article/variant-key.html" $page -}}
-{{- $itemClasses := slice "item" -}}
 {{- $slug := $page.Params.slug | default $page.File.BaseFileName -}}
 {{- $sectionLabel := $page.Params.section_label | default (humanize $page.Section) -}}
 {{- $summary := "" -}}
@@ -33,15 +31,8 @@
 {{- with $page.ReadingTime -}}
   {{- $metaParts = $metaParts | append (printf "%d min read" .) -}}
 {{- end -}}
-{{- with $class -}}
-  {{- $itemClasses = $itemClasses | append . -}}
-{{- end -}}
-{{- if $articleVariant -}}
-  {{- $itemClasses = $itemClasses | append (printf "item--variant-%s" $articleVariant) -}}
-{{- end -}}
 
-<article class="{{ delimit $itemClasses " " }}">
-  {{- if eq $articleVariant "modernbio" }}<div class="item-series-marker">Modern Bios</div>{{ end }}
+<article class="item{{ with $class }} {{ . }}{{ end }}">
   <div class="t"><a href="{{ $page.RelPermalink }}"
     {{- if $analyticsSourceSlot }}
       data-analytics-event="{{ $analyticsEvent }}"

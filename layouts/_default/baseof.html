@@ -23,20 +23,7 @@
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ if site.Params.dashboard.site }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}" integrity="{{ $css.Data.Integrity }}" />
   </head>
-  {{- $bodyClasses := slice -}}
-  {{- if .IsPage -}}
-    {{- with .Section -}}
-      {{- $bodyClasses = $bodyClasses | append (printf "section-%s" .) -}}
-    {{- end -}}
-    {{- with .Params.style_variant -}}
-      {{- $bodyClasses = $bodyClasses | append (printf "style-variant-%s" (urlize (printf "%v" .))) -}}
-    {{- end -}}
-    {{- $articleVariant := partial "article/variant-key.html" . -}}
-    {{- if $articleVariant -}}
-      {{- $bodyClasses = $bodyClasses | append (printf "article-variant-%s" $articleVariant) -}}
-    {{- end -}}
-  {{- end -}}
-  <body{{ if gt (len $bodyClasses) 0 }} class="{{ delimit $bodyClasses " " }}"{{ end }}>
+  <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="wrap">
       {{ if site.Params.dashboard.site }}
