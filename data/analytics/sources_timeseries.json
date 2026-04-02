@@ -1,236 +1,6 @@
 [
   {
-    "date": "2026-03-23",
-    "source_type": "external",
-    "source": "lpeasy.github.io/OutsideInPrintDashboard",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-21",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-30",
-    "source_type": "internal",
-    "source": "internal /start-here/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/tariffs-protectionism-and-wishful-thinking",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 23.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver/peaches-or-greece",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 4.0
-  },
-  {
-    "date": "2026-03-30",
-    "source_type": "external",
-    "source": "outsideinprint.org/library",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "internal",
-    "source": "internal /essays/the-dolphin-company/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-20",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/collections",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/library",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/cuomo-vs-mamdani-nyc-2025",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "internal",
-    "source": "internal /essays/the-national-flood-insurance-program/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/ai-in-education-is-a-wicked-problem",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/start-here",
-    "pageviews": 7.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/random",
-    "pageviews": 33.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-30",
-    "source_type": "external",
-    "source": "outsideinprint.org/random",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/literature",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-roi-of-caring",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/start-here",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/uncrustables-the-billion-dollar-peanut-butter-empire",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-19",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/what-happened-at-camp-mystic",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
+    "date": "2026-03-18",
     "source_type": "external",
     "source": "lpeasy.github.io/outsideinprint",
     "pageviews": 1.0,
@@ -240,117 +10,17 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "internal",
-    "source": "internal /essays/the-100-year-flood-is-not-what-you-think/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections/syd-and-oliver-dialogues",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/OutsideInPrintDashboard",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "internal",
-    "source": "internal /essays/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/how-did-mother-become-a-controversial-word-in-america",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
     "date": "2026-03-27",
     "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver",
-    "pageviews": 2.0,
+    "source": "outsideinprint.org/essays/whos-responsible-for-building-in-the-floodplain",
+    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "internal",
-    "source": "internal /essays/public-vs-private-pay-who-really-earns-more/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
+    "date": "2026-03-31",
     "source_type": "internal",
     "source": "internal /collections/",
     "pageviews": 0.0,
@@ -360,7 +30,47 @@
     "newsletter_submits": 0.0
   },
   {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "pageviews": 16.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
     "date": "2026-03-17",
+    "source_type": "internal",
+    "source": "internal /syd-and-oliver/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
     "source_type": "external",
     "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
     "pageviews": 1.0,
@@ -370,46 +80,6 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/collections",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
     "date": "2026-03-15",
     "source_type": "internal",
     "source": "internal /collections/",
@@ -420,9 +90,59 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-18",
+    "date": "2026-03-28",
     "source_type": "internal",
-    "source": "internal /essays/the-three-enemies-of-positive-outcomes/",
+    "source": "internal /start-here/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/random",
+    "pageviews": 28.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org",
+    "pageviews": 46.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-23",
+    "source_type": "internal",
+    "source": "internal /random/",
     "pageviews": 0.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -432,7 +152,27 @@
   {
     "date": "2026-03-30",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible",
+    "source": "outsideinprint.org/start-here",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org",
+    "pageviews": 12.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-23",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/random",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -440,9 +180,29 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-28",
+    "date": "2026-03-17",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "source": "lpeasy.github.io/outsideinprint/essays/2025-supreme-court-wrap-up",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "internal",
+    "source": "internal /library/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "direct",
+    "source": "direct",
     "pageviews": 3.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -460,259 +220,9 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/why-oberfell-will-not-be-overturned",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "internal",
-    "source": "internal /essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/collections/risk-uncertainty",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "internal",
-    "source": "internal /collections/risk-uncertainty/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/collections/floods-water-built-environment",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/june-27-2025-scotus-set-to-close-its-term-with-major-decisions",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/library",
-    "pageviews": 10.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/2025-supreme-court-wrap-up",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "pageviews": 6.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-24",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint",
-    "pageviews": 3.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "internal",
-    "source": "internal /library/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
+    "date": "2026-03-27",
     "source_type": "external",
     "source": "outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-19",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "pageviews": 16.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/let-it-crash-the-opportunity-of-a-lifetime",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 26.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "lpeasy.github.io",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "internal",
-    "source": "internal /start-here/",
-    "pageviews": 0.0,
-    "reads": 1.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 1.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-30",
-    "source_type": "external",
-    "source": "outsideinprint.org/start-here",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 1.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/start-here",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/jack-stratton-and-the-vulfpeck-model",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "internal",
-    "source": "internal /syd-and-oliver/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -721,9 +231,29 @@
   },
   {
     "date": "2026-03-20",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/the-death-of-moores-law",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/moral-momentum",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
     "source_type": "internal",
-    "source": "internal /start-here/",
-    "pageviews": 0.0,
+    "source": "internal /collections/risk-uncertainty/",
+    "pageviews": 2.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 1.0,
@@ -740,49 +270,9 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-19",
+    "date": "2026-03-28",
     "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/the-new-orthodoxy",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-20",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-20",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/start-here",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-30",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays",
+    "source": "outsideinprint.org/essays/cuomo-vs-mamdani-nyc-2025",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -792,17 +282,7 @@
   {
     "date": "2026-03-28",
     "source_type": "external",
-    "source": "outsideinprint.org",
-    "pageviews": 44.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/peaches-or-greece",
+    "source": "outsideinprint.org/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -810,10 +290,20 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-29",
+    "date": "2026-03-26",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather",
-    "pageviews": 2.0,
+    "source": "outsideinprint.org/essays/let-it-crash-the-opportunity-of-a-lifetime",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "lpeasy.github.io",
+    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -822,8 +312,188 @@
   {
     "date": "2026-03-17",
     "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "pageviews": 41.0,
+    "source": "lpeasy.github.io/outsideinprint/essays/uncrustables-the-billion-dollar-peanut-butter-empire",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/2025-supreme-court-wrap-up",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "internal",
+    "source": "internal /collections/floods-water-built-environment/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "internal",
+    "source": "internal /library/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/flash-flood-alley-why-flash-floods-kill",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-20",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver",
+    "pageviews": 11.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "external",
+    "source": "outsideinprint.org/random",
+    "pageviews": 7.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 10.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-30",
+    "source_type": "external",
+    "source": "outsideinprint.org",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "internal",
+    "source": "internal /start-here/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/ai-in-education-is-a-wicked-problem",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/is-doge-legal",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "internal",
+    "source": "internal /essays/",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter",
+    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -842,8 +512,168 @@
   {
     "date": "2026-03-26",
     "source_type": "external",
-    "source": "outsideinprint.org",
-    "pageviews": 19.0,
+    "source": "outsideinprint.org/essays/biter-the-slang-word-that-hits",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-roi-of-caring",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/what-is-risk-a-four-part-framework",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/altmans-law",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "internal",
+    "source": "internal /",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections/floods-water-built-environment",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/what-is-risk-a-four-part-framework",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver/peaches-or-greece",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-24",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-30",
+    "source_type": "internal",
+    "source": "internal /start-here/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "internal",
+    "source": "internal /collections/risk-uncertainty/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/ai-in-education-is-a-wicked-problem",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/rational-ignorance-in-the-u-s-presidential-electorate",
+    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -862,68 +692,8 @@
   {
     "date": "2026-03-28",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/whos-responsible-for-building-in-the-floodplain",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
     "source": "outsideinprint.org",
-    "pageviews": 12.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/public-vs-private-pay-who-really-earns-more",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "internal",
-    "source": "internal /library/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-23",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/literature",
-    "pageviews": 1.0,
+    "pageviews": 44.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -932,57 +702,7 @@
   {
     "date": "2026-03-17",
     "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/history-pushes-back",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-19",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/library",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/moral-momentum",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org",
-    "pageviews": 46.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-21",
-    "source_type": "direct",
-    "source": "direct",
+    "source": "lpeasy.github.io/OutsideInPrintDashboard",
     "pageviews": 2.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -990,30 +710,10 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-25",
+    "date": "2026-04-01",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/what-is-risk-a-four-part-framework",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 8.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/library",
-    "pageviews": 4.0,
+    "source": "outsideinprint.org/collections",
+    "pageviews": 3.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -1021,8 +721,38 @@
   },
   {
     "date": "2026-03-26",
+    "source_type": "internal",
+    "source": "internal /essays/public-vs-private-pay-who-really-earns-more/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/biter-the-slang-word-that-hits",
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "pageviews": 6.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "external",
+    "source": "bing.com",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-20",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/collections",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -1030,9 +760,19 @@
     "newsletter_submits": 0.0
   },
   {
+    "date": "2026-03-20",
+    "source_type": "internal",
+    "source": "internal /start-here/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
+    "newsletter_submits": 0.0
+  },
+  {
     "date": "2026-03-27",
     "source_type": "external",
-    "source": "outsideinprint.org/library",
+    "source": "outsideinprint.org/essays/jack-stratton-and-the-vulfpeck-model",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -1050,420 +790,10 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /syd-and-oliver/smoke-and-brass/",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/u-s-russia-peace-talks",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/building-for-centuries-not-election-cycles",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
     "date": "2026-03-31",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/declaring-equality",
+    "source": "outsideinprint.org/essays/what-happened-at-camp-mystic",
     "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-national-flood-insurance-program",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/flash-flood-alley-why-flash-floods-kill",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "internal",
-    "source": "internal /syd-and-oliver/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver/without-a-word",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-19",
-    "source_type": "internal",
-    "source": "internal /start-here/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/the-structure-of-modern-american-society",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/whos-responsible-for-building-in-the-floodplain",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org",
-    "pageviews": 3.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/2025-supreme-court-wrap-up",
-    "pageviews": 3.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "pageviews": 6.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-30",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 3.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-30",
-    "source_type": "internal",
-    "source": "internal /",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/library",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections",
-    "pageviews": 3.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/literature",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-19",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "internal",
-    "source": "internal /essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
-    "pageviews": 0.0,
-    "reads": 1.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-31",
-    "source_type": "external",
-    "source": "outsideinprint.org/random",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 10.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/6-reasons-redwall-is-a-timeless-classic",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-national-debt-is-screwing-you-heres-how",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "internal",
-    "source": "internal /start-here/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/2025-supreme-court-wrap-up",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-20",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver",
-    "pageviews": 3.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/random",
-    "pageviews": 68.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/in-the-image-of-god",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "internal",
-    "source": "internal /essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/",
-    "pageviews": 0.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -1480,10 +810,10 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-19",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/start-here",
-    "pageviews": 1.0,
+    "date": "2026-03-28",
+    "source_type": "internal",
+    "source": "internal /essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "pageviews": 0.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -1492,7 +822,17 @@
   {
     "date": "2026-03-28",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again",
+    "source": "outsideinprint.org/essays/june-27-2025-scotus-set-to-close-its-term-with-major-decisions",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "campaign",
+    "source": "Google / generated",
     "pageviews": 3.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -1500,19 +840,9 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-29",
-    "source_type": "internal",
-    "source": "internal /",
-    "pageviews": 0.0,
-    "reads": 1.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
+    "date": "2026-03-18",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/are-we-alone",
+    "source": "lpeasy.github.io/outsideinprint/essays/in-the-image-of-god",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -1520,120 +850,10 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-25",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 4.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /essays/",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-23",
+    "date": "2026-04-01",
     "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
+    "source": "outsideinprint.org/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation",
     "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-24",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-20",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/random",
-    "pageviews": 11.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/start-here",
-    "pageviews": 18.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-roi-of-caring",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/random",
-    "pageviews": 21.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 4.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -1641,468 +861,18 @@
   },
   {
     "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver",
-    "pageviews": 6.0,
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 9.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver",
-    "pageviews": 11.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org/random",
-    "pageviews": 7.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/start-here",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections/floods-water-built-environment",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/is-doge-legal",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-20",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 10.0,
     "newsletter_submits": 0.0
   },
   {
     "date": "2026-03-30",
     "source_type": "external",
-    "source": "outsideinprint.org",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections/technology-ai-machine-future",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-19",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-17",
-    "source_type": "internal",
-    "source": "internal /essays/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/library",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/rational-ignorance-in-the-u-s-presidential-electorate",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/risk-management-vs-risk-analysis-whats-the-difference",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-26",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 2.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "internal",
-    "source": "internal /",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver/all-time-highs",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/the-national-debt-is-screwing-you-heres-how",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-27",
-    "source_type": "internal",
-    "source": "internal /random/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-31",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-20",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/the-death-of-moores-law",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
     "source": "outsideinprint.org/random",
-    "pageviews": 28.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-15",
-    "source_type": "internal",
-    "source": "internal /collections/risk-uncertainty/",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 1.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/declaring-equality",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/collections",
-    "pageviews": 19.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-19",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "internal",
-    "source": "internal /start-here/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/tiktok-the-trojan-horse-of-global-influence",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/is-doge-legal",
-    "pageviews": 2.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/altmans-law",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-18",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "internal",
-    "source": "internal /library/",
-    "pageviews": 0.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-16",
-    "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 9.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-29",
-    "source_type": "external",
-    "source": "outsideinprint.org/start-here",
-    "pageviews": 4.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-25",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver/the-sound-of-authority",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/essays/beyond-moores-law",
-    "pageviews": 1.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "direct",
-    "source": "direct",
-    "pageviews": 9.0,
-    "reads": 0.0,
-    "read_rate": 0.0,
-    "pdf_downloads": 0.0,
-    "newsletter_submits": 0.0
-  },
-  {
-    "date": "2026-03-28",
-    "source_type": "external",
-    "source": "outsideinprint.org/syd-and-oliver/the-weight-of-promises",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -2122,8 +892,98 @@
   {
     "date": "2026-03-26",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025",
+    "source": "outsideinprint.org/essays/tariffs-protectionism-and-wishful-thinking",
     "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-20",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "pageviews": 11.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "internal",
+    "source": "internal /",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "internal",
+    "source": "internal /essays/the-three-enemies-of-positive-outcomes/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "internal",
+    "source": "internal /essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "external",
+    "source": "outsideinprint.org",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/beyond-moores-law",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/the-structure-of-modern-american-society",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays",
+    "pageviews": 2.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -2132,17 +992,27 @@
   {
     "date": "2026-03-26",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/what-is-risk-a-four-part-framework",
-    "pageviews": 2.0,
+    "source": "outsideinprint.org/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025",
+    "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-19",
+    "date": "2026-03-28",
     "source_type": "external",
-    "source": "lpeasy.github.io/outsideinprint/collections",
+    "source": "outsideinprint.org/essays/how-did-mother-become-a-controversial-word-in-america",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/history-pushes-back",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -2152,7 +1022,17 @@
   {
     "date": "2026-03-25",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test",
+    "source": "outsideinprint.org/start-here",
+    "pageviews": 18.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-national-debt-is-screwing-you-heres-how",
     "pageviews": 1.0,
     "reads": 0.0,
     "read_rate": 0.0,
@@ -2160,10 +1040,100 @@
     "newsletter_submits": 0.0
   },
   {
-    "date": "2026-03-31",
+    "date": "2026-03-20",
     "source_type": "external",
-    "source": "outsideinprint.org",
-    "pageviews": 5.0,
+    "source": "lpeasy.github.io/outsideinprint/start-here",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "internal",
+    "source": "internal /syd-and-oliver/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/building-for-centuries-not-election-cycles",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "internal",
+    "source": "internal /essays/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 1.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "internal",
+    "source": "internal /essays/the-national-flood-insurance-program/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/start-here",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "internal",
+    "source": "internal /start-here/",
+    "pageviews": 0.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -2180,10 +1150,930 @@
     "newsletter_submits": 0.0
   },
   {
+    "date": "2026-03-16",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "internal",
+    "source": "internal /",
+    "pageviews": 0.0,
+    "reads": 1.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
     "date": "2026-03-29",
     "source_type": "external",
-    "source": "outsideinprint.org/essays/ai-in-education-is-a-wicked-problem",
+    "source": "outsideinprint.org/collections/technology-ai-machine-future",
     "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/start-here",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/start-here",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/collections/risk-uncertainty",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/whos-responsible-for-building-in-the-floodplain",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-20",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 10.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/risk-management-vs-risk-analysis-whats-the-difference",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/random",
+    "pageviews": 21.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections",
+    "pageviews": 19.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections/syd-and-oliver-dialogues",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/literature",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "pageviews": 41.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 1.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/declaring-equality",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver/all-time-highs",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 2.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "internal",
+    "source": "internal /syd-and-oliver/smoke-and-brass/",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "internal",
+    "source": "internal /essays/the-dolphin-company/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "internal",
+    "source": "internal /library/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-23",
+    "source_type": "external",
+    "source": "lpeasy.github.io/OutsideInPrintDashboard",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/6-reasons-redwall-is-a-timeless-classic",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/declaring-equality",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 23.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/start-here",
+    "pageviews": 7.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/random",
+    "pageviews": 68.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/library",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-24",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver/without-a-word",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 4.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections/floods-water-built-environment",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/literature",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "internal",
+    "source": "internal /essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "pageviews": 0.0,
+    "reads": 1.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-national-flood-insurance-program",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-21",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-roi-of-caring",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/2025-supreme-court-wrap-up",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/library",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver/the-weight-of-promises",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "internal",
+    "source": "internal /start-here/",
+    "pageviews": 0.0,
+    "reads": 1.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 1.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "internal",
+    "source": "internal /essays/the-100-year-flood-is-not-what-you-think/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/collections",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver",
+    "pageviews": 6.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 8.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/start-here",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-30",
+    "source_type": "internal",
+    "source": "internal /",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/collections",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/the-new-orthodoxy",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/public-vs-private-pay-who-really-earns-more",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 14.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/collections/floods-water-built-environment",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-20",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "internal",
+    "source": "internal /library/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "internal",
+    "source": "internal /",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/syd-and-oliver/the-sound-of-authority",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/tiktok-the-trojan-horse-of-global-influence",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/is-doge-legal",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org",
+    "pageviews": 19.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "internal",
+    "source": "internal /library/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "internal",
+    "source": "internal /collections/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/why-oberfell-will-not-be-overturned",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-30",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-30",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/literature",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/are-we-alone",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-02",
+    "source_type": "campaign",
+    "source": "Google / generated",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-30",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 3.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
@@ -2200,10 +2090,340 @@
     "newsletter_submits": 0.0
   },
   {
+    "date": "2026-03-15",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 4.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-15",
+    "source_type": "internal",
+    "source": "internal /essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "external",
+    "source": "outsideinprint.org/start-here",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections",
+    "pageviews": 3.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/the-national-debt-is-screwing-you-heres-how",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
     "date": "2026-03-28",
     "source_type": "external",
     "source": "outsideinprint.org/essays/rethinking-invasive-species-management",
     "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/random",
+    "pageviews": 6.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "external",
+    "source": "outsideinprint.org",
+    "pageviews": 6.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "internal",
+    "source": "internal /essays/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-28",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections",
+    "pageviews": 4.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "external",
+    "source": "outsideinprint.org",
+    "pageviews": 6.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/syd-and-oliver/peaches-or-greece",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 10.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-18",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/essays/what-happened-at-camp-mystic",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "internal",
+    "source": "internal /start-here/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-17",
+    "source_type": "internal",
+    "source": "internal /random/",
+    "pageviews": 0.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 26.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/u-s-russia-peace-talks",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-30",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-29",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 9.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/library",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-21",
+    "source_type": "direct",
+    "source": "direct",
+    "pageviews": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "outsideinprint.org/essays/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-25",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-26",
+    "source_type": "external",
+    "source": "outsideinprint.org/random",
+    "pageviews": 33.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-27",
+    "source_type": "external",
+    "source": "outsideinprint.org/collections",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "external",
+    "source": "lpeasy.github.io/outsideinprint/start-here",
+    "pageviews": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-03-31",
+    "source_type": "external",
+    "source": "outsideinprint.org/random",
+    "pageviews": 2.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,

@@ -145,8 +145,26 @@
   },
   {
     "date": "2026-03-31",
-    "pageviews": 11.0,
-    "unique_visitors": 1.0,
+    "pageviews": 32.0,
+    "unique_visitors": 14.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-01",
+    "pageviews": 22.0,
+    "unique_visitors": 5.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-02",
+    "pageviews": 3.0,
+    "unique_visitors": 3.0,
     "reads": 0.0,
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
