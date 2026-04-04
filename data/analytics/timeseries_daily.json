@@ -169,5 +169,23 @@
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-03",
+    "pageviews": 17.0,
+    "unique_visitors": 7.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-04",
+    "pageviews": 3.0,
+    "unique_visitors": 1.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
   }
 ]
