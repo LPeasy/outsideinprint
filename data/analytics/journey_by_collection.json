@@ -20,11 +20,11 @@
     "attribution_note": "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
   },
   {
-    "collection_label": "the-ledger",
+    "collection_label": "homepage_selected_hero",
     "discovery_type": "internal-module",
     "discovery_mode": "module-driven",
-    "module_slot": "collection_page",
-    "collection": "the-ledger",
+    "module_slot": "homepage_selected_hero",
+    "collection": "",
     "section": "Essays",
     "slug": "",
     "path": "",
@@ -40,11 +40,11 @@
     "attribution_note": "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
   },
   {
-    "collection_label": "homepage_selected_hero",
+    "collection_label": "the-ledger",
     "discovery_type": "internal-module",
     "discovery_mode": "module-driven",
-    "module_slot": "homepage_selected_hero",
-    "collection": "",
+    "module_slot": "collection_page",
+    "collection": "the-ledger",
     "section": "Essays",
     "slug": "",
     "path": "",
