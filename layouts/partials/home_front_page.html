@@ -35,6 +35,13 @@
           {{ with .ReadingTime }} | {{ . }} min read{{ end }}
         </div>
         <p class="m home-front-page__lead-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
+        <div class="editorial-cartoon">
+          <img
+            src="/images/editorial/cartoon-think-outside-the-box.png"
+            alt="Editorial cartoon showing a student thinking outside the box, with the thought breaking through the frame"
+            loading="lazy"
+          />
+        </div>
       </article>
 
       {{ if gt (len $secondary) 0 }}
