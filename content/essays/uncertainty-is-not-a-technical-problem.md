@@ -5,6 +5,7 @@ draft: false
 slug: "uncertainty-is-not-a-technical-problem"
 section_label: "Essay"
 subtitle: "Why Risk Models Reward Confidence Over Truth"
+description: "On uncertainty, risk modeling, and the incentives that reward precision over responsibility. We expect risk models to tell us what will happen.\ When they do..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/uncertainty-is-not-a-technical-problem.pdf"
@@ -231,3 +232,4 @@ So does honesty.
 
 The tension between the two is not a flaw ~ it is the condition under
 which judgment must operate.
+

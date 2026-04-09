@@ -5,6 +5,7 @@ draft: false
 slug: "cuomo-vs-mamdani-nyc-2025"
 section_label: "Essay"
 subtitle: "Andrew Cuomo vs. Zohran Mamdani — What’s at Stake?"
+description: "The NYC Democratic primary pits establishment favorite Andrew Cuomo against progressive newcomer Zohran Mamdani"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/cuomo-vs-mamdani-nyc-2025.pdf"
@@ -88,3 +89,4 @@ future of the Democratic Party:**
   affordability, policing, transit?
 - **Political signal:** Will progressive momentum
   (Mamdani) or centrism (Cuomo) prevail?
+

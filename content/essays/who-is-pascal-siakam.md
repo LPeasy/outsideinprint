@@ -5,6 +5,7 @@ draft: false
 slug: "who-is-pascal-siakam"
 section_label: "Essay"
 subtitle: "How “Spicy P” Went from Douala Dreamer to Pacers Playoff Powerhouse"
+description: "Pascal Siakam from childhood in Cameroon to NBA All-Star, and his pivotal role in Indiana’s 2025 playoff run in his own words"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/who-is-pascal-siakam.pdf"
@@ -233,3 +234,4 @@ today’s economy and culture.
 - [NBA insider's latest Pacers report will have fans jumping for joy](https://8points9seconds.com/nba-insider-s-latest-pacers-report-will-have-fans-jumping-joy)
 
 - [Pascal Siakam | Forward | Indiana Pacers | NBA.com](https://www.nba.com/player/1627783/pascal-siakam)
+

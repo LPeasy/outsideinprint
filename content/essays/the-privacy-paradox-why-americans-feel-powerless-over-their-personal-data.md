@@ -5,6 +5,7 @@ draft: false
 slug: "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data"
 section_label: "Essay"
 subtitle: "Your Data Is Everywhere, and Nobody Cares (Especially Not You)"
+description: "Americans say they care about privacy. Surveys show that most people worry about how their personal data is collected, shared, and sold"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.pdf"
@@ -250,5 +251,6 @@ Read More
 
 How Americans View Data Privacy
 The share of Americans who say they are very or somewhat concerned about government use of people's data has increased…www.pewresearch.orgTo Read All Those Web Privacy Policies, Just Take A Month Off Work : All Tech Considered : NPR
+
 
 

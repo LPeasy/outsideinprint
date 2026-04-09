@@ -5,10 +5,12 @@ draft: false
 slug: "why-superintelligence-strategy-gets-ai-governance-wrong"
 section_label: "Essay"
 subtitle: "A deep dive into why AI governance frameworks like MAIM fail — and why superintelligence can’t be contained."
+description: "Governments think they can control artificial intelligence. They can’t.The authors of Superintelligence Strategy propose a grand vision for AI governance"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/why-superintelligence-strategy-gets-ai-governance-wrong.pdf"
-featured: false
+featured: false
+
 collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/why-superintelligence-strategy-gets-ai-governance-wrong-c1d4520f6037"
@@ -277,5 +279,6 @@ This story is published on Generative AI. Connect with us on LinkedIn and follow
 Subscribe to our newsletter and YouTube channel to stay updated with the latest news and updates on generative AI. Let’s shape the future of AI together!
 
 ![](https://cdn-images-1.medium.com/max/800/0*Lmq5udN78BgO6dY2.png)
+
 
 

@@ -5,6 +5,7 @@ draft: false
 slug: "the-max-mistake-why-hbos-name-change-backfired"
 section_label: "Essay"
 subtitle: "A corporate identity crisis in real time, brought to you by the people who forgot what “Home Box Office” really means"
+description: "If you’re confused, you’re not alone. This feels less like brand strategy and more like a midlife crisis complete with a haircut no one asked for, a question..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-max-mistake-why-hbos-name-change-backfired.pdf"
@@ -228,3 +229,4 @@ specificity is power.
 
 > Trying to turn a boutique into a big-box store doesn’t make loyal
 > customers stick around ~ it just makes the boutique harder to find.
+

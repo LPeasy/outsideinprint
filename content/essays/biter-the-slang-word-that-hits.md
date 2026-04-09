@@ -5,6 +5,7 @@ draft: false
 slug: "biter-the-slang-word-that-hits"
 section_label: "Essay"
 subtitle: "A word to describe artistic thieves"
+description: "Biter delivers an accusation in a word. A copycat — someone who steals another person’s ideas, aesthetic, or work and passes it off as their own"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/biter-the-slang-word-that-hits.pdf"
@@ -97,4 +98,5 @@ Respect the community.
 Biters aren’t part of the culture.They’re feeding off it.If you made it this far, you’re not a biter.
 
 You’re someone who actually cares about where creativity comes from — and where it’s going.
+
 

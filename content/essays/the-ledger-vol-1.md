@@ -5,6 +5,7 @@ draft: false
 slug: "the-ledger-vol-1"
 section_label: "Newsletter"
 subtitle: "Popes, Prime Time, and Political Games"
+description: "The Ledger: A Balance Sheet Joint. Over the past few months, I’ve been writing about everything from geopolitics and pop culture to church history and corpor..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-ledger-vol-1.pdf"
@@ -107,3 +108,4 @@ Planet.***
 > ***and I hope one or two of these pieces spark something for you.***
 
 > **~ L P**
+

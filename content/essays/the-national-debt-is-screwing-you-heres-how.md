@@ -5,6 +5,7 @@ draft: false
 slug: "the-national-debt-is-screwing-you-heres-how"
 section_label: "Essay"
 subtitle: "America maxed out its credit card — and left you to pay for it."
+description: "Imagine a 70-year-old maxing out a credit card in their grandkid’s name — then walking away, leaving them with the bill"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-national-debt-is-screwing-you-heres-how.pdf"
@@ -193,4 +194,5 @@ Inflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices U
 Politicians blame deficits — but what if the real culprit is the banking system?medium.comRussia’s Slow Surrender: How China is Turning Putin’s War into a Power Play
 Putin fights in Ukraine, Beijing tightens its grip on Russia’s futuremedium.comThe Future of AI and Technical Jobs: Why Review Work Is Your Best Bet (For Now)
 AI is automating technical work — but human reviewers still matter. Here’s why.medium.com
+
 

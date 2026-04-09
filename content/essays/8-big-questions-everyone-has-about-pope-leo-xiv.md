@@ -5,6 +5,7 @@ draft: false
 slug: "8-big-questions-everyone-has-about-pope-leo-xiv"
 section_label: "Essay"
 subtitle: "AI, gender, tradition, power ~ how will he lead?"
+description: "A native of Chicago and a Peruvian citizen. This follow-up piece offers brief, factual responses to the eight most common questions we’ve received since his..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/8-big-questions-everyone-has-about-pope-leo-xiv.pdf"
@@ -305,3 +306,4 @@ dignity over division.
 whole Catholic world?**
 
 > Will they hear him?
+

@@ -5,6 +5,7 @@ draft: false
 slug: "camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025"
 section_label: "Essay"
 subtitle: "Why 30 Minutes Matters ~ Testing the Official Accounts Against the USGS Hunt Gauge"
+description: "When reporters began reconstructing the events at Camp Mystic on the night of July 4, 2025, the story turned on a timeline"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.pdf"
@@ -350,3 +351,4 @@ accountability.
   ”
 
 - [Who’s Responsible for Building in the Floodplain?](https://medium.com/the-balanced-sheet/whos-responsible-for-building-in-the-floodplain-b468f42f536d)
+

@@ -5,6 +5,7 @@ draft: false
 slug: "generation-inflation"
 section_label: "Essay"
 subtitle: "An Exploration"
+description: "The Rising Costs of Financial Success. Imagine needing $600,000 a year just to feel financially secure. For Generation Z, this isn’t a lofty dream — it’s the..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/generation-inflation.pdf"
@@ -80,5 +81,6 @@ Works Cited
 •	Visual Capitalist. “Real Wage Growth by Income Quantile, 1979–2023.” 2023.
 
 •	National Association of Realtors. “Median Home Prices by Year.” 2024.
+
 
 

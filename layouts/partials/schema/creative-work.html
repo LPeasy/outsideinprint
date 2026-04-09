@@ -7,6 +7,7 @@
 
 {{- if $meta.route.is_article_like -}}
   {{- $workType := cond (eq $meta.route.section "syd-and-oliver") "CreativeWork" "Article" -}}
+  {{- $topicNames := slice -}}
   {{- $node := dict
     "@id" (printf "%s#primaryentity" $meta.canonical)
     "@type" $workType
@@ -22,6 +23,13 @@
   {{- if eq $workType "Article" -}}
     {{- with $meta.route.section_label -}}
       {{- $node = merge $node (dict "articleSection" .) -}}
+      {{- $topicNames = $topicNames | append . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with $page.Params.section_label -}}
+    {{- if not (in $topicNames .) -}}
+      {{- $topicNames = $topicNames | append . -}}
     {{- end -}}
   {{- end -}}
 
@@ -43,6 +51,25 @@
 
   {{- with $image -}}
     {{- $node = merge $node (dict "image" (dict "@id" (index . "@id"))) -}}
+  {{- end -}}
+
+  {{- $collectionMatches := partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) -}}
+  {{- range $collectionMatches -}}
+    {{- if not (in $topicNames .collection.title) -}}
+      {{- $topicNames = $topicNames | append .collection.title -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if gt (len $topicNames) 0 -}}
+    {{- $aboutTopics := slice -}}
+    {{- range $topicNames -}}
+      {{- $aboutTopics = $aboutTopics | append (dict "@type" "Thing" "name" .) -}}
+    {{- end -}}
+    {{- $node = merge $node (dict
+      "about" $aboutTopics
+      "keywords" (delimit $topicNames ", ")
+      "genre" (index $topicNames 0)
+    ) -}}
   {{- end -}}
 
   {{- $authorRefs := $author.refs | default (slice) -}}

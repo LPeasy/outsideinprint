@@ -1,0 +1,30 @@
+{{- $page := .page | default . -}}
+{{- $author := .author | default (partial "authors/resolve.html" (dict
+  "page" $page
+  "fallbackDefault" true
+)) -}}
+{{- with $author.primary -}}
+  <aside class="author-note" aria-labelledby="author-note-title">
+    <div class="author-note__eyebrow">Author</div>
+    <h2 id="author-note-title" class="author-note__title">
+      {{- if .rel_permalink -}}
+        <a href="{{ .rel_permalink }}">{{ .name }}</a>
+      {{- else if .url -}}
+        <a href="{{ .url }}">{{ .name }}</a>
+      {{- else -}}
+        {{ .name }}
+      {{- end -}}
+    </h2>
+    {{- with .bio }}
+      <p class="author-note__bio">{{ . }}</p>
+    {{- end }}
+    {{- with .focus }}
+      <p class="author-note__focus">{{ . }}</p>
+    {{- end }}
+    {{- if or .rel_permalink .url }}
+      <p class="author-note__link">
+        <a href="{{ .rel_permalink | default .url }}">View author archive</a>
+      </p>
+    {{- end }}
+  </aside>
+{{- end -}}

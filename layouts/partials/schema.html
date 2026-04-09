@@ -4,16 +4,18 @@
 {{- $website := partial "schema/website.html" (dict "page" $page "meta" $meta "organization" $organization) -}}
 {{- $image := partial "schema/image.html" (dict "page" $page "meta" $meta) -}}
 {{- $breadcrumb := partial "schema/breadcrumbs.html" (dict "page" $page "meta" $meta) -}}
+{{- $author := partial "schema/resolve-author.html" (dict
+  "page" $page
+  "meta" $meta
+  "organization" $organization
+) -}}
 {{- $webpage := partial "schema/webpage.html" (dict
   "page" $page
   "meta" $meta
   "website" $website
   "image" $image
   "breadcrumb" $breadcrumb
-) -}}
-{{- $author := partial "schema/resolve-author.html" (dict
-  "page" $page
-  "meta" $meta
+  "author" $author
   "organization" $organization
 ) -}}
 {{- $creativeWork := partial "schema/creative-work.html" (dict
@@ -34,12 +36,15 @@
   {{- $graph = $graph | append . -}}
 {{- end -}}
 
-{{- with $creativeWork -}}
-  {{- with .author_nodes -}}
+{{- if or $meta.route.is_article_like (eq $meta.route.name "author") -}}
+  {{- with $author.nodes -}}
     {{- range . -}}
       {{- $graph = $graph | append . -}}
     {{- end -}}
   {{- end -}}
+{{- end -}}
+
+{{- with $creativeWork -}}
   {{- with .node -}}
     {{- $graph = $graph | append . -}}
   {{- end -}}

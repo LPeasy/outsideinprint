@@ -5,6 +5,7 @@ draft: false
 slug: "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk"
 section_label: "Essay"
 subtitle: "Draining America’s emergency oil stash to curb gas prices — short-term fix or long-term peril?"
+description: "Buried deep beneath the Gulf Coast lies one of America’s most powerful weapons — not a missile or a tank, but oil"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.pdf"
@@ -225,5 +226,6 @@ Putin fights in Ukraine, Beijing tightens its grip on Russia’s futuremedium.co
 America maxed out its credit card — and left you to pay for it.medium.comInflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up
 Politicians blame deficits — but what if the real culprit is the banking system?medium.comElon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test
 Musk’s Management Tactics Hit the Federal Workforcemedium.com
+
 
 

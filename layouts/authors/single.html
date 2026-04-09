@@ -1,0 +1,109 @@
+{{ define "main" }}
+  {{ $resolvedAuthor := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) }}
+  {{ $author := $resolvedAuthor.primary }}
+  {{ $essayPages := slice }}
+  {{ range where site.RegularPages "Section" "essays" }}
+    {{ $pageAuthor := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) }}
+    {{ if and $author $pageAuthor.primary (eq $pageAuthor.primary.key $author.key) }}
+      {{ $essayPages = $essayPages | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $essayPages = sort $essayPages "Date" "desc" }}
+  {{ $recentEssays := first 8 $essayPages }}
+  {{ $latestEssay := false }}
+  {{ if gt (len $essayPages) 0 }}
+    {{ $latestEssay = index $essayPages 0 }}
+  {{ end }}
+
+  {{ $scratch := newScratch }}
+  {{ $scratch.Set "collections" (slice) }}
+  {{ range $essayPages }}
+    {{ range partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
+      {{ $seenKey := printf "collection:%s" .collection.slug }}
+      {{ if not ($scratch.Get $seenKey) }}
+        {{ $scratch.Set $seenKey true }}
+        {{ $scratch.Set "collections" (($scratch.Get "collections") | append .) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $collections := $scratch.Get "collections" | default (slice) }}
+
+  <article class="profile-page profile-page--author">
+    <header class="page-header page-shell page-shell--wide">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+      {{ with $author.focus }}<p class="page-intro">{{ . }}</p>{{ end }}
+    </header>
+
+    <section class="page-shell page-shell--wide" aria-labelledby="author-overview-title">
+      <h2 id="author-overview-title" class="list-title">Author Overview</h2>
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <div class="profile-stat__label">Published Essays</div>
+          <div class="profile-stat__value">{{ len $essayPages }}</div>
+          <p class="profile-stat__note">All live essays currently attributed to {{ with $author }}{{ .name }}{{ else }}this author{{ end }}.</p>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat__label">Public Collections</div>
+          <div class="profile-stat__value">{{ len $collections }}</div>
+          <p class="profile-stat__note">Curated reading paths that connect the essay archive into larger threads.</p>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat__label">Latest Essay</div>
+          <div class="profile-stat__value">{{ with $latestEssay }}{{ .Date.Format "Jan 2, 2006" }}{{ else }}Archive in progress{{ end }}</div>
+          <p class="profile-stat__note">{{ with $latestEssay }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ else }}New work will appear here as it is published.{{ end }}</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="piece-body page-shell page-shell--reading">
+      {{ .Content }}
+    </div>
+
+    <section class="page-shell page-shell--reading" aria-labelledby="author-recent-title">
+      <h2 id="author-recent-title" class="list-title">Recent Essays</h2>
+      {{ range $recentEssays }}
+        {{ partial "discovery/page-list-item.html" (dict
+          "page" .
+          "showCollections" true
+          "showSectionLabel" false
+        ) }}
+      {{ end }}
+    </section>
+
+    {{ if gt (len $collections) 0 }}
+      <section class="page-shell page-shell--reading" aria-labelledby="author-collections-title">
+        <h2 id="author-collections-title" class="list-title">Collections</h2>
+        {{ range $collections }}
+          {{ partial "discovery/collection-card.html" (dict
+            "entry" .
+            "variant" "item"
+            "analyticsSourceSlot" "author_page"
+          ) }}
+        {{ end }}
+      </section>
+    {{ end }}
+
+    <section class="page-shell page-shell--reading" aria-labelledby="author-archive-title">
+      <h2 id="author-archive-title" class="list-title">Essay Archive</h2>
+      {{ range $essayPages }}
+        {{ partial "discovery/page-list-item.html" (dict
+          "page" .
+          "showCollections" true
+          "showSectionLabel" false
+        ) }}
+      {{ end }}
+    </section>
+
+    {{ partial "journey_links.html" (dict
+      "class" "journey-links--page"
+      "eyebrow" "Continue reading"
+      "links" (slice
+        (dict "href" ("essays/" | absURL) "label" "Browse all essays")
+        (dict "href" ("collections/" | absURL) "label" "Browse collections")
+        (dict "href" ("library/" | absURL) "label" "Search the library")
+        (dict "href" ("about/" | absURL) "label" "About the imprint")
+      )
+    ) }}
+  </article>
+{{ end }}

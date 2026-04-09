@@ -5,6 +5,7 @@ draft: false
 slug: "make-fighter-jets-great-again-introducing-the-f-47"
 section_label: "Essay"
 subtitle: "Everything We Know About Trump’s Sixth-Generation Fighter Jet"
+description: "The name is a flex.The plane is American air superiority — reengineered.While the name might be funny, the jet itself is no joke"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/make-fighter-jets-great-again-introducing-the-f-47.pdf"
@@ -106,5 +107,6 @@ Lawton is an economist who writes about markets, policy, and the forces shaping 
 When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
 
 Read more of his here work on Medium.
+
 
 

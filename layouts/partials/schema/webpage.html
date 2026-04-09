@@ -3,11 +3,17 @@
 {{- $website := .website -}}
 {{- $image := .image -}}
 {{- $breadcrumb := .breadcrumb -}}
+{{- $author := .author -}}
+{{- $organization := .organization -}}
 {{- $significantLinks := partial "schema/significant-links.html" (dict "page" $page "meta" $meta) -}}
 
 {{- $pageType := "WebPage" -}}
 {{- if or (eq $meta.route.name "collection") (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "section-list") -}}
   {{- $pageType = "CollectionPage" -}}
+{{- else if eq $meta.route.name "about" -}}
+  {{- $pageType = "AboutPage" -}}
+{{- else if eq $meta.route.name "author" -}}
+  {{- $pageType = "ProfilePage" -}}
 {{- end -}}
 
 {{- $node := dict
@@ -23,6 +29,14 @@
 {{- if $meta.route.is_article_like -}}
   {{- $node = merge $node (dict "mainEntity" (dict
     "@id" (printf "%s#primaryentity" $meta.canonical)
+  )) -}}
+{{- else if and (eq $meta.route.name "author") $author.primary -}}
+  {{- $node = merge $node (dict "mainEntity" (dict
+    "@id" $author.primary.node_id
+  )) -}}
+{{- else if eq $meta.route.name "about" -}}
+  {{- $node = merge $node (dict "mainEntity" (dict
+    "@id" (index $organization "@id")
   )) -}}
 {{- end -}}
 
@@ -40,6 +54,29 @@
 
 {{- if gt (len $significantLinks) 0 -}}
   {{- $node = merge $node (dict "significantLink" $significantLinks) -}}
+{{- end -}}
+
+{{- if eq $meta.route.name "about" -}}
+  {{- $node = merge $node (dict "about" (dict "@id" (index $organization "@id"))) -}}
+{{- end -}}
+
+{{- if eq $meta.route.name "collection" -}}
+  {{- with $page.File -}}
+    {{- $slug := $page.Params.slug | default .BaseFileName -}}
+    {{- with partial "collections/lookup-definition.html" $slug -}}
+      {{- $topics := slice (dict "@type" "Thing" "name" .title) -}}
+      {{- with .metadata -}}
+        {{- range . -}}
+          {{- if eq (lower (printf "%v" .label)) "scope" -}}
+            {{- $topics = $topics | append (dict "@type" "Thing" "name" .value) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if gt (len $topics) 0 -}}
+        {{- $node = merge $node (dict "about" $topics) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 {{ return $node }}

@@ -5,6 +5,7 @@ draft: false
 slug: "life-is-a-bull-market"
 section_label: "Essay"
 subtitle: "Why Panic Selling Your Own Life Is a Bad Trade"
+description: "Most people talk about life as something fragile one bad break away from collapse. A missed opportunity. A wrong turn"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/life-is-a-bull-market.pdf"
@@ -190,3 +191,4 @@ drawdowns, you give compounding time to do its work.
 That isn’t optimism.
 
 It’s realism in the limit ~ looking at a longer chart.
+

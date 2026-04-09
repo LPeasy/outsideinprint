@@ -5,6 +5,7 @@ draft: false
 slug: "the-national-flood-insurance-program"
 section_label: "Essay"
 subtitle: "An Exploration"
+description: "A Precarious Future Amid Rising Costs. Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-national-flood-insurance-program.pdf"
@@ -99,3 +100,4 @@ Ending federally subsidized flood insurance in high-risk areas would reduce the 
 3. House Financial Services Committee. National Flood Insurance Program FY25 Letter. Accessed December 2024. https://democrats-financialservices.house.gov.
 4. Stanford University. "Climate Change Caused One-Third of Historical Flood Damages." Stanford News. Accessed December 2024. https://news.stanford.edu/stories/2021/01/climate-change-caused-one-third-historical-flood-damages.
 5. Princeton University. "Overcoming Contemporary Reform Failure of the National Flood Insurance Program." Journal of Public and International Affairs. Accessed December 2024. https://jpia.princeton.edu/news/overcoming-contemporary-reform-failure-national-flood-insurance-program-accelerate-just-climate.
+

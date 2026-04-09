@@ -5,6 +5,7 @@ draft: false
 slug: "the-dolphin-company"
 section_label: "Essay"
 subtitle: "The Rise and Fall of the World’s Largest Dolphin Empire"
+description: "On a beautiful spring afternoon in 2025, families gathered at Gulf World Marine Park in Panama City Beach, Florida, expecting a classic spectacle. Trainers c..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-dolphin-company.pdf"
@@ -616,3 +617,4 @@ Business and Professional Regulation. The agency’s case against Gulf
 World ended with the park losing its operating license. Investigations
 also surfaced serious malpractice concerns in the veterinarian’s office
 at the facility.
+

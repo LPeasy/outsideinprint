@@ -5,6 +5,7 @@ draft: false
 slug: "the-death-of-moores-law"
 section_label: "Essay"
 subtitle: "How the Limits of Physics Are Reshaping the Future of Computing"
+description: "When Did It End, and What Comes Next?. This insight, later adjusted to a two-year doubling period, became known as Moore’s Law. It wasn’t just an observation..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-death-of-moores-law.pdf"
@@ -144,3 +145,4 @@ In 1965, engineer and businessman Gordon Moore observed a trend that would go on
 Semiconductors are likely to continue their transformational role | Technology Quarterlywww.economist.comWhat is Quantum Computing? - Quantum Computing Explained - AWS
 Find out what is Quantum Computing and how to use Amazon Web Services for Quantum Computingaws.amazon.comGordon Moore | Biography & Facts | Britannica
 Gordon Moore, American engineer who cofounded (with Robert Noyce) Intel Corporation and devised Moore's law, which…www.britannica.com
+

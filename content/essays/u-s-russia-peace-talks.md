@@ -5,6 +5,7 @@ draft: false
 slug: "u-s-russia-peace-talks"
 section_label: "Essay"
 subtitle: "Global Power Shift and America’s Pivot to Asia"
+description: "“The key really in all of this is ultimately going to be whether an agreement can be reached with all parties involved on an acceptable resolution to the con..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/u-s-russia-peace-talks.pdf"
@@ -144,5 +145,6 @@ QUESTION: We're joined now by the U.S. delegation that just wrapped up their mee
 Defense Secretary Pete Hegseth delivered opening remarks at a meeting of the Ukraine Defense Contact Group in Brussels.www.defense.govDayton Peace Agreement
 The General Framework Agreement for Peace in Bosnia and Herzegovina, also known as the Dayton Peace Agreement (DPA),…www.osce.orgMunich Agreement | Definition, Summary, & Significance | Britannica
 Munich Agreement, settlement reached by Germany, Britain, France, and Italy in Munich in September 1938 that let Germany…www.britannica.com
+
 
 

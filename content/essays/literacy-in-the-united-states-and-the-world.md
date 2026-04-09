@@ -5,6 +5,7 @@ draft: false
 slug: "literacy-in-the-united-states-and-the-world"
 section_label: "Essay"
 subtitle: "An Exploration"
+description: "Literacy is the foundation for personal growth, social participation, and economic development. The Program for the International Assessment of Adult Compete..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/literacy-in-the-united-states-and-the-world.pdf"
@@ -72,4 +73,5 @@ The United States faces significant literacy challenges, with 21 percent of adul
 4.	USAFACTS.
 
 5.	Our World in Data.
+
 

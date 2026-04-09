@@ -5,10 +5,12 @@ draft: false
 slug: "moral-momentum"
 section_label: "Essay"
 subtitle: "What it takes to build honest, world-changing energy—together."
+description: "The ability to change the world is called. Momentum.Momentum is derived from the collective efforts of individuals"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/moral-momentum.pdf"
-featured: false
+featured: false
+
 collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/moral-momentum-915410415be6"
@@ -65,4 +67,5 @@ When enough people push in the same direction — with patience, purpose, an
 And if you’re wondering where to start, the answer is always the same:
 
 Start with yourself.If you found this useful, follow me here on Medium for more clear thinking on strategy, leadership, and systems that work.
+
 

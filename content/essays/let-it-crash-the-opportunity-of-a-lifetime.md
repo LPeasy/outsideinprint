@@ -5,6 +5,7 @@ draft: false
 slug: "let-it-crash-the-opportunity-of-a-lifetime"
 section_label: "Essay"
 subtitle: "If you’ve got a job and no assets, a market crash might be the best thing that ever happens to you."
+description: "The economy isn’t collapsing — it’s being reborn. If you’re young, working, and paying attention, this is your shot to build"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/let-it-crash-the-opportunity-of-a-lifetime.pdf"
@@ -175,5 +176,6 @@ Tracking the Real Economy
 •	Bureau of Labor Statistics (BLS)
 
 •	FRED — Federal Reserve Economic Data
+
 
 

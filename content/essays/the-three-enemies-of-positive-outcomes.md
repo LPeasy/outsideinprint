@@ -5,6 +5,7 @@ draft: false
 slug: "the-three-enemies-of-positive-outcomes"
 section_label: "Essay"
 subtitle: "Things fail for a reason. It’s usually one of these."
+description: "If your team, project, or relationship is off-track, start here. Most things don’t fail for complicated reasons. It’s usually one of these three"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-three-enemies-of-positive-outcomes.pdf"
@@ -57,4 +58,5 @@ Start by asking: is it malice, apathy, or incompetence?
 And what would it take to fix that?
 
 If you found this useful, follow me here on Medium for more clear thinking on strategy, leadership, and systems that work.
+
 

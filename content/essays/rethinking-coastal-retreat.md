@@ -5,10 +5,12 @@ draft: false
 slug: "rethinking-coastal-retreat"
 section_label: "Essay"
 subtitle: "An Exploration"
+description: "From Managed Retreat to Federal Retreat. “In 2023 alone, the United States experienced over $100 billion in climate-related disaster costs, much of it tied t..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/rethinking-coastal-retreat.pdf"
-featured: false
+featured: false
+
 collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/rethinking-coastal-retreat-d63df1ea03c0"
@@ -115,4 +117,5 @@ Works Cited
 5.	Environmental Justice Atlas. “Isle de Jean Charles: Sea-Level Rise and Tribal Relocation.” Accessed December 2024. https://ejatlas.org/conflict/isle-de-jean-charles.
 
 6.	PMC. “Equitable Buyouts? Learning from State, County, and Local Floodplain Management Programs.” Accessed December 2024. https://pmc.ncbi.nlm.nih.gov/articles/PMC9607794/.
+
 

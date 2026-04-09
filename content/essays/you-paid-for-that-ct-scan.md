@@ -5,6 +5,7 @@ draft: false
 slug: "you-paid-for-that-ct-scan"
 section_label: "Essay"
 subtitle: "You Should Be Able To See It… Right?"
+description: "But if you get a CT scan of your own body, you walk away with a jargon-heavy PDF and (after picking it up from the “medical records department”) a useless CD..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/you-paid-for-that-ct-scan.pdf"
@@ -106,3 +107,4 @@ step toward treating people like partners in care, not bystanders.
 
 The question now is whether anyone in health tech is willing to build
 for the person in the gown instead of the person in the reading room.
+

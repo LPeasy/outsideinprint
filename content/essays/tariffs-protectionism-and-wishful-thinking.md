@@ -5,6 +5,7 @@ draft: false
 slug: "tariffs-protectionism-and-wishful-thinking"
 section_label: "Essay"
 subtitle: "A Historical Look at Economic Nationalism’s Unintended Consequences:"
+description: "When global powers face economic decline, they often turn to protectionist trade policies to shield domestic industries and reassert control over internation..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/tariffs-protectionism-and-wishful-thinking.pdf"
@@ -141,5 +142,6 @@ Fact Sheet: President Donald J. Trump Imposes Tariffs on Imports from Canada, Me
 ADDRESSING AN EMERGENCY SITUATION: The extraordinary threat posed by illegal aliens and drugs, including deadly…www.whitehouse.govFact Sheet: President Donald J. Trump Announces "Fair and Reciprocal Plan" on Trade
 THE "FAIR AND RECIPROCAL PLAN": Today, President Donald J. Trump signed a Presidential Memorandum ordering the…www.whitehouse.govFact Sheet: President Donald J. Trump Restores Section 232 Tariffs
 COUNTERING TRADE PRACTICES THAT UNDERMINE NATIONAL SECURITY: Yesterday, President Donald J. Trump signed proclamations…www.whitehouse.gov
+
 
 

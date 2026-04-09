@@ -10,4 +10,12 @@
   "publisher" (dict "@id" $organizationID)
   "inLanguage" (site.Language.LanguageCode | default "en-US")
 -}}
+{{- $node = merge $node (dict "potentialAction" (dict
+  "@type" "SearchAction"
+  "target" (dict
+    "@type" "EntryPoint"
+    "urlTemplate" (printf "%slibrary/?q={search_term_string}" site.BaseURL)
+  )
+  "query-input" "required name=search_term_string"
+)) -}}
 {{ return $node }}

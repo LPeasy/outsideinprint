@@ -1,4 +1,11 @@
 authors:
+  robert-v-ussley:
+    type: Person
+    name: Robert V. Ussley
+    path: /authors/robert-v-ussley/
+    description: Robert V. Ussley writes reported essays, explanatory analysis, and editorial pieces for Outside In Print.
+    focus: Essays on risk, institutions, technology, public life, and the systems people live inside.
+    bio: Robert V. Ussley writes essays and reported analysis for Outside In Print, with a focus on risk, infrastructure, public institutions, technology, and moral life.
   editorial:
     type: Organization
     name: Outside In Print Editorial

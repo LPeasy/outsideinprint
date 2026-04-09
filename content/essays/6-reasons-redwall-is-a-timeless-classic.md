@@ -5,6 +5,7 @@ draft: false
 slug: "6-reasons-redwall-is-a-timeless-classic"
 section_label: "Essay"
 subtitle: "(And Why It Still Captivates Readers Today)"
+description: "Since its publication in 1986, Redwall has enchanted readers with its immersive world and timeless storytelling. Brian Jacques’ novel, the first in an iconic..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/6-reasons-redwall-is-a-timeless-classic.pdf"
@@ -135,4 +136,5 @@ I’m an economist, writer, and lifelong book lover running Nonstop Book Reviews
 
 ### Redwall Book Series
 Find the complete Redwall book series by Brian Jacques. Great deals on one book or all books in the series. Free US…www.thriftbooks.com
+
 

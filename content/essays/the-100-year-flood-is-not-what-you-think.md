@@ -5,6 +5,7 @@ draft: false
 slug: "the-100-year-flood-is-not-what-you-think"
 section_label: "Essay"
 subtitle: "Why the 100-year flood happens more than once in a century ~"
+description: "People hear the phrase and assume rarity.\ Once in a lifetime. Maybe once in a century.\ Something you can shrug off if you plan to sell before retirement"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-100-year-flood-is-not-what-you-think.pdf"
@@ -139,4 +140,5 @@ formally constructed.
 
 Real-world flood risk can be higher or lower depending on location,
 elevation, drainage, and changing climate conditions.
+
 

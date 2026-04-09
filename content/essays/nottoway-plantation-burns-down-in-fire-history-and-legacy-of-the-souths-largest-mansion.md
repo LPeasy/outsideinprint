@@ -5,11 +5,13 @@ draft: false
 slug: "nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion"
 section_label: "Essay"
 subtitle: "A brief explainer about what the house was, how it evolved, and why its destruction sparked so many different reactions"
+description: "It was the largest plantation home in the South — built by the enslaved, sold as a resort, and burned to the ground in 2025"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.pdf"
 featured: false
-homepage_rank: 5
+homepage_rank: 5
+
 collections:
   - reported-case-studies
 medium_source_url: "https://medium.com/@lawtonperret/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion-24c8fff8aa3d"
@@ -381,4 +383,5 @@ regular essays.***
 </div>
 
 </div>
+
 

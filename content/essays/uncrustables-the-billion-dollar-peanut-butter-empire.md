@@ -5,6 +5,7 @@ draft: false
 slug: "uncrustables-the-billion-dollar-peanut-butter-empire"
 section_label: "Essay"
 subtitle: "No Crust, No Fuss, No Limits: The Unstoppable Rise of Uncrustables"
+description: "What’s soft, sealed, and fueling everything from school lunches to Super Bowl champions?. Uncrustables.The crust-free, flash-frozen peanut butter and jelly s..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/uncrustables-the-billion-dollar-peanut-butter-empire.pdf"
@@ -189,5 +190,6 @@ Lawton is an economist who writes about markets, policy, and the forces shaping 
 When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
 
 Read more of his work here on Medium.
+
 
 

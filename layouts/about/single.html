@@ -1,0 +1,44 @@
+{{ define "main" }}
+  <article class="profile-page profile-page--about">
+    <header class="page-header page-shell page-shell--wide">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    </header>
+
+    <div class="piece-body page-shell page-shell--reading">
+      {{ .Content }}
+    </div>
+
+    <section class="page-shell page-shell--wide" aria-labelledby="about-highlights-title">
+      <h2 id="about-highlights-title" class="list-title">At a Glance</h2>
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <div class="profile-stat__label">Publisher</div>
+          <div class="profile-stat__value">Outside In Print</div>
+          <p class="profile-stat__note">The imprint and publisher for the whole site.</p>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat__label">Essay Byline</div>
+          <div class="profile-stat__value">Robert V. Ussley</div>
+          <p class="profile-stat__note">The default author name attached to published essays and related web editions.</p>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat__label">Archive Shape</div>
+          <div class="profile-stat__value">Collections + Library</div>
+          <p class="profile-stat__note">Curated topic paths and a full searchable catalog work together.</p>
+        </div>
+      </div>
+    </section>
+
+    {{ partial "journey_links.html" (dict
+      "class" "journey-links--page"
+      "eyebrow" "Read the site"
+      "links" (slice
+        (dict "href" ("authors/robert-v-ussley/" | absURL) "label" "Meet the author")
+        (dict "href" ("start-here/" | absURL) "label" "Read Start Here")
+        (dict "href" ("collections/" | absURL) "label" "Browse collections")
+        (dict "href" ("library/" | absURL) "label" "Search the library")
+      )
+    ) }}
+  </article>
+{{ end }}

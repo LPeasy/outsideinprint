@@ -5,6 +5,7 @@ draft: false
 slug: "is-doge-legal"
 section_label: "Essay"
 subtitle: "Trump, Musk, and the Constitutional Fight Over Executive Power"
+description: "The Department of Government Efficiency (DOGE), spearheaded by Elon Musk and created via executive order by President Trump, is rapidly altering the federal..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/is-doge-legal.pdf"
@@ -210,5 +211,6 @@ Clinton v. City of New York - Wikipedia
 Clinton v. City of New York , 524 U.S. 417 (1998), was a landmark decision by the Supreme Court of the United States in…en.m.wikipedia.orghttps://www.casebriefs.com/blog/law/constitutional-law/constitutional-law-keyed-to-stone/the-distribution-of-national-powers/bowsher-v-synar-2/amp/
 
 https://ballotpedia.org/Humphrey%27s_Executor_v._United_States#:~:text=The%20Supreme%20Court%20ruled%20unanimously%20that%20the,other%20than%20inefficiency%2C%20neglect%20of%20duty%2C%20or
+
 
 

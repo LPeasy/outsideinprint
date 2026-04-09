@@ -5,6 +5,7 @@ draft: false
 slug: "the-slow-way-is-the-fast-way"
 section_label: "Essay"
 subtitle: "When we rush through life’s big decisions, we often find ourselves circling back to where we started."
+description: "In a small town, two brothers ran a painting company.One brother prided himself on speed. “I can finish a house in half the time it takes anyone else,” he’d..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-slow-way-is-the-fast-way.pdf"
@@ -89,4 +90,5 @@ The fast way may sound appealing, but the slow way — the deliberate way 
 And the longest way around often turns out to be the only way through.
 
 Like this? Follow for more reflections on time, choice, and the hidden patterns that shape our lives.
+
 

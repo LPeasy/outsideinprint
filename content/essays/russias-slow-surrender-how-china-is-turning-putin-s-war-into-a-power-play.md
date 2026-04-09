@@ -5,6 +5,7 @@ draft: false
 slug: "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play"
 section_label: "Essay"
 subtitle: "Putin fights in Ukraine, Beijing tightens its grip on Russia’s future"
+description: "Russia’s prolonged war in Ukraine has significantly altered its geopolitical and economic landscape, pushing it closer to China in ways that threaten its sov..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.pdf"
@@ -95,4 +96,5 @@ America maxed out its credit card — and left you to pay for it.medium.comT
 How a Once-Taboo Term is Making a Controversial Comeback in Online Culturemedium.comElon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test
 Musk’s Management Tactics Hit the Federal Workforcemedium.comInflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up
 Politicians blame deficits — but what if the real culprit is the banking system?medium.com
+
 

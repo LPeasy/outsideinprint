@@ -5,6 +5,7 @@ draft: false
 slug: "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible"
 section_label: "Essay"
 subtitle: "A scrappy biography of the runaway apprentice who became a statesman, scientist, and master of self-improvement."
+description: "This biography is based on The Autobiography of Benjamin Franklin and other public-domain records, including Franklin’s letters, essays, and inventions"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.pdf"
@@ -242,3 +243,4 @@ experiment.
 📘 [*The Autobiography of Benjamin Franklin* (full text): Project Gutenberg](https://www.gutenberg.org/ebooks/148)\
 🎧 [Audio version (LibriVox): Listen on Archive.org](https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up)\
 📺 [PBS Documentary: *Benjamin Franklin* by Ken Burns: Watch Trailer](https://www.youtube.com/watch?v=v7wowg6Fy4I)
+

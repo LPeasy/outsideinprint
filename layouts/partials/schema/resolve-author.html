@@ -1,71 +1,42 @@
 {{- $page := .page -}}
-{{- $meta := .meta -}}
 {{- $organization := .organization -}}
-{{- $baseURL := strings.TrimSuffix "/" site.BaseURL -}}
-{{- $authorsData := site.Data.authors.authors | default dict -}}
-{{- $authorKeys := slice -}}
-
-{{- with $page.Params.author_id -}}
-  {{- $authorKeys = $authorKeys | append (printf "%v" .) -}}
-{{- end -}}
-
-{{- if and (eq (len $authorKeys) 0) $page.Params.authors -}}
-  {{- range $page.Params.authors -}}
-    {{- $authorKeys = $authorKeys | append (printf "%v" .) -}}
-  {{- end -}}
-{{- end -}}
-
-{{- if and (eq (len $authorKeys) 0) $page.Params.author -}}
-  {{- $authorKeys = $authorKeys | append (printf "%v" $page.Params.author) -}}
-{{- end -}}
-
-{{- if and (eq (len $authorKeys) 0) $meta.route.is_article_like -}}
-  {{- with site.Data.organization.default_author_id -}}
-    {{- $authorKeys = $authorKeys | append (printf "%v" .) -}}
-  {{- end -}}
-{{- end -}}
+{{- $resolved := partial "authors/resolve.html" (dict
+  "page" $page
+  "fallbackDefault" true
+) -}}
 
 {{- $refs := slice -}}
 {{- $nodes := slice -}}
 
-{{- range $authorKey := $authorKeys -}}
-  {{- $lookupKey := lower $authorKey -}}
-  {{- $nodeID := printf "%s#author-%s" $baseURL ($lookupKey | urlize) -}}
-  {{- $entry := false -}}
-  {{- if isset $authorsData $lookupKey -}}
-    {{- $entry = index $authorsData $lookupKey -}}
+{{- range $entry := $resolved.entries -}}
+  {{- $node := dict
+    "@id" $entry.node_id
+    "@type" ($entry.type | default "Person")
+    "name" $entry.name
+  -}}
+  {{- with $entry.url -}}
+    {{- $node = merge $node (dict "url" .) -}}
   {{- end -}}
-
-  {{- if $entry -}}
-    {{- $authorType := $entry.type | default "Person" -}}
-    {{- $node := dict
-      "@id" $nodeID
-      "@type" $authorType
-      "name" ($entry.name | default $authorKey)
-    -}}
-    {{- with $entry.url -}}
-      {{- $node = merge $node (dict "url" .) -}}
-    {{- end -}}
-    {{- with $entry.same_as -}}
+  {{- with $entry.same_as -}}
+    {{- if gt (len .) 0 -}}
       {{- $node = merge $node (dict "sameAs" .) -}}
     {{- end -}}
-    {{- if and (eq $authorType "Organization") ($entry.parent_organization | default false) -}}
-      {{- $node = merge $node (dict "parentOrganization" (dict "@id" (index $organization "@id"))) -}}
-    {{- end -}}
-    {{- $nodes = $nodes | append $node -}}
-  {{- else -}}
-    {{- $nodes = $nodes | append (dict
-      "@id" $nodeID
-      "@type" "Person"
-      "name" $authorKey
-    ) -}}
   {{- end -}}
-
-  {{- $refs = $refs | append (dict "@id" $nodeID) -}}
+  {{- with $entry.description -}}
+    {{- $node = merge $node (dict "description" .) -}}
+  {{- end -}}
+  {{- if and (eq $entry.type "Organization") $entry.parent_organization -}}
+    {{- $node = merge $node (dict "parentOrganization" (dict "@id" (index $organization "@id"))) -}}
+  {{- end -}}
+  {{- $nodes = $nodes | append $node -}}
+  {{- $refs = $refs | append (dict "@id" $entry.node_id) -}}
 {{- end -}}
 
 {{- $result := dict
   "refs" $refs
   "nodes" $nodes
+  "primary" $resolved.primary
+  "entries" $resolved.entries
+  "names" $resolved.names
 -}}
 {{ return $result }}

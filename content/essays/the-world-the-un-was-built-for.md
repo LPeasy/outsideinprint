@@ -5,6 +5,7 @@ draft: false
 slug: "the-world-the-un-was-built-for"
 section_label: "Essay"
 subtitle: "How Postwar Human Rights, Migration Norms, and Global Institutions Were Designed for Europe ~ and Applied to a Very Different World"
+description: "In the years after World War II, the victors attempted something new. After two global wars in a single generation, they agreed to a set of rules meant to pr..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-world-the-un-was-built-for.pdf"
@@ -237,3 +238,4 @@ If you disagree, I welcome it ~ but only on the merits of the argument
 itself.
 
 Read closely. Question the assumptions. Engage in good faith.
+

@@ -5,6 +5,8 @@ import path from "node:path";
 
 const startHereTemplate = fs.readFileSync(path.resolve("layouts/start-here/single.html"), "utf8");
 const startHereContent = fs.readFileSync(path.resolve("content/start-here/index.md"), "utf8");
+const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
+const authorSingle = fs.readFileSync(path.resolve("layouts/authors/single.html"), "utf8");
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
@@ -83,12 +85,35 @@ test("collection detail and membership hooks have explicit inner-structure styli
 
 test("article single template removes dead generic layout hooks and uses page-flow ownership", () => {
   assert.match(articleSingle, /<article class="piece"/);
+  assert.match(articleSingle, /partial "authors\/byline\.html"/);
+  assert.match(articleSingle, /partial "authors\/card\.html"/);
   assert.match(articleSingle, /<div class="piece-body">/);
   assert.doesNotMatch(articleSingle, /single-page/);
   assert.doesNotMatch(articleSingle, /single-content/);
   assert.match(css, /\.newsletter-signup--page\{\s*margin-top:0;\s*\}/);
   assert.match(css, /\.running-header\{/);
   assert.match(css, /\.running-header__inner\{/);
+});
+
+test("about and author pages own dedicated profile layouts and styling", () => {
+  assert.match(aboutSingle, /class="profile-page profile-page--about"/);
+  assert.match(aboutSingle, /id="about-highlights-title"/);
+  assert.match(aboutSingle, /Meet the author/);
+  assert.match(authorSingle, /class="profile-page profile-page--author"/);
+  assert.match(authorSingle, /Recent Essays/);
+  assert.match(authorSingle, /Essay Archive/);
+
+  for (const selector of [
+    ".piece-byline{",
+    ".author-note{",
+    ".profile-page{",
+    ".profile-stats{",
+    ".profile-stat{",
+    ".site-footer{",
+    ".site-footer__nav{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
 });
 
 test("layout ownership matrix tracks the integrated cleanup state", () => {

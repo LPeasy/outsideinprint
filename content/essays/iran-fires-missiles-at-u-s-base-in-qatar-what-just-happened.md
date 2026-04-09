@@ -5,6 +5,7 @@ draft: false
 slug: "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened"
 section_label: "Essay"
 subtitle: "Missiles intercepted. No casualties. Flash in the Pan."
+description: "Iran just fired missiles at a major U.S. military base in Qatar. The strike comes after weeks of mounting conflict involving Israeli airstrikes, Iranian reta..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.pdf"
@@ -99,3 +100,4 @@ Trump has hinted that [he wants a full regime change](https://www.cbsnews.com/ne
 
 [Xi is calling for a ceasefire](https://time.com/7296139/china-iran-israel-us-weapons-mediate-war-peace-oil-diplomacy/)
 (specifically for Israel to lay down their arms).
+

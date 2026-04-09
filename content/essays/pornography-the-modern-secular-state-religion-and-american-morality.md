@@ -5,6 +5,7 @@ draft: false
 slug: "pornography-the-modern-secular-state-religion-and-american-morality"
 section_label: "Essay"
 subtitle: "The obvious connection explained"
+description: "The pendulum swinging from a stylized depiction of an actual shepherd with his sheep to a neon fueled modern moral hell-scape"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/pornography-the-modern-secular-state-religion-and-american-morality.pdf"
@@ -317,3 +318,4 @@ subscribe so you don’t miss the next one!
   1900–2018” — https://www.bgsu.edu/ncfmr/resources/data/family-profiles/schweizer-divorce-century-change-1900-2018-fp-20-22.html
 - PubMed ~ Perry (2018) on pornography use and marital
   separation — https://pubmed.ncbi.nlm.nih.gov/28936726/
+

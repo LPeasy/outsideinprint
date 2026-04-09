@@ -56,14 +56,34 @@ if ($organizationData -notmatch 'name:\s*Outside In Print') {
   throw 'Expected data/organization.yaml to define the Outside In Print organization.'
 }
 
+if ($organizationData -notmatch 'default_author_id:\s*robert-v-ussley') {
+  throw 'Expected data/organization.yaml to default published authorship to robert-v-ussley.'
+}
+
 $authorsData = Get-Content -Path (Join-Path $repoRoot 'data/authors.yaml') -Raw
 if ($authorsData -notmatch 'Outside In Print Editorial') {
   throw 'Expected data/authors.yaml to define the editorial fallback author.'
 }
 
+if ($authorsData -notmatch 'Robert V\. Ussley') {
+  throw 'Expected data/authors.yaml to define Robert V. Ussley as a canonical author entity.'
+}
+
 $routeHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/route.html') -Raw
 if ($routeHelper -notmatch '"social_type"') {
   throw 'Expected WS-01 route helper to remain available for schema routing.'
+}
+
+$websiteHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/website.html') -Raw
+if ($websiteHelper -notmatch 'SearchAction') {
+  throw 'Expected schema/website.html to emit SearchAction metadata for the library route.'
+}
+
+$webpageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/webpage.html') -Raw
+foreach ($pageType in @('AboutPage', 'ProfilePage')) {
+  if ($webpageHelper -notmatch $pageType) {
+    throw "Expected schema/webpage.html to support $pageType."
+  }
 }
 
 $schemaReturnFiles = @(

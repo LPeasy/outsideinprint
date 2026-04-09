@@ -5,6 +5,7 @@ draft: false
 slug: "how-american-farm-labor-is-set-to-evolve"
 section_label: "Essay"
 subtitle: "Again"
+description: "Farm Labor from 1950 — The Future. The American agricultural sector has long been the backbone of the nation’s economy, feeding millions and driving exports...."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/how-american-farm-labor-is-set-to-evolve.pdf"
@@ -113,4 +114,5 @@ Read More
 •	Keith Murray, Mechanization and Labor in American Agriculture, 1945 — 1970, Agricultural History Journal.
 
 •	U.S. Department of Agriculture Economic Research Service, Farm Labor: Background.
+
 

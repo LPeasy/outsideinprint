@@ -1,4 +1,5 @@
 {{ define "main" }}
+  {{ $meta := partial "metadata/page.html" . }}
   {{ $sectionPage := .CurrentSection }}
   {{ $articleVariant := partial "article/variant-key.html" . }}
   {{ $articleClasses := slice "piece" }}
@@ -31,6 +32,7 @@
         <p class="piece-series-marker">Modern Bios</p>
       {{ end }}
       <h1>{{ .Title }}</h1>
+      {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
       {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
       {{ if eq $articleVariant "modernbio" }}
         {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
@@ -53,6 +55,7 @@
         {{ partial "article/modernbio-record.html" . }}
       {{ end }}
       {{ partial "collections/page-membership-block.html" . }}
+      {{ partial "authors/card.html" (dict "page" . "author" $meta.author) }}
 
       {{ if ne .Params.show_citation false }}
         <div class="article-closing" aria-hidden="true">
@@ -61,7 +64,7 @@
 
         <aside class="citation" role="note" aria-label="How to cite this page">
           <div class="k">Cite this</div>
-          <code>{{ .Params.author | default "Outside In Print" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+          <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
         </aside>
       {{ end }}
 

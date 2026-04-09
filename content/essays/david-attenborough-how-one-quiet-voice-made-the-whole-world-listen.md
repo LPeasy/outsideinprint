@@ -5,6 +5,7 @@ draft: false
 slug: "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen"
 section_label: "Essay"
 subtitle: "From black-and-white BBC to the edge of extinction and back"
+description: "Minimalist narration isn’t supposed to change the world. With a steady tone, curious cadence, and enough wonder to move stone-faced politicians to tears, Dav..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.pdf"
@@ -307,3 +308,4 @@ Not with that voice, that track record, and that moral weight.
 He didn’t just narrate nature.
 
 **He gave it a voice.**
+

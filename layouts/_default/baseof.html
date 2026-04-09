@@ -9,6 +9,9 @@
     <link rel="canonical" href="{{ $meta.canonical }}" />
 
     <meta name="description" content="{{ $meta.description }}" />
+    {{- with $meta.author_name }}
+    <meta name="author" content="{{ . }}" />
+    {{- end }}
     {{- with $meta.robots }}
     <meta name="robots" content="{{ delimit . ", " }}" />
     {{- end }}

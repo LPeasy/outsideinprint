@@ -5,6 +5,7 @@ draft: false
 slug: "whos-really-funding-terror"
 section_label: "Essay"
 subtitle: "Inside Treasury’s 2024 Terrorist Financing Risk Assessment"
+description: "Every few years, the U.S. Treasury Department drops a long, serious PDF that almost nobody outside government reads"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/whos-really-funding-terror.pdf"
@@ -334,3 +335,4 @@ because it offers a clear, structured story about:
 
 > For a 100-plus-page government PDF that most people will never open,
 > that’s a lot of information hiding in plain sight.
+

@@ -5,6 +5,7 @@ draft: false
 slug: "whos-drinking-all-the-modelo"
 section_label: "Essay"
 subtitle: "Especial Report"
+description: "“Every once in a while, a person comes along who defies the odds, who defies logic, and fulfills an incredible dream.”"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/whos-drinking-all-the-modelo.pdf"
@@ -236,3 +237,4 @@ While **Bud Light** and **Michelob Ultra** scrambled to stay relevant,
 - [Bud Light slips again, falling behind Modelo and Michelob Ultra after boycott](https://www.usatoday.com/story/money/2024/07/18/bud-light-beer-sales-ranking-boycott/74463050007/)
 
 - [How Modelo Became The No. 1 Beer Brand In America](https://www.forbes.com/sites/dontse/2024/11/01/how-modelo-became-the-no-1-beer-brand-in-america/)
+

@@ -5,6 +5,7 @@ draft: false
 slug: "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas"
 section_label: "Essay"
 subtitle: "Vance unveils AI-driven surveillance strategy to track illegal crossings, enhance national security, and reinforce U.S. border enforcement."
+description: "Eagle Pass, TX — March 5, 2025. Vice President JD Vance announced Wednesday that the U.S. will deploy artificial intelligence technology along the southern b..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas.pdf"
@@ -52,5 +53,6 @@ Lawton is an economist who writes about markets, AI, and the forces shaping Amer
 When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
 
 Read more of his work here.
+
 
 

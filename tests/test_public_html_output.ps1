@@ -302,15 +302,29 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/library/index.html' = @{
     Title = 'Library'
-    Description = 'The full catalog of published work from Outside In Print, searchable by title, section, and version.'
+    Description = 'The full catalog of published work from Outside In Print, searchable by title, section, collection, and version.'
     Canonical = 'https://outsideinprint.org/library/'
     OgType = 'website'
     TwitterCard = 'summary'
   }
   'public/collections/index.html' = @{
     Title = 'Collections'
-    Description = 'Curated collections that gather essays, projects, and recurring questions into coherent reading threads.'
+    Description = 'Curated collections that gather essays, projects, dossiers, and recurring questions into coherent reading threads across the archive.'
     Canonical = 'https://outsideinprint.org/collections/'
+    OgType = 'website'
+    TwitterCard = 'summary'
+  }
+  'public/about/index.html' = @{
+    Title = 'About Outside In Print'
+    Description = 'About Outside In Print: the imprint''s mission, editorial model, publishing structure, and the relationship between the site and Robert V. Ussley.'
+    Canonical = 'https://outsideinprint.org/about/'
+    OgType = 'website'
+    TwitterCard = 'summary'
+  }
+  'public/authors/robert-v-ussley/index.html' = @{
+    Title = 'Robert V. Ussley'
+    Description = 'Essays by Robert V. Ussley on risk, institutions, technology, public life, and the systems people live inside.'
+    Canonical = 'https://outsideinprint.org/authors/robert-v-ussley/'
     OgType = 'website'
     TwitterCard = 'summary'
   }
@@ -330,9 +344,10 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/essays/biter-the-slang-word-that-hits/index.html' = @{
     Title = 'Biter'
-    Description = 'A word to describe artistic thieves'
+    Description = 'Biter delivers an accusation in a word. A copycat — someone who steals another person’s ideas, aesthetic, or work and passes it off as their own'
     Canonical = 'https://outsideinprint.org/essays/biter-the-slang-word-that-hits/'
     OgType = 'article'
+    AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-risk-management-buffet/index.html' = @{
     Title = 'The Risk Management Buffet'
@@ -340,6 +355,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    AuthorMeta = 'Robert V. Ussley'
   }
 }
 
@@ -348,6 +364,7 @@ $requiredStructuredDataPages = [ordered]@{
     RequiredTypes = @('Organization', 'WebSite', 'WebPage')
     ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
     RequirePublisherNode = $true
+    RequireSearchAction = $true
   }
   'public/start-here/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList')
@@ -360,6 +377,20 @@ $requiredStructuredDataPages = [ordered]@{
     ForbiddenTypes = @('Article', 'CreativeWork')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
+  'public/about/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'AboutPage', 'BreadcrumbList')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'ProfilePage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/authors/robert-v-ussley/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'ProfilePage', 'Person', 'BreadcrumbList')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'AboutPage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequirePersonNodeName = 'Robert V. Ussley'
   }
   'public/collections/risk-uncertainty/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList')
@@ -387,11 +418,21 @@ $requiredIndexationPages = [ordered]@{
   'public/library/index.html' = @{
     ExpectRobotsMeta = $false
   }
+  'public/about/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
+  'public/authors/robert-v-ussley/index.html' = @{
+    ExpectRobotsMeta = $false
+  }
   'public/collections/index.html' = @{
     ExpectRobotsMeta = $false
   }
   'public/collections/risk-uncertainty/index.html' = @{
     ExpectRobotsMeta = $false
+  }
+  'public/authors/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
   }
   'public/essays/the-risk-management-buffet/index.html' = @{
     ExpectRobotsMeta = $false
@@ -408,6 +449,8 @@ $requiredIndexationPages = [ordered]@{
 
 $requiredSitemapInclusions = @(
   'https://outsideinprint.org/',
+  'https://outsideinprint.org/about/',
+  'https://outsideinprint.org/authors/robert-v-ussley/',
   'https://outsideinprint.org/essays/',
   'https://outsideinprint.org/essays/the-risk-management-buffet/',
   'https://outsideinprint.org/syd-and-oliver/',
@@ -418,6 +461,7 @@ $requiredSitemapInclusions = @(
 )
 
 $requiredSitemapExclusions = @(
+  'https://outsideinprint.org/authors/',
   'https://outsideinprint.org/random/',
   'https://outsideinprint.org/working-papers/',
   'https://outsideinprint.org/literature/'
@@ -426,6 +470,8 @@ $requiredSitemapExclusions = @(
 $requiredUxPages = @(
   'public/index.html',
   'public/start-here/index.html',
+  'public/about/index.html',
+  'public/authors/robert-v-ussley/index.html',
   'public/essays/index.html',
   'public/library/index.html',
   'public/collections/index.html',
@@ -600,6 +646,7 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
   $twitterTitle = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:title'
   $twitterDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:description'
   $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
+  $authorMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'author'
 
   if ($canonical -ne [string]$expected.Canonical) {
     $metadataIssues.Add("$relativePath => expected canonical $($expected.Canonical), found $canonical")
@@ -660,6 +707,10 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
     elseif ($ogImage -ne $twitterImage) {
       $metadataIssues.Add("$relativePath => expected og:image and twitter:image metadata to stay in sync")
     }
+  }
+
+  if ($expected.Contains('AuthorMeta') -and $authorMeta -ne [string]$expected.AuthorMeta) {
+    $metadataIssues.Add("$relativePath => expected author meta '$($expected.AuthorMeta)', found '$authorMeta'")
   }
 }
 
@@ -760,15 +811,47 @@ foreach ($relativePath in $requiredStructuredDataPages.Keys) {
   }
 
   $organizationNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Organization')
+  $personNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Person')
   if ($expected.Contains('RequirePublisherNode') -and [bool]$expected.RequirePublisherNode) {
     if (@($organizationNodes | Where-Object { $_.name -eq 'Outside In Print' }).Count -eq 0) {
       $structuredDataIssues.Add("$relativePath => expected an Organization node named 'Outside In Print'")
     }
   }
 
+  if ($expected.Contains('RequirePersonNodeName')) {
+    if (@($personNodes | Where-Object { $_.name -eq [string]$expected.RequirePersonNodeName }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected a Person node named '$($expected.RequirePersonNodeName)'")
+    }
+  }
+
   if ($expected.Contains('RequireBreadcrumb') -and [bool]$expected.RequireBreadcrumb) {
     if ((Get-JsonLdNodesByType -Nodes $nodes -Type 'BreadcrumbList').Count -eq 0) {
       $structuredDataIssues.Add("$relativePath => expected BreadcrumbList JSON-LD")
+    }
+  }
+
+  if ($expected.Contains('RequireSearchAction') -and [bool]$expected.RequireSearchAction) {
+    $websiteNode = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'WebSite') | Select-Object -First 1
+    if ($null -eq $websiteNode -or $null -eq $websiteNode.potentialAction) {
+      $structuredDataIssues.Add("$relativePath => expected WebSite JSON-LD to expose SearchAction")
+    } else {
+      $action = $websiteNode.potentialAction
+      if ($action.'@type' -ne 'SearchAction') {
+        $structuredDataIssues.Add("$relativePath => expected WebSite potentialAction to be SearchAction")
+      }
+
+      $targetTemplate = $null
+      if ($null -ne $action.target) {
+        if ($action.target.urlTemplate) {
+          $targetTemplate = [string]$action.target.urlTemplate
+        } elseif ($action.target -is [string]) {
+          $targetTemplate = [string]$action.target
+        }
+      }
+
+      if ($targetTemplate -ne 'https://outsideinprint.org/library/?q={search_term_string}') {
+        $structuredDataIssues.Add("$relativePath => expected SearchAction target to point at the library query route")
+      }
     }
   }
 
@@ -989,9 +1072,39 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
+    Pattern = "(?s)searchParams\\.get\\('q'\\).*searchParams\\.set\\('q', query\\)"
+    Message = 'expected the library page to sync the search input with the q query parameter'
+  },
+  @{
+    Path = 'public/library/index.html'
     Pattern = '>Read PDF<'
     Message = 'expected the library index to avoid PDF affordances'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = 'Author and Publisher'
+    Message = 'expected the about page to explain the author and publisher relationship'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = 'Robert V\. Ussley'
+    Message = 'expected the about page to name Robert V. Ussley explicitly'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Published Essays'
+    Message = 'expected the author page to expose archive statistics'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Recent Essays'
+    Message = 'expected the author page to expose recent essays'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Essay Archive'
+    Message = 'expected the author page to expose the full essay archive'
   },
   @{
     Path = 'public/collections/index.html'

@@ -5,6 +5,7 @@ draft: false
 slug: "jack-stratton-and-the-vulfpeck-model"
 section_label: "Essay"
 subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
+description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/jack-stratton-and-the-vulfpeck-model.pdf"
@@ -373,3 +374,4 @@ force behind Vulfpeck’s distinct and enduring identity.
 > Call it what you want: jam band, studio collective, funk pranksters.
 
 **Stratton just calls it music** *you can believe in.*
+

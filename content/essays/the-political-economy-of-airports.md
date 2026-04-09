@@ -5,6 +5,7 @@ draft: false
 slug: "the-political-economy-of-airports"
 section_label: "Essay"
 subtitle: "Why is everything so expensive??"
+description: "Airports are more than mere gateways for travel — they are complex ecosystems shaped by the interaction of market forces, public policy, and consumer behavio..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-political-economy-of-airports.pdf"
@@ -92,5 +93,6 @@ https://www.indystar.com/story/news/2015/03/06/flying-high-ways-indys-airport-fo
 6.	Reader’s Digest — Insights into McDonald’s revenue model:
 
 https://www.rd.com/article/real-way-mcdonalds-makes-money/
+
 
 

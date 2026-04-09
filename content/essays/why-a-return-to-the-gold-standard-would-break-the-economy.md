@@ -5,6 +5,7 @@ draft: false
 slug: "why-a-return-to-the-gold-standard-would-break-the-economy"
 section_label: "Essay"
 subtitle: "What Glitters Isn’t Always Gold"
+description: "What if overnight, your $10 bill could only buy a loaf of bread instead of a full meal?. Or even worse: what if your mortgage suddenly felt twice as expensive?"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/why-a-return-to-the-gold-standard-would-break-the-economy.pdf"
@@ -231,3 +232,4 @@ At the end of the day, what matters isn’t what backs your money ~ it’s wheth
 The gold standard might sound like a safe bet, but it’s a gamble on instability.
 
 In a high-stakes economy, that’s not a bet we can afford to make.
+

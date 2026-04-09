@@ -5,6 +5,7 @@ draft: false
 slug: "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support"
 section_label: "Essay"
 subtitle: "Hedging Their Bets"
+description: "Donald Trump called Ukrainian President Volodymyr Zelenskyy a ‘dictator’ and falsely claimed Ukraine provoked the war with Russia"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.pdf"
@@ -111,5 +112,6 @@ Lawmakers sought to dispel Kremlin talking points echoed by the president that U
 Republican senators are supportive of President Donald Trump's demand for Ukraine to hold elections, though GOP…www.foxnews.comSome Republican senators say Zelenskyy is not a 'dictator' in response to Trump comments
 Senators also contradicted President Donald Trump's false claim that Ukraine started the war with Russia that began when…www.usatoday.comGOP senators walk fine line on Ukraine without bashing Trump's comments
 Republican senators went to great lengths to avoid bashing President Donald Trump's comments on Ukraine but they didn't…abcnews.go.com
+
 
 

@@ -5,6 +5,7 @@ draft: false
 slug: "household-and-individual-wealth-in-america"
 section_label: "Essay"
 subtitle: "Dec. 14th, 2024"
+description: "Household and Personal Income Trends in the United States. I. Introduction: Income Trends as a Reflection of Economic Transformation"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/household-and-individual-wealth-in-america.pdf"
@@ -179,4 +180,5 @@ Works Cited
 •	“Median Household Income in the United States by State in 2023.” Statista, 2024.
 
 •	https://www.statista.com/statistics/233170/median-household-income-in-the-united-states-by-state/
+
 

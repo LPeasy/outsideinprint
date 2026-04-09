@@ -5,6 +5,7 @@ draft: false
 slug: "flash-flood-alley-why-flash-floods-kill"
 section_label: "Essay"
 subtitle: "Texas Hill Country and the Limits of Early Warning"
+description: "Tourists come for the picturesque rivers and limestone cliffs. The region’s steep slopes and limestone bedrock make it one of the fastest-draining flood envi..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/flash-flood-alley-why-flash-floods-kill.pdf"
@@ -473,3 +474,4 @@ Country and leaves little time for evacuation.
 
 - [What Happened at Camp Mystic?](https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27)
 - [The Water?s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
+

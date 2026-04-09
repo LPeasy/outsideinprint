@@ -5,6 +5,7 @@ draft: false
 slug: "the-cracked-pot"
 section_label: "Essay"
 subtitle: ""
+description: "The morning light filtered through the apartment’s automatic blinds, timed perfectly to match his circadian rhythm. An Optimus hummed softly as it blended hi..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-cracked-pot.pdf"
@@ -108,5 +109,6 @@ He looked at the bot, its serene expression unchanging. His eyes darted to the p
 For a moment, the temptation gripped him. What if it really could help? What if meaning wasn’t something to be fought for? What if it was something that could simply be given?
 
 He hesitated, his fingers tightening around the pot even as his gaze lingered on the box.
+
 
 

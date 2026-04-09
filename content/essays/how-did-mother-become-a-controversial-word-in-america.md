@@ -5,6 +5,7 @@ draft: false
 slug: "how-did-mother-become-a-controversial-word-in-america"
 section_label: "Essay"
 subtitle: "Why medicine, public health, and institutions stopped using one of history’s most revered terms"
+description: "For most of human history, the word mother required no clarification. It described a biological reality, a medical category, a social role, and a moral oblig..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/how-did-mother-become-a-controversial-word-in-america.pdf"
@@ -207,3 +208,4 @@ institutions draw the line between inclusion and clarity? What is more
 important ~ comfort or truth?
 
 Let’s talk about it!
+

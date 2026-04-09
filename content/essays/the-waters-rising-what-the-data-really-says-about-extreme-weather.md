@@ -5,6 +5,7 @@ draft: false
 slug: "the-waters-rising-what-the-data-really-says-about-extreme-weather"
 section_label: "Essay"
 subtitle: "“The weather’s never been like this!”"
+description: "It feels like you hear this after every flood , fire, or storm lately. From Houston to Vermont, from wildfires in Canada to flash floods in Texas, something..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-waters-rising-what-the-data-really-says-about-extreme-weather.pdf"
@@ -295,3 +296,4 @@ past.**
 ***Because what happened at Camp Mystic could happen again,***
 
 > **And next time we need to be ready.**
+

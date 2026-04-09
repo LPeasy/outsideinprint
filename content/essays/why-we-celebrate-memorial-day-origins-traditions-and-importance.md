@@ -5,6 +5,7 @@ draft: false
 slug: "why-we-celebrate-memorial-day-origins-traditions-and-importance"
 section_label: "Essay"
 subtitle: "The history of Memorial Day, its key observances, and why every American pauses to honor our fallen service members."
+description: "Have you ever stood among the headstones and wondered what stories lie behind each flag?. Who are these people? And why do we do this every May?"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/why-we-celebrate-memorial-day-origins-traditions-and-importance.pdf"
@@ -180,3 +181,4 @@ Let the laughter and waves fade.
 That’s why we celebrate Memorial Day ~ not just for the long weekend,
 but for the promise carried by each flag and flower on a soldier’s
 grave.
+

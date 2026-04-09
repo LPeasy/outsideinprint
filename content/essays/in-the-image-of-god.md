@@ -5,6 +5,7 @@ draft: false
 slug: "in-the-image-of-god"
 section_label: "Essay"
 subtitle: "An introduction to Catholic social teaching"
+description: "Most conversations about religion and society begin in the wrong places. They start with policies and parties"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/in-the-image-of-god.pdf"
@@ -349,3 +350,4 @@ Show us the truth,
 God is alive.
 
 > **Amen**.
+

@@ -5,6 +5,7 @@ draft: false
 slug: "35-years-of-yellow-the-simpsons-time-loop"
 section_label: "Essay"
 subtitle: "A fake series finale and the cartoon that somehow predicted 9/11, COVID, and President Donald Trump on an escalator."
+description: "In April 2024, The Simpsons aired a special episode called Homer’s Crossing that looked like a series finale"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/35-years-of-yellow-the-simpsons-time-loop.pdf"
@@ -325,3 +326,4 @@ turnover ~ **it just keeps going and going and going.**
 > same voices ~ new skins.
 
 ### **Maybe it never ends.**
+

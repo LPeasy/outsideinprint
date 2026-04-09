@@ -34,6 +34,35 @@ function Get-NormalizedRepoPath {
   return [System.IO.Path]::GetFullPath((Resolve-Path $candidate).Path)
 }
 
+function Write-Utf8NoBom {
+  param(
+    [string]$Path,
+    [string]$Content
+  )
+
+  $dir = Split-Path -Parent $Path
+  if ($dir -and -not (Test-Path $dir -PathType Container)) {
+    New-Item -Path $dir -ItemType Directory -Force | Out-Null
+  }
+
+  [System.IO.File]::WriteAllText($Path, $Content, (New-Object System.Text.UTF8Encoding($false)))
+}
+
+function Get-RepoRelativePath {
+  param(
+    [string]$RepoRoot,
+    [string]$PathValue
+  )
+
+  $resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $RepoRoot).Path).TrimEnd('\', '/')
+  $resolvedPath = [System.IO.Path]::GetFullPath((Resolve-Path $PathValue).Path)
+  if ($resolvedPath.StartsWith($resolvedRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
+    return $resolvedPath.Substring($resolvedRoot.Length).TrimStart('\', '/').Replace('\', '/')
+  }
+
+  return $resolvedPath.Replace('\', '/')
+}
+
 function Get-WorkingTreeEssayPaths {
   param([string]$RepoRoot)
 
@@ -103,6 +132,62 @@ function Resolve-TargetEssayPaths {
   return $results.ToArray()
 }
 
+function Get-AuditRowsForGitRef {
+  param(
+    [string]$RepoRoot,
+    [string]$AuditScriptPath,
+    [string]$Ref,
+    [string[]]$EssayPaths
+  )
+
+  if ([string]::IsNullOrWhiteSpace($Ref) -or ($Ref -match '^0+$')) {
+    return @()
+  }
+
+  $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('.tmp-essay-guardrails-base-' + [guid]::NewGuid().ToString('N'))
+  $reportBasePath = Join-Path $tempRoot 'reports\essay-guardrails'
+  $restoredPaths = New-Object System.Collections.Generic.List[string]
+
+  try {
+    $expandedEssayPaths = New-Object System.Collections.Generic.List[string]
+    foreach ($essayPath in $EssayPaths) {
+      if (Test-Path $essayPath -PathType Container) {
+        Get-ChildItem -Path $essayPath -File -Filter '*.md' -Recurse |
+          Where-Object { $_.Name -ne '_index.md' } |
+          ForEach-Object { $expandedEssayPaths.Add($_.FullName) }
+        continue
+      }
+
+      $expandedEssayPaths.Add($essayPath)
+    }
+
+    foreach ($essayPath in $expandedEssayPaths) {
+      $relativePath = Get-RepoRelativePath -RepoRoot $RepoRoot -PathValue $essayPath
+      $blob = @(& git -C $RepoRoot show "$Ref`:$relativePath" 2>$null)
+      if ($LASTEXITCODE -ne 0 -or -not $blob -or $blob.Count -eq 0) {
+        continue
+      }
+
+      $restoredPath = Join-Path $tempRoot ($relativePath -replace '/', '\')
+      Write-Utf8NoBom -Path $restoredPath -Content (($blob -join [Environment]::NewLine) + [Environment]::NewLine)
+      $restoredPaths.Add($restoredPath)
+    }
+
+    if ($restoredPaths.Count -eq 0) {
+      return @()
+    }
+
+    & $AuditScriptPath -Root $tempRoot -Sections @('essays') -Paths $restoredPaths.ToArray() -ReportBasePath $reportBasePath | Out-Null
+    $report = Get-Content ($reportBasePath + '.json') -Raw | ConvertFrom-Json
+    return @($report.files)
+  }
+  finally {
+    if (Test-Path $tempRoot) {
+      Remove-Item -Path $tempRoot -Recurse -Force -ErrorAction SilentlyContinue
+    }
+  }
+}
+
 $targetPaths = Resolve-TargetEssayPaths `
   -RepoRoot $Root `
   -ExplicitPaths $Paths `
@@ -119,6 +204,14 @@ if ($targetPaths.Count -eq 0) {
 $report = Get-Content ($ReportBasePath + '.json') -Raw | ConvertFrom-Json
 $rows = @($report.files)
 
+$baselineRowsByPath = @{}
+if (-not [string]::IsNullOrWhiteSpace($BaseRef) -and ($BaseRef -notmatch '^0+$')) {
+  $baselineRows = @(Get-AuditRowsForGitRef -RepoRoot $Root -AuditScriptPath $auditScript -Ref $BaseRef -EssayPaths $targetPaths)
+  foreach ($baselineRow in $baselineRows) {
+    $baselineRowsByPath[[string]$baselineRow.path] = $baselineRow
+  }
+}
+
 if ($rows.Count -eq 0) {
   Write-Host 'Essay guardrails: audit produced no matching essay rows.' -ForegroundColor Yellow
   exit 0
@@ -132,13 +225,26 @@ $warningResults = New-Object System.Collections.Generic.List[object]
 
 foreach ($row in $rows) {
   $issueTypes = @($row.issue_types)
-  $rowBlockers = @($issueTypes | Where-Object { $blockingIssues -contains $_ })
-  $rowWarnings = @($issueTypes | Where-Object { $warningIssues -contains $_ })
+  $baselineIssueTypes = @()
+  $baselineMissingDescription = $false
+
+  if ($baselineRowsByPath.ContainsKey([string]$row.path)) {
+    $baselineRow = $baselineRowsByPath[[string]$row.path]
+    $baselineIssueTypes = @($baselineRow.issue_types)
+    $baselineMissingDescription = -not [bool]$baselineRow.has_description
+  }
+
+  $rowBlockers = @($issueTypes | Where-Object {
+    ($blockingIssues -contains $_) -and ($baselineIssueTypes -notcontains $_)
+  })
+  $rowWarnings = @($issueTypes | Where-Object {
+    ($warningIssues -contains $_) -and ($baselineIssueTypes -notcontains $_)
+  })
 
   if ((-not [bool]$row.has_description) -and (-not [bool]$row.draft)) {
     if ($RequireDescription) {
       $rowBlockers += 'missing_description'
-    } else {
+    } elseif (-not $baselineMissingDescription) {
       $rowWarnings += 'missing_description'
     }
   }

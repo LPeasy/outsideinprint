@@ -5,6 +5,7 @@ draft: false
 slug: "you-cant-outrun-the-calculator"
 section_label: "Essay"
 subtitle: "SuperHuman Coding Agents in 2025? Altman’s Law in real time"
+description: "In a recent discussion, Sam Altman, CEO of OpenAI, laid out a trajectory that should give every software engineer pause. Just a few years ago, OpenAI’s codin..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/you-cant-outrun-the-calculator.pdf"
@@ -119,5 +120,6 @@ This story is published on Generative AI. Connect with us on LinkedIn and follow
 Subscribe to our newsletter and YouTube channel to stay updated with the latest news and updates on generative AI. Let’s shape the future of AI together!
 
 ![](https://cdn-images-1.medium.com/max/800/0*DEew_pUlSh4iztTp.png)
+
 
 

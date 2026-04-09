@@ -29,6 +29,16 @@
 
 {{- $description := partial "metadata_description.html" . -}}
 {{- $image := partial "metadata_image.html" . -}}
+{{- $author := partial "authors/resolve.html" (dict
+  "page" .
+  "fallbackDefault" (or $route.is_article_like (eq $route.name "author"))
+) -}}
+{{- $authorName := "" -}}
+{{- $authorURL := "" -}}
+{{- with $author.primary -}}
+  {{- $authorName = .name -}}
+  {{- $authorURL = .url | default "" -}}
+{{- end -}}
 
 {{- $result := dict
   "route" $route
@@ -40,5 +50,8 @@
   "image" $image
   "canonical" .Permalink
   "robots" $policy.robots
+  "author" $author
+  "author_name" $authorName
+  "author_url" $authorURL
 -}}
 {{ return $result }}

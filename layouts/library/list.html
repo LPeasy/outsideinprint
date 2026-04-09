@@ -32,7 +32,7 @@
   ) }}
   <div class="library-search page-shell page-shell--feature">
     <label class="library-search-label" for="library-search">Search the library</label>
-    <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, and versions" autocomplete="off" spellcheck="false" />
+    <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, collections, and versions" autocomplete="off" spellcheck="false" />
   </div>
   <div id="library-search-empty" class="library-empty page-shell page-shell--feature" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or start with <a href="{{ "start-here/" | absURL }}">Start Here</a>.</div>
 
@@ -75,6 +75,32 @@
       var items = Array.prototype.slice.call(document.querySelectorAll('[data-library-item]'));
       var groups = Array.prototype.slice.call(document.querySelectorAll('[data-library-group]'));
       var empty = document.getElementById('library-search-empty');
+      var supportsUrl = typeof URL === 'function' && typeof window.history.replaceState === 'function';
+
+      function getCurrentQuery() {
+        if (!supportsUrl) return '';
+        try {
+          var url = new URL(window.location.href);
+          return (url.searchParams.get('q') || '').trim();
+        } catch (error) {
+          return '';
+        }
+      }
+
+      function syncQuery(query) {
+        if (!supportsUrl) return;
+        try {
+          var url = new URL(window.location.href);
+          if (query) {
+            url.searchParams.set('q', query);
+          } else {
+            url.searchParams.delete('q');
+          }
+          window.history.replaceState({}, '', url.toString());
+        } catch (error) {
+          return;
+        }
+      }
 
       function applyFilter() {
         var query = input.value.trim().toLowerCase();
@@ -97,7 +123,18 @@
         }
       }
 
-      input.addEventListener('input', applyFilter);
+      input.value = getCurrentQuery();
+      applyFilter();
+
+      input.addEventListener('input', function () {
+        syncQuery(input.value.trim());
+        applyFilter();
+      });
+
+      window.addEventListener('popstate', function () {
+        input.value = getCurrentQuery();
+        applyFilter();
+      });
     }());
   </script>
 {{ end }}

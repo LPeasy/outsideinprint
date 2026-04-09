@@ -5,6 +5,7 @@ draft: false
 slug: "synthetic-reasoning"
 section_label: "Essay"
 subtitle: "The Dawn of Self-Evolving AI"
+description: "The race to build the most powerful artificial intelligence is accelerating, and with it, the uneasy question of whether AI will remain aligned with human va..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/synthetic-reasoning.pdf"
@@ -95,3 +96,4 @@ Regulators, researchers, and industry leaders must cooperate on robust AI govern
 - “AI Alignment through Reinforcement Learning from Human Feedback: Challenges and Limitations.” arXiv, 2024, https://arxiv.org/html/2406.18346v1.
 - Gao, Leo, et al. “Scaling Laws for Reward Model Overoptimization.” arXiv, 2022, https://arxiv.org/abs/2210.10760.
 - Anthropic & Redwood Research. “Exclusive: New Research Shows AI Strategically Lying.” Time, 2024, https://time.com/7202784/ai-research-strategic-lying/.
+

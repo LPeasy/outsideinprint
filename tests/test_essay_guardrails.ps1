@@ -118,6 +118,11 @@ This paragraph is fine.
   Assert-True ($strictWarningExit -eq 1) "Expected StrictWarnings to fail warning-only essays."
   Assert-True ($strictWarningOutput.Contains("StrictWarnings")) "Expected strict warning output to explain the failure mode."
 
+  $requireDescriptionOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" -RequireDescription 2>&1 | Out-String
+  $requireDescriptionExit = $LASTEXITCODE
+  Assert-True ($requireDescriptionExit -eq 1) "Expected RequireDescription to fail essays missing explicit descriptions."
+  Assert-True ($requireDescriptionOutput.Contains("missing_description")) "Expected RequireDescription output to include missing_description as a blocker."
+
   $cleanOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" 2>&1 | Out-String
   $cleanExit = $LASTEXITCODE
   Assert-True ($cleanExit -eq 0) "Expected clean essay to pass the guardrail check."

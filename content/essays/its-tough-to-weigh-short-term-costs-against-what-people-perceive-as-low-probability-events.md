@@ -5,6 +5,7 @@ draft: false
 slug: "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events"
 section_label: "Essay"
 subtitle: ""
+description: "It’s tough to weigh short term costs against what people perceive as low probability events"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.pdf"
@@ -108,4 +109,5 @@ Tragic.
 </div>
 
 </div>
+
 

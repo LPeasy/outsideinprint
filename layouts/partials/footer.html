@@ -1,3 +1,15 @@
 <footer class="footer site-footer">
-  <div>&copy; {{ now.Format "2006" }} Outside In Print</div>
+  <div class="site-footer__inner page-shell page-shell--wide">
+    <div class="site-footer__brand">
+      <p class="site-footer__title">&copy; {{ now.Format "2006" }} Outside In Print</p>
+      <p class="site-footer__description">Outside In Print publishes stable, citable web editions and essays by Robert V. Ussley.</p>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <a href="{{ "about/" | absURL }}">About</a>
+      <a href="{{ "authors/robert-v-ussley/" | absURL }}">Author</a>
+      <a href="{{ "collections/" | absURL }}">Collections</a>
+      <a href="{{ "library/" | absURL }}">Library</a>
+      <a href="{{ "start-here/" | absURL }}">Start Here</a>
+    </nav>
+  </div>
 </footer>

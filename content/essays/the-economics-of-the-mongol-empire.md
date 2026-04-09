@@ -5,6 +5,7 @@ draft: false
 slug: "the-economics-of-the-mongol-empire"
 section_label: "Essay"
 subtitle: "How Genghis Khan Created the First Global Trade Network"
+description: "History often remembers Genghis Khan as a ruthless conqueror, but his most lasting impact wasn’t military it was economic.The Mongol Empire, at its height, s..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-economics-of-the-mongol-empire.pdf"
@@ -174,4 +175,5 @@ and subscribe to my publication The Balance Sheet
 
 The Balance Sheet
 The Balance Sheet breaks down economics, policy, and current events with clarity and fairness. No spin — just real…medium.comThanks for reading!
+
 

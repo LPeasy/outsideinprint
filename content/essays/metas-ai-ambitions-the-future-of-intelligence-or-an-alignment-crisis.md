@@ -5,10 +5,12 @@ draft: false
 slug: "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis"
 section_label: "Essay"
 subtitle: "Mark Zuckerberg’s latest earnings call was more than a routine financial update — it was a declaration of intent. Meta is staking its claim…"
+description: "Mark Zuckerberg’s latest earnings call was more than a routine financial update — it was a declaration of intent. Meta is staking its claim as a leader in ar..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.pdf"
-featured: false
+featured: false
+
 collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis-3b932edd509e"
@@ -74,5 +76,6 @@ As AI systems become more autonomous, the lines between tools and decision-maker
 Author’s Note:
 
 Do you think Meta’s AI ambitions are advancing too fast? Are we prioritizing innovation over safety? Share your thoughts in the comments below — I’d love to hear your perspective!
+
 
 

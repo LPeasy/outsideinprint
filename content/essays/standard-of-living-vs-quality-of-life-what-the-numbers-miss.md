@@ -5,6 +5,7 @@ draft: false
 slug: "standard-of-living-vs-quality-of-life-what-the-numbers-miss"
 section_label: "Essay"
 subtitle: "GDP is UP… So Why Does Life Still Feel So Hard?"
+description: "“Raising the standard of living” might be the most recycled promise in modern American politics"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/standard-of-living-vs-quality-of-life-what-the-numbers-miss.pdf"
@@ -366,3 +367,4 @@ Just real stories, real charts, and real context.
 - [OECD Better Life Index](https://www.oecdbetterlifeindex.org/)
 
 - [Genuine Progress Indicator - Gross National Happiness USA](https://gnhusa.org/genuine-progress-indicator/)
+

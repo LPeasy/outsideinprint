@@ -5,6 +5,7 @@ draft: false
 slug: "what-is-risk-a-four-part-framework"
 section_label: "Essay"
 subtitle: "A practical way to use hazard, pathway, consequence, and uncertainty"
+description: "In everyday choices and technical work, four key terms help us define and articulate “risk.”. Hazard names the source of potential harm, pathway describes ho..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/what-is-risk-a-four-part-framework.pdf"
@@ -472,3 +473,4 @@ identify uncertainties ~**
 This is the first in a long series of essays that will cover Risk
 Management and Risk Analysis from top to bottom. Come along with me as I
 learn about the exciting, emerging science of risk.
+

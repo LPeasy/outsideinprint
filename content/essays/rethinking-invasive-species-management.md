@@ -5,6 +5,7 @@ draft: false
 slug: "rethinking-invasive-species-management"
 section_label: "Essay"
 subtitle: "Why Florida keeps spending millions managing invasives without much to show for it"
+description: "Florida spends millions fighting species it will never get rid of — while the ones it could stop slip right past"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/rethinking-invasive-species-management.pdf"
@@ -514,3 +515,4 @@ And that’s the future of invasive species management.
 
 > We can keep pushing boulders,\
 > or we can act now before they start rolling down the hill.
+

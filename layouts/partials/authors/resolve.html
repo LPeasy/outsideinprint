@@ -1,0 +1,109 @@
+{{- $page := .page | default . -}}
+{{- $fallbackDefault := default false .fallbackDefault -}}
+{{- $authorsData := site.Data.authors.authors | default dict -}}
+{{- $authorKeys := slice -}}
+
+{{- with $page.Params.author_id -}}
+  {{- $authorKeys = $authorKeys | append (printf "%v" .) -}}
+{{- end -}}
+
+{{- if and (eq (len $authorKeys) 0) $page.Params.authors -}}
+  {{- range $page.Params.authors -}}
+    {{- $authorKeys = $authorKeys | append (printf "%v" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and (eq (len $authorKeys) 0) $page.Params.author -}}
+  {{- $authorKeys = $authorKeys | append (printf "%v" $page.Params.author) -}}
+{{- end -}}
+
+{{- if and (eq (len $authorKeys) 0) $fallbackDefault -}}
+  {{- with site.Data.organization.default_author_id -}}
+    {{- $authorKeys = $authorKeys | append (printf "%v" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $entries := slice -}}
+
+{{- range $authorKey := $authorKeys -}}
+  {{- $lookupKey := lower $authorKey -}}
+  {{- $entry := false -}}
+  {{- if isset $authorsData $lookupKey -}}
+    {{- $entry = index $authorsData $lookupKey -}}
+  {{- end -}}
+
+  {{- $nodeID := printf "%s#author-%s" (strings.TrimSuffix "/" site.BaseURL) ($lookupKey | urlize) -}}
+  {{- $authorType := "Person" -}}
+  {{- $name := $authorKey -}}
+  {{- $url := "" -}}
+  {{- $relPermalink := "" -}}
+  {{- $sameAs := slice -}}
+  {{- $description := "" -}}
+  {{- $focus := "" -}}
+  {{- $bio := "" -}}
+  {{- $parentOrganization := false -}}
+
+  {{- if $entry -}}
+    {{- $authorType = $entry.type | default "Person" -}}
+    {{- $name = $entry.name | default $authorKey -}}
+    {{- $description = $entry.description | default "" -}}
+    {{- $focus = $entry.focus | default "" -}}
+    {{- $bio = $entry.bio | default "" -}}
+    {{- $parentOrganization = $entry.parent_organization | default false -}}
+
+    {{- with $entry.same_as -}}
+      {{- $sameAs = . -}}
+    {{- end -}}
+
+    {{- with $entry.path -}}
+      {{- $pathValue := printf "%v" . -}}
+      {{- with site.GetPage $pathValue -}}
+        {{- $url = .Permalink -}}
+        {{- $relPermalink = .RelPermalink -}}
+      {{- else -}}
+        {{- $url = $pathValue | relURL | absURL -}}
+        {{- $relPermalink = $pathValue | relURL -}}
+      {{- end -}}
+    {{- else -}}
+      {{- with $entry.url -}}
+        {{- $rawURL := printf "%v" . -}}
+        {{- if or (hasPrefix $rawURL "http://") (hasPrefix $rawURL "https://") -}}
+          {{- $url = $rawURL -}}
+        {{- else -}}
+          {{- $url = $rawURL | relURL | absURL -}}
+          {{- $relPermalink = $rawURL | relURL -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $entries = $entries | append (dict
+    "key" $lookupKey
+    "node_id" $nodeID
+    "type" $authorType
+    "name" $name
+    "url" $url
+    "rel_permalink" $relPermalink
+    "same_as" $sameAs
+    "description" $description
+    "focus" $focus
+    "bio" $bio
+    "parent_organization" $parentOrganization
+  ) -}}
+{{- end -}}
+
+{{- $primary := false -}}
+{{- if gt (len $entries) 0 -}}
+  {{- $primary = index $entries 0 -}}
+{{- end -}}
+
+{{- $names := slice -}}
+{{- range $entries -}}
+  {{- $names = $names | append .name -}}
+{{- end -}}
+
+{{ return (dict
+  "entries" $entries
+  "primary" $primary
+  "names" $names
+) }}

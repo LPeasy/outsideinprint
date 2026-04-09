@@ -5,6 +5,7 @@ draft: false
 slug: "mcdonalds-faces-week-long-boycott-june-24-2025"
 section_label: "Essay"
 subtitle: "Why? What is going on with the McDonald’s Boycott?"
+description: "Created by Author with ChatGPT. The People’s Union USA is urging a boycott of McDonald’s this week"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/mcdonalds-faces-week-long-boycott-june-24-2025.pdf"
@@ -125,3 +126,4 @@ of consumer activism** pushing back on major U.S. corporations:
 > Will McDonald’s reverse course — or dig in?
 
 > Will franchisees react if U.S. sales dip?
+

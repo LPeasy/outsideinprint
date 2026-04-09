@@ -5,11 +5,13 @@ draft: false
 slug: "beyond-moores-law"
 section_label: "Essay"
 subtitle: "Examining the Parallels Between Compute Power, Renewable Energy, and Battery Technology"
+description: "In our previous essay on Moore’s Law, we explored how the doubling of transistors every two years has driven unprecedented progress in computing power and sh..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/beyond-moores-law.pdf"
 featured: false
-homepage_rank: 4
+homepage_rank: 4
+
 collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/beyond-moores-law-b7838e31b905"
@@ -215,5 +217,6 @@ A study of China’s dominance in renewable energy manufacturing.
 Read the report by the Center for Strategic and International Studies:
 
 https://www.csis.org/renewable-supply-chain-report
+
 
 

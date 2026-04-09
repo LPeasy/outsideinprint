@@ -5,6 +5,7 @@ draft: false
 slug: "inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up"
 section_label: "Essay"
 subtitle: "Politicians blame deficits — but what if the real culprit is the banking system?"
+description: "Inflation dominates headlines, but most people misunderstand what’s really driving it. Turn on any financial news channel, and you’ll hear it"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.pdf"
@@ -223,4 +224,5 @@ Supply- and Demand-Driven PCE Inflation updates data on the contributions to per
 CBO regularly publishes data to accompany some of its key reports. These data have been published in the Budget and…www.cbo.govFederal Funds Effective Rate
 View data of the Effective Federal Funds Rate, or the interest rate depository institutions charge each other for…fred.stlouisfed.orgEconomic Research Data
 The Federal Reserve Board of Governors in Washington DC.www.federalreserve.gov
+
 

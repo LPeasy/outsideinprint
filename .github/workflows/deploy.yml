@@ -64,10 +64,10 @@ jobs:
           }
 
           if ([string]::IsNullOrWhiteSpace($base)) {
-            ./scripts/check_essay_guardrails.ps1
+            ./scripts/check_essay_guardrails.ps1 -RequireDescription
           }
           else {
-            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}"
+            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}" -RequireDescription
           }
 
   build:
@@ -142,6 +142,18 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Wait for Pages propagation
+        shell: bash
+        run: sleep 20
+
+      - name: Live SEO Smoke Test
+        shell: pwsh
+        run: |
+          ./tests/test_live_seo_smoke.ps1 -BaseUrl "${{ steps.deployment.outputs.page_url }}"

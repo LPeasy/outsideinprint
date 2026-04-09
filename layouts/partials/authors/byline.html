@@ -1,0 +1,17 @@
+{{- $page := .page | default . -}}
+{{- $author := .author | default (partial "authors/resolve.html" (dict
+  "page" $page
+  "fallbackDefault" true
+)) -}}
+{{- with $author.primary -}}
+  <p class="piece-byline">
+    <span class="piece-byline__label">By</span>
+    {{- if .rel_permalink -}}
+      <a href="{{ .rel_permalink }}">{{ .name }}</a>
+    {{- else if .url -}}
+      <a href="{{ .url }}">{{ .name }}</a>
+    {{- else -}}
+      <span>{{ .name }}</span>
+    {{- end -}}
+  </p>
+{{- end -}}

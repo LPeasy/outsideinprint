@@ -9,6 +9,7 @@ const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
 const homeRecentWork = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
+const footer = fs.readFileSync(path.resolve("layouts/partials/footer.html"), "utf8");
 const startHereTemplate = fs.readFileSync(path.resolve("layouts/start-here/single.html"), "utf8");
 const startHereContent = fs.readFileSync(path.resolve("content/start-here/index.md"), "utf8");
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
@@ -35,6 +36,14 @@ test("dialogues rename is wired through the section landing and start-here promp
 test("homepage no longer promotes the retired books section", () => {
   assert.doesNotMatch(homepage, /site-card--books/);
   assert.doesNotMatch(homepage, />Books</);
+});
+
+test("footer exposes persistent links to the imprint and author surfaces", () => {
+  assert.match(footer, /aria-label="Footer"/);
+  assert.match(footer, /href="\{\{ "about\/" \| absURL \}\}">About</);
+  assert.match(footer, /href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">Author</);
+  assert.match(footer, /href="\{\{ "library\/" \| absURL \}\}">Library</);
+  assert.match(footer, /Robert V\. Ussley/);
 });
 
 test("homepage cards keep only the main titles and use the shared grid flow", () => {

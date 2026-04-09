@@ -5,6 +5,7 @@ draft: false
 slug: "declaring-equality"
 section_label: "Essay"
 subtitle: "Biden claims that the ERA is the law of the land."
+description: "President Joe Biden’s recent declaration of the Equal Rights Amendment (ERA) as “the law of the land” has ignited a profound debate at the crossroads of cons..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/declaring-equality.pdf"
@@ -74,5 +75,6 @@ The ERA’s complex journey offers valuable insights into the challenges of syst
 President Biden’s declaration of the ERA as “the law of the land” is a bold assertion of America’s commitment to gender equality, but it also illuminates the complexities of constitutional change. The ERA’s legal challenges and procedural ambiguities reflect the inherent difficulties of enacting systemic reform in a deeply divided society.
 
 While symbolic gestures can inspire hope and mobilize action, they must be coupled with substantive efforts to navigate the intricate processes of law and governance. The ERA’s ultimate fate will depend on the collective will of policymakers, activists, and the public to bridge the gap between aspiration and reality, ensuring that the promise of equality becomes a tangible legacy for future generations.
+
 
 

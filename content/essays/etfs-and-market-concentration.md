@@ -5,6 +5,7 @@ draft: false
 slug: "etfs-and-market-concentration"
 section_label: "Essay"
 subtitle: "An Exploration"
+description: "ETFs, Passive Investing, and Market Concentration. I. Introduction: The Unintended Consequences of ETF Dominance"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/etfs-and-market-concentration.pdf"
@@ -106,4 +107,5 @@ V. Conclusion: Balancing Accessibility and Stability
 ETFs have fundamentally reshaped global markets, providing investors with unprecedented access to diversified portfolios while lowering costs. However, their dominance has also introduced systemic challenges, including market concentration, reduced price discovery, and heightened risk during downturns.
 
 As ETFs continue to grow, regulators, investors, and market participants must address their unintended consequences. Balancing the benefits of accessibility with the need for market efficiency and stability will require innovative thinking, active monitoring, and a renewed focus on the mechanisms that support healthy, inclusive markets.
+
 

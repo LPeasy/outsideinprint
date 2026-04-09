@@ -5,6 +5,7 @@ draft: false
 slug: "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go"
 section_label: "Essay"
 subtitle: "How your monthly budget can explain two core ideas from probability, risk, and economics ~"
+description: "Created by Author with GPT-4o. Then your rent payment drops, credit cards auto-draft, a couple of deliveries arrive at your doorstep, and by the time you che..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.pdf"
@@ -337,3 +338,4 @@ just textbook phrases ~ they’re habits of mind:
 And the next time you pull up your bank app and wonder where your
 paycheck went, you’ll have more than just a shrug. You’ll have a clearly
 carved pie and a better shot at being honest with yourself.
+

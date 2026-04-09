@@ -5,6 +5,7 @@ draft: false
 slug: "the-risk-management-buffet"
 section_label: "Essay"
 subtitle: "Making Strategic Choices When Everything’s on the Table"
+description: "Imagine you’re at an American buffet something like Golden Corral. You walk in hungry, and you’re surrounded by endless options"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-risk-management-buffet.pdf"
@@ -170,3 +171,4 @@ see them bring out a tray of hot, steamin’ ’n’ crispy fried chicken.
 **Success isn’t sampling everything or eating as much as possible ~**
 
 #### **It’s knowing you made the best choices with what was on the table.**
+

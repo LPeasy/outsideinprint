@@ -5,10 +5,12 @@ draft: false
 slug: "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter"
 section_label: "Essay"
 subtitle: "If we’re living in a simulation, Nietzsche has one question: So what?"
+description: "What if everything you’ve ever experienced — every sight, every sound, every emotion — was nothing more than an illusion? What if you were nothing more than..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter.pdf"
-featured: false
+featured: false
+
 collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter-b7e89dcdf90c"
@@ -175,5 +177,6 @@ Lawton is an economist who writes about markets, policy, and the forces shaping 
 When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
 
 Read more of his work on Medium.
+
 
 

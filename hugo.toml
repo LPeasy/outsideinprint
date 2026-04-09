@@ -21,7 +21,7 @@ collections = "/collections/:slug/"
     getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^GOATCOUNTER_']
 
 [params.homepage]
-imprint_statement = "Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records."
+imprint_statement = "Outside In Print publishes essays, dialogues, reported case studies, and working papers in stable, citable web editions organized by collections, archive lanes, and the full library."
 
 [params.newsletter]
 provider = "buttondown"

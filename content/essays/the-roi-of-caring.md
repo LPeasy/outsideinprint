@@ -5,6 +5,7 @@ draft: false
 slug: "the-roi-of-caring"
 section_label: "Essay"
 subtitle: "A logical case for why giving a damn makes everything better"
+description: "You can outsource labor, strategy, even creativity — but you can’t outsource skin in the game. Making a conscious choice to care — about the people, events..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-roi-of-caring.pdf"
@@ -93,4 +94,5 @@ It’s not just about heart; it’s about leverage.Because if you want better ou
 just this simple question:
 
 Do you care?If you found this useful, follow me here on Medium for more clear thinking on strategy, leadership, and systems that work.
+
 

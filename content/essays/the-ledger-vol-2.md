@@ -5,6 +5,7 @@ draft: false
 slug: "the-ledger-vol-2"
 section_label: "Newsletter"
 subtitle: "Floods, Flashpoints, and Florida’s Wild Side"
+description: "The Ledger: A Balance Sheet Joint. July was dominated by one story: the July 4 flood on the Guadalupe River that struck Camp Mystic"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-ledger-vol-2.pdf"
@@ -129,3 +130,4 @@ and most effective solutions are often the ones we act on too late.
 > ***and I hope one or two of these pieces spark something for you.***
 
 > ***~ L P***
+

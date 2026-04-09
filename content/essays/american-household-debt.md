@@ -5,6 +5,7 @@ draft: false
 slug: "american-household-debt"
 section_label: "Essay"
 subtitle: "December 9th, 2024"
+description: "As of the third quarter of 2024, U.S. household debt reached a historic $17.94 trillion, reflecting a 0.8% increase from the previous quarter. This debt span..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/american-household-debt.pdf"
@@ -117,4 +118,5 @@ VI. Conclusion: A Complex but Resilient Debt Landscape
 U.S. household debt reflects the broader dynamics of the American economy: its capacity to drive growth and its potential to exacerbate financial pressures. While rising incomes and declining student loan debt offer signs of progress, sector-specific vulnerabilities — such as rising auto loan delinquencies and housing affordability challenges — highlight areas of concern.
 
 The Federal Reserve’s upcoming monetary policy decisions will shape the household debt landscape, influencing borrowing costs and financial stability. The resilience of American households in the face of these evolving economic challenges will depend on the balance between inflation, wage growth, and interest rate adjustments.
+
 

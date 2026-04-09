@@ -5,6 +5,7 @@ draft: false
 slug: "the-ledger-vol-3"
 section_label: "Newsletter"
 subtitle: "100 Essays on Medium, How Hawai’i became America’s Largest Aircraft Carrier, and a new series on Risk Management ~"
+description: "The Ledger: A Balance Sheet Joint. This month brought a big first for the publication our very first contributing writer joined the fold"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-ledger-vol-3.pdf"
@@ -152,3 +153,4 @@ and willing to explore almost any topic.
 essays.
 
 > ~ LP
+

@@ -5,6 +5,7 @@ draft: false
 slug: "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe"
 section_label: "Essay"
 subtitle: "Should you read this viral book? (Yes)"
+description: "Should you read this viral book?. SPOILER ALERT!!!!Imagine waking up to find the laws of physics have changed overnight.Scientists scramble for answers. Real..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.pdf"
@@ -131,5 +132,6 @@ Get the Book
 
 The Three-Body Problem book by Liu Cixin
 Buy a cheap copy of The Three-Body Problem book by Liu Cixin. The inspiration for the Netflix series 3 Body Problem…www.thriftbooks.com
+
 
 

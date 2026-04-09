@@ -5,6 +5,7 @@ draft: false
 slug: "public-vs-private-pay-who-really-earns-more"
 section_label: "Essay"
 subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
+description: "The custodian at your local public school probably makes more per hour, with benefits than the guy who just cleaned your hotel room"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/public-vs-private-pay-who-really-earns-more.pdf"
@@ -292,3 +293,4 @@ The only real answer is:
   [https://www.cbo.gov/](https://www.cbo.gov/)
 - Economic Policy Institute →
   [https://www.epi.org/](https://www.epi.org/)
+

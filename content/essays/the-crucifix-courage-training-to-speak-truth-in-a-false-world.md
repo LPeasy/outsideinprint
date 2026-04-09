@@ -5,6 +5,7 @@ draft: false
 slug: "the-crucifix-courage-training-to-speak-truth-in-a-false-world"
 section_label: "Essay"
 subtitle: "The Christian image does something to the human nervous system ~"
+description: "Walk into a hospital, a church, or your grandmother’s living room and you might see it: a crucifix on the wall"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-crucifix-courage-training-to-speak-truth-in-a-false-world.pdf"
@@ -317,3 +318,4 @@ Because the crucifix doesn’t merely say, “You are forgiven.”
 It says, “This is what it looks like to refuse the lie. This is what it
 costs.\
 This is what love does. Now go, and speak truth.”
+

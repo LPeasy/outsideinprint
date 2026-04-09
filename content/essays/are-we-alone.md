@@ -5,6 +5,7 @@ draft: false
 slug: "are-we-alone"
 section_label: "Essay"
 subtitle: "The psychological connection between belief in evolution and aliens"
+description: "More Americans believe in intelligent extraterrestrial life than in human evolution — a contradiction that reveals the complexity of human belief systems. Wh..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/are-we-alone.pdf"
@@ -145,5 +146,6 @@ On June 9, 2022, NASA announced that the agency is commissioning a study team to
 The originators of the theory, Peter Ward and Donald Brownlee, explain to Astronomy why they think the development of…www.astronomy.comFermi Paradox: Where Are the Aliens?
 The Fermi Paradox seeks to answer the question of where the aliens are. After all, the universe is incredibly old, big…www.space.comAncient astronauts - Wikipedia
 Paleocontact or "ancient astronaut" narratives first appeared in the early science fiction of the late 19th and early…en.m.wikipedia.org
+
 
 

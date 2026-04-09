@@ -5,6 +5,7 @@ draft: false
 slug: "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter"
 section_label: "Essay"
 subtitle: "Inside the life of Robert Prevost, the Augustinian priest who made history"
+description: "He grew up in a devout Catholic household in Dolton, a working-class suburb south of the city. His parents, Louis and Mildred Prevost , were both educators d..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.pdf"
@@ -266,3 +267,4 @@ prisoners,**
 ### *Still have questions?*
 
 #### *Read our follow-up:* [*8 Big Questions About Pope Leo XIV*](https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708)
+

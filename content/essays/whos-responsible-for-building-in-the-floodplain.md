@@ -5,6 +5,7 @@ draft: false
 slug: "whos-responsible-for-building-in-the-floodplain"
 section_label: "Essay"
 subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
+description: "The United States just doesn’t work like that. This essay looks at what the federal government can (and can’t) do to prevent tragedies like this one. We exam..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/whos-responsible-for-building-in-the-floodplain.pdf"
@@ -407,3 +408,4 @@ The parents?
 > [Essay #2](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8): The Water?s Rising
 >
 > [Essay #3](https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a): Flash Flood Alley
+

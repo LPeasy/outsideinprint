@@ -5,6 +5,7 @@ draft: false
 slug: "what-happened-at-camp-mystic"
 section_label: "Essay"
 subtitle: "A Primer on the July 4, 2025 Texas Flood Tragedy"
+description: "On the night of July 4th, while fireworks lit up the Texas Hill Country, a dangerous storm stalled over the Guadalupe River Basin"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
@@ -187,3 +188,4 @@ information you might be interested in.
 - [The Water’s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
 
 > Thanks for reading!
+

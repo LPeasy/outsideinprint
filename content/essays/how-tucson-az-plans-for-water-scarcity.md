@@ -5,6 +5,7 @@ draft: false
 slug: "how-tucson-az-plans-for-water-scarcity"
 section_label: "Essay"
 subtitle: "Four Ways to Manage Risk in a Desert City ~ and how tucson plans to water its lawns for the next century"
+description: "For decades it pumped groundwater faster than the aquifer could recharge, leading to shortages and sinkholes"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/how-tucson-az-plans-for-water-scarcity.pdf"
@@ -293,3 +294,4 @@ might successfully approach long-term uncertainty in the desert.**
   an Uncertain Future.”
 - Central Arizona Project (CAP) public data and
   history.
+

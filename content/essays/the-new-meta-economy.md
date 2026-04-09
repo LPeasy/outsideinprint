@@ -5,6 +5,7 @@ draft: false
 slug: "the-new-meta-economy"
 section_label: "Essay"
 subtitle: "Ads, Bots, and the End of Work: Meta’s Q1 Earnings Report Explained"
+description: "Glasses that see what you see. Bots that sell what you want. Welcome to The New Meta Economy"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-new-meta-economy.pdf"
@@ -131,4 +132,5 @@ They’ll sell the economy back to itself — one personalized prompt at a t
 ![](https://cdn-images-1.medium.com/max/800/0*8A80GHAevkNzgLCt)
 
 Photo by Unseen Studio on Unsplash
+
 

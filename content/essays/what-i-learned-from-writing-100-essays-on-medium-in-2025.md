@@ -5,6 +5,7 @@ draft: false
 slug: "what-i-learned-from-writing-100-essays-on-medium-in-2025"
 section_label: "Essay"
 subtitle: "From zero followers to breakout stories ~ one writer’s honest experience"
+description: "The internet is noisy with hot takes and thin on verifiable facts. Sometime around December of 2024, I realized that quickly answering a question on the inte..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/what-i-learned-from-writing-100-essays-on-medium-in-2025.pdf"
@@ -363,3 +364,4 @@ Pick a question that you’ve been asking yourself and write the clearest
 answer you can. **Don’t worry about it being perfect ~**
 
 > It never is.
+

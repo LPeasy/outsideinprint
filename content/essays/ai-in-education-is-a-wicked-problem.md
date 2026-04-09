@@ -5,6 +5,7 @@ draft: false
 slug: "ai-in-education-is-a-wicked-problem"
 section_label: "Essay"
 subtitle: "~ And Why We Can’t Figure it Out"
+description: "Control is impossible when everyone depends on the machine. Schools can’t control AI misuse because everyone depends on it"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/ai-in-education-is-a-wicked-problem.pdf"
@@ -200,3 +201,4 @@ reasoning, or collaboration.
 **If we don’t like what we see, *maybe the issue isn’t the machine ~***
 
 > maybe it’s that we stopped thinking for ourselves.
+

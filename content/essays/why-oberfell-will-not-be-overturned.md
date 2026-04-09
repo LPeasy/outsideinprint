@@ -5,6 +5,7 @@ draft: false
 slug: "why-oberfell-will-not-be-overturned"
 section_label: "Essay"
 subtitle: "Marriage is a Fundamental Right"
+description: "Why Obergefell v. Hodges Is Unlikely to Be Overturned by the Conservative Supreme Court. In light of the Supreme Court’s recent decision in Dobbs v. Jackson..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/why-oberfell-will-not-be-overturned.pdf"
@@ -87,4 +88,5 @@ Conclusion
 While the overturning of Roe v. Wade in Dobbs has fueled speculation about the fate of other substantive due process cases, Obergefell v. Hodges is unlikely to face the same fate. Unlike Roe, Obergefell rests on a long-recognized fundamental right — the right to marry — and is further strengthened by its reliance on both substantive due process and the Equal Protection Clause. Additionally, Obergefell enjoys overwhelming public support, with a majority of Americans embracing marriage equality as a settled part of modern life.
 
 The Supreme Court’s cautious approach to LGBTQ+ rights post-Dobbs, as demonstrated in 303 Creative LLC v. Elenis, suggests a preference for resolving conflicts at the margins rather than dismantling core precedents like Obergefell. By focusing on balancing competing constitutional rights, the Court avoids the widespread legal and societal disruption that would follow a reversal of marriage equality. In a legal and cultural landscape where same-sex marriage has become deeply entrenched, the decision appears secure for the foreseeable future.
+
 

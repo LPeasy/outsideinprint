@@ -5,6 +5,7 @@ draft: false
 slug: "the-undead-state"
 section_label: "Essay"
 subtitle: "Why Bureaucracy Refuses to Die"
+description: "This isn’t the first time a government has tried to dismantle itself. In 1995, after decades of declining relevance, the federal government abolished the Int..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-undead-state.pdf"
@@ -97,5 +98,6 @@ JAMES Q. WILSON During its first 150 years, the American republic was not though
 The Development of the Bureaucracywww.ushistory.orgThe Roots of American Bureaucracy, 1830-1900 - Harvard University Press
 William Nelson reinterprets nineteenth-century American history as a struggle between majority rule and minority rights.…www.hup.harvard.eduhttps://www.journals.uchicago.edu/doi/abs/10.2307/2130516Establishing And Implementing The President's "Department Of Government Efficiency"
 By the authority vested in me as President by the Constitution and the laws of the United States of America, it is…www.whitehouse.gov
+
 
 

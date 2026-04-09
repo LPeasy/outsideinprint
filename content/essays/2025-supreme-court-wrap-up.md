@@ -5,6 +5,7 @@ draft: false
 slug: "2025-supreme-court-wrap-up"
 section_label: "Essay"
 subtitle: "Final Rulings from the 2025 Term"
+description: "The U.S. Supreme Court ended its term last Friday, handing down rulings on four major cases that touch on the balance of power, civil rights, education, and..."
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/2025-supreme-court-wrap-up.pdf"
@@ -229,3 +230,4 @@ questions about racial representation in redistricting.**
 
 The case will return next term; **Louisiana’s current map remains** in
 use.
+
