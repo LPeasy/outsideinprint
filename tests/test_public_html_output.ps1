@@ -1073,7 +1073,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = "(?s)searchParams\\.get\\('q'\\).*searchParams\\.set\\('q', query\\)"
+    Pattern = '(?s)searchParams\.get\((?:"q"|''q'')\).*searchParams\.set\((?:"q"|''q''),\s*[^)]+\).*replaceState'
     Message = 'expected the library page to sync the search input with the q query parameter'
   },
   @{
