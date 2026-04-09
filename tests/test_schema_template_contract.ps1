@@ -6,6 +6,7 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $requiredFiles = @(
   'data/organization.yaml',
   'data/authors.yaml',
+  'layouts/partials/authors/directory.html',
   'layouts/partials/schema.html',
   'layouts/partials/schema/organization.html',
   'layouts/partials/schema/website.html',

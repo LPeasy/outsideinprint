@@ -40,6 +40,11 @@ jobs:
         run: |
           ./tests/test_schema_template_contract.ps1
 
+      - name: Test Author Directory Contract
+        shell: pwsh
+        run: |
+          ./tests/test_author_directory_contract.ps1
+
       - name: Test Indexation Policy Contract
         shell: pwsh
         run: |
@@ -123,10 +128,33 @@ jobs:
         run: |
           ./tests/write_public_build_manifest.ps1
 
+      - name: Test Public Route Smoke
+        shell: pwsh
+        run: |
+          ./tests/test_public_route_smoke.ps1
+
       - name: Test Public HTML Output
         shell: pwsh
         run: |
           ./tests/test_public_html_output.ps1 -RequireFreshBuild
+
+      - name: Show Public Route Debug
+        if: failure()
+        shell: pwsh
+        run: |
+          ./tests/show_public_route_debug.ps1
+
+      - name: Upload Public Route Debug Artifact
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-route-debug
+          if-no-files-found: warn
+          path: |
+            public/authors/**
+            public/about/**
+            public/random/**
+            public/.oip-build-manifest.json
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

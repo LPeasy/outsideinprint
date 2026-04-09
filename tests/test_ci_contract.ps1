@@ -7,9 +7,12 @@ $nvmrcPath = Join-Path $repoRoot ".nvmrc"
 $deployWorkflowPath = Join-Path $repoRoot ".github/workflows/deploy.yml"
 $dashboardWorkflowPath = Join-Path $repoRoot ".github/workflows/publish-dashboard.yml"
 $refreshWorkflowPath = Join-Path $repoRoot ".github/workflows/refresh-analytics.yml"
+$authorDirectoryContractPath = Join-Path $repoRoot "tests/test_author_directory_contract.ps1"
 $publicOutputHelperPath = Join-Path $repoRoot "tests/helpers/public_output_common.ps1"
+$publicRouteDebugPath = Join-Path $repoRoot "tests/show_public_route_debug.ps1"
 $publicManifestWriterPath = Join-Path $repoRoot "tests/write_public_build_manifest.ps1"
 $publicOutputTestPath = Join-Path $repoRoot "tests/test_public_html_output.ps1"
+$publicRouteSmokePath = Join-Path $repoRoot "tests/test_public_route_smoke.ps1"
 $legacyRenderContractPath = Join-Path $repoRoot "tests/test_legacy_render_contract.ps1"
 
 if (-not (Test-Path $packagePath -PathType Leaf)) {
@@ -20,7 +23,15 @@ if (-not (Test-Path $nvmrcPath -PathType Leaf)) {
   throw ".nvmrc is required so local and CI Node versions stay aligned."
 }
 
-foreach ($requiredValidationPath in @($publicOutputHelperPath, $publicManifestWriterPath, $publicOutputTestPath, $legacyRenderContractPath)) {
+foreach ($requiredValidationPath in @(
+  $authorDirectoryContractPath,
+  $publicOutputHelperPath,
+  $publicRouteDebugPath,
+  $publicManifestWriterPath,
+  $publicOutputTestPath,
+  $publicRouteSmokePath,
+  $legacyRenderContractPath
+)) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
     throw "Missing SEO validation helper: $requiredValidationPath"
   }
@@ -90,6 +101,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_schema_template_contract\.ps1") {
   throw "deploy.yml must run the schema template contract test."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_author_directory_contract\.ps1") {
+  throw "deploy.yml must run the author directory contract test."
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_indexation_policy_contract\.ps1") {
   throw "deploy.yml must run the indexation policy contract test."
 }
@@ -106,8 +121,41 @@ if ($deployWorkflow -notmatch "\.\/tests\/write_public_build_manifest\.ps1") {
   throw "deploy.yml must write a fresh-build manifest before running generated-output validation."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_public_route_smoke\.ps1") {
+  throw "deploy.yml must run the public route smoke test before generated-output validation."
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_public_html_output\.ps1\s+-RequireFreshBuild") {
   throw "deploy.yml must run the generated-output regression test with -RequireFreshBuild."
+}
+
+$publicRouteSmokeIndex = $deployWorkflow.IndexOf("./tests/test_public_route_smoke.ps1")
+$publicHtmlOutputIndex = $deployWorkflow.IndexOf("./tests/test_public_html_output.ps1 -RequireFreshBuild")
+if ($publicRouteSmokeIndex -lt 0 -or $publicHtmlOutputIndex -lt 0 -or $publicRouteSmokeIndex -gt $publicHtmlOutputIndex) {
+  throw "deploy.yml must run the public route smoke test before the full generated-output regression test."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/show_public_route_debug\.ps1") {
+  throw "deploy.yml must expose a failure-only public route debug step."
+}
+
+if ($deployWorkflow -notmatch "actions\/upload-artifact@v4") {
+  throw "deploy.yml must upload a failure-only public route debug artifact."
+}
+
+foreach ($requiredDebugPath in @(
+  'public/authors/**',
+  'public/about/**',
+  'public/random/**',
+  'public/.oip-build-manifest.json'
+)) {
+  if ($deployWorkflow -notmatch [regex]::Escape($requiredDebugPath)) {
+    throw "deploy.yml must include '$requiredDebugPath' in the failure-only public route debug artifact."
+  }
+}
+
+if ($deployWorkflow -notmatch 'if:\s*failure\(\)') {
+  throw "deploy.yml must keep the public route debug steps failure-only."
 }
 
 if ($deployWorkflow -notmatch "\.\/scripts\/check_essay_guardrails\.ps1") {

@@ -1,0 +1,48 @@
+{{ $authorPages := sort .RegularPages "Title" "asc" }}
+
+<article class="profile-page profile-page--authors">
+  <header class="page-header page-shell page-shell--wide">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    {{ if gt (len $authorPages) 0 }}<p class="page-intro">{{ len $authorPages }} author page{{ if ne (len $authorPages) 1 }}s{{ end }} in the current directory.</p>{{ end }}
+  </header>
+
+  {{ with .Content }}
+    <div class="piece-body page-shell page-shell--reading">
+      {{ . }}
+    </div>
+  {{ end }}
+
+  <section class="page-shell page-shell--reading" aria-labelledby="authors-directory-title">
+    <h2 id="authors-directory-title" class="list-title">Author Directory</h2>
+    {{ if gt (len $authorPages) 0 }}
+      {{ range $authorPages }}
+        {{ $authorPage := . }}
+        {{ $resolvedAuthor := partial "authors/resolve.html" (dict "page" $authorPage "fallbackDefault" true) }}
+        {{ with $resolvedAuthor.primary }}
+          <article class="author-note">
+            <div class="author-note__eyebrow">Author</div>
+            <h3 class="author-note__title"><a href="{{ $authorPage.RelPermalink }}">{{ .name }}</a></h3>
+            {{ with .bio }}
+              <p class="author-note__bio">{{ . }}</p>
+            {{ end }}
+            {{ with .focus }}
+              <p class="author-note__focus">{{ . }}</p>
+            {{ end }}
+            <p class="author-note__link"><a href="{{ $authorPage.RelPermalink }}">View author archive</a></p>
+          </article>
+        {{ else }}
+          <article class="item">
+            <div class="t"><a href="{{ $authorPage.RelPermalink }}">{{ $authorPage.Title }}</a></div>
+            {{ with $authorPage.Params.description }}<div class="m">{{ . }}</div>{{ end }}
+          </article>
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      <div class="item">
+        <div class="t">No author pages are published yet.</div>
+        <div class="m">The author directory is reserved for public byline archives.</div>
+      </div>
+    {{ end }}
+  </section>
+</article>
