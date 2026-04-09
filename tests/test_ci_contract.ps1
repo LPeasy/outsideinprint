@@ -194,6 +194,10 @@ if ($publicOutputTest -notmatch 'Skipping generated-output regression test') {
   throw "tests/test_public_html_output.ps1 must explain when generated-output validation is skipped outside a fresh build."
 }
 
+if ($publicOutputTest -notmatch 'requiredIndexationPages\.Contains\(\$relativePath\)') {
+  throw "tests/test_public_html_output.ps1 must load indexation coverage pages into the generated-output validation set."
+}
+
 $templateSyntaxGuardPaths = @(
   (Join-Path $repoRoot 'layouts/partials/article'),
   (Join-Path $repoRoot 'layouts/partials/discovery'),

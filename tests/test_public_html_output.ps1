@@ -493,6 +493,7 @@ foreach ($file in $htmlFiles) {
     $requiredSemanticPages.Contains($relativePath) -or
     ($optionalDefaultListPages -contains $relativePath) -or
     ($requiredImportedMediaPages -contains $relativePath) -or
+    $requiredIndexationPages.Contains($relativePath) -or
     $requiredMetadataPages.Contains($relativePath) -or
     $requiredStructuredDataPages.Contains($relativePath) -or
     ($requiredLegacyCleanupPages -contains $relativePath) -or
