@@ -344,7 +344,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/essays/biter-the-slang-word-that-hits/index.html' = @{
     Title = 'Biter'
-    Description = 'Biter delivers an accusation in a word. A copycat — someone who steals another person’s ideas, aesthetic, or work and passes it off as their own'
+    Description = "Biter delivers an accusation in a word. A copycat - someone who steals another person's ideas, aesthetic, or work and passes it off as their own."
     Canonical = 'https://outsideinprint.org/essays/biter-the-slang-word-that-hits/'
     OgType = 'article'
     AuthorMeta = 'Robert V. Ussley'
