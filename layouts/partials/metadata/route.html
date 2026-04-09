@@ -26,6 +26,14 @@
   {{- $name = "home" -}}
 {{- end -}}
 
+{{- if and (eq $name "page") $relPermalink (eq $relPermalink "/about/") -}}
+  {{- $name = "about" -}}
+{{- end -}}
+
+{{- if and (eq $name "page") (findRE "^/authors/[^/]+/$" $relPermalink) -}}
+  {{- $name = "author" -}}
+{{- end -}}
+
 {{- if and (eq $name "page") .IsPage (in (slice "essays" "syd-and-oliver" "working-papers") $section) -}}
   {{- $name = "article" -}}
   {{- $socialType = "article" -}}

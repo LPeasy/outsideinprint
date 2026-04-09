@@ -74,6 +74,14 @@ if ($routeHelper -notmatch '"social_type"') {
   throw 'Expected WS-01 route helper to remain available for schema routing.'
 }
 
+if ($routeHelper -notmatch [regex]::Escape('eq $relPermalink "/about/"')) {
+  throw 'Expected the route helper to classify /about/ explicitly for schema routing.'
+}
+
+if ($routeHelper -notmatch '\^/authors/\[\^/\]\+/\$') {
+  throw 'Expected the route helper to classify author profile URLs explicitly for schema routing.'
+}
+
 $websiteHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/website.html') -Raw
 if ($websiteHelper -notmatch 'SearchAction') {
   throw 'Expected schema/website.html to emit SearchAction metadata for the library route.'
@@ -83,6 +91,13 @@ $webpageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema
 foreach ($pageType in @('AboutPage', 'ProfilePage')) {
   if ($webpageHelper -notmatch $pageType) {
     throw "Expected schema/webpage.html to support $pageType."
+  }
+}
+
+$breadcrumbHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/breadcrumbs.html') -Raw
+foreach ($routeName in @('"about"', '"author"')) {
+  if ($breadcrumbHelper -notmatch [regex]::Escape($routeName)) {
+    throw "Expected schema/breadcrumbs.html to support route $routeName."
   }
 }
 

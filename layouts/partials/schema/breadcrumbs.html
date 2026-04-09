@@ -24,7 +24,15 @@
       ) -}}
     {{- end -}}
     {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
-  {{- else if or (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "start-here") (eq $meta.route.name "utility") (eq $meta.route.name "section-list") (eq $meta.route.name "page") -}}
+  {{- else if eq $meta.route.name "author" -}}
+    {{- with site.GetPage "/authors" -}}
+      {{- $items = $items | append (dict
+        "name" .Title
+        "url" .Permalink
+      ) -}}
+    {{- end -}}
+    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
+  {{- else if or (eq $meta.route.name "about") (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "start-here") (eq $meta.route.name "utility") (eq $meta.route.name "section-list") (eq $meta.route.name "page") -}}
     {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
   {{- end -}}
 
