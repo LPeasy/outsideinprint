@@ -6,6 +6,7 @@ import path from "node:path";
 const startHereTemplate = fs.readFileSync(path.resolve("layouts/start-here/single.html"), "utf8");
 const startHereContent = fs.readFileSync(path.resolve("content/start-here/index.md"), "utf8");
 const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
+const authorList = fs.readFileSync(path.resolve("layouts/authors/list.html"), "utf8");
 const authorSingle = fs.readFileSync(path.resolve("layouts/authors/single.html"), "utf8");
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
@@ -99,6 +100,9 @@ test("about and author pages own dedicated profile layouts and styling", () => {
   assert.match(aboutSingle, /class="profile-page profile-page--about"/);
   assert.match(aboutSingle, /id="about-highlights-title"/);
   assert.match(aboutSingle, /Meet the author/);
+  assert.match(authorList, /class="profile-page profile-page--authors"/);
+  assert.match(authorList, /id="authors-directory-title"/);
+  assert.match(authorList, /View author archive/);
   assert.match(authorSingle, /class="profile-page profile-page--author"/);
   assert.match(authorSingle, /Recent Essays/);
   assert.match(authorSingle, /Essay Archive/);
