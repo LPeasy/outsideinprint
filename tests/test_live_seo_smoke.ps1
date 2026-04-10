@@ -24,9 +24,9 @@ function Get-Page {
   return (Invoke-WebRequest -Uri $uri -MaximumRedirection 5).Content
 }
 
-$home = Get-Page '/'
-Assert-Match -Content $home -Pattern 'SearchAction' -Message 'Expected the homepage WebSite schema to expose SearchAction.'
-Assert-Match -Content $home -Pattern '/library/\?q=\{search_term_string\}' -Message 'Expected SearchAction to target the library query route.'
+$homePage = Get-Page '/'
+Assert-Match -Content $homePage -Pattern 'SearchAction' -Message 'Expected the homepage WebSite schema to expose SearchAction.'
+Assert-Match -Content $homePage -Pattern '/library/\?q=\{search_term_string\}' -Message 'Expected SearchAction to target the library query route.'
 
 $essay = Get-Page '/essays/the-risk-management-buffet/'
 Assert-Match -Content $essay -Pattern '<meta\s+name="author"\s+content="Robert V\. Ussley"' -Message 'Expected essay pages to emit meta author tags for Robert V. Ussley.'
@@ -35,7 +35,7 @@ Assert-Match -Content $essay -Pattern 'Robert V\. Ussley' -Message 'Expected ess
 
 $author = Get-Page '/authors/robert-v-ussley/'
 Assert-Match -Content $author -Pattern '"@type":"ProfilePage"' -Message 'Expected the author page to expose ProfilePage JSON-LD.'
-Assert-Match -Content $author -Pattern 'Essay Archive' -Message 'Expected the author page to expose the essay archive.'
+Assert-Match -Content $author -Pattern 'From the Archive' -Message 'Expected the author page to expose the archive section.'
 
 $about = Get-Page '/about/'
 Assert-Match -Content $about -Pattern '"@type":"AboutPage"' -Message 'Expected the about page to expose AboutPage JSON-LD.'
