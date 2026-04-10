@@ -661,6 +661,9 @@ try {
 
       $mediaResult = Localize-Media -Slug $slug -ImageUrls @($post.image_urls) -MediaRoot $MediaOut -Mode $Mode -DryRun:$DryRun
       foreach ($w in $mediaResult.warnings) { $warnings.Add($w) }
+      if ((-not $DryRun) -and $mediaResult.failed -gt 0) {
+        throw ("media_localization_incomplete:{0}:{1}" -f $slug, $mediaResult.failed)
+      }
       foreach ($img in $mediaResult.replacements.Keys) {
         $bodyHtml = $bodyHtml.Replace($img, [System.Net.WebUtility]::HtmlEncode($mediaResult.replacements[$img]))
       }

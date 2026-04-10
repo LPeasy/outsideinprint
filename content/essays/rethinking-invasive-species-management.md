@@ -17,7 +17,7 @@ medium_source_url: "https://medium.com/@lawtonperret/rethinking-invasive-species
 of — while the ones it could stop slip right past.***
 
 
-![](https://cdn-images-1.medium.com/max/800/1*tlPkpjfNhEiNjmVGIf9gSw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/b2abf9b790de4f5931aecbfc1efab23d8192a255108fbcd9e9204019fed1b173.svg)
 
 *Photo by [Michael Jerrard](https://www.wakingupwild.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -29,7 +29,7 @@ wrong step, and the apex of the Everglades might wrap around your leg.
 
 **Now picture something smaller.**
 
-![](https://cdn-images-1.medium.com/max/800/1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/765ce98cfda62fede58231f05cfacfb8070505720b50faad2647fd476ae53b36.svg)
 
 > Crested Floating Heart \| Source: iNaturalist
 
@@ -54,7 +54,7 @@ let’s take a minute to make sure we’re all talking about the same thing.
 
 #### **What Even *Is* an Invasive Species?**
 
-![](https://cdn-images-1.medium.com/max/800/1*QDDlXkevaEIjcSJIWXAkGw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/612a6b63d60dd5b00f8428877630e841846d2152083ffe5359c8ff57beaae510.svg)
 
 *Photo by Joshua J. Cotten on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -94,7 +94,7 @@ animals, or damages infrastructure, it crosses the line.
 
 #### **How Florida Became Invasive Ground Zero**
 
-![](https://cdn-images-1.medium.com/max/800/1*UfjpBpU4qI6UlnyWZH6-Hg@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/0ba6e760f5351babac78bbbad83b6a0d95a8ff8f569b0d3c5bbadf04c8477a9b.svg)
 
 *Photo by [Richard Sagredo](http://www.sagredophotography.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -130,7 +130,7 @@ invasive species could get in.
 
 **1. The Pet and Aquarium Trade**
 
-![](https://cdn-images-1.medium.com/max/800/1*6jWU3bdBvfmxfb_GC2p10g@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/07b23bbafdf202e686076e3281df54738326756ac40482a211fe64dbfdb741a3.svg)
 
 *Photo by Joshua J. Cotten on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -147,7 +147,7 @@ found a perfect home in the Everglades and started breeding.
 
 **2. Intentional Introductions**
 
-![](https://cdn-images-1.medium.com/max/800/1*dduNHtYNbK9RPrKRQCEmRA@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/876527525d914ed63271662972be423cec815233ea02584362a9ab90ce5fcaf9.svg)
 
 > Melaleuca Trees in South Florida \| Source: UF-IFAS
 
@@ -166,7 +166,7 @@ wetlands.
 
 **3. Global Trade and Accidental Invaders**
 
-![](https://cdn-images-1.medium.com/max/800/1*89i6dHy1TAV6mP0X0bA-uw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/20bd037db440020fddd0ccc25fdb07561e482d10fd9c1f4401998507401e4563.svg)
 
 *Photo by william william on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -182,7 +182,7 @@ in the continental U.S. —** and the problem isn’t slowing down.
 
 #### **What Florida Is Getting Right — and Wrong**
 
-![](https://cdn-images-1.medium.com/max/800/1*295JaOzvm-cdUu-tQjWJkw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/5c0975bf2aa7497c8d43d951c541e86cfe24d49884afeefdbe5c776677f73d34.svg)
 
 *Photo by Karl Callwood on Unsplash*
 
@@ -214,13 +214,13 @@ Because when it comes to invasive species:
 
 **Take a look at this graph:**
 
-![](https://cdn-images-1.medium.com/max/800/1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/97baf9320c3c4d02290f905c8b9d129c8d86a532b84eb010fbe5db05f9c3c00d.svg)
 
 > The Invasion Curve \| Source: Cornell Cooperative Extension
 
 #### **The Invasion Curve: Why Timing Is Everything**
 
-![](https://cdn-images-1.medium.com/max/800/1*jZvB_EUa6-iQpbnb2EMknw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/3f8499f0798c03cf1eecbfa1dec48a7b27ec25affcc450594192ea2a2d7a7309.svg)
 
 *Photo by Vicky Sim on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -259,7 +259,7 @@ But here’s the thing:
 
 > Lets take another look at the invasion curve:
 
-![](https://cdn-images-1.medium.com/max/800/1*O1YgMxtKobB3v6w_YlSCCg@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/b0c3ee80ec59379bd0f02726432e145f1405368e3329f7e4e840962d958f91d9.svg)
 
 > The Invasion Curve \| Source: Cornell Cooperative Extension
 
@@ -308,7 +308,7 @@ already breeding across hundreds of square miles.
 
 > Burmese Python Range \| FL FWC \| 2019
 
-![](https://cdn-images-1.medium.com/max/800/1*2fAMvFLYqxGhaci3vRCZCw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/5f3def93a2e9ae1a0846a3b39c883316ed06bbe47fda5b1974d597d7cf30b273.svg)
 
 > Source: Florida Fish and Wildlife Conservation Commission (FWC)
 
@@ -344,7 +344,7 @@ from colonizing the Everglades.**
 
 > Nile Monitor Sightings \| EDDMapS \| 2025
 
-![](https://cdn-images-1.medium.com/max/800/1*OyXzv4py69NoMTneU1DIZQ@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/d99e0fe4832ffbcd0e67190ddbe5095cb470b364fd41e6dd31e9b3f7c94ccc48.svg)
 
 > Source: EDDMapS
 
@@ -352,7 +352,7 @@ from colonizing the Everglades.**
 
 ***Pretty Flowers, Ugly Consequences***
 
-![](https://cdn-images-1.medium.com/max/800/1*F1V2KVCZY1IFWCfgqWDbTQ@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/e4ed26917d6fd066507d5a3311baf58f762df86aa847e47154ef05e3bd7120eb.svg)
 
 > Hydrilla infestation \| Source: Cornell
 
@@ -366,7 +366,7 @@ Hydrilla is in maintenance mode.
 
 **We’re never going to get rid of it.**
 
-![](https://cdn-images-1.medium.com/max/800/1*qzSCM3Q5gRTD3e7f2Adssw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/776da8fa787620d6bd07515a6dfdbaf1d4512d02adbd5cc5b9dc68bd4bb5f80e.svg)
 
 > Crested Floating Heart \| Source: iNaturalist
 
@@ -386,7 +386,7 @@ underfunded and understaffed.
 
 ***Derby on the Reef, Disaster in a Bag***
 
-![](https://cdn-images-1.medium.com/max/800/1*jIEWyJe7hWIdUba9bF5j2g@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/57772534b594bb1e0f5e9c13ebc023ca49730b75570b290599002184df47a22c.svg)
 
 > Invasive Lionfish \| Source: NOAA
 
@@ -408,7 +408,7 @@ promoting “***Eat ’em to beat ‘em***.”
 
 But here’s a quieter success story you might have missed.
 
-![](https://cdn-images-1.medium.com/max/800/1*eTVXJMMazAzwZYREXIAPkw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/ae083295d06a5b75681ec15c74a31cf0ead6f5a03d76547cf8f6a1472c02e5b4.svg)
 
 > Zebra Mussels \| Source: NOAA
 
@@ -432,7 +432,7 @@ enough to act.
 
 #### **Why We Keep Fighting the Wrong Battles**
 
-![](https://cdn-images-1.medium.com/max/800/1*_mI-nnaTrRjjFIJvp38aGw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/f2ab4225c1bf7f320325acc767946560ea7d01d77ecafaad94889349f0d4f0af.svg)
 
 *Photo by AZGAN MjESHTRI on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -470,7 +470,7 @@ says, “Here’s what we tackle first, and why.”
 
 #### **What Needs to Change**
 
-![](https://cdn-images-1.medium.com/max/800/1*3VCtxE1Q_VGEfh-FT6MGUw@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/68ae2150df319f023661f5e377fa72398ce60e0833cbc890a5c73ea2f840d4a1.svg)
 
 *Photo by hayleigh b on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
@@ -494,7 +494,7 @@ shift.***
 
 #### **Hope Lies on the Frontier**
 
-![](https://cdn-images-1.medium.com/max/800/1*LzSbq5aUiq6LuJobhWOVIQ@2x.jpeg)
+![](/images/medium/rethinking-invasive-species-management/42734d07744853dfceee5c925c1ce126161346d30c5f7d66b25b0867f5acf1d6.svg)
 
 *Photo by [Richard Sagredo](http://www.sagredophotography.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 

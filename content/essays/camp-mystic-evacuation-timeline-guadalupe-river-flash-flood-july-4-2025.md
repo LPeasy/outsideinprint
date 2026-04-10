@@ -17,7 +17,7 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025-160671e2e602"
 ---
 
-![](https://cdn-images-1.medium.com/max/800/0*Hgbpj9XdNC_XERvQ.jpg)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/0ec9afa4944908a9366a77d95721184f1d306becf44ceecac10de15fda3917be.svg)
 
 *Map of the Guadalupe River | Camp Mystic is on the South Fork | [Source](https://sl.bing.net/SFsZM6YL7s)*
 
@@ -51,7 +51,7 @@ counselors lost their lives.
 
 ### Camp Mystic on the Guadalupe River ~ Location, Elevation, Floodplain (Kerr County, Texas)
 
-![](https://cdn-images-1.medium.com/max/800/0*eR2b0blx_qFQuPvX.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/f08e17f240c2bf6bc18e5ca4751d1e5e16f9ff59e79cf69c2a941f55d168432d.svg)
 
 *GIS view of Camp Mystic in Kerr County, Texas. | [Cypress Lake | Camp Mystic for Girls](https://www.campmystic.com/cypress-lake/)*
 
@@ -68,13 +68,9 @@ mapped floodway.**
 
 ### Camp Layout and Elevation ~ Flats vs High Ground at Camp Mystic
 
-> <a
-> href="https://www.campmystic.com/wp-content/uploads/2024/03/11.30.23-Brochure-Camp-Mystic%C2%AE-for-Girls-compressed.pdf"
-> class="markup--anchor markup--pullquote-anchor"
-> data-href="https://www.campmystic.com/wp-content/uploads/2024/03/11.30.23-Brochure-Camp-Mystic%C2%AE-for-Girls-compressed.pdf"
-> rel="noopener" target="_blank">Imagine walking through the camp ~</a>
+> Imagine walking through the camp with [Camp Mystic's brochure](https://www.campmystic.com/wp-content/uploads/2024/03/11.30.23-Brochure-Camp-Mystic%C2%AE-for-Girls-compressed.pdf) in hand.
 
-![](https://cdn-images-1.medium.com/max/800/1*m36BN7bhT-Ka8W4kG3bemg@2x.jpeg)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/5f50bfe9c8da0808fdc11588a895e7d6e3b12987fdd98a42cf8f3095858800ab.svg)
 
 **At the crest sits Cypress Lake**, a reservoir that marks the highest
 ground. Around it are the stables, the archery range, and newer cabins
@@ -83,7 +79,7 @@ built above the floodplain.
 **Descend the slope and you pass fields**, a recreation hall, and older
 bunkhouses.
 
-![](https://cdn-images-1.medium.com/max/800/1*ucYIWdAp9tDgxW-EZEol-Q@2x.jpeg)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/e1199c96ad016b9e923e7b14c1532643361a8f3aeffba6f521832c6c86d83bf0.svg)
 
 **Continue downhill and you reach the Flats** ~ a strip of cabins sit
 just about level with the river (far right on your map).
@@ -97,35 +93,27 @@ When the river overtops its banks, **water** doesn’t just rise
 vertically ~ it **spreads sideways across the Flats**, cutting off
 escape routes uphill and sweeping debris laterally.
 
-> Take a look at this <a
-> href="https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&amp;extent=-99.39123254462633,30.000432493861474,-99.34969049140369,30.01901356194827"
-> class="markup--anchor markup--pullquote-anchor"
-> data-href="https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&amp;extent=-99.39123254462633,30.000432493861474,-99.34969049140369,30.01901356194827"
-> rel="noopener" target="_blank">FEMA Flood Map</a> of the camp.
+> Take a look at this [FEMA flood map](https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=-99.39123254462633,30.000432493861474,-99.34969049140369,30.01901356194827) of the camp.
 
-![](https://cdn-images-1.medium.com/max/800/1*AqDdUV3w2tHT0fQR9i4Rrg@2x.jpeg)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/5fce0b6454ebfb4bd0550f0e920b12e8143320b16c81fc9b0c149895bb2ef3fd.svg)
 
 > A 1% annual chance of flooding stacks up to ~ 26% over 30 years, one
 > out of four.
 
 #### Here’s an elevation map from the USGS ~
 
-![](https://cdn-images-1.medium.com/max/800/1*foK4tA2BdO-M_M4f8LS2Tg.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/29f075db14c4d16cec462f4cab74e622c682a7816ae358efe17693228c82593a.svg)
 
 *The line shown goes from the elevation of the South Fork through the Flats. See elevations below. | [Source](https://apps.nationalmap.gov/viewer/)*
 
-![](https://cdn-images-1.medium.com/max/800/1*vZAX8XoVeIWw5aA_Gu9grg.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/5db27b5a638750d55c9cb89304b830af5b2735627071fc075282ffa2d16f3669.svg)
 
 *Line in topo map above shows the elevation of the camp. Line is traced from right to left, so the left side of this graph corresponds to the right-most point on the map. | [Source](https://apps.nationalmap.gov/viewer/)*
 
 In the Hill Country’s steep watersheds, **a few inches of rainfall**
 upstream can **raise the river ten feet or more** in under an hour.
 
-<figure id="5c46" class="graf graf--figure graf--iframe graf-after--p">
-[Embedded media: [https://www.youtube.com/embed/6sgziplPpWg?feature=oembed](https://www.youtube.com/embed/6sgziplPpWg?feature=oembed)]
-<figcaption>This is not the Guadalupe River; it’s the Llano River during
-the same floods on July 4th.</figcaption>
-</figure>
+[Watch flood footage from the Llano River during the July 4, 2025 floods.](https://www.youtube.com/watch?v=6sgziplPpWg)
 
 This is Llano River in the same region during the floods on July 4th,
 2025.
@@ -135,7 +123,7 @@ This is Llano River in the same region during the floods on July 4th,
 
 ### Flash-Flood Evacuation Math ~ Mobilization, Distance, Bottlenecks, Headcount
 
-![](https://cdn-images-1.medium.com/max/800/0*y2JrJ8P3yMDu92rD)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/ca8ebea3cad83c2f96d12c33ea9d5eaf8eb552bd7fe0b6e3c038ea7a60bb9f36.svg)
 
 *Flash Flood Emergency vs Flash Flood Warning | [Source](https://weather.com/safety/floods/news/2025-04-04-flash-flood-emergency-warning-dangerous-life-threatening)*
 
@@ -172,7 +160,7 @@ slips or crying, and often double back to guide stragglers.
 
 ### Flats Cabins at Camp Mystic ~ Lowest Elevation, Highest Flood Risk
 
-![](https://cdn-images-1.medium.com/max/800/1*X2LeOL1Dytzl46DKb30AEA@2x.jpeg)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/b50045b105165ebfa57612310155f76458a810574517305e996426d4ee4112a8.svg)
 
 The red box on the right shows the location of the cabins in the flats.
 
@@ -187,7 +175,7 @@ feet** ~ and water would have entered the cabins.
 
 ### Why 30 Minutes Matters ~ Nighttime Evacuation vs a Rising Flash Flood
 
-![](https://cdn-images-1.medium.com/max/800/0*Yx-ekFz-dgkk0hgV.jpg)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/7cb8f10199c7128e78fd781e963ccab375f0d581e973d95d142e2fd44d3ca5b5.svg)
 
 *Every second matters in an emergency evacuation. | [Source](https://sl.bing.net/b2co3AsqnBI)*
 
@@ -212,7 +200,7 @@ guiding children uphill and carrying them through a rising current.
 
 ### USGS Hunt Gauge ~ Guadalupe River Rise 1:00–4:30 a.m. on July 4, 2025
 
-![](https://cdn-images-1.medium.com/max/800/1*EjVJ1jZ9mOOQdOyD4kFQFw.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/4eff3692d9d9402c608213a1bf80ae9ef8dc624a27c7c58f98ca3378cbb4036b.svg)
 
 *The Guadalupe River rose nearly 30 feet in four hours, a record crest surpassing 1932. Source: USGS/NOAA.*
 
@@ -227,7 +215,7 @@ feet** based on FEMA flood maps.
 It helps to **zoom in on** the critical hours between **1:00 and 4:30
 a.m. ~**
 
-![](https://cdn-images-1.medium.com/max/800/1*aYJBxNMenzV7bKbChx74Rg.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/9c90826cc94f24b2de15463be6611d55504b2239600bbb30184f865ab0a1f775.svg)
 
 *Zooming in: key thresholds for flooding and the critical 1:00–4:30 a.m. window.*
 
@@ -264,17 +252,17 @@ On paper, that narrative sounds plausible.
 
 ### Compared against the Hunt gauge, the official timeline seems dubious
 
-![](https://cdn-images-1.medium.com/max/800/1*HXVbpTUmUivKSfxBU1fSAw.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/a907b8425be3d76541ecf7f23e49457e1a727b0c494cc0f083afc7956d9c7328.svg)
 
 *Reported evacuation timelines compared to the hydrograph. Both versions collide with floodwaters.*
 
-![](https://cdn-images-1.medium.com/max/800/1*BeTIgHY6GHnHIcol1yjSLg.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/b277a130e56b5187b062df032be76ea5181149b56d43e114bc7ad6d4156ad1d5.svg)
 
 *Claims in ABC’s coverage of the tragedy.*
 
 ### Flash-Flood Readiness for Camps and Schools ~ Practical Takeaways
 
-![](https://cdn-images-1.medium.com/max/800/0*AKS16wtc0O5L_Ftr.png)
+![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/42ac5f8ac7a274f8319f5309f8a2922ae7e250bc152a335edf39a79c3d41c680.svg)
 
 *Typical flash flood sign. | [Source](https://sl.bing.net/i7TNN1iyW1k)*
 

@@ -54,6 +54,8 @@ Blocker Subtitle
 
 [Embedded media: https://example.com/embed]
 
+![](https://cdn-images-1.medium.com/max/800/placeholder)
+
 The warning came in â€œlate.â€
 '@ | Set-Content -Path (Join-Path $essayRoot "blocker.md") -Encoding UTF8
 
@@ -96,6 +98,27 @@ featured: false
 This paragraph is fine.
 '@ | Set-Content -Path (Join-Path $essayRoot "clean.md") -Encoding UTF8
 
+  @'
+---
+title: "Slug Echo"
+date: 2025-07-14
+draft: false
+slug: "slug-echo"
+section_label: "Essay"
+subtitle: ""
+description: "An imported essay whose localized media path includes the slug."
+version: "1.0"
+edition: "First web edition"
+pdf: "/pdfs/slug-echo.pdf"
+featured: false
+medium_source_url: "https://medium.com/@example/slug-echo"
+---
+
+![](/images/medium/slug-echo/example.png)
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "slug-echo.md") -Encoding UTF8
+
   $guardrailScript = Join-Path $scriptRoot "check_essay_guardrails.ps1"
 
   $blockerOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/blocker.md" 2>&1 | Out-String
@@ -104,6 +127,7 @@ This paragraph is fine.
   Assert-True ($blockerOutput.Contains("BLOCKER essays/blocker.md")) "Expected blocker output to identify the failing essay."
   Assert-True ($blockerOutput.Contains("duplicated_title")) "Expected blocker output to include duplicated_title."
   Assert-True ($blockerOutput.Contains("embed_remnants")) "Expected blocker output to include embed_remnants."
+  Assert-True ($blockerOutput.Contains("medium_cdn_media")) "Expected blocker output to include medium_cdn_media."
   Assert-True ($blockerOutput.Contains("mojibake")) "Expected blocker output to include mojibake."
 
   $warningOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" 2>&1 | Out-String
@@ -127,6 +151,11 @@ This paragraph is fine.
   $cleanExit = $LASTEXITCODE
   Assert-True ($cleanExit -eq 0) "Expected clean essay to pass the guardrail check."
   Assert-True ($cleanOutput.Contains("Essay guardrails PASSED.")) "Expected clean essay output to report success."
+
+  $slugEchoOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/slug-echo.md" 2>&1 | Out-String
+  $slugEchoExit = $LASTEXITCODE
+  Assert-True ($slugEchoExit -eq 0) "Expected localized media paths to avoid duplicated_title false positives."
+  Assert-True (-not $slugEchoOutput.Contains("duplicated_title")) "Expected slug-only media paths not to trigger duplicated_title."
 }
 finally {
   if (Test-Path $tempRoot) {
