@@ -29,7 +29,7 @@ Assert-Match -Content $homePage -Pattern 'SearchAction' -Message 'Expected the h
 Assert-Match -Content $homePage -Pattern '/library/\?q=\{search_term_string\}' -Message 'Expected SearchAction to target the library query route.'
 
 $essay = Get-Page '/essays/the-risk-management-buffet/'
-Assert-Match -Content $essay -Pattern '<meta\s+name="author"\s+content="Robert V\. Ussley"' -Message 'Expected essay pages to emit meta author tags for Robert V. Ussley.'
+Assert-Match -Content $essay -Pattern '<meta\s+name=(?:"author"|author)\s+content=(?:"Robert V\. Ussley"|Robert V\. Ussley)' -Message 'Expected essay pages to emit meta author tags for Robert V. Ussley.'
 Assert-Match -Content $essay -Pattern '"@type":"Article"' -Message 'Expected essay pages to expose Article JSON-LD.'
 Assert-Match -Content $essay -Pattern 'Robert V\. Ussley' -Message 'Expected essay pages to expose the Robert V. Ussley author entity.'
 
@@ -45,7 +45,7 @@ $collection = Get-Page '/collections/risk-uncertainty/'
 Assert-Match -Content $collection -Pattern '"@type":"CollectionPage"' -Message 'Expected public collection pages to expose CollectionPage JSON-LD.'
 
 $random = Get-Page '/random/'
-Assert-Match -Content $random -Pattern '<meta\s+name="robots"\s+content="noindex, follow"' -Message 'Expected the random route to stay noindex, follow.'
+Assert-Match -Content $random -Pattern '<meta\s+name=(?:"robots"|robots)\s+content=(?:"noindex, follow"|noindex,\s*follow)' -Message 'Expected the random route to stay noindex, follow.'
 
 Write-Host 'Live SEO smoke test passed.'
 $global:LASTEXITCODE = 0
