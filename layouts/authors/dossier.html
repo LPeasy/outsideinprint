@@ -199,7 +199,7 @@
   {{ end }}
   {{ $themes := first 4 (sort (sort ($scratch.Get "themeMatches") "collection.weight" "asc") "collection.featured" "desc") }}
 
-  {{ $portraitPath := .Params.portrait | default "Bobviously_Portrait_v1.jpg" }}
+  {{ $portraitPath := .Params.portrait | default "Bobviously_Portrait_v1.png" }}
   {{ $portrait := .Resources.GetMatch $portraitPath }}
 
   <article class="profile-page profile-page--author-dossier">
