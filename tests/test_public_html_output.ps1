@@ -941,8 +941,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?Imprint.*?Selected Collections.*?Recent Work.*?The weekly letter.*?Browse the Archive'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?Selected Collections.*?Recent Work.*?The weekly letter.*?Browse the Archive'
     Message = 'expected the homepage to preserve the editorial module order from the story grid through archive browse'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'home-imprint-statement'
+    Message = 'expected the homepage generated output not to include the retired homepage imprint module'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -978,6 +984,16 @@ $requiredUxChecks = @(
     Path = 'public/index.html'
     Pattern = $manifestoLinkPattern
     Message = 'expected the homepage manifesto support line to render as a real text link to the newsletter module'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'home-recent-work__list\s+page-shell\s+page-shell--grid'
+    Message = 'expected the homepage recent-work module to render with the grid shell variant'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '/images/editorial/cartoon-think-outside-the-box\.png'
+    Message = 'expected the homepage generated output to include the editorial cartoon image block'
   },
   @{
     Path = 'public/index.html'
