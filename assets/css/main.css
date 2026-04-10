@@ -496,14 +496,30 @@ textarea{
   border-right:1px solid rgba(236,231,223,.1);
 }
 .editorial-cartoon{
-  margin-top:2rem;
+  margin-top:1.8rem;
+  padding:1rem;
+  border:1px solid rgba(236,231,223,.08);
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(236,231,223,.05), rgba(236,231,223,.015)),
+    rgba(236,231,223,.02);
+  box-shadow:0 18px 38px rgba(0,0,0,.2);
 }
 
 .editorial-cartoon img{
   width:100%;
   height:auto;
   display:block;
-  border:1px solid rgba(255,255,255,0.08);
+  padding:.8rem;
+  border:1px solid rgba(18,18,18,.18);
+  border-radius:12px;
+  background:#ebe5da;
+  box-shadow:0 0 0 1px rgba(255,255,255,.04) inset;
+  filter:grayscale(1) contrast(1.03) brightness(.97);
+}
+.home-front-page__secondary{
+  display:grid;
+  gap:0;
 }
 .home-front-page__secondary-label{
   margin:0 0 1rem;
@@ -547,14 +563,43 @@ textarea{
 }
 .home-front-page__lead-dek{
   max-width:35rem;
-  margin-top:1rem;
+  margin-top:.75rem;
   color:var(--text-secondary);
   font-size:clamp(1.08rem, 1.03rem + .25vw, 1.18rem);
   line-height:1.75;
 }
-.home-front-page__lead-meta,
-.home-front-page__lead-action,
-.home-front-page__secondary-meta,
+.home-front-page__lead-meta{
+  margin-top:.85rem;
+}
+.home-front-page__lead-action{
+  margin-top:1rem;
+}
+.home-front-page__secondary-item{
+  padding:1.15rem 0 1.2rem;
+  border-top:1px solid rgba(236,231,223,.08);
+}
+.home-front-page__secondary-item:first-of-type{
+  padding-top:0;
+  border-top:none;
+}
+.home-front-page__secondary-title{
+  margin:0;
+  color:var(--text-primary);
+  font-size:1.34rem;
+  line-height:1.35;
+}
+.home-front-page__secondary-dek{
+  margin-top:.65rem;
+  color:var(--text-secondary);
+  font-size:.93rem;
+  line-height:1.66;
+}
+.home-front-page__secondary-meta{
+  margin-top:.85rem;
+}
+.home-front-page__secondary-action{
+  margin-top:.75rem;
+}
 .newsletter-signup--home,
 .home-browse{
   margin-top:2.75rem;
@@ -613,7 +658,10 @@ textarea{
 }
 
 .home-recent-work__list{
-  max-width:44rem;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:0 2.5rem;
+  max-width:64rem;
 }
 .home-recent-work__item{
   padding:1rem 0;
@@ -1040,6 +1088,10 @@ textarea{
     padding:0 0 1.35rem;
     border-right:none;
     border-bottom:1px solid rgba(236,231,223,.1);
+  }
+  .home-recent-work__list{
+    grid-template-columns:1fr;
+    gap:0;
   }
   .home-selected-collections__list{
     grid-template-columns:1fr;
@@ -2637,6 +2689,9 @@ button.dashboard-chip{
   .home-front-page__lead-dek{
     font-size:1.02rem;
     line-height:1.72;
+  }
+  .editorial-cartoon{
+    padding:.8rem;
   }
   .home-front-page__secondary-title{
     font-size:1.28rem;

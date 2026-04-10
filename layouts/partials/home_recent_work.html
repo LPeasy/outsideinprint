@@ -7,7 +7,7 @@
       <h2 id="home-recent-work-title" class="list-title">Recent Work</h2>
       <p class="home-recent-work__dek">A chronological run of recent essays, excluding the pieces already held at the top of the front page.</p>
     </header>
-    <div class="home-recent-work__list page-shell page-shell--feature">
+    <div class="home-recent-work__list page-shell page-shell--grid">
       {{ $recentCount := 0 }}
       {{ range sort $recentEssays "Date" "desc" }}
         {{ if and (lt $recentCount 6) (not (in $selectedKeys .RelPermalink)) }}
