@@ -5,29 +5,32 @@
 {{ $isCollections := eq .Section "collections" }}
 {{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
 {{ $isRandom := eq .Section "random" }}
-<header class="masthead site-header masthead--editorial{{ if $stickyMasthead }} masthead--sticky{{ end }}">
-  <div class="masthead-preface" aria-hidden="true"></div>
+{{ $mastheadVariant := cond .IsHome "masthead--home" "masthead--inner" }}
+<header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
-    <div class="masthead-side-deck masthead-side-deck--left" aria-hidden="true">
-      <span>ESSAYS &bull; REPORTS</span>
-      <span>DIALOGUES</span>
-      <span>LITERATURE</span>
-    </div>
-    <a class="brand-link" href="{{ "" | absURL }}" aria-label="Outside In Print home">
-      <div class="masthead-crest" aria-hidden="true"></div>
-      <div class="title">
-        <span class="top">OUTSIDE</span>
-        <span class="bottom">IN PRINT</span>
+    <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
+    <div class="masthead-nameplate__top-ornament" aria-hidden="true"></div>
+    <div class="masthead-nameplate__body">
+      <div class="masthead-side-deck masthead-side-deck--left" aria-hidden="true">
+        <span>ESSAYS &bull; REPORTS</span>
+        <span>DIALOGUES</span>
+        <span>LITERATURE</span>
       </div>
-      <div class="subtitle">A Digital Imprint</div>
-    </a>
-    <div class="masthead-side-deck masthead-side-deck--right" aria-hidden="true">
-      <span>CURATED</span>
-      <span>ARCHIVE</span>
-      <span>EST. 2025</span>
+      <a class="brand-link" href="{{ "" | absURL }}" aria-label="Outside In Print home">
+        <div class="title">
+          <span class="top">OUTSIDE</span>
+          <span class="bottom">IN PRINT</span>
+        </div>
+        <div class="subtitle">A Digital Imprint</div>
+      </a>
+      <div class="masthead-side-deck masthead-side-deck--right" aria-hidden="true">
+        <span>CURATED</span>
+        <span>ARCHIVE</span>
+        <span>EST. 2025</span>
+      </div>
     </div>
+    <div class="masthead-nameplate__divider" aria-hidden="true"></div>
   </div>
-  <div class="masthead-divider" aria-hidden="true"></div>
 
   <nav class="nav nav--section-rail" aria-label="Primary">
     <a href="{{ "start-here/" | absURL }}"{{ if $isStartHere }} aria-current="page"{{ end }}>Start Here</a><span class="dot">&bull;</span>
