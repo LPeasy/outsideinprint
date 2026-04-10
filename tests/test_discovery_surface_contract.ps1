@@ -30,7 +30,6 @@ foreach ($relativePath in $requiredFiles) {
 $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "home_front_page.html"',
-  'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
   'partial "home_recent_work.html"',
   'partial "newsletter_signup.html"',
@@ -44,7 +43,6 @@ foreach ($requiredSnippet in @(
 
 $homepageOrder = @(
   'partial "home_front_page.html"',
-  'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
   'partial "home_recent_work.html"',
   'partial "newsletter_signup.html"',
@@ -63,6 +61,10 @@ foreach ($snippet in $homepageOrder) {
   }
 
   $lastIndex = $currentIndex
+}
+
+if ($indexTemplate -match [regex]::Escape('partial "home_imprint_statement.html"')) {
+  throw 'Expected layouts/index.html to omit the homepage imprint partial from the homepage composition.'
 }
 
 $supportLine = ('Support independent journalism ' + [string][char]0x2192)
