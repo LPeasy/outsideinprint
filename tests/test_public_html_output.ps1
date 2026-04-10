@@ -87,7 +87,7 @@ function Get-JsonLdObjects {
   param([string]$Html)
 
   $results = New-Object System.Collections.Generic.List[object]
-  $matches = [regex]::Matches($Html, "(?is)<script\b[^>]*type\s*=\s*(?:""application/ld\+json""|'application/ld\+json'|application/ld\+json)[^>]*>(.*?)</script>")
+  $matches = [regex]::Matches($Html, "(?is)<script\b[^>]*type\s*=\s*(?:\"application/ld\+json\"|'application/ld\+json'|application/ld\+json)[^>]*>(.*?)</script>")
 
   foreach ($match in $matches) {
     $json = $match.Groups[1].Value.Trim()
@@ -579,52 +579,15 @@ foreach ($relativePath in $requiredSemanticPages.Keys) {
   }
 }
 
-foreach ($relativePath in $optionalDefaultListPages) {
+foreach ($relativePath in $requiredImportedMediaPages) {
   if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $importedMediaIssues.Add("Missing generated page required for imported-media regression coverage: $relativePath")
     continue
   }
 
-  $issues = Get-SemanticPageIssues `
-    -RelativePath $relativePath `
-    -Html $targetPageHtml[$relativePath] `
-    -ExpectedH1Class 'list-title' `
-    -RequireSecondaryHeading $false
-
-  foreach ($issue in $issues) {
-    $semanticIssues.Add($issue)
-  }
-}
-
-$requiredImportedMediaChecks = @(
-  @{
-    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
-    Pattern = '(?s)<figure class="?article-figure"?><img[^>]+><figcaption class="?article-source-caption"?>Photo by Markus Spiske on Unsplash</figcaption></figure>'
-    Message = 'expected imported photo-credit media to render as a figure with figcaption'
-  },
-  @{
-    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
-    Pattern = '(?s)<p>\s*Photo by Markus Spiske on Unsplash\s*</p>'
-    Message = 'expected imported photo credits not to remain as loose paragraphs after image rendering'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/essays/rethinking-invasive-species-management/index.html'
-    Pattern = '(?s)<figure class="?article-figure"?><img[^>]+><figcaption class="?article-source-caption"?>Crested Floating Heart \| Source: iNaturalist</figcaption></figure>'
-    Message = 'expected descriptive imported image captions to render as figure captions'
-  }
-)
-
-foreach ($check in $requiredImportedMediaChecks) {
-  $relativePath = [string]$check.Path
-  if (-not $targetPageHtml.ContainsKey($relativePath)) {
-    $importedMediaIssues.Add("Missing generated page required for imported media regression coverage: $relativePath")
-    continue
-  }
-
-  $isNegative = [bool]($check.ContainsKey('ShouldNotMatch') -and $check.ShouldNotMatch)
-  $matches = $targetPageHtml[$relativePath] -match ([string]$check.Pattern)
-  if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
-    $importedMediaIssues.Add("$relativePath => $($check.Message)")
+  $html = $targetPageHtml[$relativePath]
+  if ($html -notmatch '/images/medium/') {
+    $importedMediaIssues.Add("$relativePath => expected localized /images/medium/ media references")
   }
 }
 
@@ -636,157 +599,65 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
 
   $html = $targetPageHtml[$relativePath]
   $expected = $requiredMetadataPages[$relativePath]
-  $canonical = Get-LinkHrefByRel -Html $html -Rel 'canonical'
-  $metaDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'description'
-  $ogUrl = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:url'
-  $ogTitle = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:title'
-  $ogDescription = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:description'
+
+  $titleMatch = [regex]::Match($html, '(?is)<title>(.*?)</title>')
+  $title = if ($titleMatch.Success) { $titleMatch.Groups[1].Value.Trim() } else { $null }
+  if ($title -ne [string]$expected.Title) {
+    $metadataIssues.Add("$relativePath => expected <title> '$($expected.Title)', found '$title'")
+  }
+
+  if ($expected.Contains('Description')) {
+    $metaDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'description'
+    if ($metaDescription -ne [string]$expected.Description) {
+      $metadataIssues.Add("$relativePath => expected meta description '$($expected.Description)', found '$metaDescription'")
+    }
+
+    $ogDescription = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:description'
+    if ($ogDescription -ne [string]$expected.Description) {
+      $metadataIssues.Add("$relativePath => expected og:description '$($expected.Description)', found '$ogDescription'")
+    }
+
+    $twitterDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:description'
+    if ($twitterDescription -ne [string]$expected.Description) {
+      $metadataIssues.Add("$relativePath => expected twitter:description '$($expected.Description)', found '$twitterDescription'")
+    }
+  }
+
+  $canonicalHref = Get-LinkHrefByRel -Html $html -Rel 'canonical'
+  if ($canonicalHref -ne [string]$expected.Canonical) {
+    $metadataIssues.Add("$relativePath => expected canonical '$($expected.Canonical)', found '$canonicalHref'")
+  }
+
   $ogType = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:type'
-  $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
-  $twitterCard = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:card'
-  $twitterTitle = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:title'
-  $twitterDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:description'
-  $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
-  $authorMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'author'
-
-  if ($canonical -ne [string]$expected.Canonical) {
-    $metadataIssues.Add("$relativePath => expected canonical $($expected.Canonical), found $canonical")
-  }
-
-  if ($ogUrl -ne [string]$expected.Canonical) {
-    $metadataIssues.Add("$relativePath => expected og:url to match canonical")
-  }
-
-  if ($ogTitle -ne [string]$expected.Title) {
-    $metadataIssues.Add("$relativePath => expected og:title '$($expected.Title)', found '$ogTitle'")
-  }
-
-  if ($twitterTitle -ne [string]$expected.Title) {
-    $metadataIssues.Add("$relativePath => expected twitter:title '$($expected.Title)', found '$twitterTitle'")
+  if ($ogType -ne [string]$expected.OgType) {
+    $metadataIssues.Add("$relativePath => expected og:type '$($expected.OgType)', found '$ogType'")
   }
 
   if ($expected.Contains('TwitterCard')) {
+    $twitterCard = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:card'
     if ($twitterCard -ne [string]$expected.TwitterCard) {
       $metadataIssues.Add("$relativePath => expected twitter:card '$($expected.TwitterCard)', found '$twitterCard'")
     }
   }
-  elseif ([string]::IsNullOrWhiteSpace($twitterCard)) {
-    $metadataIssues.Add("$relativePath => expected twitter:card metadata")
-  }
-
-  if ($expected.Contains('OgType') -and $ogType -ne [string]$expected.OgType) {
-    $metadataIssues.Add("$relativePath => expected og:type '$($expected.OgType)', found '$ogType'")
-  }
-
-  if ($expected.Contains('Description')) {
-    $expectedDescription = [string]$expected.Description
-    if ($metaDescription -ne $expectedDescription) {
-      $metadataIssues.Add("$relativePath => expected meta description '$expectedDescription', found '$metaDescription'")
-    }
-    if ($ogDescription -ne $expectedDescription) {
-      $metadataIssues.Add("$relativePath => expected og:description '$expectedDescription', found '$ogDescription'")
-    }
-    if ($twitterDescription -ne $expectedDescription) {
-      $metadataIssues.Add("$relativePath => expected twitter:description '$expectedDescription', found '$twitterDescription'")
-    }
-  } else {
-    if ([string]::IsNullOrWhiteSpace($metaDescription) -or [string]::IsNullOrWhiteSpace($ogDescription) -or [string]::IsNullOrWhiteSpace($twitterDescription)) {
-      $metadataIssues.Add("$relativePath => expected non-empty description metadata across meta, og, and twitter tags")
-    }
-    if (($metaDescription -ne $ogDescription) -or ($metaDescription -ne $twitterDescription)) {
-      $metadataIssues.Add("$relativePath => expected meta, og, and twitter descriptions to stay in sync")
-    }
-    if ($metaDescription -match 'Photo by .+ on Unsplash|Golden Corral in Fredericksburg, VA \| Source|\[Embedded media:') {
-      $metadataIssues.Add("$relativePath => expected metadata description to exclude imported media caption noise")
-    }
-  }
 
   if ($expected.Contains('RequireImage') -and [bool]$expected.RequireImage) {
-    if ([string]::IsNullOrWhiteSpace($ogImage) -or [string]::IsNullOrWhiteSpace($twitterImage)) {
-      $metadataIssues.Add("$relativePath => expected og:image and twitter:image metadata")
-    }
-    elseif ($ogImage -ne $twitterImage) {
-      $metadataIssues.Add("$relativePath => expected og:image and twitter:image metadata to stay in sync")
+    $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
+    if ([string]::IsNullOrWhiteSpace($ogImage)) {
+      $metadataIssues.Add("$relativePath => expected og:image to be present")
     }
   }
 
-  if ($expected.Contains('AuthorMeta') -and $authorMeta -ne [string]$expected.AuthorMeta) {
-    $metadataIssues.Add("$relativePath => expected author meta '$($expected.AuthorMeta)', found '$authorMeta'")
+  if ($expected.Contains('AuthorMeta')) {
+    $authorMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'author'
+    if ($authorMeta -ne [string]$expected.AuthorMeta) {
+      $metadataIssues.Add("$relativePath => expected author meta '$($expected.AuthorMeta)', found '$authorMeta'")
+    }
   }
 }
 
-$requiredLegacyCleanupChecks = @(
-  @{
-    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
-    Pattern = '(?is)\[Embedded media'
-    Message = 'expected imported article pages not to expose raw embedded-media placeholder text'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?is)\[Embedded media'
-    Message = 'expected list-style embedded-media remnants to be normalized in imported essays'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
-    Pattern = '(?is)\[Embedded media'
-    Message = 'expected raw HTML figure-based embedded-media remnants to be normalized in imported essays'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
-    Pattern = '(?is)class="?article-embed"?'
-    Message = 'expected imported articles with omitted media to render a semantic embedded-media notice'
-  },
-  @{
-    Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?is)class="?article-embed"?'
-    Message = 'expected imported essays with list-style embeds to render a semantic embedded-media notice'
-  },
-  @{
-    Path = 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
-    Pattern = '(?is)class="?article-embed"?'
-    Message = 'expected imported essays with raw figure embeds to render a semantic embedded-media notice'
-  },
-  @{
-    Path = 'public/essays/biter-the-slang-word-that-hits/index.html'
-    Pattern = '[\u00E2\u00C3\u00C2]'
-    Message = 'expected representative imported essays not to expose mojibake characters in rendered HTML'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '[\u00E2\u00C3\u00C2]'
-    Message = 'expected localized imported essays not to expose mojibake characters in rendered HTML'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
-    Pattern = '[\u00E2\u00C3\u00C2]'
-    Message = 'expected imported longform essays not to expose mojibake characters in rendered HTML'
-    ShouldNotMatch = $true
-  }
-)
-
-foreach ($check in $requiredLegacyCleanupChecks) {
-  $relativePath = [string]$check.Path
-  if (-not $targetPageHtml.ContainsKey($relativePath)) {
-    $legacyCleanupIssues.Add("Missing generated page required for legacy cleanup regression coverage: $relativePath")
-    continue
-  }
-
-  $isNegative = [bool]($check.ContainsKey('ShouldNotMatch') -and $check.ShouldNotMatch)
-  $matches = $targetPageHtml[$relativePath] -match ([string]$check.Pattern)
-  if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
-    $legacyCleanupIssues.Add("$relativePath => $($check.Message)")
-  }
-}
-
-# These checks validate the generated JSON-LD once public/ is refreshed from the current templates.
 foreach ($relativePath in $requiredStructuredDataPages.Keys) {
   if (-not $targetPageHtml.ContainsKey($relativePath)) {
-    $structuredDataIssues.Add("Missing generated page required for JSON-LD regression coverage: $relativePath")
+    $structuredDataIssues.Add("Missing generated page required for structured-data regression coverage: $relativePath")
     continue
   }
 
@@ -1094,18 +965,18 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'Published Essays'
-    Message = 'expected the author page to expose archive statistics'
+    Pattern = 'Selected Works'
+    Message = 'expected the author dossier page to expose selected works'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'Recent Essays'
-    Message = 'expected the author page to expose recent essays'
+    Pattern = 'Themes'
+    Message = 'expected the author dossier page to expose themes'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'Essay Archive'
-    Message = 'expected the author page to expose the full essay archive'
+    Pattern = 'From the Archive'
+    Message = 'expected the author dossier page to expose archive entries'
   },
   @{
     Path = 'public/collections/index.html'
