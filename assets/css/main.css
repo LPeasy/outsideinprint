@@ -146,21 +146,15 @@ textarea{
   display:grid;
   gap:.18rem;
   align-content:center;
+  justify-self:center;
   color:rgba(236,231,223,.69);
   font-family:var(--font-ui);
   font-size:1rem;
   font-weight:500;
   letter-spacing:.12em;
   line-height:1.28;
+  text-align:center;
   text-transform:uppercase;
-}
-.masthead-side-deck--left{
-  text-align:left;
-  justify-self:end;
-}
-.masthead-side-deck--right{
-  text-align:right;
-  justify-self:start;
 }
 .masthead .title{
   margin:0;
