@@ -1,6 +1,6 @@
 ---
 title: "Robert V. Ussley"
-description: "A literary dossier for Robert V. Ussley, author of essays on risk, institutions, technology, public life, and moral pressure."
+description: "Essays by Robert V. Ussley on risk, institutions, technology, public life, and the systems people live inside."
 draft: false
 show_citation: false
 section_label: "Author"
