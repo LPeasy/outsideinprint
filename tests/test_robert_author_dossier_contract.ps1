@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $authorPagePath = Join-Path $repoRoot 'content/authors/robert-v-ussley/index.md'
-$portraitPath = Join-Path $repoRoot 'content/authors/robert-v-ussley/Bobviously_Portrait_v1.jpg'
+$portraitPath = Join-Path $repoRoot 'content/authors/robert-v-ussley/Bobviously_Portrait_v1.png'
 $layoutPath = Join-Path $repoRoot 'layouts/authors/dossier.html'
 $buildDir = Join-Path $repoRoot '.tmp-test-robert-dossier'
 $builtPagePath = Join-Path $buildDir 'authors/robert-v-ussley/index.html'
@@ -28,7 +28,7 @@ $authorPage = Get-Content -Path $authorPagePath -Raw
 foreach ($requiredPattern in @(
   'layout:\s*"?dossier"?',
   'style_variant:\s*"?literary-dossier"?',
-  'portrait:\s*"?Bobviously_Portrait_v1\.jpg"?',
+  'portrait:\s*"?Bobviously_Portrait_v1\.png"?',
   'header_bio:\s*".+?"'
 )) {
   if ($authorPage -notmatch $requiredPattern) {
@@ -40,7 +40,7 @@ foreach ($requiredSnippet in @(
   'Selected Works',
   'Themes',
   'From the Archive',
-  'Bobviously_Portrait_v1.jpg',
+  'Bobviously_Portrait_v1.png',
   'Author Dossier'
 )) {
   if ($layoutTemplate -notmatch [regex]::Escape($requiredSnippet)) {
@@ -81,7 +81,7 @@ if ($hugoCommand) {
     'Selected Works',
     'Themes',
     'From the Archive',
-    'Bobviously_Portrait_v1.jpg',
+    'Bobviously_Portrait_v1.png',
     'Author Dossier'
   )) {
     if ($builtPage -notmatch [regex]::Escape($requiredSnippet)) {
