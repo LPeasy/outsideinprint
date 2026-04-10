@@ -1,0 +1,281 @@
+{{ define "main" }}
+  <style>
+    .style-variant-literary-dossier .profile-page--author-dossier{
+      max-width:64rem;
+      margin:0 auto;
+      gap:2.6rem;
+    }
+    .style-variant-literary-dossier .author-dossier{
+      position:relative;
+      padding:2rem clamp(1.2rem, 2vw, 2.2rem);
+      border:1px solid rgba(236,231,223,.14);
+      border-radius:24px;
+      background:
+        linear-gradient(180deg, rgba(244,236,224,.09), rgba(244,236,224,.03)),
+        linear-gradient(135deg, rgba(123,111,94,.08), rgba(18,18,18,0) 42%);
+      box-shadow:0 18px 36px rgba(0,0,0,.18);
+    }
+    .style-variant-literary-dossier .author-dossier::after{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border:1px solid rgba(236,231,223,.07);
+      border-radius:18px;
+      pointer-events:none;
+    }
+    .style-variant-literary-dossier .author-dossier__inner{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:minmax(0, 18rem) minmax(0, 1fr);
+      gap:1.6rem 2.2rem;
+      align-items:start;
+    }
+    .style-variant-literary-dossier .author-dossier__portrait{
+      margin:0;
+    }
+    .style-variant-literary-dossier .author-dossier__portrait img{
+      display:block;
+      width:min(100%, 320px);
+      max-width:100%;
+      height:auto;
+      border-radius:14px;
+      border:1px solid rgba(236,231,223,.14);
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+    }
+    .style-variant-literary-dossier .author-dossier__intro{
+      position:relative;
+      z-index:1;
+      padding-top:.35rem;
+    }
+    .style-variant-literary-dossier .author-dossier__eyebrow{
+      margin:0 0 .85rem;
+      color:rgba(222,211,197,.7);
+      font-family:var(--font-ui);
+      font-size:.68rem;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .style-variant-literary-dossier .author-dossier__intro h1{
+      margin:0;
+      color:#f4ede3;
+      font-family:var(--font-display);
+      font-size:clamp(2.35rem, 2rem + 1.2vw, 3.4rem);
+      font-weight:600;
+      line-height:1.02;
+      letter-spacing:-.025em;
+    }
+    .style-variant-literary-dossier .author-dossier__bio{
+      max-width:38rem;
+      margin:1.15rem 0 0;
+      color:#ddd1c2;
+      font-size:1.08rem;
+      line-height:1.9;
+    }
+    .style-variant-literary-dossier .author-dossier__section{
+      padding-top:1.1rem;
+      border-top:1px solid rgba(236,231,223,.08);
+    }
+    .style-variant-literary-dossier .author-dossier__section .list-title{
+      margin-bottom:1.05rem;
+      color:rgba(222,211,197,.72);
+    }
+    .style-variant-literary-dossier .author-dossier__list{
+      display:grid;
+      gap:1.15rem;
+    }
+    .style-variant-literary-dossier .author-dossier__entry{
+      padding:0 0 1.2rem;
+      border-bottom:1px solid rgba(236,231,223,.07);
+    }
+    .style-variant-literary-dossier .author-dossier__entry:last-child{
+      padding-bottom:0;
+      border-bottom:none;
+    }
+    .style-variant-literary-dossier .author-dossier__meta{
+      margin:0 0 .45rem;
+      color:rgba(201,189,175,.64);
+      font-family:var(--font-ui);
+      font-size:.68rem;
+      font-weight:600;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .style-variant-literary-dossier .author-dossier__title{
+      margin:0;
+      font-family:var(--font-display);
+      font-size:1.36rem;
+      font-weight:600;
+      line-height:1.2;
+    }
+    .style-variant-literary-dossier .author-dossier__title a{
+      color:#f0e6da;
+      text-decoration:none;
+      border-bottom:none;
+    }
+    .style-variant-literary-dossier .author-dossier__title a:hover,
+    .style-variant-literary-dossier .author-dossier__title a:focus-visible{
+      color:#fff7ec;
+      text-decoration:underline;
+      text-decoration-thickness:1px;
+      text-underline-offset:.12em;
+    }
+    .style-variant-literary-dossier .author-dossier__summary{
+      margin:.55rem 0 0;
+      color:#cfc2b3;
+      font-size:.98rem;
+      line-height:1.75;
+    }
+    @media (max-width:640px){
+      .style-variant-literary-dossier .author-dossier{
+        padding:1.2rem;
+        border-radius:18px;
+      }
+      .style-variant-literary-dossier .author-dossier::after{
+        inset:10px;
+        border-radius:12px;
+      }
+      .style-variant-literary-dossier .author-dossier__inner{
+        grid-template-columns:1fr;
+        gap:1rem;
+      }
+      .style-variant-literary-dossier .author-dossier__portrait{
+        max-width:17rem;
+      }
+      .style-variant-literary-dossier .author-dossier__portrait img{
+        width:100%;
+      }
+      .style-variant-literary-dossier .author-dossier__intro h1{
+        font-size:2rem;
+      }
+      .style-variant-literary-dossier .author-dossier__bio{
+        font-size:1rem;
+        line-height:1.82;
+      }
+      .style-variant-literary-dossier .author-dossier__title{
+        font-size:1.18rem;
+      }
+    }
+  </style>
+  {{ $resolvedAuthor := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) }}
+  {{ $author := $resolvedAuthor.primary }}
+  {{ $essayPages := slice }}
+  {{ range where site.RegularPages "Section" "essays" }}
+    {{ $pageAuthor := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) }}
+    {{ if and $author $pageAuthor.primary (eq $pageAuthor.primary.key $author.key) }}
+      {{ $essayPages = $essayPages | append . }}
+    {{ end }}
+  {{ end }}
+
+  {{ $newestEssays := first 5 (sort $essayPages "Date" "desc") }}
+  {{ $oldestSorted := sort $essayPages "Date" "asc" }}
+  {{ $selectedKeys := slice }}
+  {{ range $newestEssays }}
+    {{ $selectedKeys = $selectedKeys | append (.File.Path | default .RelPermalink) }}
+  {{ end }}
+
+  {{ $archiveEssays := slice }}
+  {{ range $oldestSorted }}
+    {{ $essayKey := .File.Path | default .RelPermalink }}
+    {{ if not (in $selectedKeys $essayKey) }}
+      {{ $archiveEssays = $archiveEssays | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $archiveEssays = first 5 $archiveEssays }}
+
+  {{ $scratch := newScratch }}
+  {{ $scratch.Set "themeMatches" (slice) }}
+  {{ range $essayPages }}
+    {{ range partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
+      {{ if eq .collection.kind "topic" }}
+        {{ $seenKey := printf "theme:%s" .collection.slug }}
+        {{ if not ($scratch.Get $seenKey) }}
+          {{ $scratch.Set $seenKey true }}
+          {{ $scratch.Set "themeMatches" (($scratch.Get "themeMatches") | append .) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $themes := first 4 (sort (sort ($scratch.Get "themeMatches") "collection.weight" "asc") "collection.featured" "desc") }}
+
+  {{ $portraitPath := .Params.portrait | default "Bobviously_Portrait_v1.jpg" }}
+  {{ $portrait := .Resources.GetMatch $portraitPath }}
+
+  <article class="profile-page profile-page--author-dossier">
+    <header class="author-dossier page-shell page-shell--feature">
+      <div class="author-dossier__inner">
+        {{ with $portrait }}
+          <figure class="author-dossier__portrait">
+            <img
+              src="{{ .RelPermalink }}"
+              alt="{{ $.Params.portrait_alt | default "Portrait of Robert V. Ussley" }}"
+              width="{{ .Width }}"
+              height="{{ .Height }}"
+            />
+          </figure>
+        {{ end }}
+
+        <div class="author-dossier__intro">
+          <p class="author-dossier__eyebrow">Author Dossier</p>
+          <h1>{{ .Title }}</h1>
+          {{ with .Params.header_bio }}
+            <p class="author-dossier__bio">{{ . }}</p>
+          {{ end }}
+        </div>
+      </div>
+    </header>
+
+    <section class="author-dossier__section page-shell page-shell--reading" aria-labelledby="author-selected-works-title">
+      <h2 id="author-selected-works-title" class="list-title">Selected Works</h2>
+      <div class="author-dossier__list">
+        {{ range $newestEssays }}
+          <article class="author-dossier__entry">
+            <div class="author-dossier__meta">{{ .Date.Format "January 2, 2006" }}</div>
+            <h3 class="author-dossier__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            {{ with partial "discovery/page-summary.html" . }}
+              <p class="author-dossier__summary">{{ . }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="author-dossier__section page-shell page-shell--reading" aria-labelledby="author-themes-title">
+      <h2 id="author-themes-title" class="list-title">Themes</h2>
+      <div class="author-dossier__list">
+        {{ range $themes }}
+          {{ $theme := . }}
+          <article class="author-dossier__entry author-dossier__entry--theme">
+            <div class="author-dossier__meta">Collection</div>
+            <h3 class="author-dossier__title">
+              {{ with $theme.page }}
+                <a href="{{ .RelPermalink }}">{{ $theme.collection.title }}</a>
+              {{ else }}
+                {{ $theme.collection.title }}
+              {{ end }}
+            </h3>
+            {{ with $theme.collection.description }}
+              <p class="author-dossier__summary">{{ . }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="author-dossier__section page-shell page-shell--reading" aria-labelledby="author-archive-title">
+      <h2 id="author-archive-title" class="list-title">From the Archive</h2>
+      <div class="author-dossier__list">
+        {{ range $archiveEssays }}
+          <article class="author-dossier__entry">
+            <div class="author-dossier__meta">{{ .Date.Format "January 2, 2006" }}</div>
+            <h3 class="author-dossier__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            {{ with partial "discovery/page-summary.html" . }}
+              <p class="author-dossier__summary">{{ . }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  </article>
+{{ end }}
