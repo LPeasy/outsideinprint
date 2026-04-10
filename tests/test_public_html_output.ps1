@@ -87,7 +87,7 @@ function Get-JsonLdObjects {
   param([string]$Html)
 
   $results = New-Object System.Collections.Generic.List[object]
-  $matches = [regex]::Matches($Html, "(?is)<script\b[^>]*type\s*=\s*(?:\"application/ld\+json\"|'application/ld\+json'|application/ld\+json)[^>]*>(.*?)</script>")
+  $matches = [regex]::Matches($Html, '(?is)<script\b[^>]*type\s*=\s*(?:"application/ld\+json"|''application/ld\+json''|application/ld\+json)[^>]*>(.*?)</script>')
 
   foreach ($match in $matches) {
     $json = $match.Groups[1].Value.Trim()
@@ -1130,3 +1130,4 @@ if ($uxIssues.Count -gt 0) {
 Write-Host "Public HTML output regression test passed."
 $global:LASTEXITCODE = 0
 exit 0
+
