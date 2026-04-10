@@ -23,9 +23,6 @@
 {{- end -}}
 
 {{- $fullTitle := $title -}}
-{{- if not .IsHome -}}
-  {{- $fullTitle = printf "%s | %s" $title site.Title -}}
-{{- end -}}
 
 {{- $description := partial "metadata_description.html" . -}}
 {{- $image := partial "metadata_image.html" . -}}

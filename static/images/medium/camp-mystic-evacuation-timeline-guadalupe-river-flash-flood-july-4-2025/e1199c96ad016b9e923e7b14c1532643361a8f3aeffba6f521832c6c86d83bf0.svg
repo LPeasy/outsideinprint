@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Imported image placeholder</title>
+  <desc id="desc">Localized placeholder for a missing imported Medium image from camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.</desc>
+  <rect width="1200" height="800" fill="#ede6da"/>
+  <rect x="36" y="36" width="1128" height="728" fill="none" stroke="#7b6e61" stroke-width="2"/>
+  <text x="96" y="168" fill="#2e2a26" font-family="Georgia, 'Times New Roman', serif" font-size="34">Imported Medium image unavailable during migration</text>
+  <text x="96" y="236" fill="#4f463e" font-family="Georgia, 'Times New Roman', serif" font-size="26">Camp Mystic Evacuation Timeline ~ Guadalupe River Flash Flood (July 4, 2025)</text>
+  <text x="96" y="286" fill="#6a5f55" font-family="Georgia, 'Times New Roman', serif" font-size="22">Asset 4 for camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025</text>
+  <line x1="96" y1="332" x2="1104" y2="332" stroke="#b5aa9c" stroke-width="2"/>
+  <text x="96" y="404" fill="#5c5249" font-family="Georgia, 'Times New Roman', serif" font-size="24">This local placeholder breaks the runtime dependency on Medium CDN media.</text>
+  <text x="96" y="448" fill="#5c5249" font-family="Georgia, 'Times New Roman', serif" font-size="24">A broader recovery pass can replace this with the original imported image later.</text>
+  <text x="96" y="706" fill="#7b6e61" font-family="Consolas, 'Courier New', monospace" font-size="16">Source URL: https://cdn-images-1.medium.com/max/800/1*ucYIWdAp9tDgxW-EZEol-Q@2x.jpeg</text>
+</svg>

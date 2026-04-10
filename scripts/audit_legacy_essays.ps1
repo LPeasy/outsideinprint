@@ -345,6 +345,17 @@ function Get-TopBodyWindow {
   return (($Body -split "`r?`n") | Select-Object -First $LineCount) -join "`n"
 }
 
+function Get-DuplicateTitleSearchWindow {
+  param([string]$Body,[int]$LineCount = 60)
+
+  $window = Get-TopBodyWindow -Body $Body -LineCount $LineCount
+  $window = [regex]::Replace($window, '!\[[^\]]*\]\([^)]+\)', ' ')
+  $window = [regex]::Replace($window, '\[([^\]]+)\]\([^)]+\)', '$1')
+  $window = [regex]::Replace($window, '<[^>]+>', ' ')
+  $window = [regex]::Replace($window, 'https?://\S+', ' ')
+  return $window
+}
+
 function Strip-WrappingEmphasis {
   param([string]$Value)
   $text = $Value.Trim()
@@ -475,6 +486,7 @@ $rows = New-Object System.Collections.Generic.List[object]
 foreach ($page in $pages) {
   $body = $page.Body
   $topWindow = Get-TopBodyWindow $body
+  $duplicateTitleWindow = Get-DuplicateTitleSearchWindow -Body $body
   $matchedCollections = New-Object System.Collections.Generic.List[object]
   foreach ($collection in $collections) {
     $matchesExplicit = $page.Collections -contains $collection.Slug
@@ -485,6 +497,7 @@ foreach ($page in $pages) {
 
   $issueCounts = [ordered]@{
     medium_cta = Count-Matches -Text $body -Patterns $ctaPatterns
+    medium_cdn_media = Count-Matches -Text $body -Patterns @('cdn-images-1\.medium\.com')
     author_note = Count-Matches -Text $body -Patterns @('(?im)^\s{0,3}(?:#+\s*)?(?:author''?s note|note from the author)\b')
     embed_remnants = Count-Matches -Text $body -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','raw HTML omitted','(?im)^\s*\[Embedded media:','<figure\b','<img\b')
     mojibake = Count-Matches -Text $body -Patterns $mojibakePatterns
@@ -499,8 +512,8 @@ foreach ($page in $pages) {
   }
 
   if ($page.MediumSourceUrl) {
-    if ($topWindow -match [regex]::Escape($page.Title)) { $issueCounts.duplicated_title++ }
-    if ($page.Subtitle -and $topWindow -match [regex]::Escape($page.Subtitle)) { $issueCounts.duplicated_title++ }
+    if ($duplicateTitleWindow -match [regex]::Escape($page.Title)) { $issueCounts.duplicated_title++ }
+    if ($page.Subtitle -and $duplicateTitleWindow -match [regex]::Escape($page.Subtitle)) { $issueCounts.duplicated_title++ }
   }
 
   $issueTypes = Build-IssueSummary ([pscustomobject]$issueCounts)
@@ -544,6 +557,7 @@ foreach ($page in $pages) {
 
   $severityScore =
     (4 * [Math]::Min(1, $issueCounts.medium_cta)) +
+    (4 * [Math]::Min(1, $issueCounts.medium_cdn_media)) +
     (3 * [Math]::Min(1, $issueCounts.author_note)) +
     (4 * [Math]::Min(1, $issueCounts.embed_remnants)) +
     (5 * [Math]::Min(1, $issueCounts.mojibake)) +
@@ -565,7 +579,7 @@ foreach ($page in $pages) {
     'batch_3'
   }
 
-  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','caption_residue','ornamental_breaks')
+  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','caption_residue','ornamental_breaks','medium_cdn_media')
   $assistedReviewIssues = @('medium_cta','escaped_linebreaks') + $safeAutoIssues
   $manualLightIssues = @('author_note','manual_bullets','fake_lists','pseudo_headings','source_dumps') + $assistedReviewIssues
   $highSensitivity = $page.Featured -or
@@ -619,6 +633,7 @@ foreach ($page in $pages) {
     featured_collection_member = [bool]($featuredCollectionMatches.Count -gt 0)
     collections = @($matchedCollections | ForEach-Object { $_.Slug })
     has_medium_cta = [bool]($issueCounts.medium_cta -gt 0)
+    has_medium_cdn_media = [bool]($issueCounts.medium_cdn_media -gt 0)
     has_author_note = [bool]($issueCounts.author_note -gt 0)
     has_embed_remnants = [bool]($issueCounts.embed_remnants -gt 0)
     has_encoding_damage = [bool]($issueCounts.mojibake -gt 0)
@@ -629,6 +644,7 @@ foreach ($page in $pages) {
     has_duplicated_title = [bool]($issueCounts.duplicated_title -gt 0)
     has_separator_residue = [bool](($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks) -gt 0)
     medium_cta_count = $issueCounts.medium_cta
+    medium_cdn_media_count = $issueCounts.medium_cdn_media
     author_note_count = $issueCounts.author_note
     embed_remnant_count = $issueCounts.embed_remnants
     encoding_damage_count = $issueCounts.mojibake
@@ -710,7 +726,7 @@ $csvPath = "$ReportBasePath.csv"
 $mdPath = "$ReportBasePath.md"
 Write-TextNoBom $jsonPath ($report | ConvertTo-Json -Depth 8)
 $rowsArray |
-  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue |
+  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_medium_cdn_media,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue |
   Export-Csv -Path $csvPath -NoTypeInformation -Encoding utf8
 
 $issueSort = @(
