@@ -3,12 +3,12 @@
     {{ partial "dashboard/render.html" . }}
   {{ else }}
   {{ $exploreRoutes := slice
-    (dict "page" (site.GetPage "/start-here") "label" "Start Here")
+    (dict "page" (site.GetPage "/start-here") "label" "Welcome")
     (dict "page" (site.GetPage "/essays") "label" "Essays")
     (dict "page" (site.GetPage "/syd-and-oliver") "label" "Dialogues")
     (dict "page" (site.GetPage "/collections") "label" "Collections")
     (dict "page" (site.GetPage "/library") "label" "Library")
-    (dict "label" "Random" "href" ("random/" | absURL) "description" "Enter the archive by chance. This route is useful for exploration, not as a canonical destination.")
+    (dict "label" "Feeling curious?" "href" ("random/" | absURL) "description" "Enter the archive by chance. This route is useful for exploration, not as a canonical destination.")
   }}
   {{ partial "home_front_page.html" . }}
   {{ partial "home_selected_collections.html" . }}
@@ -28,7 +28,7 @@
   <section class="home-browse home-browse--utility" aria-labelledby="home-browse-title">
     <header class="home-browse__header page-shell page-shell--wide">
       <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
-      <p class="home-browse__dek">Use the section landings, collections, library, or a random route when you want to move beyond the front page.</p>
+      <p class="home-browse__dek">Use the section landings, collections, library, or Feeling curious? when you want to move beyond the homepage.</p>
     </header>
     <div class="grid home-browse__grid page-shell page-shell--grid">
       {{ range $exploreRoutes }}
@@ -42,7 +42,7 @@
           {{ $description = $page.Params.description | default $description }}
         {{ end }}
         <a class="card" href="{{ $href }}"
-          {{- if eq .label "Random" }}
+          {{- if eq .label "Feeling curious?" }}
             data-analytics-event="internal_promo_click"
             data-analytics-source-slot="random_link"
             data-analytics-title="Random"

@@ -27,14 +27,14 @@
     "eyebrow" "Use the library, or take a guided path"
     "links" (slice
       (dict "href" ("collections/" | absURL) "label" "Browse collections")
-      (dict "href" ("start-here/" | absURL) "label" "Read Start Here")
+      (dict "href" ("start-here/" | absURL) "label" "Welcome")
     )
   ) }}
   <div class="library-search page-shell page-shell--feature">
     <label class="library-search-label" for="library-search">Search the library</label>
     <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, collections, and versions" autocomplete="off" spellcheck="false" />
   </div>
-  <div id="library-search-empty" class="library-empty page-shell page-shell--feature" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or start with <a href="{{ "start-here/" | absURL }}">Start Here</a>.</div>
+  <div id="library-search-empty" class="library-empty page-shell page-shell--feature" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or begin with <a href="{{ "start-here/" | absURL }}">Welcome</a>.</div>
 
   {{ range $section := $librarySections }}
     {{ $sectionKey := index $section "key" }}

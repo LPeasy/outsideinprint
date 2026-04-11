@@ -67,14 +67,9 @@ if ($indexTemplate -match [regex]::Escape('partial "home_imprint_statement.html"
   throw 'Expected layouts/index.html to omit the homepage imprint partial from the homepage composition.'
 }
 
-$supportLine = ('Support independent journalism ' + [string][char]0x2192)
-
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
-  'class="home-manifesto"',
-  'A digital imprint of essays, reports, dialogues, and literature.',
-  'Color over the lines. Read beyond the feed. Think for yourself.',
   'id="home-front-page-title"',
   'data-home-front-page-region="lead"',
   'data-home-front-page-region="secondary"'
@@ -84,37 +79,33 @@ foreach ($requiredSnippet in @(
   }
 }
 
-if ($homeFrontPageTemplate -notmatch [regex]::Escape($supportLine)) {
-  throw "Expected layouts/partials/home_front_page.html to contain: $supportLine"
-}
-
-$manifestoOrder = @(
+$homepageOrder = @(
   'id="home-front-page-title"',
-  'class="home-manifesto"',
   'class="home-front-page__stories"'
 )
 
 $lastManifestoIndex = -1
-foreach ($snippet in $manifestoOrder) {
+foreach ($snippet in $homepageOrder) {
   $currentIndex = $homeFrontPageTemplate.IndexOf($snippet, [System.StringComparison]::Ordinal)
   if ($currentIndex -lt 0) {
-    throw "Expected layouts/partials/home_front_page.html to contain ordered manifesto snippet: $snippet"
+    throw "Expected layouts/partials/home_front_page.html to contain ordered homepage snippet: $snippet"
   }
 
   if ($currentIndex -le $lastManifestoIndex) {
-    throw "Expected the homepage manifesto strip to remain between the hidden homepage heading and the story grid in layouts/partials/home_front_page.html."
+    throw "Expected the hidden homepage heading to remain above the homepage story grid in layouts/partials/home_front_page.html."
   }
 
   $lastManifestoIndex = $currentIndex
 }
 
-if ($homeFrontPageTemplate -notmatch '<a class="home-manifesto__support-link" href="#newsletter-signup-title">') {
-  throw 'Expected the homepage manifesto support line to render as a real link targeting the newsletter module.'
-}
-
 foreach ($retiredSnippet in @(
   '>Front Page<',
-  'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below.'
+  'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below.',
+  'class="home-manifesto"',
+  'A digital imprint of essays, reports, dialogues, and literature.',
+  'Color over the lines. Read beyond the feed. Think for yourself.',
+  'Support independent journalism',
+  'Also on the front page'
 )) {
   if ($homeFrontPageTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/partials/home_front_page.html to remove the retired visible front-page intro block snippet: $retiredSnippet"
@@ -190,7 +181,7 @@ foreach ($requiredSnippet in @(
 
 $defaultListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/list.html') -Raw
 foreach ($requiredSnippet in @(
-  'Read Start Here',
+  'Welcome',
   'partial "discovery/page-list-item.html"',
   'No published pieces are listed here yet.'
 )) {
@@ -202,12 +193,19 @@ foreach ($requiredSnippet in @(
 $startHereTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/start-here/single.html') -Raw
 foreach ($requiredSnippet in @(
   '.Params.description',
-  'Choose a path into the archive',
-  'Follow a Collection',
-  'Search the Library'
+  'start-here-content'
 )) {
   if ($startHereTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/start-here/single.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'journey_links.html',
+  'Choose a path into the archive'
+)) {
+  if ($startHereTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/start-here/single.html to remove the retired Welcome-page guidance shell snippet: $retiredSnippet"
   }
 }
 

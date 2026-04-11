@@ -266,8 +266,8 @@ textarea{
   align-items:center;
   justify-content:center;
   gap:.1rem;
-  padding:.28rem .72rem;
-  border:1px solid rgba(236,231,223,.16);
+  padding:.24rem .62rem;
+  border:1px solid rgba(236,231,223,.13);
   border-radius:4px;
   background:transparent;
   line-height:1;
@@ -288,7 +288,7 @@ textarea{
 .nav__explore-link:hover,
 .nav__explore-link:focus-visible{
   background:rgba(236,231,223,.035);
-  border-color:rgba(236,231,223,.24);
+  border-color:rgba(236,231,223,.2);
   text-decoration:none;
 }
 .nav__explore-link:hover::after,
@@ -297,8 +297,8 @@ textarea{
   transform:translateX(0);
 }
 .nav__explore-link[aria-current="page"]{
-  border-color:rgba(236,231,223,.22);
-  background:rgba(236,231,223,.03);
+  border-color:rgba(236,231,223,.18);
+  background:rgba(236,231,223,.025);
   text-decoration:none;
 }
 .nav .dot{ display:none; }
@@ -615,63 +615,17 @@ textarea{
 
 /* Homepage editorial surface */
 .home-front-page{
-  margin-top:0;
-}
-.home-manifesto{
-  margin:0 0 1.05rem;
-}
-.home-manifesto__inner{
-  max-width:42rem;
-  margin:0 auto;
-  padding:1.05rem 0 1.15rem;
-  border-top:1px solid rgba(236,231,223,.12);
-  border-bottom:1px solid rgba(236,231,223,.1);
-  text-align:center;
-}
-.home-manifesto__line{
-  margin:0;
-  text-wrap:balance;
-}
-.home-manifesto__line--primary,
-.home-manifesto__line--secondary{
-  font-family:var(--font-display);
-  font-style:normal;
-}
-.home-manifesto__line--primary{
-  color:var(--text-secondary);
-  font-size:clamp(1.12rem, 1.04rem + 0.42vw, 1.24rem);
-  line-height:1.5;
-}
-.home-manifesto__line--secondary{
-  margin-top:0.56rem;
-  color:var(--text-primary);
-  font-size:clamp(1.5rem, 1.18rem + 1vw, 1.9rem);
-  line-height:1.3;
-}
-.home-manifesto__line--support{
-  margin-top:0.82rem;
-  font-family:var(--font-ui);
-  font-size:.74rem;
-  letter-spacing:.14em;
-  line-height:1.5;
-  text-transform:uppercase;
-}
-.home-manifesto__support-link{
-  color:var(--accent);
-  border-bottom:none;
-}
-.home-manifesto__support-link:hover{
-  color:var(--accent-hover);
+  margin-top:0.15rem;
 }
 .home-front-page__stories{
   display:grid;
   grid-template-columns:minmax(0, 1.65fr) minmax(0, 1fr);
   gap:2rem 2.35rem;
   align-items:start;
-  padding-top:0;
+  padding-top:0.15rem;
 }
 .home-front-page__lead{
-  padding:0 2rem 0 0;
+  padding:0 1.8rem 0 0;
   border-right:1px solid rgba(236,231,223,.1);
 }
 .editorial-cartoon{
@@ -722,9 +676,9 @@ textarea{
 .home-front-page__lead-title{
   margin:0;
   color:var(--text-primary);
-  font-size:clamp(2.6rem, 4.8vw, 3.25rem);
+  font-size:clamp(2.42rem, 4.35vw, 3.05rem);
   font-weight:600;
-  line-height:1.04;
+  line-height:1.06;
   letter-spacing:-.03em;
   text-wrap:balance;
 }
@@ -764,14 +718,14 @@ textarea{
 .home-front-page__secondary-title{
   margin:0;
   color:var(--text-primary);
-  font-size:1.34rem;
-  line-height:1.35;
+  font-size:1.4rem;
+  line-height:1.33;
 }
 .home-front-page__secondary-dek{
-  margin-top:.65rem;
+  margin-top:.58rem;
   color:var(--text-secondary);
-  font-size:.93rem;
-  line-height:1.66;
+  font-size:.95rem;
+  line-height:1.64;
 }
 .home-front-page__secondary-meta{
   margin-top:.85rem;
@@ -1124,12 +1078,26 @@ textarea{
   border-top:none;
 }
 .start-here-intro{
-  color:var(--text-secondary);
-  font-size:1.02rem;
-  line-height:1.78;
+  gap:.7rem;
+  text-align:center;
 }
 .start-here-intro p{
   margin:0;
+}
+.start-here-intro .home-manifesto__line--primary,
+.start-here-intro .home-manifesto__line--secondary{
+  font-family:var(--font-display);
+  font-style:normal;
+}
+.start-here-intro .home-manifesto__line--primary{
+  color:var(--text-secondary);
+  font-size:clamp(1.12rem, 1.04rem + 0.42vw, 1.24rem);
+  line-height:1.5;
+}
+.start-here-intro .home-manifesto__line--secondary{
+  color:var(--text-primary);
+  font-size:clamp(1.5rem, 1.18rem + 1vw, 1.9rem);
+  line-height:1.3;
 }
 .start-here-map{
   display:grid;
@@ -2840,22 +2808,6 @@ button.dashboard-chip{
   .dashboard-hero{
     padding:0.9rem;
   }
-  .home-manifesto__inner{
-    max-width:42rem;
-    padding:1rem 0 1.05rem;
-  }
-  .home-manifesto__line--primary{
-    font-size:1.04rem;
-  }
-  .home-manifesto__line--secondary{
-    margin-top:0.5rem;
-    font-size:1.34rem;
-    line-height:1.38;
-  }
-  .home-manifesto__line--support{
-    margin-top:0.68rem;
-    font-size:0.68rem;
-  }
   .home-selected-collections__header,
   .home-recent-work__header,
   .home-browse__header,
@@ -2863,7 +2815,7 @@ button.dashboard-chip{
     padding-top:0.9rem;
   }
   .home-front-page__lead-title{
-    font-size:2.2rem;
+    font-size:2.08rem;
   }
   .home-front-page__lead-dek{
     font-size:1.02rem;

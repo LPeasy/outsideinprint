@@ -1,5 +1,5 @@
 {{ $stickyMasthead := and .IsPage (not (in (slice "collections" "random") .Section)) }}
-{{ $isStartHere := or (eq .RelPermalink "/start-here/") (eq .Section "start-here") }}
+{{ $isWelcome := or (eq .RelPermalink "/start-here/") (eq .Section "start-here") }}
 {{ $isEssays := eq .Section "essays" }}
 {{ $isSydAndOliver := eq .Section "syd-and-oliver" }}
 {{ $isCollections := eq .Section "collections" }}
@@ -34,7 +34,7 @@
   </div>
 
   <nav class="nav nav--section-rail" aria-label="Primary">
-    <a href="{{ "start-here/" | absURL }}"{{ if $isStartHere }} aria-current="page"{{ end }}>Start Here</a><span class="dot">&bull;</span>
+    <a href="{{ "start-here/" | absURL }}"{{ if $isWelcome }} aria-current="page"{{ end }}>Welcome</a><span class="dot">&bull;</span>
     <a href="{{ "essays/" | absURL }}"{{ if $isEssays }} aria-current="page"{{ end }}>Essays</a><span class="dot">&bull;</span>
     <a href="{{ "syd-and-oliver/" | absURL }}"{{ if $isSydAndOliver }} aria-current="page"{{ end }}>Dialogues</a><span class="dot">&bull;</span>
     <a href="{{ "collections/" | absURL }}"{{ if $isCollections }} aria-current="page"{{ end }}>Collections</a><span class="dot">&bull;</span>
