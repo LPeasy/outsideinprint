@@ -1,74 +1,32 @@
 [
   {
+    "slot": "collection_page",
+    "collection": "the-ledger",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_related",
+    "collection": "floods-water-built-environment",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
     "slot": "related_content",
     "collection": "floods-water-built-environment",
     "clicks": 1.0,
     "downstream_reads": 0.0
   },
   {
-    "slot": "collection_page",
-    "collection": "syd-and-oliver-dialogues",
-    "clicks": 2.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "homepage_recent",
-    "collection": "",
-    "clicks": 2.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "collection_page",
-    "collection": "floods-water-built-environment",
-    "clicks": 3.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "homepage_featured_collection",
-    "collection": "the-ledger",
-    "clicks": 1.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "homepage_selected_hero",
+    "slot": "homepage_selected_core",
     "collection": "",
     "clicks": 3.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "collection_page",
-    "collection": "technology-ai-machine-future",
-    "clicks": 1.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "homepage_featured_collection",
-    "collection": "floods-water-built-environment",
-    "clicks": 1.0,
-    "downstream_reads": 0.0
+    "downstream_reads": 1.0
   },
   {
     "slot": "collection_page",
     "collection": "modern-bios",
-    "clicks": 1.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "homepage_selected_core",
-    "collection": "",
     "clicks": 2.0,
-    "downstream_reads": 1.0
-  },
-  {
-    "slot": "collection_related",
-    "collection": "risk-uncertainty",
-    "clicks": 1.0,
-    "downstream_reads": 0.0
-  },
-  {
-    "slot": "collection_page",
-    "collection": "the-ledger",
-    "clicks": 1.0,
     "downstream_reads": 0.0
   },
   {
@@ -79,6 +37,66 @@
   },
   {
     "slot": "random_link",
+    "collection": "",
+    "clicks": 2.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_page",
+    "collection": "technology-ai-machine-future",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_page",
+    "collection": "moral-religious-philosophical-essays",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_related",
+    "collection": "risk-uncertainty",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_page",
+    "collection": "syd-and-oliver-dialogues",
+    "clicks": 3.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "homepage_featured_collection",
+    "collection": "the-ledger",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "homepage_featured_collection",
+    "collection": "floods-water-built-environment",
+    "clicks": 1.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_page",
+    "collection": "floods-water-built-environment",
+    "clicks": 4.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "homepage_selected_hero",
+    "collection": "",
+    "clicks": 4.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "collection_page",
+    "collection": "risk-uncertainty",
+    "clicks": 3.0,
+    "downstream_reads": 0.0
+  },
+  {
+    "slot": "homepage_recent",
     "collection": "",
     "clicks": 2.0,
     "downstream_reads": 0.0
