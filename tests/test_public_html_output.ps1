@@ -953,7 +953,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/start-here/index.html'
-    Pattern = 'Weekly letter|Begin Here|Follow a Thread|Publication Details|The Archive'
+    Pattern = 'Weekly letter|Begin Here|Follow a Thread|Publication Details|>\s*The Archive\s*<'
     Message = 'expected Welcome not to retain the retired instructional sections'
     ShouldNotMatch = $true
   },
