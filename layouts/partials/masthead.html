@@ -1,22 +1,25 @@
 {{ $stickyMasthead := and .IsPage (not (in (slice "collections" "random") .Section)) }}
+{{ $isHomeMasthead := .IsHome }}
 {{ $isWelcome := or (eq .RelPermalink "/start-here/") (eq .Section "start-here") }}
 {{ $isEssays := eq .Section "essays" }}
 {{ $isSydAndOliver := eq .Section "syd-and-oliver" }}
 {{ $isCollections := eq .Section "collections" }}
 {{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
 {{ $isRandom := eq .Section "random" }}
-{{ $mastheadVariant := cond .IsHome "masthead--home" "masthead--inner" }}
+{{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
 <header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
     <div class="masthead-nameplate__top-ornament" aria-hidden="true"></div>
     <div class="masthead-nameplate__body">
-      <div class="masthead-side-deck masthead-side-deck--left" aria-hidden="true">
-        <span>ESSAYS</span>
-        <span>REPORTS</span>
-        <span>DIALOGUES</span>
-        <span>LITERATURE</span>
-      </div>
+      {{ if $isHomeMasthead }}
+        <div class="masthead-side-deck masthead-side-deck--left" aria-hidden="true">
+          <span>ESSAYS</span>
+          <span>REPORTS</span>
+          <span>DIALOGUES</span>
+          <span>LITERATURE</span>
+        </div>
+      {{ end }}
       <a class="brand-link" href="{{ "" | absURL }}" aria-label="Outside In Print home">
         <div class="title">
           <span class="top">OUTSIDE</span>
@@ -24,11 +27,13 @@
         </div>
         <div class="subtitle">A Digital Imprint</div>
       </a>
-      <div class="masthead-side-deck masthead-side-deck--right" aria-hidden="true">
-        <span>CURATED</span>
-        <span>ARCHIVE</span>
-        <span>EST. 2025</span>
-      </div>
+      {{ if $isHomeMasthead }}
+        <div class="masthead-side-deck masthead-side-deck--right" aria-hidden="true">
+          <span>CURATED</span>
+          <span>ARCHIVE</span>
+          <span>EST. 2025</span>
+        </div>
+      {{ end }}
     </div>
     <div class="masthead-nameplate__divider" aria-hidden="true"></div>
   </div>

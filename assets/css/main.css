@@ -209,30 +209,55 @@ textarea{
   margin:0 auto 34px;
   padding:14px 24px 12px;
 }
-.masthead--home .nav--section-rail{
+.masthead--full .nav--section-rail{
   margin-bottom:24px;
 }
-.masthead--home .brand-link{
+.masthead--full .brand-link{
   justify-self:center;
 }
-.masthead--inner .masthead-side-deck{
-  display:none;
-}
-.masthead--inner .masthead-nameplate{
+.masthead--compressed .masthead-nameplate{
   max-width:760px;
 }
-.masthead--inner .masthead-nameplate__body{
+.masthead--compressed .masthead-nameplate__top-rule{
+  margin-bottom:13px;
+  background:rgba(236,231,223,.26);
+}
+.masthead--compressed .masthead-nameplate__top-ornament{
+  width:10px;
+  height:10px;
+  margin-bottom:13px;
+}
+.masthead--compressed .masthead-nameplate__body{
   grid-template-columns:1fr;
 }
-.masthead--inner .brand-link{
+.masthead--compressed .brand-link{
   max-width:34rem;
   margin:0 auto;
 }
-.masthead--inner .title{
-  font-size:clamp(3rem, 5vw, 3.65rem);
+.masthead--compressed .title{
+  font-size:clamp(3.45rem, 4.8vw, 3.85rem);
 }
-.masthead--inner .subtitle{
-  font-size:.82rem;
+.masthead--compressed .subtitle{
+  margin-top:.62rem;
+  font-size:.84rem;
+}
+.masthead--compressed .masthead-nameplate__divider{
+  height:16px;
+  margin:18px 0 14px;
+}
+.masthead--compressed .masthead-nameplate__divider::before{
+  border-top-color:rgba(236,231,223,.34);
+}
+.masthead--compressed .masthead-nameplate__divider::after{
+  width:7px;
+  height:7px;
+  border-color:rgba(236,231,223,.3);
+}
+.masthead--compressed .nav--section-rail{
+  max-width:760px;
+  margin-bottom:22px;
+  padding-top:12px;
+  padding-bottom:10px;
 }
 .masthead--dashboard .nav{
   margin-bottom:18px;
@@ -390,8 +415,14 @@ textarea{
     padding-left:18px;
     padding-right:18px;
   }
-  .masthead--home .nav--section-rail{
+  .masthead--full .nav--section-rail{
     margin-bottom:20px;
+  }
+  .masthead--compressed .masthead-nameplate{
+    max-width:1000px;
+  }
+  .masthead--compressed .nav--section-rail{
+    max-width:1000px;
   }
 }
 

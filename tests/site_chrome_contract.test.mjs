@@ -20,10 +20,15 @@ test("masthead removes books and uses the Dialogues label", () => {
   assert.match(masthead, />Welcome</);
   assert.match(masthead, />Dialogues</);
   assert.match(masthead, />Feeling curious\?</);
+  assert.match(masthead, /masthead--full/);
+  assert.match(masthead, /masthead--compressed/);
+  assert.match(masthead, /if \$isHomeMasthead/);
   assert.doesNotMatch(masthead, />Start Here</);
   assert.doesNotMatch(masthead, />S and O</);
   assert.doesNotMatch(masthead, />Syd and Oliver</);
   assert.doesNotMatch(masthead, />Books</);
+  assert.doesNotMatch(masthead, /masthead--home/);
+  assert.doesNotMatch(masthead, /masthead--inner/);
   assert.match(masthead, /aria-current="page"/);
 });
 
@@ -65,7 +70,12 @@ test("homepage cards keep only the main titles and use the shared grid flow", ()
 test("sticky editorial chrome pins only the compact section rail", () => {
   assert.match(css, /#main-content\{\s*scroll-margin-top:56px;\s*\}/);
   assert.match(css, /\.masthead--sticky \.nav--section-rail\{\s*position:sticky;\s*top:0;/);
+  assert.match(css, /\.masthead--compressed \.masthead-nameplate\{[\s\S]*max-width:760px;/);
+  assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(3\.45rem, 4\.8vw, 3\.85rem\);/);
+  assert.match(css, /\.masthead--full \.nav--section-rail\{\s*margin-bottom:24px;/);
   assert.doesNotMatch(css, /\.masthead--sticky\{\s*position:sticky;/);
+  assert.doesNotMatch(css, /\.masthead--home/);
+  assert.doesNotMatch(css, /\.masthead--inner/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*#main-content\{\s*scroll-margin-top:0;\s*\}/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.masthead--sticky \.nav--section-rail\{\s*position:static;/);
 });
