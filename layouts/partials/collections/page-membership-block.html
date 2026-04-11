@@ -26,7 +26,7 @@
           <span>{{ title .state.kind }}</span>
           <span>{{ .state.count }} pieces</span>
           {{ if eq $currentSlug (lower (printf "%v" (.collection.start_here | default ""))) }}
-            <span>Start Here</span>
+            <span>Entry Point</span>
           {{ end }}
         </div>
       </div>

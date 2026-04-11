@@ -294,8 +294,8 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary'
   }
   'public/start-here/index.html' = @{
-    Title = 'Start Here'
-    Description = 'An editorial welcome to Outside In Print and a measured guide into the archive.'
+    Title = 'Welcome'
+    Description = 'A quiet introduction to Outside In Print and a few paths into the archive.'
     Canonical = 'https://outsideinprint.org/start-here/'
     OgType = 'website'
     TwitterCard = 'summary'
@@ -833,31 +833,6 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.'
-    Message = 'expected the homepage to render the manifesto''s first line'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Color over the lines\. Read beyond the feed\. Think for yourself\.'
-    Message = 'expected the homepage to render the manifesto''s second line'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = $manifestoSupportLinePattern
-    Message = 'expected the homepage to render the manifesto''s support line'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = $manifestoPlacementPattern
-    Message = 'expected the homepage manifesto strip to appear above the story grid'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = $manifestoLinkPattern
-    Message = 'expected the homepage manifesto support line to render as a real text link to the newsletter module'
-  },
-  @{
-    Path = 'public/index.html'
     Pattern = 'home-recent-work__list\s+page-shell\s+page-shell--grid'
     Message = 'expected the homepage recent-work module to render with the grid shell variant'
   },
@@ -871,6 +846,35 @@ $requiredUxChecks = @(
     Pattern = 'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below\.'
     Message = 'expected the homepage not to retain the retired front-page intro blurb'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.'
+    Message = 'expected the homepage not to retain the moved philosophy line'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Color over the lines\. Read beyond the feed\. Think for yourself\.'
+    Message = 'expected the homepage not to retain the moved philosophy line'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Support independent journalism'
+    Message = 'expected the homepage not to retain the moved manifesto support line'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Also on the front page'
+    Message = 'expected the homepage not to retain the explicit front-page rail label'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Feeling curious\?'
+    Message = 'expected the homepage to expose the renamed exploratory route label'
   },
   @{
     Path = 'public/index.html'
@@ -897,8 +901,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/start-here/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/syd-and-oliver/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected Start Here to expose direct navigation into the site''s major discovery lanes'
+    Pattern = '(?s)A digital imprint of essays, reports, dialogues, and literature\..*?Color over the lines\. Read beyond the feed\. Think for yourself\.'
+    Message = 'expected Welcome to carry the moved philosophy lines'
   },
   @{
     Path = 'public/essays/index.html'
@@ -939,24 +943,29 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/start-here/index.html'
-    Pattern = 'Dialogues \| 5 min read \| Fiction'
-    Message = 'expected Start Here to use the Dialogues label in featured lane metadata'
+    Pattern = '(?s)(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/syd-and-oliver/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/random/'
+    Message = 'expected Welcome to expose direct navigation into the site''s major discovery lanes'
   },
   @{
     Path = 'public/start-here/index.html'
-    Pattern = 'S and O'
-    Message = 'expected Start Here not to retain the retired S and O label'
+    Pattern = 'Feeling curious\?'
+    Message = 'expected Welcome to use the renamed exploratory route label'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'Weekly letter|Begin Here|Follow a Thread|Publication Details|The Archive'
+    Message = 'expected Welcome not to retain the retired instructional sections'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/library/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/start-here/'
-    Message = 'expected the library page to expose collection and Start Here navigation'
+    Message = 'expected the library page to expose collection and Welcome navigation'
   },
   @{
     Path = 'public/library/index.html'
     Type = 'library-empty-state'
-    Message = 'expected the library empty state to point readers toward collections and Start Here'
+    Message = 'expected the library empty state to point readers toward collections and Welcome'
   },
   @{
     Path = 'public/library/index.html'
@@ -997,7 +1006,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/collections/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/start-here/'
-    Message = 'expected the collections index to expose library and Start Here navigation'
+    Message = 'expected the collections index to expose library and Welcome navigation'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
@@ -1066,7 +1075,7 @@ foreach ($check in $requiredUxChecks) {
     $html = $targetPageHtml[$relativePath]
     $hasEmptyStateText = $html -match 'No matching pieces found'
     $hasCollectionsText = $html -match 'Collections'
-    $hasStartHereText = $html -match 'Start Here'
+    $hasStartHereText = $html -match 'Welcome'
     $hasCollectionsDestination = $html -match '(?:https://outsideinprint\.org)?/collections/'
     $hasStartHereDestination = $html -match '(?:https://outsideinprint\.org)?/start-here/'
 
