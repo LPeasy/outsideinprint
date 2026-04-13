@@ -1435,8 +1435,15 @@ h2{ margin-top:34px; }
 }
 .collection-card{
   display:grid;
-  gap:.75rem;
+  gap:.9rem;
   align-content:start;
+}
+.collection-card .v{
+  font-size:1.16rem;
+  line-height:1.28;
+}
+.collection-card .d{
+  margin-top:.05rem;
 }
 .collection-meta{
   display:flex;
@@ -1447,6 +1454,39 @@ h2{ margin-top:34px; }
   font-size:.68rem;
   font-weight:600;
   letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.collections-index{
+  display:grid;
+  gap:1.8rem;
+}
+.collections-index__group{
+  display:grid;
+  gap:1rem;
+}
+.collections-index__group-title{
+  margin:0;
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:1.3rem;
+  font-weight:600;
+  line-height:1.28;
+}
+.collections-index__subgroup{
+  display:grid;
+  gap:.15rem;
+}
+.collections-index__subgroup + .collections-index__subgroup{
+  margin-top:.55rem;
+}
+.collections-index__subgroup-title{
+  margin:0 0 .25rem;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  line-height:1.5;
   text-transform:uppercase;
 }
 .imprint-header,
@@ -1814,6 +1854,12 @@ h2{ margin-top:34px; }
 @media (max-width:640px){
   .item--variant-modernbio{
     padding-left:.85rem;
+  }
+  .collections-index{
+    gap:1.45rem;
+  }
+  .collections-index__group{
+    gap:.85rem;
   }
   .piece-series-marker{
     gap:.6rem;

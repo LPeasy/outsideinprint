@@ -1009,6 +1009,33 @@ $requiredUxChecks = @(
     Message = 'expected the collections index to expose library and Welcome navigation'
   },
   @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Collections Index'
+    Message = 'expected the collections index to replace the retired flat all-collections heading'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'All Collections'
+    Message = 'expected the collections index not to retain the retired flat list heading'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Featured Series|Featured Topic'
+    Message = 'expected featured collection cards not to retain featured-type kicker labels'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)Series.*?The Ledger.*?Syd and Oliver Dialogues.*?Modern Bios.*?Reported Case Studies'
+    Message = 'expected the collections index to group series collections together'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)Topics.*?Risk.*?Risk, Uncertainty, and Decision-Making.*?Floods.*?Floods, Water, and the Built Environment.*?AI.*?Technology, AI, and the Machine Future.*?Moral / Religious.*?Moral, Religious, and Philosophical Essays.*?Public Power.*?Civic Institutions and Public Power'
+    Message = 'expected the collections index to group topical collections under the new topic subheads'
+  },
+  @{
     Path = 'public/collections/risk-uncertainty/index.html'
     Pattern = 'How to Use This Collection'
     Message = 'expected collection detail pages to include a visible overview section explaining how to use the collection'

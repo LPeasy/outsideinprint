@@ -49,8 +49,6 @@
   >
     {{- if $label -}}
       <div class="k">{{ $label }}</div>
-    {{- else -}}
-      <div class="k">{{ title $entry.state.kind }}</div>
     {{- end -}}
     <div class="v">{{ $entry.collection.title }}</div>
     {{ with $entry.collection.description }}<div class="d">{{ . }}</div>{{ end }}

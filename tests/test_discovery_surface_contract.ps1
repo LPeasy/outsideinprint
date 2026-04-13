@@ -149,10 +149,26 @@ foreach ($requiredSnippet in @(
   'Collections are curated reading threads across the archive',
   'partial "discovery/collection-card.html"',
   'Featured Collections',
-  'All Collections'
+  'Collections Index',
+  'Series',
+  'Topics',
+  'Risk',
+  'Floods',
+  'AI',
+  'Moral / Religious',
+  'Public Power'
 )) {
   if ($collectionsListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/collections/list.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'All Collections',
+  'Featured %s'
+)) {
+  if ($collectionsListTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/collections/list.html to remove the retired collections-index snippet: $retiredSnippet"
   }
 }
 
@@ -248,6 +264,14 @@ if ($mastheadPartial -notmatch '<div class="title">') {
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw
 if ($collectionCardPartial -notmatch 'Recommended entry point') {
   throw 'Expected discovery/collection-card.html to surface the collection start-here link when present.'
+}
+
+if ($collectionCardPartial -notmatch 'if \$label') {
+  throw 'Expected discovery/collection-card.html to keep grid-card kicker rendering optional rather than unconditional.'
+}
+
+if ($collectionCardPartial -match '\{\{- else -\}\}\s*<div class="k">\{\{ title \$entry\.state\.kind \}\}</div>') {
+  throw 'Expected discovery/collection-card.html not to fall back to a default kind kicker on grid cards when no label is provided.'
 }
 
 $webpageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/webpage.html') -Raw

@@ -1,6 +1,25 @@
 {{ define "main" }}
   {{ $entries := partial "collections/get-public-entries.html" . }}
   {{ $featured := slice }}
+  {{ $groupedEntries := dict
+    "series" (dict
+      "title" "Series"
+      "subgroups" (slice
+        (dict "title" "" "slugs" (slice "the-ledger" "syd-and-oliver-dialogues" "modern-bios" "reported-case-studies"))
+      )
+    )
+    "topics" (dict
+      "title" "Topics"
+      "subgroups" (slice
+        (dict "title" "Risk" "slugs" (slice "risk-uncertainty"))
+        (dict "title" "Floods" "slugs" (slice "floods-water-built-environment"))
+        (dict "title" "AI" "slugs" (slice "technology-ai-machine-future"))
+        (dict "title" "Moral / Religious" "slugs" (slice "moral-religious-philosophical-essays"))
+        (dict "title" "Public Power" "slugs" (slice "civic-institutions-and-public-power"))
+      )
+    )
+  }}
+  {{ $groupOrder := slice "series" "topics" }}
   {{ $totalPieces := 0 }}
   {{ range $entries }}
     {{ if .collection.featured }}
@@ -30,7 +49,6 @@
           {{ partial "discovery/collection-card.html" (dict
             "entry" .
             "variant" "grid"
-            "label" (printf "Featured %s" (title .state.kind))
           ) }}
         {{ end }}
       </div>
@@ -38,13 +56,41 @@
   {{ end }}
 
   {{ if gt (len $entries) 0 }}
-    <section class="page-shell page-shell--reading" aria-labelledby="all-collections-title">
-      <h2 id="all-collections-title" class="list-title" style="margin-top:28px;">All Collections</h2>
-      {{ range $entries }}
-        {{ partial "discovery/collection-card.html" (dict
-          "entry" .
-          "variant" "item"
-        ) }}
+    <section class="page-shell page-shell--reading collections-index" aria-labelledby="collections-index-title">
+      <h2 id="collections-index-title" class="list-title" style="margin-top:28px;">Collections Index</h2>
+      {{ range $groupKey := $groupOrder }}
+        {{ $group := index $groupedEntries $groupKey }}
+        {{ $groupSections := slice }}
+        {{ range $subgroup := $group.subgroups }}
+          {{ $subgroupEntries := slice }}
+          {{ range $entries }}
+            {{ if in $subgroup.slugs .collection.slug }}
+              {{ $subgroupEntries = $subgroupEntries | append . }}
+            {{ end }}
+          {{ end }}
+          {{ if gt (len $subgroupEntries) 0 }}
+            {{ $groupSections = $groupSections | append (dict
+              "title" ($subgroup.title | default "")
+              "entries" $subgroupEntries
+            ) }}
+          {{ end }}
+        {{ end }}
+        {{ if gt (len $groupSections) 0 }}
+          <section class="collections-index__group" aria-labelledby="collections-group-{{ $groupKey }}">
+            <h3 id="collections-group-{{ $groupKey }}" class="collections-index__group-title">{{ $group.title }}</h3>
+            {{ range $groupSections }}
+              <div class="collections-index__subgroup">
+                {{ with .title }}<h4 class="collections-index__subgroup-title">{{ . }}</h4>{{ end }}
+                {{ range .entries }}
+                  {{ partial "discovery/collection-card.html" (dict
+                    "entry" .
+                    "variant" "item"
+                  ) }}
+                {{ end }}
+              </div>
+            {{ end }}
+          </section>
+        {{ end }}
       {{ end }}
     </section>
   {{ else }}
