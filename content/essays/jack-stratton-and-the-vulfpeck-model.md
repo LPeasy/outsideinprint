@@ -3,7 +3,9 @@ title: "How Jack Stratton Hacked the Music Industry with Funk, Friends, and Irre
 date: 2025-05-28
 draft: false
 slug: "jack-stratton-and-the-vulfpeck-model"
-section_label: "Essay"
+section_label: "Modern Bio"
+series: ["ModernBios"]
+collections: ["modern-bios"]
 subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
 description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
 version: "1.0"

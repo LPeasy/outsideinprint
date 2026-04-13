@@ -3,7 +3,9 @@ title: "Who Is Pascal Siakam?"
 date: 2025-05-28
 draft: false
 slug: "who-is-pascal-siakam"
-section_label: "Essay"
+section_label: "Modern Bio"
+series: ["ModernBios"]
+collections: ["modern-bios"]
 subtitle: "How “Spicy P” Went from Douala Dreamer to Pacers Playoff Powerhouse"
 description: "Pascal Siakam from childhood in Cameroon to NBA All-Star, and his pivotal role in Indiana’s 2025 playoff run in his own words"
 version: "1.0"

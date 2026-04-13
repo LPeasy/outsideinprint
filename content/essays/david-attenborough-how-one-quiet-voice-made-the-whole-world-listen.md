@@ -3,7 +3,9 @@ title: "David Attenborough: How One Quiet Voice Made the Whole World Listen"
 date: 2025-06-05
 draft: false
 slug: "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen"
-section_label: "Essay"
+section_label: "Modern Bio"
+series: ["ModernBios"]
+collections: ["modern-bios"]
 subtitle: "From black-and-white BBC to the edge of extinction and back"
 description: "Minimalist narration isn’t supposed to change the world. With a steady tone, curious cadence, and enough wonder to move stone-faced politicians to tears, Dav..."
 version: "1.0"

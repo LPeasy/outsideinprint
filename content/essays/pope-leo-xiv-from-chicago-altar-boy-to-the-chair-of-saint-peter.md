@@ -3,7 +3,9 @@ title: "Who Is Pope Leo XIV? Chicago-Born Priest Becomes First American Pope"
 date: 2025-07-10
 draft: false
 slug: "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter"
-section_label: "Essay"
+section_label: "Modern Bio"
+series: ["ModernBios"]
+collections: ["modern-bios"]
 subtitle: "Inside the life of Robert Prevost, the Augustinian priest who made history"
 description: "He grew up in a devout Catholic household in Dolton, a working-class suburb south of the city. His parents, Louis and Mildred Prevost , were both educators d..."
 version: "1.0"
