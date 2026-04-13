@@ -13,6 +13,8 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $failures = @()
 $skipped = @()
+$generatedNodeWrapper = Join-Path $repoRoot "tools/bin/generated/node.cmd"
+$generatedHugoWrapper = Join-Path $repoRoot "tools/bin/generated/hugo.cmd"
 
 . (Join-Path $repoRoot "scripts/dashboard_process_tools.ps1")
 
@@ -38,7 +40,10 @@ try {
   Invoke-Step -Name "Committed snapshot contract" -Action { & (Join-Path $repoRoot "tests/test_analytics_snapshot_contract.ps1") }
 
   if (-not $SkipNode) {
-    if (Test-ExternalCommand -Command "node") {
+    if (Test-Path -LiteralPath $generatedNodeWrapper -PathType Leaf) {
+      Invoke-Step -Name "Node dashboard tests" -Action { & $generatedNodeWrapper --test tests/*.test.mjs }
+    }
+    elseif (Test-ExternalCommand -Command "node") {
       Invoke-Step -Name "Node dashboard tests" -Action { node --test tests/*.test.mjs }
     }
     elseif ($Strict) {
@@ -50,7 +55,11 @@ try {
   }
 
   if (-not $SkipDashboardBuild) {
-    if (Test-ExternalCommand -Command "hugo") {
+    if (Test-Path -LiteralPath $generatedHugoWrapper -PathType Leaf) {
+      Invoke-Step -Name "Dashboard build smoke" -Action { & (Join-Path $repoRoot "tests/test_dashboard_build.ps1") }
+      Invoke-Step -Name "Dashboard Hugo build" -Action { & $generatedHugoWrapper --config hugo-dashboard.toml --gc --minify --destination .dashboard-public }
+    }
+    elseif (Test-ExternalCommand -Command "hugo") {
       Invoke-Step -Name "Dashboard build smoke" -Action { & (Join-Path $repoRoot "tests/test_dashboard_build.ps1") }
       Invoke-Step -Name "Dashboard Hugo build" -Action { hugo --config hugo-dashboard.toml --gc --minify --destination .dashboard-public }
     }
@@ -63,7 +72,10 @@ try {
   }
 
   if (-not $SkipPublicBuild) {
-    if (Test-ExternalCommand -Command "hugo") {
+    if (Test-Path -LiteralPath $generatedHugoWrapper -PathType Leaf) {
+      Invoke-Step -Name "Public Hugo build" -Action { & $generatedHugoWrapper --minify --baseURL "https://lpeasy.github.io/outsideinprint/" }
+    }
+    elseif (Test-ExternalCommand -Command "hugo") {
       Invoke-Step -Name "Public Hugo build" -Action { hugo --minify --baseURL "https://lpeasy.github.io/outsideinprint/" }
     }
     elseif ($Strict) {
@@ -75,7 +87,7 @@ try {
   }
 
   if (-not $SkipBrowserSmoke) {
-    $hasHugo = Test-ExternalCommand -Command "hugo"
+    $hasHugo = (Test-Path -LiteralPath $generatedHugoWrapper -PathType Leaf) -or (Test-ExternalCommand -Command "hugo")
     $browserResolution = Resolve-DashboardBrowserPath -PreferredPath $BrowserPath
     $browserLaunch = $null
 
@@ -86,7 +98,12 @@ try {
     if ($browserResolution.Found -and $browserLaunch.Success -and $hasHugo) {
       Invoke-Step -Name "Browser smoke build" -Action {
         $baseUrl = ([System.Uri]((Resolve-Path $repoRoot).Path + [System.IO.Path]::DirectorySeparatorChar + ".dashboard-public-browser" + [System.IO.Path]::DirectorySeparatorChar)).AbsoluteUri
-        hugo --config hugo-dashboard.toml --gc --minify --baseURL $baseUrl --destination .dashboard-public-browser
+        if (Test-Path -LiteralPath $generatedHugoWrapper -PathType Leaf) {
+          & $generatedHugoWrapper --config hugo-dashboard.toml --gc --minify --baseURL $baseUrl --destination .dashboard-public-browser
+        }
+        else {
+          hugo --config hugo-dashboard.toml --gc --minify --baseURL $baseUrl --destination .dashboard-public-browser
+        }
       }
       Invoke-Step -Name "Browser smoke" -Action { & (Join-Path $repoRoot "tests/test_dashboard_browser_smoke.ps1") -BrowserPath $browserResolution.Path }
     }

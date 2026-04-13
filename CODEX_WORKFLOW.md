@@ -116,13 +116,25 @@ Require Codex to always return:
 Adjust as needed for your environment; keep command output in each task response.
 
 ```powershell
-# Run tests
-npm test
+# Bootstrap and validate the repo-local toolchain first
+powershell -ExecutionPolicy Bypass -File .\tools\bootstrap_toolchain_assets.ps1
+cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd && call tools\validate_toolchain.cmd"
 
-# Build site/output
-hugo
+# Scaffold a new essay draft
+.\tools\bin\custom\new-essay.cmd --title "My Title"
+
+# Run the target-file guardrails first
+.\tools\bin\generated\npm.cmd run check:essays -- -Paths .\content\essays\my-title.md
+
+# Build site/output and run generated-output regression coverage
+.\tools\bin\generated\hugo.cmd --gc --minify
+powershell -ExecutionPolicy Bypass -File .\tests\test_public_html_output.ps1
+
+# Run tests
+.\tools\bin\generated\npm.cmd test
+powershell -ExecutionPolicy Bypass -File .\tests\test_new_essay_scaffold.ps1
 
 # Optional lint/type checks (if configured)
-npm run lint
-npm run typecheck
+.\tools\bin\generated\npm.cmd run lint
+.\tools\bin\generated\npm.cmd run typecheck
 ```

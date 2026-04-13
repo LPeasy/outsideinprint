@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.1",
+  "platform": "windows",
+  "cache_strategy": "repo-local-with-optional-shared-cache",
+  "tools": [
+    {
+      "name": "soffice",
+      "kind": "machine-install",
+      "version": "24.2.0",
+      "required": true,
+      "install_path": "tools/vendor/libreoffice-machine",
+      "launch_path": "program\\soffice.exe",
+      "fallback_extract_path": "tools/vendor/libreoffice-portable",
+      "machine_candidates": [
+        "%ProgramFiles%\\LibreOffice\\program\\soffice.exe",
+        "%ProgramFiles(x86)%\\LibreOffice\\program\\soffice.exe"
+      ],
+      "source_candidates": [
+        "%CODEX_TOOL_MIRROR_ROOT%\\libreoffice\\LibreOfficePortable-extracted-24.2.0.zip"
+      ],
+      "asset_name": "LibreOfficePortable-extracted-24.2.0.zip",
+      "validate": {
+        "arguments": [
+          "--version"
+        ],
+        "match_regex": "LibreOffice"
+      },
+      "wrappers": [
+        {
+          "name": "soffice-headless",
+          "mode": "gui-headless",
+          "profile_strategy": "repo-local",
+          "profile_subpath": "soffice-headless",
+          "isolate_appdata": true,
+          "isolate_temp": true,
+          "default_arguments": [
+            "--headless",
+            "--nologo",
+            "--nodefault",
+            "--nofirststartwizard",
+            "--norestore",
+            "-env:UserInstallation={profile_uri}"
+          ]
+        }
+      ],
+      "notes": "Supported when either a machine install exists or a mirrored extracted ZIP artifact is available."
+    }
+  ]
+}

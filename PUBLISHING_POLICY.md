@@ -84,12 +84,13 @@ Current CI must fail when:
 
 ## Local author workflow
 
-1. Create or edit a content Markdown file.
+1. Create a draft with `.\tools\bin\custom\new-essay.cmd --title "My Title"` or edit an existing content Markdown file.
 2. Ensure required front matter is complete.
-3. Build Hugo locally.
-4. Review the relevant web pages.
-5. Run the applicable tests.
-6. Commit and push to `main`.
+3. Run the applicable target-file guardrails.
+4. Build Hugo locally.
+5. Review the relevant web pages.
+6. Run the applicable tests.
+7. Commit and push to `main`.
 
 ## Paused work
 

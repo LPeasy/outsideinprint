@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.1",
+  "platform": "windows",
+  "cache_strategy": "repo-local-with-optional-shared-cache",
+  "tools": [
+    {
+      "name": "node",
+      "kind": "portable-download",
+      "version": "20.20.2",
+      "required": true,
+      "install_path": "tools/vendor/node-toolchain-20.20.2",
+      "launch_path": "node-v20.20.2-win-x64/node.exe",
+      "source_candidates": [
+        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
+        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+      ],
+      "asset_name": "node-v20.20.2-win-x64.zip",
+      "validate": {
+        "arguments": [
+          "--version"
+        ],
+        "match_regex": "^v20\\.20\\.2"
+      },
+      "notes": "Pinned Node toolchain for the repo's 20.x contract. Bootstrap from tools/_downloads/bootstrap first."
+    },
+    {
+      "name": "npm",
+      "kind": "portable-download",
+      "version": "20.20.2",
+      "required": false,
+      "install_path": "tools/vendor/node-toolchain-20.20.2",
+      "launch_path": "node-v20.20.2-win-x64/npm.cmd",
+      "source_candidates": [
+        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
+        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+      ],
+      "asset_name": "node-v20.20.2-win-x64.zip",
+      "validate": {
+        "arguments": [
+          "--version"
+        ],
+        "match_regex": "^10\\.8\\.2"
+      },
+      "notes": "Shares the repo-local Node payload."
+    },
+    {
+      "name": "npx",
+      "kind": "portable-download",
+      "version": "20.20.2",
+      "required": false,
+      "install_path": "tools/vendor/node-toolchain-20.20.2",
+      "launch_path": "node-v20.20.2-win-x64/npx.cmd",
+      "source_candidates": [
+        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
+        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+      ],
+      "asset_name": "node-v20.20.2-win-x64.zip",
+      "validate": {
+        "arguments": [
+          "--version"
+        ],
+        "match_regex": "^10\\.8\\.2"
+      },
+      "notes": "Shares the repo-local Node payload."
+    },
+    {
+      "name": "corepack",
+      "kind": "portable-download",
+      "version": "20.20.2",
+      "required": false,
+      "install_path": "tools/vendor/node-toolchain-20.20.2",
+      "launch_path": "node-v20.20.2-win-x64/corepack.cmd",
+      "source_candidates": [
+        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
+        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+      ],
+      "asset_name": "node-v20.20.2-win-x64.zip",
+      "validate": {
+        "arguments": [
+          "--version"
+        ]
+      },
+      "notes": "Shares the repo-local Node payload."
+    },
+    {
+      "name": "hugo",
+      "kind": "portable-download",
+      "version": "0.157.0",
+      "required": true,
+      "install_path": "tools/vendor/hugo-0.157.0",
+      "launch_path": "hugo.exe",
+      "source_candidates": [
+        "tools/_downloads/bootstrap/hugo_extended_0.157.0_windows-amd64.zip",
+        "https://github.com/gohugoio/hugo/releases/download/v0.157.0/hugo_extended_0.157.0_windows-amd64.zip"
+      ],
+      "asset_name": "hugo_extended_0.157.0_windows-amd64.zip",
+      "validate": {
+        "arguments": [
+          "version"
+        ],
+        "match_regex": "^hugo v0\\.157\\.0"
+      },
+      "notes": "Matches the current public-site build contract."
+    },
+    {
+      "name": "pwsh",
+      "kind": "portable-download",
+      "version": "7.5.0",
+      "required": true,
+      "install_path": "tools/vendor/pwsh-7.5.0",
+      "launch_path": "pwsh.exe",
+      "source_candidates": [
+        "tools/_downloads/bootstrap/PowerShell-7.5.0-win-x64.zip",
+        "https://github.com/PowerShell/PowerShell/releases/download/v7.5.0/PowerShell-7.5.0-win-x64.zip"
+      ],
+      "asset_name": "PowerShell-7.5.0-win-x64.zip",
+      "validate": {
+        "arguments": [
+          "-NoLogo",
+          "-NoProfile",
+          "-Command",
+          "$PSVersionTable.PSVersion.ToString()"
+        ],
+        "match_regex": "^7\\.5\\.0$"
+      },
+      "notes": "Pinned repo-local PowerShell for script execution parity."
+    },
+    {
+      "name": "python",
+      "kind": "portable-download",
+      "version": "3.12.9",
+      "required": true,
+      "install_path": "tools/vendor/python-3.12.9",
+      "launch_path": "python.exe",
+      "source_candidates": [
+        "tools/_downloads/bootstrap/python-3.12.9-embed-amd64.zip",
+        "https://www.python.org/ftp/python/3.12.9/python-3.12.9-embed-amd64.zip"
+      ],
+      "asset_name": "python-3.12.9-embed-amd64.zip",
+      "validate": {
+        "arguments": [
+          "--version"
+        ],
+        "match_regex": "^Python\\s3\\.12\\.9"
+      },
+      "notes": "Used for existing normalization and import helpers. Bootstrap from tools/_downloads/bootstrap first."
+    }
+  ]
+}

@@ -96,8 +96,8 @@ These hooks still exist in live markup but do not yet carry strong explicit layo
   - Search `assets/css/main.css` for every selector named in the matrix rows.
   - Search `layouts/**` for every hook listed under `Remaining Dead Or Under-Defined Hooks`.
 - Run contract tests when Node is available:
-  - `node --test tests/layout_ownership_contract.test.mjs`
+  - `.\tools\bin\generated\node.cmd --test tests/layout_ownership_contract.test.mjs`
 - Optional render check when Hugo is available:
-  - `hugo --gc --minify`
-  - `hugo --config hugo-dashboard.toml --gc --minify`
+  - `.\tools\bin\generated\hugo.cmd --gc --minify`
+  - `.\tools\bin\generated\hugo.cmd --config hugo-dashboard.toml --gc --minify`
   - Spot-check `/`, `/start-here/`, `/essays/`, one essay single, `/collections/`, one collection detail, `/library/`, and `/random/`.

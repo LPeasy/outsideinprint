@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.1",
+  "platform": "windows",
+  "cache_strategy": "repo-local-with-optional-shared-cache",
+  "tools": [
+    {
+      "name": "edge",
+      "kind": "machine-wrapper",
+      "version": "stable",
+      "required": true,
+      "install_path": "tools/vendor/edge-stable",
+      "launch_path": "msedge.exe",
+      "machine_candidates": [
+        "%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe",
+        "%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe"
+      ],
+      "validate": {
+        "arguments": [
+          "--version"
+        ]
+      },
+      "wrappers": [
+        {
+          "name": "edge-headless",
+          "mode": "gui-headless",
+          "profile_strategy": "repo-local",
+          "profile_subpath": "edge-headless",
+          "isolate_appdata": true,
+          "isolate_temp": true,
+          "default_arguments": [
+            "--headless=new",
+            "--disable-gpu",
+            "--disable-sync",
+            "--disable-default-apps",
+            "--no-first-run",
+            "--no-default-browser-check",
+            "--disable-crash-reporter",
+            "--disable-breakpad",
+            "--user-data-dir={profile_dir}\\UserData"
+          ]
+        }
+      ],
+      "notes": "Supported browser/headless pattern with repo-local profile and temp isolation."
+    }
+  ]
+}
+

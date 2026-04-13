@@ -21,7 +21,7 @@ This generates:
 3. Apply safe structural cleanup first.
 
 ```powershell
-.\.tools\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md
+.\tools\bin\generated\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md
 ```
 
 The normalizer is intentionally conservative. It is safe for repeated use on Medium-style imports that still contain wrapper HTML, duplicated lead metadata, obvious mojibake, stripped link-card remnants, `[Embedded media: ...]` placeholders, and loose image/source caption lines that should be expressed in the article-body patterns already supported by Hugo.

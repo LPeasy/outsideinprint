@@ -6,24 +6,48 @@ A minimalist Hugo site for publishing essays, fiction, dialogues, and working pa
 
 - See `PUBLISHING_POLICY.md` for the current web-first publishing contract.
 
+## Toolchain
+
+Bootstrap the repo-local toolchain payloads, then generate/provision/validate the manifest-driven wrappers:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\bootstrap_toolchain_assets.ps1
+cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd && call tools\validate_toolchain.cmd"
+```
+
+The current toolchain contract is pinned to:
+
+- Node `20.20.2`
+- Hugo `0.157.0`
+- PowerShell `7.5.0`
+- Python `3.12.9`
+
+The legacy `.tools/` directory remains bootstrap-only compatibility. New toolchain work should happen under `tools/`.
+
 ## Local run
 
-```sh
-hugo server -D
+```powershell
+.\tools\bin\generated\hugo.cmd server -D
 ```
 
 ## Publishing workflow
 
-1. Create a new piece:
-   - `hugo new essays/my-title.md`
-2. Write, then set `draft: false` when ready.
-3. Build the site locally:
-   - `hugo --gc --minify`
-4. Run the essay guardrails on the files you changed:
-   - `npm run check:essays -- -Paths .\content\essays\my-title.md`
-5. Run the Node/browser test suite:
-   - `npm test`
-6. Commit + push.
+1. Scaffold a new essay draft:
+   - `.\tools\bin\custom\new-essay.cmd --title "My Title"`
+2. Optional fallback if you need raw Hugo generation:
+   - `.\tools\bin\generated\hugo.cmd new essays/my-title.md`
+3. Write, then set `draft: false` when ready.
+4. Run the essay guardrails on the target file:
+   - `.\tools\bin\generated\npm.cmd run check:essays -- -Paths .\content\essays\my-title.md`
+5. Build the site locally:
+   - `.\tools\bin\generated\hugo.cmd --gc --minify`
+6. Run the generated-output regression check:
+   - `powershell -ExecutionPolicy Bypass -File .\tests\test_public_html_output.ps1`
+7. Run the Node/browser test suite:
+   - `.\tools\bin\generated\npm.cmd test`
+8. Commit + push.
+
+The scaffold command creates a draft essay with the required metadata block, a derived slug, and a starter structure for lead, argument, evidence, and closing sections.
 
 ## PDF status
 
@@ -50,14 +74,20 @@ Single pages render a publication header plus a `Cite this` block so each page r
 Node/browser tests:
 
 ```powershell
-npm test
+.\tools\bin\generated\npm.cmd test
 ```
 
 Public build smoke:
 
 ```powershell
-hugo --gc --minify
+.\tools\bin\generated\hugo.cmd --gc --minify
 powershell -ExecutionPolicy Bypass -File .\tests\test_public_html_output.ps1
+```
+
+Essay scaffold regression:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tests\test_new_essay_scaffold.ps1
 ```
 
 ## Medium migration
@@ -83,11 +113,11 @@ Post-import workflow:
 
 1. Review imported markdown and localized media.
 2. Run the legacy normalizer on imported essays that still carry Medium residue.
-   - `.\.tools\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md`
+   - `.\tools\bin\generated\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md`
 3. Re-run the legacy audit to confirm the cleanup queue shrank.
    - `powershell -ExecutionPolicy Bypass -File .\scripts\audit_legacy_essays.ps1`
 4. Flip selected imported essays from `draft: true` to `draft: false`.
-5. Build the site locally with `hugo --gc --minify`.
+5. Build the site locally with `.\tools\bin\generated\hugo.cmd --gc --minify`.
 
 Fixture test harness:
 
@@ -118,13 +148,13 @@ This report now highlights the safe-auto residue categories the normalizer is me
 Default behavior checks only changed essay files in the working tree and fails on high-confidence residue:
 
 ```powershell
-npm run check:essays
+.\tools\bin\generated\npm.cmd run check:essays
 ```
 
 Explicit-path review for one or more essays:
 
 ```powershell
-npm run check:essays -- -Paths .\content\essays\my-title.md,.\content\essays\another-title.md
+.\tools\bin\generated\npm.cmd run check:essays -- -Paths .\content\essays\my-title.md,.\content\essays\another-title.md
 ```
 
 CI or branch-diff review between two refs:

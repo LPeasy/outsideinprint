@@ -76,7 +76,7 @@ Resolution rules:
 2. Create `content/collections/<slug>.md` if the collection should have a public page.
 3. Add explicit `collections` front matter to the few pieces that truly belong.
 4. Run `powershell -ExecutionPolicy Bypass -File .\scripts\audit_collections.ps1`.
-5. Run `hugo` and verify `/collections/`, the collection page, and at least one member page.
+5. Run `.\tools\bin\generated\hugo.cmd --gc --minify` and verify `/collections/`, the collection page, and at least one member page.
 
 ## Auditing
 

@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.1",
+  "platform": "windows",
+  "cache_strategy": "repo-local-with-optional-shared-cache",
+  "tools": [
+    {
+      "name": "powershell",
+      "kind": "existing-runtime",
+      "version": "5.1",
+      "required": true,
+      "install_path": "tools/vendor/windows-powershell-5.1",
+      "launch_path": "powershell.exe",
+      "machine_candidates": [
+        "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+      ],
+      "validate": {
+        "arguments": [
+          "-NoLogo",
+          "-NoProfile",
+          "-Command",
+          "$PSVersionTable.PSVersion.ToString()"
+        ],
+        "match_regex": "^5\\.1\\."
+      },
+      "notes": "Deterministic baseline wrapper for inbox Windows PowerShell."
+    },
+    {
+      "name": "curl",
+      "kind": "machine-wrapper",
+      "version": "system",
+      "required": true,
+      "install_path": "tools/vendor/curl-system",
+      "launch_path": "curl.exe",
+      "machine_candidates": [
+        "%SystemRoot%\\System32\\curl.exe"
+      ],
+      "validate": {
+        "arguments": [
+          "--version"
+        ],
+        "match_regex": "^curl\\s"
+      },
+      "notes": "Stable wrapper around curl.exe without PATH dependence."
+    }
+  ]
+}
+

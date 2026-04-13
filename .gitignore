@@ -15,3 +15,11 @@
 /qa/post-deploy-report.md
 /dashboard_deploy_key
 /dashboard_deploy_key.pub
+
+# >>> DependencyTemplate toolchain >>>
+tools/vendor/
+tools/_downloads/
+tools/_install_logs/
+tools/_work/
+# <<< DependencyTemplate toolchain <<<
+

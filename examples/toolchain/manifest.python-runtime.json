@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.1",
+  "platform": "windows",
+  "cache_strategy": "repo-local-with-optional-shared-cache",
+  "tools": [
+    {
+      "name": "python",
+      "kind": "portable-download",
+      "version": "3.11.9",
+      "required": true,
+      "install_path": "tools/vendor/python-3.11.9",
+      "launch_path": "python.exe",
+      "source_candidates": [
+        "%CODEX_TOOL_MIRROR_ROOT%\\python\\python-3.11.9-embed-amd64.zip",
+        "https://www.python.org/ftp/python/3.11.9/python-3.11.9-embed-amd64.zip"
+      ],
+      "asset_name": "python-3.11.9-embed-amd64.zip",
+      "validate": {
+        "arguments": [
+          "--version"
+        ],
+        "match_regex": "^Python\\s3\\.11\\.9"
+      },
+      "notes": "Mirror-first embeddable Python runtime with repo-local installation and shared cache reuse."
+    }
+  ]
+}
+

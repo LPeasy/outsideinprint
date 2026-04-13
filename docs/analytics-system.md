@@ -177,10 +177,10 @@ The underlying validation loop is:
 
 1. `pwsh -File ./tests/test_analytics_import.ps1`
 2. `pwsh -File ./tests/test_analytics_snapshot_contract.ps1`
-3. `node --test tests/*.test.mjs`
+3. `.\tools\bin\generated\node.cmd --test tests/*.test.mjs`
 4. `pwsh -File ./tests/test_dashboard_build.ps1`
-5. `hugo --config hugo-dashboard.toml --gc --minify --destination .dashboard-public`
-6. `hugo --minify --baseURL "https://lpeasy.github.io/outsideinprint/"`
+5. `.\tools\bin\generated\hugo.cmd --config hugo-dashboard.toml --gc --minify --destination .dashboard-public`
+6. `.\tools\bin\generated\hugo.cmd --minify --baseURL "https://lpeasy.github.io/outsideinprint/"`
 7. `pwsh -File ./tests/test_dashboard_browser_smoke.ps1`
 
 What each step protects:
@@ -290,19 +290,19 @@ The publish workflow is still:
 Public site only:
 
 ```powershell
-hugo server -D
+.\tools\bin\generated\hugo.cmd server -D
 ```
 
 Dashboard site only:
 
 ```powershell
-hugo --config hugo-dashboard.toml server --disableFastRender
+.\tools\bin\generated\hugo.cmd --config hugo-dashboard.toml server --disableFastRender
 ```
 
 Dashboard V2 smoke tests:
 
 ```powershell
-node --test .\tests\dashboard_v2_logic.test.mjs
+.\tools\bin\generated\node.cmd --test .\tests\dashboard_v2_logic.test.mjs
 powershell -ExecutionPolicy Bypass -File .\tests\test_analytics_import.ps1
 powershell -ExecutionPolicy Bypass -File .\tests\test_analytics_snapshot_contract.ps1
 powershell -ExecutionPolicy Bypass -File .\tests\test_dashboard_build.ps1
@@ -315,7 +315,7 @@ Local public-site tracking test:
 $env:ANALYTICS_ENABLED = "true"
 $env:ANALYTICS_ALLOW_LOCAL = "true"
 $env:GOATCOUNTER_SITE_URL = "https://outsideinprint.goatcounter.com"
-hugo server -D
+.\tools\bin\generated\hugo.cmd server -D
 ```
 
 Clear those environment variables afterward if you do not want future local sessions to emit analytics.
