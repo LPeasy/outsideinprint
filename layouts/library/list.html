@@ -3,25 +3,97 @@
     <h1 id="library-title" class="list-title">Library</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
   </header>
+
   {{ $sections := slice
-    (dict "key" "essays" "label" "ESSAYS")
-    (dict "key" "syd-and-oliver" "label" "DIALOGUES")
-    (dict "key" "working-papers" "label" "WORKING PAPERS")
+    (dict "key" "essays" "fallbackLabel" "Essays")
+    (dict "key" "syd-and-oliver" "fallbackLabel" "Dialogues")
+    (dict "key" "working-papers" "fallbackLabel" "Working Papers")
   }}
   {{ $librarySections := slice }}
+  {{ $libraryEntries := slice }}
+  {{ $availableYears := slice }}
+  {{ $availableCollectionSlugs := slice }}
+  {{ $collectionDefinitions := default (slice) site.Data.collections.collections }}
   {{ $totalPages := 0 }}
+
   {{ range $section := $sections }}
     {{ $sectionKey := index $section "key" }}
-    {{ $pages := where site.RegularPages "Section" $sectionKey }}
+    {{ $sectionPage := site.GetPage (printf "/%s" $sectionKey) }}
+    {{ $sectionTitle := index $section "fallbackLabel" }}
+    {{ $sectionDescription := "" }}
+    {{ with $sectionPage }}
+      {{ $sectionTitle = .Title }}
+      {{ with .Params.description }}
+        {{ $sectionDescription = . }}
+      {{ end }}
+    {{ end }}
+
+    {{ $pages := sort (where site.RegularPages "Section" $sectionKey) "Date" "desc" }}
     {{ if gt (len $pages) 0 }}
-      {{ $librarySections = $librarySections | append (merge $section (dict
-        "page" (site.GetPage (printf "/%s" $sectionKey))
-        "pages" $pages
-      )) }}
+      {{ $librarySections = $librarySections | append (dict
+        "key" $sectionKey
+        "title" $sectionTitle
+        "description" $sectionDescription
+        "count" (len $pages)
+      ) }}
       {{ $totalPages = add $totalPages (len $pages) }}
+
+      {{ range $pages }}
+        {{ $page := . }}
+        {{ $sectionLabel := $page.Params.section_label | default (humanize $page.Section) }}
+        {{ $matches := partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) }}
+        {{ $collectionSlugs := slice }}
+        {{ $collectionTitles := slice }}
+        {{ range $matches }}
+          {{ $collectionSlugs = $collectionSlugs | append (lower (printf "%v" .collection.slug)) }}
+          {{ $collectionTitles = $collectionTitles | append .collection.title }}
+        {{ end }}
+        {{ $seriesTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.series) }}
+        {{ $searchText := printf "%s %s %s %s %s %s %s %s %s" $page.Title $sectionTitle ($page.Params.section_label | default "") ($page.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" $page) ($page.Params.person_name | default "") (delimit $seriesTerms " ") ($page.Params.article_variant | default "") }}
+        {{ $year := $page.Date.Format "2006" }}
+        {{ $dateIso := $page.Date.Format "2006-01-02" }}
+        {{ $title := $page.Title }}
+        {{ $titleLower := lower $title }}
+        {{ $entryId := $page.RelPermalink }}
+
+        {{ $libraryEntries = $libraryEntries | append (dict
+          "id" $entryId
+          "page" $page
+          "sectionKey" $sectionKey
+          "sectionLabel" $sectionLabel
+          "year" $year
+          "dateIso" $dateIso
+          "title" $title
+          "titleLower" $titleLower
+          "collections" $matches
+          "collectionSlugs" $collectionSlugs
+          "collectionTitles" $collectionTitles
+          "searchText" (lower (plainify $searchText))
+        ) }}
+
+        {{ $availableYears = $availableYears | append $year }}
+        {{ range $collectionSlugs }}
+          {{ $availableCollectionSlugs = $availableCollectionSlugs | append . }}
+        {{ end }}
+      {{ end }}
     {{ end }}
   {{ end }}
+
+  {{ $yearOptions := sort (uniq $availableYears) }}
+  {{ $matchedCollectionSlugs := uniq $availableCollectionSlugs }}
+  {{ $collectionOptions := slice }}
+  {{ range $collectionDefinitions }}
+    {{ $slug := lower (printf "%v" .slug) }}
+    {{ if and .public (in $matchedCollectionSlugs $slug) }}
+      {{ $collectionOptions = $collectionOptions | append (dict
+        "slug" $slug
+        "title" .title
+      ) }}
+    {{ end }}
+  {{ end }}
+
   {{ if gt $totalPages 0 }}<p class="page-intro page-shell page-shell--wide">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $librarySections }} active lanes.</p>{{ end }}
+
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"
     "eyebrow" "Use the library, or take a guided path"
@@ -30,71 +102,225 @@
       (dict "href" ("start-here/" | absURL) "label" "Welcome")
     )
   ) }}
-  <div class="library-search page-shell page-shell--feature">
-    <label class="library-search-label" for="library-search">Search the library</label>
-    <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, collections, and versions" autocomplete="off" spellcheck="false" />
-  </div>
-  <div id="library-search-empty" class="library-empty page-shell page-shell--feature" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or begin with <a href="{{ "start-here/" | absURL }}">Welcome</a>.</div>
 
-  {{ range $section := $librarySections }}
-    {{ $sectionKey := index $section "key" }}
-    {{ $sectionLabel := index $section "label" }}
-    {{ $sectionPage := index $section "page" }}
-    {{ $pages := index $section "pages" }}
+  <div class="library-search library-search--filters page-shell page-shell--wide" data-library-controls>
+    <div class="library-filter-grid">
+      <div class="library-filter library-filter--search">
+        <label class="library-search-label" for="library-search">Search the library</label>
+        <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, collections, and versions" autocomplete="off" spellcheck="false" />
+      </div>
 
-    {{ if gt (len $pages) 0 }}
-      <section class="library-group page-shell page-shell--reading" data-library-group aria-labelledby="library-group-{{ $sectionKey }}">
-        <h2 id="library-group-{{ $sectionKey }}" class="list-title" style="margin-top:22px;">{{ with $sectionPage }}{{ .Title }}{{ else }}{{ $sectionLabel }}{{ end }}</h2>
-        {{ with $sectionPage.Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
-        <p class="m">{{ len $pages }} pieces in this lane.</p>
-        {{ range sort $pages "Title" "asc" }}
-          {{ $matches := partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
-          {{ $collectionTitles := slice }}
-          {{ range $matches }}
-            {{ $collectionTitles = $collectionTitles | append .collection.title }}
+      <div class="library-filter">
+        <label class="library-search-label" for="library-section">Section</label>
+        <select id="library-section" class="library-search-input">
+          <option value="">All sections</option>
+          {{ range $librarySections }}
+            <option value="{{ index . "key" }}">{{ index . "title" }}</option>
           {{ end }}
-          {{ $seriesTerms := partial "collections/normalize-values.html" (dict "value" .Params.series) }}
-          {{ $searchText := printf "%s %s %s %s %s %s %s %s %s" .Title $sectionLabel (.Params.section_label | default "") (.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" .) (.Params.person_name | default "") (delimit $seriesTerms " ") (.Params.article_variant | default "") }}
-          <div data-library-item data-search='{{ $searchText | lower | jsonify | safeHTMLAttr }}'>
-            {{ partial "discovery/page-list-item.html" (dict
-              "page" .
-              "showCollections" true
-              "showSectionLabel" false
-            ) }}
-          </div>
-        {{ end }}
-      </section>
+        </select>
+      </div>
+
+      <div class="library-filter">
+        <label class="library-search-label" for="library-year">Year</label>
+        <select id="library-year" class="library-search-input">
+          <option value="">All years</option>
+          {{ range collections.Reverse $yearOptions }}
+            <option value="{{ . }}">{{ . }}</option>
+          {{ end }}
+        </select>
+      </div>
+
+      <div class="library-filter">
+        <label class="library-search-label" for="library-collection">Collection</label>
+        <select id="library-collection" class="library-search-input">
+          <option value="">All collections</option>
+          {{ range $collectionOptions }}
+            <option value="{{ index . "slug" }}">{{ index . "title" }}</option>
+          {{ end }}
+        </select>
+      </div>
+
+      <div class="library-filter">
+        <label class="library-search-label" for="library-sort">Sort</label>
+        <select id="library-sort" class="library-search-input">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="title">Title A-Z</option>
+        </select>
+      </div>
+
+      <div class="library-filter library-filter--action">
+        <button id="library-reset" class="library-reset" type="button">Reset filters</button>
+      </div>
+    </div>
+  </div>
+
+  <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide">Showing all {{ $totalPages }} pieces</p>
+  <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or begin with <a href="{{ "start-here/" | absURL }}">Welcome</a>.</div>
+
+  <div id="library-grouped-results">
+    {{ range $section := $librarySections }}
+      {{ $sectionKey := index $section "key" }}
+      {{ $sectionTitle := index $section "title" }}
+      {{ $sectionDescription := index $section "description" }}
+      {{ $sectionEntries := where $libraryEntries "sectionKey" $sectionKey }}
+
+      {{ if gt (len $sectionEntries) 0 }}
+        <section class="library-group page-shell page-shell--reading" data-library-group data-library-group-key="{{ $sectionKey }}" aria-labelledby="library-group-{{ $sectionKey }}">
+          <h2 id="library-group-{{ $sectionKey }}" class="list-title" style="margin-top:22px;">{{ $sectionTitle }}</h2>
+          {{ with $sectionDescription }}<p class="page-intro">{{ . }}</p>{{ end }}
+          <p class="m"><span data-library-group-count>{{ len $sectionEntries }}</span> pieces in this lane.</p>
+          {{ range $sectionEntries }}
+            <div
+              data-library-item
+              data-library-surface="grouped"
+              data-entry-id="{{ index . "id" }}"
+              data-section="{{ index . "sectionKey" }}"
+              data-year="{{ index . "year" }}"
+              data-date="{{ index . "dateIso" }}"
+              data-title="{{ index . "title" | htmlEscape }}"
+              data-collections="{{ delimit (index . "collectionSlugs") " " }}"
+              data-search="{{ index . "searchText" | htmlEscape }}"
+            >
+              {{ partial "discovery/page-list-item.html" (dict
+                "page" (index . "page")
+                "showCollections" true
+                "showSectionLabel" false
+              ) }}
+            </div>
+          {{ end }}
+        </section>
+      {{ end }}
     {{ end }}
-  {{ end }}
+  </div>
+
+  <section id="library-flat-results" class="library-results page-shell page-shell--reading" aria-labelledby="library-results-title" hidden>
+    <h2 id="library-results-title" class="list-title" style="margin-top:22px;">Results</h2>
+    <div id="library-results-list" class="library-results__list">
+      {{ range $libraryEntries }}
+        <div
+          data-library-item
+          data-library-surface="results"
+          data-entry-id="{{ index . "id" }}"
+          data-section="{{ index . "sectionKey" }}"
+          data-year="{{ index . "year" }}"
+          data-date="{{ index . "dateIso" }}"
+          data-title="{{ index . "title" | htmlEscape }}"
+          data-collections="{{ delimit (index . "collectionSlugs") " " }}"
+          data-search="{{ index . "searchText" | htmlEscape }}"
+          hidden
+        >
+          {{ partial "discovery/page-list-item.html" (dict
+            "page" (index . "page")
+            "showCollections" true
+            "showSectionLabel" false
+          ) }}
+        </div>
+      {{ end }}
+    </div>
+  </section>
 
   <script>
     (function () {
-      var input = document.getElementById('library-search');
-      if (!input) return;
-
-      var items = Array.prototype.slice.call(document.querySelectorAll('[data-library-item]'));
-      var groups = Array.prototype.slice.call(document.querySelectorAll('[data-library-group]'));
+      var searchInput = document.getElementById('library-search');
+      var sectionSelect = document.getElementById('library-section');
+      var yearSelect = document.getElementById('library-year');
+      var collectionSelect = document.getElementById('library-collection');
+      var sortSelect = document.getElementById('library-sort');
+      var resetButton = document.getElementById('library-reset');
+      var summary = document.getElementById('library-results-summary');
       var empty = document.getElementById('library-search-empty');
+      var groupedRoot = document.getElementById('library-grouped-results');
+      var flatSection = document.getElementById('library-flat-results');
+      var flatList = document.getElementById('library-results-list');
+      if (!searchInput || !sectionSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !summary || !empty || !groupedRoot || !flatSection || !flatList) return;
+
+      var groupedItems = Array.prototype.slice.call(document.querySelectorAll('[data-library-item][data-library-surface="grouped"]'));
+      var resultItems = Array.prototype.slice.call(document.querySelectorAll('[data-library-item][data-library-surface="results"]'));
+      var groups = Array.prototype.slice.call(document.querySelectorAll('[data-library-group]'));
+      var totalCount = groupedItems.length;
       var supportsUrl = typeof URL === 'function' && typeof window.history.replaceState === 'function';
 
-      function getCurrentQuery() {
-        if (!supportsUrl) return '';
-        try {
-          var url = new URL(window.location.href);
-          return (url.searchParams.get('q') || '').trim();
-        } catch (error) {
-          return '';
-        }
+      function hasOption(select, value) {
+        return Array.prototype.some.call(select.options, function (option) {
+          return option.value === value;
+        });
       }
 
-      function syncQuery(query) {
-        if (!supportsUrl) return;
+      function readStateFromUrl() {
+        var state = { q: '', qLower: '', section: '', year: '', collection: '', sort: 'newest' };
+        if (!supportsUrl) return state;
+
         try {
           var url = new URL(window.location.href);
-          if (query) {
-            url.searchParams.set('q', query);
+          var query = (url.searchParams.get('q') || '').trim();
+          var section = (url.searchParams.get('section') || '').trim();
+          var year = (url.searchParams.get('year') || '').trim();
+          var collection = (url.searchParams.get('collection') || '').trim();
+          var sort = (url.searchParams.get('sort') || '').trim();
+
+          state.q = query;
+          state.qLower = query.toLowerCase();
+          state.section = hasOption(sectionSelect, section) ? section : '';
+          state.year = hasOption(yearSelect, year) ? year : '';
+          state.collection = hasOption(collectionSelect, collection) ? collection : '';
+          state.sort = hasOption(sortSelect, sort) ? sort : 'newest';
+        } catch (error) {
+          return state;
+        }
+
+        return state;
+      }
+
+      function writeStateToControls(state) {
+        searchInput.value = state.q;
+        sectionSelect.value = state.section;
+        yearSelect.value = state.year;
+        collectionSelect.value = state.collection;
+        sortSelect.value = state.sort;
+      }
+
+      function readStateFromControls() {
+        var query = searchInput.value.trim();
+        return {
+          q: query,
+          qLower: query.toLowerCase(),
+          section: sectionSelect.value,
+          year: yearSelect.value,
+          collection: collectionSelect.value,
+          sort: sortSelect.value || 'newest'
+        };
+      }
+
+      function syncUrl(state) {
+        if (!supportsUrl) return;
+
+        try {
+          var url = new URL(window.location.href);
+          if (state.q) {
+            url.searchParams.set('q', state.q);
           } else {
             url.searchParams.delete('q');
+          }
+          if (state.section) {
+            url.searchParams.set('section', state.section);
+          } else {
+            url.searchParams.delete('section');
+          }
+          if (state.year) {
+            url.searchParams.set('year', state.year);
+          } else {
+            url.searchParams.delete('year');
+          }
+          if (state.collection) {
+            url.searchParams.set('collection', state.collection);
+          } else {
+            url.searchParams.delete('collection');
+          }
+          if (state.sort && state.sort !== 'newest') {
+            url.searchParams.set('sort', state.sort);
+          } else {
+            url.searchParams.delete('sort');
           }
           window.history.replaceState({}, '', url.toString());
         } catch (error) {
@@ -102,38 +328,125 @@
         }
       }
 
-      function applyFilter() {
-        var query = input.value.trim().toLowerCase();
-        var anyVisible = false;
+      function isDefaultState(state) {
+        return !state.q && !state.section && !state.year && !state.collection && state.sort === 'newest';
+      }
 
-        items.forEach(function (item) {
-          var haystack = item.getAttribute('data-search') || '';
-          var match = !query || haystack.indexOf(query) !== -1;
-          item.hidden = !match;
-          if (match) anyVisible = true;
-        });
+      function itemMatches(item, state) {
+        var haystack = (item.getAttribute('data-search') || '').toLowerCase();
+        var section = item.getAttribute('data-section') || '';
+        var year = item.getAttribute('data-year') || '';
+        var collections = item.getAttribute('data-collections') || '';
+        var queryMatch = !state.qLower || haystack.indexOf(state.qLower) !== -1;
+        var sectionMatch = !state.section || section === state.section;
+        var yearMatch = !state.year || year === state.year;
+        var collectionMatch = !state.collection || (' ' + collections + ' ').indexOf(' ' + state.collection + ' ') !== -1;
+        return queryMatch && sectionMatch && yearMatch && collectionMatch;
+      }
 
+      function compareItems(a, b, sortValue) {
+        var aDate = a.getAttribute('data-date') || '';
+        var bDate = b.getAttribute('data-date') || '';
+        var aTitle = (a.getAttribute('data-title') || '').toLowerCase();
+        var bTitle = (b.getAttribute('data-title') || '').toLowerCase();
+
+        if (sortValue === 'oldest') {
+          if (aDate !== bDate) return aDate > bDate ? 1 : -1;
+          if (aTitle !== bTitle) return aTitle > bTitle ? 1 : -1;
+          return 0;
+        }
+
+        if (sortValue === 'title') {
+          if (aTitle !== bTitle) return aTitle > bTitle ? 1 : -1;
+          if (aDate !== bDate) return aDate < bDate ? 1 : -1;
+          return 0;
+        }
+
+        if (aDate !== bDate) return aDate < bDate ? 1 : -1;
+        if (aTitle !== bTitle) return aTitle > bTitle ? 1 : -1;
+        return 0;
+      }
+
+      function updateGroupedCounts() {
         groups.forEach(function (group) {
-          var visibleItems = group.querySelectorAll('[data-library-item]:not([hidden])').length;
-          group.hidden = visibleItems === 0;
+          var count = group.querySelectorAll('[data-library-item][data-library-surface="grouped"]:not([hidden])').length;
+          var countNode = group.querySelector('[data-library-group-count]');
+          if (countNode) {
+            countNode.textContent = count;
+          }
+          group.hidden = count === 0;
+        });
+      }
+
+      function renderFlatResults(visibleItems, state) {
+        resultItems.forEach(function (item) {
+          item.hidden = true;
         });
 
-        if (empty) {
-          empty.hidden = anyVisible || !query;
+        visibleItems.sort(function (a, b) {
+          return compareItems(a, b, state.sort);
+        });
+
+        visibleItems.forEach(function (item) {
+          item.hidden = false;
+          flatList.appendChild(item);
+        });
+      }
+
+      function applyState(state, options) {
+        var config = options || {};
+        var filteredMode = !isDefaultState(state);
+
+        groupedItems.forEach(function (item) {
+          var match = itemMatches(item, state);
+          item.hidden = !match;
+        });
+
+        updateGroupedCounts();
+
+        var visibleResults = resultItems.filter(function (item) {
+          return itemMatches(item, state);
+        });
+
+        renderFlatResults(visibleResults, state);
+
+        groupedRoot.hidden = filteredMode;
+        flatSection.hidden = !filteredMode || visibleResults.length === 0;
+        empty.hidden = isDefaultState(state) || visibleResults.length > 0;
+
+        if (filteredMode) {
+          summary.textContent = 'Showing ' + visibleResults.length + ' of ' + totalCount + ' pieces';
+        } else {
+          summary.textContent = 'Showing all ' + totalCount + ' pieces';
+        }
+
+        if (!config.skipUrlSync) {
+          syncUrl(state);
         }
       }
 
-      input.value = getCurrentQuery();
-      applyFilter();
+      function handleControlChange() {
+        applyState(readStateFromControls());
+      }
 
-      input.addEventListener('input', function () {
-        syncQuery(input.value.trim());
-        applyFilter();
+      writeStateToControls(readStateFromUrl());
+      applyState(readStateFromControls(), { skipUrlSync: true });
+
+      searchInput.addEventListener('input', handleControlChange);
+      sectionSelect.addEventListener('change', handleControlChange);
+      yearSelect.addEventListener('change', handleControlChange);
+      collectionSelect.addEventListener('change', handleControlChange);
+      sortSelect.addEventListener('change', handleControlChange);
+
+      resetButton.addEventListener('click', function () {
+        var defaultState = { q: '', qLower: '', section: '', year: '', collection: '', sort: 'newest' };
+        writeStateToControls(defaultState);
+        applyState(defaultState);
       });
 
       window.addEventListener('popstate', function () {
-        input.value = getCurrentQuery();
-        applyFilter();
+        writeStateToControls(readStateFromUrl());
+        applyState(readStateFromControls(), { skipUrlSync: true });
       });
     }());
   </script>

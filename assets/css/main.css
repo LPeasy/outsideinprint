@@ -475,6 +475,26 @@ textarea{
   max-width:42rem;
   margin:0 0 1.5rem;
 }
+.library-search--filters{
+  max-width:var(--measure-wide);
+  margin:0 0 1rem;
+}
+.library-filter-grid{
+  display:grid;
+  grid-template-columns:repeat(12, minmax(0, 1fr));
+  gap:1rem;
+  align-items:end;
+}
+.library-filter{
+  grid-column:span 3;
+}
+.library-filter--search{
+  grid-column:1 / -1;
+}
+.library-filter--action{
+  display:flex;
+  align-items:flex-end;
+}
 .library-search-label{
   display:block;
   margin-bottom:8px;
@@ -500,6 +520,38 @@ textarea{
 .library-search-input::placeholder{
   color:var(--text-faint);
 }
+.library-reset{
+  width:100%;
+  min-height:3rem;
+  padding:.78rem .95rem;
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-ui);
+  background:rgba(236,231,223,.04);
+  color:var(--text-primary);
+  font-family:var(--font-ui);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:border-color .18s ease, background-color .18s ease, color .18s ease;
+}
+.library-reset:hover{
+  border-color:rgba(127,147,166,.32);
+  background:rgba(236,231,223,.08);
+}
+.library-reset:focus-visible{
+  outline:2px solid rgba(127,147,166,.55);
+  outline-offset:2px;
+}
+.library-results-summary{
+  margin:0 0 1rem;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.8rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
 .library-empty{
   margin:6px 0 18px;
   color:var(--text-muted);
@@ -509,6 +561,10 @@ textarea{
 }
 .library-empty a{
   color:inherit;
+}
+.library-results__list{
+  display:grid;
+  gap:0;
 }
 /* Lists */
 .list-title{
@@ -551,6 +607,21 @@ textarea{
   font-size:.72rem;
   letter-spacing:.14em;
   text-transform:uppercase;
+}
+@media (max-width:900px){
+  .library-filter{
+    grid-column:span 6;
+  }
+  .library-filter--action{
+    grid-column:span 12;
+  }
+}
+@media (max-width:640px){
+  .library-filter,
+  .library-filter--search,
+  .library-filter--action{
+    grid-column:1 / -1;
+  }
 }
 .journey-links{
   max-width:var(--measure-wide);
