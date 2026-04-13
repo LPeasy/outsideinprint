@@ -970,7 +970,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = '(?s)window\.location\.replace\(fallback\).*window\.location\.replace\(randomUrl\)'
+    Pattern = '(?s)https://outsideinprint\.org/library/.*?if\(!\w+\.length\)\{window\.location\.replace\(\w+\);return\}.*?Math\.floor\(Math\.random\(\)\*\w+\.length\).*?window\.location\.replace\(\w+\)'
     Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
   },
   @{
