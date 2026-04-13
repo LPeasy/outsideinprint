@@ -6,12 +6,28 @@
     {{ $urls = $urls | append .Permalink }}
   {{ end }}
 
-  <div class="page-shell page-shell--reading">
-    <div class="item">
-      <div class="t">Finding a random piece...</div>
-      <div class="m"><a href="{{ "library/" | absURL }}">Library</a></div>
+  <header class="page-header page-shell page-shell--wide">
+    <h1 class="list-title">{{ .Title }}</h1>
+    <p class="page-intro">Feeling curious? Let the archive choose the next piece.</p>
+  </header>
+
+  {{ partial "journey_links.html" (dict
+    "class" "journey-links--page"
+    "eyebrow" "Or take a deliberate path"
+    "links" (slice
+      (dict "href" ("library/" | absURL) "label" "Library")
+      (dict "href" ("collections/" | absURL) "label" "Collections")
+      (dict "href" ("start-here/" | absURL) "label" "Welcome")
+    )
+  ) }}
+
+  <section class="page-shell page-shell--reading random-route" aria-labelledby="random-route-status-title">
+    <div class="item random-route__status">
+      <div class="item-series-marker">Archive path</div>
+      <h2 id="random-route-status-title" class="t random-route__title">Finding a piece from the archive...</h2>
+      <p class="d random-route__note">If the route stalls, continue through the Library or browse Collections.</p>
     </div>
-  </div>
+  </section>
 
   <script>
     (function () {
@@ -29,10 +45,12 @@
   </script>
 
   <noscript>
-    <div class="page-shell page-shell--reading">
-      <div class="item">
+    <section class="page-shell page-shell--reading random-route" aria-label="Random route fallback">
+      <div class="item random-route__status">
+        <div class="item-series-marker">Archive path</div>
         <div class="t"><a href="{{ "library/" | absURL }}">Open the Library</a></div>
+        <p class="d random-route__note">JavaScript is required to choose a random piece automatically.</p>
       </div>
-    </div>
+    </section>
   </noscript>
 {{ end }}

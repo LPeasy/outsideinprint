@@ -10,6 +10,7 @@ const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
 const homeRecentWork = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
 const footer = fs.readFileSync(path.resolve("layouts/partials/footer.html"), "utf8");
+const randomTemplate = fs.readFileSync(path.resolve("layouts/random/single.html"), "utf8");
 const startHereTemplate = fs.readFileSync(path.resolve("layouts/start-here/single.html"), "utf8");
 const startHereContent = fs.readFileSync(path.resolve("content/start-here/index.md"), "utf8");
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
@@ -53,6 +54,20 @@ test("footer exposes persistent links to the imprint and author surfaces", () =>
   assert.match(footer, /href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">Author</);
   assert.match(footer, /href="\{\{ "library\/" \| absURL \}\}">Library</);
   assert.match(footer, /Robert V\. Ussley/);
+});
+
+test("random route uses shared page framing instead of a bare redirect stub", () => {
+  assert.match(randomTemplate, /class="page-header page-shell page-shell--wide"/);
+  assert.match(randomTemplate, /Feeling curious\? Let the archive choose the next piece\./);
+  assert.match(randomTemplate, /partial "journey_links\.html"/);
+  assert.match(randomTemplate, /"label" "Library"/);
+  assert.match(randomTemplate, /"label" "Collections"/);
+  assert.match(randomTemplate, /"label" "Welcome"/);
+  assert.match(randomTemplate, /class="item random-route__status"/);
+  assert.match(randomTemplate, /Finding a piece from the archive\.\.\./);
+  assert.match(randomTemplate, /window\.location\.replace\(randomUrl\)/);
+  assert.match(randomTemplate, /window\.location\.replace\(fallback\)/);
+  assert.match(randomTemplate, /Open the Library/);
 });
 
 test("homepage cards keep only the main titles and use the shared grid flow", () => {
@@ -149,6 +164,8 @@ test("homepage editorial layout stays scoped to home modules", () => {
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.piece-body :is\(figcaption, \.article-source-caption\)\{[\s\S]*width:100%;[\s\S]*max-width:100%;/);
   assert.match(css, /\.newsletter-signup__input\{[\s\S]*font-family:var\(--font-ui\);/);
   assert.match(css, /\.newsletter-signup__button\{[\s\S]*background:var\(--accent-soft\);/);
+  assert.match(css, /\.random-route\{[\s\S]*max-width:var\(--measure-reading\);/);
+  assert.match(css, /\.random-route__note\{[\s\S]*max-width:34rem;/);
   assert.match(css, /@media \(max-width:900px\)\{[\s\S]*\.home-front-page__stories\{\s*grid-template-columns:1fr;\s*\}/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-imprint-statement__inner\{\s*grid-template-columns:1fr;/);
   assert.doesNotMatch(css, /\.selected-hero\{/);

@@ -271,6 +271,7 @@ $requiredSemanticPages = [ordered]@{
   'public/essays/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $false }
   'public/library/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
 }
 
 $optionalDefaultListPages = @(
@@ -475,6 +476,7 @@ $requiredUxPages = @(
   'public/essays/index.html',
   'public/library/index.html',
   'public/collections/index.html',
+  'public/random/index.html',
   'public/collections/risk-uncertainty/index.html',
   'public/essays/the-risk-management-buffet/index.html'
 )
@@ -950,6 +952,26 @@ $requiredUxChecks = @(
     Path = 'public/start-here/index.html'
     Pattern = 'Feeling curious\?'
     Message = 'expected Welcome to use the renamed exploratory route label'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = 'Feeling curious\? Let the archive choose the next piece\.'
+    Message = 'expected the random route to frame archive exploration with the reader-facing exploratory label'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/start-here/'
+    Message = 'expected the random route to expose library, collections, and Welcome fallbacks'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = 'Finding a piece from the archive\.\.\.'
+    Message = 'expected the random route to present a framed archive-selection status instead of a bare redirect stub'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = '(?s)window\.location\.replace\(fallback\).*window\.location\.replace\(randomUrl\)'
+    Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
   },
   @{
     Path = 'public/start-here/index.html'
