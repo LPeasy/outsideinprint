@@ -10,7 +10,6 @@ version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.pdf"
 featured: false
-homepage_rank: 5
 
 collections:
   - reported-case-studies

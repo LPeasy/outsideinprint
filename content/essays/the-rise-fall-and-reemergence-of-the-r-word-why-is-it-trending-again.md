@@ -10,7 +10,6 @@ version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again.pdf"
 featured: false
-homepage_rank: 3
 medium_source_url: "https://medium.com/@lawtonperret/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again-d804460f9464"
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*wQTI3-SOsgbcBKQzSLWlVg@2x.jpeg)

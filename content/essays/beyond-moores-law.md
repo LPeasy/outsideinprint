@@ -10,7 +10,6 @@ version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/beyond-moores-law.pdf"
 featured: false
-homepage_rank: 4
 
 collections:
   - technology-ai-machine-future

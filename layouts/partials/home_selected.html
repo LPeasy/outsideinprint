@@ -1,43 +1,54 @@
-{{/* Homepage selection is essays-only by design: one curated lead, then the newest published essays in the right rail. */}}
+{{/* Homepage selection is essays-only by design: newest work leads by default, with one explicit expiring feature override. */}}
 {{ $essays := sort (where site.RegularPages "Section" "essays") "Date" "desc" }}
-{{ $rankedEntries := slice }}
-{{ $ranks := slice }}
+{{ $today := now.Format "2006-01-02" }}
+{{ $featuredCandidates := slice }}
+
 {{ range $essays }}
   {{ $page := . }}
-  {{ $rank := $page.Params.homepage_rank }}
-  {{ with $rank }}
-    {{ $rankText := printf "%v" . }}
-    {{ if findRE "^[1-9][0-9]*$" $rankText }}
-      {{ $rankedEntries = $rankedEntries | append (dict "page" $page "rank" (int $rankText)) }}
-      {{ $ranks = $ranks | append (int $rankText) }}
+  {{ if $page.Params.homepage_featured }}
+    {{ with $page.Params.homepage_featured_until }}
+      {{ $untilMatches := findRE "\\d{4}-\\d{2}-\\d{2}" (printf "%v" .) 1 }}
+      {{ if gt (len $untilMatches) 0 }}
+        {{ $untilDate := index $untilMatches 0 }}
+        {{ if ge $untilDate $today }}
+          {{ $featuredCandidates = $featuredCandidates | append $page }}
+        {{ end }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
 
-{{ $rankedOrdered := slice }}
-{{ range sort (uniq $ranks) }}
-  {{ $rankGroup := slice }}
-  {{ range where $rankedEntries "rank" (int .) }}
-    {{ $rankGroup = $rankGroup | append .page }}
-  {{ end }}
-  {{ range sort $rankGroup "Date" "desc" }}
-    {{ $rankedOrdered = $rankedOrdered | append . }}
-  {{ end }}
+{{ $hero := false }}
+{{ $heroMode := "latest" }}
+{{ if gt (len $featuredCandidates) 0 }}
+  {{ $hero = index (sort $featuredCandidates "Date" "desc") 0 }}
+  {{ $heroMode = "featured" }}
+{{ else if gt (len $essays) 0 }}
+  {{ $hero = index $essays 0 }}
 {{ end }}
 
-{{ $lead := false }}
-{{ if gt (len $rankedOrdered) 0 }}
-  {{ $lead = index $rankedOrdered 0 }}
-{{ else if gt (len $essays) 0 }}
-  {{ $lead = index $essays 0 }}
+{{ $latest := false }}
+{{ if gt (len $essays) 0 }}
+  {{ $latest = index $essays 0 }}
+{{ end }}
+
+{{ $showLatestSlot := false }}
+{{ if and $hero $latest (ne $hero.RelPermalink $latest.RelPermalink) }}
+  {{ $showLatestSlot = true }}
 {{ end }}
 
 {{ $secondary := slice }}
 {{ $selectedPages := slice }}
 {{ $selectedKeys := slice }}
-{{ with $lead }}
+
+{{ with $hero }}
   {{ $selectedPages = $selectedPages | append . }}
   {{ $selectedKeys = $selectedKeys | append .RelPermalink }}
+{{ end }}
+
+{{ if and $showLatestSlot $latest }}
+  {{ $selectedPages = $selectedPages | append $latest }}
+  {{ $selectedKeys = $selectedKeys | append $latest.RelPermalink }}
 {{ end }}
 
 {{ range $candidate := $essays }}
@@ -55,7 +66,11 @@
 {{ return (dict
   "pages" $selectedPages
   "keys" $selectedKeys
-  "lead" $lead
+  "lead" $hero
+  "hero" $hero
+  "latest" $latest
+  "showLatestSlot" $showLatestSlot
   "secondary" $secondary
+  "heroMode" $heroMode
 ) }}
 

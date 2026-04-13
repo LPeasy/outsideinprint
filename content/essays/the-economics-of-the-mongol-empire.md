@@ -10,7 +10,6 @@ version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-economics-of-the-mongol-empire.pdf"
 featured: false
-homepage_rank: 6
 medium_source_url: "https://medium.com/@lawtonperret/the-economics-of-the-mongol-empire-c258d2179605"
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*khYdqb0OmvTtWQeCsofc3Q@2x.jpeg)

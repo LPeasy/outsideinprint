@@ -10,7 +10,6 @@ version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.pdf"
 featured: false
-homepage_rank: 2
 medium_source_url: "https://medium.com/@lawtonperret/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*PHMYPcymIjnHm77IGxy--w@2x.jpeg)

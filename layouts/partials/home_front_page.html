@@ -1,14 +1,21 @@
 {{ $frontPage := partial "home_selected.html" . }}
-{{ $lead := index $frontPage "lead" }}
+{{ $lead := index $frontPage "hero" }}
+{{ $latest := index $frontPage "latest" }}
+{{ $showLatestSlot := index $frontPage "showLatestSlot" }}
+{{ $heroMode := index $frontPage "heroMode" }}
 {{ $secondary := index $frontPage "secondary" | default (slice) }}
 <section class="home-front-page" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
   {{ with $lead }}
     {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
     {{ $leadSection := .Params.section_label | default (humanize .Section) }}
+    {{ $heroLabel := "Latest Essay" }}
+    {{ if eq $heroMode "featured" }}
+      {{ $heroLabel = "Featured Essay" }}
+    {{ end }}
     <div class="home-front-page__stories">
       <article class="home-front-page__lead" data-home-front-page-region="lead">
-        <p class="list-title home-front-page__kicker">{{ $leadSection }}</p>
+        <p class="list-title home-front-page__kicker">{{ $heroLabel }}</p>
         <h3 class="home-front-page__lead-title">
           <a href="{{ .RelPermalink }}"
             data-analytics-event="internal_promo_click"
@@ -32,13 +39,44 @@
           <img
             src="/images/editorial/cartoon-think-outside-the-box.png"
             alt="Editorial cartoon showing a student thinking outside the box, with the thought breaking through the frame"
-            loading="lazy"
+            width="1024"
+            height="1536"
           />
         </div>
       </article>
 
-      {{ if gt (len $secondary) 0 }}
-        <div class="home-front-page__secondary" aria-label="Secondary stories" data-home-front-page-region="secondary">
+      {{ if or $showLatestSlot (gt (len $secondary) 0) }}
+        {{ $secondaryAriaLabel := "Secondary stories" }}
+        {{ if $showLatestSlot }}
+          {{ $secondaryAriaLabel = "Latest and secondary stories" }}
+        {{ end }}
+        <div class="home-front-page__secondary" aria-label="{{ $secondaryAriaLabel }}" data-home-front-page-region="secondary">
+          {{ if and $showLatestSlot $latest }}
+            {{ $latestSlug := $latest.Params.slug | default $latest.File.BaseFileName }}
+            {{ $latestSectionLabel := $latest.Params.section_label | default (humanize $latest.Section) }}
+            <article class="home-front-page__secondary-item home-front-page__secondary-item--latest">
+              <p class="list-title home-front-page__secondary-kicker">Latest Essay</p>
+              <h3 class="home-front-page__secondary-title">
+                <a href="{{ $latest.RelPermalink }}"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="homepage_selected_latest"
+                  data-analytics-slug="{{ $latestSlug }}"
+                  data-analytics-title="{{ $latest.Title }}"
+                  data-analytics-section="{{ $latestSectionLabel }}"
+                  data-analytics-path="{{ $latest.RelPermalink }}"
+                >{{ $latest.Title }}</a>
+              </h3>
+              {{ with (partial "discovery/page-summary.html" $latest) }}
+                <div class="d home-front-page__secondary-dek">{{ . }}</div>
+              {{ end }}
+              <div class="m home-front-page__secondary-meta">
+                {{ with $latest.Date }}{{ .Format "Jan 2, 2006" }}{{ end }}
+                {{ with $latest.Params.version }} | v{{ . }}{{ end }}
+                {{ with $latest.ReadingTime }} | {{ . }} min read{{ end }}
+              </div>
+              <p class="m home-front-page__secondary-action"><a href="{{ $latest.RelPermalink }}">Read essay &rarr;</a></p>
+            </article>
+          {{ end }}
           {{ range $secondary }}
             {{ $slug := .Params.slug | default .File.BaseFileName }}
             {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
