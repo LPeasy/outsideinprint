@@ -12,28 +12,25 @@ function normalizeRank(value) {
 function selectHomepageEssays(pages) {
   const publishedEssays = pages
     .filter((page) => page.section === "essays" && page.draft !== true)
-    .map((page) => ({ ...page, normalizedRank: normalizeRank(page.homepage_rank) }));
+    .map((page) => ({ ...page, normalizedRank: normalizeRank(page.homepage_rank) }))
+    .sort((left, right) => right.date - left.date);
 
   const ranked = publishedEssays
     .filter((page) => page.normalizedRank !== null)
     .sort((left, right) => left.normalizedRank - right.normalizedRank || right.date - left.date);
 
-  const rankedKeys = new Set(ranked.map((page) => page.relPermalink));
-  const unranked = publishedEssays
-    .filter((page) => !rankedKeys.has(page.relPermalink))
-    .sort((left, right) => right.date - left.date);
+  const lead = ranked[0] ?? publishedEssays[0] ?? null;
+  const selected = lead ? [lead] : [];
+  const seen = new Set(lead ? [lead.relPermalink] : []);
 
-  const selected = [];
-  const seen = new Set();
-
-  for (const page of [...ranked, ...unranked]) {
+  for (const page of publishedEssays) {
     if (selected.length >= 4 || seen.has(page.relPermalink)) continue;
     seen.add(page.relPermalink);
     selected.push(page);
   }
 
   return {
-    lead: selected[0] ?? null,
+    lead,
     secondary: selected.slice(1, 4),
     selected,
     keys: selected.map((page) => page.relPermalink)
@@ -67,21 +64,23 @@ function parseFrontMatter(filePath) {
   return data;
 }
 
-test("homepage partial is essays-only and no longer depends on featured or hard-coded slugs", () => {
+test("homepage partial keeps one curated lead and fills the right rail with newest essays", () => {
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const recentWorkSource = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
   const indexSource = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 
   assert.match(source, /where site\.RegularPages "Section" "essays"/);
-  assert.match(source, /essays-only by design/);
+  assert.match(source, /one curated lead, then the newest published essays in the right rail/);
   assert.match(source, /Params\.homepage_rank/);
   assert.match(source, /findRE "\^\[1-9\]\[0-9\]\*\$"/);
   assert.match(source, /sort \(uniq \$ranks\)/);
   assert.match(source, /sort \$rankGroup "Date" "desc"/);
-  assert.match(source, /sort \$essays "Date" "desc"/);
-  assert.match(source, /lt \(len \$selectedPages\) 4/);
-  assert.match(source, /first 3 \(after 1 \$selectedPages\)/);
+  assert.match(source, /sort \(where site\.RegularPages "Section" "essays"\) "Date" "desc"/);
+  assert.match(source, /\$lead = index \$rankedOrdered 0/);
+  assert.match(source, /else if gt \(len \$essays\) 0/);
+  assert.match(source, /range \$candidate := \$essays/);
+  assert.match(source, /lt \(len \$secondary\) 3/);
   assert.match(source, /home_selected_keys/);
   assert.match(source, /"pages" \$selectedPages/);
   assert.match(source, /"keys" \$selectedKeys/);
@@ -112,7 +111,7 @@ test("homepage partial is essays-only and no longer depends on featured or hard-
   assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_recent_work.html"'));
 });
 
-test("ranked essays fill one lead and three secondary picks before deterministic unranked fallback", () => {
+test("lead stays curated while the right rail uses the newest published essays", () => {
   const pages = [
     { relPermalink: "/essays/latest/", section: "essays", draft: false, date: new Date("2026-03-01"), homepage_rank: null },
     { relPermalink: "/essays/hero/", section: "essays", draft: false, date: new Date("2026-01-01"), homepage_rank: 1 },
@@ -131,7 +130,7 @@ test("ranked essays fill one lead and three secondary picks before deterministic
   const result = selectHomepageEssays(pages);
 
   assert.equal(result.lead?.relPermalink, "/essays/hero/");
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/core-a/", "/essays/core-b/", "/essays/archive-ranked/"]);
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/latest/", "/essays/unranked-2/", "/essays/unranked-3/"]);
   assert.equal(result.secondary.length, 3);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
@@ -186,7 +185,7 @@ test("front page stays structurally primary to recent work", () => {
   assert.match(recentWorkSource, /lt \$recentCount 6/);
 });
 
-test("curated homepage control now lives in essay front matter ranks", () => {
+test("homepage lead control still lives in essay front matter ranks", () => {
   const essayDir = path.resolve("content/essays");
   const rankedEssays = fs
     .readdirSync(essayDir)
@@ -198,9 +197,10 @@ test("curated homepage control now lives in essay front matter ranks", () => {
     .filter(({ frontMatter }) => normalizeRank(frontMatter.homepage_rank) !== null)
     .sort((left, right) => left.frontMatter.homepage_rank - right.frontMatter.homepage_rank);
 
-  assert.equal(rankedEssays.length >= 4, true);
-  assert.deepEqual(
-    rankedEssays.slice(0, 4).map(({ frontMatter }) => frontMatter.homepage_rank),
-    [1, 2, 3, 4]
+  assert.equal(rankedEssays.length >= 1, true);
+  assert.equal(rankedEssays[0].frontMatter.homepage_rank, 1);
+  assert.equal(
+    rankedEssays.some(({ frontMatter }) => frontMatter.slug === "why-a-return-to-the-gold-standard-would-break-the-economy"),
+    true
   );
 });

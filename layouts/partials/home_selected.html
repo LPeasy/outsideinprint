@@ -1,5 +1,5 @@
-{{/* Homepage curation is essays-only by design; other sections stay discoverable through navigation and collections. */}}
-{{ $essays := where site.RegularPages "Section" "essays" }}
+{{/* Homepage selection is essays-only by design: one curated lead, then the newest published essays in the right rail. */}}
+{{ $essays := sort (where site.RegularPages "Section" "essays") "Date" "desc" }}
 {{ $rankedEntries := slice }}
 {{ $ranks := slice }}
 {{ range $essays }}
@@ -25,33 +25,26 @@
   {{ end }}
 {{ end }}
 
-{{ $rankedKeys := slice }}
-{{ range $rankedOrdered }}
-  {{ $rankedKeys = $rankedKeys | append .RelPermalink }}
-{{ end }}
-{{ $unrankedFallback := slice }}
-{{ range sort $essays "Date" "desc" }}
-  {{ if not (in $rankedKeys .RelPermalink) }}
-    {{ $unrankedFallback = $unrankedFallback | append . }}
-  {{ end }}
+{{ $lead := false }}
+{{ if gt (len $rankedOrdered) 0 }}
+  {{ $lead = index $rankedOrdered 0 }}
+{{ else if gt (len $essays) 0 }}
+  {{ $lead = index $essays 0 }}
 {{ end }}
 
+{{ $secondary := slice }}
 {{ $selectedPages := slice }}
 {{ $selectedKeys := slice }}
-{{ range $candidate := $rankedOrdered }}
-  {{ if lt (len $selectedPages) 4 }}
-    {{ $key := $candidate.RelPermalink }}
-    {{ if not (in $selectedKeys $key) }}
-      {{ $selectedPages = $selectedPages | append $candidate }}
-      {{ $selectedKeys = $selectedKeys | append $key }}
-    {{ end }}
-  {{ end }}
+{{ with $lead }}
+  {{ $selectedPages = $selectedPages | append . }}
+  {{ $selectedKeys = $selectedKeys | append .RelPermalink }}
 {{ end }}
 
-{{ range $candidate := $unrankedFallback }}
-  {{ if lt (len $selectedPages) 4 }}
+{{ range $candidate := $essays }}
+  {{ if lt (len $secondary) 3 }}
     {{ $key := $candidate.RelPermalink }}
     {{ if not (in $selectedKeys $key) }}
+      {{ $secondary = $secondary | append $candidate }}
       {{ $selectedPages = $selectedPages | append $candidate }}
       {{ $selectedKeys = $selectedKeys | append $key }}
     {{ end }}
@@ -59,15 +52,6 @@
 {{ end }}
 
 {{ .Scratch.Set "home_selected_keys" $selectedKeys }}
-{{ $lead := false }}
-{{ if gt (len $selectedPages) 0 }}
-  {{ $lead = index $selectedPages 0 }}
-{{ end }}
-{{ $secondary := slice }}
-{{ if gt (len $selectedPages) 1 }}
-  {{ $secondary = first 3 (after 1 $selectedPages) }}
-{{ end }}
-
 {{ return (dict
   "pages" $selectedPages
   "keys" $selectedKeys
