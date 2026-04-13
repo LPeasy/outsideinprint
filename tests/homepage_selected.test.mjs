@@ -31,7 +31,7 @@ function selectHomepageEssays(pages) {
 
   return {
     lead,
-    secondary: selected.slice(1, 4),
+    secondary: selected.slice(1, 5),
     selected,
     keys: selected.map((page) => page.relPermalink)
   };
@@ -67,7 +67,6 @@ function parseFrontMatter(filePath) {
 test("homepage partial keeps one curated lead and fills the right rail with newest essays", () => {
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
-  const recentWorkSource = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
   const indexSource = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 
   assert.match(source, /where site\.RegularPages "Section" "essays"/);
@@ -80,7 +79,7 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(source, /\$lead = index \$rankedOrdered 0/);
   assert.match(source, /else if gt \(len \$essays\) 0/);
   assert.match(source, /range \$candidate := \$essays/);
-  assert.match(source, /lt \(len \$secondary\) 3/);
+  assert.match(source, /lt \(len \$secondary\) 4/);
   assert.match(source, /home_selected_keys/);
   assert.match(source, /"pages" \$selectedPages/);
   assert.match(source, /"keys" \$selectedKeys/);
@@ -102,13 +101,11 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(frontPageSource, /home-front-page__secondary-label/);
   assert.doesNotMatch(frontPageSource, /Read by guided path/);
   assert.match(indexSource, /home_front_page\.html/);
-  assert.match(indexSource, /home_recent_work\.html/);
+  assert.doesNotMatch(indexSource, /home_recent_work\.html/);
   assert.match(indexSource, /Feeling curious\?/);
   assert.match(indexSource, /"label" "Welcome"/);
-  assert.match(recentWorkSource, /home_selected_keys/);
-  assert.match(recentWorkSource, /lt \$recentCount 6/);
-  assert.match(recentWorkSource, /not \(in \$selectedKeys \.RelPermalink\)/);
-  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_recent_work.html"'));
+  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
+  assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
 });
 
 test("lead stays curated while the right rail uses the newest published essays", () => {
@@ -130,8 +127,8 @@ test("lead stays curated while the right rail uses the newest published essays",
   const result = selectHomepageEssays(pages);
 
   assert.equal(result.lead?.relPermalink, "/essays/hero/");
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/latest/", "/essays/unranked-2/", "/essays/unranked-3/"]);
-  assert.equal(result.secondary.length, 3);
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/latest/", "/essays/unranked-2/", "/essays/unranked-3/", "/essays/unranked-4/"]);
+  assert.equal(result.secondary.length, 4);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
 });
@@ -161,11 +158,10 @@ test("recent fallback remains stable when no valid ranks exist", () => {
   assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/a/", "/essays/b/", "/essays/c/", "/essays/d/"]);
 });
 
-test("front page stays structurally primary to recent work", () => {
+test("front page stays structurally primary to collections and newsletter follow-up", () => {
   const source = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const partialSource = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
-  const recentWorkSource = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
 
   assert.match(frontPageSource, /id="home-front-page-title"/);
   assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
@@ -177,12 +173,8 @@ test("front page stays structurally primary to recent work", () => {
   assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$lead/);
   assert.match(partialSource, /"secondary" \$secondary/);
-  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_recent_work.html"'));
-  assert.match(recentWorkSource, /class="home-recent-work"/);
-  assert.doesNotMatch(recentWorkSource, /home-recent-essays/);
-  assert.match(recentWorkSource, /id="home-recent-work-title"/);
-  assert.match(recentWorkSource, /"showCollections" false/);
-  assert.match(recentWorkSource, /lt \$recentCount 6/);
+  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_selected_collections.html"'));
+  assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('partial "newsletter_signup.html"'));
 });
 
 test("homepage lead control still lives in essay front matter ranks", () => {

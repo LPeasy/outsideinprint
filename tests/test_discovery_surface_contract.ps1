@@ -31,7 +31,6 @@ $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -R
 foreach ($requiredSnippet in @(
   'partial "home_front_page.html"',
   'partial "home_selected_collections.html"',
-  'partial "home_recent_work.html"',
   'partial "newsletter_signup.html"',
   'site.GetPage "/collections"',
   'site.GetPage "/library"'
@@ -44,7 +43,6 @@ foreach ($requiredSnippet in @(
 $homepageOrder = @(
   'partial "home_front_page.html"',
   'partial "home_selected_collections.html"',
-  'partial "home_recent_work.html"',
   'partial "newsletter_signup.html"',
   'home-browse-title'
 )
@@ -133,17 +131,6 @@ foreach ($requiredSnippet in @(
   }
 }
 
-$homeRecentWorkTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_recent_work.html') -Raw
-foreach ($requiredSnippet in @(
-  'home_selected_keys',
-  'partial "discovery/page-list-item.html"',
-  'lt $recentCount 6'
-)) {
-  if ($homeRecentWorkTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/home_recent_work.html to contain: $requiredSnippet"
-  }
-}
-
 $collectionsListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/list.html') -Raw
 foreach ($requiredSnippet in @(
   'Collections are curated reading threads across the archive',
@@ -199,7 +186,10 @@ $defaultListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/
 foreach ($requiredSnippet in @(
   'Welcome',
   'partial "discovery/page-list-item.html"',
-  'No published pieces are listed here yet.'
+  'No published pieces are listed here yet.',
+  '$orderedPages := sort $pages "Title" "asc"',
+  'if eq .Section "essays"',
+  '$orderedPages = sort $pages "Date" "desc"'
 )) {
   if ($defaultListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/_default/list.html to contain: $requiredSnippet"

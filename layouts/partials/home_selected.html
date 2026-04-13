@@ -41,7 +41,7 @@
 {{ end }}
 
 {{ range $candidate := $essays }}
-  {{ if lt (len $secondary) 3 }}
+  {{ if lt (len $secondary) 4 }}
     {{ $key := $candidate.RelPermalink }}
     {{ if not (in $selectedKeys $key) }}
       {{ $secondary = $secondary | append $candidate }}

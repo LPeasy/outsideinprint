@@ -814,7 +814,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?Selected Collections.*?Recent Work.*?The weekly letter.*?Browse the Archive'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?Selected Collections.*?The weekly letter.*?Browse the Archive'
     Message = 'expected the homepage to preserve the editorial module order from the story grid through archive browse'
   },
   @{
@@ -835,8 +835,9 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'home-recent-work__list\s+page-shell\s+page-shell--grid'
-    Message = 'expected the homepage recent-work module to render with the grid shell variant'
+    Pattern = 'home-recent-work'
+    Message = 'expected the homepage not to render the retired Recent Work module'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -910,6 +911,11 @@ $requiredUxChecks = @(
     Path = 'public/essays/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected the default list template to expose collection and library next steps'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '(?s)/essays/the-fair-price-of-bitcoin-69420/.*?/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/.*?/essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/'
+    Message = 'expected the Essays landing page to list recent essays in reverse chronological order instead of alphabetically'
   },
   @{
     Path = 'public/essays/index.html'

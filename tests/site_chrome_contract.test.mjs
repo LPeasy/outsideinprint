@@ -119,15 +119,12 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.match(homeSelectedCollections, /Guided reading paths drawn from the archive/);
   assert.match(homeSelectedCollections, /"variant" "item"/);
   assert.match(homeRecentWork, /id="home-recent-work-title"/);
-  assert.match(homeRecentWork, /home_selected_keys/);
-  assert.match(homeRecentWork, /"showCollections" false/);
-  assert.doesNotMatch(homeRecentWork, /home-recent-essays/);
   assert.match(config, /\[params\.homepage\]/);
   assert.match(config, /imprint_statement = "/);
   assert.ok(homeFrontPage.indexOf('id="home-front-page-title"') < homeFrontPage.indexOf('class="home-front-page__stories"'));
   assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
-  assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('partial "home_recent_work.html"'));
-  assert.ok(homepage.indexOf('partial "home_recent_work.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
+  assert.doesNotMatch(homepage, /partial "home_recent_work\.html"/);
+  assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
   assert.match(homepage, /"title" "The weekly letter"/);
   assert.match(homepage, /"eyebrow" "Letter"/);
   assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('home-browse-title'));

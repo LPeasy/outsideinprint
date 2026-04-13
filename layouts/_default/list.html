@@ -1,5 +1,9 @@
 {{ define "main" }}
   {{ $pages := .Pages }}
+  {{ $orderedPages := sort $pages "Title" "asc" }}
+  {{ if eq .Section "essays" }}
+    {{ $orderedPages = sort $pages "Date" "desc" }}
+  {{ end }}
   {{ $latest := false }}
   {{ if gt (len $pages) 0 }}
     {{ $latest = index (sort $pages "Date" "desc") 0 }}
@@ -22,7 +26,7 @@
 
   <section class="page-shell page-shell--reading" aria-labelledby="page-title">
     {{ if gt (len $pages) 0 }}
-      {{ range sort $pages "Title" "asc" }}
+      {{ range $orderedPages }}
         {{ partial "discovery/page-list-item.html" (dict
           "page" .
           "showCollections" true
