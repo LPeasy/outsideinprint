@@ -1032,8 +1032,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Topics.*?Risk.*?Risk, Uncertainty, and Decision-Making.*?Floods.*?Floods, Water, and the Built Environment.*?AI.*?Technology, AI, and the Machine Future.*?Moral / Religious.*?Moral, Religious, and Philosophical Essays.*?Public Power.*?Civic Institutions and Public Power'
+    Pattern = '(?s)Topics.*?Risk.*?Risk, Uncertainty, and Decision-Making.*?Floods.*?Floods, Water, and the Built Environment.*?AI.*?Technology, AI, and the Machine Future.*?Moral / Religious.*?Moral, Religious, and Philosophical Essays'
     Message = 'expected the collections index to group topical collections under the new topic subheads'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Public Power|Civic Institutions and Public Power'
+    Message = 'expected the collections index not to render the hidden Public Power subgroup until that collection becomes visible'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
