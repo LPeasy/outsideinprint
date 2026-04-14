@@ -244,10 +244,37 @@
   },
   {
     "date": "2026-04-11",
-    "pageviews": 60.0,
-    "unique_visitors": 1.0,
+    "pageviews": 73.0,
+    "unique_visitors": 4.0,
     "reads": 0.0,
     "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-12",
+    "pageviews": 3.0,
+    "unique_visitors": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-13",
+    "pageviews": 112.0,
+    "unique_visitors": 7.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-14",
+    "pageviews": 32.0,
+    "unique_visitors": 4.0,
+    "reads": 1.0,
+    "read_rate": 3.1,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0
   }

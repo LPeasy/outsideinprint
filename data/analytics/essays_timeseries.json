@@ -200,6 +200,27 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
@@ -404,206 +425,23 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "2025-supreme-court-wrap-up",
-    "path": "/essays/2025-supreme-court-wrap-up/",
-    "title": "2025 Supreme Court Wrap-Up | Outside In Print",
-    "section": "Essays",
-    "series": [
+      },
       {
-        "date": "2026-03-15",
+        "date": "2026-04-12",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 2.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-24",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-25",
-        "pageviews": 3.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-26",
-        "pageviews": 4.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-27",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-28",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-29",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-30",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-31",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-01",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-02",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-03",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-04",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-05",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-06",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-07",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-08",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-09",
+        "date": "2026-04-13",
         "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-04-10",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-11",
+        "date": "2026-04-14",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
@@ -812,13 +650,34 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
   {
-    "slug": "ai-in-education-is-a-wicked-problem",
-    "path": "/essays/ai-in-education-is-a-wicked-problem/",
-    "title": "AI in Education Is a Wicked Problem | Outside In Print",
+    "slug": "2025-supreme-court-wrap-up",
+    "path": "/essays/2025-supreme-court-wrap-up/",
+    "title": "2025 Supreme Court Wrap-Up | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -837,9 +696,9 @@
       },
       {
         "date": "2026-03-17",
-        "pageviews": 0.0,
+        "pageviews": 2.0,
         "reads": 0.0,
-        "pdf_downloads": 0.0,
+        "pdf_downloads": 1.0,
         "newsletter_submits": 0.0
       },
       {
@@ -900,7 +759,7 @@
       },
       {
         "date": "2026-03-26",
-        "pageviews": 1.0,
+        "pageviews": 4.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
@@ -921,10 +780,10 @@
       },
       {
         "date": "2026-03-29",
-        "pageviews": 3.0,
+        "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
-        "newsletter_submits": 1.0
+        "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-30",
@@ -998,210 +857,6 @@
       },
       {
         "date": "2026-04-09",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-10",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-11",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "35-years-of-yellow-the-simpsons-time-loop",
-    "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
-    "title": "35 Years of Yellow: The Simpsons Time Loop | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-24",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-25",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-26",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-27",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-28",
-        "pageviews": 5.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-29",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-30",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-31",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-01",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-02",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-03",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-04",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-05",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-06",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-07",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-08",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-09",
         "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
@@ -1216,6 +871,27 @@
       },
       {
         "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
@@ -1424,6 +1100,27 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
@@ -1624,6 +1321,702 @@
       },
       {
         "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "ai-in-education-is-a-wicked-problem",
+    "path": "/essays/ai-in-education-is-a-wicked-problem/",
+    "title": "AI in Education Is a Wicked Problem | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 3.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-28",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-29",
+        "pageviews": 3.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 1.0
+      },
+      {
+        "date": "2026-03-30",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-31",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-01",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-02",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-03",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-04",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-05",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-06",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-07",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-08",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-09",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-10",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-fair-price-of-bitcoin-69420",
+    "path": "/essays/the-fair-price-of-bitcoin-69420/",
+    "title": "The Fair Price of Bitcoin: $69,420",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-28",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-29",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-30",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-31",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-01",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-02",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-03",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-04",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-05",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-06",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-07",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-08",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-09",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-10",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 6.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "35-years-of-yellow-the-simpsons-time-loop",
+    "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+    "title": "35 Years of Yellow: The Simpsons Time Loop | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-28",
+        "pageviews": 5.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-29",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-30",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-31",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-01",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-02",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-03",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-04",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-05",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-06",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-07",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-08",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-09",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-10",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
@@ -1832,13 +2225,34 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
   {
-    "slug": "the-structure-of-modern-american-society",
-    "path": "/essays/the-structure-of-modern-american-society/",
-    "title": "Wealth and Governance in Modern American Society | Outside In Print",
+    "slug": "beyond-moores-law",
+    "path": "/essays/beyond-moores-law/",
+    "title": "Beyond Moore’s Law | Outside In Print",
     "section": "Essays",
     "series": [
       {
@@ -1857,9 +2271,9 @@
       },
       {
         "date": "2026-03-17",
-        "pageviews": 3.0,
+        "pageviews": 0.0,
         "reads": 0.0,
-        "pdf_downloads": 2.0,
+        "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
@@ -1913,14 +2327,14 @@
       },
       {
         "date": "2026-03-25",
-        "pageviews": 1.0,
+        "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
         "date": "2026-03-26",
-        "pageviews": 0.0,
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
@@ -2018,420 +2432,12 @@
       },
       {
         "date": "2026-04-09",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-10",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-11",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "risk-management-vs-risk-analysis-whats-the-difference",
-    "path": "/essays/risk-management-vs-risk-analysis-whats-the-difference/",
-    "title": "Risk Management vs Risk Analysis: What’s the Difference? | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 4.0,
-        "reads": 0.0,
-        "pdf_downloads": 2.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-24",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-25",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-26",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-27",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-28",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-29",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-30",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-31",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-01",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-02",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-03",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-04",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-05",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-06",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-07",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-08",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-09",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-10",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-11",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "peaches-or-greece",
-    "path": "/syd-and-oliver/peaches-or-greece/",
-    "title": "Peaches or Greece | Outside In Print",
-    "section": "Dialogues",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-18",
-        "pageviews": 2.0,
-        "reads": 0.0,
-        "pdf_downloads": 1.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-24",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-25",
         "pageviews": 2.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-26",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-27",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-28",
-        "pageviews": 1.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-29",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-30",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-31",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-01",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-02",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-03",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-04",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-05",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-06",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-07",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-08",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-09",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
         "date": "2026-04-10",
         "pageviews": 0.0,
         "reads": 0.0,
@@ -2440,210 +2446,27 @@
       },
       {
         "date": "2026-04-11",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      }
-    ]
-  },
-  {
-    "slug": "the-risk-management-buffet",
-    "path": "/essays/the-risk-management-buffet/",
-    "title": "The Risk Management Buffet | Outside In Print",
-    "section": "Essays",
-    "series": [
-      {
-        "date": "2026-03-15",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-16",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-17",
         "pageviews": 1.0,
         "reads": 0.0,
-        "pdf_downloads": 1.0,
+        "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-18",
-        "pageviews": 0.0,
+        "date": "2026-04-12",
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-19",
-        "pageviews": 0.0,
+        "date": "2026-04-13",
+        "pageviews": 1.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
       },
       {
-        "date": "2026-03-20",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-21",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-22",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-23",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-24",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-25",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-26",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-27",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-28",
-        "pageviews": 4.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-29",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-30",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-03-31",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-01",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-02",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-03",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-04",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-05",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-06",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-07",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-08",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-09",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-10",
-        "pageviews": 0.0,
-        "reads": 0.0,
-        "pdf_downloads": 0.0,
-        "newsletter_submits": 0.0
-      },
-      {
-        "date": "2026-04-11",
+        "date": "2026-04-14",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
@@ -2852,6 +2675,477 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "the-risk-management-buffet",
+    "path": "/essays/the-risk-management-buffet/",
+    "title": "The Risk Management Buffet | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 1.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-28",
+        "pageviews": 4.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-29",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-30",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-31",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-01",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-02",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-03",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-04",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-05",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-06",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-07",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-08",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-09",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-10",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      }
+    ]
+  },
+  {
+    "slug": "tariffs-protectionism-and-wishful-thinking",
+    "path": "/essays/tariffs-protectionism-and-wishful-thinking/",
+    "title": "Tariffs, Protectionism, and Wishful Thinking | Outside In Print",
+    "section": "Essays",
+    "series": [
+      {
+        "date": "2026-03-15",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-16",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-17",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-18",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-19",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-20",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-21",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-22",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-24",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-25",
+        "pageviews": 2.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-26",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-27",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-28",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-29",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-30",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-03-31",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-01",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-02",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-03",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-04",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-05",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-06",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-07",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-08",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-09",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-10",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 1.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
@@ -3056,6 +3350,27 @@
         "reads": 0.0,
         "pdf_downloads": 0.0,
         "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
       }
     ]
   },
@@ -3256,6 +3571,27 @@
       },
       {
         "date": "2026-04-11",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-12",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-13",
+        "pageviews": 0.0,
+        "reads": 0.0,
+        "pdf_downloads": 0.0,
+        "newsletter_submits": 0.0
+      },
+      {
+        "date": "2026-04-14",
         "pageviews": 0.0,
         "reads": 0.0,
         "pdf_downloads": 0.0,
