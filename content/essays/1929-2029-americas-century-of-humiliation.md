@@ -5,7 +5,7 @@ draft: false
 slug: "1929-2029-americas-century-of-humiliation"
 section_label: "Essay"
 description: "A short essay arguing that the United States became world-historically successful while leaving millions of citizens to experience that success as humiliation, attrition, and spectatorship."
-version: "1.0"
+version: "1.1"
 edition: "First web edition"
 featured: false
 featured_image: "/images/essays/1929-2029-americas-century-of-humiliation/hero.png"
@@ -91,10 +91,6 @@ It can tell you unemployment is low while everyone you know seems tired.
 ## Final Ledger
 
 The United States remains powerful, rich, and full of talent.
-
-That part is real.
-
-That part is real too.
 
 Many citizens experience national success as spectators. They watch wealth happen around them.
 
