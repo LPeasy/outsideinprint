@@ -2,6 +2,10 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$agentsPath = Join-Path $repoRoot "AGENTS.md"
+$publishingWorkflowDocPath = Join-Path $repoRoot "docs/publishing-workflow.md"
+$readmePath = Join-Path $repoRoot "README.md"
+$codexWorkflowPath = Join-Path $repoRoot "CODEX_WORKFLOW.md"
 $packagePath = Join-Path $repoRoot "package.json"
 $nvmrcPath = Join-Path $repoRoot ".nvmrc"
 $deployWorkflowPath = Join-Path $repoRoot ".github/workflows/deploy.yml"
@@ -17,6 +21,22 @@ $legacyRenderContractPath = Join-Path $repoRoot "tests/test_legacy_render_contra
 
 if (-not (Test-Path $packagePath -PathType Leaf)) {
   throw "package.json is required for the CI contract test."
+}
+
+if (-not (Test-Path $agentsPath -PathType Leaf)) {
+  throw "AGENTS.md is required for repo-local publishing session guidance."
+}
+
+if (-not (Test-Path $publishingWorkflowDocPath -PathType Leaf)) {
+  throw "docs/publishing-workflow.md is required as the canonical publishing workflow guide."
+}
+
+if (-not (Test-Path $readmePath -PathType Leaf)) {
+  throw "README.md is required for the CI contract test."
+}
+
+if (-not (Test-Path $codexWorkflowPath -PathType Leaf)) {
+  throw "CODEX_WORKFLOW.md is required for the CI contract test."
 }
 
 if (-not (Test-Path $nvmrcPath -PathType Leaf)) {
@@ -38,6 +58,10 @@ foreach ($requiredValidationPath in @(
 }
 
 $package = Get-Content -Path $packagePath -Raw | ConvertFrom-Json
+$agents = Get-Content -Path $agentsPath -Raw
+$publishingWorkflowDoc = Get-Content -Path $publishingWorkflowDocPath -Raw
+$readme = Get-Content -Path $readmePath -Raw
+$codexWorkflow = Get-Content -Path $codexWorkflowPath -Raw
 $recommendedNodeVersion = (Get-Content -Path $nvmrcPath -Raw).Trim()
 $deployWorkflow = Get-Content -Path $deployWorkflowPath -Raw
 $dashboardWorkflow = Get-Content -Path $dashboardWorkflowPath -Raw
@@ -48,6 +72,26 @@ $publicOutputTest = Get-Content -Path $publicOutputTestPath -Raw
 
 if ([string]::IsNullOrWhiteSpace($recommendedNodeVersion)) {
   throw ".nvmrc must contain a Node major version."
+}
+
+if ($agents -notmatch 'docs/publishing-workflow\.md') {
+  throw "AGENTS.md must point publishing sessions at docs/publishing-workflow.md."
+}
+
+if ($publishingWorkflowDoc -notmatch 'tools\\bin\\generated\\') {
+  throw "docs/publishing-workflow.md must reference the repo-local generated wrappers."
+}
+
+if ($publishingWorkflowDoc -notmatch 'main') {
+  throw "docs/publishing-workflow.md must describe publishing through main."
+}
+
+if ($readme -notmatch 'docs/publishing-workflow\.md') {
+  throw "README.md must reference docs/publishing-workflow.md."
+}
+
+if ($codexWorkflow -notmatch 'docs/publishing-workflow\.md') {
+  throw "CODEX_WORKFLOW.md must reference docs/publishing-workflow.md."
 }
 
 $playwrightVersion = [string]$package.devDependencies.playwright

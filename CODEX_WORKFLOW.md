@@ -3,6 +3,14 @@
 ## Purpose
 Use Codex as an execution agent for print-output quality, not as general brainstorming chat.
 
+## Publishing Sessions
+
+When the task is publishing or revising site content, follow `AGENTS.md` and `docs/publishing-workflow.md`.
+
+- Use the repo-local wrappers under `tools\bin\generated\` for local publish commands.
+- Prefer the essay scaffold and target-file guardrails before full-site validation.
+- Treat the command block below as examples and validation helpers, not as the canonical publishing manual.
+
 ## Standard Task Contract
 Use this structure in every request:
 

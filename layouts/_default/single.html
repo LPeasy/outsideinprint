@@ -38,6 +38,19 @@
         {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
         {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
       {{ end }}
+      {{ with .Params.featured_image }}
+        {{ $featuredImage := . }}
+        {{ $featuredImageAlt := $.Params.featured_image_alt | default $.Title }}
+        {{ $featuredImageCaption := $.Params.featured_image_caption }}
+        {{ $featuredImageSrc := $featuredImage }}
+        {{ if not (or (hasPrefix $featuredImage "http://") (hasPrefix $featuredImage "https://")) }}
+          {{ $featuredImageSrc = $featuredImage | absURL }}
+        {{ end }}
+        <figure class="piece-hero">
+          <img src="{{ $featuredImageSrc }}" alt="{{ $featuredImageAlt }}">
+          {{ with $featuredImageCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
+        </figure>
+      {{ end }}
 
       {{ partial "journey_links.html" (dict
         "class" "journey-links--article"

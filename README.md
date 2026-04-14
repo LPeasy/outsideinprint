@@ -2,9 +2,11 @@
 
 A minimalist Hugo site for publishing essays, fiction, dialogues, and working papers as durable web publications.
 
-## Publishing policy
+## Publishing references
 
-- See `PUBLISHING_POLICY.md` for the current web-first publishing contract.
+- Canonical publishing workflow: `docs/publishing-workflow.md`
+- Editorial publishing contract: `PUBLISHING_POLICY.md`
+- Repo-local Codex session notes: `AGENTS.md`
 
 ## Toolchain
 
@@ -30,185 +32,39 @@ The legacy `.tools/` directory remains bootstrap-only compatibility. New toolcha
 .\tools\bin\generated\hugo.cmd server -D
 ```
 
-## Publishing workflow
+## Publishing quick start
+
+Use `docs/publishing-workflow.md` as the canonical process. The normal publish path is:
 
 1. Scaffold a new essay draft:
    - `.\tools\bin\custom\new-essay.cmd --title "My Title"`
-2. Optional fallback if you need raw Hugo generation:
-   - `.\tools\bin\generated\hugo.cmd new essays/my-title.md`
-3. Write, then set `draft: false` when ready.
-4. Run the essay guardrails on the target file:
+2. Run target-file guardrails:
    - `.\tools\bin\generated\npm.cmd run check:essays -- -Paths .\content\essays\my-title.md`
-5. Build the site locally:
+3. Build the site locally:
    - `.\tools\bin\generated\hugo.cmd --gc --minify`
-6. Run the generated-output regression check:
-   - `powershell -ExecutionPolicy Bypass -File .\tests\test_public_html_output.ps1`
-7. Run the Node/browser test suite:
+4. Run the publish smoke tests:
+   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1`
+   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`
+5. Run the Node/browser suite:
    - `.\tools\bin\generated\npm.cmd test`
-8. Commit + push.
+6. Commit and push or merge to `main`.
 
-The scaffold command creates a draft essay with the required metadata block, a derived slug, and a starter structure for lead, argument, evidence, and closing sections.
+Publishing happens through `.github/workflows/deploy.yml` after `main` is updated. For metadata, collections, Medium migration, and special-case paths, see `docs/publishing-workflow.md`.
 
 ## PDF status
 
 - PDF generation is paused and not part of the public site or deploy workflow.
 - Legacy PDF scripts remain in the repo for possible future revival, but they are outside the current publishing contract.
 
-## Metadata conventions
-
-Each non-draft piece should include:
-
-- `description`
-- `section_label`
-- `version` (bump on material revision)
-- `edition` (for example, `"First web edition"`)
-- optional `featured: true`
-- optional `homepage_rank: 1-8` for curated homepage placement
-
-## Imprint upgrade
-
-Single pages render a publication header plus a `Cite this` block so each page reads like a durable imprint object, not a blog post.
-
-## Verification commands
-
-Node/browser tests:
-
-```powershell
-.\tools\bin\generated\npm.cmd test
-```
-
-Public build smoke:
-
-```powershell
-.\tools\bin\generated\hugo.cmd --gc --minify
-powershell -ExecutionPolicy Bypass -File .\tests\test_public_html_output.ps1
-```
-
-Essay scaffold regression:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\tests\test_new_essay_scaffold.ps1
-```
-
-## Medium migration
-
-Dry run (classification + report only, no file writes):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\import_medium_export.ps1 -ZipPath "C:\Users\lawto\OneDrive\Desktop\OutsideInPrint\medium-export-3-6-26.zip" -DryRun
-```
-
-Full import run (writes markdown + localized media):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\import_medium_export.ps1 -ZipPath "C:\Users\lawto\OneDrive\Desktop\OutsideInPrint\medium-export-3-6-26.zip"
-```
-
-Rerun behavior:
-
-- Existing target files are skipped and reported (`existing_target`).
-- Slugs are stabilized via `reports/medium-slug-map.json`.
-
-Post-import workflow:
-
-1. Review imported markdown and localized media.
-2. Run the legacy normalizer on imported essays that still carry Medium residue.
-   - `.\tools\bin\generated\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md`
-3. Re-run the legacy audit to confirm the cleanup queue shrank.
-   - `powershell -ExecutionPolicy Bypass -File .\scripts\audit_legacy_essays.ps1`
-4. Flip selected imported essays from `draft: true` to `draft: false`.
-5. Build the site locally with `.\tools\bin\generated\hugo.cmd --gc --minify`.
-
-Fixture test harness:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\test_medium_import.ps1
-```
-
-Legacy normalization regression test:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\tests\test_legacy_essay_normalization.ps1
-```
-
-## Legacy essay audit
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\audit_legacy_essays.ps1
-```
-
-This report now highlights the safe-auto residue categories the normalizer is meant to clear:
-
-- embedded media placeholders and raw HTML media wrappers
-- loose image and source captions that have not been normalized into the article-body patterns
-- duplicated lead metadata carried over from Medium
-
-## Essay guardrails
-
-Default behavior checks only changed essay files in the working tree and fails on high-confidence residue:
-
-```powershell
-.\tools\bin\generated\npm.cmd run check:essays
-```
-
-Explicit-path review for one or more essays:
-
-```powershell
-.\tools\bin\generated\npm.cmd run check:essays -- -Paths .\content\essays\my-title.md,.\content\essays\another-title.md
-```
-
-CI or branch-diff review between two refs:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -BaseRef <base-sha> -HeadRef <head-sha>
-```
-
-What blocks by default:
-
-- duplicated lead title or dek in the body
-- raw HTML and embedded-media import residue
-- mojibake and obvious Medium call-to-action leftovers
-
-What warns by default:
-
-- loose image-caption residue the normalizer already knows how to clean
-- pseudo-headings and malformed list patterns
-- source dumps, ornamental separators, and escaped line-break residue
-- missing `description` on non-draft essays
-
-## Essay integrity audit
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\audit_essay_integrity.ps1
-```
-
-## Article-body conventions
-
-For cleaner web rendering, prefer:
-
-- true Markdown headings instead of standalone title-case paragraphs
-- true ordered and unordered lists instead of manual bullets or numbered paragraphs
-- `---` for thematic breaks instead of improvised separator strings
-- image captions or source lines placed directly under the image
-- no duplicated title or dek inside the body when front matter already carries them
-
 ## Collections
 
 - Maintainer guide: `docs/collections-system.md`
-- Audit/report script:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\audit_collections.ps1
-```
 
 ## Analytics
 
 - Maintainer guide: `docs/analytics-system.md`
-- Import normalized dashboard data from a GoatCounter export folder:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics
-```
+- Import command:
+  `powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics`
 
 - Automated refresh secret:
   Save `GOATCOUNTER_API_KEY` in `LPeasy/outsideinprint` if you want scheduled dashboard refreshes.

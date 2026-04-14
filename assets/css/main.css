@@ -1439,6 +1439,19 @@ textarea{
 .article-variant-modernbio .subtitle{
   max-width:42rem;
 }
+.piece-hero{
+  width:100%;
+  margin:1.5rem auto 2rem;
+}
+.piece-hero img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+}
+.piece-hero figcaption{
+  margin-top:.75rem;
+}
 .piece-body figure{
   width:100%;
   max-width:100%;
