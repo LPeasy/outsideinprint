@@ -11,6 +11,9 @@ const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/h
 const homeRecentWork = fs.readFileSync(path.resolve("layouts/partials/home_recent_work.html"), "utf8");
 const footer = fs.readFileSync(path.resolve("layouts/partials/footer.html"), "utf8");
 const randomTemplate = fs.readFileSync(path.resolve("layouts/random/single.html"), "utf8");
+const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
+const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
+const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
 const startHereTemplate = fs.readFileSync(path.resolve("layouts/start-here/single.html"), "utf8");
 const startHereContent = fs.readFileSync(path.resolve("content/start-here/index.md"), "utf8");
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
@@ -20,6 +23,9 @@ const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
 test("masthead removes books and uses the Dialogues label", () => {
   assert.match(masthead, />Welcome</);
   assert.match(masthead, />Dialogues</);
+  assert.match(masthead, />Gallery</);
+  assert.match(masthead, /\$isGallery := eq \.Section "gallery"/);
+  assert.match(masthead, /href="\{\{ "gallery\/" \| absURL \}\}"/);
   assert.match(masthead, />Feeling curious\?</);
   assert.match(masthead, /masthead--full/);
   assert.match(masthead, /masthead--compressed/);
@@ -75,6 +81,7 @@ test("homepage cards keep only the main titles and use the shared grid flow", ()
   assert.doesNotMatch(homepage, /card-center/);
   assert.match(homepage, /class="home-browse home-browse--utility"/);
   assert.match(homepage, /data-analytics-source-slot="random_link"/);
+  assert.match(homepage, /"label" "Gallery"/);
   assert.match(homepage, /class="grid home-browse__grid"/);
   assert.match(css, /\.grid\{\s*display:grid;\s*grid-template-columns:1fr 1fr;/);
   assert.doesNotMatch(css, /\.card-center\{/);
@@ -98,6 +105,9 @@ test("sticky editorial chrome pins only the compact section rail", () => {
 test("homepage composition promotes front page and imprint before lower-priority utilities", () => {
   assert.match(homeFrontPage, /id="home-front-page-title"/);
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
+  assert.match(homeFrontPage, /site\.Data\.editorial_cartoons/);
+  assert.match(homeFrontPage, /View gallery/);
+  assert.doesNotMatch(homeFrontPage, /cartoon-think-outside-the-box\.png/);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="lead"/g) || []).length, 1);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="secondary"/g) || []).length, 1);
   assert.match(homeFrontPage, /home-front-page__secondary-item/);
@@ -128,6 +138,13 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.match(homepage, /"title" "The weekly letter"/);
   assert.match(homepage, /"eyebrow" "Letter"/);
   assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('home-browse-title'));
+  assert.match(galleryContent, /title: "Gallery"/);
+  assert.match(galleryContent, /digital gallery/i);
+  assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
+  assert.match(galleryTemplate, /cartoon-gallery__grid/);
+  assert.match(cartoonData, /current: the-house-always-wins/);
+  assert.match(cartoonData, /slug: think-outside-the-box/);
+  assert.match(cartoonData, /slug: the-house-always-wins/);
 });
 
 test("homepage editorial layout stays scoped to home modules", () => {
@@ -147,6 +164,8 @@ test("homepage editorial layout stays scoped to home modules", () => {
   assert.match(css, /\.home-selected-collections__list\{\s*display:grid;\s*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-recent-work__list\{[\s\S]*max-width:64rem;/);
   assert.match(css, /\.newsletter-signup--home \.newsletter-signup__inner\{[\s\S]*padding:0;[\s\S]*border:none;[\s\S]*background:none;/);
+  assert.match(css, /\.cartoon-gallery-spotlight\{[\s\S]*grid-template-columns:minmax\(12rem, \.38fr\) minmax\(0, 1fr\);/);
+  assert.match(css, /\.cartoon-gallery__grid\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-browse__grid \.card\{[\s\S]*border:none;[\s\S]*border-top:1px solid rgba\(236,231,223,.1\);[\s\S]*border-radius:0;/);
   assert.match(css, /\.piece-header\{[\s\S]*width:100%;[\s\S]*max-width:var\(--measure-wide\);[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);
   assert.match(css, /\.piece-body,\s*\.piece-aftermatter\{[\s\S]*width:100%;[\s\S]*max-width:var\(--measure-reading\);[\s\S]*margin-left:auto;[\s\S]*margin-right:auto;/);

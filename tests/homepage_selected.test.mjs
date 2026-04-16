@@ -3,35 +3,50 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
-function normalizeRank(value) {
-  if (typeof value === "number" && Number.isInteger(value) && value > 0) return value;
-  if (typeof value === "string" && /^[1-9]\d*$/.test(value)) return Number(value);
-  return null;
+function normalizeDateString(value) {
+  const match = String(value ?? "").match(/\d{4}-\d{2}-\d{2}/);
+  return match?.[0] ?? null;
 }
 
-function selectHomepageEssays(pages) {
-  const publishedEssays = pages
+function selectHomepageEssays(pages, today = "2026-04-16") {
+  const essays = pages
     .filter((page) => page.section === "essays" && page.draft !== true)
-    .map((page) => ({ ...page, normalizedRank: normalizeRank(page.homepage_rank) }))
     .sort((left, right) => right.date - left.date);
 
-  const ranked = publishedEssays
-    .filter((page) => page.normalizedRank !== null)
-    .sort((left, right) => left.normalizedRank - right.normalizedRank || right.date - left.date);
+  const featuredCandidates = essays
+    .filter((page) => page.homepage_featured === true && normalizeDateString(page.homepage_featured_until) >= today)
+    .sort((left, right) => right.date - left.date);
 
-  const lead = ranked[0] ?? publishedEssays[0] ?? null;
-  const selected = lead ? [lead] : [];
-  const seen = new Set(lead ? [lead.relPermalink] : []);
+  const hero = featuredCandidates[0] ?? essays[0] ?? null;
+  const latest = essays[0] ?? null;
+  const showLatestSlot = Boolean(hero && latest && hero.relPermalink !== latest.relPermalink);
+  const selected = [];
+  const seen = new Set();
 
-  for (const page of publishedEssays) {
-    if (selected.length >= 4 || seen.has(page.relPermalink)) continue;
-    seen.add(page.relPermalink);
-    selected.push(page);
+  if (hero) {
+    selected.push(hero);
+    seen.add(hero.relPermalink);
+  }
+
+  if (showLatestSlot && latest) {
+    selected.push(latest);
+    seen.add(latest.relPermalink);
+  }
+
+  const secondary = [];
+  for (const candidate of essays) {
+    if (secondary.length >= 4 || seen.has(candidate.relPermalink)) continue;
+    secondary.push(candidate);
+    selected.push(candidate);
+    seen.add(candidate.relPermalink);
   }
 
   return {
-    lead,
-    secondary: selected.slice(1, 5),
+    hero,
+    lead: hero,
+    latest,
+    showLatestSlot,
+    secondary,
     selected,
     keys: selected.map((page) => page.relPermalink)
   };
@@ -68,15 +83,17 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const indexSource = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
+  const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
+  const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
+  const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 
   assert.match(source, /where site\.RegularPages "Section" "essays"/);
-  assert.match(source, /one curated lead, then the newest published essays in the right rail/);
-  assert.match(source, /Params\.homepage_rank/);
-  assert.match(source, /findRE "\^\[1-9\]\[0-9\]\*\$"/);
-  assert.match(source, /sort \(uniq \$ranks\)/);
-  assert.match(source, /sort \$rankGroup "Date" "desc"/);
+  assert.match(source, /Homepage selection is essays-only by design/);
+  assert.match(source, /Params\.homepage_featured/);
+  assert.match(source, /Params\.homepage_featured_until/);
+  assert.match(source, /findRE "\\\\d\{4\}-\\\\d\{2\}-\\\\d\{2\}"/);
   assert.match(source, /sort \(where site\.RegularPages "Section" "essays"\) "Date" "desc"/);
-  assert.match(source, /\$lead = index \$rankedOrdered 0/);
+  assert.match(source, /\$hero = index \(sort \$featuredCandidates "Date" "desc"\) 0/);
   assert.match(source, /else if gt \(len \$essays\) 0/);
   assert.match(source, /range \$candidate := \$essays/);
   assert.match(source, /lt \(len \$secondary\) 4/);
@@ -88,6 +105,11 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(source, /Read Essay/);
   assert.doesNotMatch(source, /Download PDF/);
   assert.match(frontPageSource, /home_selected\.html/);
+  assert.match(frontPageSource, /site\.Data\.editorial_cartoons/);
+  assert.match(frontPageSource, /currentCartoonSlug/);
+  assert.match(frontPageSource, /View gallery/);
+  assert.match(frontPageSource, /"gallery\/" \| absURL/);
+  assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
   assert.match(frontPageSource, /range \$secondary/);
@@ -104,53 +126,60 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(indexSource, /home_recent_work\.html/);
   assert.match(indexSource, /Feeling curious\?/);
   assert.match(indexSource, /"label" "Welcome"/);
+  assert.match(indexSource, /"label" "Gallery"/);
   assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
   assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
+  assert.match(cartoonData, /current: the-house-always-wins/);
+  assert.match(cartoonData, /slug: think-outside-the-box/);
+  assert.match(cartoonData, /slug: the-house-always-wins/);
+  assert.match(cartoonData, /image: "\/images\/editorial\/the-house-always-wins\.png"/);
+  assert.match(galleryContent, /title: "Gallery"/);
+  assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
+  assert.match(galleryTemplate, /cartoon-gallery__grid/);
 });
 
-test("lead stays curated while the right rail uses the newest published essays", () => {
+test("active featured essays lead while the right rail uses the newest published essays", () => {
   const pages = [
-    { relPermalink: "/essays/latest/", section: "essays", draft: false, date: new Date("2026-03-01"), homepage_rank: null },
-    { relPermalink: "/essays/hero/", section: "essays", draft: false, date: new Date("2026-01-01"), homepage_rank: 1 },
-    { relPermalink: "/essays/core-a/", section: "essays", draft: false, date: new Date("2026-01-02"), homepage_rank: "2" },
-    { relPermalink: "/essays/core-b/", section: "essays", draft: false, date: new Date("2026-01-03"), homepage_rank: 5 },
-    { relPermalink: "/essays/archive-ranked/", section: "essays", draft: false, date: new Date("2026-01-04"), homepage_rank: 8 },
-    { relPermalink: "/essays/unranked-2/", section: "essays", draft: false, date: new Date("2026-02-20"), homepage_rank: null },
-    { relPermalink: "/essays/unranked-3/", section: "essays", draft: false, date: new Date("2026-02-10"), homepage_rank: "bad" },
-    { relPermalink: "/essays/unranked-4/", section: "essays", draft: false, date: new Date("2026-02-05"), homepage_rank: 0 },
-    { relPermalink: "/essays/unranked-5/", section: "essays", draft: false, date: new Date("2026-02-01"), homepage_rank: null },
-    { relPermalink: "/syd-and-oliver/not-eligible/", section: "syd-and-oliver", draft: false, date: new Date("2026-04-01"), homepage_rank: 1, featured: true },
-    { relPermalink: "/essays/draft/", section: "essays", draft: true, date: new Date("2026-04-02"), homepage_rank: 3 },
-    { relPermalink: "/essays/latest/", section: "essays", draft: false, date: new Date("2026-02-28"), homepage_rank: null }
+    { relPermalink: "/essays/latest/", section: "essays", draft: false, date: new Date("2026-03-01") },
+    { relPermalink: "/essays/hero/", section: "essays", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/expired/", section: "essays", draft: false, date: new Date("2026-02-25"), homepage_featured: true, homepage_featured_until: "2026-04-01" },
+    { relPermalink: "/essays/core-a/", section: "essays", draft: false, date: new Date("2026-02-20") },
+    { relPermalink: "/essays/core-b/", section: "essays", draft: false, date: new Date("2026-02-10") },
+    { relPermalink: "/essays/core-c/", section: "essays", draft: false, date: new Date("2026-02-05") },
+    { relPermalink: "/essays/core-d/", section: "essays", draft: false, date: new Date("2026-02-01") },
+    { relPermalink: "/syd-and-oliver/not-eligible/", section: "syd-and-oliver", draft: false, date: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/draft/", section: "essays", draft: true, date: new Date("2026-04-02"), homepage_featured: true, homepage_featured_until: "2026-04-30" }
   ];
 
   const result = selectHomepageEssays(pages);
 
-  assert.equal(result.lead?.relPermalink, "/essays/hero/");
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/latest/", "/essays/unranked-2/", "/essays/unranked-3/", "/essays/unranked-4/"]);
+  assert.equal(result.hero?.relPermalink, "/essays/hero/");
+  assert.equal(result.latest?.relPermalink, "/essays/latest/");
+  assert.equal(result.showLatestSlot, true);
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/expired/", "/essays/core-a/", "/essays/core-b/", "/essays/core-c/"]);
   assert.equal(result.secondary.length, 4);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
 });
 
-test("duplicate ranks break ties by newest date first", () => {
+test("duplicate active feature flags break ties by newest date first", () => {
   const pages = [
-    { relPermalink: "/essays/older/", section: "essays", draft: false, date: new Date("2026-01-01"), homepage_rank: 2 },
-    { relPermalink: "/essays/newer/", section: "essays", draft: false, date: new Date("2026-02-01"), homepage_rank: 2 },
-    { relPermalink: "/essays/hero/", section: "essays", draft: false, date: new Date("2026-03-01"), homepage_rank: 1 }
+    { relPermalink: "/essays/older/", section: "essays", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/newer/", section: "essays", draft: false, date: new Date("2026-02-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/latest/", section: "essays", draft: false, date: new Date("2026-03-01") }
   ];
 
   const result = selectHomepageEssays(pages);
 
-  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/hero/", "/essays/newer/", "/essays/older/"]);
+  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/newer/", "/essays/latest/", "/essays/older/"]);
 });
 
-test("recent fallback remains stable when no valid ranks exist", () => {
+test("recent fallback remains stable when no active feature exists", () => {
   const pages = [
-    { relPermalink: "/essays/a/", section: "essays", draft: false, date: new Date("2026-03-03"), homepage_rank: "hero" },
-    { relPermalink: "/essays/b/", section: "essays", draft: false, date: new Date("2026-03-02"), homepage_rank: null },
-    { relPermalink: "/essays/c/", section: "essays", draft: false, date: new Date("2026-03-01"), homepage_rank: -1 },
-    { relPermalink: "/essays/d/", section: "essays", draft: false, date: new Date("2026-02-28"), homepage_rank: "03x" }
+    { relPermalink: "/essays/a/", section: "essays", draft: false, date: new Date("2026-03-03"), homepage_featured: true, homepage_featured_until: "2026-03-31" },
+    { relPermalink: "/essays/b/", section: "essays", draft: false, date: new Date("2026-03-02") },
+    { relPermalink: "/essays/c/", section: "essays", draft: false, date: new Date("2026-03-01") },
+    { relPermalink: "/essays/d/", section: "essays", draft: false, date: new Date("2026-02-28") }
   ];
 
   const result = selectHomepageEssays(pages);
@@ -167,8 +196,11 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
+  assert.match(frontPageSource, /site\.Data\.editorial_cartoons/);
   assert.doesNotMatch(frontPageSource, /Also on the front page/);
   assert.match(frontPageSource, /Read essay &rarr;/);
+  assert.match(frontPageSource, /View gallery/);
+  assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
   assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$lead/);
@@ -177,22 +209,16 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('partial "newsletter_signup.html"'));
 });
 
-test("homepage lead control still lives in essay front matter ranks", () => {
+test("homepage lead control still lives in expiring essay feature front matter", () => {
   const essayDir = path.resolve("content/essays");
-  const rankedEssays = fs
+  const essays = fs
     .readdirSync(essayDir)
     .filter((name) => name.endsWith(".md") && name !== "_index.md")
     .map((name) => ({
       name,
       frontMatter: parseFrontMatter(path.join(essayDir, name))
-    }))
-    .filter(({ frontMatter }) => normalizeRank(frontMatter.homepage_rank) !== null)
-    .sort((left, right) => left.frontMatter.homepage_rank - right.frontMatter.homepage_rank);
+    }));
 
-  assert.equal(rankedEssays.length >= 1, true);
-  assert.equal(rankedEssays[0].frontMatter.homepage_rank, 1);
-  assert.equal(
-    rankedEssays.some(({ frontMatter }) => frontMatter.slug === "why-a-return-to-the-gold-standard-would-break-the-economy"),
-    true
-  );
+  assert.equal(essays.length >= 1, true);
+  assert.equal(essays.some(({ frontMatter }) => Object.hasOwn(frontMatter, "homepage_rank")), false);
 });

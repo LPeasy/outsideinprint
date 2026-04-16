@@ -1,0 +1,16 @@
+current: the-house-always-wins
+cartoons:
+  - slug: think-outside-the-box
+    title: "Think Outside the Box"
+    date: "2026-04-16"
+    image: "/images/editorial/cartoon-think-outside-the-box.png"
+    alt: "Editorial cartoon showing a student thinking outside the box, with the thought breaking through the frame."
+    width: 1024
+    height: 1536
+  - slug: the-house-always-wins
+    title: "The House Always Wins"
+    date: "2026-04-16"
+    image: "/images/editorial/the-house-always-wins.png"
+    alt: "Black-and-white editorial cartoon showing political and financial figures seated around a casino poker table."
+    width: 1536
+    height: 1024

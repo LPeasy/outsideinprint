@@ -5,6 +5,7 @@
 {{ $isSydAndOliver := eq .Section "syd-and-oliver" }}
 {{ $isCollections := eq .Section "collections" }}
 {{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
+{{ $isGallery := eq .Section "gallery" }}
 {{ $isRandom := eq .Section "random" }}
 {{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
 <header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
@@ -44,6 +45,7 @@
     <a href="{{ "syd-and-oliver/" | absURL }}"{{ if $isSydAndOliver }} aria-current="page"{{ end }}>Dialogues</a><span class="dot">&bull;</span>
     <a href="{{ "collections/" | absURL }}"{{ if $isCollections }} aria-current="page"{{ end }}>Collections</a><span class="dot">&bull;</span>
     <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
+    <a href="{{ "gallery/" | absURL }}"{{ if $isGallery }} aria-current="page"{{ end }}>Gallery</a><span class="dot">&bull;</span>
     <a class="nav__explore-link" href="{{ "random/" | absURL }}"{{ if $isRandom }} aria-current="page"{{ end }}>Feeling curious?</a>
   </nav>
 </header>

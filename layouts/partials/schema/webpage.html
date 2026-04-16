@@ -8,7 +8,7 @@
 {{- $significantLinks := partial "schema/significant-links.html" (dict "page" $page "meta" $meta) -}}
 
 {{- $pageType := "WebPage" -}}
-{{- if or (eq $meta.route.name "collection") (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "section-list") -}}
+{{- if or (eq $meta.route.name "collection") (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "gallery") (eq $meta.route.name "section-list") -}}
   {{- $pageType = "CollectionPage" -}}
 {{- else if eq $meta.route.name "about" -}}
   {{- $pageType = "AboutPage" -}}

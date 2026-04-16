@@ -841,8 +841,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '/images/editorial/cartoon-think-outside-the-box\.png'
-    Message = 'expected the homepage generated output to include the editorial cartoon image block'
+    Pattern = '/images/editorial/the-house-always-wins\.png'
+    Message = 'expected the homepage generated output to include the current editorial cartoon image block'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)editorial-cartoon.*?View gallery'
+    Message = 'expected the homepage editorial cartoon block to link to the gallery'
   },
   @{
     Path = 'public/index.html'

@@ -52,6 +52,10 @@
   {{- $name = "library" -}}
 {{- end -}}
 
+{{- if and (eq $name "page") .IsSection (eq $section "gallery") -}}
+  {{- $name = "gallery" -}}
+{{- end -}}
+
 {{- if and (eq $name "page") .IsPage (eq $section "start-here") -}}
   {{- $name = "start-here" -}}
 {{- end -}}

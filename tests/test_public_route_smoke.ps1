@@ -81,6 +81,7 @@ foreach ($requiredPath in @(
   'about/index.html',
   'authors/index.html',
   'authors/robert-v-ussley/index.html',
+  'gallery/index.html',
   'random/index.html'
 )) {
   $null = Get-RequiredPageHtml -RelativePath $requiredPath

@@ -4,6 +4,14 @@
 {{ $showLatestSlot := index $frontPage "showLatestSlot" }}
 {{ $heroMode := index $frontPage "heroMode" }}
 {{ $secondary := index $frontPage "secondary" | default (slice) }}
+{{ $cartoonData := site.Data.editorial_cartoons | default dict }}
+{{ $currentCartoonSlug := $cartoonData.current | default "" }}
+{{ $currentCartoon := false }}
+{{ range ($cartoonData.cartoons | default (slice)) }}
+  {{ if eq .slug $currentCartoonSlug }}
+    {{ $currentCartoon = . }}
+  {{ end }}
+{{ end }}
 <section class="home-front-page" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
   {{ with $lead }}
@@ -35,14 +43,20 @@
           {{ with .ReadingTime }} | {{ . }} min read{{ end }}
         </div>
         <p class="m home-front-page__lead-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
-        <div class="editorial-cartoon">
-          <img
-            src="/images/editorial/cartoon-think-outside-the-box.png"
-            alt="Editorial cartoon showing a student thinking outside the box, with the thought breaking through the frame"
-            width="1024"
-            height="1536"
-          />
-        </div>
+        {{ with $currentCartoon }}
+          <figure class="editorial-cartoon">
+            <img
+              src="{{ .image | relURL }}"
+              alt="{{ .alt }}"
+              width="{{ .width }}"
+              height="{{ .height }}"
+            >
+            <figcaption>
+              <span>{{ .title }}</span>
+              <a href="{{ "gallery/" | absURL }}">View gallery</a>
+            </figcaption>
+          </figure>
+        {{ end }}
       </article>
 
       {{ if or $showLatestSlot (gt (len $secondary) 0) }}
