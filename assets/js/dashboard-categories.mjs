@@ -37,7 +37,7 @@ export const DASHBOARD_CATEGORIES = [
   {
     key: "sources",
     label: "Traffic sources",
-    description: "Referrers and campaigns ranked by scale or efficiency without unrelated editorial drill-downs on the page.",
+    description: "Search, AI-answer, newsletter, referral, and self-referral channels ranked by scale or efficiency without unrelated editorial drill-downs on the page.",
     controls: ["period", "sourceType", "scale"],
     exportKind: "sources"
   },

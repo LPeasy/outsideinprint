@@ -1,0 +1,29 @@
+# Outside In Print: canonical discovery document
+
+Outside In Print publishes essays, dialogues, fiction, and working papers for the web with stable URLs, structured metadata, and a navigable archive.
+
+Canonical site:
+- https://outsideinprint.org/
+
+Entity hub:
+- Publisher: Outside In Print
+- Primary byline entity: Robert V. Ussley
+- Author page: https://outsideinprint.org/authors/robert-v-ussley/
+
+Primary navigation surfaces:
+- Home: https://outsideinprint.org/
+- About the imprint: https://outsideinprint.org/about/
+- Welcome / start here: https://outsideinprint.org/start-here/
+- Essays index: https://outsideinprint.org/essays/
+- Dialogues index: https://outsideinprint.org/syd-and-oliver/
+- Collections index: https://outsideinprint.org/collections/
+- Library index: https://outsideinprint.org/library/
+
+Machine-readable discovery:
+- Sitemap: https://outsideinprint.org/sitemap.xml
+- RSS feed: https://outsideinprint.org/index.xml
+
+Canonical policy:
+- Prefer `outsideinprint.org` URLs for citation and linking.
+- Legacy GitHub Pages URLs are not canonical.
+- This document supplements, but does not replace, `robots.txt`, XML sitemaps, page metadata, canonical tags, or structured data.

@@ -17,6 +17,12 @@
   {{- with $entry.url -}}
     {{- $node = merge $node (dict "url" .) -}}
   {{- end -}}
+  {{- with $entry.image -}}
+    {{- $node = merge $node (dict "image" (dict
+      "@type" "ImageObject"
+      "url" .
+    )) -}}
+  {{- end -}}
   {{- with $entry.same_as -}}
     {{- if gt (len .) 0 -}}
       {{- $node = merge $node (dict "sameAs" .) -}}

@@ -6,7 +6,8 @@ param(
   [string]$HeadRef = 'HEAD',
   [switch]$AllEssays,
   [switch]$StrictWarnings,
-  [switch]$RequireDescription
+  [switch]$RequireDescription,
+  [switch]$RequireFeaturedImage
 )
 
 $ErrorActionPreference = 'Stop'
@@ -61,6 +62,29 @@ function Get-RepoRelativePath {
   }
 
   return $resolvedPath.Replace('\', '/')
+}
+
+function Test-FrontMatterHasSocialImage {
+  param([string]$Path)
+
+  if (-not (Test-Path $Path -PathType Leaf)) {
+    return $false
+  }
+
+  $content = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
+  $matches = [regex]::Matches($content, '(?m)^---\s*$')
+  if ($matches.Count -lt 2) {
+    return $false
+  }
+
+  $frontStart = $matches[0].Index + $matches[0].Length
+  $frontLength = $matches[1].Index - $frontStart
+  if ($frontLength -le 0) {
+    return $false
+  }
+
+  $frontMatter = $content.Substring($frontStart, $frontLength)
+  return [regex]::IsMatch($frontMatter, '(?mi)^(images|image|featured_image)\s*:')
 }
 
 function Get-WorkingTreeEssayPaths {
@@ -246,6 +270,13 @@ foreach ($row in $rows) {
       $rowBlockers += 'missing_description'
     } elseif (-not $baselineMissingDescription) {
       $rowWarnings += 'missing_description'
+    }
+  }
+
+  if ($RequireFeaturedImage -and (-not [bool]$row.draft)) {
+    $fullPath = Get-NormalizedRepoPath -RepoRoot $Root -PathValue ([string]$row.path)
+    if ($fullPath -and -not (Test-FrontMatterHasSocialImage -Path $fullPath)) {
+      $rowBlockers += 'missing_featured_image'
     }
   }
 

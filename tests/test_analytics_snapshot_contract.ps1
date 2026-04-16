@@ -5,6 +5,8 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+$repoRoot = Split-Path -Parent $PSScriptRoot
+
 function Normalize-SectionLabel {
   param([object]$Value)
 
@@ -82,6 +84,18 @@ function Convert-JsonDocument {
   return $parsed
 }
 
+function Test-FrontMatterHasImageKey {
+  param([string]$RelativePath)
+
+  $fullPath = Join-Path $repoRoot $RelativePath
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+    return $false
+  }
+
+  $content = Get-Content -Path $fullPath -Raw
+  return [regex]::IsMatch($content, '(?m)^(featured_image|image|images):')
+}
+
 $requiredFiles = @(
   "overview.json",
   "essays.json",
@@ -134,17 +148,17 @@ Assert-HasKeys -Value $parsed["overview.json"] -Keys @(
 ) -Context "overview.json"
 
 Assert-ArrayShape -Value $parsed["essays.json"] -Keys @("slug", "path", "title", "section", "views", "reads", "read_rate", "pdf_downloads", "primary_source") -Context "essays.json"
-Assert-ArrayShape -Value $parsed["sources.json"] -Keys @("source", "medium", "campaign", "content", "visitors", "pageviews", "reads") -Context "sources.json"
+Assert-ArrayShape -Value $parsed["sources.json"] -Keys @("source", "medium", "campaign", "content", "acquisition_channel", "source_type", "visitors", "pageviews", "reads") -Context "sources.json"
 Assert-ArrayShape -Value $parsed["modules.json"] -Keys @("slot", "collection", "clicks", "downstream_reads") -Context "modules.json"
 Assert-ArrayShape -Value $parsed["periods.json"] -Keys @("label", "pageviews", "unique_visitors", "reads", "read_rate", "pdf_downloads", "newsletter_submits") -Context "periods.json"
 Assert-ArrayShape -Value $parsed["timeseries_daily.json"] -Keys @("date", "pageviews", "unique_visitors", "reads", "read_rate", "pdf_downloads", "newsletter_submits") -Context "timeseries_daily.json"
 Assert-ArrayShape -Value $parsed["sections.json"] -Keys @("section", "pageviews", "reads", "read_rate", "pdf_downloads", "newsletter_submits", "sparkline_pageviews", "sparkline_reads") -Context "sections.json"
 Assert-ArrayShape -Value $parsed["essays_timeseries.json"] -Keys @("slug", "path", "title", "section", "series") -Context "essays_timeseries.json"
-Assert-ArrayShape -Value $parsed["journeys.json"] -Keys @("discovery_source", "discovery_type", "slug", "path", "title", "section", "views", "reads", "pdf_downloads", "newsletter_submits", "approximate_downstream", "attribution_note") -Context "journeys.json"
-Assert-ArrayShape -Value $parsed["journey_by_source.json"] -Keys @("discovery_source", "discovery_type", "discovery_mode", "views", "reads", "read_rate", "pdf_downloads", "pdf_rate", "newsletter_submits", "newsletter_rate", "approximate_downstream", "attribution_note") -Context "journey_by_source.json"
-Assert-ArrayShape -Value $parsed["journey_by_collection.json"] -Keys @("collection_label", "discovery_type", "discovery_mode", "module_slot", "collection", "section", "views", "reads", "read_rate", "pdf_downloads", "pdf_rate", "newsletter_submits", "newsletter_rate", "approximate_downstream", "attribution_note") -Context "journey_by_collection.json"
+Assert-ArrayShape -Value $parsed["journeys.json"] -Keys @("discovery_source", "discovery_type", "acquisition_channel", "slug", "path", "title", "section", "views", "reads", "pdf_downloads", "newsletter_submits", "approximate_downstream", "attribution_note") -Context "journeys.json"
+Assert-ArrayShape -Value $parsed["journey_by_source.json"] -Keys @("discovery_source", "discovery_type", "acquisition_channel", "discovery_mode", "views", "reads", "read_rate", "pdf_downloads", "pdf_rate", "newsletter_submits", "newsletter_rate", "approximate_downstream", "attribution_note") -Context "journey_by_source.json"
+Assert-ArrayShape -Value $parsed["journey_by_collection.json"] -Keys @("collection_label", "discovery_type", "acquisition_channel", "discovery_mode", "module_slot", "collection", "section", "views", "reads", "read_rate", "pdf_downloads", "pdf_rate", "newsletter_submits", "newsletter_rate", "approximate_downstream", "attribution_note") -Context "journey_by_collection.json"
 Assert-ArrayShape -Value $parsed["journey_by_essay.json"] -Keys @("title", "section", "slug", "path", "views", "reads", "read_rate", "pdf_downloads", "pdf_rate", "newsletter_submits", "newsletter_rate", "approximate_downstream", "attribution_note") -Context "journey_by_essay.json"
-Assert-ArrayShape -Value $parsed["sources_timeseries.json"] -Keys @("date", "source_type", "source", "pageviews", "reads", "read_rate", "pdf_downloads", "newsletter_submits") -Context "sources_timeseries.json"
+Assert-ArrayShape -Value $parsed["sources_timeseries.json"] -Keys @("date", "source_type", "acquisition_channel", "source", "pageviews", "reads", "read_rate", "pdf_downloads", "newsletter_submits") -Context "sources_timeseries.json"
 
 $canonicalSections = @($parsed["sections.json"]) | ForEach-Object { Normalize-SectionLabel -Value $_.section }
 if (@($canonicalSections | Group-Object | Where-Object { $_.Count -gt 1 }).Count -gt 0) {
@@ -173,6 +187,73 @@ if ($dialogueEssays.Count -eq 0) {
 
 if (@($dialogueEssays | Where-Object { (Normalize-SectionLabel -Value $_.section) -ne "Dialogues" }).Count -gt 0) {
   throw "essays.json must keep the /syd-and-oliver/ routes while labeling that section as Dialogues."
+}
+
+$allowedChannels = @(
+  'organic_search',
+  'ai_answer_engine',
+  'direct',
+  'internal',
+  'legacy_domain',
+  'newsletter',
+  'social_or_referral'
+)
+
+$invalidSourceChannels = @($parsed["sources.json"] | Where-Object { [string]$_.acquisition_channel -notin $allowedChannels -or [string]$_.source_type -notin $allowedChannels })
+if ($invalidSourceChannels.Count -gt 0) {
+  throw "sources.json contains acquisition channels outside the approved taxonomy."
+}
+
+$invalidTimeseriesChannels = @($parsed["sources_timeseries.json"] | Where-Object { [string]$_.acquisition_channel -notin $allowedChannels -or [string]$_.source_type -notin $allowedChannels })
+if ($invalidTimeseriesChannels.Count -gt 0) {
+  throw "sources_timeseries.json contains acquisition channels outside the approved taxonomy."
+}
+
+$selfReferralRows = @()
+foreach ($row in @($parsed["sources.json"])) {
+  $source = ([string]$row.source).ToLowerInvariant()
+  $channel = [string]$row.acquisition_channel
+  if ($source.StartsWith('outsideinprint.org') -and $channel -ne 'internal') {
+    $selfReferralRows += $row
+  }
+}
+if ($selfReferralRows.Count -gt 0) {
+  throw "sources.json still misclassifies outsideinprint.org self-referrals as external acquisition."
+}
+
+$legacyRows = @()
+foreach ($row in @($parsed["sources.json"])) {
+  $source = ([string]$row.source).ToLowerInvariant()
+  if ($source -eq 'lpeasy.github.io/outsideinprint' -or $source.StartsWith('lpeasy.github.io/outsideinprint/')) {
+    $legacyRows += $row
+  }
+}
+if ($legacyRows.Count -eq 0 -or @($legacyRows | Where-Object { [string]$_.acquisition_channel -ne 'legacy_domain' }).Count -gt 0) {
+  throw "sources.json must classify lpeasy.github.io/outsideinprint referrals as legacy_domain."
+}
+
+$googleGenerated = @($parsed["sources.json"] | Where-Object { [string]$_.source -eq 'Google' -and [string]$_.medium -eq 'generated' })
+if ($googleGenerated.Count -gt 0 -and @($googleGenerated | Where-Object { [string]$_.acquisition_channel -ne 'organic_search' }).Count -gt 0) {
+  throw "sources.json must keep 'Google / generated' in the organic_search bucket unless a more precise source is available."
+}
+
+$priorityEssayRows = @(
+  $parsed["essays.json"] |
+    Where-Object { (Normalize-SectionLabel -Value $_.section) -eq 'Essays' } |
+    Sort-Object -Property views -Descending |
+    Select-Object -First 20
+)
+
+$priorityEssayImageIssues = @()
+foreach ($row in $priorityEssayRows) {
+  $relativePath = Join-Path 'content/essays' ([string]$row.slug + '.md')
+  if (-not (Test-FrontMatterHasImageKey -RelativePath $relativePath)) {
+    $priorityEssayImageIssues += [string]$row.slug
+  }
+}
+
+if ($priorityEssayImageIssues.Count -gt 0) {
+  throw ("Top landing essays must keep explicit image metadata. Missing image front matter for: {0}" -f ($priorityEssayImageIssues -join ', '))
 }
 
 Write-Host "Analytics snapshot contract test passed."

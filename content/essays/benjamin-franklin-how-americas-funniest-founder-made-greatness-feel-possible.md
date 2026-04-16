@@ -8,6 +8,7 @@ series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "A scrappy biography of the runaway apprentice who became a statesman, scientist, and master of self-improvement."
 description: "This biography is based on The Autobiography of Benjamin Franklin and other public-domain records, including Franklin’s letters, essays, and inventions"
+featured_image: "/images/social/outside-in-print-default.png"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.pdf"

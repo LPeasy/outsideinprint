@@ -1,12 +1,21 @@
 {{- $baseURL := strings.TrimSuffix "/" site.BaseURL -}}
 {{- $organizationData := site.Data.organization -}}
 {{- $logoURL := "" -}}
+{{- $imageURL := "" -}}
 
 {{- with $organizationData.logo -}}
   {{- if or (hasPrefix . "http://") (hasPrefix . "https://") -}}
     {{- $logoURL = . -}}
   {{- else -}}
     {{- $logoURL = . | strings.TrimPrefix "/" | absURL -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $organizationData.image -}}
+  {{- if or (hasPrefix . "http://") (hasPrefix . "https://") -}}
+    {{- $imageURL = . -}}
+  {{- else -}}
+    {{- $imageURL = . | strings.TrimPrefix "/" | absURL -}}
   {{- end -}}
 {{- end -}}
 
@@ -20,6 +29,13 @@
 
 {{- with $logoURL -}}
   {{- $node = merge $node (dict "logo" (dict
+    "@type" "ImageObject"
+    "url" .
+  )) -}}
+{{- end -}}
+
+{{- with $imageURL -}}
+  {{- $node = merge $node (dict "image" (dict
     "@type" "ImageObject"
     "url" .
   )) -}}

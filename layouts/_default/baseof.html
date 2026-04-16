@@ -7,6 +7,14 @@
 
     <title>{{ $meta.full_title }}</title>
     <link rel="canonical" href="{{ $meta.canonical }}" />
+    {{- with site.Home.OutputFormats.Get "RSS" }}
+    <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ site.Title }} RSS Feed" href="{{ .Permalink }}" />
+    {{- end }}
+    {{- if .IsSection }}
+      {{- with .OutputFormats.Get "RSS" }}
+    <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Title }} RSS Feed" href="{{ .Permalink }}" />
+      {{- end }}
+    {{- end }}
 
     <meta name="description" content="{{ $meta.description }}" />
     {{- with $meta.author_name }}

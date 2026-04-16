@@ -24,6 +24,20 @@ const DEFAULT_STATE = {
   selectedEssay: ""
 };
 
+const PUBLIC_SITE_HOST = "outsideinprint.org";
+const SEARCH_ENGINE_HOSTS = ["google.com", "bing.com", "duckduckgo.com", "search.yahoo.com", "yahoo.com", "ecosia.org", "search.brave.com", "startpage.com", "kagi.com"];
+const AI_ANSWER_ENGINE_HOSTS = ["chatgpt.com", "chat.openai.com", "claude.ai", "perplexity.ai", "gemini.google.com", "copilot.microsoft.com"];
+const NEWSLETTER_HOSTS = ["buttondown.email", "buttondown.com"];
+const SOURCE_TYPE_LABELS = {
+  organic_search: "Organic search",
+  ai_answer_engine: "AI answer engine",
+  direct: "Direct",
+  internal: "Internal",
+  legacy_domain: "Legacy domain",
+  newsletter: "Newsletter",
+  social_or_referral: "Social/referral"
+};
+
 function safeNumber(value) {
   const number = Number(value);
   return Number.isFinite(number) ? number : 0;
@@ -96,29 +110,132 @@ function normalizeList(values, validValues, limit = 4) {
   return uniqueValues(values).filter((item) => valid.has(item)).slice(0, limit);
 }
 
-function sourceTypeFromRow(row) {
-  const explicit = safeText(row.discovery_type || row.source_type || row.type);
-  if (explicit) {
-    return explicit;
+function hostMatches(candidate, hosts) {
+  const normalized = safeText(candidate).toLowerCase();
+  if (!normalized) {
+    return false;
   }
 
-  const source = safeText(row.source).toLowerCase();
+  return hosts.some((host) => normalized === host || normalized.endsWith(`.${host}`));
+}
+
+function sourceDescriptor(source) {
+  const text = safeText(source).trim();
+  if (!text) {
+    return { text: "", host: "", path: "" };
+  }
+
+  const candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(text)
+    ? text
+    : /^[a-z0-9.-]+\.[a-z]{2,}(\/.*)?$/i.test(text)
+      ? `https://${text}`
+      : "";
+
+  if (candidate) {
+    try {
+      const url = new URL(candidate);
+      const host = url.hostname.replace(/^www\./i, "").toLowerCase();
+      return {
+        text,
+        host,
+        path: safeText(url.pathname)
+      };
+    } catch {
+      return { text, host: "", path: "" };
+    }
+  }
+
+  return { text, host: "", path: "" };
+}
+
+function isLegacyDomainSource(source) {
+  const descriptor = sourceDescriptor(source);
+  return (
+    (descriptor.host === "lpeasy.github.io" && (descriptor.path === "/outsideinprint" || descriptor.path.startsWith("/outsideinprint/"))) ||
+    descriptor.text.toLowerCase().startsWith("lpeasy.github.io/outsideinprint")
+  );
+}
+
+function isCurrentSiteSource(source) {
+  const descriptor = sourceDescriptor(source);
+  return hostMatches(descriptor.host, [PUBLIC_SITE_HOST]);
+}
+
+function isNewsletterSource(source, medium, campaign) {
+  const descriptor = sourceDescriptor(source);
+  const sourceText = descriptor.text.toLowerCase();
+  const mediumText = safeText(medium).toLowerCase();
+  const campaignText = safeText(campaign).toLowerCase();
+  return (
+    mediumText === "email" ||
+    mediumText === "newsletter" ||
+    hostMatches(descriptor.host, NEWSLETTER_HOSTS) ||
+    /buttondown|newsletter/.test(sourceText) ||
+    /buttondown|newsletter/.test(campaignText)
+  );
+}
+
+function isAiAnswerEngineSource(source) {
+  const descriptor = sourceDescriptor(source);
+  return hostMatches(descriptor.host, AI_ANSWER_ENGINE_HOSTS) || /\b(chatgpt|openai|claude|perplexity|copilot|gemini)\b/i.test(descriptor.text);
+}
+
+function isSearchEngineSource(source) {
+  const descriptor = sourceDescriptor(source);
+  return hostMatches(descriptor.host, SEARCH_ENGINE_HOSTS) || /\b(google|bing|duckduckgo|yahoo|ecosia|brave search|startpage|kagi)\b/i.test(descriptor.text);
+}
+
+function inferSourceTypeFromFields(row) {
+  const source = safeText(row.source || row.discovery_source).toLowerCase();
   const medium = safeText(row.medium).toLowerCase();
   const campaign = safeText(row.campaign).toLowerCase();
 
-  if (source === "direct") {
-    return "direct";
-  }
-
-  if (source.startsWith("internal")) {
+  if (source === "internal") {
     return "internal";
   }
-
-  if (campaign || medium === "campaign" || medium === "generated" || medium === "email") {
-    return "campaign";
+  if (source === "direct" || (!source && !medium && !campaign)) {
+    return "direct";
+  }
+  if (isLegacyDomainSource(source)) {
+    return "legacy_domain";
+  }
+  if (isCurrentSiteSource(source)) {
+    return "internal";
+  }
+  if (isNewsletterSource(source, medium, campaign)) {
+    return "newsletter";
+  }
+  if (isAiAnswerEngineSource(source)) {
+    return "ai_answer_engine";
+  }
+  if (isSearchEngineSource(source)) {
+    return "organic_search";
   }
 
-  return source ? "external" : "unknown";
+  return "social_or_referral";
+}
+
+function sourceTypeFromRow(row) {
+  const explicit = safeText(row.acquisition_channel || row.discovery_type || row.source_type || row.type).toLowerCase();
+  if (explicit) {
+    if (explicit === "internal-module") {
+      return "internal";
+    }
+    if (explicit === "campaign" || explicit === "external") {
+      return inferSourceTypeFromFields(row);
+    }
+    if (explicit === "unknown") {
+      return "direct";
+    }
+    return explicit;
+  }
+
+  return inferSourceTypeFromFields(row);
+}
+
+export function formatSourceTypeLabel(value) {
+  const normalized = sourceTypeFromRow({ source_type: value });
+  return SOURCE_TYPE_LABELS[normalized] || normalized.replace(/_/g, " ");
 }
 
 export function formatMetricValue(metric, value) {
@@ -635,15 +752,19 @@ export function buildFunnel(data, state) {
 }
 
 export function buildSources(data, state) {
-  const rows = data.sources
-    .map((row) => ({ ...row, source_type: sourceTypeFromRow(row) }))
+  const normalizedRows = data.sources.map((row) => ({ ...row, source_type: sourceTypeFromRow(row) }));
+  const rows = normalizedRows
     .filter((row) => matchesSourceType(row, state))
     .sort((left, right) =>
       state.scale === "rate" ? right.read_rate - left.read_rate : right.pageviews - left.pageviews
     )
     .slice(0, 10);
 
-  const mix = filterSeriesByPeriod(data.sourceSeries, state.period)
+  const periodRows = filterSeriesByPeriod(data.sourceSeries, state.period).map((row) => ({
+    ...row,
+    source_type: sourceTypeFromRow(row)
+  }));
+  const mix = periodRows
     .filter((row) => matchesSourceType(row, state))
     .reduce((map, row) => {
       const key = `${row.date}:${row.source_type}`;
@@ -654,7 +775,16 @@ export function buildSources(data, state) {
       return map;
     }, new Map());
 
-  return { rows, mix: [...mix.values()] };
+  const externalChannels = new Set(["organic_search", "ai_answer_engine", "newsletter", "social_or_referral"]);
+  const summary = {
+    externalPageviews: sumMetric(periodRows.filter((row) => externalChannels.has(row.source_type)), "pageviews"),
+    selfReferralPageviews: sumMetric(periodRows.filter((row) => row.source_type === "internal" || row.source_type === "legacy_domain"), "pageviews"),
+    directPageviews: sumMetric(periodRows.filter((row) => row.source_type === "direct"), "pageviews"),
+    searchPageviews: sumMetric(periodRows.filter((row) => row.source_type === "organic_search" || row.source_type === "ai_answer_engine"), "pageviews"),
+    aiAnswerEnginePageviews: sumMetric(periodRows.filter((row) => row.source_type === "ai_answer_engine"), "pageviews")
+  };
+
+  return { rows, mix: [...mix.values()], summary };
 }
 
 export function buildSectionExplorer(data, state) {

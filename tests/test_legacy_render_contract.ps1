@@ -7,6 +7,7 @@ $requiredFiles = @(
   'layouts/partials/render_article_body.html',
   'layouts/partials/article/repair_mojibake.html',
   'layouts/_default/_markup/render-image.html',
+  'layouts/_default/_markup/render-link.html',
   'assets/css/main.css'
 )
 
@@ -20,6 +21,7 @@ foreach ($relativePath in $requiredFiles) {
 $renderArticleBody = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/render_article_body.html') -Raw
 $repairMojibake = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/article/repair_mojibake.html') -Raw
 $renderImage = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/_markup/render-image.html') -Raw
+$renderLink = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/_markup/render-link.html') -Raw
 $mainCss = Get-Content -Path (Join-Path $repoRoot 'assets/css/main.css') -Raw
 
 foreach ($requiredSnippet in @(
@@ -57,6 +59,16 @@ foreach ($requiredSnippet in @(
 )) {
   if ($renderImage -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected render-image.html to preserve imported figure/caption semantics: $requiredSnippet"
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'Params.medium_source_url',
+  '$resolvedDestination = (index $matches 0).Permalink',
+  'safeURL'
+)) {
+  if ($renderLink -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected render-link.html to canonicalize Medium links via: $requiredSnippet"
   }
 }
 

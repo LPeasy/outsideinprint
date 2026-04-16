@@ -1,0 +1,1291 @@
+{
+  "generated_at": "2026-04-15T15:59:53.8830888-04:00",
+  "total_matches": 213,
+  "categories": {
+    "generated_historical_data": 193,
+    "intentional_legacy_classification": 5,
+    "dashboard_or_fixture_compatibility": 7,
+    "intentional_probe_target": 8,
+    "manual_follow_up": 0
+  },
+  "rows": [
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\assets\\js\\dashboard-core.mjs",
+      "line_number": 155,
+      "line": "descriptor.text.toLowerCase().startsWith(\"lpeasy.github.io/outsideinprint\")",
+      "category": "intentional_legacy_classification"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 11,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 44,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 77,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 88,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 110,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 143,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/start-here\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 165,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 198,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 264,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 275,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 319,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 330,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 396,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 407,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 528,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 539,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 550,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 572,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 594,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 627,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 638,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/essays\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 704,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 715,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 737,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 759,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/essays/the-dolphin-company\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 770,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 836,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 902,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1034,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1045,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1067,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1100,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1111,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1122,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1199,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1265,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1298,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\essays.json",
+      "line_number": 1331,
+      "line": "\"primary_source\": \"lpeasy.github.io/outsideinprint/random\"",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 3,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 87,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 213,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/collections/risk-uncertainty\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 276,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 360,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/library\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 444,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 549,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays/the-dolphin-company\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 612,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 717,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/collections/floods-water-built-environment\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journey_by_source.json",
+      "line_number": 759,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 21,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 39,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 57,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 93,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 147,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 165,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 183,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 201,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 219,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 273,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 309,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 327,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 543,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays/the-dolphin-company\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 561,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 615,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 651,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 705,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/library\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 831,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 867,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 939,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1029,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1083,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1119,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1191,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1263,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1299,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1371,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1407,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1479,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1641,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1695,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1731,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1911,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1929,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 1983,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2001,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2073,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2091,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2181,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2253,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2271,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2307,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2361,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/collections/floods-water-built-environment\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2379,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2415,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2487,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2541,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2595,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2685,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2703,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/collections/risk-uncertainty\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2829,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2847,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2883,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 2919,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3027,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3261,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/essays\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3333,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3369,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3423,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3477,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3531,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3549,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3639,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3675,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3711,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3963,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 3999,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\journeys.json",
+      "line_number": 4017,
+      "line": "\"discovery_source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 6,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/what-happened-at-camp-mystic\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 105,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 171,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 193,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 248,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 380,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 457,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/literature\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 545,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 556,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver/peaches-or-greece\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 578,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 710,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/2025-supreme-court-wrap-up\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 787,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 908,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 930,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-structure-of-modern-american-society\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 996,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1051,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1073,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/library\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1128,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1139,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1260,
+      "line": "\"source\": \"lpeasy.github.io/OutsideInPrintDashboard\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1337,
+      "line": "\"source\": \"lpeasy.github.io/OutsideInPrintDashboard\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1381,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1436,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1568,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 1865,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2195,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-dolphin-company\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2382,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2459,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2492,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2569,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/uncrustables-the-billion-dollar-peanut-butter-empire\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2613,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2712,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver/history-pushes-back\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2723,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver/the-new-orthodoxy\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2734,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2745,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2778,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2822,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections/floods-water-built-environment\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 2954,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3086,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3097,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/literature\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3174,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections/risk-uncertainty\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3251,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3262,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3328,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-death-of-moores-law\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3537,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3636,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3680,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3735,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/in-the-image-of-god\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3867,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 3977,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-dolphin-company\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources_timeseries.json",
+      "line_number": 4098,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/library\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 3,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/uncrustables-the-billion-dollar-peanut-butter-empire\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 91,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections/risk-uncertainty\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 113,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/2025-supreme-court-wrap-up\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 377,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 421,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-structure-of-modern-american-society\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 454,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 487,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 498,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/start-here\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 542,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 564,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-dolphin-company\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 586,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver/history-pushes-back\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 608,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/the-death-of-moores-law\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 685,
+      "line": "\"source\": \"lpeasy.github.io/OutsideInPrintDashboard\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 729,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/library\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 740,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/what-happened-at-camp-mystic\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 839,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver/the-new-orthodoxy\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 883,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/syd-and-oliver/peaches-or-greece\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 938,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 993,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/literature\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 1015,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 1114,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 1147,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections/floods-water-built-environment\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 1180,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/collections\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 1202,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/random\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 1224,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/in-the-image-of-god\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\data\\analytics\\sources.json",
+      "line_number": 1334,
+      "line": "\"source\": \"lpeasy.github.io/outsideinprint/essays/dirt-is-better-than-air\",",
+      "category": "generated_historical_data"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\docs\\analytics-system.md",
+      "line_number": 185,
+      "line": "6. `.\\tools\\bin\\generated\\hugo.cmd --minify --baseURL \"https://lpeasy.github.io/outsideinprint/\"`",
+      "category": "dashboard_or_fixture_compatibility"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\docs\\seo-admin-checklist.md",
+      "line_number": 59,
+      "line": "- `https://lpeasy.github.io/outsideinprint/`",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\docs\\seo-admin-checklist.md",
+      "line_number": 60,
+      "line": "- `https://lpeasy.github.io/outsideinprint/about/`",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\docs\\seo-admin-checklist.md",
+      "line_number": 61,
+      "line": "- `https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/`",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\docs\\seo-admin-checklist.md",
+      "line_number": 62,
+      "line": "- `https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/`",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\layouts\\partials\\masthead_dashboard.html",
+      "line_number": 1,
+      "line": "{{ $publicSiteURL := site.Params.dashboard.public_site_url | default \"https://lpeasy.github.io/outsideinprint/\" }}",
+      "category": "dashboard_or_fixture_compatibility"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\diagnose_seo_hosts.ps1",
+      "line_number": 220,
+      "line": "'https://lpeasy.github.io/outsideinprint/',",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\diagnose_seo_hosts.ps1",
+      "line_number": 221,
+      "line": "'https://lpeasy.github.io/outsideinprint/about/',",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\diagnose_seo_hosts.ps1",
+      "line_number": 222,
+      "line": "'https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/',",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\diagnose_seo_hosts.ps1",
+      "line_number": 223,
+      "line": "'https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/'",
+      "category": "intentional_probe_target"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\freeze_seo_rollout_baseline.ps1",
+      "line_number": 5,
+      "line": "[string]$LegacyBaseUrl = 'https://lpeasy.github.io/outsideinprint',",
+      "category": "intentional_legacy_classification"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\import_analytics.ps1",
+      "line_number": 291,
+      "line": "return $descriptor.text.ToLowerInvariant().StartsWith(\"lpeasy.github.io/outsideinprint\")",
+      "category": "intentional_legacy_classification"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\verify_dashboard.ps1",
+      "line_number": 76,
+      "line": "Invoke-Step -Name \"Public Hugo build\" -Action { & $generatedHugoWrapper --minify --baseURL \"https://lpeasy.github.io/outsideinprint/\" }",
+      "category": "dashboard_or_fixture_compatibility"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\scripts\\verify_dashboard.ps1",
+      "line_number": 79,
+      "line": "Invoke-Step -Name \"Public Hugo build\" -Action { hugo --minify --baseURL \"https://lpeasy.github.io/outsideinprint/\" }",
+      "category": "dashboard_or_fixture_compatibility"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\tests\\test_analytics_snapshot_contract.ps1",
+      "line_number": 227,
+      "line": "if ($source -eq 'lpeasy.github.io/outsideinprint' -or $source.StartsWith('lpeasy.github.io/outsideinprint/')) {",
+      "category": "intentional_legacy_classification"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\tests\\test_analytics_snapshot_contract.ps1",
+      "line_number": 232,
+      "line": "throw \"sources.json must classify lpeasy.github.io/outsideinprint referrals as legacy_domain.\"",
+      "category": "intentional_legacy_classification"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\tests\\test_pdf_builder_static_image_paths.ps1",
+      "line_number": 92,
+      "line": "$script:SiteBaseUrl = \"https://lpeasy.github.io/outsideinprint/\"",
+      "category": "dashboard_or_fixture_compatibility"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\tests\\test_pdf_builder_static_image_paths.ps1",
+      "line_number": 104,
+      "line": "#image(\"https://lpeasy.github.io/outsideinprint/images/fixture.jpg\")",
+      "category": "dashboard_or_fixture_compatibility"
+    },
+    {
+      "path": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\outsideinprint\\tests\\test_pdf_builder_static_image_paths.ps1",
+      "line_number": 142,
+      "line": "![](https://lpeasy.github.io/outsideinprint/images/fixture.jpg)",
+      "category": "dashboard_or_fixture_compatibility"
+    }
+  ]
+}

@@ -55,6 +55,11 @@ jobs:
         run: |
           ./tests/test_discovery_surface_contract.ps1
 
+      - name: Test SEO Rollout Contract
+        shell: pwsh
+        run: |
+          ./tests/test_seo_rollout_contract.ps1
+
       - name: Test Legacy Render Contract
         shell: pwsh
         run: |
@@ -69,10 +74,10 @@ jobs:
           }
 
           if ([string]::IsNullOrWhiteSpace($base)) {
-            ./scripts/check_essay_guardrails.ps1 -RequireDescription
+            ./scripts/check_essay_guardrails.ps1 -RequireDescription -RequireFeaturedImage
           }
           else {
-            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}" -RequireDescription
+            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}" -RequireDescription -RequireFeaturedImage
           }
 
   build:
@@ -185,3 +190,42 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_live_seo_smoke.ps1 -BaseUrl "${{ steps.deployment.outputs.page_url }}"
+
+      - name: Canonical Host SEO Smoke Test
+        shell: pwsh
+        run: |
+          $attempts = 6
+          $delaySeconds = 20
+          $lastError = $null
+
+          for ($attempt = 1; $attempt -le $attempts; $attempt++) {
+            try {
+              ./tests/test_live_seo_smoke.ps1 -BaseUrl "https://outsideinprint.org"
+              $lastError = $null
+              break
+            }
+            catch {
+              $lastError = $_
+              if ($attempt -lt $attempts) {
+                Start-Sleep -Seconds $delaySeconds
+              }
+            }
+          }
+
+          if ($null -ne $lastError) {
+            throw $lastError
+          }
+
+      - name: SEO Rollout Probe
+        if: always()
+        shell: pwsh
+        run: |
+          ./scripts/probe_seo_rollout.ps1 -OutputDir ./.deploy-reports/seo-rollout -UpdateWorksheet:$false
+
+      - name: Upload SEO Rollout Probe Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-rollout-probe
+          if-no-files-found: warn
+          path: ./.deploy-reports/seo-rollout/**

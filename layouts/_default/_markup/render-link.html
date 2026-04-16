@@ -1,0 +1,25 @@
+{{- $destination := .Destination -}}
+{{- if and (hasPrefix $destination "/") (not (hasPrefix $destination "//")) -}}
+  {{- $destination = printf "%s%s" site.Home.RelPermalink (strings.TrimPrefix "/" $destination) -}}
+{{- end -}}
+{{- $resolvedDestination := $destination -}}
+{{- $matches := where site.RegularPages "Params.medium_source_url" $destination -}}
+{{- if gt (len $matches) 0 -}}
+  {{- $resolvedDestination = (index $matches 0).Permalink -}}
+{{- else if in $destination "medium.com/" -}}
+  {{- $destinationKey := replaceRE "^.*/" "" (strings.TrimSuffix "/" $destination) -}}
+  {{- $matchPage := false -}}
+  {{- range site.RegularPages -}}
+    {{- $candidatePage := . -}}
+    {{- with $candidatePage.Params.medium_source_url -}}
+      {{- $candidateKey := replaceRE "^.*/" "" (strings.TrimSuffix "/" (printf "%v" .)) -}}
+      {{- if eq $candidateKey $destinationKey -}}
+        {{- $matchPage = $candidatePage -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $matchPage -}}
+    {{- $resolvedDestination = .Permalink -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $resolvedDestination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>

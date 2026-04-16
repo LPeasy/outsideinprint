@@ -26,7 +26,7 @@ jobs:
       GOATCOUNTER_SITE_URL: ${{ vars.GOATCOUNTER_SITE_URL }}
       GOATCOUNTER_API_URL: ${{ vars.GOATCOUNTER_API_URL }}
       GOATCOUNTER_SITE_BASE_PATH: ${{ vars.GOATCOUNTER_SITE_BASE_PATH }}
-      GOATCOUNTER_PUBLIC_SITE_URL: ${{ vars.GOATCOUNTER_PUBLIC_SITE_URL }}
+      GOATCOUNTER_PUBLIC_SITE_URL: ${{ vars.GOATCOUNTER_PUBLIC_SITE_URL || 'https://outsideinprint.org/' }}
 
     steps:
       - name: Checkout Repo
@@ -92,6 +92,24 @@ jobs:
           - Time range: $rangeLabel
           - Snapshot date: $updatedAt
           "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+
+      - name: SEO Rollout Measurement Summary
+        shell: pwsh
+        run: |
+          $baselinePath = Join-Path (Get-Location) 'reports/seo-rollout/baseline.json'
+          $worksheetPath = Join-Path (Get-Location) 'reports/seo-rollout/rollout-worksheet.csv'
+          if (-not (Test-Path -LiteralPath $baselinePath -PathType Leaf)) {
+            @"
+            ## SEO Rollout
+            - Baseline file is missing at reports/seo-rollout/baseline.json.
+            - Run scripts/freeze_seo_rollout_baseline.ps1 to freeze the rollout baseline before relying on window reporting.
+            "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+            exit 0
+          }
+
+          $reportDir = Join-Path (Get-Location) '.analytics-refresh/seo-rollout'
+          ./scripts/report_seo_rollout_window.ps1 -BaselinePath $baselinePath -WorksheetPath $worksheetPath -OutputDir $reportDir -Label 'refresh-analytics'
+          Get-Content (Join-Path $reportDir 'measurement-window-report.md') | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
 
       - name: Clean Temporary Analytics Files
         if: always()

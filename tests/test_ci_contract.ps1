@@ -4,6 +4,7 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $agentsPath = Join-Path $repoRoot "AGENTS.md"
 $publishingWorkflowDocPath = Join-Path $repoRoot "docs/publishing-workflow.md"
+$seoRolloutDocPath = Join-Path $repoRoot "docs/seo-rollout.md"
 $readmePath = Join-Path $repoRoot "README.md"
 $codexWorkflowPath = Join-Path $repoRoot "CODEX_WORKFLOW.md"
 $packagePath = Join-Path $repoRoot "package.json"
@@ -18,6 +19,7 @@ $publicManifestWriterPath = Join-Path $repoRoot "tests/write_public_build_manife
 $publicOutputTestPath = Join-Path $repoRoot "tests/test_public_html_output.ps1"
 $publicRouteSmokePath = Join-Path $repoRoot "tests/test_public_route_smoke.ps1"
 $legacyRenderContractPath = Join-Path $repoRoot "tests/test_legacy_render_contract.ps1"
+$seoRolloutContractPath = Join-Path $repoRoot "tests/test_seo_rollout_contract.ps1"
 
 if (-not (Test-Path $packagePath -PathType Leaf)) {
   throw "package.json is required for the CI contract test."
@@ -29,6 +31,10 @@ if (-not (Test-Path $agentsPath -PathType Leaf)) {
 
 if (-not (Test-Path $publishingWorkflowDocPath -PathType Leaf)) {
   throw "docs/publishing-workflow.md is required as the canonical publishing workflow guide."
+}
+
+if (-not (Test-Path $seoRolloutDocPath -PathType Leaf)) {
+  throw "docs/seo-rollout.md is required as the SEO rollout operations guide."
 }
 
 if (-not (Test-Path $readmePath -PathType Leaf)) {
@@ -50,7 +56,8 @@ foreach ($requiredValidationPath in @(
   $publicManifestWriterPath,
   $publicOutputTestPath,
   $publicRouteSmokePath,
-  $legacyRenderContractPath
+  $legacyRenderContractPath,
+  $seoRolloutContractPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
     throw "Missing SEO validation helper: $requiredValidationPath"
@@ -60,6 +67,7 @@ foreach ($requiredValidationPath in @(
 $package = Get-Content -Path $packagePath -Raw | ConvertFrom-Json
 $agents = Get-Content -Path $agentsPath -Raw
 $publishingWorkflowDoc = Get-Content -Path $publishingWorkflowDocPath -Raw
+$seoRolloutDoc = Get-Content -Path $seoRolloutDocPath -Raw
 $readme = Get-Content -Path $readmePath -Raw
 $codexWorkflow = Get-Content -Path $codexWorkflowPath -Raw
 $recommendedNodeVersion = (Get-Content -Path $nvmrcPath -Raw).Trim()
@@ -90,8 +98,24 @@ if ($readme -notmatch 'docs/publishing-workflow\.md') {
   throw "README.md must reference docs/publishing-workflow.md."
 }
 
+if ($readme -notmatch 'docs/seo-rollout\.md') {
+  throw "README.md must reference docs/seo-rollout.md."
+}
+
 if ($codexWorkflow -notmatch 'docs/publishing-workflow\.md') {
   throw "CODEX_WORKFLOW.md must reference docs/publishing-workflow.md."
+}
+
+if ($seoRolloutDoc -notmatch 'freeze_seo_rollout_baseline\.ps1') {
+  throw "docs/seo-rollout.md must document baseline freezing."
+}
+
+if ($seoRolloutDoc -notmatch 'probe_seo_rollout\.ps1') {
+  throw "docs/seo-rollout.md must document canonical and legacy host probing."
+}
+
+if ($seoRolloutDoc -notmatch 'report_seo_rollout_window\.ps1') {
+  throw "docs/seo-rollout.md must document rollout measurement reporting."
 }
 
 $playwrightVersion = [string]$package.devDependencies.playwright
@@ -157,6 +181,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_discovery_surface_contract\.ps1")
   throw "deploy.yml must run the discovery surface contract test."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_seo_rollout_contract\.ps1") {
+  throw "deploy.yml must run the SEO rollout contract test."
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_legacy_render_contract\.ps1") {
   throw "deploy.yml must run the legacy render contract test."
 }
@@ -202,6 +230,14 @@ if ($deployWorkflow -notmatch 'if:\s*failure\(\)') {
   throw "deploy.yml must keep the public route debug steps failure-only."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_live_seo_smoke\.ps1\s+-BaseUrl\s+""https://outsideinprint\.org""") {
+  throw "deploy.yml must run the canonical-host smoke test against https://outsideinprint.org."
+}
+
+if ($deployWorkflow -notmatch "\.\/scripts\/probe_seo_rollout\.ps1") {
+  throw "deploy.yml must probe the canonical and legacy hosts after deploy."
+}
+
 if ($deployWorkflow -notmatch "\.\/scripts\/check_essay_guardrails\.ps1") {
   throw "deploy.yml must run the essay guardrail check before building the site."
 }
@@ -216,6 +252,10 @@ if ($dashboardWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
 
 if ($refreshWorkflow -notmatch "GOATCOUNTER_API_URL:\s*\$\{\{\s*vars\.GOATCOUNTER_API_URL\s*\}\}") {
   throw "refresh-analytics.yml must pass GOATCOUNTER_API_URL through to the fetch step."
+}
+
+if ($refreshWorkflow -notmatch "\.\/scripts\/report_seo_rollout_window\.ps1") {
+  throw "refresh-analytics.yml must generate the rollout measurement report."
 }
 
 if ($publicOutputHelper -notmatch 'function\s+Test-PublicBuildFreshness') {

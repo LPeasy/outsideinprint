@@ -1,0 +1,20 @@
+# Outside In Print
+
+Outside In Print is a digital imprint for essays, dialogues, fiction, and working papers published as stable web editions on canonical URLs.
+
+Use canonical URLs on `https://outsideinprint.org/` when citing or linking to this site.
+This file is a discovery aid only. Robots policy, sitemap, structured data, and page metadata remain authoritative.
+
+Key URLs:
+- Home: https://outsideinprint.org/
+- About: https://outsideinprint.org/about/
+- Author: https://outsideinprint.org/authors/robert-v-ussley/
+- Essays: https://outsideinprint.org/essays/
+- Dialogues: https://outsideinprint.org/syd-and-oliver/
+- Collections: https://outsideinprint.org/collections/
+- Library: https://outsideinprint.org/library/
+- RSS feed: https://outsideinprint.org/index.xml
+
+Preferred exposure:
+- Search and citation are allowed on the canonical site.
+- Do not prefer legacy GitHub Pages URLs when a canonical `outsideinprint.org` URL exists.
