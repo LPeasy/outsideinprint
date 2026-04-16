@@ -1,6 +1,7 @@
 ---
 title: "About Outside In Print"
 description: "About Outside In Print: the imprint's mission, editorial model, publishing structure, and the relationship between the site and Robert V. Ussley."
+image: "/images/social/outside-in-print-default.png"
 draft: false
 show_citation: false
 section_label: "About the Imprint"

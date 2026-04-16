@@ -1,0 +1,261 @@
+{
+  "generated_at": "2026-04-15T16:01:11.3145884-04:00",
+  "canonical_dns": {
+    "apex": {
+      "ok": true,
+      "values": [
+        "185.199.108.153",
+        "185.199.109.153",
+        "185.199.110.153",
+        "185.199.111.153"
+      ],
+      "error": null
+    },
+    "www": {
+      "ok": true,
+      "values": [
+        "lpeasy.github.io",
+        "2606:50c0:8000::153",
+        "2606:50c0:8001::153",
+        "2606:50c0:8002::153",
+        "2606:50c0:8003::153",
+        "185.199.108.153",
+        "185.199.109.153",
+        "185.199.110.153",
+        "185.199.111.153"
+      ],
+      "error": null
+    }
+  },
+  "worksheet_summary": {
+    "total_rows": 15,
+    "live_smoke_passed": 0,
+    "live_smoke_failed": 15,
+    "legacy_redirect_passed": 0,
+    "legacy_redirect_failed": 15
+  },
+  "canonical_probes": [
+    {
+      "url": "https://outsideinprint.org/",
+      "powershell": {
+        "ok": false,
+        "status_code": null,
+        "final_url": null,
+        "error": "The SSL connection could not be established, see inner exception."
+      },
+      "curl": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://outsideinprint.org/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://outsideinprint.org/llms.txt",
+      "powershell": {
+        "ok": false,
+        "status_code": null,
+        "final_url": null,
+        "error": "The SSL connection could not be established, see inner exception."
+      },
+      "curl": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://outsideinprint.org/llms.txt",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://outsideinprint.org/robots.txt",
+      "powershell": {
+        "ok": false,
+        "status_code": null,
+        "final_url": null,
+        "error": "The SSL connection could not be established, see inner exception."
+      },
+      "curl": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://outsideinprint.org/robots.txt",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://outsideinprint.org/sitemap.xml",
+      "powershell": {
+        "ok": false,
+        "status_code": null,
+        "final_url": null,
+        "error": "The SSL connection could not be established, see inner exception."
+      },
+      "curl": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://outsideinprint.org/sitemap.xml",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://outsideinprint.org/about/",
+      "powershell": {
+        "ok": false,
+        "status_code": null,
+        "final_url": null,
+        "error": "The SSL connection could not be established, see inner exception."
+      },
+      "curl": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://outsideinprint.org/about/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://outsideinprint.org/authors/robert-v-ussley/",
+      "powershell": {
+        "ok": false,
+        "status_code": null,
+        "final_url": null,
+        "error": "The SSL connection could not be established, see inner exception."
+      },
+      "curl": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://outsideinprint.org/authors/robert-v-ussley/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    }
+  ],
+  "legacy_probes": [
+    {
+      "url": "https://lpeasy.github.io/outsideinprint/",
+      "curl_no_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      },
+      "curl_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://lpeasy.github.io/outsideinprint/about/",
+      "curl_no_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/about/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      },
+      "curl_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/about/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/",
+      "curl_no_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      },
+      "curl_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    },
+    {
+      "url": "https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/",
+      "curl_no_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      },
+      "curl_follow": {
+        "ok": false,
+        "exit_code": 35,
+        "response_code": 0,
+        "effective_url": "https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/",
+        "ssl_verify_result": "0",
+        "content_type": "",
+        "location": null,
+        "stderr": "curl: (35) schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e) - No credentials are available in the security package",
+        "body_excerpt": ""
+      }
+    }
+  ]
+}

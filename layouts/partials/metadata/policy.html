@@ -48,6 +48,8 @@
   {{- $inSitemap = false -}}
   {{- $robots = slice "noindex" "follow" -}}
   {{- $reason = "missing-collection-definition" -}}
+{{- else -}}
+  {{- $robots = slice "index" "follow" "max-image-preview:large" -}}
 {{- end -}}
 
 {{- $result := dict

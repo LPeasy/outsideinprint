@@ -6,6 +6,7 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $requiredFiles = @(
   'data/organization.yaml',
   'data/authors.yaml',
+  'layouts/partials/authors/resolve.html',
   'layouts/partials/authors/directory.html',
   'layouts/partials/schema.html',
   'layouts/partials/schema/organization.html',
@@ -61,6 +62,10 @@ if ($organizationData -notmatch 'default_author_id:\s*robert-v-ussley') {
   throw 'Expected data/organization.yaml to default published authorship to robert-v-ussley.'
 }
 
+if ($organizationData -notmatch 'image:\s*/images/social/outside-in-print-default\.png') {
+  throw 'Expected data/organization.yaml to define the default social image.'
+}
+
 $authorsData = Get-Content -Path (Join-Path $repoRoot 'data/authors.yaml') -Raw
 if ($authorsData -notmatch 'Outside In Print Editorial') {
   throw 'Expected data/authors.yaml to define the editorial fallback author.'
@@ -68,6 +73,17 @@ if ($authorsData -notmatch 'Outside In Print Editorial') {
 
 if ($authorsData -notmatch 'Robert V\. Ussley') {
   throw 'Expected data/authors.yaml to define Robert V. Ussley as a canonical author entity.'
+}
+
+$authorResolveHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/authors/resolve.html') -Raw
+foreach ($requiredSnippet in @(
+  '$entry.image',
+  '$authorPage.Params.featured_image',
+  '$authorPage.Params.portrait'
+)) {
+  if ($authorResolveHelper -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/authors/resolve.html to support author-image resolution via: $requiredSnippet"
+  }
 }
 
 $routeHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/route.html') -Raw
@@ -86,6 +102,28 @@ if ($routeHelper -notmatch '\^/authors/\[\^/\]\+/\$') {
 $websiteHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/website.html') -Raw
 if ($websiteHelper -notmatch 'SearchAction') {
   throw 'Expected schema/website.html to emit SearchAction metadata for the library route.'
+}
+
+$organizationHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/organization.html') -Raw
+foreach ($requiredSnippet in @(
+  '$organizationData.image',
+  'dict "image" (dict',
+  '"@type" "ImageObject"'
+)) {
+  if ($organizationHelper -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected schema/organization.html to emit organization image support via: $requiredSnippet"
+  }
+}
+
+$resolveAuthorHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/resolve-author.html') -Raw
+foreach ($requiredSnippet in @(
+  '$entry.image',
+  'dict "image" (dict',
+  '"@type" "ImageObject"'
+)) {
+  if ($resolveAuthorHelper -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected schema/resolve-author.html to emit author image support via: $requiredSnippet"
+  }
 }
 
 $webpageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/webpage.html') -Raw

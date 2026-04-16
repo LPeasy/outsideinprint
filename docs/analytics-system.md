@@ -8,6 +8,8 @@ Outside In Print uses a static, privacy-friendly analytics pipeline built around
 - The separate dashboard site reads only committed JSON snapshots
 - `.github/workflows/publish-dashboard.yml` remains the only dashboard deployment mechanism
 
+SEO rollout operations are documented separately in `docs/seo-rollout.md`.
+
 If GoatCounter is not configured, the public site still builds and the dashboard still renders from the committed snapshot files.
 
 ## Architecture
@@ -268,7 +270,7 @@ Optional:
   Default: `/outsideinprint`
   Use this only if the deployed public site moves to a different GitHub Pages base path
 - repository variable: `GOATCOUNTER_PUBLIC_SITE_URL`
-  Default: `https://lpeasy.github.io/outsideinprint/`
+  Default: `https://outsideinprint.org/`
   Use this only if the public site origin changes and you still want internal referrers grouped as `internal / <path>`
 
 The refresh workflow is in:

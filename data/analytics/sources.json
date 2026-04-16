@@ -4,6 +4,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -13,6 +15,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -22,6 +26,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 4.0,
     "pageviews": 5.0,
     "reads": 0.0
@@ -31,6 +37,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 4.0,
     "reads": 0.0
@@ -40,6 +48,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -49,6 +59,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 19.0,
     "pageviews": 70.0,
     "reads": 0.0
@@ -58,6 +70,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -67,6 +81,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -76,6 +92,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -85,6 +103,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 5.0,
     "reads": 0.0
@@ -94,6 +114,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -103,6 +125,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "organic_search",
+    "source_type": "organic_search",
     "visitors": 3.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -112,6 +136,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -121,6 +147,8 @@
     "medium": "/random/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 4.0,
     "reads": 1.0
@@ -130,6 +158,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -139,6 +169,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -148,6 +180,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -157,6 +191,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -166,6 +202,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 21.0,
     "pageviews": 40.0,
     "reads": 0.0
@@ -175,6 +213,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 20.0,
     "pageviews": 60.0,
     "reads": 0.0
@@ -184,6 +224,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -193,6 +235,8 @@
     "medium": "/library/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 0.0,
     "pageviews": 0.0,
     "reads": 1.0
@@ -202,6 +246,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -211,6 +257,8 @@
     "medium": "/essays/how-did-mother-become-a-controversial-word-in-america/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -220,6 +268,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -229,6 +279,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "social_or_referral",
+    "source_type": "social_or_referral",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -238,6 +290,8 @@
     "medium": "/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 0.0,
     "pageviews": 0.0,
     "reads": 1.0
@@ -247,6 +301,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -256,6 +312,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -265,6 +323,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -274,6 +334,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 4.0,
     "pageviews": 5.0,
     "reads": 0.0
@@ -283,6 +345,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -292,6 +356,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -301,6 +367,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -310,6 +378,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 3.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -319,6 +389,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 40.0,
     "pageviews": 234.0,
     "reads": 0.0
@@ -328,6 +400,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -337,6 +411,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -346,6 +422,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -355,6 +433,8 @@
     "medium": "generated",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "organic_search",
+    "source_type": "organic_search",
     "visitors": 6.0,
     "pageviews": 6.0,
     "reads": 0.0
@@ -364,6 +444,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -373,6 +455,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -382,6 +466,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -391,6 +477,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -400,6 +488,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -409,6 +499,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 5.0,
     "pageviews": 5.0,
     "reads": 0.0
@@ -418,6 +510,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -427,6 +521,8 @@
     "medium": "/essays/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -436,6 +532,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -445,6 +543,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 2.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -454,6 +554,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -463,6 +565,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -472,6 +576,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 13.0,
     "pageviews": 31.0,
     "reads": 0.0
@@ -481,6 +587,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -490,6 +598,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -499,6 +609,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -508,6 +620,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -517,6 +631,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -526,6 +642,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -535,6 +653,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -544,6 +664,8 @@
     "medium": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -553,6 +675,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -562,6 +686,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "social_or_referral",
+    "source_type": "social_or_referral",
     "visitors": 2.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -571,6 +697,8 @@
     "medium": "/syd-and-oliver/smoke-and-brass/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -580,6 +708,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -589,6 +719,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 4.0,
     "reads": 0.0
@@ -598,6 +730,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -607,6 +741,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -616,6 +752,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -625,6 +763,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 5.0,
     "pageviews": 6.0,
     "reads": 0.0
@@ -634,6 +774,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -643,6 +785,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -652,6 +796,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -661,6 +807,8 @@
     "medium": "/collections/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -670,6 +818,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -679,6 +829,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -688,6 +840,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -697,6 +851,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -706,6 +862,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -715,6 +873,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -724,6 +884,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -733,6 +895,8 @@
     "medium": "/start-here/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 0.0,
     "pageviews": 0.0,
     "reads": 1.0
@@ -742,6 +906,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -751,6 +917,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -760,6 +928,8 @@
     "medium": "/syd-and-oliver/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -769,6 +939,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -778,6 +950,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -787,6 +961,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -796,6 +972,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -805,6 +983,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -814,6 +994,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -823,6 +1005,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -832,6 +1016,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 8.0,
     "pageviews": 13.0,
     "reads": 0.0
@@ -841,6 +1027,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 4.0,
     "reads": 0.0
@@ -850,6 +1038,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 30.0,
     "pageviews": 211.0,
     "reads": 0.0
@@ -859,6 +1049,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 6.0,
     "pageviews": 10.0,
     "reads": 0.0
@@ -868,6 +1060,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -877,6 +1071,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -886,6 +1082,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -895,6 +1093,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "social_or_referral",
+    "source_type": "social_or_referral",
     "visitors": 3.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -904,6 +1104,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "direct",
+    "source_type": "direct",
     "visitors": 88.0,
     "pageviews": 137.0,
     "reads": 0.0
@@ -913,6 +1115,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -922,6 +1126,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -931,6 +1137,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 4.0,
     "reads": 0.0
@@ -940,6 +1148,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -949,6 +1159,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 3.0,
     "reads": 0.0
@@ -958,6 +1170,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -967,6 +1181,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 3.0,
     "pageviews": 4.0,
     "reads": 0.0
@@ -976,6 +1192,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 6.0,
     "pageviews": 10.0,
     "reads": 0.0
@@ -985,6 +1203,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 13.0,
     "pageviews": 87.0,
     "reads": 0.0
@@ -994,6 +1214,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -1003,6 +1225,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1012,6 +1236,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1021,6 +1247,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 3.0,
     "pageviews": 4.0,
     "reads": 0.0
@@ -1030,6 +1258,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 18.0,
     "pageviews": 39.0,
     "reads": 0.0
@@ -1039,6 +1269,8 @@
     "medium": "/collections/risk-uncertainty/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -1048,6 +1280,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1057,6 +1291,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1066,6 +1302,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1075,6 +1313,8 @@
     "medium": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 0.0,
     "pageviews": 0.0,
     "reads": 1.0
@@ -1084,6 +1324,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1093,6 +1335,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "legacy_domain",
+    "source_type": "legacy_domain",
     "visitors": 2.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -1102,6 +1346,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1111,6 +1357,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0
@@ -1120,6 +1368,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 2.0,
     "reads": 0.0
@@ -1129,6 +1379,8 @@
     "medium": "",
     "campaign": "",
     "content": "",
+    "acquisition_channel": "internal",
+    "source_type": "internal",
     "visitors": 1.0,
     "pageviews": 1.0,
     "reads": 0.0

@@ -1,7 +1,8 @@
 [
   {
     "collection_label": "homepage_selected_hero",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "homepage_selected_hero",
     "collection": "",
@@ -21,7 +22,8 @@
   },
   {
     "collection_label": "floods-water-built-environment",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "collection_page",
     "collection": "floods-water-built-environment",
@@ -41,7 +43,8 @@
   },
   {
     "collection_label": "related_content",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "related_content",
     "collection": "",
@@ -61,7 +64,8 @@
   },
   {
     "collection_label": "homepage_selected_core",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "homepage_selected_core",
     "collection": "",
@@ -81,7 +85,8 @@
   },
   {
     "collection_label": "the-ledger",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "collection_page",
     "collection": "the-ledger",
@@ -101,7 +106,8 @@
   },
   {
     "collection_label": "technology-ai-machine-future",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "collection_page",
     "collection": "technology-ai-machine-future",

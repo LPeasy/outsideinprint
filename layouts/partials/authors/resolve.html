@@ -41,7 +41,9 @@
   {{- $description := "" -}}
   {{- $focus := "" -}}
   {{- $bio := "" -}}
+  {{- $image := "" -}}
   {{- $parentOrganization := false -}}
+  {{- $authorPage := false -}}
 
   {{- if $entry -}}
     {{- $authorType = $entry.type | default "Person" -}}
@@ -58,6 +60,7 @@
     {{- with $entry.path -}}
       {{- $pathValue := printf "%v" . -}}
       {{- with site.GetPage $pathValue -}}
+        {{- $authorPage = . -}}
         {{- $url = .Permalink -}}
         {{- $relPermalink = .RelPermalink -}}
       {{- else -}}
@@ -77,6 +80,31 @@
     {{- end -}}
   {{- end -}}
 
+  {{- with $entry.image -}}
+    {{- $rawImage := printf "%v" . -}}
+    {{- if or (hasPrefix $rawImage "http://") (hasPrefix $rawImage "https://") -}}
+      {{- $image = $rawImage -}}
+    {{- else -}}
+      {{- $image = $rawImage | strings.TrimPrefix "/" | absURL -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if and (not $image) $authorPage -}}
+    {{- $authorImageParam := $authorPage.Params.image | default $authorPage.Params.featured_image | default $authorPage.Params.portrait -}}
+    {{- with $authorImageParam -}}
+      {{- $imagePath := printf "%v" . -}}
+      {{- with $authorPage.Resources.GetMatch $imagePath -}}
+        {{- $image = .Permalink -}}
+      {{- else -}}
+        {{- if or (hasPrefix $imagePath "http://") (hasPrefix $imagePath "https://") -}}
+          {{- $image = $imagePath -}}
+        {{- else -}}
+          {{- $image = $imagePath | relURL | absURL -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
   {{- $entries = $entries | append (dict
     "key" $lookupKey
     "node_id" $nodeID
@@ -88,6 +116,7 @@
     "description" $description
     "focus" $focus
     "bio" $bio
+    "image" $image
     "parent_organization" $parentOrganization
   ) -}}
 {{- end -}}

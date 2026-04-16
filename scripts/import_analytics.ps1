@@ -178,10 +178,242 @@ function Normalize-SectionLabel {
 }
 
 $SiteBasePath = Convert-ToText $env:GOATCOUNTER_SITE_BASE_PATH "/outsideinprint"
-$PublicSiteUrl = Convert-ToText $env:GOATCOUNTER_PUBLIC_SITE_URL "https://lpeasy.github.io/outsideinprint/"
+$PublicSiteUrl = Convert-ToText $env:GOATCOUNTER_PUBLIC_SITE_URL "https://outsideinprint.org/"
 $PublicSiteUri = $null
+$PublicSiteHost = ""
 if ($PublicSiteUrl) {
   [void][System.Uri]::TryCreate($PublicSiteUrl, [System.UriKind]::Absolute, [ref]$PublicSiteUri)
+  if ($null -ne $PublicSiteUri) {
+    $PublicSiteHost = Convert-ToText $PublicSiteUri.Host
+    if ($PublicSiteHost.StartsWith("www.")) {
+      $PublicSiteHost = $PublicSiteHost.Substring(4)
+    }
+    $PublicSiteHost = $PublicSiteHost.ToLowerInvariant()
+  }
+}
+
+$SearchEngineHosts = @(
+  "google.com",
+  "bing.com",
+  "duckduckgo.com",
+  "search.yahoo.com",
+  "yahoo.com",
+  "ecosia.org",
+  "search.brave.com",
+  "startpage.com",
+  "kagi.com"
+)
+$AiAnswerEngineHosts = @(
+  "chatgpt.com",
+  "chat.openai.com",
+  "claude.ai",
+  "perplexity.ai",
+  "gemini.google.com",
+  "copilot.microsoft.com"
+)
+$NewsletterHosts = @(
+  "buttondown.email",
+  "buttondown.com"
+)
+
+function Test-HostMatch {
+  param(
+    [string]$Candidate,
+    [string[]]$Hosts
+  )
+
+  $candidateText = Convert-ToText $Candidate
+  if (-not $candidateText) {
+    return $false
+  }
+
+  $candidateText = $candidateText.ToLowerInvariant()
+  foreach ($candidateHost in $Hosts) {
+    $hostText = (Convert-ToText $candidateHost).ToLowerInvariant()
+    if (-not $hostText) {
+      continue
+    }
+
+    if ($candidateText -eq $hostText -or $candidateText.EndsWith(".$hostText")) {
+      return $true
+    }
+  }
+
+  return $false
+}
+
+function Get-SourceDescriptor {
+  param([string]$Source)
+
+  $text = Convert-ToText $Source
+  if (-not $text) {
+    return [ordered]@{
+      text = ""
+      host = ""
+      path = ""
+    }
+  }
+
+  $candidateUri = $null
+  if ($text -match '^[a-z][a-z0-9+\-.]*://') {
+    $candidateUri = $text
+  } elseif ($text -match '^[A-Za-z0-9.-]+\.[A-Za-z]{2,}(/.*)?$') {
+    $candidateUri = "https://$text"
+  }
+
+  $normalizedHost = ""
+  $normalizedPath = ""
+  $uri = $null
+  if ($candidateUri -and [System.Uri]::TryCreate($candidateUri, [System.UriKind]::Absolute, [ref]$uri)) {
+    $normalizedHost = Convert-ToText $uri.Host
+    if ($normalizedHost.StartsWith("www.")) {
+      $normalizedHost = $normalizedHost.Substring(4)
+    }
+    $normalizedHost = $normalizedHost.ToLowerInvariant()
+    $normalizedPath = Convert-ToText $uri.AbsolutePath
+  }
+
+  return [ordered]@{
+    text = $text
+    host = $normalizedHost
+    path = $normalizedPath
+  }
+}
+
+function Test-IsLegacyDomainSource {
+  param([string]$Source)
+
+  $descriptor = Get-SourceDescriptor -Source $Source
+  if ($descriptor.host -eq "lpeasy.github.io") {
+    return ($descriptor.path -eq "/outsideinprint" -or $descriptor.path.StartsWith("/outsideinprint/"))
+  }
+
+  return $descriptor.text.ToLowerInvariant().StartsWith("lpeasy.github.io/outsideinprint")
+}
+
+function Test-IsCurrentSiteSource {
+  param([string]$Source)
+
+  if (-not $PublicSiteHost) {
+    return $false
+  }
+
+  $descriptor = Get-SourceDescriptor -Source $Source
+  if (-not $descriptor.host) {
+    return $false
+  }
+
+  return Test-HostMatch -Candidate $descriptor.host -Hosts @($PublicSiteHost)
+}
+
+function Test-IsNewsletterAttribution {
+  param(
+    [string]$Source,
+    [string]$Medium,
+    [string]$Campaign
+  )
+
+  $descriptor = Get-SourceDescriptor -Source $Source
+  $sourceText = $descriptor.text.ToLowerInvariant()
+  $mediumText = (Convert-ToText $Medium).ToLowerInvariant()
+  $campaignText = (Convert-ToText $Campaign).ToLowerInvariant()
+
+  if ($mediumText -in @("email", "newsletter")) {
+    return $true
+  }
+
+  if (Test-HostMatch -Candidate $descriptor.host -Hosts $NewsletterHosts) {
+    return $true
+  }
+
+  return (
+    $sourceText -match 'buttondown|newsletter' -or
+    $campaignText -match 'buttondown|newsletter'
+  )
+}
+
+function Test-IsAiAnswerEngineSource {
+  param([string]$Source)
+
+  $descriptor = Get-SourceDescriptor -Source $Source
+  $sourceText = $descriptor.text.ToLowerInvariant()
+
+  if (Test-HostMatch -Candidate $descriptor.host -Hosts $AiAnswerEngineHosts) {
+    return $true
+  }
+
+  return $sourceText -match '\b(chatgpt|openai|claude|perplexity|copilot|gemini)\b'
+}
+
+function Test-IsSearchEngineSource {
+  param([string]$Source)
+
+  $descriptor = Get-SourceDescriptor -Source $Source
+  $sourceText = $descriptor.text.ToLowerInvariant()
+
+  if (Test-HostMatch -Candidate $descriptor.host -Hosts $SearchEngineHosts) {
+    return $true
+  }
+
+  return $sourceText -match '\b(google|bing|duckduckgo|yahoo|ecosia|brave search|startpage|kagi)\b'
+}
+
+function Get-AcquisitionChannel {
+  param(
+    [string]$Source,
+    [string]$Medium = "",
+    [string]$Campaign = "",
+    [string]$FallbackType = ""
+  )
+
+  $sourceText = Convert-ToText $Source
+  $mediumText = Convert-ToText $Medium
+  $campaignText = Convert-ToText $Campaign
+  $fallback = (Convert-ToText $FallbackType).ToLowerInvariant()
+
+  if ($sourceText -eq "internal" -or $fallback -eq "internal-module" -or $fallback -eq "internal") {
+    return "internal"
+  }
+
+  if ($sourceText -eq "direct" -or $fallback -eq "direct") {
+    return "direct"
+  }
+
+  if (-not $sourceText -and -not $mediumText -and -not $campaignText -and -not $fallback) {
+    return "direct"
+  }
+
+  if (Test-IsLegacyDomainSource -Source $sourceText) {
+    return "legacy_domain"
+  }
+
+  if (Test-IsCurrentSiteSource -Source $sourceText) {
+    return "internal"
+  }
+
+  if (Test-IsNewsletterAttribution -Source $sourceText -Medium $mediumText -Campaign $campaignText) {
+    return "newsletter"
+  }
+
+  if (Test-IsAiAnswerEngineSource -Source $sourceText) {
+    return "ai_answer_engine"
+  }
+
+  if (Test-IsSearchEngineSource -Source $sourceText) {
+    return "organic_search"
+  }
+
+  switch ($fallback) {
+    "legacy_domain" { return "legacy_domain" }
+    "newsletter" { return "newsletter" }
+    "ai_answer_engine" { return "ai_answer_engine" }
+    "organic_search" { return "organic_search" }
+    "unknown" { return "direct" }
+    "campaign" { return "social_or_referral" }
+    "external" { return "social_or_referral" }
+  }
+
+  return "social_or_referral"
 }
 
 function Convert-ToBoolean {
@@ -901,7 +1133,7 @@ function Get-JourneyDiscoveryMode {
     [string]$Collection
   )
 
-  if ((Convert-ToText $ModuleSlot) -or (Convert-ToText $Collection) -or (Convert-ToText $DiscoveryType) -eq "internal-module") {
+  if ((Convert-ToText $ModuleSlot) -or (Convert-ToText $Collection) -or (Convert-ToText $DiscoveryType) -eq "internal") {
     return "module-driven"
   }
 
@@ -952,6 +1184,7 @@ function Convert-JourneyAggregateToRecord {
   $record = [ordered]@{}
   $record[$LabelFieldName] = Convert-ToText $Aggregate.label
   if ($Aggregate.ContainsKey("discovery_type")) { $record["discovery_type"] = Convert-ToText $Aggregate.discovery_type }
+  if ($Aggregate.ContainsKey("discovery_type")) { $record["acquisition_channel"] = Convert-ToText $Aggregate.discovery_type }
   if ($Aggregate.ContainsKey("discovery_mode")) { $record["discovery_mode"] = Convert-ToText $Aggregate.discovery_mode }
   if ($Aggregate.ContainsKey("module_slot")) { $record["module_slot"] = Convert-ToText $Aggregate.module_slot }
   if ($Aggregate.ContainsKey("collection")) { $record["collection"] = Convert-ToText $Aggregate.collection }
@@ -978,24 +1211,7 @@ function Get-SourceType {
   $source = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("source"))
   $medium = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("medium"))
   $campaign = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("campaign"))
-
-  if ($source -eq "internal") {
-    return "internal"
-  }
-
-  if ($source -eq "direct") {
-    return "direct"
-  }
-
-  if ($campaign -or $medium -eq "campaign" -or $medium -eq "generated") {
-    return "campaign"
-  }
-
-  if (-not $source) {
-    return "unknown"
-  }
-
-  return "external"
+  return (Get-AcquisitionChannel -Source $source -Medium $medium -Campaign $campaign)
 }
 
 function Get-DailySparkline {
@@ -1138,6 +1354,7 @@ function New-SourceAggregate {
     medium = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("medium"))
     campaign = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("campaign"))
     content = Convert-ToText (Get-FieldValue -Row $Attribution -Aliases @("content"))
+    acquisition_channel = Get-SourceType -Attribution $Attribution
     pageviews = 0.0
     reads = 0.0
     sessions = New-Object "System.Collections.Generic.HashSet[string]"
@@ -1180,6 +1397,8 @@ function Get-GoatCounterSources {
         medium = $entry.medium
         campaign = $entry.campaign
         content = $entry.content
+        acquisition_channel = $entry.acquisition_channel
+        source_type = $entry.acquisition_channel
         visitors = [double]$entry.sessions.Count
         pageviews = [double]$entry.pageviews
         reads = [double]$entry.reads
@@ -1764,6 +1983,7 @@ function Get-GoatCounterSourcesTimeseries {
       [ordered]@{
         date = $entry.date
         source_type = $entry.source_type
+        acquisition_channel = $entry.source_type
         source = $entry.source
         pageviews = [double]$entry.pageviews
         reads = [double]$entry.reads
@@ -1913,11 +2133,22 @@ function Normalize-Sources {
   $normalized = @()
 
   foreach ($row in $rows) {
+    $source = Convert-ToText (Get-FieldValue -Row $row -Aliases @("source", "utm_source"))
+    $medium = Convert-ToText (Get-FieldValue -Row $row -Aliases @("medium", "utm_medium"))
+    $campaign = Convert-ToText (Get-FieldValue -Row $row -Aliases @("campaign", "utm_campaign"))
+    $channel = Get-AcquisitionChannel `
+      -Source $source `
+      -Medium $medium `
+      -Campaign $campaign `
+      -FallbackType (Get-FieldValue -Row $row -Aliases @("acquisition_channel", "source_type", "type"))
+
     $normalized += [ordered]@{
-      source = Convert-ToText (Get-FieldValue -Row $row -Aliases @("source", "utm_source"))
-      medium = Convert-ToText (Get-FieldValue -Row $row -Aliases @("medium", "utm_medium"))
-      campaign = Convert-ToText (Get-FieldValue -Row $row -Aliases @("campaign", "utm_campaign"))
+      source = $source
+      medium = $medium
+      campaign = $campaign
       content = Convert-ToText (Get-FieldValue -Row $row -Aliases @("content", "utm_content"))
+      acquisition_channel = $channel
+      source_type = $channel
       visitors = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("visitors", "unique_visitors"))
       pageviews = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pageviews", "views"))
       reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
@@ -2083,7 +2314,37 @@ function Normalize-Journeys {
     return ,@()
   }
 
-  return ,@($InputData)
+  return ,@(
+    foreach ($row in @($InputData)) {
+      $discoverySource = Convert-ToText (Get-FieldValue -Row $row -Aliases @("discovery_source", "source", "label"))
+      $moduleSlot = Convert-ToText (Get-FieldValue -Row $row -Aliases @("module_slot"))
+      $collection = Convert-ToText (Get-FieldValue -Row $row -Aliases @("collection"))
+      $fallbackType = Convert-ToText (Get-FieldValue -Row $row -Aliases @("acquisition_channel", "discovery_type", "source_type", "type"))
+      if ((-not $fallbackType) -and ($moduleSlot -or $collection)) {
+        $fallbackType = "internal"
+      }
+      $channel = Get-AcquisitionChannel -Source $discoverySource -FallbackType $fallbackType
+
+      [ordered]@{
+        discovery_source = $discoverySource
+        discovery_type = $channel
+        acquisition_channel = $channel
+        discovery_mode = Convert-ToText (Get-FieldValue -Row $row -Aliases @("discovery_mode"))
+        module_slot = $moduleSlot
+        collection = $collection
+        slug = Convert-ToText (Get-FieldValue -Row $row -Aliases @("slug"))
+        path = Convert-ToText (Get-FieldValue -Row $row -Aliases @("path"))
+        title = Convert-ToText (Get-FieldValue -Row $row -Aliases @("title"))
+        section = Normalize-SectionLabel -Value (Get-FieldValue -Row $row -Aliases @("section")) -Fallback ""
+        views = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("views", "pageviews"))
+        reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
+        pdf_downloads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_downloads"))
+        newsletter_submits = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_submits"))
+        approximate_downstream = Convert-ToBoolean (Get-FieldValue -Row $row -Aliases @("approximate_downstream")) $true
+        attribution_note = Convert-ToText (Get-FieldValue -Row $row -Aliases @("attribution_note")) "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+      }
+    }
+  )
 }
 
 function Normalize-JourneyBySource {
@@ -2093,7 +2354,35 @@ function Normalize-JourneyBySource {
     return ,@()
   }
 
-  return ,@($InputData)
+  return ,@(
+    foreach ($row in @($InputData)) {
+      $source = Convert-ToText (Get-FieldValue -Row $row -Aliases @("discovery_source", "label", "source"))
+      $fallbackType = Convert-ToText (Get-FieldValue -Row $row -Aliases @("acquisition_channel", "discovery_type", "source_type", "type"))
+      $channel = Get-AcquisitionChannel -Source $source -FallbackType $fallbackType
+
+      [ordered]@{
+        discovery_source = $source
+        discovery_type = $channel
+        acquisition_channel = $channel
+        discovery_mode = Convert-ToText (Get-FieldValue -Row $row -Aliases @("discovery_mode"))
+        module_slot = Convert-ToText (Get-FieldValue -Row $row -Aliases @("module_slot"))
+        collection = Convert-ToText (Get-FieldValue -Row $row -Aliases @("collection"))
+        section = Normalize-SectionLabel -Value (Get-FieldValue -Row $row -Aliases @("section")) -Fallback ""
+        slug = Convert-ToText (Get-FieldValue -Row $row -Aliases @("slug"))
+        path = Convert-ToText (Get-FieldValue -Row $row -Aliases @("path"))
+        title = Convert-ToText (Get-FieldValue -Row $row -Aliases @("title"))
+        views = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("views", "pageviews"))
+        reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
+        read_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("read_rate"))
+        pdf_downloads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_downloads"))
+        pdf_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_rate"))
+        newsletter_submits = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_submits"))
+        newsletter_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_rate"))
+        approximate_downstream = Convert-ToBoolean (Get-FieldValue -Row $row -Aliases @("approximate_downstream")) $true
+        attribution_note = Convert-ToText (Get-FieldValue -Row $row -Aliases @("attribution_note")) "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+      }
+    }
+  )
 }
 
 function Normalize-JourneyByCollection {
@@ -2103,7 +2392,41 @@ function Normalize-JourneyByCollection {
     return ,@()
   }
 
-  return ,@($InputData)
+  return ,@(
+    foreach ($row in @($InputData)) {
+      $moduleSlot = Convert-ToText (Get-FieldValue -Row $row -Aliases @("module_slot"))
+      $collection = Convert-ToText (Get-FieldValue -Row $row -Aliases @("collection"))
+      $fallbackType = Convert-ToText (Get-FieldValue -Row $row -Aliases @("acquisition_channel", "discovery_type", "source_type", "type"))
+      if ((-not $fallbackType) -and ($moduleSlot -or $collection)) {
+        $fallbackType = "internal"
+      }
+      $channel = Get-AcquisitionChannel `
+        -Source (Convert-ToText (Get-FieldValue -Row $row -Aliases @("collection_label", "collection", "module_slot"))) `
+        -FallbackType $fallbackType
+
+      [ordered]@{
+        collection_label = Convert-ToText (Get-FieldValue -Row $row -Aliases @("collection_label", "label"))
+        discovery_type = $channel
+        acquisition_channel = $channel
+        discovery_mode = Convert-ToText (Get-FieldValue -Row $row -Aliases @("discovery_mode"))
+        module_slot = $moduleSlot
+        collection = $collection
+        section = Normalize-SectionLabel -Value (Get-FieldValue -Row $row -Aliases @("section")) -Fallback ""
+        slug = Convert-ToText (Get-FieldValue -Row $row -Aliases @("slug"))
+        path = Convert-ToText (Get-FieldValue -Row $row -Aliases @("path"))
+        title = Convert-ToText (Get-FieldValue -Row $row -Aliases @("title"))
+        views = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("views", "pageviews"))
+        reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
+        read_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("read_rate"))
+        pdf_downloads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_downloads"))
+        pdf_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_rate"))
+        newsletter_submits = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_submits"))
+        newsletter_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_rate"))
+        approximate_downstream = Convert-ToBoolean (Get-FieldValue -Row $row -Aliases @("approximate_downstream")) $true
+        attribution_note = Convert-ToText (Get-FieldValue -Row $row -Aliases @("attribution_note")) "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+      }
+    }
+  )
 }
 
 function Normalize-JourneyByEssay {
@@ -2113,7 +2436,35 @@ function Normalize-JourneyByEssay {
     return ,@()
   }
 
-  return ,@($InputData)
+  return ,@(
+    foreach ($row in @($InputData)) {
+      $fallbackType = Convert-ToText (Get-FieldValue -Row $row -Aliases @("acquisition_channel", "discovery_type", "source_type", "type"))
+      $channel = Get-AcquisitionChannel `
+        -Source (Convert-ToText (Get-FieldValue -Row $row -Aliases @("title"))) `
+        -FallbackType $fallbackType
+
+      [ordered]@{
+        title = Convert-ToText (Get-FieldValue -Row $row -Aliases @("title"))
+        discovery_type = $channel
+        acquisition_channel = $channel
+        discovery_mode = Convert-ToText (Get-FieldValue -Row $row -Aliases @("discovery_mode"))
+        module_slot = Convert-ToText (Get-FieldValue -Row $row -Aliases @("module_slot"))
+        collection = Convert-ToText (Get-FieldValue -Row $row -Aliases @("collection"))
+        section = Normalize-SectionLabel -Value (Get-FieldValue -Row $row -Aliases @("section")) -Fallback ""
+        slug = Convert-ToText (Get-FieldValue -Row $row -Aliases @("slug"))
+        path = Convert-ToText (Get-FieldValue -Row $row -Aliases @("path"))
+        views = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("views", "pageviews"))
+        reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
+        read_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("read_rate"))
+        pdf_downloads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_downloads"))
+        pdf_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_rate"))
+        newsletter_submits = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_submits"))
+        newsletter_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_rate"))
+        approximate_downstream = Convert-ToBoolean (Get-FieldValue -Row $row -Aliases @("approximate_downstream")) $true
+        attribution_note = Convert-ToText (Get-FieldValue -Row $row -Aliases @("attribution_note")) "Pageviews are measured directly. Read, PDF, and newsletter steps are approximate same-session downstream events."
+      }
+    }
+  )
 }
 
 function Normalize-SourcesTimeseries {
@@ -2123,7 +2474,28 @@ function Normalize-SourcesTimeseries {
     return ,@()
   }
 
-  return ,@($InputData)
+  return ,@(
+    foreach ($row in @($InputData)) {
+      $source = Convert-ToText (Get-FieldValue -Row $row -Aliases @("source"))
+      $channel = Get-AcquisitionChannel `
+        -Source $source `
+        -Medium (Get-FieldValue -Row $row -Aliases @("medium")) `
+        -Campaign (Get-FieldValue -Row $row -Aliases @("campaign")) `
+        -FallbackType (Get-FieldValue -Row $row -Aliases @("acquisition_channel", "source_type", "type"))
+
+      [ordered]@{
+        date = Convert-ToText (Get-FieldValue -Row $row -Aliases @("date", "day"))
+        source_type = $channel
+        acquisition_channel = $channel
+        source = $source
+        pageviews = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pageviews", "views"))
+        reads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("reads"))
+        read_rate = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("read_rate"))
+        pdf_downloads = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("pdf_downloads"))
+        newsletter_submits = Convert-ToNumber (Get-FieldValue -Row $row -Aliases @("newsletter_submits"))
+      }
+    }
+  )
 }
 
 Write-Host "Outside In Print ~ Import Analytics" -ForegroundColor Cyan

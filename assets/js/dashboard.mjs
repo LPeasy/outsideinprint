@@ -2,6 +2,7 @@ import {
   METRICS,
   buildDashboardModel,
   createState,
+  formatSourceTypeLabel,
   formatMetricValue,
   rowsToCsv,
   serializeState
@@ -775,7 +776,7 @@ function renderFunnelRefined(root, model) {
     <div class="dashboard-journey-comparison">
       <div class="dashboard-journey-comparison__header">
         <h3>Source-type conversion</h3>
-        <p>Compare internal, external, campaign, and direct discovery without pretending the downstream steps are directly observed attribution chains.</p>
+        <p>Compare internal, search, newsletter, referral, and direct discovery without pretending the downstream steps are directly observed attribution chains.</p>
       </div>
       <div class="dashboard-journey-bars">
         ${model.funnel.sourceFunnel.length
@@ -784,7 +785,7 @@ function renderFunnelRefined(root, model) {
                 (row) => `
                   <article class="dashboard-journey-bar">
                     <div class="dashboard-journey-bar__topline">
-                      <span>${escapeHtml(row.label)}</span>
+                      <span>${escapeHtml(formatSourceTypeLabel(row.label))}</span>
                       <span>${row.read_rate.toFixed(1)}%</span>
                     </div>
                     <div class="dashboard-journey-bar__track"><span style="width:${(row.views / maxSourceViews) * 100}%"></span></div>
@@ -832,7 +833,7 @@ function renderFunnelRefined(root, model) {
                   (path) => `
                     <article class="dashboard-journey">
                       <div>
-                        <p class="dashboard-journey__kicker">${escapeHtml(path.discovery_type.replace(/-/g, " "))}</p>
+                        <p class="dashboard-journey__kicker">${escapeHtml(formatSourceTypeLabel(path.discovery_type))}</p>
                         <h3>${escapeHtml(path.discovery_source)}</h3>
                         <p>${escapeHtml(path.title)}</p>
                       </div>
@@ -853,6 +854,24 @@ function renderSourcesRefined(root, model, state) {
     return;
   }
   root.innerHTML = `
+    <div class="dashboard-kpis">
+      <article class="dashboard-kpi">
+        <p class="dashboard-kpi__label">True external acquisition</p>
+        <p class="dashboard-kpi__value">${model.sources.summary.externalPageviews}</p>
+      </article>
+      <article class="dashboard-kpi">
+        <p class="dashboard-kpi__label">Self-referrals removed</p>
+        <p class="dashboard-kpi__value">${model.sources.summary.selfReferralPageviews}</p>
+      </article>
+      <article class="dashboard-kpi">
+        <p class="dashboard-kpi__label">Search and answer engines</p>
+        <p class="dashboard-kpi__value">${model.sources.summary.searchPageviews}</p>
+      </article>
+      <article class="dashboard-kpi">
+        <p class="dashboard-kpi__label">AI answer engines</p>
+        <p class="dashboard-kpi__value">${model.sources.summary.aiAnswerEnginePageviews}</p>
+      </article>
+    </div>
     <div class="dashboard-source-list">
       ${model.sources.rows.length
         ? model.sources.rows
@@ -861,7 +880,7 @@ function renderSourcesRefined(root, model, state) {
               return `
                 <article class="dashboard-source">
                   <div>
-                    <p class="dashboard-source__kicker">${state.scale === "rate" ? "Efficiency" : "Scale"}</p>
+                    <p class="dashboard-source__kicker">${escapeHtml(formatSourceTypeLabel(source.source_type))}</p>
                     <h3>${escapeHtml(source.source)}</h3>
                     <p>${label}</p>
                   </div>
@@ -950,7 +969,7 @@ function initDashboard() {
     .map((section) => `<option value="${escapeHtml(section)}">${escapeHtml(section)}</option>`)
     .join("")}`;
   controls.sourceType.innerHTML = `<option value="all">All source types</option>${data.sourceTypeOptions
-    .map((type) => `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`)
+    .map((type) => `<option value="${escapeHtml(type)}">${escapeHtml(formatSourceTypeLabel(type))}</option>`)
     .join("")}`;
 
   let state = createState(data, window.location.search);

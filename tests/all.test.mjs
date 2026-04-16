@@ -1,0 +1,7 @@
+import "./dashboard_v2_categories.test.mjs";
+import "./dashboard_v2_design.test.mjs";
+import "./dashboard_v2_logic.test.mjs";
+import "./homepage_selected.test.mjs";
+import "./layout_ownership_contract.test.mjs";
+import "./site_chrome_contract.test.mjs";
+import "./web_publishing_direction.test.mjs";

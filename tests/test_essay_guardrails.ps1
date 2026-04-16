@@ -87,6 +87,7 @@ slug: "clean-essay"
 section_label: "Essay"
 subtitle: ""
 description: "A clean essay fixture."
+featured_image: "/images/social/clean-essay.png"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/clean-essay.pdf"
@@ -147,10 +148,20 @@ This paragraph is fine.
   Assert-True ($requireDescriptionExit -eq 1) "Expected RequireDescription to fail essays missing explicit descriptions."
   Assert-True ($requireDescriptionOutput.Contains("missing_description")) "Expected RequireDescription output to include missing_description as a blocker."
 
+  $blockerRequireFeaturedImageOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/blocker.md" -RequireFeaturedImage 2>&1 | Out-String
+  $blockerRequireFeaturedImageExit = $LASTEXITCODE
+  Assert-True ($blockerRequireFeaturedImageExit -eq 1) "Expected RequireFeaturedImage to keep failing essays without explicit social images."
+  Assert-True ($blockerRequireFeaturedImageOutput.Contains("BLOCKER essays/blocker.md")) "Expected RequireFeaturedImage output to keep identifying the failing essay."
+
   $cleanOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" 2>&1 | Out-String
   $cleanExit = $LASTEXITCODE
   Assert-True ($cleanExit -eq 0) "Expected clean essay to pass the guardrail check."
   Assert-True ($cleanOutput.Contains("Essay guardrails PASSED.")) "Expected clean essay output to report success."
+
+  $cleanRequireFeaturedImageOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" -RequireFeaturedImage 2>&1 | Out-String
+  $cleanRequireFeaturedImageExit = $LASTEXITCODE
+  Assert-True ($cleanRequireFeaturedImageExit -eq 0) "Expected essays with featured_image to satisfy RequireFeaturedImage."
+  Assert-True ($cleanRequireFeaturedImageOutput.Contains("Essay guardrails PASSED.")) "Expected RequireFeaturedImage clean output to report success."
 
   $slugEchoOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/slug-echo.md" 2>&1 | Out-String
   $slugEchoExit = $LASTEXITCODE

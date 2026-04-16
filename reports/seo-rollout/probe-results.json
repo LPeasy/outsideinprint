@@ -1,0 +1,596 @@
+{
+  "generated_at": "2026-04-15T15:48:49.9733035-04:00",
+  "canonical_base_url": "https://outsideinprint.org",
+  "llms_probe": {
+    "url": "https://outsideinprint.org/llms.txt",
+    "reachable": false,
+    "contains_canonical_url": false,
+    "issues": [
+      "The SSL connection could not be established, see inner exception."
+    ]
+  },
+  "summary": {
+    "generated_at": "2026-04-15T15:48:49.9689604-04:00",
+    "canonical_base_url": "https://outsideinprint.org",
+    "canonical_pages_total": 15,
+    "canonical_pages_passed": 0,
+    "legacy_pages_total": 15,
+    "legacy_redirects_passing": 0,
+    "llms_reachable": false,
+    "llms_contains_canonical_url": false
+  },
+  "canonical_results": [
+    {
+      "probe_type": "canonical",
+      "title": "Homepage",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/",
+      "url": "https://outsideinprint.org/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "WebSite",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "About",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/about/",
+      "url": "https://outsideinprint.org/about/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "AboutPage",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "Robert V. Ussley",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/authors/robert-v-ussley/",
+      "url": "https://outsideinprint.org/authors/robert-v-ussley/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "ProfilePage",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "Collections",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/collections/",
+      "url": "https://outsideinprint.org/collections/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "CollectionPage",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "Risk, Uncertainty, and Decision-Making",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/collections/risk-uncertainty/",
+      "url": "https://outsideinprint.org/collections/risk-uncertainty/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "CollectionPage",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "Returning to the Gold Standard Will Break the Economy",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "url": "https://outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "The 100-Year Flood Is Not What You Think",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/the-100-year-flood-is-not-what-you-think/",
+      "url": "https://outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "2025 Supreme Court Wrap-Up",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/2025-supreme-court-wrap-up/",
+      "url": "https://outsideinprint.org/essays/2025-supreme-court-wrap-up/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "What Is Risk? A Four-Part Framework",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/what-is-risk-a-four-part-framework/",
+      "url": "https://outsideinprint.org/essays/what-is-risk-a-four-part-framework/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "35 Years of Yellow: The Simpsons Time Loop",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "url": "https://outsideinprint.org/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "6 Reasons Redwall Is a Timeless Classic",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "url": "https://outsideinprint.org/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "AI in Education Is a Wicked Problem",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/ai-in-education-is-a-wicked-problem/",
+      "url": "https://outsideinprint.org/essays/ai-in-education-is-a-wicked-problem/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "The Dolphin Company",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/the-dolphin-company/",
+      "url": "https://outsideinprint.org/essays/the-dolphin-company/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "The Fair Price of Bitcoin: $69,420",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/the-fair-price-of-bitcoin-69420/",
+      "url": "https://outsideinprint.org/essays/the-fair-price-of-bitcoin-69420/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    },
+    {
+      "probe_type": "canonical",
+      "title": "Beyond Moore’s Law",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/beyond-moores-law/",
+      "url": "https://outsideinprint.org/essays/beyond-moores-law/",
+      "status_code": 0,
+      "final_url": "",
+      "canonical_href": "",
+      "robots": "",
+      "has_og_image": false,
+      "has_twitter_image": false,
+      "rss_feed_count": 0,
+      "rss_feed_urls": [],
+      "expected_jsonld_type": "Article",
+      "jsonld_types": [],
+      "smoke_passed": false,
+      "issues": [
+        "The SSL connection could not be established, see inner exception."
+      ]
+    }
+  ],
+  "legacy_results": [
+    {
+      "probe_type": "legacy",
+      "title": "Homepage",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/",
+      "url": "https://lpeasy.github.io/outsideinprint/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "About",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/about/",
+      "url": "https://lpeasy.github.io/outsideinprint/about/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "Robert V. Ussley",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/authors/robert-v-ussley/",
+      "url": "https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "Collections",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/collections/",
+      "url": "https://lpeasy.github.io/outsideinprint/collections/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "Risk, Uncertainty, and Decision-Making",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "path": "/collections/risk-uncertainty/",
+      "url": "https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "Returning to the Gold Standard Will Break the Economy",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "The 100-Year Flood Is Not What You Think",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/the-100-year-flood-is-not-what-you-think/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "2025 Supreme Court Wrap-Up",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/2025-supreme-court-wrap-up/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/2025-supreme-court-wrap-up/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "What Is Risk? A Four-Part Framework",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/what-is-risk-a-four-part-framework/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "35 Years of Yellow: The Simpsons Time Loop",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "6 Reasons Redwall Is a Timeless Classic",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "AI in Education Is a Wicked Problem",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/ai-in-education-is-a-wicked-problem/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/ai-in-education-is-a-wicked-problem/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "The Dolphin Company",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/the-dolphin-company/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/the-dolphin-company/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "The Fair Price of Bitcoin: $69,420",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/the-fair-price-of-bitcoin-69420/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/the-fair-price-of-bitcoin-69420/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    },
+    {
+      "probe_type": "legacy",
+      "title": "Beyond Moore’s Law",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "path": "/essays/beyond-moores-law/",
+      "url": "https://lpeasy.github.io/outsideinprint/essays/beyond-moores-law/",
+      "status_code": 0,
+      "final_url": "",
+      "redirect_location": "",
+      "classification": "broken_or_stale",
+      "redirect_requirement_met": false,
+      "redirect_hops": [
+        "Exception calling \"GetResult\" with \"0\" argument(s): \"The SSL connection could not be established, see inner exception.\""
+      ]
+    }
+  ]
+}

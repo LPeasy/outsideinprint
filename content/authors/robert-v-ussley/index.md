@@ -1,6 +1,7 @@
 ---
 title: "Robert V. Ussley"
 description: "Essays by Robert V. Ussley on risk, institutions, technology, public life, and the systems people live inside."
+image: "Bobviously_Portrait_v1.png"
 draft: false
 show_citation: false
 section_label: "Author"

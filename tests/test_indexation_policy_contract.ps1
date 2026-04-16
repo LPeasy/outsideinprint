@@ -22,6 +22,7 @@ foreach ($requiredSnippet in @(
   'partial "collections/lookup-definition.html"',
   'eq $route.name "utility"',
   'eq $route.name "section-list"',
+  'slice "index" "follow" "max-image-preview:large"',
   'slice "noindex" "follow"',
   '"in_sitemap"'
 )) {
@@ -60,7 +61,19 @@ if ($baseTemplate -notmatch '<meta name="robots" content="\{\{ delimit \. ", " \
 }
 
 $robotsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/robots.txt') -Raw
-foreach ($requiredLine in @('User-agent: *', 'Allow: /', 'Sitemap: {{ "sitemap.xml" | absURL }}')) {
+foreach ($requiredLine in @(
+  'User-agent: OAI-SearchBot',
+  'User-agent: Claude-SearchBot',
+  'User-agent: Claude-User',
+  'User-agent: PerplexityBot',
+  'User-agent: GPTBot',
+  'User-agent: ClaudeBot',
+  'User-agent: Google-Extended',
+  'User-agent: *',
+  'Allow: /',
+  'Disallow: /',
+  'Sitemap: {{ "sitemap.xml" | absURL }}'
+)) {
   if ($robotsTemplate -notmatch [regex]::Escape($requiredLine)) {
     throw "Expected layouts/robots.txt to include: $requiredLine"
   }

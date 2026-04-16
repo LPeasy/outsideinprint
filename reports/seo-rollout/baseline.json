@@ -1,0 +1,447 @@
+{
+  "generated_at": "2026-04-15T15:15:08.1226599-04:00",
+  "canonical_base_url": "https://outsideinprint.org",
+  "legacy_base_url": "https://lpeasy.github.io/outsideinprint",
+  "data_snapshot": {
+    "updated_at": "2026-04-14",
+    "range_label": "All time",
+    "pageviews": 1146,
+    "unique_visitors": 117,
+    "reads": 5,
+    "read_rate": 0.4,
+    "pdf_downloads": 54,
+    "newsletter_submits": 5
+  },
+  "acquisition_channels": [
+    {
+      "acquisition_channel": "internal",
+      "pageviews": 854,
+      "visitors": 301,
+      "reads": 5,
+      "source_rows": 95
+    },
+    {
+      "acquisition_channel": "legacy_domain",
+      "pageviews": 139,
+      "visitors": 57,
+      "reads": 0,
+      "source_rows": 25
+    },
+    {
+      "acquisition_channel": "direct",
+      "pageviews": 137,
+      "visitors": 88,
+      "reads": 0,
+      "source_rows": 1
+    },
+    {
+      "acquisition_channel": "organic_search",
+      "pageviews": 9,
+      "visitors": 9,
+      "reads": 0,
+      "source_rows": 2
+    },
+    {
+      "acquisition_channel": "social_or_referral",
+      "pageviews": 7,
+      "visitors": 6,
+      "reads": 0,
+      "source_rows": 3
+    }
+  ],
+  "top_journey_essays": [
+    {
+      "title": "Returning to the Gold Standard Will Break the Economy",
+      "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "slug": "why-a-return-to-the-gold-standard-would-break-the-economy",
+      "section": "Essays",
+      "pageviews": 14,
+      "reads": 0,
+      "pdf_downloads": 0,
+      "newsletter_submits": 1
+    },
+    {
+      "title": "The 100-Year Flood Is Not What You Think",
+      "path": "/essays/the-100-year-flood-is-not-what-you-think/",
+      "slug": "the-100-year-flood-is-not-what-you-think",
+      "section": "Essays",
+      "pageviews": 13,
+      "reads": 1,
+      "pdf_downloads": 2,
+      "newsletter_submits": 0
+    },
+    {
+      "title": "2025 Supreme Court Wrap-Up",
+      "path": "/essays/2025-supreme-court-wrap-up/",
+      "slug": "2025-supreme-court-wrap-up",
+      "section": "Essays",
+      "pageviews": 10,
+      "reads": 0,
+      "pdf_downloads": 1,
+      "newsletter_submits": 0
+    },
+    {
+      "title": "What Is Risk? A Four-Part Framework",
+      "path": "/essays/what-is-risk-a-four-part-framework/",
+      "slug": "what-is-risk-a-four-part-framework",
+      "section": "Essays",
+      "pageviews": 10,
+      "reads": 0,
+      "pdf_downloads": 1,
+      "newsletter_submits": 0
+    },
+    {
+      "title": "35 Years of Yellow: The Simpsons Time Loop",
+      "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "slug": "35-years-of-yellow-the-simpsons-time-loop",
+      "section": "Essays",
+      "pageviews": 8,
+      "reads": 0,
+      "pdf_downloads": 0,
+      "newsletter_submits": 0
+    },
+    {
+      "title": "6 Reasons Redwall Is a Timeless Classic",
+      "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "slug": "6-reasons-redwall-is-a-timeless-classic",
+      "section": "Essays",
+      "pageviews": 8,
+      "reads": 0,
+      "pdf_downloads": 1,
+      "newsletter_submits": 1
+    },
+    {
+      "title": "AI in Education Is a Wicked Problem",
+      "path": "/essays/ai-in-education-is-a-wicked-problem/",
+      "slug": "ai-in-education-is-a-wicked-problem",
+      "section": "Essays",
+      "pageviews": 8,
+      "reads": 0,
+      "pdf_downloads": 0,
+      "newsletter_submits": 1
+    },
+    {
+      "title": "The Dolphin Company",
+      "path": "/essays/the-dolphin-company/",
+      "slug": "the-dolphin-company",
+      "section": "Essays",
+      "pageviews": 8,
+      "reads": 1,
+      "pdf_downloads": 3,
+      "newsletter_submits": 0
+    },
+    {
+      "title": "The Fair Price of Bitcoin: $69,420",
+      "path": "/essays/the-fair-price-of-bitcoin-69420/",
+      "slug": "the-fair-price-of-bitcoin-69420",
+      "section": "Essays",
+      "pageviews": 8,
+      "reads": 0,
+      "pdf_downloads": 0,
+      "newsletter_submits": 0
+    },
+    {
+      "title": "Beyond Moore’s Law",
+      "path": "/essays/beyond-moores-law/",
+      "slug": "beyond-moores-law",
+      "section": "Essays",
+      "pageviews": 7,
+      "reads": 0,
+      "pdf_downloads": 0,
+      "newsletter_submits": 0
+    }
+  ],
+  "top_external_essays": [
+    {
+      "title": "The Fair Price of Bitcoin: $69,420",
+      "path": "/essays/the-fair-price-of-bitcoin-69420/",
+      "slug": "the-fair-price-of-bitcoin-69420",
+      "section": "Essays",
+      "pageviews": 4,
+      "reads": 0,
+      "pdf_downloads": 0,
+      "newsletter_submits": 0
+    },
+    {
+      "title": "Life Is a Bull Market",
+      "path": "/essays/life-is-a-bull-market/",
+      "slug": "life-is-a-bull-market",
+      "section": "Essays",
+      "pageviews": 1,
+      "reads": 0,
+      "pdf_downloads": 0,
+      "newsletter_submits": 0
+    }
+  ],
+  "priority_urls": [
+    {
+      "path": "/",
+      "canonical_url": "https://outsideinprint.org/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "title": "Homepage",
+      "views": 1146
+    },
+    {
+      "path": "/about/",
+      "canonical_url": "https://outsideinprint.org/about/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/about/",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "title": "About",
+      "views": 0
+    },
+    {
+      "path": "/authors/robert-v-ussley/",
+      "canonical_url": "https://outsideinprint.org/authors/robert-v-ussley/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "title": "Robert V. Ussley",
+      "views": 0
+    },
+    {
+      "path": "/collections/",
+      "canonical_url": "https://outsideinprint.org/collections/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/collections/",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "title": "Collections",
+      "views": 0
+    },
+    {
+      "path": "/collections/risk-uncertainty/",
+      "canonical_url": "https://outsideinprint.org/collections/risk-uncertainty/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/",
+      "priority_tier": "tier_1",
+      "kind": "core",
+      "title": "Risk, Uncertainty, and Decision-Making",
+      "views": 0
+    },
+    {
+      "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "canonical_url": "https://outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "Returning to the Gold Standard Will Break the Economy",
+      "views": 14
+    },
+    {
+      "path": "/essays/the-100-year-flood-is-not-what-you-think/",
+      "canonical_url": "https://outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "The 100-Year Flood Is Not What You Think",
+      "views": 13
+    },
+    {
+      "path": "/essays/2025-supreme-court-wrap-up/",
+      "canonical_url": "https://outsideinprint.org/essays/2025-supreme-court-wrap-up/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/2025-supreme-court-wrap-up/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "2025 Supreme Court Wrap-Up",
+      "views": 10
+    },
+    {
+      "path": "/essays/what-is-risk-a-four-part-framework/",
+      "canonical_url": "https://outsideinprint.org/essays/what-is-risk-a-four-part-framework/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "What Is Risk? A Four-Part Framework",
+      "views": 10
+    },
+    {
+      "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "canonical_url": "https://outsideinprint.org/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "35 Years of Yellow: The Simpsons Time Loop",
+      "views": 8
+    },
+    {
+      "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "canonical_url": "https://outsideinprint.org/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "6 Reasons Redwall Is a Timeless Classic",
+      "views": 8
+    },
+    {
+      "path": "/essays/ai-in-education-is-a-wicked-problem/",
+      "canonical_url": "https://outsideinprint.org/essays/ai-in-education-is-a-wicked-problem/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/ai-in-education-is-a-wicked-problem/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "AI in Education Is a Wicked Problem",
+      "views": 8
+    },
+    {
+      "path": "/essays/the-dolphin-company/",
+      "canonical_url": "https://outsideinprint.org/essays/the-dolphin-company/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/the-dolphin-company/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "The Dolphin Company",
+      "views": 8
+    },
+    {
+      "path": "/essays/the-fair-price-of-bitcoin-69420/",
+      "canonical_url": "https://outsideinprint.org/essays/the-fair-price-of-bitcoin-69420/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/the-fair-price-of-bitcoin-69420/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "The Fair Price of Bitcoin: $69,420",
+      "views": 8
+    },
+    {
+      "path": "/essays/beyond-moores-law/",
+      "canonical_url": "https://outsideinprint.org/essays/beyond-moores-law/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/beyond-moores-law/",
+      "priority_tier": "tier_2",
+      "kind": "essay",
+      "title": "Beyond Moore’s Law",
+      "views": 7
+    }
+  ],
+  "legacy_sample_urls": [
+    {
+      "title": "Homepage",
+      "path": "/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/",
+      "expected_canonical_url": "https://outsideinprint.org/",
+      "priority_tier": "tier_1",
+      "kind": "core"
+    },
+    {
+      "title": "About",
+      "path": "/about/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/about/",
+      "expected_canonical_url": "https://outsideinprint.org/about/",
+      "priority_tier": "tier_1",
+      "kind": "core"
+    },
+    {
+      "title": "Robert V. Ussley",
+      "path": "/authors/robert-v-ussley/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/authors/robert-v-ussley/",
+      "expected_canonical_url": "https://outsideinprint.org/authors/robert-v-ussley/",
+      "priority_tier": "tier_1",
+      "kind": "core"
+    },
+    {
+      "title": "Collections",
+      "path": "/collections/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/collections/",
+      "expected_canonical_url": "https://outsideinprint.org/collections/",
+      "priority_tier": "tier_1",
+      "kind": "core"
+    },
+    {
+      "title": "Risk, Uncertainty, and Decision-Making",
+      "path": "/collections/risk-uncertainty/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/collections/risk-uncertainty/",
+      "expected_canonical_url": "https://outsideinprint.org/collections/risk-uncertainty/",
+      "priority_tier": "tier_1",
+      "kind": "core"
+    },
+    {
+      "title": "Returning to the Gold Standard Will Break the Economy",
+      "path": "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "The 100-Year Flood Is Not What You Think",
+      "path": "/essays/the-100-year-flood-is-not-what-you-think/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/the-100-year-flood-is-not-what-you-think/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "2025 Supreme Court Wrap-Up",
+      "path": "/essays/2025-supreme-court-wrap-up/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/2025-supreme-court-wrap-up/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/2025-supreme-court-wrap-up/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "What Is Risk? A Four-Part Framework",
+      "path": "/essays/what-is-risk-a-four-part-framework/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/what-is-risk-a-four-part-framework/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/what-is-risk-a-four-part-framework/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "35 Years of Yellow: The Simpsons Time Loop",
+      "path": "/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/35-years-of-yellow-the-simpsons-time-loop/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "6 Reasons Redwall Is a Timeless Classic",
+      "path": "/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/6-reasons-redwall-is-a-timeless-classic/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "AI in Education Is a Wicked Problem",
+      "path": "/essays/ai-in-education-is-a-wicked-problem/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/ai-in-education-is-a-wicked-problem/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/ai-in-education-is-a-wicked-problem/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "The Dolphin Company",
+      "path": "/essays/the-dolphin-company/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/the-dolphin-company/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/the-dolphin-company/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "The Fair Price of Bitcoin: $69,420",
+      "path": "/essays/the-fair-price-of-bitcoin-69420/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/the-fair-price-of-bitcoin-69420/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/the-fair-price-of-bitcoin-69420/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    },
+    {
+      "title": "Beyond Moore’s Law",
+      "path": "/essays/beyond-moores-law/",
+      "legacy_url": "https://lpeasy.github.io/outsideinprint/essays/beyond-moores-law/",
+      "expected_canonical_url": "https://outsideinprint.org/essays/beyond-moores-law/",
+      "priority_tier": "tier_2",
+      "kind": "essay"
+    }
+  ],
+  "worksheet_columns": [
+    "url",
+    "priority_tier",
+    "deployed",
+    "live_smoke_passed",
+    "legacy_redirect_passed",
+    "google_verified",
+    "bing_verified",
+    "selected_canonical",
+    "indexed",
+    "notes"
+  ]
+}

@@ -83,6 +83,24 @@ function Get-LinkHrefByRel {
   return $null
 }
 
+function Get-LinkHrefsByRelAndType {
+  param(
+    [string]$Html,
+    [string]$Rel,
+    [string]$Type
+  )
+
+  return @(
+    Get-OpenTags -Html $Html -TagName 'link' |
+      Where-Object {
+        (Get-AttributeValue -Tag $_ -Name 'rel') -eq $Rel -and
+        (Get-AttributeValue -Tag $_ -Name 'type') -eq $Type
+      } |
+      ForEach-Object { Get-AttributeValue -Tag $_ -Name 'href' } |
+      Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+  )
+}
+
 function Get-JsonLdObjects {
   param([string]$Html)
 
@@ -270,6 +288,7 @@ $requiredSemanticPages = [ordered]@{
   'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
   'public/essays/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $false }
   'public/library/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/gallery/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
 }
@@ -292,49 +311,64 @@ $requiredMetadataPages = [ordered]@{
     Description = 'Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records.'
     Canonical = 'https://outsideinprint.org/'
     OgType = 'website'
-    TwitterCard = 'summary'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/start-here/index.html' = @{
     Title = 'Welcome'
     Description = 'A quiet introduction to Outside In Print and a few paths into the archive.'
     Canonical = 'https://outsideinprint.org/start-here/'
     OgType = 'website'
-    TwitterCard = 'summary'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/library/index.html' = @{
     Title = 'Library'
     Description = 'The full catalog of published work from Outside In Print, searchable by title, section, collection, and version.'
     Canonical = 'https://outsideinprint.org/library/'
     OgType = 'website'
-    TwitterCard = 'summary'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/gallery/index.html' = @{
+    Title = 'Gallery'
+    Description = 'A digital gallery of Outside In Print front page political cartoons.'
+    Canonical = 'https://outsideinprint.org/gallery/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/collections/index.html' = @{
     Title = 'Collections'
     Description = 'Curated collections that gather essays, projects, dossiers, and recurring questions into coherent reading threads across the archive.'
     Canonical = 'https://outsideinprint.org/collections/'
     OgType = 'website'
-    TwitterCard = 'summary'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
     Description = 'About Outside In Print: the imprint''s mission, editorial model, publishing structure, and the relationship between the site and Robert V. Ussley.'
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
-    TwitterCard = 'summary'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/authors/robert-v-ussley/index.html' = @{
     Title = 'Robert V. Ussley'
     Description = 'Essays by Robert V. Ussley on risk, institutions, technology, public life, and the systems people live inside.'
     Canonical = 'https://outsideinprint.org/authors/robert-v-ussley/'
     OgType = 'website'
-    TwitterCard = 'summary'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/collections/risk-uncertainty/index.html' = @{
     Title = 'Risk, Uncertainty, and Decision-Making'
     Description = 'Essays about uncertainty, tradeoffs, risk framing, and decision-making under imperfect information.'
     Canonical = 'https://outsideinprint.org/collections/risk-uncertainty/'
     OgType = 'website'
-    TwitterCard = 'summary'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/random/index.html' = @{
     Title = 'Random'
@@ -348,6 +382,8 @@ $requiredMetadataPages = [ordered]@{
     Description = ("Biter delivers an accusation in a word. A copycat {0} someone who steals another person{1}s ideas, aesthetic, or work and passes it off as their own" -f [char]0x2014, [char]0x2019)
     Canonical = 'https://outsideinprint.org/essays/biter-the-slang-word-that-hits/'
     OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-risk-management-buffet/index.html' = @{
@@ -362,39 +398,48 @@ $requiredMetadataPages = [ordered]@{
 
 $requiredStructuredDataPages = [ordered]@{
   'public/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'WebPage')
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
     RequirePublisherNode = $true
     RequireSearchAction = $true
+    RequirePublisherImage = $true
   }
   'public/start-here/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList')
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
   }
   'public/library/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList')
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
     RequireSearchAction = $true
   }
-  'public/about/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'AboutPage', 'BreadcrumbList')
-    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'ProfilePage')
+  'public/gallery/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
   }
+  'public/about/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'AboutPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'ProfilePage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequirePublisherImage = $true
+  }
   'public/authors/robert-v-ussley/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'ProfilePage', 'Person', 'BreadcrumbList')
+    RequiredTypes = @('Organization', 'WebSite', 'ProfilePage', 'Person', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'AboutPage')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
     RequirePersonNodeName = 'Robert V. Ussley'
+    RequirePersonImage = $true
   }
   'public/collections/risk-uncertainty/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList')
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
@@ -406,37 +451,51 @@ $requiredStructuredDataPages = [ordered]@{
     RequireBreadcrumb = $true
     RequireWorkPublisher = $true
     RequireWorkAuthor = $true
+    RequireWorkImage = $true
+    RequirePersonImage = $true
   }
 }
 
 $requiredIndexationPages = [ordered]@{
   'public/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/start-here/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/library/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/gallery/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/about/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/authors/robert-v-ussley/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/collections/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/collections/risk-uncertainty/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/authors/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'noindex, follow'
   }
   'public/essays/the-risk-management-buffet/index.html' = @{
-    ExpectRobotsMeta = $false
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
   }
   'public/random/index.html' = @{
     ExpectRobotsMeta = $true
@@ -445,6 +504,23 @@ $requiredIndexationPages = [ordered]@{
   'public/working-papers/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'noindex, follow'
+  }
+}
+
+$requiredFeedPages = [ordered]@{
+  'public/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+  }
+  'public/about/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+  }
+  'public/essays/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+    SectionFeed = 'https://outsideinprint.org/essays/index.xml'
+  }
+  'public/syd-and-oliver/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+    SectionFeed = 'https://outsideinprint.org/syd-and-oliver/index.xml'
   }
 }
 
@@ -468,6 +544,23 @@ $requiredSitemapExclusions = @(
   'https://outsideinprint.org/literature/'
 )
 
+$requiredLlmsOutputs = [ordered]@{
+  'public/llms.txt' = @(
+    'https://outsideinprint.org/',
+    'https://outsideinprint.org/about/',
+    'https://outsideinprint.org/authors/robert-v-ussley/',
+    'https://outsideinprint.org/index.xml'
+  )
+  'public/llms-full.txt' = @(
+    'Canonical policy:',
+    'https://outsideinprint.org/sitemap.xml',
+    'https://outsideinprint.org/index.xml',
+    'https://outsideinprint.org/essays/',
+    'https://outsideinprint.org/library/',
+    'Legacy GitHub Pages URLs are not canonical.'
+  )
+}
+
 $requiredUxPages = @(
   'public/index.html',
   'public/start-here/index.html',
@@ -475,6 +568,7 @@ $requiredUxPages = @(
   'public/authors/robert-v-ussley/index.html',
   'public/essays/index.html',
   'public/library/index.html',
+  'public/gallery/index.html',
   'public/collections/index.html',
   'public/random/index.html',
   'public/collections/risk-uncertainty/index.html',
@@ -647,6 +741,17 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
     if ([string]::IsNullOrWhiteSpace($ogImage)) {
       $metadataIssues.Add("$relativePath => expected og:image to be present")
     }
+
+    $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
+    if ([string]::IsNullOrWhiteSpace($twitterImage)) {
+      $metadataIssues.Add("$relativePath => expected twitter:image to be present")
+    }
+
+    foreach ($imageValue in @($ogImage, $twitterImage)) {
+      if (-not [string]::IsNullOrWhiteSpace($imageValue) -and -not $imageValue.StartsWith('https://outsideinprint.org/', [System.StringComparison]::OrdinalIgnoreCase)) {
+        $metadataIssues.Add("$relativePath => expected social image URLs to be canonical absolute outsideinprint.org URLs, found '$imageValue'")
+      }
+    }
   }
 
   if ($expected.Contains('AuthorMeta')) {
@@ -654,6 +759,25 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
     if ($authorMeta -ne [string]$expected.AuthorMeta) {
       $metadataIssues.Add("$relativePath => expected author meta '$($expected.AuthorMeta)', found '$authorMeta'")
     }
+  }
+}
+
+foreach ($relativePath in $requiredFeedPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $metadataIssues.Add("Missing generated page required for feed-autodiscovery coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredFeedPages[$relativePath]
+  $alternateFeeds = @(Get-LinkHrefsByRelAndType -Html $html -Rel 'alternate' -Type 'application/rss+xml')
+
+  if ($expected.Contains('SiteFeed') -and ($alternateFeeds -notcontains [string]$expected.SiteFeed)) {
+    $metadataIssues.Add("$relativePath => expected site RSS autodiscovery link '$($expected.SiteFeed)'")
+  }
+
+  if ($expected.Contains('SectionFeed') -and ($alternateFeeds -notcontains [string]$expected.SectionFeed)) {
+    $metadataIssues.Add("$relativePath => expected section RSS autodiscovery link '$($expected.SectionFeed)'")
   }
 }
 
@@ -692,9 +816,21 @@ foreach ($relativePath in $requiredStructuredDataPages.Keys) {
     }
   }
 
+  if ($expected.Contains('RequirePublisherImage') -and [bool]$expected.RequirePublisherImage) {
+    if (@($organizationNodes | Where-Object { $null -ne $_.image }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected the Organization node to include image")
+    }
+  }
+
   if ($expected.Contains('RequirePersonNodeName')) {
     if (@($personNodes | Where-Object { $_.name -eq [string]$expected.RequirePersonNodeName }).Count -eq 0) {
       $structuredDataIssues.Add("$relativePath => expected a Person node named '$($expected.RequirePersonNodeName)'")
+    }
+  }
+
+  if ($expected.Contains('RequirePersonImage') -and [bool]$expected.RequirePersonImage) {
+    if (@($personNodes | Where-Object { $null -ne $_.image }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected a Person node with image")
     }
   }
 
@@ -745,6 +881,24 @@ foreach ($relativePath in $requiredStructuredDataPages.Keys) {
       $structuredDataIssues.Add("$relativePath => expected the primary work node to include author")
     }
   }
+
+  if ($expected.Contains('RequireWorkImage') -and [bool]$expected.RequireWorkImage) {
+    if ($null -eq $workNode -or $null -eq $workNode.image) {
+      $structuredDataIssues.Add("$relativePath => expected the primary work node to include image")
+    }
+  }
+}
+
+foreach ($relativePath in $requiredLegacyCleanupPages) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $legacyCleanupIssues.Add("Missing generated page required for legacy cleanup coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  if ($html -match '<a\b[^>]*href\s*=\s*(?:"https?://(?:www\.)?(?:[^/\s"''>]+\.)?medium\.com/|https?://(?:www\.)?(?:[^/\s"''>]+\.)?medium\.com/)') {
+    $legacyCleanupIssues.Add("$relativePath => expected canonical pages not to retain visible Medium links")
+  }
 }
 
 # These checks validate the generated route-policy output once public/ is refreshed from the current templates.
@@ -774,7 +928,19 @@ if (-not (Test-Path $robotsTxtPath -PathType Leaf)) {
 }
 else {
   $robotsTxt = Get-Content -Path $robotsTxtPath -Raw
-  foreach ($requiredLine in @('User-agent: *', 'Allow: /', 'Sitemap: https://outsideinprint.org/sitemap.xml')) {
+  foreach ($requiredLine in @(
+    'User-agent: OAI-SearchBot',
+    'User-agent: Claude-SearchBot',
+    'User-agent: Claude-User',
+    'User-agent: PerplexityBot',
+    'User-agent: GPTBot',
+    'User-agent: ClaudeBot',
+    'User-agent: Google-Extended',
+    'User-agent: *',
+    'Allow: /',
+    'Disallow: /',
+    'Sitemap: https://outsideinprint.org/sitemap.xml'
+  )) {
     if ($robotsTxt -notmatch [regex]::Escape($requiredLine)) {
       $indexationIssues.Add("robots.txt => expected line '$requiredLine'")
     }
@@ -796,6 +962,21 @@ else {
   foreach ($excludedLoc in $requiredSitemapExclusions) {
     if ($sitemapLocs -contains $excludedLoc) {
       $indexationIssues.Add("sitemap.xml => did not expect sitemap inclusion '$excludedLoc'")
+    }
+  }
+}
+
+foreach ($relativePath in $requiredLlmsOutputs.Keys) {
+  $fullPath = Join-Path $repoRoot $relativePath
+  if (-not (Test-Path $fullPath -PathType Leaf)) {
+    $indexationIssues.Add("Missing generated discovery output: $relativePath")
+    continue
+  }
+
+  $content = Get-Content -Path $fullPath -Raw
+  foreach ($requiredSnippet in @($requiredLlmsOutputs[$relativePath])) {
+    if ($content -notmatch [regex]::Escape([string]$requiredSnippet)) {
+      $indexationIssues.Add("$relativePath => expected discovery snippet '$requiredSnippet'")
     }
   }
 }

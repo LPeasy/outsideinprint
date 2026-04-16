@@ -3,7 +3,20 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 
+function Test-FrontMatterHasImageKey {
+  param([string]$RelativePath)
+
+  $fullPath = Join-Path $repoRoot $RelativePath
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+    return $false
+  }
+
+  $content = Get-Content -Path $fullPath -Raw
+  return [regex]::IsMatch($content, '(?m)^(featured_image|image|images):')
+}
+
 $requiredFiles = @(
+  'layouts/_default/baseof.html',
   'layouts/index.html',
   'layouts/_default/list.html',
   'layouts/collections/list.html',
@@ -17,13 +30,35 @@ $requiredFiles = @(
   'layouts/partials/discovery/page-summary.html',
   'layouts/partials/discovery/page-list-item.html',
   'layouts/partials/discovery/collection-card.html',
-  'layouts/partials/schema/significant-links.html'
+  'layouts/partials/schema/significant-links.html',
+  'static/llms.txt',
+  'static/llms-full.txt'
 )
 
 foreach ($relativePath in $requiredFiles) {
   $fullPath = Join-Path $repoRoot $relativePath
   if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
     throw "Missing required discovery-surface file: $relativePath"
+  }
+}
+
+$requiredImageFrontMatterFiles = @(
+  'content/about/index.md',
+  'content/authors/robert-v-ussley/index.md',
+  'content/collections/_index.md',
+  'content/collections/floods-water-built-environment.md',
+  'content/collections/modern-bios.md',
+  'content/collections/moral-religious-philosophical-essays.md',
+  'content/collections/reported-case-studies.md',
+  'content/collections/risk-uncertainty.md',
+  'content/collections/syd-and-oliver-dialogues.md',
+  'content/collections/technology-ai-machine-future.md',
+  'content/collections/the-ledger.md'
+)
+
+foreach ($relativePath in $requiredImageFrontMatterFiles) {
+  if (-not (Test-FrontMatterHasImageKey -RelativePath $relativePath)) {
+    throw "Expected explicit image front matter on discovery page source: $relativePath"
   }
 }
 
@@ -107,6 +142,48 @@ foreach ($retiredSnippet in @(
 )) {
   if ($homeFrontPageTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/partials/home_front_page.html to remove the retired visible front-page intro block snippet: $retiredSnippet"
+  }
+}
+
+$baseTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/baseof.html') -Raw
+foreach ($requiredSnippet in @(
+  'site.Home.OutputFormats.Get "RSS"',
+  '.IsSection',
+  '.OutputFormats.Get "RSS"',
+  '.MediaType.Type'
+)) {
+  if ($baseTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/_default/baseof.html to contain feed autodiscovery support: $requiredSnippet"
+  }
+}
+
+$llms = Get-Content -Path (Join-Path $repoRoot 'static/llms.txt') -Raw
+foreach ($requiredSnippet in @(
+  'https://outsideinprint.org/',
+  'https://outsideinprint.org/about/',
+  'https://outsideinprint.org/authors/robert-v-ussley/',
+  'https://outsideinprint.org/essays/',
+  'https://outsideinprint.org/syd-and-oliver/',
+  'https://outsideinprint.org/collections/',
+  'https://outsideinprint.org/library/',
+  'https://outsideinprint.org/index.xml'
+)) {
+  if ($llms -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected static/llms.txt to contain canonical discovery URL: $requiredSnippet"
+  }
+}
+
+$llmsFull = Get-Content -Path (Join-Path $repoRoot 'static/llms-full.txt') -Raw
+foreach ($requiredSnippet in @(
+  'Canonical policy:',
+  'https://outsideinprint.org/sitemap.xml',
+  'https://outsideinprint.org/index.xml',
+  'https://outsideinprint.org/about/',
+  'https://outsideinprint.org/authors/robert-v-ussley/',
+  'Legacy GitHub Pages URLs are not canonical.'
+)) {
+  if ($llmsFull -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected static/llms-full.txt to contain discovery guidance snippet: $requiredSnippet"
   }
 }
 

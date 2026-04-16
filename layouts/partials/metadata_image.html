@@ -1,21 +1,44 @@
 {{- $image := "" -}}
 {{- $route := partial "metadata/route.html" . -}}
+{{- $policy := partial "metadata/policy.html" (dict "page" . "route" $route) -}}
+{{- $organizationImage := site.Data.organization.image | default "" -}}
+{{- $slug := .Params.slug | default "" -}}
+{{- with .File -}}
+  {{- if not $slug -}}
+    {{- $slug = .BaseFileName -}}
+  {{- end -}}
+{{- end -}}
 
 {{- with .Params.images -}}
   {{- with index . 0 -}}
-    {{- $image = . -}}
+    {{- $image = printf "%v" . -}}
   {{- end -}}
 {{- end -}}
 
 {{- if not $image -}}
   {{- with .Params.image -}}
-    {{- $image = . -}}
+    {{- $image = printf "%v" . -}}
   {{- end -}}
 {{- end -}}
 
 {{- if not $image -}}
   {{- with .Params.featured_image -}}
-    {{- $image = . -}}
+    {{- $image = printf "%v" . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and (not $image) (eq $route.name "author") -}}
+  {{- $author := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) -}}
+  {{- with $author.primary -}}
+    {{- $image = .image | default "" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and (not $image) $route.is_article_like -}}
+  {{- with .Resources.ByType "image" -}}
+    {{- with index . 0 -}}
+      {{- $image = .Permalink -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
@@ -32,10 +55,33 @@
   {{- end -}}
 {{- end -}}
 
+{{- if and (not $image) $route.is_article_like $slug -}}
+  {{- $mediumDir := printf "static/images/medium/%s" $slug -}}
+  {{- if fileExists $mediumDir -}}
+    {{- $mediumImages := slice -}}
+    {{- range readDir $mediumDir -}}
+      {{- if and (not .IsDir) (findRE `\.(?:png|jpe?g|webp|gif)$` .Name) -}}
+        {{- $mediumImages = $mediumImages | append .Name -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if gt (len $mediumImages) 0 -}}
+      {{- $image = printf "/images/medium/%s/%s" $slug (index (sort $mediumImages) 0) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and (not $image) $policy.indexable $organizationImage -}}
+  {{- $image = printf "%v" $organizationImage -}}
+{{- end -}}
+
 {{- if $image -}}
   {{- if or (hasPrefix $image "http://") (hasPrefix $image "https://") -}}
     {{- $image -}}
   {{- else -}}
-    {{- ($image | strings.TrimPrefix "/" | absURL) -}}
+    {{- with .Resources.GetMatch $image -}}
+      {{- .Permalink -}}
+    {{- else -}}
+      {{- ($image | strings.TrimPrefix "/" | absURL) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}

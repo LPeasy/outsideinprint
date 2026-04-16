@@ -2,4 +2,5 @@ name: Outside In Print
 url: https://outsideinprint.org/
 description: Digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records.
 logo: /favicon.svg
+image: /images/social/outside-in-print-default.png
 default_author_id: robert-v-ussley

@@ -6,38 +6,8 @@
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0,
-    "sparkline_pageviews": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "sparkline_reads": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ]
+    "sparkline_pageviews": [],
+    "sparkline_reads": []
   },
   {
     "section": "Newsletter",
@@ -46,38 +16,8 @@
     "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0,
-    "sparkline_pageviews": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "sparkline_reads": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ]
+    "sparkline_pageviews": [],
+    "sparkline_reads": []
   },
   {
     "section": "Dialogues",
@@ -86,38 +26,8 @@
     "read_rate": 0.0,
     "pdf_downloads": 10.0,
     "newsletter_submits": 0.0,
-    "sparkline_pageviews": [
-      0.0,
-      0.0,
-      0.0,
-      3.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      2.0,
-      1.0
-    ],
-    "sparkline_reads": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ]
+    "sparkline_pageviews": [],
+    "sparkline_reads": []
   },
   {
     "section": "Essays",
@@ -126,37 +36,7 @@
     "read_rate": 1.4,
     "pdf_downloads": 44.0,
     "newsletter_submits": 4.0,
-    "sparkline_pageviews": [
-      3.0,
-      0.0,
-      2.0,
-      15.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      8.0,
-      16.0,
-      8.0,
-      1.0,
-      26.0,
-      7.0
-    ],
-    "sparkline_reads": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0
-    ]
+    "sparkline_pageviews": [],
+    "sparkline_reads": []
   }
 ]

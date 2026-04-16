@@ -1,7 +1,8 @@
 [
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/syd-and-oliver",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -21,7 +22,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/collections",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -41,7 +43,8 @@
   },
   {
     "discovery_source": "related_content",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "",
     "collection": "",
@@ -61,7 +64,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/essays/declaring-equality",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -81,7 +85,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -101,7 +106,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -121,7 +127,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/syd-and-oliver",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -141,7 +148,8 @@
   },
   {
     "discovery_source": "homepage_selected_hero",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "",
     "collection": "",
@@ -162,6 +170,7 @@
   {
     "discovery_source": "internal /collections/risk-uncertainty/",
     "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -181,7 +190,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io",
-    "discovery_type": "external",
+    "discovery_type": "social_or_referral",
+    "acquisition_channel": "social_or_referral",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -201,7 +211,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/collections/risk-uncertainty",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -222,6 +233,7 @@
   {
     "discovery_source": "internal /random/",
     "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -241,7 +253,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/random",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -261,7 +274,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/random",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -281,7 +295,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/collections/syd-and-oliver-dialogues",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -301,7 +316,8 @@
   },
   {
     "discovery_source": "homepage_selected_core",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "",
     "collection": "",
@@ -321,7 +337,8 @@
   },
   {
     "discovery_source": "collection_page / floods-water-built-environment",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "",
     "collection": "",
@@ -341,7 +358,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/library",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -361,7 +379,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/collections/risk-uncertainty",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -381,7 +400,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/essays/why-a-return-to-the-gold-standard-would-break-the-economy",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -402,6 +422,7 @@
   {
     "discovery_source": "internal /essays/",
     "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -421,7 +442,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/essays",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -441,7 +463,8 @@
   },
   {
     "discovery_source": "outsideinprint.org",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -462,6 +485,7 @@
   {
     "discovery_source": "internal /syd-and-oliver/",
     "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -481,7 +505,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/library",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -501,7 +526,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/collections/floods-water-built-environment",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -521,7 +547,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/essays/the-dolphin-company",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -541,7 +568,8 @@
   },
   {
     "discovery_source": "collection_page / the-ledger",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "",
     "collection": "",
@@ -561,7 +589,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/collections/modern-bios",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -581,7 +610,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/start-here",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -601,7 +631,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/collections/the-ledger",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -621,7 +652,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/start-here",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -641,7 +673,8 @@
   },
   {
     "discovery_source": "collection_page / technology-ai-machine-future",
-    "discovery_type": "internal-module",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "module-driven",
     "module_slot": "",
     "collection": "",
@@ -662,6 +695,7 @@
   {
     "discovery_source": "direct",
     "discovery_type": "direct",
+    "acquisition_channel": "direct",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -681,7 +715,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/collections/floods-water-built-environment",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -701,7 +736,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/collections/moral-religious-philosophical-essays",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -721,7 +757,8 @@
   },
   {
     "discovery_source": "lpeasy.github.io/outsideinprint/essays/the-three-enemies-of-positive-outcomes",
-    "discovery_type": "external",
+    "discovery_type": "legacy_domain",
+    "acquisition_channel": "legacy_domain",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",
@@ -741,7 +778,8 @@
   },
   {
     "discovery_source": "outsideinprint.org/essays",
-    "discovery_type": "external",
+    "discovery_type": "internal",
+    "acquisition_channel": "internal",
     "discovery_mode": "article-discovery",
     "module_slot": "",
     "collection": "",

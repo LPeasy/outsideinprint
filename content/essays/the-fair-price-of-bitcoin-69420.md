@@ -6,6 +6,7 @@ slug: "the-fair-price-of-bitcoin-69420"
 section_label: "Essay"
 subtitle: ""
 description: "A short market essay arguing that Bitcoin's recent trading range suggests a temporary fair value near $69,420."
+featured_image: "/images/medium/the-fair-price-of-bitcoin-69420/bitcoin-price-surge-and-volatility.png"
 version: "1.0"
 edition: "First web edition"
 featured: false
