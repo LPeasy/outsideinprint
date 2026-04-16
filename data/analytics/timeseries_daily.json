@@ -271,10 +271,28 @@
   },
   {
     "date": "2026-04-14",
-    "pageviews": 32.0,
-    "unique_visitors": 4.0,
+    "pageviews": 51.0,
+    "unique_visitors": 10.0,
+    "reads": 2.0,
+    "read_rate": 3.9,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-15",
+    "pageviews": 10.0,
+    "unique_visitors": 5.0,
     "reads": 1.0,
-    "read_rate": 3.1,
+    "read_rate": 10.0,
+    "pdf_downloads": 0.0,
+    "newsletter_submits": 0.0
+  },
+  {
+    "date": "2026-04-16",
+    "pageviews": 17.0,
+    "unique_visitors": 2.0,
+    "reads": 0.0,
+    "read_rate": 0.0,
     "pdf_downloads": 0.0,
     "newsletter_submits": 0.0
   }
