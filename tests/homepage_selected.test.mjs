@@ -3,6 +3,31 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
+function escapeRegex(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function readCurrentCartoonRecord(source) {
+  const currentMatch = source.match(/^current:\s*(.+)$/m);
+  assert.ok(currentMatch, "expected editorial cartoons data to define a current slug");
+
+  const currentSlug = currentMatch[1].trim();
+  const entryPattern = new RegExp(
+    `^\\s*-\\s+slug:\\s+${escapeRegex(currentSlug)}\\s*$([\\s\\S]*?)(?=^\\s*-\\s+slug:|$)`,
+    "m"
+  );
+  const entryMatch = source.match(entryPattern);
+  assert.ok(entryMatch, `expected editorial cartoons data to include the current slug entry: ${currentSlug}`);
+
+  const imageMatch = entryMatch[1].match(/^\s+image:\s+"([^"]+)"$/m);
+  assert.ok(imageMatch, `expected editorial cartoons data to include an image for current slug: ${currentSlug}`);
+
+  return {
+    slug: currentSlug,
+    image: imageMatch[1]
+  };
+}
+
 function normalizeDateString(value) {
   const match = String(value ?? "").match(/\d{4}-\d{2}-\d{2}/);
   return match?.[0] ?? null;
@@ -84,6 +109,7 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const indexSource = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
   const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
+  const currentCartoon = readCurrentCartoonRecord(cartoonData);
   const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
   const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 
@@ -129,10 +155,10 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(indexSource, /"label" "Gallery"/);
   assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
   assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
-  assert.match(cartoonData, /current: the-house-always-wins/);
   assert.match(cartoonData, /slug: think-outside-the-box/);
-  assert.match(cartoonData, /slug: the-house-always-wins/);
-  assert.match(cartoonData, /image: "\/images\/editorial\/the-house-always-wins\.png"/);
+  assert.match(cartoonData, new RegExp(`current: ${escapeRegex(currentCartoon.slug)}`));
+  assert.match(cartoonData, new RegExp(`slug: ${escapeRegex(currentCartoon.slug)}`));
+  assert.match(cartoonData, new RegExp(`image: "${escapeRegex(currentCartoon.image)}"`));
   assert.match(galleryContent, /title: "Gallery"/);
   assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
   assert.match(galleryTemplate, /cartoon-gallery__grid/);

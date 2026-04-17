@@ -1,4 +1,4 @@
-current: the-house-always-wins
+current: did-you-really-mean-what-you-said
 cartoons:
   - slug: think-outside-the-box
     title: "Think Outside the Box"
@@ -12,5 +12,12 @@ cartoons:
     date: "2026-04-16"
     image: "/images/editorial/the-house-always-wins.png"
     alt: "Black-and-white editorial cartoon showing political and financial figures seated around a casino poker table."
+    width: 1536
+    height: 1024
+  - slug: did-you-really-mean-what-you-said
+    title: "Did you really mean what you said?"
+    date: "2026-04-17"
+    image: "/images/editorial/did-you-really-mean-what-you-said.png"
+    alt: "Editorial cartoon showing a young singer at a microphone under the title 'Romantic Homicide,' with viral-media attention on one side and police tape, case files, and investigators on the other."
     width: 1536
     height: 1024
