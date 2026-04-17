@@ -188,6 +188,47 @@ function Get-HeadingLevels {
   return @([regex]::Matches($Html, '<h([1-6])\b', 'IgnoreCase') | ForEach-Object { [int]$_.Groups[1].Value })
 }
 
+function Convert-YamlScalarToString {
+  param([string]$Value)
+
+  $trimmed = $Value.Trim()
+  if (($trimmed.StartsWith('"') -and $trimmed.EndsWith('"')) -or ($trimmed.StartsWith("'") -and $trimmed.EndsWith("'"))) {
+    return $trimmed.Substring(1, $trimmed.Length - 2)
+  }
+
+  return $trimmed
+}
+
+function Get-CurrentCartoonImagePath {
+  param([string]$RepoRoot)
+
+  $dataPath = Join-Path $RepoRoot 'data\editorial_cartoons.yaml'
+  if (-not (Test-Path -LiteralPath $dataPath -PathType Leaf)) {
+    throw "Editorial cartoon data file not found: $dataPath"
+  }
+
+  $currentSlug = $null
+  $inCurrentEntry = $false
+  foreach ($line in Get-Content -Path $dataPath) {
+    if ($line -match '^current:\s*(.+)\s*$') {
+      $currentSlug = Convert-YamlScalarToString -Value $Matches[1]
+      continue
+    }
+
+    if ($line -match '^\s*-\s+slug:\s*(.+)\s*$') {
+      $slug = Convert-YamlScalarToString -Value $Matches[1]
+      $inCurrentEntry = ($null -ne $currentSlug -and $slug -eq $currentSlug)
+      continue
+    }
+
+    if ($inCurrentEntry -and $line -match '^\s+image:\s*(.+)\s*$') {
+      return (Convert-YamlScalarToString -Value $Matches[1])
+    }
+  }
+
+  throw "Unable to resolve current editorial cartoon image from $dataPath"
+}
+
 function Get-SemanticPageIssues {
   param(
     [string]$RelativePath,
@@ -245,6 +286,7 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$currentCartoonImagePattern = [regex]::Escape((Get-CurrentCartoonImagePath -RepoRoot $repoRoot))
 $freshness = Test-PublicBuildFreshness -RepoRoot $repoRoot -SiteDir $SiteDir
 if (-not $freshness.IsFresh) {
   $message = "Generated-output regression test requires a fresh Hugo build. $($freshness.Reason)"
@@ -1068,7 +1110,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '/images/editorial/the-house-always-wins\.png'
+    Pattern = $currentCartoonImagePattern
     Message = 'expected the homepage generated output to include the current editorial cartoon image block'
   },
   @{

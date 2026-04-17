@@ -3,6 +3,16 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
+function escapeRegex(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function readCurrentCartoonSlug(source) {
+  const currentMatch = source.match(/^current:\s*(.+)$/m);
+  assert.ok(currentMatch, "expected editorial cartoons data to define a current slug");
+  return currentMatch[1].trim();
+}
+
 const masthead = fs.readFileSync(path.resolve("layouts/partials/masthead.html"), "utf8");
 const homepage = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
@@ -14,6 +24,7 @@ const randomTemplate = fs.readFileSync(path.resolve("layouts/random/single.html"
 const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
 const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
+const currentCartoonSlug = readCurrentCartoonSlug(cartoonData);
 const startHereTemplate = fs.readFileSync(path.resolve("layouts/start-here/single.html"), "utf8");
 const startHereContent = fs.readFileSync(path.resolve("content/start-here/index.md"), "utf8");
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
@@ -142,9 +153,9 @@ test("homepage composition promotes front page and imprint before lower-priority
   assert.match(galleryContent, /digital gallery/i);
   assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
   assert.match(galleryTemplate, /cartoon-gallery__grid/);
-  assert.match(cartoonData, /current: the-house-always-wins/);
   assert.match(cartoonData, /slug: think-outside-the-box/);
-  assert.match(cartoonData, /slug: the-house-always-wins/);
+  assert.match(cartoonData, new RegExp(`current: ${escapeRegex(currentCartoonSlug)}`));
+  assert.match(cartoonData, new RegExp(`slug: ${escapeRegex(currentCartoonSlug)}`));
 });
 
 test("homepage editorial layout stays scoped to home modules", () => {
