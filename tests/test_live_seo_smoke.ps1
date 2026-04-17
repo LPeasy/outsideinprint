@@ -54,6 +54,12 @@ Assert-Match -Content $homePage -Pattern '/library/\?q=\{search_term_string\}' -
 Assert-Match -Content $homePage -Pattern '<meta\s+property=(?:"og:image"|og:image)\s+content=' -Message 'Expected the homepage to emit og:image.'
 Assert-Match -Content $homePage -Pattern '<meta\s+name=(?:"twitter:image"|twitter:image)\s+content=' -Message 'Expected the homepage to emit twitter:image.'
 Assert-Match -Content $homePage -Pattern '<link\b[^>]*rel=(?:"alternate"|alternate)[^>]*type=(?:"application/rss\+xml"|application/rss\+xml)[^>]*href=(?:"https://outsideinprint\.org/index\.xml"|https://outsideinprint\.org/index\.xml)' -Message 'Expected the homepage to expose RSS autodiscovery.'
+Assert-Match -Content $homePage -Pattern 'lpeasy\.github\.io' -Message 'Expected the homepage to include the legacy GitHub Pages host redirect guard.'
+Assert-Match -Content $homePage -Pattern '/outsideinprint' -Message 'Expected the homepage to include the legacy /outsideinprint prefix guard.'
+Assert-Match -Content $homePage -Pattern 'window\.location\.hostname\s*!==' -Message 'Expected the legacy redirect script not to redirect canonical-host pages.'
+Assert-Match -Content $homePage -Pattern 'window\.location\.replace\(' -Message 'Expected the legacy redirect script to forward legacy project paths.'
+Assert-Match -Content $homePage -Pattern 'window\.location\.search' -Message 'Expected the legacy redirect script to preserve query strings.'
+Assert-Match -Content $homePage -Pattern 'window\.location\.hash' -Message 'Expected the legacy redirect script to preserve hash fragments.'
 
 $essay = Get-Page '/essays/the-risk-management-buffet/'
 Assert-Canonical -Content $essay -ExpectedUrl 'https://outsideinprint.org/essays/the-risk-management-buffet/' -Message 'Expected essay pages to emit canonical URLs on outsideinprint.org.'
@@ -93,6 +99,13 @@ Assert-Match -Content $random -Pattern '<meta\s+name=(?:"robots"|robots)\s+conte
 
 $llms = Get-Page '/llms.txt'
 Assert-Match -Content $llms -Pattern 'https://outsideinprint\.org/' -Message 'Expected llms.txt to expose canonical site URLs.'
+
+$notFound = Get-Page '/404.html'
+Assert-Match -Content $notFound -Pattern '<meta\s+name=(?:"robots"|robots)\s+content=(?:"noindex, follow"|noindex,\s*follow)' -Message 'Expected the 404 page to stay noindex, follow.'
+Assert-Match -Content $notFound -Pattern 'lpeasy\.github\.io' -Message 'Expected the 404 page to include the legacy GitHub Pages host redirect guard.'
+Assert-Match -Content $notFound -Pattern 'window\.location\.replace\(' -Message 'Expected the 404 page to redirect legacy project paths to canonical equivalents.'
+Assert-Match -Content $notFound -Pattern 'window\.location\.search' -Message 'Expected the 404 page to preserve query strings.'
+Assert-Match -Content $notFound -Pattern 'window\.location\.hash' -Message 'Expected the 404 page to preserve hash fragments.'
 
 Write-Host 'Live SEO smoke test passed.'
 $global:LASTEXITCODE = 0

@@ -17,6 +17,7 @@ function Test-FrontMatterHasImageKey {
 
 $requiredFiles = @(
   'layouts/_default/baseof.html',
+  'layouts/404.html',
   'layouts/index.html',
   'layouts/_default/list.html',
   'layouts/collections/list.html',
@@ -31,6 +32,7 @@ $requiredFiles = @(
   'layouts/partials/discovery/page-list-item.html',
   'layouts/partials/discovery/collection-card.html',
   'layouts/partials/schema/significant-links.html',
+  'layouts/partials/legacy_host_redirect.html',
   'static/llms.txt',
   'static/llms-full.txt'
 )
@@ -150,10 +152,43 @@ foreach ($requiredSnippet in @(
   'site.Home.OutputFormats.Get "RSS"',
   '.IsSection',
   '.OutputFormats.Get "RSS"',
-  '.MediaType.Type'
+  '.MediaType.Type',
+  'partial "legacy_host_redirect.html"'
 )) {
   if ($baseTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/_default/baseof.html to contain feed autodiscovery support: $requiredSnippet"
+  }
+}
+
+$legacyRedirectPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/legacy_host_redirect.html') -Raw
+foreach ($requiredSnippet in @(
+  'legacyHost = "lpeasy.github.io"',
+  'legacyPrefix = "/outsideinprint"',
+  'canonicalHost = "https://outsideinprint.org"',
+  'window.location.hostname !== legacyHost',
+  'path.indexOf(legacyPrefix + "/") !== 0',
+  'path.slice(legacyPrefix.length)',
+  'window.location.replace(canonicalHost + canonicalPath + window.location.search + window.location.hash)'
+)) {
+  if ($legacyRedirectPartial -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/legacy_host_redirect.html to contain legacy-host redirect support: $requiredSnippet"
+  }
+}
+
+if ($legacyRedirectPartial -match [regex]::Escape('outsideinprint.org/outsideinprint')) {
+  throw 'Expected legacy-host redirect not to preserve the retired /outsideinprint project path on the canonical host.'
+}
+
+$notFoundTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/404.html') -Raw
+foreach ($requiredSnippet in @(
+  'partial "legacy_host_redirect.html"',
+  'noindex, follow',
+  'Page not found',
+  '/library/',
+  '/collections/'
+)) {
+  if ($notFoundTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/404.html to contain legacy-aware not-found support: $requiredSnippet"
   }
 }
 

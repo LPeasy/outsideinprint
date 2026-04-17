@@ -561,6 +561,25 @@ $requiredLlmsOutputs = [ordered]@{
   )
 }
 
+$requiredLegacyHostRedirectPages = @(
+  'public/index.html',
+  'public/about/index.html',
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/404.html'
+)
+
+$requiredLegacyHostRedirectPatterns = @(
+  'lpeasy\.github\.io',
+  '/outsideinprint',
+  'https://outsideinprint\.org',
+  'window\.location\.hostname\s*!==',
+  '\.indexOf\(',
+  '\.slice\(',
+  'window\.location\.replace\(',
+  'window\.location\.search',
+  'window\.location\.hash'
+)
+
 $requiredUxPages = @(
   'public/index.html',
   'public/start-here/index.html',
@@ -592,6 +611,7 @@ foreach ($file in $htmlFiles) {
     $requiredIndexationPages.Contains($relativePath) -or
     $requiredMetadataPages.Contains($relativePath) -or
     $requiredStructuredDataPages.Contains($relativePath) -or
+    ($requiredLegacyHostRedirectPages -contains $relativePath) -or
     ($requiredLegacyCleanupPages -contains $relativePath) -or
     ($requiredUxPages -contains $relativePath)
   ) {
@@ -978,6 +998,32 @@ foreach ($relativePath in $requiredLlmsOutputs.Keys) {
     if ($content -notmatch [regex]::Escape([string]$requiredSnippet)) {
       $indexationIssues.Add("$relativePath => expected discovery snippet '$requiredSnippet'")
     }
+  }
+}
+
+foreach ($relativePath in $requiredLegacyHostRedirectPages) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $legacyCleanupIssues.Add("Missing generated page required for legacy-host redirect coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  foreach ($pattern in $requiredLegacyHostRedirectPatterns) {
+    if ($html -notmatch $pattern) {
+      $legacyCleanupIssues.Add("$relativePath => expected legacy-host redirect pattern '$pattern'")
+    }
+  }
+
+  if ($html -match 'outsideinprint\.org/outsideinprint') {
+    $legacyCleanupIssues.Add("$relativePath => expected legacy-host redirect not to preserve /outsideinprint on the canonical host")
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/404.html')) {
+  $notFoundHtml = $targetPageHtml['public/404.html']
+  $notFoundRobots = Get-MetaContent -Html $notFoundHtml -AttributeName 'name' -AttributeValue 'robots'
+  if ($notFoundRobots -ne 'noindex, follow') {
+    $legacyCleanupIssues.Add("public/404.html => expected robots meta 'noindex, follow', found '$notFoundRobots'")
   }
 }
 

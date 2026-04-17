@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode | default "en" }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{ partial "legacy_host_redirect.html" . }}
+    <title>Page not found | {{ site.Title }}</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="The requested Outside In Print page could not be found. Browse the library or return home." />
+    <link rel="canonical" href="{{ site.BaseURL }}" />
+    <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
+    {{ partial "head_fonts.html" . }}
+    {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="wrap">
+      {{ partial "masthead.html" . }}
+      <main id="main-content" class="page-shell">
+        <h1 class="list-title">Page not found</h1>
+        <p class="page-intro">This page is not available. The library and homepage remain the best paths back into the archive.</p>
+        <p class="journey-links">
+          <a href="{{ "/" | relURL }}">Home</a>
+          <a href="{{ "/library/" | relURL }}">Library</a>
+          <a href="{{ "/collections/" | relURL }}">Collections</a>
+        </p>
+      </main>
+      {{ partial "footer.html" . }}
+    </div>
+  </body>
+</html>
