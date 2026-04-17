@@ -1,0 +1,18 @@
+{{- if not site.Params.dashboard.site -}}
+<script>
+(function () {
+  var legacyHost = "lpeasy.github.io";
+  var legacyPrefix = "/outsideinprint";
+  var canonicalHost = "https://outsideinprint.org";
+  var path = window.location.pathname || "/";
+  if (window.location.hostname !== legacyHost) {
+    return;
+  }
+  if (path !== legacyPrefix && path.indexOf(legacyPrefix + "/") !== 0) {
+    return;
+  }
+  var canonicalPath = path.slice(legacyPrefix.length) || "/";
+  window.location.replace(canonicalHost + canonicalPath + window.location.search + window.location.hash);
+}());
+</script>
+{{- end -}}

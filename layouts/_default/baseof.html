@@ -4,6 +4,7 @@
     {{- $meta := partial "metadata/page.html" . -}}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{ partial "legacy_host_redirect.html" . }}
 
     <title>{{ $meta.full_title }}</title>
     <link rel="canonical" href="{{ $meta.canonical }}" />
