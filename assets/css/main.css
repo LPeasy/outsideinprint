@@ -766,7 +766,6 @@ textarea{
   border-radius:6px;
   background:#ebe5da;
   box-shadow:0 0 0 1px rgba(255,255,255,.04) inset;
-  filter:grayscale(1) contrast(1.03) brightness(.97);
 }
 .editorial-cartoon figcaption{
   display:flex;
@@ -913,7 +912,6 @@ textarea{
   border:1px solid rgba(18,18,18,.18);
   border-radius:6px;
   background:#ebe5da;
-  filter:grayscale(1) contrast(1.03) brightness(.97);
 }
 .cartoon-gallery{
   margin-top:2.75rem;
