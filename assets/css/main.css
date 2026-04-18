@@ -819,7 +819,6 @@ textarea{
   font-weight:600;
   line-height:1.06;
   letter-spacing:-.03em;
-  text-wrap:balance;
 }
 .home-front-page__lead-title a,
 .home-front-page__secondary-title a{
@@ -889,7 +888,6 @@ textarea{
   font-size:clamp(2rem, 3vw, 3.05rem);
   font-weight:600;
   line-height:1.05;
-  text-wrap:balance;
 }
 .cartoon-gallery-spotlight__meta .m{
   margin-top:.85rem;
@@ -1596,6 +1594,19 @@ h1{
   line-height:1.08;
   letter-spacing:-.02em;
   margin:12px 0;
+}
+h1,
+.home-front-page__lead-title,
+.home-front-page__secondary-title,
+.cartoon-gallery-spotlight__meta h2,
+.item .t,
+.read-next__item-title,
+.newsletter-signup__title,
+.author-note__title,
+.style-variant-literary-dossier .author-dossier__intro h1,
+.style-variant-literary-dossier .author-dossier__title,
+.dashboard-header h1{
+  text-wrap:balance;
 }
 h2{ margin-top:34px; }
 .subtitle{
