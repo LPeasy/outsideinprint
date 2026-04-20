@@ -68,7 +68,60 @@ Resolution rules:
 - `layouts/collections/list.html`: public collections index.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: restrained "Part of this collection" block.
+- `layouts/_default/single.html`: article aftermatter, including the primary-collection reading path plus the restrained "Part of this collection" block.
+- `layouts/partials/collections/reading-path.html`: server-rendered article sequence module for the first public collection match only.
+- `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
+- `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
+
+## Reading path and progress
+
+Collections now support two reader-facing sequence layers that reuse the existing resolver and ordering rules.
+
+### Article pages
+
+- A collection-member article renders exactly one reading-path module.
+- The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
+- Secondary memberships remain visible only in the existing "Part of this collection" block.
+- The module shows:
+  - collection title
+  - sequence position
+  - remaining pieces and minutes after the current page
+  - entry-point status when the collection defines `start_here`
+  - previous / next links within the existing collection order
+  - a fixed CTA that stays sequence-first
+
+### Collection pages
+
+- Each collection page renders a browser-local `Reading Progress` panel above `In This Collection`.
+- The panel does not use cookies, a backend, or analytics state.
+- Each collection row can show a `Visited` marker when the current browser has already opened that piece.
+
+### Storage contract
+
+- Progress means visited piece paths in the current browser only.
+- The exact `localStorage` key format is `oip-reading-progress:v1:<collection-slug>`.
+- The stored JSON shape is:
+
+```json
+{
+  "visited": ["/collections/member-path/"],
+  "updatedAt": "2026-04-18T12:00:00.000Z"
+}
+```
+
+### Resume logic
+
+The collection-page resume link is deterministic:
+
+1. unvisited `start_here` page, if present
+2. otherwise the first unvisited piece in collection order
+3. otherwise the first piece in collection order
+
+Resume labels are also fixed:
+
+- `Start with <title>` when nothing in the collection is visited
+- `Resume with <title>` when some pieces are visited and an unvisited target remains
+- `Start Again with <title>` when every piece in the collection is already visited
 
 ## Adding a new collection
 

@@ -1,0 +1,44 @@
+{{ $definition := .definition }}
+{{ $items := .items | default (slice) }}
+{{ $startHere := .startHere | default false }}
+{{ $collectionUrl := printf "collections/%s/" $definition.slug | absURL }}
+{{ with .page }}
+  {{ $collectionUrl = .RelPermalink }}
+{{ end }}
+{{ $itemPaths := slice }}
+{{ $itemTitles := slice }}
+{{ range $items }}
+  {{ $itemPaths = $itemPaths | append .RelPermalink }}
+  {{ $itemTitles = $itemTitles | append .Title }}
+{{ end }}
+{{ $startHerePath := "" }}
+{{ $startHereTitle := "" }}
+{{ if $startHere }}
+  {{ $startHerePath = $startHere.RelPermalink }}
+  {{ $startHereTitle = $startHere.Title }}
+{{ end }}
+{{ $resumeHref := $collectionUrl }}
+{{ if $startHere }}
+  {{ $resumeHref = $startHere.RelPermalink }}
+{{ else if gt (len $items) 0 }}
+  {{ $resumeHref = (index $items 0).RelPermalink }}
+{{ end }}
+
+<section
+  class="collection-progress page-shell page-shell--reading"
+  aria-labelledby="collection-progress-title"
+  data-collection-progress-root
+  data-collection-slug="{{ $definition.slug }}"
+  data-collection-url="{{ $collectionUrl }}"
+  data-item-paths="{{ $itemPaths | jsonify | htmlEscape }}"
+  data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"
+  data-start-here-path="{{ $startHerePath }}"
+  data-start-here-title="{{ $startHereTitle }}"
+>
+  <h2 id="collection-progress-title" class="list-title">Reading Progress</h2>
+  <p class="collection-progress__summary" data-collection-progress-summary>Visited 0 of {{ len $items }} pieces in this browser.</p>
+  <div class="collection-progress__actions">
+    <a href="{{ $resumeHref }}" data-collection-progress-resume>Resume Collection</a>
+  </div>
+  <p class="collection-progress__note">Progress is stored only in this browser.</p>
+</section>

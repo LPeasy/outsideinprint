@@ -67,6 +67,7 @@
       {{ if eq $articleVariant "modernbio" }}
         {{ partial "article/modernbio-record.html" . }}
       {{ end }}
+      {{ partial "collections/reading-path.html" . }}
       {{ partial "collections/page-membership-block.html" . }}
       {{ partial "authors/card.html" (dict "page" . "author" $meta.author) }}
 
@@ -86,4 +87,5 @@
       {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page" "sourceSlot" "page_newsletter") }}
     </div>
   </article>
+  {{ partial "collections/reading-progress-script.html" . }}
 {{ end }}

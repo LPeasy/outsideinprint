@@ -1,0 +1,229 @@
+<script>
+  (function () {
+    if (window.__oipReadingProgressInitialized) {
+      return;
+    }
+    window.__oipReadingProgressInitialized = true;
+
+    function parseJsonAttribute(node, name) {
+      var raw = node.getAttribute(name);
+
+      if (!raw) {
+        return [];
+      }
+
+      try {
+        var parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function storageKey(slug) {
+      return "oip-reading-progress:v1:" + slug;
+    }
+
+    function normalizeVisited(input) {
+      if (!Array.isArray(input)) {
+        return [];
+      }
+
+      var seen = Object.create(null);
+      var visited = [];
+
+      input.forEach(function (value) {
+        if (typeof value !== "string" || !value || seen[value]) {
+          return;
+        }
+
+        seen[value] = true;
+        visited.push(value);
+      });
+
+      return visited;
+    }
+
+    function readProgress(slug) {
+      var key = storageKey(slug);
+      var raw;
+
+      try {
+        raw = window.localStorage.getItem(key);
+      } catch (error) {
+        return { available: false, visited: [], updatedAt: "" };
+      }
+
+      if (!raw) {
+        return { available: true, visited: [], updatedAt: "" };
+      }
+
+      try {
+        var parsed = JSON.parse(raw);
+        return {
+          available: true,
+          visited: normalizeVisited(parsed && parsed.visited),
+          updatedAt: parsed && typeof parsed.updatedAt === "string" ? parsed.updatedAt : ""
+        };
+      } catch (error) {
+        return { available: true, visited: [], updatedAt: "" };
+      }
+    }
+
+    function writeProgress(slug, visited) {
+      var payload = {
+        visited: normalizeVisited(visited),
+        updatedAt: new Date().toISOString()
+      };
+
+      try {
+        window.localStorage.setItem(storageKey(slug), JSON.stringify(payload));
+        return payload;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function countVisited(itemPaths, visited) {
+      var visitedLookup = Object.create(null);
+
+      visited.forEach(function (path) {
+        visitedLookup[path] = true;
+      });
+
+      return itemPaths.reduce(function (count, path) {
+        return count + (visitedLookup[path] ? 1 : 0);
+      }, 0);
+    }
+
+    function updateArticleModules() {
+      var roots = Array.prototype.slice.call(document.querySelectorAll("[data-reading-path-root]"));
+
+      roots.forEach(function (root) {
+        var slug = root.getAttribute("data-collection-slug") || "";
+        var currentPath = root.getAttribute("data-current-path") || "";
+        var itemPaths = parseJsonAttribute(root, "data-item-paths");
+        var progressNode = root.querySelector("[data-reading-path-progress]");
+        var state;
+        var nextState;
+
+        if (!slug || !currentPath || !itemPaths.length || !progressNode) {
+          return;
+        }
+
+        state = readProgress(slug);
+        if (!state.available) {
+          return;
+        }
+
+        nextState = state.visited.slice();
+        if (nextState.indexOf(currentPath) === -1) {
+          nextState.push(currentPath);
+          state = writeProgress(slug, nextState) || { visited: nextState };
+        }
+
+        progressNode.textContent = "Visited " + countVisited(itemPaths, state.visited || nextState) + " of " + itemPaths.length + " in this browser.";
+      });
+    }
+
+    function findResumeTarget(itemPaths, itemTitles, visited, startHerePath, startHereTitle) {
+      var visitedLookup = Object.create(null);
+      var index;
+
+      visited.forEach(function (path) {
+        visitedLookup[path] = true;
+      });
+
+      if (startHerePath && visitedLookup[startHerePath] !== true) {
+        return {
+          path: startHerePath,
+          title: startHereTitle || startHerePath,
+          labelPrefix: visited.length ? "Resume with " : "Start with "
+        };
+      }
+
+      for (index = 0; index < itemPaths.length; index += 1) {
+        if (visitedLookup[itemPaths[index]] === true) {
+          continue;
+        }
+
+        return {
+          path: itemPaths[index],
+          title: itemTitles[index] || itemPaths[index],
+          labelPrefix: visited.length ? "Resume with " : "Start with "
+        };
+      }
+
+      if (!itemPaths.length) {
+        return null;
+      }
+
+      return {
+        path: itemPaths[0],
+        title: itemTitles[0] || itemPaths[0],
+        labelPrefix: "Start Again with "
+      };
+    }
+
+    function updateCollectionModules() {
+      var roots = Array.prototype.slice.call(document.querySelectorAll("[data-collection-progress-root]"));
+
+      roots.forEach(function (root) {
+        var slug = root.getAttribute("data-collection-slug") || "";
+        var itemPaths = parseJsonAttribute(root, "data-item-paths");
+        var itemTitles = parseJsonAttribute(root, "data-item-titles");
+        var startHerePath = root.getAttribute("data-start-here-path") || "";
+        var startHereTitle = root.getAttribute("data-start-here-title") || "";
+        var summary = root.querySelector("[data-collection-progress-summary]");
+        var resume = root.querySelector("[data-collection-progress-resume]");
+        var itemStates = Array.prototype.slice.call(document.querySelectorAll("[data-collection-item-path]"));
+        var state;
+        var visitedCount;
+        var resumeTarget;
+        var visitedLookup = Object.create(null);
+
+        if (!slug || !summary || !resume) {
+          return;
+        }
+
+        state = readProgress(slug);
+        if (!state.available) {
+          return;
+        }
+
+        visitedCount = countVisited(itemPaths, state.visited);
+        summary.textContent = "Visited " + visitedCount + " of " + itemPaths.length + " pieces in this browser.";
+
+        resumeTarget = findResumeTarget(itemPaths, itemTitles, state.visited, startHerePath, startHereTitle);
+        if (resumeTarget) {
+          resume.href = resumeTarget.path;
+          resume.textContent = resumeTarget.labelPrefix + resumeTarget.title;
+        }
+
+        state.visited.forEach(function (path) {
+          visitedLookup[path] = true;
+        });
+
+        itemStates.forEach(function (item) {
+          var itemPath = item.getAttribute("data-collection-item-path") || "";
+          var stateNode = item.querySelector("[data-collection-item-state]");
+
+          if (!stateNode) {
+            return;
+          }
+
+          if (visitedLookup[itemPath] === true) {
+            stateNode.textContent = "Visited";
+            stateNode.classList.add("collection-pill", "collection-pill--visited");
+          } else {
+            stateNode.textContent = "";
+            stateNode.classList.remove("collection-pill", "collection-pill--visited");
+          }
+        });
+      });
+    }
+
+    updateArticleModules();
+    updateCollectionModules();
+  }());
+</script>

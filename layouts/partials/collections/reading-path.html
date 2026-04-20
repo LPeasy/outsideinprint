@@ -1,0 +1,101 @@
+{{ $matches := partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
+{{ if gt (len $matches) 0 }}
+  {{ $primary := index $matches 0 }}
+  {{ $items := $primary.items | default (slice) }}
+  {{ $itemCount := len $items }}
+  {{ if gt $itemCount 0 }}
+    {{ $currentIndex := -1 }}
+    {{ $currentPath := .RelPermalink }}
+    {{ $startHereSlug := lower (printf "%v" ($primary.collection.start_here | default "")) }}
+    {{ $startHere := false }}
+    {{ $itemPaths := slice }}
+    {{ $itemTitles := slice }}
+    {{ $remainingMinutes := 0 }}
+
+    {{ range $index, $item := $items }}
+      {{ $itemPaths = $itemPaths | append $item.RelPermalink }}
+      {{ $itemTitles = $itemTitles | append $item.Title }}
+      {{ if eq $item.RelPermalink $currentPath }}
+        {{ $currentIndex = $index }}
+      {{ end }}
+      {{ if eq (lower (printf "%v" ($item.Params.slug | default $item.File.BaseFileName))) $startHereSlug }}
+        {{ $startHere = $item }}
+      {{ end }}
+    {{ end }}
+
+    {{ if ge $currentIndex 0 }}
+      {{ range $index, $item := $items }}
+        {{ if gt $index $currentIndex }}
+          {{ $remainingMinutes = add $remainingMinutes (int $item.ReadingTime) }}
+        {{ end }}
+      {{ end }}
+
+      {{ $position := add $currentIndex 1 }}
+      {{ $remainingPieces := sub $itemCount $position }}
+      {{ $collectionUrl := printf "collections/%s/" $primary.collection.slug | absURL }}
+      {{ with $primary.page }}
+        {{ $collectionUrl = .RelPermalink }}
+      {{ end }}
+      {{ $previous := false }}
+      {{ if gt $currentIndex 0 }}
+        {{ $previous = index $items (sub $currentIndex 1) }}
+      {{ end }}
+      {{ $next := false }}
+      {{ if lt $position $itemCount }}
+        {{ $next = index $items $position }}
+      {{ end }}
+      {{ $startHerePath := "" }}
+      {{ if $startHere }}
+        {{ $startHerePath = $startHere.RelPermalink }}
+      {{ end }}
+
+      <aside
+        class="reading-path"
+        aria-labelledby="reading-path-title"
+        data-reading-path-root
+        data-collection-slug="{{ $primary.collection.slug }}"
+        data-collection-url="{{ $collectionUrl }}"
+        data-current-path="{{ $currentPath }}"
+        data-item-paths="{{ $itemPaths | jsonify | htmlEscape }}"
+        data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"
+        data-start-here-path="{{ $startHerePath }}"
+      >
+        <p class="reading-path__eyebrow">Reading Path</p>
+        <h2 id="reading-path-title" class="reading-path__title"><a href="{{ $collectionUrl }}">{{ $primary.collection.title }}</a></h2>
+        <p class="reading-path__meta">Piece {{ $position }} of {{ $itemCount }}</p>
+        <p class="reading-path__meta">Remaining after this piece: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min</p>
+        {{ if and $startHere (eq $currentPath $startHere.RelPermalink) }}
+          <p class="reading-path__status">Entry Point</p>
+        {{ else if $startHere }}
+          <p class="reading-path__status">Entry Point: <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a></p>
+        {{ end }}
+        <p class="reading-path__status" data-reading-path-progress>Visited 1 of {{ $itemCount }} in this browser.</p>
+        <div class="reading-path__nav" aria-label="Sequence navigation">
+          <div class="reading-path__nav-item">
+            <span class="reading-path__nav-label">Previous</span>
+            {{ with $previous }}
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ else }}
+              <span>None</span>
+            {{ end }}
+          </div>
+          <div class="reading-path__nav-item">
+            <span class="reading-path__nav-label">Next</span>
+            {{ with $next }}
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ else }}
+              <span>None</span>
+            {{ end }}
+          </div>
+        </div>
+        <div class="reading-path__cta">
+          {{ with $next }}
+            <a href="{{ .RelPermalink }}" data-reading-path-cta>Continue to {{ .Title }}</a>
+          {{ else }}
+            <a href="{{ $collectionUrl }}" data-reading-path-cta>View Collection</a>
+          {{ end }}
+        </div>
+      </aside>
+    {{ end }}
+  {{ end }}
+{{ end }}
