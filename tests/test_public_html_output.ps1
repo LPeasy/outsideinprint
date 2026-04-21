@@ -361,7 +361,6 @@ $indexationIssues = New-Object System.Collections.Generic.List[string]
 $uxIssues = New-Object System.Collections.Generic.List[string]
 $legacyCleanupIssues = New-Object System.Collections.Generic.List[string]
 $retiredRouteIssues = New-Object System.Collections.Generic.List[string]
-$hasHomepageAnalytics = $false
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
 $targetPageHtml = @{}
@@ -741,14 +740,6 @@ foreach ($file in $htmlFiles) {
 
   if ($content.IndexOf('ZgotmplZ', [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
     $zgotmplzIssues.Add($relativePath)
-  }
-
-  if (
-    $relativePath.EndsWith('public/index.html', [System.StringComparison]::OrdinalIgnoreCase) -and
-    $content -match 'data-analytics-event=(?:"internal_promo_click"|internal_promo_click)' -and
-    $content -match 'data-analytics-source-slot=(?:"random_link"|random_link)'
-  ) {
-    $hasHomepageAnalytics = $true
   }
 
   if (
@@ -1137,13 +1128,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?Welcome.*?Essays.*?Gallery.*?Collections.*?Feeling curious\?.*?</section>'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?Welcome.*?Essays.*?Gallery.*?Collections.*?</section>'
     Message = 'expected the homepage browse band to render the curated route set in editorial order'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?(?:Dialogues|Library).*?</section>'
-    Message = 'expected the homepage browse band to omit the retired Dialogues and Library routes'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?(?:Dialogues|Library|Feeling curious\?).*?</section>'
+    Message = 'expected the homepage browse band to omit the retired Dialogues, Library, and Feeling curious? routes'
     ShouldNotMatch = $true
   },
   @{
@@ -1516,10 +1507,6 @@ if ($localizedMediumImageCount -eq 0) {
 
 if ($zgotmplzIssues.Count -gt 0) {
   throw ("Found ZgotmplZ in generated HTML. Samples: {0}" -f (Format-SampleList -Items $zgotmplzIssues))
-}
-
-if (-not $hasHomepageAnalytics) {
-  throw "Homepage random-card analytics attributes were not emitted as expected in public/index.html."
 }
 
 if ($publicPdfAffordanceHits.Count -gt 0) {

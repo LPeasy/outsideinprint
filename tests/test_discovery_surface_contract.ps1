@@ -74,8 +74,7 @@ foreach ($requiredSnippet in @(
   'site.GetPage "/start-here"',
   'site.GetPage "/essays"',
   'site.GetPage "/gallery"',
-  'site.GetPage "/collections"',
-  '"Feeling curious?"'
+  'site.GetPage "/collections"'
 )) {
   if ($indexTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/index.html to contain: $requiredSnippet"
@@ -84,7 +83,10 @@ foreach ($requiredSnippet in @(
 
 foreach ($retiredSnippet in @(
   'site.GetPage "/syd-and-oliver"',
-  'site.GetPage "/library"'
+  'site.GetPage "/library"',
+  '"Feeling curious?"',
+  'data-analytics-source-slot="random_link"',
+  'data-analytics-path="/random/"'
 )) {
   if ($indexTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/index.html to omit the retired homepage browse route: $retiredSnippet"
