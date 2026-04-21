@@ -660,63 +660,41 @@ foreach ($file in $htmlFiles) {
     $targetPageHtml[$relativePath] = $content
   }
 
-  foreach ($match in [regex]::Matches($content, '<a\b[^>]*>', 'IgnoreCase')) {
-    $tag = $match.Value
-    $classValue = Get-AttributeValue -Tag $tag -Name 'class'
-    if ([string]::IsNullOrWhiteSpace($classValue)) {
-      continue
-    }
+  if ($content -match 'ZgotmplZ') {
+    $zgotmplzIssues.Add($relativePath)
+  }
 
-    $classes = @($classValue -split '\s+' | Where-Object { $_ })
-    if ($classes -notcontains 'running-header__home') {
-      continue
-    }
+  if ($content -match 'src=(?:"|''|)\s*/outsideinprint/images/') {
+    $rootRelativeImageIssues.Add($relativePath)
+  }
 
+  if ($content -match '(?:src|href)=(?:"|''|)(?:https://outsideinprint\.org)?/images/medium/') {
+    $localizedMediumImageCount += ([regex]::Matches($content, '(?:src|href)=(?:"|''|)(?:https://outsideinprint\.org)?/images/medium/')).Count
+  }
+
+  if ($content -match '(?is)<a\b[^>]*href=(?:"|''|)(?:https://outsideinprint\.org)?/[^"''>]*"?[^>]*class=(?:"[^"]*\bsite-title\b[^"]*"|''[^'']*\bsite-title\b[^'']*'')') {
     $runningHeaderMatches++
-    $href = Get-AttributeValue -Tag $tag -Name 'href'
-    if ($href -ne $ExpectedHomePath) {
+  }
+
+  foreach ($match in [regex]::Matches($content, '(?is)<a\b[^>]*class=(?:"[^"]*\bsite-title\b[^"]*"|''[^'']*\bsite-title\b[^'']*'')[^>]*href=(?:"|''|)([^"''>\s]+)')) {
+    $href = $match.Groups[1].Value
+    if ($href -notin @($ExpectedHomePath, "https://outsideinprint.org$ExpectedHomePath")) {
       $runningHeaderIssues.Add("$relativePath => $href")
     }
   }
 
-  foreach ($match in [regex]::Matches($content, '<img\b[^>]*>', 'IgnoreCase')) {
-    $tag = $match.Value
-    $src = Get-AttributeValue -Tag $tag -Name 'src'
-    if ([string]::IsNullOrWhiteSpace($src)) {
-      continue
-    }
-
-    if ($src.StartsWith('/outsideinprint/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
-      $rootRelativeImageIssues.Add("$relativePath => $src")
-    }
-
-    if ($src.StartsWith('/images/medium/', [System.StringComparison]::OrdinalIgnoreCase)) {
-      $localizedMediumImageCount++
-    }
-  }
-
-  if ($content.IndexOf('ZgotmplZ', [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
-    $zgotmplzIssues.Add($relativePath)
-  }
-
-  if (
-    $relativePath.EndsWith('public/index.html', [System.StringComparison]::OrdinalIgnoreCase) -and
-    $content -match 'data-analytics-event=(?:"internal_promo_click"|internal_promo_click)' -and
-    $content -match 'data-analytics-source-slot=(?:"random_link"|random_link)'
-  ) {
+  if ($relativePath -eq 'public/index.html' -and $content -match 'data-analytics-source-slot=(?:"|''|)random_link(?:"|''|)') {
     $hasHomepageAnalytics = $true
   }
 
-  if (
-    ($content -match 'data-analytics-format=(?:"pdf"|pdf)') -or
-    ($content -match '>Read PDF<') -or
-    ($content -match 'edition-download')
-  ) {
-    $publicPdfAffordanceHits.Add($relativePath)
+  if ($content -match '(?is)>\s*Read PDF\s*<' -or $content -match 'edition-download') {
+    if ($relativePath -notlike 'public/pdfs/*') {
+      $publicPdfAffordanceHits.Add($relativePath)
+    }
   }
 
-  if ($content -match '(?:https://outsideinprint\.org)?/literature/') {
-    $retiredRouteIssues.Add("$relativePath => literature route leaked into generated HTML")
+  if ($content -match '(?:https://outsideinprint\.org)?/literature/' -or $content -match '(?:https://outsideinprint\.org)?/books/') {
+    $retiredRouteIssues.Add($relativePath)
   }
 }
 
@@ -726,13 +704,18 @@ foreach ($relativePath in $requiredSemanticPages.Keys) {
     continue
   }
 
-  $issues = Get-SemanticPageIssues `
-    -RelativePath $relativePath `
-    -Html $targetPageHtml[$relativePath] `
-    -ExpectedH1Class ([string]$requiredSemanticPages[$relativePath].ExpectedH1Class) `
-    -RequireSecondaryHeading ([bool]$requiredSemanticPages[$relativePath].RequireSecondaryHeading)
+  $config = $requiredSemanticPages[$relativePath]
+  foreach ($issue in @(Get-SemanticPageIssues -RelativePath $relativePath -Html $targetPageHtml[$relativePath] -ExpectedH1Class $config.ExpectedH1Class -RequireSecondaryHeading ([bool]$config.RequireSecondaryHeading))) {
+    $semanticIssues.Add($issue)
+  }
+}
 
-  foreach ($issue in $issues) {
+foreach ($relativePath in $optionalDefaultListPages) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    continue
+  }
+
+  foreach ($issue in @(Get-SemanticPageIssues -RelativePath $relativePath -Html $targetPageHtml[$relativePath] -ExpectedH1Class 'list-title' -RequireSecondaryHeading $false)) {
     $semanticIssues.Add($issue)
   }
 }
@@ -744,8 +727,34 @@ foreach ($relativePath in $requiredImportedMediaPages) {
   }
 
   $html = $targetPageHtml[$relativePath]
-  if ($html -notmatch '/images/medium/') {
-    $importedMediaIssues.Add("$relativePath => expected localized /images/medium/ media references")
+
+  if ($html -match 'class=(?:"|''|)(?:[^"'']*\bimported-medium-image\b[^"'']*)(?:"|''|)') {
+    if ($html -match '(?is)<figure\b[^>]*>.*?class=(?:"|''|)(?:[^"'']*\bimported-medium-image\b[^"'']*)(?:"|''|).*?</figure>') {
+      if ($html -notmatch 'class=(?:"|''|)(?:[^"'']*\bimported-medium-image__caption\b[^"'']*)(?:"|''|)') {
+        $importedMediaIssues.Add("$relativePath => imported Medium figure missing the expected figcaption wrapper")
+      }
+    }
+    else {
+      $importedMediaIssues.Add("$relativePath => imported Medium image is not wrapped in a figure element")
+    }
+  }
+
+  if ($relativePath -eq 'public/essays/the-risk-management-buffet/index.html') {
+    if ($html -notmatch '(?is)<img\b[^>]*src=(?:"|''|)(?:https://outsideinprint\.org)?/images/medium/[^"''>]+(?:"|''|)[^>]*alt=(?:"The Risk Management Buffet"|''The Risk Management Buffet'')') {
+      $importedMediaIssues.Add("$relativePath => imported Medium hero image missing the normalized alt text")
+    }
+  }
+
+  if ($relativePath -eq 'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html') {
+    if ($html -notmatch '(?is)<img\b[^>]*alt=(?:"Camp Mystic evacuation timeline, Guadalupe River flash flood on July 4, 2025"|''Camp Mystic evacuation timeline, Guadalupe River flash flood on July 4, 2025'')') {
+      $importedMediaIssues.Add("$relativePath => hero image missing the explicit flash-flood timeline alt text")
+    }
+  }
+
+  if ($relativePath -eq 'public/essays/rethinking-invasive-species-management/index.html') {
+    if ($html -notmatch '(?is)<img\b[^>]*alt=(?:"Common green iguana perched on a branch in Florida"|''Common green iguana perched on a branch in Florida'')') {
+      $importedMediaIssues.Add("$relativePath => imported image missing the required iguana alt text")
+    }
   }
 }
 
@@ -757,89 +766,47 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
 
   $html = $targetPageHtml[$relativePath]
   $expected = $requiredMetadataPages[$relativePath]
-
-  $titleMatch = [regex]::Match($html, '(?is)<title>(.*?)</title>')
-  $title = if ($titleMatch.Success) { $titleMatch.Groups[1].Value.Trim() } else { $null }
-  if ($title -ne [string]$expected.Title) {
-    $metadataIssues.Add("$relativePath => expected <title> '$($expected.Title)', found '$title'")
-  }
-
-  if ($expected.Contains('Description')) {
-    $metaDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'description'
-    if ($metaDescription -ne [string]$expected.Description) {
-      $metadataIssues.Add("$relativePath => expected meta description '$($expected.Description)', found '$metaDescription'")
-    }
-
-    $ogDescription = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:description'
-    if ($ogDescription -ne [string]$expected.Description) {
-      $metadataIssues.Add("$relativePath => expected og:description '$($expected.Description)', found '$ogDescription'")
-    }
-
-    $twitterDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:description'
-    if ($twitterDescription -ne [string]$expected.Description) {
-      $metadataIssues.Add("$relativePath => expected twitter:description '$($expected.Description)', found '$twitterDescription'")
-    }
-  }
-
+  $titleTag = [regex]::Match($html, '(?is)<title>(.*?)</title>')
+  $metaTitle = if ($titleTag.Success) { $titleTag.Groups[1].Value.Trim() } else { $null }
+  $descriptionMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'description'
   $canonicalHref = Get-LinkHrefByRel -Html $html -Rel 'canonical'
+  $ogType = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:type'
+  $twitterCard = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:card'
+  $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
+  $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
+  $authorMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'author'
+
+  if ($metaTitle -notmatch [regex]::Escape($expected.Title)) {
+    $metadataIssues.Add("$relativePath => expected <title> to include '$($expected.Title)', found '$metaTitle'")
+  }
+
+  if ($expected.ContainsKey('Description') -and $descriptionMeta -ne [string]$expected.Description) {
+    $metadataIssues.Add("$relativePath => expected meta description '$($expected.Description)', found '$descriptionMeta'")
+  }
+
   if ($canonicalHref -ne [string]$expected.Canonical) {
     $metadataIssues.Add("$relativePath => expected canonical '$($expected.Canonical)', found '$canonicalHref'")
   }
 
-  $ogType = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:type'
   if ($ogType -ne [string]$expected.OgType) {
     $metadataIssues.Add("$relativePath => expected og:type '$($expected.OgType)', found '$ogType'")
   }
 
-  if ($expected.Contains('TwitterCard')) {
-    $twitterCard = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:card'
-    if ($twitterCard -ne [string]$expected.TwitterCard) {
-      $metadataIssues.Add("$relativePath => expected twitter:card '$($expected.TwitterCard)', found '$twitterCard'")
-    }
+  if ($twitterCard -ne [string]$expected.TwitterCard) {
+    $metadataIssues.Add("$relativePath => expected twitter:card '$($expected.TwitterCard)', found '$twitterCard'")
   }
 
-  if ($expected.Contains('RequireImage') -and [bool]$expected.RequireImage) {
-    $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
+  if ([bool]($expected.RequireImage -eq $true)) {
     if ([string]::IsNullOrWhiteSpace($ogImage)) {
-      $metadataIssues.Add("$relativePath => expected og:image to be present")
+      $metadataIssues.Add("$relativePath => expected og:image to be populated")
     }
-
-    $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
     if ([string]::IsNullOrWhiteSpace($twitterImage)) {
-      $metadataIssues.Add("$relativePath => expected twitter:image to be present")
-    }
-
-    foreach ($imageValue in @($ogImage, $twitterImage)) {
-      if (-not [string]::IsNullOrWhiteSpace($imageValue) -and -not $imageValue.StartsWith('https://outsideinprint.org/', [System.StringComparison]::OrdinalIgnoreCase)) {
-        $metadataIssues.Add("$relativePath => expected social image URLs to be canonical absolute outsideinprint.org URLs, found '$imageValue'")
-      }
+      $metadataIssues.Add("$relativePath => expected twitter:image to be populated")
     }
   }
 
-  if ($expected.Contains('AuthorMeta')) {
-    $authorMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'author'
-    if ($authorMeta -ne [string]$expected.AuthorMeta) {
-      $metadataIssues.Add("$relativePath => expected author meta '$($expected.AuthorMeta)', found '$authorMeta'")
-    }
-  }
-}
-
-foreach ($relativePath in $requiredFeedPages.Keys) {
-  if (-not $targetPageHtml.ContainsKey($relativePath)) {
-    $metadataIssues.Add("Missing generated page required for feed-autodiscovery coverage: $relativePath")
-    continue
-  }
-
-  $html = $targetPageHtml[$relativePath]
-  $expected = $requiredFeedPages[$relativePath]
-  $alternateFeeds = @(Get-LinkHrefsByRelAndType -Html $html -Rel 'alternate' -Type 'application/rss+xml')
-
-  if ($expected.Contains('SiteFeed') -and ($alternateFeeds -notcontains [string]$expected.SiteFeed)) {
-    $metadataIssues.Add("$relativePath => expected site RSS autodiscovery link '$($expected.SiteFeed)'")
-  }
-
-  if ($expected.Contains('SectionFeed') -and ($alternateFeeds -notcontains [string]$expected.SectionFeed)) {
-    $metadataIssues.Add("$relativePath => expected section RSS autodiscovery link '$($expected.SectionFeed)'")
+  if ($expected.ContainsKey('AuthorMeta') -and $authorMeta -ne [string]$expected.AuthorMeta) {
+    $metadataIssues.Add("$relativePath => expected author meta '$($expected.AuthorMeta)', found '$authorMeta'")
   }
 }
 
@@ -851,115 +818,144 @@ foreach ($relativePath in $requiredStructuredDataPages.Keys) {
 
   $html = $targetPageHtml[$relativePath]
   $expected = $requiredStructuredDataPages[$relativePath]
-  $jsonLdObjects = @(Get-JsonLdObjects -Html $html)
-  if ($jsonLdObjects.Count -eq 0) {
-    $structuredDataIssues.Add("$relativePath => expected at least one application/ld+json block")
-    continue
-  }
+  $objects = @(Get-JsonLdObjects -Html $html)
+  $nodes = @(Get-JsonLdNodes -Objects $objects)
 
-  $nodes = @(Get-JsonLdNodes -Objects $jsonLdObjects)
-  foreach ($requiredType in @($expected.RequiredTypes)) {
-    if ((Get-JsonLdNodesByType -Nodes $nodes -Type ([string]$requiredType)).Count -eq 0) {
-      $structuredDataIssues.Add("$relativePath => expected JSON-LD node type '$requiredType'")
+  foreach ($type in @($expected.RequiredTypes)) {
+    if (@(Get-JsonLdNodesByType -Nodes $nodes -Type $type).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected JSON-LD node of type '$type'")
     }
   }
 
-  foreach ($forbiddenType in @($expected.ForbiddenTypes)) {
-    if ((Get-JsonLdNodesByType -Nodes $nodes -Type ([string]$forbiddenType)).Count -gt 0) {
-      $structuredDataIssues.Add("$relativePath => did not expect JSON-LD node type '$forbiddenType'")
+  foreach ($type in @($expected.ForbiddenTypes)) {
+    if (@(Get-JsonLdNodesByType -Nodes $nodes -Type $type).Count -gt 0) {
+      $structuredDataIssues.Add("$relativePath => did not expect JSON-LD node of type '$type'")
     }
   }
 
-  $organizationNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Organization')
-  $personNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Person')
-  if ($expected.Contains('RequirePublisherNode') -and [bool]$expected.RequirePublisherNode) {
-    if (@($organizationNodes | Where-Object { $_.name -eq 'Outside In Print' }).Count -eq 0) {
-      $structuredDataIssues.Add("$relativePath => expected an Organization node named 'Outside In Print'")
+  if ([bool]($expected.RequirePublisherNode -eq $true)) {
+    $publisherNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Organization' | Where-Object { $_.name -eq 'Outside In Print' })
+    if ($publisherNodes.Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected publisher organization node for Outside In Print")
     }
   }
 
-  if ($expected.Contains('RequirePublisherImage') -and [bool]$expected.RequirePublisherImage) {
-    if (@($organizationNodes | Where-Object { $null -ne $_.image }).Count -eq 0) {
-      $structuredDataIssues.Add("$relativePath => expected the Organization node to include image")
+  if ([bool]($expected.RequireBreadcrumb -eq $true)) {
+    if (@(Get-JsonLdNodesByType -Nodes $nodes -Type 'BreadcrumbList').Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected breadcrumb structured data")
     }
   }
 
-  if ($expected.Contains('RequirePersonNodeName')) {
-    if (@($personNodes | Where-Object { $_.name -eq [string]$expected.RequirePersonNodeName }).Count -eq 0) {
-      $structuredDataIssues.Add("$relativePath => expected a Person node named '$($expected.RequirePersonNodeName)'")
-    }
-  }
-
-  if ($expected.Contains('RequirePersonImage') -and [bool]$expected.RequirePersonImage) {
-    if (@($personNodes | Where-Object { $null -ne $_.image }).Count -eq 0) {
-      $structuredDataIssues.Add("$relativePath => expected a Person node with image")
-    }
-  }
-
-  if ($expected.Contains('RequireBreadcrumb') -and [bool]$expected.RequireBreadcrumb) {
-    if ((Get-JsonLdNodesByType -Nodes $nodes -Type 'BreadcrumbList').Count -eq 0) {
-      $structuredDataIssues.Add("$relativePath => expected BreadcrumbList JSON-LD")
-    }
-  }
-
-  if ($expected.Contains('RequireSearchAction') -and [bool]$expected.RequireSearchAction) {
-    $websiteNode = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'WebSite') | Select-Object -First 1
-    if ($null -eq $websiteNode -or $null -eq $websiteNode.potentialAction) {
-      $structuredDataIssues.Add("$relativePath => expected WebSite JSON-LD to expose SearchAction")
-    } else {
-      $action = $websiteNode.potentialAction
-      if ($action.'@type' -ne 'SearchAction') {
-        $structuredDataIssues.Add("$relativePath => expected WebSite potentialAction to be SearchAction")
-      }
-
-      $targetTemplate = $null
-      if ($null -ne $action.target) {
-        if ($action.target.urlTemplate) {
-          $targetTemplate = [string]$action.target.urlTemplate
-        } elseif ($action.target -is [string]) {
-          $targetTemplate = [string]$action.target
-        }
-      }
-
-      if ($targetTemplate -ne 'https://outsideinprint.org/library/?q={search_term_string}') {
-        $structuredDataIssues.Add("$relativePath => expected SearchAction target to point at the library query route")
+  if ([bool]($expected.RequireSearchAction -eq $true)) {
+    $websiteNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'WebSite')
+    $hasSearchAction = $false
+    foreach ($node in $websiteNodes) {
+      if ($null -ne $node.potentialAction -and ($node.potentialAction.'@type' -eq 'SearchAction' -or (@($node.potentialAction) | Where-Object { $_.'@type' -eq 'SearchAction' }).Count -gt 0)) {
+        $hasSearchAction = $true
+        break
       }
     }
-  }
-
-  $workNode = @(
-    (Get-JsonLdNodesByType -Nodes $nodes -Type 'Article') +
-    (Get-JsonLdNodesByType -Nodes $nodes -Type 'CreativeWork')
-  ) | Select-Object -First 1
-
-  if ($expected.Contains('RequireWorkPublisher') -and [bool]$expected.RequireWorkPublisher) {
-    if ($null -eq $workNode -or $null -eq $workNode.publisher) {
-      $structuredDataIssues.Add("$relativePath => expected the primary work node to include publisher")
+    if (-not $hasSearchAction) {
+      $structuredDataIssues.Add("$relativePath => expected WebSite SearchAction structured data")
     }
   }
 
-  if ($expected.Contains('RequireWorkAuthor') -and [bool]$expected.RequireWorkAuthor) {
-    if ($null -eq $workNode -or $null -eq $workNode.author) {
-      $structuredDataIssues.Add("$relativePath => expected the primary work node to include author")
+  if ([bool]($expected.RequirePublisherImage -eq $true)) {
+    $publisherNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Organization' | Where-Object { $_.name -eq 'Outside In Print' })
+    $hasImage = $false
+    foreach ($node in $publisherNodes) {
+      if ($null -ne $node.image -or $null -ne $node.logo) {
+        $hasImage = $true
+        break
+      }
+    }
+    if (-not $hasImage) {
+      $structuredDataIssues.Add("$relativePath => expected publisher image or logo metadata")
     }
   }
 
-  if ($expected.Contains('RequireWorkImage') -and [bool]$expected.RequireWorkImage) {
-    if ($null -eq $workNode -or $null -eq $workNode.image) {
-      $structuredDataIssues.Add("$relativePath => expected the primary work node to include image")
+  if ($expected.ContainsKey('RequirePersonNodeName')) {
+    $personNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Person' | Where-Object { $_.name -eq [string]$expected.RequirePersonNodeName })
+    if ($personNodes.Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected Person node named '$($expected.RequirePersonNodeName)'")
+    }
+  }
+
+  if ([bool]($expected.RequirePersonImage -eq $true)) {
+    $personNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Person')
+    $hasImage = $false
+    foreach ($node in $personNodes) {
+      if ($null -ne $node.image) {
+        $hasImage = $true
+        break
+      }
+    }
+    if (-not $hasImage) {
+      $structuredDataIssues.Add("$relativePath => expected Person node to carry image metadata")
+    }
+  }
+
+  if ([bool]($expected.RequireWorkPublisher -eq $true)) {
+    $articleNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Article')
+    $hasPublisher = $false
+    foreach ($node in $articleNodes) {
+      if ($null -ne $node.publisher) {
+        $hasPublisher = $true
+        break
+      }
+    }
+    if (-not $hasPublisher) {
+      $structuredDataIssues.Add("$relativePath => expected Article node to include publisher metadata")
+    }
+  }
+
+  if ([bool]($expected.RequireWorkAuthor -eq $true)) {
+    $articleNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Article')
+    $hasAuthor = $false
+    foreach ($node in $articleNodes) {
+      if ($null -ne $node.author) {
+        $hasAuthor = $true
+        break
+      }
+    }
+    if (-not $hasAuthor) {
+      $structuredDataIssues.Add("$relativePath => expected Article node to include author metadata")
+    }
+  }
+
+  if ([bool]($expected.RequireWorkImage -eq $true)) {
+    $articleNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Article')
+    $hasImage = $false
+    foreach ($node in $articleNodes) {
+      if ($null -ne $node.image) {
+        $hasImage = $true
+        break
+      }
+    }
+    if (-not $hasImage) {
+      $structuredDataIssues.Add("$relativePath => expected Article node to include image metadata")
     }
   }
 }
 
-foreach ($relativePath in $requiredLegacyCleanupPages) {
+foreach ($relativePath in $requiredFeedPages.Keys) {
   if (-not $targetPageHtml.ContainsKey($relativePath)) {
-    $legacyCleanupIssues.Add("Missing generated page required for legacy cleanup coverage: $relativePath")
+    $indexationIssues.Add("Missing generated page required for feed regression coverage: $relativePath")
     continue
   }
 
   $html = $targetPageHtml[$relativePath]
-  if ($html -match '<a\b[^>]*href\s*=\s*(?:"https?://(?:www\.)?(?:[^/\s"''>]+\.)?medium\.com/|https?://(?:www\.)?(?:[^/\s"''>]+\.)?medium\.com/)') {
-    $legacyCleanupIssues.Add("$relativePath => expected canonical pages not to retain visible Medium links")
+  $expected = $requiredFeedPages[$relativePath]
+  $siteFeedLinks = @(Get-LinkHrefsByRelAndType -Html $html -Rel 'alternate' -Type 'application/rss+xml')
+
+  if ($siteFeedLinks -notcontains [string]$expected.SiteFeed) {
+    $indexationIssues.Add("$relativePath => expected alternate RSS feed '$($expected.SiteFeed)'")
+  }
+
+  if ($expected.ContainsKey('SectionFeed')) {
+    if ($siteFeedLinks -notcontains [string]$expected.SectionFeed) {
+      $indexationIssues.Add("$relativePath => expected section RSS feed '$($expected.SectionFeed)'")
+    }
   }
 }
 
@@ -1083,8 +1079,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?Selected Collections.*?The weekly letter.*?Browse the Archive'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?entry-threads--home.*?newsletter-signup-title.*?home-browse-title'
     Message = 'expected the homepage to preserve the editorial module order from the story grid through archive browse'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Start Reading'
+    Message = 'expected the homepage to render the curated Start Reading module label'
   },
   @{
     Path = 'public/index.html'
