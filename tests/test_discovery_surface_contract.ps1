@@ -346,6 +346,20 @@ foreach ($requiredSnippet in @(
   }
 }
 
+$articleSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/single.html') -Raw
+foreach ($requiredSnippet in @(
+  'piece--collection-accent',
+  'data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"',
+  'data-piece-collection-room-theme="{{ $primaryCollection.collection.room_theme }}"',
+  'class="piece-collection-context"',
+  'From the Collection',
+  'data-analytics-source-slot="article_collection_context"'
+)) {
+  if ($articleSingleTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/_default/single.html to contain: $requiredSnippet"
+  }
+}
+
 $collectionsData = Get-Content -Path (Join-Path $repoRoot 'data/collections.yaml') -Raw
 foreach ($requiredSnippet in @(
   'room_theme: ledger-editorial-desk',
@@ -364,6 +378,26 @@ foreach ($requiredSnippet in @(
 
 if ($collectionsData -match '(?s)- slug: civic-institutions-and-public-power.*?room_theme:') {
   throw 'Expected non-live collection civic-institutions-and-public-power not to define room_theme yet.'
+}
+
+$collectionsDoc = Get-Content -Path (Join-Path $repoRoot 'docs/collections-system.md') -Raw
+foreach ($requiredSnippet in @(
+  'From the Collection',
+  'first public match',
+  'primary-collection light-accent layer'
+)) {
+  if ($collectionsDoc -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected docs/collections-system.md to contain: $requiredSnippet"
+  }
+}
+
+$analyticsDoc = Get-Content -Path (Join-Path $repoRoot 'docs/analytics-system.md') -Raw
+foreach ($requiredSnippet in @(
+  'article_collection_context'
+)) {
+  if ($analyticsDoc -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected docs/analytics-system.md to contain: $requiredSnippet"
+  }
 }
 
 $libraryTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.html') -Raw

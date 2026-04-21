@@ -27,7 +27,7 @@ Each collection in `data/collections.yaml` supports these fields:
 - `featured`: allows the collection to appear in featured strips.
 - `weight`: ordering control for collection listings.
 - `start_here`: optional page slug that gets a dedicated callout.
-- `room_theme`: optional collection-detail-page presentation key for explicit per-collection reading-room styling.
+- `room_theme`: optional presentation key reused by collection-detail reading rooms and the article light-accent layer.
 - `description`: short editorial framing used on index, detail, and homepage strips.
 - `metadata`: optional reader-facing label/value pairs.
 - `fallback`: legacy matching fields (`series`, `topics`, `tags`, `sections`).
@@ -69,7 +69,7 @@ Resolution rules:
 - `layouts/collections/list.html`: public collections index.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: article aftermatter, including the primary-collection article-exit continuation zone for collection-member pages and the fallback `Read Next` path for standalone pages.
+- `layouts/_default/single.html`: article header and aftermatter, including the primary-collection light-accent context, the article-exit continuation zone for collection-member pages, and the fallback `Read Next` path for standalone pages.
 - `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
 - `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
 - `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
@@ -82,6 +82,11 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 - A collection-member article renders exactly one article-exit continuation zone.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
+- Eligible collection-member articles also render a compact `From the Collection` header context keyed to that same first public match.
+- The article light-accent layer uses `room_theme` only for restrained article chrome:
+  - the header context block
+  - the continuation module
+- The article body, hero, citation, author card, newsletter, and standalone `Read Next` styling remain neutral.
 - The separate mounted collection-membership block is no longer part of the article-member flow.
 - Standalone articles keep the existing `Read Next` fallback.
 - The continuation zone shows:
@@ -104,7 +109,8 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - The panel does not use cookies, a backend, or analytics state.
 - Each collection row can show a `Visited` marker when the current browser has already opened that piece.
 - Collection detail pages may also apply an explicit per-collection reading-room treatment via `room_theme`.
-- The room system is collection-detail-page only in this pass. Homepage, article-exit continuation, collection index, and library styling do not inherit these themes.
+- Article pages may reuse `room_theme` only for the compact primary-collection light-accent layer.
+- The full room system remains collection-detail-page only. Homepage, collection index, library, and article-body styling do not inherit these themes.
 - The room layer changes visual atmosphere only:
   - background field
   - panel material

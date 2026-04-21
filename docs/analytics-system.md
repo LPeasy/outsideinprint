@@ -77,6 +77,8 @@ To preserve the existing ETL/dashboard contract without the old query-time custo
 
 That metadata is parsed later during normalization.
 
+For `collection_click`, the current source-slot contract includes the article-header context slot `article_collection_context` in addition to homepage, collection-page, and article-continuation collection surfaces.
+
 ## Read Tracking Rules
 
 `essay_read_start`

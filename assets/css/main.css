@@ -1611,6 +1611,232 @@ h2{ margin-top:34px; }
 .running-header__context{
   text-align:right;
 }
+.piece--collection-accent{
+  --piece-collection-accent-border:rgba(127,147,166,.24);
+  --piece-collection-accent-border-strong:rgba(127,147,166,.38);
+  --piece-collection-accent-rule:rgba(236,231,223,.09);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(255,255,255,.026), rgba(255,255,255,0) 42%),
+    rgba(22,22,22,.74);
+  --piece-collection-accent-panel:
+    linear-gradient(180deg, rgba(255,255,255,.038), rgba(255,255,255,0) 44%),
+    rgba(24,24,24,.86);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(127,147,166,.94), rgba(127,147,166,.28));
+  --piece-collection-accent-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 1px 0 rgba(255,255,255,.02);
+  --piece-collection-accent-button-bg:rgba(127,147,166,.16);
+  --piece-collection-accent-button-hover:rgba(127,147,166,.22);
+  --piece-collection-accent-underline:rgba(127,147,166,.45);
+}
+.piece--collection-accent .piece-collection-context,
+.piece--collection-accent .reading-path{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--piece-collection-accent-border);
+  border-radius:var(--radius-soft);
+  background:var(--piece-collection-accent-panel);
+  box-shadow:var(--piece-collection-accent-shadow);
+}
+.piece--collection-accent .piece-collection-context{
+  display:grid;
+  gap:.42rem;
+  margin:1.15rem 0 1.25rem;
+  padding:1rem 1.05rem 1.02rem;
+}
+.piece--collection-accent .piece-collection-context::before,
+.piece--collection-accent .reading-path::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:3px;
+  background:var(--piece-collection-accent-rail);
+  pointer-events:none;
+}
+.piece--collection-accent .piece-collection-context__eyebrow{
+  margin:0;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.piece--collection-accent .piece-collection-context__title{
+  margin:0;
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:1.06rem;
+  font-weight:600;
+  letter-spacing:-.01em;
+  line-height:1.32;
+}
+.piece--collection-accent .piece-collection-context__title a{
+  color:inherit;
+  text-decoration:none;
+}
+.piece--collection-accent .piece-collection-context__title a:hover{
+  color:var(--text-primary);
+  text-decoration:underline;
+  text-decoration-color:var(--piece-collection-accent-underline);
+}
+.piece--collection-accent .piece-collection-context__meta{
+  margin:0;
+  color:var(--text-secondary);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.piece--collection-accent .reading-path{
+  background:var(--piece-collection-accent-surface);
+  border-color:var(--piece-collection-accent-border);
+}
+.piece--collection-accent .reading-path__actions,
+.piece--collection-accent .reading-path__preview,
+.piece--collection-accent .reading-path__archive-links,
+.piece--collection-accent .reading-path__preview-item + .reading-path__preview-item{
+  border-top-color:var(--piece-collection-accent-rule);
+}
+.piece--collection-accent .reading-path__title a:hover,
+.piece--collection-accent .reading-path__archive-links a:hover,
+.piece--collection-accent .reading-path__status a{
+  text-decoration-color:var(--piece-collection-accent-underline);
+}
+.piece--collection-accent .reading-path__action--primary{
+  background:var(--piece-collection-accent-button-bg);
+  border-color:var(--piece-collection-accent-border-strong);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.piece--collection-accent .reading-path__action--primary:hover{
+  background:var(--piece-collection-accent-button-hover);
+}
+.piece--collection-accent--ledger-editorial-desk{
+  --piece-collection-accent-border:rgba(169,141,88,.28);
+  --piece-collection-accent-border-strong:rgba(169,141,88,.44);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(250,243,228,.045), rgba(250,243,228,0) 44%),
+    rgba(27,24,21,.82);
+  --piece-collection-accent-panel:
+    linear-gradient(180deg, rgba(247,240,226,.052), rgba(247,240,226,0) 44%),
+    rgba(31,27,24,.88);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(191,160,94,.9), rgba(93,119,142,.72));
+  --piece-collection-accent-button-bg:rgba(167,138,84,.18);
+  --piece-collection-accent-button-hover:rgba(167,138,84,.25);
+  --piece-collection-accent-underline:rgba(191,160,94,.48);
+}
+.piece--collection-accent--syd-and-oliver-smoky-lounge{
+  --piece-collection-accent-border:rgba(203,162,81,.28);
+  --piece-collection-accent-border-strong:rgba(203,162,81,.44);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(241,198,106,.05), rgba(241,198,106,0) 42%),
+    rgba(32,24,21,.84);
+  --piece-collection-accent-panel:
+    radial-gradient(circle at 78% 18%, rgba(235,192,95,.12), rgba(235,192,95,0) 48%),
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 46%),
+    rgba(36,27,24,.9);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(230,188,98,.9), rgba(151,101,53,.42));
+  --piece-collection-accent-button-bg:rgba(210,168,83,.17);
+  --piece-collection-accent-button-hover:rgba(210,168,83,.24);
+  --piece-collection-accent-underline:rgba(230,188,98,.48);
+}
+.piece--collection-accent--modern-bios-records-archive{
+  --piece-collection-accent-border:rgba(110,140,171,.3);
+  --piece-collection-accent-border-strong:rgba(110,140,171,.46);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(194,205,218,.04), rgba(194,205,218,0) 44%),
+    rgba(24,27,31,.84);
+  --piece-collection-accent-panel:
+    linear-gradient(180deg, rgba(207,214,222,.05), rgba(207,214,222,0) 44%),
+    rgba(28,31,36,.89);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(118,149,182,.9), rgba(184,194,205,.5));
+  --piece-collection-accent-button-bg:rgba(110,140,171,.17);
+  --piece-collection-accent-button-hover:rgba(110,140,171,.24);
+  --piece-collection-accent-underline:rgba(118,149,182,.48);
+}
+.piece--collection-accent--risk-systems-notebook{
+  --piece-collection-accent-border:rgba(121,144,170,.27);
+  --piece-collection-accent-border-strong:rgba(121,144,170,.42);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(188,198,210,.03), rgba(188,198,210,0) 42%),
+    rgba(20,23,27,.84);
+  --piece-collection-accent-panel:
+    linear-gradient(180deg, rgba(180,194,209,.04), rgba(180,194,209,0) 44%),
+    rgba(23,27,32,.89);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(126,149,176,.88), rgba(126,149,176,.24));
+  --piece-collection-accent-button-bg:rgba(116,139,165,.16);
+  --piece-collection-accent-button-hover:rgba(116,139,165,.23);
+  --piece-collection-accent-underline:rgba(126,149,176,.44);
+}
+.piece--collection-accent--floods-survey-table{
+  --piece-collection-accent-border:rgba(126,155,174,.29);
+  --piece-collection-accent-border-strong:rgba(126,155,174,.44);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(165,188,201,.055), rgba(165,188,201,0) 44%),
+    rgba(30,34,36,.85);
+  --piece-collection-accent-panel:
+    linear-gradient(180deg, rgba(200,204,196,.045), rgba(200,204,196,0) 44%),
+    rgba(34,38,40,.89);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(136,167,189,.9), rgba(167,177,165,.44));
+  --piece-collection-accent-button-bg:rgba(128,158,179,.18);
+  --piece-collection-accent-button-hover:rgba(128,158,179,.25);
+  --piece-collection-accent-underline:rgba(136,167,189,.48);
+}
+.piece--collection-accent--ai-screen-glow-archive{
+  --piece-collection-accent-border:rgba(118,158,189,.3);
+  --piece-collection-accent-border-strong:rgba(118,158,189,.46);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(128,170,202,.06), rgba(128,170,202,0) 40%),
+    rgba(19,24,30,.85);
+  --piece-collection-accent-panel:
+    radial-gradient(circle at 82% 18%, rgba(143,186,219,.12), rgba(143,186,219,0) 46%),
+    linear-gradient(180deg, rgba(188,214,231,.035), rgba(188,214,231,0) 42%),
+    rgba(22,28,35,.89);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(132,175,210,.92), rgba(132,175,210,.3));
+  --piece-collection-accent-button-bg:rgba(118,158,189,.19);
+  --piece-collection-accent-button-hover:rgba(118,158,189,.27);
+  --piece-collection-accent-underline:rgba(132,175,210,.5);
+}
+.piece--collection-accent--moral-chapel-library{
+  --piece-collection-accent-border:rgba(170,151,108,.27);
+  --piece-collection-accent-border-strong:rgba(170,151,108,.42);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(223,211,187,.045), rgba(223,211,187,0) 44%),
+    rgba(31,25,22,.84);
+  --piece-collection-accent-panel:
+    linear-gradient(180deg, rgba(235,225,204,.052), rgba(235,225,204,0) 42%),
+    rgba(34,28,24,.89);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(181,163,120,.9), rgba(229,219,193,.38));
+  --piece-collection-accent-button-bg:rgba(173,154,110,.17);
+  --piece-collection-accent-button-hover:rgba(173,154,110,.24);
+  --piece-collection-accent-underline:rgba(181,163,120,.48);
+}
+.piece--collection-accent--reported-case-studies-evidence-room{
+  --piece-collection-accent-border:rgba(153,112,98,.28);
+  --piece-collection-accent-border-strong:rgba(153,112,98,.43);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(188,162,150,.038), rgba(188,162,150,0) 42%),
+    rgba(24,24,26,.85);
+  --piece-collection-accent-panel:
+    linear-gradient(180deg, rgba(208,186,172,.045), rgba(208,186,172,0) 42%),
+    rgba(28,28,30,.9);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(164,121,103,.9), rgba(164,121,103,.3));
+  --piece-collection-accent-button-bg:rgba(153,112,98,.17);
+  --piece-collection-accent-button-hover:rgba(153,112,98,.24);
+  --piece-collection-accent-underline:rgba(164,121,103,.46);
+}
 .collection-room{
   --collection-room-shell-radius:24px;
   --collection-room-field:
@@ -3955,6 +4181,12 @@ button.dashboard-chip{
     width:100%;
     text-align:left;
   }
+  .piece--collection-accent .piece-collection-context{
+    padding:.9rem;
+  }
+  .piece--collection-accent .piece-collection-context__title{
+    font-size:1rem;
+  }
   .piece-body{
     width:100%;
     max-width:var(--measure-reading);
@@ -4078,6 +4310,15 @@ button.dashboard-chip{
     max-width:none;
     margin:0;
     padding:0;
+  }
+  .piece-collection-context{
+    padding:.65rem .8rem .7rem;
+    border:1px solid #bbb !important;
+    background:none !important;
+    box-shadow:none !important;
+  }
+  .piece-collection-context::before{
+    content:none !important;
   }
   .piece-header,
   .piece-aftermatter{

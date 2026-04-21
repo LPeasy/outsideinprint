@@ -12,11 +12,13 @@ function escapeRegex(value) {
 }
 
 const collectionsData = read("data/collections.yaml");
+const articleSingle = read("layouts/_default/single.html");
 const collectionSingle = read("layouts/collections/single.html");
 const collectionCard = read("layouts/partials/discovery/collection-card.html");
 const css = read("assets/css/main.css");
 const collectionsDoc = read("docs/collections-system.md");
 const layoutMatrix = read("docs/layout-ownership-matrix.md");
+const analyticsDoc = read("docs/analytics-system.md");
 
 const expectedThemes = new Map([
   ["the-ledger", "ledger-editorial-desk"],
@@ -58,6 +60,22 @@ test("collection detail template emits room root and section hooks", () => {
   }
 });
 
+test("article template emits primary-collection light-accent hooks", () => {
+  for (const snippet of [
+    '{{ $showCollectionAccent := false }}',
+    '{{ $primaryCollection = $candidateCollection }}',
+    'append "piece--collection-accent"',
+    'piece--collection-accent--%s',
+    'data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"',
+    'data-piece-collection-room-theme="{{ $primaryCollection.collection.room_theme }}"',
+    'class="piece-collection-context"',
+    'From the Collection',
+    'data-analytics-source-slot="article_collection_context"'
+  ]) {
+    assert.match(articleSingle, new RegExp(escapeRegex(snippet)));
+  }
+});
+
 test("collection-card partial emits room-echo classes only in the grid branch", () => {
   for (const snippet of [
     '{{- $roomTheme := $entry.collection.room_theme | default "" -}}',
@@ -76,6 +94,21 @@ test("collection-card partial emits room-echo classes only in the grid branch", 
 
 test("css owns the shared collection-room namespace and all theme modifiers", () => {
   for (const selector of [
+    ".piece--collection-accent{",
+    ".piece--collection-accent .piece-collection-context,",
+    ".piece--collection-accent .piece-collection-context__eyebrow{",
+    ".piece--collection-accent .piece-collection-context__title{",
+    ".piece--collection-accent .piece-collection-context__meta{",
+    ".piece--collection-accent .reading-path{",
+    ".piece--collection-accent .reading-path__action--primary{",
+    ".piece--collection-accent--ledger-editorial-desk{",
+    ".piece--collection-accent--syd-and-oliver-smoky-lounge{",
+    ".piece--collection-accent--modern-bios-records-archive{",
+    ".piece--collection-accent--risk-systems-notebook{",
+    ".piece--collection-accent--floods-survey-table{",
+    ".piece--collection-accent--ai-screen-glow-archive{",
+    ".piece--collection-accent--moral-chapel-library{",
+    ".piece--collection-accent--reported-case-studies-evidence-room{",
     ".collection-room{",
     ".collection-room::before{",
     ".collection-room::after{",
@@ -111,17 +144,24 @@ test("css owns the shared collection-room namespace and all theme modifiers", ()
   }
 });
 
-test("docs record room_theme and collection-room ownership", () => {
+test("docs record room_theme, article light accents, and collection-room ownership", () => {
   for (const snippet of [
     "`room_theme`",
-    "collection-detail-page presentation key",
+    "presentation key reused by collection-detail reading rooms",
     "reading-room treatment",
-    "collection-detail-page only in this pass"
+    "From the Collection",
+    "first public match",
+    "primary-collection light-accent layer"
   ]) {
     assert.match(collectionsDoc, new RegExp(escapeRegex(snippet)));
   }
 
   for (const snippet of [
+    "`piece--collection-accent`",
+    "`piece-collection-context`",
+    "`piece-collection-context__eyebrow`",
+    "`piece-collection-context__title`",
+    "`piece-collection-context__meta`",
     "`collection-room`",
     "`collection-room__header`",
     "`collection-room__section`",
@@ -133,4 +173,6 @@ test("docs record room_theme and collection-room ownership", () => {
   ]) {
     assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));
   }
+
+  assert.match(analyticsDoc, /article_collection_context/);
 });
