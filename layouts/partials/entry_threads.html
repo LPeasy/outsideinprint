@@ -1,4 +1,8 @@
 {{ $source := .source | default "homepage" }}
+{{ $showArchiveLink := true }}
+{{ if isset . "showArchiveLink" }}
+  {{ $showArchiveLink = .showArchiveLink }}
+{{ end }}
 {{ $rootClass := "entry-threads" }}
 {{ if eq $source "homepage" }}
   {{ $rootClass = printf "%s entry-threads--home" $rootClass }}
@@ -89,14 +93,16 @@
         </article>
       {{ end }}
     </div>
-    <div class="entry-thread__archive{{ if eq $source "homepage" }} page-shell page-shell--wide{{ end }}">
-      <a href="{{ "collections/" | absURL }}"
-        data-analytics-event="internal_promo_click"
-        data-analytics-source-slot="{{ $archiveSourceSlot }}"
-        data-analytics-title="Browse all collections"
-        data-analytics-section="Collections"
-        data-analytics-path="/collections/"
-      >Browse all collections</a>
-    </div>
+    {{ if $showArchiveLink }}
+      <div class="entry-thread__archive{{ if eq $source "homepage" }} page-shell page-shell--wide{{ end }}">
+        <a href="{{ "collections/" | absURL }}"
+          data-analytics-event="internal_promo_click"
+          data-analytics-source-slot="{{ $archiveSourceSlot }}"
+          data-analytics-title="Browse all collections"
+          data-analytics-section="Collections"
+          data-analytics-path="/collections/"
+        >Browse all collections</a>
+      </div>
+    {{ end }}
   </section>
 {{ end }}
