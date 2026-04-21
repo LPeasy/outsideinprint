@@ -68,8 +68,8 @@ Resolution rules:
 - `layouts/collections/list.html`: public collections index.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: article aftermatter, including the primary-collection reading path plus the restrained "Part of this collection" block.
-- `layouts/partials/collections/reading-path.html`: server-rendered article sequence module for the first public collection match only.
+- `layouts/_default/single.html`: article aftermatter, including the primary-collection article-exit continuation zone for collection-member pages and the fallback `Read Next` path for standalone pages.
+- `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
 - `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
 - `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
 
@@ -79,16 +79,23 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 ### Article pages
 
-- A collection-member article renders exactly one reading-path module.
+- A collection-member article renders exactly one article-exit continuation zone.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
-- Secondary memberships remain visible only in the existing "Part of this collection" block.
-- The module shows:
-  - collection title
-  - sequence position
-  - remaining pieces and minutes after the current page
-  - entry-point status when the collection defines `start_here`
-  - previous / next links within the existing collection order
-  - a fixed CTA that stays sequence-first
+- The separate mounted collection-membership block is no longer part of the article-member flow.
+- Standalone articles keep the existing `Read Next` fallback.
+- The continuation zone shows:
+  - `Continue This Collection`
+  - linked collection title
+  - `Piece N of M`
+  - `Visited X of M in this browser.`
+  - `Remaining after this piece: X pieces | Y min`
+  - `Entry Point` when the current page is the collection entry point
+  - `New to this thread? Start at <link>.` when the collection defines `start_here` and the current page is not it
+  - a fixed action row:
+    - mid-collection: `Continue to <next title>`, `View Collection`, and `Previous piece` when available
+    - end-of-collection: `View Collection`, `Start Again with <title>`, and `Previous piece` when available
+  - an `Up Next` preview row showing the next one or two pieces in order with sequence number and reading time
+  - `Browse collections` and `Search the library` as archive exits
 
 ### Collection pages
 

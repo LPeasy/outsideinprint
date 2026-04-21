@@ -17,6 +17,11 @@ section_label: "Welcome"
   <p>Outside In Print is arranged less as a stream than as a record: essays, dialogues, collections, and a library meant to be returned to rather than merely passed through.</p>
   <p>Some readers arrive through an argument, some through a thread, and some by drift. The archive allows for each of those entrances without insisting on a single path.</p>
 </section>
+{{< /rawhtml >}}
+
+{{< entry_threads >}}
+
+{{< rawhtml >}}
 
 <section class="start-here-section">
   <h2>Ways Into the Archive</h2>

@@ -9,6 +9,16 @@
   {{ if $articleVariant }}
     {{ $articleClasses = $articleClasses | append (printf "article-variant-%s" $articleVariant) }}
   {{ end }}
+  {{ $publicCollectionMatches := partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
+  {{ $showCollectionContinuation := false }}
+  {{ if gt (len $publicCollectionMatches) 0 }}
+    {{ $primaryCollection := index $publicCollectionMatches 0 }}
+    {{ range $primaryCollection.items }}
+      {{ if eq .RelPermalink $.RelPermalink }}
+        {{ $showCollectionContinuation = true }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
   {{ $journeyLinks := slice }}
   {{ with $sectionPage }}
     {{ $journeyLinks = $journeyLinks | append (dict "href" .RelPermalink "label" (printf "All %s" .Title)) }}
@@ -67,8 +77,9 @@
       {{ if eq $articleVariant "modernbio" }}
         {{ partial "article/modernbio-record.html" . }}
       {{ end }}
-      {{ partial "collections/reading-path.html" . }}
-      {{ partial "collections/page-membership-block.html" . }}
+      {{ if $showCollectionContinuation }}
+        {{ partial "collections/reading-path.html" . }}
+      {{ end }}
       {{ partial "authors/card.html" (dict "page" . "author" $meta.author) }}
 
       {{ if ne .Params.show_citation false }}
@@ -82,7 +93,9 @@
         </aside>
       {{ end }}
 
-      {{ partial "read_next.html" . }}
+      {{ if not $showCollectionContinuation }}
+        {{ partial "read_next.html" . }}
+      {{ end }}
 
       {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page" "sourceSlot" "page_newsletter") }}
     </div>

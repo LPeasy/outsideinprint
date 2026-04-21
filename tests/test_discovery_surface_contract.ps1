@@ -27,10 +27,12 @@ $requiredFiles = @(
   'layouts/partials/home_front_page.html',
   'layouts/partials/home_imprint_statement.html',
   'layouts/partials/home_selected_collections.html',
+  'layouts/partials/entry_threads.html',
   'layouts/partials/home_recent_work.html',
   'layouts/partials/discovery/page-summary.html',
   'layouts/partials/discovery/page-list-item.html',
   'layouts/partials/discovery/collection-card.html',
+  'layouts/shortcodes/entry_threads.html',
   'layouts/partials/schema/significant-links.html',
   'layouts/partials/legacy_host_redirect.html',
   'static/llms.txt',
@@ -234,12 +236,63 @@ foreach ($requiredSnippet in @(
 
 $homeSelectedCollectionsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_selected_collections.html') -Raw
 foreach ($requiredSnippet in @(
-  'partial "collections/get-public-entries.html"',
-  'partial "discovery/collection-card.html"',
-  '"variant" "item"'
+  'partial "entry_threads.html"',
+  '"source" "homepage"'
 )) {
   if ($homeSelectedCollectionsTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/partials/home_selected_collections.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'collections/get-public-entries.html',
+  '.collection.featured',
+  'homepage_featured_collection'
+)) {
+  if ($homeSelectedCollectionsTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/partials/home_selected_collections.html to ignore the retired featured-collection selection path: $retiredSnippet"
+  }
+}
+
+$entryThreadsPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/entry_threads.html') -Raw
+foreach ($requiredSnippet in @(
+  '"floods-water-built-environment"',
+  '"modern-bios"',
+  '"moral-religious-philosophical-essays"',
+  'homepage_entry_thread_start',
+  'homepage_entry_thread_collection',
+  'start_here_entry_thread_start',
+  'start_here_entry_thread_collection',
+  'homepage_entry_thread_archive',
+  'start_here_entry_thread_archive',
+  'Browse all collections',
+  'Start Reading',
+  '"in-the-image-of-god" "In the Image of God"',
+  'partial "collections/lookup-definition.html"',
+  'partial "collections/resolve-items.html"',
+  'partial "collections/get-state.html"'
+)) {
+  if ($entryThreadsPartial -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/entry_threads.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  '.collection.featured',
+  'get-public-entries'
+)) {
+  if ($entryThreadsPartial -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/partials/entry_threads.html not to depend on featured collection state: $retiredSnippet"
+  }
+}
+
+$entryThreadsShortcode = Get-Content -Path (Join-Path $repoRoot 'layouts/shortcodes/entry_threads.html') -Raw
+foreach ($requiredSnippet in @(
+  'partial "entry_threads.html"',
+  '"source" "start_here"'
+)) {
+  if ($entryThreadsShortcode -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/shortcodes/entry_threads.html to contain: $requiredSnippet"
   }
 }
 
@@ -325,6 +378,20 @@ foreach ($retiredSnippet in @(
   if ($startHereTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/start-here/single.html to remove the retired Welcome-page guidance shell snippet: $retiredSnippet"
   }
+}
+
+$startHereContent = Get-Content -Path (Join-Path $repoRoot 'content/start-here/index.md') -Raw
+foreach ($requiredSnippet in @(
+  '{{< entry_threads >}}',
+  'Ways Into the Archive'
+)) {
+  if ($startHereContent -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected content/start-here/index.md to contain: $requiredSnippet"
+  }
+}
+
+if ($startHereContent.IndexOf('{{< entry_threads >}}', [System.StringComparison]::Ordinal) -ge $startHereContent.IndexOf('Ways Into the Archive', [System.StringComparison]::Ordinal)) {
+  throw 'Expected content/start-here/index.md to place the entry_threads shortcode before Ways Into the Archive.'
 }
 
 $pageListItemPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/page-list-item.html') -Raw
