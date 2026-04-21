@@ -1,6 +1,7 @@
 import "./dashboard_v2_categories.test.mjs";
 import "./dashboard_v2_design.test.mjs";
 import "./dashboard_v2_logic.test.mjs";
+import "./collection_room_themes_contract.test.mjs";
 import "./entry_threads_contract.test.mjs";
 import "./homepage_selected.test.mjs";
 import "./layout_ownership_contract.test.mjs";

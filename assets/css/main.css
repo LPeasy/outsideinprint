@@ -1611,6 +1611,416 @@ h2{ margin-top:34px; }
 .running-header__context{
   text-align:right;
 }
+.collection-room{
+  --collection-room-shell-radius:24px;
+  --collection-room-field:
+    radial-gradient(circle at 22% 10%, rgba(127,147,166,.11), rgba(127,147,166,0) 26%),
+    radial-gradient(circle at 80% 4%, rgba(236,231,223,.04), rgba(236,231,223,0) 22%),
+    linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,0) 32%);
+  --collection-room-frame:
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 48%);
+  --collection-room-header-glow:
+    radial-gradient(circle at 78% 18%, rgba(127,147,166,.18), rgba(127,147,166,0) 50%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 42%),
+    rgba(24,24,24,.9);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,0) 46%),
+    rgba(28,28,28,.96);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,0) 44%),
+    rgba(22,22,22,.9);
+  --collection-room-border:rgba(236,231,223,.12);
+  --collection-room-panel-border:rgba(236,231,223,.14);
+  --collection-room-rule:rgba(236,231,223,.09);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(127,147,166,.34) 18%, rgba(236,231,223,.14) 52%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(127,147,166,.9), rgba(127,147,166,.34));
+  --collection-room-label-width:4.75rem;
+  --collection-room-rail:
+    linear-gradient(180deg, rgba(127,147,166,.98), rgba(127,147,166,.22));
+  --collection-room-item-outline:rgba(255,255,255,.035);
+  --collection-room-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 20px 54px rgba(0,0,0,.22);
+  --collection-room-journey-surface:
+    linear-gradient(180deg, rgba(255,255,255,.024), rgba(255,255,255,0) 42%),
+    rgba(22,22,22,.82);
+  --collection-room-note-surface:rgba(236,231,223,.03);
+  position:relative;
+  display:grid;
+  gap:1.55rem;
+  margin-top:.45rem;
+  padding:.95rem 0 .25rem;
+  isolation:isolate;
+}
+.collection-room::before{
+  content:"";
+  position:absolute;
+  inset:0 -1.45rem -.2rem;
+  z-index:-2;
+  border-radius:calc(var(--collection-room-shell-radius) + 12px);
+  background:var(--collection-room-field);
+  opacity:.98;
+  pointer-events:none;
+}
+.collection-room::after{
+  content:"";
+  position:absolute;
+  inset:.6rem -1.05rem .15rem;
+  z-index:-1;
+  border:1px solid rgba(255,255,255,.025);
+  border-radius:calc(var(--collection-room-shell-radius) + 6px);
+  background:var(--collection-room-frame);
+  pointer-events:none;
+}
+.collection-room__section{
+  position:relative;
+}
+.collection-room__header,
+.collection-room__section--overview,
+.collection-room__section--entry,
+.collection-room__section--items,
+.collection-room__section--related,
+.collection-room .journey-links--page{
+  position:relative;
+  overflow:hidden;
+  padding:1.35rem 1.5rem 1.45rem;
+  border:1px solid var(--collection-room-border);
+  border-radius:var(--collection-room-shell-radius);
+  background:var(--collection-room-section-surface);
+  box-shadow:var(--collection-room-shadow);
+}
+.collection-room__header::before,
+.collection-room__section--overview::before,
+.collection-room__section--entry::before,
+.collection-room__section--items::before,
+.collection-room__section--related::before,
+.collection-room .journey-links--page::before{
+  content:"";
+  position:absolute;
+  left:1.35rem;
+  right:1.35rem;
+  top:0;
+  height:1px;
+  background:var(--collection-room-rule-gradient);
+  pointer-events:none;
+}
+.collection-room__header::after,
+.collection-room__section--overview::after,
+.collection-room__section--entry::after,
+.collection-room__section--items::after,
+.collection-room__section--related::after,
+.collection-room .journey-links--page::after{
+  content:"";
+  position:absolute;
+  left:1.35rem;
+  top:0;
+  width:var(--collection-room-label-width);
+  height:3px;
+  border-radius:999px;
+  background:var(--collection-room-label-strip);
+  pointer-events:none;
+}
+.collection-room__header::after{
+  top:auto;
+  right:-3%;
+  left:auto;
+  bottom:18%;
+  width:18rem;
+  height:12rem;
+  border-radius:999px;
+  background:var(--collection-room-header-glow);
+  opacity:.95;
+}
+.collection-room__header h1,
+.collection-room__section .list-title,
+.collection-room .journey-links__eyebrow{
+  position:relative;
+  z-index:1;
+}
+.collection-room__header .page-intro{
+  max-width:56ch;
+  position:relative;
+  z-index:1;
+}
+.collection-room__section--progress{
+  display:grid;
+}
+.collection-room__section--progress > .collection-progress{
+  margin-top:0;
+}
+.collection-room .collection-meta-block,
+.collection-room .collection-progress,
+.collection-room .collection-membership,
+.collection-room__section--entry .collection-start-here,
+.collection-room__section--items .collection-item > .item,
+.collection-room__section--related .item{
+  border-color:var(--collection-room-panel-border);
+  background:var(--collection-room-panel-surface);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 1px 0 var(--collection-room-item-outline);
+}
+.collection-room__section--entry .collection-start-here,
+.collection-room__section--items .collection-item > .item,
+.collection-room__section--related .item{
+  padding:1rem 1.05rem 1.1rem;
+  border:1px solid var(--collection-room-panel-border);
+  border-radius:calc(var(--radius-soft) + 1px);
+  background:var(--collection-room-panel-surface-soft);
+  border-bottom-color:var(--collection-room-panel-border);
+}
+.collection-room__section--items .collection-item > .item:last-child,
+.collection-room__section--related .item:last-child{
+  border-bottom:1px solid var(--collection-room-panel-border);
+}
+.collection-room .collection-meta-row,
+.collection-room .collection-membership__row,
+.collection-room .reading-path__actions,
+.collection-room .reading-path__preview,
+.collection-room .reading-path__archive-links{
+  border-top-color:var(--collection-room-rule);
+}
+.collection-room .collection-start-here::before,
+.collection-room .collection-item--start-here::before{
+  background:var(--collection-room-rail);
+}
+.collection-room .collection-item-note{
+  padding:.72rem .9rem;
+  border:1px solid var(--collection-room-panel-border);
+  border-radius:var(--radius-ui);
+  background:var(--collection-room-note-surface);
+}
+.collection-room .collection-progress__actions a,
+.collection-room .journey-links__link{
+  border-color:var(--collection-room-panel-border);
+  background:var(--collection-room-note-surface);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.collection-room .collection-progress__actions a:hover,
+.collection-room .journey-links__link:hover{
+  border-color:rgba(255,255,255,.22);
+}
+.collection-room .collection-pill{
+  border-color:rgba(255,255,255,.16);
+}
+.collection-room .journey-links--page{
+  max-width:var(--measure-reading);
+  margin-top:.15rem;
+  background:var(--collection-room-journey-surface);
+}
+.collection-room .journey-links__items{
+  gap:.7rem .8rem;
+}
+.collection-room .journey-links__link{
+  min-width:13rem;
+  justify-content:center;
+}
+.collection-room--ledger-editorial-desk{
+  --collection-room-field:
+    radial-gradient(circle at 78% 12%, rgba(205,175,122,.18), rgba(205,175,122,0) 22%),
+    radial-gradient(circle at 18% 16%, rgba(104,132,160,.16), rgba(104,132,160,0) 28%),
+    repeating-linear-gradient(90deg, rgba(205,175,122,.03) 0 1px, transparent 1px 64px),
+    linear-gradient(180deg, rgba(41,34,29,.92), rgba(18,18,18,.98));
+  --collection-room-header-glow:
+    radial-gradient(circle at 78% 18%, rgba(223,193,133,.24), rgba(223,193,133,0) 48%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(244,235,219,.07), rgba(244,235,219,0) 40%),
+    rgba(28,24,22,.95);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(244,235,219,.09), rgba(244,235,219,0) 44%),
+    rgba(34,30,27,.96);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(244,235,219,.075), rgba(244,235,219,0) 42%),
+    rgba(30,26,23,.92);
+  --collection-room-border:rgba(204,180,137,.18);
+  --collection-room-panel-border:rgba(204,180,137,.2);
+  --collection-room-rule:rgba(204,180,137,.12);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(204,180,137,.48) 18%, rgba(105,132,160,.18) 60%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(204,180,137,.92), rgba(105,132,160,.45));
+  --collection-room-rail:linear-gradient(180deg, rgba(204,180,137,.95), rgba(105,132,160,.24));
+  --collection-room-note-surface:rgba(244,235,219,.045);
+}
+.collection-room--syd-and-oliver-smoky-lounge{
+  --collection-room-shell-radius:28px;
+  --collection-room-field:
+    radial-gradient(circle at 26% 8%, rgba(226,183,92,.12), rgba(226,183,92,0) 20%),
+    radial-gradient(circle at 82% 10%, rgba(185,122,38,.24), rgba(185,122,38,0) 18%),
+    radial-gradient(circle at 48% 30%, rgba(114,68,34,.14), rgba(114,68,34,0) 36%),
+    linear-gradient(180deg, rgba(37,27,22,.96), rgba(17,15,14,.99));
+  --collection-room-header-glow:
+    radial-gradient(circle at 78% 22%, rgba(228,188,96,.28), rgba(228,188,96,0) 52%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(231,194,108,.055), rgba(231,194,108,0) 42%),
+    rgba(28,22,19,.93);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(228,189,102,.08), rgba(228,189,102,0) 42%),
+    rgba(34,26,22,.97);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(228,189,102,.06), rgba(228,189,102,0) 44%),
+    rgba(29,23,20,.93);
+  --collection-room-border:rgba(221,184,110,.17);
+  --collection-room-panel-border:rgba(221,184,110,.18);
+  --collection-room-rule:rgba(221,184,110,.1);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(221,184,110,.34) 18%, rgba(255,222,161,.14) 52%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(224,186,102,.95), rgba(163,104,44,.45));
+  --collection-room-rail:linear-gradient(180deg, rgba(224,186,102,.92), rgba(163,104,44,.28));
+  --collection-room-note-surface:rgba(224,186,102,.045);
+}
+.collection-room--modern-bios-records-archive{
+  --collection-room-field:
+    radial-gradient(circle at 18% 14%, rgba(118,146,177,.14), rgba(118,146,177,0) 26%),
+    linear-gradient(180deg, rgba(28,31,35,.96), rgba(16,17,18,.99));
+  --collection-room-header-glow:
+    radial-gradient(circle at 80% 16%, rgba(138,164,189,.18), rgba(138,164,189,0) 48%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(199,205,212,.055), rgba(199,205,212,0) 42%),
+    rgba(23,26,30,.95);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(199,205,212,.07), rgba(199,205,212,0) 46%),
+    rgba(29,33,38,.98);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(199,205,212,.055), rgba(199,205,212,0) 42%),
+    rgba(26,29,34,.94);
+  --collection-room-border:rgba(155,177,199,.16);
+  --collection-room-panel-border:rgba(155,177,199,.18);
+  --collection-room-rule:rgba(155,177,199,.1);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(155,177,199,.4) 18%, rgba(216,223,229,.15) 56%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(155,177,199,.9), rgba(120,140,162,.4));
+  --collection-room-rail:linear-gradient(180deg, rgba(155,177,199,.92), rgba(120,140,162,.2));
+  --collection-room-note-surface:rgba(199,205,212,.04);
+}
+.collection-room--risk-systems-notebook{
+  --collection-room-field:
+    linear-gradient(180deg, rgba(12,14,17,.96), rgba(9,9,10,.99)),
+    repeating-linear-gradient(0deg, rgba(143,163,182,.035) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(90deg, rgba(143,163,182,.03) 0 1px, transparent 1px 44px);
+  --collection-room-header-glow:
+    radial-gradient(circle at 78% 18%, rgba(130,154,176,.12), rgba(130,154,176,0) 42%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(212,217,224,.04), rgba(212,217,224,0) 38%),
+    rgba(16,18,21,.96);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(212,217,224,.055), rgba(212,217,224,0) 42%),
+    rgba(20,23,27,.98);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(212,217,224,.045), rgba(212,217,224,0) 40%),
+    rgba(17,19,22,.94);
+  --collection-room-border:rgba(131,156,178,.16);
+  --collection-room-panel-border:rgba(131,156,178,.18);
+  --collection-room-rule:rgba(131,156,178,.09);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(131,156,178,.38) 18%, rgba(212,217,224,.16) 52%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(131,156,178,.92), rgba(212,217,224,.28));
+  --collection-room-rail:linear-gradient(180deg, rgba(131,156,178,.9), rgba(131,156,178,.18));
+  --collection-room-note-surface:rgba(131,156,178,.04);
+}
+.collection-room--floods-survey-table{
+  --collection-room-field:
+    radial-gradient(circle at 16% 14%, rgba(144,173,193,.18), rgba(144,173,193,0) 28%),
+    linear-gradient(180deg, rgba(37,41,44,.96), rgba(18,20,22,.99)),
+    repeating-linear-gradient(145deg, rgba(144,173,193,.04) 0 2px, transparent 2px 26px);
+  --collection-room-header-glow:
+    radial-gradient(circle at 78% 20%, rgba(154,187,209,.18), rgba(154,187,209,0) 48%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(181,196,203,.055), rgba(181,196,203,0) 42%),
+    rgba(28,31,33,.95);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(181,196,203,.065), rgba(181,196,203,0) 44%),
+    rgba(35,39,42,.98);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(151,180,199,.06), rgba(151,180,199,0) 44%),
+    rgba(30,34,37,.94);
+  --collection-room-border:rgba(149,180,199,.16);
+  --collection-room-panel-border:rgba(149,180,199,.18);
+  --collection-room-rule:rgba(149,180,199,.1);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(149,180,199,.42) 20%, rgba(205,214,218,.15) 60%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(149,180,199,.9), rgba(172,185,176,.38));
+  --collection-room-rail:linear-gradient(180deg, rgba(149,180,199,.92), rgba(172,185,176,.18));
+  --collection-room-note-surface:rgba(149,180,199,.04);
+}
+.collection-room--ai-screen-glow-archive{
+  --collection-room-field:
+    radial-gradient(circle at 78% 12%, rgba(136,169,197,.2), rgba(136,169,197,0) 22%),
+    radial-gradient(circle at 24% 18%, rgba(115,135,156,.14), rgba(115,135,156,0) 30%),
+    linear-gradient(180deg, rgba(15,18,22,.97), rgba(10,12,15,.99)),
+    repeating-linear-gradient(90deg, rgba(149,177,201,.025) 0 1px, transparent 1px 40px);
+  --collection-room-header-glow:
+    radial-gradient(circle at 82% 18%, rgba(145,182,208,.22), rgba(145,182,208,0) 50%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(173,196,214,.05), rgba(173,196,214,0) 38%),
+    rgba(18,22,27,.9);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(173,196,214,.065), rgba(173,196,214,0) 42%),
+    rgba(22,27,33,.84);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(173,196,214,.055), rgba(173,196,214,0) 40%),
+    rgba(19,24,30,.78);
+  --collection-room-border:rgba(141,175,202,.18);
+  --collection-room-panel-border:rgba(141,175,202,.2);
+  --collection-room-rule:rgba(141,175,202,.1);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(141,175,202,.5) 18%, rgba(216,226,233,.14) 56%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(141,175,202,.94), rgba(186,208,222,.28));
+  --collection-room-rail:linear-gradient(180deg, rgba(141,175,202,.95), rgba(186,208,222,.16));
+  --collection-room-note-surface:rgba(141,175,202,.045);
+}
+.collection-room--moral-chapel-library{
+  --collection-room-field:
+    radial-gradient(circle at 50% 0%, rgba(191,174,131,.12), rgba(191,174,131,0) 24%),
+    linear-gradient(180deg, rgba(37,29,24,.96), rgba(15,13,12,.99)),
+    repeating-linear-gradient(90deg, rgba(192,174,128,.025) 0 1px, transparent 1px 72px);
+  --collection-room-header-glow:
+    radial-gradient(circle at 50% 8%, rgba(205,188,145,.18), rgba(205,188,145,0) 34%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(224,214,193,.055), rgba(224,214,193,0) 40%),
+    rgba(31,25,22,.95);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(224,214,193,.07), rgba(224,214,193,0) 44%),
+    rgba(37,31,27,.98);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(224,214,193,.06), rgba(224,214,193,0) 42%),
+    rgba(33,28,24,.94);
+  --collection-room-border:rgba(194,179,140,.16);
+  --collection-room-panel-border:rgba(194,179,140,.18);
+  --collection-room-rule:rgba(194,179,140,.1);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(194,179,140,.4) 18%, rgba(224,214,193,.14) 54%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(194,179,140,.9), rgba(224,214,193,.28));
+  --collection-room-rail:linear-gradient(180deg, rgba(194,179,140,.92), rgba(224,214,193,.16));
+  --collection-room-note-surface:rgba(224,214,193,.04);
+}
+.collection-room--reported-case-studies-evidence-room{
+  --collection-room-field:
+    radial-gradient(circle at 20% 12%, rgba(130,103,91,.16), rgba(130,103,91,0) 24%),
+    linear-gradient(180deg, rgba(22,23,25,.97), rgba(11,12,13,.99)),
+    repeating-linear-gradient(90deg, rgba(142,92,77,.03) 0 1px, transparent 1px 52px);
+  --collection-room-header-glow:
+    radial-gradient(circle at 78% 16%, rgba(144,102,85,.16), rgba(144,102,85,0) 44%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(204,195,186,.045), rgba(204,195,186,0) 40%),
+    rgba(23,24,26,.95);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(204,195,186,.06), rgba(204,195,186,0) 42%),
+    rgba(29,31,34,.98);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(144,102,85,.055), rgba(144,102,85,0) 42%),
+    rgba(25,27,30,.95);
+  --collection-room-border:rgba(143,103,88,.16);
+  --collection-room-panel-border:rgba(143,103,88,.18);
+  --collection-room-rule:rgba(143,103,88,.1);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(143,103,88,.45) 18%, rgba(204,195,186,.14) 54%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(143,103,88,.92), rgba(204,195,186,.28));
+  --collection-room-label-width:5.5rem;
+  --collection-room-rail:linear-gradient(180deg, rgba(143,103,88,.94), rgba(204,195,186,.18));
+  --collection-room-note-surface:rgba(143,103,88,.045);
+}
 .collection-grid{
   align-items:start;
 }
@@ -2224,6 +2634,42 @@ h2{ margin-top:34px; }
   text-transform:uppercase;
 }
 @media (max-width:640px){
+  .collection-room{
+    gap:1.25rem;
+    padding:.7rem 0 .1rem;
+  }
+  .collection-room::before,
+  .collection-room::after{
+    inset:0 -.45rem;
+  }
+  .collection-room__header,
+  .collection-room__section--overview,
+  .collection-room__section--entry,
+  .collection-room__section--items,
+  .collection-room__section--related,
+  .collection-room .journey-links--page{
+    padding:1rem .95rem 1.05rem;
+  }
+  .collection-room__header::before,
+  .collection-room__section--overview::before,
+  .collection-room__section--entry::before,
+  .collection-room__section--items::before,
+  .collection-room__section--related::before,
+  .collection-room .journey-links--page::before{
+    left:.95rem;
+    right:.95rem;
+  }
+  .collection-room__header::after,
+  .collection-room__section--overview::after,
+  .collection-room__section--entry::after,
+  .collection-room__section--items::after,
+  .collection-room__section--related::after,
+  .collection-room .journey-links--page::after{
+    left:.95rem;
+  }
+  .collection-room .journey-links__link{
+    min-width:0;
+  }
   .item--variant-modernbio{
     padding-left:.85rem;
   }

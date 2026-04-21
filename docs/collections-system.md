@@ -27,6 +27,7 @@ Each collection in `data/collections.yaml` supports these fields:
 - `featured`: allows the collection to appear in featured strips.
 - `weight`: ordering control for collection listings.
 - `start_here`: optional page slug that gets a dedicated callout.
+- `room_theme`: optional collection-detail-page presentation key for explicit per-collection reading-room styling.
 - `description`: short editorial framing used on index, detail, and homepage strips.
 - `metadata`: optional reader-facing label/value pairs.
 - `fallback`: legacy matching fields (`series`, `topics`, `tags`, `sections`).
@@ -102,6 +103,15 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - Each collection page renders a browser-local `Reading Progress` panel above `In This Collection`.
 - The panel does not use cookies, a backend, or analytics state.
 - Each collection row can show a `Visited` marker when the current browser has already opened that piece.
+- Collection detail pages may also apply an explicit per-collection reading-room treatment via `room_theme`.
+- The room system is collection-detail-page only in this pass. Homepage, article-exit continuation, collection index, and library styling do not inherit these themes.
+- The room layer changes visual atmosphere only:
+  - background field
+  - panel material
+  - border / divider language
+  - tonal accents
+  - header and section framing
+- It does not change collection ordering, progress logic, CTA order, or shared section structure.
 
 ### Storage contract
 

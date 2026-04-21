@@ -329,6 +329,13 @@ foreach ($retiredSnippet in @(
 
 $collectionSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
 foreach ($requiredSnippet in @(
+  'data-collection-room-theme="{{ $roomTheme }}"',
+  'collection-room__header',
+  'collection-room__section collection-room__section--overview',
+  'collection-room__section collection-room__section--entry',
+  'collection-room__section collection-room__section--progress',
+  'collection-room__section collection-room__section--items',
+  'collection-room__section collection-room__section--related',
   'How to Use This Collection',
   'Related Collections',
   'partial "discovery/page-list-item.html"',
@@ -337,6 +344,26 @@ foreach ($requiredSnippet in @(
   if ($collectionSingleTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/collections/single.html to contain: $requiredSnippet"
   }
+}
+
+$collectionsData = Get-Content -Path (Join-Path $repoRoot 'data/collections.yaml') -Raw
+foreach ($requiredSnippet in @(
+  'room_theme: ledger-editorial-desk',
+  'room_theme: syd-and-oliver-smoky-lounge',
+  'room_theme: modern-bios-records-archive',
+  'room_theme: risk-systems-notebook',
+  'room_theme: floods-survey-table',
+  'room_theme: ai-screen-glow-archive',
+  'room_theme: moral-chapel-library',
+  'room_theme: reported-case-studies-evidence-room'
+)) {
+  if ($collectionsData -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected data/collections.yaml to contain: $requiredSnippet"
+  }
+}
+
+if ($collectionsData -match '(?s)- slug: civic-institutions-and-public-power.*?room_theme:') {
+  throw 'Expected non-live collection civic-institutions-and-public-power not to define room_theme yet.'
 }
 
 $libraryTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.html') -Raw
