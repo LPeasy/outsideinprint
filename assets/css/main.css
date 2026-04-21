@@ -1088,6 +1088,13 @@ textarea{
   text-decoration:none;
   text-transform:uppercase;
 }
+.home-discovery-band{
+  display:grid;
+  grid-template-columns:minmax(0, .95fr) minmax(0, 1.3fr);
+  gap:2.5rem 2.75rem;
+  align-items:start;
+  margin-top:2.75rem;
+}
 .home-selected-collections__list{
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -1140,12 +1147,20 @@ textarea{
   padding-top:1.05rem;
   border-top:1px solid rgba(236,231,223,.1);
 }
+.newsletter-signup--home-band,
+.home-browse--home-band{
+  margin-top:0;
+}
 .newsletter-signup--home .newsletter-signup__inner{
   max-width:42rem;
   padding:0;
   border:none;
   border-radius:0;
   background:none;
+}
+.newsletter-signup--home-band .newsletter-signup__inner,
+.newsletter-signup--home-band .newsletter-signup__form{
+  max-width:none;
 }
 .newsletter-signup--home .newsletter-signup__eyebrow{
   font-size:.68rem;
@@ -1174,9 +1189,18 @@ textarea{
 .newsletter-signup--home .newsletter-signup__note{
   margin-top:.75rem;
 }
+.home-browse--home-band .home-browse__header{
+  margin-bottom:.9rem;
+}
+.home-browse--home-band .home-browse__dek{
+  max-width:34rem;
+}
 
 .home-browse__grid{
   gap:0 2rem;
+}
+.home-browse--home-band .home-browse__grid{
+  gap:0 1.6rem;
 }
 .home-browse__grid .card{
   padding:1rem 0 .9rem;
@@ -3457,8 +3481,13 @@ button.dashboard-chip{
   .home-recent-work,
   .entry-threads,
   .newsletter-signup--home,
-  .home-browse{
+  .home-browse,
+  .home-discovery-band{
     margin-top:2.15rem;
+  }
+  .home-discovery-band{
+    grid-template-columns:1fr;
+    gap:0;
   }
   .home-browse__grid{
     gap:0;
