@@ -979,8 +979,19 @@ foreach ($check in $essayHeroChecks) {
   $featuredImage = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image'
   $html = $targetPageHtml[$relativePath]
 
-  $heroMatch = [regex]::Match($html, '(?is)<figure class="piece-hero">\s*<img src="([^"]+)"')
-  $heroSrc = if ($heroMatch.Success) { $heroMatch.Groups[1].Value } else { '' }
+  $heroMatch = [regex]::Match(
+    $html,
+    '(?is)<figure\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-hero\b[^"]*"|''[^'']*\bpiece-hero\b[^'']*''|[^\s>]*\bpiece-hero\b[^\s>]*)[^>]*>\s*<img\b[^>]*\bsrc\s*=\s*(?:"([^"]+)"|''([^'']+)''|([^\s>]+))'
+  )
+  $heroSrc = ''
+  if ($heroMatch.Success) {
+    foreach ($groupIndex in 1..3) {
+      if ($heroMatch.Groups[$groupIndex].Success -and -not [string]::IsNullOrWhiteSpace($heroMatch.Groups[$groupIndex].Value)) {
+        $heroSrc = $heroMatch.Groups[$groupIndex].Value
+        break
+      }
+    }
+  }
 
   if ([bool]$check.ExpectVisibleHero) {
     if ([string]::IsNullOrWhiteSpace($featuredImage)) {
@@ -1010,7 +1021,10 @@ foreach ($check in $essayHeroChecks) {
     }
 
     if ([bool]$check.ExpectHeroAbsentFromBody) {
-      $bodyMatch = [regex]::Match($html, '(?is)<div class="piece-body">(.*?)</div>\s*<div class="piece-aftermatter">')
+      $bodyMatch = [regex]::Match(
+        $html,
+        '(?is)<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-body\b[^"]*"|''[^'']*\bpiece-body\b[^'']*''|[^\s>]*\bpiece-body\b[^\s>]*)[^>]*>(.*?)</div>\s*<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|''[^'']*\bpiece-aftermatter\b[^'']*''|[^\s>]*\bpiece-aftermatter\b[^\s>]*)'
+      )
       if (-not $bodyMatch.Success) {
         $metadataIssues.Add("$relativePath => expected a piece-body region for hero-deduplication coverage")
       }
