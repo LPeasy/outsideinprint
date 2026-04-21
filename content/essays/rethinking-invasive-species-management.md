@@ -5,6 +5,9 @@ draft: false
 slug: "rethinking-invasive-species-management"
 section_label: "Essay"
 subtitle: "Why Florida keeps spending millions managing invasives without much to show for it"
+featured_image: "/images/medium/rethinking-invasive-species-management/b2abf9b790de4f5931aecbfc1efab23d8192a255108fbcd9e9204019fed1b173.svg"
+featured_image_caption: "Photo by Michael Jerrard on Unsplash"
+featured_image_alt: "Rethinking Invasive Species Management in Florida"
 description: "Florida spends millions fighting species it will never get rid of — while the ones it could stop slip right past"
 version: "1.0"
 edition: "First web edition"
@@ -15,11 +18,6 @@ medium_source_url: "https://medium.com/@lawtonperret/rethinking-invasive-species
 
 ***Florida spends millions fighting species it will never get rid
 of — while the ones it could stop slip right past.***
-
-
-![](/images/medium/rethinking-invasive-species-management/b2abf9b790de4f5931aecbfc1efab23d8192a255108fbcd9e9204019fed1b173.svg)
-
-*Photo by [Michael Jerrard](https://www.wakingupwild.com) on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 **They call it a python hunt, but it feels more like a safari.**
 
@@ -515,4 +513,3 @@ And that’s the future of invasive species management.
 
 > We can keep pushing boulders,\
 > or we can act now before they start rolling down the hill.
-

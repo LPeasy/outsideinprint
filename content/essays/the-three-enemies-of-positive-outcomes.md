@@ -5,6 +5,9 @@ draft: false
 slug: "the-three-enemies-of-positive-outcomes"
 section_label: "Essay"
 subtitle: "Things fail for a reason. It’s usually one of these."
+featured_image: "/images/medium/the-three-enemies-of-positive-outcomes/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a.jpeg"
+featured_image_caption: "Photo by Zac Durant on Unsplash"
+featured_image_alt: "The Three Enemies of Positive Outcomes"
 description: "If your team, project, or relationship is off-track, start here. Most things don’t fail for complicated reasons. It’s usually one of these three"
 version: "1.0"
 edition: "First web edition"
@@ -18,10 +21,6 @@ If your team, project, or relationship is off-track, start here.
 The Three Enemies of Positive Outcomes
 
 Most things don’t fail for complicated reasons. It’s usually one of these three.
-
-![](https://cdn-images-1.medium.com/max/800/1*WQs6Fah8Hyha-u_yn9hlQQ@2x.jpeg)
-
-Photo by Zac Durant on Unsplash
 
 The enemies of positive outcomes are evil, apathy, and incompetence. That’s the whole list.
 
@@ -58,5 +57,3 @@ Start by asking: is it malice, apathy, or incompetence?
 And what would it take to fix that?
 
 If you found this useful, follow me here on Medium for more clear thinking on strategy, leadership, and systems that work.
-
-

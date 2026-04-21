@@ -6,17 +6,15 @@ slug: "why-a-return-to-the-gold-standard-would-break-the-economy"
 section_label: "Essay"
 subtitle: "What Glitters Isn’t Always Gold"
 description: "What if overnight, your $10 bill could only buy a loaf of bread instead of a full meal?. Or even worse: what if your mortgage suddenly felt twice as expensive?"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/b20b0f68d3f48fd5a5a22035ff5ff670094552486b74d98c6a1d5c3e71346552.jpeg"
+featured_image_caption: "Photo by Jingming Pan on Unsplash"
+featured_image_alt: "Returning to the Gold Standard Will Break the Economy"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/why-a-return-to-the-gold-standard-would-break-the-economy.pdf"
 featured: true
 medium_source_url: "https://medium.com/@lawtonperret/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*QvceGPZHWLRM2guTZ67OKA@2x.jpeg)
-
-Photo by Jingming Pan on Unsplash
 
 What if overnight, your $10 bill could only buy a loaf of bread instead of a full meal?
 
@@ -232,4 +230,3 @@ At the end of the day, what matters isn’t what backs your money ~ it’s wheth
 The gold standard might sound like a safe bet, but it’s a gamble on instability.
 
 In a high-stakes economy, that’s not a bet we can afford to make.
-

@@ -5,6 +5,9 @@ draft: false
 slug: "camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025"
 section_label: "Essay"
 subtitle: "Why 30 Minutes Matters ~ Testing the Official Accounts Against the USGS Hunt Gauge"
+featured_image: "/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/0ec9afa4944908a9366a77d95721184f1d306becf44ceecac10de15fda3917be.svg"
+featured_image_caption: "Map of the Guadalupe River | Camp Mystic is on the South Fork | Source"
+featured_image_alt: "Map of the Guadalupe River"
 description: "When reporters began reconstructing the events at Camp Mystic on the night of July 4, 2025, the story turned on a timeline"
 version: "1.0"
 edition: "First web edition"
@@ -16,10 +19,6 @@ collections:
   - reported-case-studies
 medium_source_url: "https://medium.com/@lawtonperret/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025-160671e2e602"
 ---
-
-![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/0ec9afa4944908a9366a77d95721184f1d306becf44ceecac10de15fda3917be.svg)
-
-*Map of the Guadalupe River | Camp Mystic is on the South Fork | [Source](https://sl.bing.net/SFsZM6YL7s)*
 
 When reporters began reconstructing the events at Camp Mystic on the
 night of July 4, 2025, **the story turned on a timeline.**
@@ -339,4 +338,3 @@ accountability.
   ”
 
 - [Who’s Responsible for Building in the Floodplain?](https://medium.com/the-balanced-sheet/whos-responsible-for-building-in-the-floodplain-b468f42f536d)
-

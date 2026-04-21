@@ -5,6 +5,9 @@ draft: false
 slug: "whos-drinking-all-the-modelo"
 section_label: "Essay"
 subtitle: "Especial Report"
+featured_image: "/images/medium/whos-drinking-all-the-modelo/645c97bb67718c4a25f3e5346039652a55d3a68b8dcd233530934b530f8e41a4.jpg"
+featured_image_caption: "Photo by Soliman Cifuentes on Unsplash"
+featured_image_alt: "Who’s Drinking All the Modelo?"
 description: "“Every once in a while, a person comes along who defies the odds, who defies logic, and fulfills an incredible dream.”"
 version: "1.0"
 edition: "First web edition"
@@ -17,10 +20,6 @@ medium_source_url: "https://medium.com/@lawtonperret/whos-drinking-all-the-model
 defies logic, and fulfills an incredible dream.”**
 
 — *The Mayor of Philadelphia celebrating Rocky Balboa in Rocky III*
-
-![](https://cdn-images-1.medium.com/max/800/0*j77amzneutwZ8s7R)
-
-Photo by Soliman Cifuentes on Unsplash
 
 #### **How Modelo Became America’s Best-Selling Beer**
 
@@ -237,4 +236,3 @@ While **Bud Light** and **Michelob Ultra** scrambled to stay relevant,
 - [Bud Light slips again, falling behind Modelo and Michelob Ultra after boycott](https://www.usatoday.com/story/money/2024/07/18/bud-light-beer-sales-ranking-boycott/74463050007/)
 
 - [How Modelo Became The No. 1 Beer Brand In America](https://www.forbes.com/sites/dontse/2024/11/01/how-modelo-became-the-no-1-beer-brand-in-america/)
-

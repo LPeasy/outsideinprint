@@ -6,7 +6,9 @@ slug: "ai-in-education-is-a-wicked-problem"
 section_label: "Essay"
 subtitle: "~ And Why We Can’t Figure it Out"
 description: "Control is impossible when everyone depends on the machine. Schools can’t control AI misuse because everyone depends on it"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/ai-in-education-is-a-wicked-problem/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba.png"
+featured_image_caption: "“In My Voice” | Art by Author"
+featured_image_alt: "“In My Voice”"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/ai-in-education-is-a-wicked-problem.pdf"
@@ -16,10 +18,6 @@ collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/ai-in-education-is-a-wicked-problem-6c01a68b48ec"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*fqGIkSDfeiM_GRHsHLJMmw.png)
-
-*“In My Voice” | Art by Author*
 
 #### The misuse debate misses the point.
 
@@ -202,4 +200,3 @@ reasoning, or collaboration.
 **If we don’t like what we see, *maybe the issue isn’t the machine ~***
 
 > maybe it’s that we stopped thinking for ourselves.
-

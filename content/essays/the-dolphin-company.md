@@ -6,7 +6,9 @@ slug: "the-dolphin-company"
 section_label: "Essay"
 subtitle: "The Rise and Fall of the World’s Largest Dolphin Empire"
 description: "On a beautiful spring afternoon in 2025, families gathered at Gulf World Marine Park in Panama City Beach, Florida, expecting a classic spectacle. Trainers c..."
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg"
+featured_image_caption: "Art by author with gpt4-o"
+featured_image_alt: "The Dolphin Company"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-dolphin-company.pdf"
@@ -16,10 +18,6 @@ collections:
   - reported-case-studies
 medium_source_url: "https://medium.com/@lawtonperret/the-dolphin-company-47f1945e2c0f"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*8xxVb6fyC-x1RmmfpPttkQ@2x.jpeg)
-
-*Art by author with gpt4-o*
 
 ### A Tragedy and a Filing
 
@@ -618,4 +616,3 @@ Business and Professional Regulation. The agency’s case against Gulf
 World ended with the park losing its operating license. Investigations
 also surfaced serious malpractice concerns in the veterinarian’s office
 at the facility.
-

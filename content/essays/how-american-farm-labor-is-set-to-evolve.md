@@ -5,6 +5,8 @@ draft: false
 slug: "how-american-farm-labor-is-set-to-evolve"
 section_label: "Essay"
 subtitle: "Again"
+featured_image: "/images/medium/how-american-farm-labor-is-set-to-evolve/dff114a907fa929b6f43c06c5643b2f9f242465875c39b6eaef5edffbcf6be33.jpeg"
+featured_image_alt: "How American Farm Labor is Set to Evolve…"
 description: "Farm Labor from 1950 — The Future. The American agricultural sector has long been the backbone of the nation’s economy, feeding millions and driving exports...."
 version: "1.0"
 edition: "First web edition"
@@ -18,8 +20,6 @@ Here comes the boom?
 Farm Labor from 1950 — The Future
 
 Introduction
-
-![](https://cdn-images-1.medium.com/max/800/1*pm-IIpQXQ-Ws0Lptm6MaKA@2x.jpeg)
 
 The American agricultural sector has long been the backbone of the nation’s economy, feeding millions and driving exports. This story of abundance, however, rests on the shoulders of farmworkers, whose labor is as indispensable as it is underappreciated. Over the past seven decades, the dynamics of farm labor have evolved drastically, shaped by mechanization, immigration policies, and social advocacy. From the sweeping changes of the mid-20th century to the relative stabilization of the labor force since 1985, farmworkers’ contributions tell a story of resilience amid systemic challenges.
 
@@ -114,5 +114,3 @@ Read More
 •	Keith Murray, Mechanization and Labor in American Agriculture, 1945 — 1970, Agricultural History Journal.
 
 •	U.S. Department of Agriculture Economic Research Service, Farm Labor: Background.
-
-

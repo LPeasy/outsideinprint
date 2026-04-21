@@ -7,6 +7,7 @@ section_label: "Essay"
 subtitle: ""
 description: "A short market essay arguing that Bitcoin's recent trading range suggests a temporary fair value near $69,420."
 featured_image: "/images/medium/the-fair-price-of-bitcoin-69420/bitcoin-price-surge-and-volatility.png"
+featured_image_alt: "The Fair Price of Bitcoin: $69,420"
 version: "1.0"
 edition: "First web edition"
 featured: false
@@ -14,8 +15,6 @@ featured: false
 topics: []
 series: []
 ---
-
-![](/images/medium/the-fair-price-of-bitcoin-69420/bitcoin-price-surge-and-volatility.png)
 
 Markets often show value through price behavior. Bitcoin is a strong example.
 

@@ -6,15 +6,14 @@ slug: "june-27-2025-scotus-set-to-close-its-term-with-major-decisions"
 section_label: "Essay"
 subtitle: "What to Watch as the Supreme Court Wraps Its Term"
 description: "The Supreme Court is set to release its final opinions of the term today, starting at 10 a.m. Eastern. Several major rulings are still pending"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/june-27-2025-scotus-set-to-close-its-term-with-major-decisions/3e3314784d7537761d81f4f12a5caf75700231bbb4a666f30ae7a77f33831c05.png"
+featured_image_alt: "June 27, 2025 — SCOTUS Set to Close Its Term with Major Decisions"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/june-27-2025-scotus-set-to-close-its-term-with-major-decisions.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/june-27-2025-scotus-set-to-close-its-term-with-major-decisions-a183e7bb38b3"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*MPK6nTbeALcKmeOyD4i-gw.png)
 
 The Supreme Court is set to release its final opinions of the term
 today, starting at 10 a.m. Eastern. Several major rulings are still
@@ -58,5 +57,3 @@ An executive order issued under the Trump administration challenged
 
 > ***We’ll return this evening with a full breakdown of the decisions
 > and what they could mean.***
-
-

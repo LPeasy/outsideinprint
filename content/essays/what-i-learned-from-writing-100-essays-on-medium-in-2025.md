@@ -5,6 +5,9 @@ draft: false
 slug: "what-i-learned-from-writing-100-essays-on-medium-in-2025"
 section_label: "Essay"
 subtitle: "From zero followers to breakout stories ~ one writer’s honest experience"
+featured_image: "/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/85db9a233bbe2b8ce8b37bf2cffb170d82db88760fa0ebb3fb2e14a0e881e798.png"
+featured_image_caption: "“I didn’t set out to build an audience ~"
+featured_image_alt: "“I didn’t set out to build an audience ~"
 description: "The internet is noisy with hot takes and thin on verifiable facts. Sometime around December of 2024, I realized that quickly answering a question on the inte..."
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/what-i-learned-from-writing-100-essays-on-medium-in-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/what-i-learned-from-writing-100-essays-on-medium-in-2025-ca5812b6e261"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*qwEvQgSNUPs73MuAd92KPA.png)
-
-> “I didn’t set out to build an audience ~
 
 > I just kept asking questions,
 
@@ -364,4 +363,3 @@ Pick a question that you’ve been asking yourself and write the clearest
 answer you can. **Don’t worry about it being perfect ~**
 
 > It never is.
-

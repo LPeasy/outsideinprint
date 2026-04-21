@@ -5,6 +5,9 @@ draft: false
 slug: "altmans-law"
 section_label: "Essay"
 subtitle: "The Super-Exponential Acceleration of AI Advancement"
+featured_image: "/images/medium/altmans-law/c294e8d769c14dca54d5f71366a7f665406be3eac44117aab1579e78cd8cfd27.jpg"
+featured_image_caption: "Photo by name_ gravity on Unsplash"
+featured_image_alt: "Altman’s Law"
 description: "For decades, Moore’s Law served as the foundation of technological forecasting, predicting that computing power would double roughly every two years due to i..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/altmans-law.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/altmans-law-a48b005e52cd"
 ---
-![](https://cdn-images-1.medium.com/max/800/0*CtkgZZFm3dESvgHu)
-
-Photo by name_ gravity on Unsplash
 
 For decades, Moore’s Law served as the foundation of technological forecasting, predicting that computing power would double roughly every two years due to improvements in transistor density.
 
@@ -128,6 +128,3 @@ This story is published on Generative AI. Connect with us on LinkedIn and follow
 Subscribe to our newsletter and YouTube channel to stay updated with the latest news and updates on generative AI. Let’s shape the future of AI together!
 
 ![](https://cdn-images-1.medium.com/max/800/0*Lmq5udN78BgO6dY2.png)
-
-
-

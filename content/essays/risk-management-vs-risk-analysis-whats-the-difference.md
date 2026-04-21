@@ -6,7 +6,8 @@ slug: "risk-management-vs-risk-analysis-whats-the-difference"
 section_label: "Essay"
 subtitle: "A coastal city’s disaster forces them to rethink their EM protocols"
 description: "This essay lays out the roles, responsibilities, and day-to-day realities of risk managers and risk analysts"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/risk-management-vs-risk-analysis-whats-the-difference/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc.png"
+featured_image_alt: "Risk Management vs Risk Analysis: What’s the Difference?"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/risk-management-vs-risk-analysis-whats-the-difference.pdf"
@@ -17,8 +18,6 @@ collections:
 collection_weight: 20
 medium_source_url: "https://medium.com/@lawtonperret/risk-management-vs-risk-analysis-whats-the-difference-d42c64c49dfa"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*ot3MQbiYVUNNieFYUVlJ8Q.png)
 
 This essay lays out the roles, responsibilities, and day-to-day
 realities of risk managers and risk analysts.
@@ -219,4 +218,3 @@ same handshake, same relationship between analyst and manager.
 > **Risk Analysis tells you what could happen and how sure we are.**
 
 > **Risk Management tells you what we will do and why.**
-

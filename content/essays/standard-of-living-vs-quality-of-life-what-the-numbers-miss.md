@@ -5,6 +5,9 @@ draft: false
 slug: "standard-of-living-vs-quality-of-life-what-the-numbers-miss"
 section_label: "Essay"
 subtitle: "GDP is UP… So Why Does Life Still Feel So Hard?"
+featured_image: "/images/medium/standard-of-living-vs-quality-of-life-what-the-numbers-miss/0f2b5ab93973a8f53632b41ba12cfaaf0e21b0a75f2ab06b643fdd9ad3dbe04c.jpg"
+featured_image_caption: "Photo by Mathieu Stern on Unsplash"
+featured_image_alt: "Standard of Living vs. Quality of Life: What the Numbers Miss"
 description: "“Raising the standard of living” might be the most recycled promise in modern American politics"
 version: "1.0"
 edition: "First web edition"
@@ -15,10 +18,6 @@ medium_source_url: "https://medium.com/@lawtonperret/standard-of-living-vs-quali
 
 > When old metrics no longer match real life experience, its time to
 > change the way we measure success.
-
-![](https://cdn-images-1.medium.com/max/800/0*ZOHujVuDrwepNkdc)
-
-*Photo by [Mathieu Stern](https://unsplash.com/@mathieustern?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
 
 #### What even is the “Standard of Living”?
 
@@ -367,4 +366,3 @@ Just real stories, real charts, and real context.
 - [OECD Better Life Index](https://www.oecdbetterlifeindex.org/)
 
 - [Genuine Progress Indicator - Gross National Happiness USA](https://gnhusa.org/genuine-progress-indicator/)
-

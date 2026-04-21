@@ -7,6 +7,9 @@ section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "From black-and-white BBC to the edge of extinction and back"
+featured_image: "/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/e9cc168657d174fbcaa39903485390e4c012d6aee82477adf48f67f3d94d5a10.jpeg"
+featured_image_caption: "Minimalist narration isn’t supposed to change the world."
+featured_image_alt: "Minimalist narration isn’t supposed to change the world."
 description: "Minimalist narration isn’t supposed to change the world. With a steady tone, curious cadence, and enough wonder to move stone-faced politicians to tears, Dav..."
 version: "1.0"
 edition: "First web edition"
@@ -14,10 +17,6 @@ pdf: "/pdfs/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.p
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen-89a9b46c27d5"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*pVDY0N3q1nmhQoCfyVkTYg@2x.jpeg)
-
-**Minimalist narration isn’t supposed to change the world.**
 
 > ***But it did.***
 
@@ -310,4 +309,3 @@ Not with that voice, that track record, and that moral weight.
 He didn’t just narrate nature.
 
 **He gave it a voice.**
-

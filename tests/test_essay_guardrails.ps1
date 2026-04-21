@@ -108,6 +108,7 @@ slug: "slug-echo"
 section_label: "Essay"
 subtitle: ""
 description: "An imported essay whose localized media path includes the slug."
+featured_image: "/images/medium/slug-echo/example.png"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/slug-echo.pdf"
@@ -119,6 +120,85 @@ medium_source_url: "https://medium.com/@example/slug-echo"
 
 This paragraph is fine.
 '@ | Set-Content -Path (Join-Path $essayRoot "slug-echo.md") -Encoding UTF8
+
+  @'
+---
+title: "Placeholder Hero Conflict"
+date: 2025-07-14
+draft: false
+slug: "placeholder-hero-conflict"
+section_label: "Essay"
+subtitle: ""
+description: "A placeholder hero fixture."
+featured_image: "/images/social/outside-in-print-default.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+![](https://example.com/lead.png)
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "placeholder-hero-conflict.md") -Encoding UTF8
+
+  @'
+---
+title: "Missing Hero Lead"
+date: 2025-07-14
+draft: false
+slug: "missing-hero-lead"
+section_label: "Essay"
+subtitle: ""
+description: "A missing hero fixture."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+![](https://example.com/lead.png)
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "missing-hero-lead.md") -Encoding UTF8
+
+  @'
+---
+title: "Duplicate Hero Lead"
+date: 2025-07-14
+draft: false
+slug: "duplicate-hero-lead"
+section_label: "Essay"
+subtitle: ""
+description: "A duplicate hero fixture."
+featured_image: "/images/medium/duplicate-hero-lead/lead.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+![](/images/medium/duplicate-hero-lead/lead.png)
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "duplicate-hero-lead.md") -Encoding UTF8
+
+  @'
+---
+title: "Current Hero Wins Conflict"
+date: 2025-07-14
+draft: false
+slug: "current-hero-wins-conflict"
+section_label: "Essay"
+subtitle: ""
+description: "A current hero wins fixture."
+featured_image: "/images/medium/current-hero-wins-conflict/hero.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+![](https://example.com/lead.png)
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "current-hero-wins-conflict.md") -Encoding UTF8
 
   $guardrailScript = Join-Path $scriptRoot "check_essay_guardrails.ps1"
 
@@ -167,6 +247,26 @@ This paragraph is fine.
   $slugEchoExit = $LASTEXITCODE
   Assert-True ($slugEchoExit -eq 0) "Expected localized media paths to avoid duplicated_title false positives."
   Assert-True (-not $slugEchoOutput.Contains("duplicated_title")) "Expected slug-only media paths not to trigger duplicated_title."
+
+  $placeholderHeroOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/placeholder-hero-conflict.md" 2>&1 | Out-String
+  $placeholderHeroExit = $LASTEXITCODE
+  Assert-True ($placeholderHeroExit -eq 1) "Expected placeholder hero conflicts to fail the guardrail check."
+  Assert-True ($placeholderHeroOutput.Contains("hero_placeholder_conflict")) "Expected placeholder hero conflicts to be reported as blockers."
+
+  $missingHeroOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/missing-hero-lead.md" 2>&1 | Out-String
+  $missingHeroExit = $LASTEXITCODE
+  Assert-True ($missingHeroExit -eq 1) "Expected missing-hero lead-image cases to fail the guardrail check."
+  Assert-True ($missingHeroOutput.Contains("hero_missing_with_lead")) "Expected missing hero lead-image cases to be reported as blockers."
+
+  $duplicateHeroOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/duplicate-hero-lead.md" 2>&1 | Out-String
+  $duplicateHeroExit = $LASTEXITCODE
+  Assert-True ($duplicateHeroExit -eq 0) "Expected duplicate hero/body cases to remain warnings by default."
+  Assert-True ($duplicateHeroOutput.Contains("hero_duplicate_lead")) "Expected duplicate hero/body cases to be reported as warnings."
+
+  $currentHeroWinsOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/current-hero-wins-conflict.md" 2>&1 | Out-String
+  $currentHeroWinsExit = $LASTEXITCODE
+  Assert-True ($currentHeroWinsExit -eq 0) "Expected current-hero-wins conflicts to remain warnings by default."
+  Assert-True ($currentHeroWinsOutput.Contains("hero_current_wins_conflict")) "Expected current-hero-wins conflicts to be reported as warnings."
 }
 finally {
   if (Test-Path $tempRoot) {

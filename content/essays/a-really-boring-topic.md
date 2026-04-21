@@ -5,6 +5,8 @@ draft: false
 slug: "a-really-boring-topic"
 section_label: "Essay"
 subtitle: "Tunneling Machines"
+featured_image: "/images/medium/a-really-boring-topic/21d0ba8af1bb61e16314860a6882761060c73a13546554cb1749d975d65bea8e.jpeg"
+featured_image_alt: "A Really Boring Topic"
 description: "Exploring the Tunnel Boring Industry’s Past, Present, and Future. The tunnel boring industry plays a pivotal role in shaping modern infrastructure, addressin..."
 version: "1.0"
 edition: "First web edition"
@@ -18,8 +20,6 @@ Beneath the Surface
 Exploring the Tunnel Boring Industry’s Past, Present, and Future
 
 All images created using ChatGPT in January 2025.
-
-![](https://cdn-images-1.medium.com/max/800/1*4K_0MknxAZea3LkSFX5YzA@2x.jpeg)
 
 The tunnel boring industry plays a pivotal role in shaping modern infrastructure, addressing the needs of an urbanizing and resource-hungry world. From its origins in 19th-century engineering breakthroughs to its adoption of cutting-edge technologies, this industry continues to expand what’s possible beneath the surface. This essay examines the history, emerging trends, future scenarios, and growth potential of the tunnel boring sector while reflecting on its broader impact on global development.
 
@@ -102,5 +102,3 @@ Conclusion
 The tunnel boring industry stands at the forefront of modern engineering, blending historical ingenuity with cutting-edge innovation. As the world urbanizes and grapples with climate change and resource scarcity, tunneling technologies will only grow in importance. From creating subterranean cities to enabling space mining, the possibilities for this industry are vast and transformative.
 
 Beneath our feet lies a world of potential, waiting to be uncovered. Whether it’s improving transportation, safeguarding cities, or reaching for the stars, the tunnel boring industry continues to redefine what humanity can achieve beneath the surface.
-
-

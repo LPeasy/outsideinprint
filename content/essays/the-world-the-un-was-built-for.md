@@ -5,6 +5,8 @@ draft: false
 slug: "the-world-the-un-was-built-for"
 section_label: "Essay"
 subtitle: "How Postwar Human Rights, Migration Norms, and Global Institutions Were Designed for Europe ~ and Applied to a Very Different World"
+featured_image: "/images/medium/the-world-the-un-was-built-for/cc8c8bffe2bc792723dbd459180973ed10ecd5475abadc1a558d3e26bb1ca050.png"
+featured_image_alt: "The World the UN Was Built For"
 description: "In the years after World War II, the victors attempted something new. After two global wars in a single generation, they agreed to a set of rules meant to pr..."
 version: "1.0"
 edition: "First web edition"
@@ -12,8 +14,6 @@ pdf: "/pdfs/the-world-the-un-was-built-for.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-world-the-un-was-built-for-335093881846"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*NVaPWu3fjquEpPay7rQusQ.png)
 
 In the years after World War II, the victors attempted something new.
 After two global wars in a single generation, they agreed to a set of
@@ -238,4 +238,3 @@ If you disagree, I welcome it ~ but only on the merits of the argument
 itself.
 
 Read closely. Question the assumptions. Engage in good faith.
-

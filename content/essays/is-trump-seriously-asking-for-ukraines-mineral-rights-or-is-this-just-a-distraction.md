@@ -5,6 +5,9 @@ draft: false
 slug: "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction"
 section_label: "Essay"
 subtitle: "(They might actually make a deal)"
+featured_image: "/images/medium/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction/ddf0698b8bfddfca59454408fb47a4e29df1578c33e821d6083ab9e6d85458f5.jpeg"
+featured_image_caption: "Photo by Glib Albovsky on Unsplash"
+featured_image_alt: "Is Trump Seriously Asking for Ukraine’s Mineral Rights — Or Is This Just a Distraction?"
 description: "The U.S.-Russia peace talks in Riyadh signaled a shift toward de-escalation in Ukraine and a broader realignment of U.S. strategy toward the pacific"
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-jus
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction-de6711fe7ecf"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*HpzYrmZu2lo3xkEf5uMHnw@2x.jpeg)
-
-Photo by Glib Albovsky on Unsplash
 
 The U.S.-Russia peace talks in Riyadh signaled a shift toward de-escalation in Ukraine and a broader realignment of U.S. strategy toward the pacific.
 
@@ -180,6 +180,3 @@ The comments overshadowed Zelensky's meeting with US envoy Keith Kellogg in Kyiv
 Ukraine is sitting on 2.6 billion tons of reserves of minerals crucial to global technology.www.axios.com85 percent of Greenlanders don't want Trump takeover, new poll says
 Survey lands as Danish prime minister tours Europe to try shore up support for keeping the Arctic island out of American…www.politico.eu'It will not happen': Trump's Greenland grab hits new Danish resistance
 "We have no interest in selling Greenland to the U.S.," Denmark's Foreign Minister Lars Løkke Rasmussen says.www.politico.eu
-
-
-

@@ -5,6 +5,9 @@ draft: false
 slug: "dirt-is-better-than-air"
 section_label: "Essay"
 subtitle: "Build heavy. Before you need it."
+featured_image: "/images/medium/dirt-is-better-than-air/4fabc777aec2477ce67e4c5981f3ebc1edf395cac2b0cb3110a8d6ff99f19623.jpeg"
+featured_image_caption: "Photo by Justin Wilkens on Unsplash"
+featured_image_alt: "Dirt Is Better Than Air"
 description: "In South Lafourche, Louisiana, storms are just part of life. They come hard and often. Decades ago, a man named Windell Curole took over the local levee dist..."
 version: "1.0"
 edition: "First web edition"
@@ -15,9 +18,6 @@ collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/dirt-is-better-than-air-08e1e54d4d5c"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*oVfRWciiezwP73W6PFNcbA@2x.jpeg)
-
-Photo by Justin Wilkens on Unsplash
 
 In South Lafourche, Louisiana, storms are just part of life. They come hard and often. Decades ago, a man named Windell Curole took over the local levee district with one job: stop the water.
 
@@ -126,6 +126,3 @@ We all face storms. We all build walls to hold them back.
 The question isn’t whether the pressure will come.
 
 The question is whether you’ve built with dirt — or with air.If this hit home, follow me for more grounded takes like this one.
-
-
-

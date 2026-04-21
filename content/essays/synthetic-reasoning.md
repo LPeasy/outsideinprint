@@ -5,6 +5,8 @@ draft: false
 slug: "synthetic-reasoning"
 section_label: "Essay"
 subtitle: "The Dawn of Self-Evolving AI"
+featured_image: "/images/medium/synthetic-reasoning/07c57a8f208c2fc53fc2c10e5deb4e365b94b9d37089dde7e1612013d373b9e0.jpeg"
+featured_image_alt: "Synthetic Reasoning"
 description: "The race to build the most powerful artificial intelligence is accelerating, and with it, the uneasy question of whether AI will remain aligned with human va..."
 version: "1.0"
 edition: "First web edition"
@@ -15,8 +17,6 @@ collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/synthetic-reasoning-265e0e7bb3d5"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*HWCwVAcXThBS7UQHZ4pRZQ@2x.jpeg)
 
 Made using Chat GPT in January, 2025.
 
@@ -96,4 +96,3 @@ Regulators, researchers, and industry leaders must cooperate on robust AI govern
 - “AI Alignment through Reinforcement Learning from Human Feedback: Challenges and Limitations.” arXiv, 2024, https://arxiv.org/html/2406.18346v1.
 - Gao, Leo, et al. “Scaling Laws for Reward Model Overoptimization.” arXiv, 2022, https://arxiv.org/abs/2210.10760.
 - Anthropic & Redwood Research. “Exclusive: New Research Shows AI Strategically Lying.” Time, 2024, https://time.com/7202784/ai-research-strategic-lying/.
-

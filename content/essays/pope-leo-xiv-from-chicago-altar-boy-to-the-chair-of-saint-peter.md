@@ -7,6 +7,9 @@ section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "Inside the life of Robert Prevost, the Augustinian priest who made history"
+featured_image: "/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/64a77b457874a4f350bf43b17cd5195fe10c5fc41af5ff7e2a1ca4e2d9c0b55c.png"
+featured_image_caption: "Pope Leo Waving to the Vatican | Source: Wikimedia Commons"
+featured_image_alt: "Pope Leo Waving to the Vatican"
 description: "He grew up in a devout Catholic household in Dolton, a working-class suburb south of the city. His parents, Louis and Mildred Prevost , were both educators d..."
 version: "1.0"
 edition: "First web edition"
@@ -14,10 +17,6 @@ pdf: "/pdfs/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*uoof4Dj5a5dexVkGBtOjwQ.png)
-
-*Pope Leo Waving to the Vatican | Source: Wikimedia Commons*
 
 ### **Early Life and Family Roots**
 
@@ -269,4 +268,3 @@ prisoners,**
 ### *Still have questions?*
 
 #### *Read our follow-up:* [*8 Big Questions About Pope Leo XIV*](https://medium.com/the-balanced-sheet/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708)
-

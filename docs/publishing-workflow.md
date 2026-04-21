@@ -64,6 +64,13 @@ Use these discovery controls deliberately:
 - `collections` for explicit membership in curated reading lanes
 - `collection_weight` when you want controlled ordering inside a collection
 
+If an essay uses a lead image, treat front matter as the canonical source:
+
+- set `featured_image`
+- set `featured_image_alt`
+- set `featured_image_caption` when attribution or caption text is needed
+- do not repeat the same image as the first body image
+
 Version discipline is manual. Bump `version` for material changes to body copy, title/subtitle, or citation-relevant metadata.
 
 If a piece belongs in an existing collection, add explicit `collections` front matter. If you are launching a new collection:
@@ -107,6 +114,7 @@ Before publishing, run the normal local publish gate:
 What this gate is meant to catch:
 
 - changed-essay residue and missing descriptions
+- hero/frontmatter conflicts such as placeholder heroes, missing heroes with real early lead images, and duplicate hero/body lead images
 - broken public routes
 - generated HTML regressions
 - Node/browser test regressions
@@ -134,6 +142,15 @@ Avoid treating these as the default path:
   .\tools\bin\generated\python.cmd .\scripts\normalize_legacy_medium_essay.py --write .\content\essays\some-piece.md
   .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\audit_legacy_essays.ps1
   ```
+
+- For existing essays with hero/body conflicts, use the repo-local normalizer instead of hand-copying image fields:
+
+  ```powershell
+  .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\normalize_essay_hero_images.ps1
+  .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\normalize_essay_hero_images.ps1 -Write
+  ```
+
+  This pass promotes deterministic early lead images into `featured_image`, localizes remote Medium images into `static/images/medium/<slug>/`, migrates short caption/source lines into `featured_image_caption`, and removes promoted duplicates from the article body.
 
 - Analytics and dashboard publishing are separate workflows. The public reading site does not publish the dashboard.
 - Do not rely on raw HTML, copied Medium formatting, duplicated title/dek in the body, or improvised separators. The essay guardrails are specifically meant to catch those problems.

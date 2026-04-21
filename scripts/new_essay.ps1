@@ -207,6 +207,9 @@ try {
     "section_label: 'Essay'"
     ('subtitle: {0}' -f (Convert-ToYamlString $options.Subtitle))
     ('description: {0}' -f (Convert-ToYamlString $options.Description))
+    "featured_image: ''"
+    "featured_image_alt: ''"
+    "featured_image_caption: ''"
     "version: '1.0'"
     "edition: 'First web edition'"
     'featured: false'
@@ -226,7 +229,8 @@ try {
     ''
     '## Evidence'
     ''
-    'If you include an image, place the caption and source directly under the image.'
+    'If you include a lead image, set featured_image, featured_image_alt, and featured_image_caption in front matter.'
+    'Do not repeat that same image as the first body image.'
     ''
     '## Why It Matters'
     ''

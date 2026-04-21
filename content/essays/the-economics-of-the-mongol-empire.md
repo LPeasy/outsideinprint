@@ -5,6 +5,9 @@ draft: false
 slug: "the-economics-of-the-mongol-empire"
 section_label: "Essay"
 subtitle: "How Genghis Khan Created the First Global Trade Network"
+featured_image: "/images/medium/the-economics-of-the-mongol-empire/60342f090c96aae087a5ed7917af61424689ccc02035e6e48d930d3f394b2fb7.jpeg"
+featured_image_caption: "Photo by Ryan Brooklyn on Unsplash"
+featured_image_alt: "The Economics of the Mongol Empire"
 description: "History often remembers Genghis Khan as a ruthless conqueror, but his most lasting impact wasn’t military it was economic.The Mongol Empire, at its height, s..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/the-economics-of-the-mongol-empire.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-economics-of-the-mongol-empire-c258d2179605"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*khYdqb0OmvTtWQeCsofc3Q@2x.jpeg)
-
-Photo by Ryan Brooklyn on Unsplash
 
 History often remembers Genghis Khan as a ruthless conqueror, but his most lasting impact wasn’t military ~ it was economic.The Mongol Empire, at its height, stretched from the Pacific Ocean to Eastern Europe, creating the largest contiguous land empire in history.
 
@@ -174,5 +174,3 @@ and subscribe to my publication The Balance Sheet
 
 The Balance Sheet
 The Balance Sheet breaks down economics, policy, and current events with clarity and fairness. No spin — just real…medium.comThanks for reading!
-
-

@@ -8,17 +8,15 @@ series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "A scrappy biography of the runaway apprentice who became a statesman, scientist, and master of self-improvement."
 description: "This biography is based on The Autobiography of Benjamin Franklin and other public-domain records, including Franklin’s letters, essays, and inventions"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/60260729069245aec2c2513ff114e881be68451fae1ca363432ab40d1bdaab17.jpeg"
+featured_image_caption: "Source: Picryl"
+featured_image_alt: "Benjamin Franklin: How America’s Funniest Founder Made Greatness Feel Possible"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible-07e2ee19813d"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*Z-dpG1Zilp-XUSJgQdYWKQ.jpeg)
-
-*[Source: Picryl](https://picryl.com/media/benjamin-franklin-after-jean-baptiste-greuze-2074a4)*
 
 #### **Editor’s Note**
 
@@ -246,4 +244,3 @@ experiment.
 📘 [*The Autobiography of Benjamin Franklin* (full text): Project Gutenberg](https://www.gutenberg.org/ebooks/148)\
 🎧 [Audio version (LibriVox): Listen on Archive.org](https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up)\
 📺 [PBS Documentary: *Benjamin Franklin* by Ken Burns: Watch Trailer](https://www.youtube.com/watch?v=v7wowg6Fy4I)
-

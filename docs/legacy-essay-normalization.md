@@ -26,11 +26,24 @@ This generates:
 
 The normalizer is intentionally conservative. It is safe for repeated use on Medium-style imports that still contain wrapper HTML, duplicated lead metadata, obvious mojibake, stripped link-card remnants, `[Embedded media: ...]` placeholders, and loose image/source caption lines that should be expressed in the article-body patterns already supported by Hugo.
 
-4. Finish each piece with a manual editorial pass for anything the script cannot infer safely.
+4. Normalize essay hero conflicts before final review.
 
-5. Re-run the audit after cleanup so the queue reflects the new state.
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\normalize_essay_hero_images.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\normalize_essay_hero_images.ps1 -Write
+```
 
-6. Run the essay guardrails on the cleaned files before publishing changes.
+This pass uses `featured_image` as the canonical essay hero, localizes remote early lead images into `static/images/medium/<slug>/`, migrates qualifying caption/source lines into `featured_image_caption`, removes promoted duplicate body images, and emits:
+
+- `reports/essay-hero-normalization.json`
+- `reports/essay-hero-normalization.csv`
+- `reports/essay-hero-normalization.md`
+
+5. Finish each piece with a manual editorial pass for anything the script cannot infer safely.
+
+6. Re-run the audit after cleanup so the queue reflects the new state.
+
+7. Run the essay guardrails on the cleaned files before publishing changes.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\some-piece.md
@@ -73,6 +86,8 @@ Use these rules in order.
 - Normalize italic caption lines after imported markdown images into either `Source:` paragraphs or blockquote captions so the article-body partial can render them consistently.
 - Prefer concise captions, `Source:` lines, or short read-more bullets over scraped card remnants.
 - Treat long source dumps as aftermatter and give them a heading when the piece clearly transitions into references.
+- When the first body image is the real lead image, promote it into `featured_image` instead of leaving it duplicated at the top of the article.
+- Do not keep `/images/social/outside-in-print-default.png` as a visible essay hero when a real early lead image exists.
 
 ### Repair text encoding and spacing
 
@@ -96,6 +111,8 @@ A piece still needs hand cleanup when it contains any of the following after the
 - long source clusters that need editorial grouping
 - heavy paragraph-collision damage from import joins
 - factual caveats embedded inside promotional aftermatter
+- essays where an existing non-placeholder hero conflicts with a different early lead image
+- essays where the first body image appears outside the strict early-lead heuristic window
 
 ## Batch Guidance
 

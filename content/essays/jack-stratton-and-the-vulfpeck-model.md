@@ -7,6 +7,9 @@ section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
+featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b41234f692c761a11f33e202a31bb366b4c2c8e31b07a3ac2b8856187.jpeg"
+featured_image_caption: "Jack Stratton on stage \\\\| Source: Michelle Shiers"
+featured_image_alt: "Jack Stratton on stage \\\\"
 description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
 version: "1.0"
 edition: "First web edition"
@@ -18,10 +21,6 @@ medium_source_url: "https://medium.com/@lawtonperret/jack-stratton-and-the-vulfp
 ***From silent albums to sold-out arenas:***
 ***The Man Behind Vulfpeck, the Funk Collective That Outsmarted the
 System***
-
-![](https://cdn-images-1.medium.com/max/800/1*cXfu1mgs_mlB6UhXEDB8ig@2x.jpeg)
-
-> Jack Stratton on stage \| [Source: Michelle Shiers](https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band)
 
 **Minimalist funk isn’t supposed to fill a room.**
 
@@ -376,4 +375,3 @@ force behind Vulfpeck’s distinct and enduring identity.
 > Call it what you want: jam band, studio collective, funk pranksters.
 
 **Stratton just calls it music** *you can believe in.*
-

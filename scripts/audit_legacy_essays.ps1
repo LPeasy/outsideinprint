@@ -228,6 +228,9 @@ function Parse-PageFrontMatter {
     Date = ''
     Draft = $false
     Featured = $false
+    FeaturedImage = ''
+    FeaturedImageAlt = ''
+    FeaturedImageCaption = ''
     MediumSourceUrl = ''
     SourceUrl = ''
     Collections = @()
@@ -253,6 +256,9 @@ function Parse-PageFrontMatter {
         'date' { $front.Date = [string](Convert-Scalar $raw) }
         'draft' { $front.Draft = [bool](Convert-Scalar $raw) }
         'featured' { $front.Featured = [bool](Convert-Scalar $raw) }
+        'featured_image' { $front.FeaturedImage = [string](Convert-Scalar $raw) }
+        'featured_image_alt' { $front.FeaturedImageAlt = [string](Convert-Scalar $raw) }
+        'featured_image_caption' { $front.FeaturedImageCaption = [string](Convert-Scalar $raw) }
         'medium_source_url' { $front.MediumSourceUrl = [string](Convert-Scalar $raw) }
         'source_url' { $front.SourceUrl = [string](Convert-Scalar $raw) }
         'subtitle' { $front.Subtitle = [string](Convert-Scalar $raw) }
@@ -354,6 +360,74 @@ function Get-DuplicateTitleSearchWindow {
   $window = [regex]::Replace($window, '<[^>]+>', ' ')
   $window = [regex]::Replace($window, 'https?://\S+', ' ')
   return $window
+}
+
+function Get-FirstHeadingLineNumber {
+  param([string[]]$Lines)
+
+  for ($index = 0; $index -lt $Lines.Length; $index++) {
+    $line = $Lines[$index].Trim()
+    if ($line -match '^(#{2,6})\s+' -or $line -match '^(?i)<h[2-6]\b') {
+      return ($index + 1)
+    }
+  }
+
+  return $null
+}
+
+function Get-FirstImageOccurrence {
+  param([string[]]$Lines)
+
+  for ($index = 0; $index -lt $Lines.Length; $index++) {
+    $line = $Lines[$index]
+    $trimmed = $line.Trim()
+
+    $markdownMatch = [regex]::Match($trimmed, '^!\[(?<alt>[^\]]*)\]\((?<src>[^)\s]+)(?:\s+"(?<title>[^"]*)")?\)\s*$')
+    if ($markdownMatch.Success) {
+      return [pscustomobject]@{
+        LineNumber = $index + 1
+        Source = $markdownMatch.Groups['src'].Value
+      }
+    }
+
+    $htmlMatch = [regex]::Match($line, '(?is)<img[^>]+src=(?:"(?<src1>[^"]+)"|''(?<src2>[^'']+)'')')
+    if ($htmlMatch.Success) {
+      $source = if ($htmlMatch.Groups['src1'].Success) { $htmlMatch.Groups['src1'].Value } else { $htmlMatch.Groups['src2'].Value }
+      return [pscustomobject]@{
+        LineNumber = $index + 1
+        Source = $source
+      }
+    }
+  }
+
+  return $null
+}
+
+function Get-EssayHeroIssueData {
+  param($Page)
+
+  $defaultPlaceholder = '/images/social/outside-in-print-default.png'
+  $bodyLines = ($Page.Body -replace "`r`n", "`n") -split "`n"
+  $firstImage = Get-FirstImageOccurrence -Lines $bodyLines
+  $firstHeadingLine = Get-FirstHeadingLineNumber -Lines $bodyLines
+  $leadWithinHeuristic = $false
+  if ($null -ne $firstImage) {
+    $leadWithinHeuristic = ($firstImage.LineNumber -le 20) -and ((-not $firstHeadingLine) -or ($firstImage.LineNumber -lt $firstHeadingLine))
+  }
+
+  $realLeadCandidate = ($null -ne $firstImage) -and ($firstImage.Source -ne $defaultPlaceholder)
+  $hasNonPlaceholderHero = (-not [string]::IsNullOrWhiteSpace($Page.FeaturedImage)) -and ($Page.FeaturedImage -ne $defaultPlaceholder)
+
+  return [pscustomobject]@{
+    lead_image_source = if ($null -ne $firstImage) { $firstImage.Source } else { '' }
+    lead_image_line = if ($null -ne $firstImage) { $firstImage.LineNumber } else { $null }
+    first_heading_line = $firstHeadingLine
+    lead_within_heuristic = [bool]$leadWithinHeuristic
+    hero_placeholder_conflict = [int](($Page.Section -eq 'essays') -and ($Page.FeaturedImage -eq $defaultPlaceholder) -and $realLeadCandidate -and $leadWithinHeuristic)
+    hero_missing_with_lead = [int](($Page.Section -eq 'essays') -and [string]::IsNullOrWhiteSpace($Page.FeaturedImage) -and $realLeadCandidate -and $leadWithinHeuristic)
+    hero_duplicate_lead = [int](($Page.Section -eq 'essays') -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -eq $Page.FeaturedImage))
+    hero_current_wins_conflict = [int](($Page.Section -eq 'essays') -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -ne $Page.FeaturedImage))
+  }
 }
 
 function Strip-WrappingEmphasis {
@@ -494,6 +568,7 @@ foreach ($page in $pages) {
       $matchedCollections.Add($collection)
     }
   }
+  $heroIssueData = Get-EssayHeroIssueData -Page $page
 
   $issueCounts = [ordered]@{
     medium_cta = Count-Matches -Text $body -Patterns $ctaPatterns
@@ -509,6 +584,10 @@ foreach ($page in $pages) {
     duplicated_title = 0
     ornamental_breaks = Count-Matches -Text $body -Patterns @('(?m)^-{20,}\s*$','(?m)^\*\s*\*\s*\*\s*$','(?m)^\\\s*$')
     escaped_linebreaks = Count-Matches -Text $body -Patterns @('(?m)[^\\]\\$')
+    hero_placeholder_conflict = $heroIssueData.hero_placeholder_conflict
+    hero_missing_with_lead = $heroIssueData.hero_missing_with_lead
+    hero_duplicate_lead = $heroIssueData.hero_duplicate_lead
+    hero_current_wins_conflict = $heroIssueData.hero_current_wins_conflict
   }
 
   if ($page.MediumSourceUrl) {
@@ -566,7 +645,9 @@ foreach ($page in $pages) {
     (3 * [Math]::Min(1, $issueCounts.pseudo_headings)) +
     (2 * [Math]::Min(1, $issueCounts.source_dumps)) +
     (3 * [Math]::Min(1, $issueCounts.duplicated_title)) +
-    (2 * [Math]::Min(1, ($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks)))
+    (2 * [Math]::Min(1, ($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks))) +
+    (4 * [Math]::Min(1, ($issueCounts.hero_placeholder_conflict + $issueCounts.hero_missing_with_lead))) +
+    (2 * [Math]::Min(1, ($issueCounts.hero_duplicate_lead + $issueCounts.hero_current_wins_conflict)))
 
   $cleanupScore = $priorityScore + $severityScore
   $batch = if (-not $hasIssues) {
@@ -579,8 +660,8 @@ foreach ($page in $pages) {
     'batch_3'
   }
 
-  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','caption_residue','ornamental_breaks','medium_cdn_media')
-  $assistedReviewIssues = @('medium_cta','escaped_linebreaks') + $safeAutoIssues
+  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','caption_residue','ornamental_breaks','medium_cdn_media','hero_placeholder_conflict','hero_missing_with_lead','hero_duplicate_lead')
+  $assistedReviewIssues = @('medium_cta','escaped_linebreaks','hero_current_wins_conflict') + $safeAutoIssues
   $manualLightIssues = @('author_note','manual_bullets','fake_lists','pseudo_headings','source_dumps') + $assistedReviewIssues
   $highSensitivity = $page.Featured -or
     ($startHereEssaySlugs -contains $page.Slug) -or
@@ -643,6 +724,10 @@ foreach ($page in $pages) {
     has_source_dump = [bool]($issueCounts.source_dumps -gt 0)
     has_duplicated_title = [bool]($issueCounts.duplicated_title -gt 0)
     has_separator_residue = [bool](($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks) -gt 0)
+    has_hero_placeholder_conflict = [bool]($issueCounts.hero_placeholder_conflict -gt 0)
+    has_hero_missing_with_lead = [bool]($issueCounts.hero_missing_with_lead -gt 0)
+    has_hero_duplicate_lead = [bool]($issueCounts.hero_duplicate_lead -gt 0)
+    has_hero_current_wins_conflict = [bool]($issueCounts.hero_current_wins_conflict -gt 0)
     medium_cta_count = $issueCounts.medium_cta
     medium_cdn_media_count = $issueCounts.medium_cdn_media
     author_note_count = $issueCounts.author_note
@@ -654,6 +739,14 @@ foreach ($page in $pages) {
     source_dump_count = $issueCounts.source_dumps
     duplicated_title_count = $issueCounts.duplicated_title
     separator_residue_count = ($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks)
+    hero_placeholder_conflict_count = $issueCounts.hero_placeholder_conflict
+    hero_missing_with_lead_count = $issueCounts.hero_missing_with_lead
+    hero_duplicate_lead_count = $issueCounts.hero_duplicate_lead
+    hero_current_wins_conflict_count = $issueCounts.hero_current_wins_conflict
+    lead_image_source = $heroIssueData.lead_image_source
+    lead_image_line = $heroIssueData.lead_image_line
+    first_heading_line = $heroIssueData.first_heading_line
+    lead_within_heuristic = [bool]$heroIssueData.lead_within_heuristic
     issue_types = $issueTypes
     issue_type_count = $issueTypes.Count
     severity_score = $severityScore
@@ -726,7 +819,7 @@ $csvPath = "$ReportBasePath.csv"
 $mdPath = "$ReportBasePath.md"
 Write-TextNoBom $jsonPath ($report | ConvertTo-Json -Depth 8)
 $rowsArray |
-  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_medium_cdn_media,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue |
+  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_medium_cdn_media,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue,has_hero_placeholder_conflict,has_hero_missing_with_lead,has_hero_duplicate_lead,has_hero_current_wins_conflict |
   Export-Csv -Path $csvPath -NoTypeInformation -Encoding utf8
 
 $issueSort = @(

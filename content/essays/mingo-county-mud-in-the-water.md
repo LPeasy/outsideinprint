@@ -5,6 +5,9 @@ draft: false
 slug: "mingo-county-mud-in-the-water"
 section_label: "Essay"
 subtitle: "What one West Virginia town reveals about America’s crumbling water systems"
+featured_image: "/images/medium/mingo-county-mud-in-the-water/1b7bc0f31b0983531545efde2ef0518d63154c5312db959917972bb515e7b60c.jpeg"
+featured_image_caption: "Photo by engin akyurt on Unsplash"
+featured_image_alt: "Mingo County: Mud in the Water"
 description: "No Water, No Trust: What Life Looks Like When the Taps Run Dry. The water comes out brown. The pressure drops to nothing. Another boil notice. Another day wi..."
 version: "1.0"
 edition: "First web edition"
@@ -15,9 +18,6 @@ collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/mingo-county-mud-in-the-water-6e1b0c0c02a5"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*SBJOe4yaQ3YoQFi8ZNNBaA@2x.jpeg)
-
-Photo by engin akyurt on Unsplash
 
 No Water, No Trust: What Life Looks Like When the Taps Run Dry
 
@@ -176,6 +176,3 @@ Read More
 Mingo County residents speak out about ongoing water issues
 A local community, struggling to get access to clean water for weeks, is speaking out about their ongoing battle when…www.wowktv.comCustomers voice water woe frustrations in Mingo County
 People who've experienced recurring outages are desperate for a long-term fix.www.wsaz.comhttps://westvirginiawatch.com/2025/01/28/challenges-persist-for-mingo-water-system-as-wv-public-service-commission-opens-investigation/
-
-
-

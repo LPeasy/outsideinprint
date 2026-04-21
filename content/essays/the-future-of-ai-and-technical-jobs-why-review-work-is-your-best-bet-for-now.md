@@ -5,6 +5,9 @@ draft: false
 slug: "the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now"
 section_label: "Essay"
 subtitle: "AI is automating technical work — but human reviewers still matter. Here’s why."
+featured_image: "/images/medium/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now/cba9e9b06b3e7cb155f359c7984d07df994a9b4cddb356a6354a3b6d930348b8.jpeg"
+featured_image_caption: "Photo by Markus Winkler on Unsplash"
+featured_image_alt: "The Future of AI and Technical Jobs: Why Review Work Is Your Best Bet (For Now)"
 description: "AI Is Here — And It’s Changing Everything. The AI revolution isn’t on the horizon — it’s already reshaping entire industries"
 version: "1.0"
 edition: "First web edition"
@@ -15,9 +18,6 @@ collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now-c8f4081f0c46"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*NLSCxlU_msuT51gEFLhizQ@2x.jpeg)
-
-Photo by Markus Winkler on Unsplash
 
 AI Is Here — And It’s Changing Everything
 
@@ -171,6 +171,3 @@ Several Chinese AI companies have launched new open-source language models that 
 
 OpenAI touts new government partnership and support for A.I. infrastructure
 NPR's Mary Louise Kelly talks with Chris Lehane, chief global affairs officer of OpenAI, about Stargate, DeepSeek and…www.npr.org
-
-
-

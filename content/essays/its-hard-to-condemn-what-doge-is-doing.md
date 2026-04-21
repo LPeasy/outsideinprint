@@ -5,6 +5,8 @@ draft: false
 slug: "its-hard-to-condemn-what-doge-is-doing"
 section_label: "Essay"
 subtitle: "The Wrecking Ball We Deserve?"
+featured_image: "/images/medium/its-hard-to-condemn-what-doge-is-doing/d0e770bbe36eaacb02b0485d21c33b388d5975eb34ddcb15f38b678658bb506e.jpeg"
+featured_image_alt: "It’s Hard to Condemn what DOGE is Doing"
 description: "Image created in ChatGPT, February 2025. There is something undeniably compelling about what the Department of Government Efficiency (DOGE) is doing"
 version: "1.0"
 edition: "First web edition"
@@ -12,7 +14,6 @@ pdf: "/pdfs/its-hard-to-condemn-what-doge-is-doing.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/its-hard-to-condemn-what-doge-is-doing-b8ed0ff6e3f8"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*PavU1or_xpIgYmgbWjwqRg@2x.jpeg)
 
 Image created in ChatGPT, February 2025.
 
@@ -146,6 +147,3 @@ This essay, “It’s Hard to Condemn What DOGE Is Doing,” is not about defend
 I don’t write to push easy answers. I write to explore the hard questions — the ones that don’t fit neatly into political talking points. This is one of those questions: What happens when the wrecking ball feels like the only option left?
 
 If this piece resonates with you — or challenges you — let me know. The conversation is just as important as the argument.
-
-
-

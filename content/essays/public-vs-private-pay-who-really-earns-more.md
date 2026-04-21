@@ -5,6 +5,8 @@ draft: false
 slug: "public-vs-private-pay-who-really-earns-more"
 section_label: "Essay"
 subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
+featured_image: "/images/medium/public-vs-private-pay-who-really-earns-more/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce.png"
+featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
 description: "The custodian at your local public school probably makes more per hour, with benefits than the guy who just cleaned your hotel room"
 version: "1.0"
 edition: "First web edition"
@@ -15,8 +17,6 @@ medium_source_url: "https://medium.com/@lawtonperret/public-vs-private-pay-who-r
 
 > The government can’t outbid Silicon Valley for engineers, but it will
 > pay a school custodian a whole lot more than a hotel would pay a maid.
-
-![](https://cdn-images-1.medium.com/max/800/1*oDvsCfwRpZG43zFlI20N_g.png)
 
 The custodian at your local public school probably makes more ~ **per
 hour, with benefits** ~ than the guy who just cleaned your hotel room.
@@ -292,4 +292,3 @@ The only real answer is:
   [https://www.cbo.gov/](https://www.cbo.gov/)
 - Economic Policy Institute →
   [https://www.epi.org/](https://www.epi.org/)
-

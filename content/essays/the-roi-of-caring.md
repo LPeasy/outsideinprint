@@ -5,6 +5,9 @@ draft: false
 slug: "the-roi-of-caring"
 section_label: "Essay"
 subtitle: "A logical case for why giving a damn makes everything better"
+featured_image: "/images/medium/the-roi-of-caring/3d9c7e2c965f02f4865656d236d78d7ee750001dab77cedab7e8cb3c437e2639.jpeg"
+featured_image_caption: "Photo by Jehyun Sung on Unsplash"
+featured_image_alt: "The ROI of Caring"
 description: "You can outsource labor, strategy, even creativity — but you can’t outsource skin in the game. Making a conscious choice to care — about the people, events..."
 version: "1.0"
 edition: "First web edition"
@@ -18,10 +21,6 @@ You can outsource labor, strategy, even creativity — but you can’t outso
 The ROI of Caring
 
 A logical case for why giving a damn makes everything better.
-
-![](https://cdn-images-1.medium.com/max/800/1*K8_OekaHGgobJ4Bqc0XkRw@2x.jpeg)
-
-Photo by Jehyun Sung on Unsplash
 
 Making a conscious choice to care — about the people, events, and moments of your life — isn’t just noble.
 
@@ -94,5 +93,3 @@ It’s not just about heart; it’s about leverage.Because if you want better ou
 just this simple question:
 
 Do you care?If you found this useful, follow me here on Medium for more clear thinking on strategy, leadership, and systems that work.
-
-

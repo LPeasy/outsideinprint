@@ -5,6 +5,9 @@ draft: false
 slug: "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play"
 section_label: "Essay"
 subtitle: "Putin fights in Ukraine, Beijing tightens its grip on Russia’s future"
+featured_image: "/images/medium/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/35170d6117697c99d263a1757eb5190348013a31255dfaed3a51215b415933a5.jpeg"
+featured_image_caption: "Photo by Didssph on Unsplash"
+featured_image_alt: "Russia’s Slow Surrender: How China is Turning Putin’s War into a Power Play"
 description: "Russia’s prolonged war in Ukraine has significantly altered its geopolitical and economic landscape, pushing it closer to China in ways that threaten its sov..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*PHMYPcymIjnHm77IGxy--w@2x.jpeg)
-
-Photo by Didssph on Unsplash
 
 Russia’s prolonged war in Ukraine has significantly altered its geopolitical and economic landscape, pushing it closer to China in ways that threaten its sovereignty.
 
@@ -95,5 +95,3 @@ America maxed out its credit card — and left you to pay for it.medium.comT
 How a Once-Taboo Term is Making a Controversial Comeback in Online Culturemedium.comElon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test
 Musk’s Management Tactics Hit the Federal Workforcemedium.comInflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up
 Politicians blame deficits — but what if the real culprit is the banking system?medium.com
-
-

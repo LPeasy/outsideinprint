@@ -6,7 +6,8 @@ slug: "in-the-image-of-god"
 section_label: "Essay"
 subtitle: "An introduction to Catholic social teaching"
 description: "Most conversations about religion and society begin in the wrong places. They start with policies and parties"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/in-the-image-of-god/fa2482c598cd754263ea2463145d8e69da0af924b806be195d62df5c53684d0f.jpg"
+featured_image_alt: "In The Image of God"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/in-the-image-of-god.pdf"
@@ -16,8 +17,6 @@ collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/in-the-image-of-god-bd1806aee9d4"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/0*2eeaLDOOeVcw8EBb.jpg)
 
 #### Author’s Note
 
@@ -351,4 +350,3 @@ Show us the truth,
 God is alive.
 
 > **Amen**.
-

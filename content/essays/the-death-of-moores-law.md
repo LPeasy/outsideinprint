@@ -5,6 +5,9 @@ draft: false
 slug: "the-death-of-moores-law"
 section_label: "Essay"
 subtitle: "How the Limits of Physics Are Reshaping the Future of Computing"
+featured_image: "/images/medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg"
+featured_image_caption: "Source: Author via ChatGPTIn 1965, Gordon Moore, a young research director at Fairchild Semiconductor, made a prediction that would define the modern technological era. Observing that the number of transistors on integrated circuits was doubling annually while costs dropped, he forecast that this trend would continue."
+featured_image_alt: "The Death of Moore’s Law"
 description: "When Did It End, and What Comes Next?. This insight, later adjusted to a two-year doubling period, became known as Moore’s Law. It wasn’t just an observation..."
 version: "1.0"
 edition: "First web edition"
@@ -17,10 +20,6 @@ medium_source_url: "https://medium.com/@lawtonperret/the-death-of-moores-law-12c
 ---
 
 When Did It End, and What Comes Next?
-
-![](https://cdn-images-1.medium.com/max/800/1*n7Cbf73cfSBGZ6P6x--1Sg@2x.jpeg)
-
-Source: Author via ChatGPTIn 1965, Gordon Moore, a young research director at Fairchild Semiconductor, made a prediction that would define the modern technological era. Observing that the number of transistors on integrated circuits was doubling annually while costs dropped, he forecast that this trend would continue.
 
 This insight, later adjusted to a two-year doubling period, became known as Moore’s Law. It wasn’t just an observation — it became the heartbeat of the semiconductor industry and a driving force behind the exponential growth of computing power.
 
@@ -138,11 +137,9 @@ Rather than mourning the end of Moore’s Law, we should view it as a natural ev
 
 The legacy of Moore’s Law isn’t just about transistors; it’s the enduring belief that ingenuity can overcome even the most daunting challenges.In the post-Moore’s Law world opportunities are endless, and the next great leap forward is just beyond the horizon.
 
-
 What is Moore's Law?
 Exponential growth is at the heart of the rapid increase of computing capabilities.ourworldindata.orgThe Death of Moore's Law: What it means and what might fill the gap going forward
 In 1965, engineer and businessman Gordon Moore observed a trend that would go on to define the unprecedented…cap.csail.mit.eduThe end of Moore's law will not slow the pace of change
 Semiconductors are likely to continue their transformational role | Technology Quarterlywww.economist.comWhat is Quantum Computing? - Quantum Computing Explained - AWS
 Find out what is Quantum Computing and how to use Amazon Web Services for Quantum Computingaws.amazon.comGordon Moore | Biography & Facts | Britannica
 Gordon Moore, American engineer who cofounded (with Robert Noyce) Intel Corporation and devised Moore's law, which…www.britannica.com
-

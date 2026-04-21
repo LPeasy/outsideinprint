@@ -5,6 +5,9 @@ draft: false
 slug: "the-max-mistake-why-hbos-name-change-backfired"
 section_label: "Essay"
 subtitle: "A corporate identity crisis in real time, brought to you by the people who forgot what “Home Box Office” really means"
+featured_image: "/images/medium/the-max-mistake-why-hbos-name-change-backfired/9d6aa7e31089220539d97cc526c31b6cae1ae73620269399d1bf1dee8e24fdb1.jpeg"
+featured_image_caption: "Photo by Oleksandra Bardash on Unsplash"
+featured_image_alt: "The Max Mistake: Why HBO’s Name Change Backfired"
 description: "If you’re confused, you’re not alone. This feels less like brand strategy and more like a midlife crisis complete with a haircut no one asked for, a question..."
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/the-max-mistake-why-hbos-name-change-backfired.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*lBhW7HvXG9Ri-0NKm7AuRg@2x.jpeg)
-
-*Photo by Oleksandra Bardash on [Unsplash](https://unsplash.com/?utm_source=medium&amp;utm_medium=referral)*
 
 ***If you’re confused, you’re not alone.***
 
@@ -229,4 +228,3 @@ specificity is power.
 
 > Trying to turn a boutique into a big-box store doesn’t make loyal
 > customers stick around ~ it just makes the boutique harder to find.
-

@@ -6,16 +6,15 @@ slug: "building-for-centuries-not-election-cycles"
 section_label: "Essay"
 subtitle: "The Case for Slow, Steady, and Smart Federal Infrastructure Planning"
 description: "Why USACE Takes Its Time: Infrastructure Built to Last. The U.S. Army Corps of Engineers (USACE) is often called America’s construction company"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/building-for-centuries-not-election-cycles/6dd004b4e2f7bf049ca17b3b694ff61968bab6e565c47cab696474a92471e04a.jpeg"
+featured_image_caption: "Photo by Justin Wilkens on Unsplash"
+featured_image_alt: "Building for Centuries Not Election Cycles"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/building-for-centuries-not-election-cycles.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/building-for-centuries-not-election-cycles-84e7c379272c"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*geasjyGVQ-iJi5J4M9gVnw@2x.jpeg)
-
-Photo by Justin Wilkens on Unsplash
 
 Why USACE Takes Its Time: Infrastructure Built to Last
 
@@ -182,6 +181,3 @@ Lawton is an economist who writes about markets, policy, and the forces shaping 
 Beyond economics, he writes fiction, makes music, and hangs out with his cat, Boudin. He also runs Nonstop Book Reviews, a Medium publication exploring books worth reading.
 
 Read more of his work on Medium: https://medium.com/@lawtonperret
-
-
-

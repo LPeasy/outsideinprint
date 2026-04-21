@@ -5,6 +5,8 @@ draft: false
 slug: "the-undead-state"
 section_label: "Essay"
 subtitle: "Why Bureaucracy Refuses to Die"
+featured_image: "/images/medium/the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg"
+featured_image_alt: "The Undead State"
 description: "This isn’t the first time a government has tried to dismantle itself. In 1995, after decades of declining relevance, the federal government abolished the Int..."
 version: "1.0"
 edition: "First web edition"
@@ -12,7 +14,6 @@ pdf: "/pdfs/the-undead-state.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-undead-state-825daec47c37"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*DdSWpwhrekKViuhM1NFe5Q@2x.jpeg)
 
 Made in ChatGPT, February 2025.
 
@@ -98,6 +99,3 @@ JAMES Q. WILSON During its first 150 years, the American republic was not though
 The Development of the Bureaucracywww.ushistory.orgThe Roots of American Bureaucracy, 1830-1900 - Harvard University Press
 William Nelson reinterprets nineteenth-century American history as a struggle between majority rule and minority rights.…www.hup.harvard.eduhttps://www.journals.uchicago.edu/doi/abs/10.2307/2130516Establishing And Implementing The President's "Department Of Government Efficiency"
 By the authority vested in me as President by the Constitution and the laws of the United States of America, it is…www.whitehouse.gov
-
-
-

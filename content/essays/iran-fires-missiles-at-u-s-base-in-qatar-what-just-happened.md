@@ -5,6 +5,9 @@ draft: false
 slug: "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened"
 section_label: "Essay"
 subtitle: "Missiles intercepted. No casualties. Flash in the Pan."
+featured_image: "/images/medium/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened/6e8942634417a99dbe919c3d64e6d5b3b172ef46c77982b5fd6c63e11504e168.png"
+featured_image_caption: "Source: NYT"
+featured_image_alt: "Iran Fires Missiles at U.S. Base in Qatar — What Just Happened?"
 description: "Iran just fired missiles at a major U.S. military base in Qatar. The strike comes after weeks of mounting conflict involving Israeli airstrikes, Iranian reta..."
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened-a3ed00113ff0"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*au1vRXxA-I7QS2jfJW_O0w.png)
-
-Source: [NYT](https://www.nytimes.com/live/2025/06/23/world/iran-trump-israel-news#udeid-qatar-base)
 
 ### Rising tensions between Iran and the U.S.
 
@@ -100,4 +99,3 @@ Trump has hinted that [he wants a full regime change](https://www.cbsnews.com/ne
 
 [Xi is calling for a ceasefire](https://time.com/7296139/china-iran-israel-us-weapons-mediate-war-peace-oil-diplomacy/)
 (specifically for Israel to lay down their arms).
-

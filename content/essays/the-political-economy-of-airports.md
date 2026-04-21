@@ -5,6 +5,8 @@ draft: false
 slug: "the-political-economy-of-airports"
 section_label: "Essay"
 subtitle: "Why is everything so expensive??"
+featured_image: "/images/medium/the-political-economy-of-airports/03d81147c17634b1515b9c1a51b387d29d7c88fda18a07195e6bd5aa69fd593c.jpeg"
+featured_image_alt: "The Political Economy of Airports"
 description: "Airports are more than mere gateways for travel — they are complex ecosystems shaped by the interaction of market forces, public policy, and consumer behavio..."
 version: "1.0"
 edition: "First web edition"
@@ -12,7 +14,6 @@ pdf: "/pdfs/the-political-economy-of-airports.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-political-economy-of-airports-aef07847fa60"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*g9_b5Uazwafn0Oi0rPqC0g@2x.jpeg)
 
 Airports are more than mere gateways for travel — they are complex ecosystems shaped by the interaction of market forces, public policy, and consumer behavior. The high prices for food, drinks, and basic necessities in airports are not incidental but rather the result of systemic economic structures, logistical constraints, and institutional arrangements. These inflated costs reflect broader trends, such as the blending of public and private interests, the challenges of maintaining infrastructure, and the monopolistic tendencies of airport retail markets.
 
@@ -93,6 +94,3 @@ https://www.indystar.com/story/news/2015/03/06/flying-high-ways-indys-airport-fo
 6.	Reader’s Digest — Insights into McDonald’s revenue model:
 
 https://www.rd.com/article/real-way-mcdonalds-makes-money/
-
-
-
