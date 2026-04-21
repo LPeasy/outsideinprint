@@ -362,6 +362,53 @@ function Get-DuplicateTitleSearchWindow {
   return $window
 }
 
+function Normalize-DuplicateTitleLine {
+  param([string]$Value)
+
+  if ([string]::IsNullOrWhiteSpace($Value)) {
+    return ''
+  }
+
+  $text = $Value.Trim()
+  $text = [regex]::Replace($text, '^#{1,6}\s+', '')
+  $text = [regex]::Replace($text, '!\[[^\]]*\]\([^)]+\)', ' ')
+  $text = Remove-MarkdownLinks $text
+  $text = [regex]::Replace($text, '<[^>]+>', ' ')
+  $text = [regex]::Replace($text, 'https?://\S+', ' ')
+  $text = Strip-WrappingEmphasis $text
+  $text = $text.Trim()
+  $text = [regex]::Replace($text, '^[\"''“”‘’]+|[\"''“”‘’]+$', '')
+  $text = ($text -replace '\s+', ' ').Trim()
+  return $text
+}
+
+function Test-DuplicateTitleLeadResidue {
+  param(
+    [string]$Body,
+    [string]$Needle,
+    [int]$LineCount = 60
+  )
+
+  $target = Normalize-DuplicateTitleLine $Needle
+  if ([string]::IsNullOrWhiteSpace($target)) {
+    return $false
+  }
+
+  $lines = (Get-TopBodyWindow -Body $Body -LineCount $LineCount) -split "`r?`n"
+  foreach ($line in $lines) {
+    $candidate = Normalize-DuplicateTitleLine $line
+    if (-not $candidate) {
+      continue
+    }
+
+    if ($candidate -eq $target) {
+      return $true
+    }
+  }
+
+  return $false
+}
+
 function Get-FirstHeadingLineNumber {
   param([string[]]$Lines)
 
@@ -591,8 +638,8 @@ foreach ($page in $pages) {
   }
 
   if ($page.MediumSourceUrl) {
-    if ($duplicateTitleWindow -match [regex]::Escape($page.Title)) { $issueCounts.duplicated_title++ }
-    if ($page.Subtitle -and $duplicateTitleWindow -match [regex]::Escape($page.Subtitle)) { $issueCounts.duplicated_title++ }
+    if (Test-DuplicateTitleLeadResidue -Body $body -Needle $page.Title) { $issueCounts.duplicated_title++ }
+    if ($page.Subtitle -and (Test-DuplicateTitleLeadResidue -Body $body -Needle $page.Subtitle)) { $issueCounts.duplicated_title++ }
   }
 
   $issueTypes = Build-IssueSummary ([pscustomobject]$issueCounts)

@@ -6,8 +6,7 @@ slug: "whos-responsible-for-building-in-the-floodplain"
 section_label: "Essay"
 subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
 featured_image: "/images/medium/whos-responsible-for-building-in-the-floodplain/921f46f4d09c0c7ddcc7a9ad8642115e20fea0355d83ec02b6a06e1d9fe8f1ed.jpeg"
-featured_image_caption: "After 27 people died at Camp Mystic on July 4, a colleague told me"
-featured_image_alt: "After 27 people died at Camp Mystic on July 4, a colleague told me"
+featured_image_alt: "Who’s Responsible for Building in the Floodplain?"
 description: "The United States just doesn’t work like that. This essay looks at what the federal government can (and can’t) do to prevent tragedies like this one. We exam..."
 version: "1.0"
 edition: "First web edition"
@@ -18,6 +17,8 @@ collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/whos-responsible-for-building-in-the-floodplain-b468f42f536d"
 ---
+
+> After 27 people died at Camp Mystic on July 4, a colleague told me
 
 > something I haven’t stopped thinking about:
 

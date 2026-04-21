@@ -7,8 +7,7 @@ section_label: "Essay"
 subtitle: "A practical way to use hazard, pathway, consequence, and uncertainty"
 description: "In everyday choices and technical work, four key terms help us define and articulate “risk.”. Hazard names the source of potential harm, pathway describes ho..."
 featured_image: "/images/medium/what-is-risk-a-four-part-framework/c5d17c0978b1a86a5144dea14f43e6da15d3559347c45d71edd7d9a334e79ab2.jpeg"
-featured_image_caption: "Risk is a framework for decision making."
-featured_image_alt: "Risk is a framework for decision making."
+featured_image_alt: "What Is Risk? A Four-Part Framework"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/what-is-risk-a-four-part-framework.pdf"
@@ -19,6 +18,8 @@ collections:
 collection_weight: 10
 medium_source_url: "https://medium.com/@lawtonperret/what-is-risk-a-four-part-framework-2b93d31679d3"
 ---
+
+> Risk is a framework for decision making.
 
 **In everyday choices and technical work, four key terms help us define
 and articulate “risk.”**
