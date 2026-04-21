@@ -1,0 +1,102 @@
+{{ $source := .source | default "homepage" }}
+{{ $rootClass := "entry-threads" }}
+{{ if eq $source "homepage" }}
+  {{ $rootClass = printf "%s entry-threads--home" $rootClass }}
+{{ else }}
+  {{ $rootClass = printf "%s entry-threads--start-here" $rootClass }}
+{{ end }}
+{{ $titleId := cond (eq $source "homepage") "home-entry-threads-title" "start-here-entry-threads-title" }}
+{{ $startSourceSlot := cond (eq $source "homepage") "homepage_entry_thread_start" "start_here_entry_thread_start" }}
+{{ $collectionSourceSlot := cond (eq $source "homepage") "homepage_entry_thread_collection" "start_here_entry_thread_collection" }}
+{{ $archiveSourceSlot := cond (eq $source "homepage") "homepage_entry_thread_archive" "start_here_entry_thread_archive" }}
+{{ $orderedSlugs := slice
+  "floods-water-built-environment"
+  "modern-bios"
+  "moral-religious-philosophical-essays"
+}}
+{{ $entryTitleOverrides := dict
+  "in-the-image-of-god" "In the Image of God"
+}}
+{{ $entries := slice }}
+
+{{ range $slug := $orderedSlugs }}
+  {{ $definition := partial "collections/lookup-definition.html" $slug }}
+  {{ if and $definition $definition.public }}
+    {{ $collectionPage := site.GetPage (printf "/collections/%s" $slug) }}
+    {{ if $collectionPage }}
+      {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition) }}
+      {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
+      {{ $startHereSlug := lower (printf "%v" ($definition.start_here | default "")) }}
+      {{ $startHere := false }}
+      {{ if $startHereSlug }}
+        {{ range $items }}
+          {{ if eq (lower (printf "%v" (.Params.slug | default .File.BaseFileName))) $startHereSlug }}
+            {{ $startHere = . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{ if $startHere }}
+        {{ $entries = $entries | append (dict
+          "definition" $definition
+          "page" $collectionPage
+          "state" $state
+          "startHere" $startHere
+        ) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $entries) 0 }}
+  <section class="{{ $rootClass }}" aria-labelledby="{{ $titleId }}">
+    <header class="entry-threads__header{{ if eq $source "homepage" }} page-shell page-shell--wide{{ end }}">
+      <h2 id="{{ $titleId }}" class="list-title">Start Reading</h2>
+      <p class="entry-threads__dek">Three strong threads through the archive, chosen on purpose.</p>
+    </header>
+    <div class="entry-threads__grid{{ if eq $source "homepage" }} page-shell page-shell--grid{{ end }}">
+      {{ range $entries }}
+        {{ $definition := .definition }}
+        {{ $collectionPage := .page }}
+        {{ $state := .state }}
+        {{ $startHere := .startHere }}
+        {{ $startHereSlug := $startHere.Params.slug | default $startHere.File.BaseFileName }}
+        {{ $startHereTitle := index $entryTitleOverrides (lower (printf "%v" $startHereSlug)) | default $startHere.Title }}
+        {{ $startHereSection := $startHere.Params.section_label | default (humanize $startHere.Section) }}
+        <article class="entry-thread">
+          <h3>{{ $definition.title }}</h3>
+          <p class="entry-thread__meta">{{ title $state.kind }} | {{ $state.count }} pieces</p>
+          {{ with $definition.description }}<p class="entry-thread__description">{{ . }}</p>{{ end }}
+          <div class="entry-thread__actions">
+            <a href="{{ $startHere.RelPermalink }}"
+              data-analytics-event="collection_click"
+              data-analytics-source-slot="{{ $startSourceSlot }}"
+              data-analytics-collection="{{ $definition.slug }}"
+              data-analytics-slug="{{ $startHereSlug }}"
+              data-analytics-title="{{ $startHereTitle }}"
+              data-analytics-section="{{ $startHereSection }}"
+              data-analytics-path="{{ $startHere.RelPermalink }}"
+            >Start with {{ $startHereTitle }}</a>
+            <a href="{{ $collectionPage.RelPermalink }}"
+              data-analytics-event="collection_click"
+              data-analytics-source-slot="{{ $collectionSourceSlot }}"
+              data-analytics-collection="{{ $definition.slug }}"
+              data-analytics-slug="{{ $definition.slug }}"
+              data-analytics-title="{{ $definition.title }}"
+              data-analytics-section="Collections"
+              data-analytics-path="{{ $collectionPage.RelPermalink }}"
+            >View Collection</a>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+    <div class="entry-thread__archive{{ if eq $source "homepage" }} page-shell page-shell--wide{{ end }}">
+      <a href="{{ "collections/" | absURL }}"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="{{ $archiveSourceSlot }}"
+        data-analytics-title="Browse all collections"
+        data-analytics-section="Collections"
+        data-analytics-path="/collections/"
+      >Browse all collections</a>
+    </div>
+  </section>
+{{ end }}

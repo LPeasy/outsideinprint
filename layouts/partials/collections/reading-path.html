@@ -44,9 +44,26 @@
       {{ if lt $position $itemCount }}
         {{ $next = index $items $position }}
       {{ end }}
+      {{ $restartTarget := false }}
+      {{ if $startHere }}
+        {{ $restartTarget = $startHere }}
+      {{ else if gt $itemCount 0 }}
+        {{ $restartTarget = index $items 0 }}
+      {{ end }}
+      {{ $previewItems := slice }}
+      {{ if $next }}
+        {{ $previewItems = $previewItems | append (dict "page" $next "position" (add $position 1)) }}
+      {{ end }}
+      {{ if lt (add $currentIndex 2) $itemCount }}
+        {{ $previewItems = $previewItems | append (dict "page" (index $items (add $currentIndex 2)) "position" (add $position 2)) }}
+      {{ end }}
       {{ $startHerePath := "" }}
       {{ if $startHere }}
         {{ $startHerePath = $startHere.RelPermalink }}
+      {{ end }}
+      {{ $collectionPath := printf "/collections/%s/" $primary.collection.slug }}
+      {{ with $primary.page }}
+        {{ $collectionPath = .RelPermalink }}
       {{ end }}
 
       <aside
@@ -60,40 +77,115 @@
         data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"
         data-start-here-path="{{ $startHerePath }}"
       >
-        <p class="reading-path__eyebrow">Reading Path</p>
-        <h2 id="reading-path-title" class="reading-path__title"><a href="{{ $collectionUrl }}">{{ $primary.collection.title }}</a></h2>
-        <p class="reading-path__meta">Piece {{ $position }} of {{ $itemCount }}</p>
-        <p class="reading-path__meta">Remaining after this piece: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min</p>
+        <div class="reading-path__header">
+          <p class="reading-path__eyebrow">Continue This Collection</p>
+          <h2 id="reading-path-title" class="reading-path__title"><a href="{{ $collectionUrl }}"
+            data-analytics-event="collection_click"
+            data-analytics-source-slot="article_continuation_secondary"
+            data-analytics-collection="{{ $primary.collection.slug }}"
+            data-analytics-slug="{{ $primary.collection.slug }}"
+            data-analytics-title="{{ $primary.collection.title }}"
+            data-analytics-section="Collections"
+            data-analytics-path="{{ $collectionPath }}"
+          >{{ $primary.collection.title }}</a></h2>
+          <p class="reading-path__meta">Piece {{ $position }} of {{ $itemCount }}</p>
+          <p class="reading-path__status" data-reading-path-progress>Visited 1 of {{ $itemCount }} in this browser.</p>
+          <p class="reading-path__meta">Remaining after this piece: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min</p>
+        </div>
         {{ if and $startHere (eq $currentPath $startHere.RelPermalink) }}
           <p class="reading-path__status">Entry Point</p>
         {{ else if $startHere }}
-          <p class="reading-path__status">Entry Point: <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a></p>
+          <p class="reading-path__status">New to this thread? Start at <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.</p>
         {{ end }}
-        <p class="reading-path__status" data-reading-path-progress>Visited 1 of {{ $itemCount }} in this browser.</p>
-        <div class="reading-path__nav" aria-label="Sequence navigation">
-          <div class="reading-path__nav-item">
-            <span class="reading-path__nav-label">Previous</span>
-            {{ with $previous }}
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            {{ else }}
-              <span>None</span>
-            {{ end }}
-          </div>
-          <div class="reading-path__nav-item">
-            <span class="reading-path__nav-label">Next</span>
-            {{ with $next }}
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            {{ else }}
-              <span>None</span>
-            {{ end }}
-          </div>
-        </div>
-        <div class="reading-path__cta">
+        <div class="reading-path__actions" aria-label="Collection continuation actions">
           {{ with $next }}
-            <a href="{{ .RelPermalink }}" data-reading-path-cta>Continue to {{ .Title }}</a>
+            {{ $nextSection := .Params.section_label | default (humanize .Section) }}
+            {{ $nextSlug := .Params.slug | default .File.BaseFileName }}
+            <a class="reading-path__action reading-path__action--primary" href="{{ .RelPermalink }}"
+              data-analytics-event="collection_click"
+              data-analytics-source-slot="article_continuation_primary"
+              data-analytics-collection="{{ $primary.collection.slug }}"
+              data-analytics-slug="{{ $nextSlug }}"
+              data-analytics-title="{{ .Title }}"
+              data-analytics-section="{{ $nextSection }}"
+              data-analytics-path="{{ .RelPermalink }}"
+            >Continue to {{ .Title }}</a>
+            <a class="reading-path__action reading-path__action--secondary" href="{{ $collectionUrl }}"
+              data-analytics-event="collection_click"
+              data-analytics-source-slot="article_continuation_secondary"
+              data-analytics-collection="{{ $primary.collection.slug }}"
+              data-analytics-slug="{{ $primary.collection.slug }}"
+              data-analytics-title="{{ $primary.collection.title }}"
+              data-analytics-section="Collections"
+              data-analytics-path="{{ $collectionPath }}"
+            >View Collection</a>
           {{ else }}
-            <a href="{{ $collectionUrl }}" data-reading-path-cta>View Collection</a>
+            <a class="reading-path__action reading-path__action--primary" href="{{ $collectionUrl }}"
+              data-analytics-event="collection_click"
+              data-analytics-source-slot="article_continuation_primary"
+              data-analytics-collection="{{ $primary.collection.slug }}"
+              data-analytics-slug="{{ $primary.collection.slug }}"
+              data-analytics-title="{{ $primary.collection.title }}"
+              data-analytics-section="Collections"
+              data-analytics-path="{{ $collectionPath }}"
+            >View Collection</a>
+            {{ with $restartTarget }}
+              {{ $restartSection := .Params.section_label | default (humanize .Section) }}
+              {{ $restartSlug := .Params.slug | default .File.BaseFileName }}
+              <a class="reading-path__action reading-path__action--secondary" href="{{ .RelPermalink }}"
+                data-analytics-event="collection_click"
+                data-analytics-source-slot="article_continuation_restart"
+                data-analytics-collection="{{ $primary.collection.slug }}"
+                data-analytics-slug="{{ $restartSlug }}"
+                data-analytics-title="{{ .Title }}"
+                data-analytics-section="{{ $restartSection }}"
+                data-analytics-path="{{ .RelPermalink }}"
+              >Start Again with {{ .Title }}</a>
+            {{ end }}
           {{ end }}
+          {{ with $previous }}
+            {{ $previousSection := .Params.section_label | default (humanize .Section) }}
+            {{ $previousSlug := .Params.slug | default .File.BaseFileName }}
+            <a class="reading-path__action reading-path__action--tertiary" href="{{ .RelPermalink }}"
+              data-analytics-event="collection_click"
+              data-analytics-source-slot="article_continuation_previous"
+              data-analytics-collection="{{ $primary.collection.slug }}"
+              data-analytics-slug="{{ $previousSlug }}"
+              data-analytics-title="{{ .Title }}"
+              data-analytics-section="{{ $previousSection }}"
+              data-analytics-path="{{ .RelPermalink }}"
+            >Previous piece</a>
+          {{ end }}
+        </div>
+        <div class="reading-path__preview" aria-label="Collection preview">
+          {{ if gt (len $previewItems) 0 }}
+            <p class="reading-path__eyebrow">Up Next</p>
+            {{ range $previewItems }}
+              {{ $previewPage := .page }}
+              <article class="reading-path__preview-item">
+                <p class="reading-path__meta">Piece {{ .position }}{{ with $previewPage.ReadingTime }} | {{ . }} min{{ end }}</p>
+                <h3 class="reading-path__title"><a href="{{ $previewPage.RelPermalink }}">{{ $previewPage.Title }}</a></h3>
+              </article>
+            {{ end }}
+          {{ else }}
+            <p class="reading-path__status">You&rsquo;re at the end of this collection.</p>
+          {{ end }}
+        </div>
+        <div class="reading-path__archive-links" aria-label="Archive links">
+          <a href="{{ "collections/" | absURL }}"
+            data-analytics-event="internal_promo_click"
+            data-analytics-source-slot="article_continuation_archive"
+            data-analytics-title="Browse collections"
+            data-analytics-section="Collections"
+            data-analytics-path="/collections/"
+          >Browse collections</a>
+          <a href="{{ "library/" | absURL }}"
+            data-analytics-event="internal_promo_click"
+            data-analytics-source-slot="article_continuation_archive"
+            data-analytics-title="Search the library"
+            data-analytics-section="Library"
+            data-analytics-path="/library/"
+          >Search the library</a>
         </div>
       </aside>
     {{ end }}

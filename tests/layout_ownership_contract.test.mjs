@@ -131,8 +131,11 @@ test("layout ownership matrix tracks the integrated cleanup state", () => {
     "`newsletter-signup--page`",
     "`newsletter-signup--start-here`",
     "`collection-item-note`",
-    "`collection-membership__eyebrow`",
     "`running-header__inner`",
+    "`reading-path__header`",
+    "`reading-path__actions`",
+    "`reading-path__preview`",
+    "`reading-path__archive-links`",
     "## Removed Layout Hooks"
   ]) {
     assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));
