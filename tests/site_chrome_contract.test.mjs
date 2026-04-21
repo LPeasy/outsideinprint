@@ -89,16 +89,19 @@ test("random route uses shared page framing instead of a bare redirect stub", ()
   assert.match(randomTemplate, /Open the Library/);
 });
 
-test("homepage cards keep only the main titles and use the shared grid flow", () => {
+test("homepage browse band stays curated and text-led", () => {
   assert.doesNotMatch(homepage, /<div class="k">(Start|Section|Index|Explore)<\/div>/);
   assert.doesNotMatch(homepage, /card-center/);
-  assert.match(homepage, /class="home-browse home-browse--utility"/);
-  assert.match(homepage, /data-analytics-source-slot="random_link"/);
+  assert.match(homepage, /class="home-browse home-browse--utility home-browse--home-curated/);
   assert.match(homepage, /"label" "Gallery"/);
-  assert.match(homepage, /class="grid home-browse__grid"/);
+  assert.doesNotMatch(homepage, /"label" "Feeling curious\?"/);
+  assert.match(homepage, /class="home-browse__list"/);
+  assert.match(homepage, /home-browse__item-title">\{\{ \$title \}\}<\/div>/);
+  assert.match(homepage, /Use Welcome, Essays, Gallery, or Collections when you want to move beyond the front page\./);
   assert.match(css, /\.grid\{\s*display:grid;\s*grid-template-columns:1fr 1fr;/);
+  assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.doesNotMatch(css, /\.card-center\{/);
-  assert.match(css, /\.card \.v\{[\s\S]*font-size:16px;[\s\S]*line-height:1\.35;/);
+  assert.match(css, /\.home-browse__item-title\{[\s\S]*font-size:14px;[\s\S]*line-height:1\.45;/);
   assert.match(css, /\.card \.k \+ \.v\{\s*margin-top:6px;\s*\}/);
 });
 

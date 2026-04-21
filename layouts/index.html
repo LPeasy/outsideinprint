@@ -7,7 +7,6 @@
     (dict "page" (site.GetPage "/essays") "label" "Essays")
     (dict "page" (site.GetPage "/gallery") "label" "Gallery")
     (dict "page" (site.GetPage "/collections") "label" "Collections")
-    (dict "label" "Feeling curious?" "href" ("random/" | absURL) "description" "Enter the archive by chance. This route is useful for exploration, not as a canonical destination.")
   }}
   {{ partial "home_front_page.html" . }}
   {{ partial "home_selected_collections.html" . }}
@@ -15,7 +14,7 @@
   <section class="home-browse home-browse--utility home-browse--home-curated page-shell page-shell--wide" aria-labelledby="home-browse-title">
     <header class="home-browse__header">
       <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
-      <p class="home-browse__dek">Use Welcome, Essays, Gallery, Collections, or Feeling curious? when you want to move beyond the front page.</p>
+      <p class="home-browse__dek">Use Welcome, Essays, Gallery, or Collections when you want to move beyond the front page.</p>
     </header>
     <div class="home-browse__list">
       {{ range $exploreRoutes }}
@@ -28,15 +27,7 @@
           {{ $title = $page.Title }}
           {{ $description = $page.Params.description | default $description }}
         {{ end }}
-        <a class="home-browse__item" href="{{ $href }}"
-          {{- if eq .label "Feeling curious?" }}
-            data-analytics-event="internal_promo_click"
-            data-analytics-source-slot="random_link"
-            data-analytics-title="Random"
-            data-analytics-section="Utility"
-            data-analytics-path="/random/"
-          {{- end }}
-        >
+        <a class="home-browse__item" href="{{ $href }}">
           <div class="home-browse__item-title">{{ $title }}</div>
           {{ with $description }}<div class="home-browse__item-description">{{ . }}</div>{{ end }}
         </a>
