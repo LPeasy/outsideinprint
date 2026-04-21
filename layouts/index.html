@@ -5,58 +5,54 @@
   {{ $exploreRoutes := slice
     (dict "page" (site.GetPage "/start-here") "label" "Welcome")
     (dict "page" (site.GetPage "/essays") "label" "Essays")
-    (dict "page" (site.GetPage "/syd-and-oliver") "label" "Dialogues")
-    (dict "page" (site.GetPage "/collections") "label" "Collections")
-    (dict "page" (site.GetPage "/library") "label" "Library")
     (dict "page" (site.GetPage "/gallery") "label" "Gallery")
+    (dict "page" (site.GetPage "/collections") "label" "Collections")
     (dict "label" "Feeling curious?" "href" ("random/" | absURL) "description" "Enter the archive by chance. This route is useful for exploration, not as a canonical destination.")
   }}
   {{ partial "home_front_page.html" . }}
   {{ partial "home_selected_collections.html" . }}
 
-  <div class="home-discovery-band page-shell page-shell--grid">
-    {{ partial "newsletter_signup.html" (dict
-      "page" .
-      "class" "newsletter-signup--home newsletter-signup--home-band"
-      "sourceSlot" "homepage_newsletter"
-      "eyebrow" "Letter"
-      "title" "The weekly letter"
-      "dek" "New essays, editorial notes, and selected archive work from Outside In Print. One quiet email a week."
-      "buttonLabel" "Subscribe"
-      "note" "New work and occasional notes. Free to join, easy to leave."
-    ) }}
-
-    <section class="home-browse home-browse--utility home-browse--home-band" aria-labelledby="home-browse-title">
-      <header class="home-browse__header">
-        <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
-        <p class="home-browse__dek">Use the section landings, collections, library, or Feeling curious? when you want to move beyond the homepage.</p>
-      </header>
-      <div class="grid home-browse__grid">
-        {{ range $exploreRoutes }}
-          {{ $page := .page | default false }}
-          {{ $href := .href | default "" }}
-          {{ $title := .label }}
-          {{ $description := .description | default "" }}
-          {{ if $page }}
-            {{ $href = $page.RelPermalink }}
-            {{ $title = $page.Title }}
-            {{ $description = $page.Params.description | default $description }}
-          {{ end }}
-          <a class="card" href="{{ $href }}"
-            {{- if eq .label "Feeling curious?" }}
-              data-analytics-event="internal_promo_click"
-              data-analytics-source-slot="random_link"
-              data-analytics-title="Random"
-              data-analytics-section="Utility"
-              data-analytics-path="/random/"
-            {{- end }}
-          >
-            <div class="v">{{ $title }}</div>
-            {{ with $description }}<div class="d">{{ . }}</div>{{ end }}
-          </a>
+  <section class="home-browse home-browse--utility home-browse--home-curated page-shell page-shell--wide" aria-labelledby="home-browse-title">
+    <header class="home-browse__header">
+      <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
+      <p class="home-browse__dek">Use Welcome, Essays, Gallery, Collections, or Feeling curious? when you want to move beyond the front page.</p>
+    </header>
+    <div class="home-browse__list">
+      {{ range $exploreRoutes }}
+        {{ $page := .page | default false }}
+        {{ $href := .href | default "" }}
+        {{ $title := .label }}
+        {{ $description := .description | default "" }}
+        {{ if $page }}
+          {{ $href = $page.RelPermalink }}
+          {{ $title = $page.Title }}
+          {{ $description = $page.Params.description | default $description }}
         {{ end }}
-      </div>
-    </section>
-  </div>
+        <a class="home-browse__item" href="{{ $href }}"
+          {{- if eq .label "Feeling curious?" }}
+            data-analytics-event="internal_promo_click"
+            data-analytics-source-slot="random_link"
+            data-analytics-title="Random"
+            data-analytics-section="Utility"
+            data-analytics-path="/random/"
+          {{- end }}
+        >
+          <div class="home-browse__item-title">{{ $title }}</div>
+          {{ with $description }}<div class="home-browse__item-description">{{ . }}</div>{{ end }}
+        </a>
+      {{ end }}
+    </div>
+  </section>
+
+  {{ partial "newsletter_signup.html" (dict
+    "page" .
+    "class" "newsletter-signup--home newsletter-signup--home-signoff page-shell page-shell--wide"
+    "sourceSlot" "homepage_newsletter"
+    "eyebrow" "Letter"
+    "title" "The weekly letter"
+    "dek" "New essays, editorial notes, and selected archive work from Outside In Print. One quiet email a week."
+    "buttonLabel" "Subscribe"
+    "note" "New work and occasional notes. Free to join, easy to leave."
+  ) }}
   {{ end }}
 {{ end }}

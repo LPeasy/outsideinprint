@@ -1127,13 +1127,30 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?entry-threads--home.*?newsletter-signup-title.*?home-browse-title'
-    Message = 'expected the homepage to preserve the editorial module order from the story grid through archive browse'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?entry-threads--home.*?home-browse-title.*?newsletter-signup-title'
+    Message = 'expected the homepage to preserve the editorial module order from the story grid through the lower-page signoff'
   },
   @{
     Path = 'public/index.html'
     Pattern = 'Start Reading'
     Message = 'expected the homepage to render the curated Start Reading module label'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?Welcome.*?Essays.*?Gallery.*?Collections.*?Feeling curious\?.*?</section>'
+    Message = 'expected the homepage browse band to render the curated route set in editorial order'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?(?:Dialogues|Library).*?</section>'
+    Message = 'expected the homepage browse band to omit the retired Dialogues and Library routes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bentry-threads--home\b[^"]*"|''[^'']*\bentry-threads--home\b[^'']*''|[^>]*\bentry-threads--home\b[^>]*)[^>]*>.*?Browse all collections.*?</section>'
+    Message = 'expected the homepage Start Reading module not to render the archive footer link'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -1307,6 +1324,11 @@ $requiredUxChecks = @(
     Pattern = 'Weekly letter|Begin Here|Follow a Thread|Publication Details|>\s*The Archive\s*<'
     Message = 'expected Welcome not to retain the retired instructional sections'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'Browse all collections'
+    Message = 'expected Welcome to preserve the Start Reading archive link'
   },
   @{
     Path = 'public/library/index.html'

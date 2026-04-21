@@ -71,19 +71,31 @@ foreach ($requiredSnippet in @(
   'partial "home_front_page.html"',
   'partial "home_selected_collections.html"',
   'partial "newsletter_signup.html"',
+  'site.GetPage "/start-here"',
+  'site.GetPage "/essays"',
+  'site.GetPage "/gallery"',
   'site.GetPage "/collections"',
-  'site.GetPage "/library"'
+  '"Feeling curious?"'
 )) {
   if ($indexTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/index.html to contain: $requiredSnippet"
   }
 }
 
+foreach ($retiredSnippet in @(
+  'site.GetPage "/syd-and-oliver"',
+  'site.GetPage "/library"'
+)) {
+  if ($indexTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/index.html to omit the retired homepage browse route: $retiredSnippet"
+  }
+}
+
 $homepageOrder = @(
   'partial "home_front_page.html"',
   'partial "home_selected_collections.html"',
-  'partial "newsletter_signup.html"',
-  'home-browse-title'
+  'home-browse-title',
+  'partial "newsletter_signup.html"'
 )
 
 $lastIndex = -1
@@ -237,7 +249,8 @@ foreach ($requiredSnippet in @(
 $homeSelectedCollectionsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_selected_collections.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "entry_threads.html"',
-  '"source" "homepage"'
+  '"source" "homepage"',
+  '"showArchiveLink" false'
 )) {
   if ($homeSelectedCollectionsTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/partials/home_selected_collections.html to contain: $requiredSnippet"
@@ -267,6 +280,7 @@ foreach ($requiredSnippet in @(
   'start_here_entry_thread_archive',
   'Browse all collections',
   'Start Reading',
+  'if $showArchiveLink',
   '"in-the-image-of-god" "In the Image of God"',
   'partial "collections/lookup-definition.html"',
   'partial "collections/resolve-items.html"',
@@ -289,7 +303,8 @@ foreach ($retiredSnippet in @(
 $entryThreadsShortcode = Get-Content -Path (Join-Path $repoRoot 'layouts/shortcodes/entry_threads.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "entry_threads.html"',
-  '"source" "start_here"'
+  '"source" "start_here"',
+  '"showArchiveLink" true'
 )) {
   if ($entryThreadsShortcode -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/shortcodes/entry_threads.html to contain: $requiredSnippet"
