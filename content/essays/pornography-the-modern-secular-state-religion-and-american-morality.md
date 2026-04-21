@@ -6,8 +6,7 @@ slug: "pornography-the-modern-secular-state-religion-and-american-morality"
 section_label: "Essay"
 subtitle: "The obvious connection explained"
 featured_image: "/images/medium/pornography-the-modern-secular-state-religion-and-american-morality/73e4b3b8aef6b4c1ca7a9e43be4aedaea51acd0c671994152f688f0655ad31bb.jpeg"
-featured_image_caption: "The pendulum swinging from a stylized depiction of an actual shepherd with his sheep to a neon fueled modern moral hell-scape."
-featured_image_alt: "The pendulum swinging from a stylized depiction of an actual shepherd with his sheep to a neon fueled modern moral hell-scape."
+featured_image_alt: "The Rise of Pornography and the Fall of Morality"
 description: "The pendulum swinging from a stylized depiction of an actual shepherd with his sheep to a neon fueled modern moral hell-scape"
 version: "1.0"
 edition: "First web edition"
@@ -18,6 +17,8 @@ collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/pornography-the-modern-secular-state-religion-and-american-morality-412bb849d7e0"
 ---
+
+*The pendulum swinging from a stylized depiction of an actual shepherd with his sheep to a neon fueled modern moral hell-scape.*
 
 America didn’t vote to become a porn-saturated culture.\
 It drifted there ~ bit by bit ~ as old guardrails collapsed and the

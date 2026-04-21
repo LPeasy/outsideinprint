@@ -167,6 +167,48 @@ Photo by Test Photographer on Unsplash
 Lead paragraph.
 "@ | Set-Content -Path (Join-Path $essayRoot 'placeholder-hero.md') -Encoding UTF8
 
+  @"
+---
+title: "Blockquote Not Caption"
+date: 2026-04-21
+draft: false
+slug: "blockquote-not-caption"
+section_label: "Essay"
+subtitle: ""
+description: "Fixture for quote preservation."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+![](http://127.0.0.1:$port/lead-a.png)
+
+> "I didn't set out to build an audience."
+
+Lead paragraph.
+"@ | Set-Content -Path (Join-Path $essayRoot 'blockquote-not-caption.md') -Encoding UTF8
+
+  @"
+---
+title: "Pipe Prose Not Caption"
+date: 2026-04-21
+draft: false
+slug: "pipe-prose-not-caption"
+section_label: "Essay"
+subtitle: ""
+description: "Fixture for pipe prose preservation."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+![](http://127.0.0.1:$port/lead-b.png)
+
+Risk | uncertainty | tradeoffs shape every decision.
+
+Lead paragraph.
+"@ | Set-Content -Path (Join-Path $essayRoot 'pipe-prose-not-caption.md') -Encoding UTF8
+
   @'
 ---
 title: "SVG No Hero"
@@ -262,6 +304,8 @@ Lead paragraph.
 
   Assert-True ($rowsBySlug['remote-no-hero'].Status -eq 'PROMOTED') 'Expected remote-no-hero to be promoted.'
   Assert-True ($rowsBySlug['placeholder-hero'].Status -eq 'PROMOTED') 'Expected placeholder-hero to be promoted.'
+  Assert-True ($rowsBySlug['blockquote-not-caption'].Status -eq 'PROMOTED') 'Expected blockquote-not-caption to be promoted.'
+  Assert-True ($rowsBySlug['pipe-prose-not-caption'].Status -eq 'PROMOTED') 'Expected pipe-prose-not-caption to be promoted.'
   Assert-True ($rowsBySlug['svg-no-hero'].Status -eq 'PROMOTED') 'Expected svg-no-hero to be promoted.'
   Assert-True ($rowsBySlug['existing-duplicate'].Status -eq 'DEDUPED_EXISTING_HERO') 'Expected existing-duplicate to dedupe the existing hero.'
   Assert-True ($rowsBySlug['current-hero-wins'].Status -eq 'SKIPPED_CURRENT_HERO_WINS') 'Expected current-hero-wins to keep its existing hero.'
@@ -282,6 +326,18 @@ Lead paragraph.
   Assert-Match -Text $placeholderHero -Pattern '(?m)^featured_image_caption:\s*"Photo by Test Photographer on Unsplash"$' -Message 'Expected placeholder-hero to migrate the provenance caption.'
   Assert-Match -Text $placeholderHero -Pattern '(?m)^featured_image_alt:\s*"Placeholder Hero"$' -Message 'Expected placeholder-hero to fall back to the essay title for non-descriptive provenance captions.'
   Assert-NotMatch -Text $placeholderHeroBody -Pattern 'Photo by Test Photographer on Unsplash' -Message 'Expected placeholder-hero to remove the migrated caption line from the body.'
+
+  $blockquoteNotCaption = Get-Content (Join-Path $essayRoot 'blockquote-not-caption.md') -Raw
+  $blockquoteNotCaptionBody = Get-MarkdownBody -Markdown $blockquoteNotCaption
+  Assert-NotMatch -Text $blockquoteNotCaption -Pattern '(?m)^featured_image_caption:' -Message 'Expected blockquote-not-caption not to migrate the quote line into a hero caption.'
+  Assert-Match -Text $blockquoteNotCaption -Pattern '(?m)^featured_image_alt:\s*"Blockquote Not Caption"$' -Message 'Expected blockquote-not-caption to fall back to the essay title for alt text.'
+  Assert-Match -Text $blockquoteNotCaptionBody -Pattern '(?m)^>\s*"I didn''t set out to build an audience\."$' -Message 'Expected blockquote-not-caption to preserve the opening quote in the body.'
+
+  $pipeProseNotCaption = Get-Content (Join-Path $essayRoot 'pipe-prose-not-caption.md') -Raw
+  $pipeProseNotCaptionBody = Get-MarkdownBody -Markdown $pipeProseNotCaption
+  Assert-NotMatch -Text $pipeProseNotCaption -Pattern '(?m)^featured_image_caption:' -Message 'Expected pipe-prose-not-caption not to migrate pipe-delimited prose into a hero caption.'
+  Assert-Match -Text $pipeProseNotCaption -Pattern '(?m)^featured_image_alt:\s*"Pipe Prose Not Caption"$' -Message 'Expected pipe-prose-not-caption to fall back to the essay title for alt text.'
+  Assert-Match -Text $pipeProseNotCaptionBody -Pattern '(?m)^Risk \| uncertainty \| tradeoffs shape every decision\.$' -Message 'Expected pipe-prose-not-caption to preserve the pipe-delimited prose line in the body.'
 
   $svgNoHero = Get-Content (Join-Path $essayRoot 'svg-no-hero.md') -Raw
   Assert-Match -Text $svgNoHero -Pattern '(?m)^featured_image:\s*"/images/medium/svg-no-hero/lead\.svg"$' -Message 'Expected svg-no-hero to promote the local SVG path directly.'
