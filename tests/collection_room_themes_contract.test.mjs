@@ -13,6 +13,7 @@ function escapeRegex(value) {
 
 const collectionsData = read("data/collections.yaml");
 const collectionSingle = read("layouts/collections/single.html");
+const collectionCard = read("layouts/partials/discovery/collection-card.html");
 const css = read("assets/css/main.css");
 const collectionsDoc = read("docs/collections-system.md");
 const layoutMatrix = read("docs/layout-ownership-matrix.md");
@@ -57,6 +58,22 @@ test("collection detail template emits room root and section hooks", () => {
   }
 });
 
+test("collection-card partial emits room-echo classes only in the grid branch", () => {
+  for (const snippet of [
+    '{{- $roomTheme := $entry.collection.room_theme | default "" -}}',
+    '{{- if eq $variant "item" -}}',
+    '<article class="item{{ with $class }} {{ . }}{{ end }}">',
+    '<a class="card collection-card{{ with $roomTheme }} collection-card--room-echo collection-card--{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"'
+  ]) {
+    assert.match(collectionCard, new RegExp(escapeRegex(snippet)));
+  }
+
+  assert.doesNotMatch(
+    collectionCard,
+    /<article class="item\{\{ with \$class \}\} \{\{ \. \}\}\{\{ end \}\}">[\s\S]*collection-card--room-echo/
+  );
+});
+
 test("css owns the shared collection-room namespace and all theme modifiers", () => {
   for (const selector of [
     ".collection-room{",
@@ -79,7 +96,16 @@ test("css owns the shared collection-room namespace and all theme modifiers", ()
     ".collection-room--floods-survey-table{",
     ".collection-room--ai-screen-glow-archive{",
     ".collection-room--moral-chapel-library{",
-    ".collection-room--reported-case-studies-evidence-room{"
+    ".collection-room--reported-case-studies-evidence-room{",
+    ".collection-card--room-echo{",
+    ".collection-card--ledger-editorial-desk{",
+    ".collection-card--syd-and-oliver-smoky-lounge{",
+    ".collection-card--modern-bios-records-archive{",
+    ".collection-card--risk-systems-notebook{",
+    ".collection-card--floods-survey-table{",
+    ".collection-card--ai-screen-glow-archive{",
+    ".collection-card--moral-chapel-library{",
+    ".collection-card--reported-case-studies-evidence-room{"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
   }
