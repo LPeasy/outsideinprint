@@ -3,7 +3,7 @@
 {{- $links := slice -}}
 
 {{- if eq $meta.route.name "home" -}}
-  {{- range (slice "/start-here" "/essays" "/syd-and-oliver" "/collections" "/library") -}}
+  {{- range (slice "/essays" "/gallery" "/collections" "/library") -}}
     {{- with site.GetPage . -}}
       {{- $links = $links | append .Permalink -}}
     {{- end -}}
@@ -38,13 +38,7 @@
     {{- $links = $links | append .Permalink -}}
   {{- end -}}
 {{- else if eq $meta.route.name "library" -}}
-  {{- range (slice "/collections" "/start-here" "/essays" "/syd-and-oliver") -}}
-    {{- with site.GetPage . -}}
-      {{- $links = $links | append .Permalink -}}
-    {{- end -}}
-  {{- end -}}
-{{- else if eq $meta.route.name "start-here" -}}
-  {{- range (slice "/essays" "/syd-and-oliver" "/collections" "/library") -}}
+  {{- range (slice "/" "/collections" "/essays" "/syd-and-oliver") -}}
     {{- with site.GetPage . -}}
       {{- $links = $links | append .Permalink -}}
     {{- end -}}

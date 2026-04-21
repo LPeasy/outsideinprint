@@ -150,10 +150,13 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(frontPageSource, /Read by guided path/);
   assert.match(indexSource, /home_front_page\.html/);
   assert.doesNotMatch(indexSource, /home_recent_work\.html/);
-  assert.match(indexSource, /Feeling curious\?/);
-  assert.match(indexSource, /"label" "Welcome"/);
+  assert.match(indexSource, /partial "home_imprint_statement\.html"/);
   assert.match(indexSource, /"label" "Gallery"/);
-  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
+  assert.match(indexSource, /"label" "Library"/);
+  assert.doesNotMatch(indexSource, /"label" "Welcome"/);
+  assert.doesNotMatch(indexSource, /"label" "Feeling curious\?"/);
+  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_imprint_statement.html"'));
+  assert.ok(indexSource.indexOf('partial "home_imprint_statement.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
   assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
   assert.match(cartoonData, /slug: think-outside-the-box/);
   assert.match(cartoonData, new RegExp(`current: ${escapeRegex(currentCartoon.slug)}`));
@@ -231,7 +234,8 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$lead/);
   assert.match(partialSource, /"secondary" \$secondary/);
-  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_selected_collections.html"'));
+  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_imprint_statement.html"'));
+  assert.ok(source.indexOf('partial "home_imprint_statement.html"') < source.indexOf('partial "home_selected_collections.html"'));
   assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('partial "newsletter_signup.html"'));
 });
 

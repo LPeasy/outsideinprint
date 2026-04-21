@@ -99,7 +99,7 @@
     "eyebrow" "Use the library, or take a guided path"
     "links" (slice
       (dict "href" ("collections/" | absURL) "label" "Browse collections")
-      (dict "href" ("start-here/" | absURL) "label" "Welcome")
+      (dict "href" ("" | absURL) "label" "Home")
     )
   ) }}
 
@@ -156,7 +156,7 @@
   </div>
 
   <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide">Showing all {{ $totalPages }} pieces</p>
-  <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or begin with <a href="{{ "start-here/" | absURL }}">Welcome</a>.</div>
+  <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or return <a href="{{ "" | absURL }}">Home</a>.</div>
 
   <div id="library-grouped-results">
     {{ range $section := $librarySections }}

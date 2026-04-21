@@ -1,9 +1,9 @@
-{{ $statement := site.Params.homepage.imprint_statement | default "" }}
-{{ if $statement }}
-  <aside class="home-imprint-statement" aria-labelledby="home-imprint-statement-title">
-    <div class="home-imprint-statement__inner page-shell page-shell--wide">
-      <p id="home-imprint-statement-title" class="list-title">Imprint</p>
-      <p class="home-imprint-statement__copy">{{ $statement }}</p>
+<aside class="home-manifesto" aria-labelledby="home-manifesto-title">
+  <div class="home-manifesto__inner page-shell page-shell--wide">
+    <p id="home-manifesto-title" class="list-title">Imprint</p>
+    <div class="home-manifesto__copy">
+      <p class="home-manifesto__line home-manifesto__line--primary">A digital imprint of essays, reports, dialogues, and literature.</p>
+      <p class="home-manifesto__line home-manifesto__line--secondary">Color over the lines. Read beyond the feed. Think for yourself.</p>
     </div>
-  </aside>
-{{ end }}
+  </div>
+</aside>

@@ -399,14 +399,6 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
   }
-  'public/start-here/index.html' = @{
-    Title = 'Welcome'
-    Description = 'A quiet introduction to Outside In Print and a few paths into the archive.'
-    Canonical = 'https://outsideinprint.org/start-here/'
-    OgType = 'website'
-    TwitterCard = 'summary_large_image'
-    RequireImage = $true
-  }
   'public/library/index.html' = @{
     Title = 'Library'
     Description = 'The full catalog of published work from Outside In Print, searchable by title, section, collection, and version.'
@@ -489,12 +481,6 @@ $requiredStructuredDataPages = [ordered]@{
     RequireSearchAction = $true
     RequirePublisherImage = $true
   }
-  'public/start-here/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'ImageObject')
-    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
-    RequirePublisherNode = $true
-    RequireBreadcrumb = $true
-  }
   'public/library/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork')
@@ -548,7 +534,7 @@ $requiredIndexationPages = [ordered]@{
   }
   'public/start-here/index.html' = @{
     ExpectRobotsMeta = $true
-    Robots = 'index, follow, max-image-preview:large'
+    Robots = 'noindex, follow'
   }
   'public/library/index.html' = @{
     ExpectRobotsMeta = $true
@@ -618,13 +604,13 @@ $requiredSitemapInclusions = @(
   'https://outsideinprint.org/syd-and-oliver/',
   'https://outsideinprint.org/collections/',
   'https://outsideinprint.org/collections/risk-uncertainty/',
-  'https://outsideinprint.org/library/',
-  'https://outsideinprint.org/start-here/'
+  'https://outsideinprint.org/library/'
 )
 
 $requiredSitemapExclusions = @(
   'https://outsideinprint.org/authors/',
   'https://outsideinprint.org/random/',
+  'https://outsideinprint.org/start-here/',
   'https://outsideinprint.org/working-papers/',
   'https://outsideinprint.org/literature/'
 )
@@ -1118,7 +1104,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?entry-threads--home.*?home-browse-title.*?newsletter-signup-title'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-manifesto.*?entry-threads--home.*?home-browse-title.*?newsletter-signup-title'
     Message = 'expected the homepage to preserve the editorial module order from the story grid through the lower-page signoff'
   },
   @{
@@ -1128,13 +1114,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?Welcome.*?Essays.*?Gallery.*?Collections.*?</section>'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?Essays.*?Gallery.*?Collections.*?Library.*?</section>'
     Message = 'expected the homepage browse band to render the curated route set in editorial order'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?(?:Dialogues|Library|Feeling curious\?).*?</section>'
-    Message = 'expected the homepage browse band to omit the retired Dialogues, Library, and Feeling curious? routes'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?(?:Welcome|Dialogues|Feeling curious\?).*?</section>'
+    Message = 'expected the homepage browse band to omit the retired Welcome, Dialogues, and Feeling curious? routes'
     ShouldNotMatch = $true
   },
   @{
@@ -1183,15 +1169,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.'
-    Message = 'expected the homepage not to retain the moved philosophy line'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Color over the lines\. Read beyond the feed\. Think for yourself\.'
-    Message = 'expected the homepage not to retain the moved philosophy line'
-    ShouldNotMatch = $true
+    Pattern = '(?s)A digital imprint of essays, reports, dialogues, and literature\..*?Color over the lines\. Read beyond the feed\. Think for yourself\.'
+    Message = 'expected the homepage to carry the preserved manifesto lines above Start Reading'
   },
   @{
     Path = 'public/index.html'
@@ -1235,13 +1214,39 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/start-here/index.html'
-    Pattern = '(?s)A digital imprint of essays, reports, dialogues, and literature\..*?Color over the lines\. Read beyond the feed\. Think for yourself\.'
-    Message = 'expected Welcome to carry the moved philosophy lines'
+    Pattern = '(?s)<link rel="canonical" href="https://outsideinprint\.org/"'
+    Message = 'expected /start-here/ to canonicalize to the homepage'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = '(?s)<meta name="robots" content="noindex, follow"'
+    Message = 'expected /start-here/ to remain non-indexable'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = '(?s)<meta http-equiv="refresh" content="0; url=/"'
+    Message = 'expected /start-here/ to include an immediate meta refresh to home'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'window\.location\.replace\("/"\)'
+    Message = 'expected /start-here/ to include a JavaScript redirect to home'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = '>Home<'
+    Message = 'expected /start-here/ to expose a visible Home fallback link'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'Ways Into the Archive|Browse all collections|Start Reading'
+    Message = 'expected /start-here/ not to retain the retired Welcome-page content'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected the default list template to expose collection and library next steps'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/'
+    Message = 'expected the default list template to expose collection, library, and home next steps'
   },
   @{
     Path = 'public/essays/index.html'
@@ -1281,24 +1286,14 @@ $requiredUxChecks = @(
     Message = 'expected the /syd-and-oliver/ route to render the renamed Dialogues section title'
   },
   @{
-    Path = 'public/start-here/index.html'
-    Pattern = '(?s)(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/syd-and-oliver/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/random/'
-    Message = 'expected Welcome to expose direct navigation into the site''s major discovery lanes'
-  },
-  @{
-    Path = 'public/start-here/index.html'
-    Pattern = 'Feeling curious\?'
-    Message = 'expected Welcome to use the renamed exploratory route label'
-  },
-  @{
     Path = 'public/random/index.html'
     Pattern = 'Feeling curious\? Let the archive choose the next piece\.'
     Message = 'expected the random route to frame archive exploration with the reader-facing exploratory label'
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/start-here/'
-    Message = 'expected the random route to expose library, collections, and Welcome fallbacks'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/'
+    Message = 'expected the random route to expose library, collections, and home fallbacks'
   },
   @{
     Path = 'public/random/index.html'
@@ -1311,25 +1306,14 @@ $requiredUxChecks = @(
     Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
   },
   @{
-    Path = 'public/start-here/index.html'
-    Pattern = 'Weekly letter|Begin Here|Follow a Thread|Publication Details|>\s*The Archive\s*<'
-    Message = 'expected Welcome not to retain the retired instructional sections'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/start-here/index.html'
-    Pattern = 'Browse all collections'
-    Message = 'expected Welcome to preserve the Start Reading archive link'
-  },
-  @{
     Path = 'public/library/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/start-here/'
-    Message = 'expected the library page to expose collection and Welcome navigation'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/'
+    Message = 'expected the library page to expose collection and home navigation'
   },
   @{
     Path = 'public/library/index.html'
     Type = 'library-empty-state'
-    Message = 'expected the library empty state to point readers toward collections and Welcome'
+    Message = 'expected the library empty state to point readers toward collections and Home'
   },
   @{
     Path = 'public/library/index.html'
@@ -1369,8 +1353,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/start-here/'
-    Message = 'expected the collections index to expose library and Welcome navigation'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/'
+    Message = 'expected the collections index to expose library and home navigation'
   },
   @{
     Path = 'public/collections/index.html'
@@ -1472,11 +1456,11 @@ foreach ($check in $requiredUxChecks) {
     $html = $targetPageHtml[$relativePath]
     $hasEmptyStateText = $html -match 'No matching pieces found'
     $hasCollectionsText = $html -match 'Collections'
-    $hasStartHereText = $html -match 'Welcome'
+    $hasHomeText = $html -match 'Home'
     $hasCollectionsDestination = $html -match '(?:https://outsideinprint\.org)?/collections/'
-    $hasStartHereDestination = $html -match '(?:https://outsideinprint\.org)?/start-here/'
+    $hasHomeDestination = $html -match '(?:https://outsideinprint\.org)?/'
 
-    if (-not ($hasEmptyStateText -and $hasCollectionsText -and $hasStartHereText -and $hasCollectionsDestination -and $hasStartHereDestination)) {
+    if (-not ($hasEmptyStateText -and $hasCollectionsText -and $hasHomeText -and $hasCollectionsDestination -and $hasHomeDestination)) {
       $uxIssues.Add("$relativePath => $($check.Message)")
     }
   }

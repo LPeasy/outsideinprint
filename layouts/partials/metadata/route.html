@@ -56,10 +56,6 @@
   {{- $name = "gallery" -}}
 {{- end -}}
 
-{{- if and (eq $name "page") .IsPage (eq $section "start-here") -}}
-  {{- $name = "start-here" -}}
-{{- end -}}
-
 {{- if and (eq $name "page") .IsPage (eq $section "about") -}}
   {{- $name = "about" -}}
 {{- end -}}

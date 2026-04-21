@@ -13,7 +13,6 @@ Entity hub:
 Primary navigation surfaces:
 - Home: https://outsideinprint.org/
 - About the imprint: https://outsideinprint.org/about/
-- Welcome / start here: https://outsideinprint.org/start-here/
 - Essays index: https://outsideinprint.org/essays/
 - Dialogues index: https://outsideinprint.org/syd-and-oliver/
 - Collections index: https://outsideinprint.org/collections/

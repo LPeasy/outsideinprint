@@ -3,18 +3,19 @@
     {{ partial "dashboard/render.html" . }}
   {{ else }}
   {{ $exploreRoutes := slice
-    (dict "page" (site.GetPage "/start-here") "label" "Welcome")
     (dict "page" (site.GetPage "/essays") "label" "Essays")
     (dict "page" (site.GetPage "/gallery") "label" "Gallery")
     (dict "page" (site.GetPage "/collections") "label" "Collections")
+    (dict "page" (site.GetPage "/library") "label" "Library")
   }}
   {{ partial "home_front_page.html" . }}
+  {{ partial "home_imprint_statement.html" . }}
   {{ partial "home_selected_collections.html" . }}
 
   <section class="home-browse home-browse--utility home-browse--home-curated page-shell page-shell--wide" aria-labelledby="home-browse-title">
     <header class="home-browse__header">
       <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
-      <p class="home-browse__dek">Use Welcome, Essays, Gallery, or Collections when you want to move beyond the front page.</p>
+      <p class="home-browse__dek">Use Essays, Gallery, Collections, or Library when you want to move beyond the front page.</p>
     </header>
     <div class="home-browse__list">
       {{ range $exploreRoutes }}
