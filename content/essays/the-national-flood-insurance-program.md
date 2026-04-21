@@ -5,6 +5,9 @@ draft: false
 slug: "the-national-flood-insurance-program"
 section_label: "Essay"
 subtitle: "An Exploration"
+featured_image: "/images/medium/the-national-flood-insurance-program/a17c72f621f83136e7fe24f2ac68620cb4f222aacfee7319a4fbfdb4051c1e1b.jpeg"
+featured_image_caption: "Source: Peter G. Peterson Foundation"
+featured_image_alt: "The National Flood Insurance Program"
 description: "A Precarious Future Amid Rising Costs. Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the..."
 version: "1.0"
 edition: "First web edition"
@@ -15,11 +18,8 @@ collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/the-national-flood-insurance-program-b400678e86c2"
 ---
+
 A Precarious Future Amid Rising Costs
-
-![](https://cdn-images-1.medium.com/max/800/1*pCLz8BImz2b-1j-MXo2wzA@2x.jpeg)
-
-Source: Peter G. Peterson Foundation
 
 Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the very program designed to insure against this risk -- the National Flood Insurance Program (NFIP) -- is $20 billion in debt and struggling to survive (FEMA, 2024). Created in 1968 to provide affordable flood insurance for property owners in flood-prone areas, the NFIP has become financially unsustainable, burdened by mounting debt, outdated risk assessments, and escalating claims fueled by climate change.
 
@@ -100,4 +100,3 @@ Ending federally subsidized flood insurance in high-risk areas would reduce the 
 3. House Financial Services Committee. National Flood Insurance Program FY25 Letter. Accessed December 2024. https://democrats-financialservices.house.gov.
 4. Stanford University. "Climate Change Caused One-Third of Historical Flood Damages." Stanford News. Accessed December 2024. https://news.stanford.edu/stories/2021/01/climate-change-caused-one-third-historical-flood-damages.
 5. Princeton University. "Overcoming Contemporary Reform Failure of the National Flood Insurance Program." Journal of Public and International Affairs. Accessed December 2024. https://jpia.princeton.edu/news/overcoming-contemporary-reform-failure-national-flood-insurance-program-accelerate-just-climate.
-

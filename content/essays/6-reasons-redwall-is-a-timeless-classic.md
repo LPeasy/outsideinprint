@@ -6,16 +6,15 @@ slug: "6-reasons-redwall-is-a-timeless-classic"
 section_label: "Essay"
 subtitle: "(And Why It Still Captivates Readers Today)"
 description: "Since its publication in 1986, Redwall has enchanted readers with its immersive world and timeless storytelling. Brian Jacques’ novel, the first in an iconic..."
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/6-reasons-redwall-is-a-timeless-classic/4271248be82b271445e30852312a06bfbd54c7d1ddb8205fa5328aa8215900d8.jpeg"
+featured_image_caption: "Photo by Jonas Jacobsson on Unsplash"
+featured_image_alt: "6 Reasons Redwall Is a Timeless Classic"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/6-reasons-redwall-is-a-timeless-classic.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/6-reasons-redwall-is-a-timeless-classic-9a15a991a20a"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*G8JHcb65GDYjffre1nbdMg@2x.jpeg)
-
-Photo by Jonas Jacobsson on Unsplash
 
 Since its publication in 1986, Redwall has enchanted readers with its immersive world and timeless storytelling. Brian Jacques’ novel, the first in an iconic fantasy series, blends adventure, depth, and heart, securing its place as a children’s literature classic.
 
@@ -137,5 +136,3 @@ I’m an economist, writer, and lifelong book lover running Nonstop Book Reviews
 
 ### Redwall Book Series
 Find the complete Redwall book series by Brian Jacques. Great deals on one book or all books in the series. Free US…www.thriftbooks.com
-
-

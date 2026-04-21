@@ -5,6 +5,8 @@ draft: false
 slug: "generation-inflation"
 section_label: "Essay"
 subtitle: "An Exploration"
+featured_image: "/images/medium/generation-inflation/04bd9395c74d1ab1388648acde9ead9cf1bd9a7b1573c15a8d943dacf6fe2784.jpeg"
+featured_image_alt: "Generation Inflation"
 description: "The Rising Costs of Financial Success. Imagine needing $600,000 a year just to feel financially secure. For Generation Z, this isn’t a lofty dream — it’s the..."
 version: "1.0"
 edition: "First web edition"
@@ -12,6 +14,7 @@ pdf: "/pdfs/generation-inflation.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/generation-inflation-a18fa175fb5b"
 ---
+
 The Rising Costs of Financial Success
 
 Imagine needing $600,000 a year just to feel financially secure. For Generation Z, this isn’t a lofty dream — it’s the baseline. A recent survey found that younger Americans believe they need a net worth of $9.5 million to consider themselves successful, a stark contrast to the $1 million benchmark set by Baby Boomers (Empower, 2024). This gap isn’t just about generational optimism; it reflects the profound economic challenges younger generations face. Skyrocketing living costs, stagnant wages, and shifting cultural expectations have completely rewritten the rules of financial success.
@@ -21,8 +24,6 @@ This phenomenon — what we’ll call “Generation Inflation” — goe
 The Impact of Intergenerational Inflation
 
 To understand why younger generations feel financially behind, we need to look at inflation’s outsized role in shaping their reality. Over the past seven decades, the prices of essential goods and services have risen dramatically, far outpacing wage growth.
-
-![](https://cdn-images-1.medium.com/max/800/1*TDM0PA-RgXqgNnx498puvA@2x.jpeg)
 
 Consider the following:
 
@@ -81,6 +82,3 @@ Works Cited
 •	Visual Capitalist. “Real Wage Growth by Income Quantile, 1979–2023.” 2023.
 
 •	National Association of Realtors. “Median Home Prices by Year.” 2024.
-
-
-

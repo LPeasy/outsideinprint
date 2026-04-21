@@ -241,8 +241,8 @@ if ($rows.Count -eq 0) {
   exit 0
 }
 
-$blockingIssues = @('duplicated_title','embed_remnants','mojibake','medium_cta','medium_cdn_media')
-$warningIssues = @('caption_residue','pseudo_headings','manual_bullets','fake_lists','source_dumps','ornamental_breaks','escaped_linebreaks','author_note')
+$blockingIssues = @('duplicated_title','embed_remnants','mojibake','medium_cta','medium_cdn_media','hero_placeholder_conflict','hero_missing_with_lead')
+$warningIssues = @('caption_residue','pseudo_headings','manual_bullets','fake_lists','source_dumps','ornamental_breaks','escaped_linebreaks','author_note','hero_duplicate_lead','hero_current_wins_conflict')
 
 $blockingResults = New-Object System.Collections.Generic.List[object]
 $warningResults = New-Object System.Collections.Generic.List[object]

@@ -5,6 +5,9 @@ draft: false
 slug: "why-we-celebrate-memorial-day-origins-traditions-and-importance"
 section_label: "Essay"
 subtitle: "The history of Memorial Day, its key observances, and why every American pauses to honor our fallen service members."
+featured_image: "/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/ff5282d7bd36ea86362477bec408be437387519e4fe6b73ee9caa9170a6d6b26.jpeg"
+featured_image_caption: "Photo by Justin Casey on Unsplash"
+featured_image_alt: "Why Do We Celebrate Memorial Day? Origins, Traditions, and Importance"
 description: "Have you ever stood among the headstones and wondered what stories lie behind each flag?. Who are these people? And why do we do this every May?"
 version: "1.0"
 edition: "First web edition"
@@ -15,10 +18,6 @@ medium_source_url: "https://medium.com/@lawtonperret/why-we-celebrate-memorial-d
 
 ***Have you ever stood among the headstones and wondered what stories
 lie behind each flag?***
-
-![](/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/ff5282d7bd36ea86362477bec408be437387519e4fe6b73ee9caa9170a6d6b26.jpeg)
-
-Photo by Justin Casey on Unsplash
 
 #### What Is Memorial Day? Understanding the Holiday’s Purpose
 
@@ -181,4 +180,3 @@ Let the laughter and waves fade.
 That’s why we celebrate Memorial Day ~ not just for the long weekend,
 but for the promise carried by each flag and flower on a soldier’s
 grave.
-

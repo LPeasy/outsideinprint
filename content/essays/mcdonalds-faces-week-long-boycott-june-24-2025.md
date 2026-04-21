@@ -5,6 +5,9 @@ draft: false
 slug: "mcdonalds-faces-week-long-boycott-june-24-2025"
 section_label: "Essay"
 subtitle: "Why? What is going on with the McDonald’s Boycott?"
+featured_image: "/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794.png"
+featured_image_caption: "Created by Author with ChatGPT"
+featured_image_alt: "McDonald’s Faces Week‑Long Boycott"
 description: "Created by Author with ChatGPT. The People’s Union USA is urging a boycott of McDonald’s this week"
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/mcdonalds-faces-week-long-boycott-june-24-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*KotasVf4jnm8gkEmpm9AJw.png)
-
-*Created by Author with ChatGPT*
 
 **The People’s Union USA is urging a boycott of McDonald’s this week.**
 
@@ -126,4 +125,3 @@ of consumer activism** pushing back on major U.S. corporations:
 > Will McDonald’s reverse course — or dig in?
 
 > Will franchisees react if U.S. sales dip?
-

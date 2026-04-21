@@ -5,6 +5,9 @@ draft: false
 slug: "the-national-debt-is-screwing-you-heres-how"
 section_label: "Essay"
 subtitle: "America maxed out its credit card — and left you to pay for it."
+featured_image: "/images/medium/the-national-debt-is-screwing-you-heres-how/0a38cb7ce16106abac5e6818c097159c0c7e758e5b7a1a6af19de9d88e0cd8d4.jpeg"
+featured_image_caption: "Photo by Jp Valery on Unsplash"
+featured_image_alt: "The National Debt Is Screwing You — Here’s How"
 description: "Imagine a 70-year-old maxing out a credit card in their grandkid’s name — then walking away, leaving them with the bill"
 version: "1.0"
 edition: "First web edition"
@@ -16,10 +19,6 @@ medium_source_url: "https://medium.com/@lawtonperret/the-national-debt-is-screwi
 The National Debt Is Screwing You — Here’s How
 
 America maxed out its credit card — and left you to pay for it.
-
-![](https://cdn-images-1.medium.com/max/800/1*2MD6ruoOmxbeOe5XmcOMAg@2x.jpeg)
-
-Photo by Jp Valery on Unsplash
 
 Imagine a 70-year-old maxing out a credit card in their grandkid’s name — then walking away, leaving them with the bill.
 
@@ -194,5 +193,3 @@ Inflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices U
 Politicians blame deficits — but what if the real culprit is the banking system?medium.comRussia’s Slow Surrender: How China is Turning Putin’s War into a Power Play
 Putin fights in Ukraine, Beijing tightens its grip on Russia’s futuremedium.comThe Future of AI and Technical Jobs: Why Review Work Is Your Best Bet (For Now)
 AI is automating technical work — but human reviewers still matter. Here’s why.medium.com
-
-

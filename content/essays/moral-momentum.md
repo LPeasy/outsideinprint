@@ -5,6 +5,9 @@ draft: false
 slug: "moral-momentum"
 section_label: "Essay"
 subtitle: "What it takes to build honest, world-changing energy—together."
+featured_image: "/images/medium/moral-momentum/c51f0ead05ea0a409a0d3c511938640b488731f8921531aacbe7167b662c33c6.jpeg"
+featured_image_caption: "Photo by Chang Duong on Unsplash"
+featured_image_alt: "Moral Momentum"
 description: "The ability to change the world is called. Momentum.Momentum is derived from the collective efforts of individuals"
 version: "1.0"
 edition: "First web edition"
@@ -23,10 +26,6 @@ Momentum.Momentum is derived from the collective efforts of individuals.
 Moral Momentum
 
 What it takes to build honest, world-changing energy — together.
-
-![](https://cdn-images-1.medium.com/max/800/1*52RULRZdOk3vE5-YTjtoSA@2x.jpeg)
-
-Photo by Chang Duong on Unsplash
 
 Momentum is the ability to change the world. Not instantly, but inevitably — when enough people move together.
 
@@ -67,5 +66,3 @@ When enough people push in the same direction — with patience, purpose, an
 And if you’re wondering where to start, the answer is always the same:
 
 Start with yourself.If you found this useful, follow me here on Medium for more clear thinking on strategy, leadership, and systems that work.
-
-

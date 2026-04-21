@@ -5,6 +5,9 @@ draft: false
 slug: "what-happened-at-camp-mystic"
 section_label: "Essay"
 subtitle: "A Primer on the July 4, 2025 Texas Flood Tragedy"
+featured_image: "/images/medium/what-happened-at-camp-mystic/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5df34db0f4.png"
+featured_image_caption: "Inundation Map | Source: CNN"
+featured_image_alt: "Inundation Map"
 description: "On the night of July 4th, while fireworks lit up the Texas Hill Country, a dangerous storm stalled over the Guadalupe River Basin"
 version: "1.0"
 edition: "First web edition"
@@ -16,10 +19,6 @@ collections:
   - reported-case-studies
 medium_source_url: "https://medium.com/@lawtonperret/what-happened-at-camp-mystic-8f61de2d0f27"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*UbIf-QBbcbAel-xIPO0WIA.png)
-
-> Inundation Map | Source: CNN
 
 > **“They were just screaming and praying. The water was moving too fast
 > to do anything.”**
@@ -188,4 +187,3 @@ information you might be interested in.
 - [The Water’s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
 
 > Thanks for reading!
-

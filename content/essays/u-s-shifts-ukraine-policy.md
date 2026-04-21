@@ -5,6 +5,9 @@ draft: false
 slug: "u-s-shifts-ukraine-policy"
 section_label: "Essay"
 subtitle: "Secretary Hegseth’s NATO Warning and China Pivot"
+featured_image: "/images/medium/u-s-shifts-ukraine-policy/3fa0cde399f43f2bae75fa7e0c43522b9a70ce47fcff3d8820cfc9b5c174a303.jpeg"
+featured_image_caption: "Photo by Marek Studzinski on Unsplash"
+featured_image_alt: "U.S. Shifts Ukraine Policy"
 description: "Secretary of Defense Pete Hegseth’s remarks at the Ukraine Defense Contact Group (UDCG) on February 12th signal a dramatic shift in U.S. foreign policy under..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/u-s-shifts-ukraine-policy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/u-s-shifts-ukraine-policy-1817b72eb1c7"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*p1CtCLe62v-f-TsVDmkUKg@2x.jpeg)
-
-Photo by Marek Studzinski on Unsplash
 
 Secretary of Defense Pete Hegseth’s remarks at the Ukraine Defense Contact Group (UDCG) on February 12th signal a dramatic shift in U.S. foreign policy under President Trump.
 
@@ -116,6 +116,3 @@ Let’s continue the conversation — feel free to comment, share, or reach 
 
 Opening Remarks by Secretary of Defense Pete Hegseth at Ukraine Defense Contact Group (As
 Defense Secretary Pete Hegseth delivered opening remarks at a meeting of the Ukraine Defense Contact Group in Brussels.www.defense.gov
-
-
-

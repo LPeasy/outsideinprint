@@ -5,6 +5,9 @@ draft: false
 slug: "the-ledger-vol-1"
 section_label: "Newsletter"
 subtitle: "Popes, Prime Time, and Political Games"
+featured_image: "/images/medium/the-ledger-vol-1/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe.png"
+featured_image_caption: "The Ledger: A Balance Sheet Joint"
+featured_image_alt: "The Ledger: A Balance Sheet Joint"
 description: "The Ledger: A Balance Sheet Joint. Over the past few months, I’ve been writing about everything from geopolitics and pop culture to church history and corpor..."
 version: "1.0"
 edition: "First web edition"
@@ -17,10 +20,6 @@ medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-1-cfe2c7d6e0
 ---
 
 July 10th, 2025
-
-![](https://cdn-images-1.medium.com/max/800/1*I771fzADqORY0B77n4BGJg.png)
-
-*The Ledger: A Balance Sheet Joint*
 
 > **A few short essays you might’ve missed ~ from Vatican intrigue to
 > corporate rebrands and Supreme Court drama.**
@@ -108,4 +107,3 @@ Planet.***
 > ***and I hope one or two of these pieces spark something for you.***
 
 > **~ L P**
-

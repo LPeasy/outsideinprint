@@ -9,9 +9,19 @@
   {{- end -}}
 {{- end -}}
 
-{{- with .Params.images -}}
-  {{- with index . 0 -}}
+{{- $preferFeaturedImage := and $route.is_article_like (eq .Section "essays") -}}
+
+{{- if $preferFeaturedImage -}}
+  {{- with .Params.featured_image -}}
     {{- $image = printf "%v" . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $image -}}
+  {{- with .Params.images -}}
+    {{- with index . 0 -}}
+      {{- $image = printf "%v" . -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

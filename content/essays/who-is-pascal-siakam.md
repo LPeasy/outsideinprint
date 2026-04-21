@@ -7,6 +7,9 @@ section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "How “Spicy P” Went from Douala Dreamer to Pacers Playoff Powerhouse"
+featured_image: "/images/medium/who-is-pascal-siakam/fc07487bf85147720fa1d0b703e5376e41a87a5c9317981a0237e4a15b0f8a68.jpeg"
+featured_image_caption: "Pascal Siakam \\\\| Source: Basketball Wiki"
+featured_image_alt: "Pascal Siakam \\\\"
 description: "Pascal Siakam from childhood in Cameroon to NBA All-Star, and his pivotal role in Indiana’s 2025 playoff run in his own words"
 version: "1.0"
 edition: "First web edition"
@@ -14,10 +17,6 @@ pdf: "/pdfs/who-is-pascal-siakam.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/who-is-pascal-siakam-7b1ed9f4f69a"
 ---
-
-![](/images/medium/who-is-pascal-siakam/fc07487bf85147720fa1d0b703e5376e41a87a5c9317981a0237e4a15b0f8a68.jpeg)
-
-> Pascal Siakam \| Source: Basketball Wiki
 
 **Pascal Siakam** ~ from childhood in Cameroon to NBA All-Star, and his
 pivotal role in Indiana’s 2025 playoff run ~ ***in his own words.***
@@ -236,4 +235,3 @@ today’s economy and culture.
 - [NBA insider's latest Pacers report will have fans jumping for joy](https://8points9seconds.com/nba-insider-s-latest-pacers-report-will-have-fans-jumping-joy)
 
 - [Pascal Siakam | Forward | Indiana Pacers | NBA.com](https://www.nba.com/player/1627783/pascal-siakam)
-

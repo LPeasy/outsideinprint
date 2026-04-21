@@ -5,6 +5,9 @@ draft: false
 slug: "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy"
 section_label: "Essay"
 subtitle: "Why America is Retreating from Global Climate Policy Leadership"
+featured_image: "/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/df7535a57eae77de0aacacac2f223a7240699ff20142644b6986d4bc4930898f.jpeg"
+featured_image_caption: "Photo by Zbynek Burival on Unsplash"
+featured_image_alt: "Trump’s Energy Revolution: Fossil Fuels, Climate Rollbacks, and the Future of U.S. Policy"
 description: "If you’re a non-member and you’d like to read the full essay, click here.Introduction. America’s stance on climate change took a dramatic U-turn during Donal..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-futu
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy-238c2fe84b5d"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*htVlPuhVhQ6Z6dRkvsXa0g@2x.jpeg)
-
-Photo by Zbynek Burival on Unsplash
 
 If you’re a non-member and you’d like to read the full essay, click here.Introduction
 
@@ -409,6 +409,3 @@ Read More
 9.	UNEP (2023). “Emissions Gap Report 2023: Broken Record.” United Nations Environment Programme — Executive Summary .
 
 10.	Net Zero Nuclear (2023). “Natrium Reactor and Energy Storage Capabilities.” (Case study with Image: TerraPower) .
-
-
-

@@ -5,6 +5,9 @@ draft: false
 slug: "you-paid-for-that-ct-scan"
 section_label: "Essay"
 subtitle: "You Should Be Able To See It… Right?"
+featured_image: "/images/medium/you-paid-for-that-ct-scan/c726f9cdfc914b7f1c2e01abf0819a58f23c143da6d5776a1527cd77b6690497.jpg"
+featured_image_caption: "CT Scanner | Source"
+featured_image_alt: "CT Scanner"
 description: "But if you get a CT scan of your own body, you walk away with a jargon-heavy PDF and (after picking it up from the “medical records department”) a useless CD..."
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/you-paid-for-that-ct-scan.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/you-paid-for-that-ct-scan-7c38e9a1c08c"
 ---
-
-![](/images/medium/you-paid-for-that-ct-scan/c726f9cdfc914b7f1c2e01abf0819a58f23c143da6d5776a1527cd77b6690497.jpg)
-
-*CT Scanner | [Source](https://www.infocusradiology.com.au/what-is-a-ct-scan/)*
 
 > You can track your Amazon package to your doorstep.
 
@@ -107,4 +106,3 @@ step toward treating people like partners in care, not bystanders.
 
 The question now is whether anyone in health tech is willing to build
 for the person in the gown instead of the person in the reading room.
-

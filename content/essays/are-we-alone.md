@@ -5,6 +5,8 @@ draft: false
 slug: "are-we-alone"
 section_label: "Essay"
 subtitle: "The psychological connection between belief in evolution and aliens"
+featured_image: "/images/medium/are-we-alone/1ce3cc8b74c5eaf2a0c196b0336516bcb69d3d1d42136c3b9004a643582074e6.jpeg"
+featured_image_alt: "Are We Alone?"
 description: "More Americans believe in intelligent extraterrestrial life than in human evolution — a contradiction that reveals the complexity of human belief systems. Wh..."
 version: "1.0"
 edition: "First web edition"
@@ -12,7 +14,6 @@ pdf: "/pdfs/are-we-alone.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/are-we-alone-110e6402d692"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*yEZjEPaNBQRco2xxvCVjdg@2x.jpeg)
 
 Made in ChatGPT, February 2025.
 
@@ -146,6 +147,3 @@ On June 9, 2022, NASA announced that the agency is commissioning a study team to
 The originators of the theory, Peter Ward and Donald Brownlee, explain to Astronomy why they think the development of…www.astronomy.comFermi Paradox: Where Are the Aliens?
 The Fermi Paradox seeks to answer the question of where the aliens are. After all, the universe is incredibly old, big…www.space.comAncient astronauts - Wikipedia
 Paleocontact or "ancient astronaut" narratives first appeared in the early science fiction of the late 19th and early…en.m.wikipedia.org
-
-
-

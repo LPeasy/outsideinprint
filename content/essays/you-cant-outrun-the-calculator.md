@@ -5,6 +5,9 @@ draft: false
 slug: "you-cant-outrun-the-calculator"
 section_label: "Essay"
 subtitle: "SuperHuman Coding Agents in 2025? Altman’s Law in real time"
+featured_image: "/images/medium/you-cant-outrun-the-calculator/664e2a13dae8e16d03f09387d1dd13a4883bf046dae2231f77b3ef1e5a38500a.jpg"
+featured_image_caption: "Photo by Crissy Jarvis on Unsplash"
+featured_image_alt: "You Can’t Outrun the Calculator"
 description: "In a recent discussion, Sam Altman, CEO of OpenAI, laid out a trajectory that should give every software engineer pause. Just a few years ago, OpenAI’s codin..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/you-cant-outrun-the-calculator.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/you-cant-outrun-the-calculator-fc4a5c608f1c"
 ---
-![](https://cdn-images-1.medium.com/max/800/0*LKtWyEnaK-CwK0pN)
-
-Photo by Crissy Jarvis on Unsplash
 
 In a recent discussion, Sam Altman, CEO of OpenAI, laid out a trajectory that should give every software engineer pause. Just a few years ago, OpenAI’s coding models were equivalent to a mediocre programmer — the millionth best in the world. By September 2024, the release of GPT-4 saw AI coding capabilities rise to the level of the 10,000th best coder. By early 2025, the company’s internal models ranked around 50th. If Altman’s projections hold, by the end of this year, OpenAI will have an AI that surpasses the best human programmer on the planet.
 
@@ -120,6 +120,3 @@ This story is published on Generative AI. Connect with us on LinkedIn and follow
 Subscribe to our newsletter and YouTube channel to stay updated with the latest news and updates on generative AI. Let’s shape the future of AI together!
 
 ![](https://cdn-images-1.medium.com/max/800/0*DEew_pUlSh4iztTp.png)
-
-
-

@@ -6,17 +6,15 @@ slug: "2025-supreme-court-wrap-up"
 section_label: "Essay"
 subtitle: "Final Rulings from the 2025 Term"
 description: "The U.S. Supreme Court ended its term last Friday, handing down rulings on four major cases that touch on the balance of power, civil rights, education, and..."
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/2025-supreme-court-wrap-up/68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095.png"
+featured_image_caption: "Created by Author"
+featured_image_alt: "2025 Supreme Court Wrap-Up"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/2025-supreme-court-wrap-up.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/2025-supreme-court-wrap-up-10de7f8206cb"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*EAasp0g4Dnd24_BzARGUyg.png)
-
-*Created by Author*
 
 **The U.S. Supreme Court ended its term last Friday,** handing down
 rulings on **four major cases** that touch on the **balance of power,
@@ -231,4 +229,3 @@ questions about racial representation in redistricting.**
 
 The case will return next term; **Louisiana’s current map remains** in
 use.
-

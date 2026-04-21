@@ -5,6 +5,9 @@ draft: false
 slug: "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test"
 section_label: "Essay"
 subtitle: "Musk’s Management Tactics Hit the Federal Workforce"
+featured_image: "/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/2d433a21e7918178f206a92811e962715a2dbeadd26881223a179ff09b346b67.jpeg"
+featured_image_caption: "Photo by Markus Winkler on Unsplash"
+featured_image_alt: "Elon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test"
 description: "Elon Musk’s Influence on DOGE and the Federal Workforce. This past weekend, the Department of Government Efficiency (DOGE) issued a directive that sent shock..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-w
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test-4d7e7341f666"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*PtAGvhHuQq9EquzyoAh_dw@2x.jpeg)
-
-Photo by Markus Winkler on Unsplash
 
 Elon Musk’s Influence on DOGE and the Federal Workforce
 
@@ -169,6 +169,3 @@ Lawton is an economist who writes about markets, policy, and the forces shaping 
 When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
 
 Read more of his work on Medium: https://medium.com/@lawtonperret
-
-
-

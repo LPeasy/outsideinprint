@@ -5,6 +5,8 @@ draft: false
 slug: "how-did-mother-become-a-controversial-word-in-america"
 section_label: "Essay"
 subtitle: "Why medicine, public health, and institutions stopped using one of history’s most revered terms"
+featured_image: "/images/medium/how-did-mother-become-a-controversial-word-in-america/c0712a9e67b7cf81b94f7909a750b129a9690f4b24f7022a544f14f43d3605c3.jpeg"
+featured_image_alt: "How did “Mother” Become a Controversial Word in America?"
 description: "For most of human history, the word mother required no clarification. It described a biological reality, a medical category, a social role, and a moral oblig..."
 version: "1.0"
 edition: "First web edition"
@@ -15,8 +17,6 @@ collections:
   - moral-religious-philosophical-essays
 medium_source_url: "https://medium.com/@lawtonperret/how-did-mother-become-a-controversial-word-in-america-2af8cb3562b0"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*Gygd582a5T1240JTiEj1Vw@2x.jpeg)
 
 For most of human history, the word mother required no clarification. It
 described a biological reality, a medical category, a social role, and a
@@ -208,4 +208,3 @@ institutions draw the line between inclusion and clarity? What is more
 important ~ comfort or truth?
 
 Let’s talk about it!
-

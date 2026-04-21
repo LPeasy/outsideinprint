@@ -5,6 +5,8 @@ draft: false
 slug: "life-is-a-bull-market"
 section_label: "Essay"
 subtitle: "Why Panic Selling Your Own Life Is a Bad Trade"
+featured_image: "/images/medium/life-is-a-bull-market/df53bd86e1b4ab0886a4b5346bb4fb1d3213d35de23e09436064bf85cca64a77.jpeg"
+featured_image_alt: "Life Is a Bull Market"
 description: "Most people talk about life as something fragile one bad break away from collapse. A missed opportunity. A wrong turn"
 version: "1.0"
 edition: "First web edition"
@@ -12,8 +14,6 @@ pdf: "/pdfs/life-is-a-bull-market.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/life-is-a-bull-market-db4524bf5431"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*1ibbdO6E5h1l8qqEFQDSPg@2x.jpeg)
 
 Most people talk about life as something fragile ~ one bad break away
 from collapse. A missed opportunity. A wrong turn.
@@ -191,4 +191,3 @@ drawdowns, you give compounding time to do its work.
 That isn’t optimism.
 
 It’s realism in the limit ~ looking at a longer chart.
-

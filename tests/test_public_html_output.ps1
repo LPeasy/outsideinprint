@@ -199,6 +199,31 @@ function Convert-YamlScalarToString {
   return $trimmed
 }
 
+function Get-FrontMatterScalarFromMarkdownFile {
+  param(
+    [string]$Path,
+    [string]$Key
+  )
+
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    return ''
+  }
+
+  $content = Get-Content -Path $Path -Raw
+  $match = [regex]::Match($content, '(?s)\A---\r?\n(.*?)\r?\n---\r?\n?')
+  if (-not $match.Success) {
+    return ''
+  }
+
+  $frontMatter = $match.Groups[1].Value
+  $scalarMatch = [regex]::Match($frontMatter, '(?m)^' + [regex]::Escape($Key) + ':\s*(.+?)\s*$')
+  if (-not $scalarMatch.Success) {
+    return ''
+  }
+
+  return Convert-YamlScalarToString -Value $scalarMatch.Groups[1].Value
+}
+
 function Test-ExpectedEntryHasKey {
   param(
     [object]$Entry,
@@ -388,6 +413,54 @@ $requiredImportedMediaPages = @(
   'public/essays/rethinking-invasive-species-management/index.html',
   'public/essays/the-risk-management-buffet/index.html',
   'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
+)
+
+$requiredEssayHeroPages = @(
+  'public/essays/2025-supreme-court-wrap-up/index.html',
+  'public/essays/synthetic-reasoning/index.html',
+  'public/essays/biter-the-slang-word-that-hits/index.html',
+  'public/essays/the-fair-price-of-bitcoin-69420/index.html',
+  'public/essays/beyond-moores-law/index.html',
+  'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
+)
+
+$essayHeroChecks = @(
+  @{
+    PublicPath = 'public/essays/2025-supreme-court-wrap-up/index.html'
+    SourcePath = 'content/essays/2025-supreme-court-wrap-up.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/synthetic-reasoning/index.html'
+    SourcePath = 'content/essays/synthetic-reasoning.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/biter-the-slang-word-that-hits/index.html'
+    SourcePath = 'content/essays/biter-the-slang-word-that-hits.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/the-fair-price-of-bitcoin-69420/index.html'
+    SourcePath = 'content/essays/the-fair-price-of-bitcoin-69420.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/beyond-moores-law/index.html'
+    SourcePath = 'content/essays/beyond-moores-law.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $false
+  },
+  @{
+    PublicPath = 'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
+    SourcePath = 'content/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation.md'
+    ExpectVisibleHero = $false
+    ExpectHeroAbsentFromBody = $false
+  }
 )
 
 $requiredMetadataPages = [ordered]@{
@@ -714,7 +787,8 @@ foreach ($file in $htmlFiles) {
     $requiredStructuredDataPages.Contains($relativePath) -or
     ($requiredLegacyHostRedirectPages -contains $relativePath) -or
     ($requiredLegacyCleanupPages -contains $relativePath) -or
-    ($requiredUxPages -contains $relativePath)
+    ($requiredUxPages -contains $relativePath) -or
+    ($requiredEssayHeroPages -contains $relativePath)
   ) {
     $targetPageHtml[$relativePath] = $content
   }
@@ -891,6 +965,64 @@ foreach ($relativePath in $requiredFeedPages.Keys) {
 
   if ((Test-ExpectedEntryHasKey -Entry $expected -Key 'SectionFeed') -and ($alternateFeeds -notcontains [string]$expected.SectionFeed)) {
     $metadataIssues.Add("$relativePath => expected section RSS autodiscovery link '$($expected.SectionFeed)'")
+  }
+}
+
+foreach ($check in $essayHeroChecks) {
+  $relativePath = [string]$check.PublicPath
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $metadataIssues.Add("Missing generated page required for essay-hero coverage: $relativePath")
+    continue
+  }
+
+  $sourcePath = Join-Path $repoRoot ([string]$check.SourcePath -replace '/', '\')
+  $featuredImage = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image'
+  $html = $targetPageHtml[$relativePath]
+
+  $heroMatch = [regex]::Match($html, '(?is)<figure class="piece-hero">\s*<img src="([^"]+)"')
+  $heroSrc = if ($heroMatch.Success) { $heroMatch.Groups[1].Value } else { '' }
+
+  if ([bool]$check.ExpectVisibleHero) {
+    if ([string]::IsNullOrWhiteSpace($featuredImage)) {
+      $metadataIssues.Add("$relativePath => expected source front matter to define featured_image for hero alignment coverage")
+      continue
+    }
+
+    $expectedHeroSrc = if ($featuredImage -match '^https?://') {
+      $featuredImage
+    }
+    else {
+      'https://outsideinprint.org' + $featuredImage
+    }
+
+    if ($heroSrc -ne $expectedHeroSrc) {
+      $metadataIssues.Add("$relativePath => expected visible hero '$expectedHeroSrc', found '$heroSrc'")
+    }
+
+    $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
+    if ($ogImage -ne $expectedHeroSrc) {
+      $metadataIssues.Add("$relativePath => expected og:image to match the visible hero '$expectedHeroSrc', found '$ogImage'")
+    }
+
+    $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
+    if ($twitterImage -ne $expectedHeroSrc) {
+      $metadataIssues.Add("$relativePath => expected twitter:image to match the visible hero '$expectedHeroSrc', found '$twitterImage'")
+    }
+
+    if ([bool]$check.ExpectHeroAbsentFromBody) {
+      $bodyMatch = [regex]::Match($html, '(?is)<div class="piece-body">(.*?)</div>\s*<div class="piece-aftermatter">')
+      if (-not $bodyMatch.Success) {
+        $metadataIssues.Add("$relativePath => expected a piece-body region for hero-deduplication coverage")
+      }
+      elseif ($bodyMatch.Groups[1].Value -match [regex]::Escape($expectedHeroSrc)) {
+        $metadataIssues.Add("$relativePath => expected the promoted or deduped hero image not to repeat inside the article body")
+      }
+    }
+  }
+  else {
+    if ($heroMatch.Success) {
+      $metadataIssues.Add("$relativePath => expected essays without a promoted hero candidate to omit the visible piece hero")
+    }
   }
 }
 

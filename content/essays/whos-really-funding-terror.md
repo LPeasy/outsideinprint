@@ -5,6 +5,9 @@ draft: false
 slug: "whos-really-funding-terror"
 section_label: "Essay"
 subtitle: "Inside Treasury’s 2024 Terrorist Financing Risk Assessment"
+featured_image: "/images/medium/whos-really-funding-terror/f7c9bf9f76e3c75c9b18d4e0740bbe303406e81e801c0fb82a9a60efa0128223.jpg"
+featured_image_caption: "Photo by Jp Valery on Unsplash"
+featured_image_alt: "Who’s Really Funding Terror?"
 description: "Every few years, the U.S. Treasury Department drops a long, serious PDF that almost nobody outside government reads"
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/whos-really-funding-terror.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-really-funding-terror-c9268e4f1bb4"
 ---
-
-![](/images/medium/whos-really-funding-terror/f7c9bf9f76e3c75c9b18d4e0740bbe303406e81e801c0fb82a9a60efa0128223.jpg)
-
-*Photo by [Jp Valery](https://unsplash.com/@jpvalery?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)*
 
 Every few years, the U.S. Treasury Department drops [a long, serious PDF that almost nobody outside government reads.](https://home.treasury.gov/system/files/136/2024-National-Terrorist-Financing-Risk-Assessment.pdf)
 
@@ -335,4 +334,3 @@ because it offers a clear, structured story about:
 
 > For a 100-plus-page government PDF that most people will never open,
 > that’s a lot of information hiding in plain sight.
-

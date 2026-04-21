@@ -5,6 +5,9 @@ draft: false
 slug: "whos-responsible-for-building-in-the-floodplain"
 section_label: "Essay"
 subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
+featured_image: "/images/medium/whos-responsible-for-building-in-the-floodplain/921f46f4d09c0c7ddcc7a9ad8642115e20fea0355d83ec02b6a06e1d9fe8f1ed.jpeg"
+featured_image_caption: "After 27 people died at Camp Mystic on July 4, a colleague told me"
+featured_image_alt: "After 27 people died at Camp Mystic on July 4, a colleague told me"
 description: "The United States just doesn’t work like that. This essay looks at what the federal government can (and can’t) do to prevent tragedies like this one. We exam..."
 version: "1.0"
 edition: "First web edition"
@@ -16,9 +19,6 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/whos-responsible-for-building-in-the-floodplain-b468f42f536d"
 ---
 
-![](https://cdn-images-1.medium.com/max/800/1*dyJQhc2PImFOrOZv9eNC4w@2x.jpeg)
-
-> After 27 people died at Camp Mystic on July 4, a colleague told me
 > something I haven’t stopped thinking about:
 
 > **“The federal government is ultimately to blame. They knew the risks.
@@ -408,4 +408,3 @@ The parents?
 > [Essay #2](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8): The Water?s Rising
 >
 > [Essay #3](https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a): Flash Flood Alley
-

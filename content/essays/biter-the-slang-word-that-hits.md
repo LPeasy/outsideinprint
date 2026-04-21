@@ -5,6 +5,9 @@ draft: false
 slug: "biter-the-slang-word-that-hits"
 section_label: "Essay"
 subtitle: "A word to describe artistic thieves"
+featured_image: "/images/medium/biter-the-slang-word-that-hits/2ea529440f66f2021477a8c9a3b5b45cdb9e09a0048a61cc9a9e995dc082bb7e.svg"
+featured_image_caption: "Photo by Markus Spiske on Unsplash"
+featured_image_alt: "Biter"
 description: "Biter delivers an accusation in a word. A copycat — someone who steals another person’s ideas, aesthetic, or work and passes it off as their own"
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/biter-the-slang-word-that-hits.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/biter-the-slang-word-that-hits-c543669e0189"
 ---
-
-![](/images/medium/biter-the-slang-word-that-hits/2ea529440f66f2021477a8c9a3b5b45cdb9e09a0048a61cc9a9e995dc082bb7e.svg)
-
-Photo by Markus Spiske on Unsplash
 
 Sometimes a single word carries the whole accusation.
 

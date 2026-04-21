@@ -5,6 +5,9 @@ draft: false
 slug: "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe"
 section_label: "Essay"
 subtitle: "Should you read this viral book? (Yes)"
+featured_image: "/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/16bb88fabf093eb157a47057f24b82ff13ee51dc67c7f5d89157c67bf668bb25.jpeg"
+featured_image_caption: "Photo by Greg Rakozy on Unsplash"
+featured_image_alt: "The Three-Body Problem: A Sci-Fi Epic That Redefines Civilization’s Place in the Universe"
 description: "Should you read this viral book?. SPOILER ALERT!!!!Imagine waking up to find the laws of physics have changed overnight.Scientists scramble for answers. Real..."
 version: "1.0"
 edition: "First web edition"
@@ -12,11 +15,8 @@ pdf: "/pdfs/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-pl
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe-8292352732cc"
 ---
+
 Should you read this viral book?
-
-![](https://cdn-images-1.medium.com/max/800/1*Xajlj2MDQVE9P7EGs-rAoA@2x.jpeg)
-
-Photo by Greg Rakozy on Unsplash
 
 SPOILER ALERT!!!!Imagine waking up to find the laws of physics have changed overnight.Scientists scramble for answers. Reality itself feels unstable. Then, a message arrives — one that changes everything.We were never alone.From the moment I started reading, I was hooked. The sheer scope and scale of Liu Cixin’s storytelling kept me on the edge of my seat. My partner, sitting beside me on the couch, had to endure my gasps, laughter, and cheers as the story unfolded.
 
@@ -132,6 +132,3 @@ Get the Book
 
 The Three-Body Problem book by Liu Cixin
 Buy a cheap copy of The Three-Body Problem book by Liu Cixin. The inspiration for the Netflix series 3 Body Problem…www.thriftbooks.com
-
-
-

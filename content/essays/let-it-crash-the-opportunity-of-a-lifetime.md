@@ -5,6 +5,9 @@ draft: false
 slug: "let-it-crash-the-opportunity-of-a-lifetime"
 section_label: "Essay"
 subtitle: "If you’ve got a job and no assets, a market crash might be the best thing that ever happens to you."
+featured_image: "/images/medium/let-it-crash-the-opportunity-of-a-lifetime/87fb7d2db379f7a2f8248d860fc4efb83cd681423ba62f2fb45e6f9a98eba8cf.jpeg"
+featured_image_caption: "Photo by Valery Fedotov on Unsplash"
+featured_image_alt: "Let It Crash: The Opportunity of a Lifetime"
 description: "The economy isn’t collapsing — it’s being reborn. If you’re young, working, and paying attention, this is your shot to build"
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/let-it-crash-the-opportunity-of-a-lifetime.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/let-it-crash-the-opportunity-of-a-lifetime-2c0f11995cee"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*2UsCHqdSMN063vm-yrg6jg@2x.jpeg)
-
-Photo by Valery Fedotov on Unsplash
 
 The economy isn’t collapsing — it’s being reborn.
 
@@ -176,6 +176,3 @@ Tracking the Real Economy
 •	Bureau of Labor Statistics (BLS)
 
 •	FRED — Federal Reserve Economic Data
-
-
-

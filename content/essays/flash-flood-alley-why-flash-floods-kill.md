@@ -5,6 +5,9 @@ draft: false
 slug: "flash-flood-alley-why-flash-floods-kill"
 section_label: "Essay"
 subtitle: "Texas Hill Country and the Limits of Early Warning"
+featured_image: "/images/medium/flash-flood-alley-why-flash-floods-kill/bc148062f555057b86125c97330c9157489ac6f13f06b0b6b48845e80c9c9701.png"
+featured_image_caption: "Flash Flood Alley | Source: Austin Chronicle"
+featured_image_alt: "Flash Flood Alley"
 description: "Tourists come for the picturesque rivers and limestone cliffs. The region’s steep slopes and limestone bedrock make it one of the fastest-draining flood envi..."
 version: "1.0"
 edition: "First web edition"
@@ -15,10 +18,6 @@ collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*trFdxNApCNZvOb-chJeCRQ.png)
-
-*Flash Flood Alley | Source: [Austin Chronicle](https://www.austinchronicle.com/news/2015-08-14/after-the-flood-before-the-flood/)*
 
 #### Why Flash Floods in the Texas Hill Country Are So Dangerous
 
@@ -469,9 +468,7 @@ structures, especially those with children.
 feet** near Camp Mystic. This type of sudden rise is typical in the Hill
 Country and leaves little time for evacuation.
 
-
 ### Related Reading
 
 - [What Happened at Camp Mystic?](https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27)
 - [The Water?s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
-

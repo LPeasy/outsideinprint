@@ -5,6 +5,8 @@ draft: false
 slug: "why-oberfell-will-not-be-overturned"
 section_label: "Essay"
 subtitle: "Marriage is a Fundamental Right"
+featured_image: "/images/medium/why-oberfell-will-not-be-overturned/642b3a0d97b101a5a53bac29390f2ee60d1274d06a06a073c3b77717181a160c.jpeg"
+featured_image_alt: "Why Obergefell will not be Overturned"
 description: "Why Obergefell v. Hodges Is Unlikely to Be Overturned by the Conservative Supreme Court. In light of the Supreme Court’s recent decision in Dobbs v. Jackson..."
 version: "1.0"
 edition: "First web edition"
@@ -14,8 +16,6 @@ medium_source_url: "https://medium.com/@lawtonperret/why-oberfell-will-not-be-ov
 ---
 
 Why Obergefell v. Hodges Is Unlikely to Be Overturned by the Conservative Supreme Court
-
-![](https://cdn-images-1.medium.com/max/800/1*FzFST7z5_BoHeLSOKUFIow@2x.jpeg)
 
 In light of the Supreme Court’s recent decision in Dobbs v. Jackson Women’s Health Organization (2022), which overturned Roe v. Wade, questions have arisen about the future of other landmark cases rooted in substantive due process.
 
@@ -88,5 +88,3 @@ Conclusion
 While the overturning of Roe v. Wade in Dobbs has fueled speculation about the fate of other substantive due process cases, Obergefell v. Hodges is unlikely to face the same fate. Unlike Roe, Obergefell rests on a long-recognized fundamental right — the right to marry — and is further strengthened by its reliance on both substantive due process and the Equal Protection Clause. Additionally, Obergefell enjoys overwhelming public support, with a majority of Americans embracing marriage equality as a settled part of modern life.
 
 The Supreme Court’s cautious approach to LGBTQ+ rights post-Dobbs, as demonstrated in 303 Creative LLC v. Elenis, suggests a preference for resolving conflicts at the margins rather than dismantling core precedents like Obergefell. By focusing on balancing competing constitutional rights, the Court avoids the widespread legal and societal disruption that would follow a reversal of marriage equality. In a legal and cultural landscape where same-sex marriage has become deeply entrenched, the decision appears secure for the foreseeable future.
-
-

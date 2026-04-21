@@ -5,6 +5,9 @@ draft: false
 slug: "uncrustables-the-billion-dollar-peanut-butter-empire"
 section_label: "Essay"
 subtitle: "No Crust, No Fuss, No Limits: The Unstoppable Rise of Uncrustables"
+featured_image: "/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/fc80734f9875292b718dcdf753b8ee19fa6bfb010a7fa92750eb15755b49b296.jpeg"
+featured_image_caption: "Image source: J.M. Smuckers, 2025."
+featured_image_alt: "Uncrustables: The Billion-Dollar Peanut Butter Empire"
 description: "What’s soft, sealed, and fueling everything from school lunches to Super Bowl champions?. Uncrustables.The crust-free, flash-frozen peanut butter and jelly s..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/uncrustables-the-billion-dollar-peanut-butter-empire.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/uncrustables-the-billion-dollar-peanut-butter-empire-05f687f1f19e"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*eaQr_RGxBFyx7fWl2AAGgw@2x.jpeg)
-
-Image source: J.M. Smuckers, 2025.
 
 What’s soft, sealed, and fueling everything from school lunches to Super Bowl champions?
 
@@ -190,6 +190,3 @@ Lawton is an economist who writes about markets, policy, and the forces shaping 
 When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
 
 Read more of his work here on Medium.
-
-
-

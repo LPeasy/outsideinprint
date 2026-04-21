@@ -5,6 +5,9 @@ draft: false
 slug: "the-new-meta-economy"
 section_label: "Essay"
 subtitle: "Ads, Bots, and the End of Work: Meta’s Q1 Earnings Report Explained"
+featured_image: "/images/medium/the-new-meta-economy/bcb3e2d1414e3aa992a7e91e09e04b5d51c9948d0210d90268c473b870857999.jpg"
+featured_image_caption: "Photo by Dima Solomin on Unsplash"
+featured_image_alt: "The New Meta Economy"
 description: "Glasses that see what you see. Bots that sell what you want. Welcome to The New Meta Economy"
 version: "1.0"
 edition: "First web edition"
@@ -16,10 +19,6 @@ medium_source_url: "https://medium.com/@lawtonperret/the-new-meta-economy-587359
 Glasses that see what you see. Bots that sell what you want.
 
 Welcome to The New Meta Economy.
-
-![](https://cdn-images-1.medium.com/max/800/0*7bXe0ch7DKf6XUUi)
-
-Photo by Dima Solomin on Unsplash
 
 Mark Zuckerberg says AI is transforming everything. But if you read his latest quarterly remarks, what it’s really transforming is how efficiently Meta can sell you things, replace your job, and insert itself between your eyes and the world.
 
@@ -132,5 +131,3 @@ They’ll sell the economy back to itself — one personalized prompt at a t
 ![](https://cdn-images-1.medium.com/max/800/0*8A80GHAevkNzgLCt)
 
 Photo by Unseen Studio on Unsplash
-
-

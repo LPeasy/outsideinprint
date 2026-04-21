@@ -5,6 +5,9 @@ draft: false
 slug: "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life"
 section_label: "Essay"
 subtitle: "Life, Love, and the Lessons Hidden in This Classic Tale"
+featured_image: "/images/medium/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/214d2b4fcdf2caf027b5fef407d18437523f338ba643848578fd1a9b869c163d.jpeg"
+featured_image_caption: "Photo by Casey and Delaney on Unsplash"
+featured_image_alt: "The Little Prince: 10 Powerful Quotes That Will Change How You See Life"
 description: "Why The Little Prince Still Captivates Readers. The Little Prince by Antoine de Saint-Exupéry is more than just a children’s book. It’s a quiet meditation on..."
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-li
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life-330d3adaf0e6"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*7PUnG80mmYgTZA1Xl1KL8A@2x.jpeg)
-
-Photo by Casey and Delaney on Unsplash
 
 Why The Little Prince Still Captivates Readers
 
@@ -162,5 +162,3 @@ My reviews focus on storytelling, themes, and impact — whether it’s a gr
 When I’m not reading, I’m making music, analyzing coastal risk, or debating the merits of AI personhood.
 
 Follow for honest, engaging reviews that never stop.
-
-

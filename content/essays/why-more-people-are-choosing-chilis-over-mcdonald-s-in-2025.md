@@ -5,6 +5,9 @@ draft: false
 slug: "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025"
 section_label: "Essay"
 subtitle: "Chili’s isn’t just competing with fast food ~ it’s eating their lunch."
+featured_image: "/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg"
+featured_image_caption: "McDonald’s vs Chili’s \\\\| Source: User with ChatGPT"
+featured_image_alt: "McDonald’s vs Chili’s \\\\"
 description: "Fast food used to mean cheap food. It wasn’t gourmet , but it was quick, easy, and affordable. You could grab lunch for five or six bucks and get back to work"
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025-55ca02bd03b7"
 ---
-
-![](/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg)
-
-> McDonald’s vs Chili’s \| Source: User with ChatGPT
 
 #### Fast Food Prices Are Driving Customers Away
 
@@ -190,4 +189,3 @@ it. Got a story about fast food sticker shock or your own go-to \$13
 meal? ***Drop it in the comments.*** And if you want more essays like
 this, follow [The Balance Sheet](https://medium.com/the-balanced-sheet?source=home---two_column_layout_nav-----------------------------------------) for straight talk on the real
 economy.
-

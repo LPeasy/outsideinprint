@@ -5,6 +5,9 @@ draft: false
 slug: "how-tucson-az-plans-for-water-scarcity"
 section_label: "Essay"
 subtitle: "Four Ways to Manage Risk in a Desert City ~ and how tucson plans to water its lawns for the next century"
+featured_image: "/images/medium/how-tucson-az-plans-for-water-scarcity/aa98845fc72a30c1e966cff65d81fdafa57cb016625a49c707aa3c432ac2e3f5.png"
+featured_image_caption: "1938 Postcard |** **Source**"
+featured_image_alt: "1938 Postcard"
 description: "For decades it pumped groundwater faster than the aquifer could recharge, leading to shortages and sinkholes"
 version: "1.0"
 edition: "First web edition"
@@ -15,10 +18,6 @@ collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/how-tucson-az-plans-for-water-scarcity-94ff7836d254"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*IhkC16g4QU02Q_0fKKa04A.png)
-
-***1938 Postcard |** [**Source**](https://za.pinterest.com/pin/14425661284769064/)*
 
 ### Tucson, Arizona is a city built in the desert.
 
@@ -283,7 +282,6 @@ as a resource, and frames futures that residents can imagine and debate.
 **Tucson’s experience can serve as a model for how other mid-size cities
 might successfully approach long-term uncertainty in the desert.**
 
-
 ### Sources
 
 - City of Tucson, *One Water 2100 Plan* (planning
@@ -294,4 +292,3 @@ might successfully approach long-term uncertainty in the desert.**
   an Uncertain Future.”
 - Central Arizona Project (CAP) public data and
   history.
-

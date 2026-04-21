@@ -5,6 +5,9 @@ draft: false
 slug: "8-big-questions-everyone-has-about-pope-leo-xiv"
 section_label: "Essay"
 subtitle: "AI, gender, tradition, power ~ how will he lead?"
+featured_image: "/images/medium/8-big-questions-everyone-has-about-pope-leo-xiv/01d9124061df2074cc801a8c98cc8e9a3c44109e0dfa7405dc763bea63374476.jpeg"
+featured_image_caption: "Official Portrait of Pope Leo XIV | Source: Vatican"
+featured_image_alt: "Official Portrait of Pope Leo XIV"
 description: "A native of Chicago and a Peruvian citizen. This follow-up piece offers brief, factual responses to the eight most common questions we’ve received since his..."
 version: "1.0"
 edition: "First web edition"
@@ -12,10 +15,6 @@ pdf: "/pdfs/8-big-questions-everyone-has-about-pope-leo-xiv.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/8-big-questions-everyone-has-about-pope-leo-xiv-8d5c6c5dc708"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*3ivMVbPE4itqtOHJ6VlYUA.jpeg)
-
-> [Official Portrait of Pope Leo XIV | Source: Vatican](https://www.vatican.va/content/dam/vatican/leone-xiv/Foto-Ufficiale-Papa-Leone-XIV_Copyright-VATICAN-MEDIA.jpg)
 
 > New to the story?
 
@@ -306,4 +305,3 @@ dignity over division.
 whole Catholic world?**
 
 > Will they hear him?
-

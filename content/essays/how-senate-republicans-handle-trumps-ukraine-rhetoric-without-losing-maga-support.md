@@ -5,6 +5,9 @@ draft: false
 slug: "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support"
 section_label: "Essay"
 subtitle: "Hedging Their Bets"
+featured_image: "/images/medium/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support/ce382abf9ec021d17148a74955d2b713c913ccc400d3c6f8cf5f2d90ace5ef7d.jpeg"
+featured_image_caption: "Photo by Chad Stembridge on Unsplash"
+featured_image_alt: "How Senate Republicans Handle Trump’s Ukraine Rhetoric Without Losing MAGA Support"
 description: "Donald Trump called Ukrainian President Volodymyr Zelenskyy a ‘dictator’ and falsely claimed Ukraine provoked the war with Russia"
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support-7c8f018911df"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*62Vbq7VGbj_5Kmzp7omTlg@2x.jpeg)
-
-Photo by Chad Stembridge on Unsplash
 
 Hedging Their Bets
 
@@ -112,6 +112,3 @@ Lawmakers sought to dispel Kremlin talking points echoed by the president that U
 Republican senators are supportive of President Donald Trump's demand for Ukraine to hold elections, though GOP…www.foxnews.comSome Republican senators say Zelenskyy is not a 'dictator' in response to Trump comments
 Senators also contradicted President Donald Trump's false claim that Ukraine started the war with Russia that began when…www.usatoday.comGOP senators walk fine line on Ukraine without bashing Trump's comments
 Republican senators went to great lengths to avoid bashing President Donald Trump's comments on Ukraine but they didn't…abcnews.go.com
-
-
-

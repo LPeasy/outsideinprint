@@ -5,6 +5,8 @@ draft: false
 slug: "deference-lost"
 section_label: "Essay"
 subtitle: "Why Loper Bright Slowed Down Agency Responsiveness"
+featured_image: "/images/medium/deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg"
+featured_image_alt: "Deference Lost"
 description: "For decades, U.S. presidents have relied on executive agencies to carry out policy agendas, often stretching the boundaries of statutory interpretation to fi..."
 version: "1.0"
 edition: "First web edition"
@@ -12,7 +14,6 @@ pdf: "/pdfs/deference-lost.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/deference-lost-817a69f92a91"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*FE5E-HBoK9qh51ZDS3KhKw@2x.jpeg)
 
 Made in ChatGPT, February 2025.
 
@@ -73,6 +74,3 @@ https://www.americanbar.org/groups/business_law/resources/business-law-today/202
 Chevron deference
 "Chevron deference" is referring to the doctrine of judicial deference given to administrative action. It was coined…www.law.cornell.eduSkidmore v. Swift & Co. - Wikipedia
 Skidmore v. Swift & Co. , 323 U.S. 134 (1944), is a United States Supreme Court decision holding that an administrative…en.m.wikipedia.orghttps://ethanolrfa.org/media-and-news/category/news-releases/article/2024/06/rfa-nfu-file-lawsuit-challenging-epa-s-unlawful-vehicle-emissions-standards
-
-
-

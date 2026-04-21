@@ -6,7 +6,8 @@ slug: "the-100-year-flood-is-not-what-you-think"
 section_label: "Essay"
 subtitle: "Why the 100-year flood happens more than once in a century ~"
 description: "People hear the phrase and assume rarity.\ Once in a lifetime. Maybe once in a century.\ Something you can shrug off if you plan to sell before retirement"
-featured_image: "/images/social/outside-in-print-default.png"
+featured_image: "/images/medium/the-100-year-flood-is-not-what-you-think/96718dd1ce6457c535506421a4afbbb633458940478ba3165a382cfaa93d70aa.jpeg"
+featured_image_alt: "The 100-Year Flood Is Not What You Think"
 version: "1.0"
 edition: "First web edition"
 pdf: "/pdfs/the-100-year-flood-is-not-what-you-think.pdf"
@@ -16,8 +17,6 @@ collections:
   - floods-water-built-environment
 medium_source_url: "https://medium.com/@lawtonperret/the-100-year-flood-is-not-what-you-think-bcdadc6c395c"
 ---
-
-![](https://cdn-images-1.medium.com/max/800/1*3BfP94jiI8zd6PbbTrC7PA@2x.jpeg)
 
 ### The "100-year flood"
 
@@ -141,5 +140,3 @@ formally constructed.
 
 Real-world flood risk can be higher or lower depending on location,
 elevation, drainage, and changing climate conditions.
-
-

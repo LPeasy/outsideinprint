@@ -5,6 +5,8 @@ draft: false
 slug: "tiktok-the-trojan-horse-of-global-influence"
 section_label: "Essay"
 subtitle: "TikTok has redefined how people engage with the digital world. With its addictive algorithm, short-form videos, and vast user base, the…"
+featured_image: "/images/medium/tiktok-the-trojan-horse-of-global-influence/a8232adfa4bde25e8b21a4830b941a336b8d1f29f04e63649adb01d93e21d4c3.jpeg"
+featured_image_alt: "TikTok: The Trojan Horse of Global Influence"
 description: "TikTok has redefined how people engage with the digital world. With its addictive algorithm, short-form videos, and vast user base, the platform has revoluti..."
 version: "1.0"
 edition: "First web edition"
@@ -12,7 +14,6 @@ pdf: "/pdfs/tiktok-the-trojan-horse-of-global-influence.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/tiktok-the-trojan-horse-of-global-influence-4167ea0e329d"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*skLHk8ojO2GsmxwNqfNVVg@2x.jpeg)
 
 Image made using ChatGPT in January 2025.
 
@@ -63,5 +64,3 @@ While its economic and creative contributions are commendable, they do not justi
 - The Times: U.S. Supreme Court Upholds TikTok Ban — https://www.thetimes.co.uk/article/tiktok-ban-supreme-court-uphold-law-trump-biden-tklk8z0sx
 - PsyPost: TikTok’s Role in Mental Health and Influence — https://www.psypost.org/new-study-unpacks-the-impact-of-tiktok-and-short-video-apps-on-adolescent-well-being
 - TikTok Transparency Report: Countering Influence Operations — https://www.tiktok.com/transparency/en/countering-influence-operations/
-
-

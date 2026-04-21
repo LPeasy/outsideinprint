@@ -5,6 +5,9 @@ draft: false
 slug: "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk"
 section_label: "Essay"
 subtitle: "Draining America’s emergency oil stash to curb gas prices — short-term fix or long-term peril?"
+featured_image: "/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk/8d0f199edacf1bf685a63f9d85f6691e0853351efd4c952ffcd76badee152004.jpeg"
+featured_image_caption: "Photo by Free Walking Tour Salzburg on Unsplash"
+featured_image_alt: "Biden’s Strategic Oil Reserve Gamble: Smart Move or National Security Risk?"
 description: "Buried deep beneath the Gulf Coast lies one of America’s most powerful weapons — not a missile or a tank, but oil"
 version: "1.0"
 edition: "First web edition"
@@ -12,9 +15,6 @@ pdf: "/pdfs/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk-5f4dbd688765"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*C6Ppqo6zC3lBOsT9anzasw@2x.jpeg)
-
-Photo by Free Walking Tour Salzburg on Unsplash
 
 Buried deep beneath the Gulf Coast lies one of America’s most powerful weapons — not a missile or a tank, but oil.
 
@@ -226,6 +226,3 @@ Putin fights in Ukraine, Beijing tightens its grip on Russia’s futuremedium.co
 America maxed out its credit card — and left you to pay for it.medium.comInflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up
 Politicians blame deficits — but what if the real culprit is the banking system?medium.comElon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test
 Musk’s Management Tactics Hit the Federal Workforcemedium.com
-
-
-

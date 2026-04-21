@@ -5,6 +5,8 @@ draft: false
 slug: "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants"
 section_label: "Essay"
 subtitle: "STaR: The Method Behind DeepSeek"
+featured_image: "/images/medium/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg"
+featured_image_alt: "DeepSeek: Lean AI Disrupts America’s Compute-Heavy Tech Giants"
 description: "How did a relatively small AI company manage to challenge the titans of tech? DeepSeek, using a technique called STaR — Self-Taught Reasoner — may have crack..."
 version: "1.0"
 edition: "First web edition"
@@ -15,7 +17,6 @@ collections:
   - technology-ai-machine-future
 medium_source_url: "https://medium.com/@lawtonperret/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants-33a04d49dfdd"
 ---
-![](https://cdn-images-1.medium.com/max/800/1*vck7W_90Lcy-BQT_yX7y7g@2x.jpeg)
 
 Created using Chat GPT in January, 2025.
 
@@ -110,6 +111,3 @@ DeepMind’s AlphaFold Project
 For insights into groundbreaking protein structure prediction:
 
 https://alphafold.ebi.ac.uk
-
-
-
