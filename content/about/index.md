@@ -27,4 +27,4 @@ Outside In Print is the publisher and imprint for the site as a whole. Robert V.
 
 ## How to Read the Site
 
-If you want a quiet introduction, begin with [Welcome](/start-here/) or move through the public [Collections](/collections/). If you want the full catalog, use the [Library](/library/). If you want to enter by chance, follow [Feeling curious?](/random/). If you want the essay corpus under a single byline, use the [author archive](/authors/robert-v-ussley/).
+If you want a quiet introduction, begin at [Home](/) or move through the public [Collections](/collections/). If you want the full catalog, use the [Library](/library/). If you want to enter by chance, follow [Feeling curious?](/random/). If you want the essay corpus under a single byline, use the [author archive](/authors/robert-v-ussley/).

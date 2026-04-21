@@ -23,7 +23,6 @@ $requiredFiles = @(
   'layouts/collections/list.html',
   'layouts/collections/single.html',
   'layouts/library/list.html',
-  'layouts/start-here/single.html',
   'layouts/partials/home_front_page.html',
   'layouts/partials/home_imprint_statement.html',
   'layouts/partials/home_selected_collections.html',
@@ -32,9 +31,9 @@ $requiredFiles = @(
   'layouts/partials/discovery/page-summary.html',
   'layouts/partials/discovery/page-list-item.html',
   'layouts/partials/discovery/collection-card.html',
-  'layouts/shortcodes/entry_threads.html',
   'layouts/partials/schema/significant-links.html',
   'layouts/partials/legacy_host_redirect.html',
+  'static/start-here/index.html',
   'static/llms.txt',
   'static/llms-full.txt'
 )
@@ -69,12 +68,13 @@ foreach ($relativePath in $requiredImageFrontMatterFiles) {
 $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "home_front_page.html"',
+  'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
   'partial "newsletter_signup.html"',
-  'site.GetPage "/start-here"',
   'site.GetPage "/essays"',
   'site.GetPage "/gallery"',
-  'site.GetPage "/collections"'
+  'site.GetPage "/collections"',
+  'site.GetPage "/library"'
 )) {
   if ($indexTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/index.html to contain: $requiredSnippet"
@@ -82,8 +82,8 @@ foreach ($requiredSnippet in @(
 }
 
 foreach ($retiredSnippet in @(
+  'site.GetPage "/start-here"',
   'site.GetPage "/syd-and-oliver"',
-  'site.GetPage "/library"',
   '"Feeling curious?"',
   'data-analytics-source-slot="random_link"',
   'data-analytics-path="/random/"'
@@ -95,6 +95,7 @@ foreach ($retiredSnippet in @(
 
 $homepageOrder = @(
   'partial "home_front_page.html"',
+  'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
   'home-browse-title',
   'partial "newsletter_signup.html"'
@@ -112,10 +113,6 @@ foreach ($snippet in $homepageOrder) {
   }
 
   $lastIndex = $currentIndex
-}
-
-if ($indexTemplate -match [regex]::Escape('partial "home_imprint_statement.html"')) {
-  throw 'Expected layouts/index.html to omit the homepage imprint partial from the homepage composition.'
 }
 
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
@@ -240,8 +237,12 @@ foreach ($requiredSnippet in @(
 
 $homeImprintTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_imprint_statement.html') -Raw
 foreach ($requiredSnippet in @(
-  'site.Params.homepage.imprint_statement',
-  'id="home-imprint-statement-title"'
+  'class="home-manifesto"',
+  'id="home-manifesto-title"',
+  'home-manifesto__line--primary',
+  'home-manifesto__line--secondary',
+  'A digital imprint of essays, reports, dialogues, and literature.',
+  'Color over the lines. Read beyond the feed. Think for yourself.'
 )) {
   if ($homeImprintTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/partials/home_imprint_statement.html to contain: $requiredSnippet"
@@ -250,9 +251,7 @@ foreach ($requiredSnippet in @(
 
 $homeSelectedCollectionsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_selected_collections.html') -Raw
 foreach ($requiredSnippet in @(
-  'partial "entry_threads.html"',
-  '"source" "homepage"',
-  '"showArchiveLink" false'
+  'partial "entry_threads.html" .'
 )) {
   if ($homeSelectedCollectionsTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/partials/home_selected_collections.html to contain: $requiredSnippet"
@@ -276,13 +275,7 @@ foreach ($requiredSnippet in @(
   '"moral-religious-philosophical-essays"',
   'homepage_entry_thread_start',
   'homepage_entry_thread_collection',
-  'start_here_entry_thread_start',
-  'start_here_entry_thread_collection',
-  'homepage_entry_thread_archive',
-  'start_here_entry_thread_archive',
-  'Browse all collections',
   'Start Reading',
-  'if $showArchiveLink',
   '"in-the-image-of-god" "In the Image of God"',
   'partial "collections/lookup-definition.html"',
   'partial "collections/resolve-items.html"',
@@ -295,21 +288,14 @@ foreach ($requiredSnippet in @(
 
 foreach ($retiredSnippet in @(
   '.collection.featured',
-  'get-public-entries'
+  'get-public-entries',
+  'start_here_entry_thread_',
+  'homepage_entry_thread_archive',
+  'Browse all collections',
+  'showArchiveLink'
 )) {
   if ($entryThreadsPartial -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/partials/entry_threads.html not to depend on featured collection state: $retiredSnippet"
-  }
-}
-
-$entryThreadsShortcode = Get-Content -Path (Join-Path $repoRoot 'layouts/shortcodes/entry_threads.html') -Raw
-foreach ($requiredSnippet in @(
-  'partial "entry_threads.html"',
-  '"source" "start_here"',
-  '"showArchiveLink" true'
-)) {
-  if ($entryThreadsShortcode -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/shortcodes/entry_threads.html to contain: $requiredSnippet"
   }
 }
 
@@ -366,7 +352,7 @@ foreach ($requiredSnippet in @(
 
 $defaultListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/list.html') -Raw
 foreach ($requiredSnippet in @(
-  'Welcome',
+  'Home',
   'partial "discovery/page-list-item.html"',
   'No published pieces are listed here yet.',
   '$orderedPages := sort $pages "Title" "asc"',
@@ -378,37 +364,27 @@ foreach ($requiredSnippet in @(
   }
 }
 
-$startHereTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/start-here/single.html') -Raw
+$startHereRedirect = Get-Content -Path (Join-Path $repoRoot 'static/start-here/index.html') -Raw
 foreach ($requiredSnippet in @(
-  '.Params.description',
-  'start-here-content'
+  '<meta name="robots" content="noindex, follow"',
+  '<link rel="canonical" href="https://outsideinprint.org/"',
+  '<meta http-equiv="refresh" content="0; url=/"',
+  'window.location.replace("/")',
+  '>Home<'
 )) {
-  if ($startHereTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/start-here/single.html to contain: $requiredSnippet"
+  if ($startHereRedirect -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected static/start-here/index.html to contain: $requiredSnippet"
   }
 }
 
 foreach ($retiredSnippet in @(
-  'journey_links.html',
-  'Choose a path into the archive'
+  'Ways Into the Archive',
+  'Browse all collections',
+  'Start Reading'
 )) {
-  if ($startHereTemplate -match [regex]::Escape($retiredSnippet)) {
-    throw "Expected layouts/start-here/single.html to remove the retired Welcome-page guidance shell snippet: $retiredSnippet"
+  if ($startHereRedirect -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected static/start-here/index.html to remove the retired Welcome-page discovery snippet: $retiredSnippet"
   }
-}
-
-$startHereContent = Get-Content -Path (Join-Path $repoRoot 'content/start-here/index.md') -Raw
-foreach ($requiredSnippet in @(
-  '{{< entry_threads >}}',
-  'Ways Into the Archive'
-)) {
-  if ($startHereContent -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected content/start-here/index.md to contain: $requiredSnippet"
-  }
-}
-
-if ($startHereContent.IndexOf('{{< entry_threads >}}', [System.StringComparison]::Ordinal) -ge $startHereContent.IndexOf('Ways Into the Archive', [System.StringComparison]::Ordinal)) {
-  throw 'Expected content/start-here/index.md to place the entry_threads shortcode before Ways Into the Archive.'
 }
 
 $pageListItemPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/page-list-item.html') -Raw

@@ -103,7 +103,6 @@ It does not run for:
 - collections list pages
 - library
 - random
-- start-here
 - dashboard
 
 ## Available Metrics

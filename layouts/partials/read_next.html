@@ -1,7 +1,7 @@
 {{ $page := . }}
 {{ $limit := 3 }}
 {{ $minimum := 2 }}
-{{ $excludedSections := slice "collections" "library" "random" "start-here" }}
+{{ $excludedSections := slice "collections" "library" "random" }}
 {{ if and .IsPage (eq .Kind "page") (not (in $excludedSections .Section)) }}
   {{ $selected := slice }}
   {{ $selectedKeys := slice }}

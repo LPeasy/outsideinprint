@@ -16,7 +16,7 @@ This generates:
 - `reports/legacy-essay-audit.csv`
 - `reports/legacy-essay-audit.md`
 
-2. Start with `batch_1` pieces that are also surfaced on the homepage, Start Here, or featured collections.
+2. Start with `batch_1` pieces that are also surfaced on the homepage, homepage reading threads, or featured collections.
 
 3. Apply safe structural cleanup first.
 
@@ -41,7 +41,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -P
 The audit ranks pieces with these repo-local signals:
 
 - `featured: true` for homepage-selected essays
-- direct links from `content/start-here/index.md`
+- direct links from homepage editorial surfaces
 - `start_here` essays from featured collections
 - membership in featured collections
 - membership in any collection
