@@ -669,7 +669,11 @@ $requiredUxPages = @(
   'public/collections/technology-ai-machine-future/index.html',
   'public/collections/moral-religious-philosophical-essays/index.html',
   'public/collections/reported-case-studies/index.html',
-  'public/essays/the-risk-management-buffet/index.html'
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/essays/synthetic-reasoning/index.html',
+  'public/essays/in-the-image-of-god/index.html',
+  'public/essays/what-happened-at-camp-mystic/index.html',
+  'public/essays/the-world-is-back-at-the-poker-table/index.html'
 )
 
 $collectionRoomExpectations = [ordered]@{
@@ -1491,6 +1495,80 @@ $requiredUxChecks = @(
     Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/literature/'
     Message = 'expected article mastheads not to expose the retired literature section'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/synthetic-reasoning/index.html'
+    Pattern = 'piece--collection-accent'
+    Message = 'expected single-collection essays to render the shared article collection-accent hook'
+  },
+  @{
+    Path = 'public/essays/synthetic-reasoning/index.html'
+    Pattern = 'data-piece-collection-slug=(?:"technology-ai-machine-future"|technology-ai-machine-future)'
+    Message = 'expected synthetic-reasoning to key article accents to the AI collection slug'
+  },
+  @{
+    Path = 'public/essays/synthetic-reasoning/index.html'
+    Pattern = 'data-piece-collection-room-theme=(?:"ai-screen-glow-archive"|ai-screen-glow-archive)'
+    Message = 'expected synthetic-reasoning to render the AI article collection-accent theme'
+  },
+  @{
+    Path = 'public/essays/synthetic-reasoning/index.html'
+    Pattern = 'From the Collection'
+    Message = 'expected collection essays to render the compact article collection context block'
+  },
+  @{
+    Path = 'public/essays/synthetic-reasoning/index.html'
+    Pattern = 'article_collection_context'
+    Message = 'expected the article collection context link to emit the dedicated analytics source slot'
+  },
+  @{
+    Path = 'public/essays/in-the-image-of-god/index.html'
+    Pattern = 'data-piece-collection-room-theme=(?:"moral-chapel-library"|moral-chapel-library)'
+    Message = 'expected moral collection essays to render their room-theme accent'
+  },
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = 'data-piece-collection-slug=(?:"floods-water-built-environment"|floods-water-built-environment)'
+    Message = 'expected dual-membership essays to key article accents to the first public collection slug'
+  },
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = 'data-piece-collection-room-theme=(?:"floods-survey-table"|floods-survey-table)'
+    Message = 'expected dual-membership essays to use the first collection room theme for article accents'
+  },
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = 'piece--collection-accent--reported-case-studies-evidence-room'
+    Message = 'expected dual-membership essays not to blend the secondary collection theme into article accents'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'piece--collection-accent'
+    Message = 'expected non-collection essays to remain unaccented'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'piece-collection-context'
+    Message = 'expected non-collection essays not to render the collection context block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'data-piece-collection-room-theme='
+    Message = 'expected non-collection essays not to emit collection room-theme data attributes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'class=(?:"read-next"|read-next)\b'
+    Message = 'expected non-collection essays to keep the neutral read-next module'
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'newsletter-signup--page'
+    Message = 'expected non-collection essays to keep the neutral page-newsletter module'
   }
 )
 

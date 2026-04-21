@@ -10,13 +10,38 @@
     {{ $articleClasses = $articleClasses | append (printf "article-variant-%s" $articleVariant) }}
   {{ end }}
   {{ $publicCollectionMatches := partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
+  {{ $primaryCollection := false }}
+  {{ $showCollectionAccent := false }}
   {{ $showCollectionContinuation := false }}
+  {{ $currentSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
   {{ if gt (len $publicCollectionMatches) 0 }}
-    {{ $primaryCollection := index $publicCollectionMatches 0 }}
-    {{ range $primaryCollection.items }}
+    {{ $candidateCollection := index $publicCollectionMatches 0 }}
+    {{ range $candidateCollection.items }}
       {{ if eq .RelPermalink $.RelPermalink }}
         {{ $showCollectionContinuation = true }}
+        {{ with $candidateCollection.collection.room_theme }}
+          {{ $primaryCollection = $candidateCollection }}
+          {{ $showCollectionAccent = true }}
+          {{ $articleClasses = $articleClasses | append "piece--collection-accent" | append (printf "piece--collection-accent--%s" .) }}
+        {{ end }}
       {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $primaryCollectionUrl := "" }}
+  {{ $primaryCollectionPath := "" }}
+  {{ $primaryCollectionEntryPoint := false }}
+  {{ if $showCollectionAccent }}
+    {{ $primaryCollectionUrl = printf "collections/%s/" $primaryCollection.collection.slug | absURL }}
+    {{ with $primaryCollection.page }}
+      {{ $primaryCollectionUrl = .RelPermalink }}
+    {{ end }}
+    {{ $primaryCollectionPath = printf "/collections/%s/" $primaryCollection.collection.slug }}
+    {{ with $primaryCollection.page }}
+      {{ $primaryCollectionPath = .RelPermalink }}
+    {{ end }}
+    {{ $startHereSlug := lower (printf "%v" ($primaryCollection.collection.start_here | default "")) }}
+    {{ if and $startHereSlug (eq $currentSlug $startHereSlug) }}
+      {{ $primaryCollectionEntryPoint = true }}
     {{ end }}
   {{ end }}
   {{ $journeyLinks := slice }}
@@ -25,7 +50,7 @@
   {{ end }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("collections/" | absURL) "label" "Browse collections") }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("library/" | absURL) "label" "Search the library") }}
-  <article class="{{ delimit $articleClasses " " }}" data-analytics-eligible-read="true">
+  <article class="{{ delimit $articleClasses " " }}" data-analytics-eligible-read="true"{{ if $showCollectionAccent }} data-piece-collection-slug="{{ $primaryCollection.collection.slug }}" data-piece-collection-room-theme="{{ $primaryCollection.collection.room_theme }}"{{ end }}>
     <header class="piece-header">
       {{ partial "running_header.html" . }}
 
@@ -47,6 +72,21 @@
       {{ if eq $articleVariant "modernbio" }}
         {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
         {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
+      {{ end }}
+      {{ if $showCollectionAccent }}
+        <aside class="piece-collection-context" aria-label="Primary collection context">
+          <p class="piece-collection-context__eyebrow">From the Collection</p>
+          <h2 class="piece-collection-context__title"><a href="{{ $primaryCollectionUrl }}"
+            data-analytics-event="collection_click"
+            data-analytics-source-slot="article_collection_context"
+            data-analytics-collection="{{ $primaryCollection.collection.slug }}"
+            data-analytics-slug="{{ $primaryCollection.collection.slug }}"
+            data-analytics-title="{{ $primaryCollection.collection.title }}"
+            data-analytics-section="Collections"
+            data-analytics-path="{{ $primaryCollectionPath }}"
+          >{{ $primaryCollection.collection.title }}</a></h2>
+          <p class="piece-collection-context__meta">{{ title $primaryCollection.state.kind }} | {{ $primaryCollection.state.count }} pieces{{ if $primaryCollectionEntryPoint }} | Entry Point{{ end }}</p>
+        </aside>
       {{ end }}
       {{ with .Params.featured_image }}
         {{ $featuredImage := . }}
