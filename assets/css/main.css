@@ -2028,6 +2028,8 @@ h2{ margin-top:34px; }
   display:grid;
   gap:.9rem;
   align-content:start;
+  position:relative;
+  overflow:hidden;
 }
 .collection-card .v{
   font-size:1.16rem;
@@ -2046,6 +2048,151 @@ h2{ margin-top:34px; }
   font-weight:600;
   letter-spacing:.14em;
   text-transform:uppercase;
+}
+.collection-card--room-echo{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(236,231,223,.028), rgba(236,231,223,0) 42%),
+    rgba(24,24,24,.92);
+  --collection-card-room-border:rgba(127,147,166,.2);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(127,147,166,.9), rgba(127,147,166,.32));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(127,147,166,.92), rgba(127,147,166,.22));
+  background:var(--collection-card-room-surface);
+  border-color:var(--collection-card-room-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 1px 0 rgba(255,255,255,.02);
+}
+.collection-card--room-echo::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 32%),
+    radial-gradient(circle at 84% 14%, rgba(255,255,255,.055), rgba(255,255,255,0) 18%);
+  pointer-events:none;
+}
+.collection-card--room-echo::after{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:0;
+  height:3px;
+  border-radius:999px;
+  background:var(--collection-card-room-rule);
+  pointer-events:none;
+}
+.collection-card--room-echo .v,
+.collection-card--room-echo .d,
+.collection-card--room-echo .collection-meta{
+  position:relative;
+  z-index:1;
+}
+.collection-card--room-echo .v{
+  position:relative;
+}
+.collection-card--room-echo .collection-meta{
+  padding-top:.55rem;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.collection-card--room-echo .v{
+  padding-left:.8rem;
+}
+.collection-card--room-echo .v::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.12rem;
+  bottom:.16rem;
+  width:3px;
+  border-radius:999px;
+  background:var(--collection-card-room-rail);
+}
+.collection-card--room-echo:hover{
+  border-color:rgba(255,255,255,.22);
+  background:var(--collection-card-room-surface);
+}
+.collection-card--ledger-editorial-desk{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(244,235,219,.065), rgba(244,235,219,0) 42%),
+    rgba(30,26,23,.94);
+  --collection-card-room-border:rgba(204,180,137,.22);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(204,180,137,.94), rgba(105,132,160,.34));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(204,180,137,.95), rgba(105,132,160,.28));
+}
+.collection-card--syd-and-oliver-smoky-lounge{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(228,189,102,.06), rgba(228,189,102,0) 40%),
+    rgba(31,24,21,.94);
+  --collection-card-room-border:rgba(221,184,110,.2);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(224,186,102,.95), rgba(163,104,44,.4));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(224,186,102,.92), rgba(163,104,44,.3));
+}
+.collection-card--modern-bios-records-archive{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(199,205,212,.06), rgba(199,205,212,0) 42%),
+    rgba(28,31,35,.95);
+  --collection-card-room-border:rgba(155,177,199,.2);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(155,177,199,.92), rgba(120,140,162,.34));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(155,177,199,.92), rgba(120,140,162,.24));
+}
+.collection-card--risk-systems-notebook{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(212,217,224,.04), rgba(212,217,224,0) 38%),
+    rgba(17,19,22,.95);
+  --collection-card-room-border:rgba(131,156,178,.2);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(131,156,178,.92), rgba(212,217,224,.26));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(131,156,178,.92), rgba(131,156,178,.2));
+}
+.collection-card--floods-survey-table{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(149,180,199,.06), rgba(149,180,199,0) 42%),
+    rgba(31,35,38,.95);
+  --collection-card-room-border:rgba(149,180,199,.2);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(149,180,199,.92), rgba(172,185,176,.3));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(149,180,199,.92), rgba(172,185,176,.18));
+}
+.collection-card--ai-screen-glow-archive{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(173,196,214,.065), rgba(173,196,214,0) 40%),
+    rgba(21,26,31,.94);
+  --collection-card-room-border:rgba(141,175,202,.22);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(141,175,202,.95), rgba(186,208,222,.26));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(141,175,202,.95), rgba(186,208,222,.18));
+}
+.collection-card--moral-chapel-library{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(224,214,193,.06), rgba(224,214,193,0) 40%),
+    rgba(33,28,24,.95);
+  --collection-card-room-border:rgba(194,179,140,.2);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(194,179,140,.92), rgba(224,214,193,.26));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(194,179,140,.92), rgba(224,214,193,.18));
+}
+.collection-card--reported-case-studies-evidence-room{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(144,102,85,.06), rgba(144,102,85,0) 40%),
+    rgba(26,28,31,.95);
+  --collection-card-room-border:rgba(143,103,88,.22);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(143,103,88,.94), rgba(204,195,186,.24));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(143,103,88,.94), rgba(204,195,186,.18));
 }
 .collections-index{
   display:grid;

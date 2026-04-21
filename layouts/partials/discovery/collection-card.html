@@ -3,6 +3,7 @@
 {{- $sourceSlot := .analyticsSourceSlot | default "collection_page" -}}
 {{- $label := .label | default "" -}}
 {{- $class := .class | default "" -}}
+{{- $roomTheme := $entry.collection.room_theme | default "" -}}
 {{- $url := printf "collections/%s/" $entry.collection.slug | absURL -}}
 {{- with $entry.page -}}
   {{- $url = .RelPermalink -}}
@@ -38,7 +39,7 @@
     {{ with $startHere }}<div class="d">Recommended entry point: <a href="{{ .RelPermalink }}">{{ .Title }}</a></div>{{ end }}
   </article>
 {{- else -}}
-  <a class="card collection-card{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"
+  <a class="card collection-card{{ with $roomTheme }} collection-card--room-echo collection-card--{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"
     data-analytics-event="collection_click"
     data-analytics-source-slot="{{ $sourceSlot }}"
     data-analytics-collection="{{ $entry.collection.slug }}"

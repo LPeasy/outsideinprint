@@ -683,6 +683,14 @@ $collectionRoomExpectations = [ordered]@{
   'public/collections/reported-case-studies/index.html' = 'reported-case-studies-evidence-room'
 }
 
+$featuredCollectionCardThemes = @(
+  'ledger-editorial-desk'
+  'syd-and-oliver-smoky-lounge'
+  'risk-systems-notebook'
+  'floods-survey-table'
+  'ai-screen-glow-archive'
+)
+
 $requiredLegacyCleanupPages = @(
   'public/essays/biter-the-slang-word-that-hits/index.html',
   'public/essays/the-risk-management-buffet/index.html',
@@ -1403,6 +1411,17 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
+    Pattern = 'collection-card--room-echo'
+    Message = 'expected featured collection grid cards to render the shared room-echo class'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)Collections Index.*?collection-card--room-echo'
+    Message = 'expected collections index rows to remain neutral and omit room-echo classes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
     Pattern = 'Public Power|Civic Institutions and Public Power'
     Message = 'expected the collections index not to render the hidden Public Power subgroup until that collection becomes visible'
     ShouldNotMatch = $true
@@ -1426,6 +1445,18 @@ $requiredUxChecks = @(
     Path = 'public/collections/risk-uncertainty/index.html'
     Pattern = '>Read PDF<'
     Message = 'expected collection pages to avoid PDF affordances'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'collection-card--room-echo'
+    Message = 'expected related-collection rows on collection detail pages to remain neutral and omit room-echo classes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'collection-card--room-echo'
+    Message = 'expected author-page collection rows to remain neutral and omit room-echo classes'
     ShouldNotMatch = $true
   },
   @{
@@ -1477,6 +1508,16 @@ foreach ($entry in $collectionRoomExpectations.GetEnumerator()) {
       Path = $relativePath
       Pattern = ('collection-room--' + [regex]::Escape($theme))
       Message = "expected the live collection page to render the collection-room modifier class '$theme'"
+    }
+  )
+}
+
+foreach ($theme in $featuredCollectionCardThemes) {
+  $requiredUxChecks += @(
+    @{
+      Path = 'public/collections/index.html'
+      Pattern = ('collection-card--' + [regex]::Escape($theme))
+      Message = "expected featured collection grid cards to render the room-echo theme class '$theme'"
     }
   )
 }
