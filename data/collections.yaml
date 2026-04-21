@@ -10,6 +10,7 @@ collections:
     weight: 10
     start_here: the-ledger-vol-1
     description: Newsletter-style dispatches that gather recent essays, themes, and recurring concerns into one archival thread.
+    room_theme: ledger-editorial-desk
     metadata:
       - label: Format
         value: Newsletter
@@ -34,6 +35,7 @@ collections:
     weight: 20
     start_here: without-a-word
     description: A conversational archive of pieces on truth, power, money, obligation, and meaning.
+    room_theme: syd-and-oliver-smoky-lounge
     metadata:
       - label: Format
         value: Dialogues
@@ -59,6 +61,7 @@ collections:
     weight: 25
     start_here: jack-stratton-and-the-vulfpeck-model
     description: Archival civic biographies of recent public figures, written as restrained record-driven essays for the imprint.
+    room_theme: modern-bios-records-archive
     metadata:
       - label: Format
         value: Civic biographies
@@ -87,6 +90,7 @@ collections:
     weight: 30
     start_here: what-is-risk-a-four-part-framework
     description: Essays about uncertainty, tradeoffs, risk framing, and decision-making under imperfect information.
+    room_theme: risk-systems-notebook
     metadata:
       - label: Format
         value: Essays
@@ -116,6 +120,7 @@ collections:
     weight: 40
     start_here: what-happened-at-camp-mystic
     description: Reporting and essays on flood risk, water systems, riverine disasters, and the places we keep building anyway.
+    room_theme: floods-survey-table
     metadata:
       - label: Format
         value: Essays and field cases
@@ -148,6 +153,7 @@ collections:
     weight: 50
     start_here: synthetic-reasoning
     description: Essays on artificial intelligence, compute, machine systems, and the social future they are dragging into view.
+    room_theme: ai-screen-glow-archive
     metadata:
       - label: Format
         value: Essays
@@ -179,6 +185,7 @@ collections:
     weight: 60
     start_here: in-the-image-of-god
     description: Essays on moral formation, religion, conscience, and the philosophical habits needed to see clearly.
+    room_theme: moral-chapel-library
     metadata:
       - label: Format
         value: Essays
@@ -210,6 +217,7 @@ collections:
     weight: 70
     start_here: what-happened-at-camp-mystic
     description: Tightly reported case studies that stay with one event, institution, or failure long enough to learn something durable.
+    room_theme: reported-case-studies-evidence-room
     metadata:
       - label: Format
         value: Case studies

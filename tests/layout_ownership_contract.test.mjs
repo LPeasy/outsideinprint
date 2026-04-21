@@ -52,6 +52,14 @@ test("homepage manifesto owns deliberate route-level hooks and drops dead start-
 });
 
 test("collection detail and membership hooks have explicit inner-structure styling", () => {
+  assert.match(collectionSingle, /class="collection-room\{\{ with \$roomTheme \}\} collection-room--\{\{ \. \}\}\{\{ end \}\}"/);
+  assert.match(collectionSingle, /data-collection-room-theme="\{\{ \$roomTheme \}\}"/);
+  assert.match(collectionSingle, /collection-room__header/);
+  assert.match(collectionSingle, /collection-room__section collection-room__section--overview/);
+  assert.match(collectionSingle, /collection-room__section collection-room__section--entry/);
+  assert.match(collectionSingle, /collection-room__section collection-room__section--progress/);
+  assert.match(collectionSingle, /collection-room__section collection-room__section--items/);
+  assert.match(collectionSingle, /collection-room__section collection-room__section--related/);
   assert.match(collectionSingle, /class="collection-meta-row"/);
   assert.match(collectionSingle, /class="collection-item-note"/);
   assert.match(collectionSingle, /class="collection-pill"/);
@@ -63,6 +71,14 @@ test("collection detail and membership hooks have explicit inner-structure styli
   assert.match(collectionMembership, /class="collection-membership__meta"/);
 
   for (const selector of [
+    ".collection-room{",
+    ".collection-room__section{",
+    ".collection-room__header,",
+    ".collection-room__section--overview,",
+    ".collection-room__section--entry,",
+    ".collection-room__section--progress{",
+    ".collection-room__section--items,",
+    ".collection-room__section--related,",
     ".collection-grid{",
     ".collection-card{",
     ".collection-meta{",
@@ -127,6 +143,14 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
     "`home-manifesto__inner`",
     "`home-manifesto__line--primary`",
     "`home-manifesto__line--secondary`",
+    "`collection-room`",
+    "`collection-room__header`",
+    "`collection-room__section`",
+    "`collection-room__section--overview`",
+    "`collection-room__section--entry`",
+    "`collection-room__section--progress`",
+    "`collection-room__section--items`",
+    "`collection-room__section--related`",
     "`collection-item-note`",
     "`running-header__inner`",
     "`reading-path__header`",

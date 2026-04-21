@@ -661,9 +661,27 @@ $requiredUxPages = @(
   'public/gallery/index.html',
   'public/collections/index.html',
   'public/random/index.html',
+  'public/collections/the-ledger/index.html',
+  'public/collections/syd-and-oliver-dialogues/index.html',
+  'public/collections/modern-bios/index.html',
   'public/collections/risk-uncertainty/index.html',
+  'public/collections/floods-water-built-environment/index.html',
+  'public/collections/technology-ai-machine-future/index.html',
+  'public/collections/moral-religious-philosophical-essays/index.html',
+  'public/collections/reported-case-studies/index.html',
   'public/essays/the-risk-management-buffet/index.html'
 )
+
+$collectionRoomExpectations = [ordered]@{
+  'public/collections/the-ledger/index.html' = 'ledger-editorial-desk'
+  'public/collections/syd-and-oliver-dialogues/index.html' = 'syd-and-oliver-smoky-lounge'
+  'public/collections/modern-bios/index.html' = 'modern-bios-records-archive'
+  'public/collections/risk-uncertainty/index.html' = 'risk-systems-notebook'
+  'public/collections/floods-water-built-environment/index.html' = 'floods-survey-table'
+  'public/collections/technology-ai-machine-future/index.html' = 'ai-screen-glow-archive'
+  'public/collections/moral-religious-philosophical-essays/index.html' = 'moral-chapel-library'
+  'public/collections/reported-case-studies/index.html' = 'reported-case-studies-evidence-room'
+}
 
 $requiredLegacyCleanupPages = @(
   'public/essays/biter-the-slang-word-that-hits/index.html',
@@ -1444,6 +1462,24 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   }
 )
+
+foreach ($entry in $collectionRoomExpectations.GetEnumerator()) {
+  $relativePath = [string]$entry.Key
+  $theme = [string]$entry.Value
+
+  $requiredUxChecks += @(
+    @{
+      Path = $relativePath
+      Pattern = ('data-collection-room-theme=(?:"' + [regex]::Escape($theme) + '"|' + [regex]::Escape($theme) + ')')
+      Message = "expected the live collection page to render data-collection-room-theme='$theme'"
+    },
+    @{
+      Path = $relativePath
+      Pattern = ('collection-room--' + [regex]::Escape($theme))
+      Message = "expected the live collection page to render the collection-room modifier class '$theme'"
+    }
+  )
+}
 
 foreach ($check in $requiredUxChecks) {
   $relativePath = [string]$check.Path
