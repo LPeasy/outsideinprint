@@ -303,15 +303,12 @@ $collectionsListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/colle
 foreach ($requiredSnippet in @(
   'Collections are curated reading threads across the archive',
   'partial "discovery/collection-card.html"',
-  'Featured Collections',
-  'Collections Index',
+  'collections-directory',
+  'collections-directory__group',
+  'collections-directory__group-title',
+  'collections-directory__grid',
   'Series',
-  'Topics',
-  'Risk',
-  'Floods',
-  'AI',
-  'Moral / Religious',
-  'Public Power'
+  'Topics'
 )) {
   if ($collectionsListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/collections/list.html to contain: $requiredSnippet"
@@ -320,7 +317,14 @@ foreach ($requiredSnippet in @(
 
 foreach ($retiredSnippet in @(
   'All Collections',
-  'Featured %s'
+  'Featured %s',
+  'Featured Collections',
+  'Collections Index',
+  '"title" "Risk"',
+  '"title" "Floods"',
+  '"title" "AI"',
+  '"title" "Moral / Religious"',
+  '"title" "Public Power"'
 )) {
   if ($collectionsListTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/collections/list.html to remove the retired collections-index snippet: $retiredSnippet"
