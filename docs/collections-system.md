@@ -24,7 +24,7 @@ Each collection in `data/collections.yaml` supports these fields:
 - `force_public`: optional override that allows a public collection to stay listed before it reaches `min_items`.
 - `min_items`: minimum resolved piece count before public listing.
 - `explicit_only`: disables fallback matching when true.
-- `featured`: allows the collection to appear in featured strips.
+- `featured`: allows the collection to appear in featured strips such as the homepage; `/collections/` does not use this field for ordering or presentation.
 - `weight`: ordering control for collection listings.
 - `start_here`: optional page slug that gets a dedicated callout.
 - `room_theme`: optional presentation key reused by collection-detail reading rooms and the article light-accent layer.
@@ -66,7 +66,7 @@ Resolution rules:
 
 ## Templates touched by the system
 
-- `layouts/collections/list.html`: public collections index.
+- `layouts/collections/list.html`: unified public collections card directory grouped into `Series` and `Topics`.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
 - `layouts/_default/single.html`: article header and aftermatter, including the primary-collection light-accent context, the article-exit continuation zone for collection-member pages, and the fallback `Read Next` path for standalone pages.
@@ -110,6 +110,9 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - Each collection row can show a `Visited` marker when the current browser has already opened that piece.
 - Collection detail pages may also apply an explicit per-collection reading-room treatment via `room_theme`.
 - Article pages may reuse `room_theme` only for the compact primary-collection light-accent layer.
+- The `/collections/` route now renders one unified directory of room-echo cards for every visible collection.
+- That directory groups cards under `Series` and `Topics` only; it does not render a separate featured strip or a neutral row index.
+- The collections index route ignores `featured`; homepage and other existing featured surfaces may still use it.
 - The full room system remains collection-detail-page only. Homepage, collection index, library, and article-body styling do not inherit these themes.
 - The room layer changes visual atmosphere only:
   - background field
