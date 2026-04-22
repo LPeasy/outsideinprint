@@ -427,7 +427,6 @@ foreach ($requiredSnippet in @(
 
 $libraryTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.html') -Raw
 foreach ($requiredSnippet in @(
-  'The library is the full catalog of the imprint',
   'page-header--section-centered',
   'partial "archive/longform-kind.html"',
   '"title" "Essays"',

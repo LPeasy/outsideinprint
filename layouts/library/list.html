@@ -77,8 +77,6 @@
 
   <header class="page-header page-header--section-centered page-shell page-shell--wide">
     <h1 id="library-title" class="list-title">Library</h1>
-    {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
-    {{ if gt $totalPages 0 }}<p class="page-intro">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $libraryGroups }} active types.</p>{{ end }}
   </header>
 
   {{ $yearOptions := sort (uniq $availableYears) }}
