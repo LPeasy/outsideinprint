@@ -1,9 +1,6 @@
 {{ define "main" }}
   {{ $pages := .Pages }}
   {{ $orderedPages := sort $pages "Title" "asc" }}
-  {{ if eq .Section "essays" }}
-    {{ $orderedPages = sort $pages "Date" "desc" }}
-  {{ end }}
   {{ $latest := false }}
   {{ if gt (len $pages) 0 }}
     {{ $latest = index (sort $pages "Date" "desc") 0 }}

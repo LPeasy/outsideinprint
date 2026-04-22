@@ -396,7 +396,7 @@ $manifestoLinkPattern = ('(?s)home-manifesto__line--support.*?home-manifesto__su
 
 $requiredSemanticPages = [ordered]@{
   'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
-  'public/essays/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $false }
+  'public/essays/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/library/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/gallery/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
@@ -1425,17 +1425,52 @@ $requiredUxChecks = @(
   @{
     Path = 'public/essays/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/'
-    Message = 'expected the default list template to expose collection, library, and home next steps'
+    Message = 'expected the essays front to expose collection, library, and home next steps'
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)/essays/the-fair-price-of-bitcoin-69420/.*?/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/.*?/essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/'
-    Message = 'expected the Essays landing page to list recent essays in reverse chronological order instead of alphabetically'
+    Pattern = 'Essay Desk'
+    Message = 'expected the essays landing page to render the route-owned newsprint masthead label'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '(?s)Late Edition.*?Current Edition'
+    Message = 'expected the essays landing page to render the current-edition band'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = 'essays-front__lead'
+    Message = 'expected the essays landing page to render a dominant lead-story region'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = 'essays-front__secondary'
+    Message = 'expected the essays landing page to render secondary current-edition stories'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = $currentCartoonImagePattern
+    Message = 'expected the essays landing page to render the current editorial cartoon break'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '(?s)Rolling Archive.*?By Month'
+    Message = 'expected the essays landing page to render the rolling archive header'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '(?s)March 2026.*?February 2026.*?January 2026'
+    Message = 'expected the essays archive to group entries by descending month-year bands'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '(?s)/essays/hindsight-2026-d4vd-alleged-romantic-homicide/.*?/essays/the-world-is-back-at-the-poker-table/.*?/essays/1929-2029-americas-century-of-humiliation/'
+    Message = 'expected the essays landing page to keep the newest stories in descending chronological order'
   },
   @{
     Path = 'public/essays/index.html'
     Pattern = '>Read PDF<'
-    Message = 'expected section list pages to avoid PDF affordances'
+    Message = 'expected the essays front to avoid PDF affordances'
     ShouldNotMatch = $true
   },
   @{
@@ -1463,6 +1498,18 @@ $requiredUxChecks = @(
     Path = 'public/syd-and-oliver/index.html'
     Pattern = '(?s)<h1[^>]*>\s*Dialogues\s*</h1>'
     Message = 'expected the /syd-and-oliver/ route to render the renamed Dialogues section title'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = 'Essay Desk|Late Edition|Rolling Archive|essays-front__lead'
+    Message = 'expected /syd-and-oliver/ to remain on the shared generic list layout'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/working-papers/index.html'
+    Pattern = 'Essay Desk|Late Edition|Rolling Archive|essays-front__lead'
+    Message = 'expected /working-papers/ to remain on the shared generic list layout'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/random/index.html'

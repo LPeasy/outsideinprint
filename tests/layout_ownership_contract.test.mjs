@@ -9,6 +9,7 @@ const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/d
 const authorList = fs.readFileSync(path.resolve("layouts/authors/list.html"), "utf8");
 const authorSection = fs.readFileSync(path.resolve("layouts/authors/section.html"), "utf8");
 const authorSingle = fs.readFileSync(path.resolve("layouts/authors/single.html"), "utf8");
+const essaysList = fs.readFileSync(path.resolve("layouts/essays/list.html"), "utf8");
 const collectionList = fs.readFileSync(path.resolve("layouts/collections/list.html"), "utf8");
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
@@ -112,6 +113,39 @@ test("collections index uses a unified card directory and drops the retired spli
   }
 });
 
+test("essays front owns a dedicated route layout and drops the generic section-list path", () => {
+  for (const snippet of [
+    'class="essays-front"',
+    'class="page-header page-shell page-shell--wide essays-front__masthead"',
+    'class="page-intro essays-front__deck"',
+    'class="page-intro essays-front__stats"',
+    'class="page-shell page-shell--wide essays-front__edition"',
+    'class="essays-front__lead"',
+    'class="essays-front__secondary"',
+    'class="page-shell page-shell--wide essays-front__cartoon"',
+    'class="page-shell page-shell--wide essays-front__archive"',
+    'class="essays-front__month-title"',
+    'partial "discovery/page-list-item.html"'
+  ]) {
+    assert.match(essaysList, new RegExp(escapeRegex(snippet)));
+  }
+
+  for (const selector of [
+    ".essays-front{",
+    ".essays-front__masthead{",
+    ".essays-front__edition{",
+    ".essays-front__lead{",
+    ".essays-front__secondary{",
+    ".essays-front__cartoon{",
+    ".essays-front__archive{",
+    ".essays-front__month{",
+    ".essays-front__month-title{",
+    ".essays-front__month-list{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+});
+
 test("article single template removes dead generic layout hooks and uses page-flow ownership", () => {
   assert.match(articleSingle, /<article class="piece"/);
   assert.match(articleSingle, /append "piece--collection-accent"/);
@@ -167,6 +201,16 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
     "`home-manifesto__inner`",
     "`home-manifesto__line--primary`",
     "`home-manifesto__line--secondary`",
+    "`essays-front`",
+    "`essays-front__masthead`",
+    "`essays-front__edition`",
+    "`essays-front__lead`",
+    "`essays-front__secondary`",
+    "`essays-front__cartoon`",
+    "`essays-front__archive`",
+    "`essays-front__month`",
+    "`essays-front__month-title`",
+    "`essays-front__month-list`",
     "`collection-room`",
     "`collection-room__header`",
     "`collection-room__section`",
@@ -197,6 +241,7 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
   for (const stalePhrase of [
     "`start-here-page`",
     "`newsletter-signup--start-here`",
+    "| Section landing family | `/essays/`,",
     "Start Here | `/start-here/`",
     "Verify that most content-authored `start-here-*` classes remain unstyled",
     "Verify `content/start-here/index.md` against `assets/css/main.css`."
