@@ -428,6 +428,7 @@ foreach ($requiredSnippet in @(
 $libraryTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.html') -Raw
 foreach ($requiredSnippet in @(
   'page-header--section-centered',
+  'Search the archive by title, type, collection, or version.',
   'partial "archive/longform-kind.html"',
   '"title" "Essays"',
   '"title" "Dialogues"',
@@ -447,6 +448,7 @@ foreach ($requiredSnippet in @(
 }
 
 foreach ($retiredSnippet in @(
+  'partial "journey_links.html"',
   'Search titles, sections, collections, and versions',
   'for="library-section">Section</label>',
   '<option value="">All sections</option>',

@@ -77,6 +77,7 @@
 
   <header class="page-header page-header--section-centered page-shell page-shell--wide">
     <h1 id="library-title" class="list-title">Library</h1>
+    <p class="page-intro">Search the archive by title, type, collection, or version.</p>
   </header>
 
   {{ $yearOptions := sort (uniq $availableYears) }}
@@ -91,15 +92,6 @@
       ) }}
     {{ end }}
   {{ end }}
-
-  {{ partial "journey_links.html" (dict
-    "class" "journey-links--page"
-    "eyebrow" "Use the library, or take a guided path"
-    "links" (slice
-      (dict "href" ("collections/" | absURL) "label" "Browse collections")
-      (dict "href" ("" | absURL) "label" "Home")
-    )
-  ) }}
 
   <div class="library-search library-search--filters page-shell page-shell--wide" data-library-controls>
     <div class="library-filter-grid">

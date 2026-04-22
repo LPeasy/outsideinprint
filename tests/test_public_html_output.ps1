@@ -1586,6 +1586,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
+    Pattern = 'Search the archive by title, type, collection, or version\.'
+    Message = 'expected the library page to render the new utility line under the title'
+  },
+  @{
+    Path = 'public/library/index.html'
     Pattern = 'Dialogues and fiction from the recurring world of Syd and Oliver'
     Message = 'expected the library page to surface lane descriptions from section metadata'
   },
@@ -1691,8 +1696,9 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/'
-    Message = 'expected the library page to expose collection and home navigation'
+    Pattern = 'journey-links'
+    Message = 'expected the library page not to render the retired guided-path block'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/library/index.html'
