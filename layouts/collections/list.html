@@ -17,7 +17,7 @@
     {{ $totalPieces = add $totalPieces .state.count }}
   {{ end }}
 
-  <header class="page-header page-shell page-shell--wide">
+  <header class="page-header page-header--section-centered page-shell page-shell--wide">
     <h1 id="collections-title" class="list-title">Collections</h1>
     {{ if gt (len $entries) 0 }}<p class="page-intro">{{ len $entries }} collections · {{ $totalPieces }} published pieces</p>{{ end }}
   </header>

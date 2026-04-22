@@ -312,6 +312,7 @@ foreach ($retiredSnippet in @(
 $collectionsListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/list.html') -Raw
 foreach ($requiredSnippet in @(
   '{{ len $entries }} collections · {{ $totalPieces }} published pieces',
+  'page-header--section-centered',
   'partial "discovery/collection-card.html"',
   'collections-directory',
   'collections-directory__group',
@@ -427,6 +428,7 @@ foreach ($requiredSnippet in @(
 $libraryTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.html') -Raw
 foreach ($requiredSnippet in @(
   'The library is the full catalog of the imprint',
+  'page-header--section-centered',
   'partial "archive/longform-kind.html"',
   '"title" "Essays"',
   '"title" "Dialogues"',
@@ -479,6 +481,7 @@ foreach ($dialogueFile in $dialogueFiles) {
 $defaultListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/list.html') -Raw
 foreach ($requiredSnippet in @(
   'Home',
+  'page-header--section-centered',
   'partial "discovery/page-list-item.html"',
   'No published pieces are listed here yet.',
   '$orderedPages := sort $pages "Title" "asc"'
@@ -518,6 +521,28 @@ foreach ($retiredSnippet in @(
 )) {
   if ($archiveListTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/archive/list.html to remove the retired archive-shell snippet: $retiredSnippet"
+  }
+}
+
+$archiveRenderListPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/archive/render-list.html') -Raw
+foreach ($requiredSnippet in @(
+  'page-header--section-centered',
+  'essays-front__year-nav',
+  'essays-front__month-title'
+)) {
+  if ($archiveRenderListPartial -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/archive/render-list.html to contain: $requiredSnippet"
+  }
+}
+
+$galleryListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/gallery/list.html') -Raw
+foreach ($requiredSnippet in @(
+  'page-header--section-centered',
+  'cartoon-gallery-spotlight',
+  'cartoon-gallery-title'
+)) {
+  if ($galleryListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/gallery/list.html to contain: $requiredSnippet"
   }
 }
 
@@ -674,6 +699,10 @@ if ($mastheadPartial -match '<h1 class="title">') {
 
 if ($mastheadPartial -notmatch '<div class="title">') {
   throw 'Expected layouts/partials/masthead.html to keep the shared non-heading title container for the editorial brand.'
+}
+
+if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Feeling curious\?') {
+  throw 'Expected layouts/partials/masthead.html to order the primary nav as Archive, Collections, Gallery, Library, Feeling curious?.'
 }
 
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw

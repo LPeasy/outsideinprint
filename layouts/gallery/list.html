@@ -10,7 +10,7 @@
   {{ end }}
   {{ $orderedCartoons := sort $cartoons "date" "desc" }}
 
-  <header class="page-header page-shell page-shell--wide">
+  <header class="page-header page-header--section-centered page-shell page-shell--wide">
     <h1 id="page-title" class="list-title">{{ .Title }}</h1>
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
   </header>

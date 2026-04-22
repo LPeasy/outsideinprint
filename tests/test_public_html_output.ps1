@@ -1440,6 +1440,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
+    Message = 'expected the homepage masthead nav order to be Archive, Collections, Gallery, Library, Feeling curious?'
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/literature/'
     Message = 'expected the homepage masthead not to expose the retired literature section'
     ShouldNotMatch = $true
@@ -1480,6 +1485,16 @@ $requiredUxChecks = @(
     Pattern = 'journey-links'
     Message = 'expected the archive front not to retain the route-level utility pill row'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the archive landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
+    Message = 'expected the archive masthead nav order to be Archive, Collections, Gallery, Library, Feeling curious?'
   },
   @{
     Path = 'public/archive/index.html'
@@ -1569,6 +1584,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the library landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/library/index.html'
     Pattern = 'Search titles, types, collections, and versions'
     Message = 'expected the library page search placeholder to reflect type-based grouping'
   },
@@ -1606,6 +1626,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/syd-and-oliver/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected /syd-and-oliver/ to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
     Pattern = 'Current Edition|essays-front__lead|essays-front__rail|essays-front__cartoon'
     Message = 'expected /syd-and-oliver/ to avoid the retired front-page-style edition structure'
     ShouldNotMatch = $true
@@ -1631,6 +1656,11 @@ $requiredUxChecks = @(
     Pattern = 'Current Edition|Rolling Archive|essays-front__lead|essays-front__year-nav'
     Message = 'expected /working-papers/ to remain on the shared generic list layout'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/working-papers/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected /working-papers/ to emit the centered section-header hook on the shared list layout'
   },
   @{
     Path = 'public/random/index.html'
@@ -1705,6 +1735,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the collections landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/collections/index.html'
     Pattern = '(?s)<main\b[^>]*>.*?Curated collections that gather essays, projects, dossiers, and recurring questions into coherent reading threads across the archive\.'
     Message = 'expected the collections index not to render the old descriptive intro paragraph in visible copy'
     ShouldNotMatch = $true
@@ -1776,6 +1811,11 @@ $requiredUxChecks = @(
     Pattern = 'How to Use This Collection'
     Message = 'expected collection detail pages not to retain the retired overview block'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the gallery landing header block to emit the centered section-header hook'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'

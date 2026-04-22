@@ -1,9 +1,4 @@
 {{ define "main" }}
-  <header class="page-header page-shell page-shell--wide">
-    <h1 id="library-title" class="list-title">Library</h1>
-    {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
-  </header>
-
   {{ $libraryTypes := slice
     (dict "key" "essay" "title" "Essays" "description" "Essays on economics, risk, culture, technology, and public life from Outside In Print.")
     (dict "key" "dialogue" "title" "Dialogues" "description" "Dialogues and fiction from the recurring world of Syd and Oliver, where power, obligation, money, intimacy, and moral pressure are worked out in conversation.")
@@ -80,6 +75,12 @@
     {{ end }}
   {{ end }}
 
+  <header class="page-header page-header--section-centered page-shell page-shell--wide">
+    <h1 id="library-title" class="list-title">Library</h1>
+    {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    {{ if gt $totalPages 0 }}<p class="page-intro">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $libraryGroups }} active types.</p>{{ end }}
+  </header>
+
   {{ $yearOptions := sort (uniq $availableYears) }}
   {{ $matchedCollectionSlugs := uniq $availableCollectionSlugs }}
   {{ $collectionOptions := slice }}
@@ -92,8 +93,6 @@
       ) }}
     {{ end }}
   {{ end }}
-
-  {{ if gt $totalPages 0 }}<p class="page-intro page-shell page-shell--wide">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $libraryGroups }} active types.</p>{{ end }}
 
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"

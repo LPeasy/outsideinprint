@@ -34,9 +34,13 @@ test("masthead removes Welcome and promotes Archive as the long-form lane", () =
   assert.doesNotMatch(masthead, />Essays</);
   assert.doesNotMatch(masthead, />Dialogues</);
   assert.match(masthead, />Collections</);
-  assert.match(masthead, />Library</);
   assert.match(masthead, />Gallery</);
+  assert.match(masthead, />Library</);
   assert.match(masthead, />Feeling curious\?</);
+  assert.match(
+    masthead,
+    /aria-label="Primary"[\s\S]*?archive\/"[\s\S]*?>Archive<[\s\S]*?collections\/"[\s\S]*?>Collections<[\s\S]*?gallery\/"[\s\S]*?>Gallery<[\s\S]*?library\/"[\s\S]*?>Library<[\s\S]*?random\/"[\s\S]*?>Feeling curious\?</
+  );
   assert.match(masthead, /\$isGallery := eq \.Section "gallery"/);
   assert.match(masthead, /href="\{\{ "gallery\/" \| absURL \}\}"/);
   assert.doesNotMatch(masthead, /href="\{\{ "start-here\/" \| absURL \}\}"/);
