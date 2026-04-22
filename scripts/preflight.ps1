@@ -137,6 +137,31 @@ function Get-ResolvedSlug {
   return $fileSlug
 }
 
+function Get-LongFormKind {
+  param(
+    [string]$Section,
+    [hashtable]$FrontMatter
+  )
+
+  if ($Section -eq "working-papers") {
+    return "working-paper"
+  }
+
+  if ($Section -eq "syd-and-oliver") {
+    return "dialogue"
+  }
+
+  if ($FrontMatter.ContainsKey("library_type") -and (($FrontMatter["library_type"] | ForEach-Object { $_.ToString().Trim().ToLowerInvariant() }) -eq "dialogue")) {
+    return "dialogue"
+  }
+
+  if ($Section -eq "essays") {
+    return "essay"
+  }
+
+  return ""
+}
+
 function Is-TrueValue {
   param([string]$Value)
 
@@ -236,7 +261,16 @@ foreach ($file in $mdFiles) {
     continue
   }
 
-  foreach ($field in $RequiredFields) {
+  $section = Get-SectionFromFile -RootPath $ContentRoot -File $file
+  $longformKind = Get-LongFormKind -Section $section -FrontMatter $frontMatter
+  $requiredFields = if ($longformKind -eq "dialogue") {
+    @($RequiredFields | Where-Object { $_ -ne "section_label" })
+  }
+  else {
+    $RequiredFields
+  }
+
+  foreach ($field in $requiredFields) {
     if (-not $frontMatter.ContainsKey($field) -or [string]::IsNullOrWhiteSpace($frontMatter[$field])) {
       Write-Host "MISSING required field '$field': $($file.FullName)" -ForegroundColor Yellow
       $fail = $true

@@ -25,7 +25,13 @@
 
 {{- $regularPageCount := 0 -}}
 {{- if $page.IsSection -}}
-  {{- $regularPageCount = len ($page.RegularPagesRecursive | default (slice)) -}}
+  {{- if eq $page.Section "archive" -}}
+    {{- $regularPageCount = len (partial "archive/resolve-pages.html" (dict "site" site "mode" "archive")) -}}
+  {{- else if eq $page.Section "syd-and-oliver" -}}
+    {{- $regularPageCount = len (partial "archive/resolve-pages.html" (dict "site" site "mode" "dialogue")) -}}
+  {{- else -}}
+    {{- $regularPageCount = len ($page.RegularPagesRecursive | default (slice)) -}}
+  {{- end -}}
 {{- end -}}
 
 {{- if $explicitNoindex -}}

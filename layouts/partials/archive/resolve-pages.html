@@ -1,0 +1,22 @@
+{{- $site := .site | default site -}}
+{{- $mode := .mode | default "archive" -}}
+{{- $pages := slice -}}
+
+{{- range $site.RegularPages -}}
+  {{- $kind := partial "archive/longform-kind.html" . -}}
+  {{- $include := false -}}
+
+  {{- if eq $mode "archive" -}}
+    {{- $include = in (slice "essay" "dialogue") $kind -}}
+  {{- else if eq $mode "dialogue" -}}
+    {{- $include = eq $kind "dialogue" -}}
+  {{- else if eq $mode "essay" -}}
+    {{- $include = eq $kind "essay" -}}
+  {{- end -}}
+
+  {{- if $include -}}
+    {{- $pages = $pages | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return sort (sort $pages "Title" "asc") "Date" "desc" -}}

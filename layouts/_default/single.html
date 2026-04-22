@@ -45,8 +45,13 @@
     {{ end }}
   {{ end }}
   {{ $journeyLinks := slice }}
-  {{ with $sectionPage }}
-    {{ $journeyLinks = $journeyLinks | append (dict "href" .RelPermalink "label" (printf "All %s" .Title)) }}
+  {{ $longformKind := partial "archive/longform-kind.html" . }}
+  {{ if in (slice "essay" "dialogue") $longformKind }}
+    {{ $journeyLinks = $journeyLinks | append (dict "href" ("archive/" | absURL) "label" "All Archive") }}
+  {{ else }}
+    {{ with $sectionPage }}
+      {{ $journeyLinks = $journeyLinks | append (dict "href" .RelPermalink "label" (printf "All %s" .Title)) }}
+    {{ end }}
   {{ end }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("collections/" | absURL) "label" "Browse collections") }}
   {{ $journeyLinks = $journeyLinks | append (dict "href" ("library/" | absURL) "label" "Search the library") }}
@@ -56,7 +61,7 @@
 
       <div class="imprint-header" role="note" aria-label="Publication details">
         <div class="row">
-          <span><b>{{ with .Params.section_label }}{{ . }}{{ else }}Piece{{ end }}</b></span>
+          <span><b>{{ partial "archive/lane-label.html" . }}</b></span>
           <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
           <span>{{ with .Params.version }}Version <b>{{ . }}</b>{{ end }}</span>
           <span>{{ with .Params.edition }}Edition <b>{{ . }}</b>{{ end }}</span>

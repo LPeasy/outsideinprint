@@ -1,8 +1,10 @@
 ---
 title: 'Without A Word'
 date: 2026-02-22T23:16:21Z
+url: '/syd-and-oliver/without-a-word/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/without-a-word.pdf'

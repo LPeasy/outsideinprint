@@ -1,8 +1,10 @@
 ---
 title: 'The Sound Of Authority'
 date: 2026-02-16T00:38:23Z
+url: '/syd-and-oliver/the-sound-of-authorit/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-sound-of-authorit.pdf'

@@ -9,8 +9,8 @@ Key URLs:
 - Home: https://outsideinprint.org/
 - About: https://outsideinprint.org/about/
 - Author: https://outsideinprint.org/authors/robert-v-ussley/
-- Essays: https://outsideinprint.org/essays/
-- Dialogues: https://outsideinprint.org/syd-and-oliver/
+- Archive: https://outsideinprint.org/archive/
+- Syd and Oliver Dialogues: https://outsideinprint.org/syd-and-oliver/
 - Collections: https://outsideinprint.org/collections/
 - Library: https://outsideinprint.org/library/
 - RSS feed: https://outsideinprint.org/index.xml

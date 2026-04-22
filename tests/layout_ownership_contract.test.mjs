@@ -9,7 +9,9 @@ const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/d
 const authorList = fs.readFileSync(path.resolve("layouts/authors/list.html"), "utf8");
 const authorSection = fs.readFileSync(path.resolve("layouts/authors/section.html"), "utf8");
 const authorSingle = fs.readFileSync(path.resolve("layouts/authors/single.html"), "utf8");
-const essaysList = fs.readFileSync(path.resolve("layouts/essays/list.html"), "utf8");
+const archiveList = fs.readFileSync(path.resolve("layouts/archive/list.html"), "utf8");
+const essaysRedirect = fs.readFileSync(path.resolve("layouts/essays/list.html"), "utf8");
+const dialoguesList = fs.readFileSync(path.resolve("layouts/syd-and-oliver/list.html"), "utf8");
 const collectionList = fs.readFileSync(path.resolve("layouts/collections/list.html"), "utf8");
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
@@ -113,38 +115,24 @@ test("collections index uses a unified card directory and drops the retired spli
   }
 });
 
-test("essays front owns a dedicated route layout and drops the generic section-list path", () => {
+test("archive shell owns the long-form list routes while /essays/ becomes a redirect alias", () => {
   for (const snippet of [
-    'class="essays-front"',
-    'class="page-header page-shell page-shell--reading essays-front__masthead"',
-    'class="page-intro essays-front__stats"',
-    'class="essays-front__year-nav"',
-    'class="essays-front__year-jumps"',
-    'class="essays-front__year-link"',
-    'class="page-shell page-shell--reading essays-front__archive"',
-    'class="essays-front__month-title"',
-    'partial "discovery/page-list-item.html"',
-    'collectionPlacement" "kicker"'
+    'partial "archive/resolve-pages.html"',
+    '"mode" "archive"',
+    'partial "archive/render-list.html"',
+    '"idPrefix" "archive"'
   ]) {
-    assert.match(essaysList, new RegExp(escapeRegex(snippet)));
+    assert.match(archiveList, new RegExp(escapeRegex(snippet)));
   }
 
   for (const retiredSnippet of [
     'partial "journey_links.html"',
-    'Essay Desk',
-    'Late Edition',
     'Current Edition',
     'Rolling Archive',
-    'By Month',
     'site.Data.editorial_cartoons',
-    'class="page-intro essays-front__deck"',
-    'class="essays-front__lead"',
-    'class="essays-front__rail"',
-    'essays-front__rail-item--with-summary',
-    'class="page-shell page-shell--wide essays-front__cartoon"',
-    'class="essays-front__cartoon-caption"'
+    '"mode" "dialogue"'
   ]) {
-    assert.doesNotMatch(essaysList, new RegExp(escapeRegex(retiredSnippet)));
+    assert.doesNotMatch(archiveList, new RegExp(escapeRegex(retiredSnippet)));
   }
 
   for (const selector of [
@@ -164,21 +152,31 @@ test("essays front owns a dedicated route layout and drops the generic section-l
     assert.match(css, new RegExp(escapeRegex(selector)));
   }
 
-  for (const retiredSelector of [
-    ".essays-front__deck{",
-    ".essays-front__label{",
-    ".essays-front__section-title{",
-    ".essays-front__meta{",
-    ".essays-front__edition{",
-    ".essays-front__edition-grid{",
-    ".essays-front__lead{",
-    ".essays-front__rail{",
-    ".essays-front__rail-item{",
-    ".essays-front__rail-item--with-summary{",
-    ".essays-front__cartoon{",
-    ".essays-front__cartoon-caption{"
+  for (const snippet of [
+    'partial "archive/resolve-pages.html"',
+    '"mode" "dialogue"',
+    'partial "archive/render-list.html"',
+    '"idPrefix" "dialogues"'
   ]) {
-    assert.doesNotMatch(css, new RegExp(escapeRegex(retiredSelector)));
+    assert.match(dialoguesList, new RegExp(escapeRegex(snippet)));
+  }
+
+  for (const snippet of [
+    'Redirecting to Outside In Print Archive',
+    'noindex, follow',
+    '<link rel="canonical" href="{{ "archive/" | absURL }}" />',
+    '<meta http-equiv="refresh" content="0; url={{ "archive/" | relURL }}" />',
+    'window.location.replace("{{ "archive/" | relURL }}");'
+  ]) {
+    assert.match(essaysRedirect, new RegExp(escapeRegex(snippet)));
+  }
+
+  for (const retiredSnippet of [
+    'define "main"',
+    'class="essays-front"',
+    'partial "archive/render-list.html"'
+  ]) {
+    assert.doesNotMatch(essaysRedirect, new RegExp(escapeRegex(retiredSnippet)));
   }
 });
 
@@ -231,7 +229,7 @@ test("about and author pages own dedicated profile layouts and styling", () => {
   }
 });
 
-test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
+test("layout ownership matrix tracks archive-shell ownership and the essays redirect alias", () => {
   for (const snippet of [
     "`home-manifesto`",
     "`home-manifesto__inner`",
@@ -269,6 +267,8 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
     "`reading-path__actions`",
     "`reading-path__preview`",
     "`reading-path__archive-links`",
+    "| Archive shell | `/archive/`, `/syd-and-oliver/`",
+    "| Essays redirect alias | `/essays/`",
     "## Removed Layout Hooks"
   ]) {
     assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));
@@ -277,7 +277,8 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
   for (const stalePhrase of [
     "`start-here-page`",
     "`newsletter-signup--start-here`",
-    "| Section landing family | `/essays/`,",
+    "| Essays front | `/essays/`",
+    "| Section landing family | `/syd-and-oliver/`,",
     "Start Here | `/start-here/`",
     "Verify that most content-authored `start-here-*` classes remain unstyled",
     "Verify `content/start-here/index.md` against `assets/css/main.css`."

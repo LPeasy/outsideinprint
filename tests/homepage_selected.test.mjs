@@ -35,7 +35,7 @@ function normalizeDateString(value) {
 
 function selectHomepageEssays(pages, today = "2026-04-16") {
   const essays = pages
-    .filter((page) => page.section === "essays" && page.draft !== true)
+    .filter((page) => page.kind === "essay" && page.draft !== true)
     .sort((left, right) => right.date - left.date);
 
   const featuredCandidates = essays
@@ -113,12 +113,14 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
   const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 
-  assert.match(source, /where site\.RegularPages "Section" "essays"/);
+  assert.match(source, /partial "archive\/longform-kind\.html"/);
   assert.match(source, /Homepage selection is essays-only by design/);
   assert.match(source, /Params\.homepage_featured/);
   assert.match(source, /Params\.homepage_featured_until/);
   assert.match(source, /findRE "\\\\d\{4\}-\\\\d\{2\}-\\\\d\{2\}"/);
-  assert.match(source, /sort \(where site\.RegularPages "Section" "essays"\) "Date" "desc"/);
+  assert.match(source, /\{\{ range site\.RegularPages \}\}/);
+  assert.match(source, /\{\{ if eq \(partial "archive\/longform-kind\.html" \.\) "essay" \}\}/);
+  assert.match(source, /sort \(sort \$essays "Title" "asc"\) "Date" "desc"/);
   assert.match(source, /\$hero = index \(sort \$featuredCandidates "Date" "desc"\) 0/);
   assert.match(source, /else if gt \(len \$essays\) 0/);
   assert.match(source, /range \$candidate := \$essays/);
@@ -128,6 +130,7 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(source, /"keys" \$selectedKeys/);
   assert.match(source, /return \(dict/);
   assert.doesNotMatch(source, /Params\.featured/);
+  assert.doesNotMatch(source, /where site\.RegularPages "Section" "essays"/);
   assert.doesNotMatch(source, /Read Essay/);
   assert.doesNotMatch(source, /Download PDF/);
   assert.match(frontPageSource, /home_selected\.html/);
@@ -169,15 +172,15 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
 
 test("active featured essays lead while the right rail uses the newest published essays", () => {
   const pages = [
-    { relPermalink: "/essays/latest/", section: "essays", draft: false, date: new Date("2026-03-01") },
-    { relPermalink: "/essays/hero/", section: "essays", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
-    { relPermalink: "/essays/expired/", section: "essays", draft: false, date: new Date("2026-02-25"), homepage_featured: true, homepage_featured_until: "2026-04-01" },
-    { relPermalink: "/essays/core-a/", section: "essays", draft: false, date: new Date("2026-02-20") },
-    { relPermalink: "/essays/core-b/", section: "essays", draft: false, date: new Date("2026-02-10") },
-    { relPermalink: "/essays/core-c/", section: "essays", draft: false, date: new Date("2026-02-05") },
-    { relPermalink: "/essays/core-d/", section: "essays", draft: false, date: new Date("2026-02-01") },
-    { relPermalink: "/syd-and-oliver/not-eligible/", section: "syd-and-oliver", draft: false, date: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
-    { relPermalink: "/essays/draft/", section: "essays", draft: true, date: new Date("2026-04-02"), homepage_featured: true, homepage_featured_until: "2026-04-30" }
+    { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") },
+    { relPermalink: "/essays/hero/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/expired/", kind: "essay", draft: false, date: new Date("2026-02-25"), homepage_featured: true, homepage_featured_until: "2026-04-01" },
+    { relPermalink: "/essays/core-a/", kind: "essay", draft: false, date: new Date("2026-02-20") },
+    { relPermalink: "/essays/core-b/", kind: "essay", draft: false, date: new Date("2026-02-10") },
+    { relPermalink: "/essays/core-c/", kind: "essay", draft: false, date: new Date("2026-02-05") },
+    { relPermalink: "/essays/core-d/", kind: "essay", draft: false, date: new Date("2026-02-01") },
+    { relPermalink: "/syd-and-oliver/not-eligible/", kind: "dialogue", draft: false, date: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/draft/", kind: "essay", draft: true, date: new Date("2026-04-02"), homepage_featured: true, homepage_featured_until: "2026-04-30" }
   ];
 
   const result = selectHomepageEssays(pages);
@@ -193,9 +196,9 @@ test("active featured essays lead while the right rail uses the newest published
 
 test("duplicate active feature flags break ties by newest date first", () => {
   const pages = [
-    { relPermalink: "/essays/older/", section: "essays", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
-    { relPermalink: "/essays/newer/", section: "essays", draft: false, date: new Date("2026-02-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
-    { relPermalink: "/essays/latest/", section: "essays", draft: false, date: new Date("2026-03-01") }
+    { relPermalink: "/essays/older/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/newer/", kind: "essay", draft: false, date: new Date("2026-02-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") }
   ];
 
   const result = selectHomepageEssays(pages);
@@ -205,10 +208,10 @@ test("duplicate active feature flags break ties by newest date first", () => {
 
 test("recent fallback remains stable when no active feature exists", () => {
   const pages = [
-    { relPermalink: "/essays/a/", section: "essays", draft: false, date: new Date("2026-03-03"), homepage_featured: true, homepage_featured_until: "2026-03-31" },
-    { relPermalink: "/essays/b/", section: "essays", draft: false, date: new Date("2026-03-02") },
-    { relPermalink: "/essays/c/", section: "essays", draft: false, date: new Date("2026-03-01") },
-    { relPermalink: "/essays/d/", section: "essays", draft: false, date: new Date("2026-02-28") }
+    { relPermalink: "/essays/a/", kind: "essay", draft: false, date: new Date("2026-03-03"), homepage_featured: true, homepage_featured_until: "2026-03-31" },
+    { relPermalink: "/essays/b/", kind: "essay", draft: false, date: new Date("2026-03-02") },
+    { relPermalink: "/essays/c/", kind: "essay", draft: false, date: new Date("2026-03-01") },
+    { relPermalink: "/essays/d/", kind: "essay", draft: false, date: new Date("2026-02-28") }
   ];
 
   const result = selectHomepageEssays(pages);

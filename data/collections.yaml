@@ -30,7 +30,7 @@ collections:
     public: true
     force_public: false
     min_items: 2
-    explicit_only: false
+    explicit_only: true
     featured: true
     weight: 20
     start_here: without-a-word
@@ -47,8 +47,7 @@ collections:
       series: []
       topics: []
       tags: []
-      sections:
-        - syd-and-oliver
+      sections: []
 
   - slug: modern-bios
     title: Modern Bios

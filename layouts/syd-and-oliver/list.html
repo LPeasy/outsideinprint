@@ -1,0 +1,8 @@
+{{ define "main" }}
+  {{ $pages := partial "archive/resolve-pages.html" (dict "site" site "mode" "dialogue") }}
+  {{ partial "archive/render-list.html" (dict
+    "page" .
+    "pages" $pages
+    "idPrefix" "dialogues"
+  ) }}
+{{ end }}

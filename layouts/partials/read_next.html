@@ -133,14 +133,7 @@
         <div class="read-next__items">
           {{ range first $limit $selected }}
             {{ $articleVariant := partial "article/variant-key.html" . }}
-            {{ $sectionLabel := .Params.section_label }}
-            {{ if not $sectionLabel }}
-              {{ if eq .Section "working-papers" }}
-                {{ $sectionLabel = "Working Paper" }}
-              {{ else }}
-                {{ $sectionLabel = humanize .Section }}
-              {{ end }}
-            {{ end }}
+            {{ $sectionLabel := partial "archive/lane-label.html" . }}
             {{ $metaParts := slice $sectionLabel }}
             {{ if eq $articleVariant "modernbio" }}
               {{ $metaParts = $metaParts | append "Modern Bios" }}
@@ -156,7 +149,7 @@
             {{ end }}
             <article class="read-next__item{{ if $articleVariant }} read-next__item--variant-{{ $articleVariant }}{{ end }}">
               {{ $slug := .Params.slug | default .File.BaseFileName }}
-              {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+              {{ $sectionLabel := partial "archive/lane-label.html" . }}
               {{ if eq $articleVariant "modernbio" }}<p class="read-next__marker">Modern Bios</p>{{ end }}
               <h3 class="read-next__item-title"><a href="{{ .RelPermalink }}"
                 data-analytics-event="internal_promo_click"

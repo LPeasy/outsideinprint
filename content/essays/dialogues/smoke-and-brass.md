@@ -1,8 +1,10 @@
 ---
 title: 'Smoke and Brass'
 date: 2026-02-12T02:42:07Z
+url: '/syd-and-oliver/smoke-and-brass/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/smoke-and-brass.pdf'

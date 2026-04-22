@@ -97,6 +97,51 @@ function Get-SectionFromFile {
   return ""
 }
 
+function Get-PublicArticleRelativePath {
+  param(
+    [hashtable]$FrontMatter,
+    [string]$FallbackSection,
+    [string]$Slug
+  )
+
+  if ($FrontMatter.ContainsKey("url") -and -not [string]::IsNullOrWhiteSpace($FrontMatter["url"])) {
+    $route = $FrontMatter["url"].Trim()
+    try {
+      if ([Uri]::IsWellFormedUriString($route, [System.UriKind]::Absolute)) {
+        $route = ([Uri]$route).AbsolutePath
+      }
+    }
+    catch {
+    }
+
+    $route = ($route -replace '\\', '/').Trim()
+    if (-not [string]::IsNullOrWhiteSpace($route)) {
+      $route = $route.Trim('/')
+      if (-not [string]::IsNullOrWhiteSpace($route)) {
+        return "$route/"
+      }
+    }
+  }
+
+  return "$FallbackSection/$Slug/"
+}
+
+function Get-PublicSectionFromRelativePath {
+  param(
+    [string]$RelativePath,
+    [string]$FallbackSection
+  )
+
+  if (-not [string]::IsNullOrWhiteSpace($RelativePath)) {
+    $segments = ($RelativePath.Trim('/') -split '/')
+    if ($segments.Length -gt 0 -and -not [string]::IsNullOrWhiteSpace($segments[0])) {
+      return $segments[0]
+    }
+  }
+
+  return $FallbackSection
+}
+
 function Get-ResolvedSlug {
   param([System.IO.FileInfo]$File,[string]$FrontMatterSlug)
 
@@ -160,6 +205,7 @@ function Resolve-HtmlArtifactPath {
   param(
     [string]$Slug,
     [string]$Section,
+    [string]$RelativePath,
     [object]$BuildMeta
   )
 
@@ -176,6 +222,18 @@ function Resolve-HtmlArtifactPath {
     }
 
     return (Join-Path $HtmlSiteDir $normalized)
+  }
+
+  $normalizedRelativePath = ($RelativePath -replace '/', [System.IO.Path]::DirectorySeparatorChar).Trim([System.IO.Path]::DirectorySeparatorChar)
+  if (-not [string]::IsNullOrWhiteSpace($normalizedRelativePath)) {
+    foreach ($candidate in @(
+        (Join-Path $HtmlSiteDir (Join-Path $normalizedRelativePath "index.html")),
+        (Join-Path $HtmlSiteDir "$normalizedRelativePath.html")
+      )) {
+      if (Test-Path -Path $candidate -PathType Leaf) {
+        return $candidate
+      }
+    }
   }
 
   foreach ($candidate in @(
@@ -247,6 +305,8 @@ foreach ($file in $mdFiles) {
       PdfPath = Join-Path $PdfRoot "$slug.pdf"
       BuildMetaPath = $buildMetaPath
       BuildMeta = $buildMeta
+      PublicRelativePath = (Get-PublicArticleRelativePath -FrontMatter $frontMatter -FallbackSection (Get-SectionFromFile -RootPath $ContentRoot -File $file) -Slug $slug)
+      PublicSection = (Get-PublicSectionFromRelativePath -RelativePath (Get-PublicArticleRelativePath -FrontMatter $frontMatter -FallbackSection (Get-SectionFromFile -RootPath $ContentRoot -File $file) -Slug $slug) -FallbackSection (Get-SectionFromFile -RootPath $ContentRoot -File $file))
     })
 }
 
@@ -307,9 +367,9 @@ foreach ($page in $pages) {
       continue
     }
 
-    $htmlArtifactPath = Resolve-HtmlArtifactPath -Slug $page.Slug -Section $page.Section -BuildMeta $page.BuildMeta
+    $htmlArtifactPath = Resolve-HtmlArtifactPath -Slug $page.Slug -Section $page.PublicSection -RelativePath $page.PublicRelativePath -BuildMeta $page.BuildMeta
     if ([string]::IsNullOrWhiteSpace($htmlArtifactPath) -or -not (Test-Path -Path $htmlArtifactPath -PathType Leaf)) {
-      Register-Failure -Category "html_source_missing" -Slug $page.Slug -Engine $page.Engine -Message "Could not locate rendered Hugo HTML for '$($page.Section)/$($page.Slug)' under '$HtmlSiteDir'. Re-run the browser-print build and inspect '$($page.BuildMetaPath)'."
+      Register-Failure -Category "html_source_missing" -Slug $page.Slug -Engine $page.Engine -Message "Could not locate rendered Hugo HTML for '$($page.PublicRelativePath)' under '$HtmlSiteDir'. Re-run the browser-print build and inspect '$($page.BuildMetaPath)'."
     }
 
     if ($null -ne $page.BuildMeta -and $page.BuildMeta.PSObject.Properties.Name -contains "render_status" -and ([string]$page.BuildMeta.render_status) -ne "primary") {

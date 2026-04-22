@@ -1,8 +1,10 @@
 ---
 title: 'The Weight of Promises'
 date: 2026-02-13T17:00:54Z
+url: '/syd-and-oliver/the-weight-of-promises/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-weight-of-promises.pdf'

@@ -1,8 +1,10 @@
 ---
 title: 'The Shape of Sacrifice'
 date: 2026-02-16T17:00:09Z
+url: '/syd-and-oliver/the-shape-of-sacrifice/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-shape-of-sacrifice.pdf'

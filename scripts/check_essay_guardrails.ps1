@@ -87,6 +87,63 @@ function Test-FrontMatterHasSocialImage {
   return [regex]::IsMatch($frontMatter, '(?mi)^(images|image|featured_image)\s*:')
 }
 
+function Test-IsDialogueEssayPath {
+  param([string]$Path)
+
+  if (-not (Test-Path $Path -PathType Leaf)) {
+    return $false
+  }
+
+  $content = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
+  $matches = [regex]::Matches($content, '(?m)^---\s*$')
+  if ($matches.Count -lt 2) {
+    return $false
+  }
+
+  $frontStart = $matches[0].Index + $matches[0].Length
+  $frontLength = $matches[1].Index - $frontStart
+  if ($frontLength -le 0) {
+    return $false
+  }
+
+  $frontMatter = $content.Substring($frontStart, $frontLength)
+  return [regex]::IsMatch($frontMatter, '(?mi)^library_type:\s*[''"]?dialogue(?:[''"]|\s|$)')
+}
+
+function Expand-EssayPaths {
+  param(
+    [string[]]$EssayPaths
+  )
+
+  $expanded = New-Object System.Collections.Generic.List[string]
+  foreach ($essayPath in $EssayPaths) {
+    if (Test-Path $essayPath -PathType Container) {
+      Get-ChildItem -Path $essayPath -File -Filter '*.md' -Recurse |
+        Where-Object { $_.Name -ne '_index.md' } |
+        ForEach-Object {
+          if (-not (Test-IsDialogueEssayPath -Path $_.FullName)) {
+            $expanded.Add($_.FullName)
+          }
+        }
+      continue
+    }
+
+    if (-not (Test-IsDialogueEssayPath -Path $essayPath)) {
+      $expanded.Add($essayPath)
+    }
+  }
+
+  $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  $results = New-Object System.Collections.Generic.List[string]
+  foreach ($candidate in $expanded) {
+    if ($seen.Add($candidate)) {
+      $results.Add($candidate)
+    }
+  }
+
+  return $results.ToArray()
+}
+
 function Get-WorkingTreeEssayPaths {
   param([string]$RepoRoot)
 
@@ -173,17 +230,7 @@ function Get-AuditRowsForGitRef {
   $restoredPaths = New-Object System.Collections.Generic.List[string]
 
   try {
-    $expandedEssayPaths = New-Object System.Collections.Generic.List[string]
-    foreach ($essayPath in $EssayPaths) {
-      if (Test-Path $essayPath -PathType Container) {
-        Get-ChildItem -Path $essayPath -File -Filter '*.md' -Recurse |
-          Where-Object { $_.Name -ne '_index.md' } |
-          ForEach-Object { $expandedEssayPaths.Add($_.FullName) }
-        continue
-      }
-
-      $expandedEssayPaths.Add($essayPath)
-    }
+    $expandedEssayPaths = @(Expand-EssayPaths -EssayPaths $EssayPaths)
 
     foreach ($essayPath in $expandedEssayPaths) {
       $relativePath = Get-RepoRelativePath -RepoRoot $RepoRoot -PathValue $essayPath
@@ -218,6 +265,8 @@ $targetPaths = Resolve-TargetEssayPaths `
   -FromRef $BaseRef `
   -ToRef $HeadRef `
   -ScanAll:$AllEssays
+
+$targetPaths = @(Expand-EssayPaths -EssayPaths $targetPaths)
 
 if ($targetPaths.Count -eq 0) {
   Write-Host 'Essay guardrails: no target essays to check.' -ForegroundColor Yellow

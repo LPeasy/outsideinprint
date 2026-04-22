@@ -1,5 +1,11 @@
-{{/* Homepage selection is essays-only by design: newest work leads by default, with one explicit expiring feature override. */}}
-{{ $essays := sort (where site.RegularPages "Section" "essays") "Date" "desc" }}
+{{/* Homepage selection stays essay-only by design even after dialogues merge into the archive model. */}}
+{{ $essays := slice }}
+{{ range site.RegularPages }}
+  {{ if eq (partial "archive/longform-kind.html" .) "essay" }}
+    {{ $essays = $essays | append . }}
+  {{ end }}
+{{ end }}
+{{ $essays = sort (sort $essays "Title" "asc") "Date" "desc" }}
 {{ $today := now.Format "2006-01-02" }}
 {{ $featuredCandidates := slice }}
 

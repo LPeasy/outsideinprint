@@ -1,0 +1,20 @@
+{{- $kind := partial "archive/longform-kind.html" . -}}
+{{- $label := "" -}}
+
+{{- if eq $kind "working-paper" -}}
+  {{- $label = "Working Paper" -}}
+{{- else if or (eq $kind "essay") (eq $kind "dialogue") -}}
+  {{- $label = "Archive" -}}
+{{- else -}}
+  {{- with .Params.section_label -}}
+    {{- $label = printf "%v" . -}}
+  {{- else -}}
+    {{- with .Section -}}
+      {{- $label = humanize . -}}
+    {{- else -}}
+      {{- $label = $.Title -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ return $label }}

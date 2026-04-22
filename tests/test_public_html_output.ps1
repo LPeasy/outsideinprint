@@ -400,7 +400,8 @@ $manifestoLinkPattern = ('(?s)home-manifesto__line--support.*?home-manifesto__su
 
 $requiredSemanticPages = [ordered]@{
   'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
-  'public/essays/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/archive/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/syd-and-oliver/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/library/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/gallery/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
@@ -408,7 +409,6 @@ $requiredSemanticPages = [ordered]@{
 }
 
 $optionalDefaultListPages = @(
-  'public/syd-and-oliver/index.html',
   'public/working-papers/index.html'
 )
 
@@ -476,9 +476,25 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
   }
+  'public/archive/index.html' = @{
+    Title = 'Archive'
+    Description = 'The long-form archive of essays and dialogues from Outside In Print.'
+    Canonical = 'https://outsideinprint.org/archive/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/syd-and-oliver/index.html' = @{
+    Title = 'Syd and Oliver Dialogues'
+    Description = 'Dialogue pieces from the recurring world of Syd and Oliver, where power, obligation, money, intimacy, and moral pressure are worked out in conversation.'
+    Canonical = 'https://outsideinprint.org/syd-and-oliver/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
   'public/library/index.html' = @{
     Title = 'Library'
-    Description = 'The full catalog of published work from Outside In Print, searchable by title, section, collection, and version.'
+    Description = 'The full catalog of published work from Outside In Print, searchable by title, type, collection, and version.'
     Canonical = 'https://outsideinprint.org/library/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -558,6 +574,20 @@ $requiredStructuredDataPages = [ordered]@{
     RequireSearchAction = $true
     RequirePublisherImage = $true
   }
+  'public/archive/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
+  'public/syd-and-oliver/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
   'public/library/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork')
@@ -625,6 +655,18 @@ $requiredIndexationPages = [ordered]@{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
+  'public/archive/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/essays/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+  'public/syd-and-oliver/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
   'public/authors/robert-v-ussley/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
@@ -662,6 +704,10 @@ $requiredFeedPages = [ordered]@{
   'public/about/index.html' = @{
     SiteFeed = 'https://outsideinprint.org/index.xml'
   }
+  'public/archive/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+    SectionFeed = 'https://outsideinprint.org/archive/index.xml'
+  }
   'public/essays/index.html' = @{
     SiteFeed = 'https://outsideinprint.org/index.xml'
     SectionFeed = 'https://outsideinprint.org/essays/index.xml'
@@ -676,7 +722,7 @@ $requiredSitemapInclusions = @(
   'https://outsideinprint.org/',
   'https://outsideinprint.org/about/',
   'https://outsideinprint.org/authors/robert-v-ussley/',
-  'https://outsideinprint.org/essays/',
+  'https://outsideinprint.org/archive/',
   'https://outsideinprint.org/essays/the-risk-management-buffet/',
   'https://outsideinprint.org/syd-and-oliver/',
   'https://outsideinprint.org/collections/',
@@ -688,6 +734,7 @@ $requiredSitemapExclusions = @(
   'https://outsideinprint.org/authors/',
   'https://outsideinprint.org/random/',
   'https://outsideinprint.org/start-here/',
+  'https://outsideinprint.org/essays/',
   'https://outsideinprint.org/working-papers/',
   'https://outsideinprint.org/literature/'
 )
@@ -703,7 +750,7 @@ $requiredLlmsOutputs = [ordered]@{
     'Canonical policy:',
     'https://outsideinprint.org/sitemap.xml',
     'https://outsideinprint.org/index.xml',
-    'https://outsideinprint.org/essays/',
+    'https://outsideinprint.org/archive/',
     'https://outsideinprint.org/library/',
     'Legacy GitHub Pages URLs are not canonical.'
   )
@@ -733,7 +780,9 @@ $requiredUxPages = @(
   'public/start-here/index.html',
   'public/about/index.html',
   'public/authors/robert-v-ussley/index.html',
+  'public/archive/index.html',
   'public/essays/index.html',
+  'public/syd-and-oliver/index.html',
   'public/library/index.html',
   'public/gallery/index.html',
   'public/collections/index.html',
@@ -1302,8 +1351,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?(?:Welcome|Dialogues|Feeling curious\?).*?</section>'
-    Message = 'expected the homepage browse band to omit the retired Welcome, Dialogues, and Feeling curious? routes'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?home-browse__item-title>(?:Welcome|Dialogues|Feeling curious\?)<.*?</section>'
+    Message = 'expected the homepage browse band to omit retired Welcome, Dialogues, and Feeling curious? browse items'
     ShouldNotMatch = $true
   },
   @{
@@ -1386,8 +1435,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*Dialogues\s*<'
-    Message = 'expected the homepage masthead to expose the Dialogues label'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<'
+    Message = 'expected the homepage masthead to expose the Archive label'
   },
   @{
     Path = 'public/index.html'
@@ -1427,64 +1476,85 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
-    Path = 'public/essays/index.html'
+    Path = 'public/archive/index.html'
     Pattern = 'journey-links'
-    Message = 'expected the essays front not to retain the route-level utility pill row'
+    Message = 'expected the archive front not to retain the route-level utility pill row'
     ShouldNotMatch = $true
   },
   @{
-    Path = 'public/essays/index.html'
+    Path = 'public/archive/index.html'
     Pattern = '\d+\s+published pieces.*?Latest:\s*[A-Z][a-z]{2}\s+\d{1,2},\s+\d{4}'
-    Message = 'expected the essays landing page to collapse to a compact archive stats line'
+    Message = 'expected the archive landing page to collapse to a compact archive stats line'
   },
   @{
-    Path = 'public/essays/index.html'
+    Path = 'public/archive/index.html'
     Pattern = '(?s)<main\b[^>]*>.*?Essays on economics, risk, culture, technology, and public life from Outside In Print\.'
-    Message = 'expected the essays landing page not to render the route-level visible deck copy'
+    Message = 'expected the archive landing page not to render the route-level visible deck copy'
     ShouldNotMatch = $true
   },
   @{
-    Path = 'public/essays/index.html'
+    Path = 'public/archive/index.html'
     Pattern = 'Current Edition|Late Edition|Rolling Archive|By Month|essays-front__lead|essays-front__rail'
-    Message = 'expected the essays landing page not to retain the retired front-page-style edition structure'
+    Message = 'expected the archive landing page not to retain the retired front-page-style edition structure'
     ShouldNotMatch = $true
   },
   @{
-    Path = 'public/essays/index.html'
+    Path = 'public/archive/index.html'
     Pattern = 'essays-front__year-nav'
-    Message = 'expected the essays landing page to render the inline year-jump archive navigation'
+    Message = 'expected the archive landing page to render the inline year-jump archive navigation'
   },
   @{
-    Path = 'public/essays/index.html'
+    Path = 'public/archive/index.html'
     Pattern = $currentCartoonImagePattern
-    Message = 'expected the essays landing page not to reuse the homepage editorial cartoon block'
+    Message = 'expected the archive landing page not to reuse the homepage editorial cartoon block'
     ShouldNotMatch = $true
   },
   @{
-    Path = 'public/essays/index.html'
+    Path = 'public/archive/index.html'
     Pattern = 'essays-front__cartoon|View gallery'
-    Message = 'expected the essays landing page not to render the retired essays-route cartoon module'
+    Message = 'expected the archive landing page not to render the retired essays-route cartoon module'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)href=(?:"?#archive-month-2026-04"?).*?>2026<.*?href=(?:"?#archive-month-2025-12"?).*?>2025<'
+    Message = 'expected the archive landing page to expose inline year jumps keyed to the first month of each year'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)April 2026.*?March 2026.*?February 2026.*?January 2026'
+    Message = 'expected the archive to group entries by descending month-year bands'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)/essays/hindsight-2026-d4vd-alleged-romantic-homicide/.*?/essays/the-world-is-back-at-the-poker-table/.*?/essays/1929-2029-americas-century-of-humiliation/'
+    Message = 'expected the archive landing page to keep the newest stories in descending chronological order'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '/syd-and-oliver/without-a-word/'
+    Message = 'expected the merged archive to include representative dialogue pieces alongside essays'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '>Read PDF<'
+    Message = 'expected the archive front to avoid PDF affordances'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)href=(?:"?#essays-month-2026-04"?).*?>2026<.*?href=(?:"?#essays-month-2025-12"?).*?>2025<'
-    Message = 'expected the essays landing page to expose inline year jumps keyed to the first month of each year'
+    Pattern = '(?s)<meta\s+name=(?:"robots"|robots)\s+content=(?:"noindex, follow"|noindex,\s*follow).*?<link\s+rel=(?:"canonical"|canonical)\s+href=(?:"https://outsideinprint\.org/archive/"|https://outsideinprint\.org/archive/).*?<meta\s+http-equiv=(?:"refresh"|refresh)\s+content=(?:"0; url=/archive/"|0;\s*url=/archive/).*?window\.location\.replace\("/archive/"\)'
+    Message = 'expected /essays/ to be a legacy redirect document targeting /archive/'
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)April 2026.*?March 2026.*?February 2026.*?January 2026'
-    Message = 'expected the essays archive to group entries by descending month-year bands'
+    Pattern = '>Archive<'
+    Message = 'expected /essays/ to expose a visible Archive fallback link'
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)/essays/hindsight-2026-d4vd-alleged-romantic-homicide/.*?/essays/the-world-is-back-at-the-poker-table/.*?/essays/1929-2029-americas-century-of-humiliation/'
-    Message = 'expected the essays landing page to keep the newest stories in descending chronological order'
-  },
-  @{
-    Path = 'public/essays/index.html'
-    Pattern = '>Read PDF<'
-    Message = 'expected the essays front to avoid PDF affordances'
+    Pattern = 'essays-front__year-nav|Current Edition|Syd and Oliver Dialogues'
+    Message = 'expected /essays/ not to render the live archive shell'
     ShouldNotMatch = $true
   },
   @{
@@ -1499,6 +1569,27 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
+    Pattern = 'Search titles, types, collections, and versions'
+    Message = 'expected the library page search placeholder to reflect type-based grouping'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '(?s)<label[^>]*for=(?:"library-type"|library-type)[^>]*>\s*Type\s*</label>.*?<option(?:\s+value(?:=(?:""|''''|[^\s>]+))?)?>All types</option>'
+    Message = 'expected the library page to expose the renamed Type filter control'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '(?s)id=(?:"library-group-dialogue"|library-group-dialogue).*?/syd-and-oliver/without-a-word/'
+    Message = 'expected the library page to group representative dialogue pieces under Dialogues'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'data-section='
+    Message = 'expected the library page to stop rendering section-keyed filter attributes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
     Pattern = '\|\s*\d+\s+min read'
     Message = 'expected the library page to render numeric reading-time metadata in list rows'
   },
@@ -1510,13 +1601,29 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/syd-and-oliver/index.html'
-    Pattern = '(?s)<h1[^>]*>\s*Dialogues\s*</h1>'
-    Message = 'expected the /syd-and-oliver/ route to render the renamed Dialogues section title'
+    Pattern = '(?s)<h1[^>]*>\s*Syd and Oliver Dialogues\s*</h1>'
+    Message = 'expected the /syd-and-oliver/ route to render the filtered dialogue archive title'
   },
   @{
     Path = 'public/syd-and-oliver/index.html'
-    Pattern = 'Current Edition|Rolling Archive|essays-front__lead|essays-front__year-nav'
-    Message = 'expected /syd-and-oliver/ to remain on the shared generic list layout'
+    Pattern = 'Current Edition|essays-front__lead|essays-front__rail|essays-front__cartoon'
+    Message = 'expected /syd-and-oliver/ to avoid the retired front-page-style edition structure'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = 'essays-front__year-nav'
+    Message = 'expected /syd-and-oliver/ to reuse the filtered archive shell with year-jump navigation'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = '/syd-and-oliver/without-a-word/'
+    Message = 'expected /syd-and-oliver/ to list representative dialogue pieces'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = '/essays/the-risk-management-buffet/'
+    Message = 'expected /syd-and-oliver/ not to mix essay-only pieces into the filtered dialogue archive'
     ShouldNotMatch = $true
   },
   @{
@@ -1717,13 +1824,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected article chrome to expose section, collections, and library next steps near the top of the page'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Message = 'expected article chrome to expose archive, collections, and library next steps near the top of the page'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/syd-and-oliver/[^>]*>\s*Dialogues\s*<'
-    Message = 'expected article pages to keep the Dialogues masthead link visible'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<'
+    Message = 'expected article pages to expose the Archive masthead link'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
@@ -1863,25 +1970,25 @@ foreach ($check in $requiredUxChecks) {
   }
 }
 
-if ($targetPageHtml.ContainsKey('public/essays/index.html')) {
-  $essaysIndexHtml = [string]$targetPageHtml['public/essays/index.html']
-  $archiveDeskTagCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bitem-kicker--collection\b[^"]*"|''[^'']*\bitem-kicker--collection\b[^'']*''|[^\s>]*\bitem-kicker--collection\b[^\s>]*)', 'IgnoreCase').Count
+if ($targetPageHtml.ContainsKey('public/archive/index.html')) {
+  $archiveIndexHtml = [string]$targetPageHtml['public/archive/index.html']
+  $archiveDeskTagCount = [regex]::Matches($archiveIndexHtml, 'class=(?:"[^"]*\bitem-kicker--collection\b[^"]*"|''[^'']*\bitem-kicker--collection\b[^'']*''|[^\s>]*\bitem-kicker--collection\b[^\s>]*)', 'IgnoreCase').Count
   if ($archiveDeskTagCount -eq 0) {
-    $uxIssues.Add('public/essays/index.html => expected archive collection labels to render in the muted desk-tag kicker position')
+    $uxIssues.Add('public/archive/index.html => expected archive collection labels to render in the muted desk-tag kicker position')
   }
 
-  $yearJumpCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bessays-front__year-link\b[^"]*"|''[^'']*\bessays-front__year-link\b[^'']*''|[^\s>]*\bessays-front__year-link\b[^\s>]*)', 'IgnoreCase').Count
+  $yearJumpCount = [regex]::Matches($archiveIndexHtml, 'class=(?:"[^"]*\bessays-front__year-link\b[^"]*"|''[^'']*\bessays-front__year-link\b[^'']*''|[^\s>]*\bessays-front__year-link\b[^\s>]*)', 'IgnoreCase').Count
   if ($yearJumpCount -lt 2) {
-    $uxIssues.Add("public/essays/index.html => expected at least 2 year-jump links, found $yearJumpCount")
+    $uxIssues.Add("public/archive/index.html => expected at least 2 year-jump links, found $yearJumpCount")
   }
 
-  if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $essaysIndexHtml -match [regex]::Escape($currentCartoonCaption)) {
-    $uxIssues.Add('public/essays/index.html => expected the essays archive not to render the homepage cartoon caption text')
+  if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $archiveIndexHtml -match [regex]::Escape($currentCartoonCaption)) {
+    $uxIssues.Add('public/archive/index.html => expected the archive shell not to render the homepage cartoon caption text')
   }
 }
 
 $modernBioSharedRowPages = @(
-  'public/essays/index.html',
+  'public/archive/index.html',
   'public/library/index.html',
   'public/collections/modern-bios/index.html'
 )

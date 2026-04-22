@@ -1,8 +1,10 @@
 ---
 title: 'History Pushes Back'
 date: 2026-02-12T17:00:11Z
+url: '/syd-and-oliver/history-pushes-back/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/history-pushes-back.pdf'

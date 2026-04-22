@@ -252,7 +252,6 @@ function Parse-Page {
 
 function Test-FallbackMatch {
   param($Page,$Collection)
-  if ($Collection.Slug -eq 'syd-and-oliver-dialogues') { return $Page.Section -eq 'syd-and-oliver' }
   if ($Collection.ExplicitOnly) { return $false }
   if ($Page.Series -and ($Collection.Fallback.Series -contains $Page.Series)) { return $true }
   if (@($Page.Topics | Where-Object { $Collection.Fallback.Topics -contains $_ }).Count -gt 0) { return $true }
