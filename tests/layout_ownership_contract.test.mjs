@@ -9,6 +9,7 @@ const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/d
 const authorList = fs.readFileSync(path.resolve("layouts/authors/list.html"), "utf8");
 const authorSection = fs.readFileSync(path.resolve("layouts/authors/section.html"), "utf8");
 const authorSingle = fs.readFileSync(path.resolve("layouts/authors/single.html"), "utf8");
+const collectionList = fs.readFileSync(path.resolve("layouts/collections/list.html"), "utf8");
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
@@ -98,6 +99,25 @@ test("collection detail and membership hooks have explicit inner-structure styli
   }
 });
 
+test("collections index uses a unified card directory and drops the retired split sections", () => {
+  assert.match(collectionList, /class="page-shell page-shell--grid collections-directory"/);
+  assert.match(collectionList, /class="collections-directory__group"/);
+  assert.match(collectionList, /class="collections-directory__group-title"/);
+  assert.match(collectionList, /class="grid collection-grid collections-directory__grid"/);
+  assert.doesNotMatch(collectionList, /Featured Collections/);
+  assert.doesNotMatch(collectionList, /Collections Index/);
+  assert.doesNotMatch(collectionList, /"variant" "item"/);
+
+  for (const selector of [
+    ".collections-directory{",
+    ".collections-directory__group{",
+    ".collections-directory__group-title{",
+    ".collections-directory__grid{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+});
+
 test("article single template removes dead generic layout hooks and uses page-flow ownership", () => {
   assert.match(articleSingle, /<article class="piece"/);
   assert.match(articleSingle, /append "piece--collection-accent"/);
@@ -161,6 +181,10 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
     "`collection-room__section--progress`",
     "`collection-room__section--items`",
     "`collection-room__section--related`",
+    "`collections-directory`",
+    "`collections-directory__group`",
+    "`collections-directory__group-title`",
+    "`collections-directory__grid`",
     "`collection-item-note`",
     "`piece--collection-accent`",
     "`piece-collection-context`",

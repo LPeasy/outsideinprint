@@ -760,12 +760,15 @@ $collectionRoomExpectations = [ordered]@{
   'public/collections/reported-case-studies/index.html' = 'reported-case-studies-evidence-room'
 }
 
-$featuredCollectionCardThemes = @(
+$collectionDirectoryThemes = @(
   'ledger-editorial-desk'
   'syd-and-oliver-smoky-lounge'
+  'modern-bios-records-archive'
   'risk-systems-notebook'
   'floods-survey-table'
   'ai-screen-glow-archive'
+  'moral-chapel-library'
+  'reported-case-studies-evidence-room'
 )
 
 $requiredLegacyCleanupPages = @(
@@ -1534,8 +1537,15 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
+    Pattern = 'Featured Collections'
+    Message = 'expected the unified collections directory to remove the separate featured collections section'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
     Pattern = 'Collections Index'
-    Message = 'expected the collections index to replace the retired flat all-collections heading'
+    Message = 'expected the unified collections directory to remove the retired collections index heading'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/index.html'
@@ -1552,22 +1562,22 @@ $requiredUxChecks = @(
   @{
     Path = 'public/collections/index.html'
     Pattern = '(?s)Series.*?The Ledger.*?Syd and Oliver Dialogues.*?Modern Bios.*?Reported Case Studies'
-    Message = 'expected the collections index to group series collections together'
+    Message = 'expected the unified collections directory to group series collections together'
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Topics.*?Risk.*?Risk, Uncertainty, and Decision-Making.*?Floods.*?Floods, Water, and the Built Environment.*?AI.*?Technology, AI, and the Machine Future.*?Moral / Religious.*?Moral, Religious, and Philosophical Essays'
-    Message = 'expected the collections index to group topical collections under the new topic subheads'
+    Pattern = '(?s)Topics.*?Risk, Uncertainty, and Decision-Making.*?Floods, Water, and the Built Environment.*?Technology, AI, and the Machine Future.*?Moral, Religious, and Philosophical Essays'
+    Message = 'expected the unified collections directory to group topic collections together without subgroup labels'
   },
   @{
     Path = 'public/collections/index.html'
     Pattern = 'collection-card--room-echo'
-    Message = 'expected featured collection grid cards to render the shared room-echo class'
+    Message = 'expected the unified collections directory to render room-echo cards'
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Collections Index.*?collection-card--room-echo'
-    Message = 'expected collections index rows to remain neutral and omit room-echo classes'
+    Pattern = 'Moral / Religious'
+    Message = 'expected the unified collections directory to drop the old topic subgroup labels'
     ShouldNotMatch = $true
   },
   @{
@@ -1736,12 +1746,12 @@ foreach ($entry in $collectionRoomExpectations.GetEnumerator()) {
   )
 }
 
-foreach ($theme in $featuredCollectionCardThemes) {
+foreach ($theme in $collectionDirectoryThemes) {
   $requiredUxChecks += @(
     @{
       Path = 'public/collections/index.html'
       Pattern = ('collection-card--' + [regex]::Escape($theme))
-      Message = "expected featured collection grid cards to render the room-echo theme class '$theme'"
+      Message = "expected the unified collections directory to render the room-echo theme class '$theme'"
     }
   )
 }
