@@ -5,6 +5,7 @@
 {{- $showCollections := .showCollections | default false -}}
 {{- $showSummary := ne .showSummary false -}}
 {{- $showSectionLabel := ne .showSectionLabel false -}}
+{{- $collectionPlacement := .collectionPlacement | default "below-meta" -}}
 {{- $class := .class | default "" -}}
 {{- $articleVariant := partial "article/variant-key.html" $page -}}
 {{- $itemClasses := slice "item" -}}
@@ -41,7 +42,19 @@
 {{- end -}}
 
 <article class="{{ delimit $itemClasses " " }}">
-  {{- if eq $articleVariant "modernbio" }}<div class="item-series-marker">Modern Bios</div>{{ end }}
+  {{- if and (eq $articleVariant "modernbio") (ne $collectionPlacement "kicker") }}<div class="item-series-marker">Modern Bios</div>{{ end }}
+  {{- if and (gt (len $collections) 0) (eq $collectionPlacement "kicker") }}
+    <div class="item-kicker item-kicker--collection">
+      {{- range $index, $match := $collections -}}
+        {{- if gt $index 0 }} &middot; {{ end -}}
+        {{- with $match.page -}}
+          <a href="{{ .RelPermalink }}">{{ $match.collection.title }}</a>
+        {{- else -}}
+          {{ $match.collection.title }}
+        {{- end -}}
+      {{- end -}}
+    </div>
+  {{- end }}
   <div class="t"><a href="{{ $page.RelPermalink }}"
     {{- if $analyticsSourceSlot }}
       data-analytics-event="{{ $analyticsEvent }}"
@@ -56,7 +69,7 @@
     {{- end }}
   >{{ $page.Title }}</a></div>
   {{- if gt (len $metaParts) 0 }}<div class="m">{{ delimit $metaParts " | " }}</div>{{ end }}
-  {{- if gt (len $collections) 0 }}
+  {{- if and (gt (len $collections) 0) (ne $collectionPlacement "kicker") }}
     <div class="d">
       {{- range $index, $match := $collections -}}
         {{- if gt $index 0 }} &middot; {{ end -}}

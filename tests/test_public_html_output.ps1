@@ -268,8 +268,11 @@ function Test-ExpectedFlag {
   return [bool](Get-ExpectedEntryValue -Entry $Entry -Key $Key -Default $false)
 }
 
-function Get-CurrentCartoonImagePath {
-  param([string]$RepoRoot)
+function Get-CurrentCartoonValue {
+  param(
+    [string]$RepoRoot,
+    [string]$Key
+  )
 
   $dataPath = Join-Path $RepoRoot 'data\editorial_cartoons.yaml'
   if (-not (Test-Path -LiteralPath $dataPath -PathType Leaf)) {
@@ -290,12 +293,12 @@ function Get-CurrentCartoonImagePath {
       continue
     }
 
-    if ($inCurrentEntry -and $line -match '^\s+image:\s*(.+)\s*$') {
+    if ($inCurrentEntry -and $line -match ('^\s+' + [regex]::Escape($Key) + ':\s*(.+)\s*$')) {
       return (Convert-YamlScalarToString -Value $Matches[1])
     }
   }
 
-  throw "Unable to resolve current editorial cartoon image from $dataPath"
+  return ''
 }
 
 function Get-SemanticPageIssues {
@@ -355,7 +358,8 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$currentCartoonImagePattern = [regex]::Escape((Get-CurrentCartoonImagePath -RepoRoot $repoRoot))
+$currentCartoonImagePattern = [regex]::Escape((Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'image'))
+$currentCartoonCaption = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'caption'
 $freshness = Test-PublicBuildFreshness -RepoRoot $repoRoot -SiteDir $SiteDir
 if (-not $freshness.IsFresh) {
   $message = "Generated-output regression test requires a fresh Hugo build. $($freshness.Reason)"
@@ -1424,8 +1428,9 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/'
-    Message = 'expected the essays front to expose collection, library, and home next steps'
+    Pattern = 'journey-links'
+    Message = 'expected the essays front not to retain the route-level utility pill row'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/index.html'
@@ -1444,13 +1449,18 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = 'essays-front__secondary'
-    Message = 'expected the essays landing page to render secondary current-edition stories'
+    Pattern = 'essays-front__rail'
+    Message = 'expected the essays landing page to render the stacked dispatch rail'
   },
   @{
     Path = 'public/essays/index.html'
     Pattern = $currentCartoonImagePattern
     Message = 'expected the essays landing page to render the current editorial cartoon break'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = 'essays-front__cartoon-caption'
+    Message = 'expected the essays landing page to render the optional visible cartoon caption when provided'
   },
   @{
     Path = 'public/essays/index.html'
@@ -1846,6 +1856,28 @@ foreach ($check in $requiredUxChecks) {
     if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
       $uxIssues.Add("$relativePath => $($check.Message)")
     }
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/essays/index.html')) {
+  $essaysIndexHtml = [string]$targetPageHtml['public/essays/index.html']
+  $railItemCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bessays-front__rail-item\b[^"]*"|''[^'']*\bessays-front__rail-item\b[^'']*''|[^\s>]*\bessays-front__rail-item\b[^\s>]*)', 'IgnoreCase').Count
+  if ($railItemCount -ne 4) {
+    $uxIssues.Add("public/essays/index.html => expected exactly 4 dispatch rail items, found $railItemCount")
+  }
+
+  $railSummaryCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bessays-front__rail-item--with-summary\b[^"]*"|''[^'']*\bessays-front__rail-item--with-summary\b[^'']*''|[^\s>]*\bessays-front__rail-item--with-summary\b[^\s>]*)', 'IgnoreCase').Count
+  if ($railSummaryCount -ne 2) {
+    $uxIssues.Add("public/essays/index.html => expected exactly 2 dispatch rail items with summaries, found $railSummaryCount")
+  }
+
+  $archiveDeskTagCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bitem-kicker--collection\b[^"]*"|''[^'']*\bitem-kicker--collection\b[^'']*''|[^\s>]*\bitem-kicker--collection\b[^\s>]*)', 'IgnoreCase').Count
+  if ($archiveDeskTagCount -eq 0) {
+    $uxIssues.Add('public/essays/index.html => expected archive collection labels to render in the muted desk-tag kicker position')
+  }
+
+  if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $essaysIndexHtml -notmatch [regex]::Escape($currentCartoonCaption)) {
+    $uxIssues.Add('public/essays/index.html => expected the current cartoon caption text to render when configured')
   }
 }
 

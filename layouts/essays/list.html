@@ -55,16 +55,6 @@
       {{ end }}
     </header>
 
-    {{ partial "journey_links.html" (dict
-      "class" "journey-links--page"
-      "eyebrow" "Browse next"
-      "links" (slice
-        (dict "href" ("collections/" | absURL) "label" "Browse collections")
-        (dict "href" ("library/" | absURL) "label" "Search the library")
-        (dict "href" ("" | absURL) "label" "Home")
-      )
-    ) }}
-
     {{ with $lead }}
       {{ $leadSummary := partial "discovery/page-summary.html" . }}
       {{ $leadMetaParts := slice }}
@@ -87,18 +77,21 @@
           </article>
 
           {{ if gt (len $secondary) 0 }}
-            <div class="essays-front__secondary" aria-label="Secondary stories">
-              {{ range $secondary }}
-                {{ $secondarySummary := partial "discovery/page-summary.html" . }}
+            <div class="essays-front__rail" aria-label="Dispatch rail">
+              {{ range $index, $story := $secondary }}
                 {{ $secondaryMetaParts := slice }}
-                {{ with .Date }}{{ $secondaryMetaParts = $secondaryMetaParts | append (.Format "Jan 2, 2006") }}{{ end }}
-                {{ with .Params.version }}{{ $secondaryMetaParts = $secondaryMetaParts | append (printf "v%s" .) }}{{ end }}
-                {{ with .ReadingTime }}{{ $secondaryMetaParts = $secondaryMetaParts | append (printf "%d min read" .) }}{{ end }}
-                <article class="essays-front__secondary-item">
+                {{ with $story.Date }}{{ $secondaryMetaParts = $secondaryMetaParts | append (.Format "Jan 2, 2006") }}{{ end }}
+                {{ with $story.Params.version }}{{ $secondaryMetaParts = $secondaryMetaParts | append (printf "v%s" .) }}{{ end }}
+                {{ with $story.ReadingTime }}{{ $secondaryMetaParts = $secondaryMetaParts | append (printf "%d min read" .) }}{{ end }}
+                {{ $railItemClasses := slice "essays-front__rail-item" }}
+                {{ if lt $index 2 }}{{ $railItemClasses = $railItemClasses | append "essays-front__rail-item--with-summary" }}{{ end }}
+                <article class="{{ delimit $railItemClasses " " }}">
                   <p class="essays-front__secondary-kicker">Dispatch</p>
-                  <h3 class="essays-front__secondary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                  <h3 class="essays-front__secondary-title"><a href="{{ $story.RelPermalink }}">{{ $story.Title }}</a></h3>
                   {{ if gt (len $secondaryMetaParts) 0 }}<p class="essays-front__meta">{{ delimit $secondaryMetaParts " | " }}</p>{{ end }}
-                  {{ with $secondarySummary }}<div class="essays-front__secondary-summary">{{ . }}</div>{{ end }}
+                  {{ if lt $index 2 }}
+                    {{ with (partial "discovery/page-summary.html" $story) }}<div class="essays-front__rail-summary">{{ . }}</div>{{ end }}
+                  {{ end }}
                 </article>
               {{ end }}
             </div>
@@ -109,12 +102,6 @@
 
     {{ with $currentCartoon }}
       <section class="page-shell page-shell--wide essays-front__cartoon" aria-labelledby="essays-cartoon-title">
-        <div class="essays-front__cartoon-meta">
-          <p class="essays-front__label">Editorial Cartoon</p>
-          <h2 id="essays-cartoon-title" class="essays-front__section-title">{{ .title }}</h2>
-          <p class="essays-front__meta">{{ time.Format "Jan 2, 2006" .date }}</p>
-          <p class="essays-front__cartoon-action"><a href="{{ "gallery/" | absURL }}">View gallery &rarr;</a></p>
-        </div>
         <figure class="essays-front__cartoon-figure">
           <img
             src="{{ .image | relURL }}"
@@ -123,7 +110,14 @@
             height="{{ .height }}"
             loading="lazy"
           >
+          {{ with .caption }}<figcaption class="essays-front__cartoon-caption">{{ . }}</figcaption>{{ end }}
         </figure>
+        <div class="essays-front__cartoon-meta">
+          <p class="essays-front__label">Editorial Cartoon</p>
+          <h2 id="essays-cartoon-title" class="essays-front__section-title">{{ .title }}</h2>
+          <p class="essays-front__meta">{{ time.Format "Jan 2, 2006" .date }}</p>
+          <p class="essays-front__cartoon-action"><a href="{{ "gallery/" | absURL }}">View gallery &rarr;</a></p>
+        </div>
       </section>
     {{ end }}
 
@@ -142,6 +136,7 @@
                   "page" .
                   "showCollections" true
                   "showSectionLabel" false
+                  "collectionPlacement" "kicker"
                 ) }}
               {{ end }}
             </div>
