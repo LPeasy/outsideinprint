@@ -1904,7 +1904,6 @@ h2{ margin-top:34px; }
   position:relative;
 }
 .collection-room__header,
-.collection-room__section--overview,
 .collection-room__section--entry,
 .collection-room__section--items,
 .collection-room__section--related,
@@ -1918,7 +1917,6 @@ h2{ margin-top:34px; }
   box-shadow:var(--collection-room-shadow);
 }
 .collection-room__header::before,
-.collection-room__section--overview::before,
 .collection-room__section--entry::before,
 .collection-room__section--items::before,
 .collection-room__section--related::before,
@@ -1933,7 +1931,6 @@ h2{ margin-top:34px; }
   pointer-events:none;
 }
 .collection-room__header::after,
-.collection-room__section--overview::after,
 .collection-room__section--entry::after,
 .collection-room__section--items::after,
 .collection-room__section--related::after,
@@ -1976,7 +1973,6 @@ h2{ margin-top:34px; }
 .collection-room__section--progress > .collection-progress{
   margin-top:0;
 }
-.collection-room .collection-meta-block,
 .collection-room .collection-progress,
 .collection-room .collection-membership,
 .collection-room__section--entry .collection-start-here,
@@ -2001,7 +1997,6 @@ h2{ margin-top:34px; }
 .collection-room__section--related .item:last-child{
   border-bottom:1px solid var(--collection-room-panel-border);
 }
-.collection-room .collection-meta-row,
 .collection-room .collection-membership__row,
 .collection-room .reading-path__actions,
 .collection-room .reading-path__preview,
@@ -2442,7 +2437,6 @@ h2{ margin-top:34px; }
 .imprint-header,
 .citation,
 .article-record,
-.collection-meta-block,
 .reading-path,
 .collection-progress,
 .collection-membership,
@@ -2590,40 +2584,6 @@ h2{ margin-top:34px; }
 .article-record__value{
   margin:0;
   color:var(--text-secondary);
-}
-.collection-meta-block{
-  display:grid;
-  gap:.8rem;
-  padding:1rem 1.05rem;
-  border-radius:var(--radius-soft);
-}
-.collection-meta-row{
-  display:grid;
-  grid-template-columns:minmax(10rem, 12rem) minmax(0, 1fr);
-  gap:.3rem 1rem;
-  align-items:baseline;
-  padding-top:.75rem;
-  border-top:1px solid rgba(236,231,223,.08);
-}
-.collection-meta-row:first-child{
-  padding-top:0;
-  border-top:none;
-}
-.collection-meta-label{
-  margin:0;
-  color:var(--text-muted);
-  font-family:var(--font-ui);
-  font-size:.68rem;
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.collection-meta-value{
-  margin:0;
-  color:var(--text-secondary);
-}
-.collection-meta-value a{
-  color:var(--text-primary);
 }
 .collection-items{
   list-style:none;
@@ -3002,7 +2962,6 @@ h2{ margin-top:34px; }
     inset:0 -.45rem;
   }
   .collection-room__header,
-  .collection-room__section--overview,
   .collection-room__section--entry,
   .collection-room__section--items,
   .collection-room__section--related,
@@ -3010,7 +2969,6 @@ h2{ margin-top:34px; }
     padding:1rem .95rem 1.05rem;
   }
   .collection-room__header::before,
-  .collection-room__section--overview::before,
   .collection-room__section--entry::before,
   .collection-room__section--items::before,
   .collection-room__section--related::before,
@@ -3019,7 +2977,6 @@ h2{ margin-top:34px; }
     right:.95rem;
   }
   .collection-room__header::after,
-  .collection-room__section--overview::after,
   .collection-room__section--entry::after,
   .collection-room__section--items::after,
   .collection-room__section--related::after,
@@ -3051,13 +3008,8 @@ h2{ margin-top:34px; }
     grid-template-columns:1fr;
     gap:.25rem;
   }
-  .collection-meta-row{
-    grid-template-columns:1fr;
-    gap:.25rem;
-  }
   .reading-path,
   .collection-progress,
-  .collection-meta-block,
   .collection-membership{
     padding:.9rem;
   }

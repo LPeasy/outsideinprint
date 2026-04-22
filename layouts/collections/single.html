@@ -43,23 +43,6 @@
         <p class="page-intro">This {{ $state.kind }} gathers {{ $state.count }} published pieces into one reading thread{{ with $startHere }} and points first-time readers to <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}.</p>
       </header>
 
-      <section class="collection-room__section collection-room__section--overview page-shell page-shell--reading" aria-labelledby="collection-overview-title">
-        <h2 id="collection-overview-title" class="list-title">How to Use This Collection</h2>
-        <dl class="collection-meta-block">
-          <div class="collection-meta-row"><dt class="collection-meta-label">Kind</dt><dd class="collection-meta-value">{{ title $state.kind }}</dd></div>
-          <div class="collection-meta-row"><dt class="collection-meta-label">Pieces</dt><dd class="collection-meta-value">{{ $state.count }}</dd></div>
-          <div class="collection-meta-row"><dt class="collection-meta-label">Minimum To List</dt><dd class="collection-meta-value">{{ $state.min_items }}</dd></div>
-          {{ with $startHere }}
-            <div class="collection-meta-row"><dt class="collection-meta-label">Recommended Entry</dt><dd class="collection-meta-value"><a href="{{ .RelPermalink }}">{{ .Title }}</a></dd></div>
-          {{ end }}
-        {{ with $definition.metadata }}
-          {{ range . }}
-            <div class="collection-meta-row"><dt class="collection-meta-label">{{ .label }}</dt><dd class="collection-meta-value">{{ .value }}</dd></div>
-          {{ end }}
-        {{ end }}
-        </dl>
-      </section>
-
       {{ with $startHere }}
         <section class="collection-room__section collection-room__section--entry page-shell page-shell--reading" aria-labelledby="collection-start-here-title">
           <h2 id="collection-start-here-title" class="list-title" style="margin-top:28px;">Entry Point</h2>
