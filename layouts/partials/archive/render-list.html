@@ -37,7 +37,7 @@
 {{- end -}}
 
 <div class="essays-front">
-  <header class="page-header page-shell page-shell--reading essays-front__masthead">
+  <header class="page-header page-header--section-centered page-shell page-shell--reading essays-front__masthead">
     <h1 id="page-title" class="list-title">{{ $page.Title }}</h1>
     {{ if gt (len $pages) 0 }}
       <p class="page-intro essays-front__stats">{{ len $pages }} published pieces{{ with index $pages 0 }} &middot; Latest: {{ .Date.Format "Jan 2, 2006" }}{{ end }}</p>

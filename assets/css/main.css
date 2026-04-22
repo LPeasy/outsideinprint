@@ -582,6 +582,11 @@ textarea{
   padding:0 0 1.25rem;
   border-bottom:1px solid rgba(236,231,223,.08);
 }
+.page-header--section-centered{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
 .page-header .list-title,
 .page-header h1{
   margin:0 0 .8rem;
@@ -593,12 +598,28 @@ textarea{
   line-height:1.08;
   text-transform:none;
 }
+.page-header--section-centered .list-title,
+.page-header--section-centered h1{
+  text-wrap:balance;
+}
 .page-intro{
   max-width:var(--measure-wide);
   margin:0 0 1rem;
   color:var(--text-secondary);
   font-size:clamp(1.03rem, .98rem + .25vw, 1.14rem);
   line-height:1.72;
+}
+.page-header--section-centered .page-intro,
+.page-header--section-centered .essays-front__stats{
+  margin-left:auto;
+  margin-right:auto;
+}
+.page-header--section-centered .essays-front__year-nav{
+  display:flex;
+  justify-content:center;
+}
+.page-header--section-centered .essays-front__year-jumps{
+  justify-content:center;
 }
 .library-group > .m{
   margin:0 0 .7rem;

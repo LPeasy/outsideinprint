@@ -40,8 +40,8 @@
   <nav class="nav nav--section-rail" aria-label="Primary">
     <a href="{{ "archive/" | absURL }}"{{ if $isArchive }} aria-current="page"{{ end }}>Archive</a><span class="dot">&bull;</span>
     <a href="{{ "collections/" | absURL }}"{{ if $isCollections }} aria-current="page"{{ end }}>Collections</a><span class="dot">&bull;</span>
-    <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
     <a href="{{ "gallery/" | absURL }}"{{ if $isGallery }} aria-current="page"{{ end }}>Gallery</a><span class="dot">&bull;</span>
+    <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
     <a class="nav__explore-link" href="{{ "random/" | absURL }}"{{ if $isRandom }} aria-current="page"{{ end }}>Feeling curious?</a>
   </nav>
 </header>
