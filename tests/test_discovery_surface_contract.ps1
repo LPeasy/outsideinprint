@@ -335,18 +335,26 @@ $collectionSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/coll
 foreach ($requiredSnippet in @(
   'data-collection-room-theme="{{ $roomTheme }}"',
   'collection-room__header',
-  'collection-room__section collection-room__section--overview',
   'collection-room__section collection-room__section--entry',
   'collection-room__section collection-room__section--progress',
   'collection-room__section collection-room__section--items',
   'collection-room__section collection-room__section--related',
-  'How to Use This Collection',
   'Related Collections',
   'partial "discovery/page-list-item.html"',
   'partial "discovery/collection-card.html"'
 )) {
   if ($collectionSingleTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/collections/single.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'collection-room__section collection-room__section--overview',
+  'How to Use This Collection',
+  'collection-meta-row'
+)) {
+  if ($collectionSingleTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/collections/single.html to remove the retired collection overview snippet: $retiredSnippet"
   }
 }
 

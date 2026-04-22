@@ -1589,7 +1589,8 @@ $requiredUxChecks = @(
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
     Pattern = 'How to Use This Collection'
-    Message = 'expected collection detail pages to include a visible overview section explaining how to use the collection'
+    Message = 'expected collection detail pages not to retain the retired overview block'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'

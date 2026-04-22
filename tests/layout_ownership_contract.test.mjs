@@ -56,12 +56,10 @@ test("collection detail and membership hooks have explicit inner-structure styli
   assert.match(collectionSingle, /class="collection-room\{\{ with \$roomTheme \}\} collection-room--\{\{ \. \}\}\{\{ end \}\}"/);
   assert.match(collectionSingle, /data-collection-room-theme="\{\{ \$roomTheme \}\}"/);
   assert.match(collectionSingle, /collection-room__header/);
-  assert.match(collectionSingle, /collection-room__section collection-room__section--overview/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--entry/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--progress/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--items/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--related/);
-  assert.match(collectionSingle, /class="collection-meta-row"/);
   assert.match(collectionSingle, /class="collection-item-note"/);
   assert.match(collectionSingle, /class="collection-pill"/);
   assert.match(collectionSingle, /"class" \(cond \(eq \$itemSlug \$startHereSlug\) "collection-item--start-here"/);
@@ -75,7 +73,6 @@ test("collection detail and membership hooks have explicit inner-structure styli
     ".collection-room{",
     ".collection-room__section{",
     ".collection-room__header,",
-    ".collection-room__section--overview,",
     ".collection-room__section--entry,",
     ".collection-room__section--progress{",
     ".collection-room__section--items,",
@@ -83,9 +80,6 @@ test("collection detail and membership hooks have explicit inner-structure styli
     ".collection-grid{",
     ".collection-card{",
     ".collection-meta{",
-    ".collection-meta-row{",
-    ".collection-meta-label{",
-    ".collection-meta-value{",
     ".collection-items{",
     ".collection-item-note{",
     ".collection-start-here,",
@@ -176,7 +170,6 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
     "`collection-room`",
     "`collection-room__header`",
     "`collection-room__section`",
-    "`collection-room__section--overview`",
     "`collection-room__section--entry`",
     "`collection-room__section--progress`",
     "`collection-room__section--items`",

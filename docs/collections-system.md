@@ -108,6 +108,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - Each collection page renders a browser-local `Reading Progress` panel above `In This Collection`.
 - The panel does not use cookies, a backend, or analytics state.
 - Each collection row can show a `Visited` marker when the current browser has already opened that piece.
+- Collection detail pages no longer render the old `How to Use This Collection` overview block.
 - Collection detail pages may also apply an explicit per-collection reading-room treatment via `room_theme`.
 - Article pages may reuse `room_theme` only for the compact primary-collection light-accent layer.
 - The `/collections/` route now renders one unified directory of room-echo cards for every visible collection.
