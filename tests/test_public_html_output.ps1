@@ -1881,6 +1881,28 @@ if ($targetPageHtml.ContainsKey('public/essays/index.html')) {
   }
 }
 
+$modernBioSharedRowPages = @(
+  'public/essays/index.html',
+  'public/library/index.html',
+  'public/collections/modern-bios/index.html'
+)
+
+foreach ($relativePath in $modernBioSharedRowPages) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $uxIssues.Add("$relativePath => expected generated HTML to be available for Modern Bios shared-row coverage")
+    continue
+  }
+
+  $html = [string]$targetPageHtml[$relativePath]
+  if ($html -notmatch 'Modern Bios') {
+    $uxIssues.Add("$relativePath => expected representative shared rows to keep the Modern Bios text kicker")
+  }
+
+  if ($html -match 'item--variant-modernbio') {
+    $uxIssues.Add("$relativePath => expected shared archive rows to stop rendering the retired Modern Bios inset-rule class")
+  }
+}
+
 if ($runningHeaderMatches -eq 0) {
   throw "Did not find any running-header home links in generated HTML."
 }

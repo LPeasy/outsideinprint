@@ -498,6 +498,7 @@ foreach ($requiredSnippet in @(
   '.essays-front__month{',
   '.essays-front__month-title{',
   '.essays-front__month-list{',
+  '.item-series-marker{',
   '.item-kicker{',
   '.item-kicker--collection{'
 )) {
@@ -536,7 +537,9 @@ foreach ($requiredSnippet in @(
   'data-analytics-source-slot',
   'printf "%d min read"',
   'collectionPlacement',
-  'item-kicker item-kicker--collection'
+  'item-kicker item-kicker--collection',
+  'item-series-marker',
+  'Modern Bios'
 )) {
   if ($pageListItemPartial -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected discovery/page-list-item.html to contain: $requiredSnippet"
@@ -545,6 +548,14 @@ foreach ($requiredSnippet in @(
 
 if ($pageListItemPartial -match [regex]::Escape('printf "%s min read"')) {
   throw 'Expected discovery/page-list-item.html to format ReadingTime as an integer, not a string.'
+}
+
+if ($pageListItemPartial -match [regex]::Escape('item--variant-modernbio')) {
+  throw 'Expected discovery/page-list-item.html to stop appending the Modern Bios row-variant class in shared archive rows.'
+}
+
+if ($mainCss -match [regex]::Escape('.item--variant-modernbio')) {
+  throw 'Expected assets/css/main.css to remove the shared-row Modern Bios inset rule styling.'
 }
 
 $pageSummaryPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/page-summary.html') -Raw
