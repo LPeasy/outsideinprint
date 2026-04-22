@@ -311,7 +311,9 @@ foreach ($retiredSnippet in @(
 
 $collectionsListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/list.html') -Raw
 foreach ($requiredSnippet in @(
-  '{{ len $entries }} collections · {{ $totalPieces }} published pieces',
+  '{{ len $entries }} collections &middot; {{ $totalPieces }} published pieces',
+  'section-front section-front--collections',
+  'section-front__header',
   'page-header--section-centered',
   'partial "discovery/collection-card.html"',
   'collections-directory',
@@ -328,6 +330,7 @@ foreach ($requiredSnippet in @(
 
 foreach ($retiredSnippet in @(
   '.Params.description',
+  'partial "journey_links.html"',
   'Collections are curated reading threads across the archive',
   'All Collections',
   'Featured %s',
@@ -427,6 +430,9 @@ foreach ($requiredSnippet in @(
 
 $libraryTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.html') -Raw
 foreach ($requiredSnippet in @(
+  'section-front section-front--library',
+  'section-front__header',
+  'section-front__body',
   'page-header--section-centered',
   'Search the archive by title, type, collection, or version.',
   'partial "archive/longform-kind.html"',
@@ -538,6 +544,9 @@ foreach ($requiredSnippet in @(
 
 $galleryListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/gallery/list.html') -Raw
 foreach ($requiredSnippet in @(
+  'section-front section-front--gallery',
+  'section-front__header',
+  'section-front__body',
   'page-header--section-centered',
   'cartoon-gallery-spotlight',
   'cartoon-gallery-title'
@@ -593,6 +602,9 @@ foreach ($retiredSnippet in @(
 }
 
 foreach ($requiredSnippet in @(
+  '.section-front{',
+  '.section-front__header{',
+  '.section-front__body{',
   '.essays-front{',
   '.essays-front__masthead{',
   '.essays-front__stats{',

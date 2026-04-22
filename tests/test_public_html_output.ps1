@@ -1591,6 +1591,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
+    Pattern = 'section-front section-front--library'
+    Message = 'expected the library page to wrap its header and controls in the shared top-zone shell'
+  },
+  @{
+    Path = 'public/library/index.html'
     Pattern = 'Dialogues and fiction from the recurring world of Syd and Oliver'
     Message = 'expected the library page to surface lane descriptions from section metadata'
   },
@@ -1753,6 +1758,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
+    Pattern = 'section-front section-front--collections'
+    Message = 'expected the collections page to wrap the header in the shared top-zone shell'
+  },
+  @{
+    Path = 'public/collections/index.html'
     Pattern = '(?s)<main\b[^>]*>.*?Curated collections that gather essays, projects, dossiers, and recurring questions into coherent reading threads across the archive\.'
     Message = 'expected the collections index not to render the old descriptive intro paragraph in visible copy'
     ShouldNotMatch = $true
@@ -1766,7 +1776,8 @@ $requiredUxChecks = @(
   @{
     Path = 'public/collections/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/'
-    Message = 'expected the collections index to expose library and home navigation'
+    Message = 'expected the collections index not to render the retired top journey-links block'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/index.html'
@@ -1829,6 +1840,17 @@ $requiredUxChecks = @(
     Path = 'public/gallery/index.html'
     Pattern = 'page-header--section-centered'
     Message = 'expected the gallery landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'section-front section-front--gallery'
+    Message = 'expected the gallery page to wrap the header and spotlight in the shared top-zone shell'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'section-front'
+    Message = 'expected the archive route to remain on its essays-front shell without the new shared top-zone wrapper'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'

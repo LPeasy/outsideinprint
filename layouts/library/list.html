@@ -75,11 +75,6 @@
     {{ end }}
   {{ end }}
 
-  <header class="page-header page-header--section-centered page-shell page-shell--wide">
-    <h1 id="library-title" class="list-title">Library</h1>
-    <p class="page-intro">Search the archive by title, type, collection, or version.</p>
-  </header>
-
   {{ $yearOptions := sort (uniq $availableYears) }}
   {{ $matchedCollectionSlugs := uniq $availableCollectionSlugs }}
   {{ $collectionOptions := slice }}
@@ -93,60 +88,69 @@
     {{ end }}
   {{ end }}
 
-  <div class="library-search library-search--filters page-shell page-shell--wide" data-library-controls>
-    <div class="library-filter-grid">
-      <div class="library-filter library-filter--search">
-        <label class="library-search-label" for="library-search">Search the library</label>
-        <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, types, collections, and versions" autocomplete="off" spellcheck="false" />
+  <div class="section-front section-front--library">
+    <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
+      <h1 id="library-title" class="list-title">Library</h1>
+      <p class="page-intro">Search the archive by title, type, collection, or version.</p>
+    </header>
+
+    <div class="section-front__body">
+      <div class="library-search library-search--filters page-shell page-shell--wide" data-library-controls>
+        <div class="library-filter-grid">
+          <div class="library-filter library-filter--search">
+            <label class="library-search-label" for="library-search">Search the library</label>
+            <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, types, collections, and versions" autocomplete="off" spellcheck="false" />
+          </div>
+
+          <div class="library-filter">
+            <label class="library-search-label" for="library-type">Type</label>
+            <select id="library-type" class="library-search-input">
+              <option value="">All types</option>
+              {{ range $libraryGroups }}
+                <option value="{{ index . "key" }}">{{ index . "title" }}</option>
+              {{ end }}
+            </select>
+          </div>
+
+          <div class="library-filter">
+            <label class="library-search-label" for="library-year">Year</label>
+            <select id="library-year" class="library-search-input">
+              <option value="">All years</option>
+              {{ range collections.Reverse $yearOptions }}
+                <option value="{{ . }}">{{ . }}</option>
+              {{ end }}
+            </select>
+          </div>
+
+          <div class="library-filter">
+            <label class="library-search-label" for="library-collection">Collection</label>
+            <select id="library-collection" class="library-search-input">
+              <option value="">All collections</option>
+              {{ range $collectionOptions }}
+                <option value="{{ index . "slug" }}">{{ index . "title" }}</option>
+              {{ end }}
+            </select>
+          </div>
+
+          <div class="library-filter">
+            <label class="library-search-label" for="library-sort">Sort</label>
+            <select id="library-sort" class="library-search-input">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="title">Title A-Z</option>
+            </select>
+          </div>
+
+          <div class="library-filter library-filter--action">
+            <button id="library-reset" class="library-reset" type="button">Reset filters</button>
+          </div>
+        </div>
       </div>
 
-      <div class="library-filter">
-        <label class="library-search-label" for="library-type">Type</label>
-        <select id="library-type" class="library-search-input">
-          <option value="">All types</option>
-          {{ range $libraryGroups }}
-            <option value="{{ index . "key" }}">{{ index . "title" }}</option>
-          {{ end }}
-        </select>
-      </div>
-
-      <div class="library-filter">
-        <label class="library-search-label" for="library-year">Year</label>
-        <select id="library-year" class="library-search-input">
-          <option value="">All years</option>
-          {{ range collections.Reverse $yearOptions }}
-            <option value="{{ . }}">{{ . }}</option>
-          {{ end }}
-        </select>
-      </div>
-
-      <div class="library-filter">
-        <label class="library-search-label" for="library-collection">Collection</label>
-        <select id="library-collection" class="library-search-input">
-          <option value="">All collections</option>
-          {{ range $collectionOptions }}
-            <option value="{{ index . "slug" }}">{{ index . "title" }}</option>
-          {{ end }}
-        </select>
-      </div>
-
-      <div class="library-filter">
-        <label class="library-search-label" for="library-sort">Sort</label>
-        <select id="library-sort" class="library-search-input">
-          <option value="newest">Newest first</option>
-          <option value="oldest">Oldest first</option>
-          <option value="title">Title A-Z</option>
-        </select>
-      </div>
-
-      <div class="library-filter library-filter--action">
-        <button id="library-reset" class="library-reset" type="button">Reset filters</button>
-      </div>
+      <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide">Showing all {{ $totalPages }} pieces</p>
+      <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or return <a href="{{ "" | absURL }}">Home</a>.</div>
     </div>
   </div>
-
-  <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide">Showing all {{ $totalPages }} pieces</p>
-  <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or return <a href="{{ "" | absURL }}">Home</a>.</div>
 
   <div id="library-grouped-results">
     {{ range $group := $libraryGroups }}
