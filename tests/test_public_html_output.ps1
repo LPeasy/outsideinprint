@@ -1574,8 +1574,15 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = 'The library is the full catalog of the imprint'
-    Message = 'expected the library page to explain its catalog role in visible copy'
+    Pattern = '(?s)<main\b[^>]*>.*?The full catalog of published work from Outside In Print, searchable by title, type, collection, and version\.'
+    Message = 'expected the library page not to render the metadata description in visible header copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'The library is the full catalog of the imprint:'
+    Message = 'expected the library page not to render the visible catalog stats sentence at the top of the page'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/library/index.html'
