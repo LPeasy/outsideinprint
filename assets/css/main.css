@@ -831,13 +831,18 @@ textarea{
   text-decoration:underline;
 }
 
-/* Essays section front */
-.essays-front{
+/* Shared section-opening shell */
+.essays-front,
+.section-front{
   position:relative;
   padding:0 0 .7rem;
   isolation:isolate;
 }
-.essays-front::before{
+.section-front{
+  margin:0 0 2.15rem;
+}
+.essays-front::before,
+.section-front::before{
   content:"";
   position:absolute;
   inset:0 0 auto;
@@ -857,7 +862,8 @@ textarea{
   pointer-events:none;
   z-index:0;
 }
-.essays-front::after{
+.essays-front::after,
+.section-front::after{
   content:"";
   position:absolute;
   inset:0;
@@ -867,20 +873,34 @@ textarea{
   pointer-events:none;
   z-index:0;
 }
-.essays-front > *{
+.essays-front > *,
+.section-front > *{
   position:relative;
   z-index:1;
 }
-.essays-front a:focus-visible{
+.essays-front a:focus-visible,
+.section-front a:focus-visible{
   outline:2px solid rgba(213,190,150,.72);
   outline-offset:3px;
   border-radius:2px;
 }
-.essays-front__masthead{
+.essays-front button:focus-visible,
+.essays-front input:focus-visible,
+.essays-front select:focus-visible,
+.section-front button:focus-visible,
+.section-front input:focus-visible,
+.section-front select:focus-visible{
+  outline:2px solid rgba(213,190,150,.72);
+  outline-offset:2px;
+}
+.essays-front__masthead,
+.section-front__header{
   padding:.45rem 0 .6rem;
+  margin-bottom:0;
   border-bottom:1px solid rgba(236,231,223,.1);
 }
-.essays-front__masthead::before{
+.essays-front__masthead::before,
+.section-front__header::before{
   content:"";
   position:absolute;
   left:0;
@@ -888,6 +908,38 @@ textarea{
   top:0;
   height:1px;
   background:linear-gradient(90deg, rgba(183,154,106,.28), rgba(236,231,223,.1) 34%, rgba(236,231,223,0));
+}
+.section-front__body{
+  padding-top:.95rem;
+}
+.section-front__body > :last-child{
+  margin-bottom:0;
+}
+.section-front--collections{
+  margin-bottom:1.95rem;
+}
+.section-front--gallery .section-front__body{
+  padding-top:1rem;
+}
+.section-front--gallery .cartoon-gallery-spotlight{
+  margin-top:0;
+  padding-top:0;
+  border-top:none;
+}
+.section-front--library .section-front__body{
+  padding-top:.9rem;
+}
+.section-front--library .library-search--filters,
+.section-front--library .library-results-summary,
+.section-front--library .library-empty{
+  margin-left:auto;
+  margin-right:auto;
+}
+.section-front--library .library-results-summary{
+  margin-bottom:.75rem;
+}
+.section-front--library .library-empty{
+  margin-top:0;
 }
 .essays-front__masthead .list-title{
   margin-bottom:.25rem;

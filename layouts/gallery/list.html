@@ -10,28 +10,32 @@
   {{ end }}
   {{ $orderedCartoons := sort $cartoons "date" "desc" }}
 
-  <header class="page-header page-header--section-centered page-shell page-shell--wide">
-    <h1 id="page-title" class="list-title">{{ .Title }}</h1>
-    {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
-  </header>
+  <div class="section-front section-front--gallery">
+    <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
+      <h1 id="page-title" class="list-title">{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    </header>
 
-  {{ with $current }}
-    <section class="cartoon-gallery-spotlight page-shell page-shell--wide" aria-labelledby="current-cartoon-title">
-      <div class="cartoon-gallery-spotlight__meta">
-        <p class="list-title">Current Cartoon</p>
-        <h2 id="current-cartoon-title">{{ .title }}</h2>
-        <p class="m">{{ time.Format "Jan 2, 2006" .date }}</p>
+    {{ with $current }}
+      <div class="section-front__body">
+        <section class="cartoon-gallery-spotlight page-shell page-shell--wide" aria-labelledby="current-cartoon-title">
+          <div class="cartoon-gallery-spotlight__meta">
+            <p class="list-title">Current Cartoon</p>
+            <h2 id="current-cartoon-title">{{ .title }}</h2>
+            <p class="m">{{ time.Format "Jan 2, 2006" .date }}</p>
+          </div>
+          <figure class="cartoon-gallery-spotlight__figure">
+            <img
+              src="{{ .image | relURL }}"
+              alt="{{ .alt }}"
+              width="{{ .width }}"
+              height="{{ .height }}"
+            >
+          </figure>
+        </section>
       </div>
-      <figure class="cartoon-gallery-spotlight__figure">
-        <img
-          src="{{ .image | relURL }}"
-          alt="{{ .alt }}"
-          width="{{ .width }}"
-          height="{{ .height }}"
-        >
-      </figure>
-    </section>
-  {{ end }}
+    {{ end }}
+  </div>
 
   <section class="cartoon-gallery page-shell page-shell--wide" aria-labelledby="cartoon-gallery-title">
     <h2 id="cartoon-gallery-title" class="list-title">Archive</h2>

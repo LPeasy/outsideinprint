@@ -13,6 +13,8 @@ const archiveList = fs.readFileSync(path.resolve("layouts/archive/list.html"), "
 const essaysRedirect = fs.readFileSync(path.resolve("layouts/essays/list.html"), "utf8");
 const dialoguesList = fs.readFileSync(path.resolve("layouts/syd-and-oliver/list.html"), "utf8");
 const collectionList = fs.readFileSync(path.resolve("layouts/collections/list.html"), "utf8");
+const galleryList = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
+const libraryList = fs.readFileSync(path.resolve("layouts/library/list.html"), "utf8");
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
@@ -97,10 +99,13 @@ test("collection detail and membership hooks have explicit inner-structure styli
 });
 
 test("collections index uses a unified card directory and drops the retired split sections", () => {
+  assert.match(collectionList, /section-front section-front--collections/);
+  assert.match(collectionList, /section-front__header/);
   assert.match(collectionList, /class="page-shell page-shell--grid collections-directory"/);
   assert.match(collectionList, /class="collections-directory__group"/);
   assert.match(collectionList, /class="collections-directory__group-title"/);
   assert.match(collectionList, /class="grid collection-grid collections-directory__grid"/);
+  assert.doesNotMatch(collectionList, /partial "journey_links\.html"/);
   assert.doesNotMatch(collectionList, /Featured Collections/);
   assert.doesNotMatch(collectionList, /Collections Index/);
   assert.doesNotMatch(collectionList, /"variant" "item"/);
@@ -110,6 +115,29 @@ test("collections index uses a unified card directory and drops the retired spli
     ".collections-directory__group{",
     ".collections-directory__group-title{",
     ".collections-directory__grid{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+});
+
+test("gallery and library use the shared section-front top-zone shell while archive stays route-owned", () => {
+  assert.match(galleryList, /section-front section-front--gallery/);
+  assert.match(galleryList, /section-front__header/);
+  assert.match(galleryList, /section-front__body/);
+  assert.match(galleryList, /cartoon-gallery-spotlight/);
+
+  assert.match(libraryList, /section-front section-front--library/);
+  assert.match(libraryList, /section-front__header/);
+  assert.match(libraryList, /section-front__body/);
+  assert.match(libraryList, /Search the archive by title, type, collection, or version\./);
+  assert.doesNotMatch(libraryList, /partial "journey_links\.html"/);
+
+  for (const selector of [
+    ".section-front{",
+    ".section-front__header{",
+    ".section-front__body{",
+    ".section-front--gallery .cartoon-gallery-spotlight{",
+    ".section-front--library .library-search--filters,"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
   }
@@ -245,6 +273,9 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`essays-front__month`",
     "`essays-front__month-title`",
     "`essays-front__month-list`",
+    "`section-front`",
+    "`section-front__header`",
+    "`section-front__body`",
     "`collection-room`",
     "`collection-room__header`",
     "`collection-room__section`",
@@ -256,6 +287,7 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`collections-directory__group`",
     "`collections-directory__group-title`",
     "`collections-directory__grid`",
+    "| Gallery | `/gallery/`",
     "`collection-item-note`",
     "`piece--collection-accent`",
     "`piece-collection-context`",
