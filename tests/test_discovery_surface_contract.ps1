@@ -301,7 +301,7 @@ foreach ($retiredSnippet in @(
 
 $collectionsListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/list.html') -Raw
 foreach ($requiredSnippet in @(
-  'Collections are curated reading threads across the archive',
+  '{{ len $entries }} collections · {{ $totalPieces }} published pieces',
   'partial "discovery/collection-card.html"',
   'collections-directory',
   'collections-directory__group',
@@ -316,6 +316,8 @@ foreach ($requiredSnippet in @(
 }
 
 foreach ($retiredSnippet in @(
+  '.Params.description',
+  'Collections are curated reading threads across the archive',
   'All Collections',
   'Featured %s',
   'Featured Collections',

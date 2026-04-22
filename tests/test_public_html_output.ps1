@@ -1532,6 +1532,23 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
+    Pattern = '8 collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*61 published pieces'
+    Message = 'expected the collections index to collapse the visible header copy to a compact stats line'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)<main\b[^>]*>.*?Curated collections that gather essays, projects, dossiers, and recurring questions into coherent reading threads across the archive\.'
+    Message = 'expected the collections index not to render the old descriptive intro paragraph in visible copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 8 public collections linking 61 published pieces\.'
+    Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
     Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/'
     Message = 'expected the collections index to expose library and home navigation'
   },

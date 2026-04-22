@@ -19,8 +19,7 @@
 
   <header class="page-header page-shell page-shell--wide">
     <h1 id="collections-title" class="list-title">Collections</h1>
-    {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
-    {{ if gt (len $entries) 0 }}<p class="page-intro">Collections are curated reading threads across the archive: {{ len $entries }} public collections linking {{ $totalPieces }} published pieces.</p>{{ end }}
+    {{ if gt (len $entries) 0 }}<p class="page-intro">{{ len $entries }} collections · {{ $totalPieces }} published pieces</p>{{ end }}
   </header>
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"
