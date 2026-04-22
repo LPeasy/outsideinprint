@@ -231,6 +231,7 @@ function Parse-PageFrontMatter {
     FeaturedImage = ''
     FeaturedImageAlt = ''
     FeaturedImageCaption = ''
+    LibraryType = ''
     MediumSourceUrl = ''
     SourceUrl = ''
     Collections = @()
@@ -259,6 +260,7 @@ function Parse-PageFrontMatter {
         'featured_image' { $front.FeaturedImage = [string](Convert-Scalar $raw) }
         'featured_image_alt' { $front.FeaturedImageAlt = [string](Convert-Scalar $raw) }
         'featured_image_caption' { $front.FeaturedImageCaption = [string](Convert-Scalar $raw) }
+        'library_type' { $front.LibraryType = Normalize-Token ([string](Convert-Scalar $raw)) }
         'medium_source_url' { $front.MediumSourceUrl = [string](Convert-Scalar $raw) }
         'source_url' { $front.SourceUrl = [string](Convert-Scalar $raw) }
         'subtitle' { $front.Subtitle = [string](Convert-Scalar $raw) }
@@ -296,6 +298,26 @@ function Parse-PageFrontMatter {
   $front.Topics = Normalize-List $front.Topics
   $front.Tags = Normalize-List $front.Tags
   return [pscustomobject]$front
+}
+
+function Get-LongFormKind {
+  param($Page)
+
+  if ($Page.Section -eq 'working-papers') { return 'working-paper' }
+  if (($Page.LibraryType -eq 'dialogue') -or ($Page.Section -eq 'syd-and-oliver')) { return 'dialogue' }
+  if ($Page.Section -eq 'essays') { return 'essay' }
+  return $Page.Section
+}
+
+function Get-ReportedSection {
+  param($Page)
+
+  switch (Get-LongFormKind $Page) {
+    'dialogue' { return 'dialogues' }
+    'working-paper' { return 'working-papers' }
+    'essay' { return 'essays' }
+    default { return $Page.Section }
+  }
 }
 
 function Test-FallbackMatch {
@@ -464,16 +486,17 @@ function Get-EssayHeroIssueData {
 
   $realLeadCandidate = ($null -ne $firstImage) -and ($firstImage.Source -ne $defaultPlaceholder)
   $hasNonPlaceholderHero = (-not [string]::IsNullOrWhiteSpace($Page.FeaturedImage)) -and ($Page.FeaturedImage -ne $defaultPlaceholder)
+  $isEssay = (Get-LongFormKind $Page) -eq 'essay'
 
   return [pscustomobject]@{
     lead_image_source = if ($null -ne $firstImage) { $firstImage.Source } else { '' }
     lead_image_line = if ($null -ne $firstImage) { $firstImage.LineNumber } else { $null }
     first_heading_line = $firstHeadingLine
     lead_within_heuristic = [bool]$leadWithinHeuristic
-    hero_placeholder_conflict = [int](($Page.Section -eq 'essays') -and ($Page.FeaturedImage -eq $defaultPlaceholder) -and $realLeadCandidate -and $leadWithinHeuristic)
-    hero_missing_with_lead = [int](($Page.Section -eq 'essays') -and [string]::IsNullOrWhiteSpace($Page.FeaturedImage) -and $realLeadCandidate -and $leadWithinHeuristic)
-    hero_duplicate_lead = [int](($Page.Section -eq 'essays') -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -eq $Page.FeaturedImage))
-    hero_current_wins_conflict = [int](($Page.Section -eq 'essays') -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -ne $Page.FeaturedImage))
+    hero_placeholder_conflict = [int]($isEssay -and ($Page.FeaturedImage -eq $defaultPlaceholder) -and $realLeadCandidate -and $leadWithinHeuristic)
+    hero_missing_with_lead = [int]($isEssay -and [string]::IsNullOrWhiteSpace($Page.FeaturedImage) -and $realLeadCandidate -and $leadWithinHeuristic)
+    hero_duplicate_lead = [int]($isEssay -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -eq $Page.FeaturedImage))
+    hero_current_wins_conflict = [int]($isEssay -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -ne $Page.FeaturedImage))
   }
 }
 
@@ -750,7 +773,7 @@ foreach ($page in $pages) {
     path = $page.RelativePath
     title = $page.Title
     slug = $page.Slug
-    section = $page.Section
+    section = Get-ReportedSection $page
     date = $page.Date
     draft = [bool]$page.Draft
     imported = [bool]($page.MediumSourceUrl -or $page.SourceUrl)

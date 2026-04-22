@@ -1,82 +1,23 @@
-{{ define "main" }}
-  {{ $pages := sort .Pages "Date" "desc" }}
-
-  {{ $archiveGroups := slice }}
-  {{ $currentMonthTitle := "" }}
-  {{ $currentMonthId := "" }}
-  {{ $currentMonthYear := "" }}
-  {{ $currentMonthPages := slice }}
-  {{ range $pages }}
-    {{ $monthTitle := .Date.Format "January 2006" }}
-    {{ $monthId := printf "essays-month-%s" (.Date.Format "2006-01" | urlize) }}
-    {{ $monthYear := .Date.Format "2006" }}
-    {{ if ne $monthTitle $currentMonthTitle }}
-      {{ if gt (len $currentMonthPages) 0 }}
-        {{ $archiveGroups = $archiveGroups | append (dict "title" $currentMonthTitle "id" $currentMonthId "year" $currentMonthYear "pages" $currentMonthPages) }}
-      {{ end }}
-      {{ $currentMonthTitle = $monthTitle }}
-      {{ $currentMonthId = $monthId }}
-      {{ $currentMonthYear = $monthYear }}
-      {{ $currentMonthPages = slice . }}
-    {{ else }}
-      {{ $currentMonthPages = $currentMonthPages | append . }}
-    {{ end }}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting to Outside In Print Archive</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="{{ "archive/" | absURL }}" />
+  {{ with site.Home.OutputFormats.Get "RSS" }}
+    <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ site.Title }} RSS Feed" href="{{ .Permalink }}" />
   {{ end }}
-  {{ if gt (len $currentMonthPages) 0 }}
-    {{ $archiveGroups = $archiveGroups | append (dict "title" $currentMonthTitle "id" $currentMonthId "year" $currentMonthYear "pages" $currentMonthPages) }}
+  {{ with .OutputFormats.Get "RSS" }}
+    <link rel="alternate" type="{{ .MediaType.Type }}" title="Essays RSS Feed" href="{{ .Permalink }}" />
   {{ end }}
-
-  {{ $yearJumps := slice }}
-  {{ $currentJumpYear := "" }}
-  {{ range $archiveGroups }}
-    {{ if ne .year $currentJumpYear }}
-      {{ $yearJumps = $yearJumps | append (dict "year" .year "target" .id) }}
-      {{ $currentJumpYear = .year }}
-    {{ end }}
-  {{ end }}
-
-  <div class="essays-front">
-    <header class="page-header page-shell page-shell--reading essays-front__masthead">
-      <h1 id="page-title" class="list-title">{{ .Title }}</h1>
-      {{ if gt (len $pages) 0 }}
-        <p class="page-intro essays-front__stats">{{ len $pages }} published pieces{{ with index $pages 0 }} &middot; Latest: {{ .Date.Format "Jan 2, 2006" }}{{ end }}</p>
-      {{ end }}
-      {{ if gt (len $yearJumps) 0 }}
-        <nav class="essays-front__year-nav" aria-label="Jump by year">
-          <ol class="essays-front__year-jumps">
-            {{ range $yearJumps }}
-              <li><a class="essays-front__year-link" href="#{{ .target }}">{{ .year }}</a></li>
-            {{ end }}
-          </ol>
-        </nav>
-      {{ end }}
-    </header>
-
-    {{ if gt (len $archiveGroups) 0 }}
-      <div class="page-shell page-shell--reading essays-front__archive">
-        {{ range $archiveGroups }}
-          <section class="essays-front__month" aria-labelledby="{{ .id }}">
-            <h2 id="{{ .id }}" class="essays-front__month-title">{{ .title }}</h2>
-            <div class="essays-front__month-list">
-              {{ range .pages }}
-                {{ partial "discovery/page-list-item.html" (dict
-                  "page" .
-                  "showCollections" true
-                  "showSectionLabel" false
-                  "collectionPlacement" "kicker"
-                ) }}
-              {{ end }}
-            </div>
-          </section>
-        {{ end }}
-      </div>
-    {{ else }}
-      <section class="page-shell page-shell--reading essays-front__archive" aria-labelledby="page-title">
-        <div class="item">
-          <div class="t">No published pieces are listed here yet.</div>
-          <div class="m">This lane is still taking shape. Browse <a href="{{ "collections/" | absURL }}">Collections</a> or the full <a href="{{ "library/" | absURL }}">Library</a> in the meantime.</div>
-        </div>
-      </section>
-    {{ end }}
-  </div>
-{{ end }}
+  <meta http-equiv="refresh" content="0; url={{ "archive/" | relURL }}" />
+  <script>
+    window.location.replace("{{ "archive/" | relURL }}");
+  </script>
+</head>
+<body>
+  <p>Redirecting to <a href="{{ "archive/" | relURL }}">Archive</a>.</p>
+</body>
+</html>

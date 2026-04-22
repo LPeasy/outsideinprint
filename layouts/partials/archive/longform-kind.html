@@ -1,0 +1,13 @@
+{{- $page := . -}}
+{{- $libraryType := lower (printf "%v" ($page.Params.library_type | default "")) -}}
+{{- $kind := "" -}}
+
+{{- if eq $page.Section "working-papers" -}}
+  {{- $kind = "working-paper" -}}
+{{- else if or (eq $libraryType "dialogue") (eq $page.Section "syd-and-oliver") -}}
+  {{- $kind = "dialogue" -}}
+{{- else if eq $page.Section "essays" -}}
+  {{- $kind = "essay" -}}
+{{- end -}}
+
+{{ return $kind }}

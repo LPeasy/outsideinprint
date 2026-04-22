@@ -1,8 +1,10 @@
 ---
 title: 'The New Orthodoxy'
 date: 2026-02-18T17:00:48Z
+url: '/syd-and-oliver/the-new-orthodoxy/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-new-orthodoxy.pdf'

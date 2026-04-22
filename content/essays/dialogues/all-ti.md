@@ -1,8 +1,10 @@
 ---
 title: 'All Time Highs'
 date: 2026-02-14T06:31:48Z
+url: '/syd-and-oliver/all-ti/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/all-ti.pdf'

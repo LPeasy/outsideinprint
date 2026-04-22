@@ -28,10 +28,11 @@ const currentCartoonSlug = readCurrentCartoonSlug(cartoonData);
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
 
-test("masthead removes Welcome and keeps the Dialogues label", () => {
+test("masthead removes Welcome and promotes Archive as the long-form lane", () => {
   assert.doesNotMatch(masthead, />Welcome</);
-  assert.match(masthead, />Essays</);
-  assert.match(masthead, />Dialogues</);
+  assert.match(masthead, />Archive</);
+  assert.doesNotMatch(masthead, />Essays</);
+  assert.doesNotMatch(masthead, />Dialogues</);
   assert.match(masthead, />Collections</);
   assert.match(masthead, />Library</);
   assert.match(masthead, />Gallery</);
@@ -44,10 +45,10 @@ test("masthead removes Welcome and keeps the Dialogues label", () => {
   assert.match(masthead, /aria-current="page"/);
 });
 
-test("dialogues rename stays wired through the live discovery surfaces", () => {
-  assert.match(dialoguesSection, /title: "Dialogues"/);
-  assert.match(dialoguesSection, /description: "Dialogues and fiction from the recurring world of Syd and Oliver\."/);
-  assert.doesNotMatch(dialoguesSection, /S and O/);
+test("filtered dialogue archive stays wired through the live discovery surfaces", () => {
+  assert.match(dialoguesSection, /title: "Syd and Oliver Dialogues"/);
+  assert.match(dialoguesSection, /description: "Dialogue pieces from the recurring world of Syd and Oliver/);
+  assert.doesNotMatch(dialoguesSection, /^title: "Dialogues"$/m);
   assert.match(randomTemplate, /"label" "Home"/);
   assert.doesNotMatch(randomTemplate, /"label" "Welcome"/);
 });
@@ -83,7 +84,7 @@ test("homepage browse band stays curated and replaces Welcome with Library", () 
   assert.doesNotMatch(homepage, /"label" "Feeling curious\?"/);
   assert.match(homepage, /class="home-browse__list"/);
   assert.match(homepage, /home-browse__item-title">\{\{ \$title \}\}<\/div>/);
-  assert.match(homepage, /Use Essays, Gallery, Collections, or Library when you want to move beyond the front page\./);
+  assert.match(homepage, /Use Archive, Gallery, Collections, or Library when you want to move beyond the front page\./);
   assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.doesNotMatch(css, /\.card-center\{/);
   assert.match(css, /\.home-browse__item-title\{[\s\S]*font-size:14px;[\s\S]*line-height:1\.45;/);

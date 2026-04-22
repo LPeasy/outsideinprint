@@ -1,5 +1,11 @@
 {{ $selectedKeys := .Scratch.Get "home_selected_keys" | default (slice) }}
-{{ $recentEssays := where site.RegularPages "Section" "essays" }}
+{{ $recentEssays := slice }}
+{{ range site.RegularPages }}
+  {{ if eq (partial "archive/longform-kind.html" .) "essay" }}
+    {{ $recentEssays = $recentEssays | append . }}
+  {{ end }}
+{{ end }}
+{{ $recentEssays = sort (sort $recentEssays "Title" "asc") "Date" "desc" }}
 
 {{ if gt (len $recentEssays) 0 }}
   <section class="home-recent-work" aria-labelledby="home-recent-work-title">

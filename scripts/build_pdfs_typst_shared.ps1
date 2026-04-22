@@ -779,6 +779,51 @@ function Get-SectionFromFile {
   return ""
 }
 
+function Get-PublicArticleRelativePath {
+  param(
+    [hashtable]$FrontMatter,
+    [string]$FallbackSection,
+    [string]$Slug
+  )
+
+  if ($FrontMatter.ContainsKey("url") -and -not [string]::IsNullOrWhiteSpace($FrontMatter["url"])) {
+    $route = $FrontMatter["url"].Trim()
+    try {
+      if ([Uri]::IsWellFormedUriString($route, [System.UriKind]::Absolute)) {
+        $route = ([Uri]$route).AbsolutePath
+      }
+    }
+    catch {
+    }
+
+    $route = ($route -replace '\\', '/').Trim()
+    if (-not [string]::IsNullOrWhiteSpace($route)) {
+      $route = $route.Trim('/')
+      if (-not [string]::IsNullOrWhiteSpace($route)) {
+        return "$route/"
+      }
+    }
+  }
+
+  return "$FallbackSection/$Slug/"
+}
+
+function Get-PublicSectionFromRelativePath {
+  param(
+    [string]$RelativePath,
+    [string]$FallbackSection
+  )
+
+  if (-not [string]::IsNullOrWhiteSpace($RelativePath)) {
+    $segments = ($RelativePath.Trim('/') -split '/')
+    if ($segments.Length -gt 0 -and -not [string]::IsNullOrWhiteSpace($segments[0])) {
+      return $segments[0]
+    }
+  }
+
+  return $FallbackSection
+}
+
 function Get-ResolvedSlug {
   param([System.IO.FileInfo]$File,[string]$FrontMatterSlug)
 
@@ -1573,9 +1618,22 @@ function Get-HtmlRenderUnavailableReason {
 }
 
 function Resolve-HtmlOutputPath {
-  param([string]$Section,[string]$Slug)
+  param(
+    [string]$RelativePath,
+    [string]$Section,
+    [string]$Slug
+  )
 
-  $candidates = @(
+  $normalizedRelativePath = ($RelativePath -replace '/', [System.IO.Path]::DirectorySeparatorChar).Trim([System.IO.Path]::DirectorySeparatorChar)
+  $candidates = @()
+  if (-not [string]::IsNullOrWhiteSpace($normalizedRelativePath)) {
+    $candidates += @(
+      (Join-Path $HtmlSiteDir (Join-Path $normalizedRelativePath "index.html")),
+      (Join-Path $HtmlSiteDir "$normalizedRelativePath.html")
+    )
+  }
+
+  $candidates += @(
     (Join-Path $HtmlSiteDir "$Section/$Slug/index.html"),
     (Join-Path $HtmlSiteDir "$Section/$Slug.html"),
     (Join-Path $HtmlSiteDir "$Slug/index.html")
@@ -1647,9 +1705,9 @@ function Invoke-HtmlPdfBatchRender {
 
   $manifestJobs = New-Object System.Collections.Generic.List[object]
   foreach ($job in $Jobs) {
-    $htmlPath = Resolve-HtmlOutputPath -Section $job.section -Slug $job.slug
+    $htmlPath = Resolve-HtmlOutputPath -RelativePath $job.public_relative_path -Section $job.section -Slug $job.slug
     if (-not $htmlPath) {
-      throw "Could not locate built HTML for $($job.section)/$($job.slug)"
+      throw "Could not locate built HTML for $($job.public_relative_path)"
     }
 
     $manifestJobs.Add([ordered]@{
@@ -1735,6 +1793,8 @@ foreach ($file in $mdFiles) {
 
   $section = Get-SectionFromFile -RootPath $ContentRoot -File $file
   $slug = Get-ResolvedSlug -File $file -FrontMatterSlug ($frontMatter['slug'])
+  $publicRelativePath = Get-PublicArticleRelativePath -FrontMatter $frontMatter -FallbackSection $section -Slug $slug
+  $publicSection = Get-PublicSectionFromRelativePath -RelativePath $publicRelativePath -FallbackSection $section
   $sourceRelativePath = Get-RelativePath -RootPath $ContentRoot -FullPath $file.FullName
   $safeSlug = Get-SafeFileSlug -Slug $slug
 
@@ -1771,7 +1831,17 @@ foreach ($file in $mdFiles) {
   if ([string]::IsNullOrWhiteSpace($title)) { $title = $slug }
   if ([string]::IsNullOrWhiteSpace($version)) { $version = '1.0' }
   if ([string]::IsNullOrWhiteSpace($edition)) { $edition = 'First digital edition' }
-  if ([string]::IsNullOrWhiteSpace($sectionLabel)) { $sectionLabel = 'Piece' }
+  if ([string]::IsNullOrWhiteSpace($sectionLabel)) {
+    if ($publicSection -eq 'working-papers') {
+      $sectionLabel = 'Working Paper'
+    }
+    elseif ($publicSection -in @('archive', 'essays', 'syd-and-oliver')) {
+      $sectionLabel = 'Archive'
+    }
+    else {
+      $sectionLabel = 'Piece'
+    }
+  }
 
   if ($engine -notin @('typst', 'html')) {
     throw "Unsupported pdf_engine '$engine' for $($file.FullName)"
@@ -1835,6 +1905,8 @@ foreach ($file in $mdFiles) {
       $htmlJobs.Add([ordered]@{
         slug = $slug
         section = $section
+        public_section = $publicSection
+        public_relative_path = $publicRelativePath
         pdf_path = $pdfPath
         build_meta_path = $buildMetaPath
         build_meta = $buildMeta
@@ -1902,7 +1974,7 @@ foreach ($file in $mdFiles) {
   $escapedEdition = Escape-TypstString -Value $edition
   $escapedVariant = Escape-TypstString -Value $variant
 
-  $articleRelativePath = "$section/$slug/"
+  $articleRelativePath = $publicRelativePath
   $articleUrl = if ([string]::IsNullOrWhiteSpace($siteBaseUrl)) { "/$articleRelativePath" } else { "$siteBaseUrl$articleRelativePath" }
   $escapedUrl = Escape-TypstString -Value $articleUrl
   $coverImagePath = Resolve-CoverImagePath -FrontMatter $frontMatter -SourceFile $file -TypDocPath $typDocPath

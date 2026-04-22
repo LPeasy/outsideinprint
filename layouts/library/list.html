@@ -4,43 +4,45 @@
     {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
   </header>
 
-  {{ $sections := slice
-    (dict "key" "essays" "fallbackLabel" "Essays")
-    (dict "key" "syd-and-oliver" "fallbackLabel" "Dialogues")
-    (dict "key" "working-papers" "fallbackLabel" "Working Papers")
+  {{ $libraryTypes := slice
+    (dict "key" "essay" "title" "Essays" "description" "Essays on economics, risk, culture, technology, and public life from Outside In Print.")
+    (dict "key" "dialogue" "title" "Dialogues" "description" "Dialogues and fiction from the recurring world of Syd and Oliver, where power, obligation, money, intimacy, and moral pressure are worked out in conversation.")
+    (dict "key" "working-paper" "title" "Working Papers" "description" "Working papers and developing pieces from Outside In Print.")
   }}
-  {{ $librarySections := slice }}
+  {{ $sourceSections := slice "essays" "working-papers" }}
+  {{ $sourcePages := sort (where site.RegularPages "Section" "in" $sourceSections) "Date" "desc" }}
+  {{ $libraryGroups := slice }}
   {{ $libraryEntries := slice }}
   {{ $availableYears := slice }}
   {{ $availableCollectionSlugs := slice }}
   {{ $collectionDefinitions := default (slice) site.Data.collections.collections }}
   {{ $totalPages := 0 }}
 
-  {{ range $section := $sections }}
-    {{ $sectionKey := index $section "key" }}
-    {{ $sectionPage := site.GetPage (printf "/%s" $sectionKey) }}
-    {{ $sectionTitle := index $section "fallbackLabel" }}
-    {{ $sectionDescription := "" }}
-    {{ with $sectionPage }}
-      {{ $sectionTitle = .Title }}
-      {{ with .Params.description }}
-        {{ $sectionDescription = . }}
+  {{ range $type := $libraryTypes }}
+    {{ $typeKey := index $type "key" }}
+    {{ $typeTitle := index $type "title" }}
+    {{ $typeDescription := index $type "description" }}
+    {{ $pages := slice }}
+
+    {{ range $sourcePages }}
+      {{ $page := . }}
+      {{ $resolvedType := partial "archive/longform-kind.html" $page }}
+      {{ if eq $resolvedType $typeKey }}
+        {{ $pages = $pages | append $page }}
       {{ end }}
     {{ end }}
 
-    {{ $pages := sort (where site.RegularPages "Section" $sectionKey) "Date" "desc" }}
     {{ if gt (len $pages) 0 }}
-      {{ $librarySections = $librarySections | append (dict
-        "key" $sectionKey
-        "title" $sectionTitle
-        "description" $sectionDescription
+      {{ $libraryGroups = $libraryGroups | append (dict
+        "key" $typeKey
+        "title" $typeTitle
+        "description" $typeDescription
         "count" (len $pages)
       ) }}
       {{ $totalPages = add $totalPages (len $pages) }}
 
       {{ range $pages }}
         {{ $page := . }}
-        {{ $sectionLabel := $page.Params.section_label | default (humanize $page.Section) }}
         {{ $matches := partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) }}
         {{ $collectionSlugs := slice }}
         {{ $collectionTitles := slice }}
@@ -49,7 +51,7 @@
           {{ $collectionTitles = $collectionTitles | append .collection.title }}
         {{ end }}
         {{ $seriesTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.series) }}
-        {{ $searchText := printf "%s %s %s %s %s %s %s %s %s" $page.Title $sectionTitle ($page.Params.section_label | default "") ($page.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" $page) ($page.Params.person_name | default "") (delimit $seriesTerms " ") ($page.Params.article_variant | default "") }}
+        {{ $searchText := printf "%s %s %s %s %s %s %s %s %s" $page.Title $typeTitle ($page.Params.section_label | default "") ($page.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" $page) ($page.Params.person_name | default "") (delimit $seriesTerms " ") ($page.Params.article_variant | default "") }}
         {{ $year := $page.Date.Format "2006" }}
         {{ $dateIso := $page.Date.Format "2006-01-02" }}
         {{ $title := $page.Title }}
@@ -59,8 +61,7 @@
         {{ $libraryEntries = $libraryEntries | append (dict
           "id" $entryId
           "page" $page
-          "sectionKey" $sectionKey
-          "sectionLabel" $sectionLabel
+          "typeKey" $typeKey
           "year" $year
           "dateIso" $dateIso
           "title" $title
@@ -92,7 +93,7 @@
     {{ end }}
   {{ end }}
 
-  {{ if gt $totalPages 0 }}<p class="page-intro page-shell page-shell--wide">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $librarySections }} active lanes.</p>{{ end }}
+  {{ if gt $totalPages 0 }}<p class="page-intro page-shell page-shell--wide">The library is the full catalog of the imprint: {{ $totalPages }} published pieces across {{ len $libraryGroups }} active types.</p>{{ end }}
 
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"
@@ -107,14 +108,14 @@
     <div class="library-filter-grid">
       <div class="library-filter library-filter--search">
         <label class="library-search-label" for="library-search">Search the library</label>
-        <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, sections, collections, and versions" autocomplete="off" spellcheck="false" />
+        <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, types, collections, and versions" autocomplete="off" spellcheck="false" />
       </div>
 
       <div class="library-filter">
-        <label class="library-search-label" for="library-section">Section</label>
-        <select id="library-section" class="library-search-input">
-          <option value="">All sections</option>
-          {{ range $librarySections }}
+        <label class="library-search-label" for="library-type">Type</label>
+        <select id="library-type" class="library-search-input">
+          <option value="">All types</option>
+          {{ range $libraryGroups }}
             <option value="{{ index . "key" }}">{{ index . "title" }}</option>
           {{ end }}
         </select>
@@ -159,23 +160,23 @@
   <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or return <a href="{{ "" | absURL }}">Home</a>.</div>
 
   <div id="library-grouped-results">
-    {{ range $section := $librarySections }}
-      {{ $sectionKey := index $section "key" }}
-      {{ $sectionTitle := index $section "title" }}
-      {{ $sectionDescription := index $section "description" }}
-      {{ $sectionEntries := where $libraryEntries "sectionKey" $sectionKey }}
+    {{ range $group := $libraryGroups }}
+      {{ $groupKey := index $group "key" }}
+      {{ $groupTitle := index $group "title" }}
+      {{ $groupDescription := index $group "description" }}
+      {{ $groupEntries := where $libraryEntries "typeKey" $groupKey }}
 
-      {{ if gt (len $sectionEntries) 0 }}
-        <section class="library-group page-shell page-shell--reading" data-library-group data-library-group-key="{{ $sectionKey }}" aria-labelledby="library-group-{{ $sectionKey }}">
-          <h2 id="library-group-{{ $sectionKey }}" class="list-title" style="margin-top:22px;">{{ $sectionTitle }}</h2>
-          {{ with $sectionDescription }}<p class="page-intro">{{ . }}</p>{{ end }}
-          <p class="m"><span data-library-group-count>{{ len $sectionEntries }}</span> pieces in this lane.</p>
-          {{ range $sectionEntries }}
+      {{ if gt (len $groupEntries) 0 }}
+        <section class="library-group page-shell page-shell--reading" data-library-group data-library-group-key="{{ $groupKey }}" aria-labelledby="library-group-{{ $groupKey }}">
+          <h2 id="library-group-{{ $groupKey }}" class="list-title" style="margin-top:22px;">{{ $groupTitle }}</h2>
+          {{ with $groupDescription }}<p class="page-intro">{{ . }}</p>{{ end }}
+          <p class="m"><span data-library-group-count>{{ len $groupEntries }}</span> pieces in this type.</p>
+          {{ range $groupEntries }}
             <div
               data-library-item
               data-library-surface="grouped"
               data-entry-id="{{ index . "id" }}"
-              data-section="{{ index . "sectionKey" }}"
+              data-type="{{ index . "typeKey" }}"
               data-year="{{ index . "year" }}"
               data-date="{{ index . "dateIso" }}"
               data-title="{{ index . "title" | htmlEscape }}"
@@ -202,7 +203,7 @@
           data-library-item
           data-library-surface="results"
           data-entry-id="{{ index . "id" }}"
-          data-section="{{ index . "sectionKey" }}"
+          data-type="{{ index . "typeKey" }}"
           data-year="{{ index . "year" }}"
           data-date="{{ index . "dateIso" }}"
           data-title="{{ index . "title" | htmlEscape }}"
@@ -223,7 +224,7 @@
   <script>
     (function () {
       var searchInput = document.getElementById('library-search');
-      var sectionSelect = document.getElementById('library-section');
+      var typeSelect = document.getElementById('library-type');
       var yearSelect = document.getElementById('library-year');
       var collectionSelect = document.getElementById('library-collection');
       var sortSelect = document.getElementById('library-sort');
@@ -233,7 +234,7 @@
       var groupedRoot = document.getElementById('library-grouped-results');
       var flatSection = document.getElementById('library-flat-results');
       var flatList = document.getElementById('library-results-list');
-      if (!searchInput || !sectionSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !summary || !empty || !groupedRoot || !flatSection || !flatList) return;
+      if (!searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !summary || !empty || !groupedRoot || !flatSection || !flatList) return;
 
       var groupedItems = Array.prototype.slice.call(document.querySelectorAll('[data-library-item][data-library-surface="grouped"]'));
       var resultItems = Array.prototype.slice.call(document.querySelectorAll('[data-library-item][data-library-surface="results"]'));
@@ -248,20 +249,20 @@
       }
 
       function readStateFromUrl() {
-        var state = { q: '', qLower: '', section: '', year: '', collection: '', sort: 'newest' };
+        var state = { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest' };
         if (!supportsUrl) return state;
 
         try {
           var url = new URL(window.location.href);
           var query = (url.searchParams.get('q') || '').trim();
-          var section = (url.searchParams.get('section') || '').trim();
+          var type = (url.searchParams.get('type') || url.searchParams.get('section') || '').trim();
           var year = (url.searchParams.get('year') || '').trim();
           var collection = (url.searchParams.get('collection') || '').trim();
           var sort = (url.searchParams.get('sort') || '').trim();
 
           state.q = query;
           state.qLower = query.toLowerCase();
-          state.section = hasOption(sectionSelect, section) ? section : '';
+          state.type = hasOption(typeSelect, type) ? type : '';
           state.year = hasOption(yearSelect, year) ? year : '';
           state.collection = hasOption(collectionSelect, collection) ? collection : '';
           state.sort = hasOption(sortSelect, sort) ? sort : 'newest';
@@ -274,7 +275,7 @@
 
       function writeStateToControls(state) {
         searchInput.value = state.q;
-        sectionSelect.value = state.section;
+        typeSelect.value = state.type;
         yearSelect.value = state.year;
         collectionSelect.value = state.collection;
         sortSelect.value = state.sort;
@@ -285,7 +286,7 @@
         return {
           q: query,
           qLower: query.toLowerCase(),
-          section: sectionSelect.value,
+          type: typeSelect.value,
           year: yearSelect.value,
           collection: collectionSelect.value,
           sort: sortSelect.value || 'newest'
@@ -302,11 +303,12 @@
           } else {
             url.searchParams.delete('q');
           }
-          if (state.section) {
-            url.searchParams.set('section', state.section);
+          if (state.type) {
+            url.searchParams.set('type', state.type);
           } else {
-            url.searchParams.delete('section');
+            url.searchParams.delete('type');
           }
+          url.searchParams.delete('section');
           if (state.year) {
             url.searchParams.set('year', state.year);
           } else {
@@ -329,19 +331,19 @@
       }
 
       function isDefaultState(state) {
-        return !state.q && !state.section && !state.year && !state.collection && state.sort === 'newest';
+        return !state.q && !state.type && !state.year && !state.collection && state.sort === 'newest';
       }
 
       function itemMatches(item, state) {
         var haystack = (item.getAttribute('data-search') || '').toLowerCase();
-        var section = item.getAttribute('data-section') || '';
+        var type = item.getAttribute('data-type') || '';
         var year = item.getAttribute('data-year') || '';
         var collections = item.getAttribute('data-collections') || '';
         var queryMatch = !state.qLower || haystack.indexOf(state.qLower) !== -1;
-        var sectionMatch = !state.section || section === state.section;
+        var typeMatch = !state.type || type === state.type;
         var yearMatch = !state.year || year === state.year;
         var collectionMatch = !state.collection || (' ' + collections + ' ').indexOf(' ' + state.collection + ' ') !== -1;
-        return queryMatch && sectionMatch && yearMatch && collectionMatch;
+        return queryMatch && typeMatch && yearMatch && collectionMatch;
       }
 
       function compareItems(a, b, sortValue) {
@@ -433,13 +435,13 @@
       applyState(readStateFromControls(), { skipUrlSync: true });
 
       searchInput.addEventListener('input', handleControlChange);
-      sectionSelect.addEventListener('change', handleControlChange);
+      typeSelect.addEventListener('change', handleControlChange);
       yearSelect.addEventListener('change', handleControlChange);
       collectionSelect.addEventListener('change', handleControlChange);
       sortSelect.addEventListener('change', handleControlChange);
 
       resetButton.addEventListener('click', function () {
-        var defaultState = { q: '', qLower: '', section: '', year: '', collection: '', sort: 'newest' };
+        var defaultState = { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest' };
         writeStateToControls(defaultState);
         applyState(defaultState);
       });

@@ -1,8 +1,10 @@
 ---
 title: 'Broke Rich'
 date: 2026-04-13T17:00:00Z
+url: '/syd-and-oliver/broke-rich/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 description: 'Syd and Oliver sit at a dim bar and talk through what it means for a country to look prosperous while ordinary people feel financially cornered.'
 version: '1.0'
 edition: 'First web edition'

@@ -1,10 +1,6 @@
-{{ $label := "" }}
-{{ with .Params.section_label }}{{ $label = upper (printf "%v" .) }}{{ end }}
+{{ $label := upper (partial "archive/lane-label.html" .) }}
 {{ if eq $label "" }}
   {{ with .Params.label }}{{ $label = upper (printf "%v" .) }}{{ end }}
-{{ end }}
-{{ if eq $label "" }}
-  {{ with .Section }}{{ $label = upper (humanize .) }}{{ end }}
 {{ end }}
 {{ if eq $label "" }}
   {{ with .Type }}{{ $label = upper (humanize .) }}{{ end }}

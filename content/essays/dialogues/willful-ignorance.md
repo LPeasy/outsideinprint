@@ -1,8 +1,10 @@
 ---
 title: 'Willful Ignorance'
 date: 2026-02-21T02:39:53Z
+url: '/syd-and-oliver/willful-ignorance/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/willful-ignorance.pdf'

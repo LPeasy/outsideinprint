@@ -85,6 +85,51 @@ function Get-SectionFromFile {
   return ""
 }
 
+function Get-PublicArticleRelativePath {
+  param(
+    [hashtable]$FrontMatter,
+    [string]$FallbackSection,
+    [string]$Slug
+  )
+
+  if ($FrontMatter.ContainsKey("url") -and -not [string]::IsNullOrWhiteSpace($FrontMatter["url"])) {
+    $route = $FrontMatter["url"].Trim()
+    try {
+      if ([Uri]::IsWellFormedUriString($route, [System.UriKind]::Absolute)) {
+        $route = ([Uri]$route).AbsolutePath
+      }
+    }
+    catch {
+    }
+
+    $route = ($route -replace '\\', '/').Trim()
+    if (-not [string]::IsNullOrWhiteSpace($route)) {
+      $route = $route.Trim('/')
+      if (-not [string]::IsNullOrWhiteSpace($route)) {
+        return "$route/"
+      }
+    }
+  }
+
+  return "$FallbackSection/$Slug/"
+}
+
+function Get-PublicSectionFromRelativePath {
+  param(
+    [string]$RelativePath,
+    [string]$FallbackSection
+  )
+
+  if (-not [string]::IsNullOrWhiteSpace($RelativePath)) {
+    $segments = ($RelativePath.Trim('/') -split '/')
+    if ($segments.Length -gt 0 -and -not [string]::IsNullOrWhiteSpace($segments[0])) {
+      return $segments[0]
+    }
+  }
+
+  return $FallbackSection
+}
+
 function Get-ResolvedSlug {
   param([System.IO.FileInfo]$File,[string]$FrontMatterSlug)
 
@@ -311,6 +356,8 @@ foreach ($file in $mdFiles) {
   }
 
   $section = Get-SectionFromFile -RootPath $ContentRoot -File $file
+  $publicRelativePath = Get-PublicArticleRelativePath -FrontMatter $frontMatter -FallbackSection $section -Slug $slug
+  $publicSection = Get-PublicSectionFromRelativePath -RelativePath $publicRelativePath -FallbackSection $section
   $pdfInfo = Get-Item -LiteralPath $pdfPath
   $pageCount = Get-PdfPageCount -Path $pdfPath
   $wordCount = Get-ApproximateWordCount -Raw $raw
@@ -323,12 +370,24 @@ foreach ($file in $mdFiles) {
   if ($null -ne $buildMeta -and $buildMeta.PSObject.Properties.Name -contains "reference_count") {
     $referenceCount = [int]$buildMeta.reference_count
   }
+  $sectionLabel = $frontMatter["section_label"]
+  if ([string]::IsNullOrWhiteSpace($sectionLabel)) {
+    if ($publicSection -eq "working-papers") {
+      $sectionLabel = "Working Paper"
+    }
+    elseif ($publicSection -in @("archive", "essays", "syd-and-oliver")) {
+      $sectionLabel = "Archive"
+    }
+    else {
+      $sectionLabel = "Piece"
+    }
+  }
 
   $entry = [ordered]@{
     slug = $slug
     title = $frontMatter["title"]
-    section = $section
-    section_label = $frontMatter["section_label"]
+    section = $publicSection
+    section_label = $sectionLabel
     pdf_path = "/pdfs/$slug.pdf"
     engine = $engine
     variant = $variant

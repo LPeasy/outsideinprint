@@ -1,8 +1,10 @@
 ---
 title: 'Peaches or Greece'
 date: 2026-02-16T17:00:35Z
+url: '/syd-and-oliver/peaches-or-greece/'
 draft: false
-section_label: 'Dialogues'
+library_type: 'dialogue'
+collections: ['syd-and-oliver-dialogues']
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/peaches-or-greece.pdf'

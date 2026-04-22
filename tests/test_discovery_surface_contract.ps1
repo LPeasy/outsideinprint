@@ -21,10 +21,18 @@ $requiredFiles = @(
   'layouts/404.html',
   'layouts/index.html',
   'layouts/_default/list.html',
+  'layouts/archive/list.html',
+  'layouts/archive/rss.xml',
   'layouts/essays/list.html',
+  'layouts/syd-and-oliver/list.html',
+  'layouts/syd-and-oliver/rss.xml',
   'layouts/collections/list.html',
   'layouts/collections/single.html',
   'layouts/library/list.html',
+  'layouts/partials/archive/longform-kind.html',
+  'layouts/partials/archive/lane-label.html',
+  'layouts/partials/archive/resolve-pages.html',
+  'layouts/partials/archive/render-list.html',
   'layouts/partials/home_front_page.html',
   'layouts/partials/home_imprint_statement.html',
   'layouts/partials/home_selected_collections.html',
@@ -73,7 +81,7 @@ foreach ($requiredSnippet in @(
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
   'partial "newsletter_signup.html"',
-  'site.GetPage "/essays"',
+  'site.GetPage "/archive"',
   'site.GetPage "/gallery"',
   'site.GetPage "/collections"',
   'site.GetPage "/library"'
@@ -212,7 +220,7 @@ foreach ($requiredSnippet in @(
   'https://outsideinprint.org/',
   'https://outsideinprint.org/about/',
   'https://outsideinprint.org/authors/robert-v-ussley/',
-  'https://outsideinprint.org/essays/',
+  'https://outsideinprint.org/archive/',
   'https://outsideinprint.org/syd-and-oliver/',
   'https://outsideinprint.org/collections/',
   'https://outsideinprint.org/library/',
@@ -419,11 +427,52 @@ foreach ($requiredSnippet in @(
 $libraryTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.html') -Raw
 foreach ($requiredSnippet in @(
   'The library is the full catalog of the imprint',
+  'partial "archive/longform-kind.html"',
+  '"title" "Essays"',
+  '"title" "Dialogues"',
+  '"title" "Working Papers"',
+  'Search titles, types, collections, and versions',
+  'for="library-type">Type</label>',
+  '<option value="">All types</option>',
+  'data-type="{{ index . "typeKey" }}"',
+  "url.searchParams.get('type')",
+  "url.searchParams.delete('section')",
   'partial "collections/resolve-page-collections.html"',
   'partial "discovery/page-list-item.html"'
 )) {
   if ($libraryTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/library/list.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'Search titles, sections, collections, and versions',
+  'for="library-section">Section</label>',
+  '<option value="">All sections</option>',
+  'data-section="{{ index . "sectionKey" }}"'
+)) {
+  if ($libraryTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/library/list.html to remove the retired library-section snippet: $retiredSnippet"
+  }
+}
+
+$dialogueFiles = Get-ChildItem -Path (Join-Path $repoRoot 'content/essays/dialogues') -Filter '*.md' | Where-Object { $_.Name -ne '_index.md' }
+foreach ($dialogueFile in $dialogueFiles) {
+  $dialogueContent = Get-Content -Path $dialogueFile.FullName -Raw
+  if ($dialogueContent -notmatch "(?m)^library_type:\s*['""]?dialogue['""]?\s*$") {
+    throw "Expected dialogue content to declare library_type: $($dialogueFile.Name)"
+  }
+
+  if ($dialogueContent -notmatch "(?m)^collections:\s*\[\s*['""]syd-and-oliver-dialogues['""]\s*\]\s*$") {
+    throw "Expected dialogue content to declare the Syd and Oliver collection explicitly: $($dialogueFile.Name)"
+  }
+
+  if ($dialogueContent -notmatch "(?m)^url:\s*['""]?/syd-and-oliver/") {
+    throw "Expected migrated dialogue content to preserve the public /syd-and-oliver/ URL: $($dialogueFile.Name)"
+  }
+
+  if ($dialogueContent -match "(?m)^section_label:\s*['""]?Dialogues['""]?\s*$") {
+    throw "Expected migrated dialogue content not to keep the retired Dialogues lane label: $($dialogueFile.Name)"
   }
 }
 
@@ -448,44 +497,72 @@ foreach ($retiredSnippet in @(
   }
 }
 
-$essaysListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/essays/list.html') -Raw
+$archiveListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/archive/list.html') -Raw
 foreach ($requiredSnippet in @(
-  'class="essays-front"',
-  'class="page-header page-shell page-shell--reading essays-front__masthead"',
-  'class="page-intro essays-front__stats"',
-  'class="essays-front__year-nav"',
-  'class="essays-front__year-jumps"',
-  'class="essays-front__year-link"',
-  'class="page-shell page-shell--reading essays-front__archive"',
-  'class="essays-front__month-title"',
-  'partial "discovery/page-list-item.html"',
-  'showCollections" true',
-  'showSectionLabel" false',
-  'collectionPlacement" "kicker"'
+  'partial "archive/resolve-pages.html"',
+  '"mode" "archive"',
+  'partial "archive/render-list.html"',
+  '"idPrefix" "archive"'
 )) {
-  if ($essaysListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/essays/list.html to contain: $requiredSnippet"
+  if ($archiveListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/archive/list.html to contain: $requiredSnippet"
   }
 }
 
 foreach ($retiredSnippet in @(
   'partial "journey_links.html"',
-  'Essay Desk',
-  'Late Edition',
+  'site.Data.editorial_cartoons',
   'Current Edition',
   'Rolling Archive',
-  'By Month',
-  'site.Data.editorial_cartoons',
-  '.caption',
-  'class="essays-front__lead"',
-  'class="essays-front__rail"',
-  'essays-front__rail-item--with-summary',
-  'class="page-intro essays-front__deck"',
-  'class="page-shell page-shell--wide essays-front__cartoon"',
-  'class="essays-front__cartoon-caption"'
+  '"mode" "dialogue"'
 )) {
-  if ($essaysListTemplate -match [regex]::Escape($retiredSnippet)) {
-    throw "Expected layouts/essays/list.html to remove the retired essays-front snippet: $retiredSnippet"
+  if ($archiveListTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/archive/list.html to remove the retired archive-shell snippet: $retiredSnippet"
+  }
+}
+
+$essaysRedirectTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/essays/list.html') -Raw
+foreach ($requiredSnippet in @(
+  'Redirecting to Outside In Print Archive',
+  'noindex, follow',
+  '<link rel="canonical" href="{{ "archive/" | absURL }}" />',
+  '<meta http-equiv="refresh" content="0; url={{ "archive/" | relURL }}" />',
+  'window.location.replace("{{ "archive/" | relURL }}");'
+)) {
+  if ($essaysRedirectTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/essays/list.html to contain the legacy redirect snippet: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'define "main"',
+  'class="essays-front"',
+  'partial "archive/render-list.html"'
+)) {
+  if ($essaysRedirectTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/essays/list.html to remain redirect-only: $retiredSnippet"
+  }
+}
+
+$dialoguesListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/syd-and-oliver/list.html') -Raw
+foreach ($requiredSnippet in @(
+  'partial "archive/resolve-pages.html"',
+  '"mode" "dialogue"',
+  'partial "archive/render-list.html"',
+  '"idPrefix" "dialogues"'
+)) {
+  if ($dialoguesListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/syd-and-oliver/list.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'partial "journey_links.html"',
+  'Current Edition',
+  'No published pieces are listed here yet.'
+)) {
+  if ($dialoguesListTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/syd-and-oliver/list.html to use the shared filtered archive shell cleanly: $retiredSnippet"
   }
 }
 
