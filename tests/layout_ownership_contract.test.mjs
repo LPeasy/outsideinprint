@@ -121,26 +121,37 @@ test("essays front owns a dedicated route layout and drops the generic section-l
     'class="page-intro essays-front__stats"',
     'class="page-shell page-shell--wide essays-front__edition"',
     'class="essays-front__lead"',
-    'class="essays-front__secondary"',
+    'class="essays-front__rail"',
+    'essays-front__rail-item--with-summary',
     'class="page-shell page-shell--wide essays-front__cartoon"',
+    'class="essays-front__cartoon-caption"',
     'class="page-shell page-shell--wide essays-front__archive"',
     'class="essays-front__month-title"',
-    'partial "discovery/page-list-item.html"'
+    'partial "discovery/page-list-item.html"',
+    'collectionPlacement" "kicker"'
   ]) {
     assert.match(essaysList, new RegExp(escapeRegex(snippet)));
   }
+
+  assert.doesNotMatch(essaysList, /partial "journey_links\.html"/);
 
   for (const selector of [
     ".essays-front{",
     ".essays-front__masthead{",
     ".essays-front__edition{",
+    ".essays-front__edition-grid{",
     ".essays-front__lead{",
-    ".essays-front__secondary{",
+    ".essays-front__rail{",
+    ".essays-front__rail-item{",
+    ".essays-front__rail-item--with-summary{",
     ".essays-front__cartoon{",
+    ".essays-front__cartoon-caption{",
     ".essays-front__archive{",
     ".essays-front__month{",
     ".essays-front__month-title{",
-    ".essays-front__month-list{"
+    ".essays-front__month-list{",
+    ".item-kicker{",
+    ".item-kicker--collection{"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
   }
@@ -204,9 +215,13 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
     "`essays-front`",
     "`essays-front__masthead`",
     "`essays-front__edition`",
+    "`essays-front__edition-grid`",
     "`essays-front__lead`",
-    "`essays-front__secondary`",
+    "`essays-front__rail`",
+    "`essays-front__rail-item`",
+    "`essays-front__rail-item--with-summary`",
     "`essays-front__cartoon`",
+    "`essays-front__cartoon-caption`",
     "`essays-front__archive`",
     "`essays-front__month`",
     "`essays-front__month-title`",

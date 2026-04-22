@@ -457,14 +457,29 @@ foreach ($requiredSnippet in @(
   'Rolling Archive',
   'By Month',
   'site.Data.editorial_cartoons',
+  '.caption',
   'class="page-shell page-shell--wide essays-front__cartoon"',
   'class="essays-front__month-title"',
   'partial "discovery/page-list-item.html"',
   'showCollections" true',
-  'showSectionLabel" false'
+  'showSectionLabel" false',
+  'collectionPlacement" "kicker"',
+  'class="essays-front__rail"',
+  'essays-front__rail-item--with-summary',
+  'class="essays-front__cartoon-caption"'
 )) {
   if ($essaysListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/essays/list.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'partial "journey_links.html"',
+  'class="essays-front__secondary"',
+  'class="essays-front__secondary-summary"'
+)) {
+  if ($essaysListTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/essays/list.html to remove the retired essays-front snippet: $retiredSnippet"
   }
 }
 
@@ -472,13 +487,19 @@ foreach ($requiredSnippet in @(
   '.essays-front{',
   '.essays-front__masthead{',
   '.essays-front__edition{',
+  '.essays-front__edition-grid{',
   '.essays-front__lead{',
-  '.essays-front__secondary{',
+  '.essays-front__rail{',
+  '.essays-front__rail-item{',
+  '.essays-front__rail-item--with-summary{',
   '.essays-front__cartoon{',
+  '.essays-front__cartoon-caption{',
   '.essays-front__archive{',
   '.essays-front__month{',
   '.essays-front__month-title{',
-  '.essays-front__month-list{'
+  '.essays-front__month-list{',
+  '.item-kicker{',
+  '.item-kicker--collection{'
 )) {
   if ($mainCss -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected assets/css/main.css to contain essays-front selector: $requiredSnippet"
@@ -513,7 +534,9 @@ foreach ($requiredSnippet in @(
   'partial "discovery/page-summary.html"',
   'partial "collections/resolve-page-collections.html"',
   'data-analytics-source-slot',
-  'printf "%d min read"'
+  'printf "%d min read"',
+  'collectionPlacement',
+  'item-kicker item-kicker--collection'
 )) {
   if ($pageListItemPartial -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected discovery/page-list-item.html to contain: $requiredSnippet"
