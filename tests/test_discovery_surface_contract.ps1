@@ -2,6 +2,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$mainCss = Get-Content -Path (Join-Path $repoRoot 'assets/css/main.css') -Raw
 
 function Test-FrontMatterHasImageKey {
   param([string]$RelativePath)
@@ -20,6 +21,7 @@ $requiredFiles = @(
   'layouts/404.html',
   'layouts/index.html',
   'layouts/_default/list.html',
+  'layouts/essays/list.html',
   'layouts/collections/list.html',
   'layouts/collections/single.html',
   'layouts/library/list.html',
@@ -430,12 +432,56 @@ foreach ($requiredSnippet in @(
   'Home',
   'partial "discovery/page-list-item.html"',
   'No published pieces are listed here yet.',
-  '$orderedPages := sort $pages "Title" "asc"',
-  'if eq .Section "essays"',
-  '$orderedPages = sort $pages "Date" "desc"'
+  '$orderedPages := sort $pages "Title" "asc"'
 )) {
   if ($defaultListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/_default/list.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'if eq .Section "essays"',
+  '$orderedPages = sort $pages "Date" "desc"'
+)) {
+  if ($defaultListTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/_default/list.html to remove the retired essays-specific list branch: $retiredSnippet"
+  }
+}
+
+$essaysListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/essays/list.html') -Raw
+foreach ($requiredSnippet in @(
+  'class="essays-front"',
+  'Essay Desk',
+  'Late Edition',
+  'Current Edition',
+  'Rolling Archive',
+  'By Month',
+  'site.Data.editorial_cartoons',
+  'class="page-shell page-shell--wide essays-front__cartoon"',
+  'class="essays-front__month-title"',
+  'partial "discovery/page-list-item.html"',
+  'showCollections" true',
+  'showSectionLabel" false'
+)) {
+  if ($essaysListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/essays/list.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($requiredSnippet in @(
+  '.essays-front{',
+  '.essays-front__masthead{',
+  '.essays-front__edition{',
+  '.essays-front__lead{',
+  '.essays-front__secondary{',
+  '.essays-front__cartoon{',
+  '.essays-front__archive{',
+  '.essays-front__month{',
+  '.essays-front__month-title{',
+  '.essays-front__month-list{'
+)) {
+  if ($mainCss -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected assets/css/main.css to contain essays-front selector: $requiredSnippet"
   }
 }
 

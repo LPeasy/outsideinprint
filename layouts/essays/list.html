@@ -1,0 +1,160 @@
+{{ define "main" }}
+  {{ $pages := sort .Pages "Date" "desc" }}
+  {{ $currentEdition := first 5 $pages }}
+  {{ $lead := false }}
+  {{ if gt (len $currentEdition) 0 }}
+    {{ $lead = index $currentEdition 0 }}
+  {{ end }}
+  {{ $secondary := slice }}
+  {{ if gt (len $currentEdition) 1 }}
+    {{ $secondary = after 1 $currentEdition }}
+  {{ end }}
+  {{ $archivePages := slice }}
+  {{ if gt (len $pages) 5 }}
+    {{ $archivePages = after 5 $pages }}
+  {{ end }}
+
+  {{ $archiveGroups := slice }}
+  {{ $currentMonthTitle := "" }}
+  {{ $currentMonthId := "" }}
+  {{ $currentMonthPages := slice }}
+  {{ range $archivePages }}
+    {{ $monthTitle := .Date.Format "January 2006" }}
+    {{ $monthId := printf "essays-month-%s" (.Date.Format "2006-01" | urlize) }}
+    {{ if ne $monthTitle $currentMonthTitle }}
+      {{ if gt (len $currentMonthPages) 0 }}
+        {{ $archiveGroups = $archiveGroups | append (dict "title" $currentMonthTitle "id" $currentMonthId "pages" $currentMonthPages) }}
+      {{ end }}
+      {{ $currentMonthTitle = $monthTitle }}
+      {{ $currentMonthId = $monthId }}
+      {{ $currentMonthPages = slice . }}
+    {{ else }}
+      {{ $currentMonthPages = $currentMonthPages | append . }}
+    {{ end }}
+  {{ end }}
+  {{ if gt (len $currentMonthPages) 0 }}
+    {{ $archiveGroups = $archiveGroups | append (dict "title" $currentMonthTitle "id" $currentMonthId "pages" $currentMonthPages) }}
+  {{ end }}
+
+  {{ $galleryData := site.Data.editorial_cartoons | default dict }}
+  {{ $currentCartoonSlug := $galleryData.current | default "" }}
+  {{ $currentCartoon := false }}
+  {{ range ($galleryData.cartoons | default (slice)) }}
+    {{ if eq .slug $currentCartoonSlug }}
+      {{ $currentCartoon = . }}
+    {{ end }}
+  {{ end }}
+
+  <div class="essays-front">
+    <header class="page-header page-shell page-shell--wide essays-front__masthead">
+      <p class="essays-front__label">Essay Desk</p>
+      <h1 id="page-title" class="list-title">{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="page-intro essays-front__deck">{{ . }}</p>{{ end }}
+      {{ if gt (len $pages) 0 }}
+        <p class="page-intro essays-front__stats">{{ len $pages }} published pieces{{ with $lead }} &middot; Latest: {{ .Date.Format "Jan 2, 2006" }}{{ end }}</p>
+      {{ end }}
+    </header>
+
+    {{ partial "journey_links.html" (dict
+      "class" "journey-links--page"
+      "eyebrow" "Browse next"
+      "links" (slice
+        (dict "href" ("collections/" | absURL) "label" "Browse collections")
+        (dict "href" ("library/" | absURL) "label" "Search the library")
+        (dict "href" ("" | absURL) "label" "Home")
+      )
+    ) }}
+
+    {{ with $lead }}
+      {{ $leadSummary := partial "discovery/page-summary.html" . }}
+      {{ $leadMetaParts := slice }}
+      {{ with .Date }}{{ $leadMetaParts = $leadMetaParts | append (.Format "Jan 2, 2006") }}{{ end }}
+      {{ with .Params.version }}{{ $leadMetaParts = $leadMetaParts | append (printf "v%s" .) }}{{ end }}
+      {{ with .ReadingTime }}{{ $leadMetaParts = $leadMetaParts | append (printf "%d min read" .) }}{{ end }}
+
+      <section class="page-shell page-shell--wide essays-front__edition" aria-labelledby="essays-current-edition-title">
+        <div class="essays-front__edition-header">
+          <p class="essays-front__label">Late Edition</p>
+          <h2 id="essays-current-edition-title" class="essays-front__section-title">Current Edition</h2>
+        </div>
+        <div class="essays-front__edition-grid">
+          <article class="essays-front__lead">
+            <p class="essays-front__lead-kicker">Lead Essay</p>
+            <h3 class="essays-front__lead-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            {{ if gt (len $leadMetaParts) 0 }}<p class="essays-front__meta">{{ delimit $leadMetaParts " | " }}</p>{{ end }}
+            {{ with $leadSummary }}<div class="essays-front__lead-summary">{{ . }}</div>{{ end }}
+            <p class="essays-front__lead-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
+          </article>
+
+          {{ if gt (len $secondary) 0 }}
+            <div class="essays-front__secondary" aria-label="Secondary stories">
+              {{ range $secondary }}
+                {{ $secondarySummary := partial "discovery/page-summary.html" . }}
+                {{ $secondaryMetaParts := slice }}
+                {{ with .Date }}{{ $secondaryMetaParts = $secondaryMetaParts | append (.Format "Jan 2, 2006") }}{{ end }}
+                {{ with .Params.version }}{{ $secondaryMetaParts = $secondaryMetaParts | append (printf "v%s" .) }}{{ end }}
+                {{ with .ReadingTime }}{{ $secondaryMetaParts = $secondaryMetaParts | append (printf "%d min read" .) }}{{ end }}
+                <article class="essays-front__secondary-item">
+                  <p class="essays-front__secondary-kicker">Dispatch</p>
+                  <h3 class="essays-front__secondary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                  {{ if gt (len $secondaryMetaParts) 0 }}<p class="essays-front__meta">{{ delimit $secondaryMetaParts " | " }}</p>{{ end }}
+                  {{ with $secondarySummary }}<div class="essays-front__secondary-summary">{{ . }}</div>{{ end }}
+                </article>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    {{ with $currentCartoon }}
+      <section class="page-shell page-shell--wide essays-front__cartoon" aria-labelledby="essays-cartoon-title">
+        <div class="essays-front__cartoon-meta">
+          <p class="essays-front__label">Editorial Cartoon</p>
+          <h2 id="essays-cartoon-title" class="essays-front__section-title">{{ .title }}</h2>
+          <p class="essays-front__meta">{{ time.Format "Jan 2, 2006" .date }}</p>
+          <p class="essays-front__cartoon-action"><a href="{{ "gallery/" | absURL }}">View gallery &rarr;</a></p>
+        </div>
+        <figure class="essays-front__cartoon-figure">
+          <img
+            src="{{ .image | relURL }}"
+            alt="{{ .alt }}"
+            width="{{ .width }}"
+            height="{{ .height }}"
+            loading="lazy"
+          >
+        </figure>
+      </section>
+    {{ end }}
+
+    {{ if gt (len $archiveGroups) 0 }}
+      <section class="page-shell page-shell--wide essays-front__archive" aria-labelledby="essays-archive-title">
+        <div class="essays-front__archive-header">
+          <p class="essays-front__label">Rolling Archive</p>
+          <h2 id="essays-archive-title" class="essays-front__section-title">By Month</h2>
+        </div>
+        {{ range $archiveGroups }}
+          <section class="essays-front__month" aria-labelledby="{{ .id }}">
+            <h3 id="{{ .id }}" class="essays-front__month-title">{{ .title }}</h3>
+            <div class="essays-front__month-list">
+              {{ range .pages }}
+                {{ partial "discovery/page-list-item.html" (dict
+                  "page" .
+                  "showCollections" true
+                  "showSectionLabel" false
+                ) }}
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+      </section>
+    {{ else if eq (len $pages) 0 }}
+      <section class="page-shell page-shell--reading essays-front__archive" aria-labelledby="page-title">
+        <div class="item">
+          <div class="t">No published pieces are listed here yet.</div>
+          <div class="m">This lane is still taking shape. Browse <a href="{{ "collections/" | absURL }}">Collections</a> or the full <a href="{{ "library/" | absURL }}">Library</a> in the meantime.</div>
+        </div>
+      </section>
+    {{ end }}
+  </div>
+{{ end }}
