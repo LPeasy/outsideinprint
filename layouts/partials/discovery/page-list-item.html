@@ -37,7 +37,7 @@
 {{- with $class -}}
   {{- $itemClasses = $itemClasses | append . -}}
 {{- end -}}
-{{- if $articleVariant -}}
+{{- if and $articleVariant (ne $articleVariant "modernbio") -}}
   {{- $itemClasses = $itemClasses | append (printf "item--variant-%s" $articleVariant) -}}
 {{- end -}}
 

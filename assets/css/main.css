@@ -718,10 +718,6 @@ textarea{
 .item-kicker a:focus-visible{
   text-decoration:underline;
 }
-.item--variant-modernbio{
-  padding-left:1rem;
-  box-shadow:inset 2px 0 0 rgba(127,147,166,.24);
-}
 .item .t{
   color:var(--text-primary);
   font-size:clamp(1.18rem, 1.02rem + .38vw, 1.38rem);
@@ -3473,9 +3469,6 @@ h2{ margin-top:34px; }
   }
   .collection-room .journey-links__link{
     min-width:0;
-  }
-  .item--variant-modernbio{
-    padding-left:.85rem;
   }
   .collections-directory{
     gap:1.7rem;
