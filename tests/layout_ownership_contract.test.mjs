@@ -116,16 +116,12 @@ test("collections index uses a unified card directory and drops the retired spli
 test("essays front owns a dedicated route layout and drops the generic section-list path", () => {
   for (const snippet of [
     'class="essays-front"',
-    'class="page-header page-shell page-shell--wide essays-front__masthead"',
-    'class="page-intro essays-front__deck"',
+    'class="page-header page-shell page-shell--reading essays-front__masthead"',
     'class="page-intro essays-front__stats"',
-    'class="page-shell page-shell--wide essays-front__edition"',
-    'class="essays-front__lead"',
-    'class="essays-front__rail"',
-    'essays-front__rail-item--with-summary',
-    'class="page-shell page-shell--wide essays-front__cartoon"',
-    'class="essays-front__cartoon-caption"',
-    'class="page-shell page-shell--wide essays-front__archive"',
+    'class="essays-front__year-nav"',
+    'class="essays-front__year-jumps"',
+    'class="essays-front__year-link"',
+    'class="page-shell page-shell--reading essays-front__archive"',
     'class="essays-front__month-title"',
     'partial "discovery/page-list-item.html"',
     'collectionPlacement" "kicker"'
@@ -133,19 +129,31 @@ test("essays front owns a dedicated route layout and drops the generic section-l
     assert.match(essaysList, new RegExp(escapeRegex(snippet)));
   }
 
-  assert.doesNotMatch(essaysList, /partial "journey_links\.html"/);
+  for (const retiredSnippet of [
+    'partial "journey_links.html"',
+    'Essay Desk',
+    'Late Edition',
+    'Current Edition',
+    'Rolling Archive',
+    'By Month',
+    'site.Data.editorial_cartoons',
+    'class="page-intro essays-front__deck"',
+    'class="essays-front__lead"',
+    'class="essays-front__rail"',
+    'essays-front__rail-item--with-summary',
+    'class="page-shell page-shell--wide essays-front__cartoon"',
+    'class="essays-front__cartoon-caption"'
+  ]) {
+    assert.doesNotMatch(essaysList, new RegExp(escapeRegex(retiredSnippet)));
+  }
 
   for (const selector of [
     ".essays-front{",
     ".essays-front__masthead{",
-    ".essays-front__edition{",
-    ".essays-front__edition-grid{",
-    ".essays-front__lead{",
-    ".essays-front__rail{",
-    ".essays-front__rail-item{",
-    ".essays-front__rail-item--with-summary{",
-    ".essays-front__cartoon{",
-    ".essays-front__cartoon-caption{",
+    ".essays-front__stats{",
+    ".essays-front__year-nav{",
+    ".essays-front__year-jumps{",
+    ".essays-front__year-link{",
     ".essays-front__archive{",
     ".essays-front__month{",
     ".essays-front__month-title{",
@@ -154,6 +162,23 @@ test("essays front owns a dedicated route layout and drops the generic section-l
     ".item-kicker--collection{"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+
+  for (const retiredSelector of [
+    ".essays-front__deck{",
+    ".essays-front__label{",
+    ".essays-front__section-title{",
+    ".essays-front__meta{",
+    ".essays-front__edition{",
+    ".essays-front__edition-grid{",
+    ".essays-front__lead{",
+    ".essays-front__rail{",
+    ".essays-front__rail-item{",
+    ".essays-front__rail-item--with-summary{",
+    ".essays-front__cartoon{",
+    ".essays-front__cartoon-caption{"
+  ]) {
+    assert.doesNotMatch(css, new RegExp(escapeRegex(retiredSelector)));
   }
 });
 
@@ -214,14 +239,10 @@ test("layout ownership matrix tracks the Welcome-route removal cleanly", () => {
     "`home-manifesto__line--secondary`",
     "`essays-front`",
     "`essays-front__masthead`",
-    "`essays-front__edition`",
-    "`essays-front__edition-grid`",
-    "`essays-front__lead`",
-    "`essays-front__rail`",
-    "`essays-front__rail-item`",
-    "`essays-front__rail-item--with-summary`",
-    "`essays-front__cartoon`",
-    "`essays-front__cartoon-caption`",
+    "`essays-front__stats`",
+    "`essays-front__year-nav`",
+    "`essays-front__year-jumps`",
+    "`essays-front__year-link`",
     "`essays-front__archive`",
     "`essays-front__month`",
     "`essays-front__month-title`",
