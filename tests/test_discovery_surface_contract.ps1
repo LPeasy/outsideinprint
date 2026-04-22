@@ -451,22 +451,17 @@ foreach ($retiredSnippet in @(
 $essaysListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/essays/list.html') -Raw
 foreach ($requiredSnippet in @(
   'class="essays-front"',
-  'Essay Desk',
-  'Late Edition',
-  'Current Edition',
-  'Rolling Archive',
-  'By Month',
-  'site.Data.editorial_cartoons',
-  '.caption',
-  'class="page-shell page-shell--wide essays-front__cartoon"',
+  'class="page-header page-shell page-shell--reading essays-front__masthead"',
+  'class="page-intro essays-front__stats"',
+  'class="essays-front__year-nav"',
+  'class="essays-front__year-jumps"',
+  'class="essays-front__year-link"',
+  'class="page-shell page-shell--reading essays-front__archive"',
   'class="essays-front__month-title"',
   'partial "discovery/page-list-item.html"',
   'showCollections" true',
   'showSectionLabel" false',
-  'collectionPlacement" "kicker"',
-  'class="essays-front__rail"',
-  'essays-front__rail-item--with-summary',
-  'class="essays-front__cartoon-caption"'
+  'collectionPlacement" "kicker"'
 )) {
   if ($essaysListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/essays/list.html to contain: $requiredSnippet"
@@ -475,8 +470,19 @@ foreach ($requiredSnippet in @(
 
 foreach ($retiredSnippet in @(
   'partial "journey_links.html"',
-  'class="essays-front__secondary"',
-  'class="essays-front__secondary-summary"'
+  'Essay Desk',
+  'Late Edition',
+  'Current Edition',
+  'Rolling Archive',
+  'By Month',
+  'site.Data.editorial_cartoons',
+  '.caption',
+  'class="essays-front__lead"',
+  'class="essays-front__rail"',
+  'essays-front__rail-item--with-summary',
+  'class="page-intro essays-front__deck"',
+  'class="page-shell page-shell--wide essays-front__cartoon"',
+  'class="essays-front__cartoon-caption"'
 )) {
   if ($essaysListTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/essays/list.html to remove the retired essays-front snippet: $retiredSnippet"
@@ -486,14 +492,10 @@ foreach ($retiredSnippet in @(
 foreach ($requiredSnippet in @(
   '.essays-front{',
   '.essays-front__masthead{',
-  '.essays-front__edition{',
-  '.essays-front__edition-grid{',
-  '.essays-front__lead{',
-  '.essays-front__rail{',
-  '.essays-front__rail-item{',
-  '.essays-front__rail-item--with-summary{',
-  '.essays-front__cartoon{',
-  '.essays-front__cartoon-caption{',
+  '.essays-front__stats{',
+  '.essays-front__year-nav{',
+  '.essays-front__year-jumps{',
+  '.essays-front__year-link{',
   '.essays-front__archive{',
   '.essays-front__month{',
   '.essays-front__month-title{',
@@ -504,6 +506,25 @@ foreach ($requiredSnippet in @(
 )) {
   if ($mainCss -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected assets/css/main.css to contain essays-front selector: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  '.essays-front__deck{',
+  '.essays-front__label{',
+  '.essays-front__section-title{',
+  '.essays-front__meta{',
+  '.essays-front__edition{',
+  '.essays-front__edition-grid{',
+  '.essays-front__lead{',
+  '.essays-front__rail{',
+  '.essays-front__rail-item{',
+  '.essays-front__rail-item--with-summary{',
+  '.essays-front__cartoon{',
+  '.essays-front__cartoon-caption{'
+)) {
+  if ($mainCss -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected assets/css/main.css to remove the retired essays-front selector: $retiredSnippet"
   }
 }
 

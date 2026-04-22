@@ -1434,42 +1434,46 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = 'Essay Desk'
-    Message = 'expected the essays landing page to render the route-owned newsprint masthead label'
+    Pattern = '\d+\s+published pieces.*?Latest:\s*[A-Z][a-z]{2}\s+\d{1,2},\s+\d{4}'
+    Message = 'expected the essays landing page to collapse to a compact archive stats line'
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)Late Edition.*?Current Edition'
-    Message = 'expected the essays landing page to render the current-edition band'
+    Pattern = '(?s)<main\b[^>]*>.*?Essays on economics, risk, culture, technology, and public life from Outside In Print\.'
+    Message = 'expected the essays landing page not to render the route-level visible deck copy'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = 'essays-front__lead'
-    Message = 'expected the essays landing page to render a dominant lead-story region'
+    Pattern = 'Current Edition|Late Edition|Rolling Archive|By Month|essays-front__lead|essays-front__rail'
+    Message = 'expected the essays landing page not to retain the retired front-page-style edition structure'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = 'essays-front__rail'
-    Message = 'expected the essays landing page to render the stacked dispatch rail'
+    Pattern = 'essays-front__year-nav'
+    Message = 'expected the essays landing page to render the inline year-jump archive navigation'
   },
   @{
     Path = 'public/essays/index.html'
     Pattern = $currentCartoonImagePattern
-    Message = 'expected the essays landing page to render the current editorial cartoon break'
+    Message = 'expected the essays landing page not to reuse the homepage editorial cartoon block'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = 'essays-front__cartoon-caption'
-    Message = 'expected the essays landing page to render the optional visible cartoon caption when provided'
+    Pattern = 'essays-front__cartoon|View gallery'
+    Message = 'expected the essays landing page not to render the retired essays-route cartoon module'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)Rolling Archive.*?By Month'
-    Message = 'expected the essays landing page to render the rolling archive header'
+    Pattern = '(?s)href=(?:"?#essays-month-2026-04"?).*?>2026<.*?href=(?:"?#essays-month-2025-12"?).*?>2025<'
+    Message = 'expected the essays landing page to expose inline year jumps keyed to the first month of each year'
   },
   @{
     Path = 'public/essays/index.html'
-    Pattern = '(?s)March 2026.*?February 2026.*?January 2026'
+    Pattern = '(?s)April 2026.*?March 2026.*?February 2026.*?January 2026'
     Message = 'expected the essays archive to group entries by descending month-year bands'
   },
   @{
@@ -1511,13 +1515,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/syd-and-oliver/index.html'
-    Pattern = 'Essay Desk|Late Edition|Rolling Archive|essays-front__lead'
+    Pattern = 'Current Edition|Rolling Archive|essays-front__lead|essays-front__year-nav'
     Message = 'expected /syd-and-oliver/ to remain on the shared generic list layout'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/working-papers/index.html'
-    Pattern = 'Essay Desk|Late Edition|Rolling Archive|essays-front__lead'
+    Pattern = 'Current Edition|Rolling Archive|essays-front__lead|essays-front__year-nav'
     Message = 'expected /working-papers/ to remain on the shared generic list layout'
     ShouldNotMatch = $true
   },
@@ -1861,23 +1865,18 @@ foreach ($check in $requiredUxChecks) {
 
 if ($targetPageHtml.ContainsKey('public/essays/index.html')) {
   $essaysIndexHtml = [string]$targetPageHtml['public/essays/index.html']
-  $railItemCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bessays-front__rail-item\b[^"]*"|''[^'']*\bessays-front__rail-item\b[^'']*''|[^\s>]*\bessays-front__rail-item\b[^\s>]*)', 'IgnoreCase').Count
-  if ($railItemCount -ne 4) {
-    $uxIssues.Add("public/essays/index.html => expected exactly 4 dispatch rail items, found $railItemCount")
-  }
-
-  $railSummaryCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bessays-front__rail-item--with-summary\b[^"]*"|''[^'']*\bessays-front__rail-item--with-summary\b[^'']*''|[^\s>]*\bessays-front__rail-item--with-summary\b[^\s>]*)', 'IgnoreCase').Count
-  if ($railSummaryCount -ne 2) {
-    $uxIssues.Add("public/essays/index.html => expected exactly 2 dispatch rail items with summaries, found $railSummaryCount")
-  }
-
   $archiveDeskTagCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bitem-kicker--collection\b[^"]*"|''[^'']*\bitem-kicker--collection\b[^'']*''|[^\s>]*\bitem-kicker--collection\b[^\s>]*)', 'IgnoreCase').Count
   if ($archiveDeskTagCount -eq 0) {
     $uxIssues.Add('public/essays/index.html => expected archive collection labels to render in the muted desk-tag kicker position')
   }
 
-  if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $essaysIndexHtml -notmatch [regex]::Escape($currentCartoonCaption)) {
-    $uxIssues.Add('public/essays/index.html => expected the current cartoon caption text to render when configured')
+  $yearJumpCount = [regex]::Matches($essaysIndexHtml, 'class=(?:"[^"]*\bessays-front__year-link\b[^"]*"|''[^'']*\bessays-front__year-link\b[^'']*''|[^\s>]*\bessays-front__year-link\b[^\s>]*)', 'IgnoreCase').Count
+  if ($yearJumpCount -lt 2) {
+    $uxIssues.Add("public/essays/index.html => expected at least 2 year-jump links, found $yearJumpCount")
+  }
+
+  if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $essaysIndexHtml -match [regex]::Escape($currentCartoonCaption)) {
+    $uxIssues.Add('public/essays/index.html => expected the essays archive not to render the homepage cartoon caption text')
   }
 }
 
