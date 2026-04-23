@@ -311,12 +311,17 @@ foreach ($retiredSnippet in @(
 
 $collectionsListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/list.html') -Raw
 foreach ($requiredSnippet in @(
-  '{{ len $entries }} collections &middot; {{ $totalPieces }} published pieces',
+  '{{ len $entries }} public collections &middot; {{ $totalPieces }} published pieces',
   'section-front section-front--collections',
   'section-front__header',
   'page-header--section-centered',
   'partial "discovery/collection-card.html"',
   'collections-directory',
+  'collections-directory__summary',
+  'collections-directory__guide',
+  'collections-directory__guide-card',
+  'collections-directory__guide-title',
+  'collections-directory__guide-meta',
   'collections-directory__group',
   'collections-directory__group-title',
   'collections-directory__grid',
@@ -719,16 +724,20 @@ if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Feel
 }
 
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw
-if ($collectionCardPartial -notmatch 'Recommended entry point') {
+if ($collectionCardPartial -notmatch 'Start Here') {
   throw 'Expected discovery/collection-card.html to surface the collection start-here link when present.'
 }
 
-if ($collectionCardPartial -notmatch 'if \$label') {
-  throw 'Expected discovery/collection-card.html to keep grid-card kicker rendering optional rather than unconditional.'
+if ($collectionCardPartial -notmatch '\$eyebrow := \$label') {
+  throw 'Expected discovery/collection-card.html to seed the collection-card eyebrow from the optional label input.'
 }
 
-if ($collectionCardPartial -match '\{\{- else -\}\}\s*<div class="k">\{\{ title \$entry\.state\.kind \}\}</div>') {
-  throw 'Expected discovery/collection-card.html not to fall back to a default kind kicker on grid cards when no label is provided.'
+if ($collectionCardPartial -notmatch 'if not \$eyebrow') {
+  throw 'Expected discovery/collection-card.html to fall back to the collection kind only when no eyebrow label is provided.'
+}
+
+if ($collectionCardPartial -notmatch '\$eyebrow = title \$entry\.state\.kind') {
+  throw 'Expected discovery/collection-card.html to default the eyebrow to the collection kind when no label is provided.'
 }
 
 $webpageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/webpage.html') -Raw
