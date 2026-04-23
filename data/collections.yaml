@@ -78,6 +78,31 @@ collections:
         - biography
       sections: []
 
+  - slug: lit-review
+    title: Lit Review
+    kind: series
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 27
+    start_here: the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe
+    room_theme: lit-review-lamplit-shelf
+    description: Reviews and close readings of books and narrative works that stay with theme, structure, and why a story endures.
+    metadata:
+      - label: Format
+        value: Reviews and close readings
+      - label: Scope
+        value: Books and narrative criticism
+      - label: Lane
+        value: Critical series
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
   - slug: risk-uncertainty
     title: Risk, Uncertainty, and Decision-Making
     kind: topic

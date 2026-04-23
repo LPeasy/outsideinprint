@@ -4,6 +4,8 @@ date: 2025-03-01
 draft: false
 slug: "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe"
 section_label: "Essay"
+collections: ["lit-review"]
+collection_weight: 10
 subtitle: "Should you read this viral book? (Yes)"
 featured_image: "/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/16bb88fabf093eb157a47057f24b82ff13ee51dc67c7f5d89157c67bf668bb25.jpeg"
 featured_image_caption: "Photo by Greg Rakozy on Unsplash"

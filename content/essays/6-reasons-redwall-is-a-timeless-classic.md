@@ -4,6 +4,8 @@ date: 2025-02-20
 draft: false
 slug: "6-reasons-redwall-is-a-timeless-classic"
 section_label: "Essay"
+collections: ["lit-review"]
+collection_weight: 30
 subtitle: "(And Why It Still Captivates Readers Today)"
 description: "Since its publication in 1986, Redwall has enchanted readers with its immersive world and timeless storytelling. Brian Jacques’ novel, the first in an iconic..."
 featured_image: "/images/medium/6-reasons-redwall-is-a-timeless-classic/4271248be82b271445e30852312a06bfbd54c7d1ddb8205fa5328aa8215900d8.jpeg"
