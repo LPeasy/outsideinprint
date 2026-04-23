@@ -426,6 +426,7 @@ $requiredEssayHeroPages = @(
   'public/essays/synthetic-reasoning/index.html',
   'public/essays/biter-the-slang-word-that-hits/index.html',
   'public/essays/the-fair-price-of-bitcoin-69420/index.html',
+  'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html',
   'public/essays/beyond-moores-law/index.html',
   'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
 )
@@ -454,6 +455,13 @@ $essayHeroChecks = @(
     SourcePath = 'content/essays/the-fair-price-of-bitcoin-69420.md'
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'
+    SourcePath = 'content/essays/the-ai-data-center-wants-its-own-power-plant.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The AI campus no longer arrives alone. It now shows up with turbines, towers, and a power strategy of its own.'
   },
   @{
     PublicPath = 'public/essays/the-sewer-under-the-sidewalk/index.html'
@@ -580,6 +588,15 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html' = @{
+    Title = 'The AI Data Center Wants Its Own Power Plant'
+    Canonical = 'https://outsideinprint.org/essays/the-ai-data-center-wants-its-own-power-plant/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-ai-data-center-wants-its-own-power-plant/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-sewer-under-the-sidewalk/index.html' = @{
@@ -1852,7 +1869,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '9 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*67 published pieces'
+    Pattern = '9 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*68 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -1883,7 +1900,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 67 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 68 published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
@@ -2082,6 +2099,26 @@ $requiredUxChecks = @(
     Path = 'public/essays/synthetic-reasoning/index.html'
     Pattern = 'article_collection_context'
     Message = 'expected the article collection context link to emit the dedicated analytics source slot'
+  },
+  @{
+    Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'
+    Pattern = 'data-piece-collection-slug=(?:"technology-ai-machine-future"|technology-ai-machine-future)'
+    Message = 'expected the AI data center essay to key article accents to the AI collection slug'
+  },
+  @{
+    Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'
+    Pattern = 'data-piece-collection-room-theme=(?:"ai-screen-glow-archive"|ai-screen-glow-archive)'
+    Message = 'expected the AI data center essay to render the AI article collection-accent theme'
+  },
+  @{
+    Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'
+    Pattern = 'From the Collection'
+    Message = 'expected the AI data center essay to render the compact article collection context block'
+  },
+  @{
+    Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'
+    Pattern = 'article_collection_context'
+    Message = 'expected the AI data center essay collection link to emit the dedicated analytics source slot'
   },
   @{
     Path = 'public/essays/in-the-image-of-god/index.html'
