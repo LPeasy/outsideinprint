@@ -536,7 +536,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
-    Description = 'About Outside In Print: the imprint''s mission, editorial model, publishing structure, and the relationship between the site and Robert V. Ussley.'
+    Description = 'A digital imprint for essays, dialogues, reported analysis, and working papers published to the web with stable URLs, versioned records, and a durable archive.'
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -1782,6 +1782,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
+    Pattern = 'Imprint Record'
+    Message = 'expected the about page to expose the imprint-record opening surface'
+  },
+  @{
+    Path = 'public/about/index.html'
     Pattern = 'Author and Publisher'
     Message = 'expected the about page to explain the author and publisher relationship'
   },
@@ -1789,6 +1794,11 @@ $requiredUxChecks = @(
     Path = 'public/about/index.html'
     Pattern = 'Robert V\. Ussley'
     Message = 'expected the about page to name Robert V. Ussley explicitly'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = '(?s)Reading Map.*?Home.*?Browse collections.*?Search the library.*?Meet the author'
+    Message = 'expected the about page to keep a calm reading map into Home, Collections, Library, and the author archive'
   },
   @{
     Path = 'public/shop/index.html'

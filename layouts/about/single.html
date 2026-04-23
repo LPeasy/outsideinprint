@@ -1,44 +1,67 @@
 {{ define "main" }}
-  <article class="profile-page profile-page--about">
-    <header class="page-header page-shell page-shell--wide">
-      <h1>{{ .Title }}</h1>
-      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
-    </header>
+  <article class="about-route">
+    <div class="section-front section-front--about">
+      <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
+        {{ with .Params.section_label }}<p class="about-route__eyebrow">{{ . }}</p>{{ end }}
+        <h1>{{ .Title }}</h1>
+      </header>
 
-    <div class="piece-body page-shell page-shell--reading">
-      {{ .Content }}
+      <div class="section-front__body page-shell page-shell--wide">
+        <section class="about-route__artifact" aria-labelledby="about-imprint-record-title">
+          <div class="about-route__artifact-panel">
+            <p class="about-route__artifact-kicker">Imprint Record</p>
+            <h2 id="about-imprint-record-title" class="about-route__artifact-title">A digital imprint built for durable reading on the open web.</h2>
+            {{ with .Params.description }}<p class="about-route__artifact-dek">{{ . }}</p>{{ end }}
+          </div>
+
+          <section class="about-route__record" aria-labelledby="about-current-file-title">
+            <h3 id="about-current-file-title" class="about-route__record-title">Current File</h3>
+            <dl class="about-route__record-rows">
+              <div class="about-route__record-row">
+                <dt class="about-route__record-label">Publisher</dt>
+                <dd class="about-route__record-value">Outside In Print</dd>
+              </div>
+              <div class="about-route__record-row">
+                <dt class="about-route__record-label">Principal Byline</dt>
+                <dd class="about-route__record-value"><a href="{{ "authors/robert-v-ussley/" | absURL }}">Robert V. Ussley</a></dd>
+              </div>
+              <div class="about-route__record-row">
+                <dt class="about-route__record-label">Forms</dt>
+                <dd class="about-route__record-value">Essays, dialogues, reported analysis, working papers</dd>
+              </div>
+              <div class="about-route__record-row">
+                <dt class="about-route__record-label">Archive</dt>
+                <dd class="about-route__record-value"><a href="{{ "collections/" | absURL }}">Collections</a> + <a href="{{ "library/" | absURL }}">Library</a></dd>
+              </div>
+            </dl>
+          </section>
+        </section>
+      </div>
     </div>
 
-    <section class="page-shell page-shell--wide" aria-labelledby="about-highlights-title">
-      <h2 id="about-highlights-title" class="list-title">At a Glance</h2>
-      <div class="profile-stats">
-        <div class="profile-stat">
-          <div class="profile-stat__label">Publisher</div>
-          <div class="profile-stat__value">Outside In Print</div>
-          <p class="profile-stat__note">The imprint and publisher for the whole site.</p>
-        </div>
-        <div class="profile-stat">
-          <div class="profile-stat__label">Essay Byline</div>
-          <div class="profile-stat__value">Robert V. Ussley</div>
-          <p class="profile-stat__note">The default author name attached to published essays and related web editions.</p>
-        </div>
-        <div class="profile-stat">
-          <div class="profile-stat__label">Archive Shape</div>
-          <div class="profile-stat__value">Collections + Library</div>
-          <p class="profile-stat__note">Curated topic paths and a full searchable catalog work together.</p>
-        </div>
+    <section class="about-route__body page-shell page-shell--reading" aria-labelledby="about-body-title">
+      <h2 id="about-body-title" class="visually-hidden">About the Imprint</h2>
+      <div class="piece-body">
+        {{ .Content }}
       </div>
     </section>
 
-    {{ partial "journey_links.html" (dict
-      "class" "journey-links--page"
-      "eyebrow" "Read the site"
-      "links" (slice
-        (dict "href" ("authors/robert-v-ussley/" | absURL) "label" "Meet the author")
-        (dict "href" ("" | absURL) "label" "Home")
-        (dict "href" ("collections/" | absURL) "label" "Browse collections")
-        (dict "href" ("library/" | absURL) "label" "Search the library")
-      )
-    ) }}
+    <section class="about-route__reading-map page-shell page-shell--wide" aria-labelledby="about-reading-map-title">
+      <div class="about-route__reading-map-header">
+        <h2 id="about-reading-map-title" class="list-title">Reading Map</h2>
+        <p class="about-route__reading-map-copy">Choose the path that matches how you want to enter the archive.</p>
+      </div>
+
+      {{ partial "journey_links.html" (dict
+        "class" "journey-links--page about-route__journey"
+        "eyebrow" "Choose a path"
+        "links" (slice
+          (dict "href" ("" | absURL) "label" "Home")
+          (dict "href" ("collections/" | absURL) "label" "Browse collections")
+          (dict "href" ("library/" | absURL) "label" "Search the library")
+          (dict "href" ("authors/robert-v-ussley/" | absURL) "label" "Meet the author")
+        )
+      ) }}
+    </section>
   </article>
 {{ end }}

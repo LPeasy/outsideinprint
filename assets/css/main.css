@@ -1027,6 +1027,15 @@ textarea{
 .section-front--shop .section-front__body{
   padding-top:1rem;
 }
+.section-front--about{
+  margin-bottom:2.25rem;
+}
+.section-front--about .section-front__body{
+  padding-top:1.15rem;
+}
+.section-front--about .page-header{
+  margin-bottom:0;
+}
 .shop-front__body{
   max-width:38rem;
 }
@@ -1982,6 +1991,139 @@ textarea{
 .author-note__focus{
   color:var(--text-secondary);
 }
+.about-route{
+  display:grid;
+  gap:2.2rem;
+}
+.about-route__eyebrow{
+  margin:0 0 .7rem;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.about-route__artifact{
+  display:grid;
+  grid-template-columns:minmax(0, 1.35fr) minmax(18rem, .95fr);
+  gap:1.1rem 1.25rem;
+  align-items:stretch;
+}
+.about-route__artifact-panel,
+.about-route__record{
+  min-height:100%;
+  padding:1.35rem 1.45rem;
+  border:1px solid rgba(236,231,223,.11);
+  border-radius:var(--radius-soft);
+}
+.about-route__artifact-panel{
+  background:
+    linear-gradient(180deg, rgba(236,231,223,.045), rgba(236,231,223,.012)),
+    rgba(18,18,18,.34);
+  box-shadow:var(--shadow-soft);
+}
+.about-route__artifact-kicker,
+.about-route__record-title{
+  margin:0;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.about-route__artifact-title{
+  max-width:22ch;
+  margin:.7rem 0 0;
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:clamp(1.7rem, 1.45rem + .9vw, 2.4rem);
+  font-weight:600;
+  letter-spacing:-.02em;
+  line-height:1.12;
+  text-wrap:balance;
+}
+.about-route__artifact-dek{
+  max-width:34rem;
+  margin:.95rem 0 0;
+  color:var(--text-secondary);
+  font-size:1rem;
+  line-height:1.72;
+}
+.about-route__record{
+  background:
+    linear-gradient(180deg, rgba(127,147,166,.08), rgba(127,147,166,.02)),
+    rgba(20,27,35,.34);
+}
+.about-route__record-rows{
+  display:grid;
+  gap:0;
+  margin:.8rem 0 0;
+}
+.about-route__record-row{
+  display:grid;
+  grid-template-columns:minmax(8.25rem, 10rem) minmax(0, 1fr);
+  gap:.95rem;
+  align-items:start;
+  padding:.85rem 0;
+  border-top:1px solid rgba(236,231,223,.09);
+}
+.about-route__record-row:first-child{
+  padding-top:0;
+  border-top:none;
+}
+.about-route__record-row:last-child{
+  padding-bottom:0;
+}
+.about-route__record-label{
+  margin:0;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.66rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1.45;
+  text-transform:uppercase;
+}
+.about-route__record-value{
+  margin:0;
+  color:var(--text-primary);
+  font-size:.96rem;
+  line-height:1.62;
+}
+.about-route__record-value a{
+  color:var(--text-primary);
+  text-decoration-color:rgba(127,147,166,.5);
+}
+.about-route__body{
+  display:grid;
+}
+.about-route__body .piece-body{
+  margin:0 auto;
+}
+.about-route__body .piece-body > p:first-child{
+  color:var(--text-secondary);
+  font-size:1.08rem;
+  line-height:1.78;
+}
+.about-route__reading-map{
+  padding-top:1.3rem;
+  border-top:1px solid rgba(236,231,223,.09);
+}
+.about-route__reading-map-header{
+  max-width:34rem;
+  margin:0 0 1rem;
+}
+.about-route__reading-map-copy{
+  margin:0;
+  color:var(--text-secondary);
+  font-size:.98rem;
+  line-height:1.68;
+}
+.about-route__journey{
+  margin-top:0;
+}
 .profile-page{
   display:grid;
   gap:1.9rem;
@@ -2017,6 +2159,39 @@ textarea{
   color:var(--text-secondary);
   font-size:.92rem;
   line-height:1.55;
+}
+@media (max-width:900px){
+  .about-route__artifact{
+    grid-template-columns:1fr;
+  }
+  .about-route__artifact-title{
+    max-width:none;
+  }
+  .about-route__record-row{
+    grid-template-columns:1fr;
+    gap:.4rem;
+  }
+}
+@media (max-width:640px){
+  .section-front--about{
+    margin-bottom:2rem;
+  }
+  .about-route{
+    gap:1.9rem;
+  }
+  .about-route__artifact-panel,
+  .about-route__record{
+    padding:1.1rem 1rem;
+  }
+  .about-route__artifact-title{
+    font-size:1.75rem;
+  }
+  .about-route__body .piece-body > p:first-child{
+    font-size:1.03rem;
+  }
+  .about-route__reading-map{
+    padding-top:1.1rem;
+  }
 }
 .site-footer{
   margin-top:3rem;

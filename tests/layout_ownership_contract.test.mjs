@@ -252,11 +252,14 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(css, /\.running-header__inner\{/);
 });
 
-test("about and author pages own dedicated profile layouts and styling", () => {
-  assert.match(aboutSingle, /class="profile-page profile-page--about"/);
-  assert.match(aboutSingle, /id="about-highlights-title"/);
-  assert.match(aboutSingle, /Meet the author/);
+test("about route owns an imprint-first layout while author pages keep the profile shell", () => {
+  assert.match(aboutSingle, /class="about-route"/);
+  assert.match(aboutSingle, /section-front section-front--about/);
+  assert.match(aboutSingle, /about-route__artifact/);
+  assert.match(aboutSingle, /about-route__record/);
+  assert.match(aboutSingle, /Reading Map/);
   assert.match(aboutSingle, /"label" "Home"/);
+  assert.match(aboutSingle, /"label" "Meet the author"/);
   assert.match(authorList, /partial "authors\/directory\.html" \./);
   assert.match(authorSection, /partial "authors\/directory\.html" \./);
   assert.match(authorDirectory, /class="profile-page profile-page--authors"/);
@@ -270,6 +273,12 @@ test("about and author pages own dedicated profile layouts and styling", () => {
   assert.match(authorSingle, /Essay Archive/);
 
   for (const selector of [
+    ".about-route{",
+    ".about-route__artifact{",
+    ".about-route__artifact-panel,",
+    ".about-route__record{",
+    ".about-route__record-row{",
+    ".about-route__journey{",
     ".piece-byline{",
     ".author-note{",
     ".profile-page{",
@@ -288,6 +297,12 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`home-manifesto__inner`",
     "`.home-manifesto__line--primary`",
     "`.home-manifesto__line--secondary`",
+    "| About route | `/about/`",
+    "`section-front--about`",
+    "`about-route`",
+    "`about-route__artifact`",
+    "`about-route__record`",
+    "`about-route__journey`",
     "`essays-front`",
     "`essays-front__masthead`",
     "`essays-front__stats`",
