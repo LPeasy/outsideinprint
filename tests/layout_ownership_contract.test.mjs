@@ -61,10 +61,13 @@ test("collection detail and membership hooks have explicit inner-structure styli
   assert.match(collectionSingle, /class="collection-room\{\{ with \$roomTheme \}\} collection-room--\{\{ \. \}\}\{\{ end \}\}"/);
   assert.match(collectionSingle, /data-collection-room-theme="\{\{ \$roomTheme \}\}"/);
   assert.match(collectionSingle, /collection-room__header/);
+  assert.match(collectionSingle, /collection-room__eyebrow/);
+  assert.match(collectionSingle, /collection-room__summary/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--entry/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--progress/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--items/);
   assert.match(collectionSingle, /collection-room__section collection-room__section--related/);
+  assert.match(collectionSingle, /collection-room__section-intro/);
   assert.match(collectionSingle, /class="collection-item-note"/);
   assert.match(collectionSingle, /class="collection-pill"/);
   assert.match(collectionSingle, /"class" \(cond \(eq \$itemSlug \$startHereSlug\) "collection-item--start-here"/);
@@ -78,10 +81,13 @@ test("collection detail and membership hooks have explicit inner-structure styli
     ".collection-room{",
     ".collection-room__section{",
     ".collection-room__header,",
+    ".collection-room__eyebrow{",
+    ".collection-room__summary,",
     ".collection-room__section--entry,",
     ".collection-room__section--progress{",
     ".collection-room__section--items,",
     ".collection-room__section--related,",
+    ".collection-room__section-intro{",
     ".collection-grid{",
     ".collection-card{",
     ".collection-meta{",
@@ -101,9 +107,15 @@ test("collection detail and membership hooks have explicit inner-structure styli
 test("collections index uses a unified card directory and drops the retired split sections", () => {
   assert.match(collectionList, /section-front section-front--collections/);
   assert.match(collectionList, /section-front__header/);
+  assert.match(collectionList, /class="page-shell page-shell--wide collections-directory__guide"/);
+  assert.match(collectionList, /collections-directory__guide-card/);
+  assert.match(collectionList, /collections-directory__guide-title/);
   assert.match(collectionList, /class="page-shell page-shell--grid collections-directory"/);
   assert.match(collectionList, /class="collections-directory__group"/);
+  assert.match(collectionList, /class="collections-directory__group-header"/);
   assert.match(collectionList, /class="collections-directory__group-title"/);
+  assert.match(collectionList, /class="collections-directory__group-meta"/);
+  assert.match(collectionList, /class="collections-directory__group-intro"/);
   assert.match(collectionList, /class="grid collection-grid collections-directory__grid"/);
   assert.doesNotMatch(collectionList, /partial "journey_links\.html"/);
   assert.doesNotMatch(collectionList, /Featured Collections/);
@@ -111,9 +123,19 @@ test("collections index uses a unified card directory and drops the retired spli
   assert.doesNotMatch(collectionList, /"variant" "item"/);
 
   for (const selector of [
+    ".collections-directory__summary{",
+    ".collections-directory__guide{",
+    ".collections-directory__guide-card{",
+    ".collections-directory__guide-kicker,",
+    ".collections-directory__guide-title{",
+    ".collections-directory__guide-copy{",
+    ".collections-directory__guide-meta{",
     ".collections-directory{",
     ".collections-directory__group{",
+    ".collections-directory__group-header{",
     ".collections-directory__group-title{",
+    ".collections-directory__group-meta{",
+    ".collections-directory__group-intro{",
     ".collections-directory__grid{"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
@@ -209,7 +231,7 @@ test("archive shell owns the long-form list routes while /essays/ becomes a redi
 });
 
 test("article single template removes dead generic layout hooks and uses page-flow ownership", () => {
-  assert.match(articleSingle, /<article class="piece"/);
+  assert.match(articleSingle, new RegExp(escapeRegex('<article class="{{ delimit $articleClasses " " }}"')));
   assert.match(articleSingle, /append "piece--collection-accent"/);
   assert.match(articleSingle, /data-piece-collection-slug="\{\{ \$primaryCollection\.collection\.slug \}\}"/);
   assert.match(articleSingle, /data-piece-collection-room-theme="\{\{ \$primaryCollection\.collection\.room_theme \}\}"/);
@@ -242,6 +264,9 @@ test("about and author pages own dedicated profile layouts and styling", () => {
   assert.match(authorDirectory, /View author archive/);
   assert.match(authorSingle, /class="profile-page profile-page--author"/);
   assert.match(authorSingle, /Recent Essays/);
+  assert.match(authorSingle, /partial "discovery\/collection-card\.html" \(dict/);
+  assert.match(authorSingle, /"variant" "item"/);
+  assert.match(authorSingle, /"analyticsSourceSlot" "author_page"/);
   assert.match(authorSingle, /Essay Archive/);
 
   for (const selector of [
@@ -261,8 +286,8 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
   for (const snippet of [
     "`home-manifesto`",
     "`home-manifesto__inner`",
-    "`home-manifesto__line--primary`",
-    "`home-manifesto__line--secondary`",
+    "`.home-manifesto__line--primary`",
+    "`.home-manifesto__line--secondary`",
     "`essays-front`",
     "`essays-front__masthead`",
     "`essays-front__stats`",
@@ -278,23 +303,28 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`section-front__body`",
     "`collection-room`",
     "`collection-room__header`",
+    "`collection-room__eyebrow`",
+    "`collection-room__summary`",
     "`collection-room__section`",
     "`collection-room__section--entry`",
     "`collection-room__section--progress`",
     "`collection-room__section--items`",
     "`collection-room__section--related`",
+    "`collection-room__section-intro`",
     "`collections-directory`",
+    "`collections-directory__guide*`",
     "`collections-directory__group`",
     "`collections-directory__group-title`",
     "`collections-directory__grid`",
     "| Gallery | `/gallery/`",
     "`collection-item-note`",
+    "`collection-card__description`",
     "`piece--collection-accent`",
     "`piece-collection-context`",
     "`piece-collection-context__eyebrow`",
     "`piece-collection-context__title`",
     "`piece-collection-context__meta`",
-    "`running-header__inner`",
+    "`.running-header__inner`",
     "`reading-path__header`",
     "`reading-path__actions`",
     "`reading-path__preview`",

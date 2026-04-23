@@ -13,6 +13,7 @@ function escapeRegex(value) {
 
 const collectionsData = read("data/collections.yaml");
 const articleSingle = read("layouts/_default/single.html");
+const collectionList = read("layouts/collections/list.html");
 const collectionSingle = read("layouts/collections/single.html");
 const collectionCard = read("layouts/partials/discovery/collection-card.html");
 const css = read("assets/css/main.css");
@@ -50,12 +51,29 @@ test("collection detail template emits room root and section hooks", () => {
     'class="collection-room{{ with $roomTheme }} collection-room--{{ . }}{{ end }}"',
     'data-collection-room-theme="{{ $roomTheme }}"',
     'class="page-header page-shell page-shell--wide collection-room__header"',
+    'class="collection-room__eyebrow"',
+    'class="collection-room__summary"',
     'class="collection-room__section collection-room__section--entry page-shell page-shell--reading"',
     'class="collection-room__section collection-room__section--progress"',
     'class="collection-room__section collection-room__section--items page-shell page-shell--reading"',
-    'class="collection-room__section collection-room__section--related page-shell page-shell--reading"'
+    'class="collection-room__section collection-room__section--related page-shell page-shell--reading"',
+    'class="collection-room__section-intro"'
   ]) {
     assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));
+  }
+});
+
+test("collection list template emits the lane guide and grouped directory hooks", () => {
+  for (const snippet of [
+    'class="page-shell page-shell--wide collections-directory__guide"',
+    'class="collections-directory__guide-card"',
+    'class="collections-directory__guide-kicker"',
+    'class="collections-directory__guide-title"',
+    'class="collections-directory__guide-copy"',
+    'class="collections-directory__guide-meta"',
+    'class="collections-directory__group-meta"'
+  ]) {
+    assert.match(collectionList, new RegExp(escapeRegex(snippet)));
   }
 });
 
@@ -79,6 +97,11 @@ test("collection-card partial emits room-echo classes only in the grid branch", 
   for (const snippet of [
     '{{- $roomTheme := $entry.collection.room_theme | default "" -}}',
     '{{- if eq $variant "item" -}}',
+    'collection-card__eyebrow',
+    'collection-card__description',
+    'collection-card__meta-line',
+    'collection-card__start-here',
+    'collection-meta',
     '<article class="item{{ with $class }} {{ . }}{{ end }}">',
     '<a class="card collection-card{{ with $roomTheme }} collection-card--room-echo collection-card--{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"'
   ]) {
@@ -87,12 +110,26 @@ test("collection-card partial emits room-echo classes only in the grid branch", 
 
   assert.doesNotMatch(
     collectionCard,
-    /<article class="item\{\{ with \$class \}\} \{\{ \. \}\}\{\{ end \}\}">[\s\S]*collection-card--room-echo/
+    /\{\{- if eq \$variant "item" -\}\}[\s\S]*?collection-card--room-echo[\s\S]*?\{\{- else -\}\}/
   );
 });
 
 test("css owns the shared collection-room namespace and all theme modifiers", () => {
   for (const selector of [
+    ".collections-directory__summary{",
+    ".collections-directory__guide{",
+    ".collections-directory__guide-card{",
+    ".collections-directory__guide-kicker,",
+    ".collections-directory__guide-title{",
+    ".collections-directory__guide-copy{",
+    ".collections-directory__guide-meta{",
+    ".collections-directory__group-header{",
+    ".collections-directory__group-meta{",
+    ".collections-directory__group-intro{",
+    ".collection-card__eyebrow{",
+    ".collection-card__description{",
+    ".collection-card__meta-line{",
+    ".collection-card__start-here{",
     ".piece--collection-accent{",
     ".piece--collection-accent .piece-collection-context,",
     ".piece--collection-accent .piece-collection-context__eyebrow{",
@@ -113,9 +150,12 @@ test("css owns the shared collection-room namespace and all theme modifiers", ()
     ".collection-room::after{",
     ".collection-room__section{",
     ".collection-room__header,",
+    ".collection-room__eyebrow{",
+    ".collection-room__summary,",
     ".collection-room__section--entry,",
     ".collection-room__section--items,",
     ".collection-room__section--related,",
+    ".collection-room__section-intro{",
     ".collection-room__section--progress{",
     ".collection-room .collection-progress,",
     ".collection-room .journey-links--page{",
@@ -146,6 +186,12 @@ test("docs record room_theme, article light accents, and collection-room ownersh
     "`room_theme`",
     "presentation key reused by collection-detail reading rooms",
     "reading-room treatment",
+    "curated editorial reading lanes",
+    "Read in sequence",
+    "Follow a question",
+    "Start Here",
+    "table of contents for the lane",
+    "Best first read for this lane.",
     "From the Collection",
     "first public match",
     "primary-collection light-accent layer"
@@ -159,13 +205,21 @@ test("docs record room_theme, article light accents, and collection-room ownersh
     "`piece-collection-context__eyebrow`",
     "`piece-collection-context__title`",
     "`piece-collection-context__meta`",
+    "`collections-directory__guide*`",
+    "`collection-card__description`",
     "`collection-room`",
     "`collection-room__header`",
+    "`collection-room__eyebrow`",
+    "`collection-room__summary`",
     "`collection-room__section`",
     "`collection-room__section--entry`",
     "`collection-room__section--progress`",
     "`collection-room__section--items`",
-    "`collection-room__section--related`"
+    "`collection-room__section--related`",
+    "`collection-card__eyebrow`",
+    "`collection-card__meta-line`",
+    "`collection-card__start-here`",
+    "`collection-room__section-intro`"
   ]) {
     assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));
   }

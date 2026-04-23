@@ -3,6 +3,8 @@
 Outside In Print uses collections as curated editorial reading lanes, not as a broad taxonomy layer.
 Hugo taxonomies remain disabled in `hugo.toml`, so every collection is defined intentionally in `data/collections.yaml` and resolved through the `layouts/partials/collections/*` helpers.
 
+For a ready-to-run Codex implementation brief and follow-up prompt sequence for future clarity work on `/collections/`, see `docs/collections-clarity-prompt-set.md`.
+
 ## Editorial rules
 
 - Collections are curated lanes, not generic categories.
@@ -66,7 +68,7 @@ Resolution rules:
 
 ## Templates touched by the system
 
-- `layouts/collections/list.html`: unified public collections card directory grouped into `Series` and `Topics`.
+- `layouts/collections/list.html`: unified public collections card directory grouped into `Series` and `Topics`, with plain-language framing for how to use the route.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
 - `layouts/_default/single.html`: article header and aftermatter, including the primary-collection light-accent context, the article-exit continuation zone for collection-member pages, and the fallback `Read Next` path for standalone pages.
@@ -108,6 +110,20 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - Each collection page renders a browser-local `Reading Progress` panel above `In This Collection`.
 - The panel does not use cookies, a backend, or analytics state.
 - Each collection row can show a `Visited` marker when the current browser has already opened that piece.
+- The collections index opens with plain editorial framing and a route-level lane guide:
+  - `Series` is framed as `Read in sequence`
+  - `Topics` is framed as `Follow a question`
+- The grouped directory remains unified; it does not split featured cards back out into a separate strip or a neutral row index.
+- Collection cards now surface their scan order more clearly:
+  - kind
+  - title
+  - description
+  - `collection-meta` summary, including piece count and lane when present
+  - supporting metadata line
+  - visible `Start Here` cue when the lane defines one
+- Collection detail headers explicitly frame what the lane is, how a first-time reader should enter it, and how browser-local progress works.
+- The `In This Collection` section now acts as the table of contents for the lane, and the marked entry piece uses the plainer note `Best first read for this lane.`
+- `Related Collections` is framed as adjacent terrain for what to read after finishing the current lane, not as a generic overflow list.
 - Collection detail pages no longer render the old `How to Use This Collection` overview block.
 - Collection detail pages may also apply an explicit per-collection reading-room treatment via `room_theme`.
 - Article pages may reuse `room_theme` only for the compact primary-collection light-accent layer.

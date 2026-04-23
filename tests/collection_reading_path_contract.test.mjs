@@ -40,6 +40,20 @@ test("collection single includes the progress partial, progress script, and item
   assert.ok(collectionSingle.indexOf('partial "collections/collection-progress.html"') < collectionSingle.indexOf('id="collection-items-title"'));
 });
 
+test("collection single frames the lane, sequence, and related terrain in plain language", () => {
+  for (const snippet of [
+    'If you are coming in fresh, begin with',
+    'Use Reading Progress to keep your place in this browser.',
+    'Start here if this is your first visit.',
+    'This panel tracks what this browser has already opened',
+    'Use this list as the table of contents for the lane.',
+    'Best first read for this lane.',
+    'These nearby lanes keep you in related terrain once you finish this one'
+  ]) {
+    assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));
+  }
+});
+
 test("reading-path partial uses the first public collection match and fixed continuation copy", () => {
   for (const snippet of [
     'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',

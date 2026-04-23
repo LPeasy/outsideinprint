@@ -38,14 +38,16 @@
 
     <div class="collection-room{{ with $roomTheme }} collection-room--{{ . }}{{ end }}" data-collection-room-theme="{{ $roomTheme }}">
       <header class="page-header page-shell page-shell--wide collection-room__header">
+        <p class="collection-room__eyebrow">{{ title $state.kind }} collection</p>
         <h1>{{ $definition.title }}</h1>
         {{ with $definition.description }}<p class="page-intro">{{ . }}</p>{{ end }}
-        <p class="page-intro">This {{ $state.kind }} gathers {{ $state.count }} published pieces into one reading thread{{ with $startHere }} and points first-time readers to <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}.</p>
+        <p class="collection-room__summary">This {{ $state.kind }} gathers {{ $state.count }} published pieces into one reading lane. {{ with $startHere }}If you are coming in fresh, begin with <a href="{{ .RelPermalink }}">{{ .Title }}</a>.{{ else }}If you are coming in fresh, begin with the first piece in the ordered list below.{{ end }} Use Reading Progress to keep your place in this browser.</p>
       </header>
 
       {{ with $startHere }}
         <section class="collection-room__section collection-room__section--entry page-shell page-shell--reading" aria-labelledby="collection-start-here-title">
           <h2 id="collection-start-here-title" class="list-title" style="margin-top:28px;">Entry Point</h2>
+          <p class="collection-room__section-intro">Start here if this is your first visit. It gives you the cleanest way into the lane before you move through the rest in order.</p>
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
             "class" "collection-start-here"
@@ -58,6 +60,7 @@
       {{ end }}
 
       <div class="collection-room__section collection-room__section--progress">
+        <p class="collection-room__section-intro">This panel tracks what this browser has already opened and keeps the resume link pointed at the next useful stop in the lane.</p>
         {{ partial "collections/collection-progress.html" (dict
           "definition" $definition
           "items" $items
@@ -68,6 +71,7 @@
 
       <section class="collection-room__section collection-room__section--items page-shell page-shell--reading" aria-labelledby="collection-items-title">
         <h2 id="collection-items-title" class="list-title" style="margin-top:30px;">In This Collection</h2>
+        <p class="collection-room__section-intro">All {{ $state.count }} pieces appear below in collection order{{ if $startHere }}, with the entry point marked for quick reference{{ end }}. Use this list as the table of contents for the lane.</p>
         {{ if gt (len $items) 0 }}
           <ol class="collection-items">
           {{ range $items }}
@@ -82,7 +86,7 @@
                 "class" (cond (eq $itemSlug $startHereSlug) "collection-item--start-here" "")
               ) }}
               <div class="collection-item-state" data-collection-item-state></div>
-              {{ if eq $itemSlug $startHereSlug }}<div class="collection-item-note"><span class="collection-pill">Entry Point</span><span>Recommended entry point for this collection.</span></div>{{ end }}
+              {{ if eq $itemSlug $startHereSlug }}<div class="collection-item-note"><span class="collection-pill">Entry Point</span><span>Best first read for this lane.</span></div>{{ end }}
             </li>
           {{ end }}
           </ol>
@@ -97,6 +101,7 @@
       {{ if gt (len $relatedCollections) 0 }}
         <section class="collection-room__section collection-room__section--related page-shell page-shell--reading" aria-labelledby="related-collections-title">
           <h2 id="related-collections-title" class="list-title" style="margin-top:30px;">Related Collections</h2>
+          <p class="collection-room__section-intro">These nearby lanes keep you in related terrain once you finish this one, without flattening distinct threads into a single list.</p>
           {{ range $relatedCollections }}
             {{ partial "discovery/collection-card.html" (dict
               "entry" .
