@@ -2702,6 +2702,22 @@ h2{ margin-top:34px; }
   --piece-collection-accent-button-hover:rgba(110,140,171,.24);
   --piece-collection-accent-underline:rgba(118,149,182,.48);
 }
+.piece--collection-accent--lit-review-lamplit-shelf{
+  --piece-collection-accent-border:rgba(184,149,94,.29);
+  --piece-collection-accent-border-strong:rgba(184,149,94,.45);
+  --piece-collection-accent-surface:
+    linear-gradient(180deg, rgba(230,198,143,.055), rgba(230,198,143,0) 42%),
+    rgba(29,24,20,.85);
+  --piece-collection-accent-panel:
+    radial-gradient(circle at 18% 16%, rgba(232,192,121,.12), rgba(232,192,121,0) 46%),
+    linear-gradient(180deg, rgba(244,231,208,.04), rgba(244,231,208,0) 42%),
+    rgba(33,27,22,.9);
+  --piece-collection-accent-rail:
+    linear-gradient(90deg, rgba(197,159,99,.92), rgba(220,204,172,.34));
+  --piece-collection-accent-button-bg:rgba(184,149,94,.18);
+  --piece-collection-accent-button-hover:rgba(184,149,94,.26);
+  --piece-collection-accent-underline:rgba(197,159,99,.48);
+}
 .piece--collection-accent--risk-systems-notebook{
   --piece-collection-accent-border:rgba(121,144,170,.27);
   --piece-collection-accent-border-strong:rgba(121,144,170,.42);
@@ -3081,6 +3097,32 @@ h2{ margin-top:34px; }
   --collection-room-rail:linear-gradient(180deg, rgba(155,177,199,.92), rgba(120,140,162,.2));
   --collection-room-note-surface:rgba(199,205,212,.04);
 }
+.collection-room--lit-review-lamplit-shelf{
+  --collection-room-field:
+    radial-gradient(circle at 18% 12%, rgba(224,182,108,.18), rgba(224,182,108,0) 24%),
+    radial-gradient(circle at 78% 8%, rgba(244,232,210,.06), rgba(244,232,210,0) 24%),
+    linear-gradient(180deg, rgba(22,18,15,.97), rgba(11,10,9,.99)),
+    repeating-linear-gradient(90deg, rgba(205,170,116,.022) 0 1px, transparent 1px 66px);
+  --collection-room-header-glow:
+    radial-gradient(circle at 20% 10%, rgba(228,188,114,.22), rgba(228,188,114,0) 38%);
+  --collection-room-section-surface:
+    linear-gradient(180deg, rgba(235,216,184,.055), rgba(235,216,184,0) 40%),
+    rgba(28,23,20,.95);
+  --collection-room-panel-surface:
+    linear-gradient(180deg, rgba(235,216,184,.072), rgba(235,216,184,0) 44%),
+    rgba(34,28,23,.98);
+  --collection-room-panel-surface-soft:
+    linear-gradient(180deg, rgba(235,216,184,.06), rgba(235,216,184,0) 42%),
+    rgba(31,26,22,.94);
+  --collection-room-border:rgba(194,160,105,.17);
+  --collection-room-panel-border:rgba(194,160,105,.19);
+  --collection-room-rule:rgba(194,160,105,.1);
+  --collection-room-rule-gradient:
+    linear-gradient(90deg, transparent, rgba(194,160,105,.42) 18%, rgba(235,216,184,.15) 56%, transparent 100%);
+  --collection-room-label-strip:linear-gradient(90deg, rgba(197,159,99,.92), rgba(231,214,183,.3));
+  --collection-room-rail:linear-gradient(180deg, rgba(197,159,99,.94), rgba(231,214,183,.18));
+  --collection-room-note-surface:rgba(235,216,184,.045);
+}
 .collection-room--risk-systems-notebook{
   --collection-room-field:
     linear-gradient(180deg, rgba(12,14,17,.96), rgba(9,9,10,.99)),
@@ -3378,6 +3420,16 @@ h2{ margin-top:34px; }
     linear-gradient(90deg, rgba(155,177,199,.92), rgba(120,140,162,.34));
   --collection-card-room-rail:
     linear-gradient(180deg, rgba(155,177,199,.92), rgba(120,140,162,.24));
+}
+.collection-card--lit-review-lamplit-shelf{
+  --collection-card-room-surface:
+    linear-gradient(180deg, rgba(226,196,142,.07), rgba(226,196,142,0) 42%),
+    rgba(31,26,22,.95);
+  --collection-card-room-border:rgba(197,159,99,.22);
+  --collection-card-room-rule:
+    linear-gradient(90deg, rgba(197,159,99,.94), rgba(231,214,183,.28));
+  --collection-card-room-rail:
+    linear-gradient(180deg, rgba(197,159,99,.94), rgba(231,214,183,.18));
 }
 .collection-card--risk-systems-notebook{
   --collection-card-room-surface:

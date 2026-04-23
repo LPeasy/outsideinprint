@@ -4,6 +4,8 @@ date: 2025-02-25
 draft: false
 slug: "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life"
 section_label: "Essay"
+collections: ["lit-review"]
+collection_weight: 20
 subtitle: "Life, Love, and the Lessons Hidden in This Classic Tale"
 featured_image: "/images/medium/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/214d2b4fcdf2caf027b5fef407d18437523f338ba643848578fd1a9b869c163d.jpeg"
 featured_image_caption: "Photo by Casey and Delaney on Unsplash"

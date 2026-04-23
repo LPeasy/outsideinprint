@@ -831,6 +831,7 @@ $requiredUxPages = @(
   'public/collections/the-ledger/index.html',
   'public/collections/syd-and-oliver-dialogues/index.html',
   'public/collections/modern-bios/index.html',
+  'public/collections/lit-review/index.html',
   'public/collections/risk-uncertainty/index.html',
   'public/collections/floods-water-built-environment/index.html',
   'public/collections/technology-ai-machine-future/index.html',
@@ -847,6 +848,7 @@ $collectionRoomExpectations = [ordered]@{
   'public/collections/the-ledger/index.html' = 'ledger-editorial-desk'
   'public/collections/syd-and-oliver-dialogues/index.html' = 'syd-and-oliver-smoky-lounge'
   'public/collections/modern-bios/index.html' = 'modern-bios-records-archive'
+  'public/collections/lit-review/index.html' = 'lit-review-lamplit-shelf'
   'public/collections/risk-uncertainty/index.html' = 'risk-systems-notebook'
   'public/collections/floods-water-built-environment/index.html' = 'floods-survey-table'
   'public/collections/technology-ai-machine-future/index.html' = 'ai-screen-glow-archive'
@@ -858,6 +860,7 @@ $collectionDirectoryThemes = @(
   'ledger-editorial-desk'
   'syd-and-oliver-smoky-lounge'
   'modern-bios-records-archive'
+  'lit-review-lamplit-shelf'
   'risk-systems-notebook'
   'floods-survey-table'
   'ai-screen-glow-archive'
@@ -1849,7 +1852,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '8 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*63 published pieces'
+    Pattern = '9 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*67 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -1880,7 +1883,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 8 public collections linking 63 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 67 published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
@@ -1916,8 +1919,19 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Series.*?The Ledger.*?Syd and Oliver Dialogues.*?Modern Bios.*?Reported Case Studies'
+    Pattern = '(?s)Series.*?The Ledger.*?Syd and Oliver Dialogues.*?Modern Bios.*?Lit Review.*?Reported Case Studies'
     Message = 'expected the unified collections directory to group series collections together'
+  },
+  @{
+    Path = 'public/collections/lit-review/index.html'
+    Pattern = '(?s)The Three-Body Problem.*?The Little Prince: 10 Powerful Quotes That Will Change How You See Life.*?6 Reasons Redwall Is a Timeless Classic.*?35 Years of Yellow: The Simpsons Time Loop'
+    Message = 'expected the Lit Review collection page to list the launch pieces in explicit collection order'
+  },
+  @{
+    Path = 'public/collections/lit-review/index.html'
+    Pattern = 'The Max Mistake'
+    Message = 'expected the Lit Review launch page not to include The Max Mistake'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/index.html'
