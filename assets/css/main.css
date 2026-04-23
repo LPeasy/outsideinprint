@@ -1036,6 +1036,15 @@ textarea{
 .section-front--about .page-header{
   margin-bottom:0;
 }
+.section-front--author{
+  margin-bottom:2.15rem;
+}
+.section-front--author .section-front__body{
+  padding-top:1rem;
+}
+.section-front--author .page-header{
+  margin-bottom:0;
+}
 .shop-front__body{
   max-width:38rem;
 }
@@ -2124,6 +2133,85 @@ textarea{
 .about-route__journey{
   margin-top:0;
 }
+.author-route{
+  display:grid;
+  gap:2rem;
+}
+.author-route__profile{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0, 18rem) minmax(0, 1fr);
+  gap:1.5rem 2.1rem;
+  align-items:start;
+  padding:clamp(1.25rem, 1.05rem + .8vw, 1.8rem);
+  border:1px solid rgba(236,231,223,.12);
+  border-radius:24px;
+  background:
+    linear-gradient(180deg, rgba(244,236,224,.08), rgba(244,236,224,.02)),
+    linear-gradient(135deg, rgba(123,111,94,.08), rgba(18,18,18,0) 42%),
+    rgba(16,16,16,.92);
+  box-shadow:0 18px 36px rgba(0,0,0,.18);
+}
+.author-route__profile::after{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:1px solid rgba(236,231,223,.06);
+  border-radius:18px;
+  pointer-events:none;
+}
+.author-route__portrait{
+  position:relative;
+  z-index:1;
+  margin:0;
+}
+.author-route__portrait img{
+  display:block;
+  width:min(100%, 320px);
+  max-width:100%;
+  height:auto;
+  border-radius:16px;
+  border:1px solid rgba(236,231,223,.14);
+  box-shadow:0 12px 26px rgba(0,0,0,.24);
+}
+.author-route__intro{
+  position:relative;
+  z-index:1;
+  max-width:40rem;
+  padding-top:.3rem;
+}
+.author-route__summary{
+  margin:0;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.84rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  line-height:1.7;
+}
+.author-route__bio{
+  margin:1rem 0 0;
+  color:var(--text-secondary);
+  font-size:1.08rem;
+  line-height:1.9;
+}
+.author-route__reading-map{
+  padding-top:1.15rem;
+  border-top:1px solid rgba(236,231,223,.09);
+}
+.author-route__reading-map-header{
+  max-width:34rem;
+  margin:0 0 1rem;
+}
+.author-route__reading-map-copy{
+  margin:0;
+  color:var(--text-secondary);
+  font-size:.98rem;
+  line-height:1.68;
+}
+.author-route__journey{
+  margin-top:0;
+}
 .profile-page{
   display:grid;
   gap:1.9rem;
@@ -2171,10 +2259,19 @@ textarea{
     grid-template-columns:1fr;
     gap:.4rem;
   }
+  .author-route__profile{
+    grid-template-columns:1fr;
+  }
+  .author-route__portrait{
+    max-width:18rem;
+  }
 }
 @media (max-width:640px){
   .section-front--about{
     margin-bottom:2rem;
+  }
+  .section-front--author{
+    margin-bottom:1.9rem;
   }
   .about-route{
     gap:1.9rem;
@@ -2191,6 +2288,30 @@ textarea{
   }
   .about-route__reading-map{
     padding-top:1.1rem;
+  }
+  .author-route{
+    gap:1.9rem;
+  }
+  .author-route__profile{
+    padding:1.15rem;
+    border-radius:20px;
+  }
+  .author-route__profile::after{
+    inset:10px;
+    border-radius:14px;
+  }
+  .author-route__portrait{
+    max-width:16rem;
+  }
+  .author-route__summary{
+    font-size:.8rem;
+  }
+  .author-route__bio{
+    font-size:1rem;
+    line-height:1.82;
+  }
+  .author-route__reading-map{
+    padding-top:1rem;
   }
 }
 .site-footer{

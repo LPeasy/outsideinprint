@@ -544,7 +544,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/authors/robert-v-ussley/index.html' = @{
     Title = 'Robert V. Ussley'
-    Description = 'Essays by Robert V. Ussley on risk, institutions, technology, public life, and the systems people live inside.'
+    Description = 'Essays and reported writing by Robert V. Ussley on risk, institutions, technology, law, religion, and public life.'
     Canonical = 'https://outsideinprint.org/authors/robert-v-ussley/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -1817,18 +1817,30 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'Selected Works'
-    Message = 'expected the author dossier page to expose selected works'
+    Pattern = 'Robert V\. Ussley'
+    Message = 'expected the refined author page to name Robert V. Ussley explicitly'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'Themes'
-    Message = 'expected the author dossier page to expose themes'
+    Pattern = 'Bobviously_Portrait_v1\.png'
+    Message = 'expected the refined author page to keep the portrait surface'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'From the Archive'
-    Message = 'expected the author dossier page to expose archive entries'
+    Pattern = '(?s)Browse archive.*?Browse collections.*?Search the library.*?About the imprint'
+    Message = 'expected the refined author page to expose the compact route-based reading map'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Author Dossier'
+    Message = 'expected the refined author page to remove the retired Author Dossier label'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Selected Works|Themes|From the Archive'
+    Message = 'expected the refined author page to remove the retired lower dossier sections'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/index.html'
