@@ -27,7 +27,7 @@ if ($hugoBinary) {
 $authorPage = Get-Content -Path $authorPagePath -Raw
 foreach ($requiredPattern in @(
   'layout:\s*"?dossier"?',
-  'style_variant:\s*"?literary-dossier"?',
+  'description:\s*".+?"',
   'portrait:\s*"?Bobviously_Portrait_v1\.png"?',
   'header_bio:\s*".+?"'
 )) {
@@ -36,12 +36,27 @@ foreach ($requiredPattern in @(
   }
 }
 
+foreach ($forbiddenPattern in @(
+  'style_variant:\s*"?literary-dossier"?'
+)) {
+  if ($authorPage -match $forbiddenPattern) {
+    throw "Expected content/authors/robert-v-ussley/index.md to omit '$forbiddenPattern'."
+  }
+}
+
 foreach ($requiredSnippet in @(
-  'Selected Works',
-  'Themes',
-  'From the Archive',
+  'class="author-route"',
+  'section-front section-front--author',
+  'author-route__profile',
+  'author-route__summary',
+  'author-route__bio',
   'Bobviously_Portrait_v1.png',
-  'Author Dossier'
+  'Reading Map',
+  'journey-links--page author-route__journey',
+  'Browse archive',
+  'Browse collections',
+  'Search the library',
+  'About the imprint'
 )) {
   if ($layoutTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/authors/dossier.html to include '$requiredSnippet'."
@@ -49,13 +64,12 @@ foreach ($requiredSnippet in @(
 }
 
 foreach ($forbiddenSnippet in @(
-  'Author Overview',
-  'Recent Essays',
-  'Essay Archive',
-  'author-overview-title',
-  'author-recent-title',
-  'author-collections-title',
-  'journey-links--page'
+  'Author Dossier',
+  'Selected Works',
+  'Themes',
+  'From the Archive',
+  'style-variant-literary-dossier',
+  'author-dossier__'
 )) {
   if ($layoutTemplate -match [regex]::Escape($forbiddenSnippet)) {
     throw "Expected layouts/authors/dossier.html to omit '$forbiddenSnippet'."
@@ -78,25 +92,40 @@ if ($hugoCommand) {
 
   $builtPage = Get-Content -Path $builtPagePath -Raw
   foreach ($requiredSnippet in @(
-    'Selected Works',
-    'Themes',
-    'From the Archive',
+    'Robert V. Ussley',
     'Bobviously_Portrait_v1.png',
-    'Author Dossier'
+    'Reading Map',
+    'Browse archive',
+    'Browse collections',
+    'Search the library',
+    'About the imprint',
+    'journey-links--page author-route__journey'
   )) {
     if ($builtPage -notmatch [regex]::Escape($requiredSnippet)) {
       throw "Expected rendered Robert dossier page to include '$requiredSnippet'."
     }
   }
 
+  foreach ($requiredPattern in @(
+    'class=(?:"author-route"|author-route)',
+    'class=(?:"author-route__profile"|author-route__profile)',
+    'class=(?:"author-route__portrait"|author-route__portrait)',
+    'class=(?:"author-route__summary"|author-route__summary)',
+    'class=(?:"author-route__bio"|author-route__bio)',
+    'class=(?:"author-route__reading-map"|author-route__reading-map)'
+  )) {
+    if ($builtPage -notmatch $requiredPattern) {
+      throw "Expected rendered Robert dossier page to match '$requiredPattern'."
+    }
+  }
+
   foreach ($forbiddenSnippet in @(
-    'Author Overview',
-    'Recent Essays',
-    'Essay Archive',
-    'author-overview-title',
-    'author-recent-title',
-    'author-collections-title',
-    'journey-links--page'
+    'Author Dossier',
+    'Selected Works',
+    'Themes',
+    'From the Archive',
+    'style-variant-literary-dossier',
+    'author-dossier__'
   )) {
     if ($builtPage -match [regex]::Escape($forbiddenSnippet)) {
       throw "Expected rendered Robert dossier page to omit '$forbiddenSnippet'."

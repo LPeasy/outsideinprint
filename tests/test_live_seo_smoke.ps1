@@ -75,7 +75,7 @@ $author = Get-Page '/authors/robert-v-ussley/'
 Assert-Canonical -Content $author -ExpectedUrl 'https://outsideinprint.org/authors/robert-v-ussley/' -Message 'Expected the author page canonical URL to point to outsideinprint.org.'
 Assert-Robots -Content $author -ExpectedRobots 'index, follow, max-image-preview:large' -Message 'Expected the author page to allow indexation with large image previews.'
 Assert-Match -Content $author -Pattern '"@type":"ProfilePage"' -Message 'Expected the author page to expose ProfilePage JSON-LD.'
-Assert-Match -Content $author -Pattern 'From the Archive' -Message 'Expected the author page to expose the archive section.'
+Assert-Match -Content $author -Pattern 'Browse archive' -Message 'Expected the author page to expose the route-based reading map.'
 Assert-Match -Content $author -Pattern '<meta\s+property=(?:"og:image"|og:image)\s+content=' -Message 'Expected the author page to emit og:image.'
 Assert-Match -Content $author -Pattern '"@type":"Person".*"image"' -Message 'Expected the author page Person entity to include an image.'
 

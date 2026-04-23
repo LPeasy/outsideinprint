@@ -6,9 +6,9 @@ import path from "node:path";
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
 const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/directory.html"), "utf8");
+const authorDossier = fs.readFileSync(path.resolve("layouts/authors/dossier.html"), "utf8");
 const authorList = fs.readFileSync(path.resolve("layouts/authors/list.html"), "utf8");
 const authorSection = fs.readFileSync(path.resolve("layouts/authors/section.html"), "utf8");
-const authorSingle = fs.readFileSync(path.resolve("layouts/authors/single.html"), "utf8");
 const archiveList = fs.readFileSync(path.resolve("layouts/archive/list.html"), "utf8");
 const essaysRedirect = fs.readFileSync(path.resolve("layouts/essays/list.html"), "utf8");
 const dialoguesList = fs.readFileSync(path.resolve("layouts/syd-and-oliver/list.html"), "utf8");
@@ -252,7 +252,7 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(css, /\.running-header__inner\{/);
 });
 
-test("about route owns an imprint-first layout while author pages keep the profile shell", () => {
+test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(aboutSingle, /class="about-route"/);
   assert.match(aboutSingle, /section-front section-front--about/);
   assert.match(aboutSingle, /about-route__artifact/);
@@ -265,12 +265,18 @@ test("about route owns an imprint-first layout while author pages keep the profi
   assert.match(authorDirectory, /class="profile-page profile-page--authors"/);
   assert.match(authorDirectory, /id="authors-directory-title"/);
   assert.match(authorDirectory, /View author archive/);
-  assert.match(authorSingle, /class="profile-page profile-page--author"/);
-  assert.match(authorSingle, /Recent Essays/);
-  assert.match(authorSingle, /partial "discovery\/collection-card\.html" \(dict/);
-  assert.match(authorSingle, /"variant" "item"/);
-  assert.match(authorSingle, /"analyticsSourceSlot" "author_page"/);
-  assert.match(authorSingle, /Essay Archive/);
+  assert.match(authorDossier, /class="author-route"/);
+  assert.match(authorDossier, /section-front section-front--author/);
+  assert.match(authorDossier, /author-route__profile/);
+  assert.match(authorDossier, /author-route__portrait/);
+  assert.match(authorDossier, /author-route__summary/);
+  assert.match(authorDossier, /author-route__bio/);
+  assert.match(authorDossier, /author-route__reading-map/);
+  assert.match(authorDossier, /journey-links--page author-route__journey/);
+  assert.doesNotMatch(authorDossier, /Author Dossier/);
+  assert.doesNotMatch(authorDossier, /Selected Works/);
+  assert.doesNotMatch(authorDossier, /Themes/);
+  assert.doesNotMatch(authorDossier, /From the Archive/);
 
   for (const selector of [
     ".about-route{",
@@ -279,11 +285,17 @@ test("about route owns an imprint-first layout while author pages keep the profi
     ".about-route__record{",
     ".about-route__record-row{",
     ".about-route__journey{",
+    ".section-front--author{",
+    ".author-route{",
+    ".author-route__profile{",
+    ".author-route__portrait{",
+    ".author-route__summary{",
+    ".author-route__bio{",
+    ".author-route__reading-map{",
+    ".author-route__journey{",
     ".piece-byline{",
     ".author-note{",
     ".profile-page{",
-    ".profile-stats{",
-    ".profile-stat{",
     ".site-footer{",
     ".site-footer__nav{"
   ]) {
@@ -303,6 +315,15 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`about-route__artifact`",
     "`about-route__record`",
     "`about-route__journey`",
+    "| Author route | `/authors/robert-v-ussley/`",
+    "`section-front--author`",
+    "`author-route`",
+    "`author-route__profile`",
+    "`author-route__portrait`",
+    "`author-route__summary`",
+    "`author-route__bio`",
+    "`author-route__reading-map`",
+    "`author-route__journey`",
     "`essays-front`",
     "`essays-front__masthead`",
     "`essays-front__stats`",
