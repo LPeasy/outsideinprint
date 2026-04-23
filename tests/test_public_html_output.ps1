@@ -1822,8 +1822,23 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '8 collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*63 published pieces'
-    Message = 'expected the collections index to collapse the visible header copy to a compact stats line'
+    Pattern = 'Collections gather connected essays into guided reading lanes across the archive\. Use them when you want an editorial thread instead of a simple timeline\.'
+    Message = 'expected the collections index to explain collections in plain editorial language'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '8 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*63 published pieces'
+    Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)Read in sequence.*?Follow a question'
+    Message = 'expected the collections index to expose the route-level lane guide for series and topics'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)href=(?:"|''|)?#collections-group-series(?:"|''|)?.*?href=(?:"|''|)?#collections-group-topic(?:"|''|)?'
+    Message = 'expected the collections lane guide to link directly to the series and topics sections'
   },
   @{
     Path = 'public/collections/index.html'
@@ -1928,8 +1943,28 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'This topic gathers \d+ published pieces into one reading lane\..*?If you are coming in fresh, begin with'
+    Message = 'expected collection detail headers to explain the lane and recommended way in'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'Use this list as the table of contents for the lane\.'
+    Message = 'expected collection detail pages to frame the ordered list as the lane table of contents'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'Best first read for this lane\.'
+    Message = 'expected collection detail pages to label the marked entry point in plainer language'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
     Pattern = 'Related Collections'
     Message = 'expected collection detail pages to link onward to related collections'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'These nearby lanes keep you in related terrain once you finish this one, without flattening distinct threads into a single list\.'
+    Message = 'expected collection detail pages to explain why related collections are shown'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'

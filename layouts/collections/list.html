@@ -4,12 +4,18 @@
     (dict
       "key" "series"
       "title" "Series"
-      "slugs" (slice "the-ledger" "syd-and-oliver-dialogues" "modern-bios" "reported-case-studies")
+      "label" "Series"
+      "description" "Recurring editorial threads built to be entered at one strong starting point and then followed in sequence."
+      "guide_title" "Read in sequence"
+      "guide_copy" "Best when you want one entry point and a reading order that accumulates as you move forward."
     )
     (dict
-      "key" "topics"
+      "key" "topic"
       "title" "Topics"
-      "slugs" (slice "risk-uncertainty" "floods-water-built-environment" "technology-ai-machine-future" "moral-religious-philosophical-essays")
+      "label" "Topic"
+      "description" "Curated subject lanes that gather essays around one enduring question, pressure, or field."
+      "guide_title" "Follow a question"
+      "guide_copy" "Best when you want to stay with one problem or subject across essays that approach it from different angles."
     )
   }}
   {{ $totalPieces := 0 }}
@@ -20,26 +26,54 @@
   <div class="section-front section-front--collections">
     <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
       <h1 id="collections-title" class="list-title">Collections</h1>
-      {{ if gt (len $entries) 0 }}<p class="page-intro">{{ len $entries }} collections &middot; {{ $totalPieces }} published pieces</p>{{ end }}
+      <p class="page-intro">Collections gather connected essays into guided reading lanes across the archive. Use them when you want an editorial thread instead of a simple timeline.</p>
+      {{ if gt (len $entries) 0 }}<p class="collections-directory__summary">{{ len $entries }} public collections &middot; {{ $totalPieces }} published pieces</p>{{ end }}
     </header>
   </div>
   {{ if gt (len $entries) 0 }}
+    <section class="page-shell page-shell--wide collections-directory__guide" aria-label="How to use collections">
+      {{ range $group := $groups }}
+        {{ $groupEntries := slice }}
+        {{ $groupPieces := 0 }}
+        {{ range $entries }}
+          {{ if eq .state.kind $group.key }}
+            {{ $groupEntries = $groupEntries | append . }}
+            {{ $groupPieces = add $groupPieces .state.count }}
+          {{ end }}
+        {{ end }}
+        {{ if gt (len $groupEntries) 0 }}
+          <a class="collections-directory__guide-card" href="#collections-group-{{ $group.key }}">
+            <p class="collections-directory__guide-kicker">{{ $group.title }}</p>
+            <h2 class="collections-directory__guide-title">{{ $group.guide_title }}</h2>
+            <p class="collections-directory__guide-copy">{{ $group.guide_copy }}</p>
+            <p class="collections-directory__guide-meta">{{ len $groupEntries }} collections &middot; {{ $groupPieces }} pieces</p>
+          </a>
+        {{ end }}
+      {{ end }}
+    </section>
     <section class="page-shell page-shell--grid collections-directory" aria-label="Collections directory">
       {{ range $group := $groups }}
         {{ $groupEntries := slice }}
+        {{ $groupPieces := 0 }}
         {{ range $entries }}
-          {{ if in $group.slugs .collection.slug }}
+          {{ if eq .state.kind $group.key }}
             {{ $groupEntries = $groupEntries | append . }}
+            {{ $groupPieces = add $groupPieces .state.count }}
           {{ end }}
         {{ end }}
         {{ if gt (len $groupEntries) 0 }}
           <section class="collections-directory__group" aria-labelledby="collections-group-{{ $group.key }}">
-            <h2 id="collections-group-{{ $group.key }}" class="collections-directory__group-title">{{ $group.title }}</h2>
+            <div class="collections-directory__group-header">
+              <h2 id="collections-group-{{ $group.key }}" class="collections-directory__group-title">{{ $group.title }}</h2>
+              <p class="collections-directory__group-meta">{{ len $groupEntries }} collections &middot; {{ $groupPieces }} pieces</p>
+              <p class="collections-directory__group-intro">{{ $group.description }}</p>
+            </div>
             <div class="grid collection-grid collections-directory__grid">
               {{ range $groupEntries }}
                 {{ partial "discovery/collection-card.html" (dict
                   "entry" .
                   "variant" "grid"
+                  "label" $group.label
                 ) }}
               {{ end }}
             </div>

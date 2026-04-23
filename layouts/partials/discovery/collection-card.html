@@ -4,6 +4,7 @@
 {{- $label := .label | default "" -}}
 {{- $class := .class | default "" -}}
 {{- $roomTheme := $entry.collection.room_theme | default "" -}}
+{{- $metadata := $entry.collection.metadata | default (slice) -}}
 {{- $url := printf "collections/%s/" $entry.collection.slug | absURL -}}
 {{- with $entry.page -}}
   {{- $url = .RelPermalink -}}
@@ -22,9 +23,39 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+{{- $format := "" -}}
+{{- $scope := "" -}}
+{{- $lane := "" -}}
+{{- range $metadata -}}
+  {{- $metaLabel := lower (printf "%v" (.label | default "")) -}}
+  {{- $metaValue := printf "%v" (.value | default "") -}}
+  {{- if and (eq $metaLabel "format") (not $format) -}}
+    {{- $format = $metaValue -}}
+  {{- else if and (eq $metaLabel "scope") (not $scope) -}}
+    {{- $scope = $metaValue -}}
+  {{- else if and (eq $metaLabel "lane") (not $lane) -}}
+    {{- $lane = $metaValue -}}
+  {{- end -}}
+{{- end -}}
+{{- $eyebrow := $label -}}
+{{- if not $eyebrow -}}
+  {{- $eyebrow = title $entry.state.kind -}}
+{{- end -}}
+{{- $metaBits := slice -}}
+{{- with $format -}}
+  {{- $metaBits = $metaBits | append . -}}
+{{- end -}}
+{{- with $scope -}}
+  {{- $metaBits = $metaBits | append . -}}
+{{- end -}}
+{{- if and (eq (len $metaBits) 0) $lane -}}
+  {{- $metaBits = $metaBits | append $lane -}}
+{{- end -}}
+{{- $metaLine := delimit $metaBits " &middot; " -}}
 
 {{- if eq $variant "item" -}}
   <article class="item{{ with $class }} {{ . }}{{ end }}">
+    {{- with $eyebrow }}<div class="k collection-card__eyebrow">{{ . }}</div>{{ end -}}
     <div class="t"><a href="{{ $url }}"
       data-analytics-event="collection_click"
       data-analytics-source-slot="{{ $sourceSlot }}"
@@ -34,9 +65,13 @@
       data-analytics-section="Collections"
       data-analytics-path="{{ $path }}"
     >{{ $entry.collection.title }}</a></div>
-    <div class="m">{{ title $entry.state.kind }} | {{ $entry.state.count }} pieces{{ with $startHere }} | Start with {{ .Title }}{{ end }}</div>
-    {{ with $entry.collection.description }}<div class="d">{{ . }}</div>{{ end }}
-    {{ with $startHere }}<div class="d">Recommended entry point: <a href="{{ .RelPermalink }}">{{ .Title }}</a></div>{{ end }}
+    {{ with $entry.collection.description }}<div class="d collection-card__description">{{ . }}</div>{{ end }}
+    <div class="collection-meta">
+      <span>{{ $entry.state.count }} pieces</span>
+      {{ with $lane }}<span>{{ . }}</span>{{ end }}
+    </div>
+    {{ with $metaLine }}<div class="m collection-card__meta-line">{{ . | safeHTML }}</div>{{ end }}
+    {{ with $startHere }}<div class="collection-card__start-here collection-card__start-here--item"><span class="collection-pill">Start Here</span><span><a href="{{ .RelPermalink }}">{{ .Title }}</a></span></div>{{ end }}
   </article>
 {{- else -}}
   <a class="card collection-card{{ with $roomTheme }} collection-card--room-echo collection-card--{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"
@@ -48,15 +83,16 @@
     data-analytics-section="Collections"
     data-analytics-path="{{ $path }}"
   >
-    {{- if $label -}}
-      <div class="k">{{ $label }}</div>
+    {{- with $eyebrow -}}
+      <div class="k collection-card__eyebrow">{{ . }}</div>
     {{- end -}}
     <div class="v">{{ $entry.collection.title }}</div>
-    {{ with $entry.collection.description }}<div class="d">{{ . }}</div>{{ end }}
+    {{ with $entry.collection.description }}<div class="d collection-card__description">{{ . }}</div>{{ end }}
     <div class="collection-meta">
       <span>{{ $entry.state.count }} pieces</span>
-      <span>{{ title $entry.state.kind }}</span>
-      {{ with $startHere }}<span>Start with {{ .Title }}</span>{{ end }}
+      {{ with $lane }}<span>{{ . }}</span>{{ end }}
     </div>
+    {{ with $metaLine }}<div class="collection-card__meta-line">{{ . | safeHTML }}</div>{{ end }}
+    {{ with $startHere }}<div class="collection-card__start-here"><span class="collection-pill">Start Here</span><span>{{ .Title }}</span></div>{{ end }}
   </a>
 {{- end -}}

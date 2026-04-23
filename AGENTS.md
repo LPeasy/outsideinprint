@@ -2,6 +2,10 @@
 
 For publishing or content-maintenance sessions in this repo, start with [docs/publishing-workflow.md](docs/publishing-workflow.md).
 
+## Deferred merch work
+
+Merch order automation is not implemented yet. Before proposing or building order intake, label generation, or fulfillment automation, read [docs/merch-order-fulfillment-plan.md](docs/merch-order-fulfillment-plan.md).
+
 ## Default publishing contract
 
 - Use the repo-local wrappers under `tools\bin\generated\`. Do not assume global `node`, `hugo`, or `pwsh`.
