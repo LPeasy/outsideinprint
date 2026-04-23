@@ -101,18 +101,44 @@ function Write-CartoonData {
     [object[]]$Cartoons
   )
 
+  $preferredKeyOrder = @('title', 'date', 'image', 'alt', 'caption', 'width', 'height')
+
   $lines = @()
   $lines += "current: $Current"
   $lines += 'cartoons:'
 
   foreach ($cartoon in $Cartoons) {
     $lines += "  - slug: $($cartoon.slug)"
-    $lines += "    title: $(Quote-YamlValue $cartoon.title)"
-    $lines += "    date: $(Quote-YamlValue $cartoon.date)"
-    $lines += "    image: $(Quote-YamlValue $cartoon.image)"
-    $lines += "    alt: $(Quote-YamlValue $cartoon.alt)"
-    $lines += "    width: $($cartoon.width)"
-    $lines += "    height: $($cartoon.height)"
+
+    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+
+    foreach ($key in $preferredKeyOrder) {
+      if (-not $cartoon.Contains($key)) {
+        continue
+      }
+
+      $seen.Add($key) | Out-Null
+      $value = $cartoon[$key]
+      if ($value -is [int] -or $value -is [long]) {
+        $lines += "    ${key}: $value"
+      } else {
+        $lines += "    ${key}: $(Quote-YamlValue ([string]$value))"
+      }
+    }
+
+    foreach ($property in $cartoon.GetEnumerator()) {
+      $key = [string]$property.Key
+      if ($key -eq 'slug' -or $seen.Contains($key)) {
+        continue
+      }
+
+      $value = $property.Value
+      if ($value -is [int] -or $value -is [long]) {
+        $lines += "    ${key}: $value"
+      } else {
+        $lines += "    ${key}: $(Quote-YamlValue ([string]$value))"
+      }
+    }
   }
 
   $parent = Split-Path -Parent $Path
@@ -161,15 +187,20 @@ $updated = $false
 
 foreach ($cartoon in @($data.cartoons)) {
   if ($cartoon.slug -eq $slug) {
-    $cartoons += [ordered]@{
-      slug = $slug
-      title = $Title
-      date = $Date
-      image = "/images/editorial/$slug.png"
-      alt = $Alt
-      width = $width
-      height = $height
+    $updatedCartoon = [ordered]@{}
+    foreach ($property in $cartoon.GetEnumerator()) {
+      $updatedCartoon[$property.Key] = $property.Value
     }
+
+    $updatedCartoon.slug = $slug
+    $updatedCartoon.title = $Title
+    $updatedCartoon.date = $Date
+    $updatedCartoon.image = "/images/editorial/$slug.png"
+    $updatedCartoon.alt = $Alt
+    $updatedCartoon.width = $width
+    $updatedCartoon.height = $height
+
+    $cartoons += $updatedCartoon
     $updated = $true
   } else {
     $cartoons += $cartoon

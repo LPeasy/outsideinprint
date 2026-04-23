@@ -1,4 +1,4 @@
-current: the-sewer-under-the-sidewalk
+current: feeding-the-machine
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -27,5 +27,12 @@ cartoons:
     image: "/images/editorial/did-you-really-mean-what-you-said.png"
     alt: "Editorial cartoon showing a young singer at a microphone under the title 'Romantic Homicide,' with viral-media attention on one side and police tape, case files, and investigators on the other."
     caption: "A cartoon about viral fame, public accusation, and the machinery that turns spectacle into evidence."
+    width: 1536
+    height: 1024
+  - slug: feeding-the-machine
+    title: "Feeding the Machine"
+    date: "2026-04-23"
+    image: "/images/editorial/feeding-the-machine.png"
+    alt: "Editorial cartoon showing a laughing businessman cutting off a power line to desperate people while a giant AI data center and smoking industrial towers consume the electricity behind him."
     width: 1536
     height: 1024
