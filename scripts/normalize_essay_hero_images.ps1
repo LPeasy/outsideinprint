@@ -275,6 +275,24 @@ function Test-CaptionCandidateLine {
   return (Test-ExplicitCaptionText -Value $Value)
 }
 
+function Get-NextNonBlankLineIndex {
+  param(
+    [string[]]$Lines,
+    [int]$StartIndex
+  )
+
+  $nextIndex = $StartIndex + 1
+  while ($nextIndex -lt $Lines.Length -and [string]::IsNullOrWhiteSpace($Lines[$nextIndex])) {
+    $nextIndex++
+  }
+
+  if ($nextIndex -ge $Lines.Length) {
+    return $null
+  }
+
+  return $nextIndex
+}
+
 function Get-FrontMatterAndBody {
   param([string]$Path)
 
@@ -415,12 +433,8 @@ function Get-FollowingCaptionCandidate {
     [int]$ImageLineIndex
   )
 
-  $nextIndex = $ImageLineIndex + 1
-  while ($nextIndex -lt $Lines.Length -and [string]::IsNullOrWhiteSpace($Lines[$nextIndex])) {
-    $nextIndex++
-  }
-
-  if ($nextIndex -ge $Lines.Length) {
+  $nextIndex = Get-NextNonBlankLineIndex -Lines $Lines -StartIndex $ImageLineIndex
+  if ($null -eq $nextIndex) {
     return $null
   }
 
@@ -434,6 +448,42 @@ function Get-FollowingCaptionCandidate {
     LineNumber = $nextIndex + 1
     Raw = $candidate
     Text = Normalize-CaptionText -Value $candidate
+    AltFallback = Get-CaptionAltFallback -CaptionText $candidate
+  }
+}
+
+function Get-FollowingDuplicateHeroCaptionCandidate {
+  param(
+    [string[]]$Lines,
+    [int]$ImageLineIndex,
+    [string]$FeaturedImageCaption
+  )
+
+  $nextIndex = Get-NextNonBlankLineIndex -Lines $Lines -StartIndex $ImageLineIndex
+  if ($null -eq $nextIndex) {
+    return $null
+  }
+
+  $candidate = $Lines[$nextIndex]
+  if (Test-ExplicitCaptionText -Value $candidate) {
+    return $null
+  }
+
+  $normalizedFeaturedCaption = Normalize-CaptionText -Value $FeaturedImageCaption
+  if ([string]::IsNullOrWhiteSpace($normalizedFeaturedCaption)) {
+    return $null
+  }
+
+  $normalizedCandidate = Normalize-CaptionText -Value $candidate
+  if ([string]::IsNullOrWhiteSpace($normalizedCandidate) -or ($normalizedCandidate -ne $normalizedFeaturedCaption)) {
+    return $null
+  }
+
+  return [pscustomobject]@{
+    LineIndex = $nextIndex
+    LineNumber = $nextIndex + 1
+    Raw = $candidate
+    Text = $normalizedCandidate
     AltFallback = Get-CaptionAltFallback -CaptionText $candidate
   }
 }
@@ -787,6 +837,10 @@ function Get-BodyImageNormalization {
   }
 
   $captionCandidate = Get-FollowingCaptionCandidate -Lines $lines -ImageLineIndex $image.LineIndex
+  $duplicateHeroCaptionCandidate = $null
+  if ($null -eq $captionCandidate) {
+    $duplicateHeroCaptionCandidate = Get-FollowingDuplicateHeroCaptionCandidate -Lines $lines -ImageLineIndex $image.LineIndex -FeaturedImageCaption $FeaturedImageCaption
+  }
   $captionFromTitle = Normalize-CaptionText -Value $image.Title
   $captionText = if (-not [string]::IsNullOrWhiteSpace($captionFromTitle)) {
     $captionFromTitle
@@ -810,7 +864,8 @@ function Get-BodyImageNormalization {
 
   if ($FeaturedImage -and ($FeaturedImage -ne $script:DefaultPlaceholderHero)) {
     if ($FeaturedImage -eq $image.Source) {
-      $body = Remove-BodyImageAndCaption -Lines $lines -ImageLineIndex $image.LineIndex -CaptionLineIndex $(if ($null -ne $captionCandidate) { $captionCandidate.LineIndex } else { $null })
+      $captionToRemove = if ($null -ne $captionCandidate) { $captionCandidate } else { $duplicateHeroCaptionCandidate }
+      $body = Remove-BodyImageAndCaption -Lines $lines -ImageLineIndex $image.LineIndex -CaptionLineIndex $(if ($null -ne $captionToRemove) { $captionToRemove.LineIndex } else { $null })
       return [pscustomobject]@{
         Status = 'DEDUPED_EXISTING_HERO'
         Reason = 'Body lead image duplicates the existing hero.'

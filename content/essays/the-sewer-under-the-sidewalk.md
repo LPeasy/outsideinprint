@@ -15,10 +15,6 @@ featured_image_caption: "The public version of infrastructure can look like a ri
 collections: ["floods-water-built-environment", "risk-uncertainty"]
 ---
 
-![Officials cut a ribbon beside a wet urban brook while cracked old sewer pipes discharge beneath the street.](/images/essays/the-sewer-under-the-sidewalk/hero.png)
-
-*The public version of infrastructure can look like a ribbon cutting. The working version is often buried below it.*
-
 Ann McDonald thought the water was safe enough.
 
 Several weeks after a 2024 rainstorm, she took a kayak onto Alewife Brook outside Boston. The waiting period was not the problem. Public health officials recommend avoiding contact with receiving waters in the Massachusetts Water Resources Authority’s combined sewer overflow network during rain and for 48 hours afterward, and she had waited much longer than that. When her kayak got caught in debris, she reached into the water to free it. Later that day, she got sick. She told the [Associated Press](https://apnews.com/article/combined-sewer-sewage-release-massachusetts-boston-bdb80fe18f7c6981c7d1dffe3a120caa) she attributed the illness to sewage in the brook.

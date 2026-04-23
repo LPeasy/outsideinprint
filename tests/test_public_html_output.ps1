@@ -455,6 +455,13 @@ $essayHeroChecks = @(
     ExpectHeroAbsentFromBody = $true
   },
   @{
+    PublicPath = 'public/essays/the-sewer-under-the-sidewalk/index.html'
+    SourcePath = 'content/essays/the-sewer-under-the-sidewalk.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The public version of infrastructure can look like a ribbon cutting. The working version is often buried below it.'
+  },
+  @{
     PublicPath = 'public/essays/beyond-moores-law/index.html'
     SourcePath = 'content/essays/beyond-moores-law.md'
     ExpectVisibleHero = $true
@@ -1106,8 +1113,16 @@ foreach ($check in $essayHeroChecks) {
       if (-not $bodyMatch.Success) {
         $metadataIssues.Add("$relativePath => expected a piece-body region for hero-deduplication coverage")
       }
-      elseif ($bodyMatch.Groups[1].Value -match [regex]::Escape($expectedHeroSrc)) {
-        $metadataIssues.Add("$relativePath => expected the promoted or deduped hero image not to repeat inside the article body")
+      else {
+        $pieceBodyHtml = $bodyMatch.Groups[1].Value
+        if ($pieceBodyHtml -match [regex]::Escape($expectedHeroSrc)) {
+          $metadataIssues.Add("$relativePath => expected the promoted or deduped hero image not to repeat inside the article body")
+        }
+
+        $forbiddenBodyText = [string](Get-ExpectedEntryValue -Entry $check -Key 'ForbiddenBodyText' -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($forbiddenBodyText) -and ($pieceBodyHtml -match [regex]::Escape($forbiddenBodyText))) {
+          $metadataIssues.Add("$relativePath => expected the duplicated hero caption text not to repeat inside the article body")
+        }
       }
     }
   }

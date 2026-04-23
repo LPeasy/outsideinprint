@@ -248,6 +248,30 @@ featured: false
 Lead paragraph.
 '@ | Set-Content -Path (Join-Path $essayRoot 'existing-duplicate.md') -Encoding UTF8
 
+  @'
+---
+title: "Existing Duplicate Caption Match"
+date: 2026-04-21
+draft: false
+slug: "existing-duplicate-caption-match"
+section_label: "Essay"
+subtitle: ""
+description: "Fixture for duplicate hero caption cleanup."
+featured_image: "/images/medium/existing-duplicate/lead.png"
+featured_image_alt: "Existing Duplicate Caption Match"
+featured_image_caption: "The public version of infrastructure can look like a ribbon cutting. The working version is often buried below it."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+![](/images/medium/existing-duplicate/lead.png)
+
+*The public version of infrastructure can look like a ribbon cutting. The working version is often buried below it.*
+
+Lead paragraph.
+'@ | Set-Content -Path (Join-Path $essayRoot 'existing-duplicate-caption-match.md') -Encoding UTF8
+
   @"
 ---
 title: "Current Hero Wins"
@@ -308,6 +332,7 @@ Lead paragraph.
   Assert-True ($rowsBySlug['pipe-prose-not-caption'].Status -eq 'PROMOTED') 'Expected pipe-prose-not-caption to be promoted.'
   Assert-True ($rowsBySlug['svg-no-hero'].Status -eq 'PROMOTED') 'Expected svg-no-hero to be promoted.'
   Assert-True ($rowsBySlug['existing-duplicate'].Status -eq 'DEDUPED_EXISTING_HERO') 'Expected existing-duplicate to dedupe the existing hero.'
+  Assert-True ($rowsBySlug['existing-duplicate-caption-match'].Status -eq 'DEDUPED_EXISTING_HERO') 'Expected existing-duplicate-caption-match to dedupe the existing hero and caption.'
   Assert-True ($rowsBySlug['current-hero-wins'].Status -eq 'SKIPPED_CURRENT_HERO_WINS') 'Expected current-hero-wins to keep its existing hero.'
   Assert-True ($rowsBySlug['outside-heuristic'].Status -eq 'REVIEW_LEAD_OUTSIDE_HEURISTIC') 'Expected outside-heuristic to enter the review queue.'
 
@@ -349,8 +374,14 @@ Lead paragraph.
   Assert-Match -Text $existingDuplicate -Pattern '(?m)^featured_image_alt:\s*"Existing Duplicate"$' -Message 'Expected existing-duplicate to fall back to the essay title for alt text.'
   Assert-NotMatch -Text $existingDuplicate -Pattern '(?m)^!\[\]\(/images/medium/existing-duplicate/lead\.png\)$' -Message 'Expected existing-duplicate to remove the duplicated body image.'
 
+  $existingDuplicateCaptionMatch = Get-Content (Join-Path $essayRoot 'existing-duplicate-caption-match.md') -Raw
+  Assert-Match -Text $existingDuplicateCaptionMatch -Pattern '(?m)^featured_image:\s*"/images/medium/existing-duplicate/lead\.png"$' -Message 'Expected existing-duplicate-caption-match to keep its current hero.'
+  Assert-Match -Text $existingDuplicateCaptionMatch -Pattern '(?m)^featured_image_caption:\s*"The public version of infrastructure can look like a ribbon cutting\. The working version is often buried below it\."$' -Message 'Expected existing-duplicate-caption-match to preserve the existing hero caption.'
+  Assert-NotMatch -Text $existingDuplicateCaptionMatch -Pattern '(?m)^!\[\]\(/images/medium/existing-duplicate/lead\.png\)$' -Message 'Expected existing-duplicate-caption-match to remove the duplicated body image.'
+  Assert-NotMatch -Text $existingDuplicateCaptionMatch -Pattern '(?m)^\*The public version of infrastructure can look like a ribbon cutting\. The working version is often buried below it\.\*$' -Message 'Expected existing-duplicate-caption-match to remove the duplicated prose caption line.'
+
   $currentHeroWins = Get-Content (Join-Path $essayRoot 'current-hero-wins.md') -Raw
-  Assert-Match -Text $currentHeroWins -Pattern '(?m)^featured_image:\s*"/images/medium/current-hero-wins/hero\.png"$' -Message 'Expected current-hero-wins to preserve the existing hero.'
+  Assert-True ($currentHeroWins.Contains('featured_image: "/images/medium/current-hero-wins/hero.png"')) 'Expected current-hero-wins to preserve the existing hero.'
   Assert-Match -Text $currentHeroWins -Pattern 'http://127\.0\.0\.1:' -Message 'Expected current-hero-wins to keep the early body image in place for manual review.'
 
   $outsideHeuristic = Get-Content (Join-Path $essayRoot 'outside-heuristic.md') -Raw
