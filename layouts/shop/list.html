@@ -1,0 +1,55 @@
+{{ define "main" }}
+  {{ $shopPages := sort .RegularPages "Weight" "asc" }}
+
+  <div class="section-front section-front--shop">
+    <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
+      <h1 id="page-title" class="list-title">{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    </header>
+
+    <div class="section-front__body">
+      <div class="page-shell page-shell--reading shop-front__body">
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+
+  <section class="page-shell page-shell--grid shop-grid" aria-labelledby="shop-catalog-title">
+    <h2 id="shop-catalog-title" class="list-title">Current release</h2>
+    {{ if gt (len $shopPages) 0 }}
+      <div class="shop-grid__items">
+        {{ range $shopPages }}
+          {{ $productKey := .Params.merch_key | default (.Params.slug | default .File.BaseFileName) }}
+          {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) }}
+          <article class="shop-card">
+            <div class="shop-card__inner">
+              {{ with index $product "type_label" }}<p class="shop-card__eyebrow">{{ . }}</p>{{ end }}
+              <h3 class="shop-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+              {{ with index $product "deck" }}<p class="shop-card__deck">{{ . }}</p>{{ end }}
+              <dl class="shop-card__meta">
+                {{ with index $product "price_display" }}
+                  <div>
+                    <dt>Price</dt>
+                    <dd>{{ . }}</dd>
+                  </div>
+                {{ end }}
+                {{ with index $product "availability_note" }}
+                  <div>
+                    <dt>Availability</dt>
+                    <dd>{{ . }}</dd>
+                  </div>
+                {{ end }}
+              </dl>
+              <a class="shop-card__link" href="{{ .RelPermalink }}">View product</a>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="item">
+        <div class="t">No products are listed yet.</div>
+        <div class="m">The shop will stay small and only publish items that are actually ready to ship.</div>
+      </div>
+    {{ end }}
+  </section>
+{{ end }}

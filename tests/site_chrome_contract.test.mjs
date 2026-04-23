@@ -33,6 +33,7 @@ test("masthead removes Welcome and promotes Archive as the long-form lane", () =
   assert.match(masthead, />Archive</);
   assert.doesNotMatch(masthead, />Essays</);
   assert.doesNotMatch(masthead, />Dialogues</);
+  assert.doesNotMatch(masthead, />Shop</);
   assert.match(masthead, />Collections</);
   assert.match(masthead, />Gallery</);
   assert.match(masthead, />Library</);
@@ -63,6 +64,7 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(footer, /href="\{\{ "about\/" \| absURL \}\}">About</);
   assert.match(footer, /href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">Author</);
   assert.match(footer, /href="\{\{ "library\/" \| absURL \}\}">Library</);
+  assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}">Shop</);
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
 
   assert.match(randomTemplate, /class="page-header page-shell page-shell--wide"/);

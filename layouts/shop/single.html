@@ -1,0 +1,71 @@
+{{ define "main" }}
+  {{ $productKey := .Params.merch_key | default (.Params.slug | default .File.BaseFileName) }}
+  {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) }}
+
+  <div class="section-front section-front--shop">
+    <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
+      {{ with index $product "type_label" }}<p class="shop-product__eyebrow">{{ . }}</p>{{ end }}
+      <h1 id="page-title" class="shop-title">{{ .Title }}</h1>
+      {{ with index $product "deck" }}<p class="page-intro">{{ . }}</p>{{ end }}
+    </header>
+  </div>
+
+  <section class="page-shell page-shell--grid shop-product" aria-labelledby="page-title">
+    <div class="shop-product__content">
+      {{ .Content }}
+
+      {{ partial "journey_links.html" (dict
+        "class" "journey-links--page"
+        "eyebrow" "Browse next"
+        "links" (slice
+          (dict "href" ("shop/" | absURL) "label" "Back to Shop")
+          (dict "href" ("library/" | absURL) "label" "Library")
+          (dict "href" ("" | absURL) "label" "Home")
+        )
+      ) }}
+    </div>
+
+    <aside class="shop-panel" aria-label="Product details">
+      <section class="shop-panel__section">
+        {{ with index $product "price_display" }}<p class="shop-price">{{ . }}</p>{{ end }}
+        {{ with index $product "availability_note" }}<p class="shop-panel__lede">{{ . }}</p>{{ end }}
+      </section>
+
+      <section class="shop-panel__section" aria-labelledby="shop-checkout-title">
+        <h2 id="shop-checkout-title" class="list-title">Checkout</h2>
+        {{ partial "shop/checkout-actions.html" (dict "product" $product) }}
+        <p class="shop-note">Secure checkout opens on Stripe once this release is live.</p>
+      </section>
+
+      <section class="shop-panel__section" aria-labelledby="shop-fulfillment-title">
+        <h2 id="shop-fulfillment-title" class="list-title">Shipping and fulfillment</h2>
+        <ul class="shop-specs">
+          {{ with index $product "shipping_note" }}
+            <li>
+              <span class="shop-specs__label">Region</span>
+              <span class="shop-specs__value">{{ . }}</span>
+            </li>
+          {{ end }}
+          {{ with index $product "fulfillment_note" }}
+            <li>
+              <span class="shop-specs__label">Timing</span>
+              <span class="shop-specs__value">{{ . }}</span>
+            </li>
+          {{ end }}
+          {{ with index $product "stock_note" }}
+            <li>
+              <span class="shop-specs__label">Stock</span>
+              <span class="shop-specs__value">{{ . }}</span>
+            </li>
+          {{ end }}
+          {{ with index $product "size_note" }}
+            <li>
+              <span class="shop-specs__label">Sizing</span>
+              <span class="shop-specs__value">{{ . }}</span>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    </aside>
+  </section>
+{{ end }}

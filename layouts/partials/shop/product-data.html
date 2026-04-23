@@ -1,0 +1,30 @@
+{{- $key := printf "%v" (.key | default "") -}}
+{{- $page := .page | default false -}}
+{{- $merch := site.Data.merch | default dict -}}
+{{- $defaults := dict -}}
+{{- $products := dict -}}
+
+{{- with index $merch "defaults" -}}
+  {{- $defaults = . -}}
+{{- end -}}
+
+{{- with index $merch "products" -}}
+  {{- $products = . -}}
+{{- end -}}
+
+{{- $product := index $products $key | default dict -}}
+{{- $result := merge $defaults $product -}}
+
+{{- if $page -}}
+  {{- if not (index $result "title") -}}
+    {{- $result = merge $result (dict "title" $page.Title) -}}
+  {{- end -}}
+  {{- if not (index $result "deck") -}}
+    {{- with $page.Params.description -}}
+      {{- $result = merge $result (dict "deck" .) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $result = merge (dict "key" $key) $result -}}
+{{- return $result -}}

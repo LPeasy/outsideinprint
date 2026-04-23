@@ -406,6 +406,7 @@ $requiredSemanticPages = [ordered]@{
   'public/library/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/gallery/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/shop/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
 }
 
@@ -525,6 +526,14 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
   }
+  'public/shop/index.html' = @{
+    Title = 'Shop'
+    Description = 'A small merchandise release from Outside In Print: one hat, one shirt, and one tote bag fulfilled directly by the site.'
+    Canonical = 'https://outsideinprint.org/shop/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
     Description = 'About Outside In Print: the imprint''s mission, editorial model, publishing structure, and the relationship between the site and Robert V. Ussley.'
@@ -620,6 +629,13 @@ $requiredStructuredDataPages = [ordered]@{
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
   }
+  'public/shop/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
   'public/about/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'AboutPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'ProfilePage')
@@ -667,6 +683,10 @@ $requiredIndexationPages = [ordered]@{
     Robots = 'index, follow, max-image-preview:large'
   }
   'public/gallery/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/shop/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
@@ -805,6 +825,8 @@ $requiredUxPages = @(
   'public/library/index.html',
   'public/gallery/index.html',
   'public/collections/index.html',
+  'public/shop/index.html',
+  'public/shop/shirt/index.html',
   'public/random/index.html',
   'public/collections/the-ledger/index.html',
   'public/collections/syd-and-oliver-dialogues/index.html',
@@ -1767,6 +1789,21 @@ $requiredUxChecks = @(
     Path = 'public/about/index.html'
     Pattern = 'Robert V\. Ussley'
     Message = 'expected the about page to name Robert V. Ussley explicitly'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)Current release.*?/shop/hat/.*?/shop/shirt/.*?/shop/tote/'
+    Message = 'expected the shop landing page to expose the three launch products'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = 'United States only'
+    Message = 'expected the shop landing page to state the initial U.S.-only shipping scope'
+  },
+  @{
+    Path = 'public/shop/shirt/index.html'
+    Pattern = '(?s)(Buy size S|Buy size S coming soon).*?(Buy size M|Buy size M coming soon).*?(Buy size L|Buy size L coming soon).*?(Buy size XL|Buy size XL coming soon)'
+    Message = 'expected the shirt page to expose separate size checkout controls for S, M, L, and XL'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'

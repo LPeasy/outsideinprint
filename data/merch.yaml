@@ -1,0 +1,42 @@
+defaults:
+  shipping_note: "Ships within the United States only."
+  fulfillment_note: "Orders usually leave within 3-5 business days."
+  stock_note: "Inventory is managed manually. If something sells out, checkout will be disabled until it is restocked."
+
+products:
+  hat:
+    type_label: "Hat"
+    title: "OIP Hat"
+    deck: "A first-run adjustable cap for readers who want the imprint in a quiet everyday form."
+    price_display: "Price pending"
+    availability_note: "Small first run."
+    stripe_payment_link: "REPLACE_WITH_STRIPE_LINK_HAT"
+
+  shirt:
+    type_label: "Shirt"
+    title: "OIP Shirt"
+    deck: "A single-color unisex shirt with one clean treatment and four launch sizes."
+    price_display: "Price pending"
+    availability_note: "Available in S / M / L / XL."
+    size_note: "Each size has its own Stripe checkout link so manual inventory stays simple."
+    size_links:
+      - label: "S"
+        checkout_label: "Buy size S"
+        stripe_payment_link: "REPLACE_WITH_STRIPE_LINK_SHIRT_S"
+      - label: "M"
+        checkout_label: "Buy size M"
+        stripe_payment_link: "REPLACE_WITH_STRIPE_LINK_SHIRT_M"
+      - label: "L"
+        checkout_label: "Buy size L"
+        stripe_payment_link: "REPLACE_WITH_STRIPE_LINK_SHIRT_L"
+      - label: "XL"
+        checkout_label: "Buy size XL"
+        stripe_payment_link: "REPLACE_WITH_STRIPE_LINK_SHIRT_XL"
+
+  tote:
+    type_label: "Tote"
+    title: "OIP Tote"
+    deck: "A one-size canvas tote: durable, easy to ship, and well matched to the imprint's editorial temperament."
+    price_display: "Price pending"
+    availability_note: "One size."
+    stripe_payment_link: "REPLACE_WITH_STRIPE_LINK_TOTE"

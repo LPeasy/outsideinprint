@@ -1,0 +1,25 @@
+{{- $product := .product | default dict -}}
+{{- $singleLink := index $product "stripe_payment_link" | default "" -}}
+{{- $sizeLinks := index $product "size_links" | default (slice) -}}
+
+<div class="shop-cta-grid">
+  {{- if gt (len $sizeLinks) 0 -}}
+    {{- range $sizeLinks -}}
+      {{- $href := .stripe_payment_link | default "" -}}
+      {{- $label := .checkout_label | default (printf "Buy size %s" (.label | default "")) -}}
+      {{- $isLive := or (hasPrefix $href "https://") (hasPrefix $href "http://") -}}
+      {{- if $isLive -}}
+        <a class="shop-cta" href="{{ $href }}">{{ $label }}</a>
+      {{- else -}}
+        <span class="shop-cta shop-cta--disabled" aria-disabled="true">{{ $label }} coming soon</span>
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $isLive := or (hasPrefix $singleLink "https://") (hasPrefix $singleLink "http://") -}}
+    {{- if $isLive -}}
+      <a class="shop-cta" href="{{ $singleLink }}">Buy now</a>
+    {{- else -}}
+      <span class="shop-cta shop-cta--disabled" aria-disabled="true">Checkout coming soon</span>
+    {{- end -}}
+  {{- end -}}
+</div>
