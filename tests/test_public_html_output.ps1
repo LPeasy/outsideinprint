@@ -358,7 +358,8 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$currentCartoonImagePattern = [regex]::Escape((Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'image'))
+$currentCartoonImagePath = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'image'
+$currentCartoonImagePattern = [regex]::Escape($currentCartoonImagePath)
 $currentCartoonCaption = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'caption'
 $freshness = Test-PublicBuildFreshness -RepoRoot $repoRoot -SiteDir $SiteDir
 if (-not $freshness.IsFresh) {
@@ -475,6 +476,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = ('https://outsideinprint.org{0}' -f $currentCartoonImagePath)
   }
   'public/archive/index.html' = @{
     Title = 'Archive'
@@ -562,6 +564,16 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-sewer-under-the-sidewalk/index.html' = @{
+    Title = 'The Sewer Under the Sidewalk'
+    Description = "An essay on Alewife Brook, Boston-area combined sewer overflows, MWRA’s cleanup plan, and the public cost of climate-era pipe decisions."
+    Canonical = 'https://outsideinprint.org/essays/the-sewer-under-the-sidewalk/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-sewer-under-the-sidewalk/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
 }
@@ -993,6 +1005,16 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
     foreach ($imageValue in @($ogImage, $twitterImage)) {
       if (-not [string]::IsNullOrWhiteSpace($imageValue) -and -not $imageValue.StartsWith('https://outsideinprint.org/', [System.StringComparison]::OrdinalIgnoreCase)) {
         $metadataIssues.Add("$relativePath => expected social image URLs to be canonical absolute outsideinprint.org URLs, found '$imageValue'")
+      }
+    }
+
+    if ($expected.Contains('ExpectedImage')) {
+      $expectedImage = [string]$expected.ExpectedImage
+      if ($ogImage -ne $expectedImage) {
+        $metadataIssues.Add("$relativePath => expected og:image '$expectedImage', found '$ogImage'")
+      }
+      if ($twitterImage -ne $expectedImage) {
+        $metadataIssues.Add("$relativePath => expected twitter:image '$expectedImage', found '$twitterImage'")
       }
     }
   }

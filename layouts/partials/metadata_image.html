@@ -44,6 +44,16 @@
   {{- end -}}
 {{- end -}}
 
+{{- if and (not $image) (eq $route.name "home") -}}
+  {{- $cartoonData := site.Data.editorial_cartoons | default dict -}}
+  {{- $currentCartoonSlug := $cartoonData.current | default "" -}}
+  {{- range ($cartoonData.cartoons | default (slice)) -}}
+    {{- if and (not $image) (eq .slug $currentCartoonSlug) -}}
+      {{- $image = printf "%v" (.image | default "") -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 {{- if and (not $image) $route.is_article_like -}}
   {{- with .Resources.ByType "image" -}}
     {{- with index . 0 -}}

@@ -1,5 +1,12 @@
-current: did-you-really-mean-what-you-said
+current: the-sewer-under-the-sidewalk
 cartoons:
+  - slug: the-sewer-under-the-sidewalk
+    title: "The Sewer Under the Sidewalk"
+    date: "2026-04-22"
+    image: "/images/editorial/the-sewer-under-the-sidewalk.png"
+    alt: "Officials cut a ribbon beside a wet urban brook while cracked old sewer pipes discharge beneath the street."
+    width: 2048
+    height: 1152
   - slug: think-outside-the-box
     title: "Think Outside the Box"
     date: "2026-04-16"
