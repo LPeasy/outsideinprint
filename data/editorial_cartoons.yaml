@@ -1,4 +1,4 @@
-current: feeding-the-machine
+current: who-do-you-know-here
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -36,3 +36,10 @@ cartoons:
     alt: "Editorial cartoon showing a laughing businessman cutting off a power line to desperate people while a giant AI data center and smoking industrial towers consume the electricity behind him."
     width: 1536
     height: 1024
+  - slug: who-do-you-know-here
+    title: "Who Do You Know Here?"
+    date: "2026-04-24"
+    image: "/images/editorial/who-do-you-know-here.png"
+    alt: "Editorial cartoon showing a crowded general immigration intake line beside a guarded Gold Card entrance, where a wealthy family with luggage and a gold card passes a $1 million cover charge sign toward a luxury skyline."
+    width: 1672
+    height: 941
