@@ -24,7 +24,7 @@ $Sections = @(
 $EssayPathPattern = "^/(essays|syd-and-oliver|working-papers)/[^/]+/?$"
 $AllTimeLabel = "All time"
 $GoatCounterExportNames = @("goatcounter-export.csv", "export.csv")
-$DashboardSparklineDays = 14
+$AnalyticsSparklineDays = 14
 
 function Read-Utf8Text {
   param([string]$Path)
@@ -1219,7 +1219,7 @@ function Get-DailySparkline {
     [hashtable]$DailyMap,
     [string[]]$DateKeys,
     [string]$MetricName,
-    [int]$Window = $DashboardSparklineDays
+    [int]$Window = $AnalyticsSparklineDays
   )
 
   if ($DateKeys.Count -eq 0) {

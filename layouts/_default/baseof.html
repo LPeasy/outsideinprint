@@ -33,7 +33,7 @@
     {{ partial "schema.html" (dict "page" . "meta" $meta) }}
 
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ if site.Params.dashboard.site }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}" integrity="{{ $css.Data.Integrity }}" />
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
   </head>
   {{- $bodyClasses := slice -}}
   {{- if .IsPage -}}
@@ -51,26 +51,13 @@
   <body{{ if gt (len $bodyClasses) 0 }} class="{{ delimit $bodyClasses " " }}"{{ end }}>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="wrap">
-      {{ if site.Params.dashboard.site }}
-        {{ partial "masthead_dashboard.html" . }}
-      {{ else }}
-        {{ partial "masthead.html" . }}
-      {{ end }}
+      {{ partial "masthead.html" . }}
       <main id="main-content">
         {{ block "main" . }}{{ end }}
       </main>
-      {{ if site.Params.dashboard.site }}
-        {{ partial "footer_dashboard.html" . }}
-      {{ else }}
-        {{ partial "footer.html" . }}
-      {{ end }}
+      {{ partial "footer.html" . }}
     </div>
-    {{ if site.Params.dashboard.site }}
-      {{ $dashboardJS := resources.Get "js/dashboard.mjs" | js.Build (dict "targetPath" "js/dashboard.js" "minify" true) | resources.Fingerprint }}
-      <script src="{{ $dashboardJS.Permalink }}" integrity="{{ $dashboardJS.Data.Integrity }}" defer></script>
-    {{ else }}
-      {{ partial "analytics.html" . }}
-    {{ end }}
+    {{ partial "analytics.html" . }}
   </body>
 </html>
 

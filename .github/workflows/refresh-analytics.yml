@@ -18,7 +18,7 @@ jobs:
     # ETL pipeline:
     # 1. Extract raw analytics from GoatCounter.
     # 2. Transform them into the repo's normalized Hugo data model.
-    # 3. Commit only changed snapshots; the push to main triggers the static dashboard publish workflow.
+    # 3. Commit only changed snapshots for reporting and rollout measurement.
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -146,4 +146,4 @@ jobs:
           api_url="${GOATCOUNTER_API_URL:-$site_url/api/v0}"
           echo "Analytics refresh finished for ${site_url}." >> "$GITHUB_STEP_SUMMARY"
           echo "GoatCounter API base used: ${api_url}." >> "$GITHUB_STEP_SUMMARY"
-          echo "Dashboard publish runs automatically on the resulting push to main when analytics files change." >> "$GITHUB_STEP_SUMMARY"
+          echo "Analytics snapshots remain available for public-site reporting and SEO rollout measurement." >> "$GITHUB_STEP_SUMMARY"

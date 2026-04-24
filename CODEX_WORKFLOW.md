@@ -9,6 +9,7 @@ When the task is publishing or revising site content, follow `AGENTS.md` and `do
 
 - Use the repo-local wrappers under `tools\bin\generated\` for local publish commands.
 - Prefer the essay scaffold and target-file guardrails before full-site validation.
+- Follow `docs/local-validation-policy.md`; do not force local npm or npx checks for OIP publish work.
 - Treat the command block below as examples and validation helpers, not as the canonical publishing manual.
 
 ## Standard Task Contract
@@ -132,17 +133,14 @@ cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.
 .\tools\bin\custom\new-essay.cmd --title "My Title"
 
 # Run the target-file guardrails first
-.\tools\bin\generated\npm.cmd run check:essays -- -Paths .\content\essays\my-title.md
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
 
 # Build site/output and run generated-output regression coverage
 .\tools\bin\generated\hugo.cmd --gc --minify
-powershell -ExecutionPolicy Bypass -File .\tests\test_public_html_output.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild
 
-# Run tests
-.\tools\bin\generated\npm.cmd test
-powershell -ExecutionPolicy Bypass -File .\tests\test_new_essay_scaffold.ps1
-
-# Optional lint/type checks (if configured)
-.\tools\bin\generated\npm.cmd run lint
-.\tools\bin\generated\npm.cmd run typecheck
+# Run targeted PowerShell tests when relevant
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_new_essay_scaffold.ps1
 ```

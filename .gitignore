@@ -5,19 +5,13 @@
 
 /.tools/
 /.tmp-public/
-/.tmp-dashboard/
-/.tmp-dashboard-publish/
 /.tmp-seo-rollout-*/
 /.tmp-essay-guardrails-*/
-/.dashboard-public/
-/.dashboard-repo/
 /.analytics-refresh/
 /assets/jsconfig.json
 /qa/artifacts/
 /qa/post-deploy-report.md
 /reports/essay-guardrails.*
-/dashboard_deploy_key
-/dashboard_deploy_key.pub
 
 # >>> DependencyTemplate toolchain >>>
 tools/vendor/

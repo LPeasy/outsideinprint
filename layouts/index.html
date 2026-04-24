@@ -1,7 +1,4 @@
 {{ define "main" }}
-  {{ if site.Params.dashboard.site }}
-    {{ partial "dashboard/render.html" . }}
-  {{ else }}
   {{ $exploreRoutes := slice
     (dict "page" (site.GetPage "/archive") "label" "Archive")
     (dict "page" (site.GetPage "/gallery") "label" "Gallery")
@@ -46,5 +43,4 @@
     "buttonLabel" "Subscribe"
     "note" "New work and occasional notes. Free to join, easy to leave."
   ) }}
-  {{ end }}
 {{ end }}

@@ -112,8 +112,20 @@ This writes:
 Use that audit to distinguish:
 
 - intentional historical legacy references in analytics and rollout sampling
-- dashboard/fixture compatibility references
+- fixture compatibility references
 - true manual follow-up cleanup candidates
+
+For a single post-deploy verification pass, run:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\run_seo_production_verification.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/production-verification/production-verification.json`
+- `reports/seo-rollout/production-verification/production-verification.md`
+- probe, host diagnostic, and legacy reference audit artifacts in the same folder
 
 ## Phase 3: Search Console And Bing
 
@@ -151,6 +163,17 @@ Blocking findings:
 - a priority core page is excluded
 - a priority essay is treated as duplicate without the canonical host being selected
 
+To generate a console-friendly inspection sheet from the frozen priority URL set, run:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\prepare_search_console_inspection_pack.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/search-console-inspection-pack.csv`
+- `reports/seo-rollout/search-console-inspection-pack.md`
+
 ## Phase 4: Measurement Window
 
 Run the measurement report against the frozen baseline:
@@ -185,6 +208,52 @@ Interpretation rules:
 - zero AI-answer-engine traffic in month one is not a failure
 - low organic traffic with correct canonicals is not a rollback trigger
 - flat or rising `legacy_domain` after redirect work is a failure signal and should reopen legacy-host consolidation
+
+When Search Console or Bing query exports are available, build a query-performance report:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\report_search_performance.ps1 -GoogleCsvPath .\path\to\google.csv -BingCsvPath .\path\to\bing.csv
+```
+
+If no export is available yet, the script writes `search-performance-input-template.csv` to show the expected shape. Use the report for targeted title and description changes only.
+
+## Phase 4.5: Audit Before Content Edits
+
+Before Phase 5 content work, run the metadata audit:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\audit_seo_metadata.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/seo-metadata-audit.csv`
+- `reports/seo-rollout/seo-metadata-audit.json`
+- `reports/seo-rollout/seo-metadata-audit.md`
+
+This audit flags missing or weak descriptions, default social images, duplicate titles/descriptions, possible encoding damage, and missing image alt text. It is not a command to rewrite the whole archive immediately.
+
+To prepare a manual hero/social image review pass for essays that need image work, run:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\prepare_essay_image_review_queue.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/essay-image-review-queue.csv`
+- `reports/seo-rollout/essay-image-review-queue.md`
+- `reports/seo-rollout/essay-image-review-worklog.csv`
+
+The image queue is review-only. Use it to generate and approve images manually before any essay front matter is patched. Batch A is the frozen priority essay set; later batches should wait until the priority images have been approved and validated.
+
+After Bing Webmaster Tools is verified and an IndexNow key file is publicly reachable on the canonical host, dry-run the submit list:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\submit_indexnow.ps1 -UsePriorityUrls -DryRun
+```
+
+Real submission requires `INDEXNOW_KEY` and must submit canonical `https://outsideinprint.org/...` URLs only.
 
 ## CI / Workflow Support
 

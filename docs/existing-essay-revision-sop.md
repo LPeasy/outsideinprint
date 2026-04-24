@@ -55,7 +55,7 @@ Do not change `date` for ordinary revisions. The date remains the original publi
 6. For copy revisions, run the OIP voice pass and the current AI-writing-tells cleanup before validation.
 7. Build locally and inspect the rendered archive block on the changed page.
 8. Verify the archive block shows the original `Date`, the new `Version`, and the new `Edition`.
-9. Run the local publish gate used for content changes, excluding local `npm test` when the local Node wrapper is blocked.
+9. Run the local publish gate used for content changes. Do not run local npm or npx checks for OIP revision work.
 10. Publish only after reviewing the diff and confirming it contains the intended content, metadata, fixture, and asset changes.
 
 ## Validation Checklist

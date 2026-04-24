@@ -7,6 +7,12 @@ $probeScriptPath = Join-Path $repoRoot 'scripts/probe_seo_rollout.ps1'
 $reportScriptPath = Join-Path $repoRoot 'scripts/report_seo_rollout_window.ps1'
 $hostDiagnosticScriptPath = Join-Path $repoRoot 'scripts/diagnose_seo_hosts.ps1'
 $legacyAuditScriptPath = Join-Path $repoRoot 'scripts/audit_legacy_host_references.ps1'
+$productionVerificationScriptPath = Join-Path $repoRoot 'scripts/run_seo_production_verification.ps1'
+$inspectionPackScriptPath = Join-Path $repoRoot 'scripts/prepare_search_console_inspection_pack.ps1'
+$metadataAuditScriptPath = Join-Path $repoRoot 'scripts/audit_seo_metadata.ps1'
+$imageReviewQueueScriptPath = Join-Path $repoRoot 'scripts/prepare_essay_image_review_queue.ps1'
+$searchPerformanceScriptPath = Join-Path $repoRoot 'scripts/report_search_performance.ps1'
+$indexNowScriptPath = Join-Path $repoRoot 'scripts/submit_indexnow.ps1'
 $docPath = Join-Path $repoRoot 'docs/seo-rollout.md'
 $adminChecklistPath = Join-Path $repoRoot 'docs/seo-admin-checklist.md'
 $baselinePath = Join-Path $repoRoot 'reports/seo-rollout/baseline.json'
@@ -22,6 +28,12 @@ foreach ($path in @(
   $reportScriptPath,
   $hostDiagnosticScriptPath,
   $legacyAuditScriptPath,
+  $productionVerificationScriptPath,
+  $inspectionPackScriptPath,
+  $metadataAuditScriptPath,
+  $imageReviewQueueScriptPath,
+  $searchPerformanceScriptPath,
+  $indexNowScriptPath,
   $docPath,
   $adminChecklistPath,
   $baselinePath,
@@ -41,6 +53,12 @@ $probeScript = Get-Content -Path $probeScriptPath -Raw
 $reportScript = Get-Content -Path $reportScriptPath -Raw
 $hostDiagnosticScript = Get-Content -Path $hostDiagnosticScriptPath -Raw
 $legacyAuditScript = Get-Content -Path $legacyAuditScriptPath -Raw
+$productionVerificationScript = Get-Content -Path $productionVerificationScriptPath -Raw
+$inspectionPackScript = Get-Content -Path $inspectionPackScriptPath -Raw
+$metadataAuditScript = Get-Content -Path $metadataAuditScriptPath -Raw
+$imageReviewQueueScript = Get-Content -Path $imageReviewQueueScriptPath -Raw
+$searchPerformanceScript = Get-Content -Path $searchPerformanceScriptPath -Raw
+$indexNowScript = Get-Content -Path $indexNowScriptPath -Raw
 $doc = Get-Content -Path $docPath -Raw
 $adminChecklist = Get-Content -Path $adminChecklistPath -Raw
 $deployWorkflow = Get-Content -Path $deployWorkflowPath -Raw
@@ -88,7 +106,9 @@ foreach ($requiredSnippet in @(
   'Invoke-WebRequest',
   'curl.exe',
   'host-diagnostics.md',
-  'outsideinprint.org/llms.txt'
+  'outsideinprint.org/llms.txt',
+  'local_windows_tls_credentials_failure',
+  'SEC_E_NO_CREDENTIALS'
 )) {
   if ($hostDiagnosticScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "diagnose_seo_hosts.ps1 must contain '$requiredSnippet'."
@@ -98,11 +118,89 @@ foreach ($requiredSnippet in @(
 foreach ($requiredSnippet in @(
   'legacy-reference-audit.md',
   'intentional_legacy_classification',
-  'dashboard_or_fixture_compatibility',
+  'fixture_compatibility',
   'manual_follow_up'
 )) {
   if ($legacyAuditScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "audit_legacy_host_references.ps1 must contain '$requiredSnippet'."
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'production-verification.md',
+  'canonical_live_smoke',
+  'seo_rollout_probe',
+  'host_diagnostics',
+  'legacy_reference_audit',
+  'FailOnError'
+)) {
+  if ($productionVerificationScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "run_seo_production_verification.ps1 must contain '$requiredSnippet'."
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'search-console-inspection-pack.csv',
+  'google_selected_canonical',
+  'bing_selected_canonical',
+  'google_exclusion_reason',
+  'blocking_finding'
+)) {
+  if ($inspectionPackScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "prepare_search_console_inspection_pack.ps1 must contain '$requiredSnippet'."
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'seo-metadata-audit.csv',
+  'missing_description',
+  'description_ends_with_ellipsis',
+  'default_social_image',
+  'possible_encoding_damage',
+  'duplicate_description'
+)) {
+  if ($metadataAuditScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "audit_seo_metadata.ps1 must contain '$requiredSnippet'."
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'essay-image-review-queue.csv',
+  'essay-image-review-queue.md',
+  'essay-image-review-worklog.csv',
+  'Batch A',
+  'missing_image',
+  'default_social_image',
+  'missing_image_alt',
+  'review_risk',
+  'image_prompt'
+)) {
+  if ($imageReviewQueueScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "prepare_essay_image_review_queue.ps1 must contain '$requiredSnippet'."
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'search-performance-input-template.csv',
+  'search-performance-report.md',
+  'Low CTR Opportunities',
+  'GoogleCsvPath',
+  'BingCsvPath'
+)) {
+  if ($searchPerformanceScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "report_search_performance.ps1 must contain '$requiredSnippet'."
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'IndexNow',
+  'INDEXNOW_KEY',
+  'DryRun',
+  'outsideinprint.org',
+  'indexnow-submit-plan.md'
+)) {
+  if ($indexNowScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "submit_indexnow.ps1 must contain '$requiredSnippet'."
   }
 }
 
@@ -112,6 +210,12 @@ foreach ($requiredSnippet in @(
   'report_seo_rollout_window.ps1',
   'diagnose_seo_hosts.ps1',
   'audit_legacy_host_references.ps1',
+  'run_seo_production_verification.ps1',
+  'prepare_search_console_inspection_pack.ps1',
+  'audit_seo_metadata.ps1',
+  'prepare_essay_image_review_queue.ps1',
+  'report_search_performance.ps1',
+  'submit_indexnow.ps1',
   'Google Search Console',
   'Bing Webmaster Tools',
   'outsideinprint.org'
@@ -212,6 +316,59 @@ try {
   )) {
     if (-not (Test-Path -LiteralPath $expectedPath -PathType Leaf)) {
       throw "report_seo_rollout_window.ps1 did not write expected artifact: $expectedPath"
+    }
+  }
+
+  & $inspectionPackScriptPath -PriorityUrlsPath (Join-Path $tempDir 'priority-urls.json') -WorksheetPath (Join-Path $tempDir 'rollout-worksheet.csv') -OutputDir $tempDir
+  foreach ($expectedPath in @(
+    (Join-Path $tempDir 'search-console-inspection-pack.csv'),
+    (Join-Path $tempDir 'search-console-inspection-pack.md')
+  )) {
+    if (-not (Test-Path -LiteralPath $expectedPath -PathType Leaf)) {
+      throw "prepare_search_console_inspection_pack.ps1 did not write expected artifact: $expectedPath"
+    }
+  }
+
+  & $metadataAuditScriptPath -OutputDir $tempDir
+  foreach ($expectedPath in @(
+    (Join-Path $tempDir 'seo-metadata-audit.csv'),
+    (Join-Path $tempDir 'seo-metadata-audit.json'),
+    (Join-Path $tempDir 'seo-metadata-audit.md')
+  )) {
+    if (-not (Test-Path -LiteralPath $expectedPath -PathType Leaf)) {
+      throw "audit_seo_metadata.ps1 did not write expected artifact: $expectedPath"
+    }
+  }
+
+  & $imageReviewQueueScriptPath -MetadataAuditPath (Join-Path $tempDir 'seo-metadata-audit.csv') -PriorityUrlsPath (Join-Path $tempDir 'priority-urls.json') -OutputDir $tempDir
+  foreach ($expectedPath in @(
+    (Join-Path $tempDir 'essay-image-review-queue.csv'),
+    (Join-Path $tempDir 'essay-image-review-queue.md'),
+    (Join-Path $tempDir 'essay-image-review-worklog.csv')
+  )) {
+    if (-not (Test-Path -LiteralPath $expectedPath -PathType Leaf)) {
+      throw "prepare_essay_image_review_queue.ps1 did not write expected artifact: $expectedPath"
+    }
+  }
+
+  & $searchPerformanceScriptPath -OutputDir $tempDir
+  foreach ($expectedPath in @(
+    (Join-Path $tempDir 'search-performance-input-template.csv'),
+    (Join-Path $tempDir 'search-performance-report.json'),
+    (Join-Path $tempDir 'search-performance-report.md')
+  )) {
+    if (-not (Test-Path -LiteralPath $expectedPath -PathType Leaf)) {
+      throw "report_search_performance.ps1 did not write expected artifact: $expectedPath"
+    }
+  }
+
+  & $indexNowScriptPath -PriorityUrlsPath (Join-Path $tempDir 'priority-urls.json') -OutputDir $tempDir -UsePriorityUrls -DryRun
+  foreach ($expectedPath in @(
+    (Join-Path $tempDir 'indexnow-submit-plan.json'),
+    (Join-Path $tempDir 'indexnow-submit-plan.md')
+  )) {
+    if (-not (Test-Path -LiteralPath $expectedPath -PathType Leaf)) {
+      throw "submit_indexnow.ps1 did not write expected artifact: $expectedPath"
     }
   }
 }

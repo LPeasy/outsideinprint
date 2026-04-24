@@ -93,7 +93,7 @@ Essays are the first-class publishing workflow. Dialogues, reports, and working 
 Run the target-file guardrail before a full build:
 
 ```powershell
-.\tools\bin\generated\npm.cmd run check:essays -- -Paths .\content\essays\my-title.md
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
 ```
 
 During drafting, preview locally with:
@@ -106,9 +106,9 @@ Before publishing, run the normal local publish gate:
 
 ```powershell
 .\tools\bin\generated\hugo.cmd --gc --minify
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild
-.\tools\bin\generated\npm.cmd test
 ```
 
 What this gate is meant to catch:
@@ -117,7 +117,7 @@ What this gate is meant to catch:
 - hero/frontmatter conflicts such as placeholder heroes, missing heroes with real early lead images, and duplicate hero/body lead images
 - broken public routes
 - generated HTML regressions
-- Node/browser test regressions
+- CI-only Node/browser regressions remain delegated to GitHub Actions and are not forced through local npm.
 
 ## Publish path through main
 
@@ -152,5 +152,5 @@ Avoid treating these as the default path:
 
   This pass promotes deterministic early lead images into `featured_image`, localizes remote Medium images into `static/images/medium/<slug>/`, migrates short caption/source lines into `featured_image_caption`, and removes promoted duplicates from the article body.
 
-- Analytics and dashboard publishing are separate workflows. The public reading site does not publish the dashboard.
+- Analytics snapshot refresh is separate from public content publishing. Dashboard publishing is paused and no dashboard build is part of the public reading-site workflow.
 - Do not rely on raw HTML, copied Medium formatting, duplicated title/dek in the body, or improvised separators. The essay guardrails are specifically meant to catch those problems.

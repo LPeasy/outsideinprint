@@ -89,7 +89,6 @@ Expected result:
 
 ```powershell
 git ls-remote https://github.com/LPeasy/outsideinprint.git HEAD
-git ls-remote https://github.com/LPeasy/OutsideInPrintDashboard.git HEAD
 ```
 
 ### 4. Confirm write access with a harmless branch probe
@@ -105,7 +104,7 @@ git -C C:\Users\lawto\Documents\OutsideInPrint\outsideinprint push origin :refs/
 For the GitHub CLI or API path:
 
 ```powershell
-& 'C:\Users\lawto\.codex\bin\gh-codex.cmd' api repos/LPeasy/OutsideInPrintDashboard/git/ref/heads/main --jq .object.sha
+& 'C:\Users\lawto\.codex\bin\gh-codex.cmd' api repos/LPeasy/outsideinprint/git/ref/heads/main --jq .object.sha
 ```
 
 Then create and delete a temporary branch through `gh api` if needed.
