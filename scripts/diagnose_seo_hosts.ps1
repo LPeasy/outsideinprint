@@ -259,21 +259,6 @@ $result = [ordered]@{
   )
 }
 
-$canonicalPowerShellErrors = @($result.canonical_probes | ForEach-Object { [string]($_.powershell.error ?? '') })
-$canonicalCurlErrors = @($result.canonical_probes | ForEach-Object { [string]($_.curl.stderr ?? '') })
-$allCanonicalPowerShellFailed = @($result.canonical_probes | Where-Object { -not $_.powershell.ok }).Count -eq @($result.canonical_probes).Count
-$allCanonicalPowerShellTlsFailed = @($canonicalPowerShellErrors | Where-Object { $_ -match 'SSL connection could not be established' }).Count -eq @($result.canonical_probes).Count
-$allCanonicalCurlCredentialFailed = @($canonicalCurlErrors | Where-Object { $_ -match 'SEC_E_NO_CREDENTIALS|No credentials are available in the security package' }).Count -eq @($result.canonical_probes).Count
-$localWindowsTlsCredentialsFailure = [bool]($allCanonicalPowerShellFailed -and $allCanonicalPowerShellTlsFailed -and $allCanonicalCurlCredentialFailed)
-$result['client_environment'] = [ordered]@{
-  local_windows_tls_credentials_failure = $localWindowsTlsCredentialsFailure
-  interpretation = if ($localWindowsTlsCredentialsFailure) {
-    'All canonical probes failed through the local Windows Schannel client with SEC_E_NO_CREDENTIALS. Treat this as local client evidence unless GitHub Actions or browser checks also fail.'
-  } else {
-    'No uniform local Windows Schannel credential failure detected.'
-  }
-}
-
 $jsonPath = Join-Path $OutputDir 'host-diagnostics.json'
 $markdownPath = Join-Path $OutputDir 'host-diagnostics.md'
 
@@ -283,11 +268,6 @@ $lines = New-Object System.Collections.Generic.List[string]
 $lines.Add('# SEO Host Diagnostics')
 $lines.Add('')
 $lines.Add(('- Generated at: {0}' -f $result.generated_at))
-$lines.Add('')
-$lines.Add('## Client Environment')
-$lines.Add('')
-$lines.Add(('- Local Windows TLS credentials failure: {0}' -f $result.client_environment.local_windows_tls_credentials_failure))
-$lines.Add(('- Interpretation: {0}' -f $result.client_environment.interpretation))
 $lines.Add('')
 $lines.Add('## DNS')
 $lines.Add('')
@@ -344,8 +324,7 @@ $lines.Add('')
 
 $lines.Add('## Operator Notes')
 $lines.Add('')
-$lines.Add('- PowerShell failures here matter only if they reproduce in GitHub Actions or another clean client.')
-$lines.Add('- `SEC_E_NO_CREDENTIALS` from local Windows Schannel points to this client environment, not automatically to bad site DNS or certificate setup.')
+$lines.Add('- PowerShell failures here matter because the canonical-host smoke in CI also uses `Invoke-WebRequest`.')
 $lines.Add('- curl success with PowerShell failure usually points to a client-specific TLS or certificate-chain issue rather than a total host outage.')
 $lines.Add('- Legacy URLs should end in matching `https://outsideinprint.org/...` paths, not a second live HTML surface.')
 
