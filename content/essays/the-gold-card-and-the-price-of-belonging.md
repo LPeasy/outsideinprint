@@ -11,7 +11,7 @@ edition: "First web edition"
 featured: false
 collections:
   - "reported-case-studies"
-featured_image: "/images/essays/the-gold-card-and-the-price-of-belonging/hero.jpg"
+featured_image: "/images/essays/the-gold-card-and-the-price-of-belonging/hero.png"
 featured_image_alt: "A gleaming gold residency card resting on blue immigration files beside a passport and seal-stamped paperwork."
 featured_image_caption: "The card is marketed like a product, but it is really a statement about who gets welcomed fast."
 ---
@@ -48,7 +48,7 @@ The official site leans into the distinction. It calls the payment a gift more t
 
 The civic fiction has been reduced to a receipt.
 
-![Wire transfer documents, visa forms, and a gold card laid across a polished government desk.](/images/essays/the-gold-card-and-the-price-of-belonging/section-1.jpg)
+![Wire transfer documents, visa forms, and a gold card laid across a polished government desk.](/images/essays/the-gold-card-and-the-price-of-belonging/section-1.png)
 
 *The old paperwork of migration now shares the desk with a much cleaner proposition ~ pay, clear screening, move ahead.*
 
@@ -98,7 +98,7 @@ That is not only immigration law. It is membership design.
 
 The language of the site sounds less like the old civics textbook and more like a luxury travel product, a bank instrument, or a premium airport service. That is not an accident of presentation. It is the logic of the program made visible. The nation is not only offering admission. It is segmenting it.
 
-![An immigration hall with brass stanchions and a distinct premium lane leading toward passport control.](/images/essays/the-gold-card-and-the-price-of-belonging/section-2.jpg)
+![An immigration hall with brass stanchions and a distinct premium lane leading toward passport control.](/images/essays/the-gold-card-and-the-price-of-belonging/section-2.png)
 
 *Every immigration system sorts. The gold card makes the hierarchy look like luxury design.*
 
