@@ -48,16 +48,22 @@ Optional fields:
 
 ## Versioning rule
 
-`version` should be manually bumped for any material change to:
+`version` should be manually bumped for any public change to:
 
 - body content
 - title or subtitle
 - citation-relevant metadata (`author`, `date`, `edition`)
+- image assets, formatting, link repairs, or other visible corrections
 
 Suggested convention:
 
-- major changes: `2.0`, `3.0`, ...
-- editorial or substantive revisions: `1.1`, `1.2`, ...
+- minor corrections: increment the decimal, such as `1.0` to `1.1`
+- major copy revisions: increment the whole number and reset the decimal, such as `1.0` to `2.0`
+- mixed revisions: use the major rule when any body-copy or argument change is present
+
+Every version bump must also advance `edition` by one ordinal label, such as `First web edition` to `Second web edition`. The original `date` remains unchanged unless the original publication date itself was wrong.
+
+For the full procedure, see [docs/existing-essay-revision-sop.md](docs/existing-essay-revision-sop.md).
 
 ## Supported Markdown subset
 
