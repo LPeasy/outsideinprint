@@ -82,6 +82,7 @@ In Google Search Console:
    - `https://outsideinprint.org/about/`
    - `https://outsideinprint.org/authors/robert-v-ussley/`
    - `https://outsideinprint.org/collections/`
+   - `https://outsideinprint.org/library/`
    - `https://outsideinprint.org/collections/risk-uncertainty/`
 5. Then inspect the essay URLs frozen in `reports/seo-rollout/priority-urls.json`.
 

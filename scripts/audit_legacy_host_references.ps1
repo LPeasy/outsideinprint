@@ -25,16 +25,13 @@ function Get-ReferenceCategory {
 
   if ($normalized -match '/scripts/import_analytics\.ps1$' -or
       $normalized -match '/scripts/freeze_seo_rollout_baseline\.ps1$' -or
-      $normalized -match '/assets/js/dashboard-core\.mjs$' -or
       $normalized -match '/tests/test_analytics_snapshot_contract\.ps1$') {
     return 'intentional_legacy_classification'
   }
 
-  if ($normalized -match '/scripts/verify_dashboard\.ps1$' -or
-      $normalized -match '/docs/analytics-system\.md$' -or
-      $normalized -match '/layouts/partials/masthead_dashboard\.html$' -or
+  if ($normalized -match '/docs/analytics-system\.md$' -or
       $normalized -match '/tests/test_pdf_builder_static_image_paths\.ps1$') {
-    return 'dashboard_or_fixture_compatibility'
+    return 'fixture_compatibility'
   }
 
   if ($normalized -match '/docs/seo-admin-checklist\.md$' -or
@@ -97,7 +94,7 @@ $summary = [ordered]@{
   categories = [ordered]@{
     generated_historical_data = @($rows | Where-Object { $_.category -eq 'generated_historical_data' }).Count
     intentional_legacy_classification = @($rows | Where-Object { $_.category -eq 'intentional_legacy_classification' }).Count
-    dashboard_or_fixture_compatibility = @($rows | Where-Object { $_.category -eq 'dashboard_or_fixture_compatibility' }).Count
+    fixture_compatibility = @($rows | Where-Object { $_.category -eq 'fixture_compatibility' }).Count
     intentional_probe_target = @($rows | Where-Object { $_.category -eq 'intentional_probe_target' }).Count
     manual_follow_up = @($rows | Where-Object { $_.category -eq 'manual_follow_up' }).Count
   }
@@ -121,7 +118,7 @@ $lines.Add('| Category | Count | Meaning |')
 $lines.Add('| --- | ---: | --- |')
 $lines.Add(('| generated_historical_data | {0} | Generated analytics snapshots that still contain legacy-host strings from historical traffic. |' -f $summary.categories.generated_historical_data))
 $lines.Add(('| intentional_legacy_classification | {0} | Legacy host references used to classify historical analytics or frozen rollout samples. |' -f $summary.categories.intentional_legacy_classification))
-$lines.Add(('| dashboard_or_fixture_compatibility | {0} | Dashboard-specific public-site links or fixture/test references that still assume the legacy host. |' -f $summary.categories.dashboard_or_fixture_compatibility))
+$lines.Add(('| fixture_compatibility | {0} | Fixture/test references that still assume the legacy host. |' -f $summary.categories.fixture_compatibility))
 $lines.Add(('| intentional_probe_target | {0} | Diagnostic scripts or owner checklists that intentionally mention the legacy host while validating the cutover. |' -f $summary.categories.intentional_probe_target))
 $lines.Add(('| manual_follow_up | {0} | Repo-controlled references that likely still need explicit human review. |' -f $summary.categories.manual_follow_up))
 $lines.Add('')
@@ -140,7 +137,7 @@ $lines.Add('')
 $lines.Add('## Operator Notes')
 $lines.Add('')
 $lines.Add('- Historical analytics snapshots are expected to preserve legacy-host strings until new data replaces them.')
-$lines.Add('- Dashboard build and fixture references should be reviewed manually before changing them, because some still describe compatibility flows rather than the canonical public site.')
+$lines.Add('- Fixture references should be reviewed manually before changing them, because some still describe compatibility flows rather than the canonical public site.')
 $lines.Add('- Diagnostic scripts and owner checklists intentionally mention the legacy host so the cutover can be tested directly.')
 $lines.Add('- Any `manual_follow_up` entry is the short list for repo cleanup once the host cutover is complete.')
 
