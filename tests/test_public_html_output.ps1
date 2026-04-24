@@ -1869,7 +1869,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '9 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*68 published pieces'
+    Pattern = '9 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*69 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -1900,7 +1900,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 68 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 69 published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
