@@ -1,4 +1,4 @@
-current: who-do-you-know-here
+current: pull-the-lever
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -41,5 +41,12 @@ cartoons:
     date: "2026-04-24"
     image: "/images/editorial/who-do-you-know-here.png"
     alt: "Editorial cartoon showing a crowded general immigration intake line beside a guarded Gold Card entrance, where a wealthy family with luggage and a gold card passes a $1 million cover charge sign toward a luxury skyline."
+    width: 1672
+    height: 941
+  - slug: pull-the-lever
+    title: "Pull the lever!"
+    date: "2026-04-25"
+    image: "/images/editorial/pull-the-lever.png"
+    alt: "Editorial cartoon showing a presidential hand pressing a glowing CUT RATES button labeled PROMISE DELIVERY while green-lit cables tangle through inflation, FOMC, credibility, markets, employment, and public trust machinery toward a locked INTEREST RATES lever before a Federal Reserve committee."
     width: 1672
     height: 941
