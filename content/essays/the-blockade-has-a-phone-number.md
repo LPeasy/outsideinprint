@@ -6,8 +6,8 @@ slug: "the-blockade-has-a-phone-number"
 section_label: "Essay"
 subtitle: "Washington says Tehran can call when it wants to talk. The Strait of Hormuz is making a different argument in oil, jet fuel, sanctions, and ships."
 description: "Trump's canceled Iran envoy trip shows how quickly diplomacy becomes theater when the real machinery of conflict is a blocked waterway."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 featured: false
 collections:
   - "risk-uncertainty"
@@ -96,6 +96,10 @@ It is a tax that was never voted on. It moves through fuel pumps, airline balanc
 The aviation story makes the point because it is easy to see. In an [April 16 AP interview](https://apnews.com/article/iran-war-europe-jet-fuel-flight-cancellations-birol-6e67fafd493861b3858de5548aa77703), IEA Executive Director Fatih Birol warned that Europe had about six weeks of jet fuel left if oil supplies remained blocked by the Iran war. He described the crisis as a global energy shock that would hit weaker economies first and could drag some countries toward slow growth or recession.
 
 By [April 24, AP reported](https://apnews.com/article/jet-fuel-flight-cancellations-airlines-42a4c548b23f9dec02ff3f5771f7b4c3) that airlines were already cutting flights as fuel costs rose. KLM cited rising kerosene costs in canceling 160 flights to and from Amsterdam's Schiphol airport for the next month. Lufthansa's parent company announced a far larger schedule cut.
+
+![Blank boarding passes, a coffee cup, and a folded receipt rest on empty airport gate seats while a logo-free plane and distant fuel truck sit outside before dawn.](/images/essays/the-blockade-has-a-phone-number/section-2.png)
+
+*By the time a waterway reaches the gate, the crisis has already become ordinary.*
 
 This is how a strait enters public life.
 
