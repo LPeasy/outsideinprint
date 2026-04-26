@@ -6,6 +6,27 @@ The repo-side metadata work is already in place. This phase is about `canonical 
 
 Use `docs/seo-admin-checklist.md` as the owner-facing companion checklist for the account-controlled steps that cannot be executed from this repo.
 
+## Operating Principle
+
+Treat this rollout as operations first and content optimization second:
+
+- canonical authority for `outsideinprint.org`
+- measured indexation in Google Search Console and Bing Webmaster Tools
+- tiered page cleanup only after canonical and indexing signals are stable
+
+Do not run sitewide body rewrites during the canonical rollout. Copy, image, and metadata changes should be small, reviewable batches tied to evidence from the rollout worksheet, metadata audit, image review queue, or search-performance report.
+
+## Cleanup Tiers
+
+Use these tiers when planning page-level work:
+
+- Tier 0: homepage, About, Author, Collections, Library, `sitemap.xml`, `robots.txt`, `llms.txt`
+- Tier 1: frozen priority URLs, current homepage items, major collection entry points
+- Tier 2: collection members and pages with impressions but weak CTR
+- Tier 3: full archive backlog
+
+Tier 0 and Tier 1 are the only appropriate targets before the day 2, day 7, day 14, and day 28 measurement windows produce useful evidence.
+
 ## Phase 0: Freeze The Baseline
 
 Run the baseline freeze script against the committed analytics snapshot:
@@ -115,6 +136,18 @@ Use that audit to distinguish:
 - fixture compatibility references
 - true manual follow-up cleanup candidates
 
+For a single post-deploy verification pass, run:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\run_seo_production_verification.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/production-verification/production-verification.json`
+- `reports/seo-rollout/production-verification/production-verification.md`
+- probe, host diagnostic, and legacy reference audit artifacts in the same folder
+
 ## Phase 3: Search Console And Bing
 
 These steps are manual. They are not automated by the repo.
@@ -128,6 +161,7 @@ Google Search Console:
    - `/about/`
    - `/authors/robert-v-ussley/`
    - `/collections/`
+   - `/library/`
    - `/collections/risk-uncertainty/`
    - the top priority essays from `reports/seo-rollout/priority-urls.json`
 
@@ -150,6 +184,17 @@ Blocking findings:
 - selected canonical is not `outsideinprint.org`
 - a priority core page is excluded
 - a priority essay is treated as duplicate without the canonical host being selected
+
+To generate a console-friendly inspection sheet from the frozen priority URL set, run:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\prepare_search_console_inspection_pack.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/search-console-inspection-pack.csv`
+- `reports/seo-rollout/search-console-inspection-pack.md`
 
 ## Phase 4: Measurement Window
 
@@ -185,6 +230,54 @@ Interpretation rules:
 - zero AI-answer-engine traffic in month one is not a failure
 - low organic traffic with correct canonicals is not a rollback trigger
 - flat or rising `legacy_domain` after redirect work is a failure signal and should reopen legacy-host consolidation
+
+When Search Console or Bing query exports are available, build a query-performance report:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\report_search_performance.ps1 -GoogleCsvPath .\path\to\google.csv -BingCsvPath .\path\to\bing.csv
+```
+
+If no export is available yet, the script writes `search-performance-input-template.csv` to show the expected shape. Use the report for targeted title and description changes only.
+
+## Phase 4.5: Audit Before Content Edits
+
+Before Phase 5 content work, run the metadata audit:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\audit_seo_metadata.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/seo-metadata-audit.csv`
+- `reports/seo-rollout/seo-metadata-audit.json`
+- `reports/seo-rollout/seo-metadata-audit.md`
+
+This audit flags missing or weak descriptions, default social images, duplicate titles/descriptions, possible encoding damage, and missing image alt text. It is not a command to rewrite the whole archive immediately. Treat it as the source list for Tier 0 through Tier 3 cleanup.
+
+To prepare a manual hero/social image review pass for essays that need image work, run:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\prepare_essay_image_review_queue.ps1
+```
+
+This writes:
+
+- `reports/seo-rollout/essay-image-review-queue.csv`
+- `reports/seo-rollout/essay-image-review-queue.md`
+- `reports/seo-rollout/essay-image-review-worklog.csv`
+
+The image queue is review-only. Use it to generate and approve images manually before any essay front matter is patched. Batch A is the frozen priority essay set; later batches should wait until the priority images have been approved and validated.
+
+No full-archive image or description normalization should begin until canonical selection is correct for Tier 0 and Tier 1 URLs.
+
+After Bing Webmaster Tools is verified and an IndexNow key file is publicly reachable on the canonical host, dry-run the submit list:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\submit_indexnow.ps1 -UsePriorityUrls -DryRun
+```
+
+Real submission requires `INDEXNOW_KEY` and must submit canonical `https://outsideinprint.org/...` URLs only.
 
 ## CI / Workflow Support
 
