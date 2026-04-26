@@ -211,8 +211,12 @@ function Invoke-CurlProbe {
 
 function Get-PythonCommand {
   $repoRoot = Split-Path -Parent $PSScriptRoot
-  $candidates = @(
-    (Join-Path $repoRoot 'tools/bin/generated/python.cmd'),
+  $candidates = @()
+  if ($IsWindows) {
+    $candidates += (Join-Path $repoRoot 'tools/bin/generated/python.cmd')
+  }
+
+  $candidates += @(
     'python',
     'python3',
     'py'
