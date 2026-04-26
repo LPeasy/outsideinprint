@@ -1,4 +1,4 @@
-current: pull-the-lever
+current: strait-to-voicemail
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -48,5 +48,12 @@ cartoons:
     date: "2026-04-25"
     image: "/images/editorial/pull-the-lever.png"
     alt: "Editorial cartoon showing a presidential hand pressing a glowing CUT RATES button labeled PROMISE DELIVERY while green-lit cables tangle through inflation, FOMC, credibility, markets, employment, and public trust machinery toward a locked INTEREST RATES lever before a Federal Reserve committee."
+    width: 1672
+    height: 941
+  - slug: strait-to-voicemail
+    title: "Strait to Voicemail"
+    date: "2026-04-26"
+    image: "/images/editorial/strait-to-voicemail.png"
+    alt: "Editorial cartoon showing a phone reading TEHRAN - SENT TO VOICEMAIL beside sanctions papers, a locked blockade over the Strait of Hormuz, tankers, and a public-costs chart for oil, jet fuel, and shipping."
     width: 1672
     height: 941
