@@ -15,6 +15,7 @@ $searchPerformanceScriptPath = Join-Path $repoRoot 'scripts/report_search_perfor
 $indexNowScriptPath = Join-Path $repoRoot 'scripts/submit_indexnow.ps1'
 $docPath = Join-Path $repoRoot 'docs/seo-rollout.md'
 $adminChecklistPath = Join-Path $repoRoot 'docs/seo-admin-checklist.md'
+$pythonRedirectRegressionTestPath = Join-Path $repoRoot 'tests/test_seo_rollout_python_redirects.ps1'
 $baselinePath = Join-Path $repoRoot 'reports/seo-rollout/baseline.json'
 $priorityUrlsPath = Join-Path $repoRoot 'reports/seo-rollout/priority-urls.json'
 $worksheetPath = Join-Path $repoRoot 'reports/seo-rollout/rollout-worksheet.csv'
@@ -36,6 +37,7 @@ foreach ($path in @(
   $indexNowScriptPath,
   $docPath,
   $adminChecklistPath,
+  $pythonRedirectRegressionTestPath,
   $baselinePath,
   $priorityUrlsPath,
   $worksheetPath,
@@ -83,7 +85,12 @@ foreach ($requiredSnippet in @(
   'live_duplicate_html',
   'broken_or_stale',
   'UpdateWorksheet',
-  'llms_probe'
+  'llms_probe',
+  'python_urllib',
+  'redirect_limit_exceeded',
+  'redirect_loop_detected',
+  'fallback_reason',
+  'response_client'
 )) {
   if ($probeScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "probe_seo_rollout.ps1 must contain '$requiredSnippet'."
@@ -108,7 +115,12 @@ foreach ($requiredSnippet in @(
   'host-diagnostics.md',
   'outsideinprint.org/llms.txt',
   'local_windows_tls_credentials_failure',
-  'SEC_E_NO_CREDENTIALS'
+  'Test-LocalTlsCredentialFailure',
+  'SEC_E_NO_CREDENTIALS',
+  'No credentials are available in the security package',
+  'Invoke-PythonProbe',
+  'python_no_follow',
+  'python_legacy_full_path_301_count'
 )) {
   if ($hostDiagnosticScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "diagnose_seo_hosts.ps1 must contain '$requiredSnippet'."
@@ -256,6 +268,18 @@ if ($refreshWorkflow -notmatch '\.\/scripts\/report_seo_rollout_window\.ps1') {
 if ($analyticsDoc -notmatch 'GOATCOUNTER_PUBLIC_SITE_URL`?\s+Default:\s+`?https://outsideinprint\.org/') {
   throw 'docs/analytics-system.md must document https://outsideinprint.org/ as the GOATCOUNTER_PUBLIC_SITE_URL default.'
 }
+
+Write-Host 'Running non-network SEO rollout behavioral regression test for Python redirect/TLS probes...'
+$pythonRedirectPwsh = Join-Path $repoRoot 'tools/bin/generated/pwsh.cmd'
+if (-not (Test-Path -LiteralPath $pythonRedirectPwsh -PathType Leaf)) {
+  throw "Required PowerShell wrapper is missing: $pythonRedirectPwsh"
+}
+& $pythonRedirectPwsh -NoLogo -NoProfile -File $pythonRedirectRegressionTestPath
+$pythonRedirectExitCode = $LASTEXITCODE
+if ($pythonRedirectExitCode -ne 0) {
+  throw "Python redirect/TLS behavioral regression test failed with exit code $pythonRedirectExitCode."
+}
+Write-Host 'Python redirect/TLS behavioral regression test passed.'
 
 $baseline = Get-Content -Path $baselinePath -Raw | ConvertFrom-Json
 foreach ($requiredKey in @('data_snapshot', 'acquisition_channels', 'priority_urls', 'legacy_sample_urls', 'worksheet_columns')) {

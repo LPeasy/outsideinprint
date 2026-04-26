@@ -1,4 +1,4 @@
-param(
+﻿param(
   [string]$PriorityUrlsPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'reports/seo-rollout/priority-urls.json'),
   [string]$WorksheetPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'reports/seo-rollout/rollout-worksheet.csv'),
   [string]$OutputDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'reports/seo-rollout')
@@ -74,6 +74,51 @@ function Get-WorksheetSummary {
   }
 }
 
+function Get-WebResponseFinalUrl {
+  param(
+    [object]$Response,
+    [string]$FallbackUrl
+  )
+
+  try {
+    if ($Response.BaseResponse.ResponseUri) {
+      return [string]$Response.BaseResponse.ResponseUri.AbsoluteUri
+    }
+  }
+  catch {
+  }
+
+  try {
+    if ($Response.BaseResponse.RequestMessage.RequestUri) {
+      return [string]$Response.BaseResponse.RequestMessage.RequestUri.AbsoluteUri
+    }
+  }
+  catch {
+  }
+
+  return $FallbackUrl
+}
+
+function Get-TextValue {
+  param([object]$Value)
+
+  if ($null -eq $Value) {
+    return ''
+  }
+
+  return [string]$Value
+}
+
+function Test-LocalTlsCredentialFailure {
+  param([string]$Text)
+
+  if ([string]::IsNullOrWhiteSpace($Text)) {
+    return $false
+  }
+
+  return [string]$Text -match '(?i)SEC_E_NO_CREDENTIALS|No credentials are available in the security package|SSL connection could not be established'
+}
+
 function Invoke-PowerShellProbe {
   param([string]$Url)
 
@@ -82,7 +127,7 @@ function Invoke-PowerShellProbe {
     return [pscustomobject]@{
       ok = $true
       status_code = [int]$response.StatusCode
-      final_url = [string]$response.BaseResponse.ResponseUri.AbsoluteUri
+      final_url = Get-WebResponseFinalUrl -Response $response -FallbackUrl $Url
       error = $null
     }
   }
@@ -127,9 +172,12 @@ function Invoke-CurlProbe {
 
     $raw = & curl.exe @arguments 2> $stderrPath
     $exitCode = $LASTEXITCODE
-    $stderr = if (Test-Path -LiteralPath $stderrPath) { (Get-Content -Path $stderrPath -Raw).Trim() } else { '' }
-    $headers = if (Test-Path -LiteralPath $headerPath) { (Get-Content -Path $headerPath -Raw) } else { '' }
-    $body = if (Test-Path -LiteralPath $bodyPath) { (Get-Content -Path $bodyPath -Raw) } else { '' }
+    $stderrContent = if (Test-Path -LiteralPath $stderrPath) { Get-Content -Path $stderrPath -Raw } else { '' }
+    $headerContent = if (Test-Path -LiteralPath $headerPath) { Get-Content -Path $headerPath -Raw } else { '' }
+    $bodyContent = if (Test-Path -LiteralPath $bodyPath) { Get-Content -Path $bodyPath -Raw } else { '' }
+    $stderr = if ($null -ne $stderrContent) { ([string]$stderrContent).Trim() } else { '' }
+    $headers = if ($null -ne $headerContent) { [string]$headerContent } else { '' }
+    $body = if ($null -ne $bodyContent) { [string]$bodyContent } else { '' }
 
     $parts = @([string]$raw -split '\|', 4)
     $responseCode = if ($parts.Count -ge 1 -and $parts[0]) { [int]$parts[0] } else { $null }
@@ -154,6 +202,232 @@ function Invoke-CurlProbe {
       location = $location
       stderr = $stderr
       body_excerpt = (($body -replace '\s+', ' ').Trim())
+    }
+  }
+  finally {
+    Remove-Item -Recurse -Force $tempRoot -ErrorAction SilentlyContinue
+  }
+}
+
+function Get-PythonCommand {
+  $repoRoot = Split-Path -Parent $PSScriptRoot
+  $candidates = @(
+    (Join-Path $repoRoot 'tools/bin/generated/python.cmd'),
+    'python',
+    'python3',
+    'py'
+  )
+
+  foreach ($candidate in $candidates) {
+    try {
+      if ($candidate -match '[\\/]' -and -not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+        continue
+      }
+
+      $null = & $candidate --version 2>$null
+      if ($LASTEXITCODE -eq 0) {
+        return $candidate
+      }
+    }
+    catch {
+    }
+  }
+
+  return $null
+}
+
+function Invoke-PythonProbe {
+  param(
+    [string]$Url,
+    [int]$RedirectLimit = 5,
+    [switch]$FollowRedirects = $true
+  )
+
+  $pythonCommand = Get-PythonCommand
+  if ([string]::IsNullOrWhiteSpace($pythonCommand)) {
+    return [pscustomobject]@{
+      ok = $false
+      status_code = $null
+      final_url = $null
+      location = $null
+      content_type = $null
+      error = 'Python fallback client is unavailable.'
+      body_excerpt = ''
+    }
+  }
+
+  $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('seo-host-python-diagnostics-' + [guid]::NewGuid().ToString('N'))
+  New-Item -ItemType Directory -Path $tempRoot -Force | Out-Null
+  $scriptPath = Join-Path $tempRoot 'probe.py'
+  $script = @'
+import json
+import sys
+import time
+import urllib.error
+import urllib.request
+import urllib.parse
+
+url = sys.argv[1]
+redirect_limit = int(sys.argv[2])
+follow_redirects = sys.argv[3].lower() == "true"
+
+
+class RedirectFailure(Exception):
+    def __init__(self, error, current_url, redirect_count, redirect_history):
+        super().__init__(error)
+        self.error = error
+        self.current_url = current_url
+        self.redirect_count = redirect_count
+        self.redirect_history = list(redirect_history)
+
+class RedirectLimitExceeded(RedirectFailure):
+    pass
+
+class RedirectLoop(RedirectFailure):
+    pass
+
+class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+def open_once(opener, request_url):
+    request = urllib.request.Request(request_url, headers={"User-Agent": "OutsideInPrintSEOProbe/1.0"})
+    try:
+        response = opener.open(request, timeout=25)
+        try:
+            body = response.read(5000).decode("utf-8", errors="replace")
+            return {
+                "ok": getattr(response, "status", response.getcode()) < 400,
+                "status_code": getattr(response, "status", response.getcode()),
+                "final_url": response.geturl(),
+                "location": response.headers.get("location"),
+                "content_type": response.headers.get("content-type"),
+                "error": "",
+                "body_excerpt": " ".join(body.split()),
+            }
+        finally:
+            response.close()
+    except urllib.error.HTTPError as exc:
+        body = exc.read(5000).decode("utf-8", errors="replace")
+        return {
+            "ok": exc.code < 400,
+            "status_code": exc.code,
+            "final_url": exc.geturl(),
+            "location": exc.headers.get("location"),
+            "content_type": exc.headers.get("content-type"),
+            "error": "" if exc.code < 400 else str(exc),
+            "body_excerpt": " ".join(body.split()),
+        }
+
+
+def normalize_redirect_url(current_url, location, redirect_count, redirect_history):
+    if not location:
+        raise RedirectLimitExceeded(
+            "redirect_missing_location",
+            current_url,
+            redirect_count,
+            redirect_history,
+        )
+    return urllib.parse.urljoin(current_url, location)
+
+
+def probe_url(url, redirect_limit, follow_redirects):
+    opener = urllib.request.build_opener(
+        urllib.request.HTTPHandler(),
+        urllib.request.HTTPSHandler(),
+        NoRedirectHandler()
+    )
+    redirect_count = 0
+    redirect_history = []
+    visited = set()
+    current_url = url
+
+    while True:
+        response = open_once(opener, current_url)
+        status_code = response.get("status_code", 0)
+        location = response.get("location")
+        response["redirect_count"] = redirect_count
+        response["redirect_history"] = redirect_history
+
+        if not follow_redirects:
+            return response
+
+        if status_code < 300 or status_code >= 400:
+            return response
+
+        if redirect_count >= redirect_limit:
+            raise RedirectLimitExceeded("redirect_limit_exceeded", current_url, redirect_count, redirect_history)
+
+        resolved_location = normalize_redirect_url(current_url, location, redirect_count, redirect_history)
+        hop = "{0} -> {1}".format(current_url, resolved_location)
+
+        if resolved_location in visited:
+            raise RedirectLoop(
+                "redirect_loop_detected",
+                resolved_location,
+                redirect_count + 1,
+                redirect_history + [hop],
+            )
+
+        visited.add(current_url)
+        redirect_count += 1
+        response["redirect_count"] = redirect_count
+        redirect_history.append(hop)
+        current_url = resolved_location
+
+
+def make_failure_payload(current_url, error, redirect_count, redirect_history):
+    return {
+        "ok": False,
+        "status_code": 0,
+        "final_url": current_url,
+        "location": None,
+        "content_type": None,
+        "error": error,
+        "body_excerpt": "",
+        "redirect_count": redirect_count,
+        "redirect_history": redirect_history,
+    }
+
+
+start = time.time()
+try:
+    payload = probe_url(url, redirect_limit, follow_redirects)
+except RedirectFailure as exc:
+    payload = make_failure_payload(exc.current_url, exc.error, exc.redirect_count, exc.redirect_history)
+except Exception as exc:
+    payload = make_failure_payload(url, "probe_error: {0}".format(str(exc)), 0, [])
+payload["elapsed_ms"] = int((time.time() - start) * 1000)
+print(json.dumps(payload))
+'@
+
+  try {
+    $script | Out-File -FilePath $scriptPath -Encoding utf8
+    $raw = @(& $pythonCommand $scriptPath $Url $RedirectLimit ([string]([bool]$FollowRedirects)).ToLowerInvariant() 2>&1)
+    if ($LASTEXITCODE -ne 0) {
+      return [pscustomobject]@{
+        ok = $false
+        status_code = $null
+        final_url = $null
+        location = $null
+        content_type = $null
+        error = (($raw | ForEach-Object { [string]$_ }) -join [Environment]::NewLine)
+        body_excerpt = ''
+      }
+    }
+
+    $payload = Convert-JsonDocument -Json (($raw | ForEach-Object { [string]$_ }) -join [Environment]::NewLine)
+    return [pscustomobject]@{
+      ok = [bool]$payload.ok
+      status_code = [int]$payload.status_code
+      final_url = [string]$payload.final_url
+      location = [string]$payload.location
+      content_type = [string]$payload.content_type
+      error = [string]$payload.error
+      body_excerpt = [string]$payload.body_excerpt
+      redirect_count = [int]$payload.redirect_count
+      redirect_history = @($payload.redirect_history)
+      elapsed_ms = [int]$payload.elapsed_ms
     }
   }
   finally {
@@ -231,6 +505,7 @@ foreach ($row in $prioritySample) {
 
 $canonicalUrls = @($canonicalUrls | Select-Object -Unique)
 $legacyUrls = @($legacyUrls | Select-Object -Unique)
+$maxRedirects = 5
 
 $result = [ordered]@{
   generated_at = (Get-Date).ToString('o')
@@ -240,11 +515,12 @@ $result = [ordered]@{
   }
   worksheet_summary = Get-WorksheetSummary -Path $WorksheetPath
   canonical_probes = @(
-    foreach ($url in $canonicalUrls) {
+      foreach ($url in $canonicalUrls) {
       [pscustomobject]@{
         url = $url
         powershell = Invoke-PowerShellProbe -Url $url
         curl = Invoke-CurlProbe -Url $url
+        python = Invoke-PythonProbe -Url $url -RedirectLimit $maxRedirects
       }
     }
   )
@@ -254,21 +530,27 @@ $result = [ordered]@{
         url = $url
         curl_no_follow = Invoke-CurlProbe -Url $url -FollowRedirects:$false
         curl_follow = Invoke-CurlProbe -Url $url
+        python_no_follow = Invoke-PythonProbe -Url $url -RedirectLimit $maxRedirects -FollowRedirects:$false
+        python_follow = Invoke-PythonProbe -Url $url -RedirectLimit $maxRedirects
       }
     }
   )
 }
 
-$canonicalPowerShellErrors = @($result.canonical_probes | ForEach-Object { [string]($_.powershell.error ?? '') })
-$canonicalCurlErrors = @($result.canonical_probes | ForEach-Object { [string]($_.curl.stderr ?? '') })
+$canonicalPowerShellErrors = @($result.canonical_probes | ForEach-Object { Get-TextValue -Value $_.powershell.error })
+$canonicalPythonErrors = @($result.canonical_probes | ForEach-Object { Get-TextValue -Value $_.python.error })
+$canonicalCurlErrors = @($result.canonical_probes | ForEach-Object { Get-TextValue -Value $_.curl.stderr })
 $allCanonicalPowerShellFailed = @($result.canonical_probes | Where-Object { -not $_.powershell.ok }).Count -eq @($result.canonical_probes).Count
-$allCanonicalPowerShellTlsFailed = @($canonicalPowerShellErrors | Where-Object { $_ -match 'SSL connection could not be established' }).Count -eq @($result.canonical_probes).Count
-$allCanonicalCurlCredentialFailed = @($canonicalCurlErrors | Where-Object { $_ -match 'SEC_E_NO_CREDENTIALS|No credentials are available in the security package' }).Count -eq @($result.canonical_probes).Count
-$localWindowsTlsCredentialsFailure = [bool]($allCanonicalPowerShellFailed -and $allCanonicalPowerShellTlsFailed -and $allCanonicalCurlCredentialFailed)
+$allCanonicalPowerShellTlsFailed = @($canonicalPowerShellErrors | Where-Object { Test-LocalTlsCredentialFailure -Text $_ }).Count -eq @($result.canonical_probes).Count
+$allCanonicalPythonTlsFailed = @($canonicalPythonErrors | Where-Object { Test-LocalTlsCredentialFailure -Text $_ }).Count -eq @($result.canonical_probes).Count
+$allCanonicalCurlCredentialFailed = @($canonicalCurlErrors | Where-Object { Test-LocalTlsCredentialFailure -Text $_ }).Count -eq @($result.canonical_probes).Count
+$localWindowsTlsCredentialsFailure = [bool]($allCanonicalPowerShellFailed -and $allCanonicalPowerShellTlsFailed -and ($allCanonicalCurlCredentialFailed -or $allCanonicalPythonTlsFailed))
 $result['client_environment'] = [ordered]@{
   local_windows_tls_credentials_failure = $localWindowsTlsCredentialsFailure
+  python_canonical_success_count = @($result.canonical_probes | Where-Object { $_.python.ok -and [int]$_.python.status_code -eq 200 }).Count
+  python_legacy_full_path_301_count = @($result.legacy_probes | Where-Object { [int]$_.python_no_follow.status_code -eq 301 -and ([string]$_.python_no_follow.location).StartsWith('https://outsideinprint.org/', [System.StringComparison]::OrdinalIgnoreCase) }).Count
   interpretation = if ($localWindowsTlsCredentialsFailure) {
-    'All canonical probes failed through the local Windows Schannel client with SEC_E_NO_CREDENTIALS. Treat this as local client evidence unless GitHub Actions or browser checks also fail.'
+    'All canonical probes failed through the local Windows Schannel client with SEC_E_NO_CREDENTIALS. Compare the Python probe columns before treating this as site failure.'
   } else {
     'No uniform local Windows Schannel credential failure detected.'
   }
@@ -287,14 +569,16 @@ $lines.Add('')
 $lines.Add('## Client Environment')
 $lines.Add('')
 $lines.Add(('- Local Windows TLS credentials failure: {0}' -f $result.client_environment.local_windows_tls_credentials_failure))
+$lines.Add(('- Python canonical successes: {0}' -f $result.client_environment.python_canonical_success_count))
+$lines.Add(('- Python legacy full-path 301s: {0}' -f $result.client_environment.python_legacy_full_path_301_count))
 $lines.Add(('- Interpretation: {0}' -f $result.client_environment.interpretation))
 $lines.Add('')
 $lines.Add('## DNS')
 $lines.Add('')
 $lines.Add('| Host | Status | Values | Error |')
 $lines.Add('| --- | --- | --- | --- |')
-$lines.Add(('| outsideinprint.org | {0} | {1} | {2} |' -f $(if ($result.canonical_dns.apex.ok) { 'ok' } else { 'error' }), (($result.canonical_dns.apex.values -join ', ') -replace '\|', '\|'), (([string]($result.canonical_dns.apex.error ?? '')) -replace '\|', '\|')))
-$lines.Add(('| www.outsideinprint.org | {0} | {1} | {2} |' -f $(if ($result.canonical_dns.www.ok) { 'ok' } else { 'error' }), (($result.canonical_dns.www.values -join ', ') -replace '\|', '\|'), (([string]($result.canonical_dns.www.error ?? '')) -replace '\|', '\|')))
+$lines.Add(('| outsideinprint.org | {0} | {1} | {2} |' -f $(if ($result.canonical_dns.apex.ok) { 'ok' } else { 'error' }), (($result.canonical_dns.apex.values -join ', ') -replace '\|', '\|'), ((Get-TextValue -Value $result.canonical_dns.apex.error) -replace '\|', '\|')))
+$lines.Add(('| www.outsideinprint.org | {0} | {1} | {2} |' -f $(if ($result.canonical_dns.www.ok) { 'ok' } else { 'error' }), (($result.canonical_dns.www.values -join ', ') -replace '\|', '\|'), ((Get-TextValue -Value $result.canonical_dns.www.error) -replace '\|', '\|')))
 $lines.Add('')
 
 if ($null -ne $result.worksheet_summary) {
@@ -310,35 +594,36 @@ if ($null -ne $result.worksheet_summary) {
 
 $lines.Add('## Canonical Host Probes')
 $lines.Add('')
-$lines.Add('| URL | PowerShell | PowerShell error | curl exit | HTTP code | curl final URL | curl SSL verify | curl stderr |')
-$lines.Add('| --- | --- | --- | ---: | ---: | --- | --- | --- |')
+$lines.Add('| URL | PowerShell | PowerShell error | curl exit | curl HTTP | curl final URL | Python HTTP | Python final URL | Python error |')
+$lines.Add('| --- | --- | --- | ---: | ---: | --- | ---: | --- | --- |')
 foreach ($probe in $result.canonical_probes) {
-  $lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |' -f `
+  $lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} |' -f `
       ($probe.url -replace '\|', '\|'),
       $(if ($probe.powershell.ok) { 'ok' } else { 'fail' }),
-      (([string]($probe.powershell.error ?? '')) -replace '\|', '\|'),
-      ([string]($probe.curl.exit_code ?? '')),
-      ([string]($probe.curl.response_code ?? '')),
-      (([string]($probe.curl.effective_url ?? '')) -replace '\|', '\|'),
-      (([string]($probe.curl.ssl_verify_result ?? '')) -replace '\|', '\|'),
-      (([string]($probe.curl.stderr ?? '')) -replace '\|', '\|')))
+      ((Get-TextValue -Value $probe.powershell.error) -replace '\|', '\|'),
+      (Get-TextValue -Value $probe.curl.exit_code),
+      (Get-TextValue -Value $probe.curl.response_code),
+      ((Get-TextValue -Value $probe.curl.effective_url) -replace '\|', '\|'),
+      (Get-TextValue -Value $probe.python.status_code),
+      ((Get-TextValue -Value $probe.python.final_url) -replace '\|', '\|'),
+      ((Get-TextValue -Value $probe.python.error) -replace '\|', '\|')))
 }
 $lines.Add('')
 
 $lines.Add('## Legacy Host Probes')
 $lines.Add('')
-$lines.Add('| URL | First curl exit | First HTTP code | First location | Follow curl exit | Follow HTTP code | Follow final URL | Follow stderr |')
-$lines.Add('| --- | ---: | ---: | --- | ---: | ---: | --- | --- |')
+$lines.Add('| URL | First curl HTTP | First curl location | Python first HTTP | Python first location | Python follow HTTP | Python follow final URL | curl stderr |')
+$lines.Add('| --- | ---: | --- | ---: | --- | ---: | --- | --- |')
 foreach ($probe in $result.legacy_probes) {
   $lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |' -f `
       ($probe.url -replace '\|', '\|'),
-      ([string]($probe.curl_no_follow.exit_code ?? '')),
-      ([string]($probe.curl_no_follow.response_code ?? '')),
-      (([string]($probe.curl_no_follow.location ?? '')) -replace '\|', '\|'),
-      ([string]($probe.curl_follow.exit_code ?? '')),
-      ([string]($probe.curl_follow.response_code ?? '')),
-      (([string]($probe.curl_follow.effective_url ?? '')) -replace '\|', '\|'),
-      (([string]($probe.curl_follow.stderr ?? '')) -replace '\|', '\|')))
+      (Get-TextValue -Value $probe.curl_no_follow.response_code),
+      ((Get-TextValue -Value $probe.curl_no_follow.location) -replace '\|', '\|'),
+      (Get-TextValue -Value $probe.python_no_follow.status_code),
+      ((Get-TextValue -Value $probe.python_no_follow.location) -replace '\|', '\|'),
+      (Get-TextValue -Value $probe.python_follow.status_code),
+      ((Get-TextValue -Value $probe.python_follow.final_url) -replace '\|', '\|'),
+      ((Get-TextValue -Value $probe.curl_follow.stderr) -replace '\|', '\|')))
 }
 $lines.Add('')
 
