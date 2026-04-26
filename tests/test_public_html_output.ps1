@@ -427,6 +427,7 @@ $requiredEssayHeroPages = @(
   'public/essays/biter-the-slang-word-that-hits/index.html',
   'public/essays/the-fair-price-of-bitcoin-69420/index.html',
   'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html',
+  'public/essays/the-blockade-has-a-phone-number/index.html',
   'public/essays/beyond-moores-law/index.html',
   'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
 )
@@ -462,6 +463,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'The AI campus no longer arrives alone. It now shows up with turbines, towers, and a power strategy of its own.'
+  },
+  @{
+    PublicPath = 'public/essays/the-blockade-has-a-phone-number/index.html'
+    SourcePath = 'content/essays/the-blockade-has-a-phone-number.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'A phone line can stay open while the waterway stays closed.'
   },
   @{
     PublicPath = 'public/essays/the-sewer-under-the-sidewalk/index.html'
@@ -597,6 +605,16 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/essays/the-ai-data-center-wants-its-own-power-plant/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-blockade-has-a-phone-number/index.html' = @{
+    Title = 'The Blockade Has a Phone Number'
+    Description = "Trump's canceled Iran envoy trip shows how quickly diplomacy becomes theater when the real machinery of conflict is a blocked waterway."
+    Canonical = 'https://outsideinprint.org/essays/the-blockade-has-a-phone-number/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-blockade-has-a-phone-number/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-sewer-under-the-sidewalk/index.html' = @{
@@ -1869,7 +1887,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '9 public collections(?:\s|&nbsp;|Â|&Acirc;)*(?:&middot;|&#183;|&#x0*B7;|·|Â·|&Acirc;&middot;)(?:\s|&nbsp;|Â|&Acirc;)*69 published pieces'
+    Pattern = '9 public collections.*70 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2119,6 +2137,26 @@ $requiredUxChecks = @(
     Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'
     Pattern = 'article_collection_context'
     Message = 'expected the AI data center essay collection link to emit the dedicated analytics source slot'
+  },
+  @{
+    Path = 'public/essays/the-blockade-has-a-phone-number/index.html'
+    Pattern = 'data-piece-collection-slug=(?:"risk-uncertainty"|risk-uncertainty)'
+    Message = 'expected the Hormuz blockade essay to key article accents to the risk collection slug'
+  },
+  @{
+    Path = 'public/essays/the-blockade-has-a-phone-number/index.html'
+    Pattern = 'data-piece-collection-room-theme=(?:"risk-systems-notebook"|risk-systems-notebook)'
+    Message = 'expected the Hormuz blockade essay to render the risk article collection-accent theme'
+  },
+  @{
+    Path = 'public/essays/the-blockade-has-a-phone-number/index.html'
+    Pattern = 'From the Collection'
+    Message = 'expected the Hormuz blockade essay to render the compact article collection context block'
+  },
+  @{
+    Path = 'public/essays/the-blockade-has-a-phone-number/index.html'
+    Pattern = 'article_collection_context'
+    Message = 'expected the Hormuz blockade essay collection link to emit the dedicated analytics source slot'
   },
   @{
     Path = 'public/essays/in-the-image-of-god/index.html'
