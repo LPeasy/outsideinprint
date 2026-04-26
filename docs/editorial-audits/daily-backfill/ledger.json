@@ -1,0 +1,98 @@
+{
+  "campaign": "oip-daily-back-archive-revision",
+  "started_on": "2026-04-26",
+  "selection_policy": "oldest_unprocessed_published_essays_by_live_archive_order_reversed",
+  "batch_size": 5,
+  "already_completed_seed": {
+    "commit": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+    "slugs": [
+      "the-blockade-has-a-phone-number",
+      "the-fed-chair-is-not-a-button",
+      "the-gold-card-and-the-price-of-belonging",
+      "the-ai-data-center-wants-its-own-power-plant",
+      "the-sewer-under-the-sidewalk"
+    ]
+  },
+  "completed": {
+    "the-blockade-has-a-phone-number": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-fed-chair-is-not-a-button": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-gold-card-and-the-price-of-belonging": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-ai-data-center-wants-its-own-power-plant": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-sewer-under-the-sidewalk": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-structure-of-modern-american-society": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26"
+    },
+    "rational-ignorance-in-the-u-s-presidential-electorate": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26"
+    },
+    "presidential-elections": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26"
+    },
+    "federalism-in-modern-american-society": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26"
+    },
+    "american-household-debt": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26"
+    }
+  },
+  "blocked": {},
+  "runs": [
+    {
+      "batch_id": "2026-04-26",
+      "selected_slugs": [
+        "the-structure-of-modern-american-society",
+        "rational-ignorance-in-the-u-s-presidential-electorate",
+        "presidential-elections",
+        "federalism-in-modern-american-society",
+        "american-household-debt"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md"
+    }
+  ]
+}
