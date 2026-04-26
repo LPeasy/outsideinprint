@@ -81,15 +81,28 @@
       {{ if $showCollectionAccent }}
         <aside class="piece-collection-context" aria-label="Primary collection context">
           <p class="piece-collection-context__eyebrow">From the Collection</p>
-          <h2 class="piece-collection-context__title"><a href="{{ $primaryCollectionUrl }}"
-            data-analytics-event="collection_click"
-            data-analytics-source-slot="article_collection_context"
-            data-analytics-collection="{{ $primaryCollection.collection.slug }}"
-            data-analytics-slug="{{ $primaryCollection.collection.slug }}"
-            data-analytics-title="{{ $primaryCollection.collection.title }}"
-            data-analytics-section="Collections"
-            data-analytics-path="{{ $primaryCollectionPath }}"
-          >{{ $primaryCollection.collection.title }}</a></h2>
+          <h2 class="piece-collection-context__title">
+            {{ range $index, $match := $publicCollectionMatches }}
+              {{ $collectionUrl := printf "collections/%s/" $match.collection.slug | absURL }}
+              {{ with $match.page }}
+                {{ $collectionUrl = .RelPermalink }}
+              {{ end }}
+              {{ $collectionPath := printf "/collections/%s/" $match.collection.slug }}
+              {{ with $match.page }}
+                {{ $collectionPath = .RelPermalink }}
+              {{ end }}
+              {{ if gt $index 0 }}<span class="piece-collection-context__separator">/</span>{{ end }}
+              <a href="{{ $collectionUrl }}"
+                data-analytics-event="collection_click"
+                data-analytics-source-slot="article_collection_context"
+                data-analytics-collection="{{ $match.collection.slug }}"
+                data-analytics-slug="{{ $match.collection.slug }}"
+                data-analytics-title="{{ $match.collection.title }}"
+                data-analytics-section="Collections"
+                data-analytics-path="{{ $collectionPath }}"
+              >{{ $match.collection.title }}</a>
+            {{ end }}
+          </h2>
           <p class="piece-collection-context__meta">{{ title $primaryCollection.state.kind }} | {{ $primaryCollection.state.count }} pieces{{ if $primaryCollectionEntryPoint }} | Entry Point{{ end }}</p>
         </aside>
       {{ end }}
@@ -135,6 +148,20 @@
         <aside class="citation" role="note" aria-label="How to cite this page">
           <div class="k">Cite this</div>
           <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+        </aside>
+      {{ end }}
+
+      {{ with .Params.revision_history }}
+        <aside class="revision-history" role="note" aria-label="Revision history">
+          <div class="k">Revision history</div>
+          <ol class="revision-history__list">
+            {{ range . }}
+              <li class="revision-history__item">
+                <span class="revision-history__meta">Version {{ .version }} | {{ .date }}</span>
+                <span class="revision-history__note">{{ .note }}</span>
+              </li>
+            {{ end }}
+          </ol>
         </aside>
       {{ end }}
 

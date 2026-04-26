@@ -6,8 +6,12 @@ slug: "the-blockade-has-a-phone-number"
 section_label: "Essay"
 subtitle: "Washington says Tehran can call when it wants to talk. The Strait of Hormuz is making a different argument in oil, jet fuel, sanctions, and ships."
 description: "Trump's canceled Iran envoy trip shows how quickly diplomacy becomes theater when the real machinery of conflict is a blocked waterway."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
+revision_history:
+  - version: "1.2"
+    date: "2026-04-26"
+    note: "Updated April 26, 2026, to clarify that the U.S. blockade applied to Iranian ports while Iran restricted movement through the Strait of Hormuz, and to replace a broken AP source link."
 featured: false
 collections:
   - "risk-uncertainty"
@@ -25,7 +29,7 @@ A phone call sounds like diplomacy reduced to its simplest shape.
 
 One side waits. The other side dials. A line opens. Voices enter the room before the ships do.
 
-That was the picture Washington offered this weekend. On [April 26, the Associated Press reported](https://apnews.com/article/f5191402d305921041ab44677d2e3523) that President Donald Trump said he had told Steve Witkoff and Jared Kushner not to travel to Pakistan for Iran talks. Iran, he said, could call when it wanted to talk.
+That was the picture Washington offered this weekend. On [April 26, the Associated Press reported](https://apnews.com/article/us-iran-war-hormuz-israel-pakistan-ceasefire-april-26-2026-9f7bcaf20c42b56d3dba4b504936f7ee) that President Donald Trump said he had told Steve Witkoff and Jared Kushner not to travel to Pakistan for Iran talks. Iran, he said, could call when it wanted to talk.
 
 Iran answered with geography.
 
@@ -73,7 +77,7 @@ They move through commerce. They produce detours. They reward middlemen. They tu
 
 Then the strait adds its own pressure.
 
-AP reported that the United States imposed a physical blockade this month on the waterway. Iran has made lifting sanctions and ending pressure part of what it wants from any deal. Washington wants to choke off revenue. Tehran wants leverage over the water. China wants oil. Airlines want fuel. Households want prices that do not rise faster than wages.
+AP reported that Iran was restricting movement through the Strait while the United States enforced a blockade of Iranian ports. Tehran also insisted that the blockade end before a new round of talks. Iran has made lifting sanctions and ending pressure part of what it wants from any deal. Washington wants to choke off revenue. Tehran wants leverage over the water. China wants oil. Airlines want fuel. Households want prices that do not rise faster than wages.
 
 There is no single conversation here.
 
@@ -95,7 +99,7 @@ It is a tax that was never voted on. It moves through fuel pumps, airline balanc
 
 The aviation story makes the point because it is easy to see. In an [April 16 AP interview](https://apnews.com/article/iran-war-europe-jet-fuel-flight-cancellations-birol-6e67fafd493861b3858de5548aa77703), IEA Executive Director Fatih Birol warned that Europe had about six weeks of jet fuel left if oil supplies remained blocked by the Iran war. He described the crisis as a global energy shock that would hit weaker economies first and could drag some countries toward slow growth or recession.
 
-By [April 24, AP reported](https://apnews.com/article/jet-fuel-flight-cancellations-airlines-42a4c548b23f9dec02ff3f5771f7b4c3) that airlines were already cutting flights as fuel costs rose. KLM cited rising kerosene costs in canceling 160 flights to and from Amsterdam's Schiphol airport for the next month. Lufthansa's parent company announced a far larger schedule cut.
+On April 24, AP reported that airlines were already cutting flights as fuel costs rose. KLM cited rising kerosene costs in canceling 160 flights to and from Amsterdam's Schiphol airport for the next month. Lufthansa's parent company announced a far larger schedule cut.
 
 ![Blank boarding passes, a coffee cup, and a folded receipt rest on empty airport gate seats while a logo-free plane and distant fuel truck sit outside before dawn.](/images/essays/the-blockade-has-a-phone-number/section-2.png)
 

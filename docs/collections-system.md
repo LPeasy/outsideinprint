@@ -38,7 +38,7 @@ Each collection in `data/collections.yaml` supports these fields:
 
 Collections use these page params:
 
-- `collections`: array of collection slugs. If present, this is the source of truth.
+- `collections`: array of collection slugs. If present, this is the source of truth and its order controls article-page collection display.
 - `series`: legacy fallback support for collections that still resolve via series names.
 - `collection_weight`: optional ascending order within a collection. If missing, date descending is used.
 
@@ -60,7 +60,7 @@ Resolver entry points:
 
 Resolution rules:
 
-1. If a page has `collections`, only those explicit memberships count.
+1. If a page has `collections`, only those explicit memberships count, and their front matter order is preserved.
 2. If a page has no `collections`, fallback matching may be used.
 3. If a collection has `explicit_only: true`, fallback is never used for that collection.
 4. Public listings require `public: true` and either `count >= min_items` or `force_public: true`.
@@ -85,6 +85,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - A collection-member article renders exactly one article-exit continuation zone.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
 - Eligible collection-member articles also render a compact `From the Collection` header context keyed to that same first public match.
+- When an article has two public explicit collections, that header context lists both collection names in front matter order. The first public match still controls the accent theme and continuation module.
 - The article light-accent layer uses `room_theme` only for restrained article chrome:
   - the header context block
   - the continuation module

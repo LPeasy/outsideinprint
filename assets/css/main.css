@@ -2614,6 +2614,13 @@ h2{ margin-top:34px; }
   color:inherit;
   text-decoration:none;
 }
+.piece-collection-context__separator{
+  display:inline-block;
+  margin:0 .35rem;
+  color:var(--text-faint);
+  font-family:var(--font-ui);
+  font-size:.8em;
+}
 .piece--collection-accent .piece-collection-context__title a:hover{
   color:var(--text-primary);
   text-decoration:underline;
@@ -3508,6 +3515,7 @@ h2{ margin-top:34px; }
 }
 .imprint-header,
 .citation,
+.revision-history,
 .article-record,
 .reading-path,
 .collection-progress,
@@ -3794,6 +3802,36 @@ h2{ margin-top:34px; }
 }
 .piece-aftermatter .citation{
   margin-top:0;
+}
+.revision-history{
+  display:grid;
+  gap:.85rem;
+  padding:1rem 1.05rem;
+  border-radius:var(--radius-soft);
+}
+.revision-history__list{
+  display:grid;
+  gap:.75rem;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.revision-history__item{
+  display:grid;
+  gap:.28rem;
+}
+.revision-history__meta{
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.revision-history__note{
+  color:var(--text-secondary);
+  font-size:.88rem;
+  line-height:1.65;
 }
 .reading-path{
   display:grid;

@@ -6,8 +6,12 @@ slug: "the-gold-card-and-the-price-of-belonging"
 section_label: "Essay"
 subtitle: "Trump's new visa program has approved only one person so far. It still says a great deal about what kind of immigrant the country now wants to honor."
 description: "The Trump Gold Card turns money into evidence of merit, exposing a harder logic inside American immigration policy."
-version: "2.0"
-edition: "Second web edition"
+version: "2.1"
+edition: "Third web edition"
+revision_history:
+  - version: "2.1"
+    date: "2026-04-26"
+    note: "Updated April 26, 2026, to add the executive order’s separate Treasury fund provision and sharpen the distinction between a gift and a specific investment."
 featured: false
 collections:
   - "reported-case-studies"
@@ -37,6 +41,8 @@ That system already carried a moral message. It told the world that one path int
 The gold card changes the tone by changing the object.
 
 In [the White House executive order that created the program on September 19, 2025](https://www.whitehouse.gov/presidential-actions/2025/09/the-gold-card/), the required payment is not an investment in a commercial enterprise. It is an unrestricted gift to the Department of Commerce. The order says the administration wants to "prioritiz[e] the admission of aliens who will affirmatively benefit the Nation," and it treats a $1 million personal gift or a $2 million corporate gift as the relevant signal.
+
+The order does require Commerce to place the gifts in a separate Treasury fund and use them to promote commerce and American industry. That still leaves the civic burden on the government after the transfer rather than on any specific investment, payroll, project, or measurable job creation by the applicant.
 
 The shift matters because it changes the story the applicant is asked to tell.
 

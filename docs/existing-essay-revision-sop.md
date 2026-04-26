@@ -16,6 +16,15 @@ edition: "First web edition"
 
 The rendered block should continue to show the original publication date unless the original date itself was wrong. Revisions are disclosed through `version` and `edition`.
 
+For visible public corrections, add `revision_history` front matter. The page renders it below the citation block as a compact list keyed by version and revision date:
+
+```yaml
+revision_history:
+  - version: "1.1"
+    date: "2026-04-26"
+    note: "Updated April 26, 2026, for minor wording cleanup."
+```
+
 ## Classify The Change
 
 Use the smallest version change that honestly describes the edit.
@@ -50,7 +59,7 @@ Do not change `date` for ordinary revisions. The date remains the original publi
 1. Start from current `origin/main` in a clean worktree. Do not revise in a dirty feature branch.
 2. Read the current live Markdown file before editing.
 3. Classify the revision as minor or major before changing front matter.
-4. Update `version` and `edition` in the same edit as the content change.
+4. Update `version`, `edition`, and any required `revision_history` entry in the same edit as the content change.
 5. Preserve stable fields unless deliberately changed: `slug`, `date`, `collections`, canonical image paths, and public URLs.
 6. For copy revisions, run the OIP voice pass and the current AI-writing-tells cleanup before validation.
 7. Build locally and inspect the rendered archive block on the changed page.
@@ -64,6 +73,7 @@ Before publishing a revised essay, confirm:
 
 - The rendered page shows the expected `Date`, `Version`, and `Edition`.
 - The citation block uses the new version.
+- The revision history block appears below the citation block when `revision_history` is present.
 - Existing images still resolve and are full-size when image assets are part of the change.
 - Existing collection membership still renders correctly.
 - `test_public_route_smoke.ps1` passes.

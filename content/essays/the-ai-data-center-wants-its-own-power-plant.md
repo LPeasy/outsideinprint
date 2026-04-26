@@ -6,8 +6,12 @@ slug: "the-ai-data-center-wants-its-own-power-plant"
 section_label: "Essay"
 subtitle: "The race to build AI at industrial scale is no longer just a story about chips and models. It is becoming a story about gas turbines, utility filings, and the quiet privatization of power."
 description: "New reporting on gas-fired AI data centers shows the compute boom turning into a power and climate story, with private generation, grid strain, and ratepayer politics at the center."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-04-26"
+    note: "Updated April 26, 2026, for minor wording cleanup."
 featured: false
 featured_image: "/images/essays/the-ai-data-center-wants-its-own-power-plant/hero.png"
 featured_image_alt: "A glowing AI data center campus at night beside gas turbines and transmission towers."
@@ -83,7 +87,7 @@ That means the comforting assumptions people make about permit ceilings may trav
 
 That is why the climate numbers matter even before they settle into actual annual operations.
 
-The same AP report on tech emissions found that Google's reported emissions have risen by nearly 50% over the first five years of its climate commitments, while Meta's rose by more than 60%. It also cited the Rhodium Group's estimate that AI contributed to a 2.4% increase in U.S. fossil fuel emissions last year. The industry's public pitch still leans heavily on efficiency, innovation, and future clean power. The physical buildout, at least for now, looks like a gas rush.
+The same AP report on tech emissions found that Google's reported emissions have risen by nearly 50% over the first five years of its climate commitments, while Meta's rose by more than 60%. It also cited the Rhodium Group's estimate that AI contributed to a 2.4% increase in U.S. fossil fuel emissions last year. The industry’s public pitch still leans heavily on better chips, future clean power, and promises of doing more with less. The physical buildout, at least for now, looks like a gas rush.
 
 This does not mean the case for AI is fake. It means the case is expensive in ways the culture would rather not picture. The story Silicon Valley prefers is one of disembodied intelligence. The story the permits tell is one of combustion, cooling, transmission, and land use. Intelligence may scale in software. Compute scales in steel, concrete, copper, and fuel contracts.
 
@@ -95,7 +99,7 @@ Once capital is sunk into gas plants, pipelines, and transmission tied to specif
 
 ![A substation and transmission lines leading toward a distant data center campus at dawn.](/images/essays/the-ai-data-center-wants-its-own-power-plant/section-2.png)
 
-*Even a "private" power solution leaves a public landscape behind it.*
+*Even a "private" power solution leaves a public footprint behind it.*
 
 ## What We Are Really Building
 
