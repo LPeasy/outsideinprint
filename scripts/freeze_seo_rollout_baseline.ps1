@@ -188,11 +188,12 @@ $priorityEssays = @(
 
 $priorityUrlRows = @()
 foreach ($coreRow in @(
-  [pscustomobject]@{ path = '/'; title = 'Homepage'; kind = 'core'; priority_tier = 'tier_1'; views = [int][double]$overview.pageviews },
-  [pscustomobject]@{ path = '/about/'; title = 'About'; kind = 'core'; priority_tier = 'tier_1'; views = 0 },
-  [pscustomobject]@{ path = '/authors/robert-v-ussley/'; title = 'Robert V. Ussley'; kind = 'core'; priority_tier = 'tier_1'; views = 0 },
-  [pscustomobject]@{ path = '/collections/'; title = 'Collections'; kind = 'core'; priority_tier = 'tier_1'; views = 0 },
-  [pscustomobject]@{ path = '/collections/risk-uncertainty/'; title = 'Risk, Uncertainty, and Decision-Making'; kind = 'core'; priority_tier = 'tier_1'; views = 0 }
+  [pscustomobject]@{ path = '/'; title = 'Homepage'; kind = 'core'; priority_tier = 'tier_0'; views = [int][double]$overview.pageviews },
+  [pscustomobject]@{ path = '/about/'; title = 'About'; kind = 'core'; priority_tier = 'tier_0'; views = 0 },
+  [pscustomobject]@{ path = '/authors/robert-v-ussley/'; title = 'Robert V. Ussley'; kind = 'core'; priority_tier = 'tier_0'; views = 0 },
+  [pscustomobject]@{ path = '/collections/'; title = 'Collections'; kind = 'core'; priority_tier = 'tier_0'; views = 0 },
+  [pscustomobject]@{ path = '/library/'; title = 'Library'; kind = 'core'; priority_tier = 'tier_0'; views = 0 },
+  [pscustomobject]@{ path = '/collections/risk-uncertainty/'; title = 'Risk, Uncertainty, and Decision-Making'; kind = 'collection'; priority_tier = 'tier_1'; views = 0 }
 )) {
   $priorityUrlRows += [pscustomobject][ordered]@{
       path = [string]$coreRow.path
@@ -215,7 +216,7 @@ foreach ($essay in $priorityEssays) {
       path = $path
       canonical_url = Join-CanonicalUrl -BaseUrl $CanonicalBaseUrl -Path $path
       legacy_url = Join-CanonicalUrl -BaseUrl $LegacyBaseUrl -Path $path
-      priority_tier = 'tier_2'
+      priority_tier = 'tier_1'
       kind = 'essay'
       title = Get-DisplayTitle -Value $essay.title
       views = [int][double]$essay.views

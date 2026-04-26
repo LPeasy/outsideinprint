@@ -1,4 +1,4 @@
-param(
+﻿param(
   [string]$PriorityUrlsPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'reports/seo-rollout/priority-urls.json'),
   [string]$WorksheetPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'reports/seo-rollout/rollout-worksheet.csv'),
   [string]$OutputDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'reports/seo-rollout'),
@@ -138,6 +138,63 @@ function Get-RssFeedUrls {
   )
 }
 
+function Add-JsonLdTypesFromNode {
+  param(
+    [object]$Node,
+    [System.Collections.Generic.HashSet[string]]$Types
+  )
+
+  if ($null -eq $Node) {
+    return
+  }
+
+  if ($Node -is [string] -or $Node.GetType().IsPrimitive -or $Node -is [decimal]) {
+    return
+  }
+
+  if ($Node -is [System.Collections.IDictionary]) {
+    if ($Node.Contains('@type')) {
+      foreach ($nodeType in @($Node['@type'])) {
+        if (-not [string]::IsNullOrWhiteSpace([string]$nodeType)) {
+          [void]$Types.Add([string]$nodeType)
+        }
+      }
+    }
+
+    foreach ($key in @($Node.Keys)) {
+      Add-JsonLdTypesFromNode -Node $Node[$key] -Types $Types
+    }
+
+    return
+  }
+
+  if ($Node -is [System.Collections.IEnumerable]) {
+    foreach ($item in $Node) {
+      Add-JsonLdTypesFromNode -Node $item -Types $Types
+    }
+
+    return
+  }
+
+  if ($Node -isnot [pscustomobject]) {
+    return
+  }
+
+  $properties = @($Node.PSObject.Properties)
+  $typeProperty = $properties | Where-Object { $_.Name -eq '@type' } | Select-Object -First 1
+  if ($typeProperty) {
+    foreach ($nodeType in @($typeProperty.Value)) {
+      if (-not [string]::IsNullOrWhiteSpace([string]$nodeType)) {
+        [void]$Types.Add([string]$nodeType)
+      }
+    }
+  }
+
+  foreach ($property in $properties) {
+    Add-JsonLdTypesFromNode -Node $property.Value -Types $Types
+  }
+}
+
 function Get-JsonLdTypes {
   param([string]$Html)
 
@@ -151,21 +208,10 @@ function Get-JsonLdTypes {
     }
 
     try {
-      $objects = @((Convert-JsonDocument -Json $json))
+      Add-JsonLdTypesFromNode -Node (Convert-JsonDocument -Json $json) -Types $types
     }
     catch {
       continue
-    }
-
-    foreach ($object in $objects) {
-      $nodes = if ($null -ne $object.'@graph') { @($object.'@graph') } else { @($object) }
-      foreach ($node in $nodes) {
-        foreach ($nodeType in @($node.'@type')) {
-          if (-not [string]::IsNullOrWhiteSpace([string]$nodeType)) {
-            [void]$types.Add([string]$nodeType)
-          }
-        }
-      }
     }
   }
 
@@ -185,17 +231,285 @@ function Get-ExpectedJsonLdType {
   }
 }
 
+function Test-LocalTlsCredentialFailure {
+  param([string]$Message)
+
+  if ([string]::IsNullOrWhiteSpace($Message)) {
+    return $false
+  }
+
+  return ([string]$Message) -match '(?i)SSL connection could not be established|SEC_E_NO_CREDENTIALS|No credentials are available in the security package'
+}
+
+function Get-WebResponseFinalUrl {
+  param(
+    [object]$Response,
+    [string]$FallbackUrl
+  )
+
+  try {
+    if ($Response.BaseResponse.ResponseUri) {
+      return [string]$Response.BaseResponse.ResponseUri.AbsoluteUri
+    }
+  }
+  catch {
+  }
+
+  try {
+    if ($Response.BaseResponse.RequestMessage.RequestUri) {
+      return [string]$Response.BaseResponse.RequestMessage.RequestUri.AbsoluteUri
+    }
+  }
+  catch {
+  }
+
+  return $FallbackUrl
+}
+
+function Get-PythonCommand {
+  $repoRoot = Split-Path -Parent $PSScriptRoot
+  $candidates = @(
+    (Join-Path $repoRoot 'tools/bin/generated/python.cmd'),
+    'python',
+    'python3',
+    'py'
+  )
+
+  foreach ($candidate in $candidates) {
+    try {
+      if ($candidate -match '[\\/]' -and -not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+        continue
+      }
+
+      $null = & $candidate --version 2>$null
+      if ($LASTEXITCODE -eq 0) {
+        return $candidate
+      }
+    }
+    catch {
+    }
+  }
+
+  return $null
+}
+
+function Invoke-PythonHttpProbe {
+  param(
+    [string]$Url,
+    [int]$RedirectLimit,
+    [switch]$FollowRedirects
+  )
+
+  $pythonCommand = Get-PythonCommand
+  if ([string]::IsNullOrWhiteSpace($pythonCommand)) {
+    throw 'Python fallback client is unavailable.'
+  }
+
+  $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('seo-python-probe-' + [guid]::NewGuid().ToString('N'))
+  New-Item -ItemType Directory -Path $tempRoot -Force | Out-Null
+  $scriptPath = Join-Path $tempRoot 'probe.py'
+  $script = @'
+import json
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+url = sys.argv[1]
+redirect_limit = int(sys.argv[2])
+follow_redirects = sys.argv[3].lower() == "true"
+
+
+
+class RedirectFailure(Exception):
+    def __init__(self, error, current_url, redirect_count, redirect_history):
+        super().__init__(error)
+        self.error = error
+        self.current_url = current_url
+        self.redirect_count = redirect_count
+        self.redirect_history = list(redirect_history)
+
+class RedirectLimitExceeded(RedirectFailure):
+    pass
+
+class RedirectLoop(RedirectFailure):
+    pass
+
+class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+def open_once(opener, request_url):
+    request = urllib.request.Request(request_url, headers={"User-Agent": "OutsideInPrintSEOProbe/1.0"})
+    try:
+        response = opener.open(request, timeout=25)
+        try:
+            body = response.read(2_000_000).decode("utf-8", errors="replace")
+            return {
+                "ok": getattr(response, "status", response.getcode()) < 400,
+                "status_code": getattr(response, "status", response.getcode()),
+                "final_url": response.geturl(),
+                "location": response.headers.get("location"),
+                "content_type": response.headers.get("content-type"),
+                "content": body,
+                "error": "",
+            }
+        finally:
+            response.close()
+    except urllib.error.HTTPError as exc:
+        body = exc.read(2_000_000).decode("utf-8", errors="replace")
+        return {
+            "ok": exc.code < 400,
+            "status_code": exc.code,
+            "final_url": exc.geturl(),
+            "location": exc.headers.get("location"),
+            "content_type": exc.headers.get("content-type"),
+            "content": body,
+            "error": "" if exc.code < 400 else str(exc),
+        }
+
+
+def normalize_redirect_url(current_url, location, redirect_count, redirect_history):
+    if not location:
+        raise RedirectLimitExceeded(
+            "redirect_missing_location",
+            current_url,
+            redirect_count,
+            redirect_history,
+        )
+    return urllib.parse.urljoin(current_url, location)
+
+
+def probe_url(url, redirect_limit, follow_redirects):
+    opener = urllib.request.build_opener(
+        urllib.request.HTTPHandler(),
+        urllib.request.HTTPSHandler(),
+        NoRedirectHandler()
+    )
+    redirect_count = 0
+    redirect_history = []
+    visited = set()
+    current_url = url
+
+    while True:
+        response = open_once(opener, current_url)
+        status_code = response.get("status_code", 0)
+        location = response.get("location")
+        response["redirect_count"] = redirect_count
+        response["redirect_history"] = redirect_history
+
+        if not follow_redirects:
+            return response
+
+        if status_code < 300 or status_code >= 400:
+            return response
+
+        if redirect_count >= redirect_limit:
+            raise RedirectLimitExceeded("redirect_limit_exceeded", current_url, redirect_count, redirect_history)
+
+        resolved_location = normalize_redirect_url(current_url, location, redirect_count, redirect_history)
+        hop = "{0} -> {1}".format(current_url, resolved_location)
+
+        if resolved_location in visited:
+            raise RedirectLoop(
+                "redirect_loop_detected",
+                resolved_location,
+                redirect_count + 1,
+                redirect_history + [hop],
+            )
+
+        visited.add(current_url)
+        redirect_count += 1
+        response["redirect_count"] = redirect_count
+        redirect_history.append(hop)
+        current_url = resolved_location
+
+
+def make_failure_payload(current_url, error, redirect_count, redirect_history):
+    return {
+        "ok": False,
+        "status_code": 0,
+        "final_url": current_url,
+        "location": None,
+        "content_type": None,
+        "content": "",
+        "error": error,
+        "redirect_count": redirect_count,
+        "redirect_history": redirect_history,
+    }
+
+start = time.time()
+try:
+    payload = probe_url(url, redirect_limit, follow_redirects)
+except RedirectFailure as exc:
+    payload = make_failure_payload(exc.current_url, exc.error, exc.redirect_count, exc.redirect_history)
+except Exception as exc:
+    payload = make_failure_payload(url, "probe_error: {0}".format(str(exc)), 0, [])
+payload["elapsed_ms"] = int((time.time() - start) * 1000)
+print(json.dumps(payload))
+'@
+
+  try {
+    $script | Out-File -FilePath $scriptPath -Encoding utf8
+    $raw = @(& $pythonCommand $scriptPath $Url $RedirectLimit ([string]([bool]$FollowRedirects)).ToLowerInvariant() 2>&1)
+    if ($LASTEXITCODE -ne 0) {
+      throw (($raw | ForEach-Object { [string]$_ }) -join [Environment]::NewLine)
+    }
+
+    $payload = Convert-JsonDocument -Json (($raw | ForEach-Object { [string]$_ }) -join [Environment]::NewLine)
+    return [pscustomobject]@{
+      Ok = [bool]$payload.ok
+      StatusCode = [int]$payload.status_code
+      FinalUrl = [string]$payload.final_url
+      RedirectLocation = [string]$payload.location
+      ContentType = [string]$payload.content_type
+      Content = [string]$payload.content
+      Error = [string]$payload.error
+      RedirectCount = [int]$payload.redirect_count
+      RedirectHistory = @($payload.redirect_history)
+      ElapsedMs = [int]$payload.elapsed_ms
+    }
+  }
+  finally {
+    Remove-Item -Recurse -Force $tempRoot -ErrorAction SilentlyContinue
+  }
+}
+
 function Invoke-CanonicalRequest {
   param(
     [string]$Url,
     [int]$RedirectLimit
   )
 
-  $response = Invoke-WebRequest -Uri $Url -MaximumRedirection $RedirectLimit
-  return [pscustomobject]@{
-    StatusCode = [int]$response.StatusCode
-    FinalUrl = [string]$response.BaseResponse.ResponseUri.AbsoluteUri
-    Content = [string]$response.Content
+  try {
+    $response = Invoke-WebRequest -Uri $Url -MaximumRedirection $RedirectLimit
+    return [pscustomobject]@{
+      StatusCode = [int]$response.StatusCode
+      FinalUrl = Get-WebResponseFinalUrl -Response $response -FallbackUrl $Url
+      Content = [string]$response.Content
+      ResponseClient = 'powershell'
+      FallbackReason = ''
+    }
+  }
+  catch {
+    $message = [string]$_.Exception.Message
+    if (-not (Test-LocalTlsCredentialFailure -Message $message)) {
+      throw
+    }
+
+    $fallback = Invoke-PythonHttpProbe -Url $Url -RedirectLimit $RedirectLimit -FollowRedirects
+    if (-not $fallback.Ok) {
+      throw ("PowerShell request failed with '{0}'. Python fallback also failed with '{1}'." -f $message, $fallback.Error)
+    }
+
+    return [pscustomobject]@{
+      StatusCode = [int]$fallback.StatusCode
+      FinalUrl = [string]$fallback.FinalUrl
+      Content = [string]$fallback.Content
+      ResponseClient = 'python_urllib'
+      FallbackReason = $message
+    }
   }
 }
 
@@ -215,6 +529,8 @@ function Resolve-LegacyRequest {
   try {
     $currentUrl = $Url
     $hops = New-Object System.Collections.Generic.List[string]
+    $firstRedirectStatusCode = $null
+    $firstRedirectLocation = $null
     for ($i = 0; $i -le $RedirectLimit; $i++) {
       $response = $client.GetAsync($currentUrl).GetAwaiter().GetResult()
       $statusCode = [int]$response.StatusCode
@@ -224,6 +540,10 @@ function Resolve-LegacyRequest {
         $resolvedLocation = ([System.Uri]::new([System.Uri]$currentUrl, $locationHeader)).AbsoluteUri
         $hops.Add(('{0} -> {1}' -f $statusCode, $resolvedLocation))
         if ($statusCode -ge 300 -and $statusCode -lt 400) {
+          if ($null -eq $firstRedirectStatusCode) {
+            $firstRedirectStatusCode = $statusCode
+            $firstRedirectLocation = $resolvedLocation
+          }
           $currentUrl = $resolvedLocation
           continue
         }
@@ -235,15 +555,44 @@ function Resolve-LegacyRequest {
       }
 
       return [pscustomobject]@{
-        StatusCode = $statusCode
+        StatusCode = if ($null -ne $firstRedirectStatusCode) { $firstRedirectStatusCode } else { $statusCode }
         FinalUrl = $currentUrl
-        RedirectLocation = $resolvedLocation
+        RedirectLocation = if ($null -ne $firstRedirectLocation) { $firstRedirectLocation } else { $resolvedLocation }
         RedirectHops = @($hops)
         Content = $content
+        ResponseClient = 'powershell'
+        FallbackReason = ''
       }
     }
 
     throw "Exceeded redirect limit while probing $Url"
+  }
+  catch {
+    $message = [string]$_.Exception.Message
+    if (-not (Test-LocalTlsCredentialFailure -Message $message)) {
+      throw
+    }
+
+    $firstHop = Invoke-PythonHttpProbe -Url $Url -RedirectLimit $RedirectLimit
+    $followed = Invoke-PythonHttpProbe -Url $Url -RedirectLimit $RedirectLimit -FollowRedirects
+    if (-not $firstHop.Ok -and -not $followed.Ok) {
+      throw ("PowerShell request failed with '{0}'. Python fallback also failed with '{1}'." -f $message, $followed.Error)
+    }
+
+    $hops = @()
+    if (-not [string]::IsNullOrWhiteSpace($firstHop.RedirectLocation)) {
+      $hops = @('{0} -> {1}' -f $firstHop.StatusCode, $firstHop.RedirectLocation)
+    }
+
+    return [pscustomobject]@{
+      StatusCode = [int]$firstHop.StatusCode
+      FinalUrl = [string]$followed.FinalUrl
+      RedirectLocation = [string]$firstHop.RedirectLocation
+      RedirectHops = @($hops)
+      Content = [string]$followed.Content
+      ResponseClient = 'python_urllib'
+      FallbackReason = $message
+    }
   }
   finally {
     $client.Dispose()
@@ -348,6 +697,8 @@ foreach ($row in $priorityRows) {
         expected_jsonld_type = $expectedJsonLdType
         jsonld_types = @($jsonLdTypes)
         smoke_passed = ($issues.Count -eq 0)
+        response_client = [string]$response.ResponseClient
+        fallback_reason = [string]$response.FallbackReason
         issues = @($issues)
       }
   }
@@ -370,6 +721,8 @@ foreach ($row in $priorityRows) {
         expected_jsonld_type = Get-ExpectedJsonLdType -Path $path
         jsonld_types = @()
         smoke_passed = $false
+        response_client = ''
+        fallback_reason = ''
         issues = @([string]$_.Exception.Message)
       }
   }
@@ -399,6 +752,8 @@ foreach ($row in $priorityRows) {
         redirect_location = [string]$legacyResponse.RedirectLocation
         classification = $classification
         redirect_requirement_met = ($classification -eq 'full_path_301')
+        response_client = [string]$legacyResponse.ResponseClient
+        fallback_reason = [string]$legacyResponse.FallbackReason
         redirect_hops = @($legacyResponse.RedirectHops)
       }
   }
@@ -415,6 +770,8 @@ foreach ($row in $priorityRows) {
         redirect_location = ''
         classification = 'broken_or_stale'
         redirect_requirement_met = $false
+        response_client = ''
+        fallback_reason = ''
         redirect_hops = @([string]$_.Exception.Message)
       }
   }
@@ -424,6 +781,8 @@ $llmsProbe = [ordered]@{
   url = Join-BaseRelativeUrl -BaseUrl $canonicalBaseUrl -Path '/llms.txt'
   reachable = $false
   contains_canonical_url = $false
+  response_client = ''
+  fallback_reason = ''
   issues = @()
 }
 
@@ -431,12 +790,31 @@ try {
   $llmsContent = Invoke-WebRequest -Uri $llmsProbe.url -MaximumRedirection $MaxRedirects
   $llmsProbe.reachable = $true
   $llmsProbe.contains_canonical_url = [string]$llmsContent.Content -match [regex]::Escape($canonicalBaseUrl)
+  $llmsProbe.response_client = 'powershell'
   if (-not $llmsProbe.contains_canonical_url) {
     $llmsProbe.issues += 'llms.txt did not contain the canonical host'
   }
 }
 catch {
-  $llmsProbe.issues += [string]$_.Exception.Message
+  $message = [string]$_.Exception.Message
+  if (Test-LocalTlsCredentialFailure -Message $message) {
+    try {
+      $fallback = Invoke-PythonHttpProbe -Url $llmsProbe.url -RedirectLimit $MaxRedirects -FollowRedirects
+      $llmsProbe.reachable = [bool]$fallback.Ok
+      $llmsProbe.contains_canonical_url = [string]$fallback.Content -match [regex]::Escape($canonicalBaseUrl)
+      $llmsProbe.response_client = 'python_urllib'
+      $llmsProbe.fallback_reason = $message
+      if (-not $llmsProbe.contains_canonical_url) {
+        $llmsProbe.issues += 'llms.txt did not contain the canonical host'
+      }
+    }
+    catch {
+      $llmsProbe.issues += ('PowerShell request failed with ''{0}''. Python fallback also failed with ''{1}''.' -f $message, [string]$_.Exception.Message)
+    }
+  }
+  else {
+    $llmsProbe.issues += $message
+  }
 }
 
 if ($UpdateWorksheet -and (Test-Path -LiteralPath $WorksheetPath -PathType Leaf)) {
@@ -449,13 +827,15 @@ if ($UpdateWorksheet -and (Test-Path -LiteralPath $WorksheetPath -PathType Leaf)
       $worksheetRow.deployed = Format-Bool -Value ([int]$canonicalMatch.status_code -eq 200)
       $worksheetRow.live_smoke_passed = Format-Bool -Value ([bool]$canonicalMatch.smoke_passed)
       $worksheetRow.selected_canonical = [string]$canonicalMatch.canonical_href
-      $canonicalNote = if (@($canonicalMatch.issues).Count -gt 0) { ('canonical: ' + ((@($canonicalMatch.issues)) -join ', ')) } else { 'canonical: passed' }
+      $canonicalClientNote = if ([string]$canonicalMatch.response_client -eq 'python_urllib') { ' via python_urllib fallback' } else { '' }
+      $canonicalNote = if (@($canonicalMatch.issues).Count -gt 0) { ('canonical: ' + ((@($canonicalMatch.issues)) -join ', ') + $canonicalClientNote) } else { ('canonical: passed' + $canonicalClientNote) }
       $worksheetRow.notes = $canonicalNote
     }
 
     if ($legacyMatch) {
       $worksheetRow.legacy_redirect_passed = Format-Bool -Value ([bool]$legacyMatch.redirect_requirement_met)
-      $legacyNote = ('legacy: {0}' -f [string]$legacyMatch.classification)
+      $legacyClientNote = if ([string]$legacyMatch.response_client -eq 'python_urllib') { ' via python_urllib fallback' } else { '' }
+      $legacyNote = ('legacy: {0}{1}' -f [string]$legacyMatch.classification, $legacyClientNote)
       $worksheetRow.notes = Join-Notes -Items @([string]$worksheetRow.notes, $legacyNote)
     }
   }
@@ -503,20 +883,22 @@ $markdown.Add(('- llms.txt contains canonical host: {0}' -f (Format-Bool -Value 
 $markdown.Add('')
 $markdown.Add('## Canonical Host Results')
 $markdown.Add('')
-$markdown.Add('| Title | URL | Smoke | Canonical href | Robots | Issues |')
-$markdown.Add('| --- | --- | --- | --- | --- | --- |')
+$markdown.Add('| Title | URL | Smoke | Client | Canonical href | Robots | Issues |')
+$markdown.Add('| --- | --- | --- | --- | --- | --- | --- |')
 foreach ($row in $canonicalResults) {
   $issueText = if (@($row.issues).Count -gt 0) { (@($row.issues) -join ', ') } else { 'passed' }
-  $markdown.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f $row.title, $row.url, (Format-Bool -Value ([bool]$row.smoke_passed)), $row.canonical_href, $row.robots, $issueText))
+  $clientText = if ([string]$row.response_client -eq 'python_urllib') { 'python_urllib fallback' } else { [string]$row.response_client }
+  $markdown.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} |' -f $row.title, $row.url, (Format-Bool -Value ([bool]$row.smoke_passed)), $clientText, $row.canonical_href, $row.robots, $issueText))
 }
 
 $markdown.Add('')
 $markdown.Add('## Legacy Host Results')
 $markdown.Add('')
-$markdown.Add('| Title | Legacy URL | Status | Final URL | Redirect target |')
-$markdown.Add('| --- | --- | --- | --- | --- |')
+$markdown.Add('| Title | Legacy URL | Status | Client | Final URL | Redirect target |')
+$markdown.Add('| --- | --- | --- | --- | --- | --- |')
 foreach ($row in $legacyResults) {
-  $markdown.Add(('| {0} | {1} | {2} | {3} | {4} |' -f $row.title, $row.url, $row.classification, $row.final_url, $row.redirect_location))
+  $clientText = if ([string]$row.response_client -eq 'python_urllib') { 'python_urllib fallback' } else { [string]$row.response_client }
+  $markdown.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f $row.title, $row.url, $row.classification, $clientText, $row.final_url, $row.redirect_location))
 }
 
 $markdown -join [Environment]::NewLine | Out-File -FilePath $markdownPath -Encoding utf8
