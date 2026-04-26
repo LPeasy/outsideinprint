@@ -40,44 +40,54 @@
       "seeded": true
     },
     "the-structure-of-modern-american-society": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-04-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
       "previous_version": "1.0",
       "new_version": "1.1",
-      "updated_on": "2026-04-26"
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
     },
     "rational-ignorance-in-the-u-s-presidential-electorate": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-04-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
       "previous_version": "1.0",
       "new_version": "1.1",
-      "updated_on": "2026-04-26"
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
     },
     "presidential-elections": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-04-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
       "previous_version": "1.0",
       "new_version": "1.1",
-      "updated_on": "2026-04-26"
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
     },
     "federalism-in-modern-american-society": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-04-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
       "previous_version": "1.0",
       "new_version": "1.1",
-      "updated_on": "2026-04-26"
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
     },
     "american-household-debt": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-04-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
       "previous_version": "1.0",
       "new_version": "1.1",
-      "updated_on": "2026-04-26"
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
     }
   },
   "blocked": {},
@@ -91,8 +101,10 @@
         "federalism-in-modern-american-society",
         "american-household-debt"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
     }
   ]
 }
