@@ -6,8 +6,12 @@ $probeScriptPath = Join-Path $repoRoot 'scripts\probe_seo_rollout.ps1'
 $diagnoseScriptPath = Join-Path $repoRoot 'scripts\diagnose_seo_hosts.ps1'
 
 function Get-PythonCommand {
-  $candidates = @(
-    (Join-Path $repoRoot 'tools/bin/generated/python.cmd'),
+  $candidates = @()
+  if ($IsWindows) {
+    $candidates += (Join-Path $repoRoot 'tools/bin/generated/python.cmd')
+  }
+
+  $candidates += @(
     'py',
     'python',
     'python3',
@@ -88,7 +92,7 @@ function Invoke-EmbeddedPythonProbe {
     [bool]$FollowRedirects
   )
 
-  $tempDir = Join-Path $env:TEMP ('seo-python-redirect-regress-' + [guid]::NewGuid().ToString('N'))
+  $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ('seo-python-redirect-regress-' + [guid]::NewGuid().ToString('N'))
   New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
   try {
     $probePath = Join-Path $tempDir 'probe.py'
@@ -134,7 +138,7 @@ function New-TestRedirectServer {
     [int]$Port
   )
 
-  $tempDir = Join-Path $env:TEMP ('seo-redirect-server-' + [guid]::NewGuid().ToString('N'))
+  $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ('seo-redirect-server-' + [guid]::NewGuid().ToString('N'))
   New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
   $serverScriptPath = Join-Path $tempDir 'server.py'
 
