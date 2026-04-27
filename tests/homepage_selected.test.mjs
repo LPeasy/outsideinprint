@@ -108,12 +108,14 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const indexSource = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
+  const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
   const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
   const currentCartoon = readCurrentCartoonRecord(cartoonData);
   const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
   const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
   const cartoonLookupPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-for-page.html"), "utf8");
   const cartoonLinkPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-gallery-link.html"), "utf8");
+  const cartoonThumbnailLightbox = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-thumbnail-lightbox.html"), "utf8");
   const pageListItem = fs.readFileSync(path.resolve("layouts/partials/discovery/page-list-item.html"), "utf8");
 
   assert.match(source, /partial "archive\/longform-kind\.html"/);
@@ -190,7 +192,17 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(cartoonLookupPartial, /\.essay/);
   assert.match(cartoonLinkPartial, /gallery\/\?cartoon=%s/);
   assert.match(cartoonLinkPartial, /essay-cartoon-thumb/);
+  assert.match(cartoonLinkPartial, /<button/);
+  assert.match(cartoonLinkPartial, /data-essay-cartoon-lightbox-trigger/);
+  assert.match(cartoonLinkPartial, /data-gallery/);
   assert.match(cartoonLinkPartial, /<img/);
+  assert.doesNotMatch(cartoonLinkPartial, /<a class="essay-cartoon-thumb/);
+  assert.match(baseLayout, /editorial\/cartoon-thumbnail-lightbox\.html/);
+  assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox/);
+  assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-gallery/);
+  assert.match(cartoonThumbnailLightbox, /View in gallery/);
+  assert.match(cartoonThumbnailLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.doesNotMatch(cartoonThumbnailLightbox, /window\.location\.href/);
   assert.match(pageListItem, /editorial\/cartoon-for-page\.html/);
   assert.match(pageListItem, /editorial\/cartoon-gallery-link\.html/);
   assert.match(cartoonData, /essay: "\/essays\/the-warning-label-in-the-weeds\/"/);

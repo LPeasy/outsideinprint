@@ -779,7 +779,12 @@ textarea{
   display:grid;
   gap:.28rem;
   width:clamp(4.75rem, 8vw, 6.4rem);
+  padding:0;
+  border:0;
+  appearance:none;
+  background:transparent;
   color:var(--text-muted);
+  cursor:zoom-in;
   font-family:var(--font-ui);
   font-size:.62rem;
   font-weight:700;
