@@ -101,6 +101,11 @@ test("homepage composition inserts the manifesto between the hero and Start Read
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
   assert.match(homeFrontPage, /site\.Data\.editorial_cartoons/);
   assert.match(homeFrontPage, /View gallery/);
+  assert.match(homeFrontPage, /data-home-cartoon-lightbox-trigger/);
+  assert.match(homeFrontPage, /data-home-cartoon-lightbox/);
+  assert.match(homeFrontPage, /data-home-cartoon-lightbox-essay/);
+  assert.match(homeFrontPage, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.doesNotMatch(homeFrontPage, /window\.location\.href/);
   assert.doesNotMatch(homeFrontPage, /cartoon-think-outside-the-box\.png/);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="lead"/g) || []).length, 1);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="secondary"/g) || []).length, 1);

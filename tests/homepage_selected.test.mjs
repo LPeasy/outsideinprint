@@ -114,7 +114,7 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 
   assert.match(source, /partial "archive\/longform-kind\.html"/);
-  assert.match(source, /Homepage selection is essays-only by design/);
+  assert.match(source, /Homepage selection stays essay-only by design/);
   assert.match(source, /Params\.homepage_featured/);
   assert.match(source, /Params\.homepage_featured_until/);
   assert.match(source, /findRE "\\\\d\{4\}-\\\\d\{2\}-\\\\d\{2\}"/);
@@ -138,6 +138,12 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(frontPageSource, /currentCartoonSlug/);
   assert.match(frontPageSource, /View gallery/);
   assert.match(frontPageSource, /"gallery\/" \| absURL/);
+  assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
+  assert.match(frontPageSource, /data-home-cartoon-lightbox/);
+  assert.match(frontPageSource, /data-home-cartoon-lightbox-image-button/);
+  assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
+  assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.doesNotMatch(frontPageSource, /window\.location\.href/);
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
@@ -238,10 +244,14 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.doesNotMatch(frontPageSource, /Also on the front page/);
   assert.match(frontPageSource, /Read essay &rarr;/);
   assert.match(frontPageSource, /View gallery/);
+  assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
+  assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
+  assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.doesNotMatch(frontPageSource, /window\.location\.href/);
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
   assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-front-page__stories"'));
-  assert.match(partialSource, /"lead" \$lead/);
+  assert.match(partialSource, /"lead" \$hero/);
   assert.match(partialSource, /"secondary" \$secondary/);
   assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(source.indexOf('partial "home_imprint_statement.html"') < source.indexOf('partial "home_selected_collections.html"'));

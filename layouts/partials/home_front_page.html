@@ -45,12 +45,27 @@
         <p class="m home-front-page__lead-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
         {{ with $currentCartoon }}
           <figure class="editorial-cartoon">
-            <img
-              src="{{ .image | relURL }}"
-              alt="{{ .alt }}"
-              width="{{ .width }}"
-              height="{{ .height }}"
+            <button
+              type="button"
+              class="editorial-cartoon__trigger"
+              data-home-cartoon-lightbox-trigger
+              data-title="{{ .title }}"
+              data-date="{{ .date }}"
+              data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
+              data-image="{{ .image | relURL }}"
+              data-alt="{{ .alt }}"
+              data-width="{{ .width }}"
+              data-height="{{ .height }}"
+              {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
+              aria-label="Open {{ .title }} fullscreen"
             >
+              <img
+                src="{{ .image | relURL }}"
+                alt="{{ .alt }}"
+                width="{{ .width }}"
+                height="{{ .height }}"
+              >
+            </button>
             <figcaption>
               <span>{{ .title }}</span>
               <a href="{{ "gallery/" | absURL }}">View gallery</a>
@@ -120,5 +135,147 @@
         </div>
       {{ end }}
     </div>
+  {{ end }}
+
+  {{ with $currentCartoon }}
+    <div class="cartoon-lightbox" data-home-cartoon-lightbox aria-hidden="true" hidden>
+      <button
+        type="button"
+        class="cartoon-lightbox__backdrop"
+        data-home-cartoon-lightbox-close
+        aria-label="Close cartoon viewer"
+      ></button>
+      <section class="cartoon-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="home-cartoon-lightbox-title">
+        <button
+          type="button"
+          class="cartoon-lightbox__close"
+          data-home-cartoon-lightbox-close
+          aria-label="Close cartoon viewer"
+        ><span aria-hidden="true">&times;</span></button>
+        <figure class="cartoon-lightbox__figure">
+          <button
+            type="button"
+            class="cartoon-lightbox__image-button"
+            data-home-cartoon-lightbox-image-button
+            aria-label="Close fullscreen cartoon"
+          >
+            <img data-home-cartoon-lightbox-image src="" alt="">
+          </button>
+          <figcaption class="cartoon-lightbox__caption">
+            <div>
+              <h2 id="home-cartoon-lightbox-title" data-home-cartoon-lightbox-title></h2>
+              <time data-home-cartoon-lightbox-date></time>
+            </div>
+            <a class="cartoon-lightbox__essay" data-home-cartoon-lightbox-essay href="#" hidden>Read essay</a>
+          </figcaption>
+        </figure>
+      </section>
+    </div>
+
+    <script>
+      (function () {
+        var lightbox = document.querySelector("[data-home-cartoon-lightbox]");
+        if (!lightbox) return;
+
+        var trigger = document.querySelector("[data-home-cartoon-lightbox-trigger]");
+        var title = lightbox.querySelector("[data-home-cartoon-lightbox-title]");
+        var date = lightbox.querySelector("[data-home-cartoon-lightbox-date]");
+        var image = lightbox.querySelector("[data-home-cartoon-lightbox-image]");
+        var imageButton = lightbox.querySelector("[data-home-cartoon-lightbox-image-button]");
+        var essayLink = lightbox.querySelector("[data-home-cartoon-lightbox-essay]");
+        var closeButton = lightbox.querySelector(".cartoon-lightbox__close");
+        var closeControls = Array.prototype.slice.call(lightbox.querySelectorAll("[data-home-cartoon-lightbox-close]"));
+        var activeTrigger = null;
+
+        if (!trigger) return;
+
+        function focusableElements() {
+          return Array.prototype.slice.call(lightbox.querySelectorAll("button:not([disabled]), a[href]")).filter(function (element) {
+            var style = window.getComputedStyle(element);
+            return !element.hidden && style.display !== "none" && style.visibility !== "hidden";
+          });
+        }
+
+        function closeLightbox() {
+          lightbox.hidden = true;
+          lightbox.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("cartoon-lightbox-open");
+          image.removeAttribute("src");
+          image.removeAttribute("width");
+          image.removeAttribute("height");
+
+          if (activeTrigger) {
+            activeTrigger.focus({ preventScroll: true });
+            activeTrigger = null;
+          }
+        }
+
+        function openLightbox() {
+          var imageTitle = trigger.getAttribute("data-title") || "";
+          var essay = trigger.getAttribute("data-essay") || "";
+          activeTrigger = trigger;
+
+          title.textContent = imageTitle;
+          date.textContent = trigger.getAttribute("data-date-label") || "";
+          date.setAttribute("datetime", trigger.getAttribute("data-date") || "");
+          image.src = trigger.getAttribute("data-image") || "";
+          image.alt = trigger.getAttribute("data-alt") || "";
+          image.width = Number(trigger.getAttribute("data-width") || 0);
+          image.height = Number(trigger.getAttribute("data-height") || 0);
+
+          if (essay) {
+            essayLink.href = essay;
+            essayLink.hidden = false;
+          } else {
+            essayLink.hidden = true;
+            essayLink.removeAttribute("href");
+          }
+
+          imageButton.setAttribute("aria-label", "Close fullscreen cartoon: " + imageTitle);
+          lightbox.hidden = false;
+          lightbox.setAttribute("aria-hidden", "false");
+          document.body.classList.add("cartoon-lightbox-open");
+          closeButton.focus({ preventScroll: true });
+        }
+
+        trigger.addEventListener("click", openLightbox);
+
+        closeControls.forEach(function (control) {
+          control.addEventListener("click", closeLightbox);
+        });
+
+        imageButton.addEventListener("click", closeLightbox);
+
+        document.addEventListener("keydown", function (event) {
+          var focusable;
+          var first;
+          var last;
+
+          if (lightbox.hidden) return;
+
+          if (event.key === "Escape") {
+            event.preventDefault();
+            closeLightbox();
+            return;
+          }
+
+          if (event.key !== "Tab") return;
+
+          focusable = focusableElements();
+          if (!focusable.length) return;
+
+          first = focusable[0];
+          last = focusable[focusable.length - 1];
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        });
+      })();
+    </script>
   {{ end }}
 </section>

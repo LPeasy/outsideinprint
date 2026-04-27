@@ -792,6 +792,21 @@ textarea{
   box-shadow:0 18px 38px rgba(0,0,0,.2);
 }
 
+.editorial-cartoon__trigger{
+  display:block;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:inherit;
+  cursor:zoom-in;
+}
+.editorial-cartoon__trigger:focus-visible{
+  outline:2px solid rgba(213,190,150,.72);
+  outline-offset:4px;
+  border-radius:8px;
+}
 .editorial-cartoon img{
   width:100%;
   max-height:720px;
