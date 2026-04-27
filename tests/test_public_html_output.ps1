@@ -428,6 +428,7 @@ $requiredEssayHeroPages = @(
   'public/essays/the-fair-price-of-bitcoin-69420/index.html',
   'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html',
   'public/essays/the-blockade-has-a-phone-number/index.html',
+  'public/essays/the-warning-label-in-the-weeds/index.html',
   'public/essays/beyond-moores-law/index.html',
   'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
 )
@@ -470,6 +471,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'A phone line can stay open while the waterway stays closed.'
+  },
+  @{
+    PublicPath = 'public/essays/the-warning-label-in-the-weeds/index.html'
+    SourcePath = 'content/essays/the-warning-label-in-the-weeds.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The label looks like packaging until the legal system asks it to carry public trust.'
   },
   @{
     PublicPath = 'public/essays/the-sewer-under-the-sidewalk/index.html'
@@ -615,6 +623,16 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/essays/the-blockade-has-a-phone-number/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-warning-label-in-the-weeds/index.html' = @{
+    Title = 'The Warning Label in the Weeds'
+    Description = "The Supreme Court's Roundup case turns a weedkiller label into a test of federal power, state lawsuits, farming, and public trust."
+    Canonical = 'https://outsideinprint.org/essays/the-warning-label-in-the-weeds/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-warning-label-in-the-weeds/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-sewer-under-the-sidewalk/index.html' = @{
@@ -1887,7 +1905,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '9 public collections.*70 published pieces'
+    Pattern = '9 public collections.*71 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -1918,7 +1936,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 69 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 70 published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
@@ -2157,6 +2175,26 @@ $requiredUxChecks = @(
     Path = 'public/essays/the-blockade-has-a-phone-number/index.html'
     Pattern = 'article_collection_context'
     Message = 'expected the Hormuz blockade essay collection link to emit the dedicated analytics source slot'
+  },
+  @{
+    Path = 'public/essays/the-warning-label-in-the-weeds/index.html'
+    Pattern = 'data-piece-collection-slug=(?:"risk-uncertainty"|risk-uncertainty)'
+    Message = 'expected the warning-label essay to key article accents to the risk collection slug'
+  },
+  @{
+    Path = 'public/essays/the-warning-label-in-the-weeds/index.html'
+    Pattern = 'data-piece-collection-room-theme=(?:"risk-systems-notebook"|risk-systems-notebook)'
+    Message = 'expected the warning-label essay to render the risk article collection-accent theme'
+  },
+  @{
+    Path = 'public/essays/the-warning-label-in-the-weeds/index.html'
+    Pattern = 'From the Collection'
+    Message = 'expected the warning-label essay to render the compact article collection context block'
+  },
+  @{
+    Path = 'public/essays/the-warning-label-in-the-weeds/index.html'
+    Pattern = 'article_collection_context'
+    Message = 'expected the warning-label essay collection link to emit the dedicated analytics source slot'
   },
   @{
     Path = 'public/essays/in-the-image-of-god/index.html'
