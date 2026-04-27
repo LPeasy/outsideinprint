@@ -25,12 +25,27 @@
             <p class="m">{{ time.Format "Jan 2, 2006" .date }}</p>
           </div>
           <figure class="cartoon-gallery-spotlight__figure">
-            <img
-              src="{{ .image | relURL }}"
-              alt="{{ .alt }}"
-              width="{{ .width }}"
-              height="{{ .height }}"
+            <button
+              type="button"
+              class="cartoon-gallery__trigger"
+              data-cartoon-lightbox-trigger
+              data-title="{{ .title }}"
+              data-date="{{ .date }}"
+              data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
+              data-image="{{ .image | relURL }}"
+              data-alt="{{ .alt }}"
+              data-width="{{ .width }}"
+              data-height="{{ .height }}"
+              {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
+              aria-label="Open {{ .title }} fullscreen"
             >
+              <img
+                src="{{ .image | relURL }}"
+                alt="{{ .alt }}"
+                width="{{ .width }}"
+                height="{{ .height }}"
+              >
+            </button>
           </figure>
         </section>
       </div>
@@ -44,13 +59,28 @@
         {{ range $orderedCartoons }}
           <article class="cartoon-gallery__item{{ if eq .slug $currentSlug }} cartoon-gallery__item--current{{ end }}">
             <figure>
-              <img
-                src="{{ .image | relURL }}"
-                alt="{{ .alt }}"
-                width="{{ .width }}"
-                height="{{ .height }}"
-                loading="lazy"
+              <button
+                type="button"
+                class="cartoon-gallery__trigger"
+                data-cartoon-lightbox-trigger
+                data-title="{{ .title }}"
+                data-date="{{ .date }}"
+                data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
+                data-image="{{ .image | relURL }}"
+                data-alt="{{ .alt }}"
+                data-width="{{ .width }}"
+                data-height="{{ .height }}"
+                {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
+                aria-label="Open {{ .title }} fullscreen"
               >
+                <img
+                  src="{{ .image | relURL }}"
+                  alt="{{ .alt }}"
+                  width="{{ .width }}"
+                  height="{{ .height }}"
+                  loading="lazy"
+                >
+              </button>
               <figcaption>
                 <span>{{ .title }}</span>
                 <time datetime="{{ .date }}">{{ time.Format "Jan 2, 2006" .date }}</time>
@@ -66,4 +96,155 @@
       </div>
     {{ end }}
   </section>
+
+  <div class="cartoon-lightbox" data-cartoon-lightbox aria-hidden="true" hidden>
+    <button
+      type="button"
+      class="cartoon-lightbox__backdrop"
+      data-cartoon-lightbox-close
+      aria-label="Close cartoon viewer"
+    ></button>
+    <section class="cartoon-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="cartoon-lightbox-title">
+      <button
+        type="button"
+        class="cartoon-lightbox__close"
+        data-cartoon-lightbox-close
+        aria-label="Close cartoon viewer"
+      ><span aria-hidden="true">&times;</span></button>
+      <figure class="cartoon-lightbox__figure">
+        <button
+          type="button"
+          class="cartoon-lightbox__image-button"
+          data-cartoon-lightbox-image-button
+        >
+          <img data-cartoon-lightbox-image src="" alt="">
+        </button>
+        <figcaption class="cartoon-lightbox__caption">
+          <div>
+            <h2 id="cartoon-lightbox-title" data-cartoon-lightbox-title></h2>
+            <time data-cartoon-lightbox-date></time>
+          </div>
+          <a class="cartoon-lightbox__essay" data-cartoon-lightbox-essay href="#" hidden>Read essay</a>
+        </figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.querySelector("[data-cartoon-lightbox]");
+      if (!lightbox) return;
+
+      var title = lightbox.querySelector("[data-cartoon-lightbox-title]");
+      var date = lightbox.querySelector("[data-cartoon-lightbox-date]");
+      var image = lightbox.querySelector("[data-cartoon-lightbox-image]");
+      var imageButton = lightbox.querySelector("[data-cartoon-lightbox-image-button]");
+      var essayLink = lightbox.querySelector("[data-cartoon-lightbox-essay]");
+      var closeButton = lightbox.querySelector(".cartoon-lightbox__close");
+      var closeControls = Array.prototype.slice.call(lightbox.querySelectorAll("[data-cartoon-lightbox-close]"));
+      var triggers = Array.prototype.slice.call(document.querySelectorAll("[data-cartoon-lightbox-trigger]"));
+      var activeTrigger = null;
+      var activeEssay = "";
+
+      function focusableElements() {
+        return Array.prototype.slice.call(lightbox.querySelectorAll("button:not([disabled]), a[href]")).filter(function (element) {
+          var style = window.getComputedStyle(element);
+          return !element.hidden && style.display !== "none" && style.visibility !== "hidden";
+        });
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("cartoon-lightbox-open");
+        image.removeAttribute("src");
+        image.removeAttribute("width");
+        image.removeAttribute("height");
+        activeEssay = "";
+
+        if (activeTrigger) {
+          activeTrigger.focus({ preventScroll: true });
+          activeTrigger = null;
+        }
+      }
+
+      function openLightbox(trigger) {
+        var imageTitle = trigger.getAttribute("data-title") || "";
+        activeTrigger = trigger;
+        activeEssay = trigger.getAttribute("data-essay") || "";
+
+        title.textContent = imageTitle;
+        date.textContent = trigger.getAttribute("data-date-label") || "";
+        date.setAttribute("datetime", trigger.getAttribute("data-date") || "");
+        image.src = trigger.getAttribute("data-image") || "";
+        image.alt = trigger.getAttribute("data-alt") || "";
+        image.width = Number(trigger.getAttribute("data-width") || 0);
+        image.height = Number(trigger.getAttribute("data-height") || 0);
+
+        if (activeEssay) {
+          essayLink.href = activeEssay;
+          essayLink.hidden = false;
+          imageButton.setAttribute("aria-label", "Open essay: " + imageTitle);
+        } else {
+          essayLink.hidden = true;
+          essayLink.removeAttribute("href");
+          imageButton.setAttribute("aria-label", "Close fullscreen cartoon: " + imageTitle);
+        }
+
+        lightbox.hidden = false;
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("cartoon-lightbox-open");
+        closeButton.focus({ preventScroll: true });
+      }
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function () {
+          openLightbox(trigger);
+        });
+      });
+
+      closeControls.forEach(function (control) {
+        control.addEventListener("click", closeLightbox);
+      });
+
+      imageButton.addEventListener("click", function () {
+        if (activeEssay) {
+          window.location.href = activeEssay;
+          return;
+        }
+
+        closeLightbox();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        var focusable;
+        var first;
+        var last;
+
+        if (lightbox.hidden) return;
+
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeLightbox();
+          return;
+        }
+
+        if (event.key !== "Tab") return;
+
+        focusable = focusableElements();
+        if (!focusable.length) return;
+
+        first = focusable[0];
+        last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+    })();
+  </script>
 {{ end }}

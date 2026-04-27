@@ -8,6 +8,10 @@ param(
   [Parameter(Mandatory = $true)]
   [string]$Alt,
 
+  [string]$EssayPath,
+
+  [switch]$NoEssayLink,
+
   [string]$Date = (Get-Date -Format 'yyyy-MM-dd'),
 
   [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -44,6 +48,116 @@ function Unquote-YamlValue {
   }
 
   return $trimmed
+}
+
+function Normalize-EssayPath {
+  param([string]$Value)
+
+  $path = ([string]$Value).Trim()
+  if ([string]::IsNullOrWhiteSpace($path)) {
+    throw 'Essay path cannot be empty.'
+  }
+
+  if ($path -match '^https?://') {
+    throw "Essay path must be a site-relative /essays/ path. Received: $path"
+  }
+
+  if (-not $path.StartsWith('/')) {
+    $path = '/' + $path
+  }
+
+  if (-not $path.EndsWith('/')) {
+    $path = $path + '/'
+  }
+
+  if ($path -notmatch '^/essays/[^/]+/$') {
+    throw "Essay path must use /essays/<slug>/ format. Received: $path"
+  }
+
+  return $path
+}
+
+function Read-MarkdownFrontMatter {
+  param([string]$Path)
+
+  $result = @{}
+  $lines = [System.IO.File]::ReadLines($Path)
+  $inFrontMatter = $false
+  $started = $false
+
+  foreach ($line in $lines) {
+    if (-not $started) {
+      if ($line -eq '---') {
+        $started = $true
+        $inFrontMatter = $true
+      }
+      else {
+        break
+      }
+      continue
+    }
+
+    if ($inFrontMatter -and $line -eq '---') {
+      break
+    }
+
+    if ($inFrontMatter -and $line -match '^\s*([A-Za-z0-9_]+):\s*(.*?)\s*$') {
+      $result[$Matches[1].ToLowerInvariant()] = Unquote-YamlValue $Matches[2]
+    }
+  }
+
+  return $result
+}
+
+function Get-LatestEssayPath {
+  param([string]$Root)
+
+  $essayDirectory = Join-Path $Root 'content\essays'
+  if (-not (Test-Path -LiteralPath $essayDirectory -PathType Container)) {
+    throw "Essay directory not found: $essayDirectory"
+  }
+
+  $candidates = @()
+  foreach ($file in Get-ChildItem -LiteralPath $essayDirectory -Filter '*.md' -File) {
+    if ($file.Name -eq '_index.md') {
+      continue
+    }
+
+    $frontMatter = Read-MarkdownFrontMatter -Path $file.FullName
+    if (-not $frontMatter.ContainsKey('date')) {
+      continue
+    }
+
+    $draftValue = ''
+    if ($frontMatter.ContainsKey('draft')) {
+      $draftValue = ([string]$frontMatter['draft']).Trim().ToLowerInvariant()
+    }
+    if ($draftValue -eq 'true') {
+      continue
+    }
+
+    $dateValue = [string]$frontMatter['date']
+    if ($dateValue -notmatch '^\d{4}-\d{2}-\d{2}') {
+      continue
+    }
+
+    $slug = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+    if ($frontMatter.ContainsKey('slug') -and -not [string]::IsNullOrWhiteSpace([string]$frontMatter['slug'])) {
+      $slug = [string]$frontMatter['slug']
+    }
+
+    $candidates += [pscustomobject]@{
+      Date = [datetime]::ParseExact($Matches[0], 'yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture)
+      Slug = $slug
+      Path = "/essays/$slug/"
+    }
+  }
+
+  if ($candidates.Count -eq 0) {
+    throw 'Unable to find a non-draft essay with a yyyy-MM-dd front matter date.'
+  }
+
+  return ($candidates | Sort-Object Date, Slug -Descending | Select-Object -First 1).Path
 }
 
 function Read-CartoonData {
@@ -101,7 +215,7 @@ function Write-CartoonData {
     [object[]]$Cartoons
   )
 
-  $preferredKeyOrder = @('title', 'date', 'image', 'alt', 'caption', 'width', 'height')
+  $preferredKeyOrder = @('title', 'date', 'image', 'essay', 'alt', 'caption', 'width', 'height')
 
   $lines = @()
   $lines += "current: $Current"
@@ -157,8 +271,22 @@ if ($Date -notmatch '^\d{4}-\d{2}-\d{2}$') {
   throw "Date must use yyyy-MM-dd format. Received: $Date"
 }
 
+if ($NoEssayLink -and -not [string]::IsNullOrWhiteSpace($EssayPath)) {
+  throw 'Use either -EssayPath or -NoEssayLink, not both.'
+}
+
 $resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $Root).Path)
 $resolvedImagePath = [System.IO.Path]::GetFullPath((Resolve-Path $ImagePath).Path)
+$defaultEssayPath = $null
+if (-not $NoEssayLink -and [string]::IsNullOrWhiteSpace($EssayPath)) {
+  $defaultEssayPath = Get-LatestEssayPath -Root $resolvedRoot
+}
+
+$resolvedEssayPath = $null
+if (-not [string]::IsNullOrWhiteSpace($EssayPath)) {
+  $resolvedEssayPath = Normalize-EssayPath -Value $EssayPath
+}
+
 $slug = ConvertTo-Slug $Title
 $targetRelativePath = "static\images\editorial\$slug.png"
 $targetPath = Join-Path $resolvedRoot $targetRelativePath
@@ -200,6 +328,14 @@ foreach ($cartoon in @($data.cartoons)) {
     $updatedCartoon.width = $width
     $updatedCartoon.height = $height
 
+    if ($NoEssayLink) {
+      if ($updatedCartoon.Contains('essay')) {
+        $updatedCartoon.Remove('essay')
+      }
+    } elseif ($resolvedEssayPath) {
+      $updatedCartoon.essay = $resolvedEssayPath
+    }
+
     $cartoons += $updatedCartoon
     $updated = $true
   } else {
@@ -208,7 +344,7 @@ foreach ($cartoon in @($data.cartoons)) {
 }
 
 if (-not $updated) {
-  $cartoons += [ordered]@{
+  $newCartoon = [ordered]@{
     slug = $slug
     title = $Title
     date = $Date
@@ -217,6 +353,12 @@ if (-not $updated) {
     width = $width
     height = $height
   }
+
+  if (-not $NoEssayLink) {
+    $newCartoon.essay = if ($resolvedEssayPath) { $resolvedEssayPath } else { $defaultEssayPath }
+  }
+
+  $cartoons += $newCartoon
 }
 
 Write-CartoonData -Path $dataPath -Current $slug -Cartoons @($cartoons)

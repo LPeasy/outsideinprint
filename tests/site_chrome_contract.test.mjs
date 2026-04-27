@@ -145,7 +145,13 @@ test("homepage composition inserts the manifesto between the hero and Start Read
   assert.match(galleryContent, /digital gallery/i);
   assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
   assert.match(galleryTemplate, /cartoon-gallery__grid/);
+  assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
+  assert.match(galleryTemplate, /data-cartoon-lightbox-essay/);
+  assert.match(galleryTemplate, /window\.location\.href = activeEssay/);
   assert.match(cartoonData, /slug: think-outside-the-box/);
+  assert.match(cartoonData, /essay: "\/essays\/the-warning-label-in-the-weeds\/"/);
+  const thinkOutsideEntry = cartoonData.match(/  - slug: think-outside-the-box[\s\S]*?(?=\n  - slug:|\n?$)/)?.[0] || "";
+  assert.doesNotMatch(thinkOutsideEntry, /essay:/);
   assert.match(cartoonData, new RegExp(`current: ${escapeRegex(currentCartoonSlug)}`));
   assert.match(cartoonData, new RegExp(`slug: ${escapeRegex(currentCartoonSlug)}`));
 });

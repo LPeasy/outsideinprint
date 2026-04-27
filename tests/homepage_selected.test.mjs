@@ -13,7 +13,7 @@ function readCurrentCartoonRecord(source) {
 
   const currentSlug = currentMatch[1].trim();
   const entryPattern = new RegExp(
-    `^\\s*-\\s+slug:\\s+${escapeRegex(currentSlug)}\\s*$([\\s\\S]*?)(?=^\\s*-\\s+slug:|$)`,
+    `^\\s*-\\s+slug:\\s+${escapeRegex(currentSlug)}\\s*\\r?\\n([\\s\\S]*?)(?=^\\s*-\\s+slug:|(?![\\s\\S]))`,
     "m"
   );
   const entryMatch = source.match(entryPattern);
@@ -168,6 +168,12 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(galleryContent, /title: "Gallery"/);
   assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
   assert.match(galleryTemplate, /cartoon-gallery__grid/);
+  assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
+  assert.match(galleryTemplate, /data-cartoon-lightbox-image-button/);
+  assert.match(galleryTemplate, /data-cartoon-lightbox-essay/);
+  assert.match(cartoonData, /essay: "\/essays\/the-warning-label-in-the-weeds\/"/);
+  const thinkOutsideEntry = cartoonData.match(/  - slug: think-outside-the-box[\s\S]*?(?=\n  - slug:|\n?$)/)?.[0] || "";
+  assert.doesNotMatch(thinkOutsideEntry, /essay:/);
 });
 
 test("active featured essays lead while the right rail uses the newest published essays", () => {

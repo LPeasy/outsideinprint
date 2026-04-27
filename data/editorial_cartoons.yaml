@@ -4,6 +4,7 @@ cartoons:
     title: "The Sewer Under the Sidewalk"
     date: "2026-04-22"
     image: "/images/editorial/the-sewer-under-the-sidewalk.png"
+    essay: "/essays/the-sewer-under-the-sidewalk/"
     alt: "Officials cut a ribbon beside a wet urban brook while cracked old sewer pipes discharge beneath the street."
     width: 2048
     height: 1152
@@ -18,6 +19,7 @@ cartoons:
     title: "The House Always Wins"
     date: "2026-04-16"
     image: "/images/editorial/the-house-always-wins.png"
+    essay: "/essays/the-world-is-back-at-the-poker-table/"
     alt: "Black-and-white editorial cartoon showing political and financial figures seated around a casino poker table."
     width: 1536
     height: 1024
@@ -25,6 +27,7 @@ cartoons:
     title: "Did you really mean what you said?"
     date: "2026-04-17"
     image: "/images/editorial/did-you-really-mean-what-you-said.png"
+    essay: "/essays/hindsight-2026-d4vd-alleged-romantic-homicide/"
     alt: "Editorial cartoon showing a young singer at a microphone under the title 'Romantic Homicide,' with viral-media attention on one side and police tape, case files, and investigators on the other."
     caption: "A cartoon about viral fame, public accusation, and the machinery that turns spectacle into evidence."
     width: 1536
@@ -33,6 +36,7 @@ cartoons:
     title: "Feeding the Machine"
     date: "2026-04-23"
     image: "/images/editorial/feeding-the-machine.png"
+    essay: "/essays/the-ai-data-center-wants-its-own-power-plant/"
     alt: "Editorial cartoon showing a laughing businessman cutting off a power line to desperate people while a giant AI data center and smoking industrial towers consume the electricity behind him."
     width: 1536
     height: 1024
@@ -40,6 +44,7 @@ cartoons:
     title: "Who Do You Know Here?"
     date: "2026-04-24"
     image: "/images/editorial/who-do-you-know-here.png"
+    essay: "/essays/the-gold-card-and-the-price-of-belonging/"
     alt: "Editorial cartoon showing a crowded general immigration intake line beside a guarded Gold Card entrance, where a wealthy family with luggage and a gold card passes a $1 million cover charge sign toward a luxury skyline."
     width: 1672
     height: 941
@@ -47,6 +52,7 @@ cartoons:
     title: "Pull the lever!"
     date: "2026-04-25"
     image: "/images/editorial/pull-the-lever.png"
+    essay: "/essays/the-fed-chair-is-not-a-button/"
     alt: "Editorial cartoon showing a presidential hand pressing a glowing CUT RATES button labeled PROMISE DELIVERY while green-lit cables tangle through inflation, FOMC, credibility, markets, employment, and public trust machinery toward a locked INTEREST RATES lever before a Federal Reserve committee."
     width: 1672
     height: 941
@@ -54,6 +60,7 @@ cartoons:
     title: "Strait to Voicemail"
     date: "2026-04-26"
     image: "/images/editorial/strait-to-voicemail.png"
+    essay: "/essays/the-blockade-has-a-phone-number/"
     alt: "Editorial cartoon showing a phone reading TEHRAN - SENT TO VOICEMAIL beside sanctions papers, a locked blockade over the Strait of Hormuz, tankers, and a public-costs chart for oil, jet fuel, and shipping."
     width: 1672
     height: 941
@@ -61,6 +68,7 @@ cartoons:
     title: "Certified safe?"
     date: "2026-04-27"
     image: "/images/editorial/certified-safe.png"
+    essay: "/essays/the-warning-label-in-the-weeds/"
     alt: "Editorial cartoon showing an EPA approval stamp landing on FIFRA paperwork for weedkiller while a magnifying glass exposes a warning label, with cancer claims, misbranding, farm use, and a state jury gathered around the scene."
     width: 1672
     height: 941
