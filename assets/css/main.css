@@ -740,6 +740,15 @@ textarea{
   font-size:clamp(1.18rem, 1.02rem + .38vw, 1.38rem);
   line-height:1.34;
 }
+.item__title-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:1rem;
+}
+.item__title-row .t{
+  min-width:0;
+}
 .item .t a{
   color:inherit;
   text-decoration:none;
@@ -764,6 +773,43 @@ textarea{
   margin-top:.5rem;
   letter-spacing:.14em;
   text-transform:uppercase;
+}
+.essay-cartoon-thumb{
+  flex:0 0 auto;
+  display:grid;
+  gap:.28rem;
+  width:clamp(4.75rem, 8vw, 6.4rem);
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  line-height:1;
+  text-align:center;
+  text-decoration:none;
+  text-transform:uppercase;
+}
+.essay-cartoon-thumb img{
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 9;
+  height:auto;
+  object-fit:cover;
+  border:1px solid rgba(236,231,223,.16);
+  border-radius:4px;
+  background:#ebe5da;
+  box-shadow:0 8px 18px rgba(0,0,0,.2);
+  transition:border-color .16s ease, transform .16s ease;
+}
+.essay-cartoon-thumb:hover,
+.essay-cartoon-thumb:focus-visible{
+  color:var(--accent-hover);
+  text-decoration:none;
+}
+.essay-cartoon-thumb:hover img,
+.essay-cartoon-thumb:focus-visible img{
+  border-color:rgba(153,173,191,.6);
+  transform:translateY(-1px);
 }
 
 /* Homepage editorial surface */
@@ -1532,6 +1578,18 @@ textarea{
   color:var(--text-primary);
   font-size:1.4rem;
   line-height:1.33;
+}
+.home-front-page__secondary-title-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:1rem;
+}
+.home-front-page__secondary-title-row .home-front-page__secondary-title{
+  min-width:0;
+}
+.essay-cartoon-thumb--home{
+  width:5.75rem;
 }
 .home-front-page__secondary-dek{
   margin-top:.58rem;
@@ -4411,6 +4469,15 @@ h2{ margin-top:34px; }
   }
   .cartoon-lightbox__caption h2{
     font-size:1.18rem;
+  }
+  .item__title-row,
+  .home-front-page__secondary-title-row{
+    gap:.75rem;
+  }
+  .essay-cartoon-thumb,
+  .essay-cartoon-thumb--home{
+    width:4.7rem;
+    font-size:.56rem;
   }
   .home-front-page__secondary-title{
     font-size:1.28rem;

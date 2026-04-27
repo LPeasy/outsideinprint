@@ -13,6 +13,7 @@
 {{- $sectionLabel := $page.Params.section_label | default (humanize $page.Section) -}}
 {{- $summary := "" -}}
 {{- $metaParts := slice -}}
+{{- $linkedCartoon := partial "editorial/cartoon-for-page.html" $page -}}
 {{- if $showSummary -}}
   {{- $summary = partial "discovery/page-summary.html" $page -}}
 {{- end -}}
@@ -55,19 +56,24 @@
       {{- end -}}
     </div>
   {{- end }}
-  <div class="t"><a href="{{ $page.RelPermalink }}"
-    {{- if $analyticsSourceSlot }}
-      data-analytics-event="{{ $analyticsEvent }}"
-      data-analytics-source-slot="{{ $analyticsSourceSlot }}"
-      data-analytics-slug="{{ $slug }}"
-      data-analytics-title="{{ $page.Title }}"
-      data-analytics-section="{{ $sectionLabel }}"
-      data-analytics-path="{{ $page.RelPermalink }}"
-      {{- with $analyticsCollection }}
-        data-analytics-collection="{{ . }}"
+  <div class="item__title-row">
+    <div class="t"><a href="{{ $page.RelPermalink }}"
+      {{- if $analyticsSourceSlot }}
+        data-analytics-event="{{ $analyticsEvent }}"
+        data-analytics-source-slot="{{ $analyticsSourceSlot }}"
+        data-analytics-slug="{{ $slug }}"
+        data-analytics-title="{{ $page.Title }}"
+        data-analytics-section="{{ $sectionLabel }}"
+        data-analytics-path="{{ $page.RelPermalink }}"
+        {{- with $analyticsCollection }}
+          data-analytics-collection="{{ . }}"
+        {{- end }}
       {{- end }}
+    >{{ $page.Title }}</a></div>
+    {{- with $linkedCartoon }}
+      {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $page "cartoon" .) -}}
     {{- end }}
-  >{{ $page.Title }}</a></div>
+  </div>
   {{- if gt (len $metaParts) 0 }}<div class="m">{{ delimit $metaParts " | " }}</div>{{ end }}
   {{- if and (gt (len $collections) 0) (ne $collectionPlacement "kicker") }}
     <div class="d">

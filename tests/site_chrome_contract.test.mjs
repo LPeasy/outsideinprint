@@ -24,6 +24,9 @@ const randomTemplate = fs.readFileSync(path.resolve("layouts/random/single.html"
 const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
 const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
+const cartoonLookupPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-for-page.html"), "utf8");
+const cartoonLinkPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-gallery-link.html"), "utf8");
+const pageListItem = fs.readFileSync(path.resolve("layouts/partials/discovery/page-list-item.html"), "utf8");
 const currentCartoonSlug = readCurrentCartoonSlug(cartoonData);
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
@@ -104,6 +107,8 @@ test("homepage composition inserts the manifesto between the hero and Start Read
   assert.match(homeFrontPage, /data-home-cartoon-lightbox-trigger/);
   assert.match(homeFrontPage, /data-home-cartoon-lightbox/);
   assert.match(homeFrontPage, /data-home-cartoon-lightbox-essay/);
+  assert.match(homeFrontPage, /editorial\/cartoon-for-page\.html/);
+  assert.match(homeFrontPage, /editorial\/cartoon-gallery-link\.html/);
   assert.match(homeFrontPage, /imageButton\.addEventListener\("click", closeLightbox\)/);
   assert.doesNotMatch(homeFrontPage, /window\.location\.href/);
   assert.doesNotMatch(homeFrontPage, /cartoon-think-outside-the-box\.png/);
@@ -151,8 +156,15 @@ test("homepage composition inserts the manifesto between the hero and Start Read
   assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
   assert.match(galleryTemplate, /cartoon-gallery__grid/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
+  assert.match(galleryTemplate, /data-cartoon-slug/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-essay/);
   assert.match(galleryTemplate, /window\.location\.href = activeEssay/);
+  assert.match(galleryTemplate, /getRequestedCartoonSlug/);
+  assert.match(galleryTemplate, /openLightbox\(requestedTrigger\)/);
+  assert.match(cartoonLookupPartial, /site\.Data\.editorial_cartoons/);
+  assert.match(cartoonLinkPartial, /gallery\/\?cartoon=%s/);
+  assert.match(cartoonLinkPartial, /essay-cartoon-thumb/);
+  assert.match(pageListItem, /editorial\/cartoon-gallery-link\.html/);
   assert.match(cartoonData, /slug: think-outside-the-box/);
   assert.match(cartoonData, /essay: "\/essays\/the-warning-label-in-the-weeds\/"/);
   const thinkOutsideEntry = cartoonData.match(/  - slug: think-outside-the-box[\s\S]*?(?=\n  - slug:|\n?$)/)?.[0] || "";
@@ -175,6 +187,8 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-front-page__stories\{\s*display:grid;\s*grid-template-columns:minmax\(0, 1\.65fr\) minmax\(0, 1fr\);/);
   assert.match(css, /\.home-front-page__lead\{[\s\S]*border-right:1px solid rgba\(236,231,223,.1\);/);
+  assert.match(css, /\.essay-cartoon-thumb img\{[\s\S]*aspect-ratio:16 \/ 9;/);
+  assert.match(css, /\.home-front-page__secondary-title-row\{[\s\S]*justify-content:space-between;/);
   assert.match(css, /\.cartoon-gallery-spotlight\{[\s\S]*grid-template-columns:minmax\(12rem, \.38fr\) minmax\(0, 1fr\);/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-manifesto__inner\{\s*grid-template-columns:1fr;/);
   assert.doesNotMatch(css, /\.entry-thread__archive\{/);

@@ -83,18 +83,24 @@
           {{ if and $showLatestSlot $latest }}
             {{ $latestSlug := $latest.Params.slug | default $latest.File.BaseFileName }}
             {{ $latestSectionLabel := $latest.Params.section_label | default (humanize $latest.Section) }}
+            {{ $latestCartoon := partial "editorial/cartoon-for-page.html" $latest }}
             <article class="home-front-page__secondary-item home-front-page__secondary-item--latest">
               <p class="list-title home-front-page__secondary-kicker">Latest Essay</p>
-              <h3 class="home-front-page__secondary-title">
-                <a href="{{ $latest.RelPermalink }}"
-                  data-analytics-event="internal_promo_click"
-                  data-analytics-source-slot="homepage_selected_latest"
-                  data-analytics-slug="{{ $latestSlug }}"
-                  data-analytics-title="{{ $latest.Title }}"
-                  data-analytics-section="{{ $latestSectionLabel }}"
-                  data-analytics-path="{{ $latest.RelPermalink }}"
-                >{{ $latest.Title }}</a>
-              </h3>
+              <div class="home-front-page__secondary-title-row">
+                <h3 class="home-front-page__secondary-title">
+                  <a href="{{ $latest.RelPermalink }}"
+                    data-analytics-event="internal_promo_click"
+                    data-analytics-source-slot="homepage_selected_latest"
+                    data-analytics-slug="{{ $latestSlug }}"
+                    data-analytics-title="{{ $latest.Title }}"
+                    data-analytics-section="{{ $latestSectionLabel }}"
+                    data-analytics-path="{{ $latest.RelPermalink }}"
+                  >{{ $latest.Title }}</a>
+                </h3>
+                {{- with $latestCartoon }}
+                  {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $latest "cartoon" . "class" "essay-cartoon-thumb--home") -}}
+                {{- end }}
+              </div>
               {{ with (partial "discovery/page-summary.html" $latest) }}
                 <div class="d home-front-page__secondary-dek">{{ . }}</div>
               {{ end }}
@@ -107,20 +113,27 @@
             </article>
           {{ end }}
           {{ range $secondary }}
+            {{ $secondaryPage := . }}
             {{ $slug := .Params.slug | default .File.BaseFileName }}
             {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+            {{ $linkedCartoon := partial "editorial/cartoon-for-page.html" . }}
             <article class="home-front-page__secondary-item">
               <p class="list-title home-front-page__secondary-kicker">{{ $sectionLabel }}</p>
-              <h3 class="home-front-page__secondary-title">
-                <a href="{{ .RelPermalink }}"
-                  data-analytics-event="internal_promo_click"
-                  data-analytics-source-slot="homepage_selected_core"
-                  data-analytics-slug="{{ $slug }}"
-                  data-analytics-title="{{ .Title }}"
-                  data-analytics-section="{{ $sectionLabel }}"
-                  data-analytics-path="{{ .RelPermalink }}"
-                >{{ .Title }}</a>
-              </h3>
+              <div class="home-front-page__secondary-title-row">
+                <h3 class="home-front-page__secondary-title">
+                  <a href="{{ .RelPermalink }}"
+                    data-analytics-event="internal_promo_click"
+                    data-analytics-source-slot="homepage_selected_core"
+                    data-analytics-slug="{{ $slug }}"
+                    data-analytics-title="{{ .Title }}"
+                    data-analytics-section="{{ $sectionLabel }}"
+                    data-analytics-path="{{ .RelPermalink }}"
+                  >{{ .Title }}</a>
+                </h3>
+                {{- if $linkedCartoon }}
+                  {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $secondaryPage "cartoon" $linkedCartoon "class" "essay-cartoon-thumb--home") -}}
+                {{- end }}
+              </div>
               {{ with (partial "discovery/page-summary.html" .) }}
                 <div class="d home-front-page__secondary-dek">{{ . }}</div>
               {{ end }}

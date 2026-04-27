@@ -1,0 +1,9 @@
+{{- $page := .page -}}
+{{- $cartoon := .cartoon -}}
+{{- $class := .class | default "" -}}
+{{- with $cartoon -}}
+  <a class="essay-cartoon-thumb{{ with $class }} {{ . }}{{ end }}" href="{{ (printf "gallery/?cartoon=%s" .slug) | absURL }}" aria-label="Open the cartoon for {{ $page.Title }} in the gallery">
+    <img src="{{ .image | relURL }}" alt="" width="{{ .width }}" height="{{ .height }}" loading="lazy">
+    <span>Cartoon</span>
+  </a>
+{{- end -}}

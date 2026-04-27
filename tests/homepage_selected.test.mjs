@@ -112,6 +112,9 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   const currentCartoon = readCurrentCartoonRecord(cartoonData);
   const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
   const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
+  const cartoonLookupPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-for-page.html"), "utf8");
+  const cartoonLinkPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-gallery-link.html"), "utf8");
+  const pageListItem = fs.readFileSync(path.resolve("layouts/partials/discovery/page-list-item.html"), "utf8");
 
   assert.match(source, /partial "archive\/longform-kind\.html"/);
   assert.match(source, /Homepage selection stays essay-only by design/);
@@ -143,6 +146,8 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(frontPageSource, /data-home-cartoon-lightbox-image-button/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
   assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.match(frontPageSource, /editorial\/cartoon-for-page\.html/);
+  assert.match(frontPageSource, /editorial\/cartoon-gallery-link\.html/);
   assert.doesNotMatch(frontPageSource, /window\.location\.href/);
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
@@ -175,8 +180,19 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
   assert.match(galleryTemplate, /cartoon-gallery__grid/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
+  assert.match(galleryTemplate, /data-cartoon-slug/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-image-button/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-essay/);
+  assert.match(galleryTemplate, /getRequestedCartoonSlug/);
+  assert.match(galleryTemplate, /URLSearchParams\(window\.location\.search/);
+  assert.match(galleryTemplate, /openLightbox\(requestedTrigger\)/);
+  assert.match(cartoonLookupPartial, /site\.Data\.editorial_cartoons/);
+  assert.match(cartoonLookupPartial, /\.essay/);
+  assert.match(cartoonLinkPartial, /gallery\/\?cartoon=%s/);
+  assert.match(cartoonLinkPartial, /essay-cartoon-thumb/);
+  assert.match(cartoonLinkPartial, /<img/);
+  assert.match(pageListItem, /editorial\/cartoon-for-page\.html/);
+  assert.match(pageListItem, /editorial\/cartoon-gallery-link\.html/);
   assert.match(cartoonData, /essay: "\/essays\/the-warning-label-in-the-weeds\/"/);
   const thinkOutsideEntry = cartoonData.match(/  - slug: think-outside-the-box[\s\S]*?(?=\n  - slug:|\n?$)/)?.[0] || "";
   assert.doesNotMatch(thinkOutsideEntry, /essay:/);
@@ -246,6 +262,8 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.match(frontPageSource, /View gallery/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
+  assert.match(frontPageSource, /essay-cartoon-thumb--home/);
+  assert.match(frontPageSource, /editorial\/cartoon-gallery-link\.html/);
   assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
   assert.doesNotMatch(frontPageSource, /window\.location\.href/);
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);

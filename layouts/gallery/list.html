@@ -29,6 +29,7 @@
               type="button"
               class="cartoon-gallery__trigger"
               data-cartoon-lightbox-trigger
+              data-cartoon-slug="{{ .slug }}"
               data-title="{{ .title }}"
               data-date="{{ .date }}"
               data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
@@ -63,6 +64,7 @@
                 type="button"
                 class="cartoon-gallery__trigger"
                 data-cartoon-lightbox-trigger
+                data-cartoon-slug="{{ .slug }}"
                 data-title="{{ .title }}"
                 data-date="{{ .date }}"
                 data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
@@ -145,6 +147,20 @@
       var triggers = Array.prototype.slice.call(document.querySelectorAll("[data-cartoon-lightbox-trigger]"));
       var activeTrigger = null;
       var activeEssay = "";
+
+      function getRequestedCartoonSlug() {
+        var params;
+        var hash;
+
+        try {
+          params = new URLSearchParams(window.location.search || "");
+          if (params.get("cartoon")) return params.get("cartoon");
+        } catch (error) {}
+
+        hash = (window.location.hash || "").replace(/^#/, "");
+        if (hash.indexOf("cartoon-") === 0) return hash.replace(/^cartoon-/, "");
+        return "";
+      }
 
       function focusableElements() {
         return Array.prototype.slice.call(lightbox.querySelectorAll("button:not([disabled]), a[href]")).filter(function (element) {
@@ -245,6 +261,17 @@
           first.focus();
         }
       });
+
+      var requestedSlug = getRequestedCartoonSlug();
+      if (requestedSlug) {
+        var requestedTrigger = triggers.find(function (trigger) {
+          return trigger.getAttribute("data-cartoon-slug") === requestedSlug;
+        });
+
+        if (requestedTrigger) {
+          openLightbox(requestedTrigger);
+        }
+      }
     })();
   </script>
 {{ end }}
