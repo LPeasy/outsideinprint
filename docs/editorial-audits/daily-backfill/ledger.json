@@ -88,6 +88,46 @@
       "updated_on": "2026-04-26",
       "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
       "deployed_on": "2026-04-26"
+    },
+    "labor-force-participation-trends-in-modern-american-society": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27"
+    },
+    "cpi-report-economic-analysis": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27"
+    },
+    "natural-asset-companies": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27"
+    },
+    "household-and-individual-wealth-in-america": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27"
+    },
+    "etfs-and-market-concentration": {
+      "status": "pending_deploy",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27"
     }
   },
   "blocked": {},
@@ -105,6 +145,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
       "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
       "deployed_on": "2026-04-26"
+    },
+    {
+      "batch_id": "2026-04-27",
+      "selected_slugs": [
+        "labor-force-participation-trends-in-modern-american-society",
+        "cpi-report-economic-analysis",
+        "natural-asset-companies",
+        "household-and-individual-wealth-in-america",
+        "etfs-and-market-concentration"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md"
     }
   ]
 }
