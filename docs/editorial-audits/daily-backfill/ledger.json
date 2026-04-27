@@ -1,162 +1,176 @@
 {
-  "campaign": "oip-daily-back-archive-revision",
-  "started_on": "2026-04-26",
-  "selection_policy": "oldest_unprocessed_published_essays_by_live_archive_order_reversed",
-  "batch_size": 5,
-  "already_completed_seed": {
-    "commit": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-    "slugs": [
-      "the-blockade-has-a-phone-number",
-      "the-fed-chair-is-not-a-button",
-      "the-gold-card-and-the-price-of-belonging",
-      "the-ai-data-center-wants-its-own-power-plant",
-      "the-sewer-under-the-sidewalk"
-    ]
-  },
-  "completed": {
-    "the-blockade-has-a-phone-number": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
-    },
-    "the-fed-chair-is-not-a-button": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
-    },
-    "the-gold-card-and-the-price-of-belonging": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
-    },
-    "the-ai-data-center-wants-its-own-power-plant": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
-    },
-    "the-sewer-under-the-sidewalk": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
-    },
-    "the-structure-of-modern-american-society": {
-      "status": "deployed",
-      "batch_id": "2026-04-26",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-26",
-      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-      "deployed_on": "2026-04-26"
-    },
-    "rational-ignorance-in-the-u-s-presidential-electorate": {
-      "status": "deployed",
-      "batch_id": "2026-04-26",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-26",
-      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-      "deployed_on": "2026-04-26"
-    },
-    "presidential-elections": {
-      "status": "deployed",
-      "batch_id": "2026-04-26",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-26",
-      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-      "deployed_on": "2026-04-26"
-    },
-    "federalism-in-modern-american-society": {
-      "status": "deployed",
-      "batch_id": "2026-04-26",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-26",
-      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-      "deployed_on": "2026-04-26"
-    },
-    "american-household-debt": {
-      "status": "deployed",
-      "batch_id": "2026-04-26",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-26",
-      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-      "deployed_on": "2026-04-26"
-    },
-    "labor-force-participation-trends-in-modern-american-society": {
-      "status": "pending_deploy",
-      "batch_id": "2026-04-27",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-27"
-    },
-    "cpi-report-economic-analysis": {
-      "status": "pending_deploy",
-      "batch_id": "2026-04-27",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-27"
-    },
-    "natural-asset-companies": {
-      "status": "pending_deploy",
-      "batch_id": "2026-04-27",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-27"
-    },
-    "household-and-individual-wealth-in-america": {
-      "status": "pending_deploy",
-      "batch_id": "2026-04-27",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-27"
-    },
-    "etfs-and-market-concentration": {
-      "status": "pending_deploy",
-      "batch_id": "2026-04-27",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-      "previous_version": "1.0",
-      "new_version": "1.1",
-      "updated_on": "2026-04-27"
-    }
-  },
-  "blocked": {},
-  "runs": [
-    {
-      "batch_id": "2026-04-26",
-      "selected_slugs": [
-        "the-structure-of-modern-american-society",
-        "rational-ignorance-in-the-u-s-presidential-electorate",
-        "presidential-elections",
-        "federalism-in-modern-american-society",
-        "american-household-debt"
-      ],
-      "status": "deployed",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-      "deployed_on": "2026-04-26"
-    },
-    {
-      "batch_id": "2026-04-27",
-      "selected_slugs": [
-        "labor-force-participation-trends-in-modern-american-society",
-        "cpi-report-economic-analysis",
-        "natural-asset-companies",
-        "household-and-individual-wealth-in-america",
-        "etfs-and-market-concentration"
-      ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md"
-    }
-  ]
+    "campaign":  "oip-daily-back-archive-revision",
+    "started_on":  "2026-04-26",
+    "selection_policy":  "oldest_unprocessed_published_essays_by_live_archive_order_reversed",
+    "batch_size":  5,
+    "already_completed_seed":  {
+                                   "commit":  "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+                                   "slugs":  [
+                                                 "the-blockade-has-a-phone-number",
+                                                 "the-fed-chair-is-not-a-button",
+                                                 "the-gold-card-and-the-price-of-belonging",
+                                                 "the-ai-data-center-wants-its-own-power-plant",
+                                                 "the-sewer-under-the-sidewalk"
+                                             ]
+                               },
+    "completed":  {
+                      "the-blockade-has-a-phone-number":  {
+                                                              "status":  "deployed",
+                                                              "commit_sha":  "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+                                                              "seeded":  true
+                                                          },
+                      "the-fed-chair-is-not-a-button":  {
+                                                            "status":  "deployed",
+                                                            "commit_sha":  "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+                                                            "seeded":  true
+                                                        },
+                      "the-gold-card-and-the-price-of-belonging":  {
+                                                                       "status":  "deployed",
+                                                                       "commit_sha":  "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+                                                                       "seeded":  true
+                                                                   },
+                      "the-ai-data-center-wants-its-own-power-plant":  {
+                                                                           "status":  "deployed",
+                                                                           "commit_sha":  "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+                                                                           "seeded":  true
+                                                                       },
+                      "the-sewer-under-the-sidewalk":  {
+                                                           "status":  "deployed",
+                                                           "commit_sha":  "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+                                                           "seeded":  true
+                                                       },
+                      "the-structure-of-modern-american-society":  {
+                                                                       "status":  "deployed",
+                                                                       "batch_id":  "2026-04-26",
+                                                                       "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+                                                                       "previous_version":  "1.0",
+                                                                       "new_version":  "1.1",
+                                                                       "updated_on":  "2026-04-26",
+                                                                       "commit_sha":  "b620ff95d079fe590755a85e2d3d3ca42823512b",
+                                                                       "deployed_on":  "2026-04-26"
+                                                                   },
+                      "rational-ignorance-in-the-u-s-presidential-electorate":  {
+                                                                                    "status":  "deployed",
+                                                                                    "batch_id":  "2026-04-26",
+                                                                                    "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+                                                                                    "previous_version":  "1.0",
+                                                                                    "new_version":  "1.1",
+                                                                                    "updated_on":  "2026-04-26",
+                                                                                    "commit_sha":  "b620ff95d079fe590755a85e2d3d3ca42823512b",
+                                                                                    "deployed_on":  "2026-04-26"
+                                                                                },
+                      "presidential-elections":  {
+                                                     "status":  "deployed",
+                                                     "batch_id":  "2026-04-26",
+                                                     "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+                                                     "previous_version":  "1.0",
+                                                     "new_version":  "1.1",
+                                                     "updated_on":  "2026-04-26",
+                                                     "commit_sha":  "b620ff95d079fe590755a85e2d3d3ca42823512b",
+                                                     "deployed_on":  "2026-04-26"
+                                                 },
+                      "federalism-in-modern-american-society":  {
+                                                                    "status":  "deployed",
+                                                                    "batch_id":  "2026-04-26",
+                                                                    "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+                                                                    "previous_version":  "1.0",
+                                                                    "new_version":  "1.1",
+                                                                    "updated_on":  "2026-04-26",
+                                                                    "commit_sha":  "b620ff95d079fe590755a85e2d3d3ca42823512b",
+                                                                    "deployed_on":  "2026-04-26"
+                                                                },
+                      "american-household-debt":  {
+                                                      "status":  "deployed",
+                                                      "batch_id":  "2026-04-26",
+                                                      "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+                                                      "previous_version":  "1.0",
+                                                      "new_version":  "1.1",
+                                                      "updated_on":  "2026-04-26",
+                                                      "commit_sha":  "b620ff95d079fe590755a85e2d3d3ca42823512b",
+                                                      "deployed_on":  "2026-04-26"
+                                                  },
+                      "labor-force-participation-trends-in-modern-american-society":  {
+                                                                                          "status":  "deployed",
+                                                                                          "batch_id":  "2026-04-27",
+                                                                                          "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+                                                                                          "previous_version":  "1.0",
+                                                                                          "new_version":  "1.1",
+                                                                                          "updated_on":  "2026-04-27",
+                                                                                          "commit_sha":  "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+                                                                                          "deployed_on":  "2026-04-27"
+                                                                                      },
+                      "cpi-report-economic-analysis":  {
+                                                           "status":  "deployed",
+                                                           "batch_id":  "2026-04-27",
+                                                           "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+                                                           "previous_version":  "1.0",
+                                                           "new_version":  "1.1",
+                                                           "updated_on":  "2026-04-27",
+                                                           "commit_sha":  "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+                                                           "deployed_on":  "2026-04-27"
+                                                       },
+                      "natural-asset-companies":  {
+                                                      "status":  "deployed",
+                                                      "batch_id":  "2026-04-27",
+                                                      "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+                                                      "previous_version":  "1.0",
+                                                      "new_version":  "1.1",
+                                                      "updated_on":  "2026-04-27",
+                                                      "commit_sha":  "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+                                                      "deployed_on":  "2026-04-27"
+                                                  },
+                      "household-and-individual-wealth-in-america":  {
+                                                                         "status":  "deployed",
+                                                                         "batch_id":  "2026-04-27",
+                                                                         "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+                                                                         "previous_version":  "1.0",
+                                                                         "new_version":  "1.1",
+                                                                         "updated_on":  "2026-04-27",
+                                                                         "commit_sha":  "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+                                                                         "deployed_on":  "2026-04-27"
+                                                                     },
+                      "etfs-and-market-concentration":  {
+                                                            "status":  "deployed",
+                                                            "batch_id":  "2026-04-27",
+                                                            "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+                                                            "previous_version":  "1.0",
+                                                            "new_version":  "1.1",
+                                                            "updated_on":  "2026-04-27",
+                                                            "commit_sha":  "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+                                                            "deployed_on":  "2026-04-27"
+                                                        }
+                  },
+    "blocked":  {
+
+                },
+    "runs":  [
+                 {
+                     "batch_id":  "2026-04-26",
+                     "selected_slugs":  [
+                                            "the-structure-of-modern-american-society",
+                                            "rational-ignorance-in-the-u-s-presidential-electorate",
+                                            "presidential-elections",
+                                            "federalism-in-modern-american-society",
+                                            "american-household-debt"
+                                        ],
+                     "status":  "deployed",
+                     "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+                     "commit_sha":  "b620ff95d079fe590755a85e2d3d3ca42823512b",
+                     "deployed_on":  "2026-04-26"
+                 },
+                 {
+                     "batch_id":  "2026-04-27",
+                     "selected_slugs":  [
+                                            "labor-force-participation-trends-in-modern-american-society",
+                                            "cpi-report-economic-analysis",
+                                            "natural-asset-companies",
+                                            "household-and-individual-wealth-in-america",
+                                            "etfs-and-market-concentration"
+                                        ],
+                     "status":  "deployed",
+                     "report":  "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+                     "commit_sha":  "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+                     "deployed_on":  "2026-04-27"
+                 }
+             ]
 }
