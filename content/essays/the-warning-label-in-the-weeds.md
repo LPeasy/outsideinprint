@@ -6,8 +6,12 @@ slug: "the-warning-label-in-the-weeds"
 section_label: "Essay"
 subtitle: "A Supreme Court fight over Roundup asks who gets to decide when a risk becomes visible on the bottle."
 description: "The Supreme Court's Roundup case turns a weedkiller label into a test of federal power, state lawsuits, farming, and public trust."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-04-27"
+    note: "Updated April 27, 2026, to tighten wording in the Roundup label discussion."
 featured: false
 collections:
   - "risk-uncertainty"
@@ -42,7 +46,7 @@ Bayer, which bought Monsanto in 2018, is trying to use the Supreme Court case to
 
 Durnell's personal claim has become a national test because the lawsuit is built around a label. He argues that the product should have warned users about cancer risk. Monsanto answers that EPA repeatedly approved glyphosate labels without that warning, and federal law should block state-law claims seeking a different result.
 
-That is why the object matters. The case does not ask the Court to decide the entire science of glyphosate. It asks who can force a risk onto the label.
+That is why the object matters. Durnell's claim puts a concrete mechanism before the justices: EPA allowed Roundup's label to stay silent about cancer risk, and a Missouri jury said Monsanto should have warned users anyway.
 
 ## The Law on the Label
 
