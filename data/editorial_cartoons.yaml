@@ -1,4 +1,4 @@
-current: strait-to-voicemail
+current: certified-safe
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -55,5 +55,12 @@ cartoons:
     date: "2026-04-26"
     image: "/images/editorial/strait-to-voicemail.png"
     alt: "Editorial cartoon showing a phone reading TEHRAN - SENT TO VOICEMAIL beside sanctions papers, a locked blockade over the Strait of Hormuz, tankers, and a public-costs chart for oil, jet fuel, and shipping."
+    width: 1672
+    height: 941
+  - slug: certified-safe
+    title: "Certified safe?"
+    date: "2026-04-27"
+    image: "/images/editorial/certified-safe.png"
+    alt: "Editorial cartoon showing an EPA approval stamp landing on FIFRA paperwork for weedkiller while a magnifying glass exposes a warning label, with cancer claims, misbranding, farm use, and a state jury gathered around the scene."
     width: 1672
     height: 941
