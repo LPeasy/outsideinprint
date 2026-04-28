@@ -1,4 +1,4 @@
-current: certified-safe
+current: cloched-for-business
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -70,5 +70,13 @@ cartoons:
     image: "/images/editorial/certified-safe.png"
     essay: "/essays/the-warning-label-in-the-weeds/"
     alt: "Editorial cartoon showing an EPA approval stamp landing on FIFRA paperwork for weedkiller while a magnifying glass exposes a warning label, with cancer claims, misbranding, farm use, and a state jury gathered around the scene."
+    width: 1672
+    height: 941
+  - slug: cloched-for-business
+    title: "Cloched for Business"
+    date: "2026-04-28"
+    image: "/images/editorial/cloched-for-business.png"
+    essay: "/essays/the-model-that-could-not-leave/"
+    alt: "Editorial cartoon showing a small plant sealed under a cracked glass cloche, with dark crosshatching around it and red fractures running down into the roots."
     width: 1672
     height: 941
