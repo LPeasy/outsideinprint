@@ -13,6 +13,20 @@ function readCurrentCartoonSlug(source) {
   return currentMatch[1].trim();
 }
 
+function classTokensForElement(source, elementPattern, label) {
+  const elementMatch = source.match(elementPattern);
+  assert.ok(elementMatch, `expected ${label} element`);
+  const classMatch = elementMatch[0].match(/\bclass="([^"]+)"/);
+  assert.ok(classMatch, `expected ${label} element to have a class attribute`);
+  return new Set(classMatch[1].trim().split(/\s+/));
+}
+
+function cssRule(source, selector) {
+  const ruleMatch = source.match(new RegExp(`(?:^|\\n)${escapeRegex(selector)}\\s*\\{[\\s\\S]*?\\n\\}`));
+  assert.ok(ruleMatch, `expected CSS rule for ${selector}`);
+  return ruleMatch[0];
+}
+
 const masthead = fs.readFileSync(path.resolve("layouts/partials/masthead.html"), "utf8");
 const homepage = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
@@ -88,7 +102,10 @@ test("footer and random route now point readers home instead of Welcome", () => 
 test("homepage browse band stays curated and replaces Welcome with Library", () => {
   assert.doesNotMatch(homepage, /<div class="k">(Start|Section|Index|Explore)<\/div>/);
   assert.doesNotMatch(homepage, /card-center/);
-  assert.match(homepage, /class="home-browse home-browse--utility home-browse--home-curated/);
+  const homeBrowseClasses = classTokensForElement(homepage, /<section\b[^>]*aria-labelledby="home-browse-title"[^>]*>/, "homepage browse");
+  for (const token of ["home-browse", "home-browse--utility", "home-browse--home-curated", "page-shell", "page-shell--wide"]) {
+    assert.ok(homeBrowseClasses.has(token), `expected homepage browse class token: ${token}`);
+  }
   assert.match(homepage, /"page" \(site\.GetPage "\/library"\) "label" "Library"/);
   assert.match(homepage, /"page" \(site\.GetPage "\/gallery"\) "label" "Gallery"/);
   assert.doesNotMatch(homepage, /"label" "Welcome"/);
@@ -192,7 +209,11 @@ test("homepage composition inserts the manifesto between the hero and Start Read
 
 test("homepage editorial layout uses the new manifesto namespace and drops dead start-here hooks", () => {
   assert.match(css, /:root\{[\s\S]*--bg-page:#121212;[\s\S]*--font-display:"Source Serif 4", Georgia, serif;[\s\S]*--measure-reading:68ch;/);
-  assert.doesNotMatch(css, /repeating-linear-gradient/);
+  assert.match(css, /#main-content\{\s*scroll-margin-top:56px;\s*\}/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?#main-content\{\s*scroll-margin-top:0;\s*\}/);
+  for (const selector of ["body", ".home-manifesto", ".home-manifesto__inner"]) {
+    assert.doesNotMatch(cssRule(css, selector), /repeating-linear-gradient/);
+  }
   assert.match(css, /\.home-manifesto\{\s*margin-top:2\.35rem;\s*\}/);
   assert.match(css, /\.home-manifesto__inner\{[\s\S]*grid-template-columns:minmax\(110px, 136px\) minmax\(0, 1fr\);[\s\S]*border-top:1px solid rgba\(236,231,223,.12\);/);
   assert.match(css, /\.home-manifesto__copy\{[\s\S]*display:grid;[\s\S]*max-width:46rem;/);
