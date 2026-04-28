@@ -9,6 +9,12 @@
     {{ end }}
   {{ end }}
   {{ $orderedCartoons := sort $cartoons "date" "desc" }}
+  {{ $archiveCartoons := slice }}
+  {{ range $orderedCartoons }}
+    {{ if ne .slug $currentSlug }}
+      {{ $archiveCartoons = $archiveCartoons | append . }}
+    {{ end }}
+  {{ end }}
 
   <div class="section-front section-front--gallery">
     <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
@@ -55,10 +61,10 @@
 
   <section class="cartoon-gallery page-shell page-shell--wide" aria-labelledby="cartoon-gallery-title">
     <h2 id="cartoon-gallery-title" class="list-title">Archive</h2>
-    {{ if gt (len $orderedCartoons) 0 }}
+    {{ if gt (len $archiveCartoons) 0 }}
       <div class="cartoon-gallery__grid">
-        {{ range $orderedCartoons }}
-          <article class="cartoon-gallery__item{{ if eq .slug $currentSlug }} cartoon-gallery__item--current{{ end }}">
+        {{ range $archiveCartoons }}
+          <article class="cartoon-gallery__item">
             <figure>
               <button
                 type="button"

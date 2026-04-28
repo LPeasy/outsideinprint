@@ -181,6 +181,11 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(galleryContent, /title: "Gallery"/);
   assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
   assert.match(galleryTemplate, /cartoon-gallery__grid/);
+  assert.match(galleryTemplate, /\$archiveCartoons := slice/);
+  assert.match(galleryTemplate, /if ne \.slug \$currentSlug/);
+  assert.match(galleryTemplate, /\$archiveCartoons = \$archiveCartoons \| append \./);
+  assert.match(galleryTemplate, /range \$archiveCartoons/);
+  assert.doesNotMatch(galleryTemplate, /cartoon-gallery__item--current/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
   assert.match(galleryTemplate, /data-cartoon-slug/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-image-button/);
