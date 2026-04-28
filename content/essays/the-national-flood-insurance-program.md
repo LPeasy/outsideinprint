@@ -9,8 +9,12 @@ featured_image: "/images/medium/the-national-flood-insurance-program/a17c72f621f
 featured_image_caption: "Source: Peter G. Peterson Foundation"
 featured_image_alt: "The National Flood Insurance Program"
 description: "A Precarious Future Amid Rising Costs. Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the..."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-04-28"
+    note: "Updated April 28, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
 pdf: "/pdfs/the-national-flood-insurance-program.pdf"
 featured: false
 
@@ -19,7 +23,7 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/the-national-flood-insurance-program-b400678e86c2"
 ---
 
-A Precarious Future Amid Rising Costs
+## A Precarious Future Amid Rising Costs
 
 Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the very program designed to insure against this risk -- the National Flood Insurance Program (NFIP) -- is $20 billion in debt and struggling to survive (FEMA, 2024). Created in 1968 to provide affordable flood insurance for property owners in flood-prone areas, the NFIP has become financially unsustainable, burdened by mounting debt, outdated risk assessments, and escalating claims fueled by climate change.
 
@@ -35,7 +39,7 @@ The NFIP currently insures 4.7 million properties, with the average insured home
 
 Outdated FEMA flood maps, which determine premiums and risk zones, are a major culprit. These inaccuracies result in underpriced policies that leave the NFIP chronically underfunded. Subsidized premiums for high-risk properties further exacerbate this funding gap, perpetuating the program's reliance on taxpayer bailouts.
 
-![](https://cdn-images-1.medium.com/max/800/1*5Y3ytOaABnz16lwshw7uyw@2x.jpeg)
+![](/images/medium/the-national-flood-insurance-program/25e17e40f081ee4becda9817ad98b4bdaeea5632c7d1ca7e560e9ac416c0b676.jpeg)
 
 Source: Peter G. Peterson Foundation
 
@@ -57,7 +61,7 @@ In flood-prone areas like coastal Louisiana or the suburbs of Miami, families re
 
 ## Phasing Out the NFIP in High-Risk Areas
 
-![](https://cdn-images-1.medium.com/max/800/1*msraVbFsrVn7SwHqyUXm0A@2x.jpeg)
+![](/images/medium/the-national-flood-insurance-program/fe59616e5431e3d4e1e6da4b3580e28ed0ba0d1bc7fb872fb5cc82cdc518c9dd.jpeg)
 
 Source: Peter G. Peterson Foundation
 
