@@ -633,6 +633,7 @@ $requiredUxPages = @(
   'public/collections/index.html',
   'public/random/index.html',
   'public/collections/risk-uncertainty/index.html',
+  'public/essays/presidential-elections/index.html',
   'public/essays/the-risk-management-buffet/index.html'
 )
 
@@ -1383,8 +1384,37 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected article chrome to expose section, collections, and library next steps near the top of the page'
+    Pattern = '(?s)newsletter-signup--page.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Message = 'expected article pages to expose section, collections, and library next steps after the newsletter signup'
+  },
+  @{
+    Path = 'public/essays/presidential-elections/index.html'
+    Pattern = '(?s)newsletter-signup--page.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/essays/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Message = 'expected standalone article pages to expose section, collections, and library next steps after the newsletter signup'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)<header class="?piece-header"?[^>]*>.*?journey-links--article(?:\s|")'
+    Message = 'expected article headers not to emit the retired header-mounted Keep Reading block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/presidential-elections/index.html'
+    Pattern = '(?s)<header class="?piece-header"?[^>]*>.*?journey-links--article(?:\s|")'
+    Message = 'expected standalone article headers not to emit the retired header-mounted Keep Reading block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'read-next|read-next-title|>Read Next<|data-analytics-source-slot="?related_content"?'
+    Message = 'expected article pages not to emit retired Read Next markup'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/presidential-elections/index.html'
+    Pattern = 'read-next|read-next-title|>Read Next<|data-analytics-source-slot="?related_content"?'
+    Message = 'expected standalone article pages not to emit retired Read Next markup'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'

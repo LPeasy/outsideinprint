@@ -23,7 +23,8 @@ foreach ($requiredSnippet in @(
   'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',
   '$showCollectionContinuation := false',
   'partial "collections/reading-path.html" .',
-  'partial "read_next.html" .',
+  'partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page" "sourceSlot" "page_newsletter")',
+  '"class" "journey-links--article-exit"',
   'partial "collections/reading-progress-script.html" .'
 )) {
   if ($articleSingle -notmatch [regex]::Escape($requiredSnippet)) {
@@ -35,8 +36,22 @@ if ($articleSingle -match [regex]::Escape('partial "collections/page-membership-
   throw 'Did not expect layouts/_default/single.html to mount the standalone collection membership block.'
 }
 
+if ($articleSingle -match [regex]::Escape('partial "read_next.html" .')) {
+  throw 'Did not expect layouts/_default/single.html to mount the retired Read Next partial.'
+}
+
+if ($articleSingle -match [regex]::Escape('"class" "journey-links--article"')) {
+  throw 'Did not expect layouts/_default/single.html to keep the header-mounted article journey links.'
+}
+
 if ($articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.StringComparison]::Ordinal) -ge $articleSingle.IndexOf('partial "authors/card.html"', [System.StringComparison]::Ordinal)) {
   throw 'Expected layouts/_default/single.html to place the reading-path partial before the author card.'
+}
+
+$newsletterIndex = $articleSingle.IndexOf('partial "newsletter_signup.html"', [System.StringComparison]::Ordinal)
+$articleExitIndex = $articleSingle.IndexOf('"class" "journey-links--article-exit"', [System.StringComparison]::Ordinal)
+if ($newsletterIndex -lt 0 -or $articleExitIndex -lt 0 -or $newsletterIndex -ge $articleExitIndex) {
+  throw 'Expected layouts/_default/single.html to place newsletter signup before the article-exit Keep Reading links.'
 }
 
 $collectionSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw

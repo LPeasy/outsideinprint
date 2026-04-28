@@ -20,15 +20,19 @@ function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-test("article single includes the reading-path partial and shared progress script", () => {
+test("article single includes the reading-path partial, article-exit links, and shared progress script", () => {
   assert.match(articleSingle, /partial "collections\/resolve-page-collections\.html" \(dict "page" \. "publicOnly" true\)/);
   assert.match(articleSingle, /\$showCollectionContinuation := false/);
   assert.match(articleSingle, /partial "collections\/reading-path\.html" \./);
-  assert.match(articleSingle, /partial "read_next\.html" \./);
+  assert.match(articleSingle, /partial "newsletter_signup\.html" \(dict "page" \. "class" "newsletter-signup--page" "sourceSlot" "page_newsletter"\)/);
+  assert.match(articleSingle, /"class" "journey-links--article-exit"/);
+  assert.doesNotMatch(articleSingle, /partial "read_next\.html" \./);
+  assert.doesNotMatch(articleSingle, /"class" "journey-links--article"/);
   assert.match(articleSingle, /\{\{ if \$showCollectionContinuation \}\}/);
-  assert.match(articleSingle, /\{\{ if not \$showCollectionContinuation \}\}/);
+  assert.doesNotMatch(articleSingle, /\{\{ if not \$showCollectionContinuation \}\}/);
   assert.doesNotMatch(articleSingle, /partial "collections\/page-membership-block\.html" \./);
   assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('partial "authors/card.html"'));
+  assert.ok(articleSingle.indexOf('partial "newsletter_signup.html"') < articleSingle.indexOf('"class" "journey-links--article-exit"'));
   assert.match(articleSingle, /partial "collections\/reading-progress-script\.html" \./);
 });
 

@@ -68,7 +68,7 @@ Resolution rules:
 - `layouts/collections/list.html`: public collections index.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: article aftermatter, including the primary-collection article-exit continuation zone for collection-member pages and the fallback `Read Next` path for standalone pages.
+- `layouts/_default/single.html`: article aftermatter, including the primary-collection article-exit continuation zone for collection-member pages and the post-newsletter Keep Reading links.
 - `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
 - `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
 - `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
@@ -82,7 +82,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - A collection-member article renders exactly one article-exit continuation zone.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
 - The separate mounted collection-membership block is no longer part of the article-member flow.
-- Standalone articles keep the existing `Read Next` fallback.
+- Standalone articles use the same post-newsletter Keep Reading exit links as collection-member articles.
 - The continuation zone shows:
   - `Continue This Collection`
   - linked collection title

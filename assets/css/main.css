@@ -669,9 +669,19 @@ textarea{
   margin-left:auto;
   margin-right:auto;
 }
-.journey-links--article{
-  max-width:34rem;
-  margin:0 auto 1.45rem;
+.journey-links--article-exit{
+  max-width:42rem;
+  margin:0;
+  padding-top:1rem;
+  border-top:1px solid rgba(236,231,223,.08);
+}
+.journey-links--article-exit .journey-links__eyebrow{
+  margin-bottom:.55rem;
+  font-size:.66rem;
+  letter-spacing:.16em;
+}
+.journey-links--article-exit .journey-links__items{
+  gap:8px;
 }
 .random-route{
   max-width:var(--measure-reading);
@@ -1720,7 +1730,6 @@ h1,
 .collection-card .v,
 .collection-membership__title,
 .item .t,
-.read-next__item-title,
 .newsletter-signup__title,
 .author-note__title,
 .style-variant-literary-dossier .author-dossier__intro h1,
@@ -2425,67 +2434,6 @@ h2{ margin-top:34px; }
     padding-left:.85rem;
   }
 }
-.read-next{
-  margin-top:0;
-  padding-top:1rem;
-  border-top:1px solid rgba(236,231,223,.08);
-}
-.read-next__inner{
-  display:grid;
-  gap:.8rem;
-}
-.read-next__title{
-  margin:0;
-  color:var(--text-muted);
-  font-family:var(--font-ui);
-  font-size:0.72rem;
-  font-style:normal;
-  font-weight:600;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.read-next__items{
-  display:grid;
-  gap:.8rem;
-}
-.read-next__item{
-  margin:0;
-}
-.read-next__marker{
-  margin:0 0 .32rem;
-  color:var(--text-muted);
-  font-family:var(--font-ui);
-  font-size:.64rem;
-  font-weight:600;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.read-next__item-title{
-  margin:0;
-  font-size:1.02rem;
-  line-height:1.42;
-  font-weight:500;
-}
-.read-next__item-title a{
-  color:var(--text-primary);
-  text-decoration:none;
-  border-bottom:none;
-}
-.read-next__item-title a:hover{
-  color:var(--text-primary);
-  text-decoration:underline;
-  text-decoration-color:rgba(127,147,166,.45);
-}
-.read-next__meta{
-  margin:.22rem 0 0;
-  font-family:var(--font-ui);
-  font-size:0.68rem;
-  font-weight:500;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--text-muted);
-}
-
 .dashboard{
   display:grid;
   gap:1.4rem;
@@ -3591,14 +3539,8 @@ button.dashboard-chip{
   .piece-aftermatter > * + *{
     margin-top:1.7rem;
   }
-  .read-next{
-    padding-top:0.75rem;
-  }
-  .read-next__title{
-    font-size:0.72rem;
-  }
-  .read-next__item-title{
-    font-size:0.99rem;
+  .journey-links--article-exit{
+    padding-top:0.85rem;
   }
   .profile-stats{
     grid-template-columns:1fr;
@@ -3626,9 +3568,9 @@ button.dashboard-chip{
   .site-header,
   .site-footer,
   .newsletter-signup,
+  .journey-links--article-exit,
   .reading-path,
   .collection-progress,
-  .read-next,
   .collection-membership,
   .article-closing{
     display:none !important;
