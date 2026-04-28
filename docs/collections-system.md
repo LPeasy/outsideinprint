@@ -71,7 +71,7 @@ Resolution rules:
 - `layouts/collections/list.html`: unified public collections card directory grouped into `Series` and `Topics`, with plain-language framing for how to use the route.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: article header and aftermatter, including the primary-collection light-accent context, the article-exit continuation zone for collection-member pages, and the fallback `Read Next` path for standalone pages.
+- `layouts/_default/single.html`: article header and aftermatter, including the primary-collection light-accent context, the article-exit continuation zone for collection-member pages, and the shared after-newsletter `Keep reading` links for article exits.
 - `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
 - `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
 - `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
@@ -89,9 +89,9 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - The article light-accent layer uses `room_theme` only for restrained article chrome:
   - the header context block
   - the continuation module
-- The article body, hero, citation, author card, newsletter, and standalone `Read Next` styling remain neutral.
+- The article body, hero, citation, author card, newsletter, and after-newsletter `Keep reading` links remain neutral.
 - The separate mounted collection-membership block is no longer part of the article-member flow.
-- Standalone articles keep the existing `Read Next` fallback.
+- Standalone articles use the same after-newsletter `Keep reading` links as collection-member articles.
 - The continuation zone shows:
   - `Continue This Collection`
   - linked collection title
