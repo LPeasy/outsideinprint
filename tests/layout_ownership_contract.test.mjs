@@ -240,6 +240,9 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(articleSingle, /data-analytics-source-slot="article_collection_context"/);
   assert.match(articleSingle, /partial "authors\/byline\.html"/);
   assert.match(articleSingle, /partial "authors\/card\.html"/);
+  assert.match(articleSingle, /journey-links--article-exit/);
+  assert.doesNotMatch(articleSingle, /journey-links--article"/);
+  assert.doesNotMatch(articleSingle, /partial "read_next\.html"/);
   assert.match(articleSingle, /<div class="piece-body">/);
   assert.doesNotMatch(articleSingle, /single-page/);
   assert.doesNotMatch(articleSingle, /single-content/);
@@ -248,6 +251,8 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(css, /\.piece--collection-accent \.reading-path\{/);
   assert.match(css, /\.piece--collection-accent--ai-screen-glow-archive\{/);
   assert.match(css, /\.newsletter-signup--page\{\s*margin-top:0;\s*\}/);
+  assert.match(css, /\.journey-links--article-exit\{/);
+  assert.doesNotMatch(css, /\.read-next/);
   assert.match(css, /\.running-header\{/);
   assert.match(css, /\.running-header__inner\{/);
 });

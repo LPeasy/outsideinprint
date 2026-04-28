@@ -120,11 +120,6 @@
         </figure>
       {{ end }}
 
-      {{ partial "journey_links.html" (dict
-        "class" "journey-links--article"
-        "eyebrow" "Keep reading"
-        "links" $journeyLinks
-      ) }}
     </header>
 
     <div class="piece-body">
@@ -165,11 +160,12 @@
         </aside>
       {{ end }}
 
-      {{ if not $showCollectionContinuation }}
-        {{ partial "read_next.html" . }}
-      {{ end }}
-
       {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page" "sourceSlot" "page_newsletter") }}
+      {{ partial "journey_links.html" (dict
+        "class" "journey-links--article-exit"
+        "eyebrow" "Keep reading"
+        "links" $journeyLinks
+      ) }}
     </div>
   </article>
   {{ partial "collections/reading-progress-script.html" . }}
