@@ -140,44 +140,54 @@
             "deployed_on": "2026-04-27"
         },
         "the-national-flood-insurance-program": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-28",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-28"
+            "updated_on": "2026-04-28",
+            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+            "deployed_on": "2026-04-28"
         },
         "rethinking-coastal-retreat": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-28",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-28"
+            "updated_on": "2026-04-28",
+            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+            "deployed_on": "2026-04-28"
         },
         "literacy-in-the-united-states-and-the-world": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-28",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-28"
+            "updated_on": "2026-04-28",
+            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+            "deployed_on": "2026-04-28"
         },
         "generation-inflation": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-28",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-28"
+            "updated_on": "2026-04-28",
+            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+            "deployed_on": "2026-04-28"
         },
         "how-american-farm-labor-is-set-to-evolve": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-28",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-28"
+            "updated_on": "2026-04-28",
+            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+            "deployed_on": "2026-04-28"
         }
     },
     "blocked": {},
@@ -219,8 +229,10 @@
                 "generation-inflation",
                 "how-american-farm-labor-is-set-to-evolve"
             ],
-            "status": "pending_deploy",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md"
+            "status": "deployed",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
+            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+            "deployed_on": "2026-04-28"
         }
     ]
 }
