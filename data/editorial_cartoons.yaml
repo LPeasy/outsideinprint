@@ -1,4 +1,4 @@
-current: cloched-for-business
+current: lines-of-fire
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -78,5 +78,13 @@ cartoons:
     image: "/images/editorial/cloched-for-business.png"
     essay: "/essays/the-model-that-could-not-leave/"
     alt: "Editorial cartoon showing a small plant sealed under a cracked glass cloche, with dark crosshatching around it and red fractures running down into the roots."
+    width: 1672
+    height: 941
+  - slug: lines-of-fire
+    title: "Lines of Fire"
+    date: "2026-04-29"
+    image: "/images/editorial/lines-of-fire.png"
+    essay: "/essays/the-strait-that-holds-the-price/"
+    alt: "Editorial cartoon showing tankers moving through a narrow strait under a fiery red sky while armed silhouettes watch from the shoreline."
     width: 1672
     height: 941
