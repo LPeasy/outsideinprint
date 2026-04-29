@@ -12,7 +12,7 @@ Examples:
 
 - `oip-theme-rules-classic-20260429-115754`
 - `oip-theme-rules-clear-20260429-115754`
-- `oip-theme-rules-print-20260429-115754`
+- `oip-theme-rules-print-20260429-161813`
 
 Use the timestamp from the planning or implementation session that created the saved comparison set.
 
@@ -40,6 +40,8 @@ Current divider tokens:
 - `--oip-rule-list`
 - `--oip-rule-standard`
 - `--oip-rule-clear`
+- `--oip-rule-engraved`
+- `--oip-rule-engraved-strong`
 
 Use these for page structure, section boundaries, archive lists, homepage zones, and article aftermatter dividers.
 
@@ -48,3 +50,11 @@ Do not use these tokens for card borders, image frames, buttons, forms, focus ri
 ## Future Print-Rule Experiments
 
 For a COA3-style print-rule treatment, add a new timestamped preset before changing active values. Prefer a small number of semantic variables first, then add any ornamental or gradient rules behind those variables so the design can be tuned without hunting many selectors.
+
+## COA3 Active Preset
+
+The active COA3 preset is `oip-theme-rules-print-20260429-161813`. It keeps ordinary structural dividers close to the prior clear preset and adds two warmer engraved rule tokens for signature thresholds only.
+
+Use `--oip-rule-engraved` and `--oip-rule-engraved-strong` for masthead and nav rails, section-front openings, archive month/year boundaries, homepage manifesto and start-reading separators, gallery spotlight/archive thresholds, article record/reading-path aftermatter, and the site footer.
+
+Do not extend the engraved tokens into card/panel borders, image frames, buttons, forms, focus rings, collection-room theme variables, or hover/accent states without a new plan.
