@@ -5,11 +5,19 @@
 {{ $heroMode := index $frontPage "heroMode" }}
 {{ $secondary := index $frontPage "secondary" | default (slice) }}
 {{ $cartoonData := site.Data.editorial_cartoons | default dict }}
+{{ $cartoons := $cartoonData.cartoons | default (slice) }}
 {{ $currentCartoonSlug := $cartoonData.current | default "" }}
 {{ $currentCartoon := false }}
-{{ range ($cartoonData.cartoons | default (slice)) }}
+{{ $orderedCartoons := sort $cartoons "date" "desc" }}
+{{ $recentCartoons := slice }}
+{{ range $cartoons }}
   {{ if eq .slug $currentCartoonSlug }}
     {{ $currentCartoon = . }}
+  {{ end }}
+{{ end }}
+{{ range $orderedCartoons }}
+  {{ if and (ne .slug $currentCartoonSlug) (lt (len $recentCartoons) 4) }}
+    {{ $recentCartoons = $recentCartoons | append . }}
   {{ end }}
 {{ end }}
 <section class="home-front-page" aria-labelledby="home-front-page-title">
@@ -49,6 +57,7 @@
               type="button"
               class="editorial-cartoon__trigger"
               data-home-cartoon-lightbox-trigger
+              data-cartoon-slug="{{ .slug }}"
               data-title="{{ .title }}"
               data-date="{{ .date }}"
               data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
@@ -71,6 +80,39 @@
               <a href="{{ "gallery/" | absURL }}">View gallery</a>
             </figcaption>
           </figure>
+        {{ end }}
+        {{ if gt (len $recentCartoons) 0 }}
+          <div class="editorial-cartoon-recent" data-home-cartoon-recent aria-label="Recent front-page cartoons">
+            {{ range $recentCartoons }}
+              <figure class="editorial-cartoon-recent__item" data-home-cartoon-recent-card data-cartoon-slug="{{ .slug }}">
+                <button
+                  type="button"
+                  class="editorial-cartoon-recent__trigger"
+                  data-home-cartoon-lightbox-trigger
+                  data-home-cartoon-recent-trigger
+                  data-cartoon-slug="{{ .slug }}"
+                  data-title="{{ .title }}"
+                  data-date="{{ .date }}"
+                  data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
+                  data-image="{{ .image | relURL }}"
+                  data-alt="{{ .alt }}"
+                  data-width="{{ .width }}"
+                  data-height="{{ .height }}"
+                  {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
+                  aria-label="Open {{ .title }} fullscreen"
+                >
+                  <img
+                    src="{{ .image | relURL }}"
+                    alt="{{ .alt }}"
+                    width="{{ .width }}"
+                    height="{{ .height }}"
+                    loading="lazy"
+                  >
+                </button>
+                <figcaption><span>{{ .title }}</span></figcaption>
+              </figure>
+            {{ end }}
+          </div>
         {{ end }}
       </article>
 
@@ -190,7 +232,7 @@
         var lightbox = document.querySelector("[data-home-cartoon-lightbox]");
         if (!lightbox) return;
 
-        var trigger = document.querySelector("[data-home-cartoon-lightbox-trigger]");
+        var triggers = Array.prototype.slice.call(document.querySelectorAll("[data-home-cartoon-lightbox-trigger]"));
         var title = lightbox.querySelector("[data-home-cartoon-lightbox-title]");
         var date = lightbox.querySelector("[data-home-cartoon-lightbox-date]");
         var image = lightbox.querySelector("[data-home-cartoon-lightbox-image]");
@@ -200,7 +242,7 @@
         var closeControls = Array.prototype.slice.call(lightbox.querySelectorAll("[data-home-cartoon-lightbox-close]"));
         var activeTrigger = null;
 
-        if (!trigger) return;
+        if (!triggers.length) return;
 
         function focusableElements() {
           return Array.prototype.slice.call(lightbox.querySelectorAll("button:not([disabled]), a[href]")).filter(function (element) {
@@ -223,7 +265,8 @@
           }
         }
 
-        function openLightbox() {
+        function openLightbox(event) {
+          var trigger = event.currentTarget;
           var imageTitle = trigger.getAttribute("data-title") || "";
           var essay = trigger.getAttribute("data-essay") || "";
           activeTrigger = trigger;
@@ -251,7 +294,9 @@
           closeButton.focus({ preventScroll: true });
         }
 
-        trigger.addEventListener("click", openLightbox);
+        triggers.forEach(function (trigger) {
+          trigger.addEventListener("click", openLightbox);
+        });
 
         closeControls.forEach(function (control) {
           control.addEventListener("click", closeLightbox);
