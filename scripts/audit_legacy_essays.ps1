@@ -348,6 +348,27 @@ function Count-Matches {
   return $count
 }
 
+function Get-TitleSubtitleAiTellStructureCount {
+  param($Page)
+
+  $count = 0
+  foreach ($value in @($Page.Title, $Page.Subtitle)) {
+    if ([string]::IsNullOrWhiteSpace($value)) { continue }
+    $normalized = [regex]::Replace([string]$value, '\s+', ' ').Trim()
+    if (
+      [regex]::IsMatch(
+        $normalized,
+        '\bnot\s+(?:just|only|merely)\b[^.!?;:]{0,240}[.!?;:]\s*(?:it|they|this|that|these|those|he|she|we)\b\s+[a-z]',
+        [System.Text.RegularExpressions.RegexOptions]::IgnoreCase
+      )
+    ) {
+      $count++
+    }
+  }
+
+  return $count
+}
+
 function Get-PseudoHeadingCount {
   param([string]$Body)
   $count = 0
@@ -652,6 +673,7 @@ foreach ($page in $pages) {
     pseudo_headings = Get-PseudoHeadingCount -Body $body
     source_dumps = Count-Matches -Text $body -Patterns @('(?im)^\s*(?:>\s*)?Source:\s*','(?im)^\s*(?:>\s*)?https?://\S+\s*$')
     duplicated_title = 0
+    ai_tell_title_subtitle_structure = Get-TitleSubtitleAiTellStructureCount -Page $page
     ornamental_breaks = Count-Matches -Text $body -Patterns @('(?m)^-{20,}\s*$','(?m)^\*\s*\*\s*\*\s*$','(?m)^\\\s*$')
     escaped_linebreaks = Count-Matches -Text $body -Patterns @('(?m)[^\\]\\$')
     hero_placeholder_conflict = $heroIssueData.hero_placeholder_conflict
@@ -715,6 +737,7 @@ foreach ($page in $pages) {
     (3 * [Math]::Min(1, $issueCounts.pseudo_headings)) +
     (2 * [Math]::Min(1, $issueCounts.source_dumps)) +
     (3 * [Math]::Min(1, $issueCounts.duplicated_title)) +
+    (5 * [Math]::Min(1, $issueCounts.ai_tell_title_subtitle_structure)) +
     (2 * [Math]::Min(1, ($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks))) +
     (4 * [Math]::Min(1, ($issueCounts.hero_placeholder_conflict + $issueCounts.hero_missing_with_lead))) +
     (2 * [Math]::Min(1, ($issueCounts.hero_duplicate_lead + $issueCounts.hero_current_wins_conflict)))
@@ -793,6 +816,7 @@ foreach ($page in $pages) {
     has_pseudo_headings = [bool]($issueCounts.pseudo_headings -gt 0)
     has_source_dump = [bool]($issueCounts.source_dumps -gt 0)
     has_duplicated_title = [bool]($issueCounts.duplicated_title -gt 0)
+    has_ai_tell_title_subtitle_structure = [bool]($issueCounts.ai_tell_title_subtitle_structure -gt 0)
     has_separator_residue = [bool](($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks) -gt 0)
     has_hero_placeholder_conflict = [bool]($issueCounts.hero_placeholder_conflict -gt 0)
     has_hero_missing_with_lead = [bool]($issueCounts.hero_missing_with_lead -gt 0)
@@ -808,6 +832,7 @@ foreach ($page in $pages) {
     pseudo_heading_count = $issueCounts.pseudo_headings
     source_dump_count = $issueCounts.source_dumps
     duplicated_title_count = $issueCounts.duplicated_title
+    ai_tell_title_subtitle_structure_count = $issueCounts.ai_tell_title_subtitle_structure
     separator_residue_count = ($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks)
     hero_placeholder_conflict_count = $issueCounts.hero_placeholder_conflict
     hero_missing_with_lead_count = $issueCounts.hero_missing_with_lead
@@ -889,7 +914,7 @@ $csvPath = "$ReportBasePath.csv"
 $mdPath = "$ReportBasePath.md"
 Write-TextNoBom $jsonPath ($report | ConvertTo-Json -Depth 8)
 $rowsArray |
-  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_medium_cdn_media,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_separator_residue,has_hero_placeholder_conflict,has_hero_missing_with_lead,has_hero_duplicate_lead,has_hero_current_wins_conflict |
+  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_medium_cdn_media,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_ai_tell_title_subtitle_structure,has_separator_residue,has_hero_placeholder_conflict,has_hero_missing_with_lead,has_hero_duplicate_lead,has_hero_current_wins_conflict |
   Export-Csv -Path $csvPath -NoTypeInformation -Encoding utf8
 
 $issueSort = @(
