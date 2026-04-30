@@ -514,12 +514,13 @@ function Get-AuditRowsForGitRef {
 
 function Get-CurrentPowerShellExecutable {
   $generatedPwsh = Join-Path $Root 'tools\bin\generated\pwsh.cmd'
-  if (Test-Path -LiteralPath $generatedPwsh -PathType Leaf) {
+  $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
+  if ($isWindowsHost -and (Test-Path -LiteralPath $generatedPwsh -PathType Leaf)) {
     return $generatedPwsh
   }
 
   $currentProcess = Get-Process -Id $PID
-  if ($currentProcess.Path -and (Test-Path $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileName($currentProcess.Path) -ieq 'pwsh.exe')) {
+  if ($currentProcess.Path -and (Test-Path $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileNameWithoutExtension($currentProcess.Path) -ieq 'pwsh')) {
     return $currentProcess.Path
   }
 

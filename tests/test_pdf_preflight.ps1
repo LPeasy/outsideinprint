@@ -3,10 +3,26 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $preflightScript = Join-Path $repoRoot "scripts/preflight.ps1"
-$shellPath = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
-if (-not (Test-Path -LiteralPath $shellPath -PathType Leaf)) {
-  throw "The repo-local PowerShell wrapper is required to run PDF preflight tests."
+function Get-TestPowerShellExecutable {
+  $wrapper = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+  $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
+  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+    return $wrapper
+  }
+
+  $currentProcess = Get-Process -Id $PID
+  if ($currentProcess.Path -and (Test-Path -LiteralPath $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileNameWithoutExtension($currentProcess.Path) -ieq 'pwsh')) {
+    return $currentProcess.Path
+  }
+
+  $command = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -First 1
+  if ($command -and $command.Source) {
+    return $command.Source
+  }
+
+  throw "PowerShell 7 is required to run PDF preflight tests."
 }
+$shellPath = Get-TestPowerShellExecutable
 
 function New-TestRoot {
   $root = Join-Path ([System.IO.Path]::GetTempPath()) ("oip-pdf-preflight-" + [guid]::NewGuid().ToString("N"))

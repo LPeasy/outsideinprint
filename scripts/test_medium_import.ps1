@@ -6,8 +6,45 @@ if (-not (Test-Path $fixtureSource)) {
   throw "Fixture source missing: $fixtureSource"
 }
 
-$pwsh = Join-Path $repo "tools/bin/generated/pwsh.cmd"
-$python = Join-Path $repo "tools/bin/generated/python.cmd"
+function Get-TestPowerShellExecutable {
+  $wrapper = Join-Path $repo "tools/bin/generated/pwsh.cmd"
+  $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
+  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+    return $wrapper
+  }
+
+  $currentProcess = Get-Process -Id $PID
+  if ($currentProcess.Path -and (Test-Path -LiteralPath $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileNameWithoutExtension($currentProcess.Path) -ieq 'pwsh')) {
+    return $currentProcess.Path
+  }
+
+  $command = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -First 1
+  if ($command -and $command.Source) {
+    return $command.Source
+  }
+
+  throw "PowerShell 7 is required to run the Medium import test."
+}
+
+function Get-TestPythonExecutable {
+  $wrapper = Join-Path $repo "tools/bin/generated/python.cmd"
+  $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
+  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+    return $wrapper
+  }
+
+  foreach ($name in @('python3', 'python')) {
+    $command = Get-Command $name -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($command -and $command.Source) {
+      return $command.Source
+    }
+  }
+
+  throw "Python is required to run the Medium import test."
+}
+
+$pwsh = Get-TestPowerShellExecutable
+$python = Get-TestPythonExecutable
 
 $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("medium-import-test-" + [guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Force -Path $tempRoot | Out-Null

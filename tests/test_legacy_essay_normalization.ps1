@@ -12,9 +12,46 @@ function Assert-True {
   }
 }
 
+function Get-TestPowerShellExecutable {
+  $wrapper = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+  $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
+  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+    return $wrapper
+  }
+
+  $currentProcess = Get-Process -Id $PID
+  if ($currentProcess.Path -and (Test-Path -LiteralPath $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileNameWithoutExtension($currentProcess.Path) -ieq 'pwsh')) {
+    return $currentProcess.Path
+  }
+
+  $command = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -First 1
+  if ($command -and $command.Source) {
+    return $command.Source
+  }
+
+  throw "PowerShell 7 is required to run legacy essay normalization tests."
+}
+
+function Get-TestPythonExecutable {
+  $wrapper = Join-Path $repoRoot "tools\bin\generated\python.cmd"
+  $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
+  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+    return $wrapper
+  }
+
+  foreach ($name in @('python3', 'python')) {
+    $command = Get-Command $name -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($command -and $command.Source) {
+      return $command.Source
+    }
+  }
+
+  throw "Python is required to run legacy essay normalization tests."
+}
+
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$python = Join-Path $repoRoot "tools\bin\generated\python.cmd"
-$pwsh = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+$python = Get-TestPythonExecutable
+$pwsh = Get-TestPowerShellExecutable
 $normalizer = Join-Path $repoRoot "scripts/normalize_legacy_medium_essay.py"
 $auditScript = Join-Path $repoRoot "scripts/audit_legacy_essays.ps1"
 

@@ -12,11 +12,28 @@ function Assert-True {
   }
 }
 
-$repoRoot = Split-Path -Parent $PSScriptRoot
-$pwsh = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
-if (-not (Test-Path -LiteralPath $pwsh -PathType Leaf)) {
-  throw "The repo-local PowerShell wrapper is required to run essay guardrail tests."
+function Get-TestPowerShellExecutable {
+  $wrapper = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+  $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
+  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+    return $wrapper
+  }
+
+  $currentProcess = Get-Process -Id $PID
+  if ($currentProcess.Path -and (Test-Path -LiteralPath $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileNameWithoutExtension($currentProcess.Path) -ieq 'pwsh')) {
+    return $currentProcess.Path
+  }
+
+  $command = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -First 1
+  if ($command -and $command.Source) {
+    return $command.Source
+  }
+
+  throw "PowerShell 7 is required to run essay guardrail tests."
 }
+
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$pwsh = Get-TestPowerShellExecutable
 
 $tempRoot = Join-Path $repoRoot (".tmp-essay-guardrails-" + [guid]::NewGuid().ToString("N"))
 
