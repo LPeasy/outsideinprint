@@ -25,157 +25,175 @@ Oliver arrived first.
 
 Syd slipped into the chair opposite him without ceremony.
 
-“You look prepared,” Syd said, nodding at the untouched drink.
+Syd nodded at the untouched drink.
 
-“I’ve been thinking,” Oliver replied.
+**Syd:** You look prepared.
 
-“That’s never good.”
+**Oliver:** I’ve been thinking.
+
+**Syd:** That’s never good.
 
 Oliver almost smiled.
 
 They let the room settle around them.
 
-“You remember the Stanford Prison Experiment.”
+**Oliver:** You remember the Stanford Prison Experiment.
 
-Syd tilted his head slightly. “Basement prison. College volunteers. Guards and inmates.”
+Syd tilted his head slightly.
 
-“Yes.”
+**Syd:** Basement prison. College volunteers. Guards and inmates.
 
-“And the guards became cruel.”
+**Oliver:** Yes.
 
-“Very quickly.”
+**Syd:** And the guards became cruel.
+
+**Oliver:** Very quickly.
 
 A pause.
 
-“It demonstrated something simple,” Oliver said. “People in power behave differently when they think they are completely justified.”
+**Oliver:** It demonstrated something simple. People in power behave differently when they think they are completely justified.
 
-Syd leaned back. “That’s not controversial.”
+Syd leaned back.
 
-“It becomes controversial when you apply it.”
+**Syd:** That’s not controversial.
 
-Syd gestured slightly. “Go on.”
+**Oliver:** It becomes controversial when you apply it.
+
+Syd gestured slightly.
+
+**Syd:** Go on.
 
 Oliver folded his hands.
 
-“In the experiment, the guards weren’t inherently sadistic. They were given authority and a framework that justified humiliation. The moral language of the setting inverted. Cruelty became duty.”
+**Oliver:** In the experiment, the guards weren’t inherently sadistic. They were given authority and a framework that justified humiliation. The moral language of the setting inverted. Cruelty became duty.
 
 Syd watched him carefully.
 
-“When a society transitions from one moral authority to another,” Oliver continued, “the same structure appears. The vocabulary changes. The authority shifts. But the mechanism remains.”
+**Oliver:** When a society transitions from one moral authority to another, the same structure appears. The vocabulary changes. The authority shifts. But the mechanism remains.
 
-“Structure,” Syd repeated softly.
+**Syd:** Structure.
 
-“There are always arbiters of virtue. Under a religious order, priests and congregations shape boundaries. Under a secular order, institutions do.”
+Syd repeated softly.
 
-“And?”
+**Oliver:** There are always arbiters of virtue. Under a religious order, priests and congregations shape boundaries. Under a secular order, institutions do.
 
-“And the new moral class treats the old one the way it claims it was treated.”
+**Syd:** And?
+
+**Oliver:** And the new moral class treats the old one the way it claims it was treated.
 
 Syd did not move.
 
-“Ostracized,” Oliver said. “Ridiculed. Professionally excluded.”
+**Oliver:** Ostracized. Ridiculed. Professionally excluded.
 
-“Canceled,” Syd added.
+**Syd:** Canceled.
 
-“If you like.”
+**Oliver:** If you like.
 
 A glass clinked behind them.
 
-Syd rested his elbows on the table. “You’re suggesting inversion. Not liberation.”
+Syd rested his elbows on the table.
 
-“I’m suggesting recurrence.”
+**Syd:** You’re suggesting inversion. Not liberation.
+
+**Oliver:** I’m suggesting recurrence.
 
 Syd considered that.
 
-“You believe secular moral orders inevitably replicate the exclusionary behavior they accuse religion of.”
+**Syd:** You believe secular moral orders inevitably replicate the exclusionary behavior they accuse religion of.
 
-“I believe moral authority cannot disappear. It can only relocate.”
+**Oliver:** I believe moral authority cannot disappear. It can only relocate.
 
-“And when it relocates,” Syd said, “it rewrites the hierarchy.”
+**Syd:** And when it relocates, it rewrites the hierarchy.
 
-“Yes.”
+**Oliver:** Yes.
 
-“And punishes the former hierarchy.”
+**Syd:** And punishes the former hierarchy.
 
 Oliver nodded once.
 
 Syd looked down at the condensation ring forming beneath his glass.
 
-“You’re assuming symmetry,” he said.
+**Syd:** You’re assuming symmetry.
 
-“In what sense?”
+**Oliver:** In what sense?
 
-“That those who felt excluded under religious norms will behave identically once empowered.”
+**Syd:** That those who felt excluded under religious norms will behave identically once empowered.
 
-Oliver shook his head slightly. “Not identically. Structurally.”
+Oliver shook his head slightly.
 
-“Explain.”
+**Oliver:** Not identically. Structurally.
 
-“The guards did not think they were villains. They believed they were maintaining order. The moral language permitted degradation. When the state becomes the primary moral authority, dissent becomes deviance.”
+**Syd:** Explain.
 
-“Which justifies correction,” Syd said.
+**Oliver:** The guards did not think they were villains. They believed they were maintaining order. The moral language permitted degradation. When the state becomes the primary moral authority, dissent becomes deviance.
 
-“Exactly.”
+**Syd:** Which justifies correction.
+
+**Oliver:** Exactly.
 
 Silence settled between them.
 
 Syd finally spoke.
 
-“You’re worried about punishment.”
+**Syd:** You’re worried about punishment.
 
-“I’m concerned about inversion without humility.”
+**Oliver:** I’m concerned about inversion without humility.
 
 Syd traced the rim of his glass with one finger.
 
-“Isn’t every moral order convinced it is correcting injustice?”
+**Syd:** Isn’t every moral order convinced it is correcting injustice?
 
-“Yes.”
+**Oliver:** Yes.
 
-“And isn’t every displaced order convinced it is being persecuted?”
+**Syd:** And isn’t every displaced order convinced it is being persecuted?
 
 Another pause. A bit longer this time.
 
-“That’s why structure matters,” Oliver said at last. “If moral language is untethered from anything beyond institutional power, it becomes contingent on that power.”
+**Oliver:** That’s why structure matters. If moral language is untethered from anything beyond institutional power, it becomes contingent on that power.
 
-“And religion is not institutional?” Syd asked quietly.
+**Syd:** And religion is not institutional?
 
-“It is,” Oliver admitted. “But it claims constraint from outside itself.”
+**Oliver:** It is.
+
+Oliver admitted.
+
+**Oliver:** But it claims constraint from outside itself.
 
 Syd’s eyes flickered.
 
-“And you trust that claim?”
+**Syd:** And you trust that claim?
 
-“I trust the idea of constraint more than I trust perpetual moral reinvention.”
+**Oliver:** I trust the idea of constraint more than I trust perpetual moral reinvention.
 
 The fan above them creaked once.
 
 Syd leaned forward slightly.
 
-“Let’s assume you’re right,” he said. “That secular morality inverts rather than abolishes hierarchy. What’s the alternative?”
+**Syd:** Let’s assume you’re right. That secular morality inverts rather than abolishes hierarchy. What’s the alternative?
 
 Oliver held his gaze.
 
-“Shared submission,” he said. “To something neither church nor state fully controls.”
+**Oliver:** Shared submission. To something neither church nor state fully controls.
 
-“And if that ‘something’ fractures?” Syd asked.
+**Syd:** And if that ‘something’ fractures?
 
-“Then we get the basement,” Oliver replied. “Everywhere.”
+**Oliver:** Then we get the basement. Everywhere.
 
 The room squeezed, and ~ for a moment ~ the darkness enveloped them completely and just as quickly receded.
 
 Syd reached for his drink.
 
-“You’re not arguing for dominance,” he said.
+**Syd:** You’re not arguing for dominance.
 
-“No.”
+**Oliver:** No.
 
-“You’re arguing against moral amnesia.”
+**Syd:** You’re arguing against moral amnesia.
 
-“Yes.”
+**Oliver:** Yes.
 
 Syd nodded slowly.
 
-“And you think we’re in the experiment.”
+**Syd:** And you think we’re in the experiment.
 
 Oliver did not answer.
 
@@ -183,20 +201,19 @@ A group entered near the door. Cold air slipped in behind them.
 
 Syd slid his chair back and stood up.
 
-“You always prefer binding structures,” he said calmly.
+**Syd:** You always prefer binding structures.
 
-“And you always prefer negotiated meaning,” Oliver replied.
+**Oliver:** And you always prefer negotiated meaning.
 
 Syd put on his coat.
 
-“If the guards truly believed they were good,” he said, “then perhaps the real danger isn’t inversion.”
+**Syd:** If the guards truly believed they were good, then perhaps the real danger isn’t inversion.
 
 Oliver waited.
 
-“It’s certainty.”
+**Oliver:** It’s certainty.
 
 Syd walked toward the door.
 
 He nodded to the doorman, donned his cap, and shouldered his way into the cold, bitter night.
-
 

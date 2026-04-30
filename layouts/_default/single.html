@@ -9,57 +9,92 @@
   {{ if $articleVariant }}
     {{ $articleClasses = $articleClasses | append (printf "article-variant-%s" $articleVariant) }}
   {{ end }}
+
   {{ $publicCollectionMatches := partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}
   {{ $primaryCollection := false }}
-  {{ $showCollectionAccent := false }}
+  {{ $showCollectionContext := false }}
   {{ $showCollectionContinuation := false }}
   {{ $currentSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
   {{ if gt (len $publicCollectionMatches) 0 }}
     {{ $candidateCollection := index $publicCollectionMatches 0 }}
     {{ range $candidateCollection.items }}
       {{ if eq .RelPermalink $.RelPermalink }}
+        {{ $primaryCollection = $candidateCollection }}
+        {{ $showCollectionContext = true }}
         {{ $showCollectionContinuation = true }}
-        {{ with $candidateCollection.collection.room_theme }}
-          {{ $primaryCollection = $candidateCollection }}
-          {{ $showCollectionAccent = true }}
-          {{ $articleClasses = $articleClasses | append "piece--collection-accent" | append (printf "piece--collection-accent--%s" .) }}
-        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
-  {{ $primaryCollectionUrl := "" }}
-  {{ $primaryCollectionPath := "" }}
+
   {{ $primaryCollectionEntryPoint := false }}
-  {{ if $showCollectionAccent }}
-    {{ $primaryCollectionUrl = printf "collections/%s/" $primaryCollection.collection.slug | absURL }}
-    {{ with $primaryCollection.page }}
-      {{ $primaryCollectionUrl = .RelPermalink }}
-    {{ end }}
-    {{ $primaryCollectionPath = printf "/collections/%s/" $primaryCollection.collection.slug }}
-    {{ with $primaryCollection.page }}
-      {{ $primaryCollectionPath = .RelPermalink }}
-    {{ end }}
+  {{ if $showCollectionContext }}
     {{ $startHereSlug := lower (printf "%v" ($primaryCollection.collection.start_here | default "")) }}
     {{ if and $startHereSlug (eq $currentSlug $startHereSlug) }}
       {{ $primaryCollectionEntryPoint = true }}
     {{ end }}
   {{ end }}
-  {{ $journeyLinks := slice }}
-  {{ $longformKind := partial "archive/longform-kind.html" . }}
-  {{ if in (slice "essay" "dialogue") $longformKind }}
-    {{ $journeyLinks = $journeyLinks | append (dict "href" ("archive/" | absURL) "label" "All Archive") }}
-  {{ else }}
-    {{ with $sectionPage }}
-      {{ $journeyLinks = $journeyLinks | append (dict "href" .RelPermalink "label" (printf "All %s" .Title)) }}
+
+  {{ $portraitImage := "" }}
+  {{ $portraitImageAlt := .Title }}
+  {{ $portraitImageCaption := "" }}
+  {{ if eq $articleVariant "modernbio" }}
+    {{ with .Params.portrait_image }}
+      {{ $portraitImage = printf "%v" . }}
+      {{ $portraitImageAlt = $.Params.portrait_image_alt | default $.Params.featured_image_alt | default $.Title }}
+      {{ $portraitImageCaption = $.Params.portrait_image_caption | default "" }}
+    {{ else }}
+      {{ with .Params.featured_image }}
+        {{ $portraitImage = printf "%v" . }}
+        {{ $portraitImageAlt = $.Params.featured_image_alt | default $.Title }}
+        {{ $portraitImageCaption = $.Params.featured_image_caption | default "" }}
+      {{ end }}
     {{ end }}
   {{ end }}
-  {{ $journeyLinks = $journeyLinks | append (dict "href" ("collections/" | absURL) "label" "Browse collections") }}
-  {{ $journeyLinks = $journeyLinks | append (dict "href" ("library/" | absURL) "label" "Search the library") }}
-  <article class="{{ delimit $articleClasses " " }}" data-analytics-eligible-read="true"{{ if $showCollectionAccent }} data-piece-collection-slug="{{ $primaryCollection.collection.slug }}" data-piece-collection-room-theme="{{ $primaryCollection.collection.room_theme }}"{{ end }}>
+  {{ $portraitImageSrc := $portraitImage }}
+  {{ if and $portraitImage (not (or (hasPrefix $portraitImage "http://") (hasPrefix $portraitImage "https://"))) }}
+    {{ $portraitImageSrc = $portraitImage | absURL }}
+  {{ end }}
+  {{ $showHero := and .Params.featured_image (ne $articleVariant "modernbio") }}
+
+  {{ $journeyLinks := slice
+    (dict "href" ("archive/" | absURL) "label" "Archive")
+    (dict "href" ("collections/" | absURL) "label" "Collections")
+    (dict "href" ("library/" | absURL) "label" "Library")
+  }}
+  {{ with site.Params.newsletter.buttondown_username }}
+    {{ $journeyLinks = $journeyLinks | append (dict "href" (printf "https://buttondown.com/%s" .) "label" "Newsletter") }}
+  {{ end }}
+
+  <article class="{{ delimit $articleClasses " " }}" data-analytics-eligible-read="true"{{ if $showCollectionContext }} data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"{{ end }}>
     <header class="piece-header">
       {{ partial "running_header.html" . }}
 
-      <div class="imprint-header" role="note" aria-label="Publication details">
+      {{ if eq $articleVariant "modernbio" }}
+        <div class="piece-title-block piece-dossier-header{{ if $portraitImage }} piece-dossier-header--with-portrait{{ else }} piece-dossier-header--text-only{{ end }}">
+          <div class="piece-dossier-header__content">
+            <p class="piece-series-marker">Modern Bios</p>
+            <h1>{{ .Title }}</h1>
+            {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
+            {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+            {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
+            {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
+          </div>
+          {{ if $portraitImage }}
+            <figure class="piece-portrait-plate">
+              <img src="{{ $portraitImageSrc }}" alt="{{ $portraitImageAlt }}">
+              {{ with $portraitImageCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
+            </figure>
+          {{ end }}
+        </div>
+      {{ else }}
+        <div class="piece-title-block">
+          <h1>{{ .Title }}</h1>
+          {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
+          {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+        </div>
+      {{ end }}
+
+      <div class="imprint-header piece-publication-strip" role="note" aria-label="Publication details">
         <div class="row">
           <span><b>{{ partial "archive/lane-label.html" . }}</b></span>
           <span>{{ with .Date }}Date <b>{{ .Format "2006-01-02" }}</b>{{ end }}</span>
@@ -68,20 +103,10 @@
         </div>
       </div>
 
-      {{ if eq $articleVariant "modernbio" }}
-        <p class="piece-series-marker">Modern Bios</p>
-      {{ end }}
-      <h1>{{ .Title }}</h1>
-      {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
-      {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
-      {{ if eq $articleVariant "modernbio" }}
-        {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
-        {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
-      {{ end }}
-      {{ if $showCollectionAccent }}
-        <aside class="piece-collection-context" aria-label="Primary collection context">
-          <p class="piece-collection-context__eyebrow">From the Collection</p>
-          <h2 class="piece-collection-context__title">
+      {{ if $showCollectionContext }}
+        <aside class="piece-collection-strip" aria-label="Primary collection context">
+          <p class="piece-collection-strip__eyebrow">From the Collection</p>
+          <p class="piece-collection-strip__title">
             {{ range $index, $match := $publicCollectionMatches }}
               {{ $collectionUrl := printf "collections/%s/" $match.collection.slug | absURL }}
               {{ with $match.page }}
@@ -91,7 +116,7 @@
               {{ with $match.page }}
                 {{ $collectionPath = .RelPermalink }}
               {{ end }}
-              {{ if gt $index 0 }}<span class="piece-collection-context__separator">/</span>{{ end }}
+              {{ if gt $index 0 }}<span class="piece-collection-strip__separator">/</span>{{ end }}
               <a href="{{ $collectionUrl }}"
                 data-analytics-event="collection_click"
                 data-analytics-source-slot="article_collection_context"
@@ -102,14 +127,15 @@
                 data-analytics-path="{{ $collectionPath }}"
               >{{ $match.collection.title }}</a>
             {{ end }}
-          </h2>
-          <p class="piece-collection-context__meta">{{ title $primaryCollection.state.kind }} | {{ $primaryCollection.state.count }} pieces{{ if $primaryCollectionEntryPoint }} | Entry Point{{ end }}</p>
+          </p>
+          <p class="piece-collection-strip__meta">{{ title $primaryCollection.state.kind }} | {{ $primaryCollection.state.count }} pieces{{ if $primaryCollectionEntryPoint }} | Entry Point{{ end }}</p>
         </aside>
       {{ end }}
-      {{ with .Params.featured_image }}
-        {{ $featuredImage := . }}
-        {{ $featuredImageAlt := $.Params.featured_image_alt | default $.Title }}
-        {{ $featuredImageCaption := $.Params.featured_image_caption }}
+
+      {{ if $showHero }}
+        {{ $featuredImage := .Params.featured_image }}
+        {{ $featuredImageAlt := .Params.featured_image_alt | default .Title }}
+        {{ $featuredImageCaption := .Params.featured_image_caption }}
         {{ $featuredImageSrc := $featuredImage }}
         {{ if not (or (hasPrefix $featuredImage "http://") (hasPrefix $featuredImage "https://")) }}
           {{ $featuredImageSrc = $featuredImage | absURL }}
@@ -119,7 +145,6 @@
           {{ with $featuredImageCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
         </figure>
       {{ end }}
-
     </header>
 
     <div class="piece-body">
@@ -130,40 +155,39 @@
       {{ if eq $articleVariant "modernbio" }}
         {{ partial "article/modernbio-record.html" . }}
       {{ end }}
+
+      {{ if or (ne .Params.show_citation false) .Params.revision_history }}
+        <aside class="article-publication-record" role="note" aria-label="Publication record">
+          <div class="k">Publication record</div>
+          {{ if ne .Params.show_citation false }}
+            <div class="article-publication-record__section article-publication-record__section--citation">
+              <p class="article-publication-record__label">Cite this</p>
+              <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+            </div>
+          {{ end }}
+          {{ with .Params.revision_history }}
+            <div class="article-publication-record__section article-publication-record__section--revisions">
+              <p class="article-publication-record__label">Revision history</p>
+              <ol class="revision-history__list">
+                {{ range . }}
+                  <li class="revision-history__item">
+                    <span class="revision-history__meta">Version {{ .version }} | {{ .date }}</span>
+                    <span class="revision-history__note">{{ .note }}</span>
+                  </li>
+                {{ end }}
+              </ol>
+            </div>
+          {{ end }}
+        </aside>
+      {{ end }}
+
       {{ if $showCollectionContinuation }}
         {{ partial "collections/reading-path.html" . }}
       {{ end }}
-      {{ partial "authors/card.html" (dict "page" . "author" $meta.author) }}
 
-      {{ if ne .Params.show_citation false }}
-        <div class="article-closing" aria-hidden="true">
-          <span class="article-closing__ornament">&bull;&bull;&bull;</span>
-        </div>
-
-        <aside class="citation" role="note" aria-label="How to cite this page">
-          <div class="k">Cite this</div>
-          <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
-        </aside>
-      {{ end }}
-
-      {{ with .Params.revision_history }}
-        <aside class="revision-history" role="note" aria-label="Revision history">
-          <div class="k">Revision history</div>
-          <ol class="revision-history__list">
-            {{ range . }}
-              <li class="revision-history__item">
-                <span class="revision-history__meta">Version {{ .version }} | {{ .date }}</span>
-                <span class="revision-history__note">{{ .note }}</span>
-              </li>
-            {{ end }}
-          </ol>
-        </aside>
-      {{ end }}
-
-      {{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--page" "sourceSlot" "page_newsletter") }}
       {{ partial "journey_links.html" (dict
         "class" "journey-links--article-exit"
-        "eyebrow" "Keep reading"
+        "eyebrow" "Article paths"
         "links" $journeyLinks
       ) }}
     </div>

@@ -27,11 +27,13 @@ Two drinks appeared.
 
 A woman near the door leaned across her table.
 
-“I just wish you would say it,” she said.
+**Woman:** I just wish you would say it.
 
-The man across from her stared at the condensation on his glass. “You know how I feel.”
+The man across from her stared at the condensation on his glass.
 
-“No,” she said. “I don’t.”
+**Man:** You know how I feel.
+
+**Woman:** No. I don’t.
 
 He nodded once, like the matter had been settled.
 
@@ -49,13 +51,15 @@ Oliver’s eyes followed her to the door. Then back to his drink.
 
 A pair of coworkers stood near the jukebox.
 
-“He earned it,” one said, raising his glass.
+One raised his glass.
 
-“Absolutely,” the other replied.
+**First Coworker:** He earned it.
+
+**Other Coworker:** Absolutely.
 
 A beat.
 
-“I mean, good for him.”
+**First Coworker:** I mean, good for him.
 
 The first man nodded too quickly.
 
@@ -67,15 +71,15 @@ Oliver looked at the bar.
 
 The bartender leaned toward a regular three stools down.
 
-“She says everything’s fine,” the regular muttered. “So it’s fine.”
+**Regular:** She says everything’s fine. So it’s fine.
 
 The bartender wiped the counter in slow circles.
 
-“Yeah,” he said finally.
+**Bartender:** Yeah.
 
 The regular nodded, satisfied.
 
-No one knew what “fine” meant.
+No one knew what "fine" meant.
 
 Syd lifted his glass, watched the light bend through it, and set it back down without drinking.
 
@@ -83,7 +87,7 @@ Oliver exhaled once through his nose.
 
 At the end of the bar, a young couple sat shoulder to shoulder.
 
-“You never say what you mean,” the woman said.
+**Woman:** You never say what you mean.
 
 The man kept his eyes on the television above the bar. Sports highlights. Closed captions sliding silently across the bottom. He didn’t answer.
 

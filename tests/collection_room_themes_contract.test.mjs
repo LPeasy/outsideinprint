@@ -78,20 +78,22 @@ test("collection list template emits the lane guide and grouped directory hooks"
   }
 });
 
-test("article template emits primary-collection light-accent hooks", () => {
+test("article template emits compact primary-collection boundary hooks", () => {
   for (const snippet of [
-    '{{ $showCollectionAccent := false }}',
+    '{{ $showCollectionContext := false }}',
     '{{ $primaryCollection = $candidateCollection }}',
-    'append "piece--collection-accent"',
-    'piece--collection-accent--%s',
     'data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"',
-    'data-piece-collection-room-theme="{{ $primaryCollection.collection.room_theme }}"',
-    'class="piece-collection-context"',
+    'class="piece-collection-strip"',
+    'piece-collection-strip__eyebrow',
+    'piece-collection-strip__title',
+    'piece-collection-strip__meta',
     'From the Collection',
     'data-analytics-source-slot="article_collection_context"'
   ]) {
     assert.match(articleSingle, new RegExp(escapeRegex(snippet)));
   }
+  assert.doesNotMatch(articleSingle, /piece--collection-accent/);
+  assert.doesNotMatch(articleSingle, /data-piece-collection-room-theme/);
 });
 
 test("collection-card partial emits room-echo classes only in the grid branch", () => {
@@ -131,22 +133,14 @@ test("css owns the shared collection-room namespace and all theme modifiers", ()
     ".collection-card__description{",
     ".collection-card__meta-line{",
     ".collection-card__start-here{",
-    ".piece--collection-accent{",
-    ".piece--collection-accent .piece-collection-context,",
-    ".piece--collection-accent .piece-collection-context__eyebrow{",
-    ".piece--collection-accent .piece-collection-context__title{",
-    ".piece--collection-accent .piece-collection-context__meta{",
-    ".piece--collection-accent .reading-path{",
-    ".piece--collection-accent .reading-path__action--primary{",
-    ".piece--collection-accent--ledger-editorial-desk{",
-    ".piece--collection-accent--syd-and-oliver-smoky-lounge{",
-    ".piece--collection-accent--modern-bios-records-archive{",
-    ".piece--collection-accent--lit-review-lamplit-shelf{",
-    ".piece--collection-accent--risk-systems-notebook{",
-    ".piece--collection-accent--floods-survey-table{",
-    ".piece--collection-accent--ai-screen-glow-archive{",
-    ".piece--collection-accent--moral-chapel-library{",
-    ".piece--collection-accent--reported-case-studies-evidence-room{",
+    ".piece-title-block{",
+    ".piece-publication-strip{",
+    ".piece-collection-strip{",
+    ".piece-collection-strip::before{",
+    ".piece-collection-strip__eyebrow,",
+    ".piece-collection-strip__title{",
+    ".piece-collection-strip__meta{",
+    ".piece-dossier-header{",
     ".collection-room{",
     ".collection-room::before{",
     ".collection-room::after{",
@@ -198,17 +192,18 @@ test("docs record room_theme, article light accents, and collection-room ownersh
     "Best first read for this lane.",
     "From the Collection",
     "first public match",
-    "primary-collection light-accent layer"
+    "compact primary-collection strip"
   ]) {
     assert.match(collectionsDoc, new RegExp(escapeRegex(snippet)));
   }
 
   for (const snippet of [
-    "`piece--collection-accent`",
-    "`piece-collection-context`",
-    "`piece-collection-context__eyebrow`",
-    "`piece-collection-context__title`",
-    "`piece-collection-context__meta`",
+    "`piece-title-block`",
+    "`piece-publication-strip`",
+    "`piece-collection-strip`",
+    "`piece-collection-strip__eyebrow`",
+    "`piece-collection-strip__title`",
+    "`piece-collection-strip__meta`",
     "`collections-directory__guide*`",
     "`collection-card__description`",
     "`collection-room`",

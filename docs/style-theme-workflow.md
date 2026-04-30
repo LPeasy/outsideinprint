@@ -67,6 +67,6 @@ Do not extend the engraved tokens into card/panel borders, image frames, buttons
 
 The second-pass engraved archive polish should stay CSS-first and restrained. Prefer a single gradient threshold or short rail at an editorial boundary over repeated ornamental treatment on every item. Long archive and library lists should use quieter row separators with stronger month/type/group starts.
 
-Article body treatment should protect reading flow. Body headings, figures, captions, embedded-media notices, citation panels, revision history, and reading paths may receive subtle engraved thresholds; ordinary paragraphs should not.
+Article body treatment should protect reading flow. Body headings, figures, captions, embedded-media notices, the combined publication-record panel, and reading paths may receive subtle engraved thresholds; ordinary paragraphs should not.
 
 Shop remains protected from route-specific engraving. It may inherit shared section-front and footer rules, but product cards, purchase controls, and form-like surfaces should remain outside the divider token system.

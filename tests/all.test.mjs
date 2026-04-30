@@ -1,3 +1,4 @@
+import "./article_form_grammar_contract.test.mjs";
 import "./collection_room_themes_contract.test.mjs";
 import "./entry_threads_contract.test.mjs";
 import "./homepage_selected.test.mjs";

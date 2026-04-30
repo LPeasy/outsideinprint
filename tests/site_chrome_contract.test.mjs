@@ -272,8 +272,8 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.nav--section-rail::before,\s*\.nav--section-rail::after\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.site-footer\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
   assert.match(css, /\.site-footer::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(css, /\.imprint-header,\s*\.citation,\s*\.article-record,\s*\.revision-history,\s*\.reading-path\{[\s\S]*border-color:var\(--oip-rule-standard\);/);
-  assert.match(css, /\.imprint-header::before,\s*\.citation::before,\s*\.article-record::before,\s*\.revision-history::before,\s*\.reading-path::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.imprint-header,\s*\.article-publication-record,\s*\.article-record,\s*\.reading-path\{[\s\S]*border-color:var\(--oip-rule-standard\);/);
+  assert.match(css, /\.imprint-header::before,\s*\.article-publication-record::before,\s*\.article-record::before,\s*\.reading-path::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.library-group::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.library-group \[data-library-item\],\s*\.library-results__list \[data-library-item\]\{[\s\S]*position:relative;[\s\S]*padding-top:\.55rem;/);
   assert.match(css, /\.library-group \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\),\s*\.library-results__list \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\)\{[\s\S]*border-top:1px solid var\(--oip-rule-standard\);/);
