@@ -57,6 +57,7 @@ try {
   Assert-Match -Value $titleOnlyContent -Pattern "(?m)^collections: \[\]$" -Message 'Expected scaffold to include empty collections metadata.'
   Assert-Match -Value $titleOnlyContent -Pattern '(?s)## Lead.*## Main Argument.*## Evidence.*## Why It Matters' -Message 'Expected scaffold to include the editorial starter structure.'
   Assert-Match -Value $titleOnlyOutput -Pattern 'check_essay_guardrails\.ps1 -Paths \.\\content\\essays\\signal-garden\.md' -Message 'Expected scaffold output to point at the target-file guardrail command.'
+  Assert-Match -Value $titleOnlyOutput -Pattern 'check_essay_guardrails\.ps1 -Paths \.\\content\\essays\\signal-garden\.md -RequireEditorialPhilosophyAudit' -Message 'Expected scaffold output to point at the publication philosophy gate.'
 
   $customOutput = & $pwshWrapperPath -NoLogo -NoProfile -ExecutionPolicy Bypass -File $scriptPath --title 'Authoring by Hand' --slug 'custom-slug' --date '2026-04-12' --subtitle 'A better starting point' --description 'Short deck for a new essay.' --root $tempRoot 2>&1 | Out-String
   $customExit = $LASTEXITCODE
@@ -72,8 +73,15 @@ try {
   Assert-Match -Value $customContent -Pattern "(?m)^slug: 'custom-slug'$" -Message 'Expected scaffold to honor an explicit slug override.'
   Assert-Match -Value $customOutput -Pattern 'Created essay draft:' -Message 'Expected scaffold to report the created file path.'
 
-  $collisionOutput = & $pwshWrapperPath -NoLogo -NoProfile -ExecutionPolicy Bypass -File $scriptPath --title 'Signal Garden' --root $tempRoot 2>&1 | Out-String
-  $collisionExit = $LASTEXITCODE
+  $previousErrorActionPreference = $ErrorActionPreference
+  $ErrorActionPreference = 'Continue'
+  try {
+    $collisionOutput = & $pwshWrapperPath -NoLogo -NoProfile -ExecutionPolicy Bypass -File $scriptPath --title 'Signal Garden' --root $tempRoot 2>&1 | Out-String
+    $collisionExit = $LASTEXITCODE
+  }
+  finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+  }
   Assert-True ($collisionExit -ne 0) 'Expected scaffold to fail when the target file already exists.'
   Assert-Match -Value $collisionOutput -Pattern 'Essay already exists:' -Message 'Expected collision failure to explain why no file was written.'
 

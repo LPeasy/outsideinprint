@@ -39,15 +39,17 @@ Use `docs/publishing-workflow.md` as the canonical process. The normal publish p
 
 1. Scaffold a new essay draft:
    - `.\tools\bin\custom\new-essay.cmd --title "My Title"`
-2. Run target-file guardrails:
+2. Run target-file guardrails while drafting:
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md`
-3. Build the site locally:
+3. Before setting `draft: false` or publishing a changed essay, run the philosophy gate:
+   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit`
+4. Build the site locally:
    - `.\tools\bin\generated\hugo.cmd --gc --minify`
-4. Write the fresh-build manifest and run the publish smoke tests:
+5. Write the fresh-build manifest and run the publish smoke tests:
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1`
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1`
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`
-5. Commit and push or merge to `main`.
+6. Commit and push or merge to `main`.
 
 Publishing happens through `.github/workflows/deploy.yml` after `main` is updated. For metadata, collections, Medium migration, and special-case paths, see `docs/publishing-workflow.md`.
 Local OIP publish work does not force npm or npx checks; CI owns public-site contracts and analytics snapshot coverage.

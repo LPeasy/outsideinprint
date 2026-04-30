@@ -571,6 +571,9 @@ $zipArchive = $null
 try {
   if (-not (Test-Path $ZipPath -PathType Leaf)) { Write-Error "Zip not found: $ZipPath"; exit 2 }
   if ($Limit -lt 0) { Write-Error 'Limit must be >= 0'; exit 2 }
+  if (-not $DraftDefault) {
+    throw 'Medium imports must remain drafts. Keep -DraftDefault true, then publish only after the essay passes OIP-99 and the Editorial Philosophy Audit.'
+  }
 
   $zipFullPath = [System.IO.Path]::GetFullPath($ZipPath)
   if (-not $ReportOut) { $ReportOut = "./reports/medium-import-$((Get-Date).ToString('yyyyMMdd-HHmmss')).json" }
@@ -702,6 +705,7 @@ try {
         reason_code = ''
         output_path = $destPath
         dry_run = [bool]$DryRun
+        requires_editorial_philosophy_audit = $true
         word_count = $post.word_count
         image_count = $post.image_urls.Count
         embed_count = $post.embed_urls.Count
@@ -721,7 +725,7 @@ try {
   $failed = @($reportEntries | Where-Object { $_.status -eq 'failed' }).Count
 
   $sinceDateStr = if ($SinceDate) { $SinceDate.Value.ToString('yyyy-MM-dd') } else { '' }
-  $runObj = [pscustomobject]@{ started_at=(Get-Date).ToString('o'); zip_path=$zipFullPath; mode=$Mode; dry_run=[bool]$DryRun; overwrite_existing=[bool]$OverwriteExisting; min_words=$MinWords; draft_default=$DraftDefault; include_tags=@($IncludeTags); exclude_tags=@($ExcludeTags); since_date=$sinceDateStr; limit=$Limit }
+  $runObj = [pscustomobject]@{ started_at=(Get-Date).ToString('o'); zip_path=$zipFullPath; mode=$Mode; dry_run=[bool]$DryRun; overwrite_existing=[bool]$OverwriteExisting; min_words=$MinWords; draft_default=$DraftDefault; editorial_philosophy_policy='imports_remain_draft_until_audit'; include_tags=@($IncludeTags); exclude_tags=@($ExcludeTags); since_date=$sinceDateStr; limit=$Limit }
   $totalsObj = [pscustomobject]@{ total_post_files=$postEntries.Count; converted=$converted; skipped=$skipped; failed=$failed }
   $entriesOut = $reportEntries.ToArray(); $payload = [ordered]@{ run = $runObj; totals = $totalsObj; entries = $entriesOut }
 
@@ -731,6 +735,7 @@ try {
     ('- Zip: ' + $zipFullPath),
     ('- Mode: ' + $Mode),
     ('- Dry run: ' + [bool]$DryRun),
+    '- Editorial philosophy policy: imports remain drafts until OIP-99 and Editorial Philosophy Audit pass',
     ('- Overwrite existing: ' + [bool]$OverwriteExisting),
     ('- Min words: ' + $MinWords),'',
     '## Totals','',

@@ -6,6 +6,8 @@ converts obvious Medium card remnants into plain markdown links, repairs common
 mojibake, strips duplicated lead metadata, and normalizes a narrow set of
 image-caption patterns that the Hugo article body partial already understands.
 It does not attempt substantive editorial rewrites.
+It also does not satisfy the Editorial Philosophy Audit; that remains a manual
+publication gate after structural normalization.
 """
 
 from __future__ import annotations

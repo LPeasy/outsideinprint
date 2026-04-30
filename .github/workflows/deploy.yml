@@ -74,10 +74,10 @@ jobs:
           }
 
           if ([string]::IsNullOrWhiteSpace($base)) {
-            ./scripts/check_essay_guardrails.ps1 -RequireDescription -RequireFeaturedImage
+            ./scripts/check_essay_guardrails.ps1 -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit
           }
           else {
-            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}" -RequireDescription -RequireFeaturedImage
+            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit
           }
 
   build:

@@ -4,6 +4,8 @@
 
 This policy defines the current editorial and technical standards for publishing a web publication from a single Markdown source.
 
+The governing editorial philosophy lives in `editorial/oip_editorial_philosophy.md`. Published work should reflect disciplined independence: judgments must be earned through evidence, logic, incentives, tradeoffs, consequences, institutional behavior, and honest uncertainty.
+
 ## Scope
 
 Applies to all non-draft content in:
@@ -38,6 +40,21 @@ Each published piece is treated as a durable publication record, not a blog post
 - `version`
 - `edition`
 - `draft`
+
+## Editorial Philosophy Gate
+
+New essays, new reports, new working papers, published revisions to those sections, and daily back-archive essay revisions must have acceptable Editorial Philosophy Audit evidence before publication. Syd & Oliver dialogue/fiction pieces are excluded from this hard gate unless a specific piece is being treated as public-judgment work. Accepted evidence is either:
+
+- `docs/editorial-audits/99-refinement/<slug>-99-refinement-report.md` with `## Editorial Philosophy Audit`, `Decision: PASS`, and PASS rows for Evidence, Logic, Incentives, Tradeoffs, Consequences, Uncertainty, and Institutional Behavior
+- a daily backfill ledger/report entry for the slug with `editorial_philosophy.status` set to `PASS` and all seven test fields set to `PASS`
+
+The target-file guardrail flag is:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit
+```
+
+Use the same flag with `content\reports\<slug>.md` and `content\working-papers\<slug>.md` when publishing or revising reports and working papers.
 
 Optional fields:
 

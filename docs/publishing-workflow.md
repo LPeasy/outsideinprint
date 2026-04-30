@@ -4,6 +4,7 @@ This is the canonical process for publishing new public content on Outside In Pr
 
 - Editorial policy lives in `PUBLISHING_POLICY.md`.
 - Repo-local session instructions live in `AGENTS.md`.
+- The governing OIP editorial philosophy lives at `editorial/oip_editorial_philosophy.md`.
 - The goal of this workflow is a clean web-first publish path that uses repo-local tooling, catches content residue early, and deploys through `main`.
 
 ## Toolchain bootstrap
@@ -86,7 +87,7 @@ If a piece belongs in an existing collection, add explicit `collections` front m
 
 5. Verify `/collections/`, the collection page, and member pages in a local build.
 
-Essays are the first-class publishing workflow. Dialogues, reports, and working papers can still be published, but they do not currently have the same scaffold and guardrail path as essays.
+Essays are the first-class publishing workflow. Reports and working papers can still be published manually and must pass the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces do not use this hard gate unless a specific piece is explicitly treated as public-judgment work.
 
 ## Local preview and publish validation
 
@@ -95,6 +96,14 @@ Run the target-file guardrail before a full build:
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
 ```
+
+For publication-ready essays, reports, and working papers, require Editorial Philosophy Audit evidence:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit
+```
+
+Use the same flag with `content\reports\<slug>.md` or `content\working-papers\<slug>.md` for those sections. Accepted evidence is either a per-piece OIP-99 report under `docs/editorial-audits/99-refinement/` or a daily backfill ledger/report entry for the slug. The audit must show `Decision: PASS` and PASS rows for Evidence, Logic, Incentives, Tradeoffs, Consequences, Uncertainty, and Institutional Behavior.
 
 During drafting, preview locally with:
 
@@ -114,6 +123,7 @@ Before publishing, run the normal local publish gate:
 What this gate is meant to catch:
 
 - changed-essay residue and missing descriptions
+- missing Editorial Philosophy Audit evidence for changed non-draft essays, reports, and working papers
 - hero/frontmatter conflicts such as placeholder heroes, missing heroes with real early lead images, and duplicate hero/body lead images
 - broken public routes
 - generated HTML regressions

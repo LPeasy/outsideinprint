@@ -25,6 +25,12 @@ For changed essays, run the direct PowerShell guardrail before the full build:
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
 ```
 
+For changed non-draft essays, reports, and working papers, require Editorial Philosophy Audit evidence before publishing:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit
+```
+
 ## CI Boundary
 
 GitHub Actions remains authoritative for CI-only public-site contracts and analytics snapshot checks. Dashboard publishing is paused; do not reintroduce local npm or npx checks as a substitute.

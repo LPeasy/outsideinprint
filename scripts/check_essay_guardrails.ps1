@@ -7,7 +7,8 @@ param(
   [switch]$AllEssays,
   [switch]$StrictWarnings,
   [switch]$RequireDescription,
-  [switch]$RequireFeaturedImage
+  [switch]$RequireFeaturedImage,
+  [switch]$RequireEditorialPhilosophyAudit
 )
 
 $ErrorActionPreference = 'Stop'
@@ -15,6 +16,12 @@ $ErrorActionPreference = 'Stop'
 if (-not $ReportBasePath) {
   $ReportBasePath = Join-Path $Root 'reports\essay-guardrails'
 }
+
+$philosophyContentRoots = @(
+  'content/essays',
+  'content/reports',
+  'content/working-papers'
+)
 
 $auditScript = Join-Path $Root 'scripts\audit_legacy_essays.ps1'
 if (-not (Test-Path $auditScript -PathType Leaf)) {
@@ -87,6 +94,94 @@ function Test-FrontMatterHasSocialImage {
   return [regex]::IsMatch($frontMatter, '(?mi)^(images|image|featured_image)\s*:')
 }
 
+function Get-FrontMatterMap {
+  param([string]$Path)
+
+  $result = @{}
+  if (-not (Test-Path $Path -PathType Leaf)) {
+    return $result
+  }
+
+  $content = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
+  $matches = [regex]::Matches($content, '(?m)^---\s*$')
+  if ($matches.Count -lt 2) {
+    return $result
+  }
+
+  $frontStart = $matches[0].Index + $matches[0].Length
+  $frontLength = $matches[1].Index - $frontStart
+  if ($frontLength -le 0) {
+    return $result
+  }
+
+  $frontMatter = $content.Substring($frontStart, $frontLength)
+  foreach ($line in @($frontMatter -split "`r?`n")) {
+    if ($line -match '^\s*([A-Za-z0-9_]+):\s*(.*?)\s*$') {
+      $value = $Matches[2].Trim()
+      if (($value.StartsWith('"') -and $value.EndsWith('"')) -or ($value.StartsWith("'") -and $value.EndsWith("'"))) {
+        $value = $value.Substring(1, $value.Length - 2)
+      }
+      $result[$Matches[1].ToLowerInvariant()] = $value
+    }
+  }
+
+  return $result
+}
+
+function Get-PhilosophyContentKind {
+  param(
+    [string]$RepoRoot,
+    [string]$PathValue
+  )
+
+  $relativePath = Get-RepoRelativePath -RepoRoot $RepoRoot -PathValue $PathValue
+  foreach ($rootName in $philosophyContentRoots) {
+    if ($relativePath.StartsWith($rootName + '/', [System.StringComparison]::OrdinalIgnoreCase)) {
+      return $rootName
+    }
+  }
+
+  return ''
+}
+
+function Test-IsEssayContentPath {
+  param(
+    [string]$RepoRoot,
+    [string]$PathValue
+  )
+
+  $relativePath = Get-RepoRelativePath -RepoRoot $RepoRoot -PathValue $PathValue
+  return $relativePath.StartsWith('content/essays/', [System.StringComparison]::OrdinalIgnoreCase)
+}
+
+function Get-PhilosophyAuditSubject {
+  param(
+    [string]$RepoRoot,
+    [string]$PathValue
+  )
+
+  $frontMatter = Get-FrontMatterMap -Path $PathValue
+  $slug = ''
+  if ($frontMatter.ContainsKey('slug')) {
+    $slug = [string]$frontMatter['slug']
+  }
+  if ([string]::IsNullOrWhiteSpace($slug)) {
+    $slug = [System.IO.Path]::GetFileNameWithoutExtension($PathValue)
+  }
+
+  $draft = $false
+  if ($frontMatter.ContainsKey('draft')) {
+    $draft = ([string]$frontMatter['draft']).Trim().ToLowerInvariant() -eq 'true'
+  }
+
+  return [pscustomobject]@{
+    Path = Get-RepoRelativePath -RepoRoot $RepoRoot -PathValue $PathValue
+    Slug = $slug
+    Draft = $draft
+    Kind = Get-PhilosophyContentKind -RepoRoot $RepoRoot -PathValue $PathValue
+  }
+}
+
 function Test-IsDialogueEssayPath {
   param([string]$Path)
 
@@ -108,6 +203,149 @@ function Test-IsDialogueEssayPath {
 
   $frontMatter = $content.Substring($frontStart, $frontLength)
   return [regex]::IsMatch($frontMatter, '(?mi)^library_type:\s*[''"]?dialogue(?:[''"]|\s|$)')
+}
+
+function Test-AuditPassLine {
+  param(
+    [string]$Text,
+    [string]$Label
+  )
+
+  $escapedLabel = [regex]::Escape($Label)
+  if ([regex]::IsMatch($Text, "(?im)^\s*(?:[-*]\s*)?$escapedLabel\s*:\s*PASS\b")) {
+    return $true
+  }
+
+  return [regex]::IsMatch($Text, "(?im)^\|\s*$escapedLabel\s*\|\s*PASS\s*\|")
+}
+
+function Test-EditorialPhilosophyAuditText {
+  param([string]$Text)
+
+  if (-not [regex]::IsMatch($Text, '(?im)^##\s+Editorial Philosophy Audit\s*$')) {
+    return $false
+  }
+
+  if (-not [regex]::IsMatch($Text, '(?im)^\s*(?:[-*]\s*)?Decision\s*:\s*PASS\b')) {
+    return $false
+  }
+
+  foreach ($label in @(
+    'Evidence',
+    'Logic',
+    'Incentives',
+    'Tradeoffs',
+    'Consequences',
+    'Uncertainty',
+    'Institutional Behavior'
+  )) {
+    if (-not (Test-AuditPassLine -Text $Text -Label $label)) {
+      return $false
+    }
+  }
+
+  return $true
+}
+
+function Test-LedgerEditorialPhilosophyEntry {
+  param(
+    [object]$Entry,
+    [string]$RepoRoot
+  )
+
+  if ($null -eq $Entry -or ($Entry.PSObject.Properties.Name -notcontains 'editorial_philosophy')) {
+    return $false
+  }
+
+  $audit = $Entry.editorial_philosophy
+  if ($null -eq $audit -or [string]$audit.status -ne 'PASS') {
+    return $false
+  }
+
+  foreach ($field in @(
+    'evidence',
+    'logic',
+    'incentives',
+    'tradeoffs',
+    'consequences',
+    'uncertainty',
+    'institutional_behavior'
+  )) {
+    if ($audit.PSObject.Properties.Name -notcontains $field) {
+      return $false
+    }
+    if ([string]$audit.$field -ne 'PASS') {
+      return $false
+    }
+  }
+
+  if ($Entry.PSObject.Properties.Name -notcontains 'report' -or [string]::IsNullOrWhiteSpace([string]$Entry.report)) {
+    return $false
+  }
+
+  $reportPath = Join-Path $RepoRoot ([string]$Entry.report)
+  if (-not (Test-Path -LiteralPath $reportPath -PathType Leaf)) {
+    return $false
+  }
+
+  $reportText = [System.IO.File]::ReadAllText($reportPath, [System.Text.Encoding]::UTF8)
+  foreach ($snippet in @(
+    'Editorial philosophy: PASS',
+    'Evidence: PASS',
+    'Logic: PASS',
+    'Incentives: PASS',
+    'Tradeoffs: PASS',
+    'Consequences: PASS',
+    'Uncertainty: PASS',
+    'Institutional behavior: PASS'
+  )) {
+    if ($reportText -notmatch [regex]::Escape($snippet)) {
+      return $false
+    }
+  }
+
+  return $true
+}
+
+function Test-EditorialPhilosophyAuditEvidence {
+  param(
+    [string]$RepoRoot,
+    [string]$Slug
+  )
+
+  if ([string]::IsNullOrWhiteSpace($Slug)) {
+    return $false
+  }
+
+  $refinementReport = Join-Path $RepoRoot "docs\editorial-audits\99-refinement\$Slug-99-refinement-report.md"
+  if (Test-Path -LiteralPath $refinementReport -PathType Leaf) {
+    $reportText = [System.IO.File]::ReadAllText($refinementReport, [System.Text.Encoding]::UTF8)
+    if (Test-EditorialPhilosophyAuditText -Text $reportText) {
+      return $true
+    }
+  }
+
+  $ledgerPath = Join-Path $RepoRoot 'docs\editorial-audits\daily-backfill\ledger.json'
+  if (-not (Test-Path -LiteralPath $ledgerPath -PathType Leaf)) {
+    return $false
+  }
+
+  try {
+    $ledger = Get-Content -LiteralPath $ledgerPath -Raw | ConvertFrom-Json
+  } catch {
+    return $false
+  }
+
+  if ($null -eq $ledger.completed) {
+    return $false
+  }
+
+  $entryProperty = $ledger.completed.PSObject.Properties[$Slug]
+  if ($null -eq $entryProperty) {
+    return $false
+  }
+
+  return (Test-LedgerEditorialPhilosophyEntry -Entry $entryProperty.Value -RepoRoot $RepoRoot)
 }
 
 function Expand-EssayPaths {
@@ -147,9 +385,16 @@ function Expand-EssayPaths {
 function Get-WorkingTreeEssayPaths {
   param([string]$RepoRoot)
 
-  $changed = @(& git -C $RepoRoot diff --name-only --diff-filter=ACMR HEAD -- content/essays 2>$null)
-  $untracked = @(& git -C $RepoRoot ls-files --others --exclude-standard -- content/essays 2>$null)
-  return @($changed + $untracked)
+  $paths = New-Object System.Collections.Generic.List[string]
+  foreach ($rootName in $philosophyContentRoots) {
+    foreach ($pathValue in @(& git -C $RepoRoot diff --name-only --diff-filter=ACMR HEAD -- $rootName 2>$null)) {
+      $paths.Add($pathValue)
+    }
+    foreach ($pathValue in @(& git -C $RepoRoot ls-files --others --exclude-standard -- $rootName 2>$null)) {
+      $paths.Add($pathValue)
+    }
+  }
+  return $paths.ToArray()
 }
 
 function Get-DiffEssayPaths {
@@ -159,7 +404,13 @@ function Get-DiffEssayPaths {
     [string]$ToRef
   )
 
-  return @(& git -C $RepoRoot diff --name-only --diff-filter=ACMR $FromRef $ToRef -- content/essays 2>$null)
+  $paths = New-Object System.Collections.Generic.List[string]
+  foreach ($rootName in $philosophyContentRoots) {
+    foreach ($pathValue in @(& git -C $RepoRoot diff --name-only --diff-filter=ACMR $FromRef $ToRef -- $rootName 2>$null)) {
+      $paths.Add($pathValue)
+    }
+  }
+  return $paths.ToArray()
 }
 
 function Resolve-TargetEssayPaths {
@@ -181,9 +432,11 @@ function Resolve-TargetEssayPaths {
       }
     }
   } elseif ($ScanAll) {
-    $essayRoot = Join-Path $RepoRoot 'content\essays'
-    if (Test-Path $essayRoot -PathType Container) {
-      $candidates.Add([System.IO.Path]::GetFullPath($essayRoot))
+    foreach ($rootName in $philosophyContentRoots) {
+      $contentRoot = Join-Path $RepoRoot ($rootName -replace '/', '\')
+      if (Test-Path $contentRoot -PathType Container) {
+        $candidates.Add([System.IO.Path]::GetFullPath($contentRoot))
+      }
     }
   } elseif (-not [string]::IsNullOrWhiteSpace($FromRef) -and ($FromRef -notmatch '^0+$')) {
     foreach ($pathValue in (Get-DiffEssayPaths -RepoRoot $RepoRoot -FromRef $FromRef -ToRef $ToRef)) {
@@ -259,6 +512,72 @@ function Get-AuditRowsForGitRef {
   }
 }
 
+function Get-CurrentPowerShellExecutable {
+  $currentProcess = Get-Process -Id $PID
+  if ($currentProcess.Path -and (Test-Path $currentProcess.Path -PathType Leaf)) {
+    return $currentProcess.Path
+  }
+
+  $pwsh = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -First 1
+  if ($pwsh -and $pwsh.Source) {
+    return $pwsh.Source
+  }
+
+  $powershell = Get-Command powershell -ErrorAction SilentlyContinue | Select-Object -First 1
+  if ($powershell -and $powershell.Source) {
+    return $powershell.Source
+  }
+
+  throw 'Unable to locate a PowerShell executable for the legacy import preflight.'
+}
+
+function Invoke-LegacyImportPreflight {
+  param(
+    [string]$RepoRoot,
+    [string[]]$EssayPaths,
+    [string]$GuardrailReportBasePath,
+    [switch]$FailOnWarnings
+  )
+
+  if (-not $EssayPaths -or $EssayPaths.Count -eq 0) {
+    Write-Host 'Legacy import preflight: no essay cleanup targets; skipping focused legacy scan.' -ForegroundColor Yellow
+    return 0
+  }
+
+  $preflightScript = Join-Path $RepoRoot 'scripts\check_legacy_import_preflight.ps1'
+  if (-not (Test-Path $preflightScript -PathType Leaf)) {
+    Write-Host 'Legacy import preflight: script not found; skipping focused legacy scan.' -ForegroundColor Yellow
+    return 0
+  }
+
+  $pwsh = Get-CurrentPowerShellExecutable
+  $preflightArgs = @(
+    '-NoLogo',
+    '-NoProfile',
+    '-ExecutionPolicy',
+    'Bypass',
+    '-File',
+    $preflightScript,
+    '-Root',
+    $RepoRoot,
+    '-ReportBasePath',
+    ($GuardrailReportBasePath + '-legacy-import-preflight'),
+    '-Paths',
+    ($EssayPaths -join ',')
+  )
+
+  if ($FailOnWarnings) {
+    $preflightArgs += '-StrictWarnings'
+  }
+
+  $preflightOutput = & $pwsh @preflightArgs 2>&1
+  $preflightExitCode = $LASTEXITCODE
+  foreach ($line in @($preflightOutput)) {
+    Write-Host $line
+  }
+  return $preflightExitCode
+}
+
 $targetPaths = Resolve-TargetEssayPaths `
   -RepoRoot $Root `
   -ExplicitPaths $Paths `
@@ -269,24 +588,34 @@ $targetPaths = Resolve-TargetEssayPaths `
 $targetPaths = @(Expand-EssayPaths -EssayPaths $targetPaths)
 
 if ($targetPaths.Count -eq 0) {
-  Write-Host 'Essay guardrails: no target essays to check.' -ForegroundColor Yellow
+  Write-Host 'Essay guardrails: no target files to check.' -ForegroundColor Yellow
   exit 0
 }
 
-& $auditScript -Root $Root -Sections @('essays') -Paths $targetPaths -ReportBasePath $ReportBasePath | Out-Null
-$report = Get-Content ($ReportBasePath + '.json') -Raw | ConvertFrom-Json
-$rows = @($report.files)
+$essayAuditPaths = @($targetPaths | Where-Object { Test-IsEssayContentPath -RepoRoot $Root -PathValue $_ })
+$philosophyAuditSubjects = @(
+  $targetPaths |
+    Where-Object { -not [string]::IsNullOrWhiteSpace((Get-PhilosophyContentKind -RepoRoot $Root -PathValue $_)) } |
+    ForEach-Object { Get-PhilosophyAuditSubject -RepoRoot $Root -PathValue $_ }
+)
+
+$rows = @()
+if ($essayAuditPaths.Count -gt 0) {
+  & $auditScript -Root $Root -Sections @('essays') -Paths $essayAuditPaths -ReportBasePath $ReportBasePath | Out-Null
+  $report = Get-Content ($ReportBasePath + '.json') -Raw | ConvertFrom-Json
+  $rows = @($report.files)
+}
 
 $baselineRowsByPath = @{}
-if (-not [string]::IsNullOrWhiteSpace($BaseRef) -and ($BaseRef -notmatch '^0+$')) {
-  $baselineRows = @(Get-AuditRowsForGitRef -RepoRoot $Root -AuditScriptPath $auditScript -Ref $BaseRef -EssayPaths $targetPaths)
+if ($essayAuditPaths.Count -gt 0 -and -not [string]::IsNullOrWhiteSpace($BaseRef) -and ($BaseRef -notmatch '^0+$')) {
+  $baselineRows = @(Get-AuditRowsForGitRef -RepoRoot $Root -AuditScriptPath $auditScript -Ref $BaseRef -EssayPaths $essayAuditPaths)
   foreach ($baselineRow in $baselineRows) {
     $baselineRowsByPath[[string]$baselineRow.path] = $baselineRow
   }
 }
 
-if ($rows.Count -eq 0) {
-  Write-Host 'Essay guardrails: audit produced no matching essay rows.' -ForegroundColor Yellow
+if ($rows.Count -eq 0 -and $philosophyAuditSubjects.Count -eq 0) {
+  Write-Host 'Essay guardrails: audit produced no matching governed rows.' -ForegroundColor Yellow
   exit 0
 }
 
@@ -295,6 +624,7 @@ $warningIssues = @('caption_residue','pseudo_headings','manual_bullets','fake_li
 
 $blockingResults = New-Object System.Collections.Generic.List[object]
 $warningResults = New-Object System.Collections.Generic.List[object]
+$philosophyAuditResults = New-Object System.Collections.Generic.List[object]
 
 foreach ($row in $rows) {
   $issueTypes = @($row.issue_types)
@@ -344,10 +674,28 @@ foreach ($row in $rows) {
   }
 }
 
+if ($RequireEditorialPhilosophyAudit) {
+  foreach ($subject in $philosophyAuditSubjects) {
+    if ([bool]$subject.Draft) {
+      continue
+    }
+
+    if (-not (Test-EditorialPhilosophyAuditEvidence -RepoRoot $Root -Slug ([string]$subject.Slug))) {
+      $philosophyAuditResults.Add([pscustomobject]@{
+        Path = [string]$subject.Path
+        Slug = [string]$subject.Slug
+        Issues = @('missing_editorial_philosophy_audit')
+      })
+    }
+  }
+}
+
 Write-Host 'Essay guardrails summary' -ForegroundColor Cyan
-Write-Host "  Target essays: $($rows.Count)"
+Write-Host "  Essay cleanup targets: $($rows.Count)"
+Write-Host "  Philosophy audit targets: $($philosophyAuditSubjects.Count)"
 Write-Host "  Blocking files: $($blockingResults.Count)"
 Write-Host "  Warning files: $($warningResults.Count)"
+Write-Host "  Philosophy audit blocking files: $($philosophyAuditResults.Count)"
 Write-Host "  Audit report: $($ReportBasePath).json"
 
 foreach ($item in $blockingResults) {
@@ -366,7 +714,21 @@ foreach ($item in $warningResults) {
   }
 }
 
-if ($blockingResults.Count -gt 0) {
+foreach ($item in $philosophyAuditResults) {
+  Write-Host ''
+  Write-Host "BLOCKER $($item.Path)" -ForegroundColor Red
+  foreach ($issue in $item.Issues) {
+    Write-Host "  - $issue for slug $($item.Slug)" -ForegroundColor Red
+  }
+}
+
+$legacyPreflightExitCode = Invoke-LegacyImportPreflight `
+  -RepoRoot $Root `
+  -EssayPaths $essayAuditPaths `
+  -GuardrailReportBasePath $ReportBasePath `
+  -FailOnWarnings:$StrictWarnings
+
+if ($blockingResults.Count -gt 0 -or $philosophyAuditResults.Count -gt 0 -or $legacyPreflightExitCode -ne 0) {
   Write-Host "`nEssay guardrails FAILED." -ForegroundColor Red
   exit 1
 }

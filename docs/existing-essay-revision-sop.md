@@ -2,6 +2,8 @@
 
 Use this procedure when editing any already-published Outside In Print page under `content/essays/`, `content/reports/`, or `content/working-papers/`.
 
+For essays, reports, and working papers, also apply the governing philosophy in `../editorial/oip_editorial_philosophy.md`. Revised published pieces in those sections must pass an Editorial Philosophy Audit before deployment. Syd & Oliver dialogue/fiction pieces are excluded from this hard gate unless explicitly treated as public-judgment work.
+
 ## Principle
 
 Published pieces are durable web editions. A public edit must leave the archive record clear enough that a reader can cite the version they read.
@@ -62,18 +64,20 @@ Do not change `date` for ordinary revisions. The date remains the original publi
 4. Update `version`, `edition`, and any required `revision_history` entry in the same edit as the content change.
 5. Preserve stable fields unless deliberately changed: `slug`, `date`, `collections`, canonical image paths, and public URLs.
 6. For copy revisions, run the OIP voice pass and the current AI-writing-tells cleanup before validation.
-7. Build locally and inspect the rendered archive block on the changed page.
-8. Verify the archive block shows the original `Date`, the new `Version`, and the new `Edition`.
-9. Run the local publish gate used for content changes. Do not run local npm or npx checks for OIP revision work.
-10. Publish only after reviewing the diff and confirming it contains the intended content, metadata, fixture, and asset changes.
+7. Create or update accepted Editorial Philosophy Audit evidence: either a per-piece OIP-99 report under `docs/editorial-audits/99-refinement/` or a daily backfill ledger/report entry for the slug.
+8. Build locally and inspect the rendered archive block on the changed page.
+9. Verify the archive block shows the original `Date`, the new `Version`, and the new `Edition`.
+10. Run the local publish gate used for content changes, including `check_essay_guardrails.ps1 -RequireEditorialPhilosophyAudit` for changed essays, reports, and working papers. Do not run local npm or npx checks for OIP revision work.
+11. Publish only after reviewing the diff and confirming it contains the intended content, metadata, fixture, audit, and asset changes.
 
 ## Validation Checklist
 
-Before publishing a revised essay, confirm:
+Before publishing a revised essay, report, or working paper, confirm:
 
 - The rendered page shows the expected `Date`, `Version`, and `Edition`.
 - The citation block uses the new version.
 - The revision history block appears below the citation block when `revision_history` is present.
+- Editorial Philosophy Audit evidence exists and passes for the changed piece.
 - Existing images still resolve and are full-size when image assets are part of the change.
 - Existing collection membership still renders correctly.
 - `test_public_route_smoke.ps1` passes.

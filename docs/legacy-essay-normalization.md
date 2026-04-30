@@ -16,6 +16,14 @@ This generates:
 - `reports/legacy-essay-audit.csv`
 - `reports/legacy-essay-audit.md`
 
+For a selected daily back-archive batch, run the focused import preflight before editing:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_legacy_import_preflight.ps1 -BatchPath .\.oip-daily-batch.json
+```
+
+The preflight targets the recurring Medium residue from the April 2026 daily runs: smart punctuation/mojibake and dash artifacts, remote Medium body images, imported discussion/read-more prompts, and ambiguous pseudo-heading or list formatting. It fails on concrete publish blockers and leaves ambiguous structural formatting as warnings unless `-StrictWarnings` is supplied.
+
 2. Start with `batch_1` pieces that are also surfaced on the homepage, homepage reading threads, or featured collections.
 
 3. Apply safe structural cleanup first.
@@ -39,15 +47,17 @@ This pass uses `featured_image` as the canonical essay hero, localizes remote ea
 - `reports/essay-hero-normalization.csv`
 - `reports/essay-hero-normalization.md`
 
-5. Finish each piece with a manual editorial pass for anything the script cannot infer safely.
+5. Finish each piece with a manual editorial pass for anything the script cannot infer safely. This is also where the Editorial Philosophy Audit happens: normalization restores structure, but it does not itself prove disciplined independence.
 
 6. Re-run the audit after cleanup so the queue reflects the new state.
 
-7. Run the essay guardrails on the cleaned files before publishing changes.
+7. Run the essay guardrails and the philosophy gate on the cleaned files before publishing changes.
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\some-piece.md
+powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\some-piece.md -RequireEditorialPhilosophyAudit
 ```
+
+The essay guardrail wrapper also runs the focused legacy import preflight for the same target paths, so daily editorial-review validation gets both the broader audit and the line-level legacy-import scan.
 
 ## Priority Signals
 
