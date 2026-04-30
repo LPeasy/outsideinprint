@@ -237,6 +237,8 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(articleSingle, /class="piece-header-composition"/);
   assert.match(articleSingle, /class="piece-record-rail"/);
   assert.match(articleSingle, /piece-record-rail__item--collection/);
+  assert.match(articleSingle, /data-article-plate-lightbox-trigger/);
+  assert.match(articleSingle, /partial "article\/plate-lightbox\.html"/);
   assert.match(articleSingle, /class="piece-title-block/);
   assert.match(articleSingle, /class="article-publication-record"/);
   assert.match(articleSingle, /data-analytics-source-slot="article_collection_context"/);
@@ -254,6 +256,7 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(css, /\.piece-title-block\{/);
   assert.match(css, /\.piece-fleuron\{/);
   assert.match(css, /\.piece-media-plate\{/);
+  assert.match(css, /\.piece-media-plate__trigger\{/);
   assert.match(css, /\.piece-record-rail\{/);
   assert.match(css, /\.article-publication-record\{/);
   assert.doesNotMatch(css, /\.piece--collection-accent/);
@@ -369,6 +372,7 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`piece-title-block`",
     "`piece-fleuron`",
     "`piece-media-plate`",
+    "`piece-media-plate__trigger`",
     "`piece-record-rail`",
     "`piece-record-rail__item--collection`",
     "`reading-path__header`",

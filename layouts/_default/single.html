@@ -14,7 +14,6 @@
   {{ $primaryCollection := false }}
   {{ $showCollectionContext := false }}
   {{ $showCollectionContinuation := false }}
-  {{ $currentSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
   {{ if gt (len $publicCollectionMatches) 0 }}
     {{ $candidateCollection := index $publicCollectionMatches 0 }}
     {{ range $candidateCollection.items }}
@@ -23,14 +22,6 @@
         {{ $showCollectionContext = true }}
         {{ $showCollectionContinuation = true }}
       {{ end }}
-    {{ end }}
-  {{ end }}
-
-  {{ $primaryCollectionEntryPoint := false }}
-  {{ if $showCollectionContext }}
-    {{ $startHereSlug := lower (printf "%v" ($primaryCollection.collection.start_here | default "")) }}
-    {{ if and $startHereSlug (eq $currentSlug $startHereSlug) }}
-      {{ $primaryCollectionEntryPoint = true }}
     {{ end }}
   {{ end }}
 
@@ -60,7 +51,8 @@
     {{ end }}
   {{ end }}
   {{ $plateImageSrc := $plateImage }}
-  {{ $plateLayout := "side" }}
+  {{ $plateImageWidth := 0 }}
+  {{ $plateImageHeight := 0 }}
   {{ $plateClasses := slice "piece-media-plate" "piece-media-plate--side" }}
   {{ if eq $plateKind "portrait" }}
     {{ $plateClasses = $plateClasses | append "piece-portrait-plate" }}
@@ -73,24 +65,15 @@
     {{ if and (fileExists $staticPlateImagePath) (not (strings.HasSuffix (lower $staticPlateImagePath) ".svg")) }}
       {{ with imageConfig $staticPlateImagePath }}
         {{ if and .Width .Height }}
-          {{ if ge (mul .Width 2) (mul .Height 3) }}
-            {{ $plateLayout = "full" }}
-          {{ end }}
+          {{ $plateImageWidth = .Width }}
+          {{ $plateImageHeight = .Height }}
         {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
-  {{ if eq $plateLayout "full" }}
-    {{ $plateClasses = slice "piece-media-plate" "piece-media-plate--full" }}
-    {{ if eq $plateKind "portrait" }}
-      {{ $plateClasses = $plateClasses | append "piece-portrait-plate" }}
-    {{ else }}
-      {{ $plateClasses = $plateClasses | append "piece-hero" }}
-    {{ end }}
-  {{ end }}
   {{ $headerClasses := slice "piece-header" "piece-header--calm" }}
   {{ if $plateImage }}
-    {{ $headerClasses = $headerClasses | append (printf "piece-header--%s-plate" $plateLayout) }}
+    {{ $headerClasses = $headerClasses | append "piece-header--side-plate" }}
   {{ else }}
     {{ $headerClasses = $headerClasses | append "piece-header--text-only" }}
   {{ end }}
@@ -119,23 +102,33 @@
           {{ end }}
         </div>
 
-        {{ if and $plateImage (eq $plateLayout "side") }}
+        {{ if $plateImage }}
           <figure class="{{ delimit $plateClasses " " }}">
-            <img src="{{ $plateImageSrc }}" alt="{{ $plateImageAlt }}">
+            <button
+              type="button"
+              class="piece-media-plate__trigger"
+              data-article-plate-lightbox-trigger
+              data-title="{{ .Title }}"
+              data-caption="{{ $plateImageCaption }}"
+              data-image="{{ $plateImageSrc }}"
+              data-alt="{{ $plateImageAlt }}"
+              {{ if gt $plateImageWidth 0 }}data-width="{{ $plateImageWidth }}"{{ end }}
+              {{ if gt $plateImageHeight 0 }}data-height="{{ $plateImageHeight }}"{{ end }}
+              aria-label="Open image fullscreen: {{ .Title }}"
+            >
+              <img
+                src="{{ $plateImageSrc }}"
+                alt="{{ $plateImageAlt }}"
+                {{ if gt $plateImageWidth 0 }}width="{{ $plateImageWidth }}"{{ end }}
+                {{ if gt $plateImageHeight 0 }}height="{{ $plateImageHeight }}"{{ end }}
+              >
+            </button>
             {{ with $plateImageCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
           </figure>
         {{ end }}
       </div>
 
-      {{ if and $plateImage (eq $plateLayout "full") }}
-        <figure class="{{ delimit $plateClasses " " }}">
-          <img src="{{ $plateImageSrc }}" alt="{{ $plateImageAlt }}">
-          {{ with $plateImageCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
-        </figure>
-      {{ end }}
-
       <div class="piece-record-rail" role="note" aria-label="Publication and collection details">
-        <span class="piece-record-rail__item piece-record-rail__item--lane">{{ partial "archive/lane-label.html" . }}</span>
         {{ with .Date }}<span class="piece-record-rail__item">{{ .Format "2006-01-02" }}</span>{{ end }}
         {{ with .Params.version }}<span class="piece-record-rail__item">V{{ . }}</span>{{ end }}
         {{ with .Params.edition }}<span class="piece-record-rail__item">{{ . }}</span>{{ end }}
@@ -162,7 +155,6 @@
               >{{ $match.collection.title }}</a>
             {{ end }}
           </span>
-          <span class="piece-record-rail__item piece-record-rail__item--collection-meta">{{ title $primaryCollection.state.kind }} | {{ $primaryCollection.state.count }} pieces{{ if $primaryCollectionEntryPoint }} | Entry Point{{ end }}</span>
         {{ end }}
       </div>
     </header>
@@ -212,5 +204,8 @@
       ) }}
     </div>
   </article>
+  {{ if $plateImage }}
+    {{ partial "article/plate-lightbox.html" . }}
+  {{ end }}
   {{ partial "collections/reading-progress-script.html" . }}
 {{ end }}

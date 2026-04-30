@@ -1,0 +1,151 @@
+<div class="cartoon-lightbox article-plate-lightbox" data-article-plate-lightbox aria-hidden="true" hidden>
+  <button
+    type="button"
+    class="cartoon-lightbox__backdrop"
+    data-article-plate-lightbox-close
+    aria-label="Close image viewer"
+  ></button>
+  <section class="cartoon-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="article-plate-lightbox-title">
+    <button
+      type="button"
+      class="cartoon-lightbox__close"
+      data-article-plate-lightbox-close
+      aria-label="Close image viewer"
+    ><span aria-hidden="true">&times;</span></button>
+    <figure class="cartoon-lightbox__figure">
+      <button
+        type="button"
+        class="cartoon-lightbox__image-button"
+        data-article-plate-lightbox-image-button
+        aria-label="Close fullscreen image"
+      >
+        <img data-article-plate-lightbox-image src="" alt="">
+      </button>
+      <figcaption class="cartoon-lightbox__caption article-plate-lightbox__caption">
+        <div>
+          <h2 id="article-plate-lightbox-title" data-article-plate-lightbox-title></h2>
+          <p data-article-plate-lightbox-caption hidden></p>
+        </div>
+      </figcaption>
+    </figure>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var lightbox = document.querySelector("[data-article-plate-lightbox]");
+    if (!lightbox) return;
+
+    var title = lightbox.querySelector("[data-article-plate-lightbox-title]");
+    var caption = lightbox.querySelector("[data-article-plate-lightbox-caption]");
+    var image = lightbox.querySelector("[data-article-plate-lightbox-image]");
+    var imageButton = lightbox.querySelector("[data-article-plate-lightbox-image-button]");
+    var closeButton = lightbox.querySelector(".cartoon-lightbox__close");
+    var closeControls = Array.prototype.slice.call(lightbox.querySelectorAll("[data-article-plate-lightbox-close]"));
+    var activeTrigger = null;
+
+    function focusableElements() {
+      return Array.prototype.slice.call(lightbox.querySelectorAll("button:not([disabled]), a[href]")).filter(function (element) {
+        var style = window.getComputedStyle(element);
+        return !element.hidden && style.display !== "none" && style.visibility !== "hidden";
+      });
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("cartoon-lightbox-open");
+      image.removeAttribute("src");
+      image.removeAttribute("width");
+      image.removeAttribute("height");
+      caption.hidden = true;
+      caption.textContent = "";
+
+      if (activeTrigger) {
+        activeTrigger.focus({ preventScroll: true });
+        activeTrigger = null;
+      }
+    }
+
+    function openLightbox(trigger) {
+      var imageTitle = trigger.getAttribute("data-title") || "";
+      var imageCaption = trigger.getAttribute("data-caption") || "";
+      var imageWidth = trigger.getAttribute("data-width") || "";
+      var imageHeight = trigger.getAttribute("data-height") || "";
+      activeTrigger = trigger;
+
+      title.textContent = imageTitle;
+      image.src = trigger.getAttribute("data-image") || "";
+      image.alt = trigger.getAttribute("data-alt") || "";
+
+      if (imageWidth) {
+        image.width = Number(imageWidth);
+      } else {
+        image.removeAttribute("width");
+      }
+
+      if (imageHeight) {
+        image.height = Number(imageHeight);
+      } else {
+        image.removeAttribute("height");
+      }
+
+      if (imageCaption) {
+        caption.textContent = imageCaption;
+        caption.hidden = false;
+      } else {
+        caption.textContent = "";
+        caption.hidden = true;
+      }
+
+      imageButton.setAttribute("aria-label", "Close fullscreen image: " + imageTitle);
+      lightbox.hidden = false;
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("cartoon-lightbox-open");
+      closeButton.focus({ preventScroll: true });
+    }
+
+    document.addEventListener("click", function (event) {
+      var trigger = event.target.closest("[data-article-plate-lightbox-trigger]");
+      if (!trigger) return;
+      event.preventDefault();
+      openLightbox(trigger);
+    });
+
+    closeControls.forEach(function (control) {
+      control.addEventListener("click", closeLightbox);
+    });
+
+    imageButton.addEventListener("click", closeLightbox);
+
+    document.addEventListener("keydown", function (event) {
+      var focusable;
+      var first;
+      var last;
+
+      if (lightbox.hidden) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeLightbox();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      focusable = focusableElements();
+      if (!focusable.length) return;
+
+      first = focusable[0];
+      last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+  })();
+</script>

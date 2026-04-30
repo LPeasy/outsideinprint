@@ -85,7 +85,6 @@ test("article template emits compact primary-collection boundary hooks", () => {
     'data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"',
     'class="piece-record-rail"',
     'piece-record-rail__item--collection',
-    'piece-record-rail__item--collection-meta',
     'data-analytics-source-slot="article_collection_context"'
   ]) {
     assert.match(articleSingle, new RegExp(escapeRegex(snippet)));
@@ -135,6 +134,7 @@ test("css owns the shared collection-room namespace and all theme modifiers", ()
     ".piece-title-block{",
     ".piece-fleuron{",
     ".piece-media-plate{",
+    ".piece-media-plate__trigger{",
     ".piece-record-rail{",
     ".piece-record-rail::before{",
     ".piece-record-rail__item--collection{",
