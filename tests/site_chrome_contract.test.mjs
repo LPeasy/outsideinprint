@@ -224,6 +224,18 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.oip-theme-rules-classic-20260429-115754\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.04\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.12\);[\s\S]*--oip-rule-engraved-strong:rgba\(213,190,150,.18\);[\s\S]*\}/);
   assert.match(css, /--oip-rule-engraved-gradient:linear-gradient\(90deg, rgba\(236,231,223,0\), var\(--oip-rule-engraved-strong\) 18%, var\(--oip-rule-engraved\) 52%, rgba\(236,231,223,0\)\);/);
   assert.match(css, /--oip-rule-engraved-rail:linear-gradient\(180deg, var\(--oip-rule-engraved-strong\), var\(--oip-rule-engraved\) 48%, rgba\(213,190,150,0\)\);/);
+  const dividerTokens = new Set(Array.from(css.matchAll(/--oip-rule-[a-z-]+:/g), ([token]) => token.slice(0, -1)));
+  assert.deepEqual(Array.from(dividerTokens).sort(), [
+    "--oip-rule-clear",
+    "--oip-rule-engraved",
+    "--oip-rule-engraved-gradient",
+    "--oip-rule-engraved-rail",
+    "--oip-rule-engraved-strong",
+    "--oip-rule-faint",
+    "--oip-rule-hairline",
+    "--oip-rule-list",
+    "--oip-rule-standard",
+  ]);
   assert.match(styleThemeWorkflow, /oip-theme-<area>-<descriptor>-YYYYMMDD-HHMMSS/);
   assert.match(styleThemeWorkflow, /oip-theme-rules-classic-20260429-115754/);
   assert.match(styleThemeWorkflow, /oip-theme-rules-clear-20260429-115754/);
@@ -263,8 +275,16 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.imprint-header,\s*\.citation,\s*\.article-record,\s*\.revision-history,\s*\.reading-path\{[\s\S]*border-color:var\(--oip-rule-standard\);/);
   assert.match(css, /\.imprint-header::before,\s*\.citation::before,\s*\.article-record::before,\s*\.revision-history::before,\s*\.reading-path::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.library-group::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(css, /\.library-group \.item::before,\s*\.library-results__list \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
+  assert.match(css, /\.library-group \[data-library-item\],\s*\.library-results__list \[data-library-item\]\{[\s\S]*position:relative;[\s\S]*padding-top:\.55rem;/);
+  assert.match(css, /\.library-group \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\),\s*\.library-results__list \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\)\{[\s\S]*border-top:1px solid var\(--oip-rule-standard\);/);
+  assert.match(css, /\.library-group \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\)::before,\s*\.library-results__list \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\)::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.library-group \[data-library-item\] > \.item,\s*\.library-results__list \[data-library-item\] > \.item\{[\s\S]*border-bottom:none;/);
+  assert.match(css, /\.library-group \[data-library-item\] > \.item::before,\s*\.library-results__list \[data-library-item\] > \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
+  assert.match(css, /\.library-group \[data-library-item\]:focus-within > \.item::before,\s*\.library-results__list \[data-library-item\]:focus-within > \.item::before\{[\s\S]*opacity:\.82;/);
+  assert.doesNotMatch(css, /\.library-group \.item,\s*\.library-results__list \.item\{/);
+  assert.doesNotMatch(css, /\.library-group \.item::before,\s*\.library-results__list \.item::before\{/);
   assert.match(css, /\.essays-front__month::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.essays-front__month-list \.item\{[\s\S]*border-bottom-color:var\(--oip-rule-faint\);/);
   assert.match(css, /\.essays-front__month-list \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
   assert.match(css, /\.editorial-cartoon-recent\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.editorial-cartoon::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
