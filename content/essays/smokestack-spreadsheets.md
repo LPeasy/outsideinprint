@@ -4,7 +4,7 @@ date: 2026-04-29
 draft: false
 slug: "smokestack-spreadsheets"
 section_label: "Essay"
-subtitle: "OpenAI’s missed targets did not just expose a software forecast. They exposed a wager on chips, cloud contracts, substations, and time."
+subtitle: "OpenAI’s missed targets turned a private forecast into a public wager on chips, cloud contracts, substations, and time."
 description: "OpenAI’s missed internal targets show how frontier AI has become a wager on electricity, cloud contracts, data centers, capital, and patience."
 featured_image: "/images/essays/smokestack-spreadsheets/hero.png"
 featured_image_alt: "A forecast spreadsheet on a drafting table extends into a data center construction site, power lines, and electrical infrastructure."
