@@ -188,6 +188,46 @@
             "updated_on": "2026-04-28",
             "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
             "deployed_on": "2026-04-28"
+        },
+        "why-oberfell-will-not-be-overturned": {
+            "status": "pending_deploy",
+            "batch_id": "2026-04-30",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-04-30"
+        },
+        "a-really-boring-topic": {
+            "status": "pending_deploy",
+            "batch_id": "2026-04-30",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-04-30"
+        },
+        "the-death-of-moores-law": {
+            "status": "pending_deploy",
+            "batch_id": "2026-04-30",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-04-30"
+        },
+        "the-cracked-pot": {
+            "status": "pending_deploy",
+            "batch_id": "2026-04-30",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-04-30"
+        },
+        "declaring-equality": {
+            "status": "pending_deploy",
+            "batch_id": "2026-04-30",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-04-30"
         }
     },
     "blocked": {},
@@ -233,6 +273,18 @@
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
             "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
             "deployed_on": "2026-04-28"
+        },
+        {
+            "batch_id": "2026-04-30",
+            "selected_slugs": [
+                "why-oberfell-will-not-be-overturned",
+                "a-really-boring-topic",
+                "the-death-of-moores-law",
+                "the-cracked-pot",
+                "declaring-equality"
+            ],
+            "status": "pending_deploy",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md"
         }
     ]
 }

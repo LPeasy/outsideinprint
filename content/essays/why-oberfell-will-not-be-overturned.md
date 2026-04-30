@@ -8,8 +8,12 @@ subtitle: "Marriage is a Fundamental Right"
 featured_image: "/images/medium/why-oberfell-will-not-be-overturned/642b3a0d97b101a5a53bac29390f2ee60d1274d06a06a073c3b77717181a160c.jpeg"
 featured_image_alt: "Why Obergefell will not be Overturned"
 description: "Why Obergefell v. Hodges Is Unlikely to Be Overturned by the Conservative Supreme Court. In light of the Supreme Court’s recent decision in Dobbs v. Jackson..."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-04-30"
+    note: "Updated April 30, 2026, after OIP back-archive review. Localized legacy Medium image references, replaced em dash punctuation, and checked source, metadata, and rendering."
 pdf: "/pdfs/why-oberfell-will-not-be-overturned.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-oberfell-will-not-be-overturned-00153db59a5e"
@@ -39,7 +43,7 @@ However, Obergefell rests on a much stronger foundation within substantive due p
 
 Marriage as a Fundamental Right
 
-![](https://cdn-images-1.medium.com/max/800/1*981wmaaNYDSDykUicX-PqA@2x.jpeg)
+![](/images/medium/why-oberfell-will-not-be-overturned/595776c99d821a71f2dbee09e007ecec515fadf1dda801300725c09ae9af0673.jpeg)
 
 Marriage, unlike abortion, has long been recognized as a fundamental right under the Constitution.
 
@@ -55,9 +59,9 @@ The Court in Obergefell emphasized that excluding same-sex couples from marriage
 
 This dual reliance on both due process and equal protection strengthens Obergefell’s foundation.
 
-To overturn Obergefell, the Court would need to revisit not only substantive due process but also long-standing precedents affirming equality under the law — a much broader and more legally fraught endeavor.
+To overturn Obergefell, the Court would need to revisit not only substantive due process but also long-standing precedents affirming equality under the law, a much broader and more legally fraught endeavor.
 
-![](https://cdn-images-1.medium.com/max/800/1*-c6rXOxKAdDJqeOBZaa-2Q@2x.jpeg)
+![](/images/medium/why-oberfell-will-not-be-overturned/bf0e2375f530022065b7487d8a86b9ec7c42453da12913ba5956f0b2e675313d.jpeg)
 
 Public Opinion: Stabilizing Obergefell
 
@@ -67,13 +71,13 @@ Entrenched Support for Marriage Equality
 
 Since Obergefell, marriage equality has become a deeply ingrained part of American life. According to a 2023 Gallup poll, 71% of Americans support legal same-sex marriage, a dramatic increase from just two decades ago. Pew Research similarly found that 63% of Americans favor same-sex marriage, with only 34% opposed. This growing acceptance reflects a fundamental shift in societal attitudes, even among conservatives.
 
-![](https://cdn-images-1.medium.com/max/800/1*F35r0UwFNd2fvFwMutAjFw@2x.jpeg)
+![](/images/medium/why-oberfell-will-not-be-overturned/be797dfbde94dd0f84d521428df8679334b72fffd73c2b138961116ae7d5ff4d.jpeg)
 
 The practical impact of Obergefell is evident in the substantial number of same-sex marriages that have occurred since the ruling. As of 2022, there were approximately 741,000 same-sex married-couple households in the United States, according to the Census Bureau. This represents a significant increase from earlier years, as marriage equality became the law of the land. In 2021, same-sex couple households surpassed 1 million for the first time, with 59% of these couples being married. Overturning Obergefell would disrupt the lives of hundreds of thousands of married same-sex couples, unraveling legal rights related to property, inheritance, child custody, and healthcare decisions.
 
 Court Legitimacy and Public Backlash
 
-![](https://cdn-images-1.medium.com/max/800/1*UnMbTSRallSxwzixi4NUjw@2x.jpeg)
+![](/images/medium/why-oberfell-will-not-be-overturned/aacead5d166ff170750776a4bd7891918ea5c530a36cdc95ad38bf9278faa553.jpeg)
 
 The Supreme Court’s legitimacy depends, in part, on its ability to maintain public confidence. Overturning Obergefell would likely provoke widespread backlash, further eroding the Court’s credibility. In contrast to abortion, which remains a deeply divisive issue, marriage equality enjoys broad support across political and demographic groups, making it politically and socially risky for the Court to revisit the ruling.
 
@@ -85,6 +89,6 @@ The Court’s decision in 303 Creative LLC v. Elenis (2023), while controversial
 
 Conclusion
 
-While the overturning of Roe v. Wade in Dobbs has fueled speculation about the fate of other substantive due process cases, Obergefell v. Hodges is unlikely to face the same fate. Unlike Roe, Obergefell rests on a long-recognized fundamental right — the right to marry — and is further strengthened by its reliance on both substantive due process and the Equal Protection Clause. Additionally, Obergefell enjoys overwhelming public support, with a majority of Americans embracing marriage equality as a settled part of modern life.
+While the overturning of Roe v. Wade in Dobbs has fueled speculation about the fate of other substantive due process cases, Obergefell v. Hodges is unlikely to face the same fate. Unlike Roe, Obergefell rests on a long-recognized fundamental right, the right to marry, and is further strengthened by its reliance on both substantive due process and the Equal Protection Clause. Additionally, Obergefell enjoys overwhelming public support, with a majority of Americans embracing marriage equality as a settled part of modern life.
 
 The Supreme Court’s cautious approach to LGBTQ+ rights post-Dobbs, as demonstrated in 303 Creative LLC v. Elenis, suggests a preference for resolving conflicts at the margins rather than dismantling core precedents like Obergefell. By focusing on balancing competing constitutional rights, the Court avoids the widespread legal and societal disruption that would follow a reversal of marriage equality. In a legal and cultural landscape where same-sex marriage has become deeply entrenched, the decision appears secure for the foreseeable future.
