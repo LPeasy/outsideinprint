@@ -13,7 +13,8 @@ function Assert-True {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$python = Join-Path $repoRoot ".tools/python.cmd"
+$python = Join-Path $repoRoot "tools\bin\generated\python.cmd"
+$pwsh = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
 $normalizer = Join-Path $repoRoot "scripts/normalize_legacy_medium_essay.py"
 $auditScript = Join-Path $repoRoot "scripts/audit_legacy_essays.ps1"
 
@@ -55,7 +56,7 @@ Fixture Subtitle
 '@ | Set-Content -Path $fixturePath -Encoding UTF8
 
   $reportBefore = Join-Path $tempRoot "reports/before"
-  powershell -ExecutionPolicy Bypass -File $auditScript -Root $tempRoot -ReportBasePath $reportBefore | Out-Null
+  & $pwsh -NoLogo -NoProfile -File $auditScript -Root $tempRoot -ReportBasePath $reportBefore | Out-Null
 
   $before = Get-Content ($reportBefore + ".json") -Raw | ConvertFrom-Json
   $beforeRow = $before.files | Where-Object { $_.slug -eq "fixture" } | Select-Object -First 1
@@ -80,7 +81,7 @@ Fixture Subtitle
   Assert-True ($normalized -match '(?m)^>\s*Range Map \| \[Source\]\(https://example\.com/chart\)\s*$') "Expected figure captions to survive as normalized caption blocks."
 
   $reportAfter = Join-Path $tempRoot "reports/after"
-  powershell -ExecutionPolicy Bypass -File $auditScript -Root $tempRoot -ReportBasePath $reportAfter | Out-Null
+  & $pwsh -NoLogo -NoProfile -File $auditScript -Root $tempRoot -ReportBasePath $reportAfter | Out-Null
 
   $after = Get-Content ($reportAfter + ".json") -Raw | ConvertFrom-Json
   $afterRow = $after.files | Where-Object { $_.slug -eq "fixture" } | Select-Object -First 1

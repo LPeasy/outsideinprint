@@ -3,12 +3,9 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $preflightScript = Join-Path $repoRoot "scripts/preflight.ps1"
-$shellCommand = Get-Command pwsh -ErrorAction SilentlyContinue
-if ($null -eq $shellCommand) {
-  $shellCommand = Get-Command powershell.exe -ErrorAction SilentlyContinue
-}
-if ($null -eq $shellCommand) {
-  throw "A PowerShell host executable is required to run PDF preflight tests."
+$shellPath = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+if (-not (Test-Path -LiteralPath $shellPath -PathType Leaf)) {
+  throw "The repo-local PowerShell wrapper is required to run PDF preflight tests."
 }
 
 function New-TestRoot {
@@ -142,7 +139,7 @@ function Invoke-Preflight {
     $commandArgs += "-StrictPdfQuality"
   }
 
-  $output = & $shellCommand.Source @commandArgs 2>&1 | Out-String
+  $output = & $shellPath @commandArgs 2>&1 | Out-String
   return [pscustomobject]@{
     ExitCode = $LASTEXITCODE
     Output = $output

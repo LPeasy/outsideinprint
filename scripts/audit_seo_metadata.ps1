@@ -1,3 +1,5 @@
+#requires -Version 7.0
+
 param(
   [string]$Root = (Split-Path -Parent $PSScriptRoot),
   [string]$ContentDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'content'),

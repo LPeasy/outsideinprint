@@ -8,9 +8,11 @@ $localValidationPolicyPath = Join-Path $repoRoot "docs/local-validation-policy.m
 $legacyEssayNormalizationPath = Join-Path $repoRoot "docs/legacy-essay-normalization.md"
 $seoRolloutDocPath = Join-Path $repoRoot "docs/seo-rollout.md"
 $readmePath = Join-Path $repoRoot "README.md"
+$packageJsonPath = Join-Path $repoRoot "package.json"
 $codexWorkflowPath = Join-Path $repoRoot "CODEX_WORKFLOW.md"
 $deployWorkflowPath = Join-Path $repoRoot ".github/workflows/deploy.yml"
 $refreshWorkflowPath = Join-Path $repoRoot ".github/workflows/refresh-analytics.yml"
+$seoMetadataAuditPath = Join-Path $repoRoot "scripts/audit_seo_metadata.ps1"
 $authorDirectoryContractPath = Join-Path $repoRoot "tests/test_author_directory_contract.ps1"
 $publicOutputHelperPath = Join-Path $repoRoot "tests/helpers/public_output_common.ps1"
 $publicRouteDebugPath = Join-Path $repoRoot "tests/show_public_route_debug.ps1"
@@ -36,6 +38,10 @@ if (-not (Test-Path $readmePath -PathType Leaf)) {
   throw "README.md is required for the CI contract test."
 }
 
+if (-not (Test-Path $packageJsonPath -PathType Leaf)) {
+  throw "package.json is required for the CI contract test."
+}
+
 if (-not (Test-Path $codexWorkflowPath -PathType Leaf)) {
   throw "CODEX_WORKFLOW.md is required for the CI contract test."
 }
@@ -48,7 +54,8 @@ foreach ($requiredValidationPath in @(
   $publicOutputTestPath,
   $publicRouteSmokePath,
   $legacyRenderContractPath,
-  $seoRolloutContractPath
+  $seoRolloutContractPath,
+  $seoMetadataAuditPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
     throw "Missing SEO validation helper: $requiredValidationPath"
@@ -61,12 +68,29 @@ $localValidationPolicy = Get-Content -Path $localValidationPolicyPath -Raw
 $legacyEssayNormalization = Get-Content -Path $legacyEssayNormalizationPath -Raw
 $seoRolloutDoc = Get-Content -Path $seoRolloutDocPath -Raw
 $readme = Get-Content -Path $readmePath -Raw
+$packageJson = Get-Content -Path $packageJsonPath -Raw
 $codexWorkflow = Get-Content -Path $codexWorkflowPath -Raw
 $deployWorkflow = Get-Content -Path $deployWorkflowPath -Raw
 $refreshWorkflow = Get-Content -Path $refreshWorkflowPath -Raw
 $publicOutputHelper = Get-Content -Path $publicOutputHelperPath -Raw
 $publicManifestWriter = Get-Content -Path $publicManifestWriterPath -Raw
 $publicOutputTest = Get-Content -Path $publicOutputTestPath -Raw
+$seoMetadataAudit = Get-Content -Path $seoMetadataAuditPath -Raw
+
+. (Join-Path $repoRoot "tools/lib/Toolchain.Wrapper.ps1")
+
+$wrapperArgumentFixture = [pscustomobject]@{
+  default_arguments = @()
+}
+$singleWrapperArgument = Get-WrapperArguments -Wrapper $wrapperArgumentFixture -Arguments @('version') -RepoRoot $repoRoot -ProfileContext @{}
+if ($singleWrapperArgument -isnot [array] -or $singleWrapperArgument.Count -ne 1 -or $singleWrapperArgument[0] -ne 'version') {
+  throw "Toolchain wrappers must preserve single runtime arguments as one-element arrays."
+}
+
+$multipleWrapperArguments = Get-WrapperArguments -Wrapper $wrapperArgumentFixture -Arguments @('--gc', '--minify') -RepoRoot $repoRoot -ProfileContext @{}
+if ($multipleWrapperArguments.Count -ne 2 -or $multipleWrapperArguments[0] -ne '--gc' -or $multipleWrapperArguments[1] -ne '--minify') {
+  throw "Toolchain wrappers must preserve ordered runtime arguments."
+}
 
 if ($agents -notmatch 'docs/publishing-workflow\.md') {
   throw "AGENTS.md must point publishing sessions at docs/publishing-workflow.md."
@@ -74,6 +98,14 @@ if ($agents -notmatch 'docs/publishing-workflow\.md') {
 
 if ($publishingWorkflowDoc -notmatch 'tools\\bin\\generated\\') {
   throw "docs/publishing-workflow.md must reference the repo-local generated wrappers."
+}
+
+if ($packageJson -match '"(?:audit:essays|check:essays|check:essays:publish)"\s*:\s*"pwsh\s+-File') {
+  throw "package.json essay scripts must use the repo-local generated pwsh wrapper, not bare pwsh."
+}
+
+if ($packageJson -notmatch '\.\\\\tools\\\\bin\\\\generated\\\\pwsh\.cmd -NoLogo -NoProfile -File \./scripts/check_essay_guardrails\.ps1') {
+  throw "package.json essay guardrail scripts must call scripts/check_essay_guardrails.ps1 through .\\tools\\bin\\generated\\pwsh.cmd."
 }
 
 if ($publishingWorkflowDoc -notmatch 'main') {
@@ -237,8 +269,20 @@ if ($publicManifestWriter -notmatch 'Write-PublicBuildManifest') {
   throw "tests/write_public_build_manifest.ps1 must write the public build manifest."
 }
 
+if ($publicManifestWriter -notmatch '#requires\s+-Version\s+7\.0') {
+  throw "tests/write_public_build_manifest.ps1 must require PowerShell 7 so freshness fingerprints match CI."
+}
+
 if ($publicOutputTest -notmatch '\[switch\]\$RequireFreshBuild') {
   throw "tests/test_public_html_output.ps1 must accept -RequireFreshBuild."
+}
+
+if ($publicOutputTest -notmatch '#requires\s+-Version\s+7\.0') {
+  throw "tests/test_public_html_output.ps1 must require PowerShell 7 so generated-output validation uses the supported engine."
+}
+
+if ($seoMetadataAudit -notmatch '#requires\s+-Version\s+7\.0') {
+  throw "scripts/audit_seo_metadata.ps1 must require PowerShell 7 because it uses PS7-only syntax."
 }
 
 if ($publicOutputTest -notmatch 'Test-PublicBuildFreshness') {

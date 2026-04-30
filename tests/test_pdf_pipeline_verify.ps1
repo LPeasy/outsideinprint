@@ -3,12 +3,9 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $verifyScript = Join-Path $repoRoot "scripts/verify_pdf_pipeline.ps1"
-$shellCommand = Get-Command pwsh -ErrorAction SilentlyContinue
-if ($null -eq $shellCommand) {
-  $shellCommand = Get-Command powershell.exe -ErrorAction SilentlyContinue
-}
-if ($null -eq $shellCommand) {
-  throw "A PowerShell host executable is required to run PDF pipeline verification tests."
+$shellPath = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+if (-not (Test-Path -LiteralPath $shellPath -PathType Leaf)) {
+  throw "The repo-local PowerShell wrapper is required to run PDF pipeline verification tests."
 }
 
 function New-TestRoot {
@@ -99,7 +96,7 @@ function Invoke-Verify {
   $pdfRoot = Join-Path $Root "static/pdfs"
   $buildMetaRoot = Join-Path $Root "resources/typst_build"
 
-  $output = & $shellCommand.Source -NoProfile -File $verifyScript `
+  $output = & $shellPath -NoProfile -File $verifyScript `
     -ContentRoot $contentRoot `
     -PdfRoot $pdfRoot `
     -BuildMetaRoot $buildMetaRoot `

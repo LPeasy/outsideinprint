@@ -13,10 +13,9 @@ function Assert-True {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$pwshCommand = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -First 1
-$pwsh = if ($null -ne $pwshCommand) { $pwshCommand.Source } else { $null }
-if ([string]::IsNullOrWhiteSpace($pwsh)) {
-  $pwsh = (Get-Process -Id $PID).Path
+$pwsh = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+if (-not (Test-Path -LiteralPath $pwsh -PathType Leaf)) {
+  throw "The repo-local PowerShell wrapper is required to run essay guardrail tests."
 }
 
 $tempRoot = Join-Path $repoRoot (".tmp-essay-guardrails-" + [guid]::NewGuid().ToString("N"))

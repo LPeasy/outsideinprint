@@ -196,5 +196,5 @@ function Get-WrapperArguments {
         $allArguments.Add((Expand-WrapperTemplate -Value ([string]$argument) -RepoRoot $RepoRoot -ProfileContext $ProfileContext))
     }
 
-    return $allArguments.ToArray()
+    return ,$allArguments.ToArray()
 }

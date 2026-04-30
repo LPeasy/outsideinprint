@@ -513,8 +513,13 @@ function Get-AuditRowsForGitRef {
 }
 
 function Get-CurrentPowerShellExecutable {
+  $generatedPwsh = Join-Path $Root 'tools\bin\generated\pwsh.cmd'
+  if (Test-Path -LiteralPath $generatedPwsh -PathType Leaf) {
+    return $generatedPwsh
+  }
+
   $currentProcess = Get-Process -Id $PID
-  if ($currentProcess.Path -and (Test-Path $currentProcess.Path -PathType Leaf)) {
+  if ($currentProcess.Path -and (Test-Path $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileName($currentProcess.Path) -ieq 'pwsh.exe')) {
     return $currentProcess.Path
   }
 
@@ -523,12 +528,7 @@ function Get-CurrentPowerShellExecutable {
     return $pwsh.Source
   }
 
-  $powershell = Get-Command powershell -ErrorAction SilentlyContinue | Select-Object -First 1
-  if ($powershell -and $powershell.Source) {
-    return $powershell.Source
-  }
-
-  throw 'Unable to locate a PowerShell executable for the legacy import preflight.'
+  throw 'Unable to locate PowerShell 7 for the legacy import preflight. Run tools\generate_tool_wrappers.cmd and tools\provision_toolchain.cmd first.'
 }
 
 function Invoke-LegacyImportPreflight {

@@ -69,7 +69,7 @@ Local OIP publish work does not force npm or npx checks; CI owns public-site con
 - SEO rollout guide: `docs/seo-rollout.md`
 - SEO admin checklist: `docs/seo-admin-checklist.md`
 - Import command:
-  `powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics`
+  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics`
 
 - Automated refresh secret:
   Save `GOATCOUNTER_API_KEY` in `LPeasy/outsideinprint` if you want scheduled analytics snapshot refreshes.

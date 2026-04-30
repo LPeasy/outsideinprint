@@ -7,7 +7,7 @@ Outside In Print treats imported essays as editorial source material, not as fin
 1. Run the legacy audit.
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\audit_legacy_essays.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\audit_legacy_essays.ps1
 ```
 
 This generates:
@@ -54,7 +54,7 @@ This pass uses `featured_image` as the canonical essay hero, localizes remote ea
 7. Run the essay guardrails and the philosophy gate on the cleaned files before publishing changes.
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\some-piece.md -RequireEditorialPhilosophyAudit
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\some-piece.md -RequireEditorialPhilosophyAudit
 ```
 
 The essay guardrail wrapper also runs the focused legacy import preflight for the same target paths, so daily editorial-review validation gets both the broader audit and the line-level legacy-import scan.
@@ -136,5 +136,5 @@ Use small batches. A good batch is 3 to 6 essays that share similar import damag
 ## Regression Check
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\tests\test_legacy_essay_normalization.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_legacy_essay_normalization.ps1
 ```

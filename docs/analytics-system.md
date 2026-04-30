@@ -89,8 +89,8 @@ Snapshot rules:
 Run these checks for analytics pipeline work:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\tests\test_analytics_import.ps1
-powershell -ExecutionPolicy Bypass -File .\tests\test_analytics_snapshot_contract.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_analytics_import.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_analytics_snapshot_contract.ps1
 ```
 
 The public publish gate remains Hugo plus PowerShell public-output checks, as documented in `docs/local-validation-policy.md`.
@@ -164,8 +164,8 @@ Local refresh test:
 ```powershell
 $env:GOATCOUNTER_API_KEY = "replace-me"
 $env:GOATCOUNTER_SITE_URL = "https://outsideinprint.goatcounter.com"
-powershell -ExecutionPolicy Bypass -File .\scripts\fetch_analytics_goatcounter.ps1 -OutputDir .\.analytics-refresh\raw
-powershell -ExecutionPolicy Bypass -File .\scripts\import_analytics.ps1 -InputPath .\.analytics-refresh\raw
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\fetch_analytics_goatcounter.ps1 -OutputDir .\.analytics-refresh\raw
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\import_analytics.ps1 -InputPath .\.analytics-refresh\raw
 ```
 
 ## Refresh Workflow

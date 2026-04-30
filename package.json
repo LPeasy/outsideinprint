@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "node --test tests/all.test.mjs",
-    "audit:essays": "pwsh -File ./scripts/audit_legacy_essays.ps1",
-    "check:essays": "pwsh -File ./scripts/check_essay_guardrails.ps1",
-    "check:essays:publish": "pwsh -File ./scripts/check_essay_guardrails.ps1 -RequireEditorialPhilosophyAudit"
+    "audit:essays": ".\\tools\\bin\\generated\\pwsh.cmd -NoLogo -NoProfile -File ./scripts/audit_legacy_essays.ps1",
+    "check:essays": ".\\tools\\bin\\generated\\pwsh.cmd -NoLogo -NoProfile -File ./scripts/check_essay_guardrails.ps1",
+    "check:essays:publish": ".\\tools\\bin\\generated\\pwsh.cmd -NoLogo -NoProfile -File ./scripts/check_essay_guardrails.ps1 -RequireEditorialPhilosophyAudit"
   },
   "devDependencies": {
     "playwright": "1.53.1"

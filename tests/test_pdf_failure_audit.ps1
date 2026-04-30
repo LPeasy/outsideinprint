@@ -4,12 +4,9 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $auditScript = Join-Path $repoRoot "scripts/audit_pdf_failures.ps1"
 $policyPath = Join-Path $repoRoot "data/pdfs/validation-policy.json"
-$shellCommand = Get-Command pwsh -ErrorAction SilentlyContinue
-if ($null -eq $shellCommand) {
-  $shellCommand = Get-Command powershell.exe -ErrorAction SilentlyContinue
-}
-if ($null -eq $shellCommand) {
-  throw "A PowerShell host executable is required to run PDF failure audit tests."
+$shellPath = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
+if (-not (Test-Path -LiteralPath $shellPath -PathType Leaf)) {
+  throw "The repo-local PowerShell wrapper is required to run PDF failure audit tests."
 }
 
 function New-TestRoot {
@@ -171,7 +168,7 @@ function Invoke-Audit {
     $commandArgs += ($AvailableTools -join ",")
   }
 
-  $output = & $shellCommand.Source @commandArgs 2>&1 | Out-String
+  $output = & $shellPath @commandArgs 2>&1 | Out-String
 
   return [pscustomobject]@{
     ExitCode = $LASTEXITCODE
