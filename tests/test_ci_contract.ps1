@@ -4,6 +4,8 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $agentsPath = Join-Path $repoRoot "AGENTS.md"
 $publishingWorkflowDocPath = Join-Path $repoRoot "docs/publishing-workflow.md"
+$localValidationPolicyPath = Join-Path $repoRoot "docs/local-validation-policy.md"
+$legacyEssayNormalizationPath = Join-Path $repoRoot "docs/legacy-essay-normalization.md"
 $seoRolloutDocPath = Join-Path $repoRoot "docs/seo-rollout.md"
 $readmePath = Join-Path $repoRoot "README.md"
 $codexWorkflowPath = Join-Path $repoRoot "CODEX_WORKFLOW.md"
@@ -55,6 +57,8 @@ foreach ($requiredValidationPath in @(
 
 $agents = Get-Content -Path $agentsPath -Raw
 $publishingWorkflowDoc = Get-Content -Path $publishingWorkflowDocPath -Raw
+$localValidationPolicy = Get-Content -Path $localValidationPolicyPath -Raw
+$legacyEssayNormalization = Get-Content -Path $legacyEssayNormalizationPath -Raw
 $seoRolloutDoc = Get-Content -Path $seoRolloutDocPath -Raw
 $readme = Get-Content -Path $readmePath -Raw
 $codexWorkflow = Get-Content -Path $codexWorkflowPath -Raw
@@ -78,6 +82,26 @@ if ($publishingWorkflowDoc -notmatch 'main') {
 
 if ($readme -notmatch 'docs/publishing-workflow\.md') {
   throw "README.md must reference docs/publishing-workflow.md."
+}
+
+foreach ($publishGuide in @(
+  @{ Name = 'README.md'; Text = $readme },
+  @{ Name = 'CODEX_WORKFLOW.md'; Text = $codexWorkflow },
+  @{ Name = 'docs/local-validation-policy.md'; Text = $localValidationPolicy },
+  @{ Name = 'docs/legacy-essay-normalization.md'; Text = $legacyEssayNormalization },
+  @{ Name = 'docs/publishing-workflow.md'; Text = $publishingWorkflowDoc }
+)) {
+  if ($publishGuide.Text -notmatch 'RequireEditorialPhilosophyAudit') {
+    throw "$($publishGuide.Name) must document the Editorial Philosophy Audit publish gate."
+  }
+}
+
+if ($publishingWorkflowDoc -notmatch 'reports, and working papers') {
+  throw "docs/publishing-workflow.md must say reports and working papers are covered by the Editorial Philosophy Audit gate."
+}
+
+if ($publishingWorkflowDoc -notmatch 'Syd & Oliver') {
+  throw "docs/publishing-workflow.md must document the Syd & Oliver exclusion from the hard Editorial Philosophy Audit gate."
 }
 
 if ($readme -notmatch 'docs/seo-rollout\.md') {
@@ -187,6 +211,10 @@ if ($deployWorkflow -notmatch "\.\/scripts\/probe_seo_rollout\.ps1") {
 
 if ($deployWorkflow -notmatch "\.\/scripts\/check_essay_guardrails\.ps1") {
   throw "deploy.yml must run the essay guardrail check before building the site."
+}
+
+if ($deployWorkflow -notmatch "RequireEditorialPhilosophyAudit") {
+  throw "deploy.yml must require Editorial Philosophy Audit evidence for changed non-draft essays, reports, and working papers."
 }
 
 if ($deployWorkflow -notmatch "needs:\s*contracts") {

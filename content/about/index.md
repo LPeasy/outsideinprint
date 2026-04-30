@@ -1,6 +1,6 @@
 ---
 title: "About Outside In Print"
-description: "A digital imprint for essays, dialogues, reported analysis, and working papers published to the web with stable URLs, versioned records, and a durable archive."
+description: "A digital imprint for disciplined public judgment: essays, dialogues, reports, and working papers built from evidence, incentives, tradeoffs, and consequences."
 image: "/images/social/outside-in-print-default.png"
 draft: false
 show_citation: false
@@ -20,6 +20,20 @@ Outside In Print publishes essays, dialogues, reported analysis, narrative exper
 ## Editorial Model
 
 The imprint is built around direct publication to the web. Essays carry a publication date, version number, and canonical URL. The archive is organized two ways at once: through collections for guided entry and through the library for full-catalog access.
+
+## Editorial Philosophy
+
+Outside In Print is built around a simple editorial discipline: begin with evidence, reason carefully, and resist the pressure to turn public life into tribal theater.
+
+OIP is anti-radical, anti-partisan, and anti-ideological. That does not mean indifferent, bloodless, or unwilling to judge. It means judgment has to be earned. Claims should be tied to records, incentives, tradeoffs, institutions, and downstream consequences. When the evidence is mixed, the writing should say so. When certainty is unavailable, the prose should not pretend otherwise.
+
+We are skeptical of any politics that asks reality to obey theory. That includes racial politics, class politics, party politics, technocratic certainty, market utopianism, bureaucratic self-protection, activist moralism, and elite consensus. The question is not which side benefits from a claim. The question is whether the claim survives contact with evidence and logic.
+
+OIP is interested in outcomes: what systems reward, what policies produce, what institutions hide, what incentives distort, and what ordinary people inherit once abstract ideas become rules, maps, prices, platforms, permits, debts, borders, schools, courts, or machines.
+
+The aim is not neutrality as performance. The aim is disciplined independence.
+
+Color over the lines. Read beyond the feed. Think for yourself.
 
 ## Author and Publisher
 

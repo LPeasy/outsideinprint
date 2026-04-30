@@ -640,7 +640,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
-    Description = 'A digital imprint for essays, dialogues, reported analysis, and working papers published to the web with stable URLs, versioned records, and a durable archive.'
+    Description = 'A digital imprint for disciplined public judgment: essays, dialogues, reports, and working papers built from evidence, incentives, tradeoffs, and consequences.'
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'

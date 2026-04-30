@@ -242,6 +242,7 @@ try {
 
   Write-Host ("Created essay draft: {0}" -f $essayPath) -ForegroundColor Green
   Write-Host ("Next: .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\{0}.md" -f $slug)
+  Write-Host ("Before publishing: .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\{0}.md -RequireEditorialPhilosophyAudit" -f $slug)
   Write-Host 'Then build with: .\tools\bin\generated\hugo.cmd --gc --minify'
 }
 catch {

@@ -135,6 +135,9 @@ cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.
 # Run the target-file guardrails first
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
 
+# Before publishing a non-draft essay, require Editorial Philosophy Audit evidence
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit
+
 # Build site/output and run generated-output regression coverage
 .\tools\bin\generated\hugo.cmd --gc --minify
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1

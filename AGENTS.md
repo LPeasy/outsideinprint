@@ -2,6 +2,7 @@
 
 For publishing or content-maintenance sessions in this repo, start with [docs/publishing-workflow.md](docs/publishing-workflow.md).
 Local validation policy lives in [docs/local-validation-policy.md](docs/local-validation-policy.md).
+The governing OIP editorial philosophy lives at `editorial\oip_editorial_philosophy.md`. Changed non-draft essays, reports, and working papers must have Editorial Philosophy Audit PASS evidence before publication. Syd & Oliver dialogue/fiction pieces are excluded from this hard gate unless explicitly treated as public-judgment work.
 
 ## Deferred merch work
 
@@ -13,6 +14,8 @@ Merch order automation is not implemented yet. Before proposing or building orde
 - Prefer the essay scaffold for new public writing: `.\tools\bin\custom\new-essay.cmd --title "My Title"`.
 - Run target-file essay guardrails before a full build:
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md`
+- For publication-ready essay, report, and working-paper changes, run the philosophy gate:
+  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit`
 - Preview locally while drafting with `.\tools\bin\generated\hugo.cmd server -D`.
 - Before publishing, run the normal gate:
   `.\tools\bin\generated\hugo.cmd --gc --minify`
@@ -26,4 +29,4 @@ Merch order automation is not implemented yet. Before proposing or building orde
 
 - PDFs are paused and are not part of the public publishing workflow.
 - Medium migrations follow the import and normalization path in [docs/publishing-workflow.md](docs/publishing-workflow.md), not the normal new-essay path.
-- Essays are the first-class publishing workflow. Dialogues, reports, and working papers are more manual and should be handled deliberately.
+- Essays are the first-class publishing workflow. Reports and working papers are more manual but still require the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces remain outside the hard philosophy gate unless explicitly treated as public-judgment work.
