@@ -38,6 +38,10 @@ test("article header follows the calm title-led form grammar", () => {
   const mediaPlate = articleSingle.indexOf('<figure class="{{ delimit $plateClasses " " }}">', subtitle);
   const recordRail = articleSingle.indexOf('class="piece-record-rail"');
   const body = articleSingle.indexOf('class="piece-body"');
+  const articleClose = articleSingle.indexOf("</article>", body);
+  const lightboxInclude = articleSingle.indexOf('partial "article/plate-lightbox.html" .', articleClose);
+  const conditionalPlateLightboxInclude = articleSingle.lastIndexOf("{{ if $plateImage }}", lightboxInclude);
+  const conditionalPlateLightboxAfterArticle = articleSingle.indexOf("{{ if $plateImage }}", articleClose);
 
   assert.ok(fleuron >= 0);
   assert.ok(fleuron < composition);
@@ -47,6 +51,9 @@ test("article header follows the calm title-led form grammar", () => {
   assert.ok(subtitle < mediaPlate);
   assert.ok(mediaPlate < recordRail);
   assert.ok(recordRail < body);
+  assert.ok(articleClose < lightboxInclude);
+  assert.ok(conditionalPlateLightboxInclude < articleClose);
+  assert.equal(conditionalPlateLightboxAfterArticle, -1);
   assert.match(articleSingle, /imageConfig/);
   assert.match(articleSingle, /\$plateImageWidth = \.Width/);
   assert.match(articleSingle, /\$plateImageHeight = \.Height/);
@@ -75,8 +82,28 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(articlePlateLightbox, /data-article-plate-lightbox-image-button/);
   assert.match(articlePlateLightbox, /document\.addEventListener\("click"/);
   assert.match(articlePlateLightbox, /closest\("\[data-article-plate-lightbox-trigger\]"\)/);
+  assert.match(articlePlateLightbox, /bodyImageSelector = "\.piece-body img"/);
+  assert.match(articlePlateLightbox, /article-lightbox-image/);
+  assert.match(articlePlateLightbox, /trigger\.matches\(bodyImageSelector\)/);
+  assert.match(articlePlateLightbox, /querySelectorAll\(bodyImageSelector\)/);
+  assert.match(articlePlateLightbox, /parent\.closest\("a, button, \[role=\\"button\\"\], \[data-article-plate-lightbox-trigger\]"\)/);
+  assert.match(articlePlateLightbox, /bodyImageSrc\(bodyImage\)/);
+  assert.match(articlePlateLightbox, /bodyImage\.classList\.add\(bodyImageClass\)/);
+  assert.match(articlePlateLightbox, /setAttribute\("role", "button"\)/);
+  assert.match(articlePlateLightbox, /setAttribute\("tabindex", "0"\)/);
+  assert.match(articlePlateLightbox, /setAttribute\("aria-label", "Open image fullscreen: " \+ imageTitle\)/);
+  assert.match(articlePlateLightbox, /bodyImage\.currentSrc \|\| bodyImage\.src/);
+  assert.match(articlePlateLightbox, /bodyImage\.naturalWidth > 0/);
+  assert.match(articlePlateLightbox, /bodyImage\.naturalHeight > 0/);
+  assert.match(articlePlateLightbox, /bodyImage\.closest\("\.piece-body figure"\)/);
+  assert.match(articlePlateLightbox, /figure\.querySelector\("figcaption"\)/);
+  assert.match(articlePlateLightbox, /figure\.querySelector\("\.article-source-caption"\)/);
+  assert.match(articlePlateLightbox, /event\.key === "Enter" \|\| event\.key === " "/);
+  assert.match(articlePlateLightbox, /event\.key === "Spacebar"/);
   assert.match(articlePlateLightbox, /document\.body\.classList\.add\("cartoon-lightbox-open"\)/);
   assert.match(articlePlateLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.match(css, /\.piece-body img\.article-lightbox-image\{/);
+  assert.match(css, /\.piece-body img\.article-lightbox-image:focus-visible\{/);
 });
 
 test("modern bios use dossier headers with portrait fallback and shared prose", () => {

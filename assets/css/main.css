@@ -3162,6 +3162,14 @@ body.cartoon-lightbox-open{
   max-width:100%;
   height:auto;
 }
+.piece-body img.article-lightbox-image{
+  cursor:zoom-in;
+}
+.piece-body img.article-lightbox-image:focus-visible{
+  outline:2px solid rgba(213,190,150,.72);
+  outline-offset:4px;
+  border-radius:6px;
+}
 .piece-body :is(figcaption, .article-source-caption){
   width:100%;
   max-width:100%;

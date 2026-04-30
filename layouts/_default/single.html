@@ -204,8 +204,6 @@
       ) }}
     </div>
   </article>
-  {{ if $plateImage }}
-    {{ partial "article/plate-lightbox.html" . }}
-  {{ end }}
+  {{ partial "article/plate-lightbox.html" . }}
   {{ partial "collections/reading-progress-script.html" . }}
 {{ end }}

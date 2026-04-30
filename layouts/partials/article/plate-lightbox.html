@@ -42,13 +42,112 @@
     var imageButton = lightbox.querySelector("[data-article-plate-lightbox-image-button]");
     var closeButton = lightbox.querySelector(".cartoon-lightbox__close");
     var closeControls = Array.prototype.slice.call(lightbox.querySelectorAll("[data-article-plate-lightbox-close]"));
+    var bodyImageSelector = ".piece-body img";
+    var bodyImageClass = "article-lightbox-image";
     var activeTrigger = null;
+    var articleTitle = "";
+
+    function getArticleTitle() {
+      var heading;
+
+      if (articleTitle) return articleTitle;
+
+      heading = document.querySelector(".piece-title-block h1, article h1, h1");
+      articleTitle = heading ? heading.textContent.trim() : "";
+      return articleTitle;
+    }
 
     function focusableElements() {
       return Array.prototype.slice.call(lightbox.querySelectorAll("button:not([disabled]), a[href]")).filter(function (element) {
         var style = window.getComputedStyle(element);
         return !element.hidden && style.display !== "none" && style.visibility !== "hidden";
       });
+    }
+
+    function bodyImageTitle(bodyImage) {
+      var alt = (bodyImage.getAttribute("alt") || "").trim();
+      return alt || getArticleTitle() || "Image";
+    }
+
+    function elementText(element) {
+      return element ? element.textContent.trim() : "";
+    }
+
+    function bodyImageCaption(bodyImage, imageTitle) {
+      var figure = bodyImage.closest(".piece-body figure");
+      var sourceCaption = null;
+      var captionText = "";
+
+      if (figure) {
+        captionText = elementText(figure.querySelector("figcaption"));
+        sourceCaption = figure.querySelector(".article-source-caption");
+      }
+
+      return captionText || elementText(sourceCaption) || imageTitle;
+    }
+
+    function bodyImageSrc(bodyImage) {
+      return bodyImage.currentSrc || bodyImage.src || "";
+    }
+
+    function hasInteractiveAncestor(bodyImage) {
+      var parent = bodyImage.parentElement;
+      return !!(parent && parent.closest("a, button, [role=\"button\"], [data-article-plate-lightbox-trigger]"));
+    }
+
+    function isBodyImageEligible(bodyImage) {
+      return !!(
+        bodyImage &&
+        bodyImage.matches &&
+        bodyImage.matches(bodyImageSelector) &&
+        !bodyImage.hasAttribute("data-article-plate-lightbox-trigger") &&
+        !hasInteractiveAncestor(bodyImage) &&
+        bodyImageSrc(bodyImage)
+      );
+    }
+
+    function lightboxDataFromBodyImage(bodyImage) {
+      var imageTitle = bodyImageTitle(bodyImage);
+
+      return {
+        title: imageTitle,
+        caption: bodyImageCaption(bodyImage, imageTitle),
+        image: bodyImageSrc(bodyImage),
+        alt: bodyImage.getAttribute("alt") || "",
+        width: bodyImage.naturalWidth > 0 ? String(bodyImage.naturalWidth) : "",
+        height: bodyImage.naturalHeight > 0 ? String(bodyImage.naturalHeight) : ""
+      };
+    }
+
+    function lightboxDataFromExplicitTrigger(trigger) {
+      return {
+        title: trigger.getAttribute("data-title") || getArticleTitle() || "Image",
+        caption: trigger.getAttribute("data-caption") || "",
+        image: trigger.getAttribute("data-image") || "",
+        alt: trigger.getAttribute("data-alt") || "",
+        width: trigger.getAttribute("data-width") || "",
+        height: trigger.getAttribute("data-height") || ""
+      };
+    }
+
+    function lightboxData(trigger) {
+      if (trigger.matches && trigger.matches(bodyImageSelector)) {
+        return lightboxDataFromBodyImage(trigger);
+      }
+
+      return lightboxDataFromExplicitTrigger(trigger);
+    }
+
+    function enhanceBodyImage(bodyImage) {
+      var imageTitle;
+
+      if (!isBodyImageEligible(bodyImage)) return;
+
+      imageTitle = bodyImageTitle(bodyImage);
+      bodyImage.classList.add(bodyImageClass);
+      bodyImage.setAttribute("role", "button");
+      bodyImage.setAttribute("tabindex", "0");
+      bodyImage.setAttribute("aria-label", "Open image fullscreen: " + imageTitle);
     }
 
     function closeLightbox() {
@@ -68,15 +167,19 @@
     }
 
     function openLightbox(trigger) {
-      var imageTitle = trigger.getAttribute("data-title") || "";
-      var imageCaption = trigger.getAttribute("data-caption") || "";
-      var imageWidth = trigger.getAttribute("data-width") || "";
-      var imageHeight = trigger.getAttribute("data-height") || "";
+      var data = lightboxData(trigger);
+      var imageTitle = data.title;
+      var imageCaption = data.caption;
+      var imageWidth = data.width;
+      var imageHeight = data.height;
+
+      if (!data.image) return;
+
       activeTrigger = trigger;
 
       title.textContent = imageTitle;
-      image.src = trigger.getAttribute("data-image") || "";
-      image.alt = trigger.getAttribute("data-alt") || "";
+      image.src = data.image;
+      image.alt = data.alt;
 
       if (imageWidth) {
         image.width = Number(imageWidth);
@@ -105,11 +208,25 @@
       closeButton.focus({ preventScroll: true });
     }
 
+    Array.prototype.slice.call(document.querySelectorAll(bodyImageSelector)).forEach(enhanceBodyImage);
+
     document.addEventListener("click", function (event) {
+      if (!event.target.closest) return;
+
       var trigger = event.target.closest("[data-article-plate-lightbox-trigger]");
-      if (!trigger) return;
+      var bodyImage;
+
+      if (trigger) {
+        event.preventDefault();
+        openLightbox(trigger);
+        return;
+      }
+
+      bodyImage = event.target.closest(bodyImageSelector);
+      if (!isBodyImageEligible(bodyImage)) return;
+
       event.preventDefault();
-      openLightbox(trigger);
+      openLightbox(bodyImage);
     });
 
     closeControls.forEach(function (control) {
@@ -119,9 +236,16 @@
     imageButton.addEventListener("click", closeLightbox);
 
     document.addEventListener("keydown", function (event) {
+      var bodyImage = event.target.closest ? event.target.closest(bodyImageSelector) : null;
       var focusable;
       var first;
       var last;
+
+      if (isBodyImageEligible(bodyImage) && (event.key === "Enter" || event.key === " " || event.key === "Spacebar")) {
+        event.preventDefault();
+        openLightbox(bodyImage);
+        return;
+      }
 
       if (lightbox.hidden) return;
 

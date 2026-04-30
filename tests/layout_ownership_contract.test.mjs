@@ -18,6 +18,7 @@ const libraryList = fs.readFileSync(path.resolve("layouts/library/list.html"), "
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
+const articlePlateLightbox = fs.readFileSync(path.resolve("layouts/partials/article/plate-lightbox.html"), "utf8");
 const layoutMatrix = fs.readFileSync(path.resolve("docs/layout-ownership-matrix.md"), "utf8");
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
 
@@ -231,6 +232,13 @@ test("archive shell owns the long-form list routes while /essays/ becomes a redi
 });
 
 test("article single template removes dead generic layout hooks and uses page-flow ownership", () => {
+  const bodyIndex = articleSingle.indexOf('class="piece-body"');
+  const articleClose = articleSingle.indexOf("</article>", bodyIndex);
+  const lightboxInclude = articleSingle.indexOf('partial "article/plate-lightbox.html" .', articleClose);
+
+  assert.ok(articleClose >= 0);
+  assert.ok(lightboxInclude > articleClose);
+  assert.equal(articleSingle.indexOf("{{ if $plateImage }}", articleClose), -1);
   assert.match(articleSingle, new RegExp(escapeRegex('<article class="{{ delimit $articleClasses " " }}"')));
   assert.match(articleSingle, /data-piece-collection-slug="\{\{ \$primaryCollection\.collection\.slug \}\}"/);
   assert.match(articleSingle, /class="piece-fleuron"/);
@@ -251,6 +259,17 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.doesNotMatch(articleSingle, /journey-links--article"/);
   assert.doesNotMatch(articleSingle, /partial "read_next\.html"/);
   assert.match(articleSingle, /<div class="piece-body">/);
+  assert.match(articlePlateLightbox, /closest\("\[data-article-plate-lightbox-trigger\]"\)/);
+  assert.match(articlePlateLightbox, /bodyImageSelector = "\.piece-body img"/);
+  assert.match(articlePlateLightbox, /article-lightbox-image/);
+  assert.match(articlePlateLightbox, /parent\.closest\("a, button, \[role=\\"button\\"\], \[data-article-plate-lightbox-trigger\]"\)/);
+  assert.match(articlePlateLightbox, /setAttribute\("tabindex", "0"\)/);
+  assert.match(articlePlateLightbox, /setAttribute\("role", "button"\)/);
+  assert.match(articlePlateLightbox, /setAttribute\("aria-label", "Open image fullscreen: " \+ imageTitle\)/);
+  assert.match(articlePlateLightbox, /event\.key === "Enter" \|\| event\.key === " "/);
+  assert.match(articlePlateLightbox, /event\.key === "Spacebar"/);
+  assert.match(articlePlateLightbox, /figure\.querySelector\("figcaption"\)/);
+  assert.match(articlePlateLightbox, /figure\.querySelector\("\.article-source-caption"\)/);
   assert.doesNotMatch(articleSingle, /single-page/);
   assert.doesNotMatch(articleSingle, /single-content/);
   assert.match(css, /\.piece-title-block\{/);
@@ -261,6 +280,8 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(css, /\.article-publication-record\{/);
   assert.doesNotMatch(css, /\.piece--collection-accent/);
   assert.doesNotMatch(css, /\.piece-collection-context/);
+  assert.match(css, /\.piece-body img\.article-lightbox-image\{/);
+  assert.match(css, /\.piece-body img\.article-lightbox-image:focus-visible\{/);
   assert.match(css, /\.journey-links--article-exit\{/);
   assert.doesNotMatch(css, /\.read-next/);
   assert.doesNotMatch(css, /\.running-header\{/);
@@ -375,6 +396,7 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`piece-media-plate__trigger`",
     "`piece-record-rail`",
     "`piece-record-rail__item--collection`",
+    "`.article-lightbox-image`",
     "`reading-path__header`",
     "`reading-path__actions`",
     "`reading-path__preview`",
