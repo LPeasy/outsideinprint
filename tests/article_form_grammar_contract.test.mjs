@@ -28,27 +28,40 @@ const dialogueFiles = [
   "without-a-word.md",
 ];
 
-test("regular article header follows the title-led form grammar", () => {
-  const runningHeader = articleSingle.indexOf('partial "running_header.html"');
+test("article header follows the calm title-led form grammar", () => {
+  const fleuron = articleSingle.indexOf('class="piece-fleuron"');
+  const composition = articleSingle.indexOf('class="piece-header-composition"');
   const titleBlock = articleSingle.indexOf('class="piece-title-block"');
   const byline = articleSingle.indexOf('partial "authors/byline.html"', titleBlock);
   const subtitle = articleSingle.indexOf("with .Params.subtitle", byline);
-  const publicationStrip = articleSingle.indexOf('class="imprint-header piece-publication-strip"');
-  const collectionStrip = articleSingle.indexOf('class="piece-collection-strip"');
-  const hero = articleSingle.indexOf('class="piece-hero"');
+  const mediaPlate = articleSingle.indexOf('<figure class="{{ delimit $plateClasses " " }}">', subtitle);
+  const recordRail = articleSingle.indexOf('class="piece-record-rail"');
   const body = articleSingle.indexOf('class="piece-body"');
 
-  assert.ok(runningHeader < titleBlock);
+  assert.ok(fleuron >= 0);
+  assert.ok(fleuron < composition);
+  assert.ok(composition < titleBlock);
   assert.ok(titleBlock < byline);
   assert.ok(byline < subtitle);
-  assert.ok(subtitle < publicationStrip);
-  assert.ok(publicationStrip < collectionStrip);
-  assert.ok(collectionStrip < hero);
-  assert.ok(hero < body);
+  assert.ok(subtitle < mediaPlate);
+  assert.ok(mediaPlate < recordRail);
+  assert.ok(recordRail < body);
+  assert.match(articleSingle, /imageConfig/);
+  assert.match(articleSingle, /ge \(mul \.Width 2\) \(mul \.Height 3\)/);
+  assert.match(articleSingle, /piece-header--%s-plate/);
+  assert.match(articleSingle, /piece-header--text-only/);
+  assert.match(articleSingle, /piece-media-plate--full/);
+  assert.doesNotMatch(articleSingle, /partial "running_header\.html"/);
+  assert.doesNotMatch(articleSingle, /piece-series-marker/);
+  assert.doesNotMatch(articleSingle, /piece-publication-strip/);
+  assert.doesNotMatch(articleSingle, /piece-collection-strip/);
+  assert.doesNotMatch(articleSingle, /From the Collection/);
   assert.doesNotMatch(articleSingle, /piece--collection-accent/);
   assert.doesNotMatch(articleSingle, /piece-collection-context/);
-  assert.match(css, /\.imprint-header\.piece-publication-strip\{\s*margin:[^}]*\s*padding:[^}]*\s*background:transparent;\s*border-width:1px 0;\s*border-radius:0;\s*box-shadow:none;/);
-  assert.match(css, /\.piece-collection-strip\{/);
+  assert.match(css, /\.piece-fleuron\{/);
+  assert.match(css, /\.piece-header-composition\{/);
+  assert.match(css, /\.piece-record-rail\{/);
+  assert.match(css, /\.piece-media-plate\{/);
   assert.match(css, /\.piece-hero\{/);
 });
 
@@ -59,10 +72,9 @@ test("modern bios use dossier headers with portrait fallback and shared prose", 
     ".Params.portrait_image_alt",
     ".Params.portrait_image_caption",
     ".Params.featured_image",
-    "piece-dossier-header--with-portrait",
-    "piece-dossier-header--text-only",
+    "piece-header--text-only",
     "piece-portrait-plate",
-    "Modern Bios",
+    "piece-record-line",
     "piece-primary-note",
     'partial "article/modernbio-record.html" .',
   ]) {
@@ -78,16 +90,18 @@ test("modern bios use dossier headers with portrait fallback and shared prose", 
   const modernBioGate = articleSingle.indexOf('if eq $articleVariant "modernbio"');
   const portraitParam = articleSingle.indexOf(".Params.portrait_image", modernBioGate);
   const featuredFallback = articleSingle.indexOf(".Params.featured_image", portraitParam);
-  const portraitPlate = articleSingle.indexOf('class="piece-portrait-plate"', featuredFallback);
-  const textOnlyClass = articleSingle.indexOf("piece-dossier-header--text-only", modernBioGate);
+  const featuredMarksPortrait = articleSingle.indexOf('{{ $plateKind = "portrait" }}', featuredFallback);
+  const portraitPlate = articleSingle.indexOf("piece-portrait-plate", featuredMarksPortrait);
+  const textOnlyClass = articleSingle.indexOf("piece-header--text-only");
   assert.ok(portraitParam > modernBioGate);
   assert.ok(featuredFallback > portraitParam);
-  assert.ok(portraitPlate > featuredFallback);
-  assert.ok(textOnlyClass > modernBioGate);
+  assert.ok(featuredMarksPortrait > featuredFallback);
+  assert.ok(portraitPlate > featuredMarksPortrait);
+  assert.ok(textOnlyClass >= 0);
 
-  assert.match(css, /\.article-variant-modernbio \.piece-header h1\{/);
-  assert.match(css, /\.piece-dossier-header--with-portrait\{/);
-  assert.match(css, /\.piece-dossier-header--text-only/);
+  assert.match(css, /\.article-variant-modernbio \.piece-title-block h1\{/);
+  assert.match(css, /\.piece-header--side-plate \.piece-header-composition\{/);
+  assert.match(css, /\.piece-header--full-plate \.piece-header-composition,/);
   assert.match(css, /\.piece-portrait-plate\{/);
   assert.doesNotMatch(css, /\.article-variant-modernbio \.piece-body/);
 });

@@ -383,8 +383,8 @@ foreach ($retiredSnippet in @(
 $articleSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/single.html') -Raw
 foreach ($requiredSnippet in @(
   'data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"',
-  'class="piece-collection-strip"',
-  'From the Collection',
+  'class="piece-record-rail"',
+  'piece-record-rail__item--collection',
   'data-analytics-source-slot="article_collection_context"'
 )) {
   if ($articleSingleTemplate -notmatch [regex]::Escape($requiredSnippet)) {
@@ -425,9 +425,9 @@ if ($collectionsData -match '(?s)- slug: civic-institutions-and-public-power.*?r
 
 $collectionsDoc = Get-Content -Path (Join-Path $repoRoot 'docs/collections-system.md') -Raw
 foreach ($requiredSnippet in @(
-  'From the Collection',
+  'article record rail',
   'first public match',
-  'compact primary-collection strip',
+  'compact collection boundary',
   '`room_theme` stays scoped to collection-detail reading rooms'
 )) {
   if ($collectionsDoc -notmatch [regex]::Escape($requiredSnippet)) {

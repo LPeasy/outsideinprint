@@ -83,15 +83,14 @@ test("article template emits compact primary-collection boundary hooks", () => {
     '{{ $showCollectionContext := false }}',
     '{{ $primaryCollection = $candidateCollection }}',
     'data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"',
-    'class="piece-collection-strip"',
-    'piece-collection-strip__eyebrow',
-    'piece-collection-strip__title',
-    'piece-collection-strip__meta',
-    'From the Collection',
+    'class="piece-record-rail"',
+    'piece-record-rail__item--collection',
+    'piece-record-rail__item--collection-meta',
     'data-analytics-source-slot="article_collection_context"'
   ]) {
     assert.match(articleSingle, new RegExp(escapeRegex(snippet)));
   }
+  assert.doesNotMatch(articleSingle, /From the Collection/);
   assert.doesNotMatch(articleSingle, /piece--collection-accent/);
   assert.doesNotMatch(articleSingle, /data-piece-collection-room-theme/);
 });
@@ -134,13 +133,11 @@ test("css owns the shared collection-room namespace and all theme modifiers", ()
     ".collection-card__meta-line{",
     ".collection-card__start-here{",
     ".piece-title-block{",
-    ".piece-publication-strip{",
-    ".piece-collection-strip{",
-    ".piece-collection-strip::before{",
-    ".piece-collection-strip__eyebrow,",
-    ".piece-collection-strip__title{",
-    ".piece-collection-strip__meta{",
-    ".piece-dossier-header{",
+    ".piece-fleuron{",
+    ".piece-media-plate{",
+    ".piece-record-rail{",
+    ".piece-record-rail::before{",
+    ".piece-record-rail__item--collection{",
     ".collection-room{",
     ".collection-room::before{",
     ".collection-room::after{",
@@ -190,20 +187,19 @@ test("docs record room_theme, article light accents, and collection-room ownersh
     "Start Here",
     "table of contents for the lane",
     "Best first read for this lane.",
-    "From the Collection",
+    "article record rail",
     "first public match",
-    "compact primary-collection strip"
+    "compact collection boundary"
   ]) {
     assert.match(collectionsDoc, new RegExp(escapeRegex(snippet)));
   }
 
   for (const snippet of [
     "`piece-title-block`",
-    "`piece-publication-strip`",
-    "`piece-collection-strip`",
-    "`piece-collection-strip__eyebrow`",
-    "`piece-collection-strip__title`",
-    "`piece-collection-strip__meta`",
+    "`piece-fleuron`",
+    "`piece-media-plate`",
+    "`piece-record-rail`",
+    "`piece-record-rail__item--collection`",
     "`collections-directory__guide*`",
     "`collection-card__description`",
     "`collection-room`",

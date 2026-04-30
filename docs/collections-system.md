@@ -71,7 +71,7 @@ Resolution rules:
 - `layouts/collections/list.html`: unified public collections card directory grouped into `Series` and `Topics`, with plain-language framing for how to use the route.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: article header and aftermatter, including the compact primary-collection strip, the article-exit continuation zone for collection-member pages, and quiet final article links.
+- `layouts/_default/single.html`: article header and aftermatter, including the compact collection boundary in the article record rail, the article-exit continuation zone for collection-member pages, and quiet final article links.
 - `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
 - `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
 - `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
@@ -84,10 +84,10 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 - A collection-member article renders exactly one article-exit continuation zone.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
-- Eligible collection-member articles also render a compact `From the Collection` header strip keyed to that same first public match.
-- When an article has two public explicit collections, that header strip lists both collection names in front matter order. The first public match still controls the continuation module.
+- Eligible collection-member articles also render compact collection links in the article record rail keyed to that same first public match.
+- When an article has two public explicit collections, the article record rail lists both collection names in front matter order. The first public match still controls the continuation module.
 - Collections influence article pages only through compact boundary modules:
-  - the header collection strip
+  - the header record rail collection boundary
   - the continuation module
 - The article body, hero, publication record, final article links, and editorial form variants remain neutral.
 - The separate mounted collection-membership block is no longer part of the article-member flow.
