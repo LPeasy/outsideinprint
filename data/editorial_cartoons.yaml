@@ -1,4 +1,4 @@
-current: lines-of-fire
+current: excellent-work
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -86,5 +86,13 @@ cartoons:
     image: "/images/editorial/lines-of-fire.png"
     essay: "/essays/the-strait-that-holds-the-price/"
     alt: "Editorial cartoon showing tankers moving through a narrow strait under a fiery red sky while armed silhouettes watch from the shoreline."
+    width: 1672
+    height: 941
+  - slug: excellent-work
+    title: "Excellent work."
+    date: "2026-04-30"
+    image: "/images/editorial/excellent-work.png"
+    essay: "/essays/smokestack-spreadsheets/"
+    alt: "Editorial cartoon showing a vintage desktop computer displaying a spreadsheet with a smokestack rising from a highlighted green cell and smoke forming a skull above the monitor."
     width: 1672
     height: 941

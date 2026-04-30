@@ -101,6 +101,46 @@ This paragraph is fine.
 
   @'
 ---
+title: "AI Tell Subtitle"
+date: 2025-07-14
+draft: false
+slug: "ai-tell-subtitle"
+section_label: "Essay"
+subtitle: "OpenAI's missed targets did not just expose a software forecast. They exposed a wager on chips, contracts, substations, and time."
+description: "A subtitle fixture with a forbidden contrast scaffold."
+featured_image: "/images/social/ai-tell-subtitle.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "ai-tell-subtitle.md") -Encoding UTF8
+
+  @'
+---
+title: "Inflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up"
+date: 2025-07-14
+draft: false
+slug: "allowed-not-just-title"
+section_label: "Essay"
+subtitle: ""
+description: "A title fixture that uses not just without the banned two-sentence scaffold."
+featured_image: "/images/social/allowed-not-just-title.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "allowed-not-just-title.md") -Encoding UTF8
+
+  @'
+---
 title: "Slug Echo"
 date: 2025-07-14
 draft: false
@@ -210,6 +250,16 @@ This paragraph is fine.
   Assert-True ($blockerOutput.Contains("embed_remnants")) "Expected blocker output to include embed_remnants."
   Assert-True ($blockerOutput.Contains("medium_cdn_media")) "Expected blocker output to include medium_cdn_media."
   Assert-True ($blockerOutput.Contains("mojibake")) "Expected blocker output to include mojibake."
+
+  $aiTellSubtitleOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/ai-tell-subtitle.md" 2>&1 | Out-String
+  $aiTellSubtitleExit = $LASTEXITCODE
+  Assert-True ($aiTellSubtitleExit -eq 1) "Expected forbidden title/subtitle AI-tell scaffolds to fail the guardrail check."
+  Assert-True ($aiTellSubtitleOutput.Contains("ai_tell_title_subtitle_structure")) "Expected forbidden title/subtitle scaffold output to include ai_tell_title_subtitle_structure."
+
+  $allowedNotJustTitleOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/allowed-not-just-title.md" 2>&1 | Out-String
+  $allowedNotJustTitleExit = $LASTEXITCODE
+  Assert-True ($allowedNotJustTitleExit -eq 0) "Expected non-scaffold not-just title phrasing to remain allowed."
+  Assert-True (-not $allowedNotJustTitleOutput.Contains("ai_tell_title_subtitle_structure")) "Expected non-scaffold not-just title phrasing not to trigger the title/subtitle AI-tell rule."
 
   $warningOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" 2>&1 | Out-String
   $warningExit = $LASTEXITCODE
