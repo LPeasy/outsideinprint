@@ -1706,8 +1706,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-blockade-has-a-phone-number"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=strait-to-voicemail"?'
-    Message = 'expected the Blockade homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?smokestack-spreadsheets"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=excellent-work"?'
+    Message = 'expected the Smokestack homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
