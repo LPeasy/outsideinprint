@@ -24,138 +24,183 @@ Syd was already in the booth. Two longnecks rested on the table, sweating into r
 
 Oliver stepped in, paused only long enough to register the room, then sat opposite him.
 
-“This place hasn’t changed at all,” Oliver said.
+**Oliver:** This place hasn’t changed at all.
 
-“That’s the whole point,” Syd replied, sliding a bottle across.
+**Syd:** That’s the whole point.
 
-Oliver took a drink. “What’s the occasion?”
+Syd slid a bottle across.
 
-“I’m leaving,” Syd said.
+Oliver took a drink.
 
-“For?”
+**Oliver:** What’s the occasion?
 
-“Forever.”
+**Syd:** I’m leaving.
 
-"What?"
+**Oliver:** For?
 
-"On a trip."
+**Syd:** Forever.
 
-“Where?”
+**Oliver:** What?
 
-Syd shrugged. “Somewhere else.”
+**Syd:** On a trip.
 
-Oliver’s expression did not change. “There’s a difference.”
+**Oliver:** Where?
 
-“Between what?”
+Syd shrugged.
 
-“Athens, Georgia and Athens, Greece.”
+**Syd:** Somewhere else.
 
-Syd smiled faintly. “Not to someone who's never left the tip of New Jersey.”
+Oliver’s expression did not change.
 
-Oliver nodded. “Perhaps, both do have a Parthenon.”
+**Oliver:** There’s a difference.
+
+**Syd:** Between what?
+
+**Oliver:** Athens, Georgia and Athens, Greece.
+
+Syd smiled faintly.
+
+**Syd:** Not to someone who's never left the tip of New Jersey.
+
+Oliver nodded.
+
+**Oliver:** Perhaps, both do have a Parthenon.
 
 They drank.
 
 Syd’s fingers traced the edge of the label.
 
-“The appeal of travel is life disruption,” he said. “Different streets. Different language. Your brain has to renegotiate basic assumptions.”
+**Syd:** The appeal of travel is life disruption. Different streets. Different language. Your brain has to renegotiate basic assumptions.
 
-“That’s true.”
+**Oliver:** That’s true.
 
-“It's a controlled shock,” Syd continued. “New inputs. New faces. You return sharper. Smarter. More open to things.”
+**Syd:** It's a controlled shock. New inputs. New faces. You return sharper. Smarter. More open to things.
 
-“Controlled,” Oliver repeated.
+**Oliver:** Controlled.
 
-“Yes. You don’t travel to discover yourself. You travel to misplace yourself.”
+Oliver repeated.
+
+**Syd:** Yes. You don’t travel to discover yourself. You travel to misplace yourself.
 
 Oliver watched a dart strike the wall just outside the board.
 
-“You know, you have an intersting point,” he said, “You could misplace a lot.”
+**Oliver:** You know, you have an intersting point. You could misplace a lot.
 
-“You think I’ll lose my passport?”
+**Syd:** You think I’ll lose my passport?
 
-“I’m not talking about logistics.”
+**Oliver:** I’m not talking about logistics.
 
 The jukebox shifted to the blues, screeched, whirled, and then started playing La Bomba.
 
-Syd lifted his bottle. “Most travel now is curated contrast. The right neighborhood. The right photograph. Manufactured global citezenship. It's beautiful."
+Syd lifted his bottle.
 
-“Oh, yes, quite,” Oliver said, “although, I would say that if you go even a seemingly insignificant distance further than the average bear, the experience is exponentially more beautiful. And the further you go, the higher the return for each additional mile.”
+**Syd:** Most travel now is curated contrast. The right neighborhood. The right photograph. Manufactured global citezenship. It's beautiful.
+
+**Oliver:** Oh, yes, quite, although, I would say that if you go even a seemingly insignificant distance further than the average bear, the experience is exponentially more beautiful. And the further you go, the higher the return for each additional mile.
 
 Syd tilted his head.
 
-“The first time I went far enough,” Oliver said, “I assumed. I assumed that it was a waste of time. It wasn’t. And I changed a lot on that trip.”
+**Oliver:** The first time I went far enough. I assumed. I assumed that it was a waste of time. It wasn’t. And I changed a lot on that trip.
 
-“That sounds inconvenient,” Syd said.
+**Syd:** That sounds inconvenient.
 
-“The call to adventure is one of life's greatest joys,” Oliver replied.
+**Oliver:** The call to adventure is one of life's greatest joys.
 
-Syd smiled faintly. “You’re romantic about it.”
+Syd smiled faintly.
 
-“No, you're romaticizing stale potato chips.”
+**Syd:** You’re romantic about it.
+
+**Oliver:** No, you're romaticizing stale potato chips.
 
 Oliver set his bottle down.
 
-Syd studied him more carefully now. “And?”
+Syd studied him more carefully now.
 
-“And what would be the point of going to Athens, Greece?”
+**Syd:** And?
+
+**Oliver:** And what would be the point of going to Athens, Greece?
 
 The dartboard thudded again. Applause followed a miss.
 
-Syd laughed quietly. “I like stepping off a plane and realizing I’m not in charge. But I like knowing I can leave whenever I want. I like renting my apartment, okay?”
+Syd laughed quietly.
+
+**Syd:** I like stepping off a plane and realizing I’m not in charge. But I like knowing I can leave whenever I want. I like renting my apartment, okay?
 
 Oliver nodded. He looked down at his beer.
 
-Syd drummed on the table and then said “What happened to you on that trip?”
+Syd drummed on the table and then said:
 
-Oliver looked up with a fierce smile. "I took on the challenge. I rode out into the unknown. I took a leap of faith. I went bowling without the rails."
+**Syd:** What happened to you on that trip?
+
+Oliver looked up with a fierce smile.
+
+**Oliver:** I took on the challenge. I rode out into the unknown. I took a leap of faith. I went bowling without the rails.
 
 That lingered.
 
-Syd slurped up some beer. “You got lost.”
+Syd slurped up some beer.
 
-Oliver laughed, “You could say that.”
+**Syd:** You got lost.
 
-“Where?”
+Oliver laughed.
 
-“Oh, what did you say? Somewhere else.”
+**Oliver:** You could say that.
 
-“For how long?”
+**Syd:** Where?
 
-“Longer than you would believe. ”
+**Oliver:** Oh, what did you say? Somewhere else.
 
-Syd leaned back. “You're a regular old Magellan, aren't you?”
+**Syd:** For how long?
 
-“Sometimes,” Oliver put his fist under his chin and thought real hard. “Most of the time I need a GPS to get to the bar.”
+**Oliver:** Longer than you would believe.
+
+Syd leaned back.
+
+**Syd:** You're a regular old Magellan, aren't you?
+
+**Oliver:** Sometimes.
+
+Oliver put his fist under his chin and thought real hard.
+
+**Oliver:** Most of the time I need a GPS to get to the bar.
 
 Syd held up his beer and they tapped them together. They sat in silence for a moment as the bar swelled and relaxed.
 
-“Why do you travel?” offered Oliver.
+**Oliver:** Why do you travel?
 
-Syd did not hesitate. “To shake up the routine. To remind myself that I can leave.”
+Syd did not hesitate.
 
-Oliver held his gaze. “Leave?”
+**Syd:** To shake up the routine. To remind myself that I can leave.
 
-“Yes.”
+Oliver held his gaze.
 
-“And return?”
+**Oliver:** Leave?
 
-“If I want to.”
+**Syd:** Yes.
+
+**Oliver:** And return?
+
+**Syd:** If I want to.
 
 Oliver nodded. They finished their beers.
 
 Outside, the night was cool and unremarkable.   
 A streetlight flickered, then steadied.
 
-“So,” Oliver said as they stepped onto the sidewalk, “Athens.”
+As they stepped onto the sidewalk, Oliver said:
 
-“Indeed,” Syd replied.
+**Oliver:** So. Athens.
 
-Oliver glanced at him. “Peaches or Greece?”
+**Syd:** Indeed.
 
-Syd laughed as they approached the curb. “Who cares?"
+Oliver glanced at him.
+
+**Oliver:** Peaches or Greece?
+
+Syd laughed as they approached the curb.
+
+**Syd:** Who cares?
 
 They parted at the street ~ walking in opposite directions.   
 Neither man hurrying nor looking back.
-
 

@@ -382,15 +382,23 @@ foreach ($retiredSnippet in @(
 
 $articleSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/single.html') -Raw
 foreach ($requiredSnippet in @(
-  'piece--collection-accent',
   'data-piece-collection-slug="{{ $primaryCollection.collection.slug }}"',
-  'data-piece-collection-room-theme="{{ $primaryCollection.collection.room_theme }}"',
-  'class="piece-collection-context"',
+  'class="piece-collection-strip"',
   'From the Collection',
   'data-analytics-source-slot="article_collection_context"'
 )) {
   if ($articleSingleTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/_default/single.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'piece--collection-accent',
+  'data-piece-collection-room-theme="{{ $primaryCollection.collection.room_theme }}"',
+  'class="piece-collection-context"'
+)) {
+  if ($articleSingleTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/_default/single.html to omit retired collection article skin snippet: $retiredSnippet"
   }
 }
 
@@ -419,7 +427,8 @@ $collectionsDoc = Get-Content -Path (Join-Path $repoRoot 'docs/collections-syste
 foreach ($requiredSnippet in @(
   'From the Collection',
   'first public match',
-  'primary-collection light-accent layer'
+  'compact primary-collection strip',
+  '`room_theme` stays scoped to collection-detail reading rooms'
 )) {
   if ($collectionsDoc -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected docs/collections-system.md to contain: $requiredSnippet"

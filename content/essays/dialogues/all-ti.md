@@ -17,152 +17,211 @@ source_url: 'https://syd-and-oliver.ghost.io/all-ti/'
 
 The bar's light was low and steady. Warm, heavy light poured across scarred wood. A thin haze softened the edges of glasses, and somewhere behind them, a muted trumpet worked through his problems.
 
-Syd was studying his phone as Oliver approached.
+Syd was studying his phone as Oliver approached. He smiled without looking up.
 
-“Up again,” Syd smiled without looking up.
+**Syd:** Up again.
 
-Oliver set his coat over the back of the chair. “What is?”
+Oliver set his coat over the back of the chair.
 
-“The market.” Syd turned the screen toward him. “Another high!”
+**Oliver:** What is?
 
-Oliver sat. A green line was zig-zagging wildly toward the top-right corner. “It’s always another high.”
+**Syd:** The market.
 
-“That’s the point.” Syd smiled faintly. “Zoom out. It trends.”
+Syd turned the screen toward him.
+
+**Syd:** Another high!
+
+Oliver sat. A green line was zig-zagging wildly toward the top-right corner.
+
+**Oliver:** It’s always another high.
+
+**Syd:** That’s the point.
+
+Syd smiled faintly.
+
+**Syd:** Zoom out. It trends.
 
 The bartender slid two drinks across the wood ~ *sssshthwip!* ~ and the men tapped once together and then both took a long pull.
 
-Syd tapped the chart again, three times. “Corrections. Crashes. Panics? Doesn’t matter. Over time, it goes up.”
+Syd tapped the chart again, three times.
 
-Oliver looked up from his drink. “Over some time, yes.”
+**Syd:** Corrections. Crashes. Panics? Doesn’t matter. Over time, it goes up.
 
-“Long enough time.”
+Oliver looked up from his drink.
 
-“Long enough for whom?”
+**Oliver:** Over some time, yes.
 
-Syd shrugged. “For anyone who stays invested.”
+**Syd:** Long enough time.
 
-Oliver watched the condensation gathering. “Is the stock market going up a good thing?”
+**Oliver:** Long enough for whom?
 
-Syd leaned back. “What are you so worried about?”
+Syd shrugged.
 
-Oliver shook his head slightly. “Manufacturing is thinner than it was. Supply chains stretch across oceans. They're fragile. Energy is expensive. Demographics are aging. And we’re about to automate half the labor force.”
+**Syd:** For anyone who stays invested.
 
-Syd waved a hand back and forth. “We’ve automated before.”
+Oliver watched the condensation gathering.
 
-“Not like this.”
+**Oliver:** Is the stock market going up a good thing?
 
-“They said that last time.”
+Syd leaned back.
 
-“They say that every time,” Oliver replied. “And sometimes they are right.”
+**Syd:** What are you so worried about?
 
-Syd took a sip. “Gold is soaring. Tesla is soaring. AI companies are valued like small countries. Capital finds a story and backs it. It's inevitable.”
+Oliver shook his head slightly.
 
-Oliver looked at him. “We’re financing growth with our kid's college fund.”
+**Oliver:** Manufacturing is thinner than it was. Supply chains stretch across oceans. They're fragile. Energy is expensive. Demographics are aging. And we’re about to automate half the labor force.
 
-“The debt is irrelevant.”
+Syd waved a hand back and forth.
 
-“What did we spend it on?”
+**Syd:** We’ve automated before.
 
-“Speculation, I suppose.”
+**Oliver:** Not like this.
 
-Oliver paused. “Sometimes, look Syd, sometimes speculation leads to us losing the family farm.”
+**Syd:** They said that last time.
+
+**Oliver:** They say that every time. And sometimes they are right.
+
+Syd took a sip.
+
+**Syd:** Gold is soaring. Tesla is soaring. AI companies are valued like small countries. Capital finds a story and backs it. It's inevitable.
+
+Oliver looked at him.
+
+**Oliver:** We’re financing growth with our kid's college fund.
+
+**Syd:** The debt is irrelevant.
+
+**Oliver:** What did we spend it on?
+
+**Syd:** Speculation, I suppose.
+
+Oliver paused.
+
+**Oliver:** Sometimes, look Syd, sometimes speculation leads to us losing the family farm.
 
 The trumpet shifted keys. A couple near the window laughed too loudly, then quieted.
 
-Syd leaned forward. “You’ve been bearish for years. You’re always worried about the ‘real economy.’ The market doesn’t care. It discounts the future.”
+Syd leaned forward.
 
-“It discounts our future,” Oliver said. “Not the future.”
+**Syd:** You’ve been bearish for years. You’re always worried about the ‘real economy.’ The market doesn’t care. It discounts the future.
 
-Syd smiled. “Same thing.”
+**Oliver:** It discounts our future. Not the future.
 
-“Not really.”
+Syd smiled.
+
+**Syd:** Same thing.
+
+**Oliver:** Not really.
 
 They stared at their drinks.
 
-Oliver continued. “A stock index rising doesn’t mean the underlying society is strengthening. It can mean liquidity. It can mean concentration. It can mean momentum chasing momentum.”
+**Oliver:** A stock index rising doesn’t mean the underlying society is strengthening. It can mean liquidity. It can mean concentration. It can mean momentum chasing momentum.
 
-“It can mean productivity.”
+**Syd:** It can mean productivity.
 
-“It can,” Oliver agreed. “If productivity is rising.”
+**Oliver:** It can. If productivity is rising.
 
-Syd tilted his head. “You don’t think it is?”
+Syd tilted his head.
 
-“I think we’re about to find out what happens when machines outperform people at cognitive labor.”
+**Syd:** You don’t think it is?
 
-“That sounds like efficiency.”
+**Oliver:** I think we’re about to find out what happens when machines outperform people at cognitive labor.
 
-“It sounds like displacement.”
+**Syd:** That sounds like efficiency.
 
-“It sounds like progress,” Syd said.
+**Oliver:** It sounds like displacement.
 
-Oliver studied him. “Progress for whom?”
+**Syd:** It sounds like progress.
+
+Oliver studied him.
+
+**Oliver:** Progress for whom?
 
 Syd didn’t answer. He looked at his phone and back at Oliver.
 
-“You know what I’ve noticed?” he said. “Every time the world ends, a handful of people get filthy rich.”
+**Oliver:** You know what I’ve noticed? Every time the world ends, a handful of people get filthy rich.
 
-Oliver’s eyes flicked toward the exit. “That’s... great.”
+Oliver’s eyes flicked toward the exit.
 
-“It’s the truth.”
+**Oliver:** That’s... great.
 
-Oliver looked down at his drink. “You’re describing downside volatility as a profit taking opportunity.”
+**Syd:** It’s the truth.
 
-“I’m describing markets doing what they do.”
+Oliver looked down at his drink.
 
-“And if the goose stops laying eggs?”
+**Oliver:** You’re describing downside volatility as a profit taking opportunity.
 
-Syd shrugged. “Then we’ll price that in.”
+**Syd:** I’m describing markets doing what they do.
 
-“You can’t price in institutional decay.”
+**Oliver:** And if the goose stops laying eggs?
 
-“We price in wars.”
+Syd shrugged.
 
-“What do you think is keeping prices so high?”
+**Syd:** Then we’ll price that in.
 
-“Belief.”
+**Oliver:** You can’t price in institutional decay.
+
+**Syd:** We price in wars.
+
+**Oliver:** What do you think is keeping prices so high?
+
+**Syd:** Belief.
 
 A cold silence settled in between them. The trumpet faded into a series of metallic sneezes.
 
-Finally, Syd sighed and said, “You’ve been predicting a reckoning for as long as I’ve known you.”
+Finally, Syd sighed and said:
 
-“I’ve been questioning the system.”
+**Syd:** You’ve been predicting a reckoning for as long as I’ve known you.
 
-“And the clock just keeps ticking and tocking.”
+**Oliver:** I’ve been questioning the system.
 
-“So far.”
+**Syd:** And the clock just keeps ticking and tocking.
 
-Syd smiled again. “Exactly.” He looked at his watch. 
+**Oliver:** So far.
 
-“You trust the long trend,” Oliver said quietly.
+Syd smiled again.
 
-Syd nodded. “History does.”
+**Syd:** Exactly.
 
-“History collapses.”
+He looked at his watch.
 
-“It recovers.”
+**Oliver:** You trust the long trend.
 
-“It survives. Or at least, the survivors do.”
+Syd nodded.
+
+**Syd:** History does.
+
+**Oliver:** History collapses.
+
+**Syd:** It recovers.
+
+**Oliver:** It survives. Or at least, the survivors do.
 
 Syd didn’t respond.
 
 The bartender returned with the bill. Oliver reached for it.
 
-“You don’t have to—” Syd began.
+Syd began:
 
-“I got it.”
+**Syd:** You don’t have to—
+
+**Oliver:** I got it.
 
 Oliver threw in a little extra before sliding the leather folder back.
 
-He stood, pulling on his coat. “You watch the charts,” he said. "I'm looking at the economy."
+He stood, pulling on his coat.
 
-Syd lifted his glass. “Same thing.”
+**Oliver:** You watch the charts. I'm looking at the economy.
+
+Syd lifted his glass.
+
+**Syd:** Same thing.
 
 Oliver paused.
 
-“No, they are not.” he said softly.
+**Oliver:** No, they are not.
 
 He stepped out into the night. The door closed with a whoosh, and the room resumed its low hum. 
 
 On Syd's phone, the green line was still climbing toward the upper right.
-
 

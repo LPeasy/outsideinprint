@@ -29,61 +29,71 @@ They talked for a while about nothing that mattered. The rhythm came back easily
 
 Eventually Oliver set his glass down.
 
-“Let me ask you something different,” he said.
+**Oliver:** Let me ask you something different.
 
 Syd turned toward him, attentive.
 
-“What would I have to believe about you in order to trust you?”
+**Oliver:** What would I have to believe about you in order to trust you?
 
-Syd smiled. “That’s a serious question.”
+Syd smiled.
 
-“I’m asking it seriously.”
+**Syd:** That’s a serious question.
+
+**Oliver:** I’m asking it seriously.
 
 Syd considered it. He always did when the questions weren’t performative.
 
-“You’d have to believe I mean what I say,” he said. “That I’m not trying to deceive you.”
+**Syd:** You’d have to believe I mean what I say. That I’m not trying to deceive you.
 
-“That’s sincerity,” Oliver said. “What else.”
+**Oliver:** That’s sincerity. What else.
 
-“That I’ll be consistent,” Syd continued. “That I won’t reverse myself arbitrarily.”
+**Syd:** That I’ll be consistent. That I won’t reverse myself arbitrarily.
 
-“Over time,” Oliver said.
+**Oliver:** Over time.
 
-“Yes.”
+**Syd:** Yes.
 
-“And when it costs you something,” Oliver added.
+**Oliver:** And when it costs you something.
 
-Syd paused, then nodded. “That too.”
+Syd paused, then nodded.
+
+**Syd:** That too.
 
 They sat with that. The room absorbed the pause easily.
 
-“And,” Oliver said, almost casually, “that if your interests change, reality still gets a vote.”
+**Oliver:** And that if your interests change, reality still gets a vote.
 
 Syd looked at him. Just long enough.
 
-“You’re asking about constraint,” he said.
+**Syd:** You’re asking about constraint.
 
-“I’m asking what I’m trusting.”
+**Oliver:** I’m asking what I’m trusting.
 
 Syd leaned back slightly, eyes tracing the ceiling before returning to Oliver.
 
-“That my future self is bound by what I say now,” he said. “That words mean the same thing tomorrow that they mean tonight.”
+**Oliver:** That my future self is bound by what I say now. That words mean the same thing tomorrow that they mean tonight.
 
-“Yes.”
+**Syd:** Yes.
 
-Syd smiled faintly. “You’re describing promises.”
+Syd smiled faintly.
 
-“They’re not complicated,” Oliver said. “They’re just heavy.”
+**Syd:** You’re describing promises.
 
-Syd let out a soft laugh. “Fair.”
+**Oliver:** They’re not complicated. They’re just heavy.
+
+Syd let out a soft laugh.
+
+**Syd:** Fair.
 
 Oliver waited.
 
-“Promise me something,” he said.
+**Oliver:** Promise me something.
 
-Syd raised an eyebrow. “What.”
+Syd raised an eyebrow.
 
-“That you won’t reinterpret this later.”
+**Syd:** What?
+
+**Oliver:** That you won’t reinterpret this later.
 
 Not legally.  
 Not morally.  
@@ -95,27 +105,31 @@ Then stopped.
 
 The pause wasn’t thoughtful this time. It was obstructed, as if the sentence had reached its limit before it could be finished.
 
-“I can’t promise that,” Syd said.
+**Syd:** I can’t promise that.
 
 Oliver didn’t respond.
 
-“Context changes,” Syd continued. “People change. Growth requires reinterpretation. Fixing meaning across time is—”
+**Syd:** Context changes. People change. Growth requires reinterpretation. Fixing meaning across time is—
 
-“I know the arguments,” Oliver said gently. “I’m asking what I’m trusting.”
+**Oliver:** I know the arguments.
+
+Oliver said it gently.
+
+**Oliver:** I’m asking what I’m trusting.
 
 Syd looked down at the table.
 
-“You’d be trusting my good faith,” he said.
+**Syd:** You’d be trusting my good faith.
 
-“For how long,” Oliver asked.
+**Oliver:** For how long?
 
-“As long as it holds.”
+**Syd:** As long as it holds.
 
-“And when it doesn’t.”
+**Oliver:** And when it doesn’t?
 
 Syd exhaled.
 
-“Then it doesn’t.”
+**Syd:** Then it doesn’t.
 
 The words stayed where they landed.
 
@@ -123,58 +137,56 @@ Oliver waited.
 
 Syd spoke again, slower now.
 
-“If I can always reinterpret,” he said, “then nothing I say really binds me. Not across time. Not across cost.”
+**Syd:** If I can always reinterpret, then nothing I say really binds me. Not across time. Not across cost.
 
 Oliver said nothing.
 
 Syd’s expression shifted ~ not into panic or anger, but into something colder and more precise.
 
-“That’s why you shouldn’t trust someone like me,” Syd said.
+**Syd:** That’s why you shouldn’t trust someone like me.
 
 Oliver didn’t interrupt.
 
-“Honesty isn’t enough,” Syd continued. “Sincerity isn’t enough. If truth lives inside the self, then promises collapse into self-report. Obligation lasts only as long as it feels authentic.”
+**Syd:** Honesty isn’t enough. Sincerity isn’t enough. If truth lives inside the self, then promises collapse into self-report. Obligation lasts only as long as it feels authentic.
 
 He gestured vaguely, then let his hand fall.
 
-“Words stop binding,” he said. “They start floating.”
+**Syd:** Words stop binding. They start floating.
 
-“And trust,” Oliver said quietly.
+**Oliver:** And trust.
 
-“Becomes coincidence,” Syd replied. “Alignment of moods. Nothing more.”
+**Syd:** Becomes coincidence. Alignment of moods. Nothing more.
 
 They sat in the open space between them. Other conversations drifted past without touching theirs.
 
-“You see why objectivists are right to be suspicious,” Syd said. “Why you can’t rely on people like me. When interests shift, meaning shifts. When meaning shifts, promises dissolve.”
+**Syd:** You see why objectivists are right to be suspicious. Why you can’t rely on people like me. When interests shift, meaning shifts. When meaning shifts, promises dissolve.
 
 Oliver nodded once.
 
-“And knowing all of that,” Oliver said, “you still reject objective truth.”
+**Oliver:** And knowing all of that, you still reject objective truth.
 
 Syd didn’t hesitate.
 
-“Yes.”
+**Syd:** Yes.
 
 Not because it was true.
 
 Because it was survivable.
 
-“Constraint is heavier than error,” Syd said. “Regret hurts, but it passes. Obligation follows you.”
+**Syd:** Constraint is heavier than error. Regret hurts, but it passes. Obligation follows you.
 
 Oliver felt the choice settle, clean and final.
 
-“Then we can coexist,” he said. “But I can’t depend on you.”
+**Oliver:** Then we can coexist. But I can’t depend on you.
 
 Syd smiled ~ not defensively, not sadly. Just honestly.
 
-“That’s fair.”
+**Syd:** That’s fair.
 
 He stood, slipped his jacket on, and moved easily toward the door.
 
-“Thank you for asking it straight,” he said. “Most people don’t want the answer.”
+**Syd:** Thank you for asking it straight. Most people don’t want the answer.
 
 He left.
 
 Oliver stayed where he was.
-
-

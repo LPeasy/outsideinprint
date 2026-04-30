@@ -219,11 +219,32 @@ test("homepage composition inserts the manifesto between the hero and Start Read
 
 test("homepage editorial layout uses the new manifesto namespace and drops dead start-here hooks", () => {
   assert.match(css, /:root\{[\s\S]*--bg-page:#121212;[\s\S]*--font-display:"Source Serif 4", Georgia, serif;[\s\S]*--measure-reading:68ch;/);
-  assert.match(css, /:root,\s*\.oip-theme-rules-clear-20260429-115754\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.055\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.155\);[\s\S]*\}/);
-  assert.match(css, /\.oip-theme-rules-classic-20260429-115754\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.04\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.12\);[\s\S]*\}/);
+  assert.match(css, /:root,\s*\.oip-theme-rules-print-20260429-161813\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.06\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.17\);[\s\S]*--oip-rule-engraved:rgba\(213,190,150,.22\);[\s\S]*--oip-rule-engraved-strong:rgba\(213,190,150,.34\);[\s\S]*\}/);
+  assert.match(css, /\.oip-theme-rules-clear-20260429-115754\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.055\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.155\);[\s\S]*--oip-rule-engraved-strong:rgba\(213,190,150,.24\);[\s\S]*\}/);
+  assert.match(css, /\.oip-theme-rules-classic-20260429-115754\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.04\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.12\);[\s\S]*--oip-rule-engraved-strong:rgba\(213,190,150,.18\);[\s\S]*\}/);
+  assert.match(css, /--oip-rule-engraved-gradient:linear-gradient\(90deg, rgba\(236,231,223,0\), var\(--oip-rule-engraved-strong\) 18%, var\(--oip-rule-engraved\) 52%, rgba\(236,231,223,0\)\);/);
+  assert.match(css, /--oip-rule-engraved-rail:linear-gradient\(180deg, var\(--oip-rule-engraved-strong\), var\(--oip-rule-engraved\) 48%, rgba\(213,190,150,0\)\);/);
+  const dividerTokens = new Set(Array.from(css.matchAll(/--oip-rule-[a-z-]+:/g), ([token]) => token.slice(0, -1)));
+  assert.deepEqual(Array.from(dividerTokens).sort(), [
+    "--oip-rule-clear",
+    "--oip-rule-engraved",
+    "--oip-rule-engraved-gradient",
+    "--oip-rule-engraved-rail",
+    "--oip-rule-engraved-strong",
+    "--oip-rule-faint",
+    "--oip-rule-hairline",
+    "--oip-rule-list",
+    "--oip-rule-standard",
+  ]);
   assert.match(styleThemeWorkflow, /oip-theme-<area>-<descriptor>-YYYYMMDD-HHMMSS/);
   assert.match(styleThemeWorkflow, /oip-theme-rules-classic-20260429-115754/);
   assert.match(styleThemeWorkflow, /oip-theme-rules-clear-20260429-115754/);
+  assert.match(styleThemeWorkflow, /oip-theme-rules-print-20260429-161813/);
+  assert.match(styleThemeWorkflow, /--oip-rule-engraved/);
+  assert.match(styleThemeWorkflow, /--oip-rule-engraved-gradient/);
+  assert.match(styleThemeWorkflow, /--oip-rule-engraved-rail/);
+  assert.match(styleThemeWorkflow, /semantic threshold tools, not general borders/);
+  assert.match(styleThemeWorkflow, /signature thresholds only/);
   assert.match(styleThemeWorkflow, /Do not add runtime theme switching/);
   assert.match(css, /#main-content\{\s*scroll-margin-top:56px;\s*\}/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?#main-content\{\s*scroll-margin-top:0;\s*\}/);
@@ -231,7 +252,8 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
     assert.doesNotMatch(cssRule(css, selector), /repeating-linear-gradient/);
   }
   assert.match(css, /\.home-manifesto\{\s*margin-top:2\.35rem;\s*\}/);
-  assert.match(css, /\.home-manifesto__inner\{[\s\S]*grid-template-columns:minmax\(110px, 136px\) minmax\(0, 1fr\);[\s\S]*border-top:1px solid var\(--oip-rule-clear\);/);
+  assert.match(css, /\.home-manifesto__inner\{[\s\S]*grid-template-columns:minmax\(110px, 136px\) minmax\(0, 1fr\);[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
+  assert.match(css, /\.home-manifesto__inner::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.home-manifesto__copy\{[\s\S]*display:grid;[\s\S]*max-width:46rem;/);
   assert.match(css, /\.home-manifesto__line--primary\{[\s\S]*font-size:clamp\(1\.12rem, 1\.04rem \+ 0\.42vw, 1\.24rem\);/);
   assert.match(css, /\.home-manifesto__line--secondary\{[\s\S]*font-size:clamp\(1\.5rem, 1\.18rem \+ 1vw, 1\.9rem\);/);
@@ -243,14 +265,42 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.home-front-page__lead\{[\s\S]*border-right:1px solid var\(--oip-rule-standard\);/);
   assert.match(css, /\.home-front-page__secondary-item\{[\s\S]*border-top:1px solid var\(--oip-rule-faint\);/);
   assert.match(css, /\.item\{[\s\S]*border-bottom:1px solid var\(--oip-rule-list\);/);
-  assert.match(css, /\.author-route__reading-map\{[\s\S]*border-top:1px solid var\(--oip-rule-list\);/);
-  assert.match(css, /\.essays-front__masthead,\s*\.section-front__header\{[\s\S]*border-bottom:1px solid var\(--oip-rule-standard\);/);
-  assert.match(css, /\.site-footer\{[\s\S]*border-top:1px solid var\(--oip-rule-standard\);/);
+  assert.match(css, /\.author-route__reading-map\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
+  assert.match(css, /\.about-route__reading-map::before,\s*\.author-route__reading-map::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.essays-front__masthead,\s*\.section-front__header\{[\s\S]*border-bottom:1px solid var\(--oip-rule-engraved\);/);
+  assert.match(css, /\.nav--section-rail\{[\s\S]*border-top-color:var\(--oip-rule-engraved\);[\s\S]*border-bottom-color:var\(--oip-rule-engraved\);/);
+  assert.match(css, /\.nav--section-rail::before,\s*\.nav--section-rail::after\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.site-footer\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
+  assert.match(css, /\.site-footer::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.imprint-header,\s*\.article-publication-record,\s*\.article-record,\s*\.reading-path\{[\s\S]*border-color:var\(--oip-rule-standard\);/);
+  assert.match(css, /\.imprint-header::before,\s*\.article-publication-record::before,\s*\.article-record::before,\s*\.reading-path::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.library-group::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.library-group \[data-library-item\],\s*\.library-results__list \[data-library-item\]\{[\s\S]*position:relative;[\s\S]*padding-top:\.55rem;/);
+  assert.match(css, /\.library-group \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\),\s*\.library-results__list \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\)\{[\s\S]*border-top:1px solid var\(--oip-rule-standard\);/);
+  assert.match(css, /\.library-group \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\)::before,\s*\.library-results__list \[data-library-item\]:not\(\[hidden\]\) ~ \[data-library-item\]:not\(\[hidden\]\)::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.library-group \[data-library-item\] > \.item,\s*\.library-results__list \[data-library-item\] > \.item\{[\s\S]*border-bottom:none;/);
+  assert.match(css, /\.library-group \[data-library-item\] > \.item::before,\s*\.library-results__list \[data-library-item\] > \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
+  assert.match(css, /\.library-group \[data-library-item\]:focus-within > \.item::before,\s*\.library-results__list \[data-library-item\]:focus-within > \.item::before\{[\s\S]*opacity:\.82;/);
+  assert.doesNotMatch(css, /\.library-group \.item,\s*\.library-results__list \.item\{/);
+  assert.doesNotMatch(css, /\.library-group \.item::before,\s*\.library-results__list \.item::before\{/);
+  assert.match(css, /\.essays-front__month::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.essays-front__month-list \.item\{[\s\S]*border-bottom-color:var\(--oip-rule-faint\);/);
+  assert.match(css, /\.essays-front__month-list \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
   assert.match(css, /\.editorial-cartoon-recent\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.editorial-cartoon::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.editorial-cartoon-recent__trigger\{[\s\S]*aspect-ratio:16 \/ 9;/);
   assert.match(css, /\.essay-cartoon-thumb img\{[\s\S]*aspect-ratio:16 \/ 9;/);
   assert.match(css, /\.home-front-page__secondary-title-row\{[\s\S]*justify-content:space-between;/);
   assert.match(css, /\.cartoon-gallery-spotlight\{[\s\S]*grid-template-columns:minmax\(12rem, \.38fr\) minmax\(0, 1fr\);/);
+  assert.match(css, /\.cartoon-gallery\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
+  assert.match(css, /\.cartoon-gallery::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.piece-body h2::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.piece-body figure\{[\s\S]*border-top:1px solid var\(--oip-rule-faint\);/);
+  assert.match(css, /\.piece-body \.article-embed::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.collections-directory__group::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  for (const selector of [".shop-card", ".shop-panel", ".shop-cta", ".newsletter-signup__input", ".newsletter-signup__button", ".collection-room"]) {
+    assert.doesNotMatch(cssRule(css, selector), /var\(--oip-rule-/);
+  }
   assert.match(css, /@media \(max-width:420px\)\{[\s\S]*\.editorial-cartoon-recent\{\s*grid-template-columns:1fr;/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-manifesto__inner\{\s*grid-template-columns:1fr;/);
   assert.doesNotMatch(css, /\.entry-thread__archive\{/);

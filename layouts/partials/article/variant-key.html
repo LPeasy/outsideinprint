@@ -1,8 +1,45 @@
 {{- $variant := lower (strings.TrimSpace (printf "%v" (.Params.article_variant | default ""))) -}}
 {{- if eq $variant "" -}}
-  {{- $style := lower (strings.TrimSpace (printf "%v" (.Params.style_variant | default ""))) -}}
-  {{- if or (eq $style "modernbio") (eq $style "modern-bio") -}}
-    {{- $variant = "modernbio" -}}
+  {{- $libraryType := lower (strings.TrimSpace (printf "%v" (.Params.library_type | default ""))) -}}
+  {{- if eq $libraryType "dialogue" -}}
+    {{- $variant = "dialogue" -}}
+  {{- else -}}
+    {{- $style := lower (strings.TrimSpace (printf "%v" (.Params.style_variant | default ""))) -}}
+    {{- if or (eq $style "modernbio") (eq $style "modern-bio") -}}
+      {{- $variant = "modernbio" -}}
+    {{- else -}}
+      {{- $sectionLabel := lower (urlize (strings.TrimSpace (printf "%v" (.Params.section_label | default "")))) -}}
+      {{- if or (eq $sectionLabel "modern-bio") (eq $sectionLabel "modern-bios") -}}
+        {{- $variant = "modernbio" -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if eq $variant "" -}}
+      {{- with .Params.series -}}
+        {{- if reflect.IsSlice . -}}
+          {{- range . -}}
+            {{- $seriesKey := lower (urlize (strings.TrimSpace (printf "%v" .))) -}}
+            {{- if or (eq $seriesKey "modernbio") (eq $seriesKey "modernbios") (eq $seriesKey "modern-bio") (eq $seriesKey "modern-bios") -}}
+              {{- $variant = "modernbio" -}}
+            {{- end -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $seriesKey := lower (urlize (strings.TrimSpace (printf "%v" .))) -}}
+          {{- if or (eq $seriesKey "modernbio") (eq $seriesKey "modernbios") (eq $seriesKey "modern-bio") (eq $seriesKey "modern-bios") -}}
+            {{- $variant = "modernbio" -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if eq $variant "" -}}
+      {{- with .Params.collections -}}
+        {{- range . -}}
+          {{- $collectionKey := lower (urlize (strings.TrimSpace (printf "%v" .))) -}}
+          {{- if eq $collectionKey "modern-bios" -}}
+            {{- $variant = "modernbio" -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{ return $variant }}

@@ -25,266 +25,340 @@ The place was half full. Predictable. Canned.
 
 Syd was already seated in a booth beneath a framed photograph of a ranch landscape, maybe in Oklahoma, could be anywhere really.
 
-“They’re going to be very different cities in twenty years,” he said as Oliver approached.
+As Oliver approached, Syd said:
 
-Oliver slid into the opposite side of the booth, setting his coat beside him. “Different how?”
+**Syd:** They’re going to be very different cities in twenty years.
 
-“Demographics. Culture. Language. The turnover is inevitable.” Syd glanced toward the television, then back. “The future is going to look nothing like the past.”
+Oliver slid into the opposite side of the booth, setting his coat beside him.
 
-Oliver nodded slightly. “And that’s good?”
+**Oliver:** Different how?
 
-Syd smiled faintly. “Of course it’s good.”
+**Syd:** Demographics. Culture. Language. The turnover is inevitable.
 
- “Why?”
+Syd glanced toward the television, then back.
 
- “Because diversity is good.”
+**Syd:** The future is going to look nothing like the past.
 
- A server arrived with matching tumblers of water and handed them gigantic, laminated menus before leaving. Oliver rested his hand lightly around his glass. “Do you know where the word diversification came from?”
+Oliver nodded slightly.
 
- Syd blinked once and shrugged. “Ecology?”
+**Oliver:** And that’s good?
 
- “No.”
+Syd smiled faintly.
 
- Syd shrugged. “Finance?”
+**Syd:** Of course it’s good.
 
- “Eventually, yes. But the idea is even more fundamental.”
+**Oliver:** Why?
 
- Syd leaned back against the vinyl. “You’re going to give me a history lesson.”
+**Syd:** Because diversity is good.
 
- “I’m going to ask you a question ~ if in a roundabout way.”
+A server arrived with matching tumblers of water and handed them gigantic, laminated menus before leaving. Oliver rested his hand lightly around his glass.
 
- Syd gestured wildly. The server tried to look away, but Syd ordered before she could disappear. Two margheritas. Salt on the rim, frozen.  
-He looked back at Oliver and opened his right palm above the table. “Proceed.”
+**Oliver:** Do you know where the word diversification came from?
 
- “For most of its life,” Oliver said, “diversity didn’t have anything to do with morality. It was practical. Mixed crops so you don’t starve. Multiple revenue streams so you don’t collapse in a downturn.”
+Syd blinked once and shrugged.
 
- “That seems sensible.”
+**Syd:** Ecology?
 
- “It was,” Oliver said. He took a sip. “In the early twentieth century, corporations adopted it. Multiple product lines. Hedging volatility. Still situational and narrowly applied.”
+**Oliver:** No.
 
-“And then…” The margheritas arrive and Syd smashed his straw on the table ~ paper bursting like hot grapes. He stabbed the doublewide purple straw into his drink, sucked down a gulp, and licked the rim of his glass.
+Syd shrugged.
 
-“Enter Harry Markowitz.” Oliver counted off 1, 2, 3, 4 ~ thumb, pointer, middle, pinky. “He showed that under specific assumptions, combining imperfectly correlated assets reduces risk without reducing expected return.”
+**Syd:** Finance?
 
-Syd’s eyebrow lifted slightly. “Ah, yes, the free lunch.”
+**Oliver:** Eventually, yes. But the idea is even more fundamental.
 
-“Yes.” Oliver’s voice remained even. “The free lunch.”
+Syd leaned back against the vinyl.
 
-“That’s not controversial.”
+**Syd:** You’re going to give me a history lesson.
 
-“No,” Oliver said. “But that’s not all he said. He also said this:
+**Oliver:** I’m going to ask you a question ~ if in a roundabout way.
 
-*“Diversification is both observed and sensible; a rule of behavior which does not imply the superiority of diversification must be rejected both as a hypothesis and as a maxim.”*  
-— **Harry Markowitz**, *Portfolio Selection* (1952)”
+Syd gestured wildly. The server tried to look away, but Syd ordered before she could disappear. Two margheritas. Salt on the rim, frozen.
+He looked back at Oliver and opened his right palm above the table.
 
-“It’s elegant.” Syd agreed.
+**Syd:** Proceed.
 
-“The point is,” Oliver continued, “it was conditional. It worked because assets are substitutable. Correlation can be measured. Coordination costs are manageable.”
+**Oliver:** For most of its life, diversity didn’t have anything to do with morality. It was practical. Mixed crops so you don’t starve. Multiple revenue streams so you don’t collapse in a downturn.
 
-Syd nodded. “Fungible.”
+**Syd:** That seems sensible.
 
-“That quote was a methodological statement about portfolio theory, not a philosophical declaration about society.”
+Oliver took a sip.
+
+**Oliver:** It was. In the early twentieth century, corporations adopted it. Multiple product lines. Hedging volatility. Still situational and narrowly applied.
+
+**Syd:** And then…
+
+The margheritas arrive and Syd smashed his straw on the table ~ paper bursting like hot grapes. He stabbed the doublewide purple straw into his drink, sucked down a gulp, and licked the rim of his glass.
+
+**Oliver:** Enter Harry Markowitz.
+
+Oliver counted off 1, 2, 3, 4 ~ thumb, pointer, middle, pinky.
+
+**Oliver:** He showed that under specific assumptions, combining imperfectly correlated assets reduces risk without reducing expected return.
+
+Syd’s eyebrow lifted slightly.
+
+**Syd:** Ah, yes, the free lunch.
+
+**Oliver:** Yes.
+
+Oliver’s voice remained even.
+
+**Oliver:** The free lunch.
+
+**Syd:** That’s not controversial.
+
+**Oliver:** No. But that’s not all he said. He also said this:
+
+*Diversification is both observed and sensible; a rule of behavior which does not imply the superiority of diversification must be rejected both as a hypothesis and as a maxim.*
+— **Harry Markowitz**, *Portfolio Selection* (1952)
+
+**Syd:** It’s elegant.
+
+**Oliver:** The point is, it was conditional. It worked because assets are substitutable. Correlation can be measured. Coordination costs are manageable.
+
+Syd nodded.
+
+**Syd:** Fungible.
+
+**Oliver:** That quote was a methodological statement about portfolio theory, not a philosophical declaration about society.
 
 Syd was paying attention now.
 
-“After that,” Oliver said, “diversification acquired scientific prestige. It wasn’t just prudent. It was right. It was, obviously, correct."
+**Oliver:** After that, diversification acquired scientific prestige. It wasn’t just prudent. It was right. It was, obviously, correct.
 
-Syd tilted his head. “In finance, you mean. Markets,” he suggested.
+Syd tilted his head.
 
-“Yes.”
+**Syd:** In finance, you mean. Markets.
+
+**Oliver:** Yes.
 
 A sports replay flashed silently above them. A touchdown. 
 
-“And then,” Oliver said, “the word migrated.”
+**Oliver:** And then, the word migrated.
 
-Syd smiled. “You’re saying the metaphor escaped containment.”
+Syd smiled.
+
+**Syd:** You’re saying the metaphor escaped containment.
 
 Oliver glanced around the bar. Noticing nothing, he turned back to the conversation and raised his eyebrows.
 
-“Diverse ecology seems self-evidently good, no?” Syd offered.
+**Syd:** Diverse ecology seems self-evidently good, no?
 
-“Resilience. Redundancy. Monocultures collapse. Diversity absorbs shocks.” Oliver concluded.
+**Oliver:** Resilience. Redundancy. Monocultures collapse. Diversity absorbs shocks.
 
-Syd lifted his glass slightly. “That sounds right to me. Cheers!” 
+Syd lifted his glass slightly.
+
+**Syd:** That sounds right to me. Cheers!
 
 They tapped glasses and drank.
 
-“It is persuasive,” Oliver said. “And it works like a charm. But only when the components are fungible.”
+**Oliver:** It is persuasive. And it works like a charm. But only when the components are fungible.
 
 Silence stretched between them. A blender whirred briefly near the bar.
 
-“And you think people aren’t?”
+**Syd:** And you think people aren’t?
 
-“No. I don’t think societies are portfolios.”
+**Oliver:** No. I don’t think societies are portfolios.
 
 Syd’s expression didn’t change.
 
-“Human beings,” Oliver continued, “are not correlated assets. Culture is not a set of independent variables. Trust isn’t divisible."
+**Oliver:** Human beings, are not correlated assets. Culture is not a set of independent variables. Trust isn’t divisible.
 
-“You’re romanticizing cohesion,” Syd said.
+**Syd:** You’re romanticizing cohesion.
 
-“Am I?”
+**Oliver:** Am I?
 
-“Yes. Shared norms are negotiated. They evolve. Demographic turnover is just another form of variation.”
+**Syd:** Yes. Shared norms are negotiated. They evolve. Demographic turnover is just another form of variation.
 
-“Is it?”
+**Oliver:** Is it?
 
 Syd watched him.
 
-“You said diversity is good,” Oliver said. “Is it always good?”
+**Oliver:** You said diversity is good. Is it always good?
 
-“On balance.”
+**Syd:** On balance.
 
-“That’s not what you said.”
+**Oliver:** That’s not what you said.
 
-Syd smiled faintly. “Fine, I'll bite. It is morally good. Diversity is more than a value ~ it’s our greatest strength.”
+Syd smiled faintly.
 
-The server returned with the checks.
+**Syd:** Fine, I'll bite. It is morally good. Diversity is more than a value ~ it’s our greatest strength.
 
-“That’s the rub,” Oliver said once she left.
+The server returned with the checks. Once she left:
 
-“What rub.”
+**Oliver:** That’s the rub.
 
-“We made risk-management a virtue.”
+**Syd:** What rub?
+
+**Oliver:** We made risk-management a virtue.
 
 The overhead lighting hummed faintly.
 
-“For two hundred years,” Oliver continued, “diversification meant prudence. Reduce downside. Avoid famine. Hedge volatility.”
+**Oliver:** For two hundred years, diversification meant prudence. Reduce downside. Avoid famine. Hedge volatility.
 
-“And that’s still true.”
+**Syd:** And that’s still true.
 
-“We applied the free lunch to human populations,” Oliver said, “It’s just not the same thing as Cap’n Crunch selling 18 different flavors of corn.”
+**Oliver:** We applied the free lunch to human populations. It’s just not the same thing as Cap’n Crunch selling 18 different flavors of corn.
 
-Syd’s voice remained even. “Diversity gives you people who bring different skills. Different perspectives. That strengthens society.”
+Syd’s voice remained even.
 
-“Sometimes, sure.”
+**Syd:** Diversity gives you people who bring different skills. Different perspectives. That strengthens society.
 
-“Usually. Maybe even most of the time.”
+**Oliver:** Sometimes, sure.
 
-“Under what assumptions?”
+**Syd:** Usually. Maybe even most of the time.
+
+**Oliver:** Under what assumptions?
 
 Syd did not answer.
 
-“Assets don’t argue,” Oliver said. “Stocks don’t vote or protest or riot.”
+**Oliver:** Assets don’t argue. Stocks don’t vote or protest or riot.
 
-Syd exhaled lightly. “You’re worried about conflict.”
+Syd exhaled lightly.
 
-“We are living in a brand new world. The old world thought they understood the risks, and they gambled the goose on what they thought was a sure bet.”
+**Syd:** You’re worried about conflict.
 
-“That’s an interesting way to put it.”
+**Oliver:** We are living in a brand new world. The old world thought they understood the risks, and they gambled the goose on what they thought was a sure bet.
 
-“That's the rub, Syd.”
+**Syd:** That’s an interesting way to put it.
+
+**Oliver:** That's the rub, Syd.
 
 They held each other’s gaze across the small, polished table.
 
-“Morally pluralistic societies,” Oliver said, “require shared baseline commitments. If those erode faster than they can be rebuilt, cohesion weakens.”
+**Oliver:** Morally pluralistic societies, require shared baseline commitments. If those erode faster than they can be rebuilt, cohesion weakens.
 
-Syd nodded slowly. “So, your solution is homogeneity.”
+Syd nodded slowly.
 
-“No.”
+**Syd:** So, your solution is homogeneity.
 
-“Continuity?”
+**Oliver:** No.
 
-“Yes.”
+**Syd:** Continuity?
 
-Syd leaned back into the booth. “Continuity with what?”
+**Oliver:** Yes.
 
-“Our inheritance. Our origin story. An identity.”
+Syd leaned back into the booth.
 
-“That’s selective,” Syd said. “Inheritance is inherently unfair.”
+**Syd:** Continuity with what?
 
-“We don’t need to reinvent the wheel. The shoulders of giants and all that, right? Maybe we should think before we spit down. Make sure we understand them.”
+**Oliver:** Our inheritance. Our origin story. An identity.
 
-“Every society reinvents itself. Think of all the progress we have made! History never ends.”
+**Syd:** That’s selective. Inheritance is inherently unfair.
 
-“It does not. The future is contingent upon us: who we are ~ what we believe ~ and what we believe we can become. We have to believe in a beautiful vision of the future where all people of good will can live and compete."
+**Oliver:** We don’t need to reinvent the wheel. The shoulders of giants and all that, right? Maybe we should think before we spit down. Make sure we understand them.
 
-“You’re afraid of fracture. Division.”
+**Syd:** Every society reinvents itself. Think of all the progress we have made! History never ends.
 
-“I’m wary of dogma.”
+**Oliver:** It does not. The future is contingent upon us: who we are ~ what we believe ~ and what we believe we can become. We have to believe in a beautiful vision of the future where all people of good will can live and compete.
 
-Syd smiled faintly. “Dogmas. Heresies. Saints.”
+**Syd:** You’re afraid of fracture. Division.
 
-“Lift any value above the rest,” Oliver said, “and it becomes sacred.”
+**Oliver:** I’m wary of dogma.
 
-Syd considered that. “You’re saying the word carries moral prestige it didn’t earn.”
+Syd smiled faintly.
 
-“That’s it!”
+**Syd:** Dogmas. Heresies. Saints.
 
-“And you think we’re misapplying portfolio theory to people.”
+**Oliver:** Lift any value above the rest, and it becomes sacred.
 
-“I think we imported the authority of mathematics into moral discourse.”
+Syd considered that.
 
-Syd laughed quietly. “That’s dramatic.”
+**Syd:** You’re saying the word carries moral prestige it didn’t earn.
 
-“It’s precise.”
+**Oliver:** That’s it!
+
+**Syd:** And you think we’re misapplying portfolio theory to people.
+
+**Oliver:** I think we imported the authority of mathematics into moral discourse.
+
+Syd laughed quietly.
+
+**Syd:** That’s dramatic.
+
+**Oliver:** It’s precise.
 
 A long pause. The server swooped in and snatched their cards.
 
-“You don’t think pluralism works,” Syd said.
+**Syd:** You don’t think pluralism works.
 
-“I think it works only when there is something holding it together.”
+**Oliver:** I think it works only when there is something holding it together.
 
-“Such as?”
+**Syd:** Such as?
 
-“A shared story, a common language, common values.”
+**Oliver:** A shared story, a common language, common values.
 
-“And what if that shared story is diversity itself.”
+**Syd:** And what if that shared story is diversity itself?
 
 Oliver looked at him steadily.
 
-“That’s a slogan,” he said. Syd did not react. “If diversity is the highest good,” Oliver continued, “then what happens when birth rates decline? When trust falls? When institutions weaken?"
+**Oliver:** That’s a slogan.
 
-“They adapt.”
+Syd did not react.
 
-“The institutions or the people?”
+**Oliver:** If diversity is the highest good, then what happens when birth rates decline? When trust falls? When institutions weaken?
 
-Syd lifted his glass again but did not drink.  “You’re describing a tradeoff,” he said. “And you think we ignore the cost.”
+**Syd:** They adapt.
 
-“I think we deny there is one.”
+**Oliver:** The institutions or the people?
+
+Syd lifted his glass again but did not drink.
+
+**Syd:** You’re describing a tradeoff. And you think we ignore the cost.
+
+**Oliver:** I think we deny there is one.
 
 The televisions cycled to a commercial. 
 
-Syd finally spoke. “You realize,” he said, “that demographic change is happening whether you like it or not.”
+Syd finally spoke.
 
-“Yes.”
+**Syd:** You realize that demographic change is happening whether you like it or not.
 
-“And that resisting it looks...”
+**Oliver:** Yes.
 
-“Perhaps.”
+**Syd:** And that resisting it looks...
 
-“And embracing it looks like the only choice.”
+**Oliver:** Perhaps.
 
-“I guess I have a hard time surrendering to despair.”
+**Syd:** And embracing it looks like the only choice.
 
-Syd’s voice stayed calm. “The future won’t ask permission from the past.”
+**Oliver:** I guess I have a hard time surrendering to despair.
 
-“No,” Oliver said. “It only asks permission from us.”
+Syd’s voice stayed calm.
 
-Silence settled between them. A birthday song began somewhere near the kitchen, loud and rehearsed. Syd looked briefly toward the sound, then back. “You know what I think?”
+**Syd:** The future won’t ask permission from the past.
 
-“What.”
+**Oliver:** No. It only asks permission from us.
 
-“Diversification became moralized because people are tired of fighting over hierarchy.” 
+Silence settled between them. A birthday song began somewhere near the kitchen, loud and rehearsed. Syd looked briefly toward the sound, then back.
+
+**Syd:** You know what I think?
+
+**Oliver:** What?
+
+**Syd:** Diversification became moralized because people are tired of fighting over hierarchy.
 
 Oliver waited. 
 
-“If no one group is central,” Syd continued, “no one dominates. Diversity is insurance against tyranny. Diversity reduces exposure.”
+**Syd:** If no one group is central, no one dominates. Diversity is insurance against tyranny. Diversity reduces exposure.
 
-“Courage and generosity and honesty and love ~ those are virtues.”
+**Oliver:** Courage and generosity and honesty and love ~ those are virtues.
 
 The server returned with their cards and bowed out without a word. 
 
-Syd quickly signed his check and then bounced the pen three times to check the balance before pocketing it. “You’re not against diversity,” he said finally.
+Syd quickly signed his check and then bounced the pen three times to check the balance before pocketing it.
 
-“No, I'm not.”
+**Syd:** You’re not against diversity.
 
-A faint smile crossed Syd’s face. “Only, for you, its not as important as truth.”
+**Oliver:** No, I'm not.
+
+A faint smile crossed Syd’s face.
+
+**Syd:** Only, for you, its not as important as truth.
 
 Oliver did not respond. The two men finished their drinks silently.
 
 They slid out of the booth and left the bar.
 
 Televisions continued streaming ~ flickering on the walls ~ regularly scheduled programming.
-
-

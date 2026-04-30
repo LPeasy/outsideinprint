@@ -21,9 +21,11 @@ Different bar. Same kind of room. Low ceiling. Wood that had learned to absorb s
 
 Syd was already there when Oliver arrived, halfway through a drink he hadn’t noticed he’d ordered. He looked up and smiled with genuine surprise.
 
-“Fancy seeing you,” Syd said.
+**Syd:** Fancy seeing you.
 
-Oliver took the stool beside him. “I was thinking the same.”
+Oliver took the stool beside him.
+
+**Oliver:** I was thinking the same.
 
 They ordered without discussion. The bartender nodded like he’d seen this before.
 
@@ -31,150 +33,179 @@ For a while they spoke the way people do when they’ve already said the thing t
 
 Eventually, Oliver leaned back.
 
-“I’ve been thinking about what you said,” he told Syd.
+**Oliver:** I’ve been thinking about what you said.
 
 Syd didn’t bristle. He never did.
 
-“About morality surviving without universality,” Oliver continued. “About truth being local.”
+**Oliver:** About morality surviving without universality. About truth being local.
 
-“And?” Syd asked.
+**Syd:** And?
 
-“And I can’t make history fit,” Oliver said.
+**Oliver:** And I can’t make history fit.
 
-Syd took a sip. “History never fits. That’s the point.”
+Syd took a sip.
 
-“No,” Oliver said. “It resists. That’s different.”
+**Syd:** History never fits. That’s the point.
+
+**Oliver:** No. It resists. That’s different.
 
 Syd turned toward him, curious now.
 
-“You don’t get to narrate everything,” Oliver went on. “Some things just happen. Some structures endure whether you approve of them or not.”
+**Oliver:** You don’t get to narrate everything. Some things just happen. Some structures endure whether you approve of them or not.
 
-“Such as,” Syd said.
+**Syd:** Such as.
 
 Oliver thought for a moment.
 
-“Civilizations,” he said. “Technology. Why some societies coordinate at scale and others don’t.”
+**Oliver:** Civilizations. Technology. Why some societies coordinate at scale and others don’t.
 
-Syd smiled. “Ah. We’re doing this.”
+Syd smiled.
 
-“We’re already doing it,” Oliver said. “I just want to be honest about it.”
+**Syd:** Ah. We’re doing this.
 
-Syd gestured with his glass. “Go on.”
+**Oliver:** We’re already doing it. I just want to be honest about it.
 
-“Hundreds of civilizations rose and fell over ten thousand years,” Oliver said. “Only one conquered the entire globe ~ the English.”
+Syd gestured with his glass.
 
-Syd raised an eyebrow. “You’re not going where I think you’re going.”
+**Syd:** Go on.
 
-“I’m not,” Oliver said. “Unless you refuse to go anywhere at all.”
+**Oliver:** Hundreds of civilizations rose and fell over ten thousand years. Only one conquered the entire globe ~ the English.
 
-Syd laughed softly. “Fair.”
+Syd raised an eyebrow.
 
-“What made them different?” Oliver asked. “Genetics? Geography? Culture? Institutions? Dumb luck?”
+**Syd:** You’re not going where I think you’re going.
 
-“All of the above,” Syd said quickly. “In no stable proportion.”
+**Oliver:** I’m not. Unless you refuse to go anywhere at all.
 
-“That still implies structure,” Oliver said. “Constraints. Causes.”
+Syd laughed softly.
 
-“It implies stories,” Syd replied. “Competing explanations layered over chaos.”
+**Syd:** Fair.
+
+**Oliver:** What made them different? Genetics? Geography? Culture? Institutions? Dumb luck?
+
+**Syd:** All of the above. In no stable proportion.
+
+**Oliver:** That still implies structure. Constraints. Causes.
+
+**Syd:** It implies stories. Competing explanations layered over chaos.
 
 Oliver shook his head.
 
-“Why didn’t anyone invent the steam engine before the nineteenth century?” he asked. “How did every civilization miss it for thousands of years?”
+**Oliver:** Why didn’t anyone invent the steam engine before the nineteenth century? How did every civilization miss it for thousands of years?
 
-Syd leaned back. “Because history isn’t a video game tech tree.”
+Syd leaned back.
 
-“No,” Oliver said. “Because prerequisite conditions were missing. Metallurgy. Capital. Incentives. Scientific method. Energy density. Time horizons.”
+**Syd:** Because history isn’t a video game tech tree.
 
-Syd studied him. “You’re assigning inevitability where there was contingency.”
+**Oliver:** No. Because prerequisite conditions were missing. Metallurgy. Capital. Incentives. Scientific method. Energy density. Time horizons.
 
-“I’m assigning limits,” Oliver said. “You can’t just will outcomes into existence.”
+Syd studied him.
 
-Syd smiled. “Tell that to politics.”
+**Syd:** You’re assigning inevitability where there was contingency.
 
-“That’s exactly who I’m telling it to,” Oliver said.
+**Oliver:** I’m assigning limits. You can’t just will outcomes into existence.
+
+Syd smiled.
+
+**Syd:** Tell that to politics.
+
+**Oliver:** That’s exactly who I’m telling it to.
 
 They sat for a moment. Someone laughed too loudly at a nearby table.
 
-“The Egyptians didn’t go to the moon,” Oliver continued. “Not because they were stupid ~ they weren’t ~ but because their civilization optimized for permanence and monumentality. Stability over iteration.”
+**Oliver:** The Egyptians didn’t go to the moon. Not because they were stupid ~ they weren’t ~ but because their civilization optimized for permanence and monumentality. Stability over iteration.
 
-“Different values,” Syd said.
+**Syd:** Different values.
 
-“Different constraints,” Oliver replied. “Different incentives. Different consequences.”
+**Oliver:** Different constraints. Different incentives. Different consequences.
 
-Syd took another drink. “And you think that means history has objective structure.”
+Syd took another drink.
 
-“I think it means history pushes back,” Oliver said. “You can tell any story you want, but some of them fail against reality.”
+**Syd:** And you think that means history has objective structure.
 
-“And who decides that?” Syd asked.
+**Oliver:** I think it means history pushes back. You can tell any story you want, but some of them fail against reality.
 
-“Reality,” Oliver said. “Eventually.”
+**Syd:** And who decides that?
+
+**Oliver:** Reality. Eventually.
 
 Syd smiled, but it didn’t reach his eyes.
 
-“You sound like a moralist pretending to be a physicist.”
+**Syd:** You sound like a moralist pretending to be a physicist.
 
-“And you sound like a relativist pretending not to smuggle judgments,” Oliver said.
+**Oliver:** And you sound like a relativist pretending not to smuggle judgments.
 
-Syd chuckled. “Touché.”
+Syd chuckled.
+
+**Syd:** Touché.
 
 Oliver leaned forward.
 
-“If everything is interpretation,” he said, “then there’s no such thing as learning from history. Only rebranding it.”
+**Oliver:** If everything is interpretation, then there’s no such thing as learning from history. Only rebranding it.
 
-“Learning is rebranding,” Syd said. “With better aesthetics.”
+**Syd:** Learning is rebranding. With better aesthetics.
 
-“That’s flippant,” Oliver said. “And you know it.”
+**Oliver:** That’s flippant. And you know it.
 
-Syd shrugged. “It’s protective.”
+Syd shrugged.
+
+**Syd:** It’s protective.
 
 Oliver studied him.
 
-“Protective of what?”
+**Oliver:** Protective of what?
 
 Syd hesitated ~ just briefly.
 
-“Of certainty,” he said. “Of people who use it like a weapon.”
+**Syd:** Of certainty. Of people who use it like a weapon.
 
 Oliver nodded slowly.
 
-“And in the process,” he said, “you dissolve causality, responsibility, and judgment.”
+**Oliver:** And in the process, you dissolve causality, responsibility, and judgment.
 
-“I redistribute them,” Syd said.
+**Syd:** I redistribute them.
 
-“To whom?” Oliver asked.
+**Oliver:** To whom?
 
 Syd didn’t answer.
 
 They sat with that.
 
-“You know what bothers me most,” Oliver said after a while.
+After a while, Oliver said:
 
-“What.”
+**Oliver:** You know what bothers me most.
 
-“You live as if objective reality exists,” Oliver said. “You rely on physics. On contracts. On medicine. On engineering. On history written by people you didn’t agree with.”
+**Syd:** What?
 
-Syd smiled. “Pragmatism is not belief.”
+**Oliver:** You live as if objective reality exists. You rely on physics. On contracts. On medicine. On engineering. On history written by people you didn’t agree with.
 
-“It’s belief,” Oliver said. “You depend on truth you won’t acknowledge.”
+Syd smiled.
+
+**Syd:** Pragmatism is not belief.
+
+**Oliver:** It’s belief. You depend on truth you won’t acknowledge.
 
 Syd laughed, genuinely this time.
 
-“That’s a good line,” he said. “I’ll steal it.”
+**Syd:** That’s a good line. I’ll steal it.
 
-“You can’t steal what you deny exists,” Oliver said.
+**Oliver:** You can’t steal what you deny exists.
 
-Syd raised his glass. “To contradiction.”
+Syd raised his glass.
+
+**Syd:** To contradiction.
 
 They finished their drinks without saying much else. When they stood to leave, Syd clapped Oliver lightly on the shoulder.
 
-“Still friends?” Syd asked.
+**Syd:** Still friends?
 
-“Yes,” Oliver said. And meant it.
+**Oliver:** Yes.
+
+Oliver meant it.
 
 But as Syd walked away, Oliver noticed something he hadn’t before ~ how easily Syd stepped out of the conversation, how little he seemed to care.
 
 History, Oliver thought, does not forget.
 
 Neither, he knew, would he.
-
 

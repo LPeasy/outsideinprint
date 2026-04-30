@@ -40,5 +40,11 @@
 {{- if .Params.repair_mojibake -}}
   {{- $content = partial "article/repair_mojibake.html" $content -}}
 {{- end -}}
+{{- if eq (partial "article/variant-key.html" .) "dialogue" -}}
+  {{- $content = replaceRE `(?s)<p>\s*<strong>\s*([^:<>"\n][^:<>"\n]{0,36}?)\s*:\s*</strong>\s*(.*?)\s*</p>` `<p class="dialogue-turn" data-speaker="$1"><span class="dialogue-turn__speaker">$1</span><span class="dialogue-turn__text">$2</span></p>` $content -}}
+  {{- $content = replaceRE `<p class="dialogue-turn" data-speaker="Syd">` `<p class="dialogue-turn dialogue-turn--syd" data-speaker="Syd">` $content -}}
+  {{- $content = replaceRE `<p class="dialogue-turn" data-speaker="Oliver">` `<p class="dialogue-turn dialogue-turn--oliver" data-speaker="Oliver">` $content -}}
+  {{- $content = replaceRE `<p class="dialogue-turn" data-speaker="Tony">` `<p class="dialogue-turn dialogue-turn--tony" data-speaker="Tony">` $content -}}
+{{- end -}}
 {{- $content = replaceRE `(?s)<p>\s*</p>` `` $content -}}
 {{- $content | safeHTML -}}

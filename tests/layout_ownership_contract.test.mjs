@@ -232,25 +232,28 @@ test("archive shell owns the long-form list routes while /essays/ becomes a redi
 
 test("article single template removes dead generic layout hooks and uses page-flow ownership", () => {
   assert.match(articleSingle, new RegExp(escapeRegex('<article class="{{ delimit $articleClasses " " }}"')));
-  assert.match(articleSingle, /append "piece--collection-accent"/);
   assert.match(articleSingle, /data-piece-collection-slug="\{\{ \$primaryCollection\.collection\.slug \}\}"/);
-  assert.match(articleSingle, /data-piece-collection-room-theme="\{\{ \$primaryCollection\.collection\.room_theme \}\}"/);
-  assert.match(articleSingle, /class="piece-collection-context"/);
+  assert.match(articleSingle, /class="piece-collection-strip"/);
+  assert.match(articleSingle, /class="imprint-header piece-publication-strip"/);
+  assert.match(articleSingle, /class="piece-title-block/);
+  assert.match(articleSingle, /class="article-publication-record"/);
   assert.match(articleSingle, /From the Collection/);
   assert.match(articleSingle, /data-analytics-source-slot="article_collection_context"/);
   assert.match(articleSingle, /partial "authors\/byline\.html"/);
-  assert.match(articleSingle, /partial "authors\/card\.html"/);
+  assert.doesNotMatch(articleSingle, /partial "authors\/card\.html"/);
+  assert.doesNotMatch(articleSingle, /partial "newsletter_signup\.html"/);
   assert.match(articleSingle, /journey-links--article-exit/);
   assert.doesNotMatch(articleSingle, /journey-links--article"/);
   assert.doesNotMatch(articleSingle, /partial "read_next\.html"/);
   assert.match(articleSingle, /<div class="piece-body">/);
   assert.doesNotMatch(articleSingle, /single-page/);
   assert.doesNotMatch(articleSingle, /single-content/);
-  assert.match(css, /\.piece--collection-accent\{/);
-  assert.match(css, /\.piece--collection-accent \.piece-collection-context,/);
-  assert.match(css, /\.piece--collection-accent \.reading-path\{/);
-  assert.match(css, /\.piece--collection-accent--ai-screen-glow-archive\{/);
-  assert.match(css, /\.newsletter-signup--page\{\s*margin-top:0;\s*\}/);
+  assert.match(css, /\.piece-title-block\{/);
+  assert.match(css, /\.piece-publication-strip\{/);
+  assert.match(css, /\.piece-collection-strip\{/);
+  assert.match(css, /\.article-publication-record\{/);
+  assert.doesNotMatch(css, /\.piece--collection-accent/);
+  assert.doesNotMatch(css, /\.piece-collection-context/);
   assert.match(css, /\.journey-links--article-exit\{/);
   assert.doesNotMatch(css, /\.read-next/);
   assert.match(css, /\.running-header\{/);
@@ -360,11 +363,12 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "| Gallery | `/gallery/`",
     "`collection-item-note`",
     "`collection-card__description`",
-    "`piece--collection-accent`",
-    "`piece-collection-context`",
-    "`piece-collection-context__eyebrow`",
-    "`piece-collection-context__title`",
-    "`piece-collection-context__meta`",
+    "`piece-title-block`",
+    "`piece-publication-strip`",
+    "`piece-collection-strip`",
+    "`piece-collection-strip__eyebrow`",
+    "`piece-collection-strip__title`",
+    "`piece-collection-strip__meta`",
     "`.running-header__inner`",
     "`reading-path__header`",
     "`reading-path__actions`",

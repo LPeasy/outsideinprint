@@ -29,7 +29,7 @@ Each collection in `data/collections.yaml` supports these fields:
 - `featured`: allows the collection to appear in featured strips such as the homepage; `/collections/` does not use this field for ordering or presentation.
 - `weight`: ordering control for collection listings.
 - `start_here`: optional page slug that gets a dedicated callout.
-- `room_theme`: optional presentation key reused by collection-detail reading rooms and the article light-accent layer.
+- `room_theme`: optional presentation key reused by collection-detail reading rooms. Article pages do not inherit room themes as full skins.
 - `description`: short editorial framing used on index, detail, and homepage strips.
 - `metadata`: optional reader-facing label/value pairs.
 - `fallback`: legacy matching fields (`series`, `topics`, `tags`, `sections`).
@@ -71,7 +71,7 @@ Resolution rules:
 - `layouts/collections/list.html`: unified public collections card directory grouped into `Series` and `Topics`, with plain-language framing for how to use the route.
 - `layouts/collections/single.html`: individual collection page.
 - `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: article header and aftermatter, including the primary-collection light-accent context, the article-exit continuation zone for collection-member pages, and the shared after-newsletter `Keep reading` links for article exits.
+- `layouts/_default/single.html`: article header and aftermatter, including the compact primary-collection strip, the article-exit continuation zone for collection-member pages, and quiet final article links.
 - `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
 - `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
 - `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
@@ -84,14 +84,14 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 - A collection-member article renders exactly one article-exit continuation zone.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
-- Eligible collection-member articles also render a compact `From the Collection` header context keyed to that same first public match.
-- When an article has two public explicit collections, that header context lists both collection names in front matter order. The first public match still controls the accent theme and continuation module.
-- The article light-accent layer uses `room_theme` only for restrained article chrome:
-  - the header context block
+- Eligible collection-member articles also render a compact `From the Collection` header strip keyed to that same first public match.
+- When an article has two public explicit collections, that header strip lists both collection names in front matter order. The first public match still controls the continuation module.
+- Collections influence article pages only through compact boundary modules:
+  - the header collection strip
   - the continuation module
-- The article body, hero, citation, author card, newsletter, and after-newsletter `Keep reading` links remain neutral.
+- The article body, hero, publication record, final article links, and editorial form variants remain neutral.
 - The separate mounted collection-membership block is no longer part of the article-member flow.
-- Standalone articles use the same after-newsletter `Keep reading` links as collection-member articles.
+- Standalone articles use the same quiet final article links as collection-member articles.
 - The continuation zone shows:
   - `Continue This Collection`
   - linked collection title
@@ -127,7 +127,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - `Related Collections` is framed as adjacent terrain for what to read after finishing the current lane, not as a generic overflow list.
 - Collection detail pages no longer render the old `How to Use This Collection` overview block.
 - Collection detail pages may also apply an explicit per-collection reading-room treatment via `room_theme`.
-- Article pages may reuse `room_theme` only for the compact primary-collection light-accent layer.
+- Article pages may show collection membership only through compact boundary modules; `room_theme` stays scoped to collection-detail reading rooms.
 - The `/collections/` route now renders one unified directory of room-echo cards for every visible collection.
 - That directory groups cards under `Series` and `Topics` only; it does not render a separate featured strip or a neutral row index.
 - The collections index route ignores `featured`; homepage and other existing featured surfaces may still use it.

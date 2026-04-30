@@ -23,9 +23,13 @@ foreach ($requiredSnippet in @(
   'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',
   '$showCollectionContinuation := false',
   'partial "collections/reading-path.html" .',
-  'partial "newsletter_signup.html"',
+  'class="article-publication-record"',
+  'Cite this',
   '"class" "journey-links--article-exit"',
-  '"eyebrow" "Keep reading"',
+  '"eyebrow" "Article paths"',
+  '(dict "href" ("archive/" | absURL) "label" "Archive")',
+  '(dict "href" ("collections/" | absURL) "label" "Collections")',
+  '(dict "href" ("library/" | absURL) "label" "Library")',
   'partial "collections/reading-progress-script.html" .'
 )) {
   if ($articleSingle -notmatch [regex]::Escape($requiredSnippet)) {
@@ -45,12 +49,16 @@ if ($articleSingle -match [regex]::Escape('"class" "journey-links--article"')) {
   throw 'Did not expect layouts/_default/single.html to render header-mounted article journey links.'
 }
 
-if ($articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.StringComparison]::Ordinal) -ge $articleSingle.IndexOf('partial "authors/card.html"', [System.StringComparison]::Ordinal)) {
-  throw 'Expected layouts/_default/single.html to place the reading-path partial before the author card.'
+if ($articleSingle -match [regex]::Escape('partial "authors/card.html"')) {
+  throw 'Did not expect layouts/_default/single.html to render the retired aftermatter author card.'
 }
 
-if ($articleSingle.IndexOf('partial "newsletter_signup.html"', [System.StringComparison]::Ordinal) -ge $articleSingle.IndexOf('"class" "journey-links--article-exit"', [System.StringComparison]::Ordinal)) {
-  throw 'Expected layouts/_default/single.html to place newsletter signup before the article-exit Keep Reading links.'
+if ($articleSingle -match [regex]::Escape('partial "newsletter_signup.html"')) {
+  throw 'Did not expect layouts/_default/single.html to render the full newsletter signup in article aftermatter.'
+}
+
+if ($articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.StringComparison]::Ordinal) -ge $articleSingle.IndexOf('"class" "journey-links--article-exit"', [System.StringComparison]::Ordinal)) {
+  throw 'Expected layouts/_default/single.html to place the reading-path partial before the article-exit links.'
 }
 
 $collectionSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw

@@ -23,152 +23,212 @@ Glassware hummed softly each time it met wood. The air held the faint trace of c
 
 Syd was already seated, one hand resting around an empty tumbler, turning it slowly. He watched the singer for a moment before looking up as Oliver approached.
 
-“You look entertained,” Oliver said, draping his coat carefully over the back of the chair before sitting.
+Oliver draped his coat carefully over the back of the chair before sitting.
 
-“I learned something today.”
+**Oliver:** You look entertained.
 
-“That tone usually signals disillusionment.”
+**Syd:** I learned something today.
 
-“Not this time.” Syd smiled faintly. “Peer review.”
+**Oliver:** That tone usually signals disillusionment.
 
-Oliver paused as a server placed two drinks down between them. “What about it?”
+**Syd:** Not this time.
 
-“I always assumed it was ancient. Monks and manuscripts. Candlelight arguments.” He lifted the glass but didn’t drink yet. “Turns out the modern system is relatively new.”
+Syd smiled faintly.
 
-“How new?”
+**Syd:** Peer review.
 
-“Seventeenth century for early scientific societies. But the anonymous referee model ~ editorial boards, formalized gatekeeping ~ mostly nineteenth and twentieth century. It grew alongside professional academia.”
+Oliver paused as a server placed two drinks down between them.
 
-Oliver eased into his chair. “So it isn’t timeless.”
+**Oliver:** What about it?
 
-“Nothing institutional is.”
+**Syd:** I always assumed it was ancient. Monks and manuscripts. Candlelight arguments.
+
+He lifted the glass but didn’t drink yet.
+
+**Syd:** Turns out the modern system is relatively new.
+
+**Oliver:** How new?
+
+**Syd:** Seventeenth century for early scientific societies. But the anonymous referee model ~ editorial boards, formalized gatekeeping ~ mostly nineteenth and twentieth century. It grew alongside professional academia.
+
+Oliver eased into his chair.
+
+**Oliver:** So it isn’t timeless.
+
+**Syd:** Nothing institutional is.
 
 The singer stretched a note until it frayed at the edges, then let it fall gently into the next line.
 
-“The early societies,” Syd continued, “circulated manuscripts among trusted members before printing them. Not because truth demanded it. Because reputation did. They didn’t want embarrassment.”
+**Syd:** The early societies circulated manuscripts among trusted members before printing them. Not because truth demanded it. Because reputation did. They didn’t want embarrassment.
 
-“Reputation tracks truth,” Oliver said evenly.
+**Oliver:** Reputation tracks truth.
 
-“Sometimes.” Syd rolled the glass between his palms. “Sometimes it tracks power. Or fashion. Or whichever theory flatters the moment.”
+**Syd:** Sometimes.
+
+Syd rolled the glass between his palms.
+
+**Syd:** Sometimes it tracks power. Or fashion. Or whichever theory flatters the moment.
 
 Oliver let that pass.
 
-“As fields specialized,” Oliver said, “evaluation required expertise. You can’t assess a technical claim without knowing the domain. So you ask peers.”
+**Oliver:** As fields specialized, evaluation required expertise. You can’t assess a technical claim without knowing the domain. So you ask peers.
 
-“Peers,” Syd repeated. “Defined by credential.”
+**Syd:** Peers.
 
-“Defined by competence.”
+Syd repeated.
 
-Syd’s smile held. “That’s the story.”
+**Syd:** Defined by credential.
 
-Oliver’s gaze fixed on him. “Are you suggesting competence isn’t real?”
+**Oliver:** Defined by competence.
 
-“I’m suggesting it’s socially recognized before it’s ontologically confirmed.”
+Syd’s smile held.
+
+**Syd:** That’s the story.
+
+Oliver’s gaze fixed on him.
+
+**Oliver:** Are you suggesting competence isn’t real?
+
+**Syd:** I’m suggesting it’s socially recognized before it’s ontologically confirmed.
 
 The singer tapped the microphone lightly between verses. A quiet piano chord followed him like a shadow.
 
-“You think knowledge is branding,” Oliver said.
+**Oliver:** You think knowledge is branding.
 
-“I think institutions formalize trust.” Syd took a slow drink. “Peer review isn’t a machine that extracts truth. It’s a structure that manages credibility.”
+**Syd:** I think institutions formalize trust.
 
-“And credibility matters because truth matters.”
+Syd took a slow drink.
 
-“Or because funding matters. Or tenure. Or professional survival.” Syd shrugged slightly. “Incentives evolved with the structure.”
+**Syd:** Peer review isn’t a machine that extracts truth. It’s a structure that manages credibility.
 
-Oliver leaned forward, forearms resting on the small round table. “You’re reducing it to cynicism.”
+**Oliver:** And credibility matters because truth matters.
 
-“I’m describing it as human.”
+**Syd:** Or because funding matters. Or tenure. Or professional survival.
+
+Syd shrugged slightly.
+
+**Syd:** Incentives evolved with the structure.
+
+Oliver leaned forward, forearms resting on the small round table.
+
+**Oliver:** You’re reducing it to cynicism.
+
+**Syd:** I’m describing it as human.
 
 A glass clinked sharply somewhere near the bar. The singer’s voice deepened, a note bending under its own weight.
 
-“Before formal review,” Oliver said carefully, “ideas circulated with little filtration. Error circulated with them. The system developed because unfiltered claims were destabilizing.”
+**Oliver:** Before formal review, ideas circulated with little filtration. Error circulated with them. The system developed because unfiltered claims were destabilizing.
 
-“Destabilizing to what?”
+**Syd:** Destabilizing to what?
 
-“To knowledge.”
+**Oliver:** To knowledge.
 
-Syd shook his head once. “To authority.”
+Syd shook his head once.
 
-Oliver’s jaw tightened slightly. “If every claim stands equal, nothing binds.”
+**Syd:** To authority.
 
-“If every gate is guarded,” Syd replied, “nothing changes.”
+Oliver’s jaw tightened slightly.
 
-“The replication crisis,” Oliver said.
+**Oliver:** If every claim stands equal, nothing binds.
 
-Syd nodded. “Exactly.”
+**Syd:** If every gate is guarded, nothing changes.
 
-“You see that as proof the system is flawed.”
+**Oliver:** The replication crisis.
 
-“I see it as proof the system is contingent.”
+Syd nodded.
 
-“Contingent on what?”
+**Syd:** Exactly.
 
-“On humans reviewing humans.”
+**Oliver:** You see that as proof the system is flawed.
 
-“That’s unavoidable.”
+**Syd:** I see it as proof the system is contingent.
 
-“Yes.”
+**Oliver:** Contingent on what?
+
+**Syd:** On humans reviewing humans.
+
+**Oliver:** That’s unavoidable.
+
+**Syd:** Yes.
 
 The singer closed his eyes through the next line, holding it just long enough to feel deliberate.
 
-“Then the question,” Oliver said, “is whether the structure disciplines bias or amplifies it.”
+**Oliver:** Then the question is whether the structure disciplines bias or amplifies it.
 
-“Depends on the culture of the field.”
+**Syd:** Depends on the culture of the field.
 
-“Culture,” Oliver repeated quietly. “Not truth.”
+**Oliver:** Culture.
 
-Syd’s voice stayed level. “Truth filtered through culture.”
+Oliver repeated quietly.
 
-Oliver’s fingers tightened slightly around his glass. “If that’s the case, dissent can always be reframed as immaturity.”
+**Oliver:** Not truth.
 
-“It often is.”
+Syd’s voice stayed level.
 
-“And consensus can be reframed as conformity.”
+**Syd:** Truth filtered through culture.
 
-“It often is.”
+Oliver’s fingers tightened slightly around his glass.
+
+**Oliver:** If that’s the case, dissent can always be reframed as immaturity.
+
+**Syd:** It often is.
+
+**Oliver:** And consensus can be reframed as conformity.
+
+**Syd:** It often is.
 
 The blues singer leaned back from the microphone and let the band carry a short instrumental break ~ slow, deliberate, unhurried.
 
-“Peer review,” Oliver said more softly now, “is an attempt to bind interpretation across time. To ensure that when someone cites a study, they aren’t simply citing themselves.”
+**Oliver:** Peer review is an attempt to bind interpretation across time. To ensure that when someone cites a study, they aren’t simply citing themselves.
 
-“Or,” Syd replied, “to ensure that when someone challenges a study, they’re told they lack credentials.”
+**Syd:** Or, to ensure that when someone challenges a study, they’re told they lack credentials.
 
 Oliver held his gaze.
 
-“Do you trust nothing institutional?” he asked.
+**Oliver:** Do you trust nothing institutional?
 
-“I trust that institutions protect themselves.”
+**Syd:** I trust that institutions protect themselves.
 
-“That’s not an answer.”
+**Oliver:** That’s not an answer.
 
-“It is.” Syd set his glass down gently. “They arose to solve a coordination problem. How do we decide what knowledge counts? So they created a ritual.”
+**Syd:** It is.
 
-“A method.”
+Syd set his glass down gently.
 
-“A ritualized method.”
+**Syd:** They arose to solve a coordination problem. How do we decide what knowledge counts? So they created a ritual.
 
-Oliver’s voice lowered. “Without shared standards, accumulated knowledge collapses.”
+**Oliver:** A method.
 
-“Without flexibility,” Syd said, “discovery stalls.”
+**Syd:** A ritualized method.
+
+Oliver’s voice lowered.
+
+**Oliver:** Without shared standards, accumulated knowledge collapses.
+
+**Syd:** Without flexibility, discovery stalls.
 
 The singer reached the final verse. His voice softened instead of rising, pulling the room inward.
 
 Oliver stood first, adjusting his coat.
 
-“So you find the history interesting.”
+**Oliver:** So you find the history interesting.
 
-“I do.”
+**Syd:** I do.
 
-“And you don’t find the implications troubling.”
+**Oliver:** And you don’t find the implications troubling.
 
-Syd rose, steady and unhurried. “I find them inevitable.”
+Syd rose, steady and unhurried.
 
-Oliver paused before turning toward the exit. “Truth must bind.”
+**Syd:** I find them inevitable.
 
-Syd glanced once toward the stage, where the singer held the last note without strain. “Only if you need it to.”
+Oliver paused before turning toward the exit.
+
+**Oliver:** Truth must bind.
+
+Syd glanced once toward the stage, where the singer held the last note without strain.
+
+**Syd:** Only if you need it to.
 
 They walked toward the door together, the blues carrying them partway out before dissolving behind the velvet curtains.
 
 The lounge continued without them.
-
-
