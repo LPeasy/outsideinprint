@@ -190,44 +190,54 @@
             "deployed_on": "2026-04-28"
         },
         "why-oberfell-will-not-be-overturned": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-30",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-30"
+            "updated_on": "2026-04-30",
+            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+            "deployed_on": "2026-04-30"
         },
         "a-really-boring-topic": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-30",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-30"
+            "updated_on": "2026-04-30",
+            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+            "deployed_on": "2026-04-30"
         },
         "the-death-of-moores-law": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-30",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-30"
+            "updated_on": "2026-04-30",
+            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+            "deployed_on": "2026-04-30"
         },
         "the-cracked-pot": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-30",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-30"
+            "updated_on": "2026-04-30",
+            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+            "deployed_on": "2026-04-30"
         },
         "declaring-equality": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-04-30",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
             "previous_version": "1.0",
             "new_version": "1.1",
-            "updated_on": "2026-04-30"
+            "updated_on": "2026-04-30",
+            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+            "deployed_on": "2026-04-30"
         }
     },
     "blocked": {},
@@ -283,8 +293,10 @@
                 "the-cracked-pot",
                 "declaring-equality"
             ],
-            "status": "pending_deploy",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md"
+            "status": "deployed",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+            "deployed_on": "2026-04-30"
         }
     ]
 }
