@@ -9,6 +9,7 @@ function read(relativePath) {
 
 const articleSingle = read("layouts/_default/single.html");
 const homepage = read("layouts/index.html");
+const articlePlateLightbox = read("layouts/partials/article/plate-lightbox.html");
 const variantKey = read("layouts/partials/article/variant-key.html");
 const renderArticleBody = read("layouts/partials/render_article_body.html");
 const css = read("assets/css/main.css");
@@ -47,10 +48,16 @@ test("article header follows the calm title-led form grammar", () => {
   assert.ok(mediaPlate < recordRail);
   assert.ok(recordRail < body);
   assert.match(articleSingle, /imageConfig/);
-  assert.match(articleSingle, /ge \(mul \.Width 2\) \(mul \.Height 3\)/);
-  assert.match(articleSingle, /piece-header--%s-plate/);
+  assert.match(articleSingle, /\$plateImageWidth = \.Width/);
+  assert.match(articleSingle, /\$plateImageHeight = \.Height/);
+  assert.match(articleSingle, /piece-header--side-plate/);
   assert.match(articleSingle, /piece-header--text-only/);
-  assert.match(articleSingle, /piece-media-plate--full/);
+  assert.match(articleSingle, /data-article-plate-lightbox-trigger/);
+  assert.match(articleSingle, /partial "article\/plate-lightbox\.html" \./);
+  assert.doesNotMatch(articleSingle, /piece-media-plate--full/);
+  assert.doesNotMatch(articleSingle, /piece-header--full-plate/);
+  assert.doesNotMatch(articleSingle, /partial "archive\/lane-label\.html"/);
+  assert.doesNotMatch(articleSingle, /piece-record-rail__item--collection-meta/);
   assert.doesNotMatch(articleSingle, /partial "running_header\.html"/);
   assert.doesNotMatch(articleSingle, /piece-series-marker/);
   assert.doesNotMatch(articleSingle, /piece-publication-strip/);
@@ -62,7 +69,14 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(css, /\.piece-header-composition\{/);
   assert.match(css, /\.piece-record-rail\{/);
   assert.match(css, /\.piece-media-plate\{/);
+  assert.match(css, /\.piece-media-plate__trigger\{/);
   assert.match(css, /\.piece-hero\{/);
+  assert.match(articlePlateLightbox, /data-article-plate-lightbox/);
+  assert.match(articlePlateLightbox, /data-article-plate-lightbox-image-button/);
+  assert.match(articlePlateLightbox, /document\.addEventListener\("click"/);
+  assert.match(articlePlateLightbox, /closest\("\[data-article-plate-lightbox-trigger\]"\)/);
+  assert.match(articlePlateLightbox, /document\.body\.classList\.add\("cartoon-lightbox-open"\)/);
+  assert.match(articlePlateLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
 });
 
 test("modern bios use dossier headers with portrait fallback and shared prose", () => {
@@ -101,7 +115,7 @@ test("modern bios use dossier headers with portrait fallback and shared prose", 
 
   assert.match(css, /\.article-variant-modernbio \.piece-title-block h1\{/);
   assert.match(css, /\.piece-header--side-plate \.piece-header-composition\{/);
-  assert.match(css, /\.piece-header--full-plate \.piece-header-composition,/);
+  assert.doesNotMatch(css, /\.piece-header--full-plate/);
   assert.match(css, /\.piece-portrait-plate\{/);
   assert.doesNotMatch(css, /\.article-variant-modernbio \.piece-body/);
 });
