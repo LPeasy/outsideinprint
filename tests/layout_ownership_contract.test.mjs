@@ -270,6 +270,9 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(articlePlateLightbox, /event\.key === "Spacebar"/);
   assert.match(articlePlateLightbox, /figure\.querySelector\("figcaption"\)/);
   assert.match(articlePlateLightbox, /figure\.querySelector\("\.article-source-caption"\)/);
+  assert.match(articlePlateLightbox, /normalizeCaptionText\(captionText \|\| elementText\(sourceCaption\)\)/);
+  assert.match(articlePlateLightbox, /captionText === normalizeCaptionText\(imageTitle\)/);
+  assert.doesNotMatch(articlePlateLightbox, /captionText \|\| elementText\(sourceCaption\) \|\| imageTitle/);
   assert.doesNotMatch(articleSingle, /single-page/);
   assert.doesNotMatch(articleSingle, /single-content/);
   assert.match(css, /\.piece-title-block\{/);

@@ -98,6 +98,9 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(articlePlateLightbox, /bodyImage\.closest\("\.piece-body figure"\)/);
   assert.match(articlePlateLightbox, /figure\.querySelector\("figcaption"\)/);
   assert.match(articlePlateLightbox, /figure\.querySelector\("\.article-source-caption"\)/);
+  assert.match(articlePlateLightbox, /normalizeCaptionText\(captionText \|\| elementText\(sourceCaption\)\)/);
+  assert.match(articlePlateLightbox, /captionText === normalizeCaptionText\(imageTitle\)/);
+  assert.doesNotMatch(articlePlateLightbox, /captionText \|\| elementText\(sourceCaption\) \|\| imageTitle/);
   assert.match(articlePlateLightbox, /event\.key === "Enter" \|\| event\.key === " "/);
   assert.match(articlePlateLightbox, /event\.key === "Spacebar"/);
   assert.match(articlePlateLightbox, /document\.body\.classList\.add\("cartoon-lightbox-open"\)/);

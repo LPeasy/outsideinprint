@@ -73,6 +73,10 @@
       return element ? element.textContent.trim() : "";
     }
 
+    function normalizeCaptionText(value) {
+      return (value || "").replace(/\s+/g, " ").trim();
+    }
+
     function bodyImageCaption(bodyImage, imageTitle) {
       var figure = bodyImage.closest(".piece-body figure");
       var sourceCaption = null;
@@ -83,7 +87,11 @@
         sourceCaption = figure.querySelector(".article-source-caption");
       }
 
-      return captionText || elementText(sourceCaption) || imageTitle;
+      captionText = normalizeCaptionText(captionText || elementText(sourceCaption));
+
+      if (captionText === normalizeCaptionText(imageTitle)) return "";
+
+      return captionText;
     }
 
     function bodyImageSrc(bodyImage) {
