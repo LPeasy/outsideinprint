@@ -1,4 +1,4 @@
-current: very-fine-lines-on-both-sides
+current: just-part-of-the-game
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -102,5 +102,13 @@ cartoons:
     image: "/images/editorial/very-fine-lines-on-both-sides.png"
     essay: "/essays/when-can-states-draw-race-based-congressional-districts/"
     alt: "Editorial cartoon showing faceless judges with halos using drafting compasses to draw blue congressional district lines across a cracked map while voters holding papers wait at the edge of the room."
+    width: 2048
+    height: 1152
+  - slug: just-part-of-the-game
+    title: "Just Part of the Game"
+    date: "2026-05-01"
+    image: "/images/editorial/just-part-of-the-game.png"
+    essay: "/essays/the-bet-slip-in-the-briefing-room/"
+    alt: "Editorial cartoon showing a public-duty threshold separating a classified briefing room from a prediction market booth while suited figures pass betting slips across it."
     width: 2048
     height: 1152
