@@ -240,7 +240,7 @@
             "deployed_on": "2026-04-30"
         },
         "tiktok-the-trojan-horse-of-global-influence": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-01",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
             "previous_version": "1.0",
@@ -256,10 +256,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay weighs platform benefits against data, algorithmic, institutional, and geopolitical risks without partisan shorthand."
-            }
+            },
+            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+            "deployed_on": "2026-05-01"
         },
         "beyond-moores-law": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-01",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
             "previous_version": "1.0",
@@ -275,10 +277,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay distinguishes mechanisms, production constraints, policy incentives, resource limits, and uncertainty across computing, renewables, and batteries."
-            }
+            },
+            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+            "deployed_on": "2026-05-01"
         },
         "the-political-economy-of-airports": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-01",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
             "previous_version": "1.0",
@@ -294,10 +298,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay traces airport pricing through public-private incentives, captive-market behavior, logistics, equity costs, and governance tradeoffs."
-            }
+            },
+            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+            "deployed_on": "2026-05-01"
         },
         "synthetic-reasoning": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-01",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
             "previous_version": "1.0",
@@ -313,10 +319,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay names evidence, mechanisms, incentive failures, oversight limits, downstream risks, and uncertainty around self-evolving AI systems."
-            }
+            },
+            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+            "deployed_on": "2026-05-01"
         },
         "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-01",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
             "previous_version": "1.0",
@@ -332,7 +340,9 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay now separates STaR from DeepSeek-R1, tests cost and infrastructure incentives, and preserves uncertainty around competitive and geopolitical effects."
-            }
+            },
+            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+            "deployed_on": "2026-05-01"
         }
     },
     "blocked": {},
@@ -402,8 +412,10 @@
                 "synthetic-reasoning",
                 "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants"
             ],
-            "status": "pending_deploy",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md"
+            "status": "deployed",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+            "deployed_on": "2026-05-01"
         }
     ]
 }
