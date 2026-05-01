@@ -238,6 +238,101 @@
             "updated_on": "2026-04-30",
             "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
             "deployed_on": "2026-04-30"
+        },
+        "tiktok-the-trojan-horse-of-global-influence": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-01",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-01",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The essay weighs platform benefits against data, algorithmic, institutional, and geopolitical risks without partisan shorthand."
+            }
+        },
+        "beyond-moores-law": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-01",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-01",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The essay distinguishes mechanisms, production constraints, policy incentives, resource limits, and uncertainty across computing, renewables, and batteries."
+            }
+        },
+        "the-political-economy-of-airports": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-01",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-01",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The essay traces airport pricing through public-private incentives, captive-market behavior, logistics, equity costs, and governance tradeoffs."
+            }
+        },
+        "synthetic-reasoning": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-01",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-01",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The essay names evidence, mechanisms, incentive failures, oversight limits, downstream risks, and uncertainty around self-evolving AI systems."
+            }
+        },
+        "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-01",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-01",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The essay now separates STaR from DeepSeek-R1, tests cost and infrastructure incentives, and preserves uncertainty around competitive and geopolitical effects."
+            }
         }
     },
     "blocked": {},
@@ -297,6 +392,18 @@
             "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
             "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
             "deployed_on": "2026-04-30"
+        },
+        {
+            "batch_id": "2026-05-01",
+            "selected_slugs": [
+                "tiktok-the-trojan-horse-of-global-influence",
+                "beyond-moores-law",
+                "the-political-economy-of-airports",
+                "synthetic-reasoning",
+                "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants"
+            ],
+            "status": "pending_deploy",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md"
         }
     ]
 }
