@@ -1,4 +1,4 @@
-current: excellent-work
+current: very-fine-lines-on-both-sides
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -96,3 +96,11 @@ cartoons:
     alt: "Editorial cartoon showing a vintage desktop computer displaying a spreadsheet with a smokestack rising from a highlighted green cell and smoke forming a skull above the monitor."
     width: 1672
     height: 941
+  - slug: very-fine-lines-on-both-sides
+    title: "Very Fine Lines on Both Sides"
+    date: "2026-04-30"
+    image: "/images/editorial/very-fine-lines-on-both-sides.png"
+    essay: "/essays/when-can-states-draw-race-based-congressional-districts/"
+    alt: "Editorial cartoon showing faceless judges with halos using drafting compasses to draw blue congressional district lines across a cracked map while voters holding papers wait at the edge of the room."
+    width: 2048
+    height: 1152
