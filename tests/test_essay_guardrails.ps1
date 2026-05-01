@@ -126,6 +126,26 @@ This paragraph is fine.
 
   @'
 ---
+title: "Moore’s Preserved Title"
+date: 2025-07-14
+draft: false
+slug: "preserved-smart-title"
+section_label: "Essay"
+subtitle: ""
+description: "A clean fixture with preserved smart punctuation in front matter."
+featured_image: "/images/social/preserved-smart-title.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "preserved-smart-title.md") -Encoding UTF8
+
+  @'
+---
 title: "AI Tell Subtitle"
 date: 2025-07-14
 draft: false
@@ -267,6 +287,11 @@ This paragraph is fine.
 
   $guardrailScript = Join-Path $scriptRoot "check_essay_guardrails.ps1"
   $legacyPreflightScript = Join-Path $scriptRoot "check_legacy_import_preflight.ps1"
+
+  $preservedTitleOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $legacyPreflightScript -Root $tempRoot -Paths "content/essays/preserved-smart-title.md" 2>&1 | Out-String
+  $preservedTitleExit = $LASTEXITCODE
+  Assert-True ($preservedTitleExit -eq 0) "Expected legacy import preflight to allow preserved smart punctuation in front matter titles."
+  Assert-True (-not $preservedTitleOutput.Contains("medium_punctuation_artifact")) "Expected front matter title punctuation not to trigger Medium punctuation artifact findings."
 
   @'
 {

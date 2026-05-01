@@ -395,21 +395,6 @@ function Scan-LegacyImportIssues {
   $text = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
   $issues = New-Object System.Collections.Generic.List[object]
 
-  $allLines = @(Split-Lines -Text $text)
-  for ($i = 0; $i -lt $allLines.Count; $i++) {
-    $line = [string]$allLines[$i]
-    $labels = @(Get-PunctuationArtifactLabels -Line $line)
-    if ($labels.Count -gt 0) {
-      Add-Issue `
-        -Issues $issues `
-        -Type 'medium_punctuation_artifact' `
-        -Severity 'blocker' `
-        -LineNumber ($i + 1) `
-        -Message ("Replace Medium smart punctuation or mojibake residue: {0}" -f (($labels | Sort-Object -Unique) -join ', ')) `
-        -Line $line
-    }
-  }
-
   $bodySection = Get-BodySection -Text $text
   $bodyLines = @(Split-Lines -Text ([string]$bodySection.Body))
   $lineOffset = [int]$bodySection.LineOffset
@@ -417,6 +402,17 @@ function Scan-LegacyImportIssues {
   for ($i = 0; $i -lt $bodyLines.Count; $i++) {
     $line = [string]$bodyLines[$i]
     $lineNumber = $lineOffset + $i + 1
+
+    $labels = @(Get-PunctuationArtifactLabels -Line $line)
+    if ($labels.Count -gt 0) {
+      Add-Issue `
+        -Issues $issues `
+        -Type 'medium_punctuation_artifact' `
+        -Severity 'blocker' `
+        -LineNumber $lineNumber `
+        -Message ("Replace Medium smart punctuation or mojibake residue: {0}" -f (($labels | Sort-Object -Unique) -join ', ')) `
+        -Line $line
+    }
 
     if (Test-RemoteMediumBodyImage -Line $line) {
       Add-Issue `
