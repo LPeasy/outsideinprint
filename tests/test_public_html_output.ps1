@@ -487,6 +487,7 @@ $requiredEssayHeroPages = @(
   'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html',
   'public/essays/the-model-that-could-not-leave/index.html',
   'public/essays/smokestack-spreadsheets/index.html',
+  'public/essays/the-bet-slip-in-the-briefing-room/index.html',
   'public/essays/the-strait-that-holds-the-price/index.html',
   'public/essays/the-blockade-has-a-phone-number/index.html',
   'public/essays/the-warning-label-in-the-weeds/index.html',
@@ -539,6 +540,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'A private forecast can become a public infrastructure claim.'
+  },
+  @{
+    PublicPath = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'
+    SourcePath = 'content/essays/the-bet-slip-in-the-briefing-room.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = "The bet slip looks harmless until it sits beside tomorrow's official decision."
   },
   @{
     PublicPath = 'public/essays/the-strait-that-holds-the-price/index.html'
@@ -664,6 +672,14 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
   }
+  'public/collections/civic-institutions-and-public-power/index.html' = @{
+    Title = 'Civic Institutions and Public Power'
+    Description = 'A staged lane for essays on courts, federalism, and public institutions once the body of work is coherent enough to publish.'
+    Canonical = 'https://outsideinprint.org/collections/civic-institutions-and-public-power/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
   'public/random/index.html' = @{
     Title = 'Random'
     Description = 'A random path into the Outside In Print archive. If the random route is not useful, browse the full library instead.'
@@ -715,6 +731,16 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/essays/smokestack-spreadsheets/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-bet-slip-in-the-briefing-room/index.html' = @{
+    Title = 'The Bet Slip in the Briefing Room'
+    Description = "The Senate's prediction-market ban shows why event markets become dangerous when public officials can trade on tomorrow's public acts."
+    Canonical = 'https://outsideinprint.org/essays/the-bet-slip-in-the-briefing-room/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-bet-slip-in-the-briefing-room/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-strait-that-holds-the-price/index.html' = @{
@@ -998,6 +1024,7 @@ $requiredUxPages = @(
   'public/collections/modern-bios/index.html',
   'public/collections/lit-review/index.html',
   'public/collections/risk-uncertainty/index.html',
+  'public/collections/civic-institutions-and-public-power/index.html',
   'public/collections/floods-water-built-environment/index.html',
   'public/collections/technology-ai-machine-future/index.html',
   'public/collections/moral-religious-philosophical-essays/index.html',
@@ -1848,12 +1875,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)href=(?:"?#archive-month-2026-04"?).*?>2026<.*?href=(?:"?#archive-month-2025-12"?).*?>2025<'
+    Pattern = '(?s)href=(?:"?#archive-month-2026-05"?).*?>2026<.*?href=(?:"?#archive-month-2025-12"?).*?>2025<'
     Message = 'expected the archive landing page to expose inline year jumps keyed to the first month of each year'
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)April 2026.*?March 2026.*?February 2026.*?January 2026'
+    Pattern = '(?s)May 2026.*?April 2026.*?March 2026.*?February 2026.*?January 2026'
     Message = 'expected the archive to group entries by descending month-year bands'
   },
   @{
@@ -2106,7 +2133,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '9 public collections.*74 published pieces'
+    Pattern = '10 public collections.*77 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2137,7 +2164,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 9 public collections linking 73 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 10 public collections linking 76 published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
@@ -2189,8 +2216,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Topics.*?Risk, Uncertainty, and Decision-Making.*?Floods, Water, and the Built Environment.*?Technology, AI, and the Machine Future.*?Moral, Religious, and Philosophical Essays'
-    Message = 'expected the unified collections directory to group topic collections together without subgroup labels'
+    Pattern = '(?s)Topics.*?Risk, Uncertainty, and Decision-Making.*?Floods, Water, and the Built Environment.*?Technology, AI, and the Machine Future.*?Moral, Religious, and Philosophical Essays.*?Civic Institutions and Public Power'
+    Message = 'expected the unified collections directory to group visible topic collections together without subgroup labels'
   },
   @{
     Path = 'public/collections/index.html'
@@ -2206,8 +2233,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/collections/index.html'
     Pattern = 'Public Power|Civic Institutions and Public Power'
-    Message = 'expected the collections index not to render the hidden Public Power subgroup until that collection becomes visible'
-    ShouldNotMatch = $true
+    Message = 'expected the collections index to render the now-public Civic Institutions and Public Power topic lane'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
@@ -2414,6 +2440,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the AI data center essay' },
   @{ Path = 'public/essays/the-model-that-could-not-leave/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the Manus essay' },
   @{ Path = 'public/essays/smokestack-spreadsheets/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Smokestack Spreadsheets' },
+  @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
