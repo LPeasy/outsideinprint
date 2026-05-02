@@ -63,13 +63,27 @@ if ($articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.
 
 $collectionSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
 foreach ($requiredSnippet in @(
-  'partial "collections/collection-progress.html"',
-  'data-collection-item-path="{{ .RelPermalink }}"',
-  'class="collection-item-state" data-collection-item-state',
-  'partial "collections/reading-progress-script.html" .'
+  '<article class="collection-section">',
+  '<h2 id="collection-start-here-title">Start Here</h2>',
+  'class="collection-section__ledger"',
+  '<ol class="collection-section__items">',
+  '{{ if not (and $startHere $isStartHere) }}',
+  '<p>The remaining {{ $contentsCount }}'
 )) {
   if ($collectionSingle -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/collections/single.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
+  'partial "collections/collection-progress.html"',
+  'data-collection-item-path="{{ .RelPermalink }}"',
+  'class="collection-item-state" data-collection-item-state',
+  'partial "collections/reading-progress-script.html" .',
+  'Entry point'
+)) {
+  if ($collectionSingle -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/collections/single.html to omit the retired collection-page progress snippet: $retiredSnippet"
   }
 }
 

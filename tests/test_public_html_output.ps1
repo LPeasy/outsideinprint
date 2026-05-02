@@ -2138,13 +2138,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Read in sequence.*?Follow a question'
-    Message = 'expected the collections index to expose the route-level lane guide for series and topics'
+    Pattern = 'collections-broadsheet'
+    Message = 'expected the collections index to render the broadsheet directory shell'
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)href=(?:"|''|)?#collections-group-series(?:"|''|)?.*?href=(?:"|''|)?#collections-group-topic(?:"|''|)?'
-    Message = 'expected the collections lane guide to link directly to the series and topics sections'
+    Pattern = '(?s)collections-broadsheet__section.*?collections-group-series.*?collections-broadsheet__section.*?collections-group-topic'
+    Message = 'expected the collections broadsheet to expose series and topics as two editorial sections'
   },
   @{
     Path = 'public/collections/index.html'
@@ -2221,8 +2221,9 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = 'collection-card--room-echo'
-    Message = 'expected the unified collections directory to render room-echo cards'
+    Pattern = 'collection-card--room-echo|class=(?:"[^"]*\bcard\b[^"]*\bcollection-card\b[^"]*"|''[^'']*\bcard\b[^'']*\bcollection-card\b[^'']*''|[^\s>]*\bcard\b[^\s>]*\bcollection-card\b[^\s>]*)'
+    Message = 'expected the collections broadsheet to omit room-echo card styling'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/index.html'
@@ -2295,18 +2296,36 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = 'This topic gathers \d+ published pieces into one reading lane\..*?If you are coming in fresh, begin with'
-    Message = 'expected collection detail headers to explain the lane and recommended way in'
+    Pattern = '(?s)collection-section__header.*?<h1>Risk, Uncertainty, and Decision-Making</h1>.*?Start here:'
+    Message = 'expected collection detail pages to use the actual collection title and a compact start-here ledger'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = 'Use this list as the table of contents for the lane\.'
-    Message = 'expected collection detail pages to frame the ordered list as the lane table of contents'
+    Pattern = '(?s)<h2[^>]*>Contents</h2>.*?The remaining 8 pieces appear below in collection order'
+    Message = 'expected collection detail pages to frame the ordered list as a newspaper-section contents list without duplicating the start-here entry'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = 'Best first read for this lane\.'
-    Message = 'expected collection detail pages to label the marked entry point in plainer language'
+    Pattern = '(?s)collection-section__lead.*?<h2[^>]*>Start Here</h2>'
+    Message = 'expected collection detail pages to promote the marked entry point in a Start Here section'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '(?s)<ol[^>]*class=(?:"[^"]*\bcollection-section__items\b[^"]*"|''[^'']*\bcollection-section__items\b[^'']*''|[^\s>]*\bcollection-section__items\b[^\s>]*)[^>]*>(?:(?!</ol>).)*?/essays/what-is-risk-a-four-part-framework/'
+    Message = 'expected the Risk, Uncertainty, and Decision-Making Start Here essay not to be duplicated in the contents list'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/the-ledger/index.html'
+    Pattern = '(?s)<ol[^>]*class=(?:"[^"]*\bcollection-section__items\b[^"]*"|''[^'']*\bcollection-section__items\b[^'']*''|[^\s>]*\bcollection-section__items\b[^\s>]*)[^>]*>(?:(?!</ol>).)*?/essays/the-ledger-vol-1/'
+    Message = 'expected The Ledger Start Here essay not to be duplicated in the contents list'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/floods-water-built-environment/index.html'
+    Pattern = '(?s)<ol[^>]*class=(?:"[^"]*\bcollection-section__items\b[^"]*"|''[^'']*\bcollection-section__items\b[^'']*''|[^\s>]*\bcollection-section__items\b[^\s>]*)[^>]*>(?:(?!</ol>).)*?/essays/what-happened-at-camp-mystic/'
+    Message = 'expected the Floods, Water, and the Built Environment Start Here essay not to be duplicated in the contents list'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
@@ -2315,7 +2334,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = 'These nearby lanes keep you in related terrain once you finish this one, without flattening distinct threads into a single list\.'
+    Pattern = 'Nearby lanes for continuing through the archive\.'
     Message = 'expected collection detail pages to explain why related collections are shown'
   },
   @{
@@ -2498,12 +2517,14 @@ foreach ($entry in $collectionRoomExpectations.GetEnumerator()) {
     @{
       Path = $relativePath
       Pattern = ('data-collection-room-theme=(?:"' + [regex]::Escape($theme) + '"|' + [regex]::Escape($theme) + ')')
-      Message = "expected the live collection page to render data-collection-room-theme='$theme'"
+      Message = "expected the live collection page to omit retired data-collection-room-theme='$theme'"
+      ShouldNotMatch = $true
     },
     @{
       Path = $relativePath
       Pattern = ('collection-room--' + [regex]::Escape($theme))
-      Message = "expected the live collection page to render the collection-room modifier class '$theme'"
+      Message = "expected the live collection page to omit retired collection-room modifier class '$theme'"
+      ShouldNotMatch = $true
     }
   )
 }
@@ -2513,7 +2534,8 @@ foreach ($theme in $collectionDirectoryThemes) {
     @{
       Path = 'public/collections/index.html'
       Pattern = ('collection-card--' + [regex]::Escape($theme))
-      Message = "expected the unified collections directory to render the room-echo theme class '$theme'"
+      Message = "expected the broadsheet collections directory to omit retired room-echo theme class '$theme'"
+      ShouldNotMatch = $true
     }
   )
 }

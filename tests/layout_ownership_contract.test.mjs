@@ -58,20 +58,25 @@ test("homepage manifesto owns deliberate route-level hooks and drops dead start-
   }
 });
 
-test("collection detail and membership hooks have explicit inner-structure styling", () => {
-  assert.match(collectionSingle, /class="collection-room\{\{ with \$roomTheme \}\} collection-room--\{\{ \. \}\}\{\{ end \}\}"/);
-  assert.match(collectionSingle, /data-collection-room-theme="\{\{ \$roomTheme \}\}"/);
-  assert.match(collectionSingle, /collection-room__header/);
-  assert.match(collectionSingle, /collection-room__eyebrow/);
-  assert.match(collectionSingle, /collection-room__summary/);
-  assert.match(collectionSingle, /collection-room__section collection-room__section--entry/);
-  assert.match(collectionSingle, /collection-room__section collection-room__section--progress/);
-  assert.match(collectionSingle, /collection-room__section collection-room__section--items/);
-  assert.match(collectionSingle, /collection-room__section collection-room__section--related/);
-  assert.match(collectionSingle, /collection-room__section-intro/);
-  assert.match(collectionSingle, /class="collection-item-note"/);
-  assert.match(collectionSingle, /class="collection-pill"/);
-  assert.match(collectionSingle, /"class" \(cond \(eq \$itemSlug \$startHereSlug\) "collection-item--start-here"/);
+test("collection detail section-front hooks have explicit inner-structure styling", () => {
+  assert.match(collectionSingle, /class="collection-section"/);
+  assert.match(collectionSingle, /collection-section__header/);
+  assert.match(collectionSingle, /collection-section__ledger/);
+  assert.match(collectionSingle, /collection-section__lead/);
+  assert.match(collectionSingle, /collection-section__contents/);
+  assert.match(collectionSingle, /collection-section__items/);
+  assert.match(collectionSingle, /collection-section__item/);
+  assert.match(collectionSingle, /collection-section__related/);
+  assert.match(collectionSingle, /collection-section__related-list/);
+  assert.match(collectionSingle, /collection-section__next/);
+  assert.match(collectionSingle, /<h1>\{\{ \$definition\.title \}\}<\/h1>/);
+  assert.match(collectionSingle, /<h2 id="collection-start-here-title">Start Here<\/h2>/);
+  assert.match(collectionSingle, /\{\{ if not \(and \$startHere \$isStartHere\) \}\}/);
+  assert.doesNotMatch(collectionSingle, /collection-room/);
+  assert.doesNotMatch(collectionSingle, /data-collection-room-theme/);
+  assert.doesNotMatch(collectionSingle, /partial "collections\/collection-progress\.html"/);
+  assert.doesNotMatch(collectionSingle, /data-collection-item-path/);
+  assert.doesNotMatch(collectionSingle, /collection-item-state/);
 
   assert.match(collectionMembership, /class="collection-membership__eyebrow"/);
   assert.match(collectionMembership, /class="collection-membership__row"/);
@@ -79,23 +84,16 @@ test("collection detail and membership hooks have explicit inner-structure styli
   assert.match(collectionMembership, /class="collection-membership__meta"/);
 
   for (const selector of [
-    ".collection-room{",
-    ".collection-room__section{",
-    ".collection-room__header,",
-    ".collection-room__eyebrow{",
-    ".collection-room__summary,",
-    ".collection-room__section--entry,",
-    ".collection-room__section--progress{",
-    ".collection-room__section--items,",
-    ".collection-room__section--related,",
-    ".collection-room__section-intro{",
-    ".collection-grid{",
-    ".collection-card{",
-    ".collection-meta{",
-    ".collection-items{",
-    ".collection-item-note{",
-    ".collection-start-here,",
-    ".collection-pill{",
+    ".collection-section{",
+    ".collection-section__header{",
+    ".collection-section__ledger{",
+    ".collection-section__lead,",
+    ".collection-section__contents,",
+    ".collection-section__heading{",
+    ".collection-section__items{",
+    ".collection-section__item{",
+    ".collection-section__related-list{",
+    ".collection-section__next{",
     ".collection-membership__eyebrow{",
     ".collection-membership__row{",
     ".collection-membership__title{",
@@ -105,39 +103,39 @@ test("collection detail and membership hooks have explicit inner-structure styli
   }
 });
 
-test("collections index uses a unified card directory and drops the retired split sections", () => {
+test("collections index uses a ruled broadsheet directory and drops card-grid guidance", () => {
   assert.match(collectionList, /section-front section-front--collections/);
   assert.match(collectionList, /section-front__header/);
-  assert.match(collectionList, /class="page-shell page-shell--wide collections-directory__guide"/);
-  assert.match(collectionList, /collections-directory__guide-card/);
-  assert.match(collectionList, /collections-directory__guide-title/);
-  assert.match(collectionList, /class="page-shell page-shell--grid collections-directory"/);
-  assert.match(collectionList, /class="collections-directory__group"/);
-  assert.match(collectionList, /class="collections-directory__group-header"/);
-  assert.match(collectionList, /class="collections-directory__group-title"/);
-  assert.match(collectionList, /class="collections-directory__group-meta"/);
-  assert.match(collectionList, /class="collections-directory__group-intro"/);
-  assert.match(collectionList, /class="grid collection-grid collections-directory__grid"/);
+  assert.match(collectionList, /collections-broadsheet__summary/);
+  assert.match(collectionList, /class="page-shell page-shell--grid collections-broadsheet"/);
+  assert.match(collectionList, /class="collections-broadsheet__section"/);
+  assert.match(collectionList, /class="collections-broadsheet__section-header"/);
+  assert.match(collectionList, /class="collections-broadsheet__section-title"/);
+  assert.match(collectionList, /class="collections-broadsheet__section-meta"/);
+  assert.match(collectionList, /class="collections-broadsheet__section-intro"/);
+  assert.match(collectionList, /class="collections-broadsheet__records"/);
+  assert.match(collectionList, /"variant" "broadsheet"/);
   assert.doesNotMatch(collectionList, /partial "journey_links\.html"/);
   assert.doesNotMatch(collectionList, /Featured Collections/);
   assert.doesNotMatch(collectionList, /Collections Index/);
   assert.doesNotMatch(collectionList, /"variant" "item"/);
+  assert.doesNotMatch(collectionList, /collections-directory__guide/);
+  assert.doesNotMatch(collectionList, /class="grid collection-grid/);
 
   for (const selector of [
-    ".collections-directory__summary{",
-    ".collections-directory__guide{",
-    ".collections-directory__guide-card{",
-    ".collections-directory__guide-kicker,",
-    ".collections-directory__guide-title{",
-    ".collections-directory__guide-copy{",
-    ".collections-directory__guide-meta{",
-    ".collections-directory{",
-    ".collections-directory__group{",
-    ".collections-directory__group-header{",
-    ".collections-directory__group-title{",
-    ".collections-directory__group-meta{",
-    ".collections-directory__group-intro{",
-    ".collections-directory__grid{"
+    ".collections-broadsheet__summary{",
+    ".collections-broadsheet{",
+    ".collections-broadsheet::before{",
+    ".collections-broadsheet__section{",
+    ".collections-broadsheet__section::before{",
+    ".collections-broadsheet__section-header{",
+    ".collections-broadsheet__section-title{",
+    ".collections-broadsheet__section-meta{",
+    ".collections-broadsheet__section-intro{",
+    ".collections-broadsheet__records{",
+    ".collection-record{",
+    ".collection-record__title{",
+    ".collection-record__start{"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
   }
@@ -375,24 +373,20 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`section-front`",
     "`section-front__header`",
     "`section-front__body`",
-    "`collection-room`",
-    "`collection-room__header`",
-    "`collection-room__eyebrow`",
-    "`collection-room__summary`",
-    "`collection-room__section`",
-    "`collection-room__section--entry`",
-    "`collection-room__section--progress`",
-    "`collection-room__section--items`",
-    "`collection-room__section--related`",
-    "`collection-room__section-intro`",
-    "`collections-directory`",
-    "`collections-directory__guide*`",
-    "`collections-directory__group`",
-    "`collections-directory__group-title`",
-    "`collections-directory__grid`",
+    "`collections-broadsheet`",
+    "`collections-broadsheet__section`",
+    "`collections-broadsheet__records`",
+    "`collection-record`",
+    "`collection-record__title`",
+    "`collection-record__start`",
+    "`collection-section`",
+    "`collection-section__header`",
+    "`collection-section__ledger`",
+    "`collection-section__lead`",
+    "`collection-section__contents`",
+    "`collection-section__items`",
+    "`collection-section__related`",
     "| Gallery | `/gallery/`",
-    "`collection-item-note`",
-    "`collection-card__description`",
     "`piece-title-block`",
     "`piece-fleuron`",
     "`piece-media-plate`",
@@ -414,6 +408,8 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
   for (const stalePhrase of [
     "`start-here-page`",
     "`newsletter-signup--start-here`",
+    "`collection-room`",
+    "`collections-directory__guide*`",
     "| Essays front | `/essays/`",
     "| Section landing family | `/syd-and-oliver/`,",
     "Start Here | `/start-here/`",

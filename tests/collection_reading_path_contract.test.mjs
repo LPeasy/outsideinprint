@@ -42,23 +42,35 @@ test("article single includes the reading-path partial and shared progress scrip
   assert.match(articleSingle, /partial "collections\/reading-progress-script\.html" \./);
 });
 
-test("collection single includes the progress partial, progress script, and item hooks", () => {
-  assert.match(collectionSingle, /partial "collections\/collection-progress\.html"/);
-  assert.match(collectionSingle, /partial "collections\/reading-progress-script\.html" \./);
-  assert.match(collectionSingle, /data-collection-item-path="\{\{ \.RelPermalink \}\}"/);
-  assert.match(collectionSingle, /class="collection-item-state" data-collection-item-state/);
-  assert.ok(collectionSingle.indexOf('partial "collections/collection-progress.html"') < collectionSingle.indexOf('id="collection-items-title"'));
+test("collection single promotes Start Here without visible progress hooks", () => {
+  for (const snippet of [
+    '<article class="collection-section">',
+    '<h2 id="collection-start-here-title">Start Here</h2>',
+    'class="collection-section__ledger"',
+    '<ol class="collection-section__items">',
+    '{{ if not (and $startHere $isStartHere) }}',
+    '<p>The remaining {{ $contentsCount }}'
+  ]) {
+    assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));
+  }
+
+  for (const retiredSnippet of [
+    'partial "collections/collection-progress.html"',
+    'partial "collections/reading-progress-script.html" .',
+    'data-collection-item-path="{{ .RelPermalink }}"',
+    'class="collection-item-state" data-collection-item-state',
+    'Entry point'
+  ]) {
+    assert.doesNotMatch(collectionSingle, new RegExp(escapeRegex(retiredSnippet)));
+  }
 });
 
-test("collection single frames the lane, sequence, and related terrain in plain language", () => {
+test("collection single frames the section front, contents, and related terrain in plain language", () => {
   for (const snippet of [
-    'If you are coming in fresh, begin with',
-    'Use Reading Progress to keep your place in this browser.',
-    'Start here if this is your first visit.',
-    'This panel tracks what this browser has already opened',
-    'Use this list as the table of contents for the lane.',
-    'Best first read for this lane.',
-    'These nearby lanes keep you in related terrain once you finish this one'
+    'Begin here if this is your first visit to the collection.',
+    'The remaining {{ $contentsCount }}',
+    'All {{ $state.count }} pieces appear below in collection order.',
+    'Nearby lanes for continuing through the archive.'
   ]) {
     assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));
   }
@@ -143,9 +155,7 @@ test("css owns the new reading-path continuation selectors", () => {
     ".collection-progress{",
     ".collection-progress__summary,",
     ".collection-progress__actions{",
-    ".collection-progress__note{",
-    ".collection-item-state{",
-    ".collection-pill--visited{"
+    ".collection-progress__note{"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
   }
