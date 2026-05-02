@@ -3,7 +3,6 @@
 {{- $sourceSlot := .analyticsSourceSlot | default "collection_page" -}}
 {{- $label := .label | default "" -}}
 {{- $class := .class | default "" -}}
-{{- $roomTheme := $entry.collection.room_theme | default "" -}}
 {{- $metadata := $entry.collection.metadata | default (slice) -}}
 {{- $url := printf "collections/%s/" $entry.collection.slug | absURL -}}
 {{- with $entry.page -}}
@@ -53,7 +52,27 @@
 {{- end -}}
 {{- $metaLine := delimit $metaBits " &middot; " -}}
 
-{{- if eq $variant "item" -}}
+{{- if eq $variant "broadsheet" -}}
+  <article class="collection-record{{ with $class }} {{ . }}{{ end }}">
+    <div class="collection-record__meta">
+      {{- with $eyebrow }}<span>{{ . }}</span>{{ end -}}
+      <span>{{ $entry.state.count }} pieces</span>
+      {{- with $lane }}<span>{{ . }}</span>{{ end -}}
+    </div>
+    <h3 class="collection-record__title"><a href="{{ $url }}"
+      data-analytics-event="collection_click"
+      data-analytics-source-slot="{{ $sourceSlot }}"
+      data-analytics-collection="{{ $entry.collection.slug }}"
+      data-analytics-slug="{{ $entry.collection.slug }}"
+      data-analytics-title="{{ $entry.collection.title }}"
+      data-analytics-section="Collections"
+      data-analytics-path="{{ $path }}"
+    >{{ $entry.collection.title }}</a></h3>
+    {{ with $entry.collection.description }}<p class="collection-record__description">{{ . }}</p>{{ end }}
+    {{ with $metaLine }}<p class="collection-record__scope">{{ . | safeHTML }}</p>{{ end }}
+    {{ with $startHere }}<p class="collection-record__start">Start here: <a href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
+  </article>
+{{- else if eq $variant "item" -}}
   <article class="item{{ with $class }} {{ . }}{{ end }}">
     {{- with $eyebrow }}<div class="k collection-card__eyebrow">{{ . }}</div>{{ end -}}
     <div class="t"><a href="{{ $url }}"
@@ -74,7 +93,7 @@
     {{ with $startHere }}<div class="collection-card__start-here collection-card__start-here--item"><span class="collection-pill">Start Here</span><span><a href="{{ .RelPermalink }}">{{ .Title }}</a></span></div>{{ end }}
   </article>
 {{- else -}}
-  <a class="card collection-card{{ with $roomTheme }} collection-card--room-echo collection-card--{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"
+  <a class="card collection-card{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"
     data-analytics-event="collection_click"
     data-analytics-source-slot="{{ $sourceSlot }}"
     data-analytics-collection="{{ $entry.collection.slug }}"

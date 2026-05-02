@@ -317,15 +317,13 @@ foreach ($requiredSnippet in @(
   'section-front__header',
   'page-header--section-centered',
   'partial "discovery/collection-card.html"',
-  'collections-directory',
-  'collections-directory__summary',
-  'collections-directory__guide',
-  'collections-directory__guide-card',
-  'collections-directory__guide-title',
-  'collections-directory__guide-meta',
-  'collections-directory__group',
-  'collections-directory__group-title',
-  'collections-directory__grid',
+  'collections-broadsheet',
+  'collections-broadsheet__summary',
+  'collections-broadsheet__section',
+  'collections-broadsheet__section-title',
+  'collections-broadsheet__section-meta',
+  'collections-broadsheet__records',
+  '"variant" "broadsheet"',
   'Series',
   'Topics'
 )) {
@@ -342,6 +340,9 @@ foreach ($retiredSnippet in @(
   'Featured %s',
   'Featured Collections',
   'Collections Index',
+  'collections-directory__guide',
+  'collections-directory__grid',
+  'class="grid collection-grid',
   '"title" "Risk"',
   '"title" "Floods"',
   '"title" "AI"',
@@ -355,12 +356,15 @@ foreach ($retiredSnippet in @(
 
 $collectionSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
 foreach ($requiredSnippet in @(
-  'data-collection-room-theme="{{ $roomTheme }}"',
-  'collection-room__header',
-  'collection-room__section collection-room__section--entry',
-  'collection-room__section collection-room__section--progress',
-  'collection-room__section collection-room__section--items',
-  'collection-room__section collection-room__section--related',
+  '<article class="collection-section">',
+  'collection-section__header',
+  'collection-section__ledger',
+  'collection-section__lead',
+  'collection-section__contents',
+  'collection-section__items',
+  'collection-section__related',
+  '<h2 id="collection-start-here-title">Start Here</h2>',
+  '{{ if not (and $startHere $isStartHere) }}',
   'Related Collections',
   'partial "discovery/page-list-item.html"',
   'partial "discovery/collection-card.html"'
@@ -371,7 +375,11 @@ foreach ($requiredSnippet in @(
 }
 
 foreach ($retiredSnippet in @(
-  'collection-room__section collection-room__section--overview',
+  'collection-room',
+  'data-collection-room-theme',
+  'partial "collections/collection-progress.html"',
+  'data-collection-item-path',
+  'collection-item-state',
   'How to Use This Collection',
   'collection-meta-row'
 )) {
@@ -428,7 +436,9 @@ foreach ($requiredSnippet in @(
   'article record rail',
   'first public match',
   'compact collection boundary',
-  '`room_theme` stays scoped to collection-detail reading rooms'
+  'legacy metadata retained for compatibility',
+  'broadsheet directory',
+  'newspaper section front'
 )) {
   if ($collectionsDoc -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected docs/collections-system.md to contain: $requiredSnippet"

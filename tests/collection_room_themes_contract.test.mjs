@@ -21,7 +21,7 @@ const collectionsDoc = read("docs/collections-system.md");
 const layoutMatrix = read("docs/layout-ownership-matrix.md");
 const analyticsDoc = read("docs/analytics-system.md");
 
-const expectedThemes = new Map([
+const expectedLegacyThemes = new Map([
   ["the-ledger", "ledger-editorial-desk"],
   ["syd-and-oliver-dialogues", "syd-and-oliver-smoky-lounge"],
   ["modern-bios", "modern-bios-records-archive"],
@@ -33,52 +33,139 @@ const expectedThemes = new Map([
   ["reported-case-studies", "reported-case-studies-evidence-room"]
 ]);
 
-test("live collections define the exact room themes and hidden collections stay unassigned", () => {
-  for (const [slug, roomTheme] of expectedThemes) {
+test("legacy room_theme metadata remains data-only and no longer drives presentation", () => {
+  for (const [slug, roomTheme] of expectedLegacyThemes) {
     assert.match(
       collectionsData,
       new RegExp(`- slug: ${escapeRegex(slug)}[\\s\\S]*?room_theme: ${escapeRegex(roomTheme)}`)
     );
   }
 
-  assert.doesNotMatch(
-    collectionsData,
-    /- slug: civic-institutions-and-public-power[\s\S]*?room_theme:/
-  );
+  for (const source of [collectionSingle, collectionCard, css]) {
+    assert.doesNotMatch(source, /collection-room/);
+    assert.doesNotMatch(source, /collection-card--room/);
+    assert.doesNotMatch(source, /roomTheme/);
+    assert.doesNotMatch(source, /data-collection-room-theme/);
+  }
 });
 
-test("collection detail template emits room root and section hooks", () => {
+test("collection detail template renders a newspaper section front", () => {
   for (const snippet of [
-    'class="collection-room{{ with $roomTheme }} collection-room--{{ . }}{{ end }}"',
-    'data-collection-room-theme="{{ $roomTheme }}"',
-    'class="page-header page-shell page-shell--wide collection-room__header"',
-    'class="collection-room__eyebrow"',
-    'class="collection-room__summary"',
-    'class="collection-room__section collection-room__section--entry page-shell page-shell--reading"',
-    'class="collection-room__section collection-room__section--progress"',
-    'class="collection-room__section collection-room__section--items page-shell page-shell--reading"',
-    'class="collection-room__section collection-room__section--related page-shell page-shell--reading"',
-    'class="collection-room__section-intro"'
+    '<article class="collection-section">',
+    'class="page-shell page-shell--grid collection-section__header"',
+    '<h1>{{ $definition.title }}</h1>',
+    'class="collection-section__ledger"',
+    'Start here: <a href="{{ .RelPermalink }}">{{ .Title }}</a>',
+    'class="page-shell page-shell--grid collection-section__lead"',
+    '<h2 id="collection-start-here-title">Start Here</h2>',
+    'class="page-shell page-shell--grid collection-section__contents"',
+    '<p>The remaining {{ $contentsCount }}',
+    '<ol class="collection-section__items">',
+    '{{ if not (and $startHere $isStartHere) }}',
+    'class="page-shell page-shell--grid collection-section__related"',
+    'Related Collections',
+    'Nearby lanes for continuing through the archive.',
+    '"variant" "broadsheet"',
+    'partial "discovery/page-list-item.html"',
+    'partial "discovery/collection-card.html"'
   ]) {
     assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));
   }
-});
 
-test("collection list template emits the lane guide and grouped directory hooks", () => {
-  for (const snippet of [
-    'class="page-shell page-shell--wide collections-directory__guide"',
-    'class="collections-directory__guide-card"',
-    'class="collections-directory__guide-kicker"',
-    'class="collections-directory__guide-title"',
-    'class="collections-directory__guide-copy"',
-    'class="collections-directory__guide-meta"',
-    'class="collections-directory__group-meta"'
+  for (const retiredSnippet of [
+    'partial "collections/collection-progress.html"',
+    'partial "collections/reading-progress-script.html" .',
+    'data-collection-item-path="{{ .RelPermalink }}"',
+    'class="collection-item-state" data-collection-item-state',
+    'Entry point',
+    'Best first read for this lane.'
   ]) {
-    assert.match(collectionList, new RegExp(escapeRegex(snippet)));
+    assert.doesNotMatch(collectionSingle, new RegExp(escapeRegex(retiredSnippet)));
   }
 });
 
-test("article template emits compact primary-collection boundary hooks", () => {
+test("collections index renders a ruled broadsheet directory", () => {
+  for (const snippet of [
+    '{{ len $entries }} public collections &middot; {{ $totalPieces }} published pieces',
+    'section-front section-front--collections',
+    'section-front__header',
+    'page-header--section-centered',
+    'class="page-shell page-shell--grid collections-broadsheet"',
+    'class="collections-broadsheet__section"',
+    'class="collections-broadsheet__section-title"',
+    'class="collections-broadsheet__section-meta"',
+    'class="collections-broadsheet__records"',
+    'partial "discovery/collection-card.html"',
+    '"variant" "broadsheet"',
+    'Series',
+    'Topics'
+  ]) {
+    assert.match(collectionList, new RegExp(escapeRegex(snippet)));
+  }
+
+  for (const retiredSnippet of [
+    'collections-directory__guide',
+    'collections-directory__guide-card',
+    'collections-directory__grid',
+    'class="grid collection-grid',
+    '"variant" "grid"',
+    'How to use collections'
+  ]) {
+    assert.doesNotMatch(collectionList, new RegExp(escapeRegex(retiredSnippet)));
+  }
+});
+
+test("collection-card partial owns a neutral broadsheet row branch", () => {
+  for (const snippet of [
+    '{{- if eq $variant "broadsheet" -}}',
+    '<article class="collection-record{{ with $class }} {{ . }}{{ end }}">',
+    'class="collection-record__meta"',
+    'class="collection-record__title"',
+    'class="collection-record__description"',
+    'class="collection-record__scope"',
+    'class="collection-record__start"',
+    'data-analytics-source-slot="{{ $sourceSlot }}"',
+    'data-analytics-collection="{{ $entry.collection.slug }}"',
+    'Start here:'
+  ]) {
+    assert.match(collectionCard, new RegExp(escapeRegex(snippet)));
+  }
+
+  assert.match(collectionCard, /<article class="item\{\{ with \$class \}\} \{\{ \. \}\}\{\{ end \}\}">/);
+  assert.match(collectionCard, /<a class="card collection-card\{\{ with \$class \}\} \{\{ \. \}\}\{\{ end \}\}" href="\{\{ \$url \}\}"/);
+});
+
+test("css owns the broadsheet and section-front selectors only", () => {
+  for (const selector of [
+    ".collections-broadsheet__summary{",
+    ".collections-broadsheet{",
+    ".collections-broadsheet::before{",
+    ".collections-broadsheet__section{",
+    ".collections-broadsheet__section::before{",
+    ".collections-broadsheet__section-title{",
+    ".collections-broadsheet__section-meta{",
+    ".collections-broadsheet__records{",
+    ".collection-record{",
+    ".collection-record__meta{",
+    ".collection-record__title{",
+    ".collection-record__description{",
+    ".collection-record__scope,",
+    ".collection-record__start{",
+    ".collection-section{",
+    ".collection-section__header{",
+    ".collection-section__ledger{",
+    ".collection-section__lead,",
+    ".collection-section__heading{",
+    ".collection-section__items{",
+    ".collection-section__item{",
+    ".collection-section__related-list{",
+    ".collection-section__next{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+});
+
+test("article collection boundary stays compact and docs track the new collection architecture", () => {
   for (const snippet of [
     '{{ $showCollectionContext := false }}',
     '{{ $primaryCollection = $candidateCollection }}',
@@ -92,131 +179,20 @@ test("article template emits compact primary-collection boundary hooks", () => {
   assert.doesNotMatch(articleSingle, /From the Collection/);
   assert.doesNotMatch(articleSingle, /piece--collection-accent/);
   assert.doesNotMatch(articleSingle, /data-piece-collection-room-theme/);
-});
 
-test("collection-card partial emits room-echo classes only in the grid branch", () => {
-  for (const snippet of [
-    '{{- $roomTheme := $entry.collection.room_theme | default "" -}}',
-    '{{- if eq $variant "item" -}}',
-    'collection-card__eyebrow',
-    'collection-card__description',
-    'collection-card__meta-line',
-    'collection-card__start-here',
-    'collection-meta',
-    '<article class="item{{ with $class }} {{ . }}{{ end }}">',
-    '<a class="card collection-card{{ with $roomTheme }} collection-card--room-echo collection-card--{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}" href="{{ $url }}"'
-  ]) {
-    assert.match(collectionCard, new RegExp(escapeRegex(snippet)));
-  }
-
-  assert.doesNotMatch(
-    collectionCard,
-    /\{\{- if eq \$variant "item" -\}\}[\s\S]*?collection-card--room-echo[\s\S]*?\{\{- else -\}\}/
-  );
-});
-
-test("css owns the shared collection-room namespace and all theme modifiers", () => {
-  for (const selector of [
-    ".collections-directory__summary{",
-    ".collections-directory__guide{",
-    ".collections-directory__guide-card{",
-    ".collections-directory__guide-kicker,",
-    ".collections-directory__guide-title{",
-    ".collections-directory__guide-copy{",
-    ".collections-directory__guide-meta{",
-    ".collections-directory__group-header{",
-    ".collections-directory__group-meta{",
-    ".collections-directory__group-intro{",
-    ".collection-card__eyebrow{",
-    ".collection-card__description{",
-    ".collection-card__meta-line{",
-    ".collection-card__start-here{",
-    ".piece-title-block{",
-    ".piece-fleuron{",
-    ".piece-media-plate{",
-    ".piece-media-plate__trigger{",
-    ".piece-record-rail{",
-    ".piece-record-rail::before{",
-    ".piece-record-rail__item--collection{",
-    ".collection-room{",
-    ".collection-room::before{",
-    ".collection-room::after{",
-    ".collection-room__section{",
-    ".collection-room__header,",
-    ".collection-room__eyebrow{",
-    ".collection-room__summary,",
-    ".collection-room__section--entry,",
-    ".collection-room__section--items,",
-    ".collection-room__section--related,",
-    ".collection-room__section-intro{",
-    ".collection-room__section--progress{",
-    ".collection-room .collection-progress,",
-    ".collection-room .journey-links--page{",
-    ".collection-room--ledger-editorial-desk{",
-    ".collection-room--syd-and-oliver-smoky-lounge{",
-    ".collection-room--modern-bios-records-archive{",
-    ".collection-room--lit-review-lamplit-shelf{",
-    ".collection-room--risk-systems-notebook{",
-    ".collection-room--floods-survey-table{",
-    ".collection-room--ai-screen-glow-archive{",
-    ".collection-room--moral-chapel-library{",
-    ".collection-room--reported-case-studies-evidence-room{",
-    ".collection-card--room-echo{",
-    ".collection-card--ledger-editorial-desk{",
-    ".collection-card--syd-and-oliver-smoky-lounge{",
-    ".collection-card--modern-bios-records-archive{",
-    ".collection-card--lit-review-lamplit-shelf{",
-    ".collection-card--risk-systems-notebook{",
-    ".collection-card--floods-survey-table{",
-    ".collection-card--ai-screen-glow-archive{",
-    ".collection-card--moral-chapel-library{",
-    ".collection-card--reported-case-studies-evidence-room{"
-  ]) {
-    assert.match(css, new RegExp(escapeRegex(selector)));
-  }
-});
-
-test("docs record room_theme, article light accents, and collection-room ownership", () => {
   for (const snippet of [
     "`room_theme`",
-    "presentation key reused by collection-detail reading rooms",
-    "reading-room treatment",
-    "curated editorial reading lanes",
-    "Read in sequence",
-    "Follow a question",
-    "Start Here",
-    "table of contents for the lane",
-    "Best first read for this lane.",
-    "article record rail",
-    "first public match",
-    "compact collection boundary"
+    "legacy metadata retained for compatibility",
+    "broadsheet directory",
+    "newspaper section front",
+    "Start Here item is promoted once and omitted from the contents list",
+    "`collections-broadsheet`",
+    "`collection-record`",
+    "`collection-section`",
+    "`collection-section__ledger`",
+    "`collection-section__items`"
   ]) {
-    assert.match(collectionsDoc, new RegExp(escapeRegex(snippet)));
-  }
-
-  for (const snippet of [
-    "`piece-title-block`",
-    "`piece-fleuron`",
-    "`piece-media-plate`",
-    "`piece-record-rail`",
-    "`piece-record-rail__item--collection`",
-    "`collections-directory__guide*`",
-    "`collection-card__description`",
-    "`collection-room`",
-    "`collection-room__header`",
-    "`collection-room__eyebrow`",
-    "`collection-room__summary`",
-    "`collection-room__section`",
-    "`collection-room__section--entry`",
-    "`collection-room__section--progress`",
-    "`collection-room__section--items`",
-    "`collection-room__section--related`",
-    "`collection-card__eyebrow`",
-    "`collection-card__meta-line`",
-    "`collection-card__start-here`",
-    "`collection-room__section-intro`"
-  ]) {
-    assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));
+    assert.match(collectionsDoc + "\n" + layoutMatrix, new RegExp(escapeRegex(snippet)));
   }
 
   assert.match(analyticsDoc, /article_collection_context/);

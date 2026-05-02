@@ -29,7 +29,7 @@ Each collection in `data/collections.yaml` supports these fields:
 - `featured`: allows the collection to appear in featured strips such as the homepage; `/collections/` does not use this field for ordering or presentation.
 - `weight`: ordering control for collection listings.
 - `start_here`: optional page slug that gets a dedicated callout.
-- `room_theme`: optional presentation key reused by collection-detail reading rooms. Article pages do not inherit room themes as full skins.
+- `room_theme`: legacy metadata retained for compatibility. Current collection index and detail pages do not consume it for presentation.
 - `description`: short editorial framing used on index, detail, and homepage strips.
 - `metadata`: optional reader-facing label/value pairs.
 - `fallback`: legacy matching fields (`series`, `topics`, `tags`, `sections`).
@@ -68,13 +68,13 @@ Resolution rules:
 
 ## Templates touched by the system
 
-- `layouts/collections/list.html`: unified public collections card directory grouped into `Series` and `Topics`, with plain-language framing for how to use the route.
-- `layouts/collections/single.html`: individual collection page.
+- `layouts/collections/list.html`: broadsheet directory grouped into `Series` and `Topics`, with compact ruled rows rather than a card grid.
+- `layouts/collections/single.html`: individual collection page rendered as a newspaper section front.
 - `layouts/index.html`: featured collections strip.
 - `layouts/_default/single.html`: article header and aftermatter, including the compact collection boundary in the article record rail, the article-exit continuation zone for collection-member pages, and quiet final article links.
 - `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
-- `layouts/partials/collections/collection-progress.html`: collection-page browser-local progress and resume module.
-- `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer shared by article and collection pages.
+- `layouts/partials/collections/collection-progress.html`: legacy browser-local progress panel partial retained for compatibility, but not mounted by collection pages.
+- `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer for article continuation modules.
 
 ## Reading path and progress
 
@@ -108,37 +108,17 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 ### Collection pages
 
-- Each collection page renders a browser-local `Reading Progress` panel above `In This Collection`.
-- The panel does not use cookies, a backend, or analytics state.
-- Each collection row can show a `Visited` marker when the current browser has already opened that piece.
-- The collections index opens with plain editorial framing and a route-level lane guide:
-  - `Series` is framed as `Read in sequence`
-  - `Topics` is framed as `Follow a question`
-- The grouped directory remains unified; it does not split featured cards back out into a separate strip or a neutral row index.
-- Collection cards now surface their scan order more clearly:
-  - kind
-  - title
-  - description
-  - `collection-meta` summary, including piece count and lane when present
-  - supporting metadata line
-  - visible `Start Here` cue when the lane defines one
-- Collection detail headers explicitly frame what the lane is, how a first-time reader should enter it, and how browser-local progress works.
-- The `In This Collection` section now acts as the table of contents for the lane, and the marked entry piece uses the plainer note `Best first read for this lane.`
+- The `/collections/` route renders a ruled broadsheet directory, not a dominant card grid.
+- The directory has one page title/deck and two editorial columns: `Series` and `Topics`.
+- Each visible collection appears as a compact `collection-record` row with kind, title, description, piece count, scope metadata, and a quiet `Start here` link when present.
+- The index ignores `featured`; homepage and other existing featured surfaces may still use that field.
+- Individual collection pages render as newspaper section fronts with the actual collection title as the H1.
+- Section fronts use a ledger line, a promoted `Start Here` entry, a `Contents` list, related collections, and quiet browse links.
+- The Start Here item is promoted once and omitted from the contents list immediately below it.
+- Collection pages do not render the visible `Reading Progress` panel, browser-local resume panel, visited-row markers, or collection-progress hooks.
 - `Related Collections` is framed as adjacent terrain for what to read after finishing the current lane, not as a generic overflow list.
-- Collection detail pages no longer render the old `How to Use This Collection` overview block.
-- Collection detail pages may also apply an explicit per-collection reading-room treatment via `room_theme`.
-- Article pages may show collection membership only through compact boundary modules; `room_theme` stays scoped to collection-detail reading rooms.
-- The `/collections/` route now renders one unified directory of room-echo cards for every visible collection.
-- That directory groups cards under `Series` and `Topics` only; it does not render a separate featured strip or a neutral row index.
-- The collections index route ignores `featured`; homepage and other existing featured surfaces may still use it.
-- The full room system remains collection-detail-page only. Homepage, collection index, library, and article-body styling do not inherit these themes.
-- The room layer changes visual atmosphere only:
-  - background field
-  - panel material
-  - border / divider language
-  - tonal accents
-  - header and section framing
-- It does not change collection ordering, progress logic, CTA order, or shared section structure.
+- Collection detail pages no longer render the old `How to Use This Collection` overview block or any per-collection reading-room treatment.
+- Article pages may show collection membership only through compact boundary modules; `room_theme` is legacy data and does not drive article or collection-page skins.
 
 ### Storage contract
 
@@ -153,9 +133,11 @@ Collections now support two reader-facing sequence layers that reuse the existin
 }
 ```
 
-### Resume logic
+The active reader-facing use is the article continuation module. Collection pages no longer expose a progress or resume interface.
 
-The collection-page resume link is deterministic:
+### Legacy resume logic
+
+The retained legacy collection-progress partial computes a resume link deterministically when mounted:
 
 1. unvisited `start_here` page, if present
 2. otherwise the first unvisited piece in collection order

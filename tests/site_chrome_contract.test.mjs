@@ -297,8 +297,9 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.piece-body h2::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.piece-body figure\{[\s\S]*border-top:1px solid var\(--oip-rule-faint\);/);
   assert.match(css, /\.piece-body \.article-embed::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(css, /\.collections-directory__group::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  for (const selector of [".shop-card", ".shop-panel", ".shop-cta", ".newsletter-signup__input", ".newsletter-signup__button", ".collection-room"]) {
+  assert.match(css, /\.collections-broadsheet__section::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.collection-section__header::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  for (const selector of [".shop-card", ".shop-panel", ".shop-cta", ".newsletter-signup__input", ".newsletter-signup__button"]) {
     assert.doesNotMatch(cssRule(css, selector), /var\(--oip-rule-/);
   }
   assert.match(css, /@media \(max-width:420px\)\{[\s\S]*\.editorial-cartoon-recent\{\s*grid-template-columns:1fr;/);
