@@ -3500,10 +3500,6 @@ h2{ margin-top:34px; }
   font-weight:600;
   line-height:1.02;
 }
-.collection-section__header .page-intro{
-  max-width:52rem;
-  margin:.85rem 0 0;
-}
 .collection-section__ledger{
   display:flex;
   flex-wrap:wrap;
@@ -3520,9 +3516,9 @@ h2{ margin-top:34px; }
   line-height:1.5;
   text-transform:uppercase;
 }
-.collection-section__ledger li + li::before{
+.collection-section__ledger li:not(:last-child)::after{
   content:"/";
-  margin-right:.78rem;
+  margin-left:.78rem;
   color:var(--text-faint);
   font-weight:500;
 }
@@ -3542,6 +3538,9 @@ h2{ margin-top:34px; }
   grid-template-columns:minmax(12rem, .42fr) minmax(0, 1fr);
   gap:1.45rem 2.4rem;
   align-items:start;
+}
+.collection-section__contents{
+  grid-template-columns:minmax(0, 1fr);
 }
 .collection-section__heading{
   position:relative;
@@ -4244,6 +4243,15 @@ h2{ margin-top:34px; }
   }
   .collection-section__header h1{
     font-size:clamp(2rem, 11vw, 2.65rem);
+  }
+  .collection-section__ledger{
+    column-gap:1rem;
+    row-gap:.42rem;
+    letter-spacing:.105em;
+    line-height:1.58;
+  }
+  .collection-section__ledger li:not(:last-child)::after{
+    content:none;
   }
   .collection-section__lead,
   .collection-section__contents,

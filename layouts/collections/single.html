@@ -34,24 +34,18 @@
       {{ end }}
     {{ end }}
     {{ $relatedCollections := first 3 (append $primaryRelatedCollections $secondaryRelatedCollections) }}
-    {{ $contentsCount := len $items }}
-    {{ if $startHere }}
-      {{ $contentsCount = sub $contentsCount 1 }}
-    {{ end }}
 
     <article class="collection-section">
       <header class="page-shell page-shell--grid collection-section__header">
         <h1>{{ $definition.title }}</h1>
-        {{ with $definition.description }}<p class="page-intro">{{ . }}</p>{{ end }}
         <ul class="collection-section__ledger" aria-label="Collection details">
           <li>{{ title $state.kind }} collection</li>
           <li>{{ $state.count }} published pieces</li>
           {{ range ($definition.metadata | default (slice)) }}
-            {{ $label := printf "%v" (.label | default "") }}
+            {{ $label := lower (printf "%v" (.label | default "")) }}
             {{ $value := printf "%v" (.value | default "") }}
-            {{ if and $label $value }}<li>{{ $label }}: {{ $value }}</li>{{ end }}
+            {{ if and $value (ne $label "lane") }}<li>{{ $value }}</li>{{ end }}
           {{ end }}
-          {{ with $startHere }}<li>Start here: <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
         </ul>
       </header>
 
@@ -72,15 +66,7 @@
         </section>
       {{ end }}
 
-      <section class="page-shell page-shell--grid collection-section__contents" aria-labelledby="collection-items-title">
-        <div class="collection-section__heading">
-          <h2 id="collection-items-title">Contents</h2>
-          {{ if $startHere }}
-            <p>The remaining {{ $contentsCount }} {{ cond (eq $contentsCount 1) "piece appears" "pieces appear" }} below in collection order.</p>
-          {{ else }}
-            <p>All {{ $state.count }} pieces appear below in collection order.</p>
-          {{ end }}
-        </div>
+      <section class="page-shell page-shell--grid collection-section__contents" aria-label="Collection pieces">
         {{ if gt (len $items) 0 }}
           <ol class="collection-section__items">
           {{ range $items }}

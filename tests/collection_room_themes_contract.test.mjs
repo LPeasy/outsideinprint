@@ -55,11 +55,10 @@ test("collection detail template renders a newspaper section front", () => {
     'class="page-shell page-shell--grid collection-section__header"',
     '<h1>{{ $definition.title }}</h1>',
     'class="collection-section__ledger"',
-    'Start here: <a href="{{ .RelPermalink }}">{{ .Title }}</a>',
+    '(ne $label "lane")',
     'class="page-shell page-shell--grid collection-section__lead"',
     '<h2 id="collection-start-here-title">Start Here</h2>',
     'class="page-shell page-shell--grid collection-section__contents"',
-    '<p>The remaining {{ $contentsCount }}',
     '<ol class="collection-section__items">',
     '{{ if not (and $startHere $isStartHere) }}',
     'class="page-shell page-shell--grid collection-section__related"',
@@ -78,10 +77,17 @@ test("collection detail template renders a newspaper section front", () => {
     'data-collection-item-path="{{ .RelPermalink }}"',
     'class="collection-item-state" data-collection-item-state',
     'Entry point',
-    'Best first read for this lane.'
+    'Best first read for this lane.',
+    '<h2 id="collection-items-title">Contents</h2>',
+    'pieces appear below in collection order',
+    '$contentsCount',
+    '$label }}: {{ $value',
+    'Start here: <a href="{{ .RelPermalink }}">{{ .Title }}</a>'
   ]) {
     assert.doesNotMatch(collectionSingle, new RegExp(escapeRegex(retiredSnippet)));
   }
+
+  assert.doesNotMatch(collectionSingle, /\$definition\.description/);
 });
 
 test("collections index renders a ruled broadsheet directory", () => {
