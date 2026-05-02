@@ -345,7 +345,7 @@
             "deployed_on": "2026-05-01"
         },
         "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-02",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
             "previous_version": "1.0",
@@ -361,10 +361,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay tests Meta AI claims through evidence, institutional control, safety incentives, open-source tradeoffs, downstream misuse, and uncertainty about alignment capacity."
-            }
+            },
+            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+            "deployed_on": "2026-05-02"
         },
         "altmans-law": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-02",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
             "previous_version": "1.0",
@@ -380,10 +382,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay separates scaling evidence, cost incentives, ownership tradeoffs, labor consequences, and uncertainty around extrapolating AI investment trends."
-            }
+            },
+            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+            "deployed_on": "2026-05-02"
         },
         "you-cant-outrun-the-calculator": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-02",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
             "previous_version": "1.0",
@@ -399,10 +403,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay weighs AI coding benchmarks against labor incentives, governance tradeoffs, downstream disruption, and uncertainty about superhuman coding forecasts."
-            }
+            },
+            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+            "deployed_on": "2026-05-02"
         },
         "its-hard-to-condemn-what-doge-is-doing": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-02",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
             "previous_version": "1.0",
@@ -418,10 +424,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay now frames DOGE through institutional failure, congressional incentives, collateral damage, and uncertainty without relying on unsupported personal-stock allegations."
-            }
+            },
+            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+            "deployed_on": "2026-05-02"
         },
         "are-we-alone": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-02",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
             "previous_version": "1.0",
@@ -437,7 +445,9 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The essay distinguishes evidence from speculation, tests belief incentives, names cultural tradeoffs, and preserves uncertainty around extraterrestrial-life claims."
-            }
+            },
+            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+            "deployed_on": "2026-05-02"
         }
     },
     "blocked": {},
@@ -521,8 +531,10 @@
                 "its-hard-to-condemn-what-doge-is-doing",
                 "are-we-alone"
             ],
-            "status": "pending_deploy",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md"
+            "status": "deployed",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
+            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+            "deployed_on": "2026-05-02"
         }
     ]
 }
