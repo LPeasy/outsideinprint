@@ -67,8 +67,7 @@ foreach ($requiredSnippet in @(
   '<h2 id="collection-start-here-title">Start Here</h2>',
   'class="collection-section__ledger"',
   '<ol class="collection-section__items">',
-  '{{ if not (and $startHere $isStartHere) }}',
-  '<p>The remaining {{ $contentsCount }}'
+  '{{ if not (and $startHere $isStartHere) }}'
 )) {
   if ($collectionSingle -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/collections/single.html to contain: $requiredSnippet"
@@ -80,7 +79,11 @@ foreach ($retiredSnippet in @(
   'data-collection-item-path="{{ .RelPermalink }}"',
   'class="collection-item-state" data-collection-item-state',
   'partial "collections/reading-progress-script.html" .',
-  'Entry point'
+  'Entry point',
+  '<h2 id="collection-items-title">Contents</h2>',
+  'pieces appear below in collection order',
+  '$contentsCount',
+  '$label }}: {{ $value'
 )) {
   if ($collectionSingle -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/collections/single.html to omit the retired collection-page progress snippet: $retiredSnippet"

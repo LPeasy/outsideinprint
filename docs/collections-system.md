@@ -113,7 +113,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - Each visible collection appears as a compact `collection-record` row with kind, title, description, piece count, scope metadata, and a quiet `Start here` link when present.
 - The index ignores `featured`; homepage and other existing featured surfaces may still use that field.
 - Individual collection pages render as newspaper section fronts with the actual collection title as the H1.
-- Section fronts use a ledger line, a promoted `Start Here` entry, a `Contents` list, related collections, and quiet browse links.
+- Section fronts use a label-free ledger line, a promoted `Start Here` entry, an ordered piece list, related collections, and quiet browse links.
 - The Start Here item is promoted once and omitted from the contents list immediately below it.
 - Collection pages do not render the visible `Reading Progress` panel, browser-local resume panel, visited-row markers, or collection-progress hooks.
 - `Related Collections` is framed as adjacent terrain for what to read after finishing the current lane, not as a generic overflow list.

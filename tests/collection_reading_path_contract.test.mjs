@@ -48,8 +48,7 @@ test("collection single promotes Start Here without visible progress hooks", () 
     '<h2 id="collection-start-here-title">Start Here</h2>',
     'class="collection-section__ledger"',
     '<ol class="collection-section__items">',
-    '{{ if not (and $startHere $isStartHere) }}',
-    '<p>The remaining {{ $contentsCount }}'
+    '{{ if not (and $startHere $isStartHere) }}'
   ]) {
     assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));
   }
@@ -59,7 +58,11 @@ test("collection single promotes Start Here without visible progress hooks", () 
     'partial "collections/reading-progress-script.html" .',
     'data-collection-item-path="{{ .RelPermalink }}"',
     'class="collection-item-state" data-collection-item-state',
-    'Entry point'
+    'Entry point',
+    '<h2 id="collection-items-title">Contents</h2>',
+    'pieces appear below in collection order',
+    '$contentsCount',
+    '$label }}: {{ $value'
   ]) {
     assert.doesNotMatch(collectionSingle, new RegExp(escapeRegex(retiredSnippet)));
   }
@@ -68,8 +71,6 @@ test("collection single promotes Start Here without visible progress hooks", () 
 test("collection single frames the section front, contents, and related terrain in plain language", () => {
   for (const snippet of [
     'Begin here if this is your first visit to the collection.',
-    'The remaining {{ $contentsCount }}',
-    'All {{ $state.count }} pieces appear below in collection order.',
     'Nearby lanes for continuing through the archive.'
   ]) {
     assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));

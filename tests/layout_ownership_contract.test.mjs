@@ -72,6 +72,7 @@ test("collection detail section-front hooks have explicit inner-structure stylin
   assert.match(collectionSingle, /<h1>\{\{ \$definition\.title \}\}<\/h1>/);
   assert.match(collectionSingle, /<h2 id="collection-start-here-title">Start Here<\/h2>/);
   assert.match(collectionSingle, /\{\{ if not \(and \$startHere \$isStartHere\) \}\}/);
+  assert.doesNotMatch(collectionSingle, /\$definition\.description/);
   assert.doesNotMatch(collectionSingle, /collection-room/);
   assert.doesNotMatch(collectionSingle, /data-collection-room-theme/);
   assert.doesNotMatch(collectionSingle, /partial "collections\/collection-progress\.html"/);

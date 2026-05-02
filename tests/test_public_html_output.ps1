@@ -2296,13 +2296,31 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = '(?s)collection-section__header.*?<h1>Risk, Uncertainty, and Decision-Making</h1>.*?Start here:'
-    Message = 'expected collection detail pages to use the actual collection title and a compact start-here ledger'
+    Pattern = '(?s)collection-section__header.*?<h1>Risk, Uncertainty, and Decision-Making</h1>.*?<li>Essays</li>.*?<li>Risk, uncertainty, and decisions</li>'
+    Message = 'expected collection detail pages to use the actual collection title and a compact label-free ledger'
+  },
+  @{
+    Path = 'public/collections/syd-and-oliver-dialogues/index.html'
+    Pattern = '(?s)collection-section__header(?:(?!</header>).)*(Conversational series|Start here:)'
+    Message = 'expected collection detail ledgers to omit lane metadata and start-here links'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = '(?s)<h2[^>]*>Contents</h2>.*?The remaining 8 pieces appear below in collection order'
-    Message = 'expected collection detail pages to frame the ordered list as a newspaper-section contents list without duplicating the start-here entry'
+    Pattern = '<h2[^>]*>Contents</h2>|pieces appear below in collection order'
+    Message = 'expected collection detail pages to omit the contents label and explanatory contents copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'Format:|Scope:|Lane:'
+    Message = 'expected collection detail ledgers to omit metadata labels and keep only values'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/civic-institutions-and-public-power/index.html'
+    Pattern = '(?s)<li>Essays</li>.*?<li>Courts, institutions, and public power</li>'
+    Message = 'expected collection detail ledgers to keep metadata values after dropping labels'
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
