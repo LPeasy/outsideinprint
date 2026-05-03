@@ -491,6 +491,7 @@ $requiredEssayHeroPages = @(
   'public/essays/the-strait-that-holds-the-price/index.html',
   'public/essays/the-blockade-has-a-phone-number/index.html',
   'public/essays/the-warning-label-in-the-weeds/index.html',
+  'public/essays/nothing-to-see-here/index.html',
   'public/essays/beyond-moores-law/index.html',
   'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
 )
@@ -568,6 +569,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'The label looks like packaging until the legal system asks it to carry public trust.'
+  },
+  @{
+    PublicPath = 'public/essays/nothing-to-see-here/index.html'
+    SourcePath = 'content/essays/nothing-to-see-here.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The map is a public-record problem before it is an origin story.'
   },
   @{
     PublicPath = 'public/essays/the-sewer-under-the-sidewalk/index.html'
@@ -2133,7 +2141,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '10 public collections.*77 published pieces'
+    Pattern = '10 public collections.*78 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2164,7 +2172,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 10 public collections linking 76 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 10 public collections linking 77 published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
@@ -2481,6 +2489,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
+  @{ Path = 'public/essays/nothing-to-see-here/index.html'; Slug = 'risk-uncertainty'; Label = 'Nothing to See Here' },
   @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'the moral collection essay' },
   @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' }
 )
