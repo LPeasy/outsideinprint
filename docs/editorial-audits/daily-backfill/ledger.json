@@ -448,6 +448,101 @@
             },
             "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
             "deployed_on": "2026-05-02"
+        },
+        "deference-lost": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-03",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-03",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The revised essay ties agency responsiveness to statutory text, judicial incentives, institutional authority, tradeoffs, downstream delay, and uncertainty about future court behavior."
+            }
+        },
+        "the-undead-state": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-03",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-03",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The revised essay frames bureaucracy through institutional incentives, public-service tradeoffs, implementation consequences, and uncertainty about DOGE outcomes."
+            }
+        },
+        "the-economics-of-the-mongol-empire": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-03",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-03",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The revised essay connects trade security, standardization, incentives, disease risk, institutional power, and uncertainty about modern analogies without partisan framing."
+            }
+        },
+        "is-doge-legal": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-03",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-03",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The revised essay separates evidence from legal inference, identifies separation-of-powers mechanisms, names institutional incentives, and keeps unsettled litigation uncertain."
+            }
+        },
+        "u-s-shifts-ukraine-policy": {
+            "status": "pending_deploy",
+            "batch_id": "2026-05-03",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+            "previous_version": "1.0",
+            "new_version": "1.1",
+            "updated_on": "2026-05-03",
+            "editorial_philosophy": {
+                "status": "PASS",
+                "evidence": "PASS",
+                "logic": "PASS",
+                "incentives": "PASS",
+                "tradeoffs": "PASS",
+                "consequences": "PASS",
+                "uncertainty": "PASS",
+                "institutional_behavior": "PASS",
+                "note": "The revised essay grounds claims in the Defense transcript, tracks alliance incentives and tradeoffs, names second-order consequences, and leaves uncertainty around European response."
+            }
         }
     },
     "blocked": {},
@@ -535,6 +630,18 @@
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
             "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
             "deployed_on": "2026-05-02"
+        },
+        {
+            "batch_id": "2026-05-03",
+            "selected_slugs": [
+                "deference-lost",
+                "the-undead-state",
+                "the-economics-of-the-mongol-empire",
+                "is-doge-legal",
+                "u-s-shifts-ukraine-policy"
+            ],
+            "status": "pending_deploy",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md"
         }
     ]
 }
