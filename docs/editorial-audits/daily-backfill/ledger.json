@@ -267,7 +267,7 @@
             "previous_version": "1.0",
             "new_version": "1.1",
             "updated_on": "2026-05-01",
-            "editorial_philosophy": {
+            "editorial_pilosophy": {
                 "status": "PASS",
                 "evidence": "PASS",
                 "logic": "PASS",
@@ -309,7 +309,7 @@
             "previous_version": "1.0",
             "new_version": "1.1",
             "updated_on": "2026-05-01",
-            "editorial_philosophy": {
+            "editorial_pilosophy": {
                 "status": "PASS",
                 "evidence": "PASS",
                 "logic": "PASS",
@@ -339,7 +339,7 @@
                 "consequences": "PASS",
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
-                "note": "The essay now separates STaR from DeepSeek-R1, tests cost and infrastructure incentives, and preserves uncertainty around competitive and geopolitical effects."
+                "note": "The essay now separates STAR from DeepSeek-R1, tests cost and infrastructure incentives, and preserves uncertainty around competitive and geopolitical effects."
             },
             "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
             "deployed_on": "2026-05-01"
@@ -351,7 +351,7 @@
             "previous_version": "1.0",
             "new_version": "1.1",
             "updated_on": "2026-05-02",
-            "editorial_philosophy": {
+            "editorial_pilosophy": {
                 "status": "PASS",
                 "evidence": "PASS",
                 "logic": "PASS",
@@ -372,7 +372,7 @@
             "previous_version": "1.0",
             "new_version": "1.1",
             "updated_on": "2026-05-02",
-            "editorial_philosophy": {
+            "editorial_pilosophy": {
                 "status": "PASS",
                 "evidence": "PASS",
                 "logic": "PASS",
@@ -414,7 +414,7 @@
             "previous_version": "1.0",
             "new_version": "1.1",
             "updated_on": "2026-05-02",
-            "editorial_philosophy": {
+            "editorial_pilosophy": {
                 "status": "PASS",
                 "evidence": "PASS",
                 "logic": "PASS",
@@ -435,7 +435,7 @@
             "previous_version": "1.0",
             "new_version": "1.1",
             "updated_on": "2026-05-02",
-            "editorial_philosophy": {
+            "editorial_pilosophy": {
                 "status": "PASS",
                 "evidence": "PASS",
                 "logic": "PASS",
@@ -450,7 +450,7 @@
             "deployed_on": "2026-05-02"
         },
         "deference-lost": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-03",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
             "previous_version": "1.0",
@@ -466,10 +466,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay ties agency responsiveness to statutory text, judicial incentives, institutional authority, tradeoffs, downstream delay, and uncertainty about future court behavior."
-            }
+            },
+            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+            "deployed_on": "2026-05-03"
         },
         "the-undead-state": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-03",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
             "previous_version": "1.0",
@@ -485,10 +487,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay frames bureaucracy through institutional incentives, public-service tradeoffs, implementation consequences, and uncertainty about DOGE outcomes."
-            }
+            },
+            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+            "deployed_on": "2026-05-03"
         },
         "the-economics-of-the-mongol-empire": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-03",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
             "previous_version": "1.0",
@@ -504,10 +508,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay connects trade security, standardization, incentives, disease risk, institutional power, and uncertainty about modern analogies without partisan framing."
-            }
+            },
+            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+            "deployed_on": "2026-05-03"
         },
         "is-doge-legal": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-03",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
             "previous_version": "1.0",
@@ -523,10 +529,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay separates evidence from legal inference, identifies separation-of-powers mechanisms, names institutional incentives, and keeps unsettled litigation uncertain."
-            }
+            },
+            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+            "deployed_on": "2026-05-03"
         },
         "u-s-shifts-ukraine-policy": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-03",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
             "previous_version": "1.0",
@@ -542,7 +550,9 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay grounds claims in the Defense transcript, tracks alliance incentives and tradeoffs, names second-order consequences, and leaves uncertainty around European response."
-            }
+            },
+            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+            "deployed_on": "2026-05-03"
         }
     },
     "blocked": {},
@@ -640,8 +650,10 @@
                 "is-doge-legal",
                 "u-s-shifts-ukraine-policy"
             ],
-            "status": "pending_deploy",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md"
+            "status": "deployed",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+            "deployed_on": "2026-05-03"
         }
     ]
 }
