@@ -1,4 +1,4 @@
-current: just-part-of-the-game
+current: when-life-gives-you
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -112,3 +112,11 @@ cartoons:
     alt: "Editorial cartoon showing a public-duty threshold separating a classified briefing room from a prediction market booth while suited figures pass betting slips across it."
     width: 2048
     height: 1152
+  - slug: when-life-gives-you
+    title: "When Life Gives You"
+    date: "2026-05-03"
+    image: "/images/editorial/when-life-gives-you.png"
+    essay: "/essays/nothing-to-see-here/"
+    alt: "Editorial cartoon showing a family on the shore facing a tick-like creature in the water while officials guard a restricted island with a chained file cabinet, floating denied and negative forms, and signs for Lyme, Old Lyme, Nothing to See Here, and a restricted federal disease site."
+    width: 1672
+    height: 941
