@@ -1045,6 +1045,7 @@ $requiredUxPages = @(
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
   'public/essays/what-happened-at-camp-mystic/index.html',
+  'public/essays/multiple-shmultiple/index.html',
   'public/essays/the-world-is-back-at-the-poker-table/index.html'
 )
 
@@ -2149,7 +2150,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '9 public collections.*75 published pieces'
+    Pattern = '9 public collections.*76 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2540,7 +2541,8 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
   @{ Path = 'public/essays/nothing-to-see-here/index.html'; Slug = 'risk-uncertainty'; Label = 'Nothing to See Here' },
   @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'the moral collection essay' },
-  @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' }
+  @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' },
+  @{ Path = 'public/essays/multiple-shmultiple/index.html'; Slug = 'reported-case-studies'; Label = 'Multiple Shmultiple' }
 )
 
 foreach ($page in $articleCollectionBoundaryPages) {

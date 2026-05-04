@@ -1,0 +1,25 @@
+# Source Checklist
+
+| Claim | Current source | Source quality | Risk level | Action taken | Remaining verification need |
+| --- | --- | --- | --- | --- | --- |
+| Bloom alleged doctors told her each memory could house a separate personality; appellate opinion summarized complaint and dismissal posture. | `Bloom v. Braun`, Justia | Court/public record | Low | Added direct story citation. | None for candidate package. |
+| *The Three Faces of Eve* book and film introduced a public case shape tied to the Medical College of Georgia. | New Georgia Encyclopedia | High-quality reference | Low | Kept supplied citation. | None. |
+| Debbie Nathan reports Mason's 1958 typed denial; Sybil case remains disputed. | SelfDefinition-hosted PDF of Nathan book material | Secondary/hosted copy | Medium | Kept careful attribution to Nathan and archival papers. | For final publication, consider checking John Jay papers or published book directly. |
+| Rieber argued that tape recordings documented fraudulent construction and the role of hypnosis. | Sage Journals article record | Peer-reviewed historical/psychiatric article | Low-Medium | Added separate Rieber citation. | Full text may need access if quoting more heavily. |
+| DSM-III used explicit criteria, multiaxial assessment, and cause-neutral framing; DSM-IV and DSM-5-TR timing. | APA DSM history | Official professional source | Low | Kept supplied APA citation. | None. |
+| Multiple personality disorder became dissociative identity disorder; current APA description lists DID criteria and associated trauma. | APA dissociative-disorders public page | Official professional source | Low | Kept supplied APA citation. | None. |
+| DID/Dissociative amnesia publication output rose sharply, peaked in mid-1990s, and fell by 2002-2003; authors called it a fashion/bubble pattern. | Karger/Psychotherapy and Psychosomatics | Peer-reviewed article | Low | Kept supplied citation and summary. | None. |
+| Piper and Merskey criticized DID's trauma proof, diagnostic reliability, child-case scarcity, and iatrogenic practices; Part II addressed reification and treatment. | Sage Journals Part I and Part II | Peer-reviewed psychiatric review | Low | Added Part II source link. | None for candidate package. |
+| Lindsay and Read warned that memory work can yield false beliefs while recognizing that abuse and some recovered memories may be real. | ResearchGate-hosted record/copy of APA paper | Peer-reviewed paper via hosted copy | Low-Medium | Added source link and preserved careful distinction. | Prefer journal/DOI copy for final publication if available. |
+| *The Courage to Heal* belongs as part of mass-market recovered-memory culture and was recommended by many practitioners. | Lindsay and Read review | Peer-reviewed paper via hosted copy | Low-Medium | Added source link. | Same as above. |
+| *Michelle Remembers* helped popularize recovered-memory/SRA assumptions. | Lindsay and Read review | Peer-reviewed paper via hosted copy | Low-Medium | Added source link. | Same as above. |
+| Lanning's 1992 report described SRA claims, lack of corroboration, contagion risk, and evidentiary standard. | Wikisource-hosted scan/index of Lanning report | Law-enforcement report via hosted copy | Low-Medium | Added source link and preserved report context. | Prefer official FBI/DOJ-hosted copy if available. |
+| Illinois disciplinary complaint against Bennett Braun alleged suggestive methods and failures to disclose risk. | FMSF-hosted reproduction of Illinois complaint | Reproduced disciplinary complaint | Medium | Preserved "reproduced complaint" language. | Obtain official Illinois record before final publication if possible. |
+| Burgus settlement totaled $10.75 million; Braun license suspension/fine/probation reported; Braun disputed settlement posture. | Psychiatric Times | Secondary professional reporting | Low-Medium | Kept reported language and settlement-is-not-verdict caveat. | None for candidate package. |
+| 2021 paper says DSM-5/ICD-10 lack easy false-positive/imitated DID guidance and describes learning from media/support/clinical language. | Frontiers in Psychology | Peer-reviewed article | Low | Kept supplied citation. | None. |
+| ISSTD 2011 adult treatment guidelines synthesize knowledge/practice and preserve clinical judgment. | ISSTD guidelines page | Professional society source | Low | Kept supplied citation. | None. |
+| Lynn et al. 2022 propose moving beyond posttraumatic and sociocognitive models toward broader mechanisms. | Maastricht University publication record | University publication record | Low | Kept supplied citation. | Full article access only needed for detailed quotation. |
+
+## Source-Risk Summary
+
+The package is publication-candidate ready with `MEDIUM-LOW` source risk because key controversial source nodes are attributed and caveated. The most important optional final-publication upgrades are direct copies of the John Jay archival material, the original Illinois disciplinary complaint, and a journal-hosted Lindsay/Read copy.
