@@ -1,4 +1,4 @@
-current: when-life-gives-you
+current: let-me-show-you
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -118,5 +118,13 @@ cartoons:
     image: "/images/editorial/when-life-gives-you.png"
     essay: "/essays/nothing-to-see-here/"
     alt: "Editorial cartoon showing a family on the shore facing a tick-like creature in the water while officials guard a restricted island with a chained file cabinet, floating denied and negative forms, and signs for Lyme, Old Lyme, Nothing to See Here, and a restricted federal disease site."
+    width: 1672
+    height: 941
+  - slug: let-me-show-you
+    title: "Let me show you"
+    date: "2026-05-04"
+    image: "/images/editorial/let-me-show-you.png"
+    essay: "/essays/multiple-shmultiple/"
+    alt: "Editorial cartoon showing a clinician holding a mirror toward a seated woman, whose reflection shows several versions of herself, while shadowed figures observe and write behind a dark window."
     width: 1672
     height: 941

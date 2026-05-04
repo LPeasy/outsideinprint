@@ -410,6 +410,8 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $currentCartoonSlug = Get-CurrentCartoonSlug -RepoRoot $repoRoot
 $currentCartoonImagePath = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'image'
 $currentCartoonImagePattern = [regex]::Escape($currentCartoonImagePath)
+$currentCartoonEssayPath = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'essay'
+$currentCartoonEssayPattern = 'data-essay=(?:"' + [regex]::Escape($currentCartoonEssayPath) + '"|' + [regex]::Escape($currentCartoonEssayPath) + ')'
 $currentCartoonCaption = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'caption'
 $recentHomeCartoons = @(
   Get-CartoonEntries -RepoRoot $repoRoot |
@@ -1718,7 +1720,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'data-essay=(?:"/essays/the-strait-that-holds-the-price/"|/essays/the-strait-that-holds-the-price/)'
+    Pattern = $currentCartoonEssayPattern
     Message = 'expected the homepage cartoon trigger to carry the associated essay path'
   },
   @{
