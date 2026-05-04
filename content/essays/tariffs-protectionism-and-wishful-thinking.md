@@ -9,136 +9,78 @@ description: "When global powers face economic decline, they often turn to prote
 featured_image: "/images/medium/tariffs-protectionism-and-wishful-thinking/a2ca847bbd3c4228bf2346d7ece93cf9ac250f9a657cc827efdd0da7347319dc.jpg"
 featured_image_caption: "Photo by Maxim Hopman on Unsplash"
 featured_image_alt: "Tariffs, Protectionism, and Wishful Thinking"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 pdf: "/pdfs/tariffs-protectionism-and-wishful-thinking.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/tariffs-protectionism-and-wishful-thinking-e24c7c45838c"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-04"
+    note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
 ---
 
-Introduction
+## Introduction
 
-When global powers face economic decline, they often turn to protectionist trade policies to shield domestic industries and reassert control over international markets.
+When global powers face economic strain, they often turn to protectionist trade policies to shield domestic industries and reassert control over international markets.
 
-The British Empire, once the undisputed leader of global trade, implemented Imperial Preference in the 1930s, imposing tariffs on foreign goods while favoring trade within its colonies. Today, in 2025, the Trump administration is pursuing a similar strategy with tariffs, trade renegotiations, and economic nationalism, claiming to restore fairness in U.S. trade relationships.
+The British Empire, once the center of global trade, moved toward Imperial Preference in the 1930s. Britain imposed tariffs on many foreign goods while favoring trade within the empire. In 2025, the Trump administration pursued a related logic through tariffs, trade renegotiations, and economic nationalism, arguing that U.S. trade relationships had become unfair.
 
-20th-century Britain and the U.S. share a common reaction to economic strain — tightening trade restrictions and prioritizing domestic production.
+The comparison is not exact. Britain's policy came from imperial decline, depression-era politics, and a search for sheltered markets. Trump's policy tied trade to national security, immigration, fentanyl, industrial capacity, and bargaining leverage. But both cases reveal the same temptation: when open competition feels threatening, governments try to legislate economic strength through trade barriers.
 
-Britain’s Late-Stage Protectionism: The Road to Imperial Preference
+## Britain's Late-Stage Protectionism
 
-![](https://cdn-images-1.medium.com/max/800/0*bKZl9g-xzzYaiobg)
+By the early 20th century, Britain's industrial dominance was fading. The United States and Germany had become major industrial competitors, and World War I left Britain financially weakened.
 
-Photo by Samuel Pollard on Unsplash
+Britain had championed free trade for much of the 19th century, but by the 1920s its industries struggled against cheaper foreign competition and a changing world economy. The 1932 Import Duties Act marked a major policy shift by imposing a general tariff on many imports. The Ottawa Conference then formalized Imperial Preference, a system that favored trade inside the empire over trade with outside economies.
 
-Britain’s Economic Decline and the Shift Toward Tariffs
+The policy had several features:
 
-By the early 20th century, Britain’s industrial dominance was fading, outpaced by the U.S. and Germany.
+- Lower barriers for colonies and dominions.
+- Higher barriers for many non-empire goods.
+- A political promise that imperial trade could protect domestic producers.
+- A push for greater self-sufficiency inside the empire.
 
-The effects of World War I left Britain financially weakened, struggling to maintain its global trade networks.
+The system could redirect some trade within the empire, but it also raised costs and encouraged retaliation. It did not restore Britain's former industrial position. After World War II, the global trade system moved toward broader multilateral rules through GATT and later the WTO.
 
-Britain championed free trade for much of the 19th century, but by the 1920s, its industries struggled against cheaper foreign competition.
+## Trump's America First Protectionism
 
-Mounting pressure led to the 1932 Import Duties Act, marking a major policy shift.
+The United States entered 2025 under a different set of pressures: concern over manufacturing decline, dependence on foreign supply chains, China's industrial policy, border politics, and public resentment toward trade arrangements seen as unequal.
 
-“In such times of economic distress, we must look first to our own industries, to our own men, to the prosperity of our own country.”— Hansard, Parliamentary Debates, 1932The Act imposed a 10% tariff on most imports, a sharp break from Britain’s historical commitment to free markets. This protectionist turn set the stage for Imperial Preference, a system that sought to strengthen intra-Empire trade at the expense of foreign competitors.
+The Trump administration used tariffs as both economic policy and geopolitical leverage. It announced or prepared measures including:
 
-The Imperial Preference System: Britain’s Economic Fortress
+- Tariffs on imports from Canada and Mexico tied to border security and fentanyl claims.
+- Additional tariffs on Chinese imports.
+- A lower tariff category for Canadian energy imports.
+- A Fair and Reciprocal Plan aimed at tariff disparities with trading partners.
+- Section 232 steel and aluminum tariffs framed around national security and industrial capacity.
 
-At the Ottawa Conference in 1932, Britain formalized Imperial Preference, an economic system designed to prioritize trade within the British Empire while imposing high tariffs on non-Empire nations.
+The administration argued that tariffs could force better terms, strengthen domestic production, and reduce dependence on rivals. The mechanism was not subtle: raise the cost of foreign access to the U.S. market, then use that pressure to extract concessions.
 
-Key features of Imperial Preference included:
+## The Tradeoff
 
-- Lower tariffs for British colonies and dominions.
-- Higher tariffs on imports from the United States, Germany, and other foreign economies.
-- A push for economic self-sufficiency within the empire.
-Prime Minister Stanley Baldwin defended the policy, declaring:
+Tariffs can create benefits for some domestic producers. They can also preserve strategic capacity in sectors where dependence on hostile or unreliable suppliers carries national-security risk.
 
-“We must look within the Empire to find our economic salvation. Our industries, our farmers, and our merchants shall thrive under the protective embrace of Imperial Preference.”— Speech at the Ottawa Conference, 1932The system briefly boosted intra-Empire trade but triggered U.S. tariffs and raised prices for British consumers.
+But tariffs spread costs through the economy. Importers pay more. Consumers often face higher prices. Downstream manufacturers that rely on foreign inputs lose competitiveness. Trading partners may retaliate. Supply chains adjust, but not instantly and not without cost.
 
-As Britain struggled to maintain economic dominance in the wake of World War II, the global trade system shifted toward multilateral agreements like GATT and the WTO.
+That is why protectionism often overpromises. It presents industrial revival as if it can be ordered by statute, while the underlying causes of decline may involve productivity, investment, workforce skills, infrastructure, competition, and technology.
 
-The United States, once a champion of free trade, is now facing economic pressures reminiscent of Britain’s decline. Trump’s 2025 policies represent a fundamental shift toward protectionism — one that echoes Britain’s earlier attempt to insulate its economy through trade barriers.
+The British experience matters because it shows what tariffs cannot do. Imperial Preference could protect some interests for a time, but it could not reverse Britain's relative decline. It could not make the empire's markets large enough, efficient enough, or politically durable enough to replace a changing global economy.
 
-Trump’s ‘America First’ Protectionism: A 21st Century Parallel
+## National Security and Economic Policy
 
-![](https://cdn-images-1.medium.com/max/800/0*JEM1R_zEihR9CWMX)
+Trump's version of protectionism differed from Britain's because it treated tariffs as instruments of national security and negotiation. The administration linked trade with immigration enforcement, fentanyl trafficking, China policy, and defense-industrial capacity.
 
-Photo by Jorge Alcala on Unsplash
+That broader frame makes the policy more flexible, but also more dangerous. If every economic dispute becomes a security emergency, trade policy becomes less predictable. Allies may begin to price U.S. access as conditional and unstable. Rivals may adapt by building alternative markets and supply chains.
 
-National Security as Economic Policy
+The policy could still produce targeted gains. A tariff threat can sometimes force negotiation. Strategic industries may deserve protection where national security risks are real. The hard question is whether the gains exceed the costs imposed on consumers, allies, exporters, and downstream firms.
 
-President Donald J. Trump is actively reshaping U.S. trade policy, using tariffs as a tool for national security and economic leverage.
+## Conclusion
 
-Britain’s policy was primarily economic; Trump’s ties trade to national security, citing immigration and the opioid crisis.
+Tariffs offer visible action. That is part of their political appeal. They let governments say they are defending workers, industries, and sovereignty.
 
-Citing the International Emergency Economic Powers Act (IEEPA), Trump has implemented:
+But economic dominance cannot be legislated into existence. It depends on investment, innovation, productivity, infrastructure, education, energy, logistics, and institutional credibility.
 
-- A 25% tariff on imports from Canada and Mexico.
-- A 10% tariff on Chinese imports
-- A 10% tariff on Canadian energy imports
-These tariffs pressure foreign governments to curb drug trafficking and illegal immigration under a national security pretext.
+Protectionism is often a response to decline. It is rarely a full solution to decline.
 
-“We will no longer surrender this country or its people to the false song of globalism.”— Trump Speech, June 28, 2016This weaponization of trade policy — tying tariffs to border security — has few historical precedents but mirrors Britain’s efforts to protect its empire from foreign economic influence.
-
-The ‘Fair and Reciprocal Plan’: Trade War as Negotiation Tactic
-
-Trump’s 2025 ‘Fair and Reciprocal Plan’ targets tariff disparities, arguing that trade partners exploit U.S. openness while maintaining protectionist barriers
-
-The plan cites tariff disparities like:
-
-- Brazil’s 18% tariff on U.S. ethanol, while the U.S. imposes only 2.5%.
-- India’s 100% tariff on U.S. motorcycles, while the U.S. imposes only 2.4%.
-- The European Union’s 10% tariff on U.S. cars, while the U.S. imposes only 2.5%.
-The plan claims tariffs will pressure foreign governments to open markets, much as Britain saw Imperial Preference as a trade-strengthening tool.
-
-Restoring Section 232 Tariffs: Steel and Aluminum as Strategic Assets
-
-Trump reinstated 25% Section 232 tariffs on steel and aluminum imports.
-
-The administration claims these tariffs will shield U.S. industries from global oversupply and foreign price manipulation, particularly by China.
-
-Trump has stated:
-
-“The United States does not want to be in a position where it would be unable to meet demand for national defense and critical infrastructure in a national emergency.”— White House Press Release, February 11, 2025This mirrors Britain’s Imperial Preference in its attempt to secure domestic supply chains and reduce reliance on foreign industries.
-
-Economic Consequences: Tariffs, Retaliation & Higher Costs
-
-![](https://cdn-images-1.medium.com/max/800/0*OCn09QSjTesA_Feg)
-
-Photo by Towfiqu barbhuiya on Unsplash
-
-Trump’s policies aim to boost domestic industry but carry potential economic downsides, much like Britain’s protectionism:
-
-- Higher Consumer Prices: The tariffs raise costs for American consumers, just as Imperial Preference increased costs for British businesses reliant on imported goods.
-- Retaliatory Tariffs: Canada, Mexico, and China are imposing counter-tariffs, similar to how the U.S. responded to Britain’s Imperial Preference in the 1930s.
-- Supply Chain Disruptions: U.S. industries reliant on foreign components (e.g., automotive and electronics) struggle to adapt, echoing Britain’s strained Empire trade network under protectionism.
-Despite these risks, Trump frames these policies as an economic revival.
-
-“Tariffs work. Studies have shown they strengthen the U.S. economy and create millions of jobs.”— White House Fact Sheet, 2025Historical precedent suggests that protectionism rarely delivers the economic resurgence it promises.
-
-Conclusion
-
-![](https://cdn-images-1.medium.com/max/800/0*D23DFmjFG-fPDaci)
-
-Photo by Nareeta Martin on Unsplash
-
-Tariffs offer short-term relief but often provoke retaliation, disrupt supply chains, and fail to reverse long-term decline.
-
-Some economists see protectionism as beneficial in select industries. The Trump administration points to increased steel investment and reshoring, but these gains often come at the cost of higher prices and trade retaliation, limiting long-term benefits.
-
-Protectionism, ultimately, is a response to decline — not a solution to it.
-
-If history teaches anything, it is that economic dominance cannot be legislated into existence — it must be earned through innovation, adaptability, and engagement with the world.
-
-Author’s Note:
-
-If you enjoyed this deep dive into trade policy and historical parallels, you might like my other essays on Medium, where I explore economic trends, policy decisions, and their unintended consequences. From inflation and market concentration to the psychology of consumer behavior, I break down the forces shaping our economy today.
-
-Check out more of my work here and feel free to follow for future analysis and commentary!
-
-Read More
-
-Fact Sheet: President Donald J. Trump Imposes Tariffs on Imports from Canada, Mexico and China
-ADDRESSING AN EMERGENCY SITUATION: The extraordinary threat posed by illegal aliens and drugs, including deadly…www.whitehouse.govFact Sheet: President Donald J. Trump Announces "Fair and Reciprocal Plan" on Trade
-THE "FAIR AND RECIPROCAL PLAN": Today, President Donald J. Trump signed a Presidential Memorandum ordering the…www.whitehouse.govFact Sheet: President Donald J. Trump Restores Section 232 Tariffs
-COUNTERING TRADE PRACTICES THAT UNDERMINE NATIONAL SECURITY: Yesterday, President Donald J. Trump signed proclamations…www.whitehouse.gov
+The lesson from Britain is not that all tariffs are always wrong. It is that trade barriers cannot substitute for the deeper work of building an economy that can compete. If the United States uses tariffs as a narrow bargaining tool, it may gain leverage. If it uses them as a substitute for adaptation, it risks repeating an old imperial mistake in a new language.

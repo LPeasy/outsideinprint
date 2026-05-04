@@ -9,174 +9,79 @@ featured_image: "/images/medium/is-trump-seriously-asking-for-ukraines-mineral-r
 featured_image_caption: "Photo by Glib Albovsky on Unsplash"
 featured_image_alt: "Is Trump Seriously Asking for Ukraine’s Mineral Rights — Or Is This Just a Distraction?"
 description: "The U.S.-Russia peace talks in Riyadh signaled a shift toward de-escalation in Ukraine and a broader realignment of U.S. strategy toward the pacific"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 pdf: "/pdfs/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction-de6711fe7ecf"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-04"
+    note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
 ---
 
-The U.S.-Russia peace talks in Riyadh signaled a shift toward de-escalation in Ukraine and a broader realignment of U.S. strategy toward the pacific.
+The U.S.-Russia peace talks in Riyadh signaled a shift toward de-escalation in Ukraine and a broader realignment of U.S. strategy toward the Pacific.
 
-So why, in the middle of peace talks, is Trump suddenly pushing for control of Ukraine’s mineral wealth?
+That made Trump's push for access to Ukraine's mineral wealth especially important.
 
-If peace is the goal, why is Washington demanding resource access? Would securing these minerals prolong the war — or deter Russian aggression?
+If peace was the goal, why was Washington demanding resource access? Would a minerals agreement prolong the war, or could it create a stronger deterrent by tying U.S. economic interests to Ukraine's survival?
 
-Trump’s position seems contradictory.
+The position looked contradictory. On February 19, Trump called the war unwinnable, attacked Zelenskyy's leadership, and questioned continued support. If Ukraine was a lost cause, why pursue its most valuable resources?
 
-On February 19, he called the war “unwinnable,” accused Zelenskyy of mismanaging U.S. funds, and questioned continued support.
+The answer may be that the minerals demand was not a distraction. It may have been the transaction through which Trump wanted to justify continued U.S. involvement.
 
-If Ukraine is a lost cause, why pursue its most valuable resources?
+## The Greenland Pattern
 
-This could be an attempt at pitching a legitimate economic partnership, or it could be another attention grabbing “deal” like his proposal to purchase Greenland.
+Trump had already shown interest in resource-rich territory through his proposal to buy Greenland. He framed Greenland as strategically important because of Arctic access, minerals, and U.S. independence from Chinese supply chains.
 
-The Greenland Playbook: A Pattern of Resource-Driven Deals
+Denmark rejected the idea, and polling showed Greenlanders overwhelmingly opposed joining the United States.
 
-![](https://cdn-images-1.medium.com/max/800/1*ZTl6bCIdX9qdwTHcwBLJ7w@2x.jpeg)
+Greenland could say no. Ukraine, fighting for survival and dependent on outside support, had far less room to refuse.
 
-Photo by Visit Greenland on Unsplash
+That asymmetry matters. A deal between a secure ally and the United States is one thing. A deal between a wartime government and its essential security patron is another.
 
-Trump has long pursued resource-rich territory in the name of “economic security.”
+## Why Ukraine's Minerals Matter
 
-In 2019, he proposed buying Greenland, arguing it was crucial for U.S. independence from China’s rare earth dominance.
+Ukraine has significant deposits of lithium, titanium, graphite, and other minerals relevant to batteries, defense production, and clean-energy technology. Some deposits are under Russian occupation or close to contested areas, which makes access both valuable and risky.
 
-The idea was dismissed, but Trump revived it in his second term, with Republicans introducing bills like the Make Greenland Great Again Act.
+For the United States, Ukraine's mineral base could reduce dependence on China-linked supply chains. For Ukraine, U.S. investment could bring capital, political attention, and a stronger argument for continued security support.
 
-Denmark flatly refused, and 85% of Greenlanders oppose the idea.
+The tradeoff is that resource access can blur the line between partnership and extraction. If Ukraine gives Washington a stake in its minerals without credible security guarantees, the agreement could look less like alliance strategy and more like wartime leverage.
 
-Greenland can afford to say no.
+## Deterrence or Exposure
 
-Ukraine, desperate for security and economic survival, may have no choice but to say yes.
+A U.S.-Ukraine minerals agreement could strengthen deterrence if American companies, financing, and political commitments make Ukraine's security more important to Washington.
 
-Why Ukraine’s Minerals Matter to the U.S.
+But investment alone is not a security guarantee. Mines, contracts, and joint funds do not stop missiles. Russia would still test the limits of U.S. commitment unless the agreement was tied to enforceable support.
 
-![](https://cdn-images-1.medium.com/max/800/1*avJ8WSppwf_HB5FlHoFGag@2x.jpeg)
+That is why Zelenskyy's reported concern over security guarantees mattered. Ukraine did not only need a buyer or investor. It needed assurance that the United States would not take the upside while leaving Ukraine exposed to the risk.
 
-Photo by Pedro Henrique Santos on Unsplash
+## The Transactional Logic
 
-Ukraine holds some of Europe’s richest deposits of rare earth elements (REE), lithium, titanium, and graphite — critical for EV batteries, military tech, and renewable energy. But much of this global supply is controlled by China, leaving the U.S. searching for alternatives.
+Trump's rhetoric suggested that continued aid had to produce a visible return for the United States. He argued that Europe had secured debt instruments while the United States had spent heavily without tangible compensation.
 
-For the U.S., Ukraine’s untapped reserves aren’t just valuable — they’re a geopolitical necessity.
+In that framework, a minerals deal could give Trump a domestic political story: the United States was not giving aid away; it was receiving strategic economic value in return.
 
-But Ukraine is at war, and many deposits are in Russian-occupied areas.
+That logic might make continued support more politically durable inside Trump's coalition. It could also make Ukraine's survival dependent on whether the deal looked profitable enough to defend.
 
-![](https://cdn-images-1.medium.com/max/800/1*oJSjbNskr7LUTIkWXVZL8w@2x.jpeg)
+The danger is that transactional politics can mistake ownership for strategy. Control over mineral rights does not automatically produce peace, deterrence, or reconstruction. Those require governance, infrastructure, capital, security, and time.
 
-Would a U.S. deal prolong the conflict — or might it actually deter future Russian aggression?
+## A Possible Reset With Zelenskyy
 
-If American contractors begin mining in Ukraine, any Russian attack risks direct U.S. involvement — something Moscow probably wants to avoid.
+U.S. Treasury Secretary Scott Bessent presented a proposal to Zelenskyy in Kyiv. Ukrainian officials reportedly objected to the speed and terms of the proposal, including the absence of explicit security guarantees.
 
-U.S. investment in Ukraine could deepen America’s long-term security commitments.
+After Keith Kellogg's visit to Kyiv, reporting suggested that talks had improved and that both sides were trying to finalize an agreement. Zelenskyy described the negotiations as a possible step forward while emphasizing the need for effective terms.
 
-If framed correctly, a U.S.-Ukraine minerals agreement could serve as both an economic windfall and a deterrent against Russian aggression.
+That sequence suggests the minerals demand was not merely rhetorical. It was part of a serious negotiation over the future shape of U.S.-Ukraine relations.
 
-Trump’s Own Words: Does He Even Want to Protect Ukraine?
+If finalized on balanced terms, the agreement could bind the United States more closely to Ukraine's reconstruction and security. If finalized under pressure, it could deepen Ukrainian dependence without solving the strategic problem that made the deal necessary.
 
-![](https://cdn-images-1.medium.com/max/800/1*PDLd0Ood0TdQMQn4fztACA@2x.jpeg)
+## Conclusion
 
-Photo by History in HD on Unsplash
+Trump's push for Ukraine's minerals echoed the Greenland idea, but the stakes were different. Greenland was a secure territory whose government could reject a bad proposal. Ukraine was a wartime democracy seeking survival.
 
-While the presence of U.S. mining operations could strengthen Ukraine’s security, Trump’s own statements raise doubts about whether he would actually commit to this kind of protection.
+A minerals agreement could serve both countries if it joins economic development with credible security commitments. It could help Ukraine rebuild, give Washington a strategic supply-chain interest, and make abandonment harder.
 
-His February 19th tweet suggests:
+But if the United States seeks resource access without real guarantees, the deal risks becoming extraction under wartime pressure.
 
-- Ukraine is a lost cause: He claims the war “couldn’t be won” and was unnecessary from the start.
-- U.S. aid has been wasted: He accuses Ukraine of mismanaging American funds, implying that future aid should be limited.
-- Zelenskyy is an unreliable partner: He paints the Ukrainian president as corrupt and politically weak.
-- Only Trump can negotiate peace: He suggests that a settlement is within reach — one that Biden and Europe have failed to achieve.
-So what is Trump really saying?
-
-If Ukraine is beyond saving, then it makes no sense to stake America’s economic future on its resources.
-
-This could be a sign that the U.S. is more committed to Ukraine’s future than he claims.
-
-Trump is a Master Manipulator
-
-![](https://cdn-images-1.medium.com/max/800/1*jAK6Nm-MBD978dQMRdzVXA@2x.jpeg)
-
-Photo by Julius Drost on Unsplash
-
-Imagine this:
-
-America gains a controlling interest in Ukrainian rare earth metals, and Ukraine secures military support from Trump’s administration.
-
-Aggressive posturing and bombastic statements aside, this sounds like a pretty good deal.
-
-Trump will not continue to support the war unless he can claim a political victory with clear (and visible) benefits.
-
-He points out that while European countries have contributed to the war effort, they have secured debt and the U.S. has nothing.
-
-He says America cannot continue to give away hundreds of billions of dollars with no tangible return.
-
-Based on the administrations recent rhetoric regarding Ukraine’s pre-2014 borders, any deal will likely legitimize Russia’s territorial gains.
-
-If claims of friendship between Trump and Putin are to be believed, they could potentially negotiate peace terms that end the war tomorrow.
-
-His rhetorical rampage against Zelenskyy may have been a ploy to improve his bargaining position.
-
-A Deal That Could Ease Tensions Between Trump and Zelensky
-
-![](https://cdn-images-1.medium.com/max/800/1*u8l6AZ4MnhH2RP0wHXUuQQ@2x.jpeg)
-
-Photo by Afif Ramdhasuma on Unsplash
-
-U.S. Treasury Secretary Scott Bessent presented a mineral rights deal to Zelensky last week in Kyiv.
-
-Zelensky and his team rejected the proposal outright, saying they had been given only a few hours to review it. They insisted that any deal must include explicit security guarantees for Ukraine.
-
-The rejection set off a public feud.
-
-But this week, signs of a breakthrough emerged.
-
-Trump’s Ukraine envoy, retired Lt. Gen. Keith Kellogg, met with Zelensky in Kyiv on Thursday.
-
-According to sources familiar with the talks, Kellogg played a key role in restoring trust between the two sides over three days of negotiations.
-
-After their meeting, Zelensky struck a more optimistic tone, calling the negotiations “a step forward” and instructing his team to finalize the deal swiftly.
-
-“This is an agreement that can strengthen our relations, and the key is to work out the details to ensure its effectiveness.” — Volodymyr Zelensky, February 21, 2025Trump, for his part, sounded confident that a deal was within reach. “I think they want it. They feel good about it,” he told reporters Friday.
-
-The agreement, which could be signed as early as Saturday, would mark a major shift in U.S.-Ukraine relations.
-
-While the full terms remain unclear, sources say Ukraine is offering access to its mineral wealth in exchange for continued U.S. support.
-
-Zelensky’s administration actually floated this strategy last year, hoping that granting the U.S. a stake in Ukraine’s resources would entice Trump to continue military aid.
-
-Trump, who has repeatedly criticized U.S. support for Ukraine, has long argued that America should be getting something in return.
-
-If finalized, the mineral rights deal wouldn’t just secure U.S. access to Ukraine’s resources — it could tie Washington’s hands, forcing long-term U.S. engagement whether Trump admits it or not.
-
-Conclusion: A Test of America’s Intentions
-
-![](https://cdn-images-1.medium.com/max/800/1*t7abqlMVSuFnb0PCO4Xv_Q@2x.jpeg)
-
-Photo by benjamin lehman on Unsplash
-
-Trump’s push for Ukraine’s minerals echoes his Greenland plan, but this time, the stakes aren’t just economic — they’re geopolitical.
-
-Unlike Greenland, Ukraine may actually benefit.
-
-If this is a real partnership, the U.S. must guarantee Ukraine’s security. Otherwise, it risks looking like a transactional deal — one where America profits while Ukraine remains vulnerable.
-
-If U.S. contractors begin mining, Washington will have no choice but to remain engaged.
-
-Either Trump is preparing to keep America in Ukraine — or he is setting the stage for a deal where the U.S. extracts wealth while leaving Ukraine exposed.
-
-So, is Trump setting the stage to protect Ukraine’s future — or just to strip it for parts? You tell me.
-
-About the Author
-
-Lawton is an economist specializing in coastal resilience, economic policy, and market trends. He writes in-depth essays on the American economy, society, and history, blending data-driven analysis with historical context. His work explores topics ranging from trade policy and inflation to labor markets and financial systems.
-
-When he’s not crunching numbers, he writes fiction, plays music, and hangs out with his lil cat named Boudin.
-
-Follow his latest essays on Medium: https://medium.com/@lawtonperret
-
-https://truthsocial.com/@realDonaldTrump/posts/114031332924234939
-
-Red, White and Blueland? Trump's Greenland talk sparks some colorful proposals
-President Trump's talk of acquiring Greenland has sparked creative proposals, from a bill to rename the island "Red,…www.npr.orgen.m.wikipedia.orgUkraine must strike minerals deal, says Trump adviser Mike Waltz
-The comments overshadowed Zelensky's meeting with US envoy Keith Kellogg in Kyiv.www.bbc.comWhat to know about Ukraine's controversial rare earth minerals
-Ukraine is sitting on 2.6 billion tons of reserves of minerals crucial to global technology.www.axios.com85 percent of Greenlanders don't want Trump takeover, new poll says
-Survey lands as Danish prime minister tours Europe to try shore up support for keeping the Arctic island out of American…www.politico.eu'It will not happen': Trump's Greenland grab hits new Danish resistance
-"We have no interest in selling Greenland to the U.S.," Denmark's Foreign Minister Lars Løkke Rasmussen says.www.politico.eu
+The question is not whether Ukraine's minerals matter. They do. The question is who bears the risk, who gains power, and whether the agreement strengthens Ukraine's sovereignty or monetizes its vulnerability.
