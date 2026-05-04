@@ -1,4 +1,4 @@
-current: let-me-show-you
+current: who-paid-the-nazis
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -128,3 +128,11 @@ cartoons:
     alt: "Editorial cartoon showing a clinician holding a mirror toward a seated woman, whose reflection shows several versions of herself, while shadowed figures observe and write behind a dark window."
     width: 1672
     height: 941
+  - slug: who-paid-the-nazis
+    title: "Who Paid the Nazis?"
+    date: "2026-05-04"
+    image: "/images/editorial/who-paid-the-nazis.png"
+    essay: "/essays/the-hate-ledger/"
+    alt: "Editorial cartoon showing blindfolded figures examining a document-covered elephant surrounded by public records, donor letters, bank files, subpoenas, court filings, and source files, with speech bubbles naming Nazis, racists, bigots, alphabet-phobes, and the SPLC."
+    width: 2048
+    height: 1152
