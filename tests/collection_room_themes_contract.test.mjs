@@ -41,6 +41,11 @@ test("legacy room_theme metadata remains data-only and no longer drives presenta
     );
   }
 
+  assert.match(
+    collectionsData,
+    /- slug: the-ledger[\s\S]*?public: false[\s\S]*?featured: false/
+  );
+
   for (const source of [collectionSingle, collectionCard, css]) {
     assert.doesNotMatch(source, /collection-room/);
     assert.doesNotMatch(source, /collection-card--room/);

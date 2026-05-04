@@ -2,11 +2,11 @@ collections:
   - slug: the-ledger
     title: The Ledger
     kind: series
-    public: true
+    public: false
     force_public: false
     min_items: 2
     explicit_only: true
-    featured: true
+    featured: false
     weight: 10
     start_here: the-ledger-vol-1
     description: Newsletter-style dispatches that gather recent essays, themes, and recurring concerns into one archival thread.

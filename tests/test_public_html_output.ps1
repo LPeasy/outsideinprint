@@ -1041,6 +1041,9 @@ $requiredUxPages = @(
   'public/essays/the-risk-management-buffet/index.html',
   'public/essays/synthetic-reasoning/index.html',
   'public/essays/in-the-image-of-god/index.html',
+  'public/essays/the-ledger-vol-1/index.html',
+  'public/essays/the-ledger-vol-2/index.html',
+  'public/essays/the-ledger-vol-3/index.html',
   'public/essays/what-happened-at-camp-mystic/index.html',
   'public/essays/the-world-is-back-at-the-poker-table/index.html'
 )
@@ -1170,6 +1173,11 @@ foreach ($file in $htmlFiles) {
   if ($content -match '(?:https://outsideinprint\.org)?/literature/') {
     $retiredRouteIssues.Add("$relativePath => literature route leaked into generated HTML")
   }
+}
+
+$sitemapPath = Join-Path $SiteDir 'sitemap.xml'
+if (Test-Path -LiteralPath $sitemapPath -PathType Leaf) {
+  $targetPageHtml['public/sitemap.xml'] = Get-Content -Path $sitemapPath -Raw
 }
 
 foreach ($relativePath in $requiredSemanticPages.Keys) {
@@ -2141,7 +2149,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '10 public collections.*78 published pieces'
+    Pattern = '9 public collections.*75 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2208,8 +2216,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Series.*?The Ledger.*?Syd and Oliver Dialogues.*?Modern Bios.*?Lit Review.*?Reported Case Studies'
-    Message = 'expected the unified collections directory to group series collections together'
+    Pattern = '(?s)Series.*?Syd and Oliver Dialogues.*?Modern Bios.*?Lit Review.*?Reported Case Studies'
+    Message = 'expected the unified collections directory to group visible series collections together'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'The Ledger|/collections/the-ledger/'
+    Message = 'expected The Ledger to be hidden from the collections directory'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/lit-review/index.html'
@@ -2342,9 +2356,44 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected related collection rows to omit the hidden Ledger collection'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/collections/the-ledger/index.html'
     Pattern = '(?s)<ol[^>]*class=(?:"[^"]*\bcollection-section__items\b[^"]*"|''[^'']*\bcollection-section__items\b[^'']*''|[^\s>]*\bcollection-section__items\b[^\s>]*)[^>]*>(?:(?!</ol>).)*?/essays/the-ledger-vol-1/'
     Message = 'expected The Ledger Start Here essay not to be duplicated in the contents list'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/the-ledger/index.html'
+    Pattern = '<meta name=robots content="noindex, follow"'
+    Message = 'expected the hidden Ledger collection page to be noindexed while remaining directly reachable'
+  },
+  @{
+    Path = 'public/sitemap.xml'
+    Pattern = '/collections/the-ledger/'
+    Message = 'expected the hidden Ledger collection page to be excluded from the sitemap'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-1/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected Ledger essay pages not to expose the hidden collection as a public reader path'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-2/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected Ledger essay pages not to expose the hidden collection as a public reader path'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-3/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected Ledger essay pages not to expose the hidden collection as a public reader path'
     ShouldNotMatch = $true
   },
   @{
