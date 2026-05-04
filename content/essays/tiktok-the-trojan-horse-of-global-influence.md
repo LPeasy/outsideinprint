@@ -17,6 +17,8 @@ revision_history:
 pdf: "/pdfs/tiktok-the-trojan-horse-of-global-influence.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/tiktok-the-trojan-horse-of-global-influence-4167ea0e329d"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 Image made using ChatGPT in January 2025.

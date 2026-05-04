@@ -18,6 +18,7 @@ featured: false
 
 collections:
   - technology-ai-machine-future
+  - geopolitics-trade-global-power
 medium_source_url: "https://medium.com/@lawtonperret/beyond-moores-law-b7838e31b905"
 ---
 ![](/images/medium/beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg)

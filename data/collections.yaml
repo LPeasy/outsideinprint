@@ -133,6 +133,38 @@ collections:
         - decision
       sections: []
 
+  - slug: geopolitics-trade-global-power
+    title: Geopolitics, Trade, and Global Power
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: true
+    weight: 35
+    start_here: the-world-is-back-at-the-poker-table
+    description: Essays on foreign policy, trade, energy chokepoints, strategic technology, and the hard machinery of global power.
+    metadata:
+      - label: Format
+        value: Essays
+      - label: Scope
+        value: Geopolitics, trade, and global power
+    fallback:
+      series: []
+      topics:
+        - geopolitics
+        - foreign policy
+        - trade
+        - global power
+        - energy security
+        - supply chains
+      tags:
+        - geopolitics
+        - trade
+        - foreign-policy
+        - energy-security
+      sections: []
+
   - slug: floods-water-built-environment
     title: Floods, Water, and the Built Environment
     kind: topic

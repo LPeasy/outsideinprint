@@ -13,7 +13,9 @@ version: "1.0"
 edition: "First web edition"
 featured: false
 
-collections: ["technology-ai-machine-future"]
+collections:
+  - technology-ai-machine-future
+  - geopolitics-trade-global-power
 ---
 
 The order was short enough to fit on a phone screen.

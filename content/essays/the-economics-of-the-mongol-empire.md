@@ -18,6 +18,8 @@ revision_history:
 pdf: "/pdfs/the-economics-of-the-mongol-empire.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-economics-of-the-mongol-empire-c258d2179605"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 History often remembers Genghis Khan as a ruthless conqueror, but his most lasting impact was also economic. The Mongol Empire, at its height, stretched from the Pacific Ocean to Eastern Europe, creating the largest contiguous land empire in history.

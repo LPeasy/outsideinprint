@@ -18,6 +18,8 @@ revision_history:
 pdf: "/pdfs/u-s-shifts-ukraine-policy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/u-s-shifts-ukraine-policy-1817b72eb1c7"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 Secretary of Defense Pete Hegseth's remarks at the Ukraine Defense Contact Group (UDCG) on February 12th signal a dramatic shift in U.S. foreign policy under President Trump.

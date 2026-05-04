@@ -18,6 +18,8 @@ revision_history:
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
+collections:
+  - geopolitics-trade-global-power
 ---
 
 "The key really in all of this is ultimately going to be whether an agreement can be reached with all parties involved on an acceptable resolution to the conflict in Ukraine. Because if that happens, not only will the world be a better place, but I think there will be some pretty unique opportunities to work with them." - Marco Rubio

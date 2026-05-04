@@ -14,6 +14,8 @@ edition: "First web edition"
 pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 Russia’s prolonged war in Ukraine has significantly altered its geopolitical and economic landscape, pushing it closer to China in ways that threaten its sovereignty.

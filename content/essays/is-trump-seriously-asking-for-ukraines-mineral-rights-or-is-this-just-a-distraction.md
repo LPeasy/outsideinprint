@@ -18,6 +18,8 @@ revision_history:
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
+collections:
+  - geopolitics-trade-global-power
 ---
 
 The U.S.-Russia peace talks in Riyadh signaled a shift toward de-escalation in Ukraine and a broader realignment of U.S. strategy toward the Pacific.

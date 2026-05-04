@@ -14,6 +14,8 @@ edition: "First web edition"
 pdf: "/pdfs/whos-really-funding-terror.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-really-funding-terror-c9268e4f1bb4"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 Every few years, the U.S. Treasury Department drops [a long, serious PDF that almost nobody outside government reads.](https://home.treasury.gov/system/files/136/2024-National-Terrorist-Financing-Risk-Assessment.pdf)

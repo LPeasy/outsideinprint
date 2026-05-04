@@ -14,6 +14,8 @@ edition: "First web edition"
 pdf: "/pdfs/make-fighter-jets-great-again-introducing-the-f-47.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/make-fighter-jets-great-again-introducing-the-f-47-3428bba1e27c"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 The name is a flex.The plane is American air superiority — reengineered.While the name might be funny, the jet itself is no joke.

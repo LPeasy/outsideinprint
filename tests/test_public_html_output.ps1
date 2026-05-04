@@ -682,6 +682,14 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
   }
+  'public/collections/geopolitics-trade-global-power/index.html' = @{
+    Title = 'Geopolitics, Trade, and Global Power'
+    Description = 'Essays on foreign policy, trade, energy chokepoints, strategic technology, and the hard machinery of global power.'
+    Canonical = 'https://outsideinprint.org/collections/geopolitics-trade-global-power/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
   'public/collections/civic-institutions-and-public-power/index.html' = @{
     Title = 'Civic Institutions and Public Power'
     Description = 'A staged lane for essays on courts, federalism, and public institutions once the body of work is coherent enough to publish.'
@@ -858,6 +866,12 @@ $requiredStructuredDataPages = [ordered]@{
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
   }
+  'public/collections/geopolitics-trade-global-power/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
   'public/essays/the-risk-management-buffet/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'Article', 'ImageObject')
     ForbiddenTypes = @('CollectionPage')
@@ -916,6 +930,10 @@ $requiredIndexationPages = [ordered]@{
     Robots = 'index, follow, max-image-preview:large'
   }
   'public/collections/risk-uncertainty/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/collections/geopolitics-trade-global-power/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
@@ -1034,6 +1052,7 @@ $requiredUxPages = @(
   'public/collections/modern-bios/index.html',
   'public/collections/lit-review/index.html',
   'public/collections/risk-uncertainty/index.html',
+  'public/collections/geopolitics-trade-global-power/index.html',
   'public/collections/civic-institutions-and-public-power/index.html',
   'public/collections/floods-water-built-environment/index.html',
   'public/collections/technology-ai-machine-future/index.html',
@@ -2152,7 +2171,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '9 public collections.*76 published pieces'
+    Pattern = '10 public collections.*98 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2241,7 +2260,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)Topics.*?Risk, Uncertainty, and Decision-Making.*?Floods, Water, and the Built Environment.*?Technology, AI, and the Machine Future.*?Moral, Religious, and Philosophical Essays.*?Civic Institutions and Public Power'
+    Pattern = '(?s)Topics.*?Risk, Uncertainty, and Decision-Making.*?Geopolitics, Trade, and Global Power.*?Floods, Water, and the Built Environment.*?Technology, AI, and the Machine Future.*?Moral, Religious, and Philosophical Essays.*?Civic Institutions and Public Power'
     Message = 'expected the unified collections directory to group visible topic collections together without subgroup labels'
   },
   @{
