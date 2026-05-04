@@ -1,6 +1,6 @@
 ---
 title: "The Hate Ledger"
-date: 2026-05-04
+date: 2026-05-04T16:20:00-04:00
 draft: false
 slug: "the-hate-ledger"
 section_label: "Essay"
