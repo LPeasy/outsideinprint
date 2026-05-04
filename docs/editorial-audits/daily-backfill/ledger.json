@@ -555,7 +555,7 @@
             "deployed_on": "2026-05-03"
         },
         "u-s-russia-peace-talks": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-04",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
             "previous_version": "1.0",
@@ -571,10 +571,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay grounds the Riyadh talks in sourced diplomatic remarks, alliance incentives, Ukraine security tradeoffs, downstream NATO consequences, and uncertainty about Russia and China."
-            }
+            },
+            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+            "deployed_on": "2026-05-04"
         },
         "tariffs-protectionism-and-wishful-thinking": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-04",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
             "previous_version": "1.0",
@@ -590,10 +592,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay separates historical analogy from present policy, tests tariff incentives, names consumer and supply-chain tradeoffs, and keeps claims about outcomes bounded."
-            }
+            },
+            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+            "deployed_on": "2026-05-04"
         },
         "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-04",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
             "previous_version": "1.0",
@@ -609,10 +613,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay tests GOP rhetoric against reported statements, primary-election incentives, Ukraine aid tradeoffs, and downstream credibility consequences without treating party loyalty as proof."
-            }
+            },
+            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+            "deployed_on": "2026-05-04"
         },
         "6-reasons-redwall-is-a-timeless-classic": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-04",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
             "previous_version": "1.0",
@@ -628,10 +634,12 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised literary essay ties claims to the book record, explains its logic, and frames community, power, and moral tradeoffs without unsupported cultural certainty."
-            }
+            },
+            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+            "deployed_on": "2026-05-04"
         },
         "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction": {
-            "status": "pending_deploy",
+            "status": "deployed",
             "batch_id": "2026-05-04",
             "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
             "previous_version": "1.0",
@@ -647,7 +655,9 @@
                 "uncertainty": "PASS",
                 "institutional_behavior": "PASS",
                 "note": "The revised essay tests the minerals proposal through source-backed reporting, bargaining incentives, sovereignty tradeoffs, security consequences, uncertainty over terms, and institutional risk allocation."
-            }
+            },
+            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+            "deployed_on": "2026-05-04"
         }
     },
     "blocked": {},
@@ -759,8 +769,10 @@
                 "6-reasons-redwall-is-a-timeless-classic",
                 "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction"
             ],
-            "status": "pending_deploy",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md"
+            "status": "deployed",
+            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
+            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+            "deployed_on": "2026-05-04"
         }
     ]
 }
