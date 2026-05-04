@@ -1062,6 +1062,7 @@ $requiredUxPages = @(
   'public/essays/the-risk-management-buffet/index.html',
   'public/essays/synthetic-reasoning/index.html',
   'public/essays/in-the-image-of-god/index.html',
+  'public/essays/the-hate-ledger/index.html',
   'public/essays/the-ledger-vol-1/index.html',
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
@@ -1771,8 +1772,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?smokestack-spreadsheets"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=excellent-work"?'
-    Message = 'expected the Smokestack homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-bet-slip-in-the-briefing-room"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=just-part-of-the-game"?'
+    Message = 'expected the Bet Slip homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -2171,7 +2172,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '10 public collections.*98 published pieces'
+    Pattern = '10 public collections.*99 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2562,6 +2563,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
   @{ Path = 'public/essays/nothing-to-see-here/index.html'; Slug = 'risk-uncertainty'; Label = 'Nothing to See Here' },
   @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'the moral collection essay' },
+  @{ Path = 'public/essays/the-hate-ledger/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'The Hate Ledger' },
   @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' },
   @{ Path = 'public/essays/multiple-shmultiple/index.html'; Slug = 'reported-case-studies'; Label = 'Multiple Shmultiple' }
 )
