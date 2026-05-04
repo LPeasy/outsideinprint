@@ -2,6 +2,7 @@
 
 For publishing or content-maintenance sessions in this repo, start with [docs/publishing-workflow.md](docs/publishing-workflow.md).
 Local validation policy lives in [docs/local-validation-policy.md](docs/local-validation-policy.md).
+Political cartoon design guidance lives in [docs/political-cartoon-design-philosophy.md](docs/political-cartoon-design-philosophy.md).
 The governing OIP editorial philosophy lives at `editorial\oip_editorial_philosophy.md`. Changed non-draft essays, reports, and working papers must have Editorial Philosophy Audit PASS evidence before publication. Syd & Oliver dialogue/fiction pieces are excluded from this hard gate unless explicitly treated as public-judgment work.
 
 ## Deferred merch work
