@@ -528,6 +528,75 @@ Institutional Behavior: PASS
   $currentHeroWinsExit = $LASTEXITCODE
   Assert-True ($currentHeroWinsExit -eq 0) "Expected current-hero-wins conflicts to remain warnings by default."
   Assert-True ($currentHeroWinsOutput.Contains("hero_current_wins_conflict")) "Expected current-hero-wins conflicts to be reported as warnings."
+
+  $taxonomyRoot = Join-Path $tempRoot "taxonomy-only-repo"
+  $taxonomyScriptRoot = Join-Path $taxonomyRoot "scripts"
+  $taxonomyEssayRoot = Join-Path $taxonomyRoot "content/essays"
+  New-Item -Path $taxonomyScriptRoot -ItemType Directory -Force | Out-Null
+  New-Item -Path $taxonomyEssayRoot -ItemType Directory -Force | Out-Null
+  Copy-Item (Join-Path $repoRoot "scripts/audit_legacy_essays.ps1") $taxonomyScriptRoot
+  Copy-Item (Join-Path $repoRoot "scripts/check_essay_guardrails.ps1") $taxonomyScriptRoot
+  Copy-Item (Join-Path $repoRoot "scripts/check_legacy_import_preflight.ps1") $taxonomyScriptRoot
+
+  $taxonomyEssayPath = Join-Path $taxonomyEssayRoot "legacy-taxonomy-only.md"
+  @'
+---
+title: "Legacy Taxonomy Only"
+date: 2025-07-14
+draft: false
+slug: "legacy-taxonomy-only"
+section_label: "Essay"
+subtitle: ""
+description: "A legacy essay fixture with old body residue."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+The warning came in â€œlate.â€
+
+![](https://cdn-images-1.medium.com/max/800/placeholder)
+'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
+
+  & git -C $taxonomyRoot init | Out-Null
+  & git -C $taxonomyRoot config user.email "codex@example.com" | Out-Null
+  & git -C $taxonomyRoot config user.name "Codex Test" | Out-Null
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "baseline" | Out-Null
+  $taxonomyBase = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  @'
+---
+title: "Legacy Taxonomy Only"
+date: 2025-07-14
+draft: false
+slug: "legacy-taxonomy-only"
+section_label: "Essay"
+subtitle: ""
+description: "A legacy essay fixture with old body residue."
+version: "1.0"
+edition: "First web edition"
+featured: false
+collections:
+  - geopolitics-trade-global-power
+---
+
+The warning came in â€œlate.â€
+
+![](https://cdn-images-1.medium.com/max/800/placeholder)
+'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
+
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add collection metadata" | Out-Null
+  $taxonomyHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  $taxonomyGuardrailScript = Join-Path $taxonomyScriptRoot "check_essay_guardrails.ps1"
+  $taxonomyOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $taxonomyBase -HeadRef $taxonomyHead -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $taxonomyOnlyExit = $LASTEXITCODE
+  Assert-True ($taxonomyOnlyExit -eq 0) "Expected taxonomy-only collection metadata diffs to skip legacy cleanup and philosophy audit gates."
+  Assert-True ($taxonomyOnlyOutput.Contains("taxonomy-only front matter change")) "Expected taxonomy-only guardrail output to report the explicit skip."
+  Assert-True (-not $taxonomyOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected taxonomy-only guardrail output not to require philosophy audit evidence."
+  Assert-True (-not $taxonomyOnlyOutput.Contains("Legacy import preflight summary")) "Expected taxonomy-only guardrail output not to scan legacy body residue."
 }
 finally {
   if (Test-Path $tempRoot) {
