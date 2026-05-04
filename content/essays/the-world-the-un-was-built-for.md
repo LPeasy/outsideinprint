@@ -13,6 +13,8 @@ edition: "First web edition"
 pdf: "/pdfs/the-world-the-un-was-built-for.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-world-the-un-was-built-for-335093881846"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 In the years after World War II, the victors attempted something new.

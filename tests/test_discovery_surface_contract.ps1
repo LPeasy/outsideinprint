@@ -60,6 +60,7 @@ $requiredImageFrontMatterFiles = @(
   'content/authors/robert-v-ussley/index.md',
   'content/collections/_index.md',
   'content/collections/floods-water-built-environment.md',
+  'content/collections/geopolitics-trade-global-power.md',
   'content/collections/lit-review.md',
   'content/collections/modern-bios.md',
   'content/collections/moral-religious-philosophical-essays.md',

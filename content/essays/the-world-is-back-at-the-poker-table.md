@@ -13,7 +13,8 @@ featured_image: "/images/essays/the-world-is-back-at-the-poker-table/chips-in.pn
 featured_image_alt: "World leaders sit around a smoky poker table covered with a map and stacks of chips."
 featured_image_caption: "Poker table imagery supplied by the author."
 
-collections: []
+collections:
+  - geopolitics-trade-global-power
 topics:
   - geopolitics
   - economics

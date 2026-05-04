@@ -13,7 +13,9 @@ version: "1.0"
 edition: "First web edition"
 featured: false
 
-collections: ["risk-uncertainty"]
+collections:
+  - risk-uncertainty
+  - geopolitics-trade-global-power
 topics:
   - geopolitics
   - energy security

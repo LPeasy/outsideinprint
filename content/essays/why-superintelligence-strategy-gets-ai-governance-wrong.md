@@ -16,6 +16,7 @@ featured: false
 
 collections:
   - technology-ai-machine-future
+  - geopolitics-trade-global-power
 medium_source_url: "https://medium.com/@lawtonperret/why-superintelligence-strategy-gets-ai-governance-wrong-c1d4520f6037"
 ---
 

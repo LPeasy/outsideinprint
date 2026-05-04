@@ -14,6 +14,8 @@ edition: "First web edition"
 pdf: "/pdfs/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy-238c2fe84b5d"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 If you’re a non-member and you’d like to read the full essay, click here.Introduction

@@ -14,6 +14,8 @@ edition: "First web edition"
 pdf: "/pdfs/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened-a3ed00113ff0"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 ### Rising tensions between Iran and the U.S.

@@ -14,6 +14,8 @@ edition: "First web edition"
 pdf: "/pdfs/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk-5f4dbd688765"
+collections:
+  - geopolitics-trade-global-power
 ---
 
 Buried deep beneath the Gulf Coast lies one of America’s most powerful weapons — not a missile or a tank, but oil.

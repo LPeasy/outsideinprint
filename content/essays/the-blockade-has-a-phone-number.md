@@ -15,6 +15,7 @@ revision_history:
 featured: false
 collections:
   - "risk-uncertainty"
+  - geopolitics-trade-global-power
 topics:
   - geopolitics
   - energy security

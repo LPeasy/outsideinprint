@@ -20,6 +20,7 @@ featured: false
 
 collections:
   - technology-ai-machine-future
+  - geopolitics-trade-global-power
 medium_source_url: "https://medium.com/@lawtonperret/the-death-of-moores-law-12cb19a75cd8"
 ---
 

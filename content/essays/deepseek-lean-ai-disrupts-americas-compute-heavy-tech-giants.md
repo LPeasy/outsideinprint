@@ -19,6 +19,7 @@ featured: false
 
 collections:
   - technology-ai-machine-future
+  - geopolitics-trade-global-power
 medium_source_url: "https://medium.com/@lawtonperret/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants-33a04d49dfdd"
 ---
 
