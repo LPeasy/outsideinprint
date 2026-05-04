@@ -413,6 +413,135 @@ function Get-DiffEssayPaths {
   return $paths.ToArray()
 }
 
+function Normalize-GuardrailText {
+  param([string]$Text)
+
+  if ($null -eq $Text) {
+    return ''
+  }
+
+  return (($Text -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd()
+}
+
+function Remove-TaxonomyFrontMatterFields {
+  param([string]$Text)
+
+  if ($null -eq $Text) {
+    return ''
+  }
+
+  $normalized = ($Text -replace "`r`n", "`n") -replace "`r", "`n"
+  $frontMatterMatch = [regex]::Match(
+    $normalized,
+    '\A---\s*\n(?<front>.*?)\n---\s*(?<after>\n|$)',
+    [System.Text.RegularExpressions.RegexOptions]::Singleline
+  )
+
+  if (-not $frontMatterMatch.Success) {
+    return $normalized
+  }
+
+  $allowedKeys = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  foreach ($key in @(
+    'collections',
+    'collection_weight',
+    'series',
+    'tags',
+    'topics'
+  )) {
+    [void]$allowedKeys.Add($key)
+  }
+
+  $frontMatter = [string]$frontMatterMatch.Groups['front'].Value
+  $lines = @([regex]::Split($frontMatter, "`n"))
+  $keptLines = New-Object System.Collections.Generic.List[string]
+  $skipAllowedBlock = $false
+
+  foreach ($line in $lines) {
+    if ($line -match '^([A-Za-z0-9_-]+)\s*:') {
+      $key = [string]$Matches[1]
+      if ($allowedKeys.Contains($key)) {
+        $skipAllowedBlock = $true
+        continue
+      }
+
+      $skipAllowedBlock = $false
+      $keptLines.Add($line)
+      continue
+    }
+
+    if ($skipAllowedBlock) {
+      if ([string]::IsNullOrWhiteSpace($line)) {
+        continue
+      }
+
+      if ($line -match '^\s+') {
+        continue
+      }
+
+      $skipAllowedBlock = $false
+    }
+
+    $keptLines.Add($line)
+  }
+
+  $frontStart = $frontMatterMatch.Index
+  $frontEnd = $frontMatterMatch.Index + $frontMatterMatch.Length
+  $afterText = $normalized.Substring($frontEnd)
+  if ($frontMatterMatch.Groups['after'].Value -eq "`n") {
+    $afterText = "`n" + $afterText
+  }
+
+  return ('---' + "`n" + (($keptLines.ToArray()) -join "`n") + "`n" + '---' + $afterText)
+}
+
+function Get-GitBlobText {
+  param(
+    [string]$RepoRoot,
+    [string]$Ref,
+    [string]$RelativePath
+  )
+
+  if ([string]::IsNullOrWhiteSpace($Ref) -or ($Ref -match '^0+$')) {
+    return $null
+  }
+
+  $blobLines = @(& git -C $RepoRoot show "$Ref`:$RelativePath" 2>$null)
+  if ($LASTEXITCODE -ne 0) {
+    return $null
+  }
+
+  return (($blobLines -join "`n") + "`n")
+}
+
+function Test-IsTaxonomyOnlyDiff {
+  param(
+    [string]$RepoRoot,
+    [string]$PathValue,
+    [string]$FromRef,
+    [string]$ToRef
+  )
+
+  if ([string]::IsNullOrWhiteSpace($FromRef) -or ($FromRef -match '^0+$')) {
+    return $false
+  }
+
+  if ([string]::IsNullOrWhiteSpace($ToRef)) {
+    return $false
+  }
+
+  $relativePath = Get-RepoRelativePath -RepoRoot $RepoRoot -PathValue $PathValue
+  $beforeText = Get-GitBlobText -RepoRoot $RepoRoot -Ref $FromRef -RelativePath $relativePath
+  $afterText = Get-GitBlobText -RepoRoot $RepoRoot -Ref $ToRef -RelativePath $relativePath
+  if ($null -eq $beforeText -or $null -eq $afterText) {
+    return $false
+  }
+
+  $beforeComparable = Normalize-GuardrailText -Text (Remove-TaxonomyFrontMatterFields -Text $beforeText)
+  $afterComparable = Normalize-GuardrailText -Text (Remove-TaxonomyFrontMatterFields -Text $afterText)
+  return ($beforeComparable -eq $afterComparable)
+}
+
 function Resolve-TargetEssayPaths {
   param(
     [string]$RepoRoot,
@@ -587,6 +716,34 @@ $targetPaths = Resolve-TargetEssayPaths `
   -ScanAll:$AllEssays
 
 $targetPaths = @(Expand-EssayPaths -EssayPaths $targetPaths)
+
+$taxonomyOnlyPaths = New-Object System.Collections.Generic.List[string]
+if (
+  (-not $AllEssays) -and
+  (-not ($Paths -and $Paths.Count -gt 0)) -and
+  (-not [string]::IsNullOrWhiteSpace($BaseRef)) -and
+  ($BaseRef -notmatch '^0+$') -and
+  (-not [string]::IsNullOrWhiteSpace($HeadRef))
+) {
+  $filteredTargets = New-Object System.Collections.Generic.List[string]
+  foreach ($targetPath in $targetPaths) {
+    if (Test-IsTaxonomyOnlyDiff -RepoRoot $Root -PathValue $targetPath -FromRef $BaseRef -ToRef $HeadRef) {
+      $taxonomyOnlyPaths.Add((Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath))
+      continue
+    }
+
+    $filteredTargets.Add($targetPath)
+  }
+
+  $targetPaths = $filteredTargets.ToArray()
+}
+
+if ($taxonomyOnlyPaths.Count -gt 0) {
+  Write-Host ("Essay guardrails: skipped {0} taxonomy-only front matter change(s)." -f $taxonomyOnlyPaths.Count) -ForegroundColor Yellow
+  foreach ($taxonomyPath in $taxonomyOnlyPaths) {
+    Write-Host "  - $taxonomyPath" -ForegroundColor Yellow
+  }
+}
 
 if ($targetPaths.Count -eq 0) {
   Write-Host 'Essay guardrails: no target files to check.' -ForegroundColor Yellow
