@@ -490,6 +490,7 @@ $requiredEssayHeroPages = @(
   'public/essays/the-model-that-could-not-leave/index.html',
   'public/essays/smokestack-spreadsheets/index.html',
   'public/essays/the-bet-slip-in-the-briefing-room/index.html',
+  'public/essays/can-you-pass-the-pepper-please/index.html',
   'public/essays/the-strait-that-holds-the-price/index.html',
   'public/essays/the-blockade-has-a-phone-number/index.html',
   'public/essays/the-warning-label-in-the-weeds/index.html',
@@ -550,6 +551,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = "The bet slip looks harmless until it sits beside tomorrow's official decision."
+  },
+  @{
+    PublicPath = 'public/essays/can-you-pass-the-pepper-please/index.html'
+    SourcePath = 'content/essays/can-you-pass-the-pepper-please.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The room clears. The report remains.'
   },
   @{
     PublicPath = 'public/essays/the-strait-that-holds-the-price/index.html'
@@ -759,6 +767,16 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/essays/the-bet-slip-in-the-briefing-room/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/can-you-pass-the-pepper-please/index.html' = @{
+    Title = 'Can You Pass the Pepper, Please?'
+    Description = 'Internal ICE force reports show how civil detention can turn requests for property, water, food, and medical care into compliance events.'
+    Canonical = 'https://outsideinprint.org/essays/can-you-pass-the-pepper-please/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/can-you-pass-the-pepper-please/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-strait-that-holds-the-price/index.html' = @{
@@ -1063,6 +1081,7 @@ $requiredUxPages = @(
   'public/essays/synthetic-reasoning/index.html',
   'public/essays/in-the-image-of-god/index.html',
   'public/essays/the-hate-ledger/index.html',
+  'public/essays/can-you-pass-the-pepper-please/index.html',
   'public/essays/the-ledger-vol-1/index.html',
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
@@ -2172,7 +2191,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '10 public collections.*99 published pieces'
+    Pattern = '10 public collections.*101 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2203,7 +2222,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 10 public collections linking 77 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 10 public collections linking 101 published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
@@ -2558,6 +2577,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-model-that-could-not-leave/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the Manus essay' },
   @{ Path = 'public/essays/smokestack-spreadsheets/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Smokestack Spreadsheets' },
   @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
+  @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
