@@ -1,778 +1,885 @@
 {
-    "campaign": "oip-daily-back-archive-revision",
-    "started_on": "2026-04-26",
-    "selection_policy": "oldest_unprocessed_published_essays_by_live_archive_order_reversed",
-    "batch_size": 5,
-    "already_completed_seed": {
-        "commit": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-        "slugs": [
-            "the-blockade-has-a-phone-number",
-            "the-fed-chair-is-not-a-button",
-            "the-gold-card-and-the-price-of-belonging",
-            "the-ai-data-center-wants-its-own-power-plant",
-            "the-sewer-under-the-sidewalk"
-        ]
-    },
-    "completed": {
-        "the-blockade-has-a-phone-number": {
-            "status": "deployed",
-            "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-            "seeded": true
-        },
-        "the-fed-chair-is-not-a-button": {
-            "status": "deployed",
-            "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-            "seeded": true
-        },
-        "the-gold-card-and-the-price-of-belonging": {
-            "status": "deployed",
-            "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-            "seeded": true
-        },
-        "the-ai-data-center-wants-its-own-power-plant": {
-            "status": "deployed",
-            "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-            "seeded": true
-        },
-        "the-sewer-under-the-sidewalk": {
-            "status": "deployed",
-            "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-            "seeded": true
-        },
-        "the-structure-of-modern-american-society": {
-            "status": "deployed",
-            "batch_id": "2026-04-26",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-26",
-            "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-            "deployed_on": "2026-04-26"
-        },
-        "rational-ignorance-in-the-u-s-presidential-electorate": {
-            "status": "deployed",
-            "batch_id": "2026-04-26",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-26",
-            "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-            "deployed_on": "2026-04-26"
-        },
-        "presidential-elections": {
-            "status": "deployed",
-            "batch_id": "2026-04-26",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-26",
-            "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-            "deployed_on": "2026-04-26"
-        },
-        "federalism-in-modern-american-society": {
-            "status": "deployed",
-            "batch_id": "2026-04-26",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-26",
-            "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-            "deployed_on": "2026-04-26"
-        },
-        "american-household-debt": {
-            "status": "deployed",
-            "batch_id": "2026-04-26",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-26",
-            "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-            "deployed_on": "2026-04-26"
-        },
-        "labor-force-participation-trends-in-modern-american-society": {
-            "status": "deployed",
-            "batch_id": "2026-04-27",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-27",
-            "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
-            "deployed_on": "2026-04-27"
-        },
-        "cpi-report-economic-analysis": {
-            "status": "deployed",
-            "batch_id": "2026-04-27",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-27",
-            "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
-            "deployed_on": "2026-04-27"
-        },
-        "natural-asset-companies": {
-            "status": "deployed",
-            "batch_id": "2026-04-27",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-27",
-            "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
-            "deployed_on": "2026-04-27"
-        },
-        "household-and-individual-wealth-in-america": {
-            "status": "deployed",
-            "batch_id": "2026-04-27",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-27",
-            "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
-            "deployed_on": "2026-04-27"
-        },
-        "etfs-and-market-concentration": {
-            "status": "deployed",
-            "batch_id": "2026-04-27",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-27",
-            "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
-            "deployed_on": "2026-04-27"
-        },
-        "the-national-flood-insurance-program": {
-            "status": "deployed",
-            "batch_id": "2026-04-28",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-28",
-            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
-            "deployed_on": "2026-04-28"
-        },
-        "rethinking-coastal-retreat": {
-            "status": "deployed",
-            "batch_id": "2026-04-28",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-28",
-            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
-            "deployed_on": "2026-04-28"
-        },
-        "literacy-in-the-united-states-and-the-world": {
-            "status": "deployed",
-            "batch_id": "2026-04-28",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-28",
-            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
-            "deployed_on": "2026-04-28"
-        },
-        "generation-inflation": {
-            "status": "deployed",
-            "batch_id": "2026-04-28",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-28",
-            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
-            "deployed_on": "2026-04-28"
-        },
-        "how-american-farm-labor-is-set-to-evolve": {
-            "status": "deployed",
-            "batch_id": "2026-04-28",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-28",
-            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
-            "deployed_on": "2026-04-28"
-        },
-        "why-oberfell-will-not-be-overturned": {
-            "status": "deployed",
-            "batch_id": "2026-04-30",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-30",
-            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
-            "deployed_on": "2026-04-30"
-        },
-        "a-really-boring-topic": {
-            "status": "deployed",
-            "batch_id": "2026-04-30",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-30",
-            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
-            "deployed_on": "2026-04-30"
-        },
-        "the-death-of-moores-law": {
-            "status": "deployed",
-            "batch_id": "2026-04-30",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-30",
-            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
-            "deployed_on": "2026-04-30"
-        },
-        "the-cracked-pot": {
-            "status": "deployed",
-            "batch_id": "2026-04-30",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-30",
-            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
-            "deployed_on": "2026-04-30"
-        },
-        "declaring-equality": {
-            "status": "deployed",
-            "batch_id": "2026-04-30",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-04-30",
-            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
-            "deployed_on": "2026-04-30"
-        },
-        "tiktok-the-trojan-horse-of-global-influence": {
-            "status": "deployed",
-            "batch_id": "2026-05-01",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-01",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay weighs platform benefits against data, algorithmic, institutional, and geopolitical risks without partisan shorthand."
-            },
-            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
-            "deployed_on": "2026-05-01"
-        },
-        "beyond-moores-law": {
-            "status": "deployed",
-            "batch_id": "2026-05-01",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-01",
-            "editorial_pilosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay distinguishes mechanisms, production constraints, policy incentives, resource limits, and uncertainty across computing, renewables, and batteries."
-            },
-            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
-            "deployed_on": "2026-05-01"
-        },
-        "the-political-economy-of-airports": {
-            "status": "deployed",
-            "batch_id": "2026-05-01",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-01",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay traces airport pricing through public-private incentives, captive-market behavior, logistics, equity costs, and governance tradeoffs."
-            },
-            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
-            "deployed_on": "2026-05-01"
-        },
-        "synthetic-reasoning": {
-            "status": "deployed",
-            "batch_id": "2026-05-01",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-01",
-            "editorial_pilosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay names evidence, mechanisms, incentive failures, oversight limits, downstream risks, and uncertainty around self-evolving AI systems."
-            },
-            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
-            "deployed_on": "2026-05-01"
-        },
-        "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants": {
-            "status": "deployed",
-            "batch_id": "2026-05-01",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-01",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay now separates STAR from DeepSeek-R1, tests cost and infrastructure incentives, and preserves uncertainty around competitive and geopolitical effects."
-            },
-            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
-            "deployed_on": "2026-05-01"
-        },
-        "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis": {
-            "status": "deployed",
-            "batch_id": "2026-05-02",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-02",
-            "editorial_pilosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay tests Meta AI claims through evidence, institutional control, safety incentives, open-source tradeoffs, downstream misuse, and uncertainty about alignment capacity."
-            },
-            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
-            "deployed_on": "2026-05-02"
-        },
-        "altmans-law": {
-            "status": "deployed",
-            "batch_id": "2026-05-02",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-02",
-            "editorial_pilosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay separates scaling evidence, cost incentives, ownership tradeoffs, labor consequences, and uncertainty around extrapolating AI investment trends."
-            },
-            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
-            "deployed_on": "2026-05-02"
-        },
-        "you-cant-outrun-the-calculator": {
-            "status": "deployed",
-            "batch_id": "2026-05-02",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-02",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay weighs AI coding benchmarks against labor incentives, governance tradeoffs, downstream disruption, and uncertainty about superhuman coding forecasts."
-            },
-            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
-            "deployed_on": "2026-05-02"
-        },
-        "its-hard-to-condemn-what-doge-is-doing": {
-            "status": "deployed",
-            "batch_id": "2026-05-02",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-02",
-            "editorial_pilosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay now frames DOGE through institutional failure, congressional incentives, collateral damage, and uncertainty without relying on unsupported personal-stock allegations."
-            },
-            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
-            "deployed_on": "2026-05-02"
-        },
-        "are-we-alone": {
-            "status": "deployed",
-            "batch_id": "2026-05-02",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-02",
-            "editorial_pilosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The essay distinguishes evidence from speculation, tests belief incentives, names cultural tradeoffs, and preserves uncertainty around extraterrestrial-life claims."
-            },
-            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
-            "deployed_on": "2026-05-02"
-        },
-        "deference-lost": {
-            "status": "deployed",
-            "batch_id": "2026-05-03",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-03",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay ties agency responsiveness to statutory text, judicial incentives, institutional authority, tradeoffs, downstream delay, and uncertainty about future court behavior."
-            },
-            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
-            "deployed_on": "2026-05-03"
-        },
-        "the-undead-state": {
-            "status": "deployed",
-            "batch_id": "2026-05-03",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-03",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay frames bureaucracy through institutional incentives, public-service tradeoffs, implementation consequences, and uncertainty about DOGE outcomes."
-            },
-            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
-            "deployed_on": "2026-05-03"
-        },
-        "the-economics-of-the-mongol-empire": {
-            "status": "deployed",
-            "batch_id": "2026-05-03",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-03",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay connects trade security, standardization, incentives, disease risk, institutional power, and uncertainty about modern analogies without partisan framing."
-            },
-            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
-            "deployed_on": "2026-05-03"
-        },
-        "is-doge-legal": {
-            "status": "deployed",
-            "batch_id": "2026-05-03",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-03",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay separates evidence from legal inference, identifies separation-of-powers mechanisms, names institutional incentives, and keeps unsettled litigation uncertain."
-            },
-            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
-            "deployed_on": "2026-05-03"
-        },
-        "u-s-shifts-ukraine-policy": {
-            "status": "deployed",
-            "batch_id": "2026-05-03",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-03",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay grounds claims in the Defense transcript, tracks alliance incentives and tradeoffs, names second-order consequences, and leaves uncertainty around European response."
-            },
-            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
-            "deployed_on": "2026-05-03"
-        },
-        "u-s-russia-peace-talks": {
-            "status": "deployed",
-            "batch_id": "2026-05-04",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-04",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay grounds the Riyadh talks in sourced diplomatic remarks, alliance incentives, Ukraine security tradeoffs, downstream NATO consequences, and uncertainty about Russia and China."
-            },
-            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
-            "deployed_on": "2026-05-04"
-        },
-        "tariffs-protectionism-and-wishful-thinking": {
-            "status": "deployed",
-            "batch_id": "2026-05-04",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-04",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay separates historical analogy from present policy, tests tariff incentives, names consumer and supply-chain tradeoffs, and keeps claims about outcomes bounded."
-            },
-            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
-            "deployed_on": "2026-05-04"
-        },
-        "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support": {
-            "status": "deployed",
-            "batch_id": "2026-05-04",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-04",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay tests GOP rhetoric against reported statements, primary-election incentives, Ukraine aid tradeoffs, and downstream credibility consequences without treating party loyalty as proof."
-            },
-            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
-            "deployed_on": "2026-05-04"
-        },
-        "6-reasons-redwall-is-a-timeless-classic": {
-            "status": "deployed",
-            "batch_id": "2026-05-04",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-04",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised literary essay ties claims to the book record, explains its logic, and frames community, power, and moral tradeoffs without unsupported cultural certainty."
-            },
-            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
-            "deployed_on": "2026-05-04"
-        },
-        "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction": {
-            "status": "deployed",
-            "batch_id": "2026-05-04",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
-            "previous_version": "1.0",
-            "new_version": "1.1",
-            "updated_on": "2026-05-04",
-            "editorial_philosophy": {
-                "status": "PASS",
-                "evidence": "PASS",
-                "logic": "PASS",
-                "incentives": "PASS",
-                "tradeoffs": "PASS",
-                "consequences": "PASS",
-                "uncertainty": "PASS",
-                "institutional_behavior": "PASS",
-                "note": "The revised essay tests the minerals proposal through source-backed reporting, bargaining incentives, sovereignty tradeoffs, security consequences, uncertainty over terms, and institutional risk allocation."
-            },
-            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
-            "deployed_on": "2026-05-04"
-        }
-    },
-    "blocked": {},
-    "runs": [
-        {
-            "batch_id": "2026-04-26",
-            "selected_slugs": [
-                "the-structure-of-modern-american-society",
-                "rational-ignorance-in-the-u-s-presidential-electorate",
-                "presidential-elections",
-                "federalism-in-modern-american-society",
-                "american-household-debt"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
-            "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
-            "deployed_on": "2026-04-26"
-        },
-        {
-            "batch_id": "2026-04-27",
-            "selected_slugs": [
-                "labor-force-participation-trends-in-modern-american-society",
-                "cpi-report-economic-analysis",
-                "natural-asset-companies",
-                "household-and-individual-wealth-in-america",
-                "etfs-and-market-concentration"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
-            "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
-            "deployed_on": "2026-04-27"
-        },
-        {
-            "batch_id": "2026-04-28",
-            "selected_slugs": [
-                "the-national-flood-insurance-program",
-                "rethinking-coastal-retreat",
-                "literacy-in-the-united-states-and-the-world",
-                "generation-inflation",
-                "how-american-farm-labor-is-set-to-evolve"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
-            "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
-            "deployed_on": "2026-04-28"
-        },
-        {
-            "batch_id": "2026-04-30",
-            "selected_slugs": [
-                "why-oberfell-will-not-be-overturned",
-                "a-really-boring-topic",
-                "the-death-of-moores-law",
-                "the-cracked-pot",
-                "declaring-equality"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
-            "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
-            "deployed_on": "2026-04-30"
-        },
-        {
-            "batch_id": "2026-05-01",
-            "selected_slugs": [
-                "tiktok-the-trojan-horse-of-global-influence",
-                "beyond-moores-law",
-                "the-political-economy-of-airports",
-                "synthetic-reasoning",
-                "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
-            "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
-            "deployed_on": "2026-05-01"
-        },
-        {
-            "batch_id": "2026-05-02",
-            "selected_slugs": [
-                "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis",
-                "altmans-law",
-                "you-cant-outrun-the-calculator",
-                "its-hard-to-condemn-what-doge-is-doing",
-                "are-we-alone"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
-            "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
-            "deployed_on": "2026-05-02"
-        },
-        {
-            "batch_id": "2026-05-03",
-            "selected_slugs": [
-                "deference-lost",
-                "the-undead-state",
-                "the-economics-of-the-mongol-empire",
-                "is-doge-legal",
-                "u-s-shifts-ukraine-policy"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
-            "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
-            "deployed_on": "2026-05-03"
-        },
-        {
-            "batch_id": "2026-05-04",
-            "selected_slugs": [
-                "u-s-russia-peace-talks",
-                "tariffs-protectionism-and-wishful-thinking",
-                "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support",
-                "6-reasons-redwall-is-a-timeless-classic",
-                "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction"
-            ],
-            "status": "deployed",
-            "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
-            "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
-            "deployed_on": "2026-05-04"
-        }
+  "campaign": "oip-daily-back-archive-revision",
+  "started_on": "2026-04-26",
+  "selection_policy": "oldest_unprocessed_published_essays_by_live_archive_order_reversed",
+  "batch_size": 5,
+  "already_completed_seed": {
+    "commit": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+    "slugs": [
+      "the-blockade-has-a-phone-number",
+      "the-fed-chair-is-not-a-button",
+      "the-gold-card-and-the-price-of-belonging",
+      "the-ai-data-center-wants-its-own-power-plant",
+      "the-sewer-under-the-sidewalk"
     ]
+  },
+  "completed": {
+    "the-blockade-has-a-phone-number": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-fed-chair-is-not-a-button": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-gold-card-and-the-price-of-belonging": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-ai-data-center-wants-its-own-power-plant": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-sewer-under-the-sidewalk": {
+      "status": "deployed",
+      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true
+    },
+    "the-structure-of-modern-american-society": {
+      "status": "deployed",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
+    },
+    "rational-ignorance-in-the-u-s-presidential-electorate": {
+      "status": "deployed",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
+    },
+    "presidential-elections": {
+      "status": "deployed",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
+    },
+    "federalism-in-modern-american-society": {
+      "status": "deployed",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
+    },
+    "american-household-debt": {
+      "status": "deployed",
+      "batch_id": "2026-04-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-26",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
+    },
+    "labor-force-participation-trends-in-modern-american-society": {
+      "status": "deployed",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27",
+      "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+      "deployed_on": "2026-04-27"
+    },
+    "cpi-report-economic-analysis": {
+      "status": "deployed",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27",
+      "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+      "deployed_on": "2026-04-27"
+    },
+    "natural-asset-companies": {
+      "status": "deployed",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27",
+      "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+      "deployed_on": "2026-04-27"
+    },
+    "household-and-individual-wealth-in-america": {
+      "status": "deployed",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27",
+      "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+      "deployed_on": "2026-04-27"
+    },
+    "etfs-and-market-concentration": {
+      "status": "deployed",
+      "batch_id": "2026-04-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-27",
+      "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+      "deployed_on": "2026-04-27"
+    },
+    "the-national-flood-insurance-program": {
+      "status": "deployed",
+      "batch_id": "2026-04-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-28",
+      "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+      "deployed_on": "2026-04-28"
+    },
+    "rethinking-coastal-retreat": {
+      "status": "deployed",
+      "batch_id": "2026-04-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-28",
+      "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+      "deployed_on": "2026-04-28"
+    },
+    "literacy-in-the-united-states-and-the-world": {
+      "status": "deployed",
+      "batch_id": "2026-04-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-28",
+      "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+      "deployed_on": "2026-04-28"
+    },
+    "generation-inflation": {
+      "status": "deployed",
+      "batch_id": "2026-04-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-28",
+      "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+      "deployed_on": "2026-04-28"
+    },
+    "how-american-farm-labor-is-set-to-evolve": {
+      "status": "deployed",
+      "batch_id": "2026-04-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-28",
+      "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+      "deployed_on": "2026-04-28"
+    },
+    "why-oberfell-will-not-be-overturned": {
+      "status": "deployed",
+      "batch_id": "2026-04-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-30",
+      "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+      "deployed_on": "2026-04-30"
+    },
+    "a-really-boring-topic": {
+      "status": "deployed",
+      "batch_id": "2026-04-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-30",
+      "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+      "deployed_on": "2026-04-30"
+    },
+    "the-death-of-moores-law": {
+      "status": "deployed",
+      "batch_id": "2026-04-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-30",
+      "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+      "deployed_on": "2026-04-30"
+    },
+    "the-cracked-pot": {
+      "status": "deployed",
+      "batch_id": "2026-04-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-30",
+      "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+      "deployed_on": "2026-04-30"
+    },
+    "declaring-equality": {
+      "status": "deployed",
+      "batch_id": "2026-04-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-04-30",
+      "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+      "deployed_on": "2026-04-30"
+    },
+    "tiktok-the-trojan-horse-of-global-influence": {
+      "status": "deployed",
+      "batch_id": "2026-05-01",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-01",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay weighs platform benefits against data, algorithmic, institutional, and geopolitical risks without partisan shorthand."
+      },
+      "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+      "deployed_on": "2026-05-01"
+    },
+    "beyond-moores-law": {
+      "status": "deployed",
+      "batch_id": "2026-05-01",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-01",
+      "editorial_pilosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay distinguishes mechanisms, production constraints, policy incentives, resource limits, and uncertainty across computing, renewables, and batteries."
+      },
+      "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+      "deployed_on": "2026-05-01"
+    },
+    "the-political-economy-of-airports": {
+      "status": "deployed",
+      "batch_id": "2026-05-01",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-01",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay traces airport pricing through public-private incentives, captive-market behavior, logistics, equity costs, and governance tradeoffs."
+      },
+      "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+      "deployed_on": "2026-05-01"
+    },
+    "synthetic-reasoning": {
+      "status": "deployed",
+      "batch_id": "2026-05-01",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-01",
+      "editorial_pilosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay names evidence, mechanisms, incentive failures, oversight limits, downstream risks, and uncertainty around self-evolving AI systems."
+      },
+      "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+      "deployed_on": "2026-05-01"
+    },
+    "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants": {
+      "status": "deployed",
+      "batch_id": "2026-05-01",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-01",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay now separates STAR from DeepSeek-R1, tests cost and infrastructure incentives, and preserves uncertainty around competitive and geopolitical effects."
+      },
+      "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+      "deployed_on": "2026-05-01"
+    },
+    "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis": {
+      "status": "deployed",
+      "batch_id": "2026-05-02",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-02",
+      "editorial_pilosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay tests Meta AI claims through evidence, institutional control, safety incentives, open-source tradeoffs, downstream misuse, and uncertainty about alignment capacity."
+      },
+      "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+      "deployed_on": "2026-05-02"
+    },
+    "altmans-law": {
+      "status": "deployed",
+      "batch_id": "2026-05-02",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-02",
+      "editorial_pilosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay separates scaling evidence, cost incentives, ownership tradeoffs, labor consequences, and uncertainty around extrapolating AI investment trends."
+      },
+      "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+      "deployed_on": "2026-05-02"
+    },
+    "you-cant-outrun-the-calculator": {
+      "status": "deployed",
+      "batch_id": "2026-05-02",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-02",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay weighs AI coding benchmarks against labor incentives, governance tradeoffs, downstream disruption, and uncertainty about superhuman coding forecasts."
+      },
+      "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+      "deployed_on": "2026-05-02"
+    },
+    "its-hard-to-condemn-what-doge-is-doing": {
+      "status": "deployed",
+      "batch_id": "2026-05-02",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-02",
+      "editorial_pilosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay now frames DOGE through institutional failure, congressional incentives, collateral damage, and uncertainty without relying on unsupported personal-stock allegations."
+      },
+      "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+      "deployed_on": "2026-05-02"
+    },
+    "are-we-alone": {
+      "status": "deployed",
+      "batch_id": "2026-05-02",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-02",
+      "editorial_pilosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The essay distinguishes evidence from speculation, tests belief incentives, names cultural tradeoffs, and preserves uncertainty around extraterrestrial-life claims."
+      },
+      "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+      "deployed_on": "2026-05-02"
+    },
+    "deference-lost": {
+      "status": "deployed",
+      "batch_id": "2026-05-03",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-03",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay ties agency responsiveness to statutory text, judicial incentives, institutional authority, tradeoffs, downstream delay, and uncertainty about future court behavior."
+      },
+      "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+      "deployed_on": "2026-05-03"
+    },
+    "the-undead-state": {
+      "status": "deployed",
+      "batch_id": "2026-05-03",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-03",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay frames bureaucracy through institutional incentives, public-service tradeoffs, implementation consequences, and uncertainty about DOGE outcomes."
+      },
+      "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+      "deployed_on": "2026-05-03"
+    },
+    "the-economics-of-the-mongol-empire": {
+      "status": "deployed",
+      "batch_id": "2026-05-03",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-03",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay connects trade security, standardization, incentives, disease risk, institutional power, and uncertainty about modern analogies without partisan framing."
+      },
+      "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+      "deployed_on": "2026-05-03"
+    },
+    "is-doge-legal": {
+      "status": "deployed",
+      "batch_id": "2026-05-03",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-03",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay separates evidence from legal inference, identifies separation-of-powers mechanisms, names institutional incentives, and keeps unsettled litigation uncertain."
+      },
+      "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+      "deployed_on": "2026-05-03"
+    },
+    "u-s-shifts-ukraine-policy": {
+      "status": "deployed",
+      "batch_id": "2026-05-03",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-03",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds claims in the Defense transcript, tracks alliance incentives and tradeoffs, names second-order consequences, and leaves uncertainty around European response."
+      },
+      "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+      "deployed_on": "2026-05-03"
+    },
+    "u-s-russia-peace-talks": {
+      "status": "deployed",
+      "batch_id": "2026-05-04",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-04",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds the Riyadh talks in sourced diplomatic remarks, alliance incentives, Ukraine security tradeoffs, downstream NATO consequences, and uncertainty about Russia and China."
+      },
+      "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+      "deployed_on": "2026-05-04"
+    },
+    "tariffs-protectionism-and-wishful-thinking": {
+      "status": "deployed",
+      "batch_id": "2026-05-04",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-04",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay separates historical analogy from present policy, tests tariff incentives, names consumer and supply-chain tradeoffs, and keeps claims about outcomes bounded."
+      },
+      "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+      "deployed_on": "2026-05-04"
+    },
+    "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support": {
+      "status": "deployed",
+      "batch_id": "2026-05-04",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-04",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests GOP rhetoric against reported statements, primary-election incentives, Ukraine aid tradeoffs, and downstream credibility consequences without treating party loyalty as proof."
+      },
+      "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+      "deployed_on": "2026-05-04"
+    },
+    "6-reasons-redwall-is-a-timeless-classic": {
+      "status": "deployed",
+      "batch_id": "2026-05-04",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-04",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised literary essay ties claims to the book record, explains its logic, and frames community, power, and moral tradeoffs without unsupported cultural certainty."
+      },
+      "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+      "deployed_on": "2026-05-04"
+    },
+    "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction": {
+      "status": "deployed",
+      "batch_id": "2026-05-04",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-04",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests the minerals proposal through source-backed reporting, bargaining incentives, sovereignty tradeoffs, security consequences, uncertainty over terms, and institutional risk allocation."
+      },
+      "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+      "deployed_on": "2026-05-04"
+    },
+    "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-05",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-05",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay ties Pew privacy findings to consent design, company incentives, regulator accountability, AI privacy tradeoffs, and uncertainty about actual behavior."
+      }
+    },
+    "building-for-centuries-not-election-cycles": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-05",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-05",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests USACE planning pace against feasibility-study rules, infrastructure incentives, fiscal and ecological tradeoffs, and institutional-memory consequences."
+      }
+    },
+    "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-05",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-05",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised literary essay grounds claims in the book text, keeps interpretation bounded, and treats institutional behavior as not central to the review rather than forcing a public-policy claim."
+      }
+    },
+    "the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-05",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-05",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds the reviewer argument in AI failure modes, Amazon hiring-tool evidence, labor-market incentives, transition tradeoffs, and uncertainty over model progress."
+      }
+    },
+    "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-05",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-05",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay separates OPM email facts from Musk/DOGE pressure, tests workforce incentives, legal-process tradeoffs, and institutional risk without treating partisan loyalty as proof."
+      }
+    }
+  },
+  "blocked": {},
+  "runs": [
+    {
+      "batch_id": "2026-04-26",
+      "selected_slugs": [
+        "the-structure-of-modern-american-society",
+        "rational-ignorance-in-the-u-s-presidential-electorate",
+        "presidential-elections",
+        "federalism-in-modern-american-society",
+        "american-household-debt"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-26.md",
+      "commit_sha": "b620ff95d079fe590755a85e2d3d3ca42823512b",
+      "deployed_on": "2026-04-26"
+    },
+    {
+      "batch_id": "2026-04-27",
+      "selected_slugs": [
+        "labor-force-participation-trends-in-modern-american-society",
+        "cpi-report-economic-analysis",
+        "natural-asset-companies",
+        "household-and-individual-wealth-in-america",
+        "etfs-and-market-concentration"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-27.md",
+      "commit_sha": "53dd7058e9c4aa16fe3ec1aa4f5d10b091cf06e5",
+      "deployed_on": "2026-04-27"
+    },
+    {
+      "batch_id": "2026-04-28",
+      "selected_slugs": [
+        "the-national-flood-insurance-program",
+        "rethinking-coastal-retreat",
+        "literacy-in-the-united-states-and-the-world",
+        "generation-inflation",
+        "how-american-farm-labor-is-set-to-evolve"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-28.md",
+      "commit_sha": "0fa7eab31dfed365510e2f26246177a6613e5e5a",
+      "deployed_on": "2026-04-28"
+    },
+    {
+      "batch_id": "2026-04-30",
+      "selected_slugs": [
+        "why-oberfell-will-not-be-overturned",
+        "a-really-boring-topic",
+        "the-death-of-moores-law",
+        "the-cracked-pot",
+        "declaring-equality"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-04-30.md",
+      "commit_sha": "ef4dd118c3b9368ee898f18920f6d88b715fbb1f",
+      "deployed_on": "2026-04-30"
+    },
+    {
+      "batch_id": "2026-05-01",
+      "selected_slugs": [
+        "tiktok-the-trojan-horse-of-global-influence",
+        "beyond-moores-law",
+        "the-political-economy-of-airports",
+        "synthetic-reasoning",
+        "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-01.md",
+      "commit_sha": "0e5cd269abf3df76486d430cd25ed7291fbe974f",
+      "deployed_on": "2026-05-01"
+    },
+    {
+      "batch_id": "2026-05-02",
+      "selected_slugs": [
+        "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis",
+        "altmans-law",
+        "you-cant-outrun-the-calculator",
+        "its-hard-to-condemn-what-doge-is-doing",
+        "are-we-alone"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-02.md",
+      "commit_sha": "36a9be1736bdd29804c40b269ff4117e0dedd0ec",
+      "deployed_on": "2026-05-02"
+    },
+    {
+      "batch_id": "2026-05-03",
+      "selected_slugs": [
+        "deference-lost",
+        "the-undead-state",
+        "the-economics-of-the-mongol-empire",
+        "is-doge-legal",
+        "u-s-shifts-ukraine-policy"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-03.md",
+      "commit_sha": "94a40a6defe5aa7024b670b2661942d5f3f9145a",
+      "deployed_on": "2026-05-03"
+    },
+    {
+      "batch_id": "2026-05-04",
+      "selected_slugs": [
+        "u-s-russia-peace-talks",
+        "tariffs-protectionism-and-wishful-thinking",
+        "how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support",
+        "6-reasons-redwall-is-a-timeless-classic",
+        "is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-04.md",
+      "commit_sha": "e39a260cc505ea14ad4feab88ef7986f80e17272",
+      "deployed_on": "2026-05-04"
+    },
+    {
+      "batch_id": "2026-05-05",
+      "selected_slugs": [
+        "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data",
+        "building-for-centuries-not-election-cycles",
+        "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life",
+        "the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now",
+        "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md"
+    }
+  ]
 }
