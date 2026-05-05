@@ -660,7 +660,7 @@
       "deployed_on": "2026-05-04"
     },
     "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-05",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
       "previous_version": "1.0",
@@ -676,10 +676,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay ties Pew privacy findings to consent design, company incentives, regulator accountability, AI privacy tradeoffs, and uncertainty about actual behavior."
-      }
+      },
+      "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
+      "deployed_on": "2026-05-05"
     },
     "building-for-centuries-not-election-cycles": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-05",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
       "previous_version": "1.0",
@@ -695,10 +697,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay tests USACE planning pace against feasibility-study rules, infrastructure incentives, fiscal and ecological tradeoffs, and institutional-memory consequences."
-      }
+      },
+      "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
+      "deployed_on": "2026-05-05"
     },
     "the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-05",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
       "previous_version": "1.0",
@@ -714,10 +718,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised literary essay grounds claims in the book text, keeps interpretation bounded, and treats institutional behavior as not central to the review rather than forcing a public-policy claim."
-      }
+      },
+      "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
+      "deployed_on": "2026-05-05"
     },
     "the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-05",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
       "previous_version": "1.0",
@@ -733,10 +739,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay grounds the reviewer argument in AI failure modes, Amazon hiring-tool evidence, labor-market incentives, transition tradeoffs, and uncertainty over model progress."
-      }
+      },
+      "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
+      "deployed_on": "2026-05-05"
     },
     "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-05",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
       "previous_version": "1.0",
@@ -752,7 +760,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay separates OPM email facts from Musk/DOGE pressure, tests workforce incentives, legal-process tradeoffs, and institutional risk without treating partisan loyalty as proof."
-      }
+      },
+      "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
+      "deployed_on": "2026-05-05"
     }
   },
   "blocked": {},
@@ -878,8 +888,10 @@
         "the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now",
         "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
+      "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
+      "deployed_on": "2026-05-05"
     }
   ]
 }
