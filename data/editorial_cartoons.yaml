@@ -1,4 +1,4 @@
-current: who-paid-the-nazis
+current: pass-the-pepper
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -136,3 +136,11 @@ cartoons:
     alt: "Editorial cartoon showing blindfolded figures examining a document-covered elephant surrounded by public records, donor letters, bank files, subpoenas, court filings, and source files, with speech bubbles naming Nazis, racists, bigots, alphabet-phobes, and the SPLC."
     width: 2048
     height: 1152
+  - slug: pass-the-pepper
+    title: "Pass the Pepper"
+    date: "2026-05-05"
+    image: "/images/editorial/pass-the-pepper.png"
+    essay: "/essays/can-you-pass-the-pepper-please/"
+    alt: "Editorial cartoon showing ICE officers in a detention dining hall treating a detainee request for pepper as a use-of-force report, with a pepper spray can on a tray and red warning labels on the report and can."
+    width: 1535
+    height: 1024
