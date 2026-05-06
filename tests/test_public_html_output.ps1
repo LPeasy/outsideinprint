@@ -559,8 +559,7 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'The room clears. The report remains.'
-  },
-  @{
+  },  @{
     PublicPath = 'public/essays/the-factory-in-the-footnote/index.html'
     SourcePath = 'content/essays/the-factory-in-the-footnote.md'
     ExpectVisibleHero = $true
