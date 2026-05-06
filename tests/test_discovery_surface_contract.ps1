@@ -28,6 +28,8 @@ $requiredFiles = @(
   'layouts/syd-and-oliver/rss.xml',
   'layouts/collections/list.html',
   'layouts/collections/single.html',
+  'layouts/collections/bobs-almanack.html',
+  'layouts/almanack/single.html',
   'layouts/library/list.html',
   'layouts/partials/archive/longform-kind.html',
   'layouts/partials/archive/lane-label.html',
@@ -59,6 +61,7 @@ $requiredImageFrontMatterFiles = @(
   'content/about/index.md',
   'content/authors/robert-v-ussley/index.md',
   'content/collections/_index.md',
+  'content/collections/bobs-almanack.md',
   'content/collections/floods-water-built-environment.md',
   'content/collections/geopolitics-trade-global-power.md',
   'content/collections/lit-review.md',
@@ -132,7 +135,10 @@ foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
   'id="home-front-page-title"',
   'data-home-front-page-region="lead"',
-  'data-home-front-page-region="secondary"'
+  'data-home-front-page-region="secondary"',
+  '$almanackIssues := where site.RegularPages "Section" "almanack"',
+  '<aside class="home-almanack" aria-labelledby="home-almanack-title">',
+  '<a href="{{ .RelPermalink }}">Read issue &rarr;</a>'
 )) {
   if ($homeFrontPageTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/partials/home_front_page.html to contain: $requiredSnippet"
@@ -280,6 +286,16 @@ foreach ($retiredSnippet in @(
   }
 }
 
+$publicCollectionEntriesPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/get-public-entries.html') -Raw
+foreach ($requiredSnippet in @(
+  '{{ $page := site.GetPage (printf "/collections/%s" .slug) }}',
+  '{{ if and $state.visible $page }}'
+)) {
+  if ($publicCollectionEntriesPartial -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/collections/get-public-entries.html to require a rendered collection page before emitting a public entry: $requiredSnippet"
+  }
+}
+
 $entryThreadsPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/entry_threads.html') -Raw
 foreach ($requiredSnippet in @(
   '"floods-water-built-environment"',
@@ -413,6 +429,10 @@ foreach ($retiredSnippet in @(
 
 $collectionsData = Get-Content -Path (Join-Path $repoRoot 'data/collections.yaml') -Raw
 foreach ($requiredSnippet in @(
+  'slug: bobs-almanack',
+  "title: Bob's Almanack",
+  'sections:',
+  '- almanack',
   'room_theme: ledger-editorial-desk',
   'room_theme: syd-and-oliver-smoky-lounge',
   'room_theme: modern-bios-records-archive',

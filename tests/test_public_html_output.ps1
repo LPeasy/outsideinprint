@@ -1062,6 +1062,8 @@ $requiredUxPages = @(
   'public/library/index.html',
   'public/gallery/index.html',
   'public/collections/index.html',
+  'public/collections/bobs-almanack/index.html',
+  'public/almanack/2026-05-02/index.html',
   'public/shop/index.html',
   'public/shop/shirt/index.html',
   'public/random/index.html',
@@ -2191,7 +2193,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '10 public collections.*101 published pieces'
+    Pattern = '11 public collections.*102 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2222,7 +2224,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: 10 public collections linking 101 published pieces\.'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: \d+ public collections linking \d+ published pieces\.'
     Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
     ShouldNotMatch = $true
   },
@@ -2254,6 +2256,42 @@ $requiredUxChecks = @(
     Path = 'public/collections/index.html'
     Pattern = 'Featured Series|Featured Topic'
     Message = 'expected featured collection cards not to retain featured-type kicker labels'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = "Bob(?:'|&#39;)s Almanack"
+    Message = 'expected the public collections index to link Bob''s Almanack after the May 2 issue and collection page are published'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '/collections/bobs-almanack/'
+    Message = 'expected the public collections index to point to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/collections/bobs-almanack/index.html'
+    Pattern = "Bob(?:'|&#39;)s Almanack"
+    Message = 'expected the Bob''s Almanack collection page to render its bespoke nameplate'
+  },
+  @{
+    Path = 'public/collections/bobs-almanack/index.html'
+    Pattern = '(?s)Latest Issue.*?May 2, 2026.*?A public cost does not disappear because someone learned to price it\..*?The Bet Slip in the Briefing Room'
+    Message = 'expected the Bob''s Almanack collection page to feature the May 2 issue and lead essay'
+  },
+  @{
+    Path = 'public/almanack/2026-05-02/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?Issue 1.*?A public cost does not disappear because someone learned to price it\.'
+    Message = 'expected the May 2 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?Read issue'
+    Message = 'expected the homepage Almanack insert to feature the May 2 issue without a collection label'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<aside\b(?=[^>]*\bhome-almanack\b)[^>]*>.*?Collection.*?</aside>'
+    Message = 'expected the homepage Almanack insert not to render a generic collection label'
     ShouldNotMatch = $true
   },
   @{
@@ -2686,6 +2724,16 @@ foreach ($check in $requiredUxChecks) {
     if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
       $uxIssues.Add("$relativePath => $($check.Message)")
     }
+  }
+}
+
+foreach ($forbiddenPath in @(
+  'public/almanack/index.html',
+  'public/almanack/2026-05-09/index.html'
+)) {
+  $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
+  if (Test-Path -LiteralPath $fullForbiddenPath -PathType Leaf) {
+    $uxIssues.Add("$forbiddenPath => expected the Almanack section index and held May 9 issue to remain unpublished")
   }
 }
 

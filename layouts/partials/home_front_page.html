@@ -10,6 +10,8 @@
 {{ $currentCartoon := false }}
 {{ $orderedCartoons := sort $cartoons "date" "desc" }}
 {{ $recentCartoons := slice }}
+{{ $almanackIssues := where site.RegularPages "Section" "almanack" }}
+{{ $latestAlmanack := false }}
 {{ range $cartoons }}
   {{ if eq .slug $currentCartoonSlug }}
     {{ $currentCartoon = . }}
@@ -19,6 +21,9 @@
   {{ if and (ne .slug $currentCartoonSlug) (lt (len $recentCartoons) 4) }}
     {{ $recentCartoons = $recentCartoons | append . }}
   {{ end }}
+{{ end }}
+{{ with first 1 (sort $almanackIssues "Date" "desc") }}
+  {{ $latestAlmanack = index . 0 }}
 {{ end }}
 <section class="home-front-page" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
@@ -80,6 +85,34 @@
               <a href="{{ "gallery/" | absURL }}">View gallery</a>
             </figcaption>
           </figure>
+        {{ end }}
+        {{ with $latestAlmanack }}
+          {{ $leadEssay := false }}
+          {{ with .Params.essays }}
+            {{ if gt (len .) 0 }}
+              {{ $leadEssay = index . 0 }}
+            {{ end }}
+          {{ end }}
+          <aside class="home-almanack" aria-labelledby="home-almanack-title">
+            <p class="list-title home-almanack__kicker">Bob's Almanack</p>
+            <h3 id="home-almanack-title">
+              <a href="{{ .RelPermalink }}">{{ .Date.Format "January 2, 2006" }}</a>
+            </h3>
+            {{ with .Params.opening_quote }}
+              <blockquote>{{ . }}</blockquote>
+            {{ end }}
+            {{ with $leadEssay }}
+              {{ $essayURL := .url | default "" }}
+              {{ $essayHref := $essayURL }}
+              {{ if and $essayURL (not (hasPrefix $essayURL "http")) }}
+                {{ $essayHref = $essayURL | relURL }}
+              {{ end }}
+              <p class="home-almanack__lead">Lead: <a href="{{ $essayHref }}">{{ .title }}</a></p>
+            {{ end }}
+            <p class="home-almanack__actions">
+              <a href="{{ .RelPermalink }}">Read issue &rarr;</a>
+            </p>
+          </aside>
         {{ end }}
         {{ if gt (len $recentCartoons) 0 }}
           <div class="editorial-cartoon-recent" data-home-cartoon-recent aria-label="Recent front-page cartoons">

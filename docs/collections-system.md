@@ -63,7 +63,7 @@ Resolution rules:
 1. If a page has `collections`, only those explicit memberships count, and their front matter order is preserved.
 2. If a page has no `collections`, fallback matching may be used.
 3. If a collection has `explicit_only: true`, fallback is never used for that collection.
-4. Public listings require `public: true` and either `count >= min_items` or `force_public: true`.
+4. Public listings require `public: true`, either `count >= min_items` or `force_public: true`, and a rendered `content/collections/<slug>.md` page.
 5. Collection item order is `collection_weight` ascending, then date descending.
 
 ## Templates touched by the system
@@ -113,6 +113,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - Each visible collection appears as a compact `collection-record` row with kind, title, description, piece count, scope metadata, and a quiet `Start here` link when present.
 - The index ignores `featured`; homepage and other existing featured surfaces may still use that field.
 - Individual collection pages render as newspaper section fronts with the actual collection title as the H1.
+- Bob's Almanack uses a bespoke collection layout and may be listed publicly only when its collection page and at least one issue are published in the same build.
 - Section fronts use a label-free ledger line, a promoted `Start Here` entry, an ordered piece list, related collections, and quiet browse links.
 - The Start Here item is promoted once and omitted from the contents list immediately below it.
 - Collection pages do not render the visible `Reading Progress` panel, browser-local resume panel, visited-row markers, or collection-progress hooks.

@@ -4,8 +4,8 @@
 {{ range $definitions }}
   {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
   {{ $state := partial "collections/get-state.html" (dict "collection" . "items" $items) }}
-  {{ if $state.visible }}
-    {{ $page := site.GetPage (printf "/collections/%s" .slug) }}
+  {{ $page := site.GetPage (printf "/collections/%s" .slug) }}
+  {{ if and $state.visible $page }}
     {{ $entries = $entries | append (dict
       "collection" .
       "items" $items

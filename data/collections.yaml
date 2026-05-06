@@ -1,4 +1,30 @@
 collections:
+  - slug: bobs-almanack
+    title: Bob's Almanack
+    kind: series
+    public: true
+    force_public: false
+    min_items: 1
+    explicit_only: false
+    featured: false
+    weight: 9
+    start_here: ""
+    description: Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, cartoons, compact notices, and worth reprinting.
+    room_theme: ledger-editorial-desk
+    metadata:
+      - label: Format
+        value: Weekly almanack
+      - label: Scope
+        value: Essays, cartoons, notices, and archive circulation
+      - label: Lane
+        value: Editorial series
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections:
+        - almanack
+
   - slug: the-ledger
     title: The Ledger
     kind: series

@@ -1,0 +1,112 @@
+{{ define "main" }}
+  {{ $slug := .Params.slug | default .File.BaseFileName }}
+  {{ $definition := partial "collections/lookup-definition.html" $slug }}
+
+  {{ if not $definition }}
+    <div class="page-shell page-shell--reading">
+      <h2 class="list-title">Bob's Almanack</h2>
+      <div class="item">
+        <div class="t">Collection definition not found.</div>
+        <div class="m">Add <code>{{ $slug }}</code> to <code>data/collections.yaml</code>.</div>
+      </div>
+    </div>
+  {{ else }}
+    {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition) }}
+    {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
+    {{ $latest := false }}
+    {{ with first 1 $items }}
+      {{ $latest = index . 0 }}
+    {{ end }}
+    {{ $pastIssues := after 1 $items }}
+
+    <article class="almanack-collection page-shell page-shell--wide" aria-labelledby="almanack-collection-title">
+      <header class="almanack-collection__masthead">
+        <p class="almanack-collection__eyebrow">Outside In Print weekly sheet</p>
+        <h1 id="almanack-collection-title">Bob's Almanack</h1>
+        <p>{{ $definition.description }}</p>
+        <ul class="almanack-collection__ledger" aria-label="Bob's Almanack details">
+          <li>{{ $state.count }} {{ cond (eq $state.count 1) "issue" "issues" }}</li>
+          {{ with $latest }}
+            <li>Latest: <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time></li>
+          {{ end }}
+        </ul>
+      </header>
+
+      {{ if $latest }}
+        {{ $latestLead := dict }}
+        {{ with $latest.Params.essays }}
+          {{ if gt (len .) 0 }}
+            {{ $latestLead = index . 0 }}
+          {{ end }}
+        {{ end }}
+        {{ $leadURL := $latestLead.url | default "" }}
+        {{ $leadHref := $leadURL }}
+        {{ if and $leadURL (not (hasPrefix $leadURL "http")) }}
+          {{ $leadHref = $leadURL | relURL }}
+        {{ end }}
+
+        <section class="almanack-collection__latest" aria-labelledby="almanack-collection-latest-title">
+          <div class="almanack-collection__latest-date">
+            <p>Latest Issue</p>
+          </div>
+          <div class="almanack-collection__latest-body">
+            <h2 id="almanack-collection-latest-title">
+              <a href="{{ $latest.RelPermalink }}">{{ $latest.Date.Format "January 2, 2006" }}</a>
+            </h2>
+            {{ with $latest.Params.opening_quote }}
+              <blockquote>{{ . }}</blockquote>
+            {{ end }}
+            {{ with $latestLead.title }}
+              <p class="almanack-collection__lead">
+                Lead: {{ if $leadHref }}<a href="{{ $leadHref }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}
+              </p>
+            {{ end }}
+            {{ with $latest.Params.opening_note }}<p>{{ . }}</p>{{ end }}
+            <a class="almanack-read-link" href="{{ $latest.RelPermalink }}">Read issue</a>
+          </div>
+        </section>
+
+        {{ if gt (len $pastIssues) 0 }}
+          <section class="almanack-collection__archive" aria-labelledby="almanack-collection-archive-title">
+            <div class="almanack-collection__section-heading">
+              <h2 id="almanack-collection-archive-title">Past Issues</h2>
+              <p>New essays, cartoons, notices, and one line worth carrying forward.</p>
+            </div>
+            <ol class="almanack-collection__issues">
+              {{ range $pastIssues }}
+                {{ $issueLead := dict }}
+                {{ with .Params.essays }}
+                  {{ if gt (len .) 0 }}
+                    {{ $issueLead = index . 0 }}
+                  {{ end }}
+                {{ end }}
+                {{ $issueLeadURL := $issueLead.url | default "" }}
+                {{ $issueLeadHref := $issueLeadURL }}
+                {{ if and $issueLeadURL (not (hasPrefix $issueLeadURL "http")) }}
+                  {{ $issueLeadHref = $issueLeadURL | relURL }}
+                {{ end }}
+                <li class="almanack-collection__issue">
+                  <article>
+                    <p class="almanack-collection__issue-label">Past Issue</p>
+                    <h3><a href="{{ .RelPermalink }}">{{ .Date.Format "January 2, 2006" }}</a></h3>
+                    {{ with .Params.opening_quote }}<p class="almanack-collection__issue-quote">{{ . }}</p>{{ end }}
+                    {{ with $issueLead.title }}
+                      <p class="almanack-collection__issue-lead">
+                        Lead: {{ if $issueLeadHref }}<a href="{{ $issueLeadHref }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}
+                      </p>
+                    {{ end }}
+                    <a class="almanack-read-link" href="{{ .RelPermalink }}">Read issue</a>
+                  </article>
+                </li>
+              {{ end }}
+            </ol>
+          </section>
+        {{ end }}
+      {{ else }}
+        <section class="almanack-collection__empty" aria-label="No published issues">
+          <p>No published issues yet.</p>
+        </section>
+      {{ end }}
+    </article>
+  {{ end }}
+{{ end }}

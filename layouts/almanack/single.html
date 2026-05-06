@@ -1,0 +1,210 @@
+{{ define "main" }}
+  {{ $issueDate := .Date }}
+  {{ $essays := .Params.essays | default (slice) }}
+  {{ $lead := dict }}
+  {{ if gt (len $essays) 0 }}
+    {{ $lead = index $essays 0 }}
+  {{ end }}
+  {{ $secondary := after 1 $essays }}
+  {{ $virtue := .Params.virtue | default (dict) }}
+  {{ $worth := .Params.worth_reprinting | default (dict) }}
+  {{ $margin := .Params.margin | default (dict) }}
+  {{ $oneNumber := index $margin "one_number" | default (dict) }}
+  {{ $oneDocument := index $margin "one_document" | default (dict) }}
+  {{ $results := index $margin "results" | default (slice) }}
+  {{ $records := index $margin "records" | default (slice) }}
+  {{ $finalBows := index $margin "final_bows" | default (slice) }}
+  {{ $obituaries := index $margin "obituaries" | default (slice) }}
+
+  <article class="almanack-issue page-shell page-shell--wide" aria-labelledby="almanack-title">
+    <header class="almanack-masthead">
+      <p class="almanack-kicker">Outside In Print weekly sheet</p>
+      <h1 id="almanack-title">Bob's Almanack</h1>
+      <div class="almanack-masthead__meta">
+        <time datetime="{{ $issueDate.Format "2006-01-02" }}">{{ $issueDate.Format "January 2, 2006" }}</time>
+        {{ with .Params.issue_number }}<span>Issue {{ . }}</span>{{ end }}
+      </div>
+      {{ with .Params.subtitle }}<p class="almanack-subtitle">{{ . }}</p>{{ end }}
+    </header>
+
+    <figure class="almanack-quote almanack-quote--opening">
+      <blockquote>{{ .Params.opening_quote }}</blockquote>
+      <figcaption>~ {{ .Params.opening_quote_attribution }}</figcaption>
+    </figure>
+
+    <section class="almanack-note" aria-labelledby="almanack-note-title">
+      <p class="almanack-section-label" id="almanack-note-title">A Note from Robert V. Ussley</p>
+      <p>{{ .Params.opening_note }}</p>
+    </section>
+
+    <div class="almanack-columns">
+      <main class="almanack-main">
+        <section class="almanack-new" aria-labelledby="almanack-new-title">
+          <p class="almanack-section-label" id="almanack-new-title">New from Outside In Print</p>
+          {{ with $lead }}
+            {{ $leadURL := .url | default "#" }}
+            {{ $leadHref := $leadURL }}
+            {{ if and $leadURL (not (hasPrefix $leadURL "http")) }}
+              {{ $leadHref = $leadURL | relURL }}
+            {{ end }}
+            {{ $leadImage := .image | default "" }}
+            {{ $leadImageSrc := $leadImage }}
+            {{ if and $leadImage (not (hasPrefix $leadImage "http")) }}
+              {{ $leadImageSrc = $leadImage | relURL }}
+            {{ end }}
+            <article class="almanack-lead">
+              {{ if $leadImageSrc }}
+                <figure class="almanack-lead__figure">
+                  <button
+                    type="button"
+                    class="almanack-image-button"
+                    data-essay-cartoon-lightbox-trigger
+                    data-title="{{ .title }}"
+                    data-date="{{ $issueDate.Format "2006-01-02" }}"
+                    data-date-label="{{ $issueDate.Format "Jan 2, 2006" }}"
+                    data-image="{{ $leadImageSrc }}"
+                    data-alt="{{ .image_alt }}"
+                    aria-label="Open {{ .title }} cartoon fullscreen"
+                  >
+                    <img src="{{ $leadImageSrc }}" alt="{{ .image_alt }}" loading="eager">
+                  </button>
+                </figure>
+              {{ end }}
+              <div class="almanack-lead__body">
+                <h2><a href="{{ $leadHref }}">{{ .title }}</a></h2>
+                <p>{{ .description }}</p>
+                <a class="almanack-read-link" href="{{ $leadHref }}">Read</a>
+              </div>
+            </article>
+          {{ end }}
+
+          {{ if gt (len $secondary) 0 }}
+            <div class="almanack-secondary-grid" aria-label="Secondary essays">
+              {{ range $secondary }}
+                {{ $itemURL := .url | default "#" }}
+                {{ $itemHref := $itemURL }}
+                {{ if and $itemURL (not (hasPrefix $itemURL "http")) }}
+                  {{ $itemHref = $itemURL | relURL }}
+                {{ end }}
+                {{ $itemImage := .image | default "" }}
+                {{ $itemImageSrc := $itemImage }}
+                {{ if and $itemImage (not (hasPrefix $itemImage "http")) }}
+                  {{ $itemImageSrc = $itemImage | relURL }}
+                {{ end }}
+                <article class="almanack-secondary-card">
+                  {{ if $itemImageSrc }}
+                    <button
+                      type="button"
+                      class="almanack-secondary-card__thumb"
+                      data-essay-cartoon-lightbox-trigger
+                      data-title="{{ .title }}"
+                      data-date="{{ $issueDate.Format "2006-01-02" }}"
+                      data-date-label="{{ $issueDate.Format "Jan 2, 2006" }}"
+                      data-image="{{ $itemImageSrc }}"
+                      data-alt="{{ .image_alt }}"
+                      aria-label="Open {{ .title }} cartoon fullscreen"
+                    >
+                      <img src="{{ $itemImageSrc }}" alt="{{ .image_alt }}" loading="lazy">
+                    </button>
+                  {{ end }}
+                  <h3><a href="{{ $itemHref }}">{{ .title }}</a></h3>
+                  <p>{{ .description }}</p>
+                  <a class="almanack-read-link" href="{{ $itemHref }}">Read</a>
+                </article>
+              {{ end }}
+            </div>
+          {{ end }}
+        </section>
+
+        <section class="almanack-virtue" aria-labelledby="almanack-virtue-title">
+          <p class="almanack-section-label" id="almanack-virtue-title">This Week's Virtue</p>
+          <h2>{{ $virtue.name }}</h2>
+          <p>{{ $virtue.reflection }}</p>
+        </section>
+      </main>
+
+      <aside class="almanack-margin" aria-labelledby="almanack-margin-title">
+        <div class="almanack-margin__header">
+          <h2 id="almanack-margin-title">In the Margins</h2>
+          <p>figures, records, notices</p>
+        </div>
+
+        <section>
+          <h3>One Number</h3>
+          <p class="almanack-margin__figure">{{ $oneNumber.figure }}</p>
+          <p>{{ $oneNumber.note }} {{ with $oneNumber.source_url }}<a href="{{ . }}">source</a>{{ end }}</p>
+        </section>
+
+        <section>
+          <h3>One Document</h3>
+          <p class="almanack-margin__figure">{{ $oneDocument.title }}</p>
+          <p>{{ $oneDocument.issued_by }}{{ with $oneDocument.date }}, {{ . }}{{ end }}</p>
+          <p>{{ $oneDocument.note }} {{ with $oneDocument.url }}<a href="{{ . }}">source</a>{{ end }}</p>
+        </section>
+
+        {{ with $results }}
+          <section>
+            <h3>Results</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{ with $records }}
+          <section>
+            <h3>Records</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{ with $finalBows }}
+          <section>
+            <h3>Final Bows</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{ with $obituaries }}
+          <section>
+            <h3>Obituaries</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+      </aside>
+    </div>
+
+    <figure class="almanack-quote almanack-quote--middle">
+      <blockquote>{{ .Params.middle_quote }}</blockquote>
+      <figcaption>~ {{ .Params.middle_quote_attribution }}</figcaption>
+    </figure>
+
+    <section class="almanack-worth" aria-labelledby="almanack-worth-title">
+      <p class="almanack-section-label" id="almanack-worth-title">Worth Reprinting</p>
+      {{ $worthURL := $worth.url | default "#" }}
+      {{ $worthHref := $worthURL }}
+      {{ if and $worthURL (not (hasPrefix $worthURL "http")) }}
+        {{ $worthHref = $worthURL | relURL }}
+      {{ end }}
+      <h2><a href="{{ $worthHref }}">{{ $worth.title }}</a></h2>
+      <p>{{ $worth.description }}</p>
+      <a class="almanack-read-link" href="{{ $worthHref }}">Read</a>
+    </section>
+
+    <figure class="almanack-quote almanack-quote--closing">
+      <blockquote>{{ .Params.closing_quote }}</blockquote>
+      <figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption>
+    </figure>
+
+    <footer class="almanack-footer">
+      <p>Outside In Print</p>
+      <p>Color over the lines. Read beyond the feed. Think for yourself.</p>
+    </footer>
+  </article>
+{{ end }}

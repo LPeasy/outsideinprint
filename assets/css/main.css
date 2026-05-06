@@ -1075,6 +1075,119 @@ textarea{
 .editorial-cartoon figcaption a:focus-visible{
   text-decoration:underline;
 }
+.home-almanack{
+  position:relative;
+  overflow:hidden;
+  margin:.95rem 0 0;
+  padding:1.05rem 1.08rem 1rem;
+  border:1px solid rgba(42,34,25,.48);
+  border-radius:4px;
+  background:
+    linear-gradient(90deg, rgba(96,72,47,.08), transparent 14%, transparent 86%, rgba(96,72,47,.08)),
+    linear-gradient(180deg, rgba(255,252,241,.68), rgba(226,207,177,.62)),
+    repeating-linear-gradient(0deg, rgba(42,34,25,.045) 0, rgba(42,34,25,.045) 1px, transparent 1px, transparent 5px),
+    #ead9bf;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.35) inset,
+    0 0 0 1px rgba(255,255,255,.16) inset;
+  color:#201a15;
+}
+.home-almanack::before,
+.home-almanack::after{
+  content:"";
+  position:absolute;
+  left:1rem;
+  right:1rem;
+  height:3px;
+  border-top:1px solid rgba(32,26,21,.7);
+  border-bottom:1px solid rgba(32,26,21,.36);
+  pointer-events:none;
+}
+.home-almanack::before{
+  top:.62rem;
+}
+.home-almanack::after{
+  bottom:.62rem;
+}
+.home-almanack__kicker{
+  position:relative;
+  margin:.28rem 0 .42rem;
+  color:#2c241c;
+  font-family:var(--font-display);
+  font-size:1.16rem;
+  font-weight:700;
+  letter-spacing:0;
+  line-height:1.1;
+  text-align:center;
+  text-transform:uppercase;
+}
+.home-almanack h3{
+  margin:0;
+  color:#5f4b36;
+  font-family:var(--font-ui);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:0;
+  line-height:1.35;
+  text-align:center;
+  text-transform:uppercase;
+}
+.home-almanack h3 a{
+  color:inherit;
+  text-decoration:none;
+}
+.home-almanack h3 a:hover,
+.home-almanack h3 a:focus-visible{
+  color:#365263;
+  text-decoration:underline;
+  text-decoration-color:rgba(54,82,99,.5);
+}
+.home-almanack blockquote{
+  margin:.72rem 0 0;
+  padding:.68rem .15rem 0;
+  border-top:1px solid rgba(32,26,21,.28);
+  color:#201a15;
+  font-family:var(--font-display);
+  font-size:1.08rem;
+  font-weight:700;
+  line-height:1.36;
+  text-align:center;
+}
+.home-almanack__lead{
+  margin:.68rem 0 0;
+  color:#4b4035;
+  font-size:.86rem;
+  line-height:1.48;
+  text-align:center;
+}
+.home-almanack__lead a{
+  color:#221d17;
+  font-weight:700;
+  text-decoration-color:rgba(54,82,99,.38);
+}
+.home-almanack__actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.48rem .8rem;
+  margin:.78rem 0 .22rem;
+  padding-top:.62rem;
+  border-top:1px solid rgba(32,26,21,.28);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:0;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+.home-almanack__actions a{
+  color:#365263;
+  text-decoration:none;
+}
+.home-almanack__actions a:hover,
+.home-almanack__actions a:focus-visible{
+  text-decoration:underline;
+}
 .editorial-cartoon-recent{
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -3663,6 +3776,203 @@ h2{ margin-top:34px; }
   color:var(--text-primary);
   text-decoration-color:rgba(153,173,191,.82);
 }
+/* Bob's Almanack collection */
+.almanack-collection{
+  margin:1rem auto 3rem;
+  padding:1.25rem 1.2rem 2.4rem;
+  border:1px solid rgba(42,34,25,.42);
+  border-radius:4px;
+  background:
+    linear-gradient(90deg, rgba(96,72,47,.07), transparent 12%, transparent 88%, rgba(96,72,47,.07)),
+    linear-gradient(180deg, rgba(255,252,241,.72), rgba(237,224,204,.86)),
+    repeating-linear-gradient(0deg, rgba(42,34,25,.032) 0, rgba(42,34,25,.032) 1px, transparent 1px, transparent 6px),
+    #efe1cb;
+  box-shadow:0 1px 0 rgba(255,255,255,.34) inset;
+  color:#171513;
+  font-family:var(--font-body);
+}
+.almanack-collection a{
+  color:#365263;
+  text-decoration-color:rgba(54,82,99,.38);
+  text-underline-offset:.18em;
+}
+.almanack-collection a:hover,
+.almanack-collection a:focus-visible{
+  color:#7f6550;
+}
+.almanack-collection__masthead{
+  padding:1.05rem 0 1.15rem;
+  border-top:4px double rgba(23,21,19,.78);
+  border-bottom:3px double rgba(23,21,19,.58);
+  text-align:center;
+}
+.almanack-collection__eyebrow,
+.almanack-collection__section-heading h2,
+.almanack-collection__latest-date p{
+  margin:0;
+  color:#6f5a46;
+  font-family:var(--font-ui);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:0;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+.almanack-collection__masthead h1{
+  margin:.18rem 0 0;
+  color:#171513;
+  font-family:var(--font-display);
+  font-size:4.55rem;
+  font-weight:800;
+  line-height:.92;
+  overflow-wrap:anywhere;
+  text-transform:uppercase;
+}
+.almanack-collection__masthead > p:not(.almanack-collection__eyebrow){
+  max-width:44rem;
+  margin:.85rem auto 0;
+  color:#3f3a35;
+  font-size:1rem;
+  line-height:1.62;
+}
+.almanack-collection__ledger{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.42rem .9rem;
+  margin:.9rem 0 0;
+  padding:.72rem 0 0;
+  border-top:1px solid rgba(23,21,19,.22);
+  color:#5e5851;
+  font-family:var(--font-ui);
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:0;
+  line-height:1.45;
+  list-style:none;
+  text-transform:uppercase;
+}
+.almanack-collection__latest{
+  display:grid;
+  grid-template-columns:13rem minmax(0, 1fr);
+  gap:1.25rem 1.65rem;
+  margin-top:1.45rem;
+  padding:1.1rem 0 1.2rem;
+  border-top:1px solid rgba(23,21,19,.3);
+  border-bottom:1px solid rgba(23,21,19,.22);
+}
+.almanack-collection__latest-date{
+  min-width:0;
+}
+.almanack-collection__latest-body{
+  min-width:0;
+}
+.almanack-collection__latest-body h2{
+  margin:0;
+  color:#171513;
+  font-size:2.05rem;
+  line-height:1.12;
+}
+.almanack-collection__latest-body h2 a,
+.almanack-collection__issue h3 a{
+  color:inherit;
+  text-decoration:none;
+}
+.almanack-collection__latest-body blockquote{
+  margin:.7rem 0 0;
+  padding:.7rem 0 0;
+  border-top:1px solid rgba(23,21,19,.24);
+  color:#201a15;
+  font-family:var(--font-display);
+  font-size:1.28rem;
+  font-weight:700;
+  line-height:1.35;
+}
+.almanack-collection__latest-body p{
+  margin:.68rem 0 0;
+  color:#342f2a;
+  line-height:1.66;
+}
+.almanack-collection__lead{
+  color:#4b4035 !important;
+  font-family:var(--font-ui);
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:0;
+  line-height:1.45 !important;
+  text-transform:uppercase;
+}
+.almanack-collection__archive{
+  display:grid;
+  grid-template-columns:13rem minmax(0, 1fr);
+  gap:1.25rem 1.65rem;
+  margin-top:1.35rem;
+  padding-top:1rem;
+}
+.almanack-collection__section-heading{
+  border-top:3px double rgba(23,21,19,.48);
+  padding-top:.75rem;
+}
+.almanack-collection__section-heading p{
+  margin:.45rem 0 0;
+  color:#4b4035;
+  font-size:.9rem;
+  line-height:1.58;
+}
+.almanack-collection__issues{
+  display:grid;
+  gap:0;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.almanack-collection__issue{
+  margin:0;
+  padding:1rem 0;
+  border-top:1px solid rgba(23,21,19,.24);
+}
+.almanack-collection__issue:first-child{
+  padding-top:0;
+  border-top:0;
+}
+.almanack-collection__issue-label{
+  margin:0;
+  color:#6f5a46;
+  font-family:var(--font-ui);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+.almanack-collection__issue h3{
+  margin:.25rem 0 0;
+  color:#171513;
+  font-size:1.5rem;
+  line-height:1.18;
+}
+.almanack-collection__issue-quote{
+  margin:.45rem 0 0;
+  color:#201a15;
+  font-family:var(--font-display);
+  font-size:1.02rem;
+  font-weight:700;
+  line-height:1.42;
+}
+.almanack-collection__issue-lead{
+  margin:.48rem 0 0;
+  color:#4b4035;
+  font-size:.86rem;
+  line-height:1.5;
+}
+.almanack-collection__empty{
+  margin-top:1.2rem;
+  padding:1rem 0 0;
+  border-top:1px solid rgba(23,21,19,.24);
+}
+.almanack-collection__empty p{
+  margin:0;
+  color:#4b4035;
+}
 .imprint-header,
 .article-publication-record,
 .article-record,
@@ -4512,6 +4822,464 @@ h2{ margin-top:34px; }
     justify-content:flex-start;
   }
 }
+/* Bob's Almanack web issue */
+body.section-almanack{
+  background:#f2eadf;
+  background-image:none;
+  color:#171513;
+}
+body.section-almanack .masthead{
+  background:#121212;
+}
+body.section-almanack .site-footer{
+  color:#2a241d;
+  border-top:1px solid rgba(23,21,19,.18);
+}
+body.section-almanack .site-footer__title,
+body.section-almanack .site-footer__description{
+  color:#2a241d;
+}
+body.section-almanack .site-footer__nav a{
+  color:#365263;
+  text-decoration-color:rgba(54,82,99,.35);
+}
+body.section-almanack .site-footer__nav a:hover,
+body.section-almanack .site-footer__nav a:focus-visible{
+  color:#7f6550;
+}
+.section-front--almanack{
+  margin-bottom:1.6rem;
+}
+.almanack-issue{
+  max-width:1120px;
+  padding:.7rem 0 3.2rem;
+  color:#171513;
+  font-family:var(--font-body);
+}
+.almanack-issue a{
+  color:#365263;
+  text-decoration-color:rgba(54,82,99,.36);
+  text-underline-offset:.18em;
+}
+.almanack-issue a:hover,
+.almanack-issue a:focus-visible{
+  color:#7f6550;
+}
+.almanack-masthead{
+  position:relative;
+  padding:1.35rem 0 1.45rem;
+  border-top:5px double rgba(23,21,19,.82);
+  border-bottom:4px double rgba(23,21,19,.64);
+  text-align:center;
+}
+.almanack-masthead::before,
+.almanack-masthead::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:1px;
+  background:rgba(23,21,19,.28);
+  pointer-events:none;
+}
+.almanack-masthead::before{
+  top:.42rem;
+}
+.almanack-masthead::after{
+  bottom:.42rem;
+}
+.almanack-kicker,
+.almanack-section-label{
+  margin:0;
+  color:#6f5a46;
+  font-family:var(--font-ui);
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:0;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+.almanack-masthead h1{
+  margin:.18rem 0 0;
+  color:#171513;
+  font-family:var(--font-display);
+  font-size:5.05rem;
+  font-weight:800;
+  line-height:.9;
+  overflow-wrap:anywhere;
+  text-transform:uppercase;
+}
+.almanack-masthead__meta{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.35rem .8rem;
+  margin-top:.78rem;
+  color:#5e5851;
+  font-family:var(--font-ui);
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+.almanack-subtitle{
+  max-width:42rem;
+  margin:.68rem auto 0;
+  color:#3f3a35;
+  font-size:.98rem;
+  line-height:1.58;
+}
+.almanack-quote{
+  max-width:58rem;
+  margin:1.45rem auto;
+  padding:1rem 1.2rem .95rem;
+  border-top:1px solid rgba(23,21,19,.38);
+  border-bottom:1px solid rgba(23,21,19,.28);
+  text-align:center;
+}
+.almanack-quote blockquote{
+  margin:0;
+  color:#171513;
+  font-size:1.35rem;
+  font-weight:650;
+  line-height:1.34;
+}
+.almanack-quote figcaption{
+  margin-top:.55rem;
+  color:#6f5a46;
+  font-family:var(--font-ui);
+  font-size:.82rem;
+  font-weight:700;
+}
+.almanack-note{
+  max-width:58rem;
+  margin:0 auto 1.55rem;
+  padding:1.05rem 0 0;
+}
+.almanack-note p:last-child{
+  margin:.45rem 0 0;
+  color:#27231f;
+  font-size:1.08rem;
+  line-height:1.72;
+}
+.almanack-columns{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 18rem;
+  gap:2rem;
+  align-items:start;
+  margin-top:1.25rem;
+}
+.almanack-main,
+.almanack-margin{
+  min-width:0;
+}
+.almanack-new,
+.almanack-virtue,
+.almanack-worth{
+  border-top:1px solid rgba(23,21,19,.34);
+  padding-top:.9rem;
+}
+.almanack-lead{
+  display:grid;
+  gap:1rem;
+  margin-top:.8rem;
+}
+.almanack-lead__figure{
+  margin:0;
+}
+.almanack-image-button,
+.almanack-secondary-card__thumb{
+  display:block;
+  width:100%;
+  margin:0;
+  padding:.45rem;
+  border:1px solid rgba(23,21,19,.24);
+  border-radius:6px;
+  background:#e4d7c6;
+  color:inherit;
+  cursor:zoom-in;
+}
+.almanack-image-button:focus-visible,
+.almanack-secondary-card__thumb:focus-visible{
+  outline:2px solid rgba(54,82,99,.76);
+  outline-offset:3px;
+}
+.almanack-image-button img,
+.almanack-secondary-card__thumb img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid rgba(23,21,19,.18);
+  border-radius:4px;
+  background:#f8f2e8;
+}
+.almanack-image-button{
+  aspect-ratio:16 / 9;
+}
+.almanack-image-button img{
+  height:100%;
+  object-fit:contain;
+}
+.almanack-lead__body h2,
+.almanack-worth h2{
+  margin:.25rem 0 0;
+  color:#171513;
+  font-size:2.05rem;
+  line-height:1.12;
+}
+.almanack-lead__body h2 a,
+.almanack-secondary-card h3 a,
+.almanack-worth h2 a,
+.almanack-index__item h3 a{
+  color:inherit;
+  text-decoration:none;
+}
+.almanack-lead__body p,
+.almanack-secondary-card p,
+.almanack-worth p,
+.almanack-index__item p{
+  margin:.55rem 0 0;
+  color:#3a342f;
+  line-height:1.66;
+}
+.almanack-read-link{
+  display:inline-block;
+  margin-top:.7rem;
+  font-family:var(--font-ui);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+.almanack-secondary-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:.9rem;
+  margin-top:1.25rem;
+}
+.almanack-secondary-card{
+  min-width:0;
+  padding:.78rem .78rem .82rem;
+  border:1px solid rgba(23,21,19,.18);
+  border-radius:6px;
+  background:#eee3d4;
+}
+.almanack-secondary-card__thumb{
+  aspect-ratio:16 / 9;
+  padding:.28rem;
+}
+.almanack-secondary-card__thumb img{
+  height:100%;
+  object-fit:contain;
+}
+.almanack-secondary-card h3{
+  margin:.68rem 0 0;
+  color:#171513;
+  font-size:1.15rem;
+  line-height:1.22;
+  overflow-wrap:anywhere;
+}
+.almanack-secondary-card p{
+  font-size:.92rem;
+}
+.almanack-virtue{
+  margin-top:1.6rem;
+}
+.almanack-virtue h2{
+  margin:.48rem 0 0;
+  color:#171513;
+  font-size:1.45rem;
+  line-height:1.2;
+}
+.almanack-virtue p:last-child{
+  margin:.45rem 0 0;
+  color:#342f2a;
+  font-size:1rem;
+  line-height:1.68;
+}
+.almanack-margin{
+  padding:.85rem .9rem .95rem;
+  border:1px solid rgba(23,21,19,.24);
+  border-radius:6px;
+  background:#eadfce;
+}
+.almanack-margin__header{
+  padding-bottom:.65rem;
+  border-bottom:1px solid rgba(23,21,19,.28);
+}
+.almanack-margin__header h2{
+  margin:0;
+  color:#171513;
+  font-size:1.15rem;
+  line-height:1.12;
+  text-transform:uppercase;
+}
+.almanack-margin__header p{
+  margin:.2rem 0 0;
+  color:#6b6259;
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+.almanack-margin section{
+  padding:.72rem 0;
+  border-bottom:1px solid rgba(23,21,19,.16);
+}
+.almanack-margin section:last-child{
+  border-bottom:0;
+  padding-bottom:0;
+}
+.almanack-margin h3{
+  margin:0 0 .3rem;
+  color:#6f5a46;
+  font-family:var(--font-ui);
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+.almanack-margin p,
+.almanack-margin li{
+  margin:.28rem 0 0;
+  color:#332f2a;
+  font-size:.82rem;
+  line-height:1.48;
+  overflow-wrap:anywhere;
+}
+.almanack-margin__figure{
+  color:#171513 !important;
+  font-size:1.02rem !important;
+  font-weight:700;
+  line-height:1.28 !important;
+}
+.almanack-margin ul{
+  display:grid;
+  gap:.38rem;
+  margin:.35rem 0 0;
+  padding:0;
+  list-style:none;
+}
+.almanack-margin a{
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:800;
+  text-transform:uppercase;
+}
+.almanack-quote--middle{
+  margin-top:1.8rem;
+}
+.almanack-worth{
+  max-width:58rem;
+  margin:1.6rem auto 0;
+}
+.almanack-footer{
+  margin-top:1.6rem;
+  padding-top:.9rem;
+  border-top:3px double rgba(23,21,19,.48);
+  text-align:center;
+}
+.almanack-footer p{
+  margin:.25rem 0 0;
+  color:#3f3a35;
+  font-family:var(--font-ui);
+  font-size:.86rem;
+  font-weight:700;
+}
+.almanack-index{
+  padding-bottom:3rem;
+}
+.almanack-index__list{
+  display:grid;
+  gap:1rem;
+}
+.almanack-index__item{
+  padding:1rem 0;
+  border-top:1px solid rgba(236,231,223,.16);
+}
+.almanack-index__item time{
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+.almanack-index__item h3{
+  margin:.25rem 0 0;
+  font-size:1.45rem;
+  line-height:1.22;
+}
+.almanack-index__empty{
+  color:var(--text-muted);
+}
+@media (max-width:900px){
+  .almanack-collection__masthead h1{
+    font-size:3.45rem;
+  }
+  .almanack-collection__latest,
+  .almanack-collection__archive{
+    grid-template-columns:1fr;
+    gap:.85rem;
+  }
+  .almanack-masthead h1{
+    font-size:3.55rem;
+  }
+  .almanack-columns{
+    grid-template-columns:1fr;
+  }
+  .almanack-margin{
+    order:2;
+  }
+  .almanack-secondary-grid{
+    grid-template-columns:1fr;
+  }
+}
+@media (max-width:560px){
+  .almanack-collection{
+    padding:1rem .85rem 2rem;
+  }
+  .almanack-collection__masthead h1{
+    font-size:2.55rem;
+  }
+  .almanack-collection__masthead > p:not(.almanack-collection__eyebrow){
+    font-size:.94rem;
+  }
+  .almanack-collection__latest-body h2{
+    font-size:1.62rem;
+  }
+  .almanack-collection__latest-body blockquote{
+    font-size:1.08rem;
+  }
+  .almanack-collection__issue h3{
+    font-size:1.28rem;
+  }
+  .almanack-issue{
+    padding-top:.35rem;
+  }
+  .almanack-masthead h1{
+    font-size:2.55rem;
+  }
+  .almanack-quote{
+    padding-left:.65rem;
+    padding-right:.65rem;
+  }
+  .almanack-quote blockquote{
+    font-size:1.12rem;
+  }
+  .almanack-note p:last-child{
+    font-size:1rem;
+  }
+  .almanack-lead__body h2,
+  .almanack-worth h2{
+    font-size:1.62rem;
+  }
+  .almanack-secondary-card{
+    padding:.72rem;
+  }
+}
+
 @media print{
   :root{
     --bg:#fff;
