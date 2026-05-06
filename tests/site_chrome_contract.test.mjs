@@ -80,6 +80,8 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(masthead, /theme-toggle__icon--sun/);
   assert.match(masthead, /theme-toggle__icon--moon/);
   assert.match(masthead, /<nav class="nav nav--section-rail"[\s\S]*Feeling curious\?/);
+  assert.match(masthead, /\$mastheadVariant := cond \$isHomeMasthead "masthead--full" "masthead--compressed"/);
+  assert.match(masthead, /\{\{ if \$isHomeMasthead \}\}[\s\S]*masthead-side-deck--left/);
   assert.doesNotMatch(
     masthead.match(/<nav class="nav nav--section-rail"[\s\S]*?<\/nav>/)?.[0] || "",
     /data-theme-toggle/
@@ -96,6 +98,11 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /html\[data-theme="light"\]\{[\s\S]*--bg-page:#f2eadf;[\s\S]*--accent:#365263;/);
   assert.match(css, /\.theme-toggle\{[\s\S]*display:none;[\s\S]*\}/);
   assert.match(css, /html\.theme-enabled \.theme-toggle\{[\s\S]*display:inline-flex;[\s\S]*\}/);
+  assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(1\.75rem, 3vw, 2\.35rem\)/);
+  assert.match(css, /html\[data-theme="light"\] \.masthead--compressed\{[\s\S]*background:#ded3c4;/);
+  assert.match(css, /\/\* Light-mode paper edition \*\//);
+  assert.match(css, /html\[data-theme="light"\] \.card,[\s\S]*background:var\(--paper-surface-wash\), var\(--bg-surface\)/);
+  assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
 });
 
 test("filtered dialogue archive stays wired through the live discovery surfaces", () => {

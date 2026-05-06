@@ -29,6 +29,10 @@ When introducing a new preset:
 
 Runtime theme switching is allowed only through the approved public theme selector in the shared masthead. Keep the selector CSS-token based, use `html[data-theme="light"]` and `html[data-theme="dark"]`, bootstrap the theme before the fingerprinted stylesheet loads, and persist only `light` or `dark` in `localStorage["oip-theme"]`.
 
+The homepage is the only surface that should use the full ceremonial OIP masthead. All other pages use the compact shared masthead. The compact masthead is the site imprint; page titles, collection titles, article titles, and the Bob's Almanack issue nameplate should carry the page-specific hierarchy.
+
+Light mode is the OIP paper edition. Use the restrained parchment tokens and shared paper surface variables for cards, panels, forms, route headers, image plates, and footer surfaces. Dark mode remains the classic OIP dark atmosphere. Do not copy Bob's Almanack-only layout treatments across the site; borrow its warm paper material, fine rules, and restrained ink palette.
+
 ## Divider Rules
 
 Structural dividers should use semantic custom properties rather than repeated raw color values.
