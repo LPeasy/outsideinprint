@@ -491,6 +491,7 @@ $requiredEssayHeroPages = @(
   'public/essays/smokestack-spreadsheets/index.html',
   'public/essays/the-bet-slip-in-the-briefing-room/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
+  'public/essays/the-factory-in-the-footnote/index.html',
   'public/essays/the-strait-that-holds-the-price/index.html',
   'public/essays/the-blockade-has-a-phone-number/index.html',
   'public/essays/the-warning-label-in-the-weeds/index.html',
@@ -558,6 +559,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'The room clears. The report remains.'
+  },
+  @{
+    PublicPath = 'public/essays/the-factory-in-the-footnote/index.html'
+    SourcePath = 'content/essays/the-factory-in-the-footnote.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'A factory can disappear into a footnote before anyone votes to close it.'
   },
   @{
     PublicPath = 'public/essays/the-strait-that-holds-the-price/index.html'
@@ -777,6 +785,16 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/essays/can-you-pass-the-pepper-please/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-factory-in-the-footnote/index.html' = @{
+    Title = 'The Factory in the Footnote'
+    Description = 'The SEC climate-disclosure reversal turns a dormant rule into a larger test of investor materiality, carbon accounting, industrial capacity, and national cost.'
+    Canonical = 'https://outsideinprint.org/essays/the-factory-in-the-footnote/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-factory-in-the-footnote/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-strait-that-holds-the-price/index.html' = @{
@@ -1084,6 +1102,7 @@ $requiredUxPages = @(
   'public/essays/in-the-image-of-god/index.html',
   'public/essays/the-hate-ledger/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
+  'public/essays/the-factory-in-the-footnote/index.html',
   'public/essays/the-ledger-vol-1/index.html',
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
@@ -1793,8 +1812,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-bet-slip-in-the-briefing-room"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=just-part-of-the-game"?'
-    Message = 'expected the Bet Slip homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?can-you-pass-the-pepper-please"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=pass-the-pepper"?'
+    Message = 'expected the Pepper homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -2193,7 +2212,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*102 published pieces'
+    Pattern = '11 public collections.*103 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2616,6 +2635,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/smokestack-spreadsheets/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Smokestack Spreadsheets' },
   @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
   @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
+  @{ Path = 'public/essays/the-factory-in-the-footnote/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Factory in the Footnote' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
