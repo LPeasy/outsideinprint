@@ -30,6 +30,9 @@ function cssRule(source, selector) {
 const masthead = fs.readFileSync(path.resolve("layouts/partials/masthead.html"), "utf8");
 const homepage = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
+const notFound = fs.readFileSync(path.resolve("layouts/404.html"), "utf8");
+const themeBootstrap = fs.readFileSync(path.resolve("layouts/partials/theme_bootstrap.html"), "utf8");
+const themeToggleScript = fs.readFileSync(path.resolve("layouts/partials/theme_toggle_script.html"), "utf8");
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
@@ -68,6 +71,31 @@ test("masthead removes Welcome and promotes Archive as the long-form lane", () =
   assert.doesNotMatch(masthead, /\$isWelcome/);
   assert.doesNotMatch(masthead, />Books</);
   assert.match(masthead, /aria-current="page"/);
+});
+
+test("shared masthead exposes the public light and dark theme selector", () => {
+  assert.match(masthead, /class="theme-toggle masthead-theme-toggle"/);
+  assert.match(masthead, /data-theme-toggle/);
+  assert.match(masthead, /aria-pressed="true"/);
+  assert.match(masthead, /theme-toggle__icon--sun/);
+  assert.match(masthead, /theme-toggle__icon--moon/);
+  assert.match(masthead, /<nav class="nav nav--section-rail"[\s\S]*Feeling curious\?/);
+  assert.doesNotMatch(
+    masthead.match(/<nav class="nav nav--section-rail"[\s\S]*?<\/nav>/)?.[0] || "",
+    /data-theme-toggle/
+  );
+  assert.match(baseLayout, /partial "theme_bootstrap\.html"[\s\S]*resources\.Get "css\/main\.css"/);
+  assert.match(baseLayout, /partial "theme_toggle_script\.html"/);
+  assert.match(notFound, /partial "theme_bootstrap\.html"[\s\S]*resources\.Get "css\/main\.css"/);
+  assert.match(notFound, /partial "theme_toggle_script\.html"/);
+  assert.match(themeBootstrap, /localStorage\.getItem\(storageKey\)/);
+  assert.match(themeBootstrap, /prefers-color-scheme:\s*dark/);
+  assert.match(themeBootstrap, /document\.documentElement\.setAttribute\("data-theme", theme\)/);
+  assert.match(themeToggleScript, /localStorage\.setItem\(storageKey, theme\)/);
+  assert.match(themeToggleScript, /setTheme\(currentTheme\(\) === "dark" \? "light" : "dark"\)/);
+  assert.match(css, /html\[data-theme="light"\]\{[\s\S]*--bg-page:#f2eadf;[\s\S]*--accent:#365263;/);
+  assert.match(css, /\.theme-toggle\{[\s\S]*display:none;[\s\S]*\}/);
+  assert.match(css, /html\.theme-enabled \.theme-toggle\{[\s\S]*display:inline-flex;[\s\S]*\}/);
 });
 
 test("filtered dialogue archive stays wired through the live discovery surfaces", () => {
@@ -245,7 +273,9 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(styleThemeWorkflow, /--oip-rule-engraved-rail/);
   assert.match(styleThemeWorkflow, /semantic threshold tools, not general borders/);
   assert.match(styleThemeWorkflow, /signature thresholds only/);
-  assert.match(styleThemeWorkflow, /Do not add runtime theme switching/);
+  assert.match(styleThemeWorkflow, /approved public theme selector/);
+  assert.match(styleThemeWorkflow, /html\[data-theme="light"\]/);
+  assert.match(styleThemeWorkflow, /localStorage\["oip-theme"\]/);
   assert.match(css, /#main-content\{\s*scroll-margin-top:56px;\s*\}/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?#main-content\{\s*scroll-margin-top:0;\s*\}/);
   for (const selector of ["body", ".home-manifesto", ".home-manifesto__inner"]) {

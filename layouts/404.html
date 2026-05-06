@@ -7,9 +7,11 @@
     <title>Page not found | {{ site.Title }}</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="The requested Outside In Print page could not be found. Browse the library or return home." />
+    <meta name="color-scheme" content="dark light" />
     <link rel="canonical" href="{{ site.BaseURL }}" />
     <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
     {{ partial "head_fonts.html" . }}
+    {{ partial "theme_bootstrap.html" . }}
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
   </head>
@@ -28,5 +30,6 @@
       </main>
       {{ partial "footer.html" . }}
     </div>
+    {{ partial "theme_toggle_script.html" . }}
   </body>
 </html>

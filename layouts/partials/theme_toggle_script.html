@@ -1,0 +1,46 @@
+<script>
+  (function () {
+    var storageKey = "oip-theme";
+    var root = document.documentElement;
+    var toggles = Array.prototype.slice.call(document.querySelectorAll("[data-theme-toggle]"));
+
+    if (!toggles.length) {
+      return;
+    }
+
+    function currentTheme() {
+      return root.getAttribute("data-theme") === "light" ? "light" : "dark";
+    }
+
+    function syncToggle() {
+      var theme = currentTheme();
+      var darkActive = theme === "dark";
+      var title = darkActive ? "Switch to light mode" : "Switch to dark mode";
+
+      toggles.forEach(function (toggle) {
+        toggle.setAttribute("aria-pressed", darkActive ? "true" : "false");
+        toggle.setAttribute("title", title);
+      });
+    }
+
+    function setTheme(theme) {
+      root.setAttribute("data-theme", theme);
+
+      try {
+        window.localStorage.setItem(storageKey, theme);
+      } catch (error) {
+        // Theme still changes for this page when storage is unavailable.
+      }
+
+      syncToggle();
+    }
+
+    toggles.forEach(function (toggle) {
+      toggle.addEventListener("click", function () {
+        setTheme(currentTheme() === "dark" ? "light" : "dark");
+      });
+    });
+
+    syncToggle();
+  })();
+</script>

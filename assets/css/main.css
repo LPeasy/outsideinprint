@@ -69,6 +69,41 @@
   --oip-rule-engraved-rail:linear-gradient(180deg, var(--oip-rule-engraved-strong), var(--oip-rule-engraved) 48%, rgba(213,190,150,0));
 }
 
+html[data-theme="dark"]{
+  color-scheme:dark;
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --bg-page:#f2eadf;
+  --bg-surface:#eadfce;
+  --bg-raised:#f7efe3;
+  --border-subtle:#d0c2af;
+  --border-soft:#bdae99;
+  --text-primary:#171513;
+  --text-secondary:#3f352b;
+  --text-muted:#6f5a46;
+  --text-faint:#8d7862;
+  --accent:#365263;
+  --accent-hover:#7f6550;
+  --accent-soft:rgba(54,82,99,.12);
+  --focus-ring:rgba(54,82,99,.72);
+  --shadow-soft:0 10px 30px rgba(67,48,30,.12);
+  --bg:var(--bg-page);
+  --fg:var(--text-primary);
+  --muted:var(--text-secondary);
+  --hair:var(--border-subtle);
+  --link:var(--accent);
+  --oip-rule-hairline:rgba(23,21,19,.055);
+  --oip-rule-faint:rgba(23,21,19,.09);
+  --oip-rule-list:rgba(23,21,19,.115);
+  --oip-rule-standard:rgba(23,21,19,.145);
+  --oip-rule-clear:rgba(23,21,19,.18);
+  --oip-rule-engraved:rgba(96,72,47,.24);
+  --oip-rule-engraved-strong:rgba(42,34,25,.42);
+  --oip-rule-engraved-gradient:linear-gradient(90deg, rgba(23,21,19,0), var(--oip-rule-engraved-strong) 18%, var(--oip-rule-engraved) 52%, rgba(23,21,19,0));
+  --oip-rule-engraved-rail:linear-gradient(180deg, var(--oip-rule-engraved-strong), var(--oip-rule-engraved) 48%, rgba(96,72,47,0));
+}
+
 *{ box-sizing:border-box; }
 html{
   font-size:100%;
@@ -91,9 +126,19 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
+html[data-theme="light"] body{
+  background-image:
+    linear-gradient(90deg, rgba(96,72,47,.045), transparent 13%, transparent 87%, rgba(96,72,47,.045)),
+    radial-gradient(circle at 20% 10%, rgba(127,101,80,.06) 0, rgba(127,101,80,0) 26%),
+    repeating-linear-gradient(0deg, rgba(42,34,25,.024) 0, rgba(42,34,25,.024) 1px, transparent 1px, transparent 6px);
+  background-attachment:fixed;
+}
 ::selection{
   background:rgba(127,147,166,.24);
   color:var(--text-primary);
+}
+html[data-theme="light"] ::selection{
+  background:rgba(54,82,99,.18);
 }
 
 .visually-hidden{
@@ -159,10 +204,66 @@ textarea{
   margin:10px 0 28px;
 }
 .masthead-nameplate{
+  position:relative;
   width:100%;
   max-width:1000px;
   margin:0 auto;
   padding:0 24px;
+}
+.theme-toggle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  width:2rem;
+  height:2rem;
+  padding:0;
+  border:1px solid rgba(236,231,223,.14);
+  border-radius:999px;
+  background:rgba(236,231,223,.025);
+  color:var(--text-muted);
+  cursor:pointer;
+  transition:color .16s ease, background-color .16s ease, border-color .16s ease, transform .16s ease;
+}
+html.theme-enabled .theme-toggle{
+  display:inline-flex;
+}
+.masthead-theme-toggle{
+  position:absolute;
+  top:1.75rem;
+  right:24px;
+  z-index:2;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible{
+  border-color:rgba(153,173,191,.42);
+  background:rgba(236,231,223,.055);
+  color:var(--text-primary);
+}
+.theme-toggle:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:3px;
+}
+.theme-toggle:active{
+  transform:translateY(1px);
+}
+.theme-toggle__icon{
+  display:none;
+  width:1rem;
+  height:1rem;
+}
+.theme-toggle__icon--sun{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.theme-toggle__icon--moon{
+  fill:currentColor;
+}
+html[data-theme="light"] .theme-toggle__icon--sun,
+html[data-theme="dark"] .theme-toggle__icon--moon{
+  display:block;
 }
 .masthead .brand-link{
   display:block;
@@ -406,6 +507,36 @@ textarea{
   z-index:30;
   background:rgba(18,18,18,.94);
   backdrop-filter:blur(10px);
+}
+html[data-theme="light"] .masthead .brand-link:focus-visible{
+  outline-color:rgba(54,82,99,.52);
+}
+html[data-theme="light"] .masthead-side-deck{
+  color:rgba(63,53,43,.68);
+}
+html[data-theme="light"] .masthead .subtitle{
+  color:#6c5b4b;
+}
+html[data-theme="light"] .nav__explore-link{
+  border-color:rgba(23,21,19,.16);
+}
+html[data-theme="light"] .nav__explore-link:hover,
+html[data-theme="light"] .nav__explore-link:focus-visible,
+html[data-theme="light"] .nav__explore-link[aria-current="page"]{
+  background:rgba(23,21,19,.04);
+  border-color:rgba(23,21,19,.24);
+}
+html[data-theme="light"] .masthead--sticky .nav--section-rail{
+  background:rgba(242,234,223,.92);
+}
+html[data-theme="light"] .theme-toggle{
+  border-color:rgba(23,21,19,.18);
+  background:rgba(23,21,19,.035);
+}
+html[data-theme="light"] .theme-toggle:hover,
+html[data-theme="light"] .theme-toggle:focus-visible{
+  border-color:rgba(54,82,99,.36);
+  background:rgba(54,82,99,.08);
 }
 
 @media (max-width:900px){
@@ -4823,29 +4954,218 @@ h2{ margin-top:34px; }
   }
 }
 /* Bob's Almanack web issue */
-body.section-almanack{
+body.section-almanack,
+body.layout-bobs-almanack{
   background:#f2eadf;
   background-image:none;
   color:#171513;
 }
-body.section-almanack .masthead{
-  background:#121212;
+body.section-almanack .masthead,
+body.layout-bobs-almanack .masthead{
+  max-width:1120px;
+  margin:0 auto 1.35rem;
+  background:#ded3c4;
+  color:#2a241d;
+  border-top:3px double rgba(23,21,19,.32);
+  border-bottom:1px solid rgba(23,21,19,.24);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42);
 }
-body.section-almanack .site-footer{
+body.section-almanack .masthead-nameplate,
+body.layout-bobs-almanack .masthead-nameplate{
+  max-width:720px;
+  padding:.7rem 24px .56rem;
+}
+body.section-almanack .masthead-nameplate__top-rule,
+body.layout-bobs-almanack .masthead-nameplate__top-rule{
+  margin-bottom:.45rem;
+  background:linear-gradient(90deg, transparent, rgba(23,21,19,.42), transparent);
+  box-shadow:none;
+}
+body.section-almanack .masthead-nameplate__top-ornament,
+body.layout-bobs-almanack .masthead-nameplate__top-ornament{
+  display:none;
+}
+body.section-almanack .masthead-nameplate__body,
+body.layout-bobs-almanack .masthead-nameplate__body{
+  grid-template-columns:1fr;
+}
+body.section-almanack .brand-link,
+body.layout-bobs-almanack .brand-link{
+  max-width:25rem;
+  margin:0 auto;
+}
+body.section-almanack .masthead .title,
+body.layout-bobs-almanack .masthead .title{
+  color:#2a241d;
+  font-size:clamp(1.75rem, 3vw, 2.35rem);
+  letter-spacing:.14em;
+  line-height:1.05;
+}
+body.section-almanack .masthead .subtitle,
+body.layout-bobs-almanack .masthead .subtitle{
+  margin-top:.32rem;
+  color:#6c5b4b;
+  font-size:.62rem;
+  letter-spacing:.18em;
+}
+body.section-almanack .masthead-nameplate__divider,
+body.layout-bobs-almanack .masthead-nameplate__divider{
+  height:9px;
+  margin:.56rem 0 .38rem;
+}
+body.section-almanack .masthead-nameplate__divider::before,
+body.layout-bobs-almanack .masthead-nameplate__divider::before{
+  background:linear-gradient(90deg, transparent, rgba(23,21,19,.36), transparent);
+}
+body.section-almanack .masthead-nameplate__divider::after,
+body.layout-bobs-almanack .masthead-nameplate__divider::after{
+  width:5px;
+  height:5px;
+  background:#ded3c4;
+  border-color:rgba(23,21,19,.42);
+}
+body.section-almanack .masthead .nav--section-rail,
+body.layout-bobs-almanack .masthead .nav--section-rail{
+  max-width:640px;
+  margin:0 auto;
+  padding:.34rem 1rem .28rem;
+  border-top:1px solid rgba(23,21,19,.18);
+  border-bottom:none;
+  background:transparent;
+  color:#6c5b4b;
+  font-size:.58rem;
+  letter-spacing:.16em;
+}
+body.section-almanack .masthead .nav--section-rail::before,
+body.section-almanack .masthead .nav--section-rail::after,
+body.layout-bobs-almanack .masthead .nav--section-rail::before,
+body.layout-bobs-almanack .masthead .nav--section-rail::after{
+  background:linear-gradient(90deg, transparent, rgba(23,21,19,.24), transparent);
+  opacity:1;
+}
+body.section-almanack .masthead .nav a,
+body.layout-bobs-almanack .masthead .nav a{
+  color:#594b3e;
+}
+body.section-almanack .masthead .nav a:hover,
+body.section-almanack .masthead .nav a:focus-visible,
+body.section-almanack .masthead .nav a[aria-current="page"],
+body.layout-bobs-almanack .masthead .nav a:hover,
+body.layout-bobs-almanack .masthead .nav a:focus-visible,
+body.layout-bobs-almanack .masthead .nav a[aria-current="page"]{
+  color:#2a241d;
+  text-decoration-color:rgba(54,82,99,.46);
+}
+body.section-almanack .masthead .nav__explore-link,
+body.layout-bobs-almanack .masthead .nav__explore-link{
+  border-color:rgba(23,21,19,.16);
+}
+body.section-almanack .masthead .nav__explore-link:hover,
+body.section-almanack .masthead .nav__explore-link:focus-visible,
+body.section-almanack .masthead .nav__explore-link[aria-current="page"],
+body.layout-bobs-almanack .masthead .nav__explore-link:hover,
+body.layout-bobs-almanack .masthead .nav__explore-link:focus-visible,
+body.layout-bobs-almanack .masthead .nav__explore-link[aria-current="page"]{
+  background:rgba(23,21,19,.04);
+  border-color:rgba(23,21,19,.24);
+}
+body.section-almanack .masthead .brand-link:focus-visible,
+body.layout-bobs-almanack .masthead .brand-link:focus-visible{
+  outline-color:rgba(54,82,99,.52);
+}
+body.section-almanack .site-footer,
+body.layout-bobs-almanack .site-footer{
   color:#2a241d;
   border-top:1px solid rgba(23,21,19,.18);
 }
 body.section-almanack .site-footer__title,
-body.section-almanack .site-footer__description{
+body.section-almanack .site-footer__description,
+body.layout-bobs-almanack .site-footer__title,
+body.layout-bobs-almanack .site-footer__description{
   color:#2a241d;
 }
-body.section-almanack .site-footer__nav a{
+body.section-almanack .site-footer__nav a,
+body.layout-bobs-almanack .site-footer__nav a{
   color:#365263;
   text-decoration-color:rgba(54,82,99,.35);
 }
 body.section-almanack .site-footer__nav a:hover,
-body.section-almanack .site-footer__nav a:focus-visible{
+body.section-almanack .site-footer__nav a:focus-visible,
+body.layout-bobs-almanack .site-footer__nav a:hover,
+body.layout-bobs-almanack .site-footer__nav a:focus-visible{
   color:#7f6550;
+}
+html[data-theme="dark"] body.section-almanack,
+html[data-theme="dark"] body.layout-bobs-almanack{
+  background-color:var(--bg-page);
+  background-image:
+    radial-gradient(circle at 18% 14%, rgba(127,147,166,.08) 0, rgba(127,147,166,0) 28%),
+    radial-gradient(circle at 82% 4%, rgba(236,231,223,.03) 0, rgba(236,231,223,0) 22%),
+    radial-gradient(circle at 50% 100%, rgba(236,231,223,.025) 0, rgba(236,231,223,0) 30%),
+    radial-gradient(circle at 1px 1px, rgba(236,231,223,.018) 0 1px, transparent 1.45px);
+  color:var(--fg);
+}
+html[data-theme="dark"] body.section-almanack .masthead,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead{
+  background:transparent;
+  color:var(--text-primary);
+  border-top:3px double var(--oip-rule-engraved-strong);
+  border-bottom:1px solid var(--oip-rule-engraved);
+  box-shadow:none;
+}
+html[data-theme="dark"] body.section-almanack .masthead .title,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .title{
+  color:var(--text-primary);
+}
+html[data-theme="dark"] body.section-almanack .masthead .subtitle,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .subtitle,
+html[data-theme="dark"] body.section-almanack .masthead .nav--section-rail,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav--section-rail{
+  color:var(--text-muted);
+}
+html[data-theme="dark"] body.section-almanack .masthead-nameplate__top-rule,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead-nameplate__top-rule,
+html[data-theme="dark"] body.section-almanack .masthead-nameplate__divider::before,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead-nameplate__divider::before,
+html[data-theme="dark"] body.section-almanack .masthead .nav--section-rail::before,
+html[data-theme="dark"] body.section-almanack .masthead .nav--section-rail::after,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav--section-rail::before,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav--section-rail::after{
+  background:var(--oip-rule-engraved-gradient);
+}
+html[data-theme="dark"] body.section-almanack .masthead-nameplate__divider::after,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead-nameplate__divider::after{
+  background:var(--bg-page);
+  border-color:var(--oip-rule-engraved-strong);
+}
+html[data-theme="dark"] body.section-almanack .masthead .nav a,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav a{
+  color:var(--text-muted);
+}
+html[data-theme="dark"] body.section-almanack .masthead .nav a:hover,
+html[data-theme="dark"] body.section-almanack .masthead .nav a:focus-visible,
+html[data-theme="dark"] body.section-almanack .masthead .nav a[aria-current="page"],
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav a:hover,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav a:focus-visible,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav a[aria-current="page"]{
+  color:var(--text-primary);
+}
+html[data-theme="dark"] body.section-almanack .masthead .nav__explore-link,
+html[data-theme="dark"] body.layout-bobs-almanack .masthead .nav__explore-link{
+  border-color:rgba(236,231,223,.13);
+}
+html[data-theme="dark"] body.section-almanack .site-footer,
+html[data-theme="dark"] body.layout-bobs-almanack .site-footer{
+  color:var(--text-secondary);
+  border-top-color:var(--oip-rule-engraved);
+}
+html[data-theme="dark"] body.section-almanack .site-footer__title,
+html[data-theme="dark"] body.layout-bobs-almanack .site-footer__title{
+  color:var(--text-primary);
+}
+html[data-theme="dark"] body.section-almanack .site-footer__description,
+html[data-theme="dark"] body.layout-bobs-almanack .site-footer__description{
+  color:var(--text-secondary);
 }
 .section-front--almanack{
   margin-bottom:1.6rem;
@@ -5213,6 +5533,117 @@ body.section-almanack .site-footer__nav a:focus-visible{
 }
 .almanack-index__empty{
   color:var(--text-muted);
+}
+html[data-theme="dark"] .almanack-issue,
+html[data-theme="dark"] .almanack-collection{
+  color:var(--text-primary);
+}
+html[data-theme="dark"] .almanack-collection{
+  border-color:var(--border-soft);
+  background:
+    linear-gradient(90deg, rgba(213,190,150,.05), transparent 12%, transparent 88%, rgba(213,190,150,.05)),
+    linear-gradient(180deg, rgba(236,231,223,.035), rgba(236,231,223,.012)),
+    var(--bg-surface);
+  box-shadow:0 1px 0 rgba(255,255,255,.03) inset;
+}
+html[data-theme="dark"] .almanack-issue a,
+html[data-theme="dark"] .almanack-collection a{
+  color:var(--accent-hover);
+  text-decoration-color:rgba(153,173,191,.48);
+}
+html[data-theme="dark"] .almanack-issue a:hover,
+html[data-theme="dark"] .almanack-issue a:focus-visible,
+html[data-theme="dark"] .almanack-collection a:hover,
+html[data-theme="dark"] .almanack-collection a:focus-visible{
+  color:#d5be96;
+}
+html[data-theme="dark"] .almanack-masthead,
+html[data-theme="dark"] .almanack-collection__masthead{
+  border-top-color:rgba(236,231,223,.58);
+  border-bottom-color:rgba(213,190,150,.36);
+}
+html[data-theme="dark"] .almanack-masthead::before,
+html[data-theme="dark"] .almanack-masthead::after{
+  background:rgba(236,231,223,.16);
+}
+html[data-theme="dark"] .almanack-kicker,
+html[data-theme="dark"] .almanack-section-label,
+html[data-theme="dark"] .almanack-collection__eyebrow,
+html[data-theme="dark"] .almanack-collection__section-heading h2,
+html[data-theme="dark"] .almanack-collection__latest-date p,
+html[data-theme="dark"] .almanack-collection__issue-label,
+html[data-theme="dark"] .almanack-margin h3{
+  color:#d5be96;
+}
+html[data-theme="dark"] .almanack-masthead h1,
+html[data-theme="dark"] .almanack-collection__masthead h1,
+html[data-theme="dark"] .almanack-collection__latest-body h2,
+html[data-theme="dark"] .almanack-collection__issue h3,
+html[data-theme="dark"] .almanack-lead__body h2,
+html[data-theme="dark"] .almanack-secondary-card h3,
+html[data-theme="dark"] .almanack-worth h2,
+html[data-theme="dark"] .almanack-virtue h2,
+html[data-theme="dark"] .almanack-margin__header h2,
+html[data-theme="dark"] .almanack-margin__figure{
+  color:var(--text-primary) !important;
+}
+html[data-theme="dark"] .almanack-subtitle,
+html[data-theme="dark"] .almanack-masthead__meta,
+html[data-theme="dark"] .almanack-collection__masthead > p:not(.almanack-collection__eyebrow),
+html[data-theme="dark"] .almanack-collection__ledger,
+html[data-theme="dark"] .almanack-collection__section-heading p,
+html[data-theme="dark"] .almanack-collection__issue-lead,
+html[data-theme="dark"] .almanack-collection__empty p,
+html[data-theme="dark"] .almanack-note p:last-child,
+html[data-theme="dark"] .almanack-lead__body p,
+html[data-theme="dark"] .almanack-secondary-card p,
+html[data-theme="dark"] .almanack-worth p,
+html[data-theme="dark"] .almanack-virtue p:last-child,
+html[data-theme="dark"] .almanack-margin__header p,
+html[data-theme="dark"] .almanack-margin p,
+html[data-theme="dark"] .almanack-margin li,
+html[data-theme="dark"] .almanack-footer p{
+  color:var(--text-secondary);
+}
+html[data-theme="dark"] .almanack-quote,
+html[data-theme="dark"] .almanack-new,
+html[data-theme="dark"] .almanack-virtue,
+html[data-theme="dark"] .almanack-worth,
+html[data-theme="dark"] .almanack-collection__latest,
+html[data-theme="dark"] .almanack-collection__section-heading,
+html[data-theme="dark"] .almanack-collection__issue,
+html[data-theme="dark"] .almanack-collection__empty{
+  border-color:var(--oip-rule-standard);
+}
+html[data-theme="dark"] .almanack-quote blockquote,
+html[data-theme="dark"] .almanack-collection__latest-body blockquote,
+html[data-theme="dark"] .almanack-collection__issue-quote{
+  color:var(--text-primary);
+}
+html[data-theme="dark"] .almanack-quote figcaption{
+  color:#d5be96;
+}
+html[data-theme="dark"] .almanack-secondary-card,
+html[data-theme="dark"] .almanack-margin{
+  border-color:var(--border-soft);
+  background:var(--bg-surface);
+}
+html[data-theme="dark"] .almanack-image-button,
+html[data-theme="dark"] .almanack-secondary-card__thumb{
+  border-color:var(--border-soft);
+  background:var(--bg-raised);
+}
+html[data-theme="dark"] .almanack-image-button img,
+html[data-theme="dark"] .almanack-secondary-card__thumb img{
+  border-color:rgba(236,231,223,.12);
+  background:#101010;
+}
+html[data-theme="dark"] .almanack-margin__header,
+html[data-theme="dark"] .almanack-margin section{
+  border-color:var(--oip-rule-standard);
+}
+html[data-theme="dark"] .almanack-footer{
+  border-top-color:var(--oip-rule-engraved);
 }
 @media (max-width:900px){
   .almanack-collection__masthead h1{

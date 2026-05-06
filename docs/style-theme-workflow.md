@@ -27,7 +27,7 @@ When introducing a new preset:
 3. Copy the incoming values onto `:root` if the new preset should become the default.
 4. Keep the saved preset classes in the stylesheet so future work can compare or temporarily apply them in browser devtools.
 
-Do not add runtime theme switching, Hugo params, data files, or extra stylesheet loading unless the user explicitly asks for a public theme selector.
+Runtime theme switching is allowed only through the approved public theme selector in the shared masthead. Keep the selector CSS-token based, use `html[data-theme="light"]` and `html[data-theme="dark"]`, bootstrap the theme before the fingerprinted stylesheet loads, and persist only `light` or `dark` in `localStorage["oip-theme"]`.
 
 ## Divider Rules
 

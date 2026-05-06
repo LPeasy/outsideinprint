@@ -1,0 +1,19 @@
+<script>
+  (function () {
+    var storageKey = "oip-theme";
+    var theme = "";
+
+    try {
+      theme = window.localStorage.getItem(storageKey) || "";
+    } catch (error) {
+      theme = "";
+    }
+
+    if (theme !== "light" && theme !== "dark") {
+      theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.classList.add("theme-enabled");
+  })();
+</script>

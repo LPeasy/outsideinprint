@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="{{ site.Language.LanguageCode | default "en" }}">
   <head>
     {{- $meta := partial "metadata/page.html" . -}}
@@ -18,6 +18,7 @@
     {{- end }}
 
     <meta name="description" content="{{ $meta.description }}" />
+    <meta name="color-scheme" content="dark light" />
     {{- with $meta.author_name }}
     <meta name="author" content="{{ . }}" />
     {{- end }}
@@ -31,6 +32,7 @@
     {{ partial "opengraph.html" (dict "page" . "meta" $meta) }}
     {{ partial "twitter_cards.html" (dict "page" . "meta" $meta) }}
     {{ partial "schema.html" (dict "page" . "meta" $meta) }}
+    {{ partial "theme_bootstrap.html" . }}
 
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
@@ -42,6 +44,9 @@
     {{- end -}}
     {{- with .Params.style_variant -}}
       {{- $bodyClasses = $bodyClasses | append (printf "style-variant-%s" (urlize (printf "%v" .))) -}}
+    {{- end -}}
+    {{- with .Params.layout -}}
+      {{- $bodyClasses = $bodyClasses | append (printf "layout-%s" (urlize (printf "%v" .))) -}}
     {{- end -}}
     {{- $articleVariant := partial "article/variant-key.html" . -}}
     {{- if $articleVariant -}}
@@ -58,6 +63,7 @@
       {{ partial "footer.html" . }}
     </div>
     {{ partial "editorial/cartoon-thumbnail-lightbox.html" . }}
+    {{ partial "theme_toggle_script.html" . }}
     {{ partial "analytics.html" . }}
   </body>
 </html>

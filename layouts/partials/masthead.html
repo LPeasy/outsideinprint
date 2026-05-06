@@ -10,6 +10,16 @@
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
     <div class="masthead-nameplate__top-ornament" aria-hidden="true"></div>
+    <button class="theme-toggle masthead-theme-toggle" type="button" data-theme-toggle aria-pressed="true" title="Switch theme">
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="3.6"></circle>
+        <path d="M12 3.2v2.1M12 18.7v2.1M3.2 12h2.1M18.7 12h2.1M5.8 5.8l1.5 1.5M16.7 16.7l1.5 1.5M18.2 5.8l-1.5 1.5M7.3 16.7l-1.5 1.5"></path>
+      </svg>
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M18.9 14.6A7.6 7.6 0 0 1 9.4 5.1 7.6 7.6 0 1 0 18.9 14.6Z"></path>
+      </svg>
+      <span class="visually-hidden">Dark mode</span>
+    </button>
     <div class="masthead-nameplate__body">
       {{ if $isHomeMasthead }}
         <div class="masthead-side-deck masthead-side-deck--left" aria-hidden="true">
