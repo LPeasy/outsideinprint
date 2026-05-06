@@ -1,4 +1,4 @@
-current: pass-the-pepper
+current: lump-of-coal
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -144,3 +144,11 @@ cartoons:
     alt: "Editorial cartoon showing ICE officers in a detention dining hall treating a detainee request for pepper as a use-of-force report, with a pepper spray can on a tray and red warning labels on the report and can."
     width: 1535
     height: 1024
+  - slug: lump-of-coal
+    title: "Lump of Coal"
+    date: "2026-05-06"
+    image: "/images/editorial/lump-of-coal.png"
+    essay: "/essays/the-factory-in-the-footnote/"
+    alt: "Editorial cartoon showing a worker asking a factory owner for a lump of coal while the factory burns coal behind him and a cold family waits in a dark room."
+    width: 1672
+    height: 941
