@@ -765,7 +765,7 @@
       "deployed_on": "2026-05-05"
     },
     "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-07",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
       "previous_version": "1.0",
@@ -781,10 +781,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay tests climate policy through evidence, energy incentives, global coordination limits, grid and EV tradeoffs, nuclear feasibility, and uncertainty around policy effects."
-      }
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
     },
     "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-07",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
       "previous_version": "1.0",
@@ -800,10 +802,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised literary essay ties claims to the novel record, keeps interpretation bounded, and treats civilization, knowledge, coercion, and survival as institutional questions without forcing partisan meaning."
-      }
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
     },
     "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-07",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
       "previous_version": "1.0",
@@ -819,10 +823,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay distinguishes Bostrom-style probability claims from Nietzschean meaning-making, names the incentive to seek escape, and preserves uncertainty around metaphysical claims."
-      }
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
     },
     "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-07",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
       "previous_version": "1.0",
@@ -838,10 +844,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay grounds the border-security account in the public transcript, tests enforcement incentives, surveillance tradeoffs, oversight consequences, and uncertainty around implementation."
-      }
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
     },
     "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-07",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
       "previous_version": "1.0",
@@ -857,7 +865,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay grounds Russia-China dependence in trade and military-supply evidence while testing leverage, strategic incentives, autonomy tradeoffs, and uncertainty around war duration."
-      }
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
     }
   },
   "blocked": {},
@@ -997,8 +1007,10 @@
         "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
         "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
     }
   ]
 }
