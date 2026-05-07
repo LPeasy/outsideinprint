@@ -143,12 +143,19 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(frontPageSource, /currentCartoonSlug/);
   assert.match(frontPageSource, /\$orderedCartoons := sort \$cartoons "date" "desc"/);
   assert.match(frontPageSource, /\$recentCartoons := slice/);
-  assert.match(frontPageSource, /lt \(len \$recentCartoons\) 4/);
+  assert.match(frontPageSource, /lt \(len \$recentCartoons\) 2/);
   assert.match(frontPageSource, /View gallery/);
   assert.match(frontPageSource, /"gallery\/" \| absURL/);
   assert.match(frontPageSource, /data-home-cartoon-recent/);
   assert.match(frontPageSource, /data-home-cartoon-recent-card/);
   assert.match(frontPageSource, /data-home-cartoon-recent-trigger/);
+  assert.match(frontPageSource, /home-almanack-divider/);
+  assert.match(frontPageSource, /class="home-almanack home-almanack--lead"/);
+  assert.match(frontPageSource, /home-almanack__ledger/);
+  assert.match(frontPageSource, /home-almanack__ledger-row--number/);
+  assert.match(frontPageSource, /home-almanack__ledger-row--virtue/);
+  assert.ok(frontPageSource.indexOf('data-home-cartoon-recent') < frontPageSource.indexOf('home-almanack-divider'));
+  assert.ok(frontPageSource.indexOf('home-almanack--lead') < frontPageSource.indexOf('data-home-front-page-region="secondary"'));
   assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-image-button/);
@@ -183,6 +190,7 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(indexSource.indexOf('partial "home_imprint_statement.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
   assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
+  assert.ok(indexSource.indexOf('partial "newsletter_signup.html"') < indexSource.indexOf('class="home-browse'));
   assert.match(cartoonData, /slug: think-outside-the-box/);
   assert.match(cartoonData, new RegExp(`current: ${escapeRegex(currentCartoon.slug)}`));
   assert.match(cartoonData, new RegExp(`slug: ${escapeRegex(currentCartoon.slug)}`));
@@ -303,6 +311,7 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(source.indexOf('partial "home_imprint_statement.html"') < source.indexOf('partial "home_selected_collections.html"'));
   assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('partial "newsletter_signup.html"'));
+  assert.ok(source.indexOf('partial "newsletter_signup.html"') < source.indexOf('class="home-browse'));
 });
 
 test("homepage lead control still lives in expiring essay feature front matter", () => {

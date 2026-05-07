@@ -1,4 +1,3 @@
-{{ $titleId := "home-entry-threads-title" }}
 {{ $orderedSlugs := slice
   "floods-water-built-environment"
   "modern-bios"
@@ -38,11 +37,7 @@
 {{ end }}
 
 {{ if gt (len $entries) 0 }}
-  <section class="entry-threads entry-threads--home" aria-labelledby="{{ $titleId }}">
-    <header class="entry-threads__header page-shell page-shell--wide">
-      <h2 id="{{ $titleId }}" class="list-title">Start Reading</h2>
-      <p class="entry-threads__dek">Check out the collections below.</p>
-    </header>
+  <section class="entry-threads entry-threads--home" aria-label="Selected collections">
     <div class="entry-threads__grid page-shell page-shell--grid">
       {{ range $entries }}
         {{ $definition := .definition }}

@@ -112,8 +112,8 @@ $homepageOrder = @(
   'partial "home_front_page.html"',
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
-  'home-browse-title',
-  'partial "newsletter_signup.html"'
+  'partial "newsletter_signup.html"',
+  'class="home-browse'
 )
 
 $lastIndex = -1
@@ -137,7 +137,10 @@ foreach ($requiredSnippet in @(
   'data-home-front-page-region="lead"',
   'data-home-front-page-region="secondary"',
   '$almanackIssues := where site.RegularPages "Section" "almanack"',
-  '<aside class="home-almanack" aria-labelledby="home-almanack-title">',
+  '<aside class="home-almanack home-almanack--lead" aria-labelledby="home-almanack-title">',
+  'home-almanack-divider',
+  'home-almanack__ledger-row--number',
+  'home-almanack__ledger-row--virtue',
   '<a href="{{ .RelPermalink }}">Read issue &rarr;</a>'
 )) {
   if ($homeFrontPageTemplate -notmatch [regex]::Escape($requiredSnippet)) {
@@ -256,14 +259,23 @@ foreach ($requiredSnippet in @(
 $homeImprintTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_imprint_statement.html') -Raw
 foreach ($requiredSnippet in @(
   'class="home-manifesto"',
+  'class="home-manifesto__line"',
+  'Ask for the evidence. Read past the headlines. Think for yourself.'
+)) {
+  if ($homeImprintTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/home_imprint_statement.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($retiredSnippet in @(
   'id="home-manifesto-title"',
   'home-manifesto__line--primary',
   'home-manifesto__line--secondary',
   'A digital imprint of essays, reports, dialogues, and literature.',
   'Color over the lines. Read beyond the feed. Think for yourself.'
 )) {
-  if ($homeImprintTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/home_imprint_statement.html to contain: $requiredSnippet"
+  if ($homeImprintTemplate -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected layouts/partials/home_imprint_statement.html to remove: $retiredSnippet"
   }
 }
 
@@ -303,7 +315,7 @@ foreach ($requiredSnippet in @(
   '"moral-religious-philosophical-essays"',
   'homepage_entry_thread_start',
   'homepage_entry_thread_collection',
-  'Start Reading',
+  'aria-label="Selected collections"',
   '"in-the-image-of-god" "In the Image of God"',
   'partial "collections/lookup-definition.html"',
   'partial "collections/resolve-items.html"',
@@ -320,6 +332,8 @@ foreach ($retiredSnippet in @(
   'start_here_entry_thread_',
   'homepage_entry_thread_archive',
   'Browse all collections',
+  'Start Reading',
+  'Check out the collections below.',
   'showArchiveLink'
 )) {
   if ($entryThreadsPartial -match [regex]::Escape($retiredSnippet)) {

@@ -9,11 +9,18 @@
   {{ partial "home_imprint_statement.html" . }}
   {{ partial "home_selected_collections.html" . }}
 
-  <section class="home-browse home-browse--utility home-browse--home-curated page-shell page-shell--wide" aria-labelledby="home-browse-title">
-    <header class="home-browse__header">
-      <h2 id="home-browse-title" class="list-title">Browse the Archive</h2>
-      <p class="home-browse__dek">Use Archive, Gallery, Collections, or Library when you want to move beyond the front page.</p>
-    </header>
+  {{ partial "newsletter_signup.html" (dict
+    "page" .
+    "class" "newsletter-signup--home newsletter-signup--home-ribbon page-shell page-shell--wide"
+    "sourceSlot" "homepage_bobs_almanack_offer"
+    "eyebrow" "Limited time"
+    "title" "Free subscription to Bob's Almanack"
+    "dek" "Essays, cartoons, and notes in one compact weekly sheet. Free during the launch window."
+    "buttonLabel" "Subscribe free"
+    "note" "No spam. Easy to leave."
+  ) }}
+
+  <section class="home-browse home-browse--utility home-browse--home-curated page-shell page-shell--wide" aria-label="Archive navigation">
     <div class="home-browse__list">
       {{ range $exploreRoutes }}
         {{ $page := .page | default false }}
@@ -32,15 +39,4 @@
       {{ end }}
     </div>
   </section>
-
-  {{ partial "newsletter_signup.html" (dict
-    "page" .
-    "class" "newsletter-signup--home newsletter-signup--home-signoff page-shell page-shell--wide"
-    "sourceSlot" "homepage_newsletter"
-    "eyebrow" "Letter"
-    "title" "The weekly letter"
-    "dek" "New essays, editorial notes, and selected archive work from Outside In Print. One quiet email a week."
-    "buttonLabel" "Subscribe"
-    "note" "New work and occasional notes. Free to join, easy to leave."
-  ) }}
 {{ end }}
