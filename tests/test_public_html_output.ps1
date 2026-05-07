@@ -480,6 +480,7 @@ $requiredImportedMediaPages = @(
 $requiredEssayHeroPages = @(
   'public/essays/2025-supreme-court-wrap-up/index.html',
   'public/essays/synthetic-reasoning/index.html',
+  'public/essays/modern-prometheus/index.html',
   'public/essays/biter-the-slang-word-that-hits/index.html',
   'public/essays/the-fair-price-of-bitcoin-69420/index.html',
   'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html',
@@ -1094,6 +1095,7 @@ $requiredUxPages = @(
   'public/essays/presidential-elections/index.html',
   'public/essays/the-risk-management-buffet/index.html',
   'public/essays/synthetic-reasoning/index.html',
+  'public/essays/modern-prometheus/index.html',
   'public/essays/in-the-image-of-god/index.html',
   'public/essays/the-hate-ledger/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
@@ -2307,7 +2309,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*103 published pieces'
+    Pattern = '11 public collections.*104 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2728,6 +2730,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the AI data center essay' },
   @{ Path = 'public/essays/the-model-that-could-not-leave/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the Manus essay' },
   @{ Path = 'public/essays/smokestack-spreadsheets/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Smokestack Spreadsheets' },
+  @{ Path = 'public/essays/modern-prometheus/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Modern Prometheus' },
   @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
   @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
   @{ Path = 'public/essays/the-factory-in-the-footnote/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Factory in the Footnote' },
