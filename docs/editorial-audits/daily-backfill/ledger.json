@@ -763,6 +763,101 @@
       },
       "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
       "deployed_on": "2026-05-05"
+    },
+    "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests climate policy through evidence, energy incentives, global coordination limits, grid and EV tradeoffs, nuclear feasibility, and uncertainty around policy effects."
+      }
+    },
+    "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised literary essay ties claims to the novel record, keeps interpretation bounded, and treats civilization, knowledge, coercion, and survival as institutional questions without forcing partisan meaning."
+      }
+    },
+    "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay distinguishes Bostrom-style probability claims from Nietzschean meaning-making, names the incentive to seek escape, and preserves uncertainty around metaphysical claims."
+      }
+    },
+    "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds the border-security account in the public transcript, tests enforcement incentives, surveillance tradeoffs, oversight consequences, and uncertainty around implementation."
+      }
+    },
+    "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds Russia-China dependence in trade and military-supply evidence while testing leverage, strategic incentives, autonomy tradeoffs, and uncertainty around war duration."
+      }
     }
   },
   "blocked": {},
@@ -892,6 +987,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
       "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
       "deployed_on": "2026-05-05"
+    },
+    {
+      "batch_id": "2026-05-07",
+      "selected_slugs": [
+        "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy",
+        "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe",
+        "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter",
+        "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
+        "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md"
     }
   ]
 }
