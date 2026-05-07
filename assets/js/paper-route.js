@@ -392,7 +392,7 @@
     }
 
     this.muteButton.textContent = this.muted ? "Sound: Muted" : "Sound: On";
-    this.muteButton.setAttribute("aria-label", this.muted ? "Turn Paper Route sound on" : "Mute Paper Route sound");
+    this.muteButton.setAttribute("aria-label", this.muted ? "Turn Paper-Bob sound on" : "Mute Paper-Bob sound");
     this.muteButton.setAttribute("aria-pressed", this.muted ? "true" : "false");
   };
 
