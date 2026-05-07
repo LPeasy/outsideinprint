@@ -6,10 +6,38 @@
 {{ $isGallery := eq .Section "gallery" }}
 {{ $isRandom := eq .Section "random" }}
 {{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
+{{ $paperRoute := site.Params.paper_route | default dict }}
+{{ $paperRouteEnabled := and $isHomeMasthead (ne ($paperRoute.enabled | default true) false) }}
 <header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
     <div class="masthead-nameplate__top-ornament" aria-hidden="true"></div>
+    {{ if $paperRouteEnabled }}
+      {{ $paperBobLogo := resources.Get "images/paper-route/paper-bob-logo.png" }}
+      {{ $paperBobLogo1x := $paperBobLogo.Resize "136x webp q82" }}
+      {{ $paperBobLogo2x := $paperBobLogo.Resize "272x webp q82" }}
+      <button
+        class="paper-route-toggle masthead-paper-route-toggle"
+        type="button"
+        data-paper-route-launch
+        aria-haspopup="dialog"
+        aria-controls="paper-route-arcade"
+        title="Launch Paper Route"
+      >
+        <img
+          class="paper-route-toggle__logo"
+          src="{{ $paperBobLogo1x.RelPermalink }}"
+          srcset="{{ $paperBobLogo1x.RelPermalink }} 136w, {{ $paperBobLogo2x.RelPermalink }} 272w"
+          sizes="(max-width: 420px) 88px, 112px"
+          width="{{ $paperBobLogo1x.Width }}"
+          height="{{ $paperBobLogo1x.Height }}"
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+        >
+        <span class="visually-hidden">Launch Paper Route arcade</span>
+      </button>
+    {{ end }}
     <button class="theme-toggle masthead-theme-toggle" type="button" data-theme-toggle aria-pressed="true" title="Switch theme">
       <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <circle cx="12" cy="12" r="3.6"></circle>

@@ -1896,6 +1896,72 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-launch'
+    Message = 'expected the homepage masthead to expose the Paper Route launcher button'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-overlay'
+    Message = 'expected the homepage to include the Paper Route dialog shell'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-phaser-src=(?:"[^"]*phaser-3\.90\.0-arcade-physics[^"]*"|[^\s>]*phaser-3\.90\.0-arcade-physics[^\s>]*)'
+    Message = 'expected the homepage Paper Route shell to expose the pinned same-origin Phaser asset URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-rules-src=(?:"[^"]*paper-route-rules[^"]*"|[^\s>]*paper-route-rules[^\s>]*)'
+    Message = 'expected the homepage Paper Route shell to expose the lazy-loaded rules URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-bob-src=(?:"[^"]*paper-bob-sprite[^"]*"|[^\s>]*paper-bob-sprite[^\s>]*)'
+    Message = 'expected the homepage Paper Route shell to expose the lazy-loaded Paper-Bob sprite URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'paper-route-launcher'
+    Message = 'expected the homepage to include only the small Paper Route launcher script on initial load'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<script\b[^>]*src=(?:"[^"]*phaser-3\.90\.0-arcade-physics[^"]*"|[^\s>]*phaser-3\.90\.0-arcade-physics[^\s>]*)'
+    Message = 'expected the homepage not to load Phaser before the Paper Route launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<script\b[^>]*src=(?:"[^"]*paper-route-rules[^"]*"|[^\s>]*paper-route-rules[^\s>]*)'
+    Message = 'expected the homepage not to load Paper Route rules before the launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<img\b[^>]*src=(?:"[^"]*paper-bob-sprite[^"]*"|[^\s>]*paper-bob-sprite[^\s>]*)'
+    Message = 'expected the homepage not to request the Paper-Bob game sprite before the launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|phaser-3\.90\.0-arcade-physics'
+    Message = 'expected the Paper Route launcher and runtime URLs to stay off archive pages'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|phaser-3\.90\.0-arcade-physics'
+    Message = 'expected the Paper Route launcher and runtime URLs to stay off library pages'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/404.html'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|phaser-3\.90\.0-arcade-physics'
+    Message = 'expected the Paper Route launcher and runtime URLs to stay off the 404 page'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/start-here/index.html'
     Pattern = '(?s)<link rel="canonical" href="https://outsideinprint\.org/"'
     Message = 'expected /start-here/ to canonicalize to the homepage'
