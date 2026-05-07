@@ -1,4 +1,4 @@
-current: lump-of-coal
+current: modern-prometheus
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -150,5 +150,13 @@ cartoons:
     image: "/images/editorial/lump-of-coal.png"
     essay: "/essays/the-factory-in-the-footnote/"
     alt: "Editorial cartoon showing a worker asking a factory owner for a lump of coal while the factory burns coal behind him and a cold family waits in a dark room."
+    width: 1672
+    height: 941
+  - slug: modern-prometheus
+    title: "Modern Prometheus"
+    date: "2026-05-07"
+    image: "/images/editorial/modern-prometheus.png"
+    essay: "/essays/modern-prometheus/"
+    alt: "Editorial cartoon showing a massive grid switchboard drawing yellow lightning from a tower labeled SKY POWER and sending electric lines to signs for NIGHT WORK, HOME LIGHT, and FARM LINE."
     width: 1672
     height: 941
