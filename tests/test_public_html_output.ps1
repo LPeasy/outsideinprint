@@ -454,10 +454,6 @@ $retiredRouteIssues = New-Object System.Collections.Generic.List[string]
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
 $targetPageHtml = @{}
-$manifestoSupportArrowPattern = ('(?:&rarr;|&#8594;|&#x2192;|' + [regex]::Escape([string][char]0x2192) + ')')
-$manifestoSupportLinePattern = ('Support independent journalism\s*' + $manifestoSupportArrowPattern)
-$manifestoPlacementPattern = '(?s)home-manifesto.*?data-home-front-page-region=(?:"lead"|lead)'
-$manifestoLinkPattern = ('(?s)home-manifesto__line--support.*?home-manifesto__support-link.*?#newsletter-signup-title.*?Support independent journalism\s*' + $manifestoSupportArrowPattern + '</a>')
 
 $requiredSemanticPages = [ordered]@{
   'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
@@ -1695,13 +1691,26 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-manifesto.*?entry-threads--home.*?home-browse-title.*?newsletter-signup-title'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-manifesto.*?entry-threads--home.*?newsletter-signup-title.*?home-browse'
     Message = 'expected the homepage to preserve the editorial module order from the story grid through the lower-page signoff'
   },
   @{
     Path = 'public/index.html'
     Pattern = 'Start Reading'
-    Message = 'expected the homepage to render the curated Start Reading module label'
+    Message = 'expected the homepage not to render the retired curated Start Reading module label'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Check out the collections below\.'
+    Message = 'expected the homepage not to render the retired collection helper sentence'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Browse the Archive|Use Archive, Gallery, Collections, or Library when you want to move beyond the front page\.'
+    Message = 'expected the homepage not to render the retired archive navigation heading or helper copy'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -1822,8 +1831,24 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)A digital imprint of essays, reports, dialogues, and literature\..*?Color over the lines\. Read beyond the feed\. Think for yourself\.'
-    Message = 'expected the homepage to carry the preserved manifesto lines above Start Reading'
+    Pattern = 'Ask for the evidence\. Read past the headlines\. Think for yourself\.'
+    Message = 'expected the homepage to carry the typeset manifesto motto above selected collections'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.|Color over the lines\. Read beyond the feed\. Think for yourself\.'
+    Message = 'expected the homepage not to carry the retired imprint and manifesto copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)newsletter-signup--home-ribbon.*?Limited time.*?Free subscription to Bob(?:''|&#39;)s Almanack.*?Subscribe free'
+    Message = 'expected the homepage newsletter signup to render as the Bob''s Almanack subscription ribbon'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-analytics-source-slot="?homepage_bobs_almanack_offer"?'
+    Message = 'expected the homepage signup form to preserve the Bob''s Almanack analytics source slot'
   },
   @{
     Path = 'public/index.html'
@@ -2303,8 +2328,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?Read issue'
-    Message = 'expected the homepage Almanack insert to feature the May 2 issue without a collection label'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Frugality.*?Read issue'
+    Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
     Path = 'public/index.html'
@@ -2770,8 +2795,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
 
   $recentMatches = @([regex]::Matches($homeIndexHtml, '<figure\b(?=[^>]*\beditorial-cartoon-recent__item\b)(?=[^>]*\bdata-home-cartoon-recent-card\b)[^>]*data-cartoon-slug=(?:"([^">]+)"|([^\s>]+))', 'IgnoreCase'))
-  if ($recentMatches.Count -ne [Math]::Min(4, $recentHomeCartoonSlugs.Count)) {
-    $uxIssues.Add("public/index.html => expected exactly $([Math]::Min(4, $recentHomeCartoonSlugs.Count)) recent homepage cartoon cards, found $($recentMatches.Count)")
+  if ($recentMatches.Count -ne [Math]::Min(2, $recentHomeCartoonSlugs.Count)) {
+    $uxIssues.Add("public/index.html => expected exactly $([Math]::Min(2, $recentHomeCartoonSlugs.Count)) recent homepage cartoon cards, found $($recentMatches.Count)")
   }
   else {
     $actualRecentSlugs = @($recentMatches | ForEach-Object {

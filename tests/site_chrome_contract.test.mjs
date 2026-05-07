@@ -138,7 +138,7 @@ test("footer and random route now point readers home instead of Welcome", () => 
 test("homepage browse band stays curated and replaces Welcome with Library", () => {
   assert.doesNotMatch(homepage, /<div class="k">(Start|Section|Index|Explore)<\/div>/);
   assert.doesNotMatch(homepage, /card-center/);
-  const homeBrowseClasses = classTokensForElement(homepage, /<section\b[^>]*aria-labelledby="home-browse-title"[^>]*>/, "homepage browse");
+  const homeBrowseClasses = classTokensForElement(homepage, /<section\b[^>]*aria-label="Archive navigation"[^>]*>/, "homepage browse");
   for (const token of ["home-browse", "home-browse--utility", "home-browse--home-curated", "page-shell", "page-shell--wide"]) {
     assert.ok(homeBrowseClasses.has(token), `expected homepage browse class token: ${token}`);
   }
@@ -148,19 +148,20 @@ test("homepage browse band stays curated and replaces Welcome with Library", () 
   assert.doesNotMatch(homepage, /"label" "Feeling curious\?"/);
   assert.match(homepage, /class="home-browse__list"/);
   assert.match(homepage, /home-browse__item-title">\{\{ \$title \}\}<\/div>/);
-  assert.match(homepage, /Use Archive, Gallery, Collections, or Library when you want to move beyond the front page\./);
+  assert.doesNotMatch(homepage, /Browse the Archive/);
+  assert.doesNotMatch(homepage, /Use Archive, Gallery, Collections, or Library when you want to move beyond the front page\./);
   assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.doesNotMatch(css, /\.card-center\{/);
   assert.match(css, /\.home-browse__item-title\{[\s\S]*font-size:14px;[\s\S]*line-height:1\.45;/);
 });
 
-test("homepage composition inserts the manifesto between the hero and Start Reading", () => {
+test("homepage composition keeps the motto, collections, signup ribbon, and archive navigation in order", () => {
   assert.match(homeFrontPage, /id="home-front-page-title"/);
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
   assert.match(homeFrontPage, /site\.Data\.editorial_cartoons/);
   assert.match(homeFrontPage, /\$orderedCartoons := sort \$cartoons "date" "desc"/);
   assert.match(homeFrontPage, /\$recentCartoons := slice/);
-  assert.match(homeFrontPage, /lt \(len \$recentCartoons\) 4/);
+  assert.match(homeFrontPage, /lt \(len \$recentCartoons\) 2/);
   assert.match(homeFrontPage, /View gallery/);
   assert.match(homeFrontPage, /data-home-cartoon-recent/);
   assert.match(homeFrontPage, /data-home-cartoon-recent-card/);
@@ -179,6 +180,13 @@ test("homepage composition inserts the manifesto between the hero and Start Read
   assert.equal((homeFrontPage.match(/data-home-front-page-region="lead"/g) || []).length, 1);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="secondary"/g) || []).length, 1);
   assert.match(homeFrontPage, /home-front-page__secondary-item/);
+  assert.match(homeFrontPage, /home-almanack-divider/);
+  assert.match(homeFrontPage, /class="home-almanack home-almanack--lead"/);
+  assert.match(homeFrontPage, /home-almanack__ledger/);
+  assert.match(homeFrontPage, /home-almanack__ledger-row--number/);
+  assert.match(homeFrontPage, /home-almanack__ledger-row--virtue/);
+  assert.ok(homeFrontPage.indexOf('data-home-cartoon-recent') < homeFrontPage.indexOf('home-almanack-divider'));
+  assert.ok(homeFrontPage.indexOf('home-almanack--lead') < homeFrontPage.indexOf('data-home-front-page-region="secondary"'));
   assert.match(homeFrontPage, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
   assert.doesNotMatch(homeFrontPage, />Front Page</);
   assert.doesNotMatch(homeFrontPage, /A curated front page from Outside In Print/);
@@ -189,16 +197,20 @@ test("homepage composition inserts the manifesto between the hero and Start Read
 
   assert.match(homeImprintStatement, /class="home-manifesto"/);
   assert.match(homeImprintStatement, /home-manifesto__inner/);
-  assert.match(homeImprintStatement, /home-manifesto__line--primary/);
-  assert.match(homeImprintStatement, /home-manifesto__line--secondary/);
-  assert.match(homeImprintStatement, /A digital imprint of essays, reports, dialogues, and literature\./);
-  assert.match(homeImprintStatement, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
+  assert.match(homeImprintStatement, /class="home-manifesto__line"/);
+  assert.match(homeImprintStatement, /Ask for the evidence\. Read past the headlines\. Think for yourself\./);
+  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--primary/);
+  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--secondary/);
+  assert.doesNotMatch(homeImprintStatement, /A digital imprint of essays, reports, dialogues, and literature\./);
+  assert.doesNotMatch(homeImprintStatement, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
 
   assert.match(homeSelectedCollections, /partial "entry_threads\.html" \./);
   assert.doesNotMatch(homeSelectedCollections, /showArchiveLink/);
   assert.doesNotMatch(homeSelectedCollections, /"source" "homepage"/);
 
-  assert.match(entryThreads, /Start Reading/);
+  assert.doesNotMatch(entryThreads, /Start Reading/);
+  assert.doesNotMatch(entryThreads, /Check out the collections below\./);
+  assert.match(entryThreads, /aria-label="Selected collections"/);
   assert.match(entryThreads, /floods-water-built-environment/);
   assert.match(entryThreads, /modern-bios/);
   assert.match(entryThreads, /moral-religious-philosophical-essays/);
@@ -210,10 +222,12 @@ test("homepage composition inserts the manifesto between the hero and Start Read
 
   assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(homepage.indexOf('partial "home_imprint_statement.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
-  assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('home-browse-title'));
-  assert.ok(homepage.indexOf('home-browse-title') < homepage.indexOf('partial "newsletter_signup.html"'));
-  assert.match(homepage, /"title" "The weekly letter"/);
-  assert.match(homepage, /"eyebrow" "Letter"/);
+  assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
+  assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('class="home-browse'));
+  assert.match(homepage, /newsletter-signup--home-ribbon/);
+  assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
+  assert.match(homepage, /"title" "Free subscription to Bob's Almanack"/);
+  assert.match(homepage, /"eyebrow" "Limited time"/);
 
   assert.match(galleryContent, /title: "Gallery"/);
   assert.match(galleryContent, /digital gallery/i);
@@ -289,14 +303,16 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
     assert.doesNotMatch(cssRule(css, selector), /repeating-linear-gradient/);
   }
   assert.match(css, /\.home-manifesto\{\s*margin-top:2\.35rem;\s*\}/);
-  assert.match(css, /\.home-manifesto__inner\{[\s\S]*grid-template-columns:minmax\(110px, 136px\) minmax\(0, 1fr\);[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
-  assert.match(css, /\.home-manifesto__inner::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(css, /\.home-manifesto__copy\{[\s\S]*display:grid;[\s\S]*max-width:46rem;/);
-  assert.match(css, /\.home-manifesto__line--primary\{[\s\S]*font-size:clamp\(1\.12rem, 1\.04rem \+ 0\.42vw, 1\.24rem\);/);
-  assert.match(css, /\.home-manifesto__line--secondary\{[\s\S]*font-size:clamp\(1\.5rem, 1\.18rem \+ 1vw, 1\.9rem\);/);
+  assert.match(css, /\.home-manifesto__inner\{[\s\S]*padding:1\.08rem 0 1\.02rem;[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);[\s\S]*border-bottom:1px solid var\(--oip-rule-engraved\);/);
+  assert.match(css, /\.home-manifesto__inner::before,\s*\.home-manifesto__inner::after\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.home-manifesto__copy\{[\s\S]*max-width:54rem;[\s\S]*text-align:center;/);
+  assert.match(css, /\.home-manifesto__line\{[\s\S]*font-size:1\.48rem;[\s\S]*letter-spacing:0;/);
+  assert.doesNotMatch(css, /\.home-manifesto__line--primary\{/);
+  assert.doesNotMatch(css, /\.home-manifesto__line--secondary\{/);
   assert.match(css, /\.entry-threads__grid\{\s*display:grid;/);
   assert.match(css, /\.entry-threads--home \.entry-threads__grid\{\s*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
-  assert.match(css, /\.newsletter-signup--home-signoff \.newsletter-signup__inner\{[\s\S]*max-width:30rem;/);
+  assert.match(css, /\.newsletter-signup--home-ribbon\{[\s\S]*margin-top:2\.15rem;[\s\S]*border-top:0;/);
+  assert.match(css, /\.newsletter-signup--home-ribbon \.newsletter-signup__inner\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) minmax\(18rem, \.86fr\);[\s\S]*background:/);
   assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-front-page__stories\{\s*display:grid;\s*grid-template-columns:minmax\(0, 1\.65fr\) minmax\(0, 1fr\);/);
   assert.match(css, /\.home-front-page__lead\{[\s\S]*border-right:1px solid var\(--oip-rule-standard\);/);
@@ -323,7 +339,11 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.essays-front__month::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.essays-front__month-list \.item\{[\s\S]*border-bottom-color:var\(--oip-rule-faint\);/);
   assert.match(css, /\.essays-front__month-list \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
+  assert.match(css, /\.home-almanack-divider\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.home-almanack__ledger\{[\s\S]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.home-almanack__ledger-row\{[\s\S]*grid-template-columns:1fr;[\s\S]*border-left:1px solid rgba\(32,26,21,\.16\);/);
   assert.match(css, /\.editorial-cartoon-recent\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.editorial-cartoon-recent__item:nth-child\(odd\):not\(:last-child\)::after\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
   assert.match(css, /\.editorial-cartoon::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.editorial-cartoon-recent__trigger\{[\s\S]*aspect-ratio:16 \/ 9;/);
   assert.match(css, /\.essay-cartoon-thumb img\{[\s\S]*aspect-ratio:16 \/ 9;/);
@@ -340,7 +360,9 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
     assert.doesNotMatch(cssRule(css, selector), /var\(--oip-rule-/);
   }
   assert.match(css, /@media \(max-width:420px\)\{[\s\S]*\.editorial-cartoon-recent\{\s*grid-template-columns:1fr;/);
-  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-manifesto__inner\{\s*grid-template-columns:1fr;/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-almanack__ledger\{\s*grid-template-columns:1fr;/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-manifesto__inner\{\s*padding:\.9rem 0 \.85rem;/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.newsletter-signup--home-ribbon \.newsletter-signup__inner\{\s*grid-template-columns:1fr;/);
   assert.doesNotMatch(css, /\.entry-thread__archive\{/);
   assert.doesNotMatch(css, /\.start-here-page\{/);
   assert.doesNotMatch(css, /\.newsletter-signup--start-here/);

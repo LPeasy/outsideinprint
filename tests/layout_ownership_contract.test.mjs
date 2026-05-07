@@ -30,18 +30,26 @@ test("homepage manifesto owns deliberate route-level hooks and drops dead start-
   assert.match(homeImprintStatement, /class="home-manifesto"/);
   assert.match(homeImprintStatement, /class="home-manifesto__inner page-shell page-shell--wide"/);
   assert.match(homeImprintStatement, /class="home-manifesto__copy"/);
-  assert.match(homeImprintStatement, /home-manifesto__line--primary/);
-  assert.match(homeImprintStatement, /home-manifesto__line--secondary/);
+  assert.match(homeImprintStatement, /class="home-manifesto__line"/);
+  assert.match(homeImprintStatement, /Ask for the evidence\. Read past the headlines\. Think for yourself\./);
+  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--primary/);
+  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--secondary/);
+  assert.doesNotMatch(homeImprintStatement, /A digital imprint of essays, reports, dialogues, and literature\./);
 
   for (const selector of [
     ".home-manifesto{",
     ".home-manifesto__inner{",
     ".home-manifesto__copy{",
-    ".home-manifesto__line{",
+    ".home-manifesto__line{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+
+  for (const retiredSelector of [
     ".home-manifesto__line--primary{",
     ".home-manifesto__line--secondary{"
   ]) {
-    assert.match(css, new RegExp(escapeRegex(selector)));
+    assert.doesNotMatch(css, new RegExp(escapeRegex(retiredSelector)));
   }
 
   for (const deadSelector of [
@@ -344,8 +352,11 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
   for (const snippet of [
     "`home-manifesto`",
     "`home-manifesto__inner`",
-    "`.home-manifesto__line--primary`",
-    "`.home-manifesto__line--secondary`",
+    "`home-manifesto__copy`",
+    "`home-manifesto__line`",
+    "`home-almanack`",
+    "`home-almanack__ledger`",
+    "`newsletter-signup--home-ribbon`",
     "| About route | `/about/`",
     "`section-front--about`",
     "`about-route`",
@@ -409,6 +420,8 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
   for (const stalePhrase of [
     "`start-here-page`",
     "`newsletter-signup--start-here`",
+    "`home-manifesto__line--primary`",
+    "`home-manifesto__line--secondary`",
     "`collection-room`",
     "`collections-directory__guide*`",
     "| Essays front | `/essays/`",

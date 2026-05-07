@@ -18,7 +18,7 @@
   {{ end }}
 {{ end }}
 {{ range $orderedCartoons }}
-  {{ if and (ne .slug $currentCartoonSlug) (lt (len $recentCartoons) 4) }}
+  {{ if and (ne .slug $currentCartoonSlug) (lt (len $recentCartoons) 2) }}
     {{ $recentCartoons = $recentCartoons | append . }}
   {{ end }}
 {{ end }}
@@ -86,34 +86,6 @@
             </figcaption>
           </figure>
         {{ end }}
-        {{ with $latestAlmanack }}
-          {{ $leadEssay := false }}
-          {{ with .Params.essays }}
-            {{ if gt (len .) 0 }}
-              {{ $leadEssay = index . 0 }}
-            {{ end }}
-          {{ end }}
-          <aside class="home-almanack" aria-labelledby="home-almanack-title">
-            <p class="list-title home-almanack__kicker">Bob's Almanack</p>
-            <h3 id="home-almanack-title">
-              <a href="{{ .RelPermalink }}">{{ .Date.Format "January 2, 2006" }}</a>
-            </h3>
-            {{ with .Params.opening_quote }}
-              <blockquote>{{ . }}</blockquote>
-            {{ end }}
-            {{ with $leadEssay }}
-              {{ $essayURL := .url | default "" }}
-              {{ $essayHref := $essayURL }}
-              {{ if and $essayURL (not (hasPrefix $essayURL "http")) }}
-                {{ $essayHref = $essayURL | relURL }}
-              {{ end }}
-              <p class="home-almanack__lead">Lead: <a href="{{ $essayHref }}">{{ .title }}</a></p>
-            {{ end }}
-            <p class="home-almanack__actions">
-              <a href="{{ .RelPermalink }}">Read issue &rarr;</a>
-            </p>
-          </aside>
-        {{ end }}
         {{ if gt (len $recentCartoons) 0 }}
           <div class="editorial-cartoon-recent" data-home-cartoon-recent aria-label="Recent front-page cartoons">
             {{ range $recentCartoons }}
@@ -146,6 +118,79 @@
               </figure>
             {{ end }}
           </div>
+        {{ end }}
+        {{ with $latestAlmanack }}
+          {{ $leadEssay := false }}
+          {{ with .Params.essays }}
+            {{ if gt (len .) 0 }}
+              {{ $leadEssay = index . 0 }}
+            {{ end }}
+          {{ end }}
+          {{ $margin := .Params.margin | default (dict) }}
+          {{ $oneNumber := index $margin "one_number" | default (dict) }}
+          {{ $oneDocument := index $margin "one_document" | default (dict) }}
+          {{ $virtue := .Params.virtue | default (dict) }}
+          {{ $oneNumberURL := $oneNumber.source_url | default "" }}
+          {{ $oneDocumentURL := $oneDocument.url | default "" }}
+          <div class="home-almanack-divider" aria-hidden="true"></div>
+          <aside class="home-almanack home-almanack--lead" aria-labelledby="home-almanack-title">
+            <header class="home-almanack__header">
+              <p class="list-title home-almanack__kicker">Bob's Almanack</p>
+              <h3 id="home-almanack-title">
+                <a href="{{ .RelPermalink }}">{{ .Date.Format "January 2, 2006" }}</a>
+              </h3>
+            </header>
+            {{ with .Params.opening_quote }}
+              <blockquote>{{ . }}</blockquote>
+            {{ end }}
+            {{ with $leadEssay }}
+              {{ $essayURL := .url | default "" }}
+              {{ $essayHref := $essayURL }}
+              {{ if and $essayURL (not (hasPrefix $essayURL "http")) }}
+                {{ $essayHref = $essayURL | relURL }}
+              {{ end }}
+              <p class="home-almanack__lead">Lead: <a href="{{ $essayHref }}">{{ .title }}</a></p>
+            {{ end }}
+            <div class="home-almanack__ledger" aria-label="In the Margins">
+              <p class="home-almanack__ledger-title">In the Margins</p>
+              {{ with $oneNumber.figure }}
+                <p class="home-almanack__ledger-row home-almanack__ledger-row--number">
+                  <span class="home-almanack__ledger-key">Number</span>
+                  <span class="home-almanack__ledger-body">
+                    <strong class="home-almanack__ledger-figure">{{ . }}</strong>
+                    {{ with $oneNumber.note }}
+                      {{ if $oneNumberURL }}
+                        <a href="{{ $oneNumberURL }}" class="home-almanack__ledger-note">{{ . }}</a>
+                      {{ else }}
+                        <span class="home-almanack__ledger-note">{{ . }}</span>
+                      {{ end }}
+                    {{ end }}
+                  </span>
+                </p>
+              {{ end }}
+              {{ with $oneDocument.title }}
+                <p class="home-almanack__ledger-row">
+                  <span class="home-almanack__ledger-key">Document</span>
+                  <span class="home-almanack__ledger-body">
+                    {{ if $oneDocumentURL }}
+                      <a href="{{ $oneDocumentURL }}" class="home-almanack__ledger-note">{{ . }}</a>
+                    {{ else }}
+                      <span class="home-almanack__ledger-note">{{ . }}</span>
+                    {{ end }}
+                  </span>
+                </p>
+              {{ end }}
+              {{ with $virtue.name }}
+                <p class="home-almanack__ledger-row home-almanack__ledger-row--virtue">
+                  <span class="home-almanack__ledger-key">Virtue</span>
+                  <span class="home-almanack__ledger-body"><strong>{{ . }}</strong></span>
+                </p>
+              {{ end }}
+            </div>
+            <p class="home-almanack__actions">
+              <a href="{{ .RelPermalink }}">Read issue &rarr;</a>
+            </p>
+          </aside>
         {{ end }}
       </article>
 

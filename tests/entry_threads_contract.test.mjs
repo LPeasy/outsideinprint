@@ -46,6 +46,8 @@ test("entry threads now exposes homepage-only analytics and no archive footer", 
   assert.doesNotMatch(entryThreads, /homepage_entry_thread_archive/);
   assert.doesNotMatch(entryThreads, /showArchiveLink/);
   assert.doesNotMatch(entryThreads, /Browse all collections/);
-  assert.match(entryThreads, /Start Reading/);
+  assert.doesNotMatch(entryThreads, /Start Reading/);
+  assert.doesNotMatch(entryThreads, /Check out the collections below\./);
+  assert.match(entryThreads, /aria-label="Selected collections"/);
   assert.match(entryThreads, /"in-the-image-of-god" "In the Image of God"/);
 });
