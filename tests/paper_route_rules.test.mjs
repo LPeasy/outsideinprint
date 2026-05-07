@@ -13,7 +13,7 @@ function createRules(highScore = 0) {
   return sandbox.window.OipPaperRouteRules.create({ highScore });
 }
 
-test("Paper Route V2 starts with 30 papers and ends after 75 seconds", () => {
+test("Paper-Bob V2 starts with 30 papers and ends after 75 seconds", () => {
   const rules = createRules();
   rules.start();
   assert.equal(rules.state.papers, 30);

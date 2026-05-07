@@ -28,16 +28,17 @@ function readPngMetadata(filePath) {
   };
 }
 
-test("Paper Route launcher stays homepage-only and outside primary navigation", () => {
+test("Paper-Bob launcher stays homepage-only and outside primary navigation", () => {
   assert.match(config, /\[params\.paper_route\][\s\S]*enabled = true/);
   assert.match(masthead, /\$paperRouteEnabled := and \$isHomeMasthead/);
   assert.match(masthead, /resources\.Get "images\/paper-route\/paper-bob-logo\.png"/);
   assert.match(masthead, /data-paper-route-launch/);
   assert.match(masthead, /aria-haspopup="dialog"/);
   assert.match(masthead, /aria-controls="paper-route-arcade"/);
-  assert.match(masthead, /Launch Paper Route arcade/);
+  assert.match(masthead, /Launch Paper-Bob arcade/);
   assert.match(masthead, /paper-route-toggle__logo/);
   assert.doesNotMatch(masthead, /paper-route-toggle__mark/);
+  assert.doesNotMatch(masthead, /Paper\s+Route/);
   assert.doesNotMatch(
     masthead.match(/<nav class="nav nav--section-rail"[\s\S]*?<\/nav>/)?.[0] || "",
     /paper-route/i
@@ -45,7 +46,7 @@ test("Paper Route launcher stays homepage-only and outside primary navigation", 
   assert.match(baseLayout, /partial "paper_route\.html"/);
 });
 
-test("Paper Route partial lazy-loads pinned same-origin Phaser and runtime assets", () => {
+test("Paper-Bob partial lazy-loads pinned same-origin Phaser and runtime assets", () => {
   assert.match(paperRoutePartial, /\$enabled := and \.IsHome/);
   assert.match(paperRoutePartial, /resources\.Get "vendor\/phaser\/phaser-3\.90\.0-arcade-physics\.min\.js" \| resources\.Fingerprint/);
   assert.match(paperRoutePartial, /resources\.Get "js\/paper-route-rules\.js" \| resources\.Minify \| resources\.Fingerprint/);
@@ -73,6 +74,8 @@ test("Paper Route partial lazy-loads pinned same-origin Phaser and runtime asset
   assert.match(paperRoutePartial, /data-paper-route-retry/);
   assert.match(paperRoutePartial, /data-paper-route-touch/);
   assert.match(paperRoutePartial, /data-paper-route-close[\s\S]*tabindex="-1"/);
+  assert.match(paperRoutePartial, /<h2 id="paper-route-title">Paper-Bob<\/h2>/);
+  assert.doesNotMatch(paperRoutePartial, /Paper\s+Route/);
   assert.match(paperRoutePartial, /<script defer src="\{\{ \$launcher\.RelPermalink \}\}"/);
   assert.doesNotMatch(paperRoutePartial, /<script[^>]+phaser-3\.90\.0-arcade-physics/);
   assert.match(vendorReadme, /Phaser 3\.90\.0 Arcade Physics/);
@@ -81,7 +84,7 @@ test("Paper Route partial lazy-loads pinned same-origin Phaser and runtime asset
   assert.match(vendorLicense, /THE SOFTWARE IS PROVIDED "AS IS"/);
 });
 
-test("Paper Route cropped sprite manifest entries point to real PNG files with metadata", () => {
+test("Paper-Bob cropped sprite manifest entries point to real PNG files with metadata", () => {
   const croppedEntries = spriteMap.entries.filter((entry) => entry.sourceStatus === "cropped");
 
   assert.equal(croppedEntries.length > 0, true);
@@ -102,7 +105,7 @@ test("Paper Route cropped sprite manifest entries point to real PNG files with m
   }
 });
 
-test("Paper Route launcher loads heavy scripts only after user activation", () => {
+test("Paper-Bob launcher loads heavy scripts only after user activation", () => {
   assert.match(launcher, /querySelector\("\[data-paper-route-launch\]"\)/);
   assert.match(launcher, /document\.createElement\("script"\)/);
   assert.match(launcher, /data-paper-route-phaser-src/);
@@ -131,7 +134,7 @@ test("Paper Route launcher loads heavy scripts only after user activation", () =
   assert.doesNotMatch(launcher, /https?:\/\//);
 });
 
-test("Paper Route V2 rules own scoring, papers, timer, and trick state", () => {
+test("Paper-Bob V2 rules own scoring, papers, timer, and trick state", () => {
   assert.match(rules, /STARTING_PAPERS = 30/);
   assert.match(rules, /RUN_SECONDS = 75/);
   assert.match(rules, /mailbox: 100/);
@@ -147,7 +150,7 @@ test("Paper Route V2 rules own scoring, papers, timer, and trick state", () => {
   assert.match(rules, /root\.OipPaperRouteRules/);
 });
 
-test("Paper Route game uses Arcade Physics, V2 controls, and the approved storage key", () => {
+test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage key", () => {
   assert.match(game, /STORAGE_KEY = "oip-paper-route:v2"/);
   assert.match(game, /default: "arcade"/);
   assert.match(game, /scene\.load\.image\("paperBobSprite", this\.bobSrc\)/);
@@ -187,7 +190,7 @@ test("Paper Route game uses Arcade Physics, V2 controls, and the approved storag
   assert.doesNotMatch(game, /hitObstacle|spawnObstacle|paperRouteObstacle/);
 });
 
-test("Paper Route visual shell has balanced masthead and accessible overlay styles", () => {
+test("Paper-Bob visual shell has balanced masthead and accessible overlay styles", () => {
   assert.match(css, /\.masthead-paper-route-toggle\{[\s\S]*left:max\(24px, env\(safe-area-inset-left\)\);/);
   assert.match(css, /\.masthead-theme-toggle\{[\s\S]*right:max\(24px, env\(safe-area-inset-right\)\);/);
   assert.match(css, /html\.theme-enabled \.paper-route-toggle\{[\s\S]*display:inline-flex;/);

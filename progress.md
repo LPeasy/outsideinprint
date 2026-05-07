@@ -20,6 +20,7 @@ Original prompt: Continue work on the Outside In Print Paper-Bob arcade easter e
 - Final polish pass moved initial Pause/Restart button ownership into the game ready state: they stay disabled until `Start route`, then enable during active play. The loaded start card now focuses `Start route` instead of leaving focus on close.
 - Final polish validation passed: `node --check assets\js\paper-route.js`, `node --check assets\js\paper-route-launcher.js`, `node --test tests\paper_route_contract.test.mjs tests\paper_route_rules.test.mjs`, `node --test tests\all.test.mjs`, `hugo --minify`, `pwsh -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1`, then `pwsh -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`.
 - Final browser smoke passed on `hugo server` port 1314 with live reload disabled: lazy-load still deferred Phaser/rules/game until launch, ready state focused `Start route`, active desktop play and pause/resume worked, mobile controls rendered compactly, and console errors stayed clean. Screenshots are in `C:\Users\lawto\Documents\40_Scratch\2026-05\paper-route-final-polish-smoke`.
+- Renamed the player-facing game title to `Paper-Bob` across live UI strings, ARIA labels, runtime error text, public-output messages, and Paper-Bob contract/rules test names. Internal `paper-route` file names, data attributes, CSS selectors, and the `oip-paper-route:v2` storage key were intentionally left unchanged.
 
 TODO:
 - Provide or generate a true top-facing ramp sprite before replacing the generated ramp texture.

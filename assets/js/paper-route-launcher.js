@@ -175,7 +175,7 @@
       setLoading(false);
       setFailure(true);
       setGameControls(false);
-      setText(status, "Paper Route could not load.");
+      setText(status, "Paper-Bob could not load.");
 
       if (retryButton) {
         retryButton.focus({ preventScroll: true });
