@@ -1,4 +1,4 @@
-current: modern-prometheus
+current: campus-r-us
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -158,5 +158,13 @@ cartoons:
     image: "/images/editorial/modern-prometheus.png"
     essay: "/essays/modern-prometheus/"
     alt: "Editorial cartoon showing a massive grid switchboard drawing yellow lightning from a tower labeled SKY POWER and sending electric lines to signs for NIGHT WORK, HOME LIGHT, and FARM LINE."
+    width: 1672
+    height: 941
+  - slug: campus-r-us
+    title: "Campus R Us"
+    date: "2026-05-08"
+    image: "/images/editorial/campus-r-us.png"
+    essay: "/essays/canvas-fails-finals-week/"
+    alt: "Editorial cartoon showing anxious students and a professor outside a Campus R Us storefront with a Finals Week Liquidation banner while private-equity figures wheel away a glowing Canvas server into a Leveraged Buyout Express truck."
     width: 1672
     height: 941
