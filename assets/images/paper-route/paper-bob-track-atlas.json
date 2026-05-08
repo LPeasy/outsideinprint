@@ -1,0 +1,253 @@
+{
+  "frames": {
+    "track_left_01": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_left_02": {
+      "frame": {
+        "x": 288,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_left_03": {
+      "frame": {
+        "x": 576,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_left_04": {
+      "frame": {
+        "x": 864,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_left_05": {
+      "frame": {
+        "x": 1152,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_left_06": {
+      "frame": {
+        "x": 1440,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_right_01": {
+      "frame": {
+        "x": 0,
+        "y": 1280,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_right_02": {
+      "frame": {
+        "x": 288,
+        "y": 1280,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_right_03": {
+      "frame": {
+        "x": 576,
+        "y": 1280,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_right_04": {
+      "frame": {
+        "x": 864,
+        "y": 1280,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_right_05": {
+      "frame": {
+        "x": 1152,
+        "y": 1280,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    },
+    "track_right_06": {
+      "frame": {
+        "x": 1440,
+        "y": 1280,
+        "w": 288,
+        "h": 1280
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 1280
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 1280
+      }
+    }
+  },
+  "meta": {
+    "app": "Codex Paper-Bob seamless track atlas builder",
+    "image": "paper-bob-track-atlas.png",
+    "size": {
+      "w": 1728,
+      "h": 2560
+    },
+    "scale": "1"
+  }
+}

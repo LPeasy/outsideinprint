@@ -1,0 +1,135 @@
+{
+  "frames": {
+    "property_left_01": {
+      "frame": {
+        "x": 8,
+        "y": 8,
+        "w": 224,
+        "h": 472
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 472
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 472
+      }
+    },
+    "property_left_02": {
+      "frame": {
+        "x": 240,
+        "y": 8,
+        "w": 224,
+        "h": 472
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 472
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 472
+      }
+    },
+    "property_left_03": {
+      "frame": {
+        "x": 472,
+        "y": 8,
+        "w": 224,
+        "h": 472
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 472
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 472
+      }
+    },
+    "property_right_01": {
+      "frame": {
+        "x": 8,
+        "y": 488,
+        "w": 224,
+        "h": 472
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 472
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 472
+      }
+    },
+    "property_right_02": {
+      "frame": {
+        "x": 240,
+        "y": 488,
+        "w": 224,
+        "h": 472
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 472
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 472
+      }
+    },
+    "property_right_03": {
+      "frame": {
+        "x": 472,
+        "y": 488,
+        "w": 224,
+        "h": 472
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 472
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 472
+      }
+    }
+  },
+  "meta": {
+    "app": "Codex Paper-Bob cleaned property lot atlas crop pass",
+    "version": "1.0",
+    "image": "paper-bob-lots-atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 704,
+      "h": 968
+    },
+    "scale": "1"
+  }
+}

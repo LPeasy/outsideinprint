@@ -7,12 +7,31 @@
   {{ $launcher := resources.Get "js/paper-route-launcher.js" | resources.Minify | resources.Fingerprint }}
   {{ $bobSprite := resources.Get "images/paper-route/paper-bob-sprite.png" | resources.Fingerprint }}
   {{ $bobSpriteSheet := resources.Get "images/paper-route/paper-bob-sprite-sheet.png" | resources.Fingerprint }}
+  {{ $bobSpriteSheetWebp := resources.Get "images/paper-route/paper-bob-sprite-sheet.webp" | resources.Fingerprint }}
   {{ $paperProjectile := resources.Get "images/paper-route/sprites/paper/paper-projectile-default.png" | resources.Fingerprint }}
+  {{ $paperProjectileWebp := resources.Get "images/paper-route/sprites/paper/paper-projectile-default.webp" | resources.Fingerprint }}
   {{ $routePuddle := resources.Get "images/paper-route/sprites/route/route-puddle.png" | resources.Fingerprint }}
+  {{ $routePuddleWebp := resources.Get "images/paper-route/sprites/route/route-puddle.webp" | resources.Fingerprint }}
   {{ $puddleSplash := resources.Get "images/paper-route/sprites/fx/fx-puddle-splash.png" | resources.Fingerprint }}
+  {{ $puddleSplashWebp := resources.Get "images/paper-route/sprites/fx/fx-puddle-splash.webp" | resources.Fingerprint }}
   {{ $mailboxHit := resources.Get "images/paper-route/sprites/fx/fx-mailbox-hit-flash.png" | resources.Fingerprint }}
+  {{ $mailboxHitWebp := resources.Get "images/paper-route/sprites/fx/fx-mailbox-hit-flash.webp" | resources.Fingerprint }}
   {{ $doorstepHit := resources.Get "images/paper-route/sprites/fx/fx-doorstep-hit-flash.png" | resources.Fingerprint }}
+  {{ $doorstepHitWebp := resources.Get "images/paper-route/sprites/fx/fx-doorstep-hit-flash.webp" | resources.Fingerprint }}
   {{ $windowHit := resources.Get "images/paper-route/sprites/fx/fx-window-crash.png" | resources.Fingerprint }}
+  {{ $windowHitWebp := resources.Get "images/paper-route/sprites/fx/fx-window-crash.webp" | resources.Fingerprint }}
+  {{ $propsAtlas := resources.Get "images/paper-route/paper-route-props-atlas.png" | resources.Fingerprint }}
+  {{ $propsAtlasWebp := resources.Get "images/paper-route/paper-route-props-atlas.webp" | resources.Fingerprint }}
+  {{ $propsAtlasJson := resources.Get "images/paper-route/paper-route-props-atlas.json" | resources.Fingerprint }}
+  {{ $lotsAtlas := resources.Get "images/paper-route/paper-bob-lots-atlas.png" | resources.Fingerprint }}
+  {{ $lotsAtlasWebp := resources.Get "images/paper-route/paper-bob-lots-atlas.webp" | resources.Fingerprint }}
+  {{ $lotsAtlasJson := resources.Get "images/paper-route/paper-bob-lots-atlas.json" | resources.Fingerprint }}
+  {{ $trackAtlas := resources.Get "images/paper-route/paper-bob-track-atlas.png" | resources.Fingerprint }}
+  {{ $trackAtlasWebp := resources.Get "images/paper-route/paper-bob-track-atlas.webp" | resources.Fingerprint }}
+  {{ $trackAtlasJson := resources.Get "images/paper-route/paper-bob-track-atlas.json" | resources.Fingerprint }}
+  {{ $introAtlas := resources.Get "images/paper-route/paper-bob-intro-atlas.png" | resources.Fingerprint }}
+  {{ $introAtlasWebp := resources.Get "images/paper-route/paper-bob-intro-atlas.webp" | resources.Fingerprint }}
+  {{ $introAtlasJson := resources.Get "images/paper-route/paper-bob-intro-atlas.json" | resources.Fingerprint }}
   <div
     id="paper-route-arcade"
     class="paper-route-overlay"
@@ -22,12 +41,31 @@
     data-paper-route-game-src="{{ $game.RelPermalink }}"
     data-paper-route-bob-src="{{ $bobSprite.RelPermalink }}"
     data-paper-route-bob-sheet-src="{{ $bobSpriteSheet.RelPermalink }}"
+    data-paper-route-bob-sheet-webp-src="{{ $bobSpriteSheetWebp.RelPermalink }}"
     data-paper-route-paper-src="{{ $paperProjectile.RelPermalink }}"
+    data-paper-route-paper-webp-src="{{ $paperProjectileWebp.RelPermalink }}"
     data-paper-route-puddle-src="{{ $routePuddle.RelPermalink }}"
+    data-paper-route-puddle-webp-src="{{ $routePuddleWebp.RelPermalink }}"
     data-paper-route-puddle-splash-src="{{ $puddleSplash.RelPermalink }}"
+    data-paper-route-puddle-splash-webp-src="{{ $puddleSplashWebp.RelPermalink }}"
     data-paper-route-mailbox-hit-src="{{ $mailboxHit.RelPermalink }}"
+    data-paper-route-mailbox-hit-webp-src="{{ $mailboxHitWebp.RelPermalink }}"
     data-paper-route-doorstep-hit-src="{{ $doorstepHit.RelPermalink }}"
+    data-paper-route-doorstep-hit-webp-src="{{ $doorstepHitWebp.RelPermalink }}"
     data-paper-route-window-hit-src="{{ $windowHit.RelPermalink }}"
+    data-paper-route-window-hit-webp-src="{{ $windowHitWebp.RelPermalink }}"
+    data-paper-route-props-atlas-src="{{ $propsAtlas.RelPermalink }}"
+    data-paper-route-props-atlas-webp-src="{{ $propsAtlasWebp.RelPermalink }}"
+    data-paper-route-props-atlas-json-src="{{ $propsAtlasJson.RelPermalink }}"
+    data-paper-route-lots-atlas-src="{{ $lotsAtlas.RelPermalink }}"
+    data-paper-route-lots-atlas-webp-src="{{ $lotsAtlasWebp.RelPermalink }}"
+    data-paper-route-lots-atlas-json-src="{{ $lotsAtlasJson.RelPermalink }}"
+    data-paper-route-track-atlas-src="{{ $trackAtlas.RelPermalink }}"
+    data-paper-route-track-atlas-webp-src="{{ $trackAtlasWebp.RelPermalink }}"
+    data-paper-route-track-atlas-json-src="{{ $trackAtlasJson.RelPermalink }}"
+    data-paper-route-intro-atlas-src="{{ $introAtlas.RelPermalink }}"
+    data-paper-route-intro-atlas-webp-src="{{ $introAtlasWebp.RelPermalink }}"
+    data-paper-route-intro-atlas-json-src="{{ $introAtlasJson.RelPermalink }}"
     aria-hidden="true"
     hidden
   >
@@ -38,14 +76,14 @@
       aria-label="Close Paper-Bob"
       tabindex="-1"
     ></button>
-    <section class="paper-route-dialog" role="dialog" aria-modal="true" aria-labelledby="paper-route-title">
+    <section class="paper-route-dialog" role="dialog" aria-modal="true" aria-labelledby="paper-route-title" tabindex="-1">
       <header class="paper-route-dialog__header">
         <div>
           <p class="paper-route-dialog__eyebrow">Outside In Print Arcade</p>
           <h2 id="paper-route-title">Paper-Bob</h2>
         </div>
         <div class="paper-route-dialog__actions">
-          <button type="button" class="paper-route-dialog__button" data-paper-route-mute aria-pressed="false">Sound: On</button>
+          <button type="button" class="paper-route-dialog__button" data-paper-route-mute aria-pressed="false">Audio: On</button>
           <button type="button" class="paper-route-dialog__button" data-paper-route-pause disabled>Pause</button>
           <button type="button" class="paper-route-dialog__button" data-paper-route-restart disabled>Restart</button>
           <button type="button" class="paper-route-dialog__close" data-paper-route-close aria-label="Close Paper-Bob">&times;</button>
@@ -53,7 +91,7 @@
       </header>
 
       <div class="paper-route-dialog__status" data-paper-route-status role="status" aria-live="polite">
-        Ready.
+        Bag packed.
       </div>
 
       <div class="paper-route-scorebar" aria-label="Paper-Bob score">
@@ -65,50 +103,57 @@
 
       <div class="paper-route-stage">
         <div class="paper-route-cabinet-label" aria-hidden="true">
-          <span>Ink-run cabinet</span>
-          <span>Dept. of delivery corrections</span>
+          <span>Paper-Bob delivery desk</span>
+          <span>Complaints window open</span>
         </div>
         <div class="paper-route-game" data-paper-route-game tabindex="-1"></div>
         <div class="paper-route-loading" data-paper-route-loading hidden>
-          Warming the presses...
+          Loading the morning edition...
+        </div>
+        <div class="paper-route-intro" data-paper-route-intro-panel hidden>
+          <div class="paper-route-intro__meter" aria-hidden="true">
+            <span data-paper-route-intro-progress></span>
+          </div>
+          <button type="button" data-paper-route-skip-intro disabled>Skip</button>
         </div>
         <div class="paper-route-card paper-route-card--failure" data-paper-route-failure hidden>
-          <p class="paper-route-card__eyebrow">Pressroom delay</p>
-          <h3>The arcade did not load.</h3>
-          <p>The game runtime is same-site and lazy-loaded. Try again from this window.</p>
-          <button type="button" data-paper-route-retry>Try again</button>
+          <p class="paper-route-card__eyebrow">Pressroom jam</p>
+          <h3>Paper-Bob missed the dock.</h3>
+          <p>The arcade bundle did not arrive. Reload the bag and try the run again.</p>
+          <button type="button" data-paper-route-retry>Reload run</button>
         </div>
         <div class="paper-route-card paper-route-card--start" data-paper-route-start-card hidden>
-          <p class="paper-route-card__eyebrow">Morning edition</p>
-          <h3>Pedal the two-column route.</h3>
-          <p>Start with 30 papers. Throw left or right into mailboxes, windows, and doorsteps while hopping ramps and clearing puddles.</p>
-          <button type="button" data-paper-route-start>Start route</button>
+          <p class="paper-route-card__eyebrow">Front-page delivery</p>
+          <h3>Deliver the morning edition.</h3>
+          <p>Thirty papers. Seventy-five seconds. Toss clean to mailboxes, doorsteps, and windows; hop ramps and keep Bob out of the puddles.</p>
+          <button type="button" data-paper-route-start>Start the route</button>
         </div>
         <div class="paper-route-card paper-route-card--pause" data-paper-route-pause-card hidden>
-          <p class="paper-route-card__eyebrow">Press hold</p>
-          <h3>Route paused.</h3>
-          <p>The ink is dry. The deadlines are not.</p>
+          <p class="paper-route-card__eyebrow">Deadline hold</p>
+          <h3>Paper-Bob is paused.</h3>
+          <p>The bag is steady. The neighborhood is not waiting.</p>
         </div>
         <div class="paper-route-card paper-route-card--summary" data-paper-route-summary hidden>
-          <p class="paper-route-card__eyebrow">Route closed</p>
-          <h3 data-paper-route-summary-title>Run complete</h3>
-          <p data-paper-route-summary-copy></p>
-          <button type="button" data-paper-route-summary-restart>Run it again</button>
+          <p class="paper-route-card__eyebrow paper-route-summary__eyebrow">Final edition</p>
+          <h3 class="paper-route-summary__title" data-paper-route-summary-title>Run filed</h3>
+          <p class="paper-route-summary__copy" data-paper-route-summary-copy></p>
+          <div class="paper-route-results" data-paper-route-summary-metrics role="list" aria-label="Paper-Bob run results"></div>
+          <button type="button" class="paper-route-summary__restart" data-paper-route-summary-restart>Play again?</button>
         </div>
         <div class="paper-route-touch" data-paper-route-touch aria-label="Touch controls" hidden>
-          <button type="button" data-paper-route-action="steer-left" aria-label="Steer left">Left</button>
-          <button type="button" data-paper-route-action="throw-left" aria-label="Throw left">Throw L</button>
+          <button type="button" data-paper-route-action="steer-left" aria-label="Move left">Left</button>
+          <button type="button" data-paper-route-action="throw-left" aria-label="Toss left">Toss L</button>
           <button type="button" data-paper-route-action="jump" aria-label="Bunny hop">Hop</button>
           <button type="button" data-paper-route-action="trick" aria-label="Hold wheelie">Wheelie</button>
-          <button type="button" data-paper-route-action="throw-right" aria-label="Throw right">Throw R</button>
-          <button type="button" data-paper-route-action="steer-right" aria-label="Steer right">Right</button>
+          <button type="button" data-paper-route-action="throw-right" aria-label="Toss right">Toss R</button>
+          <button type="button" data-paper-route-action="steer-right" aria-label="Move right">Right</button>
         </div>
       </div>
 
       <footer class="paper-route-help">
-        <span>Steer: arrows or WASD</span>
-        <span>Throw left: Q/J</span>
-        <span>Throw right: E/L</span>
+        <span>Move: arrows or WASD</span>
+        <span>Toss left: Q/J</span>
+        <span>Toss right: E/L</span>
         <span>Hop: Space</span>
         <span>Wheelie: Shift/K</span>
         <span>Pause: P</span>

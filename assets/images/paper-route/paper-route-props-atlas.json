@@ -1,0 +1,515 @@
+{
+  "frames": {
+    "ramp_wood": {
+      "frame": {
+        "x": 8,
+        "y": 8,
+        "w": 152,
+        "h": 285
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 152,
+        "h": 285
+      },
+      "sourceSize": {
+        "w": 152,
+        "h": 285
+      }
+    },
+    "ramp_metal": {
+      "frame": {
+        "x": 168,
+        "y": 8,
+        "w": 152,
+        "h": 282
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 152,
+        "h": 282
+      },
+      "sourceSize": {
+        "w": 152,
+        "h": 282
+      }
+    },
+    "property_left_01": {
+      "frame": {
+        "x": 328,
+        "y": 8,
+        "w": 219,
+        "h": 497
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 219,
+        "h": 497
+      },
+      "sourceSize": {
+        "w": 219,
+        "h": 497
+      }
+    },
+    "property_left_02": {
+      "frame": {
+        "x": 555,
+        "y": 8,
+        "w": 210,
+        "h": 469
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 210,
+        "h": 469
+      },
+      "sourceSize": {
+        "w": 210,
+        "h": 469
+      }
+    },
+    "property_left_03": {
+      "frame": {
+        "x": 773,
+        "y": 8,
+        "w": 191,
+        "h": 392
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 191,
+        "h": 392
+      },
+      "sourceSize": {
+        "w": 191,
+        "h": 392
+      }
+    },
+    "property_right_01": {
+      "frame": {
+        "x": 8,
+        "y": 513,
+        "w": 208,
+        "h": 465
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 208,
+        "h": 465
+      },
+      "sourceSize": {
+        "w": 208,
+        "h": 465
+      }
+    },
+    "property_right_02": {
+      "frame": {
+        "x": 224,
+        "y": 513,
+        "w": 177,
+        "h": 391
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 177,
+        "h": 391
+      },
+      "sourceSize": {
+        "w": 177,
+        "h": 391
+      }
+    },
+    "property_right_03": {
+      "frame": {
+        "x": 409,
+        "y": 513,
+        "w": 215,
+        "h": 392
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 215,
+        "h": 392
+      },
+      "sourceSize": {
+        "w": 215,
+        "h": 392
+      }
+    },
+    "road_surface": {
+      "frame": {
+        "x": 632,
+        "y": 513,
+        "w": 292,
+        "h": 675
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 292,
+        "h": 675
+      },
+      "sourceSize": {
+        "w": 292,
+        "h": 675
+      }
+    },
+    "road_center_dashes": {
+      "frame": {
+        "x": 932,
+        "y": 513,
+        "w": 26,
+        "h": 677
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 26,
+        "h": 677
+      },
+      "sourceSize": {
+        "w": 26,
+        "h": 677
+      }
+    },
+    "road_curb_left": {
+      "frame": {
+        "x": 8,
+        "y": 1198,
+        "w": 94,
+        "h": 676
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 94,
+        "h": 676
+      },
+      "sourceSize": {
+        "w": 94,
+        "h": 676
+      }
+    },
+    "road_curb_right": {
+      "frame": {
+        "x": 110,
+        "y": 1198,
+        "w": 77,
+        "h": 674
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 77,
+        "h": 674
+      },
+      "sourceSize": {
+        "w": 77,
+        "h": 674
+      }
+    },
+    "road_crack": {
+      "frame": {
+        "x": 195,
+        "y": 1198,
+        "w": 123,
+        "h": 153
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 123,
+        "h": 153
+      },
+      "sourceSize": {
+        "w": 123,
+        "h": 153
+      }
+    },
+    "road_tire_scuffs": {
+      "frame": {
+        "x": 326,
+        "y": 1198,
+        "w": 98,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 98,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 98,
+        "h": 170
+      }
+    },
+    "road_oil_stain": {
+      "frame": {
+        "x": 432,
+        "y": 1198,
+        "w": 135,
+        "h": 142
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 135,
+        "h": 142
+      },
+      "sourceSize": {
+        "w": 135,
+        "h": 142
+      }
+    },
+    "road_paper_scraps": {
+      "frame": {
+        "x": 575,
+        "y": 1198,
+        "w": 129,
+        "h": 97
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 129,
+        "h": 97
+      },
+      "sourceSize": {
+        "w": 129,
+        "h": 97
+      }
+    },
+    "road_worn_mark": {
+      "frame": {
+        "x": 712,
+        "y": 1198,
+        "w": 44,
+        "h": 159
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 44,
+        "h": 159
+      },
+      "sourceSize": {
+        "w": 44,
+        "h": 159
+      }
+    },
+    "road_driveway_left": {
+      "frame": {
+        "x": 8,
+        "y": 1882,
+        "w": 319,
+        "h": 233
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 319,
+        "h": 233
+      },
+      "sourceSize": {
+        "w": 319,
+        "h": 233
+      }
+    },
+    "road_driveway_right": {
+      "frame": {
+        "x": 335,
+        "y": 1882,
+        "w": 324,
+        "h": 234
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 324,
+        "h": 234
+      },
+      "sourceSize": {
+        "w": 324,
+        "h": 234
+      }
+    },
+    "side_left_01": {
+      "frame": {
+        "x": 667,
+        "y": 1882,
+        "w": 144,
+        "h": 591
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 144,
+        "h": 591
+      },
+      "sourceSize": {
+        "w": 144,
+        "h": 591
+      }
+    },
+    "side_left_02": {
+      "frame": {
+        "x": 819,
+        "y": 1882,
+        "w": 157,
+        "h": 592
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 157,
+        "h": 592
+      },
+      "sourceSize": {
+        "w": 157,
+        "h": 592
+      }
+    },
+    "side_left_03": {
+      "frame": {
+        "x": 8,
+        "y": 2482,
+        "w": 143,
+        "h": 592
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 143,
+        "h": 592
+      },
+      "sourceSize": {
+        "w": 143,
+        "h": 592
+      }
+    },
+    "side_right_01": {
+      "frame": {
+        "x": 159,
+        "y": 2482,
+        "w": 148,
+        "h": 582
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 148,
+        "h": 582
+      },
+      "sourceSize": {
+        "w": 148,
+        "h": 582
+      }
+    },
+    "side_right_02": {
+      "frame": {
+        "x": 315,
+        "y": 2482,
+        "w": 197,
+        "h": 581
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 197,
+        "h": 581
+      },
+      "sourceSize": {
+        "w": 197,
+        "h": 581
+      }
+    },
+    "side_right_03": {
+      "frame": {
+        "x": 520,
+        "y": 2482,
+        "w": 172,
+        "h": 582
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 172,
+        "h": 582
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 582
+      }
+    }
+  },
+  "meta": {
+    "app": "Codex Paper-Bob route props, road-kit, and replacement side-scenery crop pass",
+    "version": "1.3",
+    "image": "paper-route-props-atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 1024,
+      "h": 3082
+    },
+    "scale": "1"
+  }
+}

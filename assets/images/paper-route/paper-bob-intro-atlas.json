@@ -1,0 +1,594 @@
+{
+  "frames": {
+    "intro_bob_ride_front_01": {
+      "frame": {
+        "x": 8,
+        "y": 8,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_bob_ride_front_02": {
+      "frame": {
+        "x": 208,
+        "y": 8,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_bob_ride_front_03": {
+      "frame": {
+        "x": 408,
+        "y": 8,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_bob_ride_front_04": {
+      "frame": {
+        "x": 608,
+        "y": 8,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_bob_ride_front_05": {
+      "frame": {
+        "x": 808,
+        "y": 8,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_bob_ride_front_06": {
+      "frame": {
+        "x": 8,
+        "y": 208,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_bob_turn_left_01": {
+      "frame": {
+        "x": 208,
+        "y": 208,
+        "w": 224,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 224
+      }
+    },
+    "intro_bob_turn_right_01": {
+      "frame": {
+        "x": 440,
+        "y": 208,
+        "w": 224,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 224
+      }
+    },
+    "intro_bob_laydown": {
+      "frame": {
+        "x": 672,
+        "y": 208,
+        "w": 256,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 224
+      }
+    },
+    "intro_bob_jump": {
+      "frame": {
+        "x": 8,
+        "y": 440,
+        "w": 224,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 224,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 224,
+        "h": 224
+      }
+    },
+    "intro_bob_read_01": {
+      "frame": {
+        "x": 240,
+        "y": 440,
+        "w": 256,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 224
+      }
+    },
+    "intro_bob_read_02": {
+      "frame": {
+        "x": 504,
+        "y": 440,
+        "w": 256,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 224
+      }
+    },
+    "intro_bike_down": {
+      "frame": {
+        "x": 8,
+        "y": 672,
+        "w": 256,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 160
+      }
+    },
+    "intro_logo_paper_bob": {
+      "frame": {
+        "x": 272,
+        "y": 672,
+        "w": 520,
+        "h": 132
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 520,
+        "h": 132
+      },
+      "sourceSize": {
+        "w": 520,
+        "h": 132
+      }
+    },
+    "spot_run_front_01": {
+      "frame": {
+        "x": 800,
+        "y": 672,
+        "w": 150,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 150,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 150,
+        "h": 150
+      }
+    },
+    "spot_run_front_02": {
+      "frame": {
+        "x": 8,
+        "y": 840,
+        "w": 150,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 150,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 150,
+        "h": 150
+      }
+    },
+    "spot_run_front_03": {
+      "frame": {
+        "x": 166,
+        "y": 840,
+        "w": 150,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 150,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 150,
+        "h": 150
+      }
+    },
+    "spot_run_back_01": {
+      "frame": {
+        "x": 324,
+        "y": 840,
+        "w": 150,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 150,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 150,
+        "h": 150
+      }
+    },
+    "spot_run_back_02": {
+      "frame": {
+        "x": 482,
+        "y": 840,
+        "w": 150,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 150,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 150,
+        "h": 150
+      }
+    },
+    "spot_run_back_03": {
+      "frame": {
+        "x": 640,
+        "y": 840,
+        "w": 150,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 150,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 150,
+        "h": 150
+      }
+    },
+    "spot_sit_paper_front": {
+      "frame": {
+        "x": 798,
+        "y": 840,
+        "w": 180,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 150
+      }
+    },
+    "spot_sit_paper_back": {
+      "frame": {
+        "x": 8,
+        "y": 998,
+        "w": 180,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 180,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 180,
+        "h": 150
+      }
+    },
+    "spot_sit_front": {
+      "frame": {
+        "x": 196,
+        "y": 998,
+        "w": 140,
+        "h": 140
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 140,
+        "h": 140
+      },
+      "sourceSize": {
+        "w": 140,
+        "h": 140
+      }
+    },
+    "spot_run_side_01": {
+      "frame": {
+        "x": 344,
+        "y": 998,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "spot_run_side_02": {
+      "frame": {
+        "x": 544,
+        "y": 998,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "spot_run_side_03": {
+      "frame": {
+        "x": 744,
+        "y": 998,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "spot_run_side_04": {
+      "frame": {
+        "x": 8,
+        "y": 1156,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "spot_run_side_05": {
+      "frame": {
+        "x": 208,
+        "y": 1156,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "spot_run_side_06": {
+      "frame": {
+        "x": 408,
+        "y": 1156,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    }
+  },
+  "meta": {
+    "app": "Codex Paper-Bob intro atlas builder",
+    "image": "paper-bob-intro-atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 1024,
+      "h": 1292
+    },
+    "scale": "1"
+  }
+}

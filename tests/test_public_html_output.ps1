@@ -1922,8 +1922,84 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = 'data-paper-route-plan-src=(?:"[^"]*paper-route-plan[^"]*"|[^\s>]*paper-route-plan[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell not to expose the removed route planner URL'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = 'data-paper-route-bob-src=(?:"[^"]*paper-bob-sprite[^"]*"|[^\s>]*paper-bob-sprite[^\s>]*)'
     Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded Paper-Bob sprite URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-bob-sheet-webp-src=(?:"[^"]*paper-bob-sprite-sheet[^"]*\.webp[^"]*"|[^\s>]*paper-bob-sprite-sheet[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded Paper-Bob WebP sprite sheet URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-paper-webp-src=(?:"[^"]*paper-projectile-default[^"]*\.webp[^"]*"|[^\s>]*paper-projectile-default[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded WebP paper projectile URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-props-atlas-src=(?:"[^"]*paper-route-props-atlas[^"]*\.png[^"]*"|[^\s>]*paper-route-props-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route prop atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-props-atlas-webp-src=(?:"[^"]*paper-route-props-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-route-props-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route prop atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-props-atlas-json-src=(?:"[^"]*paper-route-props-atlas[^"]*\.json[^"]*"|[^\s>]*paper-route-props-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route prop atlas JSON URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-lots-atlas-src=(?:"[^"]*paper-bob-lots-atlas[^"]*\.png[^"]*"|[^\s>]*paper-bob-lots-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded property lot atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-lots-atlas-webp-src=(?:"[^"]*paper-bob-lots-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-bob-lots-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded property lot atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-lots-atlas-json-src=(?:"[^"]*paper-bob-lots-atlas[^"]*\.json[^"]*"|[^\s>]*paper-bob-lots-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded property lot atlas JSON URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-track-atlas-src=(?:"[^"]*paper-bob-track-atlas[^"]*\.png[^"]*"|[^\s>]*paper-bob-track-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route track atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-track-atlas-webp-src=(?:"[^"]*paper-bob-track-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-bob-track-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route track atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-track-atlas-json-src=(?:"[^"]*paper-bob-track-atlas[^"]*\.json[^"]*"|[^\s>]*paper-bob-track-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route track atlas JSON URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-intro-atlas-src=(?:"[^"]*paper-bob-intro-atlas[^"]*\.png[^"]*"|[^\s>]*paper-bob-intro-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded intro atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-intro-atlas-webp-src=(?:"[^"]*paper-bob-intro-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-bob-intro-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded intro atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-intro-atlas-json-src=(?:"[^"]*paper-bob-intro-atlas[^"]*\.json[^"]*"|[^\s>]*paper-bob-intro-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded intro atlas JSON URL as data only'
   },
   @{
     Path = 'public/index.html'
@@ -1944,25 +2020,31 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = '<script\b[^>]*src=(?:"[^"]*paper-route-plan[^"]*"|[^\s>]*paper-route-plan[^\s>]*)'
+    Message = 'expected the homepage not to load Paper-Bob route planner before the launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = '<img\b[^>]*src=(?:"[^"]*paper-bob-sprite[^"]*"|[^\s>]*paper-bob-sprite[^\s>]*)'
     Message = 'expected the homepage not to request the Paper-Bob game sprite before the launcher is clicked'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|phaser-3\.90\.0-arcade-physics'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|paper-route-props-atlas|paper-bob-lots-atlas|paper-bob-track-atlas|paper-bob-intro-atlas|phaser-3\.90\.0-arcade-physics'
     Message = 'expected the Paper-Bob launcher and runtime URLs to stay off archive pages'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|phaser-3\.90\.0-arcade-physics'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|paper-route-props-atlas|paper-bob-lots-atlas|paper-bob-track-atlas|paper-bob-intro-atlas|phaser-3\.90\.0-arcade-physics'
     Message = 'expected the Paper-Bob launcher and runtime URLs to stay off library pages'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/404.html'
-    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|phaser-3\.90\.0-arcade-physics'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|paper-route-props-atlas|paper-bob-lots-atlas|paper-bob-track-atlas|paper-bob-intro-atlas|phaser-3\.90\.0-arcade-physics'
     Message = 'expected the Paper-Bob launcher and runtime URLs to stay off the 404 page'
     ShouldNotMatch = $true
   },

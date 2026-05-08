@@ -7,7 +7,7 @@
   }
 
   var closeControls = Array.prototype.slice.call(overlay.querySelectorAll("[data-paper-route-close]"));
-  var closeButton = overlay.querySelector(".paper-route-dialog__close");
+  var dialog = overlay.querySelector(".paper-route-dialog");
   var loading = overlay.querySelector("[data-paper-route-loading]");
   var status = overlay.querySelector("[data-paper-route-status]");
   var muteButton = overlay.querySelector("[data-paper-route-mute]");
@@ -20,12 +20,31 @@
   var gameSrc = overlay.getAttribute("data-paper-route-game-src") || "";
   var bobSrc = overlay.getAttribute("data-paper-route-bob-src") || "";
   var bobSheetSrc = overlay.getAttribute("data-paper-route-bob-sheet-src") || "";
+  var bobSheetWebpSrc = overlay.getAttribute("data-paper-route-bob-sheet-webp-src") || "";
   var paperSrc = overlay.getAttribute("data-paper-route-paper-src") || "";
+  var paperWebpSrc = overlay.getAttribute("data-paper-route-paper-webp-src") || "";
   var puddleSrc = overlay.getAttribute("data-paper-route-puddle-src") || "";
+  var puddleWebpSrc = overlay.getAttribute("data-paper-route-puddle-webp-src") || "";
   var puddleSplashSrc = overlay.getAttribute("data-paper-route-puddle-splash-src") || "";
+  var puddleSplashWebpSrc = overlay.getAttribute("data-paper-route-puddle-splash-webp-src") || "";
   var mailboxHitSrc = overlay.getAttribute("data-paper-route-mailbox-hit-src") || "";
+  var mailboxHitWebpSrc = overlay.getAttribute("data-paper-route-mailbox-hit-webp-src") || "";
   var doorstepHitSrc = overlay.getAttribute("data-paper-route-doorstep-hit-src") || "";
+  var doorstepHitWebpSrc = overlay.getAttribute("data-paper-route-doorstep-hit-webp-src") || "";
   var windowHitSrc = overlay.getAttribute("data-paper-route-window-hit-src") || "";
+  var windowHitWebpSrc = overlay.getAttribute("data-paper-route-window-hit-webp-src") || "";
+  var propsAtlasSrc = overlay.getAttribute("data-paper-route-props-atlas-src") || "";
+  var propsAtlasWebpSrc = overlay.getAttribute("data-paper-route-props-atlas-webp-src") || "";
+  var propsAtlasJsonSrc = overlay.getAttribute("data-paper-route-props-atlas-json-src") || "";
+  var lotsAtlasSrc = overlay.getAttribute("data-paper-route-lots-atlas-src") || "";
+  var lotsAtlasWebpSrc = overlay.getAttribute("data-paper-route-lots-atlas-webp-src") || "";
+  var lotsAtlasJsonSrc = overlay.getAttribute("data-paper-route-lots-atlas-json-src") || "";
+  var trackAtlasSrc = overlay.getAttribute("data-paper-route-track-atlas-src") || "";
+  var trackAtlasWebpSrc = overlay.getAttribute("data-paper-route-track-atlas-webp-src") || "";
+  var trackAtlasJsonSrc = overlay.getAttribute("data-paper-route-track-atlas-json-src") || "";
+  var introAtlasSrc = overlay.getAttribute("data-paper-route-intro-atlas-src") || "";
+  var introAtlasWebpSrc = overlay.getAttribute("data-paper-route-intro-atlas-webp-src") || "";
+  var introAtlasJsonSrc = overlay.getAttribute("data-paper-route-intro-atlas-json-src") || "";
   var runtimePromise = null;
   var gameInstance = null;
   var activeTrigger = null;
@@ -136,12 +155,31 @@
       container: overlay.querySelector("[data-paper-route-game]"),
       bobSrc: bobSrc,
       bobSheetSrc: bobSheetSrc,
+      bobSheetWebpSrc: bobSheetWebpSrc,
       paperSrc: paperSrc,
+      paperWebpSrc: paperWebpSrc,
       puddleSrc: puddleSrc,
+      puddleWebpSrc: puddleWebpSrc,
       puddleSplashSrc: puddleSplashSrc,
+      puddleSplashWebpSrc: puddleSplashWebpSrc,
       mailboxHitSrc: mailboxHitSrc,
+      mailboxHitWebpSrc: mailboxHitWebpSrc,
       doorstepHitSrc: doorstepHitSrc,
+      doorstepHitWebpSrc: doorstepHitWebpSrc,
       windowHitSrc: windowHitSrc,
+      windowHitWebpSrc: windowHitWebpSrc,
+      propsAtlasSrc: propsAtlasSrc,
+      propsAtlasWebpSrc: propsAtlasWebpSrc,
+      propsAtlasJsonSrc: propsAtlasJsonSrc,
+      lotsAtlasSrc: lotsAtlasSrc,
+      lotsAtlasWebpSrc: lotsAtlasWebpSrc,
+      lotsAtlasJsonSrc: lotsAtlasJsonSrc,
+      trackAtlasSrc: trackAtlasSrc,
+      trackAtlasWebpSrc: trackAtlasWebpSrc,
+      trackAtlasJsonSrc: trackAtlasJsonSrc,
+      introAtlasSrc: introAtlasSrc,
+      introAtlasWebpSrc: introAtlasWebpSrc,
+      introAtlasJsonSrc: introAtlasJsonSrc,
       status: status,
       score: overlay.querySelector("[data-paper-route-score]"),
       papers: overlay.querySelector("[data-paper-route-papers]"),
@@ -152,10 +190,14 @@
       restartButton: restartButton,
       startButton: overlay.querySelector("[data-paper-route-start]"),
       startCard: overlay.querySelector("[data-paper-route-start-card]"),
+      introPanel: overlay.querySelector("[data-paper-route-intro-panel]"),
+      introProgress: overlay.querySelector("[data-paper-route-intro-progress]"),
+      skipIntroButton: overlay.querySelector("[data-paper-route-skip-intro]"),
       pauseCard: overlay.querySelector("[data-paper-route-pause-card]"),
       summaryCard: overlay.querySelector("[data-paper-route-summary]"),
       summaryTitle: overlay.querySelector("[data-paper-route-summary-title]"),
       summaryCopy: overlay.querySelector("[data-paper-route-summary-copy]"),
+      summaryMetrics: overlay.querySelector("[data-paper-route-summary-metrics]"),
       summaryRestart: overlay.querySelector("[data-paper-route-summary-restart]"),
       touchPanel: overlay.querySelector("[data-paper-route-touch]"),
       touchControls: Array.prototype.slice.call(overlay.querySelectorAll("[data-paper-route-action]"))
@@ -165,7 +207,7 @@
   function ensureGame() {
     setFailure(false);
     setLoading(true);
-    setText(status, "Warming the presses...");
+    setText(status, "Loading the morning edition...");
 
     loadRuntime().then(function () {
       setLoading(false);
@@ -192,8 +234,8 @@
     setFailure(false);
     ensureGame();
 
-    if (closeButton) {
-      closeButton.focus({ preventScroll: true });
+    if (dialog) {
+      dialog.focus({ preventScroll: true });
     }
   }
 

@@ -25,6 +25,144 @@
     runEndStart: 34,
     runEndLast: 41
   };
+  var RAMP_FRAMES = ["ramp_wood", "ramp_metal"];
+  var ROAD_DECAL_CONFIGS = [
+    { frame: "road_crack", width: 54, alpha: .34 },
+    { frame: "road_tire_scuffs", width: 64, alpha: .24 }
+  ];
+  var TRACK_ROAD_SEAM_OVERLAP = 1;
+  var TRACK_SEGMENT_FRAMES = {
+    left: ["track_left_01", "track_left_02", "track_left_03", "track_left_04", "track_left_05", "track_left_06"],
+    right: ["track_right_01", "track_right_02", "track_right_03", "track_right_04", "track_right_05", "track_right_06"]
+  };
+  var TRACK_LOT_TARGETS = {
+    left: [
+      {
+        mailbox: { x: .73, y: .77, width: 38, height: 44 },
+        doorstep: { x: .34, y: .5, width: 58, height: 42 },
+        window: { x: .2, y: .4, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .76, y: .78, width: 38, height: 44 },
+        doorstep: { x: .54, y: .51, width: 58, height: 42 },
+        window: { x: .34, y: .4, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .73, y: .74, width: 38, height: 44 },
+        doorstep: { x: .33, y: .5, width: 58, height: 42 },
+        window: { x: .2, y: .41, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .73, y: .77, width: 38, height: 44 },
+        doorstep: { x: .34, y: .5, width: 58, height: 42 },
+        window: { x: .2, y: .4, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .76, y: .78, width: 38, height: 44 },
+        doorstep: { x: .54, y: .51, width: 58, height: 42 },
+        window: { x: .34, y: .4, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .73, y: .74, width: 38, height: 44 },
+        doorstep: { x: .33, y: .5, width: 58, height: 42 },
+        window: { x: .2, y: .41, width: 42, height: 38 }
+      }
+    ],
+    right: [
+      {
+        mailbox: { x: .33, y: .76, width: 38, height: 44 },
+        doorstep: { x: .55, y: .48, width: 58, height: 42 },
+        window: { x: .42, y: .31, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .29, y: .76, width: 38, height: 44 },
+        doorstep: { x: .53, y: .51, width: 58, height: 42 },
+        window: { x: .62, y: .28, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .28, y: .72, width: 38, height: 44 },
+        doorstep: { x: .55, y: .58, width: 58, height: 42 },
+        window: { x: .53, y: .39, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .33, y: .76, width: 38, height: 44 },
+        doorstep: { x: .55, y: .48, width: 58, height: 42 },
+        window: { x: .42, y: .31, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .29, y: .76, width: 38, height: 44 },
+        doorstep: { x: .53, y: .51, width: 58, height: 42 },
+        window: { x: .62, y: .28, width: 42, height: 38 }
+      },
+      {
+        mailbox: { x: .28, y: .72, width: 38, height: 44 },
+        doorstep: { x: .55, y: .58, width: 58, height: 42 },
+        window: { x: .53, y: .39, width: 42, height: 38 }
+      }
+    ]
+  };
+  var TRACK_SEGMENT_SLOTS = [
+    { y: 0, height: 600 / 1280 },
+    { y: 640 / 1280, height: 600 / 1280 }
+  ];
+  var TRACK_SEGMENT_LOT_SEQUENCE = {
+    left: [[0, 1], [2, 0], [1, 2], [0, 2], [1, 0], [2, 1]],
+    right: [[0, 1], [2, 0], [1, 2], [0, 2], [1, 0], [2, 1]]
+  };
+
+  function buildTrackTargetGroup(targets, slot) {
+    var group = {};
+
+    ["mailbox", "doorstep", "window"].forEach(function (type) {
+      group[type] = {
+        x: targets[type].x,
+        y: slot.y + targets[type].y * slot.height,
+        width: targets[type].width,
+        height: targets[type].height
+      };
+    });
+
+    return group;
+  }
+
+  function buildTrackSegmentConfigs(side) {
+    var frames = TRACK_SEGMENT_FRAMES[side] || [];
+    var lots = TRACK_LOT_TARGETS[side] || [];
+    var sequence = TRACK_SEGMENT_LOT_SEQUENCE[side] || [];
+
+    return frames.map(function (frame, index) {
+      var pair = sequence[index % sequence.length] || [index % lots.length, (index + 1) % lots.length];
+
+      return {
+        frame: frame,
+        targetGroups: [
+          buildTrackTargetGroup(lots[pair[0] % lots.length], TRACK_SEGMENT_SLOTS[0]),
+          buildTrackTargetGroup(lots[pair[1] % lots.length], TRACK_SEGMENT_SLOTS[1])
+        ]
+      };
+    });
+  }
+
+  var TRACK_SEGMENT_CONFIGS = {
+    left: buildTrackSegmentConfigs("left"),
+    right: buildTrackSegmentConfigs("right")
+  };
+  var INTRO_DURATION = 8.5;
+  var INTRO_RIDE_FRAMES = ["intro_bob_ride_front_01", "intro_bob_ride_front_02", "intro_bob_ride_front_03", "intro_bob_ride_front_04", "intro_bob_ride_front_05", "intro_bob_ride_front_06"];
+  var SPOT_SIDE_FRAMES = ["spot_run_side_01", "spot_run_side_02", "spot_run_side_03", "spot_run_side_04", "spot_run_side_05", "spot_run_side_06"];
+  var SPOT_FRONT_FRAMES = ["spot_run_front_01", "spot_run_front_02", "spot_run_front_03"];
+  var SPOT_BACK_FRAMES = ["spot_run_back_01", "spot_run_back_02", "spot_run_back_03"];
+  var POOL_SIZES = {
+    trackSegments: 12,
+    targets: 72,
+    papers: 5,
+    ramps: 4,
+    puddles: 5,
+    roadDecals: 8,
+    hitFlashes: 8,
+    puddleSplashes: 6,
+    floatTexts: 10
+  };
   var TUNING = {
     baseSpeed: 178,
     speedRamp: 2.05,
@@ -49,19 +187,36 @@
     rampRamp: 4,
     rampMinInterval: 3900,
     rampJitter: 900,
+    roadDecalBaseInterval: 1650,
+    roadDecalMinInterval: 980,
+    roadDecalJitter: 1050,
     firstTargetDelay: 420,
     firstPuddleDelay: 2300,
     firstRampDelay: 3900,
     playerDisplay: { width: 96, height: 96 },
     playerBody: { width: 88, height: 104 },
-    paperBody: { width: 24, height: 15 },
-    paperDisplay: { width: 38, height: 24 },
-    puddleDisplay: { width: 92, height: 42 },
-    hitFlashDisplay: { width: 84, height: 84 }
+    trackSegmentSpawnBuffer: 90,
+    rampDisplay: { width: 72, height: 134 },
+    rampBody: { width: 64, height: 70 },
+    paperBody: { width: 21, height: 13 },
+    paperDisplay: { width: 32, height: 20 },
+    puddleDisplay: { width: 82, height: 34 },
+    hitFlashDisplay: { width: 68, height: 68 }
   };
 
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
+  }
+
+  function browserSupportsWebp() {
+    var canvas;
+
+    try {
+      canvas = document.createElement("canvas");
+      return canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0;
+    } catch (error) {
+      return false;
+    }
   }
 
   function readHighScore() {
@@ -168,12 +323,31 @@
     this.container = this.options.container;
     this.bobSrc = this.options.bobSrc || "";
     this.bobSheetSrc = this.options.bobSheetSrc || "";
+    this.bobSheetWebpSrc = this.options.bobSheetWebpSrc || "";
     this.paperSrc = this.options.paperSrc || "";
+    this.paperWebpSrc = this.options.paperWebpSrc || "";
     this.puddleSrc = this.options.puddleSrc || "";
+    this.puddleWebpSrc = this.options.puddleWebpSrc || "";
     this.puddleSplashSrc = this.options.puddleSplashSrc || "";
+    this.puddleSplashWebpSrc = this.options.puddleSplashWebpSrc || "";
     this.mailboxHitSrc = this.options.mailboxHitSrc || "";
+    this.mailboxHitWebpSrc = this.options.mailboxHitWebpSrc || "";
     this.doorstepHitSrc = this.options.doorstepHitSrc || "";
+    this.doorstepHitWebpSrc = this.options.doorstepHitWebpSrc || "";
     this.windowHitSrc = this.options.windowHitSrc || "";
+    this.windowHitWebpSrc = this.options.windowHitWebpSrc || "";
+    this.propsAtlasSrc = this.options.propsAtlasSrc || "";
+    this.propsAtlasWebpSrc = this.options.propsAtlasWebpSrc || "";
+    this.propsAtlasJsonSrc = this.options.propsAtlasJsonSrc || "";
+    this.lotsAtlasSrc = this.options.lotsAtlasSrc || "";
+    this.lotsAtlasWebpSrc = this.options.lotsAtlasWebpSrc || "";
+    this.lotsAtlasJsonSrc = this.options.lotsAtlasJsonSrc || "";
+    this.trackAtlasSrc = this.options.trackAtlasSrc || "";
+    this.trackAtlasWebpSrc = this.options.trackAtlasWebpSrc || "";
+    this.trackAtlasJsonSrc = this.options.trackAtlasJsonSrc || "";
+    this.introAtlasSrc = this.options.introAtlasSrc || "";
+    this.introAtlasWebpSrc = this.options.introAtlasWebpSrc || "";
+    this.introAtlasJsonSrc = this.options.introAtlasJsonSrc || "";
     this.stage = this.container && this.container.closest ? this.container.closest(".paper-route-stage") : null;
     this.status = this.options.status;
     this.scoreNode = this.options.score;
@@ -184,11 +358,15 @@
     this.pauseButton = this.options.pauseButton;
     this.restartButton = this.options.restartButton;
     this.startButton = this.options.startButton;
+    this.introPanel = this.options.introPanel;
+    this.introProgress = this.options.introProgress;
+    this.skipIntroButton = this.options.skipIntroButton;
     this.startCard = this.options.startCard;
     this.pauseCard = this.options.pauseCard;
     this.summaryCard = this.options.summaryCard;
     this.summaryTitle = this.options.summaryTitle;
     this.summaryCopy = this.options.summaryCopy;
+    this.summaryMetrics = this.options.summaryMetrics;
     this.summaryRestart = this.options.summaryRestart;
     this.touchPanel = this.options.touchPanel;
     this.touchControls = this.options.touchControls || [];
@@ -200,11 +378,20 @@
     this.scene = null;
     this.game = null;
     this.background = null;
+    this.roadSurface = null;
+    this.roadCenterLine = null;
+    this.roadLeftCurb = null;
+    this.roadRightCurb = null;
+    this.roadDecals = null;
     this.targets = null;
+    this.trackSegments = null;
     this.ramps = null;
     this.puddles = null;
     this.papers = null;
     this.player = null;
+    this.finalScoreText = null;
+    this.introLayer = null;
+    this.introObjects = {};
     this.keys = {};
     this.heldLeft = false;
     this.heldRight = false;
@@ -215,12 +402,34 @@
     this.targetTimer = 0;
     this.puddleTimer = 0;
     this.rampTimer = 0;
+    this.roadDecalTimer = 0;
     this.targetSpawnCount = 0;
+    this.rampSpawnCount = 0;
+    this.rampFrameOffset = Math.floor(Math.random() * RAMP_FRAMES.length);
+    this.trackSegmentFrameOffset = {
+      left: Math.floor(Math.random() * TRACK_SEGMENT_FRAMES.left.length),
+      right: Math.floor(Math.random() * TRACK_SEGMENT_FRAMES.right.length)
+    };
+    this.trackSegmentCursor = {
+      left: 0,
+      right: 0
+    };
     this.routeOffset = 0;
+    this.introMode = "loading-runtime";
+    this.introElapsed = 0;
+    this.introPrepComplete = false;
+    this.introComplete = false;
+    this.routeAssetsStarted = false;
+    this.routeAssetsReady = false;
+    this.routeAssetsFailed = false;
+    this.routeLoadProgress = 0;
+    this.objectPools = {};
+    this.poolStats = {};
     this.playerPose = "";
     this.poseHoldUntil = 0;
     this.heldPose = "";
     this.finishSequenceId = 0;
+    this.lastSummaryMetrics = [];
     this.basePlayerX = 0;
     this.basePlayerY = 0;
     this.width = 480;
@@ -229,13 +438,14 @@
     this.roadRight = 330;
     this.cleanup = [];
     this.reducedMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    this.webpSupported = browserSupportsWebp();
 
     this.bindDom();
     this.setTouchPanel(false);
     this.createPhaserGame();
     this.observeTheme();
     this.syncAudioButton();
-    this.syncHud("Press Start route when the bag is loaded.");
+    this.syncHud("Bag packed. Load the morning edition.");
   }
 
   PaperRouteGame.prototype.bind = function (node, eventName, handler) {
@@ -254,6 +464,9 @@
 
     this.bind(this.startButton, "click", function () {
       self.start();
+    });
+    this.bind(this.skipIntroButton, "click", function () {
+      self.skipIntro();
     });
     this.bind(this.summaryRestart, "click", function () {
       self.start();
@@ -391,7 +604,7 @@
       return;
     }
 
-    this.muteButton.textContent = this.muted ? "Sound: Muted" : "Sound: On";
+    this.muteButton.textContent = this.muted ? "Audio: Muted" : "Audio: On";
     this.muteButton.setAttribute("aria-label", this.muted ? "Turn Paper-Bob sound on" : "Mute Paper-Bob sound");
     this.muteButton.setAttribute("aria-pressed", this.muted ? "true" : "false");
   };
@@ -404,7 +617,7 @@
       this.playSound("mailbox");
     }
 
-    this.syncHud(this.muted ? "Sound muted." : "Sound on.");
+    this.syncHud(this.muted ? "Audio muted." : "Audio on.");
   };
 
   PaperRouteGame.prototype.playSound = function (name) {
@@ -419,6 +632,117 @@
     }
   };
 
+  PaperRouteGame.prototype.summaryMetricItems = function (state) {
+    var deliveries = (state && state.deliveries) || {};
+    var puddlesCleared = (state && state.puddlesCleared) || 0;
+    var puddleHits = (state && state.puddleHits) || 0;
+
+    return [
+      { key: "mailbox", value: deliveries.mailbox || 0, label: "Mailboxes" },
+      { key: "doorstep", value: deliveries.doorstep || 0, label: "Doorsteps" },
+      { key: "window", value: deliveries.window || 0, label: "Windows" },
+      { key: "ramp", value: (state && state.rampsTaken) || 0, label: "Ramps" },
+      {
+        key: "puddle",
+        value: puddlesCleared + "/" + puddleHits,
+        label: "Puddles",
+        aria: "Puddles cleared " + puddlesCleared + "; puddles hit " + puddleHits
+      },
+      { key: "papers", value: (state && state.papers) || 0, label: "Papers left" }
+    ];
+  };
+
+  PaperRouteGame.prototype.renderSummaryMetrics = function (state) {
+    var items = this.summaryMetricItems(state);
+    var node = this.summaryMetrics;
+
+    this.lastSummaryMetrics = items.map(function (item) {
+      return {
+        key: item.key,
+        value: String(item.value),
+        label: item.label
+      };
+    });
+
+    if (!node) {
+      return;
+    }
+
+    while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
+
+    items.forEach(function (item) {
+      var tile = document.createElement("span");
+      var icon = document.createElement("span");
+      var value = document.createElement("strong");
+
+      tile.className = "paper-route-result-tile paper-route-result-tile--" + item.key;
+      tile.setAttribute("role", "listitem");
+      tile.setAttribute("aria-label", item.aria || (item.label + ": " + item.value));
+      icon.className = "paper-route-result-icon";
+      icon.setAttribute("aria-hidden", "true");
+      value.textContent = item.value;
+      tile.appendChild(icon);
+      tile.appendChild(value);
+      node.appendChild(tile);
+    });
+  };
+
+  PaperRouteGame.prototype.clearSummaryMetrics = function () {
+    this.lastSummaryMetrics = [];
+    if (!this.summaryMetrics) {
+      return;
+    }
+    while (this.summaryMetrics.firstChild) {
+      this.summaryMetrics.removeChild(this.summaryMetrics.firstChild);
+    }
+  };
+
+  PaperRouteGame.prototype.clearFinalScore = function () {
+    if (!this.finalScoreText) {
+      return;
+    }
+    if (this.scene && this.scene.tweens) {
+      this.scene.tweens.killTweensOf(this.finalScoreText);
+    }
+    this.finalScoreText.setVisible(false);
+    this.finalScoreText.setText("");
+    this.finalScoreText.setAlpha(1);
+    this.finalScoreText.setScale(1);
+  };
+
+  PaperRouteGame.prototype.showFinalScore = function (score) {
+    var x;
+    var y;
+
+    if (!this.finalScoreText) {
+      return;
+    }
+
+    x = this.player ? this.player.x : this.width * .5;
+    y = this.player ? this.player.y - 116 : this.height * .62;
+    this.finalScoreText.setText(String(Math.max(0, Math.round(score || 0))));
+    this.finalScoreText.setPosition(x, y);
+    this.finalScoreText.setVisible(true);
+
+    if (this.reducedMotion || !this.scene || !this.scene.tweens) {
+      this.finalScoreText.setAlpha(1);
+      this.finalScoreText.setScale(1);
+      return;
+    }
+
+    this.finalScoreText.setAlpha(0);
+    this.finalScoreText.setScale(.78);
+    this.scene.tweens.add({
+      targets: this.finalScoreText,
+      alpha: 1,
+      scale: 1,
+      duration: 360,
+      ease: "Back.Out"
+    });
+  };
+
   PaperRouteGame.prototype.createPhaserGame = function () {
     var self = this;
 
@@ -427,7 +751,7 @@
       parent: this.container,
       width: 480,
       height: 853,
-      backgroundColor: "#171512",
+      backgroundColor: "#eadbc4",
       scale: {
         mode: window.Phaser.Scale.FIT,
         autoCenter: window.Phaser.Scale.CENTER_BOTH
@@ -454,33 +778,13 @@
     });
   };
 
+  PaperRouteGame.prototype.assetSrc = function (fallbackSrc, webpSrc) {
+    return this.webpSupported && webpSrc ? webpSrc : fallbackSrc;
+  };
+
   PaperRouteGame.prototype.preloadScene = function (scene) {
-    if (this.bobSheetSrc) {
-      scene.load.spritesheet("paperBobSheet", this.bobSheetSrc, {
-        frameWidth: 128,
-        frameHeight: 128
-      });
-    }
-    if (this.bobSrc) {
-      scene.load.image("paperBobSprite", this.bobSrc);
-    }
-    if (this.paperSrc) {
-      scene.load.image("paperRoutePaperAsset", this.paperSrc);
-    }
-    if (this.puddleSrc) {
-      scene.load.image("paperRoutePuddleAsset", this.puddleSrc);
-    }
-    if (this.puddleSplashSrc) {
-      scene.load.image("paperRoutePuddleSplashAsset", this.puddleSplashSrc);
-    }
-    if (this.mailboxHitSrc) {
-      scene.load.image("paperRouteMailboxHitAsset", this.mailboxHitSrc);
-    }
-    if (this.doorstepHitSrc) {
-      scene.load.image("paperRouteDoorstepHitAsset", this.doorstepHitSrc);
-    }
-    if (this.windowHitSrc) {
-      scene.load.image("paperRouteWindowHitAsset", this.windowHitSrc);
+    if (this.introAtlasSrc && this.introAtlasJsonSrc) {
+      scene.load.atlas("paperBobIntro", this.assetSrc(this.introAtlasSrc, this.introAtlasWebpSrc), this.introAtlasJsonSrc);
     }
   };
 
@@ -492,10 +796,14 @@
     this.background = scene.add.graphics();
     this.generateTextures(scene);
     this.createBobAnimations(scene);
+    this.createIntroAnimations(scene);
+    this.roadDecals = scene.add.group();
     this.targets = scene.physics.add.group();
+    this.trackSegments = scene.add.group();
     this.ramps = scene.physics.add.group();
     this.puddles = scene.physics.add.group();
     this.papers = scene.physics.add.group();
+    this.createRoadKitObjects(scene);
     playerTexture = scene.textures.exists("paperBobSheet") ? "paperBobSheet" : (scene.textures.exists("paperBobSprite") ? "paperBobSprite" : "paperRouteCourierFallback");
     this.player = scene.physics.add.sprite(0, 0, playerTexture, 0);
     this.player.setDepth(18);
@@ -503,6 +811,18 @@
     this.setPlayerDisplaySize(1);
     this.setPlayerPose("ride");
     this.player.body.setSize(TUNING.playerBody.width, TUNING.playerBody.height, true);
+    this.finalScoreText = scene.add.text(0, 0, "", {
+      color: "#fff8e8",
+      fontFamily: "Georgia, 'Times New Roman', serif",
+      fontSize: "34px",
+      fontStyle: "bold",
+      stroke: "#2b2117",
+      strokeThickness: 7,
+      shadow: { offsetX: 0, offsetY: 4, color: "rgba(47,31,17,.36)", blur: 6, fill: true }
+    });
+    this.finalScoreText.setOrigin(.5);
+    this.finalScoreText.setDepth(52);
+    this.finalScoreText.setVisible(false);
 
     this.keys.up = scene.input.keyboard.addKey(window.Phaser.Input.Keyboard.KeyCodes.UP);
     this.keys.down = scene.input.keyboard.addKey(window.Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -536,7 +856,7 @@
     });
 
     this.layoutScene();
-    this.showStartCard();
+    this.beginIntro();
   };
 
   PaperRouteGame.prototype.createBobAnimations = function (scene) {
@@ -561,13 +881,927 @@
 
     create("bobRide", [BOB_FRAME.rideStraight, BOB_FRAME.rideStraightAlt], 5, -1);
     create("bobAirborne", [BOB_FRAME.airbornePeak, BOB_FRAME.airborneHold], 5, -1);
-    create("bobWheelie", [BOB_FRAME.wheelieStart, BOB_FRAME.wheelieRise, BOB_FRAME.wheeliePeak, BOB_FRAME.wheelieHold], 8, -1);
+    create("bobWheelieRise", [BOB_FRAME.wheelieStart, BOB_FRAME.wheelieRise, BOB_FRAME.wheeliePeak, BOB_FRAME.wheelieHold], 10, 0);
     create("bobPuddleHit", [BOB_FRAME.puddleSplash, BOB_FRAME.puddleWobble, BOB_FRAME.puddleLoss, BOB_FRAME.puddleRecover], 7, 0);
     create("bobRunEnd", [34, 35, 36, 37, 38, 39, 40, 41], 4, 0);
   };
 
+  PaperRouteGame.prototype.createIntroAnimations = function (scene) {
+    function atlasFrames(frameNames) {
+      return frameNames.map(function (frame) {
+        return { key: "paperBobIntro", frame: frame };
+      });
+    }
+
+    function create(key, frameNames, frameRate, repeat) {
+      if (!scene.textures.exists("paperBobIntro") || scene.anims.exists(key)) {
+        return;
+      }
+      scene.anims.create({
+        key: key,
+        frames: atlasFrames(frameNames),
+        frameRate: frameRate,
+        repeat: repeat
+      });
+    }
+
+    create("introBobRideFront", INTRO_RIDE_FRAMES, 7, -1);
+    create("spotRunSide", SPOT_SIDE_FRAMES, 8, -1);
+    create("spotRunFront", SPOT_FRONT_FRAMES, 8, -1);
+    create("spotRunBack", SPOT_BACK_FRAMES, 8, -1);
+  };
+
   PaperRouteGame.prototype.hasBobSheet = function () {
     return !!(this.scene && this.scene.textures.exists("paperBobSheet"));
+  };
+
+  PaperRouteGame.prototype.hasRoutePropsAtlas = function () {
+    return !!(this.scene && this.scene.textures.exists("paperRouteProps"));
+  };
+
+  PaperRouteGame.prototype.hasLotsAtlas = function () {
+    return !!(this.scene && this.scene.textures.exists("paperBobLots"));
+  };
+
+  PaperRouteGame.prototype.hasTrackAtlas = function () {
+    return !!(this.scene && this.scene.textures.exists("paperBobTrack"));
+  };
+
+  PaperRouteGame.prototype.hasIntroAtlas = function () {
+    return !!(this.scene && this.scene.textures.exists("paperBobIntro"));
+  };
+
+  PaperRouteGame.prototype.hasRoutePropsFrame = function (frameName) {
+    return !!(this.hasRoutePropsAtlas() && this.scene.textures.getFrame("paperRouteProps", frameName));
+  };
+
+  PaperRouteGame.prototype.hasLotsFrame = function (frameName) {
+    return !!(this.hasLotsAtlas() && this.scene.textures.getFrame("paperBobLots", frameName));
+  };
+
+  PaperRouteGame.prototype.hasTrackFrame = function (frameName) {
+    return !!(this.hasTrackAtlas() && this.scene.textures.getFrame("paperBobTrack", frameName));
+  };
+
+  PaperRouteGame.prototype.hasIntegratedTrackAtlas = function () {
+    return this.hasTrackFrame(TRACK_SEGMENT_FRAMES.left[0]) && this.hasTrackFrame(TRACK_SEGMENT_FRAMES.right[0]);
+  };
+
+  PaperRouteGame.prototype.createRoadKitObjects = function (scene) {
+    var roadFrame;
+
+    if (this.roadSurface || !this.hasRoutePropsFrame("road_surface") || !this.hasRoutePropsFrame("road_center_dashes")) {
+      return;
+    }
+
+    roadFrame = scene.textures.getFrame("paperRouteProps", "road_surface");
+    this.roadSurface = scene.add.tileSprite(0, 0, roadFrame.width, this.height, "paperRouteProps", "road_surface");
+    this.roadSurface.setOrigin(0, 0);
+    this.roadSurface.setDepth(2);
+    this.roadSurface.setAlpha(.98);
+
+    this.roadCenterLine = scene.add.tileSprite(0, 0, 26, this.height, "paperRouteProps", "road_center_dashes");
+    this.roadCenterLine.setOrigin(.5, 0);
+    this.roadCenterLine.setDepth(3);
+    this.roadCenterLine.setAlpha(.9);
+
+    if (this.hasRoutePropsFrame("road_curb_left")) {
+      this.roadLeftCurb = scene.add.tileSprite(0, 0, scene.textures.getFrame("paperRouteProps", "road_curb_left").width, this.height, "paperRouteProps", "road_curb_left");
+      this.roadLeftCurb.setOrigin(0, 0);
+      this.roadLeftCurb.setDepth(4);
+    }
+
+    if (this.hasRoutePropsFrame("road_curb_right")) {
+      this.roadRightCurb = scene.add.tileSprite(0, 0, scene.textures.getFrame("paperRouteProps", "road_curb_right").width, this.height, "paperRouteProps", "road_curb_right");
+      this.roadRightCurb.setOrigin(0, 0);
+      this.roadRightCurb.setDepth(4);
+    }
+
+    this.layoutRoadKitObjects();
+  };
+
+  PaperRouteGame.prototype.layoutRoadKitObjects = function () {
+    var roadWidth = this.roadRight - this.roadLeft;
+    var curbWidth = clamp(this.width * .09, 36, 54);
+    var edgeOverlap = TRACK_ROAD_SEAM_OVERLAP;
+    var integratedTrackActive = this.hasIntegratedTrackAtlas();
+    var centerFrame;
+    var roadFrame;
+
+    if (!this.scene) {
+      return;
+    }
+    if (!this.roadSurface) {
+      this.createRoadKitObjects(this.scene);
+    }
+    if (!this.roadSurface) {
+      return;
+    }
+
+    this.roadSurface.setPosition(this.roadLeft, 0);
+    roadFrame = this.scene.textures.getFrame("paperRouteProps", "road_surface");
+    this.roadSurface.setSize(roadFrame ? roadFrame.width : roadWidth, this.height);
+    this.roadSurface.setScale(roadWidth / (roadFrame ? roadFrame.width : roadWidth), 1);
+
+    if (this.roadCenterLine) {
+      centerFrame = this.scene.textures.getFrame("paperRouteProps", "road_center_dashes");
+      this.roadCenterLine.setPosition(this.width * .5, 0);
+      this.roadCenterLine.setSize(centerFrame ? centerFrame.width : 26, this.height);
+    }
+
+    if (this.roadLeftCurb) {
+      this.roadLeftCurb.setVisible(!integratedTrackActive);
+      this.roadLeftCurb.setPosition(this.roadLeft - curbWidth + edgeOverlap, 0);
+      this.roadLeftCurb.setSize(this.roadLeftCurb.frame.width, this.height);
+      this.roadLeftCurb.setScale(curbWidth / this.roadLeftCurb.frame.width, 1);
+    }
+
+    if (this.roadRightCurb) {
+      this.roadRightCurb.setVisible(!integratedTrackActive);
+      this.roadRightCurb.setPosition(this.roadRight - edgeOverlap, 0);
+      this.roadRightCurb.setSize(this.roadRightCurb.frame.width, this.height);
+      this.roadRightCurb.setScale(curbWidth / this.roadRightCurb.frame.width, 1);
+    }
+  };
+
+  PaperRouteGame.prototype.trackSegmentDisplayWidth = function (side) {
+    var edgeOverlap = TRACK_ROAD_SEAM_OVERLAP;
+
+    return side === "left" ? this.roadLeft + edgeOverlap : this.width - this.roadRight + edgeOverlap;
+  };
+
+  PaperRouteGame.prototype.trackSegmentX = function (side) {
+    var edgeOverlap = TRACK_ROAD_SEAM_OVERLAP;
+
+    return side === "left" ? 0 : this.roadRight - edgeOverlap;
+  };
+
+  PaperRouteGame.prototype.trackSegmentConfig = function (side, index) {
+    var configs = TRACK_SEGMENT_CONFIGS[side] || [];
+    var offset = this.trackSegmentFrameOffset[side] || 0;
+
+    return configs.length ? configs[(index + offset) % configs.length] : null;
+  };
+
+  PaperRouteGame.prototype.trackSegmentDisplayHeight = function (side, config) {
+    var frame = config && this.hasTrackFrame(config.frame) ? this.scene.textures.getFrame("paperBobTrack", config.frame) : null;
+    var displayWidth = this.trackSegmentDisplayWidth(side);
+
+    return frame ? displayWidth * frame.height / frame.width : 0;
+  };
+
+  PaperRouteGame.prototype.resetTrackSegmentQueues = function () {
+    this.trackSegmentCursor.left = 0;
+    this.trackSegmentCursor.right = 0;
+  };
+
+  PaperRouteGame.prototype.positionTrackSegmentHitbox = function (segment, target) {
+    var config;
+    var x;
+    var y;
+
+    if (!segment || !target || !target.active) {
+      return;
+    }
+    config = target.getData("targetConfig");
+    if (!config) {
+      return;
+    }
+
+    x = segment.x + config.x * segment.displayWidth;
+    y = segment.y + config.y * segment.displayHeight;
+    target.setPosition(x, y);
+    if (target.body) {
+      if (target.body.reset) {
+        target.body.reset(x, y);
+      } else if (target.body.updateFromGameObject) {
+        target.body.updateFromGameObject();
+      }
+    }
+  };
+
+  PaperRouteGame.prototype.createTrackSegmentHitbox = function (segment, side, type, config, groupIndex) {
+    var target = this.getPooledObject("targets") || this.scene.physics.add.sprite(-999, -999, "paperRouteTargetMarker");
+
+    target.setTexture("paperRouteTargetMarker");
+    target.setVisible(false);
+    target.body.setSize(config.width, config.height, true);
+    target.setVelocity(0, 0);
+    target.setData("type", type);
+    target.setData("side", side);
+    target.setData("hit", false);
+    target.setData("propertyFrame", segment.getData("frame"));
+    target.setData("property", segment);
+    target.setData("segment", segment);
+    target.setData("targetConfig", config);
+    target.setData("targetGroupIndex", groupIndex);
+    if (!this.targets.contains(target)) {
+      this.targets.add(target);
+    }
+    this.positionTrackSegmentHitbox(segment, target);
+
+    return target;
+  };
+
+  PaperRouteGame.prototype.releaseTrackSegment = function (segment) {
+    var self = this;
+    var hitboxes = segment && segment.getData ? segment.getData("targets") || [] : [];
+
+    hitboxes.slice().forEach(function (target) {
+      if (target && target.active) {
+        self.releasePooledObject(target);
+      }
+    });
+    this.releasePooledObject(segment);
+  };
+
+  PaperRouteGame.prototype.spawnTrackSegment = function (side, y) {
+    var cursor = this.trackSegmentCursor[side] || 0;
+    var config = this.trackSegmentConfig(side, cursor);
+    var displayWidth;
+    var displayHeight;
+    var segment;
+    var targets = [];
+    var self = this;
+
+    if (!config || !this.hasTrackFrame(config.frame)) {
+      return null;
+    }
+
+    displayWidth = this.trackSegmentDisplayWidth(side);
+    displayHeight = this.trackSegmentDisplayHeight(side, config);
+    if (!displayHeight) {
+      return null;
+    }
+
+    segment = this.getPooledObject("trackSegments") || this.scene.add.image(-999, -999, "paperBobTrack", config.frame);
+    segment.setTexture("paperBobTrack", config.frame);
+    segment.setOrigin(0, 0);
+    segment.setPosition(this.trackSegmentX(side), y);
+    segment.setDepth(4);
+    segment.setDisplaySize(displayWidth, displayHeight);
+    segment.setData("side", side);
+    segment.setData("frame", config.frame);
+    segment.setData("segmentTop", Math.round(segment.y));
+    segment.setData("segmentBottom", Math.round(segment.y + segment.displayHeight));
+    segment.setData("targetGroups", config.targetGroups.length);
+    config.targetGroups.forEach(function (group, groupIndex) {
+      ["mailbox", "doorstep", "window"].forEach(function (type) {
+        targets.push(self.createTrackSegmentHitbox(segment, side, type, group[type], groupIndex));
+      });
+    });
+    segment.setData("targets", targets);
+    if (!this.trackSegments.contains(segment)) {
+      this.trackSegments.add(segment);
+    }
+    this.trackSegmentCursor[side] = cursor + 1;
+
+    return segment;
+  };
+
+  PaperRouteGame.prototype.seedTrackSegments = function () {
+    var self = this;
+
+    if (!this.hasIntegratedTrackAtlas() || !this.trackSegments) {
+      return;
+    }
+
+    this.resetTrackSegmentQueues();
+    ["left", "right"].forEach(function (side) {
+      var config = self.trackSegmentConfig(side, self.trackSegmentCursor[side] || 0);
+      var displayHeight = self.trackSegmentDisplayHeight(side, config);
+      var y = -displayHeight;
+      var guard = 0;
+      var segment;
+
+      while (displayHeight && y < self.height + TUNING.trackSegmentSpawnBuffer && guard < 8) {
+        segment = self.spawnTrackSegment(side, y);
+        y += segment ? segment.displayHeight : displayHeight;
+        guard += 1;
+      }
+    });
+  };
+
+  PaperRouteGame.prototype.ensureTrackSegmentCoverage = function (side) {
+    var self = this;
+    var active = [];
+    var displayHeight;
+    var topMost = Infinity;
+    var bottomMost = -Infinity;
+    var guard = 0;
+    var config;
+    var segment;
+
+    if (!this.hasIntegratedTrackAtlas() || !this.trackSegments) {
+      return;
+    }
+
+    this.trackSegments.children.each(function (child) {
+      if (child.active && child.getData("side") === side) {
+        active.push(child);
+        topMost = Math.min(topMost, child.y);
+        bottomMost = Math.max(bottomMost, child.y + child.displayHeight);
+      }
+    });
+
+    config = this.trackSegmentConfig(side, this.trackSegmentCursor[side] || 0);
+    displayHeight = this.trackSegmentDisplayHeight(side, config);
+    if (!displayHeight) {
+      return;
+    }
+
+    if (!active.length) {
+      this.spawnTrackSegment(side, -displayHeight);
+      topMost = -displayHeight;
+      bottomMost = 0;
+    }
+
+    while (topMost > -displayHeight - 4 && guard < 4) {
+      segment = this.spawnTrackSegment(side, topMost - displayHeight);
+      if (!segment) {
+        break;
+      }
+      topMost = segment.y;
+      guard += 1;
+    }
+
+    guard = 0;
+    while (bottomMost < this.height + TUNING.trackSegmentSpawnBuffer && guard < 6) {
+      segment = self.spawnTrackSegment(side, bottomMost);
+      if (!segment) {
+        break;
+      }
+      bottomMost = segment.y + segment.displayHeight;
+      guard += 1;
+    }
+  };
+
+  PaperRouteGame.prototype.updateTrackSegments = function (scrollDelta) {
+    var self = this;
+
+    if (!this.hasIntegratedTrackAtlas() || !this.trackSegments) {
+      return;
+    }
+
+    this.trackSegments.children.each(function (segment) {
+      var hitboxes;
+
+      if (!segment.active) {
+        return;
+      }
+
+      segment.y += scrollDelta;
+      segment.setData("segmentTop", Math.round(segment.y));
+      segment.setData("segmentBottom", Math.round(segment.y + segment.displayHeight));
+      hitboxes = segment.getData("targets") || [];
+      hitboxes.forEach(function (target) {
+        if (target && target.active) {
+          self.positionTrackSegmentHitbox(segment, target);
+          target.setVelocity(0, 0);
+        }
+      });
+
+      if (segment.y > self.height + TUNING.trackSegmentSpawnBuffer) {
+        self.releaseTrackSegment(segment);
+      }
+    });
+
+    this.ensureTrackSegmentCoverage("left");
+    this.ensureTrackSegmentCoverage("right");
+  };
+
+  PaperRouteGame.prototype.updateRoadKitObjects = function () {
+    var integratedTrackActive;
+
+    if (!this.roadSurface) {
+      this.layoutRoadKitObjects();
+    }
+    if (!this.roadSurface) {
+      return;
+    }
+
+    integratedTrackActive = this.hasIntegratedTrackAtlas();
+
+    if (this.roadSurface) {
+      this.roadSurface.tilePositionY = -this.routeOffset;
+    }
+    if (this.roadCenterLine) {
+      this.roadCenterLine.tilePositionY = -this.routeOffset;
+    }
+    if (this.roadLeftCurb) {
+      this.roadLeftCurb.setVisible(!integratedTrackActive);
+      this.roadLeftCurb.tilePositionY = -this.routeOffset;
+    }
+    if (this.roadRightCurb) {
+      this.roadRightCurb.setVisible(!integratedTrackActive);
+      this.roadRightCurb.tilePositionY = -this.routeOffset;
+    }
+  };
+
+  PaperRouteGame.prototype.setIntroProgress = function (value) {
+    var percent = clamp(value, 0, 1) * 100;
+
+    if (this.introProgress) {
+      this.introProgress.style.width = percent.toFixed(1) + "%";
+    }
+  };
+
+  PaperRouteGame.prototype.setIntroPanel = function (visible) {
+    if (this.introPanel) {
+      this.introPanel.hidden = !visible;
+    }
+  };
+
+  PaperRouteGame.prototype.setIntroReadyControls = function (ready) {
+    if (this.skipIntroButton) {
+      this.skipIntroButton.disabled = !ready;
+    }
+  };
+
+  PaperRouteGame.prototype.targetWithinRouteBounds = function (target) {
+    return !!(
+      target &&
+      target.x > -100 &&
+      target.x < this.width + 100 &&
+      target.y > -this.height &&
+      target.y < this.height + 160
+    );
+  };
+
+  PaperRouteGame.prototype.createObjectPools = function () {
+    var self = this;
+
+    function register(name, create, size) {
+      var pool = self.objectPools[name] || [];
+      var index;
+      var item;
+
+      for (index = pool.length; index < size; index += 1) {
+        item = create();
+        self.releasePooledObject(item);
+        pool.push(item);
+      }
+      self.objectPools[name] = pool;
+      self.poolStats[name] = pool.length;
+    }
+
+    if (!this.scene) {
+      return;
+    }
+
+    if (this.hasIntegratedTrackAtlas()) {
+      register("trackSegments", function () {
+        var image = self.scene.add.image(-999, -999, "paperBobTrack", TRACK_SEGMENT_FRAMES.left[0]);
+        image.setOrigin(0, 0);
+        image.setDepth(4);
+        self.trackSegments.add(image);
+        return image;
+      }, POOL_SIZES.trackSegments);
+    }
+
+    register("targets", function () {
+      var sprite = self.scene.physics.add.sprite(-999, -999, "paperRouteTargetMarker");
+      sprite.setVisible(false);
+      self.targets.add(sprite);
+      return sprite;
+    }, POOL_SIZES.targets);
+
+    register("papers", function () {
+      var sprite = self.scene.physics.add.sprite(-999, -999, self.scene.textures.exists("paperRoutePaperAsset") ? "paperRoutePaperAsset" : "paperRoutePaper");
+      sprite.setDepth(16);
+      self.papers.add(sprite);
+      return sprite;
+    }, POOL_SIZES.papers);
+
+    register("ramps", function () {
+      var sprite = self.scene.physics.add.sprite(-999, -999, "paperRouteRamp");
+      sprite.setDepth(8);
+      self.ramps.add(sprite);
+      return sprite;
+    }, POOL_SIZES.ramps);
+
+    register("puddles", function () {
+      var sprite = self.scene.physics.add.sprite(-999, -999, self.scene.textures.exists("paperRoutePuddleAsset") ? "paperRoutePuddleAsset" : "paperRoutePuddle");
+      sprite.setDepth(7);
+      self.puddles.add(sprite);
+      return sprite;
+    }, POOL_SIZES.puddles);
+
+    if (this.hasRoutePropsAtlas()) {
+      register("roadDecals", function () {
+        var image = self.scene.add.image(-999, -999, "paperRouteProps", "road_crack");
+        image.setDepth(4);
+        self.roadDecals.add(image);
+        return image;
+      }, POOL_SIZES.roadDecals);
+    }
+
+    register("hitFlashes", function () {
+      var image = self.scene.add.image(-999, -999, self.scene.textures.exists("paperRouteMailboxHitAsset") ? "paperRouteMailboxHitAsset" : "paperRoutePaper");
+      image.setDepth(24);
+      return image;
+    }, POOL_SIZES.hitFlashes);
+
+    register("puddleSplashes", function () {
+      var image = self.scene.add.image(-999, -999, self.scene.textures.exists("paperRoutePuddleSplashAsset") ? "paperRoutePuddleSplashAsset" : "paperRoutePuddle");
+      image.setDepth(23);
+      return image;
+    }, POOL_SIZES.puddleSplashes);
+
+    register("floatTexts", function () {
+      var text = self.scene.add.text(-999, -999, "", {
+        color: "#f6dfb7",
+        fontFamily: "Georgia, 'Times New Roman', serif",
+        fontSize: "20px",
+        fontStyle: "bold",
+        stroke: "#2b2117",
+        strokeThickness: 4
+      });
+      text.setOrigin(.5);
+      text.setDepth(30);
+      return text;
+    }, POOL_SIZES.floatTexts);
+  };
+
+  PaperRouteGame.prototype.getPooledObject = function (name) {
+    var pool = this.objectPools[name] || [];
+    var item = null;
+    var index;
+
+    for (index = 0; index < pool.length; index += 1) {
+      if (!pool[index].active) {
+        item = pool[index];
+        break;
+      }
+    }
+    if (!item) {
+      return null;
+    }
+
+    item.setActive(true);
+    item.setVisible(true);
+    item.setAlpha(1);
+    item.setAngle(0);
+    item.setScale(1);
+    item.clearTint && item.clearTint();
+    if (item.body) {
+      item.body.enable = true;
+      item.body.setVelocity(0, 0);
+      item.body.setAngularVelocity && item.body.setAngularVelocity(0);
+    }
+
+    return item;
+  };
+
+  PaperRouteGame.prototype.releasePooledObject = function (item) {
+    var destroyOnRelease;
+
+    if (!item) {
+      return;
+    }
+    destroyOnRelease = !!(item.getData && item.getData("ephemeralTarget"));
+
+    if (this.scene && this.scene.tweens) {
+      this.scene.tweens.killTweensOf(item);
+    }
+    item.setActive && item.setActive(false);
+    item.setVisible && item.setVisible(false);
+    item.setPosition && item.setPosition(-999, -999);
+    item.setAlpha && item.setAlpha(1);
+    item.setAngle && item.setAngle(0);
+    item.setScale && item.setScale(1);
+    item.clearTint && item.clearTint();
+    if (destroyOnRelease && item.destroy) {
+      item.destroy();
+      return;
+    }
+    if (item.data && item.data.removeAll) {
+      item.data.removeAll();
+    }
+    if (item.body) {
+      item.body.enable = false;
+      item.body.setVelocity(0, 0);
+      item.body.setAngularVelocity && item.body.setAngularVelocity(0);
+    }
+  };
+
+  PaperRouteGame.prototype.updateIntroLoadProgress = function () {
+    var loadingProgress = this.routeAssetsReady ? 1 : this.routeLoadProgress;
+
+    this.setIntroProgress(this.introPrepComplete ? 1 : Math.min(.98, loadingProgress));
+  };
+
+  PaperRouteGame.prototype.promotePlayerTexture = function () {
+    if (!this.player) {
+      return;
+    }
+    if (this.hasBobSheet()) {
+      this.player.setTexture("paperBobSheet", BOB_FRAME.rideStraight);
+      this.playerPose = "";
+      this.setPlayerPose("ride");
+    } else if (this.scene && this.scene.textures.exists("paperBobSprite")) {
+      this.player.setTexture("paperBobSprite");
+    }
+  };
+
+  PaperRouteGame.prototype.queueDeferredRouteAssets = function () {
+    var scene = this.scene;
+    var queued = 0;
+
+    if (!scene) {
+      return 0;
+    }
+
+    function textureMissing(key) {
+      return !scene.textures.exists(key);
+    }
+
+    if (this.bobSheetSrc && textureMissing("paperBobSheet")) {
+      scene.load.spritesheet("paperBobSheet", this.assetSrc(this.bobSheetSrc, this.bobSheetWebpSrc), {
+        frameWidth: 128,
+        frameHeight: 128
+      });
+      queued += 1;
+    }
+    if (this.bobSrc && textureMissing("paperBobSprite")) {
+      scene.load.image("paperBobSprite", this.bobSrc);
+      queued += 1;
+    }
+    if (this.paperSrc && textureMissing("paperRoutePaperAsset")) {
+      scene.load.image("paperRoutePaperAsset", this.assetSrc(this.paperSrc, this.paperWebpSrc));
+      queued += 1;
+    }
+    if (this.puddleSrc && textureMissing("paperRoutePuddleAsset")) {
+      scene.load.image("paperRoutePuddleAsset", this.assetSrc(this.puddleSrc, this.puddleWebpSrc));
+      queued += 1;
+    }
+    if (this.puddleSplashSrc && textureMissing("paperRoutePuddleSplashAsset")) {
+      scene.load.image("paperRoutePuddleSplashAsset", this.assetSrc(this.puddleSplashSrc, this.puddleSplashWebpSrc));
+      queued += 1;
+    }
+    if (this.mailboxHitSrc && textureMissing("paperRouteMailboxHitAsset")) {
+      scene.load.image("paperRouteMailboxHitAsset", this.assetSrc(this.mailboxHitSrc, this.mailboxHitWebpSrc));
+      queued += 1;
+    }
+    if (this.doorstepHitSrc && textureMissing("paperRouteDoorstepHitAsset")) {
+      scene.load.image("paperRouteDoorstepHitAsset", this.assetSrc(this.doorstepHitSrc, this.doorstepHitWebpSrc));
+      queued += 1;
+    }
+    if (this.windowHitSrc && textureMissing("paperRouteWindowHitAsset")) {
+      scene.load.image("paperRouteWindowHitAsset", this.assetSrc(this.windowHitSrc, this.windowHitWebpSrc));
+      queued += 1;
+    }
+    if (this.propsAtlasSrc && this.propsAtlasJsonSrc && textureMissing("paperRouteProps")) {
+      scene.load.atlas("paperRouteProps", this.assetSrc(this.propsAtlasSrc, this.propsAtlasWebpSrc), this.propsAtlasJsonSrc);
+      queued += 1;
+    }
+    if (this.lotsAtlasSrc && this.lotsAtlasJsonSrc && textureMissing("paperBobLots")) {
+      scene.load.atlas("paperBobLots", this.assetSrc(this.lotsAtlasSrc, this.lotsAtlasWebpSrc), this.lotsAtlasJsonSrc);
+      queued += 1;
+    }
+    if (this.trackAtlasSrc && this.trackAtlasJsonSrc && textureMissing("paperBobTrack")) {
+      scene.load.atlas("paperBobTrack", this.assetSrc(this.trackAtlasSrc, this.trackAtlasWebpSrc), this.trackAtlasJsonSrc);
+      queued += 1;
+    }
+
+    return queued;
+  };
+
+  PaperRouteGame.prototype.loadDeferredRouteAssets = function () {
+    var self = this;
+    var queued;
+
+    if (!this.scene || this.routeAssetsStarted) {
+      return;
+    }
+
+    this.routeAssetsStarted = true;
+    this.routeAssetsReady = false;
+    this.routeAssetsFailed = false;
+    this.routeLoadProgress = 0;
+    queued = this.queueDeferredRouteAssets();
+    if (!queued) {
+      this.finishDeferredRouteAssets();
+      return;
+    }
+
+    this.scene.load.on("progress", this.handleDeferredRouteProgress, this);
+    this.scene.load.once("complete", function () {
+      self.scene.load.off("progress", self.handleDeferredRouteProgress, self);
+      self.routeLoadProgress = 1;
+      self.finishDeferredRouteAssets();
+    });
+    this.scene.load.once("loaderror", function () {
+      self.routeAssetsFailed = true;
+    });
+    this.scene.load.start();
+  };
+
+  PaperRouteGame.prototype.handleDeferredRouteProgress = function (value) {
+    this.routeLoadProgress = value || 0;
+    this.updateIntroLoadProgress();
+  };
+
+  PaperRouteGame.prototype.finishDeferredRouteAssets = function () {
+    var self = this;
+
+    if (this.routeAssetsReady) {
+      return;
+    }
+    this.routeAssetsReady = true;
+    this.createRoadKitObjects(this.scene);
+    this.createBobAnimations(this.scene);
+    this.promotePlayerTexture();
+    this.createObjectPools();
+    self.introPrepComplete = true;
+    self.setIntroReadyControls(true);
+    self.updateIntroLoadProgress();
+    if (self.introMode === "intro-loading" || self.reducedMotion || !self.hasIntroAtlas()) {
+      self.completeIntro();
+    }
+  };
+
+  PaperRouteGame.prototype.createIntroObjects = function () {
+    var scene = this.scene;
+
+    if (!scene || !this.hasIntroAtlas()) {
+      return;
+    }
+
+    if (this.introLayer) {
+      this.introLayer.destroy(true);
+    }
+
+    this.introLayer = scene.add.container(0, 0);
+    this.introLayer.setDepth(40);
+    this.introObjects = {
+      bob: scene.add.sprite(this.width * .5, this.height * .56, "paperBobIntro", "intro_bob_ride_front_01"),
+      spot: scene.add.sprite(this.width * .74, this.height * .66, "paperBobIntro", "spot_sit_paper_front"),
+      logo: scene.add.image(this.width * .5, this.height * .18, "paperBobIntro", "intro_logo_paper_bob"),
+      shade: scene.add.rectangle(this.width * .5, this.height * .5, this.width, this.height, 0x000000, 0)
+    };
+    this.introObjects.bob.setDepth(43);
+    this.introObjects.spot.setDepth(44);
+    this.introObjects.logo.setDepth(45);
+    this.introObjects.logo.setVisible(true);
+    this.introObjects.logo.setDisplaySize(Math.min(220, this.width * .48), Math.min(56, this.width * .12));
+    this.introObjects.spot.setVisible(false);
+    this.introObjects.spot.setScale(.52);
+    this.introObjects.shade.setDepth(50);
+    this.introObjects.shade.setVisible(false);
+    this.introLayer.add([this.introObjects.bob, this.introObjects.spot, this.introObjects.logo, this.introObjects.shade]);
+    this.introObjects.bob.anims.play("introBobRideFront", true);
+  };
+
+  PaperRouteGame.prototype.beginIntro = function () {
+    this.introMode = "intro-prep";
+    this.introElapsed = 0;
+    this.introPrepComplete = false;
+    this.introComplete = false;
+    this.routeAssetsStarted = false;
+    this.routeAssetsReady = false;
+    this.routeAssetsFailed = false;
+    this.routeLoadProgress = 0;
+    this.setIntroPanel(true);
+    this.setIntroProgress(0);
+    this.setIntroReadyControls(false);
+    this.setTouchPanel(false);
+    if (this.startCard) {
+      this.startCard.hidden = true;
+    }
+    if (this.pauseCard) {
+      this.pauseCard.hidden = true;
+    }
+    if (this.summaryCard) {
+      this.summaryCard.hidden = true;
+    }
+    this.clearFinalScore();
+    this.clearSummaryMetrics();
+    if (this.startButton) {
+      this.startButton.disabled = true;
+    }
+    if (this.pauseButton) {
+      this.pauseButton.disabled = true;
+    }
+    if (this.restartButton) {
+      this.restartButton.disabled = true;
+    }
+    if (this.startButton) {
+      this.startButton.disabled = !this.introComplete;
+    }
+    if (this.player) {
+      this.player.setVisible(false);
+    }
+    this.syncHud("Rolling the morning edition...");
+    this.createIntroObjects();
+    this.introMode = this.hasIntroAtlas() && !this.reducedMotion ? "intro-cinematic" : "intro-loading";
+    this.loadDeferredRouteAssets();
+  };
+
+  PaperRouteGame.prototype.skipIntro = function () {
+    if (!this.introPrepComplete || this.introComplete) {
+      return;
+    }
+    this.introElapsed = INTRO_DURATION;
+    this.completeIntro();
+  };
+
+  PaperRouteGame.prototype.completeIntro = function () {
+    var bob = this.introObjects.bob;
+    var spot = this.introObjects.spot;
+    var logo = this.introObjects.logo;
+    var shade = this.introObjects.shade;
+
+    this.introMode = "ready";
+    this.introComplete = true;
+    this.setIntroPanel(false);
+    this.setIntroProgress(1);
+    if (shade) {
+      shade.setAlpha(0);
+    }
+    if (bob) {
+      bob.anims.stop();
+      bob.setTexture("paperBobIntro", "intro_bob_read_02");
+      bob.setPosition(this.width * .42, this.height * .5);
+      bob.setScale(.76);
+      bob.setAngle(0);
+      bob.setVisible(true);
+    }
+    if (spot) {
+      spot.anims.stop();
+      spot.setTexture("paperBobIntro", "spot_sit_paper_front");
+      spot.setPosition(this.width * .64, this.height * .55);
+      spot.setScale(.46);
+      spot.setVisible(false);
+    }
+    if (logo) {
+      logo.setVisible(true);
+      logo.setPosition(this.width * .5, this.height * .17);
+      logo.setAngle(0);
+      logo.setAlpha(1);
+    }
+    if (this.stage) {
+      this.stage.classList.add("paper-route-stage--intro-ready");
+    }
+    this.showStartCard();
+    this.syncHud("Paper-Bob is loaded. Hit the street.");
+  };
+
+  PaperRouteGame.prototype.updateIntro = function (deltaSeconds) {
+    var t;
+    var progress;
+    var bob = this.introObjects.bob;
+    var logo = this.introObjects.logo;
+    var shade = this.introObjects.shade;
+    var centerX = this.width * .5;
+
+    if (this.introComplete || this.introMode !== "intro-cinematic") {
+      return;
+    }
+
+    this.introElapsed = Math.min(INTRO_DURATION, this.introElapsed + deltaSeconds);
+    t = this.introElapsed;
+    progress = t / INTRO_DURATION;
+    if (this.introPrepComplete) {
+      this.setIntroProgress(1);
+    } else {
+      this.updateIntroLoadProgress();
+    }
+    this.routeOffset += (120 + progress * 42) * deltaSeconds;
+    this.redrawBackground();
+
+    if (shade) {
+      shade.setSize(this.width, this.height);
+      shade.setPosition(this.width * .5, this.height * .5);
+      shade.setAlpha(0);
+      shade.setVisible(false);
+    }
+
+    if (bob) {
+      bob.setVisible(true);
+      if (t < 6.8) {
+        bob.setTexture("paperBobIntro", INTRO_RIDE_FRAMES[Math.floor(t * 8) % INTRO_RIDE_FRAMES.length]);
+        bob.setPosition(centerX + Math.sin(t * 2.4) * 20, this.height * (.48 + progress * .08));
+        bob.setScale(.72 + Math.sin(t * 3.2) * .018);
+        bob.setAngle(Math.sin(t * 2.4) * 3.5);
+      } else {
+        bob.setTexture("paperBobIntro", Math.floor(t * 3) % 2 ? "intro_bob_read_01" : "intro_bob_read_02");
+        bob.setPosition(this.width * .42, this.height * .5);
+        bob.setScale(.76);
+        bob.setAngle(0);
+      }
+    }
+
+    if (logo) {
+      logo.setVisible(true);
+      logo.setAlpha(1);
+      logo.setPosition(this.width * .5 + Math.sin(t * 1.8) * 2, this.height * .17);
+      logo.setAngle(Math.sin(t * 1.4) * .8);
+    }
+
+    if (t >= INTRO_DURATION && this.introPrepComplete) {
+      this.completeIntro();
+    }
   };
 
   PaperRouteGame.prototype.setPlayerDisplaySize = function (scale) {
@@ -608,7 +1842,7 @@
     } else if (pose === "airborne") {
       animation = "bobAirborne";
     } else if (pose === "wheelie") {
-      animation = "bobWheelie";
+      animation = "bobWheelieRise";
     } else if (pose === "puddle") {
       animation = "bobPuddleHit";
     } else if (pose === "run-end") {
@@ -632,132 +1866,137 @@
     graphics.fillStyle(0x111111, 1);
     graphics.fillCircle(20, 28, 13);
     graphics.fillCircle(56, 28, 13);
-    graphics.lineStyle(4, 0xece7df, .9);
+    graphics.lineStyle(4, 0xf8efdd, .9);
     graphics.strokeCircle(20, 28, 13);
     graphics.strokeCircle(56, 28, 13);
     graphics.strokeLineShape(new window.Phaser.Geom.Line(24, 26, 38, 9));
     graphics.strokeLineShape(new window.Phaser.Geom.Line(38, 9, 52, 26));
     graphics.strokeLineShape(new window.Phaser.Geom.Line(31, 27, 56, 27));
-    graphics.fillStyle(0xd5be96, 1);
+    graphics.fillStyle(0xb9894d, 1);
     graphics.fillRoundedRect(6, 5, 28, 22, 3);
-    graphics.fillStyle(0x171512, 1);
+    graphics.fillStyle(0x2b2117, 1);
     graphics.fillRoundedRect(34, 0, 24, 28, 6);
     graphics.generateTexture("paperRouteCourierFallback", 78, 54);
 
     graphics.clear();
-    graphics.fillStyle(0xfff5d6, 1);
+    graphics.fillStyle(0xf6dfb7, 1);
     graphics.fillRoundedRect(1, 1, 25, 16, 2);
-    graphics.fillStyle(0xd5be96, .86);
+    graphics.fillStyle(0xb9894d, .86);
     graphics.fillTriangle(18, 1, 26, 1, 26, 9);
-    graphics.lineStyle(1, 0x365263, .95);
+    graphics.lineStyle(1, 0x557b82, .95);
     graphics.strokeLineShape(new window.Phaser.Geom.Line(5, 5, 17, 5));
     graphics.strokeLineShape(new window.Phaser.Geom.Line(5, 9, 21, 9));
     graphics.strokeLineShape(new window.Phaser.Geom.Line(5, 13, 15, 13));
     graphics.generateTexture("paperRoutePaper", 28, 18);
 
     graphics.clear();
-    graphics.fillStyle(0x1c1a16, 1);
+    graphics.fillStyle(0xffffff, 0);
+    graphics.fillRect(0, 0, 4, 4);
+    graphics.generateTexture("paperRouteTargetMarker", 4, 4);
+
+    graphics.clear();
+    graphics.fillStyle(0x2b2117, 1);
     graphics.fillRoundedRect(10, 10, 58, 64, 5);
-    graphics.fillStyle(0x2d2922, 1);
+    graphics.fillStyle(0x46331f, 1);
     graphics.fillTriangle(5, 14, 39, 0, 73, 14);
-    graphics.fillStyle(0xfff5d6, .86);
+    graphics.fillStyle(0xf6dfb7, .86);
     graphics.fillRoundedRect(21, 26, 14, 16, 2);
     graphics.fillRoundedRect(43, 26, 14, 16, 2);
-    graphics.fillStyle(0x6f5a46, 1);
+    graphics.fillStyle(0x735c43, 1);
     graphics.fillRoundedRect(33, 50, 12, 24, 2);
-    graphics.fillStyle(0x2f2c26, .92);
+    graphics.fillStyle(0x3d3327, .92);
     graphics.fillRoundedRect(48, 78, 74, 18, 3);
-    graphics.fillStyle(0x4a463b, .86);
+    graphics.fillStyle(0x5b4d3a, .86);
     graphics.fillRoundedRect(52, 84, 70, 7, 1);
-    graphics.fillStyle(0x365263, 1);
+    graphics.fillStyle(0x557b82, 1);
     graphics.fillRoundedRect(74, 51, 38, 26, 4);
-    graphics.fillStyle(0xfff5d6, .96);
+    graphics.fillStyle(0xf6dfb7, .96);
     graphics.fillRoundedRect(82, 58, 18, 8, 2);
-    graphics.fillStyle(0xd5be96, 1);
+    graphics.fillStyle(0xb9894d, 1);
     graphics.fillTriangle(78, 51, 93, 39, 108, 51);
     graphics.fillRect(91, 77, 5, 21);
-    graphics.fillStyle(0xa84e35, 1);
+    graphics.fillStyle(0xb45b3c, 1);
     graphics.fillRect(106, 48, 10, 5);
-    graphics.lineStyle(2, 0xece7df, .82);
+    graphics.lineStyle(2, 0xf8efdd, .82);
     graphics.strokeRoundedRect(10, 10, 58, 64, 5);
     graphics.strokeRoundedRect(74, 51, 38, 26, 4);
     graphics.generateTexture("paperRouteMailbox", 132, 108);
 
     graphics.clear();
-    graphics.fillStyle(0x1c1a16, 1);
+    graphics.fillStyle(0x2b2117, 1);
     graphics.fillRoundedRect(10, 10, 76, 68, 5);
-    graphics.fillStyle(0x2d2922, 1);
+    graphics.fillStyle(0x46331f, 1);
     graphics.fillTriangle(4, 15, 48, 0, 92, 15);
-    graphics.fillStyle(0xfff5d6, .88);
+    graphics.fillStyle(0xf6dfb7, .88);
     graphics.fillRoundedRect(25, 24, 18, 16, 2);
     graphics.fillRoundedRect(54, 24, 18, 16, 2);
-    graphics.fillStyle(0x365263, .88);
+    graphics.fillStyle(0x557b82, .88);
     graphics.fillRoundedRect(35, 48, 28, 30, 2);
-    graphics.fillStyle(0x2f2c26, .92);
+    graphics.fillStyle(0x3d3327, .92);
     graphics.fillRoundedRect(54, 80, 66, 18, 3);
-    graphics.fillStyle(0x6f5a46, 1);
+    graphics.fillStyle(0x735c43, 1);
     graphics.fillRoundedRect(57, 65, 58, 27, 5);
-    graphics.fillStyle(0xd5be96, .75);
+    graphics.fillStyle(0xb9894d, .75);
     graphics.fillRect(63, 73, 46, 7);
-    graphics.fillStyle(0x365263, 1);
+    graphics.fillStyle(0x557b82, 1);
     graphics.fillRoundedRect(94, 48, 24, 18, 4);
-    graphics.fillStyle(0xfff5d6, .9);
+    graphics.fillStyle(0xf6dfb7, .9);
     graphics.fillRoundedRect(99, 54, 11, 5, 1);
-    graphics.lineStyle(2, 0xece7df, .76);
+    graphics.lineStyle(2, 0xf8efdd, .76);
     graphics.strokeRoundedRect(10, 10, 76, 68, 5);
     graphics.strokeRoundedRect(57, 65, 58, 27, 5);
     graphics.generateTexture("paperRouteDoorstep", 132, 108);
 
     graphics.clear();
-    graphics.fillStyle(0x1c1a16, 1);
+    graphics.fillStyle(0x2b2117, 1);
     graphics.fillRoundedRect(8, 10, 86, 72, 5);
-    graphics.fillStyle(0x2d2922, 1);
+    graphics.fillStyle(0x46331f, 1);
     graphics.fillTriangle(1, 16, 51, 0, 101, 16);
-    graphics.fillStyle(0xfff5d6, .84);
+    graphics.fillStyle(0xf6dfb7, .84);
     graphics.fillRoundedRect(25, 27, 20, 18, 2);
     graphics.fillRoundedRect(57, 27, 20, 18, 2);
     graphics.fillRoundedRect(38, 50, 28, 22, 2);
-    graphics.lineStyle(2, 0x365263, .92);
+    graphics.lineStyle(2, 0x557b82, .92);
     graphics.strokeRoundedRect(38, 50, 28, 22, 2);
     graphics.strokeLineShape(new window.Phaser.Geom.Line(52, 50, 52, 72));
     graphics.strokeLineShape(new window.Phaser.Geom.Line(38, 61, 66, 61));
-    graphics.fillStyle(0x2f2c26, .92);
+    graphics.fillStyle(0x3d3327, .92);
     graphics.fillRoundedRect(55, 80, 68, 18, 3);
-    graphics.fillStyle(0x4a463b, .82);
+    graphics.fillStyle(0x5b4d3a, .82);
     graphics.fillRoundedRect(60, 86, 63, 6, 1);
-    graphics.fillStyle(0x365263, 1);
+    graphics.fillStyle(0x557b82, 1);
     graphics.fillRoundedRect(96, 49, 24, 18, 4);
-    graphics.fillStyle(0xd5be96, 1);
+    graphics.fillStyle(0xb9894d, 1);
     graphics.fillRect(107, 67, 4, 24);
-    graphics.lineStyle(2, 0xece7df, .8);
+    graphics.lineStyle(2, 0xf8efdd, .8);
     graphics.strokeRoundedRect(8, 10, 86, 72, 5);
     graphics.generateTexture("paperRouteWindow", 134, 108);
 
     graphics.clear();
-    graphics.fillStyle(0x2f2c26, 1);
+    graphics.fillStyle(0x3d3327, 1);
     graphics.fillRoundedRect(9, 19, 74, 45, 4);
-    graphics.fillStyle(0xd5be96, 1);
+    graphics.fillStyle(0xb9894d, 1);
     graphics.fillTriangle(13, 19, 46, 2, 79, 19);
-    graphics.fillStyle(0x8f6e3d, 1);
+    graphics.fillStyle(0xa9773c, 1);
     graphics.fillTriangle(16, 25, 46, 11, 76, 25);
-    graphics.fillStyle(0xfff5d6, .9);
+    graphics.fillStyle(0xf6dfb7, .9);
     graphics.fillRoundedRect(21, 29, 50, 10, 2);
-    graphics.fillStyle(0x365263, .55);
+    graphics.fillStyle(0x557b82, .55);
     graphics.fillRoundedRect(25, 43, 42, 10, 2);
-    graphics.lineStyle(3, 0xfff5d6, .82);
+    graphics.lineStyle(3, 0xf6dfb7, .82);
     graphics.strokeLineShape(new window.Phaser.Geom.Line(46, 3, 46, 62));
-    graphics.lineStyle(2, 0xece7df, .82);
+    graphics.lineStyle(2, 0xf8efdd, .82);
     graphics.strokeTriangle(13, 19, 46, 2, 79, 19);
     graphics.strokeRoundedRect(9, 19, 74, 45, 4);
     graphics.generateTexture("paperRouteRamp", 92, 72);
 
     graphics.clear();
-    graphics.fillStyle(0x365263, .9);
+    graphics.fillStyle(0x557b82, .9);
     graphics.fillEllipse(48, 28, 82, 34);
-    graphics.fillStyle(0x99adbf, .72);
+    graphics.fillStyle(0x9fb8bd, .72);
     graphics.fillEllipse(39, 22, 32, 10);
     graphics.fillEllipse(59, 34, 24, 8);
-    graphics.lineStyle(2, 0xfff5d6, .45);
+    graphics.lineStyle(2, 0xf6dfb7, .45);
     graphics.strokeEllipse(48, 28, 82, 34);
     graphics.generateTexture("paperRoutePuddle", 96, 58);
 
@@ -768,27 +2007,27 @@
     var light = document.documentElement.getAttribute("data-theme") === "light";
 
     return light ? {
-      paper: 0xefe2cf,
-      paperAlt: 0xd8c6ac,
-      ink: 0x211f1d,
-      inkSoft: 0x6f5a46,
-      road: 0x716a5e,
-      roadDark: 0x5c554b,
-      lane: 0xfff5d6,
-      route: 0xa84e35,
-      curb: 0xc8b798,
-      porch: 0xf7efe3
+      paper: 0xf3e6d3,
+      paperAlt: 0xe5d2b6,
+      ink: 0x2b2117,
+      inkSoft: 0x735c43,
+      road: 0x6d675c,
+      roadDark: 0x565047,
+      lane: 0xf6dfb7,
+      route: 0xb45b3c,
+      curb: 0xd4bd98,
+      porch: 0xf8efdd
     } : {
-      paper: 0x171512,
-      paperAlt: 0x24211c,
-      ink: 0xece7df,
-      inkSoft: 0x8e877d,
-      road: 0x4c493f,
-      roadDark: 0x38342d,
-      lane: 0xfff5d6,
-      route: 0xd5be96,
-      curb: 0x2a2a27,
-      porch: 0x24211c
+      paper: 0xeadbc4,
+      paperAlt: 0xd7c09e,
+      ink: 0x2b2117,
+      inkSoft: 0x735c43,
+      road: 0x625d53,
+      roadDark: 0x4d463b,
+      lane: 0xf3ddb4,
+      route: 0xb45b3c,
+      curb: 0xcbb38b,
+      porch: 0xf1e3cd
     };
   };
 
@@ -816,6 +2055,7 @@
     var palette = this.palette();
     var roadWidth = this.roadRight - this.roadLeft;
     var stripeOffset = this.routeOffset % 86;
+    var assetBackedRoute = this.hasRoutePropsFrame("road_surface") || this.hasIntegratedTrackAtlas() || this.hasLotsAtlas();
     var i;
     var y;
 
@@ -831,21 +2071,33 @@
     g.fillStyle(palette.paper, 1);
     g.fillRect(0, 0, width, height);
 
-    g.lineStyle(1, palette.inkSoft, .16);
-    for (i = -2; i < 14; i += 1) {
-      y = i * 74 + (this.routeOffset * .22) % 74;
-      line(0, y, this.roadLeft - 12, y - 42);
-      line(this.roadRight + 12, y - 42, width, y);
-    }
+    if (assetBackedRoute) {
+      g.fillStyle(palette.porch, .18);
+      g.fillRect(0, 0, this.roadLeft - 10, height);
+      g.fillRect(this.roadRight + 10, 0, width - this.roadRight - 10, height);
+      g.lineStyle(1, palette.inkSoft, .08);
+      for (i = -2; i < 14; i += 1) {
+        y = i * 96 + (this.routeOffset * .18) % 96;
+        line(20, y, this.roadLeft - 26, y - 18);
+        line(this.roadRight + 26, y - 18, width - 20, y);
+      }
+    } else {
+      g.lineStyle(1, palette.inkSoft, .16);
+      for (i = -2; i < 14; i += 1) {
+        y = i * 74 + (this.routeOffset * .22) % 74;
+        line(0, y, this.roadLeft - 12, y - 42);
+        line(this.roadRight + 12, y - 42, width, y);
+      }
 
-    g.fillStyle(palette.porch, .75);
-    for (i = -2; i < 12; i += 1) {
-      y = i * 108 + (this.routeOffset * .75) % 108;
-      g.fillRoundedRect(16, y, this.roadLeft - 48, 42, 4);
-      g.fillRoundedRect(this.roadRight + 32, y + 52, width - this.roadRight - 48, 42, 4);
-      g.lineStyle(1, palette.inkSoft, .22);
-      line(32, y + 16, this.roadLeft - 48, y + 16);
-      line(this.roadRight + 48, y + 68, width - 30, y + 68);
+      g.fillStyle(palette.porch, .75);
+      for (i = -2; i < 12; i += 1) {
+        y = i * 108 + (this.routeOffset * .75) % 108;
+        g.fillRoundedRect(16, y, this.roadLeft - 48, 42, 4);
+        g.fillRoundedRect(this.roadRight + 32, y + 52, width - this.roadRight - 48, 42, 4);
+        g.lineStyle(1, palette.inkSoft, .22);
+        line(32, y + 16, this.roadLeft - 48, y + 16);
+        line(this.roadRight + 48, y + 68, width - 30, y + 68);
+      }
     }
 
     g.fillStyle(palette.curb, 1);
@@ -853,18 +2105,21 @@
     g.fillRect(this.roadRight, 0, 8, height);
     g.fillStyle(palette.road, 1);
     g.fillRect(this.roadLeft, 0, roadWidth, height);
-    g.fillStyle(palette.roadDark, .52);
-    g.fillRect(this.roadLeft + roadWidth * .42, 0, roadWidth * .16, height);
-    g.lineStyle(2, palette.lane, .5);
-    for (i = -1; i < 13; i += 1) {
-      y = i * 86 + stripeOffset;
-      line(width * .5, y, width * .5, y + 38);
+    if (!assetBackedRoute) {
+      g.fillStyle(palette.roadDark, .52);
+      g.fillRect(this.roadLeft + roadWidth * .42, 0, roadWidth * .16, height);
+      g.lineStyle(2, palette.lane, .5);
+      for (i = -1; i < 13; i += 1) {
+        y = i * 86 + stripeOffset;
+        line(width * .5, y, width * .5, y + 38);
+      }
+      g.lineStyle(3, palette.route, .55);
+      line(30, height * .17, this.roadLeft - 26, height * .13);
+      line(this.roadRight + 26, height * .26, width - 32, height * .21);
+      line(26, height * .68, this.roadLeft - 22, height * .62);
+      line(this.roadRight + 28, height * .76, width - 30, height * .72);
     }
-    g.lineStyle(3, palette.route, .55);
-    line(30, height * .17, this.roadLeft - 26, height * .13);
-    line(this.roadRight + 26, height * .26, width - 32, height * .21);
-    line(26, height * .68, this.roadLeft - 22, height * .62);
-    line(this.roadRight + 28, height * .76, width - 30, height * .72);
+    this.updateRoadKitObjects();
   };
 
   PaperRouteGame.prototype.showStartCard = function () {
@@ -876,6 +2131,8 @@
     if (this.summaryCard) {
       this.summaryCard.hidden = true;
     }
+    this.clearFinalScore();
+    this.clearSummaryMetrics();
     if (this.pauseCard) {
       this.pauseCard.hidden = true;
     }
@@ -890,6 +2147,9 @@
     if (this.restartButton) {
       this.restartButton.disabled = true;
     }
+    if (this.startButton) {
+      this.startButton.disabled = !this.introComplete;
+    }
     if (this.scene && this.startButton && this.startButton.focus) {
       this.scene.time.delayedCall(20, function () {
         if (self.startButton && !self.startButton.closest("[hidden]")) {
@@ -900,24 +2160,52 @@
   };
 
   PaperRouteGame.prototype.start = function () {
+    if (!this.scene || !this.player || !this.player.body) {
+      this.syncHud("Paper-Bob is still at the loading dock.");
+      return;
+    }
+    if (!this.introComplete) {
+      this.syncHud("The route is still loading.");
+      return;
+    }
+
     this.clearObjects();
+    this.clearFinalScore();
+    this.clearSummaryMetrics();
     this.applyEffects(this.rules.start(this.highScore));
     this.throwCooldown = 0;
     this.targetTimer = TUNING.firstTargetDelay / 1000;
     this.puddleTimer = TUNING.firstPuddleDelay / 1000;
     this.rampTimer = TUNING.firstRampDelay / 1000;
+    this.roadDecalTimer = .85;
     this.targetSpawnCount = 0;
+    this.rampSpawnCount = 0;
+    this.rampFrameOffset = Math.floor(Math.random() * RAMP_FRAMES.length);
+    this.trackSegmentFrameOffset = {
+      left: Math.floor(Math.random() * TRACK_SEGMENT_FRAMES.left.length),
+      right: Math.floor(Math.random() * TRACK_SEGMENT_FRAMES.right.length)
+    };
+    this.resetTrackSegmentQueues();
     this.heldLeft = false;
     this.heldRight = false;
     this.heldUp = false;
     this.heldDown = false;
     this.trickHeld = false;
     this.routeOffset = 0;
+    this.updateRoadKitObjects();
+    this.seedTrackSegments();
     this.poseHoldUntil = 0;
     this.heldPose = "";
     this.finishSequenceId += 1;
     this.basePlayerX = this.width * .5;
     this.basePlayerY = this.height * .76;
+    if (this.introLayer) {
+      this.introLayer.setVisible(false);
+    }
+    if (this.stage) {
+      this.stage.classList.remove("paper-route-stage--intro-ready");
+    }
+    this.player.setVisible(true);
     this.player.clearTint();
     this.player.setAngle(0);
     this.player.setAlpha(1);
@@ -950,24 +2238,44 @@
     }
 
     this.playSound("start");
-    this.syncHud("Route open. Throw left or right; ramps turn tosses into bonus points.");
+    this.syncHud("Bag packed. Toss clean, hop ramps, dodge puddles.");
     if (this.container && this.container.focus) {
       this.container.focus({ preventScroll: true });
     }
   };
 
   PaperRouteGame.prototype.clearObjects = function () {
+    var self = this;
+
     if (this.targets) {
-      this.targets.clear(true, true);
+      this.targets.children.each(function (child) {
+        self.releasePooledObject(child);
+      });
+    }
+    if (this.trackSegments) {
+      this.trackSegments.children.each(function (child) {
+        self.releaseTrackSegment(child);
+      });
     }
     if (this.ramps) {
-      this.ramps.clear(true, true);
+      this.ramps.children.each(function (child) {
+        self.releasePooledObject(child);
+      });
     }
     if (this.puddles) {
-      this.puddles.clear(true, true);
+      this.puddles.children.each(function (child) {
+        self.releasePooledObject(child);
+      });
     }
     if (this.papers) {
-      this.papers.clear(true, true);
+      this.papers.children.each(function (child) {
+        self.releasePooledObject(child);
+      });
+    }
+    if (this.roadDecals) {
+      this.roadDecals.children.each(function (child) {
+        self.releasePooledObject(child);
+      });
     }
   };
 
@@ -1003,7 +2311,46 @@
     return (Math.max(TUNING.rampMinInterval, TUNING.rampBaseInterval - this.rules.state.elapsed * TUNING.rampRamp) + Math.random() * TUNING.rampJitter) / 1000;
   };
 
-  PaperRouteGame.prototype.spawnTarget = function () {
+  PaperRouteGame.prototype.nextRoadDecalInterval = function () {
+    return (Math.max(TUNING.roadDecalMinInterval, TUNING.roadDecalBaseInterval - this.rules.state.elapsed * 3) + Math.random() * TUNING.roadDecalJitter) / 1000;
+  };
+
+  PaperRouteGame.prototype.spawnRoadDecal = function (planned) {
+    var config;
+    var frame;
+    var displayWidth;
+    var displayHeight;
+    var decal;
+
+    if (!this.roadDecals || !this.hasRoutePropsAtlas()) {
+      return;
+    }
+
+    config = planned || ROAD_DECAL_CONFIGS[Math.floor(Math.random() * ROAD_DECAL_CONFIGS.length)];
+    frame = this.scene.textures.getFrame("paperRouteProps", config.frame);
+    if (!frame) {
+      return;
+    }
+
+    displayWidth = config.width || 56;
+    displayHeight = displayWidth * frame.height / frame.width;
+    decal = this.getPooledObject("roadDecals") || this.scene.add.image(-999, -999, "paperRouteProps", config.frame);
+    decal.setTexture("paperRouteProps", config.frame);
+    decal.setPosition(
+      clamp(this.width * (config.xRatio || (.38 + Math.random() * .24)), this.roadLeft + 32, this.roadRight - 32),
+      -displayHeight - 20,
+    );
+    decal.setDepth(4);
+    decal.setAlpha(config.alpha || .5);
+    decal.setAngle(config.angle !== undefined ? config.angle : (Math.random() - .5) * 14);
+    decal.setDisplaySize(displayWidth, displayHeight);
+    decal.setData("frame", config.frame);
+    if (!this.roadDecals.contains(decal)) {
+      this.roadDecals.add(decal);
+    }
+  };
+
+  PaperRouteGame.prototype.spawnFallbackTarget = function () {
     var types = ["mailbox", "doorstep", "window"];
     var type = this.targetSpawnCount === 0 ? "mailbox" : types[Math.floor(Math.random() * types.length)];
     var side = this.targetSpawnCount % 2 === 0 ? "left" : "right";
@@ -1015,7 +2362,7 @@
 
     target.setDepth(9);
     target.body.setSize(body.width, body.height, true);
-    target.setVelocityY(this.currentSpeed() * .92);
+    target.setVelocity(0, this.currentSpeed() * .92);
     target.setData("type", type);
     target.setData("side", side);
     target.setData("hit", false);
@@ -1023,34 +2370,59 @@
     this.targetSpawnCount += 1;
   };
 
-  PaperRouteGame.prototype.spawnRamp = function () {
-    var ramp = this.scene.physics.add.sprite(
-      clamp(this.width * (.42 + Math.random() * .16), this.roadLeft + 32, this.roadRight - 32),
-      -58,
-      "paperRouteRamp"
-    );
+  PaperRouteGame.prototype.spawnTarget = function (planned) {
+    if (this.hasIntegratedTrackAtlas()) {
+      return;
+    }
 
-    ramp.setDepth(8);
-    ramp.body.setSize(70, 32, true);
-    ramp.setVelocityY(this.currentSpeed());
-    ramp.setData("used", false);
-    this.ramps.add(ramp);
+    this.spawnFallbackTarget(planned);
   };
 
-  PaperRouteGame.prototype.spawnPuddle = function () {
-    var texture = this.scene.textures.exists("paperRoutePuddleAsset") ? "paperRoutePuddleAsset" : "paperRoutePuddle";
-    var puddle = this.scene.physics.add.sprite(
-      clamp(this.width * (.38 + Math.random() * .24), this.roadLeft + 28, this.roadRight - 28),
-      -58,
-      texture
-    );
+  PaperRouteGame.prototype.spawnRamp = function (planned) {
+    var texture = "paperRouteRamp";
+    var frame = null;
+    var y = -58;
+    var body = { width: 70, height: 32 };
+    var ramp = this.getPooledObject("ramps") || this.scene.physics.add.sprite(-999, -999, texture);
 
+    if (this.hasRoutePropsAtlas()) {
+      frame = planned && planned.frame ? planned.frame : RAMP_FRAMES[(this.rampSpawnCount + this.rampFrameOffset) % RAMP_FRAMES.length];
+      texture = "paperRouteProps";
+      ramp.setTexture(texture, frame);
+      ramp.setDisplaySize(TUNING.rampDisplay.width, TUNING.rampDisplay.height);
+      ramp.y = -TUNING.rampDisplay.height / 2 - 8;
+      body = TUNING.rampBody;
+      this.rampSpawnCount += 1;
+    } else {
+      ramp.setTexture(texture);
+      ramp.setPosition(clamp(this.width * ((planned && planned.xRatio) || (.42 + Math.random() * .16)), this.roadLeft + 32, this.roadRight - 32), y);
+    }
+
+    ramp.x = clamp(this.width * ((planned && planned.xRatio) || (.42 + Math.random() * .16)), this.roadLeft + 32, this.roadRight - 32);
+    ramp.setDepth(8);
+    ramp.body.setSize(body.width, body.height, true);
+    ramp.setVelocityY(this.currentSpeed());
+    ramp.setData("used", false);
+    ramp.setData("frame", frame || "paperRouteRamp");
+    if (!this.ramps.contains(ramp)) {
+      this.ramps.add(ramp);
+    }
+  };
+
+  PaperRouteGame.prototype.spawnPuddle = function (planned) {
+    var texture = this.scene.textures.exists("paperRoutePuddleAsset") ? "paperRoutePuddleAsset" : "paperRoutePuddle";
+    var puddle = this.getPooledObject("puddles") || this.scene.physics.add.sprite(-999, -999, texture);
+
+    puddle.setTexture(texture);
+    puddle.setPosition(clamp(this.width * ((planned && planned.xRatio) || (.38 + Math.random() * .24)), this.roadLeft + 28, this.roadRight - 28), -58);
     puddle.setDepth(7);
     puddle.setDisplaySize(TUNING.puddleDisplay.width, TUNING.puddleDisplay.height);
     puddle.body.setSize(72, 28, true);
     puddle.setVelocityY(this.currentSpeed() * .98);
     puddle.setData("used", false);
-    this.puddles.add(puddle);
+    if (!this.puddles.contains(puddle)) {
+      this.puddles.add(puddle);
+    }
   };
 
   PaperRouteGame.prototype.throwPaper = function (direction, fromTouch) {
@@ -1072,11 +2444,9 @@
       return;
     }
 
-    paper = this.scene.physics.add.sprite(
-      this.player.x + sign * 24,
-      this.player.y - 28,
-      this.scene.textures.exists("paperRoutePaperAsset") ? "paperRoutePaperAsset" : "paperRoutePaper"
-    );
+    paper = this.getPooledObject("papers") || this.scene.physics.add.sprite(-999, -999, this.scene.textures.exists("paperRoutePaperAsset") ? "paperRoutePaperAsset" : "paperRoutePaper");
+    paper.setTexture(this.scene.textures.exists("paperRoutePaperAsset") ? "paperRoutePaperAsset" : "paperRoutePaper");
+    paper.setPosition(this.player.x + sign * 24, this.player.y - 28);
     paper.setDepth(16);
     paper.setDisplaySize(TUNING.paperDisplay.width, TUNING.paperDisplay.height);
     paper.setVelocity(sign * TUNING.paperSpeed, TUNING.paperLift);
@@ -1088,7 +2458,9 @@
     paper.setData("velocityY", TUNING.paperLift);
     paper.setData("spin", sign * 460);
     paper.setData("airborneThrow", result.airborne);
-    this.papers.add(paper);
+    if (!this.papers.contains(paper)) {
+      this.papers.add(paper);
+    }
     this.throwCooldown = (fromTouch ? TUNING.touchPaperCooldown : TUNING.paperCooldown) / 1000;
     this.heldPose = result.airborne ? "air-throw-" + direction : "throw-" + direction;
     this.poseHoldUntil = this.rules.state.elapsed + .24;
@@ -1096,7 +2468,7 @@
     this.setPlayerPose(this.heldPose);
     this.paperTrail(paper.x - sign * 10, paper.y + 4, sign);
     this.playSound("throw");
-    this.syncHud(result.airborne ? "Airborne toss." : (direction === "left" ? "Left toss." : "Right toss."));
+    this.syncHud(result.airborne ? "Air delivery." : (direction === "left" ? "Left toss." : "Right toss."));
   };
 
   PaperRouteGame.prototype.startHop = function () {
@@ -1113,13 +2485,36 @@
 
     if (effects.length) {
       this.trickHeld = true;
+      this.heldPose = "";
+      this.poseHoldUntil = 0;
+      this.playerPose = "";
+      if (this.player) {
+        this.player.setAngle(this.heldRight ? 13 : -13);
+        this.player.setTint(0xf6dfb7);
+        this.setPlayerPose("wheelie");
+      }
       this.applyEffects(effects);
     }
   };
 
   PaperRouteGame.prototype.stopWheelie = function () {
+    var nextPose;
+
     this.trickHeld = false;
     this.applyEffects(this.rules.stopWheelie());
+    if (this.player) {
+      nextPose = this.heldLeft ? "lean-left" : (this.heldRight ? "lean-right" : "ride");
+      this.heldPose = "";
+      this.poseHoldUntil = 0;
+      if (this.rules.isSlowed()) {
+        this.player.setTint(0x557b82);
+      } else {
+        this.player.clearTint();
+      }
+      this.player.setAngle((this.heldLeft ? -1 : this.heldRight ? 1 : 0) * 4);
+      this.playerPose = "";
+      this.setPlayerPose(nextPose);
+    }
   };
 
   PaperRouteGame.prototype.scoreDelivery = function (paper, target) {
@@ -1140,9 +2535,9 @@
       effects = this.rules.hitMailbox(!!paper.getData("airborneThrow"));
     }
     this.targetBurst(target.x, target.y, type);
-    this.floatText("+" + (effects[0] ? effects[0].points : 0), target.x, target.y - 30, "#fff5d6");
-    paper.destroy();
-    target.destroy();
+    this.floatText("+" + (effects[0] ? effects[0].points : 0), target.x, target.y - 30, "#f6dfb7");
+    this.releasePooledObject(paper);
+    this.releasePooledObject(target);
     this.playSound(type);
     this.applyEffects(effects);
   };
@@ -1156,9 +2551,9 @@
 
     ramp.setData("used", true);
     effects = this.rules.takeRamp();
-    this.floatText("+100", ramp.x, ramp.y - 30, "#fff5d6");
+    this.floatText("+100", ramp.x, ramp.y - 30, "#f6dfb7");
     this.rampBurst(ramp.x, ramp.y);
-    ramp.destroy();
+    this.releasePooledObject(ramp);
     this.playSound("ramp");
     this.applyEffects(effects);
   };
@@ -1174,42 +2569,46 @@
     effects = this.rules.hitPuddle();
     this.puddleBurst(puddle.x, puddle.y, this.rules.state.airborne);
     if (effects[0] && effects[0].type === "puddle-clear") {
-      this.floatText("+75", puddle.x, puddle.y - 24, "#99adbf");
+      this.floatText("+75", puddle.x, puddle.y - 24, "#557b82");
       this.playSound("clear");
     } else {
-      this.floatText("-1 paper", puddle.x, puddle.y - 24, "#d5be96");
-      this.player.setTint(0x99adbf);
+      this.floatText("-1 paper", puddle.x, puddle.y - 24, "#b9894d");
+      this.player.setTint(0x557b82);
       this.heldPose = "puddle";
       this.poseHoldUntil = this.rules.state.elapsed + .72;
       this.playerPose = "";
       this.setPlayerPose("puddle");
       this.playSound("puddle");
     }
-    puddle.destroy();
+    this.releasePooledObject(puddle);
     this.applyEffects(effects);
   };
 
   PaperRouteGame.prototype.floatText = function (copy, x, y, color) {
     var label;
+    var self = this;
 
     if (!this.scene) {
       return;
     }
 
-    label = this.scene.add.text(x, y, copy, {
-      color: color || "#fff5d6",
+    label = this.getPooledObject("floatTexts") || this.scene.add.text(-999, -999, "", {
+      color: color || "#f6dfb7",
       fontFamily: "Georgia, 'Times New Roman', serif",
       fontSize: "20px",
       fontStyle: "bold",
-      stroke: "#171512",
+      stroke: "#2b2117",
       strokeThickness: 4
     });
+    label.setText(copy);
+    label.setPosition(x, y);
+    label.setStyle({ color: color || "#f6dfb7" });
     label.setOrigin(.5);
     label.setDepth(30);
 
     if (this.reducedMotion) {
       this.scene.time.delayedCall(520, function () {
-        label.destroy();
+        self.releasePooledObject(label);
       });
       return;
     }
@@ -1221,7 +2620,7 @@
       duration: 560,
       ease: "Cubic.easeOut",
       onComplete: function () {
-        label.destroy();
+        self.releasePooledObject(label);
       }
     });
   };
@@ -1234,7 +2633,7 @@
     }
 
     mark = this.scene.add.graphics({ x: x, y: y });
-    mark.lineStyle(2, 0xfff5d6, .38);
+    mark.lineStyle(2, 0xf6dfb7, .38);
     mark.strokeLineShape(new window.Phaser.Geom.Line(-sign * 18, 0, -sign * 5, 0));
     mark.strokeLineShape(new window.Phaser.Geom.Line(-sign * 14, 6, -sign * 3, 5));
     mark.strokeLineShape(new window.Phaser.Geom.Line(-sign * 14, -6, -sign * 3, -5));
@@ -1250,30 +2649,34 @@
   };
 
   PaperRouteGame.prototype.targetBurst = function (x, y, type) {
-    var color = type === "window" ? 0x99adbf : (type === "doorstep" ? 0xd5be96 : 0xfff5d6);
+    var color = type === "window" ? 0x557b82 : (type === "doorstep" ? 0xb9894d : 0xf6dfb7);
     var texture = type === "window" ? "paperRouteWindowHitAsset" : (type === "doorstep" ? "paperRouteDoorstepHitAsset" : "paperRouteMailboxHitAsset");
     var burst;
     var burstScaleX;
     var burstScaleY;
+    var self = this;
 
     if (!this.scene || this.reducedMotion) {
       return;
     }
 
     if (this.scene.textures.exists(texture)) {
-      burst = this.scene.add.image(x, y, texture);
+      burst = this.getPooledObject("hitFlashes") || this.scene.add.image(-999, -999, texture);
+      burst.setTexture(texture);
+      burst.setPosition(x, y);
       burst.setDepth(24);
-      burst.setDisplaySize(type === "doorstep" ? 104 : TUNING.hitFlashDisplay.width, type === "doorstep" ? 86 : TUNING.hitFlashDisplay.height);
+      burst.setDisplaySize(type === "doorstep" ? 82 : TUNING.hitFlashDisplay.width, type === "doorstep" ? 64 : TUNING.hitFlashDisplay.height);
+      burst.setAlpha(.82);
       burstScaleX = burst.scaleX;
       burstScaleY = burst.scaleY;
       this.scene.tweens.add({
         targets: burst,
         alpha: 0,
-        scaleX: burstScaleX * 1.12,
-        scaleY: burstScaleY * 1.12,
-        duration: 340,
+        scaleX: burstScaleX * 1.06,
+        scaleY: burstScaleY * 1.06,
+        duration: 260,
         onComplete: function () {
-          burst.destroy();
+          self.releasePooledObject(burst);
         }
       });
       return;
@@ -1304,7 +2707,7 @@
     }
 
     arc = this.scene.add.graphics({ x: x, y: y });
-    arc.lineStyle(3, 0xd5be96, .8);
+    arc.lineStyle(3, 0xb9894d, .8);
     arc.beginPath();
     arc.arc(0, -10, 34, Math.PI, Math.PI * 1.95);
     arc.strokePath();
@@ -1324,33 +2727,37 @@
     var splash;
     var splashScaleX;
     var splashScaleY;
+    var self = this;
 
     if (!this.scene || this.reducedMotion) {
       return;
     }
 
     if (this.scene.textures.exists("paperRoutePuddleSplashAsset")) {
-      splash = this.scene.add.image(x, y, "paperRoutePuddleSplashAsset");
+      splash = this.getPooledObject("puddleSplashes") || this.scene.add.image(-999, -999, "paperRoutePuddleSplashAsset");
+      splash.setTexture("paperRoutePuddleSplashAsset");
+      splash.setPosition(x, y);
       splash.setDepth(23);
-      splash.setDisplaySize(104, 58);
-      splash.setTint(cleared ? 0xffffff : 0xd5be96);
+      splash.setDisplaySize(84, 44);
+      splash.setAlpha(.82);
+      splash.setTint(cleared ? 0xffffff : 0xb9894d);
       splashScaleX = splash.scaleX;
       splashScaleY = splash.scaleY;
       this.scene.tweens.add({
         targets: splash,
         alpha: 0,
-        scaleX: splashScaleX * 1.18,
-        scaleY: splashScaleY * 1.18,
-        duration: 300,
+        scaleX: splashScaleX * 1.08,
+        scaleY: splashScaleY * 1.08,
+        duration: 240,
         onComplete: function () {
-          splash.destroy();
+          self.releasePooledObject(splash);
         }
       });
       return;
     }
 
     splash = this.scene.add.graphics({ x: x, y: y });
-    splash.lineStyle(2, cleared ? 0x99adbf : 0xfff5d6, .72);
+    splash.lineStyle(2, cleared ? 0x557b82 : 0xf6dfb7, .72);
     splash.strokeEllipse(0, 0, 84, 30);
     splash.strokeLineShape(new window.Phaser.Geom.Line(-28, -6, -42, -18));
     splash.strokeLineShape(new window.Phaser.Geom.Line(28, -6, 42, -18));
@@ -1376,7 +2783,7 @@
       if (effect.type === "finish") {
         self.finish(effect);
       } else if (effect.type === "wheelie-score") {
-        self.floatText("+" + effect.points, self.player.x, self.player.y - 62, "#d5be96");
+        self.floatText("+" + effect.points, self.player.x, self.player.y - 62, "#b9894d");
         self.playSound("wheelie");
       } else if (effect.type === "land") {
         self.player.clearTint();
@@ -1443,12 +2850,12 @@
       lift = Math.sin(progress * Math.PI) * 48;
       displayScale = 1 + Math.sin(progress * Math.PI) * .12;
       this.player.setAngle((this.heldLeft ? -1 : this.heldRight ? 1 : 0) * 8);
-      this.player.setTint(0xd5be96);
+      this.player.setTint(0xb9894d);
       pose = state.elapsed < this.poseHoldUntil && this.heldPose ? this.heldPose : "airborne";
     } else if (state.wheelie) {
       displayScale = 1;
-      this.player.setAngle(-9);
-      this.player.setTint(0xfff5d6);
+      this.player.setAngle(this.heldRight ? 13 : -13);
+      this.player.setTint(0xf6dfb7);
       pose = "wheelie";
     } else if (state.elapsed < this.poseHoldUntil && this.heldPose) {
       this.player.setAngle((this.heldLeft ? -1 : this.heldRight ? 1 : 0) * 4);
@@ -1471,10 +2878,18 @@
   PaperRouteGame.prototype.updateScene = function (time, delta) {
     var deltaSeconds = Math.min(delta / 1000, .05);
     var speed;
+    var scrollDelta;
     var self = this;
     var effects;
 
-    if (!this.scene || !this.rules.state.running || this.rules.state.paused) {
+    if (!this.scene) {
+      return;
+    }
+    if (this.introMode === "intro-cinematic") {
+      this.updateIntro(deltaSeconds);
+      return;
+    }
+    if (!this.rules.state.running || this.rules.state.paused) {
       return;
     }
 
@@ -1482,30 +2897,71 @@
     this.targetTimer -= deltaSeconds;
     this.puddleTimer -= deltaSeconds;
     this.rampTimer -= deltaSeconds;
+    this.roadDecalTimer -= deltaSeconds;
     this.handleKeyboard(deltaSeconds);
     speed = this.currentSpeed();
-    this.routeOffset += speed * deltaSeconds;
+    scrollDelta = speed * deltaSeconds;
+    this.routeOffset += scrollDelta;
     this.redrawBackground();
-
+    this.updateTrackSegments(scrollDelta);
     this.targets.children.each(function (target) {
-      target.setVelocityY(speed * .92);
+      var segment;
+
+      if (!target.active) {
+        return;
+      }
+      if (target.getData("targetConfig")) {
+        segment = target.getData("segment");
+        if (!segment || !segment.active) {
+          self.releasePooledObject(target);
+          return;
+        }
+        self.positionTrackSegmentHitbox(segment, target);
+        target.setVelocity(0, 0);
+        return;
+      }
+      if (target.getData("propertyFrame") && !self.targetWithinRouteBounds(target)) {
+        self.releasePooledObject(target);
+        return;
+      }
+      target.setVelocity(0, speed * .92);
       if (target.y > self.height + 90) {
-        target.destroy();
+        self.releasePooledObject(target);
       }
     });
     this.ramps.children.each(function (ramp) {
+      if (!ramp.active) {
+        return;
+      }
       ramp.setVelocityY(speed);
       if (ramp.y > self.height + 90) {
-        ramp.destroy();
+        self.releasePooledObject(ramp);
       }
     });
     this.puddles.children.each(function (puddle) {
+      if (!puddle.active) {
+        return;
+      }
       puddle.setVelocityY(speed * .98);
       if (puddle.y > self.height + 90) {
-        puddle.destroy();
+        self.releasePooledObject(puddle);
       }
     });
+    if (this.roadDecals) {
+      this.roadDecals.children.each(function (decal) {
+        if (!decal.active) {
+          return;
+        }
+        decal.y += speed * .88 * deltaSeconds;
+        if (decal.y > self.height + 100) {
+          self.releasePooledObject(decal);
+        }
+      });
+    }
     this.papers.children.each(function (paper) {
+      if (!paper.active) {
+        return;
+      }
       paper.x += (paper.getData("velocityX") || 0) * deltaSeconds;
       paper.y += (paper.getData("velocityY") || 0) * deltaSeconds;
       paper.angle += (paper.getData("spin") || 0) * deltaSeconds;
@@ -1515,11 +2971,11 @@
       if (paper.x < -80 || paper.x > self.width + 80 || paper.y < -90 || paper.y > self.height + 80) {
         self.applyEffects(self.rules.missPaper());
         self.playSound("miss");
-        paper.destroy();
+        self.releasePooledObject(paper);
       }
     });
 
-    if (this.targetTimer <= 0) {
+    if (!this.hasIntegratedTrackAtlas() && this.targetTimer <= 0) {
       this.spawnTarget();
       this.targetTimer = this.nextTargetInterval();
     }
@@ -1530,6 +2986,10 @@
     if (this.rampTimer <= 0) {
       this.spawnRamp();
       this.rampTimer = this.nextRampInterval();
+    }
+    if (this.roadDecalTimer <= 0) {
+      this.spawnRoadDecal();
+      this.roadDecalTimer = this.nextRoadDecalInterval();
     }
 
     effects = this.rules.tick(deltaSeconds, this.papers.countActive(true));
@@ -1543,7 +3003,7 @@
     var copy;
     var self = this;
     var sequenceId = this.finishSequenceId + 1;
-    var showDelay = this.reducedMotion ? 80 : 1550;
+    var showDelay = this.reducedMotion ? 80 : 1800;
 
     this.finishSequenceId = sequenceId;
     this.scene.physics.pause();
@@ -1566,12 +3026,14 @@
     if (this.summaryCard) {
       this.summaryCard.hidden = true;
     }
+    this.clearFinalScore();
+    this.clearSummaryMetrics();
     if (this.stage) {
       this.stage.classList.remove("paper-route-stage--paused");
     }
 
-    title = effect && effect.newBest ? "New Paper-Bob record" : "Route complete";
-    copy = "Score " + state.score + ". Papers left " + state.papers + ". Mailboxes " + state.deliveries.mailbox + ", doorsteps " + state.deliveries.doorstep + ", windows " + state.deliveries.window + ". Ramps " + state.rampsTaken + ", puddles cleared " + state.puddlesCleared + ".";
+    title = effect && effect.newBest ? "New Paper-Bob record" : "Edition delivered";
+    copy = "Final score " + state.score + ".";
     if (state.finishReason === "papers") {
       copy += " The bag ran dry.";
     }
@@ -1585,9 +3047,9 @@
     }
 
     this.playSound(effect && effect.newBest ? "record" : "end");
-    this.syncHud("Route closed. Reading final edition.");
+    this.syncHud("Run filed. Bob checks the final edition.");
 
-    this.scene.time.delayedCall(showDelay, function () {
+    window.setTimeout(function () {
       if (self.finishSequenceId !== sequenceId) {
         return;
       }
@@ -1598,19 +3060,21 @@
       if (self.summaryCopy) {
         self.summaryCopy.textContent = copy;
       }
+      self.renderSummaryMetrics(state);
+      self.showFinalScore(state.score);
       if (self.summaryCard) {
         self.summaryCard.hidden = false;
       }
-      self.syncHud(effect && effect.newBest ? "New high score saved in this browser." : "Route closed.");
+      self.syncHud(effect && effect.newBest ? "New record saved in this browser." : "Final edition filed.");
 
       if (self.summaryRestart) {
-        self.scene.time.delayedCall(20, function () {
+        window.setTimeout(function () {
           if (self.finishSequenceId === sequenceId) {
             self.summaryRestart.focus({ preventScroll: true });
           }
-        });
+        }, 20);
       }
-    });
+    }, showDelay);
   };
 
   PaperRouteGame.prototype.togglePause = function () {
@@ -1631,7 +3095,7 @@
         this.stage.classList.add("paper-route-stage--paused");
       }
       this.setTouchPanel(false);
-      this.syncHud("Paused.");
+      this.syncHud("Deadline hold.");
     } else {
       this.rules.setPaused(false);
       this.scene.physics.resume();
@@ -1645,8 +3109,23 @@
         this.stage.classList.remove("paper-route-stage--paused");
       }
       this.setTouchPanel(true);
-      this.syncHud("Route open.");
+      this.syncHud("Back on the route.");
     }
+  };
+
+  PaperRouteGame.prototype.advanceTime = function (milliseconds) {
+    var remaining = Math.max(0, Math.min(120000, Number(milliseconds) || 0));
+    var step;
+    var activePapers;
+
+    while (remaining > 0 && this.rules.state.running && !this.rules.state.paused) {
+      step = Math.min(500, remaining) / 1000;
+      activePapers = this.papers ? this.papers.countActive(true) : 0;
+      this.applyEffects(this.rules.tick(step, activePapers));
+      remaining -= step * 1000;
+    }
+
+    return this.renderStateText();
   };
 
   PaperRouteGame.prototype.renderStateText = function () {
@@ -1660,12 +3139,29 @@
       }
 
       group.children.each(function (child) {
+        var owner = child.getData ? child.getData("property") : null;
+        var targetConfig = child.getData ? child.getData("targetConfig") : null;
+
         if (child.active && items.length < 8) {
           items.push({
             x: Math.round(child.x),
             y: Math.round(child.y),
+            displayWidth: Math.round(child.displayWidth || child.width || 0),
+            displayHeight: Math.round(child.displayHeight || child.height || 0),
             type: child.getData ? child.getData("type") || child.texture.key : null,
-            side: child.getData ? child.getData("side") : null
+            side: child.getData ? child.getData("side") : null,
+            frame: child.getData ? child.getData("frame") || child.getData("propertyFrame") || (child.frame ? child.frame.name : null) : null,
+            propertyTop: child.getData && child.getData("propertyTop") !== undefined ? Math.round(child.getData("propertyTop")) : null,
+            propertyBottom: child.getData && child.getData("propertyBottom") !== undefined ? Math.round(child.getData("propertyBottom")) : null,
+            segmentTop: child.getData && child.getData("segmentTop") !== undefined ? Math.round(child.getData("segmentTop")) : null,
+            segmentBottom: child.getData && child.getData("segmentBottom") !== undefined ? Math.round(child.getData("segmentBottom")) : null,
+            ownerActive: owner ? !!owner.active : null,
+            ownerX: owner ? Math.round(owner.x) : null,
+            ownerY: owner ? Math.round(owner.y) : null,
+            ownerFrame: owner && owner.getData ? owner.getData("frame") : null,
+            targetConfigX: targetConfig ? targetConfig.x : null,
+            targetConfigY: targetConfig ? targetConfig.y : null,
+            targetGroupIndex: child.getData ? child.getData("targetGroupIndex") : null
           });
         }
       });
@@ -1675,7 +3171,15 @@
 
     return JSON.stringify({
       coordinateSystem: "origin top-left; x right; y down; route scrolls downward toward Paper Bob",
-      mode: this.rules.state.running ? (this.rules.state.paused ? "paused" : "running") : (this.summaryCard && !this.summaryCard.hidden ? "complete" : (this.rules.state.finishReason ? "run-end" : "ready")),
+      mode: !this.introComplete ? "intro" : (this.rules.state.running ? (this.rules.state.paused ? "paused" : "running") : (this.summaryCard && !this.summaryCard.hidden ? "complete" : (this.rules.state.finishReason ? "run-end" : "ready"))),
+      introMode: this.introMode,
+      introProgress: Math.round((this.introComplete ? 1 : Math.min(.98, this.routeLoadProgress)) * 1000) / 1000,
+      webpSupported: this.webpSupported,
+      routeAssetsStarted: this.routeAssetsStarted,
+      routeAssetsReady: this.routeAssetsReady,
+      routeAssetsFailed: this.routeAssetsFailed,
+      routeLoadProgress: Math.round(this.routeLoadProgress * 1000) / 1000,
+      poolCounts: this.poolStats,
       score: this.rules.state.score,
       highScore: this.highScore,
       papers: this.rules.state.papers,
@@ -1692,15 +3196,44 @@
       speed: Math.round(this.currentSpeed()),
       bobPose: this.playerPose,
       bobSpriteSheetLoaded: this.hasBobSheet(),
+      routePropsAtlasLoaded: this.hasRoutePropsAtlas(),
+      lotsAtlasLoaded: this.hasLotsAtlas(),
+      trackAtlasLoaded: this.hasTrackAtlas(),
+      roadKitLoaded: !!this.roadSurface,
+      trackSegmentsLoaded: this.hasIntegratedTrackAtlas(),
       player: {
         x: this.player ? Math.round(this.player.x) : 0,
         y: this.player ? Math.round(this.player.y) : 0,
         roadLeft: Math.round(self.roadLeft),
         roadRight: Math.round(self.roadRight)
       },
+      overlayLayout: {
+        startCardVisible: !!(this.startCard && !this.startCard.hidden),
+        summaryVisible: !!(this.summaryCard && !this.summaryCard.hidden),
+        resultTileCount: this.lastSummaryMetrics.length,
+        summaryRestartVisible: !!(this.summaryRestart && this.summaryCard && !this.summaryCard.hidden),
+        touchVisible: !!(this.touchPanel && !this.touchPanel.hidden)
+      },
+      summaryMetrics: this.lastSummaryMetrics,
+      finalScore: {
+        visible: !!(this.finalScoreText && this.finalScoreText.visible),
+        text: this.finalScoreText ? this.finalScoreText.text : "",
+        x: this.finalScoreText && this.finalScoreText.visible ? Math.round(this.finalScoreText.x) : null,
+        y: this.finalScoreText && this.finalScoreText.visible ? Math.round(this.finalScoreText.y) : null
+      },
+      routeLayering: {
+        roadSurfaceLeft: Math.round(self.roadSurface ? self.roadSurface.x : self.roadLeft),
+        roadSurfaceRight: Math.round(self.roadSurface ? self.roadSurface.x + self.roadSurface.displayWidth : self.roadRight),
+        trackLeftRightEdge: Math.round(self.trackSegmentX("left") + self.trackSegmentDisplayWidth("left")),
+        trackRightLeftEdge: Math.round(self.trackSegmentX("right")),
+        leftCurbVisible: !!(self.roadLeftCurb && self.roadLeftCurb.visible),
+        rightCurbVisible: !!(self.roadRightCurb && self.roadRightCurb.visible)
+      },
       visibleTargets: snapshot(this.targets),
+      visibleTrackSegments: snapshot(this.trackSegments),
       visibleRamps: snapshot(this.ramps),
       visiblePuddles: snapshot(this.puddles),
+      visibleRoadDecals: snapshot(this.roadDecals),
       visiblePapers: snapshot(this.papers)
     });
   };
@@ -1750,5 +3283,9 @@
 
   window.render_game_to_text = function () {
     return ACTIVE_GAME ? ACTIVE_GAME.renderStateText() : JSON.stringify({ mode: "unmounted" });
+  };
+
+  window.advanceTime = function (milliseconds) {
+    return ACTIVE_GAME ? ACTIVE_GAME.advanceTime(milliseconds) : JSON.stringify({ mode: "unmounted" });
   };
 }());

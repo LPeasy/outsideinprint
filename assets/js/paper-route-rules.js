@@ -73,12 +73,12 @@
     this.reset();
     this.state.highScore = this.highScore;
     this.state.running = true;
-    return [createEffect("start", "Route open. Thirty papers in the bag.")];
+    return [createEffect("start", "Bag packed. The street is open.")];
   };
 
   RouteRules.prototype.setPaused = function (paused) {
     this.state.paused = !!paused;
-    return [createEffect(paused ? "pause" : "resume", paused ? "Route paused." : "Route open.")];
+    return [createEffect(paused ? "pause" : "resume", paused ? "Deadline hold." : "Back on the route.")];
   };
 
   RouteRules.prototype.isSlowed = function () {
@@ -90,7 +90,7 @@
     this.state.airborneStartedAt = this.state.elapsed;
     this.state.airborneUntil = Math.max(this.state.airborneUntil, this.state.elapsed + durationSeconds);
     this.state.wheelie = false;
-    return createEffect(source || "airborne", "Paper Bob is airborne.");
+    return createEffect(source || "airborne", "Bob is airborne.");
   };
 
   RouteRules.prototype.startHop = function () {
@@ -117,7 +117,7 @@
     this.state.score += SCORES.ramp;
     this.state.rampsTaken += 1;
     return [
-      createEffect("ramp", "Ramp jump +" + SCORES.ramp + ".", { points: SCORES.ramp }),
+      createEffect("ramp", "Ramp clip +" + SCORES.ramp + ".", { points: SCORES.ramp }),
       this.startAirborne(.95, "ramp-air")
     ];
   };
@@ -129,7 +129,7 @@
     this.state.wheelie = true;
     this.state.wheelieAccumulator = 0;
     this.state.wheelieScore = 0;
-    return [createEffect("wheelie-start", "Wheelie.")];
+    return [createEffect("wheelie-start", "Wheelie held.")];
   };
 
   RouteRules.prototype.stopWheelie = function () {
@@ -138,7 +138,7 @@
     }
     this.state.wheelie = false;
     this.state.wheelieAccumulator = 0;
-    return [createEffect("wheelie-stop", "Wheelie set down.")];
+    return [createEffect("wheelie-stop", "Front wheel down.")];
   };
 
   RouteRules.prototype.consumePaper = function () {
@@ -160,7 +160,7 @@
       ok: true,
       direction: direction,
       airborne: this.state.airborne,
-      effects: [createEffect("throw", direction === "left" ? "Left edition away." : "Right edition away.", {
+      effects: [createEffect("throw", direction === "left" ? "Left toss away." : "Right toss away.", {
         direction: direction,
         papers: this.state.papers,
         airborne: this.state.airborne
@@ -192,7 +192,7 @@
     this.state.score += total;
     this.state.deliveries[kind] = (this.state.deliveries[kind] || 0) + 1;
 
-    return [createEffect("delivery", kind + " +" + total + ".", {
+    return [createEffect("delivery", kind + " filed +" + total + ".", {
       kind: kind,
       points: total,
       base: base,
@@ -229,7 +229,7 @@
     }
     this.state.puddlesCleared += 1;
     this.state.score += SCORES.puddleClear;
-    return [createEffect("puddle-clear", "Cleared puddle +" + SCORES.puddleClear + ".", { points: SCORES.puddleClear })];
+    return [createEffect("puddle-clear", "Clean hop +" + SCORES.puddleClear + ".", { points: SCORES.puddleClear })];
   };
 
   RouteRules.prototype.hitPuddle = function () {
@@ -245,7 +245,7 @@
     if (this.state.papers > 0) {
       this.state.papers -= 1;
     }
-    return [createEffect("puddle-hit", "Puddle. Lost one paper.", {
+    return [createEffect("puddle-hit", "Puddle splash. One paper gone.", {
       papers: this.state.papers,
       slowUntil: this.state.slowUntil
     })];
@@ -267,7 +267,7 @@
       this.highScore = this.state.score;
       this.state.highScore = this.highScore;
     }
-    return [createEffect("finish", newBest ? "New high score." : "Route complete.", {
+    return [createEffect("finish", newBest ? "New Paper-Bob record." : "Run filed.", {
       reason: this.state.finishReason,
       newBest: newBest,
       score: this.state.score
@@ -296,7 +296,7 @@
         wheeliePoints = Math.min(WHEELIE_TICK_POINTS, WHEELIE_CAP - this.state.wheelieScore);
         this.state.wheelieScore += wheeliePoints;
         this.state.score += wheeliePoints;
-        effects.push(createEffect("wheelie-score", "Wheelie +" + wheeliePoints + ".", { points: wheeliePoints }));
+        effects.push(createEffect("wheelie-score", "Wheelie bonus +" + wheeliePoints + ".", { points: wheeliePoints }));
       }
     }
 
