@@ -150,6 +150,7 @@
   var INTRO_DURATION = 8.5;
   var INTRO_RIDE_FRAMES = ["intro_bob_ride_front_01", "intro_bob_ride_front_02", "intro_bob_ride_front_03", "intro_bob_ride_front_04", "intro_bob_ride_front_05", "intro_bob_ride_front_06"];
   var SPOT_SIDE_FRAMES = ["spot_run_side_01", "spot_run_side_02", "spot_run_side_03", "spot_run_side_04", "spot_run_side_05", "spot_run_side_06"];
+  var SPOT_RUN_PAPER_SIDE_FRAMES = ["spot_run_paper_side_01", "spot_run_paper_side_02", "spot_run_paper_side_03", "spot_run_paper_side_04", "spot_run_paper_side_05", "spot_run_paper_side_06"];
   var SPOT_FRONT_FRAMES = ["spot_run_front_01", "spot_run_front_02", "spot_run_front_03"];
   var SPOT_BACK_FRAMES = ["spot_run_back_01", "spot_run_back_02", "spot_run_back_03"];
   var POOL_SIZES = {
@@ -158,6 +159,7 @@
     papers: 5,
     ramps: 4,
     puddles: 5,
+    spots: 1,
     roadDecals: 8,
     hitFlashes: 8,
     puddleSplashes: 6,
@@ -193,6 +195,10 @@
     firstTargetDelay: 420,
     firstPuddleDelay: 2300,
     firstRampDelay: 3900,
+    spotFirstDelay: 8000,
+    spotInterval: 12000,
+    spotSpeed: 360,
+    spotPaperSpeed: 390,
     playerDisplay: { width: 96, height: 96 },
     playerBody: { width: 88, height: 104 },
     trackSegmentSpawnBuffer: 90,
@@ -201,6 +207,13 @@
     paperBody: { width: 21, height: 13 },
     paperDisplay: { width: 32, height: 20 },
     puddleDisplay: { width: 82, height: 34 },
+    spotDisplay: { width: 108, height: 72 },
+    spotBody: { width: 82, height: 42 },
+    spotVerticalJitter: 60,
+    spotBounceDistance: 34,
+    spotBounceLift: 10,
+    spotBounceDuration: 150,
+    spotOffscreenRelease: 110,
     hitFlashDisplay: { width: 68, height: 68 }
   };
 
@@ -387,6 +400,7 @@
     this.trackSegments = null;
     this.ramps = null;
     this.puddles = null;
+    this.spots = null;
     this.papers = null;
     this.player = null;
     this.finalScoreText = null;
@@ -401,6 +415,7 @@
     this.throwCooldown = 0;
     this.targetTimer = 0;
     this.puddleTimer = 0;
+    this.spotTimer = 0;
     this.rampTimer = 0;
     this.roadDecalTimer = 0;
     this.targetSpawnCount = 0;
@@ -802,6 +817,7 @@
     this.trackSegments = scene.add.group();
     this.ramps = scene.physics.add.group();
     this.puddles = scene.physics.add.group();
+    this.spots = scene.physics.add.group();
     this.papers = scene.physics.add.group();
     this.createRoadKitObjects(scene);
     playerTexture = scene.textures.exists("paperBobSheet") ? "paperBobSheet" : (scene.textures.exists("paperBobSprite") ? "paperBobSprite" : "paperRouteCourierFallback");
@@ -850,6 +866,9 @@
     });
     scene.physics.add.overlap(this.player, this.puddles, function (player, puddle) {
       self.hitPuddle(puddle);
+    });
+    scene.physics.add.overlap(this.player, this.spots, function (player, spot) {
+      self.hitSpot(spot);
     });
     scene.scale.on("resize", function () {
       self.layoutScene();
@@ -907,6 +926,7 @@
 
     create("introBobRideFront", INTRO_RIDE_FRAMES, 7, -1);
     create("spotRunSide", SPOT_SIDE_FRAMES, 8, -1);
+    create("spotRunPaperSide", SPOT_RUN_PAPER_SIDE_FRAMES, 8, -1);
     create("spotRunFront", SPOT_FRONT_FRAMES, 8, -1);
     create("spotRunBack", SPOT_BACK_FRAMES, 8, -1);
   };
@@ -1386,6 +1406,15 @@
       self.puddles.add(sprite);
       return sprite;
     }, POOL_SIZES.puddles);
+
+    if (this.hasIntroAtlas()) {
+      register("spots", function () {
+        var sprite = self.scene.physics.add.sprite(-999, -999, "paperBobIntro", SPOT_SIDE_FRAMES[0]);
+        sprite.setDepth(19);
+        self.spots.add(sprite);
+        return sprite;
+      }, POOL_SIZES.spots);
+    }
 
     if (this.hasRoutePropsAtlas()) {
       register("roadDecals", function () {
@@ -2176,6 +2205,7 @@
     this.throwCooldown = 0;
     this.targetTimer = TUNING.firstTargetDelay / 1000;
     this.puddleTimer = TUNING.firstPuddleDelay / 1000;
+    this.spotTimer = TUNING.spotFirstDelay / 1000;
     this.rampTimer = TUNING.firstRampDelay / 1000;
     this.roadDecalTimer = .85;
     this.targetSpawnCount = 0;
@@ -2264,6 +2294,11 @@
     }
     if (this.puddles) {
       this.puddles.children.each(function (child) {
+        self.releasePooledObject(child);
+      });
+    }
+    if (this.spots) {
+      this.spots.children.each(function (child) {
         self.releasePooledObject(child);
       });
     }
@@ -2425,6 +2460,53 @@
     }
   };
 
+  PaperRouteGame.prototype.spawnSpot = function () {
+    var spot;
+    var direction;
+    var y;
+
+    if (!this.scene || !this.hasIntroAtlas() || !this.spots) {
+      return;
+    }
+    if (this.spots.countActive(true) >= POOL_SIZES.spots) {
+      return;
+    }
+
+    spot = this.getPooledObject("spots");
+    if (!spot) {
+      return;
+    }
+
+    direction = Math.random() < .5 ? 1 : -1;
+    y = clamp(
+      (this.player ? this.player.y - 10 : this.height * .72) + (Math.random() * 2 - 1) * TUNING.spotVerticalJitter,
+      this.height * .44,
+      this.height - 104
+    );
+
+    spot.setTexture("paperBobIntro", SPOT_SIDE_FRAMES[0]);
+    spot.setOrigin(.5, .72);
+    spot.setPosition(direction > 0 ? -TUNING.spotOffscreenRelease : this.width + TUNING.spotOffscreenRelease, y);
+    spot.setDepth(19);
+    spot.setFlipX(direction < 0);
+    spot.setDisplaySize(TUNING.spotDisplay.width, TUNING.spotDisplay.height);
+    spot.body.setSize(TUNING.spotBody.width, TUNING.spotBody.height, true);
+    spot.setVelocity(direction * TUNING.spotSpeed, 0);
+    spot.setData("type", "spot");
+    spot.setData("direction", direction);
+    spot.setData("speed", TUNING.spotSpeed);
+    spot.setData("used", false);
+    spot.setData("carryingPaper", false);
+    spot.setData("bouncing", false);
+    spot.setData("frame", SPOT_SIDE_FRAMES[0]);
+    if (this.scene.anims.exists("spotRunSide")) {
+      spot.anims.play("spotRunSide", true);
+    }
+    if (!this.spots.contains(spot)) {
+      this.spots.add(spot);
+    }
+  };
+
   PaperRouteGame.prototype.throwPaper = function (direction, fromTouch) {
     var result;
     var paper;
@@ -2558,6 +2640,27 @@
     this.applyEffects(effects);
   };
 
+  PaperRouteGame.prototype.applyPuddleContact = function (x, y) {
+    var effects;
+
+    effects = this.rules.hitPuddle();
+    this.puddleBurst(x, y, this.rules.state.airborne);
+    if (effects[0] && effects[0].type === "puddle-clear") {
+      this.floatText("+75", x, y - 24, "#557b82");
+      this.playSound("clear");
+    } else {
+      this.floatText("-1 paper", x, y - 24, "#b9894d");
+      this.player.setTint(0x557b82);
+      this.heldPose = "puddle";
+      this.poseHoldUntil = this.rules.state.elapsed + .72;
+      this.playerPose = "";
+      this.setPlayerPose("puddle");
+      this.playSound("puddle");
+    }
+
+    return effects;
+  };
+
   PaperRouteGame.prototype.hitPuddle = function (puddle) {
     var effects;
 
@@ -2566,22 +2669,72 @@
     }
 
     puddle.setData("used", true);
-    effects = this.rules.hitPuddle();
-    this.puddleBurst(puddle.x, puddle.y, this.rules.state.airborne);
-    if (effects[0] && effects[0].type === "puddle-clear") {
-      this.floatText("+75", puddle.x, puddle.y - 24, "#557b82");
-      this.playSound("clear");
-    } else {
-      this.floatText("-1 paper", puddle.x, puddle.y - 24, "#b9894d");
-      this.player.setTint(0x557b82);
-      this.heldPose = "puddle";
-      this.poseHoldUntil = this.rules.state.elapsed + .72;
-      this.playerPose = "";
-      this.setPlayerPose("puddle");
-      this.playSound("puddle");
-    }
+    effects = this.applyPuddleContact(puddle.x, puddle.y);
     this.releasePooledObject(puddle);
     this.applyEffects(effects);
+  };
+
+  PaperRouteGame.prototype.hitSpot = function (spot) {
+    var effects;
+
+    if (!spot || !this.rules.state.running || spot.getData("used")) {
+      return;
+    }
+    if (this.rules.state.airborne) {
+      return;
+    }
+
+    spot.setData("used", true);
+    spot.setData("carryingPaper", true);
+    spot.setData("speed", TUNING.spotPaperSpeed);
+    spot.setData("frame", SPOT_RUN_PAPER_SIDE_FRAMES[0]);
+    spot.setDepth(20);
+    spot.setTexture("paperBobIntro", SPOT_RUN_PAPER_SIDE_FRAMES[0]);
+    spot.setDisplaySize(TUNING.spotDisplay.width, TUNING.spotDisplay.height);
+    spot.body.setSize(TUNING.spotBody.width, TUNING.spotBody.height, true);
+    if (this.scene.anims.exists("spotRunPaperSide")) {
+      spot.anims.play("spotRunPaperSide", true);
+    }
+
+    effects = this.applyPuddleContact(spot.x, spot.y);
+    this.bounceSpotAfterHit(spot);
+    this.applyEffects(effects);
+  };
+
+  PaperRouteGame.prototype.bounceSpotAfterHit = function (spot) {
+    var direction;
+    var resumeY;
+    var self = this;
+
+    if (!spot || !this.scene) {
+      return;
+    }
+
+    direction = spot.getData("direction") || 1;
+    resumeY = spot.y;
+    spot.setData("bouncing", true);
+    spot.setVelocity(0, 0);
+    this.scene.tweens.add({
+      targets: spot,
+      x: spot.x - direction * TUNING.spotBounceDistance,
+      y: resumeY - TUNING.spotBounceLift,
+      duration: TUNING.spotBounceDuration,
+      ease: "Quad.easeOut",
+      onComplete: function () {
+        if (!spot.active) {
+          return;
+        }
+        spot.y = resumeY;
+        spot.setData("bouncing", false);
+        spot.setVelocity(direction * (spot.getData("speed") || TUNING.spotPaperSpeed), 0);
+        if (spot.body && spot.body.updateFromGameObject) {
+          spot.body.updateFromGameObject();
+        }
+        if (self.scene.anims.exists("spotRunPaperSide")) {
+          spot.anims.play("spotRunPaperSide", true);
+        }
+      }
+    });
   };
 
   PaperRouteGame.prototype.floatText = function (copy, x, y, color) {
@@ -2896,6 +3049,7 @@
     this.throwCooldown = Math.max(0, this.throwCooldown - deltaSeconds);
     this.targetTimer -= deltaSeconds;
     this.puddleTimer -= deltaSeconds;
+    this.spotTimer -= deltaSeconds;
     this.rampTimer -= deltaSeconds;
     this.roadDecalTimer -= deltaSeconds;
     this.handleKeyboard(deltaSeconds);
@@ -2947,6 +3101,25 @@
         self.releasePooledObject(puddle);
       }
     });
+    if (this.spots) {
+      this.spots.children.each(function (spot) {
+        var direction;
+        var spotSpeed;
+
+        if (!spot.active) {
+          return;
+        }
+
+        direction = spot.getData("direction") || 1;
+        spotSpeed = spot.getData("speed") || TUNING.spotSpeed;
+        if (!spot.getData("bouncing")) {
+          spot.setVelocity(direction * spotSpeed, 0);
+        }
+        if (spot.x < -TUNING.spotOffscreenRelease || spot.x > self.width + TUNING.spotOffscreenRelease) {
+          self.releasePooledObject(spot);
+        }
+      });
+    }
     if (this.roadDecals) {
       this.roadDecals.children.each(function (decal) {
         if (!decal.active) {
@@ -2982,6 +3155,10 @@
     if (this.puddleTimer <= 0) {
       this.spawnPuddle();
       this.puddleTimer = this.nextPuddleInterval();
+    }
+    if (this.spotTimer <= 0) {
+      this.spawnSpot();
+      this.spotTimer = TUNING.spotInterval / 1000;
     }
     if (this.rampTimer <= 0) {
       this.spawnRamp();
@@ -3115,14 +3292,12 @@
 
   PaperRouteGame.prototype.advanceTime = function (milliseconds) {
     var remaining = Math.max(0, Math.min(120000, Number(milliseconds) || 0));
-    var step;
-    var activePapers;
+    var stepMs;
 
     while (remaining > 0 && this.rules.state.running && !this.rules.state.paused) {
-      step = Math.min(500, remaining) / 1000;
-      activePapers = this.papers ? this.papers.countActive(true) : 0;
-      this.applyEffects(this.rules.tick(step, activePapers));
-      remaining -= step * 1000;
+      stepMs = Math.min(50, remaining);
+      this.updateScene(0, stepMs);
+      remaining -= stepMs;
     }
 
     return this.renderStateText();
@@ -3150,6 +3325,9 @@
             displayHeight: Math.round(child.displayHeight || child.height || 0),
             type: child.getData ? child.getData("type") || child.texture.key : null,
             side: child.getData ? child.getData("side") : null,
+            direction: child.getData ? child.getData("direction") : null,
+            used: child.getData ? !!child.getData("used") : null,
+            carryingPaper: child.getData ? !!child.getData("carryingPaper") : null,
             frame: child.getData ? child.getData("frame") || child.getData("propertyFrame") || (child.frame ? child.frame.name : null) : null,
             propertyTop: child.getData && child.getData("propertyTop") !== undefined ? Math.round(child.getData("propertyTop")) : null,
             propertyBottom: child.getData && child.getData("propertyBottom") !== undefined ? Math.round(child.getData("propertyBottom")) : null,
@@ -3193,6 +3371,7 @@
       puddleHits: this.rules.state.puddleHits,
       puddlesCleared: this.rules.state.puddlesCleared,
       rampsTaken: this.rules.state.rampsTaken,
+      spotNextIn: Math.max(0, Math.round(this.spotTimer * 100) / 100),
       speed: Math.round(this.currentSpeed()),
       bobPose: this.playerPose,
       bobSpriteSheetLoaded: this.hasBobSheet(),
@@ -3233,6 +3412,7 @@
       visibleTrackSegments: snapshot(this.trackSegments),
       visibleRamps: snapshot(this.ramps),
       visiblePuddles: snapshot(this.puddles),
+      visibleSpots: snapshot(this.spots),
       visibleRoadDecals: snapshot(this.roadDecals),
       visiblePapers: snapshot(this.papers)
     });

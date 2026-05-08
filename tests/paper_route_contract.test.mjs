@@ -185,6 +185,12 @@ test("Paper-Bob cropped sprite manifest entries point to real PNG files with met
     "spot_run_front_01",
     "spot_run_front_02",
     "spot_run_front_03",
+    "spot_run_paper_side_01",
+    "spot_run_paper_side_02",
+    "spot_run_paper_side_03",
+    "spot_run_paper_side_04",
+    "spot_run_paper_side_05",
+    "spot_run_paper_side_06",
     "spot_run_side_01",
     "spot_run_side_02",
     "spot_run_side_03",
@@ -388,6 +394,23 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /track_left_06/);
   assert.match(game, /track_right_01/);
   assert.match(game, /track_right_06/);
+  assert.match(game, /SPOT_RUN_PAPER_SIDE_FRAMES = \["spot_run_paper_side_01"/);
+  assert.match(game, /spots: 1/);
+  assert.match(game, /spotFirstDelay: 8000/);
+  assert.match(game, /spotInterval: 12000/);
+  assert.match(game, /spotSpeed: 360/);
+  assert.match(game, /this\.spots = scene\.physics\.add\.group\(\)/);
+  assert.match(game, /scene\.physics\.add\.overlap\(this\.player, this\.spots/);
+  assert.match(game, /create\("spotRunPaperSide", SPOT_RUN_PAPER_SIDE_FRAMES, 8, -1\)/);
+  assert.match(game, /this\.spotTimer = TUNING\.spotFirstDelay \/ 1000/);
+  assert.match(game, /PaperRouteGame\.prototype\.spawnSpot/);
+  assert.match(game, /this\.spotTimer = TUNING\.spotInterval \/ 1000/);
+  assert.match(game, /PaperRouteGame\.prototype\.hitSpot[\s\S]*if \(this\.rules\.state\.airborne\) \{[\s\S]*return;[\s\S]*\}/);
+  assert.match(game, /spot\.setData\("carryingPaper", true\)/);
+  assert.match(game, /spot\.anims\.play\("spotRunPaperSide", true\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.bounceSpotAfterHit/);
+  assert.match(game, /spotNextIn/);
+  assert.match(game, /visibleSpots/);
   assert.match(game, /targetGroups/);
   assert.match(game, /trackSegmentSpawnBuffer: 90/);
   assert.doesNotMatch(game, /PROPERTY_CONFIGS|SIDE_BASE_FRAMES|side_base_left_01|side_base_right_03|fallbackFrame: "property_left_01"|fallbackFrame: "property_right_03"/);
