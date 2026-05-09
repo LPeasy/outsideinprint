@@ -176,6 +176,12 @@ test("Paper-Bob cropped sprite manifest entries point to real PNG files with met
     "intro_bob_ride_front_04",
     "intro_bob_ride_front_05",
     "intro_bob_ride_front_06",
+    "intro_bob_spot_finale_01",
+    "intro_bob_spot_finale_02",
+    "intro_bob_spot_finale_03",
+    "intro_bob_spot_finale_04",
+    "intro_bob_spot_finale_05",
+    "intro_bob_spot_finale_06",
     "intro_bob_turn_left_01",
     "intro_bob_turn_right_01",
     "intro_logo_paper_bob",
@@ -394,6 +400,10 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /track_left_06/);
   assert.match(game, /track_right_01/);
   assert.match(game, /track_right_06/);
+  assert.match(game, /INTRO_DURATION = 7\.6/);
+  assert.match(game, /INTRO_BEAT_SEQUENCE/);
+  assert.match(game, /key: "spot-cross", start: 3\.1, end: 4\.6/);
+  assert.match(game, /INTRO_BOB_SPOT_FINALE_FRAMES = \["intro_bob_spot_finale_01"/);
   assert.match(game, /SPOT_RUN_PAPER_SIDE_FRAMES = \["spot_run_paper_side_01"/);
   assert.match(game, /spots: 1/);
   assert.match(game, /spotFirstDelay: 8000/);
@@ -402,6 +412,10 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /this\.spots = scene\.physics\.add\.group\(\)/);
   assert.match(game, /scene\.physics\.add\.overlap\(this\.player, this\.spots/);
   assert.match(game, /create\("spotRunPaperSide", SPOT_RUN_PAPER_SIDE_FRAMES, 8, -1\)/);
+  assert.match(game, /create\("introBobSpotFinale", INTRO_BOB_SPOT_FINALE_FRAMES, 4, 0\)/);
+  assert.match(game, /finale: scene\.add\.sprite\(this\.width \* \.46, this\.height \* \.62, "paperBobIntro", INTRO_BOB_SPOT_FINALE_FRAMES\[0\]\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.positionIntroFinale/);
+  assert.match(game, /spot\.setTexture\("paperBobIntro", frame\)/);
   assert.match(game, /this\.spotTimer = TUNING\.spotFirstDelay \/ 1000/);
   assert.match(game, /PaperRouteGame\.prototype\.spawnSpot/);
   assert.match(game, /this\.spotTimer = TUNING\.spotInterval \/ 1000/);
@@ -411,6 +425,12 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /PaperRouteGame\.prototype\.bounceSpotAfterHit/);
   assert.match(game, /spotNextIn/);
   assert.match(game, /visibleSpots/);
+  assert.match(game, /introBeat/);
+  assert.match(game, /introBobFrame/);
+  assert.match(game, /introSpotFrame/);
+  assert.match(game, /introFinaleFrame/);
+  assert.match(game, /introSpotVisible/);
+  assert.match(game, /introFinaleVisible/);
   assert.match(game, /targetGroups/);
   assert.match(game, /trackSegmentSpawnBuffer: 90/);
   assert.doesNotMatch(game, /PROPERTY_CONFIGS|SIDE_BASE_FRAMES|side_base_left_01|side_base_right_03|fallbackFrame: "property_left_01"|fallbackFrame: "property_right_03"/);
@@ -504,7 +524,6 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.doesNotMatch(game, /sideRunsLoaded|visibleSideRuns|visibleSideBases|attachedPropertyFrame|lotSeamY|sideBaseLoaded/);
   assert.match(game, /visibleRoadDecals/);
   assert.match(game, /visibleTrackSegments/);
-  assert.match(game, /INTRO_DURATION = 8\.5/);
   assert.match(game, /beginIntro/);
   assert.match(game, /skipIntro/);
   assert.match(game, /createObjectPools/);
