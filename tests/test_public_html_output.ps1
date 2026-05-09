@@ -1100,6 +1100,7 @@ $requiredUxPages = @(
   'public/collections/index.html',
   'public/collections/bobs-almanack/index.html',
   'public/almanack/2026-05-02/index.html',
+  'public/almanack/2026-05-09/index.html',
   'public/shop/index.html',
   'public/shop/shirt/index.html',
   'public/random/index.html',
@@ -2414,7 +2415,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*105 published pieces'
+    Pattern = '11 public collections.*106 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2482,7 +2483,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/collections/index.html'
     Pattern = "Bob(?:'|&#39;)s Almanack"
-    Message = 'expected the public collections index to link Bob''s Almanack after the May 2 issue and collection page are published'
+    Message = 'expected the public collections index to link Bob''s Almanack after the issue and collection page are published'
   },
   @{
     Path = 'public/collections/index.html'
@@ -2496,8 +2497,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?May 2, 2026.*?A public cost does not disappear because someone learned to price it\..*?The Bet Slip in the Briefing Room'
-    Message = 'expected the Bob''s Almanack collection page to feature the May 2 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?May 9, 2026.*?A machine is innocent only until the bill arrives\..*?Modern Prometheus'
+    Message = 'expected the Bob''s Almanack collection page to feature the May 9 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -2505,8 +2506,13 @@ $requiredUxChecks = @(
     Message = 'expected the May 2 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
   },
   @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 9, 2026.*?Issue 2.*?A machine is innocent only until the bill arrives\.'
+    Message = 'expected the May 9 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Frugality.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 9, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Resolution.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
@@ -2952,12 +2958,11 @@ foreach ($check in $requiredUxChecks) {
 }
 
 foreach ($forbiddenPath in @(
-  'public/almanack/index.html',
-  'public/almanack/2026-05-09/index.html'
+  'public/almanack/index.html'
 )) {
   $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
   if (Test-Path -LiteralPath $fullForbiddenPath -PathType Leaf) {
-    $uxIssues.Add("$forbiddenPath => expected the Almanack section index and held May 9 issue to remain unpublished")
+    $uxIssues.Add("$forbiddenPath => expected the Almanack section index to remain unpublished")
   }
 }
 
