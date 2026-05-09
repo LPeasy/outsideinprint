@@ -4294,200 +4294,462 @@ h2{ margin-top:34px; }
 }
 /* Bob's Almanack collection */
 .almanack-collection{
+  --almanack-paper:#EADBC1;
+  --almanack-paper-light:#F7EED8;
+  --almanack-paper-deep:#D8BE91;
+  --almanack-ink:#1A1712;
+  --almanack-ink-soft:#3D3329;
+  --almanack-rule:#6B543C;
+  --almanack-rubric:#8F3A2F;
+  --almanack-link:#2E5363;
+  position:relative;
   margin:1rem auto 3rem;
-  padding:1.25rem 1.2rem 2.4rem;
-  border:1px solid rgba(42,34,25,.42);
-  border-radius:4px;
+  padding:1rem 1.15rem 2rem;
+  border:1px solid var(--almanack-rule);
+  border-radius:2px;
   background:
-    linear-gradient(90deg, rgba(96,72,47,.07), transparent 12%, transparent 88%, rgba(96,72,47,.07)),
-    linear-gradient(180deg, rgba(255,252,241,.72), rgba(237,224,204,.86)),
-    repeating-linear-gradient(0deg, rgba(42,34,25,.032) 0, rgba(42,34,25,.032) 1px, transparent 1px, transparent 6px),
-    #efe1cb;
+    linear-gradient(90deg, rgba(107,84,60,.14), transparent 10%, transparent 90%, rgba(107,84,60,.14)),
+    linear-gradient(180deg, var(--almanack-paper-light), var(--almanack-paper) 42%, var(--almanack-paper-deep) 185%),
+    repeating-linear-gradient(0deg, rgba(26,23,18,.035) 0, rgba(26,23,18,.035) 1px, transparent 1px, transparent 5px),
+    var(--almanack-paper);
   box-shadow:0 1px 0 rgba(255,255,255,.34) inset;
-  color:#171513;
+  color:var(--almanack-ink);
   font-family:var(--font-body);
 }
+.almanack-collection.page-shell--wide{
+  max-width:1120px;
+}
 .almanack-collection a{
-  color:#365263;
-  text-decoration-color:rgba(54,82,99,.38);
+  color:var(--almanack-link);
+  text-decoration-color:rgba(46,83,99,.46);
   text-underline-offset:.18em;
+  overflow-wrap:anywhere;
 }
 .almanack-collection a:hover,
 .almanack-collection a:focus-visible{
-  color:#7f6550;
+  color:var(--almanack-rubric);
 }
-.almanack-collection__masthead{
-  padding:1.05rem 0 1.15rem;
-  border-top:4px double rgba(23,21,19,.78);
-  border-bottom:3px double rgba(23,21,19,.58);
+.almanack-collection__nameplate{
+  padding:.8rem 0 .95rem;
+  border-top:6px double var(--almanack-ink);
+  border-bottom:6px double var(--almanack-ink);
   text-align:center;
 }
-.almanack-collection__eyebrow,
-.almanack-collection__section-heading h2,
-.almanack-collection__latest-date p{
-  margin:0;
-  color:#6f5a46;
+.almanack-collection__strapline{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.25rem .85rem;
+  margin:0 auto .32rem;
+  padding-bottom:.35rem;
+  border-bottom:1px solid rgba(107,84,60,.52);
+  color:var(--almanack-ink-soft);
   font-family:var(--font-ui);
-  font-size:.76rem;
+  font-size:.72rem;
   font-weight:800;
   letter-spacing:0;
   line-height:1.35;
   text-transform:uppercase;
 }
-.almanack-collection__masthead h1{
-  margin:.18rem 0 0;
-  color:#171513;
+.almanack-collection__strapline span + span::before,
+.almanack-collection__strapline span + time::before,
+.almanack-collection__strapline time + span::before{
+  content:"";
+}
+.almanack-collection__section-heading h2,
+.almanack-collection__rail-section h2{
+  margin:0;
+  color:var(--almanack-rubric);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:0;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+.almanack-collection__nameplate h1{
+  margin:.22rem 0 0;
+  color:var(--almanack-ink);
   font-family:var(--font-display);
-  font-size:4.55rem;
+  font-size:5rem;
   font-weight:800;
   line-height:.92;
   overflow-wrap:anywhere;
   text-transform:uppercase;
 }
-.almanack-collection__masthead > p:not(.almanack-collection__eyebrow){
-  max-width:44rem;
-  margin:.85rem auto 0;
-  color:#3f3a35;
-  font-size:1rem;
-  line-height:1.62;
+.almanack-collection__nameplate > p{
+  max-width:56rem;
+  margin:.62rem auto 0;
+  color:var(--almanack-ink-soft);
+  font-size:.98rem;
+  line-height:1.5;
 }
-.almanack-collection__ledger{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:.42rem .9rem;
+.almanack-collection__register{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
   margin:.9rem 0 0;
-  padding:.72rem 0 0;
-  border-top:1px solid rgba(23,21,19,.22);
-  color:#5e5851;
+  border-top:3px double var(--almanack-rule);
+  border-bottom:3px double var(--almanack-rule);
+}
+.almanack-collection__register-cell{
+  display:grid;
+  gap:.12rem;
+  min-width:0;
+  padding:.52rem .68rem .58rem;
+  border-left:1px solid rgba(107,84,60,.55);
+}
+.almanack-collection__register-cell:first-child{
+  border-left:0;
+}
+.almanack-collection__register-cell span,
+.almanack-collection__facts dt,
+.almanack-collection__issue-label,
+.almanack-collection__latest-rule,
+.almanack-collection__lead,
+.almanack-collection__signposts{
+  color:var(--almanack-ink-soft);
   font-family:var(--font-ui);
-  font-size:.78rem;
-  font-weight:700;
+  font-size:.72rem;
+  font-weight:800;
   letter-spacing:0;
-  line-height:1.45;
-  list-style:none;
+  line-height:1.35;
   text-transform:uppercase;
 }
-.almanack-collection__latest{
+.almanack-collection__register-cell strong{
+  color:var(--almanack-ink);
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  font-weight:800;
+  line-height:1.1;
+  overflow-wrap:anywhere;
+}
+.almanack-collection__register-cell--active span,
+.almanack-collection__register-cell--active strong{
+  color:var(--almanack-rubric);
+}
+.almanack-collection__sheet{
   display:grid;
-  grid-template-columns:13rem minmax(0, 1fr);
-  gap:1.25rem 1.65rem;
-  margin-top:1.45rem;
-  padding:1.1rem 0 1.2rem;
-  border-top:1px solid rgba(23,21,19,.3);
-  border-bottom:1px solid rgba(23,21,19,.22);
+  grid-template-columns:13rem minmax(0, 1fr) 17rem;
+  gap:1.15rem;
+  align-items:start;
+  margin-top:1.05rem;
 }
-.almanack-collection__latest-date{
+.almanack-collection__rail,
+.almanack-collection__principal{
   min-width:0;
 }
-.almanack-collection__latest-body{
-  min-width:0;
+.almanack-collection__rail{
+  border-top:4px double var(--almanack-rule);
+  border-bottom:1px solid rgba(107,84,60,.54);
 }
-.almanack-collection__latest-body h2{
+.almanack-collection__rail-section{
+  padding:.65rem 0 .72rem;
+  border-bottom:1px solid rgba(107,84,60,.42);
+}
+.almanack-collection__rail-section:last-child{
+  border-bottom:0;
+}
+.almanack-collection__rail-section p,
+.almanack-collection__facts,
+.almanack-collection__aphorisms,
+.almanack-collection__signposts,
+.almanack-collection__margin-list{
+  margin:.42rem 0 0;
+}
+.almanack-collection__rail-section p,
+.almanack-collection__aphorisms li,
+.almanack-collection__margin-list li{
+  color:var(--almanack-ink-soft);
+  font-size:.82rem;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+.almanack-collection__facts{
+  display:grid;
+  gap:0;
+}
+.almanack-collection__facts div{
+  display:grid;
+  grid-template-columns:4.4rem minmax(0, 1fr);
+  gap:.45rem;
+  padding:.32rem 0;
+  border-top:1px solid rgba(107,84,60,.26);
+}
+.almanack-collection__facts div:first-child{
+  border-top:0;
+}
+.almanack-collection__facts dt,
+.almanack-collection__facts dd{
   margin:0;
-  color:#171513;
-  font-size:2.05rem;
-  line-height:1.12;
 }
-.almanack-collection__latest-body h2 a,
+.almanack-collection__facts dd{
+  color:var(--almanack-ink);
+  font-size:.82rem;
+  font-weight:700;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+.almanack-collection__aphorisms{
+  counter-reset:almanack-aphorism;
+  display:grid;
+  gap:.48rem;
+  padding:0;
+  list-style:none;
+}
+.almanack-collection__aphorisms li{
+  counter-increment:almanack-aphorism;
+  margin:0;
+  padding-top:.42rem;
+  border-top:1px solid rgba(107,84,60,.24);
+  font-family:var(--font-display);
+  font-weight:700;
+}
+.almanack-collection__aphorisms li:first-child{
+  padding-top:0;
+  border-top:0;
+}
+.almanack-collection__aphorisms li::before{
+  content:"No. " counter(almanack-aphorism) " ";
+  color:var(--almanack-rubric);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:800;
+  text-transform:uppercase;
+}
+.almanack-collection__signposts,
+.almanack-collection__margin-list{
+  display:grid;
+  gap:.42rem;
+  padding:0;
+  list-style:none;
+}
+.almanack-collection__signposts li,
+.almanack-collection__margin-list li{
+  margin:0;
+  padding-top:.38rem;
+  border-top:1px solid rgba(107,84,60,.24);
+}
+.almanack-collection__signposts li:first-child,
+.almanack-collection__margin-list li:first-child{
+  padding-top:0;
+  border-top:0;
+}
+.almanack-collection__latest{
+  padding:.05rem 0 1rem;
+  border-top:4px double var(--almanack-rule);
+  border-bottom:1px solid rgba(107,84,60,.5);
+}
+.almanack-collection__latest-rule{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:.35rem .8rem;
+  margin:0 0 .68rem;
+  padding:.42rem 0 .48rem;
+  border-bottom:1px solid rgba(107,84,60,.44);
+}
+.almanack-collection__latest-rule span:first-child{
+  color:var(--almanack-rubric);
+}
+.almanack-collection__latest h2{
+  margin:0;
+  color:var(--almanack-ink);
+  font-size:2.45rem;
+  line-height:1.05;
+  overflow-wrap:anywhere;
+}
+.almanack-collection__latest h2 a,
 .almanack-collection__issue h3 a{
   color:inherit;
   text-decoration:none;
 }
-.almanack-collection__latest-body blockquote{
-  margin:.7rem 0 0;
-  padding:.7rem 0 0;
-  border-top:1px solid rgba(23,21,19,.24);
-  color:#201a15;
+.almanack-collection__latest blockquote{
+  margin:.68rem 0 0;
+  padding:.68rem 0;
+  border-top:1px solid rgba(107,84,60,.44);
+  border-bottom:1px solid rgba(107,84,60,.32);
+  color:var(--almanack-ink);
   font-family:var(--font-display);
-  font-size:1.28rem;
+  font-size:1.32rem;
   font-weight:700;
   line-height:1.35;
 }
-.almanack-collection__latest-body p{
-  margin:.68rem 0 0;
-  color:#342f2a;
-  line-height:1.66;
-}
 .almanack-collection__lead{
-  color:#4b4035 !important;
-  font-family:var(--font-ui);
-  font-size:.82rem;
-  font-weight:700;
-  letter-spacing:0;
-  line-height:1.45 !important;
-  text-transform:uppercase;
+  margin:.68rem 0 0;
+  color:var(--almanack-ink-soft);
 }
+.almanack-collection__note{
+  column-count:2;
+  column-gap:1.1rem;
+  margin:.72rem 0 0;
+  color:var(--almanack-ink);
+  font-size:1rem;
+  line-height:1.58;
+}
+.almanack-collection__contents,
+.almanack-collection__archive-links,
 .almanack-collection__archive{
-  display:grid;
-  grid-template-columns:13rem minmax(0, 1fr);
-  gap:1.25rem 1.65rem;
-  margin-top:1.35rem;
-  padding-top:1rem;
+  margin-top:1rem;
+  padding-top:.85rem;
+  border-top:3px double var(--almanack-rule);
 }
 .almanack-collection__section-heading{
-  border-top:3px double rgba(23,21,19,.48);
-  padding-top:.75rem;
+  display:grid;
+  gap:.25rem;
+  margin:0 0 .35rem;
 }
 .almanack-collection__section-heading p{
-  margin:.45rem 0 0;
-  color:#4b4035;
-  font-size:.9rem;
-  line-height:1.58;
+  margin:0;
+  color:var(--almanack-ink-soft);
+  font-size:.84rem;
+  line-height:1.48;
+}
+.almanack-collection__contents-list{
+  display:grid;
+  gap:0;
+  margin:.55rem 0 0;
+  padding:0;
+  list-style:none;
+}
+.almanack-collection__contents-list li{
+  display:grid;
+  grid-template-columns:minmax(10rem, .54fr) minmax(0, 1fr);
+  gap:.55rem 1rem;
+  margin:0;
+  padding:.52rem 0;
+  border-top:1px solid rgba(107,84,60,.34);
+  color:var(--almanack-ink-soft);
+  font-size:.88rem;
+  line-height:1.42;
+}
+.almanack-collection__contents-list li:first-child{
+  border-top:0;
+}
+.almanack-collection__contents-list a,
+.almanack-collection__contents-list strong{
+  color:var(--almanack-ink);
+  font-weight:800;
+}
+.almanack-collection__contents-list span:first-child{
+  color:var(--almanack-rubric);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:800;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+.almanack-collection__archive-groups{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:0 1rem;
+  margin:.6rem 0 0;
+}
+.almanack-collection__archive-group{
+  min-width:0;
+  padding:.5rem 0 .58rem;
+  border-top:1px solid rgba(107,84,60,.34);
+}
+.almanack-collection__archive-group h3{
+  margin:0;
+  color:var(--almanack-rubric);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:800;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+.almanack-collection__archive-group ul{
+  display:grid;
+  gap:.22rem;
+  margin:.32rem 0 0;
+  padding:0;
+  list-style:none;
+}
+.almanack-collection__archive-group li{
+  margin:0;
+  color:var(--almanack-ink-soft);
+  font-size:.84rem;
+  font-weight:700;
+  line-height:1.32;
 }
 .almanack-collection__issues{
   display:grid;
   gap:0;
-  margin:0;
+  margin:.58rem 0 0;
   padding:0;
   list-style:none;
 }
 .almanack-collection__issue{
   margin:0;
-  padding:1rem 0;
-  border-top:1px solid rgba(23,21,19,.24);
+  padding:.6rem 0;
+  border-top:1px solid rgba(107,84,60,.38);
 }
-.almanack-collection__issue:first-child{
-  padding-top:0;
-  border-top:0;
+.almanack-collection__issue article{
+  display:grid;
+  grid-template-columns:5.8rem minmax(0, 1fr);
+  gap:.45rem .9rem;
+  min-width:0;
 }
 .almanack-collection__issue-label{
-  margin:0;
-  color:#6f5a46;
-  font-family:var(--font-ui);
-  font-size:.76rem;
-  font-weight:800;
-  letter-spacing:0;
-  text-transform:uppercase;
+  display:grid;
+  gap:.14rem;
+  margin:.08rem 0 0;
+}
+.almanack-collection__issue-label span:first-child{
+  color:var(--almanack-rubric);
+}
+.almanack-collection__issue--active{
+  border-left:3px solid var(--almanack-rubric);
+  padding-left:.58rem;
 }
 .almanack-collection__issue h3{
-  margin:.25rem 0 0;
-  color:#171513;
-  font-size:1.5rem;
-  line-height:1.18;
+  margin:0;
+  color:var(--almanack-ink);
+  font-size:1.12rem;
+  line-height:1.16;
+  overflow-wrap:anywhere;
 }
 .almanack-collection__issue-quote{
-  margin:.45rem 0 0;
-  color:#201a15;
+  grid-column:2;
+  margin:.2rem 0 0;
+  color:var(--almanack-ink);
   font-family:var(--font-display);
-  font-size:1.02rem;
+  font-size:.96rem;
   font-weight:700;
-  line-height:1.42;
+  line-height:1.35;
 }
 .almanack-collection__issue-lead{
-  margin:.48rem 0 0;
-  color:#4b4035;
-  font-size:.86rem;
-  line-height:1.5;
+  grid-column:2;
+  margin:.18rem 0 0;
+  color:var(--almanack-ink-soft);
+  font-size:.82rem;
+  line-height:1.38;
+}
+.almanack-collection__rail-section--rubric{
+  padding-top:.54rem;
+}
+.almanack-collection__rail-mark{
+  color:var(--almanack-rubric) !important;
+  font-family:var(--font-display);
+  font-size:2rem !important;
+  font-weight:800;
+  line-height:1 !important;
+}
+.almanack-collection__figure{
+  color:var(--almanack-ink) !important;
+  font-family:var(--font-display);
+  font-size:1.08rem !important;
+  font-weight:800;
+  line-height:1.2 !important;
 }
 .almanack-collection__empty{
   margin-top:1.2rem;
   padding:1rem 0 0;
-  border-top:1px solid rgba(23,21,19,.24);
+  border-top:3px double var(--almanack-rule);
 }
 .almanack-collection__empty p{
   margin:0;
-  color:#4b4035;
+  color:var(--almanack-ink-soft);
 }
 .imprint-header,
 .article-publication-record,
@@ -5879,31 +6141,18 @@ html[data-theme="dark"] body.layout-bobs-almanack .site-footer__description{
 .almanack-index__empty{
   color:var(--text-muted);
 }
-html[data-theme="dark"] .almanack-issue,
-html[data-theme="dark"] .almanack-collection{
+html[data-theme="dark"] .almanack-issue{
   color:var(--text-primary);
 }
-html[data-theme="dark"] .almanack-collection{
-  border-color:var(--border-soft);
-  background:
-    linear-gradient(90deg, rgba(213,190,150,.05), transparent 12%, transparent 88%, rgba(213,190,150,.05)),
-    linear-gradient(180deg, rgba(236,231,223,.035), rgba(236,231,223,.012)),
-    var(--bg-surface);
-  box-shadow:0 1px 0 rgba(255,255,255,.03) inset;
-}
-html[data-theme="dark"] .almanack-issue a,
-html[data-theme="dark"] .almanack-collection a{
+html[data-theme="dark"] .almanack-issue a{
   color:var(--accent-hover);
   text-decoration-color:rgba(153,173,191,.48);
 }
 html[data-theme="dark"] .almanack-issue a:hover,
-html[data-theme="dark"] .almanack-issue a:focus-visible,
-html[data-theme="dark"] .almanack-collection a:hover,
-html[data-theme="dark"] .almanack-collection a:focus-visible{
+html[data-theme="dark"] .almanack-issue a:focus-visible{
   color:#d5be96;
 }
-html[data-theme="dark"] .almanack-masthead,
-html[data-theme="dark"] .almanack-collection__masthead{
+html[data-theme="dark"] .almanack-masthead{
   border-top-color:rgba(236,231,223,.58);
   border-bottom-color:rgba(213,190,150,.36);
 }
@@ -5913,17 +6162,10 @@ html[data-theme="dark"] .almanack-masthead::after{
 }
 html[data-theme="dark"] .almanack-kicker,
 html[data-theme="dark"] .almanack-section-label,
-html[data-theme="dark"] .almanack-collection__eyebrow,
-html[data-theme="dark"] .almanack-collection__section-heading h2,
-html[data-theme="dark"] .almanack-collection__latest-date p,
-html[data-theme="dark"] .almanack-collection__issue-label,
 html[data-theme="dark"] .almanack-margin h3{
   color:#d5be96;
 }
 html[data-theme="dark"] .almanack-masthead h1,
-html[data-theme="dark"] .almanack-collection__masthead h1,
-html[data-theme="dark"] .almanack-collection__latest-body h2,
-html[data-theme="dark"] .almanack-collection__issue h3,
 html[data-theme="dark"] .almanack-lead__body h2,
 html[data-theme="dark"] .almanack-secondary-card h3,
 html[data-theme="dark"] .almanack-worth h2,
@@ -5934,11 +6176,6 @@ html[data-theme="dark"] .almanack-margin__figure{
 }
 html[data-theme="dark"] .almanack-subtitle,
 html[data-theme="dark"] .almanack-masthead__meta,
-html[data-theme="dark"] .almanack-collection__masthead > p:not(.almanack-collection__eyebrow),
-html[data-theme="dark"] .almanack-collection__ledger,
-html[data-theme="dark"] .almanack-collection__section-heading p,
-html[data-theme="dark"] .almanack-collection__issue-lead,
-html[data-theme="dark"] .almanack-collection__empty p,
 html[data-theme="dark"] .almanack-note p:last-child,
 html[data-theme="dark"] .almanack-lead__body p,
 html[data-theme="dark"] .almanack-secondary-card p,
@@ -5953,16 +6190,10 @@ html[data-theme="dark"] .almanack-footer p{
 html[data-theme="dark"] .almanack-quote,
 html[data-theme="dark"] .almanack-new,
 html[data-theme="dark"] .almanack-virtue,
-html[data-theme="dark"] .almanack-worth,
-html[data-theme="dark"] .almanack-collection__latest,
-html[data-theme="dark"] .almanack-collection__section-heading,
-html[data-theme="dark"] .almanack-collection__issue,
-html[data-theme="dark"] .almanack-collection__empty{
+html[data-theme="dark"] .almanack-worth{
   border-color:var(--oip-rule-standard);
 }
-html[data-theme="dark"] .almanack-quote blockquote,
-html[data-theme="dark"] .almanack-collection__latest-body blockquote,
-html[data-theme="dark"] .almanack-collection__issue-quote{
+html[data-theme="dark"] .almanack-quote blockquote{
   color:var(--text-primary);
 }
 html[data-theme="dark"] .almanack-quote figcaption{
@@ -5991,13 +6222,23 @@ html[data-theme="dark"] .almanack-footer{
   border-top-color:var(--oip-rule-engraved);
 }
 @media (max-width:900px){
-  .almanack-collection__masthead h1{
-    font-size:3.45rem;
+  .almanack-collection__nameplate h1{
+    font-size:3.55rem;
   }
-  .almanack-collection__latest,
-  .almanack-collection__archive{
+  .almanack-collection__sheet{
     grid-template-columns:1fr;
-    gap:.85rem;
+  }
+  .almanack-collection__rail--left,
+  .almanack-collection__rail--right{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:0 1rem;
+  }
+  .almanack-collection__rail--right{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+  .almanack-collection__rail-section:last-child{
+    border-bottom:1px solid rgba(107,84,60,.42);
   }
   .almanack-masthead h1{
     font-size:3.55rem;
@@ -6016,20 +6257,54 @@ html[data-theme="dark"] .almanack-footer{
   .almanack-collection{
     padding:1rem .85rem 2rem;
   }
-  .almanack-collection__masthead h1{
+  .almanack-collection__nameplate h1{
     font-size:2.55rem;
   }
-  .almanack-collection__masthead > p:not(.almanack-collection__eyebrow){
+  .almanack-collection__nameplate > p{
     font-size:.94rem;
   }
-  .almanack-collection__latest-body h2{
-    font-size:1.62rem;
+  .almanack-collection__strapline,
+  .almanack-collection__latest-rule{
+    justify-content:center;
+    text-align:center;
   }
-  .almanack-collection__latest-body blockquote{
+  .almanack-collection__register{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+  .almanack-collection__register-cell:nth-child(odd){
+    border-left:0;
+  }
+  .almanack-collection__register-cell:nth-child(n+3){
+    border-top:1px solid rgba(107,84,60,.55);
+  }
+  .almanack-collection__rail--left,
+  .almanack-collection__rail--right{
+    grid-template-columns:1fr;
+  }
+  .almanack-collection__latest h2{
+    font-size:1.7rem;
+  }
+  .almanack-collection__latest blockquote{
     font-size:1.08rem;
   }
+  .almanack-collection__note{
+    column-count:1;
+    font-size:.96rem;
+  }
+  .almanack-collection__contents-list li,
+  .almanack-collection__issue article{
+    grid-template-columns:1fr;
+    gap:.25rem;
+  }
+  .almanack-collection__archive-groups{
+    grid-template-columns:1fr;
+  }
+  .almanack-collection__issue-quote,
+  .almanack-collection__issue-lead{
+    grid-column:auto;
+  }
   .almanack-collection__issue h3{
-    font-size:1.28rem;
+    font-size:1.06rem;
   }
   .almanack-issue{
     padding-top:.35rem;
