@@ -4,175 +4,131 @@ date: 2025-04-16
 draft: false
 slug: "let-it-crash-the-opportunity-of-a-lifetime"
 section_label: "Essay"
-subtitle: "If you’ve got a job and no assets, a market crash might be the best thing that ever happens to you."
+subtitle: "If your income is stable and your balance sheet is clean, a downturn can change the price of ownership."
 featured_image: "/images/medium/let-it-crash-the-opportunity-of-a-lifetime/87fb7d2db379f7a2f8248d860fc4efb83cd681423ba62f2fb45e6f9a98eba8cf.jpeg"
 featured_image_caption: "Photo by Valery Fedotov on Unsplash"
 featured_image_alt: "Let It Crash: The Opportunity of a Lifetime"
-description: "The economy isn’t collapsing — it’s being reborn. If you’re young, working, and paying attention, this is your shot to build"
-version: "1.0"
-edition: "First web edition"
+description: "Market crashes are painful, but lower asset prices can create entry points for workers who have income, cash discipline, and the patience to avoid panic."
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-09"
+    note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, list formatting, promotional residue, and overbroad market-timing language were cleaned while preserving the original publication frame."
 pdf: "/pdfs/let-it-crash-the-opportunity-of-a-lifetime.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/let-it-crash-the-opportunity-of-a-lifetime-2c0f11995cee"
 ---
 
-The economy isn’t collapsing — it’s being reborn.
+The economy does not have to be ending for asset prices to fall.
 
-If you’re young, working, and paying attention, this is your shot to build.
+Sometimes a crash is a collapse. Sometimes it is a repricing. Sometimes it is a painful reset after years of cheap money, stretched valuations, and asset inflation that mostly rewarded people who already owned something.
 
-“Be fearful when others are greedy, and greedy when others are fearful.”— Warren BuffettLet it crash. Let it burn. Let the overvalued stocks, the zombie companies, the VC fever dreams and passive-income influencers all come back to Earth.
+That distinction matters.
 
-This economy wasn’t built to last — and now it’s time to build something ourselves.The bottom 50% of Americans don’t own stocks. They don’t own real estate. They don’t have equity in anything but themselves— their time, their labor, maybe a few side hustles.
+If you have stable income, manageable debt, and enough cash discipline to avoid panic, lower prices can create an opening. Not a guarantee. Not a slogan. An opening.
 
-What they do own is debt.Student loans, car notes, credit cards. Maybe a mortgage if they got in early or inherited help.
+For workers with no assets, the hardest part of the last fifteen years was not just high rent or high home prices. It was watching ownership move farther away while stocks, housing, and private-market valuations climbed.
 
-The last fifteen years has seen rising prices that only benefited people who already had assets. Everyone else just paid rent — literally and metaphorically.
+The bottom half of Americans owns only a small share of financial assets. Many households carry debt instead of equity. They own their labor, their skills, their relationships, and maybe a few fragile side hustles.
 
-The great melt up is here people.
+That means a downturn cuts two ways. If they lose work, it is devastating. If they keep income, lower asset prices can finally make ownership less impossible.
 
-“The bottom 50% don’t own the economy.”“We pay rent.”
+The opportunity is real only if the risk is named.
 
-![](https://cdn-images-1.medium.com/max/800/1*Ch95fdxGr3wSgvtUbY_TRg@2x.jpeg)
+### The End Of Infinite Growth
 
-The bottom 50% of Americans hold just 2.5% of all assets — and over a third of the country’s debt.Source: Federal Reserve Distributional Financial Accounts (2024 estimates)So what happens when the house of cards starts shaking?If you don’t own anything, and you can keep your job, then a 30% drop in the market is the best thing that could happen to you.
+The crash narrative is usually written as panic: markets fall, headlines turn red, and everyone asks whether the system is breaking.
 
-A 50% drop is even better.
+But some corrections happen because the prior price was wrong.
 
-That’s your shot at building the kind of wealth previous generations stumbled into by accident.
+Cheap money can push investors into risk. Passive flows can lift broad indexes. Venture capital can overfund weak businesses. Meme stocks can detach from earnings. Housing can rise faster than incomes. Technology firms can sell a story before they prove a durable cash flow.
 
-The people who came before us got to buy homes after the S&L crash.
+At some point, the line stops going up.
 
-They picked up index funds in the wreckage of ‘87.
+That is not always a crisis. It can be the market admitting that growth is not a law of nature.
 
-They built portfolios in the ashes of 2008.
+The institutional behavior is familiar. When asset prices rise, incumbents benefit. Homeowners gain equity. Investors feel richer. Companies can raise capital more easily. Governments collect more tax revenue. Everyone with a stake in the boom has an incentive to call the boom normal.
 
-Every crash was someone’s starting line.
+The cost lands on everyone trying to enter later.
 
-For years, our generation’s been locked out — told to “wait for a pullback” while everything from starter homes to S&P ETFs sailed into the stratosphere.
+### Creative Destruction Is Not Automatically Good
 
-“You don’t make money when you sell. You make it when you buy.”— Mark CubanWell, now is when you buy.
+"Let it crash" sounds harsh because crashes hurt real people.
 
-If you’ve got income, stability, and you’re paying attention — this moment is for you.
+Workers lose jobs. Retirement accounts fall. Small businesses lose customers. Households that bought near the top can get trapped. Credit tightens exactly when people need flexibility.
 
-The End of Infinite Growth
+Those are not footnotes. They are the tradeoff.
 
-![](https://cdn-images-1.medium.com/max/800/1*drm3ngXRQZ99ndmtiWhj9A@2x.jpeg)
+But refusing every correction has a cost too. If weak companies are always rescued, bad capital allocation survives. If asset prices are protected at any level, younger and poorer households stay locked out. If the economy treats every decline as a policy emergency, risk gets privatized on the way up and socialized on the way down.
 
-Photo by Markus Spiske on Unsplash
+Creative destruction renews capitalism only when it clears space for better uses of labor, capital, and talent. It fails when it simply concentrates losses on workers while insiders keep the gains.
 
-The crash isn’t a fluke. It’s not a mistake. It’s what happens when you treat growth as a law of nature instead of a phase of development.
+The goal is not pain. The goal is honest pricing.
 
-The system runs on cheap money and blind optimism.Company valuations are decoupled from earnings. Meme stocks explode. Tech firms stop building things and start selling vibes. We stop asking whether something makes sense — and just watch that line go up and up and up.
+### What A Downturn Can Offer
 
-Average Price over Earnings Ratio for the S&P 500
+Lower prices matter because entry price matters.
 
-![](https://cdn-images-1.medium.com/max/800/1*j6mYU_oB0y8M5krmv--Ozw@2x.jpeg)
+You do not build wealth only by selling high. You build it by buying durable assets at prices that leave room for future returns.
 
-P/E ratios surged far above historical norms before this downturn. Markets were overdue for a correction.Source: macrotrends.net (approximate historical data)Infinite growth is a fairy tale.
+That can mean broad index funds bought slowly over time. It can mean a home when the payment finally makes sense. It can mean a business, a skill, a tool, or a credential that increases future earnings.
 
-Trees don’t grow to the sky. Eventually, gravity wins.
+It does not mean gambling every dollar into a falling market.
 
-“The world isn’t ending — it’s maturing.”— Not Elon Musk (but it’s what he should’ve said)Elon wants to talk about population collapse and human extinction? Bit dramatic.
+The opportunity belongs to people who can keep a margin of safety:
 
-What we’re living through is maturity.
+- Maintain emergency cash.
+- Avoid high-interest debt.
+- Buy gradually instead of pretending to know the bottom.
+- Favor assets with durable cash flows or broad diversification.
+- Protect employability before chasing upside.
+- Remember that liquidity matters when the labor market weakens.
 
-Younger generations have to step up, not because we’re next in line, but because the old guard mortgaged our future and left us to pick up the tab.
+This is where the crash narrative has to be disciplined. Lower prices help only if you can survive the waiting period.
 
-They kicked the can on climate change. They hoarded assets. They printed trillions and told us the bill would never come due.
+### Housing Is The Hardest Test
 
-Well, it’s due, it’s ours,and no one is coming to help.Creative Destruction Is Not a Crisis
+Housing shows why the reset argument is emotionally powerful.
 
-![](https://cdn-images-1.medium.com/max/800/1*U9wrPTbPQFYKwldtzuiTog@2x.jpeg)
+For years, prices rose faster than incomes in many markets. Low mortgage rates masked part of the problem, then higher rates made monthly payments worse. Younger households were told to wait, save, and be patient while the ladder kept moving.
 
-Photo by Ricardo Gomez Angel on Unsplash
+A correction could improve affordability. It could also damage household wealth, construction employment, local budgets, and bank balance sheets.
 
-Let it crash.Let the bloated companies get wiped out.
+That is the tradeoff.
 
-Let AI replace the jobs no one wants.
+The right question is not whether lower home prices are good or bad in the abstract. The right question is who gains access, who takes losses, and whether the system becomes more balanced afterward.
 
-Let the hedge funds take a haircut.
+If the same cash-rich buyers scoop up discounted homes while workers remain credit constrained, the crash will not democratize ownership. It will reshuffle ownership upward again.
 
-“This isn’t a collapse — it’s the financial reset we’ve been waiting for.”Creative destruction is how capitalism renews itself.
+### What Comes Next Is Not Automatic
 
-If we don’t let it happen — if we keep papering it over with fake optimism and bailouts — we’ll never see the change and growth that we need.
+A downturn creates conditions. It does not create discipline.
 
-We need to clear the way for something better, smarter, and more human.What Comes Next Is Ours — If We Step Up
+Workers still have to save. Investors still have to avoid panic. Policymakers still have to resist the urge to rescue every inflated asset while ignoring the households that never got to participate in the boom.
 
-![](https://cdn-images-1.medium.com/max/800/1*aOIcAIgi4PYXIfbytNmb1w@2x.jpeg)
+That is the institutional test.
 
-Photo by Levi Meir Clancy on Unsplash
+Do we rebuild around productive investment, affordable ownership, and real wages? Or do we use another downturn to protect yesterday's winners and call it stability?
 
-We don’t need another round of asset price inflation. We need access. We need affordability.
+The uncertainty is obvious. No one knows the bottom. No one knows which jobs are safe. No one knows whether the next recovery will broaden ownership or simply restart the same asset-price machine.
 
-Especially in housing — where prices have decoupled from reality.
+That uncertainty is why the better advice is not "buy now." It is "get prepared."
 
-![](https://cdn-images-1.medium.com/max/800/1*m6rtx3MVIyc85VULlh600g@2x.jpeg)
+Build cash. Reduce fragile debt. Improve earning power. Learn the mechanics of investing before panic arrives. Know what you would buy, why you would buy it, and how long you could hold it if the market kept falling.
 
-Home prices have grown far faster than incomes since 2012. A correction could bring affordability back within reach.Source: Visual Capitalist, Federal ReserveSo here’s the truth: if you’re young, broke, and working — you’re not behind.
+### The Last Word
 
-You’re early.But only if you stop waiting for someone to fix things for you.
+Let inflated assets fall if they have to fall.
 
-- Start building.
-- Buy things that are real.
-- Learn how money actually works.
-- Build equity where you can.
-- Own your time, your skills, your relationships.
-Get serious about your future — because no one else is going to do it for you.
+Let weak business models face reality.
 
-“If you want to make the world a better place, take a look at yourself and make a change.”— Michael JacksonWe don’t need to collapse. We don’t need to pout.
+Let prices tell the truth.
 
-The world isn’t dying. It’s just changing.The only thing that matters now is what comes next.
+But do not confuse a crash with a plan. A crash is only an opening if people and institutions are ready to use it well.
 
-The Last Word
+For workers with income and no assets, the next downturn could be a chance to start building ownership at better prices. For households without income security, it could be another round of pain.
 
-![](https://cdn-images-1.medium.com/max/800/1*JTYdkBTukrzIvpgHTZcgbw@2x.jpeg)
+That is the whole point: crashes do not treat everyone equally.
 
-Photo by EJ Strat on Unsplash
-
-So let it crash.Let the overpriced assets fall, the noise fade, and the deadweight clear.
-
-That’s not collapse!It’s the reset we’ve been waiting for.If you’ve got a job, a brain, and the guts to care about your future, this is your window.
-
-Don’t waste it scrolling. Don’t wait for someone to hand you a better economy.Step into the fire and get to work.
-
-The old world is cracking?Good.We will build something better.Author’s Note
-
-I write about the real economy — how it works, who it works for, and what it means for people trying to build something that lasts. If this piece helped you see things more clearly, you’re exactly the kind of reader The Balance Sheet was made for.
-
-Each week, more people are turning to it for grounded, no-fluff takes on money, markets, and the policies shaping our future. Especially during a downturn like this, clarity matters. Don’t miss what’s coming next — follow now and stay ahead of the curve.
-
-If you’re thinking seriously about your future, this is where you need to be. Subscribe now — not later — and don’t wait to start seeing the economy for what it really is. One good idea, one moment of clarity, can change your whole trajectory.
-
-Further Reading & Resources
-
-Wealth and Inequality Data
-
-•	Federal Reserve Distributional Financial Accounts
-
-•	Survey of Consumer Finances (SCF)
-
-Market Valuations
-
-•	Multpl.com — S&P 500 P/E Ratio History
-
-•	Shiller P/E Ratio (CAPE)
-
-Housing Affordability
-
-•	Harvard Joint Center for Housing Studies
-
-•	U.S. Census Housing Data
-
-Investing & Financial Literacy
-
-•	Bogleheads.org — Investing for Beginners
-
-•	Morningstar
-
-•	NerdWallet
-
-Tracking the Real Economy
-
-•	Bureau of Labor Statistics (BLS)
-
-•	FRED — Federal Reserve Economic Data
+The opportunity of a lifetime is not the crash itself. It is the chance to build a more durable balance sheet when the old pricing regime finally breaks.

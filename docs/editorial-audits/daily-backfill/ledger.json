@@ -973,6 +973,101 @@
       },
       "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
       "deployed_on": "2026-05-08"
+    },
+    "uncrustables-the-billion-dollar-peanut-butter-empire": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-09",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-09.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-09",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests brand growth through source-bound business evidence, production incentives, scale tradeoffs, downstream consumer effects, and uncertainty over continued expansion."
+      }
+    },
+    "why-a-return-to-the-gold-standard-would-break-the-economy": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-09",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-09.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-09",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests gold-standard nostalgia against monetary arithmetic, crisis-response incentives, deflation tradeoffs, institutional power shifts, and uncertainty around revaluation effects."
+      }
+    },
+    "make-fighter-jets-great-again-introducing-the-f-47": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-09",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-09.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-09",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay separates F-47 branding from procurement evidence, industrial incentives, autonomy and cost tradeoffs, strategic consequences, and classified-program uncertainty."
+      }
+    },
+    "mingo-county-mud-in-the-water": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-09",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-09.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-09",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay ties water-system failure to local reporting, regulatory limits, utility finance incentives, rate and maintenance tradeoffs, trust consequences, and uncertainty around long-term fixes."
+      }
+    },
+    "let-it-crash-the-opportunity-of-a-lifetime": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-09",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-09.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-09",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests crash-opportunity claims through household-balance-sheet evidence, labor and bailout incentives, housing and liquidity tradeoffs, downstream inequality risks, and market uncertainty."
+      }
     }
   },
   "blocked": {},
@@ -1130,6 +1225,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-08.md",
       "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
       "deployed_on": "2026-05-08"
+    },
+    {
+      "batch_id": "2026-05-09",
+      "selected_slugs": [
+        "uncrustables-the-billion-dollar-peanut-butter-empire",
+        "why-a-return-to-the-gold-standard-would-break-the-economy",
+        "make-fighter-jets-great-again-introducing-the-f-47",
+        "mingo-county-mud-in-the-water",
+        "let-it-crash-the-opportunity-of-a-lifetime"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-09.md"
     }
   ]
 }

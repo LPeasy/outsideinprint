@@ -4,229 +4,122 @@ date: 2025-03-23
 draft: false
 slug: "why-a-return-to-the-gold-standard-would-break-the-economy"
 section_label: "Essay"
-subtitle: "What Glitters Isn’t Always Gold"
-description: "What if overnight, your $10 bill could only buy a loaf of bread instead of a full meal?. Or even worse: what if your mortgage suddenly felt twice as expensive?"
+subtitle: "What Glitters Isn't Always Gold"
+description: "A gold standard sounds like discipline, but the arithmetic points toward monetary rigidity, deflation risk, and a weaker crisis response."
 featured_image: "/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/b20b0f68d3f48fd5a5a22035ff5ff670094552486b74d98c6a1d5c3e71346552.jpeg"
 featured_image_caption: "Photo by Jingming Pan on Unsplash"
 featured_image_alt: "Returning to the Gold Standard Will Break the Economy"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-09"
+    note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, spacing, and source-sensitive monetary claims were cleaned while preserving the original publication frame."
 pdf: "/pdfs/why-a-return-to-the-gold-standard-would-break-the-economy.pdf"
 featured: true
 medium_source_url: "https://medium.com/@lawtonperret/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
 ---
 
-What if overnight, your $10 bill could only buy a loaf of bread instead of a full meal?
+What if your dollars were suddenly tied to a metal that cannot expand with the needs of a modern economy?
 
-Or even worse: what if your mortgage suddenly felt twice as expensive?
+That is the problem behind the gold standard.
 
-That’s what could happen if the U.S. returned to the gold standard ~ a system where each dollar is backed by something real, tangible, and mined from the earth.
+The idea sounds reassuring. Gold feels real, scarce, and hard to manipulate. But money is not just a symbol of value. It is also plumbing for wages, debt, credit, trade, banking, and emergency response.
 
-Reverting to the gold standard would cause a severe one-time inflationary adjustment and near guaranteed long-term deflation ~ a double whammy of economic hardship.
+Reverting to gold-backed money would not simply discipline Washington. It would force the economy through a monetary straitjacket, with a severe one-time adjustment risk and a long-term bias toward deflation.
 
-Every few years, the idea pops up again ~ online, in political speeches, or on cable news.
+Every few years, the idea returns in speeches, online arguments, and cable-news segments. It appeals to nostalgia for sound money and fear of inflation.
 
-It taps into a certain kind of economic nostalgia, conjuring up images of sound money, disciplined government spending, and protection against inflation.
+But a policy can feel stable and still be dangerous.
 
-Could the U.S. actually go back to gold-backed money? And more importantly, would that be a good idea?
+### Why The U.S. Left The Gold Standard
 
-### Why the U.S. Left the Gold Standard ~ and Isn’t Going Back
+For much of American history, the dollar was tied to gold. Paper money could be redeemed for a fixed amount of metal, and the government could not expand the money supply freely.
 
-![](https://cdn-images-1.medium.com/max/800/1*k9DZ8Jad4LNnzqkr1UXedw@2x.jpeg)
+That limit sounded prudent until the economy needed flexibility.
 
-Photo by Kenny Eliason on Unsplash
+During the Great Depression, the gold standard restricted the government's ability to increase liquidity when banks were failing, prices were falling, and unemployment was soaring. In 1933, President Franklin Roosevelt stopped domestic dollar-gold convertibility.
 
-For much of its history, the U.S. dollar was tied to gold, meaning that every paper dollar could be exchanged for a set amount of the metal.
+After World War II, the Bretton Woods system kept a narrower version alive. Foreign governments could redeem dollars for gold at $35 per ounce. By the 1960s, U.S. spending and foreign dollar claims strained that system. In 1971, President Richard Nixon ended convertibility.
 
-It seemed like a straightforward system ~ if the money was backed by something tangible, then it couldn’t be devalued at will.
+The world moved to fiat money because a modern credit economy needs a monetary system that can expand and contract when circumstances change.
 
-But that also meant the government could only print as much money as it had gold to support.
+That flexibility can be abused. But removing it entirely creates a different and older danger.
 
-That limit turned into a major problem during the Great Depression.
+### The Arithmetic Does Not Work
 
-The economy needed an infusion of money, but the gold standard tied the government’s hands.
+The biggest practical problem is simple: the United States does not hold enough gold to back the money supply at ordinary gold prices.
 
-Imagine trying to put out a fire but you're only allowed to use the water that's already in your bucket.
+The U.S. government owns roughly 261 million troy ounces of gold. A broad money measure such as M2 is measured in the tens of trillions of dollars.
 
-In 1933, President Franklin Roosevelt stopped Americans from exchanging dollars for gold, effectively ending the domestic gold standard.
+Using early-2025 magnitudes, full backing would require gold to be valued at tens of thousands of dollars per ounce. A rough arithmetic target near $80,000 per ounce is not a forecast. It is a warning about scale.
 
-After World War II, the U.S. kept a version of it alive ~ other countries could still redeem dollars for gold at a fixed rate of $35 per ounce. But by the 1960s, the U.S. was spending more money than it had in gold reserves, and foreign governments started cashing in their dollars for gold.
+That kind of revaluation would not be a neat accounting exercise. It would redistribute wealth, scramble expectations, and invite a crisis of confidence over who gets redeemed, when, and at what price.
 
-In 1971, President Richard Nixon put an end to it for good, and the world moved to the fiat money system we have today.
+Even partial backing has a trust problem. The United States tried a version of that in the 1960s. Once foreign governments doubted that U.S. gold reserves could cover claims, redemption pressure drained the system.
 
-Unlike gold, which is limited by how much can be mined, fiat money allows the economy to expand and contract as needed.
+A fractional gold standard works only while everyone believes the fraction will hold. Once that belief breaks, the mechanism turns into a run.
 
-This flexibility let the government step in during crises, like the 2008 financial crash and the COVID-19 pandemic, by injecting money into the system to prevent a complete collapse.
+### What It Would Mean For Households
 
-### Could the U.S. Afford to Return to Gold? Let’s Do the Math
+For most people, a gold standard would not mean simple stability.
 
-![](https://cdn-images-1.medium.com/max/800/1*GhEmY85-n4L3S2C_SjZVLw@2x.jpeg)
+It would mean less flexibility when things go wrong.
 
-Photo by Elimende Inagella on Unsplash
+Inflation is painful. But deflation can be brutal, especially for households with fixed debts. If wages and prices fall while mortgage, student-loan, car-loan, and credit-card obligations remain fixed, the real burden of debt rises.
 
-The biggest problem with returning to a gold standard is simple:
+That is why deflationary cycles can deepen recessions. People delay purchases. Businesses cut wages or workers. Borrowers struggle. Defaults rise. Banks tighten credit. The cycle feeds itself.
 
-There's not enough gold to back the U.S. money supply.
+A gold standard also limits crisis response. Under a fiat system, the Federal Reserve and Treasury can provide liquidity, backstop markets, and support emergency lending. Those powers carry tradeoffs, including moral hazard and inflation risk. But they exist because financial systems can freeze.
 
-The U.S. government owns about 261 million ounces of gold, worth around $780 billion at today's prices. That sounds like a lot -- until you compare it to the total money supply.
+Under a strict gold standard, the government's ability to respond would be tied to metal reserves instead of economic need.
 
-A common measure, M2, which includes cash, checking, and savings accounts, currently stands at over $20 trillion.
+That is not discipline. It is institutional paralysis at the worst possible moment.
 
-That means gold reserves would only cover 2.5% of the money supply.
+### The Political Appeal Is Emotional
 
-To fully back every dollar, gold would have to be revalued to $80,000 per ounce ~ an astronomical jump from today's price of around $2,000 per ounce.
+Few mainstream economists support returning to gold because the historical record is not flattering.
 
-That kind of revaluation would throw the economy into chaos. The cost of everything from gas to groceries would skyrocket as the value of the dollar collapsed.
+The Reagan administration studied the question in the early 1980s and rejected a return. Federal Reserve officials have also warned that a gold standard would remove the central bank's ability to adjust interest rates and money supply in a downturn.
 
-> "Since the gold standard determines the money supply, there is no guarantee of price stability. The gold standard could generate periods of inflation or deflation simply because the supply of gold changes."
->
-> Ben Bernanke, Former Chair of the Federal Reserve, 2012
+The appeal is not mainly technical. It is emotional.
 
-Even a partial gold backing, where only a fraction of money was tied to gold, would likely fail. The last time the U.S. tried this, in the 1960s, countries rushed to redeem their dollars for gold, draining U.S. reserves.
+Gold seems clean compared with budget deficits, bank balance sheets, and central-bank discretion. It feels like a return to a time when money "meant something."
 
-It would be no different today.
+But simplicity is not the same thing as institutional competence.
 
-A fractional system still depends on trust — and once people suspect that gold reserves can’t cover redemption demands, the whole system unravels.
+A gold standard would reward hoarding, constrain emergency policy, and shift power toward whoever controls metal reserves. It would also sacrifice the ability to manage a large, leveraged, globally connected economy.
 
-That’s what happened in the ’60s, and it would happen again.
+### Gold Is Valuable. That Does Not Make It Stable Money.
 
-### What a Gold Standard Would Mean for Your Wallet
+Gold can preserve value over long periods. It can hedge fear, inflation expectations, currency weakness, and geopolitical uncertainty.
 
-![](https://cdn-images-1.medium.com/max/800/1*mSRVTk2x94tqPJgUiKOAsg@2x.jpeg)
+But gold prices also swing with speculation, central-bank demand, mining supply, jewelry demand, investor psychology, and global risk sentiment.
 
-Photo by Emil Kalibradov on Unsplash
+That makes gold useful as an asset and unreliable as the sole anchor for daily prices, wages, rents, and debt contracts.
 
-For most people, a return to the gold standard wouldn’t mean stability ~
+A household budget cannot be run on a metal price that moves because investors are scared. A national payment system cannot be reduced to a vault count.
 
-It would be a financial disaster.
+The key institutional question is not whether gold is valuable. It is whether gold can govern a modern economy better than accountable monetary institutions can.
 
-Here’s why:
+The evidence says no.
 
-![](https://cdn-images-1.medium.com/max/800/1*e2j8KaAYTGBiWq2pWdJvow@2x.jpeg)
+### The Gold Standard Would Break More Than It Fixes
 
-Image Source: FRED | Inflation based on the average price index for all urban consumers (1982–1984 = 100)
+Could the United States technically return to some form of gold-backed money?
 
-Many people turn to gold because they’re afraid of inflation — when prices rise and dollars lose value. But the gold standard doesn’t eliminate economic risk ~ it flips the script.
+Yes.
 
-Instead of inflation, it often brings deflation, which can be just as damaging, especially if you owe money or lose your job.
+Should it?
 
-Debt would become a crushing burden.
+No.
 
-Many people worry about inflation, but deflation (the opposite) can be even worse.
+The idea sounds safe because gold feels solid. But the mechanism would make the economy more fragile, not less. It would make debt harder to carry, crises harder to fight, and monetary policy less responsive to real conditions.
 
-Inflation means prices rise gradually, but deflation makes debt more expensive, wages lower, and job losses worse.
+Fiat money requires discipline. Central banks can make mistakes. Governments can borrow recklessly. Inflation can punish households.
 
-A gold standard locks in deflationary cycles, making recessions longer and more painful.
+But the answer to bad monetary governance is better governance, not a system that turns economic management over to the supply of a metal.
 
-Imagine you owe $100,000 on a mortgage. If deflation set in ~ meaning the value of money increased ~ your debt wouldn't shrink, but your wages would.
+What matters is not whether money is backed by gold. What matters is whether money can support work, contracts, saving, investment, and crisis response without losing public trust.
 
-Paying off loans would become much harder, leading to widespread foreclosures and bankruptcies.
-
-Reverting to the gold standard would also make it impossible for the government to respond during an economic crisis.
-
-With fiat currency, the government can send out stimulus checks and provide emergency loans to keep businesses afloat.
-
-Under a gold standard, none of that would be possible ~ the government would be limited to whatever gold it has in reserve.
-
-The result?
-
-Longer recessions, higher unemployment, and less financial support during crises.
-
-Wild price swings would become the norm.
-
-### Who’s Still Pushing for the Gold Standard ~ and Why They’re Wrong
-
-![](https://cdn-images-1.medium.com/max/800/1*bga-lqD6nQFf4z8qDIrfRQ@2x.jpeg)
-
-Photo by jaikishan patel on Unsplash
-
-No serious economists.
-
-The last serious effort to study the gold standard happened in the early 1980s, when President Ronald Reagan’s administration formed a commission to explore the idea.
-
-Their conclusion? It wouldn't work.
-
-Since then, very few politicians have seriously advocated for it.
-Even during the 2022 inflation spike, when consumer prices were rising at the fastest rate in 40 years, no mainstream political figures proposed returning to gold.
-
-> "The gold standard is a bad idea. It has always been a bad idea. We should not be having this conversation."
->
-> Paul Krugman, Nobel Laureate in Economics, 2012
-
-The Federal Reserve is also against it.
-
-In 2019, Fed Chair Jerome Powell said a gold standard would remove the government’s ability to respond to economic crises.
-
-Essentially, if the U.S. was locked into a fixed amount of gold, the Fed couldn’t lower interest rates or increase the money supply to prevent a recession.
-That would mean deeper downturns and longer recoveries.
-
-The appeal isn't really economic ~ it's emotional.
-
-It feels like a return to a time when money ‘meant something.’
-
-But simplicity doesn’t make it smart policy.
-
-### Is Gold Really Stable? A Look at the Price History
-
-![](https://cdn-images-1.medium.com/max/800/1*KTB2K-MYGCEfn0tG1xed2g@2x.jpeg)
-
-Photo by Robert Gourley on Unsplash
-
-Gold has surged in price over the past few decades ~ but that doesn’t mean it’s stable in the way a currency needs to be.
-
-Here are a few quick stats:
-
-- In just the last year, it’s climbed 38.63%.
-
-![](https://cdn-images-1.medium.com/max/800/1*hQi0K0at1MOTdENLEugqEw@2x.jpeg)
-
-The chart from goldprice.com shows the full arc, including an all-time high of over $3,000 per ounce in March 2025.
-
-![](https://cdn-images-1.medium.com/max/800/1*bN1Eu1KU2qs13a5pssg-8g@2x.jpeg)
-
-The table illustrates the same point.
-"This isn't volatility! It's just gold keeping pace with inflation!"
-
-And to some extent, that's true: as the dollar loses purchasing power, gold tends to gain value over the long run.
-
-Why?
-
-Because gold prices don't just reflect inflation. They swing based on speculation, geopolitical events, central bank hoarding, jewelry demand, mining supply, and investor fear.
-But that doesn’t make it a stable pricing anchor for a modern economy.
-That's not stability. That's chaos in disguise.
-
-Gold might hold its value over decades ~ but currencies need to work week to week.
-
-If your rent or your paycheck were pegged to gold, you’d feel those swings month to month.
-
-Gold can’t guarantee that.
-
-### The Gold Standard: A Tempting Idea That Would Break the Economy
-
-![](https://cdn-images-1.medium.com/max/800/1*12WYtfhtYGc9bsGGatEuLw@2x.jpeg)
-
-Photo by Dmytro Demidko on Unsplash
-
-Could America get back on the Gold Standard?
-
-Technically? Yes.
-
-But it would be a financial disaster.
-
-The idea of gold-backed money sounds reassuring ~ it feels like something solid in a world of digital transactions and government debt.
-
-> "The gold standard is the economic equivalent of the medieval medical practice of bloodletting."
->
-> Barry Eichengreen, Professor of Economics, UC Berkeley
-
-The U.S. left the gold standard for a reason -- it couldn't keep up with the needs of a modern economy.
-
-Instead of looking back, policymakers need to focus on managing the fiat system responsibly.
-
-While gold will always be valuable, it’s not going to be the foundation of America’s financial future.
-
-At the end of the day, what matters isn’t what backs your money ~ it’s whether that money can reliably pay for your rent, groceries, and future.
-
-The gold standard might sound like a safe bet, but it’s a gamble on instability.
-
-In a high-stakes economy, that’s not a bet we can afford to make.
+The gold standard sounds like a safe bet. In a modern economy, it is a gamble on rigidity.
