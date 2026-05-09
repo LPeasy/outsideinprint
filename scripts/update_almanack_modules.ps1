@@ -3,15 +3,32 @@ param(
   [int]$StartYear = 1990,
   [int]$MaxOnThisDay = 5,
   [int]$MaxWorldEvents = 8,
-  [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+  [ValidateSet('all', 'archive-links', 'on-this-day', 'weather', 'world-week')]
+  [string[]]$Modules = @('all'),
+  [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
+  [string]$CacheDir = '',
+  [switch]$RefreshCache,
+  [switch]$ReviewOnly,
+  [string]$ReviewDir = ''
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$dataDir = Join-Path $Root 'data\almanack'
+if ([string]::IsNullOrWhiteSpace($CacheDir)) {
+  $CacheDir = Join-Path $Root '.tmp-almanack-cache'
+}
+
+if ([string]::IsNullOrWhiteSpace($ReviewDir)) {
+  $ReviewDir = Join-Path $Root ('reports\almanack-data-review\{0}' -f $IssueDate.ToString('yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture))
+}
+
+$dataDir = if ($ReviewOnly) { $ReviewDir } else { Join-Path $Root 'data\almanack' }
 if (-not (Test-Path -LiteralPath $dataDir)) {
-  New-Item -ItemType Directory -Path $dataDir | Out-Null
+  New-Item -ItemType Directory -Path $dataDir -Force | Out-Null
+}
+if (-not (Test-Path -LiteralPath $CacheDir)) {
+  New-Item -ItemType Directory -Path $CacheDir -Force | Out-Null
 }
 
 $generatedAt = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ', [Globalization.CultureInfo]::InvariantCulture)
@@ -19,6 +36,12 @@ $dateKey = $IssueDate.ToString('MM-dd', [Globalization.CultureInfo]::InvariantCu
 $dateLabel = $IssueDate.ToString('MMMM d', [Globalization.CultureInfo]::InvariantCulture)
 $weekKey = $IssueDate.ToString('yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture)
 $weekStart = $IssueDate.Date.AddDays(-6)
+$runAllModules = $Modules -contains 'all'
+
+function Test-RunModule {
+  param([string]$Name)
+  return ($runAllModules -or ($Modules -contains $Name))
+}
 
 function ConvertTo-YamlScalar {
   param([object]$Value)
@@ -39,6 +62,60 @@ function Write-Utf8NoBomLines {
   [System.IO.File]::WriteAllLines($Path, $Lines, $encoding)
 }
 
+function Get-SafeCacheFileName {
+  param(
+    [string]$Key,
+    [string]$Extension
+  )
+  $safeKey = $Key.ToLowerInvariant() -replace '[^a-z0-9._-]+', '-'
+  $safeKey = $safeKey.Trim('-')
+  if ([string]::IsNullOrWhiteSpace($safeKey)) { $safeKey = 'source' }
+  return "$safeKey.$Extension"
+}
+
+function Get-CachedSourcePath {
+  param(
+    [string]$Url,
+    [string]$CacheKey,
+    [string]$Extension,
+    [string]$Description
+  )
+
+  $cachePath = Join-Path $CacheDir (Get-SafeCacheFileName -Key $CacheKey -Extension $Extension)
+  if ((-not $RefreshCache) -and (Test-Path -LiteralPath $cachePath -PathType Leaf)) {
+    return $cachePath
+  }
+
+  $tempPath = "$cachePath.tmp"
+  try {
+    Invoke-WebRequest -UseBasicParsing -Uri $Url -OutFile $tempPath -Headers @{ 'User-Agent' = 'OutsideInPrintAlmanack/1.0 (outsideinprint.org)' }
+    $tempItem = Get-Item -LiteralPath $tempPath
+    if ($tempItem.Length -le 0) {
+      throw "Source returned an empty response."
+    }
+    Move-Item -LiteralPath $tempPath -Destination $cachePath -Force
+    return $cachePath
+  } catch {
+    Remove-Item -LiteralPath $tempPath -ErrorAction SilentlyContinue
+    throw "Unable to fetch $Description from $Url. Source data is unavailable and the Almanack data file was not updated. $($_.Exception.Message)"
+  }
+}
+
+function Get-CachedJsonSource {
+  param(
+    [string]$Url,
+    [string]$CacheKey,
+    [string]$Description
+  )
+
+  $cachePath = Get-CachedSourcePath -Url $Url -CacheKey $CacheKey -Extension 'json' -Description $Description
+  try {
+    return Get-Content -LiteralPath $cachePath -Raw | ConvertFrom-Json
+  } catch {
+    throw "Cached $Description source is not valid JSON: $cachePath. $($_.Exception.Message)"
+  }
+}
+
 function Convert-HtmlToText {
   param([string]$Html)
   $withoutRefs = $Html -replace '<sup[^>]*>.*?</sup>', ' '
@@ -55,7 +132,10 @@ function Get-OnThisDayEntries {
   $month = $IssueDate.ToString('MM', [Globalization.CultureInfo]::InvariantCulture)
   $day = $IssueDate.ToString('dd', [Globalization.CultureInfo]::InvariantCulture)
   $sourceUrl = "https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/events/$month/$day"
-  $response = Invoke-RestMethod -Uri $sourceUrl -Headers @{ 'User-Agent' = 'OutsideInPrintAlmanack/1.0 (outsideinprint.org)' }
+  $response = Get-CachedJsonSource -Url $sourceUrl -CacheKey "wikimedia-on-this-day-$dateKey" -Description 'Wikimedia On This Day entries'
+  if (-not $response.events) {
+    throw "Wikimedia On This Day source returned no events for $dateKey."
+  }
   $entries = New-Object System.Collections.Generic.List[object]
 
   foreach ($event in @($response.events | Select-Object -First $MaxOnThisDay)) {
@@ -146,9 +226,11 @@ function Get-WeatherCityRecords {
 
   foreach ($station in $stations) {
     $sourceUrl = "https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/$($station.StationId).csv"
-    $tempPath = Join-Path ([System.IO.Path]::GetTempPath()) ("oip-ghcnd-$($station.StationId).csv")
-    Invoke-WebRequest -UseBasicParsing -Uri $sourceUrl -OutFile $tempPath
-    $rows = Import-Csv -LiteralPath $tempPath
+    $cachePath = Get-CachedSourcePath -Url $sourceUrl -CacheKey "noaa-ghcnd-$($station.StationId)" -Extension 'csv' -Description "NOAA/GHCN daily station data for $($station.City)"
+    $rows = Import-Csv -LiteralPath $cachePath
+    if (-not $rows) {
+      throw "NOAA/GHCN station file for $($station.City) contained no rows: $cachePath"
+    }
 
     $lows = New-Object System.Collections.Generic.List[double]
     $highs = New-Object System.Collections.Generic.List[double]
@@ -205,10 +287,9 @@ function Get-WorldWeekEntries {
     $pageDate = $date.ToString('yyyy_MMMM_d', [Globalization.CultureInfo]::InvariantCulture)
     $pageTitle = "Portal:Current_events/$pageDate"
     $apiUrl = 'https://en.wikipedia.org/w/api.php?action=parse&page=' + [uri]::EscapeDataString($pageTitle) + '&format=json&prop=text&formatversion=2'
-    try {
-      $response = Invoke-RestMethod -Uri $apiUrl -Headers @{ 'User-Agent' = 'OutsideInPrintAlmanack/1.0 (outsideinprint.org)' }
-    } catch {
-      continue
+    $response = Get-CachedJsonSource -Url $apiUrl -CacheKey "wikipedia-current-events-$($date.ToString('yyyy-MM-dd'))" -Description "Wikipedia Current Events page $pageTitle"
+    if (-not $response.parse -or -not $response.parse.text) {
+      throw "Wikipedia Current Events source returned no parse text for $pageTitle."
     }
 
     $html = [string]$response.parse.text
@@ -249,6 +330,10 @@ function Get-WorldWeekEntries {
         })
       }
     }
+  }
+
+  if ($events.Count -eq 0) {
+    throw "No world-week candidate events were parsed for $($weekStart.ToString('yyyy-MM-dd')) through $weekKey."
   }
 
   $ranked = $events |
@@ -350,17 +435,46 @@ function Write-WorldWeekFile {
     $lines.Add("        text: $(ConvertTo-YamlScalar $event.Text)")
     $lines.Add("        source_name: $(ConvertTo-YamlScalar $event.SourceName)")
     $lines.Add("        source_url: $(ConvertTo-YamlScalar $event.SourceUrl)")
+    $lines.Add("        source_order: $($event.Sequence)")
     $order++
   }
   Write-Utf8NoBomLines -Path (Join-Path $dataDir 'world_week.yaml') -Lines $lines.ToArray()
 }
 
-$onThisDay = Get-OnThisDayEntries
-$weather = Get-WeatherCityRecords
-$worldWeek = Get-WorldWeekEntries
+$updatedFiles = New-Object System.Collections.Generic.List[string]
 
-Write-OnThisDayFile -Payload $onThisDay
-Write-WeatherFile -Records $weather
-Write-WorldWeekFile -Events $worldWeek
+if (Test-RunModule -Name 'archive-links') {
+  $archiveScript = Join-Path $PSScriptRoot 'update_almanack_archive_links.ps1'
+  if (-not (Test-Path -LiteralPath $archiveScript -PathType Leaf)) {
+    throw "Archive-link candidate script is missing: $archiveScript"
+  }
+  $archiveOutputPath = Join-Path $dataDir 'archive_link_candidates.yaml'
+  & $archiveScript -IssueDate $IssueDate -Root $Root -OutputPath $archiveOutputPath
+  if (-not $?) {
+    throw "Archive-link candidate generation failed."
+  }
+  $updatedFiles.Add($archiveOutputPath)
+}
+
+if (Test-RunModule -Name 'on-this-day') {
+  $onThisDay = Get-OnThisDayEntries
+  Write-OnThisDayFile -Payload $onThisDay
+  $updatedFiles.Add((Join-Path $dataDir 'on_this_day.yaml'))
+}
+
+if (Test-RunModule -Name 'weather') {
+  $weather = Get-WeatherCityRecords
+  Write-WeatherFile -Records $weather
+  $updatedFiles.Add((Join-Path $dataDir 'weather_city_records.yaml'))
+}
+
+if (Test-RunModule -Name 'world-week') {
+  $worldWeek = Get-WorldWeekEntries
+  Write-WorldWeekFile -Events $worldWeek
+  $updatedFiles.Add((Join-Path $dataDir 'world_week.yaml'))
+}
 
 Write-Host "Updated Almanack module data for $($IssueDate.ToString('yyyy-MM-dd')) in $dataDir"
+foreach ($updatedFile in $updatedFiles) {
+  Write-Host " - $updatedFile"
+}

@@ -117,9 +117,12 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - Bob's Almanack collection-page modules are fed only by committed Hugo data under `data/almanack/`; Hugo templates must not call live APIs during a build.
 - The collection page uses:
   - `data/almanack/archive_links.yaml` for deterministic archive shelf marks keyed by short phrases and verified public OIP essay URLs.
+  - `data/almanack/archive_link_candidates.yaml` for generated archive-link review candidates. Templates must not consume this file directly.
   - `data/almanack/on_this_day.yaml` for date-keyed historical events with source URLs and a script `generated_at` timestamp.
   - `data/almanack/weather_city_records.yaml` for display-ready Fahrenheit min/mean/max calendar-date aggregates from fixed NOAA/GHCN station IDs since 1990.
   - `data/almanack/world_week.yaml` for ordered, source-linked world-week entries with a script `generated_at` timestamp and review note.
+- Run `scripts/update_almanack_modules.ps1` to refresh the whole local data set, or use the focused wrappers `scripts/update_almanack_archive_links.ps1`, `scripts/update_almanack_on_this_day.ps1`, `scripts/update_almanack_weather.ps1`, and `scripts/update_almanack_world_week.ps1`.
+- Almanack data scripts cache upstream source responses under `.tmp-almanack-cache/`, support `-RefreshCache`, and support `-ReviewOnly` output under `reports/almanack-data-review/<issue-date>/` before replacing committed Hugo data.
 - Section fronts use a label-free ledger line, a promoted `Start Here` entry, an ordered piece list, related collections, and quiet browse links.
 - The Start Here item is promoted once and omitted from the contents list immediately below it.
 - Collection pages do not render the visible `Reading Progress` panel, browser-local resume panel, visited-row markers, or collection-progress hooks.

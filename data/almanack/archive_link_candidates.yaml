@@ -1,0 +1,425 @@
+generated_at: '2026-05-09T22:20:53Z'
+issue_date: '2026-05-09'
+source:
+  name: 'Outside In Print Hugo essays'
+  path: 'content/essays'
+candidate_note: 'Generated from local metadata and body text. Review before moving selected paths into archive_links.yaml entries.'
+entries:
+  - key: 'public-costs'
+    label: 'Public Costs'
+    phrase: 'hidden public costs'
+    terms:
+      - 'budget'
+      - 'costs'
+      - 'flood'
+      - 'hidden'
+      - 'hidden public costs'
+      - 'infrastructure'
+      - 'pipe'
+      - 'public'
+      - 'public cost'
+      - 'public costs'
+      - 'sewer'
+      - 'taxpayer'
+      - 'water'
+    candidates:
+      - path: '/essays/the-sewer-under-the-sidewalk/'
+        url: 'https://outsideinprint.org/essays/the-sewer-under-the-sidewalk/'
+        title: 'The Sewer Under the Sidewalk'
+        date: '2026-04-22'
+        description: 'An essay on Alewife Brook, Boston-area combined sewer overflows, MWRA’s cleanup plan, and the public cost of climate-era pipe decisions.'
+        score: 49
+        already_listed: true
+        matched_terms:
+          - 'budget'
+          - 'costs'
+          - 'flood'
+          - 'infrastructure'
+          - 'pipe'
+          - 'public'
+          - 'public cost'
+          - 'sewer'
+          - 'water'
+        tags: []
+        collections:
+          - 'floods-water-built-environment'
+          - 'risk-uncertainty'
+      - path: '/essays/mingo-county-mud-in-the-water/'
+        url: 'https://outsideinprint.org/essays/mingo-county-mud-in-the-water/'
+        title: 'Mingo County: Mud in the Water'
+        date: '2025-03-24'
+        description: 'Mingo County''s water crisis shows how fragile small utility systems become when debt, deferred maintenance, weak capacity, and public-health risk converge.'
+        score: 36
+        already_listed: false
+        matched_terms:
+          - 'costs'
+          - 'flood'
+          - 'infrastructure'
+          - 'pipe'
+          - 'public'
+          - 'water'
+        tags: []
+        collections:
+          - 'floods-water-built-environment'
+      - path: '/essays/the-national-flood-insurance-program/'
+        url: 'https://outsideinprint.org/essays/the-national-flood-insurance-program/'
+        title: 'The National Flood Insurance Program'
+        date: '2024-12-15'
+        description: 'A Precarious Future Amid Rising Costs. Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the...'
+        score: 36
+        already_listed: false
+        matched_terms:
+          - 'costs'
+          - 'flood'
+          - 'infrastructure'
+          - 'public'
+          - 'taxpayer'
+          - 'water'
+        tags: []
+        collections:
+          - 'floods-water-built-environment'
+      - path: '/essays/how-tucson-az-plans-for-water-scarcity/'
+        url: 'https://outsideinprint.org/essays/how-tucson-az-plans-for-water-scarcity/'
+        title: 'How Tucson, AZ Plans for Water Scarcity'
+        date: '2025-09-22'
+        description: 'For decades it pumped groundwater faster than the aquifer could recharge, leading to shortages and sinkholes'
+        score: 30
+        already_listed: false
+        matched_terms:
+          - 'budget'
+          - 'costs'
+          - 'flood'
+          - 'public'
+          - 'water'
+        tags: []
+        collections:
+          - 'floods-water-built-environment'
+      - path: '/essays/flash-flood-alley-why-flash-floods-kill/'
+        url: 'https://outsideinprint.org/essays/flash-flood-alley-why-flash-floods-kill/'
+        title: 'Flash Flood Alley: Why Flash Floods Kill'
+        date: '2025-07-17'
+        description: 'Tourists come for the picturesque rivers and limestone cliffs. The region’s steep slopes and limestone bedrock make it one of the fastest-draining flood envi...'
+        score: 29
+        already_listed: false
+        matched_terms:
+          - 'flood'
+          - 'infrastructure'
+          - 'public'
+          - 'water'
+        tags: []
+        collections:
+          - 'floods-water-built-environment'
+  - key: 'risk-evidence'
+    label: 'Risk and Evidence'
+    phrase: 'risk, evidence, and uncertainty'
+    terms:
+      - 'evidence'
+      - 'forecast'
+      - 'hazard'
+      - 'model'
+      - 'probability'
+      - 'risk'
+      - 'risk and evidence'
+      - 'risk, evidence, and uncertainty'
+      - 'uncertainty'
+    candidates:
+      - path: '/essays/uncertainty-is-not-a-technical-problem/'
+        url: 'https://outsideinprint.org/essays/uncertainty-is-not-a-technical-problem/'
+        title: 'Uncertainty Is Not a Technical Problem'
+        date: '2026-01-21'
+        description: 'On uncertainty, risk modeling, and the incentives that reward precision over responsibility. We expect risk models to tell us what will happen.\ When they do...'
+        score: 38
+        already_listed: true
+        matched_terms:
+          - 'model'
+          - 'risk'
+          - 'uncertainty'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
+      - path: '/essays/what-is-risk-a-four-part-framework/'
+        url: 'https://outsideinprint.org/essays/what-is-risk-a-four-part-framework/'
+        title: 'What Is Risk? A Four-Part Framework'
+        date: '2025-08-29'
+        description: 'In everyday choices and technical work, four key terms help us define and articulate “risk.”. Hazard names the source of potential harm, pathway describes ho...'
+        score: 37
+        already_listed: true
+        matched_terms:
+          - 'evidence'
+          - 'forecast'
+          - 'hazard'
+          - 'model'
+          - 'probability'
+          - 'risk'
+          - 'uncertainty'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
+      - path: '/essays/risk-management-vs-risk-analysis-whats-the-difference/'
+        url: 'https://outsideinprint.org/essays/risk-management-vs-risk-analysis-whats-the-difference/'
+        title: 'Risk Management vs Risk Analysis: What’s the Difference?'
+        date: '2025-09-01'
+        description: 'This essay lays out the roles, responsibilities, and day-to-day realities of risk managers and risk analysts'
+        score: 30
+        already_listed: false
+        matched_terms:
+          - 'forecast'
+          - 'hazard'
+          - 'model'
+          - 'risk'
+          - 'uncertainty'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
+      - path: '/essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events/'
+        url: 'https://outsideinprint.org/essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events/'
+        title: 'It’s tough to weigh short term costs against what people perceive as low probability events.'
+        date: '2025-08-12'
+        description: 'It’s tough to weigh short term costs against what people perceive as low probability events'
+        score: 28
+        already_listed: false
+        matched_terms:
+          - 'probability'
+          - 'risk'
+          - 'uncertainty'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
+      - path: '/essays/the-risk-management-buffet/'
+        url: 'https://outsideinprint.org/essays/the-risk-management-buffet/'
+        title: 'The Risk Management Buffet'
+        date: '2025-10-12'
+        description: 'Imagine you’re at an American buffet something like Golden Corral. You walk in hungry, and you’re surrounded by endless options'
+        score: 22
+        already_listed: false
+        matched_terms:
+          - 'risk'
+          - 'uncertainty'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
+  - key: 'public-power'
+    label: 'Public Power'
+    phrase: 'law, agencies, and voting power'
+    terms:
+      - 'agencies'
+      - 'agency'
+      - 'court'
+      - 'district'
+      - 'federal'
+      - 'law'
+      - 'law, agencies, and voting power'
+      - 'power'
+      - 'public'
+      - 'public power'
+      - 'rights'
+      - 'state'
+      - 'statute'
+      - 'voting'
+    candidates:
+      - path: '/essays/when-can-states-draw-race-based-congressional-districts/'
+        url: 'https://outsideinprint.org/essays/when-can-states-draw-race-based-congressional-districts/'
+        title: 'When Can States Draw Race-Based Congressional Districts?'
+        date: '2026-04-30'
+        description: 'The Supreme Court''s Louisiana v. Callais ruling narrows the proof pathway for Section 2 redistricting claims and changes how race, party, maps, and remedies meet in voting-rights law.'
+        score: 92
+        already_listed: true
+        matched_terms:
+          - 'court'
+          - 'district'
+          - 'federal'
+          - 'law'
+          - 'power'
+          - 'public'
+          - 'rights'
+          - 'state'
+          - 'voting'
+        tags:
+          - 'Voting Rights Act'
+          - 'Supreme Court'
+          - 'Redistricting'
+          - 'Civil Rights'
+          - 'Law'
+        collections:
+          - 'civic-institutions-and-public-power'
+      - path: '/essays/the-warning-label-in-the-weeds/'
+        url: 'https://outsideinprint.org/essays/the-warning-label-in-the-weeds/'
+        title: 'The Warning Label in the Weeds'
+        date: '2026-04-27'
+        description: 'The Supreme Court''s Roundup case turns a weedkiller label into a test of federal power, state lawsuits, farming, and public trust.'
+        score: 38
+        already_listed: false
+        matched_terms:
+          - 'agencies'
+          - 'agency'
+          - 'court'
+          - 'federal'
+          - 'law'
+          - 'power'
+          - 'public'
+          - 'state'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
+      - path: '/essays/2025-supreme-court-wrap-up/'
+        url: 'https://outsideinprint.org/essays/2025-supreme-court-wrap-up/'
+        title: '2025 Supreme Court Wrap-Up'
+        date: '2025-07-01'
+        description: 'The U.S. Supreme Court ended its term last Friday, handing down rulings on four major cases that touch on the balance of power, civil rights, education, and...'
+        score: 32
+        already_listed: false
+        matched_terms:
+          - 'court'
+          - 'district'
+          - 'federal'
+          - 'law'
+          - 'power'
+          - 'public'
+          - 'rights'
+          - 'state'
+          - 'voting'
+        tags: []
+        collections: []
+      - path: '/essays/beyond-moores-law/'
+        url: 'https://outsideinprint.org/essays/beyond-moores-law/'
+        title: 'Beyond Moore’s Law'
+        date: '2025-01-23'
+        description: 'In our previous essay on Moore''s Law, we explored how the doubling of transistors every two years has driven unprecedented progress in computing power and sh...'
+        score: 29
+        already_listed: false
+        matched_terms:
+          - 'agency'
+          - 'law'
+          - 'power'
+          - 'public'
+          - 'state'
+        tags: []
+        collections:
+          - 'technology-ai-machine-future'
+          - 'geopolitics-trade-global-power'
+      - path: '/essays/federalism-in-modern-american-society/'
+        url: 'https://outsideinprint.org/essays/federalism-in-modern-american-society/'
+        title: 'Federalism in Modern American Society'
+        date: '2024-12-09'
+        description: 'American federalism ~ the distribution of authority between national and state governments ~ has been a defining feature of governance in the United States s...'
+        score: 26
+        already_listed: false
+        matched_terms:
+          - 'agencies'
+          - 'court'
+          - 'federal'
+          - 'law'
+          - 'power'
+          - 'public'
+          - 'rights'
+          - 'state'
+        tags: []
+        collections: []
+  - key: 'counting-consequences'
+    label: 'Counting Consequences'
+    phrase: 'decision costs and consequences'
+    terms:
+      - 'consequence'
+      - 'consequences'
+      - 'costs'
+      - 'count'
+      - 'counting'
+      - 'counting consequences'
+      - 'decision'
+      - 'decision costs and consequences'
+      - 'measure'
+      - 'outcome'
+      - 'risk management'
+      - 'tradeoff'
+    candidates:
+      - path: '/essays/the-factory-in-the-footnote/'
+        url: 'https://outsideinprint.org/essays/the-factory-in-the-footnote/'
+        title: 'The Factory in the Footnote'
+        date: '2026-05-06'
+        description: 'The SEC climate-disclosure reversal turns a dormant rule into a larger test of investor materiality, carbon accounting, industrial capacity, and national cost.'
+        score: 29
+        already_listed: false
+        matched_terms:
+          - 'costs'
+          - 'count'
+          - 'counting'
+          - 'decision'
+          - 'measure'
+          - 'risk management'
+          - 'tradeoff'
+        tags:
+          - 'SEC'
+          - 'Climate Disclosure'
+          - 'Carbon Accounting'
+          - 'Industrial Policy'
+          - 'Materiality'
+          - 'Public Markets'
+          - 'Carbon Leakage'
+        collections:
+          - 'civic-institutions-and-public-power'
+      - path: '/essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events/'
+        url: 'https://outsideinprint.org/essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events/'
+        title: 'It’s tough to weigh short term costs against what people perceive as low probability events.'
+        date: '2025-08-12'
+        description: 'It’s tough to weigh short term costs against what people perceive as low probability events'
+        score: 20
+        already_listed: false
+        matched_terms:
+          - 'consequence'
+          - 'consequences'
+          - 'costs'
+          - 'count'
+          - 'counting'
+          - 'decision'
+          - 'risk management'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
+      - path: '/essays/mingo-county-mud-in-the-water/'
+        url: 'https://outsideinprint.org/essays/mingo-county-mud-in-the-water/'
+        title: 'Mingo County: Mud in the Water'
+        date: '2025-03-24'
+        description: 'Mingo County''s water crisis shows how fragile small utility systems become when debt, deferred maintenance, weak capacity, and public-health risk converge.'
+        score: 18
+        already_listed: false
+        matched_terms:
+          - 'consequence'
+          - 'costs'
+          - 'count'
+          - 'decision'
+          - 'tradeoff'
+        tags: []
+        collections:
+          - 'floods-water-built-environment'
+      - path: '/essays/etfs-and-market-concentration/'
+        url: 'https://outsideinprint.org/essays/etfs-and-market-concentration/'
+        title: 'ETFs and Market Concentration'
+        date: '2024-12-14'
+        description: 'ETFs, Passive Investing, and Market Concentration. I. Introduction: The Unintended Consequences of ETF Dominance'
+        score: 15
+        already_listed: false
+        matched_terms:
+          - 'consequence'
+          - 'consequences'
+          - 'costs'
+          - 'count'
+          - 'counting'
+        tags: []
+        collections: []
+      - path: '/essays/the-risk-management-buffet/'
+        url: 'https://outsideinprint.org/essays/the-risk-management-buffet/'
+        title: 'The Risk Management Buffet'
+        date: '2025-10-12'
+        description: 'Imagine you’re at an American buffet something like Golden Corral. You walk in hungry, and you’re surrounded by endless options'
+        score: 14
+        already_listed: true
+        matched_terms:
+          - 'consequence'
+          - 'count'
+          - 'decision'
+          - 'measure'
+          - 'outcome'
+          - 'risk management'
+        tags: []
+        collections:
+          - 'risk-uncertainty'
