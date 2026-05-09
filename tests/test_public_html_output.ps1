@@ -2511,6 +2511,22 @@ $requiredUxChecks = @(
     Message = 'expected the May 9 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
   },
   @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the May 9 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '(?s)/images/editorial/modern-prometheus\.png.*?/images/editorial/lump-of-coal\.png.*?/images/editorial/pass-the-pepper\.png.*?/images/editorial/who-paid-the-nazis\.png'
+    Message = 'expected the May 9 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '/images/essays/(modern-prometheus|the-factory-in-the-footnote|can-you-pass-the-pepper-please|the-hate-ledger)/hero\.png'
+    Message = 'expected the May 9 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/index.html'
     Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 9, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Resolution.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
