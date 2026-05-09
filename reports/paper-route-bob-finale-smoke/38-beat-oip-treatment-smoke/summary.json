@@ -1,0 +1,104 @@
+[
+  {
+    "label": "desktop",
+    "captures": [
+      {
+        "label": "desktop",
+        "target": 12,
+        "actual": 12,
+        "beat": "puddle-wheelie",
+        "sidePanels": true,
+        "oipTreatment": true,
+        "porch": false,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\desktop-frame-12-actual-12.png"
+      },
+      {
+        "label": "desktop",
+        "target": 22,
+        "actual": 22,
+        "beat": "paper-throw",
+        "sidePanels": true,
+        "oipTreatment": true,
+        "porch": false,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\desktop-frame-22-actual-22.png"
+      },
+      {
+        "label": "desktop",
+        "target": 23,
+        "actual": 24,
+        "beat": "paper-follow",
+        "sidePanels": false,
+        "oipTreatment": false,
+        "porch": true,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\desktop-frame-23-actual-24.png"
+      },
+      {
+        "label": "desktop",
+        "target": 38,
+        "actual": 38,
+        "beat": "stamp-ink",
+        "sidePanels": false,
+        "oipTreatment": false,
+        "porch": true,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\desktop-frame-38-actual-38.png"
+      }
+    ],
+    "consoleIssues": [],
+    "pageErrors": []
+  },
+  {
+    "label": "mobile",
+    "captures": [
+      {
+        "label": "mobile",
+        "target": 12,
+        "actual": 12,
+        "beat": "puddle-wheelie",
+        "sidePanels": true,
+        "oipTreatment": true,
+        "porch": false,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\mobile-frame-12-actual-12.png"
+      },
+      {
+        "label": "mobile",
+        "target": 22,
+        "actual": 22,
+        "beat": "paper-throw",
+        "sidePanels": true,
+        "oipTreatment": true,
+        "porch": false,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\mobile-frame-22-actual-22.png"
+      },
+      {
+        "label": "mobile",
+        "target": 23,
+        "actual": 23,
+        "beat": "paper-follow",
+        "sidePanels": false,
+        "oipTreatment": false,
+        "porch": true,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\mobile-frame-23-actual-23.png"
+      },
+      {
+        "label": "mobile",
+        "target": 38,
+        "actual": 38,
+        "beat": "stamp-ink",
+        "sidePanels": false,
+        "oipTreatment": false,
+        "porch": true,
+        "summary": false,
+        "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\mobile-frame-38-actual-38.png"
+      }
+    ],
+    "consoleIssues": [],
+    "pageErrors": []
+  }
+]

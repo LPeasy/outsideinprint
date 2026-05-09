@@ -1,0 +1,26 @@
+[
+  {
+    "label": "desktop",
+    "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\desktop-final-hold.png",
+    "frame": 38,
+    "beat": "results",
+    "sidePanels": false,
+    "oipTreatment": false,
+    "porch": true,
+    "summary": true,
+    "consoleIssues": [],
+    "pageErrors": []
+  },
+  {
+    "label": "mobile",
+    "screenshot": "reports\\paper-route-bob-finale-smoke\\38-beat-oip-treatment-smoke\\mobile-final-hold.png",
+    "frame": 38,
+    "beat": "results",
+    "sidePanels": false,
+    "oipTreatment": false,
+    "porch": true,
+    "summary": true,
+    "consoleIssues": [],
+    "pageErrors": []
+  }
+]
