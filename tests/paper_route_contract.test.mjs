@@ -185,6 +185,25 @@ test("Paper-Bob cropped sprite manifest entries point to real PNG files with met
     "intro_bob_turn_left_01",
     "intro_bob_turn_right_01",
     "intro_logo_paper_bob",
+    "intro_sketch_bob_ride_01",
+    "intro_sketch_bob_ride_02",
+    "intro_sketch_bob_ride_03",
+    "intro_sketch_bob_ride_04",
+    "intro_sketch_bob_ride_05",
+    "intro_sketch_bob_ride_06",
+    "intro_sketch_bob_spot_finale_01",
+    "intro_sketch_bob_spot_finale_02",
+    "intro_sketch_bob_spot_finale_03",
+    "intro_sketch_bob_spot_finale_04",
+    "intro_sketch_bob_spot_finale_05",
+    "intro_sketch_bob_spot_finale_06",
+    "intro_sketch_logo_bw",
+    "intro_sketch_spot_paper_side_01",
+    "intro_sketch_spot_paper_side_02",
+    "intro_sketch_spot_paper_side_03",
+    "intro_sketch_spot_paper_side_04",
+    "intro_sketch_spot_paper_side_05",
+    "intro_sketch_spot_paper_side_06",
     "spot_run_back_01",
     "spot_run_back_02",
     "spot_run_back_03",
@@ -402,8 +421,13 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /track_right_06/);
   assert.match(game, /INTRO_DURATION = 7\.6/);
   assert.match(game, /INTRO_BEAT_SEQUENCE/);
+  assert.match(game, /key: "sketch-draw", start: 0, end: 1\.1/);
   assert.match(game, /key: "spot-cross", start: 3\.1, end: 4\.6/);
   assert.match(game, /INTRO_BOB_SPOT_FINALE_FRAMES = \["intro_bob_spot_finale_01"/);
+  assert.match(game, /INTRO_SKETCH_BOB_RIDE_FRAMES = \["intro_sketch_bob_ride_01"/);
+  assert.match(game, /INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES = \["intro_sketch_spot_paper_side_01"/);
+  assert.match(game, /INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES = \["intro_sketch_bob_spot_finale_01"/);
+  assert.match(game, /introColorBlendAt/);
   assert.match(game, /SPOT_RUN_PAPER_SIDE_FRAMES = \["spot_run_paper_side_01"/);
   assert.match(game, /spots: 1/);
   assert.match(game, /spotFirstDelay: 8000/);
@@ -425,12 +449,22 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /PaperRouteGame\.prototype\.bounceSpotAfterHit/);
   assert.match(game, /spotNextIn/);
   assert.match(game, /visibleSpots/);
+  assert.match(game, /create\("introSketchBobRide", INTRO_SKETCH_BOB_RIDE_FRAMES, 7, -1\)/);
+  assert.match(game, /create\("introSketchSpotPaperSide", INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES, 8, -1\)/);
+  assert.match(game, /create\("introSketchBobSpotFinale", INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES, 4, 0\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.createIntroSketchObjects/);
+  assert.match(game, /PaperRouteGame\.prototype\.drawIntroSketchDecor/);
+  assert.match(game, /PaperRouteGame\.prototype\.holdIntroSketchFinale[\s\S]*this\.reducedMotion[\s\S]*introSketchLayer\.setVisible\(false\)/);
   assert.match(game, /introBeat/);
   assert.match(game, /introBobFrame/);
   assert.match(game, /introSpotFrame/);
   assert.match(game, /introFinaleFrame/);
   assert.match(game, /introSpotVisible/);
   assert.match(game, /introFinaleVisible/);
+  assert.match(game, /introSketchVisible/);
+  assert.match(game, /introSketchReveal/);
+  assert.match(game, /introColorBlend/);
+  assert.match(game, /introSketchFrame/);
   assert.match(game, /targetGroups/);
   assert.match(game, /trackSegmentSpawnBuffer: 90/);
   assert.doesNotMatch(game, /PROPERTY_CONFIGS|SIDE_BASE_FRAMES|side_base_left_01|side_base_right_03|fallbackFrame: "property_left_01"|fallbackFrame: "property_right_03"/);

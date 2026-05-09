@@ -149,14 +149,17 @@
   };
   var INTRO_DURATION = 7.6;
   var INTRO_BEAT_SEQUENCE = [
-    { key: "logo", start: 0, end: .8 },
-    { key: "bob-ride", start: .8, end: 3.1 },
+    { key: "sketch-draw", start: 0, end: 1.1 },
+    { key: "bob-ride", start: 1.1, end: 3.1 },
     { key: "spot-cross", start: 3.1, end: 4.6 },
     { key: "finale", start: 4.6, end: 6.4 },
     { key: "hold", start: 6.4, end: 7.6 }
   ];
   var INTRO_RIDE_FRAMES = ["intro_bob_ride_front_01", "intro_bob_ride_front_02", "intro_bob_ride_front_03", "intro_bob_ride_front_04", "intro_bob_ride_front_05", "intro_bob_ride_front_06"];
   var INTRO_BOB_SPOT_FINALE_FRAMES = ["intro_bob_spot_finale_01", "intro_bob_spot_finale_02", "intro_bob_spot_finale_03", "intro_bob_spot_finale_04", "intro_bob_spot_finale_05", "intro_bob_spot_finale_06"];
+  var INTRO_SKETCH_BOB_RIDE_FRAMES = ["intro_sketch_bob_ride_01", "intro_sketch_bob_ride_02", "intro_sketch_bob_ride_03", "intro_sketch_bob_ride_04", "intro_sketch_bob_ride_05", "intro_sketch_bob_ride_06"];
+  var INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES = ["intro_sketch_spot_paper_side_01", "intro_sketch_spot_paper_side_02", "intro_sketch_spot_paper_side_03", "intro_sketch_spot_paper_side_04", "intro_sketch_spot_paper_side_05", "intro_sketch_spot_paper_side_06"];
+  var INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES = ["intro_sketch_bob_spot_finale_01", "intro_sketch_bob_spot_finale_02", "intro_sketch_bob_spot_finale_03", "intro_sketch_bob_spot_finale_04", "intro_sketch_bob_spot_finale_05", "intro_sketch_bob_spot_finale_06"];
   var SPOT_SIDE_FRAMES = ["spot_run_side_01", "spot_run_side_02", "spot_run_side_03", "spot_run_side_04", "spot_run_side_05", "spot_run_side_06"];
   var SPOT_RUN_PAPER_SIDE_FRAMES = ["spot_run_paper_side_01", "spot_run_paper_side_02", "spot_run_paper_side_03", "spot_run_paper_side_04", "spot_run_paper_side_05", "spot_run_paper_side_06"];
   var SPOT_FRONT_FRAMES = ["spot_run_front_01", "spot_run_front_02", "spot_run_front_03"];
@@ -247,6 +250,20 @@
     }
 
     return INTRO_BEAT_SEQUENCE[INTRO_BEAT_SEQUENCE.length - 1];
+  }
+
+  function introColorBlendAt(time) {
+    if (time < 3.1) {
+      return 0;
+    }
+    if (time < 4.6) {
+      return easeOutCubic((time - 3.1) / 1.5) * .12;
+    }
+    if (time < 6.4) {
+      return .12 + easeOutCubic((time - 4.6) / 1.8) * .88;
+    }
+
+    return 1;
   }
 
   function frameFromTime(frames, elapsed, frameRate, clampToEnd) {
@@ -449,7 +466,9 @@
     this.player = null;
     this.finalScoreText = null;
     this.introLayer = null;
+    this.introSketchLayer = null;
     this.introObjects = {};
+    this.introSketchObjects = {};
     this.keys = {};
     this.heldLeft = false;
     this.heldRight = false;
@@ -488,6 +507,9 @@
     this.introBobFrame = "";
     this.introSpotFrame = "";
     this.introFinaleFrame = "";
+    this.introSketchReveal = 0;
+    this.introColorBlend = 0;
+    this.introSketchFrame = "";
     this.playerPose = "";
     this.poseHoldUntil = 0;
     this.heldPose = "";
@@ -974,6 +996,9 @@
 
     create("introBobRideFront", INTRO_RIDE_FRAMES, 7, -1);
     create("introBobSpotFinale", INTRO_BOB_SPOT_FINALE_FRAMES, 4, 0);
+    create("introSketchBobRide", INTRO_SKETCH_BOB_RIDE_FRAMES, 7, -1);
+    create("introSketchSpotPaperSide", INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES, 8, -1);
+    create("introSketchBobSpotFinale", INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES, 4, 0);
     create("spotRunSide", SPOT_SIDE_FRAMES, 8, -1);
     create("spotRunPaperSide", SPOT_RUN_PAPER_SIDE_FRAMES, 8, -1);
     create("spotRunFront", SPOT_FRONT_FRAMES, 8, -1);
@@ -1699,6 +1724,180 @@
     }
   };
 
+  PaperRouteGame.prototype.createIntroSketchObjects = function (scene) {
+    this.introSketchLayer = scene.add.container(0, 0);
+    this.introSketchLayer.setDepth(39);
+    this.introSketchObjects = {
+      paperWash: scene.add.rectangle(this.width * .5, this.height * .5, this.width, this.height, 0xf5ecd7, .82),
+      decor: scene.add.graphics(),
+      bob: scene.add.sprite(this.width * .5, this.height * .56, "paperBobIntro", INTRO_SKETCH_BOB_RIDE_FRAMES[0]),
+      spot: scene.add.sprite(this.width * .74, this.height * .66, "paperBobIntro", INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES[0]),
+      finale: scene.add.sprite(this.width * .46, this.height * .63, "paperBobIntro", INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES[0]),
+      logo: scene.add.image(this.width * .5, this.height * .17, "paperBobIntro", "intro_sketch_logo_bw")
+    };
+    this.introSketchObjects.paperWash.setVisible(true);
+    this.introSketchObjects.bob.setVisible(false);
+    this.introSketchObjects.spot.setVisible(false);
+    this.introSketchObjects.spot.setScale(.52);
+    this.introSketchObjects.finale.setVisible(false);
+    this.introSketchObjects.finale.setScale(.82);
+    this.introSketchObjects.logo.setDisplaySize(Math.min(220, this.width * .48), Math.min(56, this.width * .12));
+    this.introSketchLayer.add([
+      this.introSketchObjects.paperWash,
+      this.introSketchObjects.decor,
+      this.introSketchObjects.bob,
+      this.introSketchObjects.spot,
+      this.introSketchObjects.finale,
+      this.introSketchObjects.logo
+    ]);
+    this.drawIntroSketchDecor(0, 0, "sketch-draw", 0);
+  };
+
+  PaperRouteGame.prototype.drawIntroSketchDecor = function (reveal, colorBlend, beatKey, beatProgress) {
+    var objects = this.introSketchObjects || {};
+    var g = objects.decor;
+    var wash = objects.paperWash;
+    var width = this.width;
+    var height = this.height;
+    var roadLeft = this.roadLeft;
+    var roadRight = this.roadRight;
+    var routeOffset = this.routeOffset || 0;
+    var ink = 0x251f1a;
+    var softInk = 0x6b5a45;
+    var lineAlpha;
+    var panelOffset;
+    var i;
+
+    reveal = clamp(reveal, 0, 1);
+    colorBlend = clamp(colorBlend, 0, 1);
+    this.introSketchReveal = Math.round(reveal * 1000) / 1000;
+    this.introColorBlend = Math.round(colorBlend * 1000) / 1000;
+
+    if (!g) {
+      return;
+    }
+
+    if (this.introSketchLayer) {
+      this.introSketchLayer.setVisible(!this.reducedMotion);
+    }
+    if (wash) {
+      wash.setPosition(width * .5, height * .5);
+      wash.setSize(width, height);
+      wash.setAlpha(this.reducedMotion ? 0 : .82 * (1 - colorBlend));
+      wash.setVisible(!this.reducedMotion);
+    }
+
+    g.clear();
+    if (this.reducedMotion) {
+      return;
+    }
+
+    lineAlpha = .88 - colorBlend * .56;
+
+    function line(x1, y1, x2, y2, start, end, alpha, widthOverride, color) {
+      var amount;
+
+      start = start === undefined ? 0 : start;
+      end = end === undefined ? 1 : end;
+      if (reveal <= start) {
+        return;
+      }
+      amount = clamp((reveal - start) / Math.max(.01, end - start), 0, 1);
+      g.lineStyle(widthOverride || 2, color || ink, alpha === undefined ? lineAlpha : alpha);
+      g.strokeLineShape(new window.Phaser.Geom.Line(
+        x1,
+        y1,
+        x1 + (x2 - x1) * amount,
+        y1 + (y2 - y1) * amount
+      ));
+    }
+
+    function rect(x, y, w, h, start, end, alpha) {
+      line(x, y, x + w, y, start, end, alpha);
+      line(x + w, y, x + w, y + h, start + .03, end + .03, alpha);
+      line(x + w, y + h, x, y + h, start + .06, end + .06, alpha);
+      line(x, y + h, x, y, start + .09, end + .09, alpha);
+    }
+
+    line(roadLeft, -8, roadLeft, height + 12, .02, .34, lineAlpha, 3);
+    line(roadRight, -8, roadRight, height + 12, .08, .42, lineAlpha, 3);
+    line(roadLeft + 10, -8, roadLeft + 10, height + 12, .18, .56, lineAlpha * .72, 1, softInk);
+    line(roadRight - 10, -8, roadRight - 10, height + 12, .2, .58, lineAlpha * .72, 1, softInk);
+
+    for (i = -1; i < 10; i += 1) {
+      line(width * .5, i * 104 + (routeOffset * .32) % 104, width * .5, i * 104 + 44 + (routeOffset * .32) % 104, .28 + i * .018, .68 + i * .018, lineAlpha * .72, 2, softInk);
+    }
+
+    panelOffset = (routeOffset * .12) % 188;
+    for (i = -1; i < 7; i += 1) {
+      var y = i * 188 + panelOffset - 80;
+      var leftX = 28 + (i % 2) * 10;
+      var rightX = roadRight + 42 + (i % 2) * 8;
+      rect(leftX, y, Math.max(54, roadLeft - leftX - 32), 74, .22 + i * .025, .68 + i * .025, lineAlpha * .68);
+      rect(leftX + 12, y + 14, 26, 22, .34 + i * .025, .74 + i * .025, lineAlpha * .58);
+      line(leftX + 4, y + 72, roadLeft - 18, y + 104, .42 + i * .02, .76 + i * .02, lineAlpha * .5, 1, softInk);
+      rect(rightX, y + 62, Math.max(52, width - rightX - 30), 74, .24 + i * .025, .7 + i * .025, lineAlpha * .68);
+      rect(rightX + 18, y + 78, 26, 22, .36 + i * .025, .76 + i * .025, lineAlpha * .58);
+      line(roadRight + 18, y + 144, rightX + 16, y + 118, .42 + i * .02, .76 + i * .02, lineAlpha * .5, 1, softInk);
+    }
+
+    if (beatKey === "bob-ride" || beatKey === "spot-cross") {
+      for (i = 0; i < 6; i += 1) {
+        line(roadLeft + 20 + i * 8, height * (.38 + i * .055), roadLeft + 62 + i * 7, height * (.36 + i * .055), .55, 1, lineAlpha * .45, 1, softInk);
+        line(roadRight - 60 - i * 7, height * (.43 + i * .052), roadRight - 18 - i * 8, height * (.41 + i * .052), .55, 1, lineAlpha * .45, 1, softInk);
+      }
+    }
+
+    if (beatKey === "spot-cross") {
+      g.lineStyle(2, softInk, lineAlpha * .55);
+      for (i = 0; i < 3; i += 1) {
+        g.strokeCircle(width * (.66 + i * .035), height * .64 + i * 3, 6 + i * 3 + (beatProgress || 0) * 5);
+      }
+    }
+  };
+
+  PaperRouteGame.prototype.holdIntroSketchFinale = function () {
+    var sketch = this.introSketchObjects || {};
+    var finale = sketch.finale;
+    var logo = sketch.logo;
+
+    if (this.reducedMotion) {
+      if (this.introSketchLayer) {
+        this.introSketchLayer.setVisible(false);
+      }
+      this.introSketchFrame = "";
+      this.introSketchReveal = 1;
+      this.introColorBlend = 1;
+      return;
+    }
+
+    this.drawIntroSketchDecor(1, 1, "hold", 1);
+    if (this.introSketchLayer) {
+      this.introSketchLayer.setVisible(true);
+    }
+    if (finale) {
+      finale.setTexture("paperBobIntro", INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES[INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES.length - 1]);
+      finale.setPosition(this.width * .46, this.height * .63);
+      finale.setScale(.82);
+      finale.setAngle(0);
+      finale.setAlpha(.16);
+      finale.setVisible(true);
+      this.introSketchFrame = INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES[INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES.length - 1];
+    }
+    if (sketch.bob) {
+      sketch.bob.setVisible(false);
+    }
+    if (sketch.spot) {
+      sketch.spot.setVisible(false);
+    }
+    if (logo) {
+      logo.setPosition(this.width * .5, this.height * .17);
+      logo.setDisplaySize(Math.min(220, this.width * .48), Math.min(56, this.width * .12));
+      logo.setAlpha(.14);
+      logo.setVisible(true);
+    }
+  };
+
   PaperRouteGame.prototype.createIntroObjects = function () {
     var scene = this.scene;
 
@@ -1709,7 +1908,11 @@
     if (this.introLayer) {
       this.introLayer.destroy(true);
     }
+    if (this.introSketchLayer) {
+      this.introSketchLayer.destroy(true);
+    }
 
+    this.createIntroSketchObjects(scene);
     this.introLayer = scene.add.container(0, 0);
     this.introLayer.setDepth(40);
     this.introObjects = {
@@ -1724,11 +1927,15 @@
     this.introObjects.finale.setDepth(44);
     this.introObjects.logo.setDepth(45);
     this.introObjects.logo.setVisible(true);
+    this.introObjects.logo.setAlpha(0);
     this.introObjects.logo.setDisplaySize(Math.min(220, this.width * .48), Math.min(56, this.width * .12));
+    this.introObjects.bob.setAlpha(0);
     this.introObjects.spot.setVisible(false);
     this.introObjects.spot.setScale(.52);
+    this.introObjects.spot.setAlpha(0);
     this.introObjects.finale.setVisible(false);
     this.introObjects.finale.setScale(.82);
+    this.introObjects.finale.setAlpha(0);
     this.introObjects.shade.setDepth(50);
     this.introObjects.shade.setVisible(false);
     this.introLayer.add([this.introObjects.bob, this.introObjects.spot, this.introObjects.finale, this.introObjects.logo, this.introObjects.shade]);
@@ -1737,6 +1944,9 @@
     this.introBobFrame = "intro_bob_ride_front_01";
     this.introSpotFrame = "";
     this.introFinaleFrame = "";
+    this.introSketchReveal = 0;
+    this.introColorBlend = 0;
+    this.introSketchFrame = "intro_sketch_logo_bw";
   };
 
   PaperRouteGame.prototype.positionIntroFinale = function (frameName) {
@@ -1769,6 +1979,9 @@
     this.introBobFrame = "";
     this.introSpotFrame = "";
     this.introFinaleFrame = "";
+    this.introSketchReveal = 0;
+    this.introColorBlend = 0;
+    this.introSketchFrame = "";
     this.setIntroPanel(true);
     this.setIntroProgress(0);
     this.setIntroReadyControls(false);
@@ -1841,6 +2054,7 @@
     if (finale) {
       finale.anims.stop();
       this.positionIntroFinale(INTRO_BOB_SPOT_FINALE_FRAMES[INTRO_BOB_SPOT_FINALE_FRAMES.length - 1]);
+      finale.setAlpha(1);
     }
     if (logo) {
       logo.setVisible(true);
@@ -1848,6 +2062,7 @@
       logo.setAngle(0);
       logo.setAlpha(1);
     }
+    this.holdIntroSketchFinale();
     if (this.stage) {
       this.stage.classList.add("paper-route-stage--intro-ready");
     }
@@ -1861,11 +2076,21 @@
     var beat;
     var beatProgress;
     var frame;
+    var sketchFrame;
+    var sketchReveal;
+    var colorBlend;
+    var colorAlpha;
+    var sketchAlpha;
     var bob = this.introObjects.bob;
     var spot = this.introObjects.spot;
     var finale = this.introObjects.finale;
     var logo = this.introObjects.logo;
     var shade = this.introObjects.shade;
+    var sketch = this.introSketchObjects || {};
+    var sketchBob = sketch.bob;
+    var sketchSpot = sketch.spot;
+    var sketchFinale = sketch.finale;
+    var sketchLogo = sketch.logo;
     var centerX = this.width * .5;
     var logoWidth = Math.min(220, this.width * .48);
     var logoHeight = Math.min(56, this.width * .12);
@@ -1879,6 +2104,10 @@
     beat = introBeatAt(t);
     beatProgress = clamp((t - beat.start) / Math.max(.01, beat.end - beat.start), 0, 1);
     progress = t / INTRO_DURATION;
+    colorBlend = introColorBlendAt(t);
+    colorAlpha = colorBlend;
+    sketchAlpha = Math.max(.16, 1 - colorBlend * .84);
+    sketchReveal = beat.key === "sketch-draw" ? easeOutCubic(beatProgress) : 1;
     this.introBeat = beat.key;
     if (this.introPrepComplete) {
       this.setIntroProgress(1);
@@ -1887,6 +2116,7 @@
     }
     this.routeOffset += (120 + progress * 42) * deltaSeconds;
     this.redrawBackground();
+    this.drawIntroSketchDecor(sketchReveal, colorBlend, beat.key, beatProgress);
 
     if (shade) {
       shade.setSize(this.width, this.height);
@@ -1896,36 +2126,63 @@
     }
 
     if (bob) {
-      if (beat.key === "logo") {
+      if (beat.key === "sketch-draw") {
         bob.setVisible(false);
         this.introBobFrame = "";
+        if (sketchBob) {
+          sketchBob.setVisible(false);
+        }
       } else if (beat.key === "bob-ride") {
         frame = frameFromTime(INTRO_RIDE_FRAMES, t - beat.start, 8, false);
+        sketchFrame = frameFromTime(INTRO_SKETCH_BOB_RIDE_FRAMES, t - beat.start, 8, false);
         bob.setTexture("paperBobIntro", frame);
         bob.setPosition(centerX + Math.sin(t * 2.4) * 18, this.height * (.38 + easeOutCubic(beatProgress) * .18));
         bob.setScale(.52 + easeOutCubic(beatProgress) * .24 + Math.sin(t * 3.2) * .012);
         bob.setAngle(Math.sin(t * 2.6) * 3.2);
-        bob.setAlpha(1);
+        bob.setAlpha(colorAlpha);
         bob.setVisible(true);
         this.introBobFrame = frame;
+        if (sketchBob) {
+          sketchBob.setTexture("paperBobIntro", sketchFrame);
+          sketchBob.setPosition(bob.x, bob.y);
+          sketchBob.setScale(bob.scaleX, bob.scaleY);
+          sketchBob.setAngle(bob.angle);
+          sketchBob.setAlpha(sketchAlpha);
+          sketchBob.setVisible(true);
+          this.introSketchFrame = sketchFrame;
+        }
       } else if (beat.key === "spot-cross") {
         frame = INTRO_RIDE_FRAMES[Math.min(INTRO_RIDE_FRAMES.length - 1, 3)];
+        sketchFrame = INTRO_SKETCH_BOB_RIDE_FRAMES[Math.min(INTRO_SKETCH_BOB_RIDE_FRAMES.length - 1, 3)];
         bob.setTexture("paperBobIntro", frame);
         bob.setPosition(this.width * .42, this.height * .56);
         bob.setScale(.76);
         bob.setAngle(Math.sin(t * 5) * 1.1);
-        bob.setAlpha(1);
+        bob.setAlpha(colorAlpha);
         bob.setVisible(true);
         this.introBobFrame = frame;
+        if (sketchBob) {
+          sketchBob.setTexture("paperBobIntro", sketchFrame);
+          sketchBob.setPosition(bob.x, bob.y);
+          sketchBob.setScale(bob.scaleX, bob.scaleY);
+          sketchBob.setAngle(bob.angle);
+          sketchBob.setAlpha(sketchAlpha);
+          sketchBob.setVisible(true);
+          this.introSketchFrame = sketchFrame;
+        }
       } else {
         bob.setVisible(false);
         this.introBobFrame = "";
+        if (sketchBob) {
+          sketchBob.setVisible(false);
+        }
       }
     }
 
     if (spot) {
       if (beat.key === "spot-cross") {
         frame = frameFromTime(SPOT_RUN_PAPER_SIDE_FRAMES, t - beat.start, 8, false);
+        sketchFrame = frameFromTime(INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES, t - beat.start, 8, false);
         spot.setTexture("paperBobIntro", frame);
         spot.setPosition(
           this.width + 80 - easeOutCubic(beatProgress) * (this.width * .36 + 80),
@@ -1934,11 +2191,25 @@
         spot.setScale(.5 + beatProgress * .04);
         spot.setFlipX(true);
         spot.setAngle(Math.sin(t * 10) * 1.8);
+        spot.setAlpha(colorAlpha);
         spot.setVisible(true);
         this.introSpotFrame = frame;
+        if (sketchSpot) {
+          sketchSpot.setTexture("paperBobIntro", sketchFrame);
+          sketchSpot.setPosition(spot.x, spot.y);
+          sketchSpot.setScale(spot.scaleX, spot.scaleY);
+          sketchSpot.setFlipX(true);
+          sketchSpot.setAngle(spot.angle);
+          sketchSpot.setAlpha(sketchAlpha);
+          sketchSpot.setVisible(true);
+          this.introSketchFrame = sketchFrame;
+        }
       } else {
         spot.setVisible(false);
         this.introSpotFrame = "";
+        if (sketchSpot) {
+          sketchSpot.setVisible(false);
+        }
       }
     }
 
@@ -1947,23 +2218,51 @@
         frame = beat.key === "finale"
           ? frameFromTime(INTRO_BOB_SPOT_FINALE_FRAMES, t - beat.start, 3.4, true)
           : INTRO_BOB_SPOT_FINALE_FRAMES[INTRO_BOB_SPOT_FINALE_FRAMES.length - 1];
+        sketchFrame = beat.key === "finale"
+          ? frameFromTime(INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES, t - beat.start, 3.4, true)
+          : INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES[INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES.length - 1];
         this.positionIntroFinale(frame);
-        finale.setAlpha(beat.key === "finale" ? Math.max(.35, easeOutCubic(beatProgress)) : 1);
+        finale.setAlpha(colorAlpha);
+        if (sketchFinale) {
+          sketchFinale.setTexture("paperBobIntro", sketchFrame);
+          sketchFinale.setPosition(finale.x, finale.y);
+          sketchFinale.setScale(finale.scaleX, finale.scaleY);
+          sketchFinale.setAngle(finale.angle);
+          sketchFinale.setAlpha(beat.key === "hold" ? .16 : sketchAlpha);
+          sketchFinale.setVisible(true);
+          this.introSketchFrame = sketchFrame;
+        }
       } else {
         finale.setVisible(false);
         this.introFinaleFrame = "";
+        if (sketchFinale) {
+          sketchFinale.setVisible(false);
+        }
       }
     }
 
     if (logo) {
       logo.setVisible(true);
-      logo.setAlpha(1);
+      logo.setAlpha(colorAlpha);
       logo.setDisplaySize(
         logoWidth * (.78 + easeOutCubic(Math.min(t / .8, 1)) * .22),
         logoHeight * (.78 + easeOutCubic(Math.min(t / .8, 1)) * .22)
       );
       logo.setPosition(this.width * .5 + Math.sin(t * 1.8) * 2, this.height * .17);
       logo.setAngle((1 - easeOutCubic(Math.min(t / .8, 1))) * -3 + Math.sin(t * 1.4) * .45);
+    }
+    if (sketchLogo) {
+      sketchLogo.setVisible(true);
+      sketchLogo.setAlpha(Math.max(.14, 1 - colorBlend * .86));
+      sketchLogo.setDisplaySize(
+        logoWidth * (.78 + easeOutCubic(Math.min(t / .8, 1)) * .22),
+        logoHeight * (.78 + easeOutCubic(Math.min(t / .8, 1)) * .22)
+      );
+      sketchLogo.setPosition(this.width * .5 + Math.sin(t * 1.8) * 2, this.height * .17);
+      sketchLogo.setAngle((1 - easeOutCubic(Math.min(t / .8, 1))) * -3 + Math.sin(t * 1.4) * .45);
+      if (beat.key === "sketch-draw") {
+        this.introSketchFrame = "intro_sketch_logo_bw";
+      }
     }
 
     if (t >= INTRO_DURATION && this.introPrepComplete) {
@@ -2215,6 +2514,7 @@
     this.redrawBackground();
     if (this.introComplete && this.introMode === "ready" && this.introObjects.finale) {
       this.positionIntroFinale(INTRO_BOB_SPOT_FINALE_FRAMES[INTRO_BOB_SPOT_FINALE_FRAMES.length - 1]);
+      this.holdIntroSketchFinale();
     }
   };
 
@@ -2372,6 +2672,9 @@
     this.basePlayerY = this.height * .76;
     if (this.introLayer) {
       this.introLayer.setVisible(false);
+    }
+    if (this.introSketchLayer) {
+      this.introSketchLayer.setVisible(false);
     }
     if (this.stage) {
       this.stage.classList.remove("paper-route-stage--intro-ready");
@@ -3504,6 +3807,10 @@
       introFinaleFrame: this.introFinaleFrame,
       introSpotVisible: !!(this.introObjects.spot && this.introObjects.spot.visible),
       introFinaleVisible: !!(this.introObjects.finale && this.introObjects.finale.visible),
+      introSketchVisible: !!(this.introSketchLayer && this.introSketchLayer.visible),
+      introSketchReveal: this.introSketchReveal,
+      introColorBlend: this.introColorBlend,
+      introSketchFrame: this.introSketchFrame,
       poolCounts: this.poolStats,
       score: this.rules.state.score,
       highScore: this.highScore,

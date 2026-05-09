@@ -819,6 +819,386 @@
         "w": 192,
         "h": 128
       }
+    },
+    "intro_sketch_logo_bw": {
+      "frame": {
+        "x": 8,
+        "y": 1892,
+        "w": 520,
+        "h": 132
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 520,
+        "h": 132
+      },
+      "sourceSize": {
+        "w": 520,
+        "h": 132
+      }
+    },
+    "intro_sketch_bob_ride_01": {
+      "frame": {
+        "x": 536,
+        "y": 1892,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_sketch_bob_ride_02": {
+      "frame": {
+        "x": 736,
+        "y": 1892,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_sketch_bob_ride_03": {
+      "frame": {
+        "x": 8,
+        "y": 2092,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_sketch_bob_ride_04": {
+      "frame": {
+        "x": 208,
+        "y": 2092,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_sketch_bob_ride_05": {
+      "frame": {
+        "x": 408,
+        "y": 2092,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_sketch_bob_ride_06": {
+      "frame": {
+        "x": 608,
+        "y": 2092,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_sketch_spot_paper_side_01": {
+      "frame": {
+        "x": 808,
+        "y": 2092,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_sketch_spot_paper_side_02": {
+      "frame": {
+        "x": 8,
+        "y": 2292,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_sketch_spot_paper_side_03": {
+      "frame": {
+        "x": 208,
+        "y": 2292,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_sketch_spot_paper_side_04": {
+      "frame": {
+        "x": 408,
+        "y": 2292,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_sketch_spot_paper_side_05": {
+      "frame": {
+        "x": 608,
+        "y": 2292,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_sketch_spot_paper_side_06": {
+      "frame": {
+        "x": 808,
+        "y": 2292,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_sketch_bob_spot_finale_01": {
+      "frame": {
+        "x": 8,
+        "y": 2428,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_sketch_bob_spot_finale_02": {
+      "frame": {
+        "x": 336,
+        "y": 2428,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_sketch_bob_spot_finale_03": {
+      "frame": {
+        "x": 664,
+        "y": 2428,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_sketch_bob_spot_finale_04": {
+      "frame": {
+        "x": 8,
+        "y": 2660,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_sketch_bob_spot_finale_05": {
+      "frame": {
+        "x": 336,
+        "y": 2660,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_sketch_bob_spot_finale_06": {
+      "frame": {
+        "x": 664,
+        "y": 2660,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
     }
   },
   "meta": {
@@ -827,7 +1207,7 @@
     "format": "RGBA8888",
     "size": {
       "w": 1024,
-      "h": 1892
+      "h": 2892
     },
     "scale": "1"
   }
