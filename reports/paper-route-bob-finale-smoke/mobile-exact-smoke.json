@@ -1,0 +1,173 @@
+{
+  "states": [
+    {
+      "name": "freeze",
+      "beat": "freeze",
+      "elapsed": 0.05,
+      "bob": "",
+      "bobVisible": false,
+      "edition": "",
+      "editionVisible": false,
+      "frontPage": false,
+      "scoreStamped": false,
+      "finalScore": {
+        "visible": false,
+        "text": "",
+        "x": null,
+        "y": null
+      },
+      "recordStampVisible": false,
+      "cameraZoom": 1,
+      "oipBlend": 0,
+      "colorBlend": 1
+    },
+    {
+      "name": "wheelie",
+      "beat": "wheelie-charge",
+      "elapsed": 0.55,
+      "bob": "end_run_bob_front_page_02",
+      "bobVisible": true,
+      "edition": "",
+      "editionVisible": false,
+      "frontPage": false,
+      "scoreStamped": false,
+      "finalScore": {
+        "visible": false,
+        "text": "",
+        "x": null,
+        "y": null
+      },
+      "recordStampVisible": false,
+      "cameraZoom": 1,
+      "oipBlend": 0.308,
+      "colorBlend": 0.692
+    },
+    {
+      "name": "ramp-takeoff",
+      "beat": "ramp-takeoff",
+      "elapsed": 1.28,
+      "bob": "end_run_bob_front_page_05",
+      "bobVisible": true,
+      "edition": "",
+      "editionVisible": false,
+      "frontPage": false,
+      "scoreStamped": false,
+      "finalScore": {
+        "visible": false,
+        "text": "",
+        "x": null,
+        "y": null
+      },
+      "recordStampVisible": false,
+      "cameraZoom": 1.021,
+      "oipBlend": 0.78,
+      "colorBlend": 0.22
+    },
+    {
+      "name": "paper-toss",
+      "beat": "edition-unfold",
+      "elapsed": 2.05,
+      "bob": "end_run_bob_front_page_08",
+      "bobVisible": true,
+      "edition": "end_run_edition_unfold_02",
+      "editionVisible": true,
+      "frontPage": false,
+      "scoreStamped": false,
+      "finalScore": {
+        "visible": false,
+        "text": "",
+        "x": null,
+        "y": null
+      },
+      "recordStampVisible": false,
+      "cameraZoom": 1.09,
+      "oipBlend": 0.971,
+      "colorBlend": 0.029
+    },
+    {
+      "name": "page-unfold",
+      "beat": "edition-unfold",
+      "elapsed": 2.72,
+      "bob": "end_run_bob_front_page_10",
+      "bobVisible": true,
+      "edition": "end_run_edition_unfold_06",
+      "editionVisible": true,
+      "frontPage": true,
+      "scoreStamped": false,
+      "finalScore": {
+        "visible": false,
+        "text": "",
+        "x": null,
+        "y": null
+      },
+      "recordStampVisible": false,
+      "cameraZoom": 1.1,
+      "oipBlend": 1,
+      "colorBlend": 0
+    },
+    {
+      "name": "skid-chill",
+      "beat": "front-page-freeze",
+      "elapsed": 3.2,
+      "bob": "end_run_bob_front_page_12",
+      "bobVisible": true,
+      "edition": "",
+      "editionVisible": false,
+      "frontPage": true,
+      "scoreStamped": false,
+      "finalScore": {
+        "visible": false,
+        "text": "",
+        "x": null,
+        "y": null
+      },
+      "recordStampVisible": false,
+      "cameraZoom": 1.1,
+      "oipBlend": 1,
+      "colorBlend": 0
+    },
+    {
+      "name": "score-stamp",
+      "beat": "score-stamp",
+      "elapsed": 3.95,
+      "bob": "end_run_bob_front_page_14",
+      "bobVisible": true,
+      "edition": "",
+      "editionVisible": false,
+      "frontPage": true,
+      "scoreStamped": true,
+      "finalScore": {
+        "visible": true,
+        "text": "325",
+        "x": 240,
+        "y": 356
+      },
+      "recordStampVisible": true,
+      "cameraZoom": 1.1,
+      "oipBlend": 1,
+      "colorBlend": 0
+    },
+    {
+      "name": "results",
+      "beat": "results",
+      "elapsed": 4.25,
+      "bob": "end_run_bob_front_page_14",
+      "bobVisible": true,
+      "edition": "",
+      "editionVisible": false,
+      "frontPage": true,
+      "scoreStamped": true,
+      "finalScore": {
+        "visible": true,
+        "text": "325",
+        "x": 240,
+        "y": 356
+      },
+      "recordStampVisible": true,
+      "cameraZoom": 1.1,
+      "oipBlend": 1,
+      "colorBlend": 0
+    }
+  ],
+  "errors": []
+}

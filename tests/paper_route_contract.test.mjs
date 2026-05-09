@@ -72,6 +72,7 @@ test("Paper-Bob partial lazy-loads pinned same-origin Phaser and runtime assets"
   assert.match(paperRoutePartial, /resources\.Get "images\/paper-route\/paper-bob-intro-atlas\.png" \| resources\.Fingerprint/);
   assert.match(paperRoutePartial, /resources\.Get "images\/paper-route\/paper-bob-intro-atlas\.webp" \| resources\.Fingerprint/);
   assert.match(paperRoutePartial, /resources\.Get "images\/paper-route\/paper-bob-intro-atlas\.json" \| resources\.Fingerprint/);
+  assert.doesNotMatch(paperRoutePartial, /paper-bob-end-run|data-paper-route-end-run/);
   assert.match(paperRoutePartial, /data-paper-route-phaser-src="\{\{ \$phaser\.RelPermalink \}\}"/);
   assert.match(paperRoutePartial, /data-paper-route-rules-src="\{\{ \$rules\.RelPermalink \}\}"/);
   assert.doesNotMatch(paperRoutePartial, /data-paper-route-plan-src/);
@@ -176,6 +177,56 @@ test("Paper-Bob cropped sprite manifest entries point to real PNG files with met
     "side_right_03"
   ];
   const expectedIntroFrames = [
+    "end_run_bob_delivery_jump_01",
+    "end_run_bob_delivery_jump_02",
+    "end_run_bob_delivery_jump_03",
+    "end_run_bob_delivery_jump_04",
+    "end_run_bob_delivery_jump_05",
+    "end_run_bob_delivery_jump_06",
+    "end_run_bob_delivery_jump_07",
+    "end_run_bob_delivery_jump_08",
+    "end_run_bob_finger_pistols",
+    "end_run_bob_front_page_01",
+    "end_run_bob_front_page_02",
+    "end_run_bob_front_page_03",
+    "end_run_bob_front_page_04",
+    "end_run_bob_front_page_05",
+    "end_run_bob_front_page_06",
+    "end_run_bob_front_page_07",
+    "end_run_bob_front_page_08",
+    "end_run_bob_front_page_09",
+    "end_run_bob_front_page_10",
+    "end_run_bob_front_page_11",
+    "end_run_bob_front_page_12",
+    "end_run_bob_front_page_13",
+    "end_run_bob_front_page_14",
+    "end_run_bob_skid_chill_01",
+    "end_run_bob_skid_chill_02",
+    "end_run_bob_skid_chill_03",
+    "end_run_bob_skid_chill_04",
+    "end_run_bob_skid_chill_05",
+    "end_run_bob_skid_chill_06",
+    "end_run_doorstep_plate",
+    "end_run_edition_unfold_01",
+    "end_run_edition_unfold_02",
+    "end_run_edition_unfold_03",
+    "end_run_edition_unfold_04",
+    "end_run_edition_unfold_05",
+    "end_run_edition_unfold_06",
+    "end_run_front_page_oip",
+    "end_run_paper_doorstep_skid_01",
+    "end_run_paper_doorstep_skid_02",
+    "end_run_paper_doorstep_skid_03",
+    "end_run_paper_doorstep_skid_04",
+    "end_run_paper_doorstep_skid_05",
+    "end_run_paper_doorstep_skid_06",
+    "end_run_paper_doorstep_skid_07",
+    "end_run_paper_doorstep_skid_08",
+    "end_run_paper_doorstep_skid_09",
+    "end_run_paper_doorstep_skid_10",
+    "end_run_paper_doorstep_skid_11",
+    "end_run_paper_doorstep_skid_12",
+    "end_run_paper_doorstep_skid_13",
     "intro_bike_down",
     "intro_bob_jump",
     "intro_bob_laydown",
@@ -460,6 +511,22 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /key: "spot-cross", start: 4\.3, end: 6/);
   assert.match(game, /key: "finale", start: 6, end: 8\.4/);
   assert.match(game, /key: "hold", start: 8\.4, end: 10\.2/);
+  assert.match(game, /END_RUN_SCORE_REVEAL_AT = 4\.08/);
+  assert.match(game, /END_RUN_SUMMARY_REVEAL_AT = 4\.5/);
+  assert.match(game, /END_RUN_EXTRA_REVEAL_AT = 3\.86/);
+  assert.match(game, /END_RUN_ROWS_REVEAL_AT = 4\.18/);
+  assert.match(game, /END_RUN_TOTAL_FRAMES = 38/);
+  assert.match(game, /END_RUN_BEAT_SEQUENCE/);
+  assert.match(game, /END_RUN_PAPER_DOORSTEP_FRAMES = \["end_run_paper_doorstep_skid_01"[\s\S]*"end_run_paper_doorstep_skid_13"\]/);
+  assert.match(game, /END_RUN_DOORSTEP_PLATE_FRAME = "end_run_doorstep_plate"/);
+  assert.match(game, /key: "run-end", start: 0, end: \.27/);
+  assert.match(game, /key: "spot-dodge", start: \.27, end: \.72/);
+  assert.match(game, /key: "puddle-wheelie", start: \.72, end: 1\.35/);
+  assert.match(game, /key: "paper-throw", start: 1\.35, end: 2\.47/);
+  assert.match(game, /key: "paper-follow", start: 2\.47, end: 3\.08/);
+  assert.match(game, /key: "porch-skid", start: 3\.08, end: 3\.84/);
+  assert.match(game, /key: "stamp-ink", start: 3\.84, end: 4\.5/);
+  assert.match(game, /END_RUN_FRAME_TIMINGS = \[[\s\S]*\.22, \.22, \.24[\s\S]*\]/);
   assert.match(game, /INTRO_OIP_SETTING_FRAME = "intro_oip_setting_plate"/);
   assert.match(game, /INTRO_BOB_SPOT_FINALE_FRAMES = \["intro_bob_spot_finale_01"/);
   assert.match(game, /INTRO_RIDE_PERSONALITY_FRAMES = \["intro_bob_ride_bubble_gum", "intro_bob_ride_peace"\]/);
@@ -473,6 +540,15 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /introColorBlendAt/);
   assert.match(game, /introOipBlendAt/);
   assert.match(game, /introRideFrameAt/);
+  assert.match(game, /blendRgbTint/);
+  assert.match(game, /endRunBeatAt/);
+  assert.match(game, /endRunColorBlendAt/);
+  assert.match(game, /endRunOipBlendAt/);
+  assert.match(game, /function endRunFrameAt\(time\)/);
+  assert.match(game, /function endRunColorBlendAt\(time\) \{[\s\S]*return 1/);
+  assert.match(game, /function endRunOipBlendAt\(time\) \{[\s\S]*return 0/);
+  assert.match(game, /frontPage = this\.endRunObjects \? this\.endRunObjects\.frontPage : null/);
+  assert.match(game, /frontPage[\s\S]*scoreText\.setVisible\(false\)[\s\S]*this\.endRunScoreStamped = true/);
   assert.match(game, /key === "Enter"[\s\S]*this\.introPrepComplete[\s\S]*this\.skipIntro\(\)/);
   assert.match(game, /setPointerCapture[\s\S]*try[\s\S]*catch/);
   assert.match(game, /window\.innerWidth <= 720/);
@@ -511,7 +587,56 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /create\("introOipBobRide", INTRO_OIP_BOB_RIDE_FRAMES, 7, -1\)/);
   assert.match(game, /create\("introOipSpotPaperSide", INTRO_OIP_SPOT_PAPER_SIDE_FRAMES, 8, -1\)/);
   assert.match(game, /create\("introOipBobSpotFinale", INTRO_OIP_BOB_SPOT_FINALE_FRAMES, 4, 0\)/);
+  assert.match(game, /create\("bobWheelieRise", \[BOB_FRAME\.wheelieStart, BOB_FRAME\.wheelieRise2, BOB_FRAME\.wheeliePeak, BOB_FRAME\.wheeliePeakAlt, BOB_FRAME\.wheelieHold, BOB_FRAME\.wheeliePeakAlt\], 12, 0\)/);
+  assert.match(game, /create\("bobWheelieHold", \[BOB_FRAME\.wheeliePeakAlt, BOB_FRAME\.wheeliePeakAlt, BOB_FRAME\.wheelieHold, BOB_FRAME\.wheeliePeakAlt\], 6, -1\)/);
+  assert.match(game, /create\("bobWheelieRecover", \[BOB_FRAME\.wheelieLand, BOB_FRAME\.wheelieRecover, BOB_FRAME\.rideStraight\], 9, 0\)/);
   assert.match(game, /finale: scene\.add\.sprite\(this\.width \* \.46, this\.height \* \.62, "paperBobIntro", INTRO_BOB_SPOT_FINALE_FRAMES\[0\]\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.createEndRunObjects/);
+  assert.match(game, /doorstep: scene\.add\.image\(this\.width \* \.5, this\.height \* \.5, "paperBobIntro", END_RUN_DOORSTEP_PLATE_FRAME\)/);
+  assert.match(game, /this\.hasIntroFrame\(INTRO_OIP_SETTING_FRAME\)/);
+  assert.match(game, /sidePanels: scene\.add\.container\(0, 0\)/);
+  assert.match(game, /sidePanelLeft: scene\.add\.image\(this\.width \* \.5, this\.height \* \.5, "paperBobIntro", INTRO_OIP_SETTING_FRAME\)/);
+  assert.match(game, /spot: scene\.add\.sprite\(this\.width \+ 80, this\.height \* \.68, "paperBobIntro", SPOT_SIDE_FRAMES\[0\]\)/);
+  assert.match(game, /bob: scene\.add\.sprite\(this\.width \* \.5, this\.height \* \.76, "paperBobSheet", BOB_FRAME\.rideStraight\)/);
+  assert.match(game, /paperClose: scene\.add\.sprite\(this\.width \* \.5, this\.height \* \.5, "paperBobIntro", END_RUN_PAPER_DOORSTEP_FRAMES\[0\]\)/);
+  assert.match(game, /extraStamp: scene\.add\.text\(0, 0, "EXTRA EXTRA!"/);
+  assert.match(game, /recordStamp: scene\.add\.text\(0, 0, "NEW RECORD"/);
+  assert.match(game, /PaperRouteGame\.prototype\.hasIntroFrame/);
+  assert.match(game, /PaperRouteGame\.prototype\.updateEndRun/);
+  assert.match(game, /PaperRouteGame\.prototype\.drawEndRunSidePanels/);
+  assert.match(game, /PaperRouteGame\.prototype\.applyEndRunOipTreatment/);
+  assert.match(game, /oipWash: scene\.add\.rectangle\(this\.width \* \.5, this\.height \* \.5, this\.width, this\.height, 0xf3e6d3, 0\)/);
+  assert.match(game, /oipInk: scene\.add\.graphics\(\)/);
+  assert.match(game, /var sidePanelsVisible = frameNumber <= 22/);
+  assert.match(game, /var oipTreatmentActive = frameNumber <= 22/);
+  assert.match(game, /objects\.doorstep\.setAlpha\(porchVisible \? \(frameNumber === 23 \? \.72 : 1\) : 0\)/);
+  assert.match(game, /this\.drawEndRunSidePanels\(sidePanelsVisible \? 1 : 0, sidePanelsVisible \? \.86 : 0\)/);
+  assert.match(game, /this\.applyEndRunOipTreatment\(oipTreatmentActive\)/);
+  assert.match(game, /treated = \[objects\.bob, objects\.spot, objects\.paperThrow, objects\.puddle\]/);
+  assert.match(game, /treated\[index\]\.setTint\(0xf2dfbd\)/);
+  assert.match(game, /treated\[index\]\.clearTint/);
+  assert.match(game, /left\.setTexture\("paperBobIntro", INTRO_OIP_SETTING_FRAME\)/);
+  assert.match(game, /leftMask\.fillRect\(0, 0, leftEdge, height\)/);
+  assert.match(game, /rightMask\.fillRect\(rightEdge, 0, Math\.max\(0, width - rightEdge\), height\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.updateEndRunResultText/);
+  assert.match(game, /objects\.bob\.setTexture\("paperBobSheet"\)/);
+  assert.match(game, /objects\.paperClose\.setTexture\("paperBobIntro", paperCloseFrame\)/);
+  assert.match(game, /this\.summaryMetricItems\(state\)/);
+  assert.match(game, /this\.endRunFrontPageVisible = frameNumber >= 35/);
+  assert.match(game, /this\.endRunScoreStamped = this\.endRunScoreShown \|\| t >= END_RUN_SCORE_REVEAL_AT/);
+  assert.match(game, /this\.endRunPaperFrame = objects\.paperClose && objects\.paperClose\.visible \? paperCloseFrame : \(paperThrowVisible \? "runtime_paper_throw_right" : ""\)/);
+  assert.match(game, /this\.endRunSpotVisible = !!\(objects\.spot && objects\.spot\.visible\)/);
+  assert.match(game, /this\.endRunElapsed >= END_RUN_SCORE_REVEAL_AT/);
+  assert.match(game, /this\.endRunElapsed >= END_RUN_SUMMARY_REVEAL_AT/);
+  assert.match(game, /PaperRouteGame\.prototype\.skipEndRunCinematic/);
+  assert.match(game, /this\.endRunSkipped = true/);
+  assert.match(game, /PaperRouteGame\.prototype\.startEndRunCinematic[\s\S]*this\.reducedMotion[\s\S]*this\.updateEndRunVisuals\(END_RUN_SUMMARY_REVEAL_AT\)[\s\S]*this\.revealEndRunResults\(sequenceId\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.advanceTime[\s\S]*this\.endRunActive/);
+  assert.match(game, /PaperRouteGame\.prototype\.hideIntroCinematicLayers/);
+  assert.match(game, /hideIntroCinematicLayers[\s\S]*this\.introBeat = "idle"[\s\S]*this\.introBobFrame = ""/);
+  assert.match(game, /hideIntroCinematicLayers[\s\S]*this\.introSketchFrame = ""[\s\S]*this\.introSettingFrame = ""/);
+  assert.match(game, /PaperRouteGame\.prototype\.finish[\s\S]*this\.hideIntroCinematicLayers\(\)[\s\S]*startEndRunCinematic\(state, title, copy, effect, sequenceId\)/);
+  assert.match(game, /startEndRunCinematic\(state, title, copy, effect, sequenceId\)/);
   assert.match(game, /PaperRouteGame\.prototype\.positionIntroFinale/);
   assert.match(game, /spot\.setTexture\("paperBobIntro", frame\)/);
   assert.match(game, /this\.spotTimer = TUNING\.spotFirstDelay \/ 1000/);
@@ -544,6 +669,30 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /introSketchFrame/);
   assert.match(game, /introSettingVisible/);
   assert.match(game, /introSettingFrame/);
+  assert.match(game, /endRunElapsed/);
+  assert.match(game, /endRunBeat/);
+  assert.match(game, /endRunOipBlend/);
+  assert.match(game, /endRunColorBlend/);
+  assert.match(game, /endRunSpotVisible/);
+  assert.match(game, /endRunFinaleVisible/);
+  assert.match(game, /endRunFinaleFrame/);
+  assert.match(game, /endRunBobVisible/);
+  assert.match(game, /endRunBobFrame/);
+  assert.match(game, /endRunEditionVisible/);
+  assert.match(game, /endRunEditionFrame/);
+  assert.match(game, /endRunFrontPageVisible/);
+  assert.match(game, /endRunPaperVisible/);
+  assert.match(game, /endRunPaperFrame/);
+  assert.match(game, /endRunPorchVisible/);
+  assert.match(game, /endRunExtraStampVisible/);
+  assert.match(game, /endRunSummaryRowsVisible/);
+  assert.match(game, /endRunSidePanelsVisible/);
+  assert.match(game, /endRunOipTreatmentActive/);
+  assert.match(game, /endRunSkipped/);
+  assert.match(game, /endRunFrame/);
+  assert.match(game, /endRunScoreStamped/);
+  assert.match(game, /endRunCameraZoom/);
+  assert.match(game, /bobFrame: this\.player && this\.player\.frame \? this\.player\.frame\.name : null/);
   assert.match(game, /touchControlMode/);
   assert.match(game, /touchSteerActive/);
   assert.match(game, /touchSteerTargetX/);
@@ -595,6 +744,10 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /createTrackSegmentHitbox/);
   assert.match(game, /bobRunEnd/);
   assert.match(game, /bobWheelieRise/);
+  assert.match(game, /bobWheelieHold/);
+  assert.match(game, /bobWheelieRecover/);
+  assert.match(game, /wheelieVisualStartedAt/);
+  assert.match(game, /wheelieRecoverUntil/);
   assert.doesNotMatch(game, /create\("bobWheelie", \[[^\n]+, 8, -1\)/);
   assert.match(game, /setPlayerPose/);
   assert.match(game, /poseHoldUntil/);
@@ -624,10 +777,11 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /trackSegmentsLoaded/);
   assert.match(game, /Bag packed\. Toss clean, hop ramps, dodge puddles\./);
   assert.match(game, /Paper-Bob is loaded\. Hit the street\./);
-  assert.match(game, /Final score " \+ state\.score/);
+  assert.match(game, /title = String\(Math\.max\(0, Math\.round\(state\.score \|\| 0\)\)\)/);
+  assert.match(game, /copy = effect && effect\.newBest \? "New Paper-Bob record\." : "Edition delivered\."/);
   assert.match(game, /summaryMetricItems/);
   assert.match(game, /renderSummaryMetrics\(state\)/);
-  assert.match(game, /showFinalScore\(state\.score\)/);
+  assert.match(game, /showFinalScore\(state\.score, this\.endRunNewBest\)/);
   assert.match(game, /finalScoreText/);
   assert.match(game, /overlayLayout/);
   assert.match(game, /summaryMetrics: this\.lastSummaryMetrics/);
@@ -688,8 +842,12 @@ test("Paper-Bob visual shell has balanced masthead and accessible overlay styles
   assert.match(css, /\.paper-route-stage--paused \.paper-route-game/);
   assert.match(css, /--paper-route-ticket:/);
   assert.match(css, /\.paper-route-card::before\{[\s\S]*content:"Paper-Bob";/);
-  assert.match(css, /\.paper-route-overlay \.paper-route-card\.paper-route-card--summary\{[\s\S]*background:none;[\s\S]*pointer-events:none;/);
-  assert.match(css, /\.paper-route-results\{[\s\S]*grid-template-columns:repeat\(6, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.paper-route-overlay \.paper-route-card\.paper-route-card--summary\{[\s\S]*border-top:5px double[\s\S]*pointer-events:auto;/);
+  assert.match(css, /\.paper-route-summary__eyebrow\{[\s\S]*color:#9d3328/);
+  assert.match(css, /\.paper-route-summary__title::before\{[\s\S]*content:"Score";/);
+  assert.match(css, /\.paper-route-results\{[\s\S]*grid-template-columns:1fr;/);
+  assert.match(css, /\.paper-route-result-label/);
+  assert.match(css, /\.paper-route-result-leader/);
   assert.match(css, /\.paper-route-result-tile--mailbox/);
   assert.match(css, /\.paper-route-result-tile--puddle/);
   assert.match(css, /\.paper-route-overlay \.paper-route-card \.paper-route-summary__restart\{[\s\S]*animation:paper-route-restart-pulse 2\.8s/);
