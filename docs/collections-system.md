@@ -114,6 +114,12 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - The index ignores `featured`; homepage and other existing featured surfaces may still use that field.
 - Individual collection pages render as newspaper section fronts with the actual collection title as the H1.
 - Bob's Almanack uses a bespoke collection layout and may be listed publicly only when its collection page and at least one issue are published in the same build.
+- Bob's Almanack collection-page modules are fed only by committed Hugo data under `data/almanack/`; Hugo templates must not call live APIs during a build.
+- The collection page uses:
+  - `data/almanack/archive_links.yaml` for deterministic archive shelf marks keyed by short phrases and verified public OIP essay URLs.
+  - `data/almanack/on_this_day.yaml` for date-keyed historical events with source URLs and a script `generated_at` timestamp.
+  - `data/almanack/weather_city_records.yaml` for display-ready Fahrenheit min/mean/max calendar-date aggregates from fixed NOAA/GHCN station IDs since 1990.
+  - `data/almanack/world_week.yaml` for ordered, source-linked world-week entries with a script `generated_at` timestamp and review note.
 - Section fronts use a label-free ledger line, a promoted `Start Here` entry, an ordered piece list, related collections, and quiet browse links.
 - The Start Here item is promoted once and omitted from the contents list immediately below it.
 - Collection pages do not render the visible `Reading Progress` panel, browser-local resume panel, visited-row markers, or collection-progress hooks.
