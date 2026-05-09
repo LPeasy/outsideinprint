@@ -54,21 +54,23 @@
         {{ $issueNumber := $latest.Params.issue_number | default $state.count }}
         {{ $dateKey := $latest.Date.Format "01-02" }}
         {{ $weekKey := $latest.Date.Format "2006-01-02" }}
-        {{ $onThisDayData := site.Data.almanack.on_this_day | default (dict) }}
+        {{ $almanackData := site.Data.almanack | default (dict) }}
+        {{ $onThisDayData := index $almanackData "on_this_day" | default (dict) }}
         {{ $onThisDayDates := index $onThisDayData "dates" | default (dict) }}
         {{ $onThisDay := index $onThisDayDates $dateKey | default (dict) }}
         {{ $onThisDayEvents := index $onThisDay "events" | default (slice) }}
-        {{ $weatherData := site.Data.almanack.weather_city_records | default (dict) }}
+        {{ $weatherData := index $almanackData "weather_city_records" | default (dict) }}
         {{ $weatherUnit := index $weatherData "unit" | default "F" }}
         {{ $weatherDates := index $weatherData "dates" | default (dict) }}
         {{ $weatherRecord := index $weatherDates $dateKey | default (dict) }}
         {{ $weatherCities := index $weatherRecord "cities" | default (slice) }}
-        {{ $worldWeekData := site.Data.almanack.world_week | default (dict) }}
+        {{ $worldWeekData := index $almanackData "world_week" | default (dict) }}
         {{ $worldWeeks := index $worldWeekData "weeks" | default (dict) }}
         {{ $worldWeek := index $worldWeeks $weekKey | default (dict) }}
         {{ $worldEvents := index $worldWeek "events" | default (slice) }}
         {{ $archiveLinkGroups := slice }}
-        {{ with site.Data.almanack.archive_links.entries }}
+        {{ $archiveLinkData := index $almanackData "archive_links" | default (dict) }}
+        {{ with (index $archiveLinkData "entries") }}
           {{ range . }}
             {{ $archivePages := slice }}
             {{ range (.pages | default (slice)) }}
@@ -88,6 +90,13 @@
             {{ if gt (len $archivePages) 0 }}
               {{ $archiveLinkGroups = $archiveLinkGroups | append (dict "key" (.key | default "") "label" (.label | default "Archive") "phrase" (.phrase | default "") "pages" $archivePages) }}
             {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ $archiveMarginalLinks := slice }}
+        {{ range $archiveLinkGroups }}
+          {{ $groupLabel := .label }}
+          {{ range first 2 .pages }}
+            {{ $archiveMarginalLinks = $archiveMarginalLinks | append (dict "label" $groupLabel "page" .) }}
           {{ end }}
         {{ end }}
 
@@ -147,9 +156,10 @@
 
             {{ if gt (len $onThisDayEvents) 0 }}
               <section class="almanack-collection__rail-section">
-                <h2>This Day</h2>
+                <h2>This Day in History</h2>
+                {{ with (index $onThisDay "label") }}<p class="almanack-collection__rail-note">{{ . }}</p>{{ end }}
                 <ol class="almanack-collection__day-list">
-                  {{ range first 4 $onThisDayEvents }}
+                  {{ range first 2 $onThisDayEvents }}
                     <li>
                       <span class="almanack-collection__day-year">{{ .year }}</span>
                       <span>{{ .text }}</span>
@@ -158,6 +168,20 @@
                   {{ end }}
                 </ol>
               </section>
+            {{ end }}
+
+            {{ if gt (len $archiveMarginalLinks) 0 }}
+              <nav class="almanack-collection__rail-section" aria-label="From the archive">
+                <h2>From the Archive</h2>
+                <ul class="almanack-collection__see-also">
+                  {{ range first 6 $archiveMarginalLinks }}
+                    <li>
+                      <span>{{ .label }}</span>
+                      <a href="{{ .page.RelPermalink }}">{{ .page.Title }}</a>
+                    </li>
+                  {{ end }}
+                </ul>
+              </nav>
             {{ end }}
 
             <nav class="almanack-collection__rail-section" aria-label="Archive signposts">
@@ -224,48 +248,6 @@
               </ol>
             </section>
 
-            {{ if gt (len $worldEvents) 0 }}
-              <section class="almanack-collection__world-week" aria-labelledby="almanack-collection-world-week-title">
-                <div class="almanack-collection__section-heading">
-                  <h2 id="almanack-collection-world-week-title">World Week</h2>
-                  <p>{{ with (index $worldWeek "start_date") }}{{ . }} through {{ end }}{{ index $worldWeek "end_date" | default $weekKey }}</p>
-                </div>
-                <ol class="almanack-collection__world-list">
-                  {{ range $worldEvents }}
-                    {{ $sourceName := .source_name | default "Source" }}
-                    <li class="almanack-collection__world-event">
-                      <p class="almanack-collection__world-meta">
-                        <time datetime="{{ .date }}">{{ .date }}</time>{{ with .category }}<span>{{ . }}</span>{{ end }}
-                      </p>
-                      <p>{{ .text }} {{ with .source_url }}<a class="almanack-collection__source-link" href="{{ . }}">{{ $sourceName }}</a>{{ end }}</p>
-                    </li>
-                  {{ end }}
-                </ol>
-              </section>
-            {{ end }}
-
-            {{ if gt (len $archiveLinkGroups) 0 }}
-              <section class="almanack-collection__archive-links" aria-labelledby="almanack-collection-archive-links-title">
-                <div class="almanack-collection__section-heading">
-                  <h2 id="almanack-collection-archive-links-title">From the Archive</h2>
-                  <p>Deterministic shelf marks drawn from local Almanack data.</p>
-                </div>
-                <div class="almanack-collection__archive-groups">
-                  {{ range $archiveLinkGroups }}
-                    <section class="almanack-collection__archive-group">
-                      <h3>{{ .label }}</h3>
-                      {{ with .phrase }}<p>{{ . }}</p>{{ end }}
-                      <ul>
-                        {{ range .pages }}
-                          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-                        {{ end }}
-                      </ul>
-                    </section>
-                  {{ end }}
-                </div>
-              </section>
-            {{ end }}
-
             <section class="almanack-collection__archive" aria-labelledby="almanack-collection-archive-title">
               <div class="almanack-collection__section-heading">
                 <h2 id="almanack-collection-archive-title">Issue Register</h2>
@@ -325,6 +307,22 @@
                     </li>
                   {{ end }}
                 </ul>
+              </section>
+            {{ end }}
+
+            {{ if gt (len $worldEvents) 0 }}
+              <section class="almanack-collection__rail-section">
+                <h2>World Week</h2>
+                <p class="almanack-collection__rail-note">{{ with (index $worldWeek "start_date") }}{{ . }} through {{ end }}{{ index $worldWeek "end_date" | default $weekKey }}</p>
+                <ol class="almanack-collection__world-list">
+                  {{ range $worldEvents }}
+                    {{ $sourceName := .source_name | default "Source" }}
+                    <li class="almanack-collection__world-event">
+                      <span class="almanack-collection__world-meta"><time datetime="{{ .date }}">{{ .date }}</time>{{ with .category }}<span>{{ . }}</span>{{ end }}</span>
+                      <span>{{ .text }} {{ with .source_url }}<a class="almanack-collection__source-link" href="{{ . }}">{{ $sourceName }}</a>{{ end }}</span>
+                    </li>
+                  {{ end }}
+                </ol>
               </section>
             {{ end }}
 
