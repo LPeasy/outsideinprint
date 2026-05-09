@@ -763,6 +763,216 @@
       },
       "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
       "deployed_on": "2026-05-05"
+    },
+    "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy": {
+      "status": "deployed",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests climate policy through evidence, energy incentives, global coordination limits, grid and EV tradeoffs, nuclear feasibility, and uncertainty around policy effects."
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
+    },
+    "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe": {
+      "status": "deployed",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised literary essay ties claims to the novel record, keeps interpretation bounded, and treats civilization, knowledge, coercion, and survival as institutional questions without forcing partisan meaning."
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
+    },
+    "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter": {
+      "status": "deployed",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay distinguishes Bostrom-style probability claims from Nietzschean meaning-making, names the incentive to seek escape, and preserves uncertainty around metaphysical claims."
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
+    },
+    "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas": {
+      "status": "deployed",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds the border-security account in the public transcript, tests enforcement incentives, surveillance tradeoffs, oversight consequences, and uncertainty around implementation."
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
+    },
+    "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play": {
+      "status": "deployed",
+      "batch_id": "2026-05-07",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-07",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds Russia-China dependence in trade and military-supply evidence while testing leverage, strategic incentives, autonomy tradeoffs, and uncertainty around war duration."
+      },
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
+    },
+    "why-superintelligence-strategy-gets-ai-governance-wrong": {
+      "status": "deployed",
+      "batch_id": "2026-05-08",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-08.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-08",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests AI governance through evidence, surveillance constraints, state and corporate incentives, compute-control tradeoffs, proliferation consequences, and uncertainty around superintelligence timelines."
+      },
+      "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
+      "deployed_on": "2026-05-08"
+    },
+    "the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again": {
+      "status": "deployed",
+      "batch_id": "2026-05-08",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-08.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-08",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds language-change claims in disability-rights advocacy, legal terminology changes, platform incentives, generational tradeoffs, and uncertainty about whether the resurgence persists."
+      },
+      "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
+      "deployed_on": "2026-05-08"
+    },
+    "inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up": {
+      "status": "deployed",
+      "batch_id": "2026-05-08",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-08.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-08",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay separates fiscal deficits, bank credit creation, Fed policy, supply shocks, corporate pricing incentives, and uncertainty about relative inflation contributions."
+      },
+      "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
+      "deployed_on": "2026-05-08"
+    },
+    "the-national-debt-is-screwing-you-heres-how": {
+      "status": "deployed",
+      "batch_id": "2026-05-08",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-08.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-08",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay now frames debt through fiscal evidence, voter and bondholder incentives, intergenerational tradeoffs, downstream budget consequences, and uncertainty around reserve-currency risks."
+      },
+      "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
+      "deployed_on": "2026-05-08"
+    },
+    "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk": {
+      "status": "deployed",
+      "batch_id": "2026-05-08",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-08.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-08",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests SPR decisions through energy-market evidence, election and security incentives, emergency-stockpile tradeoffs, geopolitical consequences, and uncertainty about future refill capacity."
+      },
+      "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
+      "deployed_on": "2026-05-08"
     }
   },
   "blocked": {},
@@ -892,6 +1102,34 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-05.md",
       "commit_sha": "4bfb7678a60ef1e3feff12b79c6ffbad45078ee3",
       "deployed_on": "2026-05-05"
+    },
+    {
+      "batch_id": "2026-05-07",
+      "selected_slugs": [
+        "trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy",
+        "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe",
+        "nietzsche-vs-simulation-theory-why-the-nature-of-reality-real-or-not-doesnt-matter",
+        "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas",
+        "russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-07.md",
+      "commit_sha": "cbf05b911ca7570b6a1fdf2540790d7766002e62",
+      "deployed_on": "2026-05-07"
+    },
+    {
+      "batch_id": "2026-05-08",
+      "selected_slugs": [
+        "why-superintelligence-strategy-gets-ai-governance-wrong",
+        "the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again",
+        "inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up",
+        "the-national-debt-is-screwing-you-heres-how",
+        "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk"
+      ],
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-08.md",
+      "commit_sha": "e2d9e04f2ecdc6588642efa3ac198a26579c71c2",
+      "deployed_on": "2026-05-08"
     }
   ]
 }

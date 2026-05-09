@@ -480,11 +480,13 @@ $requiredImportedMediaPages = @(
 $requiredEssayHeroPages = @(
   'public/essays/2025-supreme-court-wrap-up/index.html',
   'public/essays/synthetic-reasoning/index.html',
+  'public/essays/modern-prometheus/index.html',
   'public/essays/biter-the-slang-word-that-hits/index.html',
   'public/essays/the-fair-price-of-bitcoin-69420/index.html',
   'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html',
   'public/essays/the-model-that-could-not-leave/index.html',
   'public/essays/smokestack-spreadsheets/index.html',
+  'public/essays/canvas-fails-finals-week/index.html',
   'public/essays/the-bet-slip-in-the-briefing-room/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
   'public/essays/the-factory-in-the-footnote/index.html',
@@ -541,6 +543,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'A private forecast can become a public infrastructure claim.'
+  },
+  @{
+    PublicPath = 'public/essays/canvas-fails-finals-week/index.html'
+    SourcePath = 'content/essays/canvas-fails-finals-week.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = "The operational layer is the institution now."
   },
   @{
     PublicPath = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'
@@ -762,6 +771,16 @@ $requiredMetadataPages = [ordered]@{
     ExpectedImage = 'https://outsideinprint.org/images/essays/smokestack-spreadsheets/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
+  'public/essays/canvas-fails-finals-week/index.html' = @{
+    Title = 'Canvas Fails Finals Week'
+    Description = "A reported finals-week Canvas incident becomes a window into public higher education's dependence on private-equity-owned operating layers."
+    Canonical = 'https://outsideinprint.org/essays/canvas-fails-finals-week/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/canvas-fails-finals-week/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
   'public/essays/the-bet-slip-in-the-briefing-room/index.html' = @{
     Title = 'The Bet Slip in the Briefing Room'
     Description = "The Senate's prediction-market ban shows why event markets become dangerous when public officials can trade on tomorrow's public acts."
@@ -976,6 +995,10 @@ $requiredIndexationPages = [ordered]@{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
+  'public/essays/canvas-fails-finals-week/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
   'public/random/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'noindex, follow'
@@ -1094,8 +1117,10 @@ $requiredUxPages = @(
   'public/essays/presidential-elections/index.html',
   'public/essays/the-risk-management-buffet/index.html',
   'public/essays/synthetic-reasoning/index.html',
+  'public/essays/modern-prometheus/index.html',
   'public/essays/in-the-image-of-god/index.html',
   'public/essays/the-hate-ledger/index.html',
+  'public/essays/canvas-fails-finals-week/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
   'public/essays/the-factory-in-the-footnote/index.html',
   'public/essays/the-ledger-vol-1/index.html',
@@ -2389,7 +2414,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*103 published pieces'
+    Pattern = '11 public collections.*105 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2810,6 +2835,8 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the AI data center essay' },
   @{ Path = 'public/essays/the-model-that-could-not-leave/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the Manus essay' },
   @{ Path = 'public/essays/smokestack-spreadsheets/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Smokestack Spreadsheets' },
+  @{ Path = 'public/essays/modern-prometheus/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Modern Prometheus' },
+  @{ Path = 'public/essays/canvas-fails-finals-week/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Canvas Fails Finals Week' },
   @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
   @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
   @{ Path = 'public/essays/the-factory-in-the-footnote/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Factory in the Footnote' },

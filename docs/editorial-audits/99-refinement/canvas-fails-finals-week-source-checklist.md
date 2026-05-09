@@ -1,0 +1,28 @@
+# Source Checklist
+
+Essay: `Canvas Fails Finals Week`  
+Slug: `canvas-fails-finals-week`  
+Date: `2026-05-08`
+
+| Claim | Current Source | Source Quality | Risk Level | Action Taken | Remaining Verification Need |
+|---|---|---|---|---|---|
+| JMU reported that Canvas sites at universities worldwide, including JMU, were down in response to a security breach, and delayed two Friday exam blocks to Wednesday, May 13. | https://www.jmu.edu/computing/security/canvas_outage.shtml | Official university notice | Low | Preserved. | None for candidate package. |
+| Instructure disclosed a May 1, 2026 cybersecurity incident, described containment steps, and said involved information appeared to include names, email addresses, student ID numbers, and messages. | https://status.instructure.com/ | Company status page | Low | Preserved. | Archive or screenshot status page before publication if the live status record changes. |
+| Instructure said it found no evidence that passwords, dates of birth, government identifiers, or financial information were involved. | https://status.instructure.com/ | Company status page | Low | Preserved and caveated. | None for candidate package. |
+| Rutgers repeated narrower breach language and said it was unclear what Rutgers data was involved. | https://canvas.rutgers.edu/2026/05/06/update-nationwide-security-breach-involving-canvas/ | Official university notice | Low | Preserved. | None. |
+| Columbia said Instructure had not yet made clear what CourseWorks data may have been affected and stated that CourseWorks data does not include birth dates, Social Security numbers, or financial information. | https://communications.news.columbia.edu/news/university-statement-instructure-data-breach | Official university statement | Low | Preserved. | None. |
+| By the evening of May 7, Instructure said Canvas was available for most users while Beta and Test remained in maintenance; on May 8 the status page listed no incidents reported that day while retaining the prior incident. | https://status.instructure.com/ | Company status page | Low | Preserved. | Archive status page before publication if needed. |
+| UVA restored UVACanvas and UVACanvas Connect by early May 8 while telling instructors to identify alternatives for exams, assessments, assignments, or other coursework dependent on Canvas. | https://canvas.virginia.edu/instructure-cybersecurity-incident-may-2026 | Official university notice | Low | Preserved. | None. |
+| UC said the Canvas login page displayed a suspicious message from a threat actor, and UCOP instructed all UC locations to block or redirect Canvas access until confident the system was secure. | https://ucnet.universityofcalifornia.edu/employee-news/nationwide-security-breach-involving-canvas/ | Official university system notice | Low | Preserved. | None. |
+| KKR and Dragoneer completed the acquisition of Instructure in November 2024, and Instructure described itself as serving about 200 million learners across more than 100 countries. | https://www.instructure.com/press-release/kkr-and-dragoneer-complete-acquisition-instructure | Company press release | Low | Preserved. | None. |
+| Instructure's CEO described the company as a "mission-critical educational operating system." | https://www.instructure.com/press-release/kkr-and-dragoneer-complete-acquisition-instructure | Company press release | Low | Preserved as quoted company language. | None. |
+| Instructure agreed in July 2024 to be acquired by KKR-managed funds, with Dragoneer participation, in an all-cash transaction valued at roughly $4.8 billion. | https://www.instructure.com/press-release/instructure-to-be-acquired-by-KKR | Company press release | Low | Preserved; removed tracking query from URL. | None. |
+| Alabama Community College System order form shows a four-year grand total of $3,245,300.78 for Canvas-related products and services. | https://www.accs.edu/wp-content/uploads/2022/04/Canvas-Instructure.pdf | Public procurement PDF | Low | Preserved. | None. |
+| Valencia College May 9, 2024 board transmittal says the college negotiated a three-year renewal at a total discounted rate of $1,746,220 for Canvas LMS. | https://valenciacollege.edu/about/board-of-trustees/documents/2024-05-09-transmittal-instructure-canvas-learning-management-system.pdf | Public board transmittal PDF | Low | Preserved. | None. |
+| Florida State University 2025 board materials list Instructure Inc. at $655,388.31 in fiscal-year expense, with a January 1, 2021 through December 31, 2026 term. | https://trustees.fsu.edu/sites/g/files/upcbnu3666/files/meetings/20250829/General-Meeting-Book-Web-2025-08-29.pdf | Public board materials PDF | Low | Preserved. | None. |
+| Idaho State Board of Education materials for Online Idaho show a statewide Canvas contract with year-two and year-three approval not to exceed $1,417,275 and total three-phase Instructure amount of $2,335,970. | https://boardofed.idaho.gov/meetings/board/archive/2020/110220/IRSA.pdf | Public board materials PDF | Low | Preserved. | None. |
+| University of New Mexico Board of Regents minutes from February 16, 2021 describe replacing Blackboard Learn with Canvas after an RFP and list a seven-year total cost of $2,498,375.56. | https://regents.unm.edu/meetings/minutes/2021/approved-minutes.2.16.21.bor.for-signature---signed.pdf | Public board minutes PDF | Low | Preserved. | None. |
+
+## Source Risk Summary
+
+Source risk is low for candidate packaging. The draft relies on official university notices, Instructure status and press-release records, and public procurement materials. The draft also explicitly avoids overclaiming the breach and states that the record does not show private equity caused the security incident.
