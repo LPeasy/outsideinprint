@@ -55,6 +55,11 @@ jobs:
         run: |
           ./tests/test_discovery_surface_contract.ps1
 
+      - name: Test Almanack Module Data Contract
+        shell: pwsh
+        run: |
+          ./tests/test_almanack_module_data.ps1
+
       - name: Test SEO Rollout Contract
         shell: pwsh
         run: |
