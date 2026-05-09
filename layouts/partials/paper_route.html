@@ -114,7 +114,6 @@
           <div class="paper-route-intro__meter" aria-hidden="true">
             <span data-paper-route-intro-progress></span>
           </div>
-          <button type="button" data-paper-route-skip-intro disabled>Skip</button>
         </div>
         <div class="paper-route-card paper-route-card--failure" data-paper-route-failure hidden>
           <p class="paper-route-card__eyebrow">Pressroom jam</p>
@@ -140,13 +139,24 @@
           <div class="paper-route-results" data-paper-route-summary-metrics role="list" aria-label="Paper-Bob run results"></div>
           <button type="button" class="paper-route-summary__restart" data-paper-route-summary-restart>Play again?</button>
         </div>
-        <div class="paper-route-touch" data-paper-route-touch aria-label="Touch controls" hidden>
-          <button type="button" data-paper-route-action="steer-left" aria-label="Move left">Left</button>
-          <button type="button" data-paper-route-action="throw-left" aria-label="Toss left">Toss L</button>
-          <button type="button" data-paper-route-action="jump" aria-label="Bunny hop">Hop</button>
-          <button type="button" data-paper-route-action="trick" aria-label="Hold wheelie">Wheelie</button>
-          <button type="button" data-paper-route-action="throw-right" aria-label="Toss right">Toss R</button>
-          <button type="button" data-paper-route-action="steer-right" aria-label="Move right">Right</button>
+        <div class="paper-route-touch" data-paper-route-touch aria-label="Mobile gamepad controls" hidden>
+          <div class="paper-route-touch__pad" data-paper-route-dpad aria-label="Movement controls">
+            <span class="paper-route-touch__pad-spacer" aria-hidden="true"></span>
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--dpad paper-route-touch__button--up" data-paper-route-action="steer-up" aria-label="Move up"><span aria-hidden="true">&uarr;</span></button>
+            <span class="paper-route-touch__pad-spacer" aria-hidden="true"></span>
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--dpad paper-route-touch__button--left" data-paper-route-action="steer-left" aria-label="Move left"><span aria-hidden="true">&larr;</span></button>
+            <span class="paper-route-touch__pad-center" aria-hidden="true"></span>
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--dpad paper-route-touch__button--right" data-paper-route-action="steer-right" aria-label="Move right"><span aria-hidden="true">&rarr;</span></button>
+            <span class="paper-route-touch__pad-spacer" aria-hidden="true"></span>
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--dpad paper-route-touch__button--down" data-paper-route-action="steer-down" aria-label="Move down"><span aria-hidden="true">&darr;</span></button>
+            <span class="paper-route-touch__pad-spacer" aria-hidden="true"></span>
+          </div>
+          <div class="paper-route-touch__actions" aria-label="Action controls">
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--action paper-route-touch__button--y" data-paper-route-action="trick" aria-label="Hold wheelie"><span class="paper-route-touch__glyph" aria-hidden="true">Y</span><span class="paper-route-touch__caption">Wheelie</span></button>
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--action paper-route-touch__button--x" data-paper-route-action="jump" aria-label="Bunny hop"><span class="paper-route-touch__glyph" aria-hidden="true">X</span><span class="paper-route-touch__caption">Hop</span></button>
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--action paper-route-touch__button--b" data-paper-route-action="throw-left" aria-label="Toss left"><span class="paper-route-touch__glyph" aria-hidden="true">B</span><span class="paper-route-touch__caption">Toss L</span></button>
+            <button type="button" class="paper-route-touch__button paper-route-touch__button--action paper-route-touch__button--a" data-paper-route-action="throw-right" aria-label="Toss right"><span class="paper-route-touch__glyph" aria-hidden="true">A</span><span class="paper-route-touch__caption">Toss R</span></button>
+          </div>
         </div>
       </div>
 

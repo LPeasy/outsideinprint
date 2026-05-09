@@ -103,7 +103,7 @@ test("Paper-Bob partial lazy-loads pinned same-origin Phaser and runtime assets"
   assert.match(paperRoutePartial, /data-paper-route-intro-atlas-src="\{\{ \$introAtlas\.RelPermalink \}\}"/);
   assert.match(paperRoutePartial, /data-paper-route-intro-atlas-webp-src="\{\{ \$introAtlasWebp\.RelPermalink \}\}"/);
   assert.match(paperRoutePartial, /data-paper-route-intro-atlas-json-src="\{\{ \$introAtlasJson\.RelPermalink \}\}"/);
-  assert.match(paperRoutePartial, /data-paper-route-skip-intro/);
+  assert.doesNotMatch(paperRoutePartial, /data-paper-route-skip-intro/);
   assert.match(paperRoutePartial, /data-paper-route-intro-progress/);
   assert.match(paperRoutePartial, /data-paper-route-papers/);
   assert.match(paperRoutePartial, /data-paper-route-mute/);
@@ -120,6 +120,17 @@ test("Paper-Bob partial lazy-loads pinned same-origin Phaser and runtime assets"
   assert.match(paperRoutePartial, /Thirty papers\. Seventy-five seconds\./);
   assert.match(paperRoutePartial, /data-paper-route-summary-metrics/);
   assert.match(paperRoutePartial, /Play again\?/);
+  assert.match(paperRoutePartial, /paper-route-touch__pad/);
+  assert.match(paperRoutePartial, /data-paper-route-dpad/);
+  assert.match(paperRoutePartial, /paper-route-touch__actions/);
+  assert.match(paperRoutePartial, /data-paper-route-action="steer-up"/);
+  assert.match(paperRoutePartial, /data-paper-route-action="steer-left"/);
+  assert.match(paperRoutePartial, /data-paper-route-action="steer-right"/);
+  assert.match(paperRoutePartial, /data-paper-route-action="steer-down"/);
+  assert.match(paperRoutePartial, /data-paper-route-action="throw-left"[\s\S]*>B<[\s\S]*Toss L/);
+  assert.match(paperRoutePartial, /data-paper-route-action="throw-right"[\s\S]*>A<[\s\S]*Toss R/);
+  assert.match(paperRoutePartial, /data-paper-route-action="jump"[\s\S]*>X<[\s\S]*Hop/);
+  assert.match(paperRoutePartial, /data-paper-route-action="trick"[\s\S]*>Y<[\s\S]*Wheelie/);
   assert.match(paperRoutePartial, /Toss left: Q\/J/);
   assert.doesNotMatch(paperRoutePartial, /Paper\s+Route/);
   assert.doesNotMatch(paperRoutePartial, /Pedal the two-column route|Press hold|Run it again|Warming the presses/);
@@ -170,12 +181,14 @@ test("Paper-Bob cropped sprite manifest entries point to real PNG files with met
     "intro_bob_laydown",
     "intro_bob_read_01",
     "intro_bob_read_02",
+    "intro_bob_ride_bubble_gum",
     "intro_bob_ride_front_01",
     "intro_bob_ride_front_02",
     "intro_bob_ride_front_03",
     "intro_bob_ride_front_04",
     "intro_bob_ride_front_05",
     "intro_bob_ride_front_06",
+    "intro_bob_ride_peace",
     "intro_bob_spot_finale_01",
     "intro_bob_spot_finale_02",
     "intro_bob_spot_finale_03",
@@ -185,6 +198,27 @@ test("Paper-Bob cropped sprite manifest entries point to real PNG files with met
     "intro_bob_turn_left_01",
     "intro_bob_turn_right_01",
     "intro_logo_paper_bob",
+    "intro_oip_bob_ride_01",
+    "intro_oip_bob_ride_02",
+    "intro_oip_bob_ride_03",
+    "intro_oip_bob_ride_04",
+    "intro_oip_bob_ride_05",
+    "intro_oip_bob_ride_06",
+    "intro_oip_bob_ride_bubble_gum",
+    "intro_oip_bob_ride_peace",
+    "intro_oip_bob_spot_finale_01",
+    "intro_oip_bob_spot_finale_02",
+    "intro_oip_bob_spot_finale_03",
+    "intro_oip_bob_spot_finale_04",
+    "intro_oip_bob_spot_finale_05",
+    "intro_oip_bob_spot_finale_06",
+    "intro_oip_setting_plate",
+    "intro_oip_spot_paper_side_01",
+    "intro_oip_spot_paper_side_02",
+    "intro_oip_spot_paper_side_03",
+    "intro_oip_spot_paper_side_04",
+    "intro_oip_spot_paper_side_05",
+    "intro_oip_spot_paper_side_06",
     "intro_sketch_bob_ride_01",
     "intro_sketch_bob_ride_02",
     "intro_sketch_bob_ride_03",
@@ -419,15 +453,52 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /track_left_06/);
   assert.match(game, /track_right_01/);
   assert.match(game, /track_right_06/);
-  assert.match(game, /INTRO_DURATION = 7\.6/);
+  assert.match(game, /INTRO_DURATION = 10\.2/);
   assert.match(game, /INTRO_BEAT_SEQUENCE/);
-  assert.match(game, /key: "sketch-draw", start: 0, end: 1\.1/);
-  assert.match(game, /key: "spot-cross", start: 3\.1, end: 4\.6/);
+  assert.match(game, /key: "sketch-draw", start: 0, end: 2/);
+  assert.match(game, /key: "bob-ride", start: 2, end: 4\.3/);
+  assert.match(game, /key: "spot-cross", start: 4\.3, end: 6/);
+  assert.match(game, /key: "finale", start: 6, end: 8\.4/);
+  assert.match(game, /key: "hold", start: 8\.4, end: 10\.2/);
+  assert.match(game, /INTRO_OIP_SETTING_FRAME = "intro_oip_setting_plate"/);
   assert.match(game, /INTRO_BOB_SPOT_FINALE_FRAMES = \["intro_bob_spot_finale_01"/);
+  assert.match(game, /INTRO_RIDE_PERSONALITY_FRAMES = \["intro_bob_ride_bubble_gum", "intro_bob_ride_peace"\]/);
+  assert.match(game, /INTRO_OIP_BOB_RIDE_FRAMES = \["intro_oip_bob_ride_01"/);
+  assert.match(game, /INTRO_OIP_BOB_PERSONALITY_FRAMES = \["intro_oip_bob_ride_bubble_gum", "intro_oip_bob_ride_peace"\]/);
+  assert.match(game, /INTRO_OIP_SPOT_PAPER_SIDE_FRAMES = \["intro_oip_spot_paper_side_01"/);
+  assert.match(game, /INTRO_OIP_BOB_SPOT_FINALE_FRAMES = \["intro_oip_bob_spot_finale_01"/);
   assert.match(game, /INTRO_SKETCH_BOB_RIDE_FRAMES = \["intro_sketch_bob_ride_01"/);
   assert.match(game, /INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES = \["intro_sketch_spot_paper_side_01"/);
   assert.match(game, /INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES = \["intro_sketch_bob_spot_finale_01"/);
   assert.match(game, /introColorBlendAt/);
+  assert.match(game, /introOipBlendAt/);
+  assert.match(game, /introRideFrameAt/);
+  assert.match(game, /key === "Enter"[\s\S]*this\.introPrepComplete[\s\S]*this\.skipIntro\(\)/);
+  assert.match(game, /setPointerCapture[\s\S]*try[\s\S]*catch/);
+  assert.match(game, /window\.innerWidth <= 720/);
+  assert.match(game, /PaperRouteGame\.prototype\.bindStagePointerInput/);
+  assert.match(game, /scene\.input\.on\("pointerdown"/);
+  assert.match(game, /scene\.input\.on\("pointermove"/);
+  assert.match(game, /scene\.input\.on\("pointerup"/);
+  assert.match(game, /PaperRouteGame\.prototype\.handleStagePointerDown[\s\S]*this\.skipIntro\(\)/);
+  assert.match(game, /this\.touchControlMode = "gameboy-dock"/);
+  assert.match(game, /PaperRouteGame\.prototype\.handleStagePointerDown[\s\S]*this\.lastTouchZone = "gamepad-only"[\s\S]*this\.clearStageTouchState\(\)/);
+  assert.doesNotMatch(game, /zone === "left-panel"[\s\S]*this\.throwPaper\("left", true\)/);
+  assert.doesNotMatch(game, /zone === "right-panel"[\s\S]*this\.throwPaper\("right", true\)/);
+  assert.match(game, /action === "steer-left"[\s\S]*this\.heldLeft = pressed/);
+  assert.match(game, /action === "steer-right"[\s\S]*this\.heldRight = pressed/);
+  assert.match(game, /action === "steer-up"[\s\S]*this\.heldUp = pressed/);
+  assert.match(game, /action === "steer-down"[\s\S]*this\.heldDown = pressed/);
+  assert.match(game, /this\.lastTouchZone = "gamepad-" \+ action/);
+  assert.match(game, /this\.dpadSurface = this\.touchPanel[\s\S]*querySelector\("\[data-paper-route-dpad\]"\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.bindDpadSurface/);
+  assert.match(game, /PaperRouteGame\.prototype\.updateDpadFromPointerEvent/);
+  assert.match(game, /Math\.abs\(dx\) > Math\.abs\(dy\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.applyDpadDirection[\s\S]*this\.heldLeft = direction === "left"[\s\S]*this\.heldDown = direction === "down"/);
+  assert.match(game, /PaperRouteGame\.prototype\.releaseDpad[\s\S]*this\.dpadActive = false/);
+  assert.match(game, /dpadActive/);
+  assert.match(game, /dpadDirection/);
+  assert.match(game, /touchSteerTargetX/);
   assert.match(game, /SPOT_RUN_PAPER_SIDE_FRAMES = \["spot_run_paper_side_01"/);
   assert.match(game, /spots: 1/);
   assert.match(game, /spotFirstDelay: 8000/);
@@ -437,6 +508,9 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /scene\.physics\.add\.overlap\(this\.player, this\.spots/);
   assert.match(game, /create\("spotRunPaperSide", SPOT_RUN_PAPER_SIDE_FRAMES, 8, -1\)/);
   assert.match(game, /create\("introBobSpotFinale", INTRO_BOB_SPOT_FINALE_FRAMES, 4, 0\)/);
+  assert.match(game, /create\("introOipBobRide", INTRO_OIP_BOB_RIDE_FRAMES, 7, -1\)/);
+  assert.match(game, /create\("introOipSpotPaperSide", INTRO_OIP_SPOT_PAPER_SIDE_FRAMES, 8, -1\)/);
+  assert.match(game, /create\("introOipBobSpotFinale", INTRO_OIP_BOB_SPOT_FINALE_FRAMES, 4, 0\)/);
   assert.match(game, /finale: scene\.add\.sprite\(this\.width \* \.46, this\.height \* \.62, "paperBobIntro", INTRO_BOB_SPOT_FINALE_FRAMES\[0\]\)/);
   assert.match(game, /PaperRouteGame\.prototype\.positionIntroFinale/);
   assert.match(game, /spot\.setTexture\("paperBobIntro", frame\)/);
@@ -453,8 +527,10 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /create\("introSketchSpotPaperSide", INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES, 8, -1\)/);
   assert.match(game, /create\("introSketchBobSpotFinale", INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES, 4, 0\)/);
   assert.match(game, /PaperRouteGame\.prototype\.createIntroSketchObjects/);
+  assert.match(game, /setting: scene\.add\.image\(this\.width \* \.5, this\.height \* \.5, "paperBobIntro", INTRO_OIP_SETTING_FRAME\)/);
+  assert.match(game, /oipBob: scene\.add\.sprite\(this\.width \* \.5, this\.height \* \.56, "paperBobIntro", INTRO_OIP_BOB_RIDE_FRAMES\[0\]\)/);
   assert.match(game, /PaperRouteGame\.prototype\.drawIntroSketchDecor/);
-  assert.match(game, /PaperRouteGame\.prototype\.holdIntroSketchFinale[\s\S]*this\.reducedMotion[\s\S]*introSketchLayer\.setVisible\(false\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.holdIntroSketchFinale[\s\S]*this\.reducedMotion[\s\S]*introSketchLayer\.setVisible\(true\)/);
   assert.match(game, /introBeat/);
   assert.match(game, /introBobFrame/);
   assert.match(game, /introSpotFrame/);
@@ -464,7 +540,14 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /introSketchVisible/);
   assert.match(game, /introSketchReveal/);
   assert.match(game, /introColorBlend/);
+  assert.match(game, /introOipBlend/);
   assert.match(game, /introSketchFrame/);
+  assert.match(game, /introSettingVisible/);
+  assert.match(game, /introSettingFrame/);
+  assert.match(game, /touchControlMode/);
+  assert.match(game, /touchSteerActive/);
+  assert.match(game, /touchSteerTargetX/);
+  assert.match(game, /lastTouchZone/);
   assert.match(game, /targetGroups/);
   assert.match(game, /trackSegmentSpawnBuffer: 90/);
   assert.doesNotMatch(game, /PROPERTY_CONFIGS|SIDE_BASE_FRAMES|side_base_left_01|side_base_right_03|fallbackFrame: "property_left_01"|fallbackFrame: "property_right_03"/);
@@ -593,6 +676,8 @@ test("Paper-Bob visual shell has balanced masthead and accessible overlay styles
   assert.match(css, /\.paper-route-dialog\{[\s\S]*padding:\.75rem \.85rem \.7rem;/);
   assert.match(css, /\.paper-route-stage\{[\s\S]*height:min\(100%, 760px, calc\(100dvh - 8\.9rem\)\);/);
   assert.match(css, /\.paper-route-stage\{[\s\S]*max-width:min\(100%, 520px\);/);
+  assert.match(css, /\.paper-route-game\{[\s\S]*touch-action:none;[\s\S]*user-select:none;/);
+  assert.match(css, /\.paper-route-game canvas\{[\s\S]*touch-action:none;[\s\S]*user-select:none;/);
   assert.match(css, /\.paper-route-intro\{[\s\S]*position:absolute;/);
   assert.match(css, /\.paper-route-intro__meter span\{[\s\S]*transition:width \.18s linear;/);
   assert.match(css, /\.paper-route-stage--intro-ready \.paper-route-card--start/);
@@ -611,9 +696,15 @@ test("Paper-Bob visual shell has balanced masthead and accessible overlay styles
   assert.match(css, /\.paper-route-dialog__status\{[\s\S]*border-left:2px solid/);
   assert.match(css, /@media \(max-width:720px\)\{[\s\S]*\.paper-route-scorebar\{[\s\S]*grid-template-columns:repeat\(4, minmax\(0, 1fr\)\);/);
   assert.match(css, /@media \(max-width:720px\)\{[\s\S]*\.paper-route-stage\{[\s\S]*height:min\(100%, 620px, calc\(100dvh - 10\.8rem\)\);/);
-  assert.match(css, /\.paper-route-touch\{[\s\S]*grid-template-columns:repeat\(6, minmax\(0, 1fr\)\);/);
-  assert.match(css, /@media \(hover:none\), \(pointer:coarse\)\{[\s\S]*\.paper-route-touch\{[\s\S]*display:grid;/);
-  assert.match(css, /@media \(max-width:720px\)\{[\s\S]*\.paper-route-touch\{[\s\S]*display:grid;/);
+  assert.match(css, /\.paper-route-touch\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) minmax\(0, 1fr\);/);
+  assert.match(css, /\.paper-route-touch__pad\{[\s\S]*grid-template-columns:repeat\(3, 2\.12rem\);[\s\S]*touch-action:none;/);
+  assert.match(css, /\.paper-route-touch__actions\{[\s\S]*position:relative;[\s\S]*width:7rem;[\s\S]*height:5\.8rem;[\s\S]*transform:translateX\(-\.32rem\);/);
+  assert.match(css, /\.paper-route-touch__button--y\{[\s\S]*left:0;[\s\S]*top:1\.62rem;/);
+  assert.match(css, /\.paper-route-touch__button--a\{[\s\S]*left:4\.28rem;[\s\S]*top:1\.62rem;/);
+  assert.match(css, /\.paper-route-touch button\{[\s\S]*touch-action:manipulation;/);
+  assert.match(css, /@media \(hover:none\), \(pointer:coarse\)\{[\s\S]*--paper-route-control-dock-height:10\.15rem;[\s\S]*\.paper-route-game\{[\s\S]*bottom:var\(--paper-route-control-dock-height\);[\s\S]*\.paper-route-touch\{[\s\S]*display:grid;/);
+  assert.match(css, /@media \(max-width:720px\)\{[\s\S]*\.paper-route-stage\{[\s\S]*--paper-route-control-dock-height:10\.15rem;[\s\S]*align-self:start;[\s\S]*\.paper-route-game\{[\s\S]*bottom:var\(--paper-route-control-dock-height\);/);
+  assert.match(css, /@media \(max-width:720px\)\{[\s\S]*\.paper-route-touch\{[\s\S]*display:grid;[\s\S]*grid-template-columns:minmax\(0, 1fr\) minmax\(0, 1fr\);/);
   assert.match(css, /@media \(prefers-reduced-motion:reduce\)/);
   assert.match(css, /html\[data-theme="light"\] \.paper-route-dialog/);
 });

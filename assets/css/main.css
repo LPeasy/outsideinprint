@@ -6328,11 +6328,17 @@ body.paper-route-open{
   inset:0;
   overflow:hidden;
   border-radius:inherit;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 .paper-route-game canvas{
   display:block;
   width:100% !important;
   height:100% !important;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 .paper-route-loading,
 .paper-route-card{
@@ -6454,17 +6460,6 @@ body.paper-route-open{
   height:100%;
   background:linear-gradient(90deg, var(--paper-route-green), var(--paper-route-gold));
   transition:width .18s linear;
-}
-.paper-route-intro button{
-  min-height:2.1rem;
-  padding:.42rem .72rem;
-  border-color:rgba(213,190,150,.45);
-  background:rgba(255,248,232,.78);
-  box-shadow:0 8px 20px rgba(47,31,17,.18);
-}
-.paper-route-intro button:disabled{
-  opacity:.45;
-  cursor:wait;
 }
 .paper-route-card--failure{
   border-color:rgba(168,78,53,.42);
@@ -6686,26 +6681,139 @@ body.paper-route-open{
 }
 .paper-route-touch{
   position:absolute;
-  left:50%;
-  right:auto;
-  bottom:.55rem;
+  left:.55rem;
+  right:.55rem;
+  bottom:.48rem;
   z-index:2;
   display:none;
-  grid-template-columns:repeat(6, minmax(0, 1fr));
-  gap:.28rem;
-  width:min(calc(100% - 1.1rem), 24rem);
-  transform:translateX(-50%);
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+  align-items:center;
+  gap:.72rem;
+  width:auto;
+  max-width:22rem;
+  margin:0 auto;
+  padding:.42rem .56rem .48rem;
+  border:1px solid rgba(88,62,36,.2);
+  border-radius:1.05rem;
+  background:
+    linear-gradient(180deg, rgba(255,252,241,.94), rgba(223,208,184,.9)),
+    repeating-linear-gradient(90deg, rgba(47,31,17,.03) 0 1px, transparent 1px 8px);
+  box-shadow:0 10px 22px rgba(47,31,17,.2), 0 1px 0 rgba(255,255,255,.62) inset;
+  transform:none;
+  touch-action:manipulation;
+  user-select:none;
+  -webkit-user-select:none;
 }
 .paper-route-touch[hidden]{
   display:none !important;
 }
 .paper-route-touch button{
-  min-height:2rem;
-  padding:.3rem .32rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:0;
+  padding:0;
   letter-spacing:0;
-  background:rgba(255,248,232,.78);
-  box-shadow:0 6px 14px rgba(47,31,17,.16);
-  text-shadow:0 1px 0 rgba(255,248,232,.3);
+  background:linear-gradient(180deg, rgba(54,49,43,.96), rgba(24,22,20,.98));
+  color:#fff8e8;
+  box-shadow:0 5px 0 rgba(47,31,17,.34), 0 8px 16px rgba(47,31,17,.16);
+  text-shadow:0 1px 0 rgba(0,0,0,.38);
+  touch-action:manipulation;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.paper-route-touch button:active{
+  transform:translateY(2px);
+  box-shadow:0 3px 0 rgba(47,31,17,.34), 0 5px 10px rgba(47,31,17,.14);
+}
+.paper-route-touch__pad{
+  display:grid;
+  grid-template-columns:repeat(3, 2.12rem);
+  grid-template-rows:repeat(3, 1.62rem);
+  justify-self:start;
+  justify-content:center;
+  gap:.04rem;
+  padding:.22rem;
+  border-radius:.86rem;
+  background:rgba(47,31,17,.08);
+  box-shadow:0 1px 0 rgba(255,255,255,.48) inset;
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.paper-route-touch__pad-spacer{
+  display:block;
+}
+.paper-route-touch__pad-center{
+  display:block;
+  border-radius:.18rem;
+  background:linear-gradient(180deg, rgba(54,49,43,.94), rgba(24,22,20,.96));
+  box-shadow:0 5px 0 rgba(47,31,17,.34), 0 8px 16px rgba(47,31,17,.12);
+}
+.paper-route-touch__button--dpad{
+  width:2.12rem;
+  height:1.62rem;
+  border-radius:.22rem;
+  font-size:1rem;
+  line-height:1;
+}
+.paper-route-touch__button--up{
+  border-radius:.28rem .28rem .12rem .12rem;
+}
+.paper-route-touch__button--left{
+  border-radius:.28rem .12rem .12rem .28rem;
+}
+.paper-route-touch__button--right{
+  border-radius:.12rem .28rem .28rem .12rem;
+}
+.paper-route-touch__button--down{
+  border-radius:.12rem .12rem .28rem .28rem;
+}
+.paper-route-touch__actions{
+  position:relative;
+  display:block;
+  width:7rem;
+  height:5.8rem;
+  justify-self:end;
+  transform:translateX(-.32rem);
+}
+.paper-route-touch__button--action{
+  position:absolute;
+  width:2.72rem;
+  height:2.38rem;
+  flex-direction:column;
+  gap:.03rem;
+  border-radius:999px;
+}
+.paper-route-touch__button--y{
+  left:0;
+  top:1.62rem;
+}
+.paper-route-touch__button--x{
+  left:2.14rem;
+  top:0;
+}
+.paper-route-touch__button--b{
+  left:2.14rem;
+  top:3.18rem;
+}
+.paper-route-touch__button--a{
+  left:4.28rem;
+  top:1.62rem;
+}
+.paper-route-touch__glyph{
+  display:block;
+  font-size:.94rem;
+  line-height:1;
+}
+.paper-route-touch__caption{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  font-size:.43rem;
+  line-height:1;
+  text-overflow:ellipsis;
+  text-transform:uppercase;
 }
 .paper-route-help{
   display:none;
@@ -6765,8 +6873,7 @@ html[data-theme="light"] .paper-route-cabinet-label{
 html[data-theme="light"] .paper-route-scorebar span,
 html[data-theme="light"] .paper-route-dialog__button,
 html[data-theme="light"] .paper-route-dialog__close,
-html[data-theme="light"] .paper-route-card button,
-html[data-theme="light"] .paper-route-touch button{
+html[data-theme="light"] .paper-route-card button{
   border-color:rgba(23,21,19,.14);
   background:rgba(255,252,241,.42);
 }
@@ -6783,10 +6890,6 @@ html[data-theme="light"] .paper-route-intro__meter{
   border-color:rgba(23,21,19,.16);
   background:rgba(255,252,241,.62);
 }
-html[data-theme="light"] .paper-route-intro button{
-  border-color:rgba(23,21,19,.14);
-  background:rgba(255,252,241,.86);
-}
 html[data-theme="light"] .paper-route-card::before{
   color:rgba(143,110,61,.2);
 }
@@ -6796,6 +6899,12 @@ html[data-theme="light"] .paper-route-card--failure{
     rgba(247,239,227,.97);
 }
 @media (hover:none), (pointer:coarse){
+  .paper-route-stage{
+    --paper-route-control-dock-height:10.15rem;
+  }
+  .paper-route-game{
+    bottom:var(--paper-route-control-dock-height);
+  }
   .paper-route-touch{
     display:grid;
   }
@@ -6863,18 +6972,20 @@ html[data-theme="light"] .paper-route-card--failure{
     font-size:.8rem;
   }
   .paper-route-stage{
+    --paper-route-control-dock-height:10.15rem;
     width:auto;
     min-height:0;
     height:min(100%, 620px, calc(100dvh - 10.8rem));
     aspect-ratio:9 / 16;
+    align-self:start;
     background:
-      linear-gradient(0deg, rgba(88,62,36,.22) 0 2.65rem, transparent 2.65rem),
+      linear-gradient(0deg, rgba(88,62,36,.22) 0 var(--paper-route-control-dock-height), transparent var(--paper-route-control-dock-height)),
       repeating-linear-gradient(90deg, rgba(71,49,29,.028) 0 1px, transparent 1px 9px),
       linear-gradient(180deg, rgba(85,123,130,.14), rgba(85,123,130,0) 44%),
       #eadbc4;
   }
   .paper-route-game{
-    bottom:2.65rem;
+    bottom:var(--paper-route-control-dock-height);
   }
   .paper-route-cabinet-label{
     left:.5rem;
@@ -6956,18 +7067,62 @@ html[data-theme="light"] .paper-route-card--failure{
   }
   .paper-route-touch{
     display:grid;
-    left:.45rem;
-    right:.45rem;
-    bottom:.42rem;
+    left:.38rem;
+    right:.38rem;
+    bottom:.48rem;
     width:auto;
+    max-width:none;
     transform:none;
-    grid-template-columns:repeat(6, minmax(0, 1fr));
-    gap:.24rem;
+    grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+    gap:.62rem;
+    padding:.48rem .48rem .54rem;
+    border-radius:1rem;
   }
   .paper-route-touch button{
-    min-height:1.72rem;
-    padding:.18rem .2rem;
-    font-size:.52rem;
+    font-size:.68rem;
+  }
+  .paper-route-touch__pad{
+    grid-template-columns:repeat(3, 2.55rem);
+    grid-template-rows:repeat(3, 2.55rem);
+    gap:.05rem;
+    padding:.24rem;
+    border-radius:1rem;
+  }
+  .paper-route-touch__button--dpad{
+    width:2.55rem;
+    height:2.55rem;
+    font-size:1rem;
+  }
+  .paper-route-touch__actions{
+    width:8.25rem;
+    height:7.05rem;
+    transform:translateX(-.72rem);
+  }
+  .paper-route-touch__button--action{
+    width:3.05rem;
+    height:2.85rem;
+  }
+  .paper-route-touch__button--y{
+    left:0;
+    top:2.1rem;
+  }
+  .paper-route-touch__button--x{
+    left:2.6rem;
+    top:.16rem;
+  }
+  .paper-route-touch__button--b{
+    left:2.6rem;
+    top:4.02rem;
+  }
+  .paper-route-touch__button--a{
+    left:5.2rem;
+    top:2.1rem;
+  }
+  .paper-route-touch__glyph{
+    font-size:.98rem;
+  }
+  .paper-route-touch__caption{
+    font-size:.42rem;
   }
 }
 @media (max-width:420px){

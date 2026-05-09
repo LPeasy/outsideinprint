@@ -147,16 +147,22 @@
     left: buildTrackSegmentConfigs("left"),
     right: buildTrackSegmentConfigs("right")
   };
-  var INTRO_DURATION = 7.6;
+  var INTRO_DURATION = 10.2;
   var INTRO_BEAT_SEQUENCE = [
-    { key: "sketch-draw", start: 0, end: 1.1 },
-    { key: "bob-ride", start: 1.1, end: 3.1 },
-    { key: "spot-cross", start: 3.1, end: 4.6 },
-    { key: "finale", start: 4.6, end: 6.4 },
-    { key: "hold", start: 6.4, end: 7.6 }
+    { key: "sketch-draw", start: 0, end: 2 },
+    { key: "bob-ride", start: 2, end: 4.3 },
+    { key: "spot-cross", start: 4.3, end: 6 },
+    { key: "finale", start: 6, end: 8.4 },
+    { key: "hold", start: 8.4, end: 10.2 }
   ];
+  var INTRO_OIP_SETTING_FRAME = "intro_oip_setting_plate";
   var INTRO_RIDE_FRAMES = ["intro_bob_ride_front_01", "intro_bob_ride_front_02", "intro_bob_ride_front_03", "intro_bob_ride_front_04", "intro_bob_ride_front_05", "intro_bob_ride_front_06"];
+  var INTRO_RIDE_PERSONALITY_FRAMES = ["intro_bob_ride_bubble_gum", "intro_bob_ride_peace"];
   var INTRO_BOB_SPOT_FINALE_FRAMES = ["intro_bob_spot_finale_01", "intro_bob_spot_finale_02", "intro_bob_spot_finale_03", "intro_bob_spot_finale_04", "intro_bob_spot_finale_05", "intro_bob_spot_finale_06"];
+  var INTRO_OIP_BOB_RIDE_FRAMES = ["intro_oip_bob_ride_01", "intro_oip_bob_ride_02", "intro_oip_bob_ride_03", "intro_oip_bob_ride_04", "intro_oip_bob_ride_05", "intro_oip_bob_ride_06"];
+  var INTRO_OIP_BOB_PERSONALITY_FRAMES = ["intro_oip_bob_ride_bubble_gum", "intro_oip_bob_ride_peace"];
+  var INTRO_OIP_SPOT_PAPER_SIDE_FRAMES = ["intro_oip_spot_paper_side_01", "intro_oip_spot_paper_side_02", "intro_oip_spot_paper_side_03", "intro_oip_spot_paper_side_04", "intro_oip_spot_paper_side_05", "intro_oip_spot_paper_side_06"];
+  var INTRO_OIP_BOB_SPOT_FINALE_FRAMES = ["intro_oip_bob_spot_finale_01", "intro_oip_bob_spot_finale_02", "intro_oip_bob_spot_finale_03", "intro_oip_bob_spot_finale_04", "intro_oip_bob_spot_finale_05", "intro_oip_bob_spot_finale_06"];
   var INTRO_SKETCH_BOB_RIDE_FRAMES = ["intro_sketch_bob_ride_01", "intro_sketch_bob_ride_02", "intro_sketch_bob_ride_03", "intro_sketch_bob_ride_04", "intro_sketch_bob_ride_05", "intro_sketch_bob_ride_06"];
   var INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES = ["intro_sketch_spot_paper_side_01", "intro_sketch_spot_paper_side_02", "intro_sketch_spot_paper_side_03", "intro_sketch_spot_paper_side_04", "intro_sketch_spot_paper_side_05", "intro_sketch_spot_paper_side_06"];
   var INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES = ["intro_sketch_bob_spot_finale_01", "intro_sketch_bob_spot_finale_02", "intro_sketch_bob_spot_finale_03", "intro_sketch_bob_spot_finale_04", "intro_sketch_bob_spot_finale_05", "intro_sketch_bob_spot_finale_06"];
@@ -253,17 +259,40 @@
   }
 
   function introColorBlendAt(time) {
-    if (time < 3.1) {
+    if (time < 7.6) {
       return 0;
     }
-    if (time < 4.6) {
-      return easeOutCubic((time - 3.1) / 1.5) * .12;
-    }
-    if (time < 6.4) {
-      return .12 + easeOutCubic((time - 4.6) / 1.8) * .88;
+    if (time < 9.4) {
+      return easeOutCubic((time - 7.6) / 1.8);
     }
 
     return 1;
+  }
+
+  function introOipBlendAt(time) {
+    if (time < 2) {
+      return 0;
+    }
+    if (time < 4.3) {
+      return easeOutCubic((time - 2) / 2.3);
+    }
+
+    return 1;
+  }
+
+  function introRideFrameAt(frames, personalityFrames, beat, time, frameRate) {
+    var progress = clamp((time - beat.start) / Math.max(.01, beat.end - beat.start), 0, 1);
+
+    if (personalityFrames && personalityFrames.length) {
+      if (progress >= .82) {
+        return personalityFrames[Math.min(personalityFrames.length - 1, 1)];
+      }
+      if (progress >= .68) {
+        return personalityFrames[0];
+      }
+    }
+
+    return frameFromTime(frames, time - beat.start, frameRate, false);
   }
 
   function frameFromTime(frames, elapsed, frameRate, clampToEnd) {
@@ -444,6 +473,7 @@
     this.summaryRestart = this.options.summaryRestart;
     this.touchPanel = this.options.touchPanel;
     this.touchControls = this.options.touchControls || [];
+    this.dpadSurface = this.touchPanel && this.touchPanel.querySelector ? this.touchPanel.querySelector("[data-paper-route-dpad]") : null;
     this.highScore = readHighScore();
     this.rules = window.OipPaperRouteRules.create({ highScore: this.highScore });
     this.audio = new RouteAudio();
@@ -474,6 +504,15 @@
     this.heldRight = false;
     this.heldUp = false;
     this.heldDown = false;
+    this.touchSteerActive = false;
+    this.touchSteerTargetX = null;
+    this.touchSteerPointerId = null;
+    this.touchSteerDirection = 0;
+    this.dpadActive = false;
+    this.dpadPointerId = null;
+    this.dpadDirection = "";
+    this.lastTouchZone = "";
+    this.touchControlMode = "gameboy-dock";
     this.trickHeld = false;
     this.throwCooldown = 0;
     this.targetTimer = 0;
@@ -509,7 +548,9 @@
     this.introFinaleFrame = "";
     this.introSketchReveal = 0;
     this.introColorBlend = 0;
+    this.introOipBlend = 0;
     this.introSketchFrame = "";
+    this.introSettingFrame = "";
     this.playerPose = "";
     this.poseHoldUntil = 0;
     this.heldPose = "";
@@ -570,7 +611,13 @@
       var action = button.getAttribute("data-paper-route-action") || "";
       self.bind(button, "pointerdown", function (event) {
         event.preventDefault();
-        button.setPointerCapture && button.setPointerCapture(event.pointerId);
+        if (button.setPointerCapture) {
+          try {
+            button.setPointerCapture(event.pointerId);
+          } catch (error) {
+            // Synthetic smoke-test pointer events may not have an active capture target.
+          }
+        }
         self.handleAction(action, true);
       });
       self.bind(button, "pointerup", function (event) {
@@ -584,6 +631,8 @@
         self.handleAction(action, false);
       });
     });
+
+    this.bindDpadSurface();
 
     this.bind(this.root, "keydown", function (event) {
       self.handleDomKey(event, true);
@@ -623,7 +672,12 @@
       return;
     }
 
-    if (key === "ArrowLeft" || key === "a" || key === "A") {
+    if (key === "Enter" && !buttonTarget && !this.introComplete) {
+      if (this.introPrepComplete) {
+        this.skipIntro();
+        handled = true;
+      }
+    } else if (key === "ArrowLeft" || key === "a" || key === "A") {
       this.heldLeft = true;
       handled = true;
     } else if (key === "ArrowRight" || key === "d" || key === "D") {
@@ -660,11 +714,203 @@
     }
   };
 
+  PaperRouteGame.prototype.bindDpadSurface = function () {
+    var self = this;
+
+    if (!this.dpadSurface) {
+      return;
+    }
+
+    this.bind(this.dpadSurface, "pointerdown", function (event) {
+      event.preventDefault();
+      self.dpadActive = true;
+      self.dpadPointerId = event.pointerId !== undefined ? event.pointerId : null;
+      if (self.dpadSurface.setPointerCapture && event.pointerId !== undefined) {
+        try {
+          self.dpadSurface.setPointerCapture(event.pointerId);
+        } catch (error) {
+          // Synthetic smoke-test pointer events may not have an active capture target.
+        }
+      }
+      self.updateDpadFromPointerEvent(event);
+    });
+    this.bind(this.dpadSurface, "pointermove", function (event) {
+      if (!self.dpadActive) {
+        return;
+      }
+      if (self.dpadPointerId !== null && event.pointerId !== undefined && event.pointerId !== self.dpadPointerId) {
+        return;
+      }
+      event.preventDefault();
+      self.updateDpadFromPointerEvent(event);
+    });
+    this.bind(this.dpadSurface, "pointerup", function (event) {
+      if (self.dpadPointerId === null || event.pointerId === undefined || event.pointerId === self.dpadPointerId) {
+        event.preventDefault();
+        self.releaseDpad();
+      }
+    });
+    this.bind(this.dpadSurface, "pointercancel", function () {
+      self.releaseDpad();
+    });
+    this.bind(this.dpadSurface, "lostpointercapture", function () {
+      self.releaseDpad();
+    });
+  };
+
+  PaperRouteGame.prototype.updateDpadFromPointerEvent = function (event) {
+    var rect;
+    var x;
+    var y;
+    var dx;
+    var dy;
+    var deadZone;
+    var direction = "";
+
+    if (!this.dpadSurface || !this.dpadSurface.getBoundingClientRect) {
+      return;
+    }
+
+    rect = this.dpadSurface.getBoundingClientRect();
+    x = event.clientX - rect.left;
+    y = event.clientY - rect.top;
+    dx = x - rect.width / 2;
+    dy = y - rect.height / 2;
+    deadZone = Math.min(rect.width, rect.height) * .16;
+
+    if (Math.sqrt(dx * dx + dy * dy) >= deadZone) {
+      direction = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? "left" : "right") : (dy < 0 ? "up" : "down");
+    }
+
+    this.applyDpadDirection(direction);
+  };
+
+  PaperRouteGame.prototype.applyDpadDirection = function (direction) {
+    this.heldLeft = direction === "left";
+    this.heldRight = direction === "right";
+    this.heldUp = direction === "up";
+    this.heldDown = direction === "down";
+    this.dpadDirection = direction;
+    this.lastTouchZone = direction ? "dpad-" + direction : "dpad-center";
+  };
+
+  PaperRouteGame.prototype.releaseDpad = function () {
+    this.dpadActive = false;
+    this.dpadPointerId = null;
+    this.applyDpadDirection("");
+  };
+
+  PaperRouteGame.prototype.pointerIsTouchLike = function (pointer) {
+    var event = pointer && pointer.event;
+    var pointerType = event && event.pointerType;
+
+    if (pointerType === "touch" || pointerType === "pen") {
+      return true;
+    }
+    if (window.innerWidth <= 720) {
+      return true;
+    }
+
+    return !!(window.matchMedia && window.matchMedia("(hover: none), (pointer: coarse)").matches);
+  };
+
+  PaperRouteGame.prototype.stagePointerId = function (pointer) {
+    if (!pointer) {
+      return null;
+    }
+    if (pointer.event && pointer.event.pointerId !== undefined) {
+      return pointer.event.pointerId;
+    }
+    if (pointer.id !== undefined) {
+      return pointer.id;
+    }
+    return pointer.pointerId !== undefined ? pointer.pointerId : null;
+  };
+
+  PaperRouteGame.prototype.stageTouchZone = function (x) {
+    if (x < this.roadLeft) {
+      return "left-panel";
+    }
+    if (x > this.roadRight) {
+      return "right-panel";
+    }
+    return "road";
+  };
+
+  PaperRouteGame.prototype.clearStageTouchState = function () {
+    this.touchSteerActive = false;
+    this.touchSteerTargetX = null;
+    this.touchSteerPointerId = null;
+    this.touchSteerDirection = 0;
+  };
+
+  PaperRouteGame.prototype.bindStagePointerInput = function (scene) {
+    var self = this;
+
+    scene.input.on("pointerdown", function (pointer) {
+      self.handleStagePointerDown(pointer);
+    });
+    scene.input.on("pointermove", function (pointer) {
+      self.handleStagePointerMove(pointer);
+    });
+    scene.input.on("pointerup", function (pointer) {
+      self.handleStagePointerUp(pointer);
+    });
+    scene.input.on("pointerupoutside", function (pointer) {
+      self.handleStagePointerUp(pointer);
+    });
+  };
+
+  PaperRouteGame.prototype.handleStagePointerDown = function (pointer) {
+    var x;
+
+    if (!this.pointerIsTouchLike(pointer)) {
+      return;
+    }
+
+    x = clamp(pointer.x || 0, 0, this.width);
+    this.lastTouchZone = this.stageTouchZone(x);
+
+    if (!this.introComplete) {
+      if (this.introPrepComplete) {
+        this.lastTouchZone = "intro-skip";
+        this.skipIntro();
+      } else {
+        this.lastTouchZone = "intro-loading";
+      }
+      return;
+    }
+
+    this.lastTouchZone = "gamepad-only";
+    this.clearStageTouchState();
+  };
+
+  PaperRouteGame.prototype.handleStagePointerMove = function (pointer) {
+    if (!this.pointerIsTouchLike(pointer)) {
+      return;
+    }
+
+    this.clearStageTouchState();
+  };
+
+  PaperRouteGame.prototype.handleStagePointerUp = function (pointer) {
+    if (this.pointerIsTouchLike(pointer)) {
+      this.clearStageTouchState();
+    }
+  };
+
   PaperRouteGame.prototype.handleAction = function (action, pressed) {
+    if (pressed) {
+      this.lastTouchZone = "gamepad-" + action;
+    }
     if (action === "steer-left") {
       this.heldLeft = pressed;
     } else if (action === "steer-right") {
       this.heldRight = pressed;
+    } else if (action === "steer-up") {
+      this.heldUp = pressed;
+    } else if (action === "steer-down") {
+      this.heldDown = pressed;
     } else if (pressed && action === "throw-left") {
       this.throwPaper("left", true);
     } else if (pressed && action === "throw-right") {
@@ -927,6 +1173,7 @@
     this.keys.k = scene.input.keyboard.addKey(window.Phaser.Input.Keyboard.KeyCodes.K);
     this.keys.p = scene.input.keyboard.addKey(window.Phaser.Input.Keyboard.KeyCodes.P);
     this.keys.r = scene.input.keyboard.addKey(window.Phaser.Input.Keyboard.KeyCodes.R);
+    this.bindStagePointerInput(scene);
 
     scene.physics.add.overlap(this.papers, this.targets, function (paper, target) {
       self.scoreDelivery(paper, target);
@@ -996,6 +1243,9 @@
 
     create("introBobRideFront", INTRO_RIDE_FRAMES, 7, -1);
     create("introBobSpotFinale", INTRO_BOB_SPOT_FINALE_FRAMES, 4, 0);
+    create("introOipBobRide", INTRO_OIP_BOB_RIDE_FRAMES, 7, -1);
+    create("introOipSpotPaperSide", INTRO_OIP_SPOT_PAPER_SIDE_FRAMES, 8, -1);
+    create("introOipBobSpotFinale", INTRO_OIP_BOB_SPOT_FINALE_FRAMES, 4, 0);
     create("introSketchBobRide", INTRO_SKETCH_BOB_RIDE_FRAMES, 7, -1);
     create("introSketchSpotPaperSide", INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES, 8, -1);
     create("introSketchBobSpotFinale", INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES, 4, 0);
@@ -1730,12 +1980,24 @@
     this.introSketchObjects = {
       paperWash: scene.add.rectangle(this.width * .5, this.height * .5, this.width, this.height, 0xf5ecd7, .82),
       decor: scene.add.graphics(),
+      setting: scene.add.image(this.width * .5, this.height * .5, "paperBobIntro", INTRO_OIP_SETTING_FRAME),
+      oipBob: scene.add.sprite(this.width * .5, this.height * .56, "paperBobIntro", INTRO_OIP_BOB_RIDE_FRAMES[0]),
+      oipSpot: scene.add.sprite(this.width * .74, this.height * .66, "paperBobIntro", INTRO_OIP_SPOT_PAPER_SIDE_FRAMES[0]),
+      oipFinale: scene.add.sprite(this.width * .46, this.height * .63, "paperBobIntro", INTRO_OIP_BOB_SPOT_FINALE_FRAMES[0]),
       bob: scene.add.sprite(this.width * .5, this.height * .56, "paperBobIntro", INTRO_SKETCH_BOB_RIDE_FRAMES[0]),
       spot: scene.add.sprite(this.width * .74, this.height * .66, "paperBobIntro", INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES[0]),
       finale: scene.add.sprite(this.width * .46, this.height * .63, "paperBobIntro", INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES[0]),
       logo: scene.add.image(this.width * .5, this.height * .17, "paperBobIntro", "intro_sketch_logo_bw")
     };
     this.introSketchObjects.paperWash.setVisible(true);
+    this.introSketchObjects.setting.setDisplaySize(this.width, this.height);
+    this.introSketchObjects.setting.setAlpha(0);
+    this.introSketchObjects.setting.setVisible(false);
+    this.introSketchObjects.oipBob.setVisible(false);
+    this.introSketchObjects.oipSpot.setVisible(false);
+    this.introSketchObjects.oipSpot.setScale(.52);
+    this.introSketchObjects.oipFinale.setVisible(false);
+    this.introSketchObjects.oipFinale.setScale(.82);
     this.introSketchObjects.bob.setVisible(false);
     this.introSketchObjects.spot.setVisible(false);
     this.introSketchObjects.spot.setScale(.52);
@@ -1745,18 +2007,23 @@
     this.introSketchLayer.add([
       this.introSketchObjects.paperWash,
       this.introSketchObjects.decor,
+      this.introSketchObjects.setting,
+      this.introSketchObjects.oipBob,
+      this.introSketchObjects.oipSpot,
+      this.introSketchObjects.oipFinale,
       this.introSketchObjects.bob,
       this.introSketchObjects.spot,
       this.introSketchObjects.finale,
       this.introSketchObjects.logo
     ]);
-    this.drawIntroSketchDecor(0, 0, "sketch-draw", 0);
+    this.drawIntroSketchDecor(0, 0, "sketch-draw", 0, 0);
   };
 
-  PaperRouteGame.prototype.drawIntroSketchDecor = function (reveal, colorBlend, beatKey, beatProgress) {
+  PaperRouteGame.prototype.drawIntroSketchDecor = function (reveal, colorBlend, beatKey, beatProgress, oipBlend) {
     var objects = this.introSketchObjects || {};
     var g = objects.decor;
     var wash = objects.paperWash;
+    var setting = objects.setting;
     var width = this.width;
     var height = this.height;
     var roadLeft = this.roadLeft;
@@ -1770,8 +2037,10 @@
 
     reveal = clamp(reveal, 0, 1);
     colorBlend = clamp(colorBlend, 0, 1);
+    oipBlend = clamp(oipBlend === undefined ? colorBlend : oipBlend, 0, 1);
     this.introSketchReveal = Math.round(reveal * 1000) / 1000;
     this.introColorBlend = Math.round(colorBlend * 1000) / 1000;
+    this.introOipBlend = Math.round(oipBlend * 1000) / 1000;
 
     if (!g) {
       return;
@@ -1783,16 +2052,25 @@
     if (wash) {
       wash.setPosition(width * .5, height * .5);
       wash.setSize(width, height);
-      wash.setAlpha(this.reducedMotion ? 0 : .82 * (1 - colorBlend));
+      wash.setAlpha(this.reducedMotion ? 0 : .82 * (1 - oipBlend));
       wash.setVisible(!this.reducedMotion);
+    }
+    if (setting) {
+      setting.setPosition(width * .5, height * .5);
+      setting.setDisplaySize(width, height);
+      setting.setAlpha(this.reducedMotion ? 1 : oipBlend);
+      setting.setVisible(oipBlend > .01 || this.reducedMotion);
+      this.introSettingFrame = setting.visible ? INTRO_OIP_SETTING_FRAME : "";
+    } else {
+      this.introSettingFrame = "";
     }
 
     g.clear();
-    if (this.reducedMotion) {
+    if (this.reducedMotion || oipBlend >= .995) {
       return;
     }
 
-    lineAlpha = .88 - colorBlend * .56;
+    lineAlpha = .88 - oipBlend * .56;
 
     function line(x1, y1, x2, y2, start, end, alpha, widthOverride, color) {
       var amount;
@@ -1859,19 +2137,40 @@
   PaperRouteGame.prototype.holdIntroSketchFinale = function () {
     var sketch = this.introSketchObjects || {};
     var finale = sketch.finale;
+    var oipFinale = sketch.oipFinale;
     var logo = sketch.logo;
 
     if (this.reducedMotion) {
+      this.drawIntroSketchDecor(1, 1, "hold", 1, 1);
       if (this.introSketchLayer) {
-        this.introSketchLayer.setVisible(false);
+        this.introSketchLayer.setVisible(true);
+      }
+      if (sketch.bob) {
+        sketch.bob.setVisible(false);
+      }
+      if (sketch.spot) {
+        sketch.spot.setVisible(false);
+      }
+      if (sketch.finale) {
+        sketch.finale.setVisible(false);
+      }
+      if (sketch.oipBob) {
+        sketch.oipBob.setVisible(false);
+      }
+      if (sketch.oipSpot) {
+        sketch.oipSpot.setVisible(false);
+      }
+      if (sketch.oipFinale) {
+        sketch.oipFinale.setVisible(false);
       }
       this.introSketchFrame = "";
       this.introSketchReveal = 1;
       this.introColorBlend = 1;
+      this.introOipBlend = 1;
       return;
     }
 
-    this.drawIntroSketchDecor(1, 1, "hold", 1);
+    this.drawIntroSketchDecor(1, 1, "hold", 1, 1);
     if (this.introSketchLayer) {
       this.introSketchLayer.setVisible(true);
     }
@@ -1884,11 +2183,25 @@
       finale.setVisible(true);
       this.introSketchFrame = INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES[INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES.length - 1];
     }
+    if (oipFinale) {
+      oipFinale.setTexture("paperBobIntro", INTRO_OIP_BOB_SPOT_FINALE_FRAMES[INTRO_OIP_BOB_SPOT_FINALE_FRAMES.length - 1]);
+      oipFinale.setPosition(this.width * .46, this.height * .63);
+      oipFinale.setScale(.82);
+      oipFinale.setAngle(0);
+      oipFinale.setAlpha(.12);
+      oipFinale.setVisible(true);
+    }
     if (sketch.bob) {
       sketch.bob.setVisible(false);
     }
     if (sketch.spot) {
       sketch.spot.setVisible(false);
+    }
+    if (sketch.oipBob) {
+      sketch.oipBob.setVisible(false);
+    }
+    if (sketch.oipSpot) {
+      sketch.oipSpot.setVisible(false);
     }
     if (logo) {
       logo.setPosition(this.width * .5, this.height * .17);
@@ -1946,7 +2259,9 @@
     this.introFinaleFrame = "";
     this.introSketchReveal = 0;
     this.introColorBlend = 0;
+    this.introOipBlend = 0;
     this.introSketchFrame = "intro_sketch_logo_bw";
+    this.introSettingFrame = "";
   };
 
   PaperRouteGame.prototype.positionIntroFinale = function (frameName) {
@@ -1981,7 +2296,9 @@
     this.introFinaleFrame = "";
     this.introSketchReveal = 0;
     this.introColorBlend = 0;
+    this.introOipBlend = 0;
     this.introSketchFrame = "";
+    this.introSettingFrame = "";
     this.setIntroPanel(true);
     this.setIntroProgress(0);
     this.setIntroReadyControls(false);
@@ -2079,8 +2396,10 @@
     var sketchFrame;
     var sketchReveal;
     var colorBlend;
+    var oipBlend;
     var colorAlpha;
     var sketchAlpha;
+    var oipAlpha;
     var bob = this.introObjects.bob;
     var spot = this.introObjects.spot;
     var finale = this.introObjects.finale;
@@ -2091,6 +2410,9 @@
     var sketchSpot = sketch.spot;
     var sketchFinale = sketch.finale;
     var sketchLogo = sketch.logo;
+    var oipBob = sketch.oipBob;
+    var oipSpot = sketch.oipSpot;
+    var oipFinale = sketch.oipFinale;
     var centerX = this.width * .5;
     var logoWidth = Math.min(220, this.width * .48);
     var logoHeight = Math.min(56, this.width * .12);
@@ -2105,8 +2427,10 @@
     beatProgress = clamp((t - beat.start) / Math.max(.01, beat.end - beat.start), 0, 1);
     progress = t / INTRO_DURATION;
     colorBlend = introColorBlendAt(t);
+    oipBlend = introOipBlendAt(t);
     colorAlpha = colorBlend;
-    sketchAlpha = Math.max(.16, 1 - colorBlend * .84);
+    oipAlpha = oipBlend * (1 - colorBlend * .88);
+    sketchAlpha = Math.max(0, (1 - oipBlend) * (1 - colorBlend * .5));
     sketchReveal = beat.key === "sketch-draw" ? easeOutCubic(beatProgress) : 1;
     this.introBeat = beat.key;
     if (this.introPrepComplete) {
@@ -2116,7 +2440,7 @@
     }
     this.routeOffset += (120 + progress * 42) * deltaSeconds;
     this.redrawBackground();
-    this.drawIntroSketchDecor(sketchReveal, colorBlend, beat.key, beatProgress);
+    this.drawIntroSketchDecor(sketchReveal, colorBlend, beat.key, beatProgress, oipBlend);
 
     if (shade) {
       shade.setSize(this.width, this.height);
@@ -2132,8 +2456,11 @@
         if (sketchBob) {
           sketchBob.setVisible(false);
         }
+        if (oipBob) {
+          oipBob.setVisible(false);
+        }
       } else if (beat.key === "bob-ride") {
-        frame = frameFromTime(INTRO_RIDE_FRAMES, t - beat.start, 8, false);
+        frame = introRideFrameAt(INTRO_RIDE_FRAMES, INTRO_RIDE_PERSONALITY_FRAMES, beat, t, 8);
         sketchFrame = frameFromTime(INTRO_SKETCH_BOB_RIDE_FRAMES, t - beat.start, 8, false);
         bob.setTexture("paperBobIntro", frame);
         bob.setPosition(centerX + Math.sin(t * 2.4) * 18, this.height * (.38 + easeOutCubic(beatProgress) * .18));
@@ -2142,13 +2469,21 @@
         bob.setAlpha(colorAlpha);
         bob.setVisible(true);
         this.introBobFrame = frame;
+        if (oipBob) {
+          oipBob.setTexture("paperBobIntro", introRideFrameAt(INTRO_OIP_BOB_RIDE_FRAMES, INTRO_OIP_BOB_PERSONALITY_FRAMES, beat, t, 8));
+          oipBob.setPosition(bob.x, bob.y);
+          oipBob.setScale(bob.scaleX, bob.scaleY);
+          oipBob.setAngle(bob.angle);
+          oipBob.setAlpha(oipAlpha);
+          oipBob.setVisible(oipAlpha > .01);
+        }
         if (sketchBob) {
           sketchBob.setTexture("paperBobIntro", sketchFrame);
           sketchBob.setPosition(bob.x, bob.y);
           sketchBob.setScale(bob.scaleX, bob.scaleY);
           sketchBob.setAngle(bob.angle);
           sketchBob.setAlpha(sketchAlpha);
-          sketchBob.setVisible(true);
+          sketchBob.setVisible(sketchAlpha > .01);
           this.introSketchFrame = sketchFrame;
         }
       } else if (beat.key === "spot-cross") {
@@ -2161,13 +2496,21 @@
         bob.setAlpha(colorAlpha);
         bob.setVisible(true);
         this.introBobFrame = frame;
+        if (oipBob) {
+          oipBob.setTexture("paperBobIntro", INTRO_OIP_BOB_RIDE_FRAMES[Math.min(INTRO_OIP_BOB_RIDE_FRAMES.length - 1, 3)]);
+          oipBob.setPosition(bob.x, bob.y);
+          oipBob.setScale(bob.scaleX, bob.scaleY);
+          oipBob.setAngle(bob.angle);
+          oipBob.setAlpha(oipAlpha);
+          oipBob.setVisible(oipAlpha > .01);
+        }
         if (sketchBob) {
           sketchBob.setTexture("paperBobIntro", sketchFrame);
           sketchBob.setPosition(bob.x, bob.y);
           sketchBob.setScale(bob.scaleX, bob.scaleY);
           sketchBob.setAngle(bob.angle);
           sketchBob.setAlpha(sketchAlpha);
-          sketchBob.setVisible(true);
+          sketchBob.setVisible(sketchAlpha > .01);
           this.introSketchFrame = sketchFrame;
         }
       } else {
@@ -2175,6 +2518,9 @@
         this.introBobFrame = "";
         if (sketchBob) {
           sketchBob.setVisible(false);
+        }
+        if (oipBob) {
+          oipBob.setVisible(false);
         }
       }
     }
@@ -2194,6 +2540,15 @@
         spot.setAlpha(colorAlpha);
         spot.setVisible(true);
         this.introSpotFrame = frame;
+        if (oipSpot) {
+          oipSpot.setTexture("paperBobIntro", frameFromTime(INTRO_OIP_SPOT_PAPER_SIDE_FRAMES, t - beat.start, 8, false));
+          oipSpot.setPosition(spot.x, spot.y);
+          oipSpot.setScale(spot.scaleX, spot.scaleY);
+          oipSpot.setFlipX(true);
+          oipSpot.setAngle(spot.angle);
+          oipSpot.setAlpha(oipAlpha);
+          oipSpot.setVisible(oipAlpha > .01);
+        }
         if (sketchSpot) {
           sketchSpot.setTexture("paperBobIntro", sketchFrame);
           sketchSpot.setPosition(spot.x, spot.y);
@@ -2201,7 +2556,7 @@
           sketchSpot.setFlipX(true);
           sketchSpot.setAngle(spot.angle);
           sketchSpot.setAlpha(sketchAlpha);
-          sketchSpot.setVisible(true);
+          sketchSpot.setVisible(sketchAlpha > .01);
           this.introSketchFrame = sketchFrame;
         }
       } else {
@@ -2209,6 +2564,9 @@
         this.introSpotFrame = "";
         if (sketchSpot) {
           sketchSpot.setVisible(false);
+        }
+        if (oipSpot) {
+          oipSpot.setVisible(false);
         }
       }
     }
@@ -2223,13 +2581,26 @@
           : INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES[INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES.length - 1];
         this.positionIntroFinale(frame);
         finale.setAlpha(colorAlpha);
+        if (oipFinale) {
+          oipFinale.setTexture(
+            "paperBobIntro",
+            beat.key === "finale"
+              ? frameFromTime(INTRO_OIP_BOB_SPOT_FINALE_FRAMES, t - beat.start, 3.4, true)
+              : INTRO_OIP_BOB_SPOT_FINALE_FRAMES[INTRO_OIP_BOB_SPOT_FINALE_FRAMES.length - 1]
+          );
+          oipFinale.setPosition(finale.x, finale.y);
+          oipFinale.setScale(finale.scaleX, finale.scaleY);
+          oipFinale.setAngle(finale.angle);
+          oipFinale.setAlpha(beat.key === "hold" ? Math.max(.12, oipAlpha) : oipAlpha);
+          oipFinale.setVisible(oipBlend > .01);
+        }
         if (sketchFinale) {
           sketchFinale.setTexture("paperBobIntro", sketchFrame);
           sketchFinale.setPosition(finale.x, finale.y);
           sketchFinale.setScale(finale.scaleX, finale.scaleY);
           sketchFinale.setAngle(finale.angle);
           sketchFinale.setAlpha(beat.key === "hold" ? .16 : sketchAlpha);
-          sketchFinale.setVisible(true);
+          sketchFinale.setVisible(beat.key === "hold" || sketchAlpha > .01);
           this.introSketchFrame = sketchFrame;
         }
       } else {
@@ -2237,6 +2608,9 @@
         this.introFinaleFrame = "";
         if (sketchFinale) {
           sketchFinale.setVisible(false);
+        }
+        if (oipFinale) {
+          oipFinale.setVisible(false);
         }
       }
     }
@@ -2253,7 +2627,7 @@
     }
     if (sketchLogo) {
       sketchLogo.setVisible(true);
-      sketchLogo.setAlpha(Math.max(.14, 1 - colorBlend * .86));
+      sketchLogo.setAlpha(Math.max(.14, 1 - Math.max(oipBlend, colorBlend) * .86));
       sketchLogo.setDisplaySize(
         logoWidth * (.78 + easeOutCubic(Math.min(t / .8, 1)) * .22),
         logoHeight * (.78 + easeOutCubic(Math.min(t / .8, 1)) * .22)
@@ -2661,6 +3035,8 @@
     this.heldRight = false;
     this.heldUp = false;
     this.heldDown = false;
+    this.clearStageTouchState();
+    this.releaseDpad();
     this.trickHeld = false;
     this.routeOffset = 0;
     this.updateRoadKitObjects();
@@ -3399,6 +3775,7 @@
     if (!this.rules.state.running || this.rules.state.paused) {
       return;
     }
+    this.touchSteerDirection = 0;
     if (this.keys.left.isDown || this.keys.a.isDown || this.heldLeft) {
       this.basePlayerX -= steer;
     }
@@ -3437,6 +3814,7 @@
     var progress;
     var pose = "ride";
     var displayScale = 1;
+    var turn = this.heldLeft ? -1 : (this.heldRight ? 1 : this.touchSteerDirection);
 
     if (!this.player) {
       return;
@@ -3446,22 +3824,22 @@
       progress = clamp((state.elapsed - state.airborneStartedAt) / (state.airborneUntil - state.airborneStartedAt), 0, 1);
       lift = Math.sin(progress * Math.PI) * 48;
       displayScale = 1 + Math.sin(progress * Math.PI) * .12;
-      this.player.setAngle((this.heldLeft ? -1 : this.heldRight ? 1 : 0) * 8);
+      this.player.setAngle(turn * 8);
       this.player.setTint(0xb9894d);
       pose = state.elapsed < this.poseHoldUntil && this.heldPose ? this.heldPose : "airborne";
     } else if (state.wheelie) {
       displayScale = 1;
-      this.player.setAngle(this.heldRight ? 13 : -13);
+      this.player.setAngle(turn > 0 ? 13 : -13);
       this.player.setTint(0xf6dfb7);
       pose = "wheelie";
     } else if (state.elapsed < this.poseHoldUntil && this.heldPose) {
-      this.player.setAngle((this.heldLeft ? -1 : this.heldRight ? 1 : 0) * 4);
+      this.player.setAngle(turn * 4);
       pose = this.heldPose;
     } else {
       this.heldPose = "";
       displayScale = 1;
-      this.player.setAngle((this.heldLeft ? -1 : this.heldRight ? 1 : 0) * 4);
-      pose = this.heldLeft ? "lean-left" : (this.heldRight ? "lean-right" : "ride");
+      this.player.setAngle(turn * 4);
+      pose = turn < 0 ? "lean-left" : (turn > 0 ? "lean-right" : "ride");
       if (!this.rules.isSlowed()) {
         this.player.clearTint();
       }
@@ -3629,6 +4007,8 @@
     this.finishSequenceId = sequenceId;
     this.scene.physics.pause();
     this.clearObjects();
+    this.clearStageTouchState();
+    this.releaseDpad();
     this.setTouchPanel(false);
     this.player.clearTint();
     this.player.setAngle(0);
@@ -3706,6 +4086,8 @@
     if (!this.rules.state.paused) {
       this.rules.setPaused(true);
       this.scene.physics.pause();
+      this.clearStageTouchState();
+      this.releaseDpad();
       if (this.pauseButton) {
         this.pauseButton.textContent = "Resume";
       }
@@ -3810,7 +4192,10 @@
       introSketchVisible: !!(this.introSketchLayer && this.introSketchLayer.visible),
       introSketchReveal: this.introSketchReveal,
       introColorBlend: this.introColorBlend,
+      introOipBlend: this.introOipBlend,
       introSketchFrame: this.introSketchFrame,
+      introSettingVisible: !!(this.introSketchObjects.setting && this.introSketchObjects.setting.visible),
+      introSettingFrame: this.introSettingFrame,
       poolCounts: this.poolStats,
       score: this.rules.state.score,
       highScore: this.highScore,
@@ -3847,6 +4232,12 @@
         summaryRestartVisible: !!(this.summaryRestart && this.summaryCard && !this.summaryCard.hidden),
         touchVisible: !!(this.touchPanel && !this.touchPanel.hidden)
       },
+      touchControlMode: this.touchControlMode,
+      touchSteerActive: this.touchSteerActive,
+      touchSteerTargetX: this.touchSteerTargetX === null ? null : Math.round(this.touchSteerTargetX),
+      dpadActive: this.dpadActive,
+      dpadDirection: this.dpadDirection,
+      lastTouchZone: this.lastTouchZone,
       summaryMetrics: this.lastSummaryMetrics,
       finalScore: {
         visible: !!(this.finalScoreText && this.finalScoreText.visible),

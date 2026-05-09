@@ -102,8 +102,8 @@
     },
     "intro_bob_ride_front_06": {
       "frame": {
-        "x": 8,
-        "y": 208,
+        "x": 1008,
+        "y": 8,
         "w": 192,
         "h": 192
       },
@@ -122,8 +122,8 @@
     },
     "intro_bob_turn_left_01": {
       "frame": {
-        "x": 208,
-        "y": 208,
+        "x": 1208,
+        "y": 8,
         "w": 224,
         "h": 224
       },
@@ -142,8 +142,8 @@
     },
     "intro_bob_turn_right_01": {
       "frame": {
-        "x": 440,
-        "y": 208,
+        "x": 1440,
+        "y": 8,
         "w": 224,
         "h": 224
       },
@@ -162,8 +162,8 @@
     },
     "intro_bob_laydown": {
       "frame": {
-        "x": 672,
-        "y": 208,
+        "x": 1672,
+        "y": 8,
         "w": 256,
         "h": 224
       },
@@ -183,7 +183,7 @@
     "intro_bob_jump": {
       "frame": {
         "x": 8,
-        "y": 440,
+        "y": 240,
         "w": 224,
         "h": 224
       },
@@ -203,7 +203,7 @@
     "intro_bob_read_01": {
       "frame": {
         "x": 240,
-        "y": 440,
+        "y": 240,
         "w": 256,
         "h": 224
       },
@@ -223,7 +223,7 @@
     "intro_bob_read_02": {
       "frame": {
         "x": 504,
-        "y": 440,
+        "y": 240,
         "w": 256,
         "h": 224
       },
@@ -242,8 +242,8 @@
     },
     "intro_bike_down": {
       "frame": {
-        "x": 8,
-        "y": 672,
+        "x": 768,
+        "y": 240,
         "w": 256,
         "h": 160
       },
@@ -262,8 +262,8 @@
     },
     "intro_logo_paper_bob": {
       "frame": {
-        "x": 272,
-        "y": 672,
+        "x": 1032,
+        "y": 240,
         "w": 520,
         "h": 132
       },
@@ -282,8 +282,8 @@
     },
     "intro_bob_spot_finale_01": {
       "frame": {
-        "x": 8,
-        "y": 840,
+        "x": 1560,
+        "y": 240,
         "w": 320,
         "h": 224
       },
@@ -302,8 +302,8 @@
     },
     "intro_bob_spot_finale_02": {
       "frame": {
-        "x": 336,
-        "y": 840,
+        "x": 8,
+        "y": 472,
         "w": 320,
         "h": 224
       },
@@ -322,8 +322,8 @@
     },
     "intro_bob_spot_finale_03": {
       "frame": {
-        "x": 664,
-        "y": 840,
+        "x": 336,
+        "y": 472,
         "w": 320,
         "h": 224
       },
@@ -342,8 +342,8 @@
     },
     "intro_bob_spot_finale_04": {
       "frame": {
-        "x": 8,
-        "y": 1072,
+        "x": 664,
+        "y": 472,
         "w": 320,
         "h": 224
       },
@@ -362,8 +362,8 @@
     },
     "intro_bob_spot_finale_05": {
       "frame": {
-        "x": 336,
-        "y": 1072,
+        "x": 992,
+        "y": 472,
         "w": 320,
         "h": 224
       },
@@ -382,8 +382,8 @@
     },
     "intro_bob_spot_finale_06": {
       "frame": {
-        "x": 664,
-        "y": 1072,
+        "x": 1320,
+        "y": 472,
         "w": 320,
         "h": 224
       },
@@ -402,8 +402,8 @@
     },
     "spot_run_front_01": {
       "frame": {
-        "x": 8,
-        "y": 1304,
+        "x": 1648,
+        "y": 472,
         "w": 150,
         "h": 150
       },
@@ -422,8 +422,8 @@
     },
     "spot_run_front_02": {
       "frame": {
-        "x": 166,
-        "y": 1304,
+        "x": 1806,
+        "y": 472,
         "w": 150,
         "h": 150
       },
@@ -442,8 +442,8 @@
     },
     "spot_run_front_03": {
       "frame": {
-        "x": 324,
-        "y": 1304,
+        "x": 8,
+        "y": 704,
         "w": 150,
         "h": 150
       },
@@ -462,8 +462,8 @@
     },
     "spot_run_back_01": {
       "frame": {
-        "x": 482,
-        "y": 1304,
+        "x": 166,
+        "y": 704,
         "w": 150,
         "h": 150
       },
@@ -482,8 +482,8 @@
     },
     "spot_run_back_02": {
       "frame": {
-        "x": 640,
-        "y": 1304,
+        "x": 324,
+        "y": 704,
         "w": 150,
         "h": 150
       },
@@ -502,8 +502,8 @@
     },
     "spot_run_back_03": {
       "frame": {
-        "x": 798,
-        "y": 1304,
+        "x": 482,
+        "y": 704,
         "w": 150,
         "h": 150
       },
@@ -522,8 +522,8 @@
     },
     "spot_sit_paper_front": {
       "frame": {
-        "x": 8,
-        "y": 1462,
+        "x": 640,
+        "y": 704,
         "w": 180,
         "h": 150
       },
@@ -542,8 +542,8 @@
     },
     "spot_sit_paper_back": {
       "frame": {
-        "x": 196,
-        "y": 1462,
+        "x": 828,
+        "y": 704,
         "w": 180,
         "h": 150
       },
@@ -562,8 +562,8 @@
     },
     "spot_sit_front": {
       "frame": {
-        "x": 384,
-        "y": 1462,
+        "x": 1016,
+        "y": 704,
         "w": 140,
         "h": 140
       },
@@ -582,8 +582,8 @@
     },
     "spot_run_side_01": {
       "frame": {
-        "x": 532,
-        "y": 1462,
+        "x": 1164,
+        "y": 704,
         "w": 192,
         "h": 128
       },
@@ -602,8 +602,8 @@
     },
     "spot_run_side_02": {
       "frame": {
-        "x": 732,
-        "y": 1462,
+        "x": 1364,
+        "y": 704,
         "w": 192,
         "h": 128
       },
@@ -622,8 +622,8 @@
     },
     "spot_run_side_03": {
       "frame": {
-        "x": 8,
-        "y": 1620,
+        "x": 1564,
+        "y": 704,
         "w": 192,
         "h": 128
       },
@@ -642,8 +642,8 @@
     },
     "spot_run_side_04": {
       "frame": {
-        "x": 208,
-        "y": 1620,
+        "x": 1764,
+        "y": 704,
         "w": 192,
         "h": 128
       },
@@ -662,8 +662,8 @@
     },
     "spot_run_side_05": {
       "frame": {
-        "x": 408,
-        "y": 1620,
+        "x": 8,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -682,8 +682,8 @@
     },
     "spot_run_side_06": {
       "frame": {
-        "x": 608,
-        "y": 1620,
+        "x": 208,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -702,8 +702,8 @@
     },
     "spot_run_paper_side_01": {
       "frame": {
-        "x": 808,
-        "y": 1620,
+        "x": 408,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -722,8 +722,8 @@
     },
     "spot_run_paper_side_02": {
       "frame": {
-        "x": 8,
-        "y": 1756,
+        "x": 608,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -742,8 +742,8 @@
     },
     "spot_run_paper_side_03": {
       "frame": {
-        "x": 208,
-        "y": 1756,
+        "x": 808,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -762,8 +762,8 @@
     },
     "spot_run_paper_side_04": {
       "frame": {
-        "x": 408,
-        "y": 1756,
+        "x": 1008,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -782,8 +782,8 @@
     },
     "spot_run_paper_side_05": {
       "frame": {
-        "x": 608,
-        "y": 1756,
+        "x": 1208,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -802,8 +802,8 @@
     },
     "spot_run_paper_side_06": {
       "frame": {
-        "x": 808,
-        "y": 1756,
+        "x": 1408,
+        "y": 862,
         "w": 192,
         "h": 128
       },
@@ -823,7 +823,7 @@
     "intro_sketch_logo_bw": {
       "frame": {
         "x": 8,
-        "y": 1892,
+        "y": 998,
         "w": 520,
         "h": 132
       },
@@ -843,7 +843,7 @@
     "intro_sketch_bob_ride_01": {
       "frame": {
         "x": 536,
-        "y": 1892,
+        "y": 998,
         "w": 192,
         "h": 192
       },
@@ -863,7 +863,7 @@
     "intro_sketch_bob_ride_02": {
       "frame": {
         "x": 736,
-        "y": 1892,
+        "y": 998,
         "w": 192,
         "h": 192
       },
@@ -882,8 +882,8 @@
     },
     "intro_sketch_bob_ride_03": {
       "frame": {
-        "x": 8,
-        "y": 2092,
+        "x": 936,
+        "y": 998,
         "w": 192,
         "h": 192
       },
@@ -902,8 +902,8 @@
     },
     "intro_sketch_bob_ride_04": {
       "frame": {
-        "x": 208,
-        "y": 2092,
+        "x": 1136,
+        "y": 998,
         "w": 192,
         "h": 192
       },
@@ -922,8 +922,8 @@
     },
     "intro_sketch_bob_ride_05": {
       "frame": {
-        "x": 408,
-        "y": 2092,
+        "x": 1336,
+        "y": 998,
         "w": 192,
         "h": 192
       },
@@ -942,8 +942,8 @@
     },
     "intro_sketch_bob_ride_06": {
       "frame": {
-        "x": 608,
-        "y": 2092,
+        "x": 1536,
+        "y": 998,
         "w": 192,
         "h": 192
       },
@@ -962,8 +962,8 @@
     },
     "intro_sketch_spot_paper_side_01": {
       "frame": {
-        "x": 808,
-        "y": 2092,
+        "x": 1736,
+        "y": 998,
         "w": 192,
         "h": 128
       },
@@ -983,7 +983,7 @@
     "intro_sketch_spot_paper_side_02": {
       "frame": {
         "x": 8,
-        "y": 2292,
+        "y": 1198,
         "w": 192,
         "h": 128
       },
@@ -1003,7 +1003,7 @@
     "intro_sketch_spot_paper_side_03": {
       "frame": {
         "x": 208,
-        "y": 2292,
+        "y": 1198,
         "w": 192,
         "h": 128
       },
@@ -1023,7 +1023,7 @@
     "intro_sketch_spot_paper_side_04": {
       "frame": {
         "x": 408,
-        "y": 2292,
+        "y": 1198,
         "w": 192,
         "h": 128
       },
@@ -1043,7 +1043,7 @@
     "intro_sketch_spot_paper_side_05": {
       "frame": {
         "x": 608,
-        "y": 2292,
+        "y": 1198,
         "w": 192,
         "h": 128
       },
@@ -1063,7 +1063,7 @@
     "intro_sketch_spot_paper_side_06": {
       "frame": {
         "x": 808,
-        "y": 2292,
+        "y": 1198,
         "w": 192,
         "h": 128
       },
@@ -1082,8 +1082,8 @@
     },
     "intro_sketch_bob_spot_finale_01": {
       "frame": {
-        "x": 8,
-        "y": 2428,
+        "x": 1008,
+        "y": 1198,
         "w": 320,
         "h": 224
       },
@@ -1102,8 +1102,8 @@
     },
     "intro_sketch_bob_spot_finale_02": {
       "frame": {
-        "x": 336,
-        "y": 2428,
+        "x": 1336,
+        "y": 1198,
         "w": 320,
         "h": 224
       },
@@ -1122,8 +1122,8 @@
     },
     "intro_sketch_bob_spot_finale_03": {
       "frame": {
-        "x": 664,
-        "y": 2428,
+        "x": 1664,
+        "y": 1198,
         "w": 320,
         "h": 224
       },
@@ -1143,7 +1143,7 @@
     "intro_sketch_bob_spot_finale_04": {
       "frame": {
         "x": 8,
-        "y": 2660,
+        "y": 1430,
         "w": 320,
         "h": 224
       },
@@ -1163,7 +1163,7 @@
     "intro_sketch_bob_spot_finale_05": {
       "frame": {
         "x": 336,
-        "y": 2660,
+        "y": 1430,
         "w": 320,
         "h": 224
       },
@@ -1183,7 +1183,7 @@
     "intro_sketch_bob_spot_finale_06": {
       "frame": {
         "x": 664,
-        "y": 2660,
+        "y": 1430,
         "w": 320,
         "h": 224
       },
@@ -1199,6 +1199,466 @@
         "w": 320,
         "h": 224
       }
+    },
+    "intro_oip_setting_plate": {
+      "frame": {
+        "x": 992,
+        "y": 1430,
+        "w": 480,
+        "h": 853
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 480,
+        "h": 853
+      },
+      "sourceSize": {
+        "w": 480,
+        "h": 853
+      }
+    },
+    "intro_oip_bob_ride_01": {
+      "frame": {
+        "x": 1480,
+        "y": 1430,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_bob_ride_02": {
+      "frame": {
+        "x": 1680,
+        "y": 1430,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_bob_ride_03": {
+      "frame": {
+        "x": 8,
+        "y": 2291,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_bob_ride_04": {
+      "frame": {
+        "x": 208,
+        "y": 2291,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_bob_ride_05": {
+      "frame": {
+        "x": 408,
+        "y": 2291,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_bob_ride_06": {
+      "frame": {
+        "x": 608,
+        "y": 2291,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_bob_ride_peace": {
+      "frame": {
+        "x": 808,
+        "y": 2291,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_bob_ride_bubble_gum": {
+      "frame": {
+        "x": 1008,
+        "y": 2291,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_oip_spot_paper_side_01": {
+      "frame": {
+        "x": 1208,
+        "y": 2291,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_oip_spot_paper_side_02": {
+      "frame": {
+        "x": 1408,
+        "y": 2291,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_oip_spot_paper_side_03": {
+      "frame": {
+        "x": 1608,
+        "y": 2291,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_oip_spot_paper_side_04": {
+      "frame": {
+        "x": 1808,
+        "y": 2291,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_oip_spot_paper_side_05": {
+      "frame": {
+        "x": 8,
+        "y": 2491,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_oip_spot_paper_side_06": {
+      "frame": {
+        "x": 208,
+        "y": 2491,
+        "w": 192,
+        "h": 128
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 128
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 128
+      }
+    },
+    "intro_oip_bob_spot_finale_01": {
+      "frame": {
+        "x": 408,
+        "y": 2491,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_oip_bob_spot_finale_02": {
+      "frame": {
+        "x": 736,
+        "y": 2491,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_oip_bob_spot_finale_03": {
+      "frame": {
+        "x": 1064,
+        "y": 2491,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_oip_bob_spot_finale_04": {
+      "frame": {
+        "x": 1392,
+        "y": 2491,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_oip_bob_spot_finale_05": {
+      "frame": {
+        "x": 1720,
+        "y": 2491,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_oip_bob_spot_finale_06": {
+      "frame": {
+        "x": 8,
+        "y": 2723,
+        "w": 320,
+        "h": 224
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 224
+      },
+      "sourceSize": {
+        "w": 320,
+        "h": 224
+      }
+    },
+    "intro_bob_ride_peace": {
+      "frame": {
+        "x": 336,
+        "y": 2723,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
+    },
+    "intro_bob_ride_bubble_gum": {
+      "frame": {
+        "x": 536,
+        "y": 2723,
+        "w": 192,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 192,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 192,
+        "h": 192
+      }
     }
   },
   "meta": {
@@ -1206,8 +1666,8 @@
     "image": "paper-bob-intro-atlas.png",
     "format": "RGBA8888",
     "size": {
-      "w": 1024,
-      "h": 2892
+      "w": 2048,
+      "h": 2955
     },
     "scale": "1"
   }
