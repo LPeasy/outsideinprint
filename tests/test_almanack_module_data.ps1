@@ -44,18 +44,28 @@ $script = Get-Content -LiteralPath $scriptPath -Raw
 $archiveScript = Get-Content -LiteralPath $archiveScriptPath -Raw
 
 foreach ($requiredReference in @(
-  'site.Data.almanack.on_this_day',
-  'site.Data.almanack.weather_city_records',
-  'site.Data.almanack.world_week',
-  'site.Data.almanack.archive_links'
+  'site.Data.almanack',
+  '"on_this_day"',
+  '"weather_city_records"',
+  '"world_week"',
+  '"archive_links"'
 )) {
   if ($template -notmatch [regex]::Escape($requiredReference)) {
-    throw "Bob's Almanack collection template must read $requiredReference."
+    throw "Bob's Almanack collection template must read local Almanack data key $requiredReference."
   }
 }
 
 if ($template -match 'archive_link_candidates') {
   throw 'Bob''s Almanack collection template must not consume generated archive-link candidates directly.'
+}
+
+foreach ($retiredMainSectionClass in @(
+  'almanack-collection__world-week',
+  'almanack-collection__archive-links'
+)) {
+  if ($template -match [regex]::Escape($retiredMainSectionClass)) {
+    throw "Bob's Almanack data ornaments must render in the margins, not as main-column section $retiredMainSectionClass."
+  }
 }
 
 foreach ($forbiddenTemplateText in @(
@@ -175,7 +185,7 @@ foreach ($requiredArchiveScriptTerm in @(
   }
 }
 
-foreach ($renderedHeading in @('This Day', 'Weather Almanack', 'World Week')) {
+foreach ($renderedHeading in @('This Day in History', 'From the Archive', 'Weather Almanack', 'World Week')) {
   if ($template -notmatch [regex]::Escape($renderedHeading)) {
     throw "Bob's Almanack collection template must render '$renderedHeading'."
   }
