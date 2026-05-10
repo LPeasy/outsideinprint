@@ -811,6 +811,16 @@ $requiredMetadataPages = [ordered]@{
     ExpectedImage = 'https://outsideinprint.org/images/essays/the-factory-in-the-footnote/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
+  'public/essays/the-blue-pool-at-the-memorial/index.html' = @{
+    Title = 'The Blue Pool at the Memorial'
+    Description = "Trump's blue Reflecting Pool and East Potomac plans turn Washington maintenance into a case for clean, beautiful, useful public space."
+    Canonical = 'https://outsideinprint.org/essays/the-blue-pool-at-the-memorial/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-blue-pool-at-the-memorial/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
   'public/essays/the-strait-that-holds-the-price/index.html' = @{
     Title = 'The Strait That Holds the Price'
     Description = "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage still governs energy security, commodity prices, and public life."
@@ -2415,7 +2425,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*106 published pieces'
+    Pattern = '11 public collections.*107 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2862,6 +2872,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
   @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
   @{ Path = 'public/essays/the-factory-in-the-footnote/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Factory in the Footnote' },
+  @{ Path = 'public/essays/the-blue-pool-at-the-memorial/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Blue Pool at the Memorial' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
