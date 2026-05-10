@@ -189,10 +189,15 @@
     slowMultiplier: .65,
     steerSpeed: 270,
     verticalSteerSpeed: 155,
+    touchSteerAssist: 1.14,
+    touchVerticalAssist: 1.16,
+    dpadDeadZoneRatio: .1,
+    dpadAxisThresholdRatio: .24,
     paperSpeed: 520,
     paperLift: -92,
     paperCooldown: 280,
-    touchPaperCooldown: 340,
+    touchPaperCooldown: 280,
+    touchJumpBuffer: .14,
     maxActivePapers: 5,
     targetBaseInterval: 1280,
     targetRamp: 6,
@@ -511,9 +516,17 @@
     this.dpadActive = false;
     this.dpadPointerId = null;
     this.dpadDirection = "";
+    this.dpadVectorX = 0;
+    this.dpadVectorY = 0;
     this.lastTouchZone = "";
     this.touchControlMode = "gameboy-dock";
     this.trickHeld = false;
+    this.touchThrowLeftHeld = false;
+    this.touchThrowRightHeld = false;
+    this.touchJumpHeld = false;
+    this.touchJumpBuffer = 0;
+    this.touchTrickHeld = false;
+    this.touchActionPointerIds = {};
     this.throwCooldown = 0;
     this.targetTimer = 0;
     this.puddleTimer = 0;
@@ -607,10 +620,22 @@
       self.toggleMute();
     });
 
+    ["contextmenu", "selectstart", "dragstart"].forEach(function (eventName) {
+      self.bind(self.touchPanel, eventName, function (event) {
+        event.preventDefault();
+      });
+    });
+
     this.touchControls.forEach(function (button) {
       var action = button.getAttribute("data-paper-route-action") || "";
+      if (button.closest && button.closest("[data-paper-route-dpad]")) {
+        return;
+      }
       self.bind(button, "pointerdown", function (event) {
         event.preventDefault();
+        if (!self.claimTouchActionPointer(action, event)) {
+          return;
+        }
         if (button.setPointerCapture) {
           try {
             button.setPointerCapture(event.pointerId);
@@ -622,13 +647,27 @@
       });
       self.bind(button, "pointerup", function (event) {
         event.preventDefault();
-        self.handleAction(action, false);
+        if (self.releaseTouchActionPointer(action, event)) {
+          self.handleAction(action, false);
+        }
       });
-      self.bind(button, "pointercancel", function () {
-        self.handleAction(action, false);
+      self.bind(button, "pointercancel", function (event) {
+        if (self.releaseTouchActionPointer(action, event)) {
+          self.handleAction(action, false);
+        }
       });
-      self.bind(button, "pointerleave", function () {
-        self.handleAction(action, false);
+      self.bind(button, "pointerleave", function (event) {
+        if (button.hasPointerCapture && event.pointerId !== undefined && button.hasPointerCapture(event.pointerId)) {
+          return;
+        }
+        if (self.releaseTouchActionPointer(action, event)) {
+          self.handleAction(action, false);
+        }
+      });
+      self.bind(button, "lostpointercapture", function (event) {
+        if (self.releaseTouchActionPointer(action, event)) {
+          self.handleAction(action, false);
+        }
       });
     });
 
@@ -764,7 +803,13 @@
     var y;
     var dx;
     var dy;
+    var magnitude;
     var deadZone;
+    var axisThreshold;
+    var vectorX = 0;
+    var vectorY = 0;
+    var horizontal = "";
+    var vertical = "";
     var direction = "";
 
     if (!this.dpadSurface || !this.dpadSurface.getBoundingClientRect) {
@@ -776,28 +821,79 @@
     y = event.clientY - rect.top;
     dx = x - rect.width / 2;
     dy = y - rect.height / 2;
-    deadZone = Math.min(rect.width, rect.height) * .16;
+    vectorX = clamp(dx / (rect.width / 2), -1, 1);
+    vectorY = clamp(dy / (rect.height / 2), -1, 1);
+    magnitude = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+    deadZone = TUNING.dpadDeadZoneRatio;
+    axisThreshold = TUNING.dpadAxisThresholdRatio;
 
-    if (Math.sqrt(dx * dx + dy * dy) >= deadZone) {
-      direction = Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? "left" : "right") : (dy < 0 ? "up" : "down");
+    if (magnitude >= deadZone) {
+      if (Math.abs(vectorX) >= axisThreshold) {
+        horizontal = vectorX < 0 ? "left" : "right";
+      }
+      if (Math.abs(vectorY) >= axisThreshold) {
+        vertical = vectorY < 0 ? "up" : "down";
+      }
+
+      if (!horizontal && !vertical) {
+        if (Math.abs(vectorX) > Math.abs(vectorY)) {
+          horizontal = vectorX < 0 ? "left" : "right";
+        } else {
+          vertical = vectorY < 0 ? "up" : "down";
+        }
+      }
     }
 
-    this.applyDpadDirection(direction);
+    direction = vertical && horizontal ? vertical + "-" + horizontal : (horizontal || vertical);
+    this.applyDpadDirection(direction, horizontal, vertical);
   };
 
-  PaperRouteGame.prototype.applyDpadDirection = function (direction) {
-    this.heldLeft = direction === "left";
-    this.heldRight = direction === "right";
-    this.heldUp = direction === "up";
-    this.heldDown = direction === "down";
+  PaperRouteGame.prototype.applyDpadDirection = function (direction, horizontal, vertical) {
+    horizontal = horizontal || "";
+    vertical = vertical || "";
+    this.heldLeft = horizontal === "left";
+    this.heldRight = horizontal === "right";
+    this.heldUp = vertical === "up";
+    this.heldDown = vertical === "down";
+    this.dpadVectorX = this.heldLeft ? -1 : (this.heldRight ? 1 : 0);
+    this.dpadVectorY = this.heldUp ? -1 : (this.heldDown ? 1 : 0);
     this.dpadDirection = direction;
     this.lastTouchZone = direction ? "dpad-" + direction : "dpad-center";
+    this.syncDpadFeedback(horizontal, vertical);
+  };
+
+  PaperRouteGame.prototype.syncDpadFeedback = function (horizontal, vertical) {
+    var buttons;
+
+    if (!this.dpadSurface || !this.dpadSurface.querySelectorAll) {
+      return;
+    }
+
+    this.dpadSurface.setAttribute("data-paper-route-dpad-direction", this.dpadDirection || "center");
+    buttons = this.dpadSurface.querySelectorAll("[data-paper-route-action]");
+    Array.prototype.forEach.call(buttons, function (button) {
+      var action = button.getAttribute("data-paper-route-action") || "";
+      var active = (
+        (action === "steer-left" && horizontal === "left") ||
+        (action === "steer-right" && horizontal === "right") ||
+        (action === "steer-up" && vertical === "up") ||
+        (action === "steer-down" && vertical === "down")
+      );
+
+      if (active) {
+        button.setAttribute("data-paper-route-dpad-active", "true");
+        button.setAttribute("aria-pressed", "true");
+      } else {
+        button.removeAttribute("data-paper-route-dpad-active");
+        button.removeAttribute("aria-pressed");
+      }
+    });
   };
 
   PaperRouteGame.prototype.releaseDpad = function () {
     this.dpadActive = false;
     this.dpadPointerId = null;
-    this.applyDpadDirection("");
+    this.applyDpadDirection("", "", "");
   };
 
   PaperRouteGame.prototype.pointerIsTouchLike = function (pointer) {
@@ -903,6 +999,7 @@
     if (pressed) {
       this.lastTouchZone = "gamepad-" + action;
     }
+    this.setTouchActionFeedback(action, pressed);
     if (action === "steer-left") {
       this.heldLeft = pressed;
     } else if (action === "steer-right") {
@@ -911,18 +1008,104 @@
       this.heldUp = pressed;
     } else if (action === "steer-down") {
       this.heldDown = pressed;
-    } else if (pressed && action === "throw-left") {
-      this.throwPaper("left", true);
-    } else if (pressed && action === "throw-right") {
-      this.throwPaper("right", true);
-    } else if (pressed && action === "jump") {
-      this.startHop();
+    } else if (action === "throw-left") {
+      this.touchThrowLeftHeld = pressed;
+      if (pressed) {
+        this.throwPaper("left", true);
+      }
+    } else if (action === "throw-right") {
+      this.touchThrowRightHeld = pressed;
+      if (pressed) {
+        this.throwPaper("right", true);
+      }
+    } else if (action === "jump") {
+      this.touchJumpHeld = pressed;
+      if (pressed) {
+        this.touchJumpBuffer = TUNING.touchJumpBuffer;
+        this.startHop();
+      }
     } else if (action === "trick") {
+      this.touchTrickHeld = pressed;
       if (pressed) {
         this.startWheelie();
       } else {
         this.stopWheelie();
       }
+    }
+  };
+
+  PaperRouteGame.prototype.touchActionPointerId = function (event) {
+    return event && event.pointerId !== undefined ? String(event.pointerId) : "primary";
+  };
+
+  PaperRouteGame.prototype.claimTouchActionPointer = function (action, event) {
+    var pointerId = this.touchActionPointerId(event);
+
+    if (action.indexOf("steer-") === 0) {
+      return true;
+    }
+    if (this.touchActionPointerIds[action] !== undefined) {
+      return false;
+    }
+
+    this.touchActionPointerIds[action] = pointerId;
+    return true;
+  };
+
+  PaperRouteGame.prototype.releaseTouchActionPointer = function (action, event) {
+    var pointerId = event && event.pointerId !== undefined ? this.touchActionPointerId(event) : null;
+
+    if (action.indexOf("steer-") === 0) {
+      return true;
+    }
+    if (this.touchActionPointerIds[action] === undefined) {
+      return false;
+    }
+    if (pointerId !== null && this.touchActionPointerIds[action] !== pointerId) {
+      return false;
+    }
+
+    delete this.touchActionPointerIds[action];
+    return true;
+  };
+
+  PaperRouteGame.prototype.setTouchActionFeedback = function (action, pressed) {
+    var selector;
+    var button;
+
+    if (!this.touchPanel || !this.touchPanel.querySelector || action.indexOf("steer-") === 0) {
+      return;
+    }
+
+    selector = "[data-paper-route-action=\"" + action + "\"]";
+    button = this.touchPanel.querySelector(selector);
+    if (!button) {
+      return;
+    }
+    if (pressed) {
+      button.setAttribute("data-paper-route-action-active", "true");
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      button.removeAttribute("data-paper-route-action-active");
+      button.removeAttribute("aria-pressed");
+    }
+  };
+
+  PaperRouteGame.prototype.clearTouchActionState = function () {
+    var self = this;
+
+    this.touchThrowLeftHeld = false;
+    this.touchThrowRightHeld = false;
+    this.touchJumpHeld = false;
+    this.touchJumpBuffer = 0;
+    this.touchTrickHeld = false;
+    this.touchActionPointerIds = {};
+
+    if (this.touchPanel && this.touchPanel.querySelectorAll) {
+      Array.prototype.forEach.call(this.touchPanel.querySelectorAll(".paper-route-touch__button--action"), function (button) {
+        var action = button.getAttribute("data-paper-route-action") || "";
+        self.setTouchActionFeedback(action, false);
+      });
     }
   };
 
@@ -2983,6 +3166,7 @@
     if (this.stage) {
       this.stage.classList.remove("paper-route-stage--paused");
     }
+    this.clearTouchActionState();
     this.setTouchPanel(false);
     if (this.pauseButton) {
       this.pauseButton.textContent = "Pause";
@@ -3037,6 +3221,7 @@
     this.heldDown = false;
     this.clearStageTouchState();
     this.releaseDpad();
+    this.clearTouchActionState();
     this.trickHeld = false;
     this.routeOffset = 0;
     this.updateRoadKitObjects();
@@ -3771,22 +3956,43 @@
   PaperRouteGame.prototype.handleKeyboard = function (deltaSeconds) {
     var steer = TUNING.steerSpeed * deltaSeconds;
     var vertical = TUNING.verticalSteerSpeed * deltaSeconds;
+    var touchSteer = steer * TUNING.touchSteerAssist;
+    var touchVertical = vertical * TUNING.touchVerticalAssist;
+    var dpadLeft = this.dpadActive && this.dpadVectorX < 0;
+    var dpadRight = this.dpadActive && this.dpadVectorX > 0;
+    var dpadUp = this.dpadActive && this.dpadVectorY < 0;
+    var dpadDown = this.dpadActive && this.dpadVectorY > 0;
 
     if (!this.rules.state.running || this.rules.state.paused) {
       return;
     }
+    this.touchJumpBuffer = Math.max(0, this.touchJumpBuffer - deltaSeconds);
     this.touchSteerDirection = 0;
-    if (this.keys.left.isDown || this.keys.a.isDown || this.heldLeft) {
+    if ((this.keys.left.isDown || this.keys.a.isDown || this.heldLeft) && !dpadLeft) {
       this.basePlayerX -= steer;
     }
-    if (this.keys.right.isDown || this.keys.d.isDown || this.heldRight) {
+    if ((this.keys.right.isDown || this.keys.d.isDown || this.heldRight) && !dpadRight) {
       this.basePlayerX += steer;
     }
-    if (this.keys.up.isDown || this.keys.w.isDown || this.heldUp) {
+    if ((this.keys.up.isDown || this.keys.w.isDown || this.heldUp) && !dpadUp) {
       this.basePlayerY -= vertical;
     }
-    if (this.keys.down.isDown || this.keys.s.isDown || this.heldDown) {
+    if ((this.keys.down.isDown || this.keys.s.isDown || this.heldDown) && !dpadDown) {
       this.basePlayerY += vertical;
+    }
+    if (dpadLeft) {
+      this.basePlayerX -= touchSteer;
+      this.touchSteerDirection = -1;
+    }
+    if (dpadRight) {
+      this.basePlayerX += touchSteer;
+      this.touchSteerDirection = 1;
+    }
+    if (dpadUp) {
+      this.basePlayerY -= touchVertical;
+    }
+    if (dpadDown) {
+      this.basePlayerY += touchVertical;
     }
     this.basePlayerX = clamp(this.basePlayerX, this.roadLeft + 34, this.roadRight - 34);
     this.basePlayerY = clamp(this.basePlayerY, this.height * .61, this.height * .84);
@@ -3797,7 +4003,14 @@
     if ((this.keys.e.isDown || this.keys.l.isDown) && this.throwCooldown <= 0) {
       this.throwPaper("right", false);
     }
-    if ((this.keys.space.isDown) && !this.rules.state.airborne) {
+    if (this.touchThrowLeftHeld && this.throwCooldown <= 0) {
+      this.throwPaper("left", true);
+    }
+    if (this.touchThrowRightHeld && this.throwCooldown <= 0) {
+      this.throwPaper("right", true);
+    }
+    if ((this.keys.space.isDown || this.touchJumpHeld || this.touchJumpBuffer > 0) && !this.rules.state.airborne) {
+      this.touchJumpBuffer = 0;
       this.startHop();
     }
     if ((this.keys.shift.isDown || this.keys.k.isDown) && !this.rules.state.wheelie) {
@@ -4009,6 +4222,7 @@
     this.clearObjects();
     this.clearStageTouchState();
     this.releaseDpad();
+    this.clearTouchActionState();
     this.setTouchPanel(false);
     this.player.clearTint();
     this.player.setAngle(0);
@@ -4088,6 +4302,7 @@
       this.scene.physics.pause();
       this.clearStageTouchState();
       this.releaseDpad();
+      this.clearTouchActionState();
       if (this.pauseButton) {
         this.pauseButton.textContent = "Resume";
       }
@@ -4237,6 +4452,15 @@
       touchSteerTargetX: this.touchSteerTargetX === null ? null : Math.round(this.touchSteerTargetX),
       dpadActive: this.dpadActive,
       dpadDirection: this.dpadDirection,
+      dpadVectorX: this.dpadVectorX,
+      dpadVectorY: this.dpadVectorY,
+      touchActions: {
+        throwLeft: this.touchThrowLeftHeld,
+        throwRight: this.touchThrowRightHeld,
+        jump: this.touchJumpHeld,
+        jumpBuffer: Math.round(this.touchJumpBuffer * 1000) / 1000,
+        trick: this.touchTrickHeld
+      },
       lastTouchZone: this.lastTouchZone,
       summaryMetrics: this.lastSummaryMetrics,
       finalScore: {
