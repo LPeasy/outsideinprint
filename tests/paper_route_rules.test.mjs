@@ -62,6 +62,35 @@ test("puddles slow grounded Bob and remove one paper, but airborne clears score 
   assert.equal(rules.state.score, 75);
 });
 
+test("wheelies clear puddles for points without losing papers", () => {
+  const rules = createRules();
+  rules.start();
+  rules.startWheelie();
+  const effects = rules.hitPuddle();
+  assert.equal(effects[0].type, "puddle-clear");
+  assert.equal(effects[0].source, "wheelie");
+  assert.equal(rules.state.papers, 30);
+  assert.equal(rules.state.puddleHits, 0);
+  assert.equal(rules.state.puddlesCleared, 1);
+  assert.equal(rules.state.score, 75);
+  assert.equal(rules.state.wheelie, true);
+  assert.equal(rules.isSlowed(), false);
+});
+
+test("forced puddle hits still damage Bob during wheelies for Spot contact", () => {
+  const rules = createRules();
+  rules.start();
+  rules.startWheelie();
+  const effects = rules.hitPuddle({ forceHit: true });
+  assert.equal(effects[0].type, "puddle-hit");
+  assert.equal(rules.state.papers, 29);
+  assert.equal(rules.state.puddleHits, 1);
+  assert.equal(rules.state.puddlesCleared, 0);
+  assert.equal(rules.state.score, 0);
+  assert.equal(rules.isSlowed(), true);
+  assert.equal(rules.state.wheelie, true);
+});
+
 test("ramps score and put Bob airborne", () => {
   const rules = createRules();
   rules.start();

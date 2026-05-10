@@ -223,21 +223,27 @@
     return [createEffect("miss", "Paper sailed wide.")];
   };
 
-  RouteRules.prototype.clearPuddle = function () {
+  RouteRules.prototype.clearPuddle = function (source) {
     if (!this.state.running || this.state.paused) {
       return [];
     }
     this.state.puddlesCleared += 1;
     this.state.score += SCORES.puddleClear;
-    return [createEffect("puddle-clear", "Clean hop +" + SCORES.puddleClear + ".", { points: SCORES.puddleClear })];
+    return [createEffect("puddle-clear", (source === "wheelie" ? "Wheelie splash +" : "Clean hop +") + SCORES.puddleClear + ".", {
+      points: SCORES.puddleClear,
+      source: source === "wheelie" ? "wheelie" : "airborne"
+    })];
   };
 
-  RouteRules.prototype.hitPuddle = function () {
+  RouteRules.prototype.hitPuddle = function (options) {
     if (!this.state.running || this.state.paused) {
       return [];
     }
-    if (this.state.airborne) {
-      return this.clearPuddle();
+    if (!(options && options.forceHit === true) && this.state.airborne) {
+      return this.clearPuddle("airborne");
+    }
+    if (!(options && options.forceHit === true) && this.state.wheelie) {
+      return this.clearPuddle("wheelie");
     }
     this.state.puddleHits += 1;
     this.state.streak = 0;

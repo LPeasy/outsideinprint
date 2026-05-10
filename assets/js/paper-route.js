@@ -199,6 +199,8 @@
     touchPaperCooldown: 280,
     touchJumpBuffer: .14,
     maxActivePapers: 5,
+    paperOffscreenPadding: 48,
+    paperWrapGuard: 96,
     targetBaseInterval: 1280,
     targetRamp: 6,
     targetMinInterval: 820,
@@ -3545,6 +3547,7 @@
     paper.setData("velocityY", TUNING.paperLift);
     paper.setData("spin", sign * 460);
     paper.setData("airborneThrow", result.airborne);
+    paper.setData("originX", paper.x);
     if (!this.papers.contains(paper)) {
       this.papers.add(paper);
     }
@@ -3556,6 +3559,23 @@
     this.paperTrail(paper.x - sign * 10, paper.y + 4, sign);
     this.playSound("throw");
     this.syncHud(result.airborne ? "Air delivery." : (direction === "left" ? "Left toss." : "Right toss."));
+  };
+
+  PaperRouteGame.prototype.paperIsOutOfPlay = function (paper) {
+    var direction = paper.getData("direction");
+    var originX = paper.getData("originX");
+
+    if (direction === "left" && typeof originX === "number" && paper.x > originX + TUNING.paperWrapGuard) {
+      return true;
+    }
+    if (direction === "right" && typeof originX === "number" && paper.x < originX - TUNING.paperWrapGuard) {
+      return true;
+    }
+
+    return paper.x < -TUNING.paperOffscreenPadding ||
+      paper.x > this.width + TUNING.paperOffscreenPadding ||
+      paper.y < -90 ||
+      paper.y > this.height + TUNING.paperOffscreenPadding;
   };
 
   PaperRouteGame.prototype.startHop = function () {
@@ -3645,12 +3665,14 @@
     this.applyEffects(effects);
   };
 
-  PaperRouteGame.prototype.applyPuddleContact = function (x, y) {
+  PaperRouteGame.prototype.applyPuddleContact = function (x, y, forceHit) {
     var effects;
+    var cleared;
 
-    effects = this.rules.hitPuddle();
-    this.puddleBurst(x, y, this.rules.state.airborne);
-    if (effects[0] && effects[0].type === "puddle-clear") {
+    effects = this.rules.hitPuddle(forceHit ? { forceHit: true } : undefined);
+    cleared = effects[0] && effects[0].type === "puddle-clear";
+    this.puddleBurst(x, y, cleared);
+    if (cleared) {
       this.floatText("+75", x, y - 24, "#557b82");
       this.playSound("clear");
     } else {
@@ -3701,7 +3723,7 @@
       spot.anims.play("spotRunPaperSide", true);
     }
 
-    effects = this.applyPuddleContact(spot.x, spot.y);
+    effects = this.applyPuddleContact(spot.x, spot.y, true);
     this.bounceSpotAfterHit(spot);
     this.applyEffects(effects);
   };
@@ -4176,7 +4198,7 @@
       if (paper.body && paper.body.updateFromGameObject) {
         paper.body.updateFromGameObject();
       }
-      if (paper.x < -80 || paper.x > self.width + 80 || paper.y < -90 || paper.y > self.height + 80) {
+      if (self.paperIsOutOfPlay(paper)) {
         self.applyEffects(self.rules.missPaper());
         self.playSound("miss");
         self.releasePooledObject(paper);

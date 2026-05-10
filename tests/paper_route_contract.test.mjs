@@ -425,6 +425,9 @@ test("Paper-Bob V2 rules own scoring, papers, timer, and trick state", () => {
   assert.match(rules, /RouteRules\.prototype\.throwLeft/);
   assert.match(rules, /RouteRules\.prototype\.throwRight/);
   assert.match(rules, /RouteRules\.prototype\.hitPuddle/);
+  assert.match(rules, /RouteRules\.prototype\.clearPuddle = function \(source\)/);
+  assert.match(rules, /this\.state\.wheelie[\s\S]*return this\.clearPuddle\("wheelie"\)/);
+  assert.match(rules, /options && options\.forceHit === true/);
   assert.match(rules, /RouteRules\.prototype\.takeRamp/);
   assert.match(rules, /RouteRules\.prototype\.startWheelie/);
   assert.match(rules, /root\.OipPaperRouteRules/);
@@ -547,6 +550,7 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /PaperRouteGame\.prototype\.spawnSpot/);
   assert.match(game, /this\.spotTimer = TUNING\.spotInterval \/ 1000/);
   assert.match(game, /PaperRouteGame\.prototype\.hitSpot[\s\S]*if \(this\.rules\.state\.airborne\) \{[\s\S]*return;[\s\S]*\}/);
+  assert.match(game, /effects = this\.applyPuddleContact\(spot\.x, spot\.y, true\)/);
   assert.match(game, /spot\.setData\("carryingPaper", true\)/);
   assert.match(game, /spot\.anims\.play\("spotRunPaperSide", true\)/);
   assert.match(game, /PaperRouteGame\.prototype\.bounceSpotAfterHit/);
@@ -646,6 +650,8 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /paperTrail/);
   assert.match(game, /targetBurst/);
   assert.match(game, /puddleBurst/);
+  assert.match(game, /cleared = effects\[0\] && effects\[0\]\.type === "puddle-clear"/);
+  assert.match(game, /this\.puddleBurst\(x, y, cleared\)/);
   assert.match(game, /routePropsAtlasLoaded/);
   assert.match(game, /lotsAtlasLoaded/);
   assert.match(game, /trackAtlasLoaded/);
@@ -689,8 +695,15 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /paperSpeed: 520/);
   assert.match(game, /paperLift: -92/);
   assert.match(game, /paperBody: \{ width: 21, height: 13 \}/);
+  assert.match(game, /paperOffscreenPadding: 48/);
+  assert.match(game, /paperWrapGuard: 96/);
   assert.match(game, /paper\.setVelocity\(sign \* TUNING\.paperSpeed, TUNING\.paperLift\)/);
   assert.match(game, /paper\.body\.setSize\(TUNING\.paperBody\.width, TUNING\.paperBody\.height, true\)/);
+  assert.match(game, /paper\.setData\("originX", paper\.x\)/);
+  assert.match(game, /PaperRouteGame\.prototype\.paperIsOutOfPlay = function \(paper\)/);
+  assert.match(game, /direction === "left"[\s\S]*paper\.x > originX \+ TUNING\.paperWrapGuard/);
+  assert.match(game, /direction === "right"[\s\S]*paper\.x < originX - TUNING\.paperWrapGuard/);
+  assert.match(game, /if \(self\.paperIsOutOfPlay\(paper\)\) \{[\s\S]*self\.applyEffects\(self\.rules\.missPaper\(\)\)/);
   assert.match(game, /scoreDelivery/);
   assert.match(game, /if \(type === "doorstep"\) \{[\s\S]*effects = this\.rules\.hitDoorstep\(!!paper\.getData\("airborneThrow"\)\);[\s\S]*\} else if \(type === "window"\) \{[\s\S]*effects = this\.rules\.hitWindow\(!!paper\.getData\("airborneThrow"\)\);[\s\S]*\} else \{[\s\S]*effects = this\.rules\.hitMailbox\(!!paper\.getData\("airborneThrow"\)\);/);
   assert.match(game, /takeRamp/);
@@ -698,6 +711,14 @@ test("Paper-Bob game uses Arcade Physics, V2 controls, and the approved storage 
   assert.match(game, /writeHighScore/);
   assert.doesNotMatch(game, /localStorage\.setItem\((?!STORAGE_KEY)/);
   assert.doesNotMatch(game, /hitObstacle|spawnObstacle|paperRouteObstacle/);
+});
+
+test("Paper-Bob Spot contact lets jumps escape while wheelies still take the hit", () => {
+  const hitSpotMatch = game.match(/PaperRouteGame\.prototype\.hitSpot = function \(spot\) \{[\s\S]*?\n  \};/);
+  assert.ok(hitSpotMatch);
+  const hitSpot = hitSpotMatch[0];
+  assert.match(hitSpot, /if \(this\.rules\.state\.airborne\) \{[\s\S]*return;[\s\S]*\}[\s\S]*effects = this\.applyPuddleContact\(spot\.x, spot\.y, true\)/);
+  assert.doesNotMatch(hitSpot, /wheelie/);
 });
 
 test("Paper-Bob visual shell has balanced masthead and accessible overlay styles", () => {
