@@ -1080,7 +1080,7 @@
       "deployed_on": "2026-05-09"
     },
     "the-three-enemies-of-positive-outcomes": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-10",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
       "previous_version": "1.0",
@@ -1096,10 +1096,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay tests failed outcomes through intent, attention, effort, competence, institutional risk, tradeoffs, and uncertainty without ideological or partisan framing."
-      }
+      },
+      "commit_sha": "17e9a1070af9bf72c0e8021b8327e99d9243f286",
+      "deployed_on": "2026-05-10"
     },
     "moral-momentum": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-10",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
       "previous_version": "1.0",
@@ -1115,10 +1117,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay ties moral momentum to repeated action, trust, institutional influence, deception risk, tradeoffs, and uncertainty about slow collective change."
-      }
+      },
+      "commit_sha": "17e9a1070af9bf72c0e8021b8327e99d9243f286",
+      "deployed_on": "2026-05-10"
     },
     "the-roi-of-caring": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-10",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
       "previous_version": "1.0",
@@ -1134,10 +1138,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay frames caring as agency, trust, resilience, and ownership, naming incentives, collaboration tradeoffs, downstream consequences, and bounded uncertainty."
-      }
+      },
+      "commit_sha": "17e9a1070af9bf72c0e8021b8327e99d9243f286",
+      "deployed_on": "2026-05-10"
     },
     "the-slow-way-is-the-fast-way": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-10",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
       "previous_version": "1.0",
@@ -1153,10 +1159,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay preserves the parable while testing speed against preparation, attention, decision incentives, long-run tradeoffs, and uncertainty about shortcuts."
-      }
+      },
+      "commit_sha": "17e9a1070af9bf72c0e8021b8327e99d9243f286",
+      "deployed_on": "2026-05-10"
     },
     "dirt-is-better-than-air": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-10",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
       "previous_version": "1.0",
@@ -1172,7 +1180,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay grounds South Lafourche levee claims in public reporting and tests local knowledge, federal standards, maintenance incentives, preparation tradeoffs, and flood-risk consequences."
-      }
+      },
+      "commit_sha": "17e9a1070af9bf72c0e8021b8327e99d9243f286",
+      "deployed_on": "2026-05-10"
     }
   },
   "blocked": {},
@@ -1354,8 +1364,10 @@
         "the-slow-way-is-the-fast-way",
         "dirt-is-better-than-air"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
+      "commit_sha": "17e9a1070af9bf72c0e8021b8327e99d9243f286",
+      "deployed_on": "2026-05-10"
     }
   ]
 }
