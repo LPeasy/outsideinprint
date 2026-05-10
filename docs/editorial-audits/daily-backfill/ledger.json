@@ -1078,6 +1078,101 @@
       },
       "commit_sha": "422c7f6adb075666d0f7ffc8190242df2fcdc49d",
       "deployed_on": "2026-05-09"
+    },
+    "the-three-enemies-of-positive-outcomes": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-10",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-10",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests failed outcomes through intent, attention, effort, competence, institutional risk, tradeoffs, and uncertainty without ideological or partisan framing."
+      }
+    },
+    "moral-momentum": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-10",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-10",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay ties moral momentum to repeated action, trust, institutional influence, deception risk, tradeoffs, and uncertainty about slow collective change."
+      }
+    },
+    "the-roi-of-caring": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-10",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-10",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay frames caring as agency, trust, resilience, and ownership, naming incentives, collaboration tradeoffs, downstream consequences, and bounded uncertainty."
+      }
+    },
+    "the-slow-way-is-the-fast-way": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-10",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-10",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay preserves the parable while testing speed against preparation, attention, decision incentives, long-run tradeoffs, and uncertainty about shortcuts."
+      }
+    },
+    "dirt-is-better-than-air": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-10",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-10",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds South Lafourche levee claims in public reporting and tests local knowledge, federal standards, maintenance incentives, preparation tradeoffs, and flood-risk consequences."
+      }
     }
   },
   "blocked": {},
@@ -1249,6 +1344,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-09.md",
       "commit_sha": "422c7f6adb075666d0f7ffc8190242df2fcdc49d",
       "deployed_on": "2026-05-09"
+    },
+    {
+      "batch_id": "2026-05-10",
+      "selected_slugs": [
+        "the-three-enemies-of-positive-outcomes",
+        "moral-momentum",
+        "the-roi-of-caring",
+        "the-slow-way-is-the-fast-way",
+        "dirt-is-better-than-air"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-10.md"
     }
   ]
 }

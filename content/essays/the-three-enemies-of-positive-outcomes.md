@@ -4,13 +4,17 @@ date: 2025-04-17
 draft: false
 slug: "the-three-enemies-of-positive-outcomes"
 section_label: "Essay"
-subtitle: "Things fail for a reason. It’s usually one of these."
+subtitle: "Things fail for a reason. It's usually one of these."
 featured_image: "/images/medium/the-three-enemies-of-positive-outcomes/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a.jpeg"
 featured_image_caption: "Photo by Zac Durant on Unsplash"
 featured_image_alt: "The Three Enemies of Positive Outcomes"
-description: "If your team, project, or relationship is off-track, start here. Most things don’t fail for complicated reasons. It’s usually one of these three"
-version: "1.0"
-edition: "First web edition"
+description: "If your team, project, or relationship is off-track, start here. Most things don't fail for complicated reasons. It's usually one of these three"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-10"
+    note: "Updated May 10, 2026, after OIP back-archive review for legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
 pdf: "/pdfs/the-three-enemies-of-positive-outcomes.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-three-enemies-of-positive-outcomes-795f353dcdfa"
@@ -18,42 +22,38 @@ medium_source_url: "https://medium.com/@lawtonperret/the-three-enemies-of-positi
 
 If your team, project, or relationship is off-track, start here.
 
-The Three Enemies of Positive Outcomes
+Most things don't fail for complicated reasons. It's usually one of these three.
 
-Most things don’t fail for complicated reasons. It’s usually one of these three.
+The enemies of positive outcomes are evil, apathy, and incompetence. That's the whole list.
 
-The enemies of positive outcomes are evil, apathy, and incompetence. That’s the whole list.
-
-EvilApathyIncompetenceEvil is the easiest to spot.
+Evil is the easiest to spot.
 
 Malicious intent corrodes trust, poisons collaboration, and prioritizes short-term wins over long-term good. But evil is rare.
 
-Most people aren’t trying to cause harm — they’re just checked out or in over their heads.
+Most people aren't trying to cause harm. They're just checked out or in over their heads.
 
 Apathy is quieter.
 
-It doesn’t announce itself. It shows up as a shrug.
+It doesn't announce itself. It shows up as a shrug.
 
-It’s the coworker who doesn’t follow up, the friend who disappears, the teammate who lets others carry the load. Apathy kills outcomes by starving them of attention.
+It's the coworker who doesn't follow up, the friend who disappears, the teammate who lets others carry the load. Apathy kills outcomes by starving them of attention.
 
-You can’t build good work, strong relationships, or real progress if nobody cares.
+You can't build good work, strong relationships, or real progress if nobody cares.
 
 Incompetence, on the other hand, is about capability.
 
-You can care a lot and still cause damage if you don’t have the skills, judgment, or self-awareness to do the job. That’s the thing though... Everyone starts out unqualified.
+You can care a lot and still cause damage if you don't have the skills, judgment, or self-awareness to do the job. That's the catch: everyone starts out unqualified.
 
-The problem isn’t being new — it’s refusing to get better.
+The problem isn't being new. It's refusing to get better.
 
-In any system — your job, your friend group, your family — positive outcomes depend on three things: good intentions, consistent effort, and enough skill to match the stakes.
+In any system, your job, your friend group, your family, positive outcomes depend on three things: good intentions, consistent effort, and enough skill to match the stakes.
 
-Good IntentionsConsistent EffortBasic CompetenceWhen one of those fails, things start to wobble. When all three are missing, the whole thing tends to collapse.
+When one of those fails, things start to wobble. When all three are missing, the whole thing tends to collapse.
 
-This is a simple framework, but it’s useful.
+This is a simple framework, but it's useful.
 
-When something’s going wrong, don’t overthink it.
+When something's going wrong, don't overthink it.
 
 Start by asking: is it malice, apathy, or incompetence?
 
 And what would it take to fix that?
-
-If you found this useful, follow me here on Medium for more clear thinking on strategy, leadership, and systems that work.
