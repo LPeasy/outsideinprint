@@ -1,0 +1,23 @@
+generated_at: '2026-05-09T22:20:53Z'
+source:
+  name: 'Wikimedia On This Day API'
+  url: 'https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/events/05/09'
+dates:
+  '05-09':
+    label: 'May 9'
+    events:
+      - year: 2023
+        text: 'The May 9 riots following the arrest of Imran Khan in Pakistan.'
+        source_url: 'https://en.wikipedia.org/wiki/May_9_riots'
+      - year: 2022
+        text: 'Russo-Ukrainian War: United States President Joe Biden signs the 2022 Lend-Lease Act into law, a rebooted World War II-era policy expediting American equipment to Ukraine and other Eastern European countries.'
+        source_url: 'https://en.wikipedia.org/wiki/Russo-Ukrainian_war'
+      - year: 2020
+        text: 'The COVID-19 recession causes the U.S. unemployment rate to hit 14.9 percent, its worst rate since the Great Depression.'
+        source_url: 'https://en.wikipedia.org/wiki/COVID-19_recession'
+      - year: 2018
+        text: 'Barisan Nasional, the coalition that had governed Malaysia since the country''s independence in 1957, suffer an historic defeat in the 2018 Malaysian general election.'
+        source_url: 'https://en.wikipedia.org/wiki/Barisan_Nasional'
+      - year: 2002
+        text: 'The 38-day stand-off in the Church of the Nativity in Bethlehem comes to an end when the Palestinians inside agree to have 13 suspected terrorists among them deported to several different countries.'
+        source_url: 'https://en.wikipedia.org/wiki/Siege_of_the_Church_of_the_Nativity'

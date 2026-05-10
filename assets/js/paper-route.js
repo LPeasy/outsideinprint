@@ -12,12 +12,22 @@
     throwRightLean: 7,
     airThrowLeft: 8,
     airThrowRight: 9,
+    rampApproach: 10,
+    rampMount: 11,
+    rampLift: 12,
     airbornePeak: 13,
+    airborneLeftPeak: 14,
     airborneHold: 15,
+    rampLand: 16,
+    rampRecover: 17,
     wheelieStart: 18,
-    wheelieRise: 19,
+    wheelieRise1: 19,
+    wheelieRise2: 20,
     wheeliePeak: 21,
+    wheeliePeakAlt: 22,
     wheelieHold: 23,
+    wheelieLand: 24,
+    wheelieRecover: 25,
     puddleSplash: 27,
     puddleWobble: 28,
     puddleLoss: 30,
@@ -166,6 +176,29 @@
   var INTRO_SKETCH_BOB_RIDE_FRAMES = ["intro_sketch_bob_ride_01", "intro_sketch_bob_ride_02", "intro_sketch_bob_ride_03", "intro_sketch_bob_ride_04", "intro_sketch_bob_ride_05", "intro_sketch_bob_ride_06"];
   var INTRO_SKETCH_SPOT_PAPER_SIDE_FRAMES = ["intro_sketch_spot_paper_side_01", "intro_sketch_spot_paper_side_02", "intro_sketch_spot_paper_side_03", "intro_sketch_spot_paper_side_04", "intro_sketch_spot_paper_side_05", "intro_sketch_spot_paper_side_06"];
   var INTRO_SKETCH_BOB_SPOT_FINALE_FRAMES = ["intro_sketch_bob_spot_finale_01", "intro_sketch_bob_spot_finale_02", "intro_sketch_bob_spot_finale_03", "intro_sketch_bob_spot_finale_04", "intro_sketch_bob_spot_finale_05", "intro_sketch_bob_spot_finale_06"];
+  var END_RUN_PAPER_DOORSTEP_FRAMES = ["end_run_paper_doorstep_skid_01", "end_run_paper_doorstep_skid_02", "end_run_paper_doorstep_skid_03", "end_run_paper_doorstep_skid_04", "end_run_paper_doorstep_skid_05", "end_run_paper_doorstep_skid_06", "end_run_paper_doorstep_skid_07", "end_run_paper_doorstep_skid_08", "end_run_paper_doorstep_skid_09", "end_run_paper_doorstep_skid_10", "end_run_paper_doorstep_skid_11", "end_run_paper_doorstep_skid_12", "end_run_paper_doorstep_skid_13"];
+  var END_RUN_DOORSTEP_PLATE_FRAME = "end_run_doorstep_plate";
+  var END_RUN_SCORE_REVEAL_AT = 4.08;
+  var END_RUN_SUMMARY_REVEAL_AT = 4.5;
+  var END_RUN_EXTRA_REVEAL_AT = 3.86;
+  var END_RUN_ROWS_REVEAL_AT = 4.18;
+  var END_RUN_TOTAL_FRAMES = 38;
+  var END_RUN_BEAT_SEQUENCE = [
+    { key: "run-end", start: 0, end: .27 },
+    { key: "spot-dodge", start: .27, end: .72 },
+    { key: "puddle-wheelie", start: .72, end: 1.35 },
+    { key: "paper-throw", start: 1.35, end: 2.47 },
+    { key: "paper-follow", start: 2.47, end: 3.08 },
+    { key: "porch-skid", start: 3.08, end: 3.84 },
+    { key: "stamp-ink", start: 3.84, end: 4.5 },
+    { key: "results", start: 4.5, end: 4.7 }
+  ];
+  var END_RUN_FRAME_TIMINGS = [
+    .09, .09, .09, .09, .09, .09, .09, .09, .09, .09, .09, .09, .09, .09, .09,
+    .16, .16, .16, .16, .16, .16, .16,
+    .105, .105, .105, .105, .105, .105, .105, .105, .105, .105, .105, .105, .105,
+    .22, .22, .24
+  ];
   var SPOT_SIDE_FRAMES = ["spot_run_side_01", "spot_run_side_02", "spot_run_side_03", "spot_run_side_04", "spot_run_side_05", "spot_run_side_06"];
   var SPOT_RUN_PAPER_SIDE_FRAMES = ["spot_run_paper_side_01", "spot_run_paper_side_02", "spot_run_paper_side_03", "spot_run_paper_side_04", "spot_run_paper_side_05", "spot_run_paper_side_06"];
   var SPOT_FRONT_FRAMES = ["spot_run_front_01", "spot_run_front_02", "spot_run_front_03"];
@@ -251,6 +284,21 @@
     return 1 - Math.pow(1 - t, 3);
   }
 
+  function blendRgbTint(from, to, amount) {
+    var t = clamp(amount, 0, 1);
+    var fromRed = (from >> 16) & 255;
+    var fromGreen = (from >> 8) & 255;
+    var fromBlue = from & 255;
+    var toRed = (to >> 16) & 255;
+    var toGreen = (to >> 8) & 255;
+    var toBlue = to & 255;
+    var red = Math.round(fromRed + (toRed - fromRed) * t);
+    var green = Math.round(fromGreen + (toGreen - fromGreen) * t);
+    var blue = Math.round(fromBlue + (toBlue - fromBlue) * t);
+
+    return (red << 16) + (green << 8) + blue;
+  }
+
   function introBeatAt(time) {
     var index;
     var beat;
@@ -265,6 +313,20 @@
     return INTRO_BEAT_SEQUENCE[INTRO_BEAT_SEQUENCE.length - 1];
   }
 
+  function endRunBeatAt(time) {
+    var index;
+    var beat;
+
+    for (index = 0; index < END_RUN_BEAT_SEQUENCE.length; index += 1) {
+      beat = END_RUN_BEAT_SEQUENCE[index];
+      if (time >= beat.start && time < beat.end) {
+        return beat;
+      }
+    }
+
+    return END_RUN_BEAT_SEQUENCE[END_RUN_BEAT_SEQUENCE.length - 1];
+  }
+
   function introColorBlendAt(time) {
     if (time < 7.6) {
       return 0;
@@ -273,6 +335,10 @@
       return easeOutCubic((time - 7.6) / 1.8);
     }
 
+    return 1;
+  }
+
+  function endRunColorBlendAt(time) {
     return 1;
   }
 
@@ -285,6 +351,24 @@
     }
 
     return 1;
+  }
+
+  function endRunOipBlendAt(time) {
+    return 0;
+  }
+
+  function endRunFrameAt(time) {
+    var elapsed = 0;
+    var index;
+
+    for (index = 0; index < END_RUN_FRAME_TIMINGS.length; index += 1) {
+      elapsed += END_RUN_FRAME_TIMINGS[index];
+      if (time < elapsed) {
+        return index + 1;
+      }
+    }
+
+    return END_RUN_TOTAL_FRAMES;
   }
 
   function introRideFrameAt(frames, personalityFrames, beat, time, frameRate) {
@@ -504,8 +588,10 @@
     this.finalScoreText = null;
     this.introLayer = null;
     this.introSketchLayer = null;
+    this.endRunLayer = null;
     this.introObjects = {};
     this.introSketchObjects = {};
+    this.endRunObjects = {};
     this.keys = {};
     this.heldLeft = false;
     this.heldRight = false;
@@ -566,9 +652,42 @@
     this.introOipBlend = 0;
     this.introSketchFrame = "";
     this.introSettingFrame = "";
+    this.endRunActive = false;
+    this.endRunElapsed = 0;
+    this.endRunBeat = "idle";
+    this.endRunOipBlend = 0;
+    this.endRunColorBlend = 1;
+    this.endRunSpotVisible = false;
+    this.endRunFinaleVisible = false;
+    this.endRunFinaleFrame = "";
+    this.endRunBobVisible = false;
+    this.endRunBobFrame = "";
+    this.endRunEditionVisible = false;
+    this.endRunEditionFrame = "";
+    this.endRunFrontPageVisible = false;
+    this.endRunPaperVisible = false;
+    this.endRunPaperFrame = "";
+    this.endRunPorchVisible = false;
+    this.endRunExtraStampVisible = false;
+    this.endRunSummaryRowsVisible = false;
+    this.endRunSidePanelsVisible = false;
+    this.endRunOipTreatmentActive = false;
+    this.endRunSkipped = false;
+    this.endRunFrame = 0;
+    this.endRunScoreStamped = false;
+    this.endRunCameraZoom = 1;
+    this.endRunScoreShown = false;
+    this.endRunSummaryShown = false;
+    this.endRunSummaryState = null;
+    this.endRunTitle = "";
+    this.endRunCopy = "";
+    this.endRunNewBest = false;
+    this.endRunSequenceId = 0;
     this.playerPose = "";
     this.poseHoldUntil = 0;
     this.heldPose = "";
+    this.wheelieVisualStartedAt = 0;
+    this.wheelieRecoverUntil = 0;
     this.finishSequenceId = 0;
     this.lastSummaryMetrics = [];
     this.basePlayerX = 0;
@@ -713,7 +832,9 @@
       return;
     }
 
-    if (key === "Enter" && !buttonTarget && !this.introComplete) {
+    if (key === "Enter" && !buttonTarget && this.endRunActive) {
+      handled = this.skipEndRunCinematic();
+    } else if (key === "Enter" && !buttonTarget && !this.introComplete) {
       if (this.introPrepComplete) {
         this.skipIntro();
         handled = true;
@@ -962,6 +1083,12 @@
   PaperRouteGame.prototype.handleStagePointerDown = function (pointer) {
     var x;
 
+    if (this.endRunActive) {
+      this.lastTouchZone = "end-run-skip";
+      this.skipEndRunCinematic();
+      return;
+    }
+
     if (!this.pointerIsTouchLike(pointer)) {
       return;
     }
@@ -1191,6 +1318,8 @@
     items.forEach(function (item) {
       var tile = document.createElement("span");
       var icon = document.createElement("span");
+      var label = document.createElement("span");
+      var leader = document.createElement("span");
       var value = document.createElement("strong");
 
       tile.className = "paper-route-result-tile paper-route-result-tile--" + item.key;
@@ -1198,8 +1327,14 @@
       tile.setAttribute("aria-label", item.aria || (item.label + ": " + item.value));
       icon.className = "paper-route-result-icon";
       icon.setAttribute("aria-hidden", "true");
+      label.className = "paper-route-result-label";
+      label.textContent = item.label;
+      leader.className = "paper-route-result-leader";
+      leader.setAttribute("aria-hidden", "true");
       value.textContent = item.value;
       tile.appendChild(icon);
+      tile.appendChild(label);
+      tile.appendChild(leader);
       tile.appendChild(value);
       node.appendChild(tile);
     });
@@ -1226,9 +1361,16 @@
     this.finalScoreText.setText("");
     this.finalScoreText.setAlpha(1);
     this.finalScoreText.setScale(1);
+    this.finalScoreText.setColor("#fff8e8");
+    if (this.finalScoreText.setStroke) {
+      this.finalScoreText.setStroke("#2b2117", 7);
+    }
   };
 
-  PaperRouteGame.prototype.showFinalScore = function (score) {
+  PaperRouteGame.prototype.showFinalScore = function (score, newBest) {
+    var frontPage;
+    var finale;
+    var scoreText;
     var x;
     var y;
 
@@ -1236,11 +1378,32 @@
       return;
     }
 
-    x = this.player ? this.player.x : this.width * .5;
-    y = this.player ? this.player.y - 116 : this.height * .62;
+    scoreText = this.finalScoreText;
+    frontPage = this.endRunObjects ? this.endRunObjects.frontPage : null;
+    finale = this.endRunObjects ? (this.endRunObjects.bobJump || this.endRunObjects.colorFinale || this.endRunObjects.oipFinale) : null;
+    if (frontPage && (frontPage.visible || this.endRunFrontPageVisible)) {
+      scoreText.setVisible(false);
+      this.endRunScoreStamped = true;
+      return;
+    } else if (finale && (finale.visible || this.endRunFinaleVisible)) {
+      x = finale.x;
+      y = finale.y - Math.max(118, (finale.displayHeight || 0) * .46);
+      scoreText.setColor(newBest ? "#ffe0a3" : "#fff8e8");
+      if (scoreText.setStroke) {
+        scoreText.setStroke("#2b2117", 7);
+      }
+    } else {
+      x = this.player ? this.player.x : this.width * .5;
+      y = this.player ? this.player.y - 116 : this.height * .62;
+      scoreText.setColor(newBest ? "#ffe0a3" : "#fff8e8");
+      if (scoreText.setStroke) {
+        scoreText.setStroke("#2b2117", 7);
+      }
+    }
     this.finalScoreText.setText(String(Math.max(0, Math.round(score || 0))));
     this.finalScoreText.setPosition(x, y);
     this.finalScoreText.setVisible(true);
+    this.endRunScoreStamped = true;
 
     if (this.reducedMotion || !this.scene || !this.scene.tweens) {
       this.finalScoreText.setAlpha(1);
@@ -1257,6 +1420,20 @@
       duration: 360,
       ease: "Back.Out"
     });
+    if (newBest) {
+      this.scene.tweens.add({
+        targets: this.finalScoreText,
+        scale: 1.08,
+        duration: 220,
+        ease: "Sine.InOut",
+        yoyo: true,
+        repeat: 1,
+        delay: 120,
+        onComplete: function () {
+          scoreText.setScale(1);
+        }
+      });
+    }
   };
 
   PaperRouteGame.prototype.createPhaserGame = function () {
@@ -1402,7 +1579,9 @@
 
     create("bobRide", [BOB_FRAME.rideStraight, BOB_FRAME.rideStraightAlt], 5, -1);
     create("bobAirborne", [BOB_FRAME.airbornePeak, BOB_FRAME.airborneHold], 5, -1);
-    create("bobWheelieRise", [BOB_FRAME.wheelieStart, BOB_FRAME.wheelieRise, BOB_FRAME.wheeliePeak, BOB_FRAME.wheelieHold], 10, 0);
+    create("bobWheelieRise", [BOB_FRAME.wheelieStart, BOB_FRAME.wheelieRise2, BOB_FRAME.wheeliePeak, BOB_FRAME.wheeliePeakAlt, BOB_FRAME.wheelieHold, BOB_FRAME.wheeliePeakAlt], 12, 0);
+    create("bobWheelieHold", [BOB_FRAME.wheeliePeakAlt, BOB_FRAME.wheeliePeakAlt, BOB_FRAME.wheelieHold, BOB_FRAME.wheeliePeakAlt], 6, -1);
+    create("bobWheelieRecover", [BOB_FRAME.wheelieLand, BOB_FRAME.wheelieRecover, BOB_FRAME.rideStraight], 9, 0);
     create("bobPuddleHit", [BOB_FRAME.puddleSplash, BOB_FRAME.puddleWobble, BOB_FRAME.puddleLoss, BOB_FRAME.puddleRecover], 7, 0);
     create("bobRunEnd", [34, 35, 36, 37, 38, 39, 40, 41], 4, 0);
   };
@@ -1458,6 +1637,10 @@
 
   PaperRouteGame.prototype.hasIntroAtlas = function () {
     return !!(this.scene && this.scene.textures.exists("paperBobIntro"));
+  };
+
+  PaperRouteGame.prototype.hasIntroFrame = function (frameName) {
+    return !!(this.hasIntroAtlas() && this.scene.textures.getFrame("paperBobIntro", frameName));
   };
 
   PaperRouteGame.prototype.hasRoutePropsFrame = function (frameName) {
@@ -2829,6 +3012,746 @@
     }
   };
 
+  PaperRouteGame.prototype.clearEndRunCinematic = function () {
+    var objects = this.endRunObjects || {};
+
+    if (objects.sidePanelLeftMask) {
+      objects.sidePanelLeftMask.destroy();
+    }
+    if (objects.sidePanelRightMask) {
+      objects.sidePanelRightMask.destroy();
+    }
+    if (objects.sidePanelLeftMaskGraphic) {
+      objects.sidePanelLeftMaskGraphic.destroy();
+    }
+    if (objects.sidePanelRightMaskGraphic) {
+      objects.sidePanelRightMaskGraphic.destroy();
+    }
+    if (this.endRunLayer) {
+      this.endRunLayer.destroy(true);
+      this.endRunLayer = null;
+    }
+    this.endRunObjects = {};
+    this.endRunActive = false;
+    this.endRunElapsed = 0;
+    this.endRunBeat = "idle";
+    this.endRunOipBlend = 0;
+    this.endRunColorBlend = 1;
+    this.endRunSpotVisible = false;
+    this.endRunFinaleVisible = false;
+    this.endRunFinaleFrame = "";
+    this.endRunBobVisible = false;
+    this.endRunBobFrame = "";
+    this.endRunEditionVisible = false;
+    this.endRunEditionFrame = "";
+    this.endRunFrontPageVisible = false;
+    this.endRunPaperVisible = false;
+    this.endRunPaperFrame = "";
+    this.endRunPorchVisible = false;
+    this.endRunExtraStampVisible = false;
+    this.endRunSummaryRowsVisible = false;
+    this.endRunSidePanelsVisible = false;
+    this.endRunOipTreatmentActive = false;
+    this.endRunSkipped = false;
+    this.endRunFrame = 0;
+    this.endRunScoreStamped = false;
+    this.endRunCameraZoom = 1;
+    this.endRunScoreShown = false;
+    this.endRunSummaryShown = false;
+    this.endRunSummaryState = null;
+    this.endRunTitle = "";
+    this.endRunCopy = "";
+    this.endRunNewBest = false;
+    this.endRunSequenceId = 0;
+  };
+
+  PaperRouteGame.prototype.hideIntroCinematicLayers = function () {
+    var key;
+    var object;
+
+    if (this.introLayer) {
+      this.introLayer.setVisible(false);
+    }
+    if (this.introSketchLayer) {
+      this.introSketchLayer.setVisible(false);
+    }
+    for (key in this.introObjects) {
+      if (Object.prototype.hasOwnProperty.call(this.introObjects, key)) {
+        object = this.introObjects[key];
+        if (object && object.setVisible) {
+          object.setVisible(false);
+        }
+      }
+    }
+    for (key in this.introSketchObjects) {
+      if (Object.prototype.hasOwnProperty.call(this.introSketchObjects, key)) {
+        object = this.introSketchObjects[key];
+        if (object && object.setVisible) {
+          object.setVisible(false);
+        }
+      }
+    }
+    this.introBeat = "idle";
+    this.introBobFrame = "";
+    this.introSpotFrame = "";
+    this.introFinaleFrame = "";
+    this.introSketchReveal = 0;
+    this.introColorBlend = 0;
+    this.introOipBlend = 0;
+    this.introSketchFrame = "";
+    this.introSettingFrame = "";
+  };
+
+  PaperRouteGame.prototype.createEndRunObjects = function () {
+    var scene = this.scene;
+    var objects;
+    var paperTexture;
+    var puddleTexture;
+    var rowTexts = [];
+    var rowParts;
+    var rowIndex;
+
+    this.clearEndRunCinematic();
+    if (!scene || !this.hasIntroAtlas() || !this.hasBobSheet() || !this.hasIntroFrame(INTRO_OIP_SETTING_FRAME) || !this.hasIntroFrame(END_RUN_DOORSTEP_PLATE_FRAME) || !this.hasIntroFrame(END_RUN_PAPER_DOORSTEP_FRAMES[0]) || !this.hasIntroFrame(END_RUN_PAPER_DOORSTEP_FRAMES[END_RUN_PAPER_DOORSTEP_FRAMES.length - 1]) || !this.hasIntroFrame(SPOT_SIDE_FRAMES[0])) {
+      return false;
+    }
+
+    paperTexture = scene.textures.exists("paperRoutePaperAsset") ? "paperRoutePaperAsset" : "paperRoutePaper";
+    puddleTexture = scene.textures.exists("paperRoutePuddleAsset") ? "paperRoutePuddleAsset" : "paperRoutePuddle";
+    this.endRunLayer = scene.add.container(0, 0);
+    this.endRunLayer.setDepth(47);
+    for (rowIndex = 0; rowIndex < 6; rowIndex += 1) {
+      rowParts = {
+        icon: scene.add.text(0, 0, "", {
+          color: "#2f2419",
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          fontSize: "9px",
+          fontStyle: "bold",
+          stroke: "#f4e7cc",
+          strokeThickness: 2
+        }),
+        label: scene.add.text(0, 0, "", {
+          color: "#2f2419",
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          fontSize: "10px",
+          fontStyle: "bold"
+        }),
+        value: scene.add.text(0, 0, "", {
+        color: "#2f2419",
+        fontFamily: "Georgia, 'Times New Roman', serif",
+          fontSize: "11px",
+        fontStyle: "bold"
+        })
+      };
+      rowParts.icon.setOrigin(.5);
+      rowParts.label.setOrigin(0, .5);
+      rowParts.value.setOrigin(1, .5);
+      rowParts.icon.setAlpha(0);
+      rowParts.label.setAlpha(0);
+      rowParts.value.setAlpha(0);
+      rowParts.icon.setVisible(false);
+      rowParts.label.setVisible(false);
+      rowParts.value.setVisible(false);
+      rowTexts.push(rowParts);
+    }
+    objects = {
+      oipWash: scene.add.rectangle(this.width * .5, this.height * .5, this.width, this.height, 0xf3e6d3, 0),
+      oipInk: scene.add.graphics(),
+      doorstep: scene.add.image(this.width * .5, this.height * .5, "paperBobIntro", END_RUN_DOORSTEP_PLATE_FRAME),
+      sidePanels: scene.add.container(0, 0),
+      sidePanelLeft: scene.add.image(this.width * .5, this.height * .5, "paperBobIntro", INTRO_OIP_SETTING_FRAME),
+      sidePanelRight: scene.add.image(this.width * .5, this.height * .5, "paperBobIntro", INTRO_OIP_SETTING_FRAME),
+      sidePanelLeftMaskGraphic: scene.make.graphics({ x: 0, y: 0, add: false }),
+      sidePanelRightMaskGraphic: scene.make.graphics({ x: 0, y: 0, add: false }),
+      fxBack: scene.add.graphics(),
+      puddle: scene.add.image(this.width * .55, this.height * .76, puddleTexture),
+      spot: scene.add.sprite(this.width + 80, this.height * .68, "paperBobIntro", SPOT_SIDE_FRAMES[0]),
+      bob: scene.add.sprite(this.width * .5, this.height * .76, "paperBobSheet", BOB_FRAME.rideStraight),
+      paperThrow: scene.add.image(this.width * .55, this.height * .5, paperTexture),
+      paperClose: scene.add.sprite(this.width * .5, this.height * .5, "paperBobIntro", END_RUN_PAPER_DOORSTEP_FRAMES[0]),
+      fxFront: scene.add.graphics(),
+      resultRules: scene.add.graphics(),
+      extraStamp: scene.add.text(0, 0, "EXTRA EXTRA!", {
+        color: "#9d3328",
+        fontFamily: "Georgia, 'Times New Roman', serif",
+        fontSize: "24px",
+        fontStyle: "bold",
+        stroke: "#f4e7cc",
+        strokeThickness: 3
+      }),
+      resultRows: rowTexts,
+      recordStamp: scene.add.text(0, 0, "NEW RECORD", {
+        color: "#8f3b21",
+        fontFamily: "Georgia, 'Times New Roman', serif",
+        fontSize: "20px",
+        fontStyle: "bold",
+        stroke: "#f2e6cf",
+        strokeThickness: 3
+      })
+    };
+
+    objects.oipWash.setVisible(false);
+    objects.oipInk.setVisible(false);
+    objects.doorstep.setDisplaySize(this.width, this.height);
+    objects.doorstep.setAlpha(0);
+    objects.doorstep.setVisible(false);
+    objects.sidePanelLeftMask = objects.sidePanelLeftMaskGraphic.createGeometryMask();
+    objects.sidePanelRightMask = objects.sidePanelRightMaskGraphic.createGeometryMask();
+    objects.sidePanelLeft.setDisplaySize(this.width, this.height);
+    objects.sidePanelRight.setDisplaySize(this.width, this.height);
+    objects.sidePanelLeft.setMask(objects.sidePanelLeftMask);
+    objects.sidePanelRight.setMask(objects.sidePanelRightMask);
+    objects.sidePanelLeft.setAlpha(0);
+    objects.sidePanelRight.setAlpha(0);
+    objects.sidePanelLeft.setVisible(false);
+    objects.sidePanelRight.setVisible(false);
+    objects.sidePanels.add([objects.sidePanelLeft, objects.sidePanelRight]);
+    objects.sidePanels.setVisible(false);
+    objects.fxBack.setVisible(false);
+    objects.puddle.setDisplaySize(TUNING.puddleDisplay.width, TUNING.puddleDisplay.height);
+    objects.puddle.setAlpha(0);
+    objects.puddle.setVisible(false);
+    objects.spot.setDisplaySize(TUNING.spotDisplay.width, TUNING.spotDisplay.height);
+    objects.spot.setAlpha(0);
+    objects.spot.setVisible(false);
+    objects.bob.setDisplaySize(TUNING.playerDisplay.width, TUNING.playerDisplay.height);
+    objects.bob.setAlpha(0);
+    objects.bob.setVisible(false);
+    objects.paperThrow.setDisplaySize(32, 20);
+    objects.paperThrow.setAlpha(0);
+    objects.paperThrow.setVisible(false);
+    objects.paperClose.setDisplaySize(150, 188);
+    objects.paperClose.setAlpha(0);
+    objects.paperClose.setVisible(false);
+    objects.fxFront.setVisible(false);
+    objects.resultRules.setVisible(false);
+    objects.extraStamp.setOrigin(.5);
+    objects.extraStamp.setAngle(-7);
+    objects.extraStamp.setAlpha(0);
+    objects.extraStamp.setVisible(false);
+    objects.recordStamp.setOrigin(.5);
+    objects.recordStamp.setAngle(-8);
+    objects.recordStamp.setAlpha(0);
+    objects.recordStamp.setVisible(false);
+    objects.frontPage = objects.paperClose;
+    objects.bobJump = objects.bob;
+    this.endRunLayer.add([
+      objects.oipWash,
+      objects.doorstep,
+      objects.sidePanels,
+      objects.oipInk,
+      objects.fxBack,
+      objects.puddle,
+      objects.spot,
+      objects.bob,
+      objects.paperThrow,
+      objects.paperClose,
+      objects.fxFront,
+      objects.resultRules,
+      objects.extraStamp,
+      objects.recordStamp
+    ]);
+    for (rowIndex = 0; rowIndex < rowTexts.length; rowIndex += 1) {
+      this.endRunLayer.add([rowTexts[rowIndex].icon, rowTexts[rowIndex].label, rowTexts[rowIndex].value]);
+    }
+    this.endRunObjects = objects;
+    this.updateEndRunVisuals(0);
+
+    return true;
+  };
+
+  PaperRouteGame.prototype.applyEndRunOipTreatment = function (active) {
+    var objects = this.endRunObjects || {};
+    var width = this.width;
+    var height = this.height;
+    var alpha = active ? .34 : 0;
+    var inkAlpha = active ? .1 : 0;
+    var treated = [objects.bob, objects.spot, objects.paperThrow, objects.puddle];
+    var index;
+
+    this.endRunOipTreatmentActive = !!active;
+
+    if (objects.oipWash) {
+      objects.oipWash.setPosition(width * .5, height * .5);
+      objects.oipWash.setSize(width, height);
+      objects.oipWash.setAlpha(alpha);
+      objects.oipWash.setVisible(alpha > .01);
+    }
+    if (objects.oipInk) {
+      objects.oipInk.clear();
+      objects.oipInk.setVisible(inkAlpha > .01);
+      if (inkAlpha > .01) {
+        objects.oipInk.fillStyle(0x2b2117, inkAlpha * .42);
+        objects.oipInk.fillRect(0, 0, width, height);
+        objects.oipInk.lineStyle(1, 0x6b5a45, inkAlpha * 1.6);
+        objects.oipInk.strokeLineShape(new window.Phaser.Geom.Line(this.roadLeft, 0, this.roadLeft, height));
+        objects.oipInk.strokeLineShape(new window.Phaser.Geom.Line(this.roadRight, 0, this.roadRight, height));
+        objects.oipInk.lineStyle(1, 0x6b5a45, inkAlpha * .7);
+        objects.oipInk.strokeLineShape(new window.Phaser.Geom.Line(width * .5, 0, width * .5, height));
+      }
+    }
+
+    for (index = 0; index < treated.length; index += 1) {
+      if (!treated[index]) {
+        continue;
+      }
+      if (active) {
+        treated[index].setTint(0xf2dfbd);
+      } else if (treated[index].clearTint) {
+        treated[index].clearTint();
+      }
+    }
+  };
+
+  PaperRouteGame.prototype.drawEndRunSidePanels = function (progress, alpha) {
+    var objects = this.endRunObjects || {};
+    var panels = objects.sidePanels;
+    var left = objects.sidePanelLeft;
+    var right = objects.sidePanelRight;
+    var leftMask = objects.sidePanelLeftMaskGraphic;
+    var rightMask = objects.sidePanelRightMaskGraphic;
+    var width = this.width;
+    var height = this.height;
+    var leftEdge = Math.max(4, this.roadLeft - 8);
+    var rightEdge = Math.min(width - 4, this.roadRight + 8);
+    var panelAlpha = clamp(alpha === undefined ? 1 : alpha, 0, 1);
+    var reveal = easeOutCubic(clamp(progress, 0, 1));
+    var visible = panelAlpha > .01 && reveal > .01;
+
+    if (!panels || !left || !right || !leftMask || !rightMask) {
+      return;
+    }
+
+    leftMask.clear();
+    rightMask.clear();
+    panels.setVisible(visible);
+    left.setVisible(visible);
+    right.setVisible(visible);
+    if (!visible) {
+      return;
+    }
+
+    left.setTexture("paperBobIntro", INTRO_OIP_SETTING_FRAME);
+    right.setTexture("paperBobIntro", INTRO_OIP_SETTING_FRAME);
+    left.setPosition(width * .5, height * .5);
+    right.setPosition(width * .5, height * .5);
+    left.setDisplaySize(width, height);
+    right.setDisplaySize(width, height);
+    left.setAlpha(panelAlpha * reveal);
+    right.setAlpha(panelAlpha * reveal);
+    leftMask.fillStyle(0xffffff, 1);
+    leftMask.fillRect(0, 0, leftEdge, height);
+    rightMask.fillStyle(0xffffff, 1);
+    rightMask.fillRect(rightEdge, 0, Math.max(0, width - rightEdge), height);
+  };
+
+  PaperRouteGame.prototype.updateEndRunResultText = function (pageX, pageY, pageW, pageH, stampProgress, rowsProgress) {
+    var objects = this.endRunObjects || {};
+    var rows = objects.resultRows || [];
+    var state = this.endRunSummaryState || this.rules.state;
+    var items = this.summaryMetricItems(state);
+    var rowStartY = pageY + pageH * .07;
+    var rowGap = Math.max(14, pageH * .052);
+    var iconX = pageX - pageW * .32;
+    var labelX = pageX - pageW * .25;
+    var valueX = pageX + pageW * .32;
+    var leaderStartX = pageX - pageW * .03;
+    var leaderEndX = pageX + pageW * .22;
+    var labelText;
+    var rowKey;
+    var rowText;
+    var rowY;
+    var index;
+
+    if (objects.extraStamp) {
+      objects.extraStamp.setPosition(pageX - pageW * .06, pageY - pageH * .38);
+      objects.extraStamp.setAlpha(stampProgress);
+      objects.extraStamp.setScale(.88 + stampProgress * .12);
+      objects.extraStamp.setVisible(stampProgress > .01);
+    }
+    if (objects.resultRules) {
+      objects.resultRules.clear();
+      objects.resultRules.setVisible(rowsProgress > .01);
+    }
+    for (index = 0; index < rows.length; index += 1) {
+      rowText = rows[index];
+      if (!rowText) {
+        continue;
+      }
+      if (items[index]) {
+        rowKey = items[index].key;
+        if (rowKey === "mailbox") {
+          labelText = "MAIL";
+        } else if (rowKey === "doorstep") {
+          labelText = "DOOR";
+        } else if (rowKey === "window") {
+          labelText = "WINDOW";
+        } else if (rowKey === "ramp") {
+          labelText = "RAMPS";
+        } else if (rowKey === "puddle") {
+          labelText = "PUDDLES";
+        } else {
+          labelText = "PAPERS";
+        }
+        rowY = rowStartY + index * rowGap;
+        rowText.label.setText(labelText);
+        rowText.value.setText(String(items[index].value));
+        rowText.label.setPosition(labelX, rowY);
+        rowText.value.setPosition(valueX, rowY);
+        rowText.label.setAlpha(rowsProgress);
+        rowText.value.setAlpha(rowsProgress);
+        rowText.icon.setVisible(false);
+        rowText.label.setVisible(rowsProgress > .01);
+        rowText.value.setVisible(rowsProgress > .01);
+        if (objects.resultRules && rowsProgress > .01) {
+          objects.resultRules.lineStyle(1, 0x7f6d51, .52 * rowsProgress);
+          objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(leaderStartX, rowY, leaderEndX, rowY));
+          objects.resultRules.lineStyle(1, 0x2f2419, .72 * rowsProgress);
+          objects.resultRules.fillStyle(0x2f2419, .12 * rowsProgress);
+          if (rowKey === "mailbox") {
+            objects.resultRules.strokeRect(iconX - 5, rowY - 4, 9, 7);
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX + 4, rowY - 4, iconX + 7, rowY - 8));
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX + 7, rowY - 8, iconX + 10, rowY - 6));
+          } else if (rowKey === "doorstep") {
+            objects.resultRules.strokeRect(iconX - 6, rowY - 3, 12, 6);
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX - 3, rowY - 5, iconX + 3, rowY - 5));
+          } else if (rowKey === "window") {
+            objects.resultRules.strokeRect(iconX - 5, rowY - 5, 10, 10);
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX, rowY - 5, iconX, rowY + 5));
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX - 5, rowY, iconX + 5, rowY));
+          } else if (rowKey === "ramp") {
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX - 6, rowY + 5, iconX + 7, rowY + 5));
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX + 7, rowY + 5, iconX + 7, rowY - 4));
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX + 7, rowY - 4, iconX - 6, rowY + 5));
+          } else if (rowKey === "puddle") {
+            objects.resultRules.strokeEllipse(iconX, rowY, 15, 6);
+          } else {
+            objects.resultRules.strokeRect(iconX - 5, rowY - 6, 10, 12);
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX - 2, rowY - 2, iconX + 3, rowY - 2));
+            objects.resultRules.strokeLineShape(new window.Phaser.Geom.Line(iconX - 2, rowY + 2, iconX + 3, rowY + 2));
+          }
+        }
+      } else {
+        rowText.icon.setVisible(false);
+        rowText.label.setVisible(false);
+        rowText.value.setVisible(false);
+      }
+    }
+    if (objects.recordStamp) {
+      objects.recordStamp.setVisible(!!(this.endRunNewBest && rowsProgress > .01));
+      objects.recordStamp.setAlpha(objects.recordStamp.visible ? rowsProgress : 0);
+      objects.recordStamp.setPosition(pageX + pageW * .23, pageY - pageH * .02);
+      objects.recordStamp.setScale(.76 + rowsProgress * .12);
+    }
+  };
+
+  PaperRouteGame.prototype.updateEndRunVisuals = function (time) {
+    var objects = this.endRunObjects || {};
+    var t = clamp(time, 0, END_RUN_SUMMARY_REVEAL_AT);
+    var beat = endRunBeatAt(t);
+    var frameNumber = endRunFrameAt(t);
+    var oipBlend = endRunOipBlendAt(t);
+    var colorBlend = endRunColorBlendAt(t);
+    var spotProgress = clamp((t - .27) / .45, 0, 1);
+    var wheelieProgress = clamp((t - .72) / .63, 0, 1);
+    var throwProgress = clamp((t - 1.35) / 1.12, 0, 1);
+    var followProgress = clamp((t - 2.47) / .61, 0, 1);
+    var porchProgress = clamp((t - 2.47) / 1.37, 0, 1);
+    var paperCloseIndex = clamp(frameNumber - 23, 0, END_RUN_PAPER_DOORSTEP_FRAMES.length - 1);
+    var paperCloseFrame = END_RUN_PAPER_DOORSTEP_FRAMES[paperCloseIndex];
+    var stampProgress = 0;
+    var rowsProgress = 0;
+    var pageProgress = easeOutCubic(clamp((t - 3.3) / .54, 0, 1));
+    var pageW = Math.min(264, this.width * .6);
+    var pageH = pageW * 1.25;
+    var bobFrame = BOB_FRAME.rideStraight;
+    var bobX = this.width * .5;
+    var bobY = this.height * .76;
+    var bobScale = 1;
+    var bobVisible = frameNumber <= 22;
+    var paperThrowVisible = frameNumber >= 16 && frameNumber <= 22;
+    var paperCloseVisible = frameNumber >= 23;
+    var porchVisible = frameNumber >= 23;
+    var sidePanelsVisible = frameNumber <= 22;
+    var oipTreatmentActive = frameNumber <= 22;
+    var line;
+    var index;
+
+    if (!this.endRunLayer) {
+      this.endRunBeat = "idle";
+      this.endRunOipBlend = 0;
+      this.endRunColorBlend = 1;
+      this.endRunSpotVisible = false;
+      this.endRunFinaleVisible = false;
+      this.endRunFinaleFrame = "";
+      this.endRunBobVisible = false;
+      this.endRunBobFrame = "";
+      this.endRunEditionVisible = false;
+      this.endRunEditionFrame = "";
+      this.endRunFrontPageVisible = false;
+      this.endRunPaperVisible = false;
+      this.endRunPaperFrame = "";
+      this.endRunPorchVisible = false;
+      this.endRunExtraStampVisible = false;
+      this.endRunSummaryRowsVisible = false;
+      this.endRunSidePanelsVisible = false;
+      this.endRunOipTreatmentActive = false;
+      this.endRunScoreStamped = false;
+      this.endRunCameraZoom = 1;
+      this.endRunFrame = 0;
+      return;
+    }
+
+    this.endRunBeat = beat.key;
+    this.endRunFrame = frameNumber;
+    this.endRunOipBlend = Math.round(oipBlend * 1000) / 1000;
+    this.endRunColorBlend = Math.round(colorBlend * 1000) / 1000;
+    this.endRunCameraZoom = Math.round((1 + porchProgress * .12) * 1000) / 1000;
+    this.endRunLayer.setVisible(true);
+
+    if (objects.doorstep) {
+      objects.doorstep.setDisplaySize(this.width, this.height);
+      objects.doorstep.setPosition(this.width * .5, this.height * .5);
+      objects.doorstep.setAlpha(porchVisible ? (frameNumber === 23 ? .72 : 1) : 0);
+      objects.doorstep.setVisible(objects.doorstep.alpha > .01);
+    }
+    this.drawEndRunSidePanels(sidePanelsVisible ? 1 : 0, sidePanelsVisible ? .86 : 0);
+    if (frameNumber <= 3) {
+      bobFrame = BOB_FRAME.rideStraight;
+      bobX = this.width * .5;
+      bobY = this.height * (.76 - (frameNumber - 1) * .015);
+    } else if (frameNumber <= 8) {
+      bobFrame = frameNumber < 6 ? BOB_FRAME.leanLeft : BOB_FRAME.leanRight;
+      bobX = this.width * (.5 - Math.sin(spotProgress * Math.PI) * .08);
+      bobY = this.height * (.74 - spotProgress * .035);
+      bobScale = 1 + Math.sin(spotProgress * Math.PI) * .04;
+    } else if (frameNumber <= 12) {
+      bobFrame = frameNumber < 11 ? BOB_FRAME.wheeliePeakAlt : BOB_FRAME.wheelieHold;
+      bobX = this.width * (.43 + wheelieProgress * .12);
+      bobY = this.height * (.73 - wheelieProgress * .11);
+      bobScale = 1.08 + Math.sin(wheelieProgress * Math.PI) * .15;
+    } else if (frameNumber <= 15) {
+      bobFrame = frameNumber === 15 ? BOB_FRAME.wheelieHold : BOB_FRAME.wheeliePeakAlt;
+      bobX = this.width * (.5 + Math.sin((frameNumber - 13) / 2 * Math.PI) * .018);
+      bobY = this.height * (.62 - (frameNumber - 13) * .035);
+      bobScale = 1.18;
+    } else if (frameNumber <= 18) {
+      bobFrame = frameNumber === 16 ? BOB_FRAME.throwRightLean : BOB_FRAME.throwRight;
+      bobX = this.width * (.5 + throwProgress * .045);
+      bobY = this.height * (.52 - throwProgress * .12);
+      bobScale = .98 - throwProgress * .08;
+    } else {
+      bobFrame = BOB_FRAME.rideStraight;
+      bobX = this.width * (.55 - followProgress * .04);
+      bobY = this.height * (.4 - followProgress * .09);
+      bobScale = .72 - followProgress * .36;
+    }
+    if (objects.bob) {
+      objects.bob.setTexture("paperBobSheet");
+      objects.bob.setFrame(bobFrame);
+      objects.bob.setPosition(bobX, bobY);
+      objects.bob.setDisplaySize(TUNING.playerDisplay.width * bobScale, TUNING.playerDisplay.height * bobScale);
+      objects.bob.setAngle(frameNumber >= 9 && frameNumber <= 12 ? -4 + wheelieProgress * 8 : 0);
+      objects.bob.setAlpha(bobVisible ? Math.max(.18, 1 - followProgress * .75) : 0);
+      objects.bob.setVisible(objects.bob.alpha > .01);
+    }
+    if (objects.spot) {
+      objects.spot.setTexture("paperBobIntro", frameFromTime(SPOT_SIDE_FRAMES, Math.max(0, t - .27), 12, false));
+      objects.spot.setPosition(this.width + 78 - spotProgress * (this.width + 170), this.height * (.67 + Math.sin(spotProgress * Math.PI) * .025));
+      objects.spot.setDisplaySize(TUNING.spotDisplay.width, TUNING.spotDisplay.height);
+      objects.spot.setAlpha(frameNumber >= 4 && frameNumber <= 8 ? 1 : 0);
+      objects.spot.setVisible(objects.spot.alpha > .01);
+    }
+    if (objects.puddle) {
+      objects.puddle.setPosition(this.width * .54, this.height * .76);
+      objects.puddle.setAlpha(frameNumber >= 9 && frameNumber <= 12 ? .9 : 0);
+      objects.puddle.setVisible(objects.puddle.alpha > .01);
+    }
+    if (objects.paperThrow) {
+      objects.paperThrow.setPosition(
+        this.width * (.55 + throwProgress * .24 - followProgress * .06),
+        this.height * (.51 - throwProgress * .06 + followProgress * .05)
+      );
+      objects.paperThrow.setDisplaySize(32 + (throwProgress + followProgress) * 80, 20 + (throwProgress + followProgress) * 52);
+      objects.paperThrow.setAngle(throwProgress * 42 + followProgress * 70);
+      objects.paperThrow.setAlpha(paperThrowVisible ? 1 : 0);
+      objects.paperThrow.setVisible(objects.paperThrow.alpha > .01);
+    }
+    if (objects.paperClose) {
+      objects.paperClose.setTexture("paperBobIntro", paperCloseFrame);
+      objects.paperClose.setPosition(this.width * .5, this.height * (.5 + porchProgress * .06));
+      objects.paperClose.setDisplaySize(pageW * (.72 + pageProgress * .28), pageH * (.72 + pageProgress * .28));
+      objects.paperClose.setAlpha(paperCloseVisible ? easeOutCubic(clamp((t - 2.47) / .22, 0, 1)) : 0);
+      objects.paperClose.setVisible(objects.paperClose.alpha > .01);
+    }
+    if (objects.fxBack) {
+      objects.fxBack.clear();
+      objects.fxBack.setVisible(true);
+      if (frameNumber >= 4 && frameNumber <= 22) {
+        objects.fxBack.lineStyle(2, oipTreatmentActive ? 0x6b5a45 : 0xf4e0b9, oipTreatmentActive ? .32 : .36);
+        for (index = 0; index < 5; index += 1) {
+          line = new window.Phaser.Geom.Line(this.width * (.2 + index * .13), this.height * (.78 - index * .035), this.width * (.04 + index * .1), this.height * (.79 - index * .035));
+          objects.fxBack.strokeLineShape(line);
+        }
+      }
+    }
+    if (objects.fxFront) {
+      objects.fxFront.clear();
+      objects.fxFront.setVisible(true);
+      if (frameNumber >= 10 && frameNumber <= 12) {
+        objects.fxFront.fillStyle(oipTreatmentActive ? 0x6f776d : 0xc5e5ed, oipTreatmentActive ? .5 : .72);
+        for (index = 0; index < 7; index += 1) {
+          objects.fxFront.fillCircle(this.width * (.52 + index * .015), this.height * (.75 - (index % 3) * .012), 2 + index % 3);
+        }
+      }
+      if (stampProgress > .01 && objects.paperClose) {
+        objects.fxFront.lineStyle(2, 0x9d3328, .42 * (1 - stampProgress));
+        objects.fxFront.strokeCircle(objects.paperClose.x - pageW * .06, objects.paperClose.y - pageH * .38, 22 + stampProgress * 24);
+      }
+    }
+
+    this.applyEndRunOipTreatment(oipTreatmentActive);
+    this.updateEndRunResultText(this.width * .5, this.height * (.5 + porchProgress * .06), pageW, pageH, stampProgress, rowsProgress);
+    this.endRunSpotVisible = !!(objects.spot && objects.spot.visible);
+    this.endRunBobVisible = !!(objects.bob && objects.bob.visible);
+    this.endRunBobFrame = this.endRunBobVisible ? String(bobFrame) : "";
+    this.endRunEditionVisible = false;
+    this.endRunEditionFrame = "";
+    this.endRunPorchVisible = !!(objects.doorstep && objects.doorstep.visible);
+    this.endRunSidePanelsVisible = !!(objects.sidePanels && objects.sidePanels.visible);
+    this.endRunFrontPageVisible = frameNumber >= 35 && !!(objects.paperClose && objects.paperClose.visible);
+    this.endRunPaperVisible = paperThrowVisible || !!(objects.paperClose && objects.paperClose.visible);
+    this.endRunPaperFrame = objects.paperClose && objects.paperClose.visible ? paperCloseFrame : (paperThrowVisible ? "runtime_paper_throw_right" : "");
+    this.endRunExtraStampVisible = !!(objects.extraStamp && objects.extraStamp.visible);
+    this.endRunSummaryRowsVisible = rowsProgress > .01;
+    this.endRunScoreStamped = this.endRunScoreShown || t >= END_RUN_SCORE_REVEAL_AT;
+    if (this.player) {
+      this.player.setVisible(!bobVisible);
+    }
+
+    this.endRunFinaleVisible = this.endRunBobVisible || this.endRunPaperVisible || this.endRunPorchVisible;
+    this.endRunFinaleFrame = this.endRunPaperFrame || this.endRunBobFrame;
+  };
+
+  PaperRouteGame.prototype.revealEndRunResults = function (sequenceId) {
+    var state = this.endRunSummaryState || this.rules.state;
+    var self = this;
+
+    if (sequenceId && this.finishSequenceId !== sequenceId) {
+      return;
+    }
+    if (this.endRunSummaryShown) {
+      return;
+    }
+
+    this.endRunActive = false;
+    this.endRunElapsed = END_RUN_SUMMARY_REVEAL_AT;
+    this.endRunBeat = "results";
+    if (this.endRunLayer) {
+      this.updateEndRunVisuals(END_RUN_SUMMARY_REVEAL_AT);
+    } else {
+      this.endRunOipBlend = 0;
+      this.endRunColorBlend = 1;
+    }
+    this.endRunBeat = "results";
+    if (!this.endRunScoreShown) {
+      this.showFinalScore(state.score, this.endRunNewBest);
+      this.endRunScoreShown = true;
+    }
+    if (this.summaryTitle) {
+      this.summaryTitle.textContent = this.endRunTitle;
+    }
+    if (this.summaryCopy) {
+      this.summaryCopy.textContent = this.endRunCopy;
+    }
+    this.renderSummaryMetrics(state);
+    if (this.summaryCard) {
+      this.summaryCard.hidden = false;
+    }
+    this.endRunSummaryShown = true;
+    this.endRunExtraStampVisible = true;
+    this.endRunSummaryRowsVisible = true;
+    this.endRunScoreStamped = true;
+    this.syncHud(this.endRunNewBest ? "New record saved in this browser." : "Final edition filed.");
+
+    if (this.summaryRestart) {
+      window.setTimeout(function () {
+        if (self.finishSequenceId === sequenceId) {
+          self.summaryRestart.focus({ preventScroll: true });
+        }
+      }, 20);
+    }
+  };
+
+  PaperRouteGame.prototype.startEndRunCinematic = function (state, title, copy, effect, sequenceId) {
+    var hasEndRunArt = this.createEndRunObjects();
+
+    this.endRunSummaryState = state;
+    this.endRunTitle = title;
+    this.endRunCopy = copy;
+    this.endRunNewBest = !!(effect && effect.newBest);
+    this.endRunSequenceId = sequenceId;
+    this.endRunElapsed = 0;
+    this.endRunScoreShown = false;
+    this.endRunSummaryShown = false;
+    this.endRunSkipped = false;
+
+    if (!hasEndRunArt) {
+      this.endRunElapsed = END_RUN_SUMMARY_REVEAL_AT;
+      this.endRunOipBlend = 0;
+      this.endRunColorBlend = 1;
+      this.revealEndRunResults(sequenceId);
+      return;
+    }
+
+    if (this.reducedMotion) {
+      this.endRunElapsed = END_RUN_SUMMARY_REVEAL_AT;
+      this.updateEndRunVisuals(END_RUN_SUMMARY_REVEAL_AT);
+      this.revealEndRunResults(sequenceId);
+      return;
+    }
+
+    this.endRunActive = true;
+    this.updateEndRunVisuals(0);
+  };
+
+  PaperRouteGame.prototype.skipEndRunCinematic = function () {
+    if (!this.endRunActive) {
+      return false;
+    }
+
+    this.endRunSkipped = true;
+    this.endRunElapsed = END_RUN_SUMMARY_REVEAL_AT;
+    this.updateEndRunVisuals(this.endRunElapsed);
+    if (!this.endRunScoreShown) {
+      this.showFinalScore((this.endRunSummaryState || this.rules.state).score, this.endRunNewBest);
+      this.endRunScoreShown = true;
+    }
+    this.revealEndRunResults(this.endRunSequenceId);
+
+    return true;
+  };
+
+  PaperRouteGame.prototype.updateEndRun = function (deltaSeconds) {
+    if (!this.endRunActive) {
+      return;
+    }
+    if (this.endRunSequenceId && this.finishSequenceId !== this.endRunSequenceId) {
+      this.clearEndRunCinematic();
+      return;
+    }
+
+    this.endRunElapsed = Math.min(END_RUN_SUMMARY_REVEAL_AT, this.endRunElapsed + deltaSeconds);
+    this.updateEndRunVisuals(this.endRunElapsed);
+    if (!this.endRunScoreShown && this.endRunElapsed >= END_RUN_SCORE_REVEAL_AT) {
+      this.showFinalScore((this.endRunSummaryState || this.rules.state).score, this.endRunNewBest);
+      this.endRunScoreShown = true;
+    }
+    if (this.endRunElapsed >= END_RUN_SUMMARY_REVEAL_AT) {
+      this.revealEndRunResults(this.endRunSequenceId);
+    }
+  };
+
   PaperRouteGame.prototype.setPlayerDisplaySize = function (scale) {
     if (!this.player) {
       return;
@@ -2866,8 +3789,12 @@
       frame = BOB_FRAME.airThrowRight;
     } else if (pose === "airborne") {
       animation = "bobAirborne";
-    } else if (pose === "wheelie") {
+    } else if (pose === "wheelie-rise") {
       animation = "bobWheelieRise";
+    } else if (pose === "wheelie-hold") {
+      animation = "bobWheelieHold";
+    } else if (pose === "wheelie-recover") {
+      animation = "bobWheelieRecover";
     } else if (pose === "puddle") {
       animation = "bobPuddleHit";
     } else if (pose === "run-end") {
@@ -3075,6 +4002,9 @@
       this.positionIntroFinale(INTRO_BOB_SPOT_FINALE_FRAMES[INTRO_BOB_SPOT_FINALE_FRAMES.length - 1]);
       this.holdIntroSketchFinale();
     }
+    if (this.endRunLayer) {
+      this.updateEndRunVisuals(this.endRunElapsed);
+    }
   };
 
   PaperRouteGame.prototype.redrawBackground = function () {
@@ -3200,6 +4130,7 @@
     }
 
     this.clearObjects();
+    this.clearEndRunCinematic();
     this.clearFinalScore();
     this.clearSummaryMetrics();
     this.applyEffects(this.rules.start(this.highScore));
@@ -3230,15 +4161,12 @@
     this.seedTrackSegments();
     this.poseHoldUntil = 0;
     this.heldPose = "";
+    this.wheelieVisualStartedAt = 0;
+    this.wheelieRecoverUntil = 0;
     this.finishSequenceId += 1;
     this.basePlayerX = this.width * .5;
     this.basePlayerY = this.height * .76;
-    if (this.introLayer) {
-      this.introLayer.setVisible(false);
-    }
-    if (this.introSketchLayer) {
-      this.introSketchLayer.setVisible(false);
-    }
+    this.hideIntroCinematicLayers();
     if (this.stage) {
       this.stage.classList.remove("paper-route-stage--intro-ready");
     }
@@ -3594,25 +4522,28 @@
       this.trickHeld = true;
       this.heldPose = "";
       this.poseHoldUntil = 0;
+      this.wheelieVisualStartedAt = this.rules.state.elapsed;
+      this.wheelieRecoverUntil = 0;
       this.playerPose = "";
       if (this.player) {
         this.player.setAngle(this.heldRight ? 13 : -13);
         this.player.setTint(0xf6dfb7);
-        this.setPlayerPose("wheelie");
+        this.setPlayerPose("wheelie-rise");
       }
       this.applyEffects(effects);
     }
   };
 
   PaperRouteGame.prototype.stopWheelie = function () {
-    var nextPose;
+    var effects;
 
     this.trickHeld = false;
-    this.applyEffects(this.rules.stopWheelie());
-    if (this.player) {
-      nextPose = this.heldLeft ? "lean-left" : (this.heldRight ? "lean-right" : "ride");
+    effects = this.rules.stopWheelie();
+    this.applyEffects(effects);
+    if (effects.length && this.player) {
       this.heldPose = "";
       this.poseHoldUntil = 0;
+      this.wheelieRecoverUntil = this.rules.state.elapsed + .34;
       if (this.rules.isSlowed()) {
         this.player.setTint(0x557b82);
       } else {
@@ -3620,7 +4551,7 @@
       }
       this.player.setAngle((this.heldLeft ? -1 : this.heldRight ? 1 : 0) * 4);
       this.playerPose = "";
-      this.setPlayerPose(nextPose);
+      this.setPlayerPose("wheelie-recover");
     }
   };
 
@@ -4063,10 +4994,16 @@
       this.player.setTint(0xb9894d);
       pose = state.elapsed < this.poseHoldUntil && this.heldPose ? this.heldPose : "airborne";
     } else if (state.wheelie) {
-      displayScale = 1;
-      this.player.setAngle(turn > 0 ? 13 : -13);
+      progress = clamp((state.elapsed - this.wheelieVisualStartedAt) / .52, 0, 1);
+      lift = 24 + Math.sin(progress * Math.PI) * 20;
+      displayScale = 1.22 + progress * .16;
+      this.player.setAngle(turn * 10);
       this.player.setTint(0xf6dfb7);
-      pose = "wheelie";
+      pose = state.elapsed - this.wheelieVisualStartedAt < .52 ? "wheelie-rise" : "wheelie-hold";
+    } else if (state.elapsed < this.wheelieRecoverUntil) {
+      displayScale = 1.1;
+      this.player.setAngle(turn * 5);
+      pose = "wheelie-recover";
     } else if (state.elapsed < this.poseHoldUntil && this.heldPose) {
       this.player.setAngle(turn * 4);
       pose = this.heldPose;
@@ -4097,6 +5034,10 @@
     }
     if (this.introMode === "intro-cinematic") {
       this.updateIntro(deltaSeconds);
+      return;
+    }
+    if (this.endRunActive) {
+      this.updateEndRun(deltaSeconds);
       return;
     }
     if (!this.rules.state.running || this.rules.state.paused) {
@@ -4235,9 +5176,7 @@
     var state = this.rules.state;
     var title;
     var copy;
-    var self = this;
     var sequenceId = this.finishSequenceId + 1;
-    var showDelay = this.reducedMotion ? 80 : 1800;
 
     this.finishSequenceId = sequenceId;
     this.scene.physics.pause();
@@ -4246,6 +5185,7 @@
     this.releaseDpad();
     this.clearTouchActionState();
     this.setTouchPanel(false);
+    this.hideIntroCinematicLayers();
     this.player.clearTint();
     this.player.setAngle(0);
     this.setPlayerDisplaySize(1.08);
@@ -4269,8 +5209,8 @@
       this.stage.classList.remove("paper-route-stage--paused");
     }
 
-    title = effect && effect.newBest ? "New Paper-Bob record" : "Edition delivered";
-    copy = "Final score " + state.score + ".";
+    title = String(Math.max(0, Math.round(state.score || 0)));
+    copy = effect && effect.newBest ? "New Paper-Bob record." : "Edition delivered.";
     if (state.finishReason === "papers") {
       copy += " The bag ran dry.";
     }
@@ -4285,33 +5225,7 @@
 
     this.playSound(effect && effect.newBest ? "record" : "end");
     this.syncHud("Run filed. Bob checks the final edition.");
-
-    window.setTimeout(function () {
-      if (self.finishSequenceId !== sequenceId) {
-        return;
-      }
-
-      if (self.summaryTitle) {
-        self.summaryTitle.textContent = title;
-      }
-      if (self.summaryCopy) {
-        self.summaryCopy.textContent = copy;
-      }
-      self.renderSummaryMetrics(state);
-      self.showFinalScore(state.score);
-      if (self.summaryCard) {
-        self.summaryCard.hidden = false;
-      }
-      self.syncHud(effect && effect.newBest ? "New record saved in this browser." : "Final edition filed.");
-
-      if (self.summaryRestart) {
-        window.setTimeout(function () {
-          if (self.finishSequenceId === sequenceId) {
-            self.summaryRestart.focus({ preventScroll: true });
-          }
-        }, 20);
-      }
-    }, showDelay);
+    this.startEndRunCinematic(state, title, copy, effect, sequenceId);
   };
 
   PaperRouteGame.prototype.togglePause = function () {
@@ -4357,7 +5271,7 @@
     var remaining = Math.max(0, Math.min(120000, Number(milliseconds) || 0));
     var stepMs;
 
-    while (remaining > 0 && this.rules.state.running && !this.rules.state.paused) {
+    while (remaining > 0 && (this.introMode === "intro-cinematic" || this.endRunActive || (this.rules.state.running && !this.rules.state.paused))) {
       stepMs = Math.min(50, remaining);
       this.updateScene(0, stepMs);
       remaining -= stepMs;
@@ -4433,6 +5347,29 @@
       introSketchFrame: this.introSketchFrame,
       introSettingVisible: !!(this.introSketchObjects.setting && this.introSketchObjects.setting.visible),
       introSettingFrame: this.introSettingFrame,
+      endRunElapsed: Math.round(this.endRunElapsed * 1000) / 1000,
+      endRunBeat: this.endRunBeat,
+      endRunOipBlend: this.endRunOipBlend,
+      endRunColorBlend: this.endRunColorBlend,
+      endRunSpotVisible: this.endRunSpotVisible,
+      endRunFinaleVisible: this.endRunFinaleVisible,
+      endRunFinaleFrame: this.endRunFinaleFrame,
+      endRunBobVisible: this.endRunBobVisible,
+      endRunBobFrame: this.endRunBobFrame,
+      endRunEditionVisible: this.endRunEditionVisible,
+      endRunEditionFrame: this.endRunEditionFrame,
+      endRunFrontPageVisible: this.endRunFrontPageVisible,
+      endRunPaperVisible: this.endRunPaperVisible,
+      endRunPaperFrame: this.endRunPaperFrame,
+      endRunPorchVisible: this.endRunPorchVisible,
+      endRunExtraStampVisible: this.endRunExtraStampVisible,
+      endRunSummaryRowsVisible: this.endRunSummaryRowsVisible,
+      endRunSidePanelsVisible: this.endRunSidePanelsVisible,
+      endRunOipTreatmentActive: this.endRunOipTreatmentActive,
+      endRunSkipped: this.endRunSkipped,
+      endRunFrame: this.endRunFrame,
+      endRunScoreStamped: this.endRunScoreStamped,
+      endRunCameraZoom: this.endRunCameraZoom,
       poolCounts: this.poolStats,
       score: this.rules.state.score,
       highScore: this.highScore,
@@ -4450,6 +5387,7 @@
       spotNextIn: Math.max(0, Math.round(this.spotTimer * 100) / 100),
       speed: Math.round(this.currentSpeed()),
       bobPose: this.playerPose,
+      bobFrame: this.player && this.player.frame ? this.player.frame.name : null,
       bobSpriteSheetLoaded: this.hasBobSheet(),
       routePropsAtlasLoaded: this.hasRoutePropsAtlas(),
       lotsAtlasLoaded: this.hasLotsAtlas(),

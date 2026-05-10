@@ -82,6 +82,7 @@ foreach ($requiredPath in @(
   'authors/index.html',
   'authors/robert-v-ussley/index.html',
   'almanack/2026-05-02/index.html',
+  'almanack/2026-05-09/index.html',
   'collections/bobs-almanack/index.html',
   'gallery/index.html',
   'random/index.html',
@@ -94,12 +95,11 @@ foreach ($requiredPath in @(
 }
 
 foreach ($forbiddenPath in @(
-  'almanack/index.html',
-  'almanack/2026-05-09/index.html'
+  'almanack/index.html'
 )) {
   $fullPath = Join-Path $SiteDir $forbiddenPath
   if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
-    throw "Expected unpublished Almanack route not to be emitted: $forbiddenPath"
+    throw "Expected the Almanack section index not to be emitted: $forbiddenPath"
   }
 }
 

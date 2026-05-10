@@ -1,0 +1,66 @@
+generated_at: '2026-05-09T22:20:53Z'
+source:
+  name: 'Wikipedia Current Events Portal'
+  url: 'https://en.wikipedia.org/wiki/Portal:Current_events'
+weeks:
+  '2026-05-09':
+    start_date: '2026-05-03'
+    end_date: '2026-05-09'
+    selection_note: 'Script-generated draft from dated Current Events pages; review weekly before publishing.'
+    events:
+      - order: 1
+        date: '2026-05-03'
+        category: 'Disasters and accidents'
+        text: 'The United States Africa Command reports that two American soldiers have been reported missing while on a hike near Tan-Tan, Morocco, after taking part in the annual African Lion military exercises.'
+        source_name: 'AP'
+        source_url: 'https://apnews.com/article/morocco-us-africom-african-lion-exercise-missing-733658c155ce6d64a740a2abb9e59e52'
+        source_order: 12
+      - order: 2
+        date: '2026-05-04'
+        category: 'International relations'
+        text: 'Austria–Russia relations Austria and Russian intelligence Austria expels three Russian diplomats over suspected espionage activities involving data interception from the Russian embassy and a diplomatic mission in Vienna.'
+        source_name: 'AP'
+        source_url: 'https://apnews.com/article/austria-espionage-russia-antennas-dd51684528e52a2c5a7e0997e54bbcad'
+        source_order: 37
+      - order: 3
+        date: '2026-05-06'
+        category: 'Armed conflicts and attacks'
+        text: '2026 Strait of Hormuz crisis 2026 Iran war regional mobilizations France deploys the aircraft carrier Charles de Gaulle and its strike group to the Red Sea ahead of a proposed British –French mission aimed at securing maritime traffic in the Strait of Hormuz.'
+        source_name: 'AP'
+        source_url: 'https://apnews.com/article/french-carrier-charles-de-gaulle-suez-hormuz-2749dc877f0ac34a0ccd4f0530786009'
+        source_order: 66
+      - order: 4
+        date: '2026-05-06'
+        category: 'Health and environment'
+        text: 'MV Hondius hantavirus outbreak Three passengers infected with hantavirus pulmonary syndrome from the Andes virus are evacuated off the MV Hondius cruise ship while it is stationed off the coast of Cape Verde to receive treatment in the Netherlands....'
+        source_name: 'ABC News'
+        source_url: 'https://abcnews.com/Health/3-evacuated-off-cruise-ship-suspected-hantavirus-cluster/story?id=132699628'
+        source_order: 78
+      - order: 5
+        date: '2026-05-07'
+        category: 'Armed conflicts and attacks'
+        text: 'U.S. president Donald Trump says that the ceasefire is still in effect despite the recent strikes on the U.S. destroyers.'
+        source_name: 'ABC News'
+        source_url: 'https://abcnews.com/Politics/trump-calls-iran-strikes-love-tap-ceasefire-effect/story?id=132762926'
+        source_order: 84
+      - order: 6
+        date: '2026-05-07'
+        category: 'Armed conflicts and attacks'
+        text: 'Allied Democratic Forces insurgency, Kivu conflict, Ituri conflict Forty people are killed and homes are burned by Allied Democratic Forces militants during attacks in North Kivu and Ituri Province, Democratic Republic of the Congo.'
+        source_name: 'AP'
+        source_url: 'https://apnews.com/article/congo-attacks-villages-allied-democratic-forces-killings-563bef10f07e476759c2738b820a6091'
+        source_order: 90
+      - order: 7
+        date: '2026-05-08'
+        category: 'Disasters and accidents'
+        text: 'Frontier Airlines Flight 4345 An Airbus A321neo operated by Frontier Airlines strikes and kills a person while taking off from Denver International Airport in Colorado, U.S., leading to an engine fire and aborted takeoff that injures 12 passengers.'
+        source_name: 'ABC7'
+        source_url: 'https://abc7.com/post/frontier-airlines-jet-bound-lax-strikes-person-denver-runway-engine-fire-forces-evacuation/19068264/'
+        source_order: 120
+      - order: 8
+        date: '2026-05-08'
+        category: 'Health and environment'
+        text: 'The U.S. Centers for Disease Control and Prevention reports that 115 people on the cruise ship Caribbean Princess have been infected by a norovirus outbreak.'
+        source_name: 'ABC News'
+        source_url: 'https://abcnews.com/International/115-people-sickened-norovirus-outbreak-cruise-ship-cdc/story?id=132788971'
+        source_order: 122

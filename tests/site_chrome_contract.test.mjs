@@ -95,11 +95,11 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(themeBootstrap, /document\.documentElement\.setAttribute\("data-theme", theme\)/);
   assert.match(themeToggleScript, /localStorage\.setItem\(storageKey, theme\)/);
   assert.match(themeToggleScript, /setTheme\(currentTheme\(\) === "dark" \? "light" : "dark"\)/);
-  assert.match(css, /html\[data-theme="light"\]\{[\s\S]*--bg-page:#f2eadf;[\s\S]*--accent:#365263;/);
+  assert.match(css, /html\[data-theme="light"\]\{[\s\S]*--bg-page:var\(--oip-paper\);[\s\S]*--accent:var\(--oip-link\);/);
   assert.match(css, /\.theme-toggle\{[\s\S]*display:none;[\s\S]*\}/);
   assert.match(css, /html\.theme-enabled \.theme-toggle\{[\s\S]*display:inline-flex;[\s\S]*\}/);
   assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(1\.75rem, 3vw, 2\.35rem\)/);
-  assert.match(css, /html\[data-theme="light"\] \.masthead--compressed\{[\s\S]*background:#ded3c4;/);
+  assert.match(css, /html\[data-theme="light"\] \.masthead--compressed\{[\s\S]*background:transparent;/);
   assert.match(css, /\/\* Light-mode paper edition \*\//);
   assert.match(css, /html\[data-theme="light"\] \.card,[\s\S]*background:var\(--paper-surface-wash\), var\(--bg-surface\)/);
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);

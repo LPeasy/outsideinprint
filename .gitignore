@@ -5,12 +5,14 @@
 
 /.tools/
 /.tmp-public/
+/.tmp-almanack-cache/
 /.tmp-seo-rollout-*/
 /.tmp-essay-guardrails-*/
 /.analytics-refresh/
 /assets/jsconfig.json
 /qa/artifacts/
 /qa/post-deploy-report.md
+/reports/almanack-data-review/
 /reports/essay-guardrails.*
 
 # >>> DependencyTemplate toolchain >>>

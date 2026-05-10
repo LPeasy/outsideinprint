@@ -19,7 +19,7 @@
   <article class="almanack-issue page-shell page-shell--wide" aria-labelledby="almanack-title">
     <header class="almanack-masthead">
       <p class="almanack-kicker">Outside In Print weekly sheet</p>
-      <h1 id="almanack-title">Bob's Almanack</h1>
+      <h1 id="almanack-title"><a href="{{ "collections/bobs-almanack/" | relURL }}">Bob's Almanack</a></h1>
       <div class="almanack-masthead__meta">
         <time datetime="{{ $issueDate.Format "2006-01-02" }}">{{ $issueDate.Format "January 2, 2006" }}</time>
         {{ with .Params.issue_number }}<span>Issue {{ . }}</span>{{ end }}

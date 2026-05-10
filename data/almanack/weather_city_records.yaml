@@ -1,0 +1,75 @@
+generated_at: '2026-05-09T22:20:53Z'
+source:
+  name: 'NOAA NCEI Global Historical Climatology Network Daily'
+  url: 'https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily'
+unit: 'F'
+dates:
+  '05-09':
+    label: 'May 9'
+    start_year: 1990
+    cities:
+      - key: 'new-york'
+        city: 'New York'
+        station_id: 'USW00094728'
+        station_name: 'NY City Central Park, NY US'
+        latitude: 40.77898
+        longitude: -73.96925
+        period_start: '1990-05-09'
+        period_end: '2025-05-09'
+        observations: 36
+        min_low_f: 34
+        mean_average_f: 60.4
+        max_high_f: 91
+        source_url: 'https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/USW00094728.csv'
+      - key: 'los-angeles'
+        city: 'Los Angeles'
+        station_id: 'USC00045118'
+        station_name: 'Los Angeles Downtown USC Campus, CA US'
+        latitude: 34.0236
+        longitude: -118.2911
+        period_start: '1990-05-09'
+        period_end: '2025-05-09'
+        observations: 35
+        min_low_f: 45
+        mean_average_f: 67.8
+        max_high_f: 100
+        source_url: 'https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/USC00045118.csv'
+      - key: 'chicago'
+        city: 'Chicago'
+        station_id: 'USW00094846'
+        station_name: 'Chicago O''Hare International Airport, IL US'
+        latitude: 41.995
+        longitude: -87.9336
+        period_start: '1990-05-09'
+        period_end: '2025-05-09'
+        observations: 36
+        min_low_f: 31.1
+        mean_average_f: 58.9
+        max_high_f: 88
+        source_url: 'https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/USW00094846.csv'
+      - key: 'atlanta'
+        city: 'Atlanta'
+        station_id: 'USW00013874'
+        station_name: 'Atlanta Hartsfield International Airport, GA US'
+        latitude: 33.6301
+        longitude: -84.4418
+        period_start: '1990-05-09'
+        period_end: '2025-05-09'
+        observations: 36
+        min_low_f: 44.1
+        mean_average_f: 70.1
+        max_high_f: 89.1
+        source_url: 'https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/USW00013874.csv'
+      - key: 'miami'
+        city: 'Miami'
+        station_id: 'USW00012839'
+        station_name: 'Miami International Airport, FL US'
+        latitude: 25.7906
+        longitude: -80.3164
+        period_start: '1990-05-09'
+        period_end: '2025-05-09'
+        observations: 36
+        min_low_f: 61
+        mean_average_f: 79.9
+        max_high_f: 95
+        source_url: 'https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/USW00012839.csv'

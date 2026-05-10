@@ -4,13 +4,17 @@ date: 2025-03-23
 draft: false
 slug: "make-fighter-jets-great-again-introducing-the-f-47"
 section_label: "Essay"
-subtitle: "Everything We Know About Trump’s Sixth-Generation Fighter Jet"
+subtitle: "Everything We Know About Trump's Sixth-Generation Fighter Jet"
 featured_image: "/images/medium/make-fighter-jets-great-again-introducing-the-f-47/963f254bdaaa5257edccd50b26cd1c5b9164e396f719d4b30c42d426ddf1ac4d.jpeg"
-featured_image_caption: "Image source: Collins Aerospace.In a move that fuses personal branding with national defense, President Donald Trump has unveiled the F-47 fighter jet — a name that winks at his place in history as the 47th president of the United States."
+featured_image_caption: "Image source: Collins Aerospace. The F-47 name refers to Trump's status as the 47th president."
 featured_image_alt: "Make Fighter Jets Great Again: Introducing the F-47"
-description: "The name is a flex.The plane is American air superiority — reengineered.While the name might be funny, the jet itself is no joke"
-version: "1.0"
-edition: "First web edition"
+description: "The F-47 announcement mixed Trump-era branding with a serious Air Force modernization decision: Boeing's sixth-generation fighter for the NGAD program."
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-09"
+    note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, author-promo residue, spacing, and source-sensitive defense claims were cleaned while preserving the original publication frame."
 pdf: "/pdfs/make-fighter-jets-great-again-introducing-the-f-47.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/make-fighter-jets-great-again-introducing-the-f-47-3428bba1e27c"
@@ -18,94 +22,86 @@ collections:
   - geopolitics-trade-global-power
 ---
 
-The name is a flex.The plane is American air superiority — reengineered.While the name might be funny, the jet itself is no joke.
+The name is a flex. The plane is a real defense-industrial decision.
 
-“Nothing in the world comes even close to it, and it’ll be known as the F-47,” Trump announced from the Oval Office, flanked by Defense Secretary Pete Hegseth and Air Force Chief Gen. David Allvin.Unveiling the F-47: A Sixth-Generation Powerhouse
+In March 2025, President Donald Trump announced the F-47 from the Oval Office, joined by Defense Secretary Pete Hegseth and Air Force Chief of Staff Gen. David Allvin. The branding was unmistakable: F-47, for the 47th president.
 
-![](https://cdn-images-1.medium.com/max/800/1*cB6V2VkB1zb_vJR9yUf9RQ@2x.jpeg)
+The aircraft itself is not a joke. It is the Air Force's planned sixth-generation fighter, selected under the Next Generation Air Dominance program.
 
-Image source: USAF.The F-47 is the crown jewel of the Air Force’s Next Generation Air Dominance (NGAD) program.
+The useful question is not whether the name is subtle. It is what the program tells us about American airpower, industrial capacity, and the cost of staying ahead.
 
-Built to replace the aging F-22 Raptor fleet, this sixth-generation warplane is more than just the next step in aviation — it’s a full-on leap.
+### A Sixth-Generation Fighter
 
-Longer range. Sneakier stealth. Smarter systems. And a cockpit that might as well be a command center.Boeing won the coveted Engineering and Manufacturing Development (EMD) contract, beating out Lockheed Martin.
+The F-47 is intended to replace the F-22 Raptor as the Air Force's premier air-superiority platform.
 
-It’s the company’s first clean-sheet fighter design since the McDonnell Douglas merger in 1997.
+The broad promise is familiar: longer range, stealthier design, stronger sensors, advanced data links, and the ability to work with uncrewed aircraft. The details remain limited because the program is classified in important places.
 
-“We recognize the importance of designing, building and delivering a 6th-generation fighter capability for the United States Air Force,” said Steve Parker, interim president and CEO of Boeing Defense. “In preparation for this mission, we made the most significant investment in the history of our defense business.”Next-Level Tech: Stealth, Speed, and AI Integration
+Boeing won the Engineering and Manufacturing Development contract, beating Lockheed Martin for the lead role. That matters because Boeing has not delivered a clean-sheet fighter of this kind since the McDonnell Douglas merger era.
 
-![](https://cdn-images-1.medium.com/max/800/1*ItwxxSynp8aCyLHASfgKLg@2x.jpeg)
+The contract gives Boeing a rare opportunity and a heavy burden. If it performs, the company regains prestige in a market where Lockheed's F-35 has dominated attention. If it stumbles, the Air Force loses time it may not have.
 
-Image source: Collins Aerospace.Stealth You Can’t See Coming
+### Stealth, Range, And Data
 
-The F-47 is loaded with stealth features, including cutting-edge radar-evading surfaces.
+Trump described the aircraft in sweeping terms, including claims about speed, maneuverability, payload, and near invisibility. Those statements should be treated as political language layered on top of a classified program.
 
-It’s designed to slip into hostile airspace, do the job, and leave without a trace.
+The more defensible claim is narrower: the Air Force wants an aircraft that can survive in contested airspace, coordinate with other systems, and operate at ranges that matter in the Pacific.
 
-Trump claimed it would be “virtually unseeable,” adding that “there’s never been anything even close to it, from speed to maneuverability, to what it can have to payload.”Power and Range
+That points to several likely priorities:
 
-Though the exact engine hasn’t been confirmed, contenders like GE’s XA102 and Pratt & Whitney’s XA103 promise adaptive propulsion systems that adjust thrust and fuel efficiency on the fly.
+- Lower detectability across radar and infrared signatures
+- Greater range than current tactical fighters
+- Advanced sensors and data fusion
+- Integration with Collaborative Combat Aircraft and other uncrewed systems
+- Modular systems that can be upgraded as threats change
 
-Trump even floated a speed exceeding Mach 2 — likely an exaggeration, but indicative of the ambition behind the project.
+The cockpit is not just a cockpit in this model. It is a command node.
 
-AI in the Cockpit
+That is the institutional logic behind the program. The United States is not buying a single fast airplane. It is trying to preserve an air-combat network.
 
-The F-47 won’t just fly — it’ll think.Advanced AI systems will help pilots coordinate missions with unmanned drones and manage data in real-time. This will let them react to threats with inhuman and unprecedented speed.
+### AI And Uncrewed Teammates
 
-Maneuverability, Redefined
+The F-47 is expected to operate with uncrewed aircraft that can scout, jam, carry weapons, or absorb risk ahead of a human pilot.
 
-While the Air Force is shifting toward beyond-visual-range combat, the F-47 hasn’t sacrificed agility.
+That changes the incentive structure of air warfare. A crewed fighter becomes more valuable if it can control cheaper systems at the edge of danger. A drone becomes more useful if it can extend the pilot's reach without asking the pilot to carry every sensor and every weapon.
 
-Renderings hint at a “canard configuration” — foreplanes near the cockpit — for improved handling.
+There are tradeoffs. More autonomy means more software risk, more cyber risk, more command-and-control complexity, and more pressure to decide how much lethal discretion should be delegated to machines.
 
-“Maneuverability, there’s never been anything like it,” Trump said. “Despite the power and speed.”Weapon Systems and Payload
+The technology may expand options. It does not remove judgment.
 
-The F-47 is expected to support everything from hypersonic missiles to next-gen electronic warfare tools. And its modular design allows for future upgrades — meaning this jet could evolve with emerging technologies.
+### What It Means For U.S. Strategy
 
-Air Superiority Reimagined: What the F-47 Means for U.S. Strategy
+The F-47 is a message to China, Russia, allies, Congress, contractors, and the Air Force itself.
 
-![](https://cdn-images-1.medium.com/max/800/1*_yDVTAzDzNfGMmZ_n0nWMQ@2x.jpeg)
+China has been testing advanced fighter concepts. Russia has struggled to scale its own fifth-generation fleet but remains a nuclear-armed military power. U.S. allies watch American procurement decisions because their own planning depends on whether the United States can still project power credibly.
 
-Photo by Felix Mittermeier on Unsplash
+A sixth-generation fighter is therefore not just a weapon. It is an institutional bet on future air superiority.
 
-This isn’t just about flying fast and looking cool.
+The tradeoff is cost. Advanced aircraft consume money, engineering talent, maintenance capacity, and political attention. Every dollar spent on one exquisite platform is a dollar not spent on munitions stockpiles, drones, ships, air defenses, maintenance, or personnel.
 
-The F-47 is a message — to adversaries, allies, and the future.With China reportedly testing its own sixth-generation fighters, the U.S. is staking its claim to the top of the food chain.
+That does not make the F-47 a mistake. It means the program has to prove that its strategic value is worth the opportunity cost.
 
-“The F-47 will be the most advanced, most capable, most lethal aircraft ever built,” Trump said. “It’s something the likes of which nobody has seen before.”Gen. Allvin echoed that sentiment, calling it:
+### Price And Production
 
-“A monumental leap forward in securing America’s air superiority for decades to come… With the F-47, we are not just building another fighter — we are shaping the future of warfare and putting our enemies on notice.”Price Tag and Production: What Will the F-47 Cost?
+The public cost picture remains incomplete. Trump avoided specifics, and some program details are classified.
 
-![](https://cdn-images-1.medium.com/max/800/1*hv6l028F_n9ITpZ4vCTsCQ@2x.jpeg)
+Outside estimates have pointed to a very expensive aircraft, while Air Force officials have suggested the service wants larger numbers and a more sustainable cost profile than the F-22. Both can be true at the level of aspiration. Neither guarantees delivery.
 
-Photo by Emiel Molenaar on Unsplash
+Production risk is the part of the story that deserves more attention.
 
-The cost? That’s classified — for now.Trump dodged specifics, saying:
+The United States can announce advanced weapons faster than it can build them at scale. Supply chains, skilled labor, software integration, testing cycles, and congressional funding all shape whether a program becomes a fleet or a press conference.
 
-“We can’t tell you the price, because it would give away some of the technology and some of the size of the plane.”Estimates peg the per-unit cost near $300 million, though Gen. Allvin later suggested it would come in below the F-22’s $143 million price tag and be fielded in larger numbers.
+Boeing has broken ground on major defense manufacturing capacity, but capacity is not capability until aircraft are built, tested, maintained, and fielded.
 
-Production has already begun.Boeing recently broke ground on a $1.8 billion, 1.1-million-square-foot manufacturing center.
+### Branding Meets Procurement
 
-Trump even floated the idea of the F-47 entering service during his term.
+The F-47 name makes the announcement feel like campaign merch. That reaction is understandable.
 
-“They’ve already built much of what has to be built in terms of production,” he said, referencing new manufacturing “sheds.”The Legacy Jet: Built to Dominate — and Be Remembered
+But the deeper issue is not branding. It is whether the procurement system can deliver a real capability on a timeline that matches the threat environment.
 
-![](https://cdn-images-1.medium.com/max/800/1*-eST_u9vJtl6X72HvNm_Ow@2x.jpeg)
+There is a serious aircraft behind the political theater. There are also serious risks: cost growth, schedule delay, software complexity, industrial bottlenecks, and the temptation to oversell what is still being developed.
 
-Photo by Anukrati Omar on Unsplash
+The right posture is neither blind hype nor reflexive cynicism.
 
-So yes — the F-47 is a nod to Trump’s place in history.And yes, it sounds like something you’d buy at a NASCAR gift shop.
+The F-47 could become a major leap in American airpower. It could also become another case study in how hard it is to turn classified ambition into deployable systems.
 
-But behind the branding is a real aircraft, backed by years of secret testing, experimental X-planes, and billions in defense contracts.
-
-“These experimental aircraft have demonstrated the innovations necessary to mature the F-47’s capabilities,” Gen. Allvin said. “The maturity of the aircraft at this phase in the program confirms its readiness to dominate the future fight.”It’s stealthy. It’s deadly. It’s fast.
-
-And if nothing else, it proves that in America, even fighter jets can double as campaign merch.
-
-About the Author
-
-Lawton is an economist who writes about markets, policy, and the forces shaping American life. His essays blend historical insight with data-driven analysis, covering everything from trade wars and inflation to labor markets and financial bubbles.
-
-When he isn’t writing essays, he’s making music, cooking food, and hanging out with his cat, Boudin.
-
-Read more of his here work on Medium.
+The name will get attention. The production line, software, sustainment plan, and combat architecture will decide whether the jet matters.
