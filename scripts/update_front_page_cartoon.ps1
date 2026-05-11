@@ -101,12 +101,69 @@ function Read-MarkdownFrontMatter {
       break
     }
 
-    if ($inFrontMatter -and $line -match '^\s*([A-Za-z0-9_]+):\s*(.*?)\s*$') {
+    if ($inFrontMatter -and $line -match '^([A-Za-z0-9_]+):\s*(.*?)\s*$') {
       $result[$Matches[1].ToLowerInvariant()] = Unquote-YamlValue $Matches[2]
     }
   }
 
   return $result
+}
+
+function Invoke-GitRequired {
+  param(
+    [string]$Root,
+    [string[]]$Arguments,
+    [string]$FailureMessage
+  )
+
+  $output = & git -C $Root @Arguments 2>&1
+  if ($LASTEXITCODE -ne 0) {
+    $detail = (($output | ForEach-Object { [string]$_ }) -join "`n").Trim()
+    if (-not [string]::IsNullOrWhiteSpace($detail)) {
+      throw "$FailureMessage`n$detail"
+    }
+
+    throw $FailureMessage
+  }
+
+  return @($output)
+}
+
+function Assert-DefaultEssaySourceCurrent {
+  param([string]$Root)
+
+  $inside = Invoke-GitRequired `
+    -Root $Root `
+    -Arguments @('rev-parse', '--is-inside-work-tree') `
+    -FailureMessage 'Unable to verify git worktree before inferring the latest essay link.'
+
+  if (([string]($inside | Select-Object -First 1)).Trim() -ne 'true') {
+    throw 'Latest essay inference requires running inside the Outside In Print git worktree.'
+  }
+
+  [void](Invoke-GitRequired `
+    -Root $Root `
+    -Arguments @('remote', 'get-url', 'origin') `
+    -FailureMessage 'Unable to verify the origin remote before inferring the latest essay link.')
+
+  [void](Invoke-GitRequired `
+    -Root $Root `
+    -Arguments @('fetch', 'origin', 'main', '--quiet') `
+    -FailureMessage 'Unable to refresh origin/main before inferring the latest essay link. Use a fresh worktree from origin/main or pass -EssayPath explicitly.')
+
+  $head = ([string]((Invoke-GitRequired `
+    -Root $Root `
+    -Arguments @('rev-parse', 'HEAD') `
+    -FailureMessage 'Unable to read the current HEAD before inferring the latest essay link.') | Select-Object -First 1)).Trim()
+
+  $originMain = ([string]((Invoke-GitRequired `
+    -Root $Root `
+    -Arguments @('rev-parse', 'origin/main') `
+    -FailureMessage 'Unable to read origin/main before inferring the latest essay link.') | Select-Object -First 1)).Trim()
+
+  if ($head -ne $originMain) {
+    throw "Latest essay inference requires a fresh worktree at origin/main. Current HEAD is $head; origin/main is $originMain. Create a fresh worktree from origin/main or pass -EssayPath explicitly."
+  }
 }
 
 function Get-LatestEssayPath {
@@ -137,7 +194,9 @@ function Get-LatestEssayPath {
     }
 
     $dateValue = [string]$frontMatter['date']
-    if ($dateValue -notmatch '^\d{4}-\d{2}-\d{2}') {
+    if ($dateValue -match '^(?<date>\d{4}-\d{2}-\d{2})') {
+      $candidateDate = [datetime]::ParseExact($Matches['date'], 'yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture)
+    } else {
       continue
     }
 
@@ -147,7 +206,7 @@ function Get-LatestEssayPath {
     }
 
     $candidates += [pscustomobject]@{
-      Date = [datetime]::ParseExact($Matches[0], 'yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture)
+      Date = $candidateDate
       Slug = $slug
       Path = "/essays/$slug/"
     }
@@ -421,7 +480,9 @@ $resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $Root).Path)
 $resolvedImagePath = [System.IO.Path]::GetFullPath((Resolve-Path $ImagePath).Path)
 $defaultEssayPath = $null
 if (-not $NoEssayLink -and [string]::IsNullOrWhiteSpace($EssayPath)) {
+  Assert-DefaultEssaySourceCurrent -Root $resolvedRoot
   $defaultEssayPath = Get-LatestEssayPath -Root $resolvedRoot
+  Write-Host "Default linked essay: $defaultEssayPath"
 }
 
 $resolvedEssayPath = $null
@@ -476,6 +537,8 @@ foreach ($cartoon in @($data.cartoons)) {
       }
     } elseif ($resolvedEssayPath) {
       $updatedCartoon.essay = $resolvedEssayPath
+    } else {
+      $updatedCartoon.essay = $defaultEssayPath
     }
 
     if (-not $NoEssayLink -and $updatedCartoon.Contains('essay')) {
@@ -513,6 +576,17 @@ if (-not $updated) {
 
 Write-CartoonData -Path $dataPath -Current $slug -Cartoons @($cartoons)
 
+$linkedEssay = $null
+foreach ($cartoon in @($cartoons)) {
+  if ($cartoon.slug -eq $slug -and $cartoon.Contains('essay')) {
+    $linkedEssay = [string]$cartoon.essay
+    break
+  }
+}
+
 Write-Host "Updated front page cartoon: $Title"
 Write-Host "Image: $targetRelativePath"
+if (-not [string]::IsNullOrWhiteSpace($linkedEssay)) {
+  Write-Host "Essay: $linkedEssay"
+}
 Write-Host "Data: data\editorial_cartoons.yaml"
