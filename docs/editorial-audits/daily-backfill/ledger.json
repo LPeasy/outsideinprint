@@ -15,29 +15,109 @@
   },
   "completed": {
     "the-blockade-has-a-phone-number": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.2",
+      "new_version": "1.3",
+      "updated_on": "2026-05-11",
+      "previous_deployed_commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true,
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay treats diplomacy, sanctions, and Hormuz pressure as linked institutional machinery with clear incentives, tradeoffs, consequences, uncertainty, and risk allocation."
+      }
     },
     "the-fed-chair-is-not-a-button": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "2.0",
+      "new_version": "2.1",
+      "updated_on": "2026-05-11",
+      "previous_deployed_commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true,
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay tests White House pressure against Fed procedure, inflation evidence, committee incentives, policy tradeoffs, institutional consequences, uncertainty around rate paths, and central-bank credibility."
+      }
     },
     "the-gold-card-and-the-price-of-belonging": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "2.1",
+      "new_version": "2.2",
+      "updated_on": "2026-05-11",
+      "previous_deployed_commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true,
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay examines the Gold Card through immigration records, money-as-merit logic, applicant and government incentives, selection tradeoffs, civic consequences, uncertainty about uptake, and institutional gatekeeping."
+      }
     },
     "the-ai-data-center-wants-its-own-power-plant": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-11",
+      "previous_deployed_commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true,
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay links AI data-center growth to generation evidence, utility incentives, climate and ratepayer tradeoffs, grid consequences, uncertainty around clean-power claims, and institutional risk transfer."
+      }
     },
     "the-sewer-under-the-sidewalk": {
-      "status": "deployed",
-      "commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
-      "seeded": true
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-11",
+      "previous_deployed_commit_sha": "9805d07b81db1332f2c29bebb9396e8ee11cb761",
+      "seeded": true,
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay evaluates sewer overflow through public-health evidence, agency incentives, household cost and design tradeoffs, climate consequences, uncertainty around standards, and institutional responsibility for risk."
+      }
     },
     "the-structure-of-modern-american-society": {
       "status": "deployed",
@@ -1288,6 +1368,177 @@
       },
       "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
       "deployed_on": "2026-05-11"
+    },
+    "smokestack-spreadsheets": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay grounds AI infrastructure claims in reporting, energy constraints, market incentives, ratepayer tradeoffs, downstream grid consequences, uncertainty around demand timing, and institutional allocation of risk."
+      }
+    },
+    "the-strait-that-holds-the-price": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay ties Hormuz diplomacy to shipping geography, energy-market incentives, route-capacity tradeoffs, household consequences, uncertainty around negotiations, and institutional exposure to chokepoint risk."
+      }
+    },
+    "the-model-that-could-not-leave": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay evaluates AI acquisition politics through the record, state incentives, corporate mobility tradeoffs, strategic consequences, uncertainty around enforcement, and institutional control over capability."
+      }
+    },
+    "the-warning-label-in-the-weeds": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay tests the Roundup dispute through legal records, regulatory logic, farmer and plaintiff incentives, federal-state tradeoffs, downstream trust consequences, scientific uncertainty, and institutional power."
+      }
+    },
+    "hindsight-2026-d4vd-alleged-romantic-homicide": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay preserves allegation uncertainty, separates record from inference, and examines fame incentives, reputational tradeoffs, cultural consequences, and institutional visibility around music platforms."
+      }
+    },
+    "the-world-is-back-at-the-poker-table": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay uses the poker frame to clarify evidence of leverage, state incentives, power tradeoffs, downstream geopolitical consequences, uncertainty, and institutional risk without partisan capture."
+      }
+    },
+    "1929-2029-americas-century-of-humiliation": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay keeps its civic argument bounded by social experience, incentive structures, distributional tradeoffs, civic consequences, uncertainty, and institutional responsibility."
+      }
+    },
+    "the-fair-price-of-bitcoin-69420": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.0",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Audit found no body edit required; the essay frames valuation as a bounded market argument with speculative incentives, tradeoffs, uncertainty, and institutional exposure clearly present."
+      }
+    },
+    "pope-francis-how-a-plainspoken-pope-reframed-moral-authority": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-11-style-next-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-11",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay treats papal moral authority through public biography, institutional logic, reform incentives, authority tradeoffs, downstream civic consequences, uncertainty, and church institutional behavior."
+      }
     }
   },
   "blocked": {},
@@ -1487,6 +1738,27 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md",
       "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
       "deployed_on": "2026-05-11"
+    },
+    {
+      "batch_id": "2026-05-11-style-next-15",
+      "selected_slugs": [
+        "smokestack-spreadsheets",
+        "the-strait-that-holds-the-price",
+        "the-model-that-could-not-leave",
+        "the-warning-label-in-the-weeds",
+        "the-blockade-has-a-phone-number",
+        "the-fed-chair-is-not-a-button",
+        "the-gold-card-and-the-price-of-belonging",
+        "the-ai-data-center-wants-its-own-power-plant",
+        "the-sewer-under-the-sidewalk",
+        "hindsight-2026-d4vd-alleged-romantic-homicide",
+        "the-world-is-back-at-the-poker-table",
+        "1929-2029-americas-century-of-humiliation",
+        "the-fair-price-of-bitcoin-69420",
+        "pope-francis-how-a-plainspoken-pope-reframed-moral-authority"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md"
     }
   ]
 }

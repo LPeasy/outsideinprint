@@ -9,8 +9,12 @@ description: "The Supreme Court's Louisiana v. Callais ruling narrows the proof 
 featured_image: "/images/essays/when-can-states-draw-race-based-congressional-districts/hero.png"
 featured_image_alt: "Editorial illustration of a Louisiana-style congressional map on a legal drafting table, with one blue district line casting a sharp shadow beside court papers and a gavel."
 featured_image_caption: "A district line can look like geography until it starts carrying the weight of a remedy."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections:
   - "civic-institutions-and-public-power"
@@ -81,13 +85,13 @@ Both sides frame the dispute as a question of constitutional democracy. They are
 
 A clean legal rule has institutional appeal. Government use of race is dangerous because it turns a human classification into an instrument of state power. That is why race-conscious line drawing should face hard questions. Districting cannot become a census exercise where each racial group receives seats by formula. The Voting Rights Act itself says nothing in Section 2 creates a right to proportional representation.
 
-That caution matters. A system that treats districting as race-based seat allocation would create constitutional problems of its own.
+That caution carries constitutional force. A system that treats districting as race-based seat allocation would create constitutional problems of its own.
 
-The hard part is that formal race-neutrality can also be artificial. Race-neutral criteria can still operate against a background of residential segregation, polarized voting, and prior exclusion. A map that claims to ignore race can preserve the effects of earlier sorting. The underlying data already contains residential patterns, voting behavior, and coalition strength.
+The hard part is that formal race-neutrality can also be artificial. Race-neutral criteria can operate against a background of residential segregation, polarized voting, and prior exclusion. A map that claims to ignore race can preserve the effects of earlier sorting. The underlying data already contains residential patterns, voting behavior, and coalition strength.
 
 The ruling's immediate legal effect is narrower than the politics that will surround it. As a legal matter, states defending challenged maps now have more room to point to political objectives, while plaintiffs face a more exacting proof path for connecting race, party, and present discrimination.
 
-For voters, the injury can be hard to narrate. A person still receives a ballot. The polling place still opens. The candidate still gives speeches. The district still has a representative. Nothing looks closed.
+For voters, the injury can be hard to narrate. A person receives a ballot. The polling place opens. The candidate gives speeches. The district has a representative. Nothing looks closed.
 
 Yet representation can be thinned without being denied outright. A voter can remain formally included while living inside a district where their preferred coalition is structurally less likely to prevail. The harm sits in the translation layer: ballots into seats, neighborhoods into districts, communities into power.
 
@@ -97,7 +101,7 @@ That is why redistricting cases have such strange legal texture. They are fights
 
 The danger here is broader than one party or one state. When courts narrow the tools available to challenge maps, politics may move into the open space. Legislatures may test the new boundary. Advocacy groups may search for new theories. State constitutional claims may receive more attention. Congress may face renewed pressure to revise voting law, though any federal response would be shaped by the constitutional limits described by the Court.
 
-The Court did not invalidate Section 2. It held that compliance with Section 2, as properly construed, can justify race-based districting in some cases, but that Section 2 did not justify Louisiana's use of race here. That sentence matters. It means the Act still has a doctrinal path.
+The Court did not invalidate Section 2. It held that compliance with Section 2, as properly construed, can justify race-based districting in some cases, but that Section 2 did not justify Louisiana's use of race here. That sentence keeps the Act on a doctrinal path.
 
 The path is narrow.
 
@@ -119,7 +123,7 @@ The map at the center of Callais was supposed to solve a problem. By the time it
 
 That reversal is the story worth keeping. Section 2 rests on the premise that ballot access and district design can both affect electoral opportunity. A voter may be allowed into the booth while the surrounding district lines make representation harder to reach.
 
-The Court's decision insists that a voting-rights remedy cannot depend too heavily on race unless Section 2, properly construed, requires it. That warning should not be dismissed. Racial remedies can become rigid. Courts and legislatures can overcorrect. A district can carry a community's political voice and still be drawn in a way that treats race as the master fact.
+The Court's decision insists that a voting-rights remedy cannot depend too heavily on race unless Section 2, properly construed, requires it. That warning should not be dismissed. Racial remedies can become rigid. Courts and legislatures can overcorrect. A district can carry a community's political voice while being drawn in a way that treats race as the master fact.
 
 The difficulty on the other side is quieter. The law can also become so wary of race-conscious districting remedies that some racial-dilution claims may fail unless plaintiffs can produce proof that is difficult to obtain when race, party, and geography overlap.
 

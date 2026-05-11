@@ -763,7 +763,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/essays/smokestack-spreadsheets/index.html' = @{
     Title = 'Smokestack Spreadsheets'
-    Description = "OpenAI’s missed internal targets show how frontier AI has become a wager on electricity, cloud contracts, data centers, capital, and patience."
+    Description = "OpenAI's missed internal targets show how frontier AI has become a wager on electricity, cloud contracts, data centers, capital, and patience."
     Canonical = 'https://outsideinprint.org/essays/smokestack-spreadsheets/'
     OgType = 'article'
     TwitterCard = 'summary_large_image'
@@ -833,7 +833,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/essays/the-strait-that-holds-the-price/index.html' = @{
     Title = 'The Strait That Holds the Price'
-    Description = "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage still governs energy security, commodity prices, and public life."
+    Description = "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage governs energy security, commodity prices, and public life."
     Canonical = 'https://outsideinprint.org/essays/the-strait-that-holds-the-price/'
     OgType = 'article'
     TwitterCard = 'summary_large_image'
@@ -863,7 +863,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/essays/the-sewer-under-the-sidewalk/index.html' = @{
     Title = 'The Sewer Under the Sidewalk'
-    Description = "An essay on Alewife Brook, Boston-area combined sewer overflows, MWRA’s cleanup plan, and the public cost of climate-era pipe decisions."
+    Description = "An essay on Alewife Brook, Boston-area combined sewer overflows, MWRA's cleanup plan, and the public cost of climate-era pipe decisions."
     Canonical = 'https://outsideinprint.org/essays/the-sewer-under-the-sidewalk/'
     OgType = 'article'
     TwitterCard = 'summary_large_image'

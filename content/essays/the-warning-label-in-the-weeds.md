@@ -6,9 +6,12 @@ slug: "the-warning-label-in-the-weeds"
 section_label: "Essay"
 subtitle: "A Supreme Court fight over Roundup asks who gets to decide when a risk becomes visible on the bottle."
 description: "The Supreme Court's Roundup case turns a weedkiller label into a test of federal power, state lawsuits, farming, and public trust."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
   - version: "1.1"
     date: "2026-04-27"
     note: "Updated April 27, 2026, to tighten wording in the Roundup label discussion."
@@ -34,7 +37,7 @@ It sits on a garage shelf, in a landscaping truck, in a farm shed, or beside a p
 
 On Monday, April 27, 2026, that small paper surface reached the Supreme Court.
 
-The case, [*Monsanto Company v. Durnell*](https://www.scotusblog.com/cases/case-files/monsanto-company-v-durnell/), asks whether the Federal Insecticide, Fungicide, and Rodenticide Act preempts a label-based failure-to-warn claim when the Environmental Protection Agency has not required the warning. Put plainly: if EPA approves a pesticide label without a cancer warning, can a state-law jury still hold the company liable for failing to include one?
+The case, [*Monsanto Company v. Durnell*](https://www.scotusblog.com/cases/case-files/monsanto-company-v-durnell/), asks whether the Federal Insecticide, Fungicide, and Rodenticide Act preempts a label-based failure-to-warn claim when the Environmental Protection Agency has not required the warning. Put plainly: if EPA approves a pesticide label without a cancer warning, can a state-law jury hold the company liable for failing to include one?
 
 The answer will matter far beyond one brand. It will shape how risk travels through American law: by federal agency review, by state tort suits, by juries, by scientists, by farmers, by consumers, and by companies whose products sit in ordinary places until someone gets sick.
 
@@ -46,7 +49,7 @@ Bayer, which bought Monsanto in 2018, is trying to use the Supreme Court case to
 
 Durnell's personal claim has become a national test because the lawsuit is built around a label. He argues that the product should have warned users about cancer risk. Monsanto answers that EPA repeatedly approved glyphosate labels without that warning, and federal law should block state-law claims seeking a different result.
 
-That is why the object matters. Durnell's claim puts a concrete mechanism before the justices: EPA allowed Roundup's label to stay silent about cancer risk, and a Missouri jury said Monsanto should have warned users anyway.
+The object gives the case its mechanism. Durnell's claim puts a concrete mechanism before the justices: EPA allowed Roundup's label to stay silent about cancer risk, and a Missouri jury said Monsanto should have warned users anyway.
 
 ## The Law on the Label
 
@@ -62,7 +65,7 @@ There is a real concern there. Agriculture depends on repeatable instructions. A
 
 But the same label can also become too narrow. Federal approval can lag new evidence. Agency review can be slow, political, understaffed, or too close to the industries it supervises. A national label may look clean because it is consistent, while hiding unresolved scientific conflict under the authority of one agency.
 
-## The Science Refuses to Stay Still
+## The Science Keeps Moving
 
 The fight over glyphosate has always lived in that gap.
 
@@ -116,7 +119,7 @@ That decision will arrive in legal language: preemption, misbranding, state-law 
 
 A warning label is never only text. It is a decision about what the public deserves to know before acting.
 
-Too many warnings can blur judgment. Too few can hide danger. A federal label can bring order. A state verdict can bring accountability. A product can be legal, useful, profitable, and still leave hard questions in the space where a warning might have been.
+Too many warnings can blur judgment. Too few can hide danger. A federal label can bring order. A state verdict can bring accountability. A product can be legal, useful, profitable, and leave hard questions in the space where a warning might have been.
 
 The Supreme Court cannot settle every argument about glyphosate. It may leave many of them unresolved. Its decision will set how much room state law has to speak when EPA has already allowed the label to stay silent.
 

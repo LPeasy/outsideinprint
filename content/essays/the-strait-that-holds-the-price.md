@@ -5,12 +5,16 @@ draft: false
 slug: "the-strait-that-holds-the-price"
 section_label: "Essay"
 subtitle: "Iran's Hormuz proposal shows how a narrow sea passage can turn war, fuel, shipping, fertilizer, and household prices into one shared line."
-description: "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage still governs energy security, commodity prices, and public life."
+description: "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage governs energy security, commodity prices, and public life."
 featured_image: "/images/essays/the-strait-that-holds-the-price/hero.png"
 featured_image_alt: "Editorial illustration of tankers moving through a narrow strait under a red sky while armed silhouettes watch from shore."
 featured_image_caption: "Before a price shock reaches land, it passes through a narrow place."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 
 collections:
@@ -33,7 +37,7 @@ The geometry is plain. The consequences take longer to surface.
 
 A tanker leaving Gulf crude terminals has to move through that opening before it can reach the Arabian Sea. A liquefied natural gas cargo sailing out of Qatar faces the same fact. So do shipments tied to petrochemicals, fertilizer, plastics, jet fuel, diesel, and cooking gas. The strait functions as infrastructure without the reassuring look of infrastructure. No bridge. No dam. No control room. Just water, shoreline, and the disciplined spacing of vessels carrying much of the modern economy in their hulls.
 
-That is why Iran's latest offer matters beyond the diplomatic news cycle.
+Iran's latest offer reaches beyond the diplomatic news cycle.
 
 On April 27, [the Associated Press reported](https://abcnews.com/Business/wireStory/iran-offers-reopen-strait-hormuz-us-lifts-blockade-132411061) that Iran had offered to reopen the strait if the United States lifts its blockade and ends the war, while pushing nuclear-program talks into a later phase. The same report said the United States appeared unlikely to accept a deal that leaves the nuclear issue unresolved. Secretary of State Marco Rubio publicly framed any agreement around preventing Iran from moving toward a nuclear weapon.
 
@@ -51,7 +55,7 @@ The U.S. Energy Information Administration made the older baseline even clearer.
 
 The United States is less directly dependent on Gulf crude than it was decades ago. Domestic production and Canadian imports have changed the American exposure. EIA estimated that U.S. crude and condensate imports through Hormuz accounted for about 7 percent of total U.S. crude and condensate imports in 2024 and about 2 percent of U.S. petroleum liquids consumption.
 
-That narrower exposure can produce a misleading comfort. Oil prices are global. Diesel markets are global. LNG cargoes chase the highest delivered price. A disruption near Qeshm Island can show up in a farmer's fertilizer bill, a trucking company's diesel invoice, an airline's fuel hedge, a power plant's gas contract, and a family's grocery receipt. The United States can import less Gulf oil and still live inside the price system that Hormuz disturbs.
+That narrower exposure can produce a misleading comfort. Oil prices are global. Diesel markets are global. LNG cargoes chase the highest delivered price. A disruption near Qeshm Island can show up in a farmer's fertilizer bill, a trucking company's diesel invoice, an airline's fuel hedge, a power plant's gas contract, and a family's grocery receipt. The United States can import less Gulf oil and live inside the price system that Hormuz disturbs.
 
 ## The Spare Route Problem
 
@@ -63,7 +67,7 @@ Those are large numbers until they are placed beside the flow they would need to
 
 The same problem is sharper for LNG. Qatar and the UAE send almost all of their LNG exports through Hormuz, except deliveries bound for Kuwait. The IEA's 2026 factsheet described the alternative route problem for Gulf LNG in blunt terms: cargoes need existing liquefaction facilities, and those facilities sit inside the geography that the strait controls.
 
-This is where the diplomatic story turns into an infrastructure story. Decades of investment can build wells, terminals, storage tanks, pipelines, refineries, and fleets. All of that capital still has to obey the last mile of geography. A system can become enormous and remain vulnerable at one small opening.
+This is where the diplomatic story turns into an infrastructure story. Decades of investment can build wells, terminals, storage tanks, pipelines, refineries, and fleets. All of that capital has to obey the last mile of geography. A system can become enormous and remain vulnerable at one small opening.
 
 Scale creates that vulnerability.
 
@@ -103,7 +107,7 @@ The map misses that. A map shows the strait as a line of water. Prices show the 
 
 That shared dependency is easy to ignore during normal flow. Cargoes disappear into the background when schedules hold. Refineries run. Trucks move. Planes take off. Grocery shelves look ordinary. The system becomes visible again when it slows down.
 
-There is a civic lesson in that visibility, but it is a plain one. Modern life is less weightless than it pretends to be. The internet can move instantly. Money can clear electronically. Contracts can be signed across continents. Oil, gas, grain, fertilizer, and spare parts still need routes. Routes have widths. Widths have politics.
+There is a civic lesson in that visibility, but it is a plain one. Modern life is less weightless than it pretends to be. The internet can move instantly. Money can clear electronically. Contracts can be signed across continents. Oil, gas, grain, fertilizer, and spare parts need routes. Routes have widths. Widths have politics.
 
 ![Editorial illustration of a kitchen table where fuel receipts and grocery staples are connected by thin lines to a distant sea channel.](/images/essays/the-strait-that-holds-the-price/section-2.png)
 

@@ -9,8 +9,12 @@ description: "China's block of Meta's Manus acquisition shows how AI companies, 
 featured_image: "/images/essays/the-model-that-could-not-leave/hero.png"
 featured_image_alt: "An abstract AI model sealed in a glass case under a red security-review stamp."
 featured_image_caption: "An acquisition can be written on paper. Capability is harder to move cleanly."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 
 collections:
@@ -24,13 +28,13 @@ On April 27, the Office of the Working Mechanism for Security Review of Foreign 
 
 There was no long explanation. No public theory of harm. No technical appendix about model weights, training data, agent architecture, or national-security thresholds. The state planner's message arrived as a clean administrative fact: this AI company could not be sold that way.
 
-That is why the notice matters.
+The notice carries that force.
 
 Meta had announced in December that it was acquiring Manus, an AI startup with Chinese roots and a Singapore base. Manus had drawn attention for building a general-purpose AI agent that can carry out complex computer tasks. The [Associated Press reported](https://apnews.com/article/china-meta-manus-ai-acquisition-5f8012791f86f719a24a3ebac06d9b0a) that Manus can autonomously handle work such as coding an app, doing market research, or preparing quarterly budgets. For Meta, that made Manus a useful piece of a larger race to make AI agents part of daily software, advertising, commerce, and personal computing.
 
-For Beijing, the same facts pointed in a different direction. Manus was legally and operationally more international than a simple domestic firm, yet it still traced back to Chinese founders and earlier Beijing-registered entities. AP reported that Meta had said there would be no continuing Chinese ownership interests in Manus and that Manus would discontinue services and operations in China. China began reviewing the deal in January.
+For Beijing, the same facts pointed in a different direction. Manus was legally and operationally more international than a simple domestic firm, yet it traced back to Chinese founders and earlier Beijing-registered entities. AP reported that Meta had said there would be no continuing Chinese ownership interests in Manus and that Manus would discontinue services and operations in China. China began reviewing the deal in January.
 
-The result was a small notice with a large consequence. A company can move its headquarters. Employees can sit in Singapore. A buyer can insist that the transaction follows the law. The state can still say that the capability remains within its security perimeter.
+The result was a small notice with a large consequence. A company can move its headquarters. Employees can sit in Singapore. A buyer can insist that the transaction follows the law. The state can say that the capability remains within its security perimeter.
 
 ## What Meta Was Buying
 
@@ -58,7 +62,7 @@ That kind of move once carried a clean story. A company left one jurisdiction, e
 
 AI makes the fiction harder to sustain.
 
-The company's formal address may change faster than its talent base, technical lineage, research network, data relationships, and political meaning. Beijing's action tells founders that an offshore company can still remain legible to Chinese regulators as a Chinese-linked strategic asset. Washington has been making the opposite point in its own way. The U.S. Treasury's [Outbound Investment Security Program](https://home.treasury.gov/policy-issues/international/outbound-investment-program) identifies semiconductors, quantum information technologies, and artificial intelligence as sensitive categories for investment controls involving China, Hong Kong, and Macau. The American concern is that capital, management help, and technical expertise can aid a rival's military, intelligence, surveillance, or cyber capacity.
+The company's formal address may change faster than its talent base, technical lineage, research network, data relationships, and political meaning. Beijing's action tells founders that an offshore company can remain legible to Chinese regulators as a Chinese-linked strategic asset. Washington has been making the opposite point in its own way. The U.S. Treasury's [Outbound Investment Security Program](https://home.treasury.gov/policy-issues/international/outbound-investment-program) identifies semiconductors, quantum information technologies, and artificial intelligence as sensitive categories for investment controls involving China, Hong Kong, and Macau. The American concern is that capital, management help, and technical expertise can aid a rival's military, intelligence, surveillance, or cyber capacity.
 
 China's Manus decision answers with its own version of the same logic. If the United States can treat investment as a path for strategic technology to strengthen China, China can treat acquisition as a path for strategic technology to leave.
 
@@ -132,12 +136,12 @@ AI agents sit at the edge of a broad change in how companies imagine labor. They
 
 That fear can become overbroad. Governments can use national security as a blanket for industrial policy, political control, or simple embarrassment that local founders prefer foreign exits. Companies can use corporate structure to make sensitive transfers look ordinary. Both risks are real.
 
-Manus sits where those risks meet. A startup with Chinese roots and a Singapore home became valuable enough for Meta to buy, sensitive enough for China to block, and visible enough for Washington to comment. Its product category is still young, but the political category has matured quickly.
+Manus sits where those risks meet. A startup with Chinese roots and a Singapore home became valuable enough for Meta to buy, sensitive enough for China to block, and visible enough for Washington to comment. Its product category remains young, but the political category has matured quickly.
 
 The acquisition agreement tried to answer a corporate question: who owns the company?
 
 The security review asked a harder question: who owns the capability?
 
-Those questions will keep colliding. The next case may involve a model lab, a robotics team, a chip-design group, a data-labeling network, or a quiet startup whose value sits in evaluation methods no one outside the company can see. The transaction may look international. The state may still see a national asset trying to leave.
+Those questions will keep colliding. The next case may involve a model lab, a robotics team, a chip-design group, a data-labeling network, or a quiet startup whose value sits in evaluation methods no one outside the company can see. The transaction may look international. The state may see a national asset trying to leave.
 
 The Manus order was only one line. It carried the weight of a new rule for the AI age: a company can cross a border on paper before the state agrees that its mind has gone with it.

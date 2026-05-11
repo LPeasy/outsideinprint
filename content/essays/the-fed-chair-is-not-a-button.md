@@ -4,16 +4,20 @@ date: 2026-04-25
 draft: false
 slug: "the-fed-chair-is-not-a-button"
 section_label: "Essay"
-subtitle: "Kevin Warsh may soon inherit a job the White House wants to treat as a lever. The harder fact is that interest rates still pass through inflation, a committee, and institutional trust."
+subtitle: "Kevin Warsh may soon inherit a job the White House wants to treat as a lever. The harder fact is that interest rates pass through inflation, a committee, and institutional trust."
 description: "The end of the Powell investigation may clear Kevin Warsh's path to the Federal Reserve chair, but it does not make rate cuts simple."
-version: "2.0"
-edition: "Second web edition"
+version: "2.1"
+edition: "Third web edition"
+revision_history:
+  - version: "2.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections:
   - "civic-institutions-and-public-power"
 featured_image: "/images/essays/the-fed-chair-is-not-a-button/hero.png"
 featured_image_alt: "An empty central bank chair at the head of a long committee table, with a locked interest-rate lever and inflation charts in the background."
-featured_image_caption: "Politics wants one person to move the lever. Monetary policy still has to pass through a table."
+featured_image_caption: "Politics wants one person to move the lever. Monetary policy has to pass through a table."
 ---
 
 There is a strange faith in the office at the head of the table.
@@ -30,7 +34,7 @@ On [April 24, the Associated Press reported](https://apnews.com/article/federal-
 
 The investigation ended. The pressure continued.
 
-[AP reported the next day](https://apnews.com/article/inflation-trump-federal-reserve-warsh-bcaac06bfee8bb92a900366b2d03ce01) that President Donald Trump still expects Warsh to deliver lower rates once he takes over. That expectation is easy to understand politically. Lower rates sound like relief. They promise cheaper mortgages, cheaper car loans, cheaper business credit, and a friendlier stock market. They also give a president something simple to demand.
+[AP reported the next day](https://apnews.com/article/inflation-trump-federal-reserve-warsh-bcaac06bfee8bb92a900366b2d03ce01) that President Donald Trump continues to expect Warsh to deliver lower rates once he takes over. That expectation is easy to understand politically. Lower rates sound like relief. They promise cheaper mortgages, cheaper car loans, cheaper business credit, and a friendlier stock market. They also give a president something simple to demand.
 
 Cut.
 
@@ -50,7 +54,7 @@ Warsh now enters the story as both nominee and test case. He has promised indepe
 
 This is where the story stops being about Warsh's personal courage and starts being about the architecture around him.
 
-The Federal Reserve was built to make monetary policy harder to seize in a moment of political appetite. Its insulation is not perfect. Presidents nominate governors. Senators confirm them. Congress writes the statute. Public anger reaches the building eventually. Still, the system tries to create distance between election-cycle desire and the price of money.
+The Federal Reserve was built to make monetary policy harder to seize in a moment of political appetite. Its insulation is not perfect. Presidents nominate governors. Senators confirm them. Congress writes the statute. Public anger reaches the building eventually. The system tries to create distance between election-cycle desire and the price of money.
 
 That distance protects democracy from its own short-term cravings.
 
@@ -58,9 +62,9 @@ Cheap money is popular until inflation eats the gain. Tight money is hated until
 
 Warsh is walking into that middle ground with almost no honeymoon.
 
-![Twelve equal folders around a central bank meeting table, with a small rate gauge held still at the center.](/images/essays/the-fed-chair-is-not-a-button/section-1.png)
+![Twelve equal folders around a central bank meeting table, with a small rate gauge fixed at the center.](/images/essays/the-fed-chair-is-not-a-button/section-1.png)
 
-*The chair sits at the head of the table, but the table still matters.*
+*The chair sits at the head of the table, but the table sets the terms.*
 
 ## A Chair Has Influence, Not Magic
 
@@ -68,25 +72,25 @@ The Federal Reserve chair is the most visible person in the room. That visibilit
 
 The Federal Open Market Committee runs through votes, minutes, and dissent. At its [March 18 meeting](https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm), the committee voted to hold the federal funds target range at 3-1/2 to 3-3/4 percent. Eleven members supported the hold. Stephen Miran dissented and preferred a quarter-point cut.
 
-That vote matters because it shows the structure Warsh would inherit. The chair has power, but no private remote control follows him into the room. He needs a committee. He needs arguments that other policymakers can defend in public and in the minutes. He needs data strong enough to keep a cut from looking like obedience.
+That vote shows the structure Warsh would inherit. The chair has power, but no private remote control follows him into the room. He needs a committee. He needs arguments that other policymakers can defend in public and in the minutes. He needs data strong enough to keep a cut from looking like obedience.
 
-[FRED showed](https://fred.stlouisfed.org/series/DFEDTARU) the upper end of the federal funds target range still at 3.75 percent on April 25, 2026. That number is boring by design. It is supposed to change only when the committee acts.
+[FRED showed](https://fred.stlouisfed.org/series/DFEDTARU) the upper end of the federal funds target range remained at 3.75 percent on April 25, 2026. That number is boring by design. It is supposed to change only when the committee acts.
 
 The committee's own minutes explain the reason for the hold. The [March minutes](https://www.federalreserve.gov/monetarypolicy/fomcminutes20260318.htm) said participants saw inflation above the 2 percent goal, low job gains, elevated uncertainty, and a fresh shock from the Middle East conflict. Almost all participants supported holding rates steady. Some saw future cuts if inflation moved down as expected. Others wanted language that kept rate hikes on the table if inflation stayed too high.
 
 The room was weighing two risks at once: inflation that may last, and employment that may crack.
 
-This is why the "Warsh will cut" story is too simple. Warsh can want a lower-rate path. Trump can want a lower-rate path. Borrowers can want one too. The committee still has to ask what the cut would say about inflation, about expectations, about political pressure, and about the Fed's own spine.
+This is why the "Warsh will cut" story is too simple. Warsh can want a lower-rate path. Trump can want a lower-rate path. Borrowers can want one too. The committee has to ask what the cut would say about inflation, about expectations, about political pressure, and about the Fed's own spine.
 
 Sometimes the first act of independence is not dramatic. It is silence. A hold. A refusal to convert a campaign preference into a policy meeting.
 
 That is the strange burden Warsh may face. To prove independence, he may have to withhold the very thing the White House wants from him.
 
-## Inflation Is Still at the Window
+## Inflation Is at the Window
 
 Politics is only one pressure on the Fed.
 
-Prices still press from the other side.
+Prices press from the other side.
 
 The [Bureau of Labor Statistics reported](https://www.bls.gov/news.release/archives/cpi_04102026.htm) that the Consumer Price Index rose 0.9 percent in March and 3.3 percent over the prior 12 months. Energy did much of the damage. The energy index rose 10.9 percent in March, gasoline rose 21.2 percent, and fuel oil rose 30.7 percent.
 

@@ -6,9 +6,12 @@ slug: "the-ai-data-center-wants-its-own-power-plant"
 section_label: "Essay"
 subtitle: "The race to build AI at industrial scale is no longer just a story about chips and models. It is becoming a story about gas turbines, utility filings, and the quiet privatization of power."
 description: "New reporting on gas-fired AI data centers shows the compute boom turning into a power and climate story, with private generation, grid strain, and ratepayer politics at the center."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
   - version: "1.1"
     date: "2026-04-26"
     note: "Updated April 26, 2026, for minor wording cleanup."
@@ -29,7 +32,7 @@ The truth is that AI is becoming a power story.
 
 Not in the vague way people already say that large models use "a lot of energy." In a much more literal way. The next phase of the AI boom is producing gas plants, transmission lines, battery installations, nuclear uprates, and local fights over air, land, and ratepayer risk. The software story has reached the utility commission.
 
-That matters because it changes the underlying bargain. For years, data centers were described as large but basically ordinary customers on the grid. The new buildout looks less like that and more like something else: a private industrial system assembling its own electricity fast enough to outrun public bottlenecks.
+That changes the underlying bargain. For years, data centers were described as large but basically ordinary customers on the grid. The new buildout looks less like that and more like something else: a private industrial system assembling its own electricity fast enough to outrun public bottlenecks.
 
 ## The Grid Is Too Slow for the New Compute Race
 
@@ -53,7 +56,7 @@ If AI campuses need their own energy arrangements in state after state, then the
 
 *The future enters public life through paperwork first ~ site plans, rate cases, air permits, and the map of what will have to be built.*
 
-## The Private Fix Still Reshapes the Public System
+## The Private Fix Reshapes the Public System
 
 To be fair, the companies and utilities involved do have a real argument.
 
@@ -67,7 +70,7 @@ There is a reason this framing has political traction.
 
 But a private fix does not stay private for long.
 
-Even when a hyperscaler says it will pay for everything, it is still reorganizing public infrastructure around its needs. Transmission corridors cross ordinary land. Utility planning gets bent toward one very large customer. A plant built for a single campus still alters the fuel mix, air shed, and long-term capital structure of a region. A state that learns to fast-track one customer learns something about whom it exists to serve.
+Even when a hyperscaler says it will pay for everything, it is reorganizing public infrastructure around its needs. Transmission corridors cross ordinary land. Utility planning gets bent toward one very large customer. A plant built for a single campus alters the fuel mix, air shed, and long-term capital structure of a region. A state that learns to fast-track one customer learns something about whom it exists to serve.
 
 That is the deeper issue with the "pay our own way" language. It treats electricity as if it were just another line item on a campus budget. It is not. Electricity is the basic circulatory system of modern life. Once a company starts rearranging generation and transmission at gigawatt scale, it is no longer merely buying power. It is participating in the governance of a public system, whether it says so or not.
 
@@ -87,13 +90,13 @@ That means the comforting assumptions people make about permit ceilings may trav
 
 That is why the climate numbers matter even before they settle into actual annual operations.
 
-The same AP report on tech emissions found that Google's reported emissions have risen by nearly 50% over the first five years of its climate commitments, while Meta's rose by more than 60%. It also cited the Rhodium Group's estimate that AI contributed to a 2.4% increase in U.S. fossil fuel emissions last year. The industry’s public pitch still leans heavily on better chips, future clean power, and promises of doing more with less. The physical buildout, at least for now, looks like a gas rush.
+The same AP report on tech emissions found that Google's reported emissions have risen by nearly 50% over the first five years of its climate commitments, while Meta's rose by more than 60%. It also cited the Rhodium Group's estimate that AI contributed to a 2.4% increase in U.S. fossil fuel emissions last year. The industry's public pitch leans heavily on better chips, future clean power, and promises of doing more with less. The physical buildout, at least for now, looks like a gas rush.
 
 This does not mean the case for AI is fake. It means the case is expensive in ways the culture would rather not picture. The story Silicon Valley prefers is one of disembodied intelligence. The story the permits tell is one of combustion, cooling, transmission, and land use. Intelligence may scale in software. Compute scales in steel, concrete, copper, and fuel contracts.
 
 The bridge-fuel defense deserves a hearing. The grid is constrained. Nuclear is slow. Transmission is hard. Solar and batteries cannot instantly replace every hour of firm load in every place. A country that wants more AI, more manufacturing, more electrification, and lower household bills all at once is going to collide with physics and permitting sooner or later.
 
-Still, bridges built at gigawatt scale have a habit of becoming neighborhoods.
+Bridges built at gigawatt scale have a habit of becoming neighborhoods.
 
 Once capital is sunk into gas plants, pipelines, and transmission tied to specific campuses, the "temporary" solution acquires lobbyists, debt schedules, local tax dependence, and political defenders. The bridge starts asking to become a district.
 

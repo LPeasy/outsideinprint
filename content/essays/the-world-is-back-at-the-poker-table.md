@@ -6,8 +6,12 @@ slug: "the-world-is-back-at-the-poker-table"
 section_label: "Essay"
 subtitle: "The post-Cold War game of one giant stack is ending."
 description: "A short essay arguing that the post-Cold War world of one dominant stack is fading as more states accumulate leverage in economics, energy, technology, and security."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 featured_image: "/images/essays/the-world-is-back-at-the-poker-table/chips-in.png"
 featured_image_alt: "World leaders sit around a smoky poker table covered with a map and stacks of chips."
@@ -34,11 +38,11 @@ The world is back at the poker table.
 
 ## The Big Stack
 
-The U.S. remains the world's largest economy at roughly $31.8 trillion in projected 2026 nominal GDP, still well ahead of every rival.
+The U.S. remains the world's largest economy at roughly $31.8 trillion in projected 2026 nominal GDP, well ahead of every rival.
 
 America's chips remain formidable: reserve currency status, deep capital markets, military reach, energy production, elite universities, and leading technology firms.
 
-That is still the biggest stack in the room.
+That remains the biggest stack in the room.
 
 ## The Patient Player
 
@@ -50,7 +54,7 @@ China rarely needs to win every hand. It often plays for position.
 
 ## The Wild Card
 
-Russia has a smaller economy than the top tier, yet it still matters through military power, nuclear forces, and commodity leverage.
+Russia has a smaller economy than the top tier, yet it carries leverage through military power, nuclear forces, and commodity flows.
 
 Russia's chips include oil and gas exports, military hard power, geographic depth, and tolerance for risk.
 
@@ -68,9 +72,9 @@ India may be the player adding chips while others argue.
 
 Saudi Arabia, United Arab Emirates, and Qatar convert energy wealth into sovereign investment, logistics hubs, sports influence, and diplomatic leverage.
 
-Cash still talks.
+Cash talks.
 
-Energy still matters.
+Energy moves the game.
 
 The world keeps relearning both lessons.
 
@@ -92,7 +96,7 @@ A chip plant can matter like a carrier group.
 
 No single player has left the table.
 
-America still leads many categories. China keeps building. India keeps rising. Regional powers keep bargaining. Smaller states keep playing angles.
+America leads many categories. China keeps building. India keeps rising. Regional powers keep bargaining. Smaller states keep playing angles.
 
 That does not guarantee war or collapse. It means competition returned.
 

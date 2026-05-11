@@ -5,8 +5,12 @@ draft: false
 slug: "1929-2029-americas-century-of-humiliation"
 section_label: "Essay"
 description: "A short essay arguing that the United States became world-historically successful while leaving millions of citizens to experience that success as humiliation, attrition, and spectatorship."
-version: "1.1"
-edition: "First web edition"
+version: "1.2"
+edition: "Second web edition"
+revision_history:
+  - version: "1.2"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 featured_image: "/images/essays/1929-2029-americas-century-of-humiliation/hero.png"
 featured_image_alt: "A scoreboard celebrates GDP, markets, military power, and tech wealth while people labeled rent, debt, insurance, and childcare sit exhausted below it."
@@ -66,7 +70,7 @@ The financial crisis of 2007-2008 shattered trust.
 
 Then came the pandemic, inflation, housing shortages, endless subscriptions, and eggs becoming a luxury item for six weeks.
 
-America still looks wealthy.
+America looks wealthy.
 
 Markets rise. Towers go up. Apps promise convenience. Billionaires launch rockets for leisure.
 

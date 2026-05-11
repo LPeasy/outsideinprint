@@ -6,9 +6,12 @@ slug: "the-blockade-has-a-phone-number"
 section_label: "Essay"
 subtitle: "Washington says Tehran can call when it wants to talk. The Strait of Hormuz is making a different argument in oil, jet fuel, sanctions, and ships."
 description: "Trump's canceled Iran envoy trip shows how quickly diplomacy becomes theater when the real machinery of conflict is a blocked waterway."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
   - version: "1.2"
     date: "2026-04-26"
     note: "Updated April 26, 2026, to clarify that the U.S. blockade applied to Iranian ports while Iran restricted movement through the Strait of Hormuz, and to replace a broken AP source link."
@@ -136,7 +139,7 @@ The world economy rests on old acts of trust that are easy to forget because the
 
 When a chokepoint closes, the hidden treaty underneath ordinary life becomes visible.
 
-That is why the diplomacy matters so much. A negotiation over Iran's nuclear program or regional conduct is never only a negotiation over clauses. It is also a test of whether the parties can return a public artery to ordinary use before too many actors learn that the artery itself is the prize.
+Diplomacy carries so much weight here. A negotiation over Iran's nuclear program or regional conduct is never only a negotiation over clauses. It is also a test of whether the parties can return a public artery to ordinary use before too many actors learn that the artery itself is the prize.
 
 Pressure may bring people to the table.
 

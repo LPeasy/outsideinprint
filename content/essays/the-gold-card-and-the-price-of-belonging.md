@@ -4,14 +4,17 @@ date: 2026-04-24
 draft: false
 slug: "the-gold-card-and-the-price-of-belonging"
 section_label: "Essay"
-subtitle: "Trump's new visa program has approved only one person so far. It still says a great deal about what kind of immigrant the country now wants to honor."
+subtitle: "Trump's new visa program has approved only one person so far. It says a great deal about what kind of immigrant the country now wants to honor."
 description: "The Trump Gold Card turns money into evidence of merit, exposing a harder logic inside American immigration policy."
-version: "2.1"
-edition: "Third web edition"
+version: "2.2"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.2"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
   - version: "2.1"
     date: "2026-04-26"
-    note: "Updated April 26, 2026, to add the executive order’s separate Treasury fund provision and sharpen the distinction between a gift and a specific investment."
+    note: "Updated April 26, 2026, to add the executive order's separate Treasury fund provision and sharpen the distinction between a gift and a specific investment."
 featured: false
 collections:
   - "reported-case-studies"
@@ -30,19 +33,19 @@ The better reading is more serious. The gold card says in plain public language 
 
 That logic is older than this website. The gold card strips it down until the frame is visible.
 
-## The Old Investor Visa Still Wore a Civic Costume
+## The Old Investor Visa Wore a Civic Costume
 
 America already had a way for wealthy foreigners to buy a place in the line.
 
 [USCIS says](https://www.uscis.gov/working-in-the-united-states/permanent-workers/eb-5-immigrant-investor-program) the EB-5 Immigrant Investor Program was created by Congress in 1990 to stimulate the U.S. economy through capital investment and job creation. Under the current version, an investor seeking permanent residence must put at least $1,050,000 into a new commercial enterprise, or $800,000 in a targeted employment area or infrastructure project, and create or preserve 10 permanent full-time jobs for qualified U.S. workers.
 
-That system already carried a moral message. It told the world that one path into the country runs through capital. Still, EB-5 kept a civic costume on the transaction. The investor had to do something that could be described in public terms ~ fund a business, place capital at risk, create jobs, generate growth in a place that could point to a factory floor, a hotel project, a housing complex, or some other visible enterprise.
+That system already carried a moral message. It told the world that one path into the country runs through capital. Even then, EB-5 kept a civic costume on the transaction. The investor had to do something that could be described in public terms ~ fund a business, place capital at risk, create jobs, generate growth in a place that could point to a factory floor, a hotel project, a housing complex, or some other visible enterprise.
 
 The gold card changes the tone by changing the object.
 
 In [the White House executive order that created the program on September 19, 2025](https://www.whitehouse.gov/presidential-actions/2025/09/the-gold-card/), the required payment is not an investment in a commercial enterprise. It is an unrestricted gift to the Department of Commerce. The order says the administration wants to "prioritiz[e] the admission of aliens who will affirmatively benefit the Nation," and it treats a $1 million personal gift or a $2 million corporate gift as the relevant signal.
 
-The order does require Commerce to place the gifts in a separate Treasury fund and use them to promote commerce and American industry. That still leaves the civic burden on the government after the transfer rather than on any specific investment, payroll, project, or measurable job creation by the applicant.
+The order does require Commerce to place the gifts in a separate Treasury fund and use them to promote commerce and American industry. That leaves the civic burden on the government after the transfer rather than on any specific investment, payroll, project, or measurable job creation by the applicant.
 
 The shift matters because it changes the story the applicant is asked to tell.
 
@@ -92,7 +95,7 @@ Those categories teach the country what it believes admission is for.
 
 The gold card teaches something unusually direct. It treats belonging as a luxury good.
 
-The website makes this plain in ways the policy memos almost do not have to. There is the gold finish, the presidential branding, the premium-card aesthetic, and the talk of accelerated opportunity. There is also the still more revealing next tier. The forthcoming Trump Platinum Card promises up to 270 days in the United States without tax on non-U.S. income. The corporate version carries a 1% annual maintenance fee and a 5% transfer fee, allowing a company to stop sponsoring one employee and reuse the underlying gift for another.
+The website makes this plain in ways the policy memos almost do not have to. There is the gold finish, the presidential branding, the premium-card aesthetic, and the talk of accelerated opportunity. There is also the more revealing next tier. The forthcoming Trump Platinum Card promises up to 270 days in the United States without tax on non-U.S. income. The corporate version carries a 1% annual maintenance fee and a 5% transfer fee, allowing a company to stop sponsoring one employee and reuse the underlying gift for another.
 
 That is membership design as much as immigration law.
 
@@ -108,7 +111,7 @@ The gold card changes the level of candor.
 
 EB-5 asked the rich applicant to perform a public role. The gold card asks for tribute first and supplies the public role afterward. The executive order tells agencies to read the gift as evidence of "exceptional business ability and national benefit." Wealth becomes a language of official virtue.
 
-That is why the number one matters less than the poster.
+The number one is less revealing than the poster.
 
 Maybe the program will stall. Maybe courts or Congress will narrow it. Maybe the waiting list will prove longer than the approvals. Maybe the whole thing will remain a niche pathway for a few thousand people with expensive lawyers and cleaner biographies than average.
 
@@ -124,7 +127,7 @@ That statement is harder than the usual investor-visa logic because it is cleane
 
 The card on the screen is a visa proposal and a national self-portrait.
 
-The portrait is of a country that still wants newcomers, talent, energy, and capital, while increasingly preferring to encounter those things in their most liquid form: a wire transfer, cleared funds, a premium lane.
+The portrait is of a country that wants newcomers, talent, energy, and capital, while increasingly preferring to encounter those things in their most liquid form: a wire transfer, cleared funds, a premium lane.
 
 The gold card may have only one approved holder as of April 23, 2026.
 
