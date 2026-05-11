@@ -821,6 +821,16 @@ $requiredMetadataPages = [ordered]@{
     ExpectedImage = 'https://outsideinprint.org/images/essays/the-blue-pool-at-the-memorial/hero.png'
     AuthorMeta = 'Robert V. Ussley'
   }
+  'public/essays/outside-the-garden/index.html' = @{
+    Title = 'Outside the Garden'
+    Description = 'A moral and religious essay on America, exile, sacrifice, and the collapse of inherited moral order.'
+    Canonical = 'https://outsideinprint.org/essays/outside-the-garden/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/outside-the-garden/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
   'public/essays/the-strait-that-holds-the-price/index.html' = @{
     Title = 'The Strait That Holds the Price'
     Description = "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage still governs energy security, commodity prices, and public life."
@@ -1856,8 +1866,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?can-you-pass-the-pepper-please"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=pass-the-pepper"?'
-    Message = 'expected the Pepper homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-blue-pool-at-the-memorial"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=algae-fueled-fever-dreams"?'
+    Message = 'expected the Blue Pool homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -2425,7 +2435,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*107 published pieces'
+    Pattern = '11 public collections.*108 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2879,6 +2889,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/nothing-to-see-here/index.html'; Slug = 'risk-uncertainty'; Label = 'Nothing to See Here' },
   @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'the moral collection essay' },
   @{ Path = 'public/essays/the-hate-ledger/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'The Hate Ledger' },
+  @{ Path = 'public/essays/outside-the-garden/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'Outside the Garden' },
   @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' },
   @{ Path = 'public/essays/multiple-shmultiple/index.html'; Slug = 'reported-case-studies'; Label = 'Multiple Shmultiple' }
 )
