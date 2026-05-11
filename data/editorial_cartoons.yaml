@@ -1,4 +1,4 @@
-current: algae-fueled-fever-dreams
+current: see-the-world
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -174,5 +174,13 @@ cartoons:
     image: "/images/editorial/algae-fueled-fever-dreams.png"
     essay: "/essays/the-blue-pool-at-the-memorial/"
     alt: "Political cartoon showing a public works employee rolling blue coating across the Lincoln Memorial Reflecting Pool while algae pours from a cracked pipe labeled Deferred Maintenance and protesters hold signs reading Preserve the Neglect and Authentic Algae."
+    width: 1672
+    height: 941
+  - slug: see-the-world
+    title: "See the World"
+    date: "2026-05-11"
+    image: "/images/editorial/see-the-world.png"
+    essay: "/essays/outside-the-garden/"
+    alt: "Editorial cartoon showing travelers buying exit tickets from a snake vendor in a lush garden, beside a travel poster and a closed Garden of Eden gate opening onto an industrial wasteland guarded by a winged child holding a fiery sword."
     width: 1672
     height: 941
