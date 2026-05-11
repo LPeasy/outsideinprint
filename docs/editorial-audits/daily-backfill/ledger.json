@@ -1185,7 +1185,7 @@
       "deployed_on": "2026-05-10"
     },
     "the-new-meta-economy": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-11",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md",
       "previous_version": "1.0",
@@ -1201,10 +1201,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay ties Meta AI claims to the Q1 2025 earnings-call record, names the advertising and interface-control mechanisms, preserves uncertainty around labor replacement, and identifies the platform incentives and downstream risks."
-      }
+      },
+      "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
+      "deployed_on": "2026-05-11"
     },
     "biter-the-slang-word-that-hits": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-11",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md",
       "previous_version": "1.0",
@@ -1220,10 +1222,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay keeps the creative-ownership argument grounded in credited examples, softens live reputational claims, distinguishes homage from theft, and names the community incentives around attribution."
-      }
+      },
+      "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
+      "deployed_on": "2026-05-11"
     },
     "standard-of-living-vs-quality-of-life-what-the-numbers-miss": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-11",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md",
       "previous_version": "1.0",
@@ -1239,10 +1243,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay anchors living-standard claims in distribution, well-being, and linked source notes while preserving uncertainty about measurement and naming the policy tradeoffs of average-based metrics."
-      }
+      },
+      "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
+      "deployed_on": "2026-05-11"
     },
     "whos-drinking-all-the-modelo": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-11",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md",
       "previous_version": "1.0",
@@ -1258,10 +1264,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay grounds Modelo claims in linked market coverage, separates boycott timing from long-term distribution and demographic strategy, and names brand, tariff, and consumer-demand tradeoffs."
-      }
+      },
+      "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
+      "deployed_on": "2026-05-11"
     },
     "rethinking-invasive-species-management": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-11",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md",
       "previous_version": "1.0",
@@ -1277,7 +1285,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay tests invasive-species claims against prevention incentives, control-stage tradeoffs, ecological consequences, uncertainty about species spread, and fragmented institutional responsibility."
-      }
+      },
+      "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
+      "deployed_on": "2026-05-11"
     }
   },
   "blocked": {},
@@ -1473,8 +1483,10 @@
         "whos-drinking-all-the-modelo",
         "rethinking-invasive-species-management"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11.md",
+      "commit_sha": "457e9137bfb1076a8f98938f11ea71d817fa3f04",
+      "deployed_on": "2026-05-11"
     }
   ]
 }
