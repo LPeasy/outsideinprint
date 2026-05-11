@@ -9,8 +9,12 @@ description: "The Senate's prediction-market ban shows why event markets become 
 featured_image: "/images/essays/the-bet-slip-in-the-briefing-room/hero.png"
 featured_image_alt: "Editorial illustration of a prediction-market ticket resting on a closed briefing folder at a long Senate table, with a dim trading board reflected in polished wood."
 featured_image_caption: "The bet slip looks harmless until it sits beside tomorrow's official decision."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections:
   - "civic-institutions-and-public-power"
@@ -32,7 +36,7 @@ On April 30, 2026, the Senate drew a line around that strangeness. The chamber a
 
 The timing explains the urgency. One week earlier, the Justice Department [unsealed an indictment](https://www.justice.gov/opa/pr/us-soldier-charged-using-classified-information-profit-prediction-market-bets) accusing an active-duty U.S. Army soldier, Gannon Ken Van Dyke, of using classified information about a U.S. military operation in Venezuela to profit on Polymarket. The Commodity Futures Trading Commission filed a parallel civil complaint and said the case marked [its first event-contract insider-trading charge](https://www.cftc.gov/PressRoom/PressReleases/9217-26).
 
-The Senate rule is narrow. It governs one chamber and its staff. It leaves many other public officials, relatives, contractors, lobbyists, campaign aides, agency employees, and informed private actors outside the immediate ban. Still, a small rule can clarify a large problem.
+The Senate rule is narrow. It governs one chamber and its staff. It leaves many other public officials, relatives, contractors, lobbyists, campaign aides, agency employees, and informed private actors outside the immediate ban. Even a small rule can clarify a large problem.
 
 The public office is a place where tomorrow sometimes arrives early.
 
@@ -54,13 +58,13 @@ It starts looking like a private sale of public power.
 
 ## When Power Moves The Odds
 
-The Van Dyke case is still an allegation, and the government will have to prove it in court. The facts charged by DOJ and the CFTC are direct enough to show the failure mode.
+The Van Dyke case remains an allegation, and the government will have to prove it in court. The facts charged by DOJ and the CFTC are direct enough to show the failure mode.
 
 According to the Justice Department, Van Dyke was an active-duty soldier stationed at Fort Bragg who had signed nondisclosure agreements covering military operations. Prosecutors allege that he participated in planning and executing Operation Absolute Resolve, a U.S. operation to capture Nicolas Maduro in Venezuela. They also allege that he created a Polymarket account, placed about $33,034 in Maduro- and Venezuela-related bets, and made about $409,881 after several contracts resolved in his favor.
 
 The CFTC complaint describes the same conduct through the language of market integrity. It alleges that Van Dyke bought more than 436,000 yes shares in a Maduro-related contract while holding classified or sensitive nonpublic information. The agency said the case was its first use of the so-called Eddie Murphy Rule, the federal prohibition on trading through misused government information.
 
-That detail matters because it moves prediction markets out of novelty and into familiar ethics territory. The market may be new. The temptation is old.
+That detail moves prediction markets out of novelty and into familiar ethics territory. The market may be new. The temptation is old.
 
 Public servants have always had early access to facts: procurement decisions, enforcement priorities, rate deliberations, troop movements, committee vote counts, disaster plans, sanctions packages, regulatory drafts. In older markets, some of those facts could move stocks, bonds, commodities, currencies, or contracts. Event markets broaden the surface. They create tradable questions about government action itself.
 
@@ -73,7 +77,7 @@ A person with inside knowledge no longer has to find a public company exposed to
 
 The Senate rule treats this as a public-office problem before it becomes a criminal case.
 
-That matters. Criminal enforcement arrives after the breach. It requires proof, process, jurisdiction, and time. A conduct rule can speak earlier. It says some positions carry duties that make a profitable trade improper even before a prosecutor can prove a statute was broken.
+Criminal enforcement arrives after the breach. It requires proof, process, jurisdiction, and time. A conduct rule can speak earlier. It says some positions carry duties that make a profitable trade improper even before a prosecutor can prove a statute was broken.
 
 Senator Kirsten Gillibrand and Senator Dave McCormick introduced a broader [Prediction Market Act of 2026](https://www.gillibrand.senate.gov/news/press/release/senators-gillibrand-and-mccormick-introduce-bipartisan-bill-to-stop-politicians-from-profiting-off-insider-information-and-protect-consumers-in-prediction-markets/) the same day. Their proposal would bar members of Congress, the president, the vice president, and senior executive branch officials from trading event contracts, while also giving the CFTC clearer authority over market conduct, customer funds, age verification, and retail protections.
 
@@ -83,7 +87,7 @@ The problem is plain: the more government becomes a set of tradable events, the 
 
 Kalshi's recent disciplinary action shows the issue outside classified national security. The company said, according to [ABC News](https://abcnews.com/US/prediction-market-kalshi-suspends-3-congressional-candidates-betting/story?id=132284917), that it suspended three congressional candidates for betting on their own races. Those alleged trades were far smaller than the Maduro case. The principle was similar. A candidate knows things about a campaign that ordinary traders cannot see. The candidate also has some control over the conduct being priced.
 
-That is why the Senate's action should be read as a boundary marker, with much of the larger settlement still ahead.
+The Senate's action should be read as a boundary marker, with much of the larger settlement ahead.
 
 ## The Usefulness That Makes It Dangerous
 

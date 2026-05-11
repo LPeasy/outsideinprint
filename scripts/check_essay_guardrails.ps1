@@ -348,6 +348,132 @@ function Test-EditorialPhilosophyAuditEvidence {
   return (Test-LedgerEditorialPhilosophyEntry -Entry $entryProperty.Value -RepoRoot $RepoRoot)
 }
 
+function Get-AdverbialStillConstructionHits {
+  param([string]$Path)
+
+  $hits = New-Object System.Collections.Generic.List[object]
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    return $hits.ToArray()
+  }
+
+  $allowedNextWords = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  foreach ($word in @('image', 'images', 'frame', 'frames', 'photo', 'photos', 'photograph', 'photographs', 'life', 'lifes', 'water', 'waters')) {
+    [void]$allowedNextWords.Add($word)
+  }
+
+  $allowedPreviousWords = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  foreach ($word in @('stand', 'stands', 'standing', 'stood', 'sit', 'sits', 'sitting', 'sat', 'lie', 'lies', 'lying', 'lay', 'hold', 'holds', 'held', 'remain', 'remains', 'remained')) {
+    [void]$allowedPreviousWords.Add($word)
+  }
+
+  $text = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
+  $lines = @($text -split "`r?`n")
+  $inFence = $false
+
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    $line = [string]$lines[$i]
+
+    if ($line -match '^\s*```') {
+      $inFence = -not $inFence
+      continue
+    }
+    if ($inFence -or $line -match '^\s*>') {
+      continue
+    }
+
+    foreach ($match in [regex]::Matches($line, '\bstill\b', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+      $before = $line.Substring(0, $match.Index)
+      $after = $line.Substring($match.Index + $match.Length)
+      $previousMatch = [regex]::Match($before, '([A-Za-z]+)\W*$')
+      $nextMatch = [regex]::Match($after, '^\W*([A-Za-z]+)')
+
+      if ($nextMatch.Success -and $allowedNextWords.Contains($nextMatch.Groups[1].Value)) {
+        continue
+      }
+      if ($previousMatch.Success -and $allowedPreviousWords.Contains($previousMatch.Groups[1].Value)) {
+        continue
+      }
+
+      $excerpt = ($line.Trim() -replace '\s+', ' ')
+      if ($excerpt.Length -gt 220) {
+        $excerpt = $excerpt.Substring(0, 217) + '...'
+      }
+
+      $hits.Add([pscustomobject]@{
+        Line = $i + 1
+        Excerpt = $excerpt
+      })
+    }
+  }
+
+  return $hits.ToArray()
+}
+
+function Get-ThatMattersFramingHits {
+  param([string]$Path)
+
+  $hits = New-Object System.Collections.Generic.List[object]
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    return $hits.ToArray()
+  }
+
+  $text = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
+  $lines = @($text -split "`r?`n")
+  $inFence = $false
+
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    $line = [string]$lines[$i]
+
+    if ($line -match '^\s*```') {
+      $inFence = -not $inFence
+      continue
+    }
+    if ($inFence -or $line -match '^\s*>') {
+      continue
+    }
+
+    if ($line -match '(?i)\bthat\s+matters\b|(?:^|[.!?]\s+)that\s+[^.!?]{1,80}\bmatters\b') {
+      $excerpt = ($line.Trim() -replace '\s+', ' ')
+      if ($excerpt.Length -gt 220) {
+        $excerpt = $excerpt.Substring(0, 217) + '...'
+      }
+
+      $hits.Add([pscustomobject]@{
+        Line = $i + 1
+        Excerpt = $excerpt
+      })
+    }
+  }
+
+  return $hits.ToArray()
+}
+
+function Add-BlockingIssue {
+  param(
+    [System.Collections.Generic.List[object]]$Results,
+    [string]$Path,
+    [string]$Issue
+  )
+
+  $existing = $null
+  foreach ($item in $Results) {
+    if ([string]$item.Path -eq $Path) {
+      $existing = $item
+      break
+    }
+  }
+
+  if ($null -eq $existing) {
+    $Results.Add([pscustomobject]@{
+      Path = $Path
+      Issues = @($Issue)
+    })
+    return
+  }
+
+  $existing.Issues = @(@($existing.Issues) + $Issue | Sort-Object -Unique)
+}
+
 function Expand-EssayPaths {
   param(
     [string[]]$EssayPaths
@@ -645,7 +771,10 @@ function Get-CurrentPowerShellExecutable {
   $generatedPwsh = Join-Path $Root 'tools\bin\generated\pwsh.cmd'
   $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
   if ($isWindowsHost -and (Test-Path -LiteralPath $generatedPwsh -PathType Leaf)) {
-    return $generatedPwsh
+    $probeOutput = & $generatedPwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' 2>$null
+    if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace(($probeOutput -join ''))) {
+      return $generatedPwsh
+    }
   }
 
   $currentProcess = Get-Process -Id $PID
@@ -783,6 +912,8 @@ $warningIssues = @('caption_residue','pseudo_headings','manual_bullets','fake_li
 $blockingResults = New-Object System.Collections.Generic.List[object]
 $warningResults = New-Object System.Collections.Generic.List[object]
 $philosophyAuditResults = New-Object System.Collections.Generic.List[object]
+$stillConstructionResults = New-Object System.Collections.Generic.List[object]
+$thatMattersResults = New-Object System.Collections.Generic.List[object]
 
 foreach ($row in $rows) {
   $issueTypes = @($row.issue_types)
@@ -832,6 +963,48 @@ foreach ($row in $rows) {
   }
 }
 
+foreach ($targetPath in $targetPaths) {
+  $thatMattersHits = @(Get-ThatMattersFramingHits -Path $targetPath)
+  if ($thatMattersHits.Count -gt 0) {
+    $relativePath = Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath
+    $displayPath = if ($relativePath.StartsWith('content/', [System.StringComparison]::OrdinalIgnoreCase)) {
+      $relativePath.Substring('content/'.Length)
+    } else {
+      $relativePath
+    }
+
+    Add-BlockingIssue -Results $blockingResults -Path $displayPath -Issue 'that_matters_framing'
+    foreach ($hit in $thatMattersHits) {
+      $thatMattersResults.Add([pscustomobject]@{
+        Path = $displayPath
+        Line = $hit.Line
+        Excerpt = $hit.Excerpt
+      })
+    }
+  }
+
+  $stillHits = @(Get-AdverbialStillConstructionHits -Path $targetPath)
+  if ($stillHits.Count -eq 0) {
+    continue
+  }
+
+  $relativePath = Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath
+  $displayPath = if ($relativePath.StartsWith('content/', [System.StringComparison]::OrdinalIgnoreCase)) {
+    $relativePath.Substring('content/'.Length)
+  } else {
+    $relativePath
+  }
+
+  Add-BlockingIssue -Results $blockingResults -Path $displayPath -Issue 'adverbial_still_construction'
+  foreach ($hit in $stillHits) {
+    $stillConstructionResults.Add([pscustomobject]@{
+      Path = $displayPath
+      Line = $hit.Line
+      Excerpt = $hit.Excerpt
+    })
+  }
+}
+
 if ($RequireEditorialPhilosophyAudit) {
   foreach ($subject in $philosophyAuditSubjects) {
     if ([bool]$subject.Draft) {
@@ -854,6 +1027,8 @@ Write-Host "  Philosophy audit targets: $($philosophyAuditSubjects.Count)"
 Write-Host "  Blocking files: $($blockingResults.Count)"
 Write-Host "  Warning files: $($warningResults.Count)"
 Write-Host "  Philosophy audit blocking files: $($philosophyAuditResults.Count)"
+Write-Host "  That-matters framing hits: $($thatMattersResults.Count)"
+Write-Host "  Adverbial still construction hits: $($stillConstructionResults.Count)"
 Write-Host "  Audit report: $($ReportBasePath).json"
 
 foreach ($item in $blockingResults) {
@@ -878,6 +1053,18 @@ foreach ($item in $philosophyAuditResults) {
   foreach ($issue in $item.Issues) {
     Write-Host "  - $issue for slug $($item.Slug)" -ForegroundColor Red
   }
+}
+
+foreach ($item in $thatMattersResults) {
+  Write-Host ''
+  Write-Host "THAT-MATTERS $($item.Path):$($item.Line)" -ForegroundColor Red
+  Write-Host "  $($item.Excerpt)" -ForegroundColor Red
+}
+
+foreach ($item in $stillConstructionResults) {
+  Write-Host ''
+  Write-Host "STILL $($item.Path):$($item.Line)" -ForegroundColor Red
+  Write-Host "  $($item.Excerpt)" -ForegroundColor Red
 }
 
 $legacyPreflightExitCode = Invoke-LegacyImportPreflight `

@@ -9,8 +9,12 @@ description: "Internal ICE force reports show how civil detention can turn reque
 featured_image: "/images/essays/can-you-pass-the-pepper-please/hero.png"
 featured_image_alt: "Editorial illustration of a detention lunchroom after a chemical agent release, with empty tables, orange haze, locked cell doors, and a report form on the floor."
 featured_image_caption: "The room clears. The report remains."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections:
   - "civic-institutions-and-public-power"
@@ -38,7 +42,7 @@ In the Alaska incident, according to the Post's account of the internal records,
 
 Those two accounts do not cancel each other out.
 
-A lunchroom can feel one way to the people responsible for bringing it under control and another way to the people breathing the air. A report can be accurate in some details and still incomplete in what those details mean. A detainee can be frightened. A guard can be responding to a room that is getting harder to manage. An agency can believe its standards are being followed. The public record can still be too thin to answer the questions that follow.
+A lunchroom can feel one way to the people responsible for bringing it under control and another way to the people breathing the air. A report can be accurate in some details and incomplete in what those details mean. A detainee can be frightened. A guard can be responding to a room that is getting harder to manage. An agency can believe its standards are being followed. The public record can be too thin to answer the questions that follow.
 
 The gap between those accounts is where this story begins.
 
@@ -119,7 +123,7 @@ A compliance problem becomes spray.
 
 Spray becomes a report.
 
-The point is not that the report is false. The point is that the report may be true and still leave the civic question underdescribed. A reviewer needs to know more than whether people complied. A reviewer needs to know what they were asking for, how long the condition had existed, what staff tried before force, who authorized the response, whether medical personnel were consulted, whether video exists, what injuries were reported later, and whether the underlying complaint was ever addressed.
+The point is not that the report is false. The point is that the report may be true and leave the civic question underdescribed. A reviewer needs to know more than whether people complied. A reviewer needs to know what they were asking for, how long the condition had existed, what staff tried before force, who authorized the response, whether medical personnel were consulted, whether video exists, what injuries were reported later, and whether the underlying complaint was ever addressed.
 
 Compliance is a necessary word in custody. It helps staff describe whether an order was followed and whether a room was under control.
 
@@ -204,7 +208,7 @@ That is a small administrative fact with large consequences.
 
 A short report is not automatically a bad report. Some incidents are simple. Some details should be protected. Detainees have privacy interests. Investigations can involve sensitive information. Staff can also be unfairly judged if fragments are released without context.
 
-Still, a report that gets shorter while force events rise should draw attention. The more closed the room, the more careful the record has to be. Sparse language may help a report move quickly through an agency. It may also make the public record less able to carry the facts that matter.
+A report that gets shorter while force events rise should draw attention. The more closed the room, the more careful the record has to be. Sparse language may help a report move quickly through an agency. It may also make the public record less able to carry the facts that matter.
 
 The room is locked.
 
@@ -252,4 +256,4 @@ A civil system reveals itself in the moment when an ordinary request enters a lo
 
 The dust cleared faster than the paper.
 
-That is why the lunchroom matters. Not because it gives the public an easy villain. Because it gives the public a hard question: when a closed room writes its own account, how much truth does the form have to carry?
+The lunchroom leaves the public with a hard question, not an easy villain: when a closed room writes its own account, how much truth does the form have to carry?

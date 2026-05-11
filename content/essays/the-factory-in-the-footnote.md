@@ -9,8 +9,12 @@ description: "The SEC climate-disclosure reversal turns a dormant rule into a la
 featured_image: "/images/essays/the-factory-in-the-footnote/hero.png"
 featured_image_alt: "Editorial illustration of a factory silhouette rising out of an annual-report footnote, with audit marks, carbon ledgers, and a quiet boardroom table."
 featured_image_caption: "A factory can disappear into a footnote before anyone votes to close it."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections:
   - "civic-institutions-and-public-power"
@@ -28,7 +32,7 @@ tags:
 
 A factory can disappear into a footnote.
 
-The smokestack is still there. The workers still punch in. The power bill still arrives. The supplier still needs heat, freight, steel, cement, plastic, ammonia, glass, or electricity. Then a new line appears in the annual report. A risk table expands. A climate target becomes an accounting object. A consultant measures the stack. A lawyer asks what a reasonable investor may later claim the company should have known.
+The smokestack remains. The workers punch in. The power bill arrives. The supplier needs heat, freight, steel, cement, plastic, ammonia, glass, or electricity. Then a new line appears in the annual report. A risk table expands. A climate target becomes an accounting object. A consultant measures the stack. A lawyer asks what a reasonable investor may later claim the company should have known.
 
 That is the civic shape of the Securities and Exchange Commission's climate-disclosure rule.
 
@@ -40,7 +44,7 @@ Each word seems smaller than a smokestack.
 
 The dispute beneath those words is larger. It asks how far a disclosure agency can go when the disclosed fact is a global atmospheric problem, the compliance cost lands inside domestic companies, and the climate benefit depends on behavior by countries beyond American law.
 
-That question can be asked while taking climate risk seriously and still rejecting global abstraction as a substitute for domestic accounting. The serious question concerns power. Who pays? Who gains power? What changes in the real economy? What happens when a rule written as information becomes a pressure system for production?
+That question can be asked while taking climate risk seriously without accepting global abstraction as a substitute for domestic accounting. The serious question concerns power. Who pays? Who gains power? What changes in the real economy? What happens when a rule written as information becomes a pressure system for production?
 
 ## The Rule As Written
 
@@ -50,7 +54,7 @@ The agency said the final rules were meant to give investors more consistent and
 
 The rule had already been softened before adoption. The final version dropped the broad Scope 3 supply-chain emissions requirement that had drawn heavy opposition. It also built emissions reporting around materiality. Even so, litigation arrived almost immediately. The [SEC stay order](https://www.sec.gov/files/rules/other/2024/33-11280.pdf) listed petitions filed in multiple courts by states, energy companies, business groups, and environmental organizations.
 
-That stay matters because the rule has lived as a legal object more than an operating regime. It was effective on paper. It was paused in practice. It became a warning about where American securities disclosure might go.
+The stay turned the rule into a legal object more than an operating regime. It was effective on paper. It was paused in practice. It became a warning about where American securities disclosure might go.
 
 Chairman Paul Atkins has framed the broader SEC project as a return to materiality. In [February 2026 testimony](https://www.sec.gov/newsroom/speeches-statements/atkins-testimony-sbhuac-021226), he said the agency should re-anchor disclosures in economic signals and avoid regulatory noise. He argued that public companies spend billions of dollars on annual reports and that disclosure documents can obscure when they grow too long. In an [April 2026 version of the same argument](https://corpgov.law.harvard.edu/2026/04/09/regulatory-simplification-and-the-secs-core-mission/), published at the Harvard Law School Forum on Corporate Governance, he wrote that the SEC's disclosure regime works best when it elicits information material to investors and lets markets drive additional disclosure.
 
@@ -94,7 +98,7 @@ The [European Commission's EDGAR-based 2025 climate progress chapter](https://cl
 
 Those numbers set the scale of American power.
 
-An American rule can reduce American territorial emissions and still fail to lower global emissions if production moves to a higher-carbon grid or if foreign growth swamps domestic savings. A disclosure rule can make American companies cleaner on paper while moving marginal investment toward jurisdictions with cheaper energy, weaker reporting, or state-backed industrial policy. A rule can reward firms that outsource their dirty inputs while penalizing firms that keep production visible inside the United States.
+An American rule can reduce American territorial emissions and fail to lower global emissions if production moves to a higher-carbon grid or if foreign growth swamps domestic savings. A disclosure rule can make American companies cleaner on paper while moving marginal investment toward jurisdictions with cheaper energy, weaker reporting, or state-backed industrial policy. A rule can reward firms that outsource their dirty inputs while penalizing firms that keep production visible inside the United States.
 
 That is the factory-in-the-footnote problem.
 
@@ -110,13 +114,13 @@ Investors own companies exposed to physical risk, transition risk, regulatory ri
 
 That is the best argument for the rule, and it deserves a clean answer.
 
-The best argument against the rule begins at the same place: materiality. If a climate fact matters to enterprise value, existing securities law already gives investors a path to demand it. The SEC has long expected companies to disclose material risk. The agency also has antifraud tools when a company misstates its exposure, targets, spending, or transition plan.
+The best argument against the rule begins at the same place: materiality. If a climate fact is material to enterprise value, existing securities law already gives investors a path to demand it. The SEC has long expected companies to disclose material risk. The agency also has antifraud tools when a company misstates its exposure, targets, spending, or transition plan.
 
 The 2024 rule moved toward a more prescriptive regime. It did so in a public environment where carbon accounting often carries an ambition beyond investor protection. Carbon disclosure is used by capital providers, ratings systems, activists, procurement offices, insurers, and corporate boards to rank firms by climate alignment. The filing becomes a node in a wider discipline system.
 
 That discipline may be desirable to people who want capital markets to accelerate decarbonization. It may be dangerous to people who think capital markets should disclose economic risk while elected branches decide climate policy.
 
-The distinction matters. A securities filing belongs to a different constitutional and civic category than a ballot, an environmental statute, or a treaty. When the SEC uses disclosure to shape industrial behavior, it moves public choices into a room where the key actors are lawyers, auditors, index providers, consultants, large asset managers, and boards.
+The distinction is material. A securities filing belongs to a different constitutional and civic category than a ballot, an environmental statute, or a treaty. When the SEC uses disclosure to shape industrial behavior, it moves public choices into a room where the key actors are lawyers, auditors, index providers, consultants, large asset managers, and boards.
 
 Ordinary citizens enter later, through prices, wages, energy bills, and fewer choices.
 
@@ -140,7 +144,7 @@ The proof required for a securities-disclosure rule should be especially strict 
 
 Rescinding the SEC climate rule would leave climate risk, voluntary disclosure, state rules, European rules, bank demands, insurance pressure, shareholder proposals, and material-exposure questions in place. It would remove one federal template from the center of the public-company reporting system.
 
-That may be enough to matter.
+That may be enough to shape behavior.
 
 The better replacement is sharper discipline. Companies should disclose climate risks when those risks are material to enterprise value. Regulators should punish false climate claims, invented targets, hidden liabilities, and misleading transition plans. Environmental agencies should regulate pollutants within their statutory lanes. Congress should own national climate choices that impose national cost. Trade policy should account for carbon leakage instead of pretending borders disappear whenever the word climate appears.
 
@@ -148,10 +152,10 @@ The word "global" should leave the citizen visible.
 
 The American public can support clean air, demand honest markets, protect industrial capacity, and refuse symbolic rules that shift costs without changing the world's emissions path. Those positions fit inside one serious policy argument.
 
-The factory in the footnote asks for that seriousness. A climate disclosure line can look like information and still become a chain. Before law tightens the chain, the country should know what it is fastening, where the other end leads, and whether the people carrying the weight receive anything solid in return.
+The factory in the footnote asks for that seriousness. A climate disclosure line can look like information and become a chain. Before law tightens the chain, the country should know what it is fastening, where the other end leads, and whether the people carrying the weight receive anything solid in return.
 
 ![Editorial illustration of carbon ledgers flowing across an ocean toward darker factory silhouettes, while a cleaner domestic factory remains under a magnifying glass.](/images/essays/the-factory-in-the-footnote/section-1.png)
-*A clean domestic ledger can still point toward a dirtier production map.*
+*A clean domestic ledger can point toward a dirtier production map.*
 
 ## The Material Question
 

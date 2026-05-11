@@ -9,8 +9,12 @@ description: "A federal indictment against the Southern Poverty Law Center turns
 featured_image: "/images/essays/the-hate-ledger/hero.png"
 featured_image_alt: "Editorial illustration of a ledger book, bank forms, donor envelopes, and shadowed payment cards arranged under a cold desk lamp."
 featured_image_caption: "The case begins where moral language meets the bank account."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections:
   - "moral-religious-philosophical-essays"
@@ -39,9 +43,9 @@ The indictment itself alleges more than a general hypocrisy. It alleges a machin
 
 SPLC denies the government's framing. In a court filing and public statement, SPLC says its informant program produced information that it shared with law enforcement and that the government knew this before making public comments about the indictment. SPLC argues that information gathered through the program helped law enforcement, including in connection with extremist threats around Charlottesville in 2017 and a 2019 Atomwaffen-related planned attack in Las Vegas.[^splc-motion][^splc-press]
 
-That defense matters legally and morally.
+That defense changes the legal and moral frame.
 
-Still, if the indictment holds, the dishonest move was claiming to fight hate while allegedly routing donor money to people inside the hate groups being denounced, hiding the money trail, and using the continued existence of those groups to raise money, accumulate moral authority, and lecture the country about its sickness.
+If the indictment holds, the dishonest move was claiming to fight hate while allegedly routing donor money to people inside the hate groups being denounced, hiding the money trail, and using the continued existence of those groups to raise money, accumulate moral authority, and lecture the country about its sickness.
 
 If proven, that would be a moral protection racket wearing the language of civil-rights work.
 
@@ -55,7 +59,7 @@ The indictment **does establish as public record** that the United States charge
 
 The indictment leaves guilt unresolved. It leaves unresolved whether every field-source payment increased extremist capacity, whether every paid source committed crimes while being paid, whether all informant work was illegitimate, whether the SPLC shared useful information with law enforcement, and whether any wider criminal network existed among other left-of-center nonprofits.
 
-What it does establish is narrower and still grave: the public now has a federal charging document detailed enough to justify close examination of SPLC's donor representations, source-handling rules, bank controls, board oversight, executive knowledge, and the relationship between anti-hate fundraising and the allegedly hidden financing of people attached to hate groups.
+What it does establish is narrower and grave: the public now has a federal charging document detailed enough to justify close examination of SPLC's donor representations, source-handling rules, bank controls, board oversight, executive knowledge, and the relationship between anti-hate fundraising and the allegedly hidden financing of people attached to hate groups.
 
 That is enough for a ledger.
 
@@ -134,7 +138,7 @@ The most disturbing possibility in the SPLC case is that, if the indictment hold
 
 This is the old protection-racket pattern with new moral branding. The neighborhood version says: pay us and nothing bad will happen. The political nonprofit version says: pay us because bad people are everywhere, and only we can show you where.
 
-That comparison should be handled carefully. SPLC remains accused, with guilt unresolved. The government still has to prove the elements of its charges. SPLC is entitled to defend itself. The court record will matter more than any essay.
+That comparison should be handled carefully. SPLC remains accused, with guilt unresolved. The government has to prove the elements of its charges. SPLC is entitled to defend itself. The court record will matter more than any essay.
 
 Former federal prosecutors quoted by CBS News have also argued that parts of the indictment may face serious legal challenges, especially around material donor falsehoods and the bank-fraud statute.[^cbs-legal]
 
@@ -198,7 +202,7 @@ No one wanted to call it an elephant because too many people were earning a livi
 
 ## The theory underneath the habit
 
-The indictment is a legal document before it is anything like a theory seminar. Still, the case sits inside a culture shaped by theory.
+The indictment is a legal document before it is anything like a theory seminar. The case also sits inside a culture shaped by theory.
 
 Critical Theory, in the narrower Frankfurt School sense, belongs to the Western European Marxist tradition. In broader contemporary usage, it includes or overlaps with feminist, anti-racist, anti-colonial, postcolonial, and related theories. Its recurring ambition is to expose domination and transform society through critique.[^sep]
 
@@ -337,7 +341,7 @@ America's mistake has been worse. It has allowed professional interpreters to se
 
 The ledger is now open enough to see the shape.
 
-The question is whether the country still has the nerve to read it.
+The question is whether the country has the nerve to read it.
 
 ---
 

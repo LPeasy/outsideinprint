@@ -9,8 +9,12 @@ description: "Lyme disease was made smaller by weak tests, narrow surveillance r
 featured_image: "/images/essays/nothing-to-see-here/hero.png"
 featured_image_alt: "Editorial illustration of a paper map of Long Island Sound, Lyme, Connecticut, and Plum Island pinned under clinical forms, tick drawings, and stamped public-health records."
 featured_image_caption: "The map is a public-record problem before it is an origin story."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections: ["risk-uncertainty"]
 tags:
@@ -30,7 +34,7 @@ The Lyme disease argument keeps returning to a map.
 
 Lyme, Connecticut sits on the eastern side of the Connecticut River. Across Long Island Sound sits Plum Island, a restricted federal disease-research site with a long animal-disease mission and a short Cold War military chapter. One place gave the illness its public name. The other place gave suspicion a fixed address. The water carries no proof by itself. It carries the reason suspicion keeps returning.
 
-Robert F. Kennedy Jr. supplies the news trigger. The subject is the public record. In a December 15, 2025 [HHS roundtable announcement](https://www.hhs.gov/press-room/secretary-kennedy-convenes-lyme-disease-patients-providers-announce-new-diagnostic-efforts.html), the department said Lyme patients had been denied accurate diagnostics and meaningful care for decades, renewed the LymeX diagnostic effort, and described an illness affecting millions of Americans. HHS also said current tests often miss early or late-stage infection and that persistent symptoms affect up to 20 percent of patients. That language matters because it comes out of the federal world that patients spent years trying to persuade.
+Robert F. Kennedy Jr. supplies the news trigger. The subject is the public record. In a December 15, 2025 [HHS roundtable announcement](https://www.hhs.gov/press-room/secretary-kennedy-convenes-lyme-disease-patients-providers-announce-new-diagnostic-efforts.html), the department said Lyme patients had been denied accurate diagnostics and meaningful care for decades, renewed the LymeX diagnostic effort, and described an illness affecting millions of Americans. HHS also said current tests often miss early or late-stage infection and that persistent symptoms affect up to 20 percent of patients. That language carries force because it comes out of the federal world that patients spent years trying to persuade.
 
 Public authority stays testable even when it changes tone. Kennedy's intervention should open the file, not close it. The proper question is larger than any single official: how did a real, common, sometimes disabling disease become so procedurally hard to believe?
 
@@ -42,7 +46,7 @@ Lyme entered modern public medicine through parents before it entered through ag
 
 In 1975, Judith Mensch heard about children around Lyme, Connecticut with arthritis-like illness. When her own daughter's knee swelled so badly she could barely walk, Mensch rejected the juvenile-arthritis explanation and gathered names. Polly Murray, a few miles away, had seen illness in her own family and neighbors. The state brought in Yale physicians Allen Steere and Stephen Malawista, who surveyed Lyme, Old Lyme, and East Haddam and found 51 cases with similar symptoms, many near wooded areas, often appearing in summer or early fall. [Yale's own history of the discovery](https://medicine.yale.edu/news-article/bullseye-how-yale-researchers-identified-lyme-disease/) now describes that patient-driven origin and the later identification of the bacterium *Borrelia burgdorferi*.
 
-That origin still matters. Lyme disease entered the official account because ordinary people refused a story that did not match the bodies in front of them.
+That origin anchors the story. Lyme disease entered the official account because ordinary people refused a story that did not match the bodies in front of them.
 
 The same pattern kept reappearing. Patients saw collapse before forms counted disease. Families saw disability before case definitions made room for it. Clinicians who treated complex cases often learned the limits of the script before agencies revised public language. The record did move, but it moved late and in pieces.
 
@@ -91,14 +95,14 @@ That path exists. It saves people when detection and treatment arrive early. It 
 
 The [National Academies reported in 2025](https://www.ncbi.nlm.nih.gov/books/NBK616250/) that about 10-20 percent of people who contract Lyme disease develop persistent, often debilitating symptoms such as chronic pain, fatigue, and cognitive dysfunction. The same report said there are no validated interventions to treat Lyme infection-associated chronic illnesses.
 
-[Johns Hopkins' Lyme Disease Research Center](https://www.hopkinslyme.org/lyme-disease-awareness/research-substantiates-lyme-disease-is-not-a-psychosomatic-illness/) has pushed against the old psychosomatic shortcut. In 2025, the center summarized peer-reviewed work finding that persistent Lyme-associated symptoms are biologically driven. One Hopkins study found that 14 percent of patients treated early with standard antibiotics still developed persistent, functionally impairing symptoms known as post-treatment Lyme disease. Hopkins also points to imaging and clinical research on white-matter changes, dysautonomia, POTS, subtle joint inflammation, immune response, microbiome, metabolome, and gene-regulation patterns.
+[Johns Hopkins' Lyme Disease Research Center](https://www.hopkinslyme.org/lyme-disease-awareness/research-substantiates-lyme-disease-is-not-a-psychosomatic-illness/) has pushed against the old psychosomatic shortcut. In 2025, the center summarized peer-reviewed work finding that persistent Lyme-associated symptoms are biologically driven. One Hopkins study found that 14 percent of patients treated early with standard antibiotics developed persistent, functionally impairing symptoms known as post-treatment Lyme disease. Hopkins also points to imaging and clinical research on white-matter changes, dysautonomia, POTS, subtle joint inflammation, immune response, microbiome, metabolome, and gene-regulation patterns.
 
 The mechanisms remain unsettled. Persistent infection, immune dysregulation, tissue damage, co-infections, neurological injury, microbiome change, and treatment response all require careful evidence. The unsettled biology is the reason dismissal was reckless. Failure to explain a condition is not evidence that the patient invented it.
 
-The more honest record says something harder and more useful: Lyme disease is often treatable, delayed care can be life-altering, persistent symptoms are real for a significant minority, and medicine still lacks the tools to sort every mechanism cleanly.
+The more honest record says something harder and more useful: Lyme disease is often treatable, delayed care can be life-altering, persistent symptoms are real for a significant minority, and medicine lacks the tools to sort every mechanism cleanly.
 
 ![Editorial illustration of a closed medical chart on a kitchen table beside unlabeled pill bottles, calendar pages, outdoor boots, and woods beyond the window.](/images/essays/nothing-to-see-here/section-2.png)
-*The case can close while ordinary life still carries the illness.*
+*The case can close while ordinary life carries the illness.*
 
 ## The Island Across the Sound
 
@@ -130,9 +134,9 @@ That person might have no classic rash, delayed testing, neurological symptoms, 
 
 Independent reporting kept the harder reality visible. [Lindsay Keys' film page](https://www.lindsaykeys.com/film) describes *The Quiet Epidemic* as a 2022 documentary about chronic Lyme, with festival screenings, theatrical release, and a 2024 Capitol screening. [Bay Area Lyme Foundation identifies](https://www.bayarealyme.org/videos/ticktective-the-mysterious-history-of-tick-borne-diseases-and-how-we-can-stem-the-epidemic/) Kris Newby as author of *Bitten: The Secret History of Lyme Disease and Biological Weapons* and senior producer of *Under Our Skin*, both part of the public argument over tick-borne disease history.
 
-Every independent claim still needs evidence. The civic value of the work is that it preserved questions the official system narrowed, postponed, or made socially costly to ask.
+Every independent claim needs evidence. The civic value of the work is that it preserved questions the official system narrowed, postponed, or made socially costly to ask.
 
-"Conspiracy theory" became a sorting label. It swept very different claims into one pile: Lyme is serious; surveillance undercounts; testing is limited; persistent illness is real; federal tick and vector research existed; Plum Island had a Cold War military chapter; Plum Island caused Lyme disease. Some of those claims are established. Some are supported and still developing. Some remain unresolved. Some may be wrong.
+"Conspiracy theory" became a sorting label. It swept very different claims into one pile: Lyme is serious; surveillance undercounts; testing is limited; persistent illness is real; federal tick and vector research existed; Plum Island had a Cold War military chapter; Plum Island caused Lyme disease. Some of those claims are established. Some are supported and developing. Some remain unresolved. Some may be wrong.
 
 A serious public culture keeps the distinctions clear. A lazy culture laughs at the pile.
 
@@ -186,7 +190,7 @@ Diagnostics need to do more than confirm a narrow clinical picture. They need to
 
 Federal records also need sunlight. Lawful records tied to tick-borne research, Plum Island, Fort Detrick, Dugway, Cold War vector work, and agency communications should be reviewed and released where law allows. Disclosure does not equal guilt. Secrecy does not equal safety.
 
-The map still matters.
+The map anchors the public question.
 
 Lyme and Old Lyme are places where ordinary people forced the record to notice what bodies already knew. Plum Island is not proof of origin. It is proof that secrecy leaves a wake.
 

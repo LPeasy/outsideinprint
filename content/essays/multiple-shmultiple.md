@@ -9,8 +9,12 @@ description: "A reported history of multiple personality disorder, recovered mem
 featured_image: "/images/essays/multiple-shmultiple/hero.png"
 featured_image_alt: "Editorial illustration of a court file, a therapy chair, and scattered clinical notes arranged like a quiet stage for a diagnosis learning to speak."
 featured_image_caption: "The record begins as a sentence in a file, then widens into a room that could teach suffering a script."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections: ["reported-case-studies"]
 tags:
@@ -28,7 +32,7 @@ tags:
 
 An Illinois appellate opinion contains the sentence.
 
-Rhonda Bloom alleged that her doctors told her she had to uncover all her memories of satanic ritual abuse because "each memory could house a separate personality." The court was not finding the allegation true. It was summarizing a complaint in a case dismissed on limitations and legal-disability grounds. Still, the sentence says almost everything. A memory could house a personality. A personality could house a history. A history could explain the patient. The therapist could then keep looking for more memories, more personalities, more hidden truth. ([Justia][12])
+Rhonda Bloom alleged that her doctors told her she had to uncover all her memories of satanic ritual abuse because "each memory could house a separate personality." The court was not finding the allegation true. It was summarizing a complaint in a case dismissed on limitations and legal-disability grounds. The sentence says almost everything. A memory could house a personality. A personality could house a history. A history could explain the patient. The therapist could then keep looking for more memories, more personalities, more hidden truth. ([Justia][12])
 
 That was the machine.
 
@@ -68,7 +72,7 @@ The timing was perfect.
 
 DSM-III was published in 1980. The American Psychiatric Association describes it as a major diagnostic turn: explicit diagnostic criteria, a multiaxial assessment system, and a cause-neutral approach meant to give clinicians and researchers more precise definitions. Multiple personality disorder entered the manual in that era and was later renamed dissociative identity disorder. ([American Psychiatric Association][3])
 
-That mattered.
+The code gave the category force.
 
 A diagnosis does not have to be common to become powerful. It needs a name, a code, a professional vocabulary, a few famous cases, a specialty society, a conference circuit, hospital programs, training materials, and a method for turning ambiguous suffering into category-specific signs.
 
@@ -162,7 +166,7 @@ The complaint alleged the mechanism in plain language: assigning personalities, 
 
 Those were allegations in a disciplinary complaint. They were also a map of the scandal's method.
 
-Civil litigation made the costs visible. *Psychiatric Times* reported that an October 1997 settlement totaling $10.75 million ended the Burgus lawsuit against Braun, Rush-Presbyterian-St. Luke's Hospital, and others. The suit claimed that memories of satanic ritual abuse and other trauma recovered in psychiatric treatment were false and resulted from negligent care over six years. A settlement stops short of a verdict. It is still a record of legal exposure. ([Psychiatric Times][7])
+Civil litigation made the costs visible. *Psychiatric Times* reported that an October 1997 settlement totaling $10.75 million ended the Burgus lawsuit against Braun, Rush-Presbyterian-St. Luke's Hospital, and others. The suit claimed that memories of satanic ritual abuse and other trauma recovered in psychiatric treatment were false and resulted from negligent care over six years. A settlement stops short of a verdict. It remains a record of legal exposure. ([Psychiatric Times][7])
 
 The same account reported that Braun later agreed to a two-year Illinois medical-license suspension, a $5,000 fine, probation, and a promise not to treat patients with dissociative identity disorder during that period. It also included Braun's side: he alleged that insurers settled against his wishes and maintained the case was defensible. ([Psychiatric Times][7])
 
@@ -182,7 +186,7 @@ That change did real work. It softened the theatrical image of a body occupied b
 
 That current description is more careful than the old spectacle.
 
-It still inherits the old problem.
+It inherits the old problem.
 
 A 2021 paper on false-positive and imitated DID states that ICD-10 and DSM-5 do not give clinicians clear enough guidelines to distinguish genuine DID from imitated or false-positive cases with ease. In six false-positive or imitated cases studied, themes included identification with the diagnosis, the explanatory appeal of dissociative parts, learning about DID changing the clinical presentation, discussion of fragmented personality with others, and anger or disappointment when DID was ruled out. ([Frontiers][9])
 
@@ -190,11 +194,11 @@ The same paper warned that people can learn DID symptoms from media, videos, boo
 
 That is the afterlife of the scandal.
 
-The script is still teachable.
+The script remains teachable.
 
-The patient can still learn it.
+The patient can learn it.
 
-The clinician can still mistake fluency for proof.
+The clinician can mistake fluency for proof.
 
 ## The Best Case For The Other Side
 
@@ -204,13 +208,13 @@ Child abuse is real. Trauma can deform memory. Dissociation exists. Some patient
 
 The defenders of DID are not all fools. Their strongest argument should be stated plainly: severe trauma can produce deep dissociation, dissociative symptoms are often missed, some patients have disabling identity fragmentation, and hostile skepticism can leave real suffering untreated.
 
-The International Society for the Study of Trauma and Dissociation maintains adult treatment guidelines for DID. Its 2011 guidelines describe themselves as a synthesis of scientific knowledge and informed clinical practice, with clinical judgment still required, and state that they try to present divergent views where the field disagrees. ([ISSTD][10])
+The International Society for the Study of Trauma and Dissociation maintains adult treatment guidelines for DID. Its 2011 guidelines describe themselves as a synthesis of scientific knowledge and informed clinical practice, with clinical judgment required, and state that they try to present divergent views where the field disagrees. ([ISSTD][10])
 
 The more serious modern literature has also moved beyond the cartoon fight pitting "trauma explains everything" against "culture explains everything." Steven Jay Lynn and colleagues argued in 2022 that neither the posttraumatic model nor the sociocognitive model gives a satisfactory account of dissociation. They proposed a broader framework involving sleep disturbance, impaired self-regulation, hyperassociation, shifting mental sets, reality testing, source attribution, and metacognition. ([Maastricht University][11])
 
 That is a better frame.
 
-It still leaves the central failure intact.
+It leaves the central failure intact.
 
 The profession gave the public far more certainty than the evidence could bear. It allowed methods that could shape the symptoms they claimed to discover. It let recovered memory move from therapy rooms into families, courts, police reports, and television with an authority it had not earned. Then, when the most spectacular claims became indefensible, it narrowed the vocabulary and moved on.
 
@@ -248,7 +252,7 @@ The old television image was a woman with many voices.
 
 The real image is more ordinary and more frightening: a manual, a therapist's chair, a patient desperate for an explanation, and a professional story waiting to be spoken.
 
-The Illinois file still has the sentence.
+The Illinois file has the sentence.
 
 Each memory could house a separate personality.
 

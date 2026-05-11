@@ -6,12 +6,16 @@ date: 2026-05-11
 draft: false
 slug: "outside-the-garden"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 featured_image: "/images/essays/outside-the-garden/hero.png"
 featured_image_alt: "Editorial illustration of a closed garden gate, a narrow path, and a modern civic city beyond the wall."
-featured_image_caption: "The path outside the garden still asks for discipline, memory, and sacrifice."
+featured_image_caption: "The path outside the garden asks for discipline, memory, and sacrifice."
 collections:
   - "moral-religious-philosophical-essays"
 tags:

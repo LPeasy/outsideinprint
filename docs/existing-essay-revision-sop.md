@@ -68,7 +68,8 @@ Do not change `date` for ordinary revisions. The date remains the original publi
 8. Build locally and inspect the rendered archive block on the changed page.
 9. Verify the archive block shows the original `Date`, the new `Version`, and the new `Edition`.
 10. Run the local publish gate used for content changes, including `check_essay_guardrails.ps1 -RequireEditorialPhilosophyAudit` for changed essays, reports, and working papers. Do not run local npm or npx checks for OIP revision work.
-11. Publish only after reviewing the diff and confirming it contains the intended content, metadata, fixture, audit, and asset changes.
+11. Confirm the house-style sweep removed `that matters` phrasing and adverbial `still` constructions, except quoted/literal/title-source uses covered by the house-style rule.
+12. Publish only after reviewing the diff and confirming it contains the intended content, metadata, fixture, audit, and asset changes.
 
 ## Validation Checklist
 

@@ -16,7 +16,10 @@ function Get-TestPowerShellExecutable {
   $wrapper = Join-Path $repoRoot "tools\bin\generated\pwsh.cmd"
   $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
   if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
-    return $wrapper
+    $probeOutput = & $wrapper -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' 2>$null
+    if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace(($probeOutput -join ''))) {
+      return $wrapper
+    }
   }
 
   $currentProcess = Get-Process -Id $PID
@@ -186,6 +189,66 @@ This paragraph is fine.
 
   @'
 ---
+title: "That Matters Fixture"
+date: 2025-07-14
+draft: false
+slug: "that-matters-fixture"
+section_label: "Essay"
+subtitle: ""
+description: "A fixture with forbidden that-matters phrasing."
+featured_image: "/images/social/that-matters-fixture.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+That matters because the record does not explain itself.
+'@ | Set-Content -Path (Join-Path $essayRoot "that-matters-fixture.md") -Encoding UTF8
+
+  @'
+---
+title: "Adverbial Continuity Fixture"
+date: 2025-07-14
+draft: false
+slug: "adverbial-continuity-fixture"
+section_label: "Essay"
+subtitle: ""
+description: "A fixture with discouraged continuity phrasing."
+featured_image: "/images/social/adverbial-continuity-fixture.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+The record changed, but the old incentive still governs the room.
+'@ | Set-Content -Path (Join-Path $essayRoot "adverbial-still-fixture.md") -Encoding UTF8
+
+  @'
+---
+title: "Allowed Still Life"
+date: 2025-07-14
+draft: false
+slug: "allowed-still-life"
+section_label: "Essay"
+subtitle: ""
+description: "A fixture with literal image language."
+featured_image: "/images/social/allowed-still-life.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+The still image shows a quiet table. The witness stood still while the camera focused.
+'@ | Set-Content -Path (Join-Path $essayRoot "allowed-still-life.md") -Encoding UTF8
+
+  @'
+---
 title: "Slug Echo"
 date: 2025-07-14
 draft: false
@@ -335,6 +398,23 @@ This paragraph is fine.
   $allowedNotJustTitleExit = $LASTEXITCODE
   Assert-True ($allowedNotJustTitleExit -eq 0) "Expected non-scaffold not-just title phrasing to remain allowed."
   Assert-True (-not $allowedNotJustTitleOutput.Contains("ai_tell_title_subtitle_structure")) "Expected non-scaffold not-just title phrasing not to trigger the title/subtitle AI-tell rule."
+
+  $thatMattersOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/that-matters-fixture.md" 2>&1 | Out-String
+  $thatMattersExit = $LASTEXITCODE
+  Assert-True ($thatMattersExit -eq 1) "Expected that-matters phrasing to fail the guardrail check."
+  Assert-True ($thatMattersOutput.Contains("that_matters_framing")) "Expected that-matters output to include that_matters_framing."
+  Assert-True ($thatMattersOutput.Contains("THAT-MATTERS essays/that-matters-fixture.md")) "Expected that-matters output to include the line-level detail."
+
+  $adverbialStillOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/adverbial-still-fixture.md" 2>&1 | Out-String
+  $adverbialStillExit = $LASTEXITCODE
+  Assert-True ($adverbialStillExit -eq 1) "Expected adverbial still phrasing to fail the guardrail check."
+  Assert-True ($adverbialStillOutput.Contains("adverbial_still_construction")) "Expected adverbial still output to include adverbial_still_construction."
+  Assert-True ($adverbialStillOutput.Contains("STILL essays/adverbial-still-fixture.md")) "Expected adverbial still output to include the line-level detail."
+
+  $allowedStillOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/allowed-still-life.md" 2>&1 | Out-String
+  $allowedStillExit = $LASTEXITCODE
+  Assert-True ($allowedStillExit -eq 0) "Expected literal still image/life and stood still phrasing to remain allowed."
+  Assert-True (-not $allowedStillOutput.Contains("adverbial_still_construction")) "Expected literal still phrasing not to trigger the adverbial still rule."
 
   $warningOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" 2>&1 | Out-String
   $warningExit = $LASTEXITCODE

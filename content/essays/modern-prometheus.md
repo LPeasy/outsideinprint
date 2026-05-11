@@ -9,8 +9,12 @@ description: "A historical essay on electricity, lightning, Franklin's kite, pow
 featured_image: "/images/essays/modern-prometheus/hero.png"
 featured_image_alt: "Editorial illustration of a storm-lit city, an early lightning rod, and a controlled electric glow moving into wires and lamps."
 featured_image_caption: "The old terror did not disappear. It entered the wire."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-11"
+    note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
 collections:
   - "technology-ai-machine-future"
@@ -33,7 +37,7 @@ That division held for millennia. Fire was mastered early. Lightning was for the
 
 The change that followed turned lightning as terror into electricity as infrastructure, reshaping human life with a speed and scale rivaled only by the first control of fire itself. And like fire, electricity did more than improve existing habits. It reordered time, labor, space, and society in ways few living through it fully understood.
 
-There is a reason the phrase still carries force. Mary Shelley's 1818 novel was titled [*Frankenstein; or, The Modern Prometheus*](https://www.loc.gov/item/53051218/), and it arrived in a culture already fascinated by galvanism, life, and artificial force. Prometheus had stolen fire. Modern humans began to steal the lightning.
+The phrase carries force for a reason. Mary Shelley's 1818 novel was titled [*Frankenstein; or, The Modern Prometheus*](https://www.loc.gov/item/53051218/), and it arrived in a culture already fascinated by galvanism, life, and artificial force. Prometheus had stolen fire. Modern humans began to steal the lightning.
 
 ## Wonder Becomes Experiment
 
@@ -77,7 +81,7 @@ Faraday built crude generators and motors. He showed that electricity could do m
 
 Electricity had become work.
 
-Faraday lacked mathematical training, yet his intuition reshaped physics. He spoke of fields and lines of force, invisible structures governing matter. Others would translate his vision into equations. The [Royal Institution's Faraday generator](https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator), built in October 1831, still shows the principle in physical form: a magnet moving through a coil, a current appearing where none had been.
+Faraday lacked mathematical training, yet his intuition reshaped physics. He spoke of fields and lines of force, invisible structures governing matter. Others would translate his vision into equations. The [Royal Institution's Faraday generator](https://www.rigb.org/explore-science/explore/collection/michael-faradays-generator), built in October 1831, shows the principle in physical form: a magnet moving through a coil, a current appearing where none had been.
 
 ## The World Becomes A Circuit
 
@@ -129,7 +133,7 @@ Cities changed shape. Electric streetcars allowed workers to live farther from f
 
 Homes changed more slowly, then all at once. Electric light replaced flame. Appliances displaced hours of manual labor. Radios carried voices across continents. Refrigeration altered food storage. Children studied after dark.
 
-The numbers lagged behind the wonder. The National Park Service notes that by 1910, only 10 percent of American homes had electricity; by 1930, the figure had climbed to 70 percent, while most American farms still waited. Governments noticed. In the United States, rural electrification brought power to farms decades after cities. The [USDA traces](https://www.usda.gov/about-usda/news/blog/rea-rus-75-years-lighting-way-rural-america) that campaign to 1935, when Franklin Roosevelt created the Rural Electrification Administration to bring power to rural areas.
+The numbers lagged behind the wonder. The National Park Service notes that by 1910, only 10 percent of American homes had electricity; by 1930, the figure had climbed to 70 percent, while most American farms had to wait. Governments noticed. In the United States, rural electrification brought power to farms decades after cities. The [USDA traces](https://www.usda.gov/about-usda/news/blog/rea-rus-75-years-lighting-way-rural-america) that campaign to 1935, when Franklin Roosevelt created the Rural Electrification Administration to bring power to rural areas.
 
 When power arrived, the change felt immediate and irreversible.
 
@@ -147,6 +151,6 @@ Electricity now underwrites nearly every function of modern life. When it fails,
 
 Ancient humans gathered around fire and told stories of gods. Modern humans flip switches and rarely pause to wonder.
 
-Lightning still strikes. It still inspires awe.
+Lightning strikes. It inspires awe.
 
 The difference is that now, like fire, lightning obeys.

@@ -124,6 +124,7 @@ What this gate is meant to catch:
 
 - changed-essay residue and missing descriptions
 - missing Editorial Philosophy Audit evidence for changed non-draft essays, reports, and working papers
+- forbidden `that matters` phrasing and discouraged adverbial `still` constructions in changed public prose
 - hero/frontmatter conflicts such as placeholder heroes, missing heroes with real early lead images, and duplicate hero/body lead images
 - broken public routes
 - generated HTML regressions
