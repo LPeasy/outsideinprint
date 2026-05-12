@@ -1,4 +1,4 @@
-current: see-the-world
+current: made-in-china
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -182,5 +182,13 @@ cartoons:
     image: "/images/editorial/see-the-world.png"
     essay: "/essays/outside-the-garden/"
     alt: "Editorial cartoon showing travelers buying exit tickets from a snake vendor in a lush garden, beside a travel poster and a closed Garden of Eden gate opening onto an industrial wasteland guarded by a winged child holding a fiery sword."
+    width: 1672
+    height: 941
+  - slug: made-in-china
+    title: "Made in China"
+    date: "2026-05-12"
+    image: "/images/editorial/made-in-china.png"
+    essay: "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/"
+    alt: "Editorial cartoon showing a cobalt blue porcelain current crossing a world map on a ship table from a Jingdezhen kiln through trade routes, Meissen, Chinamania, and a china cabinet to a plate stamped Made in China."
     width: 1672
     height: 941
