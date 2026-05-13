@@ -2,7 +2,7 @@
 title: "No Homo: The True History of Not Being Gay with Your Bros"
 subtitle: "A modern slang phrase, an older male ritual, and the long record of men trying to get close without being read wrong."
 description: "A culture and social-history essay on no homo, male friendship, sports interviews, older brotherhood rituals, and the public machinery of being read wrong."
-date: 2026-05-12
+date: 2026-05-12T12:00:00-04:00
 draft: false
 slug: "no-homo-true-history-not-being-gay-with-your-bros"
 section_label: "Essay"
