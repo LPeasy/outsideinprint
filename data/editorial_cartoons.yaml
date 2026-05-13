@@ -1,4 +1,4 @@
-current: made-in-china
+current: rephrase-that
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -190,5 +190,13 @@ cartoons:
     image: "/images/editorial/made-in-china.png"
     essay: "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/"
     alt: "Editorial cartoon showing a cobalt blue porcelain current crossing a world map on a ship table from a Jingdezhen kiln through trade routes, Meissen, Chinamania, and a china cabinet to a plate stamped Made in China."
+    width: 1672
+    height: 941
+  - slug: rephrase-that
+    title: "Rephrase That"
+    date: "2026-05-13"
+    image: "/images/editorial/rephrase-that.png"
+    essay: "/essays/no-homo-true-history-not-being-gay-with-your-bros/"
+    alt: "Editorial cartoon showing Uncle Sam at a Free Speech podium while a uniformed official with a PC armband marks his speech bubble with red censor strokes beside a Ministry of Correctness door and a Rephrase stamp."
     width: 1672
     height: 941
