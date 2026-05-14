@@ -1,4 +1,4 @@
-current: rephrase-that
+current: delivering-the-goods
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -198,5 +198,13 @@ cartoons:
     image: "/images/editorial/rephrase-that.png"
     essay: "/essays/no-homo-true-history-not-being-gay-with-your-bros/"
     alt: "Editorial cartoon showing Uncle Sam at a Free Speech podium while a uniformed official with a PC armband marks his speech bubble with red censor strokes beside a Ministry of Correctness door and a Rephrase stamp."
+    width: 1672
+    height: 941
+  - slug: delivering-the-goods
+    title: "Delivering the Goods"
+    date: "2026-05-14"
+    image: "/images/editorial/delivering-the-goods.png"
+    essay: "/essays/the-mailbox-at-the-clinic-door/"
+    alt: "Editorial cartoon showing customers queued at a counter where a postal worker-pharmacist places a mifepristone prescription envelope between bins labeled Mail Order and Pickup beneath signs for Take a Number, Now Serving, and Pharmacy."
     width: 1672
     height: 941
