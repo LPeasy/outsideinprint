@@ -1144,6 +1144,7 @@ $requiredUxPages = @(
   'public/essays/canvas-fails-finals-week/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
   'public/essays/the-factory-in-the-footnote/index.html',
+  'public/essays/the-mailbox-at-the-clinic-door/index.html',
   'public/essays/the-ledger-vol-1/index.html',
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
@@ -2435,7 +2436,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*108 published pieces'
+    Pattern = '11 public collections.*109 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2883,6 +2884,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
   @{ Path = 'public/essays/the-factory-in-the-footnote/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Factory in the Footnote' },
   @{ Path = 'public/essays/the-blue-pool-at-the-memorial/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Blue Pool at the Memorial' },
+  @{ Path = 'public/essays/the-mailbox-at-the-clinic-door/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Mailbox at the Clinic Door' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
