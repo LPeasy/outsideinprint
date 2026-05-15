@@ -1144,6 +1144,7 @@ $requiredUxPages = @(
   'public/essays/canvas-fails-finals-week/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
   'public/essays/the-factory-in-the-footnote/index.html',
+  'public/essays/the-ash-pond-under-the-cloud/index.html',
   'public/essays/the-mailbox-at-the-clinic-door/index.html',
   'public/essays/the-ledger-vol-1/index.html',
   'public/essays/the-ledger-vol-2/index.html',
@@ -1867,8 +1868,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-blue-pool-at-the-memorial"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=algae-fueled-fever-dreams"?'
-    Message = 'expected the Blue Pool homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-mailbox-at-the-clinic-door"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=delivering-the-goods"?'
+    Message = 'expected the Mailbox homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -2436,7 +2437,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*109 published pieces'
+    Pattern = '11 public collections.*110 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2879,6 +2880,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-model-that-could-not-leave/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the Manus essay' },
   @{ Path = 'public/essays/smokestack-spreadsheets/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Smokestack Spreadsheets' },
   @{ Path = 'public/essays/modern-prometheus/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Modern Prometheus' },
+  @{ Path = 'public/essays/the-ash-pond-under-the-cloud/index.html'; Slug = 'technology-ai-machine-future'; Label = 'The Ash Pond Under the Cloud' },
   @{ Path = 'public/essays/canvas-fails-finals-week/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Canvas Fails Finals Week' },
   @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
   @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
