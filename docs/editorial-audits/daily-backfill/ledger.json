@@ -1644,6 +1644,101 @@
       },
       "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
       "deployed_on": "2026-05-14"
+    },
+    "jack-stratton-and-the-vulfpeck-model": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-15",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay preserves the profile frame while tying claims to the cited Believer interview, music-industry examples, and Vulfpeck's direct-audience incentives."
+      }
+    },
+    "the-max-mistake-why-hbos-name-change-backfired": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-15",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay grounds the branding argument in Warner Bros. Discovery's public rebrand announcement and removes unsupported media attribution."
+      }
+    },
+    "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-15",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay keeps the biographical argument evidence-bound by removing an unsupported late-career event claim and focusing on documented career patterns."
+      }
+    },
+    "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-15",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay ties escalation claims to official CENTCOM reporting, named diplomatic reactions, and uncertainty around crisis signaling."
+      }
+    },
+    "cuomo-vs-mamdani-nyc-2025": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-15",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-15.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-15",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay preserves the primary-day frame while adding official ranked-choice result context and correcting the Cuomo description error."
+      }
     }
   },
   "blocked": {},
@@ -1878,6 +1973,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
       "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
       "deployed_on": "2026-05-14"
+    },
+    {
+      "batch_id": "2026-05-15",
+      "selected_slugs": [
+        "jack-stratton-and-the-vulfpeck-model",
+        "the-max-mistake-why-hbos-name-change-backfired",
+        "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen",
+        "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened",
+        "cuomo-vs-mamdani-nyc-2025"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-15.md"
     }
   ]
 }
