@@ -1541,7 +1541,7 @@
       }
     },
     "nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-14",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
       "previous_version": "1.0",
@@ -1557,10 +1557,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay anchors the Nottoway fire in records, property incentives, plantation-tourism tradeoffs, public-memory consequences, uncertainty about intent, and institutional responsibility for interpretation."
-      }
+      },
+      "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
+      "deployed_on": "2026-05-14"
     },
     "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-14",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
       "previous_version": "1.0",
@@ -1576,10 +1578,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay separates evidence from inference, names ceremonial and institutional incentives, weighs diplomacy against safety tradeoffs, traces downstream credibility consequences, and preserves uncertainty around final cause."
-      }
+      },
+      "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
+      "deployed_on": "2026-05-14"
     },
     "why-we-celebrate-memorial-day-origins-traditions-and-importance": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-14",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
       "previous_version": "1.0",
@@ -1595,10 +1599,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised explainer grounds the holiday in historical records, explains civic ritual logic, names the leisure/remembrance tradeoff, and keeps consequences and institutional behavior clear without partisan framing."
-      }
+      },
+      "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
+      "deployed_on": "2026-05-14"
     },
     "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-14",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
       "previous_version": "1.0",
@@ -1614,10 +1620,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay tests restaurant value through pricing evidence, consumer incentives, service tradeoffs, spending consequences, uncertainty around exact market prices, and chain-level institutional behavior."
-      }
+      },
+      "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
+      "deployed_on": "2026-05-14"
     },
     "who-is-pascal-siakam": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-14",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
       "previous_version": "1.0",
@@ -1633,7 +1641,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised profile grounds biography and playoff claims in records, clarifies development logic and team incentives, names career tradeoffs and consequences, and preserves uncertainty around the 2025 playoff endpoint at publication time."
-      }
+      },
+      "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
+      "deployed_on": "2026-05-14"
     }
   },
   "blocked": {},
@@ -1864,8 +1874,10 @@
         "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025",
         "who-is-pascal-siakam"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
+      "commit_sha": "62dc4a8fb85c39eb3eef23bbc8f739f850a1c204",
+      "deployed_on": "2026-05-14"
     }
   ]
 }
