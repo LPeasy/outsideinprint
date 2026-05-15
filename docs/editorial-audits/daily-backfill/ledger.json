@@ -1539,6 +1539,101 @@
         "institutional_behavior": "PASS",
         "note": "Revised essay treats papal moral authority through public biography, institutional logic, reform incentives, authority tradeoffs, downstream civic consequences, uncertainty, and church institutional behavior."
       }
+    },
+    "nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-14",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-14",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay anchors the Nottoway fire in records, property incentives, plantation-tourism tradeoffs, public-memory consequences, uncertainty about intent, and institutional responsibility for interpretation."
+      }
+    },
+    "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-14",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-14",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay separates evidence from inference, names ceremonial and institutional incentives, weighs diplomacy against safety tradeoffs, traces downstream credibility consequences, and preserves uncertainty around final cause."
+      }
+    },
+    "why-we-celebrate-memorial-day-origins-traditions-and-importance": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-14",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-14",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised explainer grounds the holiday in historical records, explains civic ritual logic, names the leisure/remembrance tradeoff, and keeps consequences and institutional behavior clear without partisan framing."
+      }
+    },
+    "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-14",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-14",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay tests restaurant value through pricing evidence, consumer incentives, service tradeoffs, spending consequences, uncertainty around exact market prices, and chain-level institutional behavior."
+      }
+    },
+    "who-is-pascal-siakam": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-14",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-14",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised profile grounds biography and playoff claims in records, clarifies development logic and team incentives, names career tradeoffs and consequences, and preserves uncertainty around the 2025 playoff endpoint at publication time."
+      }
     }
   },
   "blocked": {},
@@ -1759,6 +1854,18 @@
       ],
       "status": "pending_deploy",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-11-style-next-15.md"
+    },
+    {
+      "batch_id": "2026-05-14",
+      "selected_slugs": [
+        "nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion",
+        "why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e",
+        "why-we-celebrate-memorial-day-origins-traditions-and-importance",
+        "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025",
+        "who-is-pascal-siakam"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-14.md"
     }
   ]
 }

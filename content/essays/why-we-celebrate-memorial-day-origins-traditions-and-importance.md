@@ -8,9 +8,13 @@ subtitle: "The history of Memorial Day, its key observances, and why every Ameri
 featured_image: "/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/ff5282d7bd36ea86362477bec408be437387519e4fe6b73ee9caa9170a6d6b26.jpeg"
 featured_image_caption: "Photo by Justin Casey on Unsplash"
 featured_image_alt: "Why Do We Celebrate Memorial Day? Origins, Traditions, and Importance"
-description: "Have you ever stood among the headstones and wondered what stories lie behind each flag?. Who are these people? And why do we do this every May?"
-version: "1.0"
-edition: "First web edition"
+description: "A brief history of Memorial Day, Decoration Day, national remembrance, and the rituals Americans use to honor service members who died."
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-14"
+    note: "Updated May 14, 2026, after OIP back-archive review. Normalized house style, repaired description punctuation, and checked the Decoration Day and National Moment of Remembrance history."
 pdf: "/pdfs/why-we-celebrate-memorial-day-origins-traditions-and-importance.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/why-we-celebrate-memorial-day-origins-traditions-and-importance-ba6ea0d8ed39"
@@ -19,7 +23,7 @@ medium_source_url: "https://medium.com/@lawtonperret/why-we-celebrate-memorial-d
 ***Have you ever stood among the headstones and wondered what stories
 lie behind each flag?***
 
-#### What Is Memorial Day? Understanding the Holiday’s Purpose
+#### What Is Memorial Day? Understanding the Holiday's Purpose
 
 **Picture this:**
 
@@ -31,7 +35,7 @@ lie behind each flag?***
 **Who are these people? And why do we do this every May?**
 
 That simple question sums up Memorial Day: more than a long weekend,
-***it’s our promise to remember those who died serving our country.***
+***it's our promise to remember those who died serving our country.***
 
 #### Memorial Day History: From Decoration Day to National Observance
 
@@ -39,24 +43,24 @@ That simple question sums up Memorial Day: more than a long weekend,
 
 Photo by Aaron Burden on Unsplash
 
-**Long before “Memorial Day”** was on the calendar, towns across America
+**Long before "Memorial Day"** was on the calendar, towns across America
 held **springtime events to honor soldiers who died in the Civil War**
-(1861 — 1865). Women’s groups cleaned up cemeteries and laid flowers on
+(1861-1865). Women's groups cleaned up cemeteries and laid flowers on
 graves.
 
-**In April 1866**, a **Ladies’ Memorial Association in Columbus,
+**In April 1866**, a **Ladies' Memorial Association in Columbus,
 Georgia,** organized a big tribute.
 
 > Newspapers in the South reported on it, and **other towns copied the
 > idea.**
 
-On **May 5, 1868, *John A. Logan***, leader of a Union veterans’ group
-called the ***Grand Army of the Republic***, issued General Order No.
-11.
+On **May 5, 1868, *John A. Logan***, leader of a Union veterans' group
+called the ***Grand Army of the Republic***, issued [General Order No.
+11](https://www.cem.va.gov/history/memdayorder.asp).
 
-He **named May 30 “Decoration Day”** and asked every veterans’ post to
-decorate soldiers’ graves “***with the choicest flowers of
-springtime.***”
+He **named May 30 "Decoration Day"** and asked every veterans' post to
+decorate soldiers' graves "***with the choicest flowers of
+springtime.***"
 
 > No set script ~ just flowers, flags, and respect.
 
@@ -80,9 +84,9 @@ Photo by Greg Bulla on Unsplash
 **At first, Decoration Day focused on Civil War soldiers ~** more than
 600,000 lives lost. But ***after World War I,*** Americans wanted to
 honor **everyone who died in any conflict.** Over the years, **states
-began to call it “*Memorial Day*.”**
+began to call it "*Memorial Day*."**
 
-A law **moved Memorial Day** from May 30 to the **last Monday in May**,
+The Uniform Monday Holiday Act **moved Memorial Day** from May 30 to the **last Monday in May**,
 making it a ***three-day weekend***.
 
 > That change helped people plan trips and parties without losing
@@ -96,19 +100,19 @@ Photo by Tanner Ross on Unsplash
 
 **Memorial Day often means barbecues, beach trips, and sales.**
 
-> ***But* *at 3 p.m. local time, we’re asked to stop for a minute of
+> ***But* *at 3 p.m. local time, we're asked to stop for a minute of
 > silence.***
 
-In 2000, Congress created the “***National Moment of Remembrance***” so
+In 2000, Congress created the ["***National Moment of Remembrance***"](https://www.memorialdayfoundation.org/education/national-moment-of-remembrance/) so
 everyone could pause and think of the fallen.
 
-**If you visit a national cemetery** on Memorial Day, **you’ll see neat
+**If you visit a national cemetery** on Memorial Day, **you'll see neat
 rows of flags at headstones.**
 
 You might **join a parade** led by veterans carrying flags and banners.
 Families **place wreaths**. Bands **play taps.**
 
-> It’s a day of both celebration and quiet respect.
+> It's a day of both celebration and quiet respect.
 
 #### Why Memorial Day Matters: Connecting Past Sacrifice to Today
 
@@ -116,14 +120,14 @@ Families **place wreaths**. Bands **play taps.**
 
 Photo by Brandon Day on Unsplash
 
-**It’s easy to hang a flag or pause for a minute.** But those actions
+**It's easy to hang a flag or pause for a minute.** But those actions
 mean a lot.
 
 > When we honor graves and hold a moment of silence, we:
 
 **Keep Memories Alive**
 
-We promise not to forget. When families mourn at home, that’s personal.
+We promise not to forget. When families mourn at home, that's personal.
 When a whole nation stops together, it shows respect on a bigger scale.
 
 **Connect Past and Present**
@@ -135,7 +139,7 @@ shaped the world we live in.
 **Teach Young People**
 
 When kids place flags at graves or hear taps at school, they learn
-history in a real way. They’ll ask: ***Who was that soldier? Why did
+history in a real way. They'll ask: ***Who was that soldier? Why did
 they serve?***
 
 #### Memorial Day vs. Veterans Day: Key Differences Explained
@@ -151,7 +155,7 @@ they serve?***
 
 > Memorial Day is a three-day weekend, so people use the extra time to
 > gather with family and friends. Barbecues and picnics fit the holiday
-> vibe, even though they’re not part of the official observance.
+> vibe, even though they're not part of the official observance.
 
 #### Bringing It Back Home
 
@@ -162,11 +166,11 @@ Photo by Richard Sagredo on Unsplash
 Next time you see flags or hear taps in the breeze, ***think of that
 first Decoration Day in 1868.***
 
-**Picture children scattering petals across Arlington’s hills.**
+**Picture children scattering petals across Arlington's hills.**
 
 > No script, no rules, just respect.
 
-If you’re firing up the grill or heading to the beach, ***set an alarm
+If you're firing up the grill or heading to the beach, ***set an alarm
 for 3 p.m.***
 
 > Take sixty seconds.
@@ -175,8 +179,8 @@ Let the laughter and waves fade.
 
 > That brief silence links you with generations who have paused to say:
 
-> “We will not forget.”
+> "We will not forget."
 
-That’s why we celebrate Memorial Day ~ not just for the long weekend,
-but for the promise carried by each flag and flower on a soldier’s
+That's why we celebrate Memorial Day ~ not just for the long weekend,
+but for the promise carried by each flag and flower on a soldier's
 grave.
