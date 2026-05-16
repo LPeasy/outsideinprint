@@ -1751,7 +1751,7 @@
       "deployed_on": "2026-05-15"
     },
     "mcdonalds-faces-week-long-boycott-june-24-2025": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-16",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
       "previous_version": "1.0",
@@ -1767,10 +1767,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay ties the boycott to named sources, corporate pricing and DEI incentives, labor and consumer tradeoffs, sales consequences, uncertainty around boycott effects, and franchise/corporate risk allocation."
-      }
+      },
+      "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
+      "deployed_on": "2026-05-16"
     },
     "june-27-2025-scotus-set-to-close-its-term-with-major-decisions": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-16",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
       "previous_version": "1.0",
@@ -1786,10 +1788,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised preview preserves the June 27, 2025 publication-time frame while identifying legal institutions, litigant incentives, public tradeoffs, likely consequences, and uncertainty before decisions were released."
-      }
+      },
+      "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
+      "deployed_on": "2026-05-16"
     },
     "35-years-of-yellow-the-simpsons-time-loop": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-16",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
       "previous_version": "1.0",
@@ -1805,10 +1809,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay corrects the episode record and treats the show through cultural evidence, satire logic, entertainment incentives, franchise tradeoffs, audience consequences, uncertainty around prediction claims, and institutional media behavior."
-      }
+      },
+      "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
+      "deployed_on": "2026-05-16"
     },
     "2025-supreme-court-wrap-up": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-16",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
       "previous_version": "1.0",
@@ -1824,10 +1830,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay anchors each case in Supreme Court records, separates holdings from procedural orders, names institutional incentives and tradeoffs, traces downstream legal consequences, and preserves uncertainty where litigation continued."
-      }
+      },
+      "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
+      "deployed_on": "2026-05-16"
     },
     "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-16",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
       "previous_version": "1.0",
@@ -1843,7 +1851,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised profile grounds Franklin claims in public-domain records, narrows unsupported details, and frames public usefulness through evidence, incentives, tradeoffs, consequences, uncertainty, and civic institutions."
-      }
+      },
+      "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
+      "deployed_on": "2026-05-16"
     }
   },
   "blocked": {},
@@ -2102,8 +2112,10 @@
         "2025-supreme-court-wrap-up",
         "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
+      "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
+      "deployed_on": "2026-05-16"
     }
   ]
 }
