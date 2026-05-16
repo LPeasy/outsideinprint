@@ -1749,6 +1749,101 @@
       },
       "commit_sha": "291f2371c3eb8366ecc1b40ebfca36c353c954aa",
       "deployed_on": "2026-05-15"
+    },
+    "mcdonalds-faces-week-long-boycott-june-24-2025": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-16",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-16",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay ties the boycott to named sources, corporate pricing and DEI incentives, labor and consumer tradeoffs, sales consequences, uncertainty around boycott effects, and franchise/corporate risk allocation."
+      }
+    },
+    "june-27-2025-scotus-set-to-close-its-term-with-major-decisions": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-16",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-16",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised preview preserves the June 27, 2025 publication-time frame while identifying legal institutions, litigant incentives, public tradeoffs, likely consequences, and uncertainty before decisions were released."
+      }
+    },
+    "35-years-of-yellow-the-simpsons-time-loop": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-16",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-16",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay corrects the episode record and treats the show through cultural evidence, satire logic, entertainment incentives, franchise tradeoffs, audience consequences, uncertainty around prediction claims, and institutional media behavior."
+      }
+    },
+    "2025-supreme-court-wrap-up": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-16",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-16",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay anchors each case in Supreme Court records, separates holdings from procedural orders, names institutional incentives and tradeoffs, traces downstream legal consequences, and preserves uncertainty where litigation continued."
+      }
+    },
+    "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-16",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-16",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised profile grounds Franklin claims in public-domain records, narrows unsupported details, and frames public usefulness through evidence, incentives, tradeoffs, consequences, uncertainty, and civic institutions."
+      }
     }
   },
   "blocked": {},
@@ -1997,6 +2092,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-15.md",
       "commit_sha": "291f2371c3eb8366ecc1b40ebfca36c353c954aa",
       "deployed_on": "2026-05-15"
+    },
+    {
+      "batch_id": "2026-05-16",
+      "selected_slugs": [
+        "mcdonalds-faces-week-long-boycott-june-24-2025",
+        "june-27-2025-scotus-set-to-close-its-term-with-major-decisions",
+        "35-years-of-yellow-the-simpsons-time-loop",
+        "2025-supreme-court-wrap-up",
+        "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md"
     }
   ]
 }
