@@ -83,6 +83,7 @@ foreach ($requiredPath in @(
   'authors/robert-v-ussley/index.html',
   'almanack/2026-05-02/index.html',
   'almanack/2026-05-09/index.html',
+  'almanack/2026-05-16/index.html',
   'collections/bobs-almanack/index.html',
   'gallery/index.html',
   'random/index.html',

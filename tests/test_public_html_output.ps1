@@ -1121,6 +1121,7 @@ $requiredUxPages = @(
   'public/collections/bobs-almanack/index.html',
   'public/almanack/2026-05-02/index.html',
   'public/almanack/2026-05-09/index.html',
+  'public/almanack/2026-05-16/index.html',
   'public/shop/index.html',
   'public/shop/shirt/index.html',
   'public/random/index.html',
@@ -2437,7 +2438,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*111 published pieces'
+    Pattern = '11 public collections.*112 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2519,8 +2520,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?May 9, 2026.*?A machine is innocent only until the bill arrives\..*?Modern Prometheus'
-    Message = 'expected the Bob''s Almanack collection page to feature the May 9 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?May 16, 2026.*?An institution shows its faith by what it audits\..*?The Ash Pond Under the Cloud'
+    Message = 'expected the Bob''s Almanack collection page to feature the May 16 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -2549,8 +2550,29 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 16, 2026.*?Issue 3.*?An institution shows its faith by what it audits\.'
+    Message = 'expected the May 16 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the May 16 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '(?s)/images/editorial/not-my-river-not-my-problem\.png.*?/images/editorial/delivering-the-goods\.png.*?/images/editorial/made-in-china\.png.*?/images/editorial/see-the-world\.png'
+    Message = 'expected the May 16 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '/images/essays/(the-ash-pond-under-the-cloud|the-mailbox-at-the-clinic-door|fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet|outside-the-garden)/hero\.png'
+    Message = 'expected the May 16 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 9, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Resolution.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 16, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Justice.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
