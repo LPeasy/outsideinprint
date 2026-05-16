@@ -2437,7 +2437,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*110 published pieces'
+    Pattern = '11 public collections.*111 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
