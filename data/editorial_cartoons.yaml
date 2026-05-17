@@ -1,4 +1,4 @@
-current: not-my-river-not-my-problem
+current: diverse-consensus
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -214,5 +214,13 @@ cartoons:
     image: "/images/editorial/not-my-river-not-my-problem.png"
     essay: "/essays/the-ash-pond-under-the-cloud/"
     alt: "Editorial cartoon showing officials cutting a yellow ribbon at a data center while the ribbon continues as a drainpipe discharging dark water into a river beside a man holding a Clean Water Act folder."
+    width: 1672
+    height: 941
+  - slug: diverse-consensus
+    title: "Diverse Consensus"
+    date: "2026-05-17"
+    image: "/images/editorial/diverse-consensus.png"
+    essay: "/essays/from-variety-to-virtue/"
+    alt: "Editorial cartoon showing Uncle Sam kneeling before a blindfolded tribunal labeled The System, with a consensus device on the bench, a case file reading Case No. 1776: Failure to Diversify, and a chaotic city visible through the window."
     width: 1672
     height: 941
