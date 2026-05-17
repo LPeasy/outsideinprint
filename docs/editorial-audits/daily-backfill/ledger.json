@@ -1854,6 +1854,101 @@
       },
       "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
       "deployed_on": "2026-05-16"
+    },
+    "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-17",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-17.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-17",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised profile ties Prevost biography and election claims to Vatican and wire-service records, removes unsupported import residue, preserves uncertainty, and frames Church power through institutions and consequences."
+      }
+    },
+    "the-ledger-vol-1": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-17",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-17.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-17",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised roundup functions as a transparent archive guide, fixes internal routing, preserves authorial frame, and avoids unsupported claims while pointing readers to source-bearing essays."
+      }
+    },
+    "8-big-questions-everyone-has-about-pope-leo-xiv": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-17",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-17.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-17",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised explainer grounds claims in Vatican, Reuters, AP, and attributed source records, narrows ideological shorthand, and preserves tradeoffs, uncertainty, and institutional context."
+      }
+    },
+    "what-happened-at-camp-mystic": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-17",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-17.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-17",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised primer ties flood, warning, casualty, and regulatory-risk language to AP/NWS/USGS-linked records, removes overstatement, and clarifies institutional responsibility without assigning unsupported blame."
+      }
+    },
+    "the-waters-rising-what-the-data-really-says-about-extreme-weather": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-17",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-17.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-17",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised climate-risk essay ties trend claims to EPA, NOAA, Texas 2036, USGS, AP, and Reuters-linked records, separates hazard from exposure, and names planning tradeoffs and uncertainty."
+      }
     }
   },
   "blocked": {},
@@ -2116,6 +2211,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-16.md",
       "commit_sha": "615471e928d1c9171ff262acf028b2f10fe49888",
       "deployed_on": "2026-05-16"
+    },
+    {
+      "batch_id": "2026-05-17",
+      "selected_slugs": [
+        "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter",
+        "the-ledger-vol-1",
+        "8-big-questions-everyone-has-about-pope-leo-xiv",
+        "what-happened-at-camp-mystic",
+        "the-waters-rising-what-the-data-really-says-about-extreme-weather"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-17.md"
     }
   ]
 }
