@@ -1,4 +1,4 @@
-current: diverse-consensus
+current: the-altar-of-consent
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -222,5 +222,13 @@ cartoons:
     image: "/images/editorial/diverse-consensus.png"
     essay: "/essays/from-variety-to-virtue/"
     alt: "Editorial cartoon showing Uncle Sam kneeling before a blindfolded tribunal labeled The System, with a consensus device on the bench, a case file reading Case No. 1776: Failure to Diversify, and a chaotic city visible through the window."
+    width: 1672
+    height: 941
+  - slug: the-altar-of-consent
+    title: "The Altar of Consent"
+    date: "2026-05-18"
+    image: "/images/editorial/the-altar-of-consent.png"
+    essay: "/essays/consent-from-permission-to-sanctity/"
+    alt: "Editorial cartoon showing people kneeling before a marble altar holding a consent form stamped CONSENTED, with a plaque reading PERMISSION = PURITY and shadowed figures labeled Duty, Wisdom, Obligation, and Formation."
     width: 1672
     height: 941
