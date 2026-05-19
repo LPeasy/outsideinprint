@@ -1,4 +1,4 @@
-current: the-altar-of-consent
+current: papers-please
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -230,5 +230,13 @@ cartoons:
     image: "/images/editorial/the-altar-of-consent.png"
     essay: "/essays/consent-from-permission-to-sanctity/"
     alt: "Editorial cartoon showing people kneeling before a marble altar holding a consent form stamped CONSENTED, with a plaque reading PERMISSION = PURITY and shadowed figures labeled Duty, Wisdom, Obligation, and Formation."
+    width: 1672
+    height: 941
+  - slug: papers-please
+    title: "Papers, please."
+    date: "2026-05-19"
+    image: "/images/editorial/papers-please.png"
+    essay: "/essays/id-required/"
+    alt: "Editorial cartoon showing a supermarket cashier asking a customer to show papers while scanning a roll of duct tape with a red checkout light."
     width: 1672
     height: 941
