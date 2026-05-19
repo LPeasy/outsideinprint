@@ -8,8 +8,12 @@ subtitle: "A coastal city’s disaster forces them to rethink their EM protocols
 description: "This essay lays out the roles, responsibilities, and day-to-day realities of risk managers and risk analysts"
 featured_image: "/images/medium/risk-management-vs-risk-analysis-whats-the-difference/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc.png"
 featured_image_alt: "Risk Management vs Risk Analysis: What’s the Difference?"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-19"
+    note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium body images, replaced chart-only sections with text summaries, normalized import punctuation, checked source framing, and verified rendering."
 pdf: "/pdfs/risk-management-vs-risk-analysis-whats-the-difference.pdf"
 featured: false
 
@@ -41,7 +45,7 @@ than expected.*
 
 ***We were too slow.***
 
-*Our hurricane plan is twenty years old. It tells us to “consider”
+*Our hurricane plan is twenty years old. It tells us to "consider"
 evacuation.*
 
 ***That word slowed us down!***
@@ -50,11 +54,11 @@ evacuation.*
 messages. Too many maybes. No mention of climate change or adaptive
 management.*
 
-***I didn’t know if I could make the call, or even who to call.***
+***I didn't know if I could make the call, or even who to call.***
 
-**So I write down what’s got to change:**
+**So I write down what's got to change:**
 
-- Update the flood picture to today’s sea level.
+- Update the flood picture to today's sea level.
 - Re-time how long it takes the city to clear out ~
   weekends, bridges, schools, rentals and all.
 - Split the island into zones with plain go/no-go
@@ -72,11 +76,11 @@ all turned south, and finally what it will take to fix it.
 
 They decided I was right. And then they fired me.
 
-Before I handed in my badge, I left two things on the desk: last night’s
+Before I handed in my badge, I left two things on the desk: last night's
 timeline ~ *every call, every minute* ~ and a sticky note on a copy of
 the old emergency plan that read:
 
-> **“No more consider. Call it by the trigger.”**
+> **"No more consider. Call it by the trigger."**
 
 ### What happens next?
 
@@ -98,23 +102,25 @@ the analysis** and drafts the plan.
 > ***City manager → hires the consultant.***
 
 > The manager writes the scope, runs procurement, and directs the
-> analyst’s day-to-day work.
+> analyst's day-to-day work.
 
 ### Clear split of duties
 
-![](https://cdn-images-1.medium.com/max/800/1*3hETRUzbxy--CgUo3kEWUg.png)
-
-*The three players involved and their roles and responsibilities*
+The council owns policy, risk tolerance, funding, and public
+accountability. The city manager turns those choices into work plans,
+contracts, staff assignments, and public messages. The consultant builds
+the risk analysis, explains what the evidence can support, and shows
+where uncertainty remains.
 
 ### How the work actually runs ~ Analysis + Management, start to finish
 
 > *The new city manager opens with a short kickoff meeting. The council
 > sets the goal and guardrails ~ what risks the city will live with,
-> what it won’t, and when decisions must be made. The manager turns that
+> what it won't, and when decisions must be made. The manager turns that
 > into a scope and contract, then hands the consultant the data and
 > people they need.*
 
-The consultants update the flood picture to today’s sea level and local
+The consultants update the flood picture to today's sea level and local
 geography. They also rebuild the evacuation timeline ~ weekends,
 rentals, bridges, schools, nursing homes.
 
@@ -142,13 +148,13 @@ The storm story is local. The split between roles ~ people performing
 risk analysis and people ultimately making the decisions ~ is near
 universal.
 
-Whether you’re talking about floods, wildfires, cyberattacks, or public
+Whether you're talking about floods, wildfires, cyberattacks, or public
 health, the same two jobs show up:
 
 #### **Risk analysis**
 
 ***Risk analysis is a systematic way to build knowledge about a
-hazard.\***
+hazard.***
 It identifies what could happen, how likely, how bad, and how sure we
 are about any of it. It blends data, models, and expert judgment and
 explains the uncertainty instead of hiding it.
@@ -156,9 +162,9 @@ explains the uncertainty instead of hiding it.
 #### **Risk management**
 
 ***Risk management is the set of choices and actions used to handle that
-hazard.*** It sets the line the organization won’t cross, picks options
+hazard.*** It sets the line the organization won't cross, picks options
 to reduce or live with the risk, funds the work, and owns the outcome.
-Assessments inform the choice; they don’t make it. That’s the job of
+Assessments inform the choice; they don't make it. That's the job of
 risk management.
 
 > **Analysis = *what could happen and how sure we are.***
@@ -170,38 +176,41 @@ risk management.
 
 ### Responsibilities of Risk Managers and Risk Analysts
 
-![](https://cdn-images-1.medium.com/max/800/1*lqTMPkfMiw_gtrkl35CqtQ.png)
-
-*Risk Analysts and Risk Managers and their responsibilities.*
+Risk analysts define the hazard, assemble data, model plausible
+pathways, estimate consequences, and explain uncertainty. Risk managers
+set priorities, choose among options, fund action, assign authority, and
+own the result when the decision reaches the public.
 
 ### Motivations and Incentives
 
-![](https://cdn-images-1.medium.com/max/800/1*d83P2wQ0BQYYjkTQvJXwbg.png)
-
-*Motivations for each in typical relationships between managers and analysts*
+Analysts are rewarded for careful methods, transparent assumptions, and
+defensible ranges. Managers are rewarded for timely choices, workable
+plans, political durability, and outcomes people can understand before
+the next storm arrives.
 
 ### Common Failures
 
-![](https://cdn-images-1.medium.com/max/800/1*QO4eg1eS7O2WNqAnScnI9g.png)
-
-*Common failures seen when dealing with risk.*
+The system breaks when analysis hides uncertainty, management treats a
+model as the decision, or incentives punish early warning because it is
+inconvenient. The better split is simple: analysis clarifies the
+tradeoffs, and management accepts responsibility for the choice.
 
 ### Conclusion
 
 **This story started with a bad call, three lives lost, and a help
 wanted ad.**
 
-The way to address risk isn’t some magic model that can predict the
-future: **It’s risk analysis and risk management.**
+The way to address risk isn't some magic model that can predict the
+future: **It's risk analysis and risk management.**
 
 > *The council sets the priorities and funds the effort. The city
 > manager builds the team, brings the plan forward, and owns the clock.
 > The analyst sharpens the picture so the people with authority can
 > decide what to do.*
 
-> Risk analysis and risk management aren’t twins ~
+> Risk analysis and risk management aren't twins ~
 
-> they’re partners.
+> they're partners.
 
 **Analysis explains what could happen, how bad, how often, and how sure
 we are ~ and it shows the reasons behind those answers.**

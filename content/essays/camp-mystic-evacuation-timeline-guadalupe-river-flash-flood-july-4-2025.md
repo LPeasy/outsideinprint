@@ -9,8 +9,12 @@ featured_image: "/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-
 featured_image_caption: "Map of the Guadalupe River | Camp Mystic is on the South Fork | Source"
 featured_image_alt: "Map of the Guadalupe River"
 description: "When reporters began reconstructing the events at Camp Mystic on the night of July 4, 2025, the story turned on a timeline"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-19"
+    note: "Updated May 19, 2026, after OIP back-archive review. Repaired internal OIP links, removed Medium import residue, normalized punctuation, and checked contested timeline framing against source roles and rendering."
 pdf: "/pdfs/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.pdf"
 featured: false
 
@@ -29,10 +33,10 @@ night of July 4, 2025, **the story turned on a timeline.**
 
 Speaking to ***ABC News***, Carr revised that account, suggesting
 evacuations began closer to 2:00 a.m. Just forty-five minutes after the
-National Weather Service issued a “life-threatening flash flooding”
+National Weather Service issued a "life-threatening flash flooding"
 alert to phones.
 
-**Both of Carr’s timelines** ~ 2:30 and revised 2:00 a.m. ~ **were
+**Both of Carr's timelines** ~ 2:30 and revised 2:00 a.m. ~ **were
 published on July 14, 2025**, in ***The Washington Post*** and ***ABC
 News***, respectively.
 
@@ -88,7 +92,7 @@ limestone ~ summertime incarnate.
 
 > This terrain makes Mystic beautiful ~ and vulnerable.
 
-When the river overtops its banks, **water** doesn’t just rise
+When the river overtops its banks, **water** doesn't just rise
 vertically ~ it **spreads sideways across the Flats**, cutting off
 escape routes uphill and sweeping debris laterally.
 
@@ -99,7 +103,7 @@ escape routes uphill and sweeping debris laterally.
 > A 1% annual chance of flooding stacks up to ~ 26% over 30 years, one
 > out of four.
 
-#### Here’s an elevation map from the USGS ~
+#### Here's an elevation map from the USGS ~
 
 ![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/29f075db14c4d16cec462f4cab74e622c682a7816ae358efe17693228c82593a.svg)
 
@@ -109,7 +113,7 @@ escape routes uphill and sweeping debris laterally.
 
 *Line in topo map above shows the elevation of the camp. Line is traced from right to left, so the left side of this graph corresponds to the right-most point on the map. | [Source](https://apps.nationalmap.gov/viewer/)*
 
-In the Hill Country’s steep watersheds, **a few inches of rainfall**
+In the Hill Country's steep watersheds, **a few inches of rainfall**
 upstream can **raise the river ten feet or more** in under an hour.
 
 [Watch flood footage from the Llano River during the July 4, 2025 floods.](https://www.youtube.com/watch?v=6sgziplPpWg)
@@ -131,17 +135,17 @@ This is Llano River in the same region during the floods on July 4th,
 **Population size, mobilization lag, movement speed, distance to safety,
 and chokepoints along the way.**
 
-For a camp like Mystic ~ **roughly** **400–500 campers plus staff** ~
+For a camp like Mystic ~ **roughly** **400-500 campers plus staff** ~
 the parameters fall into a sobering range.
 
 **Mobilization:** waking people, calming them, organizing groups,
-assigning leaders: **20–40 minutes**.
+assigning leaders: **20-40 minutes**.
 
-**Walking speed at night with children** **on wet ground**: **1–2 feet
-per second** (0.7–1.3 mph). In rain and darkness, planners use **1
+**Walking speed at night with children** **on wet ground**: **1-2 feet
+per second** (0.7-1.3 mph). In rain and darkness, planners use **1
 ft/sec** as the realistic value.
 
-**Distance from the lowest cabins to higher ground: 300–700 feet**
+**Distance from the lowest cabins to higher ground: 300-700 feet**
 uphill, depending on location.
 
 **Operational reality:** counselors must move groups in waves, stop for
@@ -149,13 +153,13 @@ slips or crying, and often double back to guide stragglers.
 
 #### A quick check tells the story:
 
-- At 1 ft/sec, covering 500 feet to safety takes **8–10
+- At 1 ft/sec, covering 500 feet to safety takes **8-10
   minutes once a group is moving.**
-- You can’t move 100 people in one wave. Groups of 10–20
-  campers with 2 staff imply **multiple waves**, spread over **30–50
+- You can't move 100 people in one wave. Groups of 10-20
+  campers with 2 staff imply **multiple waves**, spread over **30-50
   minutes**.
 - Add mobilization lag, and the total clearance time
-  stretches to **30–70 minutes.**
+  stretches to **30-70 minutes.**
 
 ### Flats Cabins at Camp Mystic ~ Lowest Elevation, Highest Flood Risk
 
@@ -163,10 +167,10 @@ slips or crying, and often double back to guide stragglers.
 
 The red box on the right shows the location of the cabins in the flats.
 
-Each cabin would have held 10–15 campers (a few hundred total in the
+Each cabin would have held 10-15 campers (a few hundred total in the
 flats). If counselors focused solely on those cabins, **mobilization**
-(**20–40 minutes**) plus **movement uphill** (**8–10 minutes per
-group**) estimates suggest it could take around **30–70 minutes** just
+(**20-40 minutes**) plus **movement uphill** (**8-10 minutes per
+group**) estimates suggest it could take around **30-70 minutes** just
 to clear the flats.
 
 By then, the river gauge would already have been climbing through **15
@@ -188,16 +192,16 @@ If panic, weather, or debris slow things, the estimate drifts toward
 
 > A nighttime evacuation is not a switch to flip ~
 
-> It’s a fragile sequence of events.
+> It's a fragile sequence of events.
 
 Against a vertical flood curve, delays are the difference between
 guiding children uphill and carrying them through a rising current.
 
-**Wait to “assess the flooding”?**
+**Wait to "assess the flooding"?**
 
 **You miss the safe evacuation window.**
 
-### USGS Hunt Gauge ~ Guadalupe River Rise 1:00–4:30 a.m. on July 4, 2025
+### USGS Hunt Gauge ~ Guadalupe River Rise 1:00-4:30 a.m. on July 4, 2025
 
 ![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/4eff3692d9d9402c608213a1bf80ae9ef8dc624a27c7c58f98ca3378cbb4036b.svg)
 
@@ -216,7 +220,7 @@ a.m. ~**
 
 ![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/9c90826cc94f24b2de15463be6611d55504b2239600bbb30184f865ab0a1f775.svg)
 
-*Zooming in: key thresholds for flooding and the critical 1:00–4:30 a.m. window.*
+*Zooming in: key thresholds for flooding and the critical 1:00-4:30 a.m. window.*
 
 > ***At 1:00 a.m., the Guadalupe stood at 7.7 feet.***
 
@@ -241,15 +245,15 @@ family spokesperson *Jeff Carr*. ***Carr* said the camp received the
 first alert at 1:14 a.m. and began evacuating campers about 45 minutes
 later.**
 
-He added that such warnings were “***run-of-the-mill***,” the kind they
-had seen “***dozens of times before***.”
+He added that such warnings were "***run-of-the-mill***," the kind they
+had seen "***dozens of times before***."
 
 > He also said staff spent time assessing the rising waters before
 > acting.
 
 On paper, that narrative sounds plausible.
 
-### Compared against the Hunt gauge, the official timeline seems dubious
+### Compared Against the Hunt Gauge, the Spokesperson Timeline Needs Testing
 
 ![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/a907b8425be3d76541ecf7f23e49457e1a727b0c494cc0f083afc7956d9c7328.svg)
 
@@ -257,7 +261,7 @@ On paper, that narrative sounds plausible.
 
 ![](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/b277a130e56b5187b062df032be76ea5181149b56d43e114bc7ad6d4156ad1d5.svg)
 
-*Claims in ABC’s coverage of the tragedy.*
+*Claims in ABC's coverage of the tragedy.*
 
 ### Flash-Flood Readiness for Camps and Schools ~ Practical Takeaways
 
@@ -265,7 +269,7 @@ On paper, that narrative sounds plausible.
 
 *Typical flash flood sign. | [Source](https://sl.bing.net/i7TNN1iyW1k)*
 
-**Camp Mystic’s loss underscores a difficult truth:**
+**Camp Mystic's loss underscores a difficult truth:**
 
 > The evacuation window is often **shorter than the time it takes to
 > mobilize.**
@@ -296,45 +300,42 @@ On paper, that narrative sounds plausible.
 - If it takes 30 ~ 70 minutes to move a sleeping
   population, **what systems or drills can bridge that gap?**
 
-#### **3. Should ABC have questioned the camp spokesman’s statements?**
+#### **3. Should ABC have questioned the camp spokesman's statements?**
 
-- And if so, why didn’t they?
+- And if so, why didn't they?
 
 In the aftermath of tragedy, **repeating untested narratives risks
 reshaping public memory** at the expense of truth.
 
-**Mystic’s tragedy is not about a single night in Texas ~**
+**Mystic's tragedy is not about a single night in Texas ~**
 
-> It’s about the narrow margin of safety when waters rise faster than
+> It's about the narrow margin of safety when waters rise faster than
 > people can move.
 
 ### More in the Camp Mystic Series ~ Flood Timeline, Risk, Accountability
 
 This story is part of my ongoing *Camp Mystic Series* at **The Balance
-Sheet**, where I’m unpacking what happened along the Guadalupe River on
-July 4, 2025 — and what it means for flood risk, safety, and
+Sheet**, where I'm unpacking what happened along the Guadalupe River on
+July 4, 2025, and what it means for flood risk, safety, and
 accountability.
 
 - **What Happened at Camp Mystic?** ~ A narrative
-  reconstruction of the disaster’s timeline and key decisions. Read here
-  ”
+  reconstruction of the disaster's timeline and key decisions.
 
-- [What Happened at Camp Mystic?](https://medium.com/the-balanced-sheet/what-happened-at-camp-mystic-8f61de2d0f27)
+- [What Happened at Camp Mystic?](/essays/what-happened-at-camp-mystic/)
 
-- **The Water’s Rising** ~ A data-driven look at
+- **The Water's Rising** ~ A data-driven look at
   rainfall intensification and extreme weather in Texas Hill Country.
-  Read here ”
 
-- [The Water’s Rising: What the Data Really Says About Extreme Weather](https://medium.com/the-balanced-sheet/the-waters-rising-what-the-data-really-says-about-extreme-weather-45d39ba97ff8)
+- [The Water's Rising: What the Data Really Says About Extreme Weather](/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/)
 
 - **Flash Flood Alley** ~ Why the Hill Country is one of
   the most dangerous flash flood zones in America.
 
-- [Flash Flood Alley: Why Flash Floods Kill](https://medium.com/the-balanced-sheet/flash-flood-alley-why-flash-floods-kill-a02b7de5d60a)
+- [Flash Flood Alley: Why Flash Floods Kill](/essays/flash-flood-alley-why-flash-floods-kill/)
 
-- **Who’s Responsible for Building in the Floodplain?**
+- **Who's Responsible for Building in the Floodplain?**
   ~ How cabins get built and approved at the local level, and what the
-  feds can do to disincentivize development in risky spots. Read here
-  ”
+  feds can do to disincentivize development in risky spots.
 
-- [Who’s Responsible for Building in the Floodplain?](https://medium.com/the-balanced-sheet/whos-responsible-for-building-in-the-floodplain-b468f42f536d)
+- [Who's Responsible for Building in the Floodplain?](/essays/whos-responsible-for-building-in-the-floodplain/)
