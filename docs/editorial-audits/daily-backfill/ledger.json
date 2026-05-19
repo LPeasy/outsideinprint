@@ -2066,7 +2066,7 @@
       "deployed_on": "2026-05-18"
     },
     "what-is-risk-a-four-part-framework": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-19",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-19.md",
       "previous_version": "1.0",
@@ -2082,10 +2082,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised explainer tests risk through hazard, pathway, consequence, and uncertainty while preserving incentives, tradeoffs, downstream effects, and limits of knowledge."
-      }
+      },
+      "commit_sha": "cd1b398b4ae1244554721088c3a28ef2479cfff9",
+      "deployed_on": "2026-05-19"
     },
     "risk-management-vs-risk-analysis-whats-the-difference": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-19",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-19.md",
       "previous_version": "1.0",
@@ -2101,10 +2103,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised explainer separates analysis from management, names authority and incentives, preserves decision tradeoffs, and keeps uncertainty visible."
-      }
+      },
+      "commit_sha": "cd1b398b4ae1244554721088c3a28ef2479cfff9",
+      "deployed_on": "2026-05-19"
     },
     "camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-19",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-19.md",
       "previous_version": "1.0",
@@ -2120,10 +2124,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised timeline piece treats spokesperson and media accounts as claims, tests them against hydrograph evidence, and keeps institutional preparedness and uncertainty central."
-      }
+      },
+      "commit_sha": "cd1b398b4ae1244554721088c3a28ef2479cfff9",
+      "deployed_on": "2026-05-19"
     },
     "what-i-learned-from-writing-100-essays-on-medium-in-2025": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-19",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-19.md",
       "previous_version": "1.0",
@@ -2139,10 +2145,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised retrospective preserves first-person evidence, platform incentives, tradeoffs, consequences, uncertainty, and archive context without imported Medium framing."
-      }
+      },
+      "commit_sha": "cd1b398b4ae1244554721088c3a28ef2479cfff9",
+      "deployed_on": "2026-05-19"
     },
     "the-ledger-vol-3": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-19",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-19.md",
       "previous_version": "1.0",
@@ -2158,7 +2166,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised roundup keeps its archive-guide role, links to OIP records, and avoids unsupported claims while preserving incentives, tradeoffs, and institutional context in the linked essays."
-      }
+      },
+      "commit_sha": "cd1b398b4ae1244554721088c3a28ef2479cfff9",
+      "deployed_on": "2026-05-19"
     }
   },
   "blocked": {},
@@ -2459,8 +2469,10 @@
         "what-i-learned-from-writing-100-essays-on-medium-in-2025",
         "the-ledger-vol-3"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-19.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-19.md",
+      "commit_sha": "cd1b398b4ae1244554721088c3a28ef2479cfff9",
+      "deployed_on": "2026-05-19"
     }
   ]
 }
