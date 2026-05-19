@@ -490,6 +490,7 @@ $requiredEssayHeroPages = @(
   'public/essays/the-bet-slip-in-the-briefing-room/index.html',
   'public/essays/can-you-pass-the-pepper-please/index.html',
   'public/essays/the-factory-in-the-footnote/index.html',
+  'public/essays/id-required/index.html',
   'public/essays/the-strait-that-holds-the-price/index.html',
   'public/essays/the-blockade-has-a-phone-number/index.html',
   'public/essays/the-warning-label-in-the-weeds/index.html',
@@ -564,12 +565,20 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'The room clears. The report remains.'
-  },  @{
+  },
+  @{
     PublicPath = 'public/essays/the-factory-in-the-footnote/index.html'
     SourcePath = 'content/essays/the-factory-in-the-footnote.md'
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'A factory can disappear into a footnote before anyone votes to close it.'
+  },
+  @{
+    PublicPath = 'public/essays/id-required/index.html'
+    SourcePath = 'content/essays/id-required.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The voter roll is a public trust before it is a database.'
   },
   @{
     PublicPath = 'public/essays/the-strait-that-holds-the-price/index.html'
@@ -1869,8 +1878,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-mailbox-at-the-clinic-door"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=delivering-the-goods"?'
-    Message = 'expected the Mailbox homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?from-variety-to-virtue"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=diverse-consensus"?'
+    Message = 'expected the From Variety homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -2438,7 +2447,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*112 published pieces'
+    Pattern = '11 public collections.*113 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -2909,6 +2918,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-factory-in-the-footnote/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Factory in the Footnote' },
   @{ Path = 'public/essays/the-blue-pool-at-the-memorial/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Blue Pool at the Memorial' },
   @{ Path = 'public/essays/the-mailbox-at-the-clinic-door/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Mailbox at the Clinic Door' },
+  @{ Path = 'public/essays/id-required/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'ID Required' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
