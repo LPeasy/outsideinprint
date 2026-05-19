@@ -8,20 +8,24 @@ subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
 featured_image: "/images/medium/public-vs-private-pay-who-really-earns-more/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce.png"
 featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
 description: "The custodian at your local public school probably makes more per hour, with benefits than the guy who just cleaned your hotel room"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-18"
+    note: "Updated May 18, 2026, after OIP back-archive review. Removed remote Medium chart media, normalized house style, checked BLS compensation framing, and preserved the original argument."
 pdf: "/pdfs/public-vs-private-pay-who-really-earns-more.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/public-vs-private-pay-who-really-earns-more-aafec1def048"
 ---
 
-> The government can’t outbid Silicon Valley for engineers, but it will
+> The government can't outbid Silicon Valley for engineers, but it will
 > pay a school custodian a whole lot more than a hotel would pay a maid.
 
 The custodian at your local public school probably makes more ~ **per
 hour, with benefits** ~ than the guy who just cleaned your hotel room.
 
-**It’s not because one job is easier or harder. It’s because one of them
+**It's not because one job is easier or harder. It's because one of them
 has a union, a pension, great health insurance, and a predictable
 schedule.**
 
@@ -33,52 +37,50 @@ The other has \$2 and some change in their pocket.
 
 > *Wages.*
 
-**We talk about getting paid like it’s just money in the bank ~**\
+**We talk about getting paid like it's just money in the bank ~**\
 but the deal you strike with your employer is bigger than your paycheck.
 
 > *Wages, benefits, expectations, and culture all shape your standard of
 > living.*
 
-That’s why **comparing public and private sector pay is tricky.**
+That's why **comparing public and private sector pay is tricky.**
 
 We pulled federal data from the Bureau of Labor Statistics to estimate
 total compensation across jobs and sectors.
 
 **The results show that government jobs often beat private ones** ~ but
-not always where you’d expect.
+not always where you'd expect.
 
 > **This piece looks at *where, why, and how* the differences in pay,
 > benefits, and lifestyle add up.**
 
-> **Pay isn’t just wages; it’s the whole package.**
+> **Pay isn't just wages; it's the whole package.**
 
 ### Job-by-Job: Public vs Private Pay Compared
 
-> Let’s stack up a few familiar jobs side by side.
+> Let's stack up a few familiar jobs side by side.
 
-![](https://cdn-images-1.medium.com/max/800/0*_YODUx2AJYPvf6a1)
-
-- **Teachers**: A **public K–12 teacher makes more than
-  a private** school teacher. Not just in salary ~ the pension and
-  health insurance bump that advantage even further. If you’re eyeing a
-  teaching career, this is why public schools attract and keep more
-  talent.
+- **Teachers**: A **public K-12 teacher makes more than
+ a private** school teacher. Not just in salary ~ the pension and
+ health insurance bump that advantage even further. If you're eyeing a
+ teaching career, this is why public schools attract and keep more
+ talent.
 - **Nurses**: Many government-employed nurses work for
-  VA hospitals or county systems. The paychecks are bigger, and the
-  retirement packages can be generous. **For nurses, public often beats
-  private.**
+ VA hospitals or county systems. The paychecks are bigger, and the
+ retirement packages can be generous. **For nurses, public often beats
+ private.**
 - **Engineers**: Civil engineers in the **public sector
-  edge out their private peers in wages, and benefits push them further
-  ahead.** But ***the higher up you go*** in private firms ~ especially
-  in tech or energy ~ the ***golden handcuffs of bonuses and equity***
-  start to outweigh the public advantage.
+ edge out their private peers in wages, and benefits push them further
+ ahead.** But ***the higher up you go*** in private firms ~ especially
+ in tech or energy ~ the ***golden handcuffs of bonuses and equity***
+ start to outweigh the public advantage.
 - **Economists**: The **private sector pays better,**
-  especially in finance and consulting. Federal agencies compete
-  decently, but state and local economist jobs usually trail far
-  behind.
+ especially in finance and consulting. Federal agencies compete
+ decently, but state and local economist jobs usually trail far
+ behind.
 - **Maintenance Workers**: This is the clearest divide.
-  Custodians and maintenance crews on the **public payroll earn more in
-  base pay and enjoy far more reliable benefits.**
+ Custodians and maintenance crews on the **public payroll earn more in
+ base pay and enjoy far more reliable benefits.**
 
 Of course, nobody picks a career based on one comparison chart.
 
@@ -91,13 +93,9 @@ Of course, nobody picks a career based on one comparison chart.
 Widen the lens, and you see consistent patterns.
 
 - Public-sector workers dominate in education,
-  healthcare support, and service jobs.
+ healthcare support, and service jobs.
 - Private-sector workers excel in high-end professional
   and executive roles.
-
-![](https://cdn-images-1.medium.com/max/800/1*_txkO8SaSCuIDHBKM_5zzA.png)
-
-*Who pays more? Private or Public Total Compensation by Broad Sector*
 
 > The structure of compensation matters.
 
@@ -109,19 +107,19 @@ fewer safety nets.
 
 Take three snapshots:
 
-1.  **Nurses**: A VA hospital nurse might out-earn a
-    private hospital nurse, thanks to higher wages and guaranteed
-    retirement. But the doctor down the hall is almost always better
-    paid in private practice.
-2.  **Engineers**: A civil engineer at a state DOT will
-    likely earn less than a software engineer in Silicon Valley. But
-    when you add in pensions, healthcare, and stability, the
-    public-sector engineer may end up more secure over the long
-    haul.
-3.  **Custodians**: The custodian at the county
-    courthouse usually makes more ~ and has stronger benefits ~ than the
-    custodian at a chain hotel. The difference isn’t skill or effort;
-    it’s the public sector’s wage floor and access to unions.
+1. **Nurses**: A VA hospital nurse might out-earn a
+ private hospital nurse, thanks to higher wages and guaranteed
+ retirement. But the doctor down the hall is almost always better
+ paid in private practice.
+2. **Engineers**: A civil engineer at a state DOT will
+ likely earn less than a software engineer in Silicon Valley. But
+ when you add in pensions, healthcare, and stability, the
+ public-sector engineer may end up more secure over the long
+ haul.
+3. **Custodians**: The custodian at the county
+ courthouse usually makes more ~ and has stronger benefits ~ than the
+ custodian at a chain hotel. The difference isn't skill or effort;
+ it's the public sector's wage floor and access to unions.
 
 Some say **that split** ~ education vs STEM, public vs private ~
 
@@ -134,11 +132,12 @@ Some say **that split** ~ education vs STEM, public vs private ~
 
 > Zooming out, the patterns show up clearly in the averages.
 
-![](https://cdn-images-1.medium.com/max/800/0*aMWf73JXfDIQyPIm)
+*In the author's BLS-based comparison, government jobs pay far more for
+blue-collar work, while white-collar pay is closer and leans public in
+these figures. In elite roles, private compensation often dwarfs public
+pay. Source: BLS ECEC, March 2025.*
 
-*On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public. In elite roles, private compensation often dwarfs public. Source: BLS ECEC, March 2025.*
-
-> ***Here’s what the numbers show:***
+> ***Here's what the numbers show:***
 
 **Blue-collar workers** (custodians, bus drivers, protective service,
 maintenance crews) earn about **\$48/hour in the public sector vs
@@ -150,7 +149,7 @@ with higher wages and more reliable benefits.
 **White-collar workers** (engineers, economists, managers, office staff)
 average **\$60/hour in government vs \$56/hour in private industry.**
 
-That’s a smaller margin ~ and in elite private-sector roles (finance,
+That's a smaller margin ~ and in elite private-sector roles (finance,
 consulting, tech), the upside can shoot way up ~ far higher than what
 the government can match.
 
@@ -161,24 +160,22 @@ the government can match.
 > Elite private-sector jobs in finance, tech, or consulting can pay
 > multiples more.
 
-![](https://cdn-images-1.medium.com/max/800/1*pprDUfeBMm4KRodaGcy74g.png)
-
 **Blue collar workers earn substantially higher wages in public roles
 across the board with few exceptions.**
 
-> This helps explain why people’s experiences feel so different.
+> This helps explain why people's experiences feel so different.
 
 A maintenance worker might see government work as the clear winner.
 
 A high performing consultant in private industry might feel the
 opposite.
 
-**Both are right ~ the divide isn’t just public vs private.**
+**Both are right ~ the divide isn't just public vs private.**
 
-**It’s blue-collar vs white-collar.**
+**It's blue-collar vs white-collar.**
 
-> And here’s the thing:\
-> The divide isn’t just about wages.
+> And here's the thing:\
+> The divide isn't just about wages.
 
 For both blue- and white-collar workers, **the kicker is how much of
 their pay comes in the form of benefits.**
@@ -190,7 +187,7 @@ guaranteed retirement, health insurance benefits, and paid time off.
 
 **Which raises the next question:**
 
-> What actually counts as “pay”?
+> What actually counts as "pay"?
 
 ### Wages vs Benefits: What Counts as Pay?
 
@@ -200,23 +197,17 @@ guaranteed retirement, health insurance benefits, and paid time off.
 benefits.**
 
 - **Public workers** give up some cash wages but gain
-  far more in guaranteed benefits.
+ far more in guaranteed benefits.
 - **Private workers** take home a larger paycheck, but
-  the benefits package is thinner and often riskier.
+ the benefits package is thinner and often riskier.
 
 *Some public workers get a smaller paycheck ~ but a bigger bag overall.*
-
-![](https://cdn-images-1.medium.com/max/800/0*iKpEuvFN4llizRwl)
 
 - **Public Sector** ~ 62% wages, 38% benefits
 - **Private Sector** ~ 71% wages, 29% benefits
 
-![](https://cdn-images-1.medium.com/max/800/1*Z2gDqf1UHZBBQpz6zwEgPg.png)
-
-*Breakdown of Average Distribution of Pay: Public vs Private Sectors*
-
-For many state and federal employees, retirement isn’t just a 401(k)
-match ~ it’s a defined pension. That can mean decades of guaranteed
+For many state and federal employees, retirement isn't just a 401(k)
+match ~ it's a defined pension. That can mean decades of guaranteed
 income.
 
 Private workers, meanwhile, tend to get more up front in salary and may
@@ -239,7 +230,7 @@ how they shape real careers.**
 early retirement and summers off.
 
 **Engineers** may start ahead in government roles, but the private
-sector offers steeper raises, bonuses, and equity if they’re willing to
+sector offers steeper raises, bonuses, and equity if they're willing to
 chase them.
 
 **Nurses** in public hospitals usually earn more stable pay and
@@ -256,24 +247,24 @@ scales.
 > ***For others, the private sector offers fast promotions and higher
 > ceilings, but also the risk of layoffs, burnout, or benefit cuts.***
 
-*That’s why the answer to “who gets paid more?” is so tricky.*
+*That's why the answer to "who gets paid more?" is so tricky.*
 
-> Its not just about today,
+> It's not just about today,
 
-> its also the promise of tomorrow.
+> it's also the promise of tomorrow.
 
-### The Bottom Line: Public vs Private Pay Isn’t One-Size-Fits-All
+### The Bottom Line: Public vs Private Pay Isn't One-Size-Fits-All
 
 - **Public-sector jobs offer more security and stronger
-  benefits.**
+ benefits.**
 - **Private-sector jobs offer higher upside with more
-  risk.**
+ risk.**
 
-> The trade-off isn’t just economic ~ it’s structural.
+> The trade-off isn't just economic ~ it's structural.
 
-So when people ask **“Who gets paid more ~ private or public workers?”**
+So when people ask **"Who gets paid more ~ private or public workers?"**
 
-The work, the balance, the money, the risk… **its all relative.**
+The work, the balance, the money, the risk... **it's all relative.**
 
 The only real answer is:
 
@@ -284,11 +275,11 @@ The only real answer is:
 **Sources**
 
 - U.S. Bureau of Labor Statistics, Occupational
-  Employment and Wage Statistics (OEWS) →
-  [https://www.bls.gov/oes/](https://www.bls.gov/oes/)
+ Employment and Wage Statistics (OEWS) →
+ [https://www.bls.gov/oes/](https://www.bls.gov/oes/)
 - BLS Employer Costs for Employee Compensation (ECEC) →
-  [https://www.bls.gov/ncs/ect/](https://www.bls.gov/ncs/ect/)
+ [https://www.bls.gov/ncs/ect/](https://www.bls.gov/ncs/ect/)
 - Congressional Budget Office →
-  [https://www.cbo.gov/](https://www.cbo.gov/)
+ [https://www.cbo.gov/](https://www.cbo.gov/)
 - Economic Policy Institute →
-  [https://www.epi.org/](https://www.epi.org/)
+ [https://www.epi.org/](https://www.epi.org/)

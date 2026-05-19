@@ -1959,6 +1959,101 @@
       },
       "commit_sha": "44e9fa299e4283213066cfff77897b022b373e99",
       "deployed_on": "2026-05-17"
+    },
+    "flash-flood-alley-why-flash-floods-kill": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-18",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-18",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay ties flash-flood risk to terrain, warning lead time, local alert activation, planning incentives, downstream consequences, uncertainty in early records, and institutional responsibility."
+      }
+    },
+    "whos-responsible-for-building-in-the-floodplain": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-18",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-18",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay separates FEMA/NFIP mapping from local land-use authority, preserving the shared-responsibility argument while naming incentives, tradeoffs, consequences, uncertainty, and risk allocation."
+      }
+    },
+    "the-ledger-vol-2": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-18",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-18",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised roundup keeps its summary role while linking to local OIP records and treating flood risk, conservation, and invasive-species arguments as evidence-led essays rather than borrowed media frames."
+      }
+    },
+    "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-18",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-18",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay connects low-probability risk, siren costs, technical translation, and local institutional capacity without turning the source dump into an unsupported blame claim."
+      }
+    },
+    "public-vs-private-pay-who-really-earns-more": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-18",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-18",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay grounds sector-pay comparison in BLS compensation categories while naming incentives, benefits tradeoffs, worker consequences, uncertainty around averages, and institutional wage floors."
+      }
     }
   },
   "blocked": {},
@@ -2235,6 +2330,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-17.md",
       "commit_sha": "44e9fa299e4283213066cfff77897b022b373e99",
       "deployed_on": "2026-05-17"
+    },
+    {
+      "batch_id": "2026-05-18",
+      "selected_slugs": [
+        "flash-flood-alley-why-flash-floods-kill",
+        "whos-responsible-for-building-in-the-floodplain",
+        "the-ledger-vol-2",
+        "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events",
+        "public-vs-private-pay-who-really-earns-more"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md"
     }
   ]
 }
