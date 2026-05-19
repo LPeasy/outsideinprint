@@ -1961,7 +1961,7 @@
       "deployed_on": "2026-05-17"
     },
     "flash-flood-alley-why-flash-floods-kill": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-18",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
       "previous_version": "1.0",
@@ -1977,10 +1977,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay ties flash-flood risk to terrain, warning lead time, local alert activation, planning incentives, downstream consequences, uncertainty in early records, and institutional responsibility."
-      }
+      },
+      "commit_sha": "5ad66438c4a9796759e3887e29e94f354264c27c",
+      "deployed_on": "2026-05-18"
     },
     "whos-responsible-for-building-in-the-floodplain": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-18",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
       "previous_version": "1.0",
@@ -1996,10 +1998,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay separates FEMA/NFIP mapping from local land-use authority, preserving the shared-responsibility argument while naming incentives, tradeoffs, consequences, uncertainty, and risk allocation."
-      }
+      },
+      "commit_sha": "5ad66438c4a9796759e3887e29e94f354264c27c",
+      "deployed_on": "2026-05-18"
     },
     "the-ledger-vol-2": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-18",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
       "previous_version": "1.0",
@@ -2015,10 +2019,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised roundup keeps its summary role while linking to local OIP records and treating flood risk, conservation, and invasive-species arguments as evidence-led essays rather than borrowed media frames."
-      }
+      },
+      "commit_sha": "5ad66438c4a9796759e3887e29e94f354264c27c",
+      "deployed_on": "2026-05-18"
     },
     "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-18",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
       "previous_version": "1.0",
@@ -2034,10 +2040,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay connects low-probability risk, siren costs, technical translation, and local institutional capacity without turning the source dump into an unsupported blame claim."
-      }
+      },
+      "commit_sha": "5ad66438c4a9796759e3887e29e94f354264c27c",
+      "deployed_on": "2026-05-18"
     },
     "public-vs-private-pay-who-really-earns-more": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-18",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
       "previous_version": "1.0",
@@ -2053,7 +2061,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay grounds sector-pay comparison in BLS compensation categories while naming incentives, benefits tradeoffs, worker consequences, uncertainty around averages, and institutional wage floors."
-      }
+      },
+      "commit_sha": "5ad66438c4a9796759e3887e29e94f354264c27c",
+      "deployed_on": "2026-05-18"
     }
   },
   "blocked": {},
@@ -2340,8 +2350,10 @@
         "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events",
         "public-vs-private-pay-who-really-earns-more"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-18.md",
+      "commit_sha": "5ad66438c4a9796759e3887e29e94f354264c27c",
+      "deployed_on": "2026-05-18"
     }
   ]
 }
