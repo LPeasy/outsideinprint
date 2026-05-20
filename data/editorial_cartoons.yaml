@@ -1,4 +1,4 @@
-current: papers-please
+current: beneficial-use
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -238,5 +238,13 @@ cartoons:
     image: "/images/editorial/papers-please.png"
     essay: "/essays/id-required/"
     alt: "Editorial cartoon showing a supermarket cashier asking a customer to show papers while scanning a roll of duct tape with a red checkout light."
+    width: 1672
+    height: 941
+  - slug: beneficial-use
+    title: "Beneficial Use"
+    date: "2026-05-20"
+    image: "/images/editorial/beneficial-use.png"
+    essay: "/essays/save-some-air-for-the-fishies/"
+    alt: "Editorial cartoon showing officials labeled Stormwater, Agriculture, Wastewater, Dams, Development, and Climate Office managing The Oxygen Budget above a river cross-section where fish swim beneath a declining blue Remaining Oxygen line."
     width: 1672
     height: 941
