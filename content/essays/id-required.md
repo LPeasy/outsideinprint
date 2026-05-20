@@ -2,7 +2,7 @@
 title: "ID Required"
 subtitle: "A federal citizenship list and the fight over voter ID are testing whether voter verification can be serious, lawful, auditable, and worthy of the franchise it guards."
 description: "Federal citizenship verification and voter ID test whether election integrity can be built from primary records, lawful process, citizen responsibility, and correction rights."
-date: 2026-05-17
+date: 2026-05-19T10:56:33-04:00
 draft: false
 slug: "id-required"
 section_label: "Essay"
