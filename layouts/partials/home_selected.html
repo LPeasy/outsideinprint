@@ -7,7 +7,28 @@
 {{ end }}
 {{ $essays = sort (sort $essays "Title" "asc") "Date" "desc" }}
 {{ $today := now.Format "2006-01-02" }}
+{{ $cartoonData := site.Data.editorial_cartoons | default dict }}
+{{ $cartoons := $cartoonData.cartoons | default (slice) }}
+{{ $currentCartoonSlug := $cartoonData.current | default "" }}
+{{ $currentCartoonEssay := "" }}
+{{ $currentCartoonPage := false }}
 {{ $featuredCandidates := slice }}
+
+{{ range $cartoons }}
+  {{ if eq .slug $currentCartoonSlug }}
+    {{ with .essay }}
+      {{ $currentCartoonEssay = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $currentCartoonEssay }}
+  {{ range $essays }}
+    {{ if eq .RelPermalink $currentCartoonEssay }}
+      {{ $currentCartoonPage = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 
 {{ range $essays }}
   {{ $page := . }}
@@ -24,18 +45,23 @@
   {{ end }}
 {{ end }}
 
+{{ $latest := false }}
+{{ if gt (len $essays) 0 }}
+  {{ $latest = index $essays 0 }}
+{{ end }}
+
 {{ $hero := false }}
 {{ $heroMode := "latest" }}
-{{ if gt (len $featuredCandidates) 0 }}
+{{ if $currentCartoonPage }}
+  {{ $hero = $currentCartoonPage }}
+  {{ if and $latest (ne $hero.RelPermalink $latest.RelPermalink) }}
+    {{ $heroMode = "cartoon" }}
+  {{ end }}
+{{ else if gt (len $featuredCandidates) 0 }}
   {{ $hero = index (sort $featuredCandidates "Date" "desc") 0 }}
   {{ $heroMode = "featured" }}
 {{ else if gt (len $essays) 0 }}
   {{ $hero = index $essays 0 }}
-{{ end }}
-
-{{ $latest := false }}
-{{ if gt (len $essays) 0 }}
-  {{ $latest = index $essays 0 }}
 {{ end }}
 
 {{ $showLatestSlot := false }}

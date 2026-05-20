@@ -33,17 +33,18 @@ function normalizeDateString(value) {
   return match?.[0] ?? null;
 }
 
-function selectHomepageEssays(pages, today = "2026-04-16") {
+function selectHomepageEssays(pages, today = "2026-04-16", currentCartoonEssay = null) {
   const essays = pages
     .filter((page) => page.kind === "essay" && page.draft !== true)
     .sort((left, right) => right.date - left.date);
 
+  const currentCartoonPage = essays.find((page) => page.relPermalink === currentCartoonEssay) ?? null;
   const featuredCandidates = essays
     .filter((page) => page.homepage_featured === true && normalizeDateString(page.homepage_featured_until) >= today)
     .sort((left, right) => right.date - left.date);
 
-  const hero = featuredCandidates[0] ?? essays[0] ?? null;
   const latest = essays[0] ?? null;
+  const hero = currentCartoonPage ?? featuredCandidates[0] ?? latest ?? null;
   const showLatestSlot = Boolean(hero && latest && hero.relPermalink !== latest.relPermalink);
   const selected = [];
   const seen = new Set();
@@ -122,6 +123,8 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(source, /Homepage selection stays essay-only by design/);
   assert.match(source, /Params\.homepage_featured/);
   assert.match(source, /Params\.homepage_featured_until/);
+  assert.match(source, /site\.Data\.editorial_cartoons/);
+  assert.match(source, /currentCartoonPage/);
   assert.match(source, /findRE "\\\\d\{4\}-\\\\d\{2\}-\\\\d\{2\}"/);
   assert.match(source, /\{\{ range site\.RegularPages \}\}/);
   assert.match(source, /\{\{ if eq \(partial "archive\/longform-kind\.html" \.\) "essay" \}\}/);
@@ -254,6 +257,27 @@ test("active featured essays lead while the right rail uses the newest published
   assert.equal(result.secondary.length, 4);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
+});
+
+test("current cartoon essay leads and the right rail starts with the next newest essay", () => {
+  const pages = [
+    { relPermalink: "/essays/id-required/", kind: "essay", draft: false, date: new Date("2026-05-19") },
+    { relPermalink: "/essays/consent-from-permission-to-sanctity/", kind: "essay", draft: false, date: new Date("2026-05-18"), homepage_featured: true, homepage_featured_until: "2026-05-31" },
+    { relPermalink: "/essays/from-variety-to-virtue/", kind: "essay", draft: false, date: new Date("2026-05-17") },
+    { relPermalink: "/essays/the-ash-pond-under-the-cloud/", kind: "essay", draft: false, date: new Date("2026-05-16") }
+  ];
+
+  const result = selectHomepageEssays(pages, "2026-05-20", "/essays/id-required/");
+
+  assert.equal(result.hero?.relPermalink, "/essays/id-required/");
+  assert.equal(result.latest?.relPermalink, "/essays/id-required/");
+  assert.equal(result.showLatestSlot, false);
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
+    "/essays/consent-from-permission-to-sanctity/",
+    "/essays/from-variety-to-virtue/",
+    "/essays/the-ash-pond-under-the-cloud/"
+  ]);
+  assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
 });
 
 test("duplicate active feature flags break ties by newest date first", () => {

@@ -33,6 +33,8 @@
     {{ $heroLabel := "Latest Essay" }}
     {{ if eq $heroMode "featured" }}
       {{ $heroLabel = "Featured Essay" }}
+    {{ else if eq $heroMode "cartoon" }}
+      {{ $heroLabel = "Front Page Essay" }}
     {{ end }}
     <div class="home-front-page__stories">
       <article class="home-front-page__lead" data-home-front-page-region="lead">
