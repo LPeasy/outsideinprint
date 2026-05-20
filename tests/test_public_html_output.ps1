@@ -2928,7 +2928,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-hate-ledger/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'The Hate Ledger' },
   @{ Path = 'public/essays/outside-the-garden/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'Outside the Garden' },
   @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' },
-  @{ Path = 'public/essays/save-some-air-for-the-fishies/index.html'; Slug = 'floods-water-built-environment'; Label = 'save some air for the fishies' },
+  @{ Path = 'public/essays/save-some-air-for-the-fishies/index.html'; Slug = 'floods-water-built-environment'; Label = 'Save Some Air for the Fishies' },
   @{ Path = 'public/essays/multiple-shmultiple/index.html'; Slug = 'reported-case-studies'; Label = 'Multiple Shmultiple' }
 )
 

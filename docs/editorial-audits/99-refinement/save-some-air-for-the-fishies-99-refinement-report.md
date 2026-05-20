@@ -2,7 +2,7 @@
 
 Package: `2026-05-20-save-some-air-for-the-fishies`
 
-Essay: `save some air for the fishies`
+Essay: `Save Some Air for the Fishies`
 
 Workflow: `oip_daily_candidate_99_refinement`
 

@@ -1,5 +1,5 @@
 ---
-title: "save some air for the fishies"
+title: "Save Some Air for the Fishies"
 subtitle: "A new global study of river oxygen turns heat, runoff, dams, and ordinary water rules into one public question: how much life can a warmer river carry?"
 description: "A new Science Advances study shows global rivers losing oxygen, making heat, runoff, dams, and water policy one public test of how much life a warmer river can carry."
 date: 2026-05-20
