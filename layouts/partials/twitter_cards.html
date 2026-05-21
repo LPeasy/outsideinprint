@@ -5,3 +5,6 @@
 {{- with $meta.image }}
 <meta name="twitter:image" content="{{ . }}">
 {{- end }}
+{{- with $meta.image_alt }}
+<meta name="twitter:image:alt" content="{{ . }}">
+{{- end }}
