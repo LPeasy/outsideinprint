@@ -1,4 +1,4 @@
-current: beneficial-use
+current: memory-hole
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -246,5 +246,13 @@ cartoons:
     image: "/images/editorial/beneficial-use.png"
     essay: "/essays/save-some-air-for-the-fishies/"
     alt: "Editorial cartoon showing officials labeled Stormwater, Agriculture, Wastewater, Dams, Development, and Climate Office managing The Oxygen Budget above a river cross-section where fish swim beneath a declining blue Remaining Oxygen line."
+    width: 1672
+    height: 941
+  - slug: memory-hole
+    title: "Memory Hole"
+    date: "2026-05-21"
+    image: "/images/editorial/memory-hole.png"
+    essay: "/essays/the-text-message-in-the-archive-box/"
+    alt: "Editorial cartoon showing a man feeding papers into a shredder labeled PRIVATE CHANNELS over a pit labeled NO RECORD while a woman holds an empty box labeled PUBLIC MEMORY."
     width: 1672
     height: 941
