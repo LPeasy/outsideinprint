@@ -2171,7 +2171,7 @@
       "deployed_on": "2026-05-19"
     },
     "how-tucson-az-plans-for-water-scarcity": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-21",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md",
       "previous_version": "1.0",
@@ -2187,10 +2187,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay keeps Tucson's water-scarcity argument evidence-bound, ties claims to water institutions and supply constraints, and names tradeoffs, consequences, uncertainty, and risk allocation."
-      }
+      },
+      "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
+      "deployed_on": "2026-05-21"
     },
     "the-risk-management-buffet": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-21",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md",
       "previous_version": "1.0",
@@ -2206,10 +2208,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay uses a concrete analogy to explain risk appetite, options, monitoring, costs, and second-round adjustment without partisan or institutional framing."
-      }
+      },
+      "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
+      "deployed_on": "2026-05-21"
     },
     "whos-really-funding-terror": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-21",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md",
       "previous_version": "1.0",
@@ -2225,10 +2229,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay examines terrorism-finance risk through evidence, channels, incentives, regulatory tradeoffs, consequences, uncertainty, and institutional behavior rather than fear framing."
-      }
+      },
+      "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
+      "deployed_on": "2026-05-21"
     },
     "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-21",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md",
       "previous_version": "1.0",
@@ -2244,10 +2250,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay explains category design through evidence, counting logic, incentives, tradeoffs, consequences, uncertainty, and institutional uses without ideological capture."
-      }
+      },
+      "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
+      "deployed_on": "2026-05-21"
     },
     "you-paid-for-that-ct-scan": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-21",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md",
       "previous_version": "1.0",
@@ -2263,7 +2271,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "The revised essay keeps the patient-access judgment while grounding it in HHS/FDA records, diagnostic limits, incentives, tradeoffs, consequences, uncertainty, and institutional behavior."
-      }
+      },
+      "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
+      "deployed_on": "2026-05-21"
     }
   },
   "blocked": {},
@@ -2578,8 +2588,10 @@
         "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go",
         "you-paid-for-that-ct-scan"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md",
+      "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
+      "deployed_on": "2026-05-21"
     }
   ]
 }
