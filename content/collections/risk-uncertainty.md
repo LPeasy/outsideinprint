@@ -1,6 +1,8 @@
 ---
-title: "Risk, Uncertainty, and Decision-Making"
+title: "Risk, Uncertainty, and Decision-Making Collection"
 slug: "risk-uncertainty"
-image: "/images/social/outside-in-print-default.png"
+description: "Essays about uncertainty, tradeoffs, risk framing, and decision-making under imperfect information."
+image: "/images/social/collection-risk-uncertainty.png"
+image_alt: "Outside In Print social card for the Risk, Uncertainty, and Decision-Making collection."
 draft: false
 ---

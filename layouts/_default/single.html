@@ -197,9 +197,21 @@
         {{ partial "collections/reading-path.html" . }}
       {{ end }}
 
+      {{ partial "newsletter_signup.html" (dict
+        "page" .
+        "class" "newsletter-signup--article-exit"
+        "sourceSlot" "article_exit_newsletter"
+        "eyebrow" "Keep reading"
+        "title" "Get the weekly letter"
+        "dek" "One compact Outside In Print email with new essays, cartoons, and notes from the archive."
+        "buttonLabel" "Subscribe"
+        "note" "Free during the launch window. No spam."
+      ) }}
+
       {{ partial "journey_links.html" (dict
         "class" "journey-links--article-exit"
         "eyebrow" "Article paths"
+        "sourceSlot" "article_exit_paths"
         "links" $journeyLinks
       ) }}
     </div>

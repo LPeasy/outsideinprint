@@ -641,11 +641,13 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/archive/index.html' = @{
     Title = 'Archive'
-    Description = 'The long-form archive of essays and dialogues from Outside In Print.'
+    Description = 'The full Outside In Print long-form archive, gathering essays, dialogues, reports, working papers, and stable editions by date.'
     Canonical = 'https://outsideinprint.org/archive/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-archive.png'
+    ExpectedImageAlt = 'Outside In Print social card for the long-form archive.'
   }
   'public/syd-and-oliver/index.html' = @{
     Title = 'Syd and Oliver Dialogues'
@@ -678,6 +680,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-collections.png'
+    ExpectedImageAlt = 'Outside In Print social card for the collections directory.'
   }
   'public/shop/index.html' = @{
     Title = 'Shop'
@@ -694,6 +698,18 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-about.png'
+    ExpectedImageAlt = 'Outside In Print social card for the About page.'
+  }
+  'public/authors/index.html' = @{
+    Title = 'Authors'
+    Description = 'Public author archive pages for Outside In Print, gathering bylines, dossiers, and reading routes for the people behind the work.'
+    Canonical = 'https://outsideinprint.org/authors/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-authors.png'
+    ExpectedImageAlt = 'Outside In Print social card for the author directory.'
   }
   'public/authors/robert-v-ussley/index.html' = @{
     Title = 'Robert V. Ussley'
@@ -710,6 +726,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-risk-uncertainty.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Risk, Uncertainty, and Decision-Making collection.'
   }
   'public/collections/geopolitics-trade-global-power/index.html' = @{
     Title = 'Geopolitics, Trade, and Global Power'
@@ -718,14 +736,108 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-geopolitics-trade-global-power.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Geopolitics, Trade, and Global Power collection.'
   }
   'public/collections/civic-institutions-and-public-power/index.html' = @{
     Title = 'Civic Institutions and Public Power'
-    Description = 'A staged lane for essays on courts, federalism, and public institutions once the body of work is coherent enough to publish.'
+    Description = 'Essays on courts, federalism, public institutions, and civic power once the body of work is coherent enough to publish.'
     Canonical = 'https://outsideinprint.org/collections/civic-institutions-and-public-power/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-civic-institutions-and-public-power.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Civic Institutions and Public Power collection.'
+  }
+  'public/collections/bobs-almanack/index.html' = @{
+    Title = 'Bob''s Almanack'
+    Description = 'Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, editorial cartoons, compact notices, and archive pieces worth reprinting.'
+    Canonical = 'https://outsideinprint.org/collections/bobs-almanack/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-bobs-almanack.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Bob''s Almanack collection.'
+  }
+  'public/collections/the-ledger/index.html' = @{
+    Title = 'The Ledger'
+    Description = 'Newsletter-style dispatches that gather recent Outside In Print essays, themes, and recurring concerns into one archival thread.'
+    Canonical = 'https://outsideinprint.org/collections/the-ledger/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-the-ledger.png'
+    ExpectedImageAlt = 'Outside In Print social card for The Ledger collection.'
+  }
+  'public/collections/syd-and-oliver-dialogues/index.html' = @{
+    Title = 'Syd and Oliver Dialogues'
+    Description = 'A conversational archive of Syd and Oliver pieces on truth, power, money, obligation, intimacy, and meaning.'
+    Canonical = 'https://outsideinprint.org/collections/syd-and-oliver-dialogues/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-syd-and-oliver-dialogues.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Syd and Oliver Dialogues collection.'
+  }
+  'public/collections/modern-bios/index.html' = @{
+    Title = 'Modern Bios'
+    Description = 'Archival civic biographies of recent public figures, written as restrained record-driven essays for the imprint.'
+    Canonical = 'https://outsideinprint.org/collections/modern-bios/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-modern-bios.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Modern Bios collection.'
+  }
+  'public/collections/lit-review/index.html' = @{
+    Title = 'Lit Review'
+    Description = 'Reviews and close readings of books and narrative works that stay with theme, structure, and why a story endures.'
+    Canonical = 'https://outsideinprint.org/collections/lit-review/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-lit-review.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Lit Review collection.'
+  }
+  'public/collections/floods-water-built-environment/index.html' = @{
+    Title = 'Floods, Water, and the Built Environment'
+    Description = 'Reporting and essays on flood risk, water systems, riverine disasters, and the places we keep building anyway.'
+    Canonical = 'https://outsideinprint.org/collections/floods-water-built-environment/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-floods-water-built-environment.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Floods, Water, and the Built Environment collection.'
+  }
+  'public/collections/technology-ai-machine-future/index.html' = @{
+    Title = 'Technology, AI, and the Machine Future'
+    Description = 'Essays on artificial intelligence, compute, machine systems, and the social future they are dragging into view.'
+    Canonical = 'https://outsideinprint.org/collections/technology-ai-machine-future/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-technology-ai-machine-future.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Technology, AI, and the Machine Future collection.'
+  }
+  'public/collections/moral-religious-philosophical-essays/index.html' = @{
+    Title = 'Moral, Religious, and Philosophical Essays'
+    Description = 'Essays on moral formation, religion, conscience, and the philosophical habits needed to see clearly.'
+    Canonical = 'https://outsideinprint.org/collections/moral-religious-philosophical-essays/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-moral-religious-philosophical-essays.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Moral, Religious, and Philosophical Essays collection.'
+  }
+  'public/collections/reported-case-studies/index.html' = @{
+    Title = 'Reported Case Studies'
+    Description = 'Tightly reported case studies that stay with one event, institution, or failure long enough to learn something durable.'
+    Canonical = 'https://outsideinprint.org/collections/reported-case-studies/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-reported-case-studies.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Reported Case Studies collection.'
   }
   'public/random/index.html' = @{
     Title = 'Random'
@@ -1399,6 +1511,18 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
       }
       if ($twitterImage -ne $expectedImage) {
         $metadataIssues.Add("$relativePath => expected twitter:image '$expectedImage', found '$twitterImage'")
+      }
+    }
+
+    if ($expected.Contains('ExpectedImageAlt')) {
+      $expectedImageAlt = [string]$expected.ExpectedImageAlt
+      $ogImageAlt = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image:alt'
+      $twitterImageAlt = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image:alt'
+      if ($ogImageAlt -ne $expectedImageAlt) {
+        $metadataIssues.Add("$relativePath => expected og:image:alt '$expectedImageAlt', found '$ogImageAlt'")
+      }
+      if ($twitterImageAlt -ne $expectedImageAlt) {
+        $metadataIssues.Add("$relativePath => expected twitter:image:alt '$expectedImageAlt', found '$twitterImageAlt'")
       }
     }
   }
@@ -2339,8 +2463,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = 'Feeling curious\? Let the archive choose the next piece\.'
-    Message = 'expected the random route to frame archive exploration with the reader-facing exploratory label'
+    Pattern = 'Feeling curious\? Choose one of three live routes into the archive\.'
+    Message = 'expected the random route to frame archive exploration with the reader-facing choice label'
   },
   @{
     Path = 'public/random/index.html'
@@ -2349,13 +2473,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = 'Finding a piece from the archive\.\.\.'
-    Message = 'expected the random route to present a framed archive-selection status instead of a bare redirect stub'
+    Pattern = 'Three pieces from the archive'
+    Message = 'expected the random route to present a framed archive-choice status instead of a bare redirect stub'
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = '(?s)https://outsideinprint\.org/library/.*?if\(!\w+\.length\)\{window\.location\.replace\(\w+\);return\}.*?Math\.floor\(Math\.random\(\)\*\w+\.length\).*?window\.location\.replace\(\w+\)'
-    Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
+    Pattern = '(?s)data-random-route-choices.*?data-random-route-refresh.*?data-analytics-source-slot"\s*,\s*"random_choice"'
+    Message = 'expected the random route to render tracked choice cards with a redraw control'
   },
   @{
     Path = 'public/library/index.html'

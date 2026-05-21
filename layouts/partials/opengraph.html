@@ -10,6 +10,9 @@
 {{- with $meta.image }}
 <meta property="og:image" content="{{ . }}">
 {{- end }}
+{{- with $meta.image_alt }}
+<meta property="og:image:alt" content="{{ . }}">
+{{- end }}
 {{- if $meta.route.is_article_like }}
   {{- with $meta.route.section_label }}
 <meta property="article:section" content="{{ . }}">

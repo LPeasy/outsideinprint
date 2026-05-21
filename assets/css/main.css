@@ -5,7 +5,7 @@
   --bg-raised:#1d1d1d;
   --border-subtle:#2a2a2a;
   --border-soft:#343434;
-  --text-primary:#ece7df;
+  --text-primary:var(--oip-paper);
   --text-secondary:#c8c1b8;
   --text-muted:#9d978f;
   --text-faint:#7d776f;
@@ -1182,6 +1182,62 @@ html[data-theme="light"] .paper-route-toggle{
 }
 .random-route__note{
   max-width:34rem;
+}
+.random-route__choices{
+  display:grid;
+  gap:.85rem;
+  margin-top:1rem;
+}
+.random-route__choice{
+  display:grid;
+  gap:.42rem;
+  padding:1rem 0 1.05rem;
+  border-top:1px solid var(--oip-rule-faint);
+  color:var(--text-primary);
+  text-decoration:none;
+}
+.random-route__choice:hover{
+  color:var(--text-primary);
+  text-decoration:none;
+}
+.random-route__choice-kicker,
+.random-route__choice-meta{
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.random-route__choice-title{
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:clamp(1.35rem, 1.18rem + .6vw, 1.72rem);
+  line-height:1.16;
+}
+.random-route__choice-summary{
+  max-width:38rem;
+  color:var(--text-secondary);
+  font-size:.95rem;
+  line-height:1.68;
+}
+.random-route__refresh{
+  margin-top:1.15rem;
+  padding:.72rem .95rem;
+  border:1px solid rgba(236,231,223,.14);
+  border-radius:var(--radius-ui);
+  background:var(--accent-soft);
+  color:var(--text-primary);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.random-route__refresh:hover{
+  border-color:rgba(127,147,166,.4);
+  background:rgba(127,147,166,.22);
 }
 .item{
   padding:1rem 0 1.1rem;
@@ -4924,6 +4980,13 @@ h2{ margin-top:34px; }
 .newsletter-signup{
   margin-top:2.6rem;
 }
+.newsletter-signup--article-exit{
+  margin-top:0;
+  margin-bottom:1.35rem;
+}
+.newsletter-signup--article-exit .newsletter-signup__inner{
+  max-width:none;
+}
 .newsletter-signup__inner{
   max-width:42rem;
   padding:1.3rem 1.2rem 1.2rem;
@@ -5809,6 +5872,7 @@ html[data-theme="light"] .author-route__portrait img{
 html[data-theme="light"] .journey-links__link,
 html[data-theme="light"] .entry-thread__actions a:first-child,
 html[data-theme="light"] .newsletter-signup__button,
+html[data-theme="light"] .random-route__refresh,
 html[data-theme="light"] .library-reset,
 html[data-theme="light"] .collection-pill{
   border-color:rgba(46,83,99,.26);
@@ -5819,6 +5883,7 @@ html[data-theme="light"] .collection-pill{
 html[data-theme="light"] .journey-links__link:hover,
 html[data-theme="light"] .entry-thread__actions a:first-child:hover,
 html[data-theme="light"] .newsletter-signup__button:hover,
+html[data-theme="light"] .random-route__refresh:hover,
 html[data-theme="light"] .library-reset:hover{
   border-color:rgba(46,83,99,.38);
   background:rgba(46,83,99,.10);

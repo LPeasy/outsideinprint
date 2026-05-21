@@ -1,7 +1,8 @@
 ---
 title: "About Outside In Print"
 description: "A digital imprint for disciplined public judgment: essays, dialogues, reports, and working papers built from evidence, incentives, tradeoffs, and consequences."
-image: "/images/social/outside-in-print-default.png"
+image: "/images/social/oip-about.png"
+image_alt: "Outside In Print social card for the About page."
 draft: false
 show_citation: false
 section_label: "About the Imprint"

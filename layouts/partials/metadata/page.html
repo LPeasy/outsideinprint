@@ -26,6 +26,7 @@
 
 {{- $description := partial "metadata_description.html" . -}}
 {{- $image := partial "metadata_image.html" . -}}
+{{- $imageAlt := .Params.image_alt | default .Params.featured_image_alt | default .Params.portrait_alt | default $title -}}
 {{- $author := partial "authors/resolve.html" (dict
   "page" .
   "fallbackDefault" (or $route.is_article_like (eq $route.name "author"))
@@ -45,6 +46,7 @@
   "full_title" $fullTitle
   "description" $description
   "image" $image
+  "image_alt" $imageAlt
   "canonical" .Permalink
   "robots" $policy.robots
   "author" $author

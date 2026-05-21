@@ -1,11 +1,27 @@
 {{ $links := .links | default (slice) }}
+{{ $analyticsEvent := .analyticsEvent | default "internal_promo_click" }}
+{{ $sourceSlot := .sourceSlot | default "journey_links" }}
 {{ if gt (len $links) 0 }}
   <nav class="journey-links{{ with .class }} {{ . }}{{ end }}" aria-label="{{ .ariaLabel | default "Next steps" }}">
     {{ with .eyebrow }}<p class="journey-links__eyebrow">{{ . }}</p>{{ end }}
     <div class="journey-links__items">
       {{ range $links }}
         {{ if and .href .label }}
-          <a class="journey-links__link" href="{{ .href }}">{{ .label }}</a>
+          {{ $label := printf "%v" .label }}
+          {{ $href := printf "%v" .href }}
+          {{ $path := .path | default $href }}
+          {{ $slug := .slug | default (urlize $label) }}
+          {{ $section := .section | default "Navigation" }}
+          {{ $linkSourceSlot := .sourceSlot | default $sourceSlot }}
+          {{ $linkEvent := .analyticsEvent | default $analyticsEvent }}
+          <a class="journey-links__link" href="{{ $href }}"
+            data-analytics-event="{{ $linkEvent }}"
+            data-analytics-source-slot="{{ $linkSourceSlot }}"
+            data-analytics-slug="{{ $slug }}"
+            data-analytics-title="{{ $label }}"
+            data-analytics-section="{{ $section }}"
+            data-analytics-path="{{ $path }}"
+          >{{ $label }}</a>
         {{ end }}
       {{ end }}
     </div>

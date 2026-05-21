@@ -1,46 +1,131 @@
 {{ define "main" }}
   {{ $librarySections := slice "essays" "syd-and-oliver" "working-papers" }}
   {{ $libraryPages := where site.RegularPages "Section" "in" $librarySections }}
-  {{ $urls := slice }}
+  {{ $entries := slice }}
   {{ range $libraryPages }}
-    {{ $urls = $urls | append .Permalink }}
+    {{ $slug := .Params.slug | default .File.BaseFileName }}
+    {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+    {{ $entries = $entries | append (dict
+      "url" .RelPermalink
+      "title" .Title
+      "section" $sectionLabel
+      "slug" $slug
+      "readingTime" .ReadingTime
+      "summary" (partial "discovery/page-summary.html" .)
+    ) }}
   {{ end }}
 
   <header class="page-header page-shell page-shell--wide">
     <h1 class="list-title">{{ .Title }}</h1>
-    <p class="page-intro">Feeling curious? Let the archive choose the next piece.</p>
+    <p class="page-intro">Feeling curious? Choose one of three live routes into the archive.</p>
   </header>
 
   {{ partial "journey_links.html" (dict
     "class" "journey-links--page"
     "eyebrow" "Or take a deliberate path"
+    "sourceSlot" "random_page_paths"
     "links" (slice
-      (dict "href" ("library/" | absURL) "label" "Library")
-      (dict "href" ("collections/" | absURL) "label" "Collections")
-      (dict "href" ("" | absURL) "label" "Home")
+      (dict "href" ("library/" | absURL) "label" "Library" "section" "Library" "path" "/library/")
+      (dict "href" ("collections/" | absURL) "label" "Collections" "section" "Collections" "path" "/collections/")
+      (dict "href" ("" | absURL) "label" "Home" "section" "Home" "path" "/")
     )
   ) }}
 
   <section class="page-shell page-shell--reading random-route" aria-labelledby="random-route-status-title">
     <div class="item random-route__status">
       <div class="item-series-marker">Archive path</div>
-      <h2 id="random-route-status-title" class="t random-route__title">Finding a piece from the archive...</h2>
-      <p class="d random-route__note">If the route stalls, continue through the Library or browse Collections.</p>
+      <h2 id="random-route-status-title" class="t random-route__title">Three pieces from the archive</h2>
+      <p class="d random-route__note">Refresh the draw or choose the piece that catches first.</p>
     </div>
+
+    <div class="random-route__choices" data-random-route-choices aria-live="polite"></div>
+    <button class="random-route__refresh" type="button" data-random-route-refresh>Draw again</button>
   </section>
 
   <script>
     (function () {
-      var urls = {{ $urls | jsonify | safeJS }};
+      var entries = {{ $entries | jsonify | safeJS }};
       var fallback = {{ "library/" | absURL | jsonify | safeJS }};
+      var choicesRoot = document.querySelector("[data-random-route-choices]");
+      var refreshButton = document.querySelector("[data-random-route-refresh]");
 
-      if (!urls.length) {
-        window.location.replace(fallback);
+      if (!choicesRoot || !refreshButton) {
         return;
       }
 
-      var randomUrl = urls[Math.floor(Math.random() * urls.length)];
-      window.location.replace(randomUrl);
+      function shuffle(items) {
+        var copy = items.slice();
+        var index;
+        var swapIndex;
+        var temp;
+
+        for (index = copy.length - 1; index > 0; index -= 1) {
+          swapIndex = Math.floor(Math.random() * (index + 1));
+          temp = copy[index];
+          copy[index] = copy[swapIndex];
+          copy[swapIndex] = temp;
+        }
+
+        return copy;
+      }
+
+      function appendText(parent, className, text) {
+        var node = document.createElement("span");
+        node.className = className;
+        node.textContent = text;
+        parent.appendChild(node);
+        return node;
+      }
+
+      function renderChoice(entry, index) {
+        var anchor = document.createElement("a");
+        var meta = [entry.section];
+
+        if (entry.readingTime) {
+          meta.push(entry.readingTime + " min read");
+        }
+
+        anchor.className = "random-route__choice";
+        anchor.href = entry.url;
+        anchor.setAttribute("data-analytics-event", "internal_promo_click");
+        anchor.setAttribute("data-analytics-source-slot", "random_choice");
+        anchor.setAttribute("data-analytics-slug", entry.slug || "");
+        anchor.setAttribute("data-analytics-title", entry.title || "");
+        anchor.setAttribute("data-analytics-section", entry.section || "Archive");
+        anchor.setAttribute("data-analytics-path", entry.url || "");
+
+        appendText(anchor, "random-route__choice-kicker", "Route " + (index + 1));
+        appendText(anchor, "random-route__choice-title", entry.title || "Untitled");
+        appendText(anchor, "random-route__choice-meta", meta.join(" | "));
+        if (entry.summary) {
+          appendText(anchor, "random-route__choice-summary", entry.summary);
+        }
+
+        return anchor;
+      }
+
+      function renderChoices() {
+        var selected = shuffle(entries).slice(0, 3);
+
+        choicesRoot.textContent = "";
+
+        if (!selected.length) {
+          var fallbackLink = document.createElement("a");
+          fallbackLink.className = "random-route__choice";
+          fallbackLink.href = fallback;
+          fallbackLink.textContent = "Open the Library";
+          choicesRoot.appendChild(fallbackLink);
+          refreshButton.hidden = true;
+          return;
+        }
+
+        selected.forEach(function (entry, index) {
+          choicesRoot.appendChild(renderChoice(entry, index));
+        });
+      }
+
+      refreshButton.addEventListener("click", renderChoices);
+      renderChoices();
     }());
   </script>
 
@@ -49,7 +134,7 @@
       <div class="item random-route__status">
         <div class="item-series-marker">Archive path</div>
         <div class="t"><a href="{{ "library/" | absURL }}">Open the Library</a></div>
-        <p class="d random-route__note">JavaScript is required to choose a random piece automatically.</p>
+        <p class="d random-route__note">JavaScript is required to draw random archive choices.</p>
       </div>
     </section>
   </noscript>

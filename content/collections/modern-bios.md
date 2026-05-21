@@ -1,6 +1,8 @@
 ---
-title: "Modern Bios"
+title: "Modern Bios Collection"
 slug: "modern-bios"
-image: "/images/social/outside-in-print-default.png"
+description: "Archival civic biographies of recent public figures, written as restrained record-driven essays for the imprint."
+image: "/images/social/collection-modern-bios.png"
+image_alt: "Outside In Print social card for the Modern Bios collection."
 draft: false
 ---
