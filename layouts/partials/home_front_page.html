@@ -2,7 +2,6 @@
 {{ $lead := index $frontPage "hero" }}
 {{ $latest := index $frontPage "latest" }}
 {{ $showLatestSlot := index $frontPage "showLatestSlot" }}
-{{ $heroMode := index $frontPage "heroMode" }}
 {{ $secondary := index $frontPage "secondary" | default (slice) }}
 {{ $cartoonData := site.Data.editorial_cartoons | default dict }}
 {{ $cartoons := $cartoonData.cartoons | default (slice) }}
@@ -31,11 +30,6 @@
     {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
     {{ $leadSection := .Params.section_label | default (humanize .Section) }}
     {{ $heroLabel := "Latest Essay" }}
-    {{ if eq $heroMode "featured" }}
-      {{ $heroLabel = "Featured Essay" }}
-    {{ else if eq $heroMode "cartoon" }}
-      {{ $heroLabel = "Front Page Essay" }}
-    {{ end }}
     <div class="home-front-page__stories">
       <article class="home-front-page__lead" data-home-front-page-region="lead">
         <p class="list-title home-front-page__kicker">{{ $heroLabel }}</p>

@@ -33,19 +33,14 @@ function normalizeDateString(value) {
   return match?.[0] ?? null;
 }
 
-function selectHomepageEssays(pages, today = "2026-04-16", currentCartoonEssay = null) {
+function selectHomepageEssays(pages) {
   const essays = pages
     .filter((page) => page.kind === "essay" && page.draft !== true)
     .sort((left, right) => right.date - left.date);
 
-  const currentCartoonPage = essays.find((page) => page.relPermalink === currentCartoonEssay) ?? null;
-  const featuredCandidates = essays
-    .filter((page) => page.homepage_featured === true && normalizeDateString(page.homepage_featured_until) >= today)
-    .sort((left, right) => right.date - left.date);
-
   const latest = essays[0] ?? null;
-  const hero = currentCartoonPage ?? featuredCandidates[0] ?? latest ?? null;
-  const showLatestSlot = Boolean(hero && latest && hero.relPermalink !== latest.relPermalink);
+  const hero = latest ?? null;
+  const showLatestSlot = false;
   const selected = [];
   const seen = new Set();
 
@@ -121,16 +116,11 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
 
   assert.match(source, /partial "archive\/longform-kind\.html"/);
   assert.match(source, /Homepage selection stays essay-only by design/);
-  assert.match(source, /Params\.homepage_featured/);
-  assert.match(source, /Params\.homepage_featured_until/);
-  assert.match(source, /site\.Data\.editorial_cartoons/);
-  assert.match(source, /currentCartoonPage/);
-  assert.match(source, /findRE "\\\\d\{4\}-\\\\d\{2\}-\\\\d\{2\}"/);
   assert.match(source, /\{\{ range site\.RegularPages \}\}/);
   assert.match(source, /\{\{ if eq \(partial "archive\/longform-kind\.html" \.\) "essay" \}\}/);
   assert.match(source, /sort \(sort \$essays "Title" "asc"\) "Date" "desc"/);
-  assert.match(source, /\$hero = index \(sort \$featuredCandidates "Date" "desc"\) 0/);
-  assert.match(source, /else if gt \(len \$essays\) 0/);
+  assert.match(source, /\{\{ \$hero := \$latest \}\}/);
+  assert.match(source, /\{\{ \$showLatestSlot := false \}\}/);
   assert.match(source, /range \$candidate := \$essays/);
   assert.match(source, /lt \(len \$secondary\) 4/);
   assert.match(source, /home_selected_keys/);
@@ -138,6 +128,10 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.match(source, /"keys" \$selectedKeys/);
   assert.match(source, /return \(dict/);
   assert.doesNotMatch(source, /Params\.featured/);
+  assert.doesNotMatch(source, /Params\.homepage_featured/);
+  assert.doesNotMatch(source, /Params\.homepage_featured_until/);
+  assert.doesNotMatch(source, /currentCartoonPage/);
+  assert.doesNotMatch(source, /findRE "\\\\d\{4\}-\\\\d\{2\}-\\\\d\{2\}"/);
   assert.doesNotMatch(source, /where site\.RegularPages "Section" "essays"/);
   assert.doesNotMatch(source, /Read Essay/);
   assert.doesNotMatch(source, /Download PDF/);
@@ -173,6 +167,8 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
+  assert.doesNotMatch(frontPageSource, /Featured Essay/);
+  assert.doesNotMatch(frontPageSource, /Front Page Essay/);
   assert.match(frontPageSource, /range \$secondary/);
   assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
   assert.doesNotMatch(frontPageSource, />Front Page</);
@@ -235,7 +231,7 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(thinkOutsideEntry, /essay:/);
 });
 
-test("active featured essays lead while the right rail uses the newest published essays", () => {
+test("latest essay leads while the right rail uses the next newest published essays", () => {
   const pages = [
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") },
     { relPermalink: "/essays/hero/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
@@ -250,17 +246,18 @@ test("active featured essays lead while the right rail uses the newest published
 
   const result = selectHomepageEssays(pages);
 
-  assert.equal(result.hero?.relPermalink, "/essays/hero/");
+  assert.equal(result.hero?.relPermalink, "/essays/latest/");
   assert.equal(result.latest?.relPermalink, "/essays/latest/");
-  assert.equal(result.showLatestSlot, true);
+  assert.equal(result.showLatestSlot, false);
   assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/expired/", "/essays/core-a/", "/essays/core-b/", "/essays/core-c/"]);
   assert.equal(result.secondary.length, 4);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
 });
 
-test("current cartoon essay leads and the right rail starts with the next newest essay", () => {
+test("current cartoon essay does not override the latest essay lead", () => {
   const pages = [
+    { relPermalink: "/essays/the-easement-under-the-lake/", kind: "essay", draft: false, date: new Date("2026-05-22") },
     { relPermalink: "/essays/id-required/", kind: "essay", draft: false, date: new Date("2026-05-19") },
     { relPermalink: "/essays/consent-from-permission-to-sanctity/", kind: "essay", draft: false, date: new Date("2026-05-18"), homepage_featured: true, homepage_featured_until: "2026-05-31" },
     { relPermalink: "/essays/from-variety-to-virtue/", kind: "essay", draft: false, date: new Date("2026-05-17") },
@@ -269,10 +266,11 @@ test("current cartoon essay leads and the right rail starts with the next newest
 
   const result = selectHomepageEssays(pages, "2026-05-20", "/essays/id-required/");
 
-  assert.equal(result.hero?.relPermalink, "/essays/id-required/");
-  assert.equal(result.latest?.relPermalink, "/essays/id-required/");
+  assert.equal(result.hero?.relPermalink, "/essays/the-easement-under-the-lake/");
+  assert.equal(result.latest?.relPermalink, "/essays/the-easement-under-the-lake/");
   assert.equal(result.showLatestSlot, false);
   assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
+    "/essays/id-required/",
     "/essays/consent-from-permission-to-sanctity/",
     "/essays/from-variety-to-virtue/",
     "/essays/the-ash-pond-under-the-cloud/"
@@ -280,7 +278,7 @@ test("current cartoon essay leads and the right rail starts with the next newest
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
 });
 
-test("duplicate active feature flags break ties by newest date first", () => {
+test("active feature flags do not override newest essay lead", () => {
   const pages = [
     { relPermalink: "/essays/older/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
     { relPermalink: "/essays/newer/", kind: "essay", draft: false, date: new Date("2026-02-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
@@ -289,7 +287,7 @@ test("duplicate active feature flags break ties by newest date first", () => {
 
   const result = selectHomepageEssays(pages);
 
-  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/newer/", "/essays/latest/", "/essays/older/"]);
+  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/latest/", "/essays/newer/", "/essays/older/"]);
 });
 
 test("recent fallback remains stable when no active feature exists", () => {
@@ -338,7 +336,7 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.ok(source.indexOf('partial "newsletter_signup.html"') < source.indexOf('class="home-browse'));
 });
 
-test("homepage lead control still lives in expiring essay feature front matter", () => {
+test("homepage lead control ignores expiring essay feature front matter", () => {
   const essayDir = path.resolve("content/essays");
   const essays = fs
     .readdirSync(essayDir)

@@ -6,68 +6,14 @@
   {{ end }}
 {{ end }}
 {{ $essays = sort (sort $essays "Title" "asc") "Date" "desc" }}
-{{ $today := now.Format "2006-01-02" }}
-{{ $cartoonData := site.Data.editorial_cartoons | default dict }}
-{{ $cartoons := $cartoonData.cartoons | default (slice) }}
-{{ $currentCartoonSlug := $cartoonData.current | default "" }}
-{{ $currentCartoonEssay := "" }}
-{{ $currentCartoonPage := false }}
-{{ $featuredCandidates := slice }}
-
-{{ range $cartoons }}
-  {{ if eq .slug $currentCartoonSlug }}
-    {{ with .essay }}
-      {{ $currentCartoonEssay = . }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-
-{{ if $currentCartoonEssay }}
-  {{ range $essays }}
-    {{ if eq .RelPermalink $currentCartoonEssay }}
-      {{ $currentCartoonPage = . }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-
-{{ range $essays }}
-  {{ $page := . }}
-  {{ if $page.Params.homepage_featured }}
-    {{ with $page.Params.homepage_featured_until }}
-      {{ $untilMatches := findRE "\\d{4}-\\d{2}-\\d{2}" (printf "%v" .) 1 }}
-      {{ if gt (len $untilMatches) 0 }}
-        {{ $untilDate := index $untilMatches 0 }}
-        {{ if ge $untilDate $today }}
-          {{ $featuredCandidates = $featuredCandidates | append $page }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-
 {{ $latest := false }}
 {{ if gt (len $essays) 0 }}
   {{ $latest = index $essays 0 }}
 {{ end }}
 
-{{ $hero := false }}
-{{ $heroMode := "latest" }}
-{{ if $currentCartoonPage }}
-  {{ $hero = $currentCartoonPage }}
-  {{ if and $latest (ne $hero.RelPermalink $latest.RelPermalink) }}
-    {{ $heroMode = "cartoon" }}
-  {{ end }}
-{{ else if gt (len $featuredCandidates) 0 }}
-  {{ $hero = index (sort $featuredCandidates "Date" "desc") 0 }}
-  {{ $heroMode = "featured" }}
-{{ else if gt (len $essays) 0 }}
-  {{ $hero = index $essays 0 }}
-{{ end }}
+{{ $hero := $latest }}
 
 {{ $showLatestSlot := false }}
-{{ if and $hero $latest (ne $hero.RelPermalink $latest.RelPermalink) }}
-  {{ $showLatestSlot = true }}
-{{ end }}
 
 {{ $secondary := slice }}
 {{ $selectedPages := slice }}
@@ -103,6 +49,5 @@
   "latest" $latest
   "showLatestSlot" $showLatestSlot
   "secondary" $secondary
-  "heroMode" $heroMode
 ) }}
 

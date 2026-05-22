@@ -1,4 +1,4 @@
-current: memory-hole
+current: net-zero-prosperity
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -254,5 +254,13 @@ cartoons:
     image: "/images/editorial/memory-hole.png"
     essay: "/essays/the-text-message-in-the-archive-box/"
     alt: "Editorial cartoon showing a man feeding papers into a shredder labeled PRIVATE CHANNELS over a pit labeled NO RECORD while a woman holds an empty box labeled PUBLIC MEMORY."
+    width: 1672
+    height: 941
+  - slug: net-zero-prosperity
+    title: "Net Zero Prosperity"
+    date: "2026-05-22"
+    image: "/images/editorial/net-zero-prosperity.png"
+    essay: "/essays/the-easement-under-the-lake/"
+    alt: "Editorial cartoon showing protesters with signs against oil and for the planet beside a fenced federal property lot, where a bureaucrat holding a permit denied folder confronts a construction worker near pipe sections, wildlife, and industrial ruins."
     width: 1672
     height: 941
