@@ -2276,7 +2276,7 @@
       "deployed_on": "2026-05-21"
     },
     "pornography-the-modern-secular-state-religion-and-american-morality": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-22",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
       "previous_version": "1.0",
@@ -2292,10 +2292,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay ties moral claims to child-exposure data, religious-affiliation records, legal history, relationship evidence, and explicit uncertainty instead of imported culture-war certainty."
-      }
+      },
+      "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
+      "deployed_on": "2026-05-22"
     },
     "the-crucifix-courage-training-to-speak-truth-in-a-false-world": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-22",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
       "previous_version": "1.0",
@@ -2311,10 +2313,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay preserves the religious argument while distinguishing textual, therapeutic, and philosophical source roles and avoiding category-based political shorthand."
-      }
+      },
+      "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
+      "deployed_on": "2026-05-22"
     },
     "the-dolphin-company": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-22",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
       "previous_version": "1.0",
@@ -2330,10 +2334,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay follows inspection, court, transfer, and company records to test incentives, leverage, animal-care tradeoffs, and institutional risk without relying on a single advocacy frame."
-      }
+      },
+      "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
+      "deployed_on": "2026-05-22"
     },
     "uncertainty-is-not-a-technical-problem": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-22",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
       "previous_version": "1.0",
@@ -2349,10 +2355,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay directly names evidence limits, model incentives, tradeoffs, consequences, uncertainty, and institutional responsibility in a conceptual risk-analysis frame."
-      }
+      },
+      "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
+      "deployed_on": "2026-05-22"
     },
     "ai-in-education-is-a-wicked-problem": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-22",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
       "previous_version": "1.0",
@@ -2368,7 +2376,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised essay tests AI-in-education claims through governance incentives, assessment tradeoffs, detector-bias evidence, uncertainty, and institutional responsibility."
-      }
+      },
+      "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
+      "deployed_on": "2026-05-22"
     }
   },
   "blocked": {},
@@ -2697,8 +2707,10 @@
         "uncertainty-is-not-a-technical-problem",
         "ai-in-education-is-a-wicked-problem"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
+      "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
+      "deployed_on": "2026-05-22"
     }
   ]
 }
