@@ -1274,6 +1274,7 @@ $requiredUxPages = @(
   'public/essays/the-ledger-vol-3/index.html',
   'public/essays/what-happened-at-camp-mystic/index.html',
   'public/essays/save-some-air-for-the-fishies/index.html',
+  'public/essays/the-easement-under-the-lake/index.html',
   'public/essays/multiple-shmultiple/index.html',
   'public/essays/the-world-is-back-at-the-poker-table/index.html'
 )
@@ -2573,7 +2574,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*115 published pieces'
+    Pattern = '11 public collections.*116 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -3055,6 +3056,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/outside-the-garden/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'Outside the Garden' },
   @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' },
   @{ Path = 'public/essays/save-some-air-for-the-fishies/index.html'; Slug = 'floods-water-built-environment'; Label = 'Save Some Air for the Fishies' },
+  @{ Path = 'public/essays/the-easement-under-the-lake/index.html'; Slug = 'floods-water-built-environment'; Label = 'The Easement Under the Lake' },
   @{ Path = 'public/essays/multiple-shmultiple/index.html'; Slug = 'reported-case-studies'; Label = 'Multiple Shmultiple' }
 )
 
