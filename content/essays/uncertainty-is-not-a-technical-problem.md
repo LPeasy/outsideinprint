@@ -9,8 +9,12 @@ featured_image: "/images/medium/uncertainty-is-not-a-technical-problem/452fe328a
 featured_image_caption: "Photo by Loic Leray on Unsplash"
 featured_image_alt: "Uncertainty Is Not a Technical Problem"
 description: "On uncertainty, risk modeling, and the incentives that reward precision over responsibility. We expect risk models to tell us what will happen.\ When they do..."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-22"
+    note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
 pdf: "/pdfs/uncertainty-is-not-a-technical-problem.pdf"
 featured: false
 
@@ -24,7 +28,7 @@ medium_source_url: "https://medium.com/@lawtonperret/uncertainty-is-not-a-techni
 over responsibility*
 
 We expect risk models to tell us what will happen.\
-When they don’t, we assume something went wrong.
+When they don't, we assume something went wrong.
 
 But many of the failures we attribute to bad modeling have nothing to do
 with technical mistakes. They come from a deeper misunderstanding of
@@ -50,7 +54,7 @@ We tend to treat uncertainty as a failure of knowledge. If only we had
 better data, better models, better tools ~ then the answer would reveal
 itself.
 
-Sometimes that’s true. Some uncertainty reflects limits in what we know:
+Sometimes that's true. Some uncertainty reflects limits in what we know:
 missing data, outdated assumptions, imperfect measurements. In
 principle, that kind of uncertainty can be reduced.
 
@@ -96,7 +100,7 @@ neatly into briefings, tables, and approval memos. They penalize
 caveats, ranges, and statements that admit limits. A clean estimate is
 easier to defend than an honest one.
 
-Precision simplifies responsibility. If a number is “the estimate,” then
+Precision simplifies responsibility. If a number is "the estimate," then
 accountability can be traced to the method rather than the decision.
 When outcomes diverge from expectations, the failure can be framed as
 technical rather than judgmental.
@@ -127,7 +131,7 @@ But when reality diverges ~ and it always does ~
 
 that cover dissolves.
 
-### Why Better Data Doesn’t Always Improve Decisions
+### Why Better Data Doesn't Always Improve Decisions
 
 Modern systems are very good at reducing certain kinds of uncertainty.
 They can refine measurements, update inventories, recalibrate models,
@@ -155,7 +159,7 @@ It is an incentive problem.
 
 ### When Risk Estimates Erode Public Trust
 
-Public trust erodes not ‘cause estimates are wrong, but because
+Public trust erodes not because estimates are wrong, but because
 expectations are misaligned.
 
 When a precise number is presented, people assume it carries a promise:
@@ -211,7 +215,7 @@ Until we confront that, we will keep demanding certainty where it cannot
 exist ~ and losing trust when God laughs at our scribble, lines in the
 sand.
 
-### Author’s Note
+### Author's Note
 
 This essay draws on concepts from decision and risk analysis,
 particularly the distinction between **knowledge uncertainty**

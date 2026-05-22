@@ -9,8 +9,12 @@ description: "Control is impossible when everyone depends on the machine. School
 featured_image: "/images/medium/ai-in-education-is-a-wicked-problem/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba.png"
 featured_image_caption: "“In My Voice” | Art by Author"
 featured_image_alt: "“In My Voice”"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-22"
+    note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
 pdf: "/pdfs/ai-in-education-is-a-wicked-problem.pdf"
 featured: false
 
@@ -23,7 +27,7 @@ medium_source_url: "https://medium.com/@lawtonperret/ai-in-education-is-a-wicked
 
 **Control is impossible when everyone depends on the machine.**
 
-Schools can’t control AI misuse because everyone depends on it.
+Schools can't control AI misuse because everyone depends on it.
 
 Teachers use it to save time.\
 Students use it to save effort.\
@@ -31,32 +35,32 @@ Tech companies keep building faster tools for both.
 
 > *Every attempt at regulation fixes one issue and creates another.*
 
-That’s what makes this a [***wicked problem***](https://academic.oup.com/policyandsociety/article/36/3/385/6407931) ~ **something that can’t be solved because the
+That's what makes this a [***wicked problem***](https://academic.oup.com/policyandsociety/article/36/3/385/6407931) ~ **something that can't be solved because the
 act of solving it changes what it is.**
 
-AI misuse in education isn’t a passing issue ~ **it’s unmanageable by
+AI misuse in education isn't a passing issue ~ **it's unmanageable by
 design.**
 
-> AI didn’t break the system.
+> AI didn't break the system.
 
 > It revealed how automated it already was.
 
-### Why AI Misuse in Education Can’t Be Solved Like Other School Problems
+### Why AI Misuse in Education Can't Be Solved Like Other School Problems
 
 Most school problems can be managed with clear rules or metrics ~ test
 scores, attendance, or budgets.
 
-> AI doesn’t fit the mold.
+> AI doesn't fit the mold.
 
 **It moves too fast and cuts across every layer of the system.**
 
-#### Understanding ‘Wicked Problems’ ~ and Why AI Fits the Definition
+#### Understanding 'Wicked Problems' ~ and Why AI Fits the Definition
 
 Coined by Horst Rittel and Melvin Webber (1973), a wicked problem ~
 
 > ***1. Has no clear definition or endpoint***
 
-> ***2. Can’t be measured objectively***
+> ***2. Can't be measured objectively***
 
 > ***3. Evolves faster than systems can adapt***
 
@@ -64,10 +68,6 @@ Coined by Horst Rittel and Melvin Webber (1973), a wicked problem ~
 
 > Poverty, climate change, social media addiction ~ and now, AI in the
 > classroom.
-
-![](https://cdn-images-1.medium.com/max/800/1*1uSh6N8hLgHGHMtFH5vvww.png)
-
-*“The Wicked Problem Loop” | Created by Author*
 
 ### Why No One Owns the AI Problem in Education
 
@@ -81,24 +81,25 @@ Tech companies want more users.
 
 **No one defines the problem, but *everyone contributes* to it.**
 
-The answer to ***“what counts as learning?”***
+The answer to ***"what counts as learning?"***
 
-> depends on who’s answering.
+> depends on who's answering.
 
-#### Teachers Use AI Too ~ And That’s the Real Story
+#### Teachers Use AI Too ~ And That's the Real Story
 
-> Everyone’s using AI ~ just not for the same reasons.
+> Everyone's using AI ~ just not for the same reasons.
 
 Students write essays with it.\
 Teachers draft assignments and lesson plans.\
 Administrators write memos warning against AI misuse.
 
-One Florida high school recently banned ChatGPT for student essays.\
-A week later, teachers there used it to write lesson plans.
+One policy can ban student use of generative AI for essays.\
+Another staff memo can encourage teachers to use the same class of tools
+for lesson plans.
 
 > Who broke the rules?
 
-**The machine hasn’t replaced education ~ it’s becoming part of it.**
+**The machine hasn't replaced education ~ it's becoming part of it.**
 
 Teachers often rely on the same tools they warn students against.\
 Lesson plans, rubrics, and feedback.\
@@ -107,34 +108,30 @@ A teacher uses ChatGPT to summarize essays ~
 outsourcing judgment ***in the same way a student outsources
 authorship.***
 
-> That overlap isn’t hypocrisy ~ it’s survival.
+> That overlap isn't hypocrisy ~ it's survival.
 
 **AI offers relief, and *both sides take it.***
 
 ### Why Detection and Governance Fail for the Same Reason
 
-![](https://cdn-images-1.medium.com/max/800/1*uGkgPMqIPQHhlAZstOBilQ.png)
-
-*“The Futility of Control” | Created by Author*
-
 > Every attempt at control creates a new loophole.
 
-A Stanford study found that AI detectors often misidentify text,
+A Stanford-linked study found that AI detectors often misidentify text,
 especially from non-native English speakers, flagging human writing as
-AI-generated (Liang et al., 2023). These errors can unfairly damage
-reputations and institutional trust.
+AI-generated ([Liang et al., 2023](https://arxiv.org/abs/2304.02819)).
+These errors can unfairly damage reputations and institutional trust.
 
-The line between “using AI” and “cheating with AI” shifts constantly. A
-student who brainstorms with ChatGPT isn’t necessarily breaking rules.
+The line between "using AI" and "cheating with AI" shifts constantly. A
+student who brainstorms with ChatGPT isn't necessarily breaking rules.
 
 **But when does help become substitution?**
 
 ***When does efficiency replace understanding?***
 
 The balance changes with every update, making enforcement impossible.\
-You can’t regulate what you can’t clearly define or observe.
+You can't regulate what you can't clearly define or observe.
 
-> Policy can’t keep up.
+> Policy can't keep up.
 
 Even if Congress passed a law tomorrow, rapid development would render
 it a symbolic gesture. Both detection tools and governance structures
@@ -144,33 +141,25 @@ fail for the same reason ~
 
 ### How AI Is Replacing Judgment ~ Not Just Labor
 
-![](https://cdn-images-1.medium.com/max/800/1*kibCWTnDnURswRHQEglrjA.png)
-
-*“The Erosion of Judgement” | Created by Author*
-
-When a student asks AI to “write an essay in my voice,” they’re not just
-skipping work. They’re giving away the decision of what counts as
-“good”.
+When a student asks AI to "write an essay in my voice," they're not just
+skipping work. They're giving away the decision of what counts as
+"good".
 
 Teachers do something similar.
 
 Using AI for grading or feedback saves time but **shifts judgment** to a
-system that can’t read nuance or intent.
+system that can't read nuance or intent.
 
 **Everyone ends up relying on the machine *to define quality.***
 
-> What’s being lost isn’t morality ~
+> What's being lost isn't morality ~
 
-> it’s the habit of thinking through a task yourself.
+> it's the habit of thinking through a task yourself.
 
 Education already rewards output over process ~ AI is just the next
 logical iteration.
 
-### Why the AI Misuse Problem Can’t Be Solved ~ Only Redefined
-
-![](https://cdn-images-1.medium.com/max/800/1*_FuUDifbXPz_TfDGhbDjUg.png)
-
-*“The Reflection of Learning” | Art by Author*
+### Why the AI Misuse Problem Can't Be Solved ~ Only Redefined
 
 > Rules always trail behavior.
 
@@ -179,7 +168,7 @@ Detection tools always lag the newest models.
 The only sustainable response is to **redefine what learning looks
 like** when anyone can produce polished text instantly.
 
-**AI is a wicked problem, but education doesn’t have to treat it as a
+**AI is a wicked problem, but education doesn't have to treat it as a
 threat.**
 
 The focus could shift toward practical assessments ~ proving
@@ -191,12 +180,12 @@ demonstrations instead of text.
 > Students automate writing, teachers automate grading, and institutions
 > automate enforcement.
 
-**AI didn’t break education ~ *it’s holding up a mirror.***
+**AI didn't break education ~ *it's holding up a mirror.***
 
 Incorporating AI can improve accessibility, especially for students with
-learning disabilities, but it can’t replace critical thinking,
+learning disabilities, but it can't replace critical thinking,
 reasoning, or collaboration.
 
-**If we don’t like what we see, *maybe the issue isn’t the machine ~***
+**If we don't like what we see, *maybe the issue isn't the machine ~***
 
-> maybe it’s that we stopped thinking for ourselves.
+> maybe it's that we stopped thinking for ourselves.

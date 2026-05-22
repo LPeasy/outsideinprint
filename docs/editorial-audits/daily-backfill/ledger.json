@@ -2274,6 +2274,101 @@
       },
       "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
       "deployed_on": "2026-05-21"
+    },
+    "pornography-the-modern-secular-state-religion-and-american-morality": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-22",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-22",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay ties moral claims to child-exposure data, religious-affiliation records, legal history, relationship evidence, and explicit uncertainty instead of imported culture-war certainty."
+      }
+    },
+    "the-crucifix-courage-training-to-speak-truth-in-a-false-world": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-22",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-22",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay preserves the religious argument while distinguishing textual, therapeutic, and philosophical source roles and avoiding category-based political shorthand."
+      }
+    },
+    "the-dolphin-company": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-22",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-22",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay follows inspection, court, transfer, and company records to test incentives, leverage, animal-care tradeoffs, and institutional risk without relying on a single advocacy frame."
+      }
+    },
+    "uncertainty-is-not-a-technical-problem": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-22",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-22",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay directly names evidence limits, model incentives, tradeoffs, consequences, uncertainty, and institutional responsibility in a conceptual risk-analysis frame."
+      }
+    },
+    "ai-in-education-is-a-wicked-problem": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-22",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-22",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay tests AI-in-education claims through governance incentives, assessment tradeoffs, detector-bias evidence, uncertainty, and institutional responsibility."
+      }
     }
   },
   "blocked": {},
@@ -2592,6 +2687,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-21.md",
       "commit_sha": "2c8f02e2247b871551e06b6c0879a8609e889864",
       "deployed_on": "2026-05-21"
+    },
+    {
+      "batch_id": "2026-05-22",
+      "selected_slugs": [
+        "pornography-the-modern-secular-state-religion-and-american-morality",
+        "the-crucifix-courage-training-to-speak-truth-in-a-false-world",
+        "the-dolphin-company",
+        "uncertainty-is-not-a-technical-problem",
+        "ai-in-education-is-a-wicked-problem"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md"
     }
   ]
 }
