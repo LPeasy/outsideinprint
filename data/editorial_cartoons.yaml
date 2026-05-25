@@ -1,4 +1,4 @@
-current: net-zero-prosperity
+current: learing-center
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -262,5 +262,13 @@ cartoons:
     image: "/images/editorial/net-zero-prosperity.png"
     essay: "/essays/the-easement-under-the-lake/"
     alt: "Editorial cartoon showing protesters with signs against oil and for the planet beside a fenced federal property lot, where a bureaucrat holding a permit denied folder confronts a construction worker near pipe sections, wildlife, and industrial ruins."
+    width: 1672
+    height: 941
+  - slug: learing-center
+    title: "Learing Center"
+    date: "2026-05-24"
+    image: "/images/editorial/learing-center.png"
+    essay: "/essays/the-door-that-would-not-open/"
+    alt: "Editorial cartoon showing a boarded-up storefront labeled Learing Center in a cracked city block, with barred gates, a leaning utility pole, and an overturned shopping cart."
     width: 1672
     height: 941
