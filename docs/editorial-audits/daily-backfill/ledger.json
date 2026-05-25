@@ -2379,6 +2379,101 @@
       },
       "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
       "deployed_on": "2026-05-22"
+    },
+    "in-the-image-of-god": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-25",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-25.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-25",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay keeps the spiritual essay framed around inherited dignity while narrowing certainty, preserving evidence boundaries, and clarifying institutional implications without ideological capture."
+      }
+    },
+    "the-world-the-un-was-built-for": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-25",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-25.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-25",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay evaluates the postwar order through institutional design, source hierarchy, incentives, tradeoffs, consequences, uncertainty, and risk allocation rather than inherited pro-UN or anti-UN framing."
+      }
+    },
+    "the-100-year-flood-is-not-what-you-think": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-25",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-25.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-25",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay ties flood probability to FEMA and hydrology concepts, names risk-communication incentives and uncertainty, and clarifies downstream planning consequences."
+      }
+    },
+    "life-is-a-bull-market": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-25",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-25.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-25",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay preserves the metaphor while grounding claims in uncertainty, incentives, tradeoffs, consequences, and institutional behavior rather than motivational certainty."
+      }
+    },
+    "how-did-mother-become-a-controversial-word-in-america": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-25",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-25.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-25",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised essay treats institutional language choices, medical terminology, incentives, tradeoffs, consequences, uncertainty, and risk allocation without importing activist or anti-activist framing."
+      }
     }
   },
   "blocked": {},
@@ -2711,6 +2806,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-22.md",
       "commit_sha": "d3f9885637af0b6538c1452e049299275a394484",
       "deployed_on": "2026-05-22"
+    },
+    {
+      "batch_id": "2026-05-25",
+      "selected_slugs": [
+        "in-the-image-of-god",
+        "the-world-the-un-was-built-for",
+        "the-100-year-flood-is-not-what-you-think",
+        "life-is-a-bull-market",
+        "how-did-mother-become-a-controversial-word-in-america"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-25.md"
     }
   ]
 }

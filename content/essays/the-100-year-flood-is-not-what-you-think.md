@@ -8,8 +8,12 @@ subtitle: "Why the 100-year flood happens more than once in a century ~"
 description: "People hear the phrase and assume rarity.\ Once in a lifetime. Maybe once in a century.\ Something you can shrug off if you plan to sell before retirement"
 featured_image: "/images/medium/the-100-year-flood-is-not-what-you-think/96718dd1ce6457c535506421a4afbbb633458940478ba3165a382cfaa93d70aa.jpeg"
 featured_image_alt: "The 100-Year Flood Is Not What You Think"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-25"
+    note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
 pdf: "/pdfs/the-100-year-flood-is-not-what-you-think.pdf"
 featured: true
 
@@ -24,15 +28,15 @@ People hear the phrase and assume rarity.\
 Once in a lifetime. Maybe once in a century.\
 Something you can shrug off ~ if you plan to sell before retirement.
 
-**But that’s not how the math works at all.**
+**But that's not how the math works at all.**
 
-A “100-year flood” does **not** mean one flood every hundred years. It
+A "100-year flood" does **not** mean one flood every hundred years. It
 means something far more mundane and far more dangerous: **a** **1%
 chance every year**, repeated over and over again.
 
 **Same risk. New roll of the dice. Every year.**
 
-Only one of those dice rolls needs to come up “flood” to make your flood
+Only one of those dice rolls needs to come up "flood" to make your flood
 insurance worth its premium.
 
 So, how likely is your house to flood if you live in the 100-year
@@ -40,9 +44,8 @@ floodplain?
 
 ### One Year, One Chance ~ Raised to the Power of Time
 
-![](https://cdn-images-1.medium.com/max/800/1*QkwHnrZCeHCgldxY7S7Ivw@2x.jpeg)
 
-#### Let’s start with the technical stuff ~
+#### Let's start with the technical stuff ~
 
 A 100-year flood has a 1% annual probability.
 
@@ -67,7 +70,7 @@ If you look over a decade, you get: **P = (0.99)^10 = about 90%**
 So, over any decade you have something like a 90% chance of NOT
 experiencing a flood.
 
-But people don’t care about *no floods*.\
+But people don't care about *no floods*.\
 They care about whether at least one flood shows up and wrecks their
 day.
 
@@ -77,7 +80,7 @@ day.
 
 The probability we care about is: **P(at least 1 flood in n years) = 1 - (0.99)^n**
 
-**That’s it. That’s the whole trick.**
+**That's it. That's the whole trick.**
 
 > Makes sense right?
 
@@ -92,19 +95,19 @@ the mortgage is: **1 - 0.7397 = 0.26031**
 **About 26%.**\
 **Twenty-six percent!**
 
-That’s somewhere between a coin flip and a roll of the dice. And you’d
-better hope you don’t come up with snake eyes!
+That's somewhere between a coin flip and a roll of the dice. And you'd
+better hope you don't come up with snake eyes!
 
 ### Why This Confuses So Many People
 
-The phrase “100-year flood” sounds like a calendar event.\
+The phrase "100-year flood" sounds like a calendar event.\
 It feels distant.\
 Abstract.
 
-Somebody else’s problem.
+Somebody else's problem.
 
-In reality, it’s a repeated gamble with modest odds that quietly stack
-up over time. The risk doesn’t announce itself loudly ~
+In reality, it's a repeated gamble with modest odds that quietly stack
+up over time. The risk doesn't announce itself loudly ~
 
 **It accumulates as your exposure extends across time.**
 
@@ -114,14 +117,14 @@ Over the long haul, even something as rare as a 1% annual chance will
 compound.
 
 Eventually, the flood waters will rise, and if you live in the
-floodplain, then understanding the risk isn’t optional ~
+floodplain, then understanding the risk isn't optional ~
 
-It’s your responsibility.
+It's your responsibility.
 
 ### The Insurance Decision, In Plain English
 
-Choosing not to buy flood insurance in the 100-year floodplain isn’t a
-principled stand against bad science. It’s a bet.
+Choosing not to buy flood insurance in the 100-year floodplain isn't a
+principled stand against bad science. It's a bet.
 
 Vegas would give you roughly **3 to 1 odds.**
 
@@ -133,8 +136,10 @@ But in this case, the house does **not** always win.
 
 #### Author's Note
 
-The term “100-year flood” is a technical definition, not a prediction.
-It describes a fixed annual probability, not a schedule. The math here
+The term "100-year flood" is a technical definition, not a prediction.
+[FEMA describes](https://www.fema.gov/flood-maps/know-your-risk/homeowners)
+the 100-year flood as the 1% annual chance flood and uses the same 26%
+figure for a 30-year mortgage in high-risk flood zones. The math here
 assumes independence and constant risk, which is how floodplain maps are
 formally constructed.
 

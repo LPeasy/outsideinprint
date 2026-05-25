@@ -8,8 +8,12 @@ subtitle: "An introduction to Catholic social teaching"
 description: "Most conversations about religion and society begin in the wrong places. They start with policies and parties"
 featured_image: "/images/medium/in-the-image-of-god/fa2482c598cd754263ea2463145d8e69da0af924b806be195d62df5c53684d0f.jpg"
 featured_image_alt: "In The Image of God"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-25"
+    note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
 pdf: "/pdfs/in-the-image-of-god.pdf"
 featured: false
 
@@ -18,14 +22,14 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/in-the-image-of-god-bd1806aee9d4"
 ---
 
-#### Author’s Note
+#### Author's Note
 
 > This essay draws from a weekly social teaching course taught by
 > Matthew, a Catholic educator and parish instructor whose ministry
 > focuses on helping ordinary people understand how the Church thinks
 > about society, politics, and moral responsibility.
 
-> His teaching is grounded in Scripture, the Catechism, and the Church’s
+> His teaching is grounded in Scripture, the Catechism, and the Church's
 > social doctrine, and is offered not as personal opinion but as
 > faithful explanation of what the Church actually professes.
 
@@ -39,11 +43,10 @@ They start with policies and parties
 
 or slogans.
 
-Accusations…
+Accusations...
 
 ~ and they stop listening.
 
-![](https://cdn-images-1.medium.com/max/800/1*ySreNhiP4IH4YH1A29GvVQ@2x.jpeg)
 
 #### **The Church asks us to be radically different.**
 
@@ -55,12 +58,12 @@ world.
 > You are a Child of God. Therefore, your dignity is infinite and comes
 > from Him alone ~ not from any earthly power.
 
-The Church doesn’t open with economics, healthcare, climate policy, or
+The Church doesn't open with economics, healthcare, climate policy, or
 voting strategies.
 
 **It opens with a sentence so simple, and so sweet:**
 
-> **“God is love.”**
+> **"God is love."**
 
 > **(1 John 4:8, NRSV-CE)**
 
@@ -68,20 +71,19 @@ In all of history, this may be the most radical three-word sentence that
 anyone ever said. And **everything that follows** ~ every social
 principle, every moral obligation ~ **flows directly from it.**
 
-![](https://cdn-images-1.medium.com/max/800/0*dSB4kntOgJPQE900)
 
 #### Love, before anything else
 
 If God is love, then love is no feeling or preference!
 
-It can’t be reduced to kindness, tolerance, nor personal fulfillment.
+It can't be reduced to kindness, tolerance, nor personal fulfillment.
 
 Love is creativity moving over the waters of chaos bringing order and
 goodness into the world.
 
 Love is joie de vivre ~ the very essence of life itself.
 
-Love is the still, small voice you hear after the storm has pounded on
+Love is the quiet voice you hear after the storm has pounded on
 the walls. Love is the call to adventure beckoning you around the
 corner.
 
@@ -91,9 +93,9 @@ Love is the warm embrace of your wife and children after a long day.
 
 Paul said,
 
-> “If I have prophetic powers, and understand all mysteries and all
+> "If I have prophetic powers, and understand all mysteries and all
 > knowledge, and if I have all faith, so as to remove mountains, but do
-> not have love, I am nothing.”
+> not have love, I am nothing."
 
 > (1 Corinthians 13:2, NRSV-CE)
 
@@ -112,25 +114,24 @@ Love of his friends.
 
 **And that is why the crucifix is at the center of our attention.**
 
-The crucifix is not decorative. It’s not sentimental.\
-It’s the Church’s most concrete social statement.
+The crucifix is not decorative. It's not sentimental.\
+It's the Church's most concrete social statement.
 
-> “No one has greater love than this, to lay down one’s life for one’s
-> friends.”
+> "No one has greater love than this, to lay down one's life for one's
+> friends."
 
 > (John 15:13, NRSV-CE)
 
-### “It is not good that the man should be alone”
+### "It is not good that the man should be alone"
 
-![](https://cdn-images-1.medium.com/max/800/0*pYHsexsXyOLtuuuk.jpg)
 
-The Bible’s first explicit social claim appears before any potential
+The Bible's first explicit social claim appears before any potential
 play partners existed!
 
 **Everything in creation is declared good ~ light, land, sea, animals.**
 
-> **“Then the Lord God said, ‘It is not good that the man should be
-> alone.’”**
+> **"Then the Lord God said, 'It is not good that the man should be
+> alone.'"**
 
 > **(Genesis 2:18, NRSV-CE)**
 
@@ -141,7 +142,7 @@ other!
 The Church draws a decisive conclusion from this: **society is not an
 artificial construct.**
 
-#### **It’s a moral reality.**
+#### **It's a moral reality.**
 
 We need community to discover meaning, survive hardships, and find
 salvation.
@@ -156,7 +157,7 @@ God is not solitary.
 
 God is Trinity ~ a communion of persons.
 
-To be made in God’s image is to be oriented toward relationship. Social
+To be made in God's image is to be oriented toward relationship. Social
 concern is not a political hobby layered on top of faith ~
 
 It flows directly from God.
@@ -165,26 +166,28 @@ It flows directly from God.
 
 ### Dignity is Divine
 
-Human beings are made in God’s image, and their worth cannot be granted
+Human beings are made in God's image, and their worth cannot be granted
 ~ or revoked ~ by governments, markets, productivity, or popularity.
 
-This is one of Catholic social teaching’s most consistent claims:
+This is one of Catholic social teaching's most consistent claims:
 
 > Human dignity is inherent, not earned.
 
-> **“So God created humankind in his image, in the image of God he
-> created them.”**
+> **"So God created humankind in his image, in the image of God he
+> created them."**
 
 > **(Genesis 1:27, NRSV-CE)**
 
 **Dignity does not depend on capacity.**
 
-It doesn’t depend on age, intelligence, usefulness, citizenship, health,
+It doesn't depend on age, intelligence, usefulness, citizenship, health,
 or moral track record.
 
 Recent Church teaching has used the phrase ***infinite dignity***
-explicitly **** to make this unmistakable. The dignity of a human person
-is not diminished by weakness, guilt, or dependence.
+explicitly, including in the Vatican's 2024 declaration
+[*Dignitas infinita*](https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_ddf_doc_20240402_dignitas-infinita_en.html),
+to make this unmistakable. The dignity of a human person is not
+diminished by weakness, guilt, or dependence.
 
 A criminal does not lose it.\
 A migrant does not lack it.\
@@ -200,7 +203,6 @@ It refuses to reduce people to categories.
 
 ### Scripture does not allow selective concern
 
-![](https://cdn-images-1.medium.com/max/800/1*Ijyj4CJzBDKbj9jezROj6g@2x.jpeg)
 
 Jesus does not speak about social responsibility in abstract terms.
 
@@ -212,21 +214,21 @@ and left for dead on the side of the road. Two religious officials pass
 by and avert their gaze. A Samaritan, of all people! ~ an outsider ~
 stops, tends to his wounds, pays for his care, and promises to return.
 
-> **“Which of these three, do you think, was a neighbor to the man who
-> fell into the hands of the robbers?”**
+> **"Which of these three, do you think, was a neighbor to the man who
+> fell into the hands of the robbers?"**
 
 > **(Luke 10:36, NRSV-CE)**
 
-The Good Samaritan doesn’t ask whether an injured man shares his
-beliefs. He doesn’t need to consult a system. Instead he responds to
+The Good Samaritan doesn't ask whether an injured man shares his
+beliefs. He doesn't need to consult a system. Instead he responds to
 need when he witnesses it! Church tradition goes further and sees Christ
 himself as the Greatest Samaritan ~ lifting humanity toward restoration
 and the true path of fellowship.
 
 Matthew 25 removes any remaining ambiguity:
 
-> **“Truly I tell you, just as you did it to one of the least of these
-> who are members of my family, you did it to me.”**
+> **"Truly I tell you, just as you did it to one of the least of these
+> who are members of my family, you did it to me."**
 
 > **(Matthew 25:40, NRSV-CE)**
 
@@ -236,11 +238,10 @@ Christ came to be the least of us. He is the hungry, the sick, the
 imprisoned, and the poor. Social concern is not requisite charity
 layered onto faith:
 
-It’s an encounter with Christ Himself.
+It's an encounter with Christ Himself.
 
 ### The Church offers principles, not blueprints
 
-![](https://cdn-images-1.medium.com/max/800/1*PYghovCRjfTwYB0Q1bAf4A@2x.jpeg)
 
 One of the most persistent misunderstandings Matthew addresses is the
 idea that the Church exists to issue policy prescriptions.
@@ -249,8 +250,8 @@ It does not.
 
 Catholic social teaching operates at the level of principles ~ durable
 moral guideposts that can be applied across cultures, economies, and
-political systems. The Church does not prescribe tax rates. It doesn’t
-endorse parties. It doesn’t claim technical expertise in every policy
+political systems. The Church does not prescribe tax rates. It doesn't
+endorse parties. It doesn't claim technical expertise in every policy
 domain.
 
 > What it does claim is moral competence.
@@ -268,7 +269,7 @@ throughout this series:
     not merely ourselves
 
 These are not slogans.\
-They’re foundational.\
+They're foundational.\
 They prevent moral outsourcing.
 
 Citizens, lawmakers, and institutions remain responsible for applying
@@ -280,7 +281,6 @@ these principles in concrete ways.
 
 ### Why this matters now
 
-![](https://cdn-images-1.medium.com/max/800/1*xruVbWFUxkxZ91_xn8GsNA@2x.jpeg)
 
 Modern public life oscillates between two extremes ~ **technocratic
 detachment and moral outrage.**
@@ -301,15 +301,15 @@ love requires.**
 
 None of these topics are distractions from faith ~
 
-> They’re the practical applications of faith.
+> They're the practical applications of faith.
 
 ### A quiet invitation
 
-This series is not an argument. It’s an exploration of a moral tradition
+This series is not an argument. It's an exploration of a moral tradition
 that refuses simplification and rewards patience. If you follow along,
 you may not agree with every conclusion.
 
-That’s not the point.
+That's not the point.
 
 The point is to develop a framework that takes human dignity seriously
 and resists both cynicism and utopianism.
@@ -321,7 +321,6 @@ series as it unfolds week by week.
 
 ### A closing prayer
 
-![](https://cdn-images-1.medium.com/max/800/1*dCiHMr1bsztSiEsxt9TSnw@2x.jpeg)
 
 **Father**
 
@@ -333,7 +332,7 @@ Though night may fall and darkness surround us
 
 The sun will rise in the morning
 
-You give us courage when we are ‘fraid,
+You give us courage when we are 'fraid,
 
 Lift heavy burdens from our shoulders
 

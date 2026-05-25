@@ -8,8 +8,12 @@ subtitle: "Why Panic Selling Your Own Life Is a Bad Trade"
 featured_image: "/images/medium/life-is-a-bull-market/df53bd86e1b4ab0886a4b5346bb4fb1d3213d35de23e09436064bf85cca64a77.jpeg"
 featured_image_alt: "Life Is a Bull Market"
 description: "Most people talk about life as something fragile one bad break away from collapse. A missed opportunity. A wrong turn"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-25"
+    note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
 pdf: "/pdfs/life-is-a-bull-market.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/life-is-a-bull-market-db4524bf5431"
@@ -54,7 +58,7 @@ Social capital follows. Trust. Relationships. Reputation. Being known as
 someone who shows up, does what they say, and learns from mistakes. This
 capital compounds quietly.
 
-You don’t notice it building until one day, doors seem to open by
+You don't notice it building until one day, doors seem to open by
 themselves ~ automatic.
 
 Financial capital is the most visible form. Income, savings,
@@ -77,7 +81,7 @@ If life is a bull market, why does it feel so volatile?
 
 Because all bull markets have drawdowns.
 
-Markets don’t move in straight lines, and neither do people. Careers
+Markets don't move in straight lines, and neither do people. Careers
 stall. Bodies break. Relationships fracture. Plans fail. These are not
 anomalies ~ they are features of any long-running system under stress.
 
@@ -100,7 +104,6 @@ stay there far too long.
 
 ### Human capital never stops compounding
 
-![](https://cdn-images-1.medium.com/max/800/1*mHxN-rEGGixumWP62rOm3g@2x.jpeg)
 
 One of the least appreciated facts about adulthood is how late-life
 human capital accrual actually peaks.
@@ -117,7 +120,7 @@ partners, projects, and tradeoffs. Even physical decline, when managed
 well, does not erase this accumulation.
 
 Health matters enormously here. It is the carrying capacity of the
-entire system. You can’t compound human or social capital if the
+entire system. You can't compound human or social capital if the
 underlying hardware collapses.
 
 This is why health investments punch far above their weight. They
@@ -137,7 +140,7 @@ Reputation works the same way. A single failure rarely destroys it.
 Patterns do. Over time, consistency dominates moments.
 
 This is why early-life status anxiety is often misplaced. The market
-hasn’t had time to work yet. The compounding hasn’t shown up on the
+hasn't had time to work yet. The compounding hasn't shown up on the
 statement.
 
 ### Financial capital gets too much blame and too much credit
@@ -148,7 +151,7 @@ the illusion that it is the primary scorecard.
 In reality, financial capital is mostly a trailing indicator. It
 reflects prior human and social investments more than it creates them.
 
-This doesn’t make it irrelevant. It makes it contextual.
+This doesn't make it irrelevant. It makes it contextual.
 
 People who fixate on money while neglecting skills, health, judgment,
 and relationships are optimizing the wrong line item. They look rich on
@@ -156,14 +159,13 @@ paper and fragile in practice.
 
 ### Long-term optimism without denial
 
-![](https://cdn-images-1.medium.com/max/800/1*1giorNpjt9JERAT0x_6mQQ@2x.jpeg)
 
 Calling life a bull market is not denial.
 
 It does not dismiss suffering or pretend outcomes are guaranteed.
 
 Bull markets crash. Some recover slowly. Some leave scars. Some end
-early for reasons outside anyone’s control.
+early for reasons outside anyone's control.
 
 What this metaphor offers is proportionality ~
 
@@ -188,6 +190,6 @@ If you treat every downturn as a verdict, you will underperform your own
 potential. If you treat your life as a long bull market with inevitable
 drawdowns, you give compounding time to do its work.
 
-That isn’t optimism.
+That isn't optimism.
 
-It’s realism in the limit ~ looking at a longer chart.
+It's realism in the limit ~ looking at a longer chart.
