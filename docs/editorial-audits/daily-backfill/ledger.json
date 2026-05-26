@@ -2486,7 +2486,7 @@
       "deployed_on": "2026-05-25"
     },
     "ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
       "previous_version": "1.0",
@@ -2502,10 +2502,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised profile treats Ozzy as a cultural figure through record, persona, incentives of spectacle, tradeoffs of mainstream familiarity, bodily consequence, and uncertainty around mythmaking rather than tabloid framing."
-      }
+      },
+      "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
+      "deployed_on": "2026-05-26"
     },
     "george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
       "previous_version": "1.0",
@@ -2521,10 +2523,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised profile tests the reinvention argument through record, public incentives, commercial trust, tradeoffs between force and warmth, consequences for athletic legacy, and uncertainty around celebrity narrative."
-      }
+      },
+      "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
+      "deployed_on": "2026-05-26"
     },
     "gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
       "previous_version": "1.0",
@@ -2540,10 +2544,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised profile grounds the craft argument in visible screen behavior, role logic, incentives of celebrity visibility, tradeoffs of retreat, consequences for legacy, and institutional film culture without borrowed glamour framing."
-      }
+      },
+      "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
+      "deployed_on": "2026-05-26"
     },
     "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
       "previous_version": "1.0",
@@ -2559,10 +2565,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised profile directly examines who gains power, who bears risk, and how executive-branch machinery changes public outcomes while preserving uncertainty and avoiding factional loyalty."
-      }
+      },
+      "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
+      "deployed_on": "2026-05-26"
     },
     "charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-26",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
       "previous_version": "1.0",
@@ -2578,7 +2586,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Revised profile tests youth-organizing influence through evidence, media logic, belonging incentives, institutional conflict, consequences for conservative politics, uncertainty around long-term civic effects, and role-labeled criticism."
-      }
+      },
+      "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
+      "deployed_on": "2026-05-26"
     }
   },
   "blocked": {},
@@ -2935,8 +2945,10 @@
         "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center",
         "charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
+      "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
+      "deployed_on": "2026-05-26"
     }
   ]
 }
