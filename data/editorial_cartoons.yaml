@@ -1,4 +1,4 @@
-current: warbonds
+current: on-the-fence
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -278,5 +278,13 @@ cartoons:
     image: "/images/editorial/warbonds.png"
     essay: "/essays/the-tank-at-the-fence-line/"
     alt: "Editorial cartoon showing a Treasury auction block with a 10-year note, an auction gavel, bidders, warplanes and tankers outside, and a red signal driving a WAR PREMIUM gauge weighted by INFLATION and DEBT SERVICE."
+    width: 1672
+    height: 941
+  - slug: on-the-fence
+    title: "On the Fence"
+    date: "2026-05-26"
+    image: "/images/editorial/on-the-fence.png"
+    essay: "/essays/the-tank-at-the-fence-line/"
+    alt: "Editorial cartoon showing families leaving an evacuated neighborhood beside a fence line, while hazmat workers monitor a cracked MMA tank whose warning-yellow fracture casts public cost across the boundary."
     width: 1672
     height: 941
