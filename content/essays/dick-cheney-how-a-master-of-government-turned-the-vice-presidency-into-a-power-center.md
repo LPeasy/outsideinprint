@@ -6,8 +6,8 @@ slug: "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-
 description: "A compact civic portrait of the vice president who treated government as an instrument of concentrated power."
 section_label: "Essay"
 subtitle: "A compact civic portrait of the vice president who treated government as an instrument of concentrated power."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 series:
   - "Modern Bios"
 collections:
@@ -35,6 +35,10 @@ tags:
   - "biography"
   - "public-figure"
 repair_mojibake: true
+revision_history:
+  - version: "1.1"
+    date: "2026-05-26"
+    note: "Updated May 26, 2026, after OIP back-archive review. Normalized imported punctuation, removed house-style shortcuts, and checked source framing."
 ---
 
 Before he became Dick Cheney, vice president, national security architect, and one of the most controversial figures in modern American politics, he was a man who learned government from the inside out.
@@ -51,9 +55,9 @@ His years as vice president fixed his place in history.
 
 Under George W. Bush, Cheney helped redefine what the office could do. Earlier vice presidents had held influence, but Cheney approached the role with unusual force and structure. He did not treat it as ceremonial, supporting, or secondary in any simple sense. He used it as an operating center inside the executive branch, a place from which to shape policy, manage access, and push decisions toward his preferred outcome. He expanded the practical meaning of the job by occupying it as though its limits were open to revision.
 
-That mattered most after September 11.
+September 11 made that conviction operational.
 
-The attacks transformed the countryâ€™s political mood and reordered the priorities of the American state. Cheney entered that period with a settled worldview and a sharpened sense of executive necessity. He favored swift action, broad security powers, and a muscular conception of American responsibility in the world. He approached risk with the mindset of a man who believed hesitation could invite catastrophe. That posture carried enormous consequence. It influenced surveillance policy, detention policy, the architecture of the war on terror, and the larger turn toward an aggressively empowered national security state.
+The attacks transformed the country's political mood and reordered the priorities of the American state. Cheney entered that period with a settled worldview and a sharpened sense of executive necessity. He favored swift action, broad security powers, and a muscular conception of American responsibility in the world. He approached risk with the mindset of a man who believed hesitation could invite catastrophe. That posture carried enormous consequence. It influenced surveillance policy, detention policy, the architecture of the war on terror, and the larger turn toward an aggressively empowered national security state.
 
 Supporters saw resolve in that approach.
 
@@ -71,13 +75,13 @@ It also made him easier to cast as a symbol.
 
 Cheney came to stand for more than his own offices. He represented a philosophy of rule. He believed the executive branch should act with confidence, defend its prerogatives, and resist constraints that might dilute its ability to respond quickly and forcefully. He saw the modern world as unstable, adversarial, and full of actors who would exploit weakness if they found it. That worldview did not emerge overnight. It took shape over decades of institutional life, and it hardened under the pressure of crisis. By the early twenty-first century, Cheney had become one of its clearest exponents.
 
-That is why his biography matters beyond partisanship.
+His biography reaches beyond partisanship.
 
-He offers a case study in how power actually functions in a democracy. Charisma matters. Elections matter. Public language matters. Cheneyâ€™s career reminds us that process matters too. Advisers, memoranda, internal channels, bureaucratic alignments, and legal interpretations all shape the state as surely as campaign slogans do. He mastered those less visible terrains. He knew how to act before public opinion had fully formed and how to convert administrative advantage into policy momentum. He practiced a politics of structure.
+He offers a case study in how power actually functions in a democracy. Charisma matters. Elections matter. Public language matters. Cheney's career reminds us that process matters too. Advisers, memoranda, internal channels, bureaucratic alignments, and legal interpretations all shape the state as surely as campaign slogans do. He mastered those less visible terrains. He knew how to act before public opinion had fully formed and how to convert administrative advantage into policy momentum. He practiced a politics of structure.
 
 His influence also reveals the limits of invisibility.
 
-For years, Cheney seemed to operate most effectively when he remained partly out of frame. Yet the scale of his impact eventually pulled him into the center of public argument. Americans who might not have followed the architecture of executive power still sensed that something unusual had happened during his vice presidency. The office looked different. The balance of forces inside government looked different. The moral vocabulary of national security looked different. Cheney helped produce those changes, and his public reputation hardened around them.
+For years, Cheney seemed to operate most effectively when he remained partly out of frame. Yet the scale of his impact eventually pulled him into the center of public argument. Americans who might not have followed the architecture of executive power could sense that something unusual had happened during his vice presidency. The office looked different. The balance of forces inside government looked different. The moral vocabulary of national security looked different. Cheney helped produce those changes, and his public reputation hardened around them.
 
 He belonged to a generation shaped by the Cold War, but his deepest imprint fell on the world that followed it.
 

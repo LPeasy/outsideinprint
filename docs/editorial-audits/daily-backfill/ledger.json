@@ -2484,6 +2484,101 @@
       },
       "commit_sha": "456da45cf01e304b074abb683ebe1fc0ec8b703c",
       "deployed_on": "2026-05-25"
+    },
+    "ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-26",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised profile treats Ozzy as a cultural figure through record, persona, incentives of spectacle, tradeoffs of mainstream familiarity, bodily consequence, and uncertainty around mythmaking rather than tabloid framing."
+      }
+    },
+    "george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-26",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised profile tests the reinvention argument through record, public incentives, commercial trust, tradeoffs between force and warmth, consequences for athletic legacy, and uncertainty around celebrity narrative."
+      }
+    },
+    "gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-26",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised profile grounds the craft argument in visible screen behavior, role logic, incentives of celebrity visibility, tradeoffs of retreat, consequences for legacy, and institutional film culture without borrowed glamour framing."
+      }
+    },
+    "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-26",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised profile directly examines who gains power, who bears risk, and how executive-branch machinery changes public outcomes while preserving uncertainty and avoiding factional loyalty."
+      }
+    },
+    "charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-26",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-26",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Revised profile tests youth-organizing influence through evidence, media logic, belonging incentives, institutional conflict, consequences for conservative politics, uncertainty around long-term civic effects, and role-labeled criticism."
+      }
     }
   },
   "blocked": {},
@@ -2830,6 +2925,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-25.md",
       "commit_sha": "456da45cf01e304b074abb683ebe1fc0ec8b703c",
       "deployed_on": "2026-05-25"
+    },
+    {
+      "batch_id": "2026-05-26",
+      "selected_slugs": [
+        "ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture",
+        "george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill",
+        "gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed",
+        "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center",
+        "charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md"
     }
   ]
 }
