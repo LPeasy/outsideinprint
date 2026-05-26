@@ -2,7 +2,7 @@
 
 Workflow: `oip_daily_candidate_99_refinement`
 
-Date: 2026-05-25
+Date: 2026-05-26
 
 Decision state: `99_READY`
 
@@ -12,7 +12,7 @@ Source risk: Low-moderate. Current incident facts depend partly on AP and offici
 
 Image risk: Low. The image concepts avoid logos, readable brand marks, gore, and disaster sensationalism.
 
-Final recommendation: `99_READY`. Proceed to AI-writing cleanup, metadata finalization, built-in image generation, package validation, and human review. Do not publish automatically.
+Final recommendation: `99_READY`. AI-writing cleanup and package validation have passed after the risk-assessment addition. Proceed to human review. Do not publish automatically.
 
 ## Editorial Philosophy Audit
 

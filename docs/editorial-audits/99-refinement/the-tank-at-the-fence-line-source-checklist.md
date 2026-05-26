@@ -1,6 +1,6 @@
 # Source Checklist: The Tank at the Fence Line
 
-Package: `2026-05-25-the-tank-at-the-fence-line`
+Package: `2026-05-26-the-tank-at-the-fence-line`
 
 Editorial Philosophy Audit: PASS
 
@@ -32,6 +32,14 @@ Media Framing Audit: PASS
 | Associated Press, May 25, 2026, Southern California officials trying to prevent explosion or leak | https://apnews.com/article/770af6de585b1771824539b163555eaa | Tank volume, GKN facility role, current evacuation count, crack/status, lawsuit and GKN apology | Attributed reporting; not controlling frame |
 | Associated Press, May 24, 2026, Dangers from damaged California chemical tank persist | https://apnews.com/article/3689e6be99e12811d54517179b5c5de7 | Additional current incident context | Lead material only |
 | NBC Los Angeles, GKN Aerospace settled air quality safety violation | https://www.nbclosangeles.com/news/local/gkn-aerospace-air-quality-safety-violation-settlement/3894740/ | Settlement details when official report was difficult to extract cleanly | Corroborating secondary reporting only |
+
+## Internal OIP Context Links
+
+| Essay | URL | Use | Treatment |
+| --- | --- | --- | --- |
+| What Is Risk? A Four-Part Framework | https://outsideinprint.org/essays/what-is-risk-a-four-part-framework/ | Hazard, pathway, consequence, uncertainty frame | Embedded lightly as house context |
+| Risk Management vs. Risk Analysis: What's the Difference? | https://outsideinprint.org/essays/risk-management-vs-risk-analysis-whats-the-difference/ | Distinction between analysis and management under uncertainty | Embedded lightly as house context |
+| Who's Responsible for Building in the Floodplain? | https://outsideinprint.org/essays/whos-responsible-for-building-in-the-floodplain/ | Civic notice, mapped risk, and public-cost analogy | Embedded lightly as house context |
 
 ## Sources Rejected Or Quarantined
 
