@@ -2591,7 +2591,7 @@
       "deployed_on": "2026-05-26"
     },
     "when-can-states-draw-race-based-congressional-districts": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-27",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
       "previous_version": "1.1",
@@ -2607,10 +2607,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps Callais anchored in the Supreme Court opinion, Section 2 text, redistricting doctrine, proof burdens, tradeoffs, consequences, uncertainty, and institutional allocation of mapmaking power rather than voting-rights advocacy shorthand."
-      }
+      },
+      "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
+      "deployed_on": "2026-05-27"
     },
     "the-bet-slip-in-the-briefing-room": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-27",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
       "previous_version": "1.1",
@@ -2626,10 +2628,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay separates Senate rulemaking, DOJ/CFTC allegations, prediction-market utility, ethics incentives, public-office tradeoffs, and uncertainty around market design without treating markets or bans as self-justifying."
-      }
+      },
+      "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
+      "deployed_on": "2026-05-27"
     },
     "nothing-to-see-here": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-27",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
       "previous_version": "1.1",
@@ -2645,10 +2649,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps Lyme disease claims tied to federal, academic, and public-health records while separating patient reality, diagnostic limits, Plum Island uncertainty, incentives, tradeoffs, consequences, and institutional behavior."
-      }
+      },
+      "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
+      "deployed_on": "2026-05-27"
     },
     "multiple-shmultiple": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-27",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
       "previous_version": "1.1",
@@ -2664,10 +2670,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay separates dissociation, recovered-memory methods, court allegations, psychiatric classification, skeptical literature, and patient harm while avoiding either denial of trauma or diagnostic fashion as a total explanation."
-      }
+      },
+      "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
+      "deployed_on": "2026-05-27"
     },
     "the-hate-ledger": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-27",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
       "previous_version": "1.1",
@@ -2683,7 +2691,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps criminal allegations, SPLC defenses, donor incentives, nonprofit oversight, political-violence data, uncertainty, and institutional self-protection in separate evidentiary roles."
-      }
+      },
+      "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
+      "deployed_on": "2026-05-27"
     }
   },
   "blocked": {},
@@ -3054,8 +3064,10 @@
         "multiple-shmultiple",
         "the-hate-ledger"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
+      "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
+      "deployed_on": "2026-05-27"
     }
   ]
 }
