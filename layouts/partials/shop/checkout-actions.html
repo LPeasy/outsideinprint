@@ -1,25 +1,14 @@
 {{- $product := .product | default dict -}}
 {{- $singleLink := index $product "stripe_payment_link" | default "" -}}
-{{- $sizeLinks := index $product "size_links" | default (slice) -}}
+{{- $label := index $product "checkout_label" | default "Buy now" -}}
+{{- $disabledLabel := index $product "checkout_unavailable_label" | default (printf "%s coming soon" $label) -}}
+{{- $status := index $product "checkout_status" | default "" -}}
+{{- $isLive := and (ne $status "disabled") (or (hasPrefix $singleLink "https://") (hasPrefix $singleLink "http://")) -}}
 
 <div class="shop-cta-grid">
-  {{- if gt (len $sizeLinks) 0 -}}
-    {{- range $sizeLinks -}}
-      {{- $href := .stripe_payment_link | default "" -}}
-      {{- $label := .checkout_label | default (printf "Buy size %s" (.label | default "")) -}}
-      {{- $isLive := or (hasPrefix $href "https://") (hasPrefix $href "http://") -}}
-      {{- if $isLive -}}
-        <a class="shop-cta" href="{{ $href }}">{{ $label }}</a>
-      {{- else -}}
-        <span class="shop-cta shop-cta--disabled" aria-disabled="true">{{ $label }} coming soon</span>
-      {{- end -}}
-    {{- end -}}
+  {{- if $isLive -}}
+    <a class="shop-cta" href="{{ $singleLink }}">{{ $label }}</a>
   {{- else -}}
-    {{- $isLive := or (hasPrefix $singleLink "https://") (hasPrefix $singleLink "http://") -}}
-    {{- if $isLive -}}
-      <a class="shop-cta" href="{{ $singleLink }}">Buy now</a>
-    {{- else -}}
-      <span class="shop-cta shop-cta--disabled" aria-disabled="true">Checkout coming soon</span>
-    {{- end -}}
+    <span class="shop-cta shop-cta--disabled" aria-disabled="true">{{ $disabledLabel }}</span>
   {{- end -}}
 </div>

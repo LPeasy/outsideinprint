@@ -1,11 +1,11 @@
 ---
-title: "Shop"
-description: "A small merchandise release from Outside In Print: one hat, one shirt, and one tote bag fulfilled directly by the site."
-image: "/images/social/outside-in-print-default.png"
+title: "Bookstore"
+description: "Digital books from Outside In Print, led by The American Nightmare: Keep Dreaming, Kid."
+image: "/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg"
 draft: false
 show_citation: false
 ---
 
-Outside In Print keeps merch deliberately small: three items, modest batches, and direct fulfillment rather than a separate store platform.
+Outside In Print books are direct digital editions built for readers who want the work and its public support files in one durable package.
 
-Orders ship within the United States only. Current releases usually leave within 3-5 business days.
+The bookstore opens with one title: *The American Nightmare: Keep Dreaming, Kid*. Checkout stays disabled until secure Stripe payment and direct digital delivery are connected.

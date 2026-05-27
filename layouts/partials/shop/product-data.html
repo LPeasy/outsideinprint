@@ -1,14 +1,14 @@
 {{- $key := printf "%v" (.key | default "") -}}
 {{- $page := .page | default false -}}
-{{- $merch := site.Data.merch | default dict -}}
+{{- $bookstore := site.Data.bookstore | default dict -}}
 {{- $defaults := dict -}}
 {{- $products := dict -}}
 
-{{- with index $merch "defaults" -}}
+{{- with index $bookstore "defaults" -}}
   {{- $defaults = . -}}
 {{- end -}}
 
-{{- with index $merch "products" -}}
+{{- with index $bookstore "products" -}}
   {{- $products = . -}}
 {{- end -}}
 

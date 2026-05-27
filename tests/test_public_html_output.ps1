@@ -463,6 +463,7 @@ $requiredSemanticPages = [ordered]@{
   'public/gallery/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/shop/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
 }
 
@@ -692,12 +693,22 @@ $requiredMetadataPages = [ordered]@{
     ExpectedImageAlt = 'Outside In Print social card for the collections directory.'
   }
   'public/shop/index.html' = @{
-    Title = 'Shop'
-    Description = 'A small merchandise release from Outside In Print: one hat, one shirt, and one tote bag fulfilled directly by the site.'
+    Title = 'Bookstore'
+    Description = 'Digital books from Outside In Print, led by The American Nightmare: Keep Dreaming, Kid.'
     Canonical = 'https://outsideinprint.org/shop/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg'
+  }
+  'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{
+    Title = 'The American Nightmare: Keep Dreaming, Kid'
+    Description = 'An OIP digital book on how the American Dream became a global slogan just as the American good life came apart at home.'
+    Canonical = 'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg'
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
@@ -1253,7 +1264,7 @@ $requiredUxPages = @(
   'public/almanack/2026-05-16/index.html',
   'public/almanack/2026-05-23/index.html',
   'public/shop/index.html',
-  'public/shop/shirt/index.html',
+  'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/random/index.html',
   'public/collections/the-ledger/index.html',
   'public/collections/syd-and-oliver-dialogues/index.html',
@@ -1414,6 +1425,10 @@ foreach ($file in $htmlFiles) {
 
   if ($content -match '(?:https://outsideinprint\.org)?/literature/') {
     $retiredRouteIssues.Add("$relativePath => literature route leaked into generated HTML")
+  }
+
+  if ($content -match '(?:https://outsideinprint\.org)?/shop/(?:hat|shirt|tote)/') {
+    $retiredRouteIssues.Add("$relativePath => retired merch route leaked into generated HTML")
   }
 }
 
@@ -2538,18 +2553,51 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)Current release.*?/shop/hat/.*?/shop/shirt/.*?/shop/tote/'
-    Message = 'expected the shop landing page to expose the three launch products'
+    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?\$9\.99.*?Buy the OIP direct digital bundle coming soon'
+    Message = 'expected the bookstore index to expose the book record, direct price, and disabled direct checkout'
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = 'United States only'
-    Message = 'expected the shop landing page to state the initial U.S.-only shipping scope'
+    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?(Kindle edition available separately|Kindle).*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the bookstore index to make the book route, Kindle-secondary note, and print deferral visible'
   },
   @{
-    Path = 'public/shop/shirt/index.html'
-    Pattern = '(?s)(Buy size S|Buy size S coming soon).*?(Buy size M|Buy size M coming soon).*?(Buy size L|Buy size L coming soon).*?(Buy size XL|Buy size XL coming soon)'
-    Message = 'expected the shirt page to expose separate size checkout controls for S, M, L, and XL'
+    Path = 'public/shop/index.html'
+    Pattern = 'bookstore-record'
+    Message = 'expected the bookstore index to render reusable OIP book records'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = 'american-nightmare-cover-v1\.6\.jpg'
+    Message = 'expected the bookstore index to use the official cover image'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?i)(american-nightmare-bookstore-render-v1\.6\.png|bookstore-woodgrain-v1\.6\.svg|Short Book|short book)'
+    Message = 'expected the bookstore index not to use the wood-library render, woodgrain asset, or Short Book language'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)/shop/(?:hat|shirt|tote)/|\b(?:hat|shirt|tote)\b|United States only'
+    Message = 'expected the bookstore landing page to remove retired merch products and shipping copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
+    Pattern = '(?s)\$9\.99.*?PDF.*?EPUB.*?HTML.*?Markdown.*?TXT.*?DOCX.*?public source ledger.*?public claims appendix.*?Buy the OIP direct digital bundle coming soon'
+    Message = 'expected the book product page to expose direct price, disabled checkout, and direct bundle formats'
+  },
+  @{
+    Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
+    Pattern = '(?s)Kindle edition available separately.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the book product page to keep Kindle secondary and print deferred'
+  },
+  @{
+    Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
+    Pattern = '(?i)(direct_download|american-nightmare-keep-dreaming-kid_oip_direct_v1\.6\.zip|\.zip)'
+    Message = 'expected the book product page not to expose a public ZIP link'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
@@ -3326,7 +3374,7 @@ if ($publicPdfAffordanceHits.Count -gt 0) {
 }
 
 if ($retiredRouteIssues.Count -gt 0) {
-  throw ("Found retired literature routes in generated HTML. Samples: {0}" -f (Format-SampleList -Items $retiredRouteIssues))
+  throw ("Found retired routes in generated HTML. Samples: {0}" -f (Format-SampleList -Items $retiredRouteIssues))
 }
 
 if ($semanticIssues.Count -gt 0) {

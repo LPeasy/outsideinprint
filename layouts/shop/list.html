@@ -1,54 +1,75 @@
 {{ define "main" }}
   {{ $shopPages := sort .RegularPages "Weight" "asc" }}
 
-  <div class="section-front section-front--shop">
-    <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
+  <section class="bookstore-index page-shell page-shell--wide" aria-labelledby="page-title">
+    <header class="bookstore-index__header">
       <h1 id="page-title" class="list-title">{{ .Title }}</h1>
-      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+      {{ with .Content }}<div class="bookstore-index__intro">{{ . }}</div>{{ end }}
     </header>
 
-    <div class="section-front__body">
-      <div class="page-shell page-shell--reading shop-front__body">
-        {{ .Content }}
-      </div>
-    </div>
-  </div>
-
-  <section class="page-shell page-shell--grid shop-grid" aria-labelledby="shop-catalog-title">
-    <h2 id="shop-catalog-title" class="list-title">Current release</h2>
     {{ if gt (len $shopPages) 0 }}
-      <div class="shop-grid__items">
-        {{ range $shopPages }}
-          {{ $productKey := .Params.merch_key | default (.Params.slug | default .File.BaseFileName) }}
-          {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) }}
-          <article class="shop-card">
-            <div class="shop-card__inner">
-              {{ with index $product "type_label" }}<p class="shop-card__eyebrow">{{ . }}</p>{{ end }}
-              <h3 class="shop-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-              {{ with index $product "deck" }}<p class="shop-card__deck">{{ . }}</p>{{ end }}
-              <dl class="shop-card__meta">
+      <div class="bookstore-records" aria-label="Available Outside In Print books">
+        {{ range $index, $book := $shopPages }}
+          {{ $productKey := $book.Params.book_key | default ($book.Params.slug | default $book.File.BaseFileName) }}
+          {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" $book) }}
+          {{ $cover := index $product "cover_image" | default $book.Params.image }}
+          {{ $coverAlt := index $product "cover_alt" | default $book.Title }}
+          {{ $recordID := printf "bookstore-record-%d" $index }}
+
+          <article class="bookstore-record" aria-labelledby="{{ $recordID }}">
+            <a class="bookstore-record__cover" href="{{ $book.RelPermalink }}" aria-label="View {{ $book.Title }}">
+              <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" width="1600" height="2560" loading="{{ cond (eq $index 0) "eager" "lazy" }}">
+            </a>
+
+            <div class="bookstore-record__body">
+              <p class="bookstore-record__meta">
+                {{ with index $product "type_label" }}<span>{{ . }}</span>{{ end }}
+                {{ with index $product "author" }}<span>{{ . }}</span>{{ end }}
+              </p>
+
+              <h2 id="{{ $recordID }}" class="bookstore-record__title"><a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a></h2>
+              {{ with index $product "subtitle" }}<p class="bookstore-record__subtitle">{{ . }}</p>{{ end }}
+              {{ with index $product "deck" }}<p class="bookstore-record__deck">{{ . }}</p>{{ end }}
+
+              <dl class="bookstore-record__ledger">
                 {{ with index $product "price_display" }}
                   <div>
-                    <dt>Price</dt>
+                    <dt>Direct price</dt>
                     <dd>{{ . }}</dd>
                   </div>
                 {{ end }}
                 {{ with index $product "availability_note" }}
                   <div>
-                    <dt>Availability</dt>
+                    <dt>Status</dt>
+                    <dd>{{ . }}</dd>
+                  </div>
+                {{ end }}
+                {{ with index $product "kindle_note" }}
+                  <div>
+                    <dt>Kindle</dt>
+                    <dd>{{ . }}</dd>
+                  </div>
+                {{ end }}
+                {{ with index $product "print_note" }}
+                  <div>
+                    <dt>Print</dt>
                     <dd>{{ . }}</dd>
                   </div>
                 {{ end }}
               </dl>
-              <a class="shop-card__link" href="{{ .RelPermalink }}">View product</a>
+
+              <div class="bookstore-record__actions">
+                {{ partial "shop/checkout-actions.html" (dict "product" $product) }}
+                <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}">View book details</a>
+              </div>
             </div>
           </article>
         {{ end }}
       </div>
     {{ else }}
-      <div class="item">
-        <div class="t">No products are listed yet.</div>
-        <div class="m">The shop will stay small and only publish items that are actually ready to ship.</div>
+      <div class="bookstore-empty">
+        <h2 class="list-title">Books coming soon</h2>
+        <p>The bookstore is being prepared for direct digital editions.</p>
       </div>
     {{ end }}
   </section>

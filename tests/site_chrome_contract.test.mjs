@@ -119,7 +119,7 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(footer, /href="\{\{ "about\/" \| absURL \}\}">About</);
   assert.match(footer, /href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">Author</);
   assert.match(footer, /href="\{\{ "library\/" \| absURL \}\}">Library</);
-  assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}">Shop</);
+  assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}">Bookstore</);
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
 
   assert.match(randomTemplate, /class="page-header page-shell page-shell--wide"/);
@@ -358,9 +358,13 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.piece-body \.article-embed::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.collections-broadsheet__section::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.collection-section__header::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  for (const selector of [".shop-card", ".shop-panel", ".shop-cta", ".newsletter-signup__input", ".newsletter-signup__button"]) {
-    assert.doesNotMatch(cssRule(css, selector), /var\(--oip-rule-/);
-  }
+  assert.match(cssRule(css, ".bookstore-index__header"), /border-top:1px solid var\(--oip-rule-engraved\);/);
+  assert.match(cssRule(css, ".bookstore-record"), /border-top:1px solid var\(--oip-rule-standard\);/);
+  assert.match(cssRule(css, ".bookstore-record::before"), /background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(cssRule(css, ".bookstore-panel"), /border:1px solid var\(--oip-rule-standard\);/);
+  assert.match(cssRule(css, ".bookstore-panel::before"), /background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(cssRule(css, ".shop-cta"), /background:var\(--accent-soft\);/);
+  assert.doesNotMatch(css, /bookstore-woodgrain-v1\.6|#7f1f1c|#9a2a24/);
   assert.match(css, /@media \(max-width:420px\)\{[\s\S]*\.editorial-cartoon-recent\{\s*grid-template-columns:1fr;/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-almanack__ledger\{\s*grid-template-columns:1fr;/);
   assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-manifesto__inner\{\s*padding:\.9rem 0 \.85rem;/);
