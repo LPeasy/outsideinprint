@@ -1278,6 +1278,7 @@ $requiredUxPages = @(
   'public/essays/the-ash-pond-under-the-cloud/index.html',
   'public/essays/the-mailbox-at-the-clinic-door/index.html',
   'public/essays/the-text-message-in-the-archive-box/index.html',
+  'public/essays/the-courthouse-that-ate-the-republic/index.html',
   'public/essays/the-ledger-vol-1/index.html',
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
@@ -2584,7 +2585,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*119 published pieces'
+    Pattern = '11 public collections.*120 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -3078,6 +3079,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-mailbox-at-the-clinic-door/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Mailbox at the Clinic Door' },
   @{ Path = 'public/essays/id-required/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'ID Required' },
   @{ Path = 'public/essays/the-text-message-in-the-archive-box/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Text Message in the Archive Box' },
+  @{ Path = 'public/essays/the-courthouse-that-ate-the-republic/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Courthouse That Ate the Republic' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
