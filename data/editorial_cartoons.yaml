@@ -1,4 +1,4 @@
-current: on-the-fence
+current: human-resources
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -288,3 +288,11 @@ cartoons:
     alt: "Editorial cartoon showing families leaving an evacuated neighborhood beside a fence line, while hazmat workers monitor a cracked MMA tank whose warning-yellow fracture casts public cost across the boundary."
     width: 1672
     height: 941
+  - slug: human-resources
+    title: "Human Resources"
+    date: "2026-05-27"
+    image: "/images/editorial/human-resources.png"
+    essay: "/essays/the-courthouse-that-ate-the-republic/"
+    alt: "Editorial cartoon showing a split nineteenth-century and modern immigration patronage scene, with elites on a blue-draped balcony above officials handing documents and phones to waiting families."
+    width: 1572
+    height: 1001
