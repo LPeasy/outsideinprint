@@ -2589,6 +2589,101 @@
       },
       "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
       "deployed_on": "2026-05-26"
+    },
+    "when-can-states-draw-race-based-congressional-districts": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-27",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps Callais anchored in the Supreme Court opinion, Section 2 text, redistricting doctrine, proof burdens, tradeoffs, consequences, uncertainty, and institutional allocation of mapmaking power rather than voting-rights advocacy shorthand."
+      }
+    },
+    "the-bet-slip-in-the-briefing-room": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-27",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay separates Senate rulemaking, DOJ/CFTC allegations, prediction-market utility, ethics incentives, public-office tradeoffs, and uncertainty around market design without treating markets or bans as self-justifying."
+      }
+    },
+    "nothing-to-see-here": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-27",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps Lyme disease claims tied to federal, academic, and public-health records while separating patient reality, diagnostic limits, Plum Island uncertainty, incentives, tradeoffs, consequences, and institutional behavior."
+      }
+    },
+    "multiple-shmultiple": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-27",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay separates dissociation, recovered-memory methods, court allegations, psychiatric classification, skeptical literature, and patient harm while avoiding either denial of trauma or diagnostic fashion as a total explanation."
+      }
+    },
+    "the-hate-ledger": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-27",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-27",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps criminal allegations, SPLC defenses, donor incentives, nonprofit oversight, political-violence data, uncertainty, and institutional self-protection in separate evidentiary roles."
+      }
     }
   },
   "blocked": {},
@@ -2949,6 +3044,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-26.md",
       "commit_sha": "923e87a67eff7d1c22e7cbdd159f6d344ae53db6",
       "deployed_on": "2026-05-26"
+    },
+    {
+      "batch_id": "2026-05-27",
+      "selected_slugs": [
+        "when-can-states-draw-race-based-congressional-districts",
+        "the-bet-slip-in-the-briefing-room",
+        "nothing-to-see-here",
+        "multiple-shmultiple",
+        "the-hate-ledger"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md"
     }
   ]
 }

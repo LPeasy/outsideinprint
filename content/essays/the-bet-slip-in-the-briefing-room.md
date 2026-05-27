@@ -9,12 +9,15 @@ description: "The Senate's prediction-market ban shows why event markets become 
 featured_image: "/images/essays/the-bet-slip-in-the-briefing-room/hero.png"
 featured_image_alt: "Editorial illustration of a prediction-market ticket resting on a closed briefing folder at a long Senate table, with a dim trading board reflected in polished wood."
 featured_image_caption: "The bet slip looks harmless until it sits beside tomorrow's official decision."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-27"
+    note: "Updated May 27, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
   - "civic-institutions-and-public-power"

@@ -9,12 +9,15 @@ description: "The Supreme Court's Louisiana v. Callais ruling narrows the proof 
 featured_image: "/images/essays/when-can-states-draw-race-based-congressional-districts/hero.png"
 featured_image_alt: "Editorial illustration of a Louisiana-style congressional map on a legal drafting table, with one blue district line casting a sharp shadow beside court papers and a gavel."
 featured_image_caption: "A district line can look like geography until it starts carrying the weight of a remedy."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-27"
+    note: "Updated May 27, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
   - "civic-institutions-and-public-power"

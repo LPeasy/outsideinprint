@@ -9,12 +9,15 @@ description: "A reported history of multiple personality disorder, recovered mem
 featured_image: "/images/essays/multiple-shmultiple/hero.png"
 featured_image_alt: "Editorial illustration of a court file, a therapy chair, and scattered clinical notes arranged like a quiet stage for a diagnosis learning to speak."
 featured_image_caption: "The record begins as a sentence in a file, then widens into a room that could teach suffering a script."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-27"
+    note: "Updated May 27, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections: ["reported-case-studies"]
 tags:

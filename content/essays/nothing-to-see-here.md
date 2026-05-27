@@ -9,12 +9,15 @@ description: "Lyme disease was made smaller by weak tests, narrow surveillance r
 featured_image: "/images/essays/nothing-to-see-here/hero.png"
 featured_image_alt: "Editorial illustration of a paper map of Long Island Sound, Lyme, Connecticut, and Plum Island pinned under clinical forms, tick drawings, and stamped public-health records."
 featured_image_caption: "The map is a public-record problem before it is an origin story."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-27"
+    note: "Updated May 27, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections: ["risk-uncertainty"]
 tags:

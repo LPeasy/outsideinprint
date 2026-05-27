@@ -9,12 +9,15 @@ description: "A federal indictment against the Southern Poverty Law Center turns
 featured_image: "/images/essays/the-hate-ledger/hero.png"
 featured_image_alt: "Editorial illustration of a ledger book, bank forms, donor envelopes, and shadowed payment cards arranged under a cold desk lamp."
 featured_image_caption: "The case begins where moral language meets the bank account."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-27"
+    note: "Updated May 27, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
   - "moral-religious-philosophical-essays"
@@ -378,4 +381,4 @@ The question is whether the country has the nerve to read it.
 
 ## Version note
 
-Version 1.0. Prepared after a source pass against the indictment PDF itself and the DOJ press release. Criminal allegations are framed as alleged, if proven, or if the indictment holds. The case is active and should be updated if the court dismisses counts, the government supersedes the indictment, SPLC files additional dispositive motions, a plea occurs, or a verdict is reached.
+Version 1.2. Prepared after a source pass against the indictment PDF itself and the DOJ press release. Criminal allegations are framed as alleged, if proven, or if the indictment holds. The case is active and should be updated if the court dismisses counts, the government supersedes the indictment, SPLC files additional dispositive motions, a plea occurs, or a verdict is reached.
