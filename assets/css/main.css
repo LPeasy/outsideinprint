@@ -2156,6 +2156,18 @@ html[data-theme="light"] .paper-route-toggle{
   font-weight:600;
   line-height:1.48;
 }
+.bookstore-ledger-link{
+  display:inline-block;
+  margin-left:.36rem;
+  color:var(--text-primary);
+  text-decoration:underline;
+  text-decoration-color:rgba(127,147,166,.45);
+}
+.bookstore-ledger-link:hover,
+.bookstore-ledger-link:focus-visible{
+  color:var(--text-primary);
+  text-decoration-color:rgba(213,190,150,.62);
+}
 .bookstore-record__actions{
   display:flex;
   flex-wrap:wrap;

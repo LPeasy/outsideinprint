@@ -64,7 +64,12 @@
             {{ with index $product "kindle_note" }}
               <div>
                 <dt>Kindle</dt>
-                <dd>{{ . }}</dd>
+                <dd>
+                  {{ . }}
+                  {{ with index $product "kindle_url" }}
+                    <a class="bookstore-ledger-link" href="{{ . }}">{{ index $product "kindle_label" | default "View Kindle edition" }}</a>
+                  {{ end }}
+                </dd>
               </div>
             {{ end }}
             {{ with index $product "print_note" }}

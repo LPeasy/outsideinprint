@@ -464,6 +464,7 @@ $requiredSemanticPages = [ordered]@{
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/shop/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
+  'public/shop/the-parable-of-the-sheep/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
 }
 
@@ -694,7 +695,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/shop/index.html' = @{
     Title = 'Bookstore'
-    Description = 'Digital books from Outside In Print, led by The American Nightmare: Keep Dreaming, Kid.'
+    Description = 'Digital books from Outside In Print, including The American Nightmare: Keep Dreaming, Kid and The Parable of the Sheep.'
     Canonical = 'https://outsideinprint.org/shop/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -709,6 +710,15 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg'
+  }
+  'public/shop/the-parable-of-the-sheep/index.html' = @{
+    Title = 'The Parable of the Sheep'
+    Description = 'A compact allegorical fiction about a flock, a vanished shepherd, and the predators that return when memory fails.'
+    Canonical = 'https://outsideinprint.org/shop/the-parable-of-the-sheep/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/books/parable-of-the-sheep/parable-of-the-sheep-cover-v1.0.jpg'
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
@@ -1265,6 +1275,7 @@ $requiredUxPages = @(
   'public/almanack/2026-05-23/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
+  'public/shop/the-parable-of-the-sheep/index.html',
   'public/random/index.html',
   'public/collections/the-ledger/index.html',
   'public/collections/syd-and-oliver-dialogues/index.html',
@@ -2553,8 +2564,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?\$9\.99.*?Buy the OIP direct digital bundle coming soon'
-    Message = 'expected the bookstore index to expose the book record, direct price, and disabled direct checkout'
+    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?\$9\.99.*?Buy the OIP direct digital bundle coming soon.*?The Parable of the Sheep.*?\$4\.99.*?Buy the OIP direct digital bundle coming soon'
+    Message = 'expected the bookstore index to expose both book records, direct prices, and disabled direct checkout'
   },
   @{
     Path = 'public/shop/index.html'
@@ -2563,13 +2574,18 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
+    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the bookstore index to expose The Parable of the Sheep route, Amazon Kindle channel, and print deferral'
+  },
+  @{
+    Path = 'public/shop/index.html'
     Pattern = 'bookstore-record'
     Message = 'expected the bookstore index to render reusable OIP book records'
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = 'american-nightmare-cover-v1\.6\.jpg'
-    Message = 'expected the bookstore index to use the official cover image'
+    Pattern = '(?s)american-nightmare-cover-v1\.6\.jpg.*?parable-of-the-sheep-cover-v1\.0\.jpg'
+    Message = 'expected the bookstore index to use the official cover images'
   },
   @{
     Path = 'public/shop/index.html'
@@ -2597,6 +2613,22 @@ $requiredUxChecks = @(
     Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
     Pattern = '(?i)(direct_download|american-nightmare-keep-dreaming-kid_oip_direct_v1\.6\.zip|\.zip)'
     Message = 'expected the book product page not to expose a public ZIP link'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/shop/the-parable-of-the-sheep/index.html'
+    Pattern = '(?s)\$4\.99.*?PDF.*?EPUB.*?HTML.*?Markdown.*?TXT.*?Buy the OIP direct digital bundle coming soon'
+    Message = 'expected The Parable of the Sheep product page to expose direct price, disabled checkout, and reader formats'
+  },
+  @{
+    Path = 'public/shop/the-parable-of-the-sheep/index.html'
+    Pattern = '(?s)Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected The Parable of the Sheep product page to expose Amazon Kindle as the external channel and keep print deferred'
+  },
+  @{
+    Path = 'public/shop/the-parable-of-the-sheep/index.html'
+    Pattern = '(?i)(the-parable-of-the-sheep_oip_direct_reader_bundle_v1\.zip|direct_download|\.zip|print-on-demand|POD)'
+    Message = 'expected The Parable of the Sheep product page not to expose a public ZIP or print/POD purchase path'
     ShouldNotMatch = $true
   },
   @{
