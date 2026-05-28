@@ -498,6 +498,7 @@ $requiredEssayHeroPages = @(
   'public/essays/the-warning-label-in-the-weeds/index.html',
   'public/essays/nothing-to-see-here/index.html',
   'public/essays/the-tank-at-the-fence-line/index.html',
+  'public/essays/the-war-premium-at-the-auction/index.html',
   'public/essays/beyond-moores-law/index.html',
   'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
 )
@@ -617,6 +618,13 @@ $essayHeroChecks = @(
     ExpectVisibleHero = $true
     ExpectHeroAbsentFromBody = $true
     ForbiddenBodyText = 'The fence line is where private storage becomes public geography.'
+  },
+  @{
+    PublicPath = 'public/essays/the-war-premium-at-the-auction/index.html'
+    SourcePath = 'content/essays/the-war-premium-at-the-auction.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The auction turns public power into a price.'
   },
   @{
     PublicPath = 'public/essays/the-sewer-under-the-sidewalk/index.html'
@@ -2042,8 +2050,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-text-message-in-the-archive-box"?.*?data-essay-cartoon-lightbox-trigger.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=memory-hole"?'
-    Message = 'expected the Text Message homepage card cartoon thumbnail to open the in-page lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-tank-at-the-fence-line"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?on-the-fence"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=on-the-fence"?'
+    Message = 'expected the Tank homepage card cartoon thumbnail to open the On the Fence lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -2665,7 +2673,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*120 published pieces'
+    Pattern = '11 public collections.*121 published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
   },
   @{
@@ -3165,6 +3173,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
   @{ Path = 'public/essays/nothing-to-see-here/index.html'; Slug = 'risk-uncertainty'; Label = 'Nothing to See Here' },
   @{ Path = 'public/essays/the-tank-at-the-fence-line/index.html'; Slug = 'risk-uncertainty'; Label = 'The Tank at the Fence Line' },
+  @{ Path = 'public/essays/the-war-premium-at-the-auction/index.html'; Slug = 'risk-uncertainty'; Label = 'The War Premium at the Auction' },
   @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'the moral collection essay' },
   @{ Path = 'public/essays/the-hate-ledger/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'The Hate Ledger' },
   @{ Path = 'public/essays/outside-the-garden/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'Outside the Garden' },

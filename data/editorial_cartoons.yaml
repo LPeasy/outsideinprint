@@ -1,4 +1,4 @@
-current: human-resources
+current: warbonds
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -274,9 +274,9 @@ cartoons:
     height: 941
   - slug: warbonds
     title: "Warbonds"
-    date: "2026-05-25"
+    date: "2026-05-28"
     image: "/images/editorial/warbonds.png"
-    essay: "/essays/the-tank-at-the-fence-line/"
+    essay: "/essays/the-war-premium-at-the-auction/"
     alt: "Editorial cartoon showing a Treasury auction block with a 10-year note, an auction gavel, bidders, warplanes and tankers outside, and a red signal driving a WAR PREMIUM gauge weighted by INFLATION and DEBT SERVICE."
     width: 1672
     height: 941
