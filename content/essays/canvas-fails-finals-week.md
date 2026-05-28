@@ -6,12 +6,15 @@ date: 2026-05-08
 draft: false
 slug: "canvas-fails-finals-week"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-28"
+    note: "Updated May 28, 2026, after OIP back-archive review for draft-residue cleanup and source, metadata, and rendering checks."
 featured: false
 featured_image: "/images/essays/canvas-fails-finals-week/hero.png"
 featured_image_alt: "Editorial illustration of an empty university exam room lit by a blank learning-management login screen, with desks waiting during finals week."
@@ -50,7 +53,7 @@ Instructure, the parent company of Canvas, disclosed a cybersecurity incident on
 
 The vendor's narrow language sets the boundary for the claim.
 
-This draft should not claim that Social Security numbers were exposed. It should not claim that grades were exposed. It should not claim that passwords or financial records were exposed. The vendor did not say that. Several schools repeated the same narrower language. Rutgers said it was unclear what Rutgers data was involved, but that Instructure had indicated no sign that passwords, dates of birth, government identifiers, or financial information were involved. Columbia said Instructure had not yet made clear what CourseWorks data may have been affected, and noted that Columbia's CourseWorks data does not include dates of birth, Social Security numbers, or financial information. ([canvas.rutgers.edu](https://canvas.rutgers.edu/2026/05/06/update-nationwide-security-breach-involving-canvas/))
+A careful account should not claim that Social Security numbers were exposed. It should not claim that grades were exposed. It should not claim that passwords or financial records were exposed. The vendor did not say that. Several schools repeated the same narrower language. Rutgers said it was unclear what Rutgers data was involved, but that Instructure had indicated no sign that passwords, dates of birth, government identifiers, or financial information were involved. Columbia said Instructure had not yet made clear what CourseWorks data may have been affected, and noted that Columbia's CourseWorks data does not include dates of birth, Social Security numbers, or financial information. ([canvas.rutgers.edu](https://canvas.rutgers.edu/2026/05/06/update-nationwide-security-breach-involving-canvas/))
 
 The point is not to inflate the breach.
 

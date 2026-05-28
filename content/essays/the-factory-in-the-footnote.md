@@ -9,12 +9,15 @@ description: "The SEC climate-disclosure reversal turns a dormant rule into a la
 featured_image: "/images/essays/the-factory-in-the-footnote/hero.png"
 featured_image_alt: "Editorial illustration of a factory silhouette rising out of an annual-report footnote, with audit marks, carbon ledgers, and a quiet boardroom table."
 featured_image_caption: "A factory can disappear into a footnote before anyone votes to close it."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-28"
+    note: "Updated May 28, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
   - "civic-institutions-and-public-power"

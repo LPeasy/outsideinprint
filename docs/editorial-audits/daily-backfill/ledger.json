@@ -2694,6 +2694,101 @@
       },
       "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
       "deployed_on": "2026-05-27"
+    },
+    "can-you-pass-the-pepper-please": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-28.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-28",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the ICE detention force record anchored in reported internal records, DHS and contractor responses, custody incentives, compliance tradeoffs, detainee risk, uncertainty, and public oversight rather than officer-villain or detainee-symbol shorthand."
+      }
+    },
+    "the-factory-in-the-footnote": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-28.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-28",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay tests the SEC climate-disclosure retreat against securities-law materiality, emissions records, carbon-leakage incentives, industrial-capacity tradeoffs, household consequences, uncertainty, and jurisdictional limits."
+      }
+    },
+    "modern-prometheus": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-28.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-28",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay frames electricity history through sourced scientific and infrastructure records, causal logic, energy and labor incentives, technological tradeoffs, downstream social change, uncertainty about lived transition, and institutional buildout."
+      }
+    },
+    "canvas-fails-finals-week": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-28.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-28",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay separates the Instructure incident, campus records, public procurement evidence, private-equity ownership incentives, operational tradeoffs, student and faculty consequences, data uncertainty, and public-institution dependence."
+      }
+    },
+    "the-blue-pool-at-the-memorial": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-28",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-28.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-28",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay separates public-space maintenance, presidential attention, park planning records, preservation process, beauty incentives, access tradeoffs, cost and durability uncertainty, and federal-space accountability."
+      }
     }
   },
   "blocked": {},
@@ -3068,6 +3163,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-27.md",
       "commit_sha": "ebd3593804b902db061a09a2870fccfdb1a9e2a3",
       "deployed_on": "2026-05-27"
+    },
+    {
+      "batch_id": "2026-05-28",
+      "selected_slugs": [
+        "can-you-pass-the-pepper-please",
+        "the-factory-in-the-footnote",
+        "modern-prometheus",
+        "canvas-fails-finals-week",
+        "the-blue-pool-at-the-memorial"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-28.md"
     }
   ]
 }

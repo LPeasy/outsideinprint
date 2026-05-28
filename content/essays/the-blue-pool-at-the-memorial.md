@@ -6,12 +6,15 @@ date: 2026-05-10
 draft: false
 slug: "the-blue-pool-at-the-memorial"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-28"
+    note: "Updated May 28, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/the-blue-pool-at-the-memorial/hero.png"
 featured_image_alt: "Editorial illustration of the Lincoln Memorial Reflecting Pool transformed into a blue civic worksite, with review papers, park maps, and public benches around it."

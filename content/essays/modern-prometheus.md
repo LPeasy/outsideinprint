@@ -9,12 +9,15 @@ description: "A historical essay on electricity, lightning, Franklin's kite, pow
 featured_image: "/images/essays/modern-prometheus/hero.png"
 featured_image_alt: "Editorial illustration of a storm-lit city, an early lightning rod, and a controlled electric glow moving into wires and lamps."
 featured_image_caption: "The old terror did not disappear. It entered the wire."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
+  - version: "1.2"
+    date: "2026-05-28"
+    note: "Updated May 28, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
   - "technology-ai-machine-future"
