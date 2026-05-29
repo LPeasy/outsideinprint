@@ -2799,6 +2799,101 @@
       },
       "commit_sha": "a9be26fecaf8ca3e39994c14629f76fc04856463",
       "deployed_on": "2026-05-28"
+    },
+    "outside-the-garden": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-29",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-29.md",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "updated_on": "2026-05-29",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the moral-theological argument tied to named civic, institutional, fiscal, demographic, and religious records while distinguishing evidence, cultural mechanism, sacrifice, uncertainty, and institutional responsibility."
+      }
+    },
+    "fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-29",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-29.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-29",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay anchors the porcelain story in museum records, ceramics scholarship, trade history, manufacturing data, country-of-origin research, and the incentives that changed porcelain from rare treasure to domestic ceremony."
+      }
+    },
+    "no-homo-true-history-not-being-gay-with-your-bros": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-29",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-29.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-29",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay separates slang records, NBA disciplinary records, scholarship on gendered speech, historical male friendship evidence, comedy and replacement-phrase evidence, uncertainty, and the institutional cost of public speech."
+      }
+    },
+    "the-mailbox-at-the-clinic-door": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-29",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-29.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-29",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay rejects simple abortion-rights or anti-abortion shorthand and keeps the mifepristone delivery dispute anchored in FDA REMS records, Supreme Court dockets, state enforcement incentives, distance tradeoffs, emergency-order consequences, and uncertainty."
+      }
+    },
+    "the-last-victim": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-29",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-29.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-29",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps its moral-theological critique centered on incentives, agency, repentance, forgiveness, institutional reward structures, Christian anthropology, and the tradeoff between category-based authority and personal accountability."
+      }
     }
   },
   "blocked": {},
@@ -3187,6 +3282,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-28.md",
       "commit_sha": "a9be26fecaf8ca3e39994c14629f76fc04856463",
       "deployed_on": "2026-05-28"
+    },
+    {
+      "batch_id": "2026-05-29",
+      "selected_slugs": [
+        "outside-the-garden",
+        "fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet",
+        "no-homo-true-history-not-being-gay-with-your-bros",
+        "the-mailbox-at-the-clinic-door",
+        "the-last-victim"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-29.md"
     }
   ]
 }

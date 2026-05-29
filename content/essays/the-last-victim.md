@@ -10,8 +10,12 @@ author_id: "robert-v-ussley"
 featured_image: "/images/essays/the-last-victim/hero.png"
 featured_image_alt: "A wooden cross standing on a chapel-library table beside a balance scale and two blank ledger pages."
 featured_image_caption: "The scale belongs below the Cross."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-29"
+    note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
   - "moral-religious-philosophical-essays"

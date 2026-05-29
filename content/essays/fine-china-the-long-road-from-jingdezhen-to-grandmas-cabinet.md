@@ -6,8 +6,12 @@ date: 2026-05-12
 draft: false
 slug: "fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-29"
+    note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/hero.png"
 featured_image_alt: "Editorial illustration of an antique glass-front cabinet filled with blue-and-white porcelain in a dim domestic room."

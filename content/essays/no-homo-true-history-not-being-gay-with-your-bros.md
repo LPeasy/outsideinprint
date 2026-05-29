@@ -6,8 +6,12 @@ date: 2026-05-12T12:00:00-04:00
 draft: false
 slug: "no-homo-true-history-not-being-gay-with-your-bros"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-29"
+    note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/no-homo-true-history-not-being-gay-with-your-bros/hero.png"
 featured_image_alt: "Editorial illustration of a sports microphone, male friendship, and public disclaimer ritual."

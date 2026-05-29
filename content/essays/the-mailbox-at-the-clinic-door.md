@@ -6,8 +6,12 @@ date: 2026-05-14
 draft: false
 slug: "the-mailbox-at-the-clinic-door"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-29"
+    note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/the-mailbox-at-the-clinic-door/hero.png"
 featured_image_alt: "Editorial illustration of a cardboard prescription package at a clinic doorway shaped like a mailbox, with court papers and route lines folded into the threshold."
