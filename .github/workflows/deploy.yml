@@ -4,6 +4,9 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    - cron: "17 0 * * *"
+      timezone: "America/New_York"
 
 permissions:
   contents: read
@@ -60,6 +63,11 @@ jobs:
         run: |
           ./tests/test_almanack_module_data.ps1
 
+      - name: Test Editorial Cartoon Schedule Contract
+        shell: pwsh
+        run: |
+          ./tests/test_editorial_cartoon_schedule_contract.ps1
+
       - name: Test SEO Rollout Contract
         shell: pwsh
         run: |
@@ -91,6 +99,7 @@ jobs:
     timeout-minutes: 10
     env:
       HUGO_ENVIRONMENT: production
+      TZ: America/New_York
       ANALYTICS_ENABLED: ${{ vars.ANALYTICS_ENABLED }}
       ANALYTICS_ALLOW_LOCAL: ${{ vars.ANALYTICS_ALLOW_LOCAL }}
       GOATCOUNTER_SITE_URL: ${{ vars.GOATCOUNTER_SITE_URL }}

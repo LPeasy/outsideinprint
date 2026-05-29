@@ -4,18 +4,16 @@
 {{ $showLatestSlot := index $frontPage "showLatestSlot" }}
 {{ $secondary := index $frontPage "secondary" | default (slice) }}
 {{ $cartoonData := site.Data.editorial_cartoons | default dict }}
-{{ $cartoons := $cartoonData.cartoons | default (slice) }}
-{{ $currentCartoonSlug := $cartoonData.current | default "" }}
-{{ $currentCartoon := false }}
+{{ $cartoons := partial "editorial/published-cartoons.html" ($cartoonData.cartoons | default (slice)) }}
+{{ $currentCartoon := partial "editorial/current-cartoon.html" . }}
+{{ $currentCartoonSlug := "" }}
+{{ with $currentCartoon }}
+  {{ $currentCartoonSlug = .slug }}
+{{ end }}
 {{ $orderedCartoons := sort $cartoons "date" "desc" }}
 {{ $recentCartoons := slice }}
 {{ $almanackIssues := where site.RegularPages "Section" "almanack" }}
 {{ $latestAlmanack := false }}
-{{ range $cartoons }}
-  {{ if eq .slug $currentCartoonSlug }}
-    {{ $currentCartoon = . }}
-  {{ end }}
-{{ end }}
 {{ range $orderedCartoons }}
   {{ if and (ne .slug $currentCartoonSlug) (lt (len $recentCartoons) 2) }}
     {{ $recentCartoons = $recentCartoons | append . }}

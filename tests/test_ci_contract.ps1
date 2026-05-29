@@ -10,6 +10,7 @@ $seoRolloutDocPath = Join-Path $repoRoot "docs/seo-rollout.md"
 $readmePath = Join-Path $repoRoot "README.md"
 $packageJsonPath = Join-Path $repoRoot "package.json"
 $codexWorkflowPath = Join-Path $repoRoot "CODEX_WORKFLOW.md"
+$hugoConfigPath = Join-Path $repoRoot "hugo.toml"
 $deployWorkflowPath = Join-Path $repoRoot ".github/workflows/deploy.yml"
 $refreshWorkflowPath = Join-Path $repoRoot ".github/workflows/refresh-analytics.yml"
 $seoMetadataAuditPath = Join-Path $repoRoot "scripts/audit_seo_metadata.ps1"
@@ -22,6 +23,7 @@ $publicRouteSmokePath = Join-Path $repoRoot "tests/test_public_route_smoke.ps1"
 $legacyRenderContractPath = Join-Path $repoRoot "tests/test_legacy_render_contract.ps1"
 $seoRolloutContractPath = Join-Path $repoRoot "tests/test_seo_rollout_contract.ps1"
 $almanackModuleDataContractPath = Join-Path $repoRoot "tests/test_almanack_module_data.ps1"
+$editorialCartoonScheduleContractPath = Join-Path $repoRoot "tests/test_editorial_cartoon_schedule_contract.ps1"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
   throw "AGENTS.md is required for repo-local publishing session guidance."
@@ -47,6 +49,10 @@ if (-not (Test-Path $codexWorkflowPath -PathType Leaf)) {
   throw "CODEX_WORKFLOW.md is required for the CI contract test."
 }
 
+if (-not (Test-Path $hugoConfigPath -PathType Leaf)) {
+  throw "hugo.toml is required for the CI contract test."
+}
+
 foreach ($requiredValidationPath in @(
   $authorDirectoryContractPath,
   $publicOutputHelperPath,
@@ -57,6 +63,7 @@ foreach ($requiredValidationPath in @(
   $legacyRenderContractPath,
   $seoRolloutContractPath,
   $almanackModuleDataContractPath,
+  $editorialCartoonScheduleContractPath,
   $seoMetadataAuditPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
@@ -72,6 +79,7 @@ $seoRolloutDoc = Get-Content -Path $seoRolloutDocPath -Raw
 $readme = Get-Content -Path $readmePath -Raw
 $packageJson = Get-Content -Path $packageJsonPath -Raw
 $codexWorkflow = Get-Content -Path $codexWorkflowPath -Raw
+$hugoConfig = Get-Content -Path $hugoConfigPath -Raw
 $deployWorkflow = Get-Content -Path $deployWorkflowPath -Raw
 $refreshWorkflow = Get-Content -Path $refreshWorkflowPath -Raw
 $publicOutputHelper = Get-Content -Path $publicOutputHelperPath -Raw
@@ -190,6 +198,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_almanack_module_data\.ps1") {
   throw "deploy.yml must run the Almanack module data contract test."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_editorial_cartoon_schedule_contract\.ps1") {
+  throw "deploy.yml must run the editorial cartoon schedule contract test."
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_seo_rollout_contract\.ps1") {
   throw "deploy.yml must run the SEO rollout contract test."
 }
@@ -208,6 +220,22 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_public_route_smoke\.ps1") {
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_public_html_output\.ps1\s+-RequireFreshBuild") {
   throw "deploy.yml must run the generated-output regression test with -RequireFreshBuild."
+}
+
+if ($deployWorkflow -notmatch '(?m)^\s+schedule:\s*\r?\n\s+-\s+cron:\s*"17 0 \* \* \*"\s*\r?\n\s+timezone:\s*"America/New_York"') {
+  throw "deploy.yml must schedule regular rebuilds so future-dated essays can become public without a new commit."
+}
+
+if ($deployWorkflow -notmatch '(?m)^\s+TZ:\s*America/New_York\s*$') {
+  throw "deploy.yml must build in the Outside In Print publishing timezone."
+}
+
+if ($hugoConfig -notmatch '(?m)^timeZone\s*=\s*"America/New_York"\s*$') {
+  throw "hugo.toml must set the Outside In Print publishing timezone."
+}
+
+if ($deployWorkflow -match '(?m)^\s*run:\s*hugo\s+--gc\s+--minify\s+--buildFuture\b') {
+  throw "deploy.yml must not publish future-dated content early with --buildFuture."
 }
 
 $publicRouteSmokeIndex = $deployWorkflow.IndexOf("./tests/test_public_route_smoke.ps1")

@@ -3,7 +3,7 @@
 {{- $path := $page.RelPermalink | default "" -}}
 {{- if $path -}}
   {{- $path = printf "/%s" (strings.TrimPrefix "/" $path) -}}
-  {{- range (site.Data.editorial_cartoons.cartoons | default (slice)) -}}
+  {{- range (partial "editorial/published-cartoons.html" (site.Data.editorial_cartoons.cartoons | default (slice))) -}}
     {{- $essay := .essay | default "" -}}
     {{- if and (not $match) $essay -}}
       {{- $essayPath := printf "/%s" (strings.TrimPrefix "/" $essay) -}}

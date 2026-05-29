@@ -1,0 +1,12 @@
+{{- $cartoon := . -}}
+{{- $releaseValue := $cartoon.publishDate | default $cartoon.date | default "" -}}
+{{- $published := eq (getenv "HUGO_BUILD_FUTURE_CARTOONS") "true" -}}
+{{- if not $published -}}
+  {{- with $releaseValue -}}
+    {{- $release := time.AsTime . -}}
+    {{- if le $release.Unix now.Unix -}}
+      {{- $published = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $published -}}

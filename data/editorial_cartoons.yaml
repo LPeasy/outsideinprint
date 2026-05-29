@@ -1,4 +1,4 @@
-current: warbonds
+current: hit-after-hit
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -296,3 +296,12 @@ cartoons:
     alt: "Editorial cartoon showing a split nineteenth-century and modern immigration patronage scene, with elites on a blue-draped balcony above officials handing documents and phones to waiting families."
     width: 1572
     height: 1001
+  - slug: hit-after-hit
+    title: "Hit After Hit"
+    date: "2026-05-29"
+    publishDate: "2026-05-29T00:00:00-04:00"
+    image: "/images/editorial/hit-after-hit.png"
+    essay: "/essays/the-scenario-that-ate-the-future/"
+    alt: "Editorial cartoon showing children, reporters, and officials watching a glowing museum display labeled Current Crisis, while older exhibits labeled Y2K, Mayan 2012, Population Bomb, and Peak Oil sit under a sign for the Museum of Expired Catastrophes."
+    width: 1672
+    height: 941

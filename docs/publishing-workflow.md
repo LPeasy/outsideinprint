@@ -140,6 +140,65 @@ Publishing happens through `main`.
 
 There is no separate manual publish step after `main` is updated. `main` is the publish action.
 
+## Future-dated publishing
+
+Future-dated essays can be committed to `main` before release. Keep `draft: false`, set `date` to the public article date, set `publishDate` to the intended release time, and leave the production Hugo build as `hugo --gc --minify` without `--buildFuture`. Hugo excludes future-dated content from the public build until the release time has passed.
+
+Use explicit Eastern-time timestamps for timed releases:
+
+```yaml
+date: 2026-05-29
+publishDate: 2026-05-29T08:00:00-04:00
+```
+
+Date-only releases are interpreted in the site timezone, which is `America/New_York`. The deploy workflow also sets `TZ: America/New_York` and runs one scheduled GitHub Actions rebuild per day at 12:17 AM Eastern, so a dormant daily post appears on the first successful scheduled deploy after its `publishDate` becomes eligible. GitHub scheduled workflows are not exact-to-the-minute; use `workflow_dispatch` for a manual immediate release if timing is critical.
+
+For the current daily-essay queue, set one essay per publishing day:
+
+```yaml
+date: 2026-05-29
+publishDate: 2026-05-29T00:00:00-04:00
+```
+
+Multiple future essays may sit on `main` at the same time. Hugo will only build the ones whose `date` and `publishDate` are no longer future values. If two queued essays share the same eligible publish day, both will publish on that day's scheduled deploy.
+
+To inspect the dormant queue locally:
+
+```powershell
+.\tools\bin\generated\hugo.cmd list future
+```
+
+Future-dated front-page cartoons use the same daily rebuild, but the source of truth is `data/editorial_cartoons.yaml` instead of essay front matter. A queued cartoon entry may include:
+
+```yaml
+  - slug: scenario-cartoon
+    title: "Scenario Cartoon"
+    date: "2026-05-29"
+    publishDate: "2026-05-29T00:00:00-04:00"
+    image: "/images/editorial/scenario-cartoon.png"
+    essay: "/essays/the-scenario-that-ate-the-future/"
+```
+
+The public homepage, gallery, home metadata image, and essay-card cartoon thumbnails ignore future cartoon entries until `publishDate` or `date` is eligible. The current-cartoon selector falls back to the newest eligible cartoon when `current` points to a future queued entry, so multiple queued cartoons can sit on `main`.
+
+Queued cartoons must name the intended essay with `essay: "/essays/<slug>/"`. The cartoon schedule contract verifies that linked essays exist, are not drafts, and publish no later than the cartoon. If a cartoon is intentionally standalone, do not future-queue it without explicit editorial approval.
+
+For a local preview of future queued cartoons, set the explicit preview environment variable before the Hugo command:
+
+```powershell
+$env:HUGO_BUILD_FUTURE_CARTOONS = "true"
+.\tools\bin\generated\hugo.cmd --gc --minify --buildFuture
+Remove-Item Env:\HUGO_BUILD_FUTURE_CARTOONS
+```
+
+For local preview of a future-dated essay, use `--buildFuture` deliberately:
+
+```powershell
+.\tools\bin\generated\hugo.cmd --gc --minify --buildFuture
+```
+
+Do not add `--buildFuture` to the production deploy workflow. That flag is only for preview and validation of future content before its public time.
+
 ## Non-ideal paths and exceptions
 
 Avoid treating these as the default path:

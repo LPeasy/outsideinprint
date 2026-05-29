@@ -1,0 +1,15 @@
+{{- $cartoonData := site.Data.editorial_cartoons | default dict -}}
+{{- $cartoons := partial "editorial/published-cartoons.html" ($cartoonData.cartoons | default (slice)) -}}
+{{- $currentSlug := $cartoonData.current | default "" -}}
+{{- $current := false -}}
+{{- range $cartoons -}}
+  {{- if eq .slug $currentSlug -}}
+    {{- $current = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $current -}}
+  {{- with first 1 (sort $cartoons "date" "desc") -}}
+    {{- $current = index . 0 -}}
+  {{- end -}}
+{{- end -}}
+{{- return $current -}}

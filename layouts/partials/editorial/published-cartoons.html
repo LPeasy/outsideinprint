@@ -1,0 +1,8 @@
+{{- $cartoons := . | default (slice) -}}
+{{- $published := slice -}}
+{{- range $cartoons -}}
+  {{- if partial "editorial/cartoon-is-published.html" . -}}
+    {{- $published = $published | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $published -}}

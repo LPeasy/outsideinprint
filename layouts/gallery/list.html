@@ -1,12 +1,10 @@
 {{ define "main" }}
   {{ $galleryData := site.Data.editorial_cartoons | default dict }}
-  {{ $currentSlug := $galleryData.current | default "" }}
-  {{ $cartoons := $galleryData.cartoons | default (slice) }}
-  {{ $current := false }}
-  {{ range $cartoons }}
-    {{ if eq .slug $currentSlug }}
-      {{ $current = . }}
-    {{ end }}
+  {{ $cartoons := partial "editorial/published-cartoons.html" ($galleryData.cartoons | default (slice)) }}
+  {{ $current := partial "editorial/current-cartoon.html" . }}
+  {{ $currentSlug := "" }}
+  {{ with $current }}
+    {{ $currentSlug = .slug }}
   {{ end }}
   {{ $orderedCartoons := sort $cartoons "date" "desc" }}
   {{ $archiveCartoons := slice }}

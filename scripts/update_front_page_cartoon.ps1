@@ -14,6 +14,8 @@ param(
 
   [string]$Date = (Get-Date -Format 'yyyy-MM-dd'),
 
+  [string]$PublishDate,
+
   [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 )
 
@@ -48,6 +50,46 @@ function Unquote-YamlValue {
   }
 
   return $trimmed
+}
+
+function Get-EasternTimeZone {
+  try {
+    return [System.TimeZoneInfo]::FindSystemTimeZoneById('Eastern Standard Time')
+  }
+  catch {
+    return [System.TimeZoneInfo]::FindSystemTimeZoneById('America/New_York')
+  }
+}
+
+function ConvertTo-OipDateTimeOffset {
+  param(
+    [Parameter(Mandatory = $true)][string]$Value,
+    [Parameter(Mandatory = $true)][string]$Label
+  )
+
+  $trimmed = $Value.Trim()
+  if ([string]::IsNullOrWhiteSpace($trimmed)) {
+    throw "$Label cannot be empty."
+  }
+
+  if ($trimmed -match '^\d{4}-\d{2}-\d{2}$') {
+    $date = [datetime]::ParseExact($trimmed, 'yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture)
+    $eastern = Get-EasternTimeZone
+    $offset = $eastern.GetUtcOffset($date)
+    return [datetimeoffset]::new($date.Year, $date.Month, $date.Day, 0, 0, 0, $offset)
+  }
+
+  $parsed = [datetimeoffset]::MinValue
+  if ([datetimeoffset]::TryParse($trimmed, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$parsed)) {
+    return $parsed
+  }
+
+  throw "$Label must use yyyy-MM-dd or an ISO timestamp with timezone offset. Received: $Value"
+}
+
+function Get-CurrentEasternTime {
+  $eastern = Get-EasternTimeZone
+  return [System.TimeZoneInfo]::ConvertTime([datetimeoffset]::UtcNow, $eastern)
 }
 
 function Normalize-EssayPath {
@@ -249,6 +291,39 @@ function Resolve-EssayMarkdownPath {
   throw "Linked essay not found for $SiteEssayPath under content\essays."
 }
 
+function Get-EssayReleaseInfo {
+  param(
+    [string]$Root,
+    [string]$SiteEssayPath
+  )
+
+  $markdownPath = Resolve-EssayMarkdownPath -Root $Root -SiteEssayPath $SiteEssayPath
+  $frontMatter = Read-MarkdownFrontMatter -Path $markdownPath
+  if (-not $frontMatter.ContainsKey('date')) {
+    throw "Linked essay $SiteEssayPath is missing front matter date."
+  }
+
+  $draftValue = ''
+  if ($frontMatter.ContainsKey('draft')) {
+    $draftValue = ([string]$frontMatter['draft']).Trim().ToLowerInvariant()
+  }
+  if ($draftValue -eq 'true') {
+    throw "Linked essay $SiteEssayPath is still draft:true."
+  }
+
+  $releaseValue = if ($frontMatter.ContainsKey('publishdate') -and -not [string]::IsNullOrWhiteSpace([string]$frontMatter['publishdate'])) {
+    [string]$frontMatter['publishdate']
+  }
+  else {
+    [string]$frontMatter['date']
+  }
+
+  return [pscustomobject]@{
+    Path = $markdownPath
+    ReleaseAt = ConvertTo-OipDateTimeOffset -Value $releaseValue -Label "Linked essay release date for $SiteEssayPath"
+  }
+}
+
 function Test-EditorialPhilosophyPassLine {
   param(
     [string]$Text,
@@ -361,6 +436,24 @@ function Assert-LinkedEssayPhilosophyAudit {
   }
 }
 
+function Assert-LinkedEssayScheduleCompatibility {
+  param(
+    [string]$Root,
+    [string]$SiteEssayPath,
+    [datetimeoffset]$CartoonReleaseAt
+  )
+
+  if ([string]::IsNullOrWhiteSpace($SiteEssayPath)) {
+    return
+  }
+
+  $normalizedEssayPath = Normalize-EssayPath -Value $SiteEssayPath
+  $essayRelease = Get-EssayReleaseInfo -Root $Root -SiteEssayPath $normalizedEssayPath
+  if ($CartoonReleaseAt -lt $essayRelease.ReleaseAt) {
+    throw ("Cartoon release {0} is earlier than linked essay {1} release {2}. Queue the cartoon at or after the essay publishDate." -f $CartoonReleaseAt.ToString('o'), $normalizedEssayPath, $essayRelease.ReleaseAt.ToString('o'))
+  }
+}
+
 function Read-CartoonData {
   param([string]$Path)
 
@@ -416,7 +509,7 @@ function Write-CartoonData {
     [object[]]$Cartoons
   )
 
-  $preferredKeyOrder = @('title', 'date', 'image', 'essay', 'alt', 'caption', 'width', 'height')
+  $preferredKeyOrder = @('title', 'date', 'publishDate', 'image', 'essay', 'alt', 'caption', 'width', 'height')
 
   $lines = @()
   $lines += "current: $Current"
@@ -472,6 +565,10 @@ if ($Date -notmatch '^\d{4}-\d{2}-\d{2}$') {
   throw "Date must use yyyy-MM-dd format. Received: $Date"
 }
 
+$cartoonReleaseValue = if (-not [string]::IsNullOrWhiteSpace($PublishDate)) { $PublishDate } else { $Date }
+$cartoonReleaseAt = ConvertTo-OipDateTimeOffset -Value $cartoonReleaseValue -Label 'Cartoon publish date'
+$isQueuedPublish = $cartoonReleaseAt -gt (Get-CurrentEasternTime)
+
 if ($NoEssayLink -and -not [string]::IsNullOrWhiteSpace($EssayPath)) {
   throw 'Use either -EssayPath or -NoEssayLink, not both.'
 }
@@ -479,6 +576,10 @@ if ($NoEssayLink -and -not [string]::IsNullOrWhiteSpace($EssayPath)) {
 $resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $Root).Path)
 $resolvedImagePath = [System.IO.Path]::GetFullPath((Resolve-Path $ImagePath).Path)
 $defaultEssayPath = $null
+if ($isQueuedPublish -and -not $NoEssayLink -and [string]::IsNullOrWhiteSpace($EssayPath)) {
+  throw 'Queued future cartoon publishes require -EssayPath "/essays/<slug>/". Default latest-essay inference is only safe for immediate cartoon publishes.'
+}
+
 if (-not $NoEssayLink -and [string]::IsNullOrWhiteSpace($EssayPath)) {
   Assert-DefaultEssaySourceCurrent -Root $resolvedRoot
   $defaultEssayPath = Get-LatestEssayPath -Root $resolvedRoot
@@ -526,6 +627,12 @@ foreach ($cartoon in @($data.cartoons)) {
     $updatedCartoon.slug = $slug
     $updatedCartoon.title = $Title
     $updatedCartoon.date = $Date
+    if (-not [string]::IsNullOrWhiteSpace($PublishDate)) {
+      $updatedCartoon.publishDate = $PublishDate
+    }
+    elseif ($updatedCartoon.Contains('publishDate')) {
+      $updatedCartoon.Remove('publishDate')
+    }
     $updatedCartoon.image = "/images/editorial/$slug.png"
     $updatedCartoon.alt = $Alt
     $updatedCartoon.width = $width
@@ -543,6 +650,7 @@ foreach ($cartoon in @($data.cartoons)) {
 
     if (-not $NoEssayLink -and $updatedCartoon.Contains('essay')) {
       Assert-LinkedEssayPhilosophyAudit -Root $resolvedRoot -SiteEssayPath $updatedCartoon.essay
+      Assert-LinkedEssayScheduleCompatibility -Root $resolvedRoot -SiteEssayPath $updatedCartoon.essay -CartoonReleaseAt $cartoonReleaseAt
     }
 
     $cartoons += $updatedCartoon
@@ -563,12 +671,17 @@ if (-not $updated) {
     height = $height
   }
 
+  if (-not [string]::IsNullOrWhiteSpace($PublishDate)) {
+    $newCartoon.publishDate = $PublishDate
+  }
+
   if (-not $NoEssayLink) {
     $newCartoon.essay = if ($resolvedEssayPath) { $resolvedEssayPath } else { $defaultEssayPath }
   }
 
   if (-not $NoEssayLink -and $newCartoon.Contains('essay')) {
     Assert-LinkedEssayPhilosophyAudit -Root $resolvedRoot -SiteEssayPath $newCartoon.essay
+    Assert-LinkedEssayScheduleCompatibility -Root $resolvedRoot -SiteEssayPath $newCartoon.essay -CartoonReleaseAt $cartoonReleaseAt
   }
 
   $cartoons += $newCartoon
@@ -588,5 +701,8 @@ Write-Host "Updated front page cartoon: $Title"
 Write-Host "Image: $targetRelativePath"
 if (-not [string]::IsNullOrWhiteSpace($linkedEssay)) {
   Write-Host "Essay: $linkedEssay"
+}
+if (-not [string]::IsNullOrWhiteSpace($PublishDate)) {
+  Write-Host "Publish date: $PublishDate"
 }
 Write-Host "Data: data\editorial_cartoons.yaml"

@@ -350,6 +350,76 @@ function Get-CartoonEntries {
 
   return $entries.ToArray()
 }
+
+function Get-OipEasternTimeZone {
+  try {
+    return [System.TimeZoneInfo]::FindSystemTimeZoneById('Eastern Standard Time')
+  }
+  catch {
+    return [System.TimeZoneInfo]::FindSystemTimeZoneById('America/New_York')
+  }
+}
+
+function ConvertTo-OipDateTimeOffset {
+  param([string]$Value)
+
+  $trimmed = ([string]$Value).Trim()
+  if ($trimmed -match '^\d{4}-\d{2}-\d{2}$') {
+    $date = [datetime]::ParseExact($trimmed, 'yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture)
+    $eastern = Get-OipEasternTimeZone
+    $offset = $eastern.GetUtcOffset($date)
+    return [datetimeoffset]::new($date.Year, $date.Month, $date.Day, 0, 0, 0, $offset)
+  }
+
+  return [datetimeoffset]::Parse($trimmed, [Globalization.CultureInfo]::InvariantCulture)
+}
+
+function Test-CartoonEntryPublished {
+  param([object]$Entry)
+
+  if ([string]$env:HUGO_BUILD_FUTURE_CARTOONS -match '(?i)^(true|1|yes)$') {
+    return $true
+  }
+
+  $releaseValue = if ($Entry.PSObject.Properties.Name -contains 'publishDate') { [string]$Entry.publishDate } else { [string]$Entry.date }
+  if ([string]::IsNullOrWhiteSpace($releaseValue)) {
+    return $false
+  }
+
+  $easternNow = [System.TimeZoneInfo]::ConvertTime([datetimeoffset]::UtcNow, (Get-OipEasternTimeZone))
+  return (ConvertTo-OipDateTimeOffset -Value $releaseValue) -le $easternNow
+}
+
+function Get-PublishedCartoonEntries {
+  param([string]$RepoRoot)
+
+  return @(
+    Get-CartoonEntries -RepoRoot $RepoRoot |
+      Where-Object { Test-CartoonEntryPublished -Entry $_ }
+  )
+}
+
+function Get-PublicCurrentCartoonEntry {
+  param([string]$RepoRoot)
+
+  $rawCurrentSlug = Get-CurrentCartoonSlug -RepoRoot $RepoRoot
+  $publishedCartoons = @(Get-PublishedCartoonEntries -RepoRoot $RepoRoot)
+  $current = @($publishedCartoons | Where-Object { $_.slug -eq $rawCurrentSlug } | Select-Object -First 1)
+  if ($current.Count -gt 0) {
+    return $current[0]
+  }
+
+  $latest = @(
+    $publishedCartoons |
+      Sort-Object @{ Expression = { $_.date }; Descending = $true }, @{ Expression = { $_.slug }; Ascending = $true } |
+      Select-Object -First 1
+  )
+  if ($latest.Count -gt 0) {
+    return $latest[0]
+  }
+
+  return $null
+}
 function Get-SemanticPageIssues {
   param(
     [string]$RelativePath,
@@ -407,14 +477,15 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$currentCartoonSlug = Get-CurrentCartoonSlug -RepoRoot $repoRoot
-$currentCartoonImagePath = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'image'
+$currentCartoon = Get-PublicCurrentCartoonEntry -RepoRoot $repoRoot
+$currentCartoonSlug = if ($null -ne $currentCartoon) { [string]$currentCartoon.slug } else { '' }
+$currentCartoonImagePath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'image')) { [string]$currentCartoon.image } else { '' }
 $currentCartoonImagePattern = [regex]::Escape($currentCartoonImagePath)
-$currentCartoonEssayPath = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'essay'
+$currentCartoonEssayPath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'essay')) { [string]$currentCartoon.essay } else { '' }
 $currentCartoonEssayPattern = 'data-essay=(?:"' + [regex]::Escape($currentCartoonEssayPath) + '"|' + [regex]::Escape($currentCartoonEssayPath) + ')'
-$currentCartoonCaption = Get-CurrentCartoonValue -RepoRoot $repoRoot -Key 'caption'
+$currentCartoonCaption = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'caption')) { [string]$currentCartoon.caption } else { '' }
 $recentHomeCartoons = @(
-  Get-CartoonEntries -RepoRoot $repoRoot |
+  Get-PublishedCartoonEntries -RepoRoot $repoRoot |
     Where-Object { $_.slug -ne $currentCartoonSlug } |
     Sort-Object @{ Expression = { $_.date }; Descending = $true }, @{ Expression = { $_.slug }; Ascending = $true } |
     Select-Object -First 4
@@ -2673,8 +2744,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*121 published pieces'
-    Message = 'expected the collections index to expose the compact collections summary line beneath the intro'
+    Pattern = '11 public collections.*\d+ published pieces'
+    Message = 'expected the collections index to expose the compact collections summary line beneath the intro without pinning a date-sensitive piece count'
   },
   @{
     Path = 'public/collections/index.html'

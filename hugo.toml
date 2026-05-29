@@ -1,6 +1,7 @@
 baseURL = "https://outsideinprint.org/"
 title = "Outside In Print"
 languageCode = "en-us"
+timeZone = "America/New_York"
 
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
