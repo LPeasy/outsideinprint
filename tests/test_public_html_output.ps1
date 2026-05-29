@@ -2648,8 +2648,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?(Kindle edition available separately|Kindle).*?Print editions are deferred until Bowker ISBN work is complete'
-    Message = 'expected the bookstore index to make the book route, Kindle-secondary note, and print deferral visible'
+    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the bookstore index to expose The American Nightmare route, Amazon Kindle channel, and print deferral'
   },
   @{
     Path = 'public/shop/index.html'
@@ -2685,8 +2685,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
-    Pattern = '(?s)Kindle edition available separately.*?Print editions are deferred until Bowker ISBN work is complete'
-    Message = 'expected the book product page to keep Kindle secondary and print deferred'
+    Pattern = '(?s)Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the book product page to expose Amazon Kindle as the external channel and keep print deferred'
   },
   @{
     Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
