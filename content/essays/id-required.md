@@ -6,8 +6,12 @@ date: 2026-05-19T10:56:33-04:00
 draft: false
 slug: "id-required"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-30"
+    note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/id-required/hero.png"
 featured_image_alt: "Editorial illustration of a voter registration ledger under a cold database light, with one record marked for verification."

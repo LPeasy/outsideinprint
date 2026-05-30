@@ -6,8 +6,12 @@ date: 2026-05-17
 draft: false
 slug: "from-variety-to-virtue"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-30"
+    note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/from-variety-to-virtue/hero.png"
 featured_image_alt: "A cabinet of crops, ledgers, ecological specimens, and civic forms arranged as one risk-management archive."

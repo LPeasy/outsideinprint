@@ -2904,6 +2904,101 @@
       },
       "commit_sha": "b1e794251fd7b6169447b11302712420e78039e1",
       "deployed_on": "2026-05-29"
+    },
+    "the-ash-pond-under-the-cloud": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-30",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the AI-power and coal-wastewater argument tied to EPA records, grid-demand evidence, permit mechanics, downstream risk, and uncertainty about plant-level outcomes."
+      }
+    },
+    "from-variety-to-virtue": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-30",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the diversification argument tied to historical, financial, ecological, legal, and social-trust records while naming assumptions, tradeoffs, incentives, and uncertainty about social heterogeneity."
+      }
+    },
+    "consent-from-permission-to-sanctity": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-30",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the consent argument tied to legal, political, medical, sexual-ethics, and institutional records while distinguishing procedural protection from moral sufficiency."
+      }
+    },
+    "id-required": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-30",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the voter-verification argument tied to primary executive, statutory, agency, court, and election-administration records while separating lawful proof from machine error and political panic."
+      }
+    },
+    "save-some-air-for-the-fishies": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-30",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-30.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-30",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the river-oxygen argument tied to the study record, water chemistry, heat, runoff, dam, permit, and monitoring mechanisms while preserving uncertainty and local variation."
+      }
     }
   },
   "blocked": {},
@@ -3306,6 +3401,18 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-29.md",
       "commit_sha": "b1e794251fd7b6169447b11302712420e78039e1",
       "deployed_on": "2026-05-29"
+    },
+    {
+      "batch_id": "2026-05-30",
+      "selected_slugs": [
+        "the-ash-pond-under-the-cloud",
+        "from-variety-to-virtue",
+        "consent-from-permission-to-sanctity",
+        "id-required",
+        "save-some-air-for-the-fishies"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-30.md"
     }
   ]
 }

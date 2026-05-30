@@ -6,8 +6,12 @@ date: 2026-05-20
 draft: false
 slug: "save-some-air-for-the-fishies"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-30"
+    note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/save-some-air-for-the-fishies/hero.png"
 featured_image_alt: "Editorial illustration of a river oxygen meter glowing near a warm dark river as fish shadows drift below the surface."
