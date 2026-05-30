@@ -1909,11 +1909,22 @@ else {
     'User-agent: Google-Extended',
     'User-agent: *',
     'Allow: /',
-    'Disallow: /',
     'Sitemap: https://outsideinprint.org/sitemap.xml'
   )) {
     if ($robotsTxt -notmatch [regex]::Escape($requiredLine)) {
       $indexationIssues.Add("robots.txt => expected line '$requiredLine'")
+    }
+  }
+
+  foreach ($allowedAgent in @('GPTBot', 'ClaudeBot', 'Google-Extended')) {
+    $allowPattern = "(?m)User-agent:\s+$([regex]::Escape($allowedAgent))\s*\r?\nAllow:\s+/"
+    if ($robotsTxt -notmatch $allowPattern) {
+      $indexationIssues.Add("robots.txt => expected $allowedAgent to be allowed")
+    }
+
+    $disallowPattern = "(?m)User-agent:\s+$([regex]::Escape($allowedAgent))\s*\r?\nDisallow:\s+/"
+    if ($robotsTxt -match $disallowPattern) {
+      $indexationIssues.Add("robots.txt => expected $allowedAgent not to be disallowed")
     }
   }
 }
