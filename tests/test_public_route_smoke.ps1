@@ -85,6 +85,7 @@ foreach ($requiredPath in @(
   'almanack/2026-05-09/index.html',
   'almanack/2026-05-16/index.html',
   'almanack/2026-05-23/index.html',
+  'almanack/2026-05-30/index.html',
   'collections/bobs-almanack/index.html',
   'gallery/index.html',
   'random/index.html',

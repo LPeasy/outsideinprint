@@ -1352,6 +1352,7 @@ $requiredUxPages = @(
   'public/almanack/2026-05-09/index.html',
   'public/almanack/2026-05-16/index.html',
   'public/almanack/2026-05-23/index.html',
+  'public/almanack/2026-05-30/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -2837,8 +2838,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?May 23, 2026.*?A record is not the truth\. It is where the hiding starts\..*?The Text Message in the Archive Box'
-    Message = 'expected the Bob''s Almanack collection page to feature the May 23 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?May 30, 2026.*?Ask for evidence and watch them\..*?The Scenario That Ate the Future'
+    Message = 'expected the Bob''s Almanack collection page to feature the May 30 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -2909,8 +2910,29 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 30, 2026.*?Issue 5.*?Ask for evidence and watch them\.'
+    Message = 'expected the May 30 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the May 30 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '(?s)/images/editorial/hit-after-hit\.png.*?/images/editorial/warbonds\.png.*?/images/editorial/human-resources\.png.*?/images/editorial/on-the-fence\.png'
+    Message = 'expected the May 30 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '/images/essays/(the-scenario-that-ate-the-future|the-war-premium-at-the-auction|the-courthouse-that-ate-the-republic|the-tank-at-the-fence-line)/hero\.png'
+    Message = 'expected the May 30 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 23, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Order.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 30, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Prudence.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
