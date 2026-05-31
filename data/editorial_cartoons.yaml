@@ -1,4 +1,4 @@
-current: hit-after-hit
+current: sunset-powerplant
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -303,5 +303,14 @@ cartoons:
     image: "/images/editorial/hit-after-hit.png"
     essay: "/essays/the-scenario-that-ate-the-future/"
     alt: "Editorial cartoon showing children, reporters, and officials watching a glowing museum display labeled Current Crisis, while older exhibits labeled Y2K, Mayan 2012, Population Bomb, and Peak Oil sit under a sign for the Museum of Expired Catastrophes."
+    width: 1672
+    height: 941
+  - slug: sunset-powerplant
+    title: "Sunset Powerplant"
+    date: "2026-05-31"
+    publishDate: "2026-05-31T00:00:00-04:00"
+    image: "/images/editorial/sunset-powerplant.png"
+    essay: "/essays/the-sunset-date-in-the-code/"
+    alt: "Editorial cartoon showing officials and workers facing an open book labeled Energy Code as a yellow sunset lowers over power lines, pipes, and industrial energy facilities."
     width: 1672
     height: 941
