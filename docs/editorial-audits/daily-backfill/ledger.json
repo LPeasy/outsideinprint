@@ -2999,6 +2999,101 @@
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps the river-oxygen argument tied to the study record, water chemistry, heat, runoff, dam, permit, and monitoring mechanisms while preserving uncertainty and local variation."
       }
+    },
+    "the-text-message-in-the-archive-box": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-31",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-31",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps presidential-records claims tied to court orders, statutory custody, executive incentives, preservation tradeoffs, delayed access, and institutional risk over official memory."
+      }
+    },
+    "the-easement-under-the-lake": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-31",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-31",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps Dakota Access analysis tied to Corps records, operating incentives, tribal and water-risk tradeoffs, monitoring consequences, uncertainty, and public-risk allocation."
+      }
+    },
+    "the-door-that-would-not-open": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-31",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-31",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay separates allegations from convictions, grounds fraud claims in DOJ, audit, testimony, and transcript records, and weighs reporting incentives, anti-smear tradeoffs, and program-integrity consequences."
+      }
+    },
+    "the-tank-at-the-fence-line": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-31",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-31",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps Garden Grove risk claims tied to chemical, emergency, regulatory, and public-health records while naming hazard pathways, response tradeoffs, uncertainty, and fence-line risk transfer."
+      }
+    },
+    "the-courthouse-that-ate-the-republic": {
+      "status": "pending_deploy",
+      "batch_id": "2026-05-31",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-05-31",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps Tammany claims tied to named historical records, distinguishes proof levels, and tests machine politics through incentives, immigrant-service tradeoffs, legal consequences, uncertainty, and institutional capture."
+      }
     }
   },
   "blocked": {},
@@ -3413,6 +3508,18 @@
       ],
       "status": "pending_deploy",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-30.md"
+    },
+    {
+      "batch_id": "2026-05-31",
+      "selected_slugs": [
+        "the-text-message-in-the-archive-box",
+        "the-easement-under-the-lake",
+        "the-door-that-would-not-open",
+        "the-tank-at-the-fence-line",
+        "the-courthouse-that-ate-the-republic"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md"
     }
   ]
 }

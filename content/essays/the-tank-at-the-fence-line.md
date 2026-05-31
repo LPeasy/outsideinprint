@@ -6,8 +6,12 @@ date: 2026-05-26
 draft: false
 slug: "the-tank-at-the-fence-line"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-05-31"
+    note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/the-tank-at-the-fence-line/hero.png"
 featured_image_alt: "A large industrial tank behind a chain-link fence with dim houses beyond the evacuation line."
