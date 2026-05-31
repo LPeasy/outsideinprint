@@ -3001,12 +3001,14 @@
       }
     },
     "the-text-message-in-the-archive-box": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-31",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
       "previous_version": "1.0",
       "new_version": "1.1",
       "updated_on": "2026-05-31",
+      "commit_sha": "ae0503e7e3a715331c91a48b8df60851e1b079d6",
+      "deployed_on": "2026-05-31",
       "editorial_philosophy": {
         "status": "PASS",
         "evidence": "PASS",
@@ -3020,12 +3022,14 @@
       }
     },
     "the-easement-under-the-lake": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-31",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
       "previous_version": "1.0",
       "new_version": "1.1",
       "updated_on": "2026-05-31",
+      "commit_sha": "ae0503e7e3a715331c91a48b8df60851e1b079d6",
+      "deployed_on": "2026-05-31",
       "editorial_philosophy": {
         "status": "PASS",
         "evidence": "PASS",
@@ -3039,12 +3043,14 @@
       }
     },
     "the-door-that-would-not-open": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-31",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
       "previous_version": "1.0",
       "new_version": "1.1",
       "updated_on": "2026-05-31",
+      "commit_sha": "ae0503e7e3a715331c91a48b8df60851e1b079d6",
+      "deployed_on": "2026-05-31",
       "editorial_philosophy": {
         "status": "PASS",
         "evidence": "PASS",
@@ -3058,12 +3064,14 @@
       }
     },
     "the-tank-at-the-fence-line": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-31",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
       "previous_version": "1.0",
       "new_version": "1.1",
       "updated_on": "2026-05-31",
+      "commit_sha": "ae0503e7e3a715331c91a48b8df60851e1b079d6",
+      "deployed_on": "2026-05-31",
       "editorial_philosophy": {
         "status": "PASS",
         "evidence": "PASS",
@@ -3077,12 +3085,14 @@
       }
     },
     "the-courthouse-that-ate-the-republic": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-05-31",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
       "previous_version": "1.0",
       "new_version": "1.1",
       "updated_on": "2026-05-31",
+      "commit_sha": "ae0503e7e3a715331c91a48b8df60851e1b079d6",
+      "deployed_on": "2026-05-31",
       "editorial_philosophy": {
         "status": "PASS",
         "evidence": "PASS",
@@ -3518,8 +3528,10 @@
         "the-tank-at-the-fence-line",
         "the-courthouse-that-ate-the-republic"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-05-31.md",
+      "commit_sha": "ae0503e7e3a715331c91a48b8df60851e1b079d6",
+      "deployed_on": "2026-05-31"
     }
   ]
 }
