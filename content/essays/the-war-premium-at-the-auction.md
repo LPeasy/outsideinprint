@@ -6,8 +6,12 @@ date: 2026-05-28
 draft: false
 slug: "the-war-premium-at-the-auction"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-01"
+    note: "Updated June 1, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/the-war-premium-at-the-auction/hero.png"
 featured_image_alt: "A Treasury auction table under hard light, with bond papers, bidder paddles, and a faint red heat line reflected across the polished surface."

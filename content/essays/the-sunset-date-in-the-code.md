@@ -7,8 +7,12 @@ publishDate: 2026-05-31T00:00:00-04:00
 draft: false
 slug: "the-sunset-date-in-the-code"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-01"
+    note: "Updated June 1, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/the-sunset-date-in-the-code/hero.png"
 featured_image_alt: "Editorial illustration of a thick Code of Federal Regulations volume with a red sunset date stamp glowing over energy pipes, wires, and a nuclear-site gate."
