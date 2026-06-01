@@ -2133,8 +2133,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-tank-at-the-fence-line"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?on-the-fence"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=on-the-fence"?'
-    Message = 'expected the Tank homepage card cartoon thumbnail to open the On the Fence lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-sunset-date-in-the-code"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?sunset-powerplant"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=sunset-powerplant"?'
+    Message = 'expected the Sunset Date homepage card cartoon thumbnail to open the Sunset Powerplant lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -2444,7 +2444,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)href=(?:"?#archive-month-2026-05"?).*?>2026<.*?href=(?:"?#archive-month-2025-12"?).*?>2025<'
+    Pattern = '(?s)href=(?:"?#archive-month-2026-06"?).*?>2026<.*?href=(?:"?#archive-month-2025-12"?).*?>2025<'
     Message = 'expected the archive landing page to expose inline year jumps keyed to the first month of each year'
   },
   @{
