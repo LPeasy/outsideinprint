@@ -1,4 +1,4 @@
-current: sunset-powerplant
+current: goin-postal
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -312,5 +312,13 @@ cartoons:
     image: "/images/editorial/sunset-powerplant.png"
     essay: "/essays/the-sunset-date-in-the-code/"
     alt: "Editorial cartoon showing officials and workers facing an open book labeled Energy Code as a yellow sunset lowers over power lines, pipes, and industrial energy facilities."
+    width: 1672
+    height: 941
+  - slug: goin-postal
+    title: "Goin' Postal"
+    date: "2026-06-01"
+    image: "/images/editorial/goin-postal.png"
+    essay: "/essays/the-ballot-list-at-the-mailroom/"
+    alt: "Editorial cartoon showing a county election mailroom where ballot envelopes pass through a large machine labeled BALLOT MAIL while a citizenship list feeds in beside a correction path tag and state law stamp."
     width: 1672
     height: 941
