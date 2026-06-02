@@ -2,7 +2,7 @@
 
 Workflow: `oip_publication_packaging`
 
-Package: `2026-06-02-colored-glasses-the-lens-of-race`
+Package: `2026-06-01-colored-glasses-the-lens-of-race`
 
 Decision state: `PUBLICATION_READY`
 

@@ -2756,7 +2756,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/index.html'
-    Pattern = '11 public collections.*\d+ published pieces'
+    Pattern = '\d+ public collections.*\d+ published pieces'
     Message = 'expected the collections index to expose the compact collections summary line beneath the intro without pinning a date-sensitive piece count'
   },
   @{

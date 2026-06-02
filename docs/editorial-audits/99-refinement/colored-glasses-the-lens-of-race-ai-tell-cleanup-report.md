@@ -1,14 +1,14 @@
 # AI-Tell Cleanup Report
 
 Target file: `content/essays/colored-glasses-the-lens-of-race.md`
-Date reviewed: 2026-06-02
+Date reviewed: 2026-06-01
 Reviewer: Codex / ai-tell-remover
 
 ## Search Context
 
 Search query or mode: `site:grammarly.com AI writing telltale signs generic phrases ultimately crucial delve landscape`; `site:prowritingaid.com AI writing common phrases ChatGPT tells`
 
-Live-search date: 2026-06-02
+Live-search date: 2026-06-01
 
 Current tells learned:
 

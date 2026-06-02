@@ -1,6 +1,6 @@
 ---
 title: "Colored Glasses: The Lens of Race"
-date: 2026-06-02
+date: 2026-06-01
 draft: false
 slug: "colored-glasses-the-lens-of-race"
 section_label: "Essay"
