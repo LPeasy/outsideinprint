@@ -25,6 +25,30 @@ collections:
       sections:
         - almanack
 
+  - slug: simple-logic
+    title: Simple Logic
+    kind: series
+    public: true
+    force_public: false
+    min_items: 1
+    explicit_only: true
+    featured: false
+    weight: 12
+    start_here: colored-glasses-the-lens-of-race
+    description: Short logical arguments that test a public claim by following its own premises.
+    metadata:
+      - label: Format
+        value: Short arguments
+      - label: Scope
+        value: Logic, premises, and public meaning
+      - label: Lane
+        value: Essay series
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
   - slug: the-ledger
     title: The Ledger
     kind: series
