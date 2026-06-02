@@ -6,8 +6,12 @@ date: 2026-06-01
 draft: false
 slug: "the-ballot-list-at-the-mailroom"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-02"
+    note: "Updated June 2, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/the-ballot-list-at-the-mailroom/hero.png"
 featured_image_alt: "An editorial illustration of a county election mailroom with ballot envelopes, a federal citizenship list, postal barcodes, and a courthouse file under cool overhead light."

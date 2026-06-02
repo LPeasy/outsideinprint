@@ -8,8 +8,12 @@ description: "A short logical argument against making race the first rule for in
 author_id: "robert-v-ussley"
 featured_image: "/images/essays/colored-glasses-the-lens-of-race/hero.png"
 featured_image_alt: "A magnifying lens over blank silhouette cards with faint category lines on a quiet study table."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-02"
+    note: "Updated June 2, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
   - "simple-logic"

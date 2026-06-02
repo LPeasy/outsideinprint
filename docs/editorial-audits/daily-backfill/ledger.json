@@ -3167,6 +3167,44 @@
       },
       "commit_sha": "88d663ab1d2d1ee3fa3b4b73d8dd9609ff769cbb",
       "deployed_on": "2026-06-01"
+    },
+    "colored-glasses-the-lens-of-race": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-02",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-02.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-06-02",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay limits its claim to a logical critique of race-first interpretation, preserves uncertainty about history and institutions, and rejects factional or category-first moral sorting."
+      }
+    },
+    "the-ballot-list-at-the-mailroom": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-02",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-02.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-06-02",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps the election-order and ballot-mail argument tied to the executive order, court record, Federal Register proposal, election statutes, postal mechanics, correction risk, and institutional accountability."
+      }
     }
   },
   "blocked": {},
@@ -3607,6 +3645,15 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-01.md",
       "commit_sha": "88d663ab1d2d1ee3fa3b4b73d8dd9609ff769cbb",
       "deployed_on": "2026-06-01"
+    },
+    {
+      "batch_id": "2026-06-02",
+      "selected_slugs": [
+        "the-ballot-list-at-the-mailroom",
+        "colored-glasses-the-lens-of-race"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-02.md"
     }
   ]
 }
