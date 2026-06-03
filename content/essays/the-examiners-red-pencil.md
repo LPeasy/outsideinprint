@@ -2,7 +2,7 @@
 title: "The Examiner's Red Pencil"
 subtitle: "A fight over bank supervision begins with a warning letter and ends at the public safety net."
 description: "A bank-supervision fight over Fed warning letters shows how examiner judgment, bank lobbying, measurable risk, and the public safety net meet in one quiet instrument."
-date: 2026-05-26
+date: 2026-06-02
 draft: false
 slug: "the-examiners-red-pencil"
 section_label: "Essay"
