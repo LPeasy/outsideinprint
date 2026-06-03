@@ -1,4 +1,4 @@
-current: goin-postal
+current: blowing-smoke
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -320,5 +320,13 @@ cartoons:
     image: "/images/editorial/goin-postal.png"
     essay: "/essays/the-ballot-list-at-the-mailroom/"
     alt: "Editorial cartoon showing a county election mailroom where ballot envelopes pass through a large machine labeled BALLOT MAIL while a citizenship list feeds in beside a correction path tag and state law stamp."
+    width: 1672
+    height: 941
+  - slug: blowing-smoke
+    title: "Blowing Smoke"
+    date: "2026-06-03"
+    image: "/images/editorial/blowing-smoke.png"
+    essay: "/essays/the-examiners-red-pencil/"
+    alt: "Editorial cartoon showing a fire marshal waving repeated warnings at a committee that studies possible combustion while the hearing room burns and a sensitive alarm hangs overhead."
     width: 1672
     height: 941
