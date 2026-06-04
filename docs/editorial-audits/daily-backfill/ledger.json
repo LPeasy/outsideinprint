@@ -3205,6 +3205,44 @@
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps the election-order and ballot-mail argument tied to the executive order, court record, Federal Register proposal, election statutes, postal mechanics, correction risk, and institutional accountability."
       }
+    },
+    "the-examiners-red-pencil": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-04",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-04.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-06-04",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps bank-supervision claims tied to Federal Reserve, banking-agency, and Reuters source roles while testing examiner power, bank incentives, capital tradeoffs, public-risk consequences, uncertainty, and safety-net accountability."
+      }
+    },
+    "the-mailbox-at-the-edge-of-the-road": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-04",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-04.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-06-04",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps postal-history claims tied to USPS, Postal Museum, statutory, mailbox-standard, and Franklin records while testing road incentives, service-cost tradeoffs, civic consequences, uncertainty, and institutional responsibility."
+      }
     }
   },
   "blocked": {},
@@ -3654,6 +3692,15 @@
       ],
       "status": "pending_deploy",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-02.md"
+    },
+    {
+      "batch_id": "2026-06-04",
+      "selected_slugs": [
+        "the-examiners-red-pencil",
+        "the-mailbox-at-the-edge-of-the-road"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-04.md"
     }
   ]
 }

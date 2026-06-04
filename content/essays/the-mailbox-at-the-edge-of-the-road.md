@@ -6,8 +6,8 @@ date: 2026-06-03
 draft: false
 slug: "the-mailbox-at-the-edge-of-the-road"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 featured: false
 featured_image: "/images/essays/the-mailbox-at-the-edge-of-the-road/hero.png"
 featured_image_alt: "A rural mailbox at the edge of a gravel road, with postal route lines suggested in the road surface and a carrier vehicle distant on the horizon."
@@ -20,6 +20,10 @@ tags:
   - "Material History"
   - "Civic Systems"
   - "Roads"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 ---
 
 ## The Little Metal Boundary

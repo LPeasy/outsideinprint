@@ -6,8 +6,8 @@ date: 2026-06-02
 draft: false
 slug: "the-examiners-red-pencil"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 featured: false
 featured_image: "/images/essays/the-examiners-red-pencil/hero.png"
 featured_image_alt: "An editorial illustration of a red pencil resting across a thick bank examination report on a desk, with a vault door and green risk gauges in the background."
@@ -21,6 +21,10 @@ tags:
   - "public risk"
   - "institutions"
   - "supervision"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 ---
 
 The object at the center of the fight is small enough to hide inside an examination report: a Matter Requiring Attention.
