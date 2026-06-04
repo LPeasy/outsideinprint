@@ -7,9 +7,12 @@ section_label: "Essay"
 subtitle: "The Christian image does something to the human nervous system ~"
 description: "Walk into a hospital, a church, or your grandmother’s living room and you might see it: a crucifix on the wall"
 featured_image: "/images/social/outside-in-print-default.png"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to repair scripture blockquote rendering and normalize verse citations to the current OIP scripture style."
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
@@ -49,8 +52,8 @@ leaders! When we look at his body, pierced and bleeding, we see the
 worst possible consequence imaginable. And we are called to speak the
 truth as well.
 
-> **"If anyone desires to come after Me, let him deny himself, and take up his cross..."\
-> - Matthew 16:24**
+> "[If anyone desires to come after Me, let him deny himself, and take up his cross...](https://www.biblegateway.com/passage/?search=Matthew%2016%3A24&version=NKJV)"
+> ~ Matthew 16:24, NKJV
 
 **Jesus calls us to speak the truth even when we know the cost** ~ when
 you know the world will despise you ~ and when we know the powers of
@@ -86,9 +89,8 @@ You are not promised safety.
 
 Jesus says it directly:
 
-> **"If the world hates you, you know that it hated Me before it hated
-> you."\
-> - John 15:18**
+> "[If the world hates you, you know that it hated Me before it hated you.](https://www.biblegateway.com/passage/?search=John%2015%3A18&version=NKJV)"
+> ~ John 15:18, NKJV
 
 That's not poetic fluff. It's a promise.
 
@@ -112,9 +114,8 @@ earthly realm will do anything within their power to avoid being exposed
 by the truth. Part of our calling as followers of Christ is to recognize
 and refuse the world's lies and deceit.
 
-> **"Woe to you, scribes and Pharisees, hypocrites! For you shut up the
-> kingdom of heaven against men; for you neither go in yourselves..."\
-> - Matthew 23:13**
+> "[Woe to you, scribes and Pharisees, hypocrites! For you shut up the kingdom of heaven against men; for you neither go in yourselves...](https://www.biblegateway.com/passage/?search=Matthew%2023%3A13&version=NKJV)"
+> ~ Matthew 23:13, NKJV
 
 The Word of God exists in us ~ accepting the lies of this world
 diminishes our spirit and leaves us disconnected from the Spirit of
@@ -136,8 +137,8 @@ truth threatened people who were invested in a counterfeit moral order.
 
 #### He talks about truth as liberation:
 
-> **"You shall know the truth, and the truth shall make you free."\
-> - John 8:32**
+> "[You shall know the truth, and the truth shall make you free.](https://www.biblegateway.com/passage/?search=John%208%3A32&version=NKJV)"
+> ~ John 8:32, NKJV
 
 **The truth is not neutral.** It breaks the spell. It dissolves a lot of
 profitable arrangements ~ social, religious, political, personal.
@@ -157,9 +158,8 @@ while religious leaders clearly understood, and they hated Him for it.
 
 #### Jesus gives a pretty blunt statement about the parables functioning as both revelation and concealment:
 
-> **"Because it has been given to you to know the mysteries of the
-> kingdom of heaven, but to them it has not been given."\
-> - Matthew 13:11**
+> "[Because it has been given to you to know the mysteries of the kingdom of heaven, but to them it has not been given.](https://www.biblegateway.com/passage/?search=Matthew%2013%3A11&version=NKJV)"
+> ~ Matthew 13:11, NKJV
 
 A person can be highly trained yet closed ~ and that kind of
 person tends to experience truth as an attack. Why should anyone become
@@ -182,15 +182,14 @@ in their moral superiority are also the most likely to punish dissent.
 Jesus does not form His people by teaching them to despise their
 enemies. He teaches the opposite:
 
-> **"But I say to you, love your enemies..."\
-> - Matthew 5:44**
+> "[But I say to you, love your enemies...](https://www.biblegateway.com/passage/?search=Matthew%205%3A44&version=NKJV)"
+> ~ Matthew 5:44, NKJV
 
 He also gives a public "tell" for what His followers should look like in
 real life:
 
-> **"By this all will know that you are My disciples, if you have love
-> for one another."\
-> - John 13:35**
+> "[By this all will know that you are My disciples, if you have love for one another.](https://www.biblegateway.com/passage/?search=John%2013%3A35&version=NKJV)"
+> ~ John 13:35, NKJV
 
 So when people try to paint Christianity as a tribal hate machine,
 they're either ignorant of the text, lying about it, or reacting to
@@ -225,15 +224,14 @@ claiming ultimate virtue.
 
 #### Christianity does something that clashes with that frame at its most fundamental level.
 
-> **It says "the line between good and evil runs through every heart."\
-> - Aleksandr Solzhenitsyn**
+> "It says the line between good and evil runs through every heart."
+> ~ Aleksandr Solzhenitsyn
 
 It says you can't purchase righteousness by joining the correct crowd.
 It says truth is not created by power ~ truth judges power. It says,
 
-> "**There is one Lawgiver, who is able to save and to destroy. Who are
-> you to judge another?**"\
-> - **James 4:12**
+> "[There is one Lawgiver, who is able to save and to destroy. Who are you to judge another?](https://www.biblegateway.com/passage/?search=James%204%3A12&version=NKJV)"
+> ~ James 4:12, NKJV
 
 That is why the crucifix hits so hard. It reminds you that the crowd can
 be wrong, the authorities can be wrong, the moral majority can be wrong
@@ -259,15 +257,13 @@ Fear of paying a price.**
 
 #### Jesus names the stakes with no sentimentality:
 
-> **"Do not be afraid of those who kill the body, and after that have no
-> more that they can do."\
-> - Luke 12:4**
+> "[Do not be afraid of those who kill the body, and after that have no more that they can do.](https://www.biblegateway.com/passage/?search=Luke%2012%3A4&version=NKJV)"
+> ~ Luke 12:4, NKJV
 
 #### And He pairs realism with a command to stand upright anyway:
 
-> **"In the world you will have tribulation; but be of good cheer, I
-> have overcome the world."\
-> - John 16:33**
+> "[In the world you will have tribulation; but be of good cheer, I have overcome the world.](https://www.biblegateway.com/passage/?search=John%2016%3A33&version=NKJV)"
+> ~ John 16:33, NKJV
 
 **So here's what I'm asking myself, and maybe you should ask yourself
 too ~ believer, skeptic, somewhere-in-between:**

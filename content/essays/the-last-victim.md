@@ -10,9 +10,12 @@ author_id: "robert-v-ussley"
 featured_image: "/images/essays/the-last-victim/hero.png"
 featured_image_alt: "A wooden cross standing on a chapel-library table beside a balance scale and two blank ledger pages."
 featured_image_caption: "The scale belongs below the Cross."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to normalize scripture blockquotes and verse citations to the current OIP scripture style."
   - version: "1.1"
     date: "2026-05-29"
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -87,9 +90,8 @@ Christianity presents a direct challenge to this system ~ not as a political pro
 
 At the center of Christian teaching is a universal assertion: every human being is created in the image of God, morally accountable, wounded by sin, and capable of repentance and redemption. Sin is personal. Dignity precedes experience. No group is morally innocent or guilty by nature.
 
-> "Why do you see the speck that is in your brother's eye, but do not notice the log that is in your own?"
->
-> (Matthew 7:3, ESV)
+> "[Why do you see the speck that is in your brother's eye, but do not notice the log that is in your own?](https://www.biblegateway.com/passage/?search=Matthew%207%3A3&version=ESV)"
+> ~ Matthew 7:3, ESV
 
 Christianity refuses permanent innocence and permanent guilt.
 
@@ -101,9 +103,8 @@ A moral framework built on fixed categories of victim and oppressor cannot coexi
 
 Christ's crucifixion was not a claim to moral leverage. It was a voluntary act of self-sacrificial love in the face of evil ~ refusing to bargain with truth, power, or resentment. He goes first to the broken and the shameless and tells them they must repent. And that they can be redeemed.
 
-> "Repent, for the kingdom of heaven is at hand."
->
-> (Matthew 4:17, ESV)
+> "[Repent, for the kingdom of heaven is at hand.](https://www.biblegateway.com/passage/?search=Matthew%204%3A17&version=ESV)"
+> ~ Matthew 4:17, ESV
 
 Victimhood, when elevated to a moral absolute, freezes the human person at the moment of harm. Christianity insists that no one is reducible to his worst injury ~ or his most despicable deed.
 

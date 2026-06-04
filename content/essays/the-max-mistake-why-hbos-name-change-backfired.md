@@ -9,9 +9,12 @@ featured_image: "/images/medium/the-max-mistake-why-hbos-name-change-backfired/9
 featured_image_caption: "Photo by Oleksandra Bardash on Unsplash"
 featured_image_alt: "The Max Mistake: Why HBO’s Name Change Backfired"
 description: "If you’re confused, you’re not alone. This feels less like brand strategy and more like a midlife crisis complete with a haircut no one asked for, a question..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to repair visible Markdown emphasis residue in imported brand-name passages."
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, removed an unsupported media quote, and tied the rebrand reversal to Warner Bros. Discovery's public announcement."
@@ -94,7 +97,7 @@ York Times in March 2025:
 **He wasn't wrong.**
 
 ***HBO*** is one of the strongest names in the history of television. It
-stands for ***Home Box Office ~ *** a phrase that once meant ***theater
+stands for ***Home Box Office*** ~ a phrase that once meant ***theater
 quality entertainment in your living room***.
 
 > It's cinematic.
@@ -111,8 +114,8 @@ product line.
 **Let's take a moment.**
 
 HBO gave us ***The Sopranos, The Wire, Sex and the City, Six Feet Under,
-Curb Your Enthusiasm, Deadwood, Game of Thrones, Succession, Euphoria
- ~ *** and that's just off the top of the head.
+Curb Your Enthusiasm, Deadwood, Game of Thrones, Succession, Euphoria***
+~ and that's just off the top of the head.
 
 For two decades,
 

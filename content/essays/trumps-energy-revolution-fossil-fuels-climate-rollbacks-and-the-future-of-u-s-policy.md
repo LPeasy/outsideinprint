@@ -9,14 +9,17 @@ featured_image: "/images/medium/trumps-energy-revolution-fossil-fuels-climate-ro
 featured_image_caption: "Photo by Zbynek Burival on Unsplash"
 featured_image_alt: "Trump’s Energy Revolution: Fossil Fuels, Climate Rollbacks, and the Future of U.S. Policy"
 description: "Early in Trump's second term, U.S. climate policy shifted toward fossil fuel expansion, Paris withdrawal, regulatory rollback efforts, and a harder question about global emissions discipline."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 pdf: "/pdfs/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy-238c2fe84b5d"
 collections:
   - geopolitics-trade-global-power
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to repair a visible Markdown heading residue in the climate-leadership section break and clear house-style residue exposed by the formatting fix."
   - version: "1.1"
     date: "2026-05-07"
     note: "Updated May 7, 2026, after OIP back-archive review. Remote Medium residue, formatting artifacts, source-sensitive claims, and editorial-philosophy evidence were checked."
@@ -123,7 +126,7 @@ Next, India, the third-largest emitter, continues to prioritize development and 
 
 India's per capita emissions are low, but its total emissions have surged with economic growth. In 2022, India's GHG emissions rose again (as did those of fellow emerging giants Indonesia and Brazil).
 
-India has set goals to ramp up renewables and reduce emissions intensity of its GDP, but it has not committed to an absolute emission cut in the near term. In fact, India is still expanding coal mining and coal-fired generation to meet exploding electricity demand.
+India has set goals to ramp up renewables and reduce emissions intensity of its GDP, but it has not committed to an absolute emission cut in the near term. In fact, India continues expanding coal mining and coal-fired generation to meet exploding electricity demand.
 
 Both India and China pushed back at COP negotiations against language calling for a "phase out" of coal, preferring the softer "phase down."
 
@@ -158,7 +161,9 @@ Even as renewables grew, they were simply adding to energy supply rather than re
 
 The torch of climate leadership, once held aloft by the U.S., was effectively dropped, and no one is going to pick it up. America's retreat from climate policy might seem less a decisive turning point and more like
 
-one more step in the slow march toward collective failure. ## The Folly of America's Climate Leadership
+one more step in the slow march toward collective failure.
+
+## The Folly of America's Climate Leadership
 
 For years, the United States prided itself on "leading" the fight against climate change, setting ambitious national targets, pushing international accords, and (during the Obama era and briefly under Biden) implementing policies to cut domestic emissions.
 
@@ -210,7 +215,7 @@ One of the most contentious debates in climate policy is whether to rapidly phas
 
 The Trump administration sided with fossil fuels and criticized efforts to force an EV shift. There is a rational case for caution, but it has to be stated carefully: EVs are not magic, and fossil fuels are not harmless. The real question is how fast the grid, charging network, mineral supply chain, and consumer market can move without creating new failures.
 
-**Electricity is not clean everywhere yet.** An electric car is only as clean as the grid it plugs into. In the U.S. and many countries, a large share of electricity still comes from coal and natural gas. That does not mean EVs are useless, but it does mean the climate benefit depends on grid mix, vehicle size, battery production, and how quickly power generation decarbonizes.
+**Electricity is not clean everywhere yet.** An electric car is only as clean as the grid it plugs into. In the U.S. and many countries, a large share of electricity comes from coal and natural gas. That does not mean EVs are useless, but it does mean the climate benefit depends on grid mix, vehicle size, battery production, and how quickly power generation decarbonizes.
 
 Until we clean up power generation, mandating EVs everywhere might be putting the cart before the horse. In fact, under current grid conditions, large battery EVs can take longer to pay back their manufacturing emissions when the grid is especially carbon-intensive.
 
@@ -242,7 +247,7 @@ There's an argument for leveraging cleaner ICE vehicles and hybrids as a bridge 
 
 **Economic and geopolitical realities.** Forcing an abrupt transition to EVs could have unintended economic consequences.
 
-EVs are still generally more expensive upfront than ICE vehicles, and mandates or bans could hit lower-income consumers hardest (who might be unable to afford a new electric car). Additionally, the EV supply chain heavily depends on China (for battery materials and manufacturing).
+EVs remain generally more expensive upfront than ICE vehicles, and mandates or bans could hit lower-income consumers hardest (who might be unable to afford a new electric car). Additionally, the EV supply chain heavily depends on China (for battery materials and manufacturing).
 
 Rapidly shifting to EVs essentially hands the keys of transport to Chinese battery makers. There's a strategic case for not rushing into that dependency. If fossil fuels remain part of the mix a bit longer, the U.S. can take time to develop domestic battery supply chains and more secure resource access, rather than scrambling and ending up beholden to overseas suppliers.
 
@@ -252,13 +257,13 @@ The point, however, is that mandating a wholesale switch right now might be coun
 
 It's trying to sprint before we can jog. EVs are not emission-free when your power is coming from a coal plant.
 
-Until energy generation is decarbonized, pushing 100% EVs is somewhat like switching all home appliances to electric while the electricity still comes from a diesel generator. It accomplishes less than the headline suggests.
+Until energy generation is decarbonized, pushing 100% EVs is somewhat like switching all home appliances to electric while the electricity comes from a diesel generator. It accomplishes less than the headline suggests.
 
 A more nuanced approach: continue to use fossil fuels in the interim (preferably cleaner and more efficiently) while focusing policy on greening the grid and improving battery tech. Once renewable or nuclear electricity is abundant and truly clean, then EVs will deliver their full climate benefits. Until then, forcing everyone into a Tesla might feel like progress, but it could be a lot of churn for minimal gain, or even an increase in short-term emissions. Trump's pro-fossil stance, ridiculed by environmentalists, rests on a certain practical logic:
 
 Keep using what works and is available (oil/gas) until the alternatives genuinely outperform on cost, convenience, and carbon. The administration balked at top-down EV mandates and instead promoted fuel freedom, even floating the idea that fossil fuels are essential to reliability and prosperity.
 
-Given the current state of technology and infrastructure, there's a compelling argument that this slower transition, one that does not prematurely kill the internal combustion engine, could avoid economic disruption while still allowing incremental emissions improvements.
+Given the current state of technology and infrastructure, there's a compelling argument that this slower transition, one that does not prematurely kill the internal combustion engine, could avoid economic disruption while allowing incremental emissions improvements.
 
 It's not a fashionable viewpoint in climate circles, but it's one grounded in the engineering and economics of the present. Sometimes, letting the perfect be the enemy of the good (by insisting on zero-emission vehicles now) can backfire. A bit more patience with fossil fuels, paired with smart investment in future tech, might serve us better than hurriedly mandating EVs and then realizing we've simply moved the pollution upstream.
 
@@ -274,7 +279,7 @@ Rather than betting the farm on renewables or speculative technology alone, the 
 
 Why nuclear?
 
-Simply put, nuclear is one of the few energy sources with the scalability and consistency to replace a large share of fossil generation. As of 2023, fossil fuels still supplied about 80% of global primary energy, a share that has not moved much in decades.
+Simply put, nuclear is one of the few energy sources with the scalability and consistency to replace a large share of fossil generation. As of 2023, fossil fuels supplied about 80% of global primary energy, a share that has not moved much in decades.
 
 The world consumes energy on the order of hundreds of exajoules per year, an almost unfathomable amount, and doing that with just solar panels and wind turbines would require massive overbuilding and storage solutions that are not yet feasible.
 
@@ -328,7 +333,7 @@ Others are walk-away safe, meaning even in total loss of power they won't meltdo
 
 Gates's Natrium, for instance, and other small modular reactors are engineered to eliminate the potential for the kinds of failures that have haunted nuclear's reputation. And because they're smaller and often factory-produced, they promise lower costs and faster deployment.
 
-A nuclear resurgence may be one of the best shots at a sustainable energy system. When the sun is not shining and the wind is not blowing, a fleet of advanced reactors could keep the lights on without operational CO2 emissions. Imagine mid-century grids powered by renewables and a backbone of nuclear plants, with fission providing steady supply and fusion still on the horizon.
+A nuclear resurgence may be one of the best shots at a sustainable energy system. When the sun is not shining and the wind is not blowing, a fleet of advanced reactors could keep the lights on without operational CO2 emissions. Imagine mid-century grids powered by renewables and a backbone of nuclear plants, with fission providing steady supply and fusion remaining on the horizon.
 
 That vision aims at what neither fossil fuels nor renewables alone can provide: reliable, scalable, clean energy at all hours. It may be one of the only realistic ways to square the demands of modern civilization with the limits of the atmosphere.
 

@@ -8,9 +8,12 @@ subtitle: "An introduction to Catholic social teaching"
 description: "Most conversations about religion and society begin in the wrong places. They start with policies and parties"
 featured_image: "/images/medium/in-the-image-of-god/fa2482c598cd754263ea2463145d8e69da0af924b806be195d62df5c53684d0f.jpg"
 featured_image_alt: "In The Image of God"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to normalize scripture blockquotes and verse citations to the current OIP scripture style."
   - version: "1.1"
     date: "2026-05-25"
     note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
@@ -63,9 +66,8 @@ voting strategies.
 
 **It opens with a sentence so simple, and so sweet:**
 
-> **"God is love."**
-
-> **(1 John 4:8, NRSV-CE)**
+> "[God is love.](https://www.biblegateway.com/passage/?search=1%20John%204%3A8&version=NRSVCE)"
+> ~ 1 John 4:8, NRSV-CE
 
 In all of history, this may be the most radical three-word sentence that
 anyone ever said. And **everything that follows** ~ every social
@@ -93,11 +95,8 @@ Love is the warm embrace of your wife and children after a long day.
 
 Paul said,
 
-> "If I have prophetic powers, and understand all mysteries and all
-> knowledge, and if I have all faith, so as to remove mountains, but do
-> not have love, I am nothing."
-
-> (1 Corinthians 13:2, NRSV-CE)
+> "[If I have prophetic powers, and understand all mysteries and all knowledge, and if I have all faith, so as to remove mountains, but do not have love, I am nothing.](https://www.biblegateway.com/passage/?search=1%20Corinthians%2013%3A2&version=NRSVCE)"
+> ~ 1 Corinthians 13:2, NRSV-CE
 
 The story of Jesus Christ ends in His crucifixion at the hands of
 corrupt, hypocritical political leaders. And why did they murder him?
@@ -117,10 +116,8 @@ Love of his friends.
 The crucifix is not decorative. It's not sentimental.\
 It's the Church's most concrete social statement.
 
-> "No one has greater love than this, to lay down one's life for one's
-> friends."
-
-> (John 15:13, NRSV-CE)
+> "[No one has greater love than this, to lay down one's life for one's friends.](https://www.biblegateway.com/passage/?search=John%2015%3A13&version=NRSVCE)"
+> ~ John 15:13, NRSV-CE
 
 ### "It is not good that the man should be alone"
 
@@ -130,10 +127,8 @@ play partners existed!
 
 **Everything in creation is declared good ~ light, land, sea, animals.**
 
-> **"Then the Lord God said, 'It is not good that the man should be
-> alone.'"**
-
-> **(Genesis 2:18, NRSV-CE)**
+> "[Then the Lord God said, 'It is not good that the man should be alone.'](https://www.biblegateway.com/passage/?search=Genesis%202%3A18&version=NRSVCE)"
+> ~ Genesis 2:18, NRSV-CE
 
 Isolation is not good. Human beings are not designed as self-sufficient
 units. We are relational, social creatures by nature. We need each
@@ -173,10 +168,8 @@ This is one of Catholic social teaching's most consistent claims:
 
 > Human dignity is inherent, not earned.
 
-> **"So God created humankind in his image, in the image of God he
-> created them."**
-
-> **(Genesis 1:27, NRSV-CE)**
+> "[So God created humankind in his image, in the image of God he created them.](https://www.biblegateway.com/passage/?search=Genesis%201%3A27&version=NRSVCE)"
+> ~ Genesis 1:27, NRSV-CE
 
 **Dignity does not depend on capacity.**
 
@@ -214,10 +207,8 @@ and left for dead on the side of the road. Two religious officials pass
 by and avert their gaze. A Samaritan, of all people! ~ an outsider ~
 stops, tends to his wounds, pays for his care, and promises to return.
 
-> **"Which of these three, do you think, was a neighbor to the man who
-> fell into the hands of the robbers?"**
-
-> **(Luke 10:36, NRSV-CE)**
+> "[Which of these three, do you think, was a neighbor to the man who fell into the hands of the robbers?](https://www.biblegateway.com/passage/?search=Luke%2010%3A36&version=NRSVCE)"
+> ~ Luke 10:36, NRSV-CE
 
 The Good Samaritan doesn't ask whether an injured man shares his
 beliefs. He doesn't need to consult a system. Instead he responds to
@@ -227,10 +218,8 @@ and the true path of fellowship.
 
 Matthew 25 removes any remaining ambiguity:
 
-> **"Truly I tell you, just as you did it to one of the least of these
-> who are members of my family, you did it to me."**
-
-> **(Matthew 25:40, NRSV-CE)**
+> "[Truly I tell you, just as you did it to one of the least of these who are members of my family, you did it to me.](https://www.biblegateway.com/passage/?search=Matthew%2025%3A40&version=NRSVCE)"
+> ~ Matthew 25:40, NRSV-CE
 
 This passage does not invite metaphorical interpretation.
 

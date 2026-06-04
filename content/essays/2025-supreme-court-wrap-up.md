@@ -9,9 +9,12 @@ description: "The U.S. Supreme Court ended its term with rulings and procedural 
 featured_image: "/images/medium/2025-supreme-court-wrap-up/68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095.png"
 featured_image_caption: "Illustration by author"
 featured_image_alt: "2025 Supreme Court Wrap-Up"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to repair visible Markdown emphasis residue in the Callais dissent summary."
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. SCOTUS outcome wording, Medium import residue, and house-style issues were corrected."
@@ -177,7 +180,7 @@ another round of briefing and argument.
 The decision frustrated voting rights advocates, who say delays continue
 to disenfranchise voters.
 
-**Justice Thomas*, in dissent,*** **criticized the Court for avoiding a
+**Justice Thomas, in dissent, criticized the Court for avoiding a
 decision with immediate consequences.**
 
 #### **Notes**

@@ -9,9 +9,12 @@ featured_image: "/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/7
 featured_image_caption: "Illustration by author"
 featured_image_alt: "McDonald’s Faces Week‑Long Boycott"
 description: "The People’s Union USA is urging a boycott of McDonald’s over DEI rollbacks, prices, labor claims, and sales pressure."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to remove visible Markdown emphasis residue from imported boycott notes."
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. Medium import residue, source framing, and house-style issues were corrected."
@@ -88,9 +91,9 @@ On the 24th,
 [**Over 40 Black ex-franchisees**](https://www.loevy.com/mcdonalds-plaintiffs-boycott-statement/) filed a lawsuit claiming systemic racial
 discrimination and joined the boycott.
 
-> \*\*\*No reported injuries or safety issues.\*\*\*
+> **No reported injuries or safety issues.**
 
-> \*\*\*No named operation ~ just a broad boycott.\*\*\*
+> **No named operation ~ just a broad boycott.**
 
 #### ***Schwarz said in social media:***
 

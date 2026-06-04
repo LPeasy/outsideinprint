@@ -8,9 +8,12 @@ subtitle: "A practical way to use hazard, pathway, consequence, and uncertainty"
 description: "In everyday choices and technical work, four key terms help us define and articulate “risk.”. Hazard names the source of potential harm, pathway describes ho..."
 featured_image: "/images/medium/what-is-risk-a-four-part-framework/c5d17c0978b1a86a5144dea14f43e6da15d3559347c45d71edd7d9a334e79ab2.jpeg"
 featured_image_alt: "What Is Risk? A Four-Part Framework"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-04"
+    note: "Updated June 4, 2026, to repair visible Markdown emphasis residue in the risk-framework mnemonic and blockquote passages."
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium body images, repaired internal OIP links, normalized punctuation and house style, and checked source framing and rendering."
@@ -55,7 +58,7 @@ about timing, severity, and human behavior.
 
 > U → Use → Uncertainty
 
-> \*Magic\* ~ this simple framework provides a straightforward way to
+> *Magic* ~ this simple framework provides a straightforward way to
 > think about risk.
 
 ### The Framework at a Glance
@@ -262,7 +265,7 @@ rebuild trust.
 > on porch posts ~ a brutal testimony to the flood. Locals say they
 > won't trust the levees next time around. And unfortunately,
 
-> ***Trust moves a lot slower than water****.*
+> ***Trust moves a lot slower than water.***
 
 > **Trust returns one meeting at a time, bit by bit, with each shovel
 > full of dirt, until the levee (and the community) is whole again.**
@@ -380,8 +383,7 @@ reflect** **the *uncertainty that remains*** ~ baked into the model's
 assumptions and data inputs.
 
 > ***Every organization*** *(public, corporate, individual households)*
-> ***makes decisions ~ (*usually*) in an environment dominated by*
-> uncertainty*.***
+> ***makes decisions ~ usually in an environment dominated by uncertainty.***
 
 > In the real world, leaders can't always punt on critical decisions and
 > wait for new information or better data.
@@ -437,7 +439,7 @@ We do what we can to identify the risks:
 
 > U → Use → Uncertainty
 
-> \*Magic\* ~ this simple framework provides a straightforward way to
+> *Magic* ~ this simple framework provides a straightforward way to
 > think about risk.
 
 > **Try "Harry Potter Can Use Magic" on a risk you are facing this
