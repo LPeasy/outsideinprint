@@ -1,4 +1,4 @@
-current: blowing-smoke
+current: post-malonely
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -328,5 +328,13 @@ cartoons:
     image: "/images/editorial/blowing-smoke.png"
     essay: "/essays/the-examiners-red-pencil/"
     alt: "Editorial cartoon showing a fire marshal waving repeated warnings at a committee that studies possible combustion while the hearing room burns and a sensitive alarm hangs overhead."
+    width: 1672
+    height: 941
+  - slug: post-malonely
+    title: "Post Malonely"
+    date: "2026-06-03"
+    image: "/images/editorial/post-malonely.png"
+    essay: "/essays/the-examiners-red-pencil/"
+    alt: "Editorial cartoon showing a large balance scale weighing a dense city full of mailboxes against a small rural mailbox at the start of a winding country road."
     width: 1672
     height: 941
