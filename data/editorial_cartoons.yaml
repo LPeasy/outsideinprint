@@ -332,9 +332,10 @@ cartoons:
     height: 941
   - slug: post-malonely
     title: "Post Malonely"
-    date: "2026-06-03"
+    date: "2026-06-04"
+    publishDate: "2026-06-04T00:00:00Z"
     image: "/images/editorial/post-malonely.png"
-    essay: "/essays/the-examiners-red-pencil/"
+    essay: "/essays/the-mailbox-at-the-edge-of-the-road/"
     alt: "Editorial cartoon showing a large balance scale weighing a dense city full of mailboxes against a small rural mailbox at the start of a winding country road."
     width: 1672
     height: 941
