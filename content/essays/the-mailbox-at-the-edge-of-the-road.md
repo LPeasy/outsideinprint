@@ -2,7 +2,7 @@
 title: "The Mailbox at the Edge of the Road"
 subtitle: "Benjamin Franklin's post roads, Rural Free Delivery, and the little metal box show how national service depends on standards, roads, cost, and local patience."
 description: "A rural mailbox opens into Benjamin Franklin's postal logic, Rural Free Delivery, federal standards, road incentives, and the public bargain behind universal mail service."
-date: 2026-06-04T00:00:00Z
+date: 2026-06-03
 draft: false
 slug: "the-mailbox-at-the-edge-of-the-road"
 section_label: "Essay"
