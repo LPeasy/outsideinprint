@@ -1,4 +1,4 @@
-current: post-malonely
+current: the-ruler-of-the-road
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -336,5 +336,13 @@ cartoons:
     image: "/images/editorial/post-malonely.png"
     essay: "/essays/the-mailbox-at-the-edge-of-the-road/"
     alt: "Editorial cartoon showing a large balance scale weighing a dense city full of mailboxes against a small rural mailbox at the start of a winding country road."
+    width: 1672
+    height: 941
+  - slug: the-ruler-of-the-road
+    title: "The Ruler of the Road"
+    date: "2026-06-04"
+    image: "/images/editorial/the-ruler-of-the-road.png"
+    essay: "/essays/the-bell-at-the-crossing-flagship/"
+    alt: "Editorial cartoon showing a freight train holding down a railroad-crossing gate shaped like a measuring ruler, blocking a school bus, ambulance, van, tractor, and car while the gate labels time, access, safety, money, local memory, and public record."
     width: 1672
     height: 941
