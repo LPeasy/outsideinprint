@@ -3207,7 +3207,7 @@
       }
     },
     "the-examiners-red-pencil": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-04",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-04.md",
       "previous_version": "1.0",
@@ -3223,10 +3223,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps bank-supervision claims tied to Federal Reserve, banking-agency, and Reuters source roles while testing examiner power, bank incentives, capital tradeoffs, public-risk consequences, uncertainty, and safety-net accountability."
-      }
+      },
+      "commit_sha": "9d8a203f1a34708aedce714d60a3c42206b39fab",
+      "deployed_on": "2026-06-04"
     },
     "the-mailbox-at-the-edge-of-the-road": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-04",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-04.md",
       "previous_version": "1.0",
@@ -3242,7 +3244,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps postal-history claims tied to USPS, Postal Museum, statutory, mailbox-standard, and Franklin records while testing road incentives, service-cost tradeoffs, civic consequences, uncertainty, and institutional responsibility."
-      }
+      },
+      "commit_sha": "9d8a203f1a34708aedce714d60a3c42206b39fab",
+      "deployed_on": "2026-06-04"
     }
   },
   "blocked": {},
@@ -3699,8 +3703,10 @@
         "the-examiners-red-pencil",
         "the-mailbox-at-the-edge-of-the-road"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-04.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-04.md",
+      "commit_sha": "9d8a203f1a34708aedce714d60a3c42206b39fab",
+      "deployed_on": "2026-06-04"
     }
   ]
 }
