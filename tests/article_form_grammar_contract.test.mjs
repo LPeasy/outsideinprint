@@ -16,6 +16,7 @@ const css = read("assets/css/main.css");
 const dialogueDir = path.resolve("content/essays/dialogues");
 const dialogueFiles = [
   "all-ti.md",
+  "bobanonymous.md",
   "broke-rich.md",
   "history-pushes-back.md",
   "peaches-or-greece.md",
@@ -218,7 +219,7 @@ test("article aftermatter is one publication record plus compact exits", () => {
 });
 
 test("all dialogue markdown files retain dialogue metadata and speaker-label turns", () => {
-  assert.equal(dialogueFiles.length, 12);
+  assert.equal(dialogueFiles.length, 13);
 
   for (const file of dialogueFiles) {
     const source = fs.readFileSync(path.join(dialogueDir, file), "utf8");
