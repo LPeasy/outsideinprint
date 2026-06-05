@@ -26,8 +26,10 @@
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
   {{ with $lead }}
     {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
-    {{ $leadSection := .Params.section_label | default (humanize .Section) }}
-    {{ $heroLabel := "Latest Essay" }}
+    {{ $leadCopy := partial "home_front_page_copy.html" . }}
+    {{ $leadSection := index $leadCopy "sectionLabel" }}
+    {{ $heroLabel := index $leadCopy "latestLabel" }}
+    {{ $leadReadLabel := index $leadCopy "readLabel" }}
     <div class="home-front-page__stories">
       <article class="home-front-page__lead" data-home-front-page-region="lead">
         <p class="list-title home-front-page__kicker">{{ $heroLabel }}</p>
@@ -49,7 +51,7 @@
           {{ with .Params.version }} | v{{ . }}{{ end }}
           {{ with .ReadingTime }} | {{ . }} min read{{ end }}
         </div>
-        <p class="m home-front-page__lead-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
+        <p class="m home-front-page__lead-action"><a href="{{ .RelPermalink }}">{{ $leadReadLabel }} &rarr;</a></p>
         {{ with $currentCartoon }}
           <figure class="editorial-cartoon">
             <button
@@ -196,10 +198,13 @@
         <div class="home-front-page__secondary" aria-label="{{ $secondaryAriaLabel }}" data-home-front-page-region="secondary">
           {{ if and $showLatestSlot $latest }}
             {{ $latestSlug := $latest.Params.slug | default $latest.File.BaseFileName }}
-            {{ $latestSectionLabel := $latest.Params.section_label | default (humanize $latest.Section) }}
+            {{ $latestCopy := partial "home_front_page_copy.html" $latest }}
+            {{ $latestSectionLabel := index $latestCopy "sectionLabel" }}
+            {{ $latestLabel := index $latestCopy "latestLabel" }}
+            {{ $latestReadLabel := index $latestCopy "readLabel" }}
             {{ $latestCartoon := partial "editorial/cartoon-for-page.html" $latest }}
             <article class="home-front-page__secondary-item home-front-page__secondary-item--latest">
-              <p class="list-title home-front-page__secondary-kicker">Latest Essay</p>
+              <p class="list-title home-front-page__secondary-kicker">{{ $latestLabel }}</p>
               <div class="home-front-page__secondary-title-row">
                 <h3 class="home-front-page__secondary-title">
                   <a href="{{ $latest.RelPermalink }}"
@@ -223,13 +228,15 @@
                 {{ with $latest.Params.version }} | v{{ . }}{{ end }}
                 {{ with $latest.ReadingTime }} | {{ . }} min read{{ end }}
               </div>
-              <p class="m home-front-page__secondary-action"><a href="{{ $latest.RelPermalink }}">Read essay &rarr;</a></p>
+              <p class="m home-front-page__secondary-action"><a href="{{ $latest.RelPermalink }}">{{ $latestReadLabel }} &rarr;</a></p>
             </article>
           {{ end }}
           {{ range $secondary }}
             {{ $secondaryPage := . }}
             {{ $slug := .Params.slug | default .File.BaseFileName }}
-            {{ $sectionLabel := .Params.section_label | default (humanize .Section) }}
+            {{ $secondaryCopy := partial "home_front_page_copy.html" . }}
+            {{ $sectionLabel := index $secondaryCopy "sectionLabel" }}
+            {{ $readLabel := index $secondaryCopy "readLabel" }}
             {{ $linkedCartoon := partial "editorial/cartoon-for-page.html" . }}
             <article class="home-front-page__secondary-item">
               <p class="list-title home-front-page__secondary-kicker">{{ $sectionLabel }}</p>
@@ -256,7 +263,7 @@
                 {{ with .Params.version }} | v{{ . }}{{ end }}
                 {{ with .ReadingTime }} | {{ . }} min read{{ end }}
               </div>
-              <p class="m home-front-page__secondary-action"><a href="{{ .RelPermalink }}">Read essay &rarr;</a></p>
+              <p class="m home-front-page__secondary-action"><a href="{{ .RelPermalink }}">{{ $readLabel }} &rarr;</a></p>
             </article>
           {{ end }}
         </div>
