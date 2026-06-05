@@ -1,14 +1,15 @@
-{{/* Homepage selection stays essay-only by design even after dialogues merge into the archive model. */}}
-{{ $essays := slice }}
+{{/* Homepage selection follows the archive longform model for essays and dialogues. */}}
+{{ $frontPagePages := slice }}
 {{ range site.RegularPages }}
-  {{ if eq (partial "archive/longform-kind.html" .) "essay" }}
-    {{ $essays = $essays | append . }}
+  {{ $kind := partial "archive/longform-kind.html" . }}
+  {{ if or (eq $kind "essay") (eq $kind "dialogue") }}
+    {{ $frontPagePages = $frontPagePages | append . }}
   {{ end }}
 {{ end }}
-{{ $essays = sort (sort $essays "Title" "asc") "Date" "desc" }}
+{{ $frontPagePages = sort (sort $frontPagePages "Title" "asc") "Date" "desc" }}
 {{ $latest := false }}
-{{ if gt (len $essays) 0 }}
-  {{ $latest = index $essays 0 }}
+{{ if gt (len $frontPagePages) 0 }}
+  {{ $latest = index $frontPagePages 0 }}
 {{ end }}
 
 {{ $hero := $latest }}
@@ -29,7 +30,7 @@
   {{ $selectedKeys = $selectedKeys | append $latest.RelPermalink }}
 {{ end }}
 
-{{ range $candidate := $essays }}
+{{ range $candidate := $frontPagePages }}
   {{ if lt (len $secondary) 4 }}
     {{ $key := $candidate.RelPermalink }}
     {{ if not (in $selectedKeys $key) }}

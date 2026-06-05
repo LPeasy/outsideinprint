@@ -34,6 +34,7 @@ const notFound = fs.readFileSync(path.resolve("layouts/404.html"), "utf8");
 const themeBootstrap = fs.readFileSync(path.resolve("layouts/partials/theme_bootstrap.html"), "utf8");
 const themeToggleScript = fs.readFileSync(path.resolve("layouts/partials/theme_toggle_script.html"), "utf8");
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
+const homeFrontPageCopy = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
 const entryThreads = fs.readFileSync(path.resolve("layouts/partials/entry_threads.html"), "utf8");
@@ -160,6 +161,7 @@ test("homepage browse band stays curated and replaces Welcome with Library", () 
 test("homepage composition keeps the motto, collections, signup ribbon, and archive navigation in order", () => {
   assert.match(homeFrontPage, /id="home-front-page-title"/);
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
+  assert.match(homeFrontPage, /home_front_page_copy\.html/);
   assert.match(homeFrontPage, /site\.Data\.editorial_cartoons/);
   assert.match(homeFrontPage, /\$orderedCartoons := sort \$cartoons "date" "desc"/);
   assert.match(homeFrontPage, /\$recentCartoons := slice/);
@@ -195,7 +197,12 @@ test("homepage composition keeps the motto, collections, signup ribbon, and arch
   assert.doesNotMatch(homeFrontPage, /class="home-manifesto"/);
   assert.doesNotMatch(homeFrontPage, /A digital imprint of essays, reports, dialogues, and literature\./);
   assert.doesNotMatch(homeFrontPage, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
-  assert.match(homeFrontPage, /Read essay &rarr;/);
+  assert.match(homeFrontPage, /\{\{ \$leadReadLabel \}\} &rarr;/);
+  assert.match(homeFrontPage, /\{\{ \$readLabel \}\} &rarr;/);
+  assert.match(homeFrontPageCopy, /Latest Essay/);
+  assert.match(homeFrontPageCopy, /Latest Dialogue/);
+  assert.match(homeFrontPageCopy, /Read essay/);
+  assert.match(homeFrontPageCopy, /Read dialogue/);
 
   assert.match(homeImprintStatement, /class="home-manifesto"/);
   assert.match(homeImprintStatement, /home-manifesto__inner/);

@@ -33,12 +33,12 @@ function normalizeDateString(value) {
   return match?.[0] ?? null;
 }
 
-function selectHomepageEssays(pages) {
-  const essays = pages
-    .filter((page) => page.kind === "essay" && page.draft !== true)
+function selectHomepageLongform(pages) {
+  const frontPagePages = pages
+    .filter((page) => (page.kind === "essay" || page.kind === "dialogue") && page.draft !== true)
     .sort((left, right) => right.date - left.date);
 
-  const latest = essays[0] ?? null;
+  const latest = frontPagePages[0] ?? null;
   const hero = latest ?? null;
   const showLatestSlot = false;
   const selected = [];
@@ -55,7 +55,7 @@ function selectHomepageEssays(pages) {
   }
 
   const secondary = [];
-  for (const candidate of essays) {
+  for (const candidate of frontPagePages) {
     if (secondary.length >= 4 || seen.has(candidate.relPermalink)) continue;
     secondary.push(candidate);
     selected.push(candidate);
@@ -100,9 +100,10 @@ function parseFrontMatter(filePath) {
   return data;
 }
 
-test("homepage partial keeps one curated lead and fills the right rail with newest essays", () => {
+test("homepage partial keeps one lead and fills the right rail with newest essays and dialogues", () => {
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
+  const frontPageCopySource = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
   const indexSource = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
   const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
   const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
@@ -115,13 +116,14 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   const pageListItem = fs.readFileSync(path.resolve("layouts/partials/discovery/page-list-item.html"), "utf8");
 
   assert.match(source, /partial "archive\/longform-kind\.html"/);
-  assert.match(source, /Homepage selection stays essay-only by design/);
+  assert.match(source, /Homepage selection follows the archive longform model for essays and dialogues/);
   assert.match(source, /\{\{ range site\.RegularPages \}\}/);
-  assert.match(source, /\{\{ if eq \(partial "archive\/longform-kind\.html" \.\) "essay" \}\}/);
-  assert.match(source, /sort \(sort \$essays "Title" "asc"\) "Date" "desc"/);
+  assert.match(source, /\{\{ \$kind := partial "archive\/longform-kind\.html" \. \}\}/);
+  assert.match(source, /\{\{ if or \(eq \$kind "essay"\) \(eq \$kind "dialogue"\) \}\}/);
+  assert.match(source, /sort \(sort \$frontPagePages "Title" "asc"\) "Date" "desc"/);
   assert.match(source, /\{\{ \$hero := \$latest \}\}/);
   assert.match(source, /\{\{ \$showLatestSlot := false \}\}/);
-  assert.match(source, /range \$candidate := \$essays/);
+  assert.match(source, /range \$candidate := \$frontPagePages/);
   assert.match(source, /lt \(len \$secondary\) 4/);
   assert.match(source, /home_selected_keys/);
   assert.match(source, /"pages" \$selectedPages/);
@@ -136,6 +138,16 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(source, /Read Essay/);
   assert.doesNotMatch(source, /Download PDF/);
   assert.match(frontPageSource, /home_selected\.html/);
+  assert.match(frontPageSource, /home_front_page_copy\.html/);
+  assert.match(frontPageSource, /\{\{ \$leadReadLabel \}\} &rarr;/);
+  assert.match(frontPageSource, /\{\{ \$latestReadLabel \}\} &rarr;/);
+  assert.match(frontPageSource, /\{\{ \$readLabel \}\} &rarr;/);
+  assert.match(frontPageCopySource, /partial "archive\/longform-kind\.html"/);
+  assert.match(frontPageCopySource, /Latest Essay/);
+  assert.match(frontPageCopySource, /Latest Dialogue/);
+  assert.match(frontPageCopySource, /Read essay/);
+  assert.match(frontPageCopySource, /Read dialogue/);
+  assert.match(frontPageCopySource, /Dialogues/);
   assert.match(frontPageSource, /site\.Data\.editorial_cartoons/);
   assert.match(frontPageSource, /currentCartoonSlug/);
   assert.match(frontPageSource, /\$orderedCartoons := sort \$cartoons "date" "desc"/);
@@ -231,7 +243,7 @@ test("homepage partial keeps one curated lead and fills the right rail with newe
   assert.doesNotMatch(thinkOutsideEntry, /essay:/);
 });
 
-test("latest essay leads while the right rail uses the next newest published essays", () => {
+test("latest essay or dialogue leads while the right rail uses the next newest longform pages", () => {
   const pages = [
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") },
     { relPermalink: "/essays/hero/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
@@ -240,16 +252,16 @@ test("latest essay leads while the right rail uses the next newest published ess
     { relPermalink: "/essays/core-b/", kind: "essay", draft: false, date: new Date("2026-02-10") },
     { relPermalink: "/essays/core-c/", kind: "essay", draft: false, date: new Date("2026-02-05") },
     { relPermalink: "/essays/core-d/", kind: "essay", draft: false, date: new Date("2026-02-01") },
-    { relPermalink: "/syd-and-oliver/not-eligible/", kind: "dialogue", draft: false, date: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", draft: false, date: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
     { relPermalink: "/essays/draft/", kind: "essay", draft: true, date: new Date("2026-04-02"), homepage_featured: true, homepage_featured_until: "2026-04-30" }
   ];
 
-  const result = selectHomepageEssays(pages);
+  const result = selectHomepageLongform(pages);
 
-  assert.equal(result.hero?.relPermalink, "/essays/latest/");
-  assert.equal(result.latest?.relPermalink, "/essays/latest/");
+  assert.equal(result.hero?.relPermalink, "/syd-and-oliver/latest-dialogue/");
+  assert.equal(result.latest?.relPermalink, "/syd-and-oliver/latest-dialogue/");
   assert.equal(result.showLatestSlot, false);
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/expired/", "/essays/core-a/", "/essays/core-b/", "/essays/core-c/"]);
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/latest/", "/essays/expired/", "/essays/core-a/", "/essays/core-b/"]);
   assert.equal(result.secondary.length, 4);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
@@ -264,7 +276,7 @@ test("current cartoon essay does not override the latest essay lead", () => {
     { relPermalink: "/essays/the-ash-pond-under-the-cloud/", kind: "essay", draft: false, date: new Date("2026-05-16") }
   ];
 
-  const result = selectHomepageEssays(pages, "2026-05-20", "/essays/id-required/");
+  const result = selectHomepageLongform(pages, "2026-05-20", "/essays/id-required/");
 
   assert.equal(result.hero?.relPermalink, "/essays/the-easement-under-the-lake/");
   assert.equal(result.latest?.relPermalink, "/essays/the-easement-under-the-lake/");
@@ -285,7 +297,7 @@ test("active feature flags do not override newest essay lead", () => {
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") }
   ];
 
-  const result = selectHomepageEssays(pages);
+  const result = selectHomepageLongform(pages);
 
   assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/latest/", "/essays/newer/", "/essays/older/"]);
 });
@@ -298,7 +310,7 @@ test("recent fallback remains stable when no active feature exists", () => {
     { relPermalink: "/essays/d/", kind: "essay", draft: false, date: new Date("2026-02-28") }
   ];
 
-  const result = selectHomepageEssays(pages);
+  const result = selectHomepageLongform(pages);
 
   assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/a/", "/essays/b/", "/essays/c/", "/essays/d/"]);
 });
@@ -316,7 +328,8 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.match(frontPageSource, /data-home-cartoon-recent/);
   assert.match(frontPageSource, /data-home-cartoon-recent-trigger/);
   assert.doesNotMatch(frontPageSource, /Also on the front page/);
-  assert.match(frontPageSource, /Read essay &rarr;/);
+  assert.match(frontPageSource, /\{\{ \$leadReadLabel \}\} &rarr;/);
+  assert.match(frontPageSource, /\{\{ \$readLabel \}\} &rarr;/);
   assert.match(frontPageSource, /View gallery/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);

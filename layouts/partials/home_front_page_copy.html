@@ -1,0 +1,18 @@
+{{- $page := . -}}
+{{- $kind := partial "archive/longform-kind.html" $page -}}
+{{- $sectionLabel := $page.Params.section_label | default (humanize $page.Section) -}}
+{{- $latestLabel := "Latest Essay" -}}
+{{- $readLabel := "Read essay" -}}
+
+{{- if eq $kind "dialogue" -}}
+  {{- $sectionLabel = "Dialogues" -}}
+  {{- $latestLabel = "Latest Dialogue" -}}
+  {{- $readLabel = "Read dialogue" -}}
+{{- end -}}
+
+{{- return (dict
+  "kind" $kind
+  "sectionLabel" $sectionLabel
+  "latestLabel" $latestLabel
+  "readLabel" $readLabel
+) -}}
