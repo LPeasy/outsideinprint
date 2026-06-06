@@ -6,8 +6,8 @@ date: 2026-06-04
 draft: false
 slug: "the-bell-at-the-crossing-flagship"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 featured: false
 featured_image: "/images/essays/the-bell-at-the-crossing-flagship/hero.png"
 featured_image_alt: "Editorial illustration of a rural railroad crossing at dusk with a crossbuck, gate arm, signal bell, blue emergency sign, and freight cars approaching beyond the road."
@@ -19,6 +19,10 @@ tags:
   - "Civic Systems"
   - "Risk"
   - "Material History"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-06"
+    note: "Updated June 6, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 ---
 
 ## The Sign With a Number
