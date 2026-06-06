@@ -3249,7 +3249,7 @@
       "deployed_on": "2026-06-04"
     },
     "the-bell-at-the-crossing-flagship": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-06",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-06.md",
       "previous_version": "1.0",
@@ -3265,7 +3265,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps railroad-crossing claims tied to federal signal rules, FRA datasets, MUTCD guidance, state action plans, funding records, MoDOT corridor documents, and the NTSB Mendon report while testing road-rail incentives, closure tradeoffs, downstream safety consequences, uncertainty, and institutional responsibility."
-      }
+      },
+      "commit_sha": "cc8fd41acab077ce5bc9524633231f77e5160ab3",
+      "deployed_on": "2026-06-06"
     }
   },
   "blocked": {},
@@ -3732,8 +3734,10 @@
       "selected_slugs": [
         "the-bell-at-the-crossing-flagship"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-06.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-06.md",
+      "commit_sha": "cc8fd41acab077ce5bc9524633231f77e5160ab3",
+      "deployed_on": "2026-06-06"
     }
   ]
 }
