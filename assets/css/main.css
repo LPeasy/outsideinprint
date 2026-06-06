@@ -4257,6 +4257,39 @@ h2{ margin-top:34px; }
 .dialogue-turn--tony .dialogue-turn__speaker{
   color:rgba(193,177,148,.78);
 }
+.redacted-email{
+  width:100%;
+  margin:1.45rem 0;
+  padding:1rem 1.05rem .95rem;
+  border:1px solid var(--oip-rule-faint);
+  border-left:3px solid rgba(213,190,150,.58);
+  background:linear-gradient(180deg, rgba(127,147,166,.08), rgba(127,147,166,.025));
+  color:var(--text-secondary);
+  font-family:var(--font-ui);
+  font-size:.88rem;
+  line-height:1.55;
+}
+.redacted-email__line{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.42rem .5rem;
+  align-items:center;
+  min-height:1.2rem;
+  margin:.38rem 0;
+}
+.redacted-email__line--plain{
+  color:var(--text-primary);
+}
+.redacted-email__bar{
+  display:inline-block;
+  width:min(var(--redaction-width, 24ch), 100%);
+  max-width:100%;
+  height:.82em;
+  border-radius:1px;
+  background:#050505;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 1px rgba(0,0,0,.78);
+  transform:translateY(.08em);
+}
 .collection-grid{
   align-items:start;
 }
