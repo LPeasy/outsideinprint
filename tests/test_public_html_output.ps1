@@ -1354,6 +1354,7 @@ $requiredUxPages = @(
   'public/almanack/2026-05-16/index.html',
   'public/almanack/2026-05-23/index.html',
   'public/almanack/2026-05-30/index.html',
+  'public/almanack/2026-06-06/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -2839,8 +2840,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?May 30, 2026.*?Ask for evidence and watch them\..*?The Scenario That Ate the Future'
-    Message = 'expected the Bob''s Almanack collection page to feature the May 30 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?June 6, 2026.*?Um, yeah, I(?:''|&#39;)m going to need the details\..*?The Bell at the Crossing'
+    Message = 'expected the Bob''s Almanack collection page to feature the June 6 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -2932,8 +2933,29 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?June 6, 2026.*?Issue 6.*?Um, yeah, I(?:''|&#39;)m going to need the details\.'
+    Message = 'expected the June 6 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the June 6 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '(?s)/images/editorial/the-ruler-of-the-road\.png.*?/images/editorial/post-malonely\.png.*?/images/editorial/blowing-smoke\.png'
+    Message = 'expected the June 6 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '/images/essays/(the-bell-at-the-crossing-flagship|the-mailbox-at-the-edge-of-the-road|the-examiners-red-pencil|colored-glasses-the-lens-of-race)/hero\.png'
+    Message = 'expected the June 6 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?May 30, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Prudence.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?June 6, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Justice.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
