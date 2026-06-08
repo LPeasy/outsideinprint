@@ -1,4 +1,4 @@
-current: the-ruler-of-the-road
+current: the-meter
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -344,5 +344,14 @@ cartoons:
     image: "/images/editorial/the-ruler-of-the-road.png"
     essay: "/essays/the-bell-at-the-crossing-flagship/"
     alt: "Editorial cartoon showing a freight train holding down a railroad-crossing gate shaped like a measuring ruler, blocking a school bus, ambulance, van, tractor, and car while the gate labels time, access, safety, money, local memory, and public record."
+    width: 1672
+    height: 941
+  - slug: the-meter
+    title: "The Meter"
+    date: "2026-06-07"
+    publishDate: "2026-06-07T00:00:00-04:00"
+    image: "/images/editorial/the-meter.png"
+    essay: "/essays/the-meter-at-the-curb/"
+    alt: "Editorial cartoon showing a giant parking meter shaped like a small city hall at an empty curb, with a red expired flag and labels for curb, public time, fines, and city hall."
     width: 1672
     height: 941
