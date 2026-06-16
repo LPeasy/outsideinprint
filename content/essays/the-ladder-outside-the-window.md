@@ -2,7 +2,7 @@
 title: "The Ladder Outside the Window"
 subtitle: "How New York made one iron escape carry law, rent, preservation, inspection, and public trust."
 description: "A flagship Outside In Print essay on the New York fire escape as a visible contract among private property, public safety, housing density, inspection capacity, preservation memory, and emergency trust."
-date: 2026-06-06
+date: 2026-06-15
 draft: false
 slug: "the-ladder-outside-the-window"
 section_label: "Essay"
