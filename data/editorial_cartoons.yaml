@@ -1,4 +1,4 @@
-current: the-meter
+current: escape-clause
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -353,5 +353,14 @@ cartoons:
     image: "/images/editorial/the-meter.png"
     essay: "/essays/the-meter-at-the-curb/"
     alt: "Editorial cartoon showing a giant parking meter shaped like a small city hall at an empty curb, with a red expired flag and labels for curb, public time, fines, and city hall."
+    width: 1672
+    height: 941
+  - slug: escape-clause
+    title: "Escape Clause"
+    date: "2026-06-16"
+    publishDate: "2026-06-15T23:40:24-04:00"
+    image: "/images/editorial/escape-clause.png"
+    essay: "/essays/the-ladder-outside-the-window/"
+    alt: "Editorial cartoon showing a fire escape labeled PUBLIC SAFETY bolted to a brick wall marked PRIVATE WALL, with a red INSPECTION tag tied to a loose bolt above an empty sidewalk."
     width: 1672
     height: 941
