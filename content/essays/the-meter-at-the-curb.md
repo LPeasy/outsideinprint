@@ -7,8 +7,12 @@ publishDate: 2026-06-07T00:00:00-04:00
 draft: false
 slug: "the-meter-at-the-curb"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-06-17"
+    note: "Updated June 17, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 featured_image: "/images/essays/the-meter-at-the-curb/hero.png"
 featured_image_alt: "A weathered 1930s parking meter stands beside a downtown curb at dawn, with storefront glass, lane stripes, and long shadows arranged like a civic ledger."

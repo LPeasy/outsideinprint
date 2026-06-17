@@ -3268,6 +3268,44 @@
       },
       "commit_sha": "cc8fd41acab077ce5bc9524633231f77e5160ab3",
       "deployed_on": "2026-06-06"
+    },
+    "the-meter-at-the-curb": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-17",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-17.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-06-17",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps parking-meter claims tied to patent, court, federal, municipal, and public-record sources while testing curb access incentives, pricing tradeoffs, enforcement consequences, uncertainty, and institutional responsibility."
+      }
+    },
+    "the-ladder-outside-the-window": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-17",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-17.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-06-17",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps fire-escape claims tied to statutes, commission reports, public archives, NYC rules, violation data, preservation records, and code text while testing owner, tenant, agency, preservation, and public-safety risk allocation."
+      }
     }
   },
   "blocked": {},
@@ -3738,6 +3776,15 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-06.md",
       "commit_sha": "cc8fd41acab077ce5bc9524633231f77e5160ab3",
       "deployed_on": "2026-06-06"
+    },
+    {
+      "batch_id": "2026-06-17",
+      "selected_slugs": [
+        "the-meter-at-the-curb",
+        "the-ladder-outside-the-window"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-17.md"
     }
   ]
 }
