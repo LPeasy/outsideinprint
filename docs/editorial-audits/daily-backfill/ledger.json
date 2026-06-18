@@ -3270,7 +3270,7 @@
       "deployed_on": "2026-06-06"
     },
     "the-meter-at-the-curb": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-17",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-17.md",
       "previous_version": "1.0",
@@ -3286,10 +3286,12 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps parking-meter claims tied to patent, court, federal, municipal, and public-record sources while testing curb access incentives, pricing tradeoffs, enforcement consequences, uncertainty, and institutional responsibility."
-      }
+      },
+      "commit_sha": "93283cb87545383532e748ec84608117c32eb1ea",
+      "deployed_on": "2026-06-17"
     },
     "the-ladder-outside-the-window": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-17",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-17.md",
       "previous_version": "1.0",
@@ -3305,7 +3307,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps fire-escape claims tied to statutes, commission reports, public archives, NYC rules, violation data, preservation records, and code text while testing owner, tenant, agency, preservation, and public-safety risk allocation."
-      }
+      },
+      "commit_sha": "93283cb87545383532e748ec84608117c32eb1ea",
+      "deployed_on": "2026-06-17"
     }
   },
   "blocked": {},
@@ -3783,8 +3787,10 @@
         "the-meter-at-the-curb",
         "the-ladder-outside-the-window"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-17.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-17.md",
+      "commit_sha": "93283cb87545383532e748ec84608117c32eb1ea",
+      "deployed_on": "2026-06-17"
     }
   ]
 }
