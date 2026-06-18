@@ -1,4 +1,4 @@
-current: escape-clause
+current: prime-suspect
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -362,5 +362,13 @@ cartoons:
     image: "/images/editorial/escape-clause.png"
     essay: "/essays/the-ladder-outside-the-window/"
     alt: "Editorial cartoon showing a fire escape labeled PUBLIC SAFETY bolted to a brick wall marked PRIVATE WALL, with a red INSPECTION tag tied to a loose bolt above an empty sidewalk."
+    width: 1672
+    height: 941
+  - slug: prime-suspect
+    title: "Prime Suspect"
+    date: "2026-06-18"
+    image: "/images/editorial/prime-suspect.png"
+    essay: "/essays/the-stamp-on-the-meat-flagship/"
+    alt: "Editorial cartoon showing a grocery meat counter staged like an interrogation, with a fictional PASSED stamp on a wrapped steak under a lamp, a separate GRADE shield, and a detective-like shopper saying the marbling is exquisite."
     width: 1672
     height: 941

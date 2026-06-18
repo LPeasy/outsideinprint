@@ -2135,8 +2135,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-mailbox-at-the-edge-of-the-road"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?post-malonely"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=post-malonely"?'
-    Message = 'expected the Mailbox homepage card cartoon thumbnail to open the Post Malonely lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-ladder-outside-the-window"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?escape-clause"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=escape-clause"?'
+    Message = 'expected the Ladder homepage card cartoon thumbnail to open the Escape Clause lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
