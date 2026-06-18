@@ -64,20 +64,21 @@ The machine hissed again. *Shthwawip!*
 
 Oliver cleared his throat and started reading:
 
-<div class="redacted-email" aria-label="A heavily redacted anonymous complaint email. Most of the message is obscured by black bars.">
-  <p class="redacted-email__line redacted-email__line--plain">Sir,</p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 37ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 17ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 22ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 32ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 10ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 44ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 20ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 29ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 34ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 14ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 22ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 26ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 48ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 12ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 19ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 21ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 28ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 41ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 23ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line"><span class="redacted-email__bar" style="--redaction-width: 25ch;" aria-hidden="true"></span><span class="redacted-email__bar" style="--redaction-width: 35ch;" aria-hidden="true"></span></p>
-  <p class="redacted-email__line redacted-email__line--plain">Charging hard,</p>
-  <p class="redacted-email__line redacted-email__line--plain">A Discouraged American Citizen.</p>
-</div>
+> Sir,
+>
+> The culture in the division is toxic. The leadership do not expect, reward, or want excellence. Instead, they want conformity to the way we typically do things. There is no expectation that team members read the previous reports. The leadership have given up the hope that we can even communicate effectively with the engineering chain of command.
+>
+> The personal and professional cost of speaking plain truth is too high for most people. Feminine workplace politics and character assassination are used to ostracize employees who do not conform to the existing culture of apathy and resignation to eternal gross mis-management. In my opinion, there isn't enough social proof in the world for me to reject what I can clearly see to be true. However, that does not seem to be the case for most of the people working here.
+>
+> I think of myself as a civil servant. Others call themselves federal employees. We need to shift the paradigm ~ it may seem sort of ridiculous to you, sir, but believe me when I say that many of the civilians you have here are fundamentally opposed to classical liberalism and, quite simply, are just not serious people.
+>
+> I would like to suggest that the annual ethics training be reworked to focus less on $10 pizza lunch rules and more on the fundamental ethical responsibility that we have to the American tax payer. We should all be required to stand and say the pledge of allegiance at 9am at the start of the day, every day to instill a sense of duty in our workforce. Requiring the pledge of allegiance would show public support for people like me who want to change the culture and strive for excellence. Saying the pledge every day will reinforce the correct position that every civil servant should have which is dedication to God, Country, and Family.
+>
+> If any federal employee is unwilling to pledge their allegiance, I think they should be removed from their position.
+>
+> Charging hard,
+>
+> A Discouraged American Citizen.
 
 Oliver lowered the phone.
 
