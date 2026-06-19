@@ -3312,7 +3312,7 @@
       "deployed_on": "2026-06-17"
     },
     "the-stamp-on-the-meat-flagship": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-19",
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-19.md",
       "previous_version": "1.0",
@@ -3328,7 +3328,9 @@
         "uncertainty": "PASS",
         "institutional_behavior": "PASS",
         "note": "Reviewed essay keeps meat-inspection claims tied to federal statute, CFR marks, labels, records, sanitation, HACCP rules, historical 1906 records, grading and state-inspection program records, and recall evidence while testing trust boundaries, jurisdiction, traceability, incentives, tradeoffs, and institutional responsibility."
-      }
+      },
+      "commit_sha": "e5d1e34fdb5b26a49b467bc4b4d800d3f8486d1c",
+      "deployed_on": "2026-06-19"
     }
   },
   "blocked": {},
@@ -3816,8 +3818,10 @@
       "selected_slugs": [
         "the-stamp-on-the-meat-flagship"
       ],
-      "status": "pending_deploy",
-      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-19.md"
+      "status": "deployed",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-19.md",
+      "commit_sha": "e5d1e34fdb5b26a49b467bc4b4d800d3f8486d1c",
+      "deployed_on": "2026-06-19"
     }
   ]
 }
