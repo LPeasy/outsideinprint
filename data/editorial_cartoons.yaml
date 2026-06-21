@@ -1,4 +1,4 @@
-current: premium-memory
+current: curb-appeal
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -379,5 +379,13 @@ cartoons:
     image: "/images/editorial/premium-memory.png"
     essay: "/essays/the-map-that-priced-the-fire/"
     alt: "Black-and-white editorial cartoon showing an old fire-insurance map pressed into a paper city by an underwriting stamp press on a city records counter, with one muted red hazard block."
+    width: 1672
+    height: 941
+  - slug: curb-appeal
+    title: "Curb Appeal"
+    date: "2026-06-21"
+    image: "/images/editorial/curb-appeal.png"
+    essay: "/essays/the-curb-cut-at-the-corner/"
+    alt: "Editorial cartoon showing a curb ramp shaped like a signed document marked ACCESS, with a wheelchair wheel and cane at the sidewalk edge."
     width: 1672
     height: 941
