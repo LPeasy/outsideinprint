@@ -3331,6 +3331,25 @@
       },
       "commit_sha": "e5d1e34fdb5b26a49b467bc4b4d800d3f8486d1c",
       "deployed_on": "2026-06-19"
+    },
+    "the-map-that-priced-the-fire": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-21",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-21.md",
+      "previous_version": "1.0",
+      "new_version": "1.1",
+      "updated_on": "2026-06-21",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "Reviewed essay keeps Sanborn fire-insurance map claims tied to Library of Congress records, Florida Memory, the 1904 Jacksonville directory, EPA AAI guidance, 40 CFR Part 312, and a USACE Phase I report while testing source limits, map incentives, environmental due-diligence tradeoffs, uncertainty, and institutional responsibility."
+      }
     }
   },
   "blocked": {},
@@ -3822,6 +3841,14 @@
       "report": "docs/editorial-audits/daily-backfill/reports/2026-06-19.md",
       "commit_sha": "e5d1e34fdb5b26a49b467bc4b4d800d3f8486d1c",
       "deployed_on": "2026-06-19"
+    },
+    {
+      "batch_id": "2026-06-21",
+      "selected_slugs": [
+        "the-map-that-priced-the-fire"
+      ],
+      "status": "pending_deploy",
+      "report": "docs/editorial-audits/daily-backfill/reports/2026-06-21.md"
     }
   ]
 }
