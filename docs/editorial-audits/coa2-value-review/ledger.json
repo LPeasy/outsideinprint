@@ -30,8 +30,10 @@
   },
   "completed": {
     "the-100-year-flood-is-not-what-you-think": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-21",
+      "content_commit_sha": "b7ff0fc740de33e0d72f797a9124456524250670",
+      "deployed_on": "2026-06-21",
       "source_file": "content/essays/the-100-year-flood-is-not-what-you-think.md",
       "live_url": "https://outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md",
@@ -65,8 +67,10 @@
       }
     },
     "what-is-risk-a-four-part-framework": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-21",
+      "content_commit_sha": "b7ff0fc740de33e0d72f797a9124456524250670",
+      "deployed_on": "2026-06-21",
       "source_file": "content/essays/what-is-risk-a-four-part-framework.md",
       "live_url": "https://outsideinprint.org/essays/what-is-risk-a-four-part-framework/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md",
@@ -100,8 +104,10 @@
       }
     },
     "what-happened-at-camp-mystic": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-21",
+      "content_commit_sha": "b7ff0fc740de33e0d72f797a9124456524250670",
+      "deployed_on": "2026-06-21",
       "source_file": "content/essays/what-happened-at-camp-mystic.md",
       "live_url": "https://outsideinprint.org/essays/what-happened-at-camp-mystic/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md",
@@ -144,7 +150,9 @@
         "what-is-risk-a-four-part-framework",
         "what-happened-at-camp-mystic"
       ],
-      "status": "pending_deploy",
+      "status": "deployed",
+      "content_commit_sha": "b7ff0fc740de33e0d72f797a9124456524250670",
+      "deployed_on": "2026-06-21",
       "selected_on": "2026-06-21",
       "selection_policy": "value_ranked_front_surface_three_checks",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md"
