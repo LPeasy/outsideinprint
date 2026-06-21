@@ -6,9 +6,12 @@ slug: "the-waters-rising-what-the-data-really-says-about-extreme-weather"
 section_label: "Essay"
 subtitle: "“The weather’s never been like this!”"
 description: "It feels like you hear this after every flood , fire, or storm lately. From Houston to Vermont, from wildfires in Canada to flash floods in Texas, something..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-21"
+    note: "Updated June 21, 2026, to restore localized imported image assets and add body-image alt text."
   - version: "1.1"
     date: "2026-05-17"
     note: "Updated May 17, 2026, after OIP back-archive review. Climate-source framing, Camp Mystic risk language, remote body images, and house-style issues were corrected."
@@ -137,6 +140,8 @@ planning problem is immediate.**
 
 > **Here's what the U.S. data shows:**
 
+![Chart showing U.S. extreme one-day precipitation events from 1910 to 2023.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/c2a267b5b3d5f35aa89438b20e80fbc086194a0ea302b9fbc1978d2a5783b3b8.png)
+
 - **Nine of the ten wettest years on record have** [**happened since 1995.**](https://www.epa.gov/climate-indicators/climate-change-indicators-heavy-precipitation)
 - **The share of the country hit by very heavy daily
   rainfall has** [**grown about 0.5% per decade**](https://www.epa.gov/climate-indicators/climate-change-indicators-us-and-global-precipitation) **since 1910.**\
@@ -158,6 +163,8 @@ planning problem is immediate.**
 
 [But the past few decades have reshaped the state's rainfall](https://texas2036.org/texas-will-face-more-extreme-weather/) profile in dramatic ways.
 
+![Texas map showing overall precipitation trend by county from 1895 to 2023.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/7863b3485e935a7f8cb3f364d6544043e09216155fb8b65df8ed98ff0ccf01cc.png)
+
 - **Central and Eastern Texas now average ~10% more
   annual rainfall** than a century ago.
 - **Several of the wettest months in state history**
@@ -168,6 +175,8 @@ planning problem is immediate.**
 This pattern is especially dangerous in **regions like the Hill
 Country,** where steep slopes, rocky soil, and fast-moving tributaries
 funnel rainwater straight into rivers.
+
+![Map of Texas marking the Hill Country between Austin and San Antonio.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/aa6bc55283851e2bc0c7f83b7193a82a14817b40d3941917d9cee426d589447c.png)
 
 **The 2025 Guadalupe River flood wasn't just intense ~**
 
@@ -184,6 +193,8 @@ funnel rainwater straight into rivers.
 > **Others are harder to pin down.**
 
 **Here's a rough breakdown:**
+
+![Summary graphic comparing clearly worsening and unclear or variable extreme weather trends.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/05a544772ed6b9677cac30f2bb1b4db1b7737e94ea82f6dfb8ec8e2fd19b099b.png)
 
 While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weather-prediction-uncertainty)
 **surrounds all types of extreme weather events,**
@@ -205,6 +216,8 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 > "That's not normal."
 
 > **Right?**
+
+![Map of the Guadalupe River Basin, Kerr County, and Camp Mystic.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/e56a556ba82d413bc85fcfbf9a7c8f34da44b8a8f4043a42ea40f466e0ae3d40.png)
 
 [Tropical moisture from Storm Barry stalled over the Hill Country, dropping 16 inches of rain in 48 hours.](https://weather.com/news/weather/news/2025-07-06-how-guadalupe-texas-flooding-happened-forecast)
 
