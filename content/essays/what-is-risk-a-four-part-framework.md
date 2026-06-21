@@ -5,12 +5,15 @@ draft: false
 slug: "what-is-risk-a-four-part-framework"
 section_label: "Essay"
 subtitle: "A practical way to use hazard, pathway, consequence, and uncertainty"
-description: "In everyday choices and technical work, four key terms help us define and articulate “risk.”. Hazard names the source of potential harm, pathway describes ho..."
+description: "A practical four-part framework for thinking about risk: hazard, pathway, consequence, and uncertainty."
 featured_image: "/images/medium/what-is-risk-a-four-part-framework/c5d17c0978b1a86a5144dea14f43e6da15d3559347c45d71edd7d9a334e79ab2.jpeg"
 featured_image_alt: "What Is Risk? A Four-Part Framework"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-06-21"
+    note: "Updated June 21, 2026, during COA2 value review to remove reader-visible author-note and pseudo-heading residue and repair discovery metadata."
   - version: "1.2"
     date: "2026-06-04"
     note: "Updated June 4, 2026, to repair visible Markdown emphasis residue in the risk-framework mnemonic and blockquote passages."
@@ -146,8 +149,7 @@ in 2022).
 
 If you'd like to know more, [this New Security Beat article](https://www.newsecuritybeat.org/2024/07/no-the-panama-canal-is-not-running-dry/) is a helpful companion.
 
-Instead, the Panama Canal Authority (PCA) appears to have maximized the
-available water and **avoided disastrous shipping impacts.**
+Instead, the Panama Canal Authority (PCA) appears to have maximized available water and **avoided disastrous shipping impacts.**
 
 **The stress was real** ~ longer waits, detours, and higher freight ~
 but smart operations prevented a broader shipping breakdown.
@@ -410,7 +412,7 @@ thinking.**
 
 ### Life is a Risky Business
 
-We do what we can to identify the risks:
+We do what we can to identify the risks.
 
 1.  **Name the hazard** so something obvious doesn't
     catch you off guard.
@@ -450,7 +452,7 @@ identify uncertainties ~**
 
 > Then make one deliberate move to reduce the uncertainty.
 
-#### Author's Note
+### Series Note
 
 This is the first in a long series of essays that will cover Risk
 Management and Risk Analysis from top to bottom. Come along with me as I

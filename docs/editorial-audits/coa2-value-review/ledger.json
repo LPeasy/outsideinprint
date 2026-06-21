@@ -1,0 +1,153 @@
+{
+  "workflow": "oip-coa2-value-review",
+  "started_on": "2026-06-21",
+  "selection_policy": "value_ranked_front_surface_three_checks",
+  "batch_size": 3,
+  "checks": {
+    "reader_visible_residue": [
+      "author_note",
+      "caption_residue",
+      "duplicated_title",
+      "embed_remnants",
+      "escaped_linebreaks",
+      "fake_lists",
+      "manual_bullets",
+      "medium_cta",
+      "mojibake",
+      "ornamental_breaks",
+      "pseudo_headings"
+    ],
+    "source_framing_integrity": [
+      "source_dumps"
+    ],
+    "discovery_rendering_integrity": [
+      "hero_current_wins_conflict",
+      "hero_duplicate_lead",
+      "hero_missing_with_lead",
+      "hero_placeholder_conflict",
+      "missing_description"
+    ]
+  },
+  "completed": {
+    "the-100-year-flood-is-not-what-you-think": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-21",
+      "source_file": "content/essays/the-100-year-flood-is-not-what-you-think.md",
+      "live_url": "https://outsideinprint.org/essays/the-100-year-flood-is-not-what-you-think/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md",
+      "reviewed_on": "2026-06-21",
+      "version_before": "1.1",
+      "version_after": "1.2",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Renamed the Author's Note as a source/risk note, removed fake-list math bullets, and cleaned migrated punctuation residue in headings and metadata."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "FEMA source role remains explicit; probability assumptions are kept as context instead of unsupported certainty."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "Description and subtitle now render as clean public discovery metadata; hero fields and URL-critical front matter are preserved."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised piece keeps the evidence-bound flood-probability mechanism, names uncertainty in mapped risk, and avoids ideological or partisan framing."
+      }
+    },
+    "what-is-risk-a-four-part-framework": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-21",
+      "source_file": "content/essays/what-is-risk-a-four-part-framework.md",
+      "live_url": "https://outsideinprint.org/essays/what-is-risk-a-four-part-framework/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md",
+      "reviewed_on": "2026-06-21",
+      "version_before": "1.2",
+      "version_after": "1.3",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Renamed the Author's Note as a series note and converted the isolated pseudo-heading line before the closing list into normal prose."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "Source links remain attached to examples; the uncertainty framework keeps limits of knowledge visible."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "Truncated discovery description was replaced with a complete public summary; hero fields and URL-critical front matter are preserved."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised piece keeps the hazard-pathway-consequence-uncertainty mechanism, names tradeoffs and unknowns, and remains nonpartisan."
+      }
+    },
+    "what-happened-at-camp-mystic": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-21",
+      "source_file": "content/essays/what-happened-at-camp-mystic.md",
+      "live_url": "https://outsideinprint.org/essays/what-happened-at-camp-mystic/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md",
+      "reviewed_on": "2026-06-21",
+      "version_before": "1.1",
+      "version_after": "1.2",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Renamed the Author's Note as a role/disclosure note while preserving the public disclosure and historical frame."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "The disclosure context remains visible; claims remain framed around reporting, warning timelines, and risk-planning mechanisms."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "Description now gives a complete public summary; hero caption, image, collections, slug, and date are preserved."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised piece keeps the evidentiary focus on warnings, flood exposure, planning incentives, institutional responsibility, and public risk."
+      }
+    }
+  },
+  "blocked": {},
+  "runs": [
+    {
+      "batch_id": "2026-06-21",
+      "selected": [
+        "the-100-year-flood-is-not-what-you-think",
+        "what-is-risk-a-four-part-framework",
+        "what-happened-at-camp-mystic"
+      ],
+      "status": "pending_deploy",
+      "selected_on": "2026-06-21",
+      "selection_policy": "value_ranked_front_surface_three_checks",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md"
+    }
+  ]
+}

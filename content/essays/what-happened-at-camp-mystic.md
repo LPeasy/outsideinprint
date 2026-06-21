@@ -8,10 +8,13 @@ subtitle: "A Primer on the July 4, 2025 Texas Flood Tragedy"
 featured_image: "/images/medium/what-happened-at-camp-mystic/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5df34db0f4.png"
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
-description: "On the night of July 4th, while fireworks lit up the Texas Hill Country, a dangerous storm stalled over the Guadalupe River Basin"
-version: "1.1"
-edition: "Second web edition"
+description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-21"
+    note: "Updated June 21, 2026, during COA2 value review to remove reader-visible author-note residue and clarify discovery metadata while preserving the disclosure note."
   - version: "1.1"
     date: "2026-05-17"
     note: "Updated May 17, 2026, after OIP back-archive review. Warning timeline, casualty language, Medium import residue, and house-style issues were corrected."
@@ -54,7 +57,7 @@ awareness, and safety planning. And it's raising tough questions:
 > **Who is responsible ~ the camp, the parents, the government, or all
 > the above?**
 
-#### Author's Note
+### Role and Disclosure Note
 
 I work as a life safety consequences specialist with the U.S. Army Corps
 of Engineers. Our team models life loss from levee and dam breaches

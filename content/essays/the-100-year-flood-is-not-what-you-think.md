@@ -4,13 +4,16 @@ date: 2026-02-11
 draft: false
 slug: "the-100-year-flood-is-not-what-you-think"
 section_label: "Essay"
-subtitle: "Why the 100-year flood happens more than once in a century ~"
-description: "People hear the phrase and assume rarity.\ Once in a lifetime. Maybe once in a century.\ Something you can shrug off if you plan to sell before retirement"
+subtitle: "Why the 100-year flood can happen more than once in a century"
+description: "A 100-year flood is a 1% annual chance, not a once-per-century promise. Over a 30-year mortgage, repeated exposure adds up to about a 26% chance."
 featured_image: "/images/medium/the-100-year-flood-is-not-what-you-think/96718dd1ce6457c535506421a4afbbb633458940478ba3165a382cfaa93d70aa.jpeg"
 featured_image_alt: "The 100-Year Flood Is Not What You Think"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-21"
+    note: "Updated June 21, 2026, during COA2 value review to remove reader-visible import residue, repair discovery metadata, and preserve the source note as public context."
   - version: "1.1"
     date: "2026-05-25"
     note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
@@ -42,15 +45,14 @@ insurance worth its premium.
 So, how likely is your house to flood if you live in the 100-year
 floodplain?
 
-### One Year, One Chance ~ Raised to the Power of Time
+### One Year, One Chance, Raised to the Power of Time
 
 
-#### Let's start with the technical stuff ~
+#### The Technical Setup
 
-A 100-year flood has a 1% annual probability.
-
-- Chance of a flood in a given year: **p = 0.01**
-- Chance of **no** flood in a given year: **1 - p = 0.99**
+A 100-year flood has a 1% annual probability. In shorthand, **p =
+0.01** is the chance of a flood in a given year, and **1 - p = 0.99**
+is the chance of **no** flood in that year.
 
 Now assume what all of the flood maps quietly assume ~ that each year is
 independent and the probability stays constant every time.
@@ -84,7 +86,7 @@ The probability we care about is: **P(at least 1 flood in n years) = 1 - (0.99)^
 
 > Makes sense right?
 
-#### Now plug in something realistic ~ a 30-year mortgage.
+#### A 30-Year Mortgage Example
 
 Replace n with 30: **1 - (0.99)^30**
 
@@ -134,7 +136,7 @@ Somewhere in between.
 
 But in this case, the house does **not** always win.
 
-#### Author's Note
+### Source and Risk Note
 
 The term "100-year flood" is a technical definition, not a prediction.
 [FEMA describes](https://www.fema.gov/flood-maps/know-your-risk/homeowners)
