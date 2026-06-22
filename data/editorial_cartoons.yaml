@@ -1,4 +1,4 @@
-current: curb-appeal
+current: quiet-filing
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -387,5 +387,13 @@ cartoons:
     image: "/images/editorial/curb-appeal.png"
     essay: "/essays/the-curb-cut-at-the-corner/"
     alt: "Editorial cartoon showing a curb ramp shaped like a signed document marked ACCESS, with a wheelchair wheel and cane at the sidewalk edge."
+    width: 1672
+    height: 941
+  - slug: quiet-filing
+    title: "Quiet Filing"
+    date: "2026-06-22"
+    image: "/images/editorial/quiet-filing.png"
+    essay: "/essays/the-card-in-the-catalog/"
+    alt: "Black-and-white editorial cartoon showing an oversized blank catalog card bridging a gap from a card catalog drawer to library shelves while a small magnifying-glass figure waits to cross."
     width: 1672
     height: 941
