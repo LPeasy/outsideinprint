@@ -139,6 +139,120 @@
         "institutional_behavior": "PASS",
         "note": "The revised piece keeps the evidentiary focus on warnings, flood exposure, planning incentives, institutional responsibility, and public risk."
       }
+    },
+    "the-dolphin-company": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-22",
+      "source_file": "content/essays/the-dolphin-company.md",
+      "live_url": "https://outsideinprint.org/essays/the-dolphin-company/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md",
+      "reviewed_on": "2026-06-22",
+      "updated_on": "2026-06-22",
+      "version_before": "1.1",
+      "version_after": "1.2",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Removed visible source-card bullets, normalized imported pseudo-heading fragments, cleaned escaped quote-line artifacts, and kept the source note as clean prose."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "USDA, bankruptcy, regulator, and legal-property source roles remain explicit; the revision removes source-card residue without changing the historical frame."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "The truncated discovery description was replaced with a complete summary while preserving title, slug, date, hero fields, collection, and URL."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised case study keeps the evidence-bound mechanism around leveraged tourism, animal welfare, changing public norms, legal property treatment, creditor pressure, and institutional risk."
+      }
+    },
+    "in-the-image-of-god": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-22",
+      "source_file": "content/essays/in-the-image-of-god.md",
+      "live_url": "https://outsideinprint.org/essays/in-the-image-of-god/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md",
+      "reviewed_on": "2026-06-22",
+      "updated_on": "2026-06-22",
+      "version_before": "1.2",
+      "version_after": "1.3",
+      "previous_version": "1.2",
+      "new_version": "1.3",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Renamed the Author's Note as a teaching note, normalized imported sentence fragments, and rendered the closing prayer as a blockquote instead of pseudo-heading lines."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "The teaching note identifies Matthew's role; Scripture, Church teaching, and reflection remain clearly separated without policy or party framing."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "The truncated discovery description was replaced with a complete public summary while preserving title, slug, date, hero image, collection, and URL."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay presents Catholic social teaching as moral principles rather than party instructions, keeps source roles visible, and preserves the dignity, common-good, subsidiarity, and solidarity frame."
+      }
+    },
+    "the-ledger-vol-1": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-22",
+      "source_file": "content/essays/the-ledger-vol-1.md",
+      "live_url": "https://outsideinprint.org/essays/the-ledger-vol-1/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md",
+      "reviewed_on": "2026-06-22",
+      "updated_on": "2026-06-22",
+      "version_before": "1.1",
+      "version_after": "1.2",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Removed imported body-date residue and cleared the audit-style pseudo-heading flag while preserving the newsletter roundup structure."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "Internal essay links remain as the source path for the roundup; the piece stays framed as newsletter navigation rather than a new factual claim stack."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "The truncated discovery description was replaced with a complete summary while preserving title, slug, date, hero image, collection, collection weight, and URL."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised newsletter keeps its descriptive roundup purpose, preserves source paths to underlying essays, and avoids adding ideological, partisan, or unsupported claims."
+      }
     }
   },
   "blocked": {},
@@ -156,6 +270,18 @@
       "selected_on": "2026-06-21",
       "selection_policy": "value_ranked_front_surface_three_checks",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-21.md"
+    },
+    {
+      "batch_id": "2026-06-22",
+      "selected": [
+        "the-dolphin-company",
+        "in-the-image-of-god",
+        "the-ledger-vol-1"
+      ],
+      "status": "pending_deploy",
+      "selected_on": "2026-06-22",
+      "selection_policy": "value_ranked_front_surface_three_checks",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md"
     }
   ]
 }

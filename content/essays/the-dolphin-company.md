@@ -5,13 +5,16 @@ draft: false
 slug: "the-dolphin-company"
 section_label: "Essay"
 subtitle: "The Rise and Fall of the World’s Largest Dolphin Empire"
-description: "On a beautiful spring afternoon in 2025, families gathered at Gulf World Marine Park in Panama City Beach, Florida, expecting a classic spectacle. Trainers c..."
+description: "A Gulf World dolphin death, bankruptcy filings, and The Dolphin Company's debt-fueled expansion show how leveraged tourism, animal welfare, and changing public norms collided."
 featured_image: "/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg"
 featured_image_caption: "Art by author."
 featured_image_alt: "The Dolphin Company"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-22"
+    note: "Updated June 22, 2026, for COA2 public-surface review: source-card residue, pseudo-heading fragments, and discovery metadata were cleaned up."
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
@@ -26,7 +29,7 @@ medium_source_url: "https://medium.com/@lawtonperret/the-dolphin-company-47f1945
 ### A Tragedy and a Filing
 
 > **"Jett, a 14-year-old bottlenose dolphin, died from acute head trauma
-> in March 2025."\**
+> in March 2025."**
 >  - USDA inspection report, quoted in Panama City News Herald
 
 On a beautiful spring afternoon in 2025, families gathered at Gulf World
@@ -75,7 +78,7 @@ falls down.
 ### From Motel Pools to Marine Parks
 
 > **"Four bottlenose dolphins... were housed at a motel pool for
-> training."\**
+> training."**
 >  - Panama City News Herald, 1969
 
 **To understand how it all unraveled, you have to go back to the
@@ -96,17 +99,14 @@ Under U.S. law, animals like dolphins were considered regular property.
 were grandfathered into a legal framework that allowed them to continue
 operating to the present day.
 
-- [Marine Mammal Protection Act - Marine Mammal Commission The Marine Mammal Protection Act (MMPA) established a national policy to prevent marine mammal species and population...](https://www.mmc.gov/about-the-commission/our-mission/marine-mammal-protection-act/)
-
 ### For decades, dolphin shows were beloved by the public, lucrative for owners, and generally uncontroversial.
 
 By the 80s and 90s, Gulf World was pulling in steady crowds. It added
 sea lions, penguins, and even tropical birds. For local families, it was
 a mix of roadside attraction and civic landmark.
 
-The formula was simple ~
-
-**Dolphins as entertainment, and the park as reliable business.**
+The formula was simple: dolphins as entertainment, and the park as
+reliable business.
 
 #### **Gulf World: A Local Landmark in the Panhandle**
 
@@ -119,7 +119,7 @@ The formula was simple ~
 ### A Mexican Dolphin Dynasty Emerges
 
 > **"Since 1994, The Dolphin Company has contributed to the study and
-> conservation of marine mammals."\**
+> conservation of marine mammals."**
 >  - Company press release
 
 Meanwhile, across the Gulf of Mexico, a different vision for the dolphin
@@ -146,7 +146,7 @@ and rapid cross-border expansion.
 ### The Growth Playbook ~ Debt and Branding
 
 > **"Leisure Investments and 14 affiliates... filed for bankruptcy last
-> month, burdened by over \$200 million in debt."\**
+> month, burdened by over \$200 million in debt."**
 >  - Law360
 
 From the outside, The Dolphin Company looked ascendant.
@@ -216,8 +216,6 @@ Those words contrasted sharply with growing criticism and public outcry.
 Activists called on him personally to address the plight of [**Lolita, the orca at the Seaquarium**](https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254), while lenders in a Delaware bankruptcy court
 moved to strip him of control.
 
-- [Beloved Whale Lolita Dies Ahead of Release Back Into Natural Habitat: 'We Are Heartbroken' Lolita, the orca who has been at the Miami Seaquarium for 53 years, died from what experts believed to be "a renal...people.com](https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254)
-
 Albor embodied the entrepreneurial vision of Mexican tourism. At the
 same time, Albor was the face of a business model whose time had passed.
 
@@ -227,17 +225,15 @@ ultimately trapped between a dream and shifting cultural landscapes.**
 ### Warning Signs
 
 > **"The County... filed a lawsuit to evict The Dolphin Company... to ensure
-> the safety and wellbeing of the animals."\**
+> the safety and wellbeing of the animals."**
 >  - Miami-Dade County filing, 2024
 
 **By the mid-2010s, cracks in the business started to show.**
 
-After the 2013 documentary
-[Blackfish](https://www.rottentomatoes.com/m/blackfish_2013), marine parks around the
-world faced sharper scrutiny. The Dolphin Company didn't house killer
-whales, but the tide was shifting ~ concrete pools with performing
-animals began to seem less and less humane for a growing share of the
-public.
+After the 2013 documentary [Blackfish](https://www.rottentomatoes.com/m/blackfish_2013), marine parks around the world faced sharper scrutiny.
+The Dolphin Company didn't house killer whales, but the tide was
+shifting ~ concrete pools with performing animals began to seem less
+and less humane for a growing share of the public.
 
 #### The Blackfish Effect
 
@@ -248,11 +244,9 @@ public.
 > at parks dropped, lawmakers pushed for tighter regulation, and
 > activists found a louder voice.
 
-**The Dolphin Company never kept orcas.\
-Even so, it operated in the shadows of the cultural shift that came as a
-result of the film's overwhelming popularity.**
-
-- [Blackfish (2013) | Rotten Tomatoes Discover reviews, ratings, and trailers for Blackfish (2013) on Rotten Tomatoes. Stay updated with critic and audience...](https://www.rottentomatoes.com/m/blackfish_2013)
+**The Dolphin Company never kept orcas. Even so, it operated in the
+shadows of the cultural shift that came as a result of the film's
+overwhelming popularity.**
 
 #### This is the "[social license](https://www.sciencedirect.com/science/article/pii/S0301420725000303)" problem.
 
@@ -271,20 +265,14 @@ reduced visibility in show pools. Staffing was thin. Separately, a
 former trainer who worked there for years said conditions worsened after
 the 2015 takeover.
 
-- [PST Inspection Report Gulf World Marine Park Inc The inspection report for Gulf World Marine Park Inc on January 8, 2025, highlights multiple issues with facility...](https://www.scribd.com/document/842707541/PST-Inspection-Report-Gulf-World-Marine-Park-Inc)
-
 #### Dolphin deaths began to pile up.
 
 In [October 2024, three bottlenose dolphins died](https://www.newsherald.com/story/news/local/2024/10/28/how-did-three-dolphins-die-at-pcbs-gulf-world-marine-park/75716261007/) in quick succession ~ Gus, Turk, and Nate. Activists flew
 drones over the park, posting video of murky pools and sluggish animals.
 
-- [Gulf World Marine Park: Florida opens criminal investigation into dolphin deaths Several dolphins have reportedly died over the span of five months at a Florida marine park and aquarium, prompting...](https://www.fox35orlando.com/news/gulf-world-marine-park-florida-dolphin-deaths)
-
 Then, **Jett died during a live show in March 2025**, and it was the
 most visible and horrific death yet. The spectacle itself became
 evidence.
-
-- [Jett the Dolphin (2010-2025) | Obituary Jett passed away following an accident during a forced performance at a facility in Florida.](https://www.worldanimalprotection.us/obituaries/browse/jett-the-dolphin/)
 
 #### **Markets reacted to the news almost immediately.**
 
@@ -293,8 +281,6 @@ The Dolphin Company's listed affiliate in Jamaica,
 stakeholders began to demand information about the parent company's debt
 and exposure.
 
-- [Dolphin Cove Jamaica Dolphin Cove is the best swim with Dolphins in Jamaica tours! Come and live the experience in five significant habitats...](https://www.dolphincoveja.com/)
-
 **When the news broke about the company's U.S. bankruptcy filings, the
 narrative became clearer than, well, than the dolphin tanks at Gulf
 World.**
@@ -302,7 +288,7 @@ World.**
 ### Breaking Point ~ Dolphin Deaths + Bankruptcy
 
 > **"Today, at my direction, FDLE and FWC executed a search warrant at
-> Gulf World Marine Park."\**
+> Gulf World Marine Park."**
 >  - Florida Attorney General Ashley Moody, press release, March 2025
 
 #### The collapse came fast and hard.
@@ -340,10 +326,8 @@ dozen animals.
 
 #### Gulf World Closes for Good
 
-- [Gulf World Marine Park may be permanently closed- its website has been deleted Gulf World Marine Park has been shut down to the public since May, and now, it looks like that may a permanent...](https://www.wjhg.com/2025/07/08/gulf-world-marine-park-may-be-permanently-closed-its-website-has-been-deleted/)
-
-**Gulf World shut its gates to the public in May of 2025 after 55
-years.**
+**[Gulf World shut its gates to the public in May of 2025 after 55
+years.](https://www.wjhg.com/2025/07/08/gulf-world-marine-park-may-be-permanently-closed-its-website-has-been-deleted/)**
 
 To many onlookers, the transfers looked less like rescue and more like a
 reshuffling of pieces on an overleveraged board.
@@ -362,7 +346,7 @@ treats marine mammals in the modern day.***
 ### Bankruptcy Mechanics ~ Assets on Paper, Animals in Pools
 
 > **"This is to acknowledge the May 29, 2025 request for an emergency
-> waiver to transport 7 bottlenose dolphins."\**
+> waiver to transport 7 bottlenose dolphins."**
 >  - NOAA emergency waiver
 
 Chapter 11 gave the company breathing room to keep operating while it
@@ -388,26 +372,19 @@ Seven bottlenose dolphins were cleared for transfer to
 [***Marineland Dolphin Adventure and Dolphin Connection***](https://www.marineland.net/) in Florida. Four rough-toothed dolphins
 were later moved to [Clearwater Marine Aquarium](https://www.cmaquarium.org/) under a state order.
 
-- [Lawmakers call for emergency removal of dolphins at Gulf World Marine Park The Florida Fish and Wildlife Conservation Commission says this remains an active and ongoing criminal investigation.](https://www.wjhg.com/video/2025/05/29/lawmakers-call-emergency-removal-dolphins-gulf-world-marine-park/)
-
 The U.S. Chapter 11 filing sat beside a parallel Mexican process ~ a
 [***"quiebra"***](https://hmhlegal.com/blog/mexican-bankruptcy-guide/)
 reorganization initiated in late February 2025 grouped dozens of
 subsidiaries under court oversight. Reports described a footprint of 30
 dolphinariums across eight countries.
 
-- [The U.S. Creditor's Guide to Mexican Bankruptcy: Navigating Concurso Mercantil and Quiebra This guide helps foreign creditors understand proceedings, restrictions, vendor treatment, and contracts, and avoid...hmhlegal.com](https://hmhlegal.com/blog/mexican-bankruptcy-guide/)
-
-The paperwork and creditor updates reveal a blunt reality ~
-
-**The animals themselves appear on the balance sheet.**
-
-- [Marine Mammal Law - Dolphin Research Center earn about Marine Mammal Law Enforcement, Marine Enforcement agencies and the Marine Mammal Protection Act.dolphins.org](https://dolphins.org/marine_mammal_law?aid=2)
+The paperwork and creditor updates reveal a blunt reality: the animals
+themselves appear on the balance sheet.
 
 ### Collision Course ~ Finance Meets Ethics
 
 > **"The debtors are seeking approval of an \$8 million... DIP facility to
-> support operations."\**
+> support operations."**
 >  - Delaware bankruptcy filing
 
 The tension between animal rights activists and financial reality
@@ -467,7 +444,7 @@ capital structure, every "care" decision becomes a "value" decision.**
 ### Aftermath and Legacy
 
 > **"Seven bottlenose dolphins... received at Marineland Dolphin Adventure
-> and Dolphin Connection."\**
+> and Dolphin Connection."**
 >  - Florida Fish & Wildlife Commission statement
 
 #### Gulf World closed its gates on May 27, 2025, ending a 55-year run in Panama City Beach.
@@ -534,7 +511,7 @@ balance sheet ~ something has to give.
 ### Closing Reflection
 
 > **"State investigation under way... after four dolphins died in the past
-> six months."\**
+> six months."**
 >  - Florida Department of Agriculture & Consumer Services, 2025
 
 #### What comes next?
@@ -561,8 +538,6 @@ story.**
 
 #### Source Note
 
-This story was inspired by the work of the Florida Department of
-Business and Professional Regulation. The agency's case against Gulf
-World ended with the park losing its operating license. Investigations
-also surfaced serious concerns about veterinary oversight at the
-facility.
+This story was inspired by the work of the Florida Department of Business and Professional Regulation. The agency's case against Gulf World ended with the park losing its operating license.
+Investigations also surfaced serious concerns about veterinary oversight
+at the facility.

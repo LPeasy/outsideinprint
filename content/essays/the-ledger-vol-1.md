@@ -7,10 +7,13 @@ section_label: "Newsletter"
 subtitle: "Popes, Prime Time, and Political Games"
 featured_image: "/images/medium/the-ledger-vol-1/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe.png"
 featured_image_alt: "The Ledger, Vol. 1"
-description: "The Ledger: A Balance Sheet Joint. Over the past few months, I’ve been writing about everything from geopolitics and pop culture to church history and corpor..."
-version: "1.1"
-edition: "Second web edition"
+description: "The first Ledger newsletter collects recent Outside In Print essays on Pope Leo XIV, The Simpsons, McDonald's, HBO Max, the Supreme Court, David Attenborough, and the gold standard."
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-22"
+    note: "Updated June 22, 2026, for COA2 public-surface review: imported date residue and discovery metadata were cleaned up."
   - version: "1.1"
     date: "2026-05-17"
     note: "Updated May 17, 2026, after OIP back-archive review. Internal links, source framing, and rendering were checked."
@@ -21,8 +24,6 @@ collections:
 collection_weight: 10
 medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-1-cfe2c7d6e054"
 ---
-
-July 10th, 2025
 
 *The Ledger: A Balance Sheet Joint*
 

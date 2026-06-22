@@ -5,12 +5,15 @@ draft: false
 slug: "in-the-image-of-god"
 section_label: "Essay"
 subtitle: "An introduction to Catholic social teaching"
-description: "Most conversations about religion and society begin in the wrong places. They start with policies and parties"
+description: "An introduction to Catholic social teaching that starts with human dignity, love, community, Scripture, and the moral principles beneath public life."
 featured_image: "/images/medium/in-the-image-of-god/fa2482c598cd754263ea2463145d8e69da0af924b806be195d62df5c53684d0f.jpg"
 featured_image_alt: "In The Image of God"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-06-22"
+    note: "Updated June 22, 2026, for COA2 public-surface review: author-note residue, pseudo-heading fragments, prayer formatting, and discovery metadata were cleaned up."
   - version: "1.2"
     date: "2026-06-04"
     note: "Updated June 4, 2026, to normalize scripture blockquotes and verse citations to the current OIP scripture style."
@@ -25,7 +28,7 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/in-the-image-of-god-bd1806aee9d4"
 ---
 
-#### Author's Note
+#### Teaching Note
 
 > This essay draws from a weekly social teaching course taught by
 > Matthew, a Catholic educator and parish instructor whose ministry
@@ -39,16 +42,9 @@ medium_source_url: "https://medium.com/@lawtonperret/in-the-image-of-god-bd1806a
 > What follows is my own effort to understand, articulate, and reflect
 > on those teachings as they were presented.
 
-Most conversations about religion and society begin in the wrong places
-~
-
-They start with policies and parties
-
-or slogans.
-
-Accusations...
-
-~ and they stop listening.
+Most conversations about religion and society begin in the wrong
+places. They start with policies and parties or slogans. Accusations
+begin, and they stop listening.
 
 
 #### **The Church asks us to be radically different.**
@@ -93,23 +89,16 @@ Love is the warm embrace of your wife and children after a long day.
 
 ### Love is God.
 
-Paul said,
+Paul said it this way.
 
 > "[If I have prophetic powers, and understand all mysteries and all knowledge, and if I have all faith, so as to remove mountains, but do not have love, I am nothing.](https://www.biblegateway.com/passage/?search=1%20Corinthians%2013%3A2&version=NRSVCE)"
 > ~ 1 Corinthians 13:2, NRSV-CE
 
-The story of Jesus Christ ends in His crucifixion at the hands of
-corrupt, hypocritical political leaders. And why did they murder him?
+The story of Jesus Christ ends in His crucifixion at the hands of corrupt, hypocritical political leaders. And why did they murder him? He spoke the Truth.
 
-He spoke the Truth.
-
-The God of the Universe.
-
-He who exists in-around-through all things manifested Himself as a
-mortal man.
-
-God then proceeded to sacrifice Himself in the name of Truth and for the
-Love of his friends.
+The God of the Universe, He who exists in-around-through all things,
+manifested Himself as a mortal man and proceeded to sacrifice Himself in
+the name of Truth and for the Love of his friends.
 
 **And that is why the crucifix is at the center of our attention.**
 
@@ -164,7 +153,7 @@ It flows directly from God.
 Human beings are made in God's image, and their worth cannot be granted
 ~ or revoked ~ by governments, markets, productivity, or popularity.
 
-This is one of Catholic social teaching's most consistent claims:
+This is one of Catholic social teaching's most consistent claims.
 
 > Human dignity is inherent, not earned.
 
@@ -216,7 +205,7 @@ need when he witnesses it! Church tradition goes further and sees Christ
 himself as the Greatest Samaritan ~ lifting humanity toward restoration
 and the true path of fellowship.
 
-Matthew 25 removes any remaining ambiguity:
+Matthew 25 removes any remaining ambiguity.
 
 > "[Truly I tell you, just as you did it to one of the least of these who are members of my family, you did it to me.](https://www.biblegateway.com/passage/?search=Matthew%2025%3A40&version=NRSVCE)"
 > ~ Matthew 25:40, NRSV-CE
@@ -288,9 +277,8 @@ environment, war, migration, punishment, and political responsibility ~
 not as battlegrounds, but **opportunities to think clearly about what
 love requires.**
 
-None of these topics are distractions from faith ~
-
-> They're the practical applications of faith.
+None of these topics are distractions from faith. They're the practical
+applications of faith.
 
 ### A quiet invitation
 
@@ -311,30 +299,30 @@ series as it unfolds week by week.
 ### A closing prayer
 
 
-**Father**
-
-You created us in your image
-
-Your commandments are right and true
-
-Though night may fall and darkness surround us
-
-The sun will rise in the morning
-
-You give us courage when we are 'fraid,
-
-Lift heavy burdens from our shoulders
-
-We pray for peace and for your reign
-
-Gratitude, mercy, love, and grace.
-
-Protect the weak,
-
-Open our eyes,
-
-Show us the truth,
-
-God is alive.
-
+> **Father,**
+>
+> You created us in your image
+>
+> Your commandments are right and true
+>
+> Though night may fall and darkness surround us
+>
+> The sun will rise in the morning
+>
+> You give us courage when we are 'fraid,
+>
+> Lift heavy burdens from our shoulders
+>
+> We pray for peace and for your reign
+>
+> Gratitude, mercy, love, and grace.
+>
+> Protect the weak,
+>
+> Open our eyes,
+>
+> Show us the truth,
+>
+> God is alive.
+>
 > **Amen**.
