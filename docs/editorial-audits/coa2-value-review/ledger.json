@@ -141,8 +141,10 @@
       }
     },
     "the-dolphin-company": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-22",
+      "content_commit_sha": "5fc4058459165085035a8f0d92f1fbd531c897cc",
+      "deployed_on": "2026-06-22",
       "source_file": "content/essays/the-dolphin-company.md",
       "live_url": "https://outsideinprint.org/essays/the-dolphin-company/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md",
@@ -179,8 +181,10 @@
       }
     },
     "in-the-image-of-god": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-22",
+      "content_commit_sha": "5fc4058459165085035a8f0d92f1fbd531c897cc",
+      "deployed_on": "2026-06-22",
       "source_file": "content/essays/in-the-image-of-god.md",
       "live_url": "https://outsideinprint.org/essays/in-the-image-of-god/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md",
@@ -217,8 +221,10 @@
       }
     },
     "the-ledger-vol-1": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-22",
+      "content_commit_sha": "5fc4058459165085035a8f0d92f1fbd531c897cc",
+      "deployed_on": "2026-06-22",
       "source_file": "content/essays/the-ledger-vol-1.md",
       "live_url": "https://outsideinprint.org/essays/the-ledger-vol-1/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md",
@@ -278,7 +284,9 @@
         "in-the-image-of-god",
         "the-ledger-vol-1"
       ],
-      "status": "pending_deploy",
+      "status": "deployed",
+      "content_commit_sha": "5fc4058459165085035a8f0d92f1fbd531c897cc",
+      "deployed_on": "2026-06-22",
       "selected_on": "2026-06-22",
       "selection_policy": "value_ranked_front_surface_three_checks",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-22.md"
