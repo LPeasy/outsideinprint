@@ -1,4 +1,4 @@
-current: quiet-filing
+current: ground-truth
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -395,5 +395,13 @@ cartoons:
     image: "/images/editorial/quiet-filing.png"
     essay: "/essays/the-card-in-the-catalog/"
     alt: "Black-and-white editorial cartoon showing an oversized blank catalog card bridging a gap from a card catalog drawer to library shelves while a small magnifying-glass figure waits to cross."
+    width: 1672
+    height: 941
+  - slug: ground-truth
+    title: "Ground Truth"
+    date: "2026-06-23"
+    image: "/images/editorial/ground-truth.png"
+    essay: "/essays/the-brass-disk-in-the-sidewalk/"
+    alt: "Editorial cartoon showing a brass survey disk anchoring public maps and papers on a rain-wet courthouse sidewalk while a survey tripod stands in shallow floodwater."
     width: 1672
     height: 941
