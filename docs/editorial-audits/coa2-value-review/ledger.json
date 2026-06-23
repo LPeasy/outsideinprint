@@ -261,8 +261,10 @@
       }
     },
     "the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-23",
+      "content_commit_sha": "b8d581f1e51bf9bad0ee15b2500f3afc1c958654",
+      "deployed_on": "2026-06-23",
       "source_file": "content/essays/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.md",
       "live_url": "https://outsideinprint.org/essays/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-23.md",
@@ -299,8 +301,10 @@
       }
     },
     "whos-really-funding-terror": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-23",
+      "content_commit_sha": "b8d581f1e51bf9bad0ee15b2500f3afc1c958654",
+      "deployed_on": "2026-06-23",
       "source_file": "content/essays/whos-really-funding-terror.md",
       "live_url": "https://outsideinprint.org/essays/whos-really-funding-terror/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-23.md",
@@ -337,8 +341,10 @@
       }
     },
     "beyond-moores-law": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-23",
+      "content_commit_sha": "b8d581f1e51bf9bad0ee15b2500f3afc1c958654",
+      "deployed_on": "2026-06-23",
       "source_file": "content/essays/beyond-moores-law.md",
       "live_url": "https://outsideinprint.org/essays/beyond-moores-law/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-23.md",
@@ -417,7 +423,9 @@
         "whos-really-funding-terror",
         "beyond-moores-law"
       ],
-      "status": "pending_deploy",
+      "status": "deployed",
+      "content_commit_sha": "b8d581f1e51bf9bad0ee15b2500f3afc1c958654",
+      "deployed_on": "2026-06-23",
       "selected_on": "2026-06-23",
       "selection_policy": "value_ranked_front_surface_three_checks",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-23.md"
