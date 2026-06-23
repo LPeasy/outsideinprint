@@ -1384,6 +1384,7 @@ $requiredUxPages = @(
   'public/essays/the-text-message-in-the-archive-box/index.html',
   'public/essays/the-courthouse-that-ate-the-republic/index.html',
   'public/essays/the-card-in-the-catalog/index.html',
+  'public/essays/the-brass-disk-in-the-sidewalk/index.html',
   'public/essays/the-map-that-priced-the-fire/index.html',
   'public/essays/the-ledger-vol-1/index.html',
   'public/essays/the-ledger-vol-2/index.html',
@@ -2137,8 +2138,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-ladder-outside-the-window"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?escape-clause"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=escape-clause"?'
-    Message = 'expected the Ladder homepage card cartoon thumbnail to open the Escape Clause lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-card-in-the-catalog"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?quiet-filing"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=quiet-filing"?'
+    Message = 'expected the Card homepage card cartoon thumbnail to open the Quiet Filing lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
@@ -3299,6 +3300,7 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-courthouse-that-ate-the-republic/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Courthouse That Ate the Republic' },
   @{ Path = 'public/essays/the-examiners-red-pencil/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Examiner''s Red Pencil' },
   @{ Path = 'public/essays/the-card-in-the-catalog/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Card in the Catalog' },
+  @{ Path = 'public/essays/the-brass-disk-in-the-sidewalk/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Brass Disk in the Sidewalk' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
