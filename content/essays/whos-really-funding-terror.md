@@ -8,13 +8,16 @@ subtitle: "Inside Treasury’s 2024 Terrorist Financing Risk Assessment"
 featured_image: "/images/medium/whos-really-funding-terror/f7c9bf9f76e3c75c9b18d4e0740bbe303406e81e801c0fb82a9a60efa0128223.jpg"
 featured_image_caption: "Photo by Jp Valery on Unsplash"
 featured_image_alt: "Who’s Really Funding Terror?"
-description: "Every few years, the U.S. Treasury Department drops a long, serious PDF that almost nobody outside government reads"
-version: "1.1"
-edition: "Second web edition"
+description: "A Treasury risk assessment shows how terrorist financing risk moves through banks, charities, cash channels, crowdfunding, and crypto without reducing the problem to one simple culprit."
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, after OIP back-archive review. Treasury-source framing, house style, and legacy source residue were checked."
+  - version: "1.2"
+    date: "2026-06-23"
+    note: "Updated June 23, 2026, after COA2 value review. Cleaned imported list, pseudo-heading, source-card, lead-image, and discovery-description residue."
 pdf: "/pdfs/whos-really-funding-terror.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-really-funding-terror-c9268e4f1bb4"
@@ -31,55 +34,34 @@ This report quietly shapes what your bank flags as "suspicious," how
 charities move money overseas, and how financial privacy is balanced
 against national-security monitoring every few years.
 
+### The report does three main things
+
 ![](/images/medium/whos-really-funding-terror/e30a38e8e76db2b2db83590d4d4d2a3e74ac65c950419a48ba77545a1efadc76.png)
 
 *The 2024 **National Terrorist Financing Risk Assessment** is one of those PDFs.*
 
-#### **The report does three main things:**
-
-1.  **It says the main terrorism danger to people inside
-    the United States comes from individuals here at home**, often
-    inspired by extremist ideologies rather than directed by foreign
-    groups.
-2.  It highlights a **mix of old and new money
-    channels** ~ banks, cash, money transmitters, charities, virtual
-    assets, and crowdfunding ~ as the places **where terrorist funds are
-    most likely to flow.**
-3.  It builds everything on **a mostly qualitative view
-    of risk**: **who** is dangerous, **where** the financial system is
-    weak, and **what happens** when those two line up.
-
-> ***Keep reading if you want to learn more ~***
+It says the main terrorism danger to people inside the United States comes from individuals here at home, often inspired by extremist ideologies rather than directed by foreign groups. It highlights old and new money channels, including banks, cash, money transmitters, charities, virtual assets, and crowdfunding, as the places where terrorist funds are most likely to flow. And it builds everything on a mostly qualitative view of risk: who is dangerous, where the financial system is weak, and what happens when those two line up.
 
 ### What is this report, in plain English?
 
 ![](/images/medium/whos-really-funding-terror/aed769818c6ad078ab0aa6dedd63a7e8e0e1133393af22ffba1990fffc95dbc3.jpeg)
 
-> Source: [Financial Crime Academy](https://financialcrimeacademy.org/terrorist-financing-definition-process/)
+*Image credit: [Financial Crime Academy](https://financialcrimeacademy.org/terrorist-financing-definition-process/).*
 
-> *Treasury publishes national risk assessments on three big topics:*
-
-1.  Money laundering
-2.  Terrorist financing
-3.  Weapons Proliferation Financing
+Treasury publishes national risk assessments on three big topics: money laundering, terrorist financing, and weapons proliferation financing.
 
 **They're the government's top-level map of how dirty money moves
 through the financial system.**
 
-#### The terrorist financing risk assessment tries to answer one simple question:
+### The terrorist financing risk assessment tries to answer one simple question
 
 > ***Who is raising and moving money for terrorism in or through the
 > United States, where are the weak spots, and which combinations are
 > most troubling?***
 
-#### The 2024 report answers that question by looking at three things.
+### The 2024 report answers that question by looking at three things
 
-1.  **Threats** ~ which groups and individuals are
-    active or inspiring others.
-2.  **Vulnerabilities** ~ where the financial system is
-    easiest to abuse.
-3.  **Consequences** ~ what happens when that mix goes
-    wrong: attacks, recruitment, propaganda, and so on.
+The assessment separates threats, which groups and individuals are active or inspiring others; vulnerabilities, where the financial system is easiest to abuse; and consequences, what happens when that mix goes wrong through attacks, recruitment, propaganda, and related harms.
 
 ![](/images/medium/whos-really-funding-terror/f4cb36205f595996bccdedb28b5d2e346791195a73cb9f3e5aae2cafc01c1c96.jpeg)
 
@@ -97,7 +79,7 @@ Treasury's risk logic is pretty straightforward.
 
 ![](/images/medium/whos-really-funding-terror/465e7841f50fdda34b6dd8510c859c65fabd45ea929e6c23b5fee1df00af3452.jpeg)
 
-> Source: [Naval Postgraduate School Center for Homeland Defense and Security](https://www.chds.us/coursefiles/CS3660/modules/CS3660_Web_Tutorial_Risk_Methods_and_Models/media/rtvc.gif)
+*Image credit: [Naval Postgraduate School Center for Homeland Defense and Security](https://www.chds.us/coursefiles/CS3660/modules/CS3660_Web_Tutorial_Risk_Methods_and_Models/media/rtvc.gif).*
 
 **The report asks:**
 
@@ -110,26 +92,26 @@ Treasury's risk logic is pretty straightforward.
 In formal terms, risk is treated as a mix of **threat**,
 **vulnerability**, and **consequence**:
 
-> Threats ~ terrorists, supporters, or networks that try to raise, move,
+> Threats are terrorists, supporters, or networks that try to raise, move,
 > or store money in or through the U.S. financial system.
 
-> **Vulnerabilities** ~ gaps in laws, controls, or business models that
+> **Vulnerabilities** are gaps in laws, controls, or business models that
 > make that easier.
 
-> **Consequences** ~ the harm that follows if they succeed.
+> **Consequences** are the harm that follows if they succeed.
 
 Treasury defines the problem, describes possible harms, talks about
 patterns and likelihood in broad terms, and pulls it all into a unified
 picture that decision makers can use.
 
 Treasury punts on any kind of quantitative analysis or specific
-estimation of risk ~
+estimation of risk.
 
 > You won't find probabilities, dollar-value loss estimates, or neat
 > scorecards ranking every threat from 1 to 10.
 
 What you get instead is a **structured judgment**: a narrative that
-compares threats and sectors in relative terms ~ higher concern, lower
+compares threats and sectors in relative terms: higher concern, lower
 concern, growing concern.
 
 *For something as political and emotionally loaded as terrorism, that
@@ -144,8 +126,8 @@ The report is pretty direct on one point: **the primary terrorism threat
 to the U.S. homeland comes from individuals inside the country**, often
 radicalized online or through social networks.
 
-Domestic violent extremists ~ especially racially or ethnically
-motivated violent extremists ~ are described as posing the most
+Domestic violent extremists, especially racially or ethnically
+motivated violent extremists, are described as posing the most
 consistent threat of both lethal and non-lethal violence.
 
 Foreign terrorist organizations remain on the radar. The assessment
@@ -161,12 +143,12 @@ charities, front companies, and state support.
 of this whole discussion.
 
 Treasury treats that episode as a case study in what can happen when a
-group is allowed to build a complex financial operation over time ~
-***and the danger is misread.***
+group is allowed to build a complex financial operation over time and
+the danger is misread.
 
-- [Treasury Disrupts Sham Overseas Charity Networks Funding Hamas and the PFLP](https://home.treasury.gov/news/press-releases/sb0162)
+Treasury later described one related enforcement action in its release on [sham overseas charity networks funding Hamas and the PFLP](https://home.treasury.gov/news/press-releases/sb0162).
 
-#### **One uncomfortable truth runs through the report ~**
+### One uncomfortable truth runs through the report
 
 > **Terrorist attacks often do not cost very much money.**
 
@@ -182,12 +164,12 @@ relatively modest funding.
 
 ![](/images/medium/whos-really-funding-terror/1fedb88b6998323c07b9ab8abd717044fdc0e65f678106ab72a0fddf23ba005f.jpeg)
 
-> Source: [Entrepreneur](https://www.entrepreneur.com/money-finance/five-low-cost-tools-for-fast-cash-transfers/222792)
+*Image credit: [Entrepreneur](https://www.entrepreneur.com/money-finance/five-low-cost-tools-for-fast-cash-transfers/222792).*
 
 For people in finance, compliance, and the non-profit world, the most
 concrete part of the report is the discussion of **channels.**
 
-> ***Channels ~ the places where terrorist funds are most likely to show
+> ***Channels are the places where terrorist funds are most likely to show
 > up.***
 
 #### Banks and money services
@@ -211,11 +193,11 @@ Non-profits are always a sensitive topic in this space. They send money
 into fragile regions where terrorist groups also operate. They also
 provide real relief and social services to people in extreme need.
 
-***Treasury tries to walk a careful line ~***
+***Treasury tries to walk a careful line.***
 
 The report stresses that **most U.S. charities have little exposure to
-terrorist financing**, while acknowledging that **a small subset** ~
-especially some international charities and outright sham groups ~ **can
+terrorist financing**, while acknowledging that **a small subset**,
+especially some international charities and outright sham groups, **can
 be misused.** Treasury's framing keeps the focus on specific risk
 patterns instead of treating the whole sector as suspicious by default.
 
@@ -224,12 +206,7 @@ patterns instead of treating the whole sector as suspicious by default.
 Compared with earlier editions, the 2024 assessment spends more time on
 **virtual assets and crowdfunding**.
 
-Terrorist groups and their supporters have experimented with:
-
-- Public crypto donation drives
-- Mixers and other privacy tools
-- Online crowdfunding campaigns pitched as humanitarian
-  or political causes
+Terrorist groups and their supporters have experimented with public crypto donation drives, mixers and other privacy tools, and online crowdfunding campaigns pitched as humanitarian or political causes.
 
 Treasury does not claim that crypto is now the main way terrorists get
 money. Banks, cash, and money transmitters remain dominant, but the
@@ -244,21 +221,15 @@ exposure.**
 
 Read strictly as a risk assessment, the 2024 report gets a lot right.
 
-#### Strengths
+### Strengths
 
-- It is clear about its purpose and how it fits with
-  other national reports on illegal finance. Terrorist financing is
-  presented as one piece of a broader picture, not a stand-alone
-  obsession.
-- It uses a consistent way of organizing the problem ~
-  threats, vulnerabilities, consequences ~ and sticks with that
-  structure from start to finish.
-- It connects directly to real decisions: where to focus
-  investigations, which sectors deserve closer supervision, and how to
-  shape national priorities for anti-money-laundering and
-  counter-terrorist-financing work.
+It is clear about its purpose and how it fits with other national reports on illegal finance. Terrorist financing is presented as one piece of a broader picture, not a stand-alone obsession.
 
-#### Gaps
+It uses a consistent way of organizing the problem, threats, vulnerabilities, and consequences, and sticks with that structure from start to finish.
+
+It connects directly to real decisions: where to focus investigations, which sectors deserve closer supervision, and how to shape national priorities for anti-money-laundering and counter-terrorist-financing work.
+
+### Gaps
 
 **First, the guiding question is broad.**
 
@@ -310,22 +281,15 @@ tension you live inside every time a wire transfer gets held up for
 
 If you work in **policy**, the NTFRA is one more proof point that the
 United States has fully leaned into a risk-based approach to financial
-crime. The goal is not to eliminate all terrorist financing ~ that's not
-realistic ~ but to understand where the danger is concentrated and push
+crime. The goal is not to eliminate all terrorist financing. That is not
+realistic. The goal is to understand where the danger is concentrated and push
 scarce resources in that direction.
 
 So if I had to give the **2024 Terrorist Financing Risk Assessment** a
 grade, I'd call it an **A**.
 
 Not because it answers every question or settles every argument, but
-because it offers a clear, structured story about:
-
-- Who Treasury sees as today's main terrorist
-  threats
-- How those actors are trying to raise and move
-  money
-- Where the U.S. financial system is most exposed, and
-  where new cracks may be forming
+because it offers a clear, structured story about who Treasury sees as today's main terrorist threats, how those actors are trying to raise and move money, where the U.S. financial system is most exposed, and where new cracks may be forming.
 
 > For a 100-plus-page government PDF that most people will never open,
 > that's a lot of information hiding in plain sight.

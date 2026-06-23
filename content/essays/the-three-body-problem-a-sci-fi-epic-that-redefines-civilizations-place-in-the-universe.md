@@ -10,9 +10,9 @@ subtitle: "Should you read this viral book? (Yes)"
 featured_image: "/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/16bb88fabf093eb157a47057f24b82ff13ee51dc67c7f5d89157c67bf668bb25.jpeg"
 featured_image_caption: "Photo by Greg Rakozy on Unsplash"
 featured_image_alt: "The Three-Body Problem: A Sci-Fi Epic That Redefines Civilization’s Place in the Universe"
-description: "A review of Liu Cixin's The Three-Body Problem, focused on science, civilization, survival, and why the novel's ideas still matter after its Netflix adaptation."
-version: "1.1"
-edition: "Second web edition"
+description: "A review of Liu Cixin's The Three-Body Problem, focused on science, civilization, survival, and why the novel's ideas endure after its Netflix adaptation."
+version: "1.2"
+edition: "Third web edition"
 pdf: "/pdfs/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe-8292352732cc"
@@ -20,6 +20,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-07"
     note: "Updated May 7, 2026, after OIP back-archive review. Remote Medium residue, formatting artifacts, source-sensitive claims, and editorial-philosophy evidence were checked."
+  - version: "1.2"
+    date: "2026-06-23"
+    note: "Updated June 23, 2026, after COA2 value review. Cleaned verdict-list residue, house-style description language, and public discovery evidence."
 ---
 
 Should you read this viral book?
@@ -106,15 +109,11 @@ For those who love big ideas in sci-fi, this book is essential reading.
 
 **Who will love this book?**
 
-- Fans of hard science fiction and deep philosophical questions.
-- Readers who enjoy slow-burning mysteries and grand ideas.
-- Anyone who wants a science-fiction novel that truly challenges them.
+Readers most likely to love it are fans of hard science fiction, slow-burning mysteries, deep philosophical questions, and science-fiction novels that actually challenge them.
 
 **Who might struggle with it?**
 
-- Readers who prefer fast-paced, action-driven stories.
-- Readers who need deeply personal, emotional character arcs.
-- Anyone put off by heavy scientific explanation.
+It may be harder for readers who prefer fast-paced action, need deeply personal emotional arcs, or are put off by heavy scientific explanation.
 
 ## Final Thoughts: A Sci-Fi Masterpiece or a Thought Experiment?
 
