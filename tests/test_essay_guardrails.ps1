@@ -47,12 +47,15 @@ try {
   $workingPaperRoot = Join-Path $tempRoot "content/working-papers"
   $sydRoot = Join-Path $tempRoot "content/syd-and-oliver"
   $refinementRoot = Join-Path $tempRoot "docs/editorial-audits/99-refinement"
+  $coa2Root = Join-Path $tempRoot "docs/editorial-audits/coa2-value-review"
+  $coa2ReportRoot = Join-Path $coa2Root "reports"
   New-Item -Path $scriptRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $essayRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $reportRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $workingPaperRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $sydRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $refinementRoot -ItemType Directory -Force | Out-Null
+  New-Item -Path $coa2ReportRoot -ItemType Directory -Force | Out-Null
 
   Copy-Item (Join-Path $repoRoot "scripts/audit_legacy_essays.ps1") $scriptRoot
   Copy-Item (Join-Path $repoRoot "scripts/check_essay_guardrails.ps1") $scriptRoot
@@ -473,6 +476,67 @@ Institutional Behavior: PASS
   $cleanRequirePhilosophyExit = $LASTEXITCODE
   Assert-True ($cleanRequirePhilosophyExit -eq 0) "Expected RequireEditorialPhilosophyAudit to pass with valid OIP-99 report evidence."
   Assert-True ($cleanRequirePhilosophyOutput.Contains("Essay guardrails PASSED.")) "Expected philosophy audit clean output to report success."
+
+  @'
+---
+title: "COA2 Evidence"
+date: 2025-07-14
+draft: false
+slug: "coa2-evidence"
+section_label: "Essay"
+description: "A clean COA2 evidence fixture."
+version: "1.1"
+edition: "Second web edition"
+featured_image: "/images/social/outside-in-print-default.png"
+featured: false
+---
+
+This essay paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "coa2-evidence.md") -Encoding UTF8
+
+  @'
+{
+  "workflow": "oip-coa2-value-review",
+  "completed": {
+    "coa2-evidence": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-23",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-23.md",
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "COA2 evidence fixture."
+      }
+    }
+  }
+}
+'@ | Set-Content -Path (Join-Path $coa2Root "ledger.json") -Encoding UTF8
+
+  @'
+# COA2 Value Review Report: 2026-06-23
+
+## coa2-evidence
+
+- Editorial philosophy: PASS
+- Evidence: PASS
+- Logic: PASS
+- Incentives: PASS
+- Tradeoffs: PASS
+- Consequences: PASS
+- Uncertainty: PASS
+- Institutional behavior: PASS
+'@ | Set-Content -Path (Join-Path $coa2ReportRoot "2026-06-23.md") -Encoding UTF8
+
+  $coa2RequirePhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/coa2-evidence.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $coa2RequirePhilosophyExit = $LASTEXITCODE
+  Assert-True ($coa2RequirePhilosophyExit -eq 0) "Expected RequireEditorialPhilosophyAudit to pass with compact COA2 ledger evidence."
+  Assert-True ($coa2RequirePhilosophyOutput.Contains("Essay guardrails PASSED.")) "Expected compact COA2 evidence output to report success."
 
   @'
 ---

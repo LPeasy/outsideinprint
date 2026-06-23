@@ -103,7 +103,7 @@ For publication-ready essays, reports, and working papers, require Editorial Phi
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit
 ```
 
-Use the same flag with `content\reports\<slug>.md` or `content\working-papers\<slug>.md` for those sections. Accepted evidence is either a per-piece OIP-99 report under `docs/editorial-audits/99-refinement/` or a daily backfill ledger/report entry for the slug. The audit must show `Decision: PASS` and PASS rows for Evidence, Logic, Incentives, Tradeoffs, Consequences, Uncertainty, and Institutional Behavior.
+Use the same flag with `content\reports\<slug>.md` or `content\working-papers\<slug>.md` for those sections. Accepted evidence is a per-piece OIP-99 report under `docs/editorial-audits/99-refinement/`, a daily backfill ledger/report entry for the slug, or a compact COA2 ledger/report entry under `docs/editorial-audits/coa2-value-review/` for COA2 review work. Per-piece reports must show `Decision: PASS` and PASS rows for Evidence, Logic, Incentives, Tradeoffs, Consequences, Uncertainty, and Institutional Behavior. Ledger-backed evidence must include an `editorial_philosophy` PASS object and a matching report with the same PASS rows.
 
 During drafting, preview locally with:
 

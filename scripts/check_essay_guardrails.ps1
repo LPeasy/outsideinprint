@@ -307,25 +307,14 @@ function Test-LedgerEditorialPhilosophyEntry {
   return $true
 }
 
-function Test-EditorialPhilosophyAuditEvidence {
+function Test-LedgerEditorialPhilosophyEvidence {
   param(
     [string]$RepoRoot,
-    [string]$Slug
+    [string]$Slug,
+    [string]$LedgerRelativePath
   )
 
-  if ([string]::IsNullOrWhiteSpace($Slug)) {
-    return $false
-  }
-
-  $refinementReport = Join-Path $RepoRoot "docs\editorial-audits\99-refinement\$Slug-99-refinement-report.md"
-  if (Test-Path -LiteralPath $refinementReport -PathType Leaf) {
-    $reportText = [System.IO.File]::ReadAllText($refinementReport, [System.Text.Encoding]::UTF8)
-    if (Test-EditorialPhilosophyAuditText -Text $reportText) {
-      return $true
-    }
-  }
-
-  $ledgerPath = Join-Path $RepoRoot 'docs\editorial-audits\daily-backfill\ledger.json'
+  $ledgerPath = Join-Path $RepoRoot $LedgerRelativePath
   if (-not (Test-Path -LiteralPath $ledgerPath -PathType Leaf)) {
     return $false
   }
@@ -346,6 +335,36 @@ function Test-EditorialPhilosophyAuditEvidence {
   }
 
   return (Test-LedgerEditorialPhilosophyEntry -Entry $entryProperty.Value -RepoRoot $RepoRoot)
+}
+
+function Test-EditorialPhilosophyAuditEvidence {
+  param(
+    [string]$RepoRoot,
+    [string]$Slug
+  )
+
+  if ([string]::IsNullOrWhiteSpace($Slug)) {
+    return $false
+  }
+
+  $refinementReport = Join-Path $RepoRoot "docs\editorial-audits\99-refinement\$Slug-99-refinement-report.md"
+  if (Test-Path -LiteralPath $refinementReport -PathType Leaf) {
+    $reportText = [System.IO.File]::ReadAllText($refinementReport, [System.Text.Encoding]::UTF8)
+    if (Test-EditorialPhilosophyAuditText -Text $reportText) {
+      return $true
+    }
+  }
+
+  foreach ($ledgerRelativePath in @(
+    'docs\editorial-audits\daily-backfill\ledger.json',
+    'docs\editorial-audits\coa2-value-review\ledger.json'
+  )) {
+    if (Test-LedgerEditorialPhilosophyEvidence -RepoRoot $RepoRoot -Slug $Slug -LedgerRelativePath $ledgerRelativePath) {
+      return $true
+    }
+  }
+
+  return $false
 }
 
 function Get-AdverbialStillConstructionHits {

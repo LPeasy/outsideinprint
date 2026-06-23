@@ -64,7 +64,7 @@ Do not change `date` for ordinary revisions. The date remains the original publi
 4. Update `version`, `edition`, and any required `revision_history` entry in the same edit as the content change.
 5. Preserve stable fields unless deliberately changed: `slug`, `date`, `collections`, canonical image paths, and public URLs.
 6. For copy revisions, run the OIP voice pass and the current AI-writing-tells cleanup before validation.
-7. Create or update accepted Editorial Philosophy Audit evidence: either a per-piece OIP-99 report under `docs/editorial-audits/99-refinement/` or a daily backfill ledger/report entry for the slug.
+7. Create or update accepted Editorial Philosophy Audit evidence: a per-piece OIP-99 report under `docs/editorial-audits/99-refinement/`, a daily backfill ledger/report entry for the slug, or a compact COA2 ledger/report entry under `docs/editorial-audits/coa2-value-review/` for COA2 review work.
 8. Build locally and inspect the rendered archive block on the changed page.
 9. Verify the archive block shows the original `Date`, the new `Version`, and the new `Edition`.
 10. Run the local publish gate used for content changes, including `check_essay_guardrails.ps1 -RequireEditorialPhilosophyAudit` for changed essays, reports, and working papers. Do not run local npm or npx checks for OIP revision work.
