@@ -7,13 +7,16 @@ section_label: "Essay"
 subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
 featured_image: "/images/medium/whos-responsible-for-building-in-the-floodplain/921f46f4d09c0c7ddcc7a9ad8642115e20fea0355d83ec02b6a06e1d9fe8f1ed.jpeg"
 featured_image_alt: "Who’s Responsible for Building in the Floodplain?"
-description: "The United States just doesn’t work like that. This essay looks at what the federal government can (and can’t) do to prevent tragedies like this one. We exam..."
-version: "1.1"
-edition: "Second web edition"
+description: "A Camp Mystic essay on shared floodplain responsibility, local zoning, FEMA flood maps, federal flood insurance, alert protocols, and the limits of simple federal blame."
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed Medium import residue, normalized internal links, corrected minor wording, and narrowed floodplain-responsibility claims to match the available institutional record."
+  - version: "1.2"
+    date: "2026-06-24"
+    note: "Updated June 24, 2026, after COA2 review for public metadata cleanup and reader-visible list and heading residue."
 pdf: "/pdfs/whos-responsible-for-building-in-the-floodplain.pdf"
 featured: false
 
@@ -90,9 +93,7 @@ zones.
 > [Essay #3](/essays/flash-flood-alley-why-flash-floods-kill/) includes
 > the flood-risk context for Camp Mystic.
 
-If that's true, then
-
-> why were cabins in the floodway?
+That leaves the hard question: why were cabins in the floodway?
 
 Some were built decades ago and were likely grandfathered in.
 
@@ -108,12 +109,8 @@ The federal government does not have the authority to restrict
 construction on private and state-owned property.
 
 There are numerous examples of obviously risky places where people
-choose to live:
-
-- Any barrier island along the Intracoastal Waterway
-  (hurricanes, coastal inundation)
-- The cliffs of California (fires, earthquakes)
-- Tornado Alley (you guessed it)
+choose to live: barrier islands along the Intracoastal Waterway, the
+cliffs of California, and Tornado Alley.
 
 The federal government can offer or withhold funding and support for key
 programs to influence localities.
@@ -121,17 +118,13 @@ programs to influence localities.
 Federal flood insurance is often mandated by lenders for properties
 located in high-risk flood zones (if the property is financed).
 
-That being said,
-
-> Zoning law is determined by local governments, period.
+That being said, zoning law is determined by local governments, period.
 
 **Local governments** **approve building plans.**
 
 **They sign off** on emergency preparedness plans.
 
-They inspect the buildings, they dot the i's,
-
-> and they cross the t's.
+They inspect the buildings, dot the i's, and cross the t's.
 
 > ***All FEMA can do is communicate the risk.***
 
@@ -151,10 +144,9 @@ then its residents become **eligible for coverage.**
 
 > Subsidized flood insurance for minimum flood risk reduction measures.
 
-Those minimum standards are often based on outdated assumptions ~
-
-**Like the idea of a "100-year flood," which assumes historical patterns
-will hold true.**
+Those minimum standards are often based on outdated assumptions, including
+the idea of a "100-year flood," which assumes historical patterns will
+hold true.
 
 #### Wait ~ what's a "100-year flood"?
 
@@ -274,32 +266,25 @@ construction,
 
 **The federal government?**
 
-- Issued the warnings,
-- Mapped the floodplain,
-- Funded the insurance program,
-- Administered the map and insurance framework.
+It issued the warnings, mapped the floodplain, funded the insurance
+program, and administered the map and insurance framework.
 
 **The county?**
 
-- Knew the area was hazardous,
-- Controlled local review and alert activation,
-- Had tools to require better planning or
-  elevation,
-- Did not move alerts quickly enough.
+It knew the area was hazardous, controlled local review and alert
+activation, had tools to require better planning or elevation, and did
+not move alerts quickly enough.
 
 **The camp?**
 
-- Operated facilities in high-risk areas,
-- Had emergency planning gaps now subject to scrutiny,
-- Faced power, communication, and evacuation limits as water rose.
+It operated facilities in high-risk areas, had emergency planning gaps
+now subject to scrutiny, and faced power, communication, and evacuation
+limits as water rose.
 
 **The parents?**
 
-- Entrusted their children to the camp,
-- Assumed it was safe,
-- May not have known it was in a designated
- floodway,
-- And may not have asked.
+They entrusted their children to the camp, assumed it was safe, may not
+have known it was in a designated floodway, and may not have asked.
 
 ### The truth is:
 
@@ -321,9 +306,7 @@ And **they are often told**
 
 **They trust the system.**
 
-And this time,
-
-> The system let them down.
+And this time, the system let them down.
 
 > [In Essay #1](/essays/what-happened-at-camp-mystic/), we covered what
 > happened that night.

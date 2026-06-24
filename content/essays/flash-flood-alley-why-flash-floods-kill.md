@@ -8,13 +8,16 @@ subtitle: "Texas Hill Country and the Limits of Early Warning"
 featured_image: "/images/medium/flash-flood-alley-why-flash-floods-kill/bc148062f555057b86125c97330c9157489ac6f13f06b0b6b48845e80c9c9701.png"
 featured_image_caption: "Flash Flood Alley | Source: Austin Chronicle"
 featured_image_alt: "Flash Flood Alley"
-description: "Tourists come for the picturesque rivers and limestone cliffs. The region’s steep slopes and limestone bedrock make it one of the fastest-draining flood envi..."
-version: "1.1"
-edition: "Second web edition"
+description: "A Texas Hill Country flood-risk essay on steep terrain, fast runoff, warning systems, Camp Mystic, and why flash floods can turn warning time into minutes."
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed Medium import residue, normalized punctuation and internal links, narrowed source-framed flood-warning claims, and checked rendering."
+  - version: "1.2"
+    date: "2026-06-24"
+    note: "Updated June 24, 2026, after COA2 review for public metadata cleanup and reader-visible list and heading residue."
 pdf: "/pdfs/flash-flood-alley-why-flash-floods-kill.pdf"
 featured: false
 
@@ -101,10 +104,9 @@ human lives at risk ~
 > Most people think of floods as slow ~ a creeping up, inching higher,
 > day by day until the river is fit to burst.
 
-Maybe they think of a coastal flood ~
-
-**Hurricane driven storm surge** pushed in by winds with **plenty of
-advance notice** and ample opportunity to evacuate.
+They may picture a coastal flood, with **hurricane driven storm surge**
+pushed in by winds with **plenty of advance notice** and ample
+opportunity to evacuate.
 
 #### Flash floods aren't like that.
 
@@ -317,8 +319,8 @@ It's about **how fast** it hits, how **the terrain** moves it, **and**
  routes in total darkness.
 - **Rehearse flood evacuation drills** like you would
  fire drills.
-- Push for **better alerts, faster protocols, and backup
- plans** that don't require power or cell service.
+Also push for **better alerts, faster protocols, and backup plans** that
+don't require power or cell service.
 
 > Because next time, the warnings might come late ~
 
@@ -329,14 +331,10 @@ It's about **how fast** it hits, how **the terrain** moves it, **and**
 #### **What's Coming in the Next Piece**
 
 In the next article, I'll zoom in on the site-level decisions that
-shaped this tragedy:
-
-- How **cabins** ended up **in a mapped
- floodway**
-- A full analysis of the **communication breakdown
- between NWS and Camp Mystic**
-- The **responsibilities of** (and relationship between)
- **the federal and local governments**
+shaped this tragedy: how **cabins** ended up **in a mapped floodway**,
+a full analysis of the **communication breakdown between NWS and Camp
+Mystic**, and the **responsibilities of** (and relationship between)
+**the federal and local governments**.
 
 **This wasn't the first deadly Hill Country flood.**
 

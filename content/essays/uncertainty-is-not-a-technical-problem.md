@@ -8,13 +8,16 @@ subtitle: "Why Risk Models Reward Confidence Over Truth"
 featured_image: "/images/medium/uncertainty-is-not-a-technical-problem/452fe328a00b3c6e1f69d11abb31908d90e0fe9f7ced69dc66c3a45b36a29515.jpeg"
 featured_image_caption: "Photo by Loic Leray on Unsplash"
 featured_image_alt: "Uncertainty Is Not a Technical Problem"
-description: "On uncertainty, risk modeling, and the incentives that reward precision over responsibility. We expect risk models to tell us what will happen.\ When they do..."
-version: "1.1"
-edition: "Second web edition"
+description: "On uncertainty, risk modeling, and the incentives that reward precision over responsibility. Risk models can clarify choices, but they can also hide judgment when institutions treat precision as truth."
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
+  - version: "1.2"
+    date: "2026-06-24"
+    note: "Updated June 24, 2026, after COA2 review for public metadata cleanup and reader-visible import residue."
 pdf: "/pdfs/uncertainty-is-not-a-technical-problem.pdf"
 featured: false
 
@@ -127,9 +130,7 @@ It creates the appearance of control. It signals seriousness.
 
 It offers moral cover.
 
-But when reality diverges ~ and it always does ~
-
-that cover dissolves.
+But when reality diverges, as it always does, that cover dissolves.
 
 ### Why Better Data Doesn't Always Improve Decisions
 
@@ -182,9 +183,7 @@ It was translational.
 
 ### A Better Way to Think About Risk and Uncertainty
 
-Instead of asking whether an estimate is right, a better question is ~
-
-What are you not-so-sure about?
+Instead of asking whether an estimate is right, ask what it is not-so-sure about.
 
 Is the uncertainty reducible with more information, or does it reflect
 real variability in the world? Does refining the estimate change
@@ -194,9 +193,7 @@ What uncertainty has been suppressed to make the answer sound better?
 
 What are you not telling me?
 
-Analysis cannot eliminate judgment ~ but it can inform it ~
-
-if we are honest about the uncertainty.
+Analysis cannot eliminate judgment, but it can inform it if we are honest about the uncertainty.
 
 ### What Risk Models Are Asked to Hide
 
@@ -215,7 +212,7 @@ Until we confront that, we will keep demanding certainty where it cannot
 exist ~ and losing trust when God laughs at our scribble, lines in the
 sand.
 
-### Author's Note
+### Source Note
 
 This essay draws on concepts from decision and risk analysis,
 particularly the distinction between **knowledge uncertainty**
