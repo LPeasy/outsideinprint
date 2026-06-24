@@ -381,8 +381,10 @@
       }
     },
     "uncertainty-is-not-a-technical-problem": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-24",
+      "content_commit_sha": "d6da1161b8e04e27668343490267a4498ddf3d6e",
+      "deployed_on": "2026-06-24",
       "source_file": "content/essays/uncertainty-is-not-a-technical-problem.md",
       "live_url": "https://outsideinprint.org/essays/uncertainty-is-not-a-technical-problem/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-24.md",
@@ -419,8 +421,10 @@
       }
     },
     "whos-responsible-for-building-in-the-floodplain": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-24",
+      "content_commit_sha": "d6da1161b8e04e27668343490267a4498ddf3d6e",
+      "deployed_on": "2026-06-24",
       "source_file": "content/essays/whos-responsible-for-building-in-the-floodplain.md",
       "live_url": "https://outsideinprint.org/essays/whos-responsible-for-building-in-the-floodplain/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-24.md",
@@ -457,8 +461,10 @@
       }
     },
     "flash-flood-alley-why-flash-floods-kill": {
-      "status": "pending_deploy",
+      "status": "deployed",
       "batch_id": "2026-06-24",
+      "content_commit_sha": "d6da1161b8e04e27668343490267a4498ddf3d6e",
+      "deployed_on": "2026-06-24",
       "source_file": "content/essays/flash-flood-alley-why-flash-floods-kill.md",
       "live_url": "https://outsideinprint.org/essays/flash-flood-alley-why-flash-floods-kill/",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-24.md",
@@ -556,7 +562,9 @@
         "whos-responsible-for-building-in-the-floodplain",
         "flash-flood-alley-why-flash-floods-kill"
       ],
-      "status": "pending_deploy",
+      "status": "deployed",
+      "content_commit_sha": "d6da1161b8e04e27668343490267a4498ddf3d6e",
+      "deployed_on": "2026-06-24",
       "selected_on": "2026-06-24",
       "selection_policy": "value_ranked_front_surface_three_checks",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-24.md"
