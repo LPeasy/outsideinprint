@@ -1,4 +1,4 @@
-current: ground-truth
+current: break-seal
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -403,5 +403,13 @@ cartoons:
     image: "/images/editorial/ground-truth.png"
     essay: "/essays/the-brass-disk-in-the-sidewalk/"
     alt: "Editorial cartoon showing a brass survey disk anchoring public maps and papers on a rain-wet courthouse sidewalk while a survey tripod stands in shallow floodwater."
+    width: 1672
+    height: 941
+  - slug: break-seal
+    title: "Break Seal"
+    date: "2026-06-24"
+    image: "/images/editorial/break-seal.png"
+    essay: "/essays/the-seal-around-the-cap/"
+    alt: "Editorial cartoon showing a giant medicine-bottle cap as a checkpoint gate on a crosshatched pharmacy shelf, with a shopper pulling a red torn tamper-evident strip."
     width: 1672
     height: 941
