@@ -2613,6 +2613,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/random/index.html'
+    Pattern = '(?s)random-route.*?lpeasy\.github\.io.*?/outsideinprint.*?https://outsideinprint\.org.*?window\.location\.hostname===\w+.*?window\.location\.replace\(\w+\+\w+\+window\.location\.search\+window\.location\.hash\).*?Math\.floor'
+    Message = 'expected the random route script to preserve legacy-host canonical redirects before selecting a random piece'
+  },
+  @{
+    Path = 'public/random/index.html'
     Pattern = '(?s)"/library/".*?if\(!\w+\.length\)\{window\.location\.replace\(\w+\);return\}.*?Math\.floor\(Math\.random\(\)\*\w+\.length\).*?window\.location\.replace\(\w+\)'
     Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
   },

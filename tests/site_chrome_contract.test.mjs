@@ -131,6 +131,11 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(randomTemplate, /"label" "Home"/);
   assert.match(randomTemplate, /class="item random-route__status"/);
   assert.match(randomTemplate, /Finding a piece from the archive\.\.\./);
+  assert.match(randomTemplate, /legacyHost = "lpeasy\.github\.io"/);
+  assert.match(randomTemplate, /legacyPrefix = "\/outsideinprint"/);
+  assert.match(randomTemplate, /canonicalHost = "https:\/\/outsideinprint\.org"/);
+  assert.match(randomTemplate, /window\.location\.hostname === legacyHost/);
+  assert.match(randomTemplate, /window\.location\.replace\(canonicalHost \+ canonicalPath \+ window\.location\.search \+ window\.location\.hash\)/);
   assert.match(randomTemplate, /window\.location\.replace\(randomUrl\)/);
   assert.match(randomTemplate, /window\.location\.replace\(fallback\)/);
   assert.match(randomTemplate, /\.RelPermalink/);
