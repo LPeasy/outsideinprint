@@ -2598,8 +2598,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = 'Feeling curious\? Choose one of three live routes into the archive\.'
-    Message = 'expected the random route to frame archive exploration with the reader-facing choice label'
+    Pattern = 'Feeling curious\? Let the archive choose the next piece\.'
+    Message = 'expected the random route to frame archive exploration with the reader-facing exploratory label'
   },
   @{
     Path = 'public/random/index.html'
@@ -2608,13 +2608,19 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = 'Three pieces from the archive'
-    Message = 'expected the random route to present a framed archive-choice status instead of a bare redirect stub'
+    Pattern = 'Finding a piece from the archive\.\.\.'
+    Message = 'expected the random route to present a framed archive-selection status before redirecting'
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = '(?s)data-random-route-choices.*?data-random-route-refresh.*?data-analytics-source-slot"\s*,\s*"random_choice"'
-    Message = 'expected the random route to render tracked choice cards with a redraw control'
+    Pattern = '(?s)"/library/".*?if\(!\w+\.length\)\{window\.location\.replace\(\w+\);return\}.*?Math\.floor\(Math\.random\(\)\*\w+\.length\).*?window\.location\.replace\(\w+\)'
+    Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = 'data-random-route-choices|data-random-route-refresh|random_choice|Draw again|Three pieces from the archive'
+    Message = 'expected the random route not to render the retired three-choice redraw UI'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/library/index.html'
