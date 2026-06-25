@@ -9,9 +9,12 @@ featured_image: "/images/medium/make-fighter-jets-great-again-introducing-the-f-
 featured_image_caption: "Image source: Collins Aerospace. The F-47 name refers to Trump's status as the 47th president."
 featured_image_alt: "Make Fighter Jets Great Again: Introducing the F-47"
 description: "The F-47 announcement mixed Trump-era branding with a serious Air Force modernization decision: Boeing's sixth-generation fighter for the NGAD program."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-06-25"
+    note: "Updated June 25, 2026, after COA2 value review to normalize imported list residue and remove house-style hits."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, author-promo residue, spacing, and source-sensitive defense claims were cleaned while preserving the original publication frame."
@@ -36,7 +39,7 @@ The F-47 is intended to replace the F-22 Raptor as the Air Force's premier air-s
 
 The broad promise is familiar: longer range, stealthier design, stronger sensors, advanced data links, and the ability to work with uncrewed aircraft. The details remain limited because the program is classified in important places.
 
-Boeing won the Engineering and Manufacturing Development contract, beating Lockheed Martin for the lead role. That matters because Boeing has not delivered a clean-sheet fighter of this kind since the McDonnell Douglas merger era.
+Boeing won the Engineering and Manufacturing Development contract, beating Lockheed Martin for the lead role. That detail gives Boeing a rare test because the company has not delivered a clean-sheet fighter of this kind since the McDonnell Douglas merger era.
 
 The contract gives Boeing a rare opportunity and a heavy burden. If it performs, the company regains prestige in a market where Lockheed's F-35 has dominated attention. If it stumbles, the Air Force loses time it may not have.
 
@@ -46,13 +49,7 @@ Trump described the aircraft in sweeping terms, including claims about speed, ma
 
 The more defensible claim is narrower: the Air Force wants an aircraft that can survive in contested airspace, coordinate with other systems, and operate at ranges that matter in the Pacific.
 
-That points to several likely priorities:
-
-- Lower detectability across radar and infrared signatures
-- Greater range than current tactical fighters
-- Advanced sensors and data fusion
-- Integration with Collaborative Combat Aircraft and other uncrewed systems
-- Modular systems that can be upgraded as threats change
+That points to several likely priorities: lower detectability across radar and infrared signatures, greater range than current tactical fighters, advanced sensors and data fusion, integration with Collaborative Combat Aircraft and other uncrewed systems, and modular systems that can be upgraded as threats change.
 
 The cockpit is not just a cockpit in this model. It is a command node.
 
@@ -72,7 +69,7 @@ The technology may expand options. It does not remove judgment.
 
 The F-47 is a message to China, Russia, allies, Congress, contractors, and the Air Force itself.
 
-China has been testing advanced fighter concepts. Russia has struggled to scale its own fifth-generation fleet but remains a nuclear-armed military power. U.S. allies watch American procurement decisions because their own planning depends on whether the United States can still project power credibly.
+China has been testing advanced fighter concepts. Russia has struggled to scale its own fifth-generation fleet but remains a nuclear-armed military power. U.S. allies watch American procurement decisions because their own planning depends on whether the United States can project power credibly.
 
 A sixth-generation fighter is therefore not just a weapon. It is an institutional bet on future air superiority.
 
@@ -98,7 +95,7 @@ The F-47 name makes the announcement feel like campaign merch. That reaction is 
 
 But the deeper issue is not branding. It is whether the procurement system can deliver a real capability on a timeline that matches the threat environment.
 
-There is a serious aircraft behind the political theater. There are also serious risks: cost growth, schedule delay, software complexity, industrial bottlenecks, and the temptation to oversell what is still being developed.
+There is a serious aircraft behind the political theater. There are also serious risks: cost growth, schedule delay, software complexity, industrial bottlenecks, and the temptation to oversell a program that remains under development.
 
 The right posture is neither blind hype nor reflexive cynicism.
 

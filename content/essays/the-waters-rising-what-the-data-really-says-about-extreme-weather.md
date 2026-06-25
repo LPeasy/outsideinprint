@@ -5,10 +5,16 @@ draft: false
 slug: "the-waters-rising-what-the-data-really-says-about-extreme-weather"
 section_label: "Essay"
 subtitle: "“The weather’s never been like this!”"
-description: "It feels like you hear this after every flood , fire, or storm lately. From Houston to Vermont, from wildfires in Canada to flash floods in Texas, something..."
-version: "1.2"
-edition: "Third web edition"
+description: "Extreme weather data does not say every storm is unprecedented. It says heavy rain, heat, fire, and exposure are shifting the disaster baseline."
+featured_image: "/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/c2a267b5b3d5f35aa89438b20e80fbc086194a0ea302b9fbc1978d2a5783b3b8.png"
+featured_image_alt: "Chart showing U.S. extreme one-day precipitation events from 1910 to 2023."
+featured_image_caption: "EPA climate indicator chart on U.S. extreme one-day precipitation events."
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-06-25"
+    note: "Updated June 25, 2026, after COA2 value review to remove Medium residue, normalize fake-list blocks, and complete discovery metadata."
   - version: "1.2"
     date: "2026-06-21"
     note: "Updated June 21, 2026, to restore localized imported image assets and add body-image alt text."
@@ -45,29 +51,24 @@ Texas, **something about the weather seems off.**
 > **Heavy precipitation events are becoming more frequent and more
 > intense, and exposure turns them into disasters.**
 
-### A Brief Aside ~
+### Source Note
 
-#### Continue Reading Below
-
-> ***This is the second piece in a series on the Camp Mystic flood and
-> the rising threat of extreme weather in the United States.***
+This is the second piece in a series on the Camp Mystic flood and the
+rising threat of extreme weather in the United States.
 
 I work as a **life safety consequences specialist with the U.S. Army
 Corps of Engineers**, where I analyze the human impacts of flood, storm,
 and infrastructure failure scenarios.
 
-**My job is to understand how and where people die in disasters ~ and
+**My job is to understand how and where people die in disasters, and
 what we can do to prevent it.**
 
 > **Disclaimer:** The views expressed in this article are my own and do
 > not represent the official position of the U.S. Army Corps of
 > Engineers or the federal government.
 
-#### **If you missed the first piece, you can read it here:**
-
-> [*What Happened at Camp Mystic? A Primer on the July 4 Texas Flood*](/essays/what-happened-at-camp-mystic/)
-
-- [What Happened at Camp Mystic?](/essays/what-happened-at-camp-mystic/)
+If you missed the first piece, read [*What Happened at Camp Mystic? A
+Primer on the July 4 Texas Flood*](/essays/what-happened-at-camp-mystic/).
 
 #### So, is the weather actually getting worse over time? Well…
 
@@ -81,7 +82,7 @@ what we can do to prevent it.**
 
 Some years bring dozens of disasters. And some years… nothing.
 
-That randomness is why **short time windows can be misleading** ~ like
+That randomness is why **short time windows can be misleading**, like
 trying to understand the stock market by watching a single trading day.
 
 > But zoom out, and a different picture emerges.
@@ -89,20 +90,20 @@ trying to understand the stock market by watching a single trading day.
 Climate scientists say
 [the "signal" of human-caused warming](https://www.sciencedaily.com/releases/2012/11/121129143504.htm)
 has now emerged from the "noise" of natural variation. **Over the last
-30 to 40 years,** we've entered a new statistical climate ~
+30 to 40 years,** we've entered a new statistical climate,
 one where **the odds have changed.**
 
-Think of it like this:
+Think of it like this.
 
 > **We may not be getting more storms in every category.**
 
 > **Just more storms that we consider disasters.**
 
-Or if you're a stats guy:
+Or if you're a stats guy.
 
 > **The curve hasn't shifted much.**
 
-> **But the tail got fatter ~**
+> **But the tail got fatter,**
 
 > **and that's where the damage lives.**
 
@@ -110,7 +111,7 @@ Or if you're a stats guy:
 
 > ***Most national climate trend data starts around 1980.***
 
-**That's not arbitrary** ~ it's when we began getting consistent
+**That's not arbitrary**. It is when we began getting consistent
 satellite coverage, Doppler radar, and standardized instrumentation
 across the country. But it does mean **we're working with a limited
 window.**
@@ -138,39 +139,39 @@ planning problem is immediate.**
 
 ### **The Extremes Are Escalating**
 
-> **Here's what the U.S. data shows:**
+The U.S. data shows the pattern.
 
 ![Chart showing U.S. extreme one-day precipitation events from 1910 to 2023.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/c2a267b5b3d5f35aa89438b20e80fbc086194a0ea302b9fbc1978d2a5783b3b8.png)
 
-- **Nine of the ten wettest years on record have** [**happened since 1995.**](https://www.epa.gov/climate-indicators/climate-change-indicators-heavy-precipitation)
-- **The share of the country hit by very heavy daily
-  rainfall has** [**grown about 0.5% per decade**](https://www.epa.gov/climate-indicators/climate-change-indicators-us-and-global-precipitation) **since 1910.**\
-  *That's a slow rise, but a relentless one ~ and most of the increase
-  has come since 1980.*
-- [**More rain now falls in short bursts**](https://www.noaa.gov/stories/ask-scientist-extreme-rainfall-why-it-happens-and-how-we-predict-it), not daylong showers. That means more flash floods
-  and runoff.
-- [**Heatwaves are longer,**](https://newsroom.ucla.edu/releases/duration-of-heat-waves-accelerating-faster-than-global-warming) **hotter, and cover more ground.**\
-  Cold extremes are becoming less common, while record highs are
-  becoming the norm.
-- **The strongest hurricanes are becoming more consequential.**\
-  There may not be more storms overall, [but the strongest storms ~ Category 3 and above ~ are increasing,](https://www.pnj.com/story/weather/hurricanes/2025/03/21/hurricanes-not-more-frequent-stronger/82572283007/) along with rainfall and wind
-  speeds.
+**Nine of the ten wettest years on record have** [**happened since
+1995.**](https://www.epa.gov/climate-indicators/climate-change-indicators-heavy-precipitation)
+**The share of the country hit by very heavy daily rainfall has**
+[**grown about 0.5% per decade**](https://www.epa.gov/climate-indicators/climate-change-indicators-us-and-global-precipitation)
+**since 1910.** That is a slow rise, but a relentless one, and most of
+the increase has come since 1980.
+
+[**More rain now falls in short bursts**](https://www.noaa.gov/stories/ask-scientist-extreme-rainfall-why-it-happens-and-how-we-predict-it),
+not daylong showers. That means more flash floods and runoff.
+[**Heatwaves are longer,**](https://newsroom.ucla.edu/releases/duration-of-heat-waves-accelerating-faster-than-global-warming)
+**hotter, and cover more ground.** Cold extremes are becoming less
+common, while record highs are becoming the norm. There may not be more
+storms overall, [but the strongest storms, Category 3 and above, are
+increasing](https://www.pnj.com/story/weather/hurricanes/2025/03/21/hurricanes-not-more-frequent-stronger/82572283007/),
+along with rainfall and wind speeds.
 
 ### **Texas Is Flash Flood Ground Zero**
 
-> **Texas has always been wild *~*** *floods in spring, droughts in
+> **Texas has always been wild:** *floods in spring, droughts in
 > summer, and sideways hail whenever it feels like it.*
 
 [But the past few decades have reshaped the state's rainfall](https://texas2036.org/texas-will-face-more-extreme-weather/) profile in dramatic ways.
 
 ![Texas map showing overall precipitation trend by county from 1895 to 2023.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/7863b3485e935a7f8cb3f364d6544043e09216155fb8b65df8ed98ff0ccf01cc.png)
 
-- **Central and Eastern Texas now average ~10% more
-  annual rainfall** than a century ago.
-- **Several of the wettest months in state history**
-  occurred just in the last 20 years.
-- **More rain falls in intense downpours**, separated by
-  longer dry spells.
+**Central and Eastern Texas now average about 10% more annual rainfall**
+than a century ago. Several of the wettest months in state history
+occurred just in the last 20 years. More rain falls in intense
+downpours, separated by longer dry spells.
 
 This pattern is especially dangerous in **regions like the Hill
 Country,** where steep slopes, rocky soil, and fast-moving tributaries
@@ -178,11 +179,11 @@ funnel rainwater straight into rivers.
 
 ![Map of Texas marking the Hill Country between Austin and San Antonio.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/aa6bc55283851e2bc0c7f83b7193a82a14817b40d3941917d9cee426d589447c.png)
 
-**The 2025 Guadalupe River flood wasn't just intense ~**
+**The 2025 Guadalupe River flood wasn't just intense.**
 
 **It was one of the most violent floods in over a century of records.**
 
-### **What's Getting Worse ~ and What's Just Noise?**
+### **What's Getting Worse, and What's Just Noise?**
 
 > **Not every type of extreme event is on the rise.**
 
@@ -199,8 +200,8 @@ funnel rainwater straight into rivers.
 While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weather-prediction-uncertainty)
 **surrounds all types of extreme weather events,**
 
-> Several of the hazards doing the most damage ~ floods, fires, and heat
-> ~ are moving in the same direction.
+> Several of the hazards doing the most damage, floods, fires, and heat,
+> are moving in the same direction.
 
 **The big takeaway:**
 
@@ -223,10 +224,9 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 
 > The flood wiped out power, snapped gauges, and obliterated cabins.
 
-[**Texas State Climatologist John Nielsen-Gammon**](https://texas2036.org/texas-will-face-more-extreme-weather/) **projects that by 2036, Texas could see:**
-
-- **6 to 10% higher rainfall intensity**
-- **30 to 50% more frequent extreme rain events**
+[**Texas State Climatologist John Nielsen-Gammon**](https://texas2036.org/texas-will-face-more-extreme-weather/)
+**projects that by 2036, Texas could see 6 to 10% higher rainfall
+intensity and 30 to 50% more frequent extreme rain events.**
 
 ### **A New Baseline for Risk**
 
@@ -235,13 +235,15 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 
 It means **the old numbers won't hold up.**
 
-- **Flood maps based on historical records** [may now understate true risk.](https://www.cbsnews.com/news/fema-maps-flash-flood-risks-homeowners-unprepared/)
-- **Stormwater systems built for 20th-century weather**
-  may be [overwhelmed by 21st-century rain](https://ascelibrary.org/doi/10.1061/JSWBAY.SWENG-533).
-- **People living in floodways or fire zones** may be [rolling a higher-stakes dice](https://finance.yahoo.com/news/thousands-more-people-moving-fire-100000195.html) than
-  they realize.
+**Flood maps based on historical records** [may now understate true
+risk.](https://www.cbsnews.com/news/fema-maps-flash-flood-risks-homeowners-unprepared/)
+**Stormwater systems built for 20th-century weather** may be
+[overwhelmed by 21st-century rain](https://ascelibrary.org/doi/10.1061/JSWBAY.SWENG-533).
+**People living in floodways or fire zones** may be [rolling
+higher-stakes dice](https://finance.yahoo.com/news/thousands-more-people-moving-fire-100000195.html)
+than they realize.
 
-> **Some Camp Mystic cabins sat inside a mapped regulatory floodway ~
+> **Some Camp Mystic cabins sat inside a mapped regulatory floodway,
 > and the paperwork did not remove the physical risk.**
 
 **Permits were granted.**
@@ -263,14 +265,9 @@ past.**
 
 ### **What's Next**
 
-> ***In the next piece, I'll break down the Camp Mystic flood in
-> detail:***
-
-- Why the **warnings failed**
-- How buildings ended up in a **known danger
-  zone**
-- What a **risk-informed approach** would've done
-  differently
+> ***In the next piece, I'll break down why the warnings failed, how
+> buildings ended up in a known danger zone, and what a risk-informed
+> approach would've done differently.***
 
 ***Because what happened at Camp Mystic could happen again,***
 

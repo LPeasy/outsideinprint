@@ -499,6 +499,120 @@
         "institutional_behavior": "PASS",
         "note": "The revised essay keeps terrain, warning-time mechanism, emergency incentives, preparedness tradeoffs, consequences, uncertainty, and institutional risk allocation visible."
       }
+    },
+    "the-waters-rising-what-the-data-really-says-about-extreme-weather": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-25",
+      "source_file": "content/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md",
+      "live_url": "https://outsideinprint.org/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-25.md",
+      "reviewed_on": "2026-06-25",
+      "updated_on": "2026-06-25",
+      "version_before": "1.2",
+      "version_after": "1.3",
+      "previous_version": "1.2",
+      "new_version": "1.3",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Removed Medium continuation residue, duplicate link residue, tilde artifacts, fake-list blocks, and pseudo-heading setup lines while preserving the public voice."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "EPA, NOAA, Texas 2036, USGS, and public-reporting source roles remain explicit; the revision narrows presentation cleanup without changing the historical weather-risk frame."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "Replaced the truncated discovery description and added stable featured-image metadata from an existing localized chart while preserving title, date, slug, collection, and URL."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay keeps the evidence-bound extreme-weather mechanism, exposure incentives, planning tradeoffs, consequences, uncertainty, and institutional risk allocation visible without partisan framing."
+      }
+    },
+    "make-fighter-jets-great-again-introducing-the-f-47": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-25",
+      "source_file": "content/essays/make-fighter-jets-great-again-introducing-the-f-47.md",
+      "live_url": "https://outsideinprint.org/essays/make-fighter-jets-great-again-introducing-the-f-47/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-25.md",
+      "reviewed_on": "2026-06-25",
+      "updated_on": "2026-06-25",
+      "version_before": "1.1",
+      "version_after": "1.2",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Converted the selected fake-list capability block into prose and removed selected house-style hits."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "The procurement frame remains tied to the Air Force program, Boeing selection, classified limits, industrial capacity, cost, schedule, and production risk without adding unsupported claims."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "Existing title, description, hero image, image caption, collection, slug, date, and URL-critical front matter are preserved."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay keeps the defense-industrial mechanism, strategic incentives, cost and procurement tradeoffs, downstream capability risk, classified uncertainty, and institutional behavior visible without partisan capture."
+      }
+    },
+    "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk": {
+      "status": "pending_deploy",
+      "batch_id": "2026-06-25",
+      "source_file": "content/essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md",
+      "live_url": "https://outsideinprint.org/essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk/",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-25.md",
+      "reviewed_on": "2026-06-25",
+      "updated_on": "2026-06-25",
+      "version_before": "1.1",
+      "version_after": "1.2",
+      "previous_version": "1.1",
+      "new_version": "1.2",
+      "checks": {
+        "reader_visible_residue": {
+          "status": "PASS",
+          "evidence": "Converted source-attribution bullet residue, fake-list policy blocks, and pseudo-heading setup lines into normal prose."
+        },
+        "source_framing_integrity": {
+          "status": "PASS",
+          "evidence": "DOE, Treasury, Goldman Sachs, RSM, and campaign-policy source roles remain labeled by role; the revision preserves the historical energy-security frame without adopting partisan claims as proof."
+        },
+        "discovery_rendering_integrity": {
+          "status": "PASS",
+          "evidence": "Replaced the truncated discovery description while preserving title, subtitle, date, hero image, caption, collection, slug, and URL."
+        }
+      },
+      "editorial_philosophy": {
+        "status": "PASS",
+        "evidence": "PASS",
+        "logic": "PASS",
+        "incentives": "PASS",
+        "tradeoffs": "PASS",
+        "consequences": "PASS",
+        "uncertainty": "PASS",
+        "institutional_behavior": "PASS",
+        "note": "The revised essay keeps the evidence-bound reserve mechanism, price and security incentives, replenishment tradeoffs, crisis consequences, uncertainty, and institutional behavior visible without treating either party frame as settled truth."
+      }
     }
   },
   "blocked": {},
@@ -568,6 +682,23 @@
       "selected_on": "2026-06-24",
       "selection_policy": "value_ranked_front_surface_three_checks",
       "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-24.md"
+    },
+    {
+      "batch_id": "2026-06-25",
+      "selected": [
+        "the-waters-rising-what-the-data-really-says-about-extreme-weather",
+        "make-fighter-jets-great-again-introducing-the-f-47",
+        "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk"
+      ],
+      "selected_slugs": [
+        "the-waters-rising-what-the-data-really-says-about-extreme-weather",
+        "make-fighter-jets-great-again-introducing-the-f-47",
+        "bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk"
+      ],
+      "status": "pending_deploy",
+      "selected_on": "2026-06-25",
+      "selection_policy": "value_ranked_front_surface_three_checks",
+      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-25.md"
     }
   ]
 }
