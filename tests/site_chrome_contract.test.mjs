@@ -124,17 +124,19 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
 
   assert.match(randomTemplate, /class="page-header page-shell page-shell--wide"/);
-  assert.match(randomTemplate, /Feeling curious\? Choose one of three live routes into the archive\./);
+  assert.match(randomTemplate, /Feeling curious\? Let the archive choose the next piece\./);
   assert.match(randomTemplate, /partial "journey_links\.html"/);
   assert.match(randomTemplate, /"label" "Library"/);
   assert.match(randomTemplate, /"label" "Collections"/);
   assert.match(randomTemplate, /"label" "Home"/);
   assert.match(randomTemplate, /class="item random-route__status"/);
-  assert.match(randomTemplate, /Three pieces from the archive/);
-  assert.match(randomTemplate, /data-random-route-choices/);
-  assert.match(randomTemplate, /data-random-route-refresh/);
-  assert.match(randomTemplate, /data-analytics-source-slot", "random_choice"/);
-  assert.doesNotMatch(randomTemplate, /window\.location\.replace/);
+  assert.match(randomTemplate, /Finding a piece from the archive\.\.\./);
+  assert.match(randomTemplate, /window\.location\.replace\(randomUrl\)/);
+  assert.match(randomTemplate, /window\.location\.replace\(fallback\)/);
+  assert.match(randomTemplate, /\.RelPermalink/);
+  assert.doesNotMatch(randomTemplate, /data-random-route-choices/);
+  assert.doesNotMatch(randomTemplate, /data-random-route-refresh/);
+  assert.doesNotMatch(randomTemplate, /data-analytics-source-slot", "random_choice"/);
   assert.match(randomTemplate, /Open the Library/);
 });
 
