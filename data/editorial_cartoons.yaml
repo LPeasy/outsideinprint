@@ -1,4 +1,4 @@
-current: break-seal
+current: the-cone-in-the-lane
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -411,5 +411,13 @@ cartoons:
     image: "/images/editorial/break-seal.png"
     essay: "/essays/the-seal-around-the-cap/"
     alt: "Editorial cartoon showing a giant medicine-bottle cap as a checkpoint gate on a crosshatched pharmacy shelf, with a shopper pulling a red torn tamper-evident strip."
+    width: 1672
+    height: 941
+  - slug: the-cone-in-the-lane
+    title: "The Cone in the Lane"
+    date: "2026-06-25"
+    image: "/images/editorial/the-cone-in-the-lane.png"
+    essay: "/essays/the-cone-in-the-lane/"
+    alt: "Editorial cartoon showing an oversized orange traffic cone in a dark crosshatched road work zone, with smaller cones guiding a lane around a repair truck and patched pavement."
     width: 1672
     height: 941
