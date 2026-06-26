@@ -165,7 +165,7 @@ foreach ($file in $essayFiles) {
     if ([System.IO.Path]::GetExtension($staticPath) -ieq '.svg') {
       $svgContent = [System.IO.File]::ReadAllText($staticPath, [System.Text.Encoding]::UTF8)
       if ($svgContent -match '(?i)Imported image placeholder|Localized placeholder|runtime dependency on Medium CDN') {
-        $imageWarnings.Add([pscustomobject]@{
+        $issues.Add([pscustomobject]@{
           Type = 'placeholder_svg'
           Path = $relativePath
           Detail = $imageRef
