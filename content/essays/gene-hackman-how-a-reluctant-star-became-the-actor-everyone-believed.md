@@ -1,4 +1,7 @@
 ---
+featured_image: "/images/essays/gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed/hero.png"
+featured_image_alt: "Abstract archival portrait-style hero image for Gene Hackman: How a Reluctant Star Became the Actor Everyone Believed."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 title: "Gene Hackman: How a Reluctant Star Became the Actor Everyone Believed"
 date: 2026-03-31
 draft: false

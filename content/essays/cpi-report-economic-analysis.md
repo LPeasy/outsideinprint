@@ -14,6 +14,9 @@ revision_history:
     note: "Updated April 27, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
 pdf: "/pdfs/cpi-report-economic-analysis.pdf"
 featured: false
+featured_image: "/images/essays/cpi-report-economic-analysis/hero.png"
+featured_image_alt: "Abstract editorial hero image for CPI Report Economic Analysis."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/cpi-report-economic-analysis-745a9397f5be"
 ---
 

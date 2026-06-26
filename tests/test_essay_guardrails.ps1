@@ -451,6 +451,32 @@ This paragraph is fine.
   Assert-True ($cleanRequireFeaturedImageExit -eq 0) "Expected essays with featured_image to satisfy RequireFeaturedImage."
   Assert-True ($cleanRequireFeaturedImageOutput.Contains("Essay guardrails PASSED.")) "Expected RequireFeaturedImage clean output to report success."
 
+  @'
+---
+title: "Image Exempt Essay"
+date: 2025-07-14
+draft: false
+slug: "image-exempt-essay"
+section_label: "Essay"
+subtitle: ""
+description: "A fixture with an explicit image exemption."
+image_exempt: true
+image_exempt_reason: "Text-only archival notice."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "image-exempt.md") -Encoding UTF8
+
+  $exemptRequireFeaturedImageOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/image-exempt.md" -RequireFeaturedImage 2>&1 | Out-String
+  $exemptRequireFeaturedImageExit = $LASTEXITCODE
+  Assert-True ($exemptRequireFeaturedImageExit -eq 0) "Expected an explicit image exemption with reason to satisfy RequireFeaturedImage."
+  Assert-True ($exemptRequireFeaturedImageOutput.Contains("Essay guardrails PASSED.")) "Expected image exemption output to report success."
+
   $cleanMissingPhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $cleanMissingPhilosophyExit = $LASTEXITCODE
   Assert-True ($cleanMissingPhilosophyExit -eq 1) "Expected RequireEditorialPhilosophyAudit to fail without audit evidence."
@@ -738,9 +764,44 @@ The warning came in â€œlate.â€
   $taxonomyOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $taxonomyBase -HeadRef $taxonomyHead -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $taxonomyOnlyExit = $LASTEXITCODE
   Assert-True ($taxonomyOnlyExit -eq 0) "Expected taxonomy-only collection metadata diffs to skip legacy cleanup and philosophy audit gates."
-  Assert-True ($taxonomyOnlyOutput.Contains("taxonomy-only front matter change")) "Expected taxonomy-only guardrail output to report the explicit skip."
+  Assert-True ($taxonomyOnlyOutput.Contains("taxonomy/image-only front matter change")) "Expected taxonomy-only guardrail output to report the explicit skip."
   Assert-True (-not $taxonomyOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected taxonomy-only guardrail output not to require philosophy audit evidence."
   Assert-True (-not $taxonomyOnlyOutput.Contains("Legacy import preflight summary")) "Expected taxonomy-only guardrail output not to scan legacy body residue."
+
+  @'
+---
+title: "Legacy Taxonomy Only"
+date: 2025-07-14
+draft: false
+slug: "legacy-taxonomy-only"
+section_label: "Essay"
+subtitle: ""
+description: "A legacy essay fixture with old body residue."
+featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
+featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
+featured_image_caption: "Replacement hero image for the legacy web edition."
+version: "1.0"
+edition: "First web edition"
+featured: false
+collections:
+  - geopolitics-trade-global-power
+---
+
+The warning came in â€œlate.â€
+
+![](https://cdn-images-1.medium.com/max/800/placeholder)
+'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
+
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add image metadata" | Out-Null
+  $imageMetadataHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  $imageMetadataOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $taxonomyHead -HeadRef $imageMetadataHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $imageMetadataOnlyExit = $LASTEXITCODE
+  Assert-True ($imageMetadataOnlyExit -eq 0) "Expected image-only metadata diffs to skip legacy cleanup and philosophy audit gates."
+  Assert-True ($imageMetadataOnlyOutput.Contains("taxonomy/image-only front matter change")) "Expected image-only metadata guardrail output to report the explicit skip."
+  Assert-True (-not $imageMetadataOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected image-only metadata guardrail output not to require philosophy audit evidence."
+  Assert-True (-not $imageMetadataOnlyOutput.Contains("Legacy import preflight summary")) "Expected image-only metadata guardrail output not to scan legacy body residue."
 }
 finally {
   if (Test-Path $tempRoot) {

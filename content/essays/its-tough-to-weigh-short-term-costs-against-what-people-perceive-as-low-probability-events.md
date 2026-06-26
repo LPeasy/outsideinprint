@@ -14,7 +14,9 @@ revision_history:
     note: "Updated May 18, 2026, after OIP back-archive review. Removed Medium source-dump formatting, normalized prose, narrowed claims about local emergency-management capacity, and checked rendering."
 pdf: "/pdfs/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.pdf"
 featured: false
-
+featured_image: "/images/essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events/hero.png"
+featured_image_alt: "Abstract editorial hero image for It’s tough to weigh short term costs against what people perceive as low probability events.."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 collections:
   - risk-uncertainty
 collection_weight: 30

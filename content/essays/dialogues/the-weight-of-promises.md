@@ -3,6 +3,8 @@ title: 'The Weight of Promises'
 date: 2026-02-13T17:00:54Z
 url: '/syd-and-oliver/the-weight-of-promises/'
 draft: false
+image_exempt: true
+image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
 version: '1.0'

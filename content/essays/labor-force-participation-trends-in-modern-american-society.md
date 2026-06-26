@@ -14,6 +14,9 @@ revision_history:
     note: "Updated April 27, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
 pdf: "/pdfs/labor-force-participation-trends-in-modern-american-society.pdf"
 featured: false
+featured_image: "/images/essays/labor-force-participation-trends-in-modern-american-society/hero.png"
+featured_image_alt: "Abstract editorial hero image for Labor Force Participation Trends in Modern American Society."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/labor-force-participation-trends-in-modern-american-society-4ec72f06c1ec"
 ---
 

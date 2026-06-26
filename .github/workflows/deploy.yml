@@ -38,6 +38,11 @@ jobs:
         run: |
           ./tests/test_essay_guardrails.ps1
 
+      - name: Test Essay Image Audit
+        shell: pwsh
+        run: |
+          ./tests/test_essay_image_audit.ps1
+
       - name: Test Schema Template Contract
         shell: pwsh
         run: |
@@ -77,6 +82,11 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_legacy_render_contract.ps1
+
+      - name: Audit Essay Images
+        shell: pwsh
+        run: |
+          ./scripts/audit_essay_images.ps1 -FailOnIssues
 
       - name: Check Essay Guardrails
         shell: pwsh

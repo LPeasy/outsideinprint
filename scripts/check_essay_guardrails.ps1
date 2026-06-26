@@ -94,6 +94,26 @@ function Test-FrontMatterHasSocialImage {
   return [regex]::IsMatch($frontMatter, '(?mi)^(images|image|featured_image)\s*:')
 }
 
+function Test-FrontMatterHasImageExemption {
+  param([string]$Path)
+
+  $frontMatter = Get-FrontMatterMap -Path $Path
+  if (-not $frontMatter.ContainsKey('image_exempt')) {
+    return $false
+  }
+
+  $exemptValue = ([string]$frontMatter['image_exempt']).Trim()
+  if ($exemptValue -notmatch '^(?i:true|yes|1)$') {
+    return $false
+  }
+
+  if (-not $frontMatter.ContainsKey('image_exempt_reason')) {
+    return $false
+  }
+
+  return -not [string]::IsNullOrWhiteSpace([string]$frontMatter['image_exempt_reason'])
+}
+
 function Get-FrontMatterMap {
   param([string]$Path)
 
@@ -568,7 +588,7 @@ function Normalize-GuardrailText {
   return (($Text -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd()
 }
 
-function Remove-TaxonomyFrontMatterFields {
+function Remove-GuardrailExemptFrontMatterFields {
   param([string]$Text)
 
   if ($null -eq $Text) {
@@ -590,6 +610,15 @@ function Remove-TaxonomyFrontMatterFields {
   foreach ($key in @(
     'collections',
     'collection_weight',
+    'featured_image',
+    'featured_image_alt',
+    'featured_image_caption',
+    'image',
+    'image_alt',
+    'image_caption',
+    'image_exempt',
+    'image_exempt_reason',
+    'images',
     'series',
     'tags',
     'topics'
@@ -612,6 +641,10 @@ function Remove-TaxonomyFrontMatterFields {
 
       $skipAllowedBlock = $false
       $keptLines.Add($line)
+      continue
+    }
+
+    if ([string]::IsNullOrWhiteSpace($line)) {
       continue
     }
 
@@ -659,7 +692,7 @@ function Get-GitBlobText {
   return (($blobLines -join "`n") + "`n")
 }
 
-function Test-IsTaxonomyOnlyDiff {
+function Test-IsGuardrailExemptMetadataOnlyDiff {
   param(
     [string]$RepoRoot,
     [string]$PathValue,
@@ -682,8 +715,8 @@ function Test-IsTaxonomyOnlyDiff {
     return $false
   }
 
-  $beforeComparable = Normalize-GuardrailText -Text (Remove-TaxonomyFrontMatterFields -Text $beforeText)
-  $afterComparable = Normalize-GuardrailText -Text (Remove-TaxonomyFrontMatterFields -Text $afterText)
+  $beforeComparable = Normalize-GuardrailText -Text (Remove-GuardrailExemptFrontMatterFields -Text $beforeText)
+  $afterComparable = Normalize-GuardrailText -Text (Remove-GuardrailExemptFrontMatterFields -Text $afterText)
   return ($beforeComparable -eq $afterComparable)
 }
 
@@ -865,7 +898,7 @@ $targetPaths = Resolve-TargetEssayPaths `
 
 $targetPaths = @(Expand-EssayPaths -EssayPaths $targetPaths)
 
-$taxonomyOnlyPaths = New-Object System.Collections.Generic.List[string]
+$metadataOnlyPaths = New-Object System.Collections.Generic.List[string]
 if (
   (-not $AllEssays) -and
   (-not ($Paths -and $Paths.Count -gt 0)) -and
@@ -875,8 +908,8 @@ if (
 ) {
   $filteredTargets = New-Object System.Collections.Generic.List[string]
   foreach ($targetPath in $targetPaths) {
-    if (Test-IsTaxonomyOnlyDiff -RepoRoot $Root -PathValue $targetPath -FromRef $BaseRef -ToRef $HeadRef) {
-      $taxonomyOnlyPaths.Add((Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath))
+    if (Test-IsGuardrailExemptMetadataOnlyDiff -RepoRoot $Root -PathValue $targetPath -FromRef $BaseRef -ToRef $HeadRef) {
+      $metadataOnlyPaths.Add((Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath))
       continue
     }
 
@@ -886,10 +919,10 @@ if (
   $targetPaths = $filteredTargets.ToArray()
 }
 
-if ($taxonomyOnlyPaths.Count -gt 0) {
-  Write-Host ("Essay guardrails: skipped {0} taxonomy-only front matter change(s)." -f $taxonomyOnlyPaths.Count) -ForegroundColor Yellow
-  foreach ($taxonomyPath in $taxonomyOnlyPaths) {
-    Write-Host "  - $taxonomyPath" -ForegroundColor Yellow
+if ($metadataOnlyPaths.Count -gt 0) {
+  Write-Host ("Essay guardrails: skipped {0} taxonomy/image-only front matter change(s)." -f $metadataOnlyPaths.Count) -ForegroundColor Yellow
+  foreach ($metadataPath in $metadataOnlyPaths) {
+    Write-Host "  - $metadataPath" -ForegroundColor Yellow
   }
 }
 
@@ -962,7 +995,7 @@ foreach ($row in $rows) {
 
   if ($RequireFeaturedImage -and (-not [bool]$row.draft)) {
     $fullPath = Get-NormalizedRepoPath -RepoRoot $Root -PathValue ([string]$row.path)
-    if ($fullPath -and -not (Test-FrontMatterHasSocialImage -Path $fullPath)) {
+    if ($fullPath -and -not (Test-FrontMatterHasSocialImage -Path $fullPath) -and -not (Test-FrontMatterHasImageExemption -Path $fullPath)) {
       $rowBlockers += 'missing_featured_image'
     }
   }

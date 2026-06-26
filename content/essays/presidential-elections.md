@@ -14,6 +14,9 @@ revision_history:
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
 pdf: "/pdfs/presidential-elections.pdf"
 featured: false
+featured_image: "/images/essays/presidential-elections/hero.png"
+featured_image_alt: "Abstract editorial hero image for Presidential Elections."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/presidential-elections-bd1cc0d054f8"
 ---
 
