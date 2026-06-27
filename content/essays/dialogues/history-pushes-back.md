@@ -3,6 +3,8 @@ title: 'History Pushes Back'
 date: 2026-02-12T17:00:11Z
 url: '/syd-and-oliver/history-pushes-back/'
 draft: false
+image_exempt: true
+image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
 version: '1.0'

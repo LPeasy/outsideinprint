@@ -1,4 +1,7 @@
 ---
+featured_image: "/images/essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero.png"
+featured_image_alt: "Abstract archival portrait-style hero image for Pope Francis: How a Plainspoken Pope Reframed Moral Authority."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 title: "Pope Francis: How a Plainspoken Pope Reframed Moral Authority"
 date: 2026-03-31
 draft: false

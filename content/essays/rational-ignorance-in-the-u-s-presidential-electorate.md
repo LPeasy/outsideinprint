@@ -14,6 +14,9 @@ revision_history:
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
 pdf: "/pdfs/rational-ignorance-in-the-u-s-presidential-electorate.pdf"
 featured: false
+featured_image: "/images/essays/rational-ignorance-in-the-u-s-presidential-electorate/hero.png"
+featured_image_alt: "Abstract editorial hero image for Rational Ignorance in the U.S. Presidential Electorate."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/rational-ignorance-in-the-u-s-presidential-electorate-e207c24d0306"
 ---
 

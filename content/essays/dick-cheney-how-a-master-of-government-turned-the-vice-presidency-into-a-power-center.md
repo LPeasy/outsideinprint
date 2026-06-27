@@ -1,4 +1,7 @@
 ---
+featured_image: "/images/essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero.png"
+featured_image_alt: "Abstract archival portrait-style hero image for Dick Cheney: How a Master of Government Turned the Vice Presidency into a Power Center."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 title: "Dick Cheney: How a Master of Government Turned the Vice Presidency into a Power Center"
 date: 2026-03-31
 draft: false

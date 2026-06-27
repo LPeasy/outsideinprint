@@ -3,6 +3,8 @@ title: 'The Sound Of Authority'
 date: 2026-02-16T00:38:23Z
 url: '/syd-and-oliver/the-sound-of-authorit/'
 draft: false
+image_exempt: true
+image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
 version: '1.0'

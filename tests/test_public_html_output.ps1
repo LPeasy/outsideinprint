@@ -543,12 +543,22 @@ $optionalDefaultListPages = @(
   'public/working-papers/index.html'
 )
 
-$requiredImportedMediaPages = @(
-  'public/essays/biter-the-slang-word-that-hits/index.html',
-  'public/essays/rethinking-invasive-species-management/index.html',
-  'public/essays/the-risk-management-buffet/index.html',
-  'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
-)
+$requiredImportedMediaPages = [ordered]@{
+  'public/essays/biter-the-slang-word-that-hits/index.html' = @{
+    ExpectedImagePrefix = '/images/essays/biter-the-slang-word-that-hits/'
+    ForbiddenImagePattern = '/images/medium/biter-the-slang-word-that-hits/[^"''<>\s]+\.svg'
+  }
+  'public/essays/rethinking-invasive-species-management/index.html' = @{
+    ExpectedImagePrefix = '/images/essays/rethinking-invasive-species-management/'
+    ForbiddenImagePattern = '/images/medium/rethinking-invasive-species-management/[^"''<>\s]+\.svg'
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    ExpectedImagePrefix = '/images/medium/'
+  }
+  'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html' = @{
+    ExpectedImagePrefix = '/images/medium/'
+  }
+}
 
 $requiredEssayHeroPages = @(
   'public/essays/2025-supreme-court-wrap-up/index.html',
@@ -1460,7 +1470,7 @@ foreach ($file in $htmlFiles) {
   if (
     $requiredSemanticPages.Contains($relativePath) -or
     ($optionalDefaultListPages -contains $relativePath) -or
-    ($requiredImportedMediaPages -contains $relativePath) -or
+    $requiredImportedMediaPages.Contains($relativePath) -or
     $requiredIndexationPages.Contains($relativePath) -or
     $requiredMetadataPages.Contains($relativePath) -or
     $requiredStructuredDataPages.Contains($relativePath) -or
@@ -1550,15 +1560,21 @@ foreach ($relativePath in $requiredSemanticPages.Keys) {
   }
 }
 
-foreach ($relativePath in $requiredImportedMediaPages) {
+foreach ($relativePath in $requiredImportedMediaPages.Keys) {
   if (-not $targetPageHtml.ContainsKey($relativePath)) {
     $importedMediaIssues.Add("Missing generated page required for imported-media regression coverage: $relativePath")
     continue
   }
 
   $html = $targetPageHtml[$relativePath]
-  if ($html -notmatch '/images/medium/') {
-    $importedMediaIssues.Add("$relativePath => expected localized /images/medium/ media references")
+  $expectedMedia = $requiredImportedMediaPages[$relativePath]
+  $expectedPrefix = [string]$expectedMedia.ExpectedImagePrefix
+  if ($html -notmatch [regex]::Escape($expectedPrefix)) {
+    $importedMediaIssues.Add("$relativePath => expected localized $expectedPrefix media references")
+  }
+
+  if ($expectedMedia.ContainsKey('ForbiddenImagePattern') -and $html -match [string]$expectedMedia.ForbiddenImagePattern) {
+    $importedMediaIssues.Add("$relativePath => found retired Medium placeholder SVG reference")
   }
 }
 

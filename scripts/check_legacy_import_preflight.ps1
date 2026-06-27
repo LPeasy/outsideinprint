@@ -330,6 +330,77 @@ function Test-LegacyListMarker {
   return $false
 }
 
+function Test-MarkdownImageLine {
+  param([string]$Line)
+  return $Line.Trim() -match '^!\[[^\]]*\]\([^)]+\)\s*$'
+}
+
+function Get-PreviousNonBlankLine {
+  param(
+    [string[]]$Lines,
+    [int]$Index
+  )
+
+  for ($j = $Index - 1; $j -ge 0; $j--) {
+    $candidate = [string]$Lines[$j]
+    if (-not [string]::IsNullOrWhiteSpace($candidate)) {
+      return $candidate.Trim()
+    }
+  }
+
+  return ''
+}
+
+function Get-NextNonBlankLine {
+  param(
+    [string[]]$Lines,
+    [int]$Index
+  )
+
+  for ($j = $Index + 1; $j -lt $Lines.Count; $j++) {
+    $candidate = [string]$Lines[$j]
+    if (-not [string]::IsNullOrWhiteSpace($candidate)) {
+      return $candidate.Trim()
+    }
+  }
+
+  return ''
+}
+
+function Test-PlainImageCaptionLine {
+  param([string]$Line)
+
+  $trimmed = $Line.Trim()
+  return (
+    $trimmed -match '^(?i)photo by .+ on (?:unsplash|pexels)$' -or
+    $trimmed -match '^(?i)(?:source|caption|credit):\s+\S' -or
+    $trimmed -match '^[^|]{2,90}\s+\|\s+(?i:Source|Credit):\s+\S'
+  )
+}
+
+function Test-PlainImageCaptionAfterMarkdownImage {
+  param(
+    [string]$Line,
+    [string]$PreviousContentLine
+  )
+
+  return (Test-MarkdownImageLine -Line $PreviousContentLine) -and (Test-PlainImageCaptionLine -Line $Line)
+}
+
+function Test-ColonLeadInLine {
+  param(
+    [string]$Line,
+    [string]$NextContentLine
+  )
+
+  $trimmed = $Line.Trim()
+  if ($trimmed -notmatch ':$') { return $false }
+  if ($trimmed -match '^(?i:Introduction|Conclusion|Works Cited|References|Bibliography|Read More)\s*:?\s*$') { return $false }
+  if ([string]::IsNullOrWhiteSpace($NextContentLine)) { return $false }
+
+  return $true
+}
+
 function Test-NonHeadingLine {
   param([string]$Trimmed)
 
@@ -346,7 +417,9 @@ function Test-PlainHeadingCandidate {
   param(
     [string]$Line,
     [string]$PreviousLine,
-    [string]$NextLine
+    [string]$NextLine,
+    [string]$PreviousContentLine = '',
+    [string]$NextContentLine = ''
   )
 
   $trimmed = $Line.Trim()
@@ -359,6 +432,8 @@ function Test-PlainHeadingCandidate {
 
   if ($trimmed -match '^(?i:Introduction|Conclusion|Works Cited|References|Bibliography|Read More)\s*:?\s*$') { return $true }
   if ($trimmed -match '^(?:[IVXLCDM]+\.|[0-9]+\.|[A-Z]\.)\s+\S.{0,110}$') { return $true }
+  if (Test-PlainImageCaptionAfterMarkdownImage -Line $trimmed -PreviousContentLine $PreviousContentLine) { return $false }
+  if (Test-ColonLeadInLine -Line $trimmed -NextContentLine $NextContentLine) { return $false }
   if ($trimmed -match '[.!?;,]$') { return $false }
   if ($trimmed -notmatch '^[A-Z][A-Za-z0-9''()/:,&\-\s]{2,110}:?$') { return $false }
 
@@ -456,7 +531,9 @@ function Scan-LegacyImportIssues {
 
     $previousLine = if ($i -gt 0) { [string]$bodyLines[$i - 1] } else { '' }
     $nextLine = if ($i + 1 -lt $bodyLines.Count) { [string]$bodyLines[$i + 1] } else { '' }
-    if (Test-PlainHeadingCandidate -Line $line -PreviousLine $previousLine -NextLine $nextLine) {
+    $previousContentLine = Get-PreviousNonBlankLine -Lines $bodyLines -Index $i
+    $nextContentLine = Get-NextNonBlankLine -Lines $bodyLines -Index $i
+    if (Test-PlainHeadingCandidate -Line $line -PreviousLine $previousLine -NextLine $nextLine -PreviousContentLine $previousContentLine -NextContentLine $nextContentLine) {
       $trimmed = $line.Trim()
       $issueType = if ($trimmed -match '^(?i:Read More)\s*:?\s*$') { 'legacy_read_more_heading' } else { 'plain_heading_candidate' }
       Add-Issue `

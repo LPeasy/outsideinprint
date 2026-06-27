@@ -1,4 +1,7 @@
 ---
+featured_image: "/images/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero.png"
+featured_image_alt: "Abstract archival portrait-style hero image for Charlie Kirk: How a Campus Activist Learned to Command the National Conversation."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 title: "Charlie Kirk: How a Campus Activist Learned to Command the National Conversation"
 date: 2026-03-31
 draft: false

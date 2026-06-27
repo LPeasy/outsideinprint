@@ -21,6 +21,8 @@ $publicManifestWriterPath = Join-Path $repoRoot "tests/write_public_build_manife
 $publicOutputTestPath = Join-Path $repoRoot "tests/test_public_html_output.ps1"
 $publicRouteSmokePath = Join-Path $repoRoot "tests/test_public_route_smoke.ps1"
 $legacyRenderContractPath = Join-Path $repoRoot "tests/test_legacy_render_contract.ps1"
+$essayImageAuditTestPath = Join-Path $repoRoot "tests/test_essay_image_audit.ps1"
+$essayImageAuditPath = Join-Path $repoRoot "scripts/audit_essay_images.ps1"
 $seoRolloutContractPath = Join-Path $repoRoot "tests/test_seo_rollout_contract.ps1"
 $almanackModuleDataContractPath = Join-Path $repoRoot "tests/test_almanack_module_data.ps1"
 $editorialCartoonScheduleContractPath = Join-Path $repoRoot "tests/test_editorial_cartoon_schedule_contract.ps1"
@@ -61,6 +63,8 @@ foreach ($requiredValidationPath in @(
   $publicOutputTestPath,
   $publicRouteSmokePath,
   $legacyRenderContractPath,
+  $essayImageAuditTestPath,
+  $essayImageAuditPath,
   $seoRolloutContractPath,
   $almanackModuleDataContractPath,
   $editorialCartoonScheduleContractPath,
@@ -178,6 +182,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_essay_guardrails\.ps1") {
   throw "deploy.yml must run the essay guardrail regression test."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_essay_image_audit\.ps1") {
+  throw "deploy.yml must run the essay image audit regression test."
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_schema_template_contract\.ps1") {
   throw "deploy.yml must run the schema template contract test."
 }
@@ -208,6 +216,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_seo_rollout_contract\.ps1") {
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_legacy_render_contract\.ps1") {
   throw "deploy.yml must run the legacy render contract test."
+}
+
+if ($deployWorkflow -notmatch "\.\/scripts\/audit_essay_images\.ps1\s+-FailOnIssues") {
+  throw "deploy.yml must run the essay image audit before building the site."
 }
 
 if ($deployWorkflow -notmatch "\.\/tests\/write_public_build_manifest\.ps1") {

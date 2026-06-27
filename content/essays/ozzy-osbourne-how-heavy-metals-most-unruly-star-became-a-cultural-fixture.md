@@ -1,4 +1,7 @@
 ---
+featured_image: "/images/essays/ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture/hero.png"
+featured_image_alt: "Abstract archival portrait-style hero image for Ozzy Osbourne: How Heavy Metal's Most Unruly Star Became a Cultural Fixture."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 title: "Ozzy Osbourne: How Heavy Metal's Most Unruly Star Became a Cultural Fixture"
 date: 2026-03-31
 draft: false

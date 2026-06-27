@@ -14,6 +14,9 @@ revision_history:
     note: "Updated May 18, 2026, after OIP back-archive review. Removed remote Medium media, converted internal links to local OIP routes, normalized punctuation, and checked rendering."
 pdf: "/pdfs/the-ledger-vol-2.pdf"
 featured: false
+featured_image: "/images/essays/the-ledger-vol-2/hero.png"
+featured_image_alt: "Abstract editorial hero image for The Ledger, Vol. 2."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 collections:
   - the-ledger
 collection_weight: 20

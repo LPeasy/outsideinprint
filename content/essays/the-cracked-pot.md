@@ -14,6 +14,9 @@ revision_history:
     note: "Updated April 30, 2026, after OIP back-archive review. Replaced legacy em dash punctuation and checked metadata and rendering; no substantive story changes were required."
 pdf: "/pdfs/the-cracked-pot.pdf"
 featured: false
+featured_image: "/images/essays/the-cracked-pot/hero.png"
+featured_image_alt: "Abstract editorial hero image for The Cracked Pot."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/the-cracked-pot-bf4f0a13419e"
 ---
 The morning light filtered through the apartment’s automatic blinds, timed perfectly to match his circadian rhythm. An Optimus hummed softly as it blended his favorite smoothie. He didn’t even like smoothies anymore.

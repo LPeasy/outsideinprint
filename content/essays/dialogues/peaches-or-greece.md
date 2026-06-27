@@ -3,6 +3,8 @@ title: 'Peaches or Greece'
 date: 2026-02-16T17:00:35Z
 url: '/syd-and-oliver/peaches-or-greece/'
 draft: false
+image_exempt: true
+image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
 version: '1.0'

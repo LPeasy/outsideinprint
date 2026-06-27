@@ -14,6 +14,9 @@ revision_history:
     note: "Updated April 27, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
 pdf: "/pdfs/etfs-and-market-concentration.pdf"
 featured: false
+featured_image: "/images/essays/etfs-and-market-concentration/hero.png"
+featured_image_alt: "Abstract editorial hero image for ETFs and Market Concentration."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/etfs-and-market-concentration-f144383a5d85"
 ---
 

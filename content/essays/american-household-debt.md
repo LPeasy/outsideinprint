@@ -14,6 +14,9 @@ revision_history:
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
 pdf: "/pdfs/american-household-debt.pdf"
 featured: false
+featured_image: "/images/essays/american-household-debt/hero.png"
+featured_image_alt: "Abstract editorial hero image for American Household Debt."
+featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/american-household-debt-12a4116b0ade"
 ---
 

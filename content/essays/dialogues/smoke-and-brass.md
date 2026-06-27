@@ -3,6 +3,8 @@ title: 'Smoke and Brass'
 date: 2026-02-12T02:42:07Z
 url: '/syd-and-oliver/smoke-and-brass/'
 draft: false
+image_exempt: true
+image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
 version: '1.0'
