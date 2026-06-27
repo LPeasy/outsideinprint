@@ -1,4 +1,4 @@
-current: the-cone-in-the-lane
+current: shadow-price
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -419,5 +419,13 @@ cartoons:
     image: "/images/editorial/the-cone-in-the-lane.png"
     essay: "/essays/the-cone-in-the-lane/"
     alt: "Editorial cartoon showing an oversized orange traffic cone in a dark crosshatched road work zone, with smaller cones guiding a lane around a repair truck and patched pavement."
+    width: 1672
+    height: 941
+  - slug: shadow-price
+    title: "Shadow Price"
+    date: "2026-06-26"
+    image: "/images/editorial/shadow-price.png"
+    essay: "/essays/the-bars-on-the-gum/"
+    alt: "Editorial cartoon showing a plain gum pack crossing a checkout scanner as a red beam projects its barcode into huge black bars across an empty wall, with a blank receipt curling in the foreground."
     width: 1672
     height: 941
