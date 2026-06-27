@@ -237,7 +237,7 @@ He may mean it. He may also hand you a ballot.
 
 ## Notes
 
-[^1]: Cathy A. Alexander and Ralph Christian, "Old New York County Courthouse," National Register of Historic Places Inventory Nomination Form, National Park Service, December 1975, statement of significance, pp. 2 to 3, https://npgallery.nps.gov/NRHP/GetAsset/NHLS/74001277_text. The nomination states that from 1866 to 1871 Tweed, Hall, Sweeny, and Connolly ran New York City and gives a broad estimate of Ring theft.
+[^1]: Cathy A. Alexander and Ralph Christian, "Old New York County Courthouse," National Register of Historic Places Inventory Nomination Form, National Park Service, December 1975, statement of significance, pp. 2 to 3, https://catalog.archives.gov/id/75320004. The nomination states that from 1866 to 1871 Tweed, Hall, Sweeny, and Connolly ran New York City and gives a broad estimate of Ring theft.
 
 [^2]: Alexander and Christian, "Old New York County Courthouse," description section, p. 2.
 

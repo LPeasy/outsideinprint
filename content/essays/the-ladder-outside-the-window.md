@@ -41,7 +41,7 @@ The New York fire escape is a visible contract among private property, public sa
 
 Fire-escape law in New York did not begin with charm. It grew out of a physical problem: too many people living above too few reliable exits.
 
-Before the fire escape became the familiar iron stair outside the window, New York law had already tried other routes. A public-domain Tenement House Commission history, [Tenement-House Legislation in New York, 1852-1900](https://archive.org/details/tenementhouseleg00veil), traces early scuttle, ladder, roof, and egress provisions through building laws and health laws. Its first historical point is easy to miss. The word "tenement-house" appears in New York statute in 1862, yet earlier building laws had already dealt with houses occupied by many families.
+Before the fire escape became the familiar iron stair outside the window, New York law had already tried other routes. A public-domain Tenement House Commission history, [Tenement-House Legislation in New York, 1852-1900](https://archive.org/details/cu31924030084796), traces early scuttle, ladder, roof, and egress provisions through building laws and health laws. Its first historical point is easy to miss. The word "tenement-house" appears in New York statute in 1862, yet earlier building laws had already dealt with houses occupied by many families.
 
 That pressure came before the icon.
 

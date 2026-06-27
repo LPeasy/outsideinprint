@@ -154,7 +154,7 @@ River and Cypress Creek, **was obliterated.**
 It was the [second mass casualty event](https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/) related to
 flooding in the area.
 
-**In 1987,** [**ten teenagers died after their van was swept away in another Guadalupe River flood.**](https://www.everettpost.com/national/deadly-floods-at-camp-mystic-how-the-tragedy-compares-to-a-similar-event-in-1987)
+**In 1987,** [**ten teenagers died after their van was swept away in another Guadalupe River flood.**](https://abcnews.com/US/deadly-floods-camp-mystic-tragedy-compares-similar-event/story?id=123567375)
 
 > That tragedy prompted calls for better planning and safer
 > infrastructure.

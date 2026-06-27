@@ -10,8 +10,8 @@ Date: 2026-05-10
 
 ## Public-Space And Historic-Site Context
 
-- [x] National Park Service, `Lincoln Memorial Reflecting Pool`. Used for the pool's official relationship to the Lincoln Memorial and Washington Monument setting. Link: https://www.nps.gov/linc/planyourvisit/lincoln-memorial-reflecting-pool.htm
-- [x] National Park Service, `East Potomac Golf Links`. Used for the official public golf-course context inside East Potomac Park. Link: https://www.nps.gov/places/east-potomac-golf-links.htm
+- [x] National Park Service, `Lincoln Memorial Reflecting Pool`. Used for the pool's official relationship to the Lincoln Memorial and Washington Monument setting. Link: https://www.nps.gov/places/000/lincoln-memorial-reflecting-pool.htm
+- [x] National Park Service, `East Potomac Park Golf Course`. Used for the official public golf-course context inside East Potomac Park. Link: https://www.nps.gov/places/000/east-potomac-park-golf-course.htm
 - [x] Washington Post, `Trump's East Potomac Park golf-course plans`, May 2026. Used for renderings, affected public uses, and NPS statement that no final decision had been made. Link: https://www.washingtonpost.com/dc-md-va/2026/05/06/trump-east-potomac-golf-course-dc/
 
 ## Live OIP Calibration

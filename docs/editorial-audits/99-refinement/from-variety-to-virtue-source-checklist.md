@@ -78,7 +78,7 @@ Status: PASS for candidate publication review.
     - Confidence: high.
 
 14. Putnam, `E Pluribus Unum`
-    - URL: https://aisa.or.ke/wp-content/uploads/2023/05/Scand-Pol-Stud-2007-Putnam-E-Pluribus-Unum-Diversity-and-Community-in-the-Twenty%E2%80%90first-Century-The-2006-Johan-Skytte.pdf
+    - URL: https://www.hks.harvard.edu/publications/e-pluribus-unum-diversity-and-community-twenty-first-century-2006-johan-skytte-prize
     - Used for: social capital, diversity, and solidarity concern.
     - Confidence: medium for hosted PDF; high for cited article identity.
 

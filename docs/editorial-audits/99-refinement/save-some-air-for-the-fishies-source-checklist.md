@@ -8,7 +8,7 @@ Editorial Philosophy Audit: PASS
 
 - Associated Press, `Scientists find climate change is reducing oxygen in rivers worldwide`, published May 15, 2026. Used for the current news event, study summary, scale of river reaches, and public-interest framing. URL: https://apnews.com/article/38b9116cc127f4212b1c20da08af0416
 - Science Advances, `Climate change deoxygenates global rivers`, DOI page. Used for peer-reviewed source identity, title, and publication venue. URL: https://www.science.org/doi/10.1126/sciadv.aef3132
-- Chinese Academy of Sciences / Phys.org, `Climate change is reducing oxygen in rivers worldwide`, published May 16, 2026. Used for study-method summary, warming-water contribution, heat-wave contribution, river-reach scale, and study authorship context. URL: https://phys.org/news/2026-05-climate-oxygen-rivers-worldwide.html
+- Chinese Academy of Sciences, `Climate change is reducing oxygen in rivers worldwide`, published May 16, 2026. Used for study-method summary, warming-water contribution, heat-wave contribution, river-reach scale, and study authorship context. URL: https://english.cas.cn/newsroom/cas-in-media/202605/t20260518_1159547.shtml
 
 ## Technical Context
 

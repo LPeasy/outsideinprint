@@ -44,7 +44,7 @@ The blue pool is the right place to start because it is simple enough to see. It
 
 That makes the pool more than decoration. It is maintenance with civic meaning.
 
-The [National Park Service describes](https://www.nps.gov/linc/planyourvisit/lincoln-memorial-reflecting-pool.htm) the Reflecting Pool as part of the designed setting of the Lincoln Memorial and the Washington Monument. Its job is visual, symbolic, and spatial. It creates a long room outdoors. It slows visitors down. It makes the Mall feel like a place of memory instead of a corridor of attractions.
+The [National Park Service describes](https://www.nps.gov/places/000/lincoln-memorial-reflecting-pool.htm) the Reflecting Pool as part of the designed setting of the Lincoln Memorial and the Washington Monument. Its job is visual, symbolic, and spatial. It creates a long room outdoors. It slows visitors down. It makes the Mall feel like a place of memory instead of a corridor of attractions.
 
 Care for that room should be treated as public work, not as an afterthought.
 
@@ -72,7 +72,7 @@ The same tension appears across the river bend at East Potomac Park.
 
 The AP story described Trump promoting a private-style overhaul of the public golf courses at East Potomac. [The Washington Post has reported](https://www.washingtonpost.com/dc-md-va/2026/05/06/trump-east-potomac-golf-course-dc/) on renderings that would reshape the park with a new clubhouse, lodge, practice areas, and course changes, while removing or displacing familiar public uses such as open grass, picnic areas, tennis courts, and parts of Hains Point access. The National Park Service has said no final decision has been made.
 
-That park is already a public place with a history, and it is certainly a place that can be improved. [The National Park Service presents](https://www.nps.gov/places/east-potomac-golf-links.htm) East Potomac Golf Links as a public golf course that opened in the early twentieth century and remains part of a public park system. Its civic value comes partly from being ordinary. It is a place where municipal recreation, national land, riverfront geography, race, class, leisure, and federal management all share the same ground.
+That park is already a public place with a history, and it is certainly a place that can be improved. [The National Park Service presents](https://www.nps.gov/places/000/east-potomac-park-golf-course.htm) East Potomac Golf Links as a public golf course that opened in the early twentieth century and remains part of a public park system. Its civic value comes partly from being ordinary. It is a place where municipal recreation, national land, riverfront geography, race, class, leisure, and federal management all share the same ground.
 
 A better golf course could serve the public. Better paths, better drainage, better practice areas, better food service, cleaner buildings, safer edges, clearer circulation, and more beautiful grounds could all make the park more useful. The hard work is keeping those improvements public in price, access, design, transportation, and surrounding park life.
 

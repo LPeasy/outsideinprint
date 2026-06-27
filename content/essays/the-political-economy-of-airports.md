@@ -79,7 +79,7 @@ Read More
 
 1.	Airports Council International: Non-aeronautical revenue data and trends:
 
-https://aci.aero/media-centre/annual-report/
+https://store.aci.aero/product/aci-annual-report-2024/
 
 2.	Port Authority of New York and New Jersey: Street pricing policy for concessions:
 

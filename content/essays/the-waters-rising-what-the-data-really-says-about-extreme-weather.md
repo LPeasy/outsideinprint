@@ -144,9 +144,9 @@ The U.S. data shows the pattern.
 ![Chart showing U.S. extreme one-day precipitation events from 1910 to 2023.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/c2a267b5b3d5f35aa89438b20e80fbc086194a0ea302b9fbc1978d2a5783b3b8.png)
 
 **Nine of the ten wettest years on record have** [**happened since
-1995.**](https://www.epa.gov/climate-indicators/climate-change-indicators-heavy-precipitation)
+1995.**](https://www.epa.gov/system/files/documents/2024-06/heavy-precip_documentation.pdf)
 **The share of the country hit by very heavy daily rainfall has**
-[**grown about 0.5% per decade**](https://www.epa.gov/climate-indicators/climate-change-indicators-us-and-global-precipitation)
+[**grown about 0.5% per decade**](https://www.epa.gov/system/files/documents/2024-06/precipitation_documentation.pdf)
 **since 1910.** That is a slow rise, but a relentless one, and most of
 the increase has come since 1980.
 
@@ -240,7 +240,7 @@ risk.](https://www.cbsnews.com/news/fema-maps-flash-flood-risks-homeowners-unpre
 **Stormwater systems built for 20th-century weather** may be
 [overwhelmed by 21st-century rain](https://ascelibrary.org/doi/10.1061/JSWBAY.SWENG-533).
 **People living in floodways or fire zones** may be [rolling
-higher-stakes dice](https://finance.yahoo.com/news/thousands-more-people-moving-fire-100000195.html)
+higher-stakes dice](https://www.redfin.com/news/press-releases/thousands-more-people-are-moving-in-than-out-of-fire-and-flood-prone-america-fueled-by-migration-to-texas-and-florida/)
 than they realize.
 
 > **Some Camp Mystic cabins sat inside a mapped regulatory floodway,

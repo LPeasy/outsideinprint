@@ -30,7 +30,7 @@ pivotal role in Indiana's 2025 playoff run, ***in his own words.***
 
 - [Taking a Chance on the Unknown | By Pascal Siakam](https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon)
 
-- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
+- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/onsi/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
 
 - [NBA insider's latest Pacers report will have fans jumping for joy](https://8points9seconds.com/nba-insider-s-latest-pacers-report-will-have-fans-jumping-joy)
 
@@ -212,6 +212,6 @@ Whether he ends up hoisting the trophy or not:
 
 - [Taking a Chance on the Unknown | By Pascal Siakam](https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon)
 
-- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
+- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/onsi/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
 
 - [NBA insider's latest Pacers report will have fans jumping for joy](https://8points9seconds.com/nba-insider-s-latest-pacers-report-will-have-fans-jumping-joy)

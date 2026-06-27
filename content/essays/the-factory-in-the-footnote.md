@@ -97,7 +97,7 @@ The United States can regulate American issuers. It can regulate American market
 
 That fact should discipline climate policy more than it often does.
 
-The [European Commission's EDGAR-based 2025 climate progress chapter](https://climate.ec.europa.eu/eu-action/climate-strategies-targets/progress-climate-action/eu-climate-action-progress-report-2025/chapter-1-climate-action-advances-and-challenges_en) estimated that in 2024 China produced 29 percent of global greenhouse-gas emissions, the United States 11 percent, India 8 percent, the EU 6 percent, and Russia 5 percent. Global emissions rose 1.3 percent that year. [EDGAR's 2024 report](https://edgar.jrc.ec.europa.eu/report_2024?vis=co2gdp), using 2023 data, had already identified China, the United States, India, the EU, Russia, and Brazil as the largest emitters and reported that global greenhouse-gas emissions reached 53.0 gigatonnes of carbon-dioxide equivalent.
+The [European Commission's EDGAR-based 2025 climate progress chapter](https://climate.ec.europa.eu/eu-action/climate-strategies-targets/progress-climate-action/eu-climate-action-progress-report-2025/chapter-1-climate-action-advances-and-challenges_en) estimated that in 2024 China produced 29 percent of global greenhouse-gas emissions, the United States 11 percent, India 8 percent, the EU 6 percent, and Russia 5 percent. Global emissions rose 1.3 percent that year. [EDGAR's 2024 report](https://edgar.jrc.ec.europa.eu/report_2024), using 2023 data, had already identified China, the United States, India, the EU, Russia, and Brazil as the largest emitters and reported that global greenhouse-gas emissions reached 53.0 gigatonnes of carbon-dioxide equivalent.
 
 Those numbers set the scale of American power.
 

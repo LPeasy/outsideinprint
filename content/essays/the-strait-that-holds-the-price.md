@@ -39,7 +39,7 @@ A tanker leaving Gulf crude terminals has to move through that opening before it
 
 Iran's latest offer reaches beyond the diplomatic news cycle.
 
-On April 27, [the Associated Press reported](https://abcnews.com/Business/wireStory/iran-offers-reopen-strait-hormuz-us-lifts-blockade-132411061) that Iran had offered to reopen the strait if the United States lifts its blockade and ends the war, while pushing nuclear-program talks into a later phase. The same report said the United States appeared unlikely to accept a deal that leaves the nuclear issue unresolved. Secretary of State Marco Rubio publicly framed any agreement around preventing Iran from moving toward a nuclear weapon.
+On April 27, [the Associated Press reported](https://apnews.com/article/us-iran-war-hormuz-april-27-2026-374d81d1aac6d8f19c21e1d1e10ab103) that Iran had offered to reopen the strait if the United States lifts its blockade and ends the war, while pushing nuclear-program talks into a later phase. The same report said the United States appeared unlikely to accept a deal that leaves the nuclear issue unresolved. Secretary of State Marco Rubio publicly framed any agreement around preventing Iran from moving toward a nuclear weapon.
 
 The proposal may fail. The details may shift. Another channel of talks may open through Pakistan, Oman, Russia, or direct phone calls. Yet the event has already done its work. It has shown, with unusual clarity, that modern economies can be forced back to the oldest kind of political problem: a narrow passage, a ship in waiting, and two sides trying to decide who can bear more pain.
 

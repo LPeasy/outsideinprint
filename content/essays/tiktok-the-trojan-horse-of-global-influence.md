@@ -69,4 +69,4 @@ While its economic and creative contributions are commendable, they do not justi
 - AP News: TikTok's Data and Censorship Concerns: https://apnews.com/article/tiktok-bytedance-shou-zi-chew-8d8a6a9694357040d484670b7f4833be
 - The Times: U.S. Supreme Court Upholds TikTok Ban: https://www.thetimes.co.uk/article/tiktok-ban-supreme-court-uphold-law-trump-biden-tklk8z0sx
 - PsyPost: TikTok's Role in Mental Health and Influence: https://www.psypost.org/new-study-unpacks-the-impact-of-tiktok-and-short-video-apps-on-adolescent-well-being
-- TikTok Transparency Report: Countering Influence Operations: https://www.tiktok.com/transparency/en/countering-influence-operations/
+- TikTok Newsroom: Strengthening our approach to countering influence attempts: https://newsroom.tiktok.com/en-us/strengthening-our-approach-to-countering-influence-attempts

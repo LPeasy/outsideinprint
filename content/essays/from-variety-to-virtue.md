@@ -245,5 +245,5 @@ What, in your view, holds a society together ~ shared identity, shared procedure
 [11]: https://hbr.org/1990/03/from-affirmative-action-to-affirming-diversity
 [12]: https://supreme.justia.com/cases/federal/us/438/265/
 [13]: https://supreme.justia.com/cases/federal/us/539/306/
-[14]: https://aisa.or.ke/wp-content/uploads/2023/05/Scand-Pol-Stud-2007-Putnam-E-Pluribus-Unum-Diversity-and-Community-in-the-Twenty%E2%80%90first-Century-The-2006-Johan-Skytte.pdf
+[14]: https://www.hks.harvard.edu/publications/e-pluribus-unum-diversity-and-community-twenty-first-century-2006-johan-skytte-prize
 [15]: https://pure.au.dk/portal/en/publications/ethnic-diversity-and-social-trust-a-narrative-and-meta-analytical
