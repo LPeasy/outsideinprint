@@ -1365,6 +1365,8 @@ $requiredUxPages = @(
   'public/almanack/2026-05-23/index.html',
   'public/almanack/2026-05-30/index.html',
   'public/almanack/2026-06-06/index.html',
+  'public/almanack/2026-06-20/index.html',
+  'public/almanack/2026-06-27/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -2870,8 +2872,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?June 6, 2026.*?Um, yeah, I(?:''|&#39;)m going to need the details\..*?The Bell at the Crossing'
-    Message = 'expected the Bob''s Almanack collection page to feature the June 6 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?June 27, 2026.*?Vacuum the house everyday if you have a pet that sheds\..*?The Bars on the Gum'
+    Message = 'expected the Bob''s Almanack collection page to feature the June 27 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -2984,8 +2986,50 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?June 20, 2026.*?Issue 7.*?A public rule is only as clean as the place where it lands\.'
+    Message = 'expected the June 20 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the June 20 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '(?s)/images/editorial/prime-suspect\.png.*?/images/editorial/escape-clause\.png.*?/images/editorial/the-meter\.png'
+    Message = 'expected the June 20 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '/images/essays/(the-stamp-on-the-meat-flagship|the-ladder-outside-the-window|the-meter-at-the-curb)/hero\.png'
+    Message = 'expected the June 20 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?June 27, 2026.*?Issue 8.*?Vacuum the house everyday if you have a pet that sheds\.'
+    Message = 'expected the June 27 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the June 27 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '(?s)/images/editorial/shadow-price\.png.*?/images/editorial/the-cone-in-the-lane\.png.*?/images/editorial/break-seal\.png.*?/images/editorial/curb-appeal\.png'
+    Message = 'expected the June 27 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '/images/essays/(the-bars-on-the-gum|the-cone-in-the-lane|the-seal-around-the-cap|the-curb-cut-at-the-corner)/hero\.png'
+    Message = 'expected the June 27 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?June 20, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Sincerity.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?June 27, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Order.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
