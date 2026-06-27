@@ -348,6 +348,116 @@ function Count-Matches {
   return $count
 }
 
+function Test-MarkdownImageLine {
+  param([string]$Line)
+  return $Line.Trim() -match '^!\[[^\]]*\]\([^)]+\)\s*$'
+}
+
+function Test-MarkdownListItemLine {
+  param([string]$Line)
+  return $Line.Trim() -match '^(?:[-*+]\s+|\d+\.\s+)\S'
+}
+
+function Get-PreviousNonBlankLine {
+  param(
+    [string[]]$Lines,
+    [int]$Index
+  )
+
+  for ($j = $Index - 1; $j -ge 0; $j--) {
+    $candidate = [string]$Lines[$j]
+    if (-not [string]::IsNullOrWhiteSpace($candidate)) {
+      return $candidate.Trim()
+    }
+  }
+
+  return ''
+}
+
+function Get-NextNonBlankLine {
+  param(
+    [string[]]$Lines,
+    [int]$Index
+  )
+
+  for ($j = $Index + 1; $j -lt $Lines.Count; $j++) {
+    $candidate = [string]$Lines[$j]
+    if (-not [string]::IsNullOrWhiteSpace($candidate)) {
+      return $candidate.Trim()
+    }
+  }
+
+  return ''
+}
+
+function Test-PlainImageCaptionLine {
+  param([string]$Line)
+
+  $trimmed = $Line.Trim()
+  return (
+    $trimmed -match '^(?i)photo by .+ on (?:unsplash|pexels)$' -or
+    $trimmed -match '^(?i)(?:source|caption|credit):\s+\S' -or
+    $trimmed -match '^[^|]{2,90}\s+\|\s+(?i:Source|Credit):\s+\S'
+  )
+}
+
+function Test-PlainImageCaptionAfterMarkdownImage {
+  param(
+    [string]$Line,
+    [string]$PreviousContentLine
+  )
+
+  return (Test-MarkdownImageLine -Line $PreviousContentLine) -and (Test-PlainImageCaptionLine -Line $Line)
+}
+
+function Test-ColonLeadInLine {
+  param(
+    [string]$Line,
+    [string]$NextContentLine
+  )
+
+  $trimmed = $Line.Trim()
+  if ($trimmed -notmatch ':$') { return $false }
+  if ($trimmed -match '^(?i:Introduction|Conclusion|Works Cited|References|Bibliography|Read More)\s*:?\s*$') { return $false }
+  if ([string]::IsNullOrWhiteSpace($NextContentLine)) { return $false }
+
+  return $true
+}
+
+function Get-FakeListCount {
+  param([string]$Body)
+
+  $count = 0
+  $lines = $Body -split "`r?`n"
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    $line = [string]$lines[$i]
+    $trimmed = $line.Trim()
+
+    if ($trimmed -match '^\d+\)\s+') {
+      $count++
+      continue
+    }
+
+    if ($trimmed -notmatch '^[-*+]\s+[A-Z][^\n]{0,90}$') {
+      continue
+    }
+
+    $previousContentLine = Get-PreviousNonBlankLine -Lines $lines -Index $i
+    $nextContentLine = Get-NextNonBlankLine -Lines $lines -Index $i
+    if (
+      (Test-MarkdownListItemLine -Line $previousContentLine) -or
+      (Test-MarkdownListItemLine -Line $nextContentLine) -or
+      $previousContentLine.Trim().EndsWith(':')
+    ) {
+      continue
+    }
+
+    $count++
+  }
+
+  return $count
+}
+
 function Get-TitleSubtitleAiTellStructureCount {
   param($Page)
 
@@ -383,7 +493,20 @@ function Get-PseudoHeadingCount {
     if ($line -match '^[A-Z0-9][A-Za-z0-9''":,()&/\-~ ]+$') {
       $prevBlank = ($i -eq 0) -or (-not $lines[$i - 1].Trim())
       $nextBlank = ($i -eq ($lines.Count - 1)) -or (-not $lines[$i + 1].Trim())
-      if ($prevBlank -and $nextBlank) { $count++ }
+      if (-not ($prevBlank -and $nextBlank)) { continue }
+
+      $previousContentLine = Get-PreviousNonBlankLine -Lines $lines -Index $i
+      $nextContentLine = Get-NextNonBlankLine -Lines $lines -Index $i
+      if (Test-PlainImageCaptionAfterMarkdownImage -Line $line -PreviousContentLine $previousContentLine) { continue }
+
+      if ($line -match '^(?i:Introduction|Conclusion|Works Cited|References|Bibliography|Read More)\s*:?\s*$') {
+        $count++
+        continue
+      }
+
+      if (Test-ColonLeadInLine -Line $line -NextContentLine $nextContentLine) { continue }
+
+      $count++
     }
   }
   return $count
@@ -669,7 +792,7 @@ foreach ($page in $pages) {
     mojibake = Count-Matches -Text $body -Patterns $mojibakePatterns
     caption_residue = Get-CaptionResidueCount -Body $body
     manual_bullets = Count-Matches -Text $body -Patterns @('(?m)^\s*(?:\u2022|\u00E2\u20AC\u00A2)\s+')
-    fake_lists = Count-Matches -Text $body -Patterns @('(?m)^\s*-\s+[A-Z][^\n]{0,90}$','(?m)^\s*\d+\)\s+')
+    fake_lists = Get-FakeListCount -Body $body
     pseudo_headings = Get-PseudoHeadingCount -Body $body
     source_dumps = Count-Matches -Text $body -Patterns @('(?im)^\s*(?:>\s*)?Source:\s*','(?im)^\s*(?:>\s*)?https?://\S+\s*$')
     duplicated_title = 0

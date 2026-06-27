@@ -111,6 +111,44 @@ This paragraph is fine.
 
   @'
 ---
+title: "Allowed Legacy Style"
+date: 2025-07-14
+draft: false
+slug: "allowed-legacy-style"
+section_label: "Essay"
+subtitle: ""
+description: "A fixture with valid captions, lead-ins, and Markdown lists."
+featured_image: "/images/social/allowed-legacy-style.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Figure
+
+![Performer holding a microphone.](/images/essays/allowed-legacy-style/performer.jpg)
+
+Photo by Test Photographer on Unsplash
+
+Here is the question:
+
+> What happens when a normal lead-in introduces a quote?
+
+The parts are simple:
+
+- Credit
+- Intent
+- Transparency
+
+A few reasons:
+
+### Politics
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "allowed-legacy-style.md") -Encoding UTF8
+
+  @'
+---
 title: "Clean Essay"
 date: 2025-07-14
 draft: false
@@ -419,6 +457,14 @@ This paragraph is fine.
   Assert-True ($allowedStillExit -eq 0) "Expected literal still image/life and stood still phrasing to remain allowed."
   Assert-True (-not $allowedStillOutput.Contains("adverbial_still_construction")) "Expected literal still phrasing not to trigger the adverbial still rule."
 
+  $allowedLegacyStyleOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/allowed-legacy-style.md" -StrictWarnings 2>&1 | Out-String
+  $allowedLegacyStyleExit = $LASTEXITCODE
+  Assert-True ($allowedLegacyStyleExit -eq 0) "Expected valid captions, lead-ins, and Markdown lists not to trigger strict warning mode."
+  Assert-True (-not $allowedLegacyStyleOutput.Contains("pseudo_headings")) "Expected valid caption and lead-in patterns not to trigger pseudo_headings."
+  Assert-True (-not $allowedLegacyStyleOutput.Contains("fake_lists")) "Expected valid Markdown lists not to trigger fake_lists."
+  Assert-True (-not $allowedLegacyStyleOutput.Contains("plain_heading_candidate")) "Expected valid caption and lead-in patterns not to trigger legacy plain-heading warnings."
+  Assert-True (-not $allowedLegacyStyleOutput.Contains("legacy_list_marker")) "Expected valid Markdown lists not to trigger legacy list-marker warnings."
+
   $warningOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" 2>&1 | Out-String
   $warningExit = $LASTEXITCODE
   Assert-True ($warningExit -eq 0) "Expected warning-only essay to pass by default."
@@ -430,6 +476,7 @@ This paragraph is fine.
   $strictWarningExit = $LASTEXITCODE
   Assert-True ($strictWarningExit -eq 1) "Expected StrictWarnings to fail warning-only essays."
   Assert-True ($strictWarningOutput.Contains("StrictWarnings")) "Expected strict warning output to explain the failure mode."
+  Assert-True ($strictWarningOutput.Contains("pseudo_headings")) "Expected StrictWarnings to preserve real pseudo-heading warning coverage."
 
   $requireDescriptionOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" -RequireDescription 2>&1 | Out-String
   $requireDescriptionExit = $LASTEXITCODE
