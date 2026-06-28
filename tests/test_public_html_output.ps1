@@ -2156,8 +2156,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-card-in-the-catalog"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?quiet-filing"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=quiet-filing"?'
-    Message = 'expected the Card homepage card cartoon thumbnail to open the Quiet Filing lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-slug="?the-bars-on-the-gum"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?shadow-price"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=shadow-price"?'
+    Message = 'expected the Bars homepage card cartoon thumbnail to open the Shadow Price lightbox with a gallery target'
   },
   @{
     Path = 'public/index.html'
