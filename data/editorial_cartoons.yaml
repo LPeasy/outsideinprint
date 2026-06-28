@@ -1,4 +1,4 @@
-current: shadow-price
+current: call-from-above
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -427,5 +427,13 @@ cartoons:
     image: "/images/editorial/shadow-price.png"
     essay: "/essays/the-bars-on-the-gum/"
     alt: "Editorial cartoon showing a plain gum pack crossing a checkout scanner as a red beam projects its barcode into huge black bars across an empty wall, with a blank receipt curling in the foreground."
+    width: 1672
+    height: 941
+  - slug: call-from-above
+    title: "Call From Above"
+    date: "2026-06-27"
+    image: "/images/editorial/call-from-above.png"
+    essay: "/essays/the-coin-slot-on-the-corner/"
+    alt: "Editorial cartoon showing a hat-wearing suited man with a cigar gripping a public payphone while flicking a coin into the coin slot on a late-twentieth-century New York street corner, with a diner, cars, hotdog stand, pedestrians, apartment windows, and an artificial firmament opening above the city."
     width: 1672
     height: 941
