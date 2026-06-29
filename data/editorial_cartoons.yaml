@@ -1,4 +1,4 @@
-current: call-from-above
+current: claim-check
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -435,5 +435,13 @@ cartoons:
     image: "/images/editorial/call-from-above.png"
     essay: "/essays/the-coin-slot-on-the-corner/"
     alt: "Editorial cartoon showing a hat-wearing suited man with a cigar gripping a public payphone while flicking a coin into the coin slot on a late-twentieth-century New York street corner, with a diner, cars, hotdog stand, pedestrians, apartment windows, and an artificial firmament opening above the city."
+    width: 1672
+    height: 941
+  - slug: claim-check
+    title: "Claim Check"
+    date: "2026-06-28"
+    image: "/images/editorial/claim-check.png"
+    essay: "/essays/the-little-machine-in-the-glass-case/"
+    alt: "Black ink editorial cartoon of a lock-shaped glass display case holding a lit patent model, with a half-turned paper key and anonymous public viewers behind a rail."
     width: 1672
     height: 941
