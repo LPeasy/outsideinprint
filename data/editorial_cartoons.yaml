@@ -1,4 +1,4 @@
-current: claim-check
+current: after-the-tone
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -443,5 +443,13 @@ cartoons:
     image: "/images/editorial/claim-check.png"
     essay: "/essays/the-little-machine-in-the-glass-case/"
     alt: "Black ink editorial cartoon of a lock-shaped glass display case holding a lit patent model, with a half-turned paper key and anonymous public viewers behind a rail."
+    width: 1672
+    height: 941
+  - slug: after-the-tone
+    title: "After The Tone"
+    date: "2026-06-29"
+    image: "/images/editorial/after-the-tone.png"
+    essay: "/essays/the-siren-on-the-pole/"
+    alt: "Editorial cartoon showing an outdoor warning siren sending a yellow signal into a dark blank public instruction frame while a small radio and phone sit below it."
     width: 1672
     height: 941
