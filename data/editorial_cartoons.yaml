@@ -1,4 +1,4 @@
-current: after-the-tone
+current: the-minute-drawer
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -451,5 +451,13 @@ cartoons:
     image: "/images/editorial/after-the-tone.png"
     essay: "/essays/the-siren-on-the-pole/"
     alt: "Editorial cartoon showing an outdoor warning siren sending a yellow signal into a dark blank public instruction frame while a small radio and phone sit below it."
+    width: 1672
+    height: 941
+  - slug: the-minute-drawer
+    title: "The Minute Drawer"
+    date: "2026-06-30"
+    image: "/images/editorial/the-minute-drawer.png"
+    essay: "/essays/the-clock-by-the-door/"
+    alt: "Editorial cartoon showing a factory time clock beside a doorway with its punch-card slot opened like an evidence drawer, a worker silhouette at the threshold, and a ledger-shaped shadow stretching across the floor."
     width: 1672
     height: 941
