@@ -1,4 +1,4 @@
-current: the-minute-drawer
+current: the-sorting-counter
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -459,5 +459,13 @@ cartoons:
     image: "/images/editorial/the-minute-drawer.png"
     essay: "/essays/the-clock-by-the-door/"
     alt: "Editorial cartoon showing a factory time clock beside a doorway with its punch-card slot opened like an evidence drawer, a worker silhouette at the threshold, and a ledger-shaped shadow stretching across the floor."
+    width: 1672
+    height: 941
+  - slug: the-sorting-counter
+    title: "The Sorting Counter"
+    date: "2026-07-01"
+    image: "/images/editorial/the-sorting-counter.png"
+    essay: "/essays/the-charge-ledger/"
+    alt: "A courthouse records counter holds an oversized ledger and four labeled trays for alleged, seized, settled, and recovered money while anonymous figures sort papers under a red question mark thread."
     width: 1672
     height: 941

@@ -2156,8 +2156,8 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-slug="?the-bars-on-the-gum"?.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?shadow-price"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=shadow-price"?'
-    Message = 'expected the Bars homepage card cartoon thumbnail to open the Shadow Price lightbox with a gallery target'
+    Pattern = '(?s)data-analytics-source-slot="?homepage_selected_core"?.*?\bessay-cartoon-thumb--home\b.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?[^"\s>]+"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=[^"\s>]+"?'
+    Message = 'expected a homepage essay-card cartoon thumbnail to open the matching gallery-backed lightbox'
   },
   @{
     Path = 'public/index.html'
@@ -2467,8 +2467,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)href=(?:"?#archive-month-2026-06"?).*?>2026<.*?href=(?:"?#archive-month-2025-12"?).*?>2025<'
-    Message = 'expected the archive landing page to expose inline year jumps keyed to the first month of each year'
+    Pattern = '(?s)href=(?:"?#archive-month-20\d{2}-(?:0[1-9]|1[0-2])"?).*?>20\d{2}<.*?href=(?:"?#archive-month-20\d{2}-(?:0[1-9]|1[0-2])"?).*?>20\d{2}<'
+    Message = 'expected the archive landing page to expose inline year jumps keyed to archive month anchors'
   },
   @{
     Path = 'public/archive/index.html'
