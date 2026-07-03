@@ -170,6 +170,31 @@ This paragraph is fine.
 
   @'
 ---
+title: "Franklin Pullquote Essay"
+date: 2025-07-14
+draft: false
+slug: "franklin-pullquote-essay"
+section_label: "Essay"
+subtitle: ""
+description: "A fixture with approved Franklin pullquote HTML."
+featured_image: "/images/social/franklin-pullquote-essay.png"
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+## Overview
+
+<figure class="franklin-pullquote" aria-label="Section maxim">
+  <blockquote>A clean line can carry a hard rule.</blockquote>
+  <figcaption>- Rich V.</figcaption>
+</figure>
+
+This paragraph is fine.
+'@ | Set-Content -Path (Join-Path $essayRoot "franklin-pullquote.md") -Encoding UTF8
+
+  @'
+---
 title: "Moore’s Preserved Title"
 date: 2025-07-14
 draft: false
@@ -492,6 +517,11 @@ This paragraph is fine.
   $cleanExit = $LASTEXITCODE
   Assert-True ($cleanExit -eq 0) "Expected clean essay to pass the guardrail check."
   Assert-True ($cleanOutput.Contains("Essay guardrails PASSED.")) "Expected clean essay output to report success."
+
+  $franklinPullquoteOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/franklin-pullquote.md" 2>&1 | Out-String
+  $franklinPullquoteExit = $LASTEXITCODE
+  Assert-True ($franklinPullquoteExit -eq 0) "Expected approved Franklin pullquote HTML to pass the guardrail check."
+  Assert-True (-not $franklinPullquoteOutput.Contains("embed_remnants")) "Expected approved Franklin pullquote HTML not to trigger embed_remnants."
 
   $cleanRequireFeaturedImageOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" -RequireFeaturedImage 2>&1 | Out-String
   $cleanRequireFeaturedImageExit = $LASTEXITCODE

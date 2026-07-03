@@ -4070,6 +4070,35 @@ body.cartoon-lightbox-open{
   padding-top:.75rem;
   border-top:1px solid var(--oip-rule-faint);
 }
+.piece-body .franklin-pullquote{
+  max-width:38rem;
+  margin:1.1rem auto 1.35rem;
+  padding:1rem 0 .9rem;
+  border-top:1px solid rgba(87,64,39,.34);
+  border-bottom:1px solid rgba(87,64,39,.34);
+  color:#2a2118;
+  text-align:center;
+}
+.piece-body .franklin-pullquote blockquote{
+  margin:0;
+  color:#201a15;
+  font-family:var(--font-display);
+  font-size:clamp(1.08rem, 1rem + .26vw, 1.32rem);
+  font-weight:600;
+  line-height:1.35;
+  letter-spacing:0;
+}
+.piece-body .franklin-pullquote figcaption{
+  margin-top:.46rem;
+  padding-top:0;
+  border-top:0;
+  color:#6f604e;
+  font-family:var(--font-ui);
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
 .piece-body > img{
   display:block;
   width:100%;

@@ -348,6 +348,14 @@ function Count-Matches {
   return $count
 }
 
+function Remove-AllowedInlineFigures {
+  param([string]$Text)
+  if ([string]::IsNullOrEmpty($Text)) { return $Text }
+
+  $pattern = '(?is)<figure\s+class="franklin-pullquote"\s+aria-label="Section maxim">\s*<blockquote>.*?</blockquote>\s*<figcaption>- Rich V\.</figcaption>\s*</figure>'
+  return [regex]::Replace($Text, $pattern, '')
+}
+
 function Test-MarkdownImageLine {
   param([string]$Line)
   return $Line.Trim() -match '^!\[[^\]]*\]\([^)]+\)\s*$'
@@ -788,7 +796,7 @@ foreach ($page in $pages) {
     medium_cta = Count-Matches -Text $body -Patterns $ctaPatterns
     medium_cdn_media = Count-Matches -Text $body -Patterns @('cdn-images-1\.medium\.com')
     author_note = Count-Matches -Text $body -Patterns @('(?im)^\s{0,3}(?:#+\s*)?(?:author''?s note|note from the author)\b')
-    embed_remnants = Count-Matches -Text $body -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','raw HTML omitted','(?im)^\s*\[Embedded media:','<figure\b','<img\b')
+    embed_remnants = Count-Matches -Text (Remove-AllowedInlineFigures $body) -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','raw HTML omitted','(?im)^\s*\[Embedded media:','<figure\b','<img\b')
     mojibake = Count-Matches -Text $body -Patterns $mojibakePatterns
     caption_residue = Get-CaptionResidueCount -Body $body
     manual_bullets = Count-Matches -Text $body -Patterns @('(?m)^\s*(?:\u2022|\u00E2\u20AC\u00A2)\s+')

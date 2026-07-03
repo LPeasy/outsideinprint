@@ -1,4 +1,4 @@
-current: the-sorting-counter
+current: the-tab
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -467,5 +467,13 @@ cartoons:
     image: "/images/editorial/the-sorting-counter.png"
     essay: "/essays/the-charge-ledger/"
     alt: "A courthouse records counter holds an oversized ledger and four labeled trays for alleged, seized, settled, and recovered money while anonymous figures sort papers under a red question mark thread."
+    width: 1672
+    height: 941
+  - slug: the-tab
+    title: "The Tab"
+    date: "2026-07-02"
+    image: "/images/editorial/the-tab.png"
+    essay: "/essays/cost-shift/"
+    alt: "Editorial cartoon showing a faceless waiter sliding a check labeled THE TAB to ordinary diner customers while a glowing server-rack booth under a NEW POWER sign sits behind them with stacked plates and a red ink trail."
     width: 1672
     height: 941
