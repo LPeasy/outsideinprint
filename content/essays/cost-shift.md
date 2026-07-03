@@ -4,7 +4,7 @@ date: 2026-07-02
 draft: false
 slug: "cost-shift"
 section_label: "Essay"
-description: "A short logical argument for treating AI data-center ratepayer protection as a cost-assignment rule, not a slogan."
+description: "A short argument about why separate rates can assign direct AI data-center costs but cannot erase broader electricity-demand pressure."
 author_id: "robert-v-ussley"
 featured_image: "/images/essays/cost-shift/hero.png"
 featured_image_alt: "A faceless waiter slides a check labeled THE TAB to ordinary diner customers while a glowing server-rack booth under a NEW POWER sign sits behind them with stacked empty plates and a red ink trail."
@@ -22,90 +22,67 @@ tags:
   - "simple logic"
 ---
 
-Every new plug sends a bill somewhere. AI data centers can grow without making ordinary families pay higher electric bills only if the meter proves it.
+Electricity is not a press release. If a new class of buyers takes more of it, the price question does not disappear because the buyers sign a separate rate agreement.
 
-The arithmetic is stubborn. Data centers use real power. New power lines cost real money. The companies that need the new power say they will pay for the power, the wires, and the risk.
+The [Ratepayer Protection Pledge](https://www.whitehouse.gov/releases/2026/03/ratepayer-protection-pledge/) makes one useful promise. AI companies should build, bring, or buy the power they need, pay for required delivery upgrades, and negotiate separate rates with utilities and state governments. That can stop a data center from pushing its direct substation, line, or reserved-capacity bill onto ordinary households.
 
-The [White House Ratepayer Protection Pledge](https://www.whitehouse.gov/releases/2026/03/ratepayer-protection-pledge/) names the terms. Companies should build, bring, or buy the energy their new data centers need. They should pay for required delivery upgrades. They should negotiate separate rate structures. They should pay for that power and infrastructure even if they do not use all of it.
+But that is not the same as saying AI companies will absorb the whole market effect of rising electricity demand.
 
-No slogan there. A rule for assigning a bill.
-
-The rule runs this way: new load creates new cost. New cost needs a named payer. If the payer is not the company that needs the load, the cost has shifted toward everyone else.
-
-## The Pledge Is About Assignment
+## The Rate Rule
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
-  <blockquote>The company gets the new plug. The company pays for the new plug.</blockquote>
+  <blockquote>A separate rate assigns a bill. It does not erase demand.</blockquote>
   <figcaption>- Rich V.</figcaption>
 </figure>
 
-An AI data center draws far more power than a laptop on a kitchen counter. The [Department of Energy says](https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers) data centers used about 4.4 percent of U.S. electricity in 2023. It also cites a projection that data centers could use about 6.7 to 12 percent by 2028.
+The distinction matters because data centers are becoming a larger buyer of electricity. The [Department of Energy says](https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers) data centers used about 4.4 percent of U.S. electricity in 2023 and could use about 6.7 to 12 percent by 2028.
 
-That range does not prove a household bill increase. It proves the cost question is large enough to matter. A load that large needs power plants, transmission lines, substations, studies, backup plans, and rules for what happens when demand arrives faster than supply.
+That does not prove every household bill will rise because of AI. It proves the load is too large to treat as a private side deal with no public consequence.
 
-The pledge tries to answer the obvious question: who pays?
+A separate rate can say: this customer pays for this line, this substation, this reserved power, this delay risk. Good. That is cost assignment.
 
-DOE's current [data-center resource hub](https://www.energy.gov/powering-americas-ai-future-data-center-resource-hub) says the pledge requires technology companies to build, bring, or buy new power, pay for required delivery upgrades, negotiate separate rates, invest in local jobs, and coordinate with grid operators. The company gets the new plug. The company pays for the new plug.
-
-Under that rule, ordinary customers should not be used as the quiet backup wallet.
+It cannot say: the national price of electricity will not move when a fast-growing industry demands far more electricity. That is a market question. If usable supply, transmission, fuel, and reliability capacity do not keep pace, pressure appears somewhere.
 
 ![Four connected panels show the claim, premise, likely result, and possible problem in the data-center cost-assignment logic.](/images/essays/cost-shift/section-1.png)
 
 *The promise works only if the new load carries the new cost.*
 
-## FERC Is Asking The Same Question
+## The Shared Market
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
-  <blockquote>One customer causes the cost. Other customers should not pay it.</blockquote>
+  <blockquote>The meter can be separate while the market remains shared.</blockquote>
   <figcaption>- Rich V.</figcaption>
 </figure>
 
-On June 18, 2026, the [Federal Energy Regulatory Commission](https://www.ferc.gov/news-events/news/ferc-launches-aggressive-targeted-action-speed-large-load-integration) ordered six regional grid operators to justify or reform the rules for data centers and other large energy users. FERC gave them 60 days to address large-load tariff rules.
+[EIA says](https://www.eia.gov/energyexplained/electricity/prices-and-factors-affecting-prices.php) electricity prices reflect the cost to build, finance, maintain, and operate power plants and the grid. It also says price changes reflect demand, fuel costs, power plant availability, and supply constraints.
 
-One category was direct: preventing cost shifting and requiring transparency into transmission costs.
+That is the part a pledge cannot wish away. Electricity is the working resource of modern life. Homes need it. Stores need it. Hospitals need it. Factories need it. Data centers need it all day.
 
-That phrase does the work. Cost shifting means one customer causes a cost and other customers pay it. Transparency means the public can see enough of the cost to know where it went.
+If data centers bring enough new supply with them, the pressure can be reduced. If they pay for their own grid upgrades, direct cost shifting can be reduced. If they can flex demand or use onsite generation, the system may benefit.
 
-FERC Commissioner Judy W. Chang made the warning sharper in a [concurrence](https://www.ferc.gov/news-events/news/e-12-commissioner-changs-concurrence-new-york-independent-system-operator-inc). She wrote that the Federal Power Act is a customer-protection statute. She also warned that voluntary commitments may fall short of the best protection, and that the assignment of power infrastructure costs sits at the center of the proceeding.
-
-That makes the dispute a billing dispute.
-
-If a company needs a new substation, the bill should know that. If a project needs a new transmission line, the rate case should know that. If a data center reserves power and then delays, the contract should know who pays for the stranded cost. If the answer is always "the general rate base," then the public promise has failed its own premise.
-
-## A Real Example Shows Assignment
-
-<figure class="franklin-pullquote" aria-label="Section maxim">
-  <blockquote>A fact sheet differs from a bill.</blockquote>
-  <figcaption>- Rich V.</figcaption>
-</figure>
-
-DOE's Ohio fact sheet on the Portsmouth project gives one version of the promise in practice. DOE says SB Energy and AEP Ohio plan a large AI and power project, including $4.2 billion in transmission infrastructure, 10 gigawatts of new compute power, and 9.2 gigawatts of new natural-gas generation. DOE says SB Energy committed to paying for the new transmission infrastructure. DOE also says the project will use a dedicated data-center rate structure so the new power plants and transmission lines are paid by the project, not Ohio families or small businesses.
-
-The useful part is the mechanism. It goes past the broad line "AI will help the economy." It says who builds, who pays, and what kind of rate structure carries the cost.
-
-The limit is clear. A fact sheet differs from a bill. A commitment differs from a completed tariff. A project announcement differs from a household meter.
-
-The public record sits in contracts, filings, rate structures, and bills.
+But if they take a larger share of a constrained system, separate rates alone do not settle the price question. They only settle which account pays named project costs.
 
 ![A balance scale compares new power and a household bill while three checkpoints ask who caused the cost, who pays, and whether unclear assignment creates shift risk.](/images/essays/cost-shift/section-2.png)
 
 *When cost assignment is unclear, the risk shifts toward ordinary bills.*
 
-## The Ledger
+## The Public Question
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
-  <blockquote>If the new load needs the new plug, the new load should carry the new bill.</blockquote>
+  <blockquote>Private load needs private books. Public goods need public ledgers.</blockquote>
   <figcaption>- Rich V.</figcaption>
 </figure>
 
-If AI data centers are public goods, their backers can say so. They can argue that the country needs compute capacity, jobs, military strength, scientific power, and private investment. Some of that may be true.
+[FERC is already asking](https://www.ferc.gov/news-events/news/ferc-launches-aggressive-targeted-action-speed-large-load-integration) grid operators to justify or change large-load tariff rules, including rules for preventing cost shifting and making transmission costs transparent. That is the right category. The issue is not whether AI is impressive. The issue is whether the bill is public or private.
 
-If AI data centers are private loads, their backers must also say so. A private load should pay for the power system it requires.
+So name the thing plainly.
 
-Both claims can be true at once. A project can serve a national goal and also create a local cost. A company can build useful infrastructure and need firm rules about who pays. A pledge can point in the right direction and need public accounting before ordinary customers should trust it.
+Are data centers private companies buying power for private business? Then their direct power costs belong on private books.
 
-If the new load needs the new plug, the new load should carry the new bill.
+Are they public goods, like infrastructure the country needs enough to support? Then say so and put the subsidy on a public ledger.
 
-Ratepayer protection has to be a ledger. Liking or fearing AI cannot settle it. The power plant has a cost. The transmission line has a cost. The substation has a cost. The reserved capacity has a cost. The delay risk has a cost.
+Railroads were private companies with public importance, public privileges, and heavy regulation. Interstate highways are public infrastructure. Data centers cannot borrow whichever category is cheaper that day.
 
-The promise is real only when those costs do not disappear into everyone else's bill.
+The rule is simple. If a private load uses the shared grid, separate rates should assign its direct costs. If the public is asked to support the broader price pressure, the public should be told that honestly.
+
+The cost should not become public only after the bill arrives.
