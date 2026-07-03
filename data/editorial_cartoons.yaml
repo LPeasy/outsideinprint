@@ -1,4 +1,4 @@
-current: the-tab
+current: care-rota
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -475,5 +475,13 @@ cartoons:
     image: "/images/editorial/the-tab.png"
     essay: "/essays/cost-shift/"
     alt: "Editorial cartoon showing a faceless waiter sliding a check labeled THE TAB to ordinary diner customers while a glowing server-rack booth under a NEW POWER sign sits behind them with stacked plates and a red ink trail."
+    width: 1672
+    height: 941
+  - slug: care-rota
+    title: "Care Rota"
+    date: "2026-07-03"
+    image: "/images/editorial/care-rota.png"
+    essay: "/essays/empty-chair/"
+    alt: "Editorial cartoon showing an anonymous adult leaving through an open kitchen door with a BOUNDARY shield while a foreground empty chair tagged NO PLAN is tied by a red thread to another adult holding a CARE ROTA clipboard beside an older relative, medicines, and a walker."
     width: 1672
     height: 941
