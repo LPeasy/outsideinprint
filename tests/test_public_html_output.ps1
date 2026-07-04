@@ -1367,6 +1367,7 @@ $requiredUxPages = @(
   'public/almanack/2026-06-06/index.html',
   'public/almanack/2026-06-20/index.html',
   'public/almanack/2026-06-27/index.html',
+  'public/almanack/2026-07-04/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -2872,8 +2873,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?June 27, 2026.*?Vacuum the house everyday if you have a pet that sheds\..*?The Bars on the Gum'
-    Message = 'expected the Bob''s Almanack collection page to feature the June 27 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?July 4, 2026.*?A number is useful only after you know what it counts\..*?The Clock by the Door'
+    Message = 'expected the Bob''s Almanack collection page to feature the July 4 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -3029,8 +3030,29 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?June 27, 2026.*?In the Margins.*?Number.*?Document.*?Virtue.*?Order.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?July 4, 2026.*?In the Margins.*?Number.*?Document.*?Trump v\. Cook.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?July 4, 2026.*?Issue 9.*?A number is useful only after you know what it counts\.'
+    Message = 'expected the July 4 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the July 4 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '(?s)/images/editorial/the-minute-drawer\.png.*?/images/editorial/claim-check\.png.*?/images/editorial/after-the-tone\.png.*?/images/editorial/the-sorting-counter\.png'
+    Message = 'expected the July 4 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '/images/essays/(the-clock-by-the-door|the-little-machine-in-the-glass-case|the-siren-on-the-pole|the-charge-ledger)/hero\.png'
+    Message = 'expected the July 4 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
