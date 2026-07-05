@@ -1,4 +1,4 @@
-current: care-rota
+current: borrowed-hour
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -483,5 +483,13 @@ cartoons:
     image: "/images/editorial/care-rota.png"
     essay: "/essays/empty-chair/"
     alt: "Editorial cartoon showing an anonymous adult leaving through an open kitchen door with a BOUNDARY shield while a foreground empty chair tagged NO PLAN is tied by a red thread to another adult holding a CARE ROTA clipboard beside an older relative, medicines, and a walker."
+    width: 1672
+    height: 941
+  - slug: borrowed-hour
+    title: "Borrowed Hour"
+    date: "2026-07-04"
+    image: "/images/editorial/borrowed-hour.png"
+    essay: "/essays/borrowed-hour/"
+    alt: "Editorial cartoon showing an anonymous person in bed holding a glowing phone while a clock-headed clerk hands a red BORROWED HOUR ticket toward a tired morning figure standing in a doorway."
     width: 1672
     height: 941
