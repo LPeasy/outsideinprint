@@ -1,4 +1,4 @@
-current: borrowed-hour
+current: house-gravity
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -491,5 +491,13 @@ cartoons:
     image: "/images/editorial/borrowed-hour.png"
     essay: "/essays/borrowed-hour/"
     alt: "Editorial cartoon showing an anonymous person in bed holding a glowing phone while a clock-headed clerk hands a red BORROWED HOUR ticket toward a tired morning figure standing in a doorway."
+    width: 1672
+    height: 941
+  - slug: house-gravity
+    title: "House Gravity"
+    date: "2026-07-05"
+    image: "/images/editorial/house-gravity.png"
+    essay: "/essays/default-owner/"
+    alt: "Editorial cartoon showing household chores sliding down a tilted floor marked NO OWNER toward an anonymous figure wearing a DEFAULT OWNER apron."
     width: 1672
     height: 941
