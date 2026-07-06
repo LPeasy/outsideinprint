@@ -879,6 +879,144 @@ The warning came in â€œlate.â€
   Assert-True ($imageMetadataOnlyOutput.Contains("taxonomy/image-only front matter change")) "Expected image-only metadata guardrail output to report the explicit skip."
   Assert-True (-not $imageMetadataOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected image-only metadata guardrail output not to require philosophy audit evidence."
   Assert-True (-not $imageMetadataOnlyOutput.Contains("Legacy import preflight summary")) "Expected image-only metadata guardrail output not to scan legacy body residue."
+
+  @'
+---
+title: "Legacy Taxonomy Only"
+date: 2025-07-14
+draft: false
+slug: "legacy-taxonomy-only"
+section_label: "Essay"
+subtitle: ""
+description: "A legacy essay fixture with old body residue."
+featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
+featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
+featured_image_caption: "Replacement hero image for the legacy web edition."
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
+featured: false
+collections:
+  - geopolitics-trade-global-power
+---
+
+The warning came in â€œlate.â€
+
+![](https://cdn-images-1.medium.com/max/800/placeholder)
+
+![Recovered local image](/images/medium/legacy-taxonomy-only/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpeg)
+
+*Photo by Example on Unsplash*
+'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
+
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "recover local body image" | Out-Null
+  $imageRecoveryHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  $imageRecoveryOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageMetadataHead -HeadRef $imageRecoveryHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $imageRecoveryOnlyExit = $LASTEXITCODE
+  Assert-True ($imageRecoveryOnlyExit -eq 0) "Expected Medium image recovery-only diffs to skip legacy cleanup and philosophy audit gates."
+  Assert-True ($imageRecoveryOnlyOutput.Contains("Medium image recovery-only change")) "Expected Medium image recovery guardrail output to report the explicit skip."
+  Assert-True (-not $imageRecoveryOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected Medium image recovery guardrail output not to require philosophy audit evidence."
+  Assert-True (-not $imageRecoveryOnlyOutput.Contains("Legacy import preflight summary")) "Expected Medium image recovery guardrail output not to scan legacy body residue."
+
+  @'
+---
+title: "Legacy Taxonomy Only"
+date: 2025-07-14
+draft: false
+slug: "legacy-taxonomy-only"
+section_label: "Essay"
+subtitle: ""
+description: "A legacy essay fixture with old body residue."
+featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
+featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
+featured_image_caption: "Replacement hero image for the legacy web edition."
+version: "1.2"
+edition: "Third web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
+featured: false
+collections:
+  - geopolitics-trade-global-power
+---
+
+The warning came in â€œlate.â€
+
+![](https://cdn-images-1.medium.com/max/800/placeholder)
+
+![Recovered local image](/images/medium/legacy-taxonomy-only/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpeg)
+
+*Photo by Example on Archive*
+'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
+
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "normalize recovered caption" | Out-Null
+  $imageCaptionHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  $imageCaptionOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageRecoveryHead -HeadRef $imageCaptionHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $imageCaptionOnlyExit = $LASTEXITCODE
+  Assert-True ($imageCaptionOnlyExit -eq 0) "Expected recovered local image caption-only diffs to skip legacy cleanup and philosophy audit gates."
+  Assert-True ($imageCaptionOnlyOutput.Contains("Medium image recovery-only change")) "Expected recovered caption guardrail output to report the explicit skip."
+  Assert-True (-not $imageCaptionOnlyOutput.Contains("Legacy import preflight summary")) "Expected recovered caption guardrail output not to scan legacy body residue."
+
+  @'
+---
+title: "Legacy Taxonomy Only"
+date: 2025-07-14
+draft: false
+slug: "legacy-taxonomy-only"
+section_label: "Essay"
+subtitle: ""
+description: "A legacy essay fixture with old body residue."
+featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
+featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
+featured_image_caption: "Replacement hero image for the legacy web edition."
+version: "1.2"
+edition: "Third web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
+featured: false
+collections:
+  - geopolitics-trade-global-power
+---
+
+The warning came in â€œlate.â€
+
+This prose changed and should keep the essay under guardrail review.
+
+![](https://cdn-images-1.medium.com/max/800/placeholder)
+
+![Recovered local image](/images/medium/legacy-taxonomy-only/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpeg)
+
+*Photo by Example on Unsplash*
+
+![Second recovered local image](/images/medium/legacy-taxonomy-only/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.jpeg)
+
+*Photo by Example on Unsplash*
+'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
+
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "change prose with recovered image" | Out-Null
+  $imageRecoveryWithProseHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  $imageRecoveryWithProseOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageCaptionHead -HeadRef $imageRecoveryWithProseHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $imageRecoveryWithProseExit = $LASTEXITCODE
+  Assert-True ($imageRecoveryWithProseExit -ne 0) "Expected Medium image recovery plus prose changes to remain under legacy cleanup gates."
+  Assert-True ($imageRecoveryWithProseOutput.Contains("Legacy import preflight summary")) "Expected prose-changing recovery output to run the legacy scan."
 }
 finally {
   if (Test-Path $tempRoot) {

@@ -79,7 +79,7 @@ For most people, a gold standard would not mean simple stability.
 
 ![Image Source](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/e19a6bf6cfb45e24e2d91c91f8269cd2531f7afb04e2d4d54ebb2bbadd2db52f.jpeg)
 
-*Image Source: FRED | Inflation based on the average price index for all urban consumers (1982–1984 = 100)*
+*Image Source: FRED | Inflation based on the average price index for all urban consumers (1982-1984 = 100)*
 
 
 It would mean less flexibility when things go wrong.
