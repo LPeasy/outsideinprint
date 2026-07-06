@@ -9,12 +9,15 @@ featured_image: "/images/medium/the-new-meta-economy/bcb3e2d1414e3aa992a7e91e09e
 featured_image_caption: "Photo by Dima Solomin on Unsplash"
 featured_image_alt: "The New Meta Economy"
 description: "Glasses that see what you see. Bots that sell what you want. Welcome to The New Meta Economy"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images were removed, import formatting was normalized, and source discipline was tightened."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-new-meta-economy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-new-meta-economy-587359ef25db"
@@ -92,6 +95,11 @@ They would prefer if you didn't say please and thank you.
 
 Competing with narrow superintelligence trained to deliver an optimized customer service experience?
 
+![Photo by Dmitry Mishin on Unsplash](/images/medium/the-new-meta-economy/015042017f749d26d524f53072a0318c8614a17157af7ec8ff99eadeb3a1e3c3.jpg)
+
+*Photo by Dmitry Mishin on Unsplash*
+
+
 Good luck.
 
 ### Interface Ownership and Total Immersion
@@ -124,6 +132,11 @@ It controls what, when, and how you experience the world.
 
 If Zuckerberg gets his way, the final evolution of the algorithm will be a fully integrated and personalized AI companion that collects, leverages, and monetizes your lived experience in real time.
 
+![Photo by Markus Winkler on Unsplash](/images/medium/the-new-meta-economy/a30ee2a90a43eade674422a34b46917001b36ac314d190fb26f8757f5778f6f6.jpg)
+
+*Photo by Markus Winkler on Unsplash*
+
+
 ### What It All Adds Up To
 
 Zuckerberg talks about general intelligence, but Meta is also building a closed economic loop: ad networks, sales agents, content engines, and hardware interfaces under one roof.
@@ -141,6 +154,11 @@ Call it innovation. Call it strategy. Call it the future.
 Just know that if this works, Meta won't just sell ads.
 
 They'll sell the economy back to itself, one personalized prompt at a time.
+
+![Photo by Unseen Studio on Unsplash](/images/medium/the-new-meta-economy/9064025e30867e05f3e5c083e5b7a9c10e26715ea52979053975a076417cae06.jpg)
+
+*Photo by Unseen Studio on Unsplash*
+
 
 ### Read More
 

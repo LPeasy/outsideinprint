@@ -9,12 +9,15 @@ featured_image: "/images/medium/iran-fires-missiles-at-u-s-base-in-qatar-what-ju
 featured_image_caption: "Source: NYT"
 featured_image_alt: "Iran Fires Missiles at U.S. Base in Qatar — What Just Happened?"
 description: "Iran just fired missiles at a major U.S. military base in Qatar. The strike comes after weeks of mounting conflict involving Israeli airstrikes, Iranian reta..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, and tightened casualty, interception, and escalation language around the Al-Udeid strike."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened-a3ed00113ff0"
@@ -57,6 +60,11 @@ dive...*
 [AlJazeera's Timeline](https://www.aljazeera.com/news/2025/6/23/history-of-us-iran-relations-from-the-1953-regime-change-to-trump-strikes)
 
 ### June 2025: How Did We Get Here?
+
+![Created by Author](/images/medium/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened/dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea.png)
+
+*Created by Author*
+
 
 Earlier this month, **Israel bombed Iranian nuclear facilities**,
 claiming urgent security threats. **Iran struck back.**

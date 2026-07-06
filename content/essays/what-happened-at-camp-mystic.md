@@ -9,8 +9,8 @@ featured_image: "/images/medium/what-happened-at-camp-mystic/f9aa0d94b11672a7a64
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-21"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-17"
     note: "Updated May 17, 2026, after OIP back-archive review. Warning timeline, casualty language, Medium import residue, and house-style issues were corrected."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
 featured: false
 
@@ -117,6 +120,11 @@ floodway*.**
 > nearby.)**
 
 > Geography only tells part of the story.
+
+![Guadalupe River Inundation Curve](/images/medium/what-happened-at-camp-mystic/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49.png)
+
+*Guadalupe River Inundation Curve: Source | CNN*
+
 
 By the time the first official **Flash Flood Warning** was issued at
 **1:14 a.m.**, the rain had already intensified.

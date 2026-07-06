@@ -11,12 +11,15 @@ description: "This biography is based on The Autobiography of Benjamin Franklin 
 featured_image: "/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/60260729069245aec2c2513ff114e881be68451fae1ca363432ab40d1bdaab17.jpeg"
 featured_image_caption: "Source: Picryl"
 featured_image_alt: "Benjamin Franklin: How America’s Funniest Founder Made Greatness Feel Possible"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. Source framing, Medium import residue, and house-style issues were corrected."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible-07e2ee19813d"
@@ -39,6 +42,11 @@ Historical image sources were checked during the web-edition review.
 > to everything he touched.
 
 ### From Ben to Benjamin
+
+![](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/06755fe1ad6f08750acf541d36e0c342c96cda828aad2aa84559849295171036.png)
+
+*[Source: History Oasis](https://www.historyoasis.com/post/4-facts-about-young-benjamin-franklin-that-you-didnt-know)*
+
 
 **Before** he was ***Benjamin Franklin*** ~ the founding father,
 lightning wrangler, and sage of thrift ~
@@ -78,6 +86,11 @@ self-aware.**
 
 ### Founding Father, Reluctant Hero
 
+![](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/501cce308d9d0d62d12d1e49ef18619dbe6966cdc42b6adb3416d235beda0ed6.jpeg)
+
+*[Source: Public Domain](https://commons.wikimedia.org/wiki/File:BenFranklinDuplessis.jpg)*
+
+
 > Unlike other founding fathers, **Franklin didn't posture.**
 
 He poked fun at himself constantly ~
@@ -106,6 +119,11 @@ and salon wit into diplomatic assets, winning support for the Revolution
 with a raised glass and a twinkle in his eye.
 
 ### A Life of Experiments
+
+![](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/87bf947065f13bbf37f1ea9767e96d9f5b7c2f30fd59f6589b9c602ce76abb75.jpeg)
+
+*[Source: Picryl](https://picryl.com/media/dr-d-jaynes-family-medicine-3092770187-dd7fac)*
+
 
 > Franklin made life look easy.
 
@@ -137,6 +155,11 @@ tinkering.
 > morality seem fun.***
 
 ### Legacy & Last Days
+
+![](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/97ff2bac54eb79c51fa8246935f01d7e0aa2045abf6f3043785c6fd7386085c9.jpeg)
+
+*[Source: Public Domain](https://commons.wikimedia.org/wiki/File:Franklin-Benjamin-LOC.jpg)*
+
 
 > *Franklin spent his final years reading voraciously, toying with
 > ideas, writing letters, and fighting for civil liberties.*
@@ -179,6 +202,11 @@ achievable.**
 
 ### Key Projects & Works
 
+![](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/915d7340cb47af95e9696267d51126c338fb911e2a692d702d71c90ac8365908.jpeg)
+
+*[Source: Public Domain](http://www.benjamin-franklin-history.org/poor-richards-almanac/)*
+
+
 - **Poor Richard's Almanack ~** Witty, wildly popular
   yearly publication (1732-1758)
 - **The Autobiography of Benjamin Franklin** ~
@@ -195,6 +223,11 @@ achievable.**
   support during the Revolution
 
 ### Philosophy & Mindset
+
+![Made by Author with ChatGPT](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738.png)
+
+*Made by Author with ChatGPT*
+
 
 > Franklin believed in the betterment of self and society.
 

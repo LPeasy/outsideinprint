@@ -9,8 +9,8 @@ description: "The U.S. Supreme Court ended its term with rulings and procedural 
 featured_image: "/images/medium/2025-supreme-court-wrap-up/68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095.png"
 featured_image_caption: "Illustration by author"
 featured_image_alt: "2025 Supreme Court Wrap-Up"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-04"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. SCOTUS outcome wording, Medium import residue, and house-style issues were corrected."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/2025-supreme-court-wrap-up.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/2025-supreme-court-wrap-up-10de7f8206cb"
@@ -38,6 +41,11 @@ the **balance of power, civil rights, education, and online access.**
 ### Trump v. CASA, Inc.
 
 #### **Issue: Can federal judges issue nationwide injunctions against executive orders?**
+
+![Photo by Bermix Studio on Unsplash](/images/medium/2025-supreme-court-wrap-up/3eef4af19d5bca6b4492dce120492b89b5339a3e3dc68b1927f5041ac2527b9d.jpg)
+
+*Photo by [Bermix Studio](https://unsplash.com/@bermixstudio) on [Unsplash](https://unsplash.com)*
+
 
 > **This case was about the scope of judicial authority.**
 
@@ -84,6 +92,11 @@ itself.**
 
 #### **Issue: Can states require age verification for access to adult websites?**
 
+![Photo by appshunter](/images/medium/2025-supreme-court-wrap-up/7c62ce9e8dddce19cceb09af07a424dad7887b956f40ec72470179c7493e8b1b.jpg)
+
+*Photo by [appshunter.io](https://unsplash.com/@appshunter) on [Unsplash](https://unsplash.com)*
+
+
 > The court weighed protecting minors online against preserving adult
 > privacy rights.
 
@@ -115,6 +128,11 @@ imposed unconstitutional burdens on speech and set a precedent for
 ### Mahmoud v. Taylor
 
 #### Issue: Are public schools required to allow religious opt-outs from LGBTQ+ content?
+
+![Photo by National Cancer Institute on Unsplash](/images/medium/2025-supreme-court-wrap-up/2c1baf17375cec485df9ea3dd25c08273a0477f7bc51a4d53066c8de3ed97f9e.jpg)
+
+*Photo by [National Cancer Institute](https://unsplash.com/@nci) on [Unsplash](https://unsplash.com)*
+
 
 > This case tested how far public schools must go in accommodating
 > religious beliefs in the classroom.
@@ -157,6 +175,11 @@ controversial or sensitive content.**
 
 #### **Issue: Must Louisiana redraw its congressional map to include a second majority-Black district?**
 
+![Photo by Element5 Digital on Unsplash](/images/medium/2025-supreme-court-wrap-up/4c8822a8c69e5ce0228f45a5f63fcf747a9b0e5613eb7f1c147ce8d5834c1f7b.jpg)
+
+*Photo by [Element5 Digital](https://unsplash.com/@element5digital) on [Unsplash](https://unsplash.com)*
+
+
 > This redistricting case had the potential to reshape Louisiana's
 > congressional delegation and to clarify the reach of the Voting
 > Rights Act.
@@ -194,6 +217,11 @@ decision with immediate consequences.**
 ### Conclusion
 
 #### What These Rulings Mean Going Forward
+
+![Photo by Tingey Injury Law Firm on Unsplash](/images/medium/2025-supreme-court-wrap-up/c8a7f289b8c518a3a24e9938f5bb80acd6b965279cd8e445750302a5b3503fec.jpg)
+
+*Photo by [Tingey Injury Law Firm](https://unsplash.com/@tingeyinjurylawfirm) on [Unsplash](https://unsplash.com)*
+
 
 > Each of these cases adjusts how law is practiced and interpreted
 > across different parts of American life.

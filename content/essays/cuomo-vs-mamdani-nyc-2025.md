@@ -8,12 +8,15 @@ subtitle: "Andrew Cuomo vs. Zohran Mamdani — What’s at Stake?"
 featured_image: "/images/medium/cuomo-vs-mamdani-nyc-2025/791f85e62d84073354870f23d6a2372b73eef587b3bb21ff9bd13e2a21ad422a.jpeg"
 featured_image_alt: "The 2025 New York City Democratic Mayoral Primary"
 description: "The NYC Democratic primary pits establishment favorite Andrew Cuomo against progressive newcomer Zohran Mamdani"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, corrected a candidate-description error, and added official ranked-choice result context while preserving the June 2025 frame."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/cuomo-vs-mamdani-nyc-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/cuomo-vs-mamdani-nyc-2025-853ac23c8eaa"
@@ -49,6 +52,11 @@ regaining power](https://apnews.com/article/nyc-mayor-cuomo-mamdani-zohran-7a4fb
 
 ### **A Brief History ~ (With Links)**
 
+![Created by Author with ChatGPT](/images/medium/cuomo-vs-mamdani-nyc-2025/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe.png)
+
+*Created by Author with ChatGPT*
+
+
 [**NYC's political strains date back decades**](https://www.vitalcitynyc.org/articles/echoes-of-1977-shape-2025-mayoral-politics-in-new-york)**,** balancing centrist governance with progressive
 demands.
 
@@ -67,6 +75,11 @@ echoing the post-Sanders era.
 
 ### **June 2025**
 
+![Created by Author with ChatGPT](/images/medium/cuomo-vs-mamdani-nyc-2025/239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80.png)
+
+*Created by Author with ChatGPT*
+
+
 - **Early June:** Cuomo leads primary polls; Mamdani
  surges into second place by the middle of the month.
 - **June 23:** Lower-polling Democrats urge voters:
@@ -75,6 +88,11 @@ echoing the post-Sanders era.
  heat ~ ranked-choice ballots cast in a tight race.
 
 #### **Why It Matters**
+
+![Created by Author with ChatGPT](/images/medium/cuomo-vs-mamdani-nyc-2025/fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1.png)
+
+*Created by Author with ChatGPT*
+
 
 **This contest isn't just about NYC** ~ it's a referendum on **the
 future of the Democratic Party:**

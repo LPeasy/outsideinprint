@@ -9,13 +9,16 @@ featured_image: "/images/medium/why-superintelligence-strategy-gets-ai-governanc
 featured_image_caption: "Photo by Clay Banks on Unsplash"
 featured_image_alt: "Why Superintelligence Strategy Gets AI Governance Wrong"
 description: "Governments think they can control artificial intelligence. They can’t.The authors of Superintelligence Strategy propose a grand vision for AI governance"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 
 revision_history:
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/why-superintelligence-strategy-gets-ai-governance-wrong.pdf"
 featured: false
 
@@ -60,6 +63,11 @@ That's an enormous gamble. A nation (or private actor) could quietly develop and
 
 ### The Flaws of MAIM: AI Deterrence is a Losing Game
 
+![Photo by Louis Hansel on Unsplash](/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/b146ef2105febe6df11964ac53fe1a5c203fd5368e5f38bf987b5647df068701.jpeg)
+
+*Photo by Louis Hansel on Unsplash*
+
+
 The authors argue that AI deterrence will function similarly to nuclear deterrence, but this assumption ignores the fundamental differences between AI and nuclear technology.
 
 Their argument hinges on the idea that sabotage is cheaper than AI development - that cyberattacks, insider threats, and targeted disruption can prevent a nation or private actor from achieving AI dominance.
@@ -72,6 +80,11 @@ AI proliferation is not a centralized arms race - it is a decentralized, acceler
 
 
 ### Who Really Controls AI? Corporations vs. The State
+
+![Photo by charlesdeluvio on Unsplash](/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731.jpeg)
+
+*Photo by charlesdeluvio on Unsplash*
+
 
 Governments may be worried about AI, but they're not always the ones building it.
 
@@ -96,6 +109,11 @@ The U.S. negotiates with private corporations; China can direct state-linked fir
 
 
 ### Superintelligence: The AI Race No One Can Afford to Lose
+
+![Photo by Jonathan Chng on Unsplash](/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/eb7cfab27952a4dbd5b6832899dde2cf136e0d6f3c3fc6b16e8d960ff3446082.jpeg)
+
+*Photo by Jonathan Chng on Unsplash*
+
 
 The authors of Superintelligence Strategy argue that AI will redefine military power, disrupt nuclear deterrence, and create dominant economic and cyber capabilities.
 
@@ -126,6 +144,11 @@ It is the last race. The assumption that governments will maintain effective res
 
 The first-mover in superintelligence will dictate all future technological, economic, and military progress for a long time.
 
+![Photo by Umberto on Unsplash](/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/6add1dcb61e7872c89e2a51a2264443eae08e132077e2f3efd7ebecc148e4732.jpeg)
+
+*Photo by Umberto on Unsplash*
+
+
 
 ### AI No Longer Needs Supercomputers - Here's Why That Matters
 
@@ -142,6 +165,11 @@ China is stockpiling restricted chips and investing billions in domestic semicon
 And here's the biggest flaw: even if every next-gen chip were locked down, AI progress would continue.
 
 Software always finds a way to optimize around hardware constraints. The Limits of Compute Control
+
+![Photo by iMattSmart on Unsplash](/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/0ecf1f26bbbdba162535fb3213905102fa26451558ea6e1c7904384538c96d2e.jpeg)
+
+*Photo by iMattSmart on Unsplash*
+
 
 The authors claim compute access is the primary bottleneck for AI progress, arguing that AI chips should be treated like uranium in nuclear weapons - heavily restricted, tracked, and controlled.
 
@@ -183,6 +211,11 @@ Governments have never been able to contain the spread of powerful knowledge. On
 
 
 ### AI Treaties Won't Work - The Global Arms Race Has Already Started
+
+![Photo by Jeff Kingma on Unsplash](/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/e47b97f4bad2e2edbd8ce187a4321d0fa30edf367657fc31d31323ff8b4badab.jpeg)
+
+*Photo by Jeff Kingma on Unsplash*
+
 
 The authors believe that international cooperation on AI safety is possible, arguing that global agreements will prevent reckless AI development.
 

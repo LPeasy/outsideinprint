@@ -9,12 +9,15 @@ featured_image: "/images/medium/let-it-crash-the-opportunity-of-a-lifetime/87fb7
 featured_image_caption: "Photo by Valery Fedotov on Unsplash"
 featured_image_alt: "Let It Crash: The Opportunity of a Lifetime"
 description: "Market crashes are painful, but lower asset prices can create entry points for workers who have income, cash discipline, and the patience to avoid panic."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, list formatting, promotional residue, and overbroad market-timing language were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/let-it-crash-the-opportunity-of-a-lifetime.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/let-it-crash-the-opportunity-of-a-lifetime-2c0f11995cee"
@@ -37,6 +40,11 @@ That means a downturn cuts two ways. If they lose work, it is devastating. If th
 The opportunity is real only if the risk is named.
 
 ### The End Of Infinite Growth
+
+![Photo by Markus Spiske on Unsplash](/images/medium/let-it-crash-the-opportunity-of-a-lifetime/1acf282b75e7e47b1cb7f442d96bdea0bfe4c24d572149cee6440163632bd1bf.jpeg)
+
+*Photo by Markus Spiske on Unsplash*
+
 
 The crash narrative is usually written as panic: markets fall, headlines turn red, and everyone asks whether the system is breaking.
 
@@ -118,6 +126,11 @@ That uncertainty is why the better advice is not "buy now." It is "get prepared.
 Build cash. Reduce fragile debt. Improve earning power. Learn the mechanics of investing before panic arrives. Know what you would buy, why you would buy it, and how long you could hold it if the market kept falling.
 
 ### The Last Word
+
+![Photo by EJ Strat on Unsplash](/images/medium/let-it-crash-the-opportunity-of-a-lifetime/677c6d3d528fda17f5a1fa452e5854c04dfae3f6138d5f3644dc74081e005a5e.jpeg)
+
+*Photo by EJ Strat on Unsplash*
+
 
 Let inflated assets fall if they have to fall.
 

@@ -9,8 +9,8 @@ featured_image: "/images/medium/flash-flood-alley-why-flash-floods-kill/bc148062
 featured_image_caption: "Flash Flood Alley | Source: Austin Chronicle"
 featured_image_alt: "Flash Flood Alley"
 description: "A Texas Hill Country flood-risk essay on steep terrain, fast runoff, warning systems, Camp Mystic, and why flash floods can turn warning time into minutes."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-18"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.2"
     date: "2026-06-24"
     note: "Updated June 24, 2026, after COA2 review for public metadata cleanup and reader-visible list and heading residue."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/flash-flood-alley-why-flash-floods-kill.pdf"
 featured: false
 
@@ -27,6 +30,11 @@ medium_source_url: "https://medium.com/@lawtonperret/flash-flood-alley-why-flash
 ---
 
 #### Why Flash Floods in the Texas Hill Country Are So Dangerous
+
+![Blanco River, 2018](/images/medium/flash-flood-alley-why-flash-floods-kill/dce296816d2f41e1454001e65dad55298e652a6c5239dd539e3fea9368229a96.png)
+
+*Blanco River, 2018 | Source: USGS/NWS*
+
 
 > **The Texas Hill Country is beautiful, rugged ~**
 
@@ -84,6 +92,11 @@ flood at Camp Mystic.**
 > tells us about preparedness* in high-risk places like the Texas Hill
 > Country.**
 
+![2015 Blanco RIver Flood](/images/medium/flash-flood-alley-why-flash-floods-kill/f84a5f63c1f518dc5742b160eb79424464b34e1b9f07bdf4f37a279ff3344dd5.png)
+
+*2015 Blanco RIver Flood | Source: San Antonio Express-News*
+
+
 I work as a life safety consequences specialist with the U.S. Army Corps
 of Engineers, where I analyze how floods and infrastructure failures put
 human lives at risk ~
@@ -109,6 +122,11 @@ pushed in by winds with **plenty of advance notice** and ample
 opportunity to evacuate.
 
 #### Flash floods aren't like that.
+
+![Flood Timing Comparison](/images/medium/flash-flood-alley-why-flash-floods-kill/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f.png)
+
+*Flood Timing Comparison | Made by Author with ChatGPT*
+
 
 **They arrive fast,** often with **less than an hour of warning**, and
 they don't need days of rain to cause damage.
@@ -138,6 +156,11 @@ water.***
 
 In theory, the **National Weather Service (NWS) alert process** follows
 a straightforward path from the NWS to the public.
+
+![NWS Alert Process](/images/medium/flash-flood-alley-why-flash-floods-kill/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054.png)
+
+*NWS Alert Process | Made by Author with ChatGPT*
+
 
 > The flash flood alert system has multiple layers ~
 
@@ -259,6 +282,11 @@ this case, the flood was much worse.**
 
 ### **Flood Risk at Camp Mystic (FEMA FIRM Panel)**
 
+![Fema FIRM Panel](/images/medium/flash-flood-alley-why-flash-floods-kill/7eb60631a04b8cb1308977106bf7f981686b06414bcb07565b9576cec6a59b37.png)
+
+*Fema FIRM Panel | Source: FEMA*
+
+
 > *Several cabins and roads sit within Zone AE ~ a high-risk flood zone
 > with a known base flood elevation. Zone AE indicates a 1-in-100 chance
 > of flooding each year.*
@@ -279,6 +307,11 @@ It's not that people didn't try to evacuate...
 > nearly impossible.
 
 ### How Multiple System Failures Turned a Flash Flood Into a Tragedy
+
+![Made by User with ChatGPT](/images/medium/flash-flood-alley-why-flash-floods-kill/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4.png)
+
+*Made by User with ChatGPT*
+
 
 **Flash floods test emergency response systems at every level.**
 

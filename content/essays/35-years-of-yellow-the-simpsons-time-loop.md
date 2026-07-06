@@ -11,12 +11,15 @@ description: "In September 2024, The Simpsons aired Bart’s Birthday, a fake se
 featured_image: "/images/medium/35-years-of-yellow-the-simpsons-time-loop/57d2e2573cdbc659261cd4a869b43321fa96cd36a2a4f92c0efd3357c04c0318.png"
 featured_image_caption: "Illustration by author"
 featured_image_alt: "35 Years of Yellow: The Simpsons Time Loop"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. The fake-finale episode reference, Medium import residue, and house-style issues were corrected."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/35-years-of-yellow-the-simpsons-time-loop.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/35-years-of-yellow-the-simpsons-time-loop-50f72b5bff6b"
@@ -52,6 +55,11 @@ watches America evolve while it stays ***(more or less)*** the same.
 ### **How a Crude Sketch Became a Global Standard**
 
 #### History of the Simpsons
+
+![](/images/medium/35-years-of-yellow-the-simpsons-time-loop/6bd5962dce83e134c38be18476e2289171887f408ffebe32f88a49414fcd541c.png)
+
+*Source: [Reddit](https://www.reddit.com/r/FuckImOld/comments/12shvlf/the_simpsons_shorts_first_aired_on_fox_on_april/)*
+
 
 **Matt Groening** came up with ***The Simpsons*** in the lobby of James
 L. Brooks's office in the late 1980s. He was originally going to pitch a
@@ -147,6 +155,11 @@ smartphones now* ~ but the stories stay familiar.
 
 #### The Simpsons Predicts the Future
 
+![](/images/medium/35-years-of-yellow-the-simpsons-time-loop/24d7be6ef4ced1066bab99bcf050fe66e02f99aa83eac2675cd56a5d1171f6ed.png)
+
+*Source: [UPROXX](https://uproxx.com/tv/the-simpsons-911-prediction/)*
+
+
 **The most absurd part of *The Simpsons* legacy is the long,
 increasingly bizarre list of things the show somehow predicted.**
 
@@ -161,6 +174,11 @@ holds up a brochure advertising a \$9 bus fare to Manhattan. Behind the
 
 > ***The scene lasted one second. Four years later, it became internet
 > lore.***
+
+![Made by Author with ChatGPT](/images/medium/35-years-of-yellow-the-simpsons-time-loop/0fda9c1e65b4765b7fee77b3a143c7f3a4684f8f18330b1d593dab408d0f6717.png)
+
+*Made by Author with ChatGPT*
+
 
 **President Trump (2000)**
 
@@ -178,6 +196,11 @@ line.
 > American spectacle into a repeatable gag.
 
 #### **The Pandemic (1993)**
+
+![Made by Author with ChatGPT](/images/medium/35-years-of-yellow-the-simpsons-time-loop/3b78dafd8c7316c9689933faefd508443e382f22ca5017e2ca312d6e76f570b3.png)
+
+*Made by Author with ChatGPT*
+
 
 The 1993 episode ***"Marge in Chains"*** features an "Osaka Flu" that
 spreads through Springfield after being shipped in from Asia.
@@ -214,6 +237,11 @@ To be fair, the show has made **thousands of jokes across decades.**
 ### **Immortality in Syndication**
 
 #### The Simpsons: 35 Years and Counting
+
+![Made by Author with ChatGPT](/images/medium/35-years-of-yellow-the-simpsons-time-loop/72b2d666368a71ddb17bd0cfda25d444213f46060c98323516ddb9c941c1ad24.png)
+
+*Made by Author with ChatGPT*
+
 
 **With more than 750 episodes** under its belt, *The Simpsons* holds the
 title for ***the longest-running scripted primetime series in American
@@ -260,6 +288,11 @@ anymore.**
 ### Conclusion
 
 #### **-That Was the Joke-**
+
+![](/images/medium/35-years-of-yellow-the-simpsons-time-loop/62d012f21ac584c6671021982f12f2a6e169b48a222ad4b9d6d722748e11b778.png)
+
+*Source: Fox*
+
 
 > When *Bart's Birthday* aired in 2024,
 

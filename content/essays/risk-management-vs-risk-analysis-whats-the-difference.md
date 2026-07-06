@@ -8,12 +8,15 @@ subtitle: "A coastal city’s disaster forces them to rethink their EM protocols
 description: "This essay lays out the roles, responsibilities, and day-to-day realities of risk managers and risk analysts"
 featured_image: "/images/medium/risk-management-vs-risk-analysis-whats-the-difference/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc.png"
 featured_image_alt: "Risk Management vs Risk Analysis: What’s the Difference?"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium body images, replaced chart-only sections with text summaries, normalized import punctuation, checked source framing, and verified rendering."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/risk-management-vs-risk-analysis-whats-the-difference.pdf"
 featured: false
 
@@ -106,6 +109,11 @@ the analysis** and drafts the plan.
 
 ### Clear split of duties
 
+![The three players involved and their roles and responsibilities](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/be0c707ae681f1804192900e2334bb3b53c8fe6a9d8128d9d7406b7b3580090e.png)
+
+*The three players involved and their roles and responsibilities*
+
+
 The council owns policy, risk tolerance, funding, and public
 accountability. The city manager turns those choices into work plans,
 contracts, staff assignments, and public messages. The consultant builds
@@ -176,6 +184,11 @@ risk management.
 
 ### Responsibilities of Risk Managers and Risk Analysts
 
+![Risk Analysts and Risk Managers and their responsibilities](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/d235798077ba020d5701ca4cdf8385e04a63a00c9f99c5f31a86d4721e59b120.png)
+
+*Risk Analysts and Risk Managers and their responsibilities.*
+
+
 Risk analysts define the hazard, assemble data, model plausible
 pathways, estimate consequences, and explain uncertainty. Risk managers
 set priorities, choose among options, fund action, assign authority, and
@@ -183,12 +196,22 @@ own the result when the decision reaches the public.
 
 ### Motivations and Incentives
 
+![Motivations for each in typical relationships between managers and analysts](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/76a6a378caa1eb3b58af6361ee589a730ede3716843b3cf89405795871ee2f5d.png)
+
+*Motivations for each in typical relationships between managers and analysts*
+
+
 Analysts are rewarded for careful methods, transparent assumptions, and
 defensible ranges. Managers are rewarded for timely choices, workable
 plans, political durability, and outcomes people can understand before
 the next storm arrives.
 
 ### Common Failures
+
+![Common failures seen when dealing with risk](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/ed43488f59939b5080ba23ef52dfa5ce055fb5e4e997ec2f07e853757e973a71.png)
+
+*Common failures seen when dealing with risk.*
+
 
 The system breaks when analysis hides uncertainty, management treats a
 model as the decision, or incentives punish early warning because it is

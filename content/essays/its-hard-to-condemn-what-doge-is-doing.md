@@ -8,12 +8,15 @@ subtitle: "The Wrecking Ball We Deserve?"
 featured_image: "/images/medium/its-hard-to-condemn-what-doge-is-doing/d0e770bbe36eaacb02b0485d21c33b388d5975eb34ddcb15f38b678658bb506e.jpeg"
 featured_image_alt: "It’s Hard to Condemn what DOGE is Doing"
 description: "There is something undeniably compelling about what the Department of Government Efficiency (DOGE) is doing, even as its methods raise hard questions about accountability and institutional risk."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, punctuation artifacts, and unsupported reputational phrasing were cleaned up; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/its-hard-to-condemn-what-doge-is-doing.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/its-hard-to-condemn-what-doge-is-doing-b8ed0ff6e3f8"
@@ -35,6 +38,11 @@ If DOGE is wielding an axe instead of a scalpel, it's only because decades of fa
 
 The Unfinished Business of Government Efficiency
 
+![Photo by Alexandr Podvalny on Unsplash](/images/medium/its-hard-to-condemn-what-doge-is-doing/e07e6921ebeab03a24a0e8b1482ff79763d7ccbe98f2b1c3b3f50e210a02b064.jpeg)
+
+*Photo by Alexandr Podvalny on Unsplash*
+
+
 DOGE is hardly the first attempt to rein in government excess.
 
 In the early 20th century, progressive reformers sought to streamline public administration through the creation of independent commissions and civil service protections.
@@ -52,6 +60,11 @@ The pattern is clear: every few decades, an administration attempts to make gove
 In this sense, DOGE is a response to a long history of half-measures and abandoned efficiency crusades. The difference is that Musk and his team aren't just making recommendations. They are shutting down agencies by force, bypassing Congress, and daring anyone to stop them.
 
 The Real Culprit: Congressional Neglect
+
+![Photo by Kyle Glenn on Unsplash](/images/medium/its-hard-to-condemn-what-doge-is-doing/944aa116cdc8861c91ae67c50af4521cbb4cfff896bbc830bfacd9e3da166c25.jpeg)
+
+*Photo by Kyle Glenn on Unsplash*
+
 
 If inefficiency and corruption exist in the federal bureaucracy, they are symptoms, not causes, of government dysfunction.
 
@@ -71,6 +84,11 @@ None of this should have required a technocratic blitzkrieg to address. Congress
 
 The Myth of Bureaucratic Corruption
 
+![Photo by Elimende Inagella on Unsplash](/images/medium/its-hard-to-condemn-what-doge-is-doing/ac44261177d34ab5da8aef3aee01bd31e1ed03c93d470ee4ec653035d7f4217b.jpeg)
+
+*Photo by Elimende Inagella on Unsplash*
+
+
 One of DOGE's core justifications is that federal agencies are rife with corruption and self-serving career bureaucrats. But this is largely a red herring. While inefficiency exists, actual financial enrichment by civil servants is dwarfed by the fortunes amassed by elected officials.
 
 In recent years, public scrutiny has turned toward the stock market activity of congressional leaders, spouses, and households whose portfolios can overlap with the industries Congress regulates.
@@ -88,6 +106,11 @@ When Congress does it, it's just another Tuesday.
 While career bureaucrats are often vilified for their stable government salaries, they do not control legislation and they do not have the ability to shape markets in real time like members of Congress do. If corruption is truly the target, it makes little sense for DOGE to dismantle regulatory agencies while ignoring the financial conflicts that can accumulate around elected power.
 
 The Wrecking Ball and Its Collateral Damage
+
+![Photo by Dan Loran on Unsplash](/images/medium/its-hard-to-condemn-what-doge-is-doing/283ebbe543afa8851d2e9050fd070b0176597af8de6f4ecf025a37adf90ba234.jpeg)
+
+*Photo by Dan Loran on Unsplash*
+
 
 After decades of failed attempts to fix bureaucratic inefficiencies, it's hard to argue that the wrecking ball isn't necessary. The Hoover Commission, Grace Commission, and countless other reform efforts have repeatedly demonstrated that bureaucracy does not shrink itself. It has only grown more complex, more resistant to change, and more entangled with corporate and political interests.
 

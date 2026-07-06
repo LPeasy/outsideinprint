@@ -11,18 +11,26 @@ featured_image: "/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair
 featured_image_caption: "Pope Leo Waving to the Vatican | Source: Wikimedia Commons"
 featured_image_alt: "Pope Leo Waving to the Vatican"
 description: "Robert Francis Prevost grew up in Dolton, entered the Augustinians, served for years in Peru, and became the first pope from the United States."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-17"
     note: "Updated May 17, 2026, after OIP back-archive review. Vatican biography details, Medium import residue, remote body images, and house-style issues were corrected."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-9c2b0ab48f4a"
 ---
 
 ### **Early Life and Family Roots**
+
+![1950s Chicago](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/25c92cdac108c6b8135a1ab1b65c63a3b90dc9ce3ece1bfd6790741762fdbc0d.png)
+
+*1950s Chicago | Source: Wikimedia Commons*
+
 
 > **"Before Pope Leo XIV, he was just Rob Prevost, a kid from the South
 > Side of Chicago with a daily Mass habit playing priest in the living
@@ -79,6 +87,11 @@ humility, and multilingual fluency.
 
 ### **Missionary Work in Peru**
 
+![Prevost in 2012](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/a4f857d3109b3e5bcbb624c04617ff0b5f05bd66cbf3d854efc69bbd6c979231.jpeg)
+
+*Prevost in 2012 | Source: Wikimedia Commons*
+
+
 > **From 1985 to 1998, Fr. Prevost served as a missionary in northern
 > Peru.**
 
@@ -98,6 +111,11 @@ Chiclayo.**
 
 ### **Global Leadership in the Augustinian Order**
 
+![Pope Leo’s Inauguration](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/54f9bf2dba2609d3ac58119fd2080f2c79adcb50b24b92f488cf09254d5accfa.jpeg)
+
+*Pope Leo’s Inauguration | Source: Wikimedia Commons*
+
+
 > In 1999, he was elected Provincial Prior of the Augustinians in
 > Chicago.
 
@@ -113,6 +131,11 @@ in Chicago.
 > He expected a quieter chapter ahead.
 
 ### **Return to Peru and Rise in the Vatican**
+
+![Catedral de Chiclayo](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/1cce7c803071816bf647efbbdd6cfb85cb0919e17b4f97a24f0184cb34d036b8.jpeg)
+
+*Catedral de Chiclayo | Source: Wikimedia Commons*
+
 
 > Pope Francis had other plans.
 
@@ -136,6 +159,11 @@ priorities.
 
 ### **Papal Election and Inauguration**
 
+![Vatican City](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/a36be69de1178f793b3ef5f45de7d901894c3afcfb1d7313ae125c8629736f57.jpg)
+
+*Vatican City | Source: [Karim Ben Van](https://unsplash.com/@kbendakhlia)*
+
+
 > Pope Francis passed away in April 2025.
 
 During the conclave that followed, **Prevost was not widely seen as a
@@ -157,6 +185,11 @@ frontrunner**, largely because he was American.
 > **"Peace be with all of you."**
 
 ### **Timeline of Key Life Events**
+
+![Made by Author with ChatGPT](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c.png)
+
+*Made by Author with ChatGPT*
+
 
 The main dates are clear: Chicago birth in 1955, Augustinian formation
 in the late 1970s and early 1980s, missionary and formation work in

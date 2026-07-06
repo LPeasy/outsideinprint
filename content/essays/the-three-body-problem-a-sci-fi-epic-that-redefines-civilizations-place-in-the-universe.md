@@ -11,8 +11,8 @@ featured_image: "/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefi
 featured_image_caption: "Photo by Greg Rakozy on Unsplash"
 featured_image_alt: "The Three-Body Problem: A Sci-Fi Epic That Redefines Civilization’s Place in the Universe"
 description: "A review of Liu Cixin's The Three-Body Problem, focused on science, civilization, survival, and why the novel's ideas endure after its Netflix adaptation."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 pdf: "/pdfs/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe-8292352732cc"
@@ -23,6 +23,9 @@ revision_history:
   - version: "1.2"
     date: "2026-06-23"
     note: "Updated June 23, 2026, after COA2 value review. Cleaned verdict-list residue, house-style description language, and public discovery evidence."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 ---
 
 Should you read this viral book?
@@ -34,6 +37,11 @@ I became deeply invested, not just in the high-stakes mystery at the novel's cor
 This is not just a story. It is a challenge. It forces you to think, blending hard science with philosophy and exploring the fragility of civilization on a scale few novels dare to attempt.
 
 ## A Tale of Science, Betrayal, and Unfathomable Forces
+
+![Photo by Stephan Widua on Unsplash](/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/819bc28d3223127c26dbb10a0d758aba00865dc335a3c47f2ca5a790e8005a98.jpeg)
+
+*Photo by Stephan Widua on Unsplash*
+
 
 The novel opens amid China's Cultural Revolution. Scientists are persecuted. Knowledge is a threat. Chaos reigns. Ye Wenjie, a young astrophysicist, watches her father beaten to death for refusing to renounce science. Disillusioned, she makes a choice, one that will alter the fate of humanity.
 
@@ -65,6 +73,11 @@ He is a cop, not a philosopher. His gift is practical judgment: when danger is n
 
 ## Setting: A Story That Spans Eras and Worlds
 
+![Photo by Nadine E on Unsplash](/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/1f547b237fce3262296473a4c56f49ee53c435825261862ef62a820a140ac14a.jpeg)
+
+*Photo by Nadine E on Unsplash*
+
+
 ### The Cultural Revolution: The First Collapse
 
 Liu Cixin does not just use history as a backdrop. He makes it a catalyst for everything that follows. The Cultural Revolution isn't just setting; it's where Ye loses faith in humanity. It's where she makes her fateful choice.
@@ -78,6 +91,11 @@ The virtual reality game Three-Body is one of the novel's most brilliant inventi
 At first, the game seems like a strange puzzle. Then, it becomes clear: this is not just a game. It's a message from an alien race. And it holds the key to humanity's first contact.
 
 ## Themes: Science, Survival, and the Fragility of Civilization
+
+![Photo by T](/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/ca1e1c8bd1cdea532579dcbc3ce359e517adde8ab29551eac798e6302129e454.jpeg)
+
+*Photo by T. Selin Erkan on Unsplash*
+
 
 ### Faith in Science vs. Despair in Humanity
 
@@ -93,6 +111,11 @@ Liu suggests that intelligence alone does not guarantee survival. Adaptation, re
 
 ## Writing Style: A Different Kind of Sci-Fi
 
+![Photo by Heramb kamble on Unsplash](/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/c6ccf0128169eedd5b7ad584e65c6d61ce00887867bf1c5d6d949ae619e56ba7.jpeg)
+
+*Photo by Heramb kamble on Unsplash*
+
+
 Liu Cixin's writing is dense, methodical, and idea-driven. It's not emotional in the traditional sense, but it rewards patience. The translation by Ken Liu captures the novel's complexity, though it can feel stiff at times.
 
 The pacing? Slow at first. But the payoff? Enormous.
@@ -106,6 +129,11 @@ The Netflix adaptation has already widened the audience for the story, and the h
 For those who love big ideas in sci-fi, this book is essential reading.
 
 ## Verdict: Should You Read It?
+
+![Photo by Brooke Cagle on Unsplash](/images/medium/the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe/e955467abdb22bba3f9df33fc1fe8b74fece6bd2a681d70f1017c5c2d7b728ec.jpeg)
+
+*Photo by Brooke Cagle on Unsplash*
+
 
 **Who will love this book?**
 

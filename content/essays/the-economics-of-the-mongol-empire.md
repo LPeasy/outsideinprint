@@ -9,12 +9,15 @@ featured_image: "/images/medium/the-economics-of-the-mongol-empire/60342f090c96a
 featured_image_caption: "Photo by Ryan Brooklyn on Unsplash"
 featured_image_alt: "The Economics of the Mongol Empire"
 description: "History often remembers Genghis Khan as a ruthless conqueror, but his most lasting impact was also economic: a protected trade network across much of Eurasia."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, source-card fragments, spelling, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-economics-of-the-mongol-empire.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-economics-of-the-mongol-empire-c258d2179605"
@@ -50,6 +53,11 @@ Nowhere was this more evident than in Karakorum, the Mongol capital and the beat
 
 It was a marketplace of ideas ~ where East met West in ways that reshaped the world.
 
+![Location of Ghengis Khan’s capitol city Karakorum](/images/medium/the-economics-of-the-mongol-empire/ef22902ff0efb5540cbfb990defdcd832d87afa1e85d0b5eb49252a1bd420636.jpg)
+
+*Location of Ghengis Khan’s capitol city Karakorum | Source*
+
+
 The Mongols built a sophisticated road network linking Karakorum to the furthest reaches of their empire. Safe passage, standardized trade policies, and religious tolerance made the city a magnet for commerce.
 
 For the Mongols, all roads led to Karakorum. Genghis Khan's empire would expand to become the largest contiguous land empire of all time, stretching roughly 9 million square miles from the Pacific Ocean toward the Persian Gulf.
@@ -61,6 +69,11 @@ For the Mongols, all roads led to Karakorum. Genghis Khan's empire would expand 
 Before the Mongols, long-distance trade was fragmented and dangerous.
 
 Genghis Khan was born around 1162 and died in 1227. In the late 12th century, the Silk Road was plagued by warring states, bandits, and instability.
+
+![The Silk Road in the Late 8th Century](/images/medium/the-economics-of-the-mongol-empire/47adc7e89aeb23671b70efdee97bb29f0d0cfc81b84f0340b04c3db4deae26d7.jpeg)
+
+*The Silk Road in the Late 8th Century | Source*
+
 
 Genghis Khan understood that controlling land was meaningless unless it could be made productive.
 
@@ -87,6 +100,11 @@ The Mongols pushed large parts of Eurasia toward more consistent standards.
 The Yuan Dynasty in China introduced paper money as a standardized currency. While the Chinese had experimented with paper currency before, the Mongols enforced its use throughout their empire.
 
 It is a remarkable early example of fiat money backed not by gold or silver, but by government decree. The Mongols also standardized weights and measures, streamlining taxation and trade. The system still depended on fiscal credibility and state enforcement; earlier experiments tied to silk did not solve the problem.
+
+![Yuan Dynasty Banknote Printing Plate](/images/medium/the-economics-of-the-mongol-empire/919835b20215daf4d522e3b70b6f08f63a0732dc1cd97954a408d869688459e3.jpg)
+
+*Yuan Dynasty Banknote Printing Plate | Source*
+
 
 They even established a transcontinental postal system, an early version of today's express courier networks. This allowed for the rapid movement of goods, messages, and officials across thousands of miles, reducing transaction costs and increasing economic efficiency.
 
@@ -121,6 +139,11 @@ Their legacy also serves as a cautionary tale. Just as Mongol trade routes inadv
 The Mongols' postal system revolutionized communication but also leaked intelligence to rivals.
 
 Today's digital networks do the same thing ~ boosting connectivity while exposing vulnerabilities to cyber threats and misinformation.
+
+![Image of a 13th century Mongol Post Rider](/images/medium/the-economics-of-the-mongol-empire/7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6.png)
+
+*Image of a 13th century Mongol Post Rider | Created by Author with GPT-4o*
+
 
 The Mongols built an empire that connected the world like never before, but they also demonstrated the vulnerabilities of interconnected systems.
 

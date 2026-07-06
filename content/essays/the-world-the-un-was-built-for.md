@@ -8,12 +8,15 @@ subtitle: "How Postwar Human Rights, Migration Norms, and Global Institutions We
 featured_image: "/images/medium/the-world-the-un-was-built-for/cc8c8bffe2bc792723dbd459180973ed10ecd5475abadc1a558d3e26bb1ca050.png"
 featured_image_alt: "The World the UN Was Built For"
 description: "In the years after World War II, the victors attempted something new. After two global wars in a single generation, they agreed to a set of rules meant to pr..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-25"
     note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-world-the-un-was-built-for.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-world-the-un-was-built-for-335093881846"
@@ -56,7 +59,17 @@ They were trying to contain it.
 
 The system worked ~ **within the societies it was designed for**.
 
+![Allied leaders during World War II](/images/medium/the-world-the-un-was-built-for/a8a7ef586745de14c35dd74d8bfc4d9716e12cb231b36924fab1c2f24fac955b.jpg)
+
+*Allied leaders during World War II. The postwar global order emerged from total war, not peaceful consensus. [Ann Ronan Pictures/Print Collector/Getty Images](https://www.photo12.com/en/image/arp07101_390004800)*
+
+
 ### Who Built the UN ~ and Who Didn't
+
+![United Nations membership by decade](/images/medium/the-world-the-un-was-built-for/cf87d44f6e14106cf84c491686d72a57f3c45a3a924b5615f1609cb7374953ff.png)
+
+***United Nations membership by decade.*** *Most of Africa, the Middle East, and South Asia were not yet sovereign states in 1945 and were not represented at* [*the system*](http://UN.org)*’s founding.*
+
 
 
 The early UN was dominated by Western Europe, North America, Latin

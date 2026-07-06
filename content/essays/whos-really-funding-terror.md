@@ -9,8 +9,8 @@ featured_image: "/images/medium/whos-really-funding-terror/f7c9bf9f76e3c75c9b18d
 featured_image_caption: "Photo by Jp Valery on Unsplash"
 featured_image_alt: "Who’s Really Funding Terror?"
 description: "A Treasury risk assessment shows how terrorist financing risk moves through banks, charities, cash channels, crowdfunding, and crypto without reducing the problem to one simple culprit."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-21"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.2"
     date: "2026-06-23"
     note: "Updated June 23, 2026, after COA2 value review. Cleaned imported list, pseudo-heading, source-card, lead-image, and discovery-description residue."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/whos-really-funding-terror.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-really-funding-terror-c9268e4f1bb4"
@@ -122,6 +125,11 @@ discussion grounded.*
 
 So who does Treasury see as the biggest threat today?
 
+![](/images/medium/whos-really-funding-terror/5c1a69827da0ba6dd1b974eecb902aafbadb996313a4806f5e47ae20f67bdab3.jpeg)
+
+*Source: https://www.rottentomatoes.com/m/771201794*
+
+
 The report is pretty direct on one point: **the primary terrorism threat
 to the U.S. homeland comes from individuals inside the country**, often
 radicalized online or through social networks.
@@ -218,6 +226,11 @@ If you run a crypto platform or payment app, the message is simple:
 exposure.**
 
 ### Strengths and gaps in Treasury's approach
+
+![](/images/medium/whos-really-funding-terror/ae234df0d9c589de97268368e789a1b227acd387823a5e0102e5a0bf6ed1476c.jpeg)
+
+*Source: https://www.cmcmarkets.com/en-gb/trading-guides/bull-markets*
+
 
 Read strictly as a risk assessment, the 2024 report gets a lot right.
 

@@ -8,12 +8,15 @@ subtitle: "From zero followers to breakout stories ~ one writer’s honest exper
 featured_image: "/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/85db9a233bbe2b8ce8b37bf2cffb170d82db88760fa0ebb3fb2e14a0e881e798.png"
 featured_image_alt: "Writing 100 Essays on Medium"
 description: "The internet is noisy with hot takes and thin on verifiable facts. Sometime around December of 2024, I realized that quickly answering a question on the inte..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium chart images, repaired internal OIP links, removed Medium import residue, normalized house style, and checked rendering."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/what-i-learned-from-writing-100-essays-on-medium-in-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/what-i-learned-from-writing-100-essays-on-medium-in-2025-ca5812b6e261"
@@ -64,6 +67,11 @@ internal stats found on my Medium stats page.
 > The line is jagged, not smooth ~ readers came in waves.\
 > Breakouts show up as sudden leaps.
 
+![Data in this graph is tied to publishing date NOT read/view date](/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/1f230691df58ff2f8c509028142818467399db9c613d3836ad3944db9cb0f741.png)
+
+*Data in this graph is tied to publishing date NOT read/view date.*
+
+
 
 ### December 2024 ~ Starting Out on Medium with 0 Followers
 
@@ -86,6 +94,11 @@ so I joined Medium as a member in January and **then I really started to
 dig in.**
 
 ### January 2025 ~ Finding My Writing Voice on Medium
+
+![Monthly and Cumulative Essays Published](/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/92e0d1f4de6e7c9fa4d4e2dec28a53b6864fd0ea60a07d6692579443201d9cb0.png)
+
+*Monthly and Cumulative Essays Published.*
+
 
 > In January, I wrote about whatever interested me.
 
@@ -182,6 +195,11 @@ out."
 > ***Looking at a few broad categories, it became clear which kinds of
 > essays drew the strongest response. For me, it was current events.***
 
+![Average reads by topic for stories with atleast 10 views](/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/6303f2fc0491959708bd7643240384b5bdc2252ce12471c08de09c80e3cd6c83.png)
+
+*Average reads by topic for stories with atleast 10 views. (Other is everything else.)*
+
+
 
 ### Breakouts vs Evergreen Essays ~ How Medium Stories Perform Over Time
 
@@ -194,6 +212,11 @@ both.**
 after the headlines move on.
 
 #### Breakouts *~ Boosters*
+
+![Top 10 stories by reads](/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/597f8a7cf6738f762be826d657b4934b810710e6a95e9d555d102551e0e315ca.png)
+
+***Top 10 stories by reads** | Russia’s and Nottoway were breakouts | R-Word and Moore’s Law are evergreen*
+
 
 Some essays are **built to** **ride the wave** of the moment ~ they'll
 spike fast, get shared, and then disappear.
@@ -210,6 +233,11 @@ The historical explainer [Nottoway Plantation Burns Down](/essays/nottoway-plant
 
 
 #### Evergreens ~ Builders
+
+![This chart shows two very different lifecycles](/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/c26875c883b2301fadc219abba8ce620b3718e16ac0ba77004c33e0d8d2f4160.png)
+
+*This chart shows two very different lifecycles. “Russia’s Slow Surrender” drew immediate attention, spiking to 1,500 reads almost overnight before stalling out. In contrast, “The R-Word” and “Gold Standard” never broke big but continue to collect steady reads week after week. Breakout stories deliver a burst of visibility, while evergreen essays pay out slowly over time.*
+
 
 Others are **built to last**, drawing in readers steadily through
 search, recommendations, or ongoing relevance.
@@ -247,6 +275,11 @@ views over time.
 #### **2) Write about topics while people are searching for them.**
 
 #### 3) Keep your essays in the 4-9 minute range
+
+![Views and Reads against Story length in minutes](/images/medium/what-i-learned-from-writing-100-essays-on-medium-in-2025/e23c8576517bfd920bf1fbf1fb6251a8c440c1ee6b91f4f261b2c9a4876c6503.png)
+
+*Views and Reads against Story length in minutes.*
+
 
 > ***Medium seems to reward medium-length essays.*** *My reads and views
 > clustered most often between 4 and 9 minutes.*
