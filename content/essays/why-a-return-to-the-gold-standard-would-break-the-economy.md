@@ -9,12 +9,15 @@ description: "A gold standard sounds like discipline, but the arithmetic points 
 featured_image: "/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/b20b0f68d3f48fd5a5a22035ff5ff670094552486b74d98c6a1d5c3e71346552.jpeg"
 featured_image_caption: "Photo by Jingming Pan on Unsplash"
 featured_image_alt: "Returning to the Gold Standard Will Break the Economy"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, spacing, and source-sensitive monetary claims were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/why-a-return-to-the-gold-standard-would-break-the-economy.pdf"
 featured: true
 medium_source_url: "https://medium.com/@lawtonperret/why-a-return-to-the-gold-standard-would-break-the-economy-2b343a09bcf8"
@@ -33,6 +36,11 @@ Every few years, the idea returns in speeches, online arguments, and cable-news 
 But a policy can feel stable and still be dangerous.
 
 ### Why The U.S. Left The Gold Standard
+
+![Photo by Kenny Eliason on Unsplash](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/e73e4fea69af56e83d12e039e9d1ba4281d78c256e9004ebc68d88c37eb8b36c.jpeg)
+
+*Photo by Kenny Eliason on Unsplash*
+
 
 For much of American history, the dollar was tied to gold. Paper money could be redeemed for a fixed amount of metal, and the government could not expand the money supply freely.
 
@@ -64,6 +72,16 @@ A fractional gold standard works only while everyone believes the fraction will 
 
 For most people, a gold standard would not mean simple stability.
 
+![Photo by Emil Kalibradov on Unsplash](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/8c28f7087a3dddf46ea43ae94d8b16910ada8f7c9e97315e2d4026edd23f2dcc.jpeg)
+
+*Photo by Emil Kalibradov on Unsplash*
+
+
+![Image Source](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/e19a6bf6cfb45e24e2d91c91f8269cd2531f7afb04e2d4d54ebb2bbadd2db52f.jpeg)
+
+*Image Source: FRED | Inflation based on the average price index for all urban consumers (1982–1984 = 100)*
+
+
 It would mean less flexibility when things go wrong.
 
 Inflation is painful. But deflation can be brutal, especially for households with fixed debts. If wages and prices fall while mortgage, student-loan, car-loan, and credit-card obligations remain fixed, the real burden of debt rises.
@@ -77,6 +95,16 @@ Under a strict gold standard, the government's ability to respond would be tied 
 That is not discipline. It is institutional paralysis at the worst possible moment.
 
 ### The Political Appeal Is Emotional
+
+![Photo by jaikishan patel on Unsplash](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/55f6681fe7029eab9306ef87e5a2d5d99402324c451076520a95310d62c54286.jpeg)
+
+*Photo by jaikishan patel on Unsplash*
+
+
+![Photo by Robert Gourley on Unsplash](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/33be05332d8322423b7b558705c4d6b67b80856a914310f057b6cd7f52159786.jpeg)
+
+*Photo by Robert Gourley on Unsplash*
+
 
 Few mainstream economists support returning to gold because the historical record is not flattering.
 
@@ -107,6 +135,11 @@ The evidence says no.
 ### The Gold Standard Would Break More Than It Fixes
 
 Could the United States technically return to some form of gold-backed money?
+
+![Photo by Elimende Inagella on Unsplash](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb.jpeg)
+
+*Photo by Elimende Inagella on Unsplash*
+
 
 Yes.
 

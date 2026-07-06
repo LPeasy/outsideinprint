@@ -6,12 +6,15 @@ slug: "the-ledger-vol-2"
 section_label: "Newsletter"
 subtitle: "Floods, Flashpoints, and Florida’s Wild Side"
 description: "The Ledger: A Balance Sheet Joint. July was dominated by one story: the July 4 flood on the Guadalupe River that struck Camp Mystic"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed remote Medium media, converted internal links to local OIP routes, normalized punctuation, and checked rendering."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-ledger-vol-2.pdf"
 featured: false
 featured_image: "/images/essays/the-ledger-vol-2/hero.png"
@@ -50,6 +53,11 @@ Nile monitors in Florida's backyard, one question echoes:
 > and the limits of control?
 
 ### What Happened at Camp Mystic?
+
+![The Ledger](/images/medium/the-ledger-vol-2/524b2137f3e583a5c6361ea8974303d8543c20ce64ae7c973310372ab56f454f.jpeg)
+
+***The Ledger: A Balance Sheet Joint***
+
 
 - [What Happened at Camp Mystic?](/essays/what-happened-at-camp-mystic/)
 

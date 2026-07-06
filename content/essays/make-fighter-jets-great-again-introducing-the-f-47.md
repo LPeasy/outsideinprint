@@ -9,8 +9,8 @@ featured_image: "/images/medium/make-fighter-jets-great-again-introducing-the-f-
 featured_image_caption: "Image source: Collins Aerospace. The F-47 name refers to Trump's status as the 47th president."
 featured_image_alt: "Make Fighter Jets Great Again: Introducing the F-47"
 description: "The F-47 announcement mixed Trump-era branding with a serious Air Force modernization decision: Boeing's sixth-generation fighter for the NGAD program."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-25"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, author-promo residue, spacing, and source-sensitive defense claims were cleaned while preserving the original publication frame."
+  - version: "1.3"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/make-fighter-jets-great-again-introducing-the-f-47.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/make-fighter-jets-great-again-introducing-the-f-47-3428bba1e27c"
@@ -67,6 +70,11 @@ The technology may expand options. It does not remove judgment.
 
 ### What It Means For U.S. Strategy
 
+![Photo by Felix Mittermeier on Unsplash](/images/medium/make-fighter-jets-great-again-introducing-the-f-47/6219d51d1b94a46004cd1de9e6fb7af86cdef714bdc2bd0fad740afbda5ff70e.jpeg)
+
+*Photo by Felix Mittermeier on Unsplash*
+
+
 The F-47 is a message to China, Russia, allies, Congress, contractors, and the Air Force itself.
 
 China has been testing advanced fighter concepts. Russia has struggled to scale its own fifth-generation fleet but remains a nuclear-armed military power. U.S. allies watch American procurement decisions because their own planning depends on whether the United States can project power credibly.
@@ -79,6 +87,11 @@ That does not make the F-47 a mistake. It means the program has to prove that it
 
 ### Price And Production
 
+![Photo by Emiel Molenaar on Unsplash](/images/medium/make-fighter-jets-great-again-introducing-the-f-47/15d2bc5b1ff43d21d0f50475d7bd63eafd80e823a451eddb6799182896302d0d.jpeg)
+
+*Photo by Emiel Molenaar on Unsplash*
+
+
 The public cost picture remains incomplete. Trump avoided specifics, and some program details are classified.
 
 Outside estimates have pointed to a very expensive aircraft, while Air Force officials have suggested the service wants larger numbers and a more sustainable cost profile than the F-22. Both can be true at the level of aspiration. Neither guarantees delivery.
@@ -90,6 +103,11 @@ The United States can announce advanced weapons faster than it can build them at
 Boeing has broken ground on major defense manufacturing capacity, but capacity is not capability until aircraft are built, tested, maintained, and fielded.
 
 ### Branding Meets Procurement
+
+![Photo by Anukrati Omar on Unsplash](/images/medium/make-fighter-jets-great-again-introducing-the-f-47/3842e8bc5bac8d88347df71b2f8a346c6f34e83c20fa6c126a44812741532b89.jpeg)
+
+*Photo by Anukrati Omar on Unsplash*
+
 
 The F-47 name makes the announcement feel like campaign merch. That reaction is understandable.
 

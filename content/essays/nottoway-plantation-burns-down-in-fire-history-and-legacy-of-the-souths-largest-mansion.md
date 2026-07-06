@@ -8,12 +8,15 @@ subtitle: "A brief explainer about what the house was, how it evolved, and why i
 description: "It was the largest remaining antebellum mansion in the South: built by enslaved people, sold as a resort, and burned in 2025"
 featured_image: "/images/social/outside-in-print-default.png"
 featured_image_alt: "Outside In Print default social image"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Cleaned Medium import residue, removed remote body images, normalized house style, and tightened source-discipline language around Nottoway's fire and plantation legacy."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.pdf"
 featured: false
 
@@ -25,6 +28,16 @@ medium_source_url: "https://medium.com/@lawtonperret/nottoway-plantation-burns-d
 ***It was the largest remaining antebellum mansion in the South: built by enslaved people, sold as a resort, and burned to the ground in 2025.***
 
 #### The Fire That Destroyed Nottoway Plantation
+
+![Recovered from the original Medium import archive](/images/medium/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion/b6e58a26eba9d291c8e91c1137f53efb6574e1a6b9ab8681dfbc772855702d5d.jpeg)
+
+*Recovered from the original Medium import archive; original caption unavailable.*
+
+
+![Recovered from the original Medium import archive](/images/medium/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion/5aa3b48e37f9ba5c45b850e0926c845ce9b98f82a3b672403b47b593b8e6bb2d.jpeg)
+
+*Recovered from the original Medium import archive; original caption unavailable.*
+
 
 **On May 15, 2025**, flames erupted in the south wing of a grand white
 mansion in White Castle, Louisiana. The fire spread fast, overtaking the
@@ -41,6 +54,16 @@ It was a monument to slavery and selective memory.
 **This is the story of Nottoway:** what it was, how it evolved, and why its destruction stirred so many different reactions.
 
 #### Built by Enslaved Labor
+
+![Recovered from the original Medium import archive](/images/medium/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion/f784cf8ad2fbdde9181eed054d21d03ec3eda4b2b7add3ae36eb3d6a0cba328b.jpeg)
+
+*Recovered from the original Medium import archive; original caption unavailable.*
+
+
+![Recovered from the original Medium import archive](/images/medium/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion/8c8b9a8207f867708d8253e8e576c9df53b56fe73e2dd1f72d4c5f571662d860.jpeg)
+
+*Recovered from the original Medium import archive; original caption unavailable.*
+
 
 **John Hampden Randolph** moved to Louisiana from Virginia with **a
 fortune and a plan:**
@@ -72,6 +95,11 @@ into sharecropping agreements, trading bondage for debt.
 
 #### From Plantation to Resort: The Reinvention of Nottoway
 
+![Recovered from the original Medium import archive](/images/medium/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion/a987a43a9d4b3070c429152fd6470b27645165e1fb247d639094d9b53850ab61.jpeg)
+
+*Recovered from the original Medium import archive; original caption unavailable.*
+
+
 It changed hands a few times over the decades that followed, staying in
 the Owens family until 1977. It was sold to **Arlin Dease**, a history
 enthusiast who **restored the property** and opened it for tours,
@@ -90,6 +118,11 @@ origins.** The official website's history page focused entirely on the
 property's oak trees.
 
 #### Why the Nottoway Fire Divided Public Opinion
+
+![Recovered from the original Medium import archive](/images/medium/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion/5aec92b991233b26decd67ebbc8f4f8dfcb39923d510e1b3bcd243d2606e16ec.jpeg)
+
+*Recovered from the original Medium import archive; original caption unavailable.*
+
 
 Public reaction to Nottoway's destruction split quickly and revealed the competing meanings attached to the site.
 

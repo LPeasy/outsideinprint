@@ -8,12 +8,15 @@ subtitle: "Trump, Musk, and the Constitutional Fight Over Executive Power"
 featured_image: "/images/medium/is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg"
 featured_image_alt: "Is DOGE Legal?"
 description: "The Department of Government Efficiency (DOGE), associated with Elon Musk and created by executive order under President Trump, raises separation-of-powers questions."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, source-card fragments, legal overstatement, headings, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/is-doge-legal.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/is-doge-legal-6bcb518f9293"
@@ -35,6 +38,11 @@ While presidents have broad power to reorganize the executive branch, they canno
 
 ## Can DOGE Legally Shut Down Agencies Like USAID?
 
+![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg)
+
+*Made using ChatGPT, February 2025.*
+
+
 The shutdown of the U.S. Agency for International Development (USAID) is a key test of DOGE's legal authority.
 
 USAID was created by Congress in 1961 and receives direct funding through congressional appropriations.
@@ -46,6 +54,11 @@ Rep. Jamie Raskin (D-MD) has already stated that DOGE's attempt to shut down USA
 If the courts agree, USAID's closure could be blocked or delayed for months or years through litigation.
 
 ## DOGE's Access to the U.S. Treasury: A Privacy Violation?
+
+![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg)
+
+*Made using ChatGPT, February 2025.*
+
 
 DOGE has gained access to Treasury Department payment systems, which handle Social Security payments, government employee payrolls, and federal contractor payments.
 
@@ -64,6 +77,11 @@ Musk serves as a "special government employee" (SGE), meaning:
 This unique arrangement can reduce transparency compared with full-time public office. Critics argue that DOGE functions as an unelected "shadow government" with unusual influence over federal agencies. The White House later argued in court that Musk was a senior adviser without formal DOGE decision-making authority, which makes the authority question central rather than settled.
 
 ## The 119th Congress: A Republican Majority with Growing Fractures
+
+![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg)
+
+*Made using ChatGPT, February 2025.*
+
 
 As DOGE barrels forward with its aggressive dismantling of federal agencies, Congress has remained largely silent, at least at the leadership level. With Republicans controlling both chambers, the expectation might have been for full backing of Trump's government overhaul. Yet, in reality, a quiet but growing resistance is emerging within GOP ranks, revealing a political dilemma: how to support Trump's broader agenda while protecting local industries, research institutions, and government programs that directly benefit their constituents.
 
@@ -95,6 +113,11 @@ As lawsuits continue to pile up against DOGE, the courts may end up serving as t
 
 ## The Lawsuits Against DOGE: What Happens Next?
 
+![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg)
+
+*Made using ChatGPT, February 2025.*
+
+
 DOGE is facing multiple lawsuits challenging its legality:
 
 - The American Federation of Government Employees (AFGE) and other unions are suing to block mass layoffs, arguing they violate federal worker protections.
@@ -109,6 +132,11 @@ The courts will now decide:
 4. Is Musk's leadership a violation of federal ethics and governance laws?
 
 ## Legal Precedents: How Past Supreme Court Rulings May Shape DOGE's Fate
+
+![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg)
+
+*Made using ChatGPT, February 2025.*
+
 
 As lawsuits mount against DOGE, courts will look to past Supreme Court rulings to determine whether its actions are constitutional. Five key cases provide critical legal precedent that could severely limit DOGE's authority or, alternatively, open new doors for executive power. Together, these rulings establish a firm principle: the president cannot unilaterally override congressional authority, dismantle agencies, or defund programs without legislative approval.
 
@@ -155,6 +183,11 @@ If courts uphold these precedents, DOGE's sweeping executive actions could be si
 Ultimately, the legal battle over DOGE is more than a debate about government efficiency. It is a fundamental test of presidential authority versus congressional control. The outcome could redefine the limits of executive power for decades to come.
 
 ## Conclusion: DOGE's Legality Hangs in the Balance
+
+![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg)
+
+*Made using ChatGPT, February 2025.*
+
 
 DOGE is pushing the limits of presidential authority, but legal and congressional roadblocks are mounting.
 

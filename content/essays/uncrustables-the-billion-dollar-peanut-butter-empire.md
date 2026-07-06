@@ -9,12 +9,15 @@ featured_image: "/images/medium/uncrustables-the-billion-dollar-peanut-butter-em
 featured_image_caption: "Image source: J.M. Smucker, 2025."
 featured_image_alt: "Uncrustables: The Billion-Dollar Peanut Butter Empire"
 description: "Uncrustables turned a crustless PB&J into a frozen-food growth engine, but the real story is distribution, factory investment, and disciplined brand expansion."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, promotional residue, spacing, and source-sensitive business claims were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/uncrustables-the-billion-dollar-peanut-butter-empire.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/uncrustables-the-billion-dollar-peanut-butter-empire-05f687f1f19e"
@@ -26,11 +29,21 @@ Uncrustables.
 
 The crust-free, flash-frozen peanut butter and jelly sandwich went from school cafeterias to a freezer-aisle powerhouse. What started as a kitchen-table convenience product became one of J.M. Smucker's most important growth bets.
 
+![Photo by Sonder Quest on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/f4d36b28b81279913abf6c59f947a624113e20293640553b0e928927c19ce172.jpeg)
+
+*Photo by Sonder Quest on Unsplash*
+
+
 Pro athletes eat them. Parents stock them. Social media keeps finding new ways to fry, dip, and remix them.
 
 And Smucker's keeps doubling down: more production capacity, more flavors, and more distribution behind a product that works because it solves a very plain problem.
 
 ### How Two Parents Turned PB&J Into a Scalable Product
+
+![Photo by Riccardo Annandale on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/7a3b0eb2f06a2e6e4ef412dfd390d1850aa27e84455a9c9f6059d193d2b8c831.jpeg)
+
+*Photo by Riccardo Annandale on Unsplash*
+
 
 In 1995, David Geske and Len Kretchman were trying to solve the same lunch problem millions of parents know too well: kids who wanted peanut butter and jelly without the crust.
 
@@ -66,6 +79,11 @@ Every new option did the same job: keep the core product recognizable while open
 
 ### Factories, Capacity, And Demand
 
+![Photo by SpaceX on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/050e305c71a461b7c17ebb859af59988af6d5e18f519bf446720ef13f7ead086.jpeg)
+
+*Photo by SpaceX on Unsplash*
+
+
 Demand made Uncrustables a production story.
 
 Smucker's built a bakery in Scottsville, Kentucky, then added a plant in Longmont, Colorado. The company later committed major capital to a large McCalla, Alabama, facility to support the brand's next stage.
@@ -77,6 +95,16 @@ The incentives are clear. If Smucker's can scale a branded product that consumer
 The tradeoff is also clear. Bigger factories and broader distribution make the product more available, but they also lock the company into high-volume expectations, commodity inputs, and the pressure to keep the brand fresh without making it strange.
 
 ### Why Athletes And Social Media Matter
+
+![Photo by Zac Durant on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a.jpeg)
+
+*Photo by Zac Durant on Unsplash*
+
+
+![Photo by Rob on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/857001c9d1a26c02765b2b33ff3b208c56c12697efc7ce5c1bb10d5bd16ce3a4.jpeg)
+
+*Photo by Rob on Unsplash*
+
 
 Uncrustables are no longer just a kids' lunch item.
 
@@ -91,6 +119,11 @@ The institutional behavior is familiar: a food company benefits when consumers t
 Smucker's has treated Uncrustables like a priority brand because it has the qualities packaged-food companies want: repeat purchases, broad age appeal, a simple use case, and room for more capacity.
 
 The company has publicly discussed a long-term goal of turning Uncrustables into a billion-dollar annual brand. That target is ambitious, but not mysterious. The path runs through more production, more shelf space, more flavors, and possibly shelf-stable formats.
+
+![Photo by Jon Tyson on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/535010672d8ab6a41f8e9091030cc9a9e8c7c13c8d5407da42fdd8200e937581.jpeg)
+
+*Photo by Jon Tyson on Unsplash*
+
 
 The uncertainty is whether the product can keep growing without losing what made it work. Too many extensions can blur a brand. Too little innovation can let attention drift.
 

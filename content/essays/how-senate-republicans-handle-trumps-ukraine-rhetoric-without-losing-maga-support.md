@@ -9,8 +9,8 @@ featured_image: "/images/medium/how-senate-republicans-handle-trumps-ukraine-rhe
 featured_image_caption: "Photo by Chad Stembridge on Unsplash"
 featured_image_alt: "How Senate Republicans Handle Trump’s Ukraine Rhetoric Without Losing MAGA Support"
 description: "Donald Trump called Ukrainian President Volodymyr Zelenskyy a ‘dictator’ and falsely claimed Ukraine provoked the war with Russia"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 pdf: "/pdfs/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support-7c8f018911df"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 collections:
   - geopolitics-trade-global-power
 ---
@@ -33,6 +36,11 @@ The politics were harder. Republican senators had to acknowledge reality, reassu
 That tension explains the shape of their response. They pushed back, but only so far.
 
 ## The Fine Line on Ukraine
+
+![Photo by Christophe Hautier on Unsplash](/images/medium/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support/5744b33e355d56c9410af9acb253d67e02211ebab2e970f849f70f895bf6ec92.jpeg)
+
+*Photo by Christophe Hautier on Unsplash*
+
 
 Senator Susan Collins stated the core fact plainly: Russia was the instigator of the war. Senator Thom Tillis, after visiting Kyiv, praised Zelenskyy's wartime leadership. Other Republicans made similar corrections, rejecting the claim that Ukraine started the conflict.
 
@@ -60,6 +68,11 @@ The incentive structure was clear. A senator could correct the record and still 
 
 ## What Hedging Costs
 
+![Photo by Bozhin Karaivanov on Unsplash](/images/medium/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support/2170365735c77015f69068a9828d828ec4a0ed230e310cd38208222032016813.jpeg)
+
+*Photo by Bozhin Karaivanov on Unsplash*
+
+
 Hedging can preserve room for maneuver. It can also weaken public accountability.
 
 When lawmakers correct a false claim without naming the incentives behind it, they leave the mechanism intact. Trump can move the party's rhetoric, allies can soften the edges, and the policy debate drifts without a clear institutional check.
@@ -69,6 +82,11 @@ That matters for Ukraine because U.S. credibility is part of the battlefield. If
 Republican senators were trying to avoid a binary choice between principle and survival. The problem is that foreign policy eventually forces choices. Aid packages, sanctions, security guarantees, and alliance commitments cannot be hedged forever.
 
 ## Conclusion
+
+![Photo by Markus Winkler on Unsplash](/images/medium/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support/d517419a955cdb6b4ab9b3873ee4d109e72cfd0319960b4adf8c49f4bbc4a3ce.jpeg)
+
+*Photo by Markus Winkler on Unsplash*
+
 
 Senate Republicans did not fully embrace Trump's Ukraine rhetoric. They also did not fully confront it.
 

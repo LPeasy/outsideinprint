@@ -9,12 +9,15 @@ featured_image: "/images/medium/mingo-county-mud-in-the-water/1b7bc0f31b09835315
 featured_image_caption: "Photo by engin akyurt on Unsplash"
 featured_image_alt: "Mingo County: Mud in the Water"
 description: "Mingo County's water crisis shows how fragile small utility systems become when debt, deferred maintenance, weak capacity, and public-health risk converge."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, source-card residue, headings, spacing, and water-system claim framing were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/mingo-county-mud-in-the-water.pdf"
 featured: false
 
@@ -36,6 +39,11 @@ That is not just inconvenience. It is infrastructure failure entering daily life
 Mingo County is not unique. It is a warning about what happens when small systems carry large liabilities, aging pipes, limited revenue, and too little institutional capacity.
 
 ### When Legal Does Not Mean Safe
+
+![Photo by Ron Whitaker on Unsplash](/images/medium/mingo-county-mud-in-the-water/7527468b55be2c6bed751a65e3d01a10e4fd37dfcda4fe519d48603f23b4ca5c.jpeg)
+
+*Photo by Ron Whitaker on Unsplash*
+
 
 Water regulation is complicated because "legal" and "healthy" are not always the same claim.
 
@@ -63,6 +71,11 @@ Mingo County's water problems fit that pattern. Reports have pointed to debt, ma
 
 ### The Governance Problem
 
+![Photo by Sigmund on Unsplash](/images/medium/mingo-county-mud-in-the-water/ec0a1e468675759271eec7142c80bc3b69299cef99cbb2223e153dea0821a36d.jpeg)
+
+*Photo by Sigmund on Unsplash*
+
+
 Water systems fail through pipes, pumps, treatment plants, and finances. They also fail through institutions.
 
 If no one is responsible for long-term system health, everyone has an incentive to postpone the hard decision. Keep rates low this year. Delay the replacement. Patch the break. Hope the next operator, board, regulator, or elected official handles the real bill.
@@ -74,6 +87,11 @@ Residents bear the risk through outages, boil notices, bottled-water costs, miss
 The tradeoff is real. Rate hikes can hurt low-income households. But pretending the system is cheaper than it is only hides the cost until failure arrives.
 
 ### What Better Policy Would Require
+
+![Photo by Egor Myznik on Unsplash](/images/medium/mingo-county-mud-in-the-water/69bc687eb67ffd638049df8f80a6026d1a1f1a283b15834b15726a4cb6b7ba29.jpeg)
+
+*Photo by Egor Myznik on Unsplash*
+
 
 Mingo County points toward three practical lessons.
 
@@ -88,6 +106,11 @@ None of that is simple. Water systems are expensive, local, and politically sens
 But the alternative is worse: wait until brown water, school closures, and emergency repairs make every option more costly.
 
 ### What Happens When A Water Crisis Is Ignored
+
+![Photo by the blowup on Unsplash](/images/medium/mingo-county-mud-in-the-water/caa43ddbd135b00f16c8830ee814cd514cd3598486732acdc919ca0223c1b435.jpeg)
+
+*Photo by the blowup on Unsplash*
+
 
 When a water system collapses, the damage is not only mechanical.
 
@@ -106,6 +129,11 @@ The lesson is not that every small town is doomed. The lesson is that infrastruc
 You cannot build public trust on broken pipes.
 
 ### Source Notes
+
+![Photo by Dan Meyers on Unsplash](/images/medium/mingo-county-mud-in-the-water/fa34a9e9c1cd8d0707382c359815a8e04df30a474dc1518017bf7debe9e9286d.jpeg)
+
+*Photo by Dan Meyers on Unsplash*
+
 
 - [Mingo County residents speak out about ongoing water issues](https://www.wowktv.com/)
 - [Customers voice water woe frustrations in Mingo County](https://www.wsaz.com/)
