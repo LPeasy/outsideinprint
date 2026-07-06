@@ -9,8 +9,8 @@ featured_image: "/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/7
 featured_image_caption: "Illustration by author"
 featured_image_alt: "McDonald’s Faces Week‑Long Boycott"
 description: "The People’s Union USA is urging a boycott of McDonald’s over DEI rollbacks, prices, labor claims, and sales pressure."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-04"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. Medium import residue, source framing, and house-style issues were corrected."
+  - version: "1.3"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/mcdonalds-faces-week-long-boycott-june-24-2025.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/mcdonalds-faces-week-long-boycott-june-24-2025-115f95aa672b"
@@ -64,6 +67,11 @@ U.S. consumer activism grows as rollback of DEI policies intensifies:
 
 #### Fall 2024 ~ E. coli Outbreak
 
+![Created by Author with ChatGPT](/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59.png)
+
+*Created by Author with ChatGPT*
+
+
 McDonald's faced an [**E. coli contamination in its Quarter Pounder patties,**](https://www.cidrap.umn.edu/e-coli/feds-say-probe-e-coli-outbreak-tied-mcdonalds-over#:~:text=The%20outbreak%20of%20E%20coli,on%20McDonald&#39;s%20Quarter%20Pounder%20hamburgers.) prompting a recall and damaging
 consumer trust.
 
@@ -96,6 +104,11 @@ discrimination and joined the boycott.
 > **No named operation ~ just a broad boycott.**
 
 #### ***Schwarz said in social media:***
+
+![Created by Author with ChatGPT](/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89.png)
+
+*Created by Author with ChatGPT*
+
 
 > ["Let them feel it. Let them hear us."](https://www.instagram.com/reel/DLLmvwlJX9S/)
 

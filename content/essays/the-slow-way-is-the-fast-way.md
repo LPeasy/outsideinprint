@@ -9,12 +9,15 @@ featured_image: "/images/medium/the-slow-way-is-the-fast-way/f3fa7e6605d8194326e
 featured_image_caption: "Photo by Theme Photos on Unsplash"
 featured_image_alt: "The Slow Way is the Fast Way"
 description: "In a small town, two brothers ran a painting company. One brother prized speed; the other took pride in craft."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-10"
     note: "Updated May 10, 2026, after OIP back-archive review for legacy Medium cleanup, remote body-image removal, punctuation normalization, and editorial philosophy audit."
+  - version: "1.2"
+    date: "2026-07-06"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-slow-way-is-the-fast-way.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-slow-way-is-the-fast-way-166b36df04ae"
@@ -45,6 +48,11 @@ Weeks later, after rain and summer storms, the fast-painted house began to show 
 But the slow-painted house?
 
 It remained flawless.
+
+![Photo by Emma Francis on Unsplash](/images/medium/the-slow-way-is-the-fast-way/ba6cbcc2e9164e459a58266644d68bdeed1422121a94e292eacf1a9a4a9cf246.jpeg)
+
+*Photo by Emma Francis on Unsplash*
+
 
 A masterpiece: durable, detailed, and beautiful.
 
@@ -81,6 +89,11 @@ They require attention.
 They ask us to embrace uncertainty and play the long game.
 
 And here's the kicker: when we do slow down, when we ask the hard questions before we leap, when we build instead of chase, we actually save time.
+
+![Photo by Brett Jordan on Unsplash](/images/medium/the-slow-way-is-the-fast-way/a195e2e5fdbef7d5c7417de59110433d33365b9c9ad3a851eacf9f7ca3012ed8.jpeg)
+
+*Photo by Brett Jordan on Unsplash*
+
 
 Doing something right the first time isn't always possible.
 
