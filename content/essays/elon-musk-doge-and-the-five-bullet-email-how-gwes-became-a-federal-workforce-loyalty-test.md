@@ -9,12 +9,15 @@ featured_image: "/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwe
 featured_image_caption: "Photo by Markus Winkler on Unsplash"
 featured_image_alt: "Elon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test"
 description: "Elon Musk’s Influence on DOGE and the Federal Workforce. This past weekend, the Department of Government Efficiency (DOGE) issued a directive that sent shock..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, heading formatting, joined paragraphs, author-promo residue, and several source-discipline wording issues were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test-4d7e7341f666"
@@ -42,6 +45,11 @@ It was a litmus test for compliance, dressed up as an efficiency measure.
 
 ## What Is the Government-Wide Email System (GWES) and How Is It Used?
 
+![Photo by Brett Jordan on Unsplash](/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/f7d266b02009c57dd05b369be4f35536597544e145c34811a6ee655594258999.jpeg)
+
+*Photo by Brett Jordan on Unsplash*
+
+
 The Government-Wide Email System (GWES) was built to streamline internal communication across federal agencies.
 
 It allows OPM and authorized officials to send mass emails, keeping the workforce informed on policies, initiatives, and administrative matters.
@@ -56,6 +64,11 @@ It should be used to disseminate information, not as a tool to pressure employee
 
 ## Musk's 'What Did You Get Done?' Tactic: From Twitter to the Federal Government
 
+![Photo by Souvik Banerjee on Unsplash](/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/64526de0232ee097aad38bc73e7bc77ffebb7f00059954c3115a660ed2dd7d0a.jpeg)
+
+*Photo by Souvik Banerjee on Unsplash*
+
+
 Musk's "What did you get done this week?" refrain isn't new.
 
 He famously asked that question to Twitter CEO Parag Agrawal while negotiating his takeover of the social media platform, before firing Agrawal upon assuming control.
@@ -69,6 +82,11 @@ Musk was signaling his intent to bring his brand of hard-edged efficiency cultur
 The five-bullet-point email was simply the first real test, a way to apply the same pressure he used at Twitter, Tesla, and SpaceX.
 
 ## The Five-Bullet Email: A Performance Check or a Compliance Test?
+
+![Photo by charlesdeluvio on Unsplash](/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731.jpeg)
+
+*Photo by charlesdeluvio on Unsplash*
+
 
 The five-bullet email wasn't just about gathering information. It was a power move, designed to identify who was willing to fall in line.
 
@@ -110,6 +128,11 @@ A mass email demanding self-assessments sidesteps these processes, raising legal
 
 ## What's Next? The Future of DOGE, GWES, and Federal Workforce Oversight
 
+![Photo by Scott Webb on Unsplash](/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/57e4328ab789ec3acce9b5d994f10e1a20622d0def6ec1586d6b6eacfc45dce1.jpeg)
+
+*Photo by Scott Webb on Unsplash*
+
+
 DOGE's move signals a shift toward real-time workforce monitoring.
 
 While efficiency-driven reforms aren't inherently bad, they should be executed within legal and procedural norms.
@@ -130,6 +153,11 @@ Mishandle it, and the entire system will suffer.
 
 ## Conclusion: The Real Question Is...
 
+![Photo by Minh Pham on Unsplash](/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/a17ab4d9b0b27df5dfbf76bb263260b5bb1c7601cc34d9d5977821fd7be82aff.jpeg)
+
+*Photo by Minh Pham on Unsplash*
+
+
 The GWES system was built to enhance communication, not enforce compliance. But DOGE's five-bullet-point email wasn't just about checking in.
 
 It was the first real test of Musk's vision for the federal workforce, one that echoes his past management style, from Twitter to Tesla.
@@ -145,4 +173,3 @@ What did you get done this week?
 It's:
 
 Who's next?
-

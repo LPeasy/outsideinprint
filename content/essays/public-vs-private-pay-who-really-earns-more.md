@@ -8,12 +8,15 @@ subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
 featured_image: "/images/medium/public-vs-private-pay-who-really-earns-more/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce.png"
 featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
 description: "The custodian at your local public school probably makes more per hour, with benefits than the guy who just cleaned your hotel room"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed remote Medium chart media, normalized house style, checked BLS compensation framing, and preserved the original argument."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/public-vs-private-pay-who-really-earns-more.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/public-vs-private-pay-who-really-earns-more-aafec1def048"
@@ -97,6 +100,11 @@ Widen the lens, and you see consistent patterns.
 - Private-sector workers excel in high-end professional
   and executive roles.
 
+![Who pays more? Private or Public Total Compensation by Broad Sector](/images/medium/public-vs-private-pay-who-really-earns-more/6c8fd43fd1403b44671c678afe02e150e0d9909cfd95555dac8e6553b2bb4826.png)
+
+*Who pays more? Private or Public Total Compensation by Broad Sector*
+
+
 > The structure of compensation matters.
 
 **Public** jobs lean toward **predictable** salaries and long-term
@@ -131,6 +139,11 @@ Some say **that split** ~ education vs STEM, public vs private ~
 ### Blue-Collar vs White-Collar Pay: The Real Divide in Public and Private Work
 
 > Zooming out, the patterns show up clearly in the averages.
+
+![On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public](/images/medium/public-vs-private-pay-who-really-earns-more/511e88398070970581caf192a5cca6ecc1864e5c78caee1c7ffb853707b00313.png)
+
+*On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public. In elite roles, private compensation often dwarfs public. Source: BLS ECEC, March 2025.*
+
 
 *In the author's BLS-based comparison, government jobs pay far more for
 blue-collar work, while white-collar pay is closer and leans public in
@@ -205,6 +218,11 @@ benefits.**
 
 - **Public Sector** ~ 62% wages, 38% benefits
 - **Private Sector** ~ 71% wages, 29% benefits
+
+![Breakdown of Average Distribution of Pay](/images/medium/public-vs-private-pay-who-really-earns-more/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2.png)
+
+*Breakdown of Average Distribution of Pay: Public vs Private Sectors*
+
 
 For many state and federal employees, retirement isn't just a 401(k)
 match ~ it's a defined pension. That can mean decades of guaranteed

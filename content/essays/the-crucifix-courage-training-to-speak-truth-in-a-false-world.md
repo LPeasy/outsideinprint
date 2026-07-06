@@ -7,8 +7,8 @@ section_label: "Essay"
 subtitle: "The Christian image does something to the human nervous system ~"
 description: "Walk into a hospital, a church, or your grandmother’s living room and you might see it: a crucifix on the wall"
 featured_image: "/images/social/outside-in-print-default.png"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-04"
@@ -16,6 +16,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-crucifix-courage-training-to-speak-truth-in-a-false-world.pdf"
 featured: false
 
@@ -61,6 +64,11 @@ this world will attempt to destroy us for exposing their lies.
 
 ### Exposure therapy, in plain English
 
+![“Exposure Therapy” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1.png)
+
+*“Exposure Therapy” ~ art by author with gpt4-o*
+
+
 In psychotherapy, there's a well-known idea called [**exposure therapy**](https://www.apa.org/ptsd-guideline/patients-and-families/exposure-therapy). In
 simple terms, it's a structured process where a person gradually and
 repeatedly faces what they fear, until the fear response loses its grip
@@ -80,6 +88,11 @@ A person learns, over time, "I can face this. It doesn't own me."
 > Now take that idea and look at the crucifix again.
 
 ### The crucifix is a forced look at the worst-case outcome
+
+![“All Eyes on Christ” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5.png)
+
+*“All Eyes on Christ” ~ art by author with gpt4-o*
+
 
 If you follow Jesus, you are not promised comfort.\
 You are not promised status.\
@@ -124,6 +137,11 @@ crowd, and it will almost always upset the people in power.
 
 ### Truth-telling is the offense ~ not "meanness"
 
+![“Truth to Power” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74.png)
+
+*“Truth to Power” ~ art by author with gpt4-o*
+
+
 A lot of modern moral life is built around a social rule that goes
 something like: **"Be a good person, and everyone will love you."**
 
@@ -153,6 +171,11 @@ The message of the crucifix isn't just that "suffering happened."
 
 ### The parables weren't just cute stories ~ Jesus was speaking over the crowd's head
 
+![“Over their heads” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7.png)
+
+*“Over their heads” ~ art by author with gpt4-o*
+
+
 Jesus spoke in parables that largely masked meaning from the masses,
 while religious leaders clearly understood, and they hated Him for it.
 
@@ -178,6 +201,11 @@ in their moral superiority are also the most likely to punish dissent.
 **Jesus ran into that. So will anyone who tries to walk with Him.**
 
 ### Christianity is not a permission slip for hate
+
+![“INRI” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1.png)
+
+*“INRI” ~ art by author with gpt4-o*
+
 
 Jesus does not form His people by teaching them to despise their
 enemies. He teaches the opposite:
@@ -244,6 +272,11 @@ don't need a crucifix. **You need to revisit the Gospels.**
 
 ### A final look ~ and the question the image asks
 
+![“Will you speak the truth?” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29.png)
+
+*“Will you speak the truth?” ~ art by author with gpt4-o*
+
+
 The crucifix is a kind of spiritual exposure therapy: repeated contact
 with the fears we spend our lives trying to dodge.
 
@@ -285,4 +318,3 @@ Because the crucifix doesn't merely say, "You are forgiven."
 It says, "This is what it looks like to refuse the lie. This is what it
 costs.\
 This is what love does. Now go, and speak truth."
-

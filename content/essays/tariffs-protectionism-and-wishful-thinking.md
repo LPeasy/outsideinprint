@@ -9,8 +9,8 @@ description: "When global powers face economic decline, they often turn to prote
 featured_image: "/images/medium/tariffs-protectionism-and-wishful-thinking/a2ca847bbd3c4228bf2346d7ece93cf9ac250f9a657cc827efdd0da7347319dc.jpg"
 featured_image_caption: "Photo by Maxim Hopman on Unsplash"
 featured_image_alt: "Tariffs, Protectionism, and Wishful Thinking"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 pdf: "/pdfs/tariffs-protectionism-and-wishful-thinking.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/tariffs-protectionism-and-wishful-thinking-e24c7c45838c"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 collections:
   - geopolitics-trade-global-power
 ---
@@ -78,6 +81,11 @@ That broader frame makes the policy more flexible, but also more dangerous. If e
 The policy could still produce targeted gains. A tariff threat can sometimes force negotiation. Strategic industries may deserve protection where national security risks are real. The hard question is whether the gains exceed the costs imposed on consumers, allies, exporters, and downstream firms.
 
 ## Conclusion
+
+![Photo by Nareeta Martin on Unsplash](/images/medium/tariffs-protectionism-and-wishful-thinking/f7b61e42befa99c201669b5ee52ff0359bad2f0395447a8879d83f5f0fb6dfdf.jpg)
+
+*Photo by Nareeta Martin on Unsplash*
+
 
 Tariffs offer visible action. That is part of their political appeal. They let governments say they are defending workers, industries, and sovereignty.
 

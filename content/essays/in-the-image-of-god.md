@@ -8,8 +8,8 @@ subtitle: "An introduction to Catholic social teaching"
 description: "An introduction to Catholic social teaching that starts with human dignity, love, community, Scripture, and the moral principles beneath public life."
 featured_image: "/images/medium/in-the-image-of-god/fa2482c598cd754263ea2463145d8e69da0af924b806be195d62df5c53684d0f.jpg"
 featured_image_alt: "In The Image of God"
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-06-22"
@@ -20,6 +20,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-25"
     note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
+  - version: "1.4"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/in-the-image-of-god.pdf"
 featured: false
 
@@ -297,6 +300,11 @@ If you would like to continue this journey, I invite you to follow the
 series as it unfolds week by week.
 
 ### A closing prayer
+
+![Father](/images/medium/in-the-image-of-god/3f54c80d5b02949f351906a2756c2734d3d2b3d1253d26533897b77904b42891.jpeg)
+
+**Father**
+
 
 
 > **Father,**

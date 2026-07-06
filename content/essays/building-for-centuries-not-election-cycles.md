@@ -9,12 +9,15 @@ description: "Why USACE Takes Its Time: Infrastructure Built to Last. The U.S. A
 featured_image: "/images/medium/building-for-centuries-not-election-cycles/6dd004b4e2f7bf049ca17b3b694ff61968bab6e565c47cab696474a92471e04a.jpeg"
 featured_image_caption: "Photo by Justin Wilkens on Unsplash"
 featured_image_alt: "Building for Centuries Not Election Cycles"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, heading/list formatting, author-promo residue, and a USACE 3x3x3 description were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/building-for-centuries-not-election-cycles.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/building-for-centuries-not-election-cycles-84e7c379272c"
@@ -56,6 +59,11 @@ When you're building billion-dollar projects that shape the country's future, a 
 
 ## The High Cost of Rushing Infrastructure Projects
 
+![Photo by Alexander Mils on Unsplash](/images/medium/building-for-centuries-not-election-cycles/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7.jpeg)
+
+*Photo by Alexander Mils on Unsplash*
+
+
 History is full of cautionary tales about what happens when big projects move too fast. One of the worst? The large-scale drainage of Florida's wetlands in the early 20th century.
 
 At the time, the plan seemed simple: drain the Everglades, prevent flooding, and open up new farmland.
@@ -79,6 +87,11 @@ The Everglades weren't the first rushed project to backfire, and won't be the la
 With major infrastructure, there's no second chance to get it right.
 
 ## Feasibility Studies: How USACE Saves Taxpayer Dollars
+
+![Photo by Mario Verduzco on Unsplash](/images/medium/building-for-centuries-not-election-cycles/26f67e7801ff4affa4ed76d2ffb7e4e599431ef3c284927b9dd158800c323e4c.jpeg)
+
+*Photo by Mario Verduzco on Unsplash*
+
 
 The U.S. Army Corps of Engineers doesn't just build things. It decides whether things should be built at all. That's what the feasibility study process is for.
 
@@ -106,6 +119,11 @@ Feasibility studies ensure projects are guided by science and necessity, not pol
 
 ## Policy Shifts and Infrastructure Delays: Why Slow Change is Smarter
 
+![Photo by Javier Mazzeo on Unsplash](/images/medium/building-for-centuries-not-election-cycles/d7c09d394dbf469d2588f4b73c5f92e8e4ecdcb9e623da3f011de8f76bce4a2e.jpeg)
+
+*Photo by Javier Mazzeo on Unsplash*
+
+
 Every four or eight years, a new administration comes in with new priorities. Infrastructure, climate policy, and funding strategies shift. But the federal government doesn't turn on a dime. It can't.
 
 A feasibility study takes at least three years.
@@ -128,6 +146,11 @@ Planning has to outlast politics. Otherwise, nothing ever gets built.
 
 ## Institutional Memory: The Backbone of Effective Federal Planning
 
+![Photo by Fredy Jacob on Unsplash](/images/medium/building-for-centuries-not-election-cycles/5268e4979714ba848ed0d92d9acf4e00bf1f682a598bbb54b39949666531a3c0.jpeg)
+
+*Photo by Fredy Jacob on Unsplash*
+
+
 Politicians come and go. Career professionals stay.
 
 That's one of USACE's biggest strengths. The people analyzing major federal projects aren't elected officials chasing quick wins.
@@ -144,6 +167,11 @@ Even as leadership changes, long-term projects stay on course. Without stability
 
 ## Conclusion: Smart Infrastructure Requires Patience
 
+![Photo by Brett Jordan on Unsplash](/images/medium/building-for-centuries-not-election-cycles/b567e0c880be8dabbd259939c7c1d5543860fa81903a767e5916504e8ea7ee3d.jpeg)
+
+*Photo by Brett Jordan on Unsplash*
+
+
 It's easy to criticize slow-moving agencies. People want action. They want results.
 
 But when we're talking about billion-dollar projects that shape America's future, a little patience is the cheapest insurance policy we've got.
@@ -159,4 +187,3 @@ USACE's deliberate pace isn't red tape. It's a safeguard.
 Public funds should go toward projects built to last: projects that can withstand disasters and hold up under scrutiny.
 
 The cost of getting it right is a drop in the bucket. The cost of getting it wrong is a flood.
-

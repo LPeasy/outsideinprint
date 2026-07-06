@@ -9,8 +9,8 @@ description: "A Gulf World dolphin death, bankruptcy filings, and The Dolphin Co
 featured_image: "/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg"
 featured_image_caption: "Art by author."
 featured_image_alt: "The Dolphin Company"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-22"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-dolphin-company.pdf"
 featured: true
 
@@ -81,12 +84,22 @@ falls down.
 > training."**
 >  - Panama City News Herald, 1969
 
+![Panama City News Article, September 10th, 1969](/images/medium/the-dolphin-company/ed0801cbcc04514b7fc4f21637ea4ed3693ff92d4a86bd78635fed3370b3055f.jpeg)
+
+*[Panama City News Article, September 10th, 1969](https://www.newspapers.com/article/panama-city-news-gulf-world-constructio/10692445/)*
+
+
 **To understand how it all unraveled, you have to go back to the
 beginning.**
 
 Gulf World opened its doors in 1970, the brainchild of five Alabama
 businessmen. **The park's first performers weren't born in captivity ~
 they were captured in the wild.**
+
+![Panama City News, October 17th, 1969](/images/medium/the-dolphin-company/5d671824e6afcf0bc0d3e7b006f0c63e86f9e425b0f091192befbce5ab892b90.jpeg)
+
+*Panama City News, October 17th, 1969*
+
 
 Four bottlenose dolphins were netted off the Florida gulf coast in 1969,
 dropped into the Sun Dial Motel swimming pool for training, and then
@@ -100,6 +113,11 @@ were grandfathered into a legal framework that allowed them to continue
 operating to the present day.
 
 ### For decades, dolphin shows were beloved by the public, lucrative for owners, and generally uncontroversial.
+
+![Three dolphins perform at Gulf World Marine Park ~ Source](/images/medium/the-dolphin-company/d574c9b6ea920017f0c8b12bebfb5caa9938819a5b6429bd18119201f695b35a.jpeg)
+
+*Three dolphins perform at Gulf World Marine Park ~ [Source](https://www.tripadvisor.com/Attraction_Review-g34543-d143676-Reviews-Gulf_World_Marine_Park-Panama_City_Beach_Florida.html)*
+
 
 By the 80s and 90s, Gulf World was pulling in steady crowds. It added
 sea lions, penguins, and even tropical birds. For local families, it was
@@ -122,6 +140,11 @@ reliable business.
 > conservation of marine mammals."**
 >  - Company press release
 
+![Dolphin Discovery in Isla Mujeres ~ Source](/images/medium/the-dolphin-company/425923f6f8a2e4e221114fae86e63331add376bb6c2ab9eb6c6b83c1e5bbcb97.png)
+
+*Dolphin Discovery in Isla Mujeres ~ [Source](https://thedolphinco.com/)*
+
+
 Meanwhile, across the Gulf of Mexico, a different vision for the dolphin
 business was taking shape. In 1994, Mexican entrepreneur Eduardo Albor
 launched Dolphin Discovery in Cancún. His model was simple and
@@ -136,6 +159,11 @@ Florida; in 2019 it acquired Marineland in St. Augustine.
 The company listed shares on the Mexican stock exchange in 2016 under
 the name Grupo Dolphin and rebranded itself globally as
 [The Dolphin Company.](https://thedolphinco.com/)
+
+![The Dolphin Company World Map ~ Source](/images/medium/the-dolphin-company/4f31029a1c1552ee315750ba6fd54eabfc201c43c3b889388ad8777ec7b649d7.png)
+
+*The Dolphin Company World Map ~ [Source](https://thedolphinco.com/)*
+
 
 Public-facing language leaned into scale and family-friendly imagery.
 Inside the business, leadership touted a large captive-breeding program
@@ -188,6 +216,11 @@ company's liabilities and brand reputation were exposed to the world.**
 
 ### Character Sketch: Eduardo Albor
 
+![Eduardo Albor (top left) superimposed over protests outside of the Miami Seaquarium ~ Source](/images/medium/the-dolphin-company/a22e84121944ee78cbb03dd68f21cd9aaa9e496fda74b8b731f3b68a3694971c.jpeg)
+
+*Eduardo Albor (top left) superimposed over protests outside of the Miami Seaquarium ~ [Source](https://kbindependent.org/2025/06/27/bankruptcy-judge-imposes-10000-a-day-fine-against-former-miami-seaquarium-owner/)*
+
+
 #### Eduardo Albor has been the driving force behind The Dolphin Company since its founding.
 
 Trained as a lawyer in Mérida, with an MBA in corporate law from
@@ -216,6 +249,11 @@ Those words contrasted sharply with growing criticism and public outcry.
 Activists called on him personally to address the plight of [**Lolita, the orca at the Seaquarium**](https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254), while lenders in a Delaware bankruptcy court
 moved to strip him of control.
 
+![Lolita the Orca ~ Source](/images/medium/the-dolphin-company/1dec43fe52564d486342253d92440108031027b3d9025379dc461fbfb128db1d.png)
+
+*Lolita the Orca ~ [Source](https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254)*
+
+
 Albor embodied the entrepreneurial vision of Mexican tourism. At the
 same time, Albor was the face of a business model whose time had passed.
 
@@ -227,6 +265,11 @@ ultimately trapped between a dream and shifting cultural landscapes.**
 > **"The County... filed a lawsuit to evict The Dolphin Company... to ensure
 > the safety and wellbeing of the animals."**
 >  - Miami-Dade County filing, 2024
+
+![Art by author with gpt4-o](/images/medium/the-dolphin-company/ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923.png)
+
+*Art by author with gpt4-o*
+
 
 **By the mid-2010s, cracks in the business started to show.**
 

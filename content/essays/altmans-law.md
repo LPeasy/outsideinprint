@@ -9,12 +9,15 @@ featured_image: "/images/medium/altmans-law/c294e8d769c14dca54d5f71366a7f665406b
 featured_image_caption: "Photo by name_ gravity on Unsplash"
 featured_image_alt: "Altman’s Law"
 description: "For decades, Moore’s Law served as the foundation of technological forecasting, predicting that computing power would double roughly every two years due to i..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/altmans-law.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/altmans-law-a48b005e52cd"
@@ -41,6 +44,11 @@ AI intelligence increases logarithmically with resource investment, while the co
 If this trajectory holds, AI will not only transform industries but redefine the very nature of intelligence itself.
 
 The Three Pillars of Altman's Law
+
+![Photo by Jens Peter Olesen on Unsplash](/images/medium/altmans-law/50dd62a3cf7ccb0749447381d43f8fb6e6ccb308d7548336f015351fec7dbff5.jpg)
+
+*Photo by Jens Peter Olesen on Unsplash*
+
 
 Altman's observations suggest that AI's rapid advancement is propelled by three fundamental forces:
 
@@ -74,6 +82,11 @@ Imagine a rocket: Moore's Law is like constant acceleration, while Altman's Law 
 
 The Economic Consequences of Altman's Law
 
+![Photo by Bradyn Trollip on Unsplash](/images/medium/altmans-law/982ad993515acaab4b2e5332832a1ae0c246bd7776075da0ebc5c221ba0826c7.jpg)
+
+*Photo by Bradyn Trollip on Unsplash*
+
+
 If Altman's Law holds, the economic landscape will be transformed in ways we are only beginning to understand.
 
 The Collapse of Knowledge Work
@@ -93,6 +106,11 @@ The Rise of AI-Centric Business Models
 The balance of power will shift toward companies and individuals who own and control the infrastructure behind AI, from specialized computing chips to vast proprietary datasets. Businesses that fail to adapt to this AI-first economy risk being left behind.
 
 Preparing for the Age of Altman's Law
+
+![Photo by Ross Findon on Unsplash](/images/medium/altmans-law/b3ad4a69456d4e3497fd0efeb592989c9f53534a216cc020b7c2760059c72587.jpg)
+
+*Photo by Ross Findon on Unsplash*
+
 
 Altman's Law is not just an observation. It's a warning shot for the future. Governments, businesses, and individuals must adapt now, or risk being blindsided by AI's acceleration.
 

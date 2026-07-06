@@ -7,12 +7,15 @@ section_label: "Essay"
 subtitle: "Making Strategic Choices When Everything’s on the Table"
 description: "Imagine you’re at an American buffet something like Golden Corral. You walk in hungry, and you’re surrounded by endless options"
 featured_image: "/images/medium/the-risk-management-buffet/0e0afc0ee25fab12957c07b3073aff1d4c61f1883bb4eb35fbb7e5656e14b053.jpg"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, from First web edition to Second web edition after OIP back-archive review. Remote Medium media, house-style issues, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-risk-management-buffet.pdf"
 featured: false
 
@@ -25,6 +28,11 @@ medium_source_url: "https://medium.com/@lawtonperret/the-risk-management-buffet-
 Imagine you're at an American buffet ~ something like
 [Golden Corral](https://www.goldencorral.com/). You walk in hungry, and you're
 surrounded by endless options.
+
+![Golden Corral in Fredericksburg, VA](/images/medium/the-risk-management-buffet/243c921ed4b04d170e49a8c8eda1dbb2f1e406627548cacb29aeb7c0d705f13a.jpg)
+
+*Golden Corral in Fredericksburg, VA | [Source](https://www.tripadvisor.com/Restaurant_Review-g60824-d2686289-Reviews-Golden_Corral-Fredericksburg_Virginia.html)*
+
 
 The salad bar is lined with leafy greens (nature-based solutions), the
 carving station offers heavy entrées (hard structures), and there's a
@@ -167,4 +175,3 @@ see them bring out a tray of hot, steamin' 'n' crispy fried chicken.
 **Success isn't sampling everything or eating as much as possible ~**
 
 #### **It's knowing you made the best choices with what was on the table.**
-

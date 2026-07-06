@@ -9,18 +9,20 @@ featured_image: "/images/medium/the-national-debt-is-screwing-you-heres-how/0a38
 featured_image_caption: "Photo by Jp Valery on Unsplash"
 featured_image_alt: "The National Debt Is Screwing You — Here’s How"
 description: "Imagine a 70-year-old maxing out a credit card in their grandkid’s name — then walking away, leaving them with the bill"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 
 revision_history:
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-national-debt-is-screwing-you-heres-how.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-national-debt-is-screwing-you-heres-how-a8d79c0d6431"
 ---
-
 
 Imagine a 70-year-old maxing out a credit card in their grandkid's name - then walking away, leaving them with the bill.
 
@@ -45,6 +47,11 @@ Remember when a burger and fries cost $5? Now it's closer to $12. Your paycheck 
 Heavy borrowing can put pressure on interest rates, public investment, inflation expectations, and the distribution of wealth. It can also widen the gap between asset owners and people living paycheck to paycheck.
 
 If we keep ignoring it, things will get a lot worse. How America Maxed Out Its Credit Card - and Left You With the Bill
+
+![Photo by Mark OFlynn on Unsplash](/images/medium/the-national-debt-is-screwing-you-heres-how/3c4c26458cd50e3684d20598cd2f74751ed444a756468951ae94f8788311dcef.jpeg)
+
+*Photo by Mark OFlynn on Unsplash*
+
 
 In the late '90s, the federal government actually had a balanced budget.
 
@@ -78,6 +85,11 @@ Who pays for that? You do. Again. And the worst part? This whole cycle is making
 
 
 ### The National Debt Is Making the Rich Richer - And Screwing Everyone Else
+
+![Photo by Joshua Hoehne on Unsplash](/images/medium/the-national-debt-is-screwing-you-heres-how/d1d906099c6e9778e371e44c0511c6f426a530897115c28e8d7b7ae4866694fe.jpeg)
+
+*Photo by Joshua Hoehne on Unsplash*
+
 
 Inflation isn't just about rising grocery bills - it's about who owns assets and who doesn't.
 
@@ -129,6 +141,11 @@ The people who caused this mess won't be the ones cleaning it up.
 
 We will. Can We Solve the National Debt Crisis Before It's Too Late?
 
+![Photo by Olav Ahrens Røtne on Unsplash](/images/medium/the-national-debt-is-screwing-you-heres-how/068b7348f0ae0ee6ee789f441fd96895cac473a762b5e994d783f159e973a594.jpeg)
+
+*Photo by Olav Ahrens Røtne on Unsplash*
+
+
 Yes, but it would require serious changes that few voters or politicians want to make.
 
 - Cut spending? Voters get mad.
@@ -144,6 +161,11 @@ It's not about cutting everything, it's about making the numbers add up.
 
 
 ### Why You Can't Afford to Ignore This
+
+![Photo by Tolu Akinyemi 🇳🇬 on Unsplash](/images/medium/the-national-debt-is-screwing-you-heres-how/d17db2f6e4899ca70e8a4c7cfe39837d0ebcd582aeead14abb238530452bc9c9.jpeg)
+
+*Photo by Tolu Akinyemi 🇳🇬 on Unsplash*
+
 
 This isn't just some abstract problem for politicians to deal with.
 

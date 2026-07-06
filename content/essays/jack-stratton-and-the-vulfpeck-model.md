@@ -11,12 +11,15 @@ featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b412
 featured_image_caption: "Jack Stratton on stage \\\\| Source: Michelle Shiers"
 featured_image_alt: "Jack Stratton on stage \\\\"
 description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, and tightened source-discipline language around Vulfpeck's independent model."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/jack-stratton-and-the-vulfpeck-model.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/jack-stratton-and-the-vulfpeck-model-00813f3ac8bf"
@@ -55,6 +58,11 @@ music.
 
 #### Jack Stratton's Early Life and Musical Education
 
+![Jack and His Dad, Bert \](/images/medium/jack-stratton-and-the-vulfpeck-model/2c3762584e6a4b03acaf71a5ca668741cc0c78e9cd714f4238aef65d56c37c7b.jpeg)
+
+*Jack and His Dad, Bert \| [Source: Bert Stratton](https://www.cleveland.com/entertainment/2022/06/vulfpecks-jack-stratton-and-his-dad-yiddishe-cups-bert-stratton-talk-cleveland-klezmer-music-qa.html?outputType=amp)*
+
+
 > Stratton grew up in Cleveland Heights, Ohio.
 
 He started playing drums early and performed in a variety of musical
@@ -81,6 +89,11 @@ influences**, laid the foundation for a group that would blend
 **technical discipline** with **humor**, **rhythm**, and **minimalism**.
 
 #### How Vulfpeck Was Formed: The Origins of the Band
+
+![Cory Wong, Jack, and Joe Dart \](/images/medium/jack-stratton-and-the-vulfpeck-model/3a73bf5eef98b4652561ecd257f3a7a2a22726d60f3a5d8f6d30549cfe507aa2.jpeg)
+
+*Cory Wong, Jack, and Joe Dart \| [Source: StubHub](https://www.stubhub.com/vulfpeck-tickets/performer/1501197)*
+
 
 Vulfpeck was conceived in 2011 as *an imagined German rhythm section*,
 **modeled on American session musicians** of the 1960s and '70s ~ like
@@ -110,6 +123,11 @@ band**'s operations.
 
 #### Jack Stratton's Role in Vulfpeck as Bandleader and Producer
 
+![Vulfpeck \](/images/medium/jack-stratton-and-the-vulfpeck-model/552e548f82e4a9edd9b3ab53f9354751fecc3c03c5f74518fb15a8d45af58242.jpeg)
+
+*Vulfpeck \| [Source: Last.fm](https://www.last.fm/music/Vulfpeck/+wiki)*
+
+
 Stratton serves as Vulfpeck's **central organizer and creative
 director.** He oversees recording sessions, mixing, editing, video
 production, and live show design.
@@ -134,6 +152,11 @@ scientist.***
 
 #### Inside Jack Stratton's Production Style and Sound Philosophy
 
+![Jack’s Mixing Masterclass \](/images/medium/jack-stratton-and-the-vulfpeck-model/f36a6e470efd2fd38b93abfd2d8056a951f956e6f1f61d698ce43edc4f73d4f6.jpeg)
+
+*Jack’s Mixing Masterclass \| [Source: Music Radar](https://www.musicradar.com/news/jack-stratton-mixing-masterclass)*
+
+
 Stratton's approach to mixing emphasizes **warmth, clarity, and
 simplicity.**
 
@@ -155,6 +178,11 @@ tracking, **became a hallmark of the band's catalog** ~ and their sound
 is ***perfect for live shows.***
 
 #### Vulfpeck Albums and Live Performances: From MSG to the Mainstream
+
+![Vulfpeck at MSG \](/images/medium/jack-stratton-and-the-vulfpeck-model/4e545f452e9f1601fc923051b9bcfa772947549b4592a059c8e598d3259d050c.jpeg)
+
+*Vulfpeck at MSG \| [Source: Jambase](https://www.jambase.com/article/vulfpeck-madison-square-garden-chris-thile-dave-koz)*
+
 
 Under Stratton's leadership, Vulfpeck has released **six studio albums,
 a compilation, and multiple live albums.**
@@ -181,6 +209,11 @@ world's biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
 > musically and creatively.
 
 #### Clarity of Cal: A Career-Defining Live Album and Film
+
+![Clarity of Cal Album Images \](/images/medium/jack-stratton-and-the-vulfpeck-model/e4ba5e54a975b44557c9a40bf259fa87c4bd6c5ee0f0ea2d99486d083acc3ea5.jpeg)
+
+*Clarity of Cal Album Images \| [Source: Vulfpeck](https://preview.redd.it/vkcd7763xkhe1.png?width=944&format=png&auto=webp&s=c4db621337eff49d5729ebfea066f76193238085&app_web_view=ios)*
+
 
 > "Oh that's real baby. That's real life. We're getting into real life."
 

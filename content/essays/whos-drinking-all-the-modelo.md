@@ -9,12 +9,15 @@ featured_image: "/images/medium/whos-drinking-all-the-modelo/645c97bb67718c4a25f
 featured_image_caption: "Photo by Soliman Cifuentes on Unsplash"
 featured_image_alt: "Who’s Drinking All the Modelo?"
 description: "“Every once in a while, a person comes along who defies the odds, who defies logic, and fulfills an incredible dream.”"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images were removed, import formatting was normalized, and beer-market claims were tightened."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/whos-drinking-all-the-modelo.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/whos-drinking-all-the-modelo-659302786ed9"
@@ -25,6 +28,11 @@ medium_source_url: "https://medium.com/@lawtonperret/whos-drinking-all-the-model
 From the mayor of Philadelphia celebrating Rocky Balboa in *Rocky III*.
 
 ### How Modelo Became America's Best-Selling Beer
+
+![Photo by Jon Parry on Unsplash](/images/medium/whos-drinking-all-the-modelo/66c86d4f52c2091d73af54a4a7ac81edc4f51d8c8ec9e547dfa1c7a769ec2ce0.jpg)
+
+*Photo by Jon Parry on Unsplash*
+
 
 After more than 20 years on the throne, Bud Light finally tapped out.
 
@@ -61,6 +69,11 @@ Whether it is stocked at taquerias, corner stores, backyard parties, or bar pati
 > And that saturation did not happen by accident.
 
 ### Inside Modelo's Explosive Growth Strategy
+
+![Photo by kazuend on Unsplash](/images/medium/whos-drinking-all-the-modelo/0b2a1a95e739ca09d81882285708a4ed02871ab35d7251fcf6338e4dc8349da8.jpg)
+
+*Photo by kazuend on Unsplash*
+
 
 Constellation Brands, the company that holds the exclusive U.S. rights to Modelo, reported nearly $7.5 billion in beer sales in fiscal 2023, up 11% from the previous year.
 
@@ -141,6 +154,11 @@ In 2025, Constellation Brands warned of slowing beer growth and weaker demand fr
 Modelo is brewed in Mexico, one of its selling points, but also a potential business risk if tariffs or anti-Mexico rhetoric escalate.
 
 ### What Modelo's Success Teaches About Brand Strategy
+
+![Photo by Arturo Esparza on Unsplash](/images/medium/whos-drinking-all-the-modelo/de3e020b27ac557524bfe932943068c10de82e3a608d99b281f396041c5701ba.jpg)
+
+*Photo by Arturo Esparza on Unsplash*
+
 
 > Modelo's ascent isn't just a story about beer.
 

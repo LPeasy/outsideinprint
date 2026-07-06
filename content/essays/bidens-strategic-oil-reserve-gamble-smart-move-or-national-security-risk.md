@@ -9,8 +9,8 @@ featured_image: "/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-o
 featured_image_caption: "Photo by Free Walking Tour Salzburg on Unsplash"
 featured_image_alt: "Biden’s Strategic Oil Reserve Gamble: Smart Move or National Security Risk?"
 description: "America's Strategic Petroleum Reserve became a price, security, and credibility test after the Biden administration's record oil release."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 
 revision_history:
   - version: "1.2"
@@ -19,6 +19,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk-5f4dbd688765"
@@ -60,6 +63,11 @@ But the SPR was left dramatically depleted, and as global instability rises, the
 
 
 ### Biden's Record Oil Release: What Happened?
+
+![Photo by Dulcey Lima on Unsplash](/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk/4f81a7231028216cebc217b3a2fbf0dc91450a924658eae806f03ba9d739dcb6.jpeg)
+
+*Photo by Dulcey Lima on Unsplash*
+
 
 When President Biden took office in January 2021, the SPR held about 638 million barrels of crude oil.
 
@@ -118,6 +126,11 @@ While President Donald Trump has pledged to "immediately refill" the reserve, th
 
 ### Geopolitical Uncertainty: Is the U.S. Ready for the Next Oil Shock?
 
+![Photo by Sigmund on Unsplash](/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk/a8c58d4ca095a6a05c5c73ee9033808223a11e0631f53ed94ada2869721113e6.jpeg)
+
+*Photo by Sigmund on Unsplash*
+
+
 The Biden administration's SPR gamble looks even riskier in light of recent geopolitical turmoil, including the ongoing war in Ukraine and the escalating conflict between Israel and Hamas.
 
 Both crises have introduced new volatility to global oil markets, complicating the long-term consequences of depleting the SPR.
@@ -155,6 +168,11 @@ One of the most controversial energy decisions of the past decade? The cancellat
 
 ### Keystone XL, Drilling, and Trump's Energy Agenda
 
+![Photo by Mike Benna on Unsplash](/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk/c42a888cb08faae88d9eb055e6216c9a407942049ce4953223357b72d9dc1959.jpeg)
+
+*Photo by Mike Benna on Unsplash*
+
+
 The cancellation of the Keystone XL pipeline remains a flashpoint in the broader debate over U.S. energy security.
 
 The pipeline, which would have transported 830,000 barrels per day of Canadian crude oil to U.S. refineries, was effectively killed when the Biden administration revoked its permit in early 2021.
@@ -187,6 +205,11 @@ While Trump's drilling-first strategy may boost production, it does little to im
 
 
 ### The Big Picture: What Comes Next for U.S. Energy Security?
+
+![Photo by NASA on Unsplash](/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb.jpeg)
+
+*Photo by NASA on Unsplash*
+
 
 The Biden administration's use of the Strategic Petroleum Reserve was the most aggressive in history, a move that shaped energy markets, lowered gas prices, and left the U.S. in a weakened long-term position.
 

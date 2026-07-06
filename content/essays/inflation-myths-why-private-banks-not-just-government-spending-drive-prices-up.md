@@ -9,13 +9,16 @@ featured_image: "/images/medium/inflation-myths-why-private-banks-not-just-gover
 featured_image_caption: "Photo by Elimende Inagella on Unsplash"
 featured_image_alt: "Inflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up"
 description: "Inflation dominates headlines, but most people misunderstand what’s really driving it. Turn on any financial news channel, and you’ll hear it"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 
 revision_history:
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up-a59f477e0d5c"
@@ -52,6 +55,11 @@ The goal? To move beyond simplistic explanations and uncover what's really drivi
 
 ### How Money Supply Grows
 
+![Photo by Mathieu Stern on Unsplash](/images/medium/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up/49267d1d04c3bf2fd76b1b1d542bc2f42b2663111fcdd8f97f00ea487f8a0d5a.jpeg)
+
+*Photo by Mathieu Stern on Unsplash*
+
+
 The money supply grows through two primary channels:
 
 1. Government Spending and Deficits
@@ -71,6 +79,11 @@ Both mechanisms cause inflation if the money supply grows faster than the real e
 
 ### The Inflation Crisis of 1965 - 1985
 
+![Photo by Markus Winkler on Unsplash](/images/medium/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up/78311f5eecea8a840d9c044a96603ee4d1ccebba0be00cea8331e03007ff12f6.jpeg)
+
+*Photo by Markus Winkler on Unsplash*
+
+
 Between the mid-1960s and early 1980s, the U.S. experienced sustained high inflation, peaking at 14.8% in 1980.
 
 Many attribute this inflationary era to government spending, particularly on the Vietnam War and Great Society programs. Additionally, oil shocks in 1973 and 1979 caused supply-side price increases, exacerbating inflation.
@@ -87,6 +100,16 @@ While government deficits grew significantly during this period, private credit 
 
 
 ### The 2008 Financial Crisis and Private Debt Collapse
+
+![Photo by Adeolu Eletu on Unsplash](/images/medium/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up/c78e61b6d21b3738c5b9fb19c0f8f0e80ddea444b0b1452e71bcf190a315872f.jpeg)
+
+*Photo by Adeolu Eletu on Unsplash*
+
+
+![Photo by Fusion Medical Animation on Unsplash](/images/medium/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up/988f2510c82e1e0567f54b841753f6e57a1c75231f4e2969832e3e092c34c589.jpeg)
+
+*Photo by Fusion Medical Animation on Unsplash*
+
 
 The 2008 financial crisis provides a counterexample to the conventional wisdom about government spending and inflation.
 
@@ -128,6 +151,11 @@ The inflation spike of 2020 - 2023 was driven by both government stimulus and pr
 
 ### The Federal Reserve's Role in Private Debt Creation
 
+![Photo by Etienne Martin on Unsplash](/images/medium/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up/a5c0250513cddbc6089e3ce87cd1bc8370e107855ac8f94a4e204f31163f8935.jpeg)
+
+*Photo by Etienne Martin on Unsplash*
+
+
 One of the most significant levers affecting private credit creation is the Federal Reserve's interest rate policy.
 
 The Fed sets the federal funds rate, which influences borrowing costs across the economy.
@@ -146,6 +174,11 @@ The Federal Reserve's interest rate decisions have a direct impact on private de
 
 
 ### Supply Chain Shocks and Post-COVID Inflation
+
+![Photo by Mika Baumeister on Unsplash](/images/medium/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up/c49faeec5e3c00b0e69b4cdf86cf5a0ba53b791cdab0d3346b9cdb67a5f980cb.jpeg)
+
+*Photo by Mika Baumeister on Unsplash*
+
 
 Another crucial factor in post-COVID inflation was the unprecedented supply chain disruptions.
 

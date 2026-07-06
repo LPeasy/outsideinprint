@@ -9,8 +9,8 @@ featured_image: "/images/medium/russias-slow-surrender-how-china-is-turning-puti
 featured_image_caption: "Photo by Didssph on Unsplash"
 featured_image_alt: "Russia’s Slow Surrender: How China is Turning Putin’s War into a Power Play"
 description: "Russia's war in Ukraine has deepened its economic, military, and strategic reliance on China, leaving Moscow with less bargaining power over time."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
@@ -20,6 +20,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-07"
     note: "Updated May 7, 2026, after OIP back-archive review. Remote Medium residue, formatting artifacts, source-sensitive claims, and editorial-philosophy evidence were checked."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 ---
 
 Russia's prolonged war in Ukraine has significantly altered its geopolitical and economic landscape, pushing it closer to China in ways that weaken its autonomy.
@@ -29,6 +32,11 @@ The key factor in determining Russia's future is how long the war continues. The
 China, in turn, has incentives to tolerate a prolonged war: it weakens Russia, drains Western attention, and strengthens Beijing's leverage over its so-called partner.
 
 ## Economic Dependence: The Noose Tightens
+
+![Photo by Fabian Blank on Unsplash](/images/medium/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/4f81b5f2b4518afcbb6ee6d9c93feca7c9f4f5484e7ff4132a2e7db016510953.jpeg)
+
+*Photo by Fabian Blank on Unsplash*
+
 
 Western sanctions have isolated Russia from the global economy, forcing it to rely on China as a financial and trade lifeline.
 
@@ -48,6 +56,11 @@ What began as a pragmatic partnership is turning into one of economic entrapment
 
 ## Military and Strategic Dependence: A War That Benefits China
 
+![Photo by israel palacio on Unsplash](/images/medium/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/3d268372900d775181f443d55678ed003c89c83482179050882a0b9eabb65b9c.jpeg)
+
+*Photo by israel palacio on Unsplash*
+
+
 Russia's military reliance on China has grown significantly. While Beijing avoids overt direct arms transfers, it has helped sustain Moscow's war effort through dual-use technology, including components relevant to drones, navigation, and military production.
 
 Estonian intelligence reports that China is a key conduit for critical Western drone components entering Russia, sustaining production that would otherwise face tighter constraints.
@@ -61,6 +74,11 @@ Beijing benefits from a prolonged war because it weakens both Russia and the Wes
 Meanwhile, Moscow's growing dependence creates an asymmetric partnership, one where Beijing has more room to dictate terms.
 
 ## The Longer the War, the Tighter China's Grip
+
+![Photo by Aron Visuals on Unsplash](/images/medium/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/226924d3d0f2fafb6590eea841891530bb1fc9046146c1f32eb87f5902a4f0eb.jpeg)
+
+*Photo by Aron Visuals on Unsplash*
+
 
 Russia is not yet a Chinese vassal state, but the war is moving it toward deeper dependence.
 

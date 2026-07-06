@@ -9,12 +9,15 @@ description: "Control is impossible when everyone depends on the machine. School
 featured_image: "/images/medium/ai-in-education-is-a-wicked-problem/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba.png"
 featured_image_caption: "“In My Voice” | Art by Author"
 featured_image_alt: "“In My Voice”"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/ai-in-education-is-a-wicked-problem.pdf"
 featured: false
 
@@ -69,6 +72,11 @@ Coined by Horst Rittel and Melvin Webber (1973), a wicked problem ~
 > Poverty, climate change, social media addiction ~ and now, AI in the
 > classroom.
 
+![“The Wicked Problem Loop”](/images/medium/ai-in-education-is-a-wicked-problem/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db.png)
+
+*“The Wicked Problem Loop” | Created by Author*
+
+
 ### Why No One Owns the AI Problem in Education
 
 > Education is a network of competing goals.
@@ -114,6 +122,11 @@ authorship.***
 
 ### Why Detection and Governance Fail for the Same Reason
 
+![“The Futility of Control”](/images/medium/ai-in-education-is-a-wicked-problem/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7.png)
+
+*“The Futility of Control” | Created by Author*
+
+
 > Every attempt at control creates a new loophole.
 
 A Stanford-linked study found that AI detectors often misidentify text,
@@ -141,6 +154,11 @@ fail for the same reason ~
 
 ### How AI Is Replacing Judgment ~ Not Just Labor
 
+![“The Erosion of Judgement”](/images/medium/ai-in-education-is-a-wicked-problem/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28.png)
+
+*“The Erosion of Judgement” | Created by Author*
+
+
 When a student asks AI to "write an essay in my voice," they're not just
 skipping work. They're giving away the decision of what counts as
 "good".
@@ -160,6 +178,11 @@ Education already rewards output over process ~ AI is just the next
 logical iteration.
 
 ### Why the AI Misuse Problem Can't Be Solved ~ Only Redefined
+
+![“The Reflection of Learning”](/images/medium/ai-in-education-is-a-wicked-problem/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042.png)
+
+*“The Reflection of Learning” | Art by Author*
+
 
 > Rules always trail behavior.
 

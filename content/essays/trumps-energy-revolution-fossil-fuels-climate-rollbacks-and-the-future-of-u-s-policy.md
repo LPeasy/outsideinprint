@@ -9,8 +9,8 @@ featured_image: "/images/medium/trumps-energy-revolution-fossil-fuels-climate-ro
 featured_image_caption: "Photo by Zbynek Burival on Unsplash"
 featured_image_alt: "Trump’s Energy Revolution: Fossil Fuels, Climate Rollbacks, and the Future of U.S. Policy"
 description: "Early in Trump's second term, U.S. climate policy shifted toward fossil fuel expansion, Paris withdrawal, regulatory rollback efforts, and a harder question about global emissions discipline."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 pdf: "/pdfs/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy-238c2fe84b5d"
@@ -23,6 +23,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-07"
     note: "Updated May 7, 2026, after OIP back-archive review. Remote Medium residue, formatting artifacts, source-sensitive claims, and editorial-philosophy evidence were checked."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 ---
 
 ## Introduction
@@ -34,6 +37,11 @@ After years of positioning itself as a leader in global climate initiatives, the
 Climate policies were rolled back with gusto, international agreements were spurned, and fossil fuels were given pride of place once again.
 
 This analysis examines how Trump's administration reversed course on emissions cuts and clean energy, why global climate tipping points are looming regardless, and why America's past climate leadership may have been a well-intentioned misstep.
+
+![Photo by Alex McCarthy on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/3948f57d0f02588ce42f203c4f9cf28947ee048998eba88e88bcd96738063bcf.jpeg)
+
+*Photo by Alex McCarthy on Unsplash*
+
 
 ## Trump's Second-Term Climate Policy Rollbacks
 
@@ -65,6 +73,11 @@ Trump's second term became, in essence, an experiment in what happens when the w
 
 ## Tipping Points: Climate on the Brink
 
+![Photo by Nicolas Cool on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/1db5a7e16ed7f3f49eef802e0d6bf5b6767476a33c09d2b1e878345824d5374c.jpeg)
+
+*Photo by Nicolas Cool on Unsplash*
+
+
 Melting ice and disintegrating glaciers are perfect examples of climate tipping points.
 
 Once enough warmth is added, ice sheets can begin a process of long-term collapse, one of many thresholds scientists warn about. The Earth's climate does not particularly care who occupies the White House. Decades of accumulating greenhouse gases have brought us closer to climate tipping points: thresholds beyond which major systems can shift in ways that are difficult or impossible to reverse.
@@ -79,6 +92,11 @@ These include:
 Cross one of these thresholds, and we may set in motion self-perpetuating changes: feedback loops that accelerate warming even after human emissions fall.
 
 The point of no return.
+
+![Photo by Bradyn Trollip on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/eaa0b0f17c5ac16d3d6a6757d79a299a151d8ecb8df01098394858591bf226c5.jpeg)
+
+*Photo by Bradyn Trollip on Unsplash*
+
 
 The sobering reality is that these tipping points are perilously close to being triggered.
 
@@ -106,11 +124,21 @@ U.S. action alone could not have averted the danger if others stay the course to
 
 ## Rising Emissions Abroad: China, India, Russia, and the Rest
 
+![Photo by NASA on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb.jpeg)
+
+*Photo by NASA on Unsplash*
+
+
 If U.S. climate leadership fizzled, it wasn't in a vacuum, many of the world's other big emitters were more than happy to continue with business-as-usual pollution.
 
 Global greenhouse gas emissions hit record highs in recent years and show no real sign of peaking.
 
 The blunt truth is that the growth of emissions from developing and emerging economies has vastly outpaced the cuts achieved in the West. Any notion that the U.S. could "lead by example" was undercut by the relentless rise of carbon output in places like China, India, and Russia, as well as many developing nations pursuing economic growth.
+
+![Photo by Li Yang on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/7cb2be05d93967bf402bb592ae750878755789827fe0fc9a61ebfd54d9073b58.jpeg)
+
+*Photo by Li Yang on Unsplash*
+
 
 Let's start with China, the world's largest carbon polluter. China's emissions are now roughly double those of the U.S., and they keep rising, up an estimated 5.2% in 2023 alone, bringing China's CO₂ output to 12% above its 2020 level.
 
@@ -121,6 +149,11 @@ For perspective, that's like building the entire U.S. coal fleet all over again.
 Beijing has pledged to peak emissions by 2030 and reach carbon neutrality by 2060, but in practice it is front-loading fossil infrastructure now (to avoid energy shortages) and deferring major cuts to later. The result:
 
 China's near-term targets remain modest, and it is not yet bending the curve of emissions downward.
+
+![Photo by Martin Jernberg on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/b38650ef86f77a679a42006bd5c3d292f4e2d68a7fa093cc0e889bce0fbdefb7.jpeg)
+
+*Photo by Martin Jernberg on Unsplash*
+
 
 Next, India, the third-largest emitter, continues to prioritize development and poverty alleviation, which for now mean a strong reliance on fossil fuels.
 
@@ -139,6 +172,11 @@ In essence, Moscow's climate policy is to pump and drill as usual. They did adop
 A 2021 climate law was watered down to remove enforcement teeth, leaving no penalties for big emitters. The verdict from analysts is scathing: Russia shows "no real commitment to curb emissions".
 
 In fact, if every country followed Russia's approach, we'd be on track for well over 3 °C of warming. Clearly, meaningful global progress was not going to come from Moscow.
+
+![Photo by NOAA on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/ddd99ea0c21d3fd149bab8a2435bb15a8e289b6a6cf65a2fdc54415ad5469ce0.jpeg)
+
+*Photo by NOAA on Unsplash*
+
 
 Beyond these major players, many developing nations are understandably more focused on immediate development needs than on aggressive carbon cuts.
 
@@ -210,6 +248,11 @@ Trump's second-term retreat, while damaging from a climate perspective, also lay
 It's a harsh lesson in realpolitik versus idealism in climate policy.
 
 ## Fossil Fuels vs. Electric Vehicles: A Reality Check
+
+![Photo by John Cameron on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/5394e0c65e604d6c5acabcd20e526f41b75fc48896933ddbf4b81527ea6e1c6b.jpeg)
+
+*Photo by John Cameron on Unsplash*
+
 
 One of the most contentious debates in climate policy is whether to rapidly phase out fossil fuels, for example, by mandating electric vehicles (EVs), or to continue using oil, gas, and coal a while longer in a pragmatic transition.
 

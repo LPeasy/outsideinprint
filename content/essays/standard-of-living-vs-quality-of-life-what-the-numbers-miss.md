@@ -9,12 +9,15 @@ featured_image: "/images/medium/standard-of-living-vs-quality-of-life-what-the-n
 featured_image_caption: "Photo by Mathieu Stern on Unsplash"
 featured_image_alt: "Standard of Living vs. Quality of Life: What the Numbers Miss"
 description: "“Raising the standard of living” might be the most recycled promise in modern American politics"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images and promotional aftermatter were removed, import formatting was normalized, and economic claims were tightened."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/standard-of-living-vs-quality-of-life-what-the-numbers-miss.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/standard-of-living-vs-quality-of-life-what-the-numbers-miss-9a9200cdea84"
@@ -114,6 +117,11 @@ The message is clear:
 
 ### Why the Rising Tide Hasn't Lifted All Boats
 
+![Photo by frank mckenna on Unsplash](/images/medium/standard-of-living-vs-quality-of-life-what-the-numbers-miss/196a5503456fdf10d20cb1282983ad88a8f89037235a709e2e2857e43f4ff4b2.jpg)
+
+*Photo by [frank mckenna](https://unsplash.com/@frankiefoto) on [Unsplash](https://unsplash.com)*
+
+
 Wealth is growing, but not for everyone.
 
 We've all heard the phrase: "A rising tide lifts all boats."
@@ -185,6 +193,11 @@ Some countries already do this. The OECD's Better Life Index, for example, looks
 - Safety
 - Civic engagement
 - Life satisfaction
+
+![](/images/medium/standard-of-living-vs-quality-of-life-what-the-numbers-miss/91c18b717b7bf2a8c878843ff6fcb4262cf38189e16d86f2b3a8470646360450.png)
+
+*Source: OECD Better Life Index.*
+
 
 Source note: OECD Better Life Index.
 

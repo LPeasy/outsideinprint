@@ -9,12 +9,15 @@ featured_image: "/images/medium/the-privacy-paradox-why-americans-feel-powerless
 featured_image_caption: "Photo by Glen Carrie on Unsplash"
 featured_image_alt: "The Privacy Paradox: Why Americans Feel Powerless Over Their Personal Data"
 description: "Americans say they care about privacy. Surveys show that most people worry about how their personal data is collected, shared, and sold"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, list formatting, source-card residue, and author-promo residue were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data-677ae19bb7e0"
@@ -206,6 +209,11 @@ Or will they, once again, just click 'accept'?
 
 ## The Truth About Data Privacy: Why the System Is Rigged Against You
 
+![Photo by Towfiqu barbhuiya on Unsplash](/images/medium/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data/2fe9e2618aef91a9c170f5be295674f48098ec2cf2cf64ae4e50d277d22ef35b.jpg)
+
+*Photo by Towfiqu barbhuiya on Unsplash*
+
+
 Americans care about privacy, but they don't understand it.
 
 Even when they do, they feel powerless to change anything.
@@ -229,5 +237,3 @@ All data in this discussion comes from the Pew Research Center's 2023 study, "Ho
 Pew oversampled Hispanic men, non-Hispanic Black men, and non-Hispanic Asian adults for more precise estimates, later weighting responses to match actual population proportions. The response rate was 87%, though long-term attrition resulted in a cumulative response rate of 3%.
 
 While the study accurately reflects public attitudes toward data privacy, it is self-reported and does not measure actual behavior. Since participation was voluntary, those more interested in data privacy may be overrepresented, meaning general apathy could be even higher than reported.
-
-

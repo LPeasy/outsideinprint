@@ -8,8 +8,8 @@ subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
 featured_image: "/images/medium/whos-responsible-for-building-in-the-floodplain/921f46f4d09c0c7ddcc7a9ad8642115e20fea0355d83ec02b6a06e1d9fe8f1ed.jpeg"
 featured_image_alt: "Who’s Responsible for Building in the Floodplain?"
 description: "A Camp Mystic essay on shared floodplain responsibility, local zoning, FEMA flood maps, federal flood insurance, alert protocols, and the limits of simple federal blame."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-18"
@@ -17,6 +17,9 @@ revision_history:
   - version: "1.2"
     date: "2026-06-24"
     note: "Updated June 24, 2026, after COA2 review for public metadata cleanup and reader-visible list and heading residue."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/whos-responsible-for-building-in-the-floodplain.pdf"
 featured: false
 
@@ -69,6 +72,11 @@ dangerous places.
 ### Who Controls Where We Build?
 
 > The federal government doesn't control zoning and development law.
+
+![](/images/medium/whos-responsible-for-building-in-the-floodplain/ec1c5ae8cc535e537d38cab44b3ad9d53f539c19a4264bcf69416e0518501cfc.jpeg)
+
+*Source: <a*
+
 
 **That power belongs to local governments ~** counties, cities, and
 towns ~ acting under authority granted by the states. It's been that way
@@ -263,6 +271,11 @@ construction,
 > voluntary.
 
 ### So Who Is Responsible?
+
+![The federal government?](/images/medium/whos-responsible-for-building-in-the-floodplain/1bcd120993b4cf986a7889b69e8db0f9d74e2fa0001b28afa10d5bb661d6bcd7.jpeg)
+
+**The federal government?**
+
 
 **The federal government?**
 

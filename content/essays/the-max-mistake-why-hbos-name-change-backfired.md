@@ -9,8 +9,8 @@ featured_image: "/images/medium/the-max-mistake-why-hbos-name-change-backfired/9
 featured_image_caption: "Photo by Oleksandra Bardash on Unsplash"
 featured_image_alt: "The Max Mistake: Why HBO’s Name Change Backfired"
 description: "If you’re confused, you’re not alone. This feels less like brand strategy and more like a midlife crisis complete with a haircut no one asked for, a question..."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-04"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, removed an unsupported media quote, and tied the rebrand reversal to Warner Bros. Discovery's public announcement."
+  - version: "1.3"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-max-mistake-why-hbos-name-change-backfired.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-max-mistake-why-hbos-name-change-backfired-0d81a0f6d509"
@@ -46,6 +49,11 @@ place.**
 
 #### From Prestige to Platform: A Quick Timeline
 
+![HBO Logo Timeline \](/images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg)
+
+*HBO Logo Timeline \| Source: Me lol*
+
+
 > HBO Max launched in May 2020.
 
 It wasn't just HBO ~ it was HBO **plus everything else WarnerMedia
@@ -72,6 +80,11 @@ thing as just "***Max***."
 > It didn't go well.
 
 #### What Were They Thinking?
+
+![Photo by Tim Mossholder on Unsplash](/images/medium/the-max-mistake-why-hbos-name-change-backfired/6ea1f299d8c58d3fe6ca91885602166aac76e909328e0870ce83a294ab6d43bd.jpeg)
+
+*Photo by [Tim Mossholder](http://timmossholder.com) on [Unsplash](https://unsplash.com/)*
+
 
 **The logic was this:**
 
@@ -111,6 +124,11 @@ product line.
 
 #### What HBO Really Means
 
+![HBO Classic Titles \](/images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg)
+
+*HBO Classic Titles \| Source: User with ChatGPT*
+
+
 **Let's take a moment.**
 
 HBO gave us ***The Sopranos, The Wire, Sex and the City, Six Feet Under,
@@ -137,6 +155,11 @@ It was **a cultural institution**.
 
 #### What Went Wrong
 
+![Photo by Sarah Kilian on Unsplash](/images/medium/the-max-mistake-why-hbos-name-change-backfired/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7.jpeg)
+
+*Photo by Sarah Kilian on [Unsplash](https://unsplash.com/)*
+
+
 "**Max**" was too generic.
 
 It could've been a smart thermostat. A toothpaste brand. A discount
@@ -160,6 +183,11 @@ Warner Bros. Discovery's own reversal made the point more clearly than
 any dunk could: the HBO name carried the trust that "Max" had blurred.
 
 #### The Return of HBO Max
+
+![Tommy Boy Classic Quote \](/images/medium/the-max-mistake-why-hbos-name-change-backfired/8f66de7d7b988d35d8857cc99e3ad0e3c7cec0d075723e56c9afced74d5ee7fc.jpeg)
+
+*Tommy Boy Classic Quote \| Source: Movieclips.com*
+
 
 By May 2025, the writing was on the wall:
 
@@ -186,6 +214,11 @@ memes, played the self-deprecating card, and even dropped the viral
 > It was a rare moment of corporate humility. And oddly... it landed.
 
 #### What This Tells Us About Streaming Strategy
+
+![Photo by Glenn Carstens-Peters on Unsplash](/images/medium/the-max-mistake-why-hbos-name-change-backfired/a718c74c96814f122a87456ecb8c2d50700f90c7e0d392679ffc0374f4979f31.jpeg)
+
+*Photo by [Glenn Carstens-Peters](https://abgeknipst.de) on [Unsplash](https://unsplash.com/)*
+
 
 **This wasn't just a name swap.**
 

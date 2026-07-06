@@ -8,8 +8,8 @@ subtitle: "A practical way to use hazard, pathway, consequence, and uncertainty"
 description: "A practical four-part framework for thinking about risk: hazard, pathway, consequence, and uncertainty."
 featured_image: "/images/medium/what-is-risk-a-four-part-framework/c5d17c0978b1a86a5144dea14f43e6da15d3559347c45d71edd7d9a334e79ab2.jpeg"
 featured_image_alt: "What Is Risk? A Four-Part Framework"
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-06-21"
@@ -20,6 +20,9 @@ revision_history:
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium body images, repaired internal OIP links, normalized punctuation and house style, and checked source framing and rendering."
+  - version: "1.4"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/what-is-risk-a-four-part-framework.pdf"
 featured: false
 
@@ -65,6 +68,11 @@ about timing, severity, and human behavior.
 > think about risk.
 
 ### The Framework at a Glance
+
+![The Four Elements of Risk](/images/medium/what-is-risk-a-four-part-framework/c9342109be76928a5b019df4929dad331b3880c5af9f730bbc397e3a16bbccf5.png)
+
+*The Four Elements of Risk: Hazard, Pathway, Consequence, Uncertainty applied to Personal, Organizational, and Global contexts.*
+
 
 The rest of this essay presents the four-part framework applied to three
 levels of risk ~ personal, organizational, and global.
@@ -129,6 +137,11 @@ Perhaps you would rather be more specific and decide to focus on
 **Back in 2022,** [**Panama**](https://www.youtube.com/watch?v=fuKDBPw8wQA) **experienced their "worst
 drought ever."**
 
+![Panama Canal](/images/medium/what-is-risk-a-four-part-framework/35cf1b3d2ef75c842717c70d507192a932891e2806c2e9e48aa250a74f6e874d.png)
+
+*Panama Canal | Source: [RoyalCarribean](https://www.royalcaribbean.com/guides/panama-canal-cruise-tips-before-you-go)*
+
+
 
 The Panama Canal's locks run on freshwater from the upland Gatún and
 Alhajuela lakes. Prolonged dry seasons and El Niño patterns can push
@@ -141,6 +154,11 @@ system's locks also serves roughly two million people, Indigenous
 communities, farms, and hydropower facilities ~ **prolonged droughts can
 squeeze a** **shared supply** and force decision makers into tough
 positions.
+
+![Panamanian drought started in late 2022](/images/medium/what-is-risk-a-four-part-framework/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461.png)
+
+*Panamanian drought started in late 2022. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*
+
 
 
 **Despite the drought hype, tonnage moving through the canal did not
@@ -216,6 +234,11 @@ Now let's shift from **"how the trouble finds you"** to "**what happens
 when it arrives?"**
 
 ### Consequence
+
+![Estimated economic impact of a one week panama canal shutdown](/images/medium/what-is-risk-a-four-part-framework/309ebb1da0aba4db6f8bc241655840332d0522264b11613ba976c3a991e0b6a4.png)
+
+*Estimated economic impact of a one week panama canal shutdown | [Source: Woodwell Climate](https://www.woodwellclimate.org/drought-panama-canal-7-graphics/)*
+
 
 **"The specific harm, loss, or missed benefit that could occur if the
 hazard materializes."**
@@ -362,6 +385,11 @@ the same role:
     forward?** What timeline? Will there be social constraints?
 5.  **How quickly will backlogs unwind** once water
     levels and canal operations return to normal?
+
+![Key uncertainties for our three risk examples](/images/medium/what-is-risk-a-four-part-framework/9c54d75cf8915f13a6f607f11ff95af75481eeda2d7f2112a9def237c9a2531d.png)
+
+*Key uncertainties for our three risk examples.*
+
 
 
 ### Uncertainties exist in everything.

@@ -6,12 +6,15 @@ slug: "the-ledger-vol-3"
 section_label: "Newsletter"
 subtitle: "100 Essays on Medium, How Hawai’i became America’s Largest Aircraft Carrier, and a new series on Risk Management ~"
 description: "The Ledger: A Balance Sheet Joint. This month brought a big first for the publication our very first contributing writer joined the fold"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed the remote Medium body image, repaired internal OIP links, removed Medium import residue, normalized punctuation and house style, and checked rendering."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-ledger-vol-3.pdf"
 featured: false
 featured_image: "/images/essays/the-ledger-vol-3/hero.png"
@@ -24,6 +27,11 @@ medium_source_url: "https://medium.com/@lawtonperret/the-ledger-vol-3-3fa3cd5134
 ---
 
 #### 100 Essays on Medium, How Hawai'i became America's Largest Aircraft Carrier, and a new series on Risk Management
+
+![The Ledger](/images/medium/the-ledger-vol-3/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe.png)
+
+***The Ledger: A Balance Sheet Joint***
+
 
 **September 17th, 2025**
 

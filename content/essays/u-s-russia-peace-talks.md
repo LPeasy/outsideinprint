@@ -9,8 +9,8 @@ featured_image: "/images/medium/u-s-russia-peace-talks/41e06cd8fdffbd668544cdfd0
 featured_image_caption: "Photo by Gaël Gaborel - OrbisTerrae on Unsplash"
 featured_image_alt: "U.S.-Russia Peace Talks"
 description: "“The key really in all of this is ultimately going to be whether an agreement can be reached with all parties involved on an acceptable resolution to the con..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 pdf: "/pdfs/u-s-russia-peace-talks.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/u-s-russia-peace-talks-6201189d23c9"
@@ -18,11 +18,19 @@ revision_history:
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
+  - version: "1.2"
+    date: "2026-07-05"
+    note: "Recovered and localized body images from Medium import archive; no substantive text change."
 collections:
   - geopolitics-trade-global-power
 ---
 
 "The key really in all of this is ultimately going to be whether an agreement can be reached with all parties involved on an acceptable resolution to the conflict in Ukraine. Because if that happens, not only will the world be a better place, but I think there will be some pretty unique opportunities to work with them." - Marco Rubio
+
+![Photo by Hala AlGhanim on Unsplash](/images/medium/u-s-russia-peace-talks/5626d4125b7053a2835696be69b71176058b06b25e454ca9ba4fb323f48aeb35.jpeg)
+
+*Photo by Hala AlGhanim on Unsplash*
+
 
 ## A Diplomatic Reset With Global Consequences
 
