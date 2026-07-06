@@ -9,7 +9,7 @@ author_id: "robert-v-ussley"
 featured_image: "/images/essays/default-owner/hero.png"
 featured_image_alt: "Household chores slide down a tilted floor marked NO OWNER toward an anonymous figure wearing a DEFAULT OWNER apron."
 featured_image_caption: "Unowned work rolls downhill."
-version: "1.2"
+version: "1.3"
 edition: "First web edition"
 featured: false
 collections:
@@ -38,6 +38,6 @@ When no one owns the work, pressure assigns it: urgency, guilt, habit, shame, or
 
 That creates a quiet injustice. The person who sees the problem first gets treated as if seeing it created the duty. The person who ignores it longest gets treated as if the duty was never theirs.
 
-Appreciation is kind. It isn't assignment. The better question comes before the deadline: whose job is this?
+Appreciation is kind. It isn't assignment. Ask before the deadline: whose job is this?
 
 If everyone benefits from the work, someone specific has to own it. Otherwise the most responsible person becomes the household tax.
