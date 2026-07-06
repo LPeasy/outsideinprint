@@ -673,6 +673,112 @@ function Remove-GuardrailExemptFrontMatterFields {
   return ('---' + "`n" + (($keptLines.ToArray()) -join "`n") + "`n" + '---' + $afterText)
 }
 
+function Remove-GuardrailImageRecoveryFrontMatterFields {
+  param([string]$Text)
+
+  if ($null -eq $Text) {
+    return ''
+  }
+
+  $normalized = ($Text -replace "`r`n", "`n") -replace "`r", "`n"
+  $frontMatterMatch = [regex]::Match(
+    $normalized,
+    '\A---\s*\n(?<front>.*?)\n---\s*(?<after>\n|$)',
+    [System.Text.RegularExpressions.RegexOptions]::Singleline
+  )
+
+  if (-not $frontMatterMatch.Success) {
+    return $normalized
+  }
+
+  $allowedKeys = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  foreach ($key in @('version', 'edition', 'revision_history')) {
+    [void]$allowedKeys.Add($key)
+  }
+
+  $frontMatter = [string]$frontMatterMatch.Groups['front'].Value
+  $lines = @([regex]::Split($frontMatter, "`n"))
+  $keptLines = New-Object System.Collections.Generic.List[string]
+  $skipAllowedBlock = $false
+
+  foreach ($line in $lines) {
+    if ($line -match '^([A-Za-z0-9_-]+)\s*:') {
+      $key = [string]$Matches[1]
+      if ($allowedKeys.Contains($key)) {
+        $skipAllowedBlock = $true
+        continue
+      }
+
+      $skipAllowedBlock = $false
+      $keptLines.Add($line)
+      continue
+    }
+
+    if ([string]::IsNullOrWhiteSpace($line)) {
+      continue
+    }
+
+    if ($skipAllowedBlock) {
+      if ($line -match '^\s+') {
+        continue
+      }
+
+      $skipAllowedBlock = $false
+    }
+
+    $keptLines.Add($line)
+  }
+
+  $frontEnd = $frontMatterMatch.Index + $frontMatterMatch.Length
+  $afterText = $normalized.Substring($frontEnd)
+  if ($frontMatterMatch.Groups['after'].Value -eq "`n") {
+    $afterText = "`n" + $afterText
+  }
+
+  return ('---' + "`n" + (($keptLines.ToArray()) -join "`n") + "`n" + '---' + $afterText)
+}
+
+function ConvertTo-ImageRecoveryComparableText {
+  param([string]$Text)
+
+  $metadataComparable = Remove-GuardrailImageRecoveryFrontMatterFields -Text (Remove-GuardrailExemptFrontMatterFields -Text $Text)
+  $normalized = ($metadataComparable -replace "`r`n", "`n") -replace "`r", "`n"
+  $lines = @([regex]::Split($normalized, "`n"))
+  $keptLines = New-Object System.Collections.Generic.List[string]
+  $removedImageBlocks = 0
+
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    $line = [string]$lines[$i]
+    if ($line -match '^\s*!\[[^\]]*\]\(/images/medium/[^)\s]+/[0-9a-f]{64}\.[A-Za-z0-9]+(?:\s+["''][^"'']*["''])?\)\s*$') {
+      $removedImageBlocks++
+      $j = $i + 1
+      while ($j -lt $lines.Count -and [string]::IsNullOrWhiteSpace([string]$lines[$j])) {
+        $j++
+      }
+
+      if ($j -lt $lines.Count -and ([string]$lines[$j]) -match '^\s*\*.+\*\s*$') {
+        $j++
+        while ($j -lt $lines.Count -and [string]::IsNullOrWhiteSpace([string]$lines[$j])) {
+          $j++
+        }
+      }
+
+      $i = $j - 1
+      continue
+    }
+
+    $keptLines.Add($line)
+  }
+
+  $comparable = ($keptLines.ToArray() -join "`n")
+  $comparable = [regex]::Replace($comparable, "([ \t]*\n){3,}", "`n`n")
+
+  return [pscustomobject]@{
+    Text = Normalize-GuardrailText -Text $comparable
+    RemovedImageBlocks = $removedImageBlocks
+  }
+}
+
 function Get-GitBlobText {
   param(
     [string]$RepoRoot,
@@ -718,6 +824,42 @@ function Test-IsGuardrailExemptMetadataOnlyDiff {
   $beforeComparable = Normalize-GuardrailText -Text (Remove-GuardrailExemptFrontMatterFields -Text $beforeText)
   $afterComparable = Normalize-GuardrailText -Text (Remove-GuardrailExemptFrontMatterFields -Text $afterText)
   return ($beforeComparable -eq $afterComparable)
+}
+
+function Test-IsGuardrailExemptImageRecoveryDiff {
+  param(
+    [string]$RepoRoot,
+    [string]$PathValue,
+    [string]$FromRef,
+    [string]$ToRef
+  )
+
+  if ([string]::IsNullOrWhiteSpace($FromRef) -or ($FromRef -match '^0+$')) {
+    return $false
+  }
+
+  if ([string]::IsNullOrWhiteSpace($ToRef)) {
+    return $false
+  }
+
+  $relativePath = Get-RepoRelativePath -RepoRoot $RepoRoot -PathValue $PathValue
+  $beforeText = Get-GitBlobText -RepoRoot $RepoRoot -Ref $FromRef -RelativePath $relativePath
+  $afterText = Get-GitBlobText -RepoRoot $RepoRoot -Ref $ToRef -RelativePath $relativePath
+  if ($null -eq $beforeText -or $null -eq $afterText) {
+    return $false
+  }
+
+  $beforeComparable = ConvertTo-ImageRecoveryComparableText -Text $beforeText
+  $afterComparable = ConvertTo-ImageRecoveryComparableText -Text $afterText
+  if ([int]$afterComparable.RemovedImageBlocks -eq 0 -and [int]$beforeComparable.RemovedImageBlocks -eq 0) {
+    return $false
+  }
+
+  if ([int]$afterComparable.RemovedImageBlocks -lt [int]$beforeComparable.RemovedImageBlocks) {
+    return $false
+  }
+
+  return ([string]$beforeComparable.Text -eq [string]$afterComparable.Text)
 }
 
 function Resolve-TargetEssayPaths {
@@ -899,6 +1041,7 @@ $targetPaths = Resolve-TargetEssayPaths `
 $targetPaths = @(Expand-EssayPaths -EssayPaths $targetPaths)
 
 $metadataOnlyPaths = New-Object System.Collections.Generic.List[string]
+$imageRecoveryOnlyPaths = New-Object System.Collections.Generic.List[string]
 if (
   (-not $AllEssays) -and
   (-not ($Paths -and $Paths.Count -gt 0)) -and
@@ -913,6 +1056,11 @@ if (
       continue
     }
 
+    if (Test-IsGuardrailExemptImageRecoveryDiff -RepoRoot $Root -PathValue $targetPath -FromRef $BaseRef -ToRef $HeadRef) {
+      $imageRecoveryOnlyPaths.Add((Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath))
+      continue
+    }
+
     $filteredTargets.Add($targetPath)
   }
 
@@ -923,6 +1071,13 @@ if ($metadataOnlyPaths.Count -gt 0) {
   Write-Host ("Essay guardrails: skipped {0} taxonomy/image-only front matter change(s)." -f $metadataOnlyPaths.Count) -ForegroundColor Yellow
   foreach ($metadataPath in $metadataOnlyPaths) {
     Write-Host "  - $metadataPath" -ForegroundColor Yellow
+  }
+}
+
+if ($imageRecoveryOnlyPaths.Count -gt 0) {
+  Write-Host ("Essay guardrails: skipped {0} Medium image recovery-only change(s)." -f $imageRecoveryOnlyPaths.Count) -ForegroundColor Yellow
+  foreach ($imageRecoveryPath in $imageRecoveryOnlyPaths) {
+    Write-Host "  - $imageRecoveryPath" -ForegroundColor Yellow
   }
 }
 

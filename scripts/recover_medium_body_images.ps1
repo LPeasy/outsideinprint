@@ -293,6 +293,30 @@ function Remove-TrackingParams {
   [regex]::Replace($Text, 'https?://[^\s\)]+' , $evaluator)
 }
 
+function Normalize-CaptionPunctuation {
+  param([string]$Text)
+
+  if ($null -eq $Text) { return "" }
+
+  $normalized = $Text
+  $replacements = @{
+    ([string][char]0x2018) = "'"
+    ([string][char]0x2019) = "'"
+    ([string][char]0x201C) = '"'
+    ([string][char]0x201D) = '"'
+    ([string][char]0x2013) = '-'
+    ([string][char]0x2014) = '-'
+    ([string][char]0x2009) = ' '
+    ([string][char]0x200A) = ' '
+  }
+
+  foreach ($key in $replacements.Keys) {
+    $normalized = $normalized.Replace($key, [string]$replacements[$key])
+  }
+
+  return $normalized
+}
+
 function Get-CaptionPlainText {
   param([string]$Caption)
   $text = $Caption.Trim()
@@ -323,7 +347,7 @@ function Get-AltFromCaption {
 
 function Format-CaptionLine {
   param([string]$Caption)
-  $caption = Remove-TrackingParams $Caption.Trim()
+  $caption = Normalize-CaptionPunctuation (Remove-TrackingParams $Caption.Trim())
   $caption = $caption -replace '^\s*>\s*', ''
   $caption = $caption -replace '^\s*\^\s*', ''
   $caption = $caption -replace '(?i)\bChat\s+GPT\b', 'ChatGPT'
