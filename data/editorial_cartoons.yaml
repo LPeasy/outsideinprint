@@ -1,4 +1,4 @@
-current: house-gravity
+current: whose-yes
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -499,5 +499,13 @@ cartoons:
     image: "/images/editorial/house-gravity.png"
     essay: "/essays/default-owner/"
     alt: "Editorial cartoon showing household chores sliding down a tilted floor marked NO OWNER toward an anonymous figure wearing a DEFAULT OWNER apron."
+    width: 1672
+    height: 941
+  - slug: whose-yes
+    title: "Whose Yes"
+    date: "2026-07-08"
+    image: "/images/editorial/whose-yes.png"
+    essay: "/essays/whose-yes/"
+    alt: "Editorial cartoon showing a person holding a rose-gold YES card between a FOR THEM door with someone waiting at a table and a FOR ME door with a mirror, applause marks, and a spotlight."
     width: 1672
     height: 941
