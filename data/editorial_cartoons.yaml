@@ -1,4 +1,4 @@
-current: whose-yes
+current: minimum-door
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -507,5 +507,13 @@ cartoons:
     image: "/images/editorial/whose-yes.png"
     essay: "/essays/whose-yes/"
     alt: "Editorial cartoon showing a person holding a rose-gold YES card between a FOR THEM door with someone waiting at a table and a FOR ME door with a mirror, applause marks, and a spotlight."
+    width: 1672
+    height: 941
+  - slug: minimum-door
+    title: "Minimum Door"
+    date: "2026-07-09"
+    image: "/images/editorial/minimum-door.png"
+    essay: "/essays/minimum-due/"
+    alt: "Editorial cartoon showing an anonymous payer at a MINIMUM DUE window while a green path leads to a darker NEXT MONTH counter where another figure receives an INTEREST envelope."
     width: 1672
     height: 941
