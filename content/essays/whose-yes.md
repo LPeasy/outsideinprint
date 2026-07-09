@@ -41,7 +41,7 @@ Those facts don't settle the spiritual question, but they guard against fantasy.
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>A yes can serve love, or serve the self.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 A promise isn't holy because it sounds selfless. It becomes honest when it can survive the question under it.

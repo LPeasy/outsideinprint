@@ -30,7 +30,7 @@ But an hour after midnight has to come from somewhere. If work, school, children
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>A late hour is not free when morning does not move.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 [CDC](https://www.cdc.gov/sleep/about/index.html) says adults 18 to 60 need 7 or more hours of sleep, and older adults need about 7 to 9 or 7 to 8 hours. CDC also lists turning off electronic devices at least 30 minutes before bedtime as a better sleep habit.
@@ -43,7 +43,7 @@ If the phone takes 45 minutes and the alarm does not move, the night is shorter.
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>Tomorrow collects the hour the phone spent tonight.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 [NHLBI](https://www.nhlbi.nih.gov/health/sleep-deprivation/health-effects) says sleep deficiency can interfere with work, school, driving, and social functioning. It can make people slower to react, worse at focusing, and more likely to make mistakes.
@@ -56,7 +56,7 @@ A thin night can become a thin morning: less patience, less focus, less care on 
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>Rest is not idleness when tomorrow needs the man awake.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 Some nighttime phone use is harmless. Some is work. Some is care. Some people lose sleep because of pain, grief, shift work, children, stress, or a sleep disorder. The rule stays narrow.

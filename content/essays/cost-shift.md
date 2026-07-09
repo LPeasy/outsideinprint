@@ -32,7 +32,7 @@ But that is not the same as saying AI companies will absorb the whole market eff
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>A separate rate assigns a bill. It does not erase demand.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 The distinction matters because data centers are becoming a larger buyer of electricity. The [Department of Energy says](https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers) data centers used about 4.4 percent of U.S. electricity in 2023 and could use about 6.7 to 12 percent by 2028.
@@ -51,7 +51,7 @@ It cannot say: the national price of electricity will not move when a fast-growi
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>The meter can be separate while the market remains shared.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 [EIA says](https://www.eia.gov/energyexplained/electricity/prices-and-factors-affecting-prices.php) electricity prices reflect the cost to build, finance, maintain, and operate power plants and the grid. It also says price changes reflect demand, fuel costs, power plant availability, and supply constraints.
@@ -70,7 +70,7 @@ But if they take a larger share of a constrained system, separate rates alone do
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>Private load needs private books. Public goods need public ledgers.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 [FERC is already asking](https://www.ferc.gov/news-events/news/ferc-launches-aggressive-targeted-action-speed-large-load-integration) grid operators to justify or change large-load tariff rules, including rules for preventing cost shifting and making transmission costs transparent. That is the right category. The issue is not whether AI is impressive. The issue is whether the bill is public or private.

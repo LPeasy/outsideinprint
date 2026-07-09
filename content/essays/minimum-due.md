@@ -37,7 +37,7 @@ Federal disclosure rules point the same way. [Regulation Z](https://www.consumer
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>The smallest door isn't the whole road.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 Sometimes the minimum is all a person can pay. A lost shift, a medical bill, or a broken car can turn the floor into the only reachable step. The honest rule has to leave room for hard months. No honest ledger should sneer at that.

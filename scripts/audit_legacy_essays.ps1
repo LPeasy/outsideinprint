@@ -352,7 +352,7 @@ function Remove-AllowedInlineFigures {
   param([string]$Text)
   if ([string]::IsNullOrEmpty($Text)) { return $Text }
 
-  $pattern = '(?is)<figure\s+class="franklin-pullquote"\s+aria-label="Section maxim">\s*<blockquote>.*?</blockquote>\s*<figcaption>- Rich V\.</figcaption>\s*</figure>'
+  $pattern = '(?is)<figure\s+class="franklin-pullquote"\s+aria-label="Section maxim">\s*<blockquote>.*?</blockquote>\s*<figcaption>- Bobby V\.</figcaption>\s*</figure>'
   return [regex]::Replace($Text, $pattern, '')
 }
 

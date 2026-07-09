@@ -29,7 +29,7 @@ But the work does not disappear when someone walks out the door. If a parent nee
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>A real boundary protects the person and names the duty.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 [UC Davis Health](https://health.ucdavis.edu/blog/cultivating-health/how-to-set-boundaries-and-why-it-matters-for-your-mental-health/2024/03) describes boundaries as limits people set so they can feel secure and healthy at work and at home. [Mental Health America](https://mhanational.org/resources/maintaining-boundaries-as-a-caregiver-go-from-guilt-to-glow/) says caregiver boundaries can protect both the caregiver and the person receiving care.
@@ -42,7 +42,7 @@ The cheap version says: I owe nothing because I named a boundary. That can be tr
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>The empty chair does not clear the table.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 Care takes labor, time, and a person in the room.
@@ -57,7 +57,7 @@ That time includes rides, meals, forms, bills, medicine, calls, sitting nearby, 
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>When one person leaves, someone else gets the hour.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 Boundary talk becomes false when it treats freedom as cost-free.
@@ -72,7 +72,7 @@ Assignment is the hard part. Who carries the hour? Who makes the call? Who accep
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>Do not call a duty erased when it has only changed hands.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 [HHS and the U.S. Surgeon General's social-connection advisory](https://www.hhs.gov/surgeongeneral/reports-and-publications/connection/index.html) does not order any one person to become a permanent caregiver. It shows that relationships affect health. That source belongs here only as a limit: relationships carry real consequences, but no chart can assign the whole burden to one person.
