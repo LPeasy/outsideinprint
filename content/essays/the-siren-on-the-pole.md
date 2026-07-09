@@ -6,8 +6,12 @@ date: 2026-06-29
 draft: false
 slug: "the-siren-on-the-pole"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-07-09"
+    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity certainty wording without changing thesis, sourcing, or publication status."
 featured: false
 featured_image: "/images/essays/the-siren-on-the-pole/hero.png"
 featured_image_alt: "An editorial illustration of an outdoor warning siren on a utility pole above a quiet street as phones and radios glow in nearby windows."
@@ -197,7 +201,7 @@ Both sides can fail. The system has to be built with that fact in mind.
 
 The siren on the pole has a strange civic honesty. It does not promise comfort. It does not sound like customer service. It does not flatter the listener. It takes a public authority's judgment and makes it physically unpleasant.
 
-That unpleasantness is part of the bargain. Government must sometimes interrupt ordinary life before ordinary senses can confirm the danger. It must do that early enough to matter, clearly enough to guide action, and carefully enough that residents do not learn to treat public warning as background noise. Residents, in turn, have to accept that warning arrives inside uncertainty. The sky may not look dangerous yet. The phone may buzz before the storm is visible. The siren may sound for a warning area whose edge is a few blocks away. The official source may update the instruction as evidence changes.
+That unpleasantness is part of the bargain. Government must sometimes interrupt ordinary life before ordinary senses can confirm the danger. It must do that early enough to matter, with enough detail to guide action, and carefully enough that residents do not learn to treat public warning as background noise. Residents, in turn, have to accept that warning arrives inside uncertainty. The sky may not look dangerous yet. The phone may buzz before the storm is visible. The siren may sound for a warning area whose edge is a few blocks away. The official source may update the instruction as evidence changes.
 
 Trust does not mean the system is always right. Trust means the system has earned attention when it asks for it.
 

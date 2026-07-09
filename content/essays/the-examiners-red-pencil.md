@@ -6,8 +6,8 @@ date: 2026-06-02
 draft: false
 slug: "the-examiners-red-pencil"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 featured: false
 featured_image: "/images/essays/the-examiners-red-pencil/hero.png"
 featured_image_alt: "An editorial illustration of a red pencil resting across a thick bank examination report on a desk, with a vault door and green risk gauges in the background."
@@ -22,6 +22,9 @@ tags:
   - "institutions"
   - "supervision"
 revision_history:
+  - version: "1.2"
+    date: "2026-07-09"
+    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed high-severity meta-test framing without changing thesis, sourcing, or publication status."
   - version: "1.1"
     date: "2026-06-04"
     note: "Updated June 4, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -95,7 +98,7 @@ The supervision fight also arrives while the Fed is revisiting capital rules. In
 
 The number will be debated. The structure is the point. Supervision, capital, ratings, and examination findings are connected. A bank can be safer because it holds more capital. It can be safer because its liquidity risk is better managed. It can be safer because its governance is stronger. It can also appear safer because the official instruments that name weakness have been narrowed.
 
-None of those possibilities can be answered with a slogan about deregulation or red tape. A banking rule is not virtuous because it is strict. A banking rule is not sound because it is lighter. The test is what risk it sees, what behavior it rewards, what cost it imposes, and who carries the loss when it fails.
+None of those possibilities can be answered with a slogan about deregulation or red tape. Strict rules can miss the point. Lighter rules can miss it too. A useful banking rule sees material risk early, rewards repair, limits unnecessary cost, and names who carries the loss when it fails.
 
 That last question is the public question. Bank supervision reaches past regulators and banks. It is a dispute over when private risk becomes public obligation. Deposit insurance, emergency lending, payment stability, and contagion control mean the public has a stake in bank weaknesses long before the public receives a ballot on them.
 

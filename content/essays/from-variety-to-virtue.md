@@ -6,9 +6,12 @@ date: 2026-05-17
 draft: false
 slug: "from-variety-to-virtue"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-07-09"
+    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed high- and medium-severity prose scaffolds without changing thesis, sourcing, or publication status."
   - version: "1.1"
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -24,9 +27,9 @@ tags:
   - "Social Theory"
 ---
 
-The word diversification did not enter history carrying moral weight. For most of its life, it described a pattern ~ variation across crops, activities, revenues, or risks. Merriam-Webster's entry keeps that older sense close to the surface: diversification is an increase in variety or diversity, not a virtue by itself. ([Merriam-Webster][1])
+The word diversification did not enter history carrying moral weight. For most of its life, it described a pattern ~ variation across crops, activities, revenues, or risks. Merriam-Webster's entry keeps that older descriptive sense close to the surface: an increase in variety or diversity. ([Merriam-Webster][1])
 
-The moral charge came later. Later again, a technical idea from agriculture, business, finance, ecology, and development policy was lifted out of those domains and applied wholesale to human populations, as if the same assumptions traveled cleanly from one field to another.
+The moral charge came later. Later again, a technical idea from agriculture, business, finance, ecology, and development policy was lifted out of those domains and applied wholesale to human populations, as if assumptions built for one setting could travel cleanly into another.
 
 Ideas that migrate across fields often lose their guardrails. Diversification is a clean example of how a situational principle can become a generalized virtue, and then harden into something closer to doctrine.
 
@@ -72,13 +75,13 @@ Diversification was prudent.
 
 ## The Managerial Turn
 
-In the twentieth century, firms grew larger and more complex, and diversification moved from a farmer's habit to a corporate strategy.
+In the twentieth century, firms grew larger and more complex, and diversification entered corporate strategy.
 
-By 1957, H. Igor Ansoff's Harvard Business Review article "Strategies for Diversification" placed diversification inside a formal product-market framework. It was not a moral claim. It was a management problem: should a firm seek new products, new markets, or both, and what risks follow from each choice? ([EconBiz][7])
+By 1957, H. Igor Ansoff's Harvard Business Review article "Strategies for Diversification" placed diversification inside a formal product-market framework. Ansoff treated it as a management problem: should a firm seek new products, new markets, or both, and what risks follow from each choice? ([EconBiz][7])
 
 Diversification became common sense within commercial organizations.
 
-There were boundaries. It applied to firms facing uncertain markets, technological change, cyclical demand, or a need for growth beyond the existing product line. It was not a theory of virtue. It was a hedge.
+There were boundaries. It applied to firms facing uncertain markets, technological change, cyclical demand, or a need for growth beyond the existing product line. The point was risk management under uncertainty.
 
 ---
 
@@ -102,15 +105,15 @@ Those assumptions did a lot of work. They were not decoration. They were the who
 
 Ecology added another source of prestige.
 
-In the twentieth century, ecologists argued over the stability of diverse ecosystems compared with simpler ones. The answer did not become a clean slogan. A 2000 *Nature* review framed the diversity-stability question as an active debate rather than a settled rule. ([Nature][10])
+In the twentieth century, ecologists argued over the stability of diverse ecosystems compared with simpler ones. The answer did not become a clean slogan. A 2000 *Nature* review framed the diversity-stability question as an active debate, with no settled rule. ([Nature][10])
 
 The public language simplified the lesson. Monoculture sounded brittle. Diversity sounded healthy. Redundancy, overlap, and variation seemed to limit cascading failure.
 
 By the 1970s and 1980s, diversification appeared across development economics, urban planning, and disaster management. The vocabulary shifted again.
 
-Diversity became associated with health, sustainability, and resilience.
+Diversity became associated with health, sustainability, and the capacity to absorb shocks.
 
-That association had evidence behind it in some systems. It also softened the boundary between an empirical claim and a moral one.
+That association had evidence behind it in some systems. It also made a technical claim easier to hear as a moral claim.
 
 What started as a conditional slowly became a good in and of itself.
 
@@ -120,7 +123,7 @@ What started as a conditional slowly became a good in and of itself.
 
 At the end of the twentieth century, diversification stopped being defended only as a tool and started being praised intrinsically.
 
-Organizational theory helped make the move. Roosevelt Thomas's 1990 Harvard Business Review article "From Affirmative Action to Affirming Diversity" treated diversity as a management and competitiveness question. The Supreme Court moved the concept into constitutional language earlier, when Justice Powell's opinion in *Bakke* accepted student-body diversity as an educational interest, and later when *Grutter v. Bollinger* upheld a version of that rationale. ([Harvard Business Review][11]) ([Justia][12]) ([Justia][13])
+Organizational theory helped make the move. Roosevelt Thomas's 1990 Harvard Business Review article treated diversity as a management and competitiveness question. The Supreme Court moved the concept into constitutional language earlier, when Justice Powell's opinion in *Bakke* accepted student-body diversity as an educational interest, and later when *Grutter v. Bollinger* upheld a version of that rationale. ([Harvard Business Review][11]) ([Justia][12]) ([Justia][13])
 
 The justification was no longer only risk reduction. It became ethical alignment, educational benefit, organizational legitimacy, and national self-description.
 
@@ -156,9 +159,9 @@ That is where the idea begins to resemble dogma.
 
 Eventually, perhaps inevitably, diversification was absorbed into racialized frameworks of oppression, representation, and power.
 
-That shift did not happen in one place or all at once. It grew through universities, employers, courts, public agencies, and nonprofit language. The metric narrowed. Diversity came to mean variation in skills, region, experience, class, temperament, or belief only when those things could be subordinated to the visible metric. Proportional representation by ancestry and identity category became the decisive proof. The metric shifted from function to phenotype.
+That shift did not happen in one place or all at once. It grew through universities, employers, courts, public agencies, and nonprofit language. The metric narrowed. Diversity came to mean variation in skills, region, experience, class, temperament, or belief only when those things could be subordinated to the visible metric. Proportional representation by ancestry and identity category became the decisive proof. Function stopped driving the metric; phenotype did.
 
-Once that happens, diversification stops being mainly about resilience and becomes obsessed with symbolic purification. Targets become easier to count than trust. Proportions become easier to defend than cohesion. Tradeoffs are pushed into the background.
+Once that happens, diversification stops being mainly about risk absorption and becomes obsessed with symbolic purification. Targets become easier to count than trust. Proportions become easier to defend than cohesion. Tradeoffs are pushed into the background.
 
 Failure can be interpreted as insufficient commitment to the good of the community, and the highest good becomes diversity itself.
 
@@ -196,7 +199,7 @@ When diversity was universalized and applied to human populations, reality disag
 
 The evidence on heterogeneity and trust is mixed and contested, not convenient. Robert Putnam's 2007 essay "E Pluribus Unum" argued that ethnic diversity can reduce social solidarity in the short to medium run. A later Annual Review survey by Dinesen, Schaeffer, and Sønderskov found that the evidence varies by setting, measurement, and mechanism. ([Putnam][14]) ([Annual Reviews][15])
 
-The truth is sharper than the institutional language allows. Diversity of opinion, culture, and worldview is not an absolute good for society. Under some conditions, it can produce creativity, adaptation, and wider experience. Under others, it can produce division, mistrust, administrative coercion, and resentment between groups.
+Institutional language softens the problem. Diversity of opinion, culture, and worldview produces different results under different conditions: creativity, adaptation, and wider experience in some settings; division, mistrust, administrative coercion, and resentment in others.
 
 Countries with highly heterogeneous populations face a daunting challenge ~
 
@@ -214,9 +217,7 @@ Informal cohesion yields to forced management.
 
 Diversification prevents concentration in portfolios. In politics, it can prevent majority cohesion. Calling that strength or weakness depends on what you think society is for, and what kind of future you think it should make possible.
 
-The question is not whether diversity is virtuous.
-
-The question is:
+The useful question is practical:
 
 What holds a society together when virtue is redefined as variance?
 
@@ -224,7 +225,7 @@ What holds a society together when virtue is redefined as variance?
 
 ## Author's Note
 
-This essay does not claim that heterogeneity is inherently destructive, nor that cohesion requires uniformity. It argues only that tradeoffs exist. Diversification functions under specific assumptions in finance. When the same language is applied to human societies, those assumptions deserve scrutiny. The goal is not condemnation, but clarity.
+This essay does not claim that heterogeneity is inherently destructive, nor that cohesion requires uniformity. It argues only that tradeoffs exist. Diversification functions under specific assumptions in finance. When the same language is applied to human societies, those assumptions deserve scrutiny. The essay asks readers to keep those assumptions visible before turning a tool into a creed.
 
 If you disagree, push back.
 
