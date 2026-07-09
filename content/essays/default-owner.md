@@ -9,8 +9,12 @@ author_id: "robert-v-ussley"
 featured_image: "/images/essays/default-owner/hero.png"
 featured_image_alt: "Household chores slide down a tilted floor marked NO OWNER toward an anonymous figure wearing a DEFAULT OWNER apron."
 featured_image_caption: "Unowned work rolls downhill."
-version: "1.3"
-edition: "First web edition"
+version: "1.4"
+edition: "Second web edition"
+revision_history:
+  - version: "1.4"
+    date: "2026-07-09"
+    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity balanced-scaffold wording without changing thesis, sourcing, or publication status."
 featured: false
 collections:
   - "simple-logic"
@@ -40,4 +44,4 @@ That creates a quiet injustice. The person who sees the problem first gets treat
 
 Appreciation is kind. It isn't assignment. Ask before the deadline: whose job is this?
 
-If everyone benefits from the work, someone specific has to own it. Otherwise the most responsible person becomes the household tax.
+When everyone benefits, one person has to own the task. Otherwise the most responsible person becomes the household tax.

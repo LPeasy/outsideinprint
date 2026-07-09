@@ -74,3 +74,13 @@ The essay names the institutional behavior at issue: universities, employers, co
 The piece is publication-ready as an OIP candidate package after validation. It remains an opinionated essay with a sharper voice, but the argument is sourced, scoped, and framed around mechanisms, assumptions, tradeoffs, and uncertainty rather than slogan or tribal shorthand.
 
 Final recommendation: `99_READY`.
+
+## 2026-07-09 AI-Screening Remediation Note
+
+Version reviewed: `1.2`
+
+Scope: live-site AI-screening cleanup of high- and medium-severity body-prose hits. The revision removed formulaic negation, balanced scaffold phrasing, generic `resilience` vocabulary, and meta-question framing while preserving the essay's thesis, citations, section structure, and publication status.
+
+Validation: `ai_tell_scan.py --body-only --format json` returned `0` body-prose hits after revision.
+
+Editorial philosophy status: PASS remains in force. The cleanup did not alter evidence, logic, incentives, tradeoffs, consequences, uncertainty, or institutional-behavior analysis.

@@ -6,8 +6,12 @@ date: 2026-06-23
 draft: false
 slug: "the-brass-disk-in-the-sidewalk"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-07-09"
+    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity certainty wording without changing thesis, sourcing, or publication status."
 featured: false
 featured_image: "/images/essays/the-brass-disk-in-the-sidewalk/hero.png"
 featured_image_alt: "A brass survey disk set into a worn concrete sidewalk, with faint street-grid shadows and a survey tripod silhouette in morning light."
@@ -206,7 +210,7 @@ The brass disk helps because it gives the abstract system a body. A map layer ca
 
 The public risk is easy to underestimate because most datum trouble looks like paperwork at first. A field crew notes the wrong vertical reference. A scanned plan loses the sheet that named the benchmark. A GIS layer is copied into a new project with its coordinate metadata assumed instead of checked. A contractor reads a grade as if every elevation in the file came from the same frame. A floodplain reviewer catches the mismatch after the applicant has already paid for design work. None of these failures requires corruption or drama. The error grows out of ordinary public work moving faster than its records.
 
-That is why the best technical systems have to respect dull acts of record care. A plan note that names NAVD 88 can save a conversation years later. A datasheet that records the mark setting and recovery history can tell a surveyor when field evidence deserves caution. A state statute that clearly names its coordinate system can keep courthouse language aligned with professional practice. A federal transition page can keep local users from guessing about timing. A flood-map pilot can show where a datum change touches public products before the change arrives at a counter.
+That is why the best technical systems have to respect dull acts of record care. A plan note that names NAVD 88 can save a conversation years later. A datasheet that records the mark setting and recovery history can tell a surveyor when field evidence deserves caution. A state statute that names its coordinate system can keep courthouse language aligned with professional practice. A federal transition page can keep local users from guessing about timing. A flood-map pilot can show where a datum change touches public products before the change arrives at a counter.
 
 This work has an ethical weight without needing moral theater. Public records should not require secret expertise to avoid foreseeable mistakes. They will always require expertise to create and maintain, but ordinary users deserve records that carry their frame openly. A person reading an elevation certificate, a construction plan, a survey note, or a flood map should be able to learn which coordinate system is doing the work. The reader may need help interpreting the answer. The answer should be present.
 

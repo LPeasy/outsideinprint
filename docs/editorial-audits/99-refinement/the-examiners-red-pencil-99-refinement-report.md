@@ -62,3 +62,13 @@ The final prose was cleaned after a live search for current AI-writing tells and
 ## Image Notes
 
 Hero and supporting visuals should avoid bank logos and readable text. Use editorial illustration, bank-exam objects, vault geometry, gauges, public safety net imagery, and controlled green/red accents only as concept signals.
+
+## 2026-07-09 AI-Screening Remediation Note
+
+Version reviewed: `1.2`
+
+Scope: live-site AI-screening cleanup of the high-severity meta-test framing hit in body prose. The revision replaced the `The test is...` sentence with direct criteria for useful bank rules while preserving thesis, sourcing, and publication status.
+
+Validation: `ai_tell_scan.py --body-only --format json` returned `0` high/medium body-prose hits after revision. One low-severity repeated-cadence hit remains out of scope.
+
+Editorial philosophy status: PASS remains in force. The cleanup did not alter evidence, logic, incentives, tradeoffs, consequences, uncertainty, or institutional-behavior analysis.

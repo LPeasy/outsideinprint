@@ -93,3 +93,13 @@ Current live AI-tell search was run before cleanup. The story then passed the fu
 Decision: PASS
 
 Proceed to validator and Research Library capture.
+
+## 2026-07-09 AI-Screening Remediation Note
+
+Version reviewed: `1.1`
+
+Scope: live-site AI-screening cleanup of the medium-severity certainty-wording hit in body prose. The revision replaced `clearly enough to guide action` with `with enough detail to guide action` while preserving thesis, sourcing, and publication status.
+
+Validation: `ai_tell_scan.py --body-only --format json` returned `0` high/medium body-prose hits after revision. One low-severity repeated-cadence hit remains out of scope.
+
+Editorial philosophy status: PASS remains in force. The cleanup did not alter evidence, logic, incentives, tradeoffs, consequences, uncertainty, or institutional-behavior analysis.

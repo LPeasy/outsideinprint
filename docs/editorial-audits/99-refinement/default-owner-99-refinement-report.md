@@ -67,3 +67,13 @@ The selected image shows an anonymous person standing downhill in a tilted house
 ## Source Notes
 
 Primary/direct sources remain listed in `default-owner-source-checklist.md`. Central claims have no BLOCKED or PROHIBITED evidence-control status. BLS and Pew claims are used as pattern evidence, not universal proof.
+
+## 2026-07-09 AI-Screening Remediation Note
+
+Version reviewed: `1.4`
+
+Scope: live-site AI-screening cleanup of the medium-severity balanced-scaffold hit in body prose. The revision replaced `If everyone benefits from the work...` with direct ownership language while preserving thesis, sourcing, and publication status.
+
+Validation: `ai_tell_scan.py --body-only --format json` returned `0` body-prose hits after revision.
+
+Editorial philosophy status: PASS remains in force. The cleanup did not alter evidence, logic, incentives, tradeoffs, consequences, uncertainty, or institutional-behavior analysis.
