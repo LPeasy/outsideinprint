@@ -187,7 +187,7 @@ featured: false
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>A clean line can carry a hard rule.</blockquote>
-  <figcaption>- Rich V.</figcaption>
+  <figcaption>- Bobby V.</figcaption>
 </figure>
 
 This paragraph is fine.
