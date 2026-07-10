@@ -1,4 +1,4 @@
-current: minimum-door
+current: the-trophy-case
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -515,5 +515,13 @@ cartoons:
     image: "/images/editorial/minimum-door.png"
     essay: "/essays/minimum-due/"
     alt: "Editorial cartoon showing an anonymous payer at a MINIMUM DUE window while a green path leads to a darker NEXT MONTH counter where another figure receives an INTEREST envelope."
+    width: 1672
+    height: 941
+  - slug: the-trophy-case
+    title: "The Trophy Case"
+    date: "2026-07-10"
+    image: "/images/editorial/the-trophy-case.png"
+    essay: "/essays/first-step/"
+    alt: "Editorial cartoon showing an anonymous worker handing a large trophy through a dark community-center counter while open double doors reveal an indoor walking loop marked by a muted green threshold line."
     width: 1672
     height: 941
