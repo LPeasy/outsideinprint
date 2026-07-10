@@ -89,6 +89,18 @@ If a piece belongs in an existing collection, add explicit `collections` front m
 
 Essays are the first-class publishing workflow. Reports and working papers can still be published manually and must pass the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces do not use this hard gate unless a specific piece is explicitly treated as public-judgment work.
 
+## Syd & Oliver dialogue packages
+
+Every new Syd & Oliver dialogue package must include:
+
+- a Markdown source file under `content/essays/dialogues/<slug>.md`, with its canonical `/syd-and-oliver/<slug>/` URL;
+- `library_type: 'dialogue'`, `collections: ['syd-and-oliver-dialogues']`, a concise `description`, `version`, and `edition`;
+- a scene-matched hero depicting Syd and Oliver as two anonymous silhouettes, saved at `static/images/syd-and-oliver/<slug>/hero.png` and referenced by `featured_image`;
+- precise `featured_image_alt` text that describes the actual scene without identifying either man; and
+- `draft: true` by default. Change it only when the user explicitly asks for a publication-ready package or publication.
+
+Use a landscape hero that remains legible as the site's narrow desktop side plate and as a full-width mobile image. Do not put a duplicate hero image in the body. Inspect generated or supplied art before use; do not use visible faces, readable text, logos, watermarks, or unrelated focal subjects. This requirement applies to new packages only and does not require a retrofit of published dialogues.
+
 ## Local preview and publish validation
 
 Run the target-file guardrail before a full build:
