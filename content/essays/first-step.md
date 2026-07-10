@@ -2,7 +2,7 @@
 title: "First Step"
 subtitle: "A full target should point the way, not close the door."
 description: "A short Simple Logic essay on treating federal physical-activity guidance as direction while leaving room for a safe, workable first move."
-date: 2026-07-10
+date: 2026-07-10T17:39:54Z
 draft: false
 slug: "first-step"
 section_label: "Essay"
