@@ -1,6 +1,6 @@
 ---
 title: 'Pressure Makes Pearls'
-date: 2026-07-10T17:00:00Z
+date: 2026-07-10T14:20:00Z
 url: '/syd-and-oliver/pressure-makes-pearls/'
 draft: false
 library_type: 'dialogue'
