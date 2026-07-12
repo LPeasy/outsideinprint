@@ -1368,6 +1368,7 @@ $requiredUxPages = @(
   'public/almanack/2026-06-20/index.html',
   'public/almanack/2026-06-27/index.html',
   'public/almanack/2026-07-04/index.html',
+  'public/almanack/2026-07-11/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -2873,8 +2874,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?July 4, 2026.*?A number is useful only after you know what it counts\..*?The Clock by the Door'
-    Message = 'expected the Bob''s Almanack collection page to feature the July 4 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?July 11, 2026.*?Read the small words\. They decide who works and who pays\..*?First Step'
+    Message = 'expected the Bob''s Almanack collection page to feature the July 11 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -3030,7 +3031,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?July 4, 2026.*?In the Margins.*?Number.*?Document.*?Trump v\. Cook.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?July 11, 2026.*?In the Margins.*?Number.*?Document.*?Licensee eZ Check Verification for Transfers.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
@@ -3052,6 +3053,27 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-07-04/index.html'
     Pattern = '/images/essays/(the-clock-by-the-door|the-little-machine-in-the-glass-case|the-siren-on-the-pole|the-charge-ledger)/hero\.png'
     Message = 'expected the July 4 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?July 11, 2026.*?Issue 10.*?Read the small words\. They decide who works and who pays\..*?A duty undefined becomes someone else(?:''|&#39;)s\.'
+    Message = 'expected the July 11 Almanack issue page to render the nameplate, issue number, opening quote, and final user-supplied closing quote'
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the July 11 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '(?s)/images/editorial/the-trophy-case\.png.*?/images/editorial/house-gravity\.png.*?/images/editorial/whose-yes\.png.*?/images/editorial/minimum-door\.png'
+    Message = 'expected the July 11 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '/images/essays/(first-step|default-owner|whose-yes|minimum-due)/hero\.png'
+    Message = 'expected the July 11 Almanack issue not to use essay hero images for essay cards'
     ShouldNotMatch = $true
   },
   @{
