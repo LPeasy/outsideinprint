@@ -187,7 +187,7 @@ featured: false
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>A clean line can carry a hard rule.</blockquote>
-  <figcaption>- Bobby V.</figcaption>
+  <figcaption>- Robby V.</figcaption>
 </figure>
 
 This paragraph is fine.
@@ -465,565 +465,22 @@ This paragraph is fine.
   Assert-True ($allowedNotJustTitleExit -eq 0) "Expected non-scaffold not-just title phrasing to remain allowed."
   Assert-True (-not $allowedNotJustTitleOutput.Contains("ai_tell_title_subtitle_structure")) "Expected non-scaffold not-just title phrasing not to trigger the title/subtitle AI-tell rule."
 
-  $thatMattersOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/that-matters-fixture.md" 2>&1 | Out-String
-  $thatMattersExit = $LASTEXITCODE
-  Assert-True ($thatMattersExit -eq 1) "Expected that-matters phrasing to fail the guardrail check."
-  Assert-True ($thatMattersOutput.Contains("that_matters_framing")) "Expected that-matters output to include that_matters_framing."
-  Assert-True ($thatMattersOutput.Contains("THAT-MATTERS essays/that-matters-fixture.md")) "Expected that-matters output to include the line-level detail."
-
-  $adverbialStillOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/adverbial-still-fixture.md" 2>&1 | Out-String
-  $adverbialStillExit = $LASTEXITCODE
-  Assert-True ($adverbialStillExit -eq 1) "Expected adverbial still phrasing to fail the guardrail check."
-  Assert-True ($adverbialStillOutput.Contains("adverbial_still_construction")) "Expected adverbial still output to include adverbial_still_construction."
-  Assert-True ($adverbialStillOutput.Contains("STILL essays/adverbial-still-fixture.md")) "Expected adverbial still output to include the line-level detail."
-
-  $allowedStillOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/allowed-still-life.md" 2>&1 | Out-String
-  $allowedStillExit = $LASTEXITCODE
-  Assert-True ($allowedStillExit -eq 0) "Expected literal still image/life and stood still phrasing to remain allowed."
-  Assert-True (-not $allowedStillOutput.Contains("adverbial_still_construction")) "Expected literal still phrasing not to trigger the adverbial still rule."
-
-  $allowedLegacyStyleOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/allowed-legacy-style.md" -StrictWarnings 2>&1 | Out-String
-  $allowedLegacyStyleExit = $LASTEXITCODE
-  Assert-True ($allowedLegacyStyleExit -eq 0) "Expected valid captions, lead-ins, and Markdown lists not to trigger strict warning mode."
-  Assert-True (-not $allowedLegacyStyleOutput.Contains("pseudo_headings")) "Expected valid caption and lead-in patterns not to trigger pseudo_headings."
-  Assert-True (-not $allowedLegacyStyleOutput.Contains("fake_lists")) "Expected valid Markdown lists not to trigger fake_lists."
-  Assert-True (-not $allowedLegacyStyleOutput.Contains("plain_heading_candidate")) "Expected valid caption and lead-in patterns not to trigger legacy plain-heading warnings."
-  Assert-True (-not $allowedLegacyStyleOutput.Contains("legacy_list_marker")) "Expected valid Markdown lists not to trigger legacy list-marker warnings."
-
-  $warningOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" 2>&1 | Out-String
-  $warningExit = $LASTEXITCODE
-  Assert-True ($warningExit -eq 0) "Expected warning-only essay to pass by default."
-  Assert-True ($warningOutput.Contains("WARNING essays/warning.md")) "Expected warning output to identify the warned essay."
-  Assert-True ($warningOutput.Contains("pseudo_headings")) "Expected warning output to include pseudo_headings."
-  Assert-True ($warningOutput.Contains("missing_description")) "Expected warning output to include missing_description."
-
-  $strictWarningOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" -StrictWarnings 2>&1 | Out-String
-  $strictWarningExit = $LASTEXITCODE
-  Assert-True ($strictWarningExit -eq 1) "Expected StrictWarnings to fail warning-only essays."
-  Assert-True ($strictWarningOutput.Contains("StrictWarnings")) "Expected strict warning output to explain the failure mode."
-  Assert-True ($strictWarningOutput.Contains("pseudo_headings")) "Expected StrictWarnings to preserve real pseudo-heading warning coverage."
-
-  $requireDescriptionOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/warning.md" -RequireDescription 2>&1 | Out-String
-  $requireDescriptionExit = $LASTEXITCODE
-  Assert-True ($requireDescriptionExit -eq 1) "Expected RequireDescription to fail essays missing explicit descriptions."
-  Assert-True ($requireDescriptionOutput.Contains("missing_description")) "Expected RequireDescription output to include missing_description as a blocker."
-
-  $blockerRequireFeaturedImageOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/blocker.md" -RequireFeaturedImage 2>&1 | Out-String
-  $blockerRequireFeaturedImageExit = $LASTEXITCODE
-  Assert-True ($blockerRequireFeaturedImageExit -eq 1) "Expected RequireFeaturedImage to keep failing essays without explicit social images."
-  Assert-True ($blockerRequireFeaturedImageOutput.Contains("BLOCKER essays/blocker.md")) "Expected RequireFeaturedImage output to keep identifying the failing essay."
-
-  $cleanOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" 2>&1 | Out-String
-  $cleanExit = $LASTEXITCODE
-  Assert-True ($cleanExit -eq 0) "Expected clean essay to pass the guardrail check."
-  Assert-True ($cleanOutput.Contains("Essay guardrails PASSED.")) "Expected clean essay output to report success."
-
-  $franklinPullquoteOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/franklin-pullquote.md" 2>&1 | Out-String
-  $franklinPullquoteExit = $LASTEXITCODE
-  Assert-True ($franklinPullquoteExit -eq 0) "Expected approved Franklin pullquote HTML to pass the guardrail check."
-  Assert-True (-not $franklinPullquoteOutput.Contains("embed_remnants")) "Expected approved Franklin pullquote HTML not to trigger embed_remnants."
-
-  $cleanRequireFeaturedImageOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" -RequireFeaturedImage 2>&1 | Out-String
-  $cleanRequireFeaturedImageExit = $LASTEXITCODE
-  Assert-True ($cleanRequireFeaturedImageExit -eq 0) "Expected essays with featured_image to satisfy RequireFeaturedImage."
-  Assert-True ($cleanRequireFeaturedImageOutput.Contains("Essay guardrails PASSED.")) "Expected RequireFeaturedImage clean output to report success."
-
-  @'
----
-title: "Image Exempt Essay"
-date: 2025-07-14
-draft: false
-slug: "image-exempt-essay"
-section_label: "Essay"
-subtitle: ""
-description: "A fixture with an explicit image exemption."
-image_exempt: true
-image_exempt_reason: "Text-only archival notice."
-version: "1.0"
-edition: "First web edition"
-featured: false
----
-
-## Overview
-
-This paragraph is fine.
-'@ | Set-Content -Path (Join-Path $essayRoot "image-exempt.md") -Encoding UTF8
-
-  $exemptRequireFeaturedImageOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/image-exempt.md" -RequireFeaturedImage 2>&1 | Out-String
-  $exemptRequireFeaturedImageExit = $LASTEXITCODE
-  Assert-True ($exemptRequireFeaturedImageExit -eq 0) "Expected an explicit image exemption with reason to satisfy RequireFeaturedImage."
-  Assert-True ($exemptRequireFeaturedImageOutput.Contains("Essay guardrails PASSED.")) "Expected image exemption output to report success."
-
-  $cleanMissingPhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $cleanMissingPhilosophyExit = $LASTEXITCODE
-  Assert-True ($cleanMissingPhilosophyExit -eq 1) "Expected RequireEditorialPhilosophyAudit to fail without audit evidence."
-  Assert-True ($cleanMissingPhilosophyOutput.Contains("missing_editorial_philosophy_audit")) "Expected missing philosophy audit output."
-
-  @'
-# OIP 99-Point Refinement Report
-
-## Editorial Philosophy Audit
-
-Decision: PASS
-
-Evidence: PASS
-Logic: PASS
-Incentives: PASS
-Tradeoffs: PASS
-Consequences: PASS
-Uncertainty: PASS
-Institutional Behavior: PASS
-'@ | Set-Content -Path (Join-Path $refinementRoot "clean-essay-99-refinement-report.md") -Encoding UTF8
-
-  $cleanRequirePhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/clean.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $cleanRequirePhilosophyExit = $LASTEXITCODE
-  Assert-True ($cleanRequirePhilosophyExit -eq 0) "Expected RequireEditorialPhilosophyAudit to pass with valid OIP-99 report evidence."
-  Assert-True ($cleanRequirePhilosophyOutput.Contains("Essay guardrails PASSED.")) "Expected philosophy audit clean output to report success."
-
-  @'
----
-title: "COA2 Evidence"
-date: 2025-07-14
-draft: false
-slug: "coa2-evidence"
-section_label: "Essay"
-description: "A clean COA2 evidence fixture."
-version: "1.1"
-edition: "Second web edition"
-featured_image: "/images/social/outside-in-print-default.png"
-featured: false
----
-
-This essay paragraph is fine.
-'@ | Set-Content -Path (Join-Path $essayRoot "coa2-evidence.md") -Encoding UTF8
-
-  @'
-{
-  "workflow": "oip-coa2-value-review",
-  "completed": {
-    "coa2-evidence": {
-      "status": "pending_deploy",
-      "batch_id": "2026-06-23",
-      "report": "docs/editorial-audits/coa2-value-review/reports/2026-06-23.md",
-      "editorial_philosophy": {
-        "status": "PASS",
-        "evidence": "PASS",
-        "logic": "PASS",
-        "incentives": "PASS",
-        "tradeoffs": "PASS",
-        "consequences": "PASS",
-        "uncertainty": "PASS",
-        "institutional_behavior": "PASS",
-        "note": "COA2 evidence fixture."
-      }
-    }
-  }
-}
-'@ | Set-Content -Path (Join-Path $coa2Root "ledger.json") -Encoding UTF8
-
-  @'
-# COA2 Value Review Report: 2026-06-23
-
-## coa2-evidence
-
-- Editorial philosophy: PASS
-- Evidence: PASS
-- Logic: PASS
-- Incentives: PASS
-- Tradeoffs: PASS
-- Consequences: PASS
-- Uncertainty: PASS
-- Institutional behavior: PASS
-'@ | Set-Content -Path (Join-Path $coa2ReportRoot "2026-06-23.md") -Encoding UTF8
-
-  $coa2RequirePhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/coa2-evidence.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $coa2RequirePhilosophyExit = $LASTEXITCODE
-  Assert-True ($coa2RequirePhilosophyExit -eq 0) "Expected RequireEditorialPhilosophyAudit to pass with compact COA2 ledger evidence."
-  Assert-True ($coa2RequirePhilosophyOutput.Contains("Essay guardrails PASSED.")) "Expected compact COA2 evidence output to report success."
-
-  @'
----
-title: "Clean Report"
-date: 2025-07-14
-draft: false
-slug: "clean-report"
-section_label: "Report"
-description: "A clean report fixture."
-version: "1.0"
-edition: "First web edition"
-featured: false
----
-
-## Overview
-
-This report paragraph is fine.
-'@ | Set-Content -Path (Join-Path $reportRoot "clean-report.md") -Encoding UTF8
-
-  @'
----
-title: "Clean Working Paper"
-date: 2025-07-14
-draft: false
-slug: "clean-working-paper"
-section_label: "Working Paper"
-description: "A clean working paper fixture."
-version: "1.0"
-edition: "First web edition"
-featured: false
----
-
-## Overview
-
-This working paper paragraph is fine.
-'@ | Set-Content -Path (Join-Path $workingPaperRoot "clean-working-paper.md") -Encoding UTF8
-
-  @'
----
-title: "Syd Dialogue"
-date: 2025-07-14
-draft: false
-slug: "syd-dialogue"
-section_label: "Dialogue"
-library_type: "dialogue"
-description: "A Syd and Oliver dialogue fixture."
-version: "1.0"
-edition: "First web edition"
-featured: false
----
-
-Syd: This line is fine.
-'@ | Set-Content -Path (Join-Path $sydRoot "syd-dialogue.md") -Encoding UTF8
-
-  $reportMissingPhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/reports/clean-report.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $reportMissingPhilosophyExit = $LASTEXITCODE
-  Assert-True ($reportMissingPhilosophyExit -eq 1) "Expected reports to require Editorial Philosophy Audit evidence."
-  Assert-True ($reportMissingPhilosophyOutput.Contains("missing_editorial_philosophy_audit")) "Expected missing philosophy audit output for reports."
-
-  $workingPaperMissingPhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/working-papers/clean-working-paper.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $workingPaperMissingPhilosophyExit = $LASTEXITCODE
-  Assert-True ($workingPaperMissingPhilosophyExit -eq 1) "Expected working papers to require Editorial Philosophy Audit evidence."
-  Assert-True ($workingPaperMissingPhilosophyOutput.Contains("missing_editorial_philosophy_audit")) "Expected missing philosophy audit output for working papers."
-
-  $sydPhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/syd-and-oliver/syd-dialogue.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $sydPhilosophyExit = $LASTEXITCODE
-  Assert-True ($sydPhilosophyExit -eq 0) "Expected Syd and Oliver dialogue pieces to remain outside the hard philosophy audit gate."
-  Assert-True (-not $sydPhilosophyOutput.Contains("missing_editorial_philosophy_audit")) "Expected Syd and Oliver dialogue pieces not to report missing philosophy audit evidence."
-
-  @'
-# OIP 99-Point Refinement Report
-
-## Editorial Philosophy Audit
-
-Decision: PASS
-
-Evidence: PASS
-Logic: PASS
-Incentives: PASS
-Tradeoffs: PASS
-Consequences: PASS
-Uncertainty: PASS
-Institutional Behavior: PASS
-'@ | Set-Content -Path (Join-Path $refinementRoot "clean-report-99-refinement-report.md") -Encoding UTF8
-
-  @'
-# OIP 99-Point Refinement Report
-
-## Editorial Philosophy Audit
-
-Decision: PASS
-
-Evidence: PASS
-Logic: PASS
-Incentives: PASS
-Tradeoffs: PASS
-Consequences: PASS
-Uncertainty: PASS
-Institutional Behavior: PASS
-'@ | Set-Content -Path (Join-Path $refinementRoot "clean-working-paper-99-refinement-report.md") -Encoding UTF8
-
-  $reportRequirePhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/reports/clean-report.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $reportRequirePhilosophyExit = $LASTEXITCODE
-  Assert-True ($reportRequirePhilosophyExit -eq 0) "Expected reports to pass with valid OIP-99 report evidence."
-  Assert-True ($reportRequirePhilosophyOutput.Contains("Essay guardrails PASSED.")) "Expected report philosophy audit output to report success."
-
-  $workingPaperRequirePhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/working-papers/clean-working-paper.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $workingPaperRequirePhilosophyExit = $LASTEXITCODE
-  Assert-True ($workingPaperRequirePhilosophyExit -eq 0) "Expected working papers to pass with valid OIP-99 report evidence."
-  Assert-True ($workingPaperRequirePhilosophyOutput.Contains("Essay guardrails PASSED.")) "Expected working paper philosophy audit output to report success."
-
-  $slugEchoOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/slug-echo.md" 2>&1 | Out-String
-  $slugEchoExit = $LASTEXITCODE
-  Assert-True ($slugEchoExit -eq 0) "Expected localized media paths to avoid duplicated_title false positives."
-  Assert-True (-not $slugEchoOutput.Contains("duplicated_title")) "Expected slug-only media paths not to trigger duplicated_title."
-
-  $placeholderHeroOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/placeholder-hero-conflict.md" 2>&1 | Out-String
-  $placeholderHeroExit = $LASTEXITCODE
-  Assert-True ($placeholderHeroExit -eq 1) "Expected placeholder hero conflicts to fail the guardrail check."
-  Assert-True ($placeholderHeroOutput.Contains("hero_placeholder_conflict")) "Expected placeholder hero conflicts to be reported as blockers."
-
-  $missingHeroOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/missing-hero-lead.md" 2>&1 | Out-String
-  $missingHeroExit = $LASTEXITCODE
-  Assert-True ($missingHeroExit -eq 1) "Expected missing-hero lead-image cases to fail the guardrail check."
-  Assert-True ($missingHeroOutput.Contains("hero_missing_with_lead")) "Expected missing hero lead-image cases to be reported as blockers."
-
-  $duplicateHeroOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/duplicate-hero-lead.md" 2>&1 | Out-String
-  $duplicateHeroExit = $LASTEXITCODE
-  Assert-True ($duplicateHeroExit -eq 0) "Expected duplicate hero/body cases to remain warnings by default."
-  Assert-True ($duplicateHeroOutput.Contains("hero_duplicate_lead")) "Expected duplicate hero/body cases to be reported as warnings."
-
-  $currentHeroWinsOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/current-hero-wins-conflict.md" 2>&1 | Out-String
-  $currentHeroWinsExit = $LASTEXITCODE
-  Assert-True ($currentHeroWinsExit -eq 0) "Expected current-hero-wins conflicts to remain warnings by default."
-  Assert-True ($currentHeroWinsOutput.Contains("hero_current_wins_conflict")) "Expected current-hero-wins conflicts to be reported as warnings."
-
-  $taxonomyRoot = Join-Path $tempRoot "taxonomy-only-repo"
-  $taxonomyScriptRoot = Join-Path $taxonomyRoot "scripts"
-  $taxonomyEssayRoot = Join-Path $taxonomyRoot "content/essays"
-  New-Item -Path $taxonomyScriptRoot -ItemType Directory -Force | Out-Null
-  New-Item -Path $taxonomyEssayRoot -ItemType Directory -Force | Out-Null
-  Copy-Item (Join-Path $repoRoot "scripts/audit_legacy_essays.ps1") $taxonomyScriptRoot
-  Copy-Item (Join-Path $repoRoot "scripts/check_essay_guardrails.ps1") $taxonomyScriptRoot
-  Copy-Item (Join-Path $repoRoot "scripts/check_legacy_import_preflight.ps1") $taxonomyScriptRoot
-
-  $taxonomyEssayPath = Join-Path $taxonomyEssayRoot "legacy-taxonomy-only.md"
-  @'
----
-title: "Legacy Taxonomy Only"
-date: 2025-07-14
-draft: false
-slug: "legacy-taxonomy-only"
-section_label: "Essay"
-subtitle: ""
-description: "A legacy essay fixture with old body residue."
-version: "1.0"
-edition: "First web edition"
-featured: false
----
-
-The warning came in Ã¢â‚¬Å“late.Ã¢â‚¬Â
-
-![](https://cdn-images-1.medium.com/max/800/placeholder)
-'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
-
-  & git -C $taxonomyRoot init | Out-Null
-  & git -C $taxonomyRoot config user.email "codex@example.com" | Out-Null
-  & git -C $taxonomyRoot config user.name "Codex Test" | Out-Null
-  & git -C $taxonomyRoot add . | Out-Null
-  & git -C $taxonomyRoot commit -m "baseline" | Out-Null
-  $taxonomyBase = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
-
-  @'
----
-title: "Legacy Taxonomy Only"
-date: 2025-07-14
-draft: false
-slug: "legacy-taxonomy-only"
-section_label: "Essay"
-subtitle: ""
-description: "A legacy essay fixture with old body residue."
-version: "1.0"
-edition: "First web edition"
-featured: false
-collections:
-  - geopolitics-trade-global-power
----
-
-The warning came in Ã¢â‚¬Å“late.Ã¢â‚¬Â
-
-![](https://cdn-images-1.medium.com/max/800/placeholder)
-'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
-
-  & git -C $taxonomyRoot add . | Out-Null
-  & git -C $taxonomyRoot commit -m "add collection metadata" | Out-Null
-  $taxonomyHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
-
-  $taxonomyGuardrailScript = Join-Path $taxonomyScriptRoot "check_essay_guardrails.ps1"
-  $taxonomyOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $taxonomyBase -HeadRef $taxonomyHead -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $taxonomyOnlyExit = $LASTEXITCODE
-  Assert-True ($taxonomyOnlyExit -eq 0) "Expected taxonomy-only collection metadata diffs to skip legacy cleanup and philosophy audit gates."
-  Assert-True ($taxonomyOnlyOutput.Contains("taxonomy/image-only front matter change")) "Expected taxonomy-only guardrail output to report the explicit skip."
-  Assert-True (-not $taxonomyOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected taxonomy-only guardrail output not to require philosophy audit evidence."
-  Assert-True (-not $taxonomyOnlyOutput.Contains("Legacy import preflight summary")) "Expected taxonomy-only guardrail output not to scan legacy body residue."
-
-  @'
----
-title: "Legacy Taxonomy Only"
-date: 2025-07-14
-draft: false
-slug: "legacy-taxonomy-only"
-section_label: "Essay"
-subtitle: ""
-description: "A legacy essay fixture with old body residue."
-featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
-featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
-featured_image_caption: "Replacement hero image for the legacy web edition."
-version: "1.0"
-edition: "First web edition"
-featured: false
-collections:
-  - geopolitics-trade-global-power
----
-
-The warning came in Ã¢â‚¬Å“late.Ã¢â‚¬Â
-
-![](https://cdn-images-1.medium.com/max/800/placeholder)
-'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
-
-  & git -C $taxonomyRoot add . | Out-Null
-  & git -C $taxonomyRoot commit -m "add image metadata" | Out-Null
-  $imageMetadataHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
-
-  $imageMetadataOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $taxonomyHead -HeadRef $imageMetadataHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $imageMetadataOnlyExit = $LASTEXITCODE
-  Assert-True ($imageMetadataOnlyExit -eq 0) "Expected image-only metadata diffs to skip legacy cleanup and philosophy audit gates."
-  Assert-True ($imageMetadataOnlyOutput.Contains("taxonomy/image-only front matter change")) "Expected image-only metadata guardrail output to report the explicit skip."
-  Assert-True (-not $imageMetadataOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected image-only metadata guardrail output not to require philosophy audit evidence."
-  Assert-True (-not $imageMetadataOnlyOutput.Contains("Legacy import preflight summary")) "Expected image-only metadata guardrail output not to scan legacy body residue."
-
-  @'
----
-title: "Legacy Taxonomy Only"
-date: 2025-07-14
-draft: false
-slug: "legacy-taxonomy-only"
-section_label: "Essay"
-subtitle: ""
-description: "A legacy essay fixture with old body residue."
-featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
-featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
-featured_image_caption: "Replacement hero image for the legacy web edition."
-version: "1.1"
-edition: "Second web edition"
-revision_history:
-  - version: "1.1"
-    date: "2026-07-06"
-    note: "Recovered and localized body images from Medium import archive; no substantive text change."
-featured: false
-collections:
-  - geopolitics-trade-global-power
----
-
-The warning came in Ã¢â‚¬Å“late.Ã¢â‚¬Â
-
-![](https://cdn-images-1.medium.com/max/800/placeholder)
-
-![Recovered local image](/images/medium/legacy-taxonomy-only/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpeg)
-
-*Photo by Example on Unsplash*
-'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
-
-  & git -C $taxonomyRoot add . | Out-Null
-  & git -C $taxonomyRoot commit -m "recover local body image" | Out-Null
-  $imageRecoveryHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
-
-  $imageRecoveryOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageMetadataHead -HeadRef $imageRecoveryHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $imageRecoveryOnlyExit = $LASTEXITCODE
-  Assert-True ($imageRecoveryOnlyExit -eq 0) "Expected Medium image recovery-only diffs to skip legacy cleanup and philosophy audit gates."
-  Assert-True ($imageRecoveryOnlyOutput.Contains("Medium image recovery-only change")) "Expected Medium image recovery guardrail output to report the explicit skip."
-  Assert-True (-not $imageRecoveryOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected Medium image recovery guardrail output not to require philosophy audit evidence."
-  Assert-True (-not $imageRecoveryOnlyOutput.Contains("Legacy import preflight summary")) "Expected Medium image recovery guardrail output not to scan legacy body residue."
-
-  @'
----
-title: "Legacy Taxonomy Only"
-date: 2025-07-14
-draft: false
-slug: "legacy-taxonomy-only"
-section_label: "Essay"
-subtitle: ""
-description: "A legacy essay fixture with old body residue."
-featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
-featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
-featured_image_caption: "Replacement hero image for the legacy web edition."
-version: "1.2"
-edition: "Third web edition"
-revision_history:
-  - version: "1.1"
-    date: "2026-07-06"
-    note: "Recovered and localized body images from Medium import archive; no substantive text change."
-  - version: "1.2"
-    date: "2026-07-06"
-    note: "Recovered and localized body images from Medium import archive; no substantive text change."
-featured: false
-collections:
-  - geopolitics-trade-global-power
----
-
-The warning came in Ã¢â‚¬Å“late.Ã¢â‚¬Â
-
-![](https://cdn-images-1.medium.com/max/800/placeholder)
-
-![Recovered local image](/images/medium/legacy-taxonomy-only/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpeg)
-
-*Photo by Example on Archive*
-'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
-
-  & git -C $taxonomyRoot add . | Out-Null
-  & git -C $taxonomyRoot commit -m "normalize recovered caption" | Out-Null
-  $imageCaptionHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
-
-  $imageCaptionOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageRecoveryHead -HeadRef $imageCaptionHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $imageCaptionOnlyExit = $LASTEXITCODE
-  Assert-True ($imageCaptionOnlyExit -eq 0) "Expected recovered local image caption-only diffs to skip legacy cleanup and philosophy audit gates."
-  Assert-True ($imageCaptionOnlyOutput.Contains("Medium image recovery-only change")) "Expected recovered caption guardrail output to report the explicit skip."
-  Assert-True (-not $imageCaptionOnlyOutput.Contains("Legacy import preflight summary")) "Expected recovered caption guardrail output not to scan legacy body residue."
-
-  @'
----
-title: "Legacy Taxonomy Only"
-date: 2025-07-14
-draft: false
-slug: "legacy-taxonomy-only"
-section_label: "Essay"
-subtitle: ""
-description: "A legacy essay fixture with old body residue."
-featured_image: "/images/essays/legacy-taxonomy-only/hero.png"
-featured_image_alt: "Abstract editorial hero image for Legacy Taxonomy Only."
-featured_image_caption: "Replacement hero image for the legacy web edition."
-version: "1.2"
-edition: "Third web edition"
-revision_history:
-  - version: "1.1"
-    date: "2026-07-06"
-    note: "Recovered and localized body images from Medium import archive; no substantive text change."
-  - version: "1.2"
-    date: "2026-07-06"
-    note: "Recovered and localized body images from Medium import archive; no substantive text change."
-featured: false
-collections:
-  - geopolitics-trade-global-power
----
-
-The warning came in Ã¢â‚¬Å“late.Ã¢â‚¬Â
-
-This prose changed and should keep the essay under guardrail review.
-
-![](https://cdn-images-1.medium.com/max/800/placeholder)
-
-![Recovered local image](/images/medium/legacy-taxonomy-only/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpeg)
-
-*Photo by Example on Unsplash*
-
-![Second recovered local image](/images/medium/legacy-taxonomy-only/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.jpeg)
-
-*Photo by Example on Unsplash*
-'@ | Set-Content -Path $taxonomyEssayPath -Encoding UTF8
-
-  & git -C $taxonomyRoot add . | Out-Null
-  & git -C $taxonomyRoot commit -m "change prose with recovered image" | Out-Null
-  $imageRecoveryWithProseHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
-
-  $imageRecoveryWithProseOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageCaptionHead -HeadRef $imageRecoveryWithProseHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
-  $imageRecoveryWithProseExit = $LASTEXITCODE
-  Assert-True ($imageRecoveryWithProseExit -ne 0) "Expected Medium image recovery plus prose changes to remain under legacy cleanup gates."
-  Assert-True ($imageRecoveryWithProseOutput.Contains("Legacy import preflight summary")) "Expected prose-changing recovery output to run the legacy scan."
-}
-finally {
-  if (Test-Path $tempRoot) {
-    Remove-Item -Path $tempRoot -Recurse -Force -ErrorAction SilentlyContinue
-  }
-}
-
-Write-Host "Essay guardrail tests passed."
-$global:LASTEXITCODE = 0
-exit 0
+  $thatMatãÍ»¶‰žËkºwµçM½Á¡åá¥Ð€µ•Ä€À¤€‰áÁ•Ñ•É•Á½ÉÑÌÑ¼Á…ÍÌÝ¥Ñ Ù…±¥=%@´ääÉ•Á½ÉÐ•Ù¥‘•¹”¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘É•Á½ÉÑI•ÅÕ¥É•A¡¥±½Í½Á¡å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰ÍÍ…äÕ…É‘É…¥±ÌAMM¸ˆ¤¤€‰áÁ•Ñ•É•Á½ÉÐÁ¡¥±½Í½Á¡ä…Õ‘¥Ð½ÕÑÁÕÐÑ¼É•Á½ÉÐÍÕ•ÍÌ¸ˆ4(4(€€‘Ý½É­¥¹A…Á•ÉI•ÅÕ¥É•A¡¥±½Í½Á¡å=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Õ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ•µÁI½½Ð€µA…Ñ¡Ì€‰½¹Ñ•¹Ð½Ý½É­¥¹œµÁ…Á•ÉÌ½±•…¸µÝ½É­¥¹œµÁ…Á•È¹µˆ€µI•ÅÕ¥É•‘¥Ñ½É¥…±A¡¥±½Í½Á¡åÕ‘¥Ð€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘Ý½É­¥¹A…Á•ÉI•ÅÕ¥É•A¡¥±½Í½Á¡åá¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘Ý½É­¥¹A…Á•ÉI•ÅÕ¥É•A¡¥±½Í½Á¡åá¥Ð€µ•Ä€À¤€‰áÁ•Ñ•Ý½É­¥¹œÁ…Á•ÉÌÑ¼Á…ÍÌÝ¥Ñ Ù…±¥=%@´ääÉ•Á½ÉÐ•Ù¥‘•¹”¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘Ý½É­¥¹A…Á•ÉI•ÅÕ¥É•A¡¥±½Í½Á¡å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰ÍÍ…äÕ…É‘É…¥±ÌAMM¸ˆ¤¤€‰áÁ•Ñ•Ý½É­¥¹œÁ…Á•ÈÁ¡¥±½Í½Á¡ä…Õ‘¥Ð½ÕÑÁÕÐÑ¼É•Á½ÉÐÍÕ•ÍÌ¸ˆ4(4(€€‘Í±Õ¡½=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Õ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ•µÁI½½Ð€µA…Ñ¡Ì€‰½¹Ñ•¹Ð½•ÍÍ…åÌ½Í±Õœµ•¡¼¹µˆ€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘Í±Õ¡½á¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘Í±Õ¡½á¥Ð€µ•Ä€À¤€‰áÁ•Ñ•±½…±¥é•µ•‘¥„Á…Ñ¡ÌÑ¼…Ù½¥‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”™…±Í”Á½Í¥Ñ¥Ù•Ì¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘Í±Õ¡½=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”ˆ¤¤€‰áÁ•Ñ•Í±Õœµ½¹±äµ•‘¥„Á…Ñ¡Ì¹½ÐÑ¼ÑÉ¥•È‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”¸ˆ4(4(€€‘Á±…•¡½±‘•É!•É½=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Õ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ•µÁI½½Ð€µA…Ñ¡Ì€‰½¹Ñ•¹Ð½•ÍÍ…åÌ½Á±…•¡½±‘•Èµ¡•É¼µ½¹™±¥Ð¹µˆ€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘Á±…•¡½±‘•É!•É½á¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘Á±…•¡½±‘•É!•É½á¥Ð€µ•Ä€Ä¤€‰áÁ•Ñ•Á±…•¡½±‘•È¡•É¼½¹™±¥ÑÌÑ¼™…¥°Ñ¡”Õ…É‘É…¥°¡•¬¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘Á±…•¡½±‘•É!•É½=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰¡•É½}Á±…•¡½±‘•É}½¹™±¥Ðˆ¤¤€‰áÁ•Ñ•Á±…•¡½±‘•È¡•É¼½¹™±¥ÑÌÑ¼‰”É•Á½ÉÑ•…Ì‰±½­•ÉÌ¸ˆ4(4(€€‘µ¥ÍÍ¥¹!•É½=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Õ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ•µÁI½½Ð€µA…Ñ¡Ì€‰½¹Ñ•¹Ð½•ÍÍ…åÌ½µ¥ÍÍ¥¹œµ¡•É¼µ±•…¹µˆ€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘µ¥ÍÍ¥¹!•É½á¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘µ¥ÍÍ¥¹!•É½á¥Ð€µ•Ä€Ä¤€‰áÁ•Ñ•µ¥ÍÍ¥¹œµ¡•É¼±•…µ¥µ…”…Í•ÌÑ¼™…¥°Ñ¡”Õ…É‘É…¥°¡•¬¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘µ¥ÍÍ¥¹!•É½=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰¡•É½}µ¥ÍÍ¥¹}Ý¥Ñ¡}±•…ˆ¤¤€‰áÁ•Ñ•µ¥ÍÍ¥¹œ¡•É¼±•…µ¥µ…”…Í•ÌÑ¼‰”É•Á½ÉÑ•…Ì‰±½­•ÉÌ¸ˆ4(4(€€‘‘ÕÁ±¥…Ñ•!•É½=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Õ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ•µÁI½½Ð€µA…Ñ¡Ì€‰½¹Ñ•¹Ð½•ÍÍ…åÌ½‘ÕÁ±¥…Ñ”µ¡•É¼µ±•…¹µˆ€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘‘ÕÁ±¥…Ñ•!•É½á¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘‘ÕÁ±¥…Ñ•!•É½á¥Ð€µ•Ä€À¤€‰áÁ•Ñ•‘ÕÁ±¥…Ñ”¡•É¼½‰½‘ä…Í•ÌÑ¼É•µ…¥¸Ý…É¹¥¹Ì‰ä‘•™…Õ±Ð¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘‘ÕÁ±¥…Ñ•!•É½=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰¡•É½}‘ÕÁ±¥…Ñ•}±•…ˆ¤¤€‰áÁ•Ñ•‘ÕÁ±¥…Ñ”¡•É¼½‰½‘ä…Í•ÌÑ¼‰”É•Á½ÉÑ•…ÌÝ…É¹¥¹Ì¸ˆ4(4(€€‘ÕÉÉ•¹Ñ!•É½]¥¹Í=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Õ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ•µÁI½½Ð€µA…Ñ¡Ì€‰½¹Ñ•¹Ð½•ÍÍ…åÌ½ÕÉÉ•¹Ðµ¡•É¼µÝ¥¹Ìµ½¹™±¥Ð¹µˆ€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘ÕÉÉ•¹Ñ!•É½]¥¹Íá¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘ÕÉÉ•¹Ñ!•É½]¥¹Íá¥Ð€µ•Ä€À¤€‰áÁ•Ñ•ÕÉÉ•¹Ðµ¡•É¼µÝ¥¹Ì½¹™±¥ÑÌÑ¼É•µ…¥¸Ý…É¹¥¹Ì‰ä‘•™…Õ±Ð¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘ÕÉÉ•¹Ñ!•É½]¥¹Í=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰¡•É½}ÕÉÉ•¹Ñ}Ý¥¹Í}½¹™±¥Ðˆ¤¤€‰áÁ•Ñ•ÕÉÉ•¹Ðµ¡•É¼µÝ¥¹Ì½¹™±¥ÑÌÑ¼‰”É•Á½ÉÑ•…ÌÝ…É¹¥¹Ì¸ˆ4(4(€€‘Ñ…á½¹½µåI½½Ð€ô)½¥¸µA…Ñ €‘Ñ•µÁI½½Ð€‰Ñ…á½¹½µäµ½¹±äµÉ•Á¼ˆ4(€€‘Ñ…á½¹½µåMÉ¥ÁÑI½½Ð€ô)½¥¸µA…Ñ €‘Ñ…á½¹½µåI½½Ð€‰ÍÉ¥ÁÑÌˆ4(€€‘Ñ…á½¹½µåÍÍ…åI½½Ð€ô)½¥¸µA…Ñ €‘Ñ…á½¹½µåI½½Ð€‰½¹Ñ•¹Ð½•ÍÍ…åÌˆ4(€9•Üµ%Ñ•´€µA…Ñ €‘Ñ…á½¹½µåMÉ¥ÁÑI½½Ð€µ%Ñ•µQåÁ”¥É•Ñ½Éä€µ½É”ð=ÕÐµ9Õ±°4(€9•Üµ%Ñ•´€µA…Ñ €‘Ñ…á½¹½µåÍÍ…åI½½Ð€µ%Ñ•µQåÁ”¥É•Ñ½Éä€µ½É”ð=ÕÐµ9Õ±°4(€½Áäµ%Ñ•´€¡)½¥¸µA…Ñ €‘É•Á½I½½Ð€‰ÍÉ¥ÁÑÌ½…Õ‘¥Ñ}±•…å}•ÍÍ…åÌ¹ÁÌÄˆ¤€‘Ñ…á½¹½µåMÉ¥ÁÑI½½Ð4(€½Áäµ%Ñ•´€¡)½¥¸µA…Ñ €‘É•Á½I½½Ð€‰ÍÉ¥ÁÑÌ½¡•­}•ÍÍ…å}Õ…É‘É…¥±Ì¹ÁÌÄˆ¤€‘Ñ…á½¹½µåMÉ¥ÁÑI½½Ð4(€½Áäµ%Ñ•´€¡)½¥¸µA…Ñ €‘É•Á½I½½Ð€‰ÍÉ¥ÁÑÌ½¡•­}±•…å}¥µÁ½ÉÑ}ÁÉ•™±¥¡Ð¹ÁÌÄˆ¤€‘Ñ…á½¹½µåMÉ¥ÁÑI½½Ð4(4(€€‘Ñ…á½¹½µåÍÍ…åA…Ñ €ô)½¥¸µA…Ñ €‘Ñ…á½¹½µåÍÍ…åI½½Ð€‰±•…äµÑ…á½¹½µäµ½¹±ä¹µˆ4(€ œ4(´´´4)Ñ¥Ñ±”è€‰1•…äQ…á½¹½µä=¹±äˆ4)‘…Ñ”è€ÈÀÈÔ´ÀÜ´ÄÐ4)‘É…™Ðè™…±Í”4)Í±Õœè€‰±•…äµÑ…á½¹½µäµ½¹±äˆ4)Í•Ñ¥½¹}±…‰•°è€‰ÍÍ…äˆ4)ÍÕ‰Ñ¥Ñ±”è€ˆˆ4)‘•ÍÉ¥ÁÑ¥½¸è€‰±•…ä•ÍÍ…ä™¥áÑÕÉ”Ý¥Ñ ½±‰½‘äÉ•Í¥‘Õ”¸ˆ4)Ù•ÉÍ¥½¸è€ˆÄ¸Àˆ4)•‘¥Ñ¥½¸è€‰¥ÉÍÐÝ•ˆ•‘¥Ñ¥½¸ˆ4)™•…ÑÕÉ•è™…±Í”4(´´´4(4)Q¡”Ý…É¹¥¹œ…µ”¥¸ƒ‹Š
+³M±…Ñ”»‹Š
+³
+t4(4(…mt¡¡ÑÑÁÌè¼½‘¸µ¥µ…•Ì´Ä¹µ•‘¥Õ´¹½´½µ…à¼àÀÀ½Á±…•¡½±‘•È¤4( ðM•Ðµ½¹Ñ•¹Ð€µA…Ñ €‘Ñ…á½¹½µåÍÍ…åA…Ñ €µ¹½‘¥¹œUQà4(4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð¥¹¥Ðð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½¹™¥œÕÍ•È¹•µ…¥°€‰½‘•á•á…µÁ±”¹½´ˆð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½¹™¥œÕÍ•È¹¹…µ”€‰½‘•àQ•ÍÐˆð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð…‘€¸ð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½µµ¥Ð€µ´€‰‰…Í•±¥¹”ˆð=ÕÐµ9Õ±°4(€€‘Ñ…á½¹½µå	…Í”€ô€ ˜¥Ð€µ€‘Ñ…á½¹½µåI½½ÐÉ•ØµÁ…ÉÍ”!¤¹QÉ¥´ ¤4(4(€ œ4(´´´4)Ñ¥Ñ±”è€‰1•…äQ…á½¹½µä=¹±äˆ4)‘…Ñ”è€ÈÀÈÔ´ÀÜ´ÄÐ4)‘É…™Ðè™…±Í”4)Í±Õœè€‰±•…äµÑ…á½¹½µäµ½¹±äˆ4)Í•Ñ¥½¹}±…‰•°è€‰ÍÍ…äˆ4)ÍÕ‰Ñ¥Ñ±”è€ˆˆ4)‘•ÍÉ¥ÁÑ¥½¸è€‰±•…ä•ÍÍ…ä™¥áÑÕÉ”Ý¥Ñ ½±‰½‘äÉ•Í¥‘Õ”¸ˆ4)Ù•ÉÍ¥½¸è€ˆÄ¸Àˆ4)•‘¥Ñ¥½¸è€‰¥ÉÍÐÝ•ˆ•‘¥Ñ¥½¸ˆ4)™•…ÑÕÉ•è™…±Í”4)½±±•Ñ¥½¹Ìè4(€€´•½Á½±¥Ñ¥ÌµÑÉ…‘”µ±½‰…°µÁ½Ý•È4(´´´4(4)Q¡”Ý…É¹¥¹œ…µ”¥¸ƒ‹Š
+³M±…Ñ”»‹Š
+³
+t4(4(…mt¡¡ÑÑÁÌè¼½‘¸µ¥µ…•Ì´Ä¹µ•‘¥Õ´¹½´½µ…à¼àÀÀ½Á±…•¡½±‘•È¤4( ðM•Ðµ½¹Ñ•¹Ð€µA…Ñ €‘Ñ…á½¹½µåÍÍ…åA…Ñ €µ¹½‘¥¹œUQà4(4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð…‘€¸ð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½µµ¥Ð€µ´€‰…‘½±±•Ñ¥½¸µ•Ñ…‘…Ñ„ˆð=ÕÐµ9Õ±°4(€€‘Ñ…á½¹½µå!•…€ô€ ˜¥Ð€µ€‘Ñ…á½¹½µåI½½ÐÉ•ØµÁ…ÉÍ”!¤¹QÉ¥´ ¤4(4(€€‘Ñ…á½¹½µåÕ…É‘É…¥±MÉ¥ÁÐ€ô)½¥¸µA…Ñ €‘Ñ…á½¹½µåMÉ¥ÁÑI½½Ð€‰¡•­}•ÍÍ…å}Õ…É‘É…¥±Ì¹ÁÌÄˆ4(€€‘Ñ…á½¹½µå=¹±å=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Ñ…á½¹½µåÕ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ…á½¹½µåI½½Ð€µ	…Í•I•˜€‘Ñ…á½¹½µå	…Í”€µ!•…‘I•˜€‘Ñ…á½¹½µå!•…€µI•ÅÕ¥É•‘¥Ñ½É¥…±A¡¥±½Í½Á¡åÕ‘¥Ð€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘Ñ…á½¹½µå=¹±åá¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘Ñ…á½¹½µå=¹±åá¥Ð€µ•Ä€À¤€‰áÁ•Ñ•Ñ…á½¹½µäµ½¹±ä½±±•Ñ¥½¸µ•Ñ…‘…Ñ„‘¥™™ÌÑ¼Í­¥À±•…ä±•…¹ÕÀ…¹Á¡¥±½Í½Á¡ä…Õ‘¥Ð…Ñ•Ì¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘Ñ…á½¹½µå=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰Ñ…á½¹½µä½¥µ…”µ½¹±ä™É½¹Ðµ…ÑÑ•È¡…¹”ˆ¤¤€‰áÁ•Ñ•Ñ…á½¹½µäµ½¹±äÕ…É‘É…¥°½ÕÑÁÕÐÑ¼É•Á½ÉÐÑ¡”•áÁ±¥¥ÐÍ­¥À¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘Ñ…á½¹½µå=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰µ¥ÍÍ¥¹}•‘¥Ñ½É¥…±}Á¡¥±½Í½Á¡å}…Õ‘¥Ðˆ¤¤€‰áÁ•Ñ•Ñ…á½¹½µäµ½¹±äÕ…É‘É…¥°½ÕÑÁÕÐ¹½ÐÑ¼É•ÅÕ¥É”Á¡¥±½Í½Á¡ä…Õ‘¥Ð•Ù¥‘•¹”¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘Ñ…á½¹½µå=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰1•…ä¥µÁ½ÉÐÁÉ•™±¥¡ÐÍÕµµ…Éäˆ¤¤€‰áÁ•Ñ•Ñ…á½¹½µäµ½¹±äÕ…É‘É…¥°½ÕÑÁÕÐ¹½ÐÑ¼Í…¸±•…ä‰½‘äÉ•Í¥‘Õ”¸ˆ4(4(€ œ4(´´´4)Ñ¥Ñ±”è€‰1•…äQ…á½¹½µä=¹±äˆ4)‘…Ñ”è€ÈÀÈÔ´ÀÜ´ÄÐ4)‘É…™Ðè™…±Í”4)Í±Õœè€‰±•…äµÑ…á½¹½µäµ½¹±äˆ4)Í•Ñ¥½¹}±…‰•°è€‰ÍÍ…äˆ4)ÍÕ‰Ñ¥Ñ±”è€ˆˆ4)‘•ÍÉ¥ÁÑ¥½¸è€‰±•…ä•ÍÍ…ä™¥áÑÕÉ”Ý¥Ñ ½±‰½‘äÉ•Í¥‘Õ”¸ˆ4)™•…ÑÕÉ•‘}¥µ…”è€ˆ½¥µ…•Ì½•ÍÍ…åÌ½±•…äµÑ…á½¹½µäµ½¹±ä½¡•É¼¹Á¹œˆ4)™•…ÑÕÉ•‘}¥µ…•}…±Ðè€‰‰ÍÑÉ…Ð•‘¥Ñ½É¥…°¡•É¼¥µ…”™½È1•…äQ…á½¹½µä=¹±ä¸ˆ4)™•…ÑÕÉ•‘}¥µ…•}…ÁÑ¥½¸è€‰I•Á±…•µ•¹Ð¡•É¼¥µ…”™½ÈÑ¡”±•…äÝ•ˆ•‘¥Ñ¥½¸¸ˆ4)Ù•ÉÍ¥½¸è€ˆÄ¸Àˆ4)•‘¥Ñ¥½¸è€‰¥ÉÍÐÝ•ˆ•‘¥Ñ¥½¸ˆ4)™•…ÑÕÉ•è™…±Í”4)½±±•Ñ¥½¹Ìè4(€€´•½Á½±¥Ñ¥ÌµÑÉ…‘”µ±½‰…°µÁ½Ý•È4(´´´4(4)Q¡”Ý…É¹¥¹œ…µ”¥¸ƒ‹Š
+³M±…Ñ”»‹Š
+³
+t4(4(…mt¡¡ÑÑÁÌè¼½‘¸µ¥µ…•Ì´Ä¹µ•‘¥Õ´¹½´½µ…à¼àÀÀ½Á±…•¡½±‘•È¤4( ðM•Ðµ½¹Ñ•¹Ð€µA…Ñ €‘Ñ…á½¹½µåÍÍ…åA…Ñ €µ¹½‘¥¹œUQà4(4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð…‘€¸ð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½µµ¥Ð€µ´€‰…‘¥µ…”µ•Ñ…‘…Ñ„ˆð=ÕÐµ9Õ±°4(€€‘¥µ…•5•Ñ…‘…Ñ…!•…€ô€ ˜¥Ð€µ€‘Ñ…á½¹½µåI½½ÐÉ•ØµÁ…ÉÍ”!¤¹QÉ¥´ ¤4(4(€€‘¥µ…•5•Ñ…‘…Ñ…=¹±å=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Ñ…á½¹½µåÕ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ…á½¹½µåI½½Ð€µ	…Í•I•˜€‘Ñ…á½¹½µå!•…€µ!•…‘I•˜€‘¥µ…•5•Ñ…‘…Ñ…!•…€µI•ÅÕ¥É••ÍÉ¥ÁÑ¥½¸€µI•ÅÕ¥É••…ÑÕÉ•‘%µ…”€µI•ÅÕ¥É•‘¥Ñ½É¥…±A¡¥±½Í½Á¡åÕ‘¥Ð€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘¥µ…•5•Ñ…‘…Ñ…=¹±åá¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•5•Ñ…‘…Ñ…=¹±åá¥Ð€µ•Ä€À¤€‰áÁ•Ñ•¥µ…”µ½¹±äµ•Ñ…‘…Ñ„‘¥™™ÌÑ¼Í­¥À±•…ä±•…¹ÕÀ…¹Á¡¥±½Í½Á¡ä…Õ‘¥Ð…Ñ•Ì¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•5•Ñ…‘…Ñ…=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰Ñ…á½¹½µä½¥µ…”µ½¹±ä™É½¹Ðµ…ÑÑ•È¡…¹”ˆ¤¤€‰áÁ•Ñ•¥µ…”µ½¹±äµ•Ñ…‘…Ñ„Õ…É‘É…¥°½ÕÑÁÕÐÑ¼É•Á½ÉÐÑ¡”•áÁ±¥¥ÐÍ­¥À¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘¥µ…•5•Ñ…‘…Ñ…=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰µ¥ÍÍ¥¹}•‘¥Ñ½É¥…±}Á¡¥±½Í½Á¡å}…Õ‘¥Ðˆ¤¤€‰áÁ•Ñ•¥µ…”µ½¹±äµ•Ñ…‘…Ñ„Õ…É‘É…¥°½ÕÑÁÕÐ¹½ÐÑ¼É•ÅÕ¥É”Á¡¥±½Í½Á¡ä…Õ‘¥Ð•Ù¥‘•¹”¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘¥µ…•5•Ñ…‘…Ñ…=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰1•…ä¥µÁ½ÉÐÁÉ•™±¥¡ÐÍÕµµ…Éäˆ¤¤€‰áÁ•Ñ•¥µ…”µ½¹±äµ•Ñ…‘…Ñ„Õ…É‘É…¥°½ÕÑÁÕÐ¹½ÐÑ¼Í…¸±•…ä‰½‘äÉ•Í¥‘Õ”¸ˆ4(4(€ œ4(´´´4)Ñ¥Ñ±”è€‰1•…äQ…á½¹½µä=¹±äˆ4)‘…Ñ”è€ÈÀÈÔ´ÀÜ´ÄÐ4)‘É…™Ðè™…±Í”4)Í±Õœè€‰±•…äµÑ…á½¹½µäµ½¹±äˆ4)Í•Ñ¥½¹}±…‰•°è€‰ÍÍ…äˆ4)ÍÕ‰Ñ¥Ñ±”è€ˆˆ4)‘•ÍÉ¥ÁÑ¥½¸è€‰±•…ä•ÍÍ…ä™¥áÑÕÉ”Ý¥Ñ ½±‰½‘äÉ•Í¥‘Õ”¸ˆ4)™•…ÑÕÉ•‘}¥µ…”è€ˆ½¥µ…•Ì½•ÍÍ…åÌ½±•…äµÑ…á½¹½µäµ½¹±ä½¡•É¼¹Á¹œˆ4)™•…ÑÕÉ•‘}¥µ…•}…±Ðè€‰‰ÍÑÉ…Ð•‘¥Ñ½É¥…°¡•É¼¥µ…”™½È1•…äQ…á½¹½µä=¹±ä¸ˆ4)™•…ÑÕÉ•‘}¥µ…•}…ÁÑ¥½¸è€‰I•Á±…•µ•¹Ð¡•É¼¥µ…”™½ÈÑ¡”±•…äÝ•ˆ•‘¥Ñ¥½¸¸ˆ4)Ù•ÉÍ¥½¸è€ˆÄ¸Äˆ4)•‘¥Ñ¥½¸è€‰M•½¹Ý•ˆ•‘¥Ñ¥½¸ˆ4)É•Ù¥Í¥½¹}¡¥ÍÑ½Éäè4(€€´Ù•ÉÍ¥½¸è€ˆÄ¸Äˆ4(€€€‘…Ñ”è€ˆÈÀÈØ´ÀÜ´ÀØˆ4(€€€¹½Ñ”è€‰I•½Ù•É•…¹±½…±¥é•‰½‘ä¥µ…•Ì™É½´5•‘¥Õ´¥µÁ½ÉÐ…É¡¥Ù”ì¹¼ÍÕ‰ÍÑ…¹Ñ¥Ù”Ñ•áÐ¡…¹”¸ˆ4)™•…ÑÕÉ•è™…±Í”4)½±±•Ñ¥½¹Ìè4(€€´•½Á½±¥Ñ¥ÌµÑÉ…‘”µ±½‰…°µÁ½Ý•È4(´´´4(4)Q¡”Ý…É¹¥¹œ…µ”¥¸ƒ‹Š
+³M±…Ñ”»‹Š
+³
+t4(4(…mt¡¡ÑÑÁÌè¼½‘¸µ¥µ…•Ì´Ä¹µ•‘¥Õ´¹½´½µ…à¼àÀÀ½Á±…•¡½±‘•È¤4(4(…mI•½Ù•É•±½…°¥µ…•t ½¥µ…•Ì½µ•‘¥Õ´½±•…äµÑ…á½¹½µäµ½¹±ä½………………………………………………………………………………………………………………………………………………………………………„¹©Á•œ¤4(4(©A¡½Ñ¼‰äá…µÁ±”½¸U¹ÍÁ±…Í ¨4( ðM•Ðµ½¹Ñ•¹Ð€µA…Ñ €‘Ñ…á½¹½µåÍÍ…åA…Ñ €µ¹½‘¥¹œUQà4(4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð…‘€¸ð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½µµ¥Ð€µ´€‰É•½Ù•È±½…°‰½‘ä¥µ…”ˆð=ÕÐµ9Õ±°4(€€‘¥µ…•I•½Ù•Éå!•…€ô€ ˜¥Ð€µ€‘Ñ…á½¹½µåI½½ÐÉ•ØµÁ…ÉÍ”!¤¹QÉ¥´ ¤4(4(€€‘¥µ…•I•½Ù•Éå=¹±å=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Ñ…á½¹½µåÕ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ…á½¹½µåI½½Ð€µ	…Í•I•˜€‘¥µ…•5•Ñ…‘…Ñ…!•…€µ!•…‘I•˜€‘¥µ…•I•½Ù•Éå!•…€µI•ÅÕ¥É••ÍÉ¥ÁÑ¥½¸€µI•ÅÕ¥É••…ÑÕÉ•‘%µ…”€µI•ÅÕ¥É•‘¥Ñ½É¥…±A¡¥±½Í½Á¡åÕ‘¥Ð€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘¥µ…•I•½Ù•Éå=¹±åá¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•I•½Ù•Éå=¹±åá¥Ð€µ•Ä€À¤€‰áÁ•Ñ•5•‘¥Õ´¥µ…”É•½Ù•Éäµ½¹±ä‘¥™™ÌÑ¼Í­¥À±•…ä±•…¹ÕÀ…¹Á¡¥±½Í½Á¡ä…Õ‘¥Ð…Ñ•Ì¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•I•½Ù•Éå=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰5•‘¥Õ´¥µ…”É•½Ù•Éäµ½¹±ä¡…¹”ˆ¤¤€‰áÁ•Ñ•5•‘¥Õ´¥µ…”É•½Ù•ÉäÕ…É‘É…¥°½ÕÑÁÕÐÑ¼É•Á½ÉÐÑ¡”•áÁ±¥¥ÐÍ­¥À¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘¥µ…•I•½Ù•Éå=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰µ¥ÍÍ¥¹}•‘¥Ñ½É¥…±}Á¡¥±½Í½Á¡å}…Õ‘¥Ðˆ¤¤€‰áÁ•Ñ•5•‘¥Õ´¥µ…”É•½Ù•ÉäÕ…É‘É…¥°½ÕÑÁÕÐ¹½ÐÑ¼É•ÅÕ¥É”Á¡¥±½Í½Á¡ä…Õ‘¥Ð•Ù¥‘•¹”¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘¥µ…•I•½Ù•Éå=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰1•…ä¥µÁ½ÉÐÁÉ•™±¥¡ÐÍÕµµ…Éäˆ¤¤€‰áÁ•Ñ•5•‘¥Õ´¥µ…”É•½Ù•ÉäÕ…É‘É…¥°½ÕÑÁÕÐ¹½ÐÑ¼Í…¸±•…ä‰½‘äÉ•Í¥‘Õ”¸ˆ4(4(€ œ4(´´´4)Ñ¥Ñ±”è€‰1•…äQ…á½¹½µä=¹±äˆ4)‘…Ñ”è€ÈÀÈÔ´ÀÜ´ÄÐ4)‘É…™Ðè™…±Í”4)Í±Õœè€‰±•…äµÑ…á½¹½µäµ½¹±äˆ4)Í•Ñ¥½¹}±…‰•°è€‰ÍÍ…äˆ4)ÍÕ‰Ñ¥Ñ±”è€ˆˆ4)‘•ÍÉ¥ÁÑ¥½¸è€‰±•…ä•ÍÍ…ä™¥áÑÕÉ”Ý¥Ñ ½±‰½‘äÉ•Í¥‘Õ”¸ˆ4)™•…ÑÕÉ•‘}¥µ…”è€ˆ½¥µ…•Ì½•ÍÍ…åÌ½±•…äµÑ…á½¹½µäµ½¹±ä½¡•É¼¹Á¹œˆ4)™•…ÑÕÉ•‘}¥µ…•}…±Ðè€‰‰ÍÑÉ…Ð•‘¥Ñ½É¥…°¡•É¼¥µ…”™½È1•…äQ…á½¹½µä=¹±ä¸ˆ4)™•…ÑÕÉ•‘}¥µ…•}…ÁÑ¥½¸è€‰I•Á±…•µ•¹Ð¡•É¼¥µ…”™½ÈÑ¡”±•…äÝ•ˆ•‘¥Ñ¥½¸¸ˆ4)Ù•ÉÍ¥½¸è€ˆÄ¸Èˆ4)•‘¥Ñ¥½¸è€‰Q¡¥ÉÝ•ˆ•‘¥Ñ¥½¸ˆ4)É•Ù¥Í¥½¹}¡¥ÍÑ½Éäè4(€€´Ù•ÉÍ¥½¸è€ˆÄ¸Äˆ4(€€€‘…Ñ”è€ˆÈÀÈØ´ÀÜ´ÀØˆ4(€€€¹½Ñ”è€‰I•½Ù•É•…¹±½…±¥é•‰½‘ä¥µ…•Ì™É½´5•‘¥Õ´¥µÁ½ÉÐ…É¡¥Ù”ì¹¼ÍÕ‰ÍÑ…¹Ñ¥Ù”Ñ•áÐ¡…¹”¸ˆ4(€€´Ù•ÉÍ¥½¸è€ˆÄ¸Èˆ4(€€€‘…Ñ”è€ˆÈÀÈØ´ÀÜ´ÀØˆ4(€€€¹½Ñ”è€‰I•½Ù•É•…¹±½…±¥é•‰½‘ä¥µ…•Ì™É½´5•‘¥Õ´¥µÁ½ÉÐ…É¡¥Ù”ì¹¼ÍÕ‰ÍÑ…¹Ñ¥Ù”Ñ•áÐ¡…¹”¸ˆ4)™•…ÑÕÉ•è™…±Í”4)½±±•Ñ¥½¹Ìè4(€€´•½Á½±¥Ñ¥ÌµÑÉ…‘”µ±½‰…°µÁ½Ý•È4(´´´4(4)Q¡”Ý…É¹¥¹œ…µ”¥¸ƒ‹Š
+³M±…Ñ”»‹Š
+³
+t4(4(…mt¡¡ÑÑÁÌè¼½‘¸µ¥µ…•Ì´Ä¹µ•‘¥Õ´¹½´½µ…à¼àÀÀ½Á±…•¡½±‘•È¤4(4(…mI•½Ù•É•±½…°¥µ…•t ½¥µ…•Ì½µ•‘¥Õ´½±•…äµÑ…á½¹½µäµ½¹±ä½………………………………………………………………………………………………………………………………………………………………………„¹©Á•œ¤4(4(©A¡½Ñ¼‰äá…µÁ±”½¸É¡¥Ù”¨4( ðM•Ðµ½¹Ñ•¹Ð€µA…Ñ €‘Ñ…á½¹½µåÍÍ…åA…Ñ €µ¹½‘¥¹œUQà4(4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð…‘€¸ð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½µµ¥Ð€µ´€‰¹½Éµ…±¥é”É•½Ù•É•…ÁÑ¥½¸ˆð=ÕÐµ9Õ±°4(€€‘¥µ…•…ÁÑ¥½¹!•…€ô€ ˜¥Ð€µ€‘Ñ…á½¹½µåI½½ÐÉ•ØµÁ…ÉÍ”!¤¹QÉ¥´ ¤4(4(€€‘¥µ…•…ÁÑ¥½¹=¹±å=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Ñ…á½¹½µåÕ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ…á½¹½µåI½½Ð€µ	…Í•I•˜€‘¥µ…•I•½Ù•Éå!•…€µ!•…‘I•˜€‘¥µ…•…ÁÑ¥½¹!•…€µI•ÅÕ¥É••ÍÉ¥ÁÑ¥½¸€µI•ÅÕ¥É••…ÑÕÉ•‘%µ…”€µI•ÅÕ¥É•‘¥Ñ½É¥…±A¡¥±½Í½Á¡åÕ‘¥Ð€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘¥µ…•…ÁÑ¥½¹=¹±åá¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•…ÁÑ¥½¹=¹±åá¥Ð€µ•Ä€À¤€‰áÁ•Ñ•É•½Ù•É•±½…°¥µ…”…ÁÑ¥½¸µ½¹±ä‘¥™™ÌÑ¼Í­¥À±•…ä±•…¹ÕÀ…¹Á¡¥±½Í½Á¡ä…Õ‘¥Ð…Ñ•Ì¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•…ÁÑ¥½¹=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰5•‘¥Õ´¥µ…”É•½Ù•Éäµ½¹±ä¡…¹”ˆ¤¤€‰áÁ•Ñ•É•½Ù•É•…ÁÑ¥½¸Õ…É‘É…¥°½ÕÑÁÕÐÑ¼É•Á½ÉÐÑ¡”•áÁ±¥¥ÐÍ­¥À¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ µ¹½Ð€‘¥µ…•…ÁÑ¥½¹=¹±å=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰1•…ä¥µÁ½ÉÐÁÉ•™±¥¡ÐÍÕµµ…Éäˆ¤¤€‰áÁ•Ñ•É•½Ù•É•…ÁÑ¥½¸Õ…É‘É…¥°½ÕÑÁÕÐ¹½ÐÑ¼Í…¸±•…ä‰½‘äÉ•Í¥‘Õ”¸ˆ4(4(€ œ4(´´´4)Ñ¥Ñ±”è€‰1•…äQ…á½¹½µä=¹±äˆ4)‘…Ñ”è€ÈÀÈÔ´ÀÜ´ÄÐ4)‘É…™Ðè™…±Í”4)Í±Õœè€‰±•…äµÑ…á½¹½µäµ½¹±äˆ4)Í•Ñ¥½¹}±…‰•°è€‰ÍÍ…äˆ4)ÍÕ‰Ñ¥Ñ±”è€ˆˆ4)‘•ÍÉ¥ÁÑ¥½¸è€‰±•…ä•ÍÍ…ä™¥áÑÕÉ”Ý¥Ñ ½±‰½‘äÉ•Í¥‘Õ”¸ˆ4)™•…ÑÕÉ•‘}¥µ…”è€ˆ½¥µ…•Ì½•ÍÍ…åÌ½±•…äµÑ…á½¹½µäµ½¹±ä½¡•É¼¹Á¹œˆ4)™•…ÑÕÉ•‘}¥µ…•}…±Ðè€‰‰ÍÑÉ…Ð•‘¥Ñ½É¥…°¡•É¼¥µ…”™½È1•…äQ…á½¹½µä=¹±ä¸ˆ4)™•…ÑÕÉ•‘}¥µ…•}…ÁÑ¥½¸è€‰I•Á±…•µ•¹Ð¡•É¼¥µ…”™½ÈÑ¡”±•…äÝ•ˆ•‘¥Ñ¥½¸¸ˆ4)Ù•ÉÍ¥½¸è€ˆÄ¸Èˆ4)•‘¥Ñ¥½¸è€‰Q¡¥ÉÝ•ˆ•‘¥Ñ¥½¸ˆ4)É•Ù¥Í¥½¹}¡¥ÍÑ½Éäè4(€€´Ù•ÉÍ¥½¸è€ˆÄ¸Äˆ4(€€€‘…Ñ”è€ˆÈÀÈØ´ÀÜ´ÀØˆ4(€€€¹½Ñ”è€‰I•½Ù•É•…¹±½…±¥é•‰½‘ä¥µ…•Ì™É½´5•‘¥Õ´¥µÁ½ÉÐ…É¡¥Ù”ì¹¼ÍÕ‰ÍÑ…¹Ñ¥Ù”Ñ•áÐ¡…¹”¸ˆ4(€€´Ù•ÉÍ¥½¸è€ˆÄ¸Èˆ4(€€€‘…Ñ”è€ˆÈÀÈØ´ÀÜ´ÀØˆ4(€€€¹½Ñ”è€‰I•½Ù•É•…¹±½…±¥é•‰½‘ä¥µ…•Ì™É½´5•‘¥Õ´¥µÁ½ÉÐ…É¡¥Ù”ì¹¼ÍÕ‰ÍÑ…¹Ñ¥Ù”Ñ•áÐ¡…¹”¸ˆ4)™•…ÑÕÉ•è™…±Í”4)½±±•Ñ¥½¹Ìè4(€€´•½Á½±¥Ñ¥ÌµÑÉ…‘”µ±½‰…°µÁ½Ý•È4(´´´4(4)Q¡”Ý…É¹¥¹œ…µ”¥¸ƒ‹Š
+³M±…Ñ”»‹Š
+³
+t4(4)Q¡¥ÌÁÉ½Í”¡…¹•…¹Í¡½Õ±­••ÀÑ¡”•ÍÍ…äÕ¹‘•ÈÕ…É‘É…¥°É•Ù¥•Ü¸4(4(…mt¡¡ÑÑÁÌè¼½‘¸µ¥µ…•Ì´Ä¹µ•‘¥Õ´¹½´½µ…à¼àÀÀ½Á±…•¡½±‘•È¤4(4(…mI•½Ù•É•±½…°¥µ…•t ½¥µ…•Ì½µ•‘¥Õ´½±•…äµÑ…á½¹½µäµ½¹±ä½………………………………………………………………………………………………………………………………………………………………………„¹©Á•œ¤4(4(©A¡½Ñ¼‰äá…µÁ±”½¸U¹ÍÁ±…Í ¨4(4(…mM•½¹É•½Ù•É•±½…°¥µ…•t ½¥µ…•Ì½µ•‘¥Õ´½±•…äµÑ…á½¹½µäµ½¹±ä½‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰‰ˆ¹©Á•œ¤4(4(©A¡½Ñ¼‰äá…µÁ±”½¸U¹ÍÁ±…Í ¨4( ðM•Ðµ½¹Ñ•¹Ð€µA…Ñ €‘Ñ…á½¹½µåÍÍ…åA…Ñ €µ¹½‘¥¹œUQà4(4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð…‘€¸ð=ÕÐµ9Õ±°4(€€˜¥Ð€µ€‘Ñ…á½¹½µåI½½Ð½µµ¥Ð€µ´€‰¡…¹”ÁÉ½Í”Ý¥Ñ É•½Ù•É•¥µ…”ˆð=ÕÐµ9Õ±°4(€€‘¥µ…•I•½Ù•Éå]¥Ñ¡AÉ½Í•!•…€ô€ ˜¥Ð€µ€‘Ñ…á½¹½µåI½½ÐÉ•ØµÁ…ÉÍ”!¤¹QÉ¥´ ¤4(4(€€‘¥µ…•I•½Ù•Éå]¥Ñ¡AÉ½Í•=ÕÑÁÕÐ€ô€˜€‘ÁÝÍ €µ9½AÉ½™¥±”€µá•ÕÑ¥½¹A½±¥ä	åÁ…ÍÌ€µ¥±”€‘Ñ…á½¹½µåÕ…É‘É…¥±MÉ¥ÁÐ€µI½½Ð€‘Ñ…á½¹½µåI½½Ð€µ	…Í•I•˜€‘¥µ…•…ÁÑ¥½¹!•…€µ!•…‘I•˜€‘¥µ…•I•½Ù•Éå]¥Ñ¡AÉ½Í•!•…€µI•ÅÕ¥É••ÍÉ¥ÁÑ¥½¸€µI•ÅÕ¥É••…ÑÕÉ•‘%µ…”€µI•ÅÕ¥É•‘¥Ñ½É¥…±A¡¥±½Í½Á¡åÕ‘¥Ð€Èø˜Äð=ÕÐµMÑÉ¥¹œ4(€€‘¥µ…•I•½Ù•Éå]¥Ñ¡AÉ½Í•á¥Ð€ô€‘1MQa%Q=4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•I•½Ù•Éå]¥Ñ¡AÉ½Í•á¥Ð€µ¹”€À¤€‰áÁ•Ñ•5•‘¥Õ´¥µ…”É•½Ù•ÉäÁ±ÕÌÁÉ½Í”¡…¹•ÌÑ¼É•µ…¥¸Õ¹‘•È±•…ä±•…¹ÕÀ…Ñ•Ì¸ˆ4(€ÍÍ•ÉÐµQÉÕ”€ ‘¥µ…•I•½Ù•Éå]¥Ñ¡AÉ½Í•=ÕÑÁÕÐ¹½¹Ñ…¥¹Ì ‰1•…ä¥µÁ½ÉÐÁÉ•™±¥¡ÐÍÕµµ…Éäˆ¤¤€‰áÁ•Ñ•ÁÉ½Í”µ¡…¹¥¹œÉ•½Ù•Éä½ÕÑÁÕÐÑ¼ÉÕ¸Ñ¡”±•…äÍ…¸¸ˆ4)ô4)™¥¹…±±äì4(€¥˜€¡Q•ÍÐµA…Ñ €‘Ñ•µÁI½½Ð¤ì4(€€€I•µ½Ù”µ%Ñ•´€µA…Ñ €‘Ñ•µÁI½½Ð€µI•ÕÉÍ”€µ½É”€µÉÉ½ÉÑ¥½¸M¥±•¹Ñ±å½¹Ñ¥¹Õ”4(€ô4)ô4(4)]É¥Ñ”µ!½ÍÐ€‰ÍÍ…äÕ…É‘É…¥°Ñ•ÍÑÌÁ…ÍÍ•¸ˆ4(‘±½‰…°é1MQa%Q=€ô€À4)•á¥Ð€À4(

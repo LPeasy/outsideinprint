@@ -1,4 +1,4 @@
-current: orchard-grip
+current: the-tiller
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -531,5 +531,14 @@ cartoons:
     image: "/images/editorial/orchard-grip.png"
     essay: "/essays/the-harvest/"
     alt: "Editorial cartoon showing an anonymous gardener clutching a green pear on a bending orchard branch while a helper holds a watering can beside dry roots and other workers tend trees beneath a rain cloud."
+    width: 1672
+    height: 941
+  - slug: the-tiller
+    title: "The Tiller"
+    date: "2026-07-13"
+    publishDate: "2026-07-13T13:45:00-04:00"
+    image: "/images/editorial/the-tiller.png"
+    essay: "/essays/your-part/"
+    alt: "Editorial cartoon showing an anonymous ferry captain gripping a tiller while a passenger reaches toward a distant dock sign marked ARRIVAL and a red rope runs along the rail."
     width: 1672
     height: 941

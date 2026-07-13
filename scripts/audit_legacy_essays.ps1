@@ -352,7 +352,7 @@ function Remove-AllowedInlineFigures {
   param([string]$Text)
   if ([string]::IsNullOrEmpty($Text)) { return $Text }
 
-  $pattern = '(?is)<figure\s+class="franklin-pullquote"\s+aria-label="Section maxim">\s*<blockquote>.*?</blockquote>\s*<figcaption>- Bobby V\.</figcaption>\s*</figure>'
+  $pattern = '(?is)<figure\s+class="franklin-pullquote"\s+aria-label="Section maxim">\s*<blockquote>.*?</blockquote>\s*<figcaption>- (?:Bobby|Robby) V\.</figcaption>\s*</figure>'
   return [regex]::Replace($Text, $pattern, '')
 }
 
@@ -452,674 +452,4 @@ function Get-FakeListCount {
 
     $previousContentLine = Get-PreviousNonBlankLine -Lines $lines -Index $i
     $nextContentLine = Get-NextNonBlankLine -Lines $lines -Index $i
-    if (
-      (Test-MarkdownListItemLine -Line $previousContentLine) -or
-      (Test-MarkdownListItemLine -Line $nextContentLine) -or
-      $previousContentLine.Trim().EndsWith(':')
-    ) {
-      continue
-    }
-
-    $count++
-  }
-
-  return $count
-}
-
-function Get-TitleSubtitleAiTellStructureCount {
-  param($Page)
-
-  $count = 0
-  foreach ($value in @($Page.Title, $Page.Subtitle)) {
-    if ([string]::IsNullOrWhiteSpace($value)) { continue }
-    $normalized = [regex]::Replace([string]$value, '\s+', ' ').Trim()
-    if (
-      [regex]::IsMatch(
-        $normalized,
-        '\bnot\s+(?:just|only|merely)\b[^.!?;:]{0,240}[.!?;:]\s*(?:it|they|this|that|these|those|he|she|we)\b\s+[a-z]',
-        [System.Text.RegularExpressions.RegexOptions]::IgnoreCase
-      )
-    ) {
-      $count++
-    }
-  }
-
-  return $count
-}
-
-function Get-PseudoHeadingCount {
-  param([string]$Body)
-  $count = 0
-  $lines = $Body -split "`r?`n"
-  for ($i = 0; $i -lt $lines.Count; $i++) {
-    $line = $lines[$i].Trim()
-    if (-not $line) { continue }
-    if ($line -match '^(#|>|-|\*|\d+\.|!\[|<|\[Embedded media)') { continue }
-    if ($line -match 'https?://') { continue }
-    if ($line.Length -lt 4 -or $line.Length -gt 90) { continue }
-    if ($line -match '[\.!?]$') { continue }
-    if ($line -match '^[A-Z0-9][A-Za-z0-9''":,()&/\-~ ]+$') {
-      $prevBlank = ($i -eq 0) -or (-not $lines[$i - 1].Trim())
-      $nextBlank = ($i -eq ($lines.Count - 1)) -or (-not $lines[$i + 1].Trim())
-      if (-not ($prevBlank -and $nextBlank)) { continue }
-
-      $previousContentLine = Get-PreviousNonBlankLine -Lines $lines -Index $i
-      $nextContentLine = Get-NextNonBlankLine -Lines $lines -Index $i
-      if (Test-PlainImageCaptionAfterMarkdownImage -Line $line -PreviousContentLine $previousContentLine) { continue }
-
-      if ($line -match '^(?i:Introduction|Conclusion|Works Cited|References|Bibliography|Read More)\s*:?\s*$') {
-        $count++
-        continue
-      }
-
-      if (Test-ColonLeadInLine -Line $line -NextContentLine $nextContentLine) { continue }
-
-      $count++
-    }
-  }
-  return $count
-}
-
-function Get-TopBodyWindow {
-  param([string]$Body,[int]$LineCount = 60)
-  return (($Body -split "`r?`n") | Select-Object -First $LineCount) -join "`n"
-}
-
-function Get-DuplicateTitleSearchWindow {
-  param([string]$Body,[int]$LineCount = 60)
-
-  $window = Get-TopBodyWindow -Body $Body -LineCount $LineCount
-  $window = [regex]::Replace($window, '!\[[^\]]*\]\([^)]+\)', ' ')
-  $window = [regex]::Replace($window, '\[([^\]]+)\]\([^)]+\)', '$1')
-  $window = [regex]::Replace($window, '<[^>]+>', ' ')
-  $window = [regex]::Replace($window, 'https?://\S+', ' ')
-  return $window
-}
-
-function Normalize-DuplicateTitleLine {
-  param([string]$Value)
-
-  if ([string]::IsNullOrWhiteSpace($Value)) {
-    return ''
-  }
-
-  $text = $Value.Trim()
-  $text = [regex]::Replace($text, '^#{1,6}\s+', '')
-  $text = [regex]::Replace($text, '!\[[^\]]*\]\([^)]+\)', ' ')
-  $text = Remove-MarkdownLinks $text
-  $text = [regex]::Replace($text, '<[^>]+>', ' ')
-  $text = [regex]::Replace($text, 'https?://\S+', ' ')
-  $text = Strip-WrappingEmphasis $text
-  $text = $text.Trim()
-  $text = [regex]::Replace($text, '^[\"''â€œâ€â€˜â€™]+|[\"''â€œâ€â€˜â€™]+$', '')
-  $text = ($text -replace '\s+', ' ').Trim()
-  return $text
-}
-
-function Test-DuplicateTitleLeadResidue {
-  param(
-    [string]$Body,
-    [string]$Needle,
-    [int]$LineCount = 60
-  )
-
-  $target = Normalize-DuplicateTitleLine $Needle
-  if ([string]::IsNullOrWhiteSpace($target)) {
-    return $false
-  }
-
-  $lines = (Get-TopBodyWindow -Body $Body -LineCount $LineCount) -split "`r?`n"
-  foreach ($line in $lines) {
-    $candidate = Normalize-DuplicateTitleLine $line
-    if (-not $candidate) {
-      continue
-    }
-
-    if ($candidate -eq $target) {
-      return $true
-    }
-  }
-
-  return $false
-}
-
-function Get-FirstHeadingLineNumber {
-  param([string[]]$Lines)
-
-  for ($index = 0; $index -lt $Lines.Length; $index++) {
-    $line = $Lines[$index].Trim()
-    if ($line -match '^(#{2,6})\s+' -or $line -match '^(?i)<h[2-6]\b') {
-      return ($index + 1)
-    }
-  }
-
-  return $null
-}
-
-function Get-FirstImageOccurrence {
-  param([string[]]$Lines)
-
-  for ($index = 0; $index -lt $Lines.Length; $index++) {
-    $line = $Lines[$index]
-    $trimmed = $line.Trim()
-
-    $markdownMatch = [regex]::Match($trimmed, '^!\[(?<alt>[^\]]*)\]\((?<src>[^)\s]+)(?:\s+"(?<title>[^"]*)")?\)\s*$')
-    if ($markdownMatch.Success) {
-      return [pscustomobject]@{
-        LineNumber = $index + 1
-        Source = $markdownMatch.Groups['src'].Value
-      }
-    }
-
-    $htmlMatch = [regex]::Match($line, '(?is)<img[^>]+src=(?:"(?<src1>[^"]+)"|''(?<src2>[^'']+)'')')
-    if ($htmlMatch.Success) {
-      $source = if ($htmlMatch.Groups['src1'].Success) { $htmlMatch.Groups['src1'].Value } else { $htmlMatch.Groups['src2'].Value }
-      return [pscustomobject]@{
-        LineNumber = $index + 1
-        Source = $source
-      }
-    }
-  }
-
-  return $null
-}
-
-function Get-EssayHeroIssueData {
-  param($Page)
-
-  $defaultPlaceholder = '/images/social/outside-in-print-default.png'
-  $bodyLines = ($Page.Body -replace "`r`n", "`n") -split "`n"
-  $firstImage = Get-FirstImageOccurrence -Lines $bodyLines
-  $firstHeadingLine = Get-FirstHeadingLineNumber -Lines $bodyLines
-  $leadWithinHeuristic = $false
-  if ($null -ne $firstImage) {
-    $leadWithinHeuristic = ($firstImage.LineNumber -le 20) -and ((-not $firstHeadingLine) -or ($firstImage.LineNumber -lt $firstHeadingLine))
-  }
-
-  $realLeadCandidate = ($null -ne $firstImage) -and ($firstImage.Source -ne $defaultPlaceholder)
-  $hasNonPlaceholderHero = (-not [string]::IsNullOrWhiteSpace($Page.FeaturedImage)) -and ($Page.FeaturedImage -ne $defaultPlaceholder)
-  $isEssay = (Get-LongFormKind $Page) -eq 'essay'
-
-  return [pscustomobject]@{
-    lead_image_source = if ($null -ne $firstImage) { $firstImage.Source } else { '' }
-    lead_image_line = if ($null -ne $firstImage) { $firstImage.LineNumber } else { $null }
-    first_heading_line = $firstHeadingLine
-    lead_within_heuristic = [bool]$leadWithinHeuristic
-    hero_placeholder_conflict = [int]($isEssay -and ($Page.FeaturedImage -eq $defaultPlaceholder) -and $realLeadCandidate -and $leadWithinHeuristic)
-    hero_missing_with_lead = [int]($isEssay -and [string]::IsNullOrWhiteSpace($Page.FeaturedImage) -and $realLeadCandidate -and $leadWithinHeuristic)
-    hero_duplicate_lead = [int]($isEssay -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -eq $Page.FeaturedImage))
-    hero_current_wins_conflict = [int]($isEssay -and $hasNonPlaceholderHero -and $leadWithinHeuristic -and ($firstImage.Source -ne $Page.FeaturedImage))
-  }
-}
-
-function Strip-WrappingEmphasis {
-  param([string]$Value)
-  $text = $Value.Trim()
-  while (
-    $text.Length -ge 2 -and (
-      ($text.StartsWith('*') -and $text.EndsWith('*')) -or
-      ($text.StartsWith('_') -and $text.EndsWith('_'))
-    )
-  ) {
-    $candidate = $text.Substring(1, $text.Length - 2).Trim()
-    if (-not $candidate -or $candidate -eq $text) { break }
-    $text = $candidate
-  }
-  return $text
-}
-
-function Remove-MarkdownLinks {
-  param([string]$Value)
-  return [regex]::Replace($Value, '\[([^\]]+)\]\([^)]+\)', '$1')
-}
-
-function Get-CaptionResidueCount {
-  param([string]$Body)
-  $count = 0
-  $lines = $Body -split "`r?`n"
-  for ($i = 0; $i -lt $lines.Count; $i++) {
-    $line = $lines[$i].Trim()
-    if ($line -notmatch '^!\[[^\]]*\]\(\S+(?:\s+"[^"]*")?\)\s*$') { continue }
-    if ($line -match '\s+"[^"]*"\)\s*$') { continue }
-
-    $j = $i + 1
-    while ($j -lt $lines.Count -and -not $lines[$j].Trim()) { $j++ }
-    if ($j -ge $lines.Count) { continue }
-
-    $candidate = $lines[$j].Trim()
-    if (
-      $candidate -match '^>' -or
-      $candidate -match '^(?i)source:' -or
-      $candidate -match '^(?i)photo by .+ on unsplash$'
-    ) {
-      continue
-    }
-
-    $unwrapped = Strip-WrappingEmphasis $candidate
-    $plain = Remove-MarkdownLinks $unwrapped
-    $plain = ($plain -replace '\s+', ' ').Trim()
-    if (
-      ($candidate -ne $unwrapped) -and (
-        $plain -match '^(?i)photo by\b' -or
-        $plain -match '^(?i)(source:|courtesy of |image courtesy of |image source:)' -or
-        $plain.Contains('|')
-      )
-    ) {
-      $count++
-      continue
-    }
-
-    if ($candidate -match '^(?i)photo by .+\[(?:unsplash|pexels)\]') {
-      $count++
-    }
-  }
-  return $count
-}
-
-function Build-IssueSummary {
-  param($Counts)
-  $types = New-Object System.Collections.Generic.List[string]
-  foreach ($prop in $Counts.PSObject.Properties) {
-    if ([int]$prop.Value -gt 0) { $types.Add($prop.Name) }
-  }
-  return $types.ToArray()
-}
-
-$rootContent = Join-Path $Root 'content'
-$collectionsPath = Join-Path $Root 'data\collections.yaml'
-$startHerePath = Join-Path $Root 'content\start-here\index.md'
-$collections = Parse-CollectionRegistry $collectionsPath
-$startHereEssaySlugs = Get-StartHereEssaySlugs $startHerePath
-$scopedPaths = Resolve-ScopedPaths -RepoRoot $Root -InputPaths $Paths
-$pages = New-Object System.Collections.Generic.List[object]
-
-foreach ($section in $Sections) {
-  $sectionRoot = Join-Path $rootContent $section
-  if (-not (Test-Path $sectionRoot -PathType Container)) { continue }
-  Get-ChildItem -Path $sectionRoot -File -Filter '*.md' -Recurse |
-    Where-Object { $_.Name -ne '_index.md' } |
-    ForEach-Object {
-      if (Test-MatchesScopedPaths -Path $_.FullName -ScopedPaths $scopedPaths) {
-        $pages.Add((Parse-PageFrontMatter -Path $_.FullName -ContentRoot $rootContent))
-      }
-    }
-}
-
-$ctaPatterns = @(
-  '\bclap this piece\b',
-  '\bclap if\b',
-  '\bgive (?:it|this) a (?:few )?clap',
-  '\bfollow (?:me|us|the balance sheet)\b',
-  '\bfollow .* on medium\b',
-  '\bsubscribe to\b',
-  '\bsubscribe for more\b',
-  '\bsubscribe now\b',
-  '\bcomment your thoughts\b',
-  '\bcomments below\b',
-  '\boriginally appeared on\b',
-  '\boriginally published in\b',
-  '\bpublished in\b(?=[^\r\n]{0,80}\bon medium\b)',
-  '\bmember-only\b',
-  '\bi read every comment\b',
-  '\bshare this (?:story|piece)\b'
-)
-
-$mojibakePatterns = @(
-  '\u00E2\u20AC[\u2122\u0153\u009D]',
-  '\u00E2\u20AC(?:\u201D|\u201C|\u2019|\u2014|\u2013)',
-  '\u00E2\u20A6',
-  '\u00E2\u20A0',
-  '\u00E2\u20B0',
-  '\u00E2\u2020\u2019',
-  '\u00E2\u2030\u02C6',
-  '\u00E2\u02C6\u2019',
-  '\u00C2[\u00A0-\u00FF]',
-  '\u00C3[\u0080-\u00BF]',
-  '\u00F0[\u009F-\u00BF]'
-)
-
-$rows = New-Object System.Collections.Generic.List[object]
-foreach ($page in $pages) {
-  $body = $page.Body
-  $topWindow = Get-TopBodyWindow $body
-  $duplicateTitleWindow = Get-DuplicateTitleSearchWindow -Body $body
-  $matchedCollections = New-Object System.Collections.Generic.List[object]
-  foreach ($collection in $collections) {
-    $matchesExplicit = $page.Collections -contains $collection.Slug
-    if ($matchesExplicit -or (Test-FallbackMatch -Page $page -Collection $collection)) {
-      $matchedCollections.Add($collection)
-    }
-  }
-  $heroIssueData = Get-EssayHeroIssueData -Page $page
-
-  $issueCounts = [ordered]@{
-    medium_cta = Count-Matches -Text $body -Patterns $ctaPatterns
-    medium_cdn_media = Count-Matches -Text $body -Patterns @('cdn-images-1\.medium\.com')
-    author_note = Count-Matches -Text $body -Patterns @('(?im)^\s{0,3}(?:#+\s*)?(?:author''?s note|note from the author)\b')
-    embed_remnants = Count-Matches -Text (Remove-AllowedInlineFigures $body) -Patterns @('mixtapeEmbed','js-mixtapeImage','markup--anchor','class="section section','class="section-divider"','class="section-inner"','<iframe\b','raw HTML omitted','(?im)^\s*\[Embedded media:','<figure\b','<img\b')
-    mojibake = Count-Matches -Text $body -Patterns $mojibakePatterns
-    caption_residue = Get-CaptionResidueCount -Body $body
-    manual_bullets = Count-Matches -Text $body -Patterns @('(?m)^\s*(?:\u2022|\u00E2\u20AC\u00A2)\s+')
-    fake_lists = Get-FakeListCount -Body $body
-    pseudo_headings = Get-PseudoHeadingCount -Body $body
-    source_dumps = Count-Matches -Text $body -Patterns @('(?im)^\s*(?:>\s*)?Source:\s*','(?im)^\s*(?:>\s*)?https?://\S+\s*$')
-    duplicated_title = 0
-    ai_tell_title_subtitle_structure = Get-TitleSubtitleAiTellStructureCount -Page $page
-    ornamental_breaks = Count-Matches -Text $body -Patterns @('(?m)^-{20,}\s*$','(?m)^\*\s*\*\s*\*\s*$','(?m)^\\\s*$')
-    escaped_linebreaks = Count-Matches -Text $body -Patterns @('(?m)[^\\]\\$')
-    hero_placeholder_conflict = $heroIssueData.hero_placeholder_conflict
-    hero_missing_with_lead = $heroIssueData.hero_missing_with_lead
-    hero_duplicate_lead = $heroIssueData.hero_duplicate_lead
-    hero_current_wins_conflict = $heroIssueData.hero_current_wins_conflict
-  }
-
-  if ($page.MediumSourceUrl) {
-    if (Test-DuplicateTitleLeadResidue -Body $body -Needle $page.Title) { $issueCounts.duplicated_title++ }
-    if ($page.Subtitle -and (Test-DuplicateTitleLeadResidue -Body $body -Needle $page.Subtitle)) { $issueCounts.duplicated_title++ }
-  }
-
-  $issueTypes = Build-IssueSummary ([pscustomobject]$issueCounts)
-  $hasIssues = $issueTypes.Count -gt 0
-
-  $priorityReasons = New-Object System.Collections.Generic.List[string]
-  $priorityScore = 0
-  if ($page.Featured) {
-    $priorityScore += 40
-    $priorityReasons.Add('homepage_selected')
-  }
-  if ($startHereEssaySlugs -contains $page.Slug) {
-    $priorityScore += 45
-    $priorityReasons.Add('start_here_direct')
-  }
-
-  $collectionStartHere = @($matchedCollections | Where-Object { $_.StartHere -eq $page.Slug })
-  $featuredCollectionMatches = @($matchedCollections | Where-Object { $_.Featured })
-  $featuredCollectionStartHere = @($collectionStartHere | Where-Object { $_.Featured })
-
-  if ($featuredCollectionStartHere.Count -gt 0) {
-    $priorityScore += 35
-    $priorityReasons.Add('featured_collection_start_here')
-  } elseif ($collectionStartHere.Count -gt 0) {
-    $priorityScore += 25
-    $priorityReasons.Add('collection_start_here')
-  }
-
-  if ($featuredCollectionMatches.Count -gt 0) {
-    $priorityScore += 18
-    $priorityReasons.Add('featured_collection_member')
-  } elseif ($matchedCollections.Count -gt 0) {
-    $priorityScore += 8
-    $priorityReasons.Add('collection_member')
-  }
-
-  if ($page.MediumSourceUrl -and $page.Date -match '^(2025|2026)') {
-    $priorityScore += 5
-    $priorityReasons.Add('newer_imported_piece')
-  }
-
-  $severityScore =
-    (4 * [Math]::Min(1, $issueCounts.medium_cta)) +
-    (4 * [Math]::Min(1, $issueCounts.medium_cdn_media)) +
-    (3 * [Math]::Min(1, $issueCounts.author_note)) +
-    (4 * [Math]::Min(1, $issueCounts.embed_remnants)) +
-    (5 * [Math]::Min(1, $issueCounts.mojibake)) +
-    (3 * [Math]::Min(1, $issueCounts.caption_residue)) +
-    (3 * [Math]::Min(1, ($issueCounts.manual_bullets + $issueCounts.fake_lists))) +
-    (3 * [Math]::Min(1, $issueCounts.pseudo_headings)) +
-    (2 * [Math]::Min(1, $issueCounts.source_dumps)) +
-    (3 * [Math]::Min(1, $issueCounts.duplicated_title)) +
-    (5 * [Math]::Min(1, $issueCounts.ai_tell_title_subtitle_structure)) +
-    (2 * [Math]::Min(1, ($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks))) +
-    (4 * [Math]::Min(1, ($issueCounts.hero_placeholder_conflict + $issueCounts.hero_missing_with_lead))) +
-    (2 * [Math]::Min(1, ($issueCounts.hero_duplicate_lead + $issueCounts.hero_current_wins_conflict)))
-
-  $cleanupScore = $priorityScore + $severityScore
-  $batch = if (-not $hasIssues) {
-    'clean'
-  } elseif ($priorityScore -ge 70 -or ($priorityScore -ge 55 -and $severityScore -ge 12)) {
-    'batch_1'
-  } elseif ($priorityScore -ge 35 -or $severityScore -ge 12) {
-    'batch_2'
-  } else {
-    'batch_3'
-  }
-
-  $safeAutoIssues = @('duplicated_title','embed_remnants','mojibake','caption_residue','ornamental_breaks','medium_cdn_media','hero_placeholder_conflict','hero_missing_with_lead','hero_duplicate_lead')
-  $assistedReviewIssues = @('medium_cta','escaped_linebreaks','hero_current_wins_conflict') + $safeAutoIssues
-  $manualLightIssues = @('author_note','manual_bullets','fake_lists','pseudo_headings','source_dumps') + $assistedReviewIssues
-  $highSensitivity = $page.Featured -or
-    ($startHereEssaySlugs -contains $page.Slug) -or
-    ($featuredCollectionStartHere.Count -gt 0) -or
-    ($collectionStartHere.Count -gt 0)
-  $highStructuralAmbiguity =
-    ($severityScore -ge 12) -or
-    (
-      @($issueTypes | Where-Object { $_ -in @('pseudo_headings','fake_lists','source_dumps') }).Count -ge 2 -and
-      $issueTypes.Count -ge 3
-    )
-  $riskTier = $null
-  if ($hasIssues) {
-    if (@($issueTypes | Where-Object { $_ -notin $safeAutoIssues }).Count -eq 0) {
-      $riskTier = 'SAFE_AUTO'
-    } elseif (@($issueTypes | Where-Object { $_ -notin $assistedReviewIssues }).Count -eq 0) {
-      $riskTier = 'ASSISTED_REVIEW'
-    } elseif (
-      @($issueTypes | Where-Object { $_ -notin $manualLightIssues }).Count -eq 0 -and
-      -not $highSensitivity -and
-      -not $highStructuralAmbiguity
-    ) {
-      $riskTier = 'MANUAL_LIGHT'
-    } else {
-      $riskTier = 'MANUAL_FIRST'
-    }
-  }
-
-  $status = switch ($riskTier) {
-    'SAFE_AUTO' { 'READY_SAFE_AUTO' }
-    'ASSISTED_REVIEW' { 'READY_ASSISTED_REVIEW' }
-    'MANUAL_LIGHT' { 'READY_MANUAL_LIGHT' }
-    'MANUAL_FIRST' { 'READY_MANUAL_FIRST' }
-    default { 'CLEAN' }
-  }
-  $manualReview = $hasIssues -and ($riskTier -ne 'SAFE_AUTO')
-
-  $rows.Add([pscustomobject]@{
-    path = $page.RelativePath
-    title = $page.Title
-    slug = $page.Slug
-    section = Get-ReportedSection $page
-    date = $page.Date
-    draft = [bool]$page.Draft
-    imported = [bool]($page.MediumSourceUrl -or $page.SourceUrl)
-    has_description = [bool](-not [string]::IsNullOrWhiteSpace($page.Description))
-    featured = [bool]$page.Featured
-    start_here_direct = [bool]($startHereEssaySlugs -contains $page.Slug)
-    collection_start_here = [bool]($collectionStartHere.Count -gt 0)
-    featured_collection_member = [bool]($featuredCollectionMatches.Count -gt 0)
-    collections = @($matchedCollections | ForEach-Object { $_.Slug })
-    has_medium_cta = [bool]($issueCounts.medium_cta -gt 0)
-    has_medium_cdn_media = [bool]($issueCounts.medium_cdn_media -gt 0)
-    has_author_note = [bool]($issueCounts.author_note -gt 0)
-    has_embed_remnants = [bool]($issueCounts.embed_remnants -gt 0)
-    has_encoding_damage = [bool]($issueCounts.mojibake -gt 0)
-    has_caption_residue = [bool]($issueCounts.caption_residue -gt 0)
-    has_manual_bullets = [bool](($issueCounts.manual_bullets + $issueCounts.fake_lists) -gt 0)
-    has_pseudo_headings = [bool]($issueCounts.pseudo_headings -gt 0)
-    has_source_dump = [bool]($issueCounts.source_dumps -gt 0)
-    has_duplicated_title = [bool]($issueCounts.duplicated_title -gt 0)
-    has_ai_tell_title_subtitle_structure = [bool]($issueCounts.ai_tell_title_subtitle_structure -gt 0)
-    has_separator_residue = [bool](($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks) -gt 0)
-    has_hero_placeholder_conflict = [bool]($issueCounts.hero_placeholder_conflict -gt 0)
-    has_hero_missing_with_lead = [bool]($issueCounts.hero_missing_with_lead -gt 0)
-    has_hero_duplicate_lead = [bool]($issueCounts.hero_duplicate_lead -gt 0)
-    has_hero_current_wins_conflict = [bool]($issueCounts.hero_current_wins_conflict -gt 0)
-    medium_cta_count = $issueCounts.medium_cta
-    medium_cdn_media_count = $issueCounts.medium_cdn_media
-    author_note_count = $issueCounts.author_note
-    embed_remnant_count = $issueCounts.embed_remnants
-    encoding_damage_count = $issueCounts.mojibake
-    caption_residue_count = $issueCounts.caption_residue
-    manual_bullet_count = ($issueCounts.manual_bullets + $issueCounts.fake_lists)
-    pseudo_heading_count = $issueCounts.pseudo_headings
-    source_dump_count = $issueCounts.source_dumps
-    duplicated_title_count = $issueCounts.duplicated_title
-    ai_tell_title_subtitle_structure_count = $issueCounts.ai_tell_title_subtitle_structure
-    separator_residue_count = ($issueCounts.ornamental_breaks + $issueCounts.escaped_linebreaks)
-    hero_placeholder_conflict_count = $issueCounts.hero_placeholder_conflict
-    hero_missing_with_lead_count = $issueCounts.hero_missing_with_lead
-    hero_duplicate_lead_count = $issueCounts.hero_duplicate_lead
-    hero_current_wins_conflict_count = $issueCounts.hero_current_wins_conflict
-    lead_image_source = $heroIssueData.lead_image_source
-    lead_image_line = $heroIssueData.lead_image_line
-    first_heading_line = $heroIssueData.first_heading_line
-    lead_within_heuristic = [bool]$heroIssueData.lead_within_heuristic
-    issue_types = $issueTypes
-    issue_type_count = $issueTypes.Count
-    severity_score = $severityScore
-    priority_score = $priorityScore
-    cleanup_score = $cleanupScore
-    batch = $batch
-    risk_tier = $riskTier
-    status = $status
-    priority_reasons = $priorityReasons.ToArray()
-    manual_review = [bool]$manualReview
-  })
-}
-
-$rowsArray = $rows.ToArray()
-$affected = @($rowsArray | Where-Object { $_.issue_type_count -gt 0 })
-$issueSummary = @{}
-foreach ($row in $affected) {
-  foreach ($type in $row.issue_types) {
-    if (-not $issueSummary.ContainsKey($type)) { $issueSummary[$type] = 0 }
-    $issueSummary[$type]++
-  }
-}
-$issueSummaryRows = foreach ($key in ($issueSummary.Keys | Sort-Object)) {
-  [pscustomobject]@{ issue_type = $key; affected_files = $issueSummary[$key] }
-}
-$riskTierSummaryRows = foreach ($tier in @('SAFE_AUTO','ASSISTED_REVIEW','MANUAL_LIGHT','MANUAL_FIRST')) {
-  [pscustomobject]@{
-    risk_tier = $tier
-    file_count = @($affected | Where-Object { $_.risk_tier -eq $tier }).Count
-  }
-}
-$statusSummaryRows = foreach ($statusName in @('CLEAN','READY_SAFE_AUTO','READY_ASSISTED_REVIEW','READY_MANUAL_LIGHT','READY_MANUAL_FIRST')) {
-  [pscustomobject]@{
-    status = $statusName
-    file_count = @($rowsArray | Where-Object { $_.status -eq $statusName }).Count
-  }
-}
-
-$report = [pscustomobject]@{
-  generated_at = (Get-Date).ToString('o')
-  scanned_sections = $Sections
-  totals = [pscustomobject]@{
-    scanned_files = $rowsArray.Count
-    affected_files = $affected.Count
-    imported_files = @($rowsArray | Where-Object { $_.imported }).Count
-    batch_1 = @($affected | Where-Object { $_.batch -eq 'batch_1' }).Count
-    batch_2 = @($affected | Where-Object { $_.batch -eq 'batch_2' }).Count
-    batch_3 = @($affected | Where-Object { $_.batch -eq 'batch_3' }).Count
-  }
-  front_matter = [pscustomobject]@{
-    missing_description = @($rowsArray | Where-Object { -not $_.has_description }).Count
-  }
-  issue_categories = $issueSummaryRows
-  risk_tiers = $riskTierSummaryRows
-  status_counts = $statusSummaryRows
-  priority_logic = @(
-    'homepage_selected = featured: true',
-    'start_here_direct = linked from content/start-here/index.md',
-    'featured_collection_start_here = start_here slug of a featured collection',
-    'collection_start_here = start_here slug of any collection',
-    'featured_collection_member = member of a featured collection',
-    'collection_member = explicit or fallback collection match',
-    'newer_imported_piece = imported essay dated 2025 or 2026'
-  )
-  files = $rowsArray
-}
-
-$jsonPath = "$ReportBasePath.json"
-$csvPath = "$ReportBasePath.csv"
-$mdPath = "$ReportBasePath.md"
-Write-TextNoBom $jsonPath ($report | ConvertTo-Json -Depth 8)
-$rowsArray |
-  Select-Object path,title,section,date,draft,imported,has_description,featured,start_here_direct,collection_start_here,featured_collection_member,priority_score,severity_score,cleanup_score,batch,risk_tier,status,manual_review,has_medium_cta,has_medium_cdn_media,has_author_note,has_embed_remnants,has_encoding_damage,has_caption_residue,has_manual_bullets,has_pseudo_headings,has_source_dump,has_duplicated_title,has_ai_tell_title_subtitle_structure,has_separator_residue,has_hero_placeholder_conflict,has_hero_missing_with_lead,has_hero_duplicate_lead,has_hero_current_wins_conflict |
-  Export-Csv -Path $csvPath -NoTypeInformation -Encoding utf8
-
-$issueSort = @(
-  @{ Expression = 'affected_files'; Descending = $true },
-  @{ Expression = 'issue_type'; Descending = $false }
-)
-$fileSort = @(
-  @{ Expression = 'cleanup_score'; Descending = $true },
-  @{ Expression = 'priority_score'; Descending = $true },
-  @{ Expression = 'title'; Descending = $false }
-)
-$manualSort = @(
-  @{ Expression = 'cleanup_score'; Descending = $true },
-  @{ Expression = 'title'; Descending = $false }
-)
-
-$lines = New-Object System.Collections.Generic.List[string]
-$lines.Add('# Legacy Essay Audit')
-$lines.Add('')
-$lines.Add("- Generated: $((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))")
-$lines.Add("- Scanned files: $($report.totals.scanned_files)")
-$lines.Add("- Affected files: $($report.totals.affected_files)")
-$lines.Add('')
-$lines.Add('## Issue Categories')
-$lines.Add('')
-foreach ($item in ($issueSummaryRows | Sort-Object -Property $issueSort)) {
-  $lines.Add("- $($item.issue_type): $($item.affected_files)")
-}
-$lines.Add('')
-$lines.Add('## Front Matter Gaps')
-$lines.Add('')
-$lines.Add("- missing_description: $($report.front_matter.missing_description)")
-$lines.Add('')
-$lines.Add('## Risk Tiers')
-$lines.Add('')
-foreach ($item in $riskTierSummaryRows) {
-  $lines.Add("- $($item.risk_tier): $($item.file_count)")
-}
-$lines.Add('')
-$lines.Add('## Status Counts')
-$lines.Add('')
-foreach ($item in $statusSummaryRows) {
-  $lines.Add("- $($item.status): $($item.file_count)")
-}
-foreach ($batchName in @('batch_1','batch_2','batch_3')) {
-  $pretty = $batchName.Replace('_',' ').ToUpperInvariant()
-  $batchRows = @($affected | Where-Object { $_.batch -eq $batchName } | Sort-Object -Property $fileSort)
-  $lines.Add('')
-  $lines.Add("## $pretty")
-  $lines.Add('')
-  if ($batchRows.Count -eq 0) {
-    $lines.Add('- No files in this batch.')
-    continue
-  }
-  foreach ($row in $batchRows) {
-    $reasons = if ($row.priority_reasons.Count -gt 0) { ($row.priority_reasons -join ', ') } else { 'issue-driven' }
-    $issues = $row.issue_types -join ', '
-    $lines.Add("- ``$($row.path)`` :: priority $($row.priority_score), severity $($row.severity_score) :: $reasons :: $issues")
-  }
-}
-$lines.Add('')
-$lines.Add('## Manual Review Candidates')
-$lines.Add('')
-$manualRows = @($affected | Where-Object { $_.manual_review } | Sort-Object -Property $manualSort)
-if ($manualRows.Count -eq 0) {
-  $lines.Add('- None flagged.')
-} else {
-  foreach ($row in $manualRows) {
-    $lines.Add("- ``$($row.path)`` :: $($row.risk_tier) :: $($row.issue_types -join ', ')")
-  }
-}
-Write-TextNoBom $mdPath (($lines -join "`r`n") + "`r`n")
-
-Write-Host 'Legacy essay audit complete' -ForegroundColor Cyan
-Write-Host "JSON report: $jsonPath"
-Write-Host "CSV report: $csvPath"
-Write-Host "Markdown report: $mdPath"
+  ãNz¶‰ËkºwµçQ½}¡•…‘¥¹Ì€ô•ĞµAÍ•Õ‘½!•…‘¥¹½Õ¹Ğ€µ	½‘ä€‘‰½‘ä4(€€€Í½ÕÉ•}‘ÕµÁÌ€ô½Õ¹Ğµ5…Ñ¡•Ì€µQ•áĞ€‘‰½‘ä€µA…ÑÑ•É¹Ì  œ ı¥´¥yqÌ¨ üèùqÌ¨¤ıM½ÕÉ”éqÌ¨œ°œ ı¥´¥yqÌ¨ üèùqÌ¨¤ı¡ÑÑÁÌüè¼½qL­qÌ¨œ¤4(€€€‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”€ô€À4(€€€…¥}Ñ•±±}Ñ¥Ñ±•}ÍÕ‰Ñ¥Ñ±•}ÍÑÉÕÑÕÉ”€ô•ĞµQ¥Ñ±•MÕ‰Ñ¥Ñ±•¥Q•±±MÑÉÕÑÕÉ•½Õ¹Ğ€µA…”€‘Á…”4(€€€½É¹…µ•¹Ñ…±}‰É•…­Ì€ô½Õ¹Ğµ5…Ñ¡•Ì€µQ•áĞ€‘‰½‘ä€µA…ÑÑ•É¹Ì  œ ı´¥xµìÈÀ±õqÌ¨œ°œ ı´¥yp©qÌ©p©qÌ©p©qÌ¨œ°œ ı´¥yqqqÌ¨œ¤4(€€€•Í…Á•‘}±¥¹•‰É•…­Ì€ô½Õ¹Ğµ5…Ñ¡•Ì€µQ•áĞ€‘‰½‘ä€µA…ÑÑ•É¹Ì  œ ı´¥myqquqpœ¤4(€€€¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğ€ô€‘¡•É½%ÍÍÕ•…Ñ„¹¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğ4(€€€¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…€ô€‘¡•É½%ÍÍÕ•…Ñ„¹¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…4(€€€¡•É½}‘ÕÁ±¥…Ñ•}±•…€ô€‘¡•É½%ÍÍÕ•…Ñ„¹¡•É½}‘ÕÁ±¥…Ñ•}±•…4(€€€¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğ€ô€‘¡•É½%ÍÍÕ•…Ñ„¹¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğ4(€ô4(4(€¥˜€ ‘Á…”¹5•‘¥ÕµM½ÕÉ•UÉ°¤ì4(€€€¥˜€¡Q•ÍĞµÕÁ±¥…Ñ•Q¥Ñ±•1•…‘I•Í¥‘Õ”€µ	½‘ä€‘‰½‘ä€µ9••‘±”€‘Á…”¹Q¥Ñ±”¤ì€‘¥ÍÍÕ•½Õ¹ÑÌ¹‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”¬¬ô4(€€€¥˜€ ‘Á…”¹MÕ‰Ñ¥Ñ±”€µ…¹€¡Q•ÍĞµÕÁ±¥…Ñ•Q¥Ñ±•1•…‘I•Í¥‘Õ”€µ	½‘ä€‘‰½‘ä€µ9••‘±”€‘Á…”¹MÕ‰Ñ¥Ñ±”¤¤ì€‘¥ÍÍÕ•½Õ¹ÑÌ¹‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”¬¬ô4(€ô4(4(€€‘¥ÍÍÕ•QåÁ•Ì€ô	Õ¥±µ%ÍÍÕ•MÕµµ…Éä€¡mÁÍÕÍÑ½µ½‰©•Ñt‘¥ÍÍÕ•½Õ¹ÑÌ¤4(€€‘¡…Í%ÍÍÕ•Ì€ô€‘¥ÍÍÕ•QåÁ•Ì¹½Õ¹Ğ€µĞ€À4(4(€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì€ô9•Üµ=‰©•ĞMåÍÑ•´¹½±±•Ñ¥½¹Ì¹•¹•É¥Œ¹1¥ÍÑmÍÑÉ¥¹t4(€€‘ÁÉ¥½É¥ÑåM½É”€ô€À4(€¥˜€ ‘Á…”¹•…ÑÕÉ•¤ì4(€€€€‘ÁÉ¥½É¥ÑåM½É”€¬ô€ĞÀ4(€€€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹‘ ¡½µ•Á…•}Í•±•Ñ•œ¤4(€ô4(€¥˜€ ‘ÍÑ…ÉÑ!•É•ÍÍ…åM±ÕÌ€µ½¹Ñ…¥¹Ì€‘Á…”¹M±Õœ¤ì4(€€€€‘ÁÉ¥½É¥ÑåM½É”€¬ô€ĞÔ4(€€€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹‘ ÍÑ…ÉÑ}¡•É•}‘¥É•Ğœ¤4(€ô4(4(€€‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”€ô  ‘µ…Ñ¡•‘½±±•Ñ¥½¹Ìğ]¡•É”µ=‰©•Ğì€‘|¹MÑ…ÉÑ!•É”€µ•Ä€‘Á…”¹M±Õœô¤4(€€‘™•…ÑÕÉ•‘½±±•Ñ¥½¹5…Ñ¡•Ì€ô  ‘µ…Ñ¡•‘½±±•Ñ¥½¹Ìğ]¡•É”µ=‰©•Ğì€‘|¹•…ÑÕÉ•ô¤4(€€‘™•…ÑÕÉ•‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”€ô  ‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”ğ]¡•É”µ=‰©•Ğì€‘|¹•…ÑÕÉ•ô¤4(4(€¥˜€ ‘™•…ÑÕÉ•‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”¹½Õ¹Ğ€µĞ€À¤ì4(€€€€‘ÁÉ¥½É¥ÑåM½É”€¬ô€ÌÔ4(€€€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹‘ ™•…ÑÕÉ•‘}½±±•Ñ¥½¹}ÍÑ…ÉÑ}¡•É”œ¤4(€ô•±Í•¥˜€ ‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”¹½Õ¹Ğ€µĞ€À¤ì4(€€€€‘ÁÉ¥½É¥ÑåM½É”€¬ô€ÈÔ4(€€€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹‘ ½±±•Ñ¥½¹}ÍÑ…ÉÑ}¡•É”œ¤4(€ô4(4(€¥˜€ ‘™•…ÑÕÉ•‘½±±•Ñ¥½¹5…Ñ¡•Ì¹½Õ¹Ğ€µĞ€À¤ì4(€€€€‘ÁÉ¥½É¥ÑåM½É”€¬ô€Äà4(€€€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹‘ ™•…ÑÕÉ•‘}½±±•Ñ¥½¹}µ•µ‰•Èœ¤4(€ô•±Í•¥˜€ ‘µ…Ñ¡•‘½±±•Ñ¥½¹Ì¹½Õ¹Ğ€µĞ€À¤ì4(€€€€‘ÁÉ¥½É¥ÑåM½É”€¬ô€à4(€€€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹‘ ½±±•Ñ¥½¹}µ•µ‰•Èœ¤4(€ô4(4(€¥˜€ ‘Á…”¹5•‘¥ÕµM½ÕÉ•UÉ°€µ…¹€‘Á…”¹…Ñ”€µµ…Ñ €x ÈÀÈÕğÈÀÈØ¤œ¤ì4(€€€€‘ÁÉ¥½É¥ÑåM½É”€¬ô€Ô4(€€€€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹‘ ¹•İ•É}¥µÁ½ÉÑ•‘}Á¥•”œ¤4(€ô4(4(€€‘Í•Ù•É¥ÑåM½É”€ô4(€€€€ Ğ€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹µ•‘¥Õµ}Ñ„¤¤€¬4(€€€€ Ğ€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹µ•‘¥Õµ}‘¹}µ•‘¥„¤¤€¬4(€€€€ Ì€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹…ÕÑ¡½É}¹½Ñ”¤¤€¬4(€€€€ Ğ€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹•µ‰•‘}É•µ¹…¹ÑÌ¤¤€¬4(€€€€ Ô€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹µ½©¥‰…­”¤¤€¬4(€€€€ Ì€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹…ÁÑ¥½¹}É•Í¥‘Õ”¤¤€¬4(€€€€ Ì€¨m5…Ñ¡tèé5¥¸ Ä°€ ‘¥ÍÍÕ•½Õ¹ÑÌ¹µ…¹Õ…±}‰Õ±±•ÑÌ€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹™…­•}±¥ÍÑÌ¤¤¤€¬4(€€€€ Ì€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹ÁÍ•Õ‘½}¡•…‘¥¹Ì¤¤€¬4(€€€€ È€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹Í½ÕÉ•}‘ÕµÁÌ¤¤€¬4(€€€€ Ì€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”¤¤€¬4(€€€€ Ô€¨m5…Ñ¡tèé5¥¸ Ä°€‘¥ÍÍÕ•½Õ¹ÑÌ¹…¥}Ñ•±±}Ñ¥Ñ±•}ÍÕ‰Ñ¥Ñ±•}ÍÑÉÕÑÕÉ”¤¤€¬4(€€€€ È€¨m5…Ñ¡tèé5¥¸ Ä°€ ‘¥ÍÍÕ•½Õ¹ÑÌ¹½É¹…µ•¹Ñ…±}‰É•…­Ì€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹•Í…Á•‘}±¥¹•‰É•…­Ì¤¤¤€¬4(€€€€ Ğ€¨m5…Ñ¡tèé5¥¸ Ä°€ ‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğ€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…¤¤¤€¬4(€€€€ È€¨m5…Ñ¡tèé5¥¸ Ä°€ ‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}‘ÕÁ±¥…Ñ•}±•…€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğ¤¤¤4(4(€€‘±•…¹ÕÁM½É”€ô€‘ÁÉ¥½É¥ÑåM½É”€¬€‘Í•Ù•É¥ÑåM½É”4(€€‘‰…Ñ €ô¥˜€ µ¹½Ğ€‘¡…Í%ÍÍÕ•Ì¤ì4(€€€€±•…¸œ4(€ô•±Í•¥˜€ ‘ÁÉ¥½É¥ÑåM½É”€µ”€ÜÀ€µ½È€ ‘ÁÉ¥½É¥ÑåM½É”€µ”€ÔÔ€µ…¹€‘Í•Ù•É¥ÑåM½É”€µ”€ÄÈ¤¤ì4(€€€€‰…Ñ¡|Äœ4(€ô•±Í•¥˜€ ‘ÁÉ¥½É¥ÑåM½É”€µ”€ÌÔ€µ½È€‘Í•Ù•É¥ÑåM½É”€µ”€ÄÈ¤ì4(€€€€‰…Ñ¡|Èœ4(€ô•±Í”ì4(€€€€‰…Ñ¡|Ìœ4(€ô4(4(€€‘Í…™•ÕÑ½%ÍÍÕ•Ì€ô  ‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”œ°•µ‰•‘}É•µ¹…¹ÑÌœ°µ½©¥‰…­”œ°…ÁÑ¥½¹}É•Í¥‘Õ”œ°½É¹…µ•¹Ñ…±}‰É•…­Ìœ°µ•‘¥Õµ}‘¹}µ•‘¥„œ°¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğœ°¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…œ°¡•É½}‘ÕÁ±¥…Ñ•}±•…œ¤4(€€‘…ÍÍ¥ÍÑ•‘I•Ù¥•İ%ÍÍÕ•Ì€ô  µ•‘¥Õµ}Ñ„œ°•Í…Á•‘}±¥¹•‰É•…­Ìœ°¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğœ¤€¬€‘Í…™•ÕÑ½%ÍÍÕ•Ì4(€€‘µ…¹Õ…±1¥¡Ñ%ÍÍÕ•Ì€ô  …ÕÑ¡½É}¹½Ñ”œ°µ…¹Õ…±}‰Õ±±•ÑÌœ°™…­•}±¥ÍÑÌœ°ÁÍ•Õ‘½}¡•…‘¥¹Ìœ°Í½ÕÉ•}‘ÕµÁÌœ¤€¬€‘…ÍÍ¥ÍÑ•‘I•Ù¥•İ%ÍÍÕ•Ì4(€€‘¡¥¡M•¹Í¥Ñ¥Ù¥Ñä€ô€‘Á…”¹•…ÑÕÉ•€µ½È4(€€€€ ‘ÍÑ…ÉÑ!•É•ÍÍ…åM±ÕÌ€µ½¹Ñ…¥¹Ì€‘Á…”¹M±Õœ¤€µ½È4(€€€€ ‘™•…ÑÕÉ•‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”¹½Õ¹Ğ€µĞ€À¤€µ½È4(€€€€ ‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”¹½Õ¹Ğ€µĞ€À¤4(€€‘¡¥¡MÑÉÕÑÕÉ…±µ‰¥Õ¥Ñä€ô4(€€€€ ‘Í•Ù•É¥ÑåM½É”€µ”€ÄÈ¤€µ½È4(€€€€ 4(€€€€€  ‘¥ÍÍÕ•QåÁ•Ìğ]¡•É”µ=‰©•Ğì€‘|€µ¥¸  ÁÍ•Õ‘½}¡•…‘¥¹Ìœ°™…­•}±¥ÍÑÌœ°Í½ÕÉ•}‘ÕµÁÌœ¤ô¤¹½Õ¹Ğ€µ”€È€µ…¹4(€€€€€€‘¥ÍÍÕ•QåÁ•Ì¹½Õ¹Ğ€µ”€Ì4(€€€€¤4(€€‘É¥Í­Q¥•È€ô€‘¹Õ±°4(€¥˜€ ‘¡…Í%ÍÍÕ•Ì¤ì4(€€€¥˜€¡  ‘¥ÍÍÕ•QåÁ•Ìğ]¡•É”µ=‰©•Ğì€‘|€µ¹½Ñ¥¸€‘Í…™•ÕÑ½%ÍÍÕ•Ìô¤¹½Õ¹Ğ€µ•Ä€À¤ì4(€€€€€€‘É¥Í­Q¥•È€ô€M}UQ<œ4(€€€ô•±Í•¥˜€¡  ‘¥ÍÍÕ•QåÁ•Ìğ]¡•É”µ=‰©•Ğì€‘|€µ¹½Ñ¥¸€‘…ÍÍ¥ÍÑ•‘I•Ù¥•İ%ÍÍÕ•Ìô¤¹½Õ¹Ğ€µ•Ä€À¤ì4(€€€€€€‘É¥Í­Q¥•È€ô€MM%MQ}IY%\œ4(€€€ô•±Í•¥˜€ 4(€€€€€  ‘¥ÍÍÕ•QåÁ•Ìğ]¡•É”µ=‰©•Ğì€‘|€µ¹½Ñ¥¸€‘µ…¹Õ…±1¥¡Ñ%ÍÍÕ•Ìô¤¹½Õ¹Ğ€µ•Ä€À€µ…¹4(€€€€€€µ¹½Ğ€‘¡¥¡M•¹Í¥Ñ¥Ù¥Ñä€µ…¹4(€€€€€€µ¹½Ğ€‘¡¥¡MÑÉÕÑÕÉ…±µ‰¥Õ¥Ñä4(€€€€¤ì4(€€€€€€‘É¥Í­Q¥•È€ô€59U1}1%!Pœ4(€€€ô•±Í”ì4(€€€€€€‘É¥Í­Q¥•È€ô€59U1}%IMPœ4(€€€ô4(€ô4(4(€€‘ÍÑ…ÑÕÌ€ôÍİ¥Ñ € ‘É¥Í­Q¥•È¤ì4(€€€€M}UQ<œì€Ie}M}UQ<œô4(€€€€MM%MQ}IY%\œì€Ie}MM%MQ}IY%\œô4(€€€€59U1}1%!Pœì€Ie}59U1}1%!Pœô4(€€€€59U1}%IMPœì€Ie}59U1}%IMPœô4(€€€‘•™…Õ±Ğì€18œô4(€ô4(€€‘µ…¹Õ…±I•Ù¥•Ü€ô€‘¡…Í%ÍÍÕ•Ì€µ…¹€ ‘É¥Í­Q¥•È€µ¹”€M}UQ<œ¤4(4(€€‘É½İÌ¹‘¡mÁÍÕÍÑ½µ½‰©•Ñuì4(€€€Á…Ñ €ô€‘Á…”¹I•±…Ñ¥Ù•A…Ñ 4(€€€Ñ¥Ñ±”€ô€‘Á…”¹Q¥Ñ±”4(€€€Í±Õœ€ô€‘Á…”¹M±Õœ4(€€€Í•Ñ¥½¸€ô•ĞµI•Á½ÉÑ•‘M•Ñ¥½¸€‘Á…”4(€€€‘…Ñ”€ô€‘Á…”¹…Ñ”4(€€€‘É…™Ğ€ôm‰½½±t‘Á…”¹É…™Ğ4(€€€¥µÁ½ÉÑ•€ôm‰½½±t ‘Á…”¹5•‘¥ÕµM½ÕÉ•UÉ°€µ½È€‘Á…”¹M½ÕÉ•UÉ°¤4(€€€¡…Í}‘•ÍÉ¥ÁÑ¥½¸€ôm‰½½±t µ¹½ĞmÍÑÉ¥¹tèé%Í9Õ±±=É]¡¥Ñ•MÁ…” ‘Á…”¹•ÍÉ¥ÁÑ¥½¸¤¤4(€€€™•…ÑÕÉ•€ôm‰½½±t‘Á…”¹•…ÑÕÉ•4(€€€ÍÑ…ÉÑ}¡•É•}‘¥É•Ğ€ôm‰½½±t ‘ÍÑ…ÉÑ!•É•ÍÍ…åM±ÕÌ€µ½¹Ñ…¥¹Ì€‘Á…”¹M±Õœ¤4(€€€½±±•Ñ¥½¹}ÍÑ…ÉÑ}¡•É”€ôm‰½½±t ‘½±±•Ñ¥½¹MÑ…ÉÑ!•É”¹½Õ¹Ğ€µĞ€À¤4(€€€™•…ÑÕÉ•‘}½±±•Ñ¥½¹}µ•µ‰•È€ôm‰½½±t ‘™•…ÑÕÉ•‘½±±•Ñ¥½¹5…Ñ¡•Ì¹½Õ¹Ğ€µĞ€À¤4(€€€½±±•Ñ¥½¹Ì€ô  ‘µ…Ñ¡•‘½±±•Ñ¥½¹Ìğ½É… µ=‰©•Ğì€‘|¹M±Õœô¤4(€€€¡…Í}µ•‘¥Õµ}Ñ„€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹µ•‘¥Õµ}Ñ„€µĞ€À¤4(€€€¡…Í}µ•‘¥Õµ}‘¹}µ•‘¥„€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹µ•‘¥Õµ}‘¹}µ•‘¥„€µĞ€À¤4(€€€¡…Í}…ÕÑ¡½É}¹½Ñ”€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹…ÕÑ¡½É}¹½Ñ”€µĞ€À¤4(€€€¡…Í}•µ‰•‘}É•µ¹…¹ÑÌ€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹•µ‰•‘}É•µ¹…¹ÑÌ€µĞ€À¤4(€€€¡…Í}•¹½‘¥¹}‘…µ…”€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹µ½©¥‰…­”€µĞ€À¤4(€€€¡…Í}…ÁÑ¥½¹}É•Í¥‘Õ”€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹…ÁÑ¥½¹}É•Í¥‘Õ”€µĞ€À¤4(€€€¡…Í}µ…¹Õ…±}‰Õ±±•ÑÌ€ôm‰½½±t  ‘¥ÍÍÕ•½Õ¹ÑÌ¹µ…¹Õ…±}‰Õ±±•ÑÌ€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹™…­•}±¥ÍÑÌ¤€µĞ€À¤4(€€€¡…Í}ÁÍ•Õ‘½}¡•…‘¥¹Ì€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹ÁÍ•Õ‘½}¡•…‘¥¹Ì€µĞ€À¤4(€€€¡…Í}Í½ÕÉ•}‘ÕµÀ€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹Í½ÕÉ•}‘ÕµÁÌ€µĞ€À¤4(€€€¡…Í}‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”€µĞ€À¤4(€€€¡…Í}…¥}Ñ•±±}Ñ¥Ñ±•}ÍÕ‰Ñ¥Ñ±•}ÍÑÉÕÑÕÉ”€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹…¥}Ñ•±±}Ñ¥Ñ±•}ÍÕ‰Ñ¥Ñ±•}ÍÑÉÕÑÕÉ”€µĞ€À¤4(€€€¡…Í}Í•Á…É…Ñ½É}É•Í¥‘Õ”€ôm‰½½±t  ‘¥ÍÍÕ•½Õ¹ÑÌ¹½É¹…µ•¹Ñ…±}‰É•…­Ì€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹•Í…Á•‘}±¥¹•‰É•…­Ì¤€µĞ€À¤4(€€€¡…Í}¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğ€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğ€µĞ€À¤4(€€€¡…Í}¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…€µĞ€À¤4(€€€¡…Í}¡•É½}‘ÕÁ±¥…Ñ•}±•…€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}‘ÕÁ±¥…Ñ•}±•…€µĞ€À¤4(€€€¡…Í}¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğ€ôm‰½½±t ‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğ€µĞ€À¤4(€€€µ•‘¥Õµ}Ñ…}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹µ•‘¥Õµ}Ñ„4(€€€µ•‘¥Õµ}‘¹}µ•‘¥…}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹µ•‘¥Õµ}‘¹}µ•‘¥„4(€€€…ÕÑ¡½É}¹½Ñ•}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹…ÕÑ¡½É}¹½Ñ”4(€€€•µ‰•‘}É•µ¹…¹Ñ}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹•µ‰•‘}É•µ¹…¹ÑÌ4(€€€•¹½‘¥¹}‘…µ…•}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹µ½©¥‰…­”4(€€€…ÁÑ¥½¹}É•Í¥‘Õ•}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹…ÁÑ¥½¹}É•Í¥‘Õ”4(€€€µ…¹Õ…±}‰Õ±±•Ñ}½Õ¹Ğ€ô€ ‘¥ÍÍÕ•½Õ¹ÑÌ¹µ…¹Õ…±}‰Õ±±•ÑÌ€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹™…­•}±¥ÍÑÌ¤4(€€€ÁÍ•Õ‘½}¡•…‘¥¹}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹ÁÍ•Õ‘½}¡•…‘¥¹Ì4(€€€Í½ÕÉ•}‘ÕµÁ}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹Í½ÕÉ•}‘ÕµÁÌ4(€€€‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±•}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”4(€€€…¥}Ñ•±±}Ñ¥Ñ±•}ÍÕ‰Ñ¥Ñ±•}ÍÑÉÕÑÕÉ•}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹…¥}Ñ•±±}Ñ¥Ñ±•}ÍÕ‰Ñ¥Ñ±•}ÍÑÉÕÑÕÉ”4(€€€Í•Á…É…Ñ½É}É•Í¥‘Õ•}½Õ¹Ğ€ô€ ‘¥ÍÍÕ•½Õ¹ÑÌ¹½É¹…µ•¹Ñ…±}‰É•…­Ì€¬€‘¥ÍÍÕ•½Õ¹ÑÌ¹•Í…Á•‘}±¥¹•‰É•…­Ì¤4(€€€¡•É½}Á±…•¡½±‘•É}½¹™±¥Ñ}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğ4(€€€¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…‘}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…4(€€€¡•É½}‘ÕÁ±¥…Ñ•}±•…‘}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}‘ÕÁ±¥…Ñ•}±•…4(€€€¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ñ}½Õ¹Ğ€ô€‘¥ÍÍÕ•½Õ¹ÑÌ¹¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğ4(€€€±•…‘}¥µ…•}Í½ÕÉ”€ô€‘¡•É½%ÍÍÕ•…Ñ„¹±•…‘}¥µ…•}Í½ÕÉ”4(€€€±•…‘}¥µ…•}±¥¹”€ô€‘¡•É½%ÍÍÕ•…Ñ„¹±•…‘}¥µ…•}±¥¹”4(€€€™¥ÉÍÑ}¡•…‘¥¹}±¥¹”€ô€‘¡•É½%ÍÍÕ•…Ñ„¹™¥ÉÍÑ}¡•…‘¥¹}±¥¹”4(€€€±•…‘}İ¥Ñ¡¥¹}¡•ÕÉ¥ÍÑ¥Œ€ôm‰½½±t‘¡•É½%ÍÍÕ•…Ñ„¹±•…‘}İ¥Ñ¡¥¹}¡•ÕÉ¥ÍÑ¥Œ4(€€€¥ÍÍÕ•}ÑåÁ•Ì€ô€‘¥ÍÍÕ•QåÁ•Ì4(€€€¥ÍÍÕ•}ÑåÁ•}½Õ¹Ğ€ô€‘¥ÍÍÕ•QåÁ•Ì¹½Õ¹Ğ4(€€€Í•Ù•É¥Ñå}Í½É”€ô€‘Í•Ù•É¥ÑåM½É”4(€€€ÁÉ¥½É¥Ñå}Í½É”€ô€‘ÁÉ¥½É¥ÑåM½É”4(€€€±•…¹ÕÁ}Í½É”€ô€‘±•…¹ÕÁM½É”4(€€€‰…Ñ €ô€‘‰…Ñ 4(€€€É¥Í­}Ñ¥•È€ô€‘É¥Í­Q¥•È4(€€€ÍÑ…ÑÕÌ€ô€‘ÍÑ…ÑÕÌ4(€€€ÁÉ¥½É¥Ñå}É•…Í½¹Ì€ô€‘ÁÉ¥½É¥ÑåI•…Í½¹Ì¹Q½ÉÉ…ä ¤4(€€€µ…¹Õ…±}É•Ù¥•Ü€ôm‰½½±t‘µ…¹Õ…±I•Ù¥•Ü4(€ô¤4)ô4(4(‘É½İÍÉÉ…ä€ô€‘É½İÌ¹Q½ÉÉ…ä ¤4(‘…™™•Ñ•€ô  ‘É½İÍÉÉ…äğ]¡•É”µ=‰©•Ğì€‘|¹¥ÍÍÕ•}ÑåÁ•}½Õ¹Ğ€µĞ€Àô¤4(‘¥ÍÍÕ•MÕµµ…Éä€ôíô4)™½É•… € ‘É½Ü¥¸€‘…™™•Ñ•¤ì4(€™½É•… € ‘ÑåÁ”¥¸€‘É½Ü¹¥ÍÍÕ•}ÑåÁ•Ì¤ì4(€€€¥˜€ µ¹½Ğ€‘¥ÍÍÕ•MÕµµ…Éä¹½¹Ñ…¥¹Í-•ä ‘ÑåÁ”¤¤ì€‘¥ÍÍÕ•MÕµµ…Éål‘ÑåÁ•t€ô€Àô4(€€€€‘¥ÍÍÕ•MÕµµ…Éål‘ÑåÁ•t¬¬4(€ô4)ô4(‘¥ÍÍÕ•MÕµµ…ÉåI½İÌ€ô™½É•… € ‘­•ä¥¸€ ‘¥ÍÍÕ•MÕµµ…Éä¹-•åÌğM½ÉĞµ=‰©•Ğ¤¤ì4(€mÁÍÕÍÑ½µ½‰©•Ñuì¥ÍÍÕ•}ÑåÁ”€ô€‘­•äì…™™•Ñ•‘}™¥±•Ì€ô€‘¥ÍÍÕ•MÕµµ…Éål‘­•åtô4)ô4(‘É¥Í­Q¥•ÉMÕµµ…ÉåI½İÌ€ô™½É•… € ‘Ñ¥•È¥¸  M}UQ<œ°MM%MQ}IY%\œ°59U1}1%!Pœ°59U1}%IMPœ¤¤ì4(€mÁÍÕÍÑ½µ½‰©•Ñuì4(€€€É¥Í­}Ñ¥•È€ô€‘Ñ¥•È4(€€€™¥±•}½Õ¹Ğ€ô  ‘…™™•Ñ•ğ]¡•É”µ=‰©•Ğì€‘|¹É¥Í­}Ñ¥•È€µ•Ä€‘Ñ¥•Èô¤¹½Õ¹Ğ4(€ô4)ô4(‘ÍÑ…ÑÕÍMÕµµ…ÉåI½İÌ€ô™½É•… € ‘ÍÑ…ÑÕÍ9…µ”¥¸  18œ°Ie}M}UQ<œ°Ie}MM%MQ}IY%\œ°Ie}59U1}1%!Pœ°Ie}59U1}%IMPœ¤¤ì4(€mÁÍÕÍÑ½µ½‰©•Ñuì4(€€€ÍÑ…ÑÕÌ€ô€‘ÍÑ…ÑÕÍ9…µ”4(€€€™¥±•}½Õ¹Ğ€ô  ‘É½İÍÉÉ…äğ]¡•É”µ=‰©•Ğì€‘|¹ÍÑ…ÑÕÌ€µ•Ä€‘ÍÑ…ÑÕÍ9…µ”ô¤¹½Õ¹Ğ4(€ô4)ô4(4(‘É•Á½ÉĞ€ômÁÍÕÍÑ½µ½‰©•Ñuì4(€•¹•É…Ñ•‘}…Ğ€ô€¡•Ğµ…Ñ”¤¹Q½MÑÉ¥¹œ ¼œ¤4(€Í…¹¹•‘}Í•Ñ¥½¹Ì€ô€‘M•Ñ¥½¹Ì4(€Ñ½Ñ…±Ì€ômÁÍÕÍÑ½µ½‰©•Ñuì4(€€€Í…¹¹•‘}™¥±•Ì€ô€‘É½İÍÉÉ…ä¹½Õ¹Ğ4(€€€…™™•Ñ•‘}™¥±•Ì€ô€‘…™™•Ñ•¹½Õ¹Ğ4(€€€¥µÁ½ÉÑ•‘}™¥±•Ì€ô  ‘É½İÍÉÉ…äğ]¡•É”µ=‰©•Ğì€‘|¹¥µÁ½ÉÑ•ô¤¹½Õ¹Ğ4(€€€‰…Ñ¡|Ä€ô  ‘…™™•Ñ•ğ]¡•É”µ=‰©•Ğì€‘|¹‰…Ñ €µ•Ä€‰…Ñ¡|Äœô¤¹½Õ¹Ğ4(€€€‰…Ñ¡|È€ô  ‘…™™•Ñ•ğ]¡•É”µ=‰©•Ğì€‘|¹‰…Ñ €µ•Ä€‰…Ñ¡|Èœô¤¹½Õ¹Ğ4(€€€‰…Ñ¡|Ì€ô  ‘…™™•Ñ•ğ]¡•É”µ=‰©•Ğì€‘|¹‰…Ñ €µ•Ä€‰…Ñ¡|Ìœô¤¹½Õ¹Ğ4(€ô4(€™É½¹Ñ}µ…ÑÑ•È€ômÁÍÕÍÑ½µ½‰©•Ñuì4(€€€µ¥ÍÍ¥¹}‘•ÍÉ¥ÁÑ¥½¸€ô  ‘É½İÍÉÉ…äğ]¡•É”µ=‰©•Ğì€µ¹½Ğ€‘|¹¡…Í}‘•ÍÉ¥ÁÑ¥½¸ô¤¹½Õ¹Ğ4(€ô4(€¥ÍÍÕ•}…Ñ•½É¥•Ì€ô€‘¥ÍÍÕ•MÕµµ…ÉåI½İÌ4(€É¥Í­}Ñ¥•ÉÌ€ô€‘É¥Í­Q¥•ÉMÕµµ…ÉåI½İÌ4(€ÍÑ…ÑÕÍ}½Õ¹ÑÌ€ô€‘ÍÑ…ÑÕÍMÕµµ…ÉåI½İÌ4(€ÁÉ¥½É¥Ñå}±½¥Œ€ô  4(€€€€¡½µ•Á…•}Í•±•Ñ•€ô™•…ÑÕÉ•èÑÉÕ”œ°4(€€€€ÍÑ…ÉÑ}¡•É•}‘¥É•Ğ€ô±¥¹­•™É½´½¹Ñ•¹Ğ½ÍÑ…ÉĞµ¡•É”½¥¹‘•à¹µœ°4(€€€€™•…ÑÕÉ•‘}½±±•Ñ¥½¹}ÍÑ…ÉÑ}¡•É”€ôÍÑ…ÉÑ}¡•É”Í±Õœ½˜„™•…ÑÕÉ•½±±•Ñ¥½¸œ°4(€€€€½±±•Ñ¥½¹}ÍÑ…ÉÑ}¡•É”€ôÍÑ…ÉÑ}¡•É”Í±Õœ½˜…¹ä½±±•Ñ¥½¸œ°4(€€€€™•…ÑÕÉ•‘}½±±•Ñ¥½¹}µ•µ‰•È€ôµ•µ‰•È½˜„™•…ÑÕÉ•½±±•Ñ¥½¸œ°4(€€€€½±±•Ñ¥½¹}µ•µ‰•È€ô•áÁ±¥¥Ğ½È™…±±‰…¬½±±•Ñ¥½¸µ…Ñ œ°4(€€€€¹•İ•É}¥µÁ½ÉÑ•‘}Á¥•”€ô¥µÁ½ÉÑ••ÍÍ…ä‘…Ñ•€ÈÀÈÔ½È€ÈÀÈØœ4(€€¤4(€™¥±•Ì€ô€‘É½İÍÉÉ…ä4)ô4(4(‘©Í½¹A…Ñ €ô€ˆ‘I•Á½ÉÑ	…Í•A…Ñ ¹©Í½¸ˆ4(‘ÍÙA…Ñ €ô€ˆ‘I•Á½ÉÑ	…Í•A…Ñ ¹ÍØˆ4(‘µ‘A…Ñ €ô€ˆ‘I•Á½ÉÑ	…Í•A…Ñ ¹µˆ4)]É¥Ñ”µQ•áÑ9½	½´€‘©Í½¹A…Ñ € ‘É•Á½ÉĞğ½¹Ù•ÉÑQ¼µ)Í½¸€µ•ÁÑ €à¤4(‘É½İÍÉÉ…äğ4(€M•±•Ğµ=‰©•ĞÁ…Ñ ±Ñ¥Ñ±”±Í•Ñ¥½¸±‘…Ñ”±‘É…™Ğ±¥µÁ½ÉÑ•±¡…Í}‘•ÍÉ¥ÁÑ¥½¸±™•…ÑÕÉ•±ÍÑ…ÉÑ}¡•É•}‘¥É•Ğ±½±±•Ñ¥½¹}ÍÑ…ÉÑ}¡•É”±™•…ÑÕÉ•‘}½±±•Ñ¥½¹}µ•µ‰•È±ÁÉ¥½É¥Ñå}Í½É”±Í•Ù•É¥Ñå}Í½É”±±•…¹ÕÁ}Í½É”±‰…Ñ ±É¥Í­}Ñ¥•È±ÍÑ…ÑÕÌ±µ…¹Õ…±}É•Ù¥•Ü±¡…Í}µ•‘¥Õµ}Ñ„±¡…Í}µ•‘¥Õµ}‘¹}µ•‘¥„±¡…Í}…ÕÑ¡½É}¹½Ñ”±¡…Í}•µ‰•‘}É•µ¹…¹ÑÌ±¡…Í}•¹½‘¥¹}‘…µ…”±¡…Í}…ÁÑ¥½¹}É•Í¥‘Õ”±¡…Í}µ…¹Õ…±}‰Õ±±•ÑÌ±¡…Í}ÁÍ•Õ‘½}¡•…‘¥¹Ì±¡…Í}Í½ÕÉ•}‘ÕµÀ±¡…Í}‘ÕÁ±¥…Ñ•‘}Ñ¥Ñ±”±¡…Í}…¥}Ñ•±±}Ñ¥Ñ±•}ÍÕ‰Ñ¥Ñ±•}ÍÑÉÕÑÕÉ”±¡…Í}Í•Á…É…Ñ½É}É•Í¥‘Õ”±¡…Í}¡•É½}Á±…•¡½±‘•É}½¹™±¥Ğ±¡…Í}¡•É½}µ¥ÍÍ¥¹}İ¥Ñ¡}±•…±¡…Í}¡•É½}‘ÕÁ±¥…Ñ•}±•…±¡…Í}¡•É½}ÕÉÉ•¹Ñ}İ¥¹Í}½¹™±¥Ğğ4(€áÁ½ÉĞµÍØ€µA…Ñ €‘ÍÙA…Ñ €µ9½QåÁ•%¹™½Éµ…Ñ¥½¸€µ¹½‘¥¹œÕÑ˜à4(4(‘¥ÍÍÕ•M½ÉĞ€ô  4(€ìáÁÉ•ÍÍ¥½¸€ô€…™™•Ñ•‘}™¥±•Ìœì•Í•¹‘¥¹œ€ô€‘ÑÉÕ”ô°4(€ìáÁÉ•ÍÍ¥½¸€ô€¥ÍÍÕ•}ÑåÁ”œì•Í•¹‘¥¹œ€ô€‘™…±Í”ô4(¤4(‘™¥±•M½ÉĞ€ô  4(€ìáÁÉ•ÍÍ¥½¸€ô€±•…¹ÕÁ}Í½É”œì•Í•¹‘¥¹œ€ô€‘ÑÉÕ”ô°4(€ìáÁÉ•ÍÍ¥½¸€ô€ÁÉ¥½É¥Ñå}Í½É”œì•Í•¹‘¥¹œ€ô€‘ÑÉÕ”ô°4(€ìáÁÉ•ÍÍ¥½¸€ô€Ñ¥Ñ±”œì•Í•¹‘¥¹œ€ô€‘™…±Í”ô4(¤4(‘µ…¹Õ…±M½ÉĞ€ô  4(€ìáÁÉ•ÍÍ¥½¸€ô€±•…¹ÕÁ}Í½É”œì•Í•¹‘¥¹œ€ô€‘ÑÉÕ”ô°4(€ìáÁÉ•ÍÍ¥½¸€ô€Ñ¥Ñ±”œì•Í•¹‘¥¹œ€ô€‘™…±Í”ô4(¤4(4(‘±¥¹•Ì€ô9•Üµ=‰©•ĞMåÍÑ•´¹½±±•Ñ¥½¹Ì¹•¹•É¥Œ¹1¥ÍÑmÍÑÉ¥¹t4(‘±¥¹•Ì¹‘ œŒ1•…äÍÍ…äÕ‘¥Ğœ¤4(‘±¥¹•Ì¹‘ œœ¤4(‘±¥¹•Ì¹‘ ˆ´•¹•É…Ñ•è€ ¡•Ğµ…Ñ”¤¹Q½MÑÉ¥¹œ åååäµ54µ‘! éµ´éÍÌœ¤¤ˆ¤4(‘±¥¹•Ì¹‘ ˆ´M…¹¹•™¥±•Ìè€ ‘É•Á½ÉĞ¹Ñ½Ñ…±Ì¹Í…¹¹•‘}™¥±•Ì¤ˆ¤4(‘±¥¹•Ì¹‘ ˆ´™™•Ñ•™¥±•Ìè€ ‘É•Á½ÉĞ¹Ñ½Ñ…±Ì¹…™™•Ñ•‘}™¥±•Ì¤ˆ¤4(‘±¥¹•Ì¹‘ œœ¤4(‘±¥¹•Ì¹‘ œŒŒ%ÍÍÕ”…Ñ•½É¥•Ìœ¤4(‘±¥¹•Ì¹‘ œœ¤4)™½É•… € ‘¥Ñ•´¥¸€ ‘¥ÍÍÕ•MÕµµ…ÉåI½İÌğM½ÉĞµ=‰©•Ğ€µAÉ½Á•ÉÑä€‘¥ÍÍÕ•M½ÉĞ¤¤ì4(€€‘±¥¹•Ì¹‘ ˆ´€ ‘¥Ñ•´¹¥ÍÍÕ•}ÑåÁ”¤è€ ‘¥Ñ•´¹…™™•Ñ•‘}™¥±•Ì¤ˆ¤4)ô4(‘±¥¹•Ì¹‘ œœ¤4(‘±¥¹•Ì¹‘ œŒŒÉ½¹Ğ5…ÑÑ•È…ÁÌœ¤4(‘±¥¹•Ì¹‘ œœ¤4(‘±¥¹•Ì¹‘ ˆ´µ¥ÍÍ¥¹}‘•ÍÉ¥ÁÑ¥½¸è€ ‘É•Á½ÉĞ¹™É½¹Ñ}µ…ÑÑ•È¹µ¥ÍÍ¥¹}‘•ÍÉ¥ÁÑ¥½¸¤ˆ¤4(‘±¥¹•Ì¹‘ œœ¤4(‘±¥¹•Ì¹‘ œŒŒI¥Í¬Q¥•ÉÌœ¤4(‘±¥¹•Ì¹‘ œœ¤4)™½É•… € ‘¥Ñ•´¥¸€‘É¥Í­Q¥•ÉMÕµµ…ÉåI½İÌ¤ì4(€€‘±¥¹•Ì¹‘ ˆ´€ ‘¥Ñ•´¹É¥Í­}Ñ¥•È¤è€ ‘¥Ñ•´¹™¥±•}½Õ¹Ğ¤ˆ¤4)ô4(‘±¥¹•Ì¹‘ œœ¤4(‘±¥¹•Ì¹‘ œŒŒMÑ…ÑÕÌ½Õ¹ÑÌœ¤4(‘±¥¹•Ì¹‘ œœ¤4)™½É•… € ‘¥Ñ•´¥¸€‘ÍÑ…ÑÕÍMÕµµ…ÉåI½İÌ¤ì4(€€‘±¥¹•Ì¹‘ ˆ´€ ‘¥Ñ•´¹ÍÑ…ÑÕÌ¤è€ ‘¥Ñ•´¹™¥±•}½Õ¹Ğ¤ˆ¤4)ô4)™½É•… € ‘‰…Ñ¡9…µ”¥¸  ‰…Ñ¡|Äœ°‰…Ñ¡|Èœ°‰…Ñ¡|Ìœ¤¤ì4(€€‘ÁÉ•ÑÑä€ô€‘‰…Ñ¡9…µ”¹I•Á±…” |œ°œ€œ¤¹Q½UÁÁ•É%¹Ù…É¥…¹Ğ ¤4(€€‘‰…Ñ¡I½İÌ€ô  ‘…™™•Ñ•ğ]¡•É”µ=‰©•Ğì€‘|¹‰…Ñ €µ•Ä€‘‰…Ñ¡9…µ”ôğM½ÉĞµ=‰©•Ğ€µAÉ½Á•ÉÑä€‘™¥±•M½ÉĞ¤4(€€‘±¥¹•Ì¹‘ œœ¤4(€€‘±¥¹•Ì¹‘ ˆŒŒ€‘ÁÉ•ÑÑäˆ¤4(€€‘±¥¹•Ì¹‘ œœ¤4(€¥˜€ ‘‰…Ñ¡I½İÌ¹½Õ¹Ğ€µ•Ä€À¤ì4(€€€€‘±¥¹•Ì¹‘ œ´9¼™¥±•Ì¥¸Ñ¡¥Ì‰…Ñ ¸œ¤4(€€€½¹Ñ¥¹Õ”4(€ô4(€™½É•… € ‘É½Ü¥¸€‘‰…Ñ¡I½İÌ¤ì4(€€€€‘É•…Í½¹Ì€ô¥˜€ ‘É½Ü¹ÁÉ¥½É¥Ñå}É•…Í½¹Ì¹½Õ¹Ğ€µĞ€À¤ì€ ‘É½Ü¹ÁÉ¥½É¥Ñå}É•…Í½¹Ì€µ©½¥¸€œ°€œ¤ô•±Í”ì€¥ÍÍÕ”µ‘É¥Ù•¸œô4(€€€€‘¥ÍÍÕ•Ì€ô€‘É½Ü¹¥ÍÍÕ•}ÑåÁ•Ì€µ©½¥¸€œ°€œ4(€€€€‘±¥¹•Ì¹‘ ˆ´€ ‘É½Ü¹Á…Ñ ¥€€èèÁÉ¥½É¥Ñä€ ‘É½Ü¹ÁÉ¥½É¥Ñå}Í½É”¤°Í•Ù•É¥Ñä€ ‘É½Ü¹Í•Ù•É¥Ñå}Í½É”¤€èè€‘É•…Í½¹Ì€èè€‘¥ÍÍÕ•Ìˆ¤4(€ô4)ô4(‘±¥¹•Ì¹‘ œœ¤4(‘±¥¹•Ì¹‘ œŒŒ5…¹Õ…°I•Ù¥•Ü…¹‘¥‘…Ñ•Ìœ¤4(‘±¥¹•Ì¹‘ œœ¤4(‘µ…¹Õ…±I½İÌ€ô  ‘…™™•Ñ•ğ]¡•É”µ=‰©•Ğì€‘|¹µ…¹Õ…±}É•Ù¥•ÜôğM½ÉĞµ=‰©•Ğ€µAÉ½Á•ÉÑä€‘µ…¹Õ…±M½ÉĞ¤4)¥˜€ ‘µ…¹Õ…±I½İÌ¹½Õ¹Ğ€µ•Ä€À¤ì4(€€‘±¥¹•Ì¹‘ œ´9½¹”™±…•¸œ¤4)ô•±Í”ì4(€™½É•… € ‘É½Ü¥¸€‘µ…¹Õ…±I½İÌ¤ì4(€€€€‘±¥¹•Ì¹‘ ˆ´€ ‘É½Ü¹Á…Ñ ¥€€èè€ ‘É½Ü¹É¥Í­}Ñ¥•È¤€èè€ ‘É½Ü¹¥ÍÍÕ•}ÑåÁ•Ì€µ©½¥¸€œ°€œ¤ˆ¤4(€ô4)ô4)]É¥Ñ”µQ•áÑ9½	½´€‘µ‘A…Ñ €  ‘±¥¹•Ì€µ©½¥¸€‰É¸ˆ¤€¬€‰É¸ˆ¤4(4)]É¥Ñ”µ!½ÍĞ€1•…ä•ÍÍ…ä…Õ‘¥Ğ½µÁ±•Ñ”œ€µ½É•É½Õ¹‘½±½Èå…¸4)]É¥Ñ”µ!½ÍĞ€‰)M=8É•Á½ÉĞè€‘©Í½¹A…Ñ ˆ4)]É¥Ñ”µ!½ÍĞ€‰MXÉ•Á½ÉĞè€‘ÍÙA…Ñ ˆ4)]É¥Ñ”µ!½ÍĞ€‰5…É­‘½İ¸É•Á½ÉĞè€‘µ‘A…Ñ ˆ4
