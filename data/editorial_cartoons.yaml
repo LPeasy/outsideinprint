@@ -1,4 +1,4 @@
-current: the-trophy-case
+current: orchard-grip
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -523,5 +523,13 @@ cartoons:
     image: "/images/editorial/the-trophy-case.png"
     essay: "/essays/first-step/"
     alt: "Editorial cartoon showing an anonymous worker handing a large trophy through a dark community-center counter while open double doors reveal an indoor walking loop marked by a muted green threshold line."
+    width: 1672
+    height: 941
+  - slug: orchard-grip
+    title: "Orchard Grip"
+    date: "2026-07-13"
+    image: "/images/editorial/orchard-grip.png"
+    essay: "/essays/the-harvest/"
+    alt: "Editorial cartoon showing an anonymous gardener clutching a green pear on a bending orchard branch while a helper holds a watering can beside dry roots and other workers tend trees beneath a rain cloud."
     width: 1672
     height: 941
