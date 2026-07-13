@@ -514,4 +514,3193 @@ $runningHeaderIssues = New-Object System.Collections.Generic.List[string]
 $rootRelativeImageIssues = New-Object System.Collections.Generic.List[string]
 $zgotmplzIssues = New-Object System.Collections.Generic.List[string]
 $semanticIssues = New-Object System.Collections.Generic.List[string]
-$importedMediaIssues = New-Object System.Colleã¾<öÚ$z{-®éÜj×FÖÂs²6ÇVrÒv6—f–2Ö–ç7F—GWF–öç2ÖæB×V&Æ–2×÷vW"s²Æ&VÂÒuF†R'&72F—6²–âF†R6–FWvÆ²rÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†R×7G&—B×F†BÖ†öÆG2×F†R×&–6Rö–æFW‚æ‡FÖÂs²6ÇVrÒw&—6²×Væ6W'F–çG’s²Æ&VÂÒwF†R†÷&×W¢&–6RW76’rÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†RÖ&Æö6¶FRÖ†2Ö×†öæRÖçVÖ&W"ö–æFW‚æ‡FÖÂs²6ÇVrÒw&—6²×Væ6W'F–çG’s²Æ&VÂÒwF†R†÷&×W¢&Æö6¶FRW76’rÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†R×v&æ–ærÖÆ&VÂÖ–â×F†R×vVVG2ö–æFW‚æ‡FÖÂs²6ÇVrÒw&—6²×Væ6W'F–çG’s²Æ&VÂÒwF†Rv&æ–ærÖÆ&VÂW76’rÒÀ¢²F‚ÒwV&Æ–2öW76—2öæ÷F†–ær×Fò×6VRÖ†W&Rö–æFW‚æ‡FÖÂs²6ÇVrÒw&—6²×Væ6W'F–çG’s²Æ&VÂÒtæ÷F†–ærFò6VR†W&RrÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†R×Fæ²ÖB×F†RÖfVæ6RÖÆ–æRö–æFW‚æ‡FÖÂs²6ÇVrÒw&—6²×Væ6W'F–çG’s²Æ&VÂÒuF†RFæ²BF†RfVæ6RÆ–æRrÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†R×v"×&VÖ—VÒÖB×F†RÖV7F–öâö–æFW‚æ‡FÖÂs²6ÇVrÒw&—6²×Væ6W'F–çG’s²Æ&VÂÒuF†Rv"&VÖ—VÒBF†RV7F–öârÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†RÖÖ×F†B×&–6VB×F†RÖf—&Rö–æFW‚æ‡FÖÂs²6ÇVrÒw&—6²×Væ6W'F–çG’s²Æ&VÂÒuF†RÖF†B&–6VBF†Rf—&RrÒÀ¢²F‚ÒwV&Æ–2öW76—2ö–â×F†RÖ–ÖvRÖöbÖvöBö–æFW‚æ‡FÖÂs²6ÇVrÒvÖ÷&Â×&VÆ–v–÷W2×†–Æ÷6÷†–6ÂÖW76—2s²Æ&VÂÒwF†RÖ÷&Â6öÆÆV7F–öâW76’rÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†RÖ†FRÖÆVFvW"ö–æFW‚æ‡FÖÂs²6ÇVrÒvÖ÷&Â×&VÆ–v–÷W2×†–Æ÷6÷†–6ÂÖW76—2s²Æ&VÂÒuF†R†FRÆVFvW"rÒÀÐ¢²F‚ÒwV&Æ–2öW76—2ö÷WG6–FR×F†RÖv&FVâö–æFW‚æ‡FÖÂs²6ÇVrÒvÖ÷&Â×&VÆ–v–÷W2×†–Æ÷6÷†–6ÂÖW76—2s²Æ&VÂÒt÷WG6–FRF†Rv&FVârÒÀÐ¢²F‚ÒwV&Æ–2öW76—2÷v†BÖ†VæVBÖBÖ6×Ö×—7F–2ö–æFW‚æ‡FÖÂs²6ÇVrÒvfÆööG2×vFW"Ö'V–ÇBÖVçf—&öæÖVçBs²Æ&VÂÒwF†R6××—7F–2W76’rÒÀ¢²F‚ÒwV&Æ–2öW76—2÷6fR×6öÖRÖ—"Öf÷"×F†RÖf—6†–W2ö–æFW‚æ‡FÖÂs²6ÇVrÒvfÆööG2×vFW"Ö'V–ÇBÖVçf—&öæÖVçBs²Æ&VÂÒu6fR6öÖR—"f÷"F†Rf—6†–W2rÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†RÖV6VÖVçB×VæFW"×F†RÖÆ¶Rö–æFW‚æ‡FÖÂs²6ÇVrÒvfÆööG2×vFW"Ö'V–ÇBÖVçf—&öæÖVçBs²Æ&VÂÒuF†RV6VÖVçBVæFW"F†RÆ¶RrÒÀ¢²F‚ÒwV&Æ–2öW76—2ö×VÇF—ÆR×6†×VÇF—ÆRö–æFW‚æ‡FÖÂs²6ÇVrÒw&W÷'FVBÖ66R×7GVF–W2s²Æ&VÂÒt×VÇF—ÆR6†×VÇF—ÆRrÒÀ¢²F‚ÒwV&Æ–2öW76—2÷F†RÖFö÷"×F†B×v÷VÆBÖæ÷BÖ÷Vâö–æFW‚æ‡FÖÂs²6ÇVrÒw&W÷'FVBÖ66R×7GVF–W2s²Æ&VÂÒuF†RFö÷"F†Bv÷VÆBæ÷B÷VârÐ¢ Ð¦f÷&V6‚‚GvR–âF'F–6ÆT6öÆÆV7F–öä&÷VæF'•vW2’°Ð¢G&WV—&VEW„6†V6·2³Ò€Ð¢°Ð¢F‚ÒGvRåF€Ð¢GFW&âÒ‚vFF×–V6RÖ6öÆÆV7F–öâ×6ÇVsÒƒó¢"r²·&VvW…Ó£¤W66R‚GvRå6ÇVr’²r'Âr²·&VvW…Ó£¤W66R‚GvRå6ÇVr’²r’rÐ¢ÖW76vRÒ&W‡V7FVBB‚GvRäÆ&VÂ’Fò¶W’F†R'F–6ÆR6öÆÆV7F–öâ&÷VæF'’Fò6öÆÆV7F–öâ6ÇVrrB‚GvRå6ÇVr’r Ð¢ÒÀÐ¢°Ð¢F‚ÒGvRåF€Ð¢GFW&âÒtg&öÒF†R6öÆÆV7F–öâpÐ¢ÖW76vRÒ&W‡V7FVBB‚GvRäÆ&VÂ’æ÷BFò&VæFW"F†R&WF—&VBf—6–&ÆR6öÆÆV7F–öâ†VFW"‡&6R Ð¢6†÷VÆDæ÷DÖF6‚ÒGG'VPÐ¢ÒÀÐ¢°Ð¢F‚ÒGvRåF€Ð¢GFW&âÒv'F–6ÆUö6öÆÆV7F–öåö6öçFW‡BpÐ¢ÖW76vRÒ&W‡V7FVBB‚GvRäÆ&VÂ’6öÆÆV7F–öâÆ–æ²FòVÖ—BF†RFVF–6FVBæÇ—F–726÷W&6R6Æ÷B Ð¢ÒÀÐ¢°Ð¢F‚ÒGvRåF€Ð¢GFW&âÒw–V6RÒÖ6öÆÆV7F–öâÖ66VçBpÐ¢ÖW76vRÒ&W‡V7FVBB‚GvRäÆ&VÂ’æ÷BFò&VæFW"&WF—&VB'F–6ÆR6öÆÆV7F–öâÖ66VçB†öö·2 Ð¢6†÷VÆDæ÷DÖF6‚ÒGG'VPÐ¢ÒÀÐ¢°Ð¢F‚ÒGvRåF€Ð¢GFW&âÒvFF×–V6RÖ6öÆÆV7F–öâ×&ööÒ×F†VÖSÒpÐ¢ÖW76vRÒ&W‡V7FVBB‚GvRäÆ&VÂ’æ÷BFòVÖ—B&WF—&VB6öÆÆV7F–öâ&ööÒ×F†VÖR'F–6ÆRGG&–'WFW2 Ð¢6†÷VÆDæ÷DÖF6‚ÒGG'VPÐ¢ÐÐ¢Ð§ÐÐ Ð¢G&WV—&VEW„6†V6·2³Ò€Ð¢°Ð¢F‚ÒwV&Æ–2öW76—2÷v†BÖ†VæVBÖBÖ6×Ö×—7F–2ö–æFW‚æ‡FÖÂpÐ¢GFW&âÒw–V6RÒÖ6öÆÆV7F–öâÖ66VçBÒ×&W÷'FVBÖ66R×7GVF–W2ÖWf–FVæ6R×&ööÒpÐ¢ÖW76vRÒvW‡V7FVBGVÂÖÖVÖ&W'6†—W76—2æ÷BFò&ÆVæBF†R6V6öæF'’6öÆÆV7F–öâ6¶–â†öö²–çFò'F–6ÆRvW2pÐ¢6†÷VÆDæ÷DÖF6‚ÒGG'VPÐ¢ÐÐ¢Ð Ð¦f÷&V6‚‚FVçG'’–âF6öÆÆV7F–öå&ööÔW‡V7FF–öç2ävWDVçVÖW&F÷"‚’’°Ð¢G&VÆF—fUF‚Ò·7G&–æuÒFVçG'’ä¶WÐ¢GF†VÖRÒ·7G&–æuÒFVçG'’åfÇVPÐ Ð¢G&WV—&VEW„6†V6·2³Ò€Ð¢°Ð¢F‚ÒG&VÆF—fUF€Ð¢GFW&âÒ‚vFFÖ6öÆÆV7F–öâ×&ööÒ×F†VÖSÒƒó¢"r²·&VvW…Ó£¤W66R‚GF†VÖR’²r'Âr²·&VvW…Ó£¤W66R‚GF†VÖR’²r’rÐ¢ÖW76vRÒ&W‡V7FVBF†RÆ—fR6öÆÆV7F–öâvRFòöÖ—B&WF—&VBFFÖ6öÆÆV7F–öâ×&ööÒ×F†VÖSÒrGF†VÖRr Ð¢6†÷VÆDæ÷DÖF6‚ÒGG'VPÐ¢ÒÀÐ¢°Ð¢F‚ÒG&VÆF—fUF€Ð¢GFW&âÒ‚v6öÆÆV7F–öâ×&ööÒÒÒr²·&VvW…Ó£¤W66R‚GF†VÖR’Ð¢ÖW76vRÒ&W‡V7FVBF†RÆ—fR6öÆÆV7F–öâvRFòöÖ—B&WF—&VB6öÆÆV7F–öâ×&ööÒÖöF–f–W"6Æ72rGF†VÖRr Ð¢6†÷VÆDæ÷DÖF6‚ÒGG'VPÐ¢ÐÐ¢Ð§ÐÐ Ð¦f÷&V6‚‚GF†VÖR–âF6öÆÆV7F–öäF—&V7F÷'•F†VÖW2’°Ð¢G&WV—&VEW„6†V6·2³Ò€Ð¢°Ð¢F‚ÒwV&Æ–2ö6öÆÆV7F–öç2ö–æFW‚æ‡FÖÂpÐ¢GFW&âÒ‚v6öÆÆV7F–öâÖ6&BÒÒr²·&VvW…Ó£¤W66R‚GF†VÖR’Ð¢ÖW76vRÒ&W‡V7FVBF†R'&öG6†VWB6öÆÆV7F–öç2F—&V7F÷'’FòöÖ—B&WF—&VB&ööÒÖV6†òF†VÖR6Æ72rGF†VÖRr Ð¢6†÷VÆDæ÷DÖF6‚ÒGG'VPÐ¢ÐÐ¢Ð§ÐÐ Ð¦f÷&V6‚‚F6†V6²–âG&WV—&VEW„6†V6·2’°Ð¢G&VÆF—fUF‚Ò·7G&–æuÒF6†V6²åF€Ð¢–b‚Öæ÷BGF&vWEvT‡FÖÂä6öçF–ç4¶W’‚G&VÆF—fUF‚’’°Ð¢GW„—77VW2äFB‚$Ö—76–ærvVæW&FVBvR&WV—&VBf÷"U‚&Vw&W76–öâ6÷fW&vS¢G&VÆF—fUF‚"Ð¢6öçF–çVPÐ¢ÐÐ Ð¢–b‚F6†V6²ä6öçF–ç2‚uG—Rr’ÖæBF6†V6²åG—RÖWvÆ–'&'’ÖV×G’×7FFRr’°Ð¢F‡FÖÂÒGF&vWEvT‡FÖÅ²G&VÆF—fUF…ÐÐ¢F†4V×G•7FFUFW‡BÒF‡FÖÂÖÖF6‚tæòÖF6†–ær–V6W2f÷VæBpÐ¢F†46öÆÆV7F–öç5FW‡BÒF‡FÖÂÖÖF6‚t6öÆÆV7F–öç2pÐ¢F†4†öÖUFW‡BÒF‡FÖÂÖÖF6‚t†öÖRpÐ¢F†46öÆÆV7F–öç4FW7F–æF–öâÒF‡FÖÂÖÖF6‚rƒó¦‡GG3¢òö÷WG6–FV–ç&–çEÂæ÷&r“òö6öÆÆV7F–öç2òpÐ¢F†4†öÖTFW7F–æF–öâÒF‡FÖÂÖÖF6‚rƒó¦‡GG3¢òö÷WG6–FV–ç&–çEÂæ÷&r“òòpÐ Ð¢–b‚Öæ÷B‚F†4V×G•7FFUFW‡BÖæBF†46öÆÆV7F–öç5FW‡BÖæBF†4†öÖUFW‡BÖæBF†46öÆÆV7F–öç4FW7F–æF–öâÖæBF†4†öÖTFW7F–æF–öâ’’°Ð¢GW„—77VW2äFB‚"G&VÆF—fUF‚ÓâB‚F6†V6²äÖW76vR’"Ð¢ÐÐ¢ÐÐ¢VÇ6R°Ð¢F—4æVvF—fRÒ¶&ööÅÒ‚F6†V6²ä6öçF–ç4¶W’‚u6†÷VÆDæ÷DÖF6‚r’ÖæBF6†V6²å6†÷VÆDæ÷DÖF6‚Ð¢FÖF6†W2ÒGF&vWEvT‡FÖÅ²G&VÆF—fUF…ÒÖÖF6‚…·7G&–æuÒF6†V6²åGFW&âÐ¢–b‚‚F—4æVvF—fRÖæBFÖF6†W2’Ö÷"‚Öæ÷BF—4æVvF—fRÖæBÖæ÷BFÖF6†W2’’°Ð¢GW„—77VW2äFB‚"G&VÆF—fUF‚ÓâB‚F6†V6²äÖW76vR’"Ð¢ÐÐ¢ÐÐ§ÐÐ Ð¦f÷&V6‚‚Ff÷&&–FFVåF‚–â€Ð¢wV&Æ–2öÆÖæ6²ö–æFW‚æ‡FÖÂpÐ¢’’°Ð¢FgVÆÄf÷&&–FFVåF‚Ò¦ö–âÕF‚G&Wõ&ö÷BFf÷&&–FFVåF€Ð¢–b…FW7BÕF‚ÔÆ—FW&ÅF‚FgVÆÄf÷&&–FFVåF‚ÕF…G—RÆVb’°Ð¢GW„—77VW2äFB‚"Ff÷&&–FFVåF‚ÓâW‡V7FVBF†RÆÖæ6²6V7F–öâ–æFW‚Fò&VÖ–âVçV&Æ—6†VB"Ð¢ÐÐ§ÐÐ Ð¦–b‚GF&vWEvT‡FÖÂä6öçF–ç4¶W’‚wV&Æ–2ö–æFW‚æ‡FÖÂr’’°Ð¢F†öÖT–æFW„‡FÖÂÒ·7G&–æuÒGF&vWEvT‡FÖÅ²wV&Æ–2ö–æFW‚æ‡FÖÂuÐÐ¢F7W'&VçE6ÇVuGFW&âÒvFFÖ6'Fööâ×6ÇVsÒƒó¢"r²·&VvW…Ó£¤W66R‚F7W'&VçD6'Fööå6ÇVr’²r'Âr²·&VvW…Ó£¤W66R‚F7W'&VçD6'Fööå6ÇVr’²r’pÐ¢F7W'&VçEG&–vvW$ÖF6‚Ò·&VvW…Ó£¤ÖF6‚‚F†öÖT–æFW„‡FÖÂÂsÆ'WGFöåÆ"ƒóÕµãåÒ¥Æ&VF—F÷&–ÂÖ6'Fööåõ÷G&–vvW%Æ"’ƒóÕµãåÒ¢r²F7W'&VçE6ÇVuGFW&â²r•µãåÒ£ârÂt–væ÷&T66RrÐ¢G&V6VçDw&–D–æFW‚ÒF†öÖT–æFW„‡FÖÂä–æFW„öb‚vFFÖ†öÖRÖ6'Fööâ×&V6VçBrÂµ7—7FVÒå7G&–æt6ö×&—6öåÓ£¤÷&F–æÂÐ Ð¢–b‚Öæ÷BF7W'&VçEG&–vvW$ÖF6‚å7V66W72’°Ð¢GW„—77VW2äFB‚wV&Æ–2ö–æFW‚æ‡FÖÂÓâW‡V7FVBF†R7W'&VçB†öÖWvR6'FööâG&–vvW"Fò¶VWF†R7W'&VçBFF6ÇVrrÐ¢ÐÐ¢VÇ6V–b‚G&V6VçDw&–D–æFW‚ÖÇBÖ÷"F7W'&VçEG&–vvW$ÖF6‚ä–æFW‚ÖwBG&V6VçDw&–D–æFW‚’°Ð¢GW„—77VW2äFB‚wV&Æ–2ö–æFW‚æ‡FÖÂÓâW‡V7FVBF†R7W'&VçB6'Fööâ&Æö6²Fò&VæFW"&Vf÷&RF†R&V6VçB6'Fööâw&–BrÐ¢ÐÐ Ð¢G&V6VçDÖF6†W2Ò…·&VvW…Ó£¤ÖF6†W2‚F†öÖT–æFW„‡FÖÂÂsÆf–wW&UÆ"ƒóÕµãåÒ¥Æ&VF—F÷&–ÂÖ6'Fööâ×&V6VçEõö—FVÕÆ"’ƒóÕµãåÒ¥Æ&FFÖ†öÖRÖ6'Fööâ×&V6VçBÖ6&EÆ"•µãåÒ¦FFÖ6'Fööâ×6ÇVsÒƒó¢"…µâ#åÒ²’'Â…µåÇ3åÒ²’’rÂt–væ÷&T66Rr’Ð¢–b‚G&V6VçDÖF6†W2ä6÷VçBÖæR´ÖF…Ó£¤Ö–âƒ"ÂG&V6VçD†öÖT6'Fööå6ÇVw2ä6÷VçB’’°Ð¢GW„—77VW2äFB‚'V&Æ–2ö–æFW‚æ‡FÖÂÓâW‡V7FVBW†7FÇ’B…´ÖF…Ó£¤Ö–âƒ"ÂG&V6VçD†öÖT6'Fööå6ÇVw2ä6÷VçB’’&V6VçB†öÖWvR6'Fööâ6&G2Âf÷VæBB‚G&V6VçDÖF6†W2ä6÷VçB’"Ð¢ÐÐ¢VÇ6R°Ð¢F7GVÅ&V6VçE6ÇVw2Ò‚G&V6VçDÖF6†W2Âf÷$V6‚Ôö&¦V7B°Ð¢–b‚Eòäw&÷W5³Òå7V66W72’²Eòäw&÷W5³ÒåfÇVRÒVÇ6R²Eòäw&÷W5³%ÒåfÇVRÐÐ¢ÒÐ¢FW‡V7FVE&V6VçE6ÇVw2Ò‚G&V6VçD†öÖT6'Fööå6ÇVw2Â6VÆV7BÔö&¦V7BÔf—'7BG&V6VçDÖF6†W2ä6÷VçBÐ¢–b‚‚F7GVÅ&V6VçE6ÇVw2Ö¦ö–âwÂr’ÖæR‚FW‡V7FVE&V6VçE6ÇVw2Ö¦ö–âwÂr’’°Ð¢GW„—77VW2äFB‚'V&Æ–2ö–æFW‚æ‡FÖÂÓâW‡V7FVB&V6VçB†öÖWvR6'Fööç2–âFFR÷&FW"rB‚FW‡V7FVE&V6VçE6ÇVw2Ö¦ö–ârÂr’rÂf÷VæBrB‚F7GVÅ&V6VçE6ÇVw2Ö¦ö–ârÂr’r"Ð¢ÐÐ¢ÐÐ Ð¢–b‚F7W'&VçD6'Fööå6ÇVrÖWvÆ–æW2ÖöbÖf—&RrÖæBF†öÖT–æFW„‡FÖÂÖæ÷FÖF6‚vFF×F—FÆSÒƒó¢$Æ–æW2öbf—&R'ÄÆ–æW5ÂöeÂf—&R’r’°Ð¢GW„—77VW2äFB‚wV&Æ–2ö–æFW‚æ‡FÖÂÓâW‡V7FVBÆ–æW2öbf—&RFò&VÖ–âF†R7W'&VçB†öÖWvR6'FööârÐ¢ÐÐ¢–b‚‚G&V6VçD†öÖT6'Fööå6ÇVw2Â6VÆV7BÔö&¦V7BÔf—'7B’ÖWv6Æö6†VBÖf÷"Ö'W6–æW72rÖæBF†öÖT–æFW„‡FÖÂÖæ÷FÖF6‚sÆf–wW&UÆ"ƒóÕµãåÒ¥Æ&VF—F÷&–ÂÖ6'Fööâ×&V6VçEõö—FVÕÆ"’ƒóÕµãåÒ¦FFÖ6'Fööâ×6ÇVsÒƒó¢&6Æö6†VBÖf÷"Ö'W6–æW72'Æ6Æö6†VBÖf÷"Ö'W6–æW72’’ƒ÷2’â£óÆf–v6F–öããÇ7ãä6Æö6†VBf÷"'W6–æW73Â÷7ããÂöf–v6F–öãâr’°Ð¢GW„—77VW2äFB‚wV&Æ–2ö–æFW‚æ‡FÖÂÓâW‡V7FVB6Æö6†VBf÷"'W6–æW72Fò&RF†Rf—'7B&V6VçB†öÖWvR6'Fööâ6&BrÐ¢ÐÐ§ÐÐ¦f÷&V6‚‚F'F–6ÆUF‚–â€Ð¢wV&Æ–2öW76—2÷&W6–FVçF–ÂÖVÆV7F–öç2ö–æFW‚æ‡FÖÂrÀÐ¢wV&Æ–2öW76—2÷F†R×&—6²ÖÖævVÖVçBÖ'VffWBö–æFW‚æ‡FÖÂrÀÐ¢wV&Æ–2öW76—2÷F†R×v÷&ÆBÖ—2Ö&6²ÖB×F†R×ö¶W"×F&ÆRö–æFW‚æ‡FÖÂpÐ¢’’°Ð¢–b‚Öæ÷BGF&vWEvT‡FÖÂä6öçF–ç4¶W’‚F'F–6ÆUF‚’’°Ð¢GW„—77VW2äFB‚$Ö—76–ærvVæW&FVBvR&WV—&VBf÷"'F–6ÆRÖW†—B&Vw&W76–öâ6÷fW&vS¢F'F–6ÆUF‚"Ð¢6öçF–çVPÐ¢ÐÐ Ð¢F'F–6ÆT‡FÖÂÒ·7G&–æuÒGF&vWEvT‡FÖÅ²F'F–6ÆUF…ÐÐ¢FæWw6ÆWGFW$–æFW‚ÒF'F–6ÆT‡FÖÂä–æFW„öb‚væWw6ÆWGFW"×6–vçWÒ×vRrÂµ7—7FVÒå7G&–æt6ö×&—6öåÓ£¤÷&F–æÂÐ¢–b‚FæWw6ÆWGFW$–æFW‚ÖvR’°Ð¢GW„—77VW2äFB‚"F'F–6ÆUF‚ÓâW‡V7FVB'F–6ÆRgFW&ÖGFW"FòöÖ—BæWw6ÆWGFW"×6–vçWÒ×vR"Ð¢ÐÐ Ð¢G&V6÷&D–æFW‚ÒF'F–6ÆT‡FÖÂä–æFW„öb‚v'F–6ÆR×V&Æ–6F–öâ×&V6÷&BrÂµ7—7FVÒå7G&–æt6ö×&—6öåÓ£¤÷&F–æÂÐ¢F¦÷W&æW”–æFW‚ÒF'F–6ÆT‡FÖÂä–æFW„öb‚v¦÷W&æW’ÖÆ–æ·2ÒÖ'F–6ÆRÖW†—BrÂµ7—7FVÒå7G&–æt6ö×&—6öåÓ£¤÷&F–æÂÐ¢–b‚G&V6÷&D–æFW‚ÖÇBÖ÷"F¦÷W&æW”–æFW‚ÖÇBÖ÷"G&V6÷&D–æFW‚ÖvRF¦÷W&æW”–æFW‚’°Ð¢GW„—77VW2äFB‚"F'F–6ÆUF‚ÓâW‡V7FVB'F–6ÆR×V&Æ–6F–öâ×&V6÷&BFòV"&Vf÷&R¦÷W&æW’ÖÆ–æ·2ÒÖ'F–6ÆRÖW†—B"Ð¢ÐÐ Ð¢–b‚F'F–6ÆT‡FÖÂÖæ÷FÖF6‚rƒ÷2–¦÷W&æW’ÖÆ–æ·2ÒÖ'F–6ÆRÖW†—Bâ£òƒó¦‡GG3¢òö÷WG6–FV–ç&–çEÂæ÷&r“òö&6†—fRòâ£òƒó¦‡GG3¢òö÷WG6–FV–ç&–çEÂæ÷&r“òö6öÆÆV7F–öç2òâ£òƒó¦‡GG3¢òö÷WG6–FV–ç&–çEÂæ÷&r“òöÆ–'&'’òâ£ö‡GG3¢òö'WGFöæF÷våÂæ6öÒô÷WG6–FT–å&–çEµãåÒ£åÇ2¤æWw6ÆWGFW%Ç2£Âr’°Ð¢GW„—77VW2äFB‚"F'F–6ÆUF‚ÓâW‡V7FVB'F–6ÆRÖW†—BÆ–æ·2Fò–æ6ÇVFR&6†—fRÂ6öÆÆV7F–öç2ÂÆ–'&'’ÂæBæWw6ÆWGFW""Ð¢ÐÐ§ÐÐ Ð¦–b‚GF&vWEvT‡FÖÂä6öçF–ç4¶W’‚wV&Æ–2ö&6†—fRö–æFW‚æ‡FÖÂr’’°Ð¢F&6†—fT–æFW„‡FÖÂÒ·7G&–æuÒGF&vWEvT‡FÖÅ²wV&Æ–2ö&6†—fRö–æFW‚æ‡FÖÂuÐÐ¢F&6†—fTFW6µFt6÷VçBÒ·&VvW…Ó£¤ÖF6†W2‚F&6†—fT–æFW„‡FÖÂÂv6Æ73Òƒó¢%µâ%Ò¥Æ&—FVÒÖ¶–6¶W"ÒÖ6öÆÆV7F–öåÆ%µâ%Ò¢'ÂruµâruÒ¥Æ&—FVÒÖ¶–6¶W"ÒÖ6öÆÆV7F–öåÆ%µâruÒ¢rwÅµåÇ3åÒ¥Æ&—FVÒÖ¶–6¶W"ÒÖ6öÆÆV7F–öåÆ%µåÇ3åÒ¢’rÂt–væ÷&T66Rr’ä6÷Vç@Ð¢–b‚F&6†—fTFW6µFt6÷VçBÖW’°Ð¢GW„—77VW2äFB‚wV&Æ–2ö&6†—fRö–æFW‚æ‡FÖÂÓâW‡V7FVB&6†—fR6öÆÆV7F–öâÆ&VÇ2Fò&VæFW"–âF†R×WFVBFW6²×Fr¶–6¶W"÷6—F–öârÐ¢ÐÐ Ð¢G–V$§V×6÷VçBÒ·&VvW…Ó£¤ÖF6†W2‚F&6†—fT–æFW„‡FÖÂÂv6Æ73Òƒó¢%µâ%Ò¥Æ&W76—2Ög&öçEõ÷–V"ÖÆ–æµÆ%µâ%Ò¢'ÂruµâruÒ¥Æ&W76—2Ög&öçEõ÷–V"ÖÆ–æµÆ%µâruÒ¢rwÅµåÇ3åÒ¥Æ&W76—2Ög&öçEõ÷–V"ÖÆ–æµÆ%µåÇ3åÒ¢’rÂt–væ÷&T66Rr’ä6÷Vç@Ð¢–b‚G–V$§V×6÷VçBÖÇB"’°Ð¢GW„—77VW2äFB‚'V&Æ–2ö&6†—fRö–æFW‚æ‡FÖÂÓâW‡V7FVBBÆV7B"–V"Ö§V×Æ–æ·2Âf÷VæBG–V$§V×6÷VçB"Ð¢ÐÐ Ð¢–b‚Öæ÷B·7G&–æuÓ£¤—4çVÆÄ÷%v†—FU76R‚F7W'&VçD6'Fööä6F–öâ’ÖæBF&6†—fT–æFW„‡FÖÂÖÖF6‚·&VvW…Ó£¤W66R‚F7W'&VçD6'Fööä6F–öâ’’°Ð¢GW„—77VW2äFB‚wV&Æ–2ö&6†—fRö–æFW‚æ‡FÖÂÓâW‡V7FVBF†R&6†—fR6†VÆÂæ÷BFò&VæFW"F†R†öÖWvR6'Fööâ6F–öâFW‡BrÐ¢ÐÐ§ÐÐ Ð¢FÖöFW&ä&–õ6†&VE&÷uvW2Ò€Ð¢wV&Æ–2ö&6†—fRö–æFW‚æ‡FÖÂrÀÐ¢wV&Æ–2öÆ–'&'’ö–æFW‚æ‡FÖÂrÀÐ¢wV&Æ–2ö6öÆÆV7F–öç2öÖöFW&âÖ&–÷2ö–æFW‚æ‡FÖÂpÐ¢Ð Ð¦f÷&V6‚‚G&VÆF—fUF‚–âFÖöFW&ä&–õ6†&VE&÷uvW2’°Ð¢–b‚Öæ÷BGF&vWEvT‡FÖÂä6öçF–ç4¶W’‚G&VÆF—fUF‚’’°Ð¢GW„—77VW2äFB‚"G&VÆF—fUF‚ÓâW‡V7FVBvVæW&FVB…DÔÂFò&Rf–Æ&ÆRf÷"ÖöFW&â&–÷26†&VB×&÷r6÷fW&vR"Ð¢6öçF–çVPÐ¢ÐÐ Ð¢F‡FÖÂÒ·7G&–æuÒGF&vWEvT‡FÖÅ²G&VÆF—fUF…ÐÐ¢–b‚F‡FÖÂÖæ÷FÖF6‚tÖöFW&â&–÷2r’°Ð¢GW„—77VW2äFB‚"G&VÆF—fUF‚ÓâW‡V7FVB&W&W6VçFF—fR6†&VB&÷w2Fò¶VWF†RÖöFW&â&–÷2FW‡B¶–6¶W""Ð¢ÐÐ Ð¢–b‚F‡FÖÂÖÖF6‚v—FVÒÒ×f&–çBÖÖöFW&æ&–òr’°Ð¢GW„—77VW2äFB‚"G&VÆF—fUF‚ÓâW‡V7FVB6†&VB&6†—fR&÷w2Fò7F÷&VæFW&–ærF†R&WF—&VBÖöFW&â&–÷2–ç6WB×'VÆR6Æ72"Ð¢ÐÐ§ÐÐ Ð¦–b‚G'Vææ–æt†VFW$—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæB'Vææ–ærÖ†VFW"†öÖRÆ–æ·2÷WG6–FRF†RW‡V7FVB&6RF‚w³Òrâ6×ÆW3¢³Ò"ÖbDW‡V7FVD†öÖUF‚Â„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2G'Vææ–æt†VFW$—77VW2’Ð§ÐÐ Ð¦–b‚G&ö÷E&VÆF—fT–ÖvT—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚tf÷VæB7FÆR&ö¦V7B×F‚Æ–Ör7&3Ò"ö÷WG6–FV–ç&–çBö–ÖvW2òâââ#âF‡2–âvVæW&FVB…DÔÂâ6×ÆW3¢³ÒrÖb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2G&ö÷E&VÆF—fT–ÖvT—77VW2’Ð§ÐÐ Ð¦–b‚FÆö6Æ—¦VDÖVF—VÔ–ÖvT6÷VçBÖW’°Ð¢F‡&÷r$F–Bæ÷Bf–æBç’&6R×F‚×6fRÆö6Æ—¦VBö–ÖvW2öÖVF—VÒò–ÖvRU$Ç2–âvVæW&FVB…DÔÂâ Ð§ÐÐ Ð¦–b‚G¦v÷F×Ç¤—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæB¦v÷F×Å¢–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2G¦v÷F×Ç¤—77VW2’Ð§ÐÐ Ð¦–b‚GV&Æ–5Fdff÷&Fæ6T†—G2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæBV&Æ–2…DÔÂF†B7F–ÆÂW‡÷6W2Dbff÷&Fæ6W2â6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2GV&Æ–5Fdff÷&Fæ6T†—G2’Ð§ÐÐ Ð¦–b‚G&WF—&VE&÷WFT—77VW2ä6÷VçBÖwB’°¢F‡&÷r‚$f÷VæB&WF—&VB&÷WFW2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2G&WF—&VE&÷WFT—77VW2’§Ð Ð¦–b‚G6VÖçF–4—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæB6VÖçF–266W76–&–Æ—G’&Vw&W76–öç2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2G6VÖçF–4—77VW2’Ð§ÐÐ Ð¦–b‚F–×÷'FVDÖVF–—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæB–×÷'FVBÖVF–&VæFW&–ær&Vw&W76–öç2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2F–×÷'FVDÖVF–—77VW2’Ð§ÐÐ Ð¦–b‚F'F–6ÆTÆ–v‡F&÷„—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæB'F–6ÆR–ÖvRÆ–v‡F&÷‚&Vw&W76–öç2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2F'F–6ÆTÆ–v‡F&÷„—77VW2’Ð§ÐÐ Ð¦–b‚FÖWFFF—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæBÖWFFF&Vw&W76–öç2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2FÖWFFF—77VW2’Ð§ÐÐ Ð¦–b‚G7G'V7GW&VDFF—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæB7G'V7GW&VBÖFF&Vw&W76–öç2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2G7G'V7GW&VDFF—77VW2’Ð§ÐÐ Ð¦–b‚F–æFW†F–öä—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæB–æFW†F–öâ×öÆ–7’&Vw&W76–öç2–âvVæW&FVB÷WGWBâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2F–æFW†F–öä—77VW2’Ð§ÐÐ Ð¦–b‚FÆVv7”6ÆVçW—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæBÆVv7’6öçFVçBÖ6ÆVçW&Vw&W76–öç2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2FÆVv7”6ÆVçW—77VW2’Ð§ÐÐ Ð¦–b‚GW„—77VW2ä6÷VçBÖwB’°Ð¢F‡&÷r‚$f÷VæBU‚öæf–vF–öâ&Vw&W76–öç2–âvVæW&FVB…DÔÂâ6×ÆW3¢³Ò"Öb„f÷&ÖBÕ6×ÆTÆ—7BÔ—FV×2GW„—77VW2’Ð§ÐÐ Ð¥w&—FRÔ†÷7B%V&Æ–2…DÔÂ÷WGWB&Vw&W76–öâFW7B76VBâ Ð¢FvÆö&Ã¤Ä5DU„•D4ôDRÒ Ð¦W†—B  
+$importedMediaIssues = New-Object System.Collections.Generic.List[string]
+$metadataIssues = New-Object System.Collections.Generic.List[string]
+$structuredDataIssues = New-Object System.Collections.Generic.List[string]
+$indexationIssues = New-Object System.Collections.Generic.List[string]
+$uxIssues = New-Object System.Collections.Generic.List[string]
+$articleLightboxIssues = New-Object System.Collections.Generic.List[string]
+$legacyCleanupIssues = New-Object System.Collections.Generic.List[string]
+$retiredRouteIssues = New-Object System.Collections.Generic.List[string]
+$publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
+$localizedMediumImageCount = 0
+$targetPageHtml = @{}
+
+$requiredSemanticPages = [ordered]@{
+  'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
+  'public/archive/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/syd-and-oliver/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/library/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/gallery/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/shop/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+  'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
+  'public/shop/the-parable-of-the-sheep/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
+  'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
+}
+
+$optionalDefaultListPages = @(
+  'public/working-papers/index.html'
+)
+
+$requiredImportedMediaPages = [ordered]@{
+  'public/essays/biter-the-slang-word-that-hits/index.html' = @{
+    ExpectedImagePrefix = '/images/essays/biter-the-slang-word-that-hits/'
+    ForbiddenImagePattern = '/images/medium/biter-the-slang-word-that-hits/[^"''<>\s]+\.svg'
+  }
+  'public/essays/rethinking-invasive-species-management/index.html' = @{
+    ExpectedImagePrefix = '/images/essays/rethinking-invasive-species-management/'
+    ForbiddenImagePattern = '/images/medium/rethinking-invasive-species-management/[^"''<>\s]+\.svg'
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    ExpectedImagePrefix = '/images/medium/'
+  }
+  'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html' = @{
+    ExpectedImagePrefix = '/images/medium/'
+  }
+}
+
+$requiredEssayHeroPages = @(
+  'public/essays/2025-supreme-court-wrap-up/index.html',
+  'public/essays/synthetic-reasoning/index.html',
+  'public/essays/modern-prometheus/index.html',
+  'public/essays/biter-the-slang-word-that-hits/index.html',
+  'public/essays/the-fair-price-of-bitcoin-69420/index.html',
+  'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html',
+  'public/essays/the-model-that-could-not-leave/index.html',
+  'public/essays/smokestack-spreadsheets/index.html',
+  'public/essays/canvas-fails-finals-week/index.html',
+  'public/essays/the-bet-slip-in-the-briefing-room/index.html',
+  'public/essays/can-you-pass-the-pepper-please/index.html',
+  'public/essays/the-factory-in-the-footnote/index.html',
+  'public/essays/id-required/index.html',
+  'public/essays/the-examiners-red-pencil/index.html',
+  'public/essays/the-strait-that-holds-the-price/index.html',
+  'public/essays/the-blockade-has-a-phone-number/index.html',
+  'public/essays/the-warning-label-in-the-weeds/index.html',
+  'public/essays/nothing-to-see-here/index.html',
+  'public/essays/the-tank-at-the-fence-line/index.html',
+  'public/essays/the-war-premium-at-the-auction/index.html',
+  'public/essays/beyond-moores-law/index.html',
+  'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
+)
+
+$essayHeroChecks = @(
+  @{
+    PublicPath = 'public/essays/2025-supreme-court-wrap-up/index.html'
+    SourcePath = 'content/essays/2025-supreme-court-wrap-up.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/synthetic-reasoning/index.html'
+    SourcePath = 'content/essays/synthetic-reasoning.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/biter-the-slang-word-that-hits/index.html'
+    SourcePath = 'content/essays/biter-the-slang-word-that-hits.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/the-fair-price-of-bitcoin-69420/index.html'
+    SourcePath = 'content/essays/the-fair-price-of-bitcoin-69420.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+  },
+  @{
+    PublicPath = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'
+    SourcePath = 'content/essays/the-ai-data-center-wants-its-own-power-plant.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The AI campus no longer arrives alone. It now shows up with turbines, towers, and a power strategy of its own.'
+  },
+  @{
+    PublicPath = 'public/essays/the-model-that-could-not-leave/index.html'
+    SourcePath = 'content/essays/the-model-that-could-not-leave.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'An acquisition can be written on paper. Capability is harder to move cleanly.'
+  },
+  @{
+    PublicPath = 'public/essays/smokestack-spreadsheets/index.html'
+    SourcePath = 'content/essays/smokestack-spreadsheets.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'A private forecast can become a public infrastructure claim.'
+  },
+  @{
+    PublicPath = 'public/essays/canvas-fails-finals-week/index.html'
+    SourcePath = 'content/essays/canvas-fails-finals-week.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = "The operational layer is the institution now."
+  },
+  @{
+    PublicPath = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'
+    SourcePath = 'content/essays/the-bet-slip-in-the-briefing-room.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = "The bet slip looks harmless until it sits beside tomorrow's official decision."
+  },
+  @{
+    PublicPath = 'public/essays/can-you-pass-the-pepper-please/index.html'
+    SourcePath = 'content/essays/can-you-pass-the-pepper-please.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The room clears. The report remains.'
+  },
+  @{
+    PublicPath = 'public/essays/the-factory-in-the-footnote/index.html'
+    SourcePath = 'content/essays/the-factory-in-the-footnote.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'A factory can disappear into a footnote before anyone votes to close it.'
+  },
+  @{
+    PublicPath = 'public/essays/id-required/index.html'
+    SourcePath = 'content/essays/id-required.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The voter roll is a public trust before it is a database.'
+  },
+  @{
+    PublicPath = 'public/essays/the-strait-that-holds-the-price/index.html'
+    SourcePath = 'content/essays/the-strait-that-holds-the-price.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'Before a price shock reaches land, it passes through a narrow place.'
+  },
+  @{
+    PublicPath = 'public/essays/the-blockade-has-a-phone-number/index.html'
+    SourcePath = 'content/essays/the-blockade-has-a-phone-number.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'A phone line can stay open while the waterway stays closed.'
+  },
+  @{
+    PublicPath = 'public/essays/the-warning-label-in-the-weeds/index.html'
+    SourcePath = 'content/essays/the-warning-label-in-the-weeds.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The label looks like packaging until the legal system asks it to carry public trust.'
+  },
+  @{
+    PublicPath = 'public/essays/nothing-to-see-here/index.html'
+    SourcePath = 'content/essays/nothing-to-see-here.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The map is a public-record problem before it is an origin story.'
+  },
+  @{
+    PublicPath = 'public/essays/the-tank-at-the-fence-line/index.html'
+    SourcePath = 'content/essays/the-tank-at-the-fence-line.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The fence line is where private storage becomes public geography.'
+  },
+  @{
+    PublicPath = 'public/essays/the-war-premium-at-the-auction/index.html'
+    SourcePath = 'content/essays/the-war-premium-at-the-auction.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The auction turns public power into a price.'
+  },
+  @{
+    PublicPath = 'public/essays/the-sewer-under-the-sidewalk/index.html'
+    SourcePath = 'content/essays/the-sewer-under-the-sidewalk.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $true
+    ForbiddenBodyText = 'The public version of infrastructure can look like a ribbon cutting. The working version is often buried below it.'
+  },
+  @{
+    PublicPath = 'public/essays/beyond-moores-law/index.html'
+    SourcePath = 'content/essays/beyond-moores-law.md'
+    ExpectVisibleHero = $true
+    ExpectHeroAbsentFromBody = $false
+  },
+  @{
+    PublicPath = 'public/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/index.html'
+    SourcePath = 'content/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation.md'
+    ExpectVisibleHero = $false
+    ExpectHeroAbsentFromBody = $false
+  }
+)
+
+$requiredMetadataPages = [ordered]@{
+  'public/index.html' = @{
+    Title = 'Outside In Print'
+    Description = 'Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records.'
+    Canonical = 'https://outsideinprint.org/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = ('https://outsideinprint.org{0}' -f $currentCartoonImagePath)
+  }
+  'public/archive/index.html' = @{
+    Title = 'Archive'
+    Description = 'The full Outside In Print long-form archive, gathering essays, dialogues, reports, working papers, and stable editions by date.'
+    Canonical = 'https://outsideinprint.org/archive/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-archive.png'
+    ExpectedImageAlt = 'Outside In Print social card for the long-form archive.'
+  }
+  'public/syd-and-oliver/index.html' = @{
+    Title = 'Syd and Oliver Dialogues'
+    Description = 'Dialogue pieces from the recurring world of Syd and Oliver, where power, obligation, money, intimacy, and moral pressure are worked out in conversation.'
+    Canonical = 'https://outsideinprint.org/syd-and-oliver/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/library/index.html' = @{
+    Title = 'Library'
+    Description = 'The full catalog of published work from Outside In Print, searchable by title, type, collection, and version.'
+    Canonical = 'https://outsideinprint.org/library/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/gallery/index.html' = @{
+    Title = 'Gallery'
+    Description = 'A digital gallery of Outside In Print front page political cartoons.'
+    Canonical = 'https://outsideinprint.org/gallery/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/collections/index.html' = @{
+    Title = 'Collections'
+    Description = 'Curated collections that gather essays, projects, dossiers, and recurring questions into coherent reading threads across the archive.'
+    Canonical = 'https://outsideinprint.org/collections/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-collections.png'
+    ExpectedImageAlt = 'Outside In Print social card for the collections directory.'
+  }
+  'public/shop/index.html' = @{
+    Title = 'Bookstore'
+    Description = 'Digital books from Outside In Print, including The American Nightmare: Keep Dreaming, Kid and The Parable of the Sheep.'
+    Canonical = 'https://outsideinprint.org/shop/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg'
+  }
+  'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{
+    Title = 'The American Nightmare: Keep Dreaming, Kid'
+    Description = 'An OIP digital book on how the American Dream became a global slogan just as the American good life came apart at home.'
+    Canonical = 'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg'
+  }
+  'public/shop/the-parable-of-the-sheep/index.html' = @{
+    Title = 'The Parable of the Sheep'
+    Description = 'A compact allegorical fiction about a flock, a vanished shepherd, and the predators that return when memory fails.'
+    Canonical = 'https://outsideinprint.org/shop/the-parable-of-the-sheep/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/books/parable-of-the-sheep/parable-of-the-sheep-cover-v1.0.jpg'
+  }
+  'public/about/index.html' = @{
+    Title = 'About Outside In Print'
+    Description = 'A digital imprint for disciplined public judgment: essays, dialogues, reports, and working papers built from evidence, incentives, tradeoffs, and consequences.'
+    Canonical = 'https://outsideinprint.org/about/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-about.png'
+    ExpectedImageAlt = 'Outside In Print social card for the About page.'
+  }
+  'public/authors/index.html' = @{
+    Title = 'Authors'
+    Description = 'Public author archive pages for Outside In Print, gathering bylines, dossiers, and reading routes for the people behind the work.'
+    Canonical = 'https://outsideinprint.org/authors/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/oip-authors.png'
+    ExpectedImageAlt = 'Outside In Print social card for the author directory.'
+  }
+  'public/authors/robert-v-ussley/index.html' = @{
+    Title = 'Robert V. Ussley'
+    Description = 'Essays and reported writing by Robert V. Ussley on risk, institutions, technology, law, religion, and public life.'
+    Canonical = 'https://outsideinprint.org/authors/robert-v-ussley/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/collections/risk-uncertainty/index.html' = @{
+    Title = 'Risk, Uncertainty, and Decision-Making'
+    Description = 'Essays about uncertainty, tradeoffs, risk framing, and decision-making under imperfect information.'
+    Canonical = 'https://outsideinprint.org/collections/risk-uncertainty/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-risk-uncertainty.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Risk, Uncertainty, and Decision-Making collection.'
+  }
+  'public/collections/geopolitics-trade-global-power/index.html' = @{
+    Title = 'Geopolitics, Trade, and Global Power'
+    Description = 'Essays on foreign policy, trade, energy chokepoints, strategic technology, and the hard machinery of global power.'
+    Canonical = 'https://outsideinprint.org/collections/geopolitics-trade-global-power/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-geopolitics-trade-global-power.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Geopolitics, Trade, and Global Power collection.'
+  }
+  'public/collections/civic-institutions-and-public-power/index.html' = @{
+    Title = 'Civic Institutions and Public Power'
+    Description = 'Essays on courts, federalism, public institutions, and civic power once the body of work is coherent enough to publish.'
+    Canonical = 'https://outsideinprint.org/collections/civic-institutions-and-public-power/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-civic-institutions-and-public-power.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Civic Institutions and Public Power collection.'
+  }
+  'public/collections/bobs-almanack/index.html' = @{
+    Title = 'Bob''s Almanack'
+    Description = 'Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, editorial cartoons, compact notices, and archive pieces worth reprinting.'
+    Canonical = 'https://outsideinprint.org/collections/bobs-almanack/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-bobs-almanack.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Bob''s Almanack collection.'
+  }
+  'public/collections/the-ledger/index.html' = @{
+    Title = 'The Ledger'
+    Description = 'Newsletter-style dispatches that gather recent Outside In Print essays, themes, and recurring concerns into one archival thread.'
+    Canonical = 'https://outsideinprint.org/collections/the-ledger/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-the-ledger.png'
+    ExpectedImageAlt = 'Outside In Print social card for The Ledger collection.'
+  }
+  'public/collections/syd-and-oliver-dialogues/index.html' = @{
+    Title = 'Syd and Oliver Dialogues'
+    Description = 'A conversational archive of Syd and Oliver pieces on truth, power, money, obligation, intimacy, and meaning.'
+    Canonical = 'https://outsideinprint.org/collections/syd-and-oliver-dialogues/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-syd-and-oliver-dialogues.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Syd and Oliver Dialogues collection.'
+  }
+  'public/collections/modern-bios/index.html' = @{
+    Title = 'Modern Bios'
+    Description = 'Archival civic biographies of recent public figures, written as restrained record-driven essays for the imprint.'
+    Canonical = 'https://outsideinprint.org/collections/modern-bios/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-modern-bios.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Modern Bios collection.'
+  }
+  'public/collections/lit-review/index.html' = @{
+    Title = 'Lit Review'
+    Description = 'Reviews and close readings of books and narrative works that stay with theme, structure, and why a story endures.'
+    Canonical = 'https://outsideinprint.org/collections/lit-review/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-lit-review.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Lit Review collection.'
+  }
+  'public/collections/floods-water-built-environment/index.html' = @{
+    Title = 'Floods, Water, and the Built Environment'
+    Description = 'Reporting and essays on flood risk, water systems, riverine disasters, and the places we keep building anyway.'
+    Canonical = 'https://outsideinprint.org/collections/floods-water-built-environment/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-floods-water-built-environment.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Floods, Water, and the Built Environment collection.'
+  }
+  'public/collections/technology-ai-machine-future/index.html' = @{
+    Title = 'Technology, AI, and the Machine Future'
+    Description = 'Essays on artificial intelligence, compute, machine systems, and the social future they are dragging into view.'
+    Canonical = 'https://outsideinprint.org/collections/technology-ai-machine-future/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-technology-ai-machine-future.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Technology, AI, and the Machine Future collection.'
+  }
+  'public/collections/moral-religious-philosophical-essays/index.html' = @{
+    Title = 'Moral, Religious, and Philosophical Essays'
+    Description = 'Essays on moral formation, religion, conscience, and the philosophical habits needed to see clearly.'
+    Canonical = 'https://outsideinprint.org/collections/moral-religious-philosophical-essays/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-moral-religious-philosophical-essays.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Moral, Religious, and Philosophical Essays collection.'
+  }
+  'public/collections/reported-case-studies/index.html' = @{
+    Title = 'Reported Case Studies'
+    Description = 'Tightly reported case studies that stay with one event, institution, or failure long enough to learn something durable.'
+    Canonical = 'https://outsideinprint.org/collections/reported-case-studies/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/collection-reported-case-studies.png'
+    ExpectedImageAlt = 'Outside In Print social card for the Reported Case Studies collection.'
+  }
+  'public/random/index.html' = @{
+    Title = 'Random'
+    Description = 'A random path into the Outside In Print archive. If the random route is not useful, browse the full library instead.'
+    Canonical = 'https://outsideinprint.org/random/'
+    OgType = 'website'
+    TwitterCard = 'summary'
+  }
+  'public/essays/biter-the-slang-word-that-hits/index.html' = @{
+    Title = 'Biter'
+    Description = ("Biter delivers an accusation in a word. A copycat {0} someone who steals another person{1}s ideas, aesthetic, or work and passes it off as their own" -f [char]0x2014, [char]0x2019)
+    Canonical = 'https://outsideinprint.org/essays/biter-the-slang-word-that-hits/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    Title = 'The Risk Management Buffet'
+    Canonical = 'https://outsideinprint.org/essays/the-risk-management-buffet/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html' = @{
+    Title = 'The AI Data Center Wants Its Own Power Plant'
+    Canonical = 'https://outsideinprint.org/essays/the-ai-data-center-wants-its-own-power-plant/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-ai-data-center-wants-its-own-power-plant/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-model-that-could-not-leave/index.html' = @{
+    Title = 'The Model That Could Not Leave'
+    Description = "China's block of Meta's Manus acquisition shows how AI companies, talent, and capability are becoming strategic territory."
+    Canonical = 'https://outsideinprint.org/essays/the-model-that-could-not-leave/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-model-that-could-not-leave/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/smokestack-spreadsheets/index.html' = @{
+    Title = 'Smokestack Spreadsheets'
+    Description = "OpenAI's missed internal targets show how frontier AI has become a wager on electricity, cloud contracts, data centers, capital, and patience."
+    Canonical = 'https://outsideinprint.org/essays/smokestack-spreadsheets/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/smokestack-spreadsheets/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/canvas-fails-finals-week/index.html' = @{
+    Title = 'Canvas Fails Finals Week'
+    Description = "A reported finals-week Canvas incident becomes a window into public higher education's dependence on private-equity-owned operating layers."
+    Canonical = 'https://outsideinprint.org/essays/canvas-fails-finals-week/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/canvas-fails-finals-week/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-bet-slip-in-the-briefing-room/index.html' = @{
+    Title = 'The Bet Slip in the Briefing Room'
+    Description = "The Senate's prediction-market ban shows why event markets become dangerous when public officials can trade on tomorrow's public acts."
+    Canonical = 'https://outsideinprint.org/essays/the-bet-slip-in-the-briefing-room/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-bet-slip-in-the-briefing-room/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/can-you-pass-the-pepper-please/index.html' = @{
+    Title = 'Can You Pass the Pepper, Please?'
+    Description = 'Internal ICE force reports show how civil detention can turn requests for property, water, food, and medical care into compliance events.'
+    Canonical = 'https://outsideinprint.org/essays/can-you-pass-the-pepper-please/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/can-you-pass-the-pepper-please/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-factory-in-the-footnote/index.html' = @{
+    Title = 'The Factory in the Footnote'
+    Description = 'The SEC climate-disclosure reversal turns a dormant rule into a larger test of investor materiality, carbon accounting, industrial capacity, and national cost.'
+    Canonical = 'https://outsideinprint.org/essays/the-factory-in-the-footnote/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-factory-in-the-footnote/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-blue-pool-at-the-memorial/index.html' = @{
+    Title = 'The Blue Pool at the Memorial'
+    Description = "Trump's blue Reflecting Pool and East Potomac plans turn Washington maintenance into a case for clean, beautiful, useful public space."
+    Canonical = 'https://outsideinprint.org/essays/the-blue-pool-at-the-memorial/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-blue-pool-at-the-memorial/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/outside-the-garden/index.html' = @{
+    Title = 'Outside the Garden'
+    Description = 'A moral and religious essay on America, exile, sacrifice, and the collapse of inherited moral order.'
+    Canonical = 'https://outsideinprint.org/essays/outside-the-garden/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/outside-the-garden/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-strait-that-holds-the-price/index.html' = @{
+    Title = 'The Strait That Holds the Price'
+    Description = "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage governs energy security, commodity prices, and public life."
+    Canonical = 'https://outsideinprint.org/essays/the-strait-that-holds-the-price/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-strait-that-holds-the-price/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-blockade-has-a-phone-number/index.html' = @{
+    Title = 'The Blockade Has a Phone Number'
+    Description = "Trump's canceled Iran envoy trip shows how quickly diplomacy becomes theater when the real machinery of conflict is a blocked waterway."
+    Canonical = 'https://outsideinprint.org/essays/the-blockade-has-a-phone-number/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-blockade-has-a-phone-number/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-warning-label-in-the-weeds/index.html' = @{
+    Title = 'The Warning Label in the Weeds'
+    Description = "The Supreme Court's Roundup case turns a weedkiller label into a test of federal power, state lawsuits, farming, and public trust."
+    Canonical = 'https://outsideinprint.org/essays/the-warning-label-in-the-weeds/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-warning-label-in-the-weeds/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+  'public/essays/the-sewer-under-the-sidewalk/index.html' = @{
+    Title = 'The Sewer Under the Sidewalk'
+    Description = "An essay on Alewife Brook, Boston-area combined sewer overflows, MWRA's cleanup plan, and the public cost of climate-era pipe decisions."
+    Canonical = 'https://outsideinprint.org/essays/the-sewer-under-the-sidewalk/'
+    OgType = 'article'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/essays/the-sewer-under-the-sidewalk/hero.png'
+    AuthorMeta = 'Robert V. Ussley'
+  }
+}
+
+$requiredStructuredDataPages = [ordered]@{
+  'public/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
+    RequirePublisherNode = $true
+    RequireSearchAction = $true
+    RequirePublisherImage = $true
+  }
+  'public/archive/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
+  'public/syd-and-oliver/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
+  'public/library/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
+  'public/gallery/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/shop/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireSearchAction = $true
+  }
+  'public/about/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'AboutPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'ProfilePage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequirePublisherImage = $true
+  }
+  'public/authors/robert-v-ussley/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'ProfilePage', 'Person', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'AboutPage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequirePersonNodeName = 'Robert V. Ussley'
+    RequirePersonImage = $true
+  }
+  'public/collections/risk-uncertainty/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/collections/geopolitics-trade-global-power/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'Article', 'ImageObject')
+    ForbiddenTypes = @('CollectionPage')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+    RequireWorkPublisher = $true
+    RequireWorkAuthor = $true
+    RequireWorkImage = $true
+    RequirePersonImage = $true
+  }
+}
+
+$requiredIndexationPages = [ordered]@{
+  'public/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/start-here/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+  'public/library/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/gallery/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/shop/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/about/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/archive/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/essays/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+  'public/syd-and-oliver/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/authors/robert-v-ussley/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/collections/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/collections/risk-uncertainty/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/collections/geopolitics-trade-global-power/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/authors/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+  'public/essays/the-risk-management-buffet/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/essays/canvas-fails-finals-week/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/random/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+  'public/working-papers/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'noindex, follow'
+  }
+}
+
+$requiredFeedPages = [ordered]@{
+  'public/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+  }
+  'public/about/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+  }
+  'public/archive/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+    SectionFeed = 'https://outsideinprint.org/archive/index.xml'
+  }
+  'public/essays/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+    SectionFeed = 'https://outsideinprint.org/essays/index.xml'
+  }
+  'public/syd-and-oliver/index.html' = @{
+    SiteFeed = 'https://outsideinprint.org/index.xml'
+    SectionFeed = 'https://outsideinprint.org/syd-and-oliver/index.xml'
+  }
+}
+
+$requiredSitemapInclusions = @(
+  'https://outsideinprint.org/',
+  'https://outsideinprint.org/about/',
+  'https://outsideinprint.org/authors/robert-v-ussley/',
+  'https://outsideinprint.org/archive/',
+  'https://outsideinprint.org/essays/the-risk-management-buffet/',
+  'https://outsideinprint.org/syd-and-oliver/',
+  'https://outsideinprint.org/collections/',
+  'https://outsideinprint.org/collections/risk-uncertainty/',
+  'https://outsideinprint.org/library/'
+)
+
+$requiredSitemapExclusions = @(
+  'https://outsideinprint.org/authors/',
+  'https://outsideinprint.org/random/',
+  'https://outsideinprint.org/start-here/',
+  'https://outsideinprint.org/essays/',
+  'https://outsideinprint.org/working-papers/',
+  'https://outsideinprint.org/literature/'
+)
+
+$requiredLlmsOutputs = [ordered]@{
+  'public/llms.txt' = @(
+    'https://outsideinprint.org/',
+    'https://outsideinprint.org/about/',
+    'https://outsideinprint.org/authors/robert-v-ussley/',
+    'https://outsideinprint.org/index.xml'
+  )
+  'public/llms-full.txt' = @(
+    'Canonical policy:',
+    'https://outsideinprint.org/sitemap.xml',
+    'https://outsideinprint.org/index.xml',
+    'https://outsideinprint.org/archive/',
+    'https://outsideinprint.org/library/',
+    'Legacy GitHub Pages URLs are not canonical.'
+  )
+}
+
+$requiredLegacyHostRedirectPages = @(
+  'public/index.html',
+  'public/about/index.html',
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/404.html'
+)
+
+$requiredLegacyHostRedirectPatterns = @(
+  'lpeasy\.github\.io',
+  '/outsideinprint',
+  'https://outsideinprint\.org',
+  'window\.location\.hostname\s*!==',
+  '\.indexOf\(',
+  '\.slice\(',
+  'window\.location\.replace\(',
+  'window\.location\.search',
+  'window\.location\.hash'
+)
+
+$requiredUxPages = @(
+  'public/index.html',
+  'public/start-here/index.html',
+  'public/about/index.html',
+  'public/authors/robert-v-ussley/index.html',
+  'public/archive/index.html',
+  'public/essays/index.html',
+  'public/essays/your-part/index.html',
+  'public/syd-and-oliver/index.html',
+  'public/library/index.html',
+  'public/gallery/index.html',
+  'public/collections/index.html',
+  'public/collections/bobs-almanack/index.html',
+  'public/almanack/2026-05-02/index.html',
+  'public/almanack/2026-05-09/index.html',
+  'public/almanack/2026-05-16/index.html',
+  'public/almanack/2026-05-23/index.html',
+  'public/almanack/2026-05-30/index.html',
+  'public/almanack/2026-06-06/index.html',
+  'public/almanack/2026-06-20/index.html',
+  'public/almanack/2026-06-27/index.html',
+  'public/almanack/2026-07-04/index.html',
+  'public/almanack/2026-07-11/index.html',
+  'public/shop/index.html',
+  'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
+  'public/shop/the-parable-of-the-sheep/index.html',
+  'public/random/index.html',
+  'public/collections/the-ledger/index.html',
+  'public/collections/syd-and-oliver-dialogues/index.html',
+  'public/collections/modern-bios/index.html',
+  'public/collections/lit-review/index.html',
+  'public/collections/risk-uncertainty/index.html',
+  'public/collections/geopolitics-trade-global-power/index.html',
+  'public/collections/civic-institutions-and-public-power/index.html',
+  'public/collections/floods-water-built-environment/index.html',
+  'public/collections/technology-ai-machine-future/index.html',
+  'public/collections/moral-religious-philosophical-essays/index.html',
+  'public/collections/reported-case-studies/index.html',
+  'public/essays/presidential-elections/index.html',
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/essays/synthetic-reasoning/index.html',
+  'public/essays/modern-prometheus/index.html',
+  'public/essays/in-the-image-of-god/index.html',
+  'public/essays/the-hate-ledger/index.html',
+  'public/essays/canvas-fails-finals-week/index.html',
+  'public/essays/can-you-pass-the-pepper-please/index.html',
+  'public/essays/the-factory-in-the-footnote/index.html',
+  'public/essays/the-ash-pond-under-the-cloud/index.html',
+  'public/essays/the-mailbox-at-the-clinic-door/index.html',
+  'public/essays/the-text-message-in-the-archive-box/index.html',
+  'public/essays/the-courthouse-that-ate-the-republic/index.html',
+  'public/essays/the-card-in-the-catalog/index.html',
+  'public/essays/the-brass-disk-in-the-sidewalk/index.html',
+  'public/essays/the-map-that-priced-the-fire/index.html',
+  'public/essays/the-ledger-vol-1/index.html',
+  'public/essays/the-ledger-vol-2/index.html',
+  'public/essays/the-ledger-vol-3/index.html',
+  'public/essays/what-happened-at-camp-mystic/index.html',
+  'public/essays/save-some-air-for-the-fishies/index.html',
+  'public/essays/the-easement-under-the-lake/index.html',
+  'public/essays/multiple-shmultiple/index.html',
+  'public/essays/the-door-that-would-not-open/index.html',
+  'public/essays/the-world-is-back-at-the-poker-table/index.html'
+)
+
+$collectionRoomExpectations = [ordered]@{
+  'public/collections/the-ledger/index.html' = 'ledger-editorial-desk'
+  'public/collections/syd-and-oliver-dialogues/index.html' = 'syd-and-oliver-smoky-lounge'
+  'public/collections/modern-bios/index.html' = 'modern-bios-records-archive'
+  'public/collections/lit-review/index.html' = 'lit-review-lamplit-shelf'
+  'public/collections/risk-uncertainty/index.html' = 'risk-systems-notebook'
+  'public/collections/floods-water-built-environment/index.html' = 'floods-survey-table'
+  'public/collections/technology-ai-machine-future/index.html' = 'ai-screen-glow-archive'
+  'public/collections/moral-religious-philosophical-essays/index.html' = 'moral-chapel-library'
+  'public/collections/reported-case-studies/index.html' = 'reported-case-studies-evidence-room'
+}
+
+$collectionDirectoryThemes = @(
+  'ledger-editorial-desk'
+  'syd-and-oliver-smoky-lounge'
+  'modern-bios-records-archive'
+  'lit-review-lamplit-shelf'
+  'risk-systems-notebook'
+  'floods-survey-table'
+  'ai-screen-glow-archive'
+  'moral-chapel-library'
+  'reported-case-studies-evidence-room'
+)
+
+$requiredLegacyCleanupPages = @(
+  'public/essays/biter-the-slang-word-that-hits/index.html',
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/index.html'
+)
+
+foreach ($file in $htmlFiles) {
+  $content = Get-Content -Path $file.FullName -Raw
+  $relativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $file.FullName
+  $isArticleContentPage = (
+    $relativePath -match '^public/(?:essays|syd-and-oliver)/[^/]+/index\.html$' -and
+    $content -match '<article\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece\b[^"]*"|''[^'']*\bpiece\b[^'']*''|[^\s>]*\bpiece\b[^\s>]*)'
+  )
+
+  if ($isArticleContentPage) {
+    $articleLightboxContainerCount = [regex]::Matches($content, '<div\b(?=[^>]*\bdata-article-plate-lightbox\b)[^>]*>', 'IgnoreCase').Count
+    if ($articleLightboxContainerCount -ne 1) {
+      $articleLightboxIssues.Add("$relativePath => expected exactly one article image lightbox container, found $articleLightboxContainerCount")
+    }
+
+    $pieceBodyMatch = [regex]::Match(
+      $content,
+      '(?is)<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-body\b[^"]*"|''[^'']*\bpiece-body\b[^'']*''|[^\s>]*\bpiece-body\b[^\s>]*)[^>]*>(.*?)</div>\s*<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|''[^'']*\bpiece-aftermatter\b[^'']*''|[^\s>]*\bpiece-aftermatter\b[^\s>]*)'
+    )
+    $articleBodyHasImage = $pieceBodyMatch.Success -and $pieceBodyMatch.Groups[1].Value -match '<img\b'
+    $articleLightboxScriptSupportsBodyImages = (
+      $content -match [regex]::Escape('[data-article-plate-lightbox-trigger]') -and
+      $content -match [regex]::Escape('.piece-body img') -and
+      $content -match [regex]::Escape('article-lightbox-image')
+    )
+
+    if ($articleBodyHasImage -and -not $articleLightboxScriptSupportsBodyImages) {
+      $articleLightboxIssues.Add("$relativePath => expected article body images to be covered by the progressive lightbox script")
+    }
+  }
+
+  if (
+    $requiredSemanticPages.Contains($relativePath) -or
+    ($optionalDefaultListPages -contains $relativePath) -or
+    $requiredImportedMediaPages.Contains($relativePath) -or
+    $requiredIndexationPages.Contains($relativePath) -or
+    $requiredMetadataPages.Contains($relativePath) -or
+    $requiredStructuredDataPages.Contains($relativePath) -or
+    ($requiredLegacyHostRedirectPages -contains $relativePath) -or
+    ($requiredLegacyCleanupPages -contains $relativePath) -or
+    ($requiredUxPages -contains $relativePath) -or
+    ($requiredEssayHeroPages -contains $relativePath)
+  ) {
+    $targetPageHtml[$relativePath] = $content
+  }
+
+  foreach ($match in [regex]::Matches($content, '<a\b[^>]*>', 'IgnoreCase')) {
+    $tag = $match.Value
+    $classValue = Get-AttributeValue -Tag $tag -Name 'class'
+    if ([string]::IsNullOrWhiteSpace($classValue)) {
+      continue
+    }
+
+    $classes = @($classValue -split '\s+' | Where-Object { $_ })
+    if ($classes -notcontains 'running-header__home') {
+      continue
+    }
+
+    $runningHeaderMatches++
+    $href = Get-AttributeValue -Tag $tag -Name 'href'
+    if ($href -ne $ExpectedHomePath) {
+      $runningHeaderIssues.Add("$relativePath => $href")
+    }
+  }
+
+  foreach ($match in [regex]::Matches($content, '<img\b[^>]*>', 'IgnoreCase')) {
+    $tag = $match.Value
+    $src = Get-AttributeValue -Tag $tag -Name 'src'
+    if ([string]::IsNullOrWhiteSpace($src)) {
+      continue
+    }
+
+    if ($src.StartsWith('/outsideinprint/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+      $rootRelativeImageIssues.Add("$relativePath => $src")
+    }
+
+    if ($src.StartsWith('/images/medium/', [System.StringComparison]::OrdinalIgnoreCase)) {
+      $localizedMediumImageCount++
+    }
+  }
+
+  if ($content.IndexOf('ZgotmplZ', [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+    $zgotmplzIssues.Add($relativePath)
+  }
+
+  if (
+    ($content -match 'data-analytics-format=(?:"pdf"|pdf)') -or
+    ($content -match '>Read PDF<') -or
+    ($content -match 'edition-download')
+  ) {
+    $publicPdfAffordanceHits.Add($relativePath)
+  }
+
+  if ($content -match '(?:https://outsideinprint\.org)?/literature/') {
+    $retiredRouteIssues.Add("$relativePath => literature route leaked into generated HTML")
+  }
+
+  if ($content -match '(?:https://outsideinprint\.org)?/shop/(?:hat|shirt|tote)/') {
+    $retiredRouteIssues.Add("$relativePath => retired merch route leaked into generated HTML")
+  }
+}
+
+$sitemapPath = Join-Path $SiteDir 'sitemap.xml'
+if (Test-Path -LiteralPath $sitemapPath -PathType Leaf) {
+  $targetPageHtml['public/sitemap.xml'] = Get-Content -Path $sitemapPath -Raw
+}
+
+foreach ($relativePath in $requiredSemanticPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $semanticIssues.Add("Missing generated page required for semantic regression coverage: $relativePath")
+    continue
+  }
+
+  $issues = Get-SemanticPageIssues `
+    -RelativePath $relativePath `
+    -Html $targetPageHtml[$relativePath] `
+    -ExpectedH1Class ([string]$requiredSemanticPages[$relativePath].ExpectedH1Class) `
+    -RequireSecondaryHeading ([bool]$requiredSemanticPages[$relativePath].RequireSecondaryHeading)
+
+  foreach ($issue in $issues) {
+    $semanticIssues.Add($issue)
+  }
+}
+
+foreach ($relativePath in $requiredImportedMediaPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $importedMediaIssues.Add("Missing generated page required for imported-media regression coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expectedMedia = $requiredImportedMediaPages[$relativePath]
+  $expectedPrefix = [string]$expectedMedia.ExpectedImagePrefix
+  if ($html -notmatch [regex]::Escape($expectedPrefix)) {
+    $importedMediaIssues.Add("$relativePath => expected localized $expectedPrefix media references")
+  }
+
+  if ($expectedMedia.ContainsKey('ForbiddenImagePattern') -and $html -match [string]$expectedMedia.ForbiddenImagePattern) {
+    $importedMediaIssues.Add("$relativePath => found retired Medium placeholder SVG reference")
+  }
+}
+
+foreach ($relativePath in $requiredMetadataPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $metadataIssues.Add("Missing generated page required for metadata regression coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredMetadataPages[$relativePath]
+
+  $titleMatch = [regex]::Match($html, '(?is)<title>(.*?)</title>')
+  $title = if ($titleMatch.Success) { $titleMatch.Groups[1].Value.Trim() } else { $null }
+  if ($title -ne [string]$expected.Title) {
+    $metadataIssues.Add("$relativePath => expected <title> '$($expected.Title)', found '$title'")
+  }
+
+  if (Test-ExpectedEntryHasKey -Entry $expected -Key 'Description') {
+    $metaDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'description'
+    if ($metaDescription -ne [string]$expected.Description) {
+      $metadataIssues.Add("$relativePath => expected meta description '$($expected.Description)', found '$metaDescription'")
+    }
+
+    $ogDescription = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:description'
+    if ($ogDescription -ne [string]$expected.Description) {
+      $metadataIssues.Add("$relativePath => expected og:description '$($expected.Description)', found '$ogDescription'")
+    }
+
+    $twitterDescription = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:description'
+    if ($twitterDescription -ne [string]$expected.Description) {
+      $metadataIssues.Add("$relativePath => expected twitter:description '$($expected.Description)', found '$twitterDescription'")
+    }
+  }
+
+  $canonicalHref = Get-LinkHrefByRel -Html $html -Rel 'canonical'
+  if ($canonicalHref -ne [string]$expected.Canonical) {
+    $metadataIssues.Add("$relativePath => expected canonical '$($expected.Canonical)', found '$canonicalHref'")
+  }
+
+  $ogType = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:type'
+  if ($ogType -ne [string]$expected.OgType) {
+    $metadataIssues.Add("$relativePath => expected og:type '$($expected.OgType)', found '$ogType'")
+  }
+
+  if (Test-ExpectedEntryHasKey -Entry $expected -Key 'TwitterCard') {
+    $twitterCard = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:card'
+    if ($twitterCard -ne [string]$expected.TwitterCard) {
+      $metadataIssues.Add("$relativePath => expected twitter:card '$($expected.TwitterCard)', found '$twitterCard'")
+    }
+  }
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequireImage') {
+    $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
+    if ([string]::IsNullOrWhiteSpace($ogImage)) {
+      $metadataIssues.Add("$relativePath => expected og:image to be present")
+    }
+
+    $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
+    if ([string]::IsNullOrWhiteSpace($twitterImage)) {
+      $metadataIssues.Add("$relativePath => expected twitter:image to be present")
+    }
+
+    foreach ($imageValue in @($ogImage, $twitterImage)) {
+      if (-not [string]::IsNullOrWhiteSpace($imageValue) -and -not $imageValue.StartsWith('https://outsideinprint.org/', [System.StringComparison]::OrdinalIgnoreCase)) {
+        $metadataIssues.Add("$relativePath => expected social image URLs to be canonical absolute outsideinprint.org URLs, found '$imageValue'")
+      }
+    }
+
+    if ($expected.Contains('ExpectedImage')) {
+      $expectedImage = [string]$expected.ExpectedImage
+      if ($ogImage -ne $expectedImage) {
+        $metadataIssues.Add("$relativePath => expected og:image '$expectedImage', found '$ogImage'")
+      }
+      if ($twitterImage -ne $expectedImage) {
+        $metadataIssues.Add("$relativePath => expected twitter:image '$expectedImage', found '$twitterImage'")
+      }
+    }
+
+    if ($expected.Contains('ExpectedImageAlt')) {
+      $expectedImageAlt = [string]$expected.ExpectedImageAlt
+      $ogImageAlt = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image:alt'
+      $twitterImageAlt = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image:alt'
+      if ($ogImageAlt -ne $expectedImageAlt) {
+        $metadataIssues.Add("$relativePath => expected og:image:alt '$expectedImageAlt', found '$ogImageAlt'")
+      }
+      if ($twitterImageAlt -ne $expectedImageAlt) {
+        $metadataIssues.Add("$relativePath => expected twitter:image:alt '$expectedImageAlt', found '$twitterImageAlt'")
+      }
+    }
+  }
+
+  if (Test-ExpectedEntryHasKey -Entry $expected -Key 'AuthorMeta') {
+    $authorMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'author'
+    if ($authorMeta -ne [string]$expected.AuthorMeta) {
+      $metadataIssues.Add("$relativePath => expected author meta '$($expected.AuthorMeta)', found '$authorMeta'")
+    }
+  }
+}
+
+foreach ($relativePath in $requiredFeedPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $metadataIssues.Add("Missing generated page required for feed-autodiscovery coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredFeedPages[$relativePath]
+  $alternateFeeds = @(Get-LinkHrefsByRelAndType -Html $html -Rel 'alternate' -Type 'application/rss+xml')
+
+  if ((Test-ExpectedEntryHasKey -Entry $expected -Key 'SiteFeed') -and ($alternateFeeds -notcontains [string]$expected.SiteFeed)) {
+    $metadataIssues.Add("$relativePath => expected site RSS autodiscovery link '$($expected.SiteFeed)'")
+  }
+
+  if ((Test-ExpectedEntryHasKey -Entry $expected -Key 'SectionFeed') -and ($alternateFeeds -notcontains [string]$expected.SectionFeed)) {
+    $metadataIssues.Add("$relativePath => expected section RSS autodiscovery link '$($expected.SectionFeed)'")
+  }
+}
+
+foreach ($check in $essayHeroChecks) {
+  $relativePath = [string]$check.PublicPath
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $metadataIssues.Add("Missing generated page required for essay-hero coverage: $relativePath")
+    continue
+  }
+
+  $sourcePath = Join-Path $repoRoot ([string]$check.SourcePath -replace '/', '\')
+  $featuredImage = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image'
+  $html = $targetPageHtml[$relativePath]
+
+  $heroMatch = [regex]::Match(
+    $html,
+    '(?is)<figure\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-hero\b[^"]*"|''[^'']*\bpiece-hero\b[^'']*''|[^\s>]*\bpiece-hero\b[^\s>]*)[^>]*>.*?<img\b[^>]*\bsrc\s*=\s*(?:"([^"]+)"|''([^'']+)''|([^\s>]+))'
+  )
+  $heroSrc = ''
+  if ($heroMatch.Success) {
+    foreach ($groupIndex in 1..3) {
+      if ($heroMatch.Groups[$groupIndex].Success -and -not [string]::IsNullOrWhiteSpace($heroMatch.Groups[$groupIndex].Value)) {
+        $heroSrc = $heroMatch.Groups[$groupIndex].Value
+        break
+      }
+    }
+  }
+
+  if ([bool]$check.ExpectVisibleHero) {
+    if ([string]::IsNullOrWhiteSpace($featuredImage)) {
+      $metadataIssues.Add("$relativePath => expected source front matter to define featured_image for hero alignment coverage")
+      continue
+    }
+
+    $expectedHeroSrc = if ($featuredImage -match '^https?://') {
+      $featuredImage
+    }
+    else {
+      'https://outsideinprint.org' + $featuredImage
+    }
+
+    if ($heroSrc -ne $expectedHeroSrc) {
+      $metadataIssues.Add("$relativePath => expected visible hero '$expectedHeroSrc', found '$heroSrc'")
+    }
+
+    $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
+    if ($ogImage -ne $expectedHeroSrc) {
+      $metadataIssues.Add("$relativePath => expected og:image to match the visible hero '$expectedHeroSrc', found '$ogImage'")
+    }
+
+    $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
+    if ($twitterImage -ne $expectedHeroSrc) {
+      $metadataIssues.Add("$relativePath => expected twitter:image to match the visible hero '$expectedHeroSrc', found '$twitterImage'")
+    }
+
+    if ([bool]$check.ExpectHeroAbsentFromBody) {
+      $bodyMatch = [regex]::Match(
+        $html,
+        '(?is)<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-body\b[^"]*"|''[^'']*\bpiece-body\b[^'']*''|[^\s>]*\bpiece-body\b[^\s>]*)[^>]*>(.*?)</div>\s*<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|''[^'']*\bpiece-aftermatter\b[^'']*''|[^\s>]*\bpiece-aftermatter\b[^\s>]*)'
+      )
+      if (-not $bodyMatch.Success) {
+        $metadataIssues.Add("$relativePath => expected a piece-body region for hero-deduplication coverage")
+      }
+      else {
+        $pieceBodyHtml = $bodyMatch.Groups[1].Value
+        if ($pieceBodyHtml -match [regex]::Escape($expectedHeroSrc)) {
+          $metadataIssues.Add("$relativePath => expected the promoted or deduped hero image not to repeat inside the article body")
+        }
+
+        $forbiddenBodyText = [string](Get-ExpectedEntryValue -Entry $check -Key 'ForbiddenBodyText' -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($forbiddenBodyText) -and ($pieceBodyHtml -match [regex]::Escape($forbiddenBodyText))) {
+          $metadataIssues.Add("$relativePath => expected the duplicated hero caption text not to repeat inside the article body")
+        }
+      }
+    }
+  }
+  else {
+    if ($heroMatch.Success) {
+      $metadataIssues.Add("$relativePath => expected essays without a promoted hero candidate to omit the visible piece hero")
+    }
+  }
+}
+
+foreach ($relativePath in $requiredStructuredDataPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $structuredDataIssues.Add("Missing generated page required for structured-data regression coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredStructuredDataPages[$relativePath]
+  $jsonLdObjects = @(Get-JsonLdObjects -Html $html)
+  if ($jsonLdObjects.Count -eq 0) {
+    $structuredDataIssues.Add("$relativePath => expected at least one application/ld+json block")
+    continue
+  }
+
+  $nodes = @(Get-JsonLdNodes -Objects $jsonLdObjects)
+  foreach ($requiredType in @($expected.RequiredTypes)) {
+    if ((Get-JsonLdNodesByType -Nodes $nodes -Type ([string]$requiredType)).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected JSON-LD node type '$requiredType'")
+    }
+  }
+
+  foreach ($forbiddenType in @($expected.ForbiddenTypes)) {
+    if ((Get-JsonLdNodesByType -Nodes $nodes -Type ([string]$forbiddenType)).Count -gt 0) {
+      $structuredDataIssues.Add("$relativePath => did not expect JSON-LD node type '$forbiddenType'")
+    }
+  }
+
+  $organizationNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Organization')
+  $personNodes = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'Person')
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequirePublisherNode') {
+    if (@($organizationNodes | Where-Object { $_.name -eq 'Outside In Print' }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected an Organization node named 'Outside In Print'")
+    }
+  }
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequirePublisherImage') {
+    if (@($organizationNodes | Where-Object { $null -ne $_.image }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected the Organization node to include image")
+    }
+  }
+
+  if (Test-ExpectedEntryHasKey -Entry $expected -Key 'RequirePersonNodeName') {
+    if (@($personNodes | Where-Object { $_.name -eq [string]$expected.RequirePersonNodeName }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected a Person node named '$($expected.RequirePersonNodeName)'")
+    }
+  }
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequirePersonImage') {
+    if (@($personNodes | Where-Object { $null -ne $_.image }).Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected a Person node with image")
+    }
+  }
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequireBreadcrumb') {
+    if ((Get-JsonLdNodesByType -Nodes $nodes -Type 'BreadcrumbList').Count -eq 0) {
+      $structuredDataIssues.Add("$relativePath => expected BreadcrumbList JSON-LD")
+    }
+  }
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequireSearchAction') {
+    $websiteNode = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'WebSite') | Select-Object -First 1
+    if ($null -eq $websiteNode -or $null -eq $websiteNode.potentialAction) {
+      $structuredDataIssues.Add("$relativePath => expected WebSite JSON-LD to expose SearchAction")
+    } else {
+      $action = $websiteNode.potentialAction
+      if ($action.'@type' -ne 'SearchAction') {
+        $structuredDataIssues.Add("$relativePath => expected WebSite potentialAction to be SearchAction")
+      }
+
+      $targetTemplate = $null
+      if ($null -ne $action.target) {
+        if ($action.target.urlTemplate) {
+          $targetTemplate = [string]$action.target.urlTemplate
+        } elseif ($action.target -is [string]) {
+          $targetTemplate = [string]$action.target
+        }
+      }
+
+      if ($targetTemplate -ne 'https://outsideinprint.org/library/?q={search_term_string}') {
+        $structuredDataIssues.Add("$relativePath => expected SearchAction target to point at the library query route")
+      }
+    }
+  }
+
+  $workNode = @(
+    (Get-JsonLdNodesByType -Nodes $nodes -Type 'Article') +
+    (Get-JsonLdNodesByType -Nodes $nodes -Type 'CreativeWork')
+  ) | Select-Object -First 1
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequireWorkPublisher') {
+    if ($null -eq $workNode -or $null -eq $workNode.publisher) {
+      $structuredDataIssues.Add("$relativePath => expected the primary work node to include publisher")
+    }
+  }
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequireWorkAuthor') {
+    if ($null -eq $workNode -or $null -eq $workNode.author) {
+      $structuredDataIssues.Add("$relativePath => expected the primary work node to include author")
+    }
+  }
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'RequireWorkImage') {
+    if ($null -eq $workNode -or $null -eq $workNode.image) {
+      $structuredDataIssues.Add("$relativePath => expected the primary work node to include image")
+    }
+  }
+}
+
+foreach ($relativePath in $requiredLegacyCleanupPages) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $legacyCleanupIssues.Add("Missing generated page required for legacy cleanup coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  if ($html -match '<a\b[^>]*href\s*=\s*(?:"https?://(?:www\.)?(?:[^/\s"''>]+\.)?medium\.com/|https?://(?:www\.)?(?:[^/\s"''>]+\.)?medium\.com/)') {
+    $legacyCleanupIssues.Add("$relativePath => expected canonical pages not to retain visible Medium links")
+  }
+}
+
+# These checks validate the generated route-policy output once public/ is refreshed from the current templates.
+foreach ($relativePath in $requiredIndexationPages.Keys) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $indexationIssues.Add("Missing generated page required for indexation regression coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  $expected = $requiredIndexationPages[$relativePath]
+  $robotsMeta = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'robots'
+
+  if (Test-ExpectedFlag -Entry $expected -Key 'ExpectRobotsMeta') {
+    if ($robotsMeta -ne [string]$expected.Robots) {
+      $indexationIssues.Add("$relativePath => expected robots meta '$($expected.Robots)', found '$robotsMeta'")
+    }
+  }
+  elseif (-not [string]::IsNullOrWhiteSpace($robotsMeta)) {
+    $indexationIssues.Add("$relativePath => did not expect a page-level robots meta tag, found '$robotsMeta'")
+  }
+}
+
+$robotsTxtPath = Join-Path $SiteDir 'robots.txt'
+if (-not (Test-Path $robotsTxtPath -PathType Leaf)) {
+  $indexationIssues.Add('Missing generated robots.txt output.')
+}
+else {
+  $robotsTxt = Get-Content -Path $robotsTxtPath -Raw
+  foreach ($requiredLine in @(
+    'User-agent: OAI-SearchBot',
+    'User-agent: Claude-SearchBot',
+    'User-agent: Claude-User',
+    'User-agent: PerplexityBot',
+    'User-agent: GPTBot',
+    'User-agent: ClaudeBot',
+    'User-agent: Google-Extended',
+    'User-agent: *',
+    'Allow: /',
+    'Sitemap: https://outsideinprint.org/sitemap.xml'
+  )) {
+    if ($robotsTxt -notmatch [regex]::Escape($requiredLine)) {
+      $indexationIssues.Add("robots.txt => expected line '$requiredLine'")
+    }
+  }
+
+  foreach ($allowedAgent in @('GPTBot', 'ClaudeBot', 'Google-Extended')) {
+    $allowPattern = "(?m)User-agent:\s+$([regex]::Escape($allowedAgent))\s*\r?\nAllow:\s+/"
+    if ($robotsTxt -notmatch $allowPattern) {
+      $indexationIssues.Add("robots.txt => expected $allowedAgent to be allowed")
+    }
+
+    $disallowPattern = "(?m)User-agent:\s+$([regex]::Escape($allowedAgent))\s*\r?\nDisallow:\s+/"
+    if ($robotsTxt -match $disallowPattern) {
+      $indexationIssues.Add("robots.txt => expected $allowedAgent not to be disallowed")
+    }
+  }
+}
+
+$sitemapPath = Join-Path $SiteDir 'sitemap.xml'
+if (-not (Test-Path $sitemapPath -PathType Leaf)) {
+  $indexationIssues.Add('Missing generated sitemap.xml output.')
+}
+else {
+  $sitemapLocs = @(Get-SitemapLocs -Xml (Get-Content -Path $sitemapPath -Raw))
+  foreach ($requiredLoc in $requiredSitemapInclusions) {
+    if ($sitemapLocs -notcontains $requiredLoc) {
+      $indexationIssues.Add("sitemap.xml => expected sitemap inclusion '$requiredLoc'")
+    }
+  }
+
+  foreach ($excludedLoc in $requiredSitemapExclusions) {
+    if ($sitemapLocs -contains $excludedLoc) {
+      $indexationIssues.Add("sitemap.xml => did not expect sitemap inclusion '$excludedLoc'")
+    }
+  }
+}
+
+foreach ($relativePath in $requiredLlmsOutputs.Keys) {
+  $fullPath = Join-Path $repoRoot $relativePath
+  if (-not (Test-Path $fullPath -PathType Leaf)) {
+    $indexationIssues.Add("Missing generated discovery output: $relativePath")
+    continue
+  }
+
+  $content = Get-Content -Path $fullPath -Raw
+  foreach ($requiredSnippet in @($requiredLlmsOutputs[$relativePath])) {
+    if ($content -notmatch [regex]::Escape([string]$requiredSnippet)) {
+      $indexationIssues.Add("$relativePath => expected discovery snippet '$requiredSnippet'")
+    }
+  }
+}
+
+foreach ($relativePath in $requiredLegacyHostRedirectPages) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $legacyCleanupIssues.Add("Missing generated page required for legacy-host redirect coverage: $relativePath")
+    continue
+  }
+
+  $html = $targetPageHtml[$relativePath]
+  foreach ($pattern in $requiredLegacyHostRedirectPatterns) {
+    if ($html -notmatch $pattern) {
+      $legacyCleanupIssues.Add("$relativePath => expected legacy-host redirect pattern '$pattern'")
+    }
+  }
+
+  if ($html -match 'outsideinprint\.org/outsideinprint') {
+    $legacyCleanupIssues.Add("$relativePath => expected legacy-host redirect not to preserve /outsideinprint on the canonical host")
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/404.html')) {
+  $notFoundHtml = $targetPageHtml['public/404.html']
+  $notFoundRobots = Get-MetaContent -Html $notFoundHtml -AttributeName 'name' -AttributeValue 'robots'
+  if ($notFoundRobots -ne 'noindex, follow') {
+    $legacyCleanupIssues.Add("public/404.html => expected robots meta 'noindex, follow', found '$notFoundRobots'")
+  }
+}
+
+$requiredUxChecks = @(
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<h1[^>]*class=(?:"[^"]*\btitle\b[^"]*"|''[^'']*\btitle\b[^'']*''|[^>]*\btitle\b[^>]*)[^>]*>\s*Outside In Print\s*</h1>'
+    Message = 'expected the homepage to expose a semantic h1 for the site title'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<p[^>]*class=(?:"[^"]*\blist-title\b[^"]*"|''[^'']*\blist-title\b[^'']*''|[^>]*\blist-title\b[^>]*)[^>]*>\s*Front Page\s*</p>'
+    Message = 'expected the homepage not to retain the retired visible Front Page label block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-manifesto.*?entry-threads--home.*?newsletter-signup-title.*?home-browse'
+    Message = 'expected the homepage to preserve the editorial module order from the story grid through the lower-page signoff'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Start Reading'
+    Message = 'expected the homepage not to render the retired curated Start Reading module label'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Check out the collections below\.'
+    Message = 'expected the homepage not to render the retired collection helper sentence'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Browse the Archive|Use Archive, Gallery, Collections, or Library when you want to move beyond the front page\.'
+    Message = 'expected the homepage not to render the retired archive navigation heading or helper copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?Essays.*?Gallery.*?Collections.*?Library.*?</section>'
+    Message = 'expected the homepage browse band to render the curated route set in editorial order'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?home-browse__item-title>(?:Welcome|Dialogues|Feeling curious\?)<.*?</section>'
+    Message = 'expected the homepage browse band to omit retired Welcome, Dialogues, and Feeling curious? browse items'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bentry-threads--home\b[^"]*"|''[^'']*\bentry-threads--home\b[^'']*''|[^>]*\bentry-threads--home\b[^>]*)[^>]*>.*?Browse all collections.*?</section>'
+    Message = 'expected the homepage Start Reading module not to render the archive footer link'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'home-imprint-statement'
+    Message = 'expected the homepage generated output not to include the retired homepage imprint module'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-front-page-region=(?:"lead"|lead)'
+    Message = 'expected the homepage to render a dedicated lead-story region'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-front-page-region=(?:"secondary"|secondary)'
+    Message = 'expected the homepage to render a secondary editorial rail'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'home-recent-work'
+    Message = 'expected the homepage not to render the retired Recent Work module'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = $currentCartoonImagePattern
+    Message = 'expected the homepage generated output to include the current editorial cartoon image block'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-cartoon-recent'
+    Message = 'expected the homepage generated output to include the recent editorial cartoon grid'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-cartoon-recent-trigger'
+    Message = 'expected homepage recent cartoon cards to open the shared fullscreen lightbox'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)editorial-cartoon.*?View gallery'
+    Message = 'expected the homepage editorial cartoon block to link to the gallery'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-cartoon-lightbox'
+    Message = 'expected the homepage to include the fullscreen cartoon lightbox'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-cartoon-lightbox-trigger'
+    Message = 'expected the homepage cartoon image to open the fullscreen lightbox'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-home-cartoon-lightbox-essay'
+    Message = 'expected the homepage fullscreen cartoon lightbox to expose a Read essay link'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = $currentCartoonEssayPattern
+    Message = 'expected the homepage cartoon trigger to carry the associated essay path'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)data-home-cartoon-lightbox.*?data-home-cartoon-lightbox-image-button.*?addEventListener\("click",[A-Za-z_$][A-Za-z0-9_$]*\)'
+    Message = 'expected a second click on the fullscreen homepage cartoon image to close the lightbox'
+  },
+
+  @{
+    Path = 'public/index.html'
+    Pattern = 'essay-cartoon-thumb'
+    Message = 'expected linked homepage essay cards to expose cartoon thumbnail links'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-essay-cartoon-lightbox'
+    Message = 'expected essay cartoon thumbnails to mount the shared fullscreen lightbox'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-essay-cartoon-lightbox-trigger'
+    Message = 'expected essay cartoon thumbnails to open in-page fullscreen instead of navigating directly'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)data-essay-cartoon-lightbox-gallery.*?View in gallery'
+    Message = 'expected the essay cartoon fullscreen lightbox to expose a View in gallery action'
+  },
+
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)data-analytics-source-slot="?homepage_selected_core"?.*?\bessay-cartoon-thumb--home\b.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?[^"\s>]+"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=[^"\s>]+"?'
+    Message = 'expected a homepage essay-card cartoon thumbnail to open the matching gallery-backed lightbox'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below\.'
+    Message = 'expected the homepage not to retain the retired front-page intro blurb'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Ask for the evidence\. Read past the headlines\. Think for yourself\.'
+    Message = 'expected the homepage to carry the typeset manifesto motto above selected collections'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.|Color over the lines\. Read beyond the feed\. Think for yourself\.'
+    Message = 'expected the homepage not to carry the retired imprint and manifesto copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)newsletter-signup--home-ribbon.*?Limited time.*?Free subscription to Bob(?:''|&#39;)s Almanack.*?Subscribe free'
+    Message = 'expected the homepage newsletter signup to render as the Bob''s Almanack subscription ribbon'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-analytics-source-slot="?homepage_bobs_almanack_offer"?'
+    Message = 'expected the homepage signup form to preserve the Bob''s Almanack analytics source slot'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Support independent journalism'
+    Message = 'expected the homepage not to retain the moved manifesto support line'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Also on the front page'
+    Message = 'expected the homepage not to retain the explicit front-page rail label'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Feeling curious\?'
+    Message = 'expected the homepage to expose the renamed exploratory route label'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'Read by Path'
+    Message = 'expected the homepage not to retain the retired path-chooser heading'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'journey-links'
+    Message = 'expected the homepage not to retain the old browse-next journey-links module'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<'
+    Message = 'expected the homepage masthead to expose the Archive label'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
+    Message = 'expected the homepage masthead nav order to be Archive, Collections, Gallery, Library, Feeling curious?'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/literature/'
+    Message = 'expected the homepage masthead not to expose the retired literature section'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-launch'
+    Message = 'expected the homepage masthead to expose the Paper-Bob launcher button'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-overlay'
+    Message = 'expected the homepage to include the Paper-Bob dialog shell'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<h2[^>]*id=(?:"paper-route-title"|paper-route-title)[^>]*>\s*Paper-Bob\s*</h2>'
+    Message = 'expected the homepage arcade dialog title to use the Paper-Bob name'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-phaser-src=(?:"[^"]*phaser-3\.90\.0-arcade-physics[^"]*"|[^\s>]*phaser-3\.90\.0-arcade-physics[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the pinned same-origin Phaser asset URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-rules-src=(?:"[^"]*paper-route-rules[^"]*"|[^\s>]*paper-route-rules[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded rules URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-plan-src=(?:"[^"]*paper-route-plan[^"]*"|[^\s>]*paper-route-plan[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell not to expose the removed route planner URL'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-bob-src=(?:"[^"]*paper-bob-sprite[^"]*"|[^\s>]*paper-bob-sprite[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded Paper-Bob sprite URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-bob-sheet-webp-src=(?:"[^"]*paper-bob-sprite-sheet[^"]*\.webp[^"]*"|[^\s>]*paper-bob-sprite-sheet[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded Paper-Bob WebP sprite sheet URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-paper-webp-src=(?:"[^"]*paper-projectile-default[^"]*\.webp[^"]*"|[^\s>]*paper-projectile-default[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded WebP paper projectile URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-props-atlas-src=(?:"[^"]*paper-route-props-atlas[^"]*\.png[^"]*"|[^\s>]*paper-route-props-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route prop atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-props-atlas-webp-src=(?:"[^"]*paper-route-props-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-route-props-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route prop atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-props-atlas-json-src=(?:"[^"]*paper-route-props-atlas[^"]*\.json[^"]*"|[^\s>]*paper-route-props-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route prop atlas JSON URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-lots-atlas-src=(?:"[^"]*paper-bob-lots-atlas[^"]*\.png[^"]*"|[^\s>]*paper-bob-lots-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded property lot atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-lots-atlas-webp-src=(?:"[^"]*paper-bob-lots-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-bob-lots-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded property lot atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-lots-atlas-json-src=(?:"[^"]*paper-bob-lots-atlas[^"]*\.json[^"]*"|[^\s>]*paper-bob-lots-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded property lot atlas JSON URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-track-atlas-src=(?:"[^"]*paper-bob-track-atlas[^"]*\.png[^"]*"|[^\s>]*paper-bob-track-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route track atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-track-atlas-webp-src=(?:"[^"]*paper-bob-track-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-bob-track-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route track atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-track-atlas-json-src=(?:"[^"]*paper-bob-track-atlas[^"]*\.json[^"]*"|[^\s>]*paper-bob-track-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded route track atlas JSON URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-intro-atlas-src=(?:"[^"]*paper-bob-intro-atlas[^"]*\.png[^"]*"|[^\s>]*paper-bob-intro-atlas[^\s>]*\.png[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded intro atlas PNG URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-intro-atlas-webp-src=(?:"[^"]*paper-bob-intro-atlas[^"]*\.webp[^"]*"|[^\s>]*paper-bob-intro-atlas[^\s>]*\.webp[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded intro atlas WebP URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'data-paper-route-intro-atlas-json-src=(?:"[^"]*paper-bob-intro-atlas[^"]*\.json[^"]*"|[^\s>]*paper-bob-intro-atlas[^\s>]*\.json[^\s>]*)'
+    Message = 'expected the homepage Paper-Bob shell to expose the lazy-loaded intro atlas JSON URL as data only'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'paper-route-launcher'
+    Message = 'expected the homepage to include only the small Paper-Bob launcher script on initial load'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<script\b[^>]*src=(?:"[^"]*phaser-3\.90\.0-arcade-physics[^"]*"|[^\s>]*phaser-3\.90\.0-arcade-physics[^\s>]*)'
+    Message = 'expected the homepage not to load Phaser before the Paper-Bob launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<script\b[^>]*src=(?:"[^"]*paper-route-rules[^"]*"|[^\s>]*paper-route-rules[^\s>]*)'
+    Message = 'expected the homepage not to load Paper-Bob rules before the launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<script\b[^>]*src=(?:"[^"]*paper-route-plan[^"]*"|[^\s>]*paper-route-plan[^\s>]*)'
+    Message = 'expected the homepage not to load Paper-Bob route planner before the launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<img\b[^>]*src=(?:"[^"]*paper-bob-sprite[^"]*"|[^\s>]*paper-bob-sprite[^\s>]*)'
+    Message = 'expected the homepage not to request the Paper-Bob game sprite before the launcher is clicked'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|paper-route-props-atlas|paper-bob-lots-atlas|paper-bob-track-atlas|paper-bob-intro-atlas|phaser-3\.90\.0-arcade-physics'
+    Message = 'expected the Paper-Bob launcher and runtime URLs to stay off archive pages'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|paper-route-props-atlas|paper-bob-lots-atlas|paper-bob-track-atlas|paper-bob-intro-atlas|phaser-3\.90\.0-arcade-physics'
+    Message = 'expected the Paper-Bob launcher and runtime URLs to stay off library pages'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/404.html'
+    Pattern = 'data-paper-route-|paper-route-launcher|paper-route-rules|paper-bob-sprite|paper-route-props-atlas|paper-bob-lots-atlas|paper-bob-track-atlas|paper-bob-intro-atlas|phaser-3\.90\.0-arcade-physics'
+    Message = 'expected the Paper-Bob launcher and runtime URLs to stay off the 404 page'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = '(?s)<link rel="canonical" href="https://outsideinprint\.org/"'
+    Message = 'expected /start-here/ to canonicalize to the homepage'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = '(?s)<meta name="robots" content="noindex, follow"'
+    Message = 'expected /start-here/ to remain non-indexable'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = '(?s)<meta http-equiv="refresh" content="0; url=/"'
+    Message = 'expected /start-here/ to include an immediate meta refresh to home'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'window\.location\.replace\("/"\)'
+    Message = 'expected /start-here/ to include a JavaScript redirect to home'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = '>Home<'
+    Message = 'expected /start-here/ to expose a visible Home fallback link'
+  },
+  @{
+    Path = 'public/start-here/index.html'
+    Pattern = 'Ways Into the Archive|Browse all collections|Start Reading'
+    Message = 'expected /start-here/ not to retain the retired Welcome-page content'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'journey-links'
+    Message = 'expected the archive front not to retain the route-level utility pill row'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the archive landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
+    Message = 'expected the archive masthead nav order to be Archive, Collections, Gallery, Library, Feeling curious?'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '\d+\s+published pieces.*?Latest:\s*[A-Z][a-z]{2}\s+\d{1,2},\s+\d{4}'
+    Message = 'expected the archive landing page to collapse to a compact archive stats line'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)<main\b[^>]*>.*?Essays on economics, risk, culture, technology, and public life from Outside In Print\.'
+    Message = 'expected the archive landing page not to render the route-level visible deck copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'Current Edition|Late Edition|Rolling Archive|By Month|essays-front__lead|essays-front__rail'
+    Message = 'expected the archive landing page not to retain the retired front-page-style edition structure'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'essays-front__year-nav'
+    Message = 'expected the archive landing page to render the inline year-jump archive navigation'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'class=(?:"[^"]*\beditorial-cartoon\b[^"]*"|''[^'']*\beditorial-cartoon\b[^'']*''|[^>]*\beditorial-cartoon\b)'
+    Message = 'expected the archive landing page not to reuse the homepage editorial cartoon block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'essays-front__cartoon|View gallery'
+    Message = 'expected the archive landing page not to render the retired essays-route cartoon module'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)href=(?:"?#archive-month-20\d{2}-(?:0[1-9]|1[0-2])"?).*?>20\d{2}<.*?href=(?:"?#archive-month-20\d{2}-(?:0[1-9]|1[0-2])"?).*?>20\d{2}<'
+    Message = 'expected the archive landing page to expose inline year jumps keyed to archive month anchors'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)May 2026.*?April 2026.*?March 2026.*?February 2026.*?January 2026'
+    Message = 'expected the archive to group entries by descending month-year bands'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)/essays/hindsight-2026-d4vd-alleged-romantic-homicide/.*?/essays/the-world-is-back-at-the-poker-table/.*?/essays/1929-2029-americas-century-of-humiliation/'
+    Message = 'expected the archive landing page to keep the newest stories in descending chronological order'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '/syd-and-oliver/without-a-word/'
+    Message = 'expected the merged archive to include representative dialogue pieces alongside essays'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '>Read PDF<'
+    Message = 'expected the archive front to avoid PDF affordances'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '(?s)<meta\s+name=(?:"robots"|robots)\s+content=(?:"noindex, follow"|noindex,\s*follow).*?<link\s+rel=(?:"canonical"|canonical)\s+href=(?:"https://outsideinprint\.org/archive/"|https://outsideinprint\.org/archive/).*?<meta\s+http-equiv=(?:"refresh"|refresh)\s+content=(?:"0; url=/archive/"|0;\s*url=/archive/).*?window\.location\.replace\("/archive/"\)'
+    Message = 'expected /essays/ to be a legacy redirect document targeting /archive/'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = '>Archive<'
+    Message = 'expected /essays/ to expose a visible Archive fallback link'
+  },
+  @{
+    Path = 'public/essays/index.html'
+    Pattern = 'essays-front__year-nav|Current Edition|Syd and Oliver Dialogues'
+    Message = 'expected /essays/ not to render the live archive shell'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '(?s)<main\b[^>]*>.*?The full catalog of published work from Outside In Print, searchable by title, type, collection, and version\.'
+    Message = 'expected the library page not to render the metadata description in visible header copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'The library is the full catalog of the imprint:'
+    Message = 'expected the library page not to render the visible catalog stats sentence at the top of the page'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'Search the archive by title, type, collection, or version\.'
+    Message = 'expected the library page to render the new utility line under the title'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'section-front section-front--library'
+    Message = 'expected the library page to wrap its header and controls in the shared top-zone shell'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'Dialogues and fiction from the recurring world of Syd and Oliver'
+    Message = 'expected the library page to surface lane descriptions from section metadata'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the library landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'Search titles, types, collections, and versions'
+    Message = 'expected the library page search placeholder to reflect type-based grouping'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '(?s)<label[^>]*for=(?:"library-type"|library-type)[^>]*>\s*Type\s*</label>.*?<option(?:\s+value(?:=(?:""|''''|[^\s>]+))?)?>All types</option>'
+    Message = 'expected the library page to expose the renamed Type filter control'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '(?s)id=(?:"library-group-dialogue"|library-group-dialogue).*?/syd-and-oliver/without-a-word/'
+    Message = 'expected the library page to group representative dialogue pieces under Dialogues'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'data-section='
+    Message = 'expected the library page to stop rendering section-keyed filter attributes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '\|\s*\d+\s+min read'
+    Message = 'expected the library page to render numeric reading-time metadata in list rows'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '%![sS]\(int=\d+\)\s+min read'
+    Message = 'expected the library page not to expose Go-formatting error strings in reading-time metadata'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = '(?s)<h1[^>]*>\s*Syd and Oliver Dialogues\s*</h1>'
+    Message = 'expected the /syd-and-oliver/ route to render the filtered dialogue archive title'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected /syd-and-oliver/ to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = 'Current Edition|essays-front__lead|essays-front__rail|essays-front__cartoon'
+    Message = 'expected /syd-and-oliver/ to avoid the retired front-page-style edition structure'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = 'essays-front__year-nav'
+    Message = 'expected /syd-and-oliver/ to reuse the filtered archive shell with year-jump navigation'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = '/syd-and-oliver/without-a-word/'
+    Message = 'expected /syd-and-oliver/ to list representative dialogue pieces'
+  },
+  @{
+    Path = 'public/syd-and-oliver/index.html'
+    Pattern = '/essays/the-risk-management-buffet/'
+    Message = 'expected /syd-and-oliver/ not to mix essay-only pieces into the filtered dialogue archive'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/working-papers/index.html'
+    Pattern = 'Current Edition|Rolling Archive|essays-front__lead|essays-front__year-nav'
+    Message = 'expected /working-papers/ to remain on the shared generic list layout'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/working-papers/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected /working-papers/ to emit the centered section-header hook on the shared list layout'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = 'Feeling curious\? Let the archive choose the next piece\.'
+    Message = 'expected the random route to frame archive exploration with the reader-facing exploratory label'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/'
+    Message = 'expected the random route to expose library, collections, and home fallbacks'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = 'Finding a piece from the archive\.\.\.'
+    Message = 'expected the random route to present a framed archive-selection status before redirecting'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = '(?s)random-route.*?lpeasy\.github\.io.*?/outsideinprint.*?https://outsideinprint\.org.*?window\.location\.hostname===\w+.*?window\.location\.replace\(\w+\+\w+\+window\.location\.search\+window\.location\.hash\).*?Math\.floor'
+    Message = 'expected the random route script to preserve legacy-host canonical redirects before selecting a random piece'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = '(?s)"/library/".*?if\(!\w+\.length\)\{window\.location\.replace\(\w+\);return\}.*?Math\.floor\(Math\.random\(\)\*\w+\.length\).*?window\.location\.replace\(\w+\)'
+    Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
+  },
+  @{
+    Path = 'public/random/index.html'
+    Pattern = 'data-random-route-choices|data-random-route-refresh|random_choice|Draw again|Three pieces from the archive'
+    Message = 'expected the random route not to render the retired three-choice redraw UI'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = 'journey-links'
+    Message = 'expected the library page not to render the retired guided-path block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/library/index.html'
+    Type = 'library-empty-state'
+    Message = 'expected the library empty state to point readers toward collections and Home'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '(?s)searchParams\.get\((?:"q"|''q'')\).*searchParams\.set\((?:"q"|''q''),\s*[^)]+\).*replaceState'
+    Message = 'expected the library page to sync the search input with the q query parameter'
+  },
+  @{
+    Path = 'public/library/index.html'
+    Pattern = '>Read PDF<'
+    Message = 'expected the library index to avoid PDF affordances'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = 'Imprint Record'
+    Message = 'expected the about page to expose the imprint-record opening surface'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = 'Author and Publisher'
+    Message = 'expected the about page to explain the author and publisher relationship'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = 'Robert V\. Ussley'
+    Message = 'expected the about page to name Robert V. Ussley explicitly'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = '(?s)Reading Map.*?Home.*?Browse collections.*?Search the library.*?Meet the author'
+    Message = 'expected the about page to keep a calm reading map into Home, Collections, Library, and the author archive'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?\$9\.99.*?Buy the OIP direct digital bundle coming soon.*?The Parable of the Sheep.*?\$4\.99.*?Buy the OIP direct digital bundle coming soon'
+    Message = 'expected the bookstore index to expose both book records, direct prices, and disabled direct checkout'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the bookstore index to expose The American Nightmare route, Amazon Kindle channel, and print deferral'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the bookstore index to expose The Parable of the Sheep route, Amazon Kindle channel, and print deferral'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = 'bookstore-record'
+    Message = 'expected the bookstore index to render reusable OIP book records'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)american-nightmare-cover-v1\.6\.jpg.*?parable-of-the-sheep-cover-v1\.0\.jpg'
+    Message = 'expected the bookstore index to use the official cover images'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?i)(american-nightmare-bookstore-render-v1\.6\.png|bookstore-woodgrain-v1\.6\.svg|Short Book|short book)'
+    Message = 'expected the bookstore index not to use the wood-library render, woodgrain asset, or Short Book language'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)/shop/(?:hat|shirt|tote)/|\b(?:hat|shirt|tote)\b|United States only'
+    Message = 'expected the bookstore landing page to remove retired merch products and shipping copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
+    Pattern = '(?s)\$9\.99.*?PDF.*?EPUB.*?HTML.*?Markdown.*?TXT.*?DOCX.*?public source ledger.*?public claims appendix.*?Buy the OIP direct digital bundle coming soon'
+    Message = 'expected the book product page to expose direct price, disabled checkout, and direct bundle formats'
+  },
+  @{
+    Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
+    Pattern = '(?s)Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected the book product page to expose Amazon Kindle as the external channel and keep print deferred'
+  },
+  @{
+    Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
+    Pattern = '(?i)(direct_download|american-nightmare-keep-dreaming-kid_oip_direct_v1\.6\.zip|\.zip)'
+    Message = 'expected the book product page not to expose a public ZIP link'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/shop/the-parable-of-the-sheep/index.html'
+    Pattern = '(?s)\$4\.99.*?PDF.*?EPUB.*?HTML.*?Markdown.*?TXT.*?Buy the OIP direct digital bundle coming soon'
+    Message = 'expected The Parable of the Sheep product page to expose direct price, disabled checkout, and reader formats'
+  },
+  @{
+    Path = 'public/shop/the-parable-of-the-sheep/index.html'
+    Pattern = '(?s)Kindle edition is available now through Amazon.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?Print editions are deferred until Bowker ISBN work is complete'
+    Message = 'expected The Parable of the Sheep product page to expose Amazon Kindle as the external channel and keep print deferred'
+  },
+  @{
+    Path = 'public/shop/the-parable-of-the-sheep/index.html'
+    Pattern = '(?i)(the-parable-of-the-sheep_oip_direct_reader_bundle_v1\.zip|direct_download|\.zip|print-on-demand|POD)'
+    Message = 'expected The Parable of the Sheep product page not to expose a public ZIP or print/POD purchase path'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Robert V\. Ussley'
+    Message = 'expected the refined author page to name Robert V. Ussley explicitly'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Bobviously_Portrait_v1\.png'
+    Message = 'expected the refined author page to keep the portrait surface'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = '(?s)Browse archive.*?Browse collections.*?Search the library.*?About the imprint'
+    Message = 'expected the refined author page to expose the compact route-based reading map'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Author Dossier'
+    Message = 'expected the refined author page to remove the retired Author Dossier label'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'Selected Works|Themes|From the Archive'
+    Message = 'expected the refined author page to remove the retired lower dossier sections'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Collections gather connected essays into guided reading lanes across the archive\. Use them when you want an editorial thread instead of a simple timeline\.'
+    Message = 'expected the collections index to explain collections in plain editorial language'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '\d+ public collections.*\d+ published pieces'
+    Message = 'expected the collections index to expose the compact collections summary line beneath the intro without pinning a date-sensitive piece count'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'collections-broadsheet'
+    Message = 'expected the collections index to render the broadsheet directory shell'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)collections-broadsheet__section.*?collections-group-series.*?collections-broadsheet__section.*?collections-group-topic'
+    Message = 'expected the collections broadsheet to expose series and topics as two editorial sections'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the collections landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'section-front section-front--collections'
+    Message = 'expected the collections page to wrap the header in the shared top-zone shell'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)<main\b[^>]*>.*?Curated collections that gather essays, projects, dossiers, and recurring questions into coherent reading threads across the archive\.'
+    Message = 'expected the collections index not to render the old descriptive intro paragraph in visible copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)<main\b[^>]*>.*?Collections are curated reading threads across the archive: \d+ public collections linking \d+ published pieces\.'
+    Message = 'expected the collections index not to render the old prose stats sentence in visible copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/library/.*?(?:https://outsideinprint\.org)?/'
+    Message = 'expected the collections index not to render the retired top journey-links block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Featured Collections'
+    Message = 'expected the unified collections directory to remove the separate featured collections section'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Collections Index'
+    Message = 'expected the unified collections directory to remove the retired collections index heading'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'All Collections'
+    Message = 'expected the collections index not to retain the retired flat list heading'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Featured Series|Featured Topic'
+    Message = 'expected featured collection cards not to retain featured-type kicker labels'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = "Bob(?:'|&#39;)s Almanack"
+    Message = 'expected the public collections index to link Bob''s Almanack after the issue and collection page are published'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '/collections/bobs-almanack/'
+    Message = 'expected the public collections index to point to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/collections/bobs-almanack/index.html'
+    Pattern = "Bob(?:'|&#39;)s Almanack"
+    Message = 'expected the Bob''s Almanack collection page to render its bespoke nameplate'
+  },
+  @{
+    Path = 'public/collections/bobs-almanack/index.html'
+    Pattern = '(?s)Latest Issue.*?July 11, 2026.*?Read the small words\. They decide who works and who pays\..*?First Step'
+    Message = 'expected the Bob''s Almanack collection page to feature the July 11 issue and lead essay'
+  },
+  @{
+    Path = 'public/almanack/2026-05-02/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?Issue 1.*?A public cost does not disappear because someone learned to price it\.'
+    Message = 'expected the May 2 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 9, 2026.*?Issue 2.*?A machine is innocent only until the bill arrives\.'
+    Message = 'expected the May 9 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the May 9 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '(?s)/images/editorial/modern-prometheus\.png.*?/images/editorial/lump-of-coal\.png.*?/images/editorial/pass-the-pepper\.png.*?/images/editorial/who-paid-the-nazis\.png'
+    Message = 'expected the May 9 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-05-09/index.html'
+    Pattern = '/images/essays/(modern-prometheus|the-factory-in-the-footnote|can-you-pass-the-pepper-please|the-hate-ledger)/hero\.png'
+    Message = 'expected the May 9 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 16, 2026.*?Issue 3.*?An institution shows its faith by what it audits\.'
+    Message = 'expected the May 16 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the May 16 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '(?s)/images/editorial/not-my-river-not-my-problem\.png.*?/images/editorial/delivering-the-goods\.png.*?/images/editorial/made-in-china\.png.*?/images/editorial/see-the-world\.png'
+    Message = 'expected the May 16 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-05-16/index.html'
+    Pattern = '/images/essays/(the-ash-pond-under-the-cloud|the-mailbox-at-the-clinic-door|fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet|outside-the-garden)/hero\.png'
+    Message = 'expected the May 16 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-05-23/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 23, 2026.*?Issue 4.*?A record is not the truth\. It is where the hiding starts\.'
+    Message = 'expected the May 23 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-05-23/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the May 23 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-05-23/index.html'
+    Pattern = '(?s)/images/editorial/memory-hole\.png.*?/images/editorial/beneficial-use\.png.*?/images/editorial/papers-please\.png.*?/images/editorial/the-altar-of-consent\.png'
+    Message = 'expected the May 23 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-05-23/index.html'
+    Pattern = '/images/essays/(the-text-message-in-the-archive-box|save-some-air-for-the-fishies|id-required|consent-from-permission-to-sanctity)/hero\.png'
+    Message = 'expected the May 23 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 30, 2026.*?Issue 5.*?Ask for evidence and watch them\.'
+    Message = 'expected the May 30 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the May 30 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '(?s)/images/editorial/hit-after-hit\.png.*?/images/editorial/warbonds\.png.*?/images/editorial/human-resources\.png.*?/images/editorial/on-the-fence\.png'
+    Message = 'expected the May 30 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-05-30/index.html'
+    Pattern = '/images/essays/(the-scenario-that-ate-the-future|the-war-premium-at-the-auction|the-courthouse-that-ate-the-republic|the-tank-at-the-fence-line)/hero\.png'
+    Message = 'expected the May 30 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?June 6, 2026.*?Issue 6.*?Um, yeah, I(?:''|&#39;)m going to need the details\.'
+    Message = 'expected the June 6 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the June 6 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '(?s)/images/editorial/the-ruler-of-the-road\.png.*?/images/editorial/post-malonely\.png.*?/images/editorial/blowing-smoke\.png'
+    Message = 'expected the June 6 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-06-06/index.html'
+    Pattern = '/images/essays/(the-bell-at-the-crossing-flagship|the-mailbox-at-the-edge-of-the-road|the-examiners-red-pencil|colored-glasses-the-lens-of-race)/hero\.png'
+    Message = 'expected the June 6 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?June 20, 2026.*?Issue 7.*?A public rule is only as clean as the place where it lands\.'
+    Message = 'expected the June 20 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the June 20 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '(?s)/images/editorial/prime-suspect\.png.*?/images/editorial/escape-clause\.png.*?/images/editorial/the-meter\.png'
+    Message = 'expected the June 20 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-06-20/index.html'
+    Pattern = '/images/essays/(the-stamp-on-the-meat-flagship|the-ladder-outside-the-window|the-meter-at-the-curb)/hero\.png'
+    Message = 'expected the June 20 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?June 27, 2026.*?Issue 8.*?Vacuum the house everyday if you have a pet that sheds\.'
+    Message = 'expected the June 27 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the June 27 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '(?s)/images/editorial/shadow-price\.png.*?/images/editorial/the-cone-in-the-lane\.png.*?/images/editorial/break-seal\.png.*?/images/editorial/curb-appeal\.png'
+    Message = 'expected the June 27 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-06-27/index.html'
+    Pattern = '/images/essays/(the-bars-on-the-gum|the-cone-in-the-lane|the-seal-around-the-cap|the-curb-cut-at-the-corner)/hero\.png'
+    Message = 'expected the June 27 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?July 11, 2026.*?In the Margins.*?Number.*?Document.*?Licensee eZ Check Verification for Transfers.*?Virtue.*?Read issue'
+    Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?July 4, 2026.*?Issue 9.*?A number is useful only after you know what it counts\.'
+    Message = 'expected the July 4 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the July 4 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '(?s)/images/editorial/the-minute-drawer\.png.*?/images/editorial/claim-check\.png.*?/images/editorial/after-the-tone\.png.*?/images/editorial/the-sorting-counter\.png'
+    Message = 'expected the July 4 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-07-04/index.html'
+    Pattern = '/images/essays/(the-clock-by-the-door|the-little-machine-in-the-glass-case|the-siren-on-the-pole|the-charge-ledger)/hero\.png'
+    Message = 'expected the July 4 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?July 11, 2026.*?Issue 10.*?Read the small words\. They decide who works and who pays\..*?A duty undefined becomes someone else(?:''|&#39;)s\.'
+    Message = 'expected the July 11 Almanack issue page to render the nameplate, issue number, opening quote, and final user-supplied closing quote'
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the July 11 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '(?s)/images/editorial/the-trophy-case\.png.*?/images/editorial/house-gravity\.png.*?/images/editorial/whose-yes\.png.*?/images/editorial/minimum-door\.png'
+    Message = 'expected the July 11 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-07-11/index.html'
+    Pattern = '/images/essays/(first-step|default-owner|whose-yes|minimum-due)/hero\.png'
+    Message = 'expected the July 11 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<aside\b(?=[^>]*\bhome-almanack\b)[^>]*>.*?Collection.*?</aside>'
+    Message = 'expected the homepage Almanack insert not to render a generic collection label'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)Series.*?Syd and Oliver Dialogues.*?Modern Bios.*?Lit Review.*?Reported Case Studies'
+    Message = 'expected the unified collections directory to group visible series collections together'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'The Ledger|/collections/the-ledger/'
+    Message = 'expected The Ledger to be hidden from the collections directory'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/lit-review/index.html'
+    Pattern = '(?s)The Three-Body Problem.*?The Little Prince: 10 Powerful Quotes That Will Change How You See Life.*?6 Reasons Redwall Is a Timeless Classic.*?35 Years of Yellow: The Simpsons Time Loop'
+    Message = 'expected the Lit Review collection page to list the launch pieces in explicit collection order'
+  },
+  @{
+    Path = 'public/collections/lit-review/index.html'
+    Pattern = 'The Max Mistake'
+    Message = 'expected the Lit Review launch page not to include The Max Mistake'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = '(?s)Topics.*?Risk, Uncertainty, and Decision-Making.*?Geopolitics, Trade, and Global Power.*?Floods, Water, and the Built Environment.*?Technology, AI, and the Machine Future.*?Moral, Religious, and Philosophical Essays.*?Civic Institutions and Public Power'
+    Message = 'expected the unified collections directory to group visible topic collections together without subgroup labels'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'collection-card--room-echo|class=(?:"[^"]*\bcard\b[^"]*\bcollection-card\b[^"]*"|''[^'']*\bcard\b[^'']*\bcollection-card\b[^'']*''|[^\s>]*\bcard\b[^\s>]*\bcollection-card\b[^\s>]*)'
+    Message = 'expected the collections broadsheet to omit room-echo card styling'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Moral / Religious'
+    Message = 'expected the unified collections directory to drop the old topic subgroup labels'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'Public Power|Civic Institutions and Public Power'
+    Message = 'expected the collections index to render the now-public Civic Institutions and Public Power topic lane'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'How to Use This Collection'
+    Message = 'expected collection detail pages not to retain the retired overview block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'page-header--section-centered'
+    Message = 'expected the gallery landing header block to emit the centered section-header hook'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'section-front section-front--gallery'
+    Message = 'expected the gallery page to wrap the header and spotlight in the shared top-zone shell'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'data-cartoon-lightbox'
+    Message = 'expected the gallery page to include the fullscreen cartoon lightbox'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'data-cartoon-lightbox-trigger'
+    Message = 'expected gallery cartoon images to open the fullscreen lightbox'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'data-cartoon-slug=certified-safe'
+    Message = 'expected gallery cartoon triggers to expose stable cartoon deep-link slugs'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'URLSearchParams'
+    Message = 'expected gallery to resolve cartoon query-string deep links'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'data-cartoon-lightbox-essay'
+    Message = 'expected the fullscreen cartoon lightbox to expose an essay link target'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = 'data-essay=(?:"/essays/the-warning-label-in-the-weeds/"|/essays/the-warning-label-in-the-weeds/)'
+    Message = 'expected the certified-safe cartoon to link to its associated essay'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = '(?s)data-title="Think Outside the Box"[^>]*data-essay='
+    Message = 'expected Think Outside the Box to remain image-only without an essay link'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = 'section-front'
+    Message = 'expected the archive route to remain on its essays-front shell without the new shared top-zone wrapper'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '(?s)collection-section__header.*?<h1>Risk, Uncertainty, and Decision-Making</h1>.*?<li>Essays</li>.*?<li>Risk, uncertainty, and decisions</li>'
+    Message = 'expected collection detail pages to use the actual collection title and a compact label-free ledger'
+  },
+  @{
+    Path = 'public/collections/syd-and-oliver-dialogues/index.html'
+    Pattern = '(?s)collection-section__header(?:(?!</header>).)*(Conversational series|Start here:)'
+    Message = 'expected collection detail ledgers to omit lane metadata and start-here links'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '<h2[^>]*>Contents</h2>|pieces appear below in collection order'
+    Message = 'expected collection detail pages to omit the contents label and explanatory contents copy'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'Format:|Scope:|Lane:'
+    Message = 'expected collection detail ledgers to omit metadata labels and keep only values'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/civic-institutions-and-public-power/index.html'
+    Pattern = '(?s)<li>Essays</li>.*?<li>Courts, institutions, and public power</li>'
+    Message = 'expected collection detail ledgers to keep metadata values after dropping labels'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '(?s)collection-section__lead.*?<h2[^>]*>Start Here</h2>'
+    Message = 'expected collection detail pages to promote the marked entry point in a Start Here section'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '(?s)<ol[^>]*class=(?:"[^"]*\bcollection-section__items\b[^"]*"|''[^'']*\bcollection-section__items\b[^'']*''|[^\s>]*\bcollection-section__items\b[^\s>]*)[^>]*>(?:(?!</ol>).)*?/essays/what-is-risk-a-four-part-framework/'
+    Message = 'expected the Risk, Uncertainty, and Decision-Making Start Here essay not to be duplicated in the contents list'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected related collection rows to omit the hidden Ledger collection'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/the-ledger/index.html'
+    Pattern = '(?s)<ol[^>]*class=(?:"[^"]*\bcollection-section__items\b[^"]*"|''[^'']*\bcollection-section__items\b[^'']*''|[^\s>]*\bcollection-section__items\b[^\s>]*)[^>]*>(?:(?!</ol>).)*?/essays/the-ledger-vol-1/'
+    Message = 'expected The Ledger Start Here essay not to be duplicated in the contents list'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/the-ledger/index.html'
+    Pattern = '<meta name=robots content="noindex, follow"'
+    Message = 'expected the hidden Ledger collection page to be noindexed while remaining directly reachable'
+  },
+  @{
+    Path = 'public/sitemap.xml'
+    Pattern = '/collections/the-ledger/'
+    Message = 'expected the hidden Ledger collection page to be excluded from the sitemap'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-1/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected Ledger essay pages not to expose the hidden collection as a public reader path'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-2/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected Ledger essay pages not to expose the hidden collection as a public reader path'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-3/index.html'
+    Pattern = '/collections/the-ledger/|data-analytics-collection=(?:"the-ledger"|the-ledger)'
+    Message = 'expected Ledger essay pages not to expose the hidden collection as a public reader path'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/floods-water-built-environment/index.html'
+    Pattern = '(?s)<ol[^>]*class=(?:"[^"]*\bcollection-section__items\b[^"]*"|''[^'']*\bcollection-section__items\b[^'']*''|[^\s>]*\bcollection-section__items\b[^\s>]*)[^>]*>(?:(?!</ol>).)*?/essays/what-happened-at-camp-mystic/'
+    Message = 'expected the Floods, Water, and the Built Environment Start Here essay not to be duplicated in the contents list'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'Related Collections'
+    Message = 'expected collection detail pages to link onward to related collections'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'Nearby lanes for continuing through the archive\.'
+    Message = 'expected collection detail pages to explain why related collections are shown'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '(?s)journey-links.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Message = 'expected collection pages to expose follow-on navigation back to collections and the library'
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = '>Read PDF<'
+    Message = 'expected collection pages to avoid PDF affordances'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/collections/risk-uncertainty/index.html'
+    Pattern = 'collection-card--room-echo'
+    Message = 'expected related-collection rows on collection detail pages to remain neutral and omit room-echo classes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = 'collection-card--room-echo'
+    Message = 'expected author-page collection rows to remain neutral and omit room-echo classes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'edition-download'
+    Message = 'expected article pages to avoid PDF download blocks'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'First web edition'
+    Message = 'expected article record rails to normalize legacy digital-edition labels for the web'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'First digital edition'
+    Message = 'expected article headers not to expose legacy digital-edition wording'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)article-publication-record.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<'
+    Message = 'expected article exits to expose archive, collections, library, and newsletter links after the publication record'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<'
+    Message = 'expected article pages to expose the Archive masthead link'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/literature/'
+    Message = 'expected article mastheads not to expose the retired literature section'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'running-header'
+    Message = 'expected article pages not to render the retired article-level running header'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'piece--collection-accent'
+    Message = 'expected non-collection essays to remain unaccented'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'piece-collection-context'
+    Message = 'expected non-collection essays not to render the collection context block'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'data-piece-collection-room-theme='
+    Message = 'expected non-collection essays not to emit collection room-theme data attributes'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'class=(?:"read-next"|read-next)\b'
+    Message = 'expected non-collection essays not to render the retired read-next module'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'read-next-title|Read Next'
+    Message = 'expected non-collection essays not to render retired Read Next title markup'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'data-analytics-source-slot=(?:"related_content"|related_content)'
+    Message = 'expected non-collection essays not to render related_content analytics links from Read Next'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'journey-links--article(?=["\s])'
+    Message = 'expected article headers not to render the old journey-links--article modifier'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'journey-links--article-exit'
+    Message = 'expected non-collection essays to render the article-exit Keep Reading links'
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'newsletter-signup--page'
+    Message = 'expected non-collection essays to omit the retired full newsletter module'
+    ShouldNotMatch = $true
+  }
+)
+
+$articleCollectionBoundaryPages = @(
+  @{ Path = 'public/essays/your-part/index.html'; Slug = 'simple-logic'; Label = 'Your Part' },
+  @{ Path = 'public/essays/synthetic-reasoning/index.html'; Slug = 'technology-ai-machine-future'; Label = 'synthetic-reasoning' },
+  @{ Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the AI data center essay' },
+  @{ Path = 'public/essays/the-model-that-could-not-leave/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the Manus essay' },
+  @{ Path = 'public/essays/smokestack-spreadsheets/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Smokestack Spreadsheets' },
+  @{ Path = 'public/essays/modern-prometheus/index.html'; Slug = 'technology-ai-machine-future'; Label = 'Modern Prometheus' },
+  @{ Path = 'public/essays/the-ash-pond-under-the-cloud/index.html'; Slug = 'technology-ai-machine-future'; Label = 'The Ash Pond Under the Cloud' },
+  @{ Path = 'public/essays/canvas-fails-finals-week/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Canvas Fails Finals Week' },
+  @{ Path = 'public/essays/the-bet-slip-in-the-briefing-room/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Bet Slip in the Briefing Room' },
+  @{ Path = 'public/essays/can-you-pass-the-pepper-please/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'Can You Pass the Pepper, Please?' },
+  @{ Path = 'public/essays/the-factory-in-the-footnote/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Factory in the Footnote' },
+  @{ Path = 'public/essays/the-blue-pool-at-the-memorial/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Blue Pool at the Memorial' },
+  @{ Path = 'public/essays/the-mailbox-at-the-clinic-door/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Mailbox at the Clinic Door' },
+  @{ Path = 'public/essays/id-required/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'ID Required' },
+  @{ Path = 'public/essays/the-text-message-in-the-archive-box/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Text Message in the Archive Box' },
+  @{ Path = 'public/essays/the-courthouse-that-ate-the-republic/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Courthouse That Ate the Republic' },
+  @{ Path = 'public/essays/the-examiners-red-pencil/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Examiner''s Red Pencil' },
+  @{ Path = 'public/essays/the-card-in-the-catalog/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Card in the Catalog' },
+  @{ Path = 'public/essays/the-brass-disk-in-the-sidewalk/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Brass Disk in the Sidewalk' },
+  @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
+  @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
+  @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
+  @{ Path = 'public/essays/nothing-to-see-here/index.html'; Slug = 'risk-uncertainty'; Label = 'Nothing to See Here' },
+  @{ Path = 'public/essays/the-tank-at-the-fence-line/index.html'; Slug = 'risk-uncertainty'; Label = 'The Tank at the Fence Line' },
+  @{ Path = 'public/essays/the-war-premium-at-the-auction/index.html'; Slug = 'risk-uncertainty'; Label = 'The War Premium at the Auction' },
+  @{ Path = 'public/essays/the-map-that-priced-the-fire/index.html'; Slug = 'risk-uncertainty'; Label = 'The Map That Priced the Fire' },
+  @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'the moral collection essay' },
+  @{ Path = 'public/essays/the-hate-ledger/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'The Hate Ledger' },
+  @{ Path = 'public/essays/outside-the-garden/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'Outside the Garden' },
+  @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' },
+  @{ Path = 'public/essays/save-some-air-for-the-fishies/index.html'; Slug = 'floods-water-built-environment'; Label = 'Save Some Air for the Fishies' },
+  @{ Path = 'public/essays/the-easement-under-the-lake/index.html'; Slug = 'floods-water-built-environment'; Label = 'The Easement Under the Lake' },
+  @{ Path = 'public/essays/multiple-shmultiple/index.html'; Slug = 'reported-case-studies'; Label = 'Multiple Shmultiple' },
+  @{ Path = 'public/essays/the-door-that-would-not-open/index.html'; Slug = 'reported-case-studies'; Label = 'The Door That Would Not Open' }
+)
+
+foreach ($page in $articleCollectionBoundaryPages) {
+  $requiredUxChecks += @(
+    @{
+      Path = $page.Path
+      Pattern = ('data-piece-collection-slug=(?:"' + [regex]::Escape($page.Slug) + '"|' + [regex]::Escape($page.Slug) + ')')
+      Message = "expected $($page.Label) to key the article collection boundary to collection slug '$($page.Slug)'"
+    },
+    @{
+      Path = $page.Path
+      Pattern = 'From the Collection'
+      Message = "expected $($page.Label) not to render the retired visible collection header phrase"
+      ShouldNotMatch = $true
+    },
+    @{
+      Path = $page.Path
+      Pattern = 'article_collection_context'
+      Message = "expected $($page.Label) collection link to emit the dedicated analytics source slot"
+    },
+    @{
+      Path = $page.Path
+      Pattern = 'piece--collection-accent'
+      Message = "expected $($page.Label) not to render retired article collection-accent hooks"
+      ShouldNotMatch = $true
+    },
+    @{
+      Path = $page.Path
+      Pattern = 'data-piece-collection-room-theme='
+      Message = "expected $($page.Label) not to emit retired collection room-theme article attributes"
+      ShouldNotMatch = $true
+    }
+  )
+}
+
+$requiredUxChecks += @(
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = 'piece--collection-accent--reported-case-studies-evidence-room'
+    Message = 'expected dual-membership essays not to blend the secondary collection skin hook into article pages'
+    ShouldNotMatch = $true
+  }
+)
+
+foreach ($entry in $collectionRoomExpectations.GetEnumerator()) {
+  $relativePath = [string]$entry.Key
+  $theme = [string]$entry.Value
+
+  $requiredUxChecks += @(
+    @{
+      Path = $relativePath
+      Pattern = ('data-collection-room-theme=(?:"' + [regex]::Escape($theme) + '"|' + [regex]::Escape($theme) + ')')
+      Message = "expected the live collection page to omit retired data-collection-room-theme='$theme'"
+      ShouldNotMatch = $true
+    },
+    @{
+      Path = $relativePath
+      Pattern = ('collection-room--' + [regex]::Escape($theme))
+      Message = "expected the live collection page to omit retired collection-room modifier class '$theme'"
+      ShouldNotMatch = $true
+    }
+  )
+}
+
+foreach ($theme in $collectionDirectoryThemes) {
+  $requiredUxChecks += @(
+    @{
+      Path = 'public/collections/index.html'
+      Pattern = ('collection-card--' + [regex]::Escape($theme))
+      Message = "expected the broadsheet collections directory to omit retired room-echo theme class '$theme'"
+      ShouldNotMatch = $true
+    }
+  )
+}
+
+foreach ($check in $requiredUxChecks) {
+  $relativePath = [string]$check.Path
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $uxIssues.Add("Missing generated page required for UX regression coverage: $relativePath")
+    continue
+  }
+
+  if ($check.Contains('Type') -and $check.Type -eq 'library-empty-state') {
+    $html = $targetPageHtml[$relativePath]
+    $hasEmptyStateText = $html -match 'No matching pieces found'
+    $hasCollectionsText = $html -match 'Collections'
+    $hasHomeText = $html -match 'Home'
+    $hasCollectionsDestination = $html -match '(?:https://outsideinprint\.org)?/collections/'
+    $hasHomeDestination = $html -match '(?:https://outsideinprint\.org)?/'
+
+    if (-not ($hasEmptyStateText -and $hasCollectionsText -and $hasHomeText -and $hasCollectionsDestination -and $hasHomeDestination)) {
+      $uxIssues.Add("$relativePath => $($check.Message)")
+    }
+  }
+  else {
+    $isNegative = [bool]($check.ContainsKey('ShouldNotMatch') -and $check.ShouldNotMatch)
+    $matches = $targetPageHtml[$relativePath] -match ([string]$check.Pattern)
+    if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
+      $uxIssues.Add("$relativePath => $($check.Message)")
+    }
+  }
+}
+
+foreach ($forbiddenPath in @(
+  'public/almanack/index.html'
+)) {
+  $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
+  if (Test-Path -LiteralPath $fullForbiddenPath -PathType Leaf) {
+    $uxIssues.Add("$forbiddenPath => expected the Almanack section index to remain unpublished")
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/index.html')) {
+  $homeIndexHtml = [string]$targetPageHtml['public/index.html']
+  $currentSlugPattern = 'data-cartoon-slug=(?:"' + [regex]::Escape($currentCartoonSlug) + '"|' + [regex]::Escape($currentCartoonSlug) + ')'
+  $currentTriggerMatch = [regex]::Match($homeIndexHtml, '<button\b(?=[^>]*\beditorial-cartoon__trigger\b)(?=[^>]*' + $currentSlugPattern + ')[^>]*>', 'IgnoreCase')
+  $recentGridIndex = $homeIndexHtml.IndexOf('data-home-cartoon-recent', [System.StringComparison]::Ordinal)
+
+  if (-not $currentTriggerMatch.Success) {
+    $uxIssues.Add('public/index.html => expected the current homepage cartoon trigger to keep the current data slug')
+  }
+  elseif ($recentGridIndex -lt 0 -or $currentTriggerMatch.Index -gt $recentGridIndex) {
+    $uxIssues.Add('public/index.html => expected the current cartoon block to render before the recent cartoon grid')
+  }
+
+  $recentMatches = @([regex]::Matches($homeIndexHtml, '<figure\b(?=[^>]*\beditorial-cartoon-recent__item\b)(?=[^>]*\bdata-home-cartoon-recent-card\b)[^>]*data-cartoon-slug=(?:"([^">]+)"|([^\s>]+))', 'IgnoreCase'))
+  if ($recentMatches.Count -ne [Math]::Min(2, $recentHomeCartoonSlugs.Count)) {
+    $uxIssues.Add("public/index.html => expected exactly $([Math]::Min(2, $recentHomeCartoonSlugs.Count)) recent homepage cartoon cards, found $($recentMatches.Count)")
+  }
+  else {
+    $actualRecentSlugs = @($recentMatches | ForEach-Object {
+      if ($_.Groups[1].Success) { $_.Groups[1].Value } else { $_.Groups[2].Value }
+    })
+    $expectedRecentSlugs = @($recentHomeCartoonSlugs | Select-Object -First $recentMatches.Count)
+    if (($actualRecentSlugs -join '|') -ne ($expectedRecentSlugs -join '|')) {
+      $uxIssues.Add("public/index.html => expected recent homepage cartoons in date order '$($expectedRecentSlugs -join ', ')', found '$($actualRecentSlugs -join ', ')'")
+    }
+  }
+
+  if ($currentCartoonSlug -eq 'lines-of-fire' -and $homeIndexHtml -notmatch 'data-title=(?:"Lines of Fire"|Lines\ of\ Fire)') {
+    $uxIssues.Add('public/index.html => expected Lines of Fire to remain the current homepage cartoon')
+  }
+  if (($recentHomeCartoonSlugs | Select-Object -First 1) -eq 'cloched-for-business' -and $homeIndexHtml -notmatch '<figure\b(?=[^>]*\beditorial-cartoon-recent__item\b)(?=[^>]*data-cartoon-slug=(?:"cloched-for-business"|cloched-for-business))(?s).*?<figcaption><span>Cloched for Business</span></figcaption>') {
+    $uxIssues.Add('public/index.html => expected Cloched for Business to be the first recent homepage cartoon card')
+  }
+}
+foreach ($articlePath in @(
+  'public/essays/presidential-elections/index.html',
+  'public/essays/the-risk-management-buffet/index.html',
+  'public/essays/the-world-is-back-at-the-poker-table/index.html'
+)) {
+  if (-not $targetPageHtml.ContainsKey($articlePath)) {
+    $uxIssues.Add("Missing generated page required for article-exit regression coverage: $articlePath")
+    continue
+  }
+
+  $articleHtml = [string]$targetPageHtml[$articlePath]
+  $newsletterIndex = $articleHtml.IndexOf('newsletter-signup--page', [System.StringComparison]::Ordinal)
+  if ($newsletterIndex -ge 0) {
+    $uxIssues.Add("$articlePath => expected article aftermatter to omit newsletter-signup--page")
+  }
+
+  $recordIndex = $articleHtml.IndexOf('article-publication-record', [System.StringComparison]::Ordinal)
+  $journeyIndex = $articleHtml.IndexOf('journey-links--article-exit', [System.StringComparison]::Ordinal)
+  if ($recordIndex -lt 0 -or $journeyIndex -lt 0 -or $recordIndex -ge $journeyIndex) {
+    $uxIssues.Add("$articlePath => expected article-publication-record to appear before journey-links--article-exit")
+  }
+
+  if ($articleHtml -notmatch '(?s)journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<') {
+    $uxIssues.Add("$articlePath => expected article-exit links to include Archive, Collections, Library, and Newsletter")
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/archive/index.html')) {
+  $archiveIndexHtml = [string]$targetPageHtml['public/archive/index.html']
+  $archiveDeskTagCount = [regex]::Matches($archiveIndexHtml, 'class=(?:"[^"]*\bitem-kicker--collection\b[^"]*"|''[^'']*\bitem-kicker--collection\b[^'']*''|[^\s>]*\bitem-kicker--collection\b[^\s>]*)', 'IgnoreCase').Count
+  if ($archiveDeskTagCount -eq 0) {
+    $uxIssues.Add('public/archive/index.html => expected archive collection labels to render in the muted desk-tag kicker position')
+  }
+
+  $yearJumpCount = [regex]::Matches($archiveIndexHtml, 'class=(?:"[^"]*\bessays-front__year-link\b[^"]*"|''[^'']*\bessays-front__year-link\b[^'']*''|[^\s>]*\bessays-front__year-link\b[^\s>]*)', 'IgnoreCase').Count
+  if ($yearJumpCount -lt 2) {
+    $uxIssues.Add("public/archive/index.html => expected at least 2 year-jump links, found $yearJumpCount")
+  }
+
+  if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $archiveIndexHtml -match [regex]::Escape($currentCartoonCaption)) {
+    $uxIssues.Add('public/archive/index.html => expected the archive shell not to render the homepage cartoon caption text')
+  }
+}
+
+$modernBioSharedRowPages = @(
+  'public/archive/index.html',
+  'public/library/index.html',
+  'public/collections/modern-bios/index.html'
+)
+
+foreach ($relativePath in $modernBioSharedRowPages) {
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $uxIssues.Add("$relativePath => expected generated HTML to be available for Modern Bios shared-row coverage")
+    continue
+  }
+
+  $html = [string]$targetPageHtml[$relativePath]
+  if ($html -notmatch 'Modern Bios') {
+    $uxIssues.Add("$relativePath => expected representative shared rows to keep the Modern Bios text kicker")
+  }
+
+  if ($html -match 'item--variant-modernbio') {
+    $uxIssues.Add("$relativePath => expected shared archive rows to stop rendering the retired Modern Bios inset-rule class")
+  }
+}
+
+if ($runningHeaderIssues.Count -gt 0) {
+  throw ("Found running-header home links outside the expected base path '{0}'. Samples: {1}" -f $ExpectedHomePath, (Format-SampleList -Items $runningHeaderIssues))
+}
+
+if ($rootRelativeImageIssues.Count -gt 0) {
+  throw ('Found stale project-path <img src="/outsideinprint/images/..."> paths in generated HTML. Samples: {0}' -f (Format-SampleList -Items $rootRelativeImageIssues))
+}
+
+if ($localizedMediumImageCount -eq 0) {
+  throw "Did not find any base-path-safe localized /images/medium/ image URLs in generated HTML."
+}
+
+if ($zgotmplzIssues.Count -gt 0) {
+  throw ("Found ZgotmplZ in generated HTML. Samples: {0}" -f (Format-SampleList -Items $zgotmplzIssues))
+}
+
+if ($publicPdfAffordanceHits.Count -gt 0) {
+  throw ("Found public HTML that still exposes PDF affordances. Samples: {0}" -f (Format-SampleList -Items $publicPdfAffordanceHits))
+}
+
+if ($retiredRouteIssues.Count -gt 0) {
+  throw ("Found retired routes in generated HTML. Samples: {0}" -f (Format-SampleList -Items $retiredRouteIssues))
+}
+
+if ($semanticIssues.Count -gt 0) {
+  throw ("Found semantic accessibility regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $semanticIssues))
+}
+
+if ($importedMediaIssues.Count -gt 0) {
+  throw ("Found imported media rendering regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $importedMediaIssues))
+}
+
+if ($articleLightboxIssues.Count -gt 0) {
+  throw ("Found article image lightbox regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $articleLightboxIssues))
+}
+
+if ($metadataIssues.Count -gt 0) {
+  throw ("Found metadata regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $metadataIssues))
+}
+
+if ($structuredDataIssues.Count -gt 0) {
+  throw ("Found structured-data regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $structuredDataIssues))
+}
+
+if ($indexationIssues.Count -gt 0) {
+  throw ("Found indexation-policy regressions in generated output. Samples: {0}" -f (Format-SampleList -Items $indexationIssues))
+}
+
+if ($legacyCleanupIssues.Count -gt 0) {
+  throw ("Found legacy content-cleanup regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $legacyCleanupIssues))
+}
+
+if ($uxIssues.Count -gt 0) {
+  throw ("Found UX/navigation regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $uxIssues))
+}
+
+Write-Host "Public HTML output regression test passed."
+$global:LASTEXITCODE = 0
+exit 0
