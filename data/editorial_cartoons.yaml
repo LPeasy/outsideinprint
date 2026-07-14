@@ -1,4 +1,4 @@
-current: the-tiller
+current: mending-table
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -540,5 +540,14 @@ cartoons:
     image: "/images/editorial/the-tiller.png"
     essay: "/essays/your-part/"
     alt: "Editorial cartoon showing an anonymous ferry captain gripping a tiller while a passenger reaches toward a distant dock sign marked ARRIVAL and a red rope runs along the rail."
+    width: 1672
+    height: 941
+  - slug: mending-table
+    title: "Mending Table"
+    date: "2026-07-14"
+    publishDate: "2026-07-14T16:08:06-04:00"
+    image: "/images/editorial/mending-table.png"
+    essay: "/essays/the-repair/"
+    alt: "Editorial cartoon showing an anonymous adult kneeling beside a kitchen table and gathering pieces of a cracked bowl into a tray while another adult sits apart and a thin faded yellow thread runs from the bowl to the repair work."
     width: 1672
     height: 941
