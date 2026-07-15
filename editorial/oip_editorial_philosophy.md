@@ -48,6 +48,12 @@ The audit must include:
 
 The audit decision is `PASS` only when all seven tests pass.
 
+## Musings Exception
+
+Musings is a short source-free reflection lane, not a public-judgment essay. A non-draft file under content/essays/musings/ may skip the hard OIP-99 audit only when it declares library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", and external_factual_claims: "none".
+
+This is not permission to make unsupported factual claims. A musing that makes an external factual claim must be revised into a clearly personal reflection or move into the ordinary evidence-controlled publication path.
+
 ## Blocking Conditions
 
 Set the OIP-99 decision state to `SOURCE_CHECK_REQUIRED` when a draft contains unsupported evidence, unsupported certainty, unverified current claims, or source gaps that affect the argument.

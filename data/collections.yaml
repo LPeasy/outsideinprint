@@ -49,6 +49,31 @@ collections:
       tags: []
       sections: []
 
+  - slug: musings
+    title: Musings
+    kind: series
+    public: true
+    force_public: true
+    min_items: 1
+    explicit_only: true
+    featured: false
+    weight: 13
+    start_here: ""
+    sort: date_desc
+    description: Short source-free reflections on attention, ordinary life, and questions that remain open.
+    metadata:
+      - label: Format
+        value: Short blurbs
+      - label: Scope
+        value: Attention, experience, and meaning
+      - label: Lane
+        value: Personal series
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
   - slug: the-ledger
     title: The Ledger
     kind: series

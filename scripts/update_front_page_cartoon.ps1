@@ -217,7 +217,7 @@ function Get-LatestEssayPath {
   }
 
   $candidates = @()
-  foreach ($file in Get-ChildItem -LiteralPath $essayDirectory -Filter '*.md' -File) {
+  foreach ($file in Get-ChildItem -LiteralPath $essayDirectory -Filter '*.md' -File -Recurse) {
     if ($file.Name -eq '_index.md') {
       continue
     }
@@ -281,7 +281,7 @@ function Resolve-EssayMarkdownPath {
     return $directPath
   }
 
-  foreach ($file in Get-ChildItem -LiteralPath $essayDirectory -Filter '*.md' -File) {
+  foreach ($file in Get-ChildItem -LiteralPath $essayDirectory -Filter '*.md' -File -Recurse) {
     $frontMatter = Read-MarkdownFrontMatter -Path $file.FullName
     if ($frontMatter.ContainsKey('slug') -and ([string]$frontMatter['slug']) -eq $slug) {
       return $file.FullName

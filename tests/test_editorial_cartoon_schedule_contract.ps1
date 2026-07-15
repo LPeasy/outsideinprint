@@ -124,7 +124,7 @@ function Resolve-EssayMarkdownPath {
     return $directPath
   }
 
-  foreach ($file in Get-ChildItem -LiteralPath $essayDir -Filter '*.md' -File) {
+  foreach ($file in Get-ChildItem -LiteralPath $essayDir -Filter '*.md' -File -Recurse) {
     $frontMatter = Read-FrontMatter -Path $file.FullName
     if ($frontMatter.ContainsKey('slug') -and [string]$frontMatter['slug'] -eq $slug) {
       return $file.FullName

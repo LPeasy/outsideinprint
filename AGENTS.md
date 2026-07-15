@@ -31,3 +31,4 @@ Merch order automation is not implemented yet. Before proposing or building orde
 - PDFs are paused and are not part of the public publishing workflow.
 - Medium migrations follow the import and normalization path in [docs/publishing-workflow.md](docs/publishing-workflow.md), not the normal new-essay path.
 - Essays are the first-class publishing workflow. Reports and working papers are more manual but still require the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces remain outside the hard philosophy gate unless explicitly treated as public-judgment work.
+- Musings is a source-free short-reflection collection. Follow [editorial/musings-series-contract.md](editorial/musings-series-contract.md). It may skip the essay OIP-99 package only when its library type, collection, source mode, and external-factual-claim declarations satisfy that contract.
