@@ -1,4 +1,4 @@
-current: mending-table
+current: no-receipt
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -549,5 +549,14 @@ cartoons:
     image: "/images/editorial/mending-table.png"
     essay: "/essays/the-repair/"
     alt: "Editorial cartoon showing an anonymous adult kneeling beside a kitchen table and gathering pieces of a cracked bowl into a tray while another adult sits apart and a thin faded yellow thread runs from the bowl to the repair work."
+    width: 1672
+    height: 941
+  - slug: no-receipt
+    title: "No Receipt"
+    date: "2026-07-15"
+    publishDate: "2026-07-15T14:08:24-04:00"
+    image: "/images/editorial/no-receipt.png"
+    essay: "/essays/the-favor/"
+    alt: "Two anonymous adults face each other while carrying a large box on an apartment stairwell as a torn olive IOU tag falls toward a bin."
     width: 1672
     height: 941
