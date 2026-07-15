@@ -514,7 +514,15 @@ $runningHeaderIssues = New-Object System.Collections.Generic.List[string]
 $rootRelativeImageIssues = New-Object System.Collections.Generic.List[string]
 $zgotmplzIssues = New-Object System.Collections.Generic.List[string]
 $semanticIssues = New-Object System.Collections.Generic.List[string]
-$importedMediaIssues = New-Object System.Colle„æÙﬁ⁄$z{-ÆÈ‹j◊ù.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Brass Disk in the Sidewalk' },
+$importedMediaIssues = New-Object System.Collections.Generic.List[string]
+$metadataIssues = New-Object System.Collections.Generic.List[string]
+$structuredDataIssues = New-Object System.Collections.Generic.List[string]
+$indexationIssues = New-Object System.Collections.Generic.List[string]
+$uxIssues = New-Object System.Collections.Generic.List[string]
+$articleLightboxIssues = New-Object System.Collections.Generic.List[string]
+$legacyCleanupIssues = New-Object System.Collec„Æ˜⁄⁄$z{-ÆÈ‹j◊ùd-public-power'; Label = 'The Examiner''s Red Pencil' },
+  @{ Path = 'public/essays/the-card-in-the-catalog/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Card in the Catalog' },
+  @{ Path = 'public/essays/the-brass-disk-in-the-sidewalk/index.html'; Slug = 'civic-institutions-and-public-power'; Label = 'The Brass Disk in the Sidewalk' },
   @{ Path = 'public/essays/the-strait-that-holds-the-price/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz price essay' },
   @{ Path = 'public/essays/the-blockade-has-a-phone-number/index.html'; Slug = 'risk-uncertainty'; Label = 'the Hormuz blockade essay' },
   @{ Path = 'public/essays/the-warning-label-in-the-weeds/index.html'; Slug = 'risk-uncertainty'; Label = 'the warning-label essay' },
