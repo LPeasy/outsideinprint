@@ -30,7 +30,7 @@ A fair boundary gives the other person agency and grace. “I can't keep changin
 
 Say what you need ~ “Please bring the keys back tomorrow.” 
 
-Aologize and own your part. “I spoke harshly. I'm sorry. Please forgive me, and thank you for hearing me out.” These things need to be said clearly and without overexplanation. 
+Apologize and own your part. “I spoke harshly. I'm sorry. Please forgive me, and thank you for hearing me out.” These things need to be said clearly and without overexplanation.
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
   <blockquote>You do not have to justify your own existence.</blockquote>
@@ -40,7 +40,7 @@ Aologize and own your part. “I spoke harshly. I'm sorry. Please forgive me, an
 ## Catch Yourself
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
-  <blockquote>Don't let the moment cach you ~ catch yourself.</blockquote>
+  <blockquote>Don't let the moment catch you ~ catch yourself.</blockquote>
   <figcaption>- Robby V.</figcaption>
 </figure>
 
@@ -50,7 +50,7 @@ Then cut the scorekeeping and remove any words that "win". Say less, and you mig
 
 If you have something to say, then say it. Don't wait. Waiting is only useful when it helps you connect with your own heart instead of being strung along by your mind.
 
-That first draft may sit in your notes forever. Don't let the moment cach you ~ catch yourself. 
+That first draft may sit in your notes forever. Don't let the moment catch you ~ catch yourself.
 
 Send a boundary someone can keep, and be open to negotiation. Send a request someone can answer, without feeling obligated. 
 
