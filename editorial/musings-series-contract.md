@@ -9,13 +9,15 @@ Musings is Outside In Print's short-form source-free reflection lane. It holds b
 - Short blurbs with no fixed word count, no required section heading, and no required visual.
 - Plain language that leaves room for the reader instead of trying to prove a large conclusion.
 
-## Source-Free Boundary
+## Authorial Freedom And Claim Boundary
 
-Musings never require sources. They are limited to reflection that makes no external factual claim, so no citation, source checklist, research package, or OIP-99 report is required in this lane.
+Musings is Outside In Print's most open authorial lane. A Musing may use unqualified personal, spiritual, existential, philosophical, moral, or aspirational language. It may speak in the first person or a direct universal voice. It may offer counsel, hope, blessing, warning, or a vision of the good without being recast as a hedge, a diagnosis, a research claim, or an evidence-bound argument.
 
-This boundary does not turn an assertion into a fact. Do not use Musings for empirical, historical, current, legal, medical, statistical, psychological, spiritual-mechanism, or named-actor claims. If a sentence needs a source, it belongs in another OIP lane; recast it as clearly personal reflection or move it there.
+Broad or certain language does not become an external factual claim merely because it is declarative. An author does not need to add disclaimers such as "I think," "in my view," or "for me" to a personal conclusion, spiritual assurance, or life observation. Such writing needs no citations, research package, source checklist, or OIP-99 report.
 
-Do not add a named source merely to decorate a personal reflection. Do not promise a reader a result, diagnose them, or present a private feeling as universal proof. A site integration may carry a compact internal source-free editorial record when it needs one, but that record must not add sources or external evidence claims to the Musing.
+The `SOURCE_FREE` declaration has one narrow job: it means the Musing makes no concrete external factual claim. If a Musing makes an empirical, historical, current, legal, medical, statistical, scientific, or named-actor claim about the world, record appropriate sources and evidence control for that claim. It may remain a Musing when reflection remains its primary form; move it to another OIP lane only when it becomes chiefly reporting, analysis, or a public-claim package.
+
+Do not add a named source merely to decorate a personal reflection. A site integration may carry a compact internal editorial record when useful, but it must describe the actual claim posture rather than invent evidence requirements for an author's voice.
 
 ## Authoring And Publication
 

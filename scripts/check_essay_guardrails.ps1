@@ -1111,6 +1111,7 @@ if ($targetPaths.Count -eq 0) {
 }
 
 $essayAuditPaths = @($targetPaths | Where-Object { Test-IsEssayContentPath -RepoRoot $Root -PathValue $_ })
+$legacyImportPaths = @($essayAuditPaths | Where-Object { -not (Test-IsSourceFreeMusing -Path $_) })
 $philosophyAuditSubjects = @(
   $targetPaths |
     Where-Object { -not [string]::IsNullOrWhiteSpace((Get-PhilosophyContentKind -RepoRoot $Root -PathValue $_)) } |
@@ -1305,7 +1306,7 @@ foreach ($item in $stillConstructionResults) {
 
 $legacyPreflightExitCode = Invoke-LegacyImportPreflight `
   -RepoRoot $Root `
-  -EssayPaths $essayAuditPaths `
+  -EssayPaths $legacyImportPaths `
   -GuardrailReportBasePath $ReportBasePath `
   -FailOnWarnings:$StrictWarnings
 

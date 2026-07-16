@@ -93,7 +93,7 @@ Essays are the first-class publishing workflow. Reports and working papers can s
 
 Musings are short source-free reflections, not ordinary evidence-driven essays. Create them under content/essays/musings/ with section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", and external_factual_claims: "none".
 
-Musings never require citations, a research package, or an OIP-99 report because the lane carries no external factual claims. If a sentence needs factual support, it is not a Musing and must move to an evidence-controlled lane or be recast as personal reflection. A public Musing still needs a concise description and either a social image or an explicit image exemption with a reason. The standard cleanup, accessibility, and site validation checks remain required. See [editorial/musings-series-contract.md](../editorial/musings-series-contract.md).
+Musings may use unqualified personal, spiritual, existential, philosophical, moral, universal, or aspirational language without citations, a research package, or an OIP-99 report. A declarative life observation or spiritual assurance is not an external factual claim merely because it is broad or certain. If a Musing makes a concrete factual claim about the world, record evidence appropriate to that claim; it may remain a Musing when reflection remains its primary form. A public Musing still needs a concise description and either a social image or an explicit image exemption with a reason. The standard cleanup, accessibility, and site validation checks remain required. See [editorial/musings-series-contract.md](../editorial/musings-series-contract.md).
 
 ## Syd & Oliver dialogue packages
 

@@ -21,8 +21,6 @@ edition: "First web edition"
 featured: false
 ---
 
-# Togetherness
-
 You can sit beside someone you love and feel a mile away. A phone keeps lighting up. One person tries to sound fine. The other starts giving advice. Nobody is cruel. Nobody's there.
 
 You want connection, so you reach for a better line, think of a smarter answer, gesture wildly ~ a sign that everything is all right. Effort? or a performance. Then both people are listening for the version of the other person that feels easiest to manage, and scariest to confront.
