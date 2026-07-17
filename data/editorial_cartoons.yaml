@@ -1,4 +1,4 @@
-current: mail-drop
+current: passed-down
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -575,5 +575,14 @@ cartoons:
     image: "/images/editorial/mail-drop.png"
     essay: "/essays/say-less-to-say-more/"
     alt: "An anonymous adult pulls a blue envelope back from a street letterbox and slips it into a coat pocket while a lone passerby walks beyond a street lamp."
+    width: 1672
+    height: 941
+  - slug: passed-down
+    title: "Passed Down"
+    date: "2026-07-16"
+    publishDate: "2026-07-16T20:45:00-04:00"
+    image: "/images/editorial/passed-down.png"
+    essay: "/essays/the-warning-reached-the-bridge/"
+    alt: "Editorial cartoon showing officers passing a red ice warning down through a cutaway ocean liner while the bridge controls remain untouched and passengers wait beside too few lifeboats."
     width: 1672
     height: 941
