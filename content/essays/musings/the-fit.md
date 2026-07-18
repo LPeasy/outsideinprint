@@ -38,7 +38,7 @@ Circles and squares just do not line up with eachother, and that is okay.
   <figcaption>- Robby V.</figcaption>
 </figure>
 
-Take a pause and breathe in through your nose before you add more force. Look for what is actually stopping the flow: it could be time, a promise, or a picture in your head that doesn't line up with reality. T
+Take a pause and breathe in through your nose before you add more force. Look for what is actually stopping the flow: it could be time, a promise, or a picture in your head that doesn't line up with reality.
 
 Try again with more patience. Maybe the fit was wrong from the start. 
 

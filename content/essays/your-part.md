@@ -10,8 +10,8 @@ author_id: "robert-v-ussley"
 featured_image: "/images/essays/your-part/hero.png"
 featured_image_alt: "Editorial cartoon showing an anonymous ferry captain gripping a tiller while a passenger reaches toward a distant dock sign marked ARRIVAL and a red rope runs along the rail."
 featured_image_caption: "The work is yours to carry. The result usually isn't yours alone to command."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 featured: false
 collections:
   - "simple-logic"
@@ -30,7 +30,7 @@ But a result can have more than one owner. Other people choose. Timing changes. 
 ## What Belongs to You
 
 <figure class="franklin-pullquote" aria-label="Section maxim">
-  <blockquote>Do your part with care. The rest has other owners.</blockquote>
+  <blockquote>Do your part and leave the rest up to God, Chance, or the Universe.</blockquote>
   <figcaption>- Robby V.</figcaption>
 </figure>
 
