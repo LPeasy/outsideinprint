@@ -269,7 +269,40 @@ cartoons:
     date: "2026-05-24"
     image: "/images/editorial/learing-center.png"
     essay: "/essays/the-door-that-would-not-open/"
-    alt: "Editorial cartÎ}Ì¢Gß≤⁄Óù∆≠yŸon Bomb, and Peak Oil sit under a sign for the Museum of Expired Catastrophes."
+    alt: "Editorial cartoon showing a boarded-up storefront labeled Learing Center in a cracked city block, with barred gates, a leaning utility pole, and an overturned shopping cart."
+    width: 1672
+    height: 941
+  - slug: warbonds
+    title: "Warbonds"
+    date: "2026-05-28"
+    image: "/images/editorial/warbonds.png"
+    essay: "/essays/the-war-premium-at-the-auction/"
+    alt: "Editorial cartoon showing a Treasury auction block with a 10-year note, an auction gavel, bidders, warplanes and tankers outside, and a red signal driving a WAR PREMIUM gauge weighted by INFLATION and DEBT SERVICE."
+    width: 1672
+    height: 941
+  - slug: on-the-fence
+    title: "On the Fence"
+    date: "2026-05-26"
+    image: "/images/editorial/on-the-fence.png"
+    essay: "/essays/the-tank-at-the-fence-line/"
+    alt: "Editorial cartoon showing families leaving an evacuated neighborhood beside a fence line, while hazmat workers monitor a cracked MMA tank whose warning-yellow fracture casts public cost across the boundary."
+    width: 1672
+    height: 941
+  - slug: human-resources
+    title: "Human Resources"
+    date: "2026-05-27"
+    image: "/images/editorial/human-resources.png"
+    essay: "/essays/the-courthouse-that-ate-the-republic/"
+    alt: "Editorial cartoon showing a split nineteenth-century and modern immigration patronage scene, with elites on a blue-draped balcony above officials handing documents and phones to waiting families."
+    width: 1572
+    height: 1001
+  - slug: hit-after-hit
+    title: "Hit After Hit"
+    date: "2026-05-29"
+    publishDate: "2026-05-29T00:00:00-04:00"
+    image: "/images/editorial/hit-after-hit.png"
+    essay: "/essays/the-scenario-that-ate-the-future/"
+    alt: "Editorial cartoon showing children, reporters, and officials watching a glowing museum display labeled Current Crisis, while older exhibits labeled Y2K, Mayan 2012, Population Bomb, and Peak Oil sit under a sign for the Museum of Expired Catastrophes."
     width: 1672
     height: 941
   - slug: sunset-powerplant
