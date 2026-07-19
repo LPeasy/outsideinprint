@@ -6,6 +6,7 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $dataPath = Join-Path $repoRoot 'data/editorial_cartoons.yaml'
 $essayDir = Join-Path $repoRoot 'content/essays'
+. (Join-Path (Join-Path $repoRoot 'scripts') 'png_integrity.ps1')
 
 function Convert-YamlScalarToString {
   param([string]$Value)
@@ -190,6 +191,13 @@ foreach ($cartoon in @($cartoonData.Entries)) {
   $imagePath = Join-Path $repoRoot ('static/' + ([string]$cartoon.image).TrimStart('/')).Replace('/', [IO.Path]::DirectorySeparatorChar)
   if (-not (Test-Path -LiteralPath $imagePath -PathType Leaf)) {
     throw "Cartoon image file is missing for '$($cartoon.slug)': $($cartoon.image)"
+  }
+
+  if ([System.IO.Path]::GetExtension($imagePath) -ieq '.png') {
+    $png = Test-OipPngIntegrity -Path $imagePath
+    if (-not $png.IsValid) {
+      throw "Cartoon image file is invalid for '$($cartoon.slug)': $($png.Detail)"
+    }
   }
 
   $cartoonReleaseValue = if ($cartoon.PSObject.Properties.Name -contains 'publishDate') { [string]$cartoon.publishDate } else { [string]$cartoon.date }

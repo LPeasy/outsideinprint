@@ -21,10 +21,14 @@ try {
   $essayRoot = Join-Path $tempRoot "content/essays"
   $imageRoot = Join-Path $tempRoot "static/images/essays/clean"
   $placeholderRoot = Join-Path $tempRoot "static/images/essays/placeholder"
+  $corruptRoot = Join-Path $tempRoot "static/images/essays/corrupt"
   New-Item -Path $essayRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $imageRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $placeholderRoot -ItemType Directory -Force | Out-Null
-  [System.IO.File]::WriteAllBytes((Join-Path $imageRoot "hero.png"), [byte[]](0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a))
+  New-Item -Path $corruptRoot -ItemType Directory -Force | Out-Null
+  $validPng = [Convert]::FromBase64String('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO7ZP7sAAAAASUVORK5CYII=')
+  [System.IO.File]::WriteAllBytes((Join-Path $imageRoot "hero.png"), $validPng)
+  [System.IO.File]::WriteAllBytes((Join-Path $corruptRoot "hero.png"), $validPng[0..($validPng.Length - 2)])
   @'
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
   <title>Imported image placeholder</title>
@@ -78,6 +82,17 @@ featured_image: "/images/essays/missing/hero.png"
 
   @'
 ---
+title: "Corrupt"
+date: 2026-01-01
+draft: false
+featured_image: "/images/essays/corrupt/hero.png"
+---
+
+Body.
+'@ | Set-Content -Path (Join-Path $essayRoot "corrupt.md") -Encoding UTF8
+
+  @'
+---
 title: "Remote"
 date: 2026-01-01
 draft: false
@@ -102,11 +117,12 @@ Body.
   $auditExit = $LASTEXITCODE
   Assert-True ($auditExit -eq 0) "Expected JSON audit run to complete without FailOnIssues."
   $report = $jsonOutput | ConvertFrom-Json
-  Assert-True ($report.issue_count -eq 5) "Expected five image issues in the fixture audit."
+  Assert-True ($report.issue_count -eq 6) "Expected six image issues in the fixture audit."
   Assert-True (($report.issues | Where-Object Type -eq 'no_image').Count -eq 1) "Expected only the non-exempt no-image essay to be reported."
   Assert-True (($report.issues | Where-Object Type -eq 'missing_local_image').Count -eq 2) "Expected two missing local image references."
   Assert-True (($report.issues | Where-Object Type -eq 'external_medium_image').Count -eq 1) "Expected one external Medium image reference."
   Assert-True (($report.issues | Where-Object Type -eq 'placeholder_svg').Count -eq 1) "Expected one placeholder SVG issue."
+  Assert-True (($report.issues | Where-Object Type -eq 'invalid_png').Count -eq 1) "Expected one invalid PNG issue."
   Assert-True ($report.warning_count -eq 0) "Expected placeholder SVGs to be hard issues, not warnings."
 
   $failOutput = & $auditScript -Root $tempRoot -FailOnIssues 2>&1 | Out-String
@@ -114,6 +130,7 @@ Body.
   Assert-True ($failExit -eq 1) "Expected -FailOnIssues to fail when image issues exist."
   Assert-True ($failOutput.Contains("ISSUE no_image")) "Expected text output to include no_image issue details."
   Assert-True ($failOutput.Contains("ISSUE placeholder_svg")) "Expected text output to include placeholder_svg issue details."
+  Assert-True ($failOutput.Contains("ISSUE invalid_png")) "Expected text output to include invalid_png issue details."
 } finally {
   if (Test-Path -LiteralPath $tempRoot) {
     Remove-Item -LiteralPath $tempRoot -Recurse -Force

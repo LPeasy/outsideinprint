@@ -8,6 +8,8 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+. (Join-Path $PSScriptRoot 'png_integrity.ps1')
+
 function Get-FrontMatterAndBody {
   param([string]$Path)
 
@@ -169,6 +171,17 @@ foreach ($file in $essayFiles) {
           Type = 'placeholder_svg'
           Path = $relativePath
           Detail = $imageRef
+        })
+      }
+    }
+
+    if ([System.IO.Path]::GetExtension($staticPath) -ieq '.png') {
+      $png = Test-OipPngIntegrity -Path $staticPath
+      if (-not $png.IsValid) {
+        $issues.Add([pscustomobject]@{
+          Type = 'invalid_png'
+          Path = $relativePath
+          Detail = "$imageRef :: $($png.Detail)"
         })
       }
     }
