@@ -1,4 +1,4 @@
-current: the-shutters
+current: at-the-worktable
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -600,5 +600,13 @@ cartoons:
     image: "/images/editorial/the-shutters.png"
     essay: "/essays/margin/"
     alt: "Editorial cartoon showing an anonymous adult opening tall wooden shutters as a narrow ray of first light reaches a pair of boots and a canvas day bag."
+    width: 1672
+    height: 941
+  - slug: at-the-worktable
+    title: "At the Worktable"
+    date: "2026-07-20"
+    image: "/images/editorial/at-the-worktable.png"
+    essay: "/essays/in-hand/"
+    alt: "Editorial cartoon showing an anonymous adult holding a worn guitar and pressing a small record button on an older laptop at a scarred worktable, with a screwdriver, toolbox, and face-down phone nearby."
     width: 1672
     height: 941

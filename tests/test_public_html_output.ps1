@@ -1366,6 +1366,7 @@ $requiredUxPages = @(
   'public/essays/index.html',
   'public/essays/your-part/index.html',
   'public/essays/togetherness/index.html',
+  'public/essays/in-hand/index.html',
   'public/syd-and-oliver/index.html',
   'public/library/index.html',
   'public/gallery/index.html',
@@ -3434,6 +3435,7 @@ $requiredUxChecks = @(
 $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/your-part/index.html'; Slug = 'simple-logic'; Label = 'Your Part' },
   @{ Path = 'public/essays/togetherness/index.html'; Slug = 'musings'; Label = 'Togetherness' },
+  @{ Path = 'public/essays/in-hand/index.html'; Slug = 'musings'; Label = 'In Hand' },
   @{ Path = 'public/essays/synthetic-reasoning/index.html'; Slug = 'technology-ai-machine-future'; Label = 'synthetic-reasoning' },
   @{ Path = 'public/essays/the-ai-data-center-wants-its-own-power-plant/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the AI data center essay' },
   @{ Path = 'public/essays/the-model-that-could-not-leave/index.html'; Slug = 'technology-ai-machine-future'; Label = 'the Manus essay' },
