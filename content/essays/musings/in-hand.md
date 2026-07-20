@@ -11,12 +11,12 @@ collections: ["musings"]
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
 tags: ["faith", "action", "attention", "self-command"]
-subtitle: "What is already in reach can carry the next honest move."
+subtitle: "Use what you've got."
 description: "Faith begins when we use what is already in hand and release what lies outside our control."
 featured_image: "/images/essays/in-hand/hero.png"
 featured_image_alt: "An anonymous adult begins work at a modest desk with an older computer, a guitar, and a screwdriver close by."
 featured_image_caption: "Within Reach."
-version: "1.0"
+version: "1.1"
 edition: "First web edition"
 featured: false
 ---
