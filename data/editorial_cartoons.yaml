@@ -1,4 +1,4 @@
-current: the-things-we-tolerate
+current: the-closed-window
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -615,5 +615,14 @@ cartoons:
     date: "2026-07-21"
     image: "/images/editorial/the-things-we-tolerate.png"
     alt: "Editorial cartoon showing an adult pressing an overloaded closet closed as a broom braces the door and another person walks through the hallway beside a blank calendar."
+    width: 1672
+    height: 941
+  - slug: the-closed-window
+    title: "The Closed Window"
+    date: "2026-07-21"
+    publishDate: "2026-07-21T15:12:30-04:00"
+    image: "/images/editorial/the-closed-window.png"
+    essay: "/essays/the-bolt-beside-the-gas-tank/"
+    alt: "Editorial cartoon showing an engineer pushing a punctured fuel tank and test report toward a shutter marked DECISION while a clerk at the next window hands car keys to a waiting family, joined by an iridescent oil trail."
     width: 1672
     height: 941
