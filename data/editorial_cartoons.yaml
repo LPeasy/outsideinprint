@@ -1,4 +1,4 @@
-current: at-the-worktable
+current: the-things-we-tolerate
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -608,5 +608,12 @@ cartoons:
     image: "/images/editorial/at-the-worktable.png"
     essay: "/essays/in-hand/"
     alt: "Editorial cartoon showing an anonymous adult holding a worn guitar and pressing a small record button on an older laptop at a scarred worktable, with a screwdriver, toolbox, and face-down phone nearby."
+    width: 1672
+    height: 941
+  - slug: the-things-we-tolerate
+    title: "The Things We Tolerate"
+    date: "2026-07-21"
+    image: "/images/editorial/the-things-we-tolerate.png"
+    alt: "Editorial cartoon showing an adult pressing an overloaded closet closed as a broom braces the door and another person walks through the hallway beside a blank calendar."
     width: 1672
     height: 941

@@ -25,7 +25,7 @@ For changed essays, run the direct PowerShell guardrail before the full build:
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
 ```
 
-The guardrail blocks forbidden `that matters` phrasing and adverbial `still` constructions, except quoted/literal/title-source uses covered by the house-style rule.
+The guardrail blocks forbidden `that matters` phrasing and adverbial `still` constructions, except quoted/literal/title-source uses covered by the house-style rule and fully declared source-free Musings under `editorial/musings-series-contract.md`.
 
 For changed non-draft essays, reports, and working papers, require Editorial Philosophy Audit evidence before publishing:
 

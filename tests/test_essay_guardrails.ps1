@@ -715,7 +715,7 @@ edition: "First web edition"
 featured: false
 ---
 
-I notice the light change when I put the phone down.
+I still notice the light change when I put the phone down.
 '@ | Set-Content -Path (Join-Path $musingRoot "source-free-musing.md") -Encoding UTF8
 
   @'
@@ -737,7 +737,7 @@ edition: "First web edition"
 featured: false
 ---
 
-This fixture keeps the ordinary essay audit requirement.
+This fixture still keeps the ordinary essay audit requirement.
 '@ | Set-Content -Path (Join-Path $musingRoot "unqualified-musing.md") -Encoding UTF8
 
   $reportMissingPhilosophyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/reports/clean-report.md" -RequireEditorialPhilosophyAudit 2>&1 | Out-String
@@ -760,11 +760,13 @@ This fixture keeps the ordinary essay audit requirement.
   Assert-True ($sourceFreeMusingExit -eq 0) "Expected a fully declared source-free Musing to skip only the hard philosophy audit."
   Assert-True ($sourceFreeMusingOutput.Contains("Source-free Musing audit exemptions: 1")) "Expected a declared source-free Musing exemption to be reported."
   Assert-True (-not $sourceFreeMusingOutput.Contains("missing_editorial_philosophy_audit")) "Expected a declared source-free Musing not to report missing philosophy audit evidence."
+  Assert-True (-not $sourceFreeMusingOutput.Contains("adverbial_still_construction")) "Expected a fully declared source-free Musing to retain personal adverbial still cadence."
 
   $unqualifiedMusingOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/musings/unqualified-musing.md" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $unqualifiedMusingExit = $LASTEXITCODE
   Assert-True ($unqualifiedMusingExit -eq 1) "Expected a Musing without the exact source-free declaration to retain the normal philosophy audit gate."
   Assert-True ($unqualifiedMusingOutput.Contains("missing_editorial_philosophy_audit")) "Expected an unqualified Musing to report missing philosophy audit evidence."
+  Assert-True ($unqualifiedMusingOutput.Contains("adverbial_still_construction")) "Expected an unqualified Musing to retain the adverbial still guardrail."
 
   @'
 # OIP 99-Point Refinement Report

@@ -1215,6 +1215,12 @@ foreach ($targetPath in $targetPaths) {
     }
   }
 
+  # Fully declared source-free Musings preserve authorial personal cadence.
+  # Their narrow exemption is defined in editorial/musings-series-contract.md.
+  if (Test-IsSourceFreeMusing -Path $targetPath) {
+    continue
+  }
+
   $stillHits = @(Get-AdverbialStillConstructionHits -Path $targetPath)
   if ($stillHits.Count -eq 0) {
     continue
