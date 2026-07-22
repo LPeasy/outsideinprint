@@ -10,7 +10,7 @@
 {{ with $currentCartoon }}
   {{ $currentCartoonSlug = .slug }}
 {{ end }}
-{{ $orderedCartoons := sort $cartoons "date" "desc" }}
+{{ $orderedCartoons := sort (sort $cartoons "slug" "asc") "date" "desc" }}
 {{ $recentCartoons := slice }}
 {{ $almanackIssues := where site.RegularPages "Section" "almanack" }}
 {{ $latestAlmanack := false }}

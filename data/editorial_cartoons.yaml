@@ -1,4 +1,4 @@
-current: the-closed-window
+current: serpent-at-supper
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -627,3 +627,11 @@ cartoons:
     alt: "Editorial cartoon showing an engineer pushing a punctured fuel tank and test report toward a shutter marked DECISION while a clerk at the next window hands car keys to a waiting family, joined by an iridescent oil trail."
     width: 1672
     height: 941
+  - slug: serpent-at-supper
+    title: "Serpent at Supper"
+    date: "2026-07-22"
+    image: "/images/editorial/serpent-at-supper.png"
+    essay: "/essays/the-six-hour-news-cycle/"
+    alt: "At a warm-toned supper table, a central diner holds an emerald serpent head in one hand and its severed gray power-cord body in the other while two companions sit beside a dark phone."
+    width: 1672
+    height: 940
