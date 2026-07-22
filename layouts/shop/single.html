@@ -24,14 +24,14 @@
           {{ .Content }}
         </div>
 
-        <section class="bookstore-format-ledger" aria-labelledby="bookstore-format-title">
-          <h2 id="bookstore-format-title">Direct bundle formats</h2>
-          {{ with index $product "formats" }}
+        {{ with index $product "formats" }}
+          <section class="bookstore-format-ledger" aria-labelledby="bookstore-format-title">
+            <h2 id="bookstore-format-title">{{ index $product "formats_heading" | default "Direct bundle formats" }}</h2>
             <ul class="bookstore-formats">
               {{ range . }}<li>{{ . }}</li>{{ end }}
             </ul>
-          {{ end }}
-        </section>
+          </section>
+        {{ end }}
 
         {{ partial "journey_links.html" (dict
           "class" "journey-links--page"
@@ -52,7 +52,7 @@
         </section>
 
         <section class="bookstore-panel__section" aria-labelledby="shop-checkout-title">
-          <h2 id="shop-checkout-title" class="list-title">Direct checkout</h2>
+          <h2 id="shop-checkout-title" class="list-title">{{ index $product "checkout_heading" | default "Direct checkout" }}</h2>
           {{ partial "shop/checkout-actions.html" (dict "product" $product) }}
           {{ with index $product "checkout_note" }}<p class="shop-note">{{ . }}</p>{{ end }}
           {{ with index $product "delivery_note" }}<p class="shop-note">{{ . }}</p>{{ end }}

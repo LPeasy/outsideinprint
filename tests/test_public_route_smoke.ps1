@@ -94,7 +94,8 @@ foreach ($requiredPath in @(
   'random/index.html',
   'shop/index.html',
   'shop/the-american-nightmare-keep-dreaming-kid/index.html',
-  'shop/the-parable-of-the-sheep/index.html'
+  'shop/the-parable-of-the-sheep/index.html',
+  'shop/the-water-cycle/index.html'
 )) {
   $null = Get-RequiredPageHtml -RelativePath $requiredPath
 }

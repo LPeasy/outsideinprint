@@ -34,7 +34,7 @@
               <dl class="bookstore-record__ledger">
                 {{ with index $product "price_display" }}
                   <div>
-                    <dt>Direct price</dt>
+                    <dt>{{ index $product "price_label" | default "Direct price" }}</dt>
                     <dd>{{ . }}</dd>
                   </div>
                 {{ end }}

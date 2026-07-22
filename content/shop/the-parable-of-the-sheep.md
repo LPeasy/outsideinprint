@@ -13,14 +13,8 @@ weight: 20
 
 *The Parable of the Sheep* is a compact allegorical fiction about comfort, forgetting, and the old dangers that return when a flock mistakes habit for safety.
 
-The OIP direct reader bundle is prepared from the same DOCX source used in the Kindle Create package.
-
 ## Channels and limits
 
-The OIP direct digital bundle is priced at $4.99. Checkout stays disabled until secure Stripe payment and direct digital delivery are connected.
+The Kindle edition is available through Amazon for $4.99 USD.
 
-The bundle is prepared for PDF, EPUB, HTML, Markdown, and TXT.
-
-Kindle is the active external channel through Amazon.
-
-Print editions are deferred until Bowker ISBN work is complete.
+The paperback edition is not yet available. A direct OIP edition is not available through the bookstore yet.

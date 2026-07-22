@@ -17,10 +17,6 @@ The book is not an argument that immigrants caused the nightmare. It is an argum
 
 ## Channels and limits
 
-The OIP direct digital bundle is the primary edition at $9.99. Checkout stays disabled until secure Stripe payment and direct digital delivery are connected.
+The Kindle edition is available through Amazon for $9.99 USD.
 
-The bundle is prepared for PDF, EPUB, HTML, Markdown, TXT, DOCX, the public source ledger, and the public claims appendix.
-
-Kindle is a secondary channel after KDP upload.
-
-Print editions are deferred until Bowker ISBN work is complete.
+The paperback edition is not yet available. A direct OIP edition is not available through the bookstore yet.
