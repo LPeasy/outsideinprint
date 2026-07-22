@@ -27,6 +27,8 @@ For changed essays, run the direct PowerShell guardrail before the full build:
 
 The guardrail blocks forbidden `that matters` phrasing and adverbial `still` constructions, except quoted/literal/title-source uses covered by the house-style rule and fully declared source-free Musings under `editorial/musings-series-contract.md`.
 
+The front-page cartoon workflow uses the same exact source-free Musing predicate when validating essay associations. Association-only repairs must use `scripts/update_front_page_cartoon.ps1 -LinkExistingSlug <cartoon-slug> -EssayPath "/essays/<musing-slug>/"`; this mode preserves the existing `current` cartoon pointer and does not copy or replace artwork.
+
 For changed non-draft essays, reports, and working papers, require Editorial Philosophy Audit evidence before publishing:
 
 ```powershell

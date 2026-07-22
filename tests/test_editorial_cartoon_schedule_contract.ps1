@@ -8,6 +8,17 @@ $dataPath = Join-Path $repoRoot 'data/editorial_cartoons.yaml'
 $essayDir = Join-Path $repoRoot 'content/essays'
 . (Join-Path (Join-Path $repoRoot 'scripts') 'png_integrity.ps1')
 
+function Assert-True {
+  param(
+    [bool]$Condition,
+    [string]$Message
+  )
+
+  if (-not $Condition) {
+    throw $Message
+  }
+}
+
 function Convert-YamlScalarToString {
   param([string]$Value)
 
@@ -160,6 +171,140 @@ function Get-EssayReleaseDate {
   return ConvertTo-OipDateTimeOffset -Value $releaseValue -Label "Linked essay release date for $EssayPath"
 }
 
+function Test-AssociationOnlyUpdate {
+  $tempBase = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath())
+  $tempRoot = Join-Path $tempBase ("oip-cartoon-association-{0}" -f [guid]::NewGuid().ToString('N'))
+  $updateScript = Join-Path (Join-Path $repoRoot 'scripts') 'update_front_page_cartoon.ps1'
+
+  try {
+    $tempDataDir = Join-Path $tempRoot 'data'
+    $tempEssayDir = Join-Path $tempRoot 'content/essays/musings'
+    $ordinaryEssayDir = Join-Path $tempRoot 'content/essays'
+    New-Item -ItemType Directory -Path $tempDataDir -Force | Out-Null
+    New-Item -ItemType Directory -Path $tempEssayDir -Force | Out-Null
+
+    @'
+current: newest-cartoon
+cartoons:
+  - slug: target-cartoon
+    title: "Target Cartoon"
+    date: "2025-07-14"
+    image: "/images/editorial/target-cartoon.png"
+    alt: "Target cartoon fixture."
+    width: 1
+    height: 1
+  - slug: newest-cartoon
+    title: "Newest Cartoon"
+    date: "2025-07-15"
+    image: "/images/editorial/newest-cartoon.png"
+    essay: "/essays/audited-essay/"
+    alt: "Newest cartoon fixture."
+    width: 1
+    height: 1
+'@ | Set-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Encoding utf8NoBOM
+
+    @'
+---
+title: "Source-Free Musing"
+date: 2025-07-14
+draft: false
+slug: "source-free-musing"
+section_label: "Musing"
+library_type: "musing"
+collections: ["musings"]
+source_mode: "SOURCE_FREE"
+external_factual_claims: "none"
+description: "A source-free association fixture."
+version: "1.0"
+edition: "First web edition"
+---
+
+An ordinary personal reflection.
+'@ | Set-Content -LiteralPath (Join-Path $tempEssayDir 'source-free-musing.md') -Encoding utf8NoBOM
+
+    @'
+---
+title: "Unqualified Musing"
+date: 2025-07-14
+draft: false
+slug: "unqualified-musing"
+section_label: "Musing"
+library_type: "musing"
+collections: ["musings"]
+source_mode: "SOURCE_FREE"
+external_factual_claims: "unknown"
+description: "An unqualified association fixture."
+version: "1.0"
+edition: "First web edition"
+---
+
+This fixture has not cleared the source-free declaration.
+'@ | Set-Content -LiteralPath (Join-Path $tempEssayDir 'unqualified-musing.md') -Encoding utf8NoBOM
+
+    @'
+---
+title: "Ordinary Essay"
+date: 2025-07-14
+draft: false
+slug: "ordinary-essay"
+section_label: "Essay"
+description: "An ordinary essay association fixture."
+version: "1.0"
+edition: "First web edition"
+---
+
+This fixture requires an Editorial Philosophy Audit.
+'@ | Set-Content -LiteralPath (Join-Path $ordinaryEssayDir 'ordinary-essay.md') -Encoding utf8NoBOM
+
+    & $updateScript `
+      -Root $tempRoot `
+      -LinkExistingSlug 'target-cartoon' `
+      -EssayPath '/essays/source-free-musing/' | Out-Null
+
+    $updatedData = Get-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Raw
+    Assert-True `
+      -Condition ([regex]::IsMatch($updatedData, '(?m)^current:\s+newest-cartoon\s*$')) `
+      -Message 'Association-only cartoon update changed the current front-page cartoon.'
+    Assert-True `
+      -Condition ([regex]::IsMatch($updatedData, '(?ms)^\s*- slug: target-cartoon\s+.*?^\s+essay: "/essays/source-free-musing/"\s*$')) `
+      -Message 'Association-only cartoon update did not add the source-free Musing route.'
+
+    $unqualifiedBlocked = $false
+    try {
+      & $updateScript `
+        -Root $tempRoot `
+        -LinkExistingSlug 'target-cartoon' `
+        -EssayPath '/essays/unqualified-musing/' | Out-Null
+    }
+    catch {
+      $unqualifiedBlocked = $_.Exception.Message -match 'missing accepted Editorial Philosophy Audit evidence'
+    }
+    Assert-True $unqualifiedBlocked 'An incompletely declared Musing bypassed the cartoon-link audit.'
+
+    $ordinaryBlocked = $false
+    try {
+      & $updateScript `
+        -Root $tempRoot `
+        -LinkExistingSlug 'target-cartoon' `
+        -EssayPath '/essays/ordinary-essay/' | Out-Null
+    }
+    catch {
+      $ordinaryBlocked = $_.Exception.Message -match 'missing accepted Editorial Philosophy Audit evidence'
+    }
+    Assert-True $ordinaryBlocked 'An ordinary unaudited essay bypassed the cartoon-link audit.'
+  }
+  finally {
+    if (Test-Path -LiteralPath $tempRoot) {
+      $resolvedTempRoot = [System.IO.Path]::GetFullPath($tempRoot)
+      if (-not $resolvedTempRoot.StartsWith($tempBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing to remove association-test directory outside the system temp root: $resolvedTempRoot"
+      }
+
+      Remove-Item -LiteralPath $resolvedTempRoot -Recurse -Force
+    }
+  }
+}
+
 if (-not (Test-Path -LiteralPath $dataPath -PathType Leaf)) {
   throw "Editorial cartoon data file not found: $dataPath"
 }
@@ -224,6 +369,8 @@ foreach ($cartoon in @($cartoonData.Entries)) {
 if (-not $currentExists) {
   throw "Current editorial cartoon '$($cartoonData.Current)' does not match any cartoon entry."
 }
+
+Test-AssociationOnlyUpdate
 
 Write-Host "Editorial cartoon schedule contract passed."
 $global:LASTEXITCODE = 0

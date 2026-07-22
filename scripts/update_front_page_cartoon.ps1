@@ -1,19 +1,29 @@
+[CmdletBinding(DefaultParameterSetName = 'Publish')]
 param(
-  [Parameter(Mandatory = $true)]
+  [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
   [string]$ImagePath,
 
-  [Parameter(Mandatory = $true)]
+  [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
   [string]$Title,
 
-  [Parameter(Mandatory = $true)]
+  [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
   [string]$Alt,
 
+  [Parameter(ParameterSetName = 'Publish')]
+  [Parameter(Mandatory = $true, ParameterSetName = 'LinkExisting')]
   [string]$EssayPath,
 
+  [Parameter(Mandatory = $true, ParameterSetName = 'LinkExisting')]
+  [ValidatePattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]
+  [string]$LinkExistingSlug,
+
+  [Parameter(ParameterSetName = 'Publish')]
   [switch]$NoEssayLink,
 
+  [Parameter(ParameterSetName = 'Publish')]
   [string]$Date = (Get-Date -Format 'yyyy-MM-dd'),
 
+  [Parameter(ParameterSetName = 'Publish')]
   [string]$PublishDate,
 
   [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -123,7 +133,9 @@ function Read-MarkdownFrontMatter {
   param([string]$Path)
 
   $result = @{}
-  $lines = [System.IO.File]::ReadLines($Path)
+  # Front matter files are small; read eagerly so Windows does not retain a
+  # lazy file handle after an audit or association-only update.
+  $lines = [System.IO.File]::ReadAllLines($Path)
   $inFrontMatter = $false
   $started = $false
 
@@ -149,6 +161,29 @@ function Read-MarkdownFrontMatter {
   }
 
   return $result
+}
+
+function Test-IsSourceFreeMusing {
+  param([string]$Path)
+
+  $frontMatter = Read-MarkdownFrontMatter -Path $Path
+  foreach ($key in @('library_type', 'collections', 'source_mode', 'external_factual_claims')) {
+    if (-not $frontMatter.ContainsKey($key)) {
+      return $false
+    }
+  }
+
+  if (([string]$frontMatter['library_type']).Trim() -ine 'musing') {
+    return $false
+  }
+  if (([string]$frontMatter['source_mode']).Trim() -ine 'source_free') {
+    return $false
+  }
+  if (([string]$frontMatter['external_factual_claims']).Trim() -ine 'none') {
+    return $false
+  }
+
+  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?musings["'']?\s*\]\s*$'
 }
 
 function Invoke-GitRequired {
@@ -429,10 +464,16 @@ function Assert-LinkedEssayPhilosophyAudit {
 
   $normalizedEssayPath = Normalize-EssayPath -Value $SiteEssayPath
   $slug = Get-SlugFromSiteEssayPath -SiteEssayPath $normalizedEssayPath
-  [void](Resolve-EssayMarkdownPath -Root $Root -SiteEssayPath $normalizedEssayPath)
+  $markdownPath = Resolve-EssayMarkdownPath -Root $Root -SiteEssayPath $normalizedEssayPath
+
+  # The Musings contract exempts only fully declared source-free reflections
+  # from the essay-specific OIP-99 package.
+  if (Test-IsSourceFreeMusing -Path $markdownPath) {
+    return
+  }
 
   if (-not (Test-EditorialPhilosophyAuditEvidence -Root $Root -Slug $slug)) {
-    throw "Linked essay $normalizedEssayPath is missing accepted Editorial Philosophy Audit evidence. Add a per-essay OIP-99 report or daily backfill ledger entry before linking the front-page cartoon, or pass -NoEssayLink only for an explicitly standalone cartoon."
+    throw "Linked essay $normalizedEssayPath is missing accepted Editorial Philosophy Audit evidence. Add a per-essay OIP-99 report or daily backfill ledger entry, use a fully declared source-free Musing, or pass -NoEssayLink only for an explicitly standalone cartoon."
   }
 }
 
@@ -557,6 +598,64 @@ function Write-CartoonData {
   [System.IO.File]::WriteAllText($Path, (($lines -join [Environment]::NewLine) + [Environment]::NewLine), [System.Text.UTF8Encoding]::new($false))
 }
 
+$resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $Root).Path)
+
+if ($PSCmdlet.ParameterSetName -eq 'LinkExisting') {
+  $resolvedEssayPath = Normalize-EssayPath -Value $EssayPath
+  $dataPath = Join-Path $resolvedRoot 'data\editorial_cartoons.yaml'
+  $data = Read-CartoonData -Path $dataPath
+  if ([string]::IsNullOrWhiteSpace([string]$data.current)) {
+    throw 'Association-only updates require data/editorial_cartoons.yaml to define current.'
+  }
+
+  $cartoons = @()
+  $updated = $false
+  foreach ($cartoon in @($data.cartoons)) {
+    if ($cartoon.slug -ne $LinkExistingSlug) {
+      $cartoons += $cartoon
+      continue
+    }
+
+    if ($updated) {
+      throw "Association-only update found duplicate cartoon slug: $LinkExistingSlug"
+    }
+
+    $updatedCartoon = [ordered]@{}
+    foreach ($property in $cartoon.GetEnumerator()) {
+      $updatedCartoon[$property.Key] = $property.Value
+    }
+
+    if (-not $updatedCartoon.Contains('date') -or [string]::IsNullOrWhiteSpace([string]$updatedCartoon.date)) {
+      throw "Cartoon '$LinkExistingSlug' is missing its release date."
+    }
+
+    $cartoonReleaseValue = if ($updatedCartoon.Contains('publishDate') -and -not [string]::IsNullOrWhiteSpace([string]$updatedCartoon.publishDate)) {
+      [string]$updatedCartoon.publishDate
+    }
+    else {
+      [string]$updatedCartoon.date
+    }
+    $cartoonReleaseAt = ConvertTo-OipDateTimeOffset -Value $cartoonReleaseValue -Label "Cartoon release date for $LinkExistingSlug"
+
+    Assert-LinkedEssayPhilosophyAudit -Root $resolvedRoot -SiteEssayPath $resolvedEssayPath
+    Assert-LinkedEssayScheduleCompatibility -Root $resolvedRoot -SiteEssayPath $resolvedEssayPath -CartoonReleaseAt $cartoonReleaseAt
+
+    $updatedCartoon.essay = $resolvedEssayPath
+    $cartoons += $updatedCartoon
+    $updated = $true
+  }
+
+  if (-not $updated) {
+    throw "Association-only update could not find cartoon slug: $LinkExistingSlug"
+  }
+
+  Write-CartoonData -Path $dataPath -Current ([string]$data.current) -Cartoons @($cartoons)
+  Write-Host "Associated cartoon: $LinkExistingSlug"
+  Write-Host "Essay: $resolvedEssayPath"
+  Write-Host "Current front page cartoon preserved: $($data.current)"
+  return
+}
+
 if (-not (Test-Path -LiteralPath $ImagePath -PathType Leaf)) {
   throw "Image not found: $ImagePath"
 }
@@ -573,7 +672,6 @@ if ($NoEssayLink -and -not [string]::IsNullOrWhiteSpace($EssayPath)) {
   throw 'Use either -EssayPath or -NoEssayLink, not both.'
 }
 
-$resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $Root).Path)
 $resolvedImagePath = [System.IO.Path]::GetFullPath((Resolve-Path $ImagePath).Path)
 $defaultEssayPath = $null
 if ($isQueuedPublish -and -not $NoEssayLink -and [string]::IsNullOrWhiteSpace($EssayPath)) {

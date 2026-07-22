@@ -95,6 +95,8 @@ Musings are short source-free reflections, not ordinary evidence-driven essays. 
 
 Musings may use unqualified personal, spiritual, existential, philosophical, moral, universal, or aspirational language without citations, a research package, or an OIP-99 report. A declarative life observation or spiritual assurance is not an external factual claim merely because it is broad or certain. If a Musing makes a concrete factual claim about the world, record evidence appropriate to that claim; it may remain a Musing when reflection remains its primary form. A public Musing still needs a concise description and either a social image or an explicit image exemption with a reason. The standard cleanup, accessibility, and site validation checks remain required. See [editorial/musings-series-contract.md](../editorial/musings-series-contract.md).
 
+An editorial cartoon may link to a fully declared source-free Musing without a separate OIP-99 report. Use the explicit essay route in `scripts/update_front_page_cartoon.ps1`; use `-LinkExistingSlug <cartoon-slug> -EssayPath "/essays/<musing-slug>/"` when repairing an existing gallery association without changing the current front-page cartoon.
+
 ## Syd & Oliver dialogue packages
 
 Every new Syd & Oliver dialogue package must include:
