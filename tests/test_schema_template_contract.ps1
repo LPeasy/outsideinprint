@@ -53,6 +53,11 @@ if ($webpageHelper -notmatch [regex]::Escape('partial "schema/significant-links.
   throw 'Expected schema/webpage.html to consume the discovery significant-links helper.'
 }
 
+$significantLinksHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/significant-links.html') -Raw
+if ($significantLinksHelper -notmatch [regex]::Escape('"/shop"')) {
+  throw 'Expected the homepage significantLink helper to include /shop.'
+}
+
 $organizationData = Get-Content -Path (Join-Path $repoRoot 'data/organization.yaml') -Raw
 if ($organizationData -notmatch 'name:\s*Outside In Print') {
   throw 'Expected data/organization.yaml to define the Outside In Print organization.'

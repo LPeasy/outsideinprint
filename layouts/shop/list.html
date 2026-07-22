@@ -14,6 +14,8 @@
           {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" $book) }}
           {{ $cover := index $product "cover_image" | default $book.Params.image }}
           {{ $coverAlt := index $product "cover_alt" | default $book.Title }}
+          {{ $productSlug := index $product "suggested_slug" | default $productKey }}
+          {{ $productTitle := index $product "title" | default $book.Title }}
           {{ $recordID := printf "bookstore-record-%d" $index }}
 
           <article class="bookstore-record" aria-labelledby="{{ $recordID }}">
@@ -50,7 +52,15 @@
                     <dd>
                       {{ . }}
                       {{ with index $product "kindle_url" }}
-                        <a class="bookstore-ledger-link" href="{{ . }}">{{ index $product "kindle_label" | default "View Kindle edition" }}</a>
+                        <a
+                          class="bookstore-ledger-link"
+                          href="{{ . }}"
+                          data-analytics-source-slot="bookstore_index_kindle"
+                          data-analytics-slug="{{ $productSlug }}"
+                          data-analytics-title="{{ $productTitle }}"
+                          data-analytics-section="Bookstore"
+                          data-analytics-path="{{ . }}"
+                        >{{ index $product "kindle_label" | default "View Kindle edition" }}</a>
                       {{ end }}
                     </dd>
                   </div>
@@ -64,7 +74,7 @@
               </dl>
 
               <div class="bookstore-record__actions">
-                {{ partial "shop/checkout-actions.html" (dict "product" $product) }}
+                {{ partial "shop/checkout-actions.html" (dict "product" $product "sourceSlot" "bookstore_index_buy") }}
                 <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}">View book details</a>
               </div>
             </div>

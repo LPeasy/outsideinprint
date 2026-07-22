@@ -198,7 +198,8 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(indexSource, /"label" "Library"/);
   assert.doesNotMatch(indexSource, /"label" "Welcome"/);
   assert.doesNotMatch(indexSource, /"label" "Feeling curious\?"/);
-  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_imprint_statement.html"'));
+  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_bookstore_spotlight.html"'));
+  assert.ok(indexSource.indexOf('partial "home_bookstore_spotlight.html"') < indexSource.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(indexSource.indexOf('partial "home_imprint_statement.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
   assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
   assert.ok(indexSource.indexOf('partial "newsletter_signup.html"') < indexSource.indexOf('class="home-browse'));
@@ -343,10 +344,29 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$hero/);
   assert.match(partialSource, /"secondary" \$secondary/);
-  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_imprint_statement.html"'));
+  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_bookstore_spotlight.html"'));
+  assert.ok(source.indexOf('partial "home_bookstore_spotlight.html"') < source.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(source.indexOf('partial "home_imprint_statement.html"') < source.indexOf('partial "home_selected_collections.html"'));
   assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('partial "newsletter_signup.html"'));
   assert.ok(source.indexOf('partial "newsletter_signup.html"') < source.indexOf('class="home-browse'));
+});
+
+test("homepage bookstore spotlight stays weighted, data-driven, and internal-first", () => {
+  const source = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
+  const spotlight = fs.readFileSync(path.resolve("layouts/partials/home_bookstore_spotlight.html"), "utf8");
+
+  assert.match(source, /partial "home_bookstore_spotlight\.html"/);
+  assert.match(spotlight, /site\.GetPage "\/shop"/);
+  assert.match(spotlight, /first 3 \(sort \.RegularPages "Weight" "asc"\)/);
+  assert.match(spotlight, /if gt \(len \$books\) 0/);
+  assert.match(spotlight, /partial "shop\/product-data\.html"/);
+  assert.match(spotlight, /index \$product "display_title"/);
+  assert.match(spotlight, /index \$product "author"/);
+  assert.match(spotlight, /index \$product "product_type"/);
+  assert.match(spotlight, /index \$product "price_display"/);
+  assert.match(spotlight, /data-home-bookstore-card/);
+  assert.match(spotlight, /data-analytics-source-slot="homepage_bookstore_promo"/);
+  assert.doesNotMatch(spotlight, /https:\/\/www\.amazon\.com|purchase_url|checkout-actions|carousel|autoplay/);
 });
 
 test("homepage lead control ignores expiring essay feature front matter", () => {

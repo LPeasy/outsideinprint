@@ -3,6 +3,7 @@
 {{ $isArchive := or (eq .Section "archive") (eq .Section "essays") (eq .Section "syd-and-oliver") }}
 {{ $isCollections := eq .Section "collections" }}
 {{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
+{{ $isBookstore := or (eq .Section "shop") (eq .RelPermalink "/shop/") }}
 {{ $isGallery := eq .Section "gallery" }}
 {{ $isRandom := eq .Section "random" }}
 {{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
@@ -80,6 +81,16 @@
     <a href="{{ "collections/" | absURL }}"{{ if $isCollections }} aria-current="page"{{ end }}>Collections</a><span class="dot">&bull;</span>
     <a href="{{ "gallery/" | absURL }}"{{ if $isGallery }} aria-current="page"{{ end }}>Gallery</a><span class="dot">&bull;</span>
     <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
+    <a
+      href="{{ "shop/" | absURL }}"
+      data-analytics-event="internal_promo_click"
+      data-analytics-source-slot="primary_nav_bookstore"
+      data-analytics-slug="bookstore"
+      data-analytics-title="Bookstore"
+      data-analytics-section="Bookstore"
+      data-analytics-path="{{ "shop/" | relURL }}"
+      {{- if $isBookstore }} aria-current="page"{{ end -}}
+    >Bookstore</a><span class="dot">&bull;</span>
     <a class="nav__explore-link" href="{{ "random/" | absURL }}"{{ if $isRandom }} aria-current="page"{{ end }}>Feeling curious?</a>
   </nav>
 </header>

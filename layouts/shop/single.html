@@ -3,6 +3,8 @@
   {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) }}
   {{ $cover := index $product "cover_image" | default .Params.image }}
   {{ $coverAlt := index $product "cover_alt" | default .Title }}
+  {{ $productSlug := index $product "suggested_slug" | default $productKey }}
+  {{ $productTitle := index $product "title" | default .Title }}
 
   <article class="page-shell page-shell--wide bookstore-product" aria-labelledby="page-title">
     <header class="bookstore-product__header">
@@ -53,7 +55,7 @@
 
         <section class="bookstore-panel__section" aria-labelledby="shop-checkout-title">
           <h2 id="shop-checkout-title" class="list-title">{{ index $product "checkout_heading" | default "Direct checkout" }}</h2>
-          {{ partial "shop/checkout-actions.html" (dict "product" $product) }}
+          {{ partial "shop/checkout-actions.html" (dict "product" $product "sourceSlot" "bookstore_detail_buy") }}
           {{ with index $product "checkout_note" }}<p class="shop-note">{{ . }}</p>{{ end }}
           {{ with index $product "delivery_note" }}<p class="shop-note">{{ . }}</p>{{ end }}
         </section>
@@ -67,7 +69,15 @@
                 <dd>
                   {{ . }}
                   {{ with index $product "kindle_url" }}
-                    <a class="bookstore-ledger-link" href="{{ . }}">{{ index $product "kindle_label" | default "View Kindle edition" }}</a>
+                    <a
+                      class="bookstore-ledger-link"
+                      href="{{ . }}"
+                      data-analytics-source-slot="bookstore_detail_kindle"
+                      data-analytics-slug="{{ $productSlug }}"
+                      data-analytics-title="{{ $productTitle }}"
+                      data-analytics-section="Bookstore"
+                      data-analytics-path="{{ . }}"
+                    >{{ index $product "kindle_label" | default "View Kindle edition" }}</a>
                   {{ end }}
                 </dd>
               </div>

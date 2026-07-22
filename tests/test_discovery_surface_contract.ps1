@@ -36,6 +36,7 @@ $requiredFiles = @(
   'layouts/partials/archive/resolve-pages.html',
   'layouts/partials/archive/render-list.html',
   'layouts/partials/home_front_page.html',
+  'layouts/partials/home_bookstore_spotlight.html',
   'layouts/partials/home_imprint_statement.html',
   'layouts/partials/home_selected_collections.html',
   'layouts/partials/entry_threads.html',
@@ -84,6 +85,7 @@ foreach ($relativePath in $requiredImageFrontMatterFiles) {
 $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "home_front_page.html"',
+  'partial "home_bookstore_spotlight.html"',
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
   'partial "newsletter_signup.html"',
@@ -111,6 +113,7 @@ foreach ($retiredSnippet in @(
 
 $homepageOrder = @(
   'partial "home_front_page.html"',
+  'partial "home_bookstore_spotlight.html"',
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
   'partial "newsletter_signup.html"',
@@ -277,6 +280,98 @@ foreach ($retiredSnippet in @(
 )) {
   if ($homeImprintTemplate -match [regex]::Escape($retiredSnippet)) {
     throw "Expected layouts/partials/home_imprint_statement.html to remove: $retiredSnippet"
+  }
+}
+
+$homeBookstoreTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_bookstore_spotlight.html') -Raw
+foreach ($requiredSnippet in @(
+  'site.GetPage "/shop"',
+  'first 3 (sort .RegularPages "Weight" "asc")',
+  'if gt (len $books) 0',
+  'partial "shop/product-data.html"',
+  'Books from Outside In Print',
+  'Three Kindle editions, available now on Amazon.',
+  'Browse the bookstore',
+  'data-home-bookstore-card',
+  'data-analytics-source-slot="homepage_bookstore_promo"'
+)) {
+  if ($homeBookstoreTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/home_bookstore_spotlight.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($forbiddenSnippet in @(
+  'https://www.amazon.com',
+  'purchase_url',
+  'checkout-actions',
+  'carousel',
+  'autoplay'
+)) {
+  if ($homeBookstoreTemplate -match [regex]::Escape($forbiddenSnippet)) {
+    throw "Expected the homepage bookstore spotlight to omit: $forbiddenSnippet"
+  }
+}
+
+if ($mainCss -notmatch '(?s)\.home-bookstore__grid\{[^}]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);[^}]*\}') {
+  throw 'Expected the homepage bookstore grid to use three columns above 900px.'
+}
+
+if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{\s*\.home-bookstore__grid\{[^}]*grid-template-columns:1fr;[^}]*\}\s*\.home-bookstore__card\{[^}]*grid-template-columns:8rem minmax\(0, 1fr\);[^}]*\}\s*\}') {
+  throw 'Expected the homepage bookstore to use compact horizontal single-column records at 900px and below.'
+}
+
+if ($mainCss -notmatch '(?s)@media \(max-width:420px\)\{\s*\.home-bookstore__card\{[^}]*grid-template-columns:5\.75rem minmax\(0, 1fr\);[^}]*\}\s*\.home-bookstore__cta\{[^}]*width:100%;[^}]*\}\s*\}') {
+  throw 'Expected the homepage bookstore to shrink the cover column and use a full-width CTA at 420px and below.'
+}
+
+$significantLinksTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/significant-links.html') -Raw
+if ($significantLinksTemplate -notmatch [regex]::Escape('"/shop"')) {
+  throw 'Expected homepage significant links to include /shop.'
+}
+
+$checkoutActionsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/shop/checkout-actions.html') -Raw
+foreach ($requiredSnippet in @(
+  '.sourceSlot | default ""',
+  'index $product "purchase_url" | default (index $product "stripe_payment_link" | default "")',
+  '{{ with $sourceSlot }}data-analytics-source-slot="{{ . }}"{{ end }}',
+  'data-analytics-path="{{ $singleLink }}"'
+)) {
+  if ($checkoutActionsTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/shop/checkout-actions.html to preserve checkout compatibility and analytics: $requiredSnippet"
+  }
+}
+
+$shopListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/shop/list.html') -Raw
+$shopSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/shop/single.html') -Raw
+if ($checkoutActionsTemplate -match 'data-analytics-event') {
+  throw 'Expected checkout Amazon exits to rely on automatic external_link_click tracking without data-analytics-event.'
+}
+
+foreach ($requiredSlot in @(
+  'bookstore_index_buy',
+  'bookstore_index_kindle'
+)) {
+  if ($shopListTemplate -notmatch [regex]::Escape($requiredSlot)) {
+    throw "Expected layouts/shop/list.html to include analytics source slot: $requiredSlot"
+  }
+}
+
+$analyticsScript = Get-Content -Path (Join-Path $repoRoot 'assets/js/analytics.js') -Raw
+foreach ($requiredSnippet in @(
+  'if (isExternalLink(url))',
+  'track("external_link_click", mergeProps(datasetProps(anchor), currentPageProps()))'
+)) {
+  if ($analyticsScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected assets/js/analytics.js to preserve automatic external-link tracking: $requiredSnippet"
+  }
+}
+
+foreach ($requiredSlot in @(
+  'bookstore_detail_buy',
+  'bookstore_detail_kindle'
+)) {
+  if ($shopSingleTemplate -notmatch [regex]::Escape($requiredSlot)) {
+    throw "Expected layouts/shop/single.html to include analytics source slot: $requiredSlot"
   }
 }
 
@@ -777,8 +872,12 @@ if ($mastheadPartial -notmatch '<div class="title">') {
   throw 'Expected layouts/partials/masthead.html to keep the shared non-heading title container for the editorial brand.'
 }
 
-if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Feeling curious\?') {
-  throw 'Expected layouts/partials/masthead.html to order the primary nav as Archive, Collections, Gallery, Library, Feeling curious?.'
+if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Bookstore.*Feeling curious\?') {
+  throw 'Expected layouts/partials/masthead.html to order the primary nav as Archive, Collections, Gallery, Library, Bookstore, Feeling curious?.'
+}
+
+if ($mastheadPartial -notmatch 'data-analytics-source-slot="primary_nav_bookstore"') {
+  throw 'Expected the primary Bookstore navigation link to emit its analytics source slot.'
 }
 
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw

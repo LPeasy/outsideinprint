@@ -1,0 +1,72 @@
+{{- $shopPage := site.GetPage "/shop" -}}
+{{- with $shopPage -}}
+  {{- $books := first 3 (sort .RegularPages "Weight" "asc") -}}
+  {{- if gt (len $books) 0 -}}
+    <section class="home-bookstore page-shell page-shell--wide" aria-labelledby="home-bookstore-title">
+      <header class="home-bookstore__header">
+        <div class="home-bookstore__heading">
+          <p class="list-title home-bookstore__eyebrow">Books from Outside In Print</p>
+          <h2 id="home-bookstore-title" class="home-bookstore__title">The Bookstore</h2>
+          <p class="home-bookstore__dek">Three Kindle editions, available now on Amazon.</p>
+        </div>
+        <a
+          class="home-bookstore__cta"
+          href="{{ .RelPermalink }}"
+          data-analytics-event="internal_promo_click"
+          data-analytics-source-slot="homepage_bookstore_promo"
+          data-analytics-slug="bookstore"
+          data-analytics-title="The Bookstore"
+          data-analytics-section="Bookstore"
+          data-analytics-path="{{ .RelPermalink }}"
+        >Browse the bookstore <span aria-hidden="true">&rarr;</span></a>
+      </header>
+
+      <div class="home-bookstore__grid">
+        {{- range $books -}}
+          {{- $productKey := .Params.book_key | default (.Params.slug | default .File.BaseFileName) -}}
+          {{- $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) -}}
+          {{- $cover := index $product "cover_image" | default .Params.image -}}
+          {{- $coverAlt := index $product "cover_alt" | default .Title -}}
+          {{- $displayTitle := index $product "display_title" | default (index $product "title" | default .Title) -}}
+          {{- $analyticsTitle := index $product "title" | default .Title -}}
+          {{- $slug := .Params.slug | default .File.BaseFileName -}}
+          <article class="home-bookstore__card" data-home-bookstore-card>
+            <a
+              class="home-bookstore__cover"
+              href="{{ .RelPermalink }}"
+              aria-label="View {{ $analyticsTitle }}"
+              data-analytics-event="internal_promo_click"
+              data-analytics-source-slot="homepage_bookstore_promo"
+              data-analytics-slug="{{ $slug }}"
+              data-analytics-title="{{ $analyticsTitle }}"
+              data-analytics-section="Bookstore"
+              data-analytics-path="{{ .RelPermalink }}"
+            >
+              <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" width="1600" height="2560" loading="lazy" decoding="async">
+            </a>
+            <div class="home-bookstore__body">
+              {{- with index $product "author" -}}
+                <p class="home-bookstore__author">{{ . }}</p>
+              {{- end -}}
+              <h3 class="home-bookstore__card-title">
+                <a
+                  href="{{ .RelPermalink }}"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="homepage_bookstore_promo"
+                  data-analytics-slug="{{ $slug }}"
+                  data-analytics-title="{{ $analyticsTitle }}"
+                  data-analytics-section="Bookstore"
+                  data-analytics-path="{{ .RelPermalink }}"
+                >{{ $displayTitle }}</a>
+              </h3>
+              <p class="home-bookstore__edition">
+                {{- with index $product "product_type" -}}<span>{{ . }}</span>{{- end -}}
+                {{- with index $product "price_display" -}}<span>{{ . }}</span>{{- end -}}
+              </p>
+            </div>
+          </article>
+        {{- end -}}
+      </div>
+    </section>
+  {{- end -}}
+{{- end -}}

@@ -10,7 +10,15 @@
       <a href="{{ "authors/robert-v-ussley/" | absURL }}">Author</a>
       <a href="{{ "collections/" | absURL }}">Collections</a>
       <a href="{{ "library/" | absURL }}">Library</a>
-      <a href="{{ "shop/" | absURL }}">Bookstore</a>
+      <a
+        href="{{ "shop/" | absURL }}"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="footer_bookstore"
+        data-analytics-slug="bookstore"
+        data-analytics-title="Bookstore"
+        data-analytics-section="Bookstore"
+        data-analytics-path="{{ "shop/" | relURL }}"
+      >Bookstore</a>
     </nav>
   </div>
 </footer>

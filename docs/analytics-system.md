@@ -48,6 +48,18 @@ The client code keeps the current lightweight behavior:
 
 Custom events are encoded into GoatCounter event names with stable metadata such as target path, slug, section, source slot, collection, and format. That metadata is parsed later during normalization.
 
+Bookstore discovery and Amazon exits use these source slots:
+
+- `primary_nav_bookstore`
+- `homepage_bookstore_promo`
+- `footer_bookstore`
+- `bookstore_index_buy`
+- `bookstore_detail_buy`
+- `bookstore_index_kindle`
+- `bookstore_detail_kindle`
+
+Homepage cards and calls to action remain internal links. Amazon exits rely on the existing automatic `external_link_click` event and carry the book slug, full title, Bookstore section, source slot, and destination URL.
+
 For `collection_click`, the current source-slot contract includes the article-header context slot `article_collection_context` in addition to homepage, collection-page, and article-continuation collection surfaces.
 
 ## Read Tracking Rules

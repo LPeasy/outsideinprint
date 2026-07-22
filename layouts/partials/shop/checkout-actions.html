@@ -1,13 +1,24 @@
 {{- $product := .product | default dict -}}
+{{- $sourceSlot := .sourceSlot | default "" -}}
 {{- $singleLink := index $product "purchase_url" | default (index $product "stripe_payment_link" | default "") -}}
 {{- $label := index $product "checkout_label" | default "Buy now" -}}
 {{- $disabledLabel := index $product "checkout_unavailable_label" | default (printf "%s coming soon" $label) -}}
 {{- $status := index $product "checkout_status" | default "" -}}
 {{- $isLive := and (ne $status "disabled") (or (hasPrefix $singleLink "https://") (hasPrefix $singleLink "http://")) -}}
+{{- $productSlug := index $product "suggested_slug" | default (index $product "key" | default "book") -}}
+{{- $productTitle := index $product "title" | default "Book" -}}
 
 <div class="shop-cta-grid">
   {{- if $isLive -}}
-    <a class="shop-cta" href="{{ $singleLink }}">{{ $label }}</a>
+    <a
+      class="shop-cta"
+      href="{{ $singleLink }}"
+      {{ with $sourceSlot }}data-analytics-source-slot="{{ . }}"{{ end }}
+      data-analytics-slug="{{ $productSlug }}"
+      data-analytics-title="{{ $productTitle }}"
+      data-analytics-section="Bookstore"
+      data-analytics-path="{{ $singleLink }}"
+    >{{ $label }}</a>
   {{- else -}}
     <span class="shop-cta shop-cta--disabled" aria-disabled="true">{{ $disabledLabel }}</span>
   {{- end -}}

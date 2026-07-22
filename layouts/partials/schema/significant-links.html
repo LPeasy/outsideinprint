@@ -3,7 +3,7 @@
 {{- $links := slice -}}
 
 {{- if eq $meta.route.name "home" -}}
-  {{- range (slice "/essays" "/gallery" "/collections" "/library") -}}
+  {{- range (slice "/essays" "/gallery" "/collections" "/library" "/shop") -}}
     {{- with site.GetPage . -}}
       {{- $links = $links | append .Permalink -}}
     {{- end -}}

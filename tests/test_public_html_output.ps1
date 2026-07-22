@@ -2055,8 +2055,29 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-manifesto.*?entry-threads--home.*?newsletter-signup-title.*?home-browse'
-    Message = 'expected the homepage to preserve the editorial module order from the story grid through the lower-page signoff'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup-title.*?home-browse'
+    Message = 'expected the homepage to place the bookstore shelf after the story grid and before the manifesto and lower-page signoff'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Three Kindle editions, available now on Amazon\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Kindle eBook.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Kindle eBook.*?\$4\.99.*?the-water-cycle-cover-v1\.0\.jpg.*?Outside In Print.*?The Water Cycle.*?Kindle eBook.*?\$9\.99.*?</section>'
+    Message = 'expected the homepage bookstore shelf to render all three weighted Kindle records with official covers, attribution, prices, and CTA'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?is)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?(?:https://www\.amazon\.com|Buy on Amazon Kindle|\bshop-cta\b|carousel|autoplay|direct bundle|stripe).*?</section>'
+    Message = 'expected the homepage bookstore shelf to remain internal-first and free of direct-buy, carousel, and stale checkout presentation'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-bookstore.*?data-analytics-source-slot=(?:"homepage_bookstore_promo"|homepage_bookstore_promo).*?Browse the bookstore.*?/shop/the-american-nightmare-keep-dreaming-kid/.*?/shop/the-parable-of-the-sheep/.*?/shop/the-water-cycle/'
+    Message = 'expected homepage bookstore links to use the shared promotion source slot and internal OIP routes'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '"significantLink":\[[^\]]*"https://outsideinprint\.org/shop/"'
+    Message = 'expected homepage structured data to include the bookstore as a significant link'
   },
   @{
     Path = 'public/index.html'
@@ -2250,8 +2271,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
-    Message = 'expected the homepage masthead nav order to be Archive, Collections, Gallery, Library, Feeling curious?'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*Bookstore\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
+    Message = 'expected the homepage masthead nav order to be Archive, Collections, Gallery, Library, Bookstore, Feeling curious?'
   },
   @{
     Path = 'public/index.html'
@@ -2456,8 +2477,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
-    Message = 'expected the archive masthead nav order to be Archive, Collections, Gallery, Library, Feeling curious?'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*Bookstore\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
+    Message = 'expected the archive masthead nav order to be Archive, Collections, Gallery, Library, Bookstore, Feeling curious?'
   },
   @{
     Path = 'public/archive/index.html'
@@ -2714,6 +2735,31 @@ $requiredUxChecks = @(
     Path = 'public/about/index.html'
     Pattern = '(?s)Reading Map.*?Home.*?Browse collections.*?Search the library.*?Meet the author'
     Message = 'expected the about page to keep a calm reading map into Home, Collections, Library, and the author archive'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*aria-current=(?:"page"|page)[^>]*>\s*Bookstore\s*<'
+    Message = 'expected the bookstore index to mark Bookstore as the current primary destination'
+  },
+  @{
+    Path = 'public/shop/the-water-cycle/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*aria-current=(?:"page"|page)[^>]*>\s*Bookstore\s*<'
+    Message = 'expected bookstore detail pages to mark Bookstore as the current primary destination'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = '(?s)data-analytics-source-slot=(?:"bookstore_index_kindle"|bookstore_index_kindle).*?data-analytics-slug=(?:"the-american-nightmare-keep-dreaming-kid"|the-american-nightmare-keep-dreaming-kid).*?data-analytics-path=(?:"https://www\.amazon\.com/dp/B0H37W2JK8"|https://www\.amazon\.com/dp/B0H37W2JK8).*?data-analytics-source-slot=(?:"bookstore_index_buy"|bookstore_index_buy)'
+    Message = 'expected bookstore index Amazon exits to carry per-book Kindle and buy source metadata'
+  },
+  @{
+    Path = 'public/shop/the-water-cycle/index.html'
+    Pattern = '(?s)data-analytics-source-slot=(?:"bookstore_detail_buy"|bookstore_detail_buy).*?data-analytics-slug=(?:"the-water-cycle"|the-water-cycle).*?data-analytics-path=(?:"https://www\.amazon\.com/dp/B0H46WMGJQ"|https://www\.amazon\.com/dp/B0H46WMGJQ).*?data-analytics-source-slot=(?:"bookstore_detail_kindle"|bookstore_detail_kindle)'
+    Message = 'expected bookstore detail Amazon exits to carry per-book buy and Kindle source metadata'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Footer"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"footer_bookstore"|footer_bookstore)[^>]*>\s*Bookstore\s*<'
+    Message = 'expected the footer Bookstore link to emit its dedicated analytics source slot'
   },
   @{
     Path = 'public/shop/index.html'
@@ -3606,8 +3652,61 @@ foreach ($forbiddenPath in @(
   }
 }
 
+$homeBookstoreTargets = @(
+  @{ Href = '/shop/'; Slug = 'bookstore'; Title = 'The Bookstore'; Count = 1 },
+  @{ Href = '/shop/the-american-nightmare-keep-dreaming-kid/'; Slug = 'the-american-nightmare-keep-dreaming-kid'; Title = 'The American Nightmare: Keep Dreaming, Kid'; Count = 2 },
+  @{ Href = '/shop/the-parable-of-the-sheep/'; Slug = 'the-parable-of-the-sheep'; Title = 'The Parable of the Sheep'; Count = 2 },
+  @{ Href = '/shop/the-water-cycle/'; Slug = 'the-water-cycle'; Title = 'The Water Cycle: Risk, Infrastructure, and Public Memory'; Count = 2 }
+)
+
 if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeIndexHtml = [string]$targetPageHtml['public/index.html']
+  $bookstoreSectionMatch = [regex]::Match($homeIndexHtml, '(?is)<section\b(?=[^>]*\bhome-bookstore\b)[^>]*>.*?</section>')
+  if (-not $bookstoreSectionMatch.Success) {
+    $uxIssues.Add('public/index.html => expected a rendered homepage bookstore section')
+  }
+  else {
+    $bookstoreAnchors = @(Get-OpenTags -Html $bookstoreSectionMatch.Value -TagName 'a')
+    if ($bookstoreAnchors.Count -ne 7) {
+      $uxIssues.Add("public/index.html => expected exactly 7 homepage bookstore links, found $($bookstoreAnchors.Count)")
+    }
+
+    foreach ($anchor in $bookstoreAnchors) {
+      $href = Get-AttributeValue -Tag $anchor -Name 'href'
+      $target = @($homeBookstoreTargets | Where-Object { $_.Href -ceq $href }) | Select-Object -First 1
+      if (-not $target) {
+        $uxIssues.Add("public/index.html => unexpected homepage bookstore destination '$href'")
+        continue
+      }
+
+      foreach ($attributeExpectation in @(
+        @{ Name = 'data-analytics-event'; Value = 'internal_promo_click' },
+        @{ Name = 'data-analytics-source-slot'; Value = 'homepage_bookstore_promo' },
+        @{ Name = 'data-analytics-slug'; Value = $target.Slug },
+        @{ Name = 'data-analytics-title'; Value = $target.Title },
+        @{ Name = 'data-analytics-section'; Value = 'Bookstore' },
+        @{ Name = 'data-analytics-path'; Value = $target.Href }
+      )) {
+        $actualValue = Get-AttributeValue -Tag $anchor -Name $attributeExpectation.Name
+        if ($actualValue -cne $attributeExpectation.Value) {
+          $uxIssues.Add("public/index.html => homepage bookstore link '$href' expected $($attributeExpectation.Name)='$($attributeExpectation.Value)', found '$actualValue'")
+        }
+      }
+    }
+
+    foreach ($target in $homeBookstoreTargets) {
+      $matchingAnchorCount = @($bookstoreAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq $target.Href }).Count
+      if ($matchingAnchorCount -ne $target.Count) {
+        $uxIssues.Add("public/index.html => expected $($target.Count) homepage bookstore links to '$($target.Href)', found $matchingAnchorCount")
+      }
+    }
+  }
+
+  $bookstoreCardCount = [regex]::Matches($homeIndexHtml, '\bdata-home-bookstore-card(?:[=\s>])', 'IgnoreCase').Count
+  if ($bookstoreCardCount -ne 3) {
+    $uxIssues.Add("public/index.html => expected exactly 3 homepage bookstore cards, found $bookstoreCardCount")
+  }
+
   $currentSlugPattern = 'data-cartoon-slug=(?:"' + [regex]::Escape($currentCartoonSlug) + '"|' + [regex]::Escape($currentCartoonSlug) + ')'
   $currentTriggerMatch = [regex]::Match($homeIndexHtml, '<button\b(?=[^>]*\beditorial-cartoon__trigger\b)(?=[^>]*' + $currentSlugPattern + ')[^>]*>', 'IgnoreCase')
   $recentGridIndex = $homeIndexHtml.IndexOf('data-home-cartoon-recent', [System.StringComparison]::Ordinal)
@@ -3638,6 +3737,96 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
   if (($recentHomeCartoonSlugs | Select-Object -First 1) -eq 'cloched-for-business' -and $homeIndexHtml -notmatch '<figure\b(?=[^>]*\beditorial-cartoon-recent__item\b)(?=[^>]*data-cartoon-slug=(?:"cloched-for-business"|cloched-for-business))(?s).*?<figcaption><span>Cloched for Business</span></figcaption>') {
     $uxIssues.Add('public/index.html => expected Cloched for Business to be the first recent homepage cartoon card')
+  }
+}
+
+$bookstoreProducts = @(
+  @{
+    DetailPath = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
+    Slug = 'the-american-nightmare-keep-dreaming-kid'
+    Title = 'The American Nightmare: Keep Dreaming, Kid'
+    PurchaseUrl = 'https://www.amazon.com/dp/B0H37W2JK8'
+  },
+  @{
+    DetailPath = 'public/shop/the-parable-of-the-sheep/index.html'
+    Slug = 'the-parable-of-the-sheep'
+    Title = 'The Parable of the Sheep'
+    PurchaseUrl = 'https://www.amazon.com/dp/B0GN18LLWB'
+  },
+  @{
+    DetailPath = 'public/shop/the-water-cycle/index.html'
+    Slug = 'the-water-cycle'
+    Title = 'The Water Cycle: Risk, Infrastructure, and Public Memory'
+    PurchaseUrl = 'https://www.amazon.com/dp/B0H46WMGJQ'
+  }
+)
+
+foreach ($surface in @(
+  @{ Path = 'public/shop/index.html'; ExpectedCount = 6; Slots = @('bookstore_index_buy', 'bookstore_index_kindle') },
+  @{ Path = $null; ExpectedCount = 2; Slots = @('bookstore_detail_buy', 'bookstore_detail_kindle') }
+)) {
+  $surfacePaths = if ($surface.Path) { @($surface.Path) } else { @($bookstoreProducts | ForEach-Object { $_.DetailPath }) }
+
+  foreach ($surfacePath in $surfacePaths) {
+    if (-not $targetPageHtml.ContainsKey($surfacePath)) {
+      $uxIssues.Add("Missing generated bookstore page required for Amazon-exit coverage: $surfacePath")
+      continue
+    }
+
+    $surfaceHtml = [string]$targetPageHtml[$surfacePath]
+    $surfaceProducts = if ($surface.Path) {
+      $bookstoreProducts
+    }
+    else {
+      @($bookstoreProducts | Where-Object { $_.DetailPath -ceq $surfacePath })
+    }
+    $amazonAnchors = @(Get-OpenTags -Html $surfaceHtml -TagName 'a' | Where-Object {
+      (Get-AttributeValue -Tag $_ -Name 'href') -match '^https://www\.amazon\.com/'
+    })
+    $expectedExitCount = [int]$surface.ExpectedCount
+    if ($amazonAnchors.Count -ne $expectedExitCount) {
+      $uxIssues.Add("$surfacePath => expected exactly $expectedExitCount Amazon exits, found $($amazonAnchors.Count)")
+    }
+
+    foreach ($product in $surfaceProducts) {
+      $productAnchors = @($amazonAnchors | Where-Object {
+        (Get-AttributeValue -Tag $_ -Name 'href') -ceq $product.PurchaseUrl
+      })
+      if ($productAnchors.Count -ne 2) {
+        $uxIssues.Add("$surfacePath => expected exactly 2 Amazon exits for '$($product.Title)', found $($productAnchors.Count)")
+        continue
+      }
+
+      $expectedSlots = @($surface.Slots)
+      $actualSlots = @($productAnchors | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot' } | Sort-Object)
+      if (($actualSlots -join '|') -cne (($expectedSlots | Sort-Object) -join '|')) {
+        $uxIssues.Add("$surfacePath => expected Amazon source slots '$($expectedSlots -join ', ')', found '$($actualSlots -join ', ')' for '$($product.Title)'")
+      }
+
+      foreach ($anchor in $productAnchors) {
+        foreach ($attributeExpectation in @(
+          @{ Name = 'data-analytics-slug'; Value = $product.Slug },
+          @{ Name = 'data-analytics-title'; Value = $product.Title },
+          @{ Name = 'data-analytics-section'; Value = 'Bookstore' },
+          @{ Name = 'data-analytics-path'; Value = $product.PurchaseUrl }
+        )) {
+          $actualValue = Get-AttributeValue -Tag $anchor -Name $attributeExpectation.Name
+          if ($actualValue -cne $attributeExpectation.Value) {
+            $uxIssues.Add("$surfacePath => Amazon exit for '$($product.Title)' expected $($attributeExpectation.Name)='$($attributeExpectation.Value)', found '$actualValue'")
+          }
+        }
+        if ($anchor -match '\bdata-analytics-event(?:\s*=|\s|>)') {
+          $uxIssues.Add("$surfacePath => Amazon exit for '$($product.Title)' must not declare data-analytics-event")
+        }
+      }
+    }
+
+    if (-not $surface.Path) {
+      $primaryNavMatch = [regex]::Match($surfaceHtml, '(?is)<nav\b(?=[^>]*aria-label\s*=\s*(?:"Primary"|''Primary''|Primary))[^>]*>.*?</nav>')
+      if (-not $primaryNavMatch.Success -or $primaryNavMatch.Value -notmatch '(?is)<a\b(?=[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/"|(?:https://outsideinprint\.org)?/shop/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*Bookstore\s*</a>') {
+        $uxIssues.Add("$surfacePath => expected Bookstore to be the current primary-navigation destination")
+      }
+    }
   }
 }
 foreach ($articlePath in @(

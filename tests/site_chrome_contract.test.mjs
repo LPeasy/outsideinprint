@@ -35,6 +35,11 @@ const themeBootstrap = fs.readFileSync(path.resolve("layouts/partials/theme_boot
 const themeToggleScript = fs.readFileSync(path.resolve("layouts/partials/theme_toggle_script.html"), "utf8");
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
 const homeFrontPageCopy = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
+const homeBookstore = fs.readFileSync(path.resolve("layouts/partials/home_bookstore_spotlight.html"), "utf8");
+const checkoutActions = fs.readFileSync(path.resolve("layouts/partials/shop/checkout-actions.html"), "utf8");
+const shopList = fs.readFileSync(path.resolve("layouts/shop/list.html"), "utf8");
+const shopSingle = fs.readFileSync(path.resolve("layouts/shop/single.html"), "utf8");
+const analyticsScript = fs.readFileSync(path.resolve("assets/js/analytics.js"), "utf8");
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
 const entryThreads = fs.readFileSync(path.resolve("layouts/partials/entry_threads.html"), "utf8");
@@ -61,11 +66,14 @@ test("masthead removes Welcome and promotes Archive as the long-form lane", () =
   assert.match(masthead, />Collections</);
   assert.match(masthead, />Gallery</);
   assert.match(masthead, />Library</);
+  assert.match(masthead, />Bookstore</);
   assert.match(masthead, />Feeling curious\?</);
   assert.match(
     masthead,
-    /aria-label="Primary"[\s\S]*?archive\/"[\s\S]*?>Archive<[\s\S]*?collections\/"[\s\S]*?>Collections<[\s\S]*?gallery\/"[\s\S]*?>Gallery<[\s\S]*?library\/"[\s\S]*?>Library<[\s\S]*?random\/"[\s\S]*?>Feeling curious\?</
+    /aria-label="Primary"[\s\S]*?archive\/"[\s\S]*?>Archive<[\s\S]*?collections\/"[\s\S]*?>Collections<[\s\S]*?gallery\/"[\s\S]*?>Gallery<[\s\S]*?library\/"[\s\S]*?>Library<[\s\S]*?shop\/"[\s\S]*?>Bookstore<[\s\S]*?random\/"[\s\S]*?>Feeling curious\?</
   );
+  assert.match(masthead, /\$isBookstore := or \(eq \.Section "shop"\) \(eq \.RelPermalink "\/shop\/"\)/);
+  assert.match(masthead, /data-analytics-source-slot="primary_nav_bookstore"/);
   assert.match(masthead, /\$isGallery := eq \.Section "gallery"/);
   assert.match(masthead, /href="\{\{ "gallery\/" \| absURL \}\}"/);
   assert.doesNotMatch(masthead, /href="\{\{ "start-here\/" \| absURL \}\}"/);
@@ -106,6 +114,25 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
 });
 
+test("bookstore Amazon exits keep compatible checkout plumbing and automatic tracking", () => {
+  assert.match(checkoutActions, /\.sourceSlot \| default ""/);
+  assert.match(
+    checkoutActions,
+    /index \$product "purchase_url" \| default \(index \$product "stripe_payment_link" \| default ""\)/
+  );
+  assert.match(checkoutActions, /\{\{ with \$sourceSlot \}\}data-analytics-source-slot="\{\{ \. \}\}"\{\{ end \}\}/);
+  assert.match(shopList, /bookstore_index_buy/);
+  assert.match(shopList, /bookstore_index_kindle/);
+  assert.match(shopSingle, /bookstore_detail_buy/);
+  assert.match(shopSingle, /bookstore_detail_kindle/);
+  assert.doesNotMatch(checkoutActions, /data-analytics-event/);
+  assert.match(analyticsScript, /if \(isExternalLink\(url\)\)/);
+  assert.match(
+    analyticsScript,
+    /track\("external_link_click", mergeProps\(datasetProps\(anchor\), currentPageProps\(\)\)\)/
+  );
+});
+
 test("filtered dialogue archive stays wired through the live discovery surfaces", () => {
   assert.match(dialoguesSection, /title: "Syd and Oliver Dialogues"/);
   assert.match(dialoguesSection, /description: "Dialogue pieces from the recurring world of Syd and Oliver/);
@@ -120,7 +147,7 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(footer, /href="\{\{ "about\/" \| absURL \}\}">About</);
   assert.match(footer, /href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">Author</);
   assert.match(footer, /href="\{\{ "library\/" \| absURL \}\}">Library</);
-  assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}">Bookstore</);
+  assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}"[\s\S]*?data-analytics-source-slot="footer_bookstore"[\s\S]*?>Bookstore</);
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
 
   assert.match(randomTemplate, /class="page-header page-shell page-shell--wide"/);
@@ -165,7 +192,7 @@ test("homepage browse band stays curated and replaces Welcome with Library", () 
   assert.match(css, /\.home-browse__item-title\{[\s\S]*font-size:14px;[\s\S]*line-height:1\.45;/);
 });
 
-test("homepage composition keeps the motto, collections, signup ribbon, and archive navigation in order", () => {
+test("homepage composition keeps the bookstore, motto, collections, signup ribbon, and archive navigation in order", () => {
   assert.match(homeFrontPage, /id="home-front-page-title"/);
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
   assert.match(homeFrontPage, /home_front_page_copy\.html/);
@@ -211,6 +238,16 @@ test("homepage composition keeps the motto, collections, signup ribbon, and arch
   assert.match(homeFrontPageCopy, /Read essay/);
   assert.match(homeFrontPageCopy, /Read dialogue/);
 
+  assert.match(homeBookstore, /site\.GetPage "\/shop"/);
+  assert.match(homeBookstore, /first 3 \(sort \.RegularPages "Weight" "asc"\)/);
+  assert.match(homeBookstore, /if gt \(len \$books\) 0/);
+  assert.match(homeBookstore, /partial "shop\/product-data\.html"/);
+  assert.match(homeBookstore, /Books from Outside In Print/);
+  assert.match(homeBookstore, /Three Kindle editions, available now on Amazon\./);
+  assert.match(homeBookstore, /Browse the bookstore/);
+  assert.match(homeBookstore, /data-analytics-source-slot="homepage_bookstore_promo"/);
+  assert.doesNotMatch(homeBookstore, /https:\/\/www\.amazon\.com|checkout-actions|carousel|autoplay/);
+
   assert.match(homeImprintStatement, /class="home-manifesto"/);
   assert.match(homeImprintStatement, /home-manifesto__inner/);
   assert.match(homeImprintStatement, /class="home-manifesto__line"/);
@@ -236,7 +273,8 @@ test("homepage composition keeps the motto, collections, signup ribbon, and arch
   assert.doesNotMatch(entryThreads, /Browse all collections/);
   assert.doesNotMatch(entryThreads, /showArchiveLink/);
 
-  assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
+  assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_bookstore_spotlight.html"'));
+  assert.ok(homepage.indexOf('partial "home_bookstore_spotlight.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(homepage.indexOf('partial "home_imprint_statement.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
   assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
   assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('class="home-browse'));
@@ -244,6 +282,9 @@ test("homepage composition keeps the motto, collections, signup ribbon, and arch
   assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
   assert.match(homepage, /"title" "Free subscription to Bob's Almanack"/);
   assert.match(homepage, /"eyebrow" "Limited time"/);
+  assert.match(css, /\.home-bookstore__grid\{[^}]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);[^}]*\}/);
+  assert.match(css, /@media \(max-width:900px\)\{\s*\.home-bookstore__grid\{[^}]*grid-template-columns:1fr;[^}]*\}\s*\.home-bookstore__card\{[^}]*grid-template-columns:8rem minmax\(0, 1fr\);[^}]*\}\s*\}/);
+  assert.match(css, /@media \(max-width:420px\)\{\s*\.home-bookstore__card\{[^}]*grid-template-columns:5\.75rem minmax\(0, 1fr\);[^}]*\}\s*\.home-bookstore__cta\{[^}]*width:100%;[^}]*\}\s*\}/);
 
   assert.match(galleryContent, /title: "Gallery"/);
   assert.match(galleryContent, /digital gallery/i);
