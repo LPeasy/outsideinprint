@@ -1,4 +1,4 @@
-current: serpent-at-supper
+current: the-empty-hooks
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -635,3 +635,12 @@ cartoons:
     alt: "At a warm-toned supper table, a central diner holds an emerald serpent head in one hand and its severed gray power-cord body in the other while two companions sit beside a dark phone."
     width: 1672
     height: 940
+  - slug: the-empty-hooks
+    title: "The Empty Hooks"
+    date: "2026-07-23"
+    publishDate: "2026-07-23T13:50:00-04:00"
+    image: "/images/editorial/the-empty-hooks.png"
+    essay: "/essays/return/"
+    alt: "Two anonymous neighbors carry a ladder together toward empty hooks inside an open backyard shed while a small porch bulb glows in the distance."
+    width: 1672
+    height: 941
