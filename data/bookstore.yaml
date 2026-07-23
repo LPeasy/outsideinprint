@@ -109,8 +109,8 @@ products:
     kindle_url: "https://www.amazon.com/dp/B0H46WMGJQ"
     kindle_label: "View on Amazon Kindle"
     print_note: "The paperback edition is not yet available."
-    cover_image: "/images/books/the-water-cycle/the-water-cycle-cover-v1.0.jpg"
-    cover_alt: "Cream cover for The Water Cycle with fine blue contour lines, the subtitle Risk, Infrastructure, and Public Memory, a public-memory ledger diagram, and the Outside In Print imprint."
+    cover_image: "/images/books/the-water-cycle/the-water-cycle-cover-v2.0.jpg"
+    cover_alt: "Minimal cream cover for The Water Cycle with an oversized black serif title, thin blue-and-gold water lines, a vertical measurement rule, the subtitle Risk, Infrastructure, and Public Memory, and the Outside In Print imprint."
     suggested_slug: "the-water-cycle"
     formats_heading: "Available format"
     formats:

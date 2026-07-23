@@ -828,7 +828,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/books/the-water-cycle/the-water-cycle-cover-v1.0.jpg'
+    ExpectedImage = 'https://outsideinprint.org/images/books/the-water-cycle/the-water-cycle-cover-v2.0.jpg'
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
@@ -2060,7 +2060,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Three Kindle editions, available now on Amazon\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Kindle eBook.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Kindle eBook.*?\$4\.99.*?the-water-cycle-cover-v1\.0\.jpg.*?Outside In Print.*?The Water Cycle.*?Kindle eBook.*?\$9\.99.*?</section>'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Three Kindle editions, available now on Amazon\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Kindle eBook.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Kindle eBook.*?\$4\.99.*?the-water-cycle-cover-v2\.0\.jpg.*?Outside In Print.*?The Water Cycle.*?Kindle eBook.*?\$9\.99.*?</section>'
     Message = 'expected the homepage bookstore shelf to render all three weighted Kindle records with official covers, attribution, prices, and CTA'
   },
   @{
@@ -2783,7 +2783,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)american-nightmare-cover-v1\.6\.jpg.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?the-water-cycle-cover-v1\.0\.jpg'
+    Pattern = '(?s)american-nightmare-cover-v1\.6\.jpg.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?the-water-cycle-cover-v2\.0\.jpg'
     Message = 'expected the bookstore index to use the official cover images'
   },
   @{
