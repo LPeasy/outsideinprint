@@ -1,4 +1,4 @@
-current: the-empty-hooks
+current: signal-at-the-turn
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -642,5 +642,14 @@ cartoons:
     image: "/images/editorial/the-empty-hooks.png"
     essay: "/essays/return/"
     alt: "Two anonymous neighbors carry a ladder together toward empty hooks inside an open backyard shed while a small porch bulb glows in the distance."
+    width: 1672
+    height: 941
+  - slug: signal-at-the-turn
+    title: "Signal at the Turn"
+    date: "2026-07-24"
+    publishDate: "2026-07-24T07:00:37-04:00"
+    image: "/images/editorial/signal-at-the-turn.png"
+    essay: "/essays/the-update/"
+    alt: "A traveler raises an amber cloth to signal a companion at a trail fork while a fallen tree blocks the straight path and an amber route curves around it."
     width: 1672
     height: 941
