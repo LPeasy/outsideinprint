@@ -1393,6 +1393,7 @@ $requiredUxPages = @(
   'public/almanack/2026-07-04/index.html',
   'public/almanack/2026-07-11/index.html',
   'public/almanack/2026-07-18/index.html',
+  'public/almanack/2026-07-25/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -2958,8 +2959,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?July 18, 2026.*?You go through the things you tolerate\..*?The Warning Reached the Bridge'
-    Message = 'expected the Bob''s Almanack collection page to feature the July 18 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?July 25, 2026.*?Paperwork cannot repair a car\..*?The Bolt Beside the Gas Tank'
+    Message = 'expected the Bob''s Almanack collection page to feature the July 25 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -3115,7 +3116,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?July 18, 2026.*?In the Margins.*?Number.*?Document.*?Establishing a Fixed Time Period of Admission.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?July 25, 2026.*?In the Margins.*?Number.*?Document.*?Critical Minerals.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
@@ -3179,6 +3180,27 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-07-18/index.html'
     Pattern = '/images/essays/(the-warning-reached-the-bridge|the-fit|the-repair|your-part)/hero\.png'
     Message = 'expected the July 18 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-07-25/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?July 25, 2026.*?Issue 12.*?Paperwork cannot repair a car\..*?Plans change\. An update lets other people change theirs\.'
+    Message = 'expected the July 25 Almanack issue page to render the nameplate, issue number, opening quote, and closing quote'
+  },
+  @{
+    Path = 'public/almanack/2026-07-25/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the July 25 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-07-25/index.html'
+    Pattern = '(?s)/images/editorial/the-closed-window\.png.*?/images/editorial/signal-at-the-turn\.png.*?/images/editorial/the-empty-hooks\.png.*?/images/editorial/serpent-at-supper\.png'
+    Message = 'expected the July 25 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-07-25/index.html'
+    Pattern = '/images/essays/(the-bolt-beside-the-gas-tank|the-update|return|the-six-hour-news-cycle)/hero\.png'
+    Message = 'expected the July 25 Almanack issue not to use essay hero images for essay cards'
     ShouldNotMatch = $true
   },
   @{
