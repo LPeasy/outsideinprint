@@ -1,4 +1,4 @@
-current: signal-at-the-turn
+current: the-crooked-cake
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -651,5 +651,14 @@ cartoons:
     image: "/images/editorial/signal-at-the-turn.png"
     essay: "/essays/the-update/"
     alt: "A traveler raises an amber cloth to signal a companion at a trail fork while a fallen tree blocks the straight path and an amber route curves around it."
+    width: 1672
+    height: 941
+  - slug: the-crooked-cake
+    title: "The Crooked Cake"
+    date: "2026-07-26"
+    publishDate: "2026-07-26T16:07:10-04:00"
+    image: "/images/editorial/the-crooked-cake.png"
+    essay: "/essays/say-thanks/"
+    alt: "Editorial cartoon showing an adult holding a fork over a slice of cake while an apron-wearing baker rests an open hand beside the remaining cake with rust-colored frosting flowers."
     width: 1672
     height: 941
