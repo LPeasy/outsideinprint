@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -117,10 +117,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Setup Hugo (extended)
         shell: bash
@@ -175,10 +175,11 @@ jobs:
 
       - name: Upload Public Route Debug Artifact
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: public-route-debug
           if-no-files-found: warn
+          include-hidden-files: true
           path: |
             public/authors/**
             public/about/**
@@ -186,9 +187,10 @@ jobs:
             public/.oip-build-manifest.json
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
+          include-hidden-files: true
 
   deploy:
     environment:
@@ -200,11 +202,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       - name: Wait for Pages propagation
         shell: bash
@@ -248,7 +250,7 @@ jobs:
 
       - name: Upload SEO Rollout Probe Artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: seo-rollout-probe
           if-no-files-found: warn

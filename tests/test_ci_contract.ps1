@@ -91,6 +91,71 @@ $publicManifestWriter = Get-Content -Path $publicManifestWriterPath -Raw
 $publicOutputTest = Get-Content -Path $publicOutputTestPath -Raw
 $seoMetadataAudit = Get-Content -Path $seoMetadataAuditPath -Raw
 
+function Assert-WorkflowActionReferences {
+  param(
+    [Parameter(Mandatory)]
+    [string]$WorkflowName,
+
+    [Parameter(Mandatory)]
+    [string]$WorkflowText,
+
+    [Parameter(Mandatory)]
+    [hashtable]$ExpectedReferences
+  )
+
+  $actualCounts = @{}
+  foreach ($match in [regex]::Matches($WorkflowText, '(?m)^\s*uses:\s*(actions/[^\s#]+)\s*$')) {
+    $reference = $match.Groups[1].Value
+    if (-not $actualCounts.ContainsKey($reference)) {
+      $actualCounts[$reference] = 0
+    }
+    $actualCounts[$reference]++
+  }
+
+  foreach ($expected in $ExpectedReferences.GetEnumerator()) {
+    $actualCount = if ($actualCounts.ContainsKey($expected.Key)) {
+      [int]$actualCounts[$expected.Key]
+    }
+    else {
+      0
+    }
+
+    if ($actualCount -ne [int]$expected.Value) {
+      throw "$WorkflowName must reference '$($expected.Key)' exactly $($expected.Value) time(s); found $actualCount."
+    }
+  }
+
+  $unexpectedReferences = @(
+    $actualCounts.Keys |
+      Where-Object { -not $ExpectedReferences.ContainsKey($_) } |
+      Sort-Object
+  )
+  if ($unexpectedReferences.Count -gt 0) {
+    throw "$WorkflowName contains unexpected GitHub Action references: $($unexpectedReferences -join ', ')."
+  }
+}
+
+function Get-WorkflowStepBlock {
+  param(
+    [Parameter(Mandatory)]
+    [string]$WorkflowName,
+
+    [Parameter(Mandatory)]
+    [string]$WorkflowText,
+
+    [Parameter(Mandatory)]
+    [string]$StepName
+  )
+
+  $pattern = '(?ms)^      - name:\s*' + [regex]::Escape($StepName) + '\s*\r?\n.*?(?=^      - name:|\z)'
+  $stepMatch = [regex]::Match($WorkflowText, $pattern)
+  if (-not $stepMatch.Success) {
+    throw "$WorkflowName must contain the '$StepName' step."
+  }
+
+  return $stepMatch.Value
+}
+
 . (Join-Path $repoRoot "tools/lib/Toolchain.Wrapper.ps1")
 
 $wrapperArgumentFixture = [pscustomobject]@{
@@ -172,6 +237,28 @@ if ($seoRolloutDoc -notmatch 'report_seo_rollout_window\.ps1') {
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
   throw "deploy.yml must run the CI contract test."
+}
+
+Assert-WorkflowActionReferences `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -ExpectedReferences @{
+    'actions/checkout@v7' = 3
+    'actions/configure-pages@v6' = 1
+    'actions/deploy-pages@v5' = 1
+    'actions/upload-artifact@v7' = 2
+    'actions/upload-pages-artifact@v5' = 1
+  }
+
+Assert-WorkflowActionReferences `
+  -WorkflowName "refresh-analytics.yml" `
+  -WorkflowText $refreshWorkflow `
+  -ExpectedReferences @{
+    'actions/checkout@v7' = 1
+  }
+
+if (($deployWorkflow + "`n" + $refreshWorkflow) -match 'ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION') {
+  throw "GitHub Actions workflows must not opt back into the unsupported Node 20 runtime."
 }
 
 if ($deployWorkflow -notmatch "fetch-depth:\s*0") {
@@ -260,8 +347,20 @@ if ($deployWorkflow -notmatch "\.\/tests\/show_public_route_debug\.ps1") {
   throw "deploy.yml must expose a failure-only public route debug step."
 }
 
-if ($deployWorkflow -notmatch "actions\/upload-artifact@v4") {
-  throw "deploy.yml must upload a failure-only public route debug artifact."
+$publicRouteDebugArtifactStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -StepName "Upload Public Route Debug Artifact"
+if ($publicRouteDebugArtifactStep -notmatch '(?m)^\s*include-hidden-files:\s*true\s*$') {
+  throw "The public route debug artifact must include hidden files so it captures .oip-build-manifest.json."
+}
+
+$pagesArtifactStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -StepName "Upload artifact"
+if ($pagesArtifactStep -notmatch '(?m)^\s*include-hidden-files:\s*true\s*$') {
+  throw "The GitHub Pages artifact must include hidden files so .oip-build-manifest.json remains public."
 }
 
 foreach ($requiredDebugPath in @(
