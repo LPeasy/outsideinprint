@@ -1,4 +1,4 @@
-current: the-crooked-cake
+current: the-crooked-row
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -660,5 +660,14 @@ cartoons:
     image: "/images/editorial/the-crooked-cake.png"
     essay: "/essays/say-thanks/"
     alt: "Editorial cartoon showing an adult holding a fork over a slice of cake while an apron-wearing baker rests an open hand beside the remaining cake with rust-colored frosting flowers."
+    width: 1672
+    height: 941
+  - slug: the-crooked-row
+    title: "The Crooked Row"
+    date: "2026-07-27"
+    publishDate: "2026-07-27T13:52:31-04:00"
+    image: "/images/editorial/the-crooked-row.png"
+    essay: "/essays/forget-the-score/"
+    alt: "An anonymous gardener waters an uneven bed of pastel flowers while a loose measuring string sags between two stakes in a densely crosshatched backyard."
     width: 1672
     height: 941
