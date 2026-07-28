@@ -1,4 +1,4 @@
-current: the-crooked-row
+current: the-shape-opens
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -669,5 +669,14 @@ cartoons:
     image: "/images/editorial/the-crooked-row.png"
     essay: "/essays/forget-the-score/"
     alt: "An anonymous gardener waters an uneven bed of pastel flowers while a loose measuring string sags between two stakes in a densely crosshatched backyard."
+    width: 1672
+    height: 941
+  - slug: the-shape-opens
+    title: "The Shape Opens"
+    date: "2026-07-28"
+    publishDate: "2026-07-28T13:21:29-04:00"
+    image: "/images/editorial/the-shape-opens.png"
+    essay: "/essays/reverse-origami/"
+    alt: "Two relaxed hands unfold a paper bird into a broad creased sheet against a dark crosshatched backdrop as a warm golden beam from beyond the top of the frame illuminates the origami."
     width: 1672
     height: 941
