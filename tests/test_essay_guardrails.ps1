@@ -720,6 +720,28 @@ I still notice the light change when I put the phone down.
 
   @'
 ---
+title: "Source-Free Affirmation Series Entry"
+date: 2025-07-14
+draft: false
+slug: "source-free-affirmation-series-entry"
+section_label: "Musing"
+library_type: "musing"
+collections: ["what-you-tell-yourself"]
+source_mode: "SOURCE_FREE"
+external_factual_claims: "none"
+description: "A source-free affirmation series fixture."
+image_exempt: true
+image_exempt_reason: "The source-free reflection may publish without a visual."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+I still do the things I say I am going to do.
+'@ | Set-Content -Path (Join-Path $musingRoot "source-free-affirmation-series-entry.md") -Encoding UTF8
+
+  @'
+---
 title: "Unqualified Musing"
 date: 2025-07-14
 draft: false
@@ -761,6 +783,13 @@ This fixture still keeps the ordinary essay audit requirement.
   Assert-True ($sourceFreeMusingOutput.Contains("Source-free Musing audit exemptions: 1")) "Expected a declared source-free Musing exemption to be reported."
   Assert-True (-not $sourceFreeMusingOutput.Contains("missing_editorial_philosophy_audit")) "Expected a declared source-free Musing not to report missing philosophy audit evidence."
   Assert-True (-not $sourceFreeMusingOutput.Contains("adverbial_still_construction")) "Expected a fully declared source-free Musing to retain personal adverbial still cadence."
+
+  $sourceFreeAffirmationOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/musings/source-free-affirmation-series-entry.md" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $sourceFreeAffirmationExit = $LASTEXITCODE
+  Assert-True ($sourceFreeAffirmationExit -eq 0) "Expected a fully declared What You Tell Yourself entry to use the source-free Musing exemption."
+  Assert-True ($sourceFreeAffirmationOutput.Contains("Source-free Musing audit exemptions: 1")) "Expected the derived series source-free exemption to be reported."
+  Assert-True (-not $sourceFreeAffirmationOutput.Contains("missing_editorial_philosophy_audit")) "Expected a declared source-free affirmation entry not to report missing philosophy audit evidence."
+  Assert-True (-not $sourceFreeAffirmationOutput.Contains("adverbial_still_construction")) "Expected a fully declared affirmation entry to retain personal adverbial still cadence."
 
   $unqualifiedMusingOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/musings/unqualified-musing.md" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $unqualifiedMusingExit = $LASTEXITCODE

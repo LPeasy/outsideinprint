@@ -32,13 +32,13 @@ Musings is Outside In Print's most open authorial lane. A Musing may use unquali
 
 Broad or certain language does not become an external factual claim merely because it is declarative. An author does not need to add disclaimers such as "I think," "in my view," or "for me" to a personal conclusion, spiritual assurance, or life observation. Such writing needs no citations, research package, source checklist, or OIP-99 report.
 
-The `SOURCE_FREE` declaration has one narrow job: it means the Musing makes no concrete external factual claim. If a Musing makes an empirical, historical, current, legal, medical, statistical, scientific, or named-actor claim about the world, record appropriate sources and evidence control for that claim. It may remain a Musing when reflection remains its primary form; move it to another OIP lane only when it becomes chiefly reporting, analysis, or a public-claim package.
+The `SOURCE_FREE` declaration has one narrow job: it means the Musing makes no concrete external factual claim. Its collection must be either `musings` or an approved source-free series governed by its own contract. What You Tell Yourself is the first approved derived series. If a Musing makes an empirical, historical, current, legal, medical, statistical, scientific, or named-actor claim about the world, record appropriate sources and evidence control for that claim. It may remain a Musing when reflection remains its primary form; move it to another OIP lane only when it becomes chiefly reporting, analysis, or a public-claim package.
 
 Do not add a named source merely to decorate a personal reflection. A site integration may carry a compact internal editorial record when useful, but it must describe the actual claim posture rather than invent evidence requirements for an author's voice.
 
 ## Authoring And Publication
 
-New entries belong under content/essays/musings/ so they remain in the archive and Library. Use explicit front matter with a title, date, draft state, concise public description, section_label: "Musing", library_type: "musing", and collections: ["musings"].
+New entries belong under content/essays/musings/ so they remain in the archive and Library. Use explicit front matter with a title, date, draft state, concise public description, section_label: "Musing", library_type: "musing", and either collections: ["musings"] or the single approved collection declared by a derived source-free series contract.
 
 The source-free exception requires both source_mode: "SOURCE_FREE" and external_factual_claims: "none". A public Musing needs either a social image or a documented image_exempt reason, but no visual is otherwise required.
 

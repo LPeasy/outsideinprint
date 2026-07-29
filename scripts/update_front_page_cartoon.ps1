@@ -183,7 +183,7 @@ function Test-IsSourceFreeMusing {
     return $false
   }
 
-  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?musings["'']?\s*\]\s*$'
+  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?(?:musings|what-you-tell-yourself)["'']?\s*\]\s*$'
 }
 
 function Invoke-GitRequired {

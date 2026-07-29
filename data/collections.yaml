@@ -74,6 +74,31 @@ collections:
       tags: []
       sections: []
 
+  - slug: what-you-tell-yourself
+    title: What You Tell Yourself
+    kind: series
+    public: true
+    force_public: true
+    min_items: 1
+    explicit_only: true
+    featured: false
+    weight: 14
+    start_here: i-do-what-i-say
+    sort: date_desc
+    description: Short reflections on the words we repeat, the identities we build, and the actions that make those words real.
+    metadata:
+      - label: Format
+        value: Short reflections
+      - label: Scope
+        value: Affirmations, identity, and action
+      - label: Lane
+        value: Personal series
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
   - slug: the-ledger
     title: The Ledger
     kind: series

@@ -201,6 +201,13 @@ cartoons:
     alt: "Newest cartoon fixture."
     width: 1
     height: 1
+  - slug: series-cartoon
+    title: "Series Cartoon"
+    date: "2025-07-14"
+    image: "/images/editorial/series-cartoon.png"
+    alt: "Series cartoon fixture."
+    width: 1
+    height: 1
 '@ | Set-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Encoding utf8NoBOM
 
     @'
@@ -221,6 +228,25 @@ edition: "First web edition"
 
 An ordinary personal reflection.
 '@ | Set-Content -LiteralPath (Join-Path $tempEssayDir 'source-free-musing.md') -Encoding utf8NoBOM
+
+    @'
+---
+title: "Source-Free Affirmation Series Entry"
+date: 2025-07-14
+draft: false
+slug: "source-free-affirmation-series-entry"
+section_label: "Musing"
+library_type: "musing"
+collections: ["what-you-tell-yourself"]
+source_mode: "SOURCE_FREE"
+external_factual_claims: "none"
+description: "A source-free affirmation series fixture."
+version: "1.0"
+edition: "First web edition"
+---
+
+I do the things I say I am going to do.
+'@ | Set-Content -LiteralPath (Join-Path $tempEssayDir 'source-free-affirmation-series-entry.md') -Encoding utf8NoBOM
 
     @'
 ---
@@ -268,6 +294,16 @@ This fixture requires an Editorial Philosophy Audit.
     Assert-True `
       -Condition ([regex]::IsMatch($updatedData, '(?ms)^\s*- slug: target-cartoon\s+.*?^\s+essay: "/essays/source-free-musing/"\s*$')) `
       -Message 'Association-only cartoon update did not add the source-free Musing route.'
+
+    & $updateScript `
+      -Root $tempRoot `
+      -LinkExistingSlug 'series-cartoon' `
+      -EssayPath '/essays/source-free-affirmation-series-entry/' | Out-Null
+
+    $seriesUpdatedData = Get-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Raw
+    Assert-True `
+      -Condition ([regex]::IsMatch($seriesUpdatedData, '(?ms)^\s*- slug: series-cartoon\s+.*?^\s+essay: "/essays/source-free-affirmation-series-entry/"\s*$')) `
+      -Message 'Association-only cartoon update did not recognize the source-free affirmation series route.'
 
     $unqualifiedBlocked = $false
     try {
