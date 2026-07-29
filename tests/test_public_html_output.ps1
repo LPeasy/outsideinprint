@@ -768,7 +768,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/gallery/index.html' = @{
     Title = 'Gallery'
-    Description = 'A digital gallery of Outside In Print front page political cartoons.'
+    Description = 'A digital gallery of Outside In Print front-page illustrations.'
     Canonical = 'https://outsideinprint.org/gallery/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -793,6 +793,16 @@ $requiredMetadataPages = [ordered]@{
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
     ExpectedImageAlt = 'Outside In Print social card for the Musings collection.'
+  }
+  'public/collections/the-things-we-say/index.html' = @{
+    Title = 'The Things We Say'
+    Description = 'Plain personal reflections built around the words we choose and the lives we practice.'
+    Canonical = 'https://outsideinprint.org/collections/the-things-we-say/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
+    ExpectedImageAlt = 'Outside In Print social card for The Things We Say collection.'
   }
   'public/shop/index.html' = @{
     Title = 'Bookstore'

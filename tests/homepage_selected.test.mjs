@@ -35,7 +35,7 @@ function normalizeDateString(value) {
 
 function selectHomepageLongform(pages) {
   const frontPagePages = pages
-    .filter((page) => (page.kind === "essay" || page.kind === "dialogue") && page.draft !== true)
+    .filter((page) => ["essay", "affirmation", "dialogue"].includes(page.kind) && page.draft !== true)
     .sort((left, right) => right.date - left.date);
 
   const latest = frontPagePages[0] ?? null;
@@ -100,7 +100,7 @@ function parseFrontMatter(filePath) {
   return data;
 }
 
-test("homepage partial keeps one lead and fills the right rail with newest essays and dialogues", () => {
+test("homepage partial keeps one lead and fills the right rail with newest essays, affirmations, and dialogues", () => {
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const frontPageCopySource = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
@@ -116,10 +116,10 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   const pageListItem = fs.readFileSync(path.resolve("layouts/partials/discovery/page-list-item.html"), "utf8");
 
   assert.match(source, /partial "archive\/longform-kind\.html"/);
-  assert.match(source, /Homepage selection follows the archive longform model for essays and dialogues/);
+  assert.match(source, /Homepage selection follows the archive longform model for essays, affirmations, and dialogues/);
   assert.match(source, /\{\{ range site\.RegularPages \}\}/);
   assert.match(source, /\{\{ \$kind := partial "archive\/longform-kind\.html" \. \}\}/);
-  assert.match(source, /\{\{ if or \(eq \$kind "essay"\) \(eq \$kind "dialogue"\) \}\}/);
+  assert.match(source, /\{\{ if in \(slice "essay" "affirmation" "dialogue"\) \$kind \}\}/);
   assert.match(source, /sort \(sort \$frontPagePages "Title" "asc"\) "Date" "desc"/);
   assert.match(source, /\{\{ \$hero := \$latest \}\}/);
   assert.match(source, /\{\{ \$showLatestSlot := false \}\}/);
@@ -144,13 +144,16 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(frontPageSource, /\{\{ \$readLabel \}\} &rarr;/);
   assert.match(frontPageCopySource, /partial "archive\/longform-kind\.html"/);
   assert.match(frontPageCopySource, /Latest Essay/);
+  assert.match(frontPageCopySource, /Latest Affirmation/);
   assert.match(frontPageCopySource, /Latest Dialogue/);
   assert.match(frontPageCopySource, /Read essay/);
+  assert.match(frontPageCopySource, /Read affirmation/);
   assert.match(frontPageCopySource, /Read dialogue/);
+  assert.match(frontPageCopySource, /\$sectionLabel = "Affirmation"/);
   assert.match(frontPageCopySource, /Dialogues/);
   assert.match(frontPageSource, /site\.Data\.editorial_cartoons/);
   assert.match(frontPageSource, /currentCartoonSlug/);
-  assert.match(frontPageSource, /\$orderedCartoons := sort \$cartoons "date" "desc"/);
+  assert.match(frontPageSource, /\$orderedCartoons := sort \(sort \$cartoons "slug" "asc"\) "date" "desc"/);
   assert.match(frontPageSource, /\$recentCartoons := slice/);
   assert.match(frontPageSource, /lt \(len \$recentCartoons\) 2/);
   assert.match(frontPageSource, /View gallery/);
@@ -244,7 +247,7 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.doesNotMatch(thinkOutsideEntry, /essay:/);
 });
 
-test("latest essay or dialogue leads while the right rail uses the next newest longform pages", () => {
+test("latest essay, affirmation, or dialogue leads while the right rail uses the next newest longform pages", () => {
   const pages = [
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") },
     { relPermalink: "/essays/hero/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
@@ -254,15 +257,16 @@ test("latest essay or dialogue leads while the right rail uses the next newest l
     { relPermalink: "/essays/core-c/", kind: "essay", draft: false, date: new Date("2026-02-05") },
     { relPermalink: "/essays/core-d/", kind: "essay", draft: false, date: new Date("2026-02-01") },
     { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", draft: false, date: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/i-do-what-i-say/", kind: "affirmation", draft: false, date: new Date("2026-04-02") },
     { relPermalink: "/essays/draft/", kind: "essay", draft: true, date: new Date("2026-04-02"), homepage_featured: true, homepage_featured_until: "2026-04-30" }
   ];
 
   const result = selectHomepageLongform(pages);
 
-  assert.equal(result.hero?.relPermalink, "/syd-and-oliver/latest-dialogue/");
-  assert.equal(result.latest?.relPermalink, "/syd-and-oliver/latest-dialogue/");
+  assert.equal(result.hero?.relPermalink, "/essays/i-do-what-i-say/");
+  assert.equal(result.latest?.relPermalink, "/essays/i-do-what-i-say/");
   assert.equal(result.showLatestSlot, false);
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/essays/latest/", "/essays/expired/", "/essays/core-a/", "/essays/core-b/"]);
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/syd-and-oliver/latest-dialogue/", "/essays/latest/", "/essays/expired/", "/essays/core-a/"]);
   assert.equal(result.secondary.length, 4);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));

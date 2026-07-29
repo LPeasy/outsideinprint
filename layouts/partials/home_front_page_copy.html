@@ -8,6 +8,10 @@
   {{- $sectionLabel = "Dialogues" -}}
   {{- $latestLabel = "Latest Dialogue" -}}
   {{- $readLabel = "Read dialogue" -}}
+{{- else if eq $kind "affirmation" -}}
+  {{- $sectionLabel = "Affirmation" -}}
+  {{- $latestLabel = "Latest Affirmation" -}}
+  {{- $readLabel = "Read affirmation" -}}
 {{- end -}}
 
 {{- return (dict

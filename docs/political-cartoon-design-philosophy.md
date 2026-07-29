@@ -2,6 +2,14 @@
 
 Outside In Print political cartoons make policy visible by turning it into a physical machine, trap, wound, or obstruction.
 
+This contract governs political cartoons only. The Things We Say uses the
+separate OIP Watercolor Chiaroscuro contract in
+`editorial/the-things-we-say-publication-contract.md`. Its illustrations
+share this Gallery's sketched linework and chiaroscuro, while using
+transparent watercolor, a controlled full palette, and nonpolitical
+staging. The single-accent-color rule below does not apply to that
+collection.
+
 Each cartoon should take an abstract civic problem and convert it into one dominant, legible object-metaphor. The gallery language should be concrete enough that a reader understands the thesis before reading every label: a spreadsheet as an industrial smokestack, a shipping strait as a line of fire, corporate protection as a glass cloche, pesticide regulation as a stamped warning-label battlefield, or diplomacy as a phone cord chained to a blockade.
 
 The house style is serious newspaper engraving with modern cinematic composition: black ink, dense crosshatching, heavy chiaroscuro, and a wide 16:9 stage. The subject should be styled in a classic American cartoon aesthetic. Backgrounds and darker elements should use modern high-contrast crosshatching.

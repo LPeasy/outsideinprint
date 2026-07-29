@@ -44,6 +44,7 @@ try {
   $scriptRoot = Join-Path $tempRoot "scripts"
   $essayRoot = Join-Path $tempRoot "content/essays"
   $musingRoot = Join-Path $essayRoot "musings"
+  $affirmationRoot = Join-Path $essayRoot "affirmations"
   $reportRoot = Join-Path $tempRoot "content/reports"
   $workingPaperRoot = Join-Path $tempRoot "content/working-papers"
   $sydRoot = Join-Path $tempRoot "content/syd-and-oliver"
@@ -53,6 +54,7 @@ try {
   New-Item -Path $scriptRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $essayRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $musingRoot -ItemType Directory -Force | Out-Null
+  New-Item -Path $affirmationRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $reportRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $workingPaperRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $sydRoot -ItemType Directory -Force | Out-Null
@@ -720,25 +722,69 @@ I still notice the light change when I put the phone down.
 
   @'
 ---
-title: "Source-Free Affirmation Series Entry"
+title: "Source-Free Affirmation"
 date: 2025-07-14
 draft: false
-slug: "source-free-affirmation-series-entry"
-section_label: "Musing"
-library_type: "musing"
-collections: ["what-you-tell-yourself"]
+slug: "source-free-affirmation"
+section_label: "Affirmation"
+library_type: "affirmation"
+collections: ["the-things-we-say"]
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
-description: "A source-free affirmation series fixture."
+description: "A source-free Affirmation fixture."
 image_exempt: true
-image_exempt_reason: "The source-free reflection may publish without a visual."
+image_exempt_reason: "This guardrail fixture isolates the source-free predicate."
 version: "1.0"
 edition: "First web edition"
 featured: false
 ---
 
 I still do the things I say I am going to do.
-'@ | Set-Content -Path (Join-Path $musingRoot "source-free-affirmation-series-entry.md") -Encoding UTF8
+'@ | Set-Content -Path (Join-Path $affirmationRoot "source-free-affirmation.md") -Encoding UTF8
+
+  @'
+---
+title: "Crosswired Affirmation"
+date: 2025-07-14
+draft: false
+slug: "crosswired-affirmation"
+section_label: "Affirmation"
+library_type: "affirmation"
+collections: ["musings"]
+source_mode: "SOURCE_FREE"
+external_factual_claims: "none"
+description: "An Affirmation with the wrong collection."
+image_exempt: true
+image_exempt_reason: "This guardrail fixture isolates the source-free predicate."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+I still use the wrong collection.
+'@ | Set-Content -Path (Join-Path $affirmationRoot "crosswired-affirmation.md") -Encoding UTF8
+
+  @'
+---
+title: "Crosswired Musing"
+date: 2025-07-14
+draft: false
+slug: "crosswired-musing"
+section_label: "Musing"
+library_type: "musing"
+collections: ["the-things-we-say"]
+source_mode: "SOURCE_FREE"
+external_factual_claims: "none"
+description: "A Musing with the wrong collection."
+image_exempt: true
+image_exempt_reason: "This guardrail fixture isolates the source-free predicate."
+version: "1.0"
+edition: "First web edition"
+featured: false
+---
+
+I still use the wrong collection.
+'@ | Set-Content -Path (Join-Path $musingRoot "crosswired-musing.md") -Encoding UTF8
 
   @'
 ---
@@ -784,12 +830,23 @@ This fixture still keeps the ordinary essay audit requirement.
   Assert-True (-not $sourceFreeMusingOutput.Contains("missing_editorial_philosophy_audit")) "Expected a declared source-free Musing not to report missing philosophy audit evidence."
   Assert-True (-not $sourceFreeMusingOutput.Contains("adverbial_still_construction")) "Expected a fully declared source-free Musing to retain personal adverbial still cadence."
 
-  $sourceFreeAffirmationOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/musings/source-free-affirmation-series-entry.md" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $sourceFreeAffirmationOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/affirmations/source-free-affirmation.md" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $sourceFreeAffirmationExit = $LASTEXITCODE
-  Assert-True ($sourceFreeAffirmationExit -eq 0) "Expected a fully declared What You Tell Yourself entry to use the source-free Musing exemption."
-  Assert-True ($sourceFreeAffirmationOutput.Contains("Source-free Musing audit exemptions: 1")) "Expected the derived series source-free exemption to be reported."
-  Assert-True (-not $sourceFreeAffirmationOutput.Contains("missing_editorial_philosophy_audit")) "Expected a declared source-free affirmation entry not to report missing philosophy audit evidence."
-  Assert-True (-not $sourceFreeAffirmationOutput.Contains("adverbial_still_construction")) "Expected a fully declared affirmation entry to retain personal adverbial still cadence."
+  Assert-True ($sourceFreeAffirmationExit -eq 0) "Expected a fully declared source-free Affirmation to use its separate exemption."
+  Assert-True ($sourceFreeAffirmationOutput.Contains("Source-free Affirmation audit exemptions: 1")) "Expected the source-free Affirmation exemption to be reported separately."
+  Assert-True (-not $sourceFreeAffirmationOutput.Contains("missing_editorial_philosophy_audit")) "Expected a declared source-free Affirmation not to report missing philosophy audit evidence."
+  Assert-True (-not $sourceFreeAffirmationOutput.Contains("adverbial_still_construction")) "Expected a fully declared Affirmation to retain personal adverbial still cadence."
+
+  foreach ($crosswiredPath in @(
+    "content/essays/affirmations/crosswired-affirmation.md",
+    "content/essays/musings/crosswired-musing.md"
+  )) {
+    $crosswiredOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths $crosswiredPath -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+    $crosswiredExit = $LASTEXITCODE
+    Assert-True ($crosswiredExit -eq 1) "Expected crosswired source-free metadata to retain the normal philosophy audit gate: $crosswiredPath"
+    Assert-True ($crosswiredOutput.Contains("missing_editorial_philosophy_audit")) "Expected crosswired metadata to report missing philosophy audit evidence: $crosswiredPath"
+    Assert-True ($crosswiredOutput.Contains("adverbial_still_construction")) "Expected crosswired metadata to retain the adverbial still guardrail: $crosswiredPath"
+  }
 
   $unqualifiedMusingOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/musings/unqualified-musing.md" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $unqualifiedMusingExit = $LASTEXITCODE

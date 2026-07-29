@@ -200,6 +200,7 @@ function Get-PhilosophyAuditSubject {
     Draft = $draft
     Kind = Get-PhilosophyContentKind -RepoRoot $RepoRoot -PathValue $PathValue
     SourceFreeMusing = Test-IsSourceFreeMusing -Path $PathValue
+    SourceFreeAffirmation = Test-IsSourceFreeAffirmation -Path $PathValue
   }
 }
 
@@ -246,7 +247,60 @@ function Test-IsSourceFreeMusing {
     return $false
   }
 
-  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?(?:musings|what-you-tell-yourself)["'']?\s*\]\s*$'
+  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?musings["'']?\s*\]\s*$'
+}
+
+function Test-IsSourceFreeAffirmation {
+  param([string]$Path)
+
+  $frontMatter = Get-FrontMatterMap -Path $Path
+  foreach ($key in @('section_label', 'library_type', 'collections', 'source_mode', 'external_factual_claims')) {
+    if (-not $frontMatter.ContainsKey($key)) {
+      return $false
+    }
+  }
+
+  if (([string]$frontMatter['section_label']).Trim() -ine 'affirmation') {
+    return $false
+  }
+  if (([string]$frontMatter['library_type']).Trim() -ine 'affirmation') {
+    return $false
+  }
+  if (([string]$frontMatter['source_mode']).Trim() -ine 'source_free') {
+    return $false
+  }
+  if (([string]$frontMatter['external_factual_claims']).Trim() -ine 'none') {
+    return $false
+  }
+
+  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?the-things-we-say["'']?\s*\]\s*$'
+}
+
+function Test-IsSourceFreeReflection {
+  param([string]$Path)
+
+  return (
+    (Test-IsSourceFreeMusing -Path $Path) -or
+    (Test-IsSourceFreeAffirmation -Path $Path)
+  )
+}
+
+function Test-OnlyCanonicalPullQuoteHtml {
+  param([string]$Path)
+
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    return $false
+  }
+
+  $content = [System.IO.File]::ReadAllText($Path)
+  $pullQuotePattern = '(?is)<figure\b[^>]*class\s*=\s*["''][^"'']*\bfranklin-pullquote\b[^"'']*["''][^>]*>\s*<blockquote\b[^>]*>.+?</blockquote>\s*<figcaption\b[^>]*>.+?</figcaption>\s*</figure>'
+  $pullQuotes = @([regex]::Matches($content, $pullQuotePattern))
+  if ($pullQuotes.Count -lt 1) {
+    return $false
+  }
+
+  $withoutPullQuotes = [regex]::Replace($content, $pullQuotePattern, '')
+  return -not [regex]::IsMatch($withoutPullQuotes, '(?is)<\s*/?\s*[a-z][^>]*>')
 }
 
 function Test-AuditPassLine {
@@ -1111,7 +1165,7 @@ if ($targetPaths.Count -eq 0) {
 }
 
 $essayAuditPaths = @($targetPaths | Where-Object { Test-IsEssayContentPath -RepoRoot $Root -PathValue $_ })
-$legacyImportPaths = @($essayAuditPaths | Where-Object { -not (Test-IsSourceFreeMusing -Path $_) })
+$legacyImportPaths = @($essayAuditPaths | Where-Object { -not (Test-IsSourceFreeReflection -Path $_) })
 $philosophyAuditSubjects = @(
   $targetPaths |
     Where-Object { -not [string]::IsNullOrWhiteSpace((Get-PhilosophyContentKind -RepoRoot $Root -PathValue $_)) } |
@@ -1165,6 +1219,19 @@ foreach ($row in $rows) {
     ($warningIssues -contains $_) -and ($baselineIssueTypes -notcontains $_)
   })
 
+  $rowFullPath = Get-NormalizedRepoPath -RepoRoot $Root -PathValue ([string]$row.path)
+  if (-not $rowFullPath) {
+    $rowFullPath = Get-NormalizedRepoPath -RepoRoot $Root -PathValue ("content/" + [string]$row.path)
+  }
+  if (
+    ($rowBlockers -contains 'embed_remnants') -and
+    $rowFullPath -and
+    (Test-IsSourceFreeReflection -Path $rowFullPath) -and
+    (Test-OnlyCanonicalPullQuoteHtml -Path $rowFullPath)
+  ) {
+    $rowBlockers = @($rowBlockers | Where-Object { $_ -ne 'embed_remnants' })
+  }
+
   if ((-not [bool]$row.has_description) -and (-not [bool]$row.draft)) {
     if ($RequireDescription) {
       $rowBlockers += 'missing_description'
@@ -1174,8 +1241,7 @@ foreach ($row in $rows) {
   }
 
   if ($RequireFeaturedImage -and (-not [bool]$row.draft)) {
-    $fullPath = Get-NormalizedRepoPath -RepoRoot $Root -PathValue ([string]$row.path)
-    if ($fullPath -and -not (Test-FrontMatterHasSocialImage -Path $fullPath) -and -not (Test-FrontMatterHasImageExemption -Path $fullPath)) {
+    if ($rowFullPath -and -not (Test-FrontMatterHasSocialImage -Path $rowFullPath) -and -not (Test-FrontMatterHasImageExemption -Path $rowFullPath)) {
       $rowBlockers += 'missing_featured_image'
     }
   }
@@ -1215,9 +1281,9 @@ foreach ($targetPath in $targetPaths) {
     }
   }
 
-  # Fully declared source-free Musings preserve authorial personal cadence.
-  # Their narrow exemption is defined in editorial/musings-series-contract.md.
-  if (Test-IsSourceFreeMusing -Path $targetPath) {
+  # Fully declared source-free reflections preserve authorial personal cadence.
+  # Their narrow exemptions are defined by their separate publication contracts.
+  if (Test-IsSourceFreeReflection -Path $targetPath) {
     continue
   }
 
@@ -1249,7 +1315,7 @@ if ($RequireEditorialPhilosophyAudit) {
       continue
     }
 
-    if ([bool]$subject.SourceFreeMusing) {
+    if ([bool]$subject.SourceFreeMusing -or [bool]$subject.SourceFreeAffirmation) {
       continue
     }
 
@@ -1267,6 +1333,7 @@ Write-Host 'Essay guardrails summary' -ForegroundColor Cyan
 Write-Host "  Essay cleanup targets: $($rows.Count)"
 Write-Host "  Philosophy audit targets: $($philosophyAuditSubjects.Count)"
 Write-Host "  Source-free Musing audit exemptions: $(@($philosophyAuditSubjects | Where-Object { [bool]$_.SourceFreeMusing }).Count)"
+Write-Host "  Source-free Affirmation audit exemptions: $(@($philosophyAuditSubjects | Where-Object { [bool]$_.SourceFreeAffirmation }).Count)"
 Write-Host "  Blocking files: $($blockingResults.Count)"
 Write-Host "  Warning files: $($warningResults.Count)"
 Write-Host "  Philosophy audit blocking files: $($philosophyAuditResults.Count)"

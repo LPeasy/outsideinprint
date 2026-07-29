@@ -1,11 +1,23 @@
 {{- $page := . -}}
 {{- $libraryType := lower (printf "%v" ($page.Params.library_type | default "")) -}}
+{{- $sectionLabel := lower (printf "%v" ($page.Params.section_label | default "")) -}}
+{{- $sourceMode := lower (printf "%v" ($page.Params.source_mode | default "")) -}}
+{{- $externalClaims := lower (printf "%v" ($page.Params.external_factual_claims | default "")) -}}
+{{- $collections := partial "collections/normalize-values.html" (dict "value" $page.Params.collections) -}}
+{{- $isAffirmation := false -}}
+{{- if and (eq $libraryType "affirmation") (eq $sectionLabel "affirmation") (eq $sourceMode "source_free") (eq $externalClaims "none") (eq (len $collections) 1) -}}
+  {{- $isAffirmation = eq (index $collections 0) "the-things-we-say" -}}
+{{- end -}}
 {{- $kind := "" -}}
 
 {{- if eq $page.Section "working-papers" -}}
   {{- $kind = "working-paper" -}}
 {{- else if or (eq $libraryType "dialogue") (eq $page.Section "syd-and-oliver") -}}
   {{- $kind = "dialogue" -}}
+{{- else if $isAffirmation -}}
+  {{- $kind = "affirmation" -}}
+{{- else if eq $libraryType "affirmation" -}}
+  {{- $kind = "" -}}
 {{- else if eq $page.Section "essays" -}}
   {{- $kind = "essay" -}}
 {{- end -}}

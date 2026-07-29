@@ -197,7 +197,7 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
   assert.match(homeFrontPage, /home_front_page_copy\.html/);
   assert.match(homeFrontPage, /site\.Data\.editorial_cartoons/);
-  assert.match(homeFrontPage, /\$orderedCartoons := sort \$cartoons "date" "desc"/);
+  assert.match(homeFrontPage, /\$orderedCartoons := sort \(sort \$cartoons "slug" "asc"\) "date" "desc"/);
   assert.match(homeFrontPage, /\$recentCartoons := slice/);
   assert.match(homeFrontPage, /lt \(len \$recentCartoons\) 2/);
   assert.match(homeFrontPage, /View gallery/);
@@ -234,8 +234,10 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.match(homeFrontPage, /\{\{ \$leadReadLabel \}\} &rarr;/);
   assert.match(homeFrontPage, /\{\{ \$readLabel \}\} &rarr;/);
   assert.match(homeFrontPageCopy, /Latest Essay/);
+  assert.match(homeFrontPageCopy, /Latest Affirmation/);
   assert.match(homeFrontPageCopy, /Latest Dialogue/);
   assert.match(homeFrontPageCopy, /Read essay/);
+  assert.match(homeFrontPageCopy, /Read affirmation/);
   assert.match(homeFrontPageCopy, /Read dialogue/);
 
   assert.match(homeBookstore, /site\.GetPage "\/shop"/);

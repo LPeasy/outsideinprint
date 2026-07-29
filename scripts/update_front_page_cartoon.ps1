@@ -183,7 +183,42 @@ function Test-IsSourceFreeMusing {
     return $false
   }
 
-  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?(?:musings|what-you-tell-yourself)["'']?\s*\]\s*$'
+  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?musings["'']?\s*\]\s*$'
+}
+
+function Test-IsSourceFreeAffirmation {
+  param([string]$Path)
+
+  $frontMatter = Read-MarkdownFrontMatter -Path $Path
+  foreach ($key in @('section_label', 'library_type', 'collections', 'source_mode', 'external_factual_claims')) {
+    if (-not $frontMatter.ContainsKey($key)) {
+      return $false
+    }
+  }
+
+  if (([string]$frontMatter['section_label']).Trim() -ine 'affirmation') {
+    return $false
+  }
+  if (([string]$frontMatter['library_type']).Trim() -ine 'affirmation') {
+    return $false
+  }
+  if (([string]$frontMatter['source_mode']).Trim() -ine 'source_free') {
+    return $false
+  }
+  if (([string]$frontMatter['external_factual_claims']).Trim() -ine 'none') {
+    return $false
+  }
+
+  return ([string]$frontMatter['collections']).Trim() -match '^\s*\[\s*["'']?the-things-we-say["'']?\s*\]\s*$'
+}
+
+function Test-IsSourceFreeReflection {
+  param([string]$Path)
+
+  return (
+    (Test-IsSourceFreeMusing -Path $Path) -or
+    (Test-IsSourceFreeAffirmation -Path $Path)
+  )
 }
 
 function Invoke-GitRequired {
@@ -466,14 +501,14 @@ function Assert-LinkedEssayPhilosophyAudit {
   $slug = Get-SlugFromSiteEssayPath -SiteEssayPath $normalizedEssayPath
   $markdownPath = Resolve-EssayMarkdownPath -Root $Root -SiteEssayPath $normalizedEssayPath
 
-  # The Musings contract exempts only fully declared source-free reflections
-  # from the essay-specific OIP-99 package.
-  if (Test-IsSourceFreeMusing -Path $markdownPath) {
+  # Separate Musings and Affirmation contracts exempt only their exact
+  # source-free predicates from the essay-specific OIP-99 package.
+  if (Test-IsSourceFreeReflection -Path $markdownPath) {
     return
   }
 
   if (-not (Test-EditorialPhilosophyAuditEvidence -Root $Root -Slug $slug)) {
-    throw "Linked essay $normalizedEssayPath is missing accepted Editorial Philosophy Audit evidence. Add a per-essay OIP-99 report or daily backfill ledger entry, use a fully declared source-free Musing, or pass -NoEssayLink only for an explicitly standalone cartoon."
+    throw "Linked essay $normalizedEssayPath is missing accepted Editorial Philosophy Audit evidence. Add a per-essay OIP-99 report or daily backfill ledger entry, use a fully declared source-free Musing or Affirmation, or pass -NoEssayLink only for an explicitly standalone Gallery image."
   }
 }
 

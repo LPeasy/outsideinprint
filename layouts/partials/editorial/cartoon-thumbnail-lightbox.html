@@ -3,21 +3,21 @@
     type="button"
     class="cartoon-lightbox__backdrop"
     data-essay-cartoon-lightbox-close
-    aria-label="Close cartoon viewer"
+    aria-label="Close image viewer"
   ></button>
   <section class="cartoon-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="essay-cartoon-lightbox-title">
     <button
       type="button"
       class="cartoon-lightbox__close"
       data-essay-cartoon-lightbox-close
-      aria-label="Close cartoon viewer"
+      aria-label="Close image viewer"
     ><span aria-hidden="true">&times;</span></button>
     <figure class="cartoon-lightbox__figure">
       <button
         type="button"
         class="cartoon-lightbox__image-button"
         data-essay-cartoon-lightbox-image-button
-        aria-label="Close fullscreen cartoon"
+        aria-label="Close fullscreen image"
       >
         <img data-essay-cartoon-lightbox-image src="" alt="">
       </button>
@@ -93,7 +93,7 @@
         galleryLink.removeAttribute("href");
       }
 
-      imageButton.setAttribute("aria-label", "Close fullscreen cartoon: " + imageTitle);
+      imageButton.setAttribute("aria-label", "Close fullscreen image: " + imageTitle);
       lightbox.hidden = false;
       lightbox.setAttribute("aria-hidden", "false");
       document.body.classList.add("cartoon-lightbox-open");

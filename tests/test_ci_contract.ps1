@@ -26,6 +26,7 @@ $essayImageAuditPath = Join-Path $repoRoot "scripts/audit_essay_images.ps1"
 $seoRolloutContractPath = Join-Path $repoRoot "tests/test_seo_rollout_contract.ps1"
 $almanackModuleDataContractPath = Join-Path $repoRoot "tests/test_almanack_module_data.ps1"
 $editorialCartoonScheduleContractPath = Join-Path $repoRoot "tests/test_editorial_cartoon_schedule_contract.ps1"
+$affirmationContractPath = Join-Path $repoRoot "tests/test_affirmation_contract.ps1"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
   throw "AGENTS.md is required for repo-local publishing session guidance."
@@ -267,6 +268,14 @@ if ($deployWorkflow -notmatch "fetch-depth:\s*0") {
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_essay_guardrails\.ps1") {
   throw "deploy.yml must run the essay guardrail regression test."
+}
+
+if (-not (Test-Path $affirmationContractPath -PathType Leaf)) {
+  throw "tests/test_affirmation_contract.ps1 is required for The Things We Say."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_affirmation_contract\.ps1") {
+  throw "deploy.yml must run the Affirmation publication contract test."
 }
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_essay_image_audit\.ps1") {

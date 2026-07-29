@@ -83,7 +83,7 @@
           </figure>
         {{ end }}
         {{ if gt (len $recentCartoons) 0 }}
-          <div class="editorial-cartoon-recent" data-home-cartoon-recent aria-label="Recent front-page cartoons">
+          <div class="editorial-cartoon-recent" data-home-cartoon-recent aria-label="Recent front-page illustrations">
             {{ range $recentCartoons }}
               <figure class="editorial-cartoon-recent__item" data-home-cartoon-recent-card data-cartoon-slug="{{ .slug }}">
                 <button
@@ -277,21 +277,21 @@
         type="button"
         class="cartoon-lightbox__backdrop"
         data-home-cartoon-lightbox-close
-        aria-label="Close cartoon viewer"
+        aria-label="Close image viewer"
       ></button>
       <section class="cartoon-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="home-cartoon-lightbox-title">
         <button
           type="button"
           class="cartoon-lightbox__close"
           data-home-cartoon-lightbox-close
-          aria-label="Close cartoon viewer"
+          aria-label="Close image viewer"
         ><span aria-hidden="true">&times;</span></button>
         <figure class="cartoon-lightbox__figure">
           <button
             type="button"
             class="cartoon-lightbox__image-button"
             data-home-cartoon-lightbox-image-button
-            aria-label="Close fullscreen cartoon"
+            aria-label="Close fullscreen image"
           >
             <img data-home-cartoon-lightbox-image src="" alt="">
           </button>
@@ -300,7 +300,7 @@
               <h2 id="home-cartoon-lightbox-title" data-home-cartoon-lightbox-title></h2>
               <time data-home-cartoon-lightbox-date></time>
             </div>
-            <a class="cartoon-lightbox__essay" data-home-cartoon-lightbox-essay href="#" hidden>Read essay</a>
+            <a class="cartoon-lightbox__essay" data-home-cartoon-lightbox-essay href="#" hidden>Read piece</a>
           </figcaption>
         </figure>
       </section>
@@ -366,7 +366,7 @@
             essayLink.removeAttribute("href");
           }
 
-          imageButton.setAttribute("aria-label", "Close fullscreen cartoon: " + imageTitle);
+          imageButton.setAttribute("aria-label", "Close fullscreen image: " + imageTitle);
           lightbox.hidden = false;
           lightbox.setAttribute("aria-hidden", "false");
           document.body.classList.add("cartoon-lightbox-open");

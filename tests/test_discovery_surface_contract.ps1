@@ -595,6 +595,7 @@ foreach ($requiredSnippet in @(
   'Search the archive by title, type, collection, or version.',
   'partial "archive/longform-kind.html"',
   '"title" "Essays"',
+  '"title" "Affirmations"',
   '"title" "Dialogues"',
   '"title" "Working Papers"',
   'Search titles, types, collections, and versions',

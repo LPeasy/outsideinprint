@@ -15,9 +15,9 @@
     data-width="{{ .width }}"
     data-height="{{ .height }}"
     data-gallery="{{ (printf "gallery/?cartoon=%s" .slug) | absURL }}"
-    aria-label="Open the cartoon for {{ $page.Title }} fullscreen"
+    aria-label="Open the illustration for {{ $page.Title }} fullscreen"
   >
     <img src="{{ .image | relURL }}" alt="" width="{{ .width }}" height="{{ .height }}" loading="lazy">
-    <span>Cartoon</span>
+    <span>Illustration</span>
   </button>
 {{- end -}}

@@ -1,8 +1,8 @@
-{{/* Homepage selection follows the archive longform model for essays and dialogues. */}}
+{{/* Homepage selection follows the archive longform model for essays, affirmations, and dialogues. */}}
 {{ $frontPagePages := slice }}
 {{ range site.RegularPages }}
   {{ $kind := partial "archive/longform-kind.html" . }}
-  {{ if or (eq $kind "essay") (eq $kind "dialogue") }}
+  {{ if in (slice "essay" "affirmation" "dialogue") $kind }}
     {{ $frontPagePages = $frontPagePages | append . }}
   {{ end }}
 {{ end }}

@@ -24,7 +24,7 @@
       <div class="section-front__body">
         <section class="cartoon-gallery-spotlight page-shell page-shell--wide" aria-labelledby="current-cartoon-title">
           <div class="cartoon-gallery-spotlight__meta">
-            <p class="list-title">Current Cartoon</p>
+            <p class="list-title">Current Illustration</p>
             <h2 id="current-cartoon-title">{{ .title }}</h2>
             <p class="m">{{ time.Format "Jan 2, 2006" .date }}</p>
           </div>
@@ -97,8 +97,8 @@
       </div>
     {{ else }}
       <div class="item">
-        <div class="t">No cartoons are listed yet.</div>
-        <div class="m">The gallery will collect front page political cartoons as they are published.</div>
+        <div class="t">No illustrations are listed yet.</div>
+        <div class="m">The gallery will collect front-page illustrations as they are published.</div>
       </div>
     {{ end }}
   </section>
@@ -108,14 +108,14 @@
       type="button"
       class="cartoon-lightbox__backdrop"
       data-cartoon-lightbox-close
-      aria-label="Close cartoon viewer"
+      aria-label="Close image viewer"
     ></button>
     <section class="cartoon-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="cartoon-lightbox-title">
       <button
         type="button"
         class="cartoon-lightbox__close"
         data-cartoon-lightbox-close
-        aria-label="Close cartoon viewer"
+        aria-label="Close image viewer"
       ><span aria-hidden="true">&times;</span></button>
       <figure class="cartoon-lightbox__figure">
         <button
@@ -130,7 +130,7 @@
             <h2 id="cartoon-lightbox-title" data-cartoon-lightbox-title></h2>
             <time data-cartoon-lightbox-date></time>
           </div>
-          <a class="cartoon-lightbox__essay" data-cartoon-lightbox-essay href="#" hidden>Read essay</a>
+          <a class="cartoon-lightbox__essay" data-cartoon-lightbox-essay href="#" hidden>Read piece</a>
         </figcaption>
       </figure>
     </section>
@@ -204,11 +204,11 @@
         if (activeEssay) {
           essayLink.href = activeEssay;
           essayLink.hidden = false;
-          imageButton.setAttribute("aria-label", "Open essay: " + imageTitle);
+          imageButton.setAttribute("aria-label", "Open piece: " + imageTitle);
         } else {
           essayLink.hidden = true;
           essayLink.removeAttribute("href");
-          imageButton.setAttribute("aria-label", "Close fullscreen cartoon: " + imageTitle);
+          imageButton.setAttribute("aria-label", "Close fullscreen image: " + imageTitle);
         }
 
         lightbox.hidden = false;

@@ -1,16 +1,12 @@
 # Affirmations Bank
 
-This bank holds Robby's personal affirmations for use in the What You Tell Yourself series.
+This bank holds Robby's personal affirmations for use in The Things We Say.
 
 He practices them through autosuggestion during his morning walks. They support the stronger, more complete, and whole identity he is building. He has seen meaningful results in his personal life.
 
 ## Use
 
-Use at least one affirmation from this bank in each What You Tell Yourself entry. Use the chosen affirmation as at least one pull quote. Keep the reflection natural and record each use below.
-
-### Use Log
-
-1. **I Do What I Say** ~ “I do the things that I say I’m going to do.”
+Use at least one exact affirmation from this bank in each The Things We Say entry. Use the chosen affirmation as at least one pull quote. Keep the reflection natural. Record each use in that entry's package manifest and publication record so this bank remains the stable source.
 
 ## Affirmations
 

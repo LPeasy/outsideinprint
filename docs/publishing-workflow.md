@@ -95,7 +95,29 @@ Musings are short source-free reflections, not ordinary evidence-driven essays. 
 
 Musings may use unqualified personal, spiritual, existential, philosophical, moral, universal, or aspirational language without citations, a research package, or an OIP-99 report. A declarative life observation or spiritual assurance is not an external factual claim merely because it is broad or certain. If a Musing makes a concrete factual claim about the world, record evidence appropriate to that claim; it may remain a Musing when reflection remains its primary form. A public Musing still needs a concise description and either a social image or an explicit image exemption with a reason. The standard cleanup, accessibility, and site validation checks remain required. See [editorial/musings-series-contract.md](../editorial/musings-series-contract.md).
 
-An editorial cartoon may link to a fully declared source-free Musing without a separate OIP-99 report. Use the explicit essay route in `scripts/update_front_page_cartoon.ps1`; use `-LinkExistingSlug <cartoon-slug> -EssayPath "/essays/<musing-slug>/"` when repairing an existing gallery association without changing the current front-page cartoon.
+An editorial cartoon may link to a fully declared source-free Musing without a separate OIP-99 report. Use the explicit essay route in `scripts/update_front_page_cartoon.ps1`; use `-LinkExistingSlug <cartoon-slug> -EssayPath "/essays/<musing-slug>/"` when repairing an existing gallery association without changing the current front-page image.
+
+## The Things We Say
+
+The Things We Say is a separate source-free Affirmation collection. Create
+entries under `content/essays/affirmations/` with
+`section_label: "Affirmation"`, `library_type: "affirmation"`,
+`collections: ["the-things-we-say"]`, `source_mode: "SOURCE_FREE"`, and
+`external_factual_claims: "none"`.
+
+Each entry uses at least one exact affirmation from
+`editorial/affirmations-bank.md`. The selected affirmation must appear as
+at least one canonical pull quote. Publish entries one at a time through
+the dedicated `oip-publish-affirmation` publisher.
+
+Every entry receives one OIP Watercolor Chiaroscuro front-page
+illustration. The same PNG serves as the article hero and unified Gallery
+image. Midpoint art is optional. See
+[editorial/the-things-we-say-publication-contract.md](../editorial/the-things-we-say-publication-contract.md).
+
+A Gallery image may link to a fully declared source-free Affirmation
+without a separate OIP-99 report. The exact Affirmation predicate remains
+separate from the Musings predicate.
 
 ## Syd & Oliver dialogue packages
 

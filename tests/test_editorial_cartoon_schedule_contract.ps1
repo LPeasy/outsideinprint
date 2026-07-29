@@ -179,9 +179,11 @@ function Test-AssociationOnlyUpdate {
   try {
     $tempDataDir = Join-Path $tempRoot 'data'
     $tempEssayDir = Join-Path $tempRoot 'content/essays/musings'
+    $tempAffirmationDir = Join-Path $tempRoot 'content/essays/affirmations'
     $ordinaryEssayDir = Join-Path $tempRoot 'content/essays'
     New-Item -ItemType Directory -Path $tempDataDir -Force | Out-Null
     New-Item -ItemType Directory -Path $tempEssayDir -Force | Out-Null
+    New-Item -ItemType Directory -Path $tempAffirmationDir -Force | Out-Null
 
     @'
 current: newest-cartoon
@@ -231,22 +233,22 @@ An ordinary personal reflection.
 
     @'
 ---
-title: "Source-Free Affirmation Series Entry"
+title: "Source-Free Affirmation"
 date: 2025-07-14
 draft: false
-slug: "source-free-affirmation-series-entry"
-section_label: "Musing"
-library_type: "musing"
-collections: ["what-you-tell-yourself"]
+slug: "source-free-affirmation"
+section_label: "Affirmation"
+library_type: "affirmation"
+collections: ["the-things-we-say"]
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
-description: "A source-free affirmation series fixture."
+description: "A source-free Affirmation fixture."
 version: "1.0"
 edition: "First web edition"
 ---
 
 I do the things I say I am going to do.
-'@ | Set-Content -LiteralPath (Join-Path $tempEssayDir 'source-free-affirmation-series-entry.md') -Encoding utf8NoBOM
+'@ | Set-Content -LiteralPath (Join-Path $tempAffirmationDir 'source-free-affirmation.md') -Encoding utf8NoBOM
 
     @'
 ---
@@ -298,12 +300,12 @@ This fixture requires an Editorial Philosophy Audit.
     & $updateScript `
       -Root $tempRoot `
       -LinkExistingSlug 'series-cartoon' `
-      -EssayPath '/essays/source-free-affirmation-series-entry/' | Out-Null
+      -EssayPath '/essays/source-free-affirmation/' | Out-Null
 
     $seriesUpdatedData = Get-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Raw
     Assert-True `
-      -Condition ([regex]::IsMatch($seriesUpdatedData, '(?ms)^\s*- slug: series-cartoon\s+.*?^\s+essay: "/essays/source-free-affirmation-series-entry/"\s*$')) `
-      -Message 'Association-only cartoon update did not recognize the source-free affirmation series route.'
+      -Condition ([regex]::IsMatch($seriesUpdatedData, '(?ms)^\s*- slug: series-cartoon\s+.*?^\s+essay: "/essays/source-free-affirmation/"\s*$')) `
+      -Message 'Association-only Gallery update did not recognize the source-free Affirmation route.'
 
     $unqualifiedBlocked = $false
     try {

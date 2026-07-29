@@ -7,9 +7,11 @@
   {{- $include := false -}}
 
   {{- if eq $mode "archive" -}}
-    {{- $include = in (slice "essay" "dialogue") $kind -}}
+    {{- $include = in (slice "essay" "dialogue" "affirmation") $kind -}}
   {{- else if eq $mode "dialogue" -}}
     {{- $include = eq $kind "dialogue" -}}
+  {{- else if eq $mode "affirmation" -}}
+    {{- $include = eq $kind "affirmation" -}}
   {{- else if eq $mode "essay" -}}
     {{- $include = eq $kind "essay" -}}
   {{- end -}}

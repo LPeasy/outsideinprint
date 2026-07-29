@@ -74,8 +74,8 @@ collections:
       tags: []
       sections: []
 
-  - slug: what-you-tell-yourself
-    title: What You Tell Yourself
+  - slug: the-things-we-say
+    title: The Things We Say
     kind: series
     public: true
     force_public: true
@@ -85,14 +85,14 @@ collections:
     weight: 14
     start_here: i-do-what-i-say
     sort: date_desc
-    description: Short reflections on the words we repeat, the identities we build, and the actions that make those words real.
+    description: Plain personal reflections built around the words we choose and the lives we practice.
     metadata:
       - label: Format
-        value: Short reflections
+        value: Affirmations
       - label: Scope
         value: Affirmations, identity, and action
       - label: Lane
-        value: Personal series
+        value: Personal collection
     fallback:
       series: []
       topics: []
