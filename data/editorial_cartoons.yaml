@@ -1,4 +1,4 @@
-current: feet-on-the-floor
+current: the-road-rises
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -687,5 +687,14 @@ cartoons:
     image: "/images/editorial/feet-on-the-floor.png"
     essay: "/essays/i-do-what-i-say/"
     alt: "An anonymous person sits at the edge of a bed with bare feet on wooden floorboards as dawn light enters a shadowed room."
+    width: 1672
+    height: 941
+  - slug: the-road-rises
+    title: "The Road Rises"
+    date: "2026-07-30"
+    publishDate: "2026-07-30T15:45:36-04:00"
+    image: "/images/editorial/the-road-rises.png"
+    essay: "/essays/my-friend-the-universe/"
+    alt: "An anonymous walker climbs a country road at dawn as a friendly dog and its owner approach through warm morning light."
     width: 1672
     height: 941
