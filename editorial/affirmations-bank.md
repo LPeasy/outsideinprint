@@ -21,7 +21,7 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I am an amazing good luck generator.
 - I am a big smile factory.
 - I deserve love, and so do all the people around me.
-- I am healthy, and I’m clean.
+- I am healthy and I'm clean!
 - I am wealthy, and I am provided for without having to suffer.
 - I am wealthy in every sense of the word.
 - I’m rich in spirit, and rich in love.
