@@ -1,4 +1,4 @@
-current: the-road-rises
+current: filled-with-life
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -696,5 +696,14 @@ cartoons:
     image: "/images/editorial/the-road-rises.png"
     essay: "/essays/my-friend-the-universe/"
     alt: "An anonymous walker climbs a country road at dawn as a friendly dog and its owner approach through warm morning light."
+    width: 1672
+    height: 941
+  - slug: filled-with-life
+    title: "Filled With Life"
+    date: "2026-07-31"
+    publishDate: "2026-07-31T13:20:19-04:00"
+    image: "/images/editorial/filled-with-life.png"
+    essay: "/essays/i-am-healed/"
+    alt: "An anonymous person stands with arms open in a sunlit meadow as blue, gold, and green watercolor currents sweep across the sky and fields."
     width: 1672
     height: 941
