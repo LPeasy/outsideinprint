@@ -65,4 +65,3 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I am ready for the things Life is bringing me.
 - Unshakeable faith gives me superpowers.
 - More and more every day, I get better and better in every way.
-
