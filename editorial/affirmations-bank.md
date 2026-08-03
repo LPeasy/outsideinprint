@@ -37,6 +37,8 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I feel no pain and no discomfort.
 - I am at peace.
 - I’m safe in my own body.
+- My focus is my domain.
+- I am not responsible for other people's thoughts, feelings, or emotions. That's their stuff ~ not my stuff.
 - I do the things that I say I’m going to do.
 - It’s okay to make mistakes.
 - I am kind to myself.
@@ -63,3 +65,4 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I am ready for the things Life is bringing me.
 - Unshakeable faith gives me superpowers.
 - More and more every day, I get better and better in every way.
+
