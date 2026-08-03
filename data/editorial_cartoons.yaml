@@ -1,4 +1,4 @@
-current: filled-with-life
+current: not-mine-to-carry
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -705,5 +705,14 @@ cartoons:
     image: "/images/editorial/filled-with-life.png"
     essay: "/essays/i-am-healed/"
     alt: "An anonymous person stands with arms open in a sunlit meadow as blue, gold, and green watercolor currents sweep across the sky and fields."
+    width: 1672
+    height: 941
+  - slug: not-mine-to-carry
+    title: "Not Mine to Carry"
+    date: "2026-08-02"
+    publishDate: "2026-08-02T23:25:19-04:00"
+    image: "/images/editorial/not-mine-to-carry.png"
+    essay: "/essays/pay-attention-to-you/"
+    alt: "An anonymous man walks from a small shadowed crowd struggling against a tangled heap of indistinct burdens toward a sunlit field."
     width: 1672
     height: 941
