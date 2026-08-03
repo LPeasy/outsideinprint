@@ -1404,6 +1404,7 @@ $requiredUxPages = @(
   'public/almanack/2026-07-11/index.html',
   'public/almanack/2026-07-18/index.html',
   'public/almanack/2026-07-25/index.html',
+  'public/almanack/2026-08-01/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -3126,7 +3127,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?July 25, 2026.*?In the Margins.*?Number.*?Document.*?Critical Minerals.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 1, 2026.*?In the Margins.*?Number.*?Document.*?Federal Reserve issues FOMC statement.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
@@ -3211,6 +3212,27 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-07-25/index.html'
     Pattern = '/images/essays/(the-bolt-beside-the-gas-tank|the-update|return|the-six-hour-news-cycle)/hero\.png'
     Message = 'expected the July 25 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-08-01/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?August 1, 2026.*?Issue 13.*?I do what I say I do\..*?Choose one good thing and do it today\.'
+    Message = 'expected the August 1 Almanack issue page to render the nameplate, issue number, and affirmation pull quotes'
+  },
+  @{
+    Path = 'public/almanack/2026-08-01/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the August 1 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-08-01/index.html'
+    Pattern = '(?s)/images/editorial/the-shape-opens\.png.*?/images/editorial/feet-on-the-floor\.png.*?/images/editorial/the-road-rises\.png.*?/images/editorial/filled-with-life\.png'
+    Message = 'expected the August 1 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-08-01/index.html'
+    Pattern = '/images/essays/(reverse-origami|i-do-what-i-say|my-friend-the-universe|i-am-healed)/hero\.png'
+    Message = 'expected the August 1 Almanack issue not to use essay hero images for essay cards'
     ShouldNotMatch = $true
   },
   @{
@@ -3986,3 +4008,4 @@ if ($uxIssues.Count -gt 0) {
 Write-Host "Public HTML output regression test passed."
 $global:LASTEXITCODE = 0
 exit 0
+
