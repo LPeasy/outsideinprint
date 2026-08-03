@@ -1,4 +1,4 @@
-current: not-mine-to-carry
+current: life-opens-the-door
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -714,5 +714,14 @@ cartoons:
     image: "/images/editorial/not-mine-to-carry.png"
     essay: "/essays/pay-attention-to-you/"
     alt: "An anonymous man walks from a small shadowed crowd struggling against a tangled heap of indistinct burdens toward a sunlit field."
+    width: 1672
+    height: 941
+  - slug: life-opens-the-door
+    title: "Life Opens the Door"
+    date: "2026-08-03"
+    publishDate: "2026-08-03T15:29:26-04:00"
+    image: "/images/editorial/life-opens-the-door.png"
+    essay: "/essays/open-hands/"
+    alt: "An anonymous man stands with open hands inside a shadowed room as a heavy door opens onto a winding path in warm morning light."
     width: 1672
     height: 941
