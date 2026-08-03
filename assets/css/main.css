@@ -3995,6 +3995,43 @@ body.cartoon-lightbox-open{
     padding-top:1rem;
   }
 }
+.duel-info-route{
+  display:grid;
+  gap:2rem;
+}
+.duel-info-route__header{
+  max-width:var(--measure-reading);
+  margin-bottom:0;
+}
+.duel-info-route__body{
+  display:grid;
+}
+.duel-info-route__body .piece-body{
+  margin:0 auto;
+}
+.duel-info-route__body .piece-body > p:first-child{
+  color:var(--text-secondary);
+  font-size:1.08rem;
+  line-height:1.78;
+}
+.duel-info-route__nav{
+  max-width:var(--measure-reading);
+  margin-top:.25rem;
+  padding-top:1.25rem;
+  border-top:1px solid var(--oip-rule-engraved);
+}
+.duel-info-route__journey{
+  margin-bottom:0;
+}
+@media (max-width:640px){
+  .duel-info-route{
+    gap:1.5rem;
+  }
+  .duel-info-route__body .piece-body > p:first-child{
+    font-size:1.03rem;
+  }
+}
+
 .site-footer{
   position:relative;
   margin-top:3rem;
