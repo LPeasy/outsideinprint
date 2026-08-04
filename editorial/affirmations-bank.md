@@ -23,9 +23,10 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I deserve love, and so do all the people around me.
 - I am healthy and I'm clean!
 - I am wealthy, and I am provided for without having to suffer.
-- I am wealthy in every sense of the word.
-- I’m rich in spirit, and rich in love.
-- Money flows easily into my life.
+- I am wealthy in every sense of the word ~ more than money, gold, and material.
+- I'm rich in spirit and rich in love.
+- I make money in my sleep! I get paid to exist.
+- Money flows easily into my life. The Universe delivers the goods.
 - I am so grateful.
 - I go to sleep when I get in bed, and when I wake up I get up.
 - I am a spiritual being in a physical body.
@@ -54,7 +55,8 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I act now. I do not delay. I trust my instincts.
 - I move boldly. I correct as I go.
 - My thoughts, words, and habits attract endless riches.
-- I was born to be rich. I was born to be King.
+- I was born to be rich.
+- I was born to be King.
 - Happiness is my birthright. Creation is my inheritance.
 - Heart of a lion. Faith of a child.
 - Sly like a fox. Strong as an ox.
