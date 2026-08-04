@@ -1,4 +1,4 @@
-current: life-opens-the-door
+current: birthright
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -723,5 +723,14 @@ cartoons:
     image: "/images/editorial/life-opens-the-door.png"
     essay: "/essays/open-hands/"
     alt: "An anonymous man stands with open hands inside a shadowed room as a heavy door opens onto a winding path in warm morning light."
+    width: 1672
+    height: 941
+  - slug: birthright
+    title: "Birthright"
+    date: "2026-08-04"
+    publishDate: "2026-08-04T17:28:20-04:00"
+    image: "/images/editorial/birthright.png"
+    essay: "/essays/rich-in-spirit/"
+    alt: "An anonymous child sits beneath a flowering citrus tree as dappled natural sunlight falls across the child's curls and shoulders."
     width: 1672
     height: 941
