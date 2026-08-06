@@ -1,4 +1,4 @@
-current: the-cup-makes-its-own-river
+current: the-turn
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -741,5 +741,14 @@ cartoons:
     image: "/images/editorial/the-cup-makes-its-own-river.png"
     essay: "/essays/eternal-wellspring/"
     alt: "A handmade earthenware cup overflows from a spring rising within it, sending four blue-white streams across a dark stone surface at dawn."
+    width: 1672
+    height: 941
+  - slug: the-turn
+    title: "The Turn"
+    date: "2026-08-06"
+    publishDate: "2026-08-06T14:05:26-04:00"
+    image: "/images/editorial/the-turn.png"
+    essay: "/essays/i-make-myself/"
+    alt: "An anonymous person rounds a quiet neighborhood corner at dawn, moving from deep blue shadow toward the warm sunlit street ahead."
     width: 1672
     height: 941
