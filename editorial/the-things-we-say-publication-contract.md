@@ -27,9 +27,10 @@ affirmation.
 ## Public Affirmations Bank
 
 The collection landing page reads `editorial/affirmations-bank.md` during
-the Hugo build. It renders the complete bank in source order and derives the
-public count from the same parsed list. Do not maintain a second public copy
-in content, templates, or data files.
+the Hugo build. It opens with a centered personal introduction, without a
+separate visible bank title or count, and renders the complete bank in source
+order. Public validation derives its expected item count from the same parsed
+list. Do not maintain a second public copy in content, templates, or data files.
 
 The exact `## Affirmations` heading begins the machine-readable bank. After
 that heading:

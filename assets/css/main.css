@@ -4805,22 +4805,16 @@ h2{ margin-top:34px; }
   gap:1.45rem;
   align-items:start;
 }
-.affirmation-bank__meta{
-  font-family:var(--font-ui);
-  font-size:.68rem;
-  font-weight:600;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-}
 .affirmation-bank__body{
   min-width:0;
 }
 .affirmation-bank__intro{
   max-width:42rem;
-  margin:0;
+  margin:0 auto;
   color:var(--text-secondary);
-  font-size:.96rem;
+  font-size:1.05rem;
   line-height:1.72;
+  text-align:center;
 }
 .affirmation-bank__list{
   column-count:2;

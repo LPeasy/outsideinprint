@@ -3973,17 +3973,17 @@ else {
   }
   else {
     $bankSectionHtml = $bankSectionMatch.Groups['body'].Value
-    if ($bankSectionMatch.Value -notmatch 'aria-labelledby=(?:"the-words-we-say-title"|''the-words-we-say-title''|the-words-we-say-title)') {
-      $uxIssues.Add("$affirmationCollectionPath => expected affirmation-bank section to reference its visible heading")
+    if ($bankSectionMatch.Value -notmatch 'aria-label=(?:"Affirmations"|''Affirmations''|Affirmations)') {
+      $uxIssues.Add("$affirmationCollectionPath => expected an accessible Affirmations section label")
     }
-    if ($bankSectionHtml -notmatch '(?is)<h2\b[^>]*id=(?:"the-words-we-say-title"|''the-words-we-say-title''|the-words-we-say-title)[^>]*>\s*The Words We Say\s*</h2>') {
-      $uxIssues.Add("$affirmationCollectionPath => expected the visible The Words We Say h2")
+    if ($bankSectionHtml -match '(?is)<h2\b|The Words We Say|Current bank\s*[·&]|affirmation-bank__meta') {
+      $uxIssues.Add("$affirmationCollectionPath => expected no visible bank title or count")
     }
 
     $decodedBankSection = [System.Net.WebUtility]::HtmlDecode($bankSectionHtml)
-    $expectedCountLabel = "Current bank · $($canonicalAffirmations.Count) affirmations"
-    if (-not $decodedBankSection.Contains($expectedCountLabel, [System.StringComparison]::Ordinal)) {
-      $uxIssues.Add("$affirmationCollectionPath => expected dynamic count label '$expectedCountLabel'")
+    $expectedIntro = 'These are the things that I say to myself every morning. The more I say them, the more I believe them. I am becoming more and more myself every single day. If any of these resonate with you, I encourage you to use this list (or start your own!) and begin speaking love, beauty, and faith into your own life. I know this practice has radically changed the way I see the world and, I think, the way the world sees me. Life is beautiful!'
+    if (-not $decodedBankSection.Contains($expectedIntro, [System.StringComparison]::Ordinal)) {
+      $uxIssues.Add("$affirmationCollectionPath => expected the approved centered introduction copy")
     }
 
     $bankListMatch = [regex]::Match(
