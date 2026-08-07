@@ -7,8 +7,8 @@
 {{ $isApps := eq .Section "apps" }}
 {{ $isGallery := eq .Section "gallery" }}
 {{ $isRandom := eq .Section "random" }}
-{{ $appsDraft := site.GetPage "/apps" }}
-{{ $showAppsDraft := and hugo.IsServer $appsDraft }}
+{{ $appsPage := site.GetPage "/apps" }}
+{{ $showApps := and $appsPage (not $appsPage.Draft) }}
 {{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
 {{ $paperRoute := site.Params.paper_route | default dict }}
 {{ $paperRouteEnabled := and $isHomeMasthead (ne ($paperRoute.enabled | default true) false) }}
@@ -84,7 +84,7 @@
     <a href="{{ "collections/" | absURL }}"{{ if $isCollections }} aria-current="page"{{ end }}>Collections</a><span class="dot">&bull;</span>
     <a href="{{ "gallery/" | absURL }}"{{ if $isGallery }} aria-current="page"{{ end }}>Gallery</a><span class="dot">&bull;</span>
     <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
-    {{ if $showAppsDraft }}<a href="{{ $appsDraft.RelPermalink }}"{{ if $isApps }} aria-current="page"{{ end }}>Apps &amp; Tools</a><span class="dot">&bull;</span>{{ end }}
+    {{ if $showApps }}<a href="{{ $appsPage.RelPermalink }}"{{ if $isApps }} aria-current="page"{{ end }}>Apps &amp; Tools</a><span class="dot">&bull;</span>{{ end }}
     <a
       href="{{ "shop/" | absURL }}"
       data-analytics-event="internal_promo_click"

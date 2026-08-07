@@ -569,7 +569,7 @@ $articleLightboxIssues = New-Object System.Collections.Generic.List[string]
 $legacyCleanupIssues = New-Object System.Collections.Generic.List[string]
 $retiredRouteIssues = New-Object System.Collections.Generic.List[string]
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
-$unpublishedAppsIssues = New-Object System.Collections.Generic.List[string]
+$appsPreviewIssues = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
 $targetPageHtml = @{}
 
@@ -584,6 +584,8 @@ $requiredSemanticPages = [ordered]@{
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/shop/the-parable-of-the-sheep/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/shop/the-water-cycle/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
+  'public/apps/index.html' = @{ ExpectedH1Class = 'apps-index__title'; RequireSecondaryHeading = $true }
+  'public/apps/bucks-machine/index.html' = @{ ExpectedH1Class = 'apps-product__title'; RequireSecondaryHeading = $true }
   'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
 }
 
@@ -786,6 +788,22 @@ $requiredMetadataPages = [ordered]@{
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = ('https://outsideinprint.org{0}' -f $currentCartoonImagePath)
+  }
+  'public/apps/index.html' = @{
+    Title = 'Apps & Tools'
+    Description = 'Public development previews of software products from Outside In Print LLC, including Bucks Machine planning support.'
+    Canonical = 'https://outsideinprint.org/apps/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/apps/bucks-machine/index.html' = @{
+    Title = 'Bucks Machine'
+    Description = 'A public development preview of planning support that turns de-identified rough notes into a human-reviewed scope, schedule, budget, risk, PDF, and workbook packet.'
+    Canonical = 'https://outsideinprint.org/apps/bucks-machine/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
   }
   'public/archive/index.html' = @{
     Title = 'Archive'
@@ -1198,6 +1216,18 @@ $requiredStructuredDataPages = [ordered]@{
     RequireSearchAction = $true
     RequirePublisherImage = $true
   }
+  'public/apps/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'Product', 'SoftwareApplication', 'Offer')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
+  'public/apps/bucks-machine/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'Product', 'SoftwareApplication', 'Offer')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
   'public/archive/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork')
@@ -1273,6 +1303,14 @@ $requiredStructuredDataPages = [ordered]@{
 
 $requiredIndexationPages = [ordered]@{
   'public/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/apps/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/apps/bucks-machine/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
@@ -1376,7 +1414,9 @@ $requiredSitemapInclusions = @(
   'https://outsideinprint.org/syd-and-oliver/',
   'https://outsideinprint.org/collections/',
   'https://outsideinprint.org/collections/risk-uncertainty/',
-  'https://outsideinprint.org/library/'
+  'https://outsideinprint.org/library/',
+  'https://outsideinprint.org/apps/',
+  'https://outsideinprint.org/apps/bucks-machine/'
 )
 
 $requiredSitemapExclusions = @(
@@ -1385,9 +1425,7 @@ $requiredSitemapExclusions = @(
   'https://outsideinprint.org/start-here/',
   'https://outsideinprint.org/essays/',
   'https://outsideinprint.org/working-papers/',
-  'https://outsideinprint.org/literature/',
-  'https://outsideinprint.org/apps/',
-  'https://outsideinprint.org/apps/bucks-machine/'
+  'https://outsideinprint.org/literature/'
 )
 
 $requiredLlmsOutputs = [ordered]@{
@@ -1629,35 +1667,58 @@ foreach ($file in $htmlFiles) {
     $retiredRouteIssues.Add("$relativePath => retired merch route leaked into generated HTML")
   }
 
-  if (
-    ($content -match '(?i)<a\b[^>]*href\s*=\s*(?:"(?:https://outsideinprint\.org)?/apps(?:/|\?|#|"|$)|''(?:https://outsideinprint\.org)?/apps(?:/|\?|#|''|$))') -or
-    ($content -match '(?i)>\s*Apps\s*&amp;\s*Tools\s*<') -or
-    ($content -match '(?i)bucks-machine-synthetic-professional-services-demo\.(?:pdf|xlsx)')
-  ) {
-    $unpublishedAppsIssues.Add("$relativePath => unpublished Apps & Tools surface leaked into production HTML")
-  }
 }
 
-foreach ($forbiddenOutput in @(
+foreach ($requiredOutput in @(
   'apps/index.html',
   'apps/bucks-machine/index.html'
 )) {
-  $fullPath = Join-Path $SiteDir $forbiddenOutput
-  if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
-    $unpublishedAppsIssues.Add("public/$forbiddenOutput => unpublished Apps & Tools route was emitted")
+  $fullPath = Join-Path $SiteDir $requiredOutput
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+    $appsPreviewIssues.Add("public/$requiredOutput => public Apps & Tools route was not emitted")
   }
 }
 
-foreach ($sampleFileName in @(
-  'bucks-machine-synthetic-professional-services-demo.pdf',
-  'bucks-machine-synthetic-professional-services-demo.xlsx'
+foreach ($sample in @(
+  @{ RelativePath = 'apps/bucks-machine/bucks-machine-synthetic-professional-services-demo.pdf'; Sha256 = 'D9DA9DA6FBD32592F36DAEA063488E3E90E4307681B98944A7887BF31B3B0718' },
+  @{ RelativePath = 'apps/bucks-machine/bucks-machine-synthetic-professional-services-demo.xlsx'; Sha256 = 'FD1B0CFD5C7230CF31235E5E3C15CBAE2289BB5E808868D667F9175BBCE9B4F8' }
 )) {
-  $publishedSamples = @(
-    Get-ChildItem -Path $SiteDir -Recurse -File -Filter $sampleFileName -ErrorAction SilentlyContinue
-  )
-  foreach ($publishedSample in $publishedSamples) {
-    $publishedRelativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $publishedSample.FullName
-    $unpublishedAppsIssues.Add("$publishedRelativePath => localhost-only Bucks Machine sample was emitted")
+  $samplePath = Join-Path $SiteDir ([string]$sample.RelativePath)
+  if (-not (Test-Path -LiteralPath $samplePath -PathType Leaf)) {
+    $appsPreviewIssues.Add("public/$($sample.RelativePath) => reviewed synthetic sample was not emitted")
+    continue
+  }
+  $actualHash = (Get-FileHash -LiteralPath $samplePath -Algorithm SHA256).Hash
+  if ($actualHash -ne [string]$sample.Sha256) {
+    $appsPreviewIssues.Add("public/$($sample.RelativePath) => synthetic sample hash differs from the reviewed artifact")
+  }
+}
+
+$appsIndexPath = 'public/apps/index.html'
+$bucksPreviewPath = 'public/apps/bucks-machine/index.html'
+if ($targetPageHtml.ContainsKey($appsIndexPath) -and $targetPageHtml.ContainsKey($bucksPreviewPath)) {
+  $appsHtml = [string]$targetPageHtml[$appsIndexPath]
+  $bucksHtml = [string]$targetPageHtml[$bucksPreviewPath]
+  foreach ($requiredSnippet in @(
+    'Development preview.',
+    'Not currently available for use or purchase.',
+    'Bucks Machine, a product operated and sold by Outside In Print LLC.'
+  )) {
+    if (($appsHtml + $bucksHtml) -notmatch [regex]::Escape($requiredSnippet)) {
+      $appsPreviewIssues.Add("Apps preview => expected public snippet missing: $requiredSnippet")
+    }
+  }
+  foreach ($requiredSnippet in @(
+    'support@outsideinprint.org',
+    'bucks-machine-synthetic-professional-services-demo.pdf',
+    'bucks-machine-synthetic-professional-services-demo.xlsx'
+  )) {
+    if ($bucksHtml -notmatch [regex]::Escape($requiredSnippet)) {
+      $appsPreviewIssues.Add("$bucksPreviewPath => expected public snippet missing: $requiredSnippet")
+    }
+  }
+  if (($appsHtml + $bucksHtml) -match '(?i)<form\b|stripe|checkout|waitlist|available now|\$19|\$49|\$500') {
+    $appsPreviewIssues.Add('Apps preview => forbidden commercial, intake, or legacy-price surface was emitted')
   }
 }
 
@@ -3779,13 +3840,11 @@ foreach ($check in $requiredUxChecks) {
 }
 
 foreach ($forbiddenPath in @(
-  'public/almanack/index.html',
-  'public/apps/index.html',
-  'public/apps/bucks-machine/index.html'
+  'public/almanack/index.html'
 )) {
   $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
   if (Test-Path -LiteralPath $fullForbiddenPath -PathType Leaf) {
-    $uxIssues.Add("$forbiddenPath => expected unpublished route to remain absent")
+    $uxIssues.Add("$forbiddenPath => expected excluded route to remain absent")
   }
 }
 
@@ -4131,8 +4190,8 @@ if ($publicPdfAffordanceHits.Count -gt 0) {
   throw ("Found public HTML that still exposes PDF affordances. Samples: {0}" -f (Format-SampleList -Items $publicPdfAffordanceHits))
 }
 
-if ($unpublishedAppsIssues.Count -gt 0) {
-  throw ("Found unpublished Apps & Tools output in the production build. Samples: {0}" -f (Format-SampleList -Items $unpublishedAppsIssues))
+if ($appsPreviewIssues.Count -gt 0) {
+  throw ("Found Apps & Tools public-preview regressions. Samples: {0}" -f (Format-SampleList -Items $appsPreviewIssues))
 }
 
 if ($retiredRouteIssues.Count -gt 0) {

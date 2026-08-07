@@ -5,13 +5,13 @@
     <header class="apps-index__header">
       <div>
         <p class="apps-section-kicker">Outside In Print LLC</p>
-        <h1 id="apps-index-title">{{ .Title }}</h1>
+        <h1 id="apps-index-title" class="apps-index__title">{{ .Title }}</h1>
         {{ with .Content }}<div class="apps-index__intro">{{ . }}</div>{{ end }}
       </div>
-      <p class="apps-index__notice"><strong>Local draft.</strong> Products shown here are not currently offered for use or purchase.</p>
+      <p class="apps-index__notice"><strong>Development preview.</strong> Products shown here are not currently offered for use or purchase.</p>
     </header>
 
-    <div class="apps-index__grid" aria-label="Draft product catalog">
+    <div class="apps-index__grid" aria-label="Product development previews">
       {{ range $index, $productPage := $productPages }}
         {{ $productKey := $productPage.Params.product_key | default "" }}
         {{ $product := partial "apps/product-data.html" (dict "key" $productKey "page" $productPage) }}
@@ -30,7 +30,7 @@
             <ul class="apps-card__deliverables" aria-label="Bucks Machine planning packet components">
               {{ range index $product "deliverables" }}<li>{{ index . "title" }}</li>{{ end }}
             </ul>
-            <a class="apps-card__link" href="{{ $productPage.RelPermalink }}">View draft product brief <span aria-hidden="true">&rarr;</span></a>
+            <a class="apps-card__link" href="{{ $productPage.RelPermalink }}">View product brief <span aria-hidden="true">&rarr;</span></a>
           </div>
 
           <aside class="apps-card__preview" aria-label="Bucks Machine packet summary">
@@ -47,7 +47,7 @@
           </aside>
         </article>
       {{ else }}
-        <p class="apps-index__empty">No product drafts are included in this build.</p>
+        <p class="apps-index__empty">No product previews are included in this build.</p>
       {{ end }}
     </div>
   </section>

@@ -14,13 +14,14 @@ const requiredPaths = [
   "layouts/partials/apps/product-data.html",
   "layouts/partials/apps/actions.html",
   "layouts/partials/apps/sample-downloads.html",
+  "layouts/partials/schema/webpage.html",
 ];
 
 function read(relativePath) {
   return fs.readFileSync(path.resolve(relativePath), "utf8");
 }
 
-test("Apps & Tools draft keeps the Bucks Machine identity and release boundary", () => {
+test("Apps & Tools public preview keeps the Bucks Machine identity and release boundary", () => {
   for (const relativePath of requiredPaths) {
     assert.ok(fs.existsSync(path.resolve(relativePath)), `expected Apps contract file: ${relativePath}`);
   }
@@ -31,8 +32,8 @@ test("Apps & Tools draft keeps the Bucks Machine identity and release boundary",
   const appsSurface = `${appsIndex}\n${bucksPage}\n${appsData}`;
 
   for (const source of [appsIndex, bucksPage]) {
-    assert.match(source, /^draft:\s*true\s*$/m);
-    assert.match(source, /^noindex:\s*true\s*$/m);
+    assert.match(source, /^draft:\s*false\s*$/m);
+    assert.match(source, /^noindex:\s*false\s*$/m);
   }
   assert.match(bucksPage, /^build:\s*\r?\n\s+publishResources:\s*false\s*$/ms);
 
@@ -71,7 +72,7 @@ test("Apps & Tools draft keeps the Bucks Machine identity and release boundary",
     /^\s+support_line:\s*["']?Support for Bucks Machine is provided by Outside In Print LLC: support@outsideinprint\.org\.["']?\s*$/m
   );
   assert.match(appsData, /^\s+commercial_action_state:\s*["']?disabled["']?\s*$/m);
-  assert.match(appsData, /^\s+sample_downloads_state:\s*["']?local_draft["']?\s*$/m);
+  assert.match(appsData, /^\s+sample_downloads_state:\s*["']?public_preview["']?\s*$/m);
   assert.match(appsData, /Not currently available for use or purchase\./);
   assert.match(
     appsData,
@@ -96,7 +97,7 @@ test("Apps & Tools draft keeps the Bucks Machine identity and release boundary",
   }
 });
 
-test("Apps templates enforce local-only samples and inert commercial actions", () => {
+test("Apps templates enforce public synthetic samples and inert commercial actions", () => {
   const listTemplate = read("layouts/apps/list.html");
   const singleTemplate = read("layouts/apps/single.html");
   const productData = read("layouts/partials/apps/product-data.html");
@@ -121,16 +122,15 @@ test("Apps templates enforce local-only samples and inert commercial actions", (
   assert.match(singleTemplate, /href="mailto:\{\{ index \$product "support_email" \}\}"/);
   assert.match(singleTemplate, /Support for \{\{ index \$product "title" \}\} is provided by \{\{ index \$product "operator_legal_name" \}\}/);
 
-  assert.match(sampleDownloads, /hugo\.IsServer/);
   assert.match(sampleDownloads, /\.Draft/);
-  assert.match(sampleDownloads, /local_draft/);
+  assert.match(sampleDownloads, /public_preview/);
   assert.match(sampleDownloads, /Resources\.GetMatch/);
   assert.match(sampleDownloads, /\.RelPermalink/);
   assert.doesNotMatch(actions, /<a\b|<form\b|mailto:|stripe|checkout|price|waitlist/i);
   assert.doesNotMatch(templates, /SoftwareApplication|"@type"\s*:\s*"(?:Product|Offer)"/i);
 });
 
-test("Apps navigation and styling remain local and route-owned", () => {
+test("Apps navigation and styling remain public and route-owned", () => {
   const masthead = read("layouts/partials/masthead.html");
   const footer = read("layouts/partials/footer.html");
   const listTemplate = read("layouts/apps/list.html");
@@ -139,11 +139,13 @@ test("Apps navigation and styling remain local and route-owned", () => {
   const css = read("assets/css/main.css");
   const layoutMatrix = read("docs/layout-ownership-matrix.md");
   const appsMarkup = `${listTemplate}\n${singleTemplate}\n${sampleDownloads}`;
-  const appsCssMatch = css.match(/\/\* Apps & Tools local draft \*\/([\s\S]*?)(?=\r?\n@media print)/);
+  const webpageSchema = read("layouts/partials/schema/webpage.html");
+  const appsCssMatch = css.match(/\/\* Apps & Tools public development preview \*\/([\s\S]*?)(?=\r?\n@media print)/);
 
   for (const chrome of [masthead, footer]) {
     assert.match(chrome, /site\.GetPage\s+"\/apps"/);
-    assert.match(chrome, /and\s+hugo\.IsServer\s+\$appsDraft/);
+    assert.match(chrome, /and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)/);
+    assert.doesNotMatch(chrome, /hugo\.IsServer/);
     assert.match(chrome, />Apps\s*&amp;\s*Tools</);
   }
   assert.match(masthead, /\$isApps\s*:=\s*eq\s+\.Section\s+"apps"/);
@@ -172,4 +174,5 @@ test("Apps navigation and styling remain local and route-owned", () => {
   }
   assert.match(layoutMatrix, /\| Apps & Tools index \| `\/apps\/`/);
   assert.match(layoutMatrix, /\| Bucks Machine product \| `\/apps\/bucks-machine\/`/);
+  assert.match(webpageSchema, /\(and\s+\(eq\s+\$meta\.route\.name\s+"section-list"\)\s+\(ne\s+\$page\.Section\s+"apps"\)\)/);
 });

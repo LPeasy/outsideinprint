@@ -194,6 +194,7 @@ jobs:
             public/authors/**
             public/about/**
             public/random/**
+            public/apps/**
             public/.oip-build-manifest.json
 
       - name: Upload artifact

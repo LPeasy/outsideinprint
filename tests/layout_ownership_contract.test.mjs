@@ -350,7 +350,7 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   }
 });
 
-test("layout ownership matrix tracks archive, redirect, and localhost Apps route ownership", () => {
+test("layout ownership matrix tracks archive, redirect, and public Apps route ownership", () => {
   for (const snippet of [
     "`home-manifesto`",
     "`home-manifesto__inner`",

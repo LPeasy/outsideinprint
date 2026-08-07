@@ -11,7 +11,7 @@
           <span class="apps-status">{{ index $product "status" }}</span>
           <span class="apps-status-note">{{ index $product "availability" }}</span>
         </div>
-        <h1>{{ index $product "title" }}</h1>
+        <h1 class="apps-product__title">{{ index $product "title" }}</h1>
         <p class="apps-product__promise">{{ index $product "promise" }}</p>
         <p class="apps-product__audience"><strong>For:</strong> {{ index $product "audience" }}</p>
         <p class="apps-product__intake">{{ index $product "intake_note" }}</p>
@@ -39,7 +39,7 @@
 
     <section class="apps-workflow" aria-labelledby="apps-workflow-title">
       <div class="apps-section-heading">
-        <p class="apps-section-kicker">How the draft works</p>
+        <p class="apps-section-kicker">How it works</p>
         <h2 id="apps-workflow-title">Notes become a reviewable planning packet</h2>
         <p>AI assists with structure. A person reviews, corrects, and approves the working material before it leaves the planning process.</p>
       </div>
