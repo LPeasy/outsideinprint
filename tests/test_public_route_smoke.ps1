@@ -79,6 +79,8 @@ function Get-RequiredPageHtml {
 
 foreach ($requiredPath in @(
   'about/index.html',
+  'duel/privacy/index.html',
+  'duel/support/index.html',
   'authors/index.html',
   'authors/robert-v-ussley/index.html',
   'almanack/2026-05-02/index.html',
@@ -105,7 +107,8 @@ foreach ($requiredPath in @(
 }
 
 foreach ($forbiddenPath in @(
-  'almanack/index.html'
+  'almanack/index.html',
+  'duel/index.html'
 )) {
   $fullPath = Join-Path $SiteDir $forbiddenPath
   if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
@@ -122,6 +125,44 @@ if ($authorDirectoryCanonical -ne 'https://outsideinprint.org/authors/') {
 $authorDirectoryRobots = Get-MetaContent -Html $authorDirectoryHtml -AttributeName 'name' -AttributeValue 'robots'
 if ($authorDirectoryRobots -ne 'noindex, follow') {
   throw "Expected authors directory robots meta to be 'noindex, follow', found '$authorDirectoryRobots'."
+}
+
+$duelSupportHtml = Get-RequiredPageHtml -RelativePath 'duel/support/index.html'
+$duelSupportCanonical = Get-LinkHrefByRel -Html $duelSupportHtml -Rel 'canonical'
+if ($duelSupportCanonical -ne 'https://outsideinprint.org/duel/support/') {
+  throw "Expected Duel support canonical to be https://outsideinprint.org/duel/support/, found '$duelSupportCanonical'."
+}
+$duelSupportRobots = Get-MetaContent -Html $duelSupportHtml -AttributeName 'name' -AttributeValue 'robots'
+if ($duelSupportRobots -ne 'index, follow, max-image-preview:large') {
+  throw "Expected Duel support robots meta to allow indexation, found '$duelSupportRobots'."
+}
+if ($duelSupportHtml -notmatch 'class="duel-info-route"') {
+  throw 'Expected Duel support to use the dedicated Duel information layout.'
+}
+if ($duelSupportHtml -notmatch 'mailto:support@outsideinprint\.org') {
+  throw 'Expected Duel support to expose the support email.'
+}
+if ($duelSupportHtml -notmatch 'href="https://outsideinprint\.org/duel/privacy/"') {
+  throw 'Expected Duel support to link to the Duel privacy policy.'
+}
+
+$duelPrivacyHtml = Get-RequiredPageHtml -RelativePath 'duel/privacy/index.html'
+$duelPrivacyCanonical = Get-LinkHrefByRel -Html $duelPrivacyHtml -Rel 'canonical'
+if ($duelPrivacyCanonical -ne 'https://outsideinprint.org/duel/privacy/') {
+  throw "Expected Duel privacy canonical to be https://outsideinprint.org/duel/privacy/, found '$duelPrivacyCanonical'."
+}
+$duelPrivacyRobots = Get-MetaContent -Html $duelPrivacyHtml -AttributeName 'name' -AttributeValue 'robots'
+if ($duelPrivacyRobots -ne 'index, follow, max-image-preview:large') {
+  throw "Expected Duel privacy robots meta to allow indexation, found '$duelPrivacyRobots'."
+}
+if ($duelPrivacyHtml -notmatch 'class="duel-info-route"') {
+  throw 'Expected Duel privacy to use the dedicated Duel information layout.'
+}
+if ($duelPrivacyHtml -notmatch 'mailto:support@outsideinprint\.org') {
+  throw 'Expected Duel privacy to expose the support email.'
+}
+if ($duelPrivacyHtml -notmatch 'href="https://outsideinprint\.org/duel/support/"') {
+  throw 'Expected Duel privacy to link to Duel support.'
 }
 
 Write-Host 'Public route smoke test passed.'

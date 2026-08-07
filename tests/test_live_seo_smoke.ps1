@@ -87,6 +87,21 @@ Assert-Match -Content $about -Pattern 'Author and Publisher' -Message 'Expected 
 Assert-Match -Content $about -Pattern '<meta\s+property=(?:"og:image"|og:image)\s+content=' -Message 'Expected the about page to emit og:image.'
 Assert-Match -Content $about -Pattern '<link\b[^>]*rel=(?:"alternate"|alternate)[^>]*type=(?:"application/rss\+xml"|application/rss\+xml)[^>]*href=(?:"https://outsideinprint\.org/index\.xml"|https://outsideinprint\.org/index\.xml)' -Message 'Expected the about page to expose site RSS autodiscovery.'
 
+
+$duelSupport = Get-Page '/duel/support/'
+Assert-Canonical -Content $duelSupport -ExpectedUrl 'https://outsideinprint.org/duel/support/' -Message 'Expected Duel support to emit its canonical outsideinprint.org URL.'
+Assert-Robots -Content $duelSupport -ExpectedRobots 'index, follow, max-image-preview:large' -Message 'Expected Duel support to allow indexation with large image previews.'
+Assert-Match -Content $duelSupport -Pattern '"@type":"WebPage"' -Message 'Expected Duel support to expose WebPage JSON-LD.'
+Assert-Match -Content $duelSupport -Pattern 'Duel Support' -Message 'Expected the Duel support route to expose identifying page text.'
+Assert-Match -Content $duelSupport -Pattern 'mailto:support@outsideinprint\.org' -Message 'Expected the Duel support route to expose the support email.'
+
+$duelPrivacy = Get-Page '/duel/privacy/'
+Assert-Canonical -Content $duelPrivacy -ExpectedUrl 'https://outsideinprint.org/duel/privacy/' -Message 'Expected Duel privacy to emit its canonical outsideinprint.org URL.'
+Assert-Robots -Content $duelPrivacy -ExpectedRobots 'index, follow, max-image-preview:large' -Message 'Expected Duel privacy to allow indexation with large image previews.'
+Assert-Match -Content $duelPrivacy -Pattern '"@type":"WebPage"' -Message 'Expected Duel privacy to expose WebPage JSON-LD.'
+Assert-Match -Content $duelPrivacy -Pattern 'Duel Privacy Policy' -Message 'Expected the Duel privacy route to expose identifying page text.'
+Assert-Match -Content $duelPrivacy -Pattern 'Outside in Print LLC' -Message 'Expected the Duel privacy route to identify the app operator.'
+
 $collection = Get-Page '/collections/risk-uncertainty/'
 Assert-Canonical -Content $collection -ExpectedUrl 'https://outsideinprint.org/collections/risk-uncertainty/' -Message 'Expected collection pages to emit canonical URLs on outsideinprint.org.'
 Assert-Robots -Content $collection -ExpectedRobots 'index, follow, max-image-preview:large' -Message 'Expected collection pages to allow indexation with large image previews.'

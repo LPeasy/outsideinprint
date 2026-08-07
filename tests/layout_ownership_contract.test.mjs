@@ -5,6 +5,7 @@ import path from "node:path";
 
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
+const duelSingle = fs.readFileSync(path.resolve("layouts/duel/single.html"), "utf8");
 const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/directory.html"), "utf8");
 const authorDossier = fs.readFileSync(path.resolve("layouts/authors/dossier.html"), "utf8");
 const authorList = fs.readFileSync(path.resolve("layouts/authors/list.html"), "utf8");
@@ -297,6 +298,28 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.doesNotMatch(css, /\.running-header\{/);
 });
 
+test("Duel information pages own a dedicated non-article shell", () => {
+  assert.match(duelSingle, /class="duel-info-route"/);
+  assert.match(duelSingle, /duel-info-route__header/);
+  assert.match(duelSingle, /duel-info-route__body/);
+  assert.match(duelSingle, /duel-info-route__nav/);
+  assert.match(duelSingle, /partial "journey_links\.html"/);
+  assert.match(duelSingle, /"duel\/support\/" \| absURL/);
+  assert.match(duelSingle, /"duel\/privacy\/" \| absURL/);
+  assert.doesNotMatch(duelSingle, /partial "authors\/byline\.html"/);
+  assert.doesNotMatch(duelSingle, /article-publication-record/);
+  assert.doesNotMatch(duelSingle, /partial "newsletter_signup\.html"/);
+  for (const selector of [
+    ".duel-info-route{",
+    ".duel-info-route__header{",
+    ".duel-info-route__body{",
+    ".duel-info-route__nav{",
+    ".duel-info-route__journey{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+});
+
 test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(aboutSingle, /class="about-route"/);
   assert.match(aboutSingle, /section-front section-front--about/);
@@ -358,6 +381,12 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`home-almanack__ledger`",
     "`newsletter-signup--home-ribbon`",
     "| About route | `/about/`",
+    "| Duel information | `/duel/support/`, `/duel/privacy/`",
+    "`duel-info-route`",
+    "`duel-info-route__header`",
+    "`duel-info-route__body`",
+    "`duel-info-route__nav`",
+    "`duel-info-route__journey`",
     "`section-front--about`",
     "`about-route`",
     "`about-route__artifact`",

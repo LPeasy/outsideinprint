@@ -1,0 +1,29 @@
+{{ define "main" }}
+  <article class="duel-info-route">
+    <header class="duel-info-route__header page-header page-header--section-centered page-shell page-shell--reading">
+      <p class="list-title">{{ .Params.section_label | default "Duel for iPhone" }}</p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="page-intro">{{ . }}</p>{{ end }}
+    </header>
+
+    <section class="duel-info-route__body page-shell page-shell--reading" aria-label="{{ .Title }}">
+      <div class="piece-body">
+        {{ .Content }}
+      </div>
+    </section>
+
+    <section class="duel-info-route__nav page-shell page-shell--reading" aria-label="Duel information">
+      {{ partial "journey_links.html" (dict
+        "class" "journey-links--page duel-info-route__journey"
+        "ariaLabel" "Duel information pages"
+        "eyebrow" "Duel information"
+        "sourceSlot" "duel_information"
+        "links" (slice
+          (dict "href" ("duel/support/" | absURL) "path" ("duel/support/" | relURL) "label" "Duel Support" "section" "Duel")
+          (dict "href" ("duel/privacy/" | absURL) "path" ("duel/privacy/" | relURL) "label" "Privacy Policy" "section" "Duel")
+          (dict "href" ("" | absURL) "path" ("" | relURL) "label" "Outside In Print" "section" "Navigation")
+        )
+      ) }}
+    </section>
+  </article>
+{{ end }}
