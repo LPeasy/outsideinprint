@@ -67,9 +67,7 @@ test("affirmation bank partial renders one accessible static list from the canon
     'os.ReadFile $bankPath',
     'id="the-words-we-say"',
     'class="page-shell page-shell--grid affirmation-bank"',
-    'aria-labelledby="the-words-we-say-title"',
-    '<h2 id="the-words-we-say-title">The Words We Say</h2>',
-    'class="affirmation-bank__meta"',
+    'aria-label="Affirmations"',
     'class="affirmation-bank__intro"',
     'class="affirmation-bank__list"',
     'class="affirmation-bank__item"'
@@ -79,8 +77,13 @@ test("affirmation bank partial renders one accessible static list from the canon
 
   assert.match(affirmationBankPartial, /range \$affirmations/);
   assert.match(affirmationBankPartial, /len \$affirmations/);
+  assert.match(
+    affirmationBankPartial,
+    /These are the things that I say to myself every morning\.[\s\S]*Life is beautiful!/
+  );
   assert.match(affirmationBankPartial, /errorf[\s\S]*missing the required ## Affirmations heading/);
   assert.match(affirmationBankPartial, /errorf[\s\S]*contains no one-line affirmation bullets/);
+  assert.doesNotMatch(affirmationBankPartial, /The Words We Say|Current bank|affirmation-bank__meta|<h2\b/);
   assert.doesNotMatch(affirmationBankPartial, /<script\b/i);
   assert.doesNotMatch(affirmationBankPartial, /<details\b|random|shuffle|search|filter|checkbox/i);
 });
@@ -88,7 +91,6 @@ test("affirmation bank partial renders one accessible static list from the canon
 test("affirmation bank hooks have owned responsive styling", () => {
   for (const selector of [
     ".affirmation-bank{",
-    ".affirmation-bank__meta{",
     ".affirmation-bank__intro{",
     ".affirmation-bank__list{",
     ".affirmation-bank__item{"
@@ -99,4 +101,7 @@ test("affirmation bank hooks have owned responsive styling", () => {
   assert.match(css, /\.affirmation-bank__list\s*\{[\s\S]*?column-count:\s*2/);
   assert.match(css, /\.affirmation-bank__list\s*\{[\s\S]*?column-width:\s*22rem/);
   assert.match(css, /\.affirmation-bank__item\s*\{[\s\S]*?break-inside:\s*avoid/);
+  assert.match(css, /\.affirmation-bank__intro\s*\{[\s\S]*?margin:\s*0 auto/);
+  assert.match(css, /\.affirmation-bank__intro\s*\{[\s\S]*?font-size:\s*1\.05rem/);
+  assert.match(css, /\.affirmation-bank__intro\s*\{[\s\S]*?text-align:\s*center/);
 });
