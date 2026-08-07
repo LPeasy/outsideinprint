@@ -105,11 +105,25 @@ foreach ($requiredPath in @(
 }
 
 foreach ($forbiddenPath in @(
-  'almanack/index.html'
+  'almanack/index.html',
+  'apps/index.html',
+  'apps/bucks-machine/index.html'
 )) {
   $fullPath = Join-Path $SiteDir $forbiddenPath
   if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
-    throw "Expected the Almanack section index not to be emitted: $forbiddenPath"
+    throw "Expected unpublished route not to be emitted: $forbiddenPath"
+  }
+}
+
+foreach ($sampleFileName in @(
+  'bucks-machine-synthetic-professional-services-demo.pdf',
+  'bucks-machine-synthetic-professional-services-demo.xlsx'
+)) {
+  $publishedSamples = @(
+    Get-ChildItem -Path $SiteDir -Recurse -File -Filter $sampleFileName -ErrorAction SilentlyContinue
+  )
+  if ($publishedSamples.Count -gt 0) {
+    throw "Expected localhost-only Bucks Machine sample not to be emitted: $sampleFileName"
   }
 }
 

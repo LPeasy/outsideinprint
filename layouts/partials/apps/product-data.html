@@ -1,0 +1,74 @@
+{{- $key := printf "%v" (.key | default "") -}}
+{{- $page := .page | default false -}}
+{{- $apps := site.Data.apps | default dict -}}
+{{- $products := index $apps "products" | default dict -}}
+
+{{- if not $key -}}
+  {{- errorf "Apps product data requires a non-empty product key" -}}
+{{- end -}}
+
+{{- if not (isset $products $key) -}}
+  {{- errorf "Apps product data is missing products.%s" $key -}}
+{{- end -}}
+
+{{- $product := index $products $key -}}
+{{- $requiredStrings := slice
+  "slug"
+  "title"
+  "status"
+  "availability"
+  "promise"
+  "audience"
+  "intake_note"
+  "privacy_warning"
+  "operator_legal_name"
+  "seller_legal_name"
+  "operator_line"
+  "support_email"
+  "support_line"
+  "commercial_action_state"
+  "sample_downloads_state"
+-}}
+{{- range $requiredStrings -}}
+  {{- $value := index $product . | default "" -}}
+  {{- if not $value -}}
+    {{- errorf "Apps product products.%s is missing required field %s" $key . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range slice "workflow" "deliverables" "preview_rows" "limitations" "sample_downloads" -}}
+  {{- if not (index $product .) -}}
+    {{- errorf "Apps product products.%s is missing required collection %s" $key . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $legalName := "Outside In Print LLC" -}}
+{{- if ne (index $product "operator_legal_name") $legalName -}}
+  {{- errorf "Apps product products.%s operator_legal_name must equal %q" $key $legalName -}}
+{{- end -}}
+{{- if ne (index $product "seller_legal_name") $legalName -}}
+  {{- errorf "Apps product products.%s seller_legal_name must equal %q" $key $legalName -}}
+{{- end -}}
+{{- $expectedOperatorLine := printf "%s, a product operated and sold by Outside In Print LLC." (index $product "title") -}}
+{{- if ne (index $product "operator_line") $expectedOperatorLine -}}
+  {{- errorf "Apps product products.%s operator_line does not match the approved identity" $key -}}
+{{- end -}}
+{{- $supportEmail := "support@outsideinprint.org" -}}
+{{- if ne (index $product "support_email") $supportEmail -}}
+  {{- errorf "Apps product products.%s support_email must equal %q" $key $supportEmail -}}
+{{- end -}}
+{{- $expectedSupportLine := printf "Support for %s is provided by Outside In Print LLC: %s." (index $product "title") $supportEmail -}}
+{{- if ne (index $product "support_line") $expectedSupportLine -}}
+  {{- errorf "Apps product products.%s support_line does not match the approved LLC support identity" $key -}}
+{{- end -}}
+
+{{- with $page -}}
+  {{- if ne .Title (index $product "title") -}}
+    {{- errorf "Apps page %s title must match products.%s.title" .Path $key -}}
+  {{- end -}}
+  {{- if ne .Slug (index $product "slug") -}}
+    {{- errorf "Apps page %s slug must match products.%s.slug" .Path $key -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $product -}}

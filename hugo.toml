@@ -11,6 +11,7 @@ essays = "/essays/:slug/"
 syd-and-oliver = "/syd-and-oliver/:slug/"
 working-papers = "/working-papers/:slug/"
 collections = "/collections/:slug/"
+apps = "/apps/:slug/"
 
 [markup]
   [markup.goldmark]

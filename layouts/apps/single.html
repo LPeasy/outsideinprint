@@ -1,0 +1,108 @@
+{{ define "main" }}
+  {{ $productKey := .Params.product_key | default "" }}
+  {{ $product := partial "apps/product-data.html" (dict "key" $productKey "page" .) }}
+  {{ partial "apps/actions.html" (dict "product" $product) }}
+
+  <article class="apps-product page-shell page-shell--wide">
+    <header class="apps-product__hero">
+      <div class="apps-product__hero-copy">
+        <p class="apps-section-kicker">Apps &amp; Tools &middot; Planning support</p>
+        <div class="apps-status-row">
+          <span class="apps-status">{{ index $product "status" }}</span>
+          <span class="apps-status-note">{{ index $product "availability" }}</span>
+        </div>
+        <h1>{{ index $product "title" }}</h1>
+        <p class="apps-product__promise">{{ index $product "promise" }}</p>
+        <p class="apps-product__audience"><strong>For:</strong> {{ index $product "audience" }}</p>
+        <p class="apps-product__intake">{{ index $product "intake_note" }}</p>
+      </div>
+
+      <aside class="apps-packet-preview" aria-labelledby="apps-packet-preview-title">
+        <div class="apps-packet-preview__header">
+          <div>
+            <p class="apps-packet-preview__eyebrow">Synthetic preview</p>
+            <h2 id="apps-packet-preview-title">Planning packet</h2>
+          </div>
+          <span>Human reviewed</span>
+        </div>
+        <dl class="apps-packet-preview__rows">
+          {{ range index $product "preview_rows" }}
+            <div>
+              <dt>{{ index . "label" }}</dt>
+              <dd>{{ index . "value" }}</dd>
+            </div>
+          {{ end }}
+        </dl>
+        <p class="apps-packet-preview__footer">Professional Services &middot; fictional evaluation data</p>
+      </aside>
+    </header>
+
+    <section class="apps-workflow" aria-labelledby="apps-workflow-title">
+      <div class="apps-section-heading">
+        <p class="apps-section-kicker">How the draft works</p>
+        <h2 id="apps-workflow-title">Notes become a reviewable planning packet</h2>
+        <p>AI assists with structure. A person reviews, corrects, and approves the working material before it leaves the planning process.</p>
+      </div>
+      <ol class="apps-workflow__steps">
+        {{ range index $product "workflow" }}
+          <li>
+            <span class="apps-workflow__number">{{ index . "step" }}</span>
+            <h3>{{ index . "title" }}</h3>
+            <p>{{ index . "description" }}</p>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+
+    <section class="apps-deliverables" aria-labelledby="apps-deliverables-title">
+      <div class="apps-section-heading">
+        <p class="apps-section-kicker">Packet structure</p>
+        <h2 id="apps-deliverables-title">Six linked planning views</h2>
+      </div>
+      <div class="apps-deliverables__grid">
+        {{ range index $product "deliverables" }}
+          <article>
+            <h3>{{ index . "title" }}</h3>
+            <p>{{ index . "description" }}</p>
+          </article>
+        {{ end }}
+      </div>
+    </section>
+
+    {{ partial "apps/sample-downloads.html" (dict "page" . "product" $product) }}
+
+    <section class="apps-limitations" aria-labelledby="apps-limitations-title">
+      <div class="apps-limitations__copy">
+        <p class="apps-section-kicker">Use boundaries</p>
+        <h2 id="apps-limitations-title">Planning support, not final authority</h2>
+        <ul>
+          {{ range index $product "limitations" }}<li>{{ . }}</li>{{ end }}
+        </ul>
+      </div>
+      <aside class="apps-limitations__privacy" aria-labelledby="apps-privacy-title">
+        <h3 id="apps-privacy-title">Do not enter protected information</h3>
+        <p>{{ index $product "privacy_warning" }}</p>
+      </aside>
+    </section>
+
+    <footer class="apps-identity">
+      <p class="apps-section-kicker">Product identity</p>
+      <p class="apps-identity__line">{{ index $product "operator_line" }}</p>
+      <p class="apps-identity__support-line">
+        Support for {{ index $product "title" }} is provided by {{ index $product "operator_legal_name" }}:
+        <a href="mailto:{{ index $product "support_email" }}">{{ index $product "support_email" }}</a>.
+      </p>
+      <dl>
+        <div>
+          <dt>Operator</dt>
+          <dd>{{ index $product "operator_legal_name" }}</dd>
+        </div>
+        <div>
+          <dt>Seller</dt>
+          <dd>{{ index $product "seller_legal_name" }}</dd>
+        </div>
+      </dl>
+      <a href="{{ "apps/" | relURL }}">Back to Apps &amp; Tools</a>
+    </footer>
+  </article>
+{{ end }}

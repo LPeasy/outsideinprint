@@ -58,6 +58,11 @@ jobs:
         run: |
           ./tests/test_author_directory_contract.ps1
 
+      - name: Test Apps & Tools Contract
+        shell: pwsh
+        run: |
+          ./tests/test_apps_tools_contract.ps1
+
       - name: Test Indexation Policy Contract
         shell: pwsh
         run: |

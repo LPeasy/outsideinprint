@@ -176,8 +176,10 @@ test("dialogue variant derives from library_type and transforms speaker labels o
   assert.doesNotMatch(css, /chat-bubble|message-bubble|left-right|dialogue-bubble/);
 });
 
-test("article aftermatter is one publication record plus compact exits", () => {
-  assert.doesNotMatch(articleSingle, /partial "newsletter_signup\.html"/);
+test("article aftermatter is one publication record plus controlled exits", () => {
+  assert.match(articleSingle, /partial "newsletter_signup\.html"/);
+  assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
+  assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
   assert.doesNotMatch(articleSingle, /partial "authors\/card\.html"/);
   assert.match(homepage, /partial "newsletter_signup\.html"/);
 
@@ -187,14 +189,16 @@ test("article aftermatter is one publication record plus compact exits", () => {
   const citation = articleSingle.indexOf("article-publication-record__section--citation", publicationRecord);
   const revisions = articleSingle.indexOf("article-publication-record__section--revisions", publicationRecord);
   const continuation = articleSingle.indexOf('partial "collections/reading-path.html" .', publicationRecord);
-  const exitLinks = articleSingle.indexOf('"class" "journey-links--article-exit"', continuation);
+  const newsletterExit = articleSingle.indexOf('"class" "newsletter-signup--article-exit"', continuation);
+  const exitLinks = articleSingle.indexOf('"class" "journey-links--article-exit"', newsletterExit);
   assert.ok(byline >= 0);
   assert.ok(byline < aftermatter);
   assert.ok(publicationRecord > aftermatter);
   assert.ok(citation > publicationRecord);
   assert.ok(revisions > citation);
   assert.ok(continuation > publicationRecord);
-  assert.ok(exitLinks > continuation);
+  assert.ok(newsletterExit > continuation);
+  assert.ok(exitLinks > newsletterExit);
 
   assert.match(articleSingle, /class="article-publication-record"/);
   assert.match(articleSingle, /\{\{ if or \(ne \.Params\.show_citation false\) \.Params\.revision_history \}\}/);

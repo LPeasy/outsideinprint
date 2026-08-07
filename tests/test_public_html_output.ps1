@@ -569,6 +569,7 @@ $articleLightboxIssues = New-Object System.Collections.Generic.List[string]
 $legacyCleanupIssues = New-Object System.Collections.Generic.List[string]
 $retiredRouteIssues = New-Object System.Collections.Generic.List[string]
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
+$unpublishedAppsIssues = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
 $targetPageHtml = @{}
 
@@ -1384,7 +1385,9 @@ $requiredSitemapExclusions = @(
   'https://outsideinprint.org/start-here/',
   'https://outsideinprint.org/essays/',
   'https://outsideinprint.org/working-papers/',
-  'https://outsideinprint.org/literature/'
+  'https://outsideinprint.org/literature/',
+  'https://outsideinprint.org/apps/',
+  'https://outsideinprint.org/apps/bucks-machine/'
 )
 
 $requiredLlmsOutputs = [ordered]@{
@@ -1624,6 +1627,37 @@ foreach ($file in $htmlFiles) {
 
   if ($content -match '(?:https://outsideinprint\.org)?/shop/(?:hat|shirt|tote)/') {
     $retiredRouteIssues.Add("$relativePath => retired merch route leaked into generated HTML")
+  }
+
+  if (
+    ($content -match '(?i)<a\b[^>]*href\s*=\s*(?:"(?:https://outsideinprint\.org)?/apps(?:/|\?|#|"|$)|''(?:https://outsideinprint\.org)?/apps(?:/|\?|#|''|$))') -or
+    ($content -match '(?i)>\s*Apps\s*&amp;\s*Tools\s*<') -or
+    ($content -match '(?i)bucks-machine-synthetic-professional-services-demo\.(?:pdf|xlsx)')
+  ) {
+    $unpublishedAppsIssues.Add("$relativePath => unpublished Apps & Tools surface leaked into production HTML")
+  }
+}
+
+foreach ($forbiddenOutput in @(
+  'apps/index.html',
+  'apps/bucks-machine/index.html'
+)) {
+  $fullPath = Join-Path $SiteDir $forbiddenOutput
+  if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
+    $unpublishedAppsIssues.Add("public/$forbiddenOutput => unpublished Apps & Tools route was emitted")
+  }
+}
+
+foreach ($sampleFileName in @(
+  'bucks-machine-synthetic-professional-services-demo.pdf',
+  'bucks-machine-synthetic-professional-services-demo.xlsx'
+)) {
+  $publishedSamples = @(
+    Get-ChildItem -Path $SiteDir -Recurse -File -Filter $sampleFileName -ErrorAction SilentlyContinue
+  )
+  foreach ($publishedSample in $publishedSamples) {
+    $publishedRelativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $publishedSample.FullName
+    $unpublishedAppsIssues.Add("$publishedRelativePath => localhost-only Bucks Machine sample was emitted")
   }
 }
 
@@ -3745,11 +3779,13 @@ foreach ($check in $requiredUxChecks) {
 }
 
 foreach ($forbiddenPath in @(
-  'public/almanack/index.html'
+  'public/almanack/index.html',
+  'public/apps/index.html',
+  'public/apps/bucks-machine/index.html'
 )) {
   $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
   if (Test-Path -LiteralPath $fullForbiddenPath -PathType Leaf) {
-    $uxIssues.Add("$forbiddenPath => expected the Almanack section index to remain unpublished")
+    $uxIssues.Add("$forbiddenPath => expected unpublished route to remain absent")
   }
 }
 
@@ -4093,6 +4129,10 @@ if ($zgotmplzIssues.Count -gt 0) {
 
 if ($publicPdfAffordanceHits.Count -gt 0) {
   throw ("Found public HTML that still exposes PDF affordances. Samples: {0}" -f (Format-SampleList -Items $publicPdfAffordanceHits))
+}
+
+if ($unpublishedAppsIssues.Count -gt 0) {
+  throw ("Found unpublished Apps & Tools output in the production build. Samples: {0}" -f (Format-SampleList -Items $unpublishedAppsIssues))
 }
 
 if ($retiredRouteIssues.Count -gt 0) {
