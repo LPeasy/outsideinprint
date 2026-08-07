@@ -1,0 +1,42 @@
+{{- $bankPath := "editorial/affirmations-bank.md" -}}
+{{- $bankSource := os.ReadFile $bankPath -}}
+{{- $headingFound := false -}}
+{{- $collecting := false -}}
+{{- $affirmations := slice -}}
+
+{{- range split $bankSource "\n" -}}
+  {{- $line := strings.TrimSuffix "\r" . -}}
+  {{- if eq $line "## Affirmations" -}}
+    {{- $headingFound = true -}}
+    {{- $collecting = true -}}
+  {{- else if and $collecting (hasPrefix $line "## ") -}}
+    {{- $collecting = false -}}
+  {{- else if and $collecting (hasPrefix $line "- ") -}}
+    {{- $affirmation := strings.TrimSpace (strings.TrimPrefix "- " $line) -}}
+    {{- if $affirmation -}}
+      {{- $affirmations = $affirmations | append $affirmation -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $headingFound -}}
+  {{- errorf "%s is missing the required ## Affirmations heading" $bankPath -}}
+{{- end -}}
+{{- if eq (len $affirmations) 0 -}}
+  {{- errorf "%s contains no one-line affirmation bullets after ## Affirmations" $bankPath -}}
+{{- end -}}
+
+<section id="the-words-we-say" class="page-shell page-shell--grid affirmation-bank" aria-labelledby="the-words-we-say-title">
+  <div class="collection-section__heading affirmation-bank__heading">
+    <h2 id="the-words-we-say-title">The Words We Say</h2>
+    <p class="affirmation-bank__meta">Current bank &middot; {{ len $affirmations }} affirmations</p>
+  </div>
+  <div class="affirmation-bank__body">
+    <p class="affirmation-bank__intro">These are the things that I say to myself. The more I say them, the more I believe them. I am becoming more and more myself every single day. If any of these resonate with you, I encourage you to use this list (or start your own!) and begin speaking love, beauty, and faith into your own life. I know this practice has radically changed the way I see the world and, I think, the way the world sees me.</p>
+    <ul class="affirmation-bank__list">
+      {{- range $affirmations }}
+        <li class="affirmation-bank__item">{{ . }}</li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

@@ -71,3 +71,68 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - All the good things are coming to me right now!
 - Everything I desire is arriving in my life at this very instant.
 - We have everything we need, and we get everything we want.
+- The universe works for us.
+- There’s so many people in our lives who love us and will always be there for us.
+- The cavalry is here to help! Our friends and families are all around us ready to provide support.
+- People always help us without us having to ask.
+- We are totally relaxed and in perfect alignment with ourselves and the universe.
+- We relax together, and align perfectly.
+- We are big ol’ smile factories.
+- We make the most beautiful music together.
+- We harmonize perfectly.
+- Our harmonies are transcendent.
+- Our frequencies resonate.
+- I am healthy, and I’m clean.
+- I make money in my sleep!
+- I get paid to exist!
+- We are wealthy in every sense of the word.
+- Wealth is more than money, more than gold, more than material.
+- We’re rich in spirit, and rich in love.
+- We let go of everything holding us down and we allow ourselves to rise up.
+- We don’t worry about the future, we live today.
+- We don’t relive the past, we live today!
+- Every day is a beautiful adventure!
+- We know exactly what we want, but we don’t know exactly how it’s going to happen. That is okay, we don’t try to control things like that.
+- Everything I desire is arriving in my life this very instant.
+- Money flows easily into our lives.
+- We are so grateful.
+- We go to sleep when we get in bed, and when we wake up we get up.
+- I am infinite.
+- I am beautiful.
+- I am connected to the source of everything.
+- I listen to people when they speak and I really hear them. People are interesting.
+- I am at peace. I’m safe in my own body.
+- I trust myself. I have faith in myself.
+- We’re kind to ourselves.
+- It’s okay to make a mistake.
+- We give ourselves grace.
+- We look around. We live our lives right now. We don’t miss. Life is so beautiful.
+- I’m full of joy and so relaxed whenever I speak with you.
+- Whenever we talk, all the stress in my life just melts away and I know everything’s gonna be okay. Amazing, actually!
+- We’re on the beach together feeling so much love and gratitude for life.
+- Love is a garden, and we care for our garden with diligence, respect, and the utmost affection.
+- We are patient and humble.
+- We let things come to us.
+- We are not afraid. Fear is a lie.
+- We are courageous and strong.
+- My thoughts, words, and habits attract endless riches. The treasure is MINE! I claim it.
+- I was born to be rich. We are King and Queen.
+- Happiness is our birthright.
+- Creation is our inheritance.
+- We don’t make excuses. We make ourselves.
+- I am responsible for everything that happens in my life. I have complete authority over myself.
+- I am not responsible for other people’s stuff. That’s their stuff. My focus is my domain.
+- I see you.
+- I see myself.
+- I see us! I see us together. We are happy :)
+- We are allowed to want this.
+- You don’t have to do, say, be or think anything. I’ll never try to change you. I see you, I love you, and I’ll always love you no matter what.
+- I don’t feel anxiety. What I feel is readiness.
+- Having faith in each other gives us superpowers.
+- Unshakeable faith, ultimate belief, unstoppable resolve.
+- Today, I’m invulnerable and above all suffering!
+- Today is the best day ever!
+- I am a winner!
+- Temporary defeat is not ultimate failure.
+- We don’t quit! We win.
+- A slow, steady process assures success.

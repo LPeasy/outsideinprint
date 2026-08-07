@@ -4800,6 +4800,48 @@ h2{ margin-top:34px; }
   line-height:1.4;
   text-transform:uppercase;
 }
+.affirmation-bank{
+  display:grid;
+  gap:1.45rem;
+  align-items:start;
+}
+.affirmation-bank__meta{
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.affirmation-bank__body{
+  min-width:0;
+}
+.affirmation-bank__intro{
+  max-width:42rem;
+  margin:0;
+  color:var(--text-secondary);
+  font-size:.96rem;
+  line-height:1.72;
+}
+.affirmation-bank__list{
+  column-count:2;
+  column-width:22rem;
+  column-gap:2.4rem;
+  column-rule:1px solid var(--oip-rule-faint);
+  list-style:none;
+  margin:1.35rem 0 0;
+  padding:0;
+}
+.affirmation-bank__item{
+  break-inside:avoid;
+  page-break-inside:avoid;
+  margin:0;
+  padding:.78rem 0 .84rem;
+  border-top:1px solid var(--oip-rule-faint);
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:clamp(1rem, .95rem + .16vw, 1.12rem);
+  line-height:1.52;
+}
 .collection-section__related-list{
   display:grid;
   gap:0;
