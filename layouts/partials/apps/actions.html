@@ -1,0 +1,5 @@
+{{- $product := .product | default dict -}}
+{{- $state := index $product "commercial_action_state" | default "" -}}
+{{- if ne $state "disabled" -}}
+  {{- errorf "Apps product %q attempted to enable unsupported commercial action state %q" (index $product "title" | default "unknown") $state -}}
+{{- end -}}

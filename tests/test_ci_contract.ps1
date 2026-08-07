@@ -15,6 +15,7 @@ $deployWorkflowPath = Join-Path $repoRoot ".github/workflows/deploy.yml"
 $refreshWorkflowPath = Join-Path $repoRoot ".github/workflows/refresh-analytics.yml"
 $seoMetadataAuditPath = Join-Path $repoRoot "scripts/audit_seo_metadata.ps1"
 $authorDirectoryContractPath = Join-Path $repoRoot "tests/test_author_directory_contract.ps1"
+$appsToolsContractPath = Join-Path $repoRoot "tests/test_apps_tools_contract.ps1"
 $publicOutputHelperPath = Join-Path $repoRoot "tests/helpers/public_output_common.ps1"
 $publicRouteDebugPath = Join-Path $repoRoot "tests/show_public_route_debug.ps1"
 $publicManifestWriterPath = Join-Path $repoRoot "tests/write_public_build_manifest.ps1"
@@ -58,6 +59,7 @@ if (-not (Test-Path $hugoConfigPath -PathType Leaf)) {
 
 foreach ($requiredValidationPath in @(
   $authorDirectoryContractPath,
+  $appsToolsContractPath,
   $publicOutputHelperPath,
   $publicRouteDebugPath,
   $publicManifestWriterPath,
@@ -288,6 +290,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_schema_template_contract\.ps1") {
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_author_directory_contract\.ps1") {
   throw "deploy.yml must run the author directory contract test."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_apps_tools_contract\.ps1") {
+  throw "deploy.yml must run the Apps & Tools contract test."
 }
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_indexation_policy_contract\.ps1") {

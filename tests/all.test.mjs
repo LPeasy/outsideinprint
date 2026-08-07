@@ -1,5 +1,6 @@
 import "./article_form_grammar_contract.test.mjs";
 import "./affirmation_bank_surface.test.mjs";
+import "./apps_tools_contract.test.mjs";
 import "./affirmation_type_surfaces.test.mjs";
 import "./collection_room_themes_contract.test.mjs";
 import "./entry_threads_contract.test.mjs";

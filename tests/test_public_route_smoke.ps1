@@ -81,6 +81,8 @@ foreach ($requiredPath in @(
   'about/index.html',
   'authors/index.html',
   'authors/robert-v-ussley/index.html',
+  'apps/index.html',
+  'apps/bucks-machine/index.html',
   'almanack/2026-05-02/index.html',
   'almanack/2026-05-09/index.html',
   'almanack/2026-05-16/index.html',
@@ -109,8 +111,42 @@ foreach ($forbiddenPath in @(
 )) {
   $fullPath = Join-Path $SiteDir $forbiddenPath
   if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
-    throw "Expected the Almanack section index not to be emitted: $forbiddenPath"
+    throw "Expected excluded route not to be emitted: $forbiddenPath"
   }
+}
+
+foreach ($sampleRelativePath in @(
+  'apps/bucks-machine/bucks-machine-synthetic-professional-services-demo.pdf',
+  'apps/bucks-machine/bucks-machine-synthetic-professional-services-demo.xlsx'
+)) {
+  $samplePath = Join-Path $SiteDir $sampleRelativePath
+  if (-not (Test-Path -LiteralPath $samplePath -PathType Leaf)) {
+    throw "Missing reviewed public Bucks Machine sample: $sampleRelativePath"
+  }
+}
+
+$appsHtml = Get-RequiredPageHtml -RelativePath 'apps/index.html'
+$bucksHtml = Get-RequiredPageHtml -RelativePath 'apps/bucks-machine/index.html'
+
+if ($appsHtml -notmatch '<h1\b[^>]*>Apps (?:&amp;|&) Tools</h1>') {
+  throw 'Expected the public Apps & Tools route to render its single H1.'
+}
+if ($bucksHtml -notmatch '<h1\b[^>]*>Bucks Machine</h1>') {
+  throw 'Expected the public Bucks Machine route to render its single H1.'
+}
+foreach ($requiredText in @(
+  'Bucks Machine, a product operated and sold by Outside In Print LLC.',
+  'support@outsideinprint.org',
+  'Not currently available for use or purchase.',
+  'bucks-machine-synthetic-professional-services-demo.pdf',
+  'bucks-machine-synthetic-professional-services-demo.xlsx'
+)) {
+  if ($bucksHtml -notmatch [regex]::Escape($requiredText)) {
+    throw "Expected public Bucks Machine output to include: $requiredText"
+  }
+}
+if ($bucksHtml -match '(?i)<form\b|stripe|checkout|waitlist|available now') {
+  throw 'Public Bucks Machine output exposed a forbidden commercial or intake surface.'
 }
 
 $authorDirectoryHtml = Get-RequiredPageHtml -RelativePath 'authors/index.html'

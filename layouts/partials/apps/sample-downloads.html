@@ -1,0 +1,39 @@
+{{- $page := .page | default false -}}
+{{- $product := .product | default dict -}}
+{{- $state := index $product "sample_downloads_state" | default "disabled" -}}
+
+{{- if eq $state "public_preview" -}}
+  {{- if not $page -}}
+    {{- errorf "Public Apps sample downloads require a page context" -}}
+  {{- end -}}
+  {{- if $page.Draft -}}
+    {{- errorf "Apps product %q cannot use public_preview sample downloads while the page is a draft" (index $product "title" | default "unknown") -}}
+  {{- end -}}
+  <section class="apps-samples" aria-labelledby="apps-samples-title">
+    <div class="apps-samples__copy">
+      <p class="apps-section-kicker">Synthetic evaluation files</p>
+      <h2 id="apps-samples-title">Inspect a fictional planning packet</h2>
+      <p>These files use a fictional Professional Services example. They are demonstration resources, not customer work, certified estimates, contracts, approvals, government deliverables, or professional certifications.</p>
+    </div>
+    <div class="apps-samples__actions" aria-label="Synthetic sample downloads">
+      {{- range index $product "sample_downloads" -}}
+        {{- $resourceName := index . "resource" | default "" -}}
+        {{- $label := index . "label" | default "" -}}
+        {{- $format := index . "format" | default "" -}}
+        {{- if or (not $resourceName) (not $label) (not $format) -}}
+          {{- errorf "Apps product %q has an incomplete sample download record" (index $product "title" | default "unknown") -}}
+        {{- end -}}
+        {{- $resource := $page.Resources.GetMatch $resourceName -}}
+        {{- if not $resource -}}
+          {{- errorf "Apps product %q is missing public sample resource %q" (index $product "title" | default "unknown") $resourceName -}}
+        {{- end -}}
+        <a class="apps-samples__download" href="{{ $resource.RelPermalink }}" download>
+          <span>{{ $label }}</span>
+          <small>{{ $format }} &middot; synthetic data</small>
+        </a>
+      {{- end -}}
+    </div>
+  </section>
+{{- else if ne $state "disabled" -}}
+  {{- errorf "Apps product %q uses unsupported sample download state %q" (index $product "title" | default "unknown") $state -}}
+{{- end -}}

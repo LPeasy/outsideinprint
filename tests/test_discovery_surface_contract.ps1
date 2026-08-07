@@ -31,6 +31,8 @@ $requiredFiles = @(
   'layouts/collections/bobs-almanack.html',
   'layouts/almanack/single.html',
   'layouts/library/list.html',
+  'layouts/apps/list.html',
+  'layouts/apps/single.html',
   'layouts/partials/archive/longform-kind.html',
   'layouts/partials/archive/lane-label.html',
   'layouts/partials/archive/resolve-pages.html',
@@ -875,6 +877,20 @@ if ($mastheadPartial -notmatch '<div class="title">') {
 
 if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Bookstore.*Feeling curious\?') {
   throw 'Expected layouts/partials/masthead.html to order the primary nav as Archive, Collections, Gallery, Library, Bookstore, Feeling curious?.'
+}
+
+foreach ($requiredAppsNavigationSnippet in @(
+  'site.GetPage "/apps"',
+  'not $appsPage.Draft',
+  '>Apps &amp; Tools<'
+)) {
+  if ($mastheadPartial -notmatch [regex]::Escape($requiredAppsNavigationSnippet)) {
+    throw "Expected the public Apps & Tools navigation contract to contain: $requiredAppsNavigationSnippet"
+  }
+}
+
+if ($mastheadPartial -match 'hugo.IsServer') {
+  throw 'Expected the published Apps & Tools navigation link not to be restricted to the local Hugo server.'
 }
 
 if ($mastheadPartial -notmatch 'data-analytics-source-slot="primary_nav_bookstore"') {

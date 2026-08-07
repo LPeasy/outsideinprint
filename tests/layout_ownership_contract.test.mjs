@@ -259,7 +259,9 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(articleSingle, /data-analytics-source-slot="article_collection_context"/);
   assert.match(articleSingle, /partial "authors\/byline\.html"/);
   assert.doesNotMatch(articleSingle, /partial "authors\/card\.html"/);
-  assert.doesNotMatch(articleSingle, /partial "newsletter_signup\.html"/);
+  assert.match(articleSingle, /partial "newsletter_signup\.html"/);
+  assert.match(articleSingle, /newsletter-signup--article-exit/);
+  assert.match(articleSingle, /article_exit_newsletter/);
   assert.doesNotMatch(articleSingle, /partial "running_header\.html"/);
   assert.doesNotMatch(articleSingle, /From the Collection/);
   assert.match(articleSingle, /journey-links--article-exit/);
@@ -348,7 +350,7 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   }
 });
 
-test("layout ownership matrix tracks archive-shell ownership and the essays redirect alias", () => {
+test("layout ownership matrix tracks archive, redirect, and public Apps route ownership", () => {
   for (const snippet of [
     "`home-manifesto`",
     "`home-manifesto__inner`",
@@ -399,6 +401,18 @@ test("layout ownership matrix tracks archive-shell ownership and the essays redi
     "`collection-section__items`",
     "`collection-section__related`",
     "| Gallery | `/gallery/`",
+    "| Apps & Tools index | `/apps/`",
+    "| Bucks Machine product | `/apps/bucks-machine/`",
+    "`apps-index`",
+    "`apps-card`",
+    "`apps-product`",
+    "`apps-status`",
+    "`apps-packet-preview`",
+    "`apps-workflow`",
+    "`apps-deliverables`",
+    "`apps-samples`",
+    "`apps-limitations`",
+    "`apps-identity`",
     "`piece-title-block`",
     "`piece-fleuron`",
     "`piece-media-plate`",
