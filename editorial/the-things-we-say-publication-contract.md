@@ -24,6 +24,27 @@ The selected affirmation must appear verbatim in at least one canonical
 Each piece may use one or two pull quotes. At least one must be the chosen
 affirmation.
 
+## Public Affirmations Bank
+
+The collection landing page reads `editorial/affirmations-bank.md` during
+the Hugo build. It renders the complete bank in source order and derives the
+public count from the same parsed list. Do not maintain a second public copy
+in content, templates, or data files.
+
+The exact `## Affirmations` heading begins the machine-readable bank. After
+that heading:
+
+- put each complete affirmation on one physical Markdown line beginning
+  with `- `;
+- keep continuation text on that same line;
+- do not add nested bullets or non-affirmation bullets; and
+- preserve the affirmation's exact wording and source order.
+
+The landing page must expose the full list in rendered HTML without a
+collapsed control or client-side JavaScript. A missing heading, malformed
+bank line, empty bank, or mismatch between the bank and the public list must
+fail validation.
+
 ## Publication Type
 
 New entries belong under `content/essays/affirmations/` and use:

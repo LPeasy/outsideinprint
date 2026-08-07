@@ -1,5 +1,6 @@
 {{ define "main" }}
   {{ $slug := .Params.slug | default .File.BaseFileName }}
+  {{ $isTheThingsWeSay := eq (lower (printf "%v" $slug)) "the-things-we-say" }}
   {{ $definition := partial "collections/lookup-definition.html" $slug }}
   {{ if not $definition }}
     <div class="page-shell page-shell--reading">
@@ -66,7 +67,16 @@
         </section>
       {{ end }}
 
-      <section class="page-shell page-shell--grid collection-section__contents" aria-label="Collection pieces">
+      {{ if $isTheThingsWeSay }}
+        {{ partial "collections/affirmation-bank.html" . }}
+      {{ end }}
+
+      <section class="page-shell page-shell--grid collection-section__contents"{{ if $isTheThingsWeSay }} aria-labelledby="collection-published-reflections-title"{{ else }} aria-label="Collection pieces"{{ end }}>
+        {{ if $isTheThingsWeSay }}
+          <div class="collection-section__heading collection-section__published-heading">
+            <h2 id="collection-published-reflections-title">Published Reflections</h2>
+          </div>
+        {{ end }}
         {{ if gt (len $items) 0 }}
           <ol class="collection-section__items">
           {{ range $items }}

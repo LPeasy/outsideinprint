@@ -109,15 +109,38 @@ Assert-True (-not (Test-Path -LiteralPath (Join-Path $resolvedRoot 'content\coll
 Assert-True (-not (Test-Path -LiteralPath (Join-Path $resolvedRoot 'editorial\what-you-tell-yourself-series-contract.md'))) 'Retired series contract still exists.'
 
 $bankText = [System.IO.File]::ReadAllText($bankPath)
-$affirmationsStart = $bankText.IndexOf('## Affirmations', [System.StringComparison]::Ordinal)
-Assert-True ($affirmationsStart -ge 0) 'Affirmations Bank is missing its Affirmations section.'
-$bankAffirmations = [System.Collections.Generic.HashSet[string]]::new(
+$affirmationsHeading = [regex]::Match($bankText, '(?m)^## Affirmations\s*$')
+Assert-True $affirmationsHeading.Success 'Affirmations Bank is missing its Affirmations section.'
+$bankSection = $bankText.Substring($affirmationsHeading.Index + $affirmationsHeading.Length)
+$nextBankHeading = [regex]::Match($bankSection, '(?m)^##\s+')
+if ($nextBankHeading.Success) {
+  $bankSection = $bankSection.Substring(0, $nextBankHeading.Index)
+}
+$bankAffirmations = [System.Collections.Generic.List[string]]::new()
+$bankAffirmationSet = [System.Collections.Generic.HashSet[string]]::new(
   [System.StringComparer]::Ordinal
 )
-foreach ($match in [regex]::Matches($bankText.Substring($affirmationsStart), '(?m)^\s*-\s+(?<value>.+?)\s*$')) {
-  $bankAffirmations.Add((Normalize-Text $match.Groups['value'].Value)) | Out-Null
+$bankLines = @([regex]::Split($bankSection, '\r?\n'))
+foreach ($line in $bankLines) {
+  if ([string]::IsNullOrEmpty($line)) {
+    continue
+  }
+
+  Assert-True ($line.StartsWith('- ', [System.StringComparison]::Ordinal)) "Affirmations Bank contains a malformed one-line entry: $line"
+  $affirmation = $line.Substring(2)
+  Assert-True (-not [string]::IsNullOrWhiteSpace($affirmation)) 'Affirmations Bank contains an empty affirmation bullet.'
+  Assert-True ($affirmation -ceq $affirmation.Trim()) "Affirmations Bank contains leading or trailing whitespace: $affirmation"
+  Assert-True ($bankAffirmationSet.Add($affirmation)) "Affirmations Bank contains an exact duplicate: $affirmation"
+  $bankAffirmations.Add($affirmation) | Out-Null
 }
 Assert-True ($bankAffirmations.Count -gt 0) 'Affirmations Bank contains no affirmation bullets.'
+
+$normalizedBankAffirmations = [System.Collections.Generic.HashSet[string]]::new(
+  [System.StringComparer]::Ordinal
+)
+foreach ($affirmation in $bankAffirmations) {
+  $normalizedBankAffirmations.Add((Normalize-Text $affirmation)) | Out-Null
+}
 
 $galleryData = [System.IO.File]::ReadAllText($galleryDataPath)
 $articles = @(Get-ChildItem -LiteralPath $affirmationRoot -File -Filter '*.md' -Recurse)
@@ -163,7 +186,7 @@ foreach ($article in $articles) {
       '(?is)<blockquote\b[^>]*>\s*(?<value>.+?)\s*</blockquote>'
     )
     Assert-True $blockquote.Success "$slug contains a pull quote without one blockquote."
-    if ($bankAffirmations.Contains((Normalize-Text $blockquote.Groups['value'].Value))) {
+    if ($normalizedBankAffirmations.Contains((Normalize-Text $blockquote.Groups['value'].Value))) {
       $bankMatchFound = $true
     }
   }

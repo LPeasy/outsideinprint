@@ -190,6 +190,51 @@ function Get-HeadingLevels {
   return @([regex]::Matches($Html, '<h([1-6])\b', 'IgnoreCase') | ForEach-Object { [int]$_.Groups[1].Value })
 }
 
+function Get-CanonicalAffirmations {
+  param([string]$Path)
+
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    throw "Missing canonical affirmation bank: $Path"
+  }
+
+  $source = [System.IO.File]::ReadAllText($Path)
+  $headingMatch = [regex]::Match($source, '(?m)^## Affirmations\s*$')
+  if (-not $headingMatch.Success) {
+    throw "Canonical affirmation bank is missing its Affirmations heading: $Path"
+  }
+
+  $section = $source.Substring($headingMatch.Index + $headingMatch.Length)
+  $nextHeading = [regex]::Match($section, '(?m)^##\s+')
+  if ($nextHeading.Success) {
+    $section = $section.Substring(0, $nextHeading.Index)
+  }
+
+  $affirmations = [System.Collections.Generic.List[string]]::new()
+  foreach ($line in @([regex]::Split($section, '\r?\n'))) {
+    if ([string]::IsNullOrEmpty($line)) {
+      continue
+    }
+    if (-not $line.StartsWith('- ', [System.StringComparison]::Ordinal)) {
+      throw "Malformed one-line affirmation in ${Path}: $line"
+    }
+
+    $value = $line.Substring(2)
+    if ([string]::IsNullOrWhiteSpace($value) -or $value -cne $value.Trim()) {
+      throw "Invalid affirmation text in ${Path}: $line"
+    }
+    $affirmations.Add($value) | Out-Null
+  }
+
+  return $affirmations.ToArray()
+}
+
+function Convert-HtmlFragmentToText {
+  param([string]$Html)
+
+  $withoutTags = [regex]::Replace($Html, '(?is)<[^>]+>', '')
+  return [System.Net.WebUtility]::HtmlDecode($withoutTags).Trim()
+}
+
 function Convert-YamlScalarToString {
   param([string]$Value)
 
@@ -477,6 +522,7 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$canonicalAffirmations = @(Get-CanonicalAffirmations -Path (Join-Path $repoRoot 'editorial\affirmations-bank.md'))
 $currentCartoon = Get-PublicCurrentCartoonEntry -RepoRoot $repoRoot
 $currentCartoonSlug = if ($null -ne $currentCartoon) { [string]$currentCartoon.slug } else { '' }
 $currentCartoonImagePath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'image')) { [string]$currentCartoon.image } else { '' }
@@ -1391,6 +1437,7 @@ $requiredUxPages = @(
   'public/library/index.html',
   'public/gallery/index.html',
   'public/collections/index.html',
+  'public/collections/the-things-we-say/index.html',
   'public/collections/bobs-almanack/index.html',
   'public/almanack/2026-05-02/index.html',
   'public/almanack/2026-05-09/index.html',
@@ -3908,6 +3955,85 @@ foreach ($articlePath in @(
   if ($articleHtml -notmatch '(?s)journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<') {
     $uxIssues.Add("$articlePath => expected article-exit links to include Archive, Collections, Library, and Newsletter")
   }
+}
+
+$affirmationCollectionPath = 'public/collections/the-things-we-say/index.html'
+if (-not $targetPageHtml.ContainsKey($affirmationCollectionPath)) {
+  $uxIssues.Add("Missing generated page required for affirmation-bank coverage: $affirmationCollectionPath")
+}
+else {
+  $affirmationCollectionHtml = [string]$targetPageHtml[$affirmationCollectionPath]
+  $bankSectionMatch = [regex]::Match(
+    $affirmationCollectionHtml,
+    '(?is)<section\b(?=[^>]*\bid=(?:"the-words-we-say"|''the-words-we-say''|the-words-we-say))(?=[^>]*\bclass=(?:"[^"]*\baffirmation-bank\b[^"]*"|''[^'']*\baffirmation-bank\b[^'']*''|[^\s>]*\baffirmation-bank\b[^\s>]*))[^>]*>(?<body>.*?)</section>'
+  )
+
+  if (-not $bankSectionMatch.Success) {
+    $uxIssues.Add("$affirmationCollectionPath => expected the canonical affirmation-bank section")
+  }
+  else {
+    $bankSectionHtml = $bankSectionMatch.Groups['body'].Value
+    if ($bankSectionMatch.Value -notmatch 'aria-labelledby=(?:"the-words-we-say-title"|''the-words-we-say-title''|the-words-we-say-title)') {
+      $uxIssues.Add("$affirmationCollectionPath => expected affirmation-bank section to reference its visible heading")
+    }
+    if ($bankSectionHtml -notmatch '(?is)<h2\b[^>]*id=(?:"the-words-we-say-title"|''the-words-we-say-title''|the-words-we-say-title)[^>]*>\s*The Words We Say\s*</h2>') {
+      $uxIssues.Add("$affirmationCollectionPath => expected the visible The Words We Say h2")
+    }
+
+    $decodedBankSection = [System.Net.WebUtility]::HtmlDecode($bankSectionHtml)
+    $expectedCountLabel = "Current bank · $($canonicalAffirmations.Count) affirmations"
+    if (-not $decodedBankSection.Contains($expectedCountLabel, [System.StringComparison]::Ordinal)) {
+      $uxIssues.Add("$affirmationCollectionPath => expected dynamic count label '$expectedCountLabel'")
+    }
+
+    $bankListMatch = [regex]::Match(
+      $bankSectionHtml,
+      '(?is)<ul\b[^>]*class=(?:"[^"]*\baffirmation-bank__list\b[^"]*"|''[^'']*\baffirmation-bank__list\b[^'']*''|[^\s>]*\baffirmation-bank__list\b[^\s>]*)[^>]*>(?<body>.*?)</ul>'
+    )
+    if (-not $bankListMatch.Success) {
+      $uxIssues.Add("$affirmationCollectionPath => expected one semantic affirmation list")
+    }
+    else {
+      $renderedAffirmationMatches = @(
+        [regex]::Matches(
+          $bankListMatch.Groups['body'].Value,
+          '(?is)<li\b[^>]*class=(?:"[^"]*\baffirmation-bank__item\b[^"]*"|''[^'']*\baffirmation-bank__item\b[^'']*''|[^\s>]*\baffirmation-bank__item\b[^\s>]*)[^>]*>(?<value>.*?)</li>'
+        )
+      )
+      $renderedAffirmations = @(
+        $renderedAffirmationMatches |
+          ForEach-Object { Convert-HtmlFragmentToText -Html $_.Groups['value'].Value }
+      )
+
+      if ($renderedAffirmations.Count -ne $canonicalAffirmations.Count) {
+        $uxIssues.Add("$affirmationCollectionPath => expected $($canonicalAffirmations.Count) canonical affirmations, found $($renderedAffirmations.Count)")
+      }
+      else {
+        for ($index = 0; $index -lt $canonicalAffirmations.Count; $index++) {
+          if ($renderedAffirmations[$index] -cne $canonicalAffirmations[$index]) {
+            $uxIssues.Add("$affirmationCollectionPath => affirmation $($index + 1) differs from canonical order/text")
+            break
+          }
+        }
+      }
+    }
+  }
+
+  $startHereIndex = $affirmationCollectionHtml.IndexOf('collection-section__lead', [System.StringComparison]::Ordinal)
+  $bankIndex = $affirmationCollectionHtml.IndexOf('id=the-words-we-say', [System.StringComparison]::Ordinal)
+  $publishedIndex = $affirmationCollectionHtml.IndexOf('collection-published-reflections-title', [System.StringComparison]::Ordinal)
+  $relatedIndex = $affirmationCollectionHtml.IndexOf('collection-section__related', [System.StringComparison]::Ordinal)
+  if ($startHereIndex -lt 0 -or $bankIndex -le $startHereIndex -or $publishedIndex -le $bankIndex -or ($relatedIndex -ge 0 -and $relatedIndex -le $publishedIndex)) {
+    $uxIssues.Add("$affirmationCollectionPath => expected Start Here, bank, Published Reflections, then Related Collections")
+  }
+}
+
+$nonAffirmationCollectionPath = 'public/collections/musings/index.html'
+if (-not $targetPageHtml.ContainsKey($nonAffirmationCollectionPath)) {
+  $uxIssues.Add("Missing generated page required for affirmation-bank non-leak coverage: $nonAffirmationCollectionPath")
+}
+elseif ([string]$targetPageHtml[$nonAffirmationCollectionPath] -match 'id=(?:"the-words-we-say"|''the-words-we-say''|the-words-we-say)|affirmation-bank__list|the-words-we-say-title') {
+  $uxIssues.Add("$nonAffirmationCollectionPath => target-only affirmation bank leaked into another collection")
 }
 
 if ($targetPageHtml.ContainsKey('public/archive/index.html')) {
