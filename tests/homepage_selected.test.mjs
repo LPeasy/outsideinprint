@@ -151,7 +151,7 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(frontPageCopySource, /Read dialogue/);
   assert.match(frontPageCopySource, /\$sectionLabel = "Affirmation"/);
   assert.match(frontPageCopySource, /Dialogues/);
-  assert.match(frontPageSource, /site\.Data\.editorial_cartoons/);
+  assert.match(frontPageSource, /hugo\.Data\.editorial_cartoons/);
   assert.match(frontPageSource, /currentCartoonSlug/);
   assert.match(frontPageSource, /\$orderedCartoons := sort \(sort \$cartoons "slug" "asc"\) "date" "desc"/);
   assert.match(frontPageSource, /\$recentCartoons := slice/);
@@ -225,7 +225,7 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(galleryTemplate, /getRequestedCartoonSlug/);
   assert.match(galleryTemplate, /URLSearchParams\(window\.location\.search/);
   assert.match(galleryTemplate, /openLightbox\(requestedTrigger\)/);
-  assert.match(cartoonLookupPartial, /site\.Data\.editorial_cartoons/);
+  assert.match(cartoonLookupPartial, /hugo\.Data\.editorial_cartoons/);
   assert.match(cartoonLookupPartial, /\.essay/);
   assert.match(cartoonLinkPartial, /gallery\/\?cartoon=%s/);
   assert.match(cartoonLinkPartial, /essay-cartoon-thumb/);
@@ -329,7 +329,7 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
   assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
-  assert.match(frontPageSource, /site\.Data\.editorial_cartoons/);
+  assert.match(frontPageSource, /hugo\.Data\.editorial_cartoons/);
   assert.match(frontPageSource, /data-home-cartoon-recent/);
   assert.match(frontPageSource, /data-home-cartoon-recent-trigger/);
   assert.doesNotMatch(frontPageSource, /Also on the front page/);

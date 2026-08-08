@@ -21,7 +21,7 @@ Use the generated wrappers under `tools\bin\generated\` for local commands after
 Current pinned contract:
 
 - Node `20.20.2`
-- Hugo `0.157.0`
+- Hugo Extended `0.164.0`
 - PowerShell `7.5.0`
 - Python `3.12.9`
 
@@ -156,7 +156,7 @@ During drafting, preview locally with:
 Before publishing, run the normal local publish gate:
 
 ```powershell
-.\tools\bin\generated\hugo.cmd --gc --minify
+.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild
@@ -184,7 +184,7 @@ There is no separate manual publish step after `main` is updated. `main` is the 
 
 ## Future-dated publishing
 
-Future-dated essays can be committed to `main` before release. Keep `draft: false`, set `date` to the public article date, set `publishDate` to the intended release time, and leave the production Hugo build as `hugo --gc --minify` without `--buildFuture`. Hugo excludes future-dated content from the public build until the release time has passed.
+Future-dated essays can be committed to `main` before release. Keep `draft: false`, set `date` to the public article date, set `publishDate` to the intended release time, and leave the production Hugo build as `hugo --gc --minify --panicOnWarning` without `--buildFuture`. Hugo excludes future-dated content from the public build until the release time has passed.
 
 Use explicit Eastern-time timestamps for timed releases:
 
@@ -229,14 +229,14 @@ For a local preview of future queued cartoons, set the explicit preview environm
 
 ```powershell
 $env:HUGO_BUILD_FUTURE_CARTOONS = "true"
-.\tools\bin\generated\hugo.cmd --gc --minify --buildFuture
+.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning --buildFuture
 Remove-Item Env:\HUGO_BUILD_FUTURE_CARTOONS
 ```
 
 For local preview of a future-dated essay, use `--buildFuture` deliberately:
 
 ```powershell
-.\tools\bin\generated\hugo.cmd --gc --minify --buildFuture
+.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning --buildFuture
 ```
 
 Do not add `--buildFuture` to the production deploy workflow. That flag is only for preview and validation of future content before its public time.

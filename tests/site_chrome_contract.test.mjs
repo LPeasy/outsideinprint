@@ -213,7 +213,7 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.match(homeFrontPage, /id="home-front-page-title"/);
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
   assert.match(homeFrontPage, /home_front_page_copy\.html/);
-  assert.match(homeFrontPage, /site\.Data\.editorial_cartoons/);
+  assert.match(homeFrontPage, /hugo\.Data\.editorial_cartoons/);
   assert.match(homeFrontPage, /\$orderedCartoons := sort \(sort \$cartoons "slug" "asc"\) "date" "desc"/);
   assert.match(homeFrontPage, /\$recentCartoons := slice/);
   assert.match(homeFrontPage, /lt \(len \$recentCartoons\) 2/);
@@ -320,7 +320,7 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.match(galleryTemplate, /window\.location\.href = activeEssay/);
   assert.match(galleryTemplate, /getRequestedCartoonSlug/);
   assert.match(galleryTemplate, /openLightbox\(requestedTrigger\)/);
-  assert.match(cartoonLookupPartial, /site\.Data\.editorial_cartoons/);
+  assert.match(cartoonLookupPartial, /hugo\.Data\.editorial_cartoons/);
   assert.match(cartoonLinkPartial, /gallery\/\?cartoon=%s/);
   assert.match(cartoonLinkPartial, /essay-cartoon-thumb/);
   assert.match(cartoonLinkPartial, /<button/);

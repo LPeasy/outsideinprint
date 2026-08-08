@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ $galleryData := site.Data.editorial_cartoons | default dict }}
+  {{ $galleryData := hugo.Data.editorial_cartoons | default dict }}
   {{ $cartoons := partial "editorial/published-cartoons.html" ($galleryData.cartoons | default (slice)) }}
   {{ $current := partial "editorial/current-cartoon.html" . }}
   {{ $currentSlug := "" }}

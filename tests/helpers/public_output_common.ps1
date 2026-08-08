@@ -78,10 +78,76 @@ function Get-PublicBuildManifestPath {
   return (Join-Path $SiteDir '.oip-build-manifest.json')
 }
 
+function Resolve-PinnedHugo {
+  param(
+    [string]$RepoRoot,
+    [string]$ExpectedVersion = '0.164.0'
+  )
+
+  $generatedHugo = Join-Path $RepoRoot 'tools\bin\generated\hugo.cmd'
+  $hugoCommand = $null
+  if ($env:OS -eq 'Windows_NT' -and (Test-Path -LiteralPath $generatedHugo -PathType Leaf)) {
+    $hugoCommand = $generatedHugo
+  }
+  else {
+    $resolvedHugo = Get-Command hugo -CommandType Application -ErrorAction SilentlyContinue
+    if ($resolvedHugo) {
+      $hugoCommand = $resolvedHugo.Source
+    }
+  }
+
+  if ([string]::IsNullOrWhiteSpace($hugoCommand)) {
+    throw 'Pinned Hugo command could not be resolved.'
+  }
+
+  $versionOutput = ((& $hugoCommand version 2>&1) | Out-String).Trim()
+  if ($LASTEXITCODE -ne 0) {
+    throw "Pinned Hugo version check failed through $hugoCommand."
+  }
+  if ($versionOutput -notmatch "^hugo v$([regex]::Escape($ExpectedVersion)).*\+extended") {
+    throw "Expected Hugo Extended $ExpectedVersion, got: $versionOutput"
+  }
+
+  return [pscustomobject]@{
+    Command = $hugoCommand
+    Version = $versionOutput
+  }
+}
+
+function Assert-GeneratedSiteHugoVersion {
+  param(
+    [string]$SiteDir,
+    [string]$HugoVersion
+  )
+
+  $versionMatch = [regex]::Match($HugoVersion, '^hugo v(?<version>\d+\.\d+\.\d+)')
+  if (-not $versionMatch.Success) {
+    throw "Could not parse Hugo semantic version from: $HugoVersion"
+  }
+
+  $indexPath = Join-Path $SiteDir 'index.html'
+  if (-not (Test-Path -LiteralPath $indexPath -PathType Leaf)) {
+    throw "Generated homepage not found: $indexPath"
+  }
+
+  $indexHtml = Get-Content -LiteralPath $indexPath -Raw
+  $generatorMatch = [regex]::Match($indexHtml, '<meta\s+name=(?:"generator"|generator)\s+content=(?:"Hugo (?<version>\d+\.\d+\.\d+)"|Hugo\s+(?<version>\d+\.\d+\.\d+))\s*/?>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+  if (-not $generatorMatch.Success) {
+    throw "Generated homepage does not contain a parseable Hugo generator meta tag: $indexPath"
+  }
+
+  $expectedVersion = $versionMatch.Groups['version'].Value
+  $generatedVersion = $generatorMatch.Groups['version'].Value
+  if ($generatedVersion -ne $expectedVersion) {
+    throw "Generated homepage was built by Hugo $generatedVersion, but the manifest command resolved Hugo $expectedVersion."
+  }
+}
+
 function Write-PublicBuildManifest {
   param(
     [string]$RepoRoot,
-    [string]$SiteDir
+    [string]$SiteDir,
+    [string]$HugoVersion
   )
 
   if (-not (Test-Path -LiteralPath $SiteDir -PathType Container)) {
@@ -94,17 +160,17 @@ function Write-PublicBuildManifest {
     $commitSha = $null
   }
 
-  $hugoVersion = (& hugo version 2>$null)
-  if ($LASTEXITCODE -ne 0) {
-    $hugoVersion = $null
+  if ([string]::IsNullOrWhiteSpace($HugoVersion)) {
+    throw 'Pinned Hugo version is required for the public build manifest.'
   }
+  Assert-GeneratedSiteHugoVersion -SiteDir $SiteDir -HugoVersion $HugoVersion
 
   $manifest = [ordered]@{
     schemaVersion = 1
     generatedAtUtc = [DateTime]::UtcNow.ToString('o')
     sourceFingerprint = Get-SourceFingerprint -RepoRoot $RepoRoot
     commitSha = $commitSha
-    hugoVersion = $hugoVersion
+    hugoVersion = $HugoVersion
   }
 
   $manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $manifestPath
@@ -149,6 +215,25 @@ function Test-PublicBuildFreshness {
     return @{
       IsFresh = $false
       Reason = "fresh-build manifest schemaVersion is unsupported at $manifestPath"
+      ManifestPath = $manifestPath
+    }
+  }
+
+  try {
+    $pinnedHugo = Resolve-PinnedHugo -RepoRoot $RepoRoot
+    if ([string]$manifest.hugoVersion -ne [string]$pinnedHugo.Version) {
+      return @{
+        IsFresh = $false
+        Reason = "fresh-build manifest Hugo version does not match the pinned Hugo command"
+        ManifestPath = $manifestPath
+      }
+    }
+    Assert-GeneratedSiteHugoVersion -SiteDir $SiteDir -HugoVersion ([string]$manifest.hugoVersion)
+  }
+  catch {
+    return @{
+      IsFresh = $false
+      Reason = "generated-output Hugo binding failed: $($_.Exception.Message)"
       ManifestPath = $manifestPath
     }
   }

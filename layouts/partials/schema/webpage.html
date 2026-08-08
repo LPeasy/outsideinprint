@@ -23,7 +23,7 @@
   "name" $meta.title
   "description" $meta.description
   "isPartOf" (dict "@id" (index $website "@id"))
-  "inLanguage" ($page.Site.Language.LanguageCode | default "en-US")
+  "inLanguage" ($page.Site.Language.Locale | default "en-US")
 -}}
 
 {{- if $meta.route.is_article_like -}}

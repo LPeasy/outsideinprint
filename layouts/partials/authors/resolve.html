@@ -1,6 +1,6 @@
 {{- $page := .page | default . -}}
 {{- $fallbackDefault := default false .fallbackDefault -}}
-{{- $authorsData := site.Data.authors.authors | default dict -}}
+{{- $authorsData := hugo.Data.authors.authors | default dict -}}
 {{- $authorKeys := slice -}}
 
 {{- with $page.Params.author_id -}}
@@ -18,7 +18,7 @@
 {{- end -}}
 
 {{- if and (eq (len $authorKeys) 0) $fallbackDefault -}}
-  {{- with site.Data.organization.default_author_id -}}
+  {{- with hugo.Data.organization.default_author_id -}}
     {{- $authorKeys = $authorKeys | append (printf "%v" .) -}}
   {{- end -}}
 {{- end -}}

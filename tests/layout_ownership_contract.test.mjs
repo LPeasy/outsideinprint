@@ -187,7 +187,7 @@ test("archive shell owns the long-form list routes while /essays/ becomes a redi
     'partial "journey_links.html"',
     'Current Edition',
     'Rolling Archive',
-    'site.Data.editorial_cartoons',
+    'hugo.Data.editorial_cartoons',
     '"mode" "dialogue"'
   ]) {
     assert.doesNotMatch(archiveList, new RegExp(escapeRegex(retiredSnippet)));

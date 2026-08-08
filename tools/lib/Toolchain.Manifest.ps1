@@ -248,6 +248,14 @@ function Test-ToolDefinition {
         Test-ManifestStringArrayField -ToolName ([string]$Tool.name) -FieldName "source_candidates" -Value $Tool.source_candidates
     }
 
+    foreach ($hashField in @("sha256", "installed_sha256")) {
+        if ($Tool.PSObject.Properties.Name.Contains($hashField)) {
+            if ($Tool.$hashField -isnot [string] -or ([string]$Tool.$hashField) -notmatch '^[A-Fa-f0-9]{64}$') {
+                throw "Tool '$($Tool.name)' field '$hashField' must be a 64-character hexadecimal digest when provided."
+            }
+        }
+    }
+
     if ($Tool.PSObject.Properties.Name.Contains("machine_candidates")) {
         Test-ManifestStringArrayField -ToolName ([string]$Tool.name) -FieldName "machine_candidates" -Value $Tool.machine_candidates
     }

@@ -1,6 +1,6 @@
 baseURL = "https://outsideinprint.org/"
 title = "Outside In Print"
-languageCode = "en-us"
+locale = "en-US"
 timeZone = "America/New_York"
 
 enableRobotsTXT = true

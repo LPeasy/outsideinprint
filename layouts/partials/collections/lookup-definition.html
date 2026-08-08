@@ -1,6 +1,6 @@
 {{ $slug := lower (printf "%v" .) }}
 {{ $found := false }}
-{{ $definitions := default (slice) site.Data.collections.collections }}
+{{ $definitions := default (slice) hugo.Data.collections.collections }}
 {{ range $definitions }}
   {{ if eq (lower (printf "%v" .slug)) $slug }}
     {{ $found = . }}

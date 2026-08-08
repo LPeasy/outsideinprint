@@ -1,6 +1,6 @@
 {{- $organization := .organization -}}
 {{- $organizationID := index $organization "@id" -}}
-{{- $organizationData := site.Data.organization -}}
+{{- $organizationData := hugo.Data.organization -}}
 {{- $node := dict
   "@id" (printf "%s#website" (strings.TrimSuffix "/" site.BaseURL))
   "@type" "WebSite"
@@ -8,7 +8,7 @@
   "name" site.Title
   "description" ($organizationData.description | default "")
   "publisher" (dict "@id" $organizationID)
-  "inLanguage" (site.Language.LanguageCode | default "en-US")
+  "inLanguage" (site.Language.Locale | default "en-US")
 -}}
 {{- $node = merge $node (dict "potentialAction" (dict
   "@type" "SearchAction"

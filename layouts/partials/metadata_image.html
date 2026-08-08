@@ -1,7 +1,7 @@
 {{- $image := "" -}}
 {{- $route := partial "metadata/route.html" . -}}
 {{- $policy := partial "metadata/policy.html" (dict "page" . "route" $route) -}}
-{{- $organizationImage := site.Data.organization.image | default "" -}}
+{{- $organizationImage := hugo.Data.organization.image | default "" -}}
 {{- $slug := .Params.slug | default "" -}}
 {{- with .File -}}
   {{- if not $slug -}}

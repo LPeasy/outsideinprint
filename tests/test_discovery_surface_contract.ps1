@@ -682,7 +682,7 @@ foreach ($requiredSnippet in @(
 
 foreach ($retiredSnippet in @(
   'partial "journey_links.html"',
-  'site.Data.editorial_cartoons',
+  'hugo.Data.editorial_cartoons',
   'Current Edition',
   'Rolling Archive',
   '"mode" "dialogue"'

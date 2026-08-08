@@ -19,7 +19,7 @@ Merch order automation is not implemented yet. Before proposing or building orde
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit`
 - Preview locally while drafting with `.\tools\bin\generated\hugo.cmd server -D`.
 - Before publishing, run the normal gate:
-  `.\tools\bin\generated\hugo.cmd --gc --minify`
+  `.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning`
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1`
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1`
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`

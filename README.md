@@ -21,7 +21,7 @@ cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.
 The current toolchain contract is pinned to:
 
 - Node `20.20.2`
-- Hugo `0.157.0`
+- Hugo Extended `0.164.0`
 - PowerShell `7.5.0`
 - Python `3.12.9`
 
@@ -44,7 +44,7 @@ Use `docs/publishing-workflow.md` as the canonical process. The normal publish p
 3. Before setting `draft: false` or publishing a changed essay, run the philosophy gate:
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit`
 4. Build the site locally:
-   - `.\tools\bin\generated\hugo.cmd --gc --minify`
+   - `.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning`
 5. Write the fresh-build manifest and run the publish smoke tests:
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1`
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1`

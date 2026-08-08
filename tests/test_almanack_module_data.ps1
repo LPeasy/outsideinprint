@@ -44,7 +44,7 @@ $script = Get-Content -LiteralPath $scriptPath -Raw
 $archiveScript = Get-Content -LiteralPath $archiveScriptPath -Raw
 
 foreach ($requiredReference in @(
-  'site.Data.almanack',
+  'hugo.Data.almanack',
   '"on_this_day"',
   '"weather_city_records"',
   '"world_week"',
