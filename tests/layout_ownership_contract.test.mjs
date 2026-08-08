@@ -350,7 +350,7 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   }
 });
 
-test("layout ownership matrix tracks archive, redirect, and public Apps route ownership", () => {
+test("layout ownership matrix tracks archive, Apps, and lifecycle-controlled Games routes", () => {
   for (const snippet of [
     "`home-manifesto`",
     "`home-manifesto__inner`",
@@ -413,6 +413,16 @@ test("layout ownership matrix tracks archive, redirect, and public Apps route ow
     "`apps-samples`",
     "`apps-limitations`",
     "`apps-identity`",
+    "| Games index | `/games/`",
+    "| Games product family | `/games/:slug/`",
+    "`games-index`",
+    "`games-card`",
+    "`games-product`",
+    "`games-facts`",
+    "`games-features`",
+    "`games-gallery`",
+    "`games-notices`",
+    "`games-requirements`",
     "`piece-title-block`",
     "`piece-fleuron`",
     "`piece-media-plate`",

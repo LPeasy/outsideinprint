@@ -5,10 +5,13 @@
 {{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
 {{ $isBookstore := or (eq .Section "shop") (eq .RelPermalink "/shop/") }}
 {{ $isApps := eq .Section "apps" }}
+{{ $isGames := eq .Section "games" }}
 {{ $isGallery := eq .Section "gallery" }}
 {{ $isRandom := eq .Section "random" }}
 {{ $appsPage := site.GetPage "/apps" }}
 {{ $showApps := and $appsPage (not $appsPage.Draft) }}
+{{ $gamesPage := site.GetPage "/games" }}
+{{ $showGames := and $gamesPage (or (not $gamesPage.Draft) hugo.IsServer) }}
 {{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
 {{ $paperRoute := site.Params.paper_route | default dict }}
 {{ $paperRouteEnabled := and $isHomeMasthead (ne ($paperRoute.enabled | default true) false) }}
@@ -85,6 +88,7 @@
     <a href="{{ "gallery/" | absURL }}"{{ if $isGallery }} aria-current="page"{{ end }}>Gallery</a><span class="dot">&bull;</span>
     <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
     {{ if $showApps }}<a href="{{ $appsPage.RelPermalink }}"{{ if $isApps }} aria-current="page"{{ end }}>Apps &amp; Tools</a><span class="dot">&bull;</span>{{ end }}
+    {{ if $showGames }}<a href="{{ $gamesPage.RelPermalink }}"{{ if $isGames }} aria-current="page"{{ end }}>Games</a><span class="dot">&bull;</span>{{ end }}
     <a
       href="{{ "shop/" | absURL }}"
       data-analytics-event="internal_promo_click"

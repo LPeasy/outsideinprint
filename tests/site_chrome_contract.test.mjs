@@ -69,13 +69,17 @@ test("masthead removes Welcome and promotes Archive as the long-form lane", () =
   assert.match(masthead, />Bookstore</);
   assert.match(masthead, />Feeling curious\?</);
   assert.match(masthead, /\$appsPage := site\.GetPage "\/apps"/);
-  assert.match(masthead, /and \$appsPage \(not \$appsPage\.Draft\)/);
-  assert.doesNotMatch(masthead, /hugo\.IsServer/);
+  assert.match(masthead, /\$showApps := and \$appsPage \(not \$appsPage\.Draft\)/);
+  assert.doesNotMatch(masthead, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
   assert.match(masthead, /href="\{\{ \$appsPage\.RelPermalink \}\}"[\s\S]*?>Apps &amp; Tools</);
   assert.match(masthead, /\$isApps := eq \.Section "apps"/);
+  assert.match(masthead, /\$gamesPage := site\.GetPage "\/games"/);
+  assert.match(masthead, /\$showGames := and \$gamesPage \(or \(not \$gamesPage\.Draft\) hugo\.IsServer\)/);
+  assert.match(masthead, /href="\{\{ \$gamesPage\.RelPermalink \}\}"[\s\S]*?>Games</);
+  assert.match(masthead, /\$isGames := eq \.Section "games"/);
   assert.match(
     masthead,
-    /aria-label="Primary"[\s\S]*?archive\/"[\s\S]*?>Archive<[\s\S]*?collections\/"[\s\S]*?>Collections<[\s\S]*?gallery\/"[\s\S]*?>Gallery<[\s\S]*?library\/"[\s\S]*?>Library<[\s\S]*?shop\/"[\s\S]*?>Bookstore<[\s\S]*?random\/"[\s\S]*?>Feeling curious\?</
+    /aria-label="Primary"[\s\S]*?archive\/"[\s\S]*?>Archive<[\s\S]*?collections\/"[\s\S]*?>Collections<[\s\S]*?gallery\/"[\s\S]*?>Gallery<[\s\S]*?library\/"[\s\S]*?>Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?shop\/"[\s\S]*?>Bookstore<[\s\S]*?random\/"[\s\S]*?>Feeling curious\?</
   );
   assert.match(masthead, /\$isBookstore := or \(eq \.Section "shop"\) \(eq \.RelPermalink "\/shop\/"\)/);
   assert.match(masthead, /data-analytics-source-slot="primary_nav_bookstore"/);
@@ -153,9 +157,13 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(footer, /href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">Author</);
   assert.match(footer, /href="\{\{ "library\/" \| absURL \}\}">Library</);
   assert.match(footer, /\$appsPage := site\.GetPage "\/apps"/);
-  assert.match(footer, /and \$appsPage \(not \$appsPage\.Draft\)/);
-  assert.doesNotMatch(footer, /hugo\.IsServer/);
+  assert.match(footer, /\$showApps := and \$appsPage \(not \$appsPage\.Draft\)/);
+  assert.doesNotMatch(footer, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
   assert.match(footer, /href="\{\{ \$appsPage\.RelPermalink \}\}"[\s\S]*?>Apps &amp; Tools</);
+  assert.match(footer, /\$gamesPage := site\.GetPage "\/games"/);
+  assert.match(footer, /\$showGames := and \$gamesPage \(or \(not \$gamesPage\.Draft\) hugo\.IsServer\)/);
+  assert.match(footer, /href="\{\{ \$gamesPage\.RelPermalink \}\}"[\s\S]*?>Games</);
+  assert.match(footer, />Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?>Bookstore</);
   assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}"[\s\S]*?data-analytics-source-slot="footer_bookstore"[\s\S]*?>Bookstore</);
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
 

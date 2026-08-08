@@ -1,0 +1,13 @@
+{{- $game := .game -}}
+{{- $state := index $game "action_state" -}}
+{{- if ne $state "disabled" -}}
+  {{- $href := index $game "action_url" -}}
+  {{- $label := index $game "action_label" -}}
+  <div class="games-action">
+    <a
+      class="games-action__link"
+      href="{{ $href }}"
+      {{- if in (slice "external_wishlist" "external_purchase") $state }} rel="external noopener"{{ end -}}
+    >{{ $label }} <span aria-hidden="true">&rarr;</span></a>
+  </div>
+{{- end -}}

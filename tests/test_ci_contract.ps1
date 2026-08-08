@@ -336,6 +336,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_public_html_output\.ps1\s+-Requir
   throw "deploy.yml must run the generated-output regression test with -RequireFreshBuild."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_games_catalog_contract\.ps1\s+-SiteDir\s+public\s+-Mode\s+Production") {
+  throw "deploy.yml must run the Games catalog production-output contract."
+}
+
 if ($deployWorkflow -notmatch '(?m)^\s+schedule:\s*\r?\n\s+-\s+cron:\s*"17 0 \* \* \*"\s*\r?\n\s+timezone:\s*"America/New_York"') {
   throw "deploy.yml must schedule regular rebuilds so future-dated essays can become public without a new commit."
 }
@@ -382,6 +386,7 @@ foreach ($requiredDebugPath in @(
   'public/authors/**',
   'public/about/**',
   'public/random/**',
+  'public/games/**',
   'public/.oip-build-manifest.json'
 )) {
   if ($deployWorkflow -notmatch [regex]::Escape($requiredDebugPath)) {

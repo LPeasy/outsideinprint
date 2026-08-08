@@ -173,8 +173,8 @@ Assert-Omits $companion '(?i)<a\b|href=|Robert V\. Ussley|\bbyline\b|\bcover\b|\
 
 foreach ($chrome in @($masthead, $footer)) {
   Assert-Matches $chrome 'site\.GetPage\s+"/apps"' 'Site chrome must resolve the published Apps section.'
-  Assert-Matches $chrome 'and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)' 'Site chrome must gate Apps on the published section.'
-  Assert-Omits $chrome 'hugo\.IsServer' 'Apps navigation must remain public.'
+  Assert-Matches $chrome '\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)' 'Site chrome must gate Apps on the published section.'
+  Assert-Omits $chrome '\$showApps\s*:=[^\r\n]*hugo\.IsServer' 'Apps navigation must not acquire a server-only draft alternative.'
   Assert-Matches $chrome '>Apps\s*&amp;\s*Tools<' 'Apps navigation must retain its label.'
 }
 Assert-Matches $masthead '\$isApps\s*:=\s*eq\s+\.Section\s+"apps"' 'The masthead must retain Apps aria-current routing.'
@@ -212,7 +212,7 @@ foreach ($forbidden in @(
 )) {
   Assert-Omits $baseballSurface $forbidden "The Baseball public-source surface contains a forbidden release, commerce, schema, byline, or private-binding value: $forbidden"
 }
-Assert-Matches $webpageSchema '\(and\s+\(eq\s+\$meta\.route\.name\s+"section-list"\)\s+\(ne\s+\$page\.Section\s+"apps"\)\)' 'Apps metadata must remain generic WebPage.'
+Assert-Matches $webpageSchema '\(and\s+\(eq\s+\$meta\.route\.name\s+"section-list"\)\s+\(not\s+\(in\s+\(slice\s+"apps"\s+"games"\)\s+\$page\.Section\)\)\)' 'Apps metadata must remain generic WebPage.'
 
 Write-Host 'Apps & Tools contract test passed.'
 $global:LASTEXITCODE = 0

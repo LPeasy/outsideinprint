@@ -875,8 +875,8 @@ if ($mastheadPartial -notmatch '<div class="title">') {
   throw 'Expected layouts/partials/masthead.html to keep the shared non-heading title container for the editorial brand.'
 }
 
-if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Bookstore.*Feeling curious\?') {
-  throw 'Expected layouts/partials/masthead.html to order the primary nav as Archive, Collections, Gallery, Library, Bookstore, Feeling curious?.'
+if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Apps &amp; Tools.*Games.*Bookstore.*Feeling curious\?') {
+  throw 'Expected layouts/partials/masthead.html to order the primary nav as Archive, Collections, Gallery, Library, Apps & Tools, Games, Bookstore, Feeling curious?.'
 }
 
 foreach ($requiredAppsNavigationSnippet in @(
@@ -889,8 +889,12 @@ foreach ($requiredAppsNavigationSnippet in @(
   }
 }
 
-if ($mastheadPartial -match 'hugo.IsServer') {
-  throw 'Expected the published Apps & Tools navigation link not to be restricted to the local Hugo server.'
+if ($mastheadPartial -notmatch '\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)') {
+  throw 'Expected the published Apps & Tools navigation link to retain its public section gate.'
+}
+
+if ($mastheadPartial -match '\$showApps\s*:=[^\r\n]*hugo\.IsServer') {
+  throw 'Expected the published Apps & Tools navigation link not to acquire a server-only draft alternative.'
 }
 
 if ($mastheadPartial -notmatch 'data-analytics-source-slot="primary_nav_bookstore"') {
