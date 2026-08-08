@@ -1493,6 +1493,7 @@ $requiredUxPages = @(
   'public/almanack/2026-07-18/index.html',
   'public/almanack/2026-07-25/index.html',
   'public/almanack/2026-08-01/index.html',
+  'public/almanack/2026-08-08/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -3269,7 +3270,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 1, 2026.*?In the Margins.*?Number.*?Document.*?Federal Reserve issues FOMC statement.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 8, 2026.*?In the Margins.*?Number.*?Document.*?Visas: Visa Bond Program.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
@@ -3375,6 +3376,27 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-08-01/index.html'
     Pattern = '/images/essays/(reverse-origami|i-do-what-i-say|my-friend-the-universe|i-am-healed)/hero\.png'
     Message = 'expected the August 1 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-08-08/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?August 8, 2026.*?Issue 14.*?I don(?:''|&#39;|&rsquo;)t make excuses ~ I make myself\..*?My focus is my domain\.'
+    Message = 'expected the August 8 Almanack issue page to render the nameplate, issue number, and affirmation pull quotes'
+  },
+  @{
+    Path = 'public/almanack/2026-08-08/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the August 8 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-08-08/index.html'
+    Pattern = '(?s)/images/editorial/the-turn\.png.*?/images/editorial/birthright\.png.*?/images/editorial/life-opens-the-door\.png.*?/images/editorial/not-mine-to-carry\.png'
+    Message = 'expected the August 8 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-08-08/index.html'
+    Pattern = '/images/essays/(i-make-myself|rich-in-spirit|open-hands|pay-attention-to-you)/hero\.png'
+    Message = 'expected the August 8 Almanack issue not to use essay hero images for essay cards'
     ShouldNotMatch = $true
   },
   @{
