@@ -12,6 +12,7 @@ syd-and-oliver = "/syd-and-oliver/:slug/"
 working-papers = "/working-papers/:slug/"
 collections = "/collections/:slug/"
 apps = "/apps/:slug/"
+games = "/games/:slug/"
 
 [markup]
   [markup.goldmark]

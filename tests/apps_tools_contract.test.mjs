@@ -213,8 +213,8 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
 
   for (const chrome of [masthead, footer]) {
     assert.match(chrome, /site\.GetPage\s+"\/apps"/);
-    assert.match(chrome, /and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)/);
-    assert.doesNotMatch(chrome, /hugo\.IsServer/);
+    assert.match(chrome, /\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)/);
+    assert.doesNotMatch(chrome, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
     assert.match(chrome, />Apps\s*&amp;\s*Tools</);
   }
   assert.match(masthead, /\$isApps\s*:=\s*eq\s+\.Section\s+"apps"/);
@@ -257,5 +257,5 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
   assert.match(layoutMatrix, /\| Apps & Tools index \| `\/apps\/`/);
   assert.match(layoutMatrix, /\| Bucks Machine product \| `\/apps\/bucks-machine\/`/);
   assert.match(layoutMatrix, /\| Baseball Upside Risk product \| `\/apps\/baseball-upside-risk\/`/);
-  assert.match(webpageSchema, /\(and\s+\(eq\s+\$meta\.route\.name\s+"section-list"\)\s+\(ne\s+\$page\.Section\s+"apps"\)\)/);
+  assert.match(webpageSchema, /\(and\s+\(eq\s+\$meta\.route\.name\s+"section-list"\)\s+\(not\s+\(in\s+\(slice\s+"apps"\s+"games"\)\s+\$page\.Section\)\)\)/);
 });

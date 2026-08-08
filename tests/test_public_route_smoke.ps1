@@ -118,6 +118,31 @@ foreach ($forbiddenPath in @(
   }
 }
 
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$gamesIndexSourcePath = Join-Path $repoRoot 'content/games/_index.md'
+if (Test-Path -LiteralPath $gamesIndexSourcePath -PathType Leaf) {
+  $gamesIndexSource = Get-Content -LiteralPath $gamesIndexSourcePath -Raw -Encoding utf8
+  $gamesSourceIsDraft = $gamesIndexSource -match '(?m)^draft:\s*true\s*$'
+  if ($gamesSourceIsDraft) {
+    foreach ($forbiddenGamesPath in @(
+      'games/index.html',
+      'games/idle-times/index.html'
+    )) {
+      if (Test-Path -LiteralPath (Join-Path $SiteDir $forbiddenGamesPath) -PathType Leaf) {
+        throw "Expected draft Games route not to be emitted: $forbiddenGamesPath"
+      }
+    }
+  }
+  else {
+    $null = Get-RequiredPageHtml -RelativePath 'games/index.html'
+    $null = Get-RequiredPageHtml -RelativePath 'games/idle-times/index.html'
+    $gamesIndexFiles = @(Get-ChildItem -LiteralPath (Join-Path $SiteDir 'games') -Filter 'index.html' -File -Recurse)
+    if ($gamesIndexFiles.Count -ne 2) {
+      throw "Expected exactly two public Games routes; found $($gamesIndexFiles.Count)."
+    }
+  }
+}
+
 foreach ($sampleRelativePath in @(
   'apps/bucks-machine/bucks-machine-synthetic-professional-services-demo.pdf',
   'apps/bucks-machine/bucks-machine-synthetic-professional-services-demo.xlsx'

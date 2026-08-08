@@ -1,0 +1,48 @@
+{{ define "main" }}
+  {{ $gamesData := site.Data.games | default dict }}
+  {{ $catalog := index $gamesData "catalog" | default dict }}
+  {{ $order := index $catalog "order" | default (slice) }}
+  {{ if not $order }}{{ errorf "Games catalog order is required" }}{{ end }}
+
+  <section class="games-index page-shell page-shell--wide" aria-labelledby="games-index-title">
+    <header class="games-index__header">
+      <div>
+        <p class="games-kicker">Outside In Print LLC</p>
+        <h1 id="games-index-title">{{ .Title }}</h1>
+        {{ with .Content }}<div class="games-index__intro">{{ . }}</div>{{ end }}
+      </div>
+      {{ if .Draft }}
+        <p class="games-index__notice"><strong>Local review draft.</strong> No purchase, account, email capture, or game download is connected to this catalog.</p>
+      {{ else }}
+        <p class="games-index__notice"><strong>Release catalog.</strong> Idle Times is coming to Steam. No purchase, account, email capture, or game download is connected to this catalog.</p>
+      {{ end }}
+    </header>
+
+    <div class="games-index__grid" aria-label="Outside In Print game catalog">
+      {{ range $index, $gameKey := $order }}
+        {{ $game := partial "games/product-data.html" (dict "key" $gameKey) }}
+        {{ $gamePage := site.GetPage (printf "/games/%s" (index $game "slug")) }}
+        {{ $linkPage := $gamePage }}
+        {{ $cardTitleID := printf "games-card-%d-title" $index }}
+        <article class="games-card" aria-labelledby="{{ $cardTitleID }}">
+          <div class="games-card__ledger">
+            <span>{{ index $game "platform" }}</span>
+            <span>{{ index $game "status" }}</span>
+          </div>
+          <h2 id="{{ $cardTitleID }}">
+            {{ if $linkPage }}<a href="{{ $gamePage.RelPermalink }}">{{ index $game "title" }}</a>{{ else }}{{ index $game "title" }}{{ end }}
+          </h2>
+          <p class="games-card__summary">{{ index $game "catalog_summary" }}</p>
+          <p class="games-card__availability">{{ index $game "availability" }}</p>
+          <p class="games-card__note">{{ index $game "catalog_note" }}</p>
+          {{ if $linkPage }}<a class="games-card__link" href="{{ $gamePage.RelPermalink }}">View game brief <span aria-hidden="true">&rarr;</span></a>{{ end }}
+        </article>
+      {{ end }}
+    </div>
+
+    <footer class="games-index__identity">
+      <p>Games is a descriptive catalog operated by <strong>Outside In Print LLC</strong>. It is not a separate business or publisher identity.</p>
+      <a href="mailto:{{ index $catalog "support_email" }}">{{ index $catalog "support_email" }}</a>
+    </footer>
+  </section>
+{{ end }}

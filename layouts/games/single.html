@@ -1,0 +1,120 @@
+{{ define "main" }}
+  {{ $gameKey := .Params.game_key | default "" }}
+  {{ $game := partial "games/product-data.html" (dict "key" $gameKey "page" .) }}
+  {{ $media := index $game "media" | default (slice) }}
+  {{ $heroMedia := where $media "role" "hero" }}
+  {{ $galleryMedia := where $media "role" "gallery" }}
+
+  <article class="games-product page-shell page-shell--wide">
+    <header class="games-product__hero">
+      <div class="games-product__hero-copy">
+        <p class="games-kicker">Games · {{ index $game "category" }}</p>
+        <div class="games-product__status">
+          <span>{{ index $game "status" }}</span>
+          <small>{{ index $game "platform" }}</small>
+        </div>
+        <h1>{{ index $game "title" }}</h1>
+        <p class="games-product__summary">{{ index $game "summary" }}</p>
+        <p class="games-product__audience"><strong>For:</strong> {{ index $game "audience" }}</p>
+        <p class="games-product__availability">{{ index $game "availability" }}</p>
+        {{ partial "games/action.html" (dict "game" $game) }}
+      </div>
+
+      {{ if gt (len $heroMedia) 0 }}
+        {{ $resolved := partial "games/resolve-media.html" (dict "page" . "asset" (index $heroMedia 0) "game_title" (index $game "title")) }}
+        {{ $asset := index $resolved "asset" }}
+        {{ $resource := index $resolved "resource" }}
+        <figure class="games-product__hero-media">
+          <img src="{{ $resource.RelPermalink }}" width="{{ $resource.Width }}" height="{{ $resource.Height }}" alt="{{ index $asset "alt" }}" decoding="async" fetchpriority="high">
+          <figcaption>{{ index $asset "caption" }}</figcaption>
+        </figure>
+      {{ else }}
+        <aside class="games-product__source-note" aria-label="Development source boundary">
+          <p class="games-kicker">Source boundary</p>
+          <h2>Release behavior remains unverified</h2>
+          <p>This local product draft describes only the reviewed source scaffold. It does not establish a signed build, marketplace release, or physical-device result.</p>
+        </aside>
+      {{ end }}
+    </header>
+
+    <section class="games-facts" aria-labelledby="games-facts-title">
+      <header>
+        <p class="games-kicker">Game record</p>
+        <h2 id="games-facts-title">Current product facts</h2>
+      </header>
+      <dl>
+        {{ range index $game "facts" }}
+          <div><dt>{{ index . "label" }}</dt><dd>{{ index . "value" }}</dd></div>
+        {{ end }}
+      </dl>
+    </section>
+
+    <section class="games-features" aria-labelledby="games-features-title">
+      <header class="games-section-heading">
+        <div>
+          <p class="games-kicker">What it is</p>
+          <h2 id="games-features-title">{{ index $game "features_heading" }}</h2>
+        </div>
+        <p>{{ index $game "features_intro" }}</p>
+      </header>
+      <div class="games-features__grid">
+        {{ range index $game "features" }}
+          <article><h3>{{ index . "title" }}</h3><p>{{ index . "description" }}</p></article>
+        {{ end }}
+      </div>
+    </section>
+
+    {{ if gt (len $galleryMedia) 0 }}
+      <section class="games-gallery" aria-labelledby="games-gallery-title">
+        <header class="games-section-heading">
+          <div>
+            <p class="games-kicker">Approved game captures</p>
+            <h2 id="games-gallery-title">Inside {{ index $game "title" }}</h2>
+          </div>
+          <p>These captures come from the approved game-media set. No trailer is included on this page.</p>
+        </header>
+        <div class="games-gallery__grid">
+          {{ range $galleryMedia }}
+            {{ $resolved := partial "games/resolve-media.html" (dict "page" $ "asset" . "game_title" (index $game "title")) }}
+            {{ $asset := index $resolved "asset" }}
+            {{ $resource := index $resolved "resource" }}
+            <figure>
+              <img src="{{ $resource.RelPermalink }}" width="{{ $resource.Width }}" height="{{ $resource.Height }}" alt="{{ index $asset "alt" }}" loading="lazy" decoding="async">
+              <figcaption>{{ index $asset "caption" }}</figcaption>
+            </figure>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    <section class="games-notices" aria-labelledby="games-notices-title">
+      <div>
+        <p class="games-kicker">Boundaries</p>
+        <h2 id="games-notices-title">{{ index $game "notices_heading" }}</h2>
+      </div>
+      <ul>{{ range index $game "notices" }}<li>{{ . }}</li>{{ end }}</ul>
+    </section>
+
+    {{ with index $game "system_requirements" }}
+      <section class="games-requirements" aria-labelledby="games-requirements-title">
+        <header>
+          <p class="games-kicker">Windows minimum</p>
+          <h2 id="games-requirements-title">System requirements</h2>
+        </header>
+        <dl>{{ range . }}<div><dt>{{ index . "label" }}</dt><dd>{{ index . "value" }}</dd></div>{{ end }}</dl>
+      </section>
+    {{ end }}
+
+    <footer class="games-product__identity">
+      <p class="games-kicker">Operator and support</p>
+      <p class="games-product__operator">{{ index $game "operator_line" }}</p>
+      <p>{{ index $game "support_line" }}</p>
+      <nav aria-label="{{ index $game "title" }} information">
+        <a href="mailto:{{ index $game "support_email" }}">Email support</a>
+        {{ if eq (index $game "support_route_state") "local_draft" }}<a href="{{ index $game "support_route" }}">Support draft</a>{{ end }}
+        {{ if eq (index $game "privacy_route_state") "local_draft" }}<a href="{{ index $game "privacy_route" }}">Privacy readiness draft</a>{{ end }}
+        <a href="{{ "games/" | relURL }}">Back to Games</a>
+      </nav>
+    </footer>
+  </article>
+{{ end }}

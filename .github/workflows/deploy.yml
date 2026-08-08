@@ -177,6 +177,11 @@ jobs:
         run: |
           ./tests/test_public_html_output.ps1 -RequireFreshBuild
 
+      - name: Test Games Catalog Output
+        shell: pwsh
+        run: |
+          ./tests/test_games_catalog_contract.ps1 -SiteDir public -Mode Production
+
       - name: Show Public Route Debug
         if: failure()
         shell: pwsh
@@ -195,6 +200,7 @@ jobs:
             public/about/**
             public/random/**
             public/apps/**
+            public/games/**
             public/.oip-build-manifest.json
 
       - name: Upload artifact

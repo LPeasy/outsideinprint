@@ -1,0 +1,186 @@
+{{- $key := printf "%v" (.key | default "") -}}
+{{- $page := .page | default false -}}
+{{- $data := site.Data.games | default dict -}}
+{{- $catalog := index $data "catalog" | default dict -}}
+{{- $games := index $data "games" | default dict -}}
+
+{{- if not $key -}}
+  {{- errorf "Games product data requires a non-empty game key" -}}
+{{- end -}}
+{{- if not (isset $games $key) -}}
+  {{- errorf "Games product data is missing games.%s" $key -}}
+{{- end -}}
+
+{{- $legalName := "Outside In Print LLC" -}}
+{{- $supportEmail := "support@outsideinprint.org" -}}
+{{- if ne (index $catalog "operator_legal_name" | default "") $legalName -}}
+  {{- errorf "Games catalog operator_legal_name must equal %q" $legalName -}}
+{{- end -}}
+{{- if ne (index $catalog "support_email" | default "") $supportEmail -}}
+  {{- errorf "Games catalog support_email must equal %q" $supportEmail -}}
+{{- end -}}
+{{- $storefrontHosts := index $catalog "storefront_hosts" | default (slice) -}}
+{{- if not $storefrontHosts -}}
+  {{- errorf "Games catalog must define storefront_hosts" -}}
+{{- end -}}
+
+{{- $game := index $games $key -}}
+{{- $requiredStrings := slice
+  "slug"
+  "title"
+  "category"
+  "platform"
+  "status"
+  "availability"
+  "release_date_state"
+  "release_date_display"
+  "catalog_summary"
+  "catalog_note"
+  "operator_legal_name"
+  "operator_line"
+  "support_email"
+  "support_line"
+  "support_route_state"
+  "privacy_route_state"
+  "action_state"
+  "media_state"
+-}}
+{{- range $requiredStrings -}}
+  {{- if not (index $game . | default "") -}}
+    {{- errorf "Games product games.%s is missing required field %s" $key . -}}
+  {{- end -}}
+{{- end -}}
+{{- if ne (index $game "operator_legal_name") $legalName -}}
+  {{- errorf "Games product games.%s operator_legal_name must equal %q" $key $legalName -}}
+{{- end -}}
+{{- if ne (index $game "support_email") $supportEmail -}}
+  {{- errorf "Games product games.%s support_email must equal %q" $key $supportEmail -}}
+{{- end -}}
+{{- $expectedOperatorLine := printf "%s, a game operated and supported by Outside In Print LLC." (index $game "title") -}}
+{{- if ne (index $game "operator_line") $expectedOperatorLine -}}
+  {{- errorf "Games product games.%s operator_line does not match the approved LLC identity" $key -}}
+{{- end -}}
+{{- $expectedSupportLine := printf "Support for %s is provided by Outside In Print LLC: %s." (index $game "title") $supportEmail -}}
+{{- if ne (index $game "support_line") $expectedSupportLine -}}
+  {{- errorf "Games product games.%s support_line does not match the approved LLC support identity" $key -}}
+{{- end -}}
+
+{{- $routeStates := slice "email" "local_draft" "unavailable" -}}
+{{- $supportRouteState := index $game "support_route_state" -}}
+{{- $privacyRouteState := index $game "privacy_route_state" -}}
+{{- if not (in $routeStates $supportRouteState) -}}
+  {{- errorf "Games product games.%s uses unsupported support_route_state %q" $key $supportRouteState -}}
+{{- end -}}
+{{- if not (in $routeStates $privacyRouteState) -}}
+  {{- errorf "Games product games.%s uses unsupported privacy_route_state %q" $key $privacyRouteState -}}
+{{- end -}}
+{{- $supportRoute := index $game "support_route" | default "" -}}
+{{- $privacyRoute := index $game "privacy_route" | default "" -}}
+{{- if and (eq $supportRouteState "email") (ne $supportRoute (printf "mailto:%s" $supportEmail)) -}}
+  {{- errorf "Games product games.%s email support route must use the approved support address" $key -}}
+{{- end -}}
+{{- if and (eq $supportRouteState "local_draft") (not (hasPrefix $supportRoute "/")) -}}
+  {{- errorf "Games product games.%s local support route must be root-relative" $key -}}
+{{- end -}}
+{{- if and (eq $privacyRouteState "local_draft") (not (hasPrefix $privacyRoute "/")) -}}
+  {{- errorf "Games product games.%s local privacy route must be root-relative" $key -}}
+{{- end -}}
+{{- if and (eq $privacyRouteState "unavailable") $privacyRoute -}}
+  {{- errorf "Games product games.%s cannot define privacy_route when privacy_route_state is unavailable" $key -}}
+{{- end -}}
+{{- if and (eq $supportRouteState "unavailable") $supportRoute -}}
+  {{- errorf "Games product games.%s cannot define support_route when support_route_state is unavailable" $key -}}
+{{- end -}}
+
+{{- $actionState := index $game "action_state" -}}
+{{- $actionLabel := index $game "action_label" | default "" -}}
+{{- $actionURL := index $game "action_url" | default "" -}}
+{{- if not (in (slice "disabled" "browser_play" "external_wishlist" "external_purchase") $actionState) -}}
+  {{- errorf "Games product games.%s uses unsupported action_state %q" $key $actionState -}}
+{{- end -}}
+{{- if eq $actionState "disabled" -}}
+  {{- if or $actionLabel $actionURL -}}
+    {{- errorf "Games product games.%s cannot define action label or URL while action_state is disabled" $key -}}
+  {{- end -}}
+{{- else -}}
+  {{- if or (not $actionLabel) (not $actionURL) -}}
+    {{- errorf "Games product games.%s must define action_label and action_url for state %q" $key $actionState -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq $actionState "browser_play" -}}
+  {{- if or (not (hasPrefix $actionURL "/")) (hasPrefix $actionURL "//") -}}
+    {{- errorf "Games product games.%s browser_play action must use a root-relative URL" $key -}}
+  {{- end -}}
+{{- end -}}
+{{- if in (slice "external_wishlist" "external_purchase") $actionState -}}
+  {{- $parsedURL := urls.Parse $actionURL -}}
+  {{- if ne $parsedURL.Scheme "https" -}}
+    {{- errorf "Games product games.%s external action must use https" $key -}}
+  {{- end -}}
+  {{- if not (in $storefrontHosts $parsedURL.Host) -}}
+    {{- errorf "Games product games.%s storefront host %q is not allowlisted" $key $parsedURL.Host -}}
+  {{- end -}}
+  {{- if or $parsedURL.RawQuery $parsedURL.Fragment -}}
+    {{- errorf "Games product games.%s storefront URL cannot contain query parameters or a fragment" $key -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $mediaState := index $game "media_state" -}}
+{{- $media := index $game "media" | default (slice) -}}
+{{- if not (in (slice "disabled" "approved" "local_draft") $mediaState) -}}
+  {{- errorf "Games product games.%s uses unsupported media_state %q" $key $mediaState -}}
+{{- end -}}
+{{- if and (eq $mediaState "disabled") (gt (len $media) 0) -}}
+  {{- errorf "Games product games.%s cannot define media while media_state is disabled" $key -}}
+{{- end -}}
+{{- if and (in (slice "approved" "local_draft") $mediaState) (eq (len $media) 0) -}}
+  {{- errorf "Games product games.%s must define approved media" $key -}}
+{{- end -}}
+{{- range $media -}}
+  {{- $asset := . -}}
+  {{- range slice "id" "role" "source_kind" "source" "alt" "caption" "approval_scope" -}}
+    {{- if not (index $asset . | default "") -}}
+      {{- errorf "Games product games.%s has media missing %s" $key . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not (index $asset "approved" | default false) -}}
+    {{- errorf "Games product games.%s attempted to use unapproved media %q" $key (index $asset "id") -}}
+  {{- end -}}
+  {{- $approvalScope := index $asset "approval_scope" -}}
+  {{- if not (in (slice "release_candidate" "local_draft") $approvalScope) -}}
+    {{- errorf "Games product games.%s media %q uses unsupported approval_scope" $key (index $asset "id") -}}
+  {{- end -}}
+  {{- if and (eq $mediaState "local_draft") (ne $approvalScope "local_draft") -}}
+    {{- errorf "Games product games.%s local-draft media %q must use local_draft approval_scope" $key (index $asset "id") -}}
+  {{- end -}}
+  {{- if not (in (slice "hero" "gallery") (index $asset "role")) -}}
+    {{- errorf "Games product games.%s media %q uses unsupported role" $key (index $asset "id") -}}
+  {{- end -}}
+  {{- if not (in (slice "page_resource" "global_asset") (index $asset "source_kind")) -}}
+    {{- errorf "Games product games.%s media %q uses unsupported source_kind" $key (index $asset "id") -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $page -}}
+  {{- range slice "summary" "audience" "features_heading" "features_intro" "notices_heading" -}}
+    {{- if not (index $game . | default "") -}}
+      {{- errorf "Games page %s is missing required product field %s" $page.Path . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range slice "facts" "features" "notices" -}}
+    {{- if not (index $game .) -}}
+      {{- errorf "Games page %s is missing required product collection %s" $page.Path . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if ne .Title (index $game "title") -}}
+    {{- errorf "Games page %s title must match games.%s.title" .Path $key -}}
+  {{- end -}}
+  {{- if ne .Slug (index $game "slug") -}}
+    {{- errorf "Games page %s slug must match games.%s.slug" .Path $key -}}
+  {{- end -}}
+  {{- if and (not .Draft) (or (eq $supportRouteState "local_draft") (eq $privacyRouteState "local_draft")) -}}
+    {{- errorf "Published Games page %s cannot expose local-draft support or privacy routes" .Path -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $game -}}
