@@ -8457,11 +8457,13 @@ html[data-theme="light"] .paper-route-card--failure{
 }
 .apps-card__preview dt,
 .apps-packet-preview__rows dt{
+  min-width:0;
   color:var(--accent-hover);
   font-family:var(--font-ui);
   font-size:.68rem;
   font-weight:700;
   letter-spacing:.08em;
+  overflow-wrap:anywhere;
   text-transform:uppercase;
 }
 .apps-card__preview dd,

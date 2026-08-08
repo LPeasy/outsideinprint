@@ -220,6 +220,11 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
   assert.ok(appsCssMatch, "expected a bounded Apps & Tools CSS section");
   assert.match(appsCssMatch[1], /@media\s*\(max-width:640px\)/);
   assert.match(appsCssMatch[1], /:focus-visible/);
+  assert.match(
+    appsCssMatch[1],
+    /\.apps-card__preview dt,[\s\S]*?min-width:\s*0;[\s\S]*?overflow-wrap:\s*anywhere;/,
+    "scorecard labels must wrap inside their grid column instead of colliding with values"
+  );
   assert.doesNotMatch(appsCssMatch[1], /(?:linear|radial|conic)-gradient\s*\(|@keyframes\b|\banimation(?:-name)?\s*:/i);
   assert.doesNotMatch(appsCssMatch[1], /@font-face\b|url\([^)]*\.(?:woff2?|ttf|otf)/i);
 

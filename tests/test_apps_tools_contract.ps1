@@ -194,6 +194,7 @@ if (-not $appsCssMatch.Success) { throw 'Missing bounded Apps CSS section.' }
 $appsCss = $appsCssMatch.Groups[1].Value
 Assert-Matches $appsCss '@media\s*\(max-width:640px\)' 'Apps CSS must include the 320px layout.'
 Assert-Matches $appsCss ':focus-visible' 'Apps CSS must preserve visible keyboard focus.'
+Assert-Matches $appsCss '\.apps-card__preview dt,[\s\S]*?min-width:\s*0;[\s\S]*?overflow-wrap:\s*anywhere;' 'Scorecard labels must wrap inside their grid column instead of colliding with values.'
 Assert-Omits $appsCss '(?i)(?:linear|radial|conic)-gradient\s*\(|@keyframes\b|\banimation(?:-name)?\s*:' 'Apps CSS must not introduce gradients or animation.'
 Assert-Omits $appsCss '(?i)@font-face\b|url\([^)]*\.(?:woff2?|ttf|otf)' 'Apps CSS must not introduce a font system.'
 
