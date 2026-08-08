@@ -586,6 +586,7 @@ $requiredSemanticPages = [ordered]@{
   'public/shop/the-water-cycle/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/apps/index.html' = @{ ExpectedH1Class = 'apps-index__title'; RequireSecondaryHeading = $true }
   'public/apps/bucks-machine/index.html' = @{ ExpectedH1Class = 'apps-product__title'; RequireSecondaryHeading = $true }
+  'public/apps/baseball-upside-risk/index.html' = @{ ExpectedH1Class = 'apps-product__title'; RequireSecondaryHeading = $true }
   'public/random/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
 }
 
@@ -791,7 +792,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/apps/index.html' = @{
     Title = 'Apps & Tools'
-    Description = 'Public development previews of software products from Outside In Print LLC, including Bucks Machine planning support.'
+    Description = 'Public development previews of software products and educational tools from Outside In Print LLC.'
     Canonical = 'https://outsideinprint.org/apps/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -801,6 +802,14 @@ $requiredMetadataPages = [ordered]@{
     Title = 'Bucks Machine'
     Description = 'A public development preview of planning support that turns de-identified rough notes into a human-reviewed scope, schedule, budget, risk, PDF, and workbook packet.'
     Canonical = 'https://outsideinprint.org/apps/bucks-machine/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+  }
+  'public/apps/baseball-upside-risk/index.html' = @{
+    Title = 'Baseball Upside Risk'
+    Description = 'An educational cohort-level preview of the zero-heavy gross-earnings distribution and rare upside tail in professional baseball.'
+    Canonical = 'https://outsideinprint.org/apps/baseball-upside-risk/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
@@ -1228,6 +1237,12 @@ $requiredStructuredDataPages = [ordered]@{
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
   }
+  'public/apps/baseball-upside-risk/index.html' = @{
+    RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'BreadcrumbList', 'ImageObject')
+    ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage', 'Product', 'SoftwareApplication', 'Offer')
+    RequirePublisherNode = $true
+    RequireBreadcrumb = $true
+  }
   'public/archive/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork')
@@ -1311,6 +1326,10 @@ $requiredIndexationPages = [ordered]@{
     Robots = 'index, follow, max-image-preview:large'
   }
   'public/apps/bucks-machine/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
+  'public/apps/baseball-upside-risk/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
@@ -1416,7 +1435,8 @@ $requiredSitemapInclusions = @(
   'https://outsideinprint.org/collections/risk-uncertainty/',
   'https://outsideinprint.org/library/',
   'https://outsideinprint.org/apps/',
-  'https://outsideinprint.org/apps/bucks-machine/'
+  'https://outsideinprint.org/apps/bucks-machine/',
+  'https://outsideinprint.org/apps/baseball-upside-risk/'
 )
 
 $requiredSitemapExclusions = @(
@@ -1672,7 +1692,8 @@ foreach ($file in $htmlFiles) {
 
 foreach ($requiredOutput in @(
   'apps/index.html',
-  'apps/bucks-machine/index.html'
+  'apps/bucks-machine/index.html',
+  'apps/baseball-upside-risk/index.html'
 )) {
   $fullPath = Join-Path $SiteDir $requiredOutput
   if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
@@ -1697,9 +1718,11 @@ foreach ($sample in @(
 
 $appsIndexPath = 'public/apps/index.html'
 $bucksPreviewPath = 'public/apps/bucks-machine/index.html'
-if ($targetPageHtml.ContainsKey($appsIndexPath) -and $targetPageHtml.ContainsKey($bucksPreviewPath)) {
+$baseballPreviewPath = 'public/apps/baseball-upside-risk/index.html'
+if ($targetPageHtml.ContainsKey($appsIndexPath) -and $targetPageHtml.ContainsKey($bucksPreviewPath) -and $targetPageHtml.ContainsKey($baseballPreviewPath)) {
   $appsHtml = [string]$targetPageHtml[$appsIndexPath]
   $bucksHtml = [string]$targetPageHtml[$bucksPreviewPath]
+  $baseballHtml = [string]$targetPageHtml[$baseballPreviewPath]
   foreach ($requiredSnippet in @(
     'Development preview.',
     'Not currently available for use or purchase.',
@@ -1718,8 +1741,28 @@ if ($targetPageHtml.ContainsKey($appsIndexPath) -and $targetPageHtml.ContainsKey
       $appsPreviewIssues.Add("$bucksPreviewPath => expected public snippet missing: $requiredSnippet")
     }
   }
-  if (($appsHtml + $bucksHtml) -match '(?i)<form\b|stripe|checkout|waitlist|available now|\$19|\$49|\$500') {
+  foreach ($requiredSnippet in @(
+    'Baseball Upside Risk, a product operated and sold by Outside In Print LLC.',
+    'This static preview collects no player profile, name, school, email address, payment, or report request.',
+    'This frozen B-GERM snapshot was generated May 14, 2026. It uses 2024-25 participation inputs and 2025 draft inputs; it is not a live 2026 probability estimate.',
+    '99.509%',
+    '$27,201',
+    'Long Shots in the Big League',
+    'Companion publication in preparation',
+    'support@outsideinprint.org'
+  )) {
+    if ($baseballHtml -notmatch [regex]::Escape($requiredSnippet)) {
+      $appsPreviewIssues.Add("$baseballPreviewPath => expected public snippet missing: $requiredSnippet")
+    }
+  }
+  if ($appsHtml.IndexOf('Bucks Machine', [StringComparison]::Ordinal) -ge $appsHtml.IndexOf('Baseball Upside Risk', [StringComparison]::Ordinal)) {
+    $appsPreviewIssues.Add('Apps preview => expected Bucks Machine first and Baseball Upside Risk second')
+  }
+  if (($appsHtml + $bucksHtml + $baseballHtml) -match '(?i)<form\b|stripe|checkout|waitlist|available now|\$19|\$49|\$500') {
     $appsPreviewIssues.Add('Apps preview => forbidden commercial, intake, or legacy-price surface was emitted')
+  }
+  if ($baseballHtml -match '(?i)SoftwareApplication|"@type"\s*:\s*"(?:Product|Offer)"') {
+    $appsPreviewIssues.Add("$baseballPreviewPath => forbidden product, software, or offer schema was emitted")
   }
 }
 

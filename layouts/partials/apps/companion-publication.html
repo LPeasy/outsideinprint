@@ -1,0 +1,14 @@
+{{- $product := .product | default dict -}}
+{{- with index $product "companion_publication" -}}
+  <section class="apps-companion" aria-label="{{ index . "accessible_label" }}">
+    <div>
+      <p class="apps-section-kicker">{{ index . "kicker" }}</p>
+      <h2><cite>{{ index . "title" }}</cite></h2>
+      <p class="apps-companion__subtitle">{{ index . "subtitle" }}</p>
+    </div>
+    <div class="apps-companion__record">
+      <p class="apps-companion__status">{{ index . "status" }}</p>
+      <p>{{ index . "description" }}</p>
+    </div>
+  </section>
+{{- end -}}
