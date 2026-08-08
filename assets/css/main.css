@@ -8483,6 +8483,17 @@ html[data-theme="light"] .paper-route-card--failure{
   font-size:.66rem;
   line-height:1.4;
 }
+.apps-card__preview--dense dl > div{
+  grid-template-columns:minmax(6.4rem, .62fr) minmax(0, .38fr);
+  gap:.5rem;
+}
+.apps-card__preview--dense dt{
+  font-size:.62rem;
+  letter-spacing:.05em;
+  line-height:1.35;
+  overflow-wrap:normal;
+  word-break:normal;
+}
 .apps-card__identity{
   margin:1rem 0 0;
   padding-top:.85rem;
@@ -8980,6 +8991,10 @@ html[data-theme="light"] .paper-route-card--failure{
     padding:.9rem 0 0;
     border-top:1px solid var(--border-soft);
     border-left:none;
+  }
+  .apps-card__preview--dense dl > div{
+    grid-template-columns:1fr;
+    gap:.28rem;
   }
 }
 

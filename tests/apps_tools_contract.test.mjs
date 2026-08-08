@@ -166,6 +166,8 @@ test("Apps templates keep presentation data-driven and release controls inert", 
   const templates = `${listTemplate}\n${singleTemplate}\n${productData}\n${actions}\n${sampleDownloads}\n${companion}`;
 
   assert.match(listTemplate, /partial\s+"apps\/product-data\.html"/);
+  assert.match(listTemplate, /\$densePreview\s*:=\s*gt\s+\(len\s+\$previewRows\)\s+4/);
+  assert.match(listTemplate, /apps-card__preview--dense/);
   assert.match(singleTemplate, /partial\s+"apps\/product-data\.html"/);
   assert.match(singleTemplate, /partial\s+"apps\/actions\.html"/);
   assert.match(singleTemplate, /partial\s+"apps\/sample-downloads\.html"/);
@@ -224,6 +226,21 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
     appsCssMatch[1],
     /\.apps-card__preview dt,[\s\S]*?min-width:\s*0;[\s\S]*?overflow-wrap:\s*anywhere;/,
     "scorecard labels must wrap inside their grid column instead of colliding with values"
+  );
+  assert.match(
+    appsCssMatch[1],
+    /\.apps-card__preview--dense dl > div\s*\{[\s\S]*?grid-template-columns:\s*minmax\(6\.4rem,\s*\.62fr\)\s+minmax\(0,\s*\.38fr\);/,
+    "dense scorecards must allocate enough width to complete label words"
+  );
+  assert.match(
+    appsCssMatch[1],
+    /\.apps-card__preview--dense dt\s*\{[\s\S]*?font-size:\s*\.62rem;[\s\S]*?overflow-wrap:\s*normal;[\s\S]*?word-break:\s*normal;/,
+    "dense scorecard labels must retain normal whole-word wrapping"
+  );
+  assert.match(
+    appsCssMatch[1],
+    /@media\s*\(max-width:640px\)[\s\S]*?\.apps-card__preview--dense dl > div\s*\{[\s\S]*?grid-template-columns:\s*1fr;/,
+    "dense scorecard rows must stack on narrow screens"
   );
   assert.doesNotMatch(appsCssMatch[1], /(?:linear|radial|conic)-gradient\s*\(|@keyframes\b|\banimation(?:-name)?\s*:/i);
   assert.doesNotMatch(appsCssMatch[1], /@font-face\b|url\([^)]*\.(?:woff2?|ttf|otf)/i);

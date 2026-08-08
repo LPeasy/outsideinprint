@@ -157,6 +157,8 @@ foreach ($template in @($appsList, $appsSingle)) {
 Assert-Matches $appsSingle 'partial\s+"apps/actions\.html"' 'Apps product pages must render the inert action gate.'
 Assert-Matches $appsSingle 'partial\s+"apps/sample-downloads\.html"' 'Apps product pages must render the sample gate.'
 Assert-Matches $appsSingle 'partial\s+"apps/companion-publication\.html"' 'Apps product pages must render the optional companion panel.'
+Assert-Matches $appsList '\$densePreview\s*:=\s*gt\s+\(len\s+\$previewRows\)\s+4' 'The Apps index must select dense scorecards from row count rather than product identity.'
+Assert-Matches $appsList 'apps-card__preview--dense' 'The Apps index must expose the generic dense-scorecard modifier.'
 Assert-Matches $appsSingle 'href="mailto:\{\{ index \$product "support_email" \}\}"' 'Apps product pages must expose the approved support mailto.'
 Assert-Matches $appsSingle 'back_link_state' 'Apps product pages must data-gate the optional back link.'
 foreach ($term in @('local_draft', 'public_preview', 'sample_downloads', 'Outside In Print LLC', 'errorf')) {
@@ -195,6 +197,9 @@ $appsCss = $appsCssMatch.Groups[1].Value
 Assert-Matches $appsCss '@media\s*\(max-width:640px\)' 'Apps CSS must include the 320px layout.'
 Assert-Matches $appsCss ':focus-visible' 'Apps CSS must preserve visible keyboard focus.'
 Assert-Matches $appsCss '\.apps-card__preview dt,[\s\S]*?min-width:\s*0;[\s\S]*?overflow-wrap:\s*anywhere;' 'Scorecard labels must wrap inside their grid column instead of colliding with values.'
+Assert-Matches $appsCss '\.apps-card__preview--dense dl > div\s*\{[\s\S]*?grid-template-columns:\s*minmax\(6\.4rem,\s*\.62fr\)\s+minmax\(0,\s*\.38fr\);' 'Dense scorecards must allocate enough width to complete label words.'
+Assert-Matches $appsCss '\.apps-card__preview--dense dt\s*\{[\s\S]*?font-size:\s*\.62rem;[\s\S]*?overflow-wrap:\s*normal;[\s\S]*?word-break:\s*normal;' 'Dense scorecard labels must retain normal whole-word wrapping.'
+Assert-Matches $appsCss '@media\s*\(max-width:640px\)[\s\S]*?\.apps-card__preview--dense dl > div\s*\{[\s\S]*?grid-template-columns:\s*1fr;' 'Dense scorecard rows must stack on narrow screens.'
 Assert-Omits $appsCss '(?i)(?:linear|radial|conic)-gradient\s*\(|@keyframes\b|\banimation(?:-name)?\s*:' 'Apps CSS must not introduce gradients or animation.'
 Assert-Omits $appsCss '(?i)@font-face\b|url\([^)]*\.(?:woff2?|ttf|otf)' 'Apps CSS must not introduce a font system.'
 
