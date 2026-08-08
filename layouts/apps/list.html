@@ -27,19 +27,22 @@
             <h2 id="{{ $cardID }}" class="apps-card__title"><a href="{{ $productPage.RelPermalink }}">{{ index $product "title" }}</a></h2>
             <p class="apps-card__promise">{{ index $product "promise" }}</p>
             <p class="apps-card__audience"><strong>Built for:</strong> {{ index $product "audience" }}</p>
-            <ul class="apps-card__deliverables" aria-label="Bucks Machine planning packet components">
+            <ul class="apps-card__deliverables" aria-label="{{ index $product "preview_components_label" }}">
               {{ range index $product "deliverables" }}<li>{{ index . "title" }}</li>{{ end }}
             </ul>
             <a class="apps-card__link" href="{{ $productPage.RelPermalink }}">View product brief <span aria-hidden="true">&rarr;</span></a>
           </div>
 
-          <aside class="apps-card__preview" aria-label="Bucks Machine packet summary">
-            <p class="apps-card__preview-label">Planning packet</p>
+          <aside class="apps-card__preview" aria-label="{{ index $product "preview_accessible_label" }}">
+            <p class="apps-card__preview-label">{{ index $product "preview_title" }}</p>
             <dl>
               {{ range index $product "preview_rows" }}
                 <div>
                   <dt>{{ index . "label" }}</dt>
-                  <dd>{{ index . "value" }}</dd>
+                  <dd>
+                    <span>{{ index . "value" }}</span>
+                    {{ with index . "note" }}<small>{{ . }}</small>{{ end }}
+                  </dd>
                 </div>
               {{ end }}
             </dl>

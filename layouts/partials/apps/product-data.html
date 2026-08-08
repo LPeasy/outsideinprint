@@ -15,11 +15,24 @@
 {{- $requiredStrings := slice
   "slug"
   "title"
+  "category"
   "status"
   "availability"
   "promise"
   "audience"
   "intake_note"
+  "preview_eyebrow"
+  "preview_title"
+  "preview_badge"
+  "preview_footer"
+  "preview_accessible_label"
+  "preview_components_label"
+  "workflow_heading"
+  "workflow_intro"
+  "output_kicker"
+  "output_heading"
+  "limitations_heading"
+  "privacy_heading"
   "privacy_warning"
   "operator_legal_name"
   "seller_legal_name"
@@ -27,6 +40,7 @@
   "support_email"
   "support_line"
   "commercial_action_state"
+  "back_link_state"
   "sample_downloads_state"
 -}}
 {{- range $requiredStrings -}}
@@ -36,9 +50,50 @@
   {{- end -}}
 {{- end -}}
 
-{{- range slice "workflow" "deliverables" "preview_rows" "limitations" "sample_downloads" -}}
+{{- range slice "workflow" "deliverables" "preview_rows" "limitations" -}}
   {{- if not (index $product .) -}}
     {{- errorf "Apps product products.%s is missing required collection %s" $key . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $backLinkState := index $product "back_link_state" -}}
+{{- if not (in (slice "enabled" "disabled") $backLinkState) -}}
+  {{- errorf "Apps product products.%s uses unsupported back_link_state %q" $key $backLinkState -}}
+{{- end -}}
+
+{{- $sampleState := index $product "sample_downloads_state" -}}
+{{- if not (in (slice "disabled" "local_draft" "public_preview") $sampleState) -}}
+  {{- errorf "Apps product products.%s uses unsupported sample_downloads_state %q" $key $sampleState -}}
+{{- end -}}
+{{- if in (slice "local_draft" "public_preview") $sampleState -}}
+  {{- range slice "samples_kicker" "samples_heading" "samples_intro" "samples_accessible_label" -}}
+    {{- if not (index $product .) -}}
+      {{- errorf "Apps product products.%s is missing sample presentation field %s" $key . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not (index $product "sample_downloads") -}}
+    {{- errorf "Apps product products.%s must define sample_downloads when sample_downloads_state is %q" $key $sampleState -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with index $product "interpretation" -}}
+  {{- $interpretation := . -}}
+  {{- range slice "kicker" "heading" -}}
+    {{- if not (index $interpretation .) -}}
+      {{- errorf "Apps product products.%s interpretation is missing %s" $key . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not (index $interpretation "paragraphs") -}}
+    {{- errorf "Apps product products.%s interpretation is missing paragraphs" $key -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with index $product "companion_publication" -}}
+  {{- $companion := . -}}
+  {{- range slice "kicker" "title" "subtitle" "status" "description" "accessible_label" -}}
+    {{- if not (index $companion .) -}}
+      {{- errorf "Apps product products.%s companion_publication is missing %s" $key . -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

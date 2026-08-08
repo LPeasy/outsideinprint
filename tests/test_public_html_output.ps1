@@ -791,7 +791,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/apps/index.html' = @{
     Title = 'Apps & Tools'
-    Description = 'Public development previews of software products from Outside In Print LLC, including Bucks Machine planning support.'
+    Description = 'Public development previews of software products and educational tools from Outside In Print LLC.'
     Canonical = 'https://outsideinprint.org/apps/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'

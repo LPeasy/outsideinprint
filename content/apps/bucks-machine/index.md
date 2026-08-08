@@ -7,6 +7,7 @@ product_key: "bucks_machine"
 draft: false
 noindex: false
 show_citation: false
+weight: 10
 build:
   publishResources: false
 ---

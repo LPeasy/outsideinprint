@@ -6,7 +6,7 @@
   <article class="apps-product page-shell page-shell--wide">
     <header class="apps-product__hero">
       <div class="apps-product__hero-copy">
-        <p class="apps-section-kicker">Apps &amp; Tools &middot; Planning support</p>
+        <p class="apps-section-kicker">Apps &amp; Tools &middot; {{ index $product "category" }}</p>
         <div class="apps-status-row">
           <span class="apps-status">{{ index $product "status" }}</span>
           <span class="apps-status-note">{{ index $product "availability" }}</span>
@@ -15,33 +15,58 @@
         <p class="apps-product__promise">{{ index $product "promise" }}</p>
         <p class="apps-product__audience"><strong>For:</strong> {{ index $product "audience" }}</p>
         <p class="apps-product__intake">{{ index $product "intake_note" }}</p>
+        {{ with index $product "source_vintage_note" }}<p class="apps-product__source-vintage">{{ . }}</p>{{ end }}
       </div>
 
-      <aside class="apps-packet-preview" aria-labelledby="apps-packet-preview-title">
+      {{ $previewTitleID := printf "apps-preview-%s-title" (index $product "slug") }}
+      <aside class="apps-packet-preview" aria-labelledby="{{ $previewTitleID }}">
         <div class="apps-packet-preview__header">
           <div>
-            <p class="apps-packet-preview__eyebrow">Synthetic preview</p>
-            <h2 id="apps-packet-preview-title">Planning packet</h2>
+            <p class="apps-packet-preview__eyebrow">{{ index $product "preview_eyebrow" }}</p>
+            <h2 id="{{ $previewTitleID }}">{{ index $product "preview_title" }}</h2>
           </div>
-          <span>Human reviewed</span>
+          <span>{{ index $product "preview_badge" }}</span>
         </div>
         <dl class="apps-packet-preview__rows">
           {{ range index $product "preview_rows" }}
             <div>
               <dt>{{ index . "label" }}</dt>
-              <dd>{{ index . "value" }}</dd>
+              <dd>
+                <span>{{ index . "value" }}</span>
+                {{ with index . "note" }}<small>{{ . }}</small>{{ end }}
+              </dd>
             </div>
           {{ end }}
         </dl>
-        <p class="apps-packet-preview__footer">Professional Services &middot; fictional evaluation data</p>
+        <p class="apps-packet-preview__footer">{{ index $product "preview_footer" }}</p>
       </aside>
     </header>
+
+    {{ with index $product "interpretation" }}
+      <section class="apps-interpretation" aria-labelledby="apps-interpretation-title">
+        <div class="apps-interpretation__copy">
+          <p class="apps-section-kicker">{{ index . "kicker" }}</p>
+          <h2 id="apps-interpretation-title">{{ index . "heading" }}</h2>
+          {{ range index . "paragraphs" }}<p>{{ . }}</p>{{ end }}
+        </div>
+        {{ with index $product "snapshot_facts" }}
+          <dl class="apps-snapshot" aria-label="Frozen model snapshot record">
+            {{ range . }}
+              <div>
+                <dt>{{ index . "label" }}</dt>
+                <dd>{{ index . "value" }}</dd>
+              </div>
+            {{ end }}
+          </dl>
+        {{ end }}
+      </section>
+    {{ end }}
 
     <section class="apps-workflow" aria-labelledby="apps-workflow-title">
       <div class="apps-section-heading">
         <p class="apps-section-kicker">How it works</p>
-        <h2 id="apps-workflow-title">Notes become a reviewable planning packet</h2>
-        <p>AI assists with structure. A person reviews, corrects, and approves the working material before it leaves the planning process.</p>
+        <h2 id="apps-workflow-title">{{ index $product "workflow_heading" }}</h2>
+        <p>{{ index $product "workflow_intro" }}</p>
       </div>
       <ol class="apps-workflow__steps">
         {{ range index $product "workflow" }}
@@ -56,8 +81,8 @@
 
     <section class="apps-deliverables" aria-labelledby="apps-deliverables-title">
       <div class="apps-section-heading">
-        <p class="apps-section-kicker">Packet structure</p>
-        <h2 id="apps-deliverables-title">Six linked planning views</h2>
+        <p class="apps-section-kicker">{{ index $product "output_kicker" }}</p>
+        <h2 id="apps-deliverables-title">{{ index $product "output_heading" }}</h2>
       </div>
       <div class="apps-deliverables__grid">
         {{ range index $product "deliverables" }}
@@ -74,16 +99,18 @@
     <section class="apps-limitations" aria-labelledby="apps-limitations-title">
       <div class="apps-limitations__copy">
         <p class="apps-section-kicker">Use boundaries</p>
-        <h2 id="apps-limitations-title">Planning support, not final authority</h2>
+        <h2 id="apps-limitations-title">{{ index $product "limitations_heading" }}</h2>
         <ul>
           {{ range index $product "limitations" }}<li>{{ . }}</li>{{ end }}
         </ul>
       </div>
       <aside class="apps-limitations__privacy" aria-labelledby="apps-privacy-title">
-        <h3 id="apps-privacy-title">Do not enter protected information</h3>
+        <h3 id="apps-privacy-title">{{ index $product "privacy_heading" }}</h3>
         <p>{{ index $product "privacy_warning" }}</p>
       </aside>
     </section>
+
+    {{ partial "apps/companion-publication.html" (dict "product" $product) }}
 
     <footer class="apps-identity">
       <p class="apps-section-kicker">Product identity</p>
@@ -102,7 +129,9 @@
           <dd>{{ index $product "seller_legal_name" }}</dd>
         </div>
       </dl>
-      <a href="{{ "apps/" | relURL }}">Back to Apps &amp; Tools</a>
+      {{ if eq (index $product "back_link_state") "enabled" }}
+        <a href="{{ "apps/" | relURL }}">Back to Apps &amp; Tools</a>
+      {{ end }}
     </footer>
   </article>
 {{ end }}
