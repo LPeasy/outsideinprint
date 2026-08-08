@@ -85,7 +85,8 @@ foreach ($source in @($appsIndex, $bucksPage)) {
 }
 $baseballDraft = Get-FrontMatterBoolean -Source $baseballPage -Key 'draft'
 $baseballNoindex = Get-FrontMatterBoolean -Source $baseballPage -Key 'noindex'
-if ($baseballDraft -ne $baseballNoindex) { throw 'The Baseball draft and noindex states must move together.' }
+if ($baseballDraft) { throw 'The frozen Baseball publication candidate must be non-draft.' }
+if ($baseballNoindex) { throw 'The frozen Baseball publication candidate must be indexable.' }
 Assert-Matches $bucksPage '(?m)^weight:\s*10\s*$' 'Bucks Machine must remain first at weight 10.'
 Assert-Matches $baseballPage '(?m)^weight:\s*20\s*$' 'Baseball Upside Risk must remain second at weight 20.'
 foreach ($source in @($bucksPage, $baseballPage)) {

@@ -83,6 +83,7 @@ foreach ($requiredPath in @(
   'authors/robert-v-ussley/index.html',
   'apps/index.html',
   'apps/bucks-machine/index.html',
+  'apps/baseball-upside-risk/index.html',
   'almanack/2026-05-02/index.html',
   'almanack/2026-05-09/index.html',
   'almanack/2026-05-16/index.html',
@@ -108,7 +109,8 @@ foreach ($requiredPath in @(
 }
 
 foreach ($forbiddenPath in @(
-  'almanack/index.html'
+  'almanack/index.html',
+  'shop/long-shots-in-the-big-league/index.html'
 )) {
   $fullPath = Join-Path $SiteDir $forbiddenPath
   if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
@@ -128,12 +130,19 @@ foreach ($sampleRelativePath in @(
 
 $appsHtml = Get-RequiredPageHtml -RelativePath 'apps/index.html'
 $bucksHtml = Get-RequiredPageHtml -RelativePath 'apps/bucks-machine/index.html'
+$baseballHtml = Get-RequiredPageHtml -RelativePath 'apps/baseball-upside-risk/index.html'
 
 if ($appsHtml -notmatch '<h1\b[^>]*>Apps (?:&amp;|&) Tools</h1>') {
   throw 'Expected the public Apps & Tools route to render its single H1.'
 }
 if ($bucksHtml -notmatch '<h1\b[^>]*>Bucks Machine</h1>') {
   throw 'Expected the public Bucks Machine route to render its single H1.'
+}
+if ($baseballHtml -notmatch '<h1\b[^>]*>Baseball Upside Risk</h1>') {
+  throw 'Expected the public Baseball Upside Risk route to render its single H1.'
+}
+if ($appsHtml.IndexOf('Bucks Machine', [StringComparison]::Ordinal) -ge $appsHtml.IndexOf('Baseball Upside Risk', [StringComparison]::Ordinal)) {
+  throw 'Expected Bucks Machine to remain the first Apps card and Baseball Upside Risk to remain second.'
 }
 foreach ($requiredText in @(
   'Bucks Machine, a product operated and sold by Outside In Print LLC.',
@@ -148,6 +157,50 @@ foreach ($requiredText in @(
 }
 if ($bucksHtml -match '(?i)<form\b|stripe|checkout|waitlist|available now') {
   throw 'Public Bucks Machine output exposed a forbidden commercial or intake surface.'
+}
+
+foreach ($requiredText in @(
+  'Baseball Upside Risk, a product operated and sold by Outside In Print LLC.',
+  'The interactive calculator and personalized reports are not currently available for use or purchase.',
+  'This static preview collects no player profile, name, school, email address, payment, or report request.',
+  'This frozen B-GERM snapshot was generated May 14, 2026. It uses 2024-25 participation inputs and 2025 draft inputs; it is not a live 2026 probability estimate.',
+  'May 14, 2026',
+  '1,000,000 fixed-seed draws',
+  'Long Shots in the Big League',
+  'Baseball, Gross Earnings, and the Arithmetic of Risk',
+  'Companion publication in preparation',
+  'support@outsideinprint.org'
+)) {
+  if ($baseballHtml -notmatch [regex]::Escape($requiredText)) {
+    throw "Expected public Baseball Upside Risk output to include: $requiredText"
+  }
+}
+$priorIndex = -1
+foreach ($value in @('$0', '99.509%', '0.491%', '0.535%', '0.495%', '0.141%', '$27,201')) {
+  $valueIndex = $baseballHtml.IndexOf($value, $priorIndex + 1, [StringComparison]::Ordinal)
+  if ($valueIndex -le $priorIndex) {
+    throw "Frozen Baseball value is missing or out of order in public output: $value"
+  }
+  $priorIndex = $valueIndex
+}
+$baseballMainMatch = [regex]::Match($baseballHtml, '(?is)<main\b[^>]*>(.*?)</main>')
+if (-not $baseballMainMatch.Success) {
+  throw 'Public Baseball output is missing its main region.'
+}
+$baseballMain = $baseballMainMatch.Groups[1].Value
+$mainAnchors = @([regex]::Matches($baseballMain, '<a\b[^>]*>', 'IgnoreCase'))
+if ($mainAnchors.Count -ne 1 -or $mainAnchors[0].Value -notmatch 'href=(?:["''])?mailto:support@outsideinprint\.org') {
+  throw 'The LLC support mailto must be the only interactive link in the Baseball product main region.'
+}
+if ($baseballMain -match '(?i)<(?:form|input|select|textarea|button)\b|\bdownload(?:\s|=|>)|stripe|checkout|waitlist|\$19|\$49|\$500') {
+  throw 'Public Baseball output exposed an intake, download, interactive, commercial, or legacy-price surface.'
+}
+$companionMatch = [regex]::Match($baseballMain, '(?is)<section\b[^>]*class=(?:["''])?apps-companion(?:["''])?[^>]*>(.*?)</section>')
+if (-not $companionMatch.Success) {
+  throw 'Public Baseball output is missing the companion-publication notice.'
+}
+if ($companionMatch.Value -match '(?i)<a\b|Robert V\. Ussley|\bbyline\b|\bcover\b|\bprice\b|\bASIN\b|\bKDP\b|\bpre-?order\b') {
+  throw 'The public companion notice exposed a link, byline, cover, or release/commerce data.'
 }
 
 $authorDirectoryHtml = Get-RequiredPageHtml -RelativePath 'authors/index.html'

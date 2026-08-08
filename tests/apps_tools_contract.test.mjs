@@ -56,7 +56,8 @@ test("Apps data contract preserves Bucks and defines the static Baseball preview
   }
   const baseballDraft = frontMatterBoolean(baseballPage, "draft");
   const baseballNoindex = frontMatterBoolean(baseballPage, "noindex");
-  assert.equal(baseballDraft, baseballNoindex, "Baseball draft and noindex states must move together");
+  assert.equal(baseballDraft, false, "The frozen Baseball publication candidate must be non-draft");
+  assert.equal(baseballNoindex, false, "The frozen Baseball publication candidate must be indexable");
   assert.match(bucksPage, /^weight:\s*10\s*$/m);
   assert.match(baseballPage, /^weight:\s*20\s*$/m);
   for (const source of [bucksPage, baseballPage]) {

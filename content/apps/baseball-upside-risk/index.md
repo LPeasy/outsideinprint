@@ -1,11 +1,11 @@
 ---
 title: "Baseball Upside Risk"
 slug: "baseball-upside-risk"
-description: "A static educational preview showing how public baseball base rates produce a zero-heavy gross-earnings distribution and a rare upside tail across a broad high-school-senior cohort."
+description: "An educational cohort-level preview of the zero-heavy gross-earnings distribution and rare upside tail in professional baseball."
 section_label: "Apps & Tools"
 product_key: "baseball_upside_risk"
-draft: true
-noindex: true
+draft: false
+noindex: false
 show_citation: false
 weight: 20
 build:
