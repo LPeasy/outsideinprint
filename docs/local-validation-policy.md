@@ -13,7 +13,7 @@ This is intentional. The local Windows/Codex environment has repeatedly produced
 Use this gate before publishing public-site content:
 
 ```powershell
-.\tools\bin\generated\hugo.cmd --gc --minify
+.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild

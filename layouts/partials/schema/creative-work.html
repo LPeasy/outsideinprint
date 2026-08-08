@@ -17,7 +17,7 @@
     "url" $meta.canonical
     "mainEntityOfPage" (dict "@id" (printf "%s#webpage" $meta.canonical))
     "publisher" (dict "@id" (index $organization "@id"))
-    "inLanguage" ($page.Site.Language.LanguageCode | default "en-US")
+    "inLanguage" ($page.Site.Language.Locale | default "en-US")
   -}}
 
   {{- if eq $workType "Article" -}}

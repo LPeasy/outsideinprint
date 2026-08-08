@@ -9,7 +9,7 @@ This repo uses the toolchain layer to support the active web-first publishing wo
 Pinned toolchain contract for this repo:
 
 - Node `20.20.2` for the `20.x` contract in `.nvmrc` and `package.json`
-- Hugo `0.157.0`
+- Hugo Extended `0.164.0`
 - PowerShell `7.5.0`
 - Python `3.12.9`
 

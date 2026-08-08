@@ -242,6 +242,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
   throw "deploy.yml must run the CI contract test."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_hugo_upgrade_contract\.ps1") {
+  throw "deploy.yml must run the Hugo upgrade contract test."
+}
+
 Assert-WorkflowActionReferences `
   -WorkflowName "deploy.yml" `
   -WorkflowText $deployWorkflow `

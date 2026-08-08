@@ -1,4 +1,4 @@
-{{- $cartoonData := site.Data.editorial_cartoons | default dict -}}
+{{- $cartoonData := hugo.Data.editorial_cartoons | default dict -}}
 {{- $cartoons := partial "editorial/published-cartoons.html" ($cartoonData.cartoons | default (slice)) -}}
 {{- $currentSlug := $cartoonData.current | default "" -}}
 {{- $current := false -}}

@@ -69,6 +69,34 @@ with urllib.request.urlopen(url, context=context, timeout=120) as response:
   Write-Host ("Downloaded asset: {0}" -f $destinationPath)
 }
 
+function Assert-BootstrapAssetHash {
+  param(
+    [string]$AssetName,
+    [string]$ExpectedSha256
+  )
+
+  if ([string]::IsNullOrWhiteSpace($ExpectedSha256)) {
+    return
+  }
+
+  $assetPath = Join-Path $bootstrapRoot $AssetName
+  $stream = [System.IO.File]::OpenRead($assetPath)
+  $hasher = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    $hashBytes = $hasher.ComputeHash($stream)
+  } finally {
+    $hasher.Dispose()
+    $stream.Dispose()
+  }
+
+  $actualSha256 = [System.BitConverter]::ToString($hashBytes).Replace("-", "").ToLowerInvariant()
+  if ($actualSha256 -ne $ExpectedSha256.ToLowerInvariant()) {
+    throw "SHA-256 mismatch for bootstrap asset $AssetName. Expected $ExpectedSha256, got $actualSha256."
+  }
+
+  Write-Host ("Verified SHA-256: {0}" -f $assetPath)
+}
+
 Ensure-Directory -Path $bootstrapRoot
 
 $bootstrapAssets = @(
@@ -78,9 +106,10 @@ $bootstrapAssets = @(
     Url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.0/PowerShell-7.5.0-win-x64.zip"
   },
   @{
-    AssetName = "hugo_extended_0.157.0_windows-amd64.zip"
-    LocalSource = (Join-Path $repoRoot ".tools\hugo_extended_0.157.0_windows-amd64.zip")
-    Url = "https://github.com/gohugoio/hugo/releases/download/v0.157.0/hugo_extended_0.157.0_windows-amd64.zip"
+    AssetName = "hugo_extended_0.164.0_windows-amd64.zip"
+    LocalSource = (Join-Path $repoRoot ".tools\hugo_extended_0.164.0_windows-amd64.zip")
+    Url = "https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_windows-amd64.zip"
+    Sha256 = "59109d4e05d0cc9e1743688166e5323a71bd8b67a6e928db07c61720cc49a7cc"
   },
   @{
     AssetName = "node-v20.20.2-win-x64.zip"
@@ -103,6 +132,9 @@ foreach ($asset in $bootstrapAssets) {
   if (-not $copied) {
     Download-BootstrapAsset -Url $asset.Url -AssetName $asset.AssetName
   }
+
+  $expectedSha256 = if ($asset.ContainsKey("Sha256")) { [string]$asset.Sha256 } else { "" }
+  Assert-BootstrapAssetHash -AssetName $asset.AssetName -ExpectedSha256 $expectedSha256
 }
 
 Write-Host ""

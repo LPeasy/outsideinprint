@@ -11,7 +11,7 @@
   {{ $libraryEntries := slice }}
   {{ $availableYears := slice }}
   {{ $availableCollectionSlugs := slice }}
-  {{ $collectionDefinitions := default (slice) site.Data.collections.collections }}
+  {{ $collectionDefinitions := default (slice) hugo.Data.collections.collections }}
   {{ $totalPages := 0 }}
 
   {{ range $type := $libraryTypes }}

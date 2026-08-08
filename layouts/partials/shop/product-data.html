@@ -1,6 +1,6 @@
 {{- $key := printf "%v" (.key | default "") -}}
 {{- $page := .page | default false -}}
-{{- $bookstore := site.Data.bookstore | default dict -}}
+{{- $bookstore := hugo.Data.bookstore | default dict -}}
 {{- $defaults := dict -}}
 {{- $products := dict -}}
 

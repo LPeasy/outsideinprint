@@ -1,6 +1,6 @@
 {{- $page := .page -}}
 {{- $meta := .meta -}}
-{{- $locale := replace ($page.Site.Language.LanguageCode | default "en-us") "-" "_" | lower -}}
+{{- $locale := replace ($page.Site.Language.Locale | default "en-US") "-" "_" | lower -}}
 <meta property="og:url" content="{{ $meta.canonical }}">
 <meta property="og:site_name" content="{{ site.Title }}">
 <meta property="og:title" content="{{ $meta.title }}">

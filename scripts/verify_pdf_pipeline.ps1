@@ -11,6 +11,9 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Outside In Print ~ Verify PDF Pipeline" -ForegroundColor Cyan
 
+$RepoRoot = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'lib\resolve_pinned_hugo.ps1')
+
 $AllowedSections = @("essays", "reports", "syd-and-oliver", "working-papers")
 $HtmlSiteDir = Join-Path $BuildMetaRoot "__html_site"
 $failures = New-Object System.Collections.Generic.List[object]
@@ -260,6 +263,15 @@ function Test-RequiredTool {
   }
 }
 
+function Test-RequiredHugo {
+  param([string]$Reason)
+
+  $hugo = Resolve-OipPinnedHugo -RepoRoot $RepoRoot
+  if (-not $hugo.Available) {
+    Register-Failure -Category "tool_missing" -Slug "(toolchain)" -Engine "n/a" -Message "Pinned Hugo is unavailable for ${Reason}: $($hugo.Reason)."
+  }
+}
+
 $pages = New-Object System.Collections.Generic.List[object]
 $mdFiles = Get-ChildItem -Path $ContentRoot -Recurse -File -Filter "*.md" |
   Where-Object {
@@ -313,7 +325,7 @@ foreach ($file in $mdFiles) {
 if (-not $SkipToolChecks) {
   if (@($pages | Where-Object { $_.Engine -eq "html" }).Count -gt 0) {
     Test-RequiredTool -Name "node" -Reason "browser-print PDF verification"
-    Test-RequiredTool -Name "hugo" -Reason "browser-print PDF verification"
+    Test-RequiredHugo -Reason "browser-print PDF verification"
   }
 
   if (@($pages | Where-Object { $_.Engine -eq "typst" }).Count -gt 0) {

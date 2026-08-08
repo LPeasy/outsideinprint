@@ -20,6 +20,8 @@ $AllowedSections = @("essays", "reports", "syd-and-oliver", "working-papers")
 $EditionTemplatePath = "./templates/edition.typ"
 $CatalogSyncScript = "./scripts/sync_pdf_catalog.ps1"
 $RepoRoot = (Resolve-Path ".").Path
+$HugoCommand = $null
+. (Join-Path $PSScriptRoot 'lib\resolve_pinned_hugo.ps1')
 $IsWindowsHost = if (Get-Variable -Name IsWindows -ErrorAction SilentlyContinue) {
   [bool]$IsWindows
 }
@@ -1592,9 +1594,11 @@ function Get-HtmlRenderUnavailableReason {
     return "node is not available in PATH"
   }
 
-  if (-not (Get-Command "hugo" -ErrorAction SilentlyContinue)) {
-    return "hugo is not available in PATH"
+  $hugo = Resolve-OipPinnedHugo -RepoRoot $RepoRoot
+  if (-not $hugo.Available) {
+    return $hugo.Reason
   }
+  $script:HugoCommand = $hugo.Command
 
   if (-not (Test-Path -Path $HtmlRendererScript -PathType Leaf)) {
     return "the Playwright renderer script is missing at $HtmlRendererScript"
@@ -1675,7 +1679,15 @@ function Invoke-HtmlPdfBatchRender {
   }
 
   Require-NativeCommand -Name "node"
-  Require-NativeCommand -Name "hugo"
+  if ([string]::IsNullOrWhiteSpace($script:HugoCommand)) {
+    $hugo = Resolve-OipPinnedHugo -RepoRoot $RepoRoot
+    if ($hugo.Available) {
+      $script:HugoCommand = $hugo.Command
+    }
+  }
+  if ([string]::IsNullOrWhiteSpace($script:HugoCommand)) {
+    throw "Hugo Extended 0.164.0 could not be resolved through the platform-specific pinned path."
+  }
 
   if (Test-Path -Path $HtmlSiteDir -PathType Container) {
     Remove-Item -Recurse -Force $HtmlSiteDir
@@ -1691,10 +1703,11 @@ function Invoke-HtmlPdfBatchRender {
     $env:ANALYTICS_ENABLED = "false"
     $env:ANALYTICS_ALLOW_LOCAL = "false"
 
-    Invoke-NativeOrThrow -Command "hugo" -Arguments @(
+    Invoke-NativeOrThrow -Command $HugoCommand -Arguments @(
       '--contentDir', $ContentRoot,
       '--destination', $HtmlSiteDir,
       '--baseURL', $baseUrl,
+      '--panicOnWarning',
       '--quiet'
     )
   }

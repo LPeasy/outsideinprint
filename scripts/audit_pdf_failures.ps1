@@ -19,6 +19,9 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Outside In Print ~ Audit PDF Failures" -ForegroundColor Cyan
 
+$RepoRoot = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'lib\resolve_pinned_hugo.ps1')
+
 function Read-Utf8Text {
   param([string]$Path)
   return [System.IO.File]::ReadAllText((Resolve-Path $Path), [System.Text.Encoding]::UTF8)
@@ -387,8 +390,14 @@ if (-not $SkipToolChecks) {
 
   foreach ($name in @("pandoc", "typst", "node", "hugo")) {
     $required = [bool]$requiredTools[$name]
+    $availabilityReason = ""
     $available = if ($hasToolOverride) {
       $overrideTools.ContainsKey($name.ToLowerInvariant())
+    }
+    elseif ($name -eq "hugo") {
+      $hugo = Resolve-OipPinnedHugo -RepoRoot $RepoRoot
+      $availabilityReason = $hugo.Reason
+      [bool]$hugo.Available
     }
     else {
       $null -ne (Get-Command $name -ErrorAction SilentlyContinue)
@@ -402,7 +411,12 @@ if (-not $SkipToolChecks) {
       $pipelineProblems.Add([pscustomobject]@{
           code = "tool_missing"
           count = 1
-          message = "Missing required command '$name' in PATH."
+          message = if ($name -eq "hugo" -and -not [string]::IsNullOrWhiteSpace($availabilityReason)) {
+            "Pinned Hugo is unavailable: $availabilityReason."
+          }
+          else {
+            "Missing required command '$name' in PATH."
+          }
         })
     }
   }

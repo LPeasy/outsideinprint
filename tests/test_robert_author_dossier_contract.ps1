@@ -7,21 +7,15 @@ $portraitPath = Join-Path $repoRoot 'content/authors/robert-v-ussley/Bobviously_
 $layoutPath = Join-Path $repoRoot 'layouts/authors/dossier.html'
 $buildDir = Join-Path $repoRoot '.tmp-test-robert-dossier'
 $builtPagePath = Join-Path $buildDir 'authors/robert-v-ussley/index.html'
-$localHugoPath = Join-Path $repoRoot '.tools/hugo/hugo.exe'
-$hugoCommand = $null
 $layoutTemplate = Get-Content -Path $layoutPath -Raw
+
+. (Join-Path $PSScriptRoot 'helpers/public_output_common.ps1')
+$hugo = Resolve-PinnedHugo -RepoRoot $repoRoot
 
 foreach ($requiredPath in @($authorPagePath, $portraitPath, $layoutPath)) {
   if (-not (Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
     throw "Missing Robert dossier contract file: $requiredPath"
   }
-}
-
-$hugoBinary = Get-Command hugo -ErrorAction SilentlyContinue
-if ($hugoBinary) {
-  $hugoCommand = $hugoBinary.Source
-} elseif (Test-Path -LiteralPath $localHugoPath -PathType Leaf) {
-  $hugoCommand = $localHugoPath
 }
 
 $authorPage = Get-Content -Path $authorPagePath -Raw
@@ -76,12 +70,12 @@ foreach ($forbiddenSnippet in @(
   }
 }
 
-if ($hugoCommand) {
+try {
   if (Test-Path -LiteralPath $buildDir) {
     Remove-Item -LiteralPath $buildDir -Recurse -Force
   }
 
-  & $hugoCommand --quiet --destination $buildDir | Out-Null
+  & $hugo.Command --quiet --panicOnWarning --destination $buildDir | Out-Null
   if ($LASTEXITCODE -ne 0) {
     throw 'Hugo build failed while validating the Robert dossier page.'
   }
@@ -112,7 +106,7 @@ if ($hugoCommand) {
     'class=(?:"author-route__portrait"|author-route__portrait)',
     'class=(?:"author-route__summary"|author-route__summary)',
     'class=(?:"author-route__bio"|author-route__bio)',
-    'class=(?:"author-route__reading-map"|author-route__reading-map)'
+    'class=(?:"[^"]*\bauthor-route__reading-map\b[^"]*"|[^\s>]*author-route__reading-map[^\s>]*)'
   )) {
     if ($builtPage -notmatch $requiredPattern) {
       throw "Expected rendered Robert dossier page to match '$requiredPattern'."
@@ -130,6 +124,11 @@ if ($hugoCommand) {
     if ($builtPage -match [regex]::Escape($forbiddenSnippet)) {
       throw "Expected rendered Robert dossier page to omit '$forbiddenSnippet'."
     }
+  }
+}
+finally {
+  if (Test-Path -LiteralPath $buildDir) {
+    Remove-Item -LiteralPath $buildDir -Recurse -Force
   }
 }
 

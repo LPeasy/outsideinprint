@@ -1,6 +1,6 @@
 {{ $page := .page }}
 {{ $publicOnly := default false .publicOnly }}
-{{ $definitions := sort (sort (default (slice) site.Data.collections.collections) "title" "asc") "weight" "asc" }}
+{{ $definitions := sort (sort (default (slice) hugo.Data.collections.collections) "title" "asc") "weight" "asc" }}
 {{ $explicit := partial "collections/normalize-values.html" (dict "value" $page.Params.collections "limit" 2) }}
 {{ $matches := slice }}
 

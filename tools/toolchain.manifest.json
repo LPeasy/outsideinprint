@@ -85,22 +85,24 @@
     {
       "name": "hugo",
       "kind": "portable-download",
-      "version": "0.157.0",
+      "version": "0.164.0",
       "required": true,
-      "install_path": "tools/vendor/hugo-0.157.0",
+      "install_path": "tools/vendor/hugo-0.164.0",
       "launch_path": "hugo.exe",
       "source_candidates": [
-        "tools/_downloads/bootstrap/hugo_extended_0.157.0_windows-amd64.zip",
-        "https://github.com/gohugoio/hugo/releases/download/v0.157.0/hugo_extended_0.157.0_windows-amd64.zip"
+        "tools/_downloads/bootstrap/hugo_extended_0.164.0_windows-amd64.zip",
+        "https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_windows-amd64.zip"
       ],
-      "asset_name": "hugo_extended_0.157.0_windows-amd64.zip",
+      "asset_name": "hugo_extended_0.164.0_windows-amd64.zip",
+      "sha256": "59109d4e05d0cc9e1743688166e5323a71bd8b67a6e928db07c61720cc49a7cc",
+      "installed_sha256": "d6253c7438dec3959b3a63336b46ff4160285018bbe1d4e855bf5fb4384dc930",
       "validate": {
         "arguments": [
           "version"
         ],
-        "match_regex": "^hugo v0\\.157\\.0"
+        "match_regex": "^hugo v0\\.164\\.0.*\\+extended"
       },
-      "notes": "Matches the current public-site build contract."
+      "notes": "Pinned Extended build for the public site and native AVIF/WebP image processing."
     },
     {
       "name": "pwsh",

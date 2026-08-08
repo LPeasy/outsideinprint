@@ -4,7 +4,7 @@
     {
       "label": "Hugo: Serve Drafts (Open Browser)",
       "type": "shell",
-      "command": "hugo",
+      "command": ".\\tools\\bin\\generated\\hugo.cmd",
       "args": [
         "server",
         "-D",
@@ -16,7 +16,7 @@
     {
       "label": "Hugo: Serve (No Drafts)",
       "type": "shell",
-      "command": "hugo",
+      "command": ".\\tools\\bin\\generated\\hugo.cmd",
       "args": [
         "server",
         "-O"
@@ -27,9 +27,11 @@
     {
       "label": "Hugo: Build (Minify)",
       "type": "shell",
-      "command": "hugo",
+      "command": ".\\tools\\bin\\generated\\hugo.cmd",
       "args": [
-        "--minify"
+        "--gc",
+        "--minify",
+        "--panicOnWarning"
       ],
       "problemMatcher": []
     },

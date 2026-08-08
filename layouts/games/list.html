@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ $gamesData := site.Data.games | default dict }}
+  {{ $gamesData := hugo.Data.games | default dict }}
   {{ $catalog := index $gamesData "catalog" | default dict }}
   {{ $order := index $catalog "order" | default (slice) }}
   {{ if not $order }}{{ errorf "Games catalog order is required" }}{{ end }}

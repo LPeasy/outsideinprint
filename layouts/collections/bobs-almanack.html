@@ -54,7 +54,7 @@
         {{ $issueNumber := $latest.Params.issue_number | default $state.count }}
         {{ $dateKey := $latest.Date.Format "01-02" }}
         {{ $weekKey := $latest.Date.Format "2006-01-02" }}
-        {{ $almanackData := site.Data.almanack | default (dict) }}
+        {{ $almanackData := hugo.Data.almanack | default (dict) }}
         {{ $onThisDayData := index $almanackData "on_this_day" | default (dict) }}
         {{ $onThisDayDates := index $onThisDayData "dates" | default (dict) }}
         {{ $onThisDay := index $onThisDayDates $dateKey | default (dict) }}

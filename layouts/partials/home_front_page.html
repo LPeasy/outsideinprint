@@ -3,7 +3,7 @@
 {{ $latest := index $frontPage "latest" }}
 {{ $showLatestSlot := index $frontPage "showLatestSlot" }}
 {{ $secondary := index $frontPage "secondary" | default (slice) }}
-{{ $cartoonData := site.Data.editorial_cartoons | default dict }}
+{{ $cartoonData := hugo.Data.editorial_cartoons | default dict }}
 {{ $cartoons := partial "editorial/published-cartoons.html" ($cartoonData.cartoons | default (slice)) }}
 {{ $currentCartoon := partial "editorial/current-cartoon.html" . }}
 {{ $currentCartoonSlug := "" }}

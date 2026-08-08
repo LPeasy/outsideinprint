@@ -131,6 +131,14 @@ function Assert-True {
   }
 }
 
+$verifySource = Get-Content -LiteralPath $verifyScript -Raw
+$hugoResolverPath = Join-Path $repoRoot 'scripts/lib/resolve_pinned_hugo.ps1'
+$hugoResolverSource = Get-Content -LiteralPath $hugoResolverPath -Raw
+Assert-True ($verifySource.Contains('Resolve-OipPinnedHugo')) 'PDF verification must use the shared pinned Hugo resolver.'
+Assert-True ($hugoResolverSource.Contains('tools\bin\generated\hugo.cmd')) 'Shared Hugo resolver must use the repo wrapper on Windows.'
+Assert-True ($hugoResolverSource.Contains('Get-Command hugo -CommandType Application')) 'Shared Hugo resolver must use PATH only on non-Windows hosts.'
+Assert-True ($hugoResolverSource.Contains("ExpectedVersion = '0.164.0'")) 'Shared Hugo resolver must pin Hugo 0.164.0.'
+
 $rootsToClean = New-Object System.Collections.Generic.List[string]
 try {
   $successRoot = New-TestRoot

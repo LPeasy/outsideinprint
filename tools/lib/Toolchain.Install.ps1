@@ -118,6 +118,7 @@ function Install-PortableTool {
 
     $existingPath = Resolve-ToolExecutableFromRoot -Tool $Tool -InstallRoot $InstallRoot -RepoRoot $RepoRoot
     if ($existingPath) {
+        Assert-InstalledToolHash -Tool $Tool -ExecutablePath $existingPath -LogPath $LogPath
         Write-ToolLog -LogPath $LogPath -Message ("Using existing repo-local payload at {0}" -f $existingPath)
         Write-ToolLog -LogPath $LogPath -Message ("Tool={0} Version={1} Source=repo-local FallbackExtract={2}" -f $Tool.name, $Tool.version, $UsedFallbackExtract.ToString().ToLowerInvariant())
         return
@@ -127,6 +128,11 @@ function Install-PortableTool {
     if ($cachePath -and (Test-Path -LiteralPath $cachePath -PathType Container)) {
         Write-ToolLog -LogPath $LogPath -Message ("Copying payload from shared cache {0}" -f $cachePath)
         Copy-DirectoryTree -Source $cachePath -Destination $InstallRoot
+        $cachedExecutablePath = Resolve-ToolExecutableFromRoot -Tool $Tool -InstallRoot $InstallRoot -RepoRoot $RepoRoot
+        if (-not $cachedExecutablePath) {
+            throw "Shared cache payload for '$($Tool.name)' does not contain the configured executable."
+        }
+        Assert-InstalledToolHash -Tool $Tool -ExecutablePath $cachedExecutablePath -LogPath $LogPath
         Write-ToolLog -LogPath $LogPath -Message ("Tool={0} Version={1} Source=shared-cache FallbackExtract={2}" -f $Tool.name, $Tool.version, $UsedFallbackExtract.ToString().ToLowerInvariant())
         return
     }
@@ -146,6 +152,11 @@ function Install-PortableTool {
     Remove-WorkspaceItemStrict -RepoRoot $RepoRoot -TargetPath $InstallRoot
     Ensure-Directory -Path (Split-Path -Path $InstallRoot -Parent)
     Expand-ToolPayload -ArchivePath $downloadPath -DestinationPath $InstallRoot -LogPath $LogPath
+    $installedExecutablePath = Resolve-ToolExecutableFromRoot -Tool $Tool -InstallRoot $InstallRoot -RepoRoot $RepoRoot
+    if (-not $installedExecutablePath) {
+        throw "Installed payload for '$($Tool.name)' does not contain the configured executable."
+    }
+    Assert-InstalledToolHash -Tool $Tool -ExecutablePath $installedExecutablePath -LogPath $LogPath
     Write-ToolLog -LogPath $LogPath -Message ("Tool={0} Version={1} Source={2} Candidate={3} FallbackExtract={4}" -f $Tool.name, $Tool.version, $downloadResult.Origin, $downloadResult.Source, $UsedFallbackExtract.ToString().ToLowerInvariant())
 
     if ($cachePath) {
@@ -249,6 +260,50 @@ function Download-ToolPayloadCandidate {
     }
 }
 
+function Get-ToolFileSha256 {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path
+    )
+
+    $stream = [System.IO.File]::OpenRead($Path)
+    $hasher = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $hashBytes = $hasher.ComputeHash($stream)
+    } finally {
+        $hasher.Dispose()
+        $stream.Dispose()
+    }
+
+    return [System.BitConverter]::ToString($hashBytes).Replace("-", "").ToLowerInvariant()
+}
+
+function Assert-InstalledToolHash {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [pscustomobject]$Tool,
+        [Parameter(Mandatory = $true)]
+        [string]$ExecutablePath,
+        [Parameter(Mandatory = $true)]
+        [string]$LogPath
+    )
+
+    $hasInstalledSha = $Tool.PSObject.Properties.Name.Contains("installed_sha256") -and -not [string]::IsNullOrWhiteSpace($Tool.installed_sha256)
+    if (-not $hasInstalledSha) {
+        return
+    }
+
+    $actual = Get-ToolFileSha256 -Path $ExecutablePath
+    $expected = ([string]$Tool.installed_sha256).ToLowerInvariant()
+    if ($actual -ne $expected) {
+        throw "Installed SHA-256 mismatch for '$($Tool.name)'. Expected $expected, got $actual."
+    }
+
+    Write-ToolLog -LogPath $LogPath -Message "Installed executable SHA-256 verification succeeded."
+}
+
 function Assert-ToolHash {
     [CmdletBinding()]
     param(
@@ -266,7 +321,7 @@ function Assert-ToolHash {
         return
     }
 
-    $hash = (Get-FileHash -LiteralPath $DownloadedPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    $hash = Get-ToolFileSha256 -Path $DownloadedPath
     $expected = ([string]$Tool.sha256).ToLowerInvariant()
     if ($hash -ne $expected) {
         throw "SHA-256 mismatch for '$($Tool.name)'. Expected $expected, got $hash."

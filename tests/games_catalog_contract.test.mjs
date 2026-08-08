@@ -129,7 +129,7 @@ test("Games templates fail closed and keep the catalog non-commercial", () => {
   const matrix = read("docs/layout-ownership-matrix.md");
   const markup = `${listTemplate}\n${singleTemplate}`;
 
-  assert.match(listTemplate, /site\.Data\.games/);
+  assert.match(listTemplate, /hugo\.Data\.games/);
   assert.match(listTemplate, /partial "games\/product-data\.html"/);
   assert.equal((listTemplate.match(/<h1\b/g) || []).length, 1);
   assert.match(singleTemplate, /partial "games\/product-data\.html"/);
