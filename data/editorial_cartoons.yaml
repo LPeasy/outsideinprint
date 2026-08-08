@@ -1,4 +1,4 @@
-current: the-turn
+current: the-cavalry-breaks-the-hill
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -750,5 +750,14 @@ cartoons:
     image: "/images/editorial/the-turn.png"
     essay: "/essays/i-make-myself/"
     alt: "An anonymous person rounds a quiet neighborhood corner at dawn, moving from deep blue shadow toward the warm sunlit street ahead."
+    width: 1672
+    height: 941
+  - slug: the-cavalry-breaks-the-hill
+    title: "The Cavalry Breaks the Hill"
+    date: "2026-08-07"
+    publishDate: "2026-08-07T08:00:00-04:00"
+    image: "/images/editorial/the-cavalry-breaks-the-hill.png"
+    essay: "/essays/the-cavalry-is-here/"
+    alt: "A lone anonymous walker looks up from a rain-dark road as mounted trumpeters charge over a hill and golden light pours through the clouds to reach them both."
     width: 1672
     height: 941
