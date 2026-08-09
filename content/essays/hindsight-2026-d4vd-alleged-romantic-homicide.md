@@ -13,7 +13,7 @@ revision_history:
     date: '2026-05-11'
     note: 'Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding.'
 featured: false
-featured_image: '/images/essays/hindsight-2026-d4vd-alleged-romantic-homicide/hero.png'
+featured_image: 'essays/hindsight-2026-d4vd-alleged-romantic-homicide/hero'
 featured_image_alt: 'A lone young figure overlooking Los Angeles at night, surrounded by fragments of music culture and torn scraps suggesting fame, loss, and suspicion.'
 featured_image_caption: 'A young artist framed against the city, with fame, memory, and accusation hanging in the air around him.'
 
@@ -58,7 +58,7 @@ The normal machinery of a pop career has already been blown apart by the case. [
 
 The missing public record is just as important. The full evidentiary picture behind the arrest is not public. We do not know what charges, if any, prosecutors will ultimately file. We do not know what the complete forensic account will be once the case is aired in court. We also do not know how much of the internet's current storytelling will survive contact with an actual record of evidence. Right now there is an arrest, an allegation, a dead child, and a public rushing to turn incomplete information into a finished narrative.
 
-![A split composition showing police files, a Tesla, calendars, and an impound notice on one side, and music gear, a microphone, headphones, and a record sleeve on the other.](/images/essays/hindsight-2026-d4vd-alleged-romantic-homicide/section-1.png)
+![A split composition showing police files, a Tesla, calendars, and an impound notice on one side, and music gear, a microphone, headphones, and a record sleeve on the other.](oip-image:essays/hindsight-2026-d4vd-alleged-romantic-homicide/section-1)
 
 *The case file and the catalog now sit side by side, whether they belong together or not.*
 
@@ -86,7 +86,7 @@ In an earlier era, the public might have received a few magazine profiles, a han
 
 That is one reason public life in modern entertainment can be psychologically dangerous in ways people do not fully grasp. It is not just the pressure to perform. It is the pressure to remain legible all the time. You are always being interpreted. Often by strangers. Often at scale. Often by people who mistake access for understanding. For young artists, damaged artists, unstable artists, or simply artists who start believing their own myth too early, that environment can warp reality fast. It can intensify paranoia, dissociation, recklessness, self-dramatization, and the sense that your inner life is something to stage rather than something to master.
 
-![A solitary musician in a dim bedroom studio while symbolic shapes drift through the room, including a broken heart, storm cloud, speech bubbles, and childhood photos by the window.](/images/essays/hindsight-2026-d4vd-alleged-romantic-homicide/section-2.png)
+![A solitary musician in a dim bedroom studio while symbolic shapes drift through the room, including a broken heart, storm cloud, speech bubbles, and childhood photos by the window.](oip-image:essays/hindsight-2026-d4vd-alleged-romantic-homicide/section-2)
 
 *What starts as mood, symbol, and private pressure can look very different once the world starts reading backward.*
 
@@ -114,7 +114,7 @@ The point is not that these figures belong in one moral category. They do not. T
 
 Sometimes the culture answers by trying to split the art from the artist. Sometimes it fuses them completely. At other moments it moves back and forth between those positions depending on the decade, the headline, or the mood of the crowd. That instability is not a side effect. It is part of how canon formation works now. To be canonized is no longer to be settled. It is to be endlessly reopened.
 
-![A collage of framed artist silhouettes, protest imagery, a cracked gold record, and visual signs of condemnation and canonization layered together.](/images/essays/hindsight-2026-d4vd-alleged-romantic-homicide/section-3.png)
+![A collage of framed artist silhouettes, protest imagery, a cracked gold record, and visual signs of condemnation and canonization layered together.](oip-image:essays/hindsight-2026-d4vd-alleged-romantic-homicide/section-3)
 
 *Artists are often crowned and condemned in the same cultural breath.*
 

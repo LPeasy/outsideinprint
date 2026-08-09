@@ -8,6 +8,8 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
+$Root = (Resolve-Path -LiteralPath $Root).Path
+. (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 
 $script:DefaultPlaceholderHero = '/images/social/outside-in-print-default.png'
 $script:LeadImageLineLimit = 20
@@ -488,33 +490,6 @@ function Get-FollowingDuplicateHeroCaptionCandidate {
   }
 }
 
-function Get-SafeExtension {
-  param(
-    [string]$Url,
-    [string]$ContentType
-  )
-
-  $ext = ''
-  try {
-    $ext = [System.IO.Path]::GetExtension(([uri]$Url).AbsolutePath)
-  }
-  catch {
-    $ext = ''
-  }
-
-  if ($ext -match '^\.[A-Za-z0-9]{1,8}$') {
-    return $ext.ToLowerInvariant()
-  }
-
-  if ($ContentType -match 'image/jpeg') { return '.jpg' }
-  if ($ContentType -match 'image/png') { return '.png' }
-  if ($ContentType -match 'image/webp') { return '.webp' }
-  if ($ContentType -match 'image/gif') { return '.gif' }
-  if ($ContentType -match 'image/svg\+xml') { return '.svg' }
-
-  return '.img'
-}
-
 function Get-GeneratedPythonPath {
   param([string]$ScriptRoot)
 
@@ -704,20 +679,36 @@ function Localize-LeadImage {
     }
 
     $hash = Get-BytesSha256Hex -Bytes $download.Bytes
-    $extension = Get-SafeExtension -Url $SourceUrl -ContentType $download.ContentType
-    $relativePath = "/images/medium/$Slug/$hash$extension"
-    $destination = Join-Path $Root ("static\images\medium\{0}\{1}{2}" -f $Slug, $hash, $extension)
+    $extension = Resolve-OipManagedImageExtension -Bytes $download.Bytes -Url $SourceUrl -ContentType $download.ContentType -Label "Essay hero image '$SourceUrl'"
+    $assetId = "medium/$hash"
+    $assetSource = "images/originals/medium/$hash$extension"
+    $reviewState = 'pending_review'
+    $manifest = Read-OipImageAssetManifest -Root $Root -AllowMissing
+    if ($manifest.assets.Contains($assetId)) {
+      $assetSource = [string]$manifest.assets[$assetId].source
+      $reviewState = [string]$manifest.assets[$assetId].review_state
+    }
+    $destination = Join-Path (Join-Path $Root 'assets') $assetSource
 
     if ($Write) {
       Ensure-Directory -Path (Split-Path -Parent $destination)
       if (-not (Test-Path -LiteralPath $destination -PathType Leaf)) {
         [System.IO.File]::WriteAllBytes($destination, $download.Bytes)
       }
+      Register-OipImageAsset `
+        -Root $Root `
+        -Id $assetId `
+        -Source $assetSource `
+        -ImageClass 'medium_import' `
+        -ProcessingHint $(if ($extension -eq '.png') { 'drawing' } else { 'photo' }) `
+        -ReviewState $reviewState `
+        -UsageState 'referenced' `
+        -Aliases @("/images/medium/$Slug/$hash$extension") | Out-Null
     }
 
     return [pscustomobject]@{
       Success = $true
-      Path = $relativePath
+      Path = $assetId
       Localized = $true
       Error = ''
     }

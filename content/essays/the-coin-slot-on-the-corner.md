@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-coin-slot-on-the-corner/hero.png"
+featured_image: "essays/the-coin-slot-on-the-corner/hero"
 featured_image_alt: "Editorial illustration of an old metal payphone on a city corner at dusk, its coin slot and receiver lit by a soft phone-booth glow while apartment windows and a crosswalk sit in the background."
 featured_image_caption: "The old public phone made private speech possible in a public place."
 tags:
@@ -41,7 +41,7 @@ That problem had a civic side almost immediately. A telephone network becomes mo
 
 The invention carried an awkward tradeoff. Public access made the network more useful, but public placement made the device costly and fragile. A coin box invited theft. A public receiver spread wear, noise, and abuse. A booth could shelter a private conversation, but it also occupied sidewalk space. The same machine that helped a person without a telephone could become a nuisance to the business asked to host it.
 
-![Editorial illustration of a payphone opened like a civic machine, showing a coin path, receiver cord, emergency light, and abstract permit papers without readable words or logos.](/images/essays/the-coin-slot-on-the-corner/section-1.png)
+![Editorial illustration of a payphone opened like a civic machine, showing a coin path, receiver cord, emergency light, and abstract permit papers without readable words or logos.](oip-image:essays/the-coin-slot-on-the-corner/section-1)
 
 *The coin mechanism was only one part of the public bargain.*
 
@@ -73,7 +73,7 @@ Cities have not lost the need for shared communication. They have changed the to
 
 The payphone asks a useful question because it is plain enough to understand. Who can make a call without already being inside the private network? Who pays for that possibility? Who watches the contract? Who owns the device? Who bears the risk when the shared layer disappears?
 
-![Editorial illustration of an empty sidewalk payphone pedestal beside a slim modern public kiosk, with a receiver-cord shadow crossing the pavement and pedestrians passing without readable signs.](/images/essays/the-coin-slot-on-the-corner/section-2.png)
+![Editorial illustration of an empty sidewalk payphone pedestal beside a slim modern public kiosk, with a receiver-cord shadow crossing the pavement and pedestrians passing without readable signs.](oip-image:essays/the-coin-slot-on-the-corner/section-2)
 
 *The public layer did not disappear; it changed owners, shapes, and rules.*
 

@@ -3,7 +3,7 @@ cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
     date: "2026-04-22"
-    image: "/images/editorial/the-sewer-under-the-sidewalk.png"
+    image: "editorial/the-sewer-under-the-sidewalk"
     essay: "/essays/the-sewer-under-the-sidewalk/"
     alt: "Officials cut a ribbon beside a wet urban brook while cracked old sewer pipes discharge beneath the street."
     width: 2048
@@ -11,14 +11,14 @@ cartoons:
   - slug: think-outside-the-box
     title: "Think Outside the Box"
     date: "2026-04-16"
-    image: "/images/editorial/cartoon-think-outside-the-box.png"
+    image: "editorial/cartoon-think-outside-the-box"
     alt: "Editorial cartoon showing a student thinking outside the box, with the thought breaking through the frame."
     width: 1024
     height: 1536
   - slug: the-house-always-wins
     title: "The House Always Wins"
     date: "2026-04-16"
-    image: "/images/editorial/the-house-always-wins.png"
+    image: "editorial/the-house-always-wins"
     essay: "/essays/the-world-is-back-at-the-poker-table/"
     alt: "Black-and-white editorial cartoon showing political and financial figures seated around a casino poker table."
     width: 1536
@@ -26,7 +26,7 @@ cartoons:
   - slug: did-you-really-mean-what-you-said
     title: "Did you really mean what you said?"
     date: "2026-04-17"
-    image: "/images/editorial/did-you-really-mean-what-you-said.png"
+    image: "editorial/did-you-really-mean-what-you-said"
     essay: "/essays/hindsight-2026-d4vd-alleged-romantic-homicide/"
     alt: "Editorial cartoon showing a young singer at a microphone under the title 'Romantic Homicide,' with viral-media attention on one side and police tape, case files, and investigators on the other."
     caption: "A cartoon about viral fame, public accusation, and the machinery that turns spectacle into evidence."
@@ -35,7 +35,7 @@ cartoons:
   - slug: feeding-the-machine
     title: "Feeding the Machine"
     date: "2026-04-23"
-    image: "/images/editorial/feeding-the-machine.png"
+    image: "editorial/feeding-the-machine"
     essay: "/essays/the-ai-data-center-wants-its-own-power-plant/"
     alt: "Editorial cartoon showing a laughing businessman cutting off a power line to desperate people while a giant AI data center and smoking industrial towers consume the electricity behind him."
     width: 1536
@@ -43,7 +43,7 @@ cartoons:
   - slug: who-do-you-know-here
     title: "Who Do You Know Here?"
     date: "2026-04-24"
-    image: "/images/editorial/who-do-you-know-here.png"
+    image: "editorial/who-do-you-know-here"
     essay: "/essays/the-gold-card-and-the-price-of-belonging/"
     alt: "Editorial cartoon showing a crowded general immigration intake line beside a guarded Gold Card entrance, where a wealthy family with luggage and a gold card passes a $1 million cover charge sign toward a luxury skyline."
     width: 1672
@@ -51,7 +51,7 @@ cartoons:
   - slug: pull-the-lever
     title: "Pull the lever!"
     date: "2026-04-25"
-    image: "/images/editorial/pull-the-lever.png"
+    image: "editorial/pull-the-lever"
     essay: "/essays/the-fed-chair-is-not-a-button/"
     alt: "Editorial cartoon showing a presidential hand pressing a glowing CUT RATES button labeled PROMISE DELIVERY while green-lit cables tangle through inflation, FOMC, credibility, markets, employment, and public trust machinery toward a locked INTEREST RATES lever before a Federal Reserve committee."
     width: 1672
@@ -59,7 +59,7 @@ cartoons:
   - slug: strait-to-voicemail
     title: "Strait to Voicemail"
     date: "2026-04-26"
-    image: "/images/editorial/strait-to-voicemail.png"
+    image: "editorial/strait-to-voicemail"
     essay: "/essays/the-blockade-has-a-phone-number/"
     alt: "Editorial cartoon showing a phone reading TEHRAN - SENT TO VOICEMAIL beside sanctions papers, a locked blockade over the Strait of Hormuz, tankers, and a public-costs chart for oil, jet fuel, and shipping."
     width: 1672
@@ -67,7 +67,7 @@ cartoons:
   - slug: certified-safe
     title: "Certified safe?"
     date: "2026-04-27"
-    image: "/images/editorial/certified-safe.png"
+    image: "editorial/certified-safe"
     essay: "/essays/the-warning-label-in-the-weeds/"
     alt: "Editorial cartoon showing an EPA approval stamp landing on FIFRA paperwork for weedkiller while a magnifying glass exposes a warning label, with cancer claims, misbranding, farm use, and a state jury gathered around the scene."
     width: 1672
@@ -75,7 +75,7 @@ cartoons:
   - slug: cloched-for-business
     title: "Cloched for Business"
     date: "2026-04-28"
-    image: "/images/editorial/cloched-for-business.png"
+    image: "editorial/cloched-for-business"
     essay: "/essays/the-model-that-could-not-leave/"
     alt: "Editorial cartoon showing a small plant sealed under a cracked glass cloche, with dark crosshatching around it and red fractures running down into the roots."
     width: 1672
@@ -83,7 +83,7 @@ cartoons:
   - slug: lines-of-fire
     title: "Lines of Fire"
     date: "2026-04-29"
-    image: "/images/editorial/lines-of-fire.png"
+    image: "editorial/lines-of-fire"
     essay: "/essays/the-strait-that-holds-the-price/"
     alt: "Editorial cartoon showing tankers moving through a narrow strait under a fiery red sky while armed silhouettes watch from the shoreline."
     width: 1672
@@ -91,7 +91,7 @@ cartoons:
   - slug: excellent-work
     title: "Excellent work."
     date: "2026-04-30"
-    image: "/images/editorial/excellent-work.png"
+    image: "editorial/excellent-work"
     essay: "/essays/smokestack-spreadsheets/"
     alt: "Editorial cartoon showing a vintage desktop computer displaying a spreadsheet with a smokestack rising from a highlighted green cell and smoke forming a skull above the monitor."
     width: 1672
@@ -99,7 +99,7 @@ cartoons:
   - slug: very-fine-lines-on-both-sides
     title: "Very Fine Lines on Both Sides"
     date: "2026-04-30"
-    image: "/images/editorial/very-fine-lines-on-both-sides.png"
+    image: "editorial/very-fine-lines-on-both-sides"
     essay: "/essays/when-can-states-draw-race-based-congressional-districts/"
     alt: "Editorial cartoon showing faceless judges with halos using drafting compasses to draw blue congressional district lines across a cracked map while voters holding papers wait at the edge of the room."
     width: 2048
@@ -107,7 +107,7 @@ cartoons:
   - slug: just-part-of-the-game
     title: "Just Part of the Game"
     date: "2026-05-01"
-    image: "/images/editorial/just-part-of-the-game.png"
+    image: "editorial/just-part-of-the-game"
     essay: "/essays/the-bet-slip-in-the-briefing-room/"
     alt: "Editorial cartoon showing a public-duty threshold separating a classified briefing room from a prediction market booth while suited figures pass betting slips across it."
     width: 2048
@@ -115,7 +115,7 @@ cartoons:
   - slug: when-life-gives-you
     title: "When Life Gives You"
     date: "2026-05-03"
-    image: "/images/editorial/when-life-gives-you.png"
+    image: "editorial/when-life-gives-you"
     essay: "/essays/nothing-to-see-here/"
     alt: "Editorial cartoon showing a family on the shore facing a tick-like creature in the water while officials guard a restricted island with a chained file cabinet, floating denied and negative forms, and signs for Lyme, Old Lyme, Nothing to See Here, and a restricted federal disease site."
     width: 1672
@@ -123,7 +123,7 @@ cartoons:
   - slug: let-me-show-you
     title: "Let me show you"
     date: "2026-05-04"
-    image: "/images/editorial/let-me-show-you.png"
+    image: "editorial/let-me-show-you"
     essay: "/essays/multiple-shmultiple/"
     alt: "Editorial cartoon showing a clinician holding a mirror toward a seated woman, whose reflection shows several versions of herself, while shadowed figures observe and write behind a dark window."
     width: 1672
@@ -131,7 +131,7 @@ cartoons:
   - slug: who-paid-the-nazis
     title: "Who Paid the Nazis?"
     date: "2026-05-04"
-    image: "/images/editorial/who-paid-the-nazis.png"
+    image: "editorial/who-paid-the-nazis"
     essay: "/essays/the-hate-ledger/"
     alt: "Editorial cartoon showing blindfolded figures examining a document-covered elephant surrounded by public records, donor letters, bank files, subpoenas, court filings, and source files, with speech bubbles naming Nazis, racists, bigots, alphabet-phobes, and the SPLC."
     width: 2048
@@ -139,7 +139,7 @@ cartoons:
   - slug: pass-the-pepper
     title: "Pass the Pepper"
     date: "2026-05-05"
-    image: "/images/editorial/pass-the-pepper.png"
+    image: "editorial/pass-the-pepper"
     essay: "/essays/can-you-pass-the-pepper-please/"
     alt: "Editorial cartoon showing ICE officers in a detention dining hall treating a detainee request for pepper as a use-of-force report, with a pepper spray can on a tray and red warning labels on the report and can."
     width: 1535
@@ -147,7 +147,7 @@ cartoons:
   - slug: lump-of-coal
     title: "Lump of Coal"
     date: "2026-05-06"
-    image: "/images/editorial/lump-of-coal.png"
+    image: "editorial/lump-of-coal"
     essay: "/essays/the-factory-in-the-footnote/"
     alt: "Editorial cartoon showing a worker asking a factory owner for a lump of coal while the factory burns coal behind him and a cold family waits in a dark room."
     width: 1672
@@ -155,7 +155,7 @@ cartoons:
   - slug: modern-prometheus
     title: "Modern Prometheus"
     date: "2026-05-07"
-    image: "/images/editorial/modern-prometheus.png"
+    image: "editorial/modern-prometheus"
     essay: "/essays/modern-prometheus/"
     alt: "Editorial cartoon showing a massive grid switchboard drawing yellow lightning from a tower labeled SKY POWER and sending electric lines to signs for NIGHT WORK, HOME LIGHT, and FARM LINE."
     width: 1672
@@ -163,7 +163,7 @@ cartoons:
   - slug: campus-r-us
     title: "Campus R Us"
     date: "2026-05-08"
-    image: "/images/editorial/campus-r-us.png"
+    image: "editorial/campus-r-us"
     essay: "/essays/canvas-fails-finals-week/"
     alt: "Editorial cartoon showing anxious students and a professor outside a Campus R Us storefront with a Finals Week Liquidation banner while private-equity figures wheel away a glowing Canvas server into a Leveraged Buyout Express truck."
     width: 1672
@@ -171,7 +171,7 @@ cartoons:
   - slug: algae-fueled-fever-dreams
     title: "Algae-Fueled Fever Dreams"
     date: "2026-05-10"
-    image: "/images/editorial/algae-fueled-fever-dreams.png"
+    image: "editorial/algae-fueled-fever-dreams"
     essay: "/essays/the-blue-pool-at-the-memorial/"
     alt: "Political cartoon showing a public works employee rolling blue coating across the Lincoln Memorial Reflecting Pool while algae pours from a cracked pipe labeled Deferred Maintenance and protesters hold signs reading Preserve the Neglect and Authentic Algae."
     width: 1672
@@ -179,7 +179,7 @@ cartoons:
   - slug: see-the-world
     title: "See the World"
     date: "2026-05-11"
-    image: "/images/editorial/see-the-world.png"
+    image: "editorial/see-the-world"
     essay: "/essays/outside-the-garden/"
     alt: "Editorial cartoon showing travelers buying exit tickets from a snake vendor in a lush garden, beside a travel poster and a closed Garden of Eden gate opening onto an industrial wasteland guarded by a winged child holding a fiery sword."
     width: 1672
@@ -187,7 +187,7 @@ cartoons:
   - slug: made-in-china
     title: "Made in China"
     date: "2026-05-12"
-    image: "/images/editorial/made-in-china.png"
+    image: "editorial/made-in-china"
     essay: "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/"
     alt: "Editorial cartoon showing a cobalt blue porcelain current crossing a world map on a ship table from a Jingdezhen kiln through trade routes, Meissen, Chinamania, and a china cabinet to a plate stamped Made in China."
     width: 1672
@@ -195,7 +195,7 @@ cartoons:
   - slug: rephrase-that
     title: "Rephrase That"
     date: "2026-05-13"
-    image: "/images/editorial/rephrase-that.png"
+    image: "editorial/rephrase-that"
     essay: "/essays/no-homo-true-history-not-being-gay-with-your-bros/"
     alt: "Editorial cartoon showing Uncle Sam at a Free Speech podium while a uniformed official with a PC armband marks his speech bubble with red censor strokes beside a Ministry of Correctness door and a Rephrase stamp."
     width: 1672
@@ -203,7 +203,7 @@ cartoons:
   - slug: delivering-the-goods
     title: "Delivering the Goods"
     date: "2026-05-14"
-    image: "/images/editorial/delivering-the-goods.png"
+    image: "editorial/delivering-the-goods"
     essay: "/essays/the-mailbox-at-the-clinic-door/"
     alt: "Editorial cartoon showing customers queued at a counter where a postal worker-pharmacist places a mifepristone prescription envelope between bins labeled Mail Order and Pickup beneath signs for Take a Number, Now Serving, and Pharmacy."
     width: 1672
@@ -211,7 +211,7 @@ cartoons:
   - slug: not-my-river-not-my-problem
     title: "Not My River, Not My Problem"
     date: "2026-05-15"
-    image: "/images/editorial/not-my-river-not-my-problem.png"
+    image: "editorial/not-my-river-not-my-problem"
     essay: "/essays/the-ash-pond-under-the-cloud/"
     alt: "Editorial cartoon showing officials cutting a yellow ribbon at a data center while the ribbon continues as a drainpipe discharging dark water into a river beside a man holding a Clean Water Act folder."
     width: 1672
@@ -219,7 +219,7 @@ cartoons:
   - slug: diverse-consensus
     title: "Diverse Consensus"
     date: "2026-05-17"
-    image: "/images/editorial/diverse-consensus.png"
+    image: "editorial/diverse-consensus"
     essay: "/essays/from-variety-to-virtue/"
     alt: "Editorial cartoon showing Uncle Sam kneeling before a blindfolded tribunal labeled The System, with a consensus device on the bench, a case file reading Case No. 1776: Failure to Diversify, and a chaotic city visible through the window."
     width: 1672
@@ -227,7 +227,7 @@ cartoons:
   - slug: the-altar-of-consent
     title: "The Altar of Consent"
     date: "2026-05-18"
-    image: "/images/editorial/the-altar-of-consent.png"
+    image: "editorial/the-altar-of-consent"
     essay: "/essays/consent-from-permission-to-sanctity/"
     alt: "Editorial cartoon showing people kneeling before a marble altar holding a consent form stamped CONSENTED, with a plaque reading PERMISSION = PURITY and shadowed figures labeled Duty, Wisdom, Obligation, and Formation."
     width: 1672
@@ -235,7 +235,7 @@ cartoons:
   - slug: papers-please
     title: "Papers, please."
     date: "2026-05-19"
-    image: "/images/editorial/papers-please.png"
+    image: "editorial/papers-please"
     essay: "/essays/id-required/"
     alt: "Editorial cartoon showing a supermarket cashier asking a customer to show papers while scanning a roll of duct tape with a red checkout light."
     width: 1672
@@ -243,7 +243,7 @@ cartoons:
   - slug: beneficial-use
     title: "Beneficial Use"
     date: "2026-05-20"
-    image: "/images/editorial/beneficial-use.png"
+    image: "editorial/beneficial-use"
     essay: "/essays/save-some-air-for-the-fishies/"
     alt: "Editorial cartoon showing officials labeled Stormwater, Agriculture, Wastewater, Dams, Development, and Climate Office managing The Oxygen Budget above a river cross-section where fish swim beneath a declining blue Remaining Oxygen line."
     width: 1672
@@ -251,7 +251,7 @@ cartoons:
   - slug: memory-hole
     title: "Memory Hole"
     date: "2026-05-21"
-    image: "/images/editorial/memory-hole.png"
+    image: "editorial/memory-hole"
     essay: "/essays/the-text-message-in-the-archive-box/"
     alt: "Editorial cartoon showing a man feeding papers into a shredder labeled PRIVATE CHANNELS over a pit labeled NO RECORD while a woman holds an empty box labeled PUBLIC MEMORY."
     width: 1672
@@ -259,7 +259,7 @@ cartoons:
   - slug: net-zero-prosperity
     title: "Net Zero Prosperity"
     date: "2026-05-22"
-    image: "/images/editorial/net-zero-prosperity.png"
+    image: "editorial/net-zero-prosperity"
     essay: "/essays/the-easement-under-the-lake/"
     alt: "Editorial cartoon showing protesters with signs against oil and for the planet beside a fenced federal property lot, where a bureaucrat holding a permit denied folder confronts a construction worker near pipe sections, wildlife, and industrial ruins."
     width: 1672
@@ -267,7 +267,7 @@ cartoons:
   - slug: learing-center
     title: "Learing Center"
     date: "2026-05-24"
-    image: "/images/editorial/learing-center.png"
+    image: "editorial/learing-center"
     essay: "/essays/the-door-that-would-not-open/"
     alt: "Editorial cartoon showing a boarded-up storefront labeled Learing Center in a cracked city block, with barred gates, a leaning utility pole, and an overturned shopping cart."
     width: 1672
@@ -275,7 +275,7 @@ cartoons:
   - slug: warbonds
     title: "Warbonds"
     date: "2026-05-28"
-    image: "/images/editorial/warbonds.png"
+    image: "editorial/warbonds"
     essay: "/essays/the-war-premium-at-the-auction/"
     alt: "Editorial cartoon showing a Treasury auction block with a 10-year note, an auction gavel, bidders, warplanes and tankers outside, and a red signal driving a WAR PREMIUM gauge weighted by INFLATION and DEBT SERVICE."
     width: 1672
@@ -283,7 +283,7 @@ cartoons:
   - slug: on-the-fence
     title: "On the Fence"
     date: "2026-05-26"
-    image: "/images/editorial/on-the-fence.png"
+    image: "editorial/on-the-fence"
     essay: "/essays/the-tank-at-the-fence-line/"
     alt: "Editorial cartoon showing families leaving an evacuated neighborhood beside a fence line, while hazmat workers monitor a cracked MMA tank whose warning-yellow fracture casts public cost across the boundary."
     width: 1672
@@ -291,7 +291,7 @@ cartoons:
   - slug: human-resources
     title: "Human Resources"
     date: "2026-05-27"
-    image: "/images/editorial/human-resources.png"
+    image: "editorial/human-resources"
     essay: "/essays/the-courthouse-that-ate-the-republic/"
     alt: "Editorial cartoon showing a split nineteenth-century and modern immigration patronage scene, with elites on a blue-draped balcony above officials handing documents and phones to waiting families."
     width: 1572
@@ -300,7 +300,7 @@ cartoons:
     title: "Hit After Hit"
     date: "2026-05-29"
     publishDate: "2026-05-29T00:00:00-04:00"
-    image: "/images/editorial/hit-after-hit.png"
+    image: "editorial/hit-after-hit"
     essay: "/essays/the-scenario-that-ate-the-future/"
     alt: "Editorial cartoon showing children, reporters, and officials watching a glowing museum display labeled Current Crisis, while older exhibits labeled Y2K, Mayan 2012, Population Bomb, and Peak Oil sit under a sign for the Museum of Expired Catastrophes."
     width: 1672
@@ -309,7 +309,7 @@ cartoons:
     title: "Sunset Powerplant"
     date: "2026-05-31"
     publishDate: "2026-05-31T00:00:00-04:00"
-    image: "/images/editorial/sunset-powerplant.png"
+    image: "editorial/sunset-powerplant"
     essay: "/essays/the-sunset-date-in-the-code/"
     alt: "Editorial cartoon showing officials and workers facing an open book labeled Energy Code as a yellow sunset lowers over power lines, pipes, and industrial energy facilities."
     width: 1672
@@ -317,7 +317,7 @@ cartoons:
   - slug: goin-postal
     title: "Goin' Postal"
     date: "2026-06-01"
-    image: "/images/editorial/goin-postal.png"
+    image: "editorial/goin-postal"
     essay: "/essays/the-ballot-list-at-the-mailroom/"
     alt: "Editorial cartoon showing a county election mailroom where ballot envelopes pass through a large machine labeled BALLOT MAIL while a citizenship list feeds in beside a correction path tag and state law stamp."
     width: 1672
@@ -325,7 +325,7 @@ cartoons:
   - slug: blowing-smoke
     title: "Blowing Smoke"
     date: "2026-06-03"
-    image: "/images/editorial/blowing-smoke.png"
+    image: "editorial/blowing-smoke"
     essay: "/essays/the-examiners-red-pencil/"
     alt: "Editorial cartoon showing a fire marshal waving repeated warnings at a committee that studies possible combustion while the hearing room burns and a sensitive alarm hangs overhead."
     width: 1672
@@ -333,7 +333,7 @@ cartoons:
   - slug: post-malonely
     title: "Post Malonely"
     date: "2026-06-03"
-    image: "/images/editorial/post-malonely.png"
+    image: "editorial/post-malonely"
     essay: "/essays/the-mailbox-at-the-edge-of-the-road/"
     alt: "Editorial cartoon showing a large balance scale weighing a dense city full of mailboxes against a small rural mailbox at the start of a winding country road."
     width: 1672
@@ -341,7 +341,7 @@ cartoons:
   - slug: the-ruler-of-the-road
     title: "The Ruler of the Road"
     date: "2026-06-04"
-    image: "/images/editorial/the-ruler-of-the-road.png"
+    image: "editorial/the-ruler-of-the-road"
     essay: "/essays/the-bell-at-the-crossing-flagship/"
     alt: "Editorial cartoon showing a freight train holding down a railroad-crossing gate shaped like a measuring ruler, blocking a school bus, ambulance, van, tractor, and car while the gate labels time, access, safety, money, local memory, and public record."
     width: 1672
@@ -350,7 +350,7 @@ cartoons:
     title: "The Meter"
     date: "2026-06-07"
     publishDate: "2026-06-07T00:00:00-04:00"
-    image: "/images/editorial/the-meter.png"
+    image: "editorial/the-meter"
     essay: "/essays/the-meter-at-the-curb/"
     alt: "Editorial cartoon showing a giant parking meter shaped like a small city hall at an empty curb, with a red expired flag and labels for curb, public time, fines, and city hall."
     width: 1672
@@ -359,7 +359,7 @@ cartoons:
     title: "Escape Clause"
     date: "2026-06-16"
     publishDate: "2026-06-15T23:40:24-04:00"
-    image: "/images/editorial/escape-clause.png"
+    image: "editorial/escape-clause"
     essay: "/essays/the-ladder-outside-the-window/"
     alt: "Editorial cartoon showing a fire escape labeled PUBLIC SAFETY bolted to a brick wall marked PRIVATE WALL, with a red INSPECTION tag tied to a loose bolt above an empty sidewalk."
     width: 1672
@@ -367,7 +367,7 @@ cartoons:
   - slug: prime-suspect
     title: "Prime Suspect"
     date: "2026-06-18"
-    image: "/images/editorial/prime-suspect.png"
+    image: "editorial/prime-suspect"
     essay: "/essays/the-stamp-on-the-meat-flagship/"
     alt: "Editorial cartoon showing a grocery meat counter staged like an interrogation, with a fictional PASSED stamp on a wrapped steak under a lamp, a separate GRADE shield, and a detective-like shopper saying the marbling is exquisite."
     width: 1672
@@ -376,7 +376,7 @@ cartoons:
     title: "Premium Memory"
     date: "2026-06-20"
     publishDate: "2026-06-20T00:00:00-04:00"
-    image: "/images/editorial/premium-memory.png"
+    image: "editorial/premium-memory"
     essay: "/essays/the-map-that-priced-the-fire/"
     alt: "Black-and-white editorial cartoon showing an old fire-insurance map pressed into a paper city by an underwriting stamp press on a city records counter, with one muted red hazard block."
     width: 1672
@@ -384,7 +384,7 @@ cartoons:
   - slug: curb-appeal
     title: "Curb Appeal"
     date: "2026-06-21"
-    image: "/images/editorial/curb-appeal.png"
+    image: "editorial/curb-appeal"
     essay: "/essays/the-curb-cut-at-the-corner/"
     alt: "Editorial cartoon showing a curb ramp shaped like a signed document marked ACCESS, with a wheelchair wheel and cane at the sidewalk edge."
     width: 1672
@@ -392,7 +392,7 @@ cartoons:
   - slug: quiet-filing
     title: "Quiet Filing"
     date: "2026-06-22"
-    image: "/images/editorial/quiet-filing.png"
+    image: "editorial/quiet-filing"
     essay: "/essays/the-card-in-the-catalog/"
     alt: "Black-and-white editorial cartoon showing an oversized blank catalog card bridging a gap from a card catalog drawer to library shelves while a small magnifying-glass figure waits to cross."
     width: 1672
@@ -400,7 +400,7 @@ cartoons:
   - slug: ground-truth
     title: "Ground Truth"
     date: "2026-06-23"
-    image: "/images/editorial/ground-truth.png"
+    image: "editorial/ground-truth"
     essay: "/essays/the-brass-disk-in-the-sidewalk/"
     alt: "Editorial cartoon showing a brass survey disk anchoring public maps and papers on a rain-wet courthouse sidewalk while a survey tripod stands in shallow floodwater."
     width: 1672
@@ -408,7 +408,7 @@ cartoons:
   - slug: break-seal
     title: "Break Seal"
     date: "2026-06-24"
-    image: "/images/editorial/break-seal.png"
+    image: "editorial/break-seal"
     essay: "/essays/the-seal-around-the-cap/"
     alt: "Editorial cartoon showing a giant medicine-bottle cap as a checkpoint gate on a crosshatched pharmacy shelf, with a shopper pulling a red torn tamper-evident strip."
     width: 1672
@@ -416,7 +416,7 @@ cartoons:
   - slug: the-cone-in-the-lane
     title: "Borrowed Lane"
     date: "2026-06-25"
-    image: "/images/editorial/the-cone-in-the-lane.png"
+    image: "editorial/the-cone-in-the-lane"
     essay: "/essays/the-cone-in-the-lane/"
     alt: "Editorial cartoon showing an oversized orange traffic cone in a dark crosshatched road work zone, with smaller cones guiding a lane around a repair truck and patched pavement."
     width: 1672
@@ -424,7 +424,7 @@ cartoons:
   - slug: shadow-price
     title: "Shadow Price"
     date: "2026-06-26"
-    image: "/images/editorial/shadow-price.png"
+    image: "editorial/shadow-price"
     essay: "/essays/the-bars-on-the-gum/"
     alt: "Editorial cartoon showing a plain gum pack crossing a checkout scanner as a red beam projects its barcode into huge black bars across an empty wall, with a blank receipt curling in the foreground."
     width: 1672
@@ -432,7 +432,7 @@ cartoons:
   - slug: call-from-above
     title: "Call From Above"
     date: "2026-06-27"
-    image: "/images/editorial/call-from-above.png"
+    image: "editorial/call-from-above"
     essay: "/essays/the-coin-slot-on-the-corner/"
     alt: "Editorial cartoon showing a hat-wearing suited man with a cigar gripping a public payphone while flicking a coin into the coin slot on a late-twentieth-century New York street corner, with a diner, cars, hotdog stand, pedestrians, apartment windows, and an artificial firmament opening above the city."
     width: 1672
@@ -440,7 +440,7 @@ cartoons:
   - slug: claim-check
     title: "Claim Check"
     date: "2026-06-28"
-    image: "/images/editorial/claim-check.png"
+    image: "editorial/claim-check"
     essay: "/essays/the-little-machine-in-the-glass-case/"
     alt: "Black ink editorial cartoon of a lock-shaped glass display case holding a lit patent model, with a half-turned paper key and anonymous public viewers behind a rail."
     width: 1672
@@ -448,7 +448,7 @@ cartoons:
   - slug: after-the-tone
     title: "After The Tone"
     date: "2026-06-29"
-    image: "/images/editorial/after-the-tone.png"
+    image: "editorial/after-the-tone"
     essay: "/essays/the-siren-on-the-pole/"
     alt: "Editorial cartoon showing an outdoor warning siren sending a yellow signal into a dark blank public instruction frame while a small radio and phone sit below it."
     width: 1672
@@ -456,7 +456,7 @@ cartoons:
   - slug: the-minute-drawer
     title: "The Minute Drawer"
     date: "2026-06-30"
-    image: "/images/editorial/the-minute-drawer.png"
+    image: "editorial/the-minute-drawer"
     essay: "/essays/the-clock-by-the-door/"
     alt: "Editorial cartoon showing a factory time clock beside a doorway with its punch-card slot opened like an evidence drawer, a worker silhouette at the threshold, and a ledger-shaped shadow stretching across the floor."
     width: 1672
@@ -464,7 +464,7 @@ cartoons:
   - slug: the-sorting-counter
     title: "The Sorting Counter"
     date: "2026-07-01"
-    image: "/images/editorial/the-sorting-counter.png"
+    image: "editorial/the-sorting-counter"
     essay: "/essays/the-charge-ledger/"
     alt: "A courthouse records counter holds an oversized ledger and four labeled trays for alleged, seized, settled, and recovered money while anonymous figures sort papers under a red question mark thread."
     width: 1672
@@ -472,7 +472,7 @@ cartoons:
   - slug: the-tab
     title: "The Tab"
     date: "2026-07-02"
-    image: "/images/editorial/the-tab.png"
+    image: "editorial/the-tab"
     essay: "/essays/cost-shift/"
     alt: "Editorial cartoon showing a faceless waiter sliding a check labeled THE TAB to ordinary diner customers while a glowing server-rack booth under a NEW POWER sign sits behind them with stacked plates and a red ink trail."
     width: 1672
@@ -480,7 +480,7 @@ cartoons:
   - slug: care-rota
     title: "Care Rota"
     date: "2026-07-03"
-    image: "/images/editorial/care-rota.png"
+    image: "editorial/care-rota"
     essay: "/essays/empty-chair/"
     alt: "Editorial cartoon showing an anonymous adult leaving through an open kitchen door with a BOUNDARY shield while a foreground empty chair tagged NO PLAN is tied by a red thread to another adult holding a CARE ROTA clipboard beside an older relative, medicines, and a walker."
     width: 1672
@@ -488,7 +488,7 @@ cartoons:
   - slug: borrowed-hour
     title: "Borrowed Hour"
     date: "2026-07-04"
-    image: "/images/editorial/borrowed-hour.png"
+    image: "editorial/borrowed-hour"
     essay: "/essays/borrowed-hour/"
     alt: "Editorial cartoon showing an anonymous person in bed holding a glowing phone while a clock-headed clerk hands a red BORROWED HOUR ticket toward a tired morning figure standing in a doorway."
     width: 1672
@@ -496,7 +496,7 @@ cartoons:
   - slug: house-gravity
     title: "House Gravity"
     date: "2026-07-05"
-    image: "/images/editorial/house-gravity.png"
+    image: "editorial/house-gravity"
     essay: "/essays/default-owner/"
     alt: "Editorial cartoon showing household chores sliding down a tilted floor marked NO OWNER toward an anonymous figure wearing a DEFAULT OWNER apron."
     width: 1672
@@ -504,7 +504,7 @@ cartoons:
   - slug: whose-yes
     title: "Whose Yes"
     date: "2026-07-08"
-    image: "/images/editorial/whose-yes.png"
+    image: "editorial/whose-yes"
     essay: "/essays/whose-yes/"
     alt: "Editorial cartoon showing a person holding a rose-gold YES card between a FOR THEM door with someone waiting at a table and a FOR ME door with a mirror, applause marks, and a spotlight."
     width: 1672
@@ -512,7 +512,7 @@ cartoons:
   - slug: minimum-door
     title: "Minimum Door"
     date: "2026-07-09"
-    image: "/images/editorial/minimum-door.png"
+    image: "editorial/minimum-door"
     essay: "/essays/minimum-due/"
     alt: "Editorial cartoon showing an anonymous payer at a MINIMUM DUE window while a green path leads to a darker NEXT MONTH counter where another figure receives an INTEREST envelope."
     width: 1672
@@ -520,7 +520,7 @@ cartoons:
   - slug: the-trophy-case
     title: "The Trophy Case"
     date: "2026-07-10"
-    image: "/images/editorial/the-trophy-case.png"
+    image: "editorial/the-trophy-case"
     essay: "/essays/first-step/"
     alt: "Editorial cartoon showing an anonymous worker handing a large trophy through a dark community-center counter while open double doors reveal an indoor walking loop marked by a muted green threshold line."
     width: 1672
@@ -528,7 +528,7 @@ cartoons:
   - slug: orchard-grip
     title: "Orchard Grip"
     date: "2026-07-13"
-    image: "/images/editorial/orchard-grip.png"
+    image: "editorial/orchard-grip"
     essay: "/essays/the-harvest/"
     alt: "Editorial cartoon showing an anonymous gardener clutching a green pear on a bending orchard branch while a helper holds a watering can beside dry roots and other workers tend trees beneath a rain cloud."
     width: 1672
@@ -537,7 +537,7 @@ cartoons:
     title: "The Tiller"
     date: "2026-07-13"
     publishDate: "2026-07-13T13:45:00-04:00"
-    image: "/images/editorial/the-tiller.png"
+    image: "editorial/the-tiller"
     essay: "/essays/your-part/"
     alt: "Editorial cartoon showing an anonymous ferry captain gripping a tiller while a passenger reaches toward a distant dock sign marked ARRIVAL and a red rope runs along the rail."
     width: 1672
@@ -546,7 +546,7 @@ cartoons:
     title: "Mending Table"
     date: "2026-07-14"
     publishDate: "2026-07-14T16:08:06-04:00"
-    image: "/images/editorial/mending-table.png"
+    image: "editorial/mending-table"
     essay: "/essays/the-repair/"
     alt: "Editorial cartoon showing an anonymous adult kneeling beside a kitchen table and gathering pieces of a cracked bowl into a tray while another adult sits apart and a thin faded yellow thread runs from the bowl to the repair work."
     width: 1672
@@ -555,7 +555,7 @@ cartoons:
     title: "No Receipt"
     date: "2026-07-15"
     publishDate: "2026-07-15T14:08:24-04:00"
-    image: "/images/editorial/no-receipt.png"
+    image: "editorial/no-receipt"
     essay: "/essays/the-favor/"
     alt: "Two anonymous adults face each other while carrying a large box on an apartment stairwell as a torn olive IOU tag falls toward a bin."
     width: 1672
@@ -564,7 +564,7 @@ cartoons:
     title: "The Same Step"
     date: "2026-07-15"
     publishDate: "2026-07-15T14:40:57-04:00"
-    image: "/images/editorial/the-same-step.png"
+    image: "editorial/the-same-step"
     essay: "/essays/togetherness/"
     alt: "Editorial cartoon showing three anonymous adults walking side by side beside a faded ochre-yellow curb stripe on a rainy city sidewalk."
     width: 1672
@@ -572,7 +572,7 @@ cartoons:
   - slug: mail-drop
     title: "Mail Drop"
     date: "2026-07-16"
-    image: "/images/editorial/mail-drop.png"
+    image: "editorial/mail-drop"
     essay: "/essays/say-less-to-say-more/"
     alt: "An anonymous adult pulls a blue envelope back from a street letterbox and slips it into a coat pocket while a lone passerby walks beyond a street lamp."
     width: 1672
@@ -581,7 +581,7 @@ cartoons:
     title: "Passed Down"
     date: "2026-07-16"
     publishDate: "2026-07-16T20:45:00-04:00"
-    image: "/images/editorial/passed-down.png"
+    image: "editorial/passed-down"
     essay: "/essays/the-warning-reached-the-bridge/"
     alt: "Editorial cartoon showing officers passing a red ice warning down through a cutaway ocean liner while the bridge controls remain untouched and passengers wait beside too few lifeboats."
     width: 1672
@@ -589,7 +589,7 @@ cartoons:
   - slug: the-returning-water
     title: "The Returning Water"
     date: "2026-07-17"
-    image: "/images/editorial/the-returning-water.png"
+    image: "editorial/the-returning-water"
     essay: "/essays/the-fit/"
     alt: "An anonymous person walks along a low-tide shore with shoes in hand as a small teal wave returns to open water."
     width: 1672
@@ -597,7 +597,7 @@ cartoons:
   - slug: the-shutters
     title: "The Shutters"
     date: "2026-07-19"
-    image: "/images/editorial/the-shutters-baee82cb.png"
+    image: "editorial/the-shutters-baee82cb"
     essay: "/essays/margin/"
     alt: "Editorial cartoon showing an anonymous adult opening tall wooden shutters as a narrow ray of first light reaches a pair of boots and a canvas day bag."
     width: 1672
@@ -605,7 +605,7 @@ cartoons:
   - slug: at-the-worktable
     title: "At the Worktable"
     date: "2026-07-20"
-    image: "/images/editorial/at-the-worktable.png"
+    image: "editorial/at-the-worktable"
     essay: "/essays/in-hand/"
     alt: "Editorial cartoon showing an anonymous adult holding a worn guitar and pressing a small record button on an older laptop at a scarred worktable, with a screwdriver, toolbox, and face-down phone nearby."
     width: 1672
@@ -613,7 +613,7 @@ cartoons:
   - slug: the-things-we-tolerate
     title: "The Things We Tolerate"
     date: "2026-07-21"
-    image: "/images/editorial/the-things-we-tolerate.png"
+    image: "editorial/the-things-we-tolerate"
     essay: "/essays/do-the-thing-today/"
     alt: "Editorial cartoon showing an adult pressing an overloaded closet closed as a broom braces the door and another person walks through the hallway beside a blank calendar."
     width: 1672
@@ -622,7 +622,7 @@ cartoons:
     title: "The Closed Window"
     date: "2026-07-21"
     publishDate: "2026-07-21T15:12:30-04:00"
-    image: "/images/editorial/the-closed-window.png"
+    image: "editorial/the-closed-window"
     essay: "/essays/the-bolt-beside-the-gas-tank/"
     alt: "Editorial cartoon showing an engineer pushing a punctured fuel tank and test report toward a shutter marked DECISION while a clerk at the next window hands car keys to a waiting family, joined by an iridescent oil trail."
     width: 1672
@@ -630,7 +630,7 @@ cartoons:
   - slug: serpent-at-supper
     title: "Serpent at Supper"
     date: "2026-07-22"
-    image: "/images/editorial/serpent-at-supper.png"
+    image: "editorial/serpent-at-supper"
     essay: "/essays/the-six-hour-news-cycle/"
     alt: "At a warm-toned supper table, a central diner holds an emerald serpent head in one hand and its severed gray power-cord body in the other while two companions sit beside a dark phone."
     width: 1672
@@ -639,7 +639,7 @@ cartoons:
     title: "The Empty Hooks"
     date: "2026-07-23"
     publishDate: "2026-07-23T13:50:00-04:00"
-    image: "/images/editorial/the-empty-hooks.png"
+    image: "editorial/the-empty-hooks"
     essay: "/essays/return/"
     alt: "Two anonymous neighbors carry a ladder together toward empty hooks inside an open backyard shed while a small porch bulb glows in the distance."
     width: 1672
@@ -648,7 +648,7 @@ cartoons:
     title: "Signal at the Turn"
     date: "2026-07-24"
     publishDate: "2026-07-24T07:00:37-04:00"
-    image: "/images/editorial/signal-at-the-turn.png"
+    image: "editorial/signal-at-the-turn"
     essay: "/essays/the-update/"
     alt: "A traveler raises an amber cloth to signal a companion at a trail fork while a fallen tree blocks the straight path and an amber route curves around it."
     width: 1672
@@ -657,7 +657,7 @@ cartoons:
     title: "The Crooked Cake"
     date: "2026-07-26"
     publishDate: "2026-07-26T16:07:10-04:00"
-    image: "/images/editorial/the-crooked-cake.png"
+    image: "editorial/the-crooked-cake"
     essay: "/essays/say-thanks/"
     alt: "Editorial cartoon showing an adult holding a fork over a slice of cake while an apron-wearing baker rests an open hand beside the remaining cake with rust-colored frosting flowers."
     width: 1672
@@ -666,7 +666,7 @@ cartoons:
     title: "The Crooked Row"
     date: "2026-07-27"
     publishDate: "2026-07-27T13:52:31-04:00"
-    image: "/images/editorial/the-crooked-row.png"
+    image: "editorial/the-crooked-row"
     essay: "/essays/forget-the-score/"
     alt: "An anonymous gardener waters an uneven bed of pastel flowers while a loose measuring string sags between two stakes in a densely crosshatched backyard."
     width: 1672
@@ -675,7 +675,7 @@ cartoons:
     title: "The Shape Opens"
     date: "2026-07-28"
     publishDate: "2026-07-28T13:21:29-04:00"
-    image: "/images/editorial/the-shape-opens.png"
+    image: "editorial/the-shape-opens"
     essay: "/essays/reverse-origami/"
     alt: "Two relaxed hands unfold a paper bird into a broad creased sheet against a dark crosshatched backdrop as a warm golden beam from beyond the top of the frame illuminates the origami."
     width: 1672
@@ -684,7 +684,7 @@ cartoons:
     title: "Feet on the Floor"
     date: "2026-07-29"
     publishDate: "2026-07-29T10:40:06-04:00"
-    image: "/images/editorial/feet-on-the-floor.png"
+    image: "editorial/feet-on-the-floor"
     essay: "/essays/i-do-what-i-say/"
     alt: "An anonymous person sits at the edge of a bed with bare feet on wooden floorboards as dawn light enters a shadowed room."
     width: 1672
@@ -693,7 +693,7 @@ cartoons:
     title: "The Road Rises"
     date: "2026-07-30"
     publishDate: "2026-07-30T15:45:36-04:00"
-    image: "/images/editorial/the-road-rises.png"
+    image: "editorial/the-road-rises"
     essay: "/essays/my-friend-the-universe/"
     alt: "An anonymous walker climbs a country road at dawn as a friendly dog and its owner approach through warm morning light."
     width: 1672
@@ -702,7 +702,7 @@ cartoons:
     title: "Filled With Life"
     date: "2026-07-31"
     publishDate: "2026-07-31T13:20:19-04:00"
-    image: "/images/editorial/filled-with-life.png"
+    image: "editorial/filled-with-life"
     essay: "/essays/i-am-healed/"
     alt: "An anonymous person stands with arms open in a sunlit meadow as blue, gold, and green watercolor currents sweep across the sky and fields."
     width: 1672
@@ -711,7 +711,7 @@ cartoons:
     title: "Not Mine to Carry"
     date: "2026-08-02"
     publishDate: "2026-08-02T23:25:19-04:00"
-    image: "/images/editorial/not-mine-to-carry.png"
+    image: "editorial/not-mine-to-carry"
     essay: "/essays/pay-attention-to-you/"
     alt: "An anonymous man walks from a small shadowed crowd struggling against a tangled heap of indistinct burdens toward a sunlit field."
     width: 1672
@@ -720,7 +720,7 @@ cartoons:
     title: "Life Opens the Door"
     date: "2026-08-03"
     publishDate: "2026-08-03T15:29:26-04:00"
-    image: "/images/editorial/life-opens-the-door.png"
+    image: "editorial/life-opens-the-door"
     essay: "/essays/open-hands/"
     alt: "An anonymous man stands with open hands inside a shadowed room as a heavy door opens onto a winding path in warm morning light."
     width: 1672
@@ -729,7 +729,7 @@ cartoons:
     title: "Birthright"
     date: "2026-08-04"
     publishDate: "2026-08-04T17:28:20-04:00"
-    image: "/images/editorial/birthright.png"
+    image: "editorial/birthright"
     essay: "/essays/rich-in-spirit/"
     alt: "An anonymous child sits beneath a flowering citrus tree as dappled natural sunlight falls across the child's curls and shoulders."
     width: 1672
@@ -738,7 +738,7 @@ cartoons:
     title: "The Cup"
     date: "2026-08-05"
     publishDate: "2026-08-05T19:11:14-04:00"
-    image: "/images/editorial/the-cup-makes-its-own-river.png"
+    image: "editorial/the-cup-makes-its-own-river"
     essay: "/essays/eternal-wellspring/"
     alt: "A handmade earthenware cup overflows from a spring rising within it, sending four blue-white streams across a dark stone surface at dawn."
     width: 1672
@@ -747,7 +747,7 @@ cartoons:
     title: "The Turn"
     date: "2026-08-06"
     publishDate: "2026-08-06T14:05:26-04:00"
-    image: "/images/editorial/the-turn.png"
+    image: "editorial/the-turn"
     essay: "/essays/i-make-myself/"
     alt: "An anonymous person rounds a quiet neighborhood corner at dawn, moving from deep blue shadow toward the warm sunlit street ahead."
     width: 1672
@@ -756,7 +756,7 @@ cartoons:
     title: "The Cavalry Breaks the Hill"
     date: "2026-08-07"
     publishDate: "2026-08-07T08:00:00-04:00"
-    image: "/images/editorial/the-cavalry-breaks-the-hill.png"
+    image: "editorial/the-cavalry-breaks-the-hill"
     essay: "/essays/the-cavalry-is-here/"
     alt: "A lone anonymous walker looks up from a rain-dark road as mounted trumpeters charge over a hill and golden light pours through the clouds to reach them both."
     width: 1672

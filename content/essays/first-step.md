@@ -7,7 +7,7 @@ draft: false
 slug: "first-step"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/first-step/hero.png"
+featured_image: "editorial/the-trophy-case"
 featured_image_alt: "Editorial cartoon showing an anonymous worker handing a large trophy through a dark community-center counter while open double doors reveal an indoor walking loop marked by a muted green threshold line."
 featured_image_caption: "A full target should point the way, not close the door."
 version: "1.0"
@@ -31,7 +31,7 @@ Those facts belong together. The full target shows where a week can go. The smal
 
 A person who sees only 150 minutes may wait for a clean hour, new shoes, a gym membership, or a fresh Monday. The task grows grand. Nothing gets started. A five-minute walk doesn't replace a full week. It begins one.
 
-![Infographic showing a big goal leading to a small start and more steps.](/images/essays/first-step/section-1.png)
+![Infographic showing a big goal leading to a small start and more steps.](oip-image:essays/first-step/section-1)
 
 *A distant goal can begin with a smaller move.*
 
@@ -46,7 +46,7 @@ The first rung won't look alike for everyone. One person may walk. Another may r
 
 Yet a limit doesn't turn the whole week into one impossible demand. If a person can safely do something, the smallest workable move gives agency a handle. If they can't, the responsible move may be rest, help, or a new plan.
 
-![Infographic showing IF SAFE, then one move, then build slowly.](/images/essays/first-step/section-2.png)
+![Infographic showing IF SAFE, then one move, then build slowly.](oip-image:essays/first-step/section-2)
 
 *If safe, one workable move can be built slowly over time.*
 

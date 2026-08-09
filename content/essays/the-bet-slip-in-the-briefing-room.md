@@ -6,7 +6,7 @@ slug: "the-bet-slip-in-the-briefing-room"
 section_label: "Essay"
 subtitle: "The Senate's prediction-market ban treats public power as something that should not be privately priced by the people who can move the odds."
 description: "The Senate's prediction-market ban shows why event markets become dangerous when public officials can trade on tomorrow's public acts."
-featured_image: "/images/essays/the-bet-slip-in-the-briefing-room/hero.png"
+featured_image: "essays/the-bet-slip-in-the-briefing-room/hero"
 featured_image_alt: "Editorial illustration of a prediction-market ticket resting on a closed briefing folder at a long Senate table, with a dim trading board reflected in polished wood."
 featured_image_caption: "The bet slip looks harmless until it sits beside tomorrow's official decision."
 version: "1.2"
@@ -73,7 +73,7 @@ Public servants have always had early access to facts: procurement decisions, en
 
 A person with inside knowledge no longer has to find a public company exposed to an event. The event can be the contract.
 
-![Editorial illustration of a glowing event-contract board dissolving into scattered yes-or-no tickets, government folders, and market price lines without readable text.](/images/essays/the-bet-slip-in-the-briefing-room/section-1.png)
+![Editorial illustration of a glowing event-contract board dissolving into scattered yes-or-no tickets, government folders, and market price lines without readable text.](oip-image:essays/the-bet-slip-in-the-briefing-room/section-1)
 *Event contracts turn public uncertainty into prices, which makes official knowledge unusually valuable.*
 
 ## The Small Rule And The Larger Gap
@@ -128,7 +128,7 @@ It gives the conversation a clean starting point.
 
 The person who receives a briefing folder should not also hold a ticket on the outcome.
 
-![Editorial illustration of a closed briefing-room door beside an empty market kiosk, with a single lighted price line stopping at the threshold.](/images/essays/the-bet-slip-in-the-briefing-room/section-2.png)
+![Editorial illustration of a closed briefing-room door beside an empty market kiosk, with a single lighted price line stopping at the threshold.](oip-image:essays/the-bet-slip-in-the-briefing-room/section-2)
 *The market can price the event; public office has to guard the threshold.*
 
 ## What The Ticket Knows

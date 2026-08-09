@@ -26,7 +26,7 @@ topics:
   - agriculture
   - federalism
   - risk
-featured_image: "/images/essays/the-warning-label-in-the-weeds/hero.png"
+featured_image: "essays/the-warning-label-in-the-weeds/hero"
 featured_image_alt: "A weedkiller bottle sits on a courthouse bench, its blank label lit by a greenish field outside the window."
 featured_image_caption: "The label looks like packaging until the legal system asks it to carry public trust."
 ---
@@ -81,7 +81,7 @@ Glyphosate's regulatory history shows that strain. EPA [withdrew its 2020 interi
 
 So the Court is not looking at a settled civic object. It is looking at a live administrative record printed on plastic.
 
-![Rows of crops bend toward a courthouse-shaped horizon while a single paper label casts a long shadow over the field.](/images/essays/the-warning-label-in-the-weeds/section-1.png)
+![Rows of crops bend toward a courthouse-shaped horizon while a single paper label casts a long shadow over the field.](oip-image:essays/the-warning-label-in-the-weeds/section-1)
 
 *The case turns farm certainty and public warning into one narrow question of federal law.*
 
@@ -123,7 +123,7 @@ Too many warnings can blur judgment. Too few can hide danger. A federal label ca
 
 The Supreme Court cannot settle every argument about glyphosate. It may leave many of them unresolved. Its decision will set how much room state law has to speak when EPA has already allowed the label to stay silent.
 
-![A folded pesticide label rests beside gardening gloves, a small sprayer, and a stack of court papers under late afternoon light.](/images/essays/the-warning-label-in-the-weeds/section-2.png)
+![A folded pesticide label rests beside gardening gloves, a small sprayer, and a stack of court papers under late afternoon light.](oip-image:essays/the-warning-label-in-the-weeds/section-2)
 
 *The smallest print becomes the place where science, law, and memory have to share space.*
 

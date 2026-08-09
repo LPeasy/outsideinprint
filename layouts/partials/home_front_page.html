@@ -7,8 +7,14 @@
 {{ $cartoons := partial "editorial/published-cartoons.html" ($cartoonData.cartoons | default (slice)) }}
 {{ $currentCartoon := partial "editorial/current-cartoon.html" . }}
 {{ $currentCartoonSlug := "" }}
+{{ $currentCartoonImage := false }}
 {{ with $currentCartoon }}
   {{ $currentCartoonSlug = .slug }}
+  {{ $currentCartoonImage = partial "images/model.html" (dict
+    "page" $
+    "ref" .image
+    "display" true
+  ) }}
 {{ end }}
 {{ $orderedCartoons := sort (sort $cartoons "slug" "asc") "date" "desc" }}
 {{ $recentCartoons := slice }}
@@ -62,19 +68,21 @@
               data-title="{{ .title }}"
               data-date="{{ .date }}"
               data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
-              data-image="{{ .image | relURL }}"
+              data-image="{{ $currentCartoonImage.lightbox_url }}"
               data-alt="{{ .alt }}"
-              data-width="{{ .width }}"
-              data-height="{{ .height }}"
+              data-width="{{ $currentCartoonImage.lightbox_width }}"
+              data-height="{{ $currentCartoonImage.lightbox_height }}"
               {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
               aria-label="Open {{ .title }} fullscreen"
             >
-              <img
-                src="{{ .image | relURL }}"
-                alt="{{ .alt }}"
-                width="{{ .width }}"
-                height="{{ .height }}"
-              >
+              {{ partial "images/picture.html" (dict
+                "model" $currentCartoonImage
+                "alt" .alt
+                "loading" "eager"
+                "fetchpriority" "high"
+                "sizes" "(min-width: 72rem) 44rem, (min-width: 48rem) 60vw, 100vw"
+                "lightbox" true
+              ) }}
             </button>
             <figcaption>
               <span>{{ .title }}</span>
@@ -85,6 +93,11 @@
         {{ if gt (len $recentCartoons) 0 }}
           <div class="editorial-cartoon-recent" data-home-cartoon-recent aria-label="Recent front-page illustrations">
             {{ range $recentCartoons }}
+              {{ $recentImage := partial "images/model.html" (dict
+                "page" $
+                "ref" .image
+                "display" true
+              ) }}
               <figure class="editorial-cartoon-recent__item" data-home-cartoon-recent-card data-cartoon-slug="{{ .slug }}">
                 <button
                   type="button"
@@ -95,20 +108,20 @@
                   data-title="{{ .title }}"
                   data-date="{{ .date }}"
                   data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
-                  data-image="{{ .image | relURL }}"
+                  data-image="{{ $recentImage.lightbox_url }}"
                   data-alt="{{ .alt }}"
-                  data-width="{{ .width }}"
-                  data-height="{{ .height }}"
+                  data-width="{{ $recentImage.lightbox_width }}"
+                  data-height="{{ $recentImage.lightbox_height }}"
                   {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
                   aria-label="Open {{ .title }} fullscreen"
                 >
-                  <img
-                    src="{{ .image | relURL }}"
-                    alt="{{ .alt }}"
-                    width="{{ .width }}"
-                    height="{{ .height }}"
-                    loading="lazy"
-                  >
+                  {{ partial "images/picture.html" (dict
+                    "model" $recentImage
+                    "alt" .alt
+                    "loading" "lazy"
+                    "sizes" "(min-width: 48rem) 14rem, 42vw"
+                    "lightbox" true
+                  ) }}
                 </button>
                 <figcaption><span>{{ .title }}</span></figcaption>
               </figure>
@@ -293,7 +306,7 @@
             data-home-cartoon-lightbox-image-button
             aria-label="Close fullscreen image"
           >
-            <img data-home-cartoon-lightbox-image src="" alt="">
+            <img data-home-cartoon-lightbox-image alt="">
           </button>
           <figcaption class="cartoon-lightbox__caption">
             <div>

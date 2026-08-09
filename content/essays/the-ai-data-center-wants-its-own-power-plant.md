@@ -16,7 +16,7 @@ revision_history:
     date: "2026-04-26"
     note: "Updated April 26, 2026, for minor wording cleanup."
 featured: false
-featured_image: "/images/essays/the-ai-data-center-wants-its-own-power-plant/hero.png"
+featured_image: "essays/the-ai-data-center-wants-its-own-power-plant/hero"
 featured_image_alt: "A glowing AI data center campus at night beside gas turbines and transmission towers."
 featured_image_caption: "The AI campus no longer arrives alone. It now shows up with turbines, towers, and a power strategy of its own."
 collections: ["technology-ai-machine-future"]
@@ -52,7 +52,7 @@ That is a serious promise. It is also an admission.
 
 If AI campuses need their own energy arrangements in state after state, then the constraint is not just compute. It is power governance.
 
-![Permit papers, grid maps, and site plans spread across a desk under directional light.](/images/essays/the-ai-data-center-wants-its-own-power-plant/section-1.png)
+![Permit papers, grid maps, and site plans spread across a desk under directional light.](oip-image:essays/the-ai-data-center-wants-its-own-power-plant/section-1)
 
 *The future enters public life through paperwork first ~ site plans, rate cases, air permits, and the map of what will have to be built.*
 
@@ -100,7 +100,7 @@ Bridges built at gigawatt scale have a habit of becoming neighborhoods.
 
 Once capital is sunk into gas plants, pipelines, and transmission tied to specific campuses, the "temporary" solution acquires lobbyists, debt schedules, local tax dependence, and political defenders. The bridge starts asking to become a district.
 
-![A substation and transmission lines leading toward a distant data center campus at dawn.](/images/essays/the-ai-data-center-wants-its-own-power-plant/section-2.png)
+![A substation and transmission lines leading toward a distant data center campus at dawn.](oip-image:essays/the-ai-data-center-wants-its-own-power-plant/section-2)
 
 *Even a "private" power solution leaves a public footprint behind it.*
 

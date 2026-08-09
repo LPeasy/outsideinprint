@@ -67,10 +67,15 @@ Use these discovery controls deliberately:
 
 If an essay uses a lead image, treat front matter as the canonical source:
 
-- set `featured_image`
+- set `featured_image` to the stable ID from `data/image-assets.json`
 - set `featured_image_alt`
 - set `featured_image_caption` when attribution or caption text is needed
 - do not repeat the same image as the first body image
+
+Managed body images use `oip-image:<asset-id>` destinations. Originals live under
+`assets/images/originals/`; do not copy managed artwork into `static/`. See
+[`docs/responsive-image-pipeline.md`](responsive-image-pipeline.md) for the manifest,
+rendering, review, and output-budget contract.
 
 Version discipline is manual. Bump `version` for material changes to body copy, title/subtitle, or citation-relevant metadata.
 
@@ -156,10 +161,12 @@ During drafting, preview locally with:
 Before publishing, run the normal local publish gate:
 
 ```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1
 .\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public
 ```
 
 What this gate is meant to catch:
@@ -217,7 +224,7 @@ Future-dated front-page cartoons use the same daily rebuild, but the source of t
     title: "Scenario Cartoon"
     date: "2026-05-29"
     publishDate: "2026-05-29T00:00:00-04:00"
-    image: "/images/editorial/scenario-cartoon.png"
+    image: "editorial/scenario-cartoon"
     essay: "/essays/the-scenario-that-ate-the-future/"
 ```
 
@@ -262,7 +269,7 @@ Avoid treating these as the default path:
   .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\normalize_essay_hero_images.ps1 -Write
   ```
 
-  This pass promotes deterministic early lead images into `featured_image`, localizes remote Medium images into `static/images/medium/<slug>/`, migrates short caption/source lines into `featured_image_caption`, and removes promoted duplicates from the article body.
+  This pass promotes deterministic early lead images into `featured_image`, localizes remote Medium images once under `assets/images/originals/`, registers stable manifest IDs, migrates short caption/source lines into `featured_image_caption`, and removes promoted duplicates from the article body.
 
 - Analytics snapshot refresh is separate from public content publishing. Dashboard publishing is paused and no dashboard build is part of the public reading-site workflow.
 - Do not rely on raw HTML, copied Medium formatting, duplicated title/dek in the body, or improvised separators. The essay guardrails are specifically meant to catch those problems.

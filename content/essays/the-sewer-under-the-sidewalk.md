@@ -16,7 +16,7 @@ revision_history:
     date: "2026-04-26"
     note: "Updated April 26, 2026, to display both collection assignments on the article page."
 featured: false
-featured_image: "/images/essays/the-sewer-under-the-sidewalk/hero.png"
+featured_image: "editorial/the-sewer-under-the-sidewalk"
 featured_image_alt: "Officials cut a ribbon beside a wet urban brook while cracked old sewer pipes discharge beneath the street."
 featured_image_caption: "The public version of infrastructure can look like a ribbon cutting. The working version is often buried below it."
 collections: ["floods-water-built-environment", "risk-uncertainty"]
@@ -62,7 +62,7 @@ That is not a malfunction in the ordinary sense. It is a planned failure mode.
 
 The pipe was built with a release valve.
 
-![Side-by-side illustration comparing an old combined sewer system with a separated stormwater and wastewater system during a rainstorm.](/images/essays/the-sewer-under-the-sidewalk/section-1.png)
+![Side-by-side illustration comparing an old combined sewer system with a separated stormwater and wastewater system during a rainstorm.](oip-image:essays/the-sewer-under-the-sidewalk/section-1)
 
 *A combined sewer is not just an old pipe. It is an old bargain about where the city sends water when the storm arrives.*
 
@@ -138,7 +138,7 @@ But if rain is heavier, and rainy stretches come more often, how often does that
 
 At what point does a greenway become a drainage easement with benches?
 
-![A modest community meeting room with residents facing a projected rainfall map, with paper plans and a jar of cloudy brook water on a table.](/images/essays/the-sewer-under-the-sidewalk/section-2.png)
+![A modest community meeting room with residents facing a projected rainfall map, with paper plans and a jar of cloudy brook water on a table.](oip-image:essays/the-sewer-under-the-sidewalk/section-2)
 
 *The argument is not only technical. It is about bills, trust, models, and what counts as clean enough.*
 

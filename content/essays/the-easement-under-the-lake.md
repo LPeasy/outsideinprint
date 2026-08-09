@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-easement-under-the-lake/hero.png"
+featured_image: "essays/the-easement-under-the-lake/hero"
 featured_image_alt: "Editorial illustration of Lake Oahe shown in cross-section, with a dark pipeline beneath the water and an official easement document casting blue light across the shore."
 featured_image_caption: "The permission sits above the pipe, but the risk sits in the water."
 collections:
@@ -57,7 +57,7 @@ That sequence does not make the later record empty. It makes the later record ha
 
 That is why the easement deserves more attention than the slogans around it. The easement is where law turns argument into operating terms.
 
-![Editorial illustration of a government desk holding an open environmental review binder, a Lake Oahe map, five alternative route tabs, and a small pipeline cross-section under a cool blue desk lamp.](/images/essays/the-easement-under-the-lake/section-1.png)
+![Editorial illustration of a government desk holding an open environmental review binder, a Lake Oahe map, five alternative route tabs, and a small pipeline cross-section under a cool blue desk lamp.](oip-image:essays/the-easement-under-the-lake/section-1)
 
 *The environmental record arrived after the pipe had already become part of the system.*
 
@@ -113,6 +113,6 @@ The Lake Oahe easement is a document, but it is also a civic instrument. It gran
 
 If the monitoring works, the public may never notice it. If it fails, the easement will stop looking like paperwork. It will look like the strip of permission under the lake where the country decided that operating certainty was worth the water risk, and that conditions could carry the weight.
 
-![Editorial illustration of Lake Oahe monitoring equipment, groundwater wells, sensor cables, water containers, and a dark pipeline shadow below the shoreline, all tied together by controlled blue signal light.](/images/essays/the-easement-under-the-lake/section-2.png)
+![Editorial illustration of Lake Oahe monitoring equipment, groundwater wells, sensor cables, water containers, and a dark pipeline shadow below the shoreline, all tied together by controlled blue signal light.](oip-image:essays/the-easement-under-the-lake/section-2)
 
 *Permission is only as strong as the monitoring that follows it.*

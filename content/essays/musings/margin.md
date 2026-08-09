@@ -10,7 +10,7 @@ collections: ["musings"]
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
 description: "Have the presence and state of mind to take advantage of life's surprising opportunities."
-featured_image: "/images/essays/margin/hero.png"
+featured_image: "editorial/the-shutters-baee82cb"
 featured_image_alt: "An anonymous adult opens tall wooden window shutters as first light falls across boots and a canvas day bag in a quiet room."
 featured_image_caption: "The Shutters."
 version: "1.0"
@@ -36,7 +36,7 @@ When every minute already belongs to something, a small delay can throw everythi
 
 Leave a little room set aside for the part of your day that didn't plan. It may be a trip to the store, a chore you forgot about, or a last minute request from a friend who needs your help. Try to always leave some extra time in your schedule so that you always have the presence and state of mind to take advantage of life's opportunities when they are presented.
 
-![A linen curtain is drawn aside at an open window while a single houseplant leaf leans toward the first light.](/images/essays/margin/section-1.png)
+![A linen curtain is drawn aside at an open window while a single houseplant leaf leans toward the first light.](oip-image:essays/margin/section-1)
 
 *Air In.*
 
@@ -44,7 +44,7 @@ It can be really easy to think that whatever we have going on is just so importa
 
 Take a deep breath in the morning and fill up your lungs with potential. Don't close your eyes ~ open them wide! Be flexible and ready.
 
-![An anonymous adult ties an everyday boot beside a canvas day bag in a quiet hall at first light.](/images/essays/margin/section-2.png)
+![An anonymous adult ties an everyday boot beside a canvas day bag in a quiet hall at first light.](oip-image:essays/margin/section-2)
 
 *Ready, Not Rushed.*
 

@@ -7,7 +7,7 @@ section_label: "Essay"
 subtitle: "Oppressor Frameworks vs. The Love of Christ"
 description: "A compact moral-theological essay on victimhood, oppression, repentance, forgiveness, and the Christian answer to permanent moral categories."
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/the-last-victim/hero.png"
+featured_image: "essays/the-last-victim/hero"
 featured_image_alt: "A wooden cross standing on a chapel-library table beside a balance scale and two blank ledger pages."
 featured_image_caption: "The scale belongs below the Cross."
 version: "1.2"
@@ -71,7 +71,7 @@ The essential move remained unchanged. Moral status was assigned structurally, n
 
 The framework requires an oppressor to survive.
 
-![An institutional sorting table with blank cards, empty grid boxes, folders, stamps, and a wax seal arranged without readable text.](/images/essays/the-last-victim/section-1.png)
+![An institutional sorting table with blank cards, empty grid boxes, folders, stamps, and a wax seal arranged without readable text.](oip-image:essays/the-last-victim/section-1)
 *The moral sorting machine makes categories easier than persons.*
 
 What began as theory became real when Western institutions adopted it.
@@ -112,7 +112,7 @@ Victimhood-based moral systems fail for structural reasons. They cannot explain 
 
 Christianity offers a harder path. It demands repentance from all, humility from the powerful, and forgiveness from the wounded.
 
-![A stone path leading from a shadowed chapel doorway toward a plain wooden cross in warm dawn light, with two blank papers left on the floor.](/images/essays/the-last-victim/section-2.png)
+![A stone path leading from a shadowed chapel doorway toward a plain wooden cross in warm dawn light, with two blank papers left on the floor.](oip-image:essays/the-last-victim/section-2)
 *The Cross remains after accusation runs out of road.*
 
 It does not promise safety. It promises truth.

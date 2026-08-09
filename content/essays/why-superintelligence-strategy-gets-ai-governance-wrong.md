@@ -81,7 +81,7 @@ AI proliferation is not a centralized arms race - it is a decentralized, acceler
 
 ### Who Really Controls AI? Corporations vs. The State
 
-![Photo by charlesdeluvio on Unsplash](/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731.jpeg)
+![Photo by charlesdeluvio on Unsplash](oip-image:medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731)
 
 *Photo by charlesdeluvio on Unsplash*
 

@@ -6,7 +6,7 @@ slug: "multiple-shmultiple"
 section_label: "Essay"
 subtitle: "The Many Casualties of an American Psychiatric Scandal"
 description: "A reported history of multiple personality disorder, recovered memory therapy, Sybil, satanic ritual abuse claims, and the scandal American psychiatry never owned up to."
-featured_image: "/images/essays/multiple-shmultiple/hero.png"
+featured_image: "essays/multiple-shmultiple/hero"
 featured_image_alt: "Editorial illustration of a court file, a therapy chair, and scattered clinical notes arranged like a quiet stage for a diagnosis learning to speak."
 featured_image_caption: "The record begins as a sentence in a file, then widens into a room that could teach suffering a script."
 version: "1.2"
@@ -91,7 +91,7 @@ The loop was not complicated.
 
 Look for hidden selves. Ask the patient to listen for them. Treat them as separate speakers when they appear. Give them names, motives, histories, injuries, and tasks. Then count their appearance as proof that they were there all along.
 
-![Editorial illustration of a therapy room arranged like a stage, with chairs, files, and blank masks suggesting roles being learned without depicting a real patient.](/images/essays/multiple-shmultiple/section-1.png)
+![Editorial illustration of a therapy room arranged like a stage, with chairs, files, and blank masks suggesting roles being learned without depicting a real patient.](oip-image:essays/multiple-shmultiple/section-1)
 
 *The script did not have to begin as deception. It could begin as a method that rewarded the right answer.*
 
@@ -175,7 +175,7 @@ The same account reported that Braun later agreed to a two-year Illinois medical
 
 Braun is useful less as a cartoon villain than as a professional case record. The record around him shows the system at work: prestigious hospital setting, specialty expertise, hypnosis, recovered memory, satanic abuse claims, alters, litigation, licensing consequences, and then a profession able to treat the case as exceptional instead of diagnostic.
 
-![Editorial illustration of a paper trail running from a therapy chair toward a courtroom bench and filing cabinet, with official documents and clinical folders but no readable text.](/images/essays/multiple-shmultiple/section-2.png)
+![Editorial illustration of a paper trail running from a therapy chair toward a courtroom bench and filing cabinet, with official documents and clinical folders but no readable text.](oip-image:essays/multiple-shmultiple/section-2)
 
 *The treatment room did not stay private once memory became accusation.*
 

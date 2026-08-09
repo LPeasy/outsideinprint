@@ -10,7 +10,7 @@ collections: ["musings"]
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
 description: "A personal reflection on the small things we tolerate and the work that accumulates around them."
-featured_image: "/images/essays/do-the-thing-today/hero.png"
+featured_image: "editorial/the-things-we-tolerate"
 featured_image_alt: "An anonymous adult braces an overflowing apartment closet door with a broom while another person walks through the narrow hallway."
 featured_image_caption: "The Things We Tolerate."
 version: "1.0"

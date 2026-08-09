@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-courthouse-that-ate-the-republic/hero.png"
+featured_image: "essays/the-courthouse-that-ate-the-republic/hero"
 featured_image_alt: "Editorial illustration of Tweed Courthouse as a marble municipal machine turning public bills into ward favors."
 featured_image_caption: "The courthouse becomes the machine: public law, private tribute, and ward power feeding one civic engine."
 collections:
@@ -131,7 +131,7 @@ Picture the newspaper office as a workroom full of risk. Editors and compositors
 
 The press did two things at once. It investigated and staged. It exposed records and built a public drama. Harper's Weekly supplied images. The Times supplied columns, tables, names, and ridicule. Reformers supplied meetings, committees, lawsuits, and candidates. The Ring had lived by controlling the channels of public business. It began to die when hostile channels made the business visible.
 
-![Editorial illustration of a newspaper workroom turning exposed municipal ledgers into public scandal.](/images/essays/the-courthouse-that-ate-the-republic/section-1.png)
+![Editorial illustration of a newspaper workroom turning exposed municipal ledgers into public scandal.](oip-image:essays/the-courthouse-that-ate-the-republic/section-1)
 
 *The Ring began to break when city accounts became public language.*
 
@@ -143,7 +143,7 @@ In the August 19, 1871 Harper's Weekly cartoon commonly remembered as "Who stole
 
 In October, Nast drew Tweed with a money-bag face under the caption "The 'BRAINS' that achieved the Tammany victory at the Rochester Democratic Convention."[^20] It was a brutal simplification. It also caught a political truth. Tweed had become the face of faceless money.
 
-![Editorial illustration of Tammany ward politics as a handoff of aid, ballots, contracts, and obligation.](/images/essays/the-courthouse-that-ate-the-republic/section-2.png)
+![Editorial illustration of Tammany ward politics as a handoff of aid, ballots, contracts, and obligation.](oip-image:essays/the-courthouse-that-ate-the-republic/section-2)
 
 *The ward machine made help concrete, then converted help into obligation.*
 

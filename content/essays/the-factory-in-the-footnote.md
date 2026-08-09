@@ -6,7 +6,7 @@ slug: "the-factory-in-the-footnote"
 section_label: "Essay"
 subtitle: "The SEC climate-disclosure retreat asks where investor materiality ends and carbon governance begins."
 description: "The SEC climate-disclosure reversal turns a dormant rule into a larger test of investor materiality, carbon accounting, industrial capacity, and national cost."
-featured_image: "/images/essays/the-factory-in-the-footnote/hero.png"
+featured_image: "essays/the-factory-in-the-footnote/hero"
 featured_image_alt: "Editorial illustration of a factory silhouette rising out of an annual-report footnote, with audit marks, carbon ledgers, and a quiet boardroom table."
 featured_image_caption: "A factory can disappear into a footnote before anyone votes to close it."
 version: "1.2"
@@ -157,7 +157,7 @@ The American public can support clean air, demand honest markets, protect indust
 
 The factory in the footnote asks for that seriousness. A climate disclosure line can look like information and become a chain. Before law tightens the chain, the country should know what it is fastening, where the other end leads, and whether the people carrying the weight receive anything solid in return.
 
-![Editorial illustration of carbon ledgers flowing across an ocean toward darker factory silhouettes, while a cleaner domestic factory remains under a magnifying glass.](/images/essays/the-factory-in-the-footnote/section-1.png)
+![Editorial illustration of carbon ledgers flowing across an ocean toward darker factory silhouettes, while a cleaner domestic factory remains under a magnifying glass.](oip-image:essays/the-factory-in-the-footnote/section-1)
 *A clean domestic ledger can point toward a dirtier production map.*
 
 ## The Material Question
@@ -180,5 +180,5 @@ That is enough to make the SEC retreat worth more than a partisan headline.
 
 The old rule tried to put climate inside the footnote. The rescission fight asks who gets to decide what the footnote is for.
 
-![Editorial illustration of a public market filing desk with a carbon gauge, a factory permit, and a household power bill arranged under one hard overhead light.](/images/essays/the-factory-in-the-footnote/section-2.png)
+![Editorial illustration of a public market filing desk with a carbon gauge, a factory permit, and a household power bill arranged under one hard overhead light.](oip-image:essays/the-factory-in-the-footnote/section-2)
 *Materiality is where the filing meets the bill.*

@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-29"
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/no-homo-true-history-not-being-gay-with-your-bros/hero.png"
+featured_image: "essays/no-homo-true-history-not-being-gay-with-your-bros/hero"
 featured_image_alt: "Editorial illustration of a sports microphone, male friendship, and public disclaimer ritual."
 featured_image_caption: "A public microphone turns a private male ritual into a record."
 tags:
@@ -83,7 +83,7 @@ That is the heart of the story. "No homo" is a wall and a gate.
 
 The phrase says: I can come this far, but no farther. I can admire you, but not as a desiring man. I can love you, but not like that. I can touch you, but the joke must arrive first. I can be close, but only if the group sees me step back.
 
-![Editorial illustration of locker-room language, boundary policing, and male friendship.](/images/essays/no-homo-true-history-not-being-gay-with-your-bros/section-1.png)
+![Editorial illustration of locker-room language, boundary policing, and male friendship.](oip-image:essays/no-homo-true-history-not-being-gay-with-your-bros/section-1)
 
 *The joke gives closeness permission while marking the line around it.*
 
@@ -173,7 +173,7 @@ The joke form matters. A man could deny suspicion without making the denial soun
 
 The phrase performs fluency as much as it states a denial.
 
-![Editorial illustration of historical male rituals, letters, fraternity, and modern suspicion.](/images/essays/no-homo-true-history-not-being-gay-with-your-bros/section-2.png)
+![Editorial illustration of historical male rituals, letters, fraternity, and modern suspicion.](oip-image:essays/no-homo-true-history-not-being-gay-with-your-bros/section-2)
 
 *Older public scripts told audiences how to read male closeness.*
 

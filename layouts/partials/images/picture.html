@@ -1,0 +1,70 @@
+{{- $model := .model | default false -}}
+{{- if not $model -}}
+  {{- $model = partial "images/model.html" (dict
+    "page" (.page | default false)
+    "ref" (.ref | default "")
+    "display" true
+  ) -}}
+{{- end -}}
+{{- $alt := printf "%v" (.alt | default "") -}}
+{{- $title := printf "%v" (.title | default "") -}}
+{{- $sizes := printf "%v" (.sizes | default "100vw") -}}
+{{- $loading := lower (printf "%v" (.loading | default "lazy")) -}}
+{{- $fetchPriority := lower (printf "%v" (.fetchpriority | default "")) -}}
+{{- $pictureClass := strings.TrimSpace (printf "oip-picture %s" (.class | default "")) -}}
+{{- $imgClass := strings.TrimSpace (printf "%v" (.imgClass | default "")) -}}
+{{- $lightbox := .lightbox | default false -}}
+{{- if not (in (slice "eager" "lazy") $loading) -}}
+  {{- errorf "Responsive image loading value must be eager or lazy, got %q" $loading -}}
+{{- end -}}
+{{- if and $fetchPriority (not (in (slice "high" "low" "auto") $fetchPriority)) -}}
+  {{- errorf "Responsive image fetchpriority value is invalid: %q" $fetchPriority -}}
+{{- end -}}
+
+{{- if $model.managed -}}
+<picture
+  class="{{ $pictureClass }}"
+  data-oip-image-id="{{ $model.id }}"
+  {{- with $model.image_class }} data-oip-image-class="{{ . }}"{{ end -}}
+  {{- with $model.review_state }} data-oip-image-review-state="{{ . }}"{{ end -}}
+>
+  <source type="image/avif" srcset="{{ $model.avif_srcset }}" sizes="{{ $sizes }}">
+  <source type="image/webp" srcset="{{ $model.webp_srcset }}" sizes="{{ $sizes }}">
+  <img
+    src="{{ $model.fallback_url }}"
+    srcset="{{ $model.webp_srcset }}"
+    sizes="{{ $sizes }}"
+    width="{{ $model.intrinsic_width }}"
+    height="{{ $model.intrinsic_height }}"
+    alt="{{ $alt }}"
+    loading="{{ $loading }}"
+    decoding="async"
+    data-oip-image-id="{{ $model.id }}"
+    {{- with $imgClass }} class="{{ . }}"{{ end -}}
+    {{- with $title }} title="{{ . }}"{{ end -}}
+    {{- with $fetchPriority }} fetchpriority="{{ . }}"{{ end -}}
+    {{- if $lightbox }}
+      data-lightbox-src="{{ $model.lightbox_url }}"
+      data-lightbox-width="{{ $model.lightbox_width }}"
+      data-lightbox-height="{{ $model.lightbox_height }}"
+    {{- end -}}
+  >
+</picture>
+{{- else if $model.fallback_url -}}
+<img
+  src="{{ $model.fallback_url }}"
+  alt="{{ $alt }}"
+  loading="{{ $loading }}"
+  decoding="async"
+  {{- if gt (int $model.intrinsic_width) 0 }} width="{{ $model.intrinsic_width }}"{{ end -}}
+  {{- if gt (int $model.intrinsic_height) 0 }} height="{{ $model.intrinsic_height }}"{{ end -}}
+  {{- with $imgClass }} class="{{ . }}"{{ end -}}
+  {{- with $title }} title="{{ . }}"{{ end -}}
+  {{- with $fetchPriority }} fetchpriority="{{ . }}"{{ end -}}
+  {{- if $lightbox }}
+    data-lightbox-src="{{ $model.lightbox_url }}"
+    {{- if gt (int $model.lightbox_width) 0 }} data-lightbox-width="{{ $model.lightbox_width }}"{{ end -}}
+    {{- if gt (int $model.lightbox_height) 0 }} data-lightbox-height="{{ $model.lightbox_height }}"{{ end -}}
+  {{- end -}}
+>
+{{- end -}}

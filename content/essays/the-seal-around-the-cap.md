@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-seal-around-the-cap/hero.png"
+featured_image: "essays/the-seal-around-the-cap/hero"
 featured_image_alt: "A medicine bottle with a clean tamper-evident band on a quiet pharmacy shelf, rendered as serious editorial illustration."
 featured_image_caption: "The seal turns an ordinary cap into a small inspection site."
 collections:
@@ -64,7 +64,7 @@ FDA chose a final rule without the normal delay of proposing and waiting because
 
 The rule turned trust into a design requirement. The package could allow a determined attacker to enter. The legal demand was narrower: entry had to show.
 
-![An unlabeled amber medicine bottle beside a torn seal, a rotary phone, a radio, and an unreadable newspaper on a quiet table.](/images/essays/the-seal-around-the-cap/section-1.png)
+![An unlabeled amber medicine bottle beside a torn seal, a rotary phone, a radio, and an unreadable newspaper on a quiet table.](oip-image:essays/the-seal-around-the-cap/section-1)
 
 *The public panic became a quieter rule about visible evidence.*
 
@@ -80,7 +80,7 @@ That is the most disciplined sentence in the whole story. The seal does not prom
 
 The label rule is the second half of the mechanism. If a seal exists but the consumer does not know where to look, the package has not completed its job. FDA required the label to alert consumers to the specific tamper-resistant feature. A generic warning was weaker than a specific instruction. A buyer needed to know which barrier was supposed to be present and what a missing or broken one meant.
 
-![A generic medicine bottle moving through factory, carton, shelf, and shopper inspection, with the cap seal highlighted.](/images/essays/the-seal-around-the-cap/section-2.png)
+![A generic medicine bottle moving through factory, carton, shelf, and shopper inspection, with the cap seal highlighted.](oip-image:essays/the-seal-around-the-cap/section-2)
 
 *The chain of custody ends with a hand checking the cap.*
 

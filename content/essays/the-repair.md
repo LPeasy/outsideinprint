@@ -7,7 +7,7 @@ draft: false
 slug: "the-repair"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/the-repair/hero.png"
+featured_image: "editorial/mending-table"
 featured_image_alt: "Editorial cartoon showing an anonymous adult kneeling beside a kitchen table and gathering pieces of a cracked bowl into a tray while another adult sits apart and a thin faded yellow thread runs from the bowl to the repair work."
 featured_image_caption: "An apology names the harm. Repair begins with the next honest act."
 version: "1.0"
@@ -36,7 +36,7 @@ With an ordinary, repairable harm, some of those things may be true. But the oth
 
 You may wait for the perfect apology. You may want enough insight, enough pain, enough explanation to prove you understand. You may want that understanding to sound complete before you risk saying anything. That wait can become a way of doing nothing. Plain words can start the work: I did this. It hurt you. I am sorry. Here is what I will do next.
 
-![Infographic showing a broken promise, named harm, and the next honest act.](/images/essays/the-repair/section-1.png)
+![Infographic showing a broken promise, named harm, and the next honest act.](oip-image:essays/the-repair/section-1)
 
 *Name the harm, then take the next honest act.*
 
@@ -46,7 +46,7 @@ Then ask what the next honest act is: make the call you avoided, replace what yo
 
 Repair has a limit. Some harm can't be fixed by one good deed. An apology can't require forgiveness. Trust may return slowly, or it may not return at all. You can't own that outcome. You can own whether you face the harm without making the other person carry your discomfort too.
 
-![Infographic showing the difference between an explanation, repair, and another person's choice.](/images/essays/the-repair/section-2.png)
+![Infographic showing the difference between an explanation, repair, and another person's choice.](oip-image:essays/the-repair/section-2)
 
 *An explanation can help. Repair and their choice remain separate.*
 

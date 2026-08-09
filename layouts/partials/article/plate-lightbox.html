@@ -19,7 +19,7 @@
         data-article-plate-lightbox-image-button
         aria-label="Close fullscreen image"
       >
-        <img data-article-plate-lightbox-image src="" alt="">
+        <img data-article-plate-lightbox-image alt="">
       </button>
       <figcaption class="cartoon-lightbox__caption article-plate-lightbox__caption">
         <div>
@@ -95,7 +95,7 @@
     }
 
     function bodyImageSrc(bodyImage) {
-      return bodyImage.currentSrc || bodyImage.src || "";
+      return bodyImage.getAttribute("data-lightbox-src") || bodyImage.currentSrc || bodyImage.src || "";
     }
 
     function hasInteractiveAncestor(bodyImage) {
@@ -122,8 +122,8 @@
         caption: bodyImageCaption(bodyImage, imageTitle),
         image: bodyImageSrc(bodyImage),
         alt: bodyImage.getAttribute("alt") || "",
-        width: bodyImage.naturalWidth > 0 ? String(bodyImage.naturalWidth) : "",
-        height: bodyImage.naturalHeight > 0 ? String(bodyImage.naturalHeight) : ""
+        width: bodyImage.getAttribute("data-lightbox-width") || (bodyImage.naturalWidth > 0 ? String(bodyImage.naturalWidth) : ""),
+        height: bodyImage.getAttribute("data-lightbox-height") || (bodyImage.naturalHeight > 0 ? String(bodyImage.naturalHeight) : "")
       };
     }
 

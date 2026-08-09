@@ -6,7 +6,7 @@ slug: "the-strait-that-holds-the-price"
 section_label: "Essay"
 subtitle: "Iran's Hormuz proposal shows how a narrow sea passage can turn war, fuel, shipping, fertilizer, and household prices into one shared line."
 description: "Iran's offer to reopen the Strait of Hormuz shows how one narrow passage governs energy security, commodity prices, and public life."
-featured_image: "/images/essays/the-strait-that-holds-the-price/hero.png"
+featured_image: "editorial/lines-of-fire"
 featured_image_alt: "Editorial illustration of tankers moving through a narrow strait under a red sky while armed silhouettes watch from shore."
 featured_image_caption: "Before a price shock reaches land, it passes through a narrow place."
 version: "1.1"
@@ -89,7 +89,7 @@ Those figures show how quickly a pressure campaign can spread beyond its named t
 
 This is the hard moral texture of chokepoint politics. Each side can describe its pressure as necessary. Each side can point to a larger security concern. The costs leave the room where the decision is made.
 
-![Editorial illustration of oil, gas, food, shipping, and power corridors compressed through one narrow waterway.](/images/essays/the-strait-that-holds-the-price/section-1.png)
+![Editorial illustration of oil, gas, food, shipping, and power corridors compressed through one narrow waterway.](oip-image:essays/the-strait-that-holds-the-price/section-1)
 
 *The chokepoint gathers many systems into one width.*
 
@@ -109,7 +109,7 @@ That shared dependency is easy to ignore during normal flow. Cargoes disappear i
 
 There is a civic lesson in that visibility, but it is a plain one. Modern life is less weightless than it pretends to be. The internet can move instantly. Money can clear electronically. Contracts can be signed across continents. Oil, gas, grain, fertilizer, and spare parts need routes. Routes have widths. Widths have politics.
 
-![Editorial illustration of a kitchen table where fuel receipts and grocery staples are connected by thin lines to a distant sea channel.](/images/essays/the-strait-that-holds-the-price/section-2.png)
+![Editorial illustration of a kitchen table where fuel receipts and grocery staples are connected by thin lines to a distant sea channel.](oip-image:essays/the-strait-that-holds-the-price/section-2)
 
 *The strait becomes public when distant routes reach the table.*
 

@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
-featured_image: "/images/essays/the-world-is-back-at-the-poker-table/chips-in.png"
+featured_image: "essays/the-world-is-back-at-the-poker-table/chips-in"
 featured_image_alt: "World leaders sit around a smoky poker table covered with a map and stacks of chips."
 featured_image_caption: "Poker table imagery supplied by the author."
 
@@ -78,7 +78,7 @@ Energy moves the game.
 
 The world keeps relearning both lessons.
 
-![Two players sit at a smoky poker table with chips, papers, and drinks while another table blurs in the background.](/images/essays/the-world-is-back-at-the-poker-table/back-room-chips.png)
+![Two players sit at a smoky poker table with chips, papers, and drinks while another table blurs in the background.](oip-image:essays/the-world-is-back-at-the-poker-table/back-room-chips)
 
 *Poker table imagery supplied by the author.*
 

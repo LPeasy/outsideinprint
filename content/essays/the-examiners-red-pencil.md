@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.2"
 edition: "Third web edition"
 featured: false
-featured_image: "/images/essays/the-examiners-red-pencil/hero.png"
+featured_image: "essays/the-examiners-red-pencil/hero"
 featured_image_alt: "An editorial illustration of a red pencil resting across a thick bank examination report on a desk, with a vault door and green risk gauges in the background."
 featured_image_caption: "The bank examiner's red pencil is small until the loss reaches the public ledger."
 collections:
@@ -76,7 +76,7 @@ The problem is that banks fail in the space where numbers and judgment meet. Sil
 
 That lesson cuts both ways. A long list of findings can become clutter. A short list can miss the dangerous pattern. The challenge is not to make examiners louder or quieter by habit. The challenge is to make them more exact about the mechanism that can create loss.
 
-![A serious editorial illustration of bank exam instruments, paper files, and inspection lenses arranged around a shadowed vault corridor.](/images/essays/the-examiners-red-pencil/section-1.png)
+![A serious editorial illustration of bank exam instruments, paper files, and inspection lenses arranged around a shadowed vault corridor.](oip-image:essays/the-examiners-red-pencil/section-1)
 
 *Supervision turns private records into public-risk judgment before the public can see the record.*
 
@@ -114,7 +114,7 @@ That is a narrow passage. It is also the passage a public banking system has cho
 
 When the warning letter is too vague, it becomes unaccountable power. When it is too hard to write, it becomes an autopsy note.
 
-![An editorial illustration of a public safety net stretched beneath a marble bank facade while warning slips fall toward it.](/images/essays/the-examiners-red-pencil/section-2.png)
+![An editorial illustration of a public safety net stretched beneath a marble bank facade while warning slips fall toward it.](oip-image:essays/the-examiners-red-pencil/section-2)
 
 *The safety net waits beneath the private balance sheet long before a bank reaches it.*
 

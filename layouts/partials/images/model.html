@@ -1,0 +1,170 @@
+{{- $resolved := partial "images/resolve.html" (dict
+  "page" (.page | default false)
+  "ref" (.ref | default "")
+) -}}
+{{- $buildDisplay := true -}}
+{{- if isset . "display" -}}
+  {{- $buildDisplay = .display -}}
+{{- end -}}
+{{- $buildSocial := .social | default false -}}
+{{- $result := merge $resolved (dict
+  "avif_srcset" ""
+  "webp_srcset" ""
+  "fallback_url" $resolved.url
+  "fallback_absolute_url" $resolved.absolute_url
+  "intrinsic_width" $resolved.width
+  "intrinsic_height" $resolved.height
+  "lightbox_url" $resolved.url
+  "lightbox_width" $resolved.width
+  "lightbox_height" $resolved.height
+  "largest_avif_url" ""
+  "largest_avif_width" 0
+  "largest_avif_height" 0
+  "largest_webp_url" $resolved.url
+  "largest_webp_width" $resolved.width
+  "largest_webp_height" $resolved.height
+  "social_url" ""
+  "social_permalink" ""
+  "social_width" 0
+  "social_height" 0
+  "render_widths" (slice)
+) -}}
+
+{{- if $resolved.managed -}}
+  {{- $manifest := index hugo.Data "image-assets" -}}
+  {{- $defaults := $manifest.defaults | default dict -}}
+  {{- $entry := $resolved.entry -}}
+  {{- $resource := $resolved.resource -}}
+  {{- $id := $resolved.id -}}
+  {{- $hashPrefix := $resolved.hash_prefix -}}
+  {{- $processingState := lower (strings.TrimSpace (printf "%v" ($entry.processing_state | default ""))) -}}
+  {{- if not (in (slice "derivative_capable" "source_only_unprocessable") $processingState) -}}
+    {{- errorf "Responsive image asset %q has unsupported processing_state %q" $id $processingState -}}
+  {{- end -}}
+  {{- if eq $processingState "source_only_unprocessable" -}}
+    {{- errorf "Responsive image asset %q is source_only_unprocessable and must never enter the derivative model" $id -}}
+  {{- end -}}
+  {{- $renderRoot := printf "images/rendered/%s/%s" $id $hashPrefix -}}
+  {{- $maxRenderWidth := int ($defaults.max_render_width | default 1600) -}}
+  {{- $socialMaxWidth := int ($defaults.social_max_width | default 1200) -}}
+  {{- if or (le $maxRenderWidth 0) (gt $maxRenderWidth 1600) -}}
+    {{- errorf "Responsive image max_render_width must be between 1 and 1600, got %d" $maxRenderWidth -}}
+  {{- end -}}
+  {{- if or (le $socialMaxWidth 0) (gt $socialMaxWidth 1200) -}}
+    {{- errorf "Responsive image social_max_width must be between 1 and 1200, got %d" $socialMaxWidth -}}
+  {{- end -}}
+
+  {{- $hint := lower (printf "%v" ($entry.processing_hint | default "drawing")) -}}
+  {{- if not (in (slice "drawing" "icon" "photo" "picture" "text") $hint) -}}
+    {{- errorf "Responsive image asset %q has unsupported processing_hint %q" $id $hint -}}
+  {{- end -}}
+
+  {{- $webpQuality := int ($defaults.webp_quality | default 82) -}}
+  {{- $avifQuality := int ($defaults.avif_quality | default 60) -}}
+  {{- with $entry.quality_override -}}
+    {{- if not (reflect.IsMap .) -}}
+      {{- errorf "Responsive image asset %q quality_override must be an object or null" $id -}}
+    {{- else -}}
+      {{- with .webp_quality -}}
+        {{- $webpQuality = int . -}}
+      {{- end -}}
+      {{- with .avif_quality -}}
+        {{- $avifQuality = int . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if or (lt $webpQuality 1) (gt $webpQuality 100) -}}
+    {{- errorf "Responsive image asset %q has invalid WebP quality %d" $id $webpQuality -}}
+  {{- end -}}
+  {{- if or (lt $avifQuality 1) (gt $avifQuality 100) -}}
+    {{- errorf "Responsive image asset %q has invalid AVIF quality %d" $id $avifQuality -}}
+  {{- end -}}
+
+  {{- if $buildDisplay -}}
+    {{- $renderCap := $resource.Width -}}
+    {{- if gt $renderCap $maxRenderWidth -}}
+      {{- $renderCap = $maxRenderWidth -}}
+    {{- end -}}
+    {{- $renderWidths := slice -}}
+    {{- range ($defaults.widths | default (slice 320 640 960 1280 1600)) -}}
+      {{- $candidateWidth := int . -}}
+      {{- if and (gt $candidateWidth 0) (le $candidateWidth $renderCap) (not (in $renderWidths $candidateWidth)) -}}
+        {{- $renderWidths = $renderWidths | append $candidateWidth -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not (in $renderWidths $renderCap) -}}
+      {{- $renderWidths = $renderWidths | append $renderCap -}}
+    {{- end -}}
+    {{- $renderWidths = sort $renderWidths -}}
+
+    {{- $avifParts := slice -}}
+    {{- $webpParts := slice -}}
+    {{- $largestAvif := false -}}
+    {{- $largestWebp := false -}}
+    {{- range $renderWidths -}}
+      {{- $width := int . -}}
+      {{- $avif := $resource.Resize (printf "%dx avif q%d lanczos %s" $width $avifQuality $hint) -}}
+      {{- $avif = resources.Copy (printf "%s/%dw.avif" $renderRoot $width) $avif -}}
+      {{- $webp := $resource.Resize (printf "%dx webp q%d lanczos %s" $width $webpQuality $hint) -}}
+      {{- $webp = resources.Copy (printf "%s/%dw.webp" $renderRoot $width) $webp -}}
+      {{- $avifParts = $avifParts | append (printf "%s %dw" $avif.RelPermalink $avif.Width) -}}
+      {{- $webpParts = $webpParts | append (printf "%s %dw" $webp.RelPermalink $webp.Width) -}}
+      {{- $largestAvif = $avif -}}
+      {{- $largestWebp = $webp -}}
+    {{- end -}}
+
+    {{- if not $largestWebp -}}
+      {{- errorf "Responsive image asset %q did not produce any display derivatives" $id -}}
+    {{- else -}}
+      {{- $result = merge $result (dict
+        "avif_srcset" (delimit $avifParts ", ")
+        "webp_srcset" (delimit $webpParts ", ")
+        "fallback_url" $largestWebp.RelPermalink
+        "fallback_absolute_url" $largestWebp.Permalink
+        "intrinsic_width" $largestWebp.Width
+        "intrinsic_height" $largestWebp.Height
+        "lightbox_url" $largestWebp.RelPermalink
+        "lightbox_width" $largestWebp.Width
+        "lightbox_height" $largestWebp.Height
+        "largest_avif_url" $largestAvif.RelPermalink
+        "largest_avif_width" $largestAvif.Width
+        "largest_avif_height" $largestAvif.Height
+        "largest_webp_url" $largestWebp.RelPermalink
+        "largest_webp_width" $largestWebp.Width
+        "largest_webp_height" $largestWebp.Height
+        "render_widths" $renderWidths
+        "image_class" (printf "%v" ($entry.image_class | default ""))
+        "processing_hint" $hint
+        "review_state" (printf "%v" ($entry.review_state | default ""))
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $buildSocial -}}
+    {{- $socialWidth := $resource.Width -}}
+    {{- if gt $socialWidth $socialMaxWidth -}}
+      {{- $socialWidth = $socialMaxWidth -}}
+    {{- end -}}
+    {{- $socialQuality := int ($defaults.social_jpeg_quality | default 85) -}}
+    {{- if or (lt $socialQuality 1) (gt $socialQuality 100) -}}
+      {{- errorf "Responsive image social_jpeg_quality must be between 1 and 100, got %d" $socialQuality -}}
+    {{- end -}}
+    {{- $social := $resource.Resize (printf "%dx jpeg q%d lanczos #f7eed8" $socialWidth $socialQuality) -}}
+    {{- $social = resources.Copy (printf "%s/social-%dw.jpg" $renderRoot $socialWidth) $social -}}
+    {{- $result = merge $result (dict
+      "social_url" $social.RelPermalink
+      "social_permalink" $social.Permalink
+      "social_width" $social.Width
+      "social_height" $social.Height
+    ) -}}
+  {{- end -}}
+{{- else if $buildSocial -}}
+  {{- $result = merge $result (dict
+    "social_url" $resolved.url
+    "social_permalink" $resolved.absolute_url
+    "social_width" $resolved.width
+    "social_height" $resolved.height
+  ) -}}
+{{- end -}}
+
+{{- return $result -}}

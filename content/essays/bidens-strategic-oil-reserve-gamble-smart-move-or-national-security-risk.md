@@ -206,7 +206,7 @@ While Trump's drilling-first strategy may boost production, it does little to im
 
 ### The Big Picture: What Comes Next for U.S. Energy Security?
 
-![Photo by NASA on Unsplash](/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb.jpeg)
+![Photo by NASA on Unsplash](oip-image:medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb)
 
 *Photo by NASA on Unsplash*
 

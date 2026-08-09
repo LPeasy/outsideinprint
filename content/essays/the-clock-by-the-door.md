@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-clock-by-the-door/hero.png"
+featured_image: "essays/the-clock-by-the-door/hero"
 featured_image_alt: "An editorial illustration of a mechanical time clock beside a factory doorway with blank punch cards in a rack."
 featured_image_caption: "The small machine at the doorway turned arrival into proof."
 tags:
@@ -133,7 +133,7 @@ Each case also warns against easy moral sorting. The worker who passes through a
 
 That is the reason the clock remains central even when the case turns on something outside the clock. The timekeeping system is the first draft of the legal record. If the first draft omits the disputed activity, the court has to decide what the omission proves.
 
-![An editorial illustration of a blank time card enlarging into a payroll ledger and courtroom exhibit, with factory shadows behind it.](/images/essays/the-clock-by-the-door/section-1.png)
+![An editorial illustration of a blank time card enlarging into a payroll ledger and courtroom exhibit, with factory shadows behind it.](oip-image:essays/the-clock-by-the-door/section-1)
 
 *The card becomes most powerful when memory and authority disagree.*
 
@@ -213,7 +213,7 @@ Yet the employer's interest did not vanish. Employers want reliable identity con
 
 The body as badge is the old clock reaching its most intimate form.
 
-![An editorial illustration of an old time clock reflected in a modern phone timekeeping app, with a worker badge and payroll sheet nearby and no readable text.](/images/essays/the-clock-by-the-door/section-2.png)
+![An editorial illustration of an old time clock reflected in a modern phone timekeeping app, with a worker badge and payroll sheet nearby and no readable text.](oip-image:essays/the-clock-by-the-door/section-2)
 
 *The doorway moved, but the record kept its old argument.*
 

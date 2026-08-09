@@ -22,6 +22,7 @@ $CatalogSyncScript = "./scripts/sync_pdf_catalog.ps1"
 $RepoRoot = (Resolve-Path ".").Path
 $HugoCommand = $null
 . (Join-Path $PSScriptRoot 'lib\resolve_pinned_hugo.ps1')
+. (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 $IsWindowsHost = if (Get-Variable -Name IsWindows -ErrorAction SilentlyContinue) {
   [bool]$IsWindows
 }
@@ -646,6 +647,11 @@ function Test-StaticImageReference {
     return $true
   }
 
+  if ($cleanRef.StartsWith('oip-image:', [System.StringComparison]::OrdinalIgnoreCase) -or
+      $cleanRef -match '^(editorial|essays|medium)/') {
+    return $true
+  }
+
   $siteBasePath = Get-SiteBasePath -BaseUrl $script:SiteBaseUrl
   if ($cleanRef.StartsWith('/') -and $siteBasePath -and $cleanRef.StartsWith($siteBasePath, [System.StringComparison]::OrdinalIgnoreCase)) {
     $relativePath = $cleanRef.Substring($siteBasePath.Length).TrimStart('/')
@@ -760,6 +766,11 @@ function Resolve-TypstStaticAssetPath {
 
   if ([string]::IsNullOrWhiteSpace($AssetPath)) {
     return ""
+  }
+
+  $managed = Resolve-OipImageAsset -Root $RepoRoot -Reference $AssetPath
+  if ($null -ne $managed -and (Test-Path -LiteralPath $managed.Path -PathType Leaf)) {
+    return Get-RelativePathBetween -FromPath $TypstSourcePath -ToPath $managed.Path
   }
 
   $resolved = Resolve-StaticAssetPath -AssetRef $AssetPath
@@ -1210,6 +1221,11 @@ function Resolve-ImageSourcePath {
     return ""
   }
 
+  $managed = Resolve-OipImageAsset -Root $RepoRoot -Reference $ImageRef
+  if ($null -ne $managed -and (Test-Path -LiteralPath $managed.Path -PathType Leaf)) {
+    return Get-RelativePathBetween -FromPath $TempSourcePath -ToPath $managed.Path
+  }
+
   $cleanRef = Normalize-StaticAssetReference -Reference $ImageRef
   $staticAssetPath = Resolve-StaticAssetPath -AssetRef $cleanRef
   if (-not [string]::IsNullOrWhiteSpace($staticAssetPath)) {
@@ -1501,7 +1517,7 @@ function Normalize-TypstBody {
       $placeholderState.Count++
       $placeholderBlock
     })
-  $body = [regex]::Replace($body, 'image\("(?<path>/[^"\r\n]+|https?://[^"\r\n]+)"\)', {
+  $body = [regex]::Replace($body, 'image\("(?<path>/[^"\r\n]+|https?://[^"\r\n]+|oip-image:[^"\r\n]+|(?:editorial|essays|medium)/[^"\r\n]+)"\)', {
       param($match)
 
       $assetPath = $match.Groups['path'].Value

@@ -5,7 +5,7 @@ draft: false
 slug: "the-three-enemies-of-positive-outcomes"
 section_label: "Essay"
 subtitle: "Things fail for a reason. It's usually one of these."
-featured_image: "/images/medium/the-three-enemies-of-positive-outcomes/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a.jpeg"
+featured_image: "medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a"
 featured_image_caption: "Photo by Zac Durant on Unsplash"
 featured_image_alt: "The Three Enemies of Positive Outcomes"
 description: "If your team, project, or relationship is off-track, start here. Most things don't fail for complicated reasons. It's usually one of these three"

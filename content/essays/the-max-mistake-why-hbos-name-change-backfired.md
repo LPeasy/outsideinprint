@@ -155,7 +155,7 @@ It was **a cultural institution**.
 
 #### What Went Wrong
 
-![Photo by Sarah Kilian on Unsplash](/images/medium/the-max-mistake-why-hbos-name-change-backfired/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7.jpeg)
+![Photo by Sarah Kilian on Unsplash](oip-image:medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7)
 
 *Photo by Sarah Kilian on [Unsplash](https://unsplash.com/)*
 

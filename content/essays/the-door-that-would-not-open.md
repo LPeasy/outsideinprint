@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-door-that-would-not-open/hero.png"
+featured_image: "essays/the-door-that-would-not-open/hero"
 featured_image_alt: "A winter child-care entrance reflected in a camera lens, with public records and court files visible through the glass."
 featured_image_caption: "A locked door can start an inquiry, but the record has to carry it."
 collections:
@@ -63,7 +63,7 @@ The transcript also shows why the attack did not land cleanly. Shirley said CNN 
 
 The legal record refused to stay inside any one frame.
 
-![A table covered with meal rosters, reimbursement forms, a small lunch tray, and audit marks, with no readable text.](/images/essays/the-door-that-would-not-open/section-1.png)
+![A table covered with meal rosters, reimbursement forms, a small lunch tray, and audit marks, with no readable text.](oip-image:essays/the-door-that-would-not-open/section-1)
 
 *The fraud lived where paperwork, reimbursement, and weak verification met.*
 
@@ -143,6 +143,6 @@ Minnesota has to fix that file. Shirley gave the public a doorway into the probl
 
 The door should open to children. The ledger should open to audit.
 
-![A public records room and courthouse hallway seen through glass, with a small camera on one side and file boxes on the other.](/images/essays/the-door-that-would-not-open/section-2.png)
+![A public records room and courthouse hallway seen through glass, with a small camera on one side and file boxes on the other.](oip-image:essays/the-door-that-would-not-open/section-2)
 
 *The camera can begin the question. The file has to finish it.*

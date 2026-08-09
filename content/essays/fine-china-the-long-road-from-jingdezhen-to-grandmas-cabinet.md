@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-29"
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/hero.png"
+featured_image: "essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/hero"
 featured_image_alt: "Editorial illustration of an antique glass-front cabinet filled with blue-and-white porcelain in a dim domestic room."
 featured_image_caption: "A china cabinet turns porcelain into a household archive of status, distance, and ceremony. Editorial illustration for Outside In Print."
 tags:
@@ -61,7 +61,7 @@ Chinese porcelain reached Europe before Europeans had either the recipe or the p
 
 The British Museum's [Lennard Cup](https://www.britishmuseum.org/collection/object/A_PDF-695) is the early Western status mechanism in one object. It is a Ming porcelain bowl made at Jingdezhen, dated to the Jiajing reign period, and mounted in London with silver-gilt in 1569/70. The museum identifies it as the earliest known blue-and-white porcelain with a dated mount.
 
-![Editorial illustration of a blue-and-white porcelain bowl transformed into a treasure object by ornate gilt mounts.](/images/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/section-1.png)
+![Editorial illustration of a blue-and-white porcelain bowl transformed into a treasure object by ornate gilt mounts.](oip-image:essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/section-1)
 
 *A mounted porcelain bowl shows how European metalwork converted imported ceramic into treasure. Editorial illustration for Outside In Print.*
 
@@ -101,7 +101,7 @@ The V&A connects blue-and-white collecting to the Aesthetic Movement of the 1850
 
 The [Smithsonian's Porcelain Frenzy material](https://asia-archive.si.edu/exhibition/porcelain-frenzy/) places Leyland and Whistler inside this Victorian craze. It describes the middle-class appetite for blue-and-white porcelain and the satirical attention it drew from Punch.
 
-![Editorial illustration of a Victorian parlor crowded with blue-and-white porcelain after a vase breaks on the floor.](/images/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/section-2.png)
+![Editorial illustration of a Victorian parlor crowded with blue-and-white porcelain after a vase breaks on the floor.](oip-image:essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/section-2)
 
 *Victorian Chinamania turned blue-and-white porcelain into domestic performance and satire. Editorial illustration for Outside In Print.*
 

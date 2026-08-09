@@ -5,7 +5,7 @@ draft: false
 slug: "the-ledger-vol-1"
 section_label: "Newsletter"
 subtitle: "Popes, Prime Time, and Political Games"
-featured_image: "/images/medium/the-ledger-vol-1/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe.png"
+featured_image: "medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe"
 featured_image_alt: "The Ledger, Vol. 1"
 description: "The first Ledger newsletter collects recent Outside In Print essays on Pope Leo XIV, The Simpsons, McDonald's, HBO Max, the Supreme Court, David Attenborough, and the gold standard."
 version: "1.2"

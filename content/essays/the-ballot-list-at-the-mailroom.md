@@ -13,7 +13,7 @@ revision_history:
     date: "2026-06-02"
     note: "Updated June 2, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-ballot-list-at-the-mailroom/hero.png"
+featured_image: "essays/the-ballot-list-at-the-mailroom/hero"
 featured_image_alt: "An editorial illustration of a county election mailroom with ballot envelopes, a federal citizenship list, postal barcodes, and a courthouse file under cool overhead light."
 featured_image_caption: "The ballot-list fight begins where legal theory meets a stack of envelopes."
 collections:
@@ -67,7 +67,7 @@ The federal order steps into that infrastructure with a different kind of record
 
 This does not make the project illegitimate. It makes the project dangerous unless the mechanics are visible.
 
-![An editorial illustration of a voter-roll database projected over file drawers, state maps, and correction forms.](/images/essays/the-ballot-list-at-the-mailroom/section-1.png)
+![An editorial illustration of a voter-roll database projected over file drawers, state maps, and correction forms.](oip-image:essays/the-ballot-list-at-the-mailroom/section-1)
 
 *A clean list depends on the source record, the correction path, and the person who bears the cost of error.*
 
@@ -129,6 +129,6 @@ The list at the mailroom is therefore the object to watch. It will show whether 
 
 The argument will return to court if the machinery begins to move. By then the civic question should be simpler than the pleadings. A republic may guard its ballot. It must also know the hand that closes the slot.
 
-![An editorial illustration of ballot envelopes moving through a postal sorting machine while a courthouse clock and county clerk desk sit in the background.](/images/essays/the-ballot-list-at-the-mailroom/section-2.png)
+![An editorial illustration of ballot envelopes moving through a postal sorting machine while a courthouse clock and county clerk desk sit in the background.](oip-image:essays/the-ballot-list-at-the-mailroom/section-2)
 
 *The envelope looks local until the federal file meets the postal scan.*

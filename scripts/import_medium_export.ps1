@@ -1,7 +1,8 @@
 ﻿param(
   [Parameter(Mandatory = $true)] [string]$ZipPath,
+  [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
   [string]$ContentOut = "./content/essays",
-  [string]$MediaOut = "./static/images/medium",
+  [string]$MediaOut = "./assets/images/originals/medium",
   [string]$ReportOut,
   [string]$SlugMapPath = "./reports/medium-slug-map.json",
   [ValidateSet("legacy", "strict")] [string]$Mode = "legacy",
@@ -17,6 +18,17 @@
 
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+$Root = (Resolve-Path -LiteralPath $Root).Path
+. (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
+
+$canonicalMediaOut = Join-Path $Root 'assets\images\originals\medium'
+if ($PSBoundParameters.ContainsKey('MediaOut')) {
+  $requestedMediaOut = [System.IO.Path]::GetFullPath($MediaOut)
+  if ($requestedMediaOut -ne [System.IO.Path]::GetFullPath($canonicalMediaOut)) {
+    throw "MediaOut must be the canonical managed source directory: $canonicalMediaOut"
+  }
+}
+$MediaOut = $canonicalMediaOut
 
 function Ensure-Directory([string]$Path) {
   if ($Path -and -not (Test-Path $Path -PathType Container)) {
@@ -505,24 +517,12 @@ function Get-BytesSha256Hex([byte[]]$Bytes) {
   ([System.BitConverter]::ToString($hashBytes)).Replace('-', '').ToLowerInvariant()
 }
 
-function Get-SafeExtension([string]$Url, [string]$ContentType) {
-  $ext = ''
-  try { $ext = [System.IO.Path]::GetExtension(([uri]$Url).AbsolutePath) } catch { $ext = '' }
-  if ($ext -match '^\.[A-Za-z0-9]{1,5}$') { return $ext.ToLowerInvariant() }
-  if ($ContentType -match 'image/jpeg') { return '.jpg' }
-  if ($ContentType -match 'image/png') { return '.png' }
-  if ($ContentType -match 'image/webp') { return '.webp' }
-  if ($ContentType -match 'image/gif') { return '.gif' }
-  '.img'
-}
-
 function Localize-Media {
-  param([string]$Slug,[string[]]$ImageUrls,[string]$MediaRoot,[string]$Mode,[bool]$DryRun)
+  param([string]$Root,[string]$Slug,[string[]]$ImageUrls,[string]$MediaRoot,[string]$Mode,[bool]$DryRun)
   $result = [ordered]@{ replacements = @{}; downloaded = 0; failed = 0; warnings = New-Object System.Collections.Generic.List[string] }
   if ($ImageUrls.Count -eq 0) { return $result }
 
-  $slugDir = Join-Path $MediaRoot $Slug
-  if (-not $DryRun) { Ensure-Directory $slugDir }
+  if (-not $DryRun) { Ensure-Directory $MediaRoot }
 
   foreach ($url in $ImageUrls) {
     if ($DryRun) { $result.replacements[$url] = $url; continue }
@@ -531,11 +531,28 @@ function Localize-Media {
       $bytes = $resp.Content
       if ($bytes -is [string]) { $bytes = [System.Text.Encoding]::UTF8.GetBytes($bytes) }
       $hash = Get-BytesSha256Hex -Bytes $bytes
-      $ext = Get-SafeExtension -Url $url -ContentType $resp.Headers['Content-Type']
-      $file = "$hash$ext"
-      $dest = Join-Path $slugDir $file
+      $ext = Resolve-OipManagedImageExtension -Bytes $bytes -Url $url -ContentType ([string]$resp.Headers['Content-Type']) -Label "Medium import image '$url'"
+      $assetId = "medium/$hash"
+      $manifest = Read-OipImageAssetManifest -Root $Root -AllowMissing
+      $assetSource = "images/originals/medium/$hash$ext"
+      $reviewState = 'pending_review'
+      if ($manifest.assets.Contains($assetId)) {
+        $assetSource = [string]$manifest.assets[$assetId].source
+        $reviewState = [string]$manifest.assets[$assetId].review_state
+      }
+      $dest = Join-Path (Join-Path $Root 'assets') $assetSource
+      Ensure-Directory (Split-Path -Parent $dest)
       if (-not (Test-Path $dest -PathType Leaf)) { [System.IO.File]::WriteAllBytes($dest, $bytes) }
-      $result.replacements[$url] = "/images/medium/$Slug/$file"
+      Register-OipImageAsset `
+        -Root $Root `
+        -Id $assetId `
+        -Source $assetSource `
+        -ImageClass 'medium_import' `
+        -ProcessingHint $(if ($ext -eq '.png') { 'drawing' } else { 'photo' }) `
+        -ReviewState $reviewState `
+        -UsageState 'referenced' `
+        -Aliases @("/images/medium/$Slug/$hash$ext") | Out-Null
+      $result.replacements[$url] = "oip-image:$assetId"
       $result.downloaded++
     } catch {
       $result.failed++
@@ -662,7 +679,7 @@ try {
         $bodyHtml = [regex]::Replace($bodyHtml, '<iframe\b[^>]*src="' + [regex]::Escape($embed) + '"[^>]*>([\s\S]*?)</iframe>', '<p>[Embedded media: <a href="' + $embed + '">' + $embed + '</a>]</p>', 'IgnoreCase')
       }
 
-      $mediaResult = Localize-Media -Slug $slug -ImageUrls @($post.image_urls) -MediaRoot $MediaOut -Mode $Mode -DryRun:$DryRun
+      $mediaResult = Localize-Media -Root $Root -Slug $slug -ImageUrls @($post.image_urls) -MediaRoot $MediaOut -Mode $Mode -DryRun:$DryRun
       foreach ($w in $mediaResult.warnings) { $warnings.Add($w) }
       if ((-not $DryRun) -and $mediaResult.failed -gt 0) {
         throw ("media_localization_incomplete:{0}:{1}" -f $slug, $mediaResult.failed)

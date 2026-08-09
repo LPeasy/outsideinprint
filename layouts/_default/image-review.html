@@ -1,0 +1,136 @@
+{{ define "main" }}
+  {{- if not .Draft -}}
+    {{- errorf "The responsive image review surface must remain a draft" -}}
+  {{- end -}}
+  {{- if not (and hugo.IsDevelopment hugo.IsServer) -}}
+    {{- errorf "The responsive image review surface may render only through a local development server with drafts enabled" -}}
+  {{- end -}}
+
+  {{- $manifest := index hugo.Data "image-assets" | default dict -}}
+  {{- $assets := $manifest.assets | default dict -}}
+  {{- if ne (len $assets) 350 -}}
+    {{- errorf "The responsive image review surface requires exactly 350 canonical assets, got %d" (len $assets) -}}
+  {{- end -}}
+
+  <article class="image-review" aria-labelledby="image-review-title">
+    <header class="image-review__header">
+      <p class="eyebrow">Local image quality assurance</p>
+      <h1 id="image-review-title">{{ .Title }}</h1>
+      <div class="image-review__introduction">
+        {{ .Content }}
+      </div>
+      <p><strong>{{ len $assets }} canonical assets.</strong> Each row shows the tracked original, largest WebP, and largest AVIF at the same bounded dimensions.</p>
+      <form class="image-review__filters" role="search" onsubmit="return false">
+        <label for="image-review-query">Filter by asset ID</label>
+        <input id="image-review-query" type="search" autocomplete="off" placeholder="essays/example/hero" />
+        <label for="image-review-class">Image class</label>
+        <select id="image-review-class">
+          <option value="">All classes</option>
+          <option value="editorial_cartoon">Editorial cartoon</option>
+          <option value="essay_illustration">Essay illustration</option>
+          <option value="essay_photo">Essay photo</option>
+          <option value="medium_import">Shared Medium image</option>
+        </select>
+        <output id="image-review-count" for="image-review-query image-review-class" aria-live="polite">{{ len $assets }} assets shown</output>
+      </form>
+    </header>
+
+    <ol class="image-review__list">
+      {{- range $id, $entry := $assets -}}
+        {{- $resolved := partial "images/resolve.html" (dict "page" $ "ref" $id) -}}
+        {{- if not $resolved.managed -}}
+          {{- errorf "Image review asset %q did not resolve as managed" $id -}}
+        {{- end -}}
+        {{- $sourceExt := lower (path.Ext (printf "%v" $entry.source)) -}}
+        {{- if not (in (slice ".png" ".jpg" ".jpeg") $sourceExt) -}}
+          {{- errorf "Image review asset %q has unsupported original extension %q" $id $sourceExt -}}
+        {{- end -}}
+        {{- $original := resources.Copy (printf "image-review/originals/%s/original%s" $id $sourceExt) $resolved.resource -}}
+        {{- $imageClass := printf "%v" ($entry.image_class | default "") -}}
+        {{- $reviewState := printf "%v" ($entry.review_state | default "") -}}
+        {{- $usageState := printf "%v" ($entry.usage_state | default "") -}}
+        {{- $processingState := printf "%v" ($entry.processing_state | default "") -}}
+        {{- $sourceOnly := eq $processingState "source_only_unprocessable" -}}
+        {{- if not (in (slice "derivative_capable" "source_only_unprocessable") $processingState) -}}
+          {{- errorf "Image review asset %q has unsupported processing_state %q" $id $processingState -}}
+        {{- end -}}
+        {{- if and $sourceOnly (or (ne $usageState "retained_unreferenced") (ne $reviewState "rejected_corrupt_source")) -}}
+          {{- errorf "Source-only image review asset %q must be retained_unreferenced and rejected_corrupt_source" $id -}}
+        {{- end -}}
+        {{- $model := false -}}
+        {{- if not $sourceOnly -}}
+          {{- $model = partial "images/model.html" (dict "page" $ "ref" $id) -}}
+        {{- end -}}
+        <li class="image-review__item" data-image-review-id="{{ $id }}" data-image-review-class="{{ $imageClass }}">
+          <header class="image-review__item-header">
+            <h2><code>{{ $id }}</code></h2>
+            <dl class="image-review__metadata">
+              <div><dt>Native</dt><dd>{{ $entry.width }} × {{ $entry.height }}</dd></div>
+              <div><dt>Class</dt><dd>{{ $imageClass }}</dd></div>
+              <div><dt>Hint</dt><dd>{{ $entry.processing_hint }}</dd></div>
+              <div><dt>Processing</dt><dd>{{ $processingState }}</dd></div>
+              <div><dt>Review</dt><dd>{{ $reviewState }}</dd></div>
+              <div><dt>Usage</dt><dd>{{ $usageState }}</dd></div>
+              {{- with $entry.processing_note }}<div><dt>Processing note</dt><dd>{{ . }}</dd></div>{{ end -}}
+            </dl>
+          </header>
+          <div class="image-review__comparisons">
+            <figure>
+              <a href="{{ $original.RelPermalink }}" target="_blank" rel="noopener">
+                <img src="{{ $original.RelPermalink }}" alt="Original preview for {{ $id }}" width="{{ $entry.width }}" height="{{ $entry.height }}" loading="lazy" decoding="async" />
+              </a>
+              <figcaption>Original · {{ upper (strings.TrimPrefix "." $sourceExt) }} · {{ $entry.width }} × {{ $entry.height }}</figcaption>
+            </figure>
+            {{- if $model -}}
+              <figure>
+                <a href="{{ $model.largest_webp_url }}" target="_blank" rel="noopener">
+                  <img src="{{ $model.largest_webp_url }}" alt="Largest WebP preview for {{ $id }}" width="{{ $model.largest_webp_width }}" height="{{ $model.largest_webp_height }}" loading="lazy" decoding="async" />
+                </a>
+                <figcaption>WebP · {{ $model.largest_webp_width }} × {{ $model.largest_webp_height }}</figcaption>
+              </figure>
+              <figure>
+                <a href="{{ $model.largest_avif_url }}" target="_blank" rel="noopener">
+                  <img src="{{ $model.largest_avif_url }}" alt="Largest AVIF preview for {{ $id }}" width="{{ $model.largest_avif_width }}" height="{{ $model.largest_avif_height }}" loading="lazy" decoding="async" />
+                </a>
+                <figcaption>AVIF · {{ $model.largest_avif_width }} × {{ $model.largest_avif_height }}</figcaption>
+              </figure>
+            {{- else -}}
+              <figure>
+                <div class="image-review__unavailable" role="note">Rejected corrupt source — archived only; no derivatives</div>
+                <figcaption>WebP · unavailable for malformed legacy source</figcaption>
+              </figure>
+              <figure>
+                <div class="image-review__unavailable" role="note">Rejected corrupt source — archived only; no derivatives</div>
+                <figcaption>AVIF · unavailable for malformed legacy source</figcaption>
+              </figure>
+            {{- end -}}
+          </div>
+        </li>
+      {{- end -}}
+    </ol>
+  </article>
+
+  <script>
+    (() => {
+      const query = document.querySelector('#image-review-query');
+      const imageClass = document.querySelector('#image-review-class');
+      const count = document.querySelector('#image-review-count');
+      const items = [...document.querySelectorAll('[data-image-review-id]')];
+      if (!query || !imageClass || !count) return;
+      const apply = () => {
+        const needle = query.value.trim().toLowerCase();
+        const className = imageClass.value;
+        let visible = 0;
+        for (const item of items) {
+          const matchesID = !needle || item.dataset.imageReviewId.toLowerCase().includes(needle);
+          const matchesClass = !className || item.dataset.imageReviewClass === className;
+          item.hidden = !(matchesID && matchesClass);
+          if (!item.hidden) visible += 1;
+        }
+        count.value = `${visible} ${visible === 1 ? 'asset' : 'assets'} shown`;
+      };
+      query.addEventListener('input', apply);
+      imageClass.addEventListener('change', apply);
+    })();
+  </script>
+{{ end }}

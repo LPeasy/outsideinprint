@@ -280,7 +280,7 @@ function Get-FailureMessage {
       return "Typst failed on the generated 'Image kept on web edition only.' placeholder after $(Get-MetaIntValue -Meta $Meta -Name "omitted_remote_images") remote image(s) were omitted."
     }
     "local_image_path_missing" {
-      return "Typst tried to resolve an /images/... reference as a filesystem path and could not find the asset from the compile root."
+      return "Typst could not resolve a managed image ID or local /images/... reference from the compile root."
     }
     "embed_remnant" {
       return "The body still contains embed or iframe remnants that the Typst path cannot render cleanly."
@@ -450,7 +450,7 @@ if ($localImageCount -gt 0) {
   $pipelineProblems.Add([pscustomobject]@{
       code = "root_relative_image_resolution"
       count = $localImageCount
-      message = "Root-relative /images/... assets survived into Typst instead of being localized to compile-time paths."
+      message = "Managed image IDs or root-relative /images/... assets survived into Typst instead of being localized to compile-time paths."
     })
 }
 

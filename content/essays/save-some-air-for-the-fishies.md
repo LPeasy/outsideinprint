@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/save-some-air-for-the-fishies/hero.png"
+featured_image: "essays/save-some-air-for-the-fishies/hero"
 featured_image_alt: "Editorial illustration of a river oxygen meter glowing near a warm dark river as fish shadows drift below the surface."
 featured_image_caption: "The first sign of a river in trouble may be a number on a meter."
 collections:
@@ -61,7 +61,7 @@ A city may treat stormwater as a drainage problem. A farm may treat fertilizer a
 
 Nutrient pollution is one familiar path. The [Environmental Protection Agency](https://www.epa.gov/nutrientpollution) describes excess nitrogen and phosphorus as fuel for algal growth. When algae die and decompose, oxygen can fall. In a warmer river, the same nutrient load may carry a sharper biological cost because the water begins with a smaller oxygen margin.
 
-![Editorial illustration of warm runoff entering a river through a culvert while algae, fish shadows, and a dissolved oxygen gauge show the pressure building.](/images/essays/save-some-air-for-the-fishies/section-1.png)
+![Editorial illustration of warm runoff entering a river through a culvert while algae, fish shadows, and a dissolved oxygen gauge show the pressure building.](oip-image:essays/save-some-air-for-the-fishies/section-1)
 
 *Runoff, heat, and slow water meet as a single oxygen problem.*
 
@@ -97,7 +97,7 @@ The most honest version of the story leaves room for local variation. The study 
 
 That uncertainty should lead to better measurement, not easier dismissal.
 
-![Editorial illustration of a river basin map made of pipes, farms, reservoirs, shade trees, and monitoring stations converging on one narrow blue channel.](/images/essays/save-some-air-for-the-fishies/section-2.png)
+![Editorial illustration of a river basin map made of pipes, farms, reservoirs, shade trees, and monitoring stations converging on one narrow blue channel.](oip-image:essays/save-some-air-for-the-fishies/section-2)
 
 *A river's oxygen margin is built or spent across the whole basin.*
 

@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-little-machine-in-the-glass-case/hero.png"
+featured_image: "essays/the-little-machine-in-the-glass-case/hero"
 featured_image_alt: "A small wooden-and-brass patent model sits inside a glass display case in an old Patent Office room."
 featured_image_caption: "The patent model made a private claim visible inside a public room."
 tags:
@@ -165,7 +165,7 @@ Section 112 now carries much of the old model-room burden. It demands written de
 
 The patent model therefore remains useful as a civic standard, even when it no longer works as a routine filing requirement. It asks the modern record to do what the small machine did at its best: show the work, expose the parts, make the claim testable, and leave knowledge behind.
 
-![Patent models line wooden shelves while drawings and file drawers recede into the background.](/images/essays/the-little-machine-in-the-glass-case/section-1.png)
+![Patent models line wooden shelves while drawings and file drawers recede into the background.](oip-image:essays/the-little-machine-in-the-glass-case/section-1)
 
 *The old model room slowly gave way to drawings, files, and search.*
 
@@ -227,7 +227,7 @@ The model can work as an emblem of institutional seriousness. It reminds the mod
 
 The little machine survives because it once made that return visible. It sat in a public room and forced the claim to take shape. Around it gathered the whole system: inventor, examiner, rival, visitor, clerk, statute, cabinet, fire, archive, auction, database, and memory.
 
-![Patent drawings on a table cast the shadow of a small machine beside archival files.](/images/essays/the-little-machine-in-the-glass-case/section-2.png)
+![Patent drawings on a table cast the shadow of a small machine beside archival files.](oip-image:essays/the-little-machine-in-the-glass-case/section-2)
 
 *Modern patent trust moved onto claims, drawings, and records.*
 

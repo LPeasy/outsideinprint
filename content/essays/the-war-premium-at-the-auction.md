@@ -13,7 +13,7 @@ revision_history:
     date: "2026-06-01"
     note: "Updated June 1, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-war-premium-at-the-auction/hero.png"
+featured_image: "essays/the-war-premium-at-the-auction/hero"
 featured_image_alt: "A Treasury auction table under hard light, with bond papers, bidder paddles, and a faint red heat line reflected across the polished surface."
 featured_image_caption: "The auction turns public power into a price."
 collections:
@@ -53,7 +53,7 @@ Oil affects headline inflation, transport costs, airline fuel, farm inputs, plas
 
 The [Treasury Department's daily yield curve](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2026) gives the public a plain record of that price. The [Federal Reserve's H.15 release](https://www.federalreserve.gov/releases/h15/) does the same with market interest rates. The numbers are technical only until they touch a mortgage, a municipal bond, a credit card, a car loan, a construction budget, or the next Treasury refunding.
 
-![An austere bond-auction room with bidder paddles, a yield curve cast as a shadow, and distant silhouettes of oil tankers outside tall windows.](/images/essays/the-war-premium-at-the-auction/section-1.png)
+![An austere bond-auction room with bidder paddles, a yield curve cast as a shadow, and distant silhouettes of oil tankers outside tall windows.](oip-image:essays/the-war-premium-at-the-auction/section-1)
 
 *Geopolitics reaches the room as a required return.*
 
@@ -99,6 +99,6 @@ When the 10-year yield rises, the country is being asked a plain question: what 
 
 The answer changes every day. The obligation remains. Somewhere in the machinery, another note is offered, another bid is entered, and the war premium finds its price.
 
-![A household table with a Treasury note, utility bill, gas receipt, and calculator under a narrow red reflection, linking national borrowing to ordinary costs.](/images/essays/the-war-premium-at-the-auction/section-2.png)
+![A household table with a Treasury note, utility bill, gas receipt, and calculator under a narrow red reflection, linking national borrowing to ordinary costs.](oip-image:essays/the-war-premium-at-the-auction/section-2)
 
 *The public price eventually reaches the kitchen table.*

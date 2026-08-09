@@ -55,9 +55,10 @@ test("article header follows the calm title-led form grammar", () => {
   assert.ok(articleClose < lightboxInclude);
   assert.ok(conditionalPlateLightboxInclude < articleClose);
   assert.equal(conditionalPlateLightboxAfterArticle, -1);
-  assert.match(articleSingle, /imageConfig/);
-  assert.match(articleSingle, /\$plateImageWidth = \.Width/);
-  assert.match(articleSingle, /\$plateImageHeight = \.Height/);
+  assert.match(articleSingle, /partial "images\/model\.html"/);
+  assert.match(articleSingle, /partial "images\/picture\.html"/);
+  assert.match(articleSingle, /\$plateImageWidth = \$plateImageModel\.lightbox_width/);
+  assert.match(articleSingle, /\$plateImageHeight = \$plateImageModel\.lightbox_height/);
   assert.match(articleSingle, /piece-header--side-plate/);
   assert.match(articleSingle, /piece-header--text-only/);
   assert.match(articleSingle, /data-article-plate-lightbox-trigger/);
@@ -81,6 +82,7 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(css, /\.piece-hero\{/);
   assert.match(articlePlateLightbox, /data-article-plate-lightbox/);
   assert.match(articlePlateLightbox, /data-article-plate-lightbox-image-button/);
+  assert.doesNotMatch(articlePlateLightbox, /data-article-plate-lightbox-image\s+src=""/);
   assert.match(articlePlateLightbox, /document\.addEventListener\("click"/);
   assert.match(articlePlateLightbox, /closest\("\[data-article-plate-lightbox-trigger\]"\)/);
   assert.match(articlePlateLightbox, /bodyImageSelector = "\.piece-body img"/);

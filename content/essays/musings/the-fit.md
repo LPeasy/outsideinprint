@@ -10,7 +10,7 @@ collections: ["musings"]
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
 description: "Pushing against resistance can ruin everything. Rushing is overrated."
-featured_image: "/images/essays/the-fit/hero.png"
+featured_image: "editorial/the-returning-water"
 featured_image_alt: "An anonymous person walks along a low-tide shore with shoes in hand as a small teal wave returns to open water."
 featured_image_caption: "The Returning Water."
 version: "1.0"
@@ -42,7 +42,7 @@ Take a pause and breathe in through your nose before you add more force. Look fo
 
 Try again with more patience. Maybe the fit was wrong from the start. 
 
-![A person runs along the shore toward three figures ahead as a teal current curves past a large breaking wave.](/images/essays/the-fit/section-1.png)
+![A person runs along the shore toward three figures ahead as a teal current curves past a large breaking wave.](oip-image:essays/the-fit/section-1)
 
 Maybe you just need to be humble and have faith that everything will be okay.
 

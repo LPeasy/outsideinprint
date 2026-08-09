@@ -50,19 +50,34 @@ function Get-TestPowerShellExecutable {
   throw "PowerShell 7 is required to run Medium image recovery tests."
 }
 
-function New-FixtureSvg {
+function Copy-FixturePng {
   param(
+    [string]$Source,
     [string]$Path,
-    [string]$Label,
-    [string]$Fill
+    [string]$Label
   )
 
-  Write-Utf8NoBom -Path $Path -Content @"
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80">
-  <rect width="120" height="80" fill="$Fill"/>
-  <text x="8" y="42" font-size="12" fill="white">$Label</text>
-</svg>
-"@
+  $directory = Split-Path -Parent $Path
+  if ($directory -and -not (Test-Path -LiteralPath $directory -PathType Container)) {
+    New-Item -Path $directory -ItemType Directory -Force | Out-Null
+  }
+  Copy-Item -LiteralPath $Source -Destination $Path -Force
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    throw "Could not create $Label PNG fixture."
+  }
+}
+
+function Get-ImageDimensions {
+  param([string]$Path)
+
+  Add-Type -AssemblyName System.Drawing
+  $image = [System.Drawing.Image]::FromFile($Path)
+  try {
+    return [pscustomobject]@{ Width = [int]$image.Width; Height = [int]$image.Height }
+  }
+  finally {
+    $image.Dispose()
+  }
 }
 
 function Invoke-Git {
@@ -106,46 +121,51 @@ try {
   $essayRoot = Join-Path $tempRoot "content\essays"
   $fixtureRoot = Join-Path $tempRoot "fixtures"
   $staticRoot = Join-Path $tempRoot "static\images\medium\fixture-recovery"
+  $managedRoot = Join-Path $tempRoot "assets\images\originals\medium"
   $reportRoot = Join-Path $tempRoot "reports\medium-image-recovery"
   New-Item -Path $essayRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $fixtureRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $staticRoot -ItemType Directory -Force | Out-Null
 
-  $heroSvg = Join-Path $staticRoot "hero.svg"
-  $mapSvg = Join-Path $fixtureRoot "map.svg"
-  $authorSvg = Join-Path $fixtureRoot "author.svg"
-  $chartSvg = Join-Path $fixtureRoot "chart.svg"
-  $uncaptionedSvg = Join-Path $fixtureRoot "uncaptioned.svg"
-  $importOnlySvg = Join-Path $fixtureRoot "import-only.svg"
-  New-FixtureSvg -Path $heroSvg -Label "hero" -Fill "#444444"
-  New-FixtureSvg -Path $mapSvg -Label "map" -Fill "#2255aa"
-  New-FixtureSvg -Path $authorSvg -Label "author" -Fill "#7722aa"
-  New-FixtureSvg -Path $chartSvg -Label "chart" -Fill "#227744"
-  New-FixtureSvg -Path $uncaptionedSvg -Label "uncaptioned" -Fill "#aa5522"
-  New-FixtureSvg -Path $importOnlySvg -Label "import-only" -Fill "#aa2277"
+  $spriteRoot = Join-Path $repoRoot 'assets\images\paper-route\sprites\intro'
+  $heroPng = Join-Path $staticRoot "hero.png"
+  $mapPng = Join-Path $fixtureRoot "map.png"
+  $authorPng = Join-Path $fixtureRoot "author.png"
+  $chartPng = Join-Path $fixtureRoot "chart.png"
+  $uncaptionedPng = Join-Path $fixtureRoot "uncaptioned.png"
+  $importOnlyPng = Join-Path $fixtureRoot "import-only.png"
+  Copy-FixturePng -Source (Join-Path $spriteRoot 'end-run-edition-unfold-01.png') -Path $heroPng -Label "hero"
+  Copy-FixturePng -Source (Join-Path $spriteRoot 'end-run-edition-unfold-02.png') -Path $mapPng -Label "map"
+  Copy-FixturePng -Source (Join-Path $spriteRoot 'end-run-edition-unfold-03.png') -Path $authorPng -Label "author"
+  Copy-FixturePng -Source (Join-Path $spriteRoot 'end-run-edition-unfold-04.png') -Path $chartPng -Label "chart"
+  Copy-FixturePng -Source (Join-Path $spriteRoot 'end-run-front-page-oip.png') -Path $uncaptionedPng -Label "uncaptioned"
+  Copy-FixturePng -Source (Join-Path $spriteRoot 'end-run-bob-skid-chill-06.png') -Path $importOnlyPng -Label "import-only"
 
-  $heroUrl = "https://cdn-images-1.medium.com/max/800/1*hero-fixture.svg"
-  $mapUrl = "https://cdn-images-1.medium.com/max/800/1*map-fixture.svg"
-  $authorUrl = "https://cdn-images-1.medium.com/max/800/1*author-fixture.svg"
-  $chartUrl = "https://cdn-images-1.medium.com/max/800/1*chart-fixture.svg"
-  $uncaptionedUrl = "https://cdn-images-1.medium.com/max/800/1*uncaptioned-fixture.svg"
-  $importOnlyUrl = "https://cdn-images-1.medium.com/max/800/1*import-only-fixture.svg"
-  $mapHash = Get-Sha256Hex $mapSvg
-  $authorHash = Get-Sha256Hex $authorSvg
-  $chartHash = Get-Sha256Hex $chartSvg
-  $importOnlyHash = Get-Sha256Hex $importOnlySvg
-  $mapAsset = "/images/medium/fixture-recovery/$mapHash.svg"
-  $authorAsset = "/images/medium/fixture-recovery/$authorHash.svg"
-  $chartAsset = "/images/medium/fixture-recovery/$chartHash.svg"
-  $importOnlyAsset = "/images/medium/import-only-recovery/$importOnlyHash.svg"
+  $heroUrl = "https://cdn-images-1.medium.com/max/800/1*hero-fixture.png"
+  $mapUrl = "https://cdn-images-1.medium.com/max/800/1*map-fixture.png"
+  $authorUrl = "https://cdn-images-1.medium.com/max/800/1*author-fixture.png"
+  $chartUrl = "https://cdn-images-1.medium.com/max/800/1*chart-fixture.png"
+  $uncaptionedUrl = "https://cdn-images-1.medium.com/max/800/1*uncaptioned-fixture.png"
+  $importOnlyUrl = "https://cdn-images-1.medium.com/max/800/1*import-only-fixture.png"
+  $mapHash = Get-Sha256Hex $mapPng
+  $authorHash = Get-Sha256Hex $authorPng
+  $chartHash = Get-Sha256Hex $chartPng
+  $importOnlyHash = Get-Sha256Hex $importOnlyPng
+  $mapDimensions = Get-ImageDimensions $mapPng
+  $authorDimensions = Get-ImageDimensions $authorPng
+  $chartDimensions = Get-ImageDimensions $chartPng
+  $mapAsset = "oip-image:medium/$mapHash"
+  $authorAsset = "oip-image:medium/$authorHash"
+  $chartAsset = "oip-image:medium/$chartHash"
+  $importOnlyAsset = "oip-image:medium/$importOnlyHash"
 
   $fixtureMap = [ordered]@{
-    $heroUrl = "static/images/medium/fixture-recovery/hero.svg"
-    $mapUrl = "fixtures/map.svg"
-    $authorUrl = "fixtures/author.svg"
-    $chartUrl = "fixtures/chart.svg"
-    $uncaptionedUrl = "fixtures/uncaptioned.svg"
-    $importOnlyUrl = "fixtures/import-only.svg"
+    $heroUrl = "static/images/medium/fixture-recovery/hero.png"
+    $mapUrl = "fixtures/map.png"
+    $authorUrl = "fixtures/author.png"
+    $chartUrl = "fixtures/chart.png"
+    $uncaptionedUrl = "fixtures/uncaptioned.png"
+    $importOnlyUrl = "fixtures/import-only.png"
   }
   $fixtureMapPath = Join-Path $tempRoot "download-fixtures.json"
   Write-Utf8NoBom -Path $fixtureMapPath -Content ($fixtureMap | ConvertTo-Json -Depth 5)
@@ -162,7 +182,7 @@ date: 2026-01-01
 draft: false
 slug: "fixture-recovery"
 section_label: "Essay"
-featured_image: "/images/medium/fixture-recovery/hero.svg"
+featured_image: "/images/medium/fixture-recovery/hero.png"
 version: "1.0"
 edition: "First web edition"
 medium_source_url: "https://medium.com/@outsideinprint/fixture"
@@ -247,7 +267,7 @@ date: 2026-01-01
 draft: false
 slug: "fixture-recovery"
 section_label: "Essay"
-featured_image: "/images/medium/fixture-recovery/hero.svg"
+featured_image: "/images/medium/fixture-recovery/hero.png"
 version: "1.0"
 edition: "First web edition"
 medium_source_url: "https://medium.com/@outsideinprint/fixture"
@@ -272,8 +292,8 @@ The chart paragraph anchors the second useful image.
   Assert-True ($LASTEXITCODE -eq 0) "Expected dry-run recovery to exit cleanly."
   Assert-True ((Get-Content -LiteralPath $essayPath -Raw) -eq $currentMarkdown) "Dry-run must not change essay Markdown."
   Assert-True ((Get-Content -LiteralPath $importOnlyPath -Raw) -eq $currentImportOnlyMarkdown) "Dry-run must not change import-only essay Markdown."
-  Assert-True (-not (Test-Path -LiteralPath (Join-Path $staticRoot "$mapHash.svg") -PathType Leaf)) "Dry-run must not write localized image assets."
-  Assert-True (-not (Test-Path -LiteralPath (Join-Path $tempRoot "static\images\medium\import-only-recovery\$importOnlyHash.svg") -PathType Leaf)) "Dry-run must not write import-report localized assets."
+  Assert-True (-not (Test-Path -LiteralPath (Join-Path $managedRoot "$mapHash.png") -PathType Leaf)) "Dry-run must not write localized image assets."
+  Assert-True (-not (Test-Path -LiteralPath (Join-Path $managedRoot "$importOnlyHash.png") -PathType Leaf)) "Dry-run must not write import-report localized assets."
 
   $dryRunReport = Get-Content -LiteralPath (Join-Path $reportRoot "dryrun-recovery.json") -Raw | ConvertFrom-Json
   Assert-True (@($dryRunReport.images | Where-Object { $_.status -eq "would_insert" }).Count -eq 4) "Expected four recoverable images to be selected in dry-run."
@@ -301,21 +321,26 @@ The chart paragraph anchors the second useful image.
   Assert-True ($updatedMarkdown.Contains("*Image Generated by Author from ChatGPT*")) "Expected clear author provenance caption to be accepted and normalized."
   Assert-True ($updatedMarkdown.Contains("*Fixture Chart | [Source](https://example.com/chart)*")) "Expected Medium tracking params to be removed from chart caption."
   Assert-True ($updatedImportOnlyMarkdown.Contains("*Recovered from the original Medium import archive; original caption unavailable.*")) "Expected import-report fallback caption."
-  Assert-True (Test-Path -LiteralPath (Join-Path $staticRoot "$mapHash.svg") -PathType Leaf) "Expected localized map asset to be written."
-  Assert-True (Test-Path -LiteralPath (Join-Path $staticRoot "$authorHash.svg") -PathType Leaf) "Expected localized author asset to be written."
-  Assert-True (Test-Path -LiteralPath (Join-Path $staticRoot "$chartHash.svg") -PathType Leaf) "Expected localized chart asset to be written."
-  Assert-True (Test-Path -LiteralPath (Join-Path $tempRoot "static\images\medium\import-only-recovery\$importOnlyHash.svg") -PathType Leaf) "Expected localized import-report asset to be written."
+  Assert-True (Test-Path -LiteralPath (Join-Path $managedRoot "$mapHash.png") -PathType Leaf) "Expected localized map asset under assets/images/originals."
+  Assert-True (Test-Path -LiteralPath (Join-Path $managedRoot "$authorHash.png") -PathType Leaf) "Expected localized author asset under assets/images/originals."
+  Assert-True (Test-Path -LiteralPath (Join-Path $managedRoot "$chartHash.png") -PathType Leaf) "Expected localized chart asset under assets/images/originals."
+  Assert-True (Test-Path -LiteralPath (Join-Path $managedRoot "$importOnlyHash.png") -PathType Leaf) "Expected localized import-report asset under assets/images/originals."
+  Assert-True (-not (Test-Path -LiteralPath (Join-Path $staticRoot "$mapHash.png"))) "Recovery must not duplicate new managed images under static/."
 
-  foreach ($url in ((Get-MarkdownBodyImageUrls $updatedMarkdown) + (Get-MarkdownBodyImageUrls $updatedImportOnlyMarkdown) | Where-Object { $_ -match '^/images/medium/' })) {
-    $localPath = Join-Path $tempRoot ("static\" + ($url.TrimStart("/") -replace '/', '\'))
-    Assert-True (Test-Path -LiteralPath $localPath -PathType Leaf) "Expected body image asset to exist under static: $url"
+  $fixtureManifest = Get-Content -LiteralPath (Join-Path $tempRoot 'data\image-assets.json') -Raw | ConvertFrom-Json -Depth 20
+  foreach ($url in ((Get-MarkdownBodyImageUrls $updatedMarkdown) + (Get-MarkdownBodyImageUrls $updatedImportOnlyMarkdown) | Where-Object { $_ -match '^oip-image:medium/' })) {
+    $id = $url.Substring('oip-image:'.Length)
+    $entry = $fixtureManifest.assets.$id
+    Assert-True ($null -ne $entry) "Expected body image ID to be registered: $url"
+    $localPath = Join-Path (Join-Path $tempRoot 'assets') ([string]$entry.source)
+    Assert-True (Test-Path -LiteralPath $localPath -PathType Leaf) "Expected body image source to exist outside static/: $url"
   }
 
   $applyReport = Get-Content -LiteralPath (Join-Path $reportRoot "apply-recovery.json") -Raw | ConvertFrom-Json
   Assert-True (@($applyReport.images | Where-Object { $_.status -eq "inserted" }).Count -eq 4) "Expected apply report to mark four images inserted."
-  Assert-True (@($applyReport.images | Where-Object { $_.local_path -eq $mapAsset -and $_.sha256 -eq $mapHash -and $_.width -eq 120 -and $_.height -eq 80 }).Count -eq 1) "Expected deterministic map path, hash, and dimensions in report."
-  Assert-True (@($applyReport.images | Where-Object { $_.local_path -eq $authorAsset -and $_.sha256 -eq $authorHash -and $_.width -eq 120 -and $_.height -eq 80 }).Count -eq 1) "Expected deterministic author path, hash, and dimensions in report."
-  Assert-True (@($applyReport.images | Where-Object { $_.local_path -eq $chartAsset -and $_.sha256 -eq $chartHash -and $_.width -eq 120 -and $_.height -eq 80 }).Count -eq 1) "Expected deterministic chart path, hash, and dimensions in report."
+  Assert-True (@($applyReport.images | Where-Object { $_.local_path -eq $mapAsset -and $_.sha256 -eq $mapHash -and $_.width -eq $mapDimensions.Width -and $_.height -eq $mapDimensions.Height }).Count -eq 1) "Expected deterministic map ID, hash, and dimensions in report."
+  Assert-True (@($applyReport.images | Where-Object { $_.local_path -eq $authorAsset -and $_.sha256 -eq $authorHash -and $_.width -eq $authorDimensions.Width -and $_.height -eq $authorDimensions.Height }).Count -eq 1) "Expected deterministic author ID, hash, and dimensions in report."
+  Assert-True (@($applyReport.images | Where-Object { $_.local_path -eq $chartAsset -and $_.sha256 -eq $chartHash -and $_.width -eq $chartDimensions.Width -and $_.height -eq $chartDimensions.Height }).Count -eq 1) "Expected deterministic chart ID, hash, and dimensions in report."
   Assert-True (@($applyReport.images | Where-Object { $_.local_path -eq $importOnlyAsset -and $_.sha256 -eq $importOnlyHash -and $_.candidate_source -eq "import_report" }).Count -eq 1) "Expected deterministic import-report path, hash, and provenance in report."
 
   $beforeSecondApply = Get-Content -LiteralPath $essayPath -Raw

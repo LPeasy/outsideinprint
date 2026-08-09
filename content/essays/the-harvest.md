@@ -7,7 +7,7 @@ draft: false
 slug: "the-harvest"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/the-harvest/hero.png"
+featured_image: "editorial/orchard-grip"
 featured_image_alt: "Editorial cartoon showing an anonymous gardener clutching a green pear on a bending orchard branch while a helper holds a watering can beside dry roots and other workers tend trees beneath a rain cloud."
 featured_image_caption: "You can tend the field. You can't own the weather."
 version: "1.0"
@@ -40,13 +40,13 @@ Careful preparation can miss its hoped-for result. The miss records a limit. It 
 
 In the [*Enchiridion*](https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0236%3Atext%3Denc), Epictetus calls our own acts ours. Other people and the world are outside that boundary. The [*Bhagavad Gita*](https://www.gitasupersite.iitk.ac.in/srimad?etadi=1&etgb=1&etpurohit=1&etsiva=1&field_chapter_value=2&field_nsutra_value=47&language=dv) makes a related point: action is ours; a result isn't a possession.
 
-![Infographic showing preparation, action, repair, and an uncertain result.](/images/essays/the-harvest/section-1.png)
+![Infographic showing preparation, action, repair, and an uncertain result.](oip-image:essays/the-harvest/section-1)
 
 *Prepare, act, and repair; the result remains open.*
 
 That distinction leaves no shelter for lazy hope. Work remains. Make the list. Learn the skill. Tell the truth. Repair the harm. Ask again when asking makes sense.
 
-![Infographic showing your work and outside conditions leading to an uncertain result.](/images/essays/the-harvest/section-2.png)
+![Infographic showing your work and outside conditions leading to an uncertain result.](oip-image:essays/the-harvest/section-2)
 
 *Your work and outside conditions meet before the result.*
 

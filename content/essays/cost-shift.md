@@ -6,7 +6,7 @@ slug: "cost-shift"
 section_label: "Essay"
 description: "A short argument about why separate rates can assign direct AI data-center costs but cannot erase broader electricity-demand pressure."
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/cost-shift/hero.png"
+featured_image: "editorial/the-tab"
 featured_image_alt: "A faceless waiter slides a check labeled THE TAB to ordinary diner customers while a glowing server-rack booth under a NEW POWER sign sits behind them with stacked empty plates and a red ink trail."
 featured_image_caption: "One booth orders the power; ordinary customers should not get the tab."
 version: "1.0"
@@ -43,7 +43,7 @@ A separate rate can say: this customer pays for this line, this substation, this
 
 It cannot say: the national price of electricity will not move when a fast-growing industry demands far more electricity. That is a market question. If usable supply, transmission, fuel, and reliability capacity do not keep pace, pressure appears somewhere.
 
-![Three utility-office panels show a new load entering a separate-rate ledger while a red pressure line continues toward a shared-market gauge.](/images/essays/cost-shift/section-1.png)
+![Three utility-office panels show a new load entering a separate-rate ledger while a red pressure line continues toward a shared-market gauge.](oip-image:essays/cost-shift/section-1)
 
 *The promise works only if the new load carries the new cost.*
 
@@ -62,7 +62,7 @@ If data centers bring enough new supply with them, the pressure can be reduced. 
 
 But if they take a larger share of a constrained system, separate rates alone do not settle the price question. They only settle which account pays named project costs.
 
-![A municipal accounting table shows a private load, private books, a public ledger, and a form asking who pays while citizens wait.](/images/essays/cost-shift/section-2.png)
+![A municipal accounting table shows a private load, private books, a public ledger, and a form asking who pays while citizens wait.](oip-image:essays/cost-shift/section-2)
 
 *When cost assignment is unclear, the risk shifts toward ordinary bills.*
 

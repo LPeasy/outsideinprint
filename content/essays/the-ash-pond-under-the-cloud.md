@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-ash-pond-under-the-cloud/hero.png"
+featured_image: "essays/the-ash-pond-under-the-cloud/hero"
 featured_image_alt: "Editorial illustration of a coal ash pond reflecting a luminous data center cloud above it."
 featured_image_caption: "The cloud's electricity demand reaches the ground through older power plants, wastewater rules, and downstream risk."
 collections:
@@ -61,7 +61,7 @@ Coal plants sit awkwardly inside that problem. They are older. They pollute. Man
 
 That is the real tradeoff. Cheap and reliable power is a public good. Clean water is also a public good. The hard part is that the same community may need both, and the accounting systems rarely place them on the same bill.
 
-![Editorial illustration of a wastewater pipe at a coal plant with server lights reflected in dark water.](/images/essays/the-ash-pond-under-the-cloud/section-1.png)
+![Editorial illustration of a wastewater pipe at a coal plant with server lights reflected in dark water.](oip-image:essays/the-ash-pond-under-the-cloud/section-1)
 
 *The waste stream gives AI's electricity demand a physical address.*
 
@@ -111,6 +111,6 @@ OIP should resist that imbalance. The cloud becomes physical when it asks the gr
 
 At the ash pond, the cloud becomes a physical bargain: a load on the grid, a rule in a permit, a pipe at the water's edge, and a set of people downstream. The national argument over AI will keep reaching for the future. The pond under the cloud asks what the future is allowed to leave behind.
 
-![Editorial illustration of a kitchen sink and riverbank downstream from a distant power plant and glowing data center.](/images/essays/the-ash-pond-under-the-cloud/section-2.png)
+![Editorial illustration of a kitchen sink and riverbank downstream from a distant power plant and glowing data center.](oip-image:essays/the-ash-pond-under-the-cloud/section-2)
 
 *Public value has to include the places that receive the leftover risk.*

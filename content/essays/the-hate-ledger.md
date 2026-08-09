@@ -6,7 +6,7 @@ slug: "the-hate-ledger"
 section_label: "Essay"
 subtitle: "What happens when an organization built to fight hate is accused of paying people inside the hate it sells itself against?"
 description: "A federal indictment against the Southern Poverty Law Center turns an anti-hate informant program into a public question about donor trust, covert payments, and moral authority."
-featured_image: "/images/essays/the-hate-ledger/hero.png"
+featured_image: "essays/the-hate-ledger/hero"
 featured_image_alt: "Editorial illustration of a ledger book, bank forms, donor envelopes, and shadowed payment cards arranged under a cold desk lamp."
 featured_image_caption: "The case begins where moral language meets the bank account."
 version: "1.2"
@@ -122,7 +122,7 @@ The indictment then describes a money path. Funds allegedly moved from SPLC's op
 
 After the closure of some fictitious-entity accounts, the indictment alleges, SPLC changed methods. From about August 2020 through August 2023, it allegedly used the ACH system to pay field sources with donated funds, masking payments with descriptors such as "Rarebooks050" and "IPResearchCON050."[^indictment]
 
-![Editorial illustration of fictitious business forms, ACH descriptors, pay cards, and bank-account ledgers arranged as a paper trail.](/images/essays/the-hate-ledger/section-1.png)
+![Editorial illustration of fictitious business forms, ACH descriptors, pay cards, and bank-account ledgers arranged as a paper trail.](oip-image:essays/the-hate-ledger/section-1)
 *The dull objects carry the public question: accounts, descriptors, cards, and authorizations.*
 
 This is why the bank accounts matter.
@@ -265,7 +265,7 @@ That would at least give donors a choice.
 
 The allegation is that donors were denied that choice.
 
-![Editorial illustration of donor envelopes and checks entering a filing machine that sends a hidden payment trail toward shadowed extremist silhouettes.](/images/essays/the-hate-ledger/section-2.png)
+![Editorial illustration of donor envelopes and checks entering a filing machine that sends a hidden payment trail toward shadowed extremist silhouettes.](oip-image:essays/the-hate-ledger/section-2)
 *A donor promise becomes a payment path when the ledger is hidden.*
 
 A republic cannot function when its moral institutions operate by hidden ledgers. Churches, charities, watchdogs, universities, newsrooms, foundations, and advocacy groups all trade on trust. Once they discover that moral language can protect financial opacity, the temptation is obvious. Wrap the operation in virtue. Treat auditors as enemies. Treat critics as bigots. Treat donors as raw material.

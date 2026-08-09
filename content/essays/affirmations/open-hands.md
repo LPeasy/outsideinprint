@@ -17,7 +17,7 @@ tags:
   - "acceptance"
 subtitle: "We don't resist, we relax."
 description: "I release my grip on life and open myself to the good that is arriving right now."
-featured_image: "/images/essays/open-hands/hero.png"
+featured_image: "editorial/life-opens-the-door"
 featured_image_alt: "An anonymous man stands with open hands inside a shadowed room as a heavy door opens onto a winding path in warm morning light."
 featured_image_caption: "Life opens the door."
 version: "1.0"
@@ -73,7 +73,7 @@ I leave room for help to find me, for the crooked road to straighten, for a sudd
 
 I leave room for Life. And thank my God that He always delivers the Goods...
 
-![An anonymous smiling man sits with open hands on front steps in morning sunshine while two walkers and a dog approach along a distant path.](/images/essays/open-hands/section-1.png)
+![An anonymous smiling man sits with open hands on front steps in morning sunshine while two walkers and a dog approach along a distant path.](oip-image:essays/open-hands/section-1)
 
 *Look around.*
 

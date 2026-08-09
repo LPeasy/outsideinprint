@@ -61,6 +61,19 @@ function Write-BytesFromBase64 {
   [System.IO.File]::WriteAllBytes($Path, [Convert]::FromBase64String($Base64))
 }
 
+function Copy-FixtureImage {
+  param(
+    [string]$Source,
+    [string]$Path
+  )
+
+  $directory = Split-Path -Parent $Path
+  if ($directory -and -not (Test-Path -LiteralPath $directory -PathType Container)) {
+    New-Item -Path $directory -ItemType Directory -Force | Out-Null
+  }
+  Copy-Item -LiteralPath $Source -Destination $Path -Force
+}
+
 function Wait-HttpServerReady {
   param(
     [int]$Port,
@@ -107,11 +120,13 @@ try {
   New-Item -Path $staticMediumRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $mediaRoot -ItemType Directory -Force | Out-Null
 
-  $pngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO7ZP7sAAAAASUVORK5CYII='
-  Write-BytesFromBase64 -Path (Join-Path $mediaRoot 'lead-a.png') -Base64 $pngBase64
-  Write-BytesFromBase64 -Path (Join-Path $mediaRoot 'lead-b.png') -Base64 $pngBase64
-  Write-BytesFromBase64 -Path (Join-Path $staticMediumRoot 'existing-duplicate\lead.png') -Base64 $pngBase64
-  Write-BytesFromBase64 -Path (Join-Path $staticMediumRoot 'current-hero-wins\hero.png') -Base64 $pngBase64
+  $fixturePng = Join-Path $repoRoot 'assets\images\paper-route\sprites\intro\end-run-edition-unfold-01.png'
+  $fixtureHash = (Get-FileHash -LiteralPath $fixturePng -Algorithm SHA256).Hash.ToLowerInvariant()
+  $fixtureAssetId = "medium/$fixtureHash"
+  Copy-FixtureImage -Source $fixturePng -Path (Join-Path $mediaRoot 'lead-a.png')
+  Copy-FixtureImage -Source $fixturePng -Path (Join-Path $mediaRoot 'lead-b.png')
+  Copy-FixtureImage -Source $fixturePng -Path (Join-Path $staticMediumRoot 'existing-duplicate\lead.png')
+  Copy-FixtureImage -Source $fixturePng -Path (Join-Path $staticMediumRoot 'current-hero-wins\hero.png')
   New-Item -Path (Join-Path $staticMediumRoot 'svg-no-hero') -ItemType Directory -Force | Out-Null
   @'
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" aria-label="SVG lead">
@@ -338,7 +353,7 @@ Lead paragraph.
 
   $remoteNoHero = Get-Content (Join-Path $essayRoot 'remote-no-hero.md') -Raw
   $remoteNoHeroBody = Get-MarkdownBody -Markdown $remoteNoHero
-  Assert-Match -Text $remoteNoHero -Pattern '(?m)^featured_image:\s*"/images/medium/remote-no-hero/[a-f0-9]{64}\.png"$' -Message 'Expected remote-no-hero to localize the promoted PNG hero.'
+  Assert-Match -Text $remoteNoHero -Pattern ('(?m)^featured_image:\s*"' + [regex]::Escape($fixtureAssetId) + '"$') -Message 'Expected remote-no-hero to register and use the promoted PNG hero by stable asset ID.'
   Assert-Match -Text $remoteNoHero -Pattern '(?m)^featured_image_caption:\s*"River basin overview \| Source: Test Archive"$' -Message 'Expected remote-no-hero to migrate the following caption line.'
   Assert-Match -Text $remoteNoHero -Pattern '(?m)^featured_image_alt:\s*"River basin overview"$' -Message 'Expected remote-no-hero to derive alt text from the descriptive caption segment.'
   Assert-NotMatch -Text $remoteNoHeroBody -Pattern 'http://127\.0\.0\.1:' -Message 'Expected remote-no-hero to remove the promoted remote image from the body.'
@@ -347,7 +362,7 @@ Lead paragraph.
   $placeholderHero = Get-Content (Join-Path $essayRoot 'placeholder-hero.md') -Raw
   $placeholderHeroBody = Get-MarkdownBody -Markdown $placeholderHero
   Assert-NotMatch -Text $placeholderHero -Pattern [regex]::Escape('/images/social/outside-in-print-default.png') -Message 'Expected placeholder-hero to replace the placeholder hero.'
-  Assert-Match -Text $placeholderHero -Pattern '(?m)^featured_image:\s*"/images/medium/placeholder-hero/[a-f0-9]{64}\.png"$' -Message 'Expected placeholder-hero to localize the replacement hero.'
+  Assert-Match -Text $placeholderHero -Pattern ('(?m)^featured_image:\s*"' + [regex]::Escape($fixtureAssetId) + '"$') -Message 'Expected placeholder-hero to reuse the registered replacement hero by stable asset ID.'
   Assert-Match -Text $placeholderHero -Pattern '(?m)^featured_image_caption:\s*"Photo by Test Photographer on Unsplash"$' -Message 'Expected placeholder-hero to migrate the provenance caption.'
   Assert-Match -Text $placeholderHero -Pattern '(?m)^featured_image_alt:\s*"Placeholder Hero"$' -Message 'Expected placeholder-hero to fall back to the essay title for non-descriptive provenance captions.'
   Assert-NotMatch -Text $placeholderHeroBody -Pattern 'Photo by Test Photographer on Unsplash' -Message 'Expected placeholder-hero to remove the migrated caption line from the body.'
@@ -388,10 +403,20 @@ Lead paragraph.
   Assert-NotMatch -Text $outsideHeuristic -Pattern '(?m)^featured_image:' -Message 'Expected outside-heuristic not to receive an auto-promoted hero.'
   Assert-Match -Text $outsideHeuristic -Pattern 'http://127\.0\.0\.1:' -Message 'Expected outside-heuristic to keep the out-of-window body image.'
 
-  $localizedRemoteHero = Join-Path $tempRoot ('static\' + ($rowsBySlug['remote-no-hero'].NewHero.TrimStart('/') -replace '/', '\'))
-  $localizedPlaceholderHero = Join-Path $tempRoot ('static\' + ($rowsBySlug['placeholder-hero'].NewHero.TrimStart('/') -replace '/', '\'))
-  Assert-True (Test-Path -LiteralPath $localizedRemoteHero -PathType Leaf) 'Expected the promoted remote-no-hero image to be localized on disk.'
-  Assert-True (Test-Path -LiteralPath $localizedPlaceholderHero -PathType Leaf) 'Expected the promoted placeholder-hero image to be localized on disk.'
+  $manifestPath = Join-Path $tempRoot 'data\image-assets.json'
+  $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json -Depth 20
+  $manifestEntry = $manifest.assets.$fixtureAssetId
+  Assert-True ($null -ne $manifestEntry) 'Expected the localized hero to be registered in the image manifest.'
+  Assert-True ($manifestEntry.source -eq "images/originals/medium/$fixtureHash.png") 'Expected the localized hero source to use the canonical originals namespace.'
+  Assert-True ($manifestEntry.sha256 -eq $fixtureHash -and $manifestEntry.image_class -eq 'medium_import') 'Expected the manifest to bind the hero hash and Medium image class.'
+  Assert-True ($manifestEntry.processing_state -eq 'derivative_capable' -and $manifestEntry.review_state -eq 'pending_review') 'Expected a new localized hero to enter derivative processing and visual review.'
+  Assert-True ($manifest.aliases.PSObject.Properties.Name -contains "/images/medium/remote-no-hero/$fixtureHash.png") 'Expected the historical remote-no-hero URL to remain a resolver alias.'
+  Assert-True ($manifest.aliases.PSObject.Properties.Name -contains "/images/medium/placeholder-hero/$fixtureHash.png") 'Expected the historical placeholder-hero URL to remain a resolver alias.'
+
+  $localizedHero = Join-Path $tempRoot "assets\images\originals\medium\$fixtureHash.png"
+  Assert-True (Test-Path -LiteralPath $localizedHero -PathType Leaf) 'Expected the promoted hero image to be written once under assets/images/originals.'
+  Assert-True (-not (Test-Path -LiteralPath (Join-Path $tempRoot "static\images\medium\remote-no-hero\$fixtureHash.png"))) 'Expected no new remote-no-hero copy under static/.'
+  Assert-True (-not (Test-Path -LiteralPath (Join-Path $tempRoot "static\images\medium\placeholder-hero\$fixtureHash.png"))) 'Expected no duplicate placeholder-hero copy under static/.'
 }
 finally {
   if ($null -ne $serverProcess -and -not $serverProcess.HasExited) {

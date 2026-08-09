@@ -24,7 +24,7 @@ topics:
   - energy security
   - diplomacy
   - sanctions
-featured_image: "/images/essays/the-blockade-has-a-phone-number/hero.png"
+featured_image: "essays/the-blockade-has-a-phone-number/hero"
 featured_image_alt: "A beige telephone sits beside a nautical chart of a narrow strait, with model tankers, blank sanctions folders, and red route pins under low desk light."
 featured_image_caption: "A phone line can stay open while the waterway stays closed."
 ---
@@ -87,7 +87,7 @@ There is no single conversation here.
 
 There is a crowded switchboard.
 
-![Small unbranded tankers wait on both sides of a narrow blue channel on a maritime chart, with blank diplomatic folders at opposite ends of the table.](/images/essays/the-blockade-has-a-phone-number/section-1.png)
+![Small unbranded tankers wait on both sides of a narrow blue channel on a maritime chart, with blank diplomatic folders at opposite ends of the table.](oip-image:essays/the-blockade-has-a-phone-number/section-1)
 
 *A narrow passage can become a bargaining table before anyone sits down.*
 
@@ -105,7 +105,7 @@ The aviation story makes the point because it is easy to see. In an [April 16 AP
 
 On April 24, AP reported that airlines were already cutting flights as fuel costs rose. KLM cited rising kerosene costs in canceling 160 flights to and from Amsterdam's Schiphol airport for the next month. Lufthansa's parent company announced a far larger schedule cut.
 
-![Blank boarding passes, a coffee cup, and a folded receipt rest on empty airport gate seats while a logo-free plane and distant fuel truck sit outside before dawn.](/images/essays/the-blockade-has-a-phone-number/section-2.png)
+![Blank boarding passes, a coffee cup, and a folded receipt rest on empty airport gate seats while a logo-free plane and distant fuel truck sit outside before dawn.](oip-image:essays/the-blockade-has-a-phone-number/section-2)
 
 *By the time a waterway reaches the gate, the crisis has already become ordinary.*
 

@@ -37,6 +37,7 @@ $Root = [System.IO.Path]::GetFullPath($Root)
 if (-not (Test-Path -LiteralPath $Root -PathType Container)) {
   throw "Root not found: $Root"
 }
+. (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 if ([string]::IsNullOrWhiteSpace($ReportDir)) {
   $ReportDir = Join-Path $Root "reports\medium-image-recovery"
 }
@@ -109,19 +110,6 @@ function Get-FileSha256Hex {
     return ""
   }
   return Get-BytesSha256Hex -Bytes ([System.IO.File]::ReadAllBytes($Path))
-}
-
-function Get-SafeExtension {
-  param([string]$Url, [string]$ContentType)
-  $ext = ""
-  try { $ext = [System.IO.Path]::GetExtension(([uri]$Url).AbsolutePath) } catch { $ext = "" }
-  if ($ext -match '^\.[A-Za-z0-9]{1,5}$') { return $ext.ToLowerInvariant() }
-  if ($ContentType -match 'image/jpeg') { return ".jpg" }
-  if ($ContentType -match 'image/png') { return ".png" }
-  if ($ContentType -match 'image/webp') { return ".webp" }
-  if ($ContentType -match 'image/gif') { return ".gif" }
-  if ($ContentType -match 'image/svg') { return ".svg" }
-  ".img"
 }
 
 function Get-ContentTypeFromPath {
@@ -376,10 +364,19 @@ function Get-WordCount {
   @([regex]::Matches($plain, '\b[\p{L}\p{N}][\p{L}\p{N}''-]*\b')).Count
 }
 
-function Get-StaticPathFromUrl {
-  param([string]$Url)
-  if ($Url -notmatch '^/images/') { return "" }
-  Join-Path $Root ("static\" + ($Url.TrimStart("/") -replace '/', '\'))
+function Get-LocalImagePathFromReference {
+  param([string]$Reference)
+
+  $manifestPath = Get-OipImageAssetManifestPath -Root $Root
+  if (Test-Path -LiteralPath $manifestPath -PathType Leaf) {
+    $managed = Resolve-OipImageAsset -Root $Root -Reference $Reference
+    if ($null -ne $managed) {
+      return $managed.Path
+    }
+  }
+
+  if ($Reference -notmatch '^/images/') { return "" }
+  Join-Path $Root ("static\" + ($Reference.TrimStart("/") -replace '/', '\'))
 }
 
 function Get-ImageDimensions {
@@ -558,7 +555,7 @@ function Get-HistoricalImageCandidates {
       $match = [regex]::Match($line, '^\s*!\[(?<alt>[^\]]*)\]\((?<url><[^>]+>|[^\s\)]+)(?:\s+["''](?<title>[^"'']*)["''])?\)\s*$')
       if (-not $match.Success) { continue }
       $url = $match.Groups["url"].Value.Trim("<>")
-      if ($url -notmatch 'cdn-images-1\.medium\.com|^/images/(medium|essays)/') { continue }
+      if ($url -notmatch 'cdn-images-1\.medium\.com|^/images/(medium|essays)/|^oip-image:(medium|essays)/') { continue }
       $caption = ""
       $captionLineIndex = $null
       for ($j = $i + 1; $j -lt [Math]::Min($lines.Count, $i + 5); $j++) {
@@ -937,7 +934,7 @@ foreach ($essay in (Get-EssayFiles)) {
   foreach ($url in $currentBodyUrls) { $existingUrlSet[$url] = $true }
   $existingHashSet = @{}
   foreach ($url in $currentBodyUrls + @($featuredImage)) {
-    $path = Get-StaticPathFromUrl $url
+    $path = Get-LocalImagePathFromReference $url
     if (-not [string]::IsNullOrWhiteSpace($path)) {
       $hash = Get-FileSha256Hex $path
       if (-not [string]::IsNullOrWhiteSpace($hash)) { $existingHashSet[$hash] = $true }
@@ -990,8 +987,8 @@ foreach ($essay in (Get-EssayFiles)) {
     $hash = ""
     $dimensions = $null
     $attemptedUrl = ""
-    if ($candidate.Url -match '^/images/') {
-      $assetPath = Get-StaticPathFromUrl $candidate.Url
+    if ($candidate.Url -match '^/images/' -or $candidate.Url -match '^oip-image:' -or $candidate.Url -match '^(editorial|essays|medium)/') {
+      $assetPath = Get-LocalImagePathFromReference $candidate.Url
       if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) {
         $allImageReports.Add((Get-ReportEntry -Image $image -Status "rejected" -Reason "historical_local_asset_missing" -LocalPath $candidate.Url -Hash "" -Dimensions $null))
         continue
@@ -1015,16 +1012,31 @@ foreach ($essay in (Get-EssayFiles)) {
         $allImageReports.Add((Get-ReportEntry -Image $image -Status "skipped" -Reason "duplicate_existing_or_featured_image_hash" -LocalPath "" -Hash $hash -Dimensions $download.Dimensions))
         continue
       }
-      $extension = Get-SafeExtension -Url $candidate.Url -ContentType $download.ContentType
-      $fileName = "$hash$extension"
-      $assetDir = Join-Path $Root ("static\images\medium\{0}" -f $essay.Slug)
-      $assetPath = Join-Path $assetDir $fileName
-      $localPath = "/images/medium/$($essay.Slug)/$fileName"
+      $extension = Resolve-OipManagedImageExtension -Bytes $download.Bytes -Url $candidate.Url -ContentType $download.ContentType -Label "Recovered Medium image '$($candidate.Url)'"
+      $assetId = "medium/$hash"
+      $assetSource = "images/originals/medium/$hash$extension"
+      $reviewState = 'pending_review'
+      $manifest = Read-OipImageAssetManifest -Root $Root -AllowMissing
+      if ($manifest.assets.Contains($assetId)) {
+        $assetSource = [string]$manifest.assets[$assetId].source
+        $reviewState = [string]$manifest.assets[$assetId].review_state
+      }
+      $assetPath = Join-Path (Join-Path $Root 'assets') $assetSource
+      $localPath = "oip-image:$assetId"
       if ($Apply) {
-        Ensure-Directory $assetDir
+        Ensure-Directory (Split-Path -Parent $assetPath)
         if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) {
           [System.IO.File]::WriteAllBytes($assetPath, $download.Bytes)
         }
+        Register-OipImageAsset `
+          -Root $Root `
+          -Id $assetId `
+          -Source $assetSource `
+          -ImageClass 'medium_import' `
+          -ProcessingHint $(if ($extension -eq '.png') { 'drawing' } else { 'photo' }) `
+          -ReviewState $reviewState `
+          -UsageState 'referenced' `
+          -Aliases @("/images/medium/$($essay.Slug)/$hash$extension") | Out-Null
       }
       $dimensions = $download.Dimensions
     }

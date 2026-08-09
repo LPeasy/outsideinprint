@@ -13,7 +13,7 @@ external_factual_claims: "none"
 tags: ["gratitude", "attention", "kindness", "self-command"]
 subtitle: "When you get a compliment, just say thanks."
 description: "When you get a compliment, just say thanks."
-featured_image: "/images/essays/say-thanks/hero.png"
+featured_image: "editorial/the-crooked-cake"
 featured_image_alt: "At a kitchen counter, one adult holds a fork above a slice while the baker rests an open hand beside a lopsided cake with rust-colored frosting flowers."
 featured_image_caption: "The Crooked Cake."
 version: "1.3"
@@ -43,7 +43,7 @@ This is how you take a compliment:
 
 Learn to stop putting yourself down. The way you speak to yourself is everything.
 
-![At a front doorway, one friend warmly notices another person's amber scarf while the wearer smiles and leaves both hands relaxed.](/images/essays/say-thanks/section-1.png)
+![At a front doorway, one friend warmly notices another person's amber scarf while the wearer smiles and leaves both hands relaxed.](oip-image:essays/say-thanks/section-1)
 
 ## Don't Argue With It
 

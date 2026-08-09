@@ -18,7 +18,7 @@ tags:
   - "support"
 subtitle: "Help always arrives right when I need it."
 description: "I am surrounded by people who love me and want to see me succeed."
-featured_image: "/images/essays/the-cavalry-is-here/hero.png"
+featured_image: "editorial/the-cavalry-breaks-the-hill"
 featured_image_alt: "A lone anonymous walker looks up from a rain-dark road as mounted trumpeters charge over a hill and golden light pours through the clouds to reach them both."
 featured_image_caption: "The cavalry is here to help!"
 version: "0.3"
@@ -103,7 +103,7 @@ Help is arriving right now ~
 
 “People ALWAYS help me without me ever having to ask.”
 
-![A rain-soaked anonymous walker raises a hand just short of a front door as it opens from inside and another anonymous person waits in warm light.](/images/essays/the-cavalry-is-here/section-1.png)
+![A rain-soaked anonymous walker raises a hand just short of a front door as it opens from inside and another anonymous person waits in warm light.](oip-image:essays/the-cavalry-is-here/section-1)
 
 *Help always arrives right on time.*
 

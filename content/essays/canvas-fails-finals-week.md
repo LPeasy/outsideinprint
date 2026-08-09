@@ -16,7 +16,7 @@ revision_history:
     date: "2026-05-28"
     note: "Updated May 28, 2026, after OIP back-archive review for draft-residue cleanup and source, metadata, and rendering checks."
 featured: false
-featured_image: "/images/essays/canvas-fails-finals-week/hero.png"
+featured_image: "essays/canvas-fails-finals-week/hero"
 featured_image_alt: "Editorial illustration of an empty university exam room lit by a blank learning-management login screen, with desks waiting during finals week."
 featured_image_caption: "When the portal disappears during finals week, the vendor layer becomes the public record."
 collections:
@@ -98,7 +98,7 @@ Not the whole university.
 
 But enough of it to matter.
 
-![Editorial illustration of a campus map overlaid with a vendor status page, course tools, grading windows, and procurement papers.](/images/essays/canvas-fails-finals-week/section-1.png)
+![Editorial illustration of a campus map overlaid with a vendor status page, course tools, grading windows, and procurement papers.](oip-image:essays/canvas-fails-finals-week/section-1)
 
 *A course portal can become an operating layer before anyone votes on it.*
 
@@ -239,7 +239,7 @@ But the hidden sentence is this:
 
 > A public function now runs through a private chokepoint.
 
-![Editorial illustration of a public university board table, course tiles, and private-equity contract folders connected by cables.](/images/essays/canvas-fails-finals-week/section-2.png)
+![Editorial illustration of a public university board table, course tiles, and private-equity contract folders connected by cables.](oip-image:essays/canvas-fails-finals-week/section-2)
 
 *The renewal line, the login page, and the investor presentation belong to the same system.*
 

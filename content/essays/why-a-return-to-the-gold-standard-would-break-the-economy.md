@@ -136,7 +136,7 @@ The evidence says no.
 
 Could the United States technically return to some form of gold-backed money?
 
-![Photo by Elimende Inagella on Unsplash](/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb.jpeg)
+![Photo by Elimende Inagella on Unsplash](oip-image:medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb)
 
 *Photo by Elimende Inagella on Unsplash*
 

@@ -14,7 +14,7 @@ revision_history:
     date: "2026-06-17"
     note: "Updated June 17, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-meter-at-the-curb/hero.png"
+featured_image: "essays/the-meter-at-the-curb/hero"
 featured_image_alt: "A weathered 1930s parking meter stands beside a downtown curb at dawn, with storefront glass, lane stripes, and long shadows arranged like a civic ledger."
 featured_image_caption: "The old meter made public time visible, one curb space at a time."
 tags:
@@ -191,7 +191,7 @@ A curb that is managed only for parked cars will fail the modern street.
 
 Look at a busy block in sections. One piece may need short-term paid parking. One may need a delivery zone. One may need a bus stop. One may need a curb ramp clear of obstruction. One may need hydrant clearance. One may need passenger loading. One may need outdoor dining. One may need bike parking, scooter parking, stormwater treatment, a street tree, a parklet, or a wider sidewalk.
 
-![An overhead editorial illustration shows one city block split into curb uses: parking meter, delivery zone, bus stop, curb ramp, hydrant clearance, and outdoor seating, all arranged as marked pieces of a shared street edge.](/images/essays/the-meter-at-the-curb/section-1.png)
+![An overhead editorial illustration shows one city block split into curb uses: parking meter, delivery zone, bus stop, curb ramp, hydrant clearance, and outdoor seating, all arranged as marked pieces of a shared street edge.](oip-image:essays/the-meter-at-the-curb/section-1)
 
 *The curb is narrow, but it carries a city's argument over access.*
 
@@ -213,7 +213,7 @@ The old meter was inconvenient, but it was inspectable. The new system may be co
 
 That trust problem leaves digital systems possible, while demanding public discipline. The city must govern them as public authority, with procurement underneath. Who owns the data? Who can inspect errors? What happens when the app fails? How are rates changed? What records are retained? What private vendor receives? What public report is issued? How does the city prevent enforcement convenience from becoming enforcement hunger?
 
-![A modern curb at dusk shows a smartphone payment screen, a modest pay station, and the ghosted outline of an old coin meter reflected in a shop window.](/images/essays/the-meter-at-the-curb/section-2.png)
+![A modern curb at dusk shows a smartphone payment screen, a modest pay station, and the ghosted outline of an old coin meter reflected in a shop window.](oip-image:essays/the-meter-at-the-curb/section-2)
 
 *The meter's face moved into software, but the public bargain did not disappear.*
 

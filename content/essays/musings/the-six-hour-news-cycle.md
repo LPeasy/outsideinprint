@@ -12,7 +12,7 @@ external_factual_claims: "none"
 tags: ["attention", "media", "self-command", "spirituality"]
 subtitle: "Unplug, reconnect, and find yourself."
 description: "Unplug, reconnect, and find yourself."
-featured_image: "/images/essays/the-six-hour-news-cycle/hero.png"
+featured_image: "editorial/serpent-at-supper"
 featured_image_alt: "At a warm-toned supper table, a central diner holds an emerald serpent head in one hand and its severed gray power-cord body in the other while two companions sit beside a dark phone."
 featured_image_caption: "Serpent at Supper."
 version: "1.0"
@@ -38,7 +38,7 @@ By now, we've all heard of taking a break from alcohol. Dry January has been pic
 
 We need to normalize taking breaks from the infinite content machine. Too much dopamine ruins us. Being present with our loved ones is how we can restore sanity into our lives.
 
-![Two anonymous adults sit across a quiet table, one speaking while the other listens, with a blank phone resting face down beside the dishes.](/images/essays/the-six-hour-news-cycle/section-1.png)
+![Two anonymous adults sit across a quiet table, one speaking while the other listens, with a blank phone resting face down beside the dishes.](oip-image:essays/the-six-hour-news-cycle/section-1)
 
 *The Quiet Between Us.*
 

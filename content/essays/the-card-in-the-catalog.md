@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-card-in-the-catalog/hero.png"
+featured_image: "essays/the-card-in-the-catalog/hero"
 featured_image_alt: "An open oak card catalog drawer in a quiet reading room, with catalog cards arranged like search paths."
 featured_image_caption: "The library card catalog made search physical before search became a screen."
 collections:
@@ -105,7 +105,7 @@ That is the normal price of shared infrastructure. No town wants to invent every
 
 This is why the old drawer should be read as a record of work, not as furniture. It gathered thousands of tiny administrative acts into a public surface. When readers found the right book, the card made the result feel simple. The simplicity had been manufactured.
 
-![A cataloging desk with printed cards, type trays, pencils, stamps, and a map of small libraries connected by thin lines.](/images/essays/the-card-in-the-catalog/section-1.png)
+![A cataloging desk with printed cards, type trays, pencils, stamps, and a map of small libraries connected by thin lines.](oip-image:essays/the-card-in-the-catalog/section-1)
 
 *A shared catalog card turned local drawers into a national record system.*
 
@@ -195,7 +195,7 @@ The digital catalog changes the scale of that problem. A search query can become
 
 The public problem is not technology itself. The problem is invisible governance. Readers can argue with a heading they can see. They have a harder time arguing with an undisclosed ranking rule, an opaque vendor index, a retained activity log, or a search result that hides why one record surfaced above another.
 
-![A modern search glow crossing a physical card catalog drawer while a librarian sorts paper records.](/images/essays/the-card-in-the-catalog/section-2.png)
+![A modern search glow crossing a physical card catalog drawer while a librarian sorts paper records.](oip-image:essays/the-card-in-the-catalog/section-2)
 
 *The search box inherited the card catalog's old burden: public memory needs human description before it can be found.*
 

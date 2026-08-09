@@ -99,11 +99,13 @@ $resolvedRoot = (Resolve-Path -LiteralPath $Root).Path
 $affirmationRoot = Join-Path $resolvedRoot 'content\essays\affirmations'
 $bankPath = Join-Path $resolvedRoot 'editorial\affirmations-bank.md'
 $galleryDataPath = Join-Path $resolvedRoot 'data\editorial_cartoons.yaml'
+$imageManifestPath = Join-Path $resolvedRoot 'data\image-assets.json'
 $contractPath = Join-Path $resolvedRoot 'editorial\the-things-we-say-publication-contract.md'
 
 Assert-True (Test-Path -LiteralPath $affirmationRoot -PathType Container) 'Missing content/essays/affirmations.'
 Assert-True (Test-Path -LiteralPath $bankPath -PathType Leaf) 'Missing editorial/affirmations-bank.md.'
 Assert-True (Test-Path -LiteralPath $galleryDataPath -PathType Leaf) 'Missing data/editorial_cartoons.yaml.'
+Assert-True (Test-Path -LiteralPath $imageManifestPath -PathType Leaf) 'Missing data/image-assets.json.'
 Assert-True (Test-Path -LiteralPath $contractPath -PathType Leaf) 'Missing The Things We Say publication contract.'
 Assert-True (-not (Test-Path -LiteralPath (Join-Path $resolvedRoot 'content\collections\what-you-tell-yourself.md'))) 'Retired collection source still exists.'
 Assert-True (-not (Test-Path -LiteralPath (Join-Path $resolvedRoot 'editorial\what-you-tell-yourself-series-contract.md'))) 'Retired series contract still exists.'
@@ -143,6 +145,7 @@ foreach ($affirmation in $bankAffirmations) {
 }
 
 $galleryData = [System.IO.File]::ReadAllText($galleryDataPath)
+$imageManifest = Get-Content -LiteralPath $imageManifestPath -Raw | ConvertFrom-Json -AsHashtable -Depth 20
 $articles = @(Get-ChildItem -LiteralPath $affirmationRoot -File -Filter '*.md' -Recurse)
 Assert-True ($articles.Count -gt 0) 'The Things We Say has no Affirmation entries.'
 
@@ -194,10 +197,13 @@ foreach ($article in $articles) {
 
   $featuredImage = Get-FrontMatterValue -FrontMatter $frontMatter -Key 'featured_image'
   $featuredAlt = Get-FrontMatterValue -FrontMatter $frontMatter -Key 'featured_image_alt'
-  Assert-True ($featuredImage -ceq "/images/essays/$slug/hero.png") "$slug must use its shared hero path."
+  Assert-True ($featuredImage -match '^editorial/[a-z0-9-]+$') "$slug must use a registered editorial asset ID."
+  Assert-True ($imageManifest.assets.ContainsKey($featuredImage)) "$slug featured image is not registered: $featuredImage"
   Assert-True (-not [string]::IsNullOrWhiteSpace($featuredAlt)) "$slug is missing featured_image_alt."
 
-  $heroPath = Join-Path $resolvedRoot ('static\' + ($featuredImage.TrimStart('/') -replace '/', '\'))
+  $featuredAsset = $imageManifest.assets[$featuredImage]
+  Assert-True ([string]$featuredAsset.processing_state -eq 'derivative_capable') "$slug featured image cannot produce derivatives."
+  $heroPath = Join-Path (Join-Path $resolvedRoot 'assets') (([string]$featuredAsset.source) -replace '/', '\')
   Assert-True (Test-Path -LiteralPath $heroPath -PathType Leaf) "$slug hero is missing: $heroPath"
   $dimensions = Get-PngDimensions -Path $heroPath
   Assert-True ($dimensions.Width -ge 1200 -and $dimensions.Height -ge 675) "$slug hero must be at least 1200x675."
@@ -221,15 +227,10 @@ foreach ($article in $articles) {
 
   $imageMatch = [regex]::Match(
     $entryMatches[0].Groups['entry'].Value,
-    '(?m)^\s+image:\s*"(?<value>/images/editorial/[a-z0-9-]+\.png)"\s*$'
+    '(?m)^\s+image:\s*"(?<value>editorial/[a-z0-9-]+)"\s*$'
   )
   Assert-True $imageMatch.Success "$slug Gallery entry is missing its image."
-  $galleryImagePath = Join-Path $resolvedRoot ('static\' + ($imageMatch.Groups['value'].Value.TrimStart('/') -replace '/', '\'))
-  Assert-True (Test-Path -LiteralPath $galleryImagePath -PathType Leaf) "$slug Gallery image is missing."
-
-  $heroHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $heroPath).Hash
-  $galleryHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $galleryImagePath).Hash
-  Assert-True ($heroHash -eq $galleryHash) "$slug hero and Gallery image are not byte-identical."
+  Assert-True ($imageMatch.Groups['value'].Value -ceq $featuredImage) "$slug hero and Gallery entry must resolve to the same registered asset ID."
 }
 
 Write-Host "Affirmation publication contract: PASS ($($articles.Count) entry/entries)." -ForegroundColor Green

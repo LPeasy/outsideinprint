@@ -21,6 +21,11 @@
     </header>
 
     {{ with $current }}
+      {{ $currentImage := partial "images/model.html" (dict
+        "page" $
+        "ref" .image
+        "display" true
+      ) }}
       <div class="section-front__body">
         <section class="cartoon-gallery-spotlight page-shell page-shell--wide" aria-labelledby="current-cartoon-title">
           <div class="cartoon-gallery-spotlight__meta">
@@ -37,19 +42,21 @@
               data-title="{{ .title }}"
               data-date="{{ .date }}"
               data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
-              data-image="{{ .image | relURL }}"
+              data-image="{{ $currentImage.lightbox_url }}"
               data-alt="{{ .alt }}"
-              data-width="{{ .width }}"
-              data-height="{{ .height }}"
+              data-width="{{ $currentImage.lightbox_width }}"
+              data-height="{{ $currentImage.lightbox_height }}"
               {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
               aria-label="Open {{ .title }} fullscreen"
             >
-              <img
-                src="{{ .image | relURL }}"
-                alt="{{ .alt }}"
-                width="{{ .width }}"
-                height="{{ .height }}"
-              >
+              {{ partial "images/picture.html" (dict
+                "model" $currentImage
+                "alt" .alt
+                "loading" "eager"
+                "fetchpriority" "high"
+                "sizes" "(min-width: 72rem) 58rem, calc(100vw - 2rem)"
+                "lightbox" true
+              ) }}
             </button>
           </figure>
         </section>
@@ -62,6 +69,11 @@
     {{ if gt (len $archiveCartoons) 0 }}
       <div class="cartoon-gallery__grid">
         {{ range $archiveCartoons }}
+          {{ $archiveImage := partial "images/model.html" (dict
+            "page" $
+            "ref" .image
+            "display" true
+          ) }}
           <article class="cartoon-gallery__item">
             <figure>
               <button
@@ -72,20 +84,20 @@
                 data-title="{{ .title }}"
                 data-date="{{ .date }}"
                 data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
-                data-image="{{ .image | relURL }}"
+                data-image="{{ $archiveImage.lightbox_url }}"
                 data-alt="{{ .alt }}"
-                data-width="{{ .width }}"
-                data-height="{{ .height }}"
+                data-width="{{ $archiveImage.lightbox_width }}"
+                data-height="{{ $archiveImage.lightbox_height }}"
                 {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
                 aria-label="Open {{ .title }} fullscreen"
               >
-                <img
-                  src="{{ .image | relURL }}"
-                  alt="{{ .alt }}"
-                  width="{{ .width }}"
-                  height="{{ .height }}"
-                  loading="lazy"
-                >
+                {{ partial "images/picture.html" (dict
+                  "model" $archiveImage
+                  "alt" .alt
+                  "loading" "lazy"
+                  "sizes" "(min-width: 72rem) 20rem, (min-width: 48rem) 30vw, calc(100vw - 2rem)"
+                  "lightbox" true
+                ) }}
               </button>
               <figcaption>
                 <span>{{ .title }}</span>
@@ -123,7 +135,7 @@
           class="cartoon-lightbox__image-button"
           data-cartoon-lightbox-image-button
         >
-          <img data-cartoon-lightbox-image src="" alt="">
+          <img data-cartoon-lightbox-image alt="">
         </button>
         <figcaption class="cartoon-lightbox__caption">
           <div>

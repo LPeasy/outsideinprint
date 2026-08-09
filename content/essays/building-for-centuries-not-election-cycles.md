@@ -59,7 +59,7 @@ When you're building billion-dollar projects that shape the country's future, a 
 
 ## The High Cost of Rushing Infrastructure Projects
 
-![Photo by Alexander Mils on Unsplash](/images/medium/building-for-centuries-not-election-cycles/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7.jpeg)
+![Photo by Alexander Mils on Unsplash](oip-image:medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7)
 
 *Photo by Alexander Mils on Unsplash*
 

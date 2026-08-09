@@ -7,7 +7,7 @@ draft: false
 slug: "minimum-due"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/minimum-due/hero.png"
+featured_image: "editorial/minimum-door"
 featured_image_alt: "Editorial cartoon showing an anonymous payer at a MINIMUM DUE window while a green path leads to a darker NEXT MONTH counter where another figure receives an INTEREST envelope."
 featured_image_caption: "The smallest allowed payment isn't the full price."
 version: "1.0"
@@ -29,7 +29,7 @@ The [CFPB tells consumers](https://www.consumerfinance.gov/ask-cfpb/a-box-on-my-
 
 Federal disclosure rules point the same way. [Regulation Z](https://www.consumerfinance.gov/rules-policy/regulations/1026/7/) requires credit-card statements to show repayment estimates tied to minimum payments and assumptions about no new amounts added to the balance. The law puts that little box on the page because the floor needs a warning sign.
 
-![A four-box infographic reading MINIMUM DUE, ACCOUNT CURRENT, BALANCE MAY REMAIN, and INTEREST CAN GROW.](/images/essays/minimum-due/section-1.png)
+![A four-box infographic reading MINIMUM DUE, ACCOUNT CURRENT, BALANCE MAY REMAIN, and INTEREST CAN GROW.](oip-image:essays/minimum-due/section-1)
 
 *The minimum can keep the account current while the balance may remain.*
 
@@ -46,7 +46,7 @@ But when there is room to choose, the word `minimum` needs to be understood corr
 
 That price often moves: next month, next paycheck, future patience, future choices. The card company doesn't need to shout. The statement already says the floor. The interest does the rest.
 
-![A split-path infographic showing IF YOU HAVE ROOM, then PAY MORE leading to LESS INTEREST, or PAY MINIMUM leading to MORE TIME and POSSIBLE INTEREST.](/images/essays/minimum-due/section-2.png)
+![A split-path infographic showing IF YOU HAVE ROOM, then PAY MORE leading to LESS INTEREST, or PAY MINIMUM leading to MORE TIME and POSSIBLE INTEREST.](oip-image:essays/minimum-due/section-2)
 
 *More than the minimum can lower interest; the minimum can buy time.*
 

@@ -6,7 +6,7 @@ slug: "modern-prometheus"
 section_label: "Essay"
 subtitle: "When humans learned to command lightning, they changed night, labor, distance, and the shape of modern life."
 description: "A historical essay on electricity, lightning, Franklin's kite, power stations, motors, grids, and modern life."
-featured_image: "/images/essays/modern-prometheus/hero.png"
+featured_image: "essays/modern-prometheus/hero"
 featured_image_alt: "Editorial illustration of a storm-lit city, an early lightning rod, and a controlled electric glow moving into wires and lamps."
 featured_image_caption: "The old terror did not disappear. It entered the wire."
 version: "1.2"
@@ -70,7 +70,7 @@ The voltaic pile changed everything. For the first time, electricity could be ge
 
 Lightning had been captured indoors.
 
-![Editorial illustration of an eighteenth-century laboratory table with a voltaic pile, metal instruments, a Leyden jar, and storm light at the window.](/images/essays/modern-prometheus/section-1.png)
+![Editorial illustration of an eighteenth-century laboratory table with a voltaic pile, metal instruments, a Leyden jar, and storm light at the window.](oip-image:essays/modern-prometheus/section-1)
 
 *Electricity crossed the threshold through glass jars, wet cloth, metal, and nerve.*
 
@@ -122,7 +122,7 @@ The war ended quietly. Alternating current won.
 
 Electricity had escaped geography.
 
-![Editorial illustration of turbines, transmission lines, a lit city street, and distant factories connected by a glowing electrical path.](/images/essays/modern-prometheus/section-2.png)
+![Editorial illustration of turbines, transmission lines, a lit city street, and distant factories connected by a glowing electrical path.](oip-image:essays/modern-prometheus/section-2)
 
 *Once power could travel, geography lost one of its oldest vetoes.*
 

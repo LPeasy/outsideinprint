@@ -5,6 +5,7 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $dataPath = Join-Path $repoRoot 'data/editorial_cartoons.yaml'
+$imageManifestPath = Join-Path $repoRoot 'data/image-assets.json'
 $essayDir = Join-Path $repoRoot 'content/essays'
 . (Join-Path (Join-Path $repoRoot 'scripts') 'png_integrity.ps1')
 
@@ -343,11 +344,147 @@ This fixture requires an Editorial Philosophy Audit.
   }
 }
 
+function Test-ExplicitPublishSlug {
+  $tempBase = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath())
+  $tempRoot = Join-Path $tempBase ("oip-cartoon-explicit-slug-{0}" -f [guid]::NewGuid().ToString('N'))
+  $updateScript = Join-Path (Join-Path $repoRoot 'scripts') 'update_front_page_cartoon.ps1'
+  $sourceImage = Get-ChildItem -LiteralPath (Join-Path $repoRoot 'assets/images/originals/editorial') -Filter '*.png' -File | Select-Object -First 1
+  Assert-True ($null -ne $sourceImage) 'Explicit-slug fixture requires one managed editorial PNG source.'
+  $sourceJpeg = Get-ChildItem -LiteralPath (Join-Path $repoRoot 'assets/images/originals/essays') -Include '*.jpg','*.jpeg' -File -Recurse | Select-Object -First 1
+  Assert-True ($null -ne $sourceJpeg) 'Editorial source-format guard fixture requires one managed JPEG source.'
+
+  try {
+    $tempDataDir = Join-Path $tempRoot 'data'
+    New-Item -ItemType Directory -Path $tempDataDir -Force | Out-Null
+
+    @'
+current: placeholder
+cartoons:
+  - slug: placeholder
+    title: "Placeholder"
+    date: "2026-01-01"
+    image: "editorial/placeholder"
+    alt: "Placeholder fixture."
+    width: 1
+    height: 1
+'@ | Set-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Encoding utf8NoBOM
+
+    & $updateScript `
+      -Root $tempRoot `
+      -ImagePath $sourceImage.FullName `
+      -Title 'Short Title' `
+      -Slug 'explicit-manifest-slug' `
+      -Alt 'Explicit slug fixture.' `
+      -Date '2026-01-02' `
+      -NoEssayLink | Out-Null
+
+    $updatedData = Get-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Raw
+    Assert-True `
+      -Condition ([regex]::IsMatch($updatedData, '(?m)^current:\s+explicit-manifest-slug\s*$')) `
+      -Message 'Explicit publish slug was not preserved as current.'
+    Assert-True `
+      -Condition ([regex]::IsMatch($updatedData, '(?ms)^\s*- slug: explicit-manifest-slug\s+.*?^\s+title: "Short Title"\s*$.*?^\s+image: "editorial/explicit-manifest-slug"\s*$')) `
+      -Message 'Explicit publish slug did not control the Gallery slug and managed image ID.'
+
+    $explicitSourcePath = Join-Path $tempRoot 'assets/images/originals/editorial/explicit-manifest-slug.png'
+    Assert-True (Test-Path -LiteralPath $explicitSourcePath -PathType Leaf) 'Explicit publish slug did not control the managed original path.'
+    $fixtureManifest = Get-Content -LiteralPath (Join-Path $tempDataDir 'image-assets.json') -Raw | ConvertFrom-Json -AsHashtable -Depth 20
+    Assert-True ($fixtureManifest.assets.ContainsKey('editorial/explicit-manifest-slug')) 'Explicit publish slug did not register the managed asset ID.'
+
+    & $updateScript `
+      -Root $tempRoot `
+      -ImagePath $sourceImage.FullName `
+      -Title 'Derived Slug Title' `
+      -Alt 'Derived slug fixture.' `
+      -Date '2026-01-03' `
+      -NoEssayLink | Out-Null
+
+    $derivedData = Get-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Raw
+    Assert-True `
+      -Condition ([regex]::IsMatch($derivedData, '(?m)^current:\s+derived-slug-title\s*$')) `
+      -Message 'Omitting -Slug no longer derives the publish slug from Title.'
+    $derivedManifest = Get-Content -LiteralPath (Join-Path $tempDataDir 'image-assets.json') -Raw | ConvertFrom-Json -AsHashtable -Depth 20
+    Assert-True ($derivedManifest.assets.ContainsKey('editorial/derived-slug-title')) 'Title-derived default did not register its managed asset ID.'
+
+    $dataBeforeInvalid = [System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'editorial_cartoons.yaml'))
+    $manifestBeforeInvalid = [System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'image-assets.json'))
+    $invalidBlocked = $false
+    try {
+      & $updateScript `
+        -Root $tempRoot `
+        -ImagePath $sourceImage.FullName `
+        -Title 'Invalid Slug Attempt' `
+        -Slug 'Invalid Slug' `
+        -Alt 'Invalid slug fixture.' `
+        -Date '2026-01-04' `
+        -NoEssayLink | Out-Null
+    }
+    catch {
+      $invalidBlocked = $_.Exception.Message -match 'Slug'
+    }
+    Assert-True $invalidBlocked 'Invalid explicit publish slug did not fail closed.'
+    Assert-True `
+      -Condition ([Convert]::ToBase64String($dataBeforeInvalid) -ceq [Convert]::ToBase64String([System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'editorial_cartoons.yaml')))) `
+      -Message 'Invalid explicit publish slug changed editorial_cartoons.yaml.'
+    Assert-True `
+      -Condition ([Convert]::ToBase64String($manifestBeforeInvalid) -ceq [Convert]::ToBase64String([System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'image-assets.json')))) `
+      -Message 'Invalid explicit publish slug changed image-assets.json.'
+
+    foreach ($invalidImageCase in @(
+      @{ Path = $sourceJpeg.FullName; Slug = 'rejected-jpeg-extension' },
+      @{ Path = (Join-Path $tempRoot 'jpeg-disguised-as-png.png'); Slug = 'rejected-png-signature' }
+    )) {
+      if ($invalidImageCase.Slug -eq 'rejected-png-signature') {
+        Copy-Item -LiteralPath $sourceJpeg.FullName -Destination $invalidImageCase.Path -Force
+      }
+      $dataBeforeImageRejection = [System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'editorial_cartoons.yaml'))
+      $manifestBeforeImageRejection = [System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'image-assets.json'))
+      $imageRejected = $false
+      try {
+        & $updateScript `
+          -Root $tempRoot `
+          -ImagePath $invalidImageCase.Path `
+          -Title 'Rejected Image Format' `
+          -Slug $invalidImageCase.Slug `
+          -Alt 'Rejected image fixture.' `
+          -Date '2026-01-04' `
+          -NoEssayLink | Out-Null
+      }
+      catch {
+        $imageRejected = $_.Exception.Message -match 'Front-page cartoon source'
+      }
+      Assert-True $imageRejected "Front-page cartoon publisher accepted invalid managed-image input: $($invalidImageCase.Slug)"
+      Assert-True `
+        -Condition (-not (Test-Path -LiteralPath (Join-Path $tempRoot "assets/images/originals/editorial/$($invalidImageCase.Slug).png"))) `
+        -Message "Invalid front-page cartoon input wrote a managed source: $($invalidImageCase.Slug)"
+      Assert-True `
+        -Condition ([Convert]::ToBase64String($dataBeforeImageRejection) -ceq [Convert]::ToBase64String([System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'editorial_cartoons.yaml')))) `
+        -Message "Invalid front-page cartoon input changed editorial_cartoons.yaml: $($invalidImageCase.Slug)"
+      Assert-True `
+        -Condition ([Convert]::ToBase64String($manifestBeforeImageRejection) -ceq [Convert]::ToBase64String([System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'image-assets.json')))) `
+        -Message "Invalid front-page cartoon input changed image-assets.json: $($invalidImageCase.Slug)"
+    }
+  }
+  finally {
+    if (Test-Path -LiteralPath $tempRoot) {
+      $resolvedTempRoot = [System.IO.Path]::GetFullPath($tempRoot)
+      if (-not $resolvedTempRoot.StartsWith($tempBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing to remove explicit-slug test directory outside the system temp root: $resolvedTempRoot"
+      }
+      Remove-Item -LiteralPath $resolvedTempRoot -Recurse -Force
+    }
+  }
+}
+
 if (-not (Test-Path -LiteralPath $dataPath -PathType Leaf)) {
   throw "Editorial cartoon data file not found: $dataPath"
 }
+if (-not (Test-Path -LiteralPath $imageManifestPath -PathType Leaf)) {
+  throw "Responsive image manifest not found: $imageManifestPath"
+}
 
 $cartoonData = Get-CartoonEntries
+$imageManifest = Get-Content -LiteralPath $imageManifestPath -Raw | ConvertFrom-Json -AsHashtable -Depth 20
 if ([string]::IsNullOrWhiteSpace($cartoonData.Current)) {
   throw "data/editorial_cartoons.yaml must define current."
 }
@@ -371,7 +508,17 @@ foreach ($cartoon in @($cartoonData.Entries)) {
     $currentExists = $true
   }
 
-  $imagePath = Join-Path $repoRoot ('static/' + ([string]$cartoon.image).TrimStart('/')).Replace('/', [IO.Path]::DirectorySeparatorChar)
+  $imageId = [string]$cartoon.image
+  if (-not $imageManifest.assets.ContainsKey($imageId)) {
+    throw "Cartoon image is not registered for '$($cartoon.slug)': $imageId"
+  }
+
+  $imageAsset = $imageManifest.assets[$imageId]
+  if ([string]$imageAsset.processing_state -ne 'derivative_capable') {
+    throw "Cartoon image cannot produce derivatives for '$($cartoon.slug)': $imageId"
+  }
+
+  $imagePath = Join-Path (Join-Path $repoRoot 'assets') ([string]$imageAsset.source).Replace('/', [IO.Path]::DirectorySeparatorChar)
   if (-not (Test-Path -LiteralPath $imagePath -PathType Leaf)) {
     throw "Cartoon image file is missing for '$($cartoon.slug)': $($cartoon.image)"
   }
@@ -409,6 +556,7 @@ if (-not $currentExists) {
 }
 
 Test-AssociationOnlyUpdate
+Test-ExplicitPublishSlug
 
 Write-Host "Editorial cartoon schedule contract passed."
 $global:LASTEXITCODE = 0

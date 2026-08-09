@@ -10,6 +10,10 @@ param(
   [string]$Alt,
 
   [Parameter(ParameterSetName = 'Publish')]
+  [ValidatePattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]
+  [string]$Slug,
+
+  [Parameter(ParameterSetName = 'Publish')]
   [Parameter(Mandatory = $true, ParameterSetName = 'LinkExisting')]
   [string]$EssayPath,
 
@@ -30,6 +34,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 
 function ConvertTo-Slug {
   param([string]$Value)
@@ -708,6 +713,10 @@ if ($NoEssayLink -and -not [string]::IsNullOrWhiteSpace($EssayPath)) {
 }
 
 $resolvedImagePath = [System.IO.Path]::GetFullPath((Resolve-Path $ImagePath).Path)
+if ([System.IO.Path]::GetExtension($resolvedImagePath) -ine '.png') {
+  throw 'Front-page cartoon source must use a .png extension.'
+}
+Assert-OipManagedImageFile -Path $resolvedImagePath -ExpectedExtension '.png' -Label 'Front-page cartoon source' | Out-Null
 $defaultEssayPath = $null
 if ($isQueuedPublish -and -not $NoEssayLink -and [string]::IsNullOrWhiteSpace($EssayPath)) {
   throw 'Queued future cartoon publishes require -EssayPath "/essays/<slug>/". Default latest-essay inference is only safe for immediate cartoon publishes.'
@@ -724,8 +733,10 @@ if (-not [string]::IsNullOrWhiteSpace($EssayPath)) {
   $resolvedEssayPath = Normalize-EssayPath -Value $EssayPath
 }
 
-$slug = ConvertTo-Slug $Title
-$targetRelativePath = "static\images\editorial\$slug.png"
+$resolvedSlug = if ([string]::IsNullOrWhiteSpace($Slug)) { ConvertTo-Slug $Title } else { $Slug }
+$assetId = "editorial/$resolvedSlug"
+$assetSource = "images/originals/editorial/$resolvedSlug.png"
+$targetRelativePath = "assets\images\originals\editorial\$resolvedSlug.png"
 $targetPath = Join-Path $resolvedRoot $targetRelativePath
 $targetDirectory = Split-Path -Parent $targetPath
 
@@ -735,15 +746,26 @@ if (-not (Test-Path -LiteralPath $targetDirectory -PathType Container)) {
 
 Copy-Item -LiteralPath $resolvedImagePath -Destination $targetPath -Force
 
-Add-Type -AssemblyName System.Drawing
-$image = [System.Drawing.Image]::FromFile($targetPath)
-try {
-  $width = $image.Width
-  $height = $image.Height
+$manifest = Read-OipImageAssetManifest -Root $resolvedRoot -AllowMissing
+$sourceHash = (Get-FileHash -LiteralPath $targetPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$reviewState = 'pending_review'
+if ($manifest.assets.Contains($assetId) -and [string]$manifest.assets[$assetId].sha256 -eq $sourceHash) {
+  $reviewState = [string]$manifest.assets[$assetId].review_state
 }
-finally {
-  $image.Dispose()
-}
+
+$dimensions = Get-OipImageNativeDimensions -Path $targetPath
+$width = $dimensions.Width
+$height = $dimensions.Height
+
+Register-OipImageAsset `
+  -Root $resolvedRoot `
+  -Id $assetId `
+  -Source $assetSource `
+  -ImageClass 'editorial_cartoon' `
+  -ProcessingHint 'drawing' `
+  -ReviewState $reviewState `
+  -UsageState 'referenced' `
+  -Aliases @("/images/editorial/$resolvedSlug.png") | Out-Null
 
 $dataPath = Join-Path $resolvedRoot 'data\editorial_cartoons.yaml'
 $data = Read-CartoonData -Path $dataPath
@@ -751,13 +773,13 @@ $cartoons = @()
 $updated = $false
 
 foreach ($cartoon in @($data.cartoons)) {
-  if ($cartoon.slug -eq $slug) {
+  if ($cartoon.slug -eq $resolvedSlug) {
     $updatedCartoon = [ordered]@{}
     foreach ($property in $cartoon.GetEnumerator()) {
       $updatedCartoon[$property.Key] = $property.Value
     }
 
-    $updatedCartoon.slug = $slug
+    $updatedCartoon.slug = $resolvedSlug
     $updatedCartoon.title = $Title
     $updatedCartoon.date = $Date
     if (-not [string]::IsNullOrWhiteSpace($PublishDate)) {
@@ -766,7 +788,7 @@ foreach ($cartoon in @($data.cartoons)) {
     elseif ($updatedCartoon.Contains('publishDate')) {
       $updatedCartoon.Remove('publishDate')
     }
-    $updatedCartoon.image = "/images/editorial/$slug.png"
+    $updatedCartoon.image = $assetId
     $updatedCartoon.alt = $Alt
     $updatedCartoon.width = $width
     $updatedCartoon.height = $height
@@ -795,10 +817,10 @@ foreach ($cartoon in @($data.cartoons)) {
 
 if (-not $updated) {
   $newCartoon = [ordered]@{
-    slug = $slug
+    slug = $resolvedSlug
     title = $Title
     date = $Date
-    image = "/images/editorial/$slug.png"
+    image = $assetId
     alt = $Alt
     width = $width
     height = $height
@@ -820,11 +842,11 @@ if (-not $updated) {
   $cartoons += $newCartoon
 }
 
-Write-CartoonData -Path $dataPath -Current $slug -Cartoons @($cartoons)
+Write-CartoonData -Path $dataPath -Current $resolvedSlug -Cartoons @($cartoons)
 
 $linkedEssay = $null
 foreach ($cartoon in @($cartoons)) {
-  if ($cartoon.slug -eq $slug -and $cartoon.Contains('essay')) {
+  if ($cartoon.slug -eq $resolvedSlug -and $cartoon.Contains('essay')) {
     $linkedEssay = [string]$cartoon.essay
     break
   }

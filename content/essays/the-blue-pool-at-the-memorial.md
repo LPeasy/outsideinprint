@@ -16,7 +16,7 @@ revision_history:
     date: "2026-05-28"
     note: "Updated May 28, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-blue-pool-at-the-memorial/hero.png"
+featured_image: "essays/the-blue-pool-at-the-memorial/hero"
 featured_image_alt: "Editorial illustration of the Lincoln Memorial Reflecting Pool transformed into a blue civic worksite, with review papers, park maps, and public benches around it."
 featured_image_caption: "A public place improves when someone treats care as visible work."
 collections:
@@ -100,7 +100,7 @@ A blue coating on a pool may be reversible. A golf-course redesign may be revise
 
 That is where process becomes more than paperwork. It is how a public place turns money, taste, urgency, and expertise into work that can survive the first announcement.
 
-![Editorial illustration of East Potomac Park as a public golf map under review, with paths, benches, river water, and folded planning papers gathered on a long table.](/images/essays/the-blue-pool-at-the-memorial/section-1.png)
+![Editorial illustration of East Potomac Park as a public golf map under review, with paths, benches, river water, and folded planning papers gathered on a long table.](oip-image:essays/the-blue-pool-at-the-memorial/section-1)
 
 *A park plan works when ordinary public use is the measure of success.*
 
@@ -158,6 +158,6 @@ At the Lincoln Memorial, the water has always been more than water. It has been 
 
 Make the shared places better. Then make the improvement worthy of the people who share them.
 
-![Editorial illustration of a federal review desk with a pool sample, preservation files, anniversary bunting, and public comment cards under one hard overhead light.](/images/essays/the-blue-pool-at-the-memorial/section-2.png)
+![Editorial illustration of a federal review desk with a pool sample, preservation files, anniversary bunting, and public comment cards under one hard overhead light.](oip-image:essays/the-blue-pool-at-the-memorial/section-2)
 
 *The color is visible first. The public value has to last.*

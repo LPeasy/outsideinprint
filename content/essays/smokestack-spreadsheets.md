@@ -6,7 +6,7 @@ slug: "smokestack-spreadsheets"
 section_label: "Essay"
 subtitle: "OpenAI's missed targets turned a private forecast into a public wager on chips, cloud contracts, substations, and time."
 description: "OpenAI's missed internal targets show how frontier AI has become a wager on electricity, cloud contracts, data centers, capital, and patience."
-featured_image: "/images/essays/smokestack-spreadsheets/hero.png"
+featured_image: "essays/smokestack-spreadsheets/hero"
 featured_image_alt: "A forecast spreadsheet on a drafting table extends into a data center construction site, power lines, and electrical infrastructure."
 featured_image_caption: "A private forecast can become a public infrastructure claim."
 version: "1.1"
@@ -78,7 +78,7 @@ That can be hard to see because AI arrives in polite boxes on a screen. It feels
 
 Then the demo asks for a power plant.
 
-![A cutaway data center campus connects server racks, cooling pipes, substations, construction cranes, and contract paperwork.](/images/essays/smokestack-spreadsheets/section-1.png)
+![A cutaway data center campus connects server racks, cooling pipes, substations, construction cranes, and contract paperwork.](oip-image:essays/smokestack-spreadsheets/section-1)
 *The model runs inside a contract, a substation, a cooling loop, and a construction schedule.*
 
 ## The Public Edge of a Private Forecast
@@ -137,7 +137,7 @@ But the basic question will remain.
 
 How much physical world does frontier AI need before the money arrives, and who carries the cost if the timing slips?
 
-![Investors sit around a dark table while a distant data center and power plant glow across the grid.](/images/essays/smokestack-spreadsheets/section-2.png)
+![Investors sit around a dark table while a distant data center and power plant glow across the grid.](oip-image:essays/smokestack-spreadsheets/section-2)
 *A private miss becomes public when the bill touches markets, utilities, and the grid.*
 
 ## The World the Spreadsheet Asked For

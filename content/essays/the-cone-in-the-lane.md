@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-cone-in-the-lane/hero.png"
+featured_image: "essays/the-cone-in-the-lane/hero"
 featured_image_alt: "A line of clean orange traffic cones bending a live lane around a fresh pavement cut at dawn, with workers distant and traffic continuing past them."
 featured_image_caption: "The cone is small because the claim is temporary, but the temporary claim governs the lane."
 tags:
@@ -99,7 +99,7 @@ This is also where public patience begins. A driver sees a lane closed and often
 
 That invisibility places a duty on the agency and contractor. The more a temporary order asks from the public, the cleaner its grammar should be. The taper should make sense. The signs should match the closure. The cones should be upright. The open lane should be wide enough for the expected vehicles. The business entrance should remain findable where possible. The pedestrian route should be real. The end of the job should end the order.
 
-![A tabletop plan of a temporary street route, with miniature cones, a sidewalk detour, a cane-detectable edge, a utility cut, and a worker clipboard.](/images/essays/the-cone-in-the-lane/section-1.png)
+![A tabletop plan of a temporary street route, with miniature cones, a sidewalk detour, a cane-detectable edge, a utility cut, and a worker clipboard.](oip-image:essays/the-cone-in-the-lane/section-1)
 
 *A good work zone draws more than a driver path; it has to account for every public body using the street.*
 
@@ -219,6 +219,6 @@ The difference is not the plastic. The difference is the system standing behind 
 
 The next time a lane bends around a row of orange cones, the object may look like clutter. Sometimes it is clutter. At its best, it is a small temporary constitution for a damaged road: authority light enough to lift, visible enough to obey, bounded enough to trust, and honest enough to leave when the public way is whole again.
 
-![A dusk work zone seen from low road level, with orange cones reflecting headlights while workers repair pavement behind a clear temporary path.](/images/essays/the-cone-in-the-lane/section-2.png)
+![A dusk work zone seen from low road level, with orange cones reflecting headlights while workers repair pavement behind a clear temporary path.](oip-image:essays/the-cone-in-the-lane/section-2)
 
 *The cone works only while attention holds; after the repair, its authority should leave the lane.*

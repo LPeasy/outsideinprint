@@ -14,7 +14,7 @@ revision_history:
     note: "Updated April 28, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
 pdf: "/pdfs/rethinking-coastal-retreat.pdf"
 featured: false
-featured_image: "/images/essays/rethinking-coastal-retreat/hero.png"
+featured_image: "essays/rethinking-coastal-retreat/hero"
 featured_image_alt: "Abstract editorial hero image for Rethinking Coastal Retreat."
 featured_image_caption: "Replacement hero image for the legacy web edition."
 collections:

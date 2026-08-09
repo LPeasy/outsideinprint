@@ -124,7 +124,7 @@ U.S. action alone could not have averted the danger if others stay the course to
 
 ## Rising Emissions Abroad: China, India, Russia, and the Rest
 
-![Photo by NASA on Unsplash](/images/medium/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb.jpeg)
+![Photo by NASA on Unsplash](oip-image:medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb)
 
 *Photo by NASA on Unsplash*
 

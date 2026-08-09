@@ -6,7 +6,7 @@ slug: "nothing-to-see-here"
 section_label: "Essay"
 subtitle: "Lyme disease was not imagined. Bad tests, narrow case definitions, official caution, insurance pressure, secrecy, and ridicule made it smaller inside the public record."
 description: "Lyme disease was made smaller by weak tests, narrow surveillance records, official caution, insurance pressure, secrecy, and a medical culture that treated uncertainty as closure."
-featured_image: "/images/essays/nothing-to-see-here/hero.png"
+featured_image: "essays/nothing-to-see-here/hero"
 featured_image_alt: "Editorial illustration of a paper map of Long Island Sound, Lyme, Connecticut, and Plum Island pinned under clinical forms, tick drawings, and stamped public-health records."
 featured_image_caption: "The map is a public-record problem before it is an origin story."
 version: "1.2"
@@ -87,7 +87,7 @@ This is where public-record failure becomes ordinary. It lives in a form, cutoff
 
 For a patient, that distinction may have no practical difference.
 
-![Editorial illustration of a patient silhouette holding a thick chart before a clinic-administration counter where test strips, forms, and a narrow slot act like a gate.](/images/essays/nothing-to-see-here/section-1.png)
+![Editorial illustration of a patient silhouette holding a thick chart before a clinic-administration counter where test strips, forms, and a narrow slot act like a gate.](oip-image:essays/nothing-to-see-here/section-1)
 *The diagnostic gate can shrink illness before medicine has explained it.*
 
 ## The Body After the Case
@@ -104,7 +104,7 @@ The mechanisms remain unsettled. Persistent infection, immune dysregulation, tis
 
 The more honest record says something harder and more useful: Lyme disease is often treatable, delayed care can be life-altering, persistent symptoms are real for a significant minority, and medicine lacks the tools to sort every mechanism cleanly.
 
-![Editorial illustration of a closed medical chart on a kitchen table beside unlabeled pill bottles, calendar pages, outdoor boots, and woods beyond the window.](/images/essays/nothing-to-see-here/section-2.png)
+![Editorial illustration of a closed medical chart on a kitchen table beside unlabeled pill bottles, calendar pages, outdoor boots, and woods beyond the window.](oip-image:essays/nothing-to-see-here/section-2)
 *The case can close while ordinary life carries the illness.*
 
 ## The Island Across the Sound

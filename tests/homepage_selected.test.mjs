@@ -171,6 +171,7 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-image-button/);
+  assert.doesNotMatch(frontPageSource, /data-home-cartoon-lightbox-image\s+src=""/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
   assert.match(frontPageSource, /querySelectorAll\("\[data-home-cartoon-lightbox-trigger\]"\)/);
   assert.match(frontPageSource, /triggers\.forEach\(function \(trigger\)/);
@@ -221,6 +222,7 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
   assert.match(galleryTemplate, /data-cartoon-slug/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-image-button/);
+  assert.doesNotMatch(galleryTemplate, /data-cartoon-lightbox-image\s+src=""/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-essay/);
   assert.match(galleryTemplate, /getRequestedCartoonSlug/);
   assert.match(galleryTemplate, /URLSearchParams\(window\.location\.search/);
@@ -232,10 +234,13 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(cartoonLinkPartial, /<button/);
   assert.match(cartoonLinkPartial, /data-essay-cartoon-lightbox-trigger/);
   assert.match(cartoonLinkPartial, /data-gallery/);
-  assert.match(cartoonLinkPartial, /<img/);
+  assert.match(cartoonLinkPartial, /partial "images\/model\.html"/);
+  assert.match(cartoonLinkPartial, /partial "images\/picture\.html"/);
+  assert.doesNotMatch(cartoonLinkPartial, /<img/);
   assert.doesNotMatch(cartoonLinkPartial, /<a class="essay-cartoon-thumb/);
   assert.match(baseLayout, /editorial\/cartoon-thumbnail-lightbox\.html/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox/);
+  assert.doesNotMatch(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-image\s+src=""/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-gallery/);
   assert.match(cartoonThumbnailLightbox, /View in gallery/);
   assert.match(cartoonThumbnailLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);

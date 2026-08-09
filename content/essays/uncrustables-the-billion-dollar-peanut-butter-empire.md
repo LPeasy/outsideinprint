@@ -96,7 +96,7 @@ The tradeoff is also clear. Bigger factories and broader distribution make the p
 
 ### Why Athletes And Social Media Matter
 
-![Photo by Zac Durant on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a.jpeg)
+![Photo by Zac Durant on Unsplash](oip-image:medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a)
 
 *Photo by Zac Durant on Unsplash*
 

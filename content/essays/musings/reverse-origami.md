@@ -12,7 +12,7 @@ source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
 subtitle: "Life unfolds in the most beautiful ways."
 description: "Life unfolds in the most beautiful ways."
-featured_image: "/images/essays/reverse-origami/hero.png"
+featured_image: "editorial/the-shape-opens"
 featured_image_alt: "Two relaxed hands unfold a paper bird into a broad creased sheet against a dark crosshatched backdrop as a warm golden beam from beyond the top of the frame illuminates the origami."
 featured_image_caption: "The Shape Opens."
 version: "1.0"
@@ -55,7 +55,7 @@ Be courageous. Become larger than the shape you forced yourself into. There is f
   <figcaption>- Robby V.</figcaption>
 </figure>
 
-![An overhead view of one unfolded sheet marked by intersecting creases and muted-gold facets against a dark floor.](/images/essays/reverse-origami/section-1.png)
+![An overhead view of one unfolded sheet marked by intersecting creases and muted-gold facets against a dark floor.](oip-image:essays/reverse-origami/section-1)
 
 *The Pattern From Above.*
 

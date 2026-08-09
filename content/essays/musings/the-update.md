@@ -13,7 +13,7 @@ external_factual_claims: "none"
 tags: ["flexibility", "plans", "communication", "self-command"]
 subtitle: "Plans change. Give people room to move with them."
 description: "Plans change. Give people room to move with them."
-featured_image: "/images/essays/the-update/hero.png"
+featured_image: "editorial/signal-at-the-turn"
 featured_image_alt: "An anonymous traveler signals a changed route around a fallen tree to a companion waiting at the trail fork."
 featured_image_caption: "Signal at the Turn."
 version: "1.1"
@@ -41,7 +41,7 @@ Those words may not make anyone happy. They put both people back in the same mom
 
 Plans change. An update lets other people change theirs.
 
-![In a split domestic scene, one person sends an update from a home doorway while another reads it at a café table beside a book and coat.](/images/essays/the-update/section-1.png)
+![In a split domestic scene, one person sends an update from a home doorway while another reads it at a café table beside a book and coat.](oip-image:essays/the-update/section-1)
 
 ## Move With the Water
 

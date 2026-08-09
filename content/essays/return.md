@@ -9,7 +9,7 @@ section_label: "Essay"
 author_id: "robert-v-ussley"
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
-featured_image: "/images/essays/return/hero.png"
+featured_image: "editorial/the-empty-hooks"
 featured_image_alt: "Editorial cartoon showing two anonymous neighbors carrying a ladder toward empty hooks inside an open backyard shed while a porch bulb glows in the distance."
 featured_image_caption: "A borrowed ladder has a clear way home."
 version: "1.0"
@@ -41,7 +41,7 @@ Sometimes the owner will tell you to keep it longer. They may be away or may not
 
 Use the same process for a book, casserole dish, key, phone charger, or anything else you borrow. Keep the item with the parts that came with it. Make a return plan before it disappears into a drawer, car, or closet.
 
-![Three panels show a ladder being borrowed, used to change a porch bulb, and returned to hooks.](/images/essays/return/section-1.png)
+![Three panels show a ladder being borrowed, used to change a porch bulb, and returned to hooks.](oip-image:essays/return/section-1)
 
 *Borrow it. Use it. Return it.*
 

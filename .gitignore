@@ -12,6 +12,7 @@
 /assets/jsconfig.json
 /qa/artifacts/
 /qa/post-deploy-report.md
+/output/
 /reports/almanack-data-review/
 /reports/essay-guardrails.*
 

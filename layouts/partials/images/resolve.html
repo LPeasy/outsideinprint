@@ -1,0 +1,178 @@
+{{- $page := .page | default false -}}
+{{- $rawRef := strings.TrimSpace (printf "%v" (.ref | default "")) -}}
+{{- $result := dict
+  "managed" false
+  "external" false
+  "id" ""
+  "ref" $rawRef
+  "url" ""
+  "absolute_url" ""
+  "width" 0
+  "height" 0
+  "resource" false
+  "entry" false
+  "hash_prefix" ""
+-}}
+
+{{- if $rawRef -}}
+  {{- $isExternal := or
+    (hasPrefix $rawRef "http://")
+    (hasPrefix $rawRef "https://")
+    (hasPrefix $rawRef "//")
+    (hasPrefix $rawRef "data:")
+  -}}
+
+  {{- if $isExternal -}}
+    {{- $result = merge $result (dict
+      "external" true
+      "url" $rawRef
+      "absolute_url" $rawRef
+    ) -}}
+  {{- else -}}
+    {{- $manifest := index hugo.Data "image-assets" | default dict -}}
+    {{- $assets := $manifest.assets | default dict -}}
+    {{- $aliases := $manifest.aliases | default dict -}}
+    {{- $explicitManaged := hasPrefix $rawRef "oip-image:" -}}
+    {{- $lookupRef := $rawRef -}}
+    {{- if $explicitManaged -}}
+      {{- $lookupRef = strings.TrimSpace (strings.TrimPrefix "oip-image:" $lookupRef) -}}
+      {{- if not $lookupRef -}}
+        {{- errorf "Responsive image reference %q does not contain an asset ID" $rawRef -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $lookupKeys := slice $lookupRef -}}
+    {{- $withoutLeadingSlash := strings.TrimPrefix "/" $lookupRef -}}
+    {{- if ne $withoutLeadingSlash $lookupRef -}}
+      {{- $lookupKeys = $lookupKeys | append $withoutLeadingSlash -}}
+    {{- else if hasPrefix $lookupRef "images/" -}}
+      {{- $lookupKeys = $lookupKeys | append (printf "/%s" $lookupRef) -}}
+    {{- end -}}
+
+    {{- $canonicalID := "" -}}
+    {{- $entry := false -}}
+    {{- range $lookupKeys -}}
+      {{- if not $entry -}}
+        {{- with index $assets . -}}
+          {{- $entry = . -}}
+          {{- $canonicalID = printf "%v" .id -}}
+        {{- else -}}
+          {{- with index $aliases . -}}
+            {{- $canonicalID = printf "%v" . -}}
+            {{- with index $assets $canonicalID -}}
+              {{- $entry = . -}}
+            {{- else -}}
+              {{- errorf "Responsive image alias %q targets missing asset %q" $rawRef $canonicalID -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if $entry -}}
+      {{- $declaredID := printf "%v" $entry.id -}}
+      {{- if ne $declaredID $canonicalID -}}
+        {{- errorf "Responsive image asset key %q disagrees with its declared id %q" $canonicalID $declaredID -}}
+      {{- end -}}
+      {{- if or
+        (not (findRE `^[a-z0-9](?:[a-z0-9_/-]*[a-z0-9])?$` $canonicalID))
+        (in $canonicalID "//")
+      -}}
+        {{- errorf "Responsive image asset ID %q is not URL-safe" $canonicalID -}}
+      {{- end -}}
+
+      {{- $source := strings.TrimSpace (printf "%v" $entry.source) -}}
+      {{- if or
+        (not (hasPrefix $source "images/originals/"))
+        (hasPrefix $source "/")
+        (in $source "..")
+      -}}
+        {{- errorf "Responsive image asset %q has unsafe source path %q" $canonicalID $source -}}
+      {{- end -}}
+
+      {{- $sha := lower (strings.TrimSpace (printf "%v" $entry.sha256)) -}}
+      {{- if not (findRE `^[a-f0-9]{64}$` $sha) -}}
+        {{- errorf "Responsive image asset %q has an invalid SHA-256 digest" $canonicalID -}}
+      {{- end -}}
+
+      {{- $resource := resources.Get $source -}}
+      {{- if not $resource -}}
+        {{- errorf "Responsive image asset %q source is missing: %s" $canonicalID $source -}}
+      {{- else if ne $resource.MediaType.MainType "image" -}}
+        {{- errorf "Responsive image asset %q source is not an image: %s" $canonicalID $source -}}
+      {{- else -}}
+        {{- $declaredWidth := int $entry.width -}}
+        {{- $declaredHeight := int $entry.height -}}
+        {{- if or (le $declaredWidth 0) (le $declaredHeight 0) -}}
+          {{- errorf "Responsive image asset %q has invalid native dimensions" $canonicalID -}}
+        {{- end -}}
+        {{- if or (ne $resource.Width $declaredWidth) (ne $resource.Height $declaredHeight) -}}
+          {{- errorf "Responsive image asset %q dimensions disagree with source: manifest=%dx%d source=%dx%d" $canonicalID $declaredWidth $declaredHeight $resource.Width $resource.Height -}}
+        {{- end -}}
+
+        {{- $result = merge $result (dict
+          "managed" true
+          "id" $canonicalID
+          "resource" $resource
+          "entry" $entry
+          "hash_prefix" (substr $sha 0 12)
+          "width" $resource.Width
+          "height" $resource.Height
+        ) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $namespaceRef := strings.TrimPrefix "/" $lookupRef -}}
+      {{- $managedNamespace := or
+        (hasPrefix $namespaceRef "images/originals/")
+        (hasPrefix $namespaceRef "images/editorial/")
+        (hasPrefix $namespaceRef "images/essays/")
+      -}}
+      {{- $managedID := or
+        (hasPrefix $lookupRef "editorial/")
+        (hasPrefix $lookupRef "essays/")
+        (hasPrefix $lookupRef "medium/")
+      -}}
+      {{- if or $explicitManaged $managedNamespace $managedID -}}
+        {{- errorf "Managed responsive image reference %q is not declared in data/image-assets.json" $rawRef -}}
+      {{- else -}}
+        {{- $fallbackURL := $rawRef -}}
+        {{- $fallbackAbsoluteURL := "" -}}
+        {{- $fallbackWidth := 0 -}}
+        {{- $fallbackHeight := 0 -}}
+        {{- $pageResource := false -}}
+        {{- with $page -}}
+          {{- $pageResource = .Resources.GetMatch $rawRef -}}
+        {{- end -}}
+
+        {{- with $pageResource -}}
+          {{- $fallbackURL = .RelPermalink -}}
+          {{- $fallbackAbsoluteURL = .Permalink -}}
+          {{- if eq .MediaType.MainType "image" -}}
+            {{- $fallbackWidth = .Width -}}
+            {{- $fallbackHeight = .Height -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $fallbackURL = $rawRef | relURL -}}
+          {{- $fallbackAbsoluteURL = strings.TrimPrefix "/" $rawRef | absURL -}}
+          {{- $staticPath := printf "static/%s" (strings.TrimPrefix "/" $rawRef) -}}
+          {{- if and (fileExists $staticPath) (not (strings.HasSuffix (lower $staticPath) ".svg")) -}}
+            {{- with imageConfig $staticPath -}}
+              {{- $fallbackWidth = .Width -}}
+              {{- $fallbackHeight = .Height -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- $result = merge $result (dict
+          "url" $fallbackURL
+          "absolute_url" $fallbackAbsoluteURL
+          "width" $fallbackWidth
+          "height" $fallbackHeight
+          "resource" $pageResource
+        ) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

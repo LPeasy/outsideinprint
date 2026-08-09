@@ -28,6 +28,10 @@ $seoRolloutContractPath = Join-Path $repoRoot "tests/test_seo_rollout_contract.p
 $almanackModuleDataContractPath = Join-Path $repoRoot "tests/test_almanack_module_data.ps1"
 $editorialCartoonScheduleContractPath = Join-Path $repoRoot "tests/test_editorial_cartoon_schedule_contract.ps1"
 $affirmationContractPath = Join-Path $repoRoot "tests/test_affirmation_contract.ps1"
+$responsiveImageSourceContractPath = Join-Path $repoRoot "tests/test_responsive_image_source_contract.ps1"
+$responsiveImageOutputContractPath = Join-Path $repoRoot "tests/test_responsive_image_output_contract.ps1"
+$responsiveImageNodeContractPath = Join-Path $repoRoot "tests/responsive_image_contract.test.mjs"
+$responsiveImageGuidePath = Join-Path $repoRoot "docs/responsive-image-pipeline.md"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
   throw "AGENTS.md is required for repo-local publishing session guidance."
@@ -71,6 +75,10 @@ foreach ($requiredValidationPath in @(
   $seoRolloutContractPath,
   $almanackModuleDataContractPath,
   $editorialCartoonScheduleContractPath,
+  $responsiveImageSourceContractPath,
+  $responsiveImageOutputContractPath,
+  $responsiveImageNodeContractPath,
+  $responsiveImageGuidePath,
   $seoMetadataAuditPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
@@ -93,6 +101,7 @@ $publicOutputHelper = Get-Content -Path $publicOutputHelperPath -Raw
 $publicManifestWriter = Get-Content -Path $publicManifestWriterPath -Raw
 $publicOutputTest = Get-Content -Path $publicOutputTestPath -Raw
 $seoMetadataAudit = Get-Content -Path $seoMetadataAuditPath -Raw
+$responsiveImageOutputContract = Get-Content -Path $responsiveImageOutputContractPath -Raw
 
 function Assert-WorkflowActionReferences {
   param(
@@ -246,11 +255,99 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_hugo_upgrade_contract\.ps1") {
   throw "deploy.yml must run the Hugo upgrade contract test."
 }
 
+if ($deployWorkflow -notmatch 'node --test tests/all\.test\.mjs') {
+  throw "deploy.yml must run the complete Node contract suite through tests/all.test.mjs."
+}
+
+$setupNodeStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -StepName "Setup Node for contract tests"
+if ($setupNodeStep -notmatch '(?m)^\s*uses:\s*actions/setup-node@v6\s*$' -or
+  $setupNodeStep -notmatch '(?m)^\s*node-version:\s*"20\.20\.2"\s*$' -or
+  $setupNodeStep -notmatch '(?m)^\s*package-manager-cache:\s*false\s*$') {
+  throw "deploy.yml must run Node contracts with the pinned Node 20.20.2 runtime and no package-manager cache."
+}
+
+$responsiveImageSourceStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -StepName "Test Responsive Image Source Contract"
+if ($responsiveImageSourceStep -notmatch "\.\/tests\/test_responsive_image_source_contract\.ps1") {
+  throw "deploy.yml must run the responsive-image source contract before building."
+}
+if ($responsiveImageSourceStep -match '(?i)AllowPendingReview') {
+  throw "CI must run the fail-closed responsive-image source contract without -AllowPendingReview."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_responsive_image_output_contract\.ps1\s+-SiteDir\s+public") {
+  throw "deploy.yml must run the responsive-image generated-output contract."
+}
+
+$cacheStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -StepName "Cache Hugo image resources"
+foreach ($requiredCacheSnippet in @(
+  'actions/cache@v5',
+  'path: resources/_gen',
+  'tools/toolchain.manifest.json',
+  'hugo.toml',
+  'data/image-assets.json',
+  'assets/images/originals/**',
+  'layouts/partials/images/**',
+  'layouts/_default/_markup/render-image.html',
+  'layouts/partials/metadata_image.html',
+  'layouts/partials/opengraph.html',
+  'layouts/partials/twitter_cards.html',
+  'layouts/partials/schema/image.html'
+)) {
+  if (-not $cacheStep.Contains($requiredCacheSnippet, [System.StringComparison]::Ordinal)) {
+    throw "Hugo image cache key is missing dependency: $requiredCacheSnippet"
+  }
+}
+if ($cacheStep -match '(?m)^\s*restore-keys:') {
+  throw "Hugo image resources must use an exact content key; broad restore keys can restore stale derivatives."
+}
+
+if ($deployWorkflow -notmatch '(?ms)^\s{2}build:\s*\r?\n.*?^\s{4}timeout-minutes:\s*20\s*$') {
+  throw "The image-generating Hugo build job must have a 20-minute timeout."
+}
+
+$hugoBuildStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -StepName "Build Hugo"
+foreach ($requiredBuildSnippet in @(
+  'hugo --gc --minify --panicOnWarning',
+  'steps.hugo-image-cache.outputs.cache-hit',
+  'limit_seconds=900',
+  'limit_seconds=300'
+)) {
+  if (-not $hugoBuildStep.Contains($requiredBuildSnippet, [System.StringComparison]::Ordinal)) {
+    throw "Build Hugo must enforce cold/restored-cache timing through: $requiredBuildSnippet"
+  }
+}
+
+foreach ($budgetContract in @(
+  @{ Pattern = '(?m)^\$maxArtifactBytes\s*=\s*600MB\s*$'; Name = '600 MiB Pages artifact' },
+  @{ Pattern = '(?m)^\$maxPublicImageBytes\s*=\s*500MB\s*$'; Name = '500 MiB public/images' },
+  @{ Pattern = '(?m)^\$maxDerivativeBytes\s*=\s*1MB\s*$'; Name = '1 MiB derivative' },
+  @{ Pattern = '(?m)^\$maxGeneratedImages\s*=\s*5000\s*$'; Name = '5,000 generated images' },
+  @{ Pattern = '(?m)^\$maxPublicFiles\s*=\s*6500\s*$'; Name = '6,500 public files' }
+)) {
+  if ($responsiveImageOutputContract -notmatch $budgetContract.Pattern) {
+    throw "Responsive-image output contract must enforce the $($budgetContract.Name) budget."
+  }
+}
+
 Assert-WorkflowActionReferences `
   -WorkflowName "deploy.yml" `
   -WorkflowText $deployWorkflow `
   -ExpectedReferences @{
     'actions/checkout@v7' = 3
+    'actions/setup-node@v6' = 1
+    'actions/cache@v5' = 1
     'actions/configure-pages@v6' = 1
     'actions/deploy-pages@v5' = 1
     'actions/upload-artifact@v7' = 2

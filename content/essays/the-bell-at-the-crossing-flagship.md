@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.1"
 edition: "Second web edition"
 featured: false
-featured_image: "/images/essays/the-bell-at-the-crossing-flagship/hero.png"
+featured_image: "essays/the-bell-at-the-crossing-flagship/hero"
 featured_image_alt: "Editorial illustration of a rural railroad crossing at dusk with a crossbuck, gate arm, signal bell, blue emergency sign, and freight cars approaching beyond the road."
 featured_image_caption: "The crossbuck turns a familiar roadside warning into a shared civic machine."
 tags:
@@ -73,7 +73,7 @@ The bell carries that hidden machinery into the road: detection circuits, signal
 
 At the pavement, all of that work becomes one human requirement: stop before steel arrives.
 
-![Editorial illustration of a signal cabinet opened beside a crossing, showing wires, inspection tags, warning lights, and a small federal inventory card.](/images/essays/the-bell-at-the-crossing-flagship/section-1.png)
+![Editorial illustration of a signal cabinet opened beside a crossing, showing wires, inspection tags, warning lights, and a small federal inventory card.](oip-image:essays/the-bell-at-the-crossing-flagship/section-1)
 
 *The warning at the road depends on records, circuits, maintenance, and a dispatch path.*
 
@@ -223,7 +223,7 @@ It sounds before the train because responsibility has to arrive before impact. T
 
 There is a kind of civic humility in that scene. The country cannot make a train brake like a sedan. It cannot make every driver patient. It cannot make every local budget generous. It can keep a public inventory. It can require a readable sign. It can maintain circuits and gates. It can fund upgrades. It can close dangerous crossings when the record supports closure. It can refuse to treat a familiar warning as proof that the warning is adequate.
 
-![Editorial illustration of a lowered crossing gate reflected in a windshield, with stopped cars, a school bus silhouette, and a freight train passing through yellow warning light.](/images/essays/the-bell-at-the-crossing-flagship/section-2.png)
+![Editorial illustration of a lowered crossing gate reflected in a windshield, with stopped cars, a school bus silhouette, and a freight train passing through yellow warning light.](oip-image:essays/the-bell-at-the-crossing-flagship/section-2)
 
 *The familiar stop becomes serious when a road, a rail line, and a public record converge.*
 

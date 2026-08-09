@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/whose-yes/hero.png"
+featured_image: "editorial/whose-yes"
 featured_image_alt: "Editorial cartoon showing a person holding a rose-gold YES card between a FOR THEM door with someone waiting at a table and a FOR ME door with a mirror, applause marks, and a spotlight."
 featured_image_caption: "A yes can serve love, or serve the self."
 collections:
@@ -33,7 +33,7 @@ The [Bureau of Labor Statistics](https://www.bls.gov/news.release/atus.nr0.htm) 
 
 Those facts don't settle the spiritual question, but they guard against fantasy. A day has walls, and a promise has to live inside them.
 
-![An infographic showing a yes decision flow from asked to pause, with image leading to reconsider and love leading to promise honestly.](/images/essays/whose-yes/section-1.png)
+![An infographic showing a yes decision flow from asked to pause, with image leading to reconsider and love leading to promise honestly.](oip-image:essays/whose-yes/section-1)
 
 *The honest yes starts by asking whom it serves.*
 

@@ -50,7 +50,7 @@
       {{ $plateImageCaption = $.Params.featured_image_caption | default "" }}
     {{ end }}
   {{ end }}
-  {{ $plateImageSrc := $plateImage }}
+  {{ $plateImageModel := false }}
   {{ $plateImageWidth := 0 }}
   {{ $plateImageHeight := 0 }}
   {{ $plateClasses := slice "piece-media-plate" "piece-media-plate--side" }}
@@ -59,17 +59,14 @@
   {{ else }}
     {{ $plateClasses = $plateClasses | append "piece-hero" }}
   {{ end }}
-  {{ if and $plateImage (not (or (hasPrefix $plateImage "http://") (hasPrefix $plateImage "https://"))) }}
-    {{ $plateImageSrc = $plateImage | absURL }}
-    {{ $staticPlateImagePath := printf "static/%s" (strings.TrimPrefix "/" $plateImage) }}
-    {{ if and (fileExists $staticPlateImagePath) (not (strings.HasSuffix (lower $staticPlateImagePath) ".svg")) }}
-      {{ with imageConfig $staticPlateImagePath }}
-        {{ if and .Width .Height }}
-          {{ $plateImageWidth = .Width }}
-          {{ $plateImageHeight = .Height }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
+  {{ if $plateImage }}
+    {{ $plateImageModel = partial "images/model.html" (dict
+      "page" .
+      "ref" $plateImage
+      "display" true
+    ) }}
+    {{ $plateImageWidth = $plateImageModel.lightbox_width }}
+    {{ $plateImageHeight = $plateImageModel.lightbox_height }}
   {{ end }}
   {{ $headerClasses := slice "piece-header" "piece-header--calm" }}
   {{ if $plateImage }}
@@ -110,18 +107,20 @@
               data-article-plate-lightbox-trigger
               data-title="{{ .Title }}"
               data-caption="{{ $plateImageCaption }}"
-              data-image="{{ $plateImageSrc }}"
+              data-image="{{ $plateImageModel.lightbox_url }}"
               data-alt="{{ $plateImageAlt }}"
               {{ if gt $plateImageWidth 0 }}data-width="{{ $plateImageWidth }}"{{ end }}
               {{ if gt $plateImageHeight 0 }}data-height="{{ $plateImageHeight }}"{{ end }}
               aria-label="Open image fullscreen: {{ .Title }}"
             >
-              <img
-                src="{{ $plateImageSrc }}"
-                alt="{{ $plateImageAlt }}"
-                {{ if gt $plateImageWidth 0 }}width="{{ $plateImageWidth }}"{{ end }}
-                {{ if gt $plateImageHeight 0 }}height="{{ $plateImageHeight }}"{{ end }}
-              >
+              {{ partial "images/picture.html" (dict
+                "model" $plateImageModel
+                "alt" $plateImageAlt
+                "loading" "eager"
+                "fetchpriority" "high"
+                "sizes" "(min-width: 72rem) 30rem, (min-width: 48rem) 42vw, 100vw"
+                "lightbox" true
+              ) }}
             </button>
             {{ with $plateImageCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
           </figure>
