@@ -316,7 +316,7 @@ $deepCategoryCounts['deterministic_minimum_fill'] = @($deepReviewSelection | Whe
 
 $report = [ordered]@{
   schema_version = '1.0'
-  manifest_sha256 = (Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash.ToLowerInvariant()
+  manifest_sha256 = Get-OipCanonicalTextFileSha256 -Path $manifestPath -Label 'Image asset manifest' -RequireCanonical
   canonical_asset_count = $rows.Count
   candidate_count = $candidates.Count
   minimum_candidate_count = $MinimumCandidates
@@ -340,8 +340,7 @@ if (-not [string]::IsNullOrWhiteSpace($OutputPath)) {
   if (-not (Test-Path -LiteralPath $directory -PathType Container)) {
     New-Item -Path $directory -ItemType Directory -Force | Out-Null
   }
-  $json = $report | ConvertTo-Json -Depth 12
-  [System.IO.File]::WriteAllText($resolvedOutput, $json + "`n", [System.Text.UTF8Encoding]::new($false))
+  Write-OipCanonicalJsonFile -Path $resolvedOutput -Value $report -Depth 12
   Write-Host "Review candidate report: $resolvedOutput"
 }
 

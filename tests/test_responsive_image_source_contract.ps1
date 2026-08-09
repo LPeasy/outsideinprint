@@ -41,6 +41,90 @@ $rootPath = [System.IO.Path]::GetFullPath($Root)
 $manifestPath = Join-Path $rootPath 'data/image-assets.json'
 $assetsRoot = Join-Path $rootPath 'assets'
 $staticRoot = Join-Path $rootPath 'static'
+$canonicalFixtureRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('oip-responsive-image-canonical-json-' + [guid]::NewGuid().ToString('N'))
+$canonicalUtf8 = [System.Text.UTF8Encoding]::new($false)
+New-Item -Path $canonicalFixtureRoot -ItemType Directory | Out-Null
+try {
+  $canonicalProbe = '{"probe":1}' + "`n"
+  $canonicalProbeHash = '4bf48a3727db0ecd342ba1fbfe17331e958a4a0cbee43b9b749a5edef916c1be'
+  $lfPath = Join-Path $canonicalFixtureRoot 'lf.json'
+  $crlfPath = Join-Path $canonicalFixtureRoot 'crlf.json'
+  $loneCrPath = Join-Path $canonicalFixtureRoot 'lone-cr.json'
+  $missingFinalLfPath = Join-Path $canonicalFixtureRoot 'missing-final-lf.json'
+  $doubleFinalLfPath = Join-Path $canonicalFixtureRoot 'double-final-lf.json'
+  $bomPath = Join-Path $canonicalFixtureRoot 'bom.json'
+  $invalidUtf8Path = Join-Path $canonicalFixtureRoot 'invalid-utf8.json'
+  $writerPath = Join-Path $canonicalFixtureRoot 'writer.json'
+
+  [System.IO.File]::WriteAllBytes($lfPath, $canonicalUtf8.GetBytes($canonicalProbe))
+  [System.IO.File]::WriteAllBytes($crlfPath, $canonicalUtf8.GetBytes($canonicalProbe.Replace("`n", "`r`n")))
+  [System.IO.File]::WriteAllBytes($loneCrPath, $canonicalUtf8.GetBytes($canonicalProbe.Replace("`n", "`r")))
+  [System.IO.File]::WriteAllBytes($missingFinalLfPath, $canonicalUtf8.GetBytes($canonicalProbe.TrimEnd("`n")))
+  [System.IO.File]::WriteAllBytes($doubleFinalLfPath, $canonicalUtf8.GetBytes($canonicalProbe + "`n"))
+  [System.IO.File]::WriteAllBytes($bomPath, [byte[]](0xef, 0xbb, 0xbf) + $canonicalUtf8.GetBytes($canonicalProbe))
+  [System.IO.File]::WriteAllBytes($invalidUtf8Path, [byte[]](0xc3, 0x28))
+
+  Assert-Equal -Actual (Get-OipCanonicalTextFileSha256 -Path $lfPath -Label 'LF fixture' -RequireCanonical) -Expected $canonicalProbeHash -Message 'Canonical JSON known digest changed.'
+  Assert-Equal -Actual (Get-OipCanonicalTextFileSha256 -Path $crlfPath -Label 'CRLF fixture') -Expected $canonicalProbeHash -Message 'LF and CRLF canonical hashes differ.'
+
+  foreach ($nonCanonicalFixture in @($crlfPath, $loneCrPath, $missingFinalLfPath, $doubleFinalLfPath)) {
+    $rejected = $false
+    try {
+      Get-OipCanonicalTextFileSha256 -Path $nonCanonicalFixture -Label 'Noncanonical fixture' -RequireCanonical | Out-Null
+    }
+    catch {
+      $rejected = $true
+    }
+    if (-not $rejected) {
+      throw "Canonical JSON validation accepted noncanonical line endings or final newline state: $nonCanonicalFixture"
+    }
+  }
+
+  foreach ($invalidFixture in @($bomPath, $invalidUtf8Path)) {
+    $rejected = $false
+    try {
+      Get-OipCanonicalTextFileSha256 -Path $invalidFixture -Label 'Invalid UTF-8 fixture' | Out-Null
+    }
+    catch {
+      $rejected = $true
+    }
+    if (-not $rejected) {
+      throw "Canonical JSON validation accepted BOM-prefixed or invalid UTF-8 input: $invalidFixture"
+    }
+  }
+
+  Write-OipCanonicalJsonFile -Path $writerPath -Value ([ordered]@{ probe = 1 }) -Depth 4
+  $writerText = Read-OipStrictUtf8Text -Path $writerPath -Label 'Canonical JSON writer fixture'
+  if ($writerText.Contains("`r", [System.StringComparison]::Ordinal) -or
+      -not $writerText.EndsWith("`n", [System.StringComparison]::Ordinal) -or
+      $writerText.EndsWith("`n`n", [System.StringComparison]::Ordinal)) {
+    throw 'Canonical JSON writer did not emit strict UTF-8/no-BOM/LF with exactly one final LF.'
+  }
+  Get-OipCanonicalTextFileSha256 -Path $writerPath -Label 'Canonical JSON writer fixture' -RequireCanonical | Out-Null
+}
+finally {
+  if (Test-Path -LiteralPath $canonicalFixtureRoot -PathType Container) {
+    Remove-Item -LiteralPath $canonicalFixtureRoot -Recurse -Force
+  }
+}
+
+$gitattributesPath = Join-Path $rootPath '.gitattributes'
+if (-not (Test-Path -LiteralPath $gitattributesPath -PathType Leaf)) {
+  throw 'Missing .gitattributes controls for canonical responsive-image JSON.'
+}
+$gitattributes = [System.IO.File]::ReadAllText($gitattributesPath, [System.Text.Encoding]::UTF8)
+foreach ($requiredAttribute in @(
+  '/data/image-assets.json text eol=lf',
+  '/reports/image-review-candidates.json text eol=lf',
+  '/reports/image-visual-review.json text eol=lf',
+  '/reports/responsive-image-build-evidence.json text eol=lf'
+)) {
+  if ($gitattributes -notmatch ('(?m)^' + [regex]::Escape($requiredAttribute) + '$')) {
+    throw "Missing canonical LF attribute: $requiredAttribute"
+  }
+}
+
+$manifestCanonicalSha256 = Get-OipCanonicalTextFileSha256 -Path $manifestPath -Label 'Image asset manifest' -RequireCanonical
 $manifest = Get-OipImageManifest -Path $manifestPath
 
 Assert-ExactProperties -Value $manifest -Expected @('schema_version','defaults','assets','aliases') -Context 'Manifest root'
@@ -564,6 +648,7 @@ $reviewReportPath = Join-Path $rootPath 'reports/image-review-candidates.json'
 if (-not (Test-Path -LiteralPath $reviewReportPath -PathType Leaf)) {
   throw "Missing deterministic high-risk image review report: $reviewReportPath"
 }
+$reviewReportCanonicalSha256 = Get-OipCanonicalTextFileSha256 -Path $reviewReportPath -Label 'Image review candidate report' -RequireCanonical
 $reviewReport = Get-Content -LiteralPath $reviewReportPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 20
 Assert-ExactProperties -Value $reviewReport -Expected @(
   'schema_version',
@@ -580,7 +665,7 @@ Assert-ExactProperties -Value $reviewReport -Expected @(
   'deep_review_selection'
 ) -Context 'Image review report root'
 Assert-Equal -Actual ([string]$reviewReport.schema_version) -Expected '1.0' -Message 'Image review report schema changed.'
-Assert-Equal -Actual ([string]$reviewReport.manifest_sha256) -Expected (Get-OipSha256 -Path $manifestPath) -Message 'Image review report is stale relative to the manifest.'
+Assert-Equal -Actual ([string]$reviewReport.manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Image review report is stale relative to the canonical manifest.'
 Assert-Equal -Actual ([int]$reviewReport.canonical_asset_count) -Expected $assetIds.Count -Message 'Image review report canonical count is stale.'
 $reviewCandidates = @($reviewReport.candidates)
 $deepReviewSelection = @($reviewReport.deep_review_selection)
@@ -634,6 +719,21 @@ foreach ($requiredCategory in @('fine_text','crosshatching','faces_or_photos','d
     throw "Deep-review selection does not cover required high-risk category: $requiredCategory"
   }
 }
+
+$visualReviewPath = Join-Path $rootPath 'reports/image-visual-review.json'
+Get-OipCanonicalTextFileSha256 -Path $visualReviewPath -Label 'Image visual review evidence' -RequireCanonical | Out-Null
+$visualReview = Get-Content -LiteralPath $visualReviewPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 20
+Assert-Equal -Actual ([string]$visualReview.manifest_sha256_before_review_basis) -Expected 'historical_windows_worktree_bytes' -Message 'Historical pre-review manifest hash basis changed.'
+Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Current manifest hash basis changed.'
+Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Candidate report hash basis changed.'
+Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review) -Expected $manifestCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical manifest.'
+Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256) -Expected $reviewReportCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical candidate report.'
+
+$buildEvidencePath = Join-Path $rootPath 'reports/responsive-image-build-evidence.json'
+Get-OipCanonicalTextFileSha256 -Path $buildEvidencePath -Label 'Responsive image build evidence' -RequireCanonical | Out-Null
+$buildEvidence = Get-Content -LiteralPath $buildEvidencePath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 20
+Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Responsive image build evidence hash basis changed.'
+Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Responsive image build evidence is stale relative to the canonical manifest.'
 
 if (-not $AllowPendingReview -and $pendingReviewIds.Count -gt 0) {
   $sample = @($pendingReviewIds | Select-Object -First 12)

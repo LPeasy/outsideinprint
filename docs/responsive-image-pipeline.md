@@ -20,6 +20,8 @@ One malformed supplemental legacy JPG is quarantined as `processing_state: sourc
 Aliases are resolver inputs, not redirects. Retired raw PNG/JPEG URLs are allowed to return 404. An alias must resolve directly to a canonical asset and must not create a second source copy.
 The 350-source and 391-alias counts are frozen R1 controls. Future registered artwork requires a deliberate manifest and contract update; unexplained count drift fails validation.
 
+The manifest and its three tracked review/build evidence files use one cross-platform byte contract: strict UTF-8 without a byte-order mark, LF line endings, and exactly one final LF. Current manifest-linkage SHA-256 values are computed from those canonical bytes; the visual-review report's `manifest_sha256_before_review` remains a historical pre-approval value and is not reinterpreted by this contract. The shared writer normalizes output before an atomic replacement, `.gitattributes` preserves LF checkouts, and the source contract rejects BOMs, invalid UTF-8, CRLF/lone-CR bytes, or an incorrect final-newline state. Binary artwork hashes remain raw file-byte hashes and are never text-normalized.
+
 ## Authoring references
 
 Use logical references instead of source paths:

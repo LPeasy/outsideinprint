@@ -22,6 +22,98 @@ function Get-OipImageAssetManifestPath {
   return Join-Path $Root 'data\image-assets.json'
 }
 
+function ConvertTo-OipCanonicalText {
+  param([AllowEmptyString()][string]$Text)
+
+  $normalized = $Text.Replace("`r`n", "`n").Replace("`r", "`n")
+  $normalized = $normalized.TrimEnd([char[]]@([char]10))
+  return $normalized + "`n"
+}
+
+function Read-OipStrictUtf8Text {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [string]$Label = 'Text file'
+  )
+
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    throw "$Label is not a file: $Path"
+  }
+
+  $bytes = [System.IO.File]::ReadAllBytes($Path)
+  if (
+    $bytes.Length -ge 3 -and
+    $bytes[0] -eq 0xef -and $bytes[1] -eq 0xbb -and $bytes[2] -eq 0xbf
+  ) {
+    throw "$Label must use UTF-8 without a byte-order mark: $Path"
+  }
+
+  $strictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
+  try {
+    return $strictUtf8.GetString($bytes)
+  }
+  catch {
+    throw "$Label is not valid UTF-8: $Path"
+  }
+}
+
+function Get-OipSha256ForBytes {
+  param([Parameter(Mandatory = $true)][byte[]]$Bytes)
+
+  $sha256 = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    $digest = $sha256.ComputeHash($Bytes)
+  }
+  finally {
+    $sha256.Dispose()
+  }
+  return [System.BitConverter]::ToString($digest).Replace('-', '').ToLowerInvariant()
+}
+
+function Get-OipCanonicalTextFileSha256 {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [string]$Label = 'Text file',
+    [switch]$RequireCanonical
+  )
+
+  $text = Read-OipStrictUtf8Text -Path $Path -Label $Label
+  $canonicalText = ConvertTo-OipCanonicalText -Text $text
+  if ($RequireCanonical -and $text -cne $canonicalText) {
+    throw "$Label must use LF line endings and exactly one final LF: $Path"
+  }
+
+  $encoding = [System.Text.UTF8Encoding]::new($false)
+  return Get-OipSha256ForBytes -Bytes ($encoding.GetBytes($canonicalText))
+}
+
+function Write-OipCanonicalJsonFile {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [Parameter(Mandatory = $true)][object]$Value,
+    [ValidateRange(2, 100)][int]$Depth = 12
+  )
+
+  $directory = Split-Path -Parent $Path
+  if (-not (Test-Path -LiteralPath $directory -PathType Container)) {
+    New-Item -Path $directory -ItemType Directory -Force | Out-Null
+  }
+
+  $json = $Value | ConvertTo-Json -Depth $Depth
+  $canonicalText = ConvertTo-OipCanonicalText -Text $json
+  $tempPath = Join-Path $directory ('.canonical-json.' + [guid]::NewGuid().ToString('N') + '.tmp')
+  $encoding = [System.Text.UTF8Encoding]::new($false)
+  try {
+    [System.IO.File]::WriteAllText($tempPath, $canonicalText, $encoding)
+    [System.IO.File]::Move($tempPath, $Path, $true)
+  }
+  finally {
+    if (Test-Path -LiteralPath $tempPath -PathType Leaf) {
+      Remove-Item -LiteralPath $tempPath -Force
+    }
+  }
+}
+
 function Test-OipImageAssetId {
   param([string]$Id)
 
@@ -457,23 +549,7 @@ function Write-OipImageAssetManifest {
   }
 
   $path = Get-OipImageAssetManifestPath -Root $Root
-  $directory = Split-Path -Parent $path
-  if (-not (Test-Path -LiteralPath $directory -PathType Container)) {
-    New-Item -Path $directory -ItemType Directory -Force | Out-Null
-  }
-
-  $tempPath = Join-Path $directory ('.image-assets.' + [guid]::NewGuid().ToString('N') + '.tmp')
-  $encoding = [System.Text.UTF8Encoding]::new($false)
-  try {
-    $json = $orderedManifest | ConvertTo-Json -Depth 12
-    [System.IO.File]::WriteAllText($tempPath, $json + "`n", $encoding)
-    [System.IO.File]::Move($tempPath, $path, $true)
-  }
-  finally {
-    if (Test-Path -LiteralPath $tempPath -PathType Leaf) {
-      Remove-Item -LiteralPath $tempPath -Force
-    }
-  }
+  Write-OipCanonicalJsonFile -Path $path -Value $orderedManifest -Depth 12
 }
 
 function Get-OipImageNativeDimensions {
