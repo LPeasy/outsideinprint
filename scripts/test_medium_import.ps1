@@ -7,15 +7,15 @@ if (-not (Test-Path $fixtureSource)) {
 }
 
 function Get-TestPowerShellExecutable {
-  $wrapper = Join-Path $repo "tools/bin/generated/pwsh.cmd"
   $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
-  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
-    return $wrapper
-  }
-
   $currentProcess = Get-Process -Id $PID
   if ($currentProcess.Path -and (Test-Path -LiteralPath $currentProcess.Path -PathType Leaf) -and ([System.IO.Path]::GetFileNameWithoutExtension($currentProcess.Path) -ieq 'pwsh')) {
     return $currentProcess.Path
+  }
+
+  $wrapper = Join-Path $repo "tools/bin/generated/pwsh.cmd"
+  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
+    return $wrapper
   }
 
   $command = Get-Command pwsh -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -27,10 +27,21 @@ function Get-TestPowerShellExecutable {
 }
 
 function Get-TestPythonExecutable {
-  $wrapper = Join-Path $repo "tools/bin/generated/python.cmd"
   $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
-  if ($isWindowsHost -and (Test-Path -LiteralPath $wrapper -PathType Leaf)) {
-    return $wrapper
+  if ($isWindowsHost) {
+    $bundledPython = @(
+      Get-ChildItem -LiteralPath (Join-Path $repo 'tools/vendor') -Directory -Filter 'python-*' -ErrorAction SilentlyContinue |
+        ForEach-Object { Join-Path $_.FullName 'python.exe' } |
+        Where-Object { Test-Path -LiteralPath $_ -PathType Leaf }
+    )
+    if ($bundledPython.Count -eq 1) {
+      return $bundledPython[0]
+    }
+
+    $wrapper = Join-Path $repo "tools/bin/generated/python.cmd"
+    if (Test-Path -LiteralPath $wrapper -PathType Leaf) {
+      return $wrapper
+    }
   }
 
   foreach ($name in @('python3', 'python')) {
@@ -56,7 +67,13 @@ try {
 
   $mediaRoot = Join-Path $tempRoot "fixture-media"
   New-Item -ItemType Directory -Force -Path $mediaRoot | Out-Null
-  [System.IO.File]::WriteAllBytes((Join-Path $mediaRoot "fixture.jpeg"), [byte[]](0xff, 0xd8, 0xff, 0xd9))
+  $fixtureImageSource = Join-Path $repo 'assets/images/originals/essays/biter-the-slang-word-that-hits/hero-cassette.jpg'
+  if (-not (Test-Path -LiteralPath $fixtureImageSource -PathType Leaf)) {
+    throw "Managed JPEG fixture source missing: $fixtureImageSource"
+  }
+  $fixtureImagePath = Join-Path $mediaRoot 'fixture.jpeg'
+  Copy-Item -LiteralPath $fixtureImageSource -Destination $fixtureImagePath
+  $fixtureImageHash = (Get-FileHash -LiteralPath $fixtureImagePath -Algorithm SHA256).Hash.ToLowerInvariant()
 
   $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Parse("127.0.0.1"), 0)
   $listener.Start()
@@ -100,7 +117,7 @@ try {
   Compress-Archive -Path (Join-Path $fixtureWork "*") -DestinationPath $zipPath -Force
 
   $contentOut = Join-Path $tempRoot "content/essays"
-  $mediaOut = Join-Path $tempRoot "static/images/medium"
+  $mediaOut = Join-Path $tempRoot "assets/images/originals/medium"
   $reportsDir = Join-Path $tempRoot "reports"
   New-Item -ItemType Directory -Force -Path $contentOut,$mediaOut,$reportsDir | Out-Null
 
@@ -109,6 +126,7 @@ try {
 
   & $pwsh -NoLogo -NoProfile -File (Join-Path $repo "scripts/import_medium_export.ps1") `
     -ZipPath $zipPath `
+    -Root $tempRoot `
     -ContentOut $contentOut `
     -MediaOut $mediaOut `
     -ReportOut $reportDry `
@@ -122,6 +140,7 @@ try {
   $reportWrite = Join-Path $reportsDir "write.json"
   & $pwsh -NoLogo -NoProfile -File (Join-Path $repo "scripts/import_medium_export.ps1") `
     -ZipPath $zipPath `
+    -Root $tempRoot `
     -ContentOut $contentOut `
     -MediaOut $mediaOut `
     -ReportOut $reportWrite `
@@ -137,6 +156,38 @@ try {
   if ($subtitleImport -notmatch '(?m)^description: "Subtitle line ~ keep exact"$') {
     throw "Expected imported subtitle fixture to preserve the subtitle as description front matter."
   }
+  if ($subtitleImport -notmatch [regex]::Escape("oip-image:medium/$fixtureImageHash")) {
+    throw "Expected imported image to use its registered medium/<sha256> asset ID."
+  }
+
+  $managedSource = Join-Path $mediaOut "$fixtureImageHash.jpeg"
+  if (-not (Test-Path -LiteralPath $managedSource -PathType Leaf)) {
+    throw "Expected one canonical managed Medium source: $managedSource"
+  }
+  if (Test-Path -LiteralPath (Join-Path $tempRoot 'static/images/medium')) {
+    throw 'Medium import wrote a duplicate image beneath static/images/medium.'
+  }
+
+  $manifestPath = Join-Path $tempRoot 'data/image-assets.json'
+  if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
+    throw 'Medium import did not write the managed image manifest.'
+  }
+  $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json -AsHashtable -Depth 20
+  $assetId = "medium/$fixtureImageHash"
+  if (-not $manifest.assets.ContainsKey($assetId)) {
+    throw "Medium import did not register $assetId."
+  }
+  $asset = $manifest.assets[$assetId]
+  if ([string]$asset.source -ne "images/originals/medium/$fixtureImageHash.jpeg") {
+    throw "Medium import registered an unexpected canonical source: $($asset.source)"
+  }
+  if ([string]$asset.image_class -ne 'medium_import' -or [string]$asset.processing_state -ne 'derivative_capable') {
+    throw 'Medium import registered invalid image class or processing state.'
+  }
+  $legacyAlias = "/images/medium/essay-with-subtitle-and-image/$fixtureImageHash.jpeg"
+  if (-not $manifest.aliases.ContainsKey($legacyAlias) -or [string]$manifest.aliases[$legacyAlias] -ne $assetId) {
+    throw "Medium import did not preserve the expected legacy URL alias: $legacyAlias"
+  }
 
   $longImport = Get-Content (Join-Path $contentOut "long-essay-for-import.md") -Raw
   if ($longImport -notmatch '(?m)^description: "This is a longform sentence for migration testing with stable meaning and preserved tilde ~ punctuation') {
@@ -145,8 +196,20 @@ try {
 
   Write-Host "Fixture migration tests passed." -ForegroundColor Green
 }
+catch {
+  Write-Host ("Medium import fixture failed: {0}" -f $_.Exception.ToString()) -ForegroundColor Red
+  throw
+}
 finally {
   if ($null -ne $serverProcess -and -not $serverProcess.HasExited) {
     Stop-Process -Id $serverProcess.Id -Force -ErrorAction SilentlyContinue
+  }
+  if (Test-Path -LiteralPath $tempRoot) {
+    $resolvedTempRoot = [System.IO.Path]::GetFullPath($tempRoot)
+    $resolvedSystemTemp = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath())
+    if (-not $resolvedTempRoot.StartsWith($resolvedSystemTemp, [System.StringComparison]::OrdinalIgnoreCase)) {
+      throw "Refusing to remove Medium-import fixture outside the system temp root: $resolvedTempRoot"
+    }
+    Remove-Item -LiteralPath $resolvedTempRoot -Recurse -Force
   }
 }

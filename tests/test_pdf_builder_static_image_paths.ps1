@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $sharedScript = Join-Path $repoRoot "scripts/build_pdfs_typst_shared.ps1"
+. (Join-Path $repoRoot 'scripts/lib/image_asset_manifest.ps1')
 
 function Assert-True {
   param([bool]$Condition,[string]$Message)
@@ -95,6 +96,7 @@ try {
   $contentDir = Join-Path $testRoot "content/essays"
   $tempDir = Join-Path $testRoot "resources/typst_build"
   New-Item -ItemType Directory -Force -Path $staticImageDir, $contentDir, $tempDir | Out-Null
+  Write-OipImageAssetManifest -Root $testRoot -Manifest (New-OipImageAssetManifest)
   "fixture image" | Set-Content -Path (Join-Path $staticImageDir "fixture.jpg") -Encoding UTF8
 
   $bodyPath = Join-Path $tempDir "fixture.body.typ"

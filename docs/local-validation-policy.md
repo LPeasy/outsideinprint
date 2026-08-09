@@ -13,11 +13,19 @@ This is intentional. The local Windows/Codex environment has repeatedly produced
 Use this gate before publishing public-site content:
 
 ```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1
 .\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public
 ```
+
+The responsive-image source gate validates the canonical manifest, source hashes,
+dimensions, aliases, and review state before Hugo runs. The output gate validates
+generated formats, responsive markup, no-upscale behavior, source exclusion, and
+the Pages/image/file-count budgets. Full details live in
+[`docs/responsive-image-pipeline.md`](responsive-image-pipeline.md).
 
 For changed essays, run the direct PowerShell guardrail before the full build:
 

@@ -7,8 +7,10 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+$Root = (Resolve-Path -LiteralPath $Root).Path
 
 . (Join-Path $PSScriptRoot 'png_integrity.ps1')
+. (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 
 function Get-FrontMatterAndBody {
   param([string]$Path)
@@ -61,13 +63,18 @@ function Get-LocalImageReferences {
     }
   }
 
-  foreach ($match in [regex]::Matches($Body, '!\[[^\]]*\]\((/images/[^)\s]+)', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
-    $refs.Add($match.Groups[1].Value)
+  foreach ($match in [regex]::Matches($Body, '!\[[^\]]*\]\((?<url><[^>]+>|[^)\s]+)', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+    $url = $match.Groups['url'].Value.Trim('<', '>')
+    if ($url -match '^/images/' -or $url -match '^oip-image:' -or $url -match '^(editorial|essays|medium)/') {
+      $refs.Add($url)
+    }
   }
 
   foreach ($match in [regex]::Matches($Body, '<img[^>]+src=(?:"([^"]+)"|''([^'']+)''|([^\s>]+))', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
     $src = ($match.Groups[1].Value + $match.Groups[2].Value + $match.Groups[3].Value).Trim()
-    if ($src.StartsWith('/images/', [System.StringComparison]::OrdinalIgnoreCase)) {
+    if ($src.StartsWith('/images/', [System.StringComparison]::OrdinalIgnoreCase) -or
+        $src.StartsWith('oip-image:', [System.StringComparison]::OrdinalIgnoreCase) -or
+        $src -match '^(editorial|essays|medium)/') {
       $refs.Add($src)
     }
   }
@@ -89,13 +96,26 @@ function Test-ImageExempt {
   return $FrontMatter.ContainsKey('image_exempt_reason') -and -not [string]::IsNullOrWhiteSpace([string]$FrontMatter['image_exempt_reason'])
 }
 
-function Resolve-StaticImagePath {
+function Resolve-LocalImagePath {
   param(
     [string]$Root,
     [string]$ImageRef
   )
 
-  $relative = $ImageRef.Trim()
+  $reference = $ImageRef.Trim()
+  $manifestPath = Get-OipImageAssetManifestPath -Root $Root
+  if (Test-Path -LiteralPath $manifestPath -PathType Leaf) {
+    $managed = Resolve-OipImageAsset -Root $Root -Reference $reference
+    if ($null -ne $managed) {
+      return $managed.Path
+    }
+  }
+
+  if ($reference -match '^oip-image:' -or $reference -match '^(editorial|essays|medium)/') {
+    return Join-Path $Root ('__missing_managed_image__\' + ($reference -replace '[:/]', '_'))
+  }
+
+  $relative = $reference
   if ($relative.StartsWith('/')) {
     $relative = $relative.Substring(1)
   }
@@ -150,7 +170,7 @@ foreach ($file in $essayFiles) {
   }
 
   foreach ($imageRef in $localRefs) {
-    $staticPath = Resolve-StaticImagePath -Root $Root -ImageRef $imageRef
+    $staticPath = Resolve-LocalImagePath -Root $Root -ImageRef $imageRef
     if ($null -eq $staticPath) {
       continue
     }

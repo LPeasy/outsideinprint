@@ -83,7 +83,7 @@ The five-bullet-point email was simply the first real test, a way to apply the s
 
 ## The Five-Bullet Email: A Performance Check or a Compliance Test?
 
-![Photo by charlesdeluvio on Unsplash](/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731.jpeg)
+![Photo by charlesdeluvio on Unsplash](oip-image:medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731)
 
 *Photo by charlesdeluvio on Unsplash*
 

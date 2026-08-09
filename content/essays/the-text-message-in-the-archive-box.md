@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-text-message-in-the-archive-box/hero.png"
+featured_image: "essays/the-text-message-in-the-archive-box/hero"
 featured_image_alt: "Editorial illustration of a glowing phone message moving into an archival records box under a court-order light."
 featured_image_caption: "The private channel enters the public file."
 collections:
@@ -53,7 +53,7 @@ Judge Bates's [54-page opinion](https://www.citizensforethics.org/wp-content/upl
 
 The phone message sits inside those categories. A public decision can now be born on a private device. The act of preservation has to move with the medium.
 
-![Editorial illustration of a private phone message passing through a courthouse scanner into a labeled archival storage system, with no readable text.](/images/essays/the-text-message-in-the-archive-box/section-1.png)
+![Editorial illustration of a private phone message passing through a courthouse scanner into a labeled archival storage system, with no readable text.](oip-image:essays/the-text-message-in-the-archive-box/section-1)
 
 *A private channel can become a public record only if the route is built before the message disappears.*
 
@@ -107,6 +107,6 @@ For now, the country has a smaller instruction with wider meaning. If official p
 
 The phone may be private. The office is not.
 
-![Editorial illustration of a future archive reading room where sealed records boxes, phone silhouettes, and court papers converge under a restrained institutional light.](/images/essays/the-text-message-in-the-archive-box/section-2.png)
+![Editorial illustration of a future archive reading room where sealed records boxes, phone silhouettes, and court papers converge under a restrained institutional light.](oip-image:essays/the-text-message-in-the-archive-box/section-2)
 
 *The public may wait years for the file, but the file has to survive the day it is made.*

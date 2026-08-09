@@ -1,5 +1,5 @@
 ---
-featured_image: "/images/essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill/hero.png"
+featured_image: "essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill/hero"
 featured_image_alt: "Abstract archival portrait-style hero image for George Foreman: How a Heavyweight Champion Turned Reinvention into His Greatest Skill."
 featured_image_caption: "Replacement hero image for the legacy web edition."
 title: "George Foreman: How a Heavyweight Champion Turned Reinvention into His Greatest Skill"

@@ -17,7 +17,7 @@ tags:
   - "gratitude"
 subtitle: "The wallet holds money. My life holds wealth."
 description: "I count money, spirit, love, work, rest, and every good thing the Universe delivers."
-featured_image: "/images/essays/rich-in-spirit/hero.png"
+featured_image: "editorial/birthright"
 featured_image_alt: "An anonymous child sits beneath a flowering citrus tree as dappled natural sunlight falls across the child's curls and shoulders."
 featured_image_caption: "Creation is my birthright."
 version: "1.0"
@@ -135,7 +135,7 @@ A chance.
 An opportunity reveals itself.
 I catch an idea like a butterfly in a net. 
 
-![A blue butterfly rests on a blank open notebook beside a pen in bright window sunlight.](/images/essays/rich-in-spirit/section-1.png)
+![A blue butterfly rests on a blank open notebook beside a pen in bright window sunlight.](oip-image:essays/rich-in-spirit/section-1)
 
 *An answer arrives.*
 

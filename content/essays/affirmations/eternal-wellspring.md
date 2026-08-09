@@ -17,7 +17,7 @@ tags:
   - "abundance"
 subtitle: "Self-sourced and Overflowing"
 description: "Pour joy and love into life from the heart ~ you have infinite love within you."
-featured_image: "/images/essays/eternal-wellspring/hero.png"
+featured_image: "editorial/the-cup-makes-its-own-river"
 featured_image_alt: "A handmade earthenware cup overflows from a spring rising within it, sending four blue-white streams across a dark stone surface at dawn."
 featured_image_caption: "My cup is overflowing."
 version: "1.0"
@@ -144,7 +144,7 @@ What am I supposed to do with all of that love?
 
 I LET IT OUT!
 
-![An anonymous person stands with one hand over the heart in a shadowed predawn kitchen while a cat eats nearby and a blue-gold watercolor current moves across the floor.](/images/essays/eternal-wellspring/section-1.png)
+![An anonymous person stands with one hand over the heart in a shadowed predawn kitchen while a cat eats nearby and a blue-gold watercolor current moves across the floor.](oip-image:essays/eternal-wellspring/section-1)
 
 *Before the world speaks.*
 

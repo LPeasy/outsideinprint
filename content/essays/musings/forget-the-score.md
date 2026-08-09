@@ -13,7 +13,7 @@ external_factual_claims: "none"
 tags: ["hobbies", "play", "practice", "self-command"]
 subtitle: "Keep on keepin' not stoppin', and don't look back."
 description: "Keep on keepin' not stoppin', and don't look back."
-featured_image: "/images/essays/forget-the-score/hero.png"
+featured_image: "editorial/the-crooked-row"
 featured_image_alt: "An anonymous gardener waters an uneven bed of pastel flowers while a loose measuring string sags between two stakes in a densely crosshatched backyard."
 featured_image_caption: "The Crooked Row."
 version: "1.0"
@@ -39,7 +39,7 @@ It can be one small thing you do just because you like doing it.
 
 There's something magical about detaching from outcomes and just being yourself.
 
-![An anonymous adult walks a basketball toward a hoop in an empty community gym beneath a blank, dark scoreboard and empty bleachers.](/images/essays/forget-the-score/section-1.png)
+![An anonymous adult walks a basketball toward a hoop in an empty community gym beneath a blank, dark scoreboard and empty bleachers.](oip-image:essays/forget-the-score/section-1)
 
 ## Play Without Proof
 

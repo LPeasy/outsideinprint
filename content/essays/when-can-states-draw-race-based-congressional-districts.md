@@ -6,7 +6,7 @@ slug: "when-can-states-draw-race-based-congressional-districts"
 section_label: "Essay"
 subtitle: "Louisiana v. Callais turned Louisiana's second majority-Black district map into a constitutional problem, narrowing the path for Section 2 remedies in redistricting cases."
 description: "The Supreme Court's Louisiana v. Callais ruling narrows the proof pathway for Section 2 redistricting claims and changes how race, party, maps, and remedies meet in voting-rights law."
-featured_image: "/images/essays/when-can-states-draw-race-based-congressional-districts/hero.png"
+featured_image: "essays/when-can-states-draw-race-based-congressional-districts/hero"
 featured_image_alt: "Editorial illustration of a Louisiana-style congressional map on a legal drafting table, with one blue district line casting a sharp shadow beside court papers and a gavel."
 featured_image_caption: "A district line can look like geography until it starts carrying the weight of a remedy."
 version: "1.2"
@@ -60,7 +60,7 @@ Callais puts new pressure on that overlap. The Court said plaintiffs' illustrati
 
 Those requirements sound technical. They are more than technical. They change the evidentiary burden carried by voters who claim a map has diluted their electoral power.
 
-![Close-up editorial illustration of mapmaking tools, blank ballots, and layered district templates with a narrowing blue line beneath a ruler.](/images/essays/when-can-states-draw-race-based-congressional-districts/section-1.png)
+![Close-up editorial illustration of mapmaking tools, blank ballots, and layered district templates with a narrowing blue line beneath a ruler.](oip-image:essays/when-can-states-draw-race-based-congressional-districts/section-1)
 
 ## Race, Party, and Proof
 
@@ -118,7 +118,7 @@ That argument has weight. Courts are blunt tools for political repair. Judges ca
 
 But withdrawal has costs too. A legislature that controls the map can shape its electorate with substantial precision, aided by modern districting technology. When that precision intersects with race, history, and party, a reduced judicial role does not by itself make the mapmaking process neutral. It shifts more practical power toward mapmakers and away from litigants challenging the map.
 
-![Editorial illustration of voters on a map-floor, a blue path running through district gates toward empty congressional seats in shadow.](/images/essays/when-can-states-draw-race-based-congressional-districts/section-2.png)
+![Editorial illustration of voters on a map-floor, a blue path running through district gates toward empty congressional seats in shadow.](oip-image:essays/when-can-states-draw-race-based-congressional-districts/section-2)
 
 ## The Remedy's Shadow
 

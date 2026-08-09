@@ -17,7 +17,7 @@ tags:
   - "self-trust"
 subtitle: "I am responsible for everything in my life."
 description: "I have complete authority over my life."
-featured_image: "/images/essays/i-make-myself/hero.png"
+featured_image: "editorial/the-turn"
 featured_image_alt: "An anonymous person rounds a quiet neighborhood corner at dawn, moving from deep blue shadow toward the warm sunlit street ahead."
 featured_image_caption: "I decide what happens next."
 version: "1.0"
@@ -173,7 +173,7 @@ Help arrives? I say THANK YOU and accept it.
 
 I take whatever Life hands me.
 
-![An anonymous person guides a hand plane across a rough board at a workbench before dawn as fine grain and curling shavings emerge in blue and amber light.](/images/essays/i-make-myself/section-1.png)
+![An anonymous person guides a hand plane across a rough board at a workbench before dawn as fine grain and curling shavings emerge in blue and amber light.](oip-image:essays/i-make-myself/section-1)
 
 *I am the material and the maker.*
 

@@ -7,7 +7,7 @@ draft: false
 slug: "the-warning-reached-the-bridge"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/the-warning-reached-the-bridge/hero.png"
+featured_image: "essays/the-warning-reached-the-bridge/hero"
 featured_image_alt: "An editorial cutaway of an ocean liner whose warning messages descend through decks toward lifeboats below."
 featured_image_caption: "A warning can cross an ocean and fail to cross an organization."
 version: "1.0"
@@ -51,7 +51,7 @@ The ethical duty was not difficult to state: a passenger ship should have a surv
 
 The same problem appears whenever professionals treat a rule as the outer edge of responsibility. Building codes, cybersecurity checklists, environmental permits, financial controls, and workplace procedures all provide baselines. None can substitute for the judgment of people who can see that the baseline no longer fits the risk.
 
-![A restrained editorial infographic showing a chain from warning to authority to action, with the final link visibly broken.](/images/essays/the-warning-reached-the-bridge/section-1.png)
+![A restrained editorial infographic showing a chain from warning to authority to action, with the final link visibly broken.](oip-image:essays/the-warning-reached-the-bridge/section-1)
 
 *The break usually occurs between knowing and acting.*
 

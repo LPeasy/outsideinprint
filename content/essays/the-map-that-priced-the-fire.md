@@ -14,7 +14,7 @@ revision_history:
     date: "2026-06-21"
     note: "Updated June 21, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-map-that-priced-the-fire/hero.png"
+featured_image: "essays/the-map-that-priced-the-fire/hero"
 featured_image_alt: "Editorial image: a public archive table holding an opened Sanborn-style map, with measured streets, color-coded blocks, and restrained civic-record lighting."
 featured_image_caption: "Hero image: the map as the main character, not the fire."
 collections:
@@ -56,7 +56,7 @@ The 1897 atlas belongs to the city before the great fire. The 1903 atlas belongs
 
 The old moss at Davis and Beaver gives the story a tactile origin. Spanish moss dried for mattresses sounds almost domestic, even soft. A Sanborn sheet translates that world into hazard language. It cares less about softness than proximity, ignition, roof material, wall behavior, and the chance that one burning building will teach its neighbors to burn. In that sense, the map is a moral shock because it refuses romance. It does not say that Jacksonville rose heroically after disaster. It shows that the rebuilt city had to become legible to people who asked how the next fire would move.
 
-![Editorial image: an archivist's hands using a pencil and ruler over a color-coded fire-insurance map, with no flames, only records and measured risk.](/images/essays/the-map-that-priced-the-fire/section-1.png)
+![Editorial image: an archivist's hands using a pencil and ruler over a color-coded fire-insurance map, with no flames, only records and measured risk.](oip-image:essays/the-map-that-priced-the-fire/section-1)
 
 *Image 1: the surveyor's discipline, rendered as civic paperwork.*
 
@@ -142,7 +142,7 @@ That last fact is as important as a smoking-gun discovery. A record can help by 
 
 This modern use should change how we look back at the old Jacksonville sheet. The map is an antique survivor and part of a longer chain of risk reading. Fire insurance, preservation, genealogy, planning, brownfields assessment, and neighborhood memory all ask versions of the same question: what did this place used to be, and what does that past require of us now?
 
-![Editorial image: a modern environmental due-diligence desk with an old map, a public-record folder, and a clean redevelopment site plan, with no corporate branding.](/images/essays/the-map-that-priced-the-fire/section-2.png)
+![Editorial image: a modern environmental due-diligence desk with an old map, a public-record folder, and a clean redevelopment site plan, with no corporate branding.](oip-image:essays/the-map-that-priced-the-fire/section-2)
 
 *Image 2: old insurance evidence inside a modern due-diligence file.*
 

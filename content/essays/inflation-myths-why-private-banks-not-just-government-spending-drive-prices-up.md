@@ -5,7 +5,7 @@ draft: false
 slug: "inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up"
 section_label: "Essay"
 subtitle: "Politicians blame deficits — but what if the real culprit is the banking system?"
-featured_image: "/images/medium/inflation-myths-why-private-banks-not-just-government-spending-drive-prices-up/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb.jpeg"
+featured_image: "medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb"
 featured_image_caption: "Photo by Elimende Inagella on Unsplash"
 featured_image_alt: "Inflation Myths: Why Private Banks, Not Just Government Spending, Drive Prices Up"
 description: "Inflation dominates headlines, but most people misunderstand what’s really driving it. Turn on any financial news channel, and you’ll hear it"

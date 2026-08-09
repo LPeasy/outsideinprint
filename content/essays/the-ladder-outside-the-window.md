@@ -13,7 +13,7 @@ revision_history:
     date: "2026-06-17"
     note: "Updated June 17, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-ladder-outside-the-window/hero.png"
+featured_image: "essays/the-ladder-outside-the-window/hero"
 featured_image_alt: "Editorial illustration of a black iron fire escape bolted to old brick above a narrow city sidewalk, with warm apartment light and a pale dawn sky."
 featured_image_caption: "The fire escape turned a private facade into part of the public safety system."
 tags:
@@ -119,7 +119,7 @@ The same feature that made the fire escape useful in danger made it tempting in 
 
 That daily use did not make encumbrance safe. It explains why encumbrance kept returning. The platform was a safety device grafted onto a housing system where people needed more living space than the apartment gave them. The law's warning plate asked tenants to preserve a future emergency route. The room's heat and tightness asked them to use the route today.
 
-![Editorial illustration of a tenement fire escape seen close up, with bedding on one landing, a milk bottle on another, and a smoke-dark stairwell visible through an open window.](/images/essays/the-ladder-outside-the-window/section-1.png)
+![Editorial illustration of a tenement fire escape seen close up, with bedding on one landing, a milk bottle on another, and a smoke-dark stairwell visible through an open window.](oip-image:essays/the-ladder-outside-the-window/section-1)
 
 *The emergency route also became a record of crowded rooms and improvised urban life.*
 
@@ -243,7 +243,7 @@ The city asks the tenant to trust the owner. It asks the owner to obey code, mai
 
 No one actor can make that whole system honorable alone. The owner who repairs the iron cannot by himself solve overcrowding. The tenant who keeps the platform clear cannot by herself maintain anchors. The inspector who writes a violation cannot by himself complete the work. The preservation reviewer who protects a facade cannot by herself make the old device safe. The firefighter arrives after the bargain has already been tested.
 
-![Editorial illustration looking upward from a sidewalk beneath a fire escape, with a building inspector's clipboard, a tenant's open window, and a firefighter's ladder implied by shadows.](/images/essays/the-ladder-outside-the-window/section-2.png)
+![Editorial illustration looking upward from a sidewalk beneath a fire escape, with a building inspector's clipboard, a tenant's open window, and a firefighter's ladder implied by shadows.](oip-image:essays/the-ladder-outside-the-window/section-2)
 
 *Public safety often depends on private maintenance completed before anyone calls for help.*
 

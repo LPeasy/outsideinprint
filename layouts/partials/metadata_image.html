@@ -60,8 +60,11 @@
 
 {{- if and (not $image) $route.is_article_like -}}
   {{- $rawContent := .RawContent | default "" -}}
+  {{- $managedMarkdownImageMatches := findRESubmatch `!\[[^\]]*\]\((oip-image:[a-z0-9_/-]+)` $rawContent 1 -}}
   {{- $localMarkdownImageMatches := findRESubmatch `!\[[^\]]*\]\((/images/[^)\s]+)` $rawContent 1 -}}
-  {{- if gt (len $localMarkdownImageMatches) 0 -}}
+  {{- if gt (len $managedMarkdownImageMatches) 0 -}}
+    {{- $image = index (index $managedMarkdownImageMatches 0) 1 -}}
+  {{- else if gt (len $localMarkdownImageMatches) 0 -}}
     {{- $image = index (index $localMarkdownImageMatches 0) 1 -}}
   {{- else -}}
     {{- $localHtmlImageMatches := findRESubmatch `<img[^>]+src="(/images/[^"]+)"` $rawContent 1 -}}
@@ -91,13 +94,11 @@
 {{- end -}}
 
 {{- if $image -}}
-  {{- if or (hasPrefix $image "http://") (hasPrefix $image "https://") -}}
-    {{- $image -}}
-  {{- else -}}
-    {{- with .Resources.GetMatch $image -}}
-      {{- .Permalink -}}
-    {{- else -}}
-      {{- ($image | strings.TrimPrefix "/" | absURL) -}}
-    {{- end -}}
-  {{- end -}}
+  {{- $imageModel := partial "images/model.html" (dict
+    "page" .
+    "ref" $image
+    "display" false
+    "social" true
+  ) -}}
+  {{- $imageModel.social_permalink -}}
 {{- end -}}

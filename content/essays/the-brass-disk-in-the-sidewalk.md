@@ -13,7 +13,7 @@ revision_history:
     date: "2026-07-09"
     note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity certainty wording without changing thesis, sourcing, or publication status."
 featured: false
-featured_image: "/images/essays/the-brass-disk-in-the-sidewalk/hero.png"
+featured_image: "essays/the-brass-disk-in-the-sidewalk/hero"
 featured_image_alt: "A brass survey disk set into a worn concrete sidewalk, with faint street-grid shadows and a survey tripod silhouette in morning light."
 featured_image_caption: "The public coordinate system begins with an object a passerby can step over without seeing."
 collections:
@@ -66,7 +66,7 @@ That chain is fragile in ordinary ways. A mark can be paved over. A bridge can b
 
 The old federal survey did not solve that problem once. It built a public routine for working on it.
 
-![A surveyor's field notebook, level rod, and old brass benchmark record on a municipal records desk, with a bridge plan partly visible.](/images/essays/the-brass-disk-in-the-sidewalk/section-1.png)
+![A surveyor's field notebook, level rod, and old brass benchmark record on a municipal records desk, with a bridge plan partly visible.](oip-image:essays/the-brass-disk-in-the-sidewalk/section-1)
 
 *A survey mark turns location into a record that engineers, clerks, builders, and mapmakers can share.*
 
@@ -216,7 +216,7 @@ This work has an ethical weight without needing moral theater. Public records sh
 
 That expectation is modest. It also gives the modernization project its public test. A new datum succeeds when it improves the frame and preserves the path back to older records. It fails the public when accuracy rises and traceability falls.
 
-![A night scene with a brass survey disk glowing faintly under a transparent overlay of satellite paths and public-record grid lines.](/images/essays/the-brass-disk-in-the-sidewalk/section-2.png)
+![A night scene with a brass survey disk glowing faintly under a transparent overlay of satellite paths and public-record grid lines.](oip-image:essays/the-brass-disk-in-the-sidewalk/section-2)
 
 *GPS makes location feel effortless, but the public frame beneath it needs custody.*
 

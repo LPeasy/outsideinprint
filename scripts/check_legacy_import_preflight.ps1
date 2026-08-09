@@ -495,7 +495,7 @@ function Scan-LegacyImportIssues {
         -Type 'remote_medium_body_image' `
         -Severity 'blocker' `
         -LineNumber $lineNumber `
-        -Message 'Localize remote Medium body images under static/images/medium/<slug>/ before publishing.' `
+        -Message 'Localize remote Medium body images once under assets/images/originals/medium and reference them with oip-image:medium/<sha256> before publishing.' `
         -Line $line
     }
 

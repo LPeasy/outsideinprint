@@ -13,7 +13,7 @@ revision_history:
     date: "2026-06-19"
     note: "Updated June 19, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-stamp-on-the-meat-flagship/hero.png"
+featured_image: "essays/the-stamp-on-the-meat-flagship/hero"
 featured_image_alt: "Editorial illustration of an inspection legend, a ledger, and wrapped meat under a cold retail counter."
 featured_image_caption: "The mark is small because the system behind it is supposed to have done its work already."
 tags:
@@ -120,7 +120,7 @@ The 2019 Federal Register rule on carcass marking shows how the mark also adapts
 
 The stamp becomes important at thresholds. It matters when meat leaves an official establishment, moves in commerce, enters a container, appears on a label, crosses a border, enters a recall notice, or becomes evidence in an enforcement record. Inside a controlled plant, the public fact can be maintained by inspection control. Outside the plant, the fact needs a portable sign.
 
-![Editorial illustration of an inspected plant floor, a public ledger, and a stamped package turning hidden process into public record.](/images/essays/the-stamp-on-the-meat-flagship/section-1.png)
+![Editorial illustration of an inspected plant floor, a public ledger, and a stamped package turning hidden process into public record.](oip-image:essays/the-stamp-on-the-meat-flagship/section-1)
 
 *Inspection happens out of sight, then leaves a public trace.*
 
@@ -236,6 +236,6 @@ The answer is small because it has to fit on meat. The system behind it is large
 
 The stamp is the public entering the room, leaving a mark, and sending the evidence out into the world.
 
-![Editorial illustration separating a USDA-style inspection legend from a separate grade shield on a meat counter.](/images/essays/the-stamp-on-the-meat-flagship/section-2.png)
+![Editorial illustration separating a USDA-style inspection legend from a separate grade shield on a meat counter.](oip-image:essays/the-stamp-on-the-meat-flagship/section-2)
 
 *Inspection and grading look official together, but they answer different questions.*

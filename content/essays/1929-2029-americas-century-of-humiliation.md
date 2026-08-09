@@ -12,7 +12,7 @@ revision_history:
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
-featured_image: "/images/essays/1929-2029-americas-century-of-humiliation/hero.png"
+featured_image: "essays/1929-2029-americas-century-of-humiliation/hero"
 featured_image_alt: "A scoreboard celebrates GDP, markets, military power, and tech wealth while people labeled rent, debt, insurance, and childcare sit exhausted below it."
 ---
 

@@ -7,7 +7,7 @@ draft: false
 slug: "the-favor"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/the-favor/hero.png"
+featured_image: "editorial/no-receipt"
 featured_image_alt: "Editorial cartoon showing two anonymous adults facing one another while carrying a large box on an apartment stairwell as a torn olive IOU tag falls toward a bin."
 featured_image_caption: "Help without strings attached is nice."
 version: "1.0"
@@ -44,13 +44,13 @@ One sentence can prevent resentment. "I can help today, and I may need a hand wi
 
 People can ask for what they need, and the request stands on its own.
 
-![Infographic showing help as a gift or agreement, followed by plain words and a free choice.](/images/essays/the-favor/section-1.png)
+![Infographic showing help as a gift or agreement, followed by plain words and a free choice.](oip-image:essays/the-favor/section-1)
 
 *Help can be a gift or an agreement. Clear words leave room to choose.*
 
 If help is a gift, let it be a gift. If you need something back, say so while the other person can answer freely. The answer may be yes, no, or a different plan.
 
-![Infographic showing old help ending before a new request receives a direct answer.](/images/essays/the-favor/section-2.png)
+![Infographic showing old help ending before a new request receives a direct answer.](oip-image:essays/the-favor/section-2)
 
 *Old help ends. A new request deserves plain words and a free answer.*
 

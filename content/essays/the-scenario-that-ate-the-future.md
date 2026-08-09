@@ -14,7 +14,7 @@ revision_history:
     date: "2026-06-01"
     note: "Updated June 1, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-scenario-that-ate-the-future/hero.png"
+featured_image: "essays/the-scenario-that-ate-the-future/hero"
 featured_image_alt: "A climate scenario table projected in a public hearing room while the number 8.5 casts a long shadow across papers, reports, and public-record files."
 featured_image_caption: "A technical pathway becomes public power when the caveats leave the room."
 collections:
@@ -91,7 +91,7 @@ The public problem is not that researchers wrote down a severe fossil future. Th
 
 A scenario without its assumptions becomes an omen.
 
-![A coal-heavy model world laid out as assumptions on an archival desk with energy charts, population curves, and fossil-fuel silhouettes.](/images/essays/the-scenario-that-ate-the-future/section-1.png)
+![A coal-heavy model world laid out as assumptions on an archival desk with energy charts, population curves, and fossil-fuel silhouettes.](oip-image:essays/the-scenario-that-ate-the-future/section-1)
 
 *The 8.5 world was built from assumptions: high population, slow efficiency, weak policy, and a long coal afterlife.*
 
@@ -131,7 +131,7 @@ Even with that caution, the literature record supports the core claim. RCP8.5 wa
 
 That last distinction is the one the essay must keep making. "Used" is not the same as "misused." A coastal engineer using RCP8.5 as a high-end sea-level stress case is not doing the same thing as a headline presenting an RCP8.5-derived outcome as the future children should expect to inherit. Counts have force only after the use is classified.
 
-![A horizontal bar chart showing 305 ambiguous-projection records, 37 high-emissions-clear records, 13 baseline-or-BAU records, 11 stress-case-clear records, and 1 default-future-implied record in OIP's RCP8.5 framing classifier.](/images/essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts.png)
+![A horizontal bar chart showing 305 ambiguous-projection records, 37 high-emissions-clear records, 13 baseline-or-BAU records, 11 stress-case-clear records, and 1 default-future-implied record in OIP's RCP8.5 framing classifier.](oip-image:essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts)
 
 *The signal is not mass explicit business-as-usual labeling; it is the rarity of visible stress-case labels in a literature large enough to shape public imagination.*
 
@@ -149,7 +149,7 @@ A public audience is rarely told which one it is seeing.
 
 A British Columbia public-sector building standards document makes the problem concrete. In an appendix asking what future climate will look like, the document describes RCP 8.5 as a business-as-usual pathway in which past emissions practices continue; nearby, it describes SSP5 as fossil-fueled business-as-usual development. This is not a newspaper scare line. It is public-sector guidance for climate-resilient buildings. The document also contains context and caveats, and it does not prove that B.C. policy depended on RCP8.5. It proves the narrower point: the language had traveled. A high-end/no-policy scenario could enter ordinary infrastructure guidance as the public image of future climate.[^51]
 
-![A scientific paper, press desk, and public-facing summary linked by a chain of simplified climate-warning language.](/images/essays/the-scenario-that-ate-the-future/section-2.png)
+![A scientific paper, press desk, and public-facing summary linked by a chain of simplified climate-warning language.](oip-image:essays/the-scenario-that-ate-the-future/section-2)
 
 *By the time a model result reached public language, the assumptions had often fallen out of the chain.*
 

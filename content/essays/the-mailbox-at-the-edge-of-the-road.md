@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.1"
 edition: "Second web edition"
 featured: false
-featured_image: "/images/essays/the-mailbox-at-the-edge-of-the-road/hero.png"
+featured_image: "essays/the-mailbox-at-the-edge-of-the-road/hero"
 featured_image_alt: "A rural mailbox at the edge of a gravel road, with postal route lines suggested in the road surface and a carrier vehicle distant on the horizon."
 featured_image_caption: "The roadside mailbox made the public route visible at the edge of private land."
 tags:
@@ -68,7 +68,7 @@ The mailbox belongs in the history of roads as much as the history of letters. I
 
 The current legal promise rests on old republican language. Federal postal policy says the Postal Service must provide "postal services to bind the Nation together" and must serve "patrons in all areas" under [39 U.S.C. § 101](https://www.law.cornell.edu/uscode/text/39/101). The phrase is grand. The daily form is modest: a carrier, a route, a road shoulder, a receptacle, and a schedule that makes the promise measurable.
 
-![A tabletop editorial illustration of improvised rural mail containers giving way to a standardized metal mailbox, with a muddy road profile and postal route geometry around them.](/images/essays/the-mailbox-at-the-edge-of-the-road/section-1.png)
+![A tabletop editorial illustration of improvised rural mail containers giving way to a standardized metal mailbox, with a muddy road profile and postal route geometry around them.](oip-image:essays/the-mailbox-at-the-edge-of-the-road/section-1)
 
 *Standardization turned household improvisation into a postal interface.*
 
@@ -112,7 +112,7 @@ The Postal Regulatory Commission's work on the universal service obligation and 
 
 Postal service has always carried a democratic idea that is more practical than sentimental. A country spread across distance needs a common circulation of notices, ballots, newspapers, medicine, business records, household goods, legal papers, and private words. The system is never innocent. It has exclusions, delays, price fights, labor conflicts, surveillance questions, and budget pressure. Yet the common route remains one of the plainest ways a large republic makes itself physically present without asking every resident to live near a courthouse, depot, or city hall.
 
-![A quiet rural crossroads where mail routes, road maintenance marks, small post office silhouettes, and household paths converge around one roadside mailbox.](/images/essays/the-mailbox-at-the-edge-of-the-road/section-2.png)
+![A quiet rural crossroads where mail routes, road maintenance marks, small post office silhouettes, and household paths converge around one roadside mailbox.](oip-image:essays/the-mailbox-at-the-edge-of-the-road/section-2)
 
 *The mailbox gathers road policy, household time, and federal reach into one stop.*
 

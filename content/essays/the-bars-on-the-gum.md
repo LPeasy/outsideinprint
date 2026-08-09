@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-bars-on-the-gum/hero.png"
+featured_image: "essays/the-bars-on-the-gum/hero"
 featured_image_alt: "A pack of gum with a stark UPC-like code resting beside a low grocery scanner under cool fluorescent light."
 featured_image_caption: "The first scan made a package readable by a machine, but the machine worked only because many people had agreed on the same record."
 tags:
@@ -98,7 +98,7 @@ The old store had its own errors. A clerk could type badly. A stamped price coul
 
 That is the price of a shared record. It can make a good fact travel quickly. It can make a bad fact travel with the same confidence.
 
-![A grocery checkout lane seen as a quiet ledger, with a scanner light linking packages to stacked receipt paper and inventory cards.](/images/essays/the-bars-on-the-gum/section-1.png)
+![A grocery checkout lane seen as a quiet ledger, with a scanner light linking packages to stacked receipt paper and inventory cards.](oip-image:essays/the-bars-on-the-gum/section-1)
 
 *The scanner made the checkout lane a point of sale and a point of record.*
 
@@ -188,7 +188,7 @@ The barcode did not turn a supermarket into a data company by itself. It gave th
 
 This helps explain why the UPC belongs in material history. The material object is a printed code, but the thing being built is a record path. The path passes through paper, ink, glass, light, copper, steel, plastic, software, invoices, price books, training manuals, shelf labels, receipts, and public inspection forms. A cultural history that stops at the black bars misses the machinery of agreement around them.
 
-![A warehouse aisle where simple black product codes become a shared path through shelves, carts, cases, and reorder slips.](/images/essays/the-bars-on-the-gum/section-2.png)
+![A warehouse aisle where simple black product codes become a shared path through shelves, carts, cases, and reorder slips.](oip-image:essays/the-bars-on-the-gum/section-2)
 
 *The barcode gave variety a common address, then handed power to the records behind that address.*
 

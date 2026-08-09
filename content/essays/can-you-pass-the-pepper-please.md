@@ -6,7 +6,7 @@ slug: "can-you-pass-the-pepper-please"
 section_label: "Essay"
 subtitle: "Internal ICE force reports show how civil detention can turn requests for property, water, food, and medical care into compliance events."
 description: "Internal ICE force reports show how civil detention can turn requests for property, water, food, and medical care into compliance events."
-featured_image: "/images/essays/can-you-pass-the-pepper-please/hero.png"
+featured_image: "essays/can-you-pass-the-pepper-please/hero"
 featured_image_alt: "Editorial illustration of a detention lunchroom after a chemical agent release, with empty tables, orange haze, locked cell doors, and a report form on the floor."
 featured_image_caption: "The room clears. The report remains."
 version: "1.2"
@@ -99,7 +99,7 @@ That does not turn every officer into an abuser or every detainee into a passive
 
 When power becomes physical, the paperwork matters.
 
-![Editorial illustration of a clipboard labeled only by blank fields, a restraint chair in shadow, and detention doors receding into a corridor.](/images/essays/can-you-pass-the-pepper-please/section-1.png)
+![Editorial illustration of a clipboard labeled only by blank fields, a restraint chair in shadow, and detention doors receding into a corridor.](oip-image:essays/can-you-pass-the-pepper-please/section-1)
 *The report form can become a shield when its blanks are easier to fill than its facts.*
 
 ## The Words That Change The Event
@@ -190,7 +190,7 @@ By the time all of that reaches the form, it can be compressed into one word: co
 
 That is the public-power problem. A private company operating under federal standards is not exercising merely private judgment. It is carrying out custody in the name of the United States. When force is used, the record cannot belong only to the building. It belongs to the public system that authorized the confinement, paid for the bed, set the standards, and received the report.
 
-![Editorial illustration of a civil detention facility drawn as a file cabinet with barred windows, bus lights outside, and a thin orange line moving through the drawers.](/images/essays/can-you-pass-the-pepper-please/section-2.png)
+![Editorial illustration of a civil detention facility drawn as a file cabinet with barred windows, bus lights outside, and a thin orange line moving through the drawers.](oip-image:essays/can-you-pass-the-pepper-please/section-2)
 *Capacity, custody, and paperwork become one machine when the locked room writes its own account.*
 
 ## The Closed Door

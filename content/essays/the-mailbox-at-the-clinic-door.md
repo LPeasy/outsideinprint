@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-29"
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-mailbox-at-the-clinic-door/hero.png"
+featured_image: "essays/the-mailbox-at-the-clinic-door/hero"
 featured_image_alt: "Editorial illustration of a cardboard prescription package at a clinic doorway shaped like a mailbox, with court papers and route lines folded into the threshold."
 featured_image_caption: "The delivery route became the doorway."
 collections:
@@ -69,7 +69,7 @@ The opposing view starts in the same place and draws the line differently. If ea
 
 That is the tradeoff beneath the package. National drug regulation creates uniformity and scientific centralization. State abortion law creates local democratic control after Dobbs. A mailed prescription forces the two systems onto the same porch.
 
-![Editorial illustration of a prescription route line crossing a state boundary, with a clinic light far away and a mailbox casting a long shadow over the road.](/images/essays/the-mailbox-at-the-clinic-door/section-1.png)
+![Editorial illustration of a prescription route line crossing a state boundary, with a clinic light far away and a mailbox casting a long shadow over the road.](oip-image:essays/the-mailbox-at-the-clinic-door/section-1)
 
 *Distance turns a dispensing rule into a practical gate.*
 
@@ -113,6 +113,6 @@ This case also shows how policy changes character once it reaches the edge of or
 
 The mailbox at the clinic door is a small object with a large burden. It has to carry federal science, state sovereignty, judicial power, medical practice, and private fear in the same envelope. That is too much weight for any package. It is also where the law has placed the fight.
 
-![Editorial illustration of a pharmacy counter, court order, and sealed package under a narrow overhead light, with anonymous hands paused before the label.](/images/essays/the-mailbox-at-the-clinic-door/section-2.png)
+![Editorial illustration of a pharmacy counter, court order, and sealed package under a narrow overhead light, with anonymous hands paused before the label.](oip-image:essays/the-mailbox-at-the-clinic-door/section-2)
 
 *Emergency law reaches the counter before the merits are settled.*

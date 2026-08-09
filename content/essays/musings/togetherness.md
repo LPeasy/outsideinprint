@@ -13,7 +13,7 @@ external_factual_claims: "none"
 tags: ["presence", "connection", "authenticity", "togetherness", "musings"]
 subtitle: "Connection begins when nobody has to perform."
 description: "A short reflection on presence, connection, and making room for another person without performance."
-featured_image: "/images/essays/togetherness/hero.png"
+featured_image: "essays/togetherness/hero"
 featured_image_alt: "An anonymous adult sets a blank mask and folded notebook on a porch rail while three adults make room on a long swing held by faded ochre-yellow ropes."
 featured_image_caption: "Room on the Swing."
 version: "1.0"

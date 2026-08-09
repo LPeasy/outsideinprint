@@ -17,7 +17,7 @@ tags:
   - "action"
 subtitle: "We inevitably believe the things that we say."
 description: "Speak life into existence."
-featured_image: "/images/essays/i-do-what-i-say/hero.png"
+featured_image: "editorial/feet-on-the-floor"
 featured_image_alt: "An anonymous person sits at the edge of a bed with bare feet on wooden floorboards as dawn light enters a shadowed room."
 featured_image_caption: "Feet on the Floor."
 version: "2.0"
@@ -53,7 +53,7 @@ As simply as possible...
   <figcaption>- Robby V.</figcaption>
 </figure>
 
-![An anonymous man walks alone toward warm morning light while a distant muted crowd moves in the opposite direction.](/images/essays/i-do-what-i-say/section-1.png)
+![An anonymous man walks alone toward warm morning light while a distant muted crowd moves in the opposite direction.](oip-image:essays/i-do-what-i-say/section-1)
 
 *Walk your own path.*
 

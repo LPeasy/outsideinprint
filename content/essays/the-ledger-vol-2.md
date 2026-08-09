@@ -17,7 +17,7 @@ revision_history:
     note: "Recovered and localized body images from Medium import archive; no substantive text change."
 pdf: "/pdfs/the-ledger-vol-2.pdf"
 featured: false
-featured_image: "/images/essays/the-ledger-vol-2/hero.png"
+featured_image: "essays/the-ledger-vol-2/hero"
 featured_image_alt: "Abstract editorial hero image for The Ledger, Vol. 2."
 featured_image_caption: "Replacement hero image for the legacy web edition."
 collections:

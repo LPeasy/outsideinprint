@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "evidence_date": "2026-08-08",
+  "hugo_version": "0.164.0-extended",
+  "build_environment": "production",
+  "build_flags": [
+    "--gc",
+    "--minify",
+    "--panicOnWarning",
+    "--cleanDestinationDir"
+  ],
+  "cache_test": {
+    "isolated_resource_directory": true,
+    "isolated_cache_directory": true,
+    "cold_seconds": 178.135,
+    "cold_limit_seconds": 900,
+    "restored_cache_seconds": 17.573,
+    "restored_cache_limit_seconds": 300,
+    "outcome": "pass"
+  },
+  "rendered_output": {
+    "pages": 295,
+    "static_files_reported_by_hugo": 627,
+    "processed_images_reported_by_hugo": 3504,
+    "total_public_files": 4466,
+    "total_public_bytes": 548682656,
+    "public_image_files": 4028,
+    "public_image_bytes": 512312327,
+    "rendered_derivative_files": 3502,
+    "largest_derivative_bytes": 700370,
+    "missing_referenced_derivatives": 0,
+    "orphan_rendered_derivatives": 0
+  },
+  "prepared_pages_payload": {
+    "measurement_scope": "clean production output after public PDF exclusion and before deploy-time build-manifest injection",
+    "excluded_public_pdf_bytes": 13088889,
+    "file_count": 4340,
+    "bytes": 535593767,
+    "limit_bytes": 629145600,
+    "outcome": "pass"
+  },
+  "budgets": {
+    "public_images_limit_bytes": 524288000,
+    "largest_derivative_limit_bytes": 1048576,
+    "generated_image_limit": 5000,
+    "public_file_limit": 6500,
+    "outcome": "pass"
+  },
+  "source_manifest_sha256": "49137f0ecc66f817df07eb3330207035b65c1ea20609cb17f27d84b41e7685e9"
+}

@@ -17,7 +17,7 @@ tags:
   - "self-trust"
 subtitle: "Remember that You are but a Part of the Whole, and You shall be content with Everything that happens."
 description: "The universe has my back ~ and I have my own back, too."
-featured_image: "/images/essays/my-friend-the-universe/hero.png"
+featured_image: "editorial/the-road-rises"
 featured_image_alt: "An anonymous walker climbs a country road at dawn as a friendly dog and its owner approach through warm morning light."
 featured_image_caption: "Go boldly."
 version: "1.0"
@@ -56,7 +56,7 @@ Life is funny, isn't it? Think of the Universe as a dear old friend. Imagine all
   <figcaption>— Robby V.</figcaption>
 </figure>
 
-![An anonymous walker takes the first step along the brighter branch of a forked country road as wind moves the grass and coat.](/images/essays/my-friend-the-universe/section-1.png)
+![An anonymous walker takes the first step along the brighter branch of a forked country road as wind moves the grass and coat.](oip-image:essays/my-friend-the-universe/section-1)
 
 *Keep going.*
 

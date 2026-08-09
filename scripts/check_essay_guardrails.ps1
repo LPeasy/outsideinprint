@@ -827,7 +827,7 @@ function ConvertTo-ImageRecoveryComparableText {
 
   for ($i = 0; $i -lt $lines.Count; $i++) {
     $line = [string]$lines[$i]
-    if ($line -match '^\s*!\[[^\]]*\]\(/images/medium/[^)\s]+/[0-9a-f]{64}\.[A-Za-z0-9]+(?:\s+["''][^"'']*["''])?\)\s*$') {
+    if ($line -match '^\s*!\[[^\]]*\]\((?:/images/medium/[^)\s]+/[0-9a-f]{64}\.[A-Za-z0-9]+|oip-image:medium/[0-9a-f]{64})(?:\s+["''][^"'']*["''])?\)\s*$') {
       $removedImageBlocks++
       $j = $i + 1
       while ($j -lt $lines.Count -and [string]::IsNullOrWhiteSpace([string]$lines[$j])) {

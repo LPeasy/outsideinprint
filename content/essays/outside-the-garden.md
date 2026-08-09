@@ -16,7 +16,7 @@ revision_history:
     date: "2026-05-29"
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/outside-the-garden/hero.png"
+featured_image: "essays/outside-the-garden/hero"
 featured_image_alt: "Editorial illustration of a closed garden gate, a narrow path, and a modern civic city beyond the wall."
 featured_image_caption: "The path outside the garden asks for discipline, memory, and sacrifice."
 collections:
@@ -100,7 +100,7 @@ Many citizens no longer felt represented. Elections appeared to be influenced by
 
 We became aware that something was lost.
 
-![Editorial illustration of civic institutions, family ledgers, and public screens arranged as fractured inheritance.](/images/essays/outside-the-garden/section-1.png)
+![Editorial illustration of civic institutions, family ledgers, and public screens arranged as fractured inheritance.](oip-image:essays/outside-the-garden/section-1)
 
 *When a moral inheritance breaks, the fracture shows up in ordinary civic machinery.*
 
@@ -152,7 +152,7 @@ The past is gone and the future is here.
 
 What do we have to offer but ourselves?
 
-![Editorial illustration of a workbench, bread, tools, and a small family table outside a closed garden wall.](/images/essays/outside-the-garden/section-2.png)
+![Editorial illustration of a workbench, bread, tools, and a small family table outside a closed garden wall.](oip-image:essays/outside-the-garden/section-2)
 
 *Outside the wall, sacrifice becomes ordinary work offered toward a higher end.*
 

@@ -17,7 +17,7 @@ tags:
   - "renewal"
 subtitle: "Every word I speak strengthens the life within me."
 description: "I welcome health. I welcome strength. I welcome renewal."
-featured_image: "/images/essays/i-am-healed/hero.png"
+featured_image: "editorial/filled-with-life"
 featured_image_alt: "An anonymous person stands with arms open in a sunlit meadow as blue, gold, and green watercolor currents sweep across the sky and fields."
 featured_image_caption: "Whole. Complete. Renewed."
 version: "1.0"
@@ -75,7 +75,7 @@ Work with your body. Listen closely. Become its friend and faithful companion.
   <figcaption>— Robby V.</figcaption>
 </figure>
 
-![An anonymous seated person rests one hand over the heart in warm morning light beside a window.](/images/essays/i-am-healed/section-1.png)
+![An anonymous seated person rests one hand over the heart in warm morning light beside a window.](oip-image:essays/i-am-healed/section-1)
 
 *Thank your body.*
 

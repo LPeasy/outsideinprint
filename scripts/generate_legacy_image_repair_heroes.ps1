@@ -5,6 +5,8 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+$Root = (Resolve-Path -LiteralPath $Root).Path
+. (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 
 Add-Type -AssemblyName System.Drawing
 
@@ -210,7 +212,7 @@ function Draw-Motif($Graphics, [string]$Kind, [string]$Accent) {
 }
 
 foreach ($item in $items) {
-  $dir = Join-Path $Root (Join-Path 'static/images/essays' $item.Slug)
+  $dir = Join-Path $Root (Join-Path 'assets/images/originals/essays' $item.Slug)
   New-Item -Path $dir -ItemType Directory -Force | Out-Null
 
   $bitmap = [System.Drawing.Bitmap]::new(1600, 900)
@@ -234,5 +236,21 @@ foreach ($item in $items) {
   $bitmap.Save($outPath, [System.Drawing.Imaging.ImageFormat]::Png)
 
   $border.Dispose(); $veil.Dispose(); $gradient.Dispose(); $graphics.Dispose(); $bitmap.Dispose()
+  $assetId = "essays/$($item.Slug)/hero"
+  $manifest = Read-OipImageAssetManifest -Root $Root -AllowMissing
+  $sourceHash = (Get-FileHash -LiteralPath $outPath -Algorithm SHA256).Hash.ToLowerInvariant()
+  $reviewState = 'pending_review'
+  if ($manifest.assets.Contains($assetId) -and [string]$manifest.assets[$assetId].sha256 -eq $sourceHash) {
+    $reviewState = [string]$manifest.assets[$assetId].review_state
+  }
+  Register-OipImageAsset `
+    -Root $Root `
+    -Id $assetId `
+    -Source "images/originals/essays/$($item.Slug)/hero.png" `
+    -ImageClass 'essay_illustration' `
+    -ProcessingHint 'drawing' `
+    -ReviewState $reviewState `
+    -UsageState 'referenced' `
+    -Aliases @("/images/essays/$($item.Slug)/hero.png") | Out-Null
   Write-Host "Wrote $outPath"
 }

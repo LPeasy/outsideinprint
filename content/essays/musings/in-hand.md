@@ -13,7 +13,7 @@ external_factual_claims: "none"
 tags: ["faith", "action", "attention", "self-command"]
 subtitle: "Use what you've got."
 description: "Faith begins when we use what is already in hand and release what lies outside our control."
-featured_image: "/images/essays/in-hand/hero.png"
+featured_image: "editorial/at-the-worktable"
 featured_image_alt: "An anonymous adult begins work at a modest desk with an older computer, a guitar, and a screwdriver close by."
 featured_image_caption: "Within Reach."
 version: "1.1"
@@ -38,7 +38,7 @@ I used to wait until I felt ready before acting. That feeling hid for a long tim
 
 Then I realized I would never stop becoming until I decided to actually BE. 
 
-![An anonymous adult turns a screwdriver beneath a kitchen chair while an older laptop and a worn guitar rest nearby.](/images/essays/in-hand/section-1.png)
+![An anonymous adult turns a screwdriver beneath a kitchen chair while an older laptop and a worn guitar rest nearby.](oip-image:essays/in-hand/section-1)
 
 For me, faith is having a clear mind and a strong heart. What I can conceive and bring myself to believe, I can achieve: a turned screw, a paragraph, a chord that stops feeling strange in the hand. The ordinary things around me need no ceremony. They wait for patient attention. 
 
@@ -47,6 +47,6 @@ I give my attention only to those things that I can actually touch, affect, cont
 
 I can't manage the timing of the world, other people's feelings, or the shape that work may take after it leaves me. Those things sit outside my little domain. We have to let go when we have no control.
 
-![An anonymous adult closes a face-down phone beside a handwritten page, an older laptop, and a guitar pick on a small worktable.](/images/essays/in-hand/section-2.png)
+![An anonymous adult closes a face-down phone beside a handwritten page, an older laptop, and a guitar pick on a small worktable.](oip-image:essays/in-hand/section-2)
 
 My domain is my focus, and I surrender everything outside of my control to the friendly universe we live in that always has our backs.

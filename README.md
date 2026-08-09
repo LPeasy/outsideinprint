@@ -6,6 +6,7 @@ A minimalist Hugo site for publishing essays, fiction, dialogues, and working pa
 
 - Canonical publishing workflow: `docs/publishing-workflow.md`
 - Local validation policy: `docs/local-validation-policy.md`
+- Responsive image pipeline: `docs/responsive-image-pipeline.md`
 - Editorial publishing contract: `PUBLISHING_POLICY.md`
 - Repo-local Codex session notes: `AGENTS.md`
 
@@ -43,12 +44,14 @@ Use `docs/publishing-workflow.md` as the canonical process. The normal publish p
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md`
 3. Before setting `draft: false` or publishing a changed essay, run the philosophy gate:
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit`
-4. Build the site locally:
+4. Validate managed image sources, then build the site locally:
+   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1`
    - `.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning`
-5. Write the fresh-build manifest and run the publish smoke tests:
+5. Write the fresh-build manifest and run the publish smoke and image-output tests:
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1`
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1`
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`
+   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public`
 6. Commit and push or merge to `main`.
 
 Publishing happens through `.github/workflows/deploy.yml` after `main` is updated. For metadata, collections, Medium migration, and special-case paths, see `docs/publishing-workflow.md`.

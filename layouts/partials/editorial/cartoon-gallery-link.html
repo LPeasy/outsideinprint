@@ -2,6 +2,11 @@
 {{- $cartoon := .cartoon -}}
 {{- $class := .class | default "" -}}
 {{- with $cartoon -}}
+  {{- $imageModel := partial "images/model.html" (dict
+    "page" $page
+    "ref" .image
+    "display" true
+  ) -}}
   <button
     type="button"
     class="essay-cartoon-thumb{{ with $class }} {{ . }}{{ end }}"
@@ -10,14 +15,20 @@
     data-title="{{ .title }}"
     data-date="{{ .date }}"
     data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
-    data-image="{{ .image | relURL }}"
+    data-image="{{ $imageModel.lightbox_url }}"
     data-alt="{{ .alt }}"
-    data-width="{{ .width }}"
-    data-height="{{ .height }}"
+    data-width="{{ $imageModel.lightbox_width }}"
+    data-height="{{ $imageModel.lightbox_height }}"
     data-gallery="{{ (printf "gallery/?cartoon=%s" .slug) | absURL }}"
     aria-label="Open the illustration for {{ $page.Title }} fullscreen"
   >
-    <img src="{{ .image | relURL }}" alt="" width="{{ .width }}" height="{{ .height }}" loading="lazy">
+    {{- partial "images/picture.html" (dict
+      "model" $imageModel
+      "alt" ""
+      "loading" "lazy"
+      "sizes" "7rem"
+      "lightbox" true
+    ) -}}
     <span>Illustration</span>
   </button>
 {{- end -}}

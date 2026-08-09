@@ -1,0 +1,1976 @@
+{
+  "schema_version": "1.0",
+  "manifest_sha256": "49137f0ecc66f817df07eb3330207035b65c1ea20609cb17f27d84b41e7685e9",
+  "canonical_asset_count": 350,
+  "candidate_count": 70,
+  "minimum_candidate_count": 24,
+  "deep_review_count": 24,
+  "selection_rule": "union_of_all_photos_and_medium_sources_top_12_bytes_top_12_pixels_top_12_aspect_ratio_and_text_fine_line_metadata",
+  "deep_review_rule": "fixed_fine_text_and_crosshatching_assets_plus_top_4_photos_dark_tones_saturated_color_aspect_ratio_source_bytes_native_pixels_then_deterministic_fill_to_24",
+  "reason_counts": {
+    "all_photo_and_medium_sources": 20,
+    "extreme_aspect_ratio": 12,
+    "known_text_or_fine_line_cartoon": 7,
+    "largest_native_dimensions": 12,
+    "largest_source_bytes": 12,
+    "text_or_fine_line_metadata": 28
+  },
+  "deep_review_category_counts": {
+    "fine_text": 4,
+    "crosshatching": 3,
+    "faces_or_photos": 4,
+    "dark_tones": 4,
+    "saturated_color": 4,
+    "extreme_aspect_ratio": 4,
+    "largest_source_bytes": 4,
+    "largest_native_dimensions": 4,
+    "deterministic_minimum_fill": 9
+  },
+  "candidates": [
+    {
+      "id": "editorial/after-the-tone",
+      "source": "images/originals/editorial/after-the-tone.png",
+      "sha256": "a60724f95abb22c91df734814e09a006490fdbc4fa260dcbd883076c090a106a",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 2201716,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions"
+      ]
+    },
+    {
+      "id": "editorial/algae-fueled-fever-dreams",
+      "source": "images/originals/editorial/algae-fueled-fever-dreams.png",
+      "sha256": "ec58d0b22e675f35b6792377be30cb3535f955a2f8b8abd50b6807d77f961989",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3876540,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions"
+      ]
+    },
+    {
+      "id": "editorial/at-the-worktable",
+      "source": "images/originals/editorial/at-the-worktable.png",
+      "sha256": "ea467349ee51f02dd3fbb4d61da07929731f859716e08f54fddae13d95b43572",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3772178,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/beneficial-use",
+      "source": "images/originals/editorial/beneficial-use.png",
+      "sha256": "ceffea2e2ae8506874874681905685c4bce6be21903843596a0b0a3e4eb27592",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3423210,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions"
+      ]
+    },
+    {
+      "id": "editorial/cartoon-think-outside-the-box",
+      "source": "images/originals/editorial/cartoon-think-outside-the-box.png",
+      "sha256": "b8f8042587e7a1c374b74ed5a6d2c6cb915a2a7eaada467e582b43f49643d913",
+      "width": 1024,
+      "height": 1536,
+      "pixels": 1572864,
+      "bytes": 1382531,
+      "aspect_ratio": 1.5,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "known_text_or_fine_line_cartoon"
+      ]
+    },
+    {
+      "id": "editorial/certified-safe",
+      "source": "images/originals/editorial/certified-safe.png",
+      "sha256": "2f7f8def7f32156c68e5c5acdb761a358b3126fb1c8783642f330e545203fd94",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3359291,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/claim-check",
+      "source": "images/originals/editorial/claim-check.png",
+      "sha256": "0c3dc94dfed6611a81ad1b4794e017ce841ead34eaaa0728cc717fbfb8cd6ad0",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3011704,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "known_text_or_fine_line_cartoon"
+      ]
+    },
+    {
+      "id": "editorial/curb-appeal",
+      "source": "images/originals/editorial/curb-appeal.png",
+      "sha256": "7d4c347e6c820ee3acbb668673c6c53ced4460c48e5b3f004dde9c3fec6fc582",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 2643563,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/delivering-the-goods",
+      "source": "images/originals/editorial/delivering-the-goods.png",
+      "sha256": "a5923f078f0efb04fbd6408bfea002eb2669200a08352014aceebdbb6389ddfb",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3049380,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/diverse-consensus",
+      "source": "images/originals/editorial/diverse-consensus.png",
+      "sha256": "9f9740d5b687c501a89c9433c27399714403e80f09e392dcf86b5685f36d3af1",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3621298,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/goin-postal",
+      "source": "images/originals/editorial/goin-postal.png",
+      "sha256": "54d31b12129f9002b6053ab036b2b0e56bf9a33734226dd09f1771847e179e6d",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3759639,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/hit-after-hit",
+      "source": "images/originals/editorial/hit-after-hit.png",
+      "sha256": "314c8a65f21aac0c11c590deffb2494933defbb25b16c89b7f324af975b3a0ab",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3391292,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/house-gravity",
+      "source": "images/originals/editorial/house-gravity.png",
+      "sha256": "913749c0d148a13393d45c722f03d8f12970d8f73cfd704b7d631dbb3384ce16",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 4066594,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "editorial/human-resources",
+      "source": "images/originals/editorial/human-resources.png",
+      "sha256": "976fe6d38a955dcaab05af54a002ea3904f97f7b7493eccc38d010a610f00bfa",
+      "width": 1572,
+      "height": 1001,
+      "pixels": 1573572,
+      "bytes": 4212538,
+      "aspect_ratio": 1.5704,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "editorial/just-part-of-the-game",
+      "source": "images/originals/editorial/just-part-of-the-game.png",
+      "sha256": "63d42c5dfa2c914320fd17b2a9bc73d7c12fd4c838d331190836166345b5e90f",
+      "width": 2048,
+      "height": 1152,
+      "pixels": 2359296,
+      "bytes": 5585143,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio",
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "editorial/made-in-china",
+      "source": "images/originals/editorial/made-in-china.png",
+      "sha256": "5fc35a296bb739f7574d9d3a46dee58fa0202ad9520d7cc1f93072162727f933",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3731485,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/minimum-door",
+      "source": "images/originals/editorial/minimum-door.png",
+      "sha256": "d90c4433558437edeefe70709a86bc01536b76e8641ac222ea13b0d1881487ad",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 4033988,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/papers-please",
+      "source": "images/originals/editorial/papers-please.png",
+      "sha256": "8c5678cb2e38650a7d59ee155ac92d0c118318e99c422df38726b8531842e869",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3806455,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "known_text_or_fine_line_cartoon"
+      ]
+    },
+    {
+      "id": "editorial/premium-memory",
+      "source": "images/originals/editorial/premium-memory.png",
+      "sha256": "fd02e38cfa1503ac4182ec57e6eb9f4e7f22b83b60dcebfb18dedc8ea1491c4f",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3069006,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/prime-suspect",
+      "source": "images/originals/editorial/prime-suspect.png",
+      "sha256": "59e3bf001cb390583371b9e19959fb4f6dd729ad19cc57053a806de3ec2fdc5e",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3485409,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/pull-the-lever",
+      "source": "images/originals/editorial/pull-the-lever.png",
+      "sha256": "c34a2bf1813efd314d2fb223676aff6cfc889b9d32a4eef64695d2e66096257b",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3646587,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/quiet-filing",
+      "source": "images/originals/editorial/quiet-filing.png",
+      "sha256": "9965b0d66cf0d06f3ddaae8f9658cf55061782e0a64f99b05cf9b0e90abd03ff",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 1811440,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/rephrase-that",
+      "source": "images/originals/editorial/rephrase-that.png",
+      "sha256": "d148d48228b97dcaaea526aca39b61798a7ad466c81d7ec7535d624ba41fcc19",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3543438,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/serpent-at-supper",
+      "source": "images/originals/editorial/serpent-at-supper.png",
+      "sha256": "f846520973b1a2969e565c48e1c62134650a66a209b358ba50784dea42ce8169",
+      "width": 1672,
+      "height": 940,
+      "pixels": 1571680,
+      "bytes": 3792282,
+      "aspect_ratio": 1.7787,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "editorial/shadow-price",
+      "source": "images/originals/editorial/shadow-price.png",
+      "sha256": "37a07a1cc0b756c1c95562e6006911885d3f5ee8c32347e1bb6e8700ec4fbb7e",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 2403044,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/signal-at-the-turn",
+      "source": "images/originals/editorial/signal-at-the-turn.png",
+      "sha256": "594b4029ebc1d669fa30c87feaa3e648fa10f7550880f9ed2c1c29864d6eff2f",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 4060126,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "editorial/strait-to-voicemail",
+      "source": "images/originals/editorial/strait-to-voicemail.png",
+      "sha256": "406e73b503c155d7763c127415678359f0c0e88aaec4faf4fd36de6515d948ba",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 4051453,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/the-altar-of-consent",
+      "source": "images/originals/editorial/the-altar-of-consent.png",
+      "sha256": "cdfabf9806b7c4e77ab9f969820d8671ad8ae0b2c2086d9549b7d1089ee0065f",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3428127,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/the-meter",
+      "source": "images/originals/editorial/the-meter.png",
+      "sha256": "1654b8f9c1c41a1ee31b2adeeaad035c078049591e17dcf5caa853751975616e",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3863888,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "known_text_or_fine_line_cartoon",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/the-minute-drawer",
+      "source": "images/originals/editorial/the-minute-drawer.png",
+      "sha256": "358e2ea5b2927d9e5287f6b6db16c8e37da40f24f6bfe4496579dd4cd82e2fcd",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3625844,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "known_text_or_fine_line_cartoon",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/the-sewer-under-the-sidewalk",
+      "source": "images/originals/editorial/the-sewer-under-the-sidewalk.png",
+      "sha256": "0cce9ebd2a5ca9819339c9fd1305aef22d159a0fd65c2e5bc816311c842c2a2f",
+      "width": 2048,
+      "height": 1152,
+      "pixels": 2359296,
+      "bytes": 6154636,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio",
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "editorial/the-sorting-counter",
+      "source": "images/originals/editorial/the-sorting-counter.png",
+      "sha256": "b83194f726e14f2ad9445c9b4339e19e8a5591246b2a43363f5e70b62a80598b",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3664203,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/the-tab",
+      "source": "images/originals/editorial/the-tab.png",
+      "sha256": "9771cdcb5fd60fb0ddced9359d2228d9334cbddd47a8fa1c3c31f65ef2b92561",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3679398,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "known_text_or_fine_line_cartoon",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/the-tiller",
+      "source": "images/originals/editorial/the-tiller.png",
+      "sha256": "8423c0d7816e87fc2eec07b35897df7f45059df3932b57809fd902fb2055ca19",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 4059196,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_source_bytes",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/the-trophy-case",
+      "source": "images/originals/editorial/the-trophy-case.png",
+      "sha256": "4dbc416375fa6ff949be3319dc12082107b4a0260cfaa4efc15402c15d436356",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3594148,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/very-fine-lines-on-both-sides",
+      "source": "images/originals/editorial/very-fine-lines-on-both-sides.png",
+      "sha256": "0bf2a133d8e824df27a595ee832d5bfa03d262ebe97d010f4d8b16bfd4f3a919",
+      "width": 2048,
+      "height": 1152,
+      "pixels": 2359296,
+      "bytes": 6360213,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio",
+        "largest_native_dimensions",
+        "largest_source_bytes",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/when-life-gives-you",
+      "source": "images/originals/editorial/when-life-gives-you.png",
+      "sha256": "9978e8c984b2f12bc44052e04f53861cc1f34fdd3c068473f96fa26ff70bfe2a",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3538250,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/who-do-you-know-here",
+      "source": "images/originals/editorial/who-do-you-know-here.png",
+      "sha256": "59f99f5324299075e4cc8793ff3785e82c222518e411699ddd19d82dff7db8f5",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3645211,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/who-paid-the-nazis",
+      "source": "images/originals/editorial/who-paid-the-nazis.png",
+      "sha256": "28532607c8a411bbcb56d89e8cd2deeab2b074b62db0f819e9fb82eadefd5c14",
+      "width": 2048,
+      "height": 1152,
+      "pixels": 2359296,
+      "bytes": 6121264,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio",
+        "largest_native_dimensions",
+        "largest_source_bytes",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "editorial/whose-yes",
+      "source": "images/originals/editorial/whose-yes.png",
+      "sha256": "18361dcaa2cddefa87da546c87d6cc6097f2a7dca4de1e3e1d0b032e54df9df8",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 3745917,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "known_text_or_fine_line_cartoon",
+        "text_or_fine_line_metadata"
+      ]
+    },
+    {
+      "id": "essays/american-household-debt/hero",
+      "source": "images/originals/essays/american-household-debt/hero.png",
+      "sha256": "d17c9034a376c6c21205f743d238fa25e5e9bb157162e58fa573518e2192662d",
+      "width": 1600,
+      "height": 900,
+      "pixels": 1440000,
+      "bytes": 254369,
+      "aspect_ratio": 1.7778,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "essays/biter-the-slang-word-that-hits/hero-cassette",
+      "source": "images/originals/essays/biter-the-slang-word-that-hits/hero-cassette.jpg",
+      "sha256": "a5c2cf449d152c582ae6eeb826dfb964fb34f20c4e6dbb20e346365d9629ed37",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 17078,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/biter-the-slang-word-that-hits/performer",
+      "source": "images/originals/essays/biter-the-slang-word-that-hits/performer.jpg",
+      "sha256": "a3376aa6c3553bb9d7b09685db037def491d23da3f6a7fd0c35b0cdef35a726b",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 43405,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/biter-the-slang-word-that-hits/style-fashion",
+      "source": "images/originals/essays/biter-the-slang-word-that-hits/style-fashion.jpg",
+      "sha256": "1b1e3d20690dc3ce010cf7b049ff73e7582aac2a65b99fb04366afb7fa9cbcfd",
+      "width": 800,
+      "height": 447,
+      "pixels": 357600,
+      "bytes": 27748,
+      "aspect_ratio": 1.7897,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources",
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "essays/biter-the-slang-word-that-hits/teeth",
+      "source": "images/originals/essays/biter-the-slang-word-that-hits/teeth.jpg",
+      "sha256": "209bf5eb1114d9d42a409a1672e6bdb379740370120267da82522dd9e452f7a7",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 21210,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero",
+      "source": "images/originals/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero.png",
+      "sha256": "76de4212b25be8005089cf835deea90c864f28d6536559b453df9108012dc4c9",
+      "width": 1600,
+      "height": 900,
+      "pixels": 1440000,
+      "bytes": 277431,
+      "aspect_ratio": 1.7778,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "essays/cpi-report-economic-analysis/hero",
+      "source": "images/originals/essays/cpi-report-economic-analysis/hero.png",
+      "sha256": "86c9d3c4c7016f137b1e307901a9b141e53507f1129123899a17ec35c223321d",
+      "width": 1600,
+      "height": 900,
+      "pixels": 1440000,
+      "bytes": 250307,
+      "aspect_ratio": 1.7778,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero",
+      "source": "images/originals/essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero.png",
+      "sha256": "d87298f043ad0efca54c403d548699a5cd4800f688b17b7e2420d5fae98970b7",
+      "width": 1600,
+      "height": 900,
+      "pixels": 1440000,
+      "bytes": 283756,
+      "aspect_ratio": 1.7778,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "essays/etfs-and-market-concentration/hero",
+      "source": "images/originals/essays/etfs-and-market-concentration/hero.png",
+      "sha256": "e2cac172aed086605542588c09ff6b48c8c814e55ba2afd071316c66f6e4e3c0",
+      "width": 1600,
+      "height": 900,
+      "pixels": 1440000,
+      "bytes": 288117,
+      "aspect_ratio": 1.7778,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "essays/in-hand/section-2",
+      "source": "images/originals/essays/in-hand/section-2.png",
+      "sha256": "185fd5d966a298857fbe62a9aa67cfb75ac732537fd48ac7670d965e6de88e9c",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 4096703,
+      "aspect_ratio": 1.7768,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "essays/margin/section-1",
+      "source": "images/originals/essays/margin/section-1.png",
+      "sha256": "a709de233b0d40c0dde017449a86abb9c3818dfdf15a4e1b8bf3e763211df76c",
+      "width": 1672,
+      "height": 941,
+      "pixels": 1573352,
+      "bytes": 4106431,
+      "aspect_ratio": 1.7768,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/florida-ecosystem",
+      "source": "images/originals/essays/rethinking-invasive-species-management/florida-ecosystem.jpg",
+      "sha256": "e23a3fdb0a173682a048386f7cba001c2670c0a0fb9f6d3ae83be3530da1ae45",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 117822,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/global-shipping",
+      "source": "images/originals/essays/rethinking-invasive-species-management/global-shipping.jpg",
+      "sha256": "ef5e18fe87babf4a82fc3b97aa2922782f338da6b88d460447c9bab8c3017811",
+      "width": 800,
+      "height": 534,
+      "pixels": 427200,
+      "bytes": 118041,
+      "aspect_ratio": 1.4981,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/hero-python",
+      "source": "images/originals/essays/rethinking-invasive-species-management/hero-python.jpg",
+      "sha256": "7947c6cb9b398fd9e5a0cafe864b4fc8a495b0cbd11325858277e8f556807fe0",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 80012,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/lionfish",
+      "source": "images/originals/essays/rethinking-invasive-species-management/lionfish.jpg",
+      "sha256": "2d7ff3e0b5afa5dd1c225a3f09ba7bcf329acb3027094d3c15b04cea2a7cb2fe",
+      "width": 800,
+      "height": 448,
+      "pixels": 358400,
+      "bytes": 52922,
+      "aspect_ratio": 1.7857,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources",
+        "extreme_aspect_ratio"
+      ]
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/python-pet-trade",
+      "source": "images/originals/essays/rethinking-invasive-species-management/python-pet-trade.jpg",
+      "sha256": "6838a34b92dcc441e28590e9a1030f57d2bf70f0a911775fa8faf67f30b2740a",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 101826,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/zebra-mussels",
+      "source": "images/originals/essays/rethinking-invasive-species-management/zebra-mussels.jpg",
+      "sha256": "c4cc996b9a89c2b30a2b879713dabe0a70d0ac1bff9dbd3fdfba79a58a205983",
+      "width": 800,
+      "height": 600,
+      "pixels": 480000,
+      "bytes": 87900,
+      "aspect_ratio": 1.3333,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/the-gold-card-and-the-price-of-belonging/hero-jpg",
+      "source": "images/originals/essays/the-gold-card-and-the-price-of-belonging/hero.jpg",
+      "sha256": "d2d7754dd43a04ef6939f40cc89705d7366aed6d6b39b83b326415d7fbad40b9",
+      "width": 256,
+      "height": 170,
+      "pixels": 43520,
+      "bytes": 5247,
+      "aspect_ratio": 1.5059,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "retained_unreferenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/the-gold-card-and-the-price-of-belonging/section-1-jpg",
+      "source": "images/originals/essays/the-gold-card-and-the-price-of-belonging/section-1.jpg",
+      "sha256": "449547624265697255ea1b0ae232af52f4c70359be2ac77d88a9ddbf8e7283bb",
+      "width": 256,
+      "height": 170,
+      "pixels": 43520,
+      "bytes": 7456,
+      "aspect_ratio": 1.5059,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "retained_unreferenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/the-gold-card-and-the-price-of-belonging/section-2-jpg",
+      "source": "images/originals/essays/the-gold-card-and-the-price-of-belonging/section-2.jpg",
+      "sha256": "4924cbe883f3e0ba66d88b14326459aeba12783a8128609b05bd1e6fd60692fc",
+      "width": 256,
+      "height": 170,
+      "pixels": 43520,
+      "bytes": 5375,
+      "aspect_ratio": 1.5059,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "rejected_corrupt_source",
+      "usage_state": "retained_unreferenced",
+      "processing_state": "source_only_unprocessable",
+      "processing_note": "legacy_jpeg_decoder_warning_premature_end_of_data_segment_and_gray_lower_region",
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",
+      "source": "images/originals/essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts.png",
+      "sha256": "6629627274097a0262a88b222bea6c2f19676f0ced12bcb1afefb9d30d445e09",
+      "width": 2467,
+      "height": 1401,
+      "pixels": 3456267,
+      "bytes": 139659,
+      "aspect_ratio": 1.7609,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions"
+      ]
+    },
+    {
+      "id": "essays/the-sewer-under-the-sidewalk/section-1",
+      "source": "images/originals/essays/the-sewer-under-the-sidewalk/section-1.png",
+      "sha256": "9cccd46b17666872d20d59a772176e3403d7dde7e9c3708c8c86c78f793b61d6",
+      "width": 2048,
+      "height": 1365,
+      "pixels": 2795520,
+      "bytes": 6107179,
+      "aspect_ratio": 1.5004,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "essays/the-sewer-under-the-sidewalk/section-2",
+      "source": "images/originals/essays/the-sewer-under-the-sidewalk/section-2.png",
+      "sha256": "27d899c7e33c9ecca18ae6d67807153966637b8978ae94b709373f2bac530318",
+      "width": 2048,
+      "height": 1365,
+      "pixels": 2795520,
+      "bytes": 4580814,
+      "aspect_ratio": 1.5004,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ]
+    },
+    {
+      "id": "medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731",
+      "source": "images/originals/medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731.jpeg",
+      "sha256": "20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 40582,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7",
+      "source": "images/originals/medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7.jpeg",
+      "sha256": "2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 60693,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a",
+      "source": "images/originals/medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a.jpeg",
+      "sha256": "502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 24630,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe",
+      "source": "images/originals/medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe.png",
+      "sha256": "79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe",
+      "width": 800,
+      "height": 800,
+      "pixels": 640000,
+      "bytes": 863377,
+      "aspect_ratio": 1.0,
+      "image_class": "medium_import",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb",
+      "source": "images/originals/medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb.jpeg",
+      "sha256": "982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 40076,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb",
+      "source": "images/originals/medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb.jpeg",
+      "sha256": "bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 48363,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    },
+    {
+      "id": "medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7",
+      "source": "images/originals/medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7.jpeg",
+      "sha256": "ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7",
+      "width": 800,
+      "height": 533,
+      "pixels": 426400,
+      "bytes": 33118,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "reasons": [
+        "all_photo_and_medium_sources"
+      ]
+    }
+  ],
+  "deep_review_selection": [
+    {
+      "id": "editorial/after-the-tone",
+      "source": "images/originals/editorial/after-the-tone.png",
+      "sha256": "a60724f95abb22c91df734814e09a006490fdbc4fa260dcbd883076c090a106a",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2201716,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "extreme_aspect_ratio",
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.7865,
+        "dark_fraction": 0.1553,
+        "average_saturation": 0.0299,
+        "saturated_fraction": 0.0059,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/cartoon-think-outside-the-box",
+      "source": "images/originals/editorial/cartoon-think-outside-the-box.png",
+      "sha256": "b8f8042587e7a1c374b74ed5a6d2c6cb915a2a7eaada467e582b43f49643d913",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1382531,
+      "aspect_ratio": 1.5,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "crosshatching"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.7628,
+        "dark_fraction": 0.2119,
+        "average_saturation": 0.033,
+        "saturated_fraction": 0.0186,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/claim-check",
+      "source": "images/originals/editorial/claim-check.png",
+      "sha256": "0c3dc94dfed6611a81ad1b4794e017ce841ead34eaaa0728cc717fbfb8cd6ad0",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3011704,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "fine_text"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.6079,
+        "dark_fraction": 0.2969,
+        "average_saturation": 0.0385,
+        "saturated_fraction": 0.0088,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/human-resources",
+      "source": "images/originals/editorial/human-resources.png",
+      "sha256": "976fe6d38a955dcaab05af54a002ea3904f97f7b7493eccc38d010a610f00bfa",
+      "width": 1572,
+      "height": 1001,
+      "bytes": 4212538,
+      "aspect_ratio": 1.5704,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "deterministic_minimum_fill"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.3768,
+        "dark_fraction": 0.4619,
+        "average_saturation": 0.1867,
+        "saturated_fraction": 0.0693,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/just-part-of-the-game",
+      "source": "images/originals/editorial/just-part-of-the-game.png",
+      "sha256": "63d42c5dfa2c914320fd17b2a9bc73d7c12fd4c838d331190836166345b5e90f",
+      "width": 2048,
+      "height": 1152,
+      "bytes": 5585143,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "deterministic_minimum_fill"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.2682,
+        "dark_fraction": 0.6523,
+        "average_saturation": 0.1084,
+        "saturated_fraction": 0.002,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/papers-please",
+      "source": "images/originals/editorial/papers-please.png",
+      "sha256": "8c5678cb2e38650a7d59ee155ac92d0c118318e99c422df38726b8531842e869",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3806455,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "fine_text"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.3418,
+        "dark_fraction": 0.5059,
+        "average_saturation": 0.0857,
+        "saturated_fraction": 0.0127,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/the-meter",
+      "source": "images/originals/editorial/the-meter.png",
+      "sha256": "1654b8f9c1c41a1ee31b2adeeaad035c078049591e17dcf5caa853751975616e",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3863888,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "deterministic_minimum_fill",
+        "fine_text"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.3878,
+        "dark_fraction": 0.4346,
+        "average_saturation": 0.0562,
+        "saturated_fraction": 0.0039,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/the-minute-drawer",
+      "source": "images/originals/editorial/the-minute-drawer.png",
+      "sha256": "358e2ea5b2927d9e5287f6b6db16c8e37da40f24f6bfe4496579dd4cd82e2fcd",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3625844,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "deterministic_minimum_fill"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.2374,
+        "dark_fraction": 0.6953,
+        "average_saturation": 0.152,
+        "saturated_fraction": 0.0293,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/the-sewer-under-the-sidewalk",
+      "source": "images/originals/editorial/the-sewer-under-the-sidewalk.png",
+      "sha256": "0cce9ebd2a5ca9819339c9fd1305aef22d159a0fd65c2e5bc816311c842c2a2f",
+      "width": 2048,
+      "height": 1152,
+      "bytes": 6154636,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "crosshatching",
+        "deterministic_minimum_fill"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.316,
+        "dark_fraction": 0.5605,
+        "average_saturation": 0.2628,
+        "saturated_fraction": 0.0635,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/very-fine-lines-on-both-sides",
+      "source": "images/originals/editorial/very-fine-lines-on-both-sides.png",
+      "sha256": "0bf2a133d8e824df27a595ee832d5bfa03d262ebe97d010f4d8b16bfd4f3a919",
+      "width": 2048,
+      "height": 1152,
+      "bytes": 6360213,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "crosshatching",
+        "deterministic_minimum_fill"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.3475,
+        "dark_fraction": 0.5059,
+        "average_saturation": 0.0651,
+        "saturated_fraction": 0.0146,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/who-do-you-know-here",
+      "source": "images/originals/editorial/who-do-you-know-here.png",
+      "sha256": "59f99f5324299075e4cc8793ff3785e82c222518e411699ddd19d82dff7db8f5",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3645211,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "extreme_aspect_ratio",
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.3502,
+        "dark_fraction": 0.4883,
+        "average_saturation": 0.1476,
+        "saturated_fraction": 0.0273,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/who-paid-the-nazis",
+      "source": "images/originals/editorial/who-paid-the-nazis.png",
+      "sha256": "28532607c8a411bbcb56d89e8cd2deeab2b074b62db0f819e9fb82eadefd5c14",
+      "width": 2048,
+      "height": 1152,
+      "bytes": 6121264,
+      "aspect_ratio": 1.7778,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "deterministic_minimum_fill",
+        "extreme_aspect_ratio",
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.3243,
+        "dark_fraction": 0.5693,
+        "average_saturation": 0.1778,
+        "saturated_fraction": 0.0225,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "editorial/whose-yes",
+      "source": "images/originals/editorial/whose-yes.png",
+      "sha256": "18361dcaa2cddefa87da546c87d6cc6097f2a7dca4de1e3e1d0b032e54df9df8",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3745917,
+      "aspect_ratio": 1.7768,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "extreme_aspect_ratio",
+        "fine_text",
+        "largest_native_dimensions",
+        "largest_source_bytes"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.6527,
+        "dark_fraction": 0.1709,
+        "average_saturation": 0.128,
+        "saturated_fraction": 0.0029,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "essays/biter-the-slang-word-that-hits/hero-cassette",
+      "source": "images/originals/essays/biter-the-slang-word-that-hits/hero-cassette.jpg",
+      "sha256": "a5c2cf449d152c582ae6eeb826dfb964fb34f20c4e6dbb20e346365d9629ed37",
+      "width": 800,
+      "height": 533,
+      "bytes": 17078,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "faces_or_photos"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.7681,
+        "dark_fraction": 0.0464,
+        "average_saturation": 0.0968,
+        "saturated_fraction": 0.0009,
+        "sample_count": 1056
+      }
+    },
+    {
+      "id": "essays/biter-the-slang-word-that-hits/performer",
+      "source": "images/originals/essays/biter-the-slang-word-that-hits/performer.jpg",
+      "sha256": "a3376aa6c3553bb9d7b09685db037def491d23da3f6a7fd0c35b0cdef35a726b",
+      "width": 800,
+      "height": 533,
+      "bytes": 43405,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "dark_tones"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.2053,
+        "dark_fraction": 0.7623,
+        "average_saturation": 0.6095,
+        "saturated_fraction": 0.5275,
+        "sample_count": 1056
+      }
+    },
+    {
+      "id": "essays/biter-the-slang-word-that-hits/style-fashion",
+      "source": "images/originals/essays/biter-the-slang-word-that-hits/style-fashion.jpg",
+      "sha256": "1b1e3d20690dc3ce010cf7b049ff73e7582aac2a65b99fb04366afb7fa9cbcfd",
+      "width": 800,
+      "height": 447,
+      "bytes": 27748,
+      "aspect_ratio": 1.7897,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "deterministic_minimum_fill"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.821,
+        "dark_fraction": 0.0901,
+        "average_saturation": 0.124,
+        "saturated_fraction": 0.0947,
+        "sample_count": 1088
+      }
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/hero-python",
+      "source": "images/originals/essays/rethinking-invasive-species-management/hero-python.jpg",
+      "sha256": "7947c6cb9b398fd9e5a0cafe864b4fc8a495b0cbd11325858277e8f556807fe0",
+      "width": 800,
+      "height": 533,
+      "bytes": 80012,
+      "aspect_ratio": 1.5009,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "saturated_color"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.2565,
+        "dark_fraction": 0.5634,
+        "average_saturation": 0.6586,
+        "saturated_fraction": 0.7348,
+        "sample_count": 1056
+      }
+    },
+    {
+      "id": "essays/rethinking-invasive-species-management/lionfish",
+      "source": "images/originals/essays/rethinking-invasive-species-management/lionfish.jpg",
+      "sha256": "2d7ff3e0b5afa5dd1c225a3f09ba7bcf329acb3027094d3c15b04cea2a7cb2fe",
+      "width": 800,
+      "height": 448,
+      "bytes": 52922,
+      "aspect_ratio": 1.7857,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "deterministic_minimum_fill",
+        "saturated_color"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.2591,
+        "dark_fraction": 0.5869,
+        "average_saturation": 0.7024,
+        "saturated_fraction": 0.6934,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "essays/the-gold-card-and-the-price-of-belonging/hero-jpg",
+      "source": "images/originals/essays/the-gold-card-and-the-price-of-belonging/hero.jpg",
+      "sha256": "d2d7754dd43a04ef6939f40cc89705d7366aed6d6b39b83b326415d7fbad40b9",
+      "width": 256,
+      "height": 170,
+      "bytes": 5247,
+      "aspect_ratio": 1.5059,
+      "image_class": "essay_photo",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "retained_unreferenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "dark_tones",
+        "saturated_color"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.0661,
+        "dark_fraction": 0.932,
+        "average_saturation": 0.8468,
+        "saturated_fraction": 0.795,
+        "sample_count": 1088
+      }
+    },
+    {
+      "id": "essays/the-sewer-under-the-sidewalk/section-2",
+      "source": "images/originals/essays/the-sewer-under-the-sidewalk/section-2.png",
+      "sha256": "27d899c7e33c9ecca18ae6d67807153966637b8978ae94b709373f2bac530318",
+      "width": 2048,
+      "height": 1365,
+      "bytes": 4580814,
+      "aspect_ratio": 1.5004,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "dark_tones"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.1993,
+        "dark_fraction": 0.7461,
+        "average_saturation": 0.4563,
+        "saturated_fraction": 0.3076,
+        "sample_count": 1024
+      }
+    },
+    {
+      "id": "medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7",
+      "source": "images/originals/medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7.jpeg",
+      "sha256": "2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7",
+      "width": 800,
+      "height": 533,
+      "bytes": 60693,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "faces_or_photos"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.4185,
+        "dark_fraction": 0.3854,
+        "average_saturation": 0.1897,
+        "saturated_fraction": 0.0114,
+        "sample_count": 1056
+      }
+    },
+    {
+      "id": "medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a",
+      "source": "images/originals/medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a.jpeg",
+      "sha256": "502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a",
+      "width": 800,
+      "height": 533,
+      "bytes": 24630,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "faces_or_photos",
+        "saturated_color"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.3677,
+        "dark_fraction": 0.357,
+        "average_saturation": 0.6835,
+        "saturated_fraction": 0.5777,
+        "sample_count": 1056
+      }
+    },
+    {
+      "id": "medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb",
+      "source": "images/originals/medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb.jpeg",
+      "sha256": "982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb",
+      "width": 800,
+      "height": 533,
+      "bytes": 40076,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "faces_or_photos"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.5655,
+        "dark_fraction": 0.018,
+        "average_saturation": 0.5163,
+        "saturated_fraction": 0.4261,
+        "sample_count": 1056
+      }
+    },
+    {
+      "id": "medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb",
+      "source": "images/originals/medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb.jpeg",
+      "sha256": "bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb",
+      "width": 800,
+      "height": 533,
+      "bytes": 48363,
+      "aspect_ratio": 1.5009,
+      "image_class": "medium_import",
+      "processing_hint": "photo",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "categories": [
+        "dark_tones"
+      ],
+      "visual_metrics": {
+        "average_luminance": 0.0858,
+        "dark_fraction": 0.9631,
+        "average_saturation": 0.387,
+        "saturated_fraction": 0.3324,
+        "sample_count": 1056
+      }
+    }
+  ]
+}

@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/id-required/hero.png"
+featured_image: "essays/id-required/hero"
 featured_image_alt: "Editorial illustration of a voter registration ledger under a cold database light, with one record marked for verification."
 featured_image_caption: "The voter roll is a public trust before it is a database."
 collections:
@@ -76,7 +76,7 @@ If proof becomes unthinkable, the civic culture has already been damaged. A fran
 
 
 
-![Editorial illustration of county election workers sorting notices beside a large federal data terminal.](/images/essays/id-required/section-1.png)
+![Editorial illustration of county election workers sorting notices beside a large federal data terminal.](oip-image:essays/id-required/section-1)
 
 *Federal records reach the franchise through state law and county desks.*
 ## The Machine Has to Be Worthy of the Task
@@ -163,7 +163,7 @@ If citizens claim the franchise, citizens should treat proof and responsiveness 
 
 
 
-![Editorial illustration of a polling-place table with a voter, a clerk, citizenship papers, and a verification file.](/images/essays/id-required/section-2.png)
+![Editorial illustration of a polling-place table with a voter, a clerk, citizenship papers, and a verification file.](oip-image:essays/id-required/section-2)
 
 *The burden of proof belongs in a process, not in a panic.*
 ## The File and the Franchise

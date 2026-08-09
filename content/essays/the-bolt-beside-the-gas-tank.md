@@ -7,7 +7,7 @@ draft: false
 slug: "the-bolt-beside-the-gas-tank"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/the-bolt-beside-the-gas-tank/hero.png"
+featured_image: "essays/the-bolt-beside-the-gas-tank/hero"
 featured_image_alt: "A side cutaway of a 1970s compact car after a rear crash shows the fuel tank behind the rear axle driven forward into a differential bolt."
 featured_image_caption: "The tank sat behind the rear axle. A rear crash could drive it forward into exposed differential bolts."
 version: "1.0"
@@ -89,7 +89,7 @@ That kind of number can help with a rule for millions of cars, but it cannot set
 
 Putting the memo in its proper place leaves the gas-tank problem intact.
 
-![Two separate archive displays show earlier crash-test photographs on the left and a 1977 cost memo enlarged under later newspaper attention on the right.](/images/essays/the-bolt-beside-the-gas-tank/section-1.png)
+![Two separate archive displays show earlier crash-test photographs on the left and a 1977 cost memo enlarged under later newspaper attention on the right.](oip-image:essays/the-bolt-beside-the-gas-tank/section-1)
 
 *The crash tests came first. The 1977 memo later became the story most people remembered.*
 

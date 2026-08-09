@@ -48,12 +48,16 @@
               {{ $leadHref = $leadURL | relURL }}
             {{ end }}
             {{ $leadImage := .image | default "" }}
-            {{ $leadImageSrc := $leadImage }}
-            {{ if and $leadImage (not (hasPrefix $leadImage "http")) }}
-              {{ $leadImageSrc = $leadImage | relURL }}
+            {{ $leadImageModel := false }}
+            {{ if $leadImage }}
+              {{ $leadImageModel = partial "images/model.html" (dict
+                "page" $
+                "ref" $leadImage
+                "display" true
+              ) }}
             {{ end }}
             <article class="almanack-lead">
-              {{ if $leadImageSrc }}
+              {{ if $leadImageModel }}
                 <figure class="almanack-lead__figure">
                   <button
                     type="button"
@@ -62,11 +66,20 @@
                     data-title="{{ .title }}"
                     data-date="{{ $issueDate.Format "2006-01-02" }}"
                     data-date-label="{{ $issueDate.Format "Jan 2, 2006" }}"
-                    data-image="{{ $leadImageSrc }}"
+                    data-image="{{ $leadImageModel.lightbox_url }}"
                     data-alt="{{ .image_alt }}"
+                    data-width="{{ $leadImageModel.lightbox_width }}"
+                    data-height="{{ $leadImageModel.lightbox_height }}"
                     aria-label="Open {{ .title }} cartoon fullscreen"
                   >
-                    <img src="{{ $leadImageSrc }}" alt="{{ .image_alt }}" loading="eager">
+                    {{ partial "images/picture.html" (dict
+                      "model" $leadImageModel
+                      "alt" .image_alt
+                      "loading" "eager"
+                      "fetchpriority" "high"
+                      "sizes" "(min-width: 72rem) 42rem, (min-width: 48rem) 58vw, calc(100vw - 2rem)"
+                      "lightbox" true
+                    ) }}
                   </button>
                 </figure>
               {{ end }}
@@ -87,12 +100,16 @@
                   {{ $itemHref = $itemURL | relURL }}
                 {{ end }}
                 {{ $itemImage := .image | default "" }}
-                {{ $itemImageSrc := $itemImage }}
-                {{ if and $itemImage (not (hasPrefix $itemImage "http")) }}
-                  {{ $itemImageSrc = $itemImage | relURL }}
+                {{ $itemImageModel := false }}
+                {{ if $itemImage }}
+                  {{ $itemImageModel = partial "images/model.html" (dict
+                    "page" $
+                    "ref" $itemImage
+                    "display" true
+                  ) }}
                 {{ end }}
                 <article class="almanack-secondary-card">
-                  {{ if $itemImageSrc }}
+                  {{ if $itemImageModel }}
                     <button
                       type="button"
                       class="almanack-secondary-card__thumb"
@@ -100,11 +117,19 @@
                       data-title="{{ .title }}"
                       data-date="{{ $issueDate.Format "2006-01-02" }}"
                       data-date-label="{{ $issueDate.Format "Jan 2, 2006" }}"
-                      data-image="{{ $itemImageSrc }}"
+                      data-image="{{ $itemImageModel.lightbox_url }}"
                       data-alt="{{ .image_alt }}"
+                      data-width="{{ $itemImageModel.lightbox_width }}"
+                      data-height="{{ $itemImageModel.lightbox_height }}"
                       aria-label="Open {{ .title }} cartoon fullscreen"
                     >
-                      <img src="{{ $itemImageSrc }}" alt="{{ .image_alt }}" loading="lazy">
+                      {{ partial "images/picture.html" (dict
+                        "model" $itemImageModel
+                        "alt" .image_alt
+                        "loading" "lazy"
+                        "sizes" "(min-width: 48rem) 18rem, calc(100vw - 2rem)"
+                        "lightbox" true
+                      ) }}
                     </button>
                   {{ end }}
                   <h3><a href="{{ $itemHref }}">{{ .title }}</a></h3>

@@ -13,7 +13,7 @@ revision_history:
     date: "2026-07-09"
     note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity certainty wording without changing thesis, sourcing, or publication status."
 featured: false
-featured_image: "/images/essays/the-siren-on-the-pole/hero.png"
+featured_image: "essays/the-siren-on-the-pole/hero"
 featured_image_alt: "An editorial illustration of an outdoor warning siren on a utility pole above a quiet street as phones and radios glow in nearby windows."
 featured_image_caption: "The old public signal now sits beside smaller private screens."
 collections:
@@ -107,7 +107,7 @@ Public education belongs in that same ledger. A test schedule has little value i
 
 The siren therefore needs a civic maintenance plan as much as a mechanical one. The county has to maintain the hardware. It also has to maintain the meaning.
 
-![A quiet emergency operations room with a wall map, a siren control panel, and alert channels branching toward a town outside the window.](/images/essays/the-siren-on-the-pole/section-1.png)
+![A quiet emergency operations room with a wall map, a siren control panel, and alert channels branching toward a town outside the window.](oip-image:essays/the-siren-on-the-pole/section-1)
 
 *The pole is only the visible end of the warning chain.*
 
@@ -211,7 +211,7 @@ It is also made when officials resist the temptation to sell one technology as t
 
 Public warning works as a stack because public life is scattered. People are indoors and outdoors, awake and asleep, online and off, English-speaking and not, able-bodied and disabled, local and visiting, skeptical and trusting, prepared and improvising. The system has to meet more than the average resident. It has to meet the resident who is hard to reach when the clock is short.
 
-![A neighborhood street after a siren test, with residents checking a radio, a phone, and a posted evacuation map under a clearing sky.](/images/essays/the-siren-on-the-pole/section-2.png)
+![A neighborhood street after a siren test, with residents checking a radio, a phone, and a posted evacuation map under a clearing sky.](oip-image:essays/the-siren-on-the-pole/section-2)
 
 *A warning succeeds when the noise becomes a usable instruction.*
 

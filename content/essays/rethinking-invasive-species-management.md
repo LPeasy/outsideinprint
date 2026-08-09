@@ -5,7 +5,7 @@ draft: false
 slug: "rethinking-invasive-species-management"
 section_label: "Essay"
 subtitle: "Why Florida keeps spending millions managing invasives without much to show for it"
-featured_image: "/images/essays/rethinking-invasive-species-management/hero-python.jpg"
+featured_image: "essays/rethinking-invasive-species-management/hero-python"
 featured_image_caption: "Photo by Michael Jerrard on Unsplash"
 featured_image_alt: "Close view of a coiled python."
 description: "Florida spends millions fighting species it will never get rid of — while the ones it could stop slip right past"
@@ -97,7 +97,7 @@ Here is how many of them arrived:
 
 ### The Pet and Aquarium Trade
 
-![Burmese pythons coiled together.](/images/essays/rethinking-invasive-species-management/python-pet-trade.jpg)
+![Burmese pythons coiled together.](oip-image:essays/rethinking-invasive-species-management/python-pet-trade)
 
 Photo by Joshua J. Cotten on Unsplash
 
@@ -121,7 +121,7 @@ The result? Dense, dry stands where there used to be one-of-a-kind natural Flori
 
 ### Global Trade and Accidental Invaders
 
-![Container ships and port cranes seen from above.](/images/essays/rethinking-invasive-species-management/global-shipping.jpg)
+![Container ships and port cranes seen from above.](oip-image:essays/rethinking-invasive-species-management/global-shipping)
 
 Photo by william william on Unsplash
 
@@ -153,7 +153,7 @@ Because when it comes to invasive species:
 
 > Timing is everything.
 
-![Diagram of the invasion curve from prevention through long-term control.](/images/essays/rethinking-invasive-species-management/invasion-curve.png)
+![Diagram of the invasion curve from prevention through long-term control.](oip-image:essays/rethinking-invasive-species-management/invasion-curve)
 
 > OIP diagram | Prevention and early response are cheaper than long-term control after an invasive species is established.
 
@@ -220,7 +220,7 @@ If you know one invasive species in Florida, it is probably the Burmese python. 
 
 We missed our shot. By the time we took them seriously, they were already breeding across hundreds of square miles.
 
-![Comparison diagram for Burmese pythons and Nile monitors.](/images/essays/rethinking-invasive-species-management/case-python-monitor.png)
+![Comparison diagram for Burmese pythons and Nile monitors.](oip-image:essays/rethinking-invasive-species-management/case-python-monitor)
 
 > OIP diagram | Pythons are already in maintenance mode; Nile monitors still present a narrower target.
 
@@ -244,7 +244,7 @@ FWC and regional partners are monitoring them, so managers have better informati
 
 ### Case Study 2: Hydrilla vs. Crested Floating Heart
 
-![Comparison diagram for hydrilla and crested floating heart.](/images/essays/rethinking-invasive-species-management/case-hydrilla-floating-heart.png)
+![Comparison diagram for hydrilla and crested floating heart.](oip-image:essays/rethinking-invasive-species-management/case-hydrilla-floating-heart)
 
 > OIP diagram | Hydrilla is a maintenance burden; crested floating heart is still a better prevention target.
 
@@ -266,11 +266,11 @@ Right now, it remains a localized threat in parts of North and Central Florida. 
 
 ### Case Study 3: Lionfish vs. Zebra Mussels in Retail
 
-![Comparison diagram for lionfish and zebra mussels in retail pathways.](/images/essays/rethinking-invasive-species-management/case-lionfish-zebra-mussels.png)
+![Comparison diagram for lionfish and zebra mussels in retail pathways.](oip-image:essays/rethinking-invasive-species-management/case-lionfish-zebra-mussels)
 
 > OIP diagram | Some markets reward removal; others spread risk through retail pathways.
 
-![Lionfish near coral.](/images/essays/rethinking-invasive-species-management/lionfish.jpg)
+![Lionfish near coral.](oip-image:essays/rethinking-invasive-species-management/lionfish)
 
 > Invasive Lionfish | Source: NOAA
 
@@ -286,7 +286,7 @@ There are lionfish derbies, awareness campaigns, and seafood pushes promoting "E
 
 But here is a quieter success story you might have missed.
 
-![Zebra mussels attached to a hard surface.](/images/essays/rethinking-invasive-species-management/zebra-mussels.jpg)
+![Zebra mussels attached to a hard surface.](oip-image:essays/rethinking-invasive-species-management/zebra-mussels)
 
 > Zebra Mussels | Source: NOAA
 
@@ -340,7 +340,7 @@ This is not about doing more.
 
 ### Hope Lies on the Frontier
 
-![Alligator resting near water in a Florida habitat.](/images/essays/rethinking-invasive-species-management/florida-ecosystem.jpg)
+![Alligator resting near water in a Florida habitat.](oip-image:essays/rethinking-invasive-species-management/florida-ecosystem)
 
 Photo by Richard Sagredo on Unsplash
 

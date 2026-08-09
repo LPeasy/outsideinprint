@@ -13,7 +13,7 @@ revision_history:
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-tank-at-the-fence-line/hero.png"
+featured_image: "essays/the-tank-at-the-fence-line/hero"
 featured_image_alt: "A large industrial tank behind a chain-link fence with dim houses beyond the evacuation line."
 featured_image_caption: "The fence line is where private storage becomes public geography."
 collections:
@@ -65,7 +65,7 @@ Residents hear contradiction because public language has to carry technical unce
 
 Those sentences belong to the same emergency. They are hard to live under because each one is partial.
 
-![A command table with maps, radios, air monitors, and road closure cones laid out under a hard overhead light.](/images/essays/the-tank-at-the-fence-line/section-1.png)
+![A command table with maps, radios, air monitors, and road closure cones laid out under a hard overhead light.](oip-image:essays/the-tank-at-the-fence-line/section-1)
 
 *An emergency response turns uncertainty into orders, routes, shelters, and monitors.*
 
@@ -143,7 +143,7 @@ The Garden Grove emergency strained that trust because the boring work became vi
 
 Public confidence in industrial risk rests less on dramatic disaster response than on the quiet credibility of everything that happens before response begins. That is the civic problem beneath the incident.
 
-![A quiet residential street at night with porch lights on and an evacuation barrier at the far end.](/images/essays/the-tank-at-the-fence-line/section-2.png)
+![A quiet residential street at night with porch lights on and an evacuation barrier at the far end.](oip-image:essays/the-tank-at-the-fence-line/section-2)
 
 *The neighborhood learns about the plant when the plant's risk crosses the street.*
 

@@ -315,6 +315,58 @@ function Test-ExpectedFlag {
   return [bool](Get-ExpectedEntryValue -Entry $Entry -Key $Key -Default $false)
 }
 
+function Get-ManagedSocialImageUrl {
+  param(
+    [hashtable]$Manifest,
+    [string]$AssetId
+  )
+
+  if ([string]::IsNullOrWhiteSpace($AssetId) -or -not $Manifest.assets.ContainsKey($AssetId)) {
+    throw "Managed social-image asset is not registered: $AssetId"
+  }
+
+  $asset = $Manifest.assets[$AssetId]
+  if ([string]$asset.processing_state -ne 'derivative_capable') {
+    throw "Managed social-image asset cannot produce derivatives: $AssetId"
+  }
+
+  $hashPrefix = ([string]$asset.sha256).Substring(0, 12)
+  $socialWidth = [Math]::Min([int]$asset.width, [int]$Manifest.defaults.social_max_width)
+  return "https://outsideinprint.org/images/rendered/$AssetId/$hashPrefix/social-${socialWidth}w.jpg"
+}
+
+function Get-ManagedVisibleImagePath {
+  param(
+    [hashtable]$Manifest,
+    [string]$AssetId
+  )
+
+  if ([string]::IsNullOrWhiteSpace($AssetId) -or -not $Manifest.assets.ContainsKey($AssetId)) {
+    throw "Managed visible-image asset is not registered: $AssetId"
+  }
+
+  $asset = $Manifest.assets[$AssetId]
+  if ([string]$asset.processing_state -ne 'derivative_capable') {
+    throw "Managed visible-image asset cannot produce derivatives: $AssetId"
+  }
+
+  $hashPrefix = ([string]$asset.sha256).Substring(0, 12)
+  $visibleWidth = [Math]::Min([int]$asset.width, [int]$Manifest.defaults.max_render_width)
+  return "/images/rendered/$AssetId/$hashPrefix/${visibleWidth}w.webp"
+}
+
+function ConvertTo-CanonicalImageUrl {
+  param([AllowNull()][string]$Value)
+
+  if ([string]::IsNullOrWhiteSpace($Value) -or $Value -match '^https?://') {
+    return $Value
+  }
+  if (-not $Value.StartsWith('/', [System.StringComparison]::Ordinal)) {
+    return "https://outsideinprint.org/$Value"
+  }
+  return "https://outsideinprint.org$Value"
+}
+
 function Get-CurrentCartoonValue {
   param(
     [string]$RepoRoot,
@@ -522,6 +574,11 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$imageManifestPath = Join-Path $repoRoot 'data\image-assets.json'
+if (-not (Test-Path -LiteralPath $imageManifestPath -PathType Leaf)) {
+  throw "Responsive image manifest not found: $imageManifestPath"
+}
+$imageManifest = Get-Content -LiteralPath $imageManifestPath -Raw | ConvertFrom-Json -AsHashtable -Depth 20
 $canonicalAffirmations = @(Get-CanonicalAffirmations -Path (Join-Path $repoRoot 'editorial\affirmations-bank.md'))
 $currentCartoon = Get-PublicCurrentCartoonEntry -RepoRoot $repoRoot
 $currentCartoonSlug = if ($null -ne $currentCartoon) { [string]$currentCartoon.slug } else { '' }
@@ -596,11 +653,11 @@ $optionalDefaultListPages = @(
 
 $requiredImportedMediaPages = [ordered]@{
   'public/essays/biter-the-slang-word-that-hits/index.html' = @{
-    ExpectedImagePrefix = '/images/essays/biter-the-slang-word-that-hits/'
+    ExpectedImagePrefix = '/images/rendered/essays/biter-the-slang-word-that-hits/'
     ForbiddenImagePattern = '/images/medium/biter-the-slang-word-that-hits/[^"''<>\s]+\.svg'
   }
   'public/essays/rethinking-invasive-species-management/index.html' = @{
-    ExpectedImagePrefix = '/images/essays/rethinking-invasive-species-management/'
+    ExpectedImagePrefix = '/images/rendered/essays/rethinking-invasive-species-management/'
     ForbiddenImagePattern = '/images/medium/rethinking-invasive-species-management/[^"''<>\s]+\.svg'
   }
   'public/essays/the-risk-management-buffet/index.html' = @{
@@ -788,7 +845,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = ('https://outsideinprint.org{0}' -f $currentCartoonImagePath)
+    ExpectedManagedImageId = $currentCartoonImagePath
   }
   'public/apps/index.html' = @{
     Title = 'Apps & Tools'
@@ -1092,7 +1149,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-ai-data-center-wants-its-own-power-plant/hero.png'
+    ExpectedManagedImageId = 'essays/the-ai-data-center-wants-its-own-power-plant/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-model-that-could-not-leave/index.html' = @{
@@ -1102,7 +1159,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-model-that-could-not-leave/hero.png'
+    ExpectedManagedImageId = 'essays/the-model-that-could-not-leave/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/smokestack-spreadsheets/index.html' = @{
@@ -1112,7 +1169,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/smokestack-spreadsheets/hero.png'
+    ExpectedManagedImageId = 'essays/smokestack-spreadsheets/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/canvas-fails-finals-week/index.html' = @{
@@ -1122,7 +1179,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/canvas-fails-finals-week/hero.png'
+    ExpectedManagedImageId = 'essays/canvas-fails-finals-week/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-bet-slip-in-the-briefing-room/index.html' = @{
@@ -1132,7 +1189,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-bet-slip-in-the-briefing-room/hero.png'
+    ExpectedManagedImageId = 'essays/the-bet-slip-in-the-briefing-room/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/can-you-pass-the-pepper-please/index.html' = @{
@@ -1142,7 +1199,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/can-you-pass-the-pepper-please/hero.png'
+    ExpectedManagedImageId = 'essays/can-you-pass-the-pepper-please/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-factory-in-the-footnote/index.html' = @{
@@ -1152,7 +1209,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-factory-in-the-footnote/hero.png'
+    ExpectedManagedImageId = 'essays/the-factory-in-the-footnote/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-blue-pool-at-the-memorial/index.html' = @{
@@ -1162,7 +1219,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-blue-pool-at-the-memorial/hero.png'
+    ExpectedManagedImageId = 'essays/the-blue-pool-at-the-memorial/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/outside-the-garden/index.html' = @{
@@ -1172,7 +1229,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/outside-the-garden/hero.png'
+    ExpectedManagedImageId = 'essays/outside-the-garden/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-strait-that-holds-the-price/index.html' = @{
@@ -1182,7 +1239,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-strait-that-holds-the-price/hero.png'
+    ExpectedManagedImageId = 'editorial/lines-of-fire'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-blockade-has-a-phone-number/index.html' = @{
@@ -1192,7 +1249,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-blockade-has-a-phone-number/hero.png'
+    ExpectedManagedImageId = 'essays/the-blockade-has-a-phone-number/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-warning-label-in-the-weeds/index.html' = @{
@@ -1202,7 +1259,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-warning-label-in-the-weeds/hero.png'
+    ExpectedManagedImageId = 'essays/the-warning-label-in-the-weeds/hero'
     AuthorMeta = 'Robert V. Ussley'
   }
   'public/essays/the-sewer-under-the-sidewalk/index.html' = @{
@@ -1212,7 +1269,7 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'article'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/essays/the-sewer-under-the-sidewalk/hero.png'
+    ExpectedManagedImageId = 'editorial/the-sewer-under-the-sidewalk'
     AuthorMeta = 'Robert V. Ussley'
   }
 }
@@ -1882,6 +1939,17 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
       }
     }
 
+    if ($expected.Contains('ExpectedManagedImageId')) {
+      $expectedImageAssetId = [string]$expected.ExpectedManagedImageId
+      $expectedImage = Get-ManagedSocialImageUrl -Manifest $imageManifest -AssetId $expectedImageAssetId
+      if ($ogImage -ne $expectedImage) {
+        $metadataIssues.Add("$relativePath => expected managed og:image '$expectedImage', found '$ogImage'")
+      }
+      if ($twitterImage -ne $expectedImage) {
+        $metadataIssues.Add("$relativePath => expected managed twitter:image '$expectedImage', found '$twitterImage'")
+      }
+    }
+
     if ($expected.Contains('ExpectedImageAlt')) {
       $expectedImageAlt = [string]$expected.ExpectedImageAlt
       $ogImageAlt = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image:alt'
@@ -1953,25 +2021,34 @@ foreach ($check in $essayHeroChecks) {
       continue
     }
 
-    $expectedHeroSrc = if ($featuredImage -match '^https?://') {
-      $featuredImage
+    $isManagedFeaturedImage = $imageManifest.assets.ContainsKey($featuredImage)
+    $expectedHeroPath = if ($isManagedFeaturedImage) {
+      Get-ManagedVisibleImagePath -Manifest $imageManifest -AssetId $featuredImage
     }
     else {
-      'https://outsideinprint.org' + $featuredImage
+      $featuredImage
+    }
+    $expectedHeroUrl = ConvertTo-CanonicalImageUrl -Value $expectedHeroPath
+    $actualHeroUrl = ConvertTo-CanonicalImageUrl -Value $heroSrc
+
+    if ($actualHeroUrl -ne $expectedHeroUrl) {
+      $metadataIssues.Add("$relativePath => expected visible hero '$expectedHeroUrl', found '$actualHeroUrl'")
     }
 
-    if ($heroSrc -ne $expectedHeroSrc) {
-      $metadataIssues.Add("$relativePath => expected visible hero '$expectedHeroSrc', found '$heroSrc'")
+    $expectedSocialImage = if ($isManagedFeaturedImage) {
+      Get-ManagedSocialImageUrl -Manifest $imageManifest -AssetId $featuredImage
     }
-
+    else {
+      ConvertTo-CanonicalImageUrl -Value $featuredImage
+    }
     $ogImage = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue 'og:image'
-    if ($ogImage -ne $expectedHeroSrc) {
-      $metadataIssues.Add("$relativePath => expected og:image to match the visible hero '$expectedHeroSrc', found '$ogImage'")
+    if ($ogImage -ne $expectedSocialImage) {
+      $metadataIssues.Add("$relativePath => expected hero social JPEG or canonical fallback '$expectedSocialImage', found og:image '$ogImage'")
     }
 
     $twitterImage = Get-MetaContent -Html $html -AttributeName 'name' -AttributeValue 'twitter:image'
-    if ($twitterImage -ne $expectedHeroSrc) {
-      $metadataIssues.Add("$relativePath => expected twitter:image to match the visible hero '$expectedHeroSrc', found '$twitterImage'")
+    if ($twitterImage -ne $expectedSocialImage) {
+      $metadataIssues.Add("$relativePath => expected hero social JPEG or canonical fallback '$expectedSocialImage', found twitter:image '$twitterImage'")
     }
 
     if ([bool]$check.ExpectHeroAbsentFromBody) {
@@ -1984,7 +2061,16 @@ foreach ($check in $essayHeroChecks) {
       }
       else {
         $pieceBodyHtml = $bodyMatch.Groups[1].Value
-        if ($pieceBodyHtml -match [regex]::Escape($expectedHeroSrc)) {
+        $bodyRepeatsHero = if ($isManagedFeaturedImage) {
+          @(
+            Get-OpenTags -Html $pieceBodyHtml -TagName 'img' |
+              Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-oip-image-id') -ceq $featuredImage }
+          ).Count -gt 0
+        }
+        else {
+          $pieceBodyHtml -match [regex]::Escape($heroSrc)
+        }
+        if ($bodyRepeatsHero) {
           $metadataIssues.Add("$relativePath => expected the promoted or deduped hero image not to repeat inside the article body")
         }
 
@@ -3176,7 +3262,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-05-09/index.html'
-    Pattern = '(?s)/images/editorial/modern-prometheus\.png.*?/images/editorial/lump-of-coal\.png.*?/images/editorial/pass-the-pepper\.png.*?/images/editorial/who-paid-the-nazis\.png'
+    Pattern = '(?s)/images/rendered/editorial/modern-prometheus/.*?/images/rendered/editorial/lump-of-coal/.*?/images/rendered/editorial/pass-the-pepper/.*?/images/rendered/editorial/who-paid-the-nazis/'
     Message = 'expected the May 9 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3197,7 +3283,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-05-16/index.html'
-    Pattern = '(?s)/images/editorial/not-my-river-not-my-problem\.png.*?/images/editorial/delivering-the-goods\.png.*?/images/editorial/made-in-china\.png.*?/images/editorial/see-the-world\.png'
+    Pattern = '(?s)/images/rendered/editorial/not-my-river-not-my-problem/.*?/images/rendered/editorial/delivering-the-goods/.*?/images/rendered/editorial/made-in-china/.*?/images/rendered/editorial/see-the-world/'
     Message = 'expected the May 16 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3218,7 +3304,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-05-23/index.html'
-    Pattern = '(?s)/images/editorial/memory-hole\.png.*?/images/editorial/beneficial-use\.png.*?/images/editorial/papers-please\.png.*?/images/editorial/the-altar-of-consent\.png'
+    Pattern = '(?s)/images/rendered/editorial/memory-hole/.*?/images/rendered/editorial/beneficial-use/.*?/images/rendered/editorial/papers-please/.*?/images/rendered/editorial/the-altar-of-consent/'
     Message = 'expected the May 23 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3239,7 +3325,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-05-30/index.html'
-    Pattern = '(?s)/images/editorial/hit-after-hit\.png.*?/images/editorial/warbonds\.png.*?/images/editorial/human-resources\.png.*?/images/editorial/on-the-fence\.png'
+    Pattern = '(?s)/images/rendered/editorial/hit-after-hit/.*?/images/rendered/editorial/warbonds/.*?/images/rendered/editorial/human-resources/.*?/images/rendered/editorial/on-the-fence/'
     Message = 'expected the May 30 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3260,7 +3346,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-06-06/index.html'
-    Pattern = '(?s)/images/editorial/the-ruler-of-the-road\.png.*?/images/editorial/post-malonely\.png.*?/images/editorial/blowing-smoke\.png'
+    Pattern = '(?s)/images/rendered/editorial/the-ruler-of-the-road/.*?/images/rendered/editorial/post-malonely/.*?/images/rendered/editorial/blowing-smoke/'
     Message = 'expected the June 6 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3281,7 +3367,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-06-20/index.html'
-    Pattern = '(?s)/images/editorial/prime-suspect\.png.*?/images/editorial/escape-clause\.png.*?/images/editorial/the-meter\.png'
+    Pattern = '(?s)/images/rendered/editorial/prime-suspect/.*?/images/rendered/editorial/escape-clause/.*?/images/rendered/editorial/the-meter/'
     Message = 'expected the June 20 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3302,7 +3388,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-06-27/index.html'
-    Pattern = '(?s)/images/editorial/shadow-price\.png.*?/images/editorial/the-cone-in-the-lane\.png.*?/images/editorial/break-seal\.png.*?/images/editorial/curb-appeal\.png'
+    Pattern = '(?s)/images/rendered/editorial/shadow-price/.*?/images/rendered/editorial/the-cone-in-the-lane/.*?/images/rendered/editorial/break-seal/.*?/images/rendered/editorial/curb-appeal/'
     Message = 'expected the June 27 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3328,7 +3414,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-04/index.html'
-    Pattern = '(?s)/images/editorial/the-minute-drawer\.png.*?/images/editorial/claim-check\.png.*?/images/editorial/after-the-tone\.png.*?/images/editorial/the-sorting-counter\.png'
+    Pattern = '(?s)/images/rendered/editorial/the-minute-drawer/.*?/images/rendered/editorial/claim-check/.*?/images/rendered/editorial/after-the-tone/.*?/images/rendered/editorial/the-sorting-counter/'
     Message = 'expected the July 4 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3349,7 +3435,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-11/index.html'
-    Pattern = '(?s)/images/editorial/the-trophy-case\.png.*?/images/editorial/house-gravity\.png.*?/images/editorial/whose-yes\.png.*?/images/editorial/minimum-door\.png'
+    Pattern = '(?s)/images/rendered/editorial/the-trophy-case/.*?/images/rendered/editorial/house-gravity/.*?/images/rendered/editorial/whose-yes/.*?/images/rendered/editorial/minimum-door/'
     Message = 'expected the July 11 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3370,7 +3456,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-18/index.html'
-    Pattern = '(?s)/images/editorial/passed-down\.png.*?/images/editorial/the-returning-water\.png.*?/images/editorial/mending-table\.png.*?/images/editorial/the-tiller\.png'
+    Pattern = '(?s)/images/rendered/editorial/passed-down/.*?/images/rendered/editorial/the-returning-water/.*?/images/rendered/editorial/mending-table/.*?/images/rendered/editorial/the-tiller/'
     Message = 'expected the July 18 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3391,7 +3477,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)/images/editorial/the-closed-window\.png.*?/images/editorial/signal-at-the-turn\.png.*?/images/editorial/the-empty-hooks\.png.*?/images/editorial/serpent-at-supper\.png'
+    Pattern = '(?s)/images/rendered/editorial/the-closed-window/.*?/images/rendered/editorial/signal-at-the-turn/.*?/images/rendered/editorial/the-empty-hooks/.*?/images/rendered/editorial/serpent-at-supper/'
     Message = 'expected the July 25 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3412,7 +3498,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-08-01/index.html'
-    Pattern = '(?s)/images/editorial/the-shape-opens\.png.*?/images/editorial/feet-on-the-floor\.png.*?/images/editorial/the-road-rises\.png.*?/images/editorial/filled-with-life\.png'
+    Pattern = '(?s)/images/rendered/editorial/the-shape-opens/.*?/images/rendered/editorial/feet-on-the-floor/.*?/images/rendered/editorial/the-road-rises/.*?/images/rendered/editorial/filled-with-life/'
     Message = 'expected the August 1 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{
@@ -3433,7 +3519,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-08-08/index.html'
-    Pattern = '(?s)/images/editorial/the-turn\.png.*?/images/editorial/birthright\.png.*?/images/editorial/life-opens-the-door\.png.*?/images/editorial/not-mine-to-carry\.png'
+    Pattern = '(?s)/images/rendered/editorial/the-turn/.*?/images/rendered/editorial/birthright/.*?/images/rendered/editorial/life-opens-the-door/.*?/images/rendered/editorial/not-mine-to-carry/'
     Message = 'expected the August 8 Almanack essay cards to use the paired editorial cartoons from the gallery'
   },
   @{

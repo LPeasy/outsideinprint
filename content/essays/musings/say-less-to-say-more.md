@@ -10,7 +10,7 @@ collections: ["musings"]
 source_mode: "SOURCE_FREE"
 external_factual_claims: "none"
 description: "You do not have to justify your own existence."
-featured_image: "/images/essays/say-less-to-say-more/hero.png"
+featured_image: "editorial/mail-drop"
 featured_image_alt: "An anonymous adult pulls a blue envelope back from a street letterbox and slips it into a coat pocket while a lone passerby walks beyond a street lamp."
 featured_image_caption: "Mail Drop."
 version: "1.0"

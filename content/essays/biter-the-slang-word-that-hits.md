@@ -5,7 +5,7 @@ draft: false
 slug: "biter-the-slang-word-that-hits"
 section_label: "Essay"
 subtitle: "A word to describe artistic thieves"
-featured_image: "/images/essays/biter-the-slang-word-that-hits/hero-cassette.jpg"
+featured_image: "essays/biter-the-slang-word-that-hits/hero-cassette"
 featured_image_caption: "Photo by Markus Spiske on Unsplash"
 featured_image_alt: "Cassette tape photographed in soft light."
 description: "Biter delivers an accusation in a word. A copycat — someone who steals another person’s ideas, aesthetic, or work and passes it off as their own"
@@ -46,7 +46,7 @@ The dispute was not only about copied words. It was about delivery, style, and o
 
 Grandmaster Caz called it "pure treason."
 
-![Performer holding a microphone on stage.](/images/essays/biter-the-slang-word-that-hits/performer.jpg)
+![Performer holding a microphone on stage.](oip-image:essays/biter-the-slang-word-that-hits/performer)
 
 Photo by Harry Swales on Unsplash
 
@@ -64,7 +64,7 @@ The difference between homage and biting?
 - Intent
 - Transparency
 
-![Fashion subject in a red outfit on white steps.](/images/essays/biter-the-slang-word-that-hits/style-fashion.jpg)
+![Fashion subject in a red outfit on white steps.](oip-image:essays/biter-the-slang-word-that-hits/style-fashion)
 
 Photo by Peter Plashkin on Unsplash
 
@@ -88,7 +88,7 @@ The dispute was not just gossip. It raised the same questions that creative comm
 
 The community response was angry because the alleged copying ran against the basic bargain of creative scenes. You can borrow. You can study. You can pay homage. But you cannot take the labor of smaller artists, strip away the credit, and sell it as your own.
 
-![Dental model representing teeth and bite.](/images/essays/biter-the-slang-word-that-hits/teeth.jpg)
+![Dental model representing teeth and bite.](oip-image:essays/biter-the-slang-word-that-hits/teeth)
 
 Photo by Enis Yavuz on Unsplash
 

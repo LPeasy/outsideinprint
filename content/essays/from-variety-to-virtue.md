@@ -16,7 +16,7 @@ revision_history:
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/from-variety-to-virtue/hero.png"
+featured_image: "essays/from-variety-to-virtue/hero"
 featured_image_alt: "A cabinet of crops, ledgers, ecological specimens, and civic forms arranged as one risk-management archive."
 featured_image_caption: "A practical tool begins as variety across baskets, then gathers authority as it moves from soil to ledgers to public life."
 tags:
@@ -95,7 +95,7 @@ Finance gave diversification scientific authority. It was no longer merely sensi
 
 Those assumptions did a lot of work. They were not decoration. They were the whole deal.
 
-![A portfolio table where imperfectly linked asset tiles are connected by measured threads.](/images/essays/from-variety-to-virtue/section-1.png)
+![A portfolio table where imperfectly linked asset tiles are connected by measured threads.](oip-image:essays/from-variety-to-virtue/section-1)
 
 *Finance gave diversification a formula, and the formula gave an old habit the weight of proof.*
 
@@ -177,7 +177,7 @@ Diversification.
 
 Diversification?
 
-![An institutional sorting machine converting civic judgment into uniform statistical tiles.](/images/essays/from-variety-to-virtue/section-2.png)
+![An institutional sorting machine converting civic judgment into uniform statistical tiles.](oip-image:essays/from-variety-to-virtue/section-2)
 
 *When a conditional tool becomes doctrine, the machine starts treating social life as if it were a portfolio.*
 

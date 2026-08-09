@@ -7,7 +7,7 @@ draft: false
 slug: "your-part"
 section_label: "Essay"
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/your-part/hero.png"
+featured_image: "editorial/the-tiller"
 featured_image_alt: "Editorial cartoon showing an anonymous ferry captain gripping a tiller while a passenger reaches toward a distant dock sign marked ARRIVAL and a red rope runs along the rail."
 featured_image_caption: "The work is yours to carry. The result usually isn't yours alone to command."
 version: "1.1"

@@ -14,7 +14,7 @@ revision_history:
     date: "2026-06-01"
     note: "Updated June 1, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
-featured_image: "/images/essays/the-sunset-date-in-the-code/hero.png"
+featured_image: "essays/the-sunset-date-in-the-code/hero"
 featured_image_alt: "Editorial illustration of a thick Code of Federal Regulations volume with a red sunset date stamp glowing over energy pipes, wires, and a nuclear-site gate."
 featured_image_caption: "The code now carries a date stamp. The public risk sits inside the pages."
 collections:
@@ -94,7 +94,7 @@ The public sees the energy system through failures: a blackout, a spill, a mine 
 
 Sunset review can be useful when it uncovers dead rules. It becomes dangerous when expiration supplies the discipline that evidence, staffing, and public explanation should provide.
 
-![Editorial illustration of agency staff sorting old energy rules at a long table while industry representatives and public-safety monitors watch a wall calendar.](/images/essays/the-sunset-date-in-the-code/section-1.png)
+![Editorial illustration of agency staff sorting old energy rules at a long table while industry representatives and public-safety monitors watch a wall calendar.](oip-image:essays/the-sunset-date-in-the-code/section-1)
 
 *The review table decides which rules deserve renewal and which risks move onto the calendar.*
 
@@ -136,6 +136,6 @@ The Federal Register made the change in small type.
 
 The expiration date is the story.
 
-![Editorial illustration of a public comment clock wired into energy infrastructure, with rules hanging like numbered tags over pipes and power lines.](/images/essays/the-sunset-date-in-the-code/section-2.png)
+![Editorial illustration of a public comment clock wired into energy infrastructure, with rules hanging like numbered tags over pipes and power lines.](oip-image:essays/the-sunset-date-in-the-code/section-2)
 
 *The comment clock starts before the public can see which future rule will need saving.*

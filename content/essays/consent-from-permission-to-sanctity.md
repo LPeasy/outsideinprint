@@ -15,7 +15,7 @@ revision_history:
 featured: false
 homepage_featured: true
 homepage_featured_until: 2026-05-25
-featured_image: "/images/essays/consent-from-permission-to-sanctity/hero.png"
+featured_image: "essays/consent-from-permission-to-sanctity/hero"
 featured_image_alt: "A stamped consent form rests on a civic altar with a green approval mark, columns, files, and institutional symbols behind it."
 featured_image_caption: "A stamped consent form becomes a civic altar, making permission look like purity."
 tags:
@@ -45,7 +45,7 @@ In [Roman law](https://www.britannica.com/topic/consensual-contract), consensus 
 
 A later legal maxim put it cleanly: [consensus facit legem](https://legal-dictionary.thefreedictionary.com/Consensus+facit+legem) ~ consent makes the law. The phrase sounds expansive to modern ears. In context, it was narrow. Consent validated exchanges inside an already ordered society. Slaves could not consent. Children's consent carried little weight. Women's consent was often mediated by guardians. The moral universe was not up for renegotiation.
 
-![The old legal seal made agreement legible inside hierarchy.](/images/essays/consent-from-permission-to-sanctity/section-1.png)
+![The old legal seal made agreement legible inside hierarchy.](oip-image:essays/consent-from-permission-to-sanctity/section-1)
 
 *The old legal seal made agreement legible inside hierarchy.*
 
@@ -105,7 +105,7 @@ The obsession is not accidental. It reflects a society uneasy about authority, w
 
 Consent becomes that ground.
 
-![A consent checkbox can protect the weak, then quietly transfer the burden to them.](/images/essays/consent-from-permission-to-sanctity/section-2.png)
+![A consent checkbox can protect the weak, then quietly transfer the burden to them.](oip-image:essays/consent-from-permission-to-sanctity/section-2)
 
 *A consent checkbox can protect the weak, then quietly transfer the burden to them.*
 

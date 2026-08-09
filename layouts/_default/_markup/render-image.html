@@ -1,12 +1,21 @@
-{{- $destination := .Destination -}}
-{{- if and (hasPrefix $destination "/") (not (hasPrefix $destination "//")) -}}
-  {{- $destination = printf "%s%s" site.Home.RelPermalink (strings.TrimPrefix "/" $destination) -}}
-{{- end -}}
+{{- $model := partial "images/model.html" (dict
+  "page" .Page
+  "ref" .Destination
+  "display" true
+) -}}
+{{- $picture := partial "images/picture.html" (dict
+  "model" $model
+  "alt" .PlainText
+  "title" (cond (and (not .Page.Params.medium_source_url) .Title) .Title "")
+  "loading" "lazy"
+  "sizes" "(min-width: 60rem) 46rem, calc(100vw - 2rem)"
+  "lightbox" true
+) -}}
 {{- if and .Page.Params.medium_source_url .Title -}}
 <figure class="article-figure">
-  <img src="{{ $destination }}" alt="{{ .PlainText }}">
+  {{ $picture }}
   <figcaption class="article-source-caption">{{ .Title }}</figcaption>
 </figure>
 {{- else -}}
-<img src="{{ $destination }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{ $picture }}
 {{- end -}}

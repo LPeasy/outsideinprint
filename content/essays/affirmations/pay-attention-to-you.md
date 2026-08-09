@@ -17,7 +17,7 @@ tags:
   - "self-possession"
 subtitle: "My focus is my domain."
 description: "I bring my focus back to myself and release what belongs to other people."
-featured_image: "/images/essays/pay-attention-to-you/hero.png"
+featured_image: "editorial/not-mine-to-carry"
 featured_image_alt: "An anonymous man walks from a small shadowed crowd struggling against a tangled heap of indistinct burdens toward a sunlit field."
 featured_image_caption: "Not mine to carry."
 version: "1.0"
@@ -60,7 +60,7 @@ So I take a deep breath ~ and I come back to myself.
 I feel my feet on the ground. I tap the side of my hand. 
 I look at the amazing wonderful world all around me. 
 
-![An anonymous barefoot man stands confidently alone in warm morning light with both feet planted and his hands resting in his trouser pockets.](/images/essays/pay-attention-to-you/section-1.png)
+![An anonymous barefoot man stands confidently alone in warm morning light with both feet planted and his hands resting in his trouser pockets.](oip-image:essays/pay-attention-to-you/section-1)
 
 *I come back to myself.*
 

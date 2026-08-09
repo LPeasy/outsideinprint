@@ -9,7 +9,7 @@ section_label: "Essay"
 version: "1.0"
 edition: "First web edition"
 featured: false
-featured_image: "/images/essays/the-curb-cut-at-the-corner/hero.png"
+featured_image: "essays/the-curb-cut-at-the-corner/hero"
 featured_image_alt: "Editorial illustration of a city corner where a curb ramp, tactile warning domes, crosswalk, stroller, cane, wheelchair wheel, and hand truck meet in quiet morning light."
 featured_image_caption: "The corner looks ordinary because a public fight became poured concrete."
 collections:
@@ -91,7 +91,7 @@ That layered structure can be frustrating for the reader who wants one clean rul
 
 The corner is small. The legal machinery around it is large.
 
-![Editorial illustration of a municipal work table with a curb ramp plan, ADA transition map, paving calendar, and small concrete corner model under a desk lamp.](/images/essays/the-curb-cut-at-the-corner/section-1.png)
+![Editorial illustration of a municipal work table with a curb ramp plan, ADA transition map, paving calendar, and small concrete corner model under a desk lamp.](oip-image:essays/the-curb-cut-at-the-corner/section-1)
 
 *The right becomes real only when the project list, budget, and corner detail agree.*
 
@@ -189,7 +189,7 @@ They can also stop counting a ramp as finished when the concrete is poured. The 
 
 The public body that handles those details does more than obey a rule. It gives residents a readable account of how rights reach the ground.
 
-![Editorial illustration of a quiet sidewalk corner after rain, with tactile domes, a clear crosswalk, repaired concrete seams, and a faint reflection of city buildings.](/images/essays/the-curb-cut-at-the-corner/section-2.png)
+![Editorial illustration of a quiet sidewalk corner after rain, with tactile domes, a clear crosswalk, repaired concrete seams, and a faint reflection of city buildings.](oip-image:essays/the-curb-cut-at-the-corner/section-2)
 
 *A city keeps the promise at the corner, or it lets the curb rise again.*
 

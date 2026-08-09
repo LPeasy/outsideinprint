@@ -6,7 +6,7 @@ slug: "the-charge-ledger"
 section_label: "Essay"
 description: "A short logical argument for keeping alleged fraud, seized assets, settlements, proof, and recovered money in separate public columns."
 author_id: "robert-v-ussley"
-featured_image: "/images/essays/the-charge-ledger/hero.png"
+featured_image: "editorial/the-sorting-counter"
 featured_image_alt: "A courthouse records counter holds an oversized ledger and four labeled trays for alleged, seized, settled, and recovered money while anonymous figures sort papers under a red question mark thread."
 featured_image_caption: "A fraud ledger works only when each kind of money has its own slot."
 version: "1.0"
@@ -59,7 +59,7 @@ Readers should not have to guess which column they are reading.
 
 Each column tells a different truth.
 
-![Four boxes show the sequence from the takedown claim to the premise, logical result, and possible problem.](/images/essays/the-charge-ledger/section-1.png)
+![Four boxes show the sequence from the takedown claim to the premise, logical result, and possible problem.](oip-image:essays/the-charge-ledger/section-1)
 
 *The big number shows scale only if the labels stay clear.*
 
@@ -91,7 +91,7 @@ The government does need tools to fight health-care fraud. A payment system this
 
 But enforcement does not become clearer by making every number do the same job.
 
-![Five columns separate alleged, seized, settled, recovered, and unresolved outcomes.](/images/essays/the-charge-ledger/section-2.png)
+![Five columns separate alleged, seized, settled, recovered, and unresolved outcomes.](oip-image:essays/the-charge-ledger/section-2)
 
 *Alleged, seized, settled, and recovered are different outcomes.*
 

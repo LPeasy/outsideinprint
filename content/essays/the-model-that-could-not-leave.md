@@ -6,7 +6,7 @@ slug: "the-model-that-could-not-leave"
 section_label: "Essay"
 subtitle: "China's block of Meta's Manus deal shows how AI companies are becoming strategic territory, even after their headquarters, staff, and paperwork move abroad."
 description: "China's block of Meta's Manus acquisition shows how AI companies, talent, and capability are becoming strategic territory."
-featured_image: "/images/essays/the-model-that-could-not-leave/hero.png"
+featured_image: "essays/the-model-that-could-not-leave/hero"
 featured_image_alt: "An abstract AI model sealed in a glass case under a red security-review stamp."
 featured_image_caption: "An acquisition can be written on paper. Capability is harder to move cleanly."
 version: "1.1"
@@ -104,7 +104,7 @@ There are public benefits too. Voters may reasonably want governments to notice 
 
 The Manus notice offered power without much explanation. That may suit the administrator. It is also a warning to the market. The review perimeter can appear after the deal is already celebrated.
 
-![AI company components arranged on an inspection table under red review light.](/images/essays/the-model-that-could-not-leave/section-1.png)
+![AI company components arranged on an inspection table under red review light.](oip-image:essays/the-model-that-could-not-leave/section-1)
 
 *An AI company is code, people, data, habits, and product judgment arranged into one difficult object.*
 
@@ -122,7 +122,7 @@ The old merger remedy imagines a company as a thing that can be bought, sold, se
 
 That is why the Manus order may matter long after this particular deal is resolved. It signals that regulators will contest AI transfers after corporate form has already shifted. The legal question may become backward-looking: how much of the company has already moved?
 
-![A glowing abstract model held in an inspection tray while two generic hands reach across a transparent barrier.](/images/essays/the-model-that-could-not-leave/section-2.png)
+![A glowing abstract model held in an inspection tray while two generic hands reach across a transparent barrier.](oip-image:essays/the-model-that-could-not-leave/section-2)
 
 *The deal may be corporate. The review treats the model as strategic capacity.*
 

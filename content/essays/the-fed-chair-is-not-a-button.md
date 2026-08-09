@@ -15,7 +15,7 @@ revision_history:
 featured: false
 collections:
   - "civic-institutions-and-public-power"
-featured_image: "/images/essays/the-fed-chair-is-not-a-button/hero.png"
+featured_image: "essays/the-fed-chair-is-not-a-button/hero"
 featured_image_alt: "An empty central bank chair at the head of a long committee table, with a locked interest-rate lever and inflation charts in the background."
 featured_image_caption: "Politics wants one person to move the lever. Monetary policy has to pass through a table."
 ---
@@ -62,7 +62,7 @@ Cheap money is popular until inflation eats the gain. Tight money is hated until
 
 Warsh is walking into that middle ground with almost no honeymoon.
 
-![Twelve equal folders around a central bank meeting table, with a small rate gauge fixed at the center.](/images/essays/the-fed-chair-is-not-a-button/section-1.png)
+![Twelve equal folders around a central bank meeting table, with a small rate gauge fixed at the center.](oip-image:essays/the-fed-chair-is-not-a-button/section-1)
 
 *The chair sits at the head of the table, but the table sets the terms.*
 
@@ -112,7 +112,7 @@ Cuts may become necessary.
 
 They also need to look earned.
 
-![Household bills and receipts crowd a small brass rate gauge on an ordinary kitchen table.](/images/essays/the-fed-chair-is-not-a-button/section-2.png)
+![Household bills and receipts crowd a small brass rate gauge on an ordinary kitchen table.](oip-image:essays/the-fed-chair-is-not-a-button/section-2)
 
 *The rate decision eventually reaches the kitchen table, but it begins with prices people already feel.*
 
