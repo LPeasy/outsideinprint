@@ -280,6 +280,17 @@ if ($responsiveImageSourceStep -match '(?i)AllowPendingReview') {
   throw "CI must run the fail-closed responsive-image source contract without -AllowPendingReview."
 }
 
+if ([regex]::Matches($deployWorkflow, '\.\/tests\/test_focused_image_review_promotion\.ps1').Count -ne 2) {
+  throw "deploy.yml must run the focused image review promotion contract once on Ubuntu and once on Windows."
+}
+if ($deployWorkflow -notmatch '(?ms)^  focused-image-review-windows:\s*\r?\n.*?^    runs-on: windows-latest\s*$' -or
+  $deployWorkflow -notmatch '(?ms)^  focused-image-review-windows:\s*\r?\n.*?^          \.\/tests\/test_focused_image_review_promotion\.ps1\s*$') {
+  throw "deploy.yml must run the focused image review promotion contract in a dedicated Windows job."
+}
+if ($deployWorkflow -notmatch '(?m)^    needs: \[contracts, focused-image-review-windows\]\s*$') {
+  throw "The Hugo build must wait for both Ubuntu contracts and the Windows focused image review contract."
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_responsive_image_output_contract\.ps1\s+-SiteDir\s+public") {
   throw "deploy.yml must run the responsive-image generated-output contract."
 }
@@ -345,7 +356,7 @@ Assert-WorkflowActionReferences `
   -WorkflowName "deploy.yml" `
   -WorkflowText $deployWorkflow `
   -ExpectedReferences @{
-    'actions/checkout@v7' = 3
+    'actions/checkout@v7' = 4
     'actions/setup-node@v6' = 1
     'actions/cache@v5' = 1
     'actions/configure-pages@v6' = 1
@@ -515,7 +526,7 @@ if ($deployWorkflow -notmatch "RequireEditorialPhilosophyAudit") {
   throw "deploy.yml must require Editorial Philosophy Audit evidence for changed non-draft essays, reports, and working papers."
 }
 
-if ($deployWorkflow -notmatch "needs:\s*contracts") {
+if ($deployWorkflow -notmatch '(?m)^    needs:\s*(?:contracts|\[[^]]*\bcontracts\b[^]]*\])\s*$') {
   throw "deploy.yml must separate contract tests from the Hugo build by making the build job depend on the contracts job."
 }
 

@@ -18,6 +18,48 @@ function Assert-True {
   if (-not $Condition) { throw $Message }
 }
 
+function Get-CombinedProcessDiagnostics {
+  param([Parameter(Mandatory = $true)][object]$Result)
+
+  return @([string]$Result.Stdout, [string]$Result.Stderr) -join [Environment]::NewLine
+}
+
+function ConvertTo-NormalizedProcessDiagnostics {
+  param([AllowEmptyString()][string]$Text)
+
+  $escape = [string][char]27
+  $ansiCsiPattern = [regex]::Escape($escape) + '\[[0-?]*[ -/]*[@-~]'
+  $withoutAnsi = [regex]::Replace($Text, $ansiCsiPattern, '')
+  return [regex]::Replace($withoutAnsi, '\s+', ' ').Trim()
+}
+
+function Assert-PromotionFailure {
+  param(
+    [Parameter(Mandatory = $true)][object]$Result,
+    [Parameter(Mandatory = $true)][string]$ExpectedMessage,
+    [Parameter(Mandatory = $true)][string]$Scenario
+  )
+
+  $combined = Get-CombinedProcessDiagnostics -Result $Result
+  $normalized = ConvertTo-NormalizedProcessDiagnostics -Text $combined
+  $normalizedExpected = ConvertTo-NormalizedProcessDiagnostics -Text $ExpectedMessage
+  if ($Result.ExitCode -ne 0 -and
+    $normalized.Contains($normalizedExpected, [StringComparison]::Ordinal)) {
+    return
+  }
+
+  throw @(
+    "$Scenario failed for an unexpected reason.",
+    "Exit code: $($Result.ExitCode)",
+    "Expected normalized message: $normalizedExpected",
+    "Normalized diagnostics: $normalized",
+    "Raw stdout:",
+    [string]$Result.Stdout,
+    "Raw stderr:",
+    [string]$Result.Stderr
+  ) -join [Environment]::NewLine
+}
+
 function Invoke-FocusedReviewPromotion {
   param(
     [Parameter(Mandatory = $true)][string]$ReviewRoot,
@@ -30,7 +72,8 @@ function Invoke-FocusedReviewPromotion {
   $start.UseShellExecute = $false
   $start.RedirectStandardOutput = $true
   $start.RedirectStandardError = $true
-  foreach ($argument in @('-NoLogo', '-NoProfile', '-File', $promoterPath, '-Root', $ReviewRoot) + $Arguments) {
+  $start.Environment['NO_COLOR'] = '1'
+  foreach ($argument in @('-NoLogo', '-NoProfile', '-NonInteractive', '-File', $promoterPath, '-Root', $ReviewRoot) + $Arguments) {
     $null = $start.ArgumentList.Add($argument)
   }
 
@@ -67,6 +110,17 @@ function Copy-ReviewFixtureFiles {
 try {
   [IO.Directory]::CreateDirectory($fixtureRoot) | Out-Null
 
+  $escape = [string][char]27
+  $normalizationFixture = [pscustomobject]@{
+    ExitCode = 1
+    Stdout = "${escape}[36mFocused cleanup inventory is${escape}[0m"
+    Stderr = "not the exact`r`n  approved`t105 Medium plus four Syd cohort."
+  }
+  Assert-PromotionFailure `
+    -Result $normalizationFixture `
+    -ExpectedMessage 'Focused cleanup inventory is not the exact approved 105 Medium plus four Syd cohort.' `
+    -Scenario 'ANSI/wrapped diagnostic normalization fixture'
+
   $applied = Invoke-FocusedReviewPromotion -ReviewRoot $rootPath -Arguments @('-Json')
   Assert-True ($applied.ExitCode -eq 0) "R2 applied-state verification failed: $($applied.Stderr)"
   $appliedResult = $applied.Stdout | ConvertFrom-Json -AsHashtable
@@ -93,24 +147,21 @@ try {
   $inventory.action_id = 'WEB-UNRELATED-IMAGE-CLEANUP-999-R2'
   Write-OipCanonicalJsonFile -Path $inventoryPath -Value $inventory -Depth 40
   $unrelatedInventory = Invoke-FocusedReviewPromotion -ReviewRoot $fixtureRoot -Arguments @('-Json')
-  Assert-True ($unrelatedInventory.ExitCode -ne 0) 'Promoter accepted an unrelated inventory action ID.'
-  Assert-True (($unrelatedInventory.Stdout + $unrelatedInventory.Stderr).Contains('does not identify the WEB-LEGACY-IMAGE-CLEANUP-001 revision family', [StringComparison]::Ordinal)) 'Unrelated inventory action failed for an unexpected reason.'
+  Assert-PromotionFailure -Result $unrelatedInventory -ExpectedMessage 'does not identify the WEB-LEGACY-IMAGE-CLEANUP-001 revision family' -Scenario 'Unrelated inventory action'
 
   Copy-ReviewFixtureFiles
   $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 40
   $evidence.action_id = 'WEB-UNRELATED-IMAGE-CLEANUP-999-R1'
   Write-OipCanonicalJsonFile -Path $evidencePath -Value $evidence -Depth 40
   $unrelatedEvidence = Invoke-FocusedReviewPromotion -ReviewRoot $fixtureRoot -Arguments @('-Json')
-  Assert-True ($unrelatedEvidence.ExitCode -ne 0) 'Promoter accepted an unrelated visual-review action ID.'
-  Assert-True (($unrelatedEvidence.Stdout + $unrelatedEvidence.Stderr).Contains('does not identify the WEB-LEGACY-IMAGE-CLEANUP-001 revision family', [StringComparison]::Ordinal)) 'Unrelated visual-review action failed for an unexpected reason.'
+  Assert-PromotionFailure -Result $unrelatedEvidence -ExpectedMessage 'does not identify the WEB-LEGACY-IMAGE-CLEANUP-001 revision family' -Scenario 'Unrelated visual-review action'
 
   Copy-ReviewFixtureFiles
   $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 40
   $evidence.reviewed_asset_ids = @($evidence.reviewed_asset_ids | Select-Object -Skip 1)
   Write-OipCanonicalJsonFile -Path $evidencePath -Value $evidence -Depth 40
   $reviewCohortDrift = Invoke-FocusedReviewPromotion -ReviewRoot $fixtureRoot -Arguments @('-Json')
-  Assert-True ($reviewCohortDrift.ExitCode -ne 0) 'Promoter accepted prior-revision evidence for a different reviewed cohort.'
-  Assert-True (($reviewCohortDrift.Stdout + $reviewCohortDrift.Stderr).Contains('Evidence reviewed_asset_ids differs from the deterministic expected set', [StringComparison]::Ordinal)) 'Prior-revision reviewed-cohort drift failed for an unexpected reason.'
+  Assert-PromotionFailure -Result $reviewCohortDrift -ExpectedMessage 'Evidence reviewed_asset_ids differs from the deterministic expected set' -Scenario 'Prior-revision reviewed-cohort drift'
 
   Copy-ReviewFixtureFiles
   $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 40
@@ -118,24 +169,21 @@ try {
   $evidence.candidate_report_sha256_before_promotion = Get-OipCanonicalTextFileSha256 -Path (Join-Path $fixtureRoot 'reports/image-review-candidates.json') -Label 'Fixture candidate report' -RequireCanonical
   Write-OipCanonicalJsonFile -Path $evidencePath -Value $evidence -Depth 40
   $priorRevisionPromotion = Invoke-FocusedReviewPromotion -ReviewRoot $fixtureRoot -Arguments @('-Json')
-  Assert-True ($priorRevisionPromotion.ExitCode -ne 0) 'Promoter allowed prior-revision evidence to authorize a new promotion.'
-  Assert-True (($priorRevisionPromotion.Stdout + $priorRevisionPromotion.Stderr).Contains('Prior-revision visual-review evidence may verify an already-applied', [StringComparison]::Ordinal)) "Prior-revision promotion attempt failed for an unexpected reason: $($priorRevisionPromotion.Stdout) $($priorRevisionPromotion.Stderr)"
+  Assert-PromotionFailure -Result $priorRevisionPromotion -ExpectedMessage 'Prior-revision visual-review evidence may verify an already-applied' -Scenario 'Prior-revision promotion attempt'
 
   Copy-ReviewFixtureFiles
   $inventory = Get-Content -LiteralPath $inventoryPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 40
   $inventory.schema_version = '9.9'
   Write-OipCanonicalJsonFile -Path $inventoryPath -Value $inventory -Depth 40
   $unsupportedSchema = Invoke-FocusedReviewPromotion -ReviewRoot $fixtureRoot -Arguments @('-Json')
-  Assert-True ($unsupportedSchema.ExitCode -ne 0) 'Promoter accepted an unsupported focused-cleanup inventory schema.'
-  Assert-True (($unsupportedSchema.Stdout + $unsupportedSchema.Stderr).Contains('Focused cleanup inventory uses unsupported schema', [StringComparison]::Ordinal)) 'Unsupported inventory schema failed for an unexpected reason.'
+  Assert-PromotionFailure -Result $unsupportedSchema -ExpectedMessage 'Focused cleanup inventory uses unsupported schema' -Scenario 'Unsupported inventory schema'
 
   Copy-ReviewFixtureFiles
   $inventory = Get-Content -LiteralPath $inventoryPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 40
   $inventory.medium_migrations = @($inventory.medium_migrations | Select-Object -Skip 1)
   Write-OipCanonicalJsonFile -Path $inventoryPath -Value $inventory -Depth 40
   $cohortDrift = Invoke-FocusedReviewPromotion -ReviewRoot $fixtureRoot -Arguments @('-Json')
-  Assert-True ($cohortDrift.ExitCode -ne 0) 'Promoter accepted focused-cleanup cohort drift.'
-  Assert-True (($cohortDrift.Stdout + $cohortDrift.Stderr).Contains('not the exact approved 105 Medium plus four Syd cohort', [StringComparison]::Ordinal)) 'Focused-cleanup cohort drift failed for an unexpected reason.'
+  Assert-PromotionFailure -Result $cohortDrift -ExpectedMessage 'not the exact approved 105 Medium plus four Syd cohort' -Scenario 'Focused-cleanup cohort drift'
 
   Write-Host 'Focused image review promotion contract passed.'
 }
