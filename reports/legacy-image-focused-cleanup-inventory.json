@@ -1,7 +1,8 @@
 {
-  "schema_version": "1.0",
-  "action_id": "WEB-LEGACY-IMAGE-CLEANUP-001-R1",
+  "schema_version": "1.1",
+  "action_id": "WEB-LEGACY-IMAGE-CLEANUP-001-R2",
   "baseline_commit": "0938aabe809107fd6cfb48807a5609f1be21aaa2",
+  "rewritten_content_sha256_basis": "strict_utf8_bom_preserved_crlf_and_cr_to_lf_terminal_newlines_preserved_sha256",
   "baseline": {
     "inventory_digest_basis": "sorted_path_tab_actual_sha256_lf_utf8_no_bom",
     "medium_inventory_sha256": "851880a2e59635b660a6192385dff6cbb0eb73d3b8b3d5f747c6e730c6302c5a",
@@ -4812,225 +4813,225 @@
   "modified_reference_files": [
     {
       "path": "content/essays/2025-supreme-court-wrap-up.md",
-      "before_sha256": "d101d9e79de8b104948f006be63de86a7856c8e7611e32b0075cb4aa99e8af5d",
-      "after_sha256": "dcfcc1bf1c2234a186680fd2cf482a9257a7428ade94d1391708adc94ec7dbe0",
+      "before_sha256": "4f2e798b5016212e320eac83f8c0968a3f4288357c33f7ecd1dcdcb50ab0c0a5",
+      "after_sha256": "3f335fcee83ad4c031117330420b4accb306c77231d294d4371ba4f9d524042b",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/35-years-of-yellow-the-simpsons-time-loop.md",
-      "before_sha256": "222e428539679bb33eeb50ed32ede664aeed79b79f1b7c329b9debc641adbcb5",
-      "after_sha256": "3969f3331688a82e218d05f203edeb4ab6f26f20f67988eb3cd4783200ac5d09",
+      "before_sha256": "217242029090ea101552a6e24b5c620f29aa7550667c15a1b5ffe6df344bdc59",
+      "after_sha256": "248d08ef7813c2850ef082e476bad36459823e90ccd4a025aec175bbdc5b5949",
       "utf8_bom": false,
       "replacement_count": 7
     },
     {
       "path": "content/essays/ai-in-education-is-a-wicked-problem.md",
-      "before_sha256": "c49fe1ab683cc974b32808de4f23d54e1783d201543d4559036b2ece3d753f73",
-      "after_sha256": "e761bdb54097d7e5e2f69d096878214fa9974dfea3415037cc269c243e1265ad",
+      "before_sha256": "39f6ef1f7d0af4f12c8575aede24387ae9c7fd25c02d92c3dea154bcf83190b4",
+      "after_sha256": "7c877ca0dff761682c94c86d42f062c91ac6d1022aa23337ca0d1583b6ada51a",
       "utf8_bom": false,
       "replacement_count": 5
     },
     {
       "path": "content/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md",
-      "before_sha256": "edd4fd34054fa160756b72e1ca37a0fbc93a3389bac647ece28ec1f946d9b1c2",
-      "after_sha256": "db777563faa3c71b35b869a7e869358048876d31af3a1c749489480fd7e8f20e",
+      "before_sha256": "a9599b02cb855936dc9af5e47e349f3ae2f152d73f5e04f8d75e30269463291b",
+      "after_sha256": "60997681ef370969d5daea4c986546fa320670f0b0459774256957c114db6a7b",
       "utf8_bom": false,
       "replacement_count": 2
     },
     {
       "path": "content/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md",
-      "before_sha256": "b075bd70a99582b6ef6dd0bd093e343e5e76bd314367c0444af05418b5da809c",
-      "after_sha256": "4951f6a8f1ee7f148abdf15f9f197c01f0a094903b93d32c01569229d0fcc394",
+      "before_sha256": "5c80dbbdeb0799a28af0e72ea75951c48a5bf68922612e0d4e3b2d4662a5cd89",
+      "after_sha256": "2d7638c7d1896d7c79512c5b5c6166f0531b01390b2631bff2268cc4834c753b",
       "utf8_bom": false,
       "replacement_count": 8
     },
     {
       "path": "content/essays/cuomo-vs-mamdani-nyc-2025.md",
-      "before_sha256": "b2b76cc434240e1f70a5009d54a8681d8d754e6a55aa3ea1368d8f7439506187",
-      "after_sha256": "44cc9a0fb1dd1c75bac43c7801e8d083269f3a4a8be34b0cc95851e07ef79572",
+      "before_sha256": "a2d667d9e6a1afafdd18591a77b0a24726bc118c8e1e85ad28d3aaee2c16fc2c",
+      "after_sha256": "c597c047e5a8307671940c4831b19c1644a28d452445a7e5d4036a5d9142f417",
       "utf8_bom": false,
       "replacement_count": 3
     },
     {
       "path": "content/essays/dialogues/bobanonymous.md",
-      "before_sha256": "6ea5bb05d65a1c9ac324da86888adf6f9bbf654df6824ada9dfbacc887677462",
-      "after_sha256": "7824762f89c9246e20e31a87f93a6f447bcc4455d3b266c33eee4bd81b3103e0",
+      "before_sha256": "7e52a4e54d447904c6da3ae4d2cae15b981096c984262e94b174128928bd606d",
+      "after_sha256": "c2a19adbe56121461f1b179e3127a9b7255e9c4a6713d4a68826b224a2e4db1d",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/dialogues/broke-rich.md",
-      "before_sha256": "d7638c155fe12f558b63448efa6c7b9c851de0c68c19c9f242294e7b3c7f32d3",
-      "after_sha256": "1432656586da9630811ac561457716f3f9b3ae3c30d97c69a978f7129695ac3c",
+      "before_sha256": "166910e58c64357a73a1ab7572fe26cd09789b8bd38c51393ca59a72d0933dea",
+      "after_sha256": "3300e79a2b383bbc1b4c4229294b4d3cdfa90e1fb87f33426175ebb87c580518",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/dialogues/infinite-incontent.md",
-      "before_sha256": "0ac6d4e7799a291526f67a92e658c7d6bdb5f0a33f78928233a00704c9bce272",
-      "after_sha256": "2daa6a9f9abcf071ee1f4a203318751a7740e4a83d3f501d4bbd1715652fa5a2",
+      "before_sha256": "1019e45bf87a7f1aa6354f9c92699036c8b1379c9acea16a9b1a0c51cb544372",
+      "after_sha256": "43d4286a32ad48abdca70342fcf263be8115bc17c3274f0ffb773590d8f8a21d",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/dialogues/pressure-makes-pearls.md",
-      "before_sha256": "87a5b2c47ae10e268bfc0dc34c88d4cbae2bbfc6e1c806213ebc141924a2d06d",
-      "after_sha256": "892d48fff8308645caea780943f6665ebf5b2f2c3f28111acd2a01dc612cde2e",
+      "before_sha256": "204ea1144382e9ecc444145a196b832c624f8fe8f3f617335d9e9c0af5152b05",
+      "after_sha256": "0200dae714f65104018aeb5aa8232e02ba73af87471a235b0047a186a528aab3",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
-      "before_sha256": "5c6aa340da1e3832514e0a85ae7f8a35bcafb04b4c33ff4192761bfb3dbc1044",
-      "after_sha256": "de526b36f48bfba58b4a3c957bd21a621b3b97e7a8422776215994d6de44703b",
+      "before_sha256": "c951c7ae80ce1cc1b0b7ef44d32f86e6cf54dbfbdc351966d3abaecb9c0e77da",
+      "after_sha256": "7b6b1f936a809e162fa09c7e84908ae78af50a0ffba96ac43e6085039425309d",
       "utf8_bom": false,
       "replacement_count": 8
     },
     {
       "path": "content/essays/flash-flood-alley-why-flash-floods-kill.md",
-      "before_sha256": "dd52dbc8c32412f666b5d00c4c2d254e27bf377ee9ad8924f00578eb69b39c8a",
-      "after_sha256": "725d683ecb150896e75f16894fce786a24c32dc43a4564b966d18b3069780f2f",
+      "before_sha256": "b292c1946ac0ecbb16100cc8531eb478803391a4d5d35468f13085e5ff7f940b",
+      "after_sha256": "c5228910970b34c0736ae4b2563e6e837edfa03b306afe287a9d308d826a507f",
       "utf8_bom": false,
       "replacement_count": 7
     },
     {
       "path": "content/essays/how-tucson-az-plans-for-water-scarcity.md",
-      "before_sha256": "4a72f5f86358696af791c7c8f29ef9d06c54441399775f9d5c6dbd6d38cd122d",
-      "after_sha256": "d643d25e6677befd77d262f1c06c26579dc9abf9fbca29262790a2713d68a969",
+      "before_sha256": "d86e619ed067152652046692beb24c88c7ce998fbe43c686f626322d227b6492",
+      "after_sha256": "c4baef804453210fb996283ebe72e7d2d36be576440b085a277b0e940904e0b8",
       "utf8_bom": false,
       "replacement_count": 4
     },
     {
       "path": "content/essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md",
-      "before_sha256": "183b8c6cb7f3fa37297d32b63d547b2fbe8371c2d324a3e4d3ac26fe31ef2e53",
-      "after_sha256": "cef30d4eef73c4d8e899f7e13f508c584760044c82c9a357c3216edd1a376ecb",
+      "before_sha256": "1fd1db409e69b3477e18e0a2724e6869a035c338ce43bec73601fe7ba45f29f7",
+      "after_sha256": "6bb1e5281a278bdbf9a5802533e086152e556180e6b5e4a9056bddc7b71b3330",
       "utf8_bom": false,
       "replacement_count": 2
     },
     {
       "path": "content/essays/june-27-2025-scotus-set-to-close-its-term-with-major-decisions.md",
-      "before_sha256": "5d4dc96d071e1fc1a85dbff0796619ed46dda0f15e03e1885a949f2f37e3f0b8",
-      "after_sha256": "63ae424f2a45d0ac4175a639346769a21d489d5fb7a029101beae3be06abcf74",
+      "before_sha256": "07179ff232bc58ead3c54e7b2e54c214d14412a1e6ed9d40251ae27a9fb4ce51",
+      "after_sha256": "d63ae12b73a72c7d6b3c2ed6fc900dbb6b181509ec0769d838fe3e5deb1aff1a",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/mcdonalds-faces-week-long-boycott-june-24-2025.md",
-      "before_sha256": "578778de320d59e4be17d82da8edd75ccc8b97b6e6e8d31edd124fa7e6ec6635",
-      "after_sha256": "08abe5681dd1fc24a5157dfcb9eb0241279198c7ce282a4d2225527cf7051ff3",
+      "before_sha256": "2acda3cfb231680829c2c4fc42b031c15ea6aa4efa526114721b092a6325e7b1",
+      "after_sha256": "ab1aad0d972939abeaf2e731f0d430c3349f16385c4caa0b51023b69db74cdb0",
       "utf8_bom": false,
       "replacement_count": 3
     },
     {
       "path": "content/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md",
-      "before_sha256": "125aa32fa231f9243a5df9d252fc4c6a35494d8a76e2fbcb1eebd307dc294ef4",
-      "after_sha256": "c0ba404aac52163abf7b13f00ebae621d0bca6249e275cd509fe322deaa534fa",
+      "before_sha256": "299dda9016dde00b98c95d4491d50941724f0da8182df3e951e7a390d3dc4f6a",
+      "after_sha256": "3754edb20aa4cfb71f0d78f1b6c86a8158b91c33dffc5eeada5f6c77ffd41f3d",
       "utf8_bom": false,
       "replacement_count": 3
     },
     {
       "path": "content/essays/pornography-the-modern-secular-state-religion-and-american-morality.md",
-      "before_sha256": "667d527cd9426c7ec442729d0151acf97422f8e2b8499dd2d3dee2d0602f42a9",
-      "after_sha256": "6b98418d8c3a522dc56dcaea8d6c55c777e30c162c39957eb936c71ddcb60d9d",
+      "before_sha256": "5d20108221af357bb2651e0d2aec1ad46f75ea9ec353e411c17302f3be164669",
+      "after_sha256": "3f3ae6c45d5743500c9bd7efcabb81107ae0838faa83a322fee531dfe7af67c5",
       "utf8_bom": false,
       "replacement_count": 3
     },
     {
       "path": "content/essays/public-vs-private-pay-who-really-earns-more.md",
-      "before_sha256": "48ccc0469ea931052e2941b85b5a34b6db948db62a9e8aa641baf99edd27ccfb",
-      "after_sha256": "b7bde7da77c01e6b613a28c210f76c7ec77240b24f388fc124f34cecc0d2f732",
+      "before_sha256": "b889b12ca8e50cf7f42e9af794f28bd090f7fbf6e2a55010933343d4d890bba6",
+      "after_sha256": "1ee812c91f194e65ef29f801c943ba952ac1ac64dd6ea3241fb1f659477886c7",
       "utf8_bom": false,
       "replacement_count": 4
     },
     {
       "path": "content/essays/risk-management-vs-risk-analysis-whats-the-difference.md",
-      "before_sha256": "ea3b6a5524c9683a2b89b2bcd29966fc30dc0f4dca115194dc83d89c3455f2b0",
-      "after_sha256": "42a183638e32ffa709494823972138b208340b0e310379b7e11b5f8218e17af6",
+      "before_sha256": "e94c56208af33fb6ab964cf68e6c0f96eeeddb8771284a8303d34df4c078dc12",
+      "after_sha256": "3478d5e47bfdb0704238ebfb85aa36c2e28feae864cd3bc97250d6cf7142116f",
       "utf8_bom": false,
       "replacement_count": 5
     },
     {
       "path": "content/essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md",
-      "before_sha256": "d2bcb282caf9271e62fba943115d8ee04ff8ab1858699c8be873d9c466fcd9f8",
-      "after_sha256": "8c1264fe9a534259f8ca85051278dc831ff7f9aa529b0d3d73e3dd731f35d3c0",
+      "before_sha256": "81143eef683c1557475e6f6397e416085b1eb99eeba3c603e8218f549e4f9e64",
+      "after_sha256": "115487a2023e89b75ec488c9b5d99a26715c3b28c6627ea8b772dbbe35387c73",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
-      "before_sha256": "07922917697d3d9fc4854510178fe0b51f659172df9cf370ae4c53e61a5628db",
-      "after_sha256": "05a09af93a28c396f51c58794e339b4dc63bde19aa84cac174df8f8b35a7c5b7",
+      "before_sha256": "1c1d3642731ba067a90d4815f7da24d3950f3351ec49928e8ba6bd63c9a6af0c",
+      "after_sha256": "0950745b6a8d7e04b2c26889f21bd69fd55e4849e6f1a861daa4a06603ebf8ff",
       "utf8_bom": false,
       "replacement_count": 6
     },
     {
       "path": "content/essays/the-dolphin-company.md",
-      "before_sha256": "6fb694a3439e4571031b690eeca9c1747a7d417f95e1ff165c29108d9de652e7",
-      "after_sha256": "d6b7e9522a33d3513336b0a43c2451f732a1464a994ceae16c7b78b8925df8ef",
+      "before_sha256": "ae9cc62bd9dac7ab7f9b4b7a2054d5fa77e40b1bc03b5ae1e12faa619abab628",
+      "after_sha256": "2734052794f0269b8a51e3278956ed0be10af6d9e7f0d5636b2cf6fd3b330f45",
       "utf8_bom": false,
       "replacement_count": 4
     },
     {
       "path": "content/essays/the-economics-of-the-mongol-empire.md",
-      "before_sha256": "debbcfb041ae31f66137cee149e3d3202c123836d1928591b7176429652c47e8",
-      "after_sha256": "17ca01f18f2dc039bc4c657f167f12e041b942eeda6cc6b5c9da8396c8bfee0e",
+      "before_sha256": "b6c35e5e0a053d9e9ff602827950ce54deac9b178646b359a30453d570c3940a",
+      "after_sha256": "0e8111dd12722d266e6b91e97df38e610f7ead77b253d5e90fdb9f75b369f49d",
       "utf8_bom": false,
       "replacement_count": 1
     },
     {
       "path": "content/essays/the-fair-price-of-bitcoin-69420.md",
-      "before_sha256": "8e372ff1752c15bca8e80c71072248ad16799557c0a9ee88c43a123480685566",
-      "after_sha256": "6a67cad58e6088778ab0354e730994de00a45d7a1907279cd79ae4479335b474",
+      "before_sha256": "057210efccf3e9029603443a437dbc804cb8b6aa1c865888b954401d2fe60e0e",
+      "after_sha256": "a9a8618f95076c6558ace0f613a8042f81239cab19217c879573d906aed30dce",
       "utf8_bom": false,
       "replacement_count": 2
     },
     {
       "path": "content/essays/the-risk-management-buffet.md",
-      "before_sha256": "4291ad3cf0c1b6423c49c641942380806a9ff0f92022cae53ac6f4f4297b7493",
-      "after_sha256": "bda30031829e6f8776a9fc3ef0660d3f24d315ac872bf4892998833179edd31e",
+      "before_sha256": "c9464ffda6ce8160e8aba29ec628a7cdb4d98465aad54a3b0f9bb5640b009dd2",
+      "after_sha256": "f13fa92ea02122651e6d74e4565bbc02d6f9dab25f3e5919b4748a3fb85a81d3",
       "utf8_bom": false,
       "replacement_count": 3
     },
     {
       "path": "content/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md",
-      "before_sha256": "09572c57018779cfacb96211b292b9d959f9cbd4e7b86d1585b950318722a871",
-      "after_sha256": "639ad23e9b539005e63f6f8e93a472b423596c2b74d47af098f9e95686279fd8",
+      "before_sha256": "f87bd3d81c515b46e3caf34c48043f9cd14814f82a7d302e6c98ff4d7c164ac1",
+      "after_sha256": "0449de20e5ae4b9645513dca1c385d58733fe1aabf96893ea88e48e42dd9ba34",
       "utf8_bom": false,
       "replacement_count": 6
     },
     {
       "path": "content/essays/the-world-the-un-was-built-for.md",
-      "before_sha256": "b0f048b891fb545d1778bb5c68d936e760bdec5ff2c8b1dde62085e22970d80c",
-      "after_sha256": "be8bb829062e1aa74e80e29f3e55fa59403acf508eadb92b6bb7290c8d50fc76",
+      "before_sha256": "ca826be44237bccfcd0ed4d70e4dc11d2e00d9101d2c97c89ebc7ca3ad42028c",
+      "after_sha256": "6d4bc254ae9af16c266c65360b7749b06a8a8c7df00760b79e1e44a2bcb28f0f",
       "utf8_bom": false,
       "replacement_count": 2
     },
     {
       "path": "content/essays/what-happened-at-camp-mystic.md",
-      "before_sha256": "f15d347dcbfef7237ccf65d926eba4a9fadc7c2ced3c27879355699e47a83198",
-      "after_sha256": "ee44ea012b10702597d06f16c7a6ed78c76afb2a1029753737f022504e3e2f9e",
+      "before_sha256": "367436ba1b5af42b77c56e40e5c0f060aa3e9fa13adab3a439465e6a70bac079",
+      "after_sha256": "b2d68e6557f74b83f6b49697666dfa11fd7ff3bb49a6256544f2f947b9d6858b",
       "utf8_bom": false,
       "replacement_count": 2
     },
     {
       "path": "content/essays/what-i-learned-from-writing-100-essays-on-medium-in-2025.md",
-      "before_sha256": "8837e92831781f0a5f63f93552c385bcd46e294f2c57bb11422804cd2704aeeb",
-      "after_sha256": "a3d16fc08e51f45766b0e5569d622f043f0f067b18e004428a3595ce3f3e1ecc",
+      "before_sha256": "97db88d21429d9ed2ba5772c7181b8ecfd6c8d001f2f7edff70af0d032e6d527",
+      "after_sha256": "b2eccc2da8ce3d1bcc41badb8135c143a8bb027c764e015939ade8497335aa39",
       "utf8_bom": false,
       "replacement_count": 7
     },
     {
       "path": "content/essays/what-is-risk-a-four-part-framework.md",
-      "before_sha256": "3098c9931f3a50b9633c075a65ad83119da65d78d76e5375466eb3aca2108359",
-      "after_sha256": "ed489bfd130497285210edee92866132b5870a8efe56e1da0fbc6c803df77026",
+      "before_sha256": "a27135c7038b11cd16b0b1f26278e852f2b904e92b25048d7626f54210d43276",
+      "after_sha256": "3ed06e058e4b9e39c199a8d1dd56d381a3c4f012a0189d646ed53ba53a94f67d",
       "utf8_bom": false,
       "replacement_count": 5
     },
     {
       "path": "content/essays/whos-really-funding-terror.md",
-      "before_sha256": "4142e02b7acc03dbf3c4371fb91e8da9e9e072ed2db10625769e12948927c76d",
-      "after_sha256": "178d1b5b2844daf4527a7756e6035ec885e5ba5f69a4b025276db8143b0f5b64",
+      "before_sha256": "f9cf2f2b18fe67b3d536ea8fc34ad0683c5051a12fe6f79d699917fa61a4c35d",
+      "after_sha256": "2af0af3717fa2983b55151beabcd4b1191c0d6f1785c1d7b40798f99859ac7b6",
       "utf8_bom": false,
       "replacement_count": 1
     }

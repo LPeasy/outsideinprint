@@ -101,6 +101,47 @@ try {
     throw 'Canonical JSON writer did not emit strict UTF-8/no-BOM/LF with exactly one final LF.'
   }
   Get-OipCanonicalTextFileSha256 -Path $writerPath -Label 'Canonical JSON writer fixture' -RequireCanonical | Out-Null
+
+  $portableBasis = 'strict_utf8_bom_preserved_crlf_and_cr_to_lf_terminal_newlines_preserved_sha256'
+  Assert-Equal -Actual (Get-OipPortableTextSha256Basis) -Expected $portableBasis -Message 'Portable rewritten-content digest basis changed.'
+  $portableLfBytes = $canonicalUtf8.GetBytes("alpha`nbeta`n")
+  $portableCrLfBytes = $canonicalUtf8.GetBytes("alpha`r`nbeta`r`n")
+  $portableLoneCrBytes = $canonicalUtf8.GetBytes("alpha`rbeta`r")
+  $portableChangedBytes = $canonicalUtf8.GetBytes("alpha`ngamma`n")
+  $portableMissingFinalLfBytes = $canonicalUtf8.GetBytes("alpha`nbeta")
+  $portableDoubleFinalLfBytes = $canonicalUtf8.GetBytes("alpha`nbeta`n`n")
+  $portableBomBytes = [byte[]](0xef, 0xbb, 0xbf) + $portableLfBytes
+  $portableHash = Get-OipSha256ForBytes -Bytes $portableLfBytes
+  Assert-Equal -Actual (Get-OipPortableTextSha256ForBytes -Bytes $portableLfBytes -Label 'Portable LF fixture') -Expected $portableHash -Message 'Portable LF digest changed.'
+  Assert-Equal -Actual (Get-OipPortableTextSha256ForBytes -Bytes $portableCrLfBytes -Label 'Portable CRLF fixture') -Expected $portableHash -Message 'Portable LF and CRLF digests differ.'
+  Assert-Equal -Actual (Get-OipPortableTextSha256ForBytes -Bytes $portableLoneCrBytes -Label 'Portable lone-CR fixture') -Expected $portableHash -Message 'Portable LF and lone-CR digests differ.'
+  if ((Get-OipPortableTextSha256ForBytes -Bytes $portableChangedBytes) -ceq $portableHash) {
+    throw 'Portable rewritten-content digest did not detect changed text.'
+  }
+  $terminalDigests = @(
+    Get-OipPortableTextSha256ForBytes -Bytes $portableMissingFinalLfBytes
+    Get-OipPortableTextSha256ForBytes -Bytes $portableLfBytes
+    Get-OipPortableTextSha256ForBytes -Bytes $portableDoubleFinalLfBytes
+  ) | Sort-Object -Unique
+  Assert-Equal -Actual $terminalDigests.Count -Expected 3 -Message 'Portable digest did not preserve terminal-newline presence and count.'
+  $portableBomHash = Get-OipPortableTextSha256ForBytes -Bytes $portableBomBytes -Label 'Portable BOM fixture'
+  Assert-Equal -Actual $portableBomHash -Expected (Get-OipSha256ForBytes -Bytes $portableBomBytes) -Message 'Portable digest did not preserve the leading UTF-8 BOM.'
+  if ($portableBomHash -ceq $portableHash) {
+    throw 'Portable digest did not distinguish BOM and no-BOM text.'
+  }
+  $portableCrLfPath = Join-Path $canonicalFixtureRoot 'portable-crlf.txt'
+  [System.IO.File]::WriteAllBytes($portableCrLfPath, $portableCrLfBytes)
+  Assert-Equal -Actual (Get-OipPortableTextFileSha256 -Path $portableCrLfPath) -Expected $portableHash -Message 'Portable file and byte digests differ.'
+  $portableInvalidRejected = $false
+  try {
+    Get-OipPortableTextSha256ForBytes -Bytes ([byte[]](0xc3, 0x28)) -Label 'Portable invalid UTF-8 fixture' | Out-Null
+  }
+  catch {
+    $portableInvalidRejected = $_.Exception.Message -match 'not valid UTF-8'
+  }
+  if (-not $portableInvalidRejected) {
+    throw 'Portable rewritten-content digest accepted invalid UTF-8.'
+  }
 }
 finally {
   if (Test-Path -LiteralPath $canonicalFixtureRoot -PathType Container) {
@@ -112,7 +153,7 @@ $gitattributesPath = Join-Path $rootPath '.gitattributes'
 if (-not (Test-Path -LiteralPath $gitattributesPath -PathType Leaf)) {
   throw 'Missing .gitattributes controls for canonical responsive-image JSON.'
 }
-$gitattributes = [System.IO.File]::ReadAllText($gitattributesPath, [System.Text.Encoding]::UTF8)
+$gitattributes = [System.IO.File]::ReadAllText($gitattributesPath, [System.Text.Encoding]::UTF8).Replace("`r`n", "`n").Replace("`r", "`n")
 foreach ($requiredAttribute in @(
   '/data/image-assets.json text eol=lf',
   '/reports/image-review-candidates.json text eol=lf',
@@ -736,6 +777,7 @@ Assert-ExactProperties -Value $migrationReport -Expected @(
   'schema_version',
   'action_id',
   'baseline_commit',
+  'rewritten_content_sha256_basis',
   'baseline',
   'result',
   'medium_migrations',
@@ -744,8 +786,9 @@ Assert-ExactProperties -Value $migrationReport -Expected @(
   'removed_orphans',
   'modified_reference_files'
 ) -Context 'Focused legacy image cleanup report root'
-Assert-Equal -Actual ([string]$migrationReport.schema_version) -Expected '1.0' -Message 'Focused-cleanup report schema changed.'
-Assert-Equal -Actual ([string]$migrationReport.action_id) -Expected 'WEB-LEGACY-IMAGE-CLEANUP-001-R1' -Message 'Focused-cleanup action binding changed.'
+Assert-Equal -Actual ([string]$migrationReport.schema_version) -Expected '1.1' -Message 'Focused-cleanup report schema changed.'
+Assert-Equal -Actual ([string]$migrationReport.action_id) -Expected 'WEB-LEGACY-IMAGE-CLEANUP-001-R2' -Message 'Focused-cleanup action binding changed.'
+Assert-Equal -Actual ([string]$migrationReport.rewritten_content_sha256_basis) -Expected (Get-OipPortableTextSha256Basis) -Message 'Focused-cleanup rewritten-content digest basis changed.'
 Assert-ExactProperties -Value $migrationReport.baseline -Expected @(
   'inventory_digest_basis',
   'medium_inventory_sha256',
@@ -943,10 +986,17 @@ $baselineBlobPaths = @(
   $reportedOrphans | ForEach-Object { [string]$_.legacy_path }
 )
 $baselineBlobMap = Get-OipBaselineBlobMap -Commit ([string]$migrationReport.baseline_commit) -RelativePaths $baselineBlobPaths
+$currentCommit = (& git -C $rootPath rev-parse HEAD).Trim()
+if ($LASTEXITCODE -ne 0 -or $currentCommit -cnotmatch '^[0-9a-f]{40}$') {
+  throw 'Unable to resolve the current commit for rewritten-content Git-blob parity.'
+}
+$currentContentBlobMap = Get-OipBaselineBlobMap -Commit $currentCommit -RelativePaths @(
+  $migrationReport.modified_reference_files | ForEach-Object { [string]$_.path }
+)
 Assert-Equal -Actual $baselineBlobMap.Count -Expected 507 -Message 'Baseline Git-blob batch must bind the 32 rewritten content files, 105 Medium PNGs, four Syd heroes, 316 retained Medium JPEG/JPG files, and 50 removed orphans.'
+Assert-Equal -Actual $currentContentBlobMap.Count -Expected 32 -Message 'Current Git-blob batch must bind all 32 rewritten content files.'
 Assert-Equal -Actual (Get-OipEvidenceInventoryDigest -Rows @(@($reportedMediumMigrations) + @($reportedRetainedMedium) + @($reportedOrphans))) -Expected ([string]$migrationReport.baseline.medium_inventory_sha256) -Message 'Reported Medium rows do not reproduce the frozen canonical path/actual-SHA digest.'
 Assert-Equal -Actual (Get-OipEvidenceInventoryDigest -Rows @($reportedSydMigrations)) -Expected ([string]$migrationReport.baseline.syd_inventory_sha256) -Message 'Reported Syd rows do not reproduce the frozen canonical path/actual-SHA digest.'
-$strictUtf8 = [Text.UTF8Encoding]::new($false, $true)
 $reportedModifiedPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
 foreach ($item in @($migrationReport.modified_reference_files)) {
   $relativePath = [string]$item.path
@@ -954,20 +1004,16 @@ foreach ($item in @($migrationReport.modified_reference_files)) {
     throw "Focused-cleanup report contains a duplicate or out-of-scope rewritten content path: $relativePath"
   }
   $fullPath = Join-Path $rootPath $relativePath
-  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf) -or (Get-OipSha256 -Path $fullPath) -cne [string]$item.after_sha256) {
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf) -or
+    (Get-OipPortableTextFileSha256 -Path $fullPath -Label "Rewritten content '$relativePath'") -cne [string]$item.after_sha256) {
     throw "Focused-cleanup rewritten-content hash is stale: $relativePath"
   }
   if ([string]$item.before_sha256 -ceq [string]$item.after_sha256 -or [int]$item.replacement_count -lt 1) {
     throw "Focused-cleanup rewritten-content evidence lacks a real bounded replacement: $relativePath"
   }
   $baselineBlobBytes = [byte[]]$baselineBlobMap[$relativePath]
-  $baselineBlobSha256 = Get-OipSha256ForBytes -Bytes $baselineBlobBytes
-  $baselineText = $strictUtf8.GetString($baselineBlobBytes)
-  $materializedBaselineBytes = [Text.Encoding]::UTF8.GetBytes(([regex]::Replace($baselineText, "`r`n|`r|`n", "`r`n")))
-  $materializedBaselineSha256 = Get-OipSha256ForBytes -Bytes $materializedBaselineBytes
-  if ([string]$item.before_sha256 -cnotin @($baselineBlobSha256, $materializedBaselineSha256)) {
-    throw "Focused-cleanup before-content hash matches neither the raw baseline Git blob nor its deterministic CRLF checkout materialization: $relativePath"
-  }
+  Assert-Equal -Actual ([string]$item.before_sha256) -Expected (Get-OipPortableTextSha256ForBytes -Bytes $baselineBlobBytes -Label "Baseline Git blob '$relativePath'") -Message "Focused-cleanup before-content portable hash differs from the exact baseline Git blob: $relativePath"
+  Assert-Equal -Actual ([string]$item.after_sha256) -Expected (Get-OipPortableTextSha256ForBytes -Bytes ([byte[]]$currentContentBlobMap[$relativePath]) -Label "Current Git blob '$relativePath'") -Message "Focused-cleanup after-content portable hash differs between the fresh Git blob and checkout: $relativePath"
 }
 
 $reportedMigrationIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)

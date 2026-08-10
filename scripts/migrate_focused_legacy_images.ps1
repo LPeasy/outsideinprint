@@ -26,6 +26,7 @@ $Expected = [ordered]@{
 $ExpectedMediumInventorySha256 = '851880a2e59635b660a6192385dff6cbb0eb73d3b8b3d5f747c6e730c6302c5a'
 $ExpectedSydInventorySha256 = 'c53d8f9db266f5cba29cb4fd400a0dd72263e6eb492e706b2d1aedd07c0bd21e'
 $InventoryDigestBasis = 'sorted_path_tab_actual_sha256_lf_utf8_no_bom'
+$RewrittenContentSha256Basis = Get-OipPortableTextSha256Basis
 $ReportRelativePath = 'reports/legacy-image-focused-cleanup-inventory.json'
 $ReportPath = Join-Path $Root $ReportRelativePath
 $StrictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
@@ -335,6 +336,7 @@ function Get-OipResultFromReport {
   )
   $reportedSydDigest = Get-OipInventoryDigest -Rows @($Report.syd_migrations)
   if ([string]$Report.baseline.inventory_digest_basis -cne $InventoryDigestBasis -or
+    [string]$Report.rewritten_content_sha256_basis -cne $RewrittenContentSha256Basis -or
     [string]$Report.baseline.medium_inventory_sha256 -cne $ExpectedMediumInventorySha256 -or
     [string]$Report.baseline.syd_inventory_sha256 -cne $ExpectedSydInventorySha256 -or
     $reportedMediumDigest -cne $ExpectedMediumInventorySha256 -or
@@ -374,7 +376,8 @@ function Test-OipCompletedMigration {
   }
 
   $report = (Read-OipUtf8File -Path $ReportPath) | ConvertFrom-Json -AsHashtable
-  if ([string]$report.schema_version -ne '1.0' -or [string]$report.action_id -ne 'WEB-LEGACY-IMAGE-CLEANUP-001-R1') {
+  if ([string]$report.schema_version -ne '1.1' -or [string]$report.action_id -ne 'WEB-LEGACY-IMAGE-CLEANUP-001-R2' -or
+    [string]$report.rewritten_content_sha256_basis -cne $RewrittenContentSha256Basis) {
     throw "Unsupported focused legacy image migration report: $ReportPath"
   }
 
@@ -393,6 +396,13 @@ function Test-OipCompletedMigration {
     $path = Get-OipFullPath -RelativePath ([string]$item.path)
     if (-not [IO.File]::Exists($path) -or (Get-OipRawFileHash -Path $path) -cne [string]$item.sha256) {
       throw "Retained Medium file differs from the frozen migration report: $($item.path)"
+    }
+  }
+  foreach ($item in @($report.modified_reference_files)) {
+    $path = Get-OipFullPath -RelativePath ([string]$item.path)
+    if (-not [IO.File]::Exists($path) -or
+      (Get-OipPortableTextFileSha256 -Path $path -Label "Rewritten content '$($item.path)'") -cne [string]$item.after_sha256) {
+      throw "Rewritten-content portable hash differs from the frozen migration report: $($item.path)"
     }
   }
   foreach ($item in @($report.removed_orphans) + @($report.medium_migrations) + @($report.syd_migrations)) {
@@ -592,8 +602,8 @@ foreach ($relativePath in $referenceTexts.Keys) {
   $modifiedTexts[$relativePath] = $after
   $modifiedReferenceFiles.Add([ordered]@{
     path = $relativePath
-    before_sha256 = Get-OipRawFileHash -Path $fullPath
-    after_sha256 = Get-OipSha256ForBytes -Bytes $afterBytes
+    before_sha256 = Get-OipPortableTextFileSha256 -Path $fullPath -Label "Pre-migration content '$relativePath'"
+    after_sha256 = Get-OipPortableTextSha256ForBytes -Bytes $afterBytes -Label "Rewritten content '$relativePath'"
     utf8_bom = $withBom
     replacement_count = $replacementCount
   })
@@ -664,9 +674,10 @@ foreach ($item in $retainedMedium) {
 }
 
 $report = [ordered]@{
-  schema_version = '1.0'
-  action_id = 'WEB-LEGACY-IMAGE-CLEANUP-001-R1'
+  schema_version = '1.1'
+  action_id = 'WEB-LEGACY-IMAGE-CLEANUP-001-R2'
   baseline_commit = $baselineCommit
+  rewritten_content_sha256_basis = $RewrittenContentSha256Basis
   baseline = [ordered]@{
     inventory_digest_basis = $InventoryDigestBasis
     medium_inventory_sha256 = $mediumInventorySha256
