@@ -7,6 +7,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $rootPath = [IO.Path]::GetFullPath($Root)
+. (Join-Path $rootPath 'scripts/lib/image_asset_manifest.ps1')
 $inventoryPath = Join-Path $rootPath 'reports/legacy-image-focused-cleanup-inventory.json'
 $inventory = Get-Content -LiteralPath $inventoryPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 30
 $baseline = [string]$inventory.baseline_commit
@@ -67,6 +68,18 @@ try {
   [IO.Directory]::CreateDirectory((Join-Path $fixtureRoot 'scripts/lib')) | Out-Null
   [IO.File]::Copy((Join-Path $rootPath 'scripts/migrate_focused_legacy_images.ps1'), (Join-Path $fixtureRoot 'scripts/migrate_focused_legacy_images.ps1'), $true)
   [IO.File]::Copy((Join-Path $rootPath 'scripts/lib/image_asset_manifest.ps1'), (Join-Path $fixtureRoot 'scripts/lib/image_asset_manifest.ps1'), $true)
+
+  # Materialize one selected content input as CRLF before the fixture commit.
+  # Its Git blob and tracked evidence use LF, so the successful migration below
+  # proves that producer hashes are independent of checkout line endings.
+  $portableProbeRelativePath = [string]$inventory.modified_reference_files[0].path
+  $portableProbePath = Join-Path $fixtureRoot $portableProbeRelativePath
+  $strictUtf8 = [Text.UTF8Encoding]::new($false, $true)
+  $utf8NoBom = [Text.UTF8Encoding]::new($false)
+  $portableProbeText = $strictUtf8.GetString([IO.File]::ReadAllBytes($portableProbePath))
+  $portableProbeCrLfBytes = $utf8NoBom.GetBytes($portableProbeText.Replace("`r`n", "`n").Replace("`r", "`n").Replace("`n", "`r`n"))
+  [IO.File]::WriteAllBytes($portableProbePath, $portableProbeCrLfBytes)
+  $portableProbeBeforeSha256 = Get-OipPortableTextSha256ForBytes -Bytes $portableProbeCrLfBytes -Label 'Focused migration CRLF producer fixture'
 
   & git -C $fixtureRoot init --quiet
   & git -C $fixtureRoot config user.name 'OIP Contract Fixture'
@@ -186,6 +199,41 @@ try {
   Assert-True ($rollback.ExitCode -ne 0) 'Injected operation failure unexpectedly completed the migration.'
   Assert-True (($rollback.Stderr + $rollback.Stdout).Contains('Injected focused-migration test failure after operation 3', [StringComparison]::Ordinal)) 'Injected rollback test failed for an unexpected reason.'
   Assert-CleanFixture -Context 'Injected operation rollback'
+
+  $write = Invoke-FixtureMigration -Arguments @('-Write','-Json')
+  Assert-True ($write.ExitCode -eq 0) "Successful migration fixture failed: $($write.Stderr)"
+  $generatedInventoryPath = Join-Path $fixtureRoot 'reports/legacy-image-focused-cleanup-inventory.json'
+  $generatedInventory = Get-Content -LiteralPath $generatedInventoryPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 30
+  Assert-True ([string]$generatedInventory.schema_version -ceq '1.1') 'Generated focused-cleanup report did not declare schema 1.1.'
+  Assert-True ([string]$generatedInventory.action_id -ceq 'WEB-LEGACY-IMAGE-CLEANUP-001-R2') 'Generated focused-cleanup report did not declare R2.'
+  Assert-True ([string]$generatedInventory.rewritten_content_sha256_basis -ceq (Get-OipPortableTextSha256Basis)) 'Generated focused-cleanup report did not declare the shared portable-text digest basis.'
+  Assert-True (@($generatedInventory.modified_reference_files).Count -eq 32) 'Generated focused-cleanup report did not bind all 32 rewritten content files.'
+
+  $expectedRows = @{}
+  foreach ($row in @($inventory.modified_reference_files)) { $expectedRows[[string]$row.path] = $row }
+  foreach ($row in @($generatedInventory.modified_reference_files)) {
+    $path = [string]$row.path
+    Assert-True ($expectedRows.ContainsKey($path)) "Generated report added an unexpected rewritten-content path: $path"
+    Assert-True ([string]$row.before_sha256 -ceq [string]$expectedRows[$path].before_sha256) "Producer/consumer before hash differs for $path."
+    Assert-True ([string]$row.after_sha256 -ceq [string]$expectedRows[$path].after_sha256) "Producer/consumer after hash differs for $path."
+    Assert-True ([string]$row.after_sha256 -ceq (Get-OipPortableTextFileSha256 -Path (Join-Path $fixtureRoot $path) -Label "Fixture rewritten content '$path'")) "Generated report after hash does not match the shared portable digest for $path."
+  }
+  Assert-True ([string]$generatedInventory.modified_reference_files[0].before_sha256 -ceq $portableProbeBeforeSha256) 'CRLF checkout input did not reproduce the portable baseline-content hash.'
+
+  $completed = Invoke-FixtureMigration -Arguments @('-Json')
+  Assert-True ($completed.ExitCode -eq 0) "Completed-state producer verification failed: $($completed.Stderr)"
+
+  $rewrittenProbeBytes = [IO.File]::ReadAllBytes($portableProbePath)
+  $rewrittenProbeText = $strictUtf8.GetString($rewrittenProbeBytes)
+  $rewrittenProbeLfText = $rewrittenProbeText.Replace("`r`n", "`n").Replace("`r", "`n")
+  [IO.File]::WriteAllBytes($portableProbePath, $utf8NoBom.GetBytes($rewrittenProbeLfText.Replace("`n", "`r")))
+  $loneCrCompleted = Invoke-FixtureMigration -Arguments @('-Json')
+  Assert-True ($loneCrCompleted.ExitCode -eq 0) "Completed-state verification did not accept portable lone-CR checkout materialization: $($loneCrCompleted.Stderr)"
+
+  [IO.File]::WriteAllBytes($portableProbePath, $utf8NoBom.GetBytes($rewrittenProbeLfText + 'changed'))
+  $changedContent = Invoke-FixtureMigration -Arguments @('-Json')
+  Assert-True ($changedContent.ExitCode -ne 0) 'Completed-state verification accepted changed rewritten content.'
+  Assert-True (($changedContent.Stderr + $changedContent.Stdout).Contains('Rewritten-content portable hash differs', [StringComparison]::Ordinal)) 'Changed rewritten content failed for an unexpected reason.'
 
   Write-Host 'Focused legacy image migration behavioral contract passed.'
 }

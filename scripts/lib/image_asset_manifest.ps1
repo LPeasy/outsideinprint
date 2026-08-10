@@ -70,6 +70,47 @@ function Get-OipSha256ForBytes {
   return [System.BitConverter]::ToString($digest).Replace('-', '').ToLowerInvariant()
 }
 
+function Get-OipPortableTextSha256Basis {
+  return 'strict_utf8_bom_preserved_crlf_and_cr_to_lf_terminal_newlines_preserved_sha256'
+}
+
+function Get-OipPortableTextSha256ForBytes {
+  param(
+    [Parameter(Mandatory = $true)][AllowEmptyCollection()][byte[]]$Bytes,
+    [string]$Label = 'Portable text'
+  )
+
+  # Decode the complete byte stream. A leading UTF-8 BOM therefore becomes
+  # U+FEFF and is emitted again by the no-preamble encoder below. This makes
+  # BOM state part of the digest while avoiding an implicit encoder preamble.
+  $strictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
+  try {
+    $text = $strictUtf8.GetString($Bytes)
+  }
+  catch {
+    throw "$Label is not valid UTF-8."
+  }
+
+  # Preserve every other code point and the exact terminal-newline count.
+  # Only platform-dependent newline spellings are normalized.
+  $portableText = $text.Replace("`r`n", "`n").Replace("`r", "`n")
+  $utf8NoPreamble = [System.Text.UTF8Encoding]::new($false)
+  $portableBytes = $utf8NoPreamble.GetBytes($portableText)
+  return Get-OipSha256ForBytes -Bytes $portableBytes
+}
+
+function Get-OipPortableTextFileSha256 {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [string]$Label = 'Portable text file'
+  )
+
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    throw "$Label is not a file: $Path"
+  }
+  return Get-OipPortableTextSha256ForBytes -Bytes ([System.IO.File]::ReadAllBytes($Path)) -Label $Label
+}
+
 function Get-OipCanonicalTextFileSha256 {
   param(
     [Parameter(Mandatory = $true)][string]$Path,

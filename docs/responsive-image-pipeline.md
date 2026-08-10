@@ -34,7 +34,7 @@ Never write `/images/originals/` into content, data, layouts, or metadata. Never
 
 ### Focused legacy migration
 
-The migration command is dry-run by default:
+The R2 migration command is dry-run by default:
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\migrate_focused_legacy_images.ps1
@@ -47,6 +47,8 @@ Apply the validated plan only with the explicit mutation switch:
 ```
 
 The command enumerates tracked files with NUL-delimited Git output, uses actual file-byte SHA-256 values, and supports Windows paths longer than 260 characters. It must reconcile the frozen 471-file baseline into exactly 105 Medium PNG migrations, four Syd-and-Oliver hero migrations, 316 retained JPEG/JPG files, and 50 unreferenced removals. Counts are not sufficient: fail-closed preflight also matches frozen SHA-256 digests over ordinally sorted `path<TAB>actual_sha256<LF>` rows for the complete 471-file Medium fleet and four-file Syd fleet. Fifteen legacy filenames differ from their actual byte hashes; actual hashes always define managed IDs and source filenames. The write path stages every replacement in a temporary transaction and performs one rollback-capable atomic replacement only after all source, manifest, alias, and content checks pass.
+
+`WEB-LEGACY-IMAGE-CLEANUP-001-R2` corrects only the 32 rewritten-content evidence hashes. Their declared basis is `strict_utf8_bom_preserved_crlf_and_cr_to_lf_terminal_newlines_preserved_sha256`: decode the complete byte stream as strict UTF-8, reject invalid byte sequences, preserve a leading UTF-8 BOM as part of the canonical bytes, normalize CRLF and lone CR to LF, preserve all other code points and the exact terminal-newline presence/count, re-encode without an implicit preamble, and hash those bytes. The migration producer and source contract call the same byte-level helper for baseline Git blobs, staged output, committed Git blobs, and materialized checkouts. Binary image hashes remain exact raw-byte hashes.
 
 The migration deliberately excludes compact Medium JPEG/JPG files, books, social cards, Paper-Bob, Idle Times, and the author portrait. Those assets must remain byte-identical to the bound baseline.
 
@@ -84,7 +86,7 @@ The production gate enforces:
 - zero managed source bytes or migrated editorial/essay raster originals in `static/` or `public/`; and
 - valid AVIF, WebP, and JPEG signatures, dimensions, MIME declarations, responsive descriptors, and source-hash URL prefixes.
 
-For `WEB-LEGACY-IMAGE-CLEANUP-001-R1`, the release gate additionally requires `public/images` to remain at or below 450 MiB and to save at least 40 MiB against the authoritative deployed 512,308,750-byte live baseline. These are release acceptance controls; the standing 500 MiB hard budget remains unchanged.
+For `WEB-LEGACY-IMAGE-CLEANUP-001-R1` and its R2 hash reconciliation, the release gate additionally requires `public/images` to remain at or below 450 MiB and to save at least 40 MiB against the authoritative deployed 512,308,750-byte live baseline. These are release acceptance controls; the standing 500 MiB hard budget remains unchanged.
 
 ## Validation and visual review
 
