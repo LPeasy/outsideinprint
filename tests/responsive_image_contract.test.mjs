@@ -244,8 +244,23 @@ test("focused legacy migration is dry-run-first, hash-based, long-path-safe, and
   assert.match(promotion, /expected_asset_count\s*=\s*109/);
   assert.match(promotion, /@\(\$inventory\.medium_migrations\)\.Count -ne 105/);
   assert.match(promotion, /@\(\$inventory\.syd_migrations\)\.Count -ne 4/);
-  assert.match(promotion, /Assert-OipExactSet\s+-Actual\s+@\(\$evidence\.reviewed_asset_ids\)/);
-  assert.match(promotion, /Assert-OipExactSet\s+-Actual\s+@\(\$evidence\.deep_reviewed_asset_ids\)/);
+  assert.match(promotion, /function Assert-OipPassEvidenceCoverage/);
+  assert.match(
+    promotion,
+    /Assert-OipExactSet\s+-Actual\s+@\(\$Evidence\.reviewed_asset_ids\)\s+-Expected\s+\$Context\.AssetIds/,
+  );
+  assert.match(
+    promotion,
+    /Assert-OipExactSet\s+-Actual\s+@\(\$Evidence\.deep_reviewed_asset_ids\)\s+-Expected\s+\$Context\.DeepIds/,
+  );
+  assert.equal(
+    [...promotion.matchAll(/Assert-OipPassEvidenceCoverage\s+-Evidence\s+\$evidence\s+-Context\s+\$context/g)].length,
+    2,
+    "PASS evidence coverage must gate both applied-state verification and new promotion",
+  );
+  assert.match(promotion, /reviewed_asset_ids_sha256\s+-ceq\s+\(Get-OipSha256ForStrings -Values \$context\.AssetIds\)/);
+  assert.match(promotion, /deep_review_asset_ids_sha256\s+-ceq\s+\(Get-OipSha256ForStrings -Values \$context\.DeepIds\)/);
+  assert.match(promotion, /Prior-revision visual-review evidence may verify an already-applied promotion but cannot authorize a new promotion/);
   assert.match(promotion, /\$deepIds\s*=\s*@\(\$allDeepIds\s*\|\s*Where-Object\s*\{\s*\$assetIds -ccontains \$_\s*\}\)/);
   assert.match(promotion, /focused_deep_review_count/);
   assert.match(promotion, /AllDeepIds\s*=\s*\$allDeepIds/);
