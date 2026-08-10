@@ -356,9 +356,12 @@ The chart paragraph anchors the second useful image.
 }
 
 $missingRepoImages = New-Object System.Collections.Generic.List[string]
+$repoRawMediumUrls = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
 foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repoRoot "content\essays") -Recurse -File -Filter "*.md") {
   $markdown = Get-Content -LiteralPath $file.FullName -Raw
   foreach ($url in (Get-MarkdownBodyImageUrls $markdown | Where-Object { $_ -match '^/images/medium/' })) {
+    Assert-True ([System.IO.Path]::GetExtension($url).ToLowerInvariant() -in @('.jpg','.jpeg')) "Expected focused cleanup to retire every raw Medium PNG/GIF body reference: $url"
+    [void]$repoRawMediumUrls.Add($url)
     $localPath = Join-Path $repoRoot ("static\" + ($url.TrimStart("/") -replace '/', '\'))
     if (-not (Test-Path -LiteralPath $localPath -PathType Leaf)) {
       $relativePath = [System.IO.Path]::GetRelativePath($repoRoot, $file.FullName) -replace '\\', '/'
@@ -367,6 +370,20 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repoRoot "content\essay
   }
 }
 Assert-True ($missingRepoImages.Count -eq 0) ("Expected every /images/medium/ body image in repo essays to exist under static/. Missing: {0}" -f ($missingRepoImages -join "; "))
+
+$repoStaticMediumRoot = Join-Path $repoRoot 'static/images/medium'
+$repoStaticMediumFiles = @(Get-ChildItem -LiteralPath $repoStaticMediumRoot -File -Recurse)
+Assert-True ($repoStaticMediumFiles.Count -eq 316) "Expected exactly 316 retained compact Medium JPEG/JPG files."
+Assert-True (@($repoStaticMediumFiles | Where-Object { $_.Extension.ToLowerInvariant() -notin @('.jpg','.jpeg') }).Count -eq 0) "Expected no Medium PNG/GIF to remain under static/."
+
+$allEssayText = @(
+  Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/essays') -Recurse -File -Filter '*.md' |
+    ForEach-Object { Get-Content -LiteralPath $_.FullName -Raw }
+) -join "`n"
+$allRawMediumMatches = @([regex]::Matches($allEssayText, '(?i)/images/medium/[^\s"''<>\(\)\[\]]+\.(?:png|gif|jpe?g)'))
+$allRawMediumUrls = @($allRawMediumMatches | ForEach-Object { $_.Value } | Sort-Object -Unique)
+Assert-True ($allRawMediumUrls.Count -eq 316) "Expected exactly 316 unique raw Medium JPEG/JPG references after focused cleanup."
+Assert-True (@($allRawMediumUrls | Where-Object { [System.IO.Path]::GetExtension($_).ToLowerInvariant() -notin @('.jpg','.jpeg') }).Count -eq 0) "Expected no raw Medium PNG/GIF reference in essay front matter or body Markdown."
 
 Write-Host "Medium image recovery tests passed."
 exit 0

@@ -39,7 +39,7 @@ against national-security monitoring every few years.
 
 ### The report does three main things
 
-![](/images/medium/whos-really-funding-terror/e30a38e8e76db2b2db83590d4d4d2a3e74ac65c950419a48ba77545a1efadc76.png)
+![](oip-image:medium/e30a38e8e76db2b2db83590d4d4d2a3e74ac65c950419a48ba77545a1efadc76)
 
 *The 2024 **National Terrorist Financing Risk Assessment** is one of those PDFs.*
 

@@ -47,6 +47,11 @@ jobs:
         run: |
           ./tests/test_responsive_image_source_contract.ps1
 
+      - name: Test Focused Legacy Image Migration Contract
+        shell: pwsh
+        run: |
+          ./tests/test_focused_legacy_image_migration.ps1
+
       - name: Test Hugo Upgrade Contract
         shell: pwsh
         run: |

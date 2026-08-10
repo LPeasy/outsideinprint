@@ -5,7 +5,7 @@ draft: false
 slug: "flash-flood-alley-why-flash-floods-kill"
 section_label: "Essay"
 subtitle: "Texas Hill Country and the Limits of Early Warning"
-featured_image: "/images/medium/flash-flood-alley-why-flash-floods-kill/bc148062f555057b86125c97330c9157489ac6f13f06b0b6b48845e80c9c9701.png"
+featured_image: "medium/bc148062f555057b86125c97330c9157489ac6f13f06b0b6b48845e80c9c9701"
 featured_image_caption: "Flash Flood Alley | Source: Austin Chronicle"
 featured_image_alt: "Flash Flood Alley"
 description: "A Texas Hill Country flood-risk essay on steep terrain, fast runoff, warning systems, Camp Mystic, and why flash floods can turn warning time into minutes."
@@ -31,7 +31,7 @@ medium_source_url: "https://medium.com/@lawtonperret/flash-flood-alley-why-flash
 
 #### Why Flash Floods in the Texas Hill Country Are So Dangerous
 
-![Blanco River, 2018](/images/medium/flash-flood-alley-why-flash-floods-kill/dce296816d2f41e1454001e65dad55298e652a6c5239dd539e3fea9368229a96.png)
+![Blanco River, 2018](oip-image:medium/dce296816d2f41e1454001e65dad55298e652a6c5239dd539e3fea9368229a96)
 
 *Blanco River, 2018 | Source: USGS/NWS*
 
@@ -92,7 +92,7 @@ flood at Camp Mystic.**
 > tells us about preparedness* in high-risk places like the Texas Hill
 > Country.**
 
-![2015 Blanco RIver Flood](/images/medium/flash-flood-alley-why-flash-floods-kill/f84a5f63c1f518dc5742b160eb79424464b34e1b9f07bdf4f37a279ff3344dd5.png)
+![2015 Blanco RIver Flood](oip-image:medium/f84a5f63c1f518dc5742b160eb79424464b34e1b9f07bdf4f37a279ff3344dd5)
 
 *2015 Blanco RIver Flood | Source: San Antonio Express-News*
 
@@ -123,7 +123,7 @@ opportunity to evacuate.
 
 #### Flash floods aren't like that.
 
-![Flood Timing Comparison](/images/medium/flash-flood-alley-why-flash-floods-kill/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f.png)
+![Flood Timing Comparison](oip-image:medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f)
 
 *Flood Timing Comparison | Made by Author with ChatGPT*
 
@@ -157,7 +157,7 @@ water.***
 In theory, the **National Weather Service (NWS) alert process** follows
 a straightforward path from the NWS to the public.
 
-![NWS Alert Process](/images/medium/flash-flood-alley-why-flash-floods-kill/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054.png)
+![NWS Alert Process](oip-image:medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054)
 
 *NWS Alert Process | Made by Author with ChatGPT*
 
@@ -282,7 +282,7 @@ this case, the flood was much worse.**
 
 ### **Flood Risk at Camp Mystic (FEMA FIRM Panel)**
 
-![Fema FIRM Panel](/images/medium/flash-flood-alley-why-flash-floods-kill/7eb60631a04b8cb1308977106bf7f981686b06414bcb07565b9576cec6a59b37.png)
+![Fema FIRM Panel](oip-image:medium/7eb60631a04b8cb1308977106bf7f981686b06414bcb07565b9576cec6a59b37)
 
 *Fema FIRM Panel | Source: FEMA*
 
@@ -308,7 +308,7 @@ It's not that people didn't try to evacuate...
 
 ### How Multiple System Failures Turned a Flash Flood Into a Tragedy
 
-![Made by User with ChatGPT](/images/medium/flash-flood-alley-why-flash-floods-kill/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4.png)
+![Made by User with ChatGPT](oip-image:medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4)
 
 *Made by User with ChatGPT*
 

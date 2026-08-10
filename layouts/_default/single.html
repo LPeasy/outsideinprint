@@ -1,4 +1,5 @@
 {{ define "main" }}
+  <style>@media (max-width:640px){.piece-body blockquote{margin-left:0;margin-right:0}}</style>
   {{ $meta := partial "metadata/page.html" . }}
   {{ $sectionPage := .CurrentSection }}
   {{ $articleVariant := partial "article/variant-key.html" . }}

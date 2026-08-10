@@ -5,7 +5,7 @@ draft: false
 slug: "public-vs-private-pay-who-really-earns-more"
 section_label: "Essay"
 subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
-featured_image: "/images/medium/public-vs-private-pay-who-really-earns-more/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce.png"
+featured_image: "medium/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce"
 featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
 description: "The custodian at your local public school probably makes more per hour, with benefits than the guy who just cleaned your hotel room"
 version: "1.2"
@@ -100,7 +100,7 @@ Widen the lens, and you see consistent patterns.
 - Private-sector workers excel in high-end professional
   and executive roles.
 
-![Who pays more? Private or Public Total Compensation by Broad Sector](/images/medium/public-vs-private-pay-who-really-earns-more/6c8fd43fd1403b44671c678afe02e150e0d9909cfd95555dac8e6553b2bb4826.png)
+![Who pays more? Private or Public Total Compensation by Broad Sector](oip-image:medium/6c8fd43fd1403b44671c678afe02e150e0d9909cfd95555dac8e6553b2bb4826)
 
 *Who pays more? Private or Public Total Compensation by Broad Sector*
 
@@ -140,7 +140,7 @@ Some say **that split** ~ education vs STEM, public vs private ~
 
 > Zooming out, the patterns show up clearly in the averages.
 
-![On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public](/images/medium/public-vs-private-pay-who-really-earns-more/511e88398070970581caf192a5cca6ecc1864e5c78caee1c7ffb853707b00313.png)
+![On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public](oip-image:medium/511e88398070970581caf192a5cca6ecc1864e5c78caee1c7ffb853707b00313)
 
 *On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public. In elite roles, private compensation often dwarfs public. Source: BLS ECEC, March 2025.*
 
@@ -219,7 +219,7 @@ benefits.**
 - **Public Sector** ~ 62% wages, 38% benefits
 - **Private Sector** ~ 71% wages, 29% benefits
 
-![Breakdown of Average Distribution of Pay](/images/medium/public-vs-private-pay-who-really-earns-more/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2.png)
+![Breakdown of Average Distribution of Pay](oip-image:medium/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2)
 
 *Breakdown of Average Distribution of Pay: Public vs Private Sectors*
 

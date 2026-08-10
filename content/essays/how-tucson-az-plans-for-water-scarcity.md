@@ -5,7 +5,7 @@ draft: false
 slug: "how-tucson-az-plans-for-water-scarcity"
 section_label: "Essay"
 subtitle: "Four Ways to Manage Risk in a Desert City ~ and how tucson plans to water its lawns for the next century"
-featured_image: "/images/medium/how-tucson-az-plans-for-water-scarcity/aa98845fc72a30c1e966cff65d81fdafa57cb016625a49c707aa3c432ac2e3f5.png"
+featured_image: "medium/aa98845fc72a30c1e966cff65d81fdafa57cb016625a49c707aa3c432ac2e3f5"
 featured_image_caption: "1938 postcard of Tucson."
 featured_image_alt: "1938 Postcard"
 description: "For decades it pumped groundwater faster than the aquifer could recharge, leading to shortages and sinkholes"
@@ -46,7 +46,7 @@ in 1993.
 > journey in that canal ~ from Lake Havasu in the west all the way to
 > Tucson at the end of the line.
 
-![](/images/medium/how-tucson-az-plans-for-water-scarcity/0844157f306924d63b26280e0e04d2f1986f4e4e76404355df8697184253ecff.png)
+![](oip-image:medium/0844157f306924d63b26280e0e04d2f1986f4e4e76404355df8697184253ecff)
 
 *Source: [Central Arizona Project System Map](https://www.cap-az.com/cap-system/water-operations/system-map/)*
 
@@ -62,7 +62,7 @@ at a crossroads. [Lake Mead](https://www.nps.gov/lake/index.htm) and
 store the river's flow, are now **half-empty bathtubs ~ pale rings
 visible.**
 
-![Hoover Dam at Lake Mead in 2001 vs 2015](/images/medium/how-tucson-az-plans-for-water-scarcity/555f275407a3014072d84c9ad7709ad3a9bd36bc91f8b7570a7425778b38e7e7.png)
+![Hoover Dam at Lake Mead in 2001 vs 2015](oip-image:medium/555f275407a3014072d84c9ad7709ad3a9bd36bc91f8b7570a7425778b38e7e7)
 
 *Hoover Dam at Lake Mead in 2001 vs 2015 | [Source](https://commons.wikimedia.org/wiki/File:Drought-before-after.jpg)*
 
@@ -134,7 +134,7 @@ budget cycle, but **for the next 50 years and beyond.**
 > **Tucson's One Water 2100 plan draws on all four traditions,** but
 > each general framework would steer the city in a different direction.
 
-![Four generic frameworks for managing risk](/images/medium/how-tucson-az-plans-for-water-scarcity/d44953c273cb2e6277217f577942f0bf3f2c1028ac37d36ca7648f51c0e37ffc.png)
+![Four generic frameworks for managing risk](oip-image:medium/d44953c273cb2e6277217f577942f0bf3f2c1028ac37d36ca7648f51c0e37ffc)
 
 *Four generic frameworks for managing risk: Conventional, Precautionary, Adaptive, and Scenario.*
 

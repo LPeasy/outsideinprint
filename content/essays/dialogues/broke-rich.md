@@ -8,7 +8,7 @@ collections: ['syd-and-oliver-dialogues']
 description: 'Syd and Oliver sit at a dim bar and talk through what it means for a country to look prosperous while ordinary people feel financially cornered.'
 version: '1.0'
 edition: 'First web edition'
-featured_image: '/images/syd-and-oliver/broke-rich/hero.png'
+featured_image: 'essays/dialogues/broke-rich/hero'
 featured_image_alt: 'Two men in silhouette sit at a bar facing a wall of backlit bottles.'
 ---
 

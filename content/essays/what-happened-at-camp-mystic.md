@@ -5,7 +5,7 @@ draft: false
 slug: "what-happened-at-camp-mystic"
 section_label: "Essay"
 subtitle: "A Primer on the July 4, 2025 Texas Flood Tragedy"
-featured_image: "/images/medium/what-happened-at-camp-mystic/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5df34db0f4.png"
+featured_image: "medium/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5df34db0f4"
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
@@ -121,7 +121,7 @@ floodway*.**
 
 > Geography only tells part of the story.
 
-![Guadalupe River Inundation Curve](/images/medium/what-happened-at-camp-mystic/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49.png)
+![Guadalupe River Inundation Curve](oip-image:medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49)
 
 *Guadalupe River Inundation Curve: Source | CNN*
 

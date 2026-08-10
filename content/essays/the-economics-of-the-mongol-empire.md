@@ -140,7 +140,7 @@ The Mongols' postal system revolutionized communication but also leaked intellig
 
 Today's digital networks do the same thing ~ boosting connectivity while exposing vulnerabilities to cyber threats and misinformation.
 
-![Image of a 13th century Mongol Post Rider](/images/medium/the-economics-of-the-mongol-empire/7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6.png)
+![Image of a 13th century Mongol Post Rider](oip-image:medium/7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6)
 
 *Image of a 13th century Mongol Post Rider | Created by Author with GPT-4o*
 

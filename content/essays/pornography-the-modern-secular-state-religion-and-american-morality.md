@@ -64,7 +64,7 @@ societal foundations.**
 
 ### When gatekeepers existed, porn was marginalized
 
-![](/images/medium/pornography-the-modern-secular-state-religion-and-american-morality/e23eb0c06f9b9269eb68bf003662f9bb052f278ce14a2d8cf1d1ebcb61934caf.png)
+![](oip-image:medium/e23eb0c06f9b9269eb68bf003662f9bb052f278ce14a2d8cf1d1ebcb61934caf)
 
 *Before the advent of the internet, pornography was much harder to disseminate and access.*
 
@@ -86,7 +86,7 @@ technologically.
 
 ### The legal turn ~ privacy becomes the shield
 
-![](/images/medium/pornography-the-modern-secular-state-religion-and-american-morality/0bf634bc6fb074374be1b483fd021f75b61a1324004b4771b72577a23f635011.png)
+![](oip-image:medium/0bf634bc6fb074374be1b483fd021f75b61a1324004b4771b72577a23f635011)
 
 *Internet privacy laws led to a complete abdication of moral guidance from community leaders across society.*
 
@@ -156,7 +156,7 @@ It doesn't become morally neutral. It becomes morally reorganized.
 
 ### The modern secular state religion ~ moral imperatives without God
 
-![](/images/medium/pornography-the-modern-secular-state-religion-and-american-morality/14795fdf038d7210715e0637d23a724a2064f915fe3e2f55db2b03675f165534.png)
+![](oip-image:medium/14795fdf038d7210715e0637d23a724a2064f915fe3e2f55db2b03675f165534)
 
 *The modern secular state religion*
 

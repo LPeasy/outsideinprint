@@ -5,7 +5,7 @@ draft: false
 slug: "iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened"
 section_label: "Essay"
 subtitle: "Missiles intercepted. No casualties. Flash in the Pan."
-featured_image: "/images/medium/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened/6e8942634417a99dbe919c3d64e6d5b3b172ef46c77982b5fd6c63e11504e168.png"
+featured_image: "medium/6e8942634417a99dbe919c3d64e6d5b3b172ef46c77982b5fd6c63e11504e168"
 featured_image_caption: "Source: NYT"
 featured_image_alt: "Iran Fires Missiles at U.S. Base in Qatar — What Just Happened?"
 description: "Iran just fired missiles at a major U.S. military base in Qatar. The strike comes after weeks of mounting conflict involving Israeli airstrikes, Iranian reta..."
@@ -61,7 +61,7 @@ dive...*
 
 ### June 2025: How Did We Get Here?
 
-![Created by Author](/images/medium/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened/dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea.png)
+![Created by Author](oip-image:medium/dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea)
 
 *Created by Author*
 

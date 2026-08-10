@@ -1722,6 +1722,13 @@ foreach ($file in $htmlFiles) {
 
     if ($src.StartsWith('/images/medium/', [System.StringComparison]::OrdinalIgnoreCase)) {
       $localizedMediumImageCount++
+      if ([System.IO.Path]::GetExtension(($src -split '[?#]', 2)[0]).ToLowerInvariant() -in @('.png','.gif')) {
+        $legacyCleanupIssues.Add("$relativePath => retired raw Medium PNG/GIF leaked into generated HTML: $src")
+      }
+    }
+
+    if ($src.StartsWith('/images/syd-and-oliver/', [System.StringComparison]::OrdinalIgnoreCase)) {
+      $legacyCleanupIssues.Add("$relativePath => retired raw Syd-and-Oliver hero leaked into generated HTML: $src")
     }
   }
 
@@ -4296,6 +4303,30 @@ if ($targetPageHtml.ContainsKey('public/archive/index.html')) {
 
   if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $archiveIndexHtml -match [regex]::Escape($currentCartoonCaption)) {
     $uxIssues.Add('public/archive/index.html => expected the archive shell not to render the homepage cartoon caption text')
+  }
+}
+
+$focusedSydHeroPages = [ordered]@{
+  'bobanonymous' = 'essays/dialogues/bobanonymous/hero'
+  'broke-rich' = 'essays/dialogues/broke-rich/hero'
+  'infinite-incontent' = 'essays/dialogues/infinite-incontent/hero'
+  'pressure-makes-pearls' = 'essays/dialogues/pressure-makes-pearls/hero'
+}
+foreach ($slug in $focusedSydHeroPages.Keys) {
+  $relativePath = "public/syd-and-oliver/$slug/index.html"
+  $fullPath = Join-Path $SiteDir ($relativePath.Substring('public/'.Length).Replace('/', [System.IO.Path]::DirectorySeparatorChar))
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+    $legacyCleanupIssues.Add("$relativePath => focused-cleanup dialogue route is missing")
+    continue
+  }
+
+  $html = Get-Content -LiteralPath $fullPath -Raw -Encoding utf8
+  $assetId = [string]$focusedSydHeroPages[$slug]
+  if ($html -notmatch ('data-oip-image-id=(?:"|'''')?' + [regex]::Escape($assetId) + '(?:"|'''')?')) {
+    $legacyCleanupIssues.Add("$relativePath => expected managed Syd-and-Oliver hero $assetId")
+  }
+  if ($html -match '(?i)/images/syd-and-oliver/') {
+    $legacyCleanupIssues.Add("$relativePath => retired Syd-and-Oliver source URL remains in HTML")
   }
 }
 

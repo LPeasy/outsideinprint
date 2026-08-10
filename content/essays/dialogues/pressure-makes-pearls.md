@@ -8,7 +8,7 @@ collections: ['syd-and-oliver-dialogues']
 description: 'Syd and Oliver argue over composure, fear, and the difference between telling the truth and making another person carry it.'
 version: '1.0'
 edition: 'First web edition'
-featured_image: '/images/syd-and-oliver/pressure-makes-pearls/hero.png'
+featured_image: 'essays/dialogues/pressure-makes-pearls/hero'
 featured_image_alt: 'Two anonymous men in silhouette sit side by side at a warmly lit bar on a rainy night.'
 ---
 
