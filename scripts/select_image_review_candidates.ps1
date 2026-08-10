@@ -107,6 +107,22 @@ foreach ($row in @($rows | Where-Object { $_.processing_hint -eq 'photo' -or $_.
   Add-ReviewReason -Id $row.id -Reason 'all_photo_and_medium_sources'
 }
 
+$legacyMediumIds = @(
+  'medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731',
+  'medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7',
+  'medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a',
+  'medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe',
+  'medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb',
+  'medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb',
+  'medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7'
+)
+foreach ($row in @($rows | Where-Object {
+  ($_.id.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_.id) -or
+  $_.id.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal)
+})) {
+  Add-ReviewReason -Id $row.id -Reason 'focused_cleanup_migration'
+}
+
 foreach ($row in @($rows | Sort-Object @{ Expression = 'bytes'; Descending = $true }, id | Select-Object -First 12)) {
   Add-ReviewReason -Id $row.id -Reason 'largest_source_bytes'
 }
@@ -183,6 +199,15 @@ if ($candidates.Count -lt $MinimumCandidates) {
   throw "Review candidate selection produced $($candidates.Count), below required minimum $MinimumCandidates."
 }
 
+$focusedCleanupCandidates = @($candidates | Where-Object { $_.reasons -contains 'focused_cleanup_migration' })
+if ($focusedCleanupCandidates.Count -ne 109) {
+  throw "Focused-cleanup review cohort must contain exactly 109 migrated assets; found $($focusedCleanupCandidates.Count)."
+}
+$focusedCleanupIdSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+foreach ($candidate in $focusedCleanupCandidates) {
+  [void]$focusedCleanupIdSet.Add([string]$candidate.id)
+}
+
 $visualMetrics = @{}
 foreach ($candidate in @($candidates | Where-Object { $_.processing_state -eq 'derivative_capable' })) {
   $sourcePath = Join-Path (Join-Path $Root 'assets') ([string]$candidate.source)
@@ -220,6 +245,15 @@ foreach ($id in @(
   Add-DeepReviewReason -Id $id -Reason 'crosshatching'
 }
 
+foreach ($id in @(
+  'essays/dialogues/bobanonymous/hero',
+  'essays/dialogues/broke-rich/hero',
+  'essays/dialogues/infinite-incontent/hero',
+  'essays/dialogues/pressure-makes-pearls/hero'
+)) {
+  Add-DeepReviewReason -Id $id -Reason 'focused_syd_hero'
+}
+
 foreach ($candidate in @($candidates | Where-Object { $_.processing_hint -eq 'photo' } | Sort-Object @{ Expression = 'bytes'; Descending = $true }, id | Select-Object -First 4)) {
   Add-DeepReviewReason -Id $candidate.id -Reason 'faces_or_photos'
 }
@@ -252,16 +286,81 @@ foreach ($candidate in @($candidates | Sort-Object @{ Expression = 'pixels'; Des
   Add-DeepReviewReason -Id $candidate.id -Reason 'largest_native_dimensions'
 }
 
-if ($deepReasons.Count -lt 24) {
-  foreach ($candidate in @($candidates | Sort-Object @{ Expression = { $_.reasons.Count }; Descending = $true }, @{ Expression = 'bytes'; Descending = $true }, id)) {
-    if ($deepReasons.Count -ge 24) { break }
-    Add-DeepReviewReason -Id $candidate.id -Reason 'deterministic_minimum_fill'
+foreach ($id in @(
+  'medium/39e3617269bd3ce2757d8b6d0bf6990bda121d46a73fbc206ab41017d99c2fde',
+  'medium/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2',
+  'medium/42145583d76ac3616def9f537a23dd218becdf4a7b344792606bfcc5f9e88c19',
+  'medium/597f8a7cf6738f762be826d657b4934b810710e6a95e9d555d102551e0e315ca'
+)) {
+  Add-DeepReviewReason -Id $id -Reason 'focused_chart'
+}
+
+foreach ($id in @(
+  'medium/4f31029a1c1552ee315750ba6fd54eabfc201c43c3b889388ad8777ec7b649d7',
+  'medium/d5d6535a7eb0a21a23db5acb6801f1c8aebee162d072c53e03b818938512a56e',
+  'medium/e310cf068f2005331d6c0d44ca19a81ee9223e9cd449724d13e282717ccbf203',
+  'medium/fe49c38c26d28df6603266a66af7c98a5337fb7c9dca2d977f3331fdc40bbb3a'
+)) {
+  Add-DeepReviewReason -Id $id -Reason 'focused_map'
+}
+
+foreach ($id in @(
+  'medium/41eed8f56249fdadda5c9bf6714146ebac1841b1a5f956a41c8369f729333c1f',
+  'medium/76a6a378caa1eb3b58af6361ee589a730ede3716843b3cf89405795871ee2f5d',
+  'medium/ed3b9f9e6208b9bfbcdab0d0460ba2217a8278685f91a746edc592a202c21a3f',
+  'medium/edf9c9656e1f84536b0a965f37a58e7cb1e26100742c63990e5b133a04badb7c'
+)) {
+  Add-DeepReviewReason -Id $id -Reason 'focused_fine_text'
+}
+
+foreach ($id in @(
+  'medium/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe',
+  'medium/57d2e2573cdbc659261cd4a869b43321fa96cd36a2a4f92c0efd3357c04c0318',
+  'medium/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89',
+  'medium/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59'
+)) {
+  Add-DeepReviewReason -Id $id -Reason 'focused_portrait_or_tall'
+}
+
+foreach ($candidate in @($focusedCleanupCandidates | Sort-Object @{ Expression = 'aspect_ratio'; Descending = $true }, id | Select-Object -First 4)) {
+  Add-DeepReviewReason -Id $candidate.id -Reason 'focused_extreme_aspect_ratio'
+}
+foreach ($candidate in @(
+  $focusedCleanupCandidates |
+    Where-Object { $visualMetrics.ContainsKey($_.id) } |
+    Sort-Object @{ Expression = { $visualMetrics[$_.id].dark_fraction }; Descending = $true }, id |
+    Select-Object -First 4
+)) {
+  Add-DeepReviewReason -Id $candidate.id -Reason 'focused_dark_tones'
+}
+foreach ($candidate in @(
+  $focusedCleanupCandidates |
+    Where-Object { $visualMetrics.ContainsKey($_.id) } |
+    Sort-Object @{ Expression = { $visualMetrics[$_.id].saturated_fraction }; Descending = $true }, id |
+    Select-Object -First 4
+)) {
+  Add-DeepReviewReason -Id $candidate.id -Reason 'focused_saturated_color'
+}
+foreach ($candidate in @($focusedCleanupCandidates | Sort-Object @{ Expression = 'bytes'; Descending = $true }, id | Select-Object -First 4)) {
+  Add-DeepReviewReason -Id $candidate.id -Reason 'focused_largest_source_bytes'
+}
+foreach ($candidate in @($focusedCleanupCandidates | Sort-Object @{ Expression = 'pixels'; Descending = $true }, id | Select-Object -First 4)) {
+  Add-DeepReviewReason -Id $candidate.id -Reason 'focused_largest_native_dimensions'
+}
+
+$focusedDeepReviewCount = @($deepReasons.Keys | Where-Object { $focusedCleanupIdSet.Contains([string]$_) }).Count
+if ($focusedDeepReviewCount -lt 24) {
+  foreach ($candidate in @($focusedCleanupCandidates | Sort-Object @{ Expression = { $_.reasons.Count }; Descending = $true }, @{ Expression = 'bytes'; Descending = $true }, id)) {
+    if ($focusedDeepReviewCount -ge 24) { break }
+    Add-DeepReviewReason -Id $candidate.id -Reason 'focused_deterministic_minimum_fill'
+    $focusedDeepReviewCount = @($deepReasons.Keys | Where-Object { $focusedCleanupIdSet.Contains([string]$_) }).Count
   }
 }
 
 $requiredDeepCategories = @(
   'fine_text',
   'crosshatching',
+  'focused_syd_hero',
   'faces_or_photos',
   'dark_tones',
   'saturated_color',
@@ -276,6 +375,31 @@ foreach ($category in $requiredDeepCategories) {
 }
 if ($deepReasons.Count -lt 24) {
   throw "Deep-review selection produced $($deepReasons.Count), below required minimum 24."
+}
+$requiredFocusedDeepCategories = @(
+  'focused_syd_hero',
+  'focused_chart',
+  'focused_map',
+  'focused_fine_text',
+  'focused_portrait_or_tall',
+  'focused_extreme_aspect_ratio',
+  'focused_dark_tones',
+  'focused_saturated_color',
+  'focused_largest_source_bytes',
+  'focused_largest_native_dimensions'
+)
+foreach ($category in $requiredFocusedDeepCategories) {
+  $focusedCategoryCount = @(
+    $deepReasons.Keys | Where-Object {
+      $focusedCleanupIdSet.Contains([string]$_) -and $deepReasons[$_] -contains $category
+    }
+  ).Count
+  if ($focusedCategoryCount -lt 1) {
+    throw "Focused deep-review selection is missing required category: $category"
+  }
+}
+if ($focusedDeepReviewCount -lt 24) {
+  throw "Focused deep-review selection produced $focusedDeepReviewCount migrated assets, below required minimum 24."
 }
 
 $candidateById = @{}
@@ -309,10 +433,11 @@ foreach ($reason in @($reasons.Values | ForEach-Object { $_ } | Sort-Object -Uni
   $reasonCounts[$reason] = @($candidates | Where-Object { $_.reasons -contains $reason }).Count
 }
 $deepCategoryCounts = [ordered]@{}
-foreach ($category in $requiredDeepCategories) {
+foreach ($category in @($requiredDeepCategories + $requiredFocusedDeepCategories)) {
   $deepCategoryCounts[$category] = @($deepReviewSelection | Where-Object { $_.categories -contains $category }).Count
 }
 $deepCategoryCounts['deterministic_minimum_fill'] = @($deepReviewSelection | Where-Object { $_.categories -contains 'deterministic_minimum_fill' }).Count
+$deepCategoryCounts['focused_deterministic_minimum_fill'] = @($deepReviewSelection | Where-Object { $_.categories -contains 'focused_deterministic_minimum_fill' }).Count
 
 $report = [ordered]@{
   schema_version = '1.0'
@@ -321,8 +446,9 @@ $report = [ordered]@{
   candidate_count = $candidates.Count
   minimum_candidate_count = $MinimumCandidates
   deep_review_count = $deepReviewSelection.Count
-  selection_rule = 'union_of_all_photos_and_medium_sources_top_12_bytes_top_12_pixels_top_12_aspect_ratio_and_text_fine_line_metadata'
-  deep_review_rule = 'fixed_fine_text_and_crosshatching_assets_plus_top_4_photos_dark_tones_saturated_color_aspect_ratio_source_bytes_native_pixels_then_deterministic_fill_to_24'
+  focused_deep_review_count = $focusedDeepReviewCount
+  selection_rule = 'union_of_focused_cleanup_migrations_all_photos_and_medium_sources_top_12_bytes_top_12_pixels_top_12_aspect_ratio_and_text_fine_line_metadata'
+  deep_review_rule = 'r3_carryovers_plus_at_least_24_focused_cleanup_assets_covering_all_syd_heroes_charts_maps_fine_text_portrait_or_tall_extreme_aspect_dark_saturated_largest_bytes_and_largest_dimensions'
   reason_counts = $reasonCounts
   deep_review_category_counts = $deepCategoryCounts
   candidates = $candidates

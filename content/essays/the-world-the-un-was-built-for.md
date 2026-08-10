@@ -5,7 +5,7 @@ draft: false
 slug: "the-world-the-un-was-built-for"
 section_label: "Essay"
 subtitle: "How Postwar Human Rights, Migration Norms, and Global Institutions Were Designed for Europe ~ and Applied to a Very Different World"
-featured_image: "/images/medium/the-world-the-un-was-built-for/cc8c8bffe2bc792723dbd459180973ed10ecd5475abadc1a558d3e26bb1ca050.png"
+featured_image: "medium/cc8c8bffe2bc792723dbd459180973ed10ecd5475abadc1a558d3e26bb1ca050"
 featured_image_alt: "The World the UN Was Built For"
 description: "In the years after World War II, the victors attempted something new. After two global wars in a single generation, they agreed to a set of rules meant to pr..."
 version: "1.2"
@@ -66,7 +66,7 @@ The system worked ~ **within the societies it was designed for**.
 
 ### Who Built the UN ~ and Who Didn't
 
-![United Nations membership by decade](/images/medium/the-world-the-un-was-built-for/cf87d44f6e14106cf84c491686d72a57f3c45a3a924b5615f1609cb7374953ff.png)
+![United Nations membership by decade](oip-image:medium/cf87d44f6e14106cf84c491686d72a57f3c45a3a924b5615f1609cb7374953ff)
 
 ***United Nations membership by decade.*** *Most of Africa, the Middle East, and South Asia were not yet sovereign states in 1945 and were not represented at* [*the system*](http://UN.org)*’s founding.*
 

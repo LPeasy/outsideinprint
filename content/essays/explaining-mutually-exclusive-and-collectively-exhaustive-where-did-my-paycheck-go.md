@@ -19,7 +19,7 @@ medium_source_url: "https://medium.com/@lawtonperret/explaining-mutually-exclusi
 
 ### Mutual Exclusivity and Collective Exhaustion
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e.png)
+![](oip-image:medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e)
 
 *Created by Author with GPT-4o*
 
@@ -52,7 +52,7 @@ Once you see them in that setting, things start making a lot more cents.
 
 ### Building a Simple Paycheck Budget With Clear Spending Categories
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a.png)
+![](oip-image:medium/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a)
 
 *Created by Author with GPT-4o*
 
@@ -93,7 +93,7 @@ build anyway.
 
 ### Mutually Exclusive Categories: One Dollar, One Budget Bucket
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286.png)
+![](oip-image:medium/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286)
 
 *Created by Author with GPT-4o*
 
@@ -133,7 +133,7 @@ Once you decide, keep it consistent and locked in.
 
 ### Collectively Exhaustive Categories: Making Sure Every Dollar Is Counted
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0.png)
+![](oip-image:medium/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0)
 
 *Created by Author with GPT-4o*
 
@@ -180,7 +180,7 @@ small and boring, not giant and mysterious.
 
 ### Common Budget Mistakes: Overlapping and Missing Categories
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564.png)
+![](oip-image:medium/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564)
 
 *Created by Author with GPT-4o*
 
@@ -230,7 +230,7 @@ crisis.
 
 ### Your Budget as a Model: How Category Design Shapes What You See
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443.png)
+![](oip-image:medium/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443)
 
 *Created by Author with GPT-4o*
 
@@ -272,7 +272,7 @@ there's a long (and often painful) debate about where to draw the lines.
 
 ### From Personal Budgeting to Economics and Risk Analysis
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f.png)
+![](oip-image:medium/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f)
 
 *Created by Author with GPT-4o*
 
@@ -313,7 +313,7 @@ your own budget: does anything double count? Did we leave anything out?
 
 ### A Simple Rule for Mutually Exclusive and Collectively Exhaustive Thinking
 
-![](/images/medium/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5.png)
+![](oip-image:medium/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5)
 
 *Created by Author with GPT-4o*
 

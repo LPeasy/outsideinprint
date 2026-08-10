@@ -81,7 +81,7 @@ down the line.**
 **control measure ~** **something we can do to change the likelihood or
 consequence** of a bad outcome.
 
-![](/images/medium/the-risk-management-buffet/43530fb850663ea7bfd30db9762da942bf229ac626de4c26ac36a3cad9098d75.png)
+![](oip-image:medium/43530fb850663ea7bfd30db9762da942bf229ac626de4c26ac36a3cad9098d75)
 
 > Golden Corral's Extensive Dinner Menu | [Source](https://www.goldencorral.com/wp-content/uploads/2021/01/GC_Print-Menu-for-Web-1.pdf)
 
@@ -103,7 +103,7 @@ preference.**
 
 ### *Risk Managers are Picky Eaters*
 
-![](/images/medium/the-risk-management-buffet/af797534f3498226022829ef3e9f29bb5102fe39a086a1226c74c0d4352dd0ab.png)
+![](oip-image:medium/af797534f3498226022829ef3e9f29bb5102fe39a086a1226c74c0d4352dd0ab)
 
 > Advice from legendary investor Warren Buffett. | [Source](https://marketmegood.com/blog/warren-buffett-quotes-on-leadership)
 
@@ -153,7 +153,7 @@ round. **Go get seconds!**
 
 ### The Art of the Second Plate \| Evaluating Success
 
-![](/images/medium/the-risk-management-buffet/67e970f0d8eec52e8fca539c7de6f66bf86ed83db3ebc0f38554ed46b39a85e7.png)
+![](oip-image:medium/67e970f0d8eec52e8fca539c7de6f66bf86ed83db3ebc0f38554ed46b39a85e7)
 
 *[Golden Corral Buffet &amp; Grill](https://visithendersonvillenc.org/businesses/golden-corral)*
 

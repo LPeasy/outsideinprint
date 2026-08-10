@@ -117,7 +117,9 @@ foreach ($requiredAttribute in @(
   '/data/image-assets.json text eol=lf',
   '/reports/image-review-candidates.json text eol=lf',
   '/reports/image-visual-review.json text eol=lf',
-  '/reports/responsive-image-build-evidence.json text eol=lf'
+  '/reports/responsive-image-build-evidence.json text eol=lf',
+  '/reports/legacy-image-focused-cleanup-inventory.json text eol=lf',
+  '/reports/focused-image-visual-review.json text eol=lf'
 )) {
   if ($gitattributes -notmatch ('(?m)^' + [regex]::Escape($requiredAttribute) + '$')) {
     throw "Missing canonical LF attribute: $requiredAttribute"
@@ -161,7 +163,7 @@ foreach ($defaultExpectation in @(
 }
 
 $assetIds = @(Get-OipPropertyNames -Value $manifest.assets | Sort-Object)
-Assert-Equal -Actual $assetIds.Count -Expected 350 -Message 'Canonical managed-image inventory changed; reconcile and document any variance before release.'
+Assert-Equal -Actual $assetIds.Count -Expected 459 -Message 'Focused-cleanup managed-image inventory changed; reconcile and document any variance before release.'
 
 $allowedAssetProperties = @('id','source','sha256','width','height','image_class','processing_hint','processing_state','processing_note','review_state','quality_override','usage_state')
 $allowedClasses = @('editorial_cartoon','essay_illustration','medium_import','essay_photo')
@@ -179,7 +181,7 @@ $classCounts = @{}
 $usageCounts = @{}
 
 foreach ($assetId in $assetIds) {
-  if ($assetId -cnotmatch '^(?:editorial/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|medium/[0-9a-f]{64})$') {
+  if ($assetId -cnotmatch '^(?:editorial/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium/[0-9a-f]{64})$') {
     throw "Invalid stable image asset ID: $assetId"
   }
 
@@ -202,13 +204,14 @@ foreach ($assetId in $assetIds) {
     }
   }
   elseif ($assetIdParts[0] -ceq 'essays') {
-    $sourceDirectoryPattern = '^images/originals/essays/' + [regex]::Escape($assetIdParts[1]) + '/'
+    $expectedSourcePrefix = 'images/originals/' + (($assetIdParts[0..($assetIdParts.Count - 2)]) -join '/') + '/'
     $sourceStem = [System.IO.Path]::GetFileNameWithoutExtension($source)
-    $expectedStem = $assetIdParts[2]
+    $expectedStem = $assetIdParts[-1]
     $isExplicitJpegCollision = $expectedStem.EndsWith('-jpg', [System.StringComparison]::Ordinal) -and
       $sourceStem -ceq $expectedStem.Substring(0, $expectedStem.Length - 4) -and
       [System.IO.Path]::GetExtension($source) -ceq '.jpg'
-    if ($source -cnotmatch $sourceDirectoryPattern -or ($sourceStem -cne $expectedStem -and -not $isExplicitJpegCollision)) {
+    if (-not $source.StartsWith($expectedSourcePrefix, [System.StringComparison]::Ordinal) -or
+      ($sourceStem -cne $expectedStem -and -not $isExplicitJpegCollision)) {
       throw "Essay asset '$assetId' source does not match its stable ID: $source"
     }
   }
@@ -334,15 +337,44 @@ foreach ($assetId in $assetIds) {
   })
 }
 
-Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 7 -Message 'Shared Medium canonical count changed.'
+Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 112 -Message 'Managed Medium canonical count changed.'
 Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected 13 -Message 'Supplemental essay-photo count changed.'
 $coreIllustrationCount = [int]($classCounts['editorial_cartoon'] ?? 0) + [int]($classCounts['essay_illustration'] ?? 0) + [int]($classCounts['medium_import'] ?? 0)
-Assert-Equal -Actual $coreIllustrationCount -Expected 337 -Message 'Core responsive-image review cohort changed.'
+Assert-Equal -Actual $coreIllustrationCount -Expected 446 -Message 'Core responsive-image review cohort changed.'
 Assert-Equal -Actual ([int]($usageCounts['retained_unreferenced'] ?? 0)) -Expected 5 -Message 'The explicit retained-but-unreferenced source count changed.'
-Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected 345 -Message 'Referenced managed-source count changed.'
+Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected 454 -Message 'Referenced managed-source count changed.'
 Assert-Equal -Actual $sourceOnlyIds.Count -Expected 1 -Message 'Exactly one corrupt supplemental source may be quarantined as source_only_unprocessable.'
 Assert-Equal -Actual $sourceOnlyIds[0] -Expected $expectedSourceOnlyId -Message 'The quarantined source-only asset changed.'
 Assert-Equal -Actual ([string]$manifest.assets.$expectedSourceOnlyId.processing_note) -Expected $expectedSourceOnlyNote -Message 'The tracked-safe quarantine reason changed.'
+
+$legacyMediumIds = @(
+  'medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731',
+  'medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7',
+  'medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a',
+  'medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe',
+  'medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb',
+  'medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb',
+  'medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7'
+)
+$mediumIds = @($assetIds | Where-Object { $_.StartsWith('medium/', [System.StringComparison]::Ordinal) })
+Assert-Equal -Actual $mediumIds.Count -Expected 112 -Message 'Managed Medium inventory must contain the seven R3 assets plus 105 focused-cleanup migrations.'
+Assert-Equal -Actual @($mediumIds | Where-Object { $legacyMediumIds -cnotcontains $_ }).Count -Expected 105 -Message 'Focused cleanup must add exactly 105 actual-hash Medium IDs.'
+foreach ($legacyMediumId in $legacyMediumIds) {
+  if ($mediumIds -cnotcontains $legacyMediumId) {
+    throw "Focused cleanup removed a pre-existing managed Medium asset: $legacyMediumId"
+  }
+}
+
+$expectedSydIds = @(
+  'essays/dialogues/bobanonymous/hero',
+  'essays/dialogues/broke-rich/hero',
+  'essays/dialogues/infinite-incontent/hero',
+  'essays/dialogues/pressure-makes-pearls/hero'
+)
+$actualSydIds = @($assetIds | Where-Object { $_.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal) })
+if (($actualSydIds -join "`n") -cne ($expectedSydIds -join "`n")) {
+  throw "Focused cleanup must register exactly the four approved Syd-and-Oliver heroes. Found: $($actualSydIds -join ', ')."
+}
 
 $managedSourceFiles = @(
   Get-ChildItem -LiteralPath (Join-Path $assetsRoot 'images/originals') -File -Recurse |
@@ -361,7 +393,15 @@ if (($managedSourceRelativePaths -join "`n") -cne ($manifestSourceRelativePaths 
 }
 
 $aliasNames = @(Get-OipPropertyNames -Value $manifest.aliases | Sort-Object)
-Assert-Equal -Actual $aliasNames.Count -Expected 391 -Message 'Frozen retired-path alias inventory changed; reconcile and document any variance before release.'
+Assert-Equal -Actual $aliasNames.Count -Expected 500 -Message 'Focused-cleanup retired-path alias inventory changed; reconcile and document any variance before release.'
+$mediumAliases = @($aliasNames | Where-Object { $_.StartsWith('/images/medium/', [System.StringComparison]::Ordinal) })
+$sydAliases = @($aliasNames | Where-Object { $_.StartsWith('/images/syd-and-oliver/', [System.StringComparison]::Ordinal) })
+Assert-Equal -Actual $mediumAliases.Count -Expected 119 -Message 'Medium alias count must equal 14 R3 aliases plus 105 retired PNG URLs.'
+Assert-Equal -Actual $sydAliases.Count -Expected 4 -Message 'Each retired Syd-and-Oliver hero URL must have one resolver alias.'
+$actualSydAliasTargets = @($sydAliases | ForEach-Object { [string]$manifest.aliases.$_ } | Sort-Object)
+if (($actualSydAliasTargets -join "`n") -cne ($expectedSydIds -join "`n")) {
+  throw 'Syd-and-Oliver aliases do not map one-to-one to the four managed dialogue heroes.'
+}
 $sourceOnlyAliasCount = @($aliasNames | Where-Object { [string]$manifest.aliases.$_ -ceq $sourceOnlyIds[0] }).Count
 Assert-Equal -Actual $sourceOnlyAliasCount -Expected 1 -Message 'The quarantined source must retain exactly one historical retired-path alias.'
 
@@ -388,7 +428,7 @@ function Resolve-OipAlias {
 }
 
 foreach ($alias in $aliasNames) {
-  if ($alias -cnotmatch '^/images/(?:editorial|essays|medium)/.+\.(?:png|jpe?g)$') {
+  if ($alias -cnotmatch '^/images/(?:editorial|essays|medium|syd-and-oliver)/.+\.(?:png|jpe?g)$') {
     throw "Managed alias must be an exact former public image URL: $alias"
   }
   if ($alias.Contains('/originals/', [System.StringComparison]::Ordinal)) {
@@ -407,7 +447,7 @@ foreach ($alias in $aliasNames) {
   }
 }
 
-foreach ($retiredDirectory in @('static/images/editorial','static/images/essays')) {
+foreach ($retiredDirectory in @('static/images/editorial','static/images/essays','static/images/syd-and-oliver')) {
   $fullDirectory = Join-Path $rootPath $retiredDirectory
   if (-not (Test-Path -LiteralPath $fullDirectory -PathType Container)) {
     continue
@@ -417,6 +457,21 @@ foreach ($retiredDirectory in @('static/images/editorial','static/images/essays'
     $sample = @($retiredRasterFiles | Select-Object -First 8 | ForEach-Object { $_.FullName.Substring($rootPath.Length + 1).Replace('\','/') })
     throw "Managed editorial/essay raster originals remain under static/. Samples: $($sample -join ', ')"
   }
+}
+
+$staticMediumRoot = Join-Path $staticRoot 'images/medium'
+if (-not (Test-Path -LiteralPath $staticMediumRoot -PathType Container)) {
+  throw 'Focused cleanup must retain the referenced compact Medium JPEG/JPG fleet under static/images/medium.'
+}
+$staticMediumFiles = @(Get-ChildItem -LiteralPath $staticMediumRoot -File -Recurse)
+Assert-Equal -Actual $staticMediumFiles.Count -Expected 316 -Message 'Focused cleanup must retain exactly 316 referenced Medium JPEG/JPG files.'
+$unsupportedStaticMediumFiles = @($staticMediumFiles | Where-Object { $_.Extension.ToLowerInvariant() -notin @('.jpg','.jpeg') })
+if ($unsupportedStaticMediumFiles.Count -gt 0) {
+  $sample = @($unsupportedStaticMediumFiles | Select-Object -First 8 | ForEach-Object { $_.FullName.Substring($rootPath.Length + 1).Replace('\','/') })
+  throw "Medium PNG/GIF or another unsupported legacy file remains under static/: $($sample -join ', ')"
+}
+if (Test-Path -LiteralPath (Join-Path $staticRoot 'images/syd-and-oliver')) {
+  throw 'The retired static/images/syd-and-oliver source directory must be absent after migration.'
 }
 
 $sourceLengths = @{}
@@ -600,6 +655,8 @@ finally {
 
 $referenceFiles = @()
 $logicalReferenceCounts = @{}
+$rawMediumReferences = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+$referenceTextByPath = @{}
 foreach ($assetId in $assetIds) {
   $logicalReferenceCounts[$assetId] = 0
 }
@@ -614,6 +671,18 @@ foreach ($referenceRoot in @('content','data')) {
 
 foreach ($referenceFile in $referenceFiles) {
   $text = Get-Content -LiteralPath $referenceFile.FullName -Raw -Encoding utf8
+  $referenceTextByPath[$referenceFile.FullName] = $text
+  foreach ($rawMediumMatch in [regex]::Matches(
+    $text,
+    '(?i)(?<url>/images/medium/[^\s"''<>\(\)\[\]]+\.(?:png|gif|jpe?g))',
+    [System.Text.RegularExpressions.RegexOptions]::CultureInvariant
+  )) {
+    $rawMediumUrl = $rawMediumMatch.Groups['url'].Value
+    if ([System.IO.Path]::GetExtension($rawMediumUrl).ToLowerInvariant() -notin @('.jpg','.jpeg')) {
+      throw "Content/data retains a raw Medium PNG or GIF reference after migration: $rawMediumUrl"
+    }
+    [void]$rawMediumReferences.Add($rawMediumUrl)
+  }
   if ($text.Contains($sourceOnlyIds[0], [System.StringComparison]::Ordinal)) {
     throw "Content/data must not reference quarantined source-only asset '$($sourceOnlyIds[0])': $($referenceFile.FullName.Substring($rootPath.Length + 1).Replace('\','/'))"
   }
@@ -633,6 +702,19 @@ foreach ($referenceFile in $referenceFiles) {
   }
 }
 
+Assert-Equal -Actual $rawMediumReferences.Count -Expected 316 -Message 'Content/data must retain exactly the 316 compact Medium JPEG/JPG references.'
+$expectedRawMediumReferences = @(
+  $staticMediumFiles |
+    ForEach-Object { '/' + $_.FullName.Substring($staticRoot.Length + 1).Replace('\','/') } |
+    Sort-Object
+)
+$actualRawMediumReferences = @($rawMediumReferences | Sort-Object)
+if (($actualRawMediumReferences -join "`n") -cne ($expectedRawMediumReferences -join "`n")) {
+  $missingStaticFiles = @($actualRawMediumReferences | Where-Object { $expectedRawMediumReferences -cnotcontains $_ })
+  $unreferencedStaticFiles = @($expectedRawMediumReferences | Where-Object { $actualRawMediumReferences -cnotcontains $_ })
+  throw "Raw Medium references and retained static JPEG/JPG files differ. Missing files: $($missingStaticFiles -join ', '). Unreferenced files: $($unreferencedStaticFiles -join ', ')."
+}
+
 foreach ($assetId in $assetIds) {
   $usageState = [string]$manifest.assets.$assetId.usage_state
   $referenceCount = [int]$logicalReferenceCounts[$assetId]
@@ -643,6 +725,320 @@ foreach ($assetId in $assetIds) {
     throw "Managed asset is marked retained_unreferenced but appears in content/data: $assetId"
   }
 }
+
+$migrationReportPath = Join-Path $rootPath 'reports/legacy-image-focused-cleanup-inventory.json'
+if (-not (Test-Path -LiteralPath $migrationReportPath -PathType Leaf)) {
+  throw "Missing frozen focused-cleanup inventory evidence: $migrationReportPath"
+}
+Get-OipCanonicalTextFileSha256 -Path $migrationReportPath -Label 'Focused legacy image cleanup inventory' -RequireCanonical | Out-Null
+$migrationReport = Get-Content -LiteralPath $migrationReportPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 30
+Assert-ExactProperties -Value $migrationReport -Expected @(
+  'schema_version',
+  'action_id',
+  'baseline_commit',
+  'baseline',
+  'result',
+  'medium_migrations',
+  'syd_migrations',
+  'retained_medium_files',
+  'removed_orphans',
+  'modified_reference_files'
+) -Context 'Focused legacy image cleanup report root'
+Assert-Equal -Actual ([string]$migrationReport.schema_version) -Expected '1.0' -Message 'Focused-cleanup report schema changed.'
+Assert-Equal -Actual ([string]$migrationReport.action_id) -Expected 'WEB-LEGACY-IMAGE-CLEANUP-001-R1' -Message 'Focused-cleanup action binding changed.'
+Assert-ExactProperties -Value $migrationReport.baseline -Expected @(
+  'inventory_digest_basis',
+  'medium_inventory_sha256',
+  'syd_inventory_sha256',
+  'medium_files',
+  'referenced_medium_files',
+  'referenced_medium_pngs',
+  'referenced_medium_jpeg_jpg',
+  'medium_orphans',
+  'syd_heroes',
+  'filename_hash_mismatches',
+  'long_paths_over_260'
+) -Context 'Focused legacy image cleanup baseline'
+Assert-Equal -Actual ([string]$migrationReport.baseline.inventory_digest_basis) -Expected 'sorted_path_tab_actual_sha256_lf_utf8_no_bom' -Message 'Focused-cleanup inventory digest basis changed.'
+Assert-Equal -Actual ([string]$migrationReport.baseline.medium_inventory_sha256) -Expected '851880a2e59635b660a6192385dff6cbb0eb73d3b8b3d5f747c6e730c6302c5a' -Message 'Frozen 471-file Medium inventory digest changed.'
+Assert-Equal -Actual ([string]$migrationReport.baseline.syd_inventory_sha256) -Expected 'c53d8f9db266f5cba29cb4fd400a0dd72263e6eb492e706b2d1aedd07c0bd21e' -Message 'Frozen four-file Syd inventory digest changed.'
+Assert-ExactProperties -Value $migrationReport.result -Expected @(
+  'manifest_assets',
+  'manifest_aliases',
+  'migrated_source_bytes',
+  'removed_orphan_bytes',
+  'retained_medium_bytes'
+) -Context 'Focused legacy image cleanup result'
+if ([string]$migrationReport.baseline_commit -cnotmatch '^[0-9a-f]{40}$') {
+  throw 'Focused-cleanup report baseline_commit must be one exact Git commit.'
+}
+& git -C $rootPath cat-file -e (([string]$migrationReport.baseline_commit) + '^{commit}') 2>$null
+if ($LASTEXITCODE -ne 0) {
+  throw "Focused-cleanup baseline commit is unavailable: $($migrationReport.baseline_commit)"
+}
+$excludedLaneChanges = @(
+  & git -C $rootPath diff --name-only ([string]$migrationReport.baseline_commit) -- `
+    'assets/images/paper-route' `
+    'assets/js/paper-route-launcher.js' `
+    'assets/js/paper-route-rules.js' `
+    'assets/js/paper-route.js' `
+    'content/games/idle-times' `
+    'static/images/books' `
+    'static/images/social' `
+    'content/authors/robert-v-ussley/Bobviously_Portrait_v1.png'
+)
+if ($LASTEXITCODE -ne 0) {
+  throw 'Unable to compare excluded image/game lanes with the focused-cleanup baseline.'
+}
+if ($excludedLaneChanges.Count -gt 0) {
+  throw "Focused cleanup changed excluded Paper-Bob, Idle Times, book, social-card, or author-portrait assets: $($excludedLaneChanges -join ', ')"
+}
+
+function Get-OipBaselineBlobMap {
+  param(
+    [Parameter(Mandatory)][string]$Commit,
+    [Parameter(Mandatory)][string[]]$RelativePaths
+  )
+
+  $paths = @($RelativePaths | Sort-Object -Unique)
+  $startInfo = [System.Diagnostics.ProcessStartInfo]::new()
+  $startInfo.FileName = 'git'
+  $startInfo.WorkingDirectory = $rootPath
+  $startInfo.UseShellExecute = $false
+  $startInfo.RedirectStandardInput = $true
+  $startInfo.RedirectStandardOutput = $true
+  $startInfo.RedirectStandardError = $true
+  $null = $startInfo.ArgumentList.Add('cat-file')
+  $null = $startInfo.ArgumentList.Add('--batch')
+  $process = [System.Diagnostics.Process]::new()
+  $process.StartInfo = $startInfo
+  $null = $process.Start()
+  $memory = [System.IO.MemoryStream]::new()
+  try {
+    $outputTask = $process.StandardOutput.BaseStream.CopyToAsync($memory)
+    $errorTask = $process.StandardError.ReadToEndAsync()
+    foreach ($relativePath in $paths) {
+      $process.StandardInput.WriteLine("${Commit}:$relativePath")
+    }
+    $process.StandardInput.Close()
+    $null = $outputTask.GetAwaiter().GetResult()
+    $stderr = $errorTask.GetAwaiter().GetResult()
+    $process.WaitForExit()
+    if ($process.ExitCode -ne 0) {
+      throw "Unable to batch-read baseline Git blobs: $($stderr.Trim())"
+    }
+
+    $output = $memory.ToArray()
+    $offset = 0
+    $result = @{}
+    foreach ($relativePath in $paths) {
+      $newline = [Array]::IndexOf($output, [byte]10, $offset)
+      if ($newline -lt $offset) {
+        throw "Malformed Git batch header for baseline path: $relativePath"
+      }
+      $header = [Text.Encoding]::ASCII.GetString($output, $offset, $newline - $offset)
+      if ($header.EndsWith(' missing', [StringComparison]::Ordinal)) {
+        throw "Baseline Git blob is missing: $relativePath"
+      }
+      $headerParts = $header.Split(' ', [StringSplitOptions]::RemoveEmptyEntries)
+      if ($headerParts.Count -ne 3 -or $headerParts[1] -cne 'blob') {
+        throw "Unexpected Git batch header for baseline path '$relativePath': $header"
+      }
+      $blobLength = [int]$headerParts[2]
+      $blobStart = $newline + 1
+      $delimiterOffset = $blobStart + $blobLength
+      if ($delimiterOffset -ge $output.Length -or $output[$delimiterOffset] -ne 10) {
+        throw "Malformed Git batch payload for baseline path: $relativePath"
+      }
+      $blobBytes = [byte[]]::new($blobLength)
+      [Array]::Copy($output, $blobStart, $blobBytes, 0, $blobLength)
+      $result[$relativePath] = $blobBytes
+      $offset = $delimiterOffset + 1
+    }
+    if ($offset -ne $output.Length) {
+      throw 'Git baseline blob batch returned unexpected trailing bytes.'
+    }
+    return $result
+  }
+  finally {
+    $memory.Dispose()
+    $process.Dispose()
+  }
+}
+
+function Get-OipEvidenceInventoryDigest {
+  param([Parameter(Mandatory)][object[]]$Rows)
+
+  $paths = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+  $lines = [Collections.Generic.List[string]]::new()
+  foreach ($row in $Rows) {
+    $path = if ($row.Contains('path')) { [string]$row.path } else { [string]$row.legacy_path }
+    $sha256 = [string]$row.sha256
+    if (-not $paths.Add($path) -or $path.Contains("`t") -or $path.Contains("`r") -or $path.Contains("`n") -or $sha256 -cnotmatch '^[0-9a-f]{64}$') {
+      throw "Focused inventory digest contains an invalid or duplicate path/SHA: $path"
+    }
+    $lines.Add($path + "`t" + $sha256)
+  }
+  $lines.Sort([StringComparer]::Ordinal)
+  return Get-OipSha256ForBytes -Bytes $canonicalUtf8.GetBytes(([string]::Join("`n", $lines)) + "`n")
+}
+
+function Assert-OipNoTrackedRuntimeReferences {
+  param(
+    [Parameter(Mandatory)][string[]]$Values,
+    [Parameter(Mandatory)][string]$Label
+  )
+
+  $patternPath = [IO.Path]::GetTempFileName()
+  try {
+    [IO.File]::WriteAllLines($patternPath, @($Values | Sort-Object -Unique), [Text.UTF8Encoding]::new($false))
+    $hits = @(& git -C $rootPath grep -I -n -F -f $patternPath -- . ':(exclude)reports' 2>$null)
+    $grepExit = $LASTEXITCODE
+    if ($grepExit -notin @(0,1)) {
+      throw "Tracked runtime-source scan failed for $Label."
+    }
+    if ($hits.Count -gt 0) {
+      throw "Tracked nonhistorical source retains ${Label}: $($hits -join '; ')"
+    }
+  }
+  finally {
+    [IO.File]::Delete($patternPath)
+  }
+}
+
+foreach ($expectation in @(
+  @{ Value = $migrationReport.baseline.medium_files; Expected = 471; Message = 'Baseline Medium inventory changed.' },
+  @{ Value = $migrationReport.baseline.referenced_medium_files; Expected = 421; Message = 'Baseline referenced Medium inventory changed.' },
+  @{ Value = $migrationReport.baseline.referenced_medium_pngs; Expected = 105; Message = 'Focused Medium PNG migration count changed.' },
+  @{ Value = $migrationReport.baseline.referenced_medium_jpeg_jpg; Expected = 316; Message = 'Retained Medium JPEG/JPG count changed.' },
+  @{ Value = $migrationReport.baseline.medium_orphans; Expected = 50; Message = 'Removed Medium orphan count changed.' },
+  @{ Value = $migrationReport.baseline.syd_heroes; Expected = 4; Message = 'Migrated Syd hero count changed.' },
+  @{ Value = $migrationReport.baseline.filename_hash_mismatches; Expected = 15; Message = 'Legacy filename/hash mismatch count changed.' },
+  @{ Value = $migrationReport.baseline.long_paths_over_260; Expected = 61; Message = 'Long-path baseline coverage changed.' },
+  @{ Value = $migrationReport.result.manifest_assets; Expected = 459; Message = 'Post-cleanup manifest asset count changed.' },
+  @{ Value = $migrationReport.result.manifest_aliases; Expected = 500; Message = 'Post-cleanup manifest alias count changed.' },
+  @{ Value = $migrationReport.result.migrated_source_bytes; Expected = 69683954; Message = 'Focused migrated-source byte total changed.' },
+  @{ Value = $migrationReport.result.removed_orphan_bytes; Expected = 5207258; Message = 'Focused orphan-removal byte total changed.' }
+)) {
+  Assert-Equal -Actual ([int]$expectation.Value) -Expected ([int]$expectation.Expected) -Message ([string]$expectation.Message)
+}
+if ([int]$migrationReport.baseline.long_paths_over_260 -lt 1) {
+  throw 'Focused-cleanup evidence must prove that NUL-delimited enumeration handled at least one path longer than 260 characters.'
+}
+
+$reportedMediumMigrations = @($migrationReport.medium_migrations)
+$reportedSydMigrations = @($migrationReport.syd_migrations)
+$reportedRetainedMedium = @($migrationReport.retained_medium_files)
+$reportedOrphans = @($migrationReport.removed_orphans)
+Assert-Equal -Actual $reportedMediumMigrations.Count -Expected 105 -Message 'Focused-cleanup report must enumerate all 105 Medium PNG migrations.'
+Assert-Equal -Actual $reportedSydMigrations.Count -Expected 4 -Message 'Focused-cleanup report must enumerate all four Syd migrations.'
+Assert-Equal -Actual $reportedRetainedMedium.Count -Expected 316 -Message 'Focused-cleanup report must enumerate all 316 retained Medium JPEG/JPG files.'
+Assert-Equal -Actual $reportedOrphans.Count -Expected 50 -Message 'Focused-cleanup report must enumerate all 50 removed Medium orphans.'
+Assert-Equal -Actual @($migrationReport.modified_reference_files).Count -Expected 32 -Message 'Focused cleanup must rewrite exactly the frozen 32 content files.'
+$baselineBlobPaths = @(
+  $migrationReport.modified_reference_files | ForEach-Object { [string]$_.path }
+  $reportedMediumMigrations | ForEach-Object { [string]$_.legacy_path }
+  $reportedSydMigrations | ForEach-Object { [string]$_.legacy_path }
+  $reportedRetainedMedium | ForEach-Object { [string]$_.path }
+  $reportedOrphans | ForEach-Object { [string]$_.legacy_path }
+)
+$baselineBlobMap = Get-OipBaselineBlobMap -Commit ([string]$migrationReport.baseline_commit) -RelativePaths $baselineBlobPaths
+Assert-Equal -Actual $baselineBlobMap.Count -Expected 507 -Message 'Baseline Git-blob batch must bind the 32 rewritten content files, 105 Medium PNGs, four Syd heroes, 316 retained Medium JPEG/JPG files, and 50 removed orphans.'
+Assert-Equal -Actual (Get-OipEvidenceInventoryDigest -Rows @(@($reportedMediumMigrations) + @($reportedRetainedMedium) + @($reportedOrphans))) -Expected ([string]$migrationReport.baseline.medium_inventory_sha256) -Message 'Reported Medium rows do not reproduce the frozen canonical path/actual-SHA digest.'
+Assert-Equal -Actual (Get-OipEvidenceInventoryDigest -Rows @($reportedSydMigrations)) -Expected ([string]$migrationReport.baseline.syd_inventory_sha256) -Message 'Reported Syd rows do not reproduce the frozen canonical path/actual-SHA digest.'
+$strictUtf8 = [Text.UTF8Encoding]::new($false, $true)
+$reportedModifiedPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+foreach ($item in @($migrationReport.modified_reference_files)) {
+  $relativePath = [string]$item.path
+  if (-not $reportedModifiedPaths.Add($relativePath) -or $relativePath -cnotmatch '^content/essays/.+\.md$') {
+    throw "Focused-cleanup report contains a duplicate or out-of-scope rewritten content path: $relativePath"
+  }
+  $fullPath = Join-Path $rootPath $relativePath
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf) -or (Get-OipSha256 -Path $fullPath) -cne [string]$item.after_sha256) {
+    throw "Focused-cleanup rewritten-content hash is stale: $relativePath"
+  }
+  if ([string]$item.before_sha256 -ceq [string]$item.after_sha256 -or [int]$item.replacement_count -lt 1) {
+    throw "Focused-cleanup rewritten-content evidence lacks a real bounded replacement: $relativePath"
+  }
+  $baselineBlobBytes = [byte[]]$baselineBlobMap[$relativePath]
+  $baselineBlobSha256 = Get-OipSha256ForBytes -Bytes $baselineBlobBytes
+  $baselineText = $strictUtf8.GetString($baselineBlobBytes)
+  $materializedBaselineBytes = [Text.Encoding]::UTF8.GetBytes(([regex]::Replace($baselineText, "`r`n|`r|`n", "`r`n")))
+  $materializedBaselineSha256 = Get-OipSha256ForBytes -Bytes $materializedBaselineBytes
+  if ([string]$item.before_sha256 -cnotin @($baselineBlobSha256, $materializedBaselineSha256)) {
+    throw "Focused-cleanup before-content hash matches neither the raw baseline Git blob nor its deterministic CRLF checkout materialization: $relativePath"
+  }
+}
+
+$reportedMigrationIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+$reportedLegacyPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+foreach ($item in $reportedMediumMigrations) {
+  $actualHash = ([string]$item.sha256).ToLowerInvariant()
+  $expectedId = 'medium/' + $actualHash
+  Assert-Equal -Actual ([string]$item.asset_id) -Expected $expectedId -Message "Medium migration ID is not based on actual file bytes: $($item.legacy_path)"
+  Assert-Equal -Actual ([string]$item.source) -Expected ("images/originals/medium/$actualHash.png") -Message "Medium migration source is not named by actual file bytes: $($item.legacy_path)"
+  if ([string]$item.legacy_path -cnotmatch '^static/images/medium/.+\.png$' -or [string]$item.public_alias -cne ('/' + ([string]$item.legacy_path).Substring('static/'.Length))) {
+    throw "Invalid retired Medium migration path or alias: $($item.legacy_path)"
+  }
+  if (-not $reportedMigrationIds.Add($expectedId) -or -not $reportedLegacyPaths.Add([string]$item.legacy_path)) {
+    throw "Duplicate focused Medium migration evidence: $($item.legacy_path)"
+  }
+  Assert-Equal -Actual (Get-OipSha256ForBytes -Bytes ([byte[]]$baselineBlobMap[[string]$item.legacy_path])) -Expected $actualHash -Message "Migrated Medium source hash does not match the exact baseline Git blob: $($item.legacy_path)"
+  $legacyFilenameStem = [IO.Path]::GetFileNameWithoutExtension([string]$item.legacy_path)
+  Assert-Equal -Actual ([bool]$item.filename_hash_match) -Expected ($legacyFilenameStem -ceq $actualHash) -Message "Medium filename_hash_match flag disagrees with the baseline-blob SHA: $($item.legacy_path)"
+  if ($mediumIds -cnotcontains $expectedId -or [string]$manifest.aliases.([string]$item.public_alias) -cne $expectedId) {
+    throw "Focused Medium migration report does not match the manifest: $($item.legacy_path)"
+  }
+  if (Test-Path -LiteralPath (Join-Path $rootPath ([string]$item.legacy_path))) {
+    throw "Retired Medium PNG remains in the working tree: $($item.legacy_path)"
+  }
+}
+Assert-Equal -Actual @($reportedMediumMigrations | Where-Object { -not [bool]$_.filename_hash_match }).Count -Expected 15 -Message 'Focused-cleanup report must identify exactly 15 filename/hash mismatches.'
+
+foreach ($item in $reportedSydMigrations) {
+  if (-not $reportedMigrationIds.Add([string]$item.asset_id) -or -not $reportedLegacyPaths.Add([string]$item.legacy_path)) {
+    throw "Duplicate focused Syd migration evidence: $($item.legacy_path)"
+  }
+  if ($expectedSydIds -cnotcontains [string]$item.asset_id -or
+    [string]$manifest.aliases.([string]$item.public_alias) -cne [string]$item.asset_id -or
+    [string]$manifest.assets.([string]$item.asset_id).sha256 -cne [string]$item.sha256) {
+    throw "Focused Syd migration report does not match the manifest: $($item.legacy_path)"
+  }
+  Assert-Equal -Actual (Get-OipSha256ForBytes -Bytes ([byte[]]$baselineBlobMap[[string]$item.legacy_path])) -Expected ([string]$item.sha256) -Message "Migrated Syd source hash does not match the exact baseline Git blob: $($item.legacy_path)"
+  $legacyFilenameStem = [IO.Path]::GetFileNameWithoutExtension([string]$item.legacy_path)
+  Assert-Equal -Actual ([bool]$item.filename_hash_match) -Expected ($legacyFilenameStem -ceq [string]$item.sha256) -Message "Syd filename_hash_match flag disagrees with the baseline-blob SHA: $($item.legacy_path)"
+  if (Test-Path -LiteralPath (Join-Path $rootPath ([string]$item.legacy_path))) {
+    throw "Retired Syd hero remains in the working tree: $($item.legacy_path)"
+  }
+}
+Assert-Equal -Actual $reportedMigrationIds.Count -Expected 109 -Message 'Focused-cleanup report must bind exactly 109 unique managed asset IDs.'
+
+foreach ($item in $reportedRetainedMedium) {
+  $relativePath = [string]$item.path
+  if ([System.IO.Path]::GetExtension($relativePath).ToLowerInvariant() -notin @('.jpg','.jpeg')) {
+    throw "Focused-cleanup retained inventory contains a non-JPEG file: $relativePath"
+  }
+  $fullPath = Join-Path $rootPath $relativePath
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf) -or (Get-OipSha256 -Path $fullPath) -cne [string]$item.sha256) {
+    throw "Focused-cleanup retained Medium evidence is stale: $relativePath"
+  }
+  Assert-Equal -Actual (Get-OipSha256ForBytes -Bytes ([byte[]]$baselineBlobMap[$relativePath])) -Expected ([string]$item.sha256) -Message "Retained Medium source hash does not match the exact baseline Git blob: $relativePath"
+}
+$reportedOrphanAliases = [System.Collections.Generic.List[string]]::new()
+foreach ($item in $reportedOrphans) {
+  $relativePath = [string]$item.legacy_path
+  if (-not $reportedLegacyPaths.Add($relativePath)) {
+    throw "Focused-cleanup orphan evidence duplicates another retired path: $relativePath"
+  }
+  if (Test-Path -LiteralPath (Join-Path $rootPath $relativePath)) {
+    throw "Confirmed Medium orphan remains in the working tree: $relativePath"
+  }
+  $publicAlias = '/' + $relativePath.Substring('static/'.Length)
+  Assert-Equal -Actual (Get-OipSha256ForBytes -Bytes ([byte[]]$baselineBlobMap[$relativePath])) -Expected ([string]$item.sha256) -Message "Removed orphan hash does not match the baseline Git blob: $relativePath"
+  $reportedOrphanAliases.Add($publicAlias)
+}
+Assert-OipNoTrackedRuntimeReferences -Values $reportedOrphanAliases -Label 'removed orphan aliases'
+Assert-Equal -Actual $reportedLegacyPaths.Count -Expected 159 -Message 'Focused-cleanup report must bind 105 Medium migrations, four Syd migrations, and 50 orphan removals.'
 
 $reviewReportPath = Join-Path $rootPath 'reports/image-review-candidates.json'
 if (-not (Test-Path -LiteralPath $reviewReportPath -PathType Leaf)) {
@@ -657,6 +1053,7 @@ Assert-ExactProperties -Value $reviewReport -Expected @(
   'candidate_count',
   'minimum_candidate_count',
   'deep_review_count',
+  'focused_deep_review_count',
   'selection_rule',
   'deep_review_rule',
   'reason_counts',
@@ -697,6 +1094,22 @@ foreach ($candidate in $reviewCandidates) {
     }
   }
 }
+$focusedCleanupReviewIds = @(
+  $assetIds | Where-Object {
+    ($_.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_) -or
+    $_.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal)
+  }
+)
+Assert-Equal -Actual $focusedCleanupReviewIds.Count -Expected 109 -Message 'Focused-cleanup visual-review cohort must contain exactly 105 Medium PNGs and four Syd heroes.'
+foreach ($focusedCleanupReviewId in $focusedCleanupReviewIds) {
+  if (-not $candidateIds.Contains($focusedCleanupReviewId)) {
+    throw "Focused-cleanup migration is missing from the deterministic review report: $focusedCleanupReviewId"
+  }
+  $focusedCandidate = @($reviewCandidates | Where-Object { [string]$_.id -ceq $focusedCleanupReviewId })[0]
+  if (@($focusedCandidate.reasons) -cnotcontains 'focused_cleanup_migration') {
+    throw "Focused-cleanup review candidate is missing its migration reason: $focusedCleanupReviewId"
+  }
+}
 if (-not $candidateIds.Contains($expectedSourceOnlyId)) {
   throw 'The quarantined corrupt source must remain in the raw-source review candidate report.'
 }
@@ -714,26 +1127,129 @@ foreach ($selection in $deepReviewSelection) {
     throw "Deep-review selection cannot produce comparison derivatives: $selectionId"
   }
 }
-foreach ($requiredCategory in @('fine_text','crosshatching','faces_or_photos','dark_tones','saturated_color','extreme_aspect_ratio','largest_source_bytes','largest_native_dimensions')) {
+$focusedDeepReviewIds = @(
+  $deepReviewSelection |
+    Where-Object { $focusedCleanupReviewIds -ccontains [string]$_.id } |
+    ForEach-Object { [string]$_.id } |
+    Sort-Object -Unique
+)
+Assert-Equal -Actual ([int]$reviewReport.focused_deep_review_count) -Expected $focusedDeepReviewIds.Count -Message 'Image review report focused_deep_review_count is stale.'
+if ($focusedDeepReviewIds.Count -lt 24) {
+  throw "Focused-cleanup deep review must select at least 24 migrated assets; found $($focusedDeepReviewIds.Count)."
+}
+foreach ($requiredSydId in $expectedSydIds) {
+  if ($focusedDeepReviewIds -cnotcontains $requiredSydId) {
+    throw "Focused-cleanup deep review must include Syd-and-Oliver hero: $requiredSydId"
+  }
+}
+foreach ($requiredCategory in @('fine_text','crosshatching','focused_syd_hero','faces_or_photos','dark_tones','saturated_color','extreme_aspect_ratio','largest_source_bytes','largest_native_dimensions')) {
   if (-not $reviewReport.deep_review_category_counts.ContainsKey($requiredCategory) -or [int]$reviewReport.deep_review_category_counts[$requiredCategory] -lt 1) {
     throw "Deep-review selection does not cover required high-risk category: $requiredCategory"
+  }
+}
+foreach ($requiredFocusedCategory in @('focused_syd_hero','focused_chart','focused_map','focused_fine_text','focused_portrait_or_tall','focused_extreme_aspect_ratio','focused_dark_tones','focused_saturated_color','focused_largest_source_bytes','focused_largest_native_dimensions')) {
+  if (-not $reviewReport.deep_review_category_counts.ContainsKey($requiredFocusedCategory) -or [int]$reviewReport.deep_review_category_counts[$requiredFocusedCategory] -lt 1) {
+    throw "Focused deep-review selection does not cover required migrated-asset category: $requiredFocusedCategory"
+  }
+}
+
+$focusedReviewEvidencePath = Join-Path $rootPath 'reports/focused-image-visual-review.json'
+Get-OipCanonicalTextFileSha256 -Path $focusedReviewEvidencePath -Label 'Focused image visual-review evidence' -RequireCanonical | Out-Null
+$focusedReviewEvidence = Get-Content -LiteralPath $focusedReviewEvidencePath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 30
+Assert-ExactProperties -Value $focusedReviewEvidence -Expected @(
+  'schema_version',
+  'action_id',
+  'review_state',
+  'review_date',
+  'review_actor',
+  'review_surface',
+  'manifest_sha256_before_promotion',
+  'manifest_sha256_basis',
+  'candidate_report_sha256_before_promotion',
+  'candidate_report_sha256_basis',
+  'expected_asset_count',
+  'expected_asset_ids',
+  'reviewed_asset_ids',
+  'required_review_methods',
+  'completed_review_methods',
+  'expected_deep_review_count',
+  'expected_deep_review_ids',
+  'deep_reviewed_asset_ids',
+  'decode_sanity',
+  'quality_overrides',
+  'notes'
+) -Context 'Focused image visual-review evidence'
+Assert-Equal -Actual ([string]$focusedReviewEvidence.schema_version) -Expected '1.0' -Message 'Focused visual-review schema changed.'
+Assert-Equal -Actual ([string]$focusedReviewEvidence.action_id) -Expected 'WEB-LEGACY-IMAGE-CLEANUP-001-R1' -Message 'Focused visual-review action binding changed.'
+Assert-Equal -Actual ([int]$focusedReviewEvidence.expected_asset_count) -Expected 109 -Message 'Focused visual-review asset count changed.'
+Assert-Equal -Actual ([int]$focusedReviewEvidence.expected_deep_review_count) -Expected $focusedDeepReviewIds.Count -Message 'Focused deep-review count is stale.'
+if ((@($focusedReviewEvidence.expected_asset_ids | Sort-Object -Unique) -join "`n") -cne (@($focusedCleanupReviewIds | Sort-Object -Unique) -join "`n")) {
+  throw 'Focused visual-review evidence does not bind the exact 109 migrated assets.'
+}
+if ((@($focusedReviewEvidence.expected_deep_review_ids | Sort-Object -Unique) -join "`n") -cne (@($focusedDeepReviewIds | Sort-Object -Unique) -join "`n")) {
+  throw 'Focused visual-review evidence does not bind the deterministic migrated-asset deep-review selection.'
+}
+$focusedReviewState = [string]$focusedReviewEvidence.review_state
+if ($focusedReviewState -cnotin @('pending_review','pass')) {
+  throw "Focused visual-review evidence has unsupported review_state '$focusedReviewState'."
+}
+if ($focusedReviewState -ceq 'pending_review') {
+  Assert-Equal -Actual ([string]$focusedReviewEvidence.manifest_sha256_before_promotion) -Expected $manifestCanonicalSha256 -Message 'Pending focused visual-review evidence is stale relative to the manifest.'
+  Assert-Equal -Actual ([string]$focusedReviewEvidence.candidate_report_sha256_before_promotion) -Expected $reviewReportCanonicalSha256 -Message 'Pending focused visual-review evidence is stale relative to the candidate report.'
+  if (@($focusedReviewEvidence.reviewed_asset_ids).Count -ne 0 -or @($focusedReviewEvidence.deep_reviewed_asset_ids).Count -ne 0) {
+    throw 'Pending focused visual-review evidence must not claim completed asset review.'
+  }
+}
+else {
+  if ((@($focusedReviewEvidence.reviewed_asset_ids | Sort-Object -Unique) -join "`n") -cne (@($focusedCleanupReviewIds | Sort-Object -Unique) -join "`n") -or
+    (@($focusedReviewEvidence.deep_reviewed_asset_ids | Sort-Object -Unique) -join "`n") -cne (@($focusedDeepReviewIds | Sort-Object -Unique) -join "`n")) {
+    throw 'PASS focused visual-review evidence must cover all 109 migrations and the complete deterministic deep-review selection.'
+  }
+  if ([int]$focusedReviewEvidence.decode_sanity.asset_count -ne 109 -or
+    [int]$focusedReviewEvidence.decode_sanity.decode_failure_count -ne 0 -or
+    [string]$focusedReviewEvidence.decode_sanity.outcome -cne 'pass') {
+    throw 'PASS focused visual-review evidence must record zero decode failures across all 109 migrations.'
   }
 }
 
 $visualReviewPath = Join-Path $rootPath 'reports/image-visual-review.json'
 Get-OipCanonicalTextFileSha256 -Path $visualReviewPath -Label 'Image visual review evidence' -RequireCanonical | Out-Null
 $visualReview = Get-Content -LiteralPath $visualReviewPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 20
-Assert-Equal -Actual ([string]$visualReview.manifest_sha256_before_review_basis) -Expected 'historical_windows_worktree_bytes' -Message 'Historical pre-review manifest hash basis changed.'
 Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Current manifest hash basis changed.'
 Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Candidate report hash basis changed.'
-Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review) -Expected $manifestCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical manifest.'
-Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256) -Expected $reviewReportCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical candidate report.'
+$pendingStructuralReview = $pendingReviewIds.Count -gt 0 -and $AllowPendingReview
+if (-not $pendingStructuralReview) {
+  Assert-Equal -Actual ([string]$visualReview.manifest_sha256_before_review_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Focused pre-review manifest hash basis changed.'
+  Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review) -Expected $manifestCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical manifest.'
+  Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256) -Expected $reviewReportCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical candidate report.'
+  Assert-Equal -Actual ([int]$visualReview.quantitative_decode_sanity.asset_count) -Expected 458 -Message 'Aggregate decode evidence must preserve the prior 349 approved assets and add all 109 focused migrations.'
+  Assert-Equal -Actual ([int]$visualReview.quantitative_decode_sanity.decode_failure_count) -Expected 0 -Message 'Aggregate decode evidence records a failure.'
+  Assert-Equal -Actual ([string]$visualReview.quantitative_decode_sanity.outcome) -Expected 'pass' -Message 'Aggregate decode evidence has not passed.'
+  Assert-Equal -Actual ([int]$visualReview.deep_review.asset_count) -Expected $deepReviewIds.Count -Message 'Aggregate deep-review count must cover the complete current selection, including carryovers.'
+  Assert-Equal -Actual ([string]$visualReview.deep_review.outcome) -Expected 'pass' -Message 'Aggregate deep review has not passed.'
+  Assert-ExactProperties -Value $visualReview.deep_review.category_counts -Expected @($reviewReport.deep_review_category_counts.Keys) -Context 'Aggregate deep-review category counts'
+  foreach ($category in $reviewReport.deep_review_category_counts.Keys) {
+    Assert-Equal -Actual ([int]$visualReview.deep_review.category_counts[$category]) -Expected ([int]$reviewReport.deep_review_category_counts[$category]) -Message "Aggregate deep-review category count is stale: $category"
+  }
+  Assert-Equal -Actual ([string]$visualReview.focused_cleanup_review.action_id) -Expected 'WEB-LEGACY-IMAGE-CLEANUP-001-R1' -Message 'Aggregate focused visual-review action binding changed.'
+  Assert-Equal -Actual ([string]$visualReview.focused_cleanup_review.outcome) -Expected 'pass' -Message 'Aggregate focused visual review has not passed.'
+  Assert-Equal -Actual ([int]$visualReview.focused_cleanup_review.reviewed_asset_count) -Expected 109 -Message 'Aggregate focused visual review must cover all 109 migrations.'
+  Assert-Equal -Actual ([int]$visualReview.focused_cleanup_review.deep_review_asset_count) -Expected $focusedDeepReviewIds.Count -Message 'Aggregate focused deep-review count is stale.'
+  Assert-Equal -Actual ([int]$visualReview.focused_cleanup_review.decode_failure_count) -Expected 0 -Message 'Aggregate focused visual review records a decode failure.'
+  Assert-Equal -Actual ([int]$visualReview.focused_cleanup_review.quality_override_count) -Expected (@($focusedReviewEvidence.quality_overrides).Count) -Message 'Aggregate focused quality-override count is stale.'
+  $focusedReviewedIdsSha256 = Get-OipSha256ForBytes -Bytes $canonicalUtf8.GetBytes(((@($focusedCleanupReviewIds | Sort-Object -Unique) -join "`n") + "`n"))
+  $focusedDeepIdsSha256 = Get-OipSha256ForBytes -Bytes $canonicalUtf8.GetBytes(((@($focusedDeepReviewIds | Sort-Object -Unique) -join "`n") + "`n"))
+  Assert-Equal -Actual ([string]$visualReview.focused_cleanup_review.reviewed_asset_ids_sha256) -Expected $focusedReviewedIdsSha256 -Message 'Aggregate focused reviewed-ID digest is stale.'
+  Assert-Equal -Actual ([string]$visualReview.focused_cleanup_review.deep_review_asset_ids_sha256) -Expected $focusedDeepIdsSha256 -Message 'Aggregate focused deep-review digest is stale.'
+}
 
 $buildEvidencePath = Join-Path $rootPath 'reports/responsive-image-build-evidence.json'
 Get-OipCanonicalTextFileSha256 -Path $buildEvidencePath -Label 'Responsive image build evidence' -RequireCanonical | Out-Null
 $buildEvidence = Get-Content -LiteralPath $buildEvidencePath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 20
 Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Responsive image build evidence hash basis changed.'
-Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Responsive image build evidence is stale relative to the canonical manifest.'
+if (-not $pendingStructuralReview) {
+  Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Responsive image build evidence is stale relative to the canonical manifest.'
+}
 
 if (-not $AllowPendingReview -and $pendingReviewIds.Count -gt 0) {
   $sample = @($pendingReviewIds | Select-Object -First 12)

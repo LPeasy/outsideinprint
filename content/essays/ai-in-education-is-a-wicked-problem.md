@@ -6,7 +6,7 @@ slug: "ai-in-education-is-a-wicked-problem"
 section_label: "Essay"
 subtitle: "~ And Why We Can’t Figure it Out"
 description: "Control is impossible when everyone depends on the machine. Schools can’t control AI misuse because everyone depends on it"
-featured_image: "/images/medium/ai-in-education-is-a-wicked-problem/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba.png"
+featured_image: "medium/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba"
 featured_image_caption: "“In My Voice” | Art by Author"
 featured_image_alt: "“In My Voice”"
 version: "1.2"
@@ -72,7 +72,7 @@ Coined by Horst Rittel and Melvin Webber (1973), a wicked problem ~
 > Poverty, climate change, social media addiction ~ and now, AI in the
 > classroom.
 
-![“The Wicked Problem Loop”](/images/medium/ai-in-education-is-a-wicked-problem/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db.png)
+![“The Wicked Problem Loop”](oip-image:medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db)
 
 *“The Wicked Problem Loop” | Created by Author*
 
@@ -122,7 +122,7 @@ authorship.***
 
 ### Why Detection and Governance Fail for the Same Reason
 
-![“The Futility of Control”](/images/medium/ai-in-education-is-a-wicked-problem/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7.png)
+![“The Futility of Control”](oip-image:medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7)
 
 *“The Futility of Control” | Created by Author*
 
@@ -154,7 +154,7 @@ fail for the same reason ~
 
 ### How AI Is Replacing Judgment ~ Not Just Labor
 
-![“The Erosion of Judgement”](/images/medium/ai-in-education-is-a-wicked-problem/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28.png)
+![“The Erosion of Judgement”](oip-image:medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28)
 
 *“The Erosion of Judgement” | Created by Author*
 
@@ -179,7 +179,7 @@ logical iteration.
 
 ### Why the AI Misuse Problem Can't Be Solved ~ Only Redefined
 
-![“The Reflection of Learning”](/images/medium/ai-in-education-is-a-wicked-problem/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042.png)
+![“The Reflection of Learning”](oip-image:medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042)
 
 *“The Reflection of Learning” | Art by Author*
 

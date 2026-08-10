@@ -20,10 +20,10 @@ test("responsive image manifest keeps the frozen inventory and processing defaul
   });
 
   const entries = Object.entries(manifest.assets);
-  assert.equal(entries.length, 350, "the 337 core images plus 13 essay photos must remain reconciled");
+  assert.equal(entries.length, 459, "the focused cleanup must keep 459 reconciled managed images");
   assert.equal(
     entries.filter(([, asset]) => asset.image_class === "medium_import").length,
-    7,
+    112,
   );
   assert.equal(
     entries.filter(([, asset]) => asset.image_class === "essay_photo").length,
@@ -55,7 +55,7 @@ test("responsive image manifest keeps the frozen inventory and processing defaul
     assert.equal(asset.id, id);
     assert.match(
       id,
-      /^(?:editorial\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|medium\/[0-9a-f]{64})$/,
+      /^(?:editorial\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium\/[0-9a-f]{64})$/,
     );
     assert.match(asset.source, /^images\/originals\/(?:editorial|essays|medium)\/.+\.(?:png|jpe?g)$/);
     const idParts = id.split("/");
@@ -65,12 +65,13 @@ test("responsive image manifest keeps the frozen inventory and processing defaul
       assert.deepEqual(sourceParts.slice(0, -1), ["images", "originals", "editorial"]);
       assert.equal(sourceStem, idParts[1]);
     } else if (idParts[0] === "essays") {
-      assert.deepEqual(sourceParts.slice(0, -1), ["images", "originals", "essays", idParts[1]]);
+      assert.deepEqual(sourceParts.slice(0, -1), ["images", "originals", ...idParts.slice(0, -1)]);
+      const assetStem = idParts.at(-1);
       const explicitJpegCollision =
-        idParts[2].endsWith("-jpg") &&
+        assetStem.endsWith("-jpg") &&
         asset.source.endsWith(".jpg") &&
-        sourceStem === idParts[2].slice(0, -4);
-      assert.ok(sourceStem === idParts[2] || explicitJpegCollision);
+        sourceStem === assetStem.slice(0, -4);
+      assert.ok(sourceStem === assetStem || explicitJpegCollision);
     } else {
       assert.deepEqual(sourceParts.slice(0, -1), ["images", "originals", "medium"]);
       assert.equal(sourceStem, idParts[1]);
@@ -102,11 +103,48 @@ test("responsive image manifest keeps the frozen inventory and processing defaul
     sources.add(asset.source);
   }
 
-  assert.equal(Object.keys(manifest.aliases).length, 391);
+  const legacyMediumIds = new Set([
+    "medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731",
+    "medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7",
+    "medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a",
+    "medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe",
+    "medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb",
+    "medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb",
+    "medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7",
+  ]);
+  assert.equal(
+    entries.filter(([id]) => id.startsWith("medium/") && !legacyMediumIds.has(id)).length,
+    105,
+    "exactly 105 Medium PNG sources must join the pre-existing seven managed Medium assets",
+  );
+
+  const expectedSydIds = [
+    "essays/dialogues/bobanonymous/hero",
+    "essays/dialogues/broke-rich/hero",
+    "essays/dialogues/infinite-incontent/hero",
+    "essays/dialogues/pressure-makes-pearls/hero",
+  ];
+  assert.deepEqual(
+    entries.map(([id]) => id).filter((id) => id.startsWith("essays/dialogues/")).sort(),
+    expectedSydIds,
+  );
+
+  assert.equal(Object.keys(manifest.aliases).length, 500);
   for (const [alias, target] of Object.entries(manifest.aliases)) {
-    assert.match(alias, /^\/images\/(?:editorial|essays|medium)\/.+\.(?:png|jpe?g)$/);
+    assert.match(alias, /^\/images\/(?:editorial|essays|medium|syd-and-oliver)\/.+\.(?:png|jpe?g)$/);
     assert.ok(Object.hasOwn(manifest.assets, target), `${alias} must resolve directly to a canonical asset`);
   }
+  assert.equal(
+    Object.keys(manifest.aliases).filter((alias) => alias.startsWith("/images/medium/")).length,
+    119,
+  );
+  assert.deepEqual(
+    Object.entries(manifest.aliases)
+      .filter(([alias]) => alias.startsWith("/images/syd-and-oliver/"))
+      .map(([, target]) => target)
+      .sort(),
+    expectedSydIds,
+  );
   assert.equal(
     Object.values(manifest.aliases).filter((target) => target === sourceOnlyEntries[0][0]).length,
     1,
@@ -150,6 +188,106 @@ test("all managed rendering surfaces delegate to the shared responsive pipeline"
   assert.match(metadataImage, /partial\s+"images\/model\.html"/);
 });
 
+test("focused legacy migration is dry-run-first, hash-based, long-path-safe, and rollback-capable", () => {
+  const migration = read("scripts/migrate_focused_legacy_images.ps1");
+  const promotion = read("scripts/promote_focused_image_review.ps1");
+  const reviewSelection = read("scripts/select_image_review_candidates.ps1");
+
+  assert.match(migration, /\[switch\]\$Write/);
+  assert.match(migration, /\[switch\]\$Json/);
+  assert.match(migration, /'ls-files', '-z', '--'/);
+  assert.match(migration, /\.Split\(\[char\]0/);
+  assert.match(migration, /Get-FileHash\s+-LiteralPath\s+\$Path\s+-Algorithm\s+SHA256/);
+  assert.match(migration, /filename_hash_match\s*=\s*\(\$stem -ceq \$hash\)/);
+  assert.match(migration, /asset_id\s*=\s*'medium\/'\s*\+\s*\[string\]\$item\.sha256/);
+  assert.match(migration, /mode\s*=\s*if\s*\(\$Write\)\s*\{\s*'write'\s*\}\s*else\s*\{\s*'dry_run'\s*\}/);
+  assert.match(migration, /mode\s*=\s*if\s*\(\$Write\)\s*\{\s*'already_applied'\s*\}\s*else\s*\{\s*'verify_applied'\s*\}/);
+
+  for (const [field, value] of [
+    ["baseline_medium_files", 471],
+    ["referenced_medium_files", 421],
+    ["migrated_medium_pngs", 105],
+    ["retained_medium_jpeg_jpg", 316],
+    ["removed_medium_orphans", 50],
+    ["migrated_syd_heroes", 4],
+    ["filename_hash_mismatches", 15],
+    ["post_manifest_assets", 459],
+    ["post_manifest_aliases", 500],
+  ]) {
+    assert.match(migration, new RegExp(`${field}\\s*=\\s*${value}\\b`));
+  }
+  assert.match(migration, /ExpectedMediumInventorySha256\s*=\s*'851880a2e59635b660a6192385dff6cbb0eb73d3b8b3d5f747c6e730c6302c5a'/);
+  assert.match(migration, /ExpectedSydInventorySha256\s*=\s*'c53d8f9db266f5cba29cb4fd400a0dd72263e6eb492e706b2d1aedd07c0bd21e'/);
+  assert.match(migration, /InventoryDigestBasis\s*=\s*'sorted_path_tab_actual_sha256_lf_utf8_no_bom'/);
+  assert.match(migration, /function Get-OipInventoryDigest/);
+  assert.match(migration, /Focused legacy Medium inventory digest drifted/);
+  assert.match(migration, /Focused legacy Syd inventory digest drifted/);
+
+  const stageIndex = migration.indexOf("$stagedWrites");
+  const writeGateIndex = migration.indexOf("if ($Write)", stageIndex);
+  const backupIndex = migration.indexOf("$backups =", writeGateIndex);
+  const moveIndex = migration.indexOf("[IO.File]::Move", backupIndex);
+  const rollbackIndex = migration.indexOf("if (-not $commitSucceeded)", moveIndex);
+  assert.ok(stageIndex >= 0 && writeGateIndex > stageIndex, "all output must stage before the write gate");
+  assert.ok(backupIndex > writeGateIndex && moveIndex > backupIndex, "writes must begin only after backups exist");
+  assert.ok(rollbackIndex > moveIndex, "failed commits must enter the rollback path");
+  assert.match(migration, /Migration input changed after staging/);
+  assert.match(migration, /Committed managed original failed verification/);
+  assert.match(migration, /\[IO\.File\]::Copy\(\[string\]\$backups\[\$path\], \$path, \$true\)/);
+  assert.doesNotMatch(migration, /Remove-Item\s+[^\r\n]*-Recurse/);
+
+  assert.match(promotion, /\[switch\]\$InitializeEvidence/);
+  assert.match(promotion, /\[switch\]\$Write/);
+  assert.match(promotion, /focused-image-visual-review\.json/);
+  assert.match(promotion, /review_state\s*=\s*'pending_review'/);
+  assert.match(promotion, /Promotion refused: focused image visual-review record is not PASS/);
+  assert.match(promotion, /expected_asset_count\s*=\s*109/);
+  assert.match(promotion, /@\(\$inventory\.medium_migrations\)\.Count -ne 105/);
+  assert.match(promotion, /@\(\$inventory\.syd_migrations\)\.Count -ne 4/);
+  assert.match(promotion, /Assert-OipExactSet\s+-Actual\s+@\(\$evidence\.reviewed_asset_ids\)/);
+  assert.match(promotion, /Assert-OipExactSet\s+-Actual\s+@\(\$evidence\.deep_reviewed_asset_ids\)/);
+  assert.match(promotion, /\$deepIds\s*=\s*@\(\$allDeepIds\s*\|\s*Where-Object\s*\{\s*\$assetIds -ccontains \$_\s*\}\)/);
+  assert.match(promotion, /focused_deep_review_count/);
+  assert.match(promotion, /AllDeepIds\s*=\s*\$allDeepIds/);
+  assert.match(promotion, /quantitative_decode_sanity\s*=\s*\[ordered\]@\{\s*asset_count\s*=\s*458/);
+  assert.match(promotion, /deep_review\s*=\s*\[ordered\]@\{\s*asset_count\s*=\s*\$context\.AllDeepIds\.Count/);
+  assert.match(promotion, /decode_failure_count -ne 0/);
+  assert.match(promotion, /\$context\.Manifest\.assets\[\$assetId\]\.review_state = 'approved'/);
+  assert.match(promotion, /if \(-not \$commitSucceeded\)/);
+  assert.match(promotion, /\[IO\.File\]::Copy\(\[string\]\$backups\[\$target\], \$target, \$true\)/);
+
+  assert.match(reviewSelection, /focused_deep_review_count\s*=\s*\$focusedDeepReviewCount/);
+  assert.match(reviewSelection, /Focused deep-review selection produced \$focusedDeepReviewCount migrated assets, below required minimum 24/);
+  for (const category of [
+    "focused_syd_hero",
+    "focused_chart",
+    "focused_map",
+    "focused_fine_text",
+    "focused_portrait_or_tall",
+    "focused_extreme_aspect_ratio",
+    "focused_dark_tones",
+    "focused_saturated_color",
+  ]) {
+    assert.ok(reviewSelection.includes(`'${category}'`), `focused review selection must cover ${category}`);
+  }
+});
+
+test("draft image review previews contain tall assets without changing production picture styles", () => {
+  const reviewLayout = read("layouts/_default/image-review.html");
+  const inlineReviewCss = reviewLayout.match(/<style>(?<body>[\s\S]*?)<\/style>/)?.groups?.body ?? "";
+  const reviewImageRule = inlineReviewCss.match(/\.image-review__comparisons img\s*\{(?<body>[\s\S]*?)\}/)?.groups?.body ?? "";
+  const reviewLinkRule = inlineReviewCss.match(/\.image-review__comparisons a\s*,[\s\S]*?\{(?<body>[\s\S]*?)\}/)?.groups?.body ?? "";
+
+  assert.match(reviewLayout, /if not \.Draft/);
+  assert.match(reviewLayout, /hugo\.IsDevelopment hugo\.IsServer/);
+  assert.match(reviewImageRule, /width:\s*auto/);
+  assert.match(reviewImageRule, /max-width:\s*100%/);
+  assert.match(reviewImageRule, /height:\s*auto/);
+  assert.match(reviewImageRule, /max-height:\s*100%/);
+  assert.match(reviewLinkRule, /overflow:\s*hidden/);
+  assert.doesNotMatch(reviewImageRule, /(?:^|\n)\s*height:\s*100%/);
+});
+
 test("CI caches generated resources and runs both responsive image gates", () => {
   const workflow = read(".github/workflows/deploy.yml");
   const publishing = read("docs/publishing-workflow.md");
@@ -162,6 +300,7 @@ test("CI caches generated resources and runs both responsive image gates", () =>
   assert.match(workflow, /layouts\/partials\/images\/\*\*/);
   assert.match(workflow, /timeout-minutes:\s*20/);
   assert.match(workflow, /test_responsive_image_source_contract\.ps1/);
+  assert.match(workflow, /test_focused_legacy_image_migration\.ps1/);
   assert.doesNotMatch(
     workflow,
     /test_responsive_image_source_contract\.ps1[^\r\n]*AllowPendingReview/i,
@@ -172,6 +311,20 @@ test("CI caches generated resources and runs both responsive image gates", () =>
   for (const required of ["600 MiB", "500 MiB", "1 MiB", "5,000", "6,500", "15 minutes", "five minutes"]) {
     assert.ok(imageGuide.includes(required), `responsive image guide must document ${required}`);
   }
+  for (const required of [
+    "migrate_focused_legacy_images.ps1",
+    "471-file baseline",
+    "105 Medium PNG migrations",
+    "316 retained JPEG/JPG files",
+    "50 unreferenced removals",
+    "Fifteen legacy filenames",
+    "promote_focused_image_review.ps1",
+  ]) {
+    assert.ok(imageGuide.includes(required), `responsive image guide must document ${required}`);
+  }
+  assert.doesNotMatch(publishing, /static\/images\/syd-and-oliver\/<slug>\/hero\.png/);
+  assert.match(publishing, /assets\/images\/originals\/essays\/dialogues\/<slug>\/hero\.<ext>/);
+  assert.match(publishing, /essays\/dialogues\/<slug>\/hero/);
   assert.match(publishing, /responsive[- ]image/i);
   assert.match(publishing, /test_responsive_image_output_contract\.ps1/);
 });

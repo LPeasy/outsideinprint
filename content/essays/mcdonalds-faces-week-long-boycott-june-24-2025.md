@@ -5,7 +5,7 @@ draft: false
 slug: "mcdonalds-faces-week-long-boycott-june-24-2025"
 section_label: "Essay"
 subtitle: "Why? What is going on with the McDonald’s Boycott?"
-featured_image: "/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794.png"
+featured_image: "medium/749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794"
 featured_image_caption: "Illustration by author"
 featured_image_alt: "McDonald’s Faces Week‑Long Boycott"
 description: "The People’s Union USA is urging a boycott of McDonald’s over DEI rollbacks, prices, labor claims, and sales pressure."
@@ -67,7 +67,7 @@ U.S. consumer activism grows as rollback of DEI policies intensifies:
 
 #### Fall 2024 ~ E. coli Outbreak
 
-![Created by Author with ChatGPT](/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59.png)
+![Created by Author with ChatGPT](oip-image:medium/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59)
 
 *Created by Author with ChatGPT*
 
@@ -105,7 +105,7 @@ discrimination and joined the boycott.
 
 #### ***Schwarz said in social media:***
 
-![Created by Author with ChatGPT](/images/medium/mcdonalds-faces-week-long-boycott-june-24-2025/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89.png)
+![Created by Author with ChatGPT](oip-image:medium/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89)
 
 *Created by Author with ChatGPT*
 

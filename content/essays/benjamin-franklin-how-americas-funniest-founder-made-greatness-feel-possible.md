@@ -43,7 +43,7 @@ Historical image sources were checked during the web-edition review.
 
 ### From Ben to Benjamin
 
-![](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/06755fe1ad6f08750acf541d36e0c342c96cda828aad2aa84559849295171036.png)
+![](oip-image:medium/06755fe1ad6f08750acf541d36e0c342c96cda828aad2aa84559849295171036)
 
 *[Source: History Oasis](https://www.historyoasis.com/post/4-facts-about-young-benjamin-franklin-that-you-didnt-know)*
 
@@ -224,7 +224,7 @@ achievable.**
 
 ### Philosophy & Mindset
 
-![Made by Author with ChatGPT](/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738.png)
+![Made by Author with ChatGPT](oip-image:medium/1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738)
 
 *Made by Author with ChatGPT*
 

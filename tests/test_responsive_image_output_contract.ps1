@@ -12,6 +12,9 @@ $ErrorActionPreference = 'Stop'
 
 $maxArtifactBytes = 600MB
 $maxPublicImageBytes = 500MB
+$focusedCleanupPublicImageCeilingBytes = 450MB
+$boundLivePublicImageBytes = 512308750
+$focusedCleanupMinimumSavingsBytes = 40MB
 $maxDerivativeBytes = 1MB
 $maxGeneratedImages = 5000
 $maxPublicFiles = 6500
@@ -207,6 +210,13 @@ $publicImageBytes = ($publicImageFiles | Measure-Object -Property Length -Sum).S
 if ($publicImageBytes -gt $maxPublicImageBytes) {
   throw "public/images exceeds the 500 MiB budget: $publicImageBytes bytes"
 }
+if ($publicImageBytes -gt $focusedCleanupPublicImageCeilingBytes) {
+  throw "Focused cleanup release exceeds its 450 MiB public/images acceptance ceiling: $publicImageBytes bytes"
+}
+$focusedCleanupSavingsBytes = $boundLivePublicImageBytes - $publicImageBytes
+if ($focusedCleanupSavingsBytes -lt $focusedCleanupMinimumSavingsBytes) {
+  throw "Focused cleanup saves only $focusedCleanupSavingsBytes bytes from the bound $boundLivePublicImageBytes-byte live baseline; at least 40 MiB is required."
+}
 
 $originalsLeak = @($publicFiles | Where-Object { $_.FullName.Replace('\','/') -match '/images/originals/' })
 if ($originalsLeak.Count -gt 0) {
@@ -239,6 +249,33 @@ foreach ($renderedFile in $renderedFiles) {
   $renderedModelsByRelativePath[$relativePath] = $model
 }
 
+$legacyMediumIds = @(
+  'medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731',
+  'medium/2cb1bd9d5e821673e5988fe08124a3a9270c9ef0cd5b494b7fea0a55bb4814e7',
+  'medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a',
+  'medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe',
+  'medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb',
+  'medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb',
+  'medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7'
+)
+$focusedCleanupIds = @(
+  $assetIds | Where-Object {
+    ($_.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_) -or
+    $_.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal)
+  }
+)
+if ($focusedCleanupIds.Count -ne 109) {
+  throw "Focused cleanup output validation requires exactly 109 newly migrated managed assets; found $($focusedCleanupIds.Count)."
+}
+$renderedAssetIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+foreach ($renderedModel in $renderedModelsByRelativePath.Values) {
+  [void]$renderedAssetIds.Add([string]$renderedModel.Id)
+}
+$missingFocusedCleanupDerivatives = @($focusedCleanupIds | Where-Object { -not $renderedAssetIds.Contains($_) })
+if ($missingFocusedCleanupDerivatives.Count -gt 0) {
+  throw "Focused-cleanup assets are missing generated derivatives: $($missingFocusedCleanupDerivatives -join ', ')"
+}
+
 $sourceLengths = @{}
 foreach ($assetId in $assetIds) {
   $asset = $manifest.assets.$assetId
@@ -262,7 +299,7 @@ foreach ($publicImage in $publicImageFiles) {
   }
 }
 
-foreach ($retiredDirectory in @('images/editorial','images/essays')) {
+foreach ($retiredDirectory in @('images/editorial','images/essays','images/syd-and-oliver')) {
   $fullDirectory = Join-Path $siteRoot $retiredDirectory
   if (-not (Test-Path -LiteralPath $fullDirectory -PathType Container)) {
     continue
@@ -271,6 +308,20 @@ foreach ($retiredDirectory in @('images/editorial','images/essays')) {
   if ($retiredRasterFiles.Count -gt 0) {
     throw "Retired managed editorial/essay raster paths remain in public output: $retiredDirectory"
   }
+}
+
+$publicMediumRoot = Join-Path $publicImagesRoot 'medium'
+if (-not (Test-Path -LiteralPath $publicMediumRoot -PathType Container)) {
+  throw 'Production output is missing the retained compact Medium JPEG/JPG fleet.'
+}
+$publicMediumFiles = @(Get-ChildItem -LiteralPath $publicMediumRoot -File -Recurse)
+if ($publicMediumFiles.Count -ne 316) {
+  throw "Production output must contain exactly 316 retained Medium JPEG/JPG files; found $($publicMediumFiles.Count)."
+}
+$unsupportedPublicMediumFiles = @($publicMediumFiles | Where-Object { $_.Extension.ToLowerInvariant() -notin @('.jpg','.jpeg') })
+if ($unsupportedPublicMediumFiles.Count -gt 0) {
+  $sample = @($unsupportedPublicMediumFiles | Select-Object -First 8 | ForEach-Object { $_.FullName.Substring($siteRoot.Length + 1).Replace('\','/') })
+  throw "Production output contains retired Medium PNG/GIF or another unsupported format: $($sample -join ', ')"
 }
 
 $htmlFiles = @(Get-ChildItem -LiteralPath $siteRoot -File -Recurse -Filter '*.html')
@@ -431,7 +482,14 @@ foreach ($htmlFile in $htmlFiles) {
     $managedLightboxCount++
   }
 
-  $socialUrlMatches = @([regex]::Matches($html, '(?i)(?:https?://[^"''<>\s]+)?/images/rendered/(?:editorial/[a-z0-9-]+|essays/[a-z0-9-]+/[a-z0-9-]+|medium/[0-9a-f]{64})/[0-9a-f]{8,64}/social-[1-9][0-9]*w\.jpg'))
+  if ($html -match '(?i)/images/medium/[^"''<>\s\)]+\.(?:png|gif)') {
+    throw "Generated HTML retains a retired raw Medium PNG/GIF URL: $relativeHtmlPath"
+  }
+  if ($html -match '(?i)/images/syd-and-oliver/') {
+    throw "Generated HTML retains a retired raw Syd-and-Oliver hero URL: $relativeHtmlPath"
+  }
+
+  $socialUrlMatches = @([regex]::Matches($html, '(?i)(?:https?://[^"''<>\s]+)?/images/rendered/(?:editorial/[a-z0-9-]+|essays/[a-z0-9/-]+|medium/[0-9a-f]{64})/[0-9a-f]{8,64}/social-[1-9][0-9]*w\.jpg'))
   if ($socialUrlMatches.Count -gt 0) {
     $uniqueSocialUrls = @($socialUrlMatches | ForEach-Object { Get-RenderedRelativePath -Url $_.Value } | Sort-Object -Unique)
     if ($uniqueSocialUrls.Count -ne 1) {

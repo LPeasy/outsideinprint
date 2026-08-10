@@ -6,7 +6,7 @@ slug: "the-waters-rising-what-the-data-really-says-about-extreme-weather"
 section_label: "Essay"
 subtitle: "“The weather’s never been like this!”"
 description: "Extreme weather data does not say every storm is unprecedented. It says heavy rain, heat, fire, and exposure are shifting the disaster baseline."
-featured_image: "/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/c2a267b5b3d5f35aa89438b20e80fbc086194a0ea302b9fbc1978d2a5783b3b8.png"
+featured_image: "medium/39e3617269bd3ce2757d8b6d0bf6990bda121d46a73fbc206ab41017d99c2fde"
 featured_image_alt: "Chart showing U.S. extreme one-day precipitation events from 1910 to 2023."
 featured_image_caption: "EPA climate indicator chart on U.S. extreme one-day precipitation events."
 version: "1.3"
@@ -141,7 +141,7 @@ planning problem is immediate.**
 
 The U.S. data shows the pattern.
 
-![Chart showing U.S. extreme one-day precipitation events from 1910 to 2023.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/c2a267b5b3d5f35aa89438b20e80fbc086194a0ea302b9fbc1978d2a5783b3b8.png)
+![Chart showing U.S. extreme one-day precipitation events from 1910 to 2023.](oip-image:medium/39e3617269bd3ce2757d8b6d0bf6990bda121d46a73fbc206ab41017d99c2fde)
 
 **Nine of the ten wettest years on record have** [**happened since
 1995.**](https://www.epa.gov/climate-indicators/climate-change-indicators-heavy-precipitation)
@@ -166,7 +166,7 @@ along with rainfall and wind speeds.
 
 [But the past few decades have reshaped the state's rainfall](https://texas2036.org/texas-will-face-more-extreme-weather/) profile in dramatic ways.
 
-![Texas map showing overall precipitation trend by county from 1895 to 2023.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/7863b3485e935a7f8cb3f364d6544043e09216155fb8b65df8ed98ff0ccf01cc.png)
+![Texas map showing overall precipitation trend by county from 1895 to 2023.](oip-image:medium/b21d49d59abe9fffed3fc8b549a7d9ec5de79b63d896fb0a72bb044812de20b7)
 
 **Central and Eastern Texas now average about 10% more annual rainfall**
 than a century ago. Several of the wettest months in state history
@@ -177,7 +177,7 @@ This pattern is especially dangerous in **regions like the Hill
 Country,** where steep slopes, rocky soil, and fast-moving tributaries
 funnel rainwater straight into rivers.
 
-![Map of Texas marking the Hill Country between Austin and San Antonio.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/aa6bc55283851e2bc0c7f83b7193a82a14817b40d3941917d9cee426d589447c.png)
+![Map of Texas marking the Hill Country between Austin and San Antonio.](oip-image:medium/fe49c38c26d28df6603266a66af7c98a5337fb7c9dca2d977f3331fdc40bbb3a)
 
 **The 2025 Guadalupe River flood wasn't just intense.**
 
@@ -195,7 +195,7 @@ funnel rainwater straight into rivers.
 
 **Here's a rough breakdown:**
 
-![Summary graphic comparing clearly worsening and unclear or variable extreme weather trends.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/05a544772ed6b9677cac30f2bb1b4db1b7737e94ea82f6dfb8ec8e2fd19b099b.png)
+![Summary graphic comparing clearly worsening and unclear or variable extreme weather trends.](oip-image:medium/c50100c0dccbed7038ca041dea10befa36fe670c5eafa5f54c30070ca1e7be93)
 
 While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weather-prediction-uncertainty)
 **surrounds all types of extreme weather events,**
@@ -218,7 +218,7 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 
 > **Right?**
 
-![Map of the Guadalupe River Basin, Kerr County, and Camp Mystic.](/images/medium/the-waters-rising-what-the-data-really-says-about-extreme-weather/e56a556ba82d413bc85fcfbf9a7c8f34da44b8a8f4043a42ea40f466e0ae3d40.png)
+![Map of the Guadalupe River Basin, Kerr County, and Camp Mystic.](oip-image:medium/d5d6535a7eb0a21a23db5acb6801f1c8aebee162d072c53e03b818938512a56e)
 
 [Tropical moisture from Storm Barry stalled over the Hill Country, dropping 16 inches of rain in 48 hours.](https://weather.com/news/weather/news/2025-07-06-how-guadalupe-texas-flooding-happened-forecast)
 

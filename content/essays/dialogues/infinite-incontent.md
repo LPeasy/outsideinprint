@@ -8,7 +8,7 @@ collections: ['syd-and-oliver-dialogues']
 description: 'At a World Cup watch party, Syd and Oliver confront the flood of events, reactions, and obligations carried by every screen.'
 version: '1.0'
 edition: 'First web edition'
-featured_image: '/images/syd-and-oliver/infinite-incontent/hero.png'
+featured_image: 'essays/dialogues/infinite-incontent/hero'
 featured_image_alt: 'Two men sit at a crowded sports bar beneath four football broadcasts, each screen showing the same match at a slightly different moment.'
 ---
 

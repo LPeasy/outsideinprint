@@ -52,7 +52,7 @@ regaining power](https://apnews.com/article/nyc-mayor-cuomo-mamdani-zohran-7a4fb
 
 ### **A Brief History ~ (With Links)**
 
-![Created by Author with ChatGPT](/images/medium/cuomo-vs-mamdani-nyc-2025/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe.png)
+![Created by Author with ChatGPT](oip-image:medium/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe)
 
 *Created by Author with ChatGPT*
 
@@ -75,7 +75,7 @@ echoing the post-Sanders era.
 
 ### **June 2025**
 
-![Created by Author with ChatGPT](/images/medium/cuomo-vs-mamdani-nyc-2025/239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80.png)
+![Created by Author with ChatGPT](oip-image:medium/239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80)
 
 *Created by Author with ChatGPT*
 
@@ -89,7 +89,7 @@ echoing the post-Sanders era.
 
 #### **Why It Matters**
 
-![Created by Author with ChatGPT](/images/medium/cuomo-vs-mamdani-nyc-2025/fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1.png)
+![Created by Author with ChatGPT](oip-image:medium/fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1)
 
 *Created by Author with ChatGPT*
 

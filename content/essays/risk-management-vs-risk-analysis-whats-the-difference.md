@@ -6,7 +6,7 @@ slug: "risk-management-vs-risk-analysis-whats-the-difference"
 section_label: "Essay"
 subtitle: "A coastal city’s disaster forces them to rethink their EM protocols"
 description: "This essay lays out the roles, responsibilities, and day-to-day realities of risk managers and risk analysts"
-featured_image: "/images/medium/risk-management-vs-risk-analysis-whats-the-difference/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc.png"
+featured_image: "medium/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc"
 featured_image_alt: "Risk Management vs Risk Analysis: What’s the Difference?"
 version: "1.2"
 edition: "Third web edition"
@@ -109,7 +109,7 @@ the analysis** and drafts the plan.
 
 ### Clear split of duties
 
-![The three players involved and their roles and responsibilities](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/be0c707ae681f1804192900e2334bb3b53c8fe6a9d8128d9d7406b7b3580090e.png)
+![The three players involved and their roles and responsibilities](oip-image:medium/be0c707ae681f1804192900e2334bb3b53c8fe6a9d8128d9d7406b7b3580090e)
 
 *The three players involved and their roles and responsibilities*
 
@@ -184,7 +184,7 @@ risk management.
 
 ### Responsibilities of Risk Managers and Risk Analysts
 
-![Risk Analysts and Risk Managers and their responsibilities](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/d235798077ba020d5701ca4cdf8385e04a63a00c9f99c5f31a86d4721e59b120.png)
+![Risk Analysts and Risk Managers and their responsibilities](oip-image:medium/d235798077ba020d5701ca4cdf8385e04a63a00c9f99c5f31a86d4721e59b120)
 
 *Risk Analysts and Risk Managers and their responsibilities.*
 
@@ -196,7 +196,7 @@ own the result when the decision reaches the public.
 
 ### Motivations and Incentives
 
-![Motivations for each in typical relationships between managers and analysts](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/76a6a378caa1eb3b58af6361ee589a730ede3716843b3cf89405795871ee2f5d.png)
+![Motivations for each in typical relationships between managers and analysts](oip-image:medium/76a6a378caa1eb3b58af6361ee589a730ede3716843b3cf89405795871ee2f5d)
 
 *Motivations for each in typical relationships between managers and analysts*
 
@@ -208,7 +208,7 @@ the next storm arrives.
 
 ### Common Failures
 
-![Common failures seen when dealing with risk](/images/medium/risk-management-vs-risk-analysis-whats-the-difference/ed43488f59939b5080ba23ef52dfa5ce055fb5e4e997ec2f07e853757e973a71.png)
+![Common failures seen when dealing with risk](oip-image:medium/ed43488f59939b5080ba23ef52dfa5ce055fb5e4e997ec2f07e853757e973a71)
 
 *Common failures seen when dealing with risk.*
 

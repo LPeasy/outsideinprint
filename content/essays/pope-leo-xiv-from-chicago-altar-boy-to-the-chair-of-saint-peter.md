@@ -7,7 +7,7 @@ section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "Inside the life of Robert Prevost, the Augustinian priest who made history"
-featured_image: "/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/64a77b457874a4f350bf43b17cd5195fe10c5fc41af5ff7e2a1ca4e2d9c0b55c.png"
+featured_image: "medium/64a77b457874a4f350bf43b17cd5195fe10c5fc41af5ff7e2a1ca4e2d9c0b55c"
 featured_image_caption: "Pope Leo Waving to the Vatican | Source: Wikimedia Commons"
 featured_image_alt: "Pope Leo Waving to the Vatican"
 description: "Robert Francis Prevost grew up in Dolton, entered the Augustinians, served for years in Peru, and became the first pope from the United States."
@@ -27,7 +27,7 @@ medium_source_url: "https://medium.com/@lawtonperret/pope-leo-xiv-from-chicago-a
 
 ### **Early Life and Family Roots**
 
-![1950s Chicago](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/25c92cdac108c6b8135a1ab1b65c63a3b90dc9ce3ece1bfd6790741762fdbc0d.png)
+![1950s Chicago](oip-image:medium/25c92cdac108c6b8135a1ab1b65c63a3b90dc9ce3ece1bfd6790741762fdbc0d)
 
 *1950s Chicago | Source: Wikimedia Commons*
 
@@ -186,7 +186,7 @@ frontrunner**, largely because he was American.
 
 ### **Timeline of Key Life Events**
 
-![Made by Author with ChatGPT](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c.png)
+![Made by Author with ChatGPT](oip-image:medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c)
 
 *Made by Author with ChatGPT*
 

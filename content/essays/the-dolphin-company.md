@@ -140,7 +140,7 @@ reliable business.
 > conservation of marine mammals."**
 >  - Company press release
 
-![Dolphin Discovery in Isla Mujeres ~ Source](/images/medium/the-dolphin-company/425923f6f8a2e4e221114fae86e63331add376bb6c2ab9eb6c6b83c1e5bbcb97.png)
+![Dolphin Discovery in Isla Mujeres ~ Source](oip-image:medium/425923f6f8a2e4e221114fae86e63331add376bb6c2ab9eb6c6b83c1e5bbcb97)
 
 *Dolphin Discovery in Isla Mujeres ~ [Source](https://thedolphinco.com/)*
 
@@ -160,7 +160,7 @@ The company listed shares on the Mexican stock exchange in 2016 under
 the name Grupo Dolphin and rebranded itself globally as
 [The Dolphin Company.](https://thedolphinco.com/)
 
-![The Dolphin Company World Map ~ Source](/images/medium/the-dolphin-company/4f31029a1c1552ee315750ba6fd54eabfc201c43c3b889388ad8777ec7b649d7.png)
+![The Dolphin Company World Map ~ Source](oip-image:medium/4f31029a1c1552ee315750ba6fd54eabfc201c43c3b889388ad8777ec7b649d7)
 
 *The Dolphin Company World Map ~ [Source](https://thedolphinco.com/)*
 
@@ -249,7 +249,7 @@ Those words contrasted sharply with growing criticism and public outcry.
 Activists called on him personally to address the plight of [**Lolita, the orca at the Seaquarium**](https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254), while lenders in a Delaware bankruptcy court
 moved to strip him of control.
 
-![Lolita the Orca ~ Source](/images/medium/the-dolphin-company/1dec43fe52564d486342253d92440108031027b3d9025379dc461fbfb128db1d.png)
+![Lolita the Orca ~ Source](oip-image:medium/1dec43fe52564d486342253d92440108031027b3d9025379dc461fbfb128db1d)
 
 *Lolita the Orca ~ [Source](https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254)*
 
@@ -266,7 +266,7 @@ ultimately trapped between a dream and shifting cultural landscapes.**
 > the safety and wellbeing of the animals."**
 >  - Miami-Dade County filing, 2024
 
-![Art by author with gpt4-o](/images/medium/the-dolphin-company/ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923.png)
+![Art by author with gpt4-o](oip-image:medium/ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923)
 
 *Art by author with gpt4-o*
 

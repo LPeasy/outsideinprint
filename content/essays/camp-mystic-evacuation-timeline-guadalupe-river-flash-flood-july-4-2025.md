@@ -57,7 +57,7 @@ counselors lost their lives.
 
 ### Camp Mystic on the Guadalupe River ~ Location, Elevation, Floodplain (Kerr County, Texas)
 
-![GIS view of Camp Mystic in Kerr County, Texas.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/f08e17f240c2bf6bc18e5ca4751d1e5e16f9ff59e79cf69c2a941f55d168432d.png)
+![GIS view of Camp Mystic in Kerr County, Texas.](oip-image:medium/e310cf068f2005331d6c0d44ca19a81ee9223e9cd449724d13e282717ccbf203)
 
 *GIS view of Camp Mystic in Kerr County, Texas. Source: [Camp Mystic Cypress Lake page](https://www.campmystic.com/cypress-lake/).*
 
@@ -108,11 +108,11 @@ escape routes uphill and sweeping debris laterally.
 
 #### Here's an elevation map from the USGS ~
 
-![USGS elevation map with cross-section line through Camp Mystic.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/29f075db14c4d16cec462f4cab74e622c682a7816ae358efe17693228c82593a.png)
+![USGS elevation map with cross-section line through Camp Mystic.](oip-image:medium/a920fa69779c6bdb1900f3bb4221da3835781decd2517f6d5449ec61eaaef7d3)
 
 *The line shown goes from the elevation of the South Fork through the Flats. See elevations below. Source: [USGS National Map](https://apps.nationalmap.gov/viewer/).*
 
-![USGS elevation profile from the South Fork through the Camp Mystic Flats.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/5db27b5a638750d55c9cb89304b830af5b2735627071fc075282ffa2d16f3669.png)
+![USGS elevation profile from the South Fork through the Camp Mystic Flats.](oip-image:medium/41eed8f56249fdadda5c9bf6714146ebac1841b1a5f956a41c8369f729333c1f)
 
 *Line in topo map above shows the elevation of the camp. Line is traced from right to left, so the left side of this graph corresponds to the right-most point on the map. Source: [USGS National Map](https://apps.nationalmap.gov/viewer/).*
 
@@ -200,7 +200,7 @@ guiding children uphill and carrying them through a rising current.
 
 ### USGS Hunt Gauge ~ Guadalupe River Rise 1:00-4:30 a.m. on July 4, 2025
 
-![USGS Hunt gauge hydrograph for the Guadalupe River on July 4, 2025.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/4eff3692d9d9402c608213a1bf80ae9ef8dc624a27c7c58f98ca3378cbb4036b.png)
+![USGS Hunt gauge hydrograph for the Guadalupe River on July 4, 2025.](oip-image:medium/a5ae03a4e1a16023ecb29be50d855e253024e9df861f7f85926c40a2d2c525f7)
 
 *USGS and NOAA data show the Guadalupe River rose nearly 30 feet in four hours, a record crest surpassing 1932.*
 
@@ -215,7 +215,7 @@ feet** based on FEMA flood maps.
 It helps to **zoom in on** the critical hours between **1:00 and 4:30
 a.m. ~**
 
-![Zoomed hydrograph showing 1:00 to 4:30 a.m. flood thresholds.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/9c90826cc94f24b2de15463be6611d55504b2239600bbb30184f865ab0a1f775.png)
+![Zoomed hydrograph showing 1:00 to 4:30 a.m. flood thresholds.](oip-image:medium/42145583d76ac3616def9f537a23dd218becdf4a7b344792606bfcc5f9e88c19)
 
 *Zooming in: key thresholds for flooding and the critical 1:00-4:30 a.m. window.*
 
@@ -252,17 +252,17 @@ On paper, that narrative sounds plausible.
 
 ### Compared Against the Hunt Gauge, the Spokesperson Timeline Needs Testing
 
-![Reported evacuation timelines compared with the Guadalupe River hydrograph.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/a907b8425be3d76541ecf7f23e49457e1a727b0c494cc0f083afc7956d9c7328.png)
+![Reported evacuation timelines compared with the Guadalupe River hydrograph.](oip-image:medium/edf9c9656e1f84536b0a965f37a58e7cb1e26100742c63990e5b133a04badb7c)
 
 *Reported evacuation timelines compared to the hydrograph. Both versions collide with floodwaters.*
 
-![ABC News claims excerpt about Camp Mystic evacuation timing.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/b277a130e56b5187b062df032be76ea5181149b56d43e114bc7ad6d4156ad1d5.png)
+![ABC News claims excerpt about Camp Mystic evacuation timing.](oip-image:medium/ed3b9f9e6208b9bfbcdab0d0460ba2217a8278685f91a746edc592a202c21a3f)
 
 *Claims in ABC's coverage of the tragedy.*
 
 ### Flash-Flood Readiness for Camps and Schools ~ Practical Takeaways
 
-![Typical flash flood warning sign.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/42ac5f8ac7a274f8319f5309f8a2922ae7e250bc152a335edf39a79c3d41c680.png)
+![Typical flash flood warning sign.](oip-image:medium/3b9a5d8cdd50b045bdb0155a963e1c1fb72e3521e17002feb9db562d9a7ec949)
 
 *Typical flash flood sign. Source: [image reference](https://sl.bing.net/i7TNN1iyW1k).*
 

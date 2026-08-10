@@ -8,7 +8,7 @@ collections: ['syd-and-oliver-dialogues']
 description: 'Syd and Oliver sit in a spotless boba shop and argue over an anonymous complaint, public duty, and whether a workplace can remember what it serves.'
 version: '1.0'
 edition: 'First web edition'
-featured_image: '/images/syd-and-oliver/bobanonymous/hero.png'
+featured_image: 'essays/dialogues/bobanonymous/hero'
 featured_image_alt: 'Two men in silhouette sit at a pink boba shop hightop in front of a large window.'
 ---
 

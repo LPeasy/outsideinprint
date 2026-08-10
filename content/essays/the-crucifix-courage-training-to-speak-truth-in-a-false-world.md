@@ -64,7 +64,7 @@ this world will attempt to destroy us for exposing their lies.
 
 ### Exposure therapy, in plain English
 
-![“Exposure Therapy” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1.png)
+![“Exposure Therapy” ~ art by author with gpt4-o](oip-image:medium/88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1)
 
 *“Exposure Therapy” ~ art by author with gpt4-o*
 
@@ -89,7 +89,7 @@ A person learns, over time, "I can face this. It doesn't own me."
 
 ### The crucifix is a forced look at the worst-case outcome
 
-![“All Eyes on Christ” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5.png)
+![“All Eyes on Christ” ~ art by author with gpt4-o](oip-image:medium/768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5)
 
 *“All Eyes on Christ” ~ art by author with gpt4-o*
 
@@ -137,7 +137,7 @@ crowd, and it will almost always upset the people in power.
 
 ### Truth-telling is the offense ~ not "meanness"
 
-![“Truth to Power” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74.png)
+![“Truth to Power” ~ art by author with gpt4-o](oip-image:medium/8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74)
 
 *“Truth to Power” ~ art by author with gpt4-o*
 
@@ -171,7 +171,7 @@ The message of the crucifix isn't just that "suffering happened."
 
 ### The parables weren't just cute stories ~ Jesus was speaking over the crowd's head
 
-![“Over their heads” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7.png)
+![“Over their heads” ~ art by author with gpt4-o](oip-image:medium/96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7)
 
 *“Over their heads” ~ art by author with gpt4-o*
 
@@ -202,7 +202,7 @@ in their moral superiority are also the most likely to punish dissent.
 
 ### Christianity is not a permission slip for hate
 
-![“INRI” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1.png)
+![“INRI” ~ art by author with gpt4-o](oip-image:medium/127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1)
 
 *“INRI” ~ art by author with gpt4-o*
 
@@ -272,7 +272,7 @@ don't need a crucifix. **You need to revisit the Gospels.**
 
 ### A final look ~ and the question the image asks
 
-![“Will you speak the truth?” ~ art by author with gpt4-o](/images/medium/the-crucifix-courage-training-to-speak-truth-in-a-false-world/46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29.png)
+![“Will you speak the truth?” ~ art by author with gpt4-o](oip-image:medium/46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29)
 
 *“Will you speak the truth?” ~ art by author with gpt4-o*
 

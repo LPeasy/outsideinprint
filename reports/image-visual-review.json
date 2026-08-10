@@ -1,21 +1,21 @@
 {
   "schema_version": "1.0",
-  "review_date": "2026-08-08",
-  "review_actor": "local_visual_qa",
+  "review_date": "2026-08-09",
+  "review_actor": "local_visual_qa_with_independent_agent_review",
   "review_surface": "/image-review/",
   "publication_state": "local_unpublished_draft",
-  "manifest_sha256_before_review": "a9342c9bfdcd39eefa0e3b281ba8e8ced7b33a87934eafb2f13e1d9cd012b41b",
-  "manifest_sha256_before_review_basis": "historical_windows_worktree_bytes",
-  "manifest_sha256_after_review": "e4d767bd0b6aed921e918cc21ee6b7f9f5f2e681e377a2ade1f852dcb66ad9ec",
+  "manifest_sha256_before_review": "8d31907eac3f69604b258bba9b05a63993e4e900afc2f832dcef629f4c0259f0",
+  "manifest_sha256_before_review_basis": "canonical_utf8_no_bom_lf_single_terminal_lf",
+  "manifest_sha256_after_review": "a89acf5f9284df1fe7f5ccd88fab3408fdd517d8107499e4e31360ba4ffb9f11",
   "manifest_sha256_after_review_basis": "canonical_utf8_no_bom_lf_single_terminal_lf",
-  "candidate_report_sha256": "646ad6f761dd193b83818063f772922fffa707c2b0e6981a17b634c8f809ccc9",
+  "candidate_report_sha256": "d7ba782fa4d480b7998da1f10fc9dee401f58c85806d612d6524649732d3471b",
   "candidate_report_sha256_basis": "canonical_utf8_no_bom_lf_single_terminal_lf",
   "hash_reconciliation_date": "2026-08-09",
-  "canonical_asset_count": 350,
+  "canonical_asset_count": 459,
   "all_contact_sheet_entries_reviewed": true,
-  "derivative_capable_asset_count": 349,
-  "approved_derivative_capable_asset_count": 349,
-  "approved_asset_ids_sha256": "7cddb6c5ffe084f6af1686bc9d56544f60b5dea208702d806baf2dc5137a6ec2",
+  "derivative_capable_asset_count": 458,
+  "approved_derivative_capable_asset_count": 458,
+  "approved_asset_ids_sha256": "cde657d7b702cb911bd179a9d7aadc6d58f143613e4fcf19f7904a3891b089f8",
   "review_method": [
     "original_largest_webp_largest_avif_contact_sheet_comparison",
     "deep_review_browser_100_percent_zoom",
@@ -23,33 +23,38 @@
     "browser_canvas_decode_and_pixel_sanity"
   ],
   "quantitative_decode_sanity": {
-    "asset_count": 349,
+    "asset_count": 458,
     "decode_failure_count": 0,
-    "comparison_sample_width": 192,
-    "webp_mean_absolute_channel_error": 3.3576,
-    "webp_max_mean_absolute_channel_error": 8.8189,
-    "avif_mean_absolute_channel_error": 3.2976,
-    "avif_max_mean_absolute_channel_error": 8.8443,
-    "channel_scale_maximum": 255,
     "outcome": "pass"
   },
   "deep_review": {
-    "asset_count": 24,
+    "asset_count": 44,
     "outcome": "pass",
     "category_counts": {
       "fine_text": 4,
       "crosshatching": 3,
+      "focused_syd_hero": 4,
       "faces_or_photos": 4,
       "dark_tones": 4,
       "saturated_color": 4,
       "extreme_aspect_ratio": 4,
       "largest_source_bytes": 4,
       "largest_native_dimensions": 4,
-      "deterministic_minimum_fill": 9
+      "focused_chart": 4,
+      "focused_map": 4,
+      "focused_fine_text": 4,
+      "focused_portrait_or_tall": 4,
+      "focused_extreme_aspect_ratio": 4,
+      "focused_dark_tones": 4,
+      "focused_saturated_color": 4,
+      "focused_largest_source_bytes": 4,
+      "focused_largest_native_dimensions": 4,
+      "deterministic_minimum_fill": 0,
+      "focused_deterministic_minimum_fill": 0
     }
   },
   "quality_override_count": 0,
-  "quality_override_decision": "No per-asset quality override was needed after visual review.",
+  "quality_override_decision": "No focused-cleanup asset required the reviewed detail-quality override.",
   "rejected_sources": [
     {
       "id": "essays/the-gold-card-and-the-price-of-belonging/section-2-jpg",
@@ -60,5 +65,17 @@
       "derivatives_generated": false,
       "production_references": 0
     }
-  ]
+  ],
+  "focused_cleanup_review": {
+    "action_id": "WEB-LEGACY-IMAGE-CLEANUP-001-R1",
+    "outcome": "pass",
+    "review_date": "2026-08-09",
+    "review_actor": "local_visual_qa_with_independent_agent_review",
+    "reviewed_asset_count": 109,
+    "reviewed_asset_ids_sha256": "7be1c5344893291fc143c467c7cadf0a89646dd2367c10c020554d1f88036e42",
+    "deep_review_asset_count": 31,
+    "deep_review_asset_ids_sha256": "491bf5c9217100144d536c1ab08314b7f16f7d0b7bc0f65cfe65ac2b43d330c9",
+    "decode_failure_count": 0,
+    "quality_override_count": 0
+  }
 }

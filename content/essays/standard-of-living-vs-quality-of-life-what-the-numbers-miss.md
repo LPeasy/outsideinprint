@@ -194,7 +194,7 @@ Some countries already do this. The OECD's Better Life Index, for example, looks
 - Civic engagement
 - Life satisfaction
 
-![](/images/medium/standard-of-living-vs-quality-of-life-what-the-numbers-miss/91c18b717b7bf2a8c878843ff6fcb4262cf38189e16d86f2b3a8470646360450.png)
+![](oip-image:medium/91c18b717b7bf2a8c878843ff6fcb4262cf38189e16d86f2b3a8470646360450)
 
 *Source: OECD Better Life Index.*
 

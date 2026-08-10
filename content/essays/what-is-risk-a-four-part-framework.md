@@ -69,7 +69,7 @@ about timing, severity, and human behavior.
 
 ### The Framework at a Glance
 
-![The Four Elements of Risk](/images/medium/what-is-risk-a-four-part-framework/c9342109be76928a5b019df4929dad331b3880c5af9f730bbc397e3a16bbccf5.png)
+![The Four Elements of Risk](oip-image:medium/c9342109be76928a5b019df4929dad331b3880c5af9f730bbc397e3a16bbccf5)
 
 *The Four Elements of Risk: Hazard, Pathway, Consequence, Uncertainty applied to Personal, Organizational, and Global contexts.*
 
@@ -137,7 +137,7 @@ Perhaps you would rather be more specific and decide to focus on
 **Back in 2022,** [**Panama**](https://www.youtube.com/watch?v=fuKDBPw8wQA) **experienced their "worst
 drought ever."**
 
-![Panama Canal](/images/medium/what-is-risk-a-four-part-framework/35cf1b3d2ef75c842717c70d507192a932891e2806c2e9e48aa250a74f6e874d.png)
+![Panama Canal](oip-image:medium/35cf1b3d2ef75c842717c70d507192a932891e2806c2e9e48aa250a74f6e874d)
 
 *Panama Canal | Source: [RoyalCarribean](https://www.royalcaribbean.com/guides/panama-canal-cruise-tips-before-you-go)*
 
@@ -155,7 +155,7 @@ communities, farms, and hydropower facilities ~ **prolonged droughts can
 squeeze a** **shared supply** and force decision makers into tough
 positions.
 
-![Panamanian drought started in late 2022](/images/medium/what-is-risk-a-four-part-framework/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461.png)
+![Panamanian drought started in late 2022](oip-image:medium/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461)
 
 *Panamanian drought started in late 2022. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*
 
@@ -235,7 +235,7 @@ when it arrives?"**
 
 ### Consequence
 
-![Estimated economic impact of a one week panama canal shutdown](/images/medium/what-is-risk-a-four-part-framework/309ebb1da0aba4db6f8bc241655840332d0522264b11613ba976c3a991e0b6a4.png)
+![Estimated economic impact of a one week panama canal shutdown](oip-image:medium/309ebb1da0aba4db6f8bc241655840332d0522264b11613ba976c3a991e0b6a4)
 
 *Estimated economic impact of a one week panama canal shutdown | [Source: Woodwell Climate](https://www.woodwellclimate.org/drought-panama-canal-7-graphics/)*
 
@@ -386,7 +386,7 @@ the same role:
 5.  **How quickly will backlogs unwind** once water
     levels and canal operations return to normal?
 
-![Key uncertainties for our three risk examples](/images/medium/what-is-risk-a-four-part-framework/9c54d75cf8915f13a6f607f11ff95af75481eeda2d7f2112a9def237c9a2531d.png)
+![Key uncertainties for our three risk examples](oip-image:medium/9c54d75cf8915f13a6f607f11ff95af75481eeda2d7f2112a9def237c9a2531d)
 
 *Key uncertainties for our three risk examples.*
 
