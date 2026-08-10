@@ -32,6 +32,8 @@ $CandidatePath = Join-Path $Root 'reports/image-review-candidates.json'
 $VisualReviewPath = Join-Path $Root 'reports/image-visual-review.json'
 $CleanupActionPattern = '^WEB-LEGACY-IMAGE-CLEANUP-001-R(?<revision>[1-9][0-9]*)$'
 $SupportedInventorySchemas = @('1.0', '1.1')
+$FocusedCleanupBaselineAssetCount = 459
+$FocusedCleanupBaselineDerivativeCapableCount = 458
 $ResolvedEvidencePath = if ([IO.Path]::IsPathRooted($EvidencePath)) {
   [IO.Path]::GetFullPath($EvidencePath)
 }
@@ -177,8 +179,20 @@ function Get-OipReviewContext {
   $candidate = Read-OipJsonHashtable -Path $CandidatePath -Label 'image review candidate report'
   $manifestSha = Get-OipCanonicalTextFileSha256 -Path $ManifestPath -Label 'image asset manifest' -RequireCanonical
   $candidateSha = Get-OipCanonicalTextFileSha256 -Path $CandidatePath -Label 'image review candidate report' -RequireCanonical
-  if ([string]$candidate.manifest_sha256 -cne $manifestSha) {
-    throw 'Image review candidate report is stale relative to the pending manifest.'
+  $manifestAssetCount = @($manifest.assets.Keys).Count
+  $routineManagedAssetCount = $manifestAssetCount - $FocusedCleanupBaselineAssetCount
+  if ($routineManagedAssetCount -lt 0) {
+    throw "Focused-cleanup managed-image inventory shrank below the release baseline. Expected at least '$FocusedCleanupBaselineAssetCount'; found '$manifestAssetCount'."
+  }
+  $candidateReportIsCurrent = [int]$candidate.canonical_asset_count -eq $manifestAssetCount
+  $candidateReportIsFocusedBaseline = [int]$candidate.canonical_asset_count -eq $FocusedCleanupBaselineAssetCount -and $routineManagedAssetCount -gt 0
+  if ($candidateReportIsCurrent) {
+    if ([string]$candidate.manifest_sha256 -cne $manifestSha) {
+      throw 'Image review candidate report is stale relative to the pending manifest.'
+    }
+  }
+  elseif (-not $candidateReportIsFocusedBaseline) {
+    throw "Image review candidate report canonical count is stale. Expected current '$manifestAssetCount' or focused-cleanup baseline '$FocusedCleanupBaselineAssetCount'; found '$([int]$candidate.canonical_asset_count)'."
   }
 
   $candidateIds = @($candidate.candidates | ForEach-Object { [string]$_.id })
@@ -296,11 +310,16 @@ if ([string]$evidence.manifest_sha256_before_promotion -cne $context.ManifestSha
     if ([string]$evidence.review_state -ceq 'pass' -and
       [string]$visual.focused_cleanup_review.action_id -ceq $evidenceActionId -and
       [string]$visual.focused_cleanup_review.outcome -ceq 'pass' -and
+      [int]$visual.canonical_asset_count -eq $FocusedCleanupBaselineAssetCount -and
+      [int]$visual.derivative_capable_asset_count -eq $FocusedCleanupBaselineDerivativeCapableCount -and
+      [int]$visual.approved_derivative_capable_asset_count -eq $FocusedCleanupBaselineDerivativeCapableCount -and
+      [string]$visual.manifest_sha256_after_review -ceq [string]$context.Candidate.manifest_sha256 -and
+      [string]$visual.candidate_report_sha256 -ceq $context.CandidateSha -and
       [int]$visual.focused_cleanup_review.reviewed_asset_count -eq 109 -and
       [string]$visual.focused_cleanup_review.reviewed_asset_ids_sha256 -ceq (Get-OipSha256ForStrings -Values $context.AssetIds) -and
       [int]$visual.focused_cleanup_review.deep_review_asset_count -eq $context.DeepIds.Count -and
       [string]$visual.focused_cleanup_review.deep_review_asset_ids_sha256 -ceq (Get-OipSha256ForStrings -Values $context.DeepIds) -and
-      [int]$visual.quantitative_decode_sanity.asset_count -eq 458 -and
+      [int]$visual.quantitative_decode_sanity.asset_count -eq $FocusedCleanupBaselineDerivativeCapableCount -and
       [int]$visual.quantitative_decode_sanity.decode_failure_count -eq 0 -and
       [int]$visual.deep_review.asset_count -eq $context.AllDeepIds.Count -and
       [string]$visual.deep_review.outcome -ceq 'pass') {
