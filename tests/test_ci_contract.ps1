@@ -168,6 +168,51 @@ function Get-WorkflowStepBlock {
   return $stepMatch.Value
 }
 
+function Get-WorkflowJobBlock {
+  param(
+    [Parameter(Mandatory)]
+    [string]$WorkflowName,
+
+    [Parameter(Mandatory)]
+    [string]$WorkflowText,
+
+    [Parameter(Mandatory)]
+    [string]$JobName
+  )
+
+  $pattern = '(?ms)^  ' + [regex]::Escape($JobName) + ':[^\S\r\n]*\r?\n.*?(?=^  [A-Za-z0-9_-]+:[^\S\r\n]*\r?\n|\z)'
+  $jobMatches = [regex]::Matches($WorkflowText, $pattern)
+  if ($jobMatches.Count -ne 1) {
+    throw "$WorkflowName must contain exactly one top-level '$JobName' job; found $($jobMatches.Count)."
+  }
+
+  return $jobMatches[0].Value
+}
+
+$jobBoundaryFixture = @'
+jobs:
+  focused-image-review-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Boundary sentinel
+        run: Write-Output "bounded"
+
+  neighboring-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Leaking command sentinel
+        run: ./tests/test_focused_image_review_promotion.ps1
+'@
+$boundedJobFixture = Get-WorkflowJobBlock `
+  -WorkflowName 'job-boundary fixture' `
+  -WorkflowText $jobBoundaryFixture `
+  -JobName 'focused-image-review-windows'
+if ($boundedJobFixture -notmatch 'Boundary sentinel' -or
+  $boundedJobFixture -match 'Leaking command sentinel' -or
+  $boundedJobFixture -match '\.\/tests\/test_focused_image_review_promotion\.ps1') {
+  throw 'Top-level workflow job extraction must stop before the next sibling job.'
+}
+
 . (Join-Path $repoRoot "tools/lib/Toolchain.Wrapper.ps1")
 
 $wrapperArgumentFixture = [pscustomobject]@{
@@ -280,14 +325,32 @@ if ($responsiveImageSourceStep -match '(?i)AllowPendingReview') {
   throw "CI must run the fail-closed responsive-image source contract without -AllowPendingReview."
 }
 
-if ([regex]::Matches($deployWorkflow, '\.\/tests\/test_focused_image_review_promotion\.ps1').Count -ne 2) {
+$focusedReviewInvocationPattern = '(?m)^[ \t]*\.\/tests\/test_focused_image_review_promotion\.ps1[ \t]*\r?$'
+$contractsJobBlock = Get-WorkflowJobBlock `
+  -WorkflowName 'deploy.yml' `
+  -WorkflowText $deployWorkflow `
+  -JobName 'contracts'
+$windowsReviewJobBlock = Get-WorkflowJobBlock `
+  -WorkflowName 'deploy.yml' `
+  -WorkflowText $deployWorkflow `
+  -JobName 'focused-image-review-windows'
+$buildJobBlock = Get-WorkflowJobBlock `
+  -WorkflowName 'deploy.yml' `
+  -WorkflowText $deployWorkflow `
+  -JobName 'build'
+
+if ([regex]::Matches($deployWorkflow, $focusedReviewInvocationPattern).Count -ne 2) {
   throw "deploy.yml must run the focused image review promotion contract once on Ubuntu and once on Windows."
 }
-if ($deployWorkflow -notmatch '(?ms)^  focused-image-review-windows:\s*\r?\n.*?^    runs-on: windows-latest\s*$' -or
-  $deployWorkflow -notmatch '(?ms)^  focused-image-review-windows:\s*\r?\n.*?^          \.\/tests\/test_focused_image_review_promotion\.ps1\s*$') {
+if ($contractsJobBlock -notmatch '(?m)^    runs-on:[ \t]*ubuntu-latest[ \t]*\r?$' -or
+  [regex]::Matches($contractsJobBlock, $focusedReviewInvocationPattern).Count -ne 1) {
+  throw "deploy.yml must run the focused image review promotion contract exactly once in the Ubuntu contracts job."
+}
+if ($windowsReviewJobBlock -notmatch '(?m)^    runs-on:[ \t]*windows-latest[ \t]*\r?$' -or
+  [regex]::Matches($windowsReviewJobBlock, $focusedReviewInvocationPattern).Count -ne 1) {
   throw "deploy.yml must run the focused image review promotion contract in a dedicated Windows job."
 }
-if ($deployWorkflow -notmatch '(?m)^    needs: \[contracts, focused-image-review-windows\]\s*$') {
+if ($buildJobBlock -notmatch '(?m)^    needs:[ \t]*\[contracts, focused-image-review-windows\][ \t]*\r?$') {
   throw "The Hugo build must wait for both Ubuntu contracts and the Windows focused image review contract."
 }
 
@@ -526,7 +589,7 @@ if ($deployWorkflow -notmatch "RequireEditorialPhilosophyAudit") {
   throw "deploy.yml must require Editorial Philosophy Audit evidence for changed non-draft essays, reports, and working papers."
 }
 
-if ($deployWorkflow -notmatch '(?m)^    needs:\s*(?:contracts|\[[^]]*\bcontracts\b[^]]*\])\s*$') {
+if ($buildJobBlock -notmatch '(?m)^    needs:[ \t]*(?:contracts|\[[^]]*\bcontracts\b[^]]*\])[ \t]*\r?$') {
   throw "deploy.yml must separate contract tests from the Hugo build by making the build job depend on the contracts job."
 }
 

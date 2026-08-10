@@ -10,6 +10,19 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+function Throw-OipPromoterError {
+  param(
+    [Parameter(Mandatory = $true)][string]$ErrorCode,
+    [Parameter(Mandatory = $true)][string]$Message
+  )
+
+  $exception = [InvalidOperationException]::new($Message)
+  $exception.Data['OipPromoterErrorCode'] = $ErrorCode
+  throw $exception
+}
+
+try {
 $Root = (Resolve-Path -LiteralPath $Root).Path
 . (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 
@@ -50,12 +63,16 @@ function Assert-OipExactSet {
   param(
     [Parameter(Mandatory = $true)][object[]]$Actual,
     [Parameter(Mandatory = $true)][object[]]$Expected,
-    [Parameter(Mandatory = $true)][string]$Label
+    [Parameter(Mandatory = $true)][string]$Label,
+    [string]$ErrorCode
   )
 
   $actualValues = @($Actual | ForEach-Object { [string]$_ } | Sort-Object -Unique)
   $expectedValues = @($Expected | ForEach-Object { [string]$_ } | Sort-Object -Unique)
   if ([string]::Join("`n", $actualValues) -cne [string]::Join("`n", $expectedValues)) {
+    if (-not [string]::IsNullOrWhiteSpace($ErrorCode)) {
+      Throw-OipPromoterError -ErrorCode $ErrorCode -Message "$Label differs from the deterministic expected set."
+    }
     throw "$Label differs from the deterministic expected set."
   }
 }
@@ -70,12 +87,15 @@ function Get-OipSha256ForStrings {
 function Get-OipCleanupActionRevision {
   param(
     [Parameter(Mandatory = $true)][string]$ActionId,
-    [Parameter(Mandatory = $true)][string]$Label
+    [Parameter(Mandatory = $true)][string]$Label,
+    [Parameter(Mandatory = $true)][string]$ErrorCode
   )
 
   $actionMatch = [regex]::Match($ActionId, $CleanupActionPattern)
   if (-not $actionMatch.Success) {
-    throw "$Label does not identify the WEB-LEGACY-IMAGE-CLEANUP-001 revision family: $ActionId"
+    Throw-OipPromoterError `
+      -ErrorCode $ErrorCode `
+      -Message "$Label does not identify the WEB-LEGACY-IMAGE-CLEANUP-001 revision family: $ActionId"
   }
   return [int]$actionMatch.Groups['revision'].Value
 }
@@ -85,11 +105,16 @@ function Get-OipInventoryActionBinding {
 
   $schemaVersion = [string]$Inventory.schema_version
   if ($SupportedInventorySchemas -cnotcontains $schemaVersion) {
-    throw "Focused cleanup inventory uses unsupported schema: $schemaVersion"
+    Throw-OipPromoterError `
+      -ErrorCode 'inventory_schema_unsupported' `
+      -Message "Focused cleanup inventory uses unsupported schema: $schemaVersion"
   }
 
   $actionId = [string]$Inventory.action_id
-  $revision = Get-OipCleanupActionRevision -ActionId $actionId -Label 'Focused cleanup inventory action_id'
+  $revision = Get-OipCleanupActionRevision `
+    -ActionId $actionId `
+    -Label 'Focused cleanup inventory action_id' `
+    -ErrorCode 'inventory_action_family_invalid'
   if (($schemaVersion -ceq '1.0' -and $revision -ne 1) -or
     ($schemaVersion -ceq '1.1' -and $revision -lt 2)) {
     throw "Focused cleanup inventory schema/action binding is unsupported: schema $schemaVersion, action $actionId"
@@ -115,7 +140,7 @@ function Assert-OipPassEvidenceCoverage {
     throw 'PASS evidence requires a review_date and review_actor.'
   }
   Assert-OipExactSet -Actual @($Evidence.expected_asset_ids) -Expected $Context.AssetIds -Label 'Evidence expected_asset_ids'
-  Assert-OipExactSet -Actual @($Evidence.reviewed_asset_ids) -Expected $Context.AssetIds -Label 'Evidence reviewed_asset_ids'
+  Assert-OipExactSet -Actual @($Evidence.reviewed_asset_ids) -Expected $Context.AssetIds -Label 'Evidence reviewed_asset_ids' -ErrorCode 'evidence_reviewed_asset_set_mismatch'
   Assert-OipExactSet -Actual @($Evidence.required_review_methods) -Expected $RequiredReviewMethods -Label 'Evidence required_review_methods'
   Assert-OipExactSet -Actual @($Evidence.completed_review_methods) -Expected $RequiredReviewMethods -Label 'Evidence completed_review_methods'
   Assert-OipExactSet -Actual @($Evidence.expected_deep_review_ids) -Expected $Context.DeepIds -Label 'Evidence expected_deep_review_ids'
@@ -134,7 +159,9 @@ function Get-OipReviewContext {
   $actionBinding = Get-OipInventoryActionBinding -Inventory $inventory
   if (@($inventory.medium_migrations).Count -ne 105 -or
     @($inventory.syd_migrations).Count -ne 4) {
-    throw 'Focused cleanup inventory is not the exact approved 105 Medium plus four Syd cohort.'
+    Throw-OipPromoterError `
+      -ErrorCode 'inventory_cohort_mismatch' `
+      -Message 'Focused cleanup inventory is not the exact approved 105 Medium plus four Syd cohort.'
   }
 
   $assetIds = @(
@@ -250,7 +277,10 @@ if ([string]$evidence.schema_version -cne '1.0') {
   throw 'Focused image visual-review record has an unsupported schema or action binding.'
 }
 $evidenceActionId = [string]$evidence.action_id
-$evidenceActionRevision = Get-OipCleanupActionRevision -ActionId $evidenceActionId -Label 'Focused image visual-review action_id'
+$evidenceActionRevision = Get-OipCleanupActionRevision `
+  -ActionId $evidenceActionId `
+  -Label 'Focused image visual-review action_id' `
+  -ErrorCode 'evidence_action_family_invalid'
 if ($evidenceActionRevision -gt [int]$context.ActionRevision) {
   throw "Focused image visual-review record targets a newer cleanup revision than the inventory: $evidenceActionId"
 }
@@ -291,7 +321,9 @@ if ([string]$evidence.manifest_sha256_before_promotion -cne $context.ManifestSha
 }
 
 if ($evidenceUsesPriorRevision) {
-  throw 'Prior-revision visual-review evidence may verify an already-applied promotion but cannot authorize a new promotion.'
+  Throw-OipPromoterError `
+    -ErrorCode 'prior_revision_promotion_forbidden' `
+    -Message 'Prior-revision visual-review evidence may verify an already-applied promotion but cannot authorize a new promotion.'
 }
 
 if ([string]$evidence.review_state -cne 'pass') {
@@ -477,4 +509,27 @@ finally {
     [IO.Path]::GetFileName($tempRoot) -like 'oip-focused-review-*') {
     [IO.Directory]::Delete($tempRoot, $true)
   }
+}
+}
+catch {
+  if (-not $Json) {
+    throw
+  }
+
+  $errorCode = 'unexpected_error'
+  if ($_.Exception.Data.Contains('OipPromoterErrorCode')) {
+    $errorCode = [string]$_.Exception.Data['OipPromoterErrorCode']
+  }
+  $message = [string]$_.Exception.Message
+  if ([string]::IsNullOrWhiteSpace($message)) {
+    $message = 'Focused image review promotion failed.'
+  }
+  $failure = [ordered]@{
+    schema_version = '1.0'
+    mode = 'error'
+    error_code = $errorCode
+    message = $message
+  }
+  [Console]::Out.WriteLine(([pscustomobject]$failure | ConvertTo-Json -Compress -Depth 4))
+  exit 1
 }
