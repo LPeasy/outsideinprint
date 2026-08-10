@@ -1,4 +1,4 @@
-current: the-cavalry-breaks-the-hill
+current: the-quiet-shield
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -759,5 +759,14 @@ cartoons:
     image: "editorial/the-cavalry-breaks-the-hill"
     essay: "/essays/the-cavalry-is-here/"
     alt: "A lone anonymous walker looks up from a rain-dark road as mounted trumpeters charge over a hill and golden light pours through the clouds to reach them both."
+    width: 1672
+    height: 941
+  - slug: the-quiet-shield
+    title: "The Quiet Shield"
+    date: "2026-08-10"
+    publishDate: "2026-08-10T17:02:04-04:00"
+    image: "editorial/the-quiet-shield"
+    essay: "/essays/invulnerable-today/"
+    alt: "An anonymous walker moves through a rain-dark morning road while a faint clear shield of warm light bends dark water and thorny branches away from the path."
     width: 1672
     height: 941
