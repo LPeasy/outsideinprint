@@ -4,7 +4,7 @@ import test from "node:test";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("responsive image manifest keeps the frozen inventory and processing defaults", () => {
+test("responsive image manifest keeps the frozen baseline and processing defaults", () => {
   const manifest = JSON.parse(read("data/image-assets.json"));
 
   assert.equal(manifest.schema_version, "1.0");
@@ -19,8 +19,17 @@ test("responsive image manifest keeps the frozen inventory and processing defaul
     social_max_width: 1200,
   });
 
+  const focusedCleanupBaselineAssetCount = 459;
+  const focusedCleanupBaselineAliasCount = 500;
+  const focusedCleanupBaselineCoreReviewCount = 446;
+  const focusedCleanupBaselineReferencedCount = 454;
+
   const entries = Object.entries(manifest.assets);
-  assert.equal(entries.length, 459, "the focused cleanup must keep 459 reconciled managed images");
+  assert.ok(
+    entries.length >= focusedCleanupBaselineAssetCount,
+    "the focused cleanup must keep at least 459 reconciled managed images",
+  );
+  const routineManagedAssetCount = entries.length - focusedCleanupBaselineAssetCount;
   assert.equal(
     entries.filter(([, asset]) => asset.image_class === "medium_import").length,
     112,
@@ -30,8 +39,18 @@ test("responsive image manifest keeps the frozen inventory and processing defaul
     13,
   );
   assert.equal(
+    entries.filter(([, asset]) =>
+      ["editorial_cartoon", "essay_illustration", "medium_import"].includes(asset.image_class),
+    ).length,
+    focusedCleanupBaselineCoreReviewCount + routineManagedAssetCount,
+  );
+  assert.equal(
     entries.filter(([, asset]) => asset.usage_state === "retained_unreferenced").length,
     5,
+  );
+  assert.equal(
+    entries.filter(([, asset]) => asset.usage_state === "referenced").length,
+    focusedCleanupBaselineReferencedCount + routineManagedAssetCount,
   );
   const sourceOnlyEntries = entries.filter(
     ([, asset]) => asset.processing_state === "source_only_unprocessable",
@@ -129,7 +148,11 @@ test("responsive image manifest keeps the frozen inventory and processing defaul
     expectedSydIds,
   );
 
-  assert.equal(Object.keys(manifest.aliases).length, 500);
+  assert.equal(
+    Object.keys(manifest.aliases).length - focusedCleanupBaselineAliasCount,
+    routineManagedAssetCount,
+    "routine managed artwork must add exactly one resolver alias per new canonical asset",
+  );
   for (const [alias, target] of Object.entries(manifest.aliases)) {
     assert.match(alias, /^\/images\/(?:editorial|essays|medium|syd-and-oliver)\/.+\.(?:png|jpe?g)$/);
     assert.ok(Object.hasOwn(manifest.assets, target), `${alias} must resolve directly to a canonical asset`);

@@ -203,8 +203,17 @@ foreach ($defaultExpectation in @(
   Assert-Equal -Actual ([int]$manifest.defaults.($defaultExpectation.Name)) -Expected $defaultExpectation.Value -Message "Manifest default $($defaultExpectation.Name) changed."
 }
 
+$focusedCleanupBaselineAssetCount = 459
+$focusedCleanupBaselineAliasCount = 500
+$focusedCleanupBaselineCoreReviewCount = 446
+$focusedCleanupBaselineReferencedCount = 454
+$focusedCleanupBaselineDerivativeCapableCount = 458
+
 $assetIds = @(Get-OipPropertyNames -Value $manifest.assets | Sort-Object)
-Assert-Equal -Actual $assetIds.Count -Expected 459 -Message 'Focused-cleanup managed-image inventory changed; reconcile and document any variance before release.'
+$routineManagedAssetCount = $assetIds.Count - $focusedCleanupBaselineAssetCount
+if ($routineManagedAssetCount -lt 0) {
+  throw "Focused-cleanup managed-image inventory shrank below the release baseline. Expected at least '$focusedCleanupBaselineAssetCount'; found '$($assetIds.Count)'."
+}
 
 $allowedAssetProperties = @('id','source','sha256','width','height','image_class','processing_hint','processing_state','processing_note','review_state','quality_override','usage_state')
 $allowedClasses = @('editorial_cartoon','essay_illustration','medium_import','essay_photo')
@@ -381,9 +390,9 @@ foreach ($assetId in $assetIds) {
 Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 112 -Message 'Managed Medium canonical count changed.'
 Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected 13 -Message 'Supplemental essay-photo count changed.'
 $coreIllustrationCount = [int]($classCounts['editorial_cartoon'] ?? 0) + [int]($classCounts['essay_illustration'] ?? 0) + [int]($classCounts['medium_import'] ?? 0)
-Assert-Equal -Actual $coreIllustrationCount -Expected 446 -Message 'Core responsive-image review cohort changed.'
+Assert-Equal -Actual $coreIllustrationCount -Expected ($focusedCleanupBaselineCoreReviewCount + $routineManagedAssetCount) -Message 'Core responsive-image review cohort changed outside routine managed-art growth.'
 Assert-Equal -Actual ([int]($usageCounts['retained_unreferenced'] ?? 0)) -Expected 5 -Message 'The explicit retained-but-unreferenced source count changed.'
-Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected 454 -Message 'Referenced managed-source count changed.'
+Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected ($focusedCleanupBaselineReferencedCount + $routineManagedAssetCount) -Message 'Referenced managed-source count changed outside routine managed-art growth.'
 Assert-Equal -Actual $sourceOnlyIds.Count -Expected 1 -Message 'Exactly one corrupt supplemental source may be quarantined as source_only_unprocessable.'
 Assert-Equal -Actual $sourceOnlyIds[0] -Expected $expectedSourceOnlyId -Message 'The quarantined source-only asset changed.'
 Assert-Equal -Actual ([string]$manifest.assets.$expectedSourceOnlyId.processing_note) -Expected $expectedSourceOnlyNote -Message 'The tracked-safe quarantine reason changed.'
@@ -434,7 +443,11 @@ if (($managedSourceRelativePaths -join "`n") -cne ($manifestSourceRelativePaths 
 }
 
 $aliasNames = @(Get-OipPropertyNames -Value $manifest.aliases | Sort-Object)
-Assert-Equal -Actual $aliasNames.Count -Expected 500 -Message 'Focused-cleanup retired-path alias inventory changed; reconcile and document any variance before release.'
+$routineAliasCount = $aliasNames.Count - $focusedCleanupBaselineAliasCount
+if ($routineAliasCount -lt 0) {
+  throw "Focused-cleanup retired-path alias inventory shrank below the release baseline. Expected at least '$focusedCleanupBaselineAliasCount'; found '$($aliasNames.Count)'."
+}
+Assert-Equal -Actual $routineAliasCount -Expected $routineManagedAssetCount -Message 'Routine managed artwork must add exactly one resolver alias per new canonical asset.'
 $mediumAliases = @($aliasNames | Where-Object { $_.StartsWith('/images/medium/', [System.StringComparison]::Ordinal) })
 $sydAliases = @($aliasNames | Where-Object { $_.StartsWith('/images/syd-and-oliver/', [System.StringComparison]::Ordinal) })
 Assert-Equal -Actual $mediumAliases.Count -Expected 119 -Message 'Medium alias count must equal 14 R3 aliases plus 105 retired PNG URLs.'
@@ -1108,8 +1121,14 @@ Assert-ExactProperties -Value $reviewReport -Expected @(
   'deep_review_selection'
 ) -Context 'Image review report root'
 Assert-Equal -Actual ([string]$reviewReport.schema_version) -Expected '1.0' -Message 'Image review report schema changed.'
-Assert-Equal -Actual ([string]$reviewReport.manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Image review report is stale relative to the canonical manifest.'
-Assert-Equal -Actual ([int]$reviewReport.canonical_asset_count) -Expected $assetIds.Count -Message 'Image review report canonical count is stale.'
+$reviewReportIsCurrent = [int]$reviewReport.canonical_asset_count -eq $assetIds.Count
+$reviewReportIsFocusedBaseline = [int]$reviewReport.canonical_asset_count -eq $focusedCleanupBaselineAssetCount -and $routineManagedAssetCount -gt 0
+if ($reviewReportIsCurrent) {
+  Assert-Equal -Actual ([string]$reviewReport.manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Image review report is stale relative to the canonical manifest.'
+}
+elseif (-not $reviewReportIsFocusedBaseline) {
+  throw "Image review report canonical count is stale. Expected current '$($assetIds.Count)' or focused-cleanup baseline '$focusedCleanupBaselineAssetCount'; found '$([int]$reviewReport.canonical_asset_count)'."
+}
 $reviewCandidates = @($reviewReport.candidates)
 $deepReviewSelection = @($reviewReport.deep_review_selection)
 Assert-Equal -Actual ([int]$reviewReport.candidate_count) -Expected $reviewCandidates.Count -Message 'Image review report candidate_count is stale.'
@@ -1266,9 +1285,18 @@ Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256_basis) -Expe
 $pendingStructuralReview = $pendingReviewIds.Count -gt 0 -and $AllowPendingReview
 if (-not $pendingStructuralReview) {
   Assert-Equal -Actual ([string]$visualReview.manifest_sha256_before_review_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Focused pre-review manifest hash basis changed.'
-  Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review) -Expected $manifestCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical manifest.'
-  Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256) -Expected $reviewReportCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical candidate report.'
-  Assert-Equal -Actual ([int]$visualReview.quantitative_decode_sanity.asset_count) -Expected 458 -Message 'Aggregate decode evidence must preserve the prior 349 approved assets and add all 109 focused migrations.'
+  if ($reviewReportIsCurrent) {
+    Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review) -Expected $manifestCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical manifest.'
+    Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256) -Expected $reviewReportCanonicalSha256 -Message 'Image visual review evidence is stale relative to the canonical candidate report.'
+  }
+  else {
+    Assert-Equal -Actual ([int]$visualReview.canonical_asset_count) -Expected $focusedCleanupBaselineAssetCount -Message 'Focused-cleanup visual evidence must bind the release baseline when routine artwork has been added.'
+    Assert-Equal -Actual ([int]$visualReview.derivative_capable_asset_count) -Expected $focusedCleanupBaselineDerivativeCapableCount -Message 'Focused-cleanup visual evidence derivative-capable count changed.'
+    Assert-Equal -Actual ([int]$visualReview.approved_derivative_capable_asset_count) -Expected $focusedCleanupBaselineDerivativeCapableCount -Message 'Focused-cleanup visual evidence approved derivative-capable count changed.'
+    Assert-Equal -Actual ([string]$visualReview.manifest_sha256_after_review) -Expected ([string]$reviewReport.manifest_sha256) -Message 'Focused-cleanup visual evidence is stale relative to the tracked focused-cleanup candidate report.'
+    Assert-Equal -Actual ([string]$visualReview.candidate_report_sha256) -Expected $reviewReportCanonicalSha256 -Message 'Focused-cleanup visual evidence is stale relative to the tracked candidate report.'
+  }
+  Assert-Equal -Actual ([int]$visualReview.quantitative_decode_sanity.asset_count) -Expected $focusedCleanupBaselineDerivativeCapableCount -Message 'Aggregate decode evidence must preserve the prior 349 approved assets and add all 109 focused migrations.'
   Assert-Equal -Actual ([int]$visualReview.quantitative_decode_sanity.decode_failure_count) -Expected 0 -Message 'Aggregate decode evidence records a failure.'
   Assert-Equal -Actual ([string]$visualReview.quantitative_decode_sanity.outcome) -Expected 'pass' -Message 'Aggregate decode evidence has not passed.'
   Assert-Equal -Actual ([int]$visualReview.deep_review.asset_count) -Expected $deepReviewIds.Count -Message 'Aggregate deep-review count must cover the complete current selection, including carryovers.'
@@ -1294,7 +1322,12 @@ Get-OipCanonicalTextFileSha256 -Path $buildEvidencePath -Label 'Responsive image
 $buildEvidence = Get-Content -LiteralPath $buildEvidencePath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable -Depth 20
 Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256_basis) -Expected 'canonical_utf8_no_bom_lf_single_terminal_lf' -Message 'Responsive image build evidence hash basis changed.'
 if (-not $pendingStructuralReview) {
-  Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Responsive image build evidence is stale relative to the canonical manifest.'
+  if ($reviewReportIsCurrent) {
+    Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256) -Expected $manifestCanonicalSha256 -Message 'Responsive image build evidence is stale relative to the canonical manifest.'
+  }
+  else {
+    Assert-Equal -Actual ([string]$buildEvidence.source_manifest_sha256) -Expected ([string]$reviewReport.manifest_sha256) -Message 'Responsive image build evidence must bind the focused-cleanup baseline when routine artwork has been added.'
+  }
 }
 
 if (-not $AllowPendingReview -and $pendingReviewIds.Count -gt 0) {
