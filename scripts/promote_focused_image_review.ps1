@@ -13,11 +13,12 @@ $ErrorActionPreference = 'Stop'
 $Root = (Resolve-Path -LiteralPath $Root).Path
 . (Join-Path $PSScriptRoot 'lib\image_asset_manifest.ps1')
 
-$ActionId = 'WEB-LEGACY-IMAGE-CLEANUP-001-R1'
 $InventoryPath = Join-Path $Root 'reports/legacy-image-focused-cleanup-inventory.json'
 $ManifestPath = Get-OipImageAssetManifestPath -Root $Root
 $CandidatePath = Join-Path $Root 'reports/image-review-candidates.json'
 $VisualReviewPath = Join-Path $Root 'reports/image-visual-review.json'
+$CleanupActionPattern = '^WEB-LEGACY-IMAGE-CLEANUP-001-R(?<revision>[1-9][0-9]*)$'
+$SupportedInventorySchemas = @('1.0', '1.1')
 $ResolvedEvidencePath = if ([IO.Path]::IsPathRooted($EvidencePath)) {
   [IO.Path]::GetFullPath($EvidencePath)
 }
@@ -66,10 +67,72 @@ function Get-OipSha256ForStrings {
   return Get-OipSha256ForBytes -Bytes $Utf8NoBom.GetBytes($text)
 }
 
+function Get-OipCleanupActionRevision {
+  param(
+    [Parameter(Mandatory = $true)][string]$ActionId,
+    [Parameter(Mandatory = $true)][string]$Label
+  )
+
+  $actionMatch = [regex]::Match($ActionId, $CleanupActionPattern)
+  if (-not $actionMatch.Success) {
+    throw "$Label does not identify the WEB-LEGACY-IMAGE-CLEANUP-001 revision family: $ActionId"
+  }
+  return [int]$actionMatch.Groups['revision'].Value
+}
+
+function Get-OipInventoryActionBinding {
+  param([Parameter(Mandatory = $true)][System.Collections.IDictionary]$Inventory)
+
+  $schemaVersion = [string]$Inventory.schema_version
+  if ($SupportedInventorySchemas -cnotcontains $schemaVersion) {
+    throw "Focused cleanup inventory uses unsupported schema: $schemaVersion"
+  }
+
+  $actionId = [string]$Inventory.action_id
+  $revision = Get-OipCleanupActionRevision -ActionId $actionId -Label 'Focused cleanup inventory action_id'
+  if (($schemaVersion -ceq '1.0' -and $revision -ne 1) -or
+    ($schemaVersion -ceq '1.1' -and $revision -lt 2)) {
+    throw "Focused cleanup inventory schema/action binding is unsupported: schema $schemaVersion, action $actionId"
+  }
+
+  return [pscustomobject]@{
+    ActionId = $actionId
+    Revision = $revision
+  }
+}
+
+function Assert-OipPassEvidenceCoverage {
+  param(
+    [Parameter(Mandatory = $true)][System.Collections.IDictionary]$Evidence,
+    [Parameter(Mandatory = $true)][object]$Context
+  )
+
+  if ([string]$Evidence.review_state -cne 'pass') {
+    throw 'Focused image visual-review record is not PASS.'
+  }
+  if ([string]$Evidence.review_date -cnotmatch '^20[0-9]{2}-[01][0-9]-[0-3][0-9]$' -or
+    [string]::IsNullOrWhiteSpace([string]$Evidence.review_actor)) {
+    throw 'PASS evidence requires a review_date and review_actor.'
+  }
+  Assert-OipExactSet -Actual @($Evidence.expected_asset_ids) -Expected $Context.AssetIds -Label 'Evidence expected_asset_ids'
+  Assert-OipExactSet -Actual @($Evidence.reviewed_asset_ids) -Expected $Context.AssetIds -Label 'Evidence reviewed_asset_ids'
+  Assert-OipExactSet -Actual @($Evidence.required_review_methods) -Expected $RequiredReviewMethods -Label 'Evidence required_review_methods'
+  Assert-OipExactSet -Actual @($Evidence.completed_review_methods) -Expected $RequiredReviewMethods -Label 'Evidence completed_review_methods'
+  Assert-OipExactSet -Actual @($Evidence.expected_deep_review_ids) -Expected $Context.DeepIds -Label 'Evidence expected_deep_review_ids'
+  Assert-OipExactSet -Actual @($Evidence.deep_reviewed_asset_ids) -Expected $Context.DeepIds -Label 'Evidence deep_reviewed_asset_ids'
+  if ([int]$Evidence.expected_asset_count -ne 109 -or
+    [int]$Evidence.expected_deep_review_count -ne $Context.DeepIds.Count -or
+    [int]$Evidence.decode_sanity.asset_count -ne 109 -or
+    [int]$Evidence.decode_sanity.decode_failure_count -ne 0 -or
+    [string]$Evidence.decode_sanity.outcome -cne 'pass') {
+    throw 'PASS evidence does not cover all 109 assets, the deterministic deep-review set, and zero decode failures.'
+  }
+}
+
 function Get-OipReviewContext {
   $inventory = Read-OipJsonHashtable -Path $InventoryPath -Label 'focused cleanup inventory'
-  if ([string]$inventory.action_id -cne $ActionId -or
-    @($inventory.medium_migrations).Count -ne 105 -or
+  $actionBinding = Get-OipInventoryActionBinding -Inventory $inventory
+  if (@($inventory.medium_migrations).Count -ne 105 -or
     @($inventory.syd_migrations).Count -ne 4) {
     throw 'Focused cleanup inventory is not the exact approved 105 Medium plus four Syd cohort.'
   }
@@ -113,6 +176,8 @@ function Get-OipReviewContext {
   }
 
   return [pscustomobject]@{
+    ActionId = $actionBinding.ActionId
+    ActionRevision = $actionBinding.Revision
     Inventory = $inventory
     Manifest = $manifest
     Candidate = $candidate
@@ -125,6 +190,7 @@ function Get-OipReviewContext {
 }
 
 $context = Get-OipReviewContext
+$ActionId = [string]$context.ActionId
 
 if ($InitializeEvidence) {
   if ($Write) {
@@ -168,6 +234,7 @@ if ($InitializeEvidence) {
   Write-OipCanonicalJsonFile -Path $ResolvedEvidencePath -Value $template -Depth 20
   $result = [ordered]@{
     mode = 'initialized_pending_evidence'
+    action_id = $ActionId
     evidence_path = [IO.Path]::GetRelativePath($Root, $ResolvedEvidencePath).Replace('\','/')
     review_state = 'pending_review'
     expected_asset_count = 109
@@ -179,24 +246,38 @@ if ($InitializeEvidence) {
 }
 
 $evidence = Read-OipJsonHashtable -Path $ResolvedEvidencePath -Label 'focused image visual-review record'
-if ([string]$evidence.schema_version -cne '1.0' -or [string]$evidence.action_id -cne $ActionId) {
+if ([string]$evidence.schema_version -cne '1.0') {
   throw 'Focused image visual-review record has an unsupported schema or action binding.'
 }
+$evidenceActionId = [string]$evidence.action_id
+$evidenceActionRevision = Get-OipCleanupActionRevision -ActionId $evidenceActionId -Label 'Focused image visual-review action_id'
+if ($evidenceActionRevision -gt [int]$context.ActionRevision) {
+  throw "Focused image visual-review record targets a newer cleanup revision than the inventory: $evidenceActionId"
+}
+$evidenceUsesPriorRevision = $evidenceActionRevision -lt [int]$context.ActionRevision
 if ([string]$evidence.manifest_sha256_before_promotion -cne $context.ManifestSha -or
   [string]$evidence.candidate_report_sha256_before_promotion -cne $context.CandidateSha) {
   $allApproved = @($context.AssetIds | Where-Object { [string]$context.Manifest.assets[$_].review_state -ceq 'approved' }).Count -eq 109
   if ($allApproved -and [IO.File]::Exists($VisualReviewPath)) {
     $visual = Read-OipJsonHashtable -Path $VisualReviewPath -Label 'aggregate image visual-review evidence'
-    if ([string]$visual.focused_cleanup_review.action_id -ceq $ActionId -and
+    if ([string]$evidence.review_state -ceq 'pass') {
+      Assert-OipPassEvidenceCoverage -Evidence $evidence -Context $context
+    }
+    if ([string]$evidence.review_state -ceq 'pass' -and
+      [string]$visual.focused_cleanup_review.action_id -ceq $evidenceActionId -and
       [string]$visual.focused_cleanup_review.outcome -ceq 'pass' -and
       [int]$visual.focused_cleanup_review.reviewed_asset_count -eq 109 -and
+      [string]$visual.focused_cleanup_review.reviewed_asset_ids_sha256 -ceq (Get-OipSha256ForStrings -Values $context.AssetIds) -and
       [int]$visual.focused_cleanup_review.deep_review_asset_count -eq $context.DeepIds.Count -and
+      [string]$visual.focused_cleanup_review.deep_review_asset_ids_sha256 -ceq (Get-OipSha256ForStrings -Values $context.DeepIds) -and
       [int]$visual.quantitative_decode_sanity.asset_count -eq 458 -and
       [int]$visual.quantitative_decode_sanity.decode_failure_count -eq 0 -and
       [int]$visual.deep_review.asset_count -eq $context.AllDeepIds.Count -and
       [string]$visual.deep_review.outcome -ceq 'pass') {
       $result = [ordered]@{
         mode = 'verify_applied'
+        inventory_action_id = $ActionId
+        review_action_id = $evidenceActionId
         review_state = 'pass'
         expected_asset_count = 109
         expected_deep_review_count = $context.DeepIds.Count
@@ -207,6 +288,10 @@ if ([string]$evidence.manifest_sha256_before_promotion -cne $context.ManifestSha
     }
   }
   throw 'Focused visual-review record is stale relative to the pending manifest or candidate report.'
+}
+
+if ($evidenceUsesPriorRevision) {
+  throw 'Prior-revision visual-review evidence may verify an already-applied promotion but cannot authorize a new promotion.'
 }
 
 if ([string]$evidence.review_state -cne 'pass') {
@@ -226,23 +311,7 @@ if ([string]$evidence.review_state -cne 'pass') {
   exit 0
 }
 
-if ([string]$evidence.review_date -cnotmatch '^20[0-9]{2}-[01][0-9]-[0-3][0-9]$' -or
-  [string]::IsNullOrWhiteSpace([string]$evidence.review_actor)) {
-  throw 'PASS evidence requires a review_date and review_actor.'
-}
-Assert-OipExactSet -Actual @($evidence.expected_asset_ids) -Expected $context.AssetIds -Label 'Evidence expected_asset_ids'
-Assert-OipExactSet -Actual @($evidence.reviewed_asset_ids) -Expected $context.AssetIds -Label 'Evidence reviewed_asset_ids'
-Assert-OipExactSet -Actual @($evidence.required_review_methods) -Expected $RequiredReviewMethods -Label 'Evidence required_review_methods'
-Assert-OipExactSet -Actual @($evidence.completed_review_methods) -Expected $RequiredReviewMethods -Label 'Evidence completed_review_methods'
-Assert-OipExactSet -Actual @($evidence.expected_deep_review_ids) -Expected $context.DeepIds -Label 'Evidence expected_deep_review_ids'
-Assert-OipExactSet -Actual @($evidence.deep_reviewed_asset_ids) -Expected $context.DeepIds -Label 'Evidence deep_reviewed_asset_ids'
-if ([int]$evidence.expected_asset_count -ne 109 -or
-  [int]$evidence.expected_deep_review_count -ne $context.DeepIds.Count -or
-  [int]$evidence.decode_sanity.asset_count -ne 109 -or
-  [int]$evidence.decode_sanity.decode_failure_count -ne 0 -or
-  [string]$evidence.decode_sanity.outcome -cne 'pass') {
-  throw 'PASS evidence does not cover all 109 assets, the deterministic deep-review set, and zero decode failures.'
-}
+Assert-OipPassEvidenceCoverage -Evidence $evidence -Context $context
 
 $overridesById = @{}
 foreach ($override in @($evidence.quality_overrides)) {
