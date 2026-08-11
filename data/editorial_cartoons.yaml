@@ -1,4 +1,4 @@
-current: the-quiet-shield
+current: the-open-hand
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -768,5 +768,14 @@ cartoons:
     image: "editorial/the-quiet-shield"
     essay: "/essays/invulnerable-today/"
     alt: "An anonymous walker moves through a rain-dark morning road while a faint clear shield of warm light bends dark water and thorny branches away from the path."
+    width: 1672
+    height: 941
+  - slug: the-open-hand
+    title: "The Open Hand"
+    date: "2026-08-11"
+    publishDate: "2026-08-11T11:06:31-04:00"
+    image: "editorial/the-open-hand"
+    essay: "/essays/rise-into-today/"
+    alt: "An unmarked cork shoots upward through blue-green water toward a sunlit surface as an open hand recedes below."
     width: 1672
     height: 941
