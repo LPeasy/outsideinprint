@@ -1,4 +1,4 @@
-current: the-open-hand
+current: the-next-stone
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -777,5 +777,14 @@ cartoons:
     image: "editorial/the-open-hand"
     essay: "/essays/rise-into-today/"
     alt: "An unmarked cork shoots upward through blue-green water toward a sunlit surface as an open hand recedes below."
+    width: 1672
+    height: 941
+  - slug: the-next-stone
+    title: "The Next Stone"
+    date: "2026-08-12"
+    publishDate: "2026-08-12T11:34:01-04:00"
+    image: "editorial/the-next-stone"
+    essay: "/essays/correct-as-i-go/"
+    alt: "An anonymous person steps from a shadowed riverbank onto sunlit stones that curve across calm water and disappear into luminous mist."
     width: 1672
     height: 941
