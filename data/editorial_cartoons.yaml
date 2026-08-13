@@ -1,4 +1,4 @@
-current: the-next-stone
+current: energy-in-motion
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -786,5 +786,14 @@ cartoons:
     image: "editorial/the-next-stone"
     essay: "/essays/correct-as-i-go/"
     alt: "An anonymous person steps from a shadowed riverbank onto sunlit stones that curve across calm water and disappear into luminous mist."
+    width: 1672
+    height: 941
+  - slug: energy-in-motion
+    title: "Energy in Motion"
+    date: "2026-08-13"
+    publishDate: "2026-08-13T13:56:20-04:00"
+    image: "editorial/energy-in-motion"
+    essay: "/essays/spiritual-being-physical/"
+    alt: "An anonymous person leans over a wooden footbridge as a pebble strikes dark water and blue, gold, and rose light traces the widening concentric ripples."
     width: 1672
     height: 941
