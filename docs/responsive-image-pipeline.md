@@ -78,15 +78,15 @@ GitHub Actions caches `resources/_gen` with one exact key derived from Hugo `0.1
 
 The production gate enforces:
 
-- prepared Pages payload no more than 600 MiB;
-- `public/images` no more than 500 MiB;
+- prepared Pages payload no more than 900 MiB;
+- `public/images` no more than 800 MiB;
 - no derivative larger than 1 MiB;
 - no more than 5,000 generated images;
 - no more than 6,500 total public files;
 - zero managed source bytes or migrated editorial/essay raster originals in `static/` or `public/`; and
 - valid AVIF, WebP, and JPEG signatures, dimensions, MIME declarations, responsive descriptors, and source-hash URL prefixes.
 
-For `WEB-LEGACY-IMAGE-CLEANUP-001-R1` and its R2 hash reconciliation, the release gate additionally requires `public/images` to remain at or below 450 MiB and to save at least 40 MiB against the authoritative deployed 512,308,750-byte live baseline. These are release acceptance controls; the standing 500 MiB hard budget remains unchanged.
+The earlier focused-cleanup acceptance ceiling and live-baseline savings check were retired after the migration completed. The standing limits now preserve a 100 MiB reserve beneath [GitHub Pages' supported 1 GiB deployment ceiling](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits): 800 MiB for `public/images` within a 900 MiB prepared Pages payload.
 
 ## Validation and visual review
 

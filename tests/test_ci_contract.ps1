@@ -404,8 +404,8 @@ foreach ($requiredBuildSnippet in @(
 }
 
 foreach ($budgetContract in @(
-  @{ Pattern = '(?m)^\$maxArtifactBytes\s*=\s*600MB\s*$'; Name = '600 MiB Pages artifact' },
-  @{ Pattern = '(?m)^\$maxPublicImageBytes\s*=\s*500MB\s*$'; Name = '500 MiB public/images' },
+  @{ Pattern = '(?m)^\$maxArtifactBytes\s*=\s*900MB\s*$'; Name = '900 MiB Pages artifact' },
+  @{ Pattern = '(?m)^\$maxPublicImageBytes\s*=\s*800MB\s*$'; Name = '800 MiB public/images' },
   @{ Pattern = '(?m)^\$maxDerivativeBytes\s*=\s*1MB\s*$'; Name = '1 MiB derivative' },
   @{ Pattern = '(?m)^\$maxGeneratedImages\s*=\s*5000\s*$'; Name = '5,000 generated images' },
   @{ Pattern = '(?m)^\$maxPublicFiles\s*=\s*6500\s*$'; Name = '6,500 public files' }

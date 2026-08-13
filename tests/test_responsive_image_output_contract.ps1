@@ -10,11 +10,8 @@ $ErrorActionPreference = 'Stop'
 
 . (Join-Path $PSScriptRoot 'helpers/responsive_image_common.ps1')
 
-$maxArtifactBytes = 600MB
-$maxPublicImageBytes = 500MB
-$focusedCleanupPublicImageCeilingBytes = 450MB
-$boundLivePublicImageBytes = 512308750
-$focusedCleanupMinimumSavingsBytes = 40MB
+$maxArtifactBytes = 900MB
+$maxPublicImageBytes = 800MB
 $maxDerivativeBytes = 1MB
 $maxGeneratedImages = 5000
 $maxPublicFiles = 6500
@@ -190,7 +187,7 @@ if ($publicFiles.Count -gt $maxPublicFiles) {
 }
 $publicBytes = ($publicFiles | Measure-Object -Property Length -Sum).Sum
 if ($publicBytes -gt $maxArtifactBytes) {
-  throw "Prepared Pages payload exceeds the 600 MiB artifact budget: $publicBytes bytes"
+  throw "Prepared Pages payload exceeds the 900 MiB artifact budget: $publicBytes bytes"
 }
 
 foreach ($reviewOutputPath in @('image-review','image-review/originals')) {
@@ -208,14 +205,7 @@ else {
 }
 $publicImageBytes = ($publicImageFiles | Measure-Object -Property Length -Sum).Sum
 if ($publicImageBytes -gt $maxPublicImageBytes) {
-  throw "public/images exceeds the 500 MiB budget: $publicImageBytes bytes"
-}
-if ($publicImageBytes -gt $focusedCleanupPublicImageCeilingBytes) {
-  throw "Focused cleanup release exceeds its 450 MiB public/images acceptance ceiling: $publicImageBytes bytes"
-}
-$focusedCleanupSavingsBytes = $boundLivePublicImageBytes - $publicImageBytes
-if ($focusedCleanupSavingsBytes -lt $focusedCleanupMinimumSavingsBytes) {
-  throw "Focused cleanup saves only $focusedCleanupSavingsBytes bytes from the bound $boundLivePublicImageBytes-byte live baseline; at least 40 MiB is required."
+  throw "public/images exceeds the 800 MiB budget: $publicImageBytes bytes"
 }
 
 $originalsLeak = @($publicFiles | Where-Object { $_.FullName.Replace('\','/') -match '/images/originals/' })
