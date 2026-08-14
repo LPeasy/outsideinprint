@@ -1,4 +1,4 @@
-current: energy-in-motion
+current: the-weight-falls-away
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -795,5 +795,14 @@ cartoons:
     image: "editorial/energy-in-motion"
     essay: "/essays/spiritual-being-physical/"
     alt: "An anonymous person leans over a wooden footbridge as a pebble strikes dark water and blue, gold, and rose light traces the widening concentric ripples."
+    width: 1672
+    height: 941
+  - slug: the-weight-falls-away
+    title: "The Weight Falls Away"
+    date: "2026-08-14"
+    publishDate: "2026-08-14T16:33:39-04:00"
+    image: "editorial/the-weight-falls-away"
+    essay: "/essays/who-i-decide-to-be/"
+    alt: "From directly overhead, a barefoot man floats face-up with arms open as a dark indigo watercolor shadow dissolves beneath him and the blue-violet current brightens toward rose-gold light."
     width: 1672
     height: 941

@@ -1277,6 +1277,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-weight-falls-away": {
+      "id": "editorial/the-weight-falls-away",
+      "source": "images/originals/editorial/the-weight-falls-away.png",
+      "sha256": "2f2d88a9a71c954a004c3a00f4518661c40ebea7c29cac5ce8cbc6e6cd70ec3c",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/very-fine-lines-on-both-sides": {
       "id": "editorial/very-fine-lines-on-both-sides",
       "source": "images/originals/editorial/very-fine-lines-on-both-sides.png",
@@ -4945,6 +4959,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/who-i-decide-to-be/section-1": {
+      "id": "essays/who-i-decide-to-be/section-1",
+      "source": "images/originals/essays/who-i-decide-to-be/section-1.png",
+      "sha256": "60901d00bedd2eb9eb470fc7c4aae8d7dcd228f118c261b4602fc63f16a234ea",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/whose-yes/section-1": {
       "id": "essays/whose-yes/section-1",
       "source": "images/originals/essays/whose-yes/section-1.png",
@@ -6647,6 +6675,7 @@
     "/images/editorial/the-tiller.png": "editorial/the-tiller",
     "/images/editorial/the-trophy-case.png": "editorial/the-trophy-case",
     "/images/editorial/the-turn.png": "editorial/the-turn",
+    "/images/editorial/the-weight-falls-away.png": "editorial/the-weight-falls-away",
     "/images/editorial/very-fine-lines-on-both-sides.png": "editorial/very-fine-lines-on-both-sides",
     "/images/editorial/warbonds.png": "editorial/warbonds",
     "/images/editorial/when-life-gives-you.png": "editorial/when-life-gives-you",
@@ -6937,6 +6966,7 @@
     "/images/essays/when-can-states-draw-race-based-congressional-districts/hero.png": "essays/when-can-states-draw-race-based-congressional-districts/hero",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/section-1.png": "essays/when-can-states-draw-race-based-congressional-districts/section-1",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/section-2.png": "essays/when-can-states-draw-race-based-congressional-districts/section-2",
+    "/images/essays/who-i-decide-to-be/section-1.png": "essays/who-i-decide-to-be/section-1",
     "/images/essays/whose-yes/hero.png": "editorial/whose-yes",
     "/images/essays/whose-yes/section-1.png": "essays/whose-yes/section-1",
     "/images/essays/your-part/hero.png": "editorial/the-tiller",
