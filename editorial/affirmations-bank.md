@@ -136,3 +136,7 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - Temporary defeat is not ultimate failure.
 - We don’t quit! We win.
 - A slow, steady process assures success.
+- I'm not who I used to be... I'm who I decide to be.
+- I embrace change and lean into the bends.
+- I let the river of life power me forward.
+- I turn every failure into a stepping stone on the way to ultimate success.
