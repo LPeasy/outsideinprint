@@ -1571,6 +1571,7 @@ $requiredUxPages = @(
   'public/almanack/2026-07-25/index.html',
   'public/almanack/2026-08-01/index.html',
   'public/almanack/2026-08-08/index.html',
+  'public/almanack/2026-08-15/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -3406,7 +3407,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 8, 2026.*?In the Margins.*?Number.*?Document.*?Visas: Visa Bond Program.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 15, 2026.*?In the Margins.*?Number.*?Document.*?Differential Pay for Prescribed Wildland Fire Activities.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
@@ -3533,6 +3534,27 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-08-08/index.html'
     Pattern = '/images/essays/(i-make-myself|rich-in-spirit|open-hands|pay-attention-to-you)/hero\.png'
     Message = 'expected the August 8 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-08-15/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?August 15, 2026.*?Issue 15.*?I(?:''|&#39;|&rsquo;)m not who I used to be\.\.\. I(?:''|&#39;|&rsquo;)m who I decide to be\..*?I move boldly, and I correct as I go\.'
+    Message = 'expected the August 15 Almanack issue page to render the nameplate, issue number, and affirmation pull quotes'
+  },
+  @{
+    Path = 'public/almanack/2026-08-15/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the August 15 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-08-15/index.html'
+    Pattern = '(?s)/images/rendered/editorial/the-weight-falls-away/.*?/images/rendered/editorial/energy-in-motion/.*?/images/rendered/editorial/the-next-stone/.*?/images/rendered/editorial/the-open-hand/'
+    Message = 'expected the August 15 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-08-15/index.html'
+    Pattern = '/images/essays/(who-i-decide-to-be|spiritual-being-physical|correct-as-i-go|rise-into-today)/hero\.png'
+    Message = 'expected the August 15 Almanack issue not to use essay hero images for essay cards'
     ShouldNotMatch = $true
   },
   @{
