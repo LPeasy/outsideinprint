@@ -1095,6 +1095,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-quiet-street-ahead": {
+      "id": "editorial/the-quiet-street-ahead",
+      "source": "images/originals/editorial/the-quiet-street-ahead.png",
+      "sha256": "4444c173bd2b82ead9883b55f06b99bf6d7afa9f47b490a8872751aba212cbd3",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/the-returning-water": {
       "id": "editorial/the-returning-water",
       "source": "images/originals/editorial/the-returning-water.png",
@@ -4917,6 +4931,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/what-i-let-in/section-1": {
+      "id": "essays/what-i-let-in/section-1",
+      "source": "images/originals/essays/what-i-let-in/section-1.png",
+      "sha256": "3fb01c895b52ab8c0eb67717cff2eafc002ff7c467b4deae08cf7b0b9bdb78c8",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/when-can-states-draw-race-based-congressional-districts/hero": {
       "id": "essays/when-can-states-draw-race-based-congressional-districts/hero",
       "source": "images/originals/essays/when-can-states-draw-race-based-congressional-districts/hero.png",
@@ -6662,6 +6690,7 @@
     "/images/editorial/the-next-stone.png": "editorial/the-next-stone",
     "/images/editorial/the-open-hand.png": "editorial/the-open-hand",
     "/images/editorial/the-quiet-shield.png": "editorial/the-quiet-shield",
+    "/images/editorial/the-quiet-street-ahead.png": "editorial/the-quiet-street-ahead",
     "/images/editorial/the-returning-water.png": "editorial/the-returning-water",
     "/images/editorial/the-road-rises.png": "editorial/the-road-rises",
     "/images/editorial/the-ruler-of-the-road.png": "editorial/the-ruler-of-the-road",
@@ -6963,6 +6992,7 @@
     "/images/essays/the-world-is-back-at-the-poker-table/back-room-chips.png": "essays/the-world-is-back-at-the-poker-table/back-room-chips",
     "/images/essays/the-world-is-back-at-the-poker-table/chips-in.png": "essays/the-world-is-back-at-the-poker-table/chips-in",
     "/images/essays/togetherness/hero.png": "essays/togetherness/hero",
+    "/images/essays/what-i-let-in/section-1.png": "essays/what-i-let-in/section-1",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/hero.png": "essays/when-can-states-draw-race-based-congressional-districts/hero",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/section-1.png": "essays/when-can-states-draw-race-based-congressional-districts/section-1",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/section-2.png": "essays/when-can-states-draw-race-based-congressional-districts/section-2",

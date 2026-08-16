@@ -1,4 +1,4 @@
-current: the-weight-falls-away
+current: the-quiet-street-ahead
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -804,5 +804,14 @@ cartoons:
     image: "editorial/the-weight-falls-away"
     essay: "/essays/who-i-decide-to-be/"
     alt: "From directly overhead, a barefoot man floats face-up with arms open as a dark indigo watercolor shadow dissolves beneath him and the blue-violet current brightens toward rose-gold light."
+    width: 1672
+    height: 941
+  - slug: the-quiet-street-ahead
+    title: "The Quiet Street Ahead"
+    date: "2026-08-16"
+    publishDate: "2026-08-16T11:08:37-04:00"
+    image: "editorial/the-quiet-street-ahead"
+    essay: "/essays/what-i-let-in/"
+    alt: "At dawn, an anonymous man in an ivory shirt pauses beside dew-lit grass while an empty blue-violet street curves toward rose-gold light."
     width: 1672
     height: 941
