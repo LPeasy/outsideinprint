@@ -140,3 +140,7 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I embrace change and lean into the bends.
 - I let the river of life power me forward.
 - I turn every failure into a stepping stone on the way to ultimate success.
+- My mind is closed to all negativity.
+- I'm grateful for this day and its opportunities.
+- I take action with courage and clarity.
+- Everyday I am becoming who I am meant to be.
