@@ -1025,6 +1025,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-impression": {
+      "id": "editorial/the-impression",
+      "source": "images/originals/editorial/the-impression.png",
+      "sha256": "c147659461f4c604b28364b78e1c7d83b0b0d4ccb767bce1e578b7433c5ad91d",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/the-meter": {
       "id": "editorial/the-meter",
       "source": "images/originals/editorial/the-meter.png",
@@ -4357,6 +4371,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/the-part-that-is-mine/section-1": {
+      "id": "essays/the-part-that-is-mine/section-1",
+      "source": "images/originals/essays/the-part-that-is-mine/section-1.png",
+      "sha256": "85a40d4078ce539242796b841a9fa7c4c46617c79d15b406ec0b2937b9067650",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/the-repair/section-1": {
       "id": "essays/the-repair/section-1",
       "source": "images/originals/essays/the-repair/section-1.png",
@@ -6685,6 +6713,7 @@
     "/images/editorial/the-cup-makes-its-own-river.png": "editorial/the-cup-makes-its-own-river",
     "/images/editorial/the-empty-hooks.png": "editorial/the-empty-hooks",
     "/images/editorial/the-house-always-wins.png": "editorial/the-house-always-wins",
+    "/images/editorial/the-impression.png": "editorial/the-impression",
     "/images/editorial/the-meter.png": "editorial/the-meter",
     "/images/editorial/the-minute-drawer.png": "editorial/the-minute-drawer",
     "/images/editorial/the-next-stone.png": "editorial/the-next-stone",
@@ -6946,6 +6975,7 @@
     "/images/essays/the-model-that-could-not-leave/hero.png": "essays/the-model-that-could-not-leave/hero",
     "/images/essays/the-model-that-could-not-leave/section-1.png": "essays/the-model-that-could-not-leave/section-1",
     "/images/essays/the-model-that-could-not-leave/section-2.png": "essays/the-model-that-could-not-leave/section-2",
+    "/images/essays/the-part-that-is-mine/section-1.png": "essays/the-part-that-is-mine/section-1",
     "/images/essays/the-repair/hero.png": "editorial/mending-table",
     "/images/essays/the-repair/section-1.png": "essays/the-repair/section-1",
     "/images/essays/the-repair/section-2.png": "essays/the-repair/section-2",

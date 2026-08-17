@@ -1,4 +1,4 @@
-current: the-quiet-street-ahead
+current: the-impression
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -813,5 +813,14 @@ cartoons:
     image: "editorial/the-quiet-street-ahead"
     essay: "/essays/what-i-let-in/"
     alt: "At dawn, an anonymous man in an ivory shirt pauses beside dew-lit grass while an empty blue-violet street curves toward rose-gold light."
+    width: 1672
+    height: 941
+  - slug: the-impression
+    title: "The Impression"
+    date: "2026-08-17"
+    publishDate: "2026-08-17T17:41:42-04:00"
+    image: "editorial/the-impression"
+    essay: "/essays/the-part-that-is-mine/"
+    alt: "Before sunrise in a hotel room, an anonymous man adjusts his collar before a lit mirror while his shadow spreads across the wall as an empty conference table surrounded by vacant chairs."
     width: 1672
     height: 941
