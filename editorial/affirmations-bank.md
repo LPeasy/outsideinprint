@@ -144,3 +144,6 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I'm grateful for this day and its opportunities.
 - I take action with courage and clarity.
 - Everyday I am becoming who I am meant to be.
+- I don't try to control things. I only control myself!
+- Thinking of an excuse? Wipe it out.
+- Turn off the impression.
