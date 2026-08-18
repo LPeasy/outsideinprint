@@ -1,4 +1,4 @@
-current: the-impression
+current: both-hands
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -822,5 +822,14 @@ cartoons:
     image: "editorial/the-impression"
     essay: "/essays/the-part-that-is-mine/"
     alt: "Before sunrise in a hotel room, an anonymous man adjusts his collar before a lit mirror while his shadow spreads across the wall as an empty conference table surrounded by vacant chairs."
+    width: 1672
+    height: 941
+  - slug: both-hands
+    title: "Both Hands"
+    date: "2026-08-18"
+    publishDate: "2026-08-18T14:21:17-04:00"
+    image: "editorial/both-hands"
+    essay: "/essays/after-the-cup-falls/"
+    alt: "An anonymous person stands at an open kitchen cupboard, lifting an intact ceramic mug with both hands as clear morning light fills the room."
     width: 1672
     height: 941
