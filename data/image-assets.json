@@ -1375,6 +1375,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/where-the-light-finds-me": {
+      "id": "editorial/where-the-light-finds-me",
+      "source": "images/originals/editorial/where-the-light-finds-me.png",
+      "sha256": "c64d53f080656776a09dda4d12ba28a716d8b02f8f26236035962c624f411423",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/who-do-you-know-here": {
       "id": "editorial/who-do-you-know-here",
       "source": "images/originals/editorial/who-do-you-know-here.png",
@@ -6766,6 +6780,7 @@
     "/images/editorial/very-fine-lines-on-both-sides.png": "editorial/very-fine-lines-on-both-sides",
     "/images/editorial/warbonds.png": "editorial/warbonds",
     "/images/editorial/when-life-gives-you.png": "editorial/when-life-gives-you",
+    "/images/editorial/where-the-light-finds-me.png": "editorial/where-the-light-finds-me",
     "/images/editorial/who-do-you-know-here.png": "editorial/who-do-you-know-here",
     "/images/editorial/who-paid-the-nazis.png": "editorial/who-paid-the-nazis",
     "/images/editorial/whose-yes.png": "editorial/whose-yes",

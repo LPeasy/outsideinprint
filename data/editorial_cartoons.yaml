@@ -1,4 +1,4 @@
-current: both-hands
+current: where-the-light-finds-me
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -831,5 +831,14 @@ cartoons:
     image: "editorial/both-hands"
     essay: "/essays/after-the-cup-falls/"
     alt: "An anonymous person stands at an open kitchen cupboard, lifting an intact ceramic mug with both hands as clear morning light fills the room."
+    width: 1672
+    height: 941
+  - slug: where-the-light-finds-me
+    title: "Where the Light Finds Me"
+    date: "2026-08-19"
+    publishDate: "2026-08-19T17:57:24-04:00"
+    image: "editorial/where-the-light-finds-me"
+    essay: "/essays/i-stand/"
+    alt: "An anonymous man seen from behind stands with both feet planted on a rough concrete riverfront as wind lifts his jacket and sunrise spills across the dark water from the opposite bank."
     width: 1672
     height: 941
