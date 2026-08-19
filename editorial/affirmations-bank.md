@@ -147,3 +147,6 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I don't try to control things. I only control myself!
 - Thinking of an excuse? Wipe it out.
 - Turn off the impression.
+- God ~ the universe, infinite intelligence ~ is not ignoring my prayers, he is testing my faith.
+- I am the one who believes when all others doubt. I command my mind. I am being prepared. I believe, and I will receive.
+- I am calm. I am still. I do not shake, I stand.
