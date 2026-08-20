@@ -150,3 +150,6 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - God ~ the universe, infinite intelligence ~ is not ignoring my prayers, he is testing my faith.
 - I am the one who believes when all others doubt. I command my mind. I am being prepared. I believe, and I will receive.
 - I am calm. I am still. I do not shake, I stand.
+- I welcome the heat because I am what remains after the fire.
+- I turn bad into good. I turn failure into opportunity.
+- I have more faith in my vision than in my current circumstances.
