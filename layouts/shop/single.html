@@ -3,32 +3,42 @@
   {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) }}
   {{ $cover := index $product "cover_image" | default .Params.image }}
   {{ $coverAlt := index $product "cover_alt" | default .Title }}
-  {{ $productSlug := index $product "suggested_slug" | default $productKey }}
-  {{ $productTitle := index $product "title" | default .Title }}
 
   <article class="page-shell page-shell--wide bookstore-product" aria-labelledby="page-title">
-    <header class="bookstore-product__header">
-      <p class="bookstore-record__meta">
-        {{ with index $product "type_label" }}<span>{{ . }}</span>{{ end }}
-        {{ with index $product "author" }}<span>{{ . }}</span>{{ end }}
-      </p>
-      <h1 id="page-title" class="shop-title">{{ .Title }}</h1>
-      {{ with index $product "subtitle" }}<p class="bookstore-product__subtitle">{{ . }}</p>{{ end }}
-    </header>
-
     <div class="bookstore-product__layout">
       <figure class="bookstore-product__cover">
         <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" width="1600" height="2560" loading="eager">
       </figure>
 
       <div class="bookstore-product__content">
+        <header class="bookstore-product__header">
+          <h1 id="page-title" class="shop-title">{{ .Title }}</h1>
+          <p class="bookstore-record__meta">
+            {{ with index $product "author" }}<span>{{ . }}</span>{{ end }}
+            {{ with index $product "publisher" }}<span>{{ . }}</span>{{ end }}
+          </p>
+          {{ with index $product "subtitle" }}<p class="bookstore-product__subtitle">{{ . }}</p>{{ end }}
+        </header>
+
+        {{ partial "shop/direct-offers.html" (dict
+          "product" $product
+          "sourceSlot" "bookstore_detail_direct"
+        ) }}
+
+        <div class="bookstore-product__kindle">
+          {{ partial "shop/kindle-button.html" (dict
+            "product" $product
+            "sourceSlot" "bookstore_detail_kindle"
+          ) }}
+        </div>
+
         <div class="bookstore-product__copy">
           {{ .Content }}
         </div>
 
         {{ with index $product "formats" }}
           <section class="bookstore-format-ledger" aria-labelledby="bookstore-format-title">
-            <h2 id="bookstore-format-title">{{ index $product "formats_heading" | default "Direct bundle formats" }}</h2>
+            <h2 id="bookstore-format-title">{{ index $product "formats_heading" | default "Direct formats" }}</h2>
             <ul class="bookstore-formats">
               {{ range . }}<li>{{ . }}</li>{{ end }}
             </ul>
@@ -46,51 +56,8 @@
         ) }}
       </div>
 
-      <aside class="bookstore-panel" aria-label="Book purchase details">
-        <section class="bookstore-panel__section">
-          {{ with index $product "price_display" }}<p class="shop-price">{{ . }}</p>{{ end }}
-          {{ with index $product "product_type" }}<p class="bookstore-panel__type">{{ . }}</p>{{ end }}
-          {{ with index $product "direct_note" }}<p class="shop-panel__lede">{{ . }}</p>{{ end }}
-        </section>
-
-        <section class="bookstore-panel__section" aria-labelledby="shop-checkout-title">
-          <h2 id="shop-checkout-title" class="list-title">{{ index $product "checkout_heading" | default "Direct checkout" }}</h2>
-          {{ partial "shop/checkout-actions.html" (dict "product" $product "sourceSlot" "bookstore_detail_buy") }}
-          {{ with index $product "checkout_note" }}<p class="shop-note">{{ . }}</p>{{ end }}
-          {{ with index $product "delivery_note" }}<p class="shop-note">{{ . }}</p>{{ end }}
-        </section>
-
-        <section class="bookstore-panel__section" aria-labelledby="shop-channel-title">
-          <h2 id="shop-channel-title" class="list-title">Channels</h2>
-          <dl class="bookstore-record__ledger bookstore-record__ledger--panel">
-            {{ with index $product "kindle_note" }}
-              <div>
-                <dt>Kindle</dt>
-                <dd>
-                  {{ . }}
-                  {{ with index $product "kindle_url" }}
-                    <a
-                      class="bookstore-ledger-link"
-                      href="{{ . }}"
-                      data-analytics-source-slot="bookstore_detail_kindle"
-                      data-analytics-slug="{{ $productSlug }}"
-                      data-analytics-title="{{ $productTitle }}"
-                      data-analytics-section="Bookstore"
-                      data-analytics-path="{{ . }}"
-                    >{{ index $product "kindle_label" | default "View Kindle edition" }}</a>
-                  {{ end }}
-                </dd>
-              </div>
-            {{ end }}
-            {{ with index $product "print_note" }}
-              <div>
-                <dt>Print</dt>
-                <dd>{{ . }}</dd>
-              </div>
-            {{ end }}
-          </dl>
-        </section>
-      </aside>
     </div>
   </article>
+  {{- $epubCheckoutScript := resources.Get "js/epub-checkout.js" | resources.Minify | resources.Fingerprint -}}
+  <script defer src="{{ $epubCheckoutScript.RelPermalink }}" integrity="{{ $epubCheckoutScript.Data.Integrity }}"></script>
 {{ end }}

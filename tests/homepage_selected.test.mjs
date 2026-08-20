@@ -375,7 +375,8 @@ test("homepage bookstore spotlight stays weighted, data-driven, and internal-fir
   assert.match(spotlight, /index \$product "price_display"/);
   assert.match(spotlight, /data-home-bookstore-card/);
   assert.match(spotlight, /data-analytics-source-slot="homepage_bookstore_promo"/);
-  assert.doesNotMatch(spotlight, /https:\/\/www\.amazon\.com|purchase_url|checkout-actions|carousel|autoplay/);
+  assert.match(spotlight, /Three Outside In Print EPUB editions at \$9\.99 each, prepared for secure digital delivery\./);
+  assert.doesNotMatch(spotlight, /amazon|kindle|purchase_url|kindle_url|kindle-button|checkout-actions|carousel|autoplay/i);
 });
 
 test("homepage lead control ignores expiring essay feature front matter", () => {

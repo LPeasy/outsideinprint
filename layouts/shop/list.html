@@ -14,8 +14,6 @@
           {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" $book) }}
           {{ $cover := index $product "cover_image" | default $book.Params.image }}
           {{ $coverAlt := index $product "cover_alt" | default $book.Title }}
-          {{ $productSlug := index $product "suggested_slug" | default $productKey }}
-          {{ $productTitle := index $product "title" | default $book.Title }}
           {{ $recordID := printf "bookstore-record-%d" $index }}
 
           <article class="bookstore-record" aria-labelledby="{{ $recordID }}">
@@ -24,57 +22,29 @@
             </a>
 
             <div class="bookstore-record__body">
+              <h2 id="{{ $recordID }}" class="bookstore-record__title"><a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a></h2>
               <p class="bookstore-record__meta">
-                {{ with index $product "type_label" }}<span>{{ . }}</span>{{ end }}
                 {{ with index $product "author" }}<span>{{ . }}</span>{{ end }}
+                {{ with index $product "publisher" }}<span>{{ . }}</span>{{ end }}
               </p>
 
-              <h2 id="{{ $recordID }}" class="bookstore-record__title"><a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a></h2>
               {{ with index $product "subtitle" }}<p class="bookstore-record__subtitle">{{ . }}</p>{{ end }}
               {{ with index $product "deck" }}<p class="bookstore-record__deck">{{ . }}</p>{{ end }}
 
-              <dl class="bookstore-record__ledger">
-                {{ with index $product "price_display" }}
-                  <div>
-                    <dt>{{ index $product "price_label" | default "Direct price" }}</dt>
-                    <dd>{{ . }}</dd>
-                  </div>
-                {{ end }}
-                {{ with index $product "availability_note" }}
-                  <div>
-                    <dt>Status</dt>
-                    <dd>{{ . }}</dd>
-                  </div>
-                {{ end }}
-                {{ with index $product "kindle_note" }}
-                  <div>
-                    <dt>Kindle</dt>
-                    <dd>
-                      {{ . }}
-                      {{ with index $product "kindle_url" }}
-                        <a
-                          class="bookstore-ledger-link"
-                          href="{{ . }}"
-                          data-analytics-source-slot="bookstore_index_kindle"
-                          data-analytics-slug="{{ $productSlug }}"
-                          data-analytics-title="{{ $productTitle }}"
-                          data-analytics-section="Bookstore"
-                          data-analytics-path="{{ . }}"
-                        >{{ index $product "kindle_label" | default "View Kindle edition" }}</a>
-                      {{ end }}
-                    </dd>
-                  </div>
-                {{ end }}
-                {{ with index $product "print_note" }}
-                  <div>
-                    <dt>Print</dt>
-                    <dd>{{ . }}</dd>
-                  </div>
-                {{ end }}
-              </dl>
+              {{ partial "shop/direct-offers.html" (dict
+                "product" $product
+                "sourceSlot" "bookstore_index_direct"
+                "compact" true
+              ) }}
+
+              <div class="bookstore-record__kindle">
+                {{ partial "shop/kindle-button.html" (dict
+                  "product" $product
+                  "sourceSlot" "bookstore_index_kindle"
+                ) }}
+              </div>
 
               <div class="bookstore-record__actions">
-                {{ partial "shop/checkout-actions.html" (dict "product" $product "sourceSlot" "bookstore_index_buy") }}
                 <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}">View book details</a>
               </div>
             </div>
@@ -88,4 +58,6 @@
       </div>
     {{ end }}
   </section>
+  {{- $epubCheckoutScript := resources.Get "js/epub-checkout.js" | resources.Minify | resources.Fingerprint -}}
+  <script defer src="{{ $epubCheckoutScript.RelPermalink }}" integrity="{{ $epubCheckoutScript.Data.Integrity }}"></script>
 {{ end }}

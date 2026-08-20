@@ -66,7 +66,7 @@
   }
 
   function buildEventPath(eventName, props) {
-    var keys = ["path", "slug", "section", "source_slot", "collection"];
+    var keys = ["path", "slug", "section", "source_slot", "collection", "product", "format"];
     var parts = ["oip:" + eventName];
 
     keys.forEach(function (key) {
@@ -85,7 +85,7 @@
       return window.oipAnalyticsEventReferrer() || "";
     }
 
-    return document.referrer || "";
+    return "";
   }
 
   function buildEventPayload(eventName, props) {
@@ -140,6 +140,8 @@
       section: node.dataset.analyticsSection,
       source_slot: node.dataset.analyticsSourceSlot,
       collection: node.dataset.analyticsCollection,
+      product: node.dataset.analyticsProduct,
+      format: node.dataset.analyticsFormat,
       path: node.dataset.analyticsPath
     });
   }
@@ -257,11 +259,18 @@
     function (event) {
       var form = event.target;
 
-      if (!form || !form.matches("[data-analytics-event='newsletter_submit']")) {
+      var eventName;
+
+      if (!form || !form.matches("[data-analytics-event]")) {
         return;
       }
 
-      track("newsletter_submit", mergeProps(datasetProps(form), currentPageProps()));
+      eventName = form.dataset.analyticsEvent;
+      if (!eventName) {
+        return;
+      }
+
+      track(eventName, mergeProps(datasetProps(form), currentPageProps()));
     },
     true
   );
@@ -279,19 +288,18 @@
       }
 
       url = parseUrl(anchor.getAttribute("href"));
+      eventName = anchor.dataset.analyticsEvent;
+
+      if (eventName) {
+        props = mergeProps(datasetProps(anchor), currentPageProps());
+        track(eventName, props);
+        return;
+      }
 
       if (isExternalLink(url)) {
         track("external_link_click", mergeProps(datasetProps(anchor), currentPageProps()));
         return;
       }
-
-      eventName = anchor.dataset.analyticsEvent;
-      if (!eventName) {
-        return;
-      }
-
-      props = mergeProps(datasetProps(anchor), currentPageProps());
-      track(eventName, props);
     },
     true
   );

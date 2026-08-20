@@ -53,8 +53,8 @@ Bookstore discovery and Amazon exits use these source slots:
 - `primary_nav_bookstore`
 - `homepage_bookstore_promo`
 - `footer_bookstore`
-- `bookstore_index_buy`
-- `bookstore_detail_buy`
+- `bookstore_index_direct`
+- `bookstore_detail_direct`
 - `bookstore_index_kindle`
 - `bookstore_detail_kindle`
 

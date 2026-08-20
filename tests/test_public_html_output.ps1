@@ -641,6 +641,13 @@ $requiredSemanticPages = [ordered]@{
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/shop/the-parable-of-the-sheep/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/shop/the-water-cycle/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
+  'public/support/index.html' = @{ ExpectedH1Class = 'support-page__title'; RequireSecondaryHeading = $true }
+  'public/support/cancellation-refunds/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $true }
+  'public/support/thanks/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $false }
+  'public/privacy/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $true }
+  'public/terms/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $true }
+  'public/epub-license-refunds/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $true }
+  'public/contact/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $true }
   'public/apps/index.html' = @{ ExpectedH1Class = 'apps-index__title'; RequireSecondaryHeading = $true }
   'public/apps/bucks-machine/index.html' = @{ ExpectedH1Class = 'apps-product__title'; RequireSecondaryHeading = $true }
   'public/apps/baseball-upside-risk/index.html' = @{ ExpectedH1Class = 'apps-product__title'; RequireSecondaryHeading = $true }
@@ -2352,13 +2359,19 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Three Kindle editions, available now on Amazon\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Kindle eBook.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Kindle eBook.*?\$4\.99.*?the-water-cycle-cover-v2\.0\.jpg.*?Outside In Print.*?The Water Cycle.*?Kindle eBook.*?\$9\.99.*?</section>'
-    Message = 'expected the homepage bookstore shelf to render all three weighted Kindle records with official covers, attribution, prices, and CTA'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Three Outside In Print EPUB editions at \$9\.99 each, prepared for secure digital delivery\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Outside In Print EPUB.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Outside In Print EPUB.*?\$9\.99.*?the-water-cycle-cover-v2\.0\.jpg.*?Robert V\. Ussley.*?The Water Cycle.*?Outside In Print EPUB.*?\$9\.99.*?</section>'
+    Message = 'expected the homepage bookstore shelf to present three $9.99 Outside In Print EPUB records with the canonical author and publisher data'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?is)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?(?:https://www\.amazon\.com|Buy on Amazon Kindle|\bshop-cta\b|carousel|autoplay|direct bundle|stripe).*?</section>'
+    Pattern = '(?is)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?(?:\bshop-cta\b|carousel|autoplay|direct bundle|stripe).*?</section>'
     Message = 'expected the homepage bookstore shelf to remain internal-first and free of direct-buy, carousel, and stale checkout presentation'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?i)(?:https?://(?:www\.)?amazon\.com/|Kindle on Amazon|View on Amazon Kindle|\bdata-bookstore-kindle-button\b|\bbookstore-kindle-button\b)'
+    Message = 'expected the homepage to contain no Amazon URL or Kindle purchase CTA'
     ShouldNotMatch = $true
   },
   @{
@@ -3040,13 +3053,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)data-analytics-source-slot=(?:"bookstore_index_kindle"|bookstore_index_kindle).*?data-analytics-slug=(?:"the-american-nightmare-keep-dreaming-kid"|the-american-nightmare-keep-dreaming-kid).*?data-analytics-path=(?:"https://www\.amazon\.com/dp/B0H37W2JK8"|https://www\.amazon\.com/dp/B0H37W2JK8).*?data-analytics-source-slot=(?:"bookstore_index_buy"|bookstore_index_buy)'
-    Message = 'expected bookstore index Amazon exits to carry per-book Kindle and buy source metadata'
+    Pattern = '(?s)data-bookstore-kindle-button.*?data-analytics-source-slot=(?:"bookstore_index_kindle"|bookstore_index_kindle).*?data-analytics-slug=(?:"the-american-nightmare-keep-dreaming-kid"|the-american-nightmare-keep-dreaming-kid).*?data-analytics-path=(?:"https://www\.amazon\.com/dp/B0H37W2JK8"|https://www\.amazon\.com/dp/B0H37W2JK8)'
+    Message = 'expected the compact Kindle button on the bookstore index to carry per-book analytics metadata'
   },
   @{
     Path = 'public/shop/the-water-cycle/index.html'
-    Pattern = '(?s)data-analytics-source-slot=(?:"bookstore_detail_buy"|bookstore_detail_buy).*?data-analytics-slug=(?:"the-water-cycle"|the-water-cycle).*?data-analytics-path=(?:"https://www\.amazon\.com/dp/B0H46WMGJQ"|https://www\.amazon\.com/dp/B0H46WMGJQ).*?data-analytics-source-slot=(?:"bookstore_detail_kindle"|bookstore_detail_kindle)'
-    Message = 'expected bookstore detail Amazon exits to carry per-book buy and Kindle source metadata'
+    Pattern = '(?s)data-bookstore-kindle-button.*?data-analytics-source-slot=(?:"bookstore_detail_kindle"|bookstore_detail_kindle).*?data-analytics-slug=(?:"the-water-cycle"|the-water-cycle).*?data-analytics-path=(?:"https://www\.amazon\.com/dp/B0H46WMGJQ"|https://www\.amazon\.com/dp/B0H46WMGJQ)'
+    Message = 'expected the compact Kindle button on bookstore detail pages to carry per-book analytics metadata'
   },
   @{
     Path = 'public/index.html'
@@ -3055,18 +3068,18 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?Kindle price.*?\$9\.99.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?Buy on Amazon Kindle.*?The Parable of the Sheep.*?Kindle price.*?\$4\.99.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?Buy on Amazon Kindle.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Kindle price.*?\$9\.99.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?Buy on Amazon Kindle'
-    Message = 'expected the bookstore index to expose all three Kindle records, prices, Amazon URLs, and live buy actions'
+    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$4\.99.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Message = 'expected the bookstore index to render each $9.99 direct EPUB offer before its single compact Kindle button'
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?Kindle edition is available now through Amazon for \$9\.99 USD\..*?https://www\.amazon\.com/dp/B0H37W2JK8.*?The paperback edition is not yet available\.'
-    Message = 'expected the bookstore index to expose The American Nightmare route, price, Amazon Kindle channel, and paperback status'
+    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Message = 'expected the bookstore index to expose The American Nightmare direct EPUB before its compact Kindle button'
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Kindle edition is available now through Amazon for \$4\.99 USD\..*?https://www\.amazon\.com/dp/B0GN18LLWB.*?The paperback edition is not yet available\.'
-    Message = 'expected the bookstore index to expose The Parable of the Sheep route, price, Amazon Kindle channel, and paperback status'
+    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$4\.99'
+    Message = 'expected the bookstore index to expose Parable at $9.99 direct before its compact $4.99 Kindle button'
   },
   @{
     Path = 'public/shop/index.html'
@@ -3092,46 +3105,46 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?i)(direct digital|direct bundle|secure checkout|direct delivery|stripe|checkout coming soon|buy the OIP direct)'
-    Message = 'expected the bookstore index to contain no stale direct-bundle or Stripe-delivery presentation'
+    Pattern = '(?i)(direct bundle|stripe|paperback|USPS|shipping address|physical checkout)'
+    Message = 'expected the bookstore index to contain no physical-commerce or stale Stripe presentation'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
-    Pattern = '(?s)Book.*?Robert V\. Ussley.*?The American Nightmare: Keep Dreaming, Kid.*?Available format.*?Kindle eBook.*?\$9\.99.*?Buy the Kindle edition.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?Buy on Amazon Kindle.*?Amazon handles purchase and Kindle delivery\..*?Kindle edition is available now through Amazon for \$9\.99 USD\..*?The paperback edition is not yet available\.'
-    Message = 'expected The American Nightmare product page to expose full attribution, Kindle price, Amazon purchase action, and edition status'
+    Pattern = '(?s)Book.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Message = 'expected The American Nightmare page to place its $9.99 direct EPUB offer before one compact Kindle button'
   },
   @{
     Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
-    Pattern = '(?i)(direct_download|\.zip|direct digital|direct bundle|secure checkout|direct delivery|stripe|print-on-demand|\bPOD\b|paperback purchase|buy paperback|coming soon)'
-    Message = 'expected The American Nightmare product page not to expose stale direct-download, Stripe, or paperback purchase paths'
+    Pattern = '(?i)(direct_download|\.zip|direct bundle|stripe|print-on-demand|\bPOD\b|paperback|USPS|shipping address)'
+    Message = 'expected The American Nightmare product page not to expose stale or physical purchase paths'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/shop/the-parable-of-the-sheep/index.html'
-    Pattern = '(?s)Book.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Available format.*?Kindle eBook.*?\$4\.99.*?Buy the Kindle edition.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?Buy on Amazon Kindle.*?Amazon handles purchase and Kindle delivery\..*?Kindle edition is available now through Amazon for \$4\.99 USD\..*?The paperback edition is not yet available\.'
-    Message = 'expected The Parable of the Sheep product page to expose full attribution, Kindle price, Amazon purchase action, and edition status'
+    Pattern = '(?s)Book.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$4\.99'
+    Message = 'expected Parable page to place the $9.99 direct EPUB offer before one compact $4.99 Kindle button'
   },
   @{
     Path = 'public/shop/the-parable-of-the-sheep/index.html'
-    Pattern = '(?i)(direct_download|\.zip|direct digital|direct bundle|secure checkout|direct delivery|stripe|print-on-demand|\bPOD\b|paperback purchase|buy paperback|coming soon)'
-    Message = 'expected The Parable of the Sheep product page not to expose stale direct-download, Stripe, or paperback purchase paths'
+    Pattern = '(?i)(direct_download|\.zip|direct bundle|stripe|print-on-demand|\bPOD\b|paperback|USPS|shipping address)'
+    Message = 'expected The Parable of the Sheep product page not to expose stale or physical purchase paths'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-water-cycle/.*?Kindle edition is available now through Amazon for \$9\.99 USD\..*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?The paperback edition is not yet available\.'
-    Message = 'expected the bookstore index to expose The Water Cycle route, price, Amazon Kindle channel, and paperback status'
+    Pattern = '(?s)/shop/the-water-cycle/.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Message = 'expected the bookstore index to expose The Water Cycle direct EPUB before its compact Kindle button'
   },
   @{
     Path = 'public/shop/the-water-cycle/index.html'
-    Pattern = '(?s)\$9\.99.*?Kindle eBook.*?Buy the Kindle edition.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?Buy on Amazon Kindle.*?Amazon handles purchase and Kindle delivery\..*?Kindle edition is available now through Amazon for \$9\.99 USD\..*?The paperback edition is not yet available\.'
-    Message = 'expected The Water Cycle product page to expose the Kindle price, Amazon link, and edition status'
+    Pattern = '(?s)Book.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?\$9\.99.*?EPUB coming soon.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Message = 'expected The Water Cycle page to place its $9.99 direct EPUB offer before one compact Kindle button with canonical author and publisher data'
   },
   @{
     Path = 'public/shop/the-water-cycle/index.html'
-    Pattern = '(?i)(direct_download|\.zip|direct digital|direct bundle|secure checkout|direct delivery|stripe|print-on-demand|\bPOD\b|paperback purchase|buy paperback|coming soon)'
-    Message = 'expected The Water Cycle product page not to expose stale direct-download, Stripe, or paperback purchase paths'
+    Pattern = '(?i)(direct_download|\.zip|direct bundle|stripe|print-on-demand|\bPOD\b|paperback|USPS|shipping address)'
+    Message = 'expected The Water Cycle product page not to expose stale or physical purchase paths'
     ShouldNotMatch = $true
   },
   @{
@@ -4020,7 +4033,8 @@ foreach ($check in $requiredUxChecks) {
 }
 
 foreach ($forbiddenPath in @(
-  'public/almanack/index.html'
+  'public/almanack/index.html',
+  'public/shipping-returns/index.html'
 )) {
   $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
   if (Test-Path -LiteralPath $fullForbiddenPath -PathType Leaf) {
@@ -4138,8 +4152,8 @@ $bookstoreProducts = @(
 )
 
 foreach ($surface in @(
-  @{ Path = 'public/shop/index.html'; ExpectedCount = 6; Slots = @('bookstore_index_buy', 'bookstore_index_kindle') },
-  @{ Path = $null; ExpectedCount = 2; Slots = @('bookstore_detail_buy', 'bookstore_detail_kindle') }
+  @{ Path = 'public/shop/index.html'; ExpectedCount = 3; Slots = @('bookstore_index_kindle') },
+  @{ Path = $null; ExpectedCount = 1; Slots = @('bookstore_detail_kindle') }
 )) {
   $surfacePaths = if ($surface.Path) { @($surface.Path) } else { @($bookstoreProducts | ForEach-Object { $_.DetailPath }) }
 
@@ -4168,8 +4182,8 @@ foreach ($surface in @(
       $productAnchors = @($amazonAnchors | Where-Object {
         (Get-AttributeValue -Tag $_ -Name 'href') -ceq $product.PurchaseUrl
       })
-      if ($productAnchors.Count -ne 2) {
-        $uxIssues.Add("$surfacePath => expected exactly 2 Amazon exits for '$($product.Title)', found $($productAnchors.Count)")
+      if ($productAnchors.Count -ne 1) {
+        $uxIssues.Add("$surfacePath => expected exactly 1 secondary Kindle exit for '$($product.Title)', found $($productAnchors.Count)")
         continue
       }
 

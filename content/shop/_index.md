@@ -6,6 +6,6 @@ draft: false
 show_citation: false
 ---
 
-Outside In Print books are available in Kindle editions with clear pricing, purchase links, and publication status.
+Outside In Print is preparing direct EPUB editions for secure digital delivery. Each title lists its direct price and release status here.
 
-The bookstore lists the current OIP catalog and links each live edition on Amazon.
+[Reader support](/support/) uses a separate checkout.

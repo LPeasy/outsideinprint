@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <article class="commerce-policy page-shell" aria-labelledby="commerce-policy-title">
+    <header class="commerce-policy__header">
+      <p class="commerce-policy__eyebrow">Outside In Print policies</p>
+      <h1 id="commerce-policy-title" class="commerce-policy__title">{{ .Title }}</h1>
+      {{ with .Params.effective_date }}<p class="commerce-policy__effective">Effective {{ . }}</p>{{ end }}
+      {{ with .Params.description }}<p class="commerce-policy__description">{{ . }}</p>{{ end }}
+    </header>
+
+    <div class="commerce-policy__body">
+      {{ .Content }}
+    </div>
+
+    <nav class="commerce-policy__nav" aria-label="Commerce policies">
+      <a href="{{ "shop/" | relURL }}">Bookstore</a>
+      <a href="{{ "support/" | relURL }}">Support</a>
+      <a href="{{ "epub-license-refunds/" | relURL }}">EPUB license &amp; refunds</a>
+      <a href="{{ "support/cancellation-refunds/" | relURL }}">Support terms</a>
+      <a href="{{ "privacy/" | relURL }}">Privacy</a>
+      <a href="{{ "terms/" | relURL }}">Terms of sale</a>
+      <a href="{{ "contact/" | relURL }}">Contact</a>
+    </nav>
+  </article>
+{{ end }}

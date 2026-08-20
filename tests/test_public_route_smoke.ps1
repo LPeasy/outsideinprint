@@ -100,17 +100,25 @@ foreach ($requiredPath in @(
   'collections/what-you-tell-yourself/index.html',
   'essays/i-do-what-i-say/index.html',
   'gallery/index.html',
+  'contact/index.html',
+  'epub-license-refunds/index.html',
+  'privacy/index.html',
   'random/index.html',
   'shop/index.html',
   'shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'shop/the-parable-of-the-sheep/index.html',
-  'shop/the-water-cycle/index.html'
+  'shop/the-water-cycle/index.html',
+  'support/index.html',
+  'support/cancellation-refunds/index.html',
+  'support/thanks/index.html',
+  'terms/index.html'
 )) {
   $null = Get-RequiredPageHtml -RelativePath $requiredPath
 }
 
 foreach ($forbiddenPath in @(
   'almanack/index.html',
+  'shipping-returns/index.html',
   'shop/long-shots-in-the-big-league/index.html'
 )) {
   $fullPath = Join-Path $SiteDir $forbiddenPath
@@ -239,6 +247,8 @@ $authorDirectoryRobots = Get-MetaContent -Html $authorDirectoryHtml -AttributeNa
 if ($authorDirectoryRobots -ne 'noindex, follow') {
   throw "Expected authors directory robots meta to be 'noindex, follow', found '$authorDirectoryRobots'."
 }
+
+& (Join-Path $PSScriptRoot 'test_direct_commerce_storefront_contract.ps1') -SiteDir $SiteDir
 
 Write-Host 'Public route smoke test passed.'
 $global:LASTEXITCODE = 0

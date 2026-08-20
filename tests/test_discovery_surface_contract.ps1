@@ -292,7 +292,7 @@ foreach ($requiredSnippet in @(
   'if gt (len $books) 0',
   'partial "shop/product-data.html"',
   'Books from Outside In Print',
-  'Three Kindle editions, available now on Amazon.',
+  'Three Outside In Print EPUB editions at $9.99 each, prepared for secure digital delivery.',
   'Browse the bookstore',
   'data-home-bookstore-card',
   'data-analytics-source-slot="homepage_bookstore_promo"'
@@ -304,6 +304,8 @@ foreach ($requiredSnippet in @(
 
 foreach ($forbiddenSnippet in @(
   'https://www.amazon.com',
+  'Amazon',
+  'Kindle',
   'purchase_url',
   'checkout-actions',
   'carousel',
@@ -331,28 +333,33 @@ if ($significantLinksTemplate -notmatch [regex]::Escape('"/shop"')) {
   throw 'Expected homepage significant links to include /shop.'
 }
 
-$checkoutActionsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/shop/checkout-actions.html') -Raw
+$checkoutActionsPath = Join-Path $repoRoot 'layouts/partials/shop/checkout-actions.html'
+if (Test-Path -LiteralPath $checkoutActionsPath) {
+  throw 'Expected the unused legacy checkout-actions partial to be removed.'
+}
+
+$kindleButtonTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/shop/kindle-button.html') -Raw
 foreach ($requiredSnippet in @(
-  '.sourceSlot | default ""',
-  'index $product "purchase_url" | default (index $product "stripe_payment_link" | default "")',
-  '{{ with $sourceSlot }}data-analytics-source-slot="{{ . }}"{{ end }}',
-  'data-analytics-path="{{ $singleLink }}"'
+  '.sourceSlot | default "bookstore_kindle"',
+  'index $product "kindle_url"',
+  'index $product "kindle_label"',
+  'class="bookstore-kindle-button"',
+  'data-bookstore-kindle-button',
+  'data-analytics-source-slot="{{ $sourceSlot }}"',
+  'data-analytics-path="{{ . }}"'
 )) {
-  if ($checkoutActionsTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/shop/checkout-actions.html to preserve checkout compatibility and analytics: $requiredSnippet"
+  if ($kindleButtonTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/shop/kindle-button.html to preserve compact Kindle analytics: $requiredSnippet"
   }
 }
 
 $shopListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/shop/list.html') -Raw
 $shopSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/shop/single.html') -Raw
-if ($checkoutActionsTemplate -match 'data-analytics-event') {
-  throw 'Expected checkout Amazon exits to rely on automatic external_link_click tracking without data-analytics-event.'
+if ($kindleButtonTemplate -match 'data-analytics-event') {
+  throw 'Expected Kindle Amazon exits to rely on automatic external_link_click tracking without data-analytics-event.'
 }
 
-foreach ($requiredSlot in @(
-  'bookstore_index_buy',
-  'bookstore_index_kindle'
-)) {
+foreach ($requiredSlot in @('bookstore_index_direct', 'bookstore_index_kindle')) {
   if ($shopListTemplate -notmatch [regex]::Escape($requiredSlot)) {
     throw "Expected layouts/shop/list.html to include analytics source slot: $requiredSlot"
   }
@@ -368,10 +375,7 @@ foreach ($requiredSnippet in @(
   }
 }
 
-foreach ($requiredSlot in @(
-  'bookstore_detail_buy',
-  'bookstore_detail_kindle'
-)) {
+foreach ($requiredSlot in @('bookstore_detail_direct', 'bookstore_detail_kindle')) {
   if ($shopSingleTemplate -notmatch [regex]::Escape($requiredSlot)) {
     throw "Expected layouts/shop/single.html to include analytics source slot: $requiredSlot"
   }
@@ -922,6 +926,8 @@ $webpageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema
 if ($webpageHelper -notmatch 'significantLink') {
   throw 'Expected schema/webpage.html to emit significantLink for discovery surfaces.'
 }
+
+& (Join-Path $PSScriptRoot 'test_direct_commerce_storefront_contract.ps1') -SourceOnly
 
 Write-Host 'Discovery surface contract test passed.'
 $global:LASTEXITCODE = 0

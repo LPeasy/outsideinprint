@@ -13,8 +13,4 @@ weight: 20
 
 *The Parable of the Sheep* is a compact allegorical fiction about comfort, forgetting, and the old dangers that return when a flock mistakes habit for safety.
 
-## Channels and limits
-
-The Kindle edition is available through Amazon for $4.99 USD.
-
-The paperback edition is not yet available. A direct OIP edition is not available through the bookstore yet.
+Purchase options, prices, and release status are listed from the bookstore catalog on this page.
