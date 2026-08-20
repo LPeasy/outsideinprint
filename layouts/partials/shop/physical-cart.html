@@ -1,0 +1,66 @@
+{{- $offers := .offers | default (slice) -}}
+{{- $endpoint := .endpoint | default "" -}}
+{{- if and (gt (len $offers) 0) (eq $endpoint "https://downloads.outsideinprint.org/api/books/physical") -}}
+  <section class="bookstore-physical-cart" aria-labelledby="bookstore-physical-cart-title">
+    <header class="bookstore-physical-cart__header">
+      <p class="bookstore-physical-cart__eyebrow">Direct paperbacks</p>
+      <h2 id="bookstore-physical-cart-title">Build a paperback order</h2>
+      <p>Select up to six books total. Paperbacks ship to U.S. addresses by USPS Media Mail. Sales tax is calculated at checkout where applicable.</p>
+    </header>
+
+    <form
+      class="bookstore-physical-checkout bookstore-physical-cart__form"
+      action="{{ $endpoint }}"
+      method="post"
+      data-physical-checkout
+      data-physical-cart-checkout
+      data-analytics-event="checkout_start"
+      data-analytics-source-slot="bookstore_index_physical_cart"
+      data-analytics-format="Paperback"
+      data-analytics-section="Bookstore"
+      data-analytics-path="/api/books/physical"
+    >
+      <fieldset class="bookstore-physical-cart__items">
+        <legend>Paperback quantities</legend>
+        <div class="bookstore-physical-cart__item-list">
+          {{- range $offer := $offers -}}
+            {{- $sku := index $offer "sku" -}}
+            {{- $inputID := printf "physical-cart-%s" ($sku | urlize) -}}
+            <label class="bookstore-physical-cart__item" for="{{ $inputID }}">
+              <span>
+                <strong>{{ index $offer "title" }}</strong>
+                <small><code>{{ $sku }}</code>{{ with index $offer "price_display" }} · {{ . }}{{ end }}</small>
+              </span>
+              <input
+                id="{{ $inputID }}"
+                name="quantity-{{ $sku }}"
+                type="number"
+                min="0"
+                max="6"
+                step="1"
+                value="0"
+                inputmode="numeric"
+                aria-label="Quantity for {{ index $offer "title" }}"
+                data-physical-cart-item
+                data-physical-sku="{{ $sku }}"
+              >
+            </label>
+          {{- end -}}
+        </div>
+        <p class="bookstore-physical-cart__limit">Order minimum: one paperback. Order maximum: six paperbacks total.</p>
+      </fieldset>
+
+      <fieldset class="bookstore-physical-cart__address">
+        <legend>U.S. shipping address</legend>
+        <label>Street address <input name="address_line_1" autocomplete="shipping address-line1" maxlength="128" required></label>
+        <label>Apartment, suite, or unit <input name="address_line_2" autocomplete="shipping address-line2" maxlength="64"></label>
+        <label>City <input name="locality" autocomplete="shipping address-level2" maxlength="96" required></label>
+        <label>State <input name="administrative_district_level_1" autocomplete="shipping address-level1" minlength="2" maxlength="2" pattern="[A-Za-z]{2}" required></label>
+        <label>ZIP Code <input name="postal_code" autocomplete="shipping postal-code" maxlength="10" pattern="[0-9]{5}(-[0-9]{4})?" required></label>
+      </fieldset>
+
+      <button class="shop-cta bookstore-direct-offer__action" type="submit">Continue to secure checkout</button>
+      <p class="bookstore-physical-checkout__status" data-physical-checkout-status role="status" aria-live="polite"></p>
+    </form>
+  </section>
+{{- end -}}

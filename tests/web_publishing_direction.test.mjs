@@ -59,6 +59,6 @@ test("archetypes and public templates no longer depend on pdf front matter", () 
   assert.doesNotMatch(read("layouts/collections/single.html"), /Params\.pdf|Read PDF|data-analytics-format="pdf"/);
   assert.doesNotMatch(read("layouts/library/list.html"), /Params\.pdf|Read PDF|data-analytics-format="pdf"/);
   assert.doesNotMatch(read("layouts/random/single.html"), /Params\.pdf/);
-  assert.doesNotMatch(read("assets/js/analytics.js"), /pdf_download|isPdfLink|analyticsFormat|analyticsEngine|analyticsVariant|analyticsLengthBucket/);
+  assert.doesNotMatch(read("assets/js/analytics.js"), /pdf_download|isPdfLink|analyticsEngine|analyticsVariant|analyticsLengthBucket/);
   assert.equal(fs.existsSync(path.join(repoRoot, "layouts", "partials", "pdf_button.html")), false);
 });

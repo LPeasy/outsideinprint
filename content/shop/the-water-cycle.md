@@ -15,8 +15,4 @@ weight: 30
 
 The book follows a single civic problem across floodplains, drinking-water systems, desert infrastructure, and household expectations: engineering and finance can make water easier to use while making dependence easier to forget.
 
-## Channels and limits
-
-The Kindle edition is available through Amazon for $9.99 USD.
-
-The paperback edition is not yet available. A direct OIP edition is not available through the bookstore yet.
+Purchase options, prices, and release status are listed from the bookstore catalog on this page.

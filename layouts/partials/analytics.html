@@ -93,75 +93,18 @@
 
 {{ if $active }}
   <script>
-    window.oipAnalyticsCampaignReferrer = function () {
-      var params;
-      var source;
-      var medium;
-      var campaign;
-      var content;
-
-      try {
-        params = new URLSearchParams(window.location.search || "");
-      } catch (error) {
-        params = null;
-      }
-
-      if (params) {
-        source = params.get("utm_source") || params.get("ref") || params.get("src") || params.get("source") || "";
-        medium = params.get("utm_medium") || "";
-        campaign = params.get("utm_campaign") || "";
-        content = params.get("utm_content") || "";
-
-        if (source || medium || campaign || content) {
-          return [
-            "campaign:",
-            "source=", encodeURIComponent(source),
-            "|medium=", encodeURIComponent(medium),
-            "|campaign=", encodeURIComponent(campaign),
-            "|content=", encodeURIComponent(content)
-          ].join("");
-        }
-      }
-
-      return "";
-    };
-
     window.oipAnalyticsEventReferrer = function () {
-      var campaignReferrer;
-      var referrerUrl;
-
-      campaignReferrer = typeof window.oipAnalyticsCampaignReferrer === "function"
-        ? window.oipAnalyticsCampaignReferrer()
-        : "";
-
-      if (campaignReferrer) {
-        return campaignReferrer;
-      }
-
-      if (!document.referrer) {
-        return "";
-      }
-
-      try {
-        referrerUrl = new URL(document.referrer, window.location.href);
-        if (referrerUrl.origin === window.location.origin) {
-          return "internal:path=" + encodeURIComponent(referrerUrl.pathname || "/");
-        }
-      } catch (error) {
-        return document.referrer;
-      }
-
-      return document.referrer;
+      return "";
     };
 
     window.goatcounter = window.goatcounter || {};
     window.goatcounter.no_events = true;
     window.goatcounter.allow_local = {{ $allowLocal | jsonify }};
-    window.goatcounter.referrer = function (referrer) {
-      var campaignReferrer = typeof window.oipAnalyticsCampaignReferrer === "function"
-        ? window.oipAnalyticsCampaignReferrer()
-        : "";
-      return campaignReferrer || referrer;
+    window.goatcounter.path = function () {
+      return window.location.pathname || "/";
+    };
+    window.goatcounter.referrer = function () {
+      return "";
     };
   </script>
   <script

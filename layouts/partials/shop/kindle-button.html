@@ -1,0 +1,19 @@
+{{- $product := .product | default dict -}}
+{{- $sourceSlot := .sourceSlot | default "bookstore_kindle" -}}
+{{- $productSlug := index $product "suggested_slug" | default (index $product "key" | default "book") -}}
+{{- $productTitle := index $product "title" | default "Book" -}}
+{{- $kindleURL := index $product "kindle_url" | default "" -}}
+{{- $kindleLabel := index $product "kindle_label" | default "Kindle on Amazon" -}}
+
+{{- with $kindleURL -}}
+  <a
+    class="bookstore-kindle-button"
+    href="{{ . }}"
+    data-bookstore-kindle-button
+    data-analytics-source-slot="{{ $sourceSlot }}"
+    data-analytics-slug="{{ $productSlug }}"
+    data-analytics-title="{{ $productTitle }}"
+    data-analytics-section="Bookstore"
+    data-analytics-path="{{ . }}"
+  >{{ $kindleLabel }}</a>
+{{- end -}}

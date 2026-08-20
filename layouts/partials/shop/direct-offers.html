@@ -1,0 +1,110 @@
+{{- $product := .product | default dict -}}
+{{- $allOffers := index $product "direct_offers" | default (slice) -}}
+{{- $offers := where $allOffers "format" "EPUB" -}}
+{{- $sourceSlot := .sourceSlot | default "bookstore_direct_offer" -}}
+{{- $compact := .compact | default false -}}
+{{- $productSlug := index $product "suggested_slug" | default (index $product "key" | default "book") -}}
+{{- $productTitle := index $product "title" | default "Book" -}}
+{{- $offerHeading := index $product "direct_offers_heading" | default "Outside In Print EPUB" -}}
+{{- $offerHelper := index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. EPUB delivered by email.") -}}
+{{- $buyLabel := index $product "checkout_label" | default "Buy EPUB" -}}
+{{- $disabledLabel := index $product "checkout_unavailable_label" | default "EPUB coming soon" -}}
+{{- $allowedStatuses := slice "disabled" "live" -}}
+{{- $allowedCheckoutActions := slice "epub_checkout_api" "square_hosted_checkout" -}}
+{{- $requiredFields := slice "sku" "format" "availability_status" "availability_label" "isbn_status" "price_display" "currency" "permitted_geography" "tax_class" "fulfillment_type" "checkout_action" "checkout_url" "checkout_endpoint" "gate_note" -}}
+
+{{- if gt (len $offers) 0 -}}
+  {{- $headingID := printf "%s-title-%s" $sourceSlot $productSlug -}}
+  {{- $helperID := printf "%s-helper-%s" $sourceSlot $productSlug -}}
+  <section class="bookstore-direct-offers{{ if $compact }} bookstore-direct-offers--compact{{ end }}" aria-labelledby="{{ $headingID }}">
+    <header class="bookstore-direct-offers__header">
+      {{ if $compact }}
+        <h3 id="{{ $headingID }}">{{ $offerHeading }}</h3>
+      {{ else }}
+        <h2 id="{{ $headingID }}">{{ $offerHeading }}</h2>
+      {{ end }}
+      <p id="{{ $helperID }}">{{ $offerHelper }}</p>
+    </header>
+
+    <div class="bookstore-direct-offers__grid">
+      {{- range $index, $offer := $offers -}}
+        {{- range $requiredFields -}}
+          {{- if not (isset $offer .) -}}
+            {{- errorf "Bookstore direct offer %s[%d] is missing required field %s" $productSlug $index . -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- $status := index $offer "availability_status" -}}
+        {{- $checkoutAction := index $offer "checkout_action" -}}
+        {{- $checkoutURL := index $offer "checkout_url" | default "" -}}
+        {{- $checkoutEndpoint := index $offer "checkout_endpoint" | default "" -}}
+        {{- $isSquareCheckout := or (hasPrefix $checkoutURL "https://square.link/") (hasPrefix $checkoutURL "https://checkout.square.site/") -}}
+        {{- $isEpubApi := eq $checkoutAction "epub_checkout_api" -}}
+        {{- $isEpubEndpoint := eq $checkoutEndpoint "https://downloads.outsideinprint.org/api/books/epub" -}}
+        {{- if not (in $allowedStatuses $status) -}}
+          {{- errorf "Bookstore direct offer %s[%d] uses unsupported availability_status %q" $productSlug $index $status -}}
+        {{- end -}}
+        {{- if not (in $allowedCheckoutActions $checkoutAction) -}}
+          {{- errorf "Bookstore direct offer %s[%d] uses unsupported checkout_action %q" $productSlug $index $checkoutAction -}}
+        {{- end -}}
+        {{- if and (eq $status "live") $isEpubApi (or (ne (index $offer "format") "EPUB") (not $isEpubEndpoint) (ne $checkoutURL "")) -}}
+          {{- errorf "Bookstore direct offer %s[%d] cannot open EPUB checkout without the approved API endpoint and an empty checkout_url" $productSlug $index -}}
+        {{- end -}}
+        {{- if and (eq $status "live") (not $isEpubApi) (or (not $isSquareCheckout) (ne $checkoutEndpoint "")) -}}
+          {{- errorf "Bookstore direct offer %s[%d] cannot be live without a Square-owned HTTPS checkout_url and an empty checkout_endpoint" $productSlug $index -}}
+        {{- end -}}
+        {{- if and (eq $status "disabled") (or (ne $checkoutURL "") (ne $checkoutEndpoint "")) -}}
+          {{- errorf "Bookstore direct offer %s[%d] must not expose checkout_url or checkout_endpoint while disabled" $productSlug $index -}}
+        {{- end -}}
+
+        {{- $format := index $offer "format" -}}
+        {{- $sku := index $offer "sku" -}}
+        {{- $statusID := printf "%s-status-%s" $sourceSlot $productSlug -}}
+        <article class="bookstore-direct-offer" data-direct-offer data-direct-offer-sku="{{ $sku }}" data-direct-offer-status="{{ $status }}">
+          <p class="bookstore-direct-offer__price">{{ index $offer "price_display" }}</p>
+
+          {{- if eq $status "live" -}}
+            {{- if $isEpubApi -}}
+              <form
+                class="bookstore-epub-checkout"
+                action="{{ $checkoutEndpoint }}"
+                method="post"
+                data-epub-checkout
+                data-epub-sku="{{ $sku }}"
+                data-analytics-event="checkout_start"
+                data-analytics-source-slot="{{ $sourceSlot }}"
+                data-analytics-product="{{ $sku }}"
+                data-analytics-format="{{ $format }}"
+                data-analytics-slug="{{ $productSlug }}"
+                data-analytics-title="{{ $productTitle }}"
+                data-analytics-section="Bookstore"
+                data-analytics-path="/api/books/epub"
+              >
+                <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
+                <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>
+              </form>
+            {{- else -}}
+              <a
+                class="shop-cta bookstore-direct-offer__action"
+                href="{{ $checkoutURL }}"
+                aria-describedby="{{ $helperID }}"
+                data-analytics-event="checkout_start"
+                data-analytics-source-slot="{{ $sourceSlot }}"
+                data-analytics-product="{{ $sku }}"
+                data-analytics-format="{{ $format }}"
+                data-analytics-slug="{{ $productSlug }}"
+                data-analytics-title="{{ $productTitle }}"
+                data-analytics-section="Bookstore"
+                data-analytics-path="/shop/{{ $productSlug }}/{{ $format | urlize }}/checkout"
+              >{{ $buyLabel }}</a>
+            {{- end -}}
+          {{- else -}}
+            <span class="shop-cta shop-cta--disabled bookstore-direct-offer__action" aria-disabled="true" aria-describedby="{{ $helperID }}">{{ $disabledLabel }}</span>
+          {{- end -}}
+
+          <p class="bookstore-direct-offer__gate">{{ index $offer "gate_note" }}</p>
+        </article>
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}

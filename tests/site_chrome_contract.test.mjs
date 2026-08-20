@@ -36,9 +36,12 @@ const themeToggleScript = fs.readFileSync(path.resolve("layouts/partials/theme_t
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
 const homeFrontPageCopy = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
 const homeBookstore = fs.readFileSync(path.resolve("layouts/partials/home_bookstore_spotlight.html"), "utf8");
-const checkoutActions = fs.readFileSync(path.resolve("layouts/partials/shop/checkout-actions.html"), "utf8");
+const directOffers = fs.readFileSync(path.resolve("layouts/partials/shop/direct-offers.html"), "utf8");
+const kindleButton = fs.readFileSync(path.resolve("layouts/partials/shop/kindle-button.html"), "utf8");
 const shopList = fs.readFileSync(path.resolve("layouts/shop/list.html"), "utf8");
 const shopSingle = fs.readFileSync(path.resolve("layouts/shop/single.html"), "utf8");
+const epubCheckoutScript = fs.readFileSync(path.resolve("assets/js/epub-checkout.js"), "utf8");
+const bookstoreData = fs.readFileSync(path.resolve("data/bookstore.yaml"), "utf8");
 const analyticsScript = fs.readFileSync(path.resolve("assets/js/analytics.js"), "utf8");
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
@@ -124,18 +127,41 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
 });
 
-test("bookstore Amazon exits keep compatible checkout plumbing and automatic tracking", () => {
-  assert.match(checkoutActions, /\.sourceSlot \| default ""/);
-  assert.match(
-    checkoutActions,
-    /index \$product "purchase_url" \| default \(index \$product "stripe_payment_link" \| default ""\)/
-  );
-  assert.match(checkoutActions, /\{\{ with \$sourceSlot \}\}data-analytics-source-slot="\{\{ \. \}\}"\{\{ end \}\}/);
-  assert.match(shopList, /bookstore_index_buy/);
+test("Square-first bookstore keeps direct checkout primary and Kindle compact", () => {
+  assert.equal(fs.existsSync(path.resolve("layouts/partials/shop/checkout-actions.html")), false);
+  assert.match(directOffers, /direct_offers_heading" \| default "Outside In Print EPUB"/);
+  assert.match(directOffers, /checkout_unavailable_label" \| default "EPUB coming soon"/);
+  assert.match(directOffers, /data-analytics-event="checkout_start"/);
+  assert.doesNotMatch(directOffers, /fallback_(?:url|label)|amazon/i);
+
+  assert.match(kindleButton, /class="bookstore-kindle-button"/);
+  assert.match(kindleButton, /data-bookstore-kindle-button/);
+  assert.match(kindleButton, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);
+  assert.doesNotMatch(kindleButton, /data-analytics-event|<img/i);
+
+  assert.equal((shopList.match(/partial "shop\/kindle-button\.html"/g) || []).length, 1);
+  assert.equal((shopSingle.match(/partial "shop\/kindle-button\.html"/g) || []).length, 1);
+  assert.ok(shopList.indexOf('partial "shop/direct-offers.html"') < shopList.indexOf('partial "shop/kindle-button.html"'));
+  assert.ok(shopSingle.indexOf('partial "shop/direct-offers.html"') < shopSingle.indexOf('partial "shop/kindle-button.html"'));
+  assert.match(shopList, /bookstore_index_direct/);
   assert.match(shopList, /bookstore_index_kindle/);
-  assert.match(shopSingle, /bookstore_detail_buy/);
+  assert.match(shopSingle, /bookstore_detail_direct/);
   assert.match(shopSingle, /bookstore_detail_kindle/);
-  assert.doesNotMatch(checkoutActions, /data-analytics-event/);
+  assert.doesNotMatch(shopList, /bookstore-secondary-channel|checkout-actions/);
+  assert.doesNotMatch(shopSingle, /bookstore-panel|Other formats and channels|checkout-actions/);
+
+  assert.match(bookstoreData, /checkout_label: "Buy EPUB — \$9\.99"/);
+  assert.match(bookstoreData, /checkout_note: "Secure checkout through Square\. EPUB delivered by email\."/);
+  assert.match(bookstoreData, /kindle_label: "Kindle on Amazon · \$4\.99"/);
+  assert.doesNotMatch(bookstoreData, /^\s+(?:purchase_url|fallback_url|fallback_label):/m);
+
+  assert.match(epubCheckoutScript, /"Idempotency-Key": idempotencyKey/);
+  assert.match(epubCheckoutScript, /JSON\.stringify\(\{ sku: sku, country_code: "US" \}\)/);
+  assert.match(epubCheckoutScript, /payload\.checkout_url \|\| payload\.url/);
+  assert.match(epubCheckoutScript, /parsed\.hostname !== "square\.link" && parsed\.hostname !== "checkout\.square\.site"/);
+  assert.match(epubCheckoutScript, /button\.disabled = false;[\s\S]*button\.textContent = originalLabel;[\s\S]*support@outsideinprint\.org/);
+  assert.doesNotMatch(epubCheckoutScript, /amazon/i);
+
   assert.match(analyticsScript, /if \(isExternalLink\(url\)\)/);
   assert.match(
     analyticsScript,
@@ -263,10 +289,10 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.match(homeBookstore, /if gt \(len \$books\) 0/);
   assert.match(homeBookstore, /partial "shop\/product-data\.html"/);
   assert.match(homeBookstore, /Books from Outside In Print/);
-  assert.match(homeBookstore, /Three Kindle editions, available now on Amazon\./);
+  assert.match(homeBookstore, /Three Outside In Print EPUB editions at \$9\.99 each, prepared for secure digital delivery\./);
   assert.match(homeBookstore, /Browse the bookstore/);
   assert.match(homeBookstore, /data-analytics-source-slot="homepage_bookstore_promo"/);
-  assert.doesNotMatch(homeBookstore, /https:\/\/www\.amazon\.com|checkout-actions|carousel|autoplay/);
+  assert.doesNotMatch(homeBookstore, /amazon|kindle|purchase_url|kindle_url|kindle-button|checkout-actions|carousel|autoplay/i);
 
   assert.match(homeImprintStatement, /class="home-manifesto"/);
   assert.match(homeImprintStatement, /home-manifesto__inner/);
@@ -436,8 +462,10 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(cssRule(css, ".bookstore-index__header"), /border-top:1px solid var\(--oip-rule-engraved\);/);
   assert.match(cssRule(css, ".bookstore-record"), /border-top:1px solid var\(--oip-rule-standard\);/);
   assert.match(cssRule(css, ".bookstore-record::before"), /background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(cssRule(css, ".bookstore-panel"), /border:1px solid var\(--oip-rule-standard\);/);
-  assert.match(cssRule(css, ".bookstore-panel::before"), /background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(cssRule(css, ".bookstore-direct-offer"), /border:1px solid rgba\(127,147,166,\.36\);/);
+  assert.match(cssRule(css, ".bookstore-direct-offer__action"), /width:100%;[\s\S]*min-height:3\.2rem;/);
+  assert.match(cssRule(css, ".bookstore-direct-offer__action:not(.shop-cta--disabled)"), /background:var\(--accent\);/);
+  assert.match(cssRule(css, ".bookstore-kindle-button"), /display:inline-flex;[\s\S]*width:auto;[\s\S]*max-width:100%;[\s\S]*background:transparent;/);
   assert.match(cssRule(css, ".shop-cta"), /background:var\(--accent-soft\);/);
   assert.doesNotMatch(css, /bookstore-woodgrain-v1\.6|#7f1f1c|#9a2a24/);
   assert.match(css, /@media \(max-width:420px\)\{[\s\S]*\.editorial-cartoon-recent\{\s*grid-template-columns:1fr;/);

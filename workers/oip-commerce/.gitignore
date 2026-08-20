@@ -1,0 +1,7 @@
+.dev.vars
+.wrangler/
+node_modules/
+coverage/
+.private-imports/
+wrangler.toml
+wrangler.consumer.toml

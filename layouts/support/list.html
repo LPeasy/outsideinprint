@@ -1,0 +1,110 @@
+{{ define "main" }}
+  {{- $commerce := site.Params.commerce | default dict -}}
+  {{- $apiBase := strings.TrimSuffix "/" (index $commerce "api_base" | default "") -}}
+  {{- $supportCheckoutEnabled := index $commerce "support_checkout_enabled" | default false -}}
+  {{- if not (hasPrefix $apiBase "https://") -}}
+    {{- errorf "params.commerce.api_base must be an HTTPS origin" -}}
+  {{- end -}}
+  {{- $oneTimeEndpoint := printf "%s/api/support/one-time" $apiBase -}}
+  {{- $monthlyEndpoint := printf "%s/api/support/monthly" $apiBase -}}
+
+  <article class="support-page page-shell" aria-labelledby="support-page-title" data-support-checkout-enabled="{{ $supportCheckoutEnabled }}">
+    <header class="support-page__header">
+      <p class="support-page__eyebrow">Reader support</p>
+      <h1 id="support-page-title" class="support-page__title">{{ .Title }}</h1>
+      <div class="support-page__intro">{{ .Content }}</div>
+    </header>
+
+    <div class="support-options" aria-label="Ways to support Outside In Print">
+      <section class="support-option" aria-labelledby="support-once-title">
+        <p class="support-option__frequency">One time</p>
+        <h2 id="support-once-title">Support once</h2>
+        <p>Choose any whole-dollar amount from $5 to $500.</p>
+        {{ if $supportCheckoutEnabled }}
+          <form
+            class="support-checkout-form"
+            action="{{ $oneTimeEndpoint }}"
+            method="post"
+            data-support-checkout
+            data-checkout-kind="support_once"
+            data-analytics-event="checkout_start"
+            data-analytics-source-slot="support_once"
+            data-analytics-product="OIP-SUPPORT-ONCE"
+            data-analytics-format="one_time_support"
+            data-analytics-slug="support"
+            data-analytics-title="Support Outside In Print"
+            data-analytics-section="Support"
+            data-analytics-path="/api/support/one-time"
+          >
+            <label for="support-once-amount">Amount in U.S. dollars</label>
+            <div class="support-amount-control">
+              <span aria-hidden="true">$</span>
+              <input id="support-once-amount" name="amount_dollars" type="number" min="5" max="500" step="1" inputmode="numeric" value="10" required>
+            </div>
+            <button class="shop-cta" type="submit">Continue to Square</button>
+            <p class="support-checkout-form__status" data-checkout-status role="status" aria-live="polite"></p>
+          </form>
+        {{ else }}
+          <div class="support-checkout-form support-checkout-form--disabled" aria-label="One-time reader support checkout not yet open">
+            <label for="support-once-amount">Amount in U.S. dollars</label>
+            <div class="support-amount-control">
+              <span aria-hidden="true">$</span>
+              <input id="support-once-amount" type="number" min="5" max="500" step="1" value="10" disabled>
+            </div>
+            <span class="shop-cta shop-cta--disabled" aria-disabled="true">Checkout not yet open</span>
+            <p class="support-option__gate">Reader support checkout opens after its activation gate passes.</p>
+          </div>
+        {{ end }}
+      </section>
+
+      <section class="support-option" aria-labelledby="support-five-title">
+        <p class="support-option__frequency">Monthly</p>
+        <h2 id="support-five-title">Support $5 monthly</h2>
+        <p>Start a $5 monthly payment today. Square sends the receipt and account-management link.</p>
+        {{ if $supportCheckoutEnabled }}
+          <form
+            class="support-checkout-form"
+            action="{{ $monthlyEndpoint }}"
+            method="post"
+            data-support-checkout
+            data-checkout-kind="support_monthly_fixed"
+            data-analytics-event="checkout_start"
+            data-analytics-source-slot="support_monthly_fixed"
+            data-analytics-product="OIP-SUPPORT-MONTHLY-5"
+            data-analytics-format="monthly_support"
+            data-analytics-slug="support"
+            data-analytics-title="Support Outside In Print"
+            data-analytics-section="Support"
+            data-analytics-path="/api/support/monthly"
+          >
+            <input name="amount_cents" type="hidden" value="500">
+            <p class="support-option__amount" aria-label="Five dollars per month">$5<span>/month</span></p>
+            <button class="shop-cta" type="submit">Continue to Square</button>
+            <p class="support-checkout-form__status" data-checkout-status role="status" aria-live="polite"></p>
+          </form>
+        {{ else }}
+          <div class="support-checkout-form support-checkout-form--disabled" aria-label="Monthly reader support checkout not yet open">
+            <p class="support-option__amount" aria-label="Five dollars per month">$5<span>/month</span></p>
+            <span class="shop-cta shop-cta--disabled" aria-disabled="true">Checkout not yet open</span>
+            <p class="support-option__gate">Monthly reader support opens after its activation gate passes.</p>
+          </div>
+        {{ end }}
+      </section>
+    </div>
+
+    <aside class="support-page__terms" aria-labelledby="support-terms-title">
+      <h2 id="support-terms-title">Before you continue</h2>
+      <p>Monthly support is charged today and renews each month until canceled. Cancel anytime through the link in your Square receipt email.</p>
+      <p>Support does not include a book, membership benefit, editorial influence, or special access. Review the <a href="{{ "support/cancellation-refunds/" | relURL }}">cancellation and refund terms</a> and <a href="{{ "terms/" | relURL }}">terms of sale</a> before continuing.</p>
+    </aside>
+
+    {{- if $supportCheckoutEnabled -}}
+      <noscript><p class="support-page__noscript">Online support checkout requires JavaScript. Contact <a href="mailto:support@outsideinprint.org">support@outsideinprint.org</a> if you need help.</p></noscript>
+    {{- end -}}
+  </article>
+
+  {{- if $supportCheckoutEnabled -}}
+    {{- $supportScript := resources.Get "js/support-checkout.js" | resources.Minify | resources.Fingerprint -}}
+    <script defer src="{{ $supportScript.RelPermalink }}" integrity="{{ $supportScript.Data.Integrity }}"></script>
+  {{- end -}}
+{{ end }}

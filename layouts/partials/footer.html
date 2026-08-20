@@ -8,6 +8,7 @@
       <p class="site-footer__title">&copy; {{ now.Format "2006" }} Outside In Print</p>
       <p class="site-footer__description">Outside In Print publishes stable, citable web editions and essays by Robert V. Ussley.</p>
     </div>
+    <div class="site-footer__links">
     <nav class="site-footer__nav" aria-label="Footer">
       <a href="{{ "" | absURL }}">Home</a>
       <a href="{{ "about/" | absURL }}">About</a>
@@ -25,6 +26,23 @@
         data-analytics-section="Bookstore"
         data-analytics-path="{{ "shop/" | relURL }}"
       >Bookstore</a>
+      <a
+        href="{{ "support/" | absURL }}"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="footer_support"
+        data-analytics-slug="support"
+        data-analytics-title="Support Outside In Print"
+        data-analytics-section="Support"
+        data-analytics-path="{{ "support/" | relURL }}"
+      >Support</a>
+      <a href="{{ "contact/" | absURL }}">Contact</a>
     </nav>
+    <nav class="site-footer__nav site-footer__nav--policies" aria-label="Commerce policies">
+      <a href="{{ "epub-license-refunds/" | absURL }}">EPUB terms</a>
+      <a href="{{ "support/cancellation-refunds/" | absURL }}">Support terms</a>
+      <a href="{{ "privacy/" | absURL }}">Privacy</a>
+      <a href="{{ "terms/" | absURL }}">Terms of sale</a>
+    </nav>
+    </div>
   </div>
 </footer>

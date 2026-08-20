@@ -1,0 +1,76 @@
+name = "oip-commerce"
+compatibility_date = "2026-08-01"
+pages_build_output_dir = "public"
+
+[vars]
+ALLOWED_ORIGINS = "https://outsideinprint.org"
+ALLOW_LOCAL_ORIGINS = "false"
+PUBLIC_HOST = "downloads.outsideinprint.org"
+SQUARE_API_BASE_URL = "https://connect.squareup.com"
+# Reverify the supported Square-Version value when the service is provisioned.
+SQUARE_API_VERSION = "SET_DURING_PROVISIONING"
+DOWNLOAD_BASE_URL = "https://downloads.outsideinprint.org"
+SQUARE_WEBHOOK_NOTIFICATION_URL = "https://downloads.outsideinprint.org/api/square/webhook"
+SQUARE_REDIRECT_URL = "https://outsideinprint.org/support/thanks/"
+SQUARE_EPUB_REDIRECT_URL = "https://outsideinprint.org/shop/"
+SQUARE_EPUB_CATALOG_VARIATION_IDS = "{}"
+SQUARE_PHYSICAL_REDIRECT_URL = "https://outsideinprint.org/shop/"
+SQUARE_MERCHANT_SUPPORT_EMAIL = ""
+SQUARE_PAPERBACK_CATALOG = "{}"
+DOWNLOAD_EMAIL_FROM = "Outside In Print <downloads@outsideinprint.org>"
+DOWNLOAD_EMAIL_REPLY_TO = "support@outsideinprint.org"
+ADMIN_EMAILS = ""
+SUPPORT_CHECKOUT_ENABLED = "false"
+CF_ACCESS_ISSUER = "https://SET_TEAM_NAME.cloudflareaccess.com"
+CF_ACCESS_AUD = "SET_DURING_PROVISIONING"
+RATE_LIMIT_MAX = "10"
+RATE_LIMIT_WINDOW_SECONDS = "60"
+PHYSICAL_RATE_LIMIT_MAX = "3"
+PHYSICAL_RATE_LIMIT_WINDOW_SECONDS = "1800"
+REQUIRE_EPUB_US_COUNTRY_PROOF = "true"
+EPUB_ENABLED_SKUS = ""
+PAPERBACK_ENABLED_SKUS = ""
+POINTMATCH_DATASET_VERSION = "SET_DURING_PROVISIONING"
+POINTMATCH_SCHEMA_VERSION = "oip-pointmatch-v1"
+POINTMATCH_SHARD_PREFIX = "pointmatch"
+POINTMATCH_INDEX_ROOT_SHA256 = "SET_DURING_PROVISIONING"
+FL_SALES_TAX_RATE_VERSION = "SET_DURING_PROVISIONING"
+FL_SALES_TAX_RATE_ROOT_SHA256 = "SET_DURING_PROVISIONING"
+US_ZIP_STATE_PROVIDER = ""
+USPS_ADDRESSES_API_BASE_URL = ""
+USPS_OAUTH_TOKEN_URL = ""
+USPS_ADDRESSES_API_VERSION = ""
+CUSTOM_MONTHLY_ENABLED = "false"
+CUSTOM_MONTHLY_STRATEGY = "override"
+CUSTOM_MONTHLY_STATIC_PLAN_VARIATIONS = "{}"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "oip-commerce"
+database_id = "SET_DURING_PROVISIONING"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "EPUB_BUCKET"
+bucket_name = "oip-private-epubs"
+
+[[r2_buckets]]
+binding = "JURISDICTION_BUCKET"
+bucket_name = "oip-private-jurisdiction"
+
+[[queues.producers]]
+binding = "WEBHOOK_QUEUE"
+queue = "oip-commerce-events"
+
+# Set these only with `wrangler secret put` or the Cloudflare dashboard:
+# SQUARE_ACCESS_TOKEN
+# SQUARE_LOCATION_ID
+# SQUARE_WEBHOOK_SIGNATURE_KEY
+# SQUARE_MONTHLY_PLAN_VARIATION_ID
+# RESEND_API_KEY
+# EMAIL_HASH_PEPPER
+# DOWNLOAD_TOKEN_SECRET
+# RATE_LIMIT_SALT
+# ADDRESS_LOOKUP_HMAC_SECRET
+# USPS_API_CLIENT_ID
+# USPS_API_CLIENT_SECRET

@@ -1,0 +1,59 @@
+name = "oip-commerce-consumer"
+main = "consumer/index.js"
+compatibility_date = "2026-08-01"
+
+[vars]
+SQUARE_API_BASE_URL = "https://connect.squareup.com"
+SQUARE_API_VERSION = "SET_DURING_PROVISIONING"
+DOWNLOAD_BASE_URL = "https://downloads.outsideinprint.org"
+DOWNLOAD_EMAIL_FROM = "Outside In Print <downloads@outsideinprint.org>"
+DOWNLOAD_EMAIL_REPLY_TO = "support@outsideinprint.org"
+REQUIRE_EPUB_US_COUNTRY_PROOF = "true"
+EPUB_ENABLED_SKUS = ""
+SQUARE_EPUB_CATALOG_VARIATION_IDS = "{}"
+POINTMATCH_DATASET_VERSION = "SET_DURING_PROVISIONING"
+POINTMATCH_SCHEMA_VERSION = "oip-pointmatch-v1"
+POINTMATCH_SHARD_PREFIX = "pointmatch"
+POINTMATCH_INDEX_ROOT_SHA256 = "SET_DURING_PROVISIONING"
+FL_SALES_TAX_RATE_VERSION = "SET_DURING_PROVISIONING"
+FL_SALES_TAX_RATE_ROOT_SHA256 = "SET_DURING_PROVISIONING"
+US_ZIP_STATE_PROVIDER = ""
+USPS_ADDRESSES_API_BASE_URL = ""
+USPS_OAUTH_TOKEN_URL = ""
+USPS_ADDRESSES_API_VERSION = ""
+SQUARE_INVENTORY_TRANSACTION_ID_KIND = ""
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "oip-commerce"
+database_id = "SET_DURING_PROVISIONING"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "EPUB_BUCKET"
+bucket_name = "oip-private-epubs"
+
+[[r2_buckets]]
+binding = "JURISDICTION_BUCKET"
+bucket_name = "oip-private-jurisdiction"
+
+[[queues.consumers]]
+queue = "oip-commerce-events"
+max_batch_size = 1
+max_batch_timeout = 1
+max_retries = 10
+dead_letter_queue = "oip-commerce-events-dlq"
+max_concurrency = 1
+
+# Set with Cloudflare secret bindings, never in this file:
+# SQUARE_ACCESS_TOKEN
+# SQUARE_LOCATION_ID
+# RESEND_API_KEY
+# EMAIL_HASH_PEPPER
+# DOWNLOAD_TOKEN_SECRET
+# ADDRESS_LOOKUP_HMAC_SECRET
+# USPS_API_CLIENT_ID
+# USPS_API_CLIENT_SECRET
