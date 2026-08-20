@@ -1,4 +1,4 @@
-current: where-the-light-finds-me
+current: what-remains
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -840,5 +840,14 @@ cartoons:
     image: "editorial/where-the-light-finds-me"
     essay: "/essays/i-stand/"
     alt: "An anonymous man seen from behind stands with both feet planted on a rough concrete riverfront as wind lifts his jacket and sunrise spills across the dark water from the opposite bank."
+    width: 1672
+    height: 941
+  - slug: what-remains
+    title: "What Remains"
+    date: "2026-08-20"
+    publishDate: "2026-08-20T12:45:57-04:00"
+    image: "editorial/what-remains"
+    essay: "/essays/welcome-the-heat/"
+    alt: "An anonymous man stands with a notebook and laptop bag at the open glass door of an empty conference room, facing a bright late-afternoon office courtyard."
     width: 1672
     height: 941
