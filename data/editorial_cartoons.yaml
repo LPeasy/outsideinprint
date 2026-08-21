@@ -1,4 +1,4 @@
-current: what-remains
+current: the-morning-holds-us
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -849,5 +849,14 @@ cartoons:
     image: "editorial/what-remains"
     essay: "/essays/welcome-the-heat/"
     alt: "An anonymous man stands with a notebook and laptop bag at the open glass door of an empty conference room, facing a bright late-afternoon office courtyard."
+    width: 1672
+    height: 941
+  - slug: the-morning-holds-us
+    title: "The Morning Holds Us"
+    date: "2026-08-21"
+    publishDate: "2026-08-21T16:37:52-04:00"
+    image: "editorial/the-morning-holds-us"
+    essay: "/essays/love-in-the-mirror/"
+    alt: "Morning sunlight fills a home entryway as an anonymous host accepts a covered breakfast dish from one of three arriving loved ones while another carries flowers and their joyful figures gather in a wide hallway mirror."
     width: 1672
     height: 941
