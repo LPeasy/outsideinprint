@@ -32,11 +32,6 @@
       <figcaption>~ {{ .Params.opening_quote_attribution }}</figcaption>
     </figure>
 
-    <section class="almanack-note" aria-labelledby="almanack-note-title">
-      <p class="almanack-section-label" id="almanack-note-title">A Note from Robert V. Ussley</p>
-      <p>{{ .Params.opening_note }}</p>
-    </section>
-
     <div class="almanack-columns">
       <main class="almanack-main">
         <section class="almanack-new" aria-labelledby="almanack-new-title">
@@ -59,18 +54,10 @@
             <article class="almanack-lead">
               {{ if $leadImageModel }}
                 <figure class="almanack-lead__figure">
-                  <button
-                    type="button"
+                  <a
+                    href="{{ $leadHref }}"
                     class="almanack-image-button"
-                    data-essay-cartoon-lightbox-trigger
-                    data-title="{{ .title }}"
-                    data-date="{{ $issueDate.Format "2006-01-02" }}"
-                    data-date-label="{{ $issueDate.Format "Jan 2, 2006" }}"
-                    data-image="{{ $leadImageModel.lightbox_url }}"
-                    data-alt="{{ .image_alt }}"
-                    data-width="{{ $leadImageModel.lightbox_width }}"
-                    data-height="{{ $leadImageModel.lightbox_height }}"
-                    aria-label="Open {{ .title }} cartoon fullscreen"
+                    aria-label="Read {{ .title }}"
                   >
                     {{ partial "images/picture.html" (dict
                       "model" $leadImageModel
@@ -78,15 +65,14 @@
                       "loading" "eager"
                       "fetchpriority" "high"
                       "sizes" "(min-width: 72rem) 42rem, (min-width: 48rem) 58vw, calc(100vw - 2rem)"
-                      "lightbox" true
+                      "lightbox" false
                     ) }}
-                  </button>
+                  </a>
                 </figure>
               {{ end }}
               <div class="almanack-lead__body">
                 <h2><a href="{{ $leadHref }}">{{ .title }}</a></h2>
                 <p>{{ .description }}</p>
-                <a class="almanack-read-link" href="{{ $leadHref }}">Read</a>
               </div>
             </article>
           {{ end }}
@@ -110,31 +96,22 @@
                 {{ end }}
                 <article class="almanack-secondary-card">
                   {{ if $itemImageModel }}
-                    <button
-                      type="button"
+                    <a
+                      href="{{ $itemHref }}"
                       class="almanack-secondary-card__thumb"
-                      data-essay-cartoon-lightbox-trigger
-                      data-title="{{ .title }}"
-                      data-date="{{ $issueDate.Format "2006-01-02" }}"
-                      data-date-label="{{ $issueDate.Format "Jan 2, 2006" }}"
-                      data-image="{{ $itemImageModel.lightbox_url }}"
-                      data-alt="{{ .image_alt }}"
-                      data-width="{{ $itemImageModel.lightbox_width }}"
-                      data-height="{{ $itemImageModel.lightbox_height }}"
-                      aria-label="Open {{ .title }} cartoon fullscreen"
+                      aria-label="Read {{ .title }}"
                     >
                       {{ partial "images/picture.html" (dict
                         "model" $itemImageModel
                         "alt" .image_alt
                         "loading" "lazy"
                         "sizes" "(min-width: 48rem) 18rem, calc(100vw - 2rem)"
-                        "lightbox" true
+                        "lightbox" false
                       ) }}
-                    </button>
+                    </a>
                   {{ end }}
                   <h3><a href="{{ $itemHref }}">{{ .title }}</a></h3>
                   <p>{{ .description }}</p>
-                  <a class="almanack-read-link" href="{{ $itemHref }}">Read</a>
                 </article>
               {{ end }}
             </div>
@@ -219,7 +196,6 @@
       {{ end }}
       <h2><a href="{{ $worthHref }}">{{ $worth.title }}</a></h2>
       <p>{{ $worth.description }}</p>
-      <a class="almanack-read-link" href="{{ $worthHref }}">Read</a>
     </section>
 
     <figure class="almanack-quote almanack-quote--closing">

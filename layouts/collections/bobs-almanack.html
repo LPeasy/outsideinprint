@@ -213,7 +213,6 @@
                   Lead: {{ if $leadHref }}<a href="{{ $leadHref }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}
                 </p>
               {{ end }}
-              {{ with $latest.Params.opening_note }}<p class="almanack-collection__note">{{ . }}</p>{{ end }}
               <a class="almanack-read-link" href="{{ $latest.RelPermalink }}">Read issue</a>
             </section>
 

@@ -4,6 +4,7 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $dataDir = Join-Path $repoRoot 'data\almanack'
 $templatePath = Join-Path $repoRoot 'layouts\collections\bobs-almanack.html'
+$issueTemplatePath = Join-Path $repoRoot 'layouts\almanack\single.html'
 $scriptPath = Join-Path $repoRoot 'scripts\update_almanack_modules.ps1'
 $archiveScriptPath = Join-Path $repoRoot 'scripts\update_almanack_archive_links.ps1'
 $onThisDayScriptPath = Join-Path $repoRoot 'scripts\update_almanack_on_this_day.ps1'
@@ -23,6 +24,7 @@ foreach ($requiredPath in @(
   $weatherPath,
   $worldWeekPath,
   $templatePath,
+  $issueTemplatePath,
   $scriptPath,
   $archiveScriptPath,
   $onThisDayScriptPath,
@@ -40,6 +42,7 @@ $onThisDay = Get-Content -LiteralPath $onThisDayPath -Raw
 $weather = Get-Content -LiteralPath $weatherPath -Raw
 $worldWeek = Get-Content -LiteralPath $worldWeekPath -Raw
 $template = Get-Content -LiteralPath $templatePath -Raw
+$issueTemplate = Get-Content -LiteralPath $issueTemplatePath -Raw
 $script = Get-Content -LiteralPath $scriptPath -Raw
 $archiveScript = Get-Content -LiteralPath $archiveScriptPath -Raw
 
@@ -57,6 +60,25 @@ foreach ($requiredReference in @(
 
 if ($template -match 'archive_link_candidates') {
   throw 'Bob''s Almanack collection template must not consume generated archive-link candidates directly.'
+}
+
+foreach ($retiredIssueCopy in @('opening_note', 'A Note from Robert V. Ussley')) {
+  if ($issueTemplate -match [regex]::Escape($retiredIssueCopy) -or $template -match [regex]::Escape($retiredIssueCopy)) {
+    throw "Bob's Almanack templates must not render retired weekly introduction copy: $retiredIssueCopy"
+  }
+}
+
+if ($issueTemplate -match 'class="almanack-read-link"[^>]*>\s*Read\s*</a>') {
+  throw 'Bob''s Almanack story cards and Worth Reprinting must not render separate Read labels.'
+}
+
+foreach ($requiredCartoonAnchor in @(
+  '<a\s+href="\{\{ \$leadHref \}\}"\s+class="almanack-image-button"',
+  '<a\s+href="\{\{ \$itemHref \}\}"\s+class="almanack-secondary-card__thumb"'
+)) {
+  if ($issueTemplate -notmatch $requiredCartoonAnchor) {
+    throw "Bob's Almanack paired cartoons must link to their matching essays: missing $requiredCartoonAnchor"
+  }
 }
 
 foreach ($retiredMainSectionClass in @(

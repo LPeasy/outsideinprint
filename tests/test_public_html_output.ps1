@@ -1579,6 +1579,7 @@ $requiredUxPages = @(
   'public/almanack/2026-08-01/index.html',
   'public/almanack/2026-08-08/index.html',
   'public/almanack/2026-08-15/index.html',
+  'public/almanack/2026-08-22/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -3420,7 +3421,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 15, 2026.*?In the Margins.*?Number.*?Document.*?Differential Pay for Prescribed Wildland Fire Activities.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 22, 2026.*?In the Margins.*?Number.*?Document.*?B-338306.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
@@ -3568,6 +3569,49 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-08-15/index.html'
     Pattern = '/images/essays/(who-i-decide-to-be|spiritual-being-physical|correct-as-i-go|rise-into-today)/hero\.png'
     Message = 'expected the August 15 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?August 22, 2026.*?Issue 16.*?The light in me recognizes the light in all other beings\..*?I don(?:''|&#39;|&rsquo;)t try to control things\. I only control myself!'
+    Message = 'expected the August 22 Almanack issue page to render the nameplate, issue number, and affirmation pull quotes'
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the August 22 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = '(?s)/images/rendered/editorial/the-morning-holds-us/.*?/images/rendered/editorial/what-remains/.*?/images/rendered/editorial/both-hands/.*?/images/rendered/editorial/the-impression/'
+    Message = 'expected the August 22 Almanack essay cards to use the paired editorial cartoons from the gallery'
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = '(?s)<a\b(?=[^>]*href="?/essays/love-in-the-mirror/"?)(?=[^>]*class="?almanack-image-button"?)[^>]*>.*?/images/rendered/editorial/the-morning-holds-us/.*?<a\b(?=[^>]*href="?/essays/welcome-the-heat/"?)(?=[^>]*class="?almanack-secondary-card__thumb"?)[^>]*>.*?/images/rendered/editorial/what-remains/.*?<a\b(?=[^>]*href="?/essays/after-the-cup-falls/"?)(?=[^>]*class="?almanack-secondary-card__thumb"?)[^>]*>.*?/images/rendered/editorial/both-hands/.*?<a\b(?=[^>]*href="?/essays/the-part-that-is-mine/"?)(?=[^>]*class="?almanack-secondary-card__thumb"?)[^>]*>.*?/images/rendered/editorial/the-impression/'
+    Message = 'expected each August 22 paired cartoon to link to its matching public essay'
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = '/images/essays/(love-in-the-mirror|welcome-the-heat|after-the-cup-falls|the-part-that-is-mine)/hero\.png'
+    Message = 'expected the August 22 Almanack issue not to use essay hero images for essay cards'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = 'A Note from Robert V\. Ussley|almanack-note|This week begins|opening_note'
+    Message = 'expected the August 22 Almanack issue to contain no weekly introduction or Robert note section'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = '(?s)Love in the Mirror.*?Morning gathers all of us in the same light\..*?Welcome the Heat.*?I let failure show me what can carry me forward\..*?After the Cup Falls.*?I repair what happened without punishing myself\..*?The Part That Is Mine.*?I leave the performance in the mirror and take charge of my next move\.'
+    Message = 'expected the August 22 story cards to render exact linked titles and source decks in order'
+  },
+  @{
+    Path = 'public/almanack/2026-08-22/index.html'
+    Pattern = 'class="almanack-read-link"[^>]*>Read<|class="almanack-read-link"[^>]*>Read\s*<'
+    Message = 'expected the August 22 story cards and Worth Reprinting to omit separate Read labels'
     ShouldNotMatch = $true
   },
   @{

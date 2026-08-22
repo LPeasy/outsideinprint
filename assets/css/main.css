@@ -7263,7 +7263,7 @@ html[data-theme="dark"] body.layout-bobs-almanack .site-footer__description{
   border-radius:6px;
   background:#e4d7c6;
   color:inherit;
-  cursor:zoom-in;
+  cursor:pointer;
 }
 .almanack-image-button:focus-visible,
 .almanack-secondary-card__thumb:focus-visible{
