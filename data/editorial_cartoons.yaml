@@ -1,4 +1,4 @@
-current: toward-the-light
+current: into-the-morning
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -867,5 +867,14 @@ cartoons:
     image: "editorial/toward-the-light"
     essay: "/essays/what-grows/"
     alt: "A tiny tomato seedling bends toward warm morning light from dark damp soil in a handmade terracotta pot on a quiet kitchen windowsill beside an unmarked seed packet illustrated with ripe red tomatoes."
+    width: 1672
+    height: 941
+  - slug: into-the-morning
+    title: "Into the Morning"
+    date: "2026-08-24"
+    publishDate: "2026-08-24T09:00:00-04:00"
+    image: "editorial/into-the-morning"
+    essay: "/essays/ready-to-receive/"
+    alt: "An anonymous man seen from behind walks from a shadowed apartment lobby through open glass doors toward a sunlit city crosswalk, holding a small key ring loosely at his side."
     width: 1672
     height: 941
