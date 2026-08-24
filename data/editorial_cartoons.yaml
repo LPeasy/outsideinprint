@@ -1,4 +1,4 @@
-current: the-morning-holds-us
+current: toward-the-light
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -858,5 +858,14 @@ cartoons:
     image: "editorial/the-morning-holds-us"
     essay: "/essays/love-in-the-mirror/"
     alt: "Morning sunlight fills a home entryway as an anonymous host accepts a covered breakfast dish from one of three arriving loved ones while another carries flowers and their joyful figures gather in a wide hallway mirror."
+    width: 1672
+    height: 941
+  - slug: toward-the-light
+    title: "Toward the Light"
+    date: "2026-08-23"
+    publishDate: "2026-08-23T22:34:52-04:00"
+    image: "editorial/toward-the-light"
+    essay: "/essays/what-grows/"
+    alt: "A tiny tomato seedling bends toward warm morning light from dark damp soil in a handmade terracotta pot on a quiet kitchen windowsill beside an unmarked seed packet illustrated with ripe red tomatoes."
     width: 1672
     height: 941

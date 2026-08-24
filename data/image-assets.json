@@ -1347,6 +1347,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/toward-the-light": {
+      "id": "editorial/toward-the-light",
+      "source": "images/originals/editorial/toward-the-light.png",
+      "sha256": "974574225e38f51c2be0e8801902bba4e0a0ae0216f82d32cad5dea8030835a7",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/very-fine-lines-on-both-sides": {
       "id": "editorial/very-fine-lines-on-both-sides",
       "source": "images/originals/editorial/very-fine-lines-on-both-sides.png",
@@ -5057,6 +5071,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/what-grows/section-1": {
+      "id": "essays/what-grows/section-1",
+      "source": "images/originals/essays/what-grows/section-1.png",
+      "sha256": "ac13ba6ba22892095633452c71a7d79b9e7574333726a45801b582d08f7f22db",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/what-i-let-in/section-1": {
       "id": "essays/what-i-let-in/section-1",
       "source": "images/originals/essays/what-i-let-in/section-1.png",
@@ -6834,6 +6862,7 @@
     "/images/editorial/the-trophy-case.png": "editorial/the-trophy-case",
     "/images/editorial/the-turn.png": "editorial/the-turn",
     "/images/editorial/the-weight-falls-away.png": "editorial/the-weight-falls-away",
+    "/images/editorial/toward-the-light.png": "editorial/toward-the-light",
     "/images/editorial/very-fine-lines-on-both-sides.png": "editorial/very-fine-lines-on-both-sides",
     "/images/editorial/warbonds.png": "editorial/warbonds",
     "/images/editorial/what-remains.png": "editorial/what-remains",
@@ -7127,6 +7156,7 @@
     "/images/essays/the-world-is-back-at-the-poker-table/chips-in.png": "essays/the-world-is-back-at-the-poker-table/chips-in",
     "/images/essays/togetherness/hero.png": "essays/togetherness/hero",
     "/images/essays/welcome-the-heat/section-1.png": "essays/welcome-the-heat/section-1",
+    "/images/essays/what-grows/section-1.png": "essays/what-grows/section-1",
     "/images/essays/what-i-let-in/section-1.png": "essays/what-i-let-in/section-1",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/hero.png": "essays/when-can-states-draw-race-based-congressional-districts/hero",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/section-1.png": "essays/when-can-states-draw-race-based-congressional-districts/section-1",
