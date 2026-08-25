@@ -343,13 +343,14 @@ foreach ($requiredSnippet in @(
   '.sourceSlot | default "bookstore_kindle"',
   'index $product "kindle_url"',
   'index $product "kindle_label"',
-  'class="bookstore-kindle-button"',
+  'class="bookstore-kindle-button{{ if $promoteKindle }} bookstore-kindle-button--available-primary{{ end }}"',
   'data-bookstore-kindle-button',
+  'data-bookstore-kindle-role="{{ cond $promoteKindle "primary-available" "secondary" }}"',
   'data-analytics-source-slot="{{ $sourceSlot }}"',
   'data-analytics-path="{{ . }}"'
 )) {
   if ($kindleButtonTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/shop/kindle-button.html to preserve compact Kindle analytics: $requiredSnippet"
+    throw "Expected layouts/partials/shop/kindle-button.html to preserve status-aware Kindle analytics: $requiredSnippet"
   }
 }
 
