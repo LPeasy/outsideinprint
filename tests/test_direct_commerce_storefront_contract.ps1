@@ -195,17 +195,20 @@ if (Test-Path -LiteralPath $legacyCheckoutActions) {
 
 $kindleButtonTemplate = Get-RequiredText -RelativePath 'layouts/partials/shop/kindle-button.html'
 foreach ($requiredKindleText in @(
-  'class="bookstore-kindle-button"',
+  '$promoteKindle := and (gt (len $epubOffers) 0) (eq (len $liveEpubOffers) 0)',
+  'class="bookstore-kindle-button{{ if $promoteKindle }} bookstore-kindle-button--available-primary{{ end }}"',
+  'bookstore-kindle-offer--available-primary',
   'data-bookstore-kindle-button',
+  'data-bookstore-kindle-role="{{ cond $promoteKindle "primary-available" "secondary" }}"',
   'index $product "kindle_url"',
   'index $product "kindle_label"',
   'data-analytics-source-slot="{{ $sourceSlot }}"',
   'data-analytics-path="{{ . }}"'
 )) {
-  Assert-Contains -Text $kindleButtonTemplate -Expected $requiredKindleText -Context 'Shared compact Kindle button'
+  Assert-Contains -Text $kindleButtonTemplate -Expected $requiredKindleText -Context 'Status-aware Kindle offer'
 }
 if ($kindleButtonTemplate -match '(?i)data-analytics-event|<img|amazon[^<]*logo|width:\s*100%') {
-  throw 'Compact Kindle partial must rely on external-link analytics and must not use a logo or full-width treatment.'
+  throw 'Status-aware Kindle partial must rely on external-link analytics and must not use a logo or hard-coded full-width treatment.'
 }
 
 $shopListTemplate = Get-RequiredText -RelativePath 'layouts/shop/list.html'
@@ -315,7 +318,11 @@ foreach ($requiredCssContract in @(
   'display:inline-flex;',
   'width:auto;',
   'max-width:100%;',
-  'background:transparent;'
+  'background:transparent;',
+  '.bookstore-kindle-button--available-primary{',
+  'min-height:3.2rem;',
+  'background:var(--accent);',
+  '.bookstore-direct-offers--unavailable{'
 )) {
   Assert-Contains -Text $mainCss -Expected $requiredCssContract -Context 'Square-first storefront CSS'
 }
@@ -524,10 +531,11 @@ if ($shopOutput -match '(?i)Amazon handles purchase|fallback_(?:url|label)|purch
 if ([regex]::Matches($shopOutput, 'data-bookstore-kindle-button(?:=|\s|>)', 'IgnoreCase').Count -ne 6) {
   throw 'Built bookstore must render exactly one compact Kindle button per title on the index and detail surfaces.'
 }
-if ([regex]::Matches($shopOutput, 'Kindle on Amazon · \$9\.99', 'IgnoreCase').Count -ne 4) {
+$decodedShopOutput = [Net.WebUtility]::HtmlDecode($shopOutput)
+if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$9\.99</a>', 'IgnoreCase').Count -ne 4) {
   throw 'American Nightmare and Water Cycle must each show the exact $9.99 compact Kindle label on index and detail pages.'
 }
-if ([regex]::Matches($shopOutput, 'Kindle on Amazon · \$4\.99', 'IgnoreCase').Count -ne 2) {
+if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$4\.99</a>', 'IgnoreCase').Count -ne 2) {
   throw 'Parable must show the exact $4.99 compact Kindle label on index and detail pages.'
 }
 

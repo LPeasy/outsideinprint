@@ -12,11 +12,13 @@
 {{- $allowedStatuses := slice "disabled" "live" -}}
 {{- $allowedCheckoutActions := slice "epub_checkout_api" "square_hosted_checkout" -}}
 {{- $requiredFields := slice "sku" "format" "availability_status" "availability_label" "isbn_status" "price_display" "currency" "permitted_geography" "tax_class" "fulfillment_type" "checkout_action" "checkout_url" "checkout_endpoint" "gate_note" -}}
+{{- $liveOffers := where $offers "availability_status" "live" -}}
+{{- $allUnavailable := and (gt (len $offers) 0) (eq (len $liveOffers) 0) -}}
 
 {{- if gt (len $offers) 0 -}}
   {{- $headingID := printf "%s-title-%s" $sourceSlot $productSlug -}}
   {{- $helperID := printf "%s-helper-%s" $sourceSlot $productSlug -}}
-  <section class="bookstore-direct-offers{{ if $compact }} bookstore-direct-offers--compact{{ end }}" aria-labelledby="{{ $headingID }}">
+  <section class="bookstore-direct-offers{{ if $compact }} bookstore-direct-offers--compact{{ end }}{{ if $allUnavailable }} bookstore-direct-offers--unavailable{{ end }}" aria-labelledby="{{ $headingID }}">
     <header class="bookstore-direct-offers__header">
       {{ if $compact }}
         <h3 id="{{ $headingID }}">{{ $offerHeading }}</h3>
@@ -61,7 +63,10 @@
         {{- $sku := index $offer "sku" -}}
         {{- $statusID := printf "%s-status-%s" $sourceSlot $productSlug -}}
         <article class="bookstore-direct-offer" data-direct-offer data-direct-offer-sku="{{ $sku }}" data-direct-offer-status="{{ $status }}">
-          <p class="bookstore-direct-offer__price">{{ index $offer "price_display" }}</p>
+          <p class="bookstore-direct-offer__price">
+            {{- if eq $status "disabled" }}<span>Planned price</span>{{ end -}}
+            {{ index $offer "price_display" }}
+          </p>
 
           {{- if eq $status "live" -}}
             {{- if $isEpubApi -}}
@@ -102,7 +107,14 @@
             <span class="shop-cta shop-cta--disabled bookstore-direct-offer__action" aria-disabled="true" aria-describedby="{{ $helperID }}">{{ $disabledLabel }}</span>
           {{- end -}}
 
-          <p class="bookstore-direct-offer__gate">{{ index $offer "gate_note" }}</p>
+          {{- if eq $status "disabled" -}}
+            <details class="bookstore-direct-offer__status-details">
+              <summary>Release status</summary>
+              <p class="bookstore-direct-offer__gate">{{ index $offer "gate_note" }}</p>
+            </details>
+          {{- else -}}
+            <p class="bookstore-direct-offer__gate">{{ index $offer "gate_note" }}</p>
+          {{- end -}}
         </article>
       {{- end -}}
     </div>

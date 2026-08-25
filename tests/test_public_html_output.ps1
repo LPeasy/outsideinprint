@@ -4196,8 +4196,8 @@ $bookstoreProducts = @(
 )
 
 foreach ($surface in @(
-  @{ Path = 'public/shop/index.html'; ExpectedCount = 3; Slots = @('bookstore_index_kindle') },
-  @{ Path = $null; ExpectedCount = 1; Slots = @('bookstore_detail_kindle') }
+  @{ Path = 'public/shop/index.html'; ExpectedCount = 3; Slots = @('bookstore_index_kindle'); KindleRole = 'primary-available' },
+  @{ Path = $null; ExpectedCount = 1; Slots = @('bookstore_detail_kindle'); KindleRole = 'primary-available' }
 )) {
   $surfacePaths = if ($surface.Path) { @($surface.Path) } else { @($bookstoreProducts | ForEach-Object { $_.DetailPath }) }
 
@@ -4227,7 +4227,7 @@ foreach ($surface in @(
         (Get-AttributeValue -Tag $_ -Name 'href') -ceq $product.PurchaseUrl
       })
       if ($productAnchors.Count -ne 1) {
-        $uxIssues.Add("$surfacePath => expected exactly 1 secondary Kindle exit for '$($product.Title)', found $($productAnchors.Count)")
+        $uxIssues.Add("$surfacePath => expected exactly 1 active Kindle exit for '$($product.Title)', found $($productAnchors.Count)")
         continue
       }
 
@@ -4238,6 +4238,16 @@ foreach ($surface in @(
       }
 
       foreach ($anchor in $productAnchors) {
+        $kindleRole = Get-AttributeValue -Tag $anchor -Name 'data-bookstore-kindle-role'
+        if ($kindleRole -cne $surface.KindleRole) {
+          $uxIssues.Add("$surfacePath => Kindle exit for '$($product.Title)' expected data-bookstore-kindle-role='$($surface.KindleRole)', found '$kindleRole'")
+        }
+
+        $kindleClasses = @((Get-AttributeValue -Tag $anchor -Name 'class') -split '\s+' | Where-Object { $_ })
+        if ($surface.KindleRole -ceq 'primary-available' -and $kindleClasses -cnotcontains 'bookstore-kindle-button--available-primary') {
+          $uxIssues.Add("$surfacePath => active Kindle exit for '$($product.Title)' must carry bookstore-kindle-button--available-primary")
+        }
+
         foreach ($attributeExpectation in @(
           @{ Name = 'data-analytics-slug'; Value = $product.Slug },
           @{ Name = 'data-analytics-title'; Value = $product.Title },

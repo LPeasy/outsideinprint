@@ -6,6 +6,6 @@ draft: false
 show_citation: false
 ---
 
-Outside In Print is preparing direct EPUB editions for secure digital delivery. Each title lists its direct price and release status here.
+Three independent books on the American Dream, public infrastructure, and the stories societies tell themselves. Buy Kindle editions now; direct Outside In Print EPUBs are coming next.
 
 [Reader support](/support/) uses a separate checkout.

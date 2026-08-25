@@ -4,16 +4,29 @@
 {{- $productTitle := index $product "title" | default "Book" -}}
 {{- $kindleURL := index $product "kindle_url" | default "" -}}
 {{- $kindleLabel := index $product "kindle_label" | default "Kindle on Amazon" -}}
+{{- $epubOffers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" -}}
+{{- $liveEpubOffers := where $epubOffers "availability_status" "live" -}}
+{{- $promoteKindle := and (gt (len $epubOffers) 0) (eq (len $liveEpubOffers) 0) -}}
+{{- $offerID := printf "%s-offer-%s" $sourceSlot $productSlug -}}
 
 {{- with $kindleURL -}}
-  <a
-    class="bookstore-kindle-button"
-    href="{{ . }}"
-    data-bookstore-kindle-button
-    data-analytics-source-slot="{{ $sourceSlot }}"
-    data-analytics-slug="{{ $productSlug }}"
-    data-analytics-title="{{ $productTitle }}"
-    data-analytics-section="Bookstore"
-    data-analytics-path="{{ . }}"
-  >{{ $kindleLabel }}</a>
+  <section class="bookstore-kindle-offer{{ if $promoteKindle }} bookstore-kindle-offer--available-primary{{ end }}" aria-labelledby="{{ $offerID }}">
+    <div class="bookstore-kindle-offer__copy">
+      <p class="bookstore-kindle-offer__eyebrow">{{ cond $promoteKindle "Available now" "Also available" }}</p>
+      <p id="{{ $offerID }}" class="bookstore-kindle-offer__title">Kindle edition</p>
+      <p class="bookstore-kindle-offer__note">Purchase and delivery through Amazon.</p>
+    </div>
+    <a
+      class="bookstore-kindle-button{{ if $promoteKindle }} bookstore-kindle-button--available-primary{{ end }}"
+      href="{{ . }}"
+      aria-label="{{ $kindleLabel }} for {{ $productTitle }}"
+      data-bookstore-kindle-button
+      data-bookstore-kindle-role="{{ cond $promoteKindle "primary-available" "secondary" }}"
+      data-analytics-source-slot="{{ $sourceSlot }}"
+      data-analytics-slug="{{ $productSlug }}"
+      data-analytics-title="{{ $productTitle }}"
+      data-analytics-section="Bookstore"
+      data-analytics-path="{{ . }}"
+    >{{ $kindleLabel }}</a>
+  </section>
 {{- end -}}

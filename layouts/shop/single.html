@@ -3,34 +3,57 @@
   {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) }}
   {{ $cover := index $product "cover_image" | default .Params.image }}
   {{ $coverAlt := index $product "cover_alt" | default .Title }}
+  {{ $epubOffers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" }}
+  {{ $liveEpubOffers := where $epubOffers "availability_status" "live" }}
 
   <article class="page-shell page-shell--wide bookstore-product" aria-labelledby="page-title">
     <div class="bookstore-product__layout">
       <figure class="bookstore-product__cover">
-        <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" width="1600" height="2560" loading="eager">
+        {{ partial "images/picture.html" (dict
+          "page" .
+          "ref" $cover
+          "alt" $coverAlt
+          "loading" "eager"
+          "fetchpriority" "high"
+          "sizes" "(min-width: 60rem) 21rem, (min-width: 45rem) 16rem, 13rem"
+        ) }}
       </figure>
 
       <div class="bookstore-product__content">
         <header class="bookstore-product__header">
+          <p class="bookstore-product__eyebrow">An Outside In Print book</p>
           <h1 id="page-title" class="shop-title">{{ .Title }}</h1>
           <p class="bookstore-record__meta">
-            {{ with index $product "author" }}<span>{{ . }}</span>{{ end }}
+            {{ with index $product "author" }}<span>By <a href="{{ "authors/robert-v-ussley/" | relURL }}">{{ . }}</a></span>{{ end }}
             {{ with index $product "publisher" }}<span>{{ . }}</span>{{ end }}
           </p>
           {{ with index $product "subtitle" }}<p class="bookstore-product__subtitle">{{ . }}</p>{{ end }}
+          {{ with index $product "deck" }}<p class="bookstore-product__deck">{{ . }}</p>{{ end }}
+          {{ with index $product "tags" }}
+            <ul class="bookstore-record__topics bookstore-record__topics--detail" aria-label="Book topics">
+              {{ range . }}<li>{{ . }}</li>{{ end }}
+            </ul>
+          {{ end }}
         </header>
 
-        {{ partial "shop/direct-offers.html" (dict
-          "product" $product
-          "sourceSlot" "bookstore_detail_direct"
-        ) }}
+        <section class="bookstore-product__purchase" aria-labelledby="bookstore-purchase-title">
+          <p id="bookstore-purchase-title" class="bookstore-product__purchase-title">Choose an edition</p>
 
-        <div class="bookstore-product__kindle">
-          {{ partial "shop/kindle-button.html" (dict
+          {{ partial "shop/direct-offers.html" (dict
             "product" $product
-            "sourceSlot" "bookstore_detail_kindle"
+            "sourceSlot" "bookstore_detail_direct"
+            "compact" (eq (len $liveEpubOffers) 0)
           ) }}
-        </div>
+
+          <div class="bookstore-product__kindle">
+            {{ partial "shop/kindle-button.html" (dict
+              "product" $product
+              "sourceSlot" "bookstore_detail_kindle"
+            ) }}
+          </div>
+
+          <p class="bookstore-product__purchase-help"><a href="{{ "epub-license-refunds/" | relURL }}">Read the direct EPUB delivery and refund terms</a></p>
+        </section>
 
         <div class="bookstore-product__copy">
           {{ .Content }}
@@ -44,6 +67,11 @@
             </ul>
           </section>
         {{ end }}
+
+        <aside class="bookstore-product__author-note" aria-label="About the author">
+          <p><strong>Robert V. Ussley</strong> is the author of all three books in the Outside In Print catalog.</p>
+          <a href="{{ "authors/robert-v-ussley/" | relURL }}">Meet the author <span aria-hidden="true">&rarr;</span></a>
+        </aside>
 
         {{ partial "journey_links.html" (dict
           "class" "journey-links--page"

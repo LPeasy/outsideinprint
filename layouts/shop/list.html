@@ -3,54 +3,104 @@
 
   <section class="bookstore-index page-shell page-shell--wide" aria-labelledby="page-title">
     <header class="bookstore-index__header">
-      <h1 id="page-title" class="list-title">{{ .Title }}</h1>
-      {{ with .Content }}<div class="bookstore-index__intro">{{ . }}</div>{{ end }}
+      <div class="bookstore-index__heading">
+        <p class="bookstore-index__eyebrow">Outside In Print books</p>
+        <h1 id="page-title" class="list-title">{{ .Title }}</h1>
+        {{ with .Content }}<div class="bookstore-index__intro">{{ . }}</div>{{ end }}
+      </div>
+
+      <dl class="bookstore-index__guide" aria-label="Bookstore at a glance">
+        <div>
+          <dt>Catalog</dt>
+          <dd>{{ len $shopPages }} titles</dd>
+        </div>
+        <div>
+          <dt>Buy now</dt>
+          <dd>Kindle on Amazon</dd>
+        </div>
+        <div>
+          <dt>Coming next</dt>
+          <dd>Direct OIP EPUBs</dd>
+        </div>
+      </dl>
     </header>
 
     {{ if gt (len $shopPages) 0 }}
-      <div class="bookstore-records" aria-label="Available Outside In Print books">
+      <div id="bookstore-catalog" class="bookstore-records" aria-label="Available Outside In Print books">
         {{ range $index, $book := $shopPages }}
           {{ $productKey := $book.Params.book_key | default ($book.Params.slug | default $book.File.BaseFileName) }}
           {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" $book) }}
           {{ $cover := index $product "cover_image" | default $book.Params.image }}
           {{ $coverAlt := index $product "cover_alt" | default $book.Title }}
+          {{ $displayTitle := index $product "display_title" | default $book.Title }}
           {{ $recordID := printf "bookstore-record-%d" $index }}
+          {{ $epubOffers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" }}
+          {{ $liveEpubOffers := where $epubOffers "availability_status" "live" }}
 
           <article class="bookstore-record" aria-labelledby="{{ $recordID }}">
-            <a class="bookstore-record__cover" href="{{ $book.RelPermalink }}" aria-label="View {{ $book.Title }}">
-              <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" width="1600" height="2560" loading="{{ cond (eq $index 0) "eager" "lazy" }}">
+            <a class="bookstore-record__cover" href="{{ $book.RelPermalink }}" aria-label="Read about {{ $book.Title }}">
+              {{ partial "images/picture.html" (dict
+                "page" $book
+                "ref" $cover
+                "alt" $coverAlt
+                "loading" (cond (eq $index 0) "eager" "lazy")
+                "fetchpriority" (cond (eq $index 0) "high" "low")
+                "sizes" "(min-width: 64rem) 18rem, (min-width: 45rem) 13rem, 11.5rem"
+              ) }}
             </a>
 
             <div class="bookstore-record__body">
-              <h2 id="{{ $recordID }}" class="bookstore-record__title"><a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a></h2>
+              <p class="bookstore-record__eyebrow">Independent book</p>
+              <h2 id="{{ $recordID }}" class="bookstore-record__title"><a href="{{ $book.RelPermalink }}">{{ $displayTitle }}</a></h2>
               <p class="bookstore-record__meta">
-                {{ with index $product "author" }}<span>{{ . }}</span>{{ end }}
+                {{ with index $product "author" }}<span>By <a href="{{ "authors/robert-v-ussley/" | relURL }}">{{ . }}</a></span>{{ end }}
                 {{ with index $product "publisher" }}<span>{{ . }}</span>{{ end }}
               </p>
 
               {{ with index $product "subtitle" }}<p class="bookstore-record__subtitle">{{ . }}</p>{{ end }}
-              {{ with index $product "deck" }}<p class="bookstore-record__deck">{{ . }}</p>{{ end }}
-
-              {{ partial "shop/direct-offers.html" (dict
-                "product" $product
-                "sourceSlot" "bookstore_index_direct"
-                "compact" true
-              ) }}
-
-              <div class="bookstore-record__kindle">
-                {{ partial "shop/kindle-button.html" (dict
+              <div class="bookstore-record__purchase" aria-label="Purchase options for {{ $book.Title }}">
+                {{ partial "shop/direct-offers.html" (dict
                   "product" $product
-                  "sourceSlot" "bookstore_index_kindle"
+                  "sourceSlot" "bookstore_index_direct"
+                  "compact" (eq (len $liveEpubOffers) 0)
                 ) }}
+
+                <div class="bookstore-record__kindle">
+                  {{ partial "shop/kindle-button.html" (dict
+                    "product" $product
+                    "sourceSlot" "bookstore_index_kindle"
+                  ) }}
+                </div>
               </div>
 
+              {{ with index $product "deck" }}<p class="bookstore-record__deck">{{ . }}</p>{{ end }}
+
+              {{ with index $product "tags" }}
+                <ul class="bookstore-record__topics" aria-label="Topics in {{ $book.Title }}">
+                  {{ range first 3 . }}<li>{{ . }}</li>{{ end }}
+                </ul>
+              {{ end }}
+
               <div class="bookstore-record__actions">
-                <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}">View book details</a>
+                <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}">Read about the book <span aria-hidden="true">&rarr;</span></a>
               </div>
             </div>
           </article>
         {{ end }}
       </div>
+
+      <aside class="bookstore-buying-note" aria-labelledby="bookstore-buying-note-title">
+        <div>
+          <p class="bookstore-buying-note__eyebrow">Before you buy</p>
+          <h2 id="bookstore-buying-note-title">Clear formats, prices, and handoffs</h2>
+          <p>Kindle purchases take place on Amazon. Direct EPUB checkout will use Square and email delivery when each edition is released.</p>
+        </div>
+        <nav class="bookstore-buying-note__links" aria-label="Bookstore help and policies">
+          <a href="{{ "epub-license-refunds/" | relURL }}">EPUB terms</a>
+          <a href="{{ "terms/" | relURL }}">Terms of sale</a>
+          <a href="{{ "contact/" | relURL }}">Contact</a>
+        </nav>
+      </aside>
     {{ else }}
       <div class="bookstore-empty">
         <h2 class="list-title">Books coming soon</h2>

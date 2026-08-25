@@ -127,15 +127,18 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
 });
 
-test("Square-first bookstore keeps direct checkout primary and Kindle compact", () => {
+test("Square-first bookstore promotes Kindle only while direct EPUB checkout is unavailable", () => {
   assert.equal(fs.existsSync(path.resolve("layouts/partials/shop/checkout-actions.html")), false);
   assert.match(directOffers, /direct_offers_heading" \| default "Outside In Print EPUB"/);
   assert.match(directOffers, /checkout_unavailable_label" \| default "EPUB coming soon"/);
   assert.match(directOffers, /data-analytics-event="checkout_start"/);
   assert.doesNotMatch(directOffers, /fallback_(?:url|label)|amazon/i);
 
-  assert.match(kindleButton, /class="bookstore-kindle-button"/);
+  assert.match(kindleButton, /\$promoteKindle := and \(gt \(len \$epubOffers\) 0\) \(eq \(len \$liveEpubOffers\) 0\)/);
+  assert.match(kindleButton, /class="bookstore-kindle-button\{\{ if \$promoteKindle \}\} bookstore-kindle-button--available-primary/);
+  assert.match(kindleButton, /bookstore-kindle-offer--available-primary/);
   assert.match(kindleButton, /data-bookstore-kindle-button/);
+  assert.match(kindleButton, /data-bookstore-kindle-role="\{\{ cond \$promoteKindle "primary-available" "secondary" \}\}"/);
   assert.match(kindleButton, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);
   assert.doesNotMatch(kindleButton, /data-analytics-event|<img/i);
 
@@ -466,6 +469,8 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(cssRule(css, ".bookstore-direct-offer__action"), /width:100%;[\s\S]*min-height:3\.2rem;/);
   assert.match(cssRule(css, ".bookstore-direct-offer__action:not(.shop-cta--disabled)"), /background:var\(--accent\);/);
   assert.match(cssRule(css, ".bookstore-kindle-button"), /display:inline-flex;[\s\S]*width:auto;[\s\S]*max-width:100%;[\s\S]*background:transparent;/);
+  assert.match(cssRule(css, ".bookstore-kindle-button--available-primary"), /min-height:3\.2rem;[\s\S]*background:var\(--accent\);/);
+  assert.match(cssRule(css, ".bookstore-direct-offers--unavailable"), /border:1px solid var\(--oip-rule-faint\);/);
   assert.match(cssRule(css, ".shop-cta"), /background:var\(--accent-soft\);/);
   assert.doesNotMatch(css, /bookstore-woodgrain-v1\.6|#7f1f1c|#9a2a24/);
   assert.match(css, /@media \(max-width:420px\)\{[\s\S]*\.editorial-cartoon-recent\{\s*grid-template-columns:1fr;/);
