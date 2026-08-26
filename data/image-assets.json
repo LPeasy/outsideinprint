@@ -381,6 +381,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/first-light-reaches-the-floor": {
+      "id": "editorial/first-light-reaches-the-floor",
+      "source": "images/originals/editorial/first-light-reaches-the-floor.png",
+      "sha256": "c8dddfa1d466bc604d54f3fb484c279163138cc84003028d8fdd6e3d3e5d3845",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/goin-postal": {
       "id": "editorial/goin-postal",
       "source": "images/originals/editorial/goin-postal.png",
@@ -3755,6 +3769,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/the-day-begins-in-the-body/section-1": {
+      "id": "essays/the-day-begins-in-the-body/section-1",
+      "source": "images/originals/essays/the-day-begins-in-the-body/section-1.png",
+      "sha256": "a6aefb8ae76c3969962923649cb18f1884ad50d59f37c0139cf2c8544cad4f86",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/the-door-that-would-not-open/hero": {
       "id": "essays/the-door-that-would-not-open/hero",
       "source": "images/originals/essays/the-door-that-would-not-open/hero.png",
@@ -6849,6 +6877,7 @@
     "/images/editorial/feeding-the-machine.png": "editorial/feeding-the-machine",
     "/images/editorial/feet-on-the-floor.png": "editorial/feet-on-the-floor",
     "/images/editorial/filled-with-life.png": "editorial/filled-with-life",
+    "/images/editorial/first-light-reaches-the-floor.png": "editorial/first-light-reaches-the-floor",
     "/images/editorial/goin-postal.png": "editorial/goin-postal",
     "/images/editorial/ground-truth.png": "editorial/ground-truth",
     "/images/editorial/hit-after-hit.png": "editorial/hit-after-hit",
@@ -7110,6 +7139,7 @@
     "/images/essays/the-curb-cut-at-the-corner/hero.png": "essays/the-curb-cut-at-the-corner/hero",
     "/images/essays/the-curb-cut-at-the-corner/section-1.png": "essays/the-curb-cut-at-the-corner/section-1",
     "/images/essays/the-curb-cut-at-the-corner/section-2.png": "essays/the-curb-cut-at-the-corner/section-2",
+    "/images/essays/the-day-begins-in-the-body/section-1.png": "essays/the-day-begins-in-the-body/section-1",
     "/images/essays/the-door-that-would-not-open/hero.png": "essays/the-door-that-would-not-open/hero",
     "/images/essays/the-door-that-would-not-open/section-1.png": "essays/the-door-that-would-not-open/section-1",
     "/images/essays/the-door-that-would-not-open/section-2.png": "essays/the-door-that-would-not-open/section-2",

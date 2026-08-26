@@ -1,4 +1,4 @@
-current: the-bridge-makes-room
+current: first-light-reaches-the-floor
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -885,5 +885,14 @@ cartoons:
     image: "editorial/the-bridge-makes-room"
     essay: "/essays/the-bridge-is-up/"
     alt: "A double-leaf drawbridge rises above a bright river as cars wait safely behind gates on both road approaches and a white sailboat carrying an anonymous sailor and a brown dog enters the channel."
+    width: 1672
+    height: 941
+  - slug: first-light-reaches-the-floor
+    title: "First Light Reaches the Floor"
+    date: "2026-08-26"
+    publishDate: "2026-08-26T15:11:47-04:00"
+    image: "editorial/first-light-reaches-the-floor"
+    essay: "/essays/the-day-begins-in-the-body/"
+    alt: "An anonymous adult sits at the edge of a shadowed bed with both bare feet planted on sunlit wooden floorboards while an open window reveals a green morning garden."
     width: 1672
     height: 941
