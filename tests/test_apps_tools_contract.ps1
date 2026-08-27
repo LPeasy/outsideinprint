@@ -191,7 +191,7 @@ foreach ($family in @(
 }
 Assert-Matches $layoutMatrix '\| Baseball Upside Risk product \| `/apps/baseball-upside-risk/`' 'The layout matrix must own the Baseball route.'
 
-$appsCssMatch = [regex]::Match($mainCss, '(?s)/\* Apps & Tools public development preview \*/(.*?)(?=\r?\n@media print)')
+$appsCssMatch = [regex]::Match($mainCss, '(?s)/\* Apps & Tools public development preview \*/(.*?)(?=\r?\n/\* Games storefront and product \*/|\r?\n@media print)')
 if (-not $appsCssMatch.Success) { throw 'Missing bounded Apps CSS section.' }
 $appsCss = $appsCssMatch.Groups[1].Value
 Assert-Matches $appsCss '@media\s*\(max-width:640px\)' 'Apps CSS must include the 320px layout.'
