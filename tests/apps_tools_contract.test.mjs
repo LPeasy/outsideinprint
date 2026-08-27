@@ -209,7 +209,7 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
   const layoutMatrix = read("docs/layout-ownership-matrix.md");
   const appsMarkup = `${listTemplate}\n${singleTemplate}\n${sampleDownloads}\n${companion}`;
   const webpageSchema = read("layouts/partials/schema/webpage.html");
-  const appsCssMatch = css.match(/\/\* Apps & Tools public development preview \*\/([\s\S]*?)(?=\r?\n@media print)/);
+  const appsCssMatch = css.match(/\/\* Apps & Tools public development preview \*\/([\s\S]*?)(?=\r?\n\/\* Games storefront and product \*\/|\r?\n@media print)/);
 
   for (const chrome of [masthead, footer]) {
     assert.match(chrome, /site\.GetPage\s+"\/apps"/);
