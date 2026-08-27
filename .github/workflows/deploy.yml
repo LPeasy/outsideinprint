@@ -199,7 +199,7 @@ jobs:
         with:
           path: resources/_gen
           key: >-
-            ${{ runner.os }}-hugo-resources-0.164.0-${{ hashFiles('tools/toolchain.manifest.json', 'hugo.toml', 'data/image-assets.json', 'assets/images/originals/**', 'layouts/partials/images/**', 'layouts/_default/_markup/render-image.html', 'layouts/partials/metadata_image.html', 'layouts/partials/opengraph.html', 'layouts/partials/twitter_cards.html', 'layouts/partials/schema/image.html') }}
+            ${{ runner.os }}-hugo-resources-0.164.0-${{ hashFiles('tools/toolchain.manifest.json', 'hugo.toml', 'data/image-assets.json', 'assets/images/originals/**', 'content/games/**', 'layouts/games/**', 'layouts/partials/games/**', 'layouts/partials/images/**', 'layouts/_default/_markup/render-image.html', 'layouts/partials/metadata_image.html', 'layouts/partials/opengraph.html', 'layouts/partials/twitter_cards.html', 'layouts/partials/schema/image.html') }}
 
       - name: Verify Toolchain
         shell: bash

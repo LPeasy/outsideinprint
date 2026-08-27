@@ -1,13 +1,13 @@
 ---
 title: "Privacy Policy"
-description: "How Outside In Print handles information connected to site use, orders, EPUB delivery, and reader support."
-effective_date: "August 13, 2026"
+description: "How Outside In Print handles information connected to site use, Steam storefront visits, orders, EPUB delivery, and reader support."
+effective_date: "August 26, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
 ---
 
-This policy explains how Outside In Print handles information connected to this website, EPUB delivery, and reader support.
+This policy explains how Outside In Print handles information connected to this website, Steam storefront access, EPUB delivery, and reader support.
 
 ## Information involved
 
@@ -35,6 +35,10 @@ Information is used to:
 ## Service providers and disclosure
 
 Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. GitHub Pages hosts the public website, and GoatCounter provides site analytics.
+
+The Games pages link to Steam storefront pages and may load a Steam store widget. Following a Steam link or loading the widget sends a request to Valve's Steam services, which receives the technical information ordinarily sent with a web request. Steam may also set or read cookies according to your Steam settings and Valve's own privacy practices.
+
+Any Steam checkout, account sign-in, payment, game license, or download takes place on Steam and remains under Valve's control. Outside In Print does not receive your Steam password, full payment-card details, or Steam license through these links or the widget.
 
 Outside In Print does not sell or rent personal information. Information may be disclosed when required by law, to protect the site and its customers, or to the service providers needed to complete the functions described above.
 

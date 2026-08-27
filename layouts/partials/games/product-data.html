@@ -20,8 +20,40 @@
   {{- errorf "Games catalog support_email must equal %q" $supportEmail -}}
 {{- end -}}
 {{- $storefrontHosts := index $catalog "storefront_hosts" | default (slice) -}}
-{{- if not $storefrontHosts -}}
-  {{- errorf "Games catalog must define storefront_hosts" -}}
+{{- if or (ne (len $storefrontHosts) 1) (not (in $storefrontHosts "store.steampowered.com")) -}}
+  {{- errorf "Games catalog storefront_hosts must contain only store.steampowered.com" -}}
+{{- end -}}
+{{- $utmSource := index $catalog "utm_source" | default "" -}}
+{{- $utmMedium := index $catalog "utm_medium" | default "" -}}
+{{- $utmCampaign := index $catalog "utm_campaign" | default "" -}}
+{{- if ne $utmSource "outsideinprint" -}}
+  {{- errorf "Games catalog utm_source must equal outsideinprint" -}}
+{{- end -}}
+{{- if ne $utmMedium "owned_web" -}}
+  {{- errorf "Games catalog utm_medium must equal owned_web" -}}
+{{- end -}}
+{{- if ne $utmCampaign "games_hub" -}}
+  {{- errorf "Games catalog utm_campaign must equal games_hub" -}}
+{{- end -}}
+{{- $approvedUTMSlots := slice
+  "games_index_hero"
+  "games_index_widget"
+  "idle_times_detail_hero"
+  "idle_times_detail_widget"
+-}}
+{{- $catalogUTMSlots := index $catalog "utm_source_slots" | default (slice) -}}
+{{- if ne (len $catalogUTMSlots) (len $approvedUTMSlots) -}}
+  {{- errorf "Games catalog must define exactly four approved UTM source slots" -}}
+{{- end -}}
+{{- range $catalogUTMSlots -}}
+  {{- if not (in $approvedUTMSlots .) -}}
+    {{- errorf "Games catalog uses unsupported UTM source slot %q" . -}}
+  {{- end -}}
+{{- end -}}
+{{- range $approvedUTMSlots -}}
+  {{- if not (in $catalogUTMSlots .) -}}
+    {{- errorf "Games catalog is missing approved UTM source slot %q" . -}}
+  {{- end -}}
 {{- end -}}
 
 {{- $game := index $games $key -}}
@@ -30,6 +62,9 @@
   "title"
   "category"
   "platform"
+  "language"
+  "play_style"
+  "steam_app_id"
   "status"
   "availability"
   "release_date_state"
@@ -66,6 +101,7 @@
 {{- end -}}
 
 {{- $routeStates := slice "email" "local_draft" "unavailable" -}}
+{{- $routeStates = $routeStates | append "public" -}}
 {{- $supportRouteState := index $game "support_route_state" -}}
 {{- $privacyRouteState := index $game "privacy_route_state" -}}
 {{- if not (in $routeStates $supportRouteState) -}}
@@ -84,6 +120,15 @@
 {{- end -}}
 {{- if and (eq $privacyRouteState "local_draft") (not (hasPrefix $privacyRoute "/")) -}}
   {{- errorf "Games product games.%s local privacy route must be root-relative" $key -}}
+{{- end -}}
+{{- if eq $privacyRouteState "public" -}}
+  {{- $parsedPrivacyRoute := urls.Parse $privacyRoute -}}
+  {{- if or (not (hasPrefix $privacyRoute "/")) (hasPrefix $privacyRoute "//") $parsedPrivacyRoute.RawQuery $parsedPrivacyRoute.Fragment -}}
+    {{- errorf "Games product games.%s public privacy route must be a clean root-relative URL" $key -}}
+  {{- end -}}
+  {{- if ne $privacyRoute "/privacy/" -}}
+    {{- errorf "Games product games.%s public privacy route must equal /privacy/" $key -}}
+  {{- end -}}
 {{- end -}}
 {{- if and (eq $privacyRouteState "unavailable") $privacyRoute -}}
   {{- errorf "Games product games.%s cannot define privacy_route when privacy_route_state is unavailable" $key -}}
@@ -125,6 +170,81 @@
   {{- end -}}
 {{- end -}}
 
+{{- $releaseState := index $game "release_date_state" -}}
+{{- if not (in (slice "planned" "released") $releaseState) -}}
+  {{- errorf "Games product games.%s uses unsupported release_date_state %q" $key $releaseState -}}
+{{- end -}}
+{{- if eq $releaseState "planned" -}}
+  {{- if ne $actionState "external_wishlist" -}}
+    {{- errorf "Games product games.%s planned releases must use external_wishlist" $key -}}
+  {{- end -}}
+  {{- if ne $actionLabel "Wishlist on Steam" -}}
+    {{- errorf "Games product games.%s planned Steam action must use the approved wishlist label" $key -}}
+  {{- end -}}
+  {{- if ne (index $game "status") "Coming soon" -}}
+    {{- errorf "Games product games.%s planned release status must be Coming soon" $key -}}
+  {{- end -}}
+{{- else if eq $releaseState "released" -}}
+  {{- if ne $actionState "external_purchase" -}}
+    {{- errorf "Games product games.%s released products must use external_purchase" $key -}}
+  {{- end -}}
+  {{- $expectedPurchaseLabel := printf "Buy %s on Steam" (index $game "title") -}}
+  {{- if ne $actionLabel $expectedPurchaseLabel -}}
+    {{- errorf "Games product games.%s released Steam action must equal %q" $key $expectedPurchaseLabel -}}
+  {{- end -}}
+  {{- if ne (index $game "status") "Available now" -}}
+    {{- errorf "Games product games.%s released status must be Available now" $key -}}
+  {{- end -}}
+  {{- if ne (index $game "availability") "Available now on Steam." -}}
+    {{- errorf "Games product games.%s released availability must be Available now on Steam" $key -}}
+  {{- end -}}
+  {{- $releasedCopy := lower ($game | jsonify) -}}
+  {{- range slice "coming soon" "coming to steam" "wishlist" "not yet available" "before steam unlocks" -}}
+    {{- if strings.Contains $releasedCopy . -}}
+      {{- errorf "Games product games.%s released copy contains stale pre-release language %q" $key . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $steamAppID := printf "%v" (index $game "steam_app_id") -}}
+{{- if or (not (findRE "^[0-9]+$" $steamAppID)) (and (eq $key "idle_times") (ne $steamAppID "4978200")) -}}
+  {{- errorf "Games product games.%s must use approved Steam App ID 4978200" $key -}}
+{{- end -}}
+{{- if and (eq $key "idle_times") (ne $actionURL "https://store.steampowered.com/app/4978200/Idle_Times/") -}}
+  {{- errorf "Games product games.%s must keep the approved clean Steam store URL" $key -}}
+{{- end -}}
+{{- if ne (index $game "platform") "Windows" -}}
+  {{- errorf "Games product games.%s platform must equal Windows" $key -}}
+{{- end -}}
+{{- if ne (index $game "language") "English" -}}
+  {{- errorf "Games product games.%s language must equal English" $key -}}
+{{- end -}}
+{{- if ne (index $game "play_style") "Single-player" -}}
+  {{- errorf "Games product games.%s play_style must equal Single-player" $key -}}
+{{- end -}}
+
+{{- $storeURLs := dict -}}
+{{- range $approvedUTMSlots -}}
+  {{- $query := printf "utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" $utmSource $utmMedium $utmCampaign . -}}
+  {{- $trackedURL := printf "%s?%s" $actionURL $query -}}
+  {{- $parsedTrackedURL := urls.Parse $trackedURL -}}
+  {{- if or (ne $parsedTrackedURL.Scheme "https") (not (in $storefrontHosts $parsedTrackedURL.Host)) (ne $parsedTrackedURL.RawQuery $query) $parsedTrackedURL.Fragment -}}
+    {{- errorf "Games product games.%s could not generate approved tracked store URL for slot %q" $key . -}}
+  {{- end -}}
+  {{- $storeURLs = merge $storeURLs (dict . $trackedURL) -}}
+{{- end -}}
+{{- $steamWidgetURLs := dict -}}
+{{- $widgetBaseURL := printf "https://store.steampowered.com/widget/%s/" $steamAppID -}}
+{{- range slice "games_index_widget" "idle_times_detail_widget" -}}
+  {{- $query := printf "utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" $utmSource $utmMedium $utmCampaign . -}}
+  {{- $trackedWidgetURL := printf "%s?%s" $widgetBaseURL $query -}}
+  {{- $parsedWidgetURL := urls.Parse $trackedWidgetURL -}}
+  {{- if or (ne $parsedWidgetURL.Scheme "https") (not (in $storefrontHosts $parsedWidgetURL.Host)) (ne $parsedWidgetURL.Path (printf "/widget/%s/" $steamAppID)) (ne $parsedWidgetURL.RawQuery $query) $parsedWidgetURL.Fragment -}}
+    {{- errorf "Games product games.%s could not generate approved Steam widget URL for slot %q" $key . -}}
+  {{- end -}}
+  {{- $steamWidgetURLs = merge $steamWidgetURLs (dict . $trackedWidgetURL) -}}
+{{- end -}}
+
 {{- $mediaState := index $game "media_state" -}}
 {{- $media := index $game "media" | default (slice) -}}
 {{- if not (in (slice "disabled" "approved" "local_draft") $mediaState) -}}
@@ -161,6 +281,47 @@
   {{- end -}}
 {{- end -}}
 
+{{- $heroMedia := where $media "role" "hero" -}}
+{{- if ne (len $heroMedia) 1 -}}
+  {{- errorf "Games product games.%s must define exactly one hero image" $key -}}
+{{- end -}}
+{{- if and (eq $key "idle_times") (ne (index (index $heroMedia 0) "id") "full-desk") -}}
+  {{- errorf "Games product games.%s must use the full gameplay capture as its hero" $key -}}
+{{- end -}}
+
+{{- $facts := index $game "facts" | default (slice) -}}
+{{- $factValues := dict -}}
+{{- range $facts -}}
+  {{- $factLabel := index . "label" | default "" -}}
+  {{- $factValue := index . "value" | default "" -}}
+  {{- if or (not $factLabel) (not $factValue) -}}
+    {{- errorf "Games product games.%s has an incomplete product fact" $key -}}
+  {{- end -}}
+  {{- if isset $factValues $factLabel -}}
+    {{- errorf "Games product games.%s repeats product fact %q" $key $factLabel -}}
+  {{- end -}}
+  {{- $factValues = merge $factValues (dict $factLabel $factValue) -}}
+{{- end -}}
+{{- range $label, $expectedValue := dict "Platform" "Windows" "Language" "English" "Play style" "Single-player" -}}
+  {{- if ne (index $factValues $label | default "") $expectedValue -}}
+    {{- errorf "Games product games.%s fact %q must equal %q" $key $label $expectedValue -}}
+  {{- end -}}
+{{- end -}}
+{{- if ne (len (index $game "features" | default (slice))) 3 -}}
+  {{- errorf "Games product games.%s must define exactly three benefit sections" $key -}}
+{{- end -}}
+{{- $disclosureCopy := lower ($game | jsonify) -}}
+{{- range slice
+  "progress occurs only while a desk view is open"
+  "there is no offline progression"
+  "fixed and pre-generated"
+  "no runtime generative-ai service or api calls"
+-}}
+  {{- if not (strings.Contains $disclosureCopy .) -}}
+    {{- errorf "Games product games.%s is missing required disclosure %q" $key . -}}
+  {{- end -}}
+{{- end -}}
+
 {{- with $page -}}
   {{- range slice "summary" "audience" "features_heading" "features_intro" "notices_heading" -}}
     {{- if not (index $game . | default "") -}}
@@ -183,4 +344,8 @@
   {{- end -}}
 {{- end -}}
 
-{{- return $game -}}
+{{- return (merge (dict
+  "product_key" $key
+  "store_urls" $storeURLs
+  "steam_widget_urls" $steamWidgetURLs
+) $game) -}}

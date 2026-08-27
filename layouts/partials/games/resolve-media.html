@@ -1,16 +1,22 @@
-{{- $page := .page -}}
-{{- $asset := .asset -}}
+{{- $page := .page | default false -}}
+{{- $asset := .asset | default dict -}}
 {{- $gameTitle := .game_title | default "unknown game" -}}
 {{- if not (index $asset "approved" | default false) -}}
   {{- errorf "Games media for %s is not approved" $gameTitle -}}
 {{- end -}}
-{{- if and (eq (index $asset "approval_scope") "local_draft") (not $page.Draft) -}}
+{{- if and (eq (index $asset "approval_scope") "local_draft") (or (not $page) (not $page.Draft)) -}}
   {{- errorf "Games media for %s is approved for draft review only" $gameTitle -}}
 {{- end -}}
 {{- $source := index $asset "source" | default "" -}}
 {{- $sourceKind := index $asset "source_kind" | default "" -}}
+{{- if not $source -}}
+  {{- errorf "Games media for %s does not define a source" $gameTitle -}}
+{{- end -}}
 {{- $resource := false -}}
 {{- if eq $sourceKind "page_resource" -}}
+  {{- if not $page -}}
+    {{- errorf "Games media for %s requires a page to resolve %q" $gameTitle $source -}}
+  {{- end -}}
   {{- $resource = $page.Resources.GetMatch $source -}}
 {{- else if eq $sourceKind "global_asset" -}}
   {{- $resource = resources.Get $source -}}
@@ -19,5 +25,8 @@
 {{- end -}}
 {{- if not $resource -}}
   {{- errorf "Games media for %s cannot resolve approved resource %q" $gameTitle $source -}}
+{{- end -}}
+{{- if ne $resource.MediaType.MainType "image" -}}
+  {{- errorf "Games media for %s is not an image resource: %q" $gameTitle $source -}}
 {{- end -}}
 {{- return (dict "asset" $asset "resource" $resource) -}}

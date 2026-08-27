@@ -60,7 +60,7 @@
   {{ $allowLocal = false }}
 {{ end }}
 
-{{ $eligibleRead := and .IsPage (eq .Kind "page") (not (in (slice "collections" "library" "random" "start-here") .Section)) }}
+{{ $eligibleRead := and .IsPage (eq .Kind "page") (not (in (slice "collections" "games" "library" "random" "start-here") .Section)) }}
 {{ $pageSlug := "" }}
 {{ if .IsPage }}
   {{ $pageSlug = .Params.slug | default .File.BaseFileName }}

@@ -1,13 +1,41 @@
-{{- $game := .game -}}
-{{- $state := index $game "action_state" -}}
+{{- $game := .game | default dict -}}
+{{- $state := index $game "action_state" | default "" -}}
+{{- $sourceSlot := strings.TrimSpace (printf "%v" (.source_slot | default "")) -}}
+{{- $allowedSlots := slice "games_index_hero" "games_index_widget" "idle_times_detail_hero" "idle_times_detail_widget" -}}
+{{- if not (in $allowedSlots $sourceSlot) -}}
+  {{- errorf "Games action uses unsupported source slot %q" $sourceSlot -}}
+{{- end -}}
+
 {{- if ne $state "disabled" -}}
-  {{- $href := index $game "action_url" -}}
-  {{- $label := index $game "action_label" -}}
-  <div class="games-action">
-    <a
-      class="games-action__link"
-      href="{{ $href }}"
-      {{- if in (slice "external_wishlist" "external_purchase") $state }} rel="external noopener"{{ end -}}
-    >{{ $label }} <span aria-hidden="true">&rarr;</span></a>
-  </div>
+  {{- $label := printf "%v" (.label | default (index $game "action_label" | default "")) -}}
+  {{- $modifier := strings.TrimSpace (printf "%v" (.modifier | default "")) -}}
+  {{- $class := "games-action" -}}
+  {{- with $modifier }}{{ $class = printf "%s games-action--%s" $class . }}{{ end -}}
+
+  {{- if in (slice "external_wishlist" "external_purchase") $state -}}
+    {{- $storeURLs := index $game "store_urls" | default dict -}}
+    {{- $href := index $storeURLs $sourceSlot | default "" -}}
+    {{- $productKey := index $game "product_key" | default "" -}}
+    {{- if not $href -}}
+      {{- errorf "Games product %q is missing the generated Steam URL for source slot %q" $productKey $sourceSlot -}}
+    {{- end -}}
+    {{- if not $productKey -}}
+      {{- errorf "Games action requires a product_key for source slot %q" $sourceSlot -}}
+    {{- end -}}
+    <div class="{{ $class }}">
+      <a
+        class="games-action__link"
+        href="{{ $href }}"
+        rel="external noopener"
+        data-analytics-event="game_store_click"
+        data-analytics-product="{{ $productKey }}"
+        data-analytics-source-slot="{{ $sourceSlot }}"
+      >{{ $label }} <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  {{- else -}}
+    {{- $href := index $game "action_url" | default "" -}}
+    <div class="{{ $class }}">
+      <a class="games-action__link" href="{{ $href }}">{{ $label }} <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  {{- end -}}
 {{- end -}}

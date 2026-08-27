@@ -2,46 +2,109 @@
   {{ $gamesData := hugo.Data.games | default dict }}
   {{ $catalog := index $gamesData "catalog" | default dict }}
   {{ $order := index $catalog "order" | default (slice) }}
-  {{ if not $order }}{{ errorf "Games catalog order is required" }}{{ end }}
+  {{ if ne (len $order) 1 }}{{ errorf "Games storefront requires exactly one featured product" }}{{ end }}
+
+  {{ $gameKey := index $order 0 }}
+  {{ $gameRecord := index (index $gamesData "games" | default dict) $gameKey | default dict }}
+  {{ $slug := index $gameRecord "slug" | default "" }}
+  {{ $gamePage := site.GetPage (printf "/games/%s" $slug) }}
+  {{ if not $gamePage }}{{ errorf "Games storefront cannot resolve the featured product page for %q" $gameKey }}{{ end }}
+  {{ $game := partial "games/product-data.html" (dict "key" $gameKey "page" $gamePage) }}
+  {{ $media := index $game "media" | default (slice) }}
+  {{ $heroAsset := false }}
+  {{ range $media }}
+    {{ if or (eq (index . "id") "full-desk") (eq (index . "source") "idle-times-packaged-desk-1920x1080.png") }}
+      {{ $heroAsset = . }}
+    {{ end }}
+  {{ end }}
+  {{ if not $heroAsset }}
+    {{ range where $media "role" "hero" }}
+      {{ if not $heroAsset }}{{ $heroAsset = . }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if not $heroAsset }}{{ errorf "Games storefront requires approved hero media for %s" (index $game "title") }}{{ end }}
+  {{ $hero := partial "games/resolve-media.html" (dict "page" $gamePage "asset" $heroAsset "game_title" (index $game "title")) }}
 
   <section class="games-index page-shell page-shell--wide" aria-labelledby="games-index-title">
     <header class="games-index__header">
-      <div>
-        <p class="games-kicker">Outside In Print LLC</p>
-        <h1 id="games-index-title">{{ .Title }}</h1>
-        {{ with .Content }}<div class="games-index__intro">{{ . }}</div>{{ end }}
-      </div>
-      {{ if .Draft }}
-        <p class="games-index__notice"><strong>Local review draft.</strong> No purchase, account, email capture, or game download is connected to this catalog.</p>
-      {{ else }}
-        <p class="games-index__notice"><strong>Release catalog.</strong> Idle Times is coming to Steam. No purchase, account, email capture, or game download is connected to this catalog.</p>
-      {{ end }}
+      <p class="games-kicker">Outside In Print Games</p>
+      <h1 id="games-index-title">{{ .Title }}</h1>
+      {{ with .Content }}<div class="games-index__intro">{{ . }}</div>{{ end }}
     </header>
 
-    <div class="games-index__grid" aria-label="Outside In Print game catalog">
-      {{ range $index, $gameKey := $order }}
-        {{ $game := partial "games/product-data.html" (dict "key" $gameKey) }}
-        {{ $gamePage := site.GetPage (printf "/games/%s" (index $game "slug")) }}
-        {{ $linkPage := $gamePage }}
-        {{ $cardTitleID := printf "games-card-%d-title" $index }}
-        <article class="games-card" aria-labelledby="{{ $cardTitleID }}">
-          <div class="games-card__ledger">
-            <span>{{ index $game "platform" }}</span>
-            <span>{{ index $game "status" }}</span>
+    <section class="games-index__featured" aria-labelledby="games-card-title">
+      <article class="games-card games-card--featured">
+        <figure class="games-card__media">
+          {{ partial "games/picture.html" (dict
+            "resolved" $hero
+            "class" "games-card__picture"
+            "sizes" "(max-width: 760px) 100vw, 58vw"
+            "loading" "eager"
+            "fetchpriority" "high"
+          ) }}
+          {{ with index $heroAsset "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
+        </figure>
+
+        <div class="games-card__body">
+          <div class="games-card__eyebrow">
+            <span class="games-card__status">{{ index $game "status" }}</span>
+            <span>{{ index $game "category" }}</span>
           </div>
-          <h2 id="{{ $cardTitleID }}">
-            {{ if $linkPage }}<a href="{{ $gamePage.RelPermalink }}">{{ index $game "title" }}</a>{{ else }}{{ index $game "title" }}{{ end }}
-          </h2>
+          <h2 id="games-card-title">{{ index $game "title" }}</h2>
           <p class="games-card__summary">{{ index $game "catalog_summary" }}</p>
           <p class="games-card__availability">{{ index $game "availability" }}</p>
-          <p class="games-card__note">{{ index $game "catalog_note" }}</p>
-          {{ if $linkPage }}<a class="games-card__link" href="{{ $gamePage.RelPermalink }}">View game brief <span aria-hidden="true">&rarr;</span></a>{{ end }}
-        </article>
-      {{ end }}
+          {{ partial "games/action.html" (dict "game" $game "source_slot" "games_index_hero") }}
+
+          <dl class="games-facts games-facts--compact games-card__facts" aria-label="Platform and play style">
+            {{ range index $game "facts" }}
+              {{ if in (slice "Platform" "Language" "Play style") (index . "label") }}
+                <div><dt>{{ index . "label" }}</dt><dd>{{ index . "value" }}</dd></div>
+              {{ end }}
+            {{ end }}
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="games-benefits" aria-labelledby="games-benefits-title">
+      <header class="games-benefits__header games-section-heading">
+        <div>
+          <p class="games-kicker">Why it fits beside your work</p>
+          <h2 id="games-benefits-title">{{ index $game "features_heading" }}</h2>
+        </div>
+        <p>{{ index $game "features_intro" }}</p>
+      </header>
+      <div class="games-benefits__grid">
+        {{ range first 3 (index $game "features") }}
+          <article class="games-benefit">
+            <h3>{{ index . "title" }}</h3>
+            <p>{{ index . "description" }}</p>
+          </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="games-notices games-notices--compact" aria-labelledby="games-notices-title">
+      <header class="games-notices__header">
+        <p class="games-kicker">Before you play</p>
+        <h2 id="games-notices-title">{{ index $game "notices_heading" }}</h2>
+      </header>
+      <ul class="games-notices__list">
+        {{ range index $game "notices" }}<li>{{ . }}</li>{{ end }}
+      </ul>
+    </section>
+
+    <div class="games-index__widget">
+      {{ partial "games/steam-widget.html" (dict "game" $game "source_slot" "games_index_widget") }}
+    </div>
+
+    <div class="games-index__detail-link">
+      <p>See every screenshot, feature, requirement, and disclosure.</p>
+      <a href="{{ $gamePage.RelPermalink }}">Explore the full Idle Times details <span aria-hidden="true">&rarr;</span></a>
     </div>
 
     <footer class="games-index__identity">
-      <p>Games is a descriptive catalog operated by <strong>Outside In Print LLC</strong>. It is not a separate business or publisher identity.</p>
+      <p>{{ index $game "operator_line" }}</p>
       <a href="mailto:{{ index $catalog "support_email" }}">{{ index $catalog "support_email" }}</a>
     </footer>
   </section>

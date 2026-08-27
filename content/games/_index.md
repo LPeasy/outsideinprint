@@ -6,4 +6,4 @@ noindex: false
 show_citation: false
 ---
 
-Games is a descriptive catalog for interactive work operated and supported by Outside In Print LLC.
+Games from Outside In Print begin with Idle Times, a quiet desktop companion available now on Steam.

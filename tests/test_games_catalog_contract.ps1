@@ -59,12 +59,37 @@ if ($gameKeys.Count -ne 1 -or $gameKeys[0] -cne 'idle_times') {
 if ($data -notmatch '(?ms)^\s+order:\s*\r?\n\s+-\s+"idle_times"\s*\r?\n\s*\r?\ngames:') {
   throw 'Bounded release catalog order must contain only Idle Times.'
 }
-
-$idleAssets = @(
-  'games/idle-times/idle-times-main-capsule.png',
-  'games/idle-times/idle-times-packaged-desk-1920x1080.png',
-  'games/idle-times/idle-times-packaged-library-1920x1080.png'
+$requiredReleasedSourcePatterns = @(
+  '(?m)^\s+release_date_state:\s*"released"\s*$',
+  '(?m)^\s+status:\s*"Available now"\s*$',
+  '(?m)^\s+availability:\s*"Available now on Steam\."\s*$',
+  '(?m)^\s+action_state:\s*"external_purchase"\s*$',
+  '(?m)^\s+action_label:\s*"Buy Idle Times on Steam"\s*$',
+  '(?m)^\s+steam_app_id:\s*"4978200"\s*$',
+  '(?m)^\s+platform:\s*"Windows"\s*$',
+  '(?m)^\s+language:\s*"English"\s*$',
+  '(?m)^\s+play_style:\s*"Single-player"\s*$',
+  '(?m)^\s+privacy_route_state:\s*"public"\s*$',
+  '(?m)^\s+privacy_route:\s*"/privacy/"\s*$'
 )
+foreach ($pattern in $requiredReleasedSourcePatterns) {
+  if ($data -notmatch $pattern) { throw "Released Idle Times source contract is missing pattern: $pattern" }
+}
+$cleanStoreUrl = 'https://store.steampowered.com/app/4978200/Idle_Times/'
+$storedActionUrl = [regex]::Match($data, '(?m)^\s+action_url:\s*"([^"]+)"\s*$')
+if (-not $storedActionUrl.Success -or $storedActionUrl.Groups[1].Value -cne $cleanStoreUrl) {
+  throw 'Idle Times must store the exact clean Steam URL without tracking parameters or a fragment.'
+}
+$approvedSlots = @('games_index_hero', 'games_index_widget', 'idle_times_detail_hero', 'idle_times_detail_widget')
+$sourceSlots = @([regex]::Matches($data, '(?m)^\s{4}-\s+"(games_index_hero|games_index_widget|idle_times_detail_hero|idle_times_detail_widget)"\s*$') | ForEach-Object { $_.Groups[1].Value })
+if (($sourceSlots -join "`n") -cne ($approvedSlots -join "`n")) {
+  throw 'Games data must define the four approved Steam UTM source slots in contract order.'
+}
+$releasedSource = "$gamesIndexSource`n$idleSource`n$data"
+if ($releasedSource -match '(?i)coming soon|coming to Steam|wishlist|not yet available|before Steam unlocks') {
+  throw 'Released Games source contains stale pre-release language.'
+}
+
 $gamesHtml = Get-BuiltHtml 'games/index.html'
 $idleHtml = Get-BuiltHtml 'games/idle-times/index.html'
 $publicRouteRecords = @(
@@ -81,52 +106,104 @@ foreach ($entry in $publicRouteRecords) {
   if ($entry.Html -notmatch $canonicalPattern) { throw "Public route has the wrong canonical: $($entry.Route)" }
 }
 
-if ([regex]::Matches($gamesHtml, '<article\s+class=(?:"games-card"|games-card(?:\s|>))').Count -ne 1) {
-  throw 'Public Games catalog must contain exactly one game card.'
-}
 $idleCardLinks = [regex]::Matches($gamesHtml, 'href=(?:"/games/idle-times/"|/games/idle-times/(?:\s|>))').Count
 if ($idleCardLinks -lt 1) { throw 'Public catalog must link Idle Times.' }
 
-foreach ($asset in $idleAssets) {
-  if (-not (Test-Path -LiteralPath (Join-Path $SiteDir $asset) -PathType Leaf)) {
-    throw "Public Idle media is missing: $asset"
-  }
-}
-$expectedAssetHashes = @{
-  'games/idle-times/idle-times-main-capsule.png' = '5797E830C285688A3E5F6840FD189D8281AD31320AF2388074FB3016EE853109'
-  'games/idle-times/idle-times-packaged-desk-1920x1080.png' = '0D5C4E1D01F10F4E8D070DB2CE555C55D66655F1ECFD66DF4ADBFD38EEF7B339'
-  'games/idle-times/idle-times-packaged-library-1920x1080.png' = '0EAC2DD310F4A6365666F1662B814AD28D6B8EE3E3558DDF3947FD1658A7B954'
-}
-foreach ($asset in $expectedAssetHashes.Keys) {
-  $actualHash = (Get-FileHash -LiteralPath (Join-Path $SiteDir $asset) -Algorithm SHA256).Hash
-  if ($actualHash -cne $expectedAssetHashes[$asset]) { throw "Public Idle media hash changed: $asset" }
-}
-
 foreach ($required in @(
-  'Coming to Steam August 25, 2026.',
+  'Available now on Steam.',
+  'Buy Idle Times on Steam',
   'Full Desk, Mini Companion, and Pet Desk',
   '78 illustrated rewards',
-  'Seven bundled tracks',
-  'fixed, pre-generated AI-assisted visual art',
+  'Progress occurs only while a desk view is open.',
+  'There is no offline progression.',
+  'fixed and pre-generated',
+  'no runtime generative-AI service or API calls',
   'support@outsideinprint.org',
-  'https://store.steampowered.com/app/4978200/Idle_Times/'
+  '/privacy/'
 )) {
   if ($idleHtml -notmatch [regex]::Escape($required)) { throw "Public Idle output is missing: $required" }
 }
 foreach ($required in @(
-  'Coming to Steam August 25, 2026.',
-  'Games is a descriptive catalog operated by <strong>Outside In Print LLC</strong>. It is not a separate business or publisher identity.'
+  'Available now',
+  'Buy Idle Times on Steam',
+  '/games/idle-times/'
 )) {
   if ($gamesHtml -notmatch [regex]::Escape($required)) { throw "Public Games catalog is missing: $required" }
 }
 
+$utmPrefix = 'utm_source=outsideinprint&utm_medium=owned_web&utm_campaign=games_hub&utm_content='
+$gamesDecoded = [System.Net.WebUtility]::HtmlDecode($gamesHtml)
+$idleDecoded = [System.Net.WebUtility]::HtmlDecode($idleHtml)
+$trackedOutput = @(
+  @{ Html = $gamesDecoded; Slot = 'games_index_hero'; Base = $cleanStoreUrl; Label = 'Games hero CTA' },
+  @{ Html = $gamesDecoded; Slot = 'games_index_widget'; Base = $cleanStoreUrl; Label = 'Games widget fallback' },
+  @{ Html = $gamesDecoded; Slot = 'games_index_widget'; Base = 'https://store.steampowered.com/widget/4978200/'; Label = 'Games Steam widget' },
+  @{ Html = $idleDecoded; Slot = 'idle_times_detail_hero'; Base = $cleanStoreUrl; Label = 'Idle Times hero CTA' },
+  @{ Html = $idleDecoded; Slot = 'idle_times_detail_widget'; Base = $cleanStoreUrl; Label = 'Idle Times widget fallback' },
+  @{ Html = $idleDecoded; Slot = 'idle_times_detail_widget'; Base = 'https://store.steampowered.com/widget/4978200/'; Label = 'Idle Times Steam widget' }
+)
+foreach ($record in $trackedOutput) {
+  $expectedUrl = "$($record.Base)?$utmPrefix$($record.Slot)"
+  if ([regex]::Matches($record.Html, [regex]::Escape($expectedUrl)).Count -ne 1) {
+    throw "$($record.Label) must emit exactly one approved tracked Steam URL."
+  }
+}
+$allSteamUrls = @([regex]::Matches("$gamesDecoded`n$idleDecoded", 'https://store\.steampowered\.com/(?:app/4978200/Idle_Times/|widget/4978200/)\?[^\s"''<>]+') | ForEach-Object { $_.Value })
+if ($allSteamUrls.Count -ne $trackedOutput.Count) {
+  throw "Expected exactly $($trackedOutput.Count) tracked Steam URLs; found $($allSteamUrls.Count)."
+}
+foreach ($url in $allSteamUrls) {
+  if ($url -notmatch ('^https://store\.steampowered\.com/(?:app/4978200/Idle_Times/|widget/4978200/)\?' + [regex]::Escape($utmPrefix) + '(?:' + (($approvedSlots | ForEach-Object { [regex]::Escape($_) }) -join '|') + ')$')) {
+    throw "Public Games output contains an unapproved Steam URL: $url"
+  }
+}
+
+foreach ($entry in @(
+  @{ Html = $gamesHtml; Route = 'games/index.html'; PictureCount = 1; Slot = 'games_index_widget' },
+  @{ Html = $idleHtml; Route = 'games/idle-times/index.html'; PictureCount = 3; Slot = 'idle_times_detail_widget' }
+)) {
+  if ([regex]::Matches($entry.Html, '<picture\b', 'IgnoreCase').Count -ne $entry.PictureCount) {
+    throw "Expected $($entry.PictureCount) responsive pictures at $($entry.Route)."
+  }
+  foreach ($pattern in @(
+    'type=(?:"image/avif"|image/avif(?:\s|>))',
+    'type=(?:"image/webp"|image/webp(?:\s|>))',
+    '<img\b[^>]*\bsrcset=',
+    '<img\b[^>]*\bsizes=',
+    '<iframe\b[^>]*\bloading=(?:"lazy"|lazy(?:\s|>))',
+    'games-widget__fallback',
+    'data-analytics-event=(?:"game_store_click"|game_store_click(?:\s|>))',
+    'data-analytics-product=(?:"idle_times"|idle_times(?:\s|>))',
+    ('data-analytics-source-slot=(?:"' + [regex]::Escape($entry.Slot) + '"|' + [regex]::Escape($entry.Slot) + '(?:\s|>))')
+  )) {
+    if ($entry.Html -notmatch $pattern) { throw "Public Games responsive/widget interface is missing at $($entry.Route): $pattern" }
+  }
+}
+
 foreach ($html in @($gamesHtml, $idleHtml)) {
-  if ($html -match '(?i)<(?:form|input|select|textarea)\b|stripe|checkout|waitlist|[$€£]\s*\d|\?utm_|<video\b|\.(?:webm|mp4)') {
-    throw 'Public Games output exposed commerce, intake, tracking, or trailer media.'
+  if ($html -match '(?i)<(?:form|input|select|textarea)\b|stripe|checkout|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)') {
+    throw 'Public Games output exposed onsite commerce, intake, price claims, or trailer media.'
   }
   if ($html -match '(?i)Steam (?:seller|payee|tax|bank)') {
     throw 'Public Games output makes an unverified Steam account-identity claim.'
   }
+  if ($html -match '(?i)<a\b[^>]*\btarget=(?:"_blank"|_blank(?:\s|>))') {
+    throw 'Public Games output must not force Steam links into an unannounced new tab.'
+  }
+}
+
+$rawSocialPath = Join-Path $SiteDir 'games/idle-times/idle-times-packaged-desk-1920x1080.png'
+if (Test-Path -LiteralPath $rawSocialPath -PathType Leaf) {
+  throw 'Idle Times metadata must not publish the original full-size gameplay PNG.'
+}
+$processedSocialRelativePath = 'images/games/idle-times/social-1200w.jpg'
+$processedSocialPath = Join-Path $SiteDir $processedSocialRelativePath
+if (-not (Test-Path -LiteralPath $processedSocialPath -PathType Leaf)) {
+  throw 'Idle Times metadata must publish the processed 1200px social image.'
+}
+$processedSocialUrl = "https://outsideinprint.org/$processedSocialRelativePath"
+if ($idleHtml -notmatch [regex]::Escape($processedSocialUrl)) {
+  throw 'Idle Times metadata must reference the processed social image.'
 }
 
 $sitemapPath = Join-Path $SiteDir 'sitemap.xml'

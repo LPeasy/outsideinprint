@@ -838,7 +838,9 @@ $excludedLaneChanges = @(
     'assets/js/paper-route-launcher.js' `
     'assets/js/paper-route-rules.js' `
     'assets/js/paper-route.js' `
-    'content/games/idle-times' `
+    'content/games/idle-times/idle-times-main-capsule.png' `
+    'content/games/idle-times/idle-times-packaged-desk-1920x1080.png' `
+    'content/games/idle-times/idle-times-packaged-library-1920x1080.png' `
     'static/images/books' `
     'static/images/social' `
     'content/authors/robert-v-ussley/Bobviously_Portrait_v1.png'
@@ -847,7 +849,7 @@ if ($LASTEXITCODE -ne 0) {
   throw 'Unable to compare excluded image/game lanes with the focused-cleanup baseline.'
 }
 if ($excludedLaneChanges.Count -gt 0) {
-  throw "Focused cleanup changed excluded Paper-Bob, Idle Times, book, social-card, or author-portrait assets: $($excludedLaneChanges -join ', ')"
+  throw "Focused cleanup changed excluded Paper-Bob, Idle Times binary, book, social-card, or author-portrait assets: $($excludedLaneChanges -join ', ')"
 }
 
 function Get-OipBaselineBlobMap {

@@ -1,0 +1,41 @@
+{{- $game := .game | default dict -}}
+{{- $sourceSlot := strings.TrimSpace (printf "%v" (.source_slot | default "")) -}}
+{{- $allowedSlots := slice "games_index_widget" "idle_times_detail_widget" -}}
+{{- if not (in $allowedSlots $sourceSlot) -}}
+  {{- errorf "Steam widget uses unsupported source slot %q" $sourceSlot -}}
+{{- end -}}
+{{- $productKey := index $game "product_key" | default "" -}}
+{{- $widgetURLs := index $game "steam_widget_urls" | default dict -}}
+{{- $widgetURL := index $widgetURLs $sourceSlot | default "" -}}
+{{- if not $widgetURL -}}
+  {{- errorf "Games product %q is missing the Steam widget URL for source slot %q" $productKey $sourceSlot -}}
+{{- end -}}
+{{- $titleID := printf "games-widget-%s-title" $sourceSlot -}}
+{{- $descriptionID := printf "games-widget-%s-description" $sourceSlot -}}
+
+<section class="games-widget" aria-labelledby="{{ $titleID }}" aria-describedby="{{ $descriptionID }}">
+  <div class="games-widget__copy">
+    <p class="games-widget__eyebrow">Steam Store</p>
+    <h2 class="games-widget__title" id="{{ $titleID }}">{{ index $game "title" }} on Steam</h2>
+    <p id="{{ $descriptionID }}">Steam provides current pricing and handles purchases, accounts, and licenses.</p>
+  </div>
+  <div class="games-widget__frame">
+    <iframe
+      src="{{ $widgetURL }}"
+      title="Buy {{ index $game "title" }} on Steam"
+      width="646"
+      height="190"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+  <div class="games-widget__fallback">
+    <p>If the Steam widget is blocked, use the direct store link.</p>
+    {{ partial "games/action.html" (dict
+      "game" $game
+      "source_slot" $sourceSlot
+      "modifier" "widget"
+      "label" "Open Idle Times on Steam"
+    ) }}
+  </div>
+</section>

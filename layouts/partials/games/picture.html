@@ -1,0 +1,66 @@
+{{- $resolved := .resolved | default false -}}
+{{- if not $resolved -}}
+  {{- errorf "Games picture requires resolved media" -}}
+{{- end -}}
+{{- $asset := index $resolved "asset" | default dict -}}
+{{- $resource := index $resolved "resource" | default false -}}
+{{- if not $resource -}}
+  {{- errorf "Games picture cannot render a missing media resource" -}}
+{{- end -}}
+{{- $assetID := strings.TrimSpace (printf "%v" (index $asset "id" | default "")) -}}
+{{- if or (not $assetID) (not (findRE `^[a-z0-9][a-z0-9-]*$` $assetID)) -}}
+  {{- errorf "Games picture uses unsafe media id %q" $assetID -}}
+{{- end -}}
+
+{{- $loading := lower (strings.TrimSpace (printf "%v" (.loading | default "lazy"))) -}}
+{{- if not (in (slice "eager" "lazy") $loading) -}}
+  {{- errorf "Games picture uses unsupported loading policy %q" $loading -}}
+{{- end -}}
+{{- $fetchPriority := lower (strings.TrimSpace (printf "%v" (.fetchpriority | default ""))) -}}
+{{- if and $fetchPriority (not (in (slice "high" "low" "auto") $fetchPriority)) -}}
+  {{- errorf "Games picture uses unsupported fetch priority %q" $fetchPriority -}}
+{{- end -}}
+{{- $sizes := strings.TrimSpace (printf "%v" (.sizes | default "100vw")) -}}
+{{- $pictureClass := strings.TrimSpace (printf "games-picture %s" (.class | default "")) -}}
+{{- $alt := printf "%v" (.alt | default (index $asset "alt" | default "")) -}}
+
+{{- $renderCap := int $resource.Width -}}
+{{- if gt $renderCap 1600 }}{{ $renderCap = 1600 }}{{ end -}}
+{{- $widths := slice -}}
+{{- range slice 320 640 960 1280 1600 -}}
+  {{- if and (le . $renderCap) (not (in $widths .)) }}{{ $widths = $widths | append . }}{{ end -}}
+{{- end -}}
+{{- if not (in $widths $renderCap) }}{{ $widths = $widths | append $renderCap }}{{ end -}}
+{{- $widths = sort $widths -}}
+
+{{- $avifSet := slice -}}
+{{- $webpSet := slice -}}
+{{- $fallback := false -}}
+{{- range $widths -}}
+  {{- $width := int . -}}
+  {{- $avif := $resource.Resize (printf "%dx avif q62 lanczos drawing" $width) -}}
+  {{- $avif = resources.Copy (printf "images/games/%s/%dw.avif" $assetID $width) $avif -}}
+  {{- $webp := $resource.Resize (printf "%dx webp q84 lanczos drawing" $width) -}}
+  {{- $webp = resources.Copy (printf "images/games/%s/%dw.webp" $assetID $width) $webp -}}
+  {{- $avifSet = $avifSet | append (printf "%s %dw" $avif.RelPermalink $avif.Width) -}}
+  {{- $webpSet = $webpSet | append (printf "%s %dw" $webp.RelPermalink $webp.Width) -}}
+  {{- $fallback = $webp -}}
+{{- end -}}
+{{- if not $fallback }}{{ errorf "Games picture %q produced no responsive derivatives" $assetID }}{{ end -}}
+
+<picture class="{{ $pictureClass }}" data-games-media-id="{{ $assetID }}">
+  <source type="image/avif" srcset="{{ delimit $avifSet ", " }}" sizes="{{ $sizes }}">
+  <source type="image/webp" srcset="{{ delimit $webpSet ", " }}" sizes="{{ $sizes }}">
+  <img
+    class="games-picture__image"
+    src="{{ $fallback.RelPermalink }}"
+    srcset="{{ delimit $webpSet ", " }}"
+    sizes="{{ $sizes }}"
+    width="{{ $fallback.Width }}"
+    height="{{ $fallback.Height }}"
+    alt="{{ $alt }}"
+    loading="{{ $loading }}"
+    decoding="async"
+    {{- with $fetchPriority }} fetchpriority="{{ . }}"{{ end -}}
+  >
+</picture>

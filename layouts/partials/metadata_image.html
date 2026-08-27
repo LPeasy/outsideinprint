@@ -89,11 +89,31 @@
   {{- end -}}
 {{- end -}}
 
+{{- $gamesSocialImage := "" -}}
+{{- if and $image (eq .Section "games") -}}
+  {{- $gamesResource := .Resources.GetMatch $image -}}
+  {{- if not $gamesResource -}}
+    {{- errorf "Games metadata image %q is not a page resource for %s" $image .Path -}}
+  {{- else if ne $gamesResource.MediaType.MainType "image" -}}
+    {{- errorf "Games metadata resource %q is not an image for %s" $image .Path -}}
+  {{- else -}}
+    {{- $gamesSocialWidth := $gamesResource.Width -}}
+    {{- if gt $gamesSocialWidth 1200 -}}
+      {{- $gamesSocialWidth = 1200 -}}
+    {{- end -}}
+    {{- $gamesSocial := $gamesResource.Resize (printf "%dx jpeg q85 lanczos #f7eed8" $gamesSocialWidth) -}}
+    {{- $gamesSocial = resources.Copy (printf "images/games/%s/social-%dw.jpg" $slug $gamesSocialWidth) $gamesSocial -}}
+    {{- $gamesSocialImage = $gamesSocial.Permalink -}}
+  {{- end -}}
+{{- end -}}
+
 {{- if and (not $image) $policy.indexable $organizationImage -}}
   {{- $image = printf "%v" $organizationImage -}}
 {{- end -}}
 
-{{- if $image -}}
+{{- if $gamesSocialImage -}}
+  {{- $gamesSocialImage -}}
+{{- else if $image -}}
   {{- $imageModel := partial "images/model.html" (dict
     "page" .
     "ref" $image

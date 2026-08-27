@@ -35,7 +35,9 @@ const requiredCommonPaths = [
   "layouts/games/single.html",
   "layouts/partials/games/product-data.html",
   "layouts/partials/games/resolve-media.html",
+  "layouts/partials/games/picture.html",
   "layouts/partials/games/action.html",
+  "layouts/partials/games/steam-widget.html",
   "layouts/partials/schema/webpage.html",
   "layouts/partials/masthead.html",
   "layouts/partials/footer.html",
@@ -64,6 +66,17 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
   assert.match(data, /^\s+operator_legal_name:\s*"Outside In Print LLC"\s*$/m);
   assert.match(data, /^\s+support_email:\s*"support@outsideinprint\.org"\s*$/m);
   assert.match(data, /^\s+storefront_hosts:\s*\r?\n\s+-\s+"store\.steampowered\.com"\s*$/m);
+  assert.match(data, /^\s+utm_source:\s*"outsideinprint"\s*$/m);
+  assert.match(data, /^\s+utm_medium:\s*"owned_web"\s*$/m);
+  assert.match(data, /^\s+utm_campaign:\s*"games_hub"\s*$/m);
+  const utmSlots = [...data.matchAll(/^\s{4}-\s+"(games_index_hero|games_index_widget|idle_times_detail_hero|idle_times_detail_widget)"\s*$/gm)]
+    .map((match) => match[1]);
+  assert.deepEqual(utmSlots, [
+    "games_index_hero",
+    "games_index_widget",
+    "idle_times_detail_hero",
+    "idle_times_detail_widget",
+  ], "Games data must expose only the four approved UTM source slots");
   assert.match(data, /^\s+order:\s*\r?\n\s+-\s+"idle_times"\s*\r?\n\s*\r?\ngames:/m);
   const gamesSection = data.split(/^games:\s*$/m)[1];
   assert.ok(gamesSection, "expected Games records section");
@@ -72,7 +85,8 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
 
   for (const [title, block] of [["Idle Times", idle]]) {
     for (const field of [
-      "slug", "title", "category", "platform", "status", "availability", "release_date_state",
+      "slug", "title", "category", "platform", "language", "play_style", "steam_app_id",
+      "status", "availability", "release_date_state",
       "release_date_display", "catalog_summary", "catalog_note",
       "operator_legal_name", "operator_line", "support_email", "support_line", "support_route_state",
       "privacy_route_state", "action_state", "media_state",
@@ -88,17 +102,32 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
   for (const field of ["summary", "audience", "features_heading", "features_intro", "notices_heading", "facts", "features", "notices"]) {
     assert.match(idle, new RegExp(`^\\s+${field}:`, "m"), `Idle Times must define page field ${field}`);
   }
-  assert.match(idle, /^\s+action_state:\s*"external_wishlist"\s*$/m);
+  assert.match(idle, /^\s+release_date_state:\s*"released"\s*$/m);
+  assert.match(idle, /^\s+status:\s*"Available now"\s*$/m);
+  assert.match(idle, /^\s+availability:\s*"Available now on Steam\."\s*$/m);
+  assert.match(idle, /^\s+action_state:\s*"external_purchase"\s*$/m);
+  assert.match(idle, /^\s+action_label:\s*"Buy Idle Times on Steam"\s*$/m);
   assert.match(idle, /^\s+action_url:\s*"https:\/\/store\.steampowered\.com\/app\/4978200\/Idle_Times\/"\s*$/m);
-  assert.doesNotMatch(idle, /[?#](?:utm_|[^"\s]*)/i);
-  assert.match(idle, /Coming to Steam August 25, 2026\./);
+  assert.match(idle, /^\s+steam_app_id:\s*"4978200"\s*$/m);
+  assert.match(idle, /^\s+platform:\s*"Windows"\s*$/m);
+  assert.match(idle, /^\s+language:\s*"English"\s*$/m);
+  assert.match(idle, /^\s+play_style:\s*"Single-player"\s*$/m);
+  assert.match(idle, /^\s+privacy_route_state:\s*"public"\s*$/m);
+  assert.match(idle, /^\s+privacy_route:\s*"\/privacy\/"\s*$/m);
+  assert.doesNotMatch(idle.match(/^\s+action_url:.*$/m)?.[0] || "", /[?#]/);
   assert.match(idle, /Full Desk, Mini Companion, and Pet Desk/);
   assert.match(idle, /78 illustrated rewards/);
-  assert.match(idle, /Seven bundled tracks/);
-  assert.match(idle, /fixed, pre-generated AI-assisted visual art/);
-  assert.match(idle, /No live AI/);
+  assert.match(idle, /Progress occurs only while a desk view is open\. There is no offline progression\./);
+  assert.match(idle, /All AI-assisted visual artwork is fixed and pre-generated before release\./);
+  assert.match(idle, /no runtime generative-AI service or API calls/);
+  assert.match(idle, /^\s+- label:\s*"Platform"\s*\r?\n\s+value:\s*"Windows"\s*$/m);
+  assert.match(idle, /^\s+- label:\s*"Language"\s*\r?\n\s+value:\s*"English"\s*$/m);
+  assert.match(idle, /^\s+- label:\s*"Play style"\s*\r?\n\s+value:\s*"Single-player"\s*$/m);
+  assert.equal((idle.match(/^\s+- title:/gm) || []).length, 3, "Idle Times must define exactly three benefit sections");
+  assert.match(idle, /^\s+- id:\s*"full-desk"\s*\r?\n\s+role:\s*"hero"\s*$/m);
   assert.doesNotMatch(idle, /seller|payee|tax party|bank identity/i);
-  assert.doesNotMatch(idle, /seven original tracks|available now|[$€£]\s*\d|\$\d/i);
+  assert.doesNotMatch(`${gamesIndex}\n${idlePage}\n${idle}`, /coming soon|coming to steam|wishlist|not yet available|before steam unlocks/i);
+  assert.doesNotMatch(idle, /seven original tracks|[$€£]\s*\d|\$\d/i);
 
   const expectedHashes = new Map([
     ["content/games/idle-times/idle-times-main-capsule.png", "5797e830c285688a3e5f6840fd189d8281ad31320af2388074fb3016ee853109"],
@@ -116,12 +145,14 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
   assert.deepEqual(gamesContent, ["_index.md", "idle-times/index.md"], "bounded release must contain only Games index and Idle Times content");
 });
 
-test("Games templates fail closed and keep the catalog non-commercial", () => {
+test("Games templates fail closed around Steam and expose the released storefront interface", () => {
   const listTemplate = read("layouts/games/list.html");
   const singleTemplate = read("layouts/games/single.html");
   const productData = read("layouts/partials/games/product-data.html");
   const resolveMedia = read("layouts/partials/games/resolve-media.html");
+  const picture = read("layouts/partials/games/picture.html");
   const action = read("layouts/partials/games/action.html");
+  const widget = read("layouts/partials/games/steam-widget.html");
   const masthead = read("layouts/partials/masthead.html");
   const footer = read("layouts/partials/footer.html");
   const schema = read("layouts/partials/schema/webpage.html");
@@ -135,7 +166,18 @@ test("Games templates fail closed and keep the catalog non-commercial", () => {
   assert.match(singleTemplate, /partial "games\/product-data\.html"/);
   assert.match(singleTemplate, /partial "games\/resolve-media\.html"/);
   assert.match(singleTemplate, /partial "games\/action\.html"/);
+  assert.match(listTemplate, /partial "games\/picture\.html"/);
+  assert.match(singleTemplate, /partial "games\/picture\.html"/);
+  assert.match(listTemplate, /partial "games\/steam-widget\.html"/);
+  assert.match(singleTemplate, /partial "games\/steam-widget\.html"/);
   assert.equal((singleTemplate.match(/<h1\b/g) || []).length, 1);
+
+  for (const slot of ["games_index_hero", "games_index_widget"]) {
+    assert.match(listTemplate, new RegExp(`"${slot}"`), `Games index must use source slot ${slot}`);
+  }
+  for (const slot of ["idle_times_detail_hero", "idle_times_detail_widget"]) {
+    assert.match(singleTemplate, new RegExp(`"${slot}"`), `Idle Times detail must use source slot ${slot}`);
+  }
 
   for (const state of ["disabled", "browser_play", "external_wishlist", "external_purchase"]) {
     assert.match(productData, new RegExp(`"${state}"`), `expected controlled action state ${state}`);
@@ -144,6 +186,25 @@ test("Games templates fail closed and keep the catalog non-commercial", () => {
   assert.match(productData, /urls\.Parse/);
   assert.match(productData, /RawQuery/);
   assert.match(productData, /Fragment/);
+  assert.match(productData, /release_date_state/);
+  assert.match(productData, /planned releases must use external_wishlist/);
+  assert.match(productData, /released products must use external_purchase/);
+  assert.match(productData, /stale pre-release language/);
+  assert.match(productData, /"product_key"/);
+  assert.match(productData, /"store_urls"/);
+  assert.match(productData, /"steam_widget_urls"/);
+  assert.match(productData, /utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s/);
+  for (const value of [
+    "outsideinprint",
+    "owned_web",
+    "games_hub",
+    "games_index_hero",
+    "games_index_widget",
+    "idle_times_detail_hero",
+    "idle_times_detail_widget",
+  ]) {
+    assert.match(productData, new RegExp(`"${value}"`), `product data must bind approved Steam tracking value ${value}`);
+  }
   assert.match(productData, /Outside In Print LLC/);
   assert.match(productData, /support@outsideinprint\.org/);
   assert.match(productData, /errorf/);
@@ -152,7 +213,30 @@ test("Games templates fail closed and keep the catalog non-commercial", () => {
   assert.match(resolveMedia, /Resources\.GetMatch/);
   assert.match(resolveMedia, /resources\.Get/);
   assert.match(action, /rel="external noopener"/);
+  assert.match(action, /data-analytics-event="game_store_click"/);
+  assert.match(action, /data-analytics-product=/);
+  assert.match(action, /data-analytics-source-slot=/);
+  assert.match(action, /store_urls/);
+  assert.doesNotMatch(action, /target="_blank"/);
   assert.doesNotMatch(action, /<form\b|<input\b|checkout|waitlist|price/i);
+
+  assert.match(picture, /<picture\b/);
+  assert.match(picture, /data-games-media-id/);
+  assert.match(picture, /type="image\/avif"/);
+  assert.match(picture, /type="image\/webp"/);
+  assert.match(picture, /class="games-picture__image"/);
+  assert.match(picture, /srcset=/);
+  assert.match(picture, /sizes=/);
+  assert.match(picture, /loading=/);
+  assert.match(picture, /decoding=/);
+
+  assert.match(widget, /<iframe\b/);
+  assert.match(widget, /width="646"/);
+  assert.match(widget, /height="190"/);
+  assert.match(widget, /loading="lazy"/);
+  assert.match(widget, /steam_widget_urls/);
+  assert.match(widget, /games-widget__fallback/);
+  assert.match(widget, /partial "games\/action\.html"/);
 
   for (const chrome of [masthead, footer]) {
     assert.match(chrome, /site\.GetPage "\/games"/);
@@ -168,11 +252,10 @@ test("Games templates fail closed and keep the catalog non-commercial", () => {
     assert.match(css, new RegExp(`\\.${family}`), `expected Games CSS owner ${family}`);
     assert.match(matrix, new RegExp("`" + family), `expected Games matrix owner ${family}`);
   }
-  const gamesCss = css.match(/\/\* Games catalog and product briefs \*\/([\s\S]*?)(?=\r?\n@media print)/);
+  const gamesCss = css.match(/\/\* Games (?:catalog and product briefs|storefront and product) \*\/([\s\S]*?)(?=\r?\n@media print)/);
   assert.ok(gamesCss, "expected bounded Games CSS section");
-  assert.match(gamesCss[1], /@media\s*\(max-width:640px\)/);
+  assert.match(gamesCss[1], /@media\s*\(max-width:(?:600|640)px\)/);
   assert.match(gamesCss[1], /:focus-visible/);
-  assert.doesNotMatch(gamesCss[1], /(?:linear|radial|conic)-gradient\s*\(|@keyframes\b|\banimation(?:-name)?\s*:/i);
   assert.doesNotMatch(gamesCss[1], /@font-face\b|url\([^)]*\.(?:woff2?|ttf|otf)/i);
 
   assert.doesNotMatch(`${read("data/games.yaml")}\n${markup}`, /Outside In Games/);
