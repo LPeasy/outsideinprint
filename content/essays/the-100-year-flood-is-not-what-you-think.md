@@ -8,9 +8,12 @@ subtitle: "Why the 100-year flood can happen more than once in a century"
 description: "A 100-year flood is a 1% annual chance, not a once-per-century promise. Over a 30-year mortgage, repeated exposure adds up to about a 26% chance."
 featured_image: "/images/medium/the-100-year-flood-is-not-what-you-think/96718dd1ce6457c535506421a4afbbb633458940478ba3165a382cfaa93d70aa.jpeg"
 featured_image_alt: "The 100-Year Flood Is Not What You Think"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-08-27"
+    note: "Added a seven-part infographic series explaining the annual-chance definition, repeated exposure, mortgage-period probability, the insurance decision, and the limits of the model."
   - version: "1.2"
     date: "2026-06-21"
     note: "Updated June 21, 2026, during COA2 value review to remove reader-visible import residue, repair discovery metadata, and preserve the source note as public context."
@@ -45,6 +48,10 @@ insurance worth its premium.
 So, how likely is your house to flood if you live in the 100-year
 floodplain?
 
+![A crossed-out once-per-century calendar sits beside five yearly cards, each marked 1%, showing that every year is a new flood-risk roll.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-1)
+
+*A 100-year flood is a 1% annual chance, not a scheduled event.*
+
 ### One Year, One Chance, Raised to the Power of Time
 
 
@@ -61,6 +68,10 @@ No memory.\
 No mercy.\
 Just repetition.
 
+![A 100-tile grid shows one flood tile and 99 no-flood tiles, with p = .01 and 1 - p = .99 repeated unchanged across years.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-2)
+
+*Each year carries the same two-outcome model: 1% flood, 99% no flood.*
+
 ### Where Time Does the Damage
 
 If you want to know the chance of **no floods** over a number of years,
@@ -75,6 +86,10 @@ experiencing a flood.
 But people don't care about *no floods*.\
 They care about whether at least one flood shows up and wrecks their
 day.
+
+![Ten yearly no-flood probabilities multiply to .904, leaving a 90.4% chance of no flood and a 9.6% chance of at least one flood over ten years.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-3)
+
+*Ten 1% annual chances add up to about a 9.6% chance of at least one flood.*
 
 ### The True Risk in the 100-Year Floodplain
 
@@ -100,6 +115,10 @@ the mortgage is: **1 - 0.7397 = 0.26031**
 That's somewhere between a coin flip and a roll of the dice. And you'd
 better hope you don't come up with snake eyes!
 
+![The complement formula 1 - .99 to the thirtieth power points to a donut chart with 26% flood and 74% no flood over a 30-year mortgage.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-4)
+
+*Across a 30-year mortgage, the modeled chance of at least one flood is about 26%.*
+
 ### Why This Confuses So Many People
 
 The phrase "100-year flood" sounds like a calendar event.\
@@ -123,6 +142,10 @@ floodplain, then understanding the risk isn't optional ~
 
 It's your responsibility.
 
+![A crossed-out once-per-century timeline contrasts with a cumulative-risk curve rising from 1% in one year to 9.6% in ten years and 26% in thirty years.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-5)
+
+*The annual probability stays at 1%; cumulative exposure rises with time.*
+
 ### The Insurance Decision, In Plain English
 
 Choosing not to buy flood insurance in the 100-year floodplain isn't a
@@ -136,6 +159,10 @@ Somewhere in between.
 
 But in this case, the house does **not** always win.
 
+![A balance compares a 74% no-flood outcome with a 26% at-least-one-flood outcome over 30 years, framing the insurance choice as a wager.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-6)
+
+*Roughly 3-to-1 odds against a flood do not make the 26% outcome disappear.*
+
 ### Source and Risk Note
 
 The term "100-year flood" is a technical definition, not a prediction.
@@ -147,3 +174,7 @@ formally constructed.
 
 Real-world flood risk can be higher or lower depending on location,
 elevation, drainage, and changing climate conditions.
+
+![A flood-map model with 1% annual chance, independent years, and constant probability points to real-world factors including location, elevation, drainage, and changing climate.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-7)
+
+*The technical definition is fixed; site-specific conditions can move actual risk up or down.*
