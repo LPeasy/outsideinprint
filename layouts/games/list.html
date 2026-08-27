@@ -84,16 +84,6 @@
       </div>
     </section>
 
-    <section class="games-notices games-notices--compact" aria-labelledby="games-notices-title">
-      <header class="games-notices__header">
-        <p class="games-kicker">Before you play</p>
-        <h2 id="games-notices-title">{{ index $game "notices_heading" }}</h2>
-      </header>
-      <ul class="games-notices__list">
-        {{ range index $game "notices" }}<li>{{ . }}</li>{{ end }}
-      </ul>
-    </section>
-
     <div class="games-index__widget">
       {{ partial "games/steam-widget.html" (dict "game" $game "source_slot" "games_index_widget") }}
     </div>
@@ -109,3 +99,4 @@
     </footer>
   </section>
 {{ end }}
+
