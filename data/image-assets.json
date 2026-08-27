@@ -423,6 +423,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/hands-find-the-weight": {
+      "id": "editorial/hands-find-the-weight",
+      "source": "images/originals/editorial/hands-find-the-weight.png",
+      "sha256": "10300977cea50f4c86d21968e24a83ffa508224a3816313406f93aeb7480633c",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/hit-after-hit": {
       "id": "editorial/hit-after-hit",
       "source": "images/originals/editorial/hit-after-hit.png",
@@ -4665,6 +4679,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/the-other-end/section-1": {
+      "id": "essays/the-other-end/section-1",
+      "source": "images/originals/essays/the-other-end/section-1.png",
+      "sha256": "b3273f696c634bb2bf6ce1df94d19e2d4a041b4fd6c332bc0e003aa019e3cc80",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/the-part-that-is-mine/section-1": {
       "id": "essays/the-part-that-is-mine/section-1",
       "source": "images/originals/essays/the-part-that-is-mine/section-1.png",
@@ -7006,6 +7034,7 @@
     "/images/editorial/first-light-reaches-the-floor.png": "editorial/first-light-reaches-the-floor",
     "/images/editorial/goin-postal.png": "editorial/goin-postal",
     "/images/editorial/ground-truth.png": "editorial/ground-truth",
+    "/images/editorial/hands-find-the-weight.png": "editorial/hands-find-the-weight",
     "/images/editorial/hit-after-hit.png": "editorial/hit-after-hit",
     "/images/editorial/house-gravity.png": "editorial/house-gravity",
     "/images/editorial/human-resources.png": "editorial/human-resources",
@@ -7332,6 +7361,7 @@
     "/images/essays/the-model-that-could-not-leave/hero.png": "essays/the-model-that-could-not-leave/hero",
     "/images/essays/the-model-that-could-not-leave/section-1.png": "essays/the-model-that-could-not-leave/section-1",
     "/images/essays/the-model-that-could-not-leave/section-2.png": "essays/the-model-that-could-not-leave/section-2",
+    "/images/essays/the-other-end/section-1.png": "essays/the-other-end/section-1",
     "/images/essays/the-part-that-is-mine/section-1.png": "essays/the-part-that-is-mine/section-1",
     "/images/essays/the-repair/hero.png": "editorial/mending-table",
     "/images/essays/the-repair/section-1.png": "essays/the-repair/section-1",
