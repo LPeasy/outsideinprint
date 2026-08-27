@@ -1305,6 +1305,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-street-keeps-time": {
+      "id": "editorial/the-street-keeps-time",
+      "source": "images/originals/editorial/the-street-keeps-time.png",
+      "sha256": "0a6fe961221385fde86b2c1407d229ef3266342c8db4ce3deecbd820372fb881",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/the-tab": {
       "id": "editorial/the-tab",
       "source": "images/originals/editorial/the-tab.png",
@@ -4777,6 +4791,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/the-song-we-make/section-1": {
+      "id": "essays/the-song-we-make/section-1",
+      "source": "images/originals/essays/the-song-we-make/section-1.png",
+      "sha256": "5d0e39e46e2840823b7d8eeecdefb4db709a9d0ed1e5ec81f2196ab97911746b",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/the-stamp-on-the-meat-flagship/hero": {
       "id": "essays/the-stamp-on-the-meat-flagship/hero",
       "source": "images/originals/essays/the-stamp-on-the-meat-flagship/hero.png",
@@ -6943,6 +6971,7 @@
     "/images/editorial/the-shape-opens.png": "editorial/the-shape-opens",
     "/images/editorial/the-shutters-baee82cb.png": "editorial/the-shutters-baee82cb",
     "/images/editorial/the-sorting-counter.png": "editorial/the-sorting-counter",
+    "/images/editorial/the-street-keeps-time.png": "editorial/the-street-keeps-time",
     "/images/editorial/the-tab.png": "editorial/the-tab",
     "/images/editorial/the-things-we-tolerate.png": "editorial/the-things-we-tolerate",
     "/images/editorial/the-tiller.png": "editorial/the-tiller",
@@ -7217,6 +7246,7 @@
     "/images/essays/the-siren-on-the-pole/section-2.png": "essays/the-siren-on-the-pole/section-2",
     "/images/essays/the-six-hour-news-cycle/hero.png": "editorial/serpent-at-supper",
     "/images/essays/the-six-hour-news-cycle/section-1.png": "essays/the-six-hour-news-cycle/section-1",
+    "/images/essays/the-song-we-make/section-1.png": "essays/the-song-we-make/section-1",
     "/images/essays/the-stamp-on-the-meat-flagship/hero.png": "essays/the-stamp-on-the-meat-flagship/hero",
     "/images/essays/the-stamp-on-the-meat-flagship/section-1.png": "essays/the-stamp-on-the-meat-flagship/section-1",
     "/images/essays/the-stamp-on-the-meat-flagship/section-2.png": "essays/the-stamp-on-the-meat-flagship/section-2",
