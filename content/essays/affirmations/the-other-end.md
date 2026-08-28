@@ -3,7 +3,7 @@ title: "The Other End"
 slug: "the-other-end"
 url: "/essays/the-other-end/"
 date: 2026-08-28
-publishDate: 2026-08-28T09:00:00-04:00
+publishDate: 2026-08-28T08:29:46-04:00
 draft: false
 section_label: "Affirmation"
 library_type: "affirmation"
