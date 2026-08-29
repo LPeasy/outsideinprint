@@ -422,8 +422,10 @@ $expectedSydIds = @(
   'essays/dialogues/pressure-makes-pearls/hero'
 )
 $actualSydIds = @($assetIds | Where-Object { $_.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal) })
-if (($actualSydIds -join "`n") -cne ($expectedSydIds -join "`n")) {
-  throw "Focused cleanup must register exactly the four approved Syd-and-Oliver heroes. Found: $($actualSydIds -join ', ')."
+foreach ($expectedSydId in $expectedSydIds) {
+  if ($actualSydIds -cnotcontains $expectedSydId) {
+    throw "Focused cleanup removed an approved Syd-and-Oliver hero: $expectedSydId"
+  }
 }
 
 $managedSourceFiles = @(
@@ -451,10 +453,10 @@ Assert-Equal -Actual $routineAliasCount -Expected $routineManagedAssetCount -Mes
 $mediumAliases = @($aliasNames | Where-Object { $_.StartsWith('/images/medium/', [System.StringComparison]::Ordinal) })
 $sydAliases = @($aliasNames | Where-Object { $_.StartsWith('/images/syd-and-oliver/', [System.StringComparison]::Ordinal) })
 Assert-Equal -Actual $mediumAliases.Count -Expected 119 -Message 'Medium alias count must equal 14 R3 aliases plus 105 retired PNG URLs.'
-Assert-Equal -Actual $sydAliases.Count -Expected 4 -Message 'Each retired Syd-and-Oliver hero URL must have one resolver alias.'
+Assert-Equal -Actual $sydAliases.Count -Expected $actualSydIds.Count -Message 'Each managed Syd-and-Oliver hero must have one resolver alias.'
 $actualSydAliasTargets = @($sydAliases | ForEach-Object { [string]$manifest.aliases.$_ } | Sort-Object)
-if (($actualSydAliasTargets -join "`n") -cne ($expectedSydIds -join "`n")) {
-  throw 'Syd-and-Oliver aliases do not map one-to-one to the four managed dialogue heroes.'
+if (($actualSydAliasTargets -join "`n") -cne ($actualSydIds -join "`n")) {
+  throw 'Syd-and-Oliver aliases do not map one-to-one to the managed dialogue heroes.'
 }
 $sourceOnlyAliasCount = @($aliasNames | Where-Object { [string]$manifest.aliases.$_ -ceq $sourceOnlyIds[0] }).Count
 Assert-Equal -Actual $sourceOnlyAliasCount -Expected 1 -Message 'The quarantined source must retain exactly one historical retired-path alias.'
@@ -1163,10 +1165,10 @@ foreach ($candidate in $reviewCandidates) {
 }
 $focusedCleanupReviewIds = @(
   $assetIds | Where-Object {
-    ($_.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_) -or
-    $_.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal)
+    $_.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_
   }
 )
+$focusedCleanupReviewIds = @($focusedCleanupReviewIds + $expectedSydIds | Sort-Object)
 Assert-Equal -Actual $focusedCleanupReviewIds.Count -Expected 109 -Message 'Focused-cleanup visual-review cohort must contain exactly 105 Medium PNGs and four Syd heroes.'
 foreach ($focusedCleanupReviewId in $focusedCleanupReviewIds) {
   if (-not $candidateIds.Contains($focusedCleanupReviewId)) {

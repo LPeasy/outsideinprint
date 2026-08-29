@@ -116,9 +116,15 @@ $legacyMediumIds = @(
   'medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb',
   'medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7'
 )
+$focusedCleanupSydIds = @(
+  'essays/dialogues/bobanonymous/hero',
+  'essays/dialogues/broke-rich/hero',
+  'essays/dialogues/infinite-incontent/hero',
+  'essays/dialogues/pressure-makes-pearls/hero'
+)
 foreach ($row in @($rows | Where-Object {
   ($_.id.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_.id) -or
-  $_.id.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal)
+  $focusedCleanupSydIds -ccontains [string]$_.id
 })) {
   Add-ReviewReason -Id $row.id -Reason 'focused_cleanup_migration'
 }
@@ -245,12 +251,7 @@ foreach ($id in @(
   Add-DeepReviewReason -Id $id -Reason 'crosshatching'
 }
 
-foreach ($id in @(
-  'essays/dialogues/bobanonymous/hero',
-  'essays/dialogues/broke-rich/hero',
-  'essays/dialogues/infinite-incontent/hero',
-  'essays/dialogues/pressure-makes-pearls/hero'
-)) {
+foreach ($id in $focusedCleanupSydIds) {
   Add-DeepReviewReason -Id $id -Reason 'focused_syd_hero'
 }
 

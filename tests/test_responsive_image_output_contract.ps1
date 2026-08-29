@@ -248,12 +248,18 @@ $legacyMediumIds = @(
   'medium/bae249c94478ad9d5603403fcd7b5141ffc06bc35a66bd782d1f4f259ed2a7cb',
   'medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7'
 )
+$focusedCleanupSydIds = @(
+  'essays/dialogues/bobanonymous/hero',
+  'essays/dialogues/broke-rich/hero',
+  'essays/dialogues/infinite-incontent/hero',
+  'essays/dialogues/pressure-makes-pearls/hero'
+)
 $focusedCleanupIds = @(
   $assetIds | Where-Object {
-    ($_.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_) -or
-    $_.StartsWith('essays/dialogues/', [System.StringComparison]::Ordinal)
+    $_.StartsWith('medium/', [System.StringComparison]::Ordinal) -and $legacyMediumIds -cnotcontains $_
   }
 )
+$focusedCleanupIds = @($focusedCleanupIds + $focusedCleanupSydIds | Sort-Object)
 if ($focusedCleanupIds.Count -ne 109) {
   throw "Focused cleanup output validation requires exactly 109 newly migrated managed assets; found $($focusedCleanupIds.Count)."
 }
