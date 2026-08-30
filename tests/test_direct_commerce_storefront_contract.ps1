@@ -492,12 +492,17 @@ if ($footerTemplate -match '(?i)shipping-returns|Shipping &amp; returns') {
 
 $thanksSource = Get-RequiredText -RelativePath 'content/support/thanks.md'
 foreach ($requiredThanksText in @(
+  'title: "Thank you for supporting Outside In Print"',
   'type: "commerce-policy"',
+  'eyebrow: "Support confirmation"',
   'draft: false',
   'noindex: true',
-  'This page is only a return destination from Square.',
-  'does not by itself confirm that a payment succeeded',
-  'Your Square receipt email is the authoritative confirmation',
+  'list: never',
+  "You’re back from Square checkout. Thank you for supporting Outside In Print.",
+  'Check your Square receipt email for confirmation:',
+  '**One-time support:** The receipt confirms the amount charged.',
+  '**Monthly support:** The receipt confirms the $5 monthly subscription',
+  'Your Square receipt is the authoritative confirmation.',
   '[return to the support options](/support/)',
   '[contact Outside In Print](/contact/)'
 )) {
@@ -675,9 +680,15 @@ if ($supportOutput -match '(?i)data-analytics-(?:customer|payment|subscription|t
 
 $thanksOutput = [Net.WebUtility]::HtmlDecode([string]$output['support/thanks/index.html'])
 foreach ($requiredThanksOutput in @(
-  'This page is only a return destination from Square.',
-  'does not by itself confirm that a payment succeeded',
-  'Your Square receipt email is the authoritative confirmation',
+  'Support confirmation',
+  'Thank you for supporting Outside In Print',
+  "You’re back from Square checkout. Thank you for supporting Outside In Print.",
+  'Check your Square receipt email for confirmation:',
+  'One-time support:',
+  'The receipt confirms the amount charged.',
+  'Monthly support:',
+  'The receipt confirms the $5 monthly subscription',
+  'Your Square receipt is the authoritative confirmation.',
   'href=/support/',
   'href=/contact/'
 )) {
