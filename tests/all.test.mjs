@@ -7,6 +7,7 @@ import "./entry_threads_contract.test.mjs";
 import "./games_catalog_contract.test.mjs";
 import "./homepage_selected.test.mjs";
 import "./layout_ownership_contract.test.mjs";
+import "./oip_commerce_provisioning_order.test.mjs";
 import "./paper_route_contract.test.mjs";
 import "./paper_route_rules.test.mjs";
 import "./responsive_image_contract.test.mjs";

@@ -47,6 +47,10 @@ function Assert-Ordered {
 }
 
 $bookstoreData = Get-RequiredText -RelativePath 'data/bookstore.yaml'
+$americanNightmarePage = Get-RequiredText -RelativePath 'content/shop/the-american-nightmare-keep-dreaming-kid.md'
+if ([regex]::Matches($americanNightmarePage, '(?m)^date: 2026-08-21\s*$').Count -ne 1) {
+  throw 'The American Nightmare site edition metadata must bind the owner-accepted 2026-08-21 publication date exactly once.'
+}
 $catalogSkus = @(
   'OIP-AN-EPUB',
   'OIP-AN-PB',
@@ -56,6 +60,8 @@ $catalogSkus = @(
   'OIP-WC-PB'
 )
 $publicEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
+$liveEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
+$disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB')
 
 foreach ($requiredCatalogText in @(
   'product_type: "Outside In Print EPUB"',
@@ -78,7 +84,7 @@ foreach ($sku in $catalogSkus) {
   $offerBlock = $skuMatches[0].Value
   foreach ($requiredField in @(
     'format:',
-    'availability_status: "disabled"',
+    'availability_status:',
     'availability_label:',
     'isbn_status:',
     'price_display:',
@@ -87,8 +93,8 @@ foreach ($sku in $catalogSkus) {
     'tax_class:',
     'fulfillment_type:',
     'checkout_action:',
-    'checkout_url: ""',
-    'checkout_endpoint: ""',
+    'checkout_url:',
+    'checkout_endpoint:',
     'gate_note:'
   )) {
     Assert-Contains -Text $offerBlock -Expected $requiredField -Context "Catalog offer $sku"
@@ -99,6 +105,19 @@ foreach ($sku in $catalogSkus) {
   }
   else {
     Assert-Contains -Text $offerBlock -Expected 'checkout_action: "physical_checkout_api"' -Context "Catalog offer $sku"
+  }
+
+  if ($liveEpubSkus -contains $sku) {
+    Assert-Contains -Text $offerBlock -Expected 'availability_status: "live"' -Context "Live catalog offer $sku"
+    Assert-Contains -Text $offerBlock -Expected 'availability_label: "Available now"' -Context "Live catalog offer $sku"
+    Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Assigned"' -Context "Live catalog offer $sku"
+    Assert-Contains -Text $offerBlock -Expected 'checkout_url: ""' -Context "Live catalog offer $sku"
+    Assert-Contains -Text $offerBlock -Expected 'checkout_endpoint: "https://downloads.outsideinprint.org/api/books/epub"' -Context "Live catalog offer $sku"
+  }
+  elseif ($disabledOfferSkus -contains $sku) {
+    Assert-Contains -Text $offerBlock -Expected 'availability_status: "disabled"' -Context "Closed catalog offer $sku"
+    Assert-Contains -Text $offerBlock -Expected 'checkout_url: ""' -Context "Closed catalog offer $sku"
+    Assert-Contains -Text $offerBlock -Expected 'checkout_endpoint: ""' -Context "Closed catalog offer $sku"
   }
 }
 
@@ -136,14 +155,17 @@ if ($bookstoreData -match '(?im)^\s+checkout_note:\s+"[^"]*Amazon') {
   throw 'Bookstore data must not retain an Amazon checkout note.'
 }
 
-if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 6) {
-  throw 'Every direct EPUB and paperback offer must remain disabled until its product gate passes.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne 3) {
+  throw 'All three direct EPUB offers must be live.'
+}
+if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 3) {
+  throw 'All three paperback offers must remain disabled.'
 }
 if ($bookstoreData -match '(?im)^\s+checkout_url:\s+"https?://') {
-  throw 'A disabled direct offer exposed a checkout URL.'
+  throw 'The API-based direct EPUB launch must not expose a hosted checkout URL.'
 }
-if ($bookstoreData -match '(?im)^\s+checkout_endpoint:\s+"https?://') {
-  throw 'A disabled direct offer exposed a checkout endpoint.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"\s*$').Count -ne 3) {
+  throw 'All three direct EPUB offers must expose the approved production endpoint.'
 }
 if ($bookstoreData -match '(?i)stripe') {
   throw 'The Square-only catalog must not contain Stripe configuration.'
@@ -514,13 +536,19 @@ foreach ($sku in $publicEpubSkus) {
   }
 }
 if ($shopOutput -match '(?is)<a\b[^>]*bookstore-direct-offer__action') {
-  throw 'Built shop output exposed a live direct-offer checkout action before product gates passed.'
+  throw 'The API-based EPUB launch must not expose a hosted direct-offer checkout link.'
 }
-if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?disabled(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
-  throw 'Expected three disabled EPUB offers on the index and once again on their detail pages.'
+if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?live(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
+  throw 'Expected all three live EPUB offers on the index and their detail pages.'
 }
-if ($shopOutput -match '(?i)data-epub-checkout|/api/books/epub|https://downloads\.outsideinprint\.org/api/books/epub') {
-  throw 'Built shop output exposed a direct-commerce endpoint while every offer is disabled.'
+if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?disabled(?:"|'''')?', 'IgnoreCase').Count -ne 0) {
+  throw 'No closed EPUB offer may remain on the storefront.'
+}
+if ([regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 6) {
+  throw 'Expected six rendered checkout forms for the three live EPUB offers.'
+}
+if ([regex]::Matches($shopOutput, 'action=(?:"|'''')?https://downloads\.outsideinprint\.org/api/books/epub(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
+  throw 'Expected the approved production endpoint on all live EPUB index and detail forms.'
 }
 if ($shopOutput -match '(?i)OIP-(?:AN|PS|WC)-PB|data-physical|bookstore-physical|/api/books/physical|USPS Media Mail|Shipping &amp; returns') {
   throw 'Built shop output exposed physical-commerce UI during the EPUB-first launch.'
@@ -540,10 +568,10 @@ if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$4\.99</a>', 'Ig
 }
 
 $shopSurfaceExpectations = @(
-  @{ Path = 'shop/index.html'; KindleCount = 3; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'EPUB coming soon', '$9.99', 'Robert V. Ussley', 'Outside In Print') },
-  @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'EPUB coming soon', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
-  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'EPUB coming soon', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $4.99') },
-  @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'EPUB coming soon', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
+  @{ Path = 'shop/index.html'; KindleCount = 3; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print') },
+  @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
+  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $4.99') },
+  @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
 )
 foreach ($surface in $shopSurfaceExpectations) {
   $surfaceHtml = [Net.WebUtility]::HtmlDecode([string]$output[$surface.Path])

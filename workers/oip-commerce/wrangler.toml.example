@@ -65,7 +65,6 @@ queue = "oip-commerce-events"
 # Set these only with `wrangler secret put` or the Cloudflare dashboard:
 # SQUARE_ACCESS_TOKEN
 # SQUARE_LOCATION_ID
-# SQUARE_WEBHOOK_SIGNATURE_KEY
 # SQUARE_MONTHLY_PLAN_VARIATION_ID
 # RESEND_API_KEY
 # EMAIL_HASH_PEPPER
@@ -74,3 +73,6 @@ queue = "oip-commerce-events"
 # ADDRESS_LOOKUP_HMAC_SECRET
 # USPS_API_CLIENT_ID
 # USPS_API_CLIENT_SECRET
+
+# Task 3 only. Keep both the provider binding and value absent throughout Task 2:
+# SQUARE_WEBHOOK_SIGNATURE_KEY

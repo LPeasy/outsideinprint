@@ -1,6 +1,13 @@
 name = "oip-commerce-consumer"
 main = "consumer/index.js"
 compatibility_date = "2026-08-01"
+compatibility_flags = ["global_fetch_strictly_public"]
+workers_dev = false
+preview_urls = false
+
+[observability]
+enabled = true
+head_sampling_rate = 1
 
 [vars]
 SQUARE_API_BASE_URL = "https://connect.squareup.com"
@@ -22,6 +29,14 @@ USPS_ADDRESSES_API_BASE_URL = ""
 USPS_OAUTH_TOKEN_URL = ""
 USPS_ADDRESSES_API_VERSION = ""
 SQUARE_INVENTORY_TRANSACTION_ID_KIND = ""
+OPERATIONS_MONITORING_ENABLED = "false"
+OPERATIONAL_ENVIRONMENT = "PRODUCTION"
+OPERATIONAL_HEALTHCHECK_URL = "https://downloads.outsideinprint.org/health"
+OPERATIONAL_PRIMARY_QUEUE = "oip-commerce-events"
+OPERATIONAL_DLQ_QUEUE = "oip-commerce-events-dlq"
+OPERATIONAL_CANARY_STALE_SECONDS = "600"
+OPERATIONAL_FULFILLMENT_STALE_SECONDS = "900"
+OPERATIONAL_ALERT_REPEAT_SECONDS = "21600"
 
 [triggers]
 crons = ["*/5 * * * *"]
@@ -40,6 +55,10 @@ bucket_name = "oip-private-epubs"
 binding = "JURISDICTION_BUCKET"
 bucket_name = "oip-private-jurisdiction"
 
+[[queues.producers]]
+binding = "OPERATIONAL_CANARY_QUEUE"
+queue = "oip-commerce-events"
+
 [[queues.consumers]]
 queue = "oip-commerce-events"
 max_batch_size = 1
@@ -48,10 +67,18 @@ max_retries = 10
 dead_letter_queue = "oip-commerce-events-dlq"
 max_concurrency = 1
 
+[[queues.consumers]]
+queue = "oip-commerce-events-dlq"
+max_batch_size = 1
+max_batch_timeout = 1
+max_retries = 10
+max_concurrency = 1
+
 # Set with Cloudflare secret bindings, never in this file:
 # SQUARE_ACCESS_TOKEN
 # SQUARE_LOCATION_ID
 # RESEND_API_KEY
+# OPERATIONAL_ALERT_EMAIL (consumer-only owner-direct protected recipient)
 # EMAIL_HASH_PEPPER
 # DOWNLOAD_TOKEN_SECRET
 # ADDRESS_LOOKUP_HMAC_SECRET

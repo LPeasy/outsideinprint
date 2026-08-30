@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
+import { timingSafeEqual as nodeTimingSafeEqual } from "node:crypto";
 import test from "node:test";
 
 import { requireCloudflareAccessAdmin } from "../src/access.js";
 import {
+  constantTimeEqual,
   deriveDownloadToken,
   hmacSha256Base64,
   hmacSha256Hex,
@@ -46,6 +48,24 @@ import {
   verifyPaperbackCatalogVariation,
 } from "../src/square.js";
 import { FakeD1 } from "./fake-d1.mjs";
+
+if (typeof crypto.subtle.timingSafeEqual !== "function") {
+  Object.defineProperty(crypto.subtle, "timingSafeEqual", {
+    configurable: true,
+    value(left, right) {
+      const leftBuffer = left instanceof ArrayBuffer
+        ? Buffer.from(left)
+        : Buffer.from(left.buffer, left.byteOffset, left.byteLength);
+      const rightBuffer = right instanceof ArrayBuffer
+        ? Buffer.from(right)
+        : Buffer.from(right.buffer, right.byteOffset, right.byteLength);
+      if (leftBuffer.byteLength !== rightBuffer.byteLength) {
+        throw new RangeError("Input buffers must have the same byte length.");
+      }
+      return nodeTimingSafeEqual(leftBuffer, rightBuffer);
+    },
+  });
+}
 
 function fakePrivateBucket() {
   const objects = new Map();
@@ -630,6 +650,28 @@ test("Square signature binds the exact notification URL and raw body", async () 
     await verifySquareSignature({ rawBody, signature, notificationUrl: `${notificationUrl}/`, signatureKey }),
     false,
   );
+});
+
+test("constant-time comparison hashes unequal-length values before the runtime primitive", async () => {
+  const original = crypto.subtle.timingSafeEqual;
+  const comparedLengths = [];
+  Object.defineProperty(crypto.subtle, "timingSafeEqual", {
+    configurable: true,
+    value(left, right) {
+      comparedLengths.push([left.byteLength, right.byteLength]);
+      return original.call(crypto.subtle, left, right);
+    },
+  });
+  try {
+    assert.equal(await constantTimeEqual("same", "same"), true);
+    assert.equal(await constantTimeEqual("short", "a substantially longer value"), false);
+  } finally {
+    Object.defineProperty(crypto.subtle, "timingSafeEqual", {
+      configurable: true,
+      value: original,
+    });
+  }
+  assert.deepEqual(comparedLengths, [[32, 32], [32, 32]]);
 });
 
 test("download tokens and Resend idempotency are stable for the same generation", async () => {
@@ -2190,6 +2232,104 @@ test("valid Square webhook is persisted, queued immediately, and replay is ackno
   assert.equal(env.DB.webhooks.get("event-1").attempts, 0);
 });
 
+test("authenticated Square webhook with a Queue-invalid event id is rejected before persistence", async () => {
+  const env = baseEnv();
+  const rawBody = JSON.stringify({
+    event_id: "event:id:not-queue-safe",
+    type: "order.updated",
+  });
+  const signature = await hmacSha256Base64(
+    env.SQUARE_WEBHOOK_SIGNATURE_KEY,
+    `${env.SQUARE_WEBHOOK_NOTIFICATION_URL}${rawBody}`,
+  );
+  const response = await handleRequest(
+    new Request(env.SQUARE_WEBHOOK_NOTIFICATION_URL, {
+      method: "POST",
+      headers: { "x-square-hmacsha256-signature": signature },
+      body: rawBody,
+    }),
+    env,
+  );
+  assert.equal(response.status, 400);
+  assert.equal((await response.json()).error.code, "INVALID_WEBHOOK_EVENT");
+  assert.equal(env.DB.webhooks.size, 0);
+  assert.equal(env.WEBHOOK_QUEUE.sent.length, 0);
+});
+
+test("chunked webhook bytes preserve a split UTF-8 sequence for signature verification", async () => {
+  const env = baseEnv();
+  const rawBody = JSON.stringify({
+    event_id: "event-unicode",
+    type: "order.updated",
+    note: "café 📚",
+  });
+  const encoded = new TextEncoder().encode(rawBody);
+  const emojiStart = encoded.findIndex((value, index) =>
+    value === 0xf0 && encoded[index + 1] === 0x9f);
+  assert.notEqual(emojiStart, -1);
+  const chunks = [
+    encoded.slice(0, emojiStart + 1),
+    encoded.slice(emojiStart + 1, emojiStart + 3),
+    encoded.slice(emojiStart + 3),
+  ];
+  const body = new ReadableStream({
+    pull(controller) {
+      const chunk = chunks.shift();
+      if (chunk) controller.enqueue(chunk);
+      else controller.close();
+    },
+  }, { highWaterMark: 0 });
+  const signature = await hmacSha256Base64(
+    env.SQUARE_WEBHOOK_SIGNATURE_KEY,
+    `${env.SQUARE_WEBHOOK_NOTIFICATION_URL}${rawBody}`,
+  );
+  const response = await handleRequest(
+    new Request(env.SQUARE_WEBHOOK_NOTIFICATION_URL, {
+      method: "POST",
+      headers: { "x-square-hmacsha256-signature": signature },
+      body,
+      duplex: "half",
+    }),
+    env,
+  );
+  assert.equal(response.status, 200);
+  assert.equal(env.DB.webhooks.get("event-unicode").status, "QUEUED");
+  assert.equal(env.WEBHOOK_QUEUE.sent.length, 1);
+});
+
+test("chunked webhook ingress cancels after crossing the one-megabyte limit", async () => {
+  const env = baseEnv();
+  let pulls = 0;
+  let cancelled = false;
+  const body = new ReadableStream({
+    pull(controller) {
+      pulls += 1;
+      if (pulls <= 2) {
+        controller.enqueue(new Uint8Array(600 * 1024));
+        return;
+      }
+      controller.error(new Error("the bounded reader requested an unnecessary chunk"));
+    },
+    cancel() {
+      cancelled = true;
+    },
+  }, { highWaterMark: 0 });
+  const response = await handleRequest(
+    new Request(env.SQUARE_WEBHOOK_NOTIFICATION_URL, {
+      method: "POST",
+      body,
+      duplex: "half",
+    }),
+    env,
+  );
+  assert.equal(response.status, 413);
+  assert.equal((await response.json()).error.code, "WEBHOOK_TOO_LARGE");
+  assert.equal(pulls, 2);
+  assert.equal(cancelled, true);
+  assert.equal(env.DB.webhooks.size, 0);
+  assert.equal(env.WEBHOOK_QUEUE.sent.length, 0);
+});
+
 test("Square webhook rejects a signature made for altered bytes", async () => {
   const env = baseEnv();
   const response = await handleRequest(
@@ -2203,6 +2343,31 @@ test("Square webhook rejects a signature made for altered bytes", async () => {
   assert.equal(response.status, 401);
   assert.equal((await response.json()).error.code, "INVALID_WEBHOOK_SIGNATURE");
   assert.equal(env.DB.webhooks.size, 0);
+});
+
+test("the same Square event id with different authenticated bytes is rejected as a conflict", async () => {
+  const env = baseEnv();
+  const send = async (rawBody) => {
+    const signature = await hmacSha256Base64(
+      env.SQUARE_WEBHOOK_SIGNATURE_KEY,
+      `${env.SQUARE_WEBHOOK_NOTIFICATION_URL}${rawBody}`,
+    );
+    return handleRequest(
+      new Request(env.SQUARE_WEBHOOK_NOTIFICATION_URL, {
+        method: "POST",
+        headers: { "x-square-hmacsha256-signature": signature },
+        body: rawBody,
+      }),
+      env,
+    );
+  };
+  const first = await send(JSON.stringify({ event_id: "event-conflict", type: "order.created" }));
+  assert.equal(first.status, 200);
+  const conflict = await send(JSON.stringify({ event_id: "event-conflict", type: "order.updated" }));
+  assert.equal(conflict.status, 409);
+  assert.equal((await conflict.json()).error.code, "WEBHOOK_EVENT_CONFLICT");
+  assert.equal(env.WEBHOOK_QUEUE.sent.length, 1);
+  assert.equal(env.DB.webhooks.get("event-conflict").event_type, "order.created");
 });
 
 test("a queue-send failure returns retryable response and Square retry enqueues the stored event", async () => {
@@ -2316,6 +2481,56 @@ test("queue consumer claims, processes, and acknowledges a stored event", async 
   assert.deepEqual(await processQueueMessage(message, env), { state: "PROCESSED" });
   assert.deepEqual(actions, ["ack"]);
   assert.equal(env.DB.webhooks.get("queued-order").status, "PROCESSED");
+});
+
+test("queue consumer acknowledges an invalid event id without reading stored state", async () => {
+  const env = baseEnv();
+  const actions = [];
+  const message = {
+    body: { eventId: "event:id:not-queue-safe", payloadHash: "a".repeat(64) },
+    attempts: 1,
+    ack() { actions.push("ack"); },
+    retry(options) { actions.push(["retry", options]); },
+  };
+  assert.deepEqual(
+    await processQueueMessage(message, env),
+    { state: "INVALID_MESSAGE" },
+  );
+  assert.deepEqual(actions, ["ack"]);
+  assert.equal(env.DB.webhooks.size, 0);
+});
+
+test("queue consumer marks a failed event retryable and leaves it unacknowledged for Queue retry", async () => {
+  const env = baseEnv({
+    __testFetch: async () => new Response(JSON.stringify({ errors: [{ code: "TEMPORARY_ERROR" }] }), {
+      status: 503,
+      headers: { "content-type": "application/json" },
+    }),
+  });
+  const payloadHash = "b".repeat(64);
+  env.DB.webhooks.set("queued-payment", {
+    event_id: "queued-payment",
+    event_type: "payment.updated",
+    object_id: "payment-1",
+    payment_id: "payment-1",
+    payload_sha256: payloadHash,
+    status: "QUEUED",
+    attempts: 0,
+    received_at: 1000,
+    processing_started_at: null,
+    processing_token: null,
+  });
+  const actions = [];
+  const message = {
+    body: { eventId: "queued-payment", payloadHash },
+    attempts: 1,
+    ack() { actions.push("ack"); },
+    retry(options) { actions.push(["retry", options]); },
+  };
+  const result = await processQueueMessage(message, env);
+  assert.equal(result.state, "RETRY");
+  assert.deepEqual(actions, [["retry", { delaySeconds: 5 }]]);
+  assert.equal(env.DB.webhooks.get("queued-payment").status, "FAILED");
 });
 
 test("webhook fencing rejects stale finish and fail after lease reclaim", async () => {

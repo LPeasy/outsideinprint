@@ -811,6 +811,66 @@ export async function sendDownloadEmail(env, { buyerEmail, product, downloadUrl,
   return { status: "SENT", messageId: payload.id || null };
 }
 
+export async function sendOperationalAlert(env, alert) {
+  const apiKey = requireBinding(env, "RESEND_API_KEY");
+  const from = requireBinding(env, "DOWNLOAD_EMAIL_FROM");
+  const replyTo = requireBinding(env, "DOWNLOAD_EMAIL_REPLY_TO");
+  const recipient = String(requireBinding(env, "OPERATIONAL_ALERT_EMAIL")).trim();
+  const environment = String(requireBinding(env, "OPERATIONAL_ENVIRONMENT"));
+  const alertCode = String(alert.alertCode || "");
+  const alertBucket = Number(alert.alertBucket);
+  const firstSeenAt = Number(alert.firstSeenAt);
+  const lastSeenAt = Number(alert.lastSeenAt);
+  const occurrences = Number(alert.occurrences);
+  if (
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(recipient) || recipient.length > 320 ||
+    !["SANDBOX", "PRODUCTION"].includes(environment) ||
+    !/^[A-Z0-9_]{3,64}$/u.test(alertCode) ||
+    !Number.isSafeInteger(alertBucket) || alertBucket < 0 ||
+    !Number.isSafeInteger(firstSeenAt) || firstSeenAt < 0 ||
+    !Number.isSafeInteger(lastSeenAt) || lastSeenAt < firstSeenAt ||
+    !Number.isSafeInteger(occurrences) || occurrences < 1
+  ) {
+    return { status: "FAILED", errorCode: "OPERATIONAL_ALERT_INPUT_INVALID" };
+  }
+  const idempotencyKey = `oip-ops-${environment.toLowerCase()}-${alertCode.toLowerCase()}-${alertBucket}`;
+  let response;
+  try {
+    response = await outboundFetch(env)("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${apiKey}`,
+        "content-type": "application/json",
+        "idempotency-key": idempotencyKey,
+      },
+      body: JSON.stringify({
+        from,
+        to: [recipient],
+        reply_to: replyTo,
+        subject: `[OIP ${environment}] operational alert: ${alertCode}`,
+        text: [
+          "Outside In Print operational monitoring detected a service condition.",
+          `Environment: ${environment}`,
+          `Code: ${alertCode}`,
+          `First observed: ${new Date(firstSeenAt * 1000).toISOString()}`,
+          `Last observed: ${new Date(lastSeenAt * 1000).toISOString()}`,
+          `Observations in this alert window: ${occurrences}`,
+          "",
+          "No buyer, order, payment, download-token, Queue-payload, or secret data is included.",
+          "Review the Cloudflare Worker, Queue, D1, and Resend operational state.",
+        ].join("\n"),
+      }),
+      signal: AbortSignal.timeout(10000),
+    });
+  } catch {
+    return { status: "RETRY", errorCode: "RESEND_UNREACHABLE" };
+  }
+  if (response.ok) return { status: "SENT", errorCode: null };
+  if (response.status === 429) return { status: "RETRY", errorCode: "RESEND_RATE_LIMITED" };
+  if (response.status >= 500) return { status: "RETRY", errorCode: "RESEND_UPSTREAM_FAILED" };
+  return { status: "FAILED", errorCode: "RESEND_REJECTED" };
+}
+
 export function publicCheckoutError(error) {
   if (error instanceof HttpError) return error;
   if (error instanceof SquareApiError) {
