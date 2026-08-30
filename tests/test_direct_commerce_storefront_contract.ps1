@@ -175,7 +175,7 @@ $hugoConfig = Get-RequiredText -RelativePath 'hugo.toml'
 foreach ($requiredConfig in @(
   '[params.commerce]',
   'api_base = "https://downloads.outsideinprint.org"',
-  'support_checkout_enabled = false',
+  'support_checkout_enabled = true',
   'custom_monthly_enabled = false'
   'publication_tag = "new-publications"'
 )) {
@@ -650,17 +650,21 @@ foreach ($requiredSupportOutput in @(
   'Support once',
   'Support $5 monthly',
   'Monthly support is charged today and renews each month until canceled. Cancel anytime through the link in your Square receipt email.',
-  'data-support-checkout-enabled=false',
-  'Checkout not yet open',
-  'Reader support checkout opens after its activation gate passes.'
+  'data-support-checkout-enabled=true',
+  'https://downloads.outsideinprint.org/api/support/one-time',
+  'https://downloads.outsideinprint.org/api/support/monthly',
+  'Continue to Square'
 )) {
   Assert-Contains -Text $supportOutput -Expected $requiredSupportOutput -Context 'Built support page'
 }
 if ([regex]::Matches($supportOutput, '<section\b[^>]*class=(?:"|'''')?support-option\b', 'IgnoreCase').Count -ne 2) {
   throw 'Built support page must contain exactly two public support options.'
 }
-if ($supportOutput -match '(?i)<form\b[^>]*data-support-checkout|/api/support/(?:one-time|monthly)|downloads\.outsideinprint\.org|Choose a monthly amount|OIP-SUPPORT-MONTHLY-CUSTOM') {
-  throw 'Default-closed support output must expose no live form, endpoint, or custom-monthly option.'
+if ([regex]::Matches($supportOutput, '<form\b[^>]*data-support-checkout', 'IgnoreCase').Count -ne 2) {
+  throw 'Live support output must expose exactly two checkout forms.'
+}
+if ($supportOutput -match '(?i)Checkout not yet open|activation gate passes|Choose a monthly amount|OIP-SUPPORT-MONTHLY-CUSTOM') {
+  throw 'Live support output must not expose a closed-gate message or custom-monthly option.'
 }
 if ($supportOutput -match '(?i)data-analytics-(?:amount|order|email|address)') {
   throw 'Built support analytics attributes exposed sensitive or financial data.'
