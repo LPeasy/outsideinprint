@@ -109,6 +109,7 @@ foreach ($requiredPath in @(
   'shop/index.html',
   'shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'shop/the-parable-of-the-sheep/index.html',
+  'shop/thanks/index.html',
   'shop/the-water-cycle/index.html',
   'support/index.html',
   'support/cancellation-refunds/index.html',

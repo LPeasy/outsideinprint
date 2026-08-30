@@ -640,6 +640,7 @@ $requiredSemanticPages = [ordered]@{
   'public/shop/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/shop/the-parable-of-the-sheep/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
+  'public/shop/thanks/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $false }
   'public/shop/the-water-cycle/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/support/index.html' = @{ ExpectedH1Class = 'support-page__title'; RequireSecondaryHeading = $true }
   'public/support/cancellation-refunds/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $true }
