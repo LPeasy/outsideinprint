@@ -1,4 +1,9 @@
 const encoder = new TextEncoder();
+const SQUARE_EVENT_ID_RE = /^[A-Za-z0-9_-]{1,192}$/u;
+
+export function isValidSquareEventId(value) {
+  return typeof value === "string" && SQUARE_EVENT_ID_RE.test(value);
+}
 
 export function bytesToHex(bytes) {
   return [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
@@ -49,19 +54,16 @@ export async function deriveDownloadToken(secret, fulfillmentId, generation) {
     .replace(/=+$/u, "");
 }
 
-export function constantTimeEqual(left, right) {
-  const a = encoder.encode(String(left));
-  const b = encoder.encode(String(right));
-  const length = Math.max(a.length, b.length);
-  let different = a.length ^ b.length;
-  for (let index = 0; index < length; index += 1) {
-    different |= (a[index] || 0) ^ (b[index] || 0);
-  }
-  return different === 0;
+export async function constantTimeEqual(left, right) {
+  const [leftHash, rightHash] = await Promise.all([
+    crypto.subtle.digest("SHA-256", encoder.encode(String(left))),
+    crypto.subtle.digest("SHA-256", encoder.encode(String(right))),
+  ]);
+  return crypto.subtle.timingSafeEqual(leftHash, rightHash);
 }
 
 export async function verifySquareSignature({ rawBody, signature, notificationUrl, signatureKey }) {
   if (!signature || !notificationUrl || !signatureKey) return false;
   const expected = await hmacSha256Base64(signatureKey, `${notificationUrl}${rawBody}`);
-  return constantTimeEqual(signature, expected);
+  return await constantTimeEqual(signature, expected);
 }

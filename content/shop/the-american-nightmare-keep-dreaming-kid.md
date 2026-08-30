@@ -1,6 +1,7 @@
 ---
 title: "The American Nightmare: Keep Dreaming, Kid"
 description: "An OIP digital book on how the American Dream became a global slogan just as the American good life came apart at home."
+date: 2026-08-21
 image: "/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg"
 draft: false
 show_citation: false

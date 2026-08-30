@@ -1,6 +1,7 @@
 import {
   configuredEpubCatalogVariationId,
   enabledEpubSkus,
+  enabledPaperbackSkus,
   productForSku,
 } from "./catalog.js";
 import { requireCloudflareAccessAdmin } from "./access.js";
@@ -27,7 +28,12 @@ import {
   reservePhysicalInventory,
   releasePhysicalInventoryReservations,
 } from "./database.js";
-import { deriveDownloadToken, sha256Hex, verifySquareSignature } from "./crypto.js";
+import {
+  deriveDownloadToken,
+  isValidSquareEventId,
+  sha256Hex,
+  verifySquareSignature,
+} from "./crypto.js";
 import { extractPaymentEmail, hasAnyRefund } from "./fulfillment.js";
 import {
   HttpError,
@@ -45,6 +51,7 @@ import {
   validateSupportAmount,
 } from "./http.js";
 import { preparePhysicalCheckout, serializedPhysicalItems } from "./physical.js";
+import { operationalHealthFields } from "./monitoring.js";
 import {
   SquareApiError,
   createEpubPaymentLink,
@@ -475,15 +482,52 @@ function sanitizedSquareReference(event) {
 }
 
 async function readWebhookBody(request) {
-  const length = Number(request.headers.get("content-length") || "0");
-  if (Number.isFinite(length) && length > MAX_WEBHOOK_BYTES) {
-    throw new HttpError(413, "WEBHOOK_TOO_LARGE");
+  const lengthHeader = request.headers.get("content-length");
+  if (lengthHeader !== null) {
+    const length = Number(lengthHeader);
+    if (!Number.isSafeInteger(length) || length < 0) {
+      throw new HttpError(400, "INVALID_WEBHOOK_CONTENT_LENGTH");
+    }
+    if (length > MAX_WEBHOOK_BYTES) {
+      throw new HttpError(413, "WEBHOOK_TOO_LARGE");
+    }
   }
-  const rawBody = await request.text();
-  if (new TextEncoder().encode(rawBody).byteLength > MAX_WEBHOOK_BYTES) {
-    throw new HttpError(413, "WEBHOOK_TOO_LARGE");
+
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const bytes = new Uint8Array(MAX_WEBHOOK_BYTES);
+  let byteLength = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (!(value instanceof Uint8Array)) {
+        throw new HttpError(400, "INVALID_WEBHOOK_BODY");
+      }
+      if (value.byteLength > MAX_WEBHOOK_BYTES - byteLength) {
+        try {
+          await reader.cancel();
+        } catch {
+          // The size rejection remains authoritative even if stream cancellation fails.
+        }
+        throw new HttpError(413, "WEBHOOK_TOO_LARGE");
+      }
+      bytes.set(value, byteLength);
+      byteLength += value.byteLength;
+    }
+  } catch (error) {
+    if (error instanceof HttpError) throw error;
+    throw new HttpError(400, "INVALID_WEBHOOK_BODY");
+  } finally {
+    reader.releaseLock();
   }
-  return rawBody;
+
+  try {
+    return new TextDecoder("utf-8", { fatal: true, ignoreBOM: true })
+      .decode(bytes.subarray(0, byteLength));
+  } catch {
+    throw new HttpError(400, "INVALID_WEBHOOK_BODY");
+  }
 }
 
 async function handleSquareWebhook(request, env) {
@@ -500,14 +544,21 @@ async function handleSquareWebhook(request, env) {
   } catch {
     throw new HttpError(400, "INVALID_WEBHOOK_JSON");
   }
-  if (!event || typeof event !== "object" || !event.event_id || !event.type) {
+  if (
+    !event ||
+    typeof event !== "object" ||
+    !isValidSquareEventId(event.event_id) ||
+    typeof event.type !== "string" ||
+    !event.type
+  ) {
     throw new HttpError(400, "INVALID_WEBHOOK_EVENT");
   }
+  const eventId = event.event_id;
   const now = epochSeconds();
   const payloadHash = await sha256Hex(rawBody);
   const reference = sanitizedSquareReference(event);
   const recorded = await recordWebhookEvent(env.DB, {
-    id: String(event.event_id),
+    id: eventId,
     type: String(event.type),
     objectId: reference.objectId,
     paymentId: reference.paymentId,
@@ -521,11 +572,11 @@ async function handleSquareWebhook(request, env) {
   }
   requireBinding(env, "WEBHOOK_QUEUE");
   try {
-    await env.WEBHOOK_QUEUE.send({ eventId: String(event.event_id), payloadHash });
+    await env.WEBHOOK_QUEUE.send({ eventId, payloadHash });
   } catch {
     throw new HttpError(503, "WEBHOOK_QUEUE_UNAVAILABLE");
   }
-  await markWebhookQueued(env.DB, String(event.event_id), payloadHash);
+  await markWebhookQueued(env.DB, eventId, payloadHash);
   return jsonResponse({ received: true, queued: true });
 }
 
@@ -686,10 +737,22 @@ async function route(request, env) {
     return handleAdminResend(request, env);
   }
   if (request.method === "GET" && url.pathname === "/health") {
+    const supportGateOpen = parseBoolean(env.SUPPORT_CHECKOUT_ENABLED, false);
+    const customMonthlyGateOpen = parseBoolean(env.CUSTOM_MONTHLY_ENABLED, false);
+    const epubGatesOpen = enabledEpubSkus(env).size > 0;
+    const paperbackGatesOpen = enabledPaperbackSkus(env).size > 0;
+    const webhookSignatureBound = env.SQUARE_WEBHOOK_SIGNATURE_KEY !== undefined;
     return jsonResponse({
       ok: true,
-      support_gate_open: parseBoolean(env.SUPPORT_CHECKOUT_ENABLED, false),
-      epub_gates_open: enabledEpubSkus(env).size > 0,
+      task2_safe: !(
+        supportGateOpen || customMonthlyGateOpen || epubGatesOpen ||
+        paperbackGatesOpen || webhookSignatureBound
+      ),
+      support_gate_open: supportGateOpen,
+      custom_monthly_gate_open: customMonthlyGateOpen,
+      epub_gates_open: epubGatesOpen,
+      paperback_gates_open: paperbackGatesOpen,
+      ...(await operationalHealthFields(env.DB)),
     });
   }
   throw new HttpError(404, "NOT_FOUND", "Route not found.");

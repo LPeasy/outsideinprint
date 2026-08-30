@@ -847,3 +847,228 @@ export async function markStaleUnboundPhysicalReservationsForReview(db, now) {
     .run();
   return Number(result?.meta?.changes || 0);
 }
+
+export async function startOperationalHeartbeat(db, record) {
+  await db
+    .prepare(
+      `INSERT INTO operational_heartbeats
+       (monitor_key, run_token, last_started_at, last_completed_at, status,
+        last_error_code, updated_at)
+       VALUES (?, ?, ?, NULL, 'RUNNING', NULL, ?)
+       ON CONFLICT(monitor_key) DO UPDATE SET
+         run_token = excluded.run_token,
+         last_started_at = excluded.last_started_at,
+         status = 'RUNNING',
+         last_error_code = NULL,
+         updated_at = excluded.updated_at`,
+    )
+    .bind(record.monitorKey, record.runToken, record.now, record.now)
+    .run();
+}
+
+export async function finishOperationalHeartbeat(db, record) {
+  const result = await db
+    .prepare(
+      `UPDATE operational_heartbeats
+       SET last_completed_at = ?, status = ?, last_error_code = ?, updated_at = ?
+       WHERE monitor_key = ? AND run_token = ?`,
+    )
+    .bind(
+      record.now,
+      record.status,
+      record.errorCode || null,
+      record.now,
+      record.monitorKey,
+      record.runToken,
+    )
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function getOperationalHealthSnapshot(db, monitorKey) {
+  const heartbeat = await db
+    .prepare(
+      `SELECT status, last_started_at, last_completed_at
+       FROM operational_heartbeats WHERE monitor_key = ?`,
+    )
+    .bind(monitorKey)
+    .first();
+  const pending = await db
+    .prepare(
+      `SELECT COUNT(*) AS pending_count
+       FROM operational_alerts WHERE status = 'PENDING'`,
+    )
+    .first();
+  return {
+    heartbeat,
+    pendingAlerts: Number(pending?.pending_count || 0),
+  };
+}
+
+export async function createOperationalCanary(db, record) {
+  const result = await db
+    .prepare(
+      `INSERT OR IGNORE INTO operational_queue_canaries
+       (canary_id, status, queued_at, received_at, updated_at)
+       VALUES (?, 'PENDING', ?, NULL, ?)`,
+    )
+    .bind(record.canaryId, record.now, record.now)
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function markOperationalCanaryQueued(db, canaryId, now) {
+  const result = await db
+    .prepare(
+      `UPDATE operational_queue_canaries SET status = 'QUEUED', updated_at = ?
+       WHERE canary_id = ? AND status = 'PENDING'`,
+    )
+    .bind(now, canaryId)
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function markOperationalCanarySendFailed(db, canaryId, now) {
+  const result = await db
+    .prepare(
+      `UPDATE operational_queue_canaries SET status = 'SEND_FAILED', updated_at = ?
+       WHERE canary_id = ? AND status = 'PENDING'`,
+    )
+    .bind(now, canaryId)
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function receiveOperationalCanary(db, record) {
+  const result = await db
+    .prepare(
+      `UPDATE operational_queue_canaries
+       SET status = 'RECEIVED', received_at = ?, updated_at = ?
+       WHERE canary_id = ? AND queued_at = ? AND status <> 'RECEIVED'`,
+    )
+    .bind(record.now, record.now, record.canaryId, record.queuedAt)
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function markStaleOperationalCanaries(db, staleBefore, now) {
+  const result = await db
+    .prepare(
+      `UPDATE operational_queue_canaries SET status = 'STALE', updated_at = ?
+       WHERE status IN ('PENDING', 'QUEUED') AND queued_at <= ?`,
+    )
+    .bind(now, staleBefore)
+    .run();
+  return Number(result?.meta?.changes || 0);
+}
+
+export async function cleanupOperationalCanaries(db, receivedBefore, limit = 500) {
+  const result = await db
+    .prepare(
+      `DELETE FROM operational_queue_canaries WHERE rowid IN (
+         SELECT rowid FROM operational_queue_canaries
+         WHERE status = 'RECEIVED' AND received_at < ?
+         ORDER BY received_at ASC LIMIT ?
+       )`,
+    )
+    .bind(receivedBefore, limit)
+    .run();
+  return Number(result?.meta?.changes || 0);
+}
+
+export async function recordOperationalDlqReceipt(db, record) {
+  const result = await db
+    .prepare(
+      `INSERT OR IGNORE INTO operational_dlq_receipts (receipt_sha256, received_at)
+       VALUES (?, ?)`,
+    )
+    .bind(record.receiptHash, record.now)
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function recordOperationalAlert(db, record) {
+  const alertBucket = Math.floor(record.now / record.repeatSeconds);
+  const alertId = `${record.alertCode}:${alertBucket}`;
+  await db
+    .prepare(
+      `INSERT INTO operational_alerts
+       (alert_id, alert_code, alert_bucket, status, occurrence_count,
+        first_seen_at, last_seen_at, delivery_attempts)
+       VALUES (?, ?, ?, 'PENDING', ?, ?, ?, 0)
+       ON CONFLICT(alert_code, alert_bucket) DO UPDATE SET
+         occurrence_count = operational_alerts.occurrence_count + excluded.occurrence_count,
+         last_seen_at = excluded.last_seen_at`,
+    )
+    .bind(
+      alertId,
+      record.alertCode,
+      alertBucket,
+      record.occurrences || 1,
+      record.now,
+      record.now,
+    )
+    .run();
+  return alertId;
+}
+
+export async function listPendingOperationalAlerts(db, limit = 10) {
+  const result = await db
+    .prepare(
+      `SELECT alert_id, alert_code, alert_bucket, occurrence_count,
+              first_seen_at, last_seen_at, delivery_attempts
+       FROM operational_alerts WHERE status = 'PENDING'
+       ORDER BY first_seen_at ASC LIMIT ?`,
+    )
+    .bind(limit)
+    .all();
+  return result?.results || [];
+}
+
+export async function markOperationalAlertSent(db, alertId, now) {
+  const result = await db
+    .prepare(
+      `UPDATE operational_alerts
+       SET status = 'SENT', delivery_attempts = delivery_attempts + 1,
+           last_delivery_attempt_at = ?, delivered_at = ?, last_delivery_error_code = NULL
+       WHERE alert_id = ? AND status = 'PENDING'`,
+    )
+    .bind(now, now, alertId)
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function markOperationalAlertFailed(db, alertId, errorCode, now) {
+  const result = await db
+    .prepare(
+      `UPDATE operational_alerts
+       SET delivery_attempts = delivery_attempts + 1,
+           last_delivery_attempt_at = ?, last_delivery_error_code = ?
+       WHERE alert_id = ? AND status = 'PENDING'`,
+    )
+    .bind(now, errorCode, alertId)
+    .run();
+  return Number(result?.meta?.changes || 0) === 1;
+}
+
+export async function countFulfillmentDeliveryIssues(db, staleBefore) {
+  const row = await db
+    .prepare(
+      `SELECT
+         SUM(CASE WHEN email_delivery_status = 'FAILED' THEN 1 ELSE 0 END) AS email_failed,
+         SUM(CASE WHEN email_delivery_status = 'PENDING' AND created_at <= ? THEN 1 ELSE 0 END) AS email_stale,
+         SUM(CASE WHEN resend_status = 'FAILED' THEN 1 ELSE 0 END) AS resend_failed,
+         SUM(CASE WHEN resend_status = 'PENDING'
+                   AND (resend_processing_started_at IS NULL OR resend_processing_started_at <= ?)
+             THEN 1 ELSE 0 END) AS resend_stale
+       FROM fulfillments WHERE status = 'ACTIVE'`,
+    )
+    .bind(staleBefore, staleBefore)
+    .first();
+  return {
+    emailFailed: Number(row?.email_failed || 0),
+    emailStale: Number(row?.email_stale || 0),
+    resendFailed: Number(row?.resend_failed || 0),
+    resendStale: Number(row?.resend_stale || 0),
+  };
+}

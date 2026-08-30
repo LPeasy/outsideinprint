@@ -12,6 +12,10 @@ export class FakeD1 {
     this.countyRates = new Map();
     this.physicalCheckouts = new Map();
     this.inventoryReservations = new Map();
+    this.operationalHeartbeats = new Map();
+    this.operationalCanaries = new Map();
+    this.operationalDlqReceipts = new Map();
+    this.operationalAlerts = new Map();
   }
 
   prepare(sql) {
@@ -33,6 +37,140 @@ class FakeStatement {
 
   async run() {
     const { db, sql, args } = this;
+    if (sql.startsWith("INSERT INTO operational_heartbeats")) {
+      const [monitorKey, runToken, startedAt, updatedAt] = args;
+      const existing = db.operationalHeartbeats.get(monitorKey) || {};
+      db.operationalHeartbeats.set(monitorKey, {
+        ...existing,
+        monitor_key: monitorKey,
+        run_token: runToken,
+        last_started_at: startedAt,
+        status: "RUNNING",
+        last_error_code: null,
+        updated_at: updatedAt,
+      });
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_heartbeats")) {
+      const [completedAt, status, errorCode, updatedAt, monitorKey, runToken] = args;
+      const row = db.operationalHeartbeats.get(monitorKey);
+      if (!row || row.run_token !== runToken) return changed(0);
+      Object.assign(row, {
+        last_completed_at: completedAt,
+        status,
+        last_error_code: errorCode,
+        updated_at: updatedAt,
+      });
+      return changed(1);
+    }
+    if (sql.startsWith("INSERT OR IGNORE INTO operational_queue_canaries")) {
+      const [canaryId, queuedAt, updatedAt] = args;
+      if (db.operationalCanaries.has(canaryId)) return changed(0);
+      db.operationalCanaries.set(canaryId, {
+        canary_id: canaryId,
+        status: "PENDING",
+        queued_at: queuedAt,
+        received_at: null,
+        updated_at: updatedAt,
+      });
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_queue_canaries SET status = 'QUEUED'")) {
+      const [updatedAt, canaryId] = args;
+      const row = db.operationalCanaries.get(canaryId);
+      if (!row || row.status !== "PENDING") return changed(0);
+      row.status = "QUEUED";
+      row.updated_at = updatedAt;
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_queue_canaries SET status = 'SEND_FAILED'")) {
+      const [updatedAt, canaryId] = args;
+      const row = db.operationalCanaries.get(canaryId);
+      if (!row || row.status !== "PENDING") return changed(0);
+      row.status = "SEND_FAILED";
+      row.updated_at = updatedAt;
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_queue_canaries SET status = 'RECEIVED'")) {
+      const [receivedAt, updatedAt, canaryId, queuedAt] = args;
+      const row = db.operationalCanaries.get(canaryId);
+      if (!row || row.queued_at !== queuedAt || row.status === "RECEIVED") return changed(0);
+      row.status = "RECEIVED";
+      row.received_at = receivedAt;
+      row.updated_at = updatedAt;
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_queue_canaries SET status = 'STALE'")) {
+      const [updatedAt, staleBefore] = args;
+      let changes = 0;
+      for (const row of db.operationalCanaries.values()) {
+        if (!["PENDING", "QUEUED"].includes(row.status) || row.queued_at > staleBefore) continue;
+        row.status = "STALE";
+        row.updated_at = updatedAt;
+        changes += 1;
+      }
+      return changed(changes);
+    }
+    if (sql.startsWith("DELETE FROM operational_queue_canaries WHERE rowid IN")) {
+      const [receivedBefore, limit] = args;
+      const rows = [...db.operationalCanaries.entries()]
+        .filter(([, row]) => row.status === "RECEIVED" && row.received_at < receivedBefore)
+        .sort((left, right) => left[1].received_at - right[1].received_at)
+        .slice(0, limit);
+      for (const [key] of rows) db.operationalCanaries.delete(key);
+      return changed(rows.length);
+    }
+    if (sql.startsWith("INSERT OR IGNORE INTO operational_dlq_receipts")) {
+      const [receiptHash, receivedAt] = args;
+      if (db.operationalDlqReceipts.has(receiptHash)) return changed(0);
+      db.operationalDlqReceipts.set(receiptHash, { receipt_sha256: receiptHash, received_at: receivedAt });
+      return changed(1);
+    }
+    if (sql.startsWith("INSERT INTO operational_alerts")) {
+      const [alertId, alertCode, alertBucket, occurrences, firstSeenAt, lastSeenAt] = args;
+      const existing = [...db.operationalAlerts.values()].find(
+        (row) => row.alert_code === alertCode && row.alert_bucket === alertBucket,
+      );
+      if (existing) {
+        existing.occurrence_count += occurrences;
+        existing.last_seen_at = lastSeenAt;
+      } else {
+        db.operationalAlerts.set(alertId, {
+          alert_id: alertId,
+          alert_code: alertCode,
+          alert_bucket: alertBucket,
+          status: "PENDING",
+          occurrence_count: occurrences,
+          first_seen_at: firstSeenAt,
+          last_seen_at: lastSeenAt,
+          delivery_attempts: 0,
+          last_delivery_attempt_at: null,
+          delivered_at: null,
+          last_delivery_error_code: null,
+        });
+      }
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_alerts SET status = 'SENT'")) {
+      const [attemptedAt, deliveredAt, alertId] = args;
+      const row = db.operationalAlerts.get(alertId);
+      if (!row || row.status !== "PENDING") return changed(0);
+      row.status = "SENT";
+      row.delivery_attempts += 1;
+      row.last_delivery_attempt_at = attemptedAt;
+      row.delivered_at = deliveredAt;
+      row.last_delivery_error_code = null;
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_alerts SET delivery_attempts")) {
+      const [attemptedAt, errorCode, alertId] = args;
+      const row = db.operationalAlerts.get(alertId);
+      if (!row || row.status !== "PENDING") return changed(0);
+      row.delivery_attempts += 1;
+      row.last_delivery_attempt_at = attemptedAt;
+      row.last_delivery_error_code = errorCode;
+      return changed(1);
+    }
     if (sql.startsWith("INSERT INTO rate_limits")) {
       const key = `${args[0]}:${args[1]}`;
       const existing = db.rateLimits.get(key);
@@ -495,6 +633,34 @@ class FakeStatement {
 
   async first() {
     const { db, sql, args } = this;
+    if (sql.startsWith("SELECT status, last_started_at, last_completed_at FROM operational_heartbeats")) {
+      const row = db.operationalHeartbeats.get(args[0]);
+      if (!row) return null;
+      return {
+        status: row.status,
+        last_started_at: row.last_started_at,
+        last_completed_at: row.last_completed_at ?? null,
+      };
+    }
+    if (sql.startsWith("SELECT COUNT(*) AS pending_count FROM operational_alerts")) {
+      return {
+        pending_count: [...db.operationalAlerts.values()]
+          .filter((row) => row.status === "PENDING").length,
+      };
+    }
+    if (sql.startsWith("SELECT SUM(CASE WHEN email_delivery_status = 'FAILED'")) {
+      const [emailStaleBefore, resendStaleBefore] = args;
+      const active = [...db.fulfillments.values()].filter((row) => row.status === "ACTIVE");
+      return {
+        email_failed: active.filter((row) => row.email_delivery_status === "FAILED").length,
+        email_stale: active.filter((row) =>
+          row.email_delivery_status === "PENDING" && row.created_at <= emailStaleBefore).length,
+        resend_failed: active.filter((row) => row.resend_status === "FAILED").length,
+        resend_stale: active.filter((row) =>
+          row.resend_status === "PENDING" &&
+          (row.resend_processing_started_at == null || row.resend_processing_started_at <= resendStaleBefore)).length,
+      };
+    }
     if (sql.startsWith("SELECT request_count FROM rate_limits")) {
       return db.rateLimits.get(`${args[0]}:${args[1]}`) || null;
     }
@@ -561,6 +727,15 @@ class FakeStatement {
 
   async all() {
     const { db, sql, args } = this;
+    if (sql.startsWith("SELECT alert_id, alert_code, alert_bucket, occurrence_count")) {
+      return {
+        results: [...db.operationalAlerts.values()]
+          .filter((row) => row.status === "PENDING")
+          .sort((left, right) => left.first_seen_at - right.first_seen_at)
+          .slice(0, args[0])
+          .map((row) => ({ ...row })),
+      };
+    }
     if (sql.startsWith("SELECT county_fips, state_rate_bps, surtax_rate_bps, combined_rate_bps") &&
         sql.includes("FROM florida_county_sales_tax_rates")) {
       const prefix = `${args[0]}:`;

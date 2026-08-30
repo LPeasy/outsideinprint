@@ -2,6 +2,9 @@
 .wrangler/
 node_modules/
 coverage/
+__pycache__/
 .private-imports/
 wrangler.toml
 wrangler.consumer.toml
+.task2-provisioning/
+wrangler.consumer.bootstrap.toml

@@ -5,7 +5,14 @@ import {
   getWebhookEvent,
   hasWebhookClaim,
 } from "./database.js";
+import { isValidSquareEventId } from "./crypto.js";
 import { processSquareReference } from "./fulfillment.js";
+import {
+  handleDlqBatch,
+  OPERATIONAL_CANARY_KIND,
+  operationalQueueNames,
+  processOperationalCanaryMessage,
+} from "./monitoring.js";
 
 function nowSeconds() {
   return Math.floor(Date.now() / 1000);
@@ -18,10 +25,12 @@ function retryDelay(message) {
 
 export async function processQueueMessage(message, env) {
   const body = message?.body;
+  if (body?.kind === OPERATIONAL_CANARY_KIND) {
+    return processOperationalCanaryMessage(message, env);
+  }
   if (
     !body ||
-    typeof body.eventId !== "string" ||
-    !/^[A-Za-z0-9_-]{1,192}$/u.test(body.eventId) ||
+    !isValidSquareEventId(body.eventId) ||
     typeof body.payloadHash !== "string" ||
     !/^[a-f0-9]{64}$/u.test(body.payloadHash)
   ) {
@@ -92,4 +101,12 @@ export async function handleQueueBatch(batch, env) {
   for (const message of batch.messages) {
     await processQueueMessage(message, env);
   }
+}
+
+export async function handleConsumerQueueBatch(batch, env) {
+  const { primary, dlq } = operationalQueueNames(env);
+  if (batch.queue === primary) return handleQueueBatch(batch, env);
+  if (batch.queue === dlq) return handleDlqBatch(batch, env);
+  batch.retryAll({ delaySeconds: 300 });
+  throw new Error("QUEUE_SOURCE_UNEXPECTED");
 }
