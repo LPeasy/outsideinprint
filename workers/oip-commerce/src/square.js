@@ -181,6 +181,10 @@ function verifyCreatedEpubOrder(
   const order = Array.isArray(orders) ? orders.find((candidate) => candidate.id === link?.order_id) : null;
   const lines = order?.line_items;
   const line = Array.isArray(lines) && lines.length === 1 ? lines[0] : null;
+  const fulfillments = order?.fulfillments;
+  const fulfillment = Array.isArray(fulfillments) && fulfillments.length === 1
+    ? fulfillments[0]
+    : null;
   if (
     !link?.order_id ||
     link.pre_populated_data?.buyer_email !== buyerEmail ||
@@ -194,6 +198,7 @@ function verifyCreatedEpubOrder(
     !line ||
     line.catalog_object_id !== catalogObjectId ||
     String(line.quantity) !== "1" ||
+    fulfillment?.type !== "DIGITAL" ||
     !moneyMatches(line.base_price_money, product.priceCents) ||
     !moneyMatches(line.total_money, product.priceCents) ||
     !zeroOrMissingMoney(line.total_tax_money) ||

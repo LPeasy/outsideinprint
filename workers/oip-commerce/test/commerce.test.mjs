@@ -598,6 +598,10 @@ function epubPaymentLinkResponse({
         total_tax_money: { amount: 0, currency: "USD" },
         total_discount_money: { amount: 0, currency: "USD" },
         total_service_charge_money: { amount: 0, currency: "USD" },
+        fulfillments: [{
+          type: "DIGITAL",
+          state: "PROPOSED",
+        }],
         line_items: [{
           catalog_object_id: variationId,
           quantity: "1",
@@ -1049,6 +1053,34 @@ test("EPUB checkout withholds a Square link whose created order includes tax", a
     epubRequest(
       { sku: "OIP-AN-EPUB", country_code: "US" },
       { "idempotency-key": "taxed-epub-order-123" },
+    ),
+    env,
+  );
+  assert.equal(response.status, 502);
+  assert.equal((await response.json()).error.code, "CHECKOUT_PROVIDER_ERROR");
+});
+
+test("EPUB checkout withholds a Square link without its generated digital fulfillment", async () => {
+  const env = baseEnv({
+    EPUB_ENABLED_SKUS: "OIP-AN-EPUB",
+    __testFetch: async (url, options = {}) => {
+      if (url.includes("/v2/catalog/object/variation-1")) return Response.json(epubVariation());
+      if (url.endsWith("/v2/online-checkout/payment-links")) {
+        const body = JSON.parse(options.body);
+        const response = epubPaymentLinkResponse({
+          referenceId: body.order.reference_id,
+          buyerEmail: body.pre_populated_data.buyer_email,
+        });
+        delete response.related_resources.orders[0].fulfillments;
+        return Response.json(response);
+      }
+      throw new Error(`unexpected request: ${url}`);
+    },
+  });
+  const response = await handleRequest(
+    epubRequest(
+      { sku: "OIP-AN-EPUB", country_code: "US" },
+      { "idempotency-key": "missing-email-fulfillment-123" },
     ),
     env,
   );
@@ -2674,7 +2706,7 @@ test("completed eligible EPUB payment creates one active token and one idempoten
             amount_money: { amount: 999, currency: "USD" },
             refunded_money: { amount: 0, currency: "USD" },
             billing_address: { country: "US" },
-            buyer_email_address: "Reader@Example.com",
+            source_type: "WALLET",
           },
         });
       }
@@ -2684,6 +2716,11 @@ test("completed eligible EPUB payment creates one active token and one idempoten
             id: "order-1",
             location_id: "location-1",
             total_money: { amount: 999, currency: "USD" },
+            fulfillments: [{
+              type: "DIGITAL",
+              state: "COMPLETED",
+              recipient: { email_address: "Reader@Example.com" },
+            }],
             line_items: [{
               catalog_object_id: "variation-1",
               quantity: "1",
