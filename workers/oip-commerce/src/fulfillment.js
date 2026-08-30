@@ -68,7 +68,8 @@ export function extractPaymentEmail(payment, order = null) {
   }
   if (recipientEmails.size > 1) return null;
   if (recipientEmails.size === 1) return recipientEmails.values().next().value;
-  return normalizeEmailAddress(payment?.buyer_email_address);
+  return normalizeEmailAddress(payment?.buyer_email_address) ||
+    normalizeEmailAddress(payment?.shipping_address?.email_address);
 }
 
 export async function evaluateEpubOrder({

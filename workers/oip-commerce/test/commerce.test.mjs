@@ -941,6 +941,7 @@ test("EPUB checkout prepopulates delivery email, keeps wallets, and reuses an id
         });
         assert.match(body.idempotency_key, /^oip-[a-f0-9]{64}$/u);
         assert.equal(Object.hasOwn(body.order.line_items[0], "base_price_money"), false);
+        assert.equal(Object.hasOwn(body.order, "fulfillments"), false);
         assert.equal(Object.hasOwn(body.order, "taxes"), false);
         assert.equal(Object.hasOwn(body.order, "discounts"), false);
         assert.equal(Object.hasOwn(body.checkout_options, "shipping_fee"), false);
@@ -2965,7 +2966,9 @@ test("countryless EPUB payment uses signed U.S. proof and the Order recipient em
     reference_id: referenceId,
     total_money: { amount: 999, currency: "USD" },
     fulfillments: [{
-      shipment_details: { recipient: { email_address: "Reader@Example.com" } },
+      type: "DIGITAL",
+      state: "PROPOSED",
+      recipient: { email_address: "Reader@Example.com" },
     }],
     line_items: [{
       catalog_object_id: "variation-1",
@@ -2977,6 +2980,12 @@ test("countryless EPUB payment uses signed U.S. proof and the Order recipient em
     }],
   };
   assert.equal(extractPaymentEmail(payment, order), "reader@example.com");
+  const shippingOnlyPayment = structuredClone(payment);
+  shippingOnlyPayment.shipping_address = { email_address: "Shipping@Example.com" };
+  assert.equal(
+    extractPaymentEmail(shippingOnlyPayment, { ...order, fulfillments: [] }),
+    "shipping@example.com",
+  );
   const editedEmailPayment = structuredClone(payment);
   editedEmailPayment.buyer_email_address = "original@example.com";
   assert.equal(extractPaymentEmail(editedEmailPayment, order), "reader@example.com");
