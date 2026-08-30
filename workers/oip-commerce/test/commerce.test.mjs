@@ -111,7 +111,7 @@ function baseEnv(overrides = {}) {
     SQUARE_ACCESS_TOKEN: "test-token",
     SQUARE_LOCATION_ID: "location-1",
     SQUARE_REDIRECT_URL: "https://outsideinprint.org/support/thanks/",
-    SQUARE_EPUB_REDIRECT_URL: "https://outsideinprint.org/shop/",
+    SQUARE_EPUB_REDIRECT_URL: "https://outsideinprint.org/shop/thanks/",
     SQUARE_EPUB_CATALOG_VARIATION_IDS: JSON.stringify({
       "OIP-AN-EPUB": "variation-1",
       "OIP-PS-EPUB": "variation-ps",
@@ -929,7 +929,7 @@ test("EPUB checkout prepopulates delivery email, keeps wallets, and reuses an id
           },
           pre_populated_data: { buyer_email: "reader@example.com" },
           checkout_options: {
-            redirect_url: "https://outsideinprint.org/shop/",
+            redirect_url: "https://outsideinprint.org/shop/thanks/",
             ask_for_shipping_address: false,
             allow_tipping: false,
             accepted_payment_methods: {

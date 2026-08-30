@@ -507,6 +507,26 @@ if ($thanksSource -match '(?i)<form|<input|URLSearchParams|location\.search|orde
   throw 'Support thanks source must not capture or display redirect identifiers.'
 }
 
+$epubThanksSource = Get-RequiredText -RelativePath 'content/shop/thanks.md'
+foreach ($requiredEpubThanksText in @(
+  'title: "Thanks for your purchase"',
+  'type: "commerce-policy"',
+  'eyebrow: "Order confirmation"',
+  'draft: false',
+  'noindex: true',
+  'list: never',
+  'Expect your secure EPUB download link at the delivery email address you entered during checkout.',
+  'Square is confirming your payment.',
+  'does not confirm that payment succeeded',
+  '[contact Outside In Print](/contact/)',
+  '[return to the bookstore](/shop/)'
+)) {
+  Assert-Contains -Text $epubThanksSource -Expected $requiredEpubThanksText -Context 'EPUB thanks source'
+}
+if ($epubThanksSource -match '(?i)<form|<input|URLSearchParams|location\.search|order[_ -]?id|payment[_ -]?id|email has been sent') {
+  throw 'EPUB thanks source must remain query-agnostic and avoid unverified fulfillment claims.'
+}
+
 if ($SourceOnly) {
   Write-Host 'Direct-commerce storefront source contract passed.'
   return
@@ -516,6 +536,7 @@ $requiredOutputFiles = @(
   'shop/index.html',
   'shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'shop/the-parable-of-the-sheep/index.html',
+  'shop/thanks/index.html',
   'shop/the-water-cycle/index.html',
   'support/index.html',
   'support/cancellation-refunds/index.html',
@@ -662,7 +683,23 @@ if ($thanksOutput -match '(?i)<form\b|<input\b|data-support-checkout|order[_ -]?
   throw 'Built support thanks page must remain query-agnostic and free of identifier capture.'
 }
 
-foreach ($commercePage in @($shopOutput, $supportOutput, $thanksOutput)) {
+$epubThanksOutput = [Net.WebUtility]::HtmlDecode([string]$output['shop/thanks/index.html'])
+foreach ($requiredEpubThanksOutput in @(
+  'Order confirmation',
+  'Thanks for your purchase',
+  'Expect your secure EPUB download link at the delivery email address you entered during checkout.',
+  'Square is confirming your payment.',
+  'does not confirm that payment succeeded',
+  'href=/contact/',
+  'href=/shop/'
+)) {
+  Assert-Contains -Text $epubThanksOutput -Expected $requiredEpubThanksOutput -Context 'Built EPUB thanks page'
+}
+if ($epubThanksOutput -match '(?i)<form\b|<input\b|data-epub-checkout|order[_ -]?id|payment[_ -]?id|email has been sent') {
+  throw 'Built EPUB thanks page must remain query-agnostic and avoid unverified fulfillment claims.'
+}
+
+foreach ($commercePage in @($shopOutput, $supportOutput, $thanksOutput, $epubThanksOutput)) {
   if ($commercePage -notmatch '(?i)data-goatcounter=') {
     continue
   }

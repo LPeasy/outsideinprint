@@ -160,7 +160,7 @@ EXPECTED_FIXED = {
         "REQUIRE_EPUB_US_COUNTRY_PROOF": "true",
         "SQUARE_API_BASE_URL": "https://connect.squareup.com",
         "SQUARE_API_VERSION": "2026-07-15",
-        "SQUARE_EPUB_REDIRECT_URL": "https://outsideinprint.org/shop/",
+        "SQUARE_EPUB_REDIRECT_URL": "https://outsideinprint.org/shop/thanks/",
         "SQUARE_REDIRECT_URL": "https://outsideinprint.org/support/thanks/",
         "SQUARE_WEBHOOK_NOTIFICATION_URL": "https://downloads.outsideinprint.org/api/square/webhook",
         "USPS_ADDRESSES_API_BASE_URL": "",

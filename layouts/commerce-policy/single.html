@@ -1,7 +1,7 @@
 {{ define "main" }}
   <article class="commerce-policy page-shell" aria-labelledby="commerce-policy-title">
     <header class="commerce-policy__header">
-      <p class="commerce-policy__eyebrow">Outside In Print policies</p>
+      <p class="commerce-policy__eyebrow">{{ .Params.eyebrow | default "Outside In Print policies" }}</p>
       <h1 id="commerce-policy-title" class="commerce-policy__title">{{ .Title }}</h1>
       {{ with .Params.effective_date }}<p class="commerce-policy__effective">Effective {{ . }}</p>{{ end }}
       {{ with .Params.description }}<p class="commerce-policy__description">{{ . }}</p>{{ end }}
