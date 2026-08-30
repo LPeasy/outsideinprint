@@ -139,6 +139,7 @@ products:
     type_label: "Book"
     title: "The Water Cycle: Risk, Infrastructure, and Public Memory"
     display_title: "The Water Cycle"
+    subtitle: "How maps, pipes, insurance, and public decisions shape what communities remember about water risk"
     author: "Robert V. Ussley"
     publisher: "Outside In Print"
     product_type: "Outside In Print EPUB"
