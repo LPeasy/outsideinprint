@@ -1,5 +1,6 @@
 import { HttpError, requireBinding } from "./http.js";
 import { squarePercentageForBasisPoints } from "./florida-tax.js";
+import { createEpubUsOrderReference } from "./epub-reference.js";
 
 export class SquareApiError extends Error {
   constructor(status, code) {
@@ -171,7 +172,10 @@ function zeroOrMissingMoney(money) {
   return money === undefined || money === null || moneyMatches(money, 0);
 }
 
-function verifyCreatedEpubOrder(payload, { catalogObjectId, product, locationId }) {
+function verifyCreatedEpubOrder(
+  payload,
+  { catalogObjectId, product, locationId, referenceId, buyerEmail },
+) {
   const link = payload.payment_link;
   const orders = payload.related_resources?.orders;
   const order = Array.isArray(orders) ? orders.find((candidate) => candidate.id === link?.order_id) : null;
@@ -179,9 +183,10 @@ function verifyCreatedEpubOrder(payload, { catalogObjectId, product, locationId 
   const line = Array.isArray(lines) && lines.length === 1 ? lines[0] : null;
   if (
     !link?.order_id ||
+    link.pre_populated_data?.buyer_email !== buyerEmail ||
     !order ||
     order.location_id !== locationId ||
-    order.reference_id !== product.sku ||
+    order.reference_id !== referenceId ||
     !moneyMatches(order.total_money, product.priceCents) ||
     !zeroOrMissingMoney(order.total_tax_money) ||
     !zeroOrMissingMoney(order.total_discount_money) ||
@@ -198,9 +203,16 @@ function verifyCreatedEpubOrder(payload, { catalogObjectId, product, locationId 
   }
 }
 
-export async function createEpubPaymentLink(env, { product, catalogObjectId, idempotencyKey }) {
+export async function createEpubPaymentLink(
+  env,
+  { product, catalogObjectId, idempotencyKey, buyerEmail, checkoutCreatedAt },
+) {
   const locationId = requireBinding(env, "SQUARE_LOCATION_ID");
   const redirectUrl = requireBinding(env, "SQUARE_EPUB_REDIRECT_URL");
+  const referenceId = await createEpubUsOrderReference(
+    requireBinding(env, "DOWNLOAD_TOKEN_SECRET"),
+    { issuedAt: checkoutCreatedAt, sku: product.sku },
+  );
   await verifyEpubCatalogVariation(env, { catalogObjectId, product });
   const payload = await squareRequest(env, "/v2/online-checkout/payment-links", {
     method: "POST",
@@ -208,20 +220,17 @@ export async function createEpubPaymentLink(env, { product, catalogObjectId, ide
       idempotency_key: idempotencyKey,
       order: {
         location_id: locationId,
-        reference_id: product.sku,
+        reference_id: referenceId,
         line_items: [{ quantity: "1", catalog_object_id: catalogObjectId }],
       },
+      pre_populated_data: { buyer_email: buyerEmail },
       checkout_options: {
         redirect_url: redirectUrl,
         ask_for_shipping_address: false,
         allow_tipping: false,
         accepted_payment_methods: {
-          // Express wallets can complete without returning the buyer email and
-          // country fields required for secure EPUB delivery. Keep EPUB sales
-          // on Square's full card/contact flow until those fields are bound
-          // before the hosted checkout opens.
-          apple_pay: false,
-          google_pay: false,
+          apple_pay: true,
+          google_pay: true,
           cash_app_pay: false,
           afterpay_clearpay: false,
         },
@@ -232,7 +241,13 @@ export async function createEpubPaymentLink(env, { product, catalogObjectId, ide
     },
   });
   if (!payload.payment_link?.url) throw new SquareApiError(502, "SQUARE_LINK_MISSING");
-  verifyCreatedEpubOrder(payload, { catalogObjectId, product, locationId });
+  verifyCreatedEpubOrder(payload, {
+    catalogObjectId,
+    product,
+    locationId,
+    referenceId,
+    buyerEmail,
+  });
   return { id: payload.payment_link.id || null, url: payload.payment_link.url };
 }
 
