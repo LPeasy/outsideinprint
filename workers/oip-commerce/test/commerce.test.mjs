@@ -26,7 +26,16 @@ import {
   releaseResendAttempt,
   reservePhysicalInventory,
 } from "../src/database.js";
-import { evaluateEpubOrder, hasAnyRefund, processSquareEvent } from "../src/fulfillment.js";
+import {
+  evaluateEpubOrder,
+  extractPaymentEmail,
+  hasAnyRefund,
+  processSquareEvent,
+} from "../src/fulfillment.js";
+import {
+  createEpubUsOrderReference,
+  verifyEpubUsOrderReference,
+} from "../src/epub-reference.js";
 import {
   canonicalFloridaRateTable,
   canonicalPointMatchIndex,
@@ -36,7 +45,11 @@ import {
   shippingCentsForQuantity,
   taxCentsForPhysicalLines,
 } from "../src/florida-tax.js";
-import { validatePhysicalCheckoutRequest, validateSupportAmount } from "../src/http.js";
+import {
+  validateEpubCheckoutRequest,
+  validatePhysicalCheckoutRequest,
+  validateSupportAmount,
+} from "../src/http.js";
 import { handleRequest } from "../src/index.js";
 import { expireUnusedPhysicalLinks } from "../src/maintenance.js";
 import { evaluatePhysicalOrder } from "../src/physical.js";
@@ -122,6 +135,7 @@ function baseEnv(overrides = {}) {
     SQUARE_WEBHOOK_SIGNATURE_KEY: "test-signature-key",
     DOWNLOAD_BASE_URL: "https://downloads.outsideinprint.org",
     DOWNLOAD_TOKEN_SECRET: "test-download-token-secret-that-is-not-production",
+    EMAIL_HASH_PEPPER: "test-email-pepper",
     RESEND_API_KEY: "test-resend-key",
     DOWNLOAD_EMAIL_FROM: "Outside In Print <downloads@outsideinprint.org>",
     DOWNLOAD_EMAIL_REPLY_TO: "support@outsideinprint.org",
@@ -534,7 +548,7 @@ function epubRequest(body, extraHeaders = {}, url = "https://downloads.outsidein
       "cf-ipcountry": "US",
       ...extraHeaders,
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({ email: "reader@example.com", ...body }),
   });
   Object.defineProperty(request, "cf", {
     value: { country: extraHeaders["cf-ipcountry"] || "US" },
@@ -565,18 +579,29 @@ function epubPaymentLinkResponse({
   variationId = "variation-1",
   sku = "OIP-AN-EPUB",
   priceCents = 999,
+  referenceId = sku,
+  buyerEmail = "reader@example.com",
 } = {}) {
   return {
-    payment_link: { id: linkId, order_id: orderId, url },
+    payment_link: {
+      id: linkId,
+      order_id: orderId,
+      url,
+      pre_populated_data: { buyer_email: buyerEmail },
+    },
     related_resources: {
       orders: [{
         id: orderId,
         location_id: "location-1",
-        reference_id: sku,
+        reference_id: referenceId,
         total_money: { amount: priceCents, currency: "USD" },
         total_tax_money: { amount: 0, currency: "USD" },
         total_discount_money: { amount: 0, currency: "USD" },
         total_service_charge_money: { amount: 0, currency: "USD" },
+        fulfillments: [{
+          type: "DIGITAL",
+          state: "PROPOSED",
+        }],
         line_items: [{
           catalog_object_id: variationId,
           quantity: "1",
@@ -762,6 +787,29 @@ test("reader support checkout is default-closed before origin data or Square sid
   assert.equal(squareCalls, 0);
 });
 
+test("EPUB checkout requires and normalizes a delivery email", () => {
+  assert.deepEqual(
+    validateEpubCheckoutRequest({
+      sku: "OIP-AN-EPUB",
+      country_code: "US",
+      email: " Reader@Example.com ",
+    }),
+    { sku: "OIP-AN-EPUB", countryCode: "US", email: "reader@example.com" },
+  );
+  assert.throws(
+    () => validateEpubCheckoutRequest({ sku: "OIP-AN-EPUB", country_code: "US" }),
+    /receive the EPUB/u,
+  );
+  assert.throws(
+    () => validateEpubCheckoutRequest({
+      sku: "OIP-AN-EPUB",
+      country_code: "US",
+      email: "reader @example.com",
+    }),
+    /receive the EPUB/u,
+  );
+});
+
 test("EPUB checkout rejects unknown, disabled, and non-US selections before Square", async () => {
   let squareCalls = 0;
   const noSquare = async () => {
@@ -817,7 +865,7 @@ test("EPUB checkout rejects unknown, disabled, and non-US selections before Squa
         "idempotency-key": "spoofed-country-123",
         "cf-ipcountry": "US",
       },
-      body: JSON.stringify({ sku: "OIP-AN-EPUB", country_code: "US" }),
+      body: JSON.stringify({ sku: "OIP-AN-EPUB", country_code: "US", email: "reader@example.com" }),
     }),
     baseEnv({ EPUB_ENABLED_SKUS: "OIP-AN-EPUB", __testFetch: noSquare }),
   );
@@ -857,7 +905,7 @@ test("EPUB checkout fails closed for variation-map gaps and Square ID mismatch",
   assert.equal(squareCalls, 1);
 });
 
-test("EPUB checkout uses the exact catalog-only payload and reuses an idempotent link", async () => {
+test("EPUB checkout prepopulates delivery email, keeps wallets, and reuses an idempotent link", async () => {
   const calls = [];
   const env = baseEnv({
     EPUB_ENABLED_SKUS: "OIP-AN-EPUB",
@@ -870,13 +918,16 @@ test("EPUB checkout uses the exact catalog-only payload and reuses an idempotent
       }
       if (url.endsWith("/v2/online-checkout/payment-links")) {
         const body = JSON.parse(options.body);
+        assert.match(body.order.reference_id, /^E1\.[0-9a-z]{1,9}\.[A-Za-z0-9_-]{22}$/u);
+        assert.ok(body.order.reference_id.length <= 40);
         assert.deepEqual(body, {
           idempotency_key: body.idempotency_key,
           order: {
             location_id: "location-1",
-            reference_id: "OIP-AN-EPUB",
+            reference_id: body.order.reference_id,
             line_items: [{ quantity: "1", catalog_object_id: "variation-an" }],
           },
+          pre_populated_data: { buyer_email: "reader@example.com" },
           checkout_options: {
             redirect_url: "https://outsideinprint.org/shop/",
             ask_for_shipping_address: false,
@@ -894,10 +945,15 @@ test("EPUB checkout uses the exact catalog-only payload and reuses an idempotent
         });
         assert.match(body.idempotency_key, /^oip-[a-f0-9]{64}$/u);
         assert.equal(Object.hasOwn(body.order.line_items[0], "base_price_money"), false);
+        assert.equal(Object.hasOwn(body.order, "fulfillments"), false);
         assert.equal(Object.hasOwn(body.order, "taxes"), false);
         assert.equal(Object.hasOwn(body.order, "discounts"), false);
         assert.equal(Object.hasOwn(body.checkout_options, "shipping_fee"), false);
-        return Response.json(epubPaymentLinkResponse({ variationId: "variation-an" }));
+        return Response.json(epubPaymentLinkResponse({
+          variationId: "variation-an",
+          referenceId: body.order.reference_id,
+          buyerEmail: body.pre_populated_data.buyer_email,
+        }));
       }
       throw new Error(`unexpected request: ${url}`);
     },
@@ -946,13 +1002,16 @@ test("Parable EPUB rejects the legacy $4.99 variation and creates only a $9.99 c
       }
       if (url.endsWith("/v2/online-checkout/payment-links")) {
         const body = JSON.parse(options.body);
-        assert.equal(body.order.reference_id, "OIP-PS-EPUB");
+        assert.match(body.order.reference_id, /^E1\./u);
+        assert.deepEqual(body.pre_populated_data, { buyer_email: "reader@example.com" });
         assert.deepEqual(body.order.line_items, [{ quantity: "1", catalog_object_id: "variation-ps" }]);
         assert.equal(Object.hasOwn(body.order.line_items[0], "base_price_money"), false);
         return Response.json(epubPaymentLinkResponse({
           variationId: "variation-ps",
           sku: "OIP-PS-EPUB",
           priceCents: 999,
+          referenceId: body.order.reference_id,
+          buyerEmail: body.pre_populated_data.buyer_email,
         }));
       }
       throw new Error(`unexpected request: ${url}`);
@@ -972,10 +1031,14 @@ test("Parable EPUB rejects the legacy $4.99 variation and creates only a $9.99 c
 test("EPUB checkout withholds a Square link whose created order includes tax", async () => {
   const env = baseEnv({
     EPUB_ENABLED_SKUS: "OIP-AN-EPUB",
-    __testFetch: async (url) => {
+    __testFetch: async (url, options = {}) => {
       if (url.includes("/v2/catalog/object/variation-1")) return Response.json(epubVariation());
       if (url.endsWith("/v2/online-checkout/payment-links")) {
-        const response = epubPaymentLinkResponse();
+        const body = JSON.parse(options.body);
+        const response = epubPaymentLinkResponse({
+          referenceId: body.order.reference_id,
+          buyerEmail: body.pre_populated_data.buyer_email,
+        });
         const order = response.related_resources.orders[0];
         order.total_tax_money.amount = 75;
         order.total_money.amount = 1074;
@@ -990,6 +1053,34 @@ test("EPUB checkout withholds a Square link whose created order includes tax", a
     epubRequest(
       { sku: "OIP-AN-EPUB", country_code: "US" },
       { "idempotency-key": "taxed-epub-order-123" },
+    ),
+    env,
+  );
+  assert.equal(response.status, 502);
+  assert.equal((await response.json()).error.code, "CHECKOUT_PROVIDER_ERROR");
+});
+
+test("EPUB checkout withholds a Square link without its generated digital fulfillment", async () => {
+  const env = baseEnv({
+    EPUB_ENABLED_SKUS: "OIP-AN-EPUB",
+    __testFetch: async (url, options = {}) => {
+      if (url.includes("/v2/catalog/object/variation-1")) return Response.json(epubVariation());
+      if (url.endsWith("/v2/online-checkout/payment-links")) {
+        const body = JSON.parse(options.body);
+        const response = epubPaymentLinkResponse({
+          referenceId: body.order.reference_id,
+          buyerEmail: body.pre_populated_data.buyer_email,
+        });
+        delete response.related_resources.orders[0].fulfillments;
+        return Response.json(response);
+      }
+      throw new Error(`unexpected request: ${url}`);
+    },
+  });
+  const response = await handleRequest(
+    epubRequest(
+      { sku: "OIP-AN-EPUB", country_code: "US" },
+      { "idempotency-key": "missing-email-fulfillment-123" },
     ),
     env,
   );
@@ -1037,13 +1128,18 @@ test("EPUB checkout claim fencing blocks concurrent provider work", async () => 
   const catalogStarted = new Promise((resolve) => { markCatalogStarted = resolve; });
   const env = baseEnv({
     EPUB_ENABLED_SKUS: "OIP-AN-EPUB",
-    __testFetch: async (url) => {
+    __testFetch: async (url, options = {}) => {
       if (url.includes("/v2/catalog/object/variation-1")) {
         markCatalogStarted();
         return catalogResponse;
       }
       if (url.endsWith("/v2/online-checkout/payment-links")) {
-        return Response.json(epubPaymentLinkResponse({ linkId: "epub-link" }));
+        const body = JSON.parse(options.body);
+        return Response.json(epubPaymentLinkResponse({
+          linkId: "epub-link",
+          referenceId: body.order.reference_id,
+          buyerEmail: body.pre_populated_data.buyer_email,
+        }));
       }
       throw new Error(`unexpected request: ${url}`);
     },
@@ -2610,7 +2706,7 @@ test("completed eligible EPUB payment creates one active token and one idempoten
             amount_money: { amount: 999, currency: "USD" },
             refunded_money: { amount: 0, currency: "USD" },
             billing_address: { country: "US" },
-            buyer_email_address: "Reader@Example.com",
+            source_type: "WALLET",
           },
         });
       }
@@ -2620,6 +2716,11 @@ test("completed eligible EPUB payment creates one active token and one idempoten
             id: "order-1",
             location_id: "location-1",
             total_money: { amount: 999, currency: "USD" },
+            fulfillments: [{
+              type: "DIGITAL",
+              state: "COMPLETED",
+              recipient: { email_address: "Reader@Example.com" },
+            }],
             line_items: [{
               catalog_object_id: "variation-1",
               quantity: "1",
@@ -2874,6 +2975,86 @@ test("EPUB eligibility requires enabled SKU, exact price, no tax, US proof, and 
     ).reasonCode,
     "PAYMENT_HAS_REFUND",
   );
+});
+
+test("countryless EPUB payment uses signed U.S. proof and the Order recipient email fallback", async () => {
+  const secret = "test-download-token-secret-that-is-not-production";
+  const issuedAt = 1788048000;
+  const referenceId = await createEpubUsOrderReference(secret, {
+    issuedAt,
+    sku: "OIP-AN-EPUB",
+  });
+  assert.match(referenceId, /^E1\.[0-9a-z]{1,9}\.[A-Za-z0-9_-]{22}$/u);
+  assert.ok(referenceId.length <= 40);
+
+  const payment = {
+    id: "wallet-payment",
+    order_id: "wallet-order",
+    location_id: "location-1",
+    status: "COMPLETED",
+    source_type: "WALLET",
+    created_at: new Date((issuedAt + 120) * 1000).toISOString(),
+    amount_money: { amount: 999, currency: "USD" },
+    refunded_money: { amount: 0, currency: "USD" },
+  };
+  const order = {
+    id: "wallet-order",
+    location_id: "location-1",
+    reference_id: referenceId,
+    total_money: { amount: 999, currency: "USD" },
+    fulfillments: [{
+      type: "DIGITAL",
+      state: "PROPOSED",
+      recipient: { email_address: "Reader@Example.com" },
+    }],
+    line_items: [{
+      catalog_object_id: "variation-1",
+      quantity: "1",
+      base_price_money: { amount: 999, currency: "USD" },
+      total_money: { amount: 999, currency: "USD" },
+      total_tax_money: { amount: 0, currency: "USD" },
+      total_discount_money: { amount: 0, currency: "USD" },
+    }],
+  };
+  assert.equal(extractPaymentEmail(payment, order), "reader@example.com");
+  const shippingOnlyPayment = structuredClone(payment);
+  shippingOnlyPayment.shipping_address = { email_address: "Shipping@Example.com" };
+  assert.equal(
+    extractPaymentEmail(shippingOnlyPayment, { ...order, fulfillments: [] }),
+    "shipping@example.com",
+  );
+  const editedEmailPayment = structuredClone(payment);
+  editedEmailPayment.buyer_email_address = "original@example.com";
+  assert.equal(extractPaymentEmail(editedEmailPayment, order), "reader@example.com");
+  const evaluate = (overrides = {}) => evaluateEpubOrder({
+    payment: overrides.payment || payment,
+    order: overrides.order || order,
+    resolveSku: async () => "OIP-AN-EPUB",
+    enabledSkus: new Set(["OIP-AN-EPUB"]),
+    requireUsCountryProof: true,
+    expectedLocationId: "location-1",
+    verifySignedUsReference: (reference) => verifyEpubUsOrderReference(secret, reference),
+  });
+  assert.equal((await evaluate()).eligible, true);
+  assert.equal((await evaluate({ payment: editedEmailPayment })).eligible, true);
+
+  const applePayCard = structuredClone(payment);
+  applePayCard.source_type = "CARD";
+  assert.equal((await evaluate({ payment: applePayCard })).eligible, true);
+
+  const forged = structuredClone(order);
+  forged.reference_id = `${referenceId.slice(0, -1)}${referenceId.endsWith("A") ? "B" : "A"}`;
+  assert.equal((await evaluate({ order: forged })).reasonCode, "US_COUNTRY_NOT_PROVEN");
+
+  const foreign = structuredClone(payment);
+  foreign.billing_address = { country: "CA" };
+  assert.equal((await evaluate({ payment: foreign })).reasonCode, "US_COUNTRY_NOT_PROVEN");
+
+  const ambiguous = structuredClone(order);
+  ambiguous.fulfillments.push({
+    recipient: { email_address: "other@example.com" },
+  });
+  assert.equal((await evaluate({ order: ambiguous })).reasonCode, "BUYER_EMAIL_MISSING");
 });
 
 test("any completed partial refund conservatively revokes all payment downloads", async () => {

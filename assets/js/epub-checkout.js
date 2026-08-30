@@ -44,18 +44,75 @@
     if (status) status.textContent = message;
   }
 
+  function normalizedEmail(input) {
+    return String(input && input.value || "").trim().toLowerCase();
+  }
+
+  function submitButtondownPreferences(form, email) {
+    var endpoint = form.dataset.buttondownEndpoint || "";
+    var weekly = form.querySelector("input[name='weekly_email']");
+    var publications = form.querySelector("input[name='publication_notifications']");
+    var tags = [];
+    var parsed;
+    var body;
+
+    if (weekly && weekly.checked && form.dataset.weeklyEmailTag) {
+      tags.push(form.dataset.weeklyEmailTag);
+    }
+    if (publications && publications.checked && form.dataset.publicationEmailTag) {
+      tags.push(form.dataset.publicationEmailTag);
+    }
+    if (!endpoint || tags.length === 0) return;
+
+    try {
+      parsed = new URL(endpoint);
+    } catch (error) {
+      return;
+    }
+    if (
+      parsed.protocol !== "https:" ||
+      parsed.hostname !== "buttondown.com" ||
+      !parsed.pathname.startsWith("/api/emails/embed-subscribe/")
+    ) return;
+
+    body = new URLSearchParams();
+    body.append("email", email);
+    body.append("embed", "1");
+    tags.forEach(function (tag) { body.append("tag", tag); });
+    fetch(parsed.href, {
+      method: "POST",
+      mode: "no-cors",
+      credentials: "omit",
+      cache: "no-store",
+      referrerPolicy: "no-referrer",
+      keepalive: true,
+      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+      body: body.toString()
+    }).catch(function () {
+      // Marketing signup is optional and must never block a paid EPUB checkout.
+    });
+  }
+
   document.addEventListener("submit", function (event) {
     var form = event.target;
     var button;
     var sku;
     var originalLabel;
     var idempotencyKey;
+    var emailInput;
+    var email;
 
     if (!form || !form.matches("[data-epub-checkout]")) return;
     event.preventDefault();
     button = form.querySelector("button[type='submit']");
     sku = form.dataset.epubSku || "";
     if (!button || button.disabled || !/^OIP-[A-Z]{2}-EPUB$/.test(sku)) return;
+    emailInput = form.querySelector("input[name='email']");
+    if (!emailInput || !emailInput.checkValidity()) {
+      if (emailInput) emailInput.reportValidity();
+      return;
+    }
+    email = normalizedEmail(emailInput);
 
     originalLabel = button.textContent;
     button.disabled = true;
@@ -75,13 +132,14 @@
         "Content-Type": "application/json",
         "Idempotency-Key": idempotencyKey
       },
-      body: JSON.stringify({ sku: sku, country_code: "US" })
+      body: JSON.stringify({ sku: sku, country_code: "US", email: email })
     }).then(function (response) {
       if (!response.ok) throw new Error("checkout_request_failed");
       return response.json();
     }).then(function (payload) {
       var checkoutUrl = secureSquareUrl(payload);
       if (!checkoutUrl) throw new Error("checkout_url_missing");
+      submitButtondownPreferences(form, email);
       window.location.assign(checkoutUrl);
     }).catch(function () {
       button.disabled = false;

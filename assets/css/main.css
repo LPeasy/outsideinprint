@@ -2809,6 +2809,56 @@ html[data-theme="light"] .paper-route-toggle{
 .bookstore-physical-checkout{
   margin:0;
 }
+.bookstore-epub-checkout{
+  display:grid;
+  gap:.62rem;
+  margin-top:.78rem;
+}
+.bookstore-epub-checkout__field label,
+.bookstore-epub-checkout__preferences legend{
+  color:var(--text-secondary);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:650;
+}
+.bookstore-epub-checkout__field input{
+  box-sizing:border-box;
+  width:100%;
+  margin-top:.18rem;
+  padding:.5rem .55rem;
+  border:1px solid var(--oip-rule-standard);
+  border-radius:4px;
+  background:var(--bg-surface);
+  color:var(--text-primary);
+  font:inherit;
+}
+.bookstore-epub-checkout__field p,
+.bookstore-epub-checkout__preferences p{
+  margin:.24rem 0 0;
+  color:var(--text-muted);
+  font-size:.68rem;
+  line-height:1.4;
+}
+.bookstore-epub-checkout__preferences{
+  display:grid;
+  gap:.42rem;
+  margin:0;
+  padding:.6rem;
+  border:1px solid var(--oip-rule-faint);
+}
+.bookstore-epub-checkout__preferences label{
+  display:grid;
+  grid-template-columns:auto minmax(0, 1fr);
+  gap:.42rem;
+  align-items:start;
+  color:var(--text-secondary);
+  font-family:var(--font-ui);
+  font-size:.7rem;
+  line-height:1.4;
+}
+.bookstore-epub-checkout__preferences input{
+  margin:.14rem 0 0;
+}
 .bookstore-epub-checkout .bookstore-direct-offer__action,
 .bookstore-physical-checkout .bookstore-direct-offer__action{
   cursor:pointer;
@@ -2860,6 +2910,9 @@ html[data-theme="light"] .paper-route-toggle{
   font:inherit;
 }
 .bookstore-physical-checkout .bookstore-direct-offer__action{
+  margin-top:0;
+}
+.bookstore-epub-checkout .bookstore-direct-offer__action{
   margin-top:0;
 }
 .bookstore-direct-offer__gate{

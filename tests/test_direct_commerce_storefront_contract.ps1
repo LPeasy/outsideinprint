@@ -177,6 +177,7 @@ foreach ($requiredConfig in @(
   'api_base = "https://downloads.outsideinprint.org"',
   'support_checkout_enabled = false',
   'custom_monthly_enabled = false'
+  'publication_tag = "new-publications"'
 )) {
   Assert-Contains -Text $hugoConfig -Expected $requiredConfig -Context 'Hugo commerce configuration'
 }
@@ -193,6 +194,12 @@ foreach ($requiredTemplateText in @(
   'https://downloads.outsideinprint.org/api/books/epub',
   'data-epub-checkout',
   'data-epub-sku="{{ $sku }}"',
+  'type="email"',
+  'name="email"',
+  'name="weekly_email"',
+  'name="publication_notifications"',
+  'Optional. Not required to buy. Unsubscribe anytime.',
+  'data-buttondown-endpoint="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"',
   'https://square.link/',
   'https://checkout.square.site/',
   'data-analytics-event="checkout_start"',
@@ -299,7 +306,10 @@ foreach ($requiredScriptText in @(
   'form.matches("[data-epub-checkout]")',
   'form.dataset.epubSku',
   '"Idempotency-Key": idempotencyKey',
-  'JSON.stringify({ sku: sku, country_code: "US" })',
+  'JSON.stringify({ sku: sku, country_code: "US", email: email })',
+  'emailInput.checkValidity()',
+  'body.append("tag", tag)',
+  'keepalive: true',
   'payload.checkout_url || payload.url',
   'parsed.protocol !== "https:"',
   'parsed.hostname !== "square.link"',
@@ -549,6 +559,15 @@ if ([regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase'
 }
 if ([regex]::Matches($shopOutput, 'action=(?:"|'''')?https://downloads\.outsideinprint\.org/api/books/epub(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
   throw 'Expected the approved production endpoint on all live EPUB index and detail forms.'
+}
+if ([regex]::Matches($shopOutput, 'type=(?:"|'''')?email(?:"|'''')?', 'IgnoreCase').Count -lt 6) {
+  throw 'Every live EPUB checkout must require a delivery email field.'
+}
+if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?weekly_email(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
+  throw 'Every live EPUB checkout must expose the optional weekly-email choice.'
+}
+if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?publication_notifications(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
+  throw 'Every live EPUB checkout must expose the optional new-publication choice.'
 }
 if ($shopOutput -match '(?i)OIP-(?:AN|PS|WC)-PB|data-physical|bookstore-physical|/api/books/physical|USPS Media Mail|Shipping &amp; returns') {
   throw 'Built shop output exposed physical-commerce UI during the EPUB-first launch.'

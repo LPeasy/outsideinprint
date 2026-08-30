@@ -9,6 +9,10 @@
 {{- $offerHelper := index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. EPUB delivered by email.") -}}
 {{- $buyLabel := index $product "checkout_label" | default "Buy EPUB" -}}
 {{- $disabledLabel := index $product "checkout_unavailable_label" | default "EPUB coming soon" -}}
+{{- $newsletter := site.Params.newsletter -}}
+{{- $buttondownUsername := index $newsletter "buttondown_username" | default "" -}}
+{{- $weeklyTag := index $newsletter "tag" | default "outside-in-print" -}}
+{{- $publicationTag := index $newsletter "publication_tag" | default "new-publications" -}}
 {{- $allowedStatuses := slice "disabled" "live" -}}
 {{- $allowedCheckoutActions := slice "epub_checkout_api" "square_hosted_checkout" -}}
 {{- $requiredFields := slice "sku" "format" "availability_status" "availability_label" "isbn_status" "price_display" "currency" "permitted_geography" "tax_class" "fulfillment_type" "checkout_action" "checkout_url" "checkout_endpoint" "gate_note" -}}
@@ -62,6 +66,9 @@
         {{- $format := index $offer "format" -}}
         {{- $sku := index $offer "sku" -}}
         {{- $statusID := printf "%s-status-%s" $sourceSlot $productSlug -}}
+        {{- $emailID := printf "%s-email-%s" $sourceSlot $productSlug -}}
+        {{- $emailNoteID := printf "%s-email-note-%s" $sourceSlot $productSlug -}}
+        {{- $preferencesID := printf "%s-email-preferences-%s" $sourceSlot $productSlug -}}
         <article class="bookstore-direct-offer" data-direct-offer data-direct-offer-sku="{{ $sku }}" data-direct-offer-status="{{ $status }}">
           <p class="bookstore-direct-offer__price">
             {{- if eq $status "disabled" }}<span>Planned price</span>{{ end -}}
@@ -84,7 +91,34 @@
                 data-analytics-title="{{ $productTitle }}"
                 data-analytics-section="Bookstore"
                 data-analytics-path="/api/books/epub"
+                {{- with $buttondownUsername }}
+                data-buttondown-endpoint="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"
+                data-weekly-email-tag="{{ $weeklyTag }}"
+                data-publication-email-tag="{{ $publicationTag }}"
+                {{- end }}
               >
+                <div class="bookstore-epub-checkout__field">
+                  <label for="{{ $emailID }}">Delivery email</label>
+                  <input
+                    id="{{ $emailID }}"
+                    type="email"
+                    name="email"
+                    maxlength="256"
+                    autocomplete="email"
+                    autocapitalize="off"
+                    inputmode="email"
+                    spellcheck="false"
+                    aria-describedby="{{ $emailNoteID }}"
+                    required
+                  />
+                  <p id="{{ $emailNoteID }}">Your secure EPUB link will be sent here.</p>
+                </div>
+                <fieldset class="bookstore-epub-checkout__preferences" aria-describedby="{{ $preferencesID }}">
+                  <legend>Email updates (optional)</legend>
+                  <label><input type="checkbox" name="weekly_email" /> Send me Bob's Almanack, the free weekly email.</label>
+                  <label><input type="checkbox" name="publication_notifications" /> Notify me when Outside In Print releases a new book.</label>
+                  <p id="{{ $preferencesID }}">Optional. Not required to buy. Unsubscribe anytime.</p>
+                </fieldset>
                 <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
                 <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>
               </form>

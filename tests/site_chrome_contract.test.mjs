@@ -127,11 +127,15 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
 });
 
-test("Square-first bookstore promotes Kindle only while direct EPUB checkout is unavailable", () => {
+test("Square-first bookstore requires delivery email and keeps marketing consent optional", () => {
   assert.equal(fs.existsSync(path.resolve("layouts/partials/shop/checkout-actions.html")), false);
   assert.match(directOffers, /direct_offers_heading" \| default "Outside In Print EPUB"/);
   assert.match(directOffers, /checkout_unavailable_label" \| default "EPUB coming soon"/);
   assert.match(directOffers, /data-analytics-event="checkout_start"/);
+  assert.match(directOffers, /type="email"[\s\S]*name="email"[\s\S]*required/);
+  assert.match(directOffers, /type="checkbox" name="weekly_email"/);
+  assert.match(directOffers, /type="checkbox" name="publication_notifications"/);
+  assert.match(directOffers, /Optional\. Not required to buy\. Unsubscribe anytime\./);
   assert.doesNotMatch(directOffers, /fallback_(?:url|label)|amazon/i);
 
   assert.match(kindleButton, /\$promoteKindle := and \(gt \(len \$epubOffers\) 0\) \(eq \(len \$liveEpubOffers\) 0\)/);
@@ -159,7 +163,10 @@ test("Square-first bookstore promotes Kindle only while direct EPUB checkout is 
   assert.doesNotMatch(bookstoreData, /^\s+(?:purchase_url|fallback_url|fallback_label):/m);
 
   assert.match(epubCheckoutScript, /"Idempotency-Key": idempotencyKey/);
-  assert.match(epubCheckoutScript, /JSON\.stringify\(\{ sku: sku, country_code: "US" \}\)/);
+  assert.match(epubCheckoutScript, /JSON\.stringify\(\{ sku: sku, country_code: "US", email: email \}\)/);
+  assert.match(epubCheckoutScript, /emailInput\.checkValidity\(\)/);
+  assert.match(epubCheckoutScript, /body\.append\("tag", tag\)/);
+  assert.match(epubCheckoutScript, /keepalive: true/);
   assert.match(epubCheckoutScript, /payload\.checkout_url \|\| payload\.url/);
   assert.match(epubCheckoutScript, /parsed\.hostname !== "square\.link" && parsed\.hostname !== "checkout\.square\.site"/);
   assert.match(epubCheckoutScript, /button\.disabled = false;[\s\S]*button\.textContent = originalLabel;[\s\S]*support@outsideinprint\.org/);

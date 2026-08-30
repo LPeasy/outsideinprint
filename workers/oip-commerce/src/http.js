@@ -70,9 +70,9 @@ export function validateSupportAmount(payload) {
 }
 
 export function validateEpubCheckoutRequest(payload) {
-  const allowedFields = new Set(["sku", "country_code"]);
+  const allowedFields = new Set(["sku", "country_code", "email"]);
   if (Object.keys(payload).some((key) => !allowedFields.has(key))) {
-    throw new HttpError(400, "UNEXPECTED_FIELD", "Only sku and country_code are accepted.");
+    throw new HttpError(400, "UNEXPECTED_FIELD", "Only sku, country_code, and email are accepted.");
   }
   if (typeof payload.sku !== "string" || !/^[A-Z0-9-]{1,64}$/u.test(payload.sku)) {
     throw new HttpError(400, "INVALID_EPUB_SKU", "Choose an available EPUB edition.");
@@ -80,7 +80,25 @@ export function validateEpubCheckoutRequest(payload) {
   if (payload.country_code !== "US") {
     throw new HttpError(403, "EPUB_US_ONLY", "Direct EPUB checkout is available only to U.S. customers.");
   }
-  return { sku: payload.sku, countryCode: payload.country_code };
+  const email = normalizeEmailAddress(payload.email);
+  if (!email) {
+    throw new HttpError(400, "INVALID_BUYER_EMAIL", "Enter the email address that should receive the EPUB.");
+  }
+  return { sku: payload.sku, countryCode: payload.country_code, email };
+}
+
+export function normalizeEmailAddress(value) {
+  if (typeof value !== "string") return null;
+  const normalized = value.normalize("NFKC").trim().toLowerCase();
+  if (
+    normalized.length < 3 || normalized.length > 256 ||
+    /[\u0000-\u0020\u007f]/u.test(normalized) ||
+    !/^[^@]+@[^@]+$/u.test(normalized)
+  ) return null;
+  const [local, domain] = normalized.split("@");
+  if (!local || local.length > 64 || !domain || domain.length > 255 ||
+      domain.startsWith(".") || domain.endsWith(".") || domain.includes("..")) return null;
+  return normalized;
 }
 
 const US_SHIPPING_REGIONS = new Set([

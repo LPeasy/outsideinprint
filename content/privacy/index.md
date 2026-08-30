@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "How Outside In Print handles information connected to site use, Steam storefront visits, orders, EPUB delivery, and reader support."
-effective_date: "August 26, 2026"
+effective_date: "August 29, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -14,6 +14,8 @@ This policy explains how Outside In Print handles information connected to this 
 When you check out through Square, Square collects the payment and contact information needed to process the transaction. Outside In Print does not receive your full card number or card-security code.
 
 For an EPUB order, the delivery service processes the email address supplied to Square long enough to send the secure download message. It stores limited fulfillment records, such as the Square order identifier, product SKU, delivery status, email hash, download-token hash, expiration, and download count.
+
+Before EPUB checkout, you may separately choose to receive Bob's Almanack, new-publication notices, both, or neither. These choices are optional and are not required to buy. If you select either choice, Outside In Print sends the email address and selected preferences to Buttondown, which sends a confirmation message and manages subscription preferences and unsubscribes. Transactional EPUB delivery through Resend remains separate from marketing email.
 
 For reader support, Outside In Print receives transaction identifiers, amount, status, and subscription status needed for reconciliation, cancellation support, and refunds. No reader-support amount is sent to site analytics.
 
@@ -34,7 +36,7 @@ Information is used to:
 
 ## Service providers and disclosure
 
-Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. GitHub Pages hosts the public website, and GoatCounter provides site analytics.
+Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. Buttondown manages optional newsletter and new-publication subscriptions. GitHub Pages hosts the public website, and GoatCounter provides site analytics.
 
 The Games pages link to Steam storefront pages and may load a Steam store widget. Following a Steam link or loading the widget sends a request to Valve's Steam services, which receives the technical information ordinarily sent with a web request. Steam may also set or read cookies according to your Steam settings and Valve's own privacy practices.
 
@@ -50,7 +52,7 @@ Outside In Print limits access to commerce records and keeps payment credentials
 
 ## Your choices
 
-You may ask about, correct, or request deletion of information held directly by Outside In Print, subject to transaction, tax, fraud-prevention, and legal retention duties. Square and other service providers maintain their own privacy processes for information they control.
+You may ask about, correct, or request deletion of information held directly by Outside In Print, subject to transaction, tax, fraud-prevention, and legal retention duties. You can unsubscribe through the link in any Buttondown message or contact Outside In Print to change which optional messages you receive. Square and other service providers maintain their own privacy processes for information they control.
 
 ## Contact
 

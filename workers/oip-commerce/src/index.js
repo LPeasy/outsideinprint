@@ -59,6 +59,7 @@ import {
   deletePaymentLink,
   createMonthlySupportLink,
   createOneTimeSupportLink,
+  getOrder,
   getPayment,
   publicCheckoutError,
   sendDownloadEmail,
@@ -243,8 +244,11 @@ async function handleEpubCheckout(request, env) {
 
   const suppliedKey = validateIdempotencyKey(request.headers.get("idempotency-key"));
   const requestKey = await sha256Hex(`EPUB:${suppliedKey}`);
+  const emailFingerprint = await sha256Hex(
+    `${requireBinding(env, "EMAIL_HASH_PEPPER")}:${selection.email}`,
+  );
   const requestHash = await sha256Hex(
-    `EPUB:${selection.sku}:${selection.countryCode}:USD:${catalogObjectId}`,
+    `EPUB:${selection.sku}:${selection.countryCode}:USD:${catalogObjectId}:${emailFingerprint}`,
   );
   const squareIdempotencyKey = `oip-${requestKey.slice(0, 64)}`;
   const state = await getOrCreateCheckoutRequest(env.DB, {
@@ -278,6 +282,8 @@ async function handleEpubCheckout(request, env) {
       product,
       catalogObjectId,
       idempotencyKey: state.row.square_idempotency_key,
+      buyerEmail: selection.email,
+      checkoutCreatedAt: Number(state.row.created_at),
     });
     const completed = await completeCheckoutRequest(env.DB, requestKey, claimToken, link, now);
     if (!completed) throw new HttpError(503, "CHECKOUT_CLAIM_LOST");
@@ -644,7 +650,10 @@ async function handleAdminResend(request, env) {
       continue;
     }
     const payment = await getPayment(env, row.payment_id);
-    const email = extractPaymentEmail(payment);
+    let email = extractPaymentEmail(payment);
+    if (!email && payment.order_id === row.order_id) {
+      email = extractPaymentEmail(payment, await getOrder(env, row.order_id));
+    }
     if (payment.status !== "COMPLETED" || hasAnyRefund(payment) || !email) {
       failed += 1;
       continue;

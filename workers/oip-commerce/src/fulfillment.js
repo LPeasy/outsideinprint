@@ -21,7 +21,8 @@ import {
   upsertSubscriptionEvent,
 } from "./database.js";
 import { deriveDownloadToken, sha256Hex } from "./crypto.js";
-import { parseBoolean, requireBinding } from "./http.js";
+import { normalizeEmailAddress, parseBoolean, requireBinding } from "./http.js";
+import { verifyEpubUsOrderReference } from "./epub-reference.js";
 import { evaluatePhysicalOrder } from "./physical.js";
 import {
   getCatalogSku,
@@ -51,10 +52,24 @@ function paymentCountry(payment) {
   );
 }
 
-function buyerEmail(payment) {
-  const value = payment.buyer_email_address || payment.shipping_address?.email_address || null;
-  if (!value || typeof value !== "string" || value.length > 320 || !value.includes("@")) return null;
-  return value.trim().toLowerCase();
+export function extractPaymentEmail(payment, order = null) {
+  const recipientEmails = new Set();
+  for (const fulfillment of Array.isArray(order?.fulfillments) ? order.fulfillments : []) {
+    for (const recipient of [
+      fulfillment?.recipient,
+      fulfillment?.digital_details?.recipient,
+      fulfillment?.shipment_details?.recipient,
+      fulfillment?.pickup_details?.recipient,
+      fulfillment?.delivery_details?.recipient,
+    ]) {
+      const email = normalizeEmailAddress(recipient?.email_address);
+      if (email) recipientEmails.add(email);
+    }
+  }
+  if (recipientEmails.size > 1) return null;
+  if (recipientEmails.size === 1) return recipientEmails.values().next().value;
+  return normalizeEmailAddress(payment?.buyer_email_address) ||
+    normalizeEmailAddress(payment?.shipping_address?.email_address);
 }
 
 export async function evaluateEpubOrder({
@@ -65,6 +80,7 @@ export async function evaluateEpubOrder({
   expectedCatalogVariationId,
   requireUsCountryProof,
   expectedLocationId,
+  verifySignedUsReference,
 }) {
   const failure = (reasonCode, details = {}) => ({ eligible: false, reasonCode, details });
   if (payment.status !== "COMPLETED") return failure("PAYMENT_NOT_COMPLETED");
@@ -79,8 +95,7 @@ export async function evaluateEpubOrder({
   const paidAmount = moneyAmount(payment.amount_money);
   if (paidAmount === null || paidAmount !== moneyAmount(order.total_money)) return failure("PAYMENT_TOTAL_MISMATCH");
   if (hasAnyRefund(payment)) return failure("PAYMENT_HAS_REFUND");
-  if (requireUsCountryProof && paymentCountry(payment) !== "US") return failure("US_COUNTRY_NOT_PROVEN");
-  const email = buyerEmail(payment);
+  const email = extractPaymentEmail(payment, order);
   if (!email) return failure("BUYER_EMAIL_MISSING");
 
   const lines = Array.isArray(order.line_items) ? order.line_items : [];
@@ -114,6 +129,20 @@ export async function evaluateEpubOrder({
     items.push({ sku, product });
   }
   if (expectedTotal !== paidAmount) return failure("EPUB_ORDER_TOTAL_MISMATCH");
+  if (requireUsCountryProof) {
+    const country = paymentCountry(payment);
+    if (country && country !== "US") return failure("US_COUNTRY_NOT_PROVEN");
+    if (!country) {
+      const signedUsProof =
+        items.length === 1 && typeof verifySignedUsReference === "function" &&
+        await verifySignedUsReference({
+          referenceId: order.reference_id,
+          paymentCreatedAt: payment.created_at,
+          sku: items[0].sku,
+        });
+      if (!signedUsProof) return failure("US_COUNTRY_NOT_PROVEN");
+    }
+  }
   return { eligible: true, buyerEmail: email, items };
 }
 
@@ -280,6 +309,10 @@ async function fulfillCompletedPayment(env, event, now, assertClaim) {
     enabledSkus: enabledEpubSkus(env),
     expectedCatalogVariationId: (sku) => configuredEpubCatalogVariationId(env, sku),
     requireUsCountryProof: parseBoolean(env.REQUIRE_EPUB_US_COUNTRY_PROOF, true),
+    verifySignedUsReference: (reference) => verifyEpubUsOrderReference(
+      requireBinding(env, "DOWNLOAD_TOKEN_SECRET"),
+      reference,
+    ),
     resolveSku: async (catalogObjectId) => {
       if (!skuCache.has(catalogObjectId)) skuCache.set(catalogObjectId, await getCatalogSku(env, catalogObjectId));
       return skuCache.get(catalogObjectId);
@@ -496,8 +529,4 @@ export async function processSquareReference(env, reference, now, assertClaim = 
   }
   await assertClaim();
   await processSquareEvent(env, event, now, assertClaim);
-}
-
-export function extractPaymentEmail(payment) {
-  return buyerEmail(payment);
 }
