@@ -857,7 +857,7 @@ test("EPUB checkout fails closed for variation-map gaps and Square ID mismatch",
   assert.equal(squareCalls, 1);
 });
 
-test("EPUB checkout uses the exact catalog-only payload and reuses an idempotent link", async () => {
+test("EPUB checkout disables express wallets and reuses an exact catalog-only idempotent link", async () => {
   const calls = [];
   const env = baseEnv({
     EPUB_ENABLED_SKUS: "OIP-AN-EPUB",
@@ -882,8 +882,8 @@ test("EPUB checkout uses the exact catalog-only payload and reuses an idempotent
             ask_for_shipping_address: false,
             allow_tipping: false,
             accepted_payment_methods: {
-              apple_pay: true,
-              google_pay: true,
+              apple_pay: false,
+              google_pay: false,
               cash_app_pay: false,
               afterpay_clearpay: false,
             },

@@ -216,8 +216,12 @@ export async function createEpubPaymentLink(env, { product, catalogObjectId, ide
         ask_for_shipping_address: false,
         allow_tipping: false,
         accepted_payment_methods: {
-          apple_pay: true,
-          google_pay: true,
+          // Express wallets can complete without returning the buyer email and
+          // country fields required for secure EPUB delivery. Keep EPUB sales
+          // on Square's full card/contact flow until those fields are bound
+          // before the hosted checkout opens.
+          apple_pay: false,
+          google_pay: false,
           cash_app_pay: false,
           afterpay_clearpay: false,
         },
