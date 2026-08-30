@@ -1,4 +1,4 @@
-current: hands-find-the-weight
+current: the-words-find-their-feet
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -912,5 +912,14 @@ cartoons:
     image: "editorial/hands-find-the-weight"
     essay: "/essays/the-other-end/"
     alt: "An anonymous man in a dark teal work jacket, rust knit cap, charcoal trousers, and brown boots steadies a honey-colored six-drawer dresser strapped to a hand truck at the foot of a narrow brick apartment stair in warm morning light."
+    width: 1672
+    height: 941
+  - slug: the-words-find-their-feet
+    title: "The Words Find Their Feet"
+    date: "2026-08-30"
+    publishDate: "2026-08-30T12:04:00-04:00"
+    image: "editorial/the-words-find-their-feet"
+    essay: "/essays/mantra-1/"
+    alt: "An anonymous man in a rust-colored coat and dark teal cap walks uphill past brick row houses on a windy morning while holding a folded cream page."
     width: 1672
     height: 941
