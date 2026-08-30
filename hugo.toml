@@ -45,7 +45,7 @@ script_crossorigin = "anonymous"
 
 [params.commerce]
 api_base = "https://downloads.outsideinprint.org"
-support_checkout_enabled = false
+support_checkout_enabled = true
 custom_monthly_enabled = false
 
 [params.paper_route]
