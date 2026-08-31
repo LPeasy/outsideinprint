@@ -23,6 +23,9 @@ test("responsive image manifest keeps the frozen baseline and processing default
   const focusedCleanupBaselineAliasCount = 500;
   const focusedCleanupBaselineCoreReviewCount = 446;
   const focusedCleanupBaselineReferencedCount = 454;
+  const intentionallyRetiredManagedAssetIds = [
+    "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",
+  ];
 
   const entries = Object.entries(manifest.assets);
   assert.ok(
@@ -46,12 +49,17 @@ test("responsive image manifest keeps the frozen baseline and processing default
   );
   assert.equal(
     entries.filter(([, asset]) => asset.usage_state === "retained_unreferenced").length,
-    5,
+    5 + intentionallyRetiredManagedAssetIds.length,
   );
   assert.equal(
     entries.filter(([, asset]) => asset.usage_state === "referenced").length,
-    focusedCleanupBaselineReferencedCount + routineManagedAssetCount,
+    focusedCleanupBaselineReferencedCount +
+      routineManagedAssetCount -
+      intentionallyRetiredManagedAssetIds.length,
   );
+  for (const id of intentionallyRetiredManagedAssetIds) {
+    assert.equal(manifest.assets[id].usage_state, "retained_unreferenced");
+  }
   const sourceOnlyEntries = entries.filter(
     ([, asset]) => asset.processing_state === "source_only_unprocessable",
   );

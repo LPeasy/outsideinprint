@@ -208,6 +208,9 @@ $focusedCleanupBaselineAliasCount = 500
 $focusedCleanupBaselineCoreReviewCount = 446
 $focusedCleanupBaselineReferencedCount = 454
 $focusedCleanupBaselineDerivativeCapableCount = 458
+$intentionallyRetiredManagedAssetIds = @(
+  'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts'
+)
 
 $assetIds = @(Get-OipPropertyNames -Value $manifest.assets | Sort-Object)
 $routineManagedAssetCount = $assetIds.Count - $focusedCleanupBaselineAssetCount
@@ -391,8 +394,11 @@ Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 112 -
 Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected 13 -Message 'Supplemental essay-photo count changed.'
 $coreIllustrationCount = [int]($classCounts['editorial_cartoon'] ?? 0) + [int]($classCounts['essay_illustration'] ?? 0) + [int]($classCounts['medium_import'] ?? 0)
 Assert-Equal -Actual $coreIllustrationCount -Expected ($focusedCleanupBaselineCoreReviewCount + $routineManagedAssetCount) -Message 'Core responsive-image review cohort changed outside routine managed-art growth.'
-Assert-Equal -Actual ([int]($usageCounts['retained_unreferenced'] ?? 0)) -Expected 5 -Message 'The explicit retained-but-unreferenced source count changed.'
-Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected ($focusedCleanupBaselineReferencedCount + $routineManagedAssetCount) -Message 'Referenced managed-source count changed outside routine managed-art growth.'
+Assert-Equal -Actual ([int]($usageCounts['retained_unreferenced'] ?? 0)) -Expected (5 + $intentionallyRetiredManagedAssetIds.Count) -Message 'The explicit retained-but-unreferenced source count changed.'
+Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected ($focusedCleanupBaselineReferencedCount + $routineManagedAssetCount - $intentionallyRetiredManagedAssetIds.Count) -Message 'Referenced managed-source count changed outside routine managed-art growth and intentional retirement.'
+foreach ($retiredAssetId in $intentionallyRetiredManagedAssetIds) {
+  Assert-Equal -Actual ([string]$manifest.assets.$retiredAssetId.usage_state) -Expected 'retained_unreferenced' -Message "Intentionally retired managed asset returned to referenced use: $retiredAssetId"
+}
 Assert-Equal -Actual $sourceOnlyIds.Count -Expected 1 -Message 'Exactly one corrupt supplemental source may be quarantined as source_only_unprocessable.'
 Assert-Equal -Actual $sourceOnlyIds[0] -Expected $expectedSourceOnlyId -Message 'The quarantined source-only asset changed.'
 Assert-Equal -Actual ([string]$manifest.assets.$expectedSourceOnlyId.processing_note) -Expected $expectedSourceOnlyNote -Message 'The tracked-safe quarantine reason changed.'

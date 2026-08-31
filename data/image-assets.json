@@ -4786,7 +4786,7 @@
       "image_class": "essay_illustration",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
