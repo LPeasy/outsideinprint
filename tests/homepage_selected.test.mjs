@@ -246,6 +246,8 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(baseLayout, /editorial\/cartoon-thumbnail-lightbox\.html/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox/);
   assert.doesNotMatch(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-image\s+src=""/);
+  assert.match(cartoonThumbnailLightbox, /<p id="essay-cartoon-lightbox-title" class="cartoon-lightbox__title" data-essay-cartoon-lightbox-title><\/p>/);
+  assert.doesNotMatch(cartoonThumbnailLightbox, /<h2 id="essay-cartoon-lightbox-title"/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-gallery/);
   assert.match(cartoonThumbnailLightbox, /View in gallery/);
   assert.match(cartoonThumbnailLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);

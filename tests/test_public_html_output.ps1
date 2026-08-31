@@ -2519,6 +2519,17 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = '<p id=(?:"essay-cartoon-lightbox-title"|essay-cartoon-lightbox-title) class=(?:"cartoon-lightbox__title"|cartoon-lightbox__title) data-essay-cartoon-lightbox-title(?:="")?></p>'
+    Message = 'expected the shared essay cartoon lightbox to use a non-heading dialog label'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<h2 id=(?:"essay-cartoon-lightbox-title"|essay-cartoon-lightbox-title)'
+    Message = 'expected the shared essay cartoon lightbox not to emit an empty heading'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = 'data-essay-cartoon-lightbox-trigger'
     Message = 'expected essay cartoon thumbnails to open in-page fullscreen instead of navigating directly'
   },

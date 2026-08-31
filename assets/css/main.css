@@ -919,7 +919,6 @@ html[data-theme="light"] .paper-route-toggle{
   .nav-mobile-menu{
     z-index:1;
     display:grid;
-    grid-template-columns:minmax(0, .77fr) minmax(0, 1.22fr) minmax(0, 1.07fr) minmax(0, .8fr);
     grid-row:1;
     grid-column:1 / -1;
     width:100%;
@@ -928,8 +927,7 @@ html[data-theme="light"] .paper-route-toggle{
   .nav-mobile-menu__summary{
     z-index:3;
     grid-row:1;
-    grid-column:4;
-    justify-self:stretch;
+    justify-self:end;
     gap:.25rem;
     min-height:44px;
     padding:.32rem 0;
@@ -938,7 +936,6 @@ html[data-theme="light"] .paper-route-toggle{
   .nav-mobile-menu__panel{
     display:grid;
     grid-row:2;
-    grid-column:1 / -1;
     grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:.72rem .62rem;
     width:100%;

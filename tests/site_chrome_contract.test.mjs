@@ -154,7 +154,8 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.75rem;[\s\S]*?letter-spacing:0;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:(?:repeat\(4,\s*minmax\(0,\s*1fr\)\)|(?:minmax\(0,\s*(?:\d*\.?\d+)fr\)\s*){4});/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link\{[\s\S]*?min-height:44px;/);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?grid-column:4;[\s\S]*?gap:\.25rem;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?justify-self:end;[\s\S]*?gap:\.25rem;/);
+  assert.doesNotMatch(css, /\.nav-mobile-menu\{(?:(?!\n\s*\}).)*grid-template-columns/s);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__panel\{[\s\S]*?grid-row:2;/);
   assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2\.5rem, 12vw, 2\.75rem\)/);
   assert.doesNotMatch(css, /@media \(max-width:360px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.6rem;/);
@@ -463,6 +464,8 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.doesNotMatch(cartoonLinkPartial, /<a class="essay-cartoon-thumb/);
   assert.match(baseLayout, /editorial\/cartoon-thumbnail-lightbox\.html/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox/);
+  assert.match(cartoonThumbnailLightbox, /<p id="essay-cartoon-lightbox-title" class="cartoon-lightbox__title" data-essay-cartoon-lightbox-title><\/p>/);
+  assert.doesNotMatch(cartoonThumbnailLightbox, /<h2 id="essay-cartoon-lightbox-title"/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-gallery/);
   assert.match(cartoonThumbnailLightbox, /View in gallery/);
   assert.match(cartoonThumbnailLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
