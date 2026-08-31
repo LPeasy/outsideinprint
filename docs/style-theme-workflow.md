@@ -31,6 +31,12 @@ Runtime theme switching is allowed only through the approved public theme select
 
 The homepage is the only surface that should use the full ceremonial OIP masthead. All other pages use the compact shared masthead. The compact masthead is the site imprint; page titles, collection titles, article titles, and the Bob's Almanack issue nameplate should carry the page-specific hierarchy.
 
+## Primary Navigation
+
+The shared masthead owns one `Primary` navigation landmark. At widths above 768px, it presents `Read` and `Explore` as native disclosure controls, followed by direct `Bookstore`, `About`, and `Support` links. `Read` contains Latest, Archive, Collections, Library, and Feeling curious?; `Explore` contains Gallery plus the publication-gated Apps & Tools and Games destinations.
+
+At 768px and below, Archive, Collections, and Bookstore remain visible in the closed ribbon. A native `Menu` disclosure contains the remaining destinations under Read, Explore, and Outside In Print headings. Keep the closed ribbon on one row at 320px and larger, preserve 44px interaction targets, and let the mobile disclosure expand in normal document flow. Desktop disclosure panels may overlay content below the ribbon. Destination metadata and exact active-state ownership live in `layouts/partials/masthead.html`; link rendering lives in `layouts/partials/masthead_nav_link.html`; disclosure coordination lives in `layouts/partials/masthead_navigation_script.html`. Do not use ARIA menu roles, hover-only opening, or analytics events for disclosure controls.
+
 Light mode is the OIP paper edition. Use the restrained parchment tokens and shared paper surface variables for cards, panels, forms, route headers, image plates, and footer surfaces. Dark mode remains the classic OIP dark atmosphere. Do not copy Bob's Almanack-only layout treatments across the site; borrow its warm paper material, fine rules, and restrained ink palette.
 
 ## Divider Rules

@@ -241,10 +241,11 @@ test("Games templates fail closed around Steam and expose the released storefron
   for (const chrome of [masthead, footer]) {
     assert.match(chrome, /site\.GetPage "\/games"/);
     assert.match(chrome, /\$showGames := and \$gamesPage \(or \(not \$gamesPage\.Draft\) hugo\.IsServer\)/);
-    assert.match(chrome, />Games</);
   }
+  assert.match(masthead, /"label" "Games"[\s\S]*?"group" "explore"/);
+  assert.match(footer, />Games</);
   assert.match(masthead, /\$isGames := eq \.Section "games"/);
-  assert.match(masthead, />Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?>Bookstore</);
+  assert.match(masthead, /"label" "Apps & Tools"[\s\S]*?"label" "Games"[\s\S]*?"label" "Bookstore"/);
   assert.match(schema, /\(slice "apps" "games"\)/, "Games index must remain generic WebPage metadata");
 
   for (const family of ["games-index", "games-card", "games-product", "games-facts", "games-features", "games-gallery", "games-notices", "games-requirements"]) {

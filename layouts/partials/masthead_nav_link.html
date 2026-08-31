@@ -1,0 +1,19 @@
+{{- $item := .item -}}
+{{- $class := .class | default "nav-disclosure__link" -}}
+{{- $showDescription := .showDescription | default false -}}
+<a
+  class="{{ $class }}"
+  href="{{ $item.href }}"
+  {{- if $item.current }} aria-current="page"{{ end }}
+  {{- with $item.analyticsEvent }} data-analytics-event="{{ . }}"{{ end }}
+  {{- with $item.analyticsSourceSlot }} data-analytics-source-slot="{{ . }}"{{ end }}
+  {{- with $item.analyticsSlug }} data-analytics-slug="{{ . }}"{{ end }}
+  {{- with $item.analyticsTitle }} data-analytics-title="{{ . }}"{{ end }}
+  {{- with $item.analyticsSection }} data-analytics-section="{{ . }}"{{ end }}
+  {{- with $item.analyticsPath }} data-analytics-path="{{ . }}"{{ end }}
+>
+  <span class="nav-link__label">{{ $item.label }}</span>
+  {{- if and $showDescription $item.description }}
+    <span class="nav-link__description">{{ $item.description }}</span>
+  {{- end }}
+</a>

@@ -1,0 +1,66 @@
+<script>
+  (function () {
+    var nav = document.querySelector("[data-primary-nav]");
+
+    if (!nav) {
+      return;
+    }
+
+    var disclosures = Array.prototype.slice.call(nav.querySelectorAll("[data-primary-nav-disclosure]"));
+    var breakpoint = window.matchMedia("(max-width: 768px)");
+
+    function closeDisclosure(disclosure, restoreFocus) {
+      if (!disclosure.open) {
+        return;
+      }
+
+      disclosure.open = false;
+
+      if (restoreFocus) {
+        var summary = disclosure.querySelector("summary");
+        if (summary) {
+          summary.focus();
+        }
+      }
+    }
+
+    function closeAll(except) {
+      disclosures.forEach(function (disclosure) {
+        if (disclosure !== except) {
+          closeDisclosure(disclosure, false);
+        }
+      });
+    }
+
+    disclosures.forEach(function (disclosure) {
+      disclosure.addEventListener("toggle", function () {
+        if (disclosure.open) {
+          closeAll(disclosure);
+        }
+      });
+
+      disclosure.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && disclosure.open) {
+          event.preventDefault();
+          closeDisclosure(disclosure, true);
+        }
+      });
+    });
+
+    document.addEventListener("pointerdown", function (event) {
+      if (!nav.contains(event.target)) {
+        closeAll();
+      }
+    });
+
+    function handleBreakpointChange() {
+      closeAll();
+    }
+
+    if (typeof breakpoint.addEventListener === "function") {
+      breakpoint.addEventListener("change", handleBreakpointChange);
+    } else if (typeof breakpoint.addListener === "function") {
+      breakpoint.addListener(handleBreakpointChange);
+    }
+  })();
+</script>

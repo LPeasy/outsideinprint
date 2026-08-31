@@ -880,14 +880,45 @@ if ($mastheadPartial -notmatch '<div class="title">') {
   throw 'Expected layouts/partials/masthead.html to keep the shared non-heading title container for the editorial brand.'
 }
 
-if ($mastheadPartial -notmatch '(?s)Archive.*Collections.*Gallery.*Library.*Apps &amp; Tools.*Games.*Bookstore.*Feeling curious\?') {
-  throw 'Expected layouts/partials/masthead.html to order the primary nav as Archive, Collections, Gallery, Library, Apps & Tools, Games, Bookstore, Feeling curious?.'
+if ($mastheadPartial -notmatch '(?s)nav-disclosure--read.*<span>Read</span>.*nav-disclosure--explore.*<span>Explore</span>.*range \$directItems') {
+  throw 'Expected layouts/partials/masthead.html to render grouped Read and Explore disclosures before the direct desktop links.'
+}
+
+if ($mastheadPartial -notmatch '(?s)class="nav__mobile".*range \$mobilePrimaryItems.*<span>Menu</span>') {
+  throw 'Expected layouts/partials/masthead.html to render the Archive, Collections, and Bookstore mobile-primary items before Menu.'
+}
+
+foreach ($requiredNavigationSnippet in @(
+  '"label" "Latest"',
+  '"description" "Front page"',
+  '"label" "Archive"',
+  '"description" "By date"',
+  '"label" "Collections"',
+  '"description" "By topic"',
+  '"label" "Library"',
+  '"description" "Search all"',
+  '"label" "Feeling curious?"',
+  '"description" "Surprise me"',
+  '"label" "Gallery"',
+  '"description" "Editorial art"',
+  '"label" "Bookstore"',
+  '"label" "About"',
+  '"label" "Support"',
+  'aria-label="Primary" data-primary-nav',
+  'mobile-nav-read-heading',
+  'mobile-nav-explore-heading',
+  'mobile-nav-imprint-heading'
+)) {
+  if ($mastheadPartial -notmatch [regex]::Escape($requiredNavigationSnippet)) {
+    throw "Expected grouped primary navigation contract to contain: $requiredNavigationSnippet"
+  }
 }
 
 foreach ($requiredAppsNavigationSnippet in @(
   'site.GetPage "/apps"',
   'not $appsPage.Draft',
-  '>Apps &amp; Tools<'
+  '"label" "Apps & Tools"',
+  '"description" "Digital experiments"'
 )) {
   if ($mastheadPartial -notmatch [regex]::Escape($requiredAppsNavigationSnippet)) {
     throw "Expected the public Apps & Tools navigation contract to contain: $requiredAppsNavigationSnippet"
@@ -902,8 +933,12 @@ if ($mastheadPartial -match '\$showApps\s*:=[^\r\n]*hugo\.IsServer') {
   throw 'Expected the published Apps & Tools navigation link not to acquire a server-only draft alternative.'
 }
 
-if ($mastheadPartial -notmatch 'data-analytics-source-slot="primary_nav_bookstore"') {
-  throw 'Expected the primary Bookstore navigation link to emit its analytics source slot.'
+if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_bookstore"') {
+  throw 'Expected the primary Bookstore destination to retain its analytics source slot.'
+}
+
+if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_support"') {
+  throw 'Expected the primary Support destination to retain its analytics source slot.'
 }
 
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw

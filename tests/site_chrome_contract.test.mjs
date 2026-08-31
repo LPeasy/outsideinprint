@@ -28,6 +28,8 @@ function cssRule(source, selector) {
 }
 
 const masthead = fs.readFileSync(path.resolve("layouts/partials/masthead.html"), "utf8");
+const mastheadNavLink = fs.readFileSync(path.resolve("layouts/partials/masthead_nav_link.html"), "utf8");
+const mastheadNavigationScript = fs.readFileSync(path.resolve("layouts/partials/masthead_navigation_script.html"), "utf8");
 const homepage = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
 const newsletterSignup = fs.readFileSync(path.resolve("layouts/partials/newsletter_signup.html"), "utf8");
@@ -64,38 +66,54 @@ const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_i
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
 const styleThemeWorkflow = fs.readFileSync(path.resolve("docs/style-theme-workflow.md"), "utf8");
 
-test("masthead removes Welcome and promotes Archive as the long-form lane", () => {
+test("masthead defines the grouped desktop and mobile navigation from one destination model", () => {
   assert.doesNotMatch(masthead, />Welcome</);
-  assert.match(masthead, />Archive</);
   assert.doesNotMatch(masthead, />Essays</);
   assert.doesNotMatch(masthead, />Dialogues</);
   assert.doesNotMatch(masthead, />Shop</);
-  assert.match(masthead, />Collections</);
-  assert.match(masthead, />Gallery</);
-  assert.match(masthead, />Library</);
-  assert.match(masthead, />Bookstore</);
-  assert.match(masthead, />Feeling curious\?</);
+  assert.doesNotMatch(masthead, />Books</);
+  assert.doesNotMatch(masthead, /href="\{\{ "start-here\/" \| absURL \}\}"/);
+  assert.doesNotMatch(masthead, /\$isWelcome/);
+
+  for (const [label, route, group, description] of [
+    ["Latest", '"" | absURL', "read", "Front page"],
+    ["Archive", '"archive/" | absURL', "read", "By date"],
+    ["Collections", '"collections/" | absURL', "read", "By topic"],
+    ["Library", '"library/" | absURL', "read", "Search all"],
+    ["Feeling curious?", '"random/" | absURL', "read", "Surprise me"],
+    ["Gallery", '"gallery/" | absURL', "explore", "Editorial art"],
+  ]) {
+    assert.equal((masthead.match(new RegExp(`"label" "${escapeRegex(label)}"`, "g")) || []).length, 1, `${label} should be defined once`);
+    assert.match(masthead, new RegExp(`"label" "${escapeRegex(label)}"[\\s\\S]*?"href" \\(${escapeRegex(route)}\\)[\\s\\S]*?"description" "${escapeRegex(description)}"[\\s\\S]*?"group" "${group}"`));
+  }
+
   assert.match(masthead, /\$appsPage := site\.GetPage "\/apps"/);
   assert.match(masthead, /\$showApps := and \$appsPage \(not \$appsPage\.Draft\)/);
   assert.doesNotMatch(masthead, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
-  assert.match(masthead, /href="\{\{ \$appsPage\.RelPermalink \}\}"[\s\S]*?>Apps &amp; Tools</);
+  assert.match(masthead, /"label" "Apps & Tools"[\s\S]*?"href" \$appsPage\.RelPermalink[\s\S]*?"description" "Digital experiments"[\s\S]*?"group" "explore"/);
   assert.match(masthead, /\$isApps := eq \.Section "apps"/);
   assert.match(masthead, /\$gamesPage := site\.GetPage "\/games"/);
   assert.match(masthead, /\$showGames := and \$gamesPage \(or \(not \$gamesPage\.Draft\) hugo\.IsServer\)/);
-  assert.match(masthead, /href="\{\{ \$gamesPage\.RelPermalink \}\}"[\s\S]*?>Games</);
+  assert.match(masthead, /"label" "Games"[\s\S]*?"href" \$gamesPage\.RelPermalink[\s\S]*?"description" "Playable work"[\s\S]*?"group" "explore"/);
   assert.match(masthead, /\$isGames := eq \.Section "games"/);
-  assert.match(
-    masthead,
-    /aria-label="Primary"[\s\S]*?archive\/"[\s\S]*?>Archive<[\s\S]*?collections\/"[\s\S]*?>Collections<[\s\S]*?gallery\/"[\s\S]*?>Gallery<[\s\S]*?library\/"[\s\S]*?>Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?shop\/"[\s\S]*?>Bookstore<[\s\S]*?random\/"[\s\S]*?>Feeling curious\?</
-  );
+
+  assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
+  assert.match(masthead, /"label" "About"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
+  assert.match(masthead, /"label" "Support"[\s\S]*?"group" "direct"[\s\S]*?"analyticsSourceSlot" "primary_nav_support"/);
   assert.match(masthead, /\$isBookstore := or \(eq \.Section "shop"\) \(eq \.RelPermalink "\/shop\/"\)/);
-  assert.match(masthead, /data-analytics-source-slot="primary_nav_bookstore"/);
-  assert.match(masthead, /\$isGallery := eq \.Section "gallery"/);
-  assert.match(masthead, /href="\{\{ "gallery\/" \| absURL \}\}"/);
-  assert.doesNotMatch(masthead, /href="\{\{ "start-here\/" \| absURL \}\}"/);
-  assert.doesNotMatch(masthead, /\$isWelcome/);
-  assert.doesNotMatch(masthead, />Books</);
-  assert.match(masthead, /aria-current="page"/);
+  assert.match(masthead, /<nav class="nav nav--section-rail" aria-label="Primary" data-primary-nav>/);
+  assert.equal((masthead.match(/aria-label="Primary"/g) || []).length, 1);
+  assert.match(masthead, /class="nav__desktop"[\s\S]*?>\s*<span>Read<\/span>[\s\S]*?>\s*<span>Explore<\/span>[\s\S]*?range \$directItems/);
+  assert.match(masthead, /class="nav__mobile"[\s\S]*?range \$mobilePrimaryItems[\s\S]*?<span>Menu<\/span>/);
+  assert.match(masthead, /mobile-nav-read-heading[\s\S]*?mobile-nav-explore-heading[\s\S]*?mobile-nav-imprint-heading/);
+  assert.match(masthead, /\$mobileMenuCurrent := or \$isHomeMasthead \$isLibrary \$isRandom \$exploreCurrent \$isAbout \$isSupport/);
+  assert.match(masthead, /<span class="visually-hidden">, current section<\/span>/);
+  assert.match(masthead, /<span class="visually-hidden">, contains current section<\/span>/);
+
+  assert.match(mastheadNavLink, /if \$item\.current[\s\S]*?aria-current="page"/);
+  assert.match(mastheadNavLink, /with \$item\.analyticsEvent[\s\S]*?data-analytics-event="\{\{ \. \}\}"/);
+  assert.match(mastheadNavLink, /with \$item\.analyticsSourceSlot[\s\S]*?data-analytics-source-slot="\{\{ \. \}\}"/);
+  assert.match(mastheadNavLink, /nav-link__description/);
 });
 
 test("shared masthead exposes the public light and dark theme selector", () => {
@@ -104,7 +122,7 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(masthead, /aria-pressed="true"/);
   assert.match(masthead, /theme-toggle__icon--sun/);
   assert.match(masthead, /theme-toggle__icon--moon/);
-  assert.match(masthead, /<nav class="nav nav--section-rail"[\s\S]*Feeling curious\?/);
+  assert.match(masthead, /<nav class="nav nav--section-rail"[\s\S]*nav-disclosure--read[\s\S]*nav-disclosure--explore[\s\S]*nav-mobile-menu/);
   assert.match(masthead, /\$mastheadVariant := cond \$isHomeMasthead "masthead--full" "masthead--compressed"/);
   assert.match(masthead, /\{\{ if \$isHomeMasthead \}\}[\s\S]*masthead-side-deck--left/);
   assert.doesNotMatch(
@@ -113,17 +131,28 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   );
   assert.match(baseLayout, /partial "theme_bootstrap\.html"[\s\S]*resources\.Get "css\/main\.css"/);
   assert.match(baseLayout, /partial "theme_toggle_script\.html"/);
+  assert.match(baseLayout, /partial "masthead_navigation_script\.html"/);
   assert.match(notFound, /partial "theme_bootstrap\.html"[\s\S]*resources\.Get "css\/main\.css"/);
   assert.match(notFound, /partial "theme_toggle_script\.html"/);
+  assert.match(notFound, /partial "masthead_navigation_script\.html"/);
   assert.match(themeBootstrap, /localStorage\.getItem\(storageKey\)/);
   assert.match(themeBootstrap, /prefers-color-scheme:\s*dark/);
   assert.match(themeBootstrap, /document\.documentElement\.setAttribute\("data-theme", theme\)/);
   assert.match(themeToggleScript, /localStorage\.setItem\(storageKey, theme\)/);
   assert.match(themeToggleScript, /setTheme\(currentTheme\(\) === "dark" \? "light" : "dark"\)/);
+  assert.match(mastheadNavigationScript, /data-primary-nav-disclosure/);
+  assert.match(mastheadNavigationScript, /event\.key === "Escape" && disclosure\.open/);
+  assert.match(mastheadNavigationScript, /disclosure\.querySelector\("summary"\)[\s\S]*?summary\.focus\(\)/);
+  assert.match(mastheadNavigationScript, /document\.addEventListener\("pointerdown"/);
+  assert.match(mastheadNavigationScript, /matchMedia\("\(max-width: 768px\)"\)/);
   assert.match(css, /html\[data-theme="light"\]\{[\s\S]*--bg-page:var\(--oip-paper\);[\s\S]*--accent:var\(--oip-link\);/);
   assert.match(css, /\.theme-toggle\{[\s\S]*display:none;[\s\S]*\}/);
   assert.match(css, /html\.theme-enabled \.theme-toggle\{[\s\S]*display:inline-flex;[\s\S]*\}/);
   assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(1\.75rem, 3vw, 2\.35rem\)/);
+  assert.match(css, /\.nav__direct-link,[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?min-height:44px;/);
+  assert.match(css, /\.nav-disclosure__panel\{[\s\S]*?position:absolute;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:max-content max-content max-content 1fr;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__panel\{[\s\S]*?grid-row:2;/);
   assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2\.5rem, 12vw, 2\.75rem\)/);
   assert.match(css, /html\[data-theme="light"\] \.masthead--compressed\{[\s\S]*background:transparent;/);
   assert.match(css, /\/\* Light-mode paper edition \*\//);

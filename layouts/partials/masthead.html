@@ -5,6 +5,7 @@
 {{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
 {{ $isBookstore := or (eq .Section "shop") (eq .RelPermalink "/shop/") }}
 {{ $isSupport := eq .Section "support" }}
+{{ $isAbout := or (eq .Section "about") (eq .RelPermalink "/about/") }}
 {{ $isApps := eq .Section "apps" }}
 {{ $isGames := eq .Section "games" }}
 {{ $isGallery := eq .Section "gallery" }}
@@ -16,6 +17,129 @@
 {{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
 {{ $paperRoute := site.Params.paper_route | default dict }}
 {{ $paperRouteEnabled := and $isHomeMasthead (ne ($paperRoute.enabled | default true) false) }}
+{{ $navItems := slice
+  (dict
+    "key" "latest"
+    "label" "Latest"
+    "href" ("" | absURL)
+    "description" "Front page"
+    "group" "read"
+    "current" $isHomeMasthead
+    "mobilePrimary" false
+  )
+  (dict
+    "key" "archive"
+    "label" "Archive"
+    "href" ("archive/" | absURL)
+    "description" "By date"
+    "group" "read"
+    "current" $isArchive
+    "mobilePrimary" true
+  )
+  (dict
+    "key" "collections"
+    "label" "Collections"
+    "href" ("collections/" | absURL)
+    "description" "By topic"
+    "group" "read"
+    "current" $isCollections
+    "mobilePrimary" true
+  )
+  (dict
+    "key" "library"
+    "label" "Library"
+    "href" ("library/" | absURL)
+    "description" "Search all"
+    "group" "read"
+    "current" $isLibrary
+    "mobilePrimary" false
+  )
+  (dict
+    "key" "random"
+    "label" "Feeling curious?"
+    "href" ("random/" | absURL)
+    "description" "Surprise me"
+    "group" "read"
+    "current" $isRandom
+    "mobilePrimary" false
+  )
+  (dict
+    "key" "gallery"
+    "label" "Gallery"
+    "href" ("gallery/" | absURL)
+    "description" "Editorial art"
+    "group" "explore"
+    "current" $isGallery
+    "mobilePrimary" false
+  )
+}}
+{{ if $showApps }}
+  {{ $navItems = $navItems | append (dict
+    "key" "apps"
+    "label" "Apps & Tools"
+    "href" $appsPage.RelPermalink
+    "description" "Digital experiments"
+    "group" "explore"
+    "current" $isApps
+    "mobilePrimary" false
+  ) }}
+{{ end }}
+{{ if $showGames }}
+  {{ $navItems = $navItems | append (dict
+    "key" "games"
+    "label" "Games"
+    "href" $gamesPage.RelPermalink
+    "description" "Playable work"
+    "group" "explore"
+    "current" $isGames
+    "mobilePrimary" false
+  ) }}
+{{ end }}
+{{ $navItems = $navItems | append
+  (dict
+    "key" "bookstore"
+    "label" "Bookstore"
+    "href" ("shop/" | absURL)
+    "group" "direct"
+    "current" $isBookstore
+    "mobilePrimary" true
+    "analyticsEvent" "internal_promo_click"
+    "analyticsSourceSlot" "primary_nav_bookstore"
+    "analyticsSlug" "bookstore"
+    "analyticsTitle" "Bookstore"
+    "analyticsSection" "Bookstore"
+    "analyticsPath" ("shop/" | relURL)
+  )
+  (dict
+    "key" "about"
+    "label" "About"
+    "href" ("about/" | absURL)
+    "group" "direct"
+    "current" $isAbout
+    "mobilePrimary" false
+  )
+  (dict
+    "key" "support"
+    "label" "Support"
+    "href" ("support/" | absURL)
+    "group" "direct"
+    "current" $isSupport
+    "mobilePrimary" false
+    "analyticsEvent" "internal_promo_click"
+    "analyticsSourceSlot" "primary_nav_support"
+    "analyticsSlug" "support"
+    "analyticsTitle" "Support Outside In Print"
+    "analyticsSection" "Support"
+    "analyticsPath" ("support/" | relURL)
+  )
+}}
+{{ $readItems := where $navItems "group" "read" }}
+{{ $exploreItems := where $navItems "group" "explore" }}
+{{ $directItems := where $navItems "group" "direct" }}
+{{ $mobilePrimaryItems := where $navItems "mobilePrimary" true }}
+{{ $readCurrent := gt (len (where $readItems "current" true)) 0 }}
+{{ $exploreCurrent := gt (len (where $exploreItems "current" true)) 0 }}
+{{ $mobileMenuCurrent := or $isHomeMasthead $isLibrary $isRandom $exploreCurrent $isAbout $isSupport }}
 <header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
@@ -83,33 +207,81 @@
     <div class="masthead-nameplate__divider" aria-hidden="true"></div>
   </div>
 
-  <nav class="nav nav--section-rail" aria-label="Primary">
-    <a href="{{ "archive/" | absURL }}"{{ if $isArchive }} aria-current="page"{{ end }}>Archive</a><span class="dot">&bull;</span>
-    <a href="{{ "collections/" | absURL }}"{{ if $isCollections }} aria-current="page"{{ end }}>Collections</a><span class="dot">&bull;</span>
-    <a href="{{ "gallery/" | absURL }}"{{ if $isGallery }} aria-current="page"{{ end }}>Gallery</a><span class="dot">&bull;</span>
-    <a href="{{ "library/" | absURL }}"{{ if $isLibrary }} aria-current="page"{{ end }}>Library</a><span class="dot">&bull;</span>
-    {{ if $showApps }}<a href="{{ $appsPage.RelPermalink }}"{{ if $isApps }} aria-current="page"{{ end }}>Apps &amp; Tools</a><span class="dot">&bull;</span>{{ end }}
-    {{ if $showGames }}<a href="{{ $gamesPage.RelPermalink }}"{{ if $isGames }} aria-current="page"{{ end }}>Games</a><span class="dot">&bull;</span>{{ end }}
-    <a
-      href="{{ "shop/" | absURL }}"
-      data-analytics-event="internal_promo_click"
-      data-analytics-source-slot="primary_nav_bookstore"
-      data-analytics-slug="bookstore"
-      data-analytics-title="Bookstore"
-      data-analytics-section="Bookstore"
-      data-analytics-path="{{ "shop/" | relURL }}"
-      {{- if $isBookstore }} aria-current="page"{{ end -}}
-    >Bookstore</a><span class="dot">&bull;</span>
-    <a
-      href="{{ "support/" | absURL }}"
-      data-analytics-event="internal_promo_click"
-      data-analytics-source-slot="primary_nav_support"
-      data-analytics-slug="support"
-      data-analytics-title="Support Outside In Print"
-      data-analytics-section="Support"
-      data-analytics-path="{{ "support/" | relURL }}"
-      {{- if $isSupport }} aria-current="page"{{ end -}}
-    >Support</a><span class="dot">&bull;</span>
-    <a class="nav__explore-link" href="{{ "random/" | absURL }}"{{ if $isRandom }} aria-current="page"{{ end }}>Feeling curious?</a>
+  <nav class="nav nav--section-rail" aria-label="Primary" data-primary-nav>
+    <div class="nav__desktop">
+      <details class="nav-disclosure nav-disclosure--read{{ if $readCurrent }} nav-disclosure--current{{ end }}" data-primary-nav-disclosure>
+        <summary class="nav-disclosure__summary">
+          <span>Read</span>
+          {{ if $readCurrent }}<span class="visually-hidden">, current section</span>{{ end }}
+          <span class="nav-disclosure__chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="nav-disclosure__panel nav-disclosure__panel--read">
+          <ul class="nav-disclosure__list">
+            {{ range $readItems }}
+              <li>{{ partial "masthead_nav_link.html" (dict "item" . "showDescription" true) }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </details>
+
+      <details class="nav-disclosure nav-disclosure--explore{{ if $exploreCurrent }} nav-disclosure--current{{ end }}" data-primary-nav-disclosure>
+        <summary class="nav-disclosure__summary">
+          <span>Explore</span>
+          {{ if $exploreCurrent }}<span class="visually-hidden">, current section</span>{{ end }}
+          <span class="nav-disclosure__chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="nav-disclosure__panel nav-disclosure__panel--explore">
+          <ul class="nav-disclosure__list">
+            {{ range $exploreItems }}
+              <li>{{ partial "masthead_nav_link.html" (dict "item" . "showDescription" true) }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </details>
+
+      {{ range $directItems }}
+        {{ partial "masthead_nav_link.html" (dict "item" . "class" "nav__direct-link") }}
+      {{ end }}
+    </div>
+
+    <div class="nav__mobile">
+      {{ range $mobilePrimaryItems }}
+        {{ partial "masthead_nav_link.html" (dict "item" . "class" (printf "nav__mobile-link nav__mobile-link--%s" .key)) }}
+      {{ end }}
+
+      <details class="nav-mobile-menu{{ if $mobileMenuCurrent }} nav-mobile-menu--current{{ end }}" data-primary-nav-disclosure>
+        <summary class="nav-mobile-menu__summary">
+          <span>Menu</span>
+          {{ if $mobileMenuCurrent }}<span class="visually-hidden">, contains current section</span>{{ end }}
+          <span class="nav-disclosure__chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="nav-mobile-menu__panel">
+          <section class="nav-mobile-menu__group" aria-labelledby="mobile-nav-read-heading">
+            <p id="mobile-nav-read-heading">Read</p>
+            <ul>
+              {{ range where $readItems "mobilePrimary" false }}
+                <li>{{ partial "masthead_nav_link.html" (dict "item" .) }}</li>
+              {{ end }}
+            </ul>
+          </section>
+          <section class="nav-mobile-menu__group" aria-labelledby="mobile-nav-explore-heading">
+            <p id="mobile-nav-explore-heading">Explore</p>
+            <ul>
+              {{ range $exploreItems }}
+                <li>{{ partial "masthead_nav_link.html" (dict "item" .) }}</li>
+              {{ end }}
+            </ul>
+          </section>
+          <section class="nav-mobile-menu__group nav-mobile-menu__group--imprint" aria-labelledby="mobile-nav-imprint-heading">
+            <p id="mobile-nav-imprint-heading">Outside In Print</p>
+            <ul>
+              {{ range where $directItems "mobilePrimary" false }}
+                <li>{{ partial "masthead_nav_link.html" (dict "item" .) }}</li>
+              {{ end }}
+            </ul>
+          </section>
+        </div>
+      </details>
+    </div>
   </nav>
 </header>

@@ -1586,6 +1586,7 @@ $requiredUxPages = @(
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
   'public/shop/the-water-cycle/index.html',
+  'public/games/index.html',
   'public/random/index.html',
   'public/collections/the-ledger/index.html',
   'public/collections/syd-and-oliver-dialogues/index.html',
@@ -2585,13 +2586,18 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>\s*Archive\s*</span>'
     Message = 'expected the homepage masthead to expose the Archive label'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*Bookstore\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
-    Message = 'expected the homepage masthead nav order to be Archive, Collections, Gallery, Library, Bookstore, Feeling curious?'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Read</span>.*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*data-analytics-source-slot=(?:"primary_nav_support"|primary_nav_support)[^>]*>\s*<span[^>]*>Support</span>'
+    Message = 'expected the homepage desktop ribbon to expose Read, Explore, Bookstore, About, and Support in order'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?class=(?:"nav-mobile-menu__summary"|nav-mobile-menu__summary)[^>]*>.*?<span>Menu</span>.*?mobile-nav-read-heading.*?<span[^>]*>Latest</span>.*?<span[^>]*>Library</span>.*?<span[^>]*>Feeling curious\?</span>.*?mobile-nav-explore-heading.*?<span[^>]*>Gallery</span>.*?<span[^>]*>Apps & Tools</span>.*?<span[^>]*>Games</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>'
+    Message = 'expected the homepage mobile ribbon and Menu to expose the approved responsive hierarchy'
   },
   @{
     Path = 'public/index.html'
@@ -2753,6 +2759,11 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/404.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>.*?class=(?:"nav__mobile"|nav__mobile).*?<span[^>]*>Archive</span>.*?<span[^>]*>Collections</span>.*?<span[^>]*>Bookstore</span>.*?<span>Menu</span>'
+    Message = 'expected the 404 page to use the same grouped desktop and mobile Primary navigation'
+  },
+  @{
     Path = 'public/start-here/index.html'
     Pattern = '(?s)<link rel="canonical" href="https://outsideinprint\.org/"'
     Message = 'expected /start-here/ to canonicalize to the homepage'
@@ -2796,8 +2807,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*Collections\s*<.*?(?:https://outsideinprint\.org)?/gallery/[^>]*>\s*Gallery\s*<.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*Library\s*<.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*Bookstore\s*<.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*Feeling curious\?\s*<'
-    Message = 'expected the archive masthead nav order to be Archive, Collections, Gallery, Library, Bookstore, Feeling curious?'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?nav-disclosure--read[^>]*nav-disclosure--current.*?(?:https://outsideinprint\.org)?/archive/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>Archive</span>'
+    Message = 'expected Archive to be the exact current destination and Read to be the current desktop group'
   },
   @{
     Path = 'public/archive/index.html'
@@ -3036,6 +3047,16 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/apps/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?nav-disclosure--explore[^>]*nav-disclosure--current.*?(?:https://outsideinprint\.org)?/apps/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>Apps & Tools</span>'
+    Message = 'expected Apps & Tools to be the exact current destination and Explore to be the current group'
+  },
+  @{
+    Path = 'public/games/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?nav-disclosure--explore[^>]*nav-disclosure--current.*?(?:https://outsideinprint\.org)?/games/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>Games</span>'
+    Message = 'expected Games to be the exact current destination and Explore to be the current group'
+  },
+  @{
     Path = 'public/about/index.html'
     Pattern = 'Imprint Record'
     Message = 'expected the about page to expose the imprint-record opening surface'
@@ -3057,12 +3078,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*aria-current=(?:"page"|page)[^>]*>\s*Bookstore\s*<'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>\s*Bookstore\s*</span>'
     Message = 'expected the bookstore index to mark Bookstore as the current primary destination'
   },
   @{
     Path = 'public/shop/the-water-cycle/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*aria-current=(?:"page"|page)[^>]*>\s*Bookstore\s*<'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>\s*Bookstore\s*</span>'
     Message = 'expected bookstore detail pages to mark Bookstore as the current primary destination'
   },
   @{
@@ -3921,7 +3942,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*Archive\s*<'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>\s*Archive\s*</span>'
     Message = 'expected article pages to expose the Archive masthead link'
   },
   @{
@@ -4334,7 +4355,7 @@ foreach ($surface in @(
 
     if (-not $surface.Path) {
       $primaryNavMatch = [regex]::Match($surfaceHtml, '(?is)<nav\b(?=[^>]*aria-label\s*=\s*(?:"Primary"|''Primary''|Primary))[^>]*>.*?</nav>')
-      if (-not $primaryNavMatch.Success -or $primaryNavMatch.Value -notmatch '(?is)<a\b(?=[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/"|(?:https://outsideinprint\.org)?/shop/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*Bookstore\s*</a>') {
+      if (-not $primaryNavMatch.Success -or $primaryNavMatch.Value -notmatch '(?is)<a\b(?=[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/"|(?:https://outsideinprint\.org)?/shop/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*<span[^>]*>\s*Bookstore\s*</span>\s*</a>') {
         $uxIssues.Add("$surfacePath => expected Bookstore to be the current primary-navigation destination")
       }
     }

@@ -215,10 +215,11 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
     assert.match(chrome, /site\.GetPage\s+"\/apps"/);
     assert.match(chrome, /\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)/);
     assert.doesNotMatch(chrome, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
-    assert.match(chrome, />Apps\s*&amp;\s*Tools</);
   }
+  assert.match(masthead, /"label" "Apps & Tools"[\s\S]*?"group" "explore"/);
+  assert.match(footer, />Apps\s*&amp;\s*Tools</);
   assert.match(masthead, /\$isApps\s*:=\s*eq\s+\.Section\s+"apps"/);
-  assert.match(masthead, /\$isApps[^\r\n]*aria-current="page"|aria-current="page"[^\r\n]*\$isApps/);
+  assert.match(masthead, /"current" \$isApps/);
   assert.ok(appsCssMatch, "expected a bounded Apps & Tools CSS section");
   assert.match(appsCssMatch[1], /@media\s*\(max-width:640px\)/);
   assert.match(appsCssMatch[1], /:focus-visible/);
