@@ -883,9 +883,9 @@ html[data-theme="light"] .paper-route-toggle{
     top:.72rem;
   }
   .masthead--editorial .nav--section-rail{
-    padding:4px 18px;
-    font-size:clamp(.6rem, 2.65vw, .68rem);
-    letter-spacing:.1em;
+    padding:4px 0;
+    font-size:.75rem;
+    letter-spacing:0;
   }
   .nav__desktop{
     display:none;
@@ -893,18 +893,19 @@ html[data-theme="light"] .paper-route-toggle{
   .nav__mobile{
     position:relative;
     display:grid;
-    grid-template-columns:max-content max-content max-content 1fr;
+    grid-template-columns:minmax(0, .77fr) minmax(0, 1.22fr) minmax(0, 1.07fr) minmax(0, .8fr);
     align-items:start;
-    column-gap:clamp(.25rem, 1.8vw, .65rem);
+    column-gap:0;
     width:100%;
   }
   .nav__mobile-link{
     position:relative;
     z-index:2;
     grid-row:1;
+    width:100%;
     min-width:0;
     min-height:44px;
-    padding:.32rem .18rem;
+    padding:.32rem 0;
   }
   .nav__mobile-link--archive{
     grid-column:1;
@@ -918,6 +919,7 @@ html[data-theme="light"] .paper-route-toggle{
   .nav-mobile-menu{
     z-index:1;
     display:grid;
+    grid-template-columns:minmax(0, .77fr) minmax(0, 1.22fr) minmax(0, 1.07fr) minmax(0, .8fr);
     grid-row:1;
     grid-column:1 / -1;
     width:100%;
@@ -926,14 +928,17 @@ html[data-theme="light"] .paper-route-toggle{
   .nav-mobile-menu__summary{
     z-index:3;
     grid-row:1;
-    justify-self:end;
+    grid-column:4;
+    justify-self:stretch;
+    gap:.25rem;
     min-height:44px;
-    padding:.32rem .18rem .32rem .42rem;
+    padding:.32rem 0;
     pointer-events:auto;
   }
   .nav-mobile-menu__panel{
     display:grid;
     grid-row:2;
+    grid-column:1 / -1;
     grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:.72rem .62rem;
     width:100%;
@@ -986,23 +991,6 @@ html[data-theme="light"] .paper-route-toggle{
 @media (max-width:360px){
   .masthead--full .title{
     font-size:clamp(2.5rem, 12vw, 2.75rem);
-  }
-  .masthead--editorial .nav--section-rail{
-    padding-right:0;
-    padding-left:0;
-    font-size:.6rem;
-    letter-spacing:.08em;
-  }
-  .nav__mobile{
-    column-gap:.15rem;
-  }
-  .nav__mobile-link,
-  .nav-mobile-menu__summary{
-    padding-right:.12rem;
-    padding-left:.12rem;
-  }
-  .nav-mobile-menu__summary{
-    padding-left:.3rem;
   }
 }
 

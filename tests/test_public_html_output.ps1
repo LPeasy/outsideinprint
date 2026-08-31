@@ -2352,6 +2352,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = '(?s)<h1[^>]*>\s*Outside In Print\s*</h1>.*?<section[^>]*class=(?:"[^"]*\bhome-front-page__stories\b[^"]*"|''[^'']*\bhome-front-page__stories\b[^'']*''|[^>]*\bhome-front-page__stories\b[^>]*)[^>]*aria-labelledby=(?:"home-front-page-stories-title"|home-front-page-stories-title)[^>]*>\s*<h2[^>]*id=(?:"home-front-page-stories-title"|home-front-page-stories-title)[^>]*class=(?:"[^"]*\bvisually-hidden\b[^"]*"|''[^'']*\bvisually-hidden\b[^'']*''|[^>]*\bvisually-hidden\b[^>]*)[^>]*>\s*Front page stories\s*</h2>.*?<h3[^>]*class=(?:"[^"]*\bhome-front-page__lead-title\b[^"]*"|''[^'']*\bhome-front-page__lead-title\b[^'']*''|[^>]*\bhome-front-page__lead-title\b[^>]*)'
+    Message = 'expected the homepage story area to expose a visually hidden h2 before its story h3 headings'
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = '(?s)<p[^>]*class=(?:"[^"]*\blist-title\b[^"]*"|''[^'']*\blist-title\b[^'']*''|[^>]*\blist-title\b[^>]*)[^>]*>\s*Front Page\s*</p>'
     Message = 'expected the homepage not to retain the retired visible Front Page label block'
     ShouldNotMatch = $true

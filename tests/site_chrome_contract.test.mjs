@@ -151,9 +151,13 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(1\.75rem, 3vw, 2\.35rem\)/);
   assert.match(css, /\.nav__direct-link,[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?min-height:44px;/);
   assert.match(css, /\.nav-disclosure__panel\{[\s\S]*?position:absolute;/);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:max-content max-content max-content 1fr;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.75rem;[\s\S]*?letter-spacing:0;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:(?:repeat\(4,\s*minmax\(0,\s*1fr\)\)|(?:minmax\(0,\s*(?:\d*\.?\d+)fr\)\s*){4});/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link\{[\s\S]*?min-height:44px;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?grid-column:4;[\s\S]*?gap:\.25rem;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__panel\{[\s\S]*?grid-row:2;/);
   assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2\.5rem, 12vw, 2\.75rem\)/);
+  assert.doesNotMatch(css, /@media \(max-width:360px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.6rem;/);
   assert.match(css, /html\[data-theme="light"\] \.masthead--compressed\{[\s\S]*background:transparent;/);
   assert.match(css, /\.bookstore-epub-checkout-disclosure > summary\{[\s\S]*min-height:3\.2rem;/);
   assert.match(css, /\.bookstore-epub-checkout-disclosure > summary:focus-visible\{[\s\S]*outline:2px solid var\(--focus-ring\);/);
@@ -370,6 +374,10 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.ok(homeFrontPage.indexOf('data-home-cartoon-recent') < homeFrontPage.indexOf('home-almanack-divider'));
   assert.ok(homeFrontPage.indexOf('home-almanack--lead') < homeFrontPage.indexOf('data-home-front-page-region="secondary"'));
   assert.match(homeFrontPage, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
+  assert.match(homeFrontPage, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
+  assert.ok(homeFrontPage.indexOf('>Front page stories</h2>') < homeFrontPage.indexOf('<h3 class="home-front-page__lead-title">'));
+  assert.match(homeFrontPage, /<p id="home-cartoon-lightbox-title" class="cartoon-lightbox__title" data-home-cartoon-lightbox-title><\/p>/);
+  assert.doesNotMatch(homeFrontPage, /<h2 id="home-cartoon-lightbox-title"/);
   assert.doesNotMatch(homeFrontPage, />Front Page</);
   assert.doesNotMatch(homeFrontPage, /A curated front page from Outside In Print/);
   assert.doesNotMatch(homeFrontPage, /class="home-manifesto"/);

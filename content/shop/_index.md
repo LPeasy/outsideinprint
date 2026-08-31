@@ -8,4 +8,6 @@ show_citation: false
 
 Three independent books on the American Dream, public infrastructure, and the stories societies tell themselves. Buy all three directly as Outside In Print EPUBs through secure Square checkout. Kindle editions remain available.
 
+Direct EPUB checkout is currently available to U.S. customers only.
+
 [Reader support](/support/) uses a separate checkout.

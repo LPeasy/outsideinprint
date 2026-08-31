@@ -36,7 +36,8 @@
     {{ $leadSection := index $leadCopy "sectionLabel" }}
     {{ $heroLabel := index $leadCopy "latestLabel" }}
     {{ $leadReadLabel := index $leadCopy "readLabel" }}
-    <div class="home-front-page__stories">
+    <section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">
+      <h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories</h2>
       <article class="home-front-page__lead" data-home-front-page-region="lead">
         <p class="list-title home-front-page__kicker">{{ $heroLabel }}</p>
         <h3 class="home-front-page__lead-title">
@@ -281,7 +282,7 @@
           {{ end }}
         </div>
       {{ end }}
-    </div>
+    </section>
   {{ end }}
 
   {{ with $currentCartoon }}

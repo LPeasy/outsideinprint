@@ -47,6 +47,10 @@ function Assert-Ordered {
 }
 
 $bookstoreData = Get-RequiredText -RelativePath 'data/bookstore.yaml'
+$bookstoreIndexContent = Get-RequiredText -RelativePath 'content/shop/_index.md'
+$usCheckoutRestriction = 'Direct EPUB checkout is currently available to U.S. customers only.'
+Assert-Contains -Text $bookstoreIndexContent -Expected $usCheckoutRestriction -Context 'Bookstore geographic checkout notice'
+Assert-Ordered -Text $bookstoreIndexContent -First $usCheckoutRestriction -Second '[Reader support](/support/) uses a separate checkout.' -Context 'Bookstore geographic checkout notice'
 $americanNightmarePage = Get-RequiredText -RelativePath 'content/shop/the-american-nightmare-keep-dreaming-kid.md'
 if ([regex]::Matches($americanNightmarePage, '(?m)^date: 2026-08-21\s*$').Count -ne 1) {
   throw 'The American Nightmare site edition metadata must bind the owner-accepted 2026-08-21 publication date exactly once.'
@@ -281,6 +285,7 @@ if ([regex]::Matches($shopListTemplate, 'partial\s+"shop/kindle-button\.html"').
   throw 'Bookstore index must render the shared compact Kindle partial exactly once per product loop.'
 }
 Assert-Ordered -Text $shopListTemplate -First 'partial "shop/direct-offers.html"' -Second 'partial "shop/kindle-button.html"' -Context 'Bookstore index purchase order'
+Assert-Ordered -Text $shopListTemplate -First '{{ with .Content }}' -Second 'partial "shop/direct-offers.html"' -Context 'Bookstore geographic checkout notice placement'
 if ($shopListTemplate -match '(?i)paperback|physical-cart|physical-checkout|/api/books/physical|js/physical-checkout') {
   throw 'Shop list must not expose paperback, physical-cart, shipping, or physical-checkout UI.'
 }
@@ -605,6 +610,13 @@ $shopDetailOutput = @(
 $catalogDisclosures = @([regex]::Matches($shopIndexOutput, '<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>)', 'IgnoreCase'))
 if ($catalogDisclosures.Count -ne 3) {
   throw "Bookstore index must render exactly three direct-EPUB checkout disclosures; found $($catalogDisclosures.Count)."
+}
+$decodedShopIndexOutput = [Net.WebUtility]::HtmlDecode($shopIndexOutput)
+Assert-Contains -Text $decodedShopIndexOutput -Expected $usCheckoutRestriction -Context 'Built bookstore geographic checkout notice'
+$restrictionIndex = $decodedShopIndexOutput.IndexOf($usCheckoutRestriction, [StringComparison]::Ordinal)
+$firstDisclosureIndex = $decodedShopIndexOutput.IndexOf('data-bookstore-checkout-disclosure', [StringComparison]::Ordinal)
+if ($restrictionIndex -lt 0 -or $firstDisclosureIndex -lt 0 -or $restrictionIndex -ge $firstDisclosureIndex) {
+  throw 'Built bookstore must place the U.S.-only direct EPUB notice before the first checkout disclosure.'
 }
 if ($shopIndexOutput -match '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure[^>]*\bopen(?:\s*=|\s|>)') {
   throw 'Bookstore index direct-EPUB checkout disclosures must be closed by default.'
