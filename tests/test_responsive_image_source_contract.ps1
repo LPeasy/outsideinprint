@@ -1164,7 +1164,13 @@ foreach ($candidate in $reviewCandidates) {
     $rawCandidateValue = if ($candidate -is [System.Collections.IDictionary]) { $candidate[$field] } else { $candidate.$field }
     $candidateValue = if ($null -eq $rawCandidateValue) { $null } else { [string]$rawCandidateValue }
     $manifestValue = if ($null -eq $candidateAsset.$field) { $null } else { [string]$candidateAsset.$field }
-    if ($candidateValue -cne $manifestValue) {
+    $isDocumentedRetirement = (
+      $field -ceq 'usage_state' -and
+      $intentionallyRetiredManagedAssetIds -ccontains $candidateId -and
+      $candidateValue -ceq 'referenced' -and
+      $manifestValue -ceq 'retained_unreferenced'
+    )
+    if ($candidateValue -cne $manifestValue -and -not $isDocumentedRetirement) {
       throw "Image review candidate '$candidateId' has stale $field evidence."
     }
   }
