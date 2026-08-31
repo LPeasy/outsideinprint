@@ -2357,7 +2357,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup-title.*?home-browse'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup--home-ribbon.*?home-browse'
     Message = 'expected the homepage to place the bookstore shelf after the story grid and before the manifesto and lower-page signoff'
   },
   @{
