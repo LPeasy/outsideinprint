@@ -1,4 +1,4 @@
-current: the-words-find-their-feet
+current: the-open-morning
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -921,5 +921,14 @@ cartoons:
     image: "editorial/the-words-find-their-feet"
     essay: "/essays/mantra-1/"
     alt: "Golden sunrise fills an empty brick street rising between row houses, iron stoops, and an oak, with a folded cream page resting on a sunlit step."
+    width: 1672
+    height: 941
+  - slug: the-open-morning
+    title: "The Open Morning"
+    date: "2026-08-31"
+    publishDate: "2026-08-31T12:23:11-04:00"
+    image: "editorial/the-open-morning"
+    essay: "/essays/mantra-2/"
+    alt: "Golden sunrise fills an empty brick market street between open iron gates, striped awnings, a glowing bakery window, and wooden crates of oranges."
     width: 1672
     height: 941
