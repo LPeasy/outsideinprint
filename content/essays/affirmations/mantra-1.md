@@ -19,7 +19,7 @@ tags:
 subtitle: "I walk the words until they become my own."
 description: "On a windy morning walk, I carry one long mantra through an ordinary interruption and let each sentence settle into breath, pace, peace, and belonging."
 featured_image: "editorial/the-words-find-their-feet"
-featured_image_alt: "An anonymous man in a rust-colored coat and dark teal cap walks uphill past brick row houses on a windy morning while holding a folded cream page."
+featured_image_alt: "Golden sunrise fills an empty brick street rising between row houses, iron stoops, and an oak, with a folded cream page resting on a sunlit step."
 featured_image_caption: "I walk the words until they become my own."
 version: "1.0"
 edition: "First web edition"
@@ -95,9 +95,9 @@ The woman continues downhill. I fold the page along its old creases and hold it 
 
 “I travel light. I welcome support. It is safe to receive. My needs matter and my needs are met.”
 
-![The same anonymous man in a rust-colored coat receives his folded cream page from a woman in a dark coat beside a stone wall and iron railing on a windy hill.](oip-image:essays/mantra-1/section-1)
+![Golden sunrise pours through an open park gate beneath a broad oak, lighting a stone wall, an old fountain, and a folded cream page.](oip-image:essays/mantra-1/section-1)
 
-*Support reaches me in an ordinary hand.*
+*The morning carries the page and gives it back.*
 
 At the park gate, a drinking fountain stands beneath an oak. I press the button and bend toward the clear arc. Cold water touches my lips. I drink, raise my head, and wipe my chin.
 
