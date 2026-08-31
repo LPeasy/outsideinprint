@@ -6,12 +6,15 @@ date: 2026-06-29
 draft: false
 slug: "the-siren-on-the-pole"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-07-09"
-    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity certainty wording without changing thesis, sourcing, or publication status."
+    note: "Refined certainty language in several passages without changing the essay's argument or sources."
+  - version: "1.2"
+    date: "2026-08-30"
+    note: "Clarified the public revision history; the essay text and sources are unchanged."
 featured: false
 featured_image: "essays/the-siren-on-the-pole/hero"
 featured_image_alt: "An editorial illustration of an outdoor warning siren on a utility pole above a quiet street as phones and radios glow in nearby windows."

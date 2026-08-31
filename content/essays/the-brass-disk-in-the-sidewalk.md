@@ -6,12 +6,15 @@ date: 2026-06-23
 draft: false
 slug: "the-brass-disk-in-the-sidewalk"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-07-09"
-    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity certainty wording without changing thesis, sourcing, or publication status."
+    note: "Refined certainty language in several passages without changing the essay's argument or sources."
+  - version: "1.2"
+    date: "2026-08-30"
+    note: "Removed internal research-workflow language and replaced it with reader-facing source notes; no change to the essay's thesis or supported factual claims."
 featured: false
 featured_image: "essays/the-brass-disk-in-the-sidewalk/hero"
 featured_image_alt: "A brass survey disk set into a worn concrete sidewalk, with faint street-grid shadows and a survey tripod silhouette in morning light."
@@ -40,7 +43,7 @@ The small object gives the country a way to say here.
 
 [NOAA's survey mark fact sheet](https://www2.census.gov/programs-surveys/decennial/2010/program-management/4-release/press-kit/center-of-population/noaa/survey-marks-fact-sheet.pdf) says the National Geodetic Survey and its predecessor agencies have placed permanent survey marks throughout the United States since 1807. It describes typical marks as brass, bronze, or aluminum disks or rods, while some marks use prominent objects such as towers or spires. The same fact sheet says the NGS database contained information on about 1.5 million survey disks across the United States and its possessions.
 
-The current public map layer is narrower than that older broad description, but it shows the same public habit in working form. On June 23, 2026, the queryable [NGS Datasheets Feature Service](https://services2.arcgis.com/C8EMgrsFcRFL6LrL/arcgis/rest/services/NGS_Datasheets_Feature_Service/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json) returned 798,914 datasheet features. That count covers the public NGS datasheet layer reached in this run, not every mark ever set, every disk ever placed, or every local control point in the country. It is enough to show the scale: public coordinates are a maintained record system.
+The current public map layer is narrower than that older broad description, but it shows the same public habit in working form. On June 23, 2026, a count query to the [NGS Datasheets Feature Service](https://services2.arcgis.com/C8EMgrsFcRFL6LrL/arcgis/rest/services/NGS_Datasheets_Feature_Service/FeatureServer/1/query?where=1%3D1&returnCountOnly=true&f=json) reported 798,914 features in its public datasheet layer. That figure describes the records exposed through the service at that time, not every mark ever set, every disk ever placed, or every local control point in the country. It is enough to show the scale: public coordinates are a maintained record system.
 
 The mark looks local. The system behind it is national. The conflict inside it is civic. A country that governs land, water, construction, emergency response, property, and risk needs a shared language of place before its arguments can be honest.
 

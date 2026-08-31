@@ -7,12 +7,15 @@ publishDate: 2026-06-20T00:00:00-04:00
 draft: false
 slug: "the-map-that-priced-the-fire"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-06-21"
     note: "Updated June 21, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-08-30"
+    note: "Removed internal research-workflow language and replaced it with reader-facing source notes; no change to the essay's thesis or supported factual claims."
 featured: false
 featured_image: "essays/the-map-that-priced-the-fire/hero"
 featured_image_alt: "Editorial image: a public archive table holding an opened Sanborn-style map, with measured streets, color-coded blocks, and restrained civic-record lighting."
@@ -172,6 +175,20 @@ Return, then, to the table. Put the 1903 Sanborn atlas beside the 1904 Polk dire
 
 The fire map priced combustible value. The directory counted the addresses that came next. Read together, they give the public a harder kind of memory: a city seen through the records that once made it chargeable, reachable, and rebuildable.
 
-## Working Sources
+## Sources and limits
 
-Primary and official sources consulted for this flagship expansion include the Library of Congress Sanborn collection introduction, collection guide, time-series essay, Jacksonville 1897/1903/1913 item records, the Jacksonville Public Library 1904 Polk city directory, Florida Memory's Great Jacksonville Fire exhibit, EPA's All Appropriate Inquiries guidance, 40 CFR Part 312, and the U.S. Army Corps of Engineers Upper St. Anthony Falls Phase I Environmental Site Assessment. A full source-hardening checklist is included in `source-checklist.md`.
+Primary and official sources consulted for this essay include:
+
+- [Library of Congress, Introduction to the Collection](https://www.loc.gov/collections/sanborn-maps/articles-and-essays/introduction-to-the-collection/)
+- [Library of Congress, About this Collection](https://www.loc.gov/collections/sanborn-maps/about-this-collection/)
+- [Library of Congress, Sanborn Time Series](https://www.loc.gov/collections/sanborn-maps/articles-and-essays/sanborn-time-series/)
+- [Library of Congress, Jacksonville 1897 item](https://www.loc.gov/item/sanborn01286_004/)
+- [Library of Congress, Jacksonville 1903 resource](https://www.loc.gov/resource/g3934jm.g3934jm_g012861903/)
+- [Library of Congress, Jacksonville 1913 resource](https://www.loc.gov/resource/g3934jm.g3934jm_g01286191301/)
+- [Jacksonville Public Library, *Polk's Jacksonville City Directory 1904*](https://jaxpubliclibrary.contentdm.oclc.org/digital/compoundobject/collection/p16025coll10/id/3309)
+- [Florida Memory, Great Jacksonville Fire of 1901](https://www.floridamemory.com/learn/exhibits/photo_exhibits/jacksonvillefire/)
+- [U.S. Environmental Protection Agency, Brownfields All Appropriate Inquiries](https://www.epa.gov/brownfields/brownfields-all-appropriate-inquiries)
+- [Electronic Code of Federal Regulations, 40 CFR Part 312](https://www.ecfr.gov/current/title-40/chapter-I/subchapter-J/part-312)
+- [U.S. Army Corps of Engineers, *Phase I Environmental Site Assessment Report, Upper St. Anthony Falls Disposition*](https://www.mvp.usace.army.mil/Portals/57/docs/Civil%20Works/Projects/MplsLocksDisposition/2020_DraftTSP_PublicNotice/Appendix_E_HTRW_Phase1_Report_USAFDisposition_Dec2020.pdf)
+
+These sources establish the collection history, Jacksonville map sequence, fire chronology, directory evidence, and modern environmental-review framework used here. The essay treats Sanborn maps as disciplined but partial evidence. It does not treat sheet counts as proof of population, property value, or construction volume, and it does not use map detail alone to establish lived experience, social conditions, or environmental liability.

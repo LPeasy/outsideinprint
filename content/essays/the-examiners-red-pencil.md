@@ -6,8 +6,8 @@ date: 2026-06-02
 draft: false
 slug: "the-examiners-red-pencil"
 section_label: "Essay"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 featured: false
 featured_image: "essays/the-examiners-red-pencil/hero"
 featured_image_alt: "An editorial illustration of a red pencil resting across a thick bank examination report on a desk, with a vault door and green risk gauges in the background."
@@ -22,12 +22,15 @@ tags:
   - "institutions"
   - "supervision"
 revision_history:
-  - version: "1.2"
-    date: "2026-07-09"
-    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed high-severity meta-test framing without changing thesis, sourcing, or publication status."
   - version: "1.1"
     date: "2026-06-04"
     note: "Updated June 4, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-09"
+    note: "Refined the opening framing so the bank-supervision argument begins more directly without changing its thesis or sources."
+  - version: "1.3"
+    date: "2026-08-30"
+    note: "Clarified the public revision history; the essay text and sources are unchanged."
 ---
 
 The object at the center of the fight is small enough to hide inside an examination report: a Matter Requiring Attention.

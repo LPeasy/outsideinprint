@@ -1,0 +1,6 @@
+classification,article_count,share_of_rcp85_articles,classification_note,validation_status
+baseline_or_bau,13,0.035422343324250684,"Explicitly frames RCP8.5 as business-as-usual, baseline, reference, no-policy, or comparable default/reference case.",provisional_automated_output_manual_review_pending
+stress_case_clear,11,0.02997275204359673,"Explicitly frames RCP8.5 as a stress case, worst case, high-end, upper-bound, extreme, pessimistic, or severe scenario.",provisional_automated_output_manual_review_pending
+high_emissions_clear,37,0.1008174386920981,Explicitly frames RCP8.5 as high-emissions or high-concentration.,provisional_automated_output_manual_review_pending
+default_future_implied,1,0.0027247956403269754,"Uses RCP8.5 as future climate conditions without clear scenario, stress, high-emissions, or baseline qualification in title/abstract.",provisional_automated_output_manual_review_pending
+ambiguous_projection,305,0.8310626702997275,"Uses scenario/projection/model language but does not clearly state baseline, stress-case, high-emissions, or default-future framing in title/abstract.",provisional_automated_output_manual_review_pending

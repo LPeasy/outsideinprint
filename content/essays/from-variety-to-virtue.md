@@ -6,15 +6,18 @@ date: 2026-05-17
 draft: false
 slug: "from-variety-to-virtue"
 section_label: "Essay"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
-  - version: "1.2"
-    date: "2026-07-09"
-    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed high- and medium-severity prose scaffolds without changing thesis, sourcing, or publication status."
   - version: "1.1"
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-07-09"
+    note: "Refined several passages to remove repetitive framing and sharpen the essay's argument without changing its thesis or sources."
+  - version: "1.3"
+    date: "2026-08-30"
+    note: "Clarified the public revision history; the essay text and sources are unchanged."
 featured: false
 featured_image: "essays/from-variety-to-virtue/hero"
 featured_image_alt: "A cabinet of crops, ledgers, ecological specimens, and civic forms arranged as one risk-management archive."

@@ -7,12 +7,15 @@ publishDate: 2026-05-29T00:00:00-04:00
 draft: false
 slug: "the-scenario-that-ate-the-future"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-06-01"
     note: "Updated June 1, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-08-30"
+    note: "Removed internal research-workflow language and replaced it with reader-facing source notes; no change to the essay's thesis or supported factual claims."
 featured: false
 featured_image: "essays/the-scenario-that-ate-the-future/hero"
 featured_image_alt: "A climate scenario table projected in a public hearing room while the number 8.5 casts a long shadow across papers, reports, and public-record files."
@@ -115,25 +118,21 @@ Scientific inertia is not always a vice. A stable model archive lets researchers
 
 The footprint of RCP8.5 in the scholarly world is not anecdotal.
 
-The three foundation papers alone show the scale of the scenario system's scientific adoption. As retrieved for this package in late May 2026, the three foundation papers together showed roughly 15,000 citations across their publisher pages: Moss et al. 2010, van Vuuren et al. 2011, and Riahi et al. 2011.[^17][^18][^19]
+The three foundation papers alone show the scale of the scenario system's scientific adoption. Publisher metric pages viewed May 28, 2026 showed roughly 15,000 citations across the three papers: Moss et al. 2010, van Vuuren et al. 2011, and Riahi et al. 2011.[^17][^18][^19]
 
 Those counts measure the central scenario-design literature. A census of every RCP8.5 impact paper is a separate task. The floor alone establishes the point: this was a deeply embedded research architecture, no stray modeling exercise.
 
 The direct downstream count is harder. Bibliometric totals vary depending on database, search string, time window, article type, and whether "RCP8.5," "RCP 8.5," "RCP85," "SSP5-8.5," or "business as usual" is searched.
 
-OIP also ran a metadata-index bibliometric pass for this essay using OpenAlex search and a limited Crossref metadata check. The pass retained 42,295 raw records and deduped them to 42,036 records across RCP8.5 and SSP5-8.5 scenario-family terms; for 2010 through 2020, it found 14,742 RCP8.5-family records. The same pass found continued 2026 publication activity at a combined RCP8.5 / SSP5-8.5 rate of 19.41 records per day through May 27, 2026. This is a metadata-index count, not full-text hand-coded classification.[^20]
+OIP also ran an OpenAlex metadata search with a limited Crossref check. The search retrieved a large record pool, but OpenAlex can match titles, abstracts, or indexed full text, and metadata alone cannot establish whether a paper used RCP8.5 as a default, comparison, or stress case. The search and deduplication records are public with the companion methods paper, but their totals are not treated here as a count of misuse or clearly classified use.[^20]
 
-OIP then ran a narrower framing-classification pass over a 52,710-article climate-policy and climate-risk corpus drawn from 16 journals. Within that corpus, 367 title/abstract records mentioned RCP8.5. Because this was title-and-abstract classification, not full-text hand coding, the result should be read as a measure of public-facing scholarly framing. On that surface, the dominant category was ambiguous projection: 305 of 367 RCP8.5 title/abstract records used ordinary scenario, projection, pathway, model, or simulation language without clearly marking RCP8.5 as a stress case, high-end case, high-emissions case, baseline, or business-as-usual case. Only 11 records, 3.0 percent, clearly labeled it as a stress or high-end case; 37 records, 10.1 percent, clearly labeled it as high-emissions; and 13 records, 3.5 percent, used baseline or business-as-usual framing. This does not measure every caveat inside every paper. It measures the public face of scholarship. On that surface, the tail case usually entered as normal projection machinery.[^21]
+OIP also tested a narrower deterministic classifier on title and OpenAlex abstract text in a 52,710-article climate-policy and climate-risk corpus drawn from 16 journals. The automated screen identified 367 records with an RCP8.5 term hit and assigned provisional categories. Its validation record says manual review is required before publication-grade claims, and that review remains incomplete. Broad terms such as "baseline," "pessimistic," and "high concentration" can describe something other than the scenario itself. This essay therefore does not use the provisional category totals as evidence. The rules, unreviewed rows, and aggregate output are public so readers can inspect the limitation and any later review can be documented against the same row set.[^21]
 
-Vox reported in May 2026, citing Nature, that between 2011 and 2020 more than 2,000 climate impact studies used RCP8.5 as their default future. OIP's metadata-index count lands in the same order of magnitude for that narrower class. The larger point no longer rests only on anecdote: RCP8.5 and SSP5-8.5 became a standing research infrastructure large enough to feed public climate imagination through studies, press releases, assessments, and journalism.[^22]
+Vox reported in May 2026, citing Nature, that between 2011 and 2020 more than 2,000 climate impact studies used RCP8.5 as their default future. That figure remains attributed reporting; OIP's metadata pass did not independently reproduce the default-use classification. The larger point does not rest on that total alone: RCP8.5 and SSP5-8.5 became standing research infrastructure large enough to feed public climate imagination through studies, press releases, assessments, and journalism.[^22]
 
 Even with that caution, the literature record supports the core claim. RCP8.5 was widely used in major scientific publication. It was not confined to a few fringe studies. It became a standard severe pathway for late-century impact research, and in some of that literature it was treated or described as a default, baseline, business-as-usual, or no-policy future.
 
-That last distinction is the one the essay must keep making. "Used" is not the same as "misused." A coastal engineer using RCP8.5 as a high-end sea-level stress case is not doing the same thing as a headline presenting an RCP8.5-derived outcome as the future children should expect to inherit. Counts have force only after the use is classified.
-
-![A horizontal bar chart showing 305 ambiguous-projection records, 37 high-emissions-clear records, 13 baseline-or-BAU records, 11 stress-case-clear records, and 1 default-future-implied record in OIP's RCP8.5 framing classifier.](oip-image:essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts)
-
-*The signal is not mass explicit business-as-usual labeling; it is the rarity of visible stress-case labels in a literature large enough to shape public imagination.*
+That distinction is essential. "Used" is not the same as "misused." A coastal engineer using RCP8.5 as a high-end sea-level stress case is not doing the same thing as a headline presenting an RCP8.5-derived outcome as the future children should expect to inherit. Counts have force only after the use is classified.
 
 ## How the public heard it
 
@@ -321,15 +320,15 @@ The next sentence is ours to write more carefully.
 
 [^16]: van Vuuren et al. 2026, section 2.1. The paper notes that ScenarioMIP simulations were heavily used in CMIP6 and IPCC assessments, and that long production lags meant some IAM projections were outdated by the time climate model output became available. URL: https://gmd.copernicus.org/articles/19/2627/2026/
 
-[^17]: Moss et al. 2010, Nature article metrics page viewed May 28, 2026 for this package, listing 78k accesses, 5,665 citations, and 267 Altmetric. URL: https://www.nature.com/articles/nature08823
+[^17]: Moss et al. 2010, Nature article metrics page viewed May 28, 2026, listing 78k accesses, 5,665 citations, and 267 Altmetric. URL: https://www.nature.com/articles/nature08823
 
-[^18]: van Vuuren et al. 2011, Springer article metrics page viewed May 28, 2026 for this package, listing 293k accesses, 6,771 citations, 759 Altmetric, and 130 mentions. URL: https://link.springer.com/article/10.1007/s10584-011-0148-z
+[^18]: van Vuuren et al. 2011, Springer article metrics page viewed May 28, 2026, listing 293k accesses, 6,771 citations, 759 Altmetric, and 130 mentions. URL: https://link.springer.com/article/10.1007/s10584-011-0148-z
 
-[^19]: Riahi et al. 2011, Springer article metrics page viewed May 28, 2026 for this package, listing 209k accesses, 2,634 citations, 1,304 Altmetric, and 278 mentions. URL: https://link.springer.com/article/10.1007/s10584-011-0149-y
+[^19]: Riahi et al. 2011, Springer article metrics page viewed May 28, 2026, listing 209k accesses, 2,634 citations, 1,304 Altmetric, and 278 mentions. URL: https://link.springer.com/article/10.1007/s10584-011-0149-y
 
-[^20]: OIP, "RCP8.5 Bibliometrics Methods and Tables," companion package note prepared May 28, 2026 from a May 27, 2026 OpenAlex metadata-index pass with Crossref as a limited metadata check. See `03_backmatter/oip-rcp85-bibliometrics-methods-and-tables.md` and the CSV tables in `03_backmatter/bibliometrics_tables/`.
+[^20]: Robert V. Ussley, ["RCP8.5 Bibliometrics: Methods, Data, and Limits"](/working-papers/rcp85-bibliometrics-methods-and-tables/), *Outside In Print*, August 30, 2026. The companion paper documents the May 27, 2026 OpenAlex search, limited Crossref check, deduplication method, uncertainty, and [downloadable data files](/working-papers/rcp85-bibliometrics-methods-and-tables/#data-downloads).
 
-[^21]: OIP, "RCP8.5 Framing Classification," companion package method included in `03_backmatter/oip-rcp85-bibliometrics-methods-and-tables.md`, using title plus OpenAlex abstract text in a 52,710-article, 16-journal climate-policy and climate-risk corpus. See `03_backmatter/bibliometrics_tables/rcp85_framing_classifications.csv`.
+[^21]: Ussley, ["RCP8.5 Bibliometrics: Methods, Data, and Limits"](/working-papers/rcp85-bibliometrics-methods-and-tables/). The automated screen uses title plus OpenAlex abstract text in a 52,710-article, 16-journal climate-policy and climate-risk corpus. Its source validation record labels the classifications provisional and requires manual review before publication-grade use. That review is incomplete, so this essay does not rely on the category totals. Public files include the [unreviewed record-level output](/data/rcp85-bibliometrics/framing-classifications.csv) and [provisional aggregate summary](/data/rcp85-bibliometrics/framing-summary.csv); copied abstract text is omitted from the download.
 
 [^22]: Bryan Walsh, "The climate apocalypse is canceled. The merely terrible is not," Vox, May 2026. Vox reports, citing Nature, that more than 2,000 climate impact studies used RCP8.5 as their default future between 2011 and 2020. URL: https://www.vox.com/future-perfect/489488/climate-change-scenario-rcp-8-5-warming-emissions
 
@@ -390,5 +389,3 @@ The next sentence is ours to write more carefully.
 [^50]: Bank of England, "Key elements of the 2021 Biennial Exploratory Scenario: Financial risks from climate change," published June 8, 2021. The page describes the CBES as an exercise for banks and insurers built around Early Action, Late Action, and No Additional Action climate-policy scenarios, and states that the scenarios are not forecasts. URL: https://www.bankofengland.co.uk/stress-testing/2021/key-elements-2021-biennial-exploratory-scenario-financial-risks-climate-change
 
 [^51]: British Columbia Climate Action Secretariat, *Climate Resilience Framework & Standards for Public Sector Buildings*, Version 1.0, developed by RDH Building Science, March 31, 2023, Appendix A. The document frames RCP 8.5 and SSP5 with business-as-usual language in a public-sector building standards context. URL: https://bcgreencare.ca/wp-content/uploads/2023/07/Climate-Resilience-Framework-and-Standards-for-Public-Sector-Buildings_v1.pdf
-
-

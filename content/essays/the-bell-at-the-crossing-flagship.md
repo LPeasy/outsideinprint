@@ -6,8 +6,8 @@ date: 2026-06-04
 draft: false
 slug: "the-bell-at-the-crossing-flagship"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 featured: false
 featured_image: "essays/the-bell-at-the-crossing-flagship/hero"
 featured_image_alt: "Editorial illustration of a rural railroad crossing at dusk with a crossbuck, gate arm, signal bell, blue emergency sign, and freight cars approaching beyond the road."
@@ -23,6 +23,9 @@ revision_history:
   - version: "1.1"
     date: "2026-06-06"
     note: "Updated June 6, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
+  - version: "1.2"
+    date: "2026-08-30"
+    note: "Removed internal research-workflow language and replaced it with reader-facing source notes; no change to the essay's thesis or supported factual claims."
 ---
 
 ## The Sign With a Number
@@ -115,7 +118,7 @@ Safety plans become budget claims.
 
 FHWA describes the [Railway-Highway Crossings Program](https://highways.dot.gov/safety/hsip/xings/railway-highway-crossing-program-overview), commonly known as Section 130, as a program that provides funds to eliminate hazards at public railway-highway crossings. It sits inside the Highway Safety Improvement Program. FHWA's current page says the Infrastructure Investment and Jobs Act continued an annual set-aside of $245 million for fiscal years 2022 through 2026, with funds apportioned to states by formula and projects funded at a 100 percent federal share under the current program description.
 
-The date range is important. On June 4, 2026, the current federal language sits inside the fiscal-year 2022 through 2026 set-aside period. A later expansion or publication after that period would need a fresh funding check. For this draft, the current program page is enough to say that Section 130 remains the named federal crossing-safety program.
+Source boundary: The FHWA overview was verified on August 30, 2026. The page, marked last updated February 12, 2025, supports the Section 130 program description, $245 million annual set-aside for fiscal years 2022 through 2026, formula apportionment to states, and 100 percent federal share stated above. It does not establish funding beyond fiscal year 2026.
 
 That money can buy gates, lights, signs, pavement work, sight-distance improvements, channelization, closure, or grade separation. Each choice moves cost somewhere. A closed crossing can improve safety and irritate a neighborhood. A new gate can reduce collision risk and delay traffic. A separated crossing can remove the conflict and require land, engineering, public money, and years of work.
 

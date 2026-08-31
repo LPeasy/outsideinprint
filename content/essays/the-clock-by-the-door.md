@@ -6,8 +6,15 @@ date: 2026-06-30
 draft: false
 slug: "the-clock-by-the-door"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.0"
+    date: "2026-06-30"
+    note: "First web edition."
+  - version: "1.1"
+    date: "2026-08-30"
+    note: "Removed internal research-workflow language and replaced it with reader-facing source notes; no change to the essay's thesis or supported factual claims."
 featured: false
 featured_image: "essays/the-clock-by-the-door/hero"
 featured_image_alt: "An editorial illustration of a mechanical time clock beside a factory doorway with blank punch cards in a rack."
@@ -61,7 +68,7 @@ Bundy's recorder grew out of a late nineteenth-century world that wanted work to
 
 The worker became visible through records.
 
-A stable museum trail helps keep the argument anchored in the thing itself. The Bundy Museum's ["It's About Time!" exhibit](https://www.bundymuseum.org/its-about-time) preserves the time-clock story where the family name belongs, while Smithsonian object pages for time recorders show a broader museum trail even though those pages blocked automated fetches on this host. The point for this essay does not depend on one display case. The patent record and surviving museum trail together show the object as a real machine with a real administrative purpose: turn a worker's presence into a durable mark.
+A stable museum trail helps keep the argument anchored in the thing itself. The Bundy Museum's ["It's About Time!" exhibit](https://www.bundymuseum.org/its-about-time) preserves the time-clock story where the family name belongs. No single display case carries the argument. The patent record and museum exhibit together show the object as a real machine with a real administrative purpose: turn a worker's presence into a durable mark.
 
 That sounds fairer than memory. Often it was. Memory favors the person with rank. A card can give the lower-status person something to point at.
 
@@ -147,7 +154,7 @@ The rule therefore tests arithmetic as behavior. A policy that looks neutral on 
 
 Auto-deducted meal breaks create the same problem. A system may subtract thirty minutes because most people take lunch. The record becomes false when workers keep answering calls, watching patients, cleaning equipment, handling customers, or covering a short-staffed floor during the deducted time. The software sees a meal. The worker lives a duty.
 
-Off-clock work repeats the pattern in another form. The Department of Labor's public guidance on hours worked, including its [Fact Sheet #22](https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked), describes compensable time through categories such as waiting, on-call time, rest periods, training, travel, and sleeping time. DOL pages can block automated fetches here, but the official guidance is part of the source trail. The basic principle is simple enough: labels do not control the day; control and work do.
+Off-clock work repeats the pattern in another form. The Department of Labor's public guidance on hours worked, including its [Fact Sheet #22](https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked), describes compensable time through categories such as waiting, on-call time, rest periods, training, travel, and sleeping time. The guidance is general; the governing law and facts still control a particular dispute. The basic principle is simple enough: labels do not control the day; control and work do.
 
 The time clock can therefore create false confidence. It produces rows. Rows look precise. Precision can be an optical effect if the system rounds, edits, deducts, or ignores the work that happens at the edge.
 
@@ -159,13 +166,13 @@ That creates a practical standard for any timekeeping system. A worker should be
 
 ## Guidance for Both Sides
 
-Worker-facing and employer-facing sources approach the time clock through different anxieties.
+The time clock creates different practical anxieties for workers and employers.
 
-Workers need to know which hours count, how to challenge unpaid time, and where to take a complaint. The Wage and Hour Division's worker materials and complaint channels exist because a worker inside a bad record system often lacks direct bargaining power. Even when DOL pages block automated fetches, the public architecture is clear: workers need a path outside the employer's file cabinet.
+Workers need to know which hours count, how to challenge unpaid time, and where to take a complaint. The Wage and Hour Division's [How to File a Complaint](https://www.dol.gov/agencies/whd/contact/complaints) page explains its confidential complaint process and provides a route outside the employer's file cabinet for workers who may lack direct bargaining power.
 
-Employers need something else: administrable payroll, schedules that close, audits they can answer, and rules that managers can follow without inventing wage law on every shift. Employer-facing payroll vendors and compliance guides often speak in that language. Several direct vendor pages on time rounding and FLSA compliance were located during source hardening, though many block automated fetches or move URLs. They remain useful as lead material, not as the controlling frame.
+Employers need something else: administrable payroll, schedules that close, audits they can answer, and rules that managers can follow without inventing wage law on every shift. Those needs are legitimate, but statutes, regulations, official guidance, and cases remain the controlling authorities.
 
-The OIP frame has to resist both temptations. A worker-rights guide may turn every edge case into a moral injury. An employer guide may turn every edge case into a compliance workflow. The essay needs the record beneath both frames.
+A balanced account has to resist two simplifications. Not every edge case is deliberate theft, and not every edge case is merely a compliance workflow. The record beneath both frames matters more.
 
 The employer has a real need for administrable time. A hospital, store, factory, warehouse, or restaurant cannot run payroll by memoir. The worker has a real need for a record that survives hierarchy. A person paid by the hour should not have to prove a week through courage alone. The regulator has a real need for evidence that can be inspected without reconstructing every shift through testimony.
 
@@ -173,7 +180,7 @@ The time clock sits where those needs collide. Good timekeeping is not sentiment
 
 The employer-facing record trail deserves more attention than polemical labor writing usually gives it. Employers need records because schedules change, managers leave, payroll staff make mistakes, workers transfer, software settings drift, and memory collapses under scale. A serious employer wants a record that can defend good conduct and expose bad local practice before it becomes a legal claim.
 
-That interest is legitimate. It also makes the employer's duty sharper. The side with the strongest reason to build the system has the strongest duty to build it well. A payroll vendor can sell convenience. A compliance manual can explain procedures. A manager can demand closure. None of those interests can replace the wage record's public function. The record has to work when the person with less power challenges the person with more power.
+That interest is legitimate. It also makes the employer's duty sharper. The side with the strongest reason to build the system has the strongest duty to build it well. Payroll software can offer convenience. A compliance manual can explain procedures. A manager can demand closure. None of those interests can replace the wage record's public function. The record has to work when the person with less power challenges the person with more power.
 
 Employer convenience belongs in the tradeoff column. It cannot end the argument by itself. A simple rule may be worth using if it is accurate enough and easy to inspect. A more detailed system may be worth using if workers can see and challenge it. A biometric clock may reduce fraud while raising privacy stakes. A mobile app may improve distributed payroll while shifting costs and access burdens onto workers. Every tool has a gain and a sacrifice.
 
@@ -221,7 +228,7 @@ The body as badge is the old clock reaching its most intimate form.
 
 The time record carries force because enforcement needs something to hold.
 
-The Department of Labor publishes Wage and Hour Division [data and enforcement materials](https://www.dol.gov/agencies/whd/data) showing that wage enforcement reaches beyond a private quarrel. Automated fetches of DOL pages often fail from this host, but the public source remains official. The existence of enforcement data is itself part of the story: wage law is measured through back wages, penalties, industries, claims, and cases because the public rule has to be administered.
+The Department of Labor publishes Wage and Hour Division [data and enforcement materials](https://www.dol.gov/agencies/whd/data) showing that wage enforcement reaches beyond a private quarrel. The data describe administered enforcement activity rather than every workplace dispute, but their existence is itself part of the story: wage law is measured through back wages, penalties, industries, claims, and cases because the public rule has to be administered.
 
 A bad record makes enforcement expensive. Investigators need payroll records, schedules, interviews, and comparisons. Workers may fear retaliation. Employers may face accusations that depend on estimates. Courts may have to decide which inference is fair. Every missing time record moves the dispute away from arithmetic and toward credibility.
 

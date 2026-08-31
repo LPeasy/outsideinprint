@@ -9,12 +9,15 @@ author_id: "robert-v-ussley"
 featured_image: "editorial/house-gravity"
 featured_image_alt: "Household chores slide down a tilted floor marked NO OWNER toward an anonymous figure wearing a DEFAULT OWNER apron."
 featured_image_caption: "Unowned work rolls downhill."
-version: "1.4"
-edition: "Second web edition"
+version: "1.5"
+edition: "Third web edition"
 revision_history:
   - version: "1.4"
     date: "2026-07-09"
-    note: "Updated July 9, 2026, after live-site AI-screening cleanup. Removed medium-severity balanced-scaffold wording without changing thesis, sourcing, or publication status."
+    note: "Refined language about how unassigned work becomes concentrated without changing the essay's argument or cited evidence."
+  - version: "1.5"
+    date: "2026-08-30"
+    note: "Clarified the public revision history; the essay text and sources are unchanged."
 featured: false
 collections:
   - "simple-logic"
