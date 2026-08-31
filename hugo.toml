@@ -32,6 +32,17 @@ provider = "buttondown"
 buttondown_username = "OutsideInPrint"
 tag = "outside-in-print"
 publication_tag = "new-publications"
+cadence = "Every Saturday"
+title = "Bob's Almanack"
+contents = "Each Saturday's issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting."
+price_promise = "Bob's Almanack will remain free. No ads, ever."
+button_label = "Subscribe free"
+checkout_label = "Send me Bob's Almanack every Saturday. It will remain free. No ads, ever."
+sample_url = "/almanack/2026-07-25/"
+sample_label = "Read a sample issue"
+privacy_promise = "Your email goes to Buttondown to deliver and manage Bob's Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."
+privacy_url = "/privacy/"
+privacy_label = "Privacy details"
 
 [params.analytics]
 enabled = false

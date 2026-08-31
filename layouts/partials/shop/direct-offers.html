@@ -13,6 +13,14 @@
 {{- $buttondownUsername := index $newsletter "buttondown_username" | default "" -}}
 {{- $weeklyTag := index $newsletter "tag" | default "outside-in-print" -}}
 {{- $publicationTag := index $newsletter "publication_tag" | default "new-publications" -}}
+{{- $newsletterCheckoutLabel := index $newsletter "checkout_label" -}}
+{{- $newsletterContents := index $newsletter "contents" -}}
+{{- $newsletterSampleURL := index $newsletter "sample_url" -}}
+{{- $newsletterSampleLabel := index $newsletter "sample_label" -}}
+{{- $newsletterPrivacyPromise := index $newsletter "privacy_promise" -}}
+{{- $newsletterPrivacyURL := index $newsletter "privacy_url" -}}
+{{- $newsletterPrivacyLabel := index $newsletter "privacy_label" -}}
+{{- $newsletterSampleSourceSlot := printf "%s_sample_issue" $sourceSlot -}}
 {{- $allowedStatuses := slice "disabled" "live" -}}
 {{- $allowedCheckoutActions := slice "epub_checkout_api" "square_hosted_checkout" -}}
 {{- $requiredFields := slice "sku" "format" "availability_status" "availability_label" "isbn_status" "price_display" "currency" "permitted_geography" "tax_class" "fulfillment_type" "checkout_action" "checkout_url" "checkout_endpoint" "gate_note" -}}
@@ -115,9 +123,26 @@
                 </div>
                 <fieldset class="bookstore-epub-checkout__preferences" aria-describedby="{{ $preferencesID }}">
                   <legend>Email updates (optional)</legend>
-                  <label><input type="checkbox" name="weekly_email" /> Send me Bob's Almanack, the free weekly email.</label>
+                  <label><input type="checkbox" name="weekly_email" /> {{ $newsletterCheckoutLabel }}</label>
                   <label><input type="checkbox" name="publication_notifications" /> Notify me when Outside In Print releases a new book.</label>
-                  <p id="{{ $preferencesID }}">Optional. Not required to buy. Unsubscribe anytime.</p>
+                  <div id="{{ $preferencesID }}" class="bookstore-epub-checkout__newsletter-details">
+                    <p class="bookstore-epub-checkout__newsletter-contents">{{ $newsletterContents }}</p>
+                    <p class="bookstore-epub-checkout__newsletter-links">
+                      <a
+                        href="{{ $newsletterSampleURL | relURL }}"
+                        data-analytics-event="internal_promo_click"
+                        data-analytics-source-slot="{{ $newsletterSampleSourceSlot }}"
+                        data-analytics-slug="bobs-almanack-sample"
+                        data-analytics-title="{{ $newsletterSampleLabel }}"
+                        data-analytics-section="Newsletter"
+                        data-analytics-path="{{ $newsletterSampleURL }}"
+                      >{{ $newsletterSampleLabel }}</a>
+                      <span aria-hidden="true">&middot;</span>
+                      <a href="{{ $newsletterPrivacyURL | relURL }}">{{ $newsletterPrivacyLabel }}</a>
+                    </p>
+                    <p class="bookstore-epub-checkout__newsletter-privacy">{{ $newsletterPrivacyPromise }}</p>
+                    <p class="bookstore-epub-checkout__preference-note">Optional. Not required to buy.</p>
+                  </div>
                 </fieldset>
                 <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
                 <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>

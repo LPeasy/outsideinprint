@@ -2535,13 +2535,24 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)newsletter-signup--home-ribbon.*?Limited time.*?Free subscription to Bob(?:''|&#39;)s Almanack.*?Subscribe free'
-    Message = 'expected the homepage newsletter signup to render as the Bob''s Almanack subscription ribbon'
+    Pattern = '(?s)newsletter-signup--home-ribbon.*?Every Saturday.*?Bob(?:''|&#39;)s Almanack.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting\..*?Subscribe free.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage Bob(?:''|&#39;)s Almanack\. Outside In Print does not sell or rent subscriber information\. Unsubscribe anytime\.'
+    Message = 'expected the homepage Bob''s Almanack ribbon to state the canonical cadence, contents, permanent-free promise, sample, and privacy promise'
   },
   @{
     Path = 'public/index.html'
     Pattern = 'data-analytics-source-slot="?homepage_bobs_almanack_offer"?'
     Message = 'expected the homepage signup form to preserve the Bob''s Almanack analytics source slot'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*data-analytics-event=(?:"|'''')?internal_promo_click(?:"|'''')?[^>]*data-analytics-source-slot=(?:"|'''')?homepage_bobs_almanack_offer_sample_issue(?:"|'''')?'
+    Message = 'expected the homepage sample issue link to use the existing internal-promotion event and derived newsletter source slot'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?is)<section\b(?=[^>]*newsletter-signup--home-ribbon)[^>]*>.*?(?:Limited time|launch window|No spam|Easy to leave).*?</section>'
+    Message = 'expected the homepage newsletter proposition to omit retired temporary and vague trust copy'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -3905,8 +3916,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<'
-    Message = 'expected article exits to expose archive, collections, library, and newsletter links after the publication record'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Message = 'expected article aftermatter to place the full canonical Bob''s Almanack signup and article paths after the publication record'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
@@ -3974,8 +3985,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
-    Pattern = 'newsletter-signup--page'
-    Message = 'expected non-collection essays to omit the retired full newsletter module'
+    Pattern = 'newsletter-signup--article-exit'
+    Message = 'expected non-collection essays to render the full canonical Bob''s Almanack signup'
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = '(?is)<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?(?:Limited time|launch window|No spam|Easy to leave).*?</section>'
+    Message = 'expected article newsletter propositions to omit retired temporary and vague trust copy'
     ShouldNotMatch = $true
   }
 )
@@ -4335,15 +4351,22 @@ foreach ($articlePath in @(
   }
 
   $articleHtml = [string]$targetPageHtml[$articlePath]
-  $newsletterIndex = $articleHtml.IndexOf('newsletter-signup--page', [System.StringComparison]::Ordinal)
-  if ($newsletterIndex -ge 0) {
-    $uxIssues.Add("$articlePath => expected article aftermatter to omit newsletter-signup--page")
+  $newsletterSectionMatch = [regex]::Match($articleHtml, '(?is)<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?</section>')
+  $newsletterHtml = if ($newsletterSectionMatch.Success) { $newsletterSectionMatch.Value } else { '' }
+  $recordIndex = $articleHtml.IndexOf('article-publication-record', [System.StringComparison]::Ordinal)
+  $newsletterIndex = $articleHtml.IndexOf('newsletter-signup--article-exit', [System.StringComparison]::Ordinal)
+  $journeyIndex = $articleHtml.IndexOf('journey-links--article-exit', [System.StringComparison]::Ordinal)
+  if ($recordIndex -lt 0 -or $newsletterIndex -lt 0 -or $journeyIndex -lt 0 -or
+      $recordIndex -ge $newsletterIndex -or $newsletterIndex -ge $journeyIndex) {
+    $uxIssues.Add("$articlePath => expected publication record, full Bob's Almanack signup, and article paths in that order")
   }
 
-  $recordIndex = $articleHtml.IndexOf('article-publication-record', [System.StringComparison]::Ordinal)
-  $journeyIndex = $articleHtml.IndexOf('journey-links--article-exit', [System.StringComparison]::Ordinal)
-  if ($recordIndex -lt 0 -or $journeyIndex -lt 0 -or $recordIndex -ge $journeyIndex) {
-    $uxIssues.Add("$articlePath => expected article-publication-record to appear before journey-links--article-exit")
+  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown') {
+    $uxIssues.Add("$articlePath => expected the canonical Bob's Almanack cadence, contents, permanent-free, sample, and privacy proposition")
+  }
+
+  if ($newsletterHtml -match '(?i)Limited time|launch window|No spam|Easy to leave') {
+    $uxIssues.Add("$articlePath => retained retired newsletter trust copy")
   }
 
   if ($articleHtml -notmatch '(?s)journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<') {
@@ -4556,4 +4579,3 @@ if ($uxIssues.Count -gt 0) {
 Write-Host "Public HTML output regression test passed."
 $global:LASTEXITCODE = 0
 exit 0
-

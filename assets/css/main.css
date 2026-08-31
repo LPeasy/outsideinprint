@@ -2859,6 +2859,62 @@ html[data-theme="light"] .paper-route-toggle{
 .bookstore-epub-checkout__preferences input{
   margin:.14rem 0 0;
 }
+.bookstore-epub-checkout__newsletter-details{
+  display:grid;
+  gap:.3rem;
+  margin-top:.18rem;
+  padding-top:.5rem;
+  border-top:1px solid var(--oip-rule-faint);
+  font-family:var(--font-ui);
+}
+.bookstore-epub-checkout__preferences .bookstore-epub-checkout__newsletter-contents{
+  margin:0;
+  color:var(--text-secondary);
+  font-size:.7rem;
+  line-height:1.52;
+}
+.bookstore-epub-checkout__preferences .bookstore-epub-checkout__newsletter-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.22rem .4rem;
+  margin:0;
+  font-size:.69rem;
+  line-height:1.5;
+}
+.bookstore-epub-checkout__newsletter-links span{
+  color:var(--text-faint);
+}
+.bookstore-epub-checkout__newsletter-links a,
+.bookstore-epub-checkout__newsletter-privacy a{
+  color:var(--accent-hover);
+  font-weight:650;
+  text-decoration-color:rgba(153,173,191,.62);
+  text-underline-offset:.18em;
+}
+.bookstore-epub-checkout__newsletter-links a:hover,
+.bookstore-epub-checkout__newsletter-privacy a:hover{
+  color:var(--text-primary);
+  text-decoration-color:currentColor;
+}
+.bookstore-epub-checkout__preferences .bookstore-epub-checkout__newsletter-privacy{
+  margin:0;
+  color:var(--text-muted);
+  font-size:.67rem;
+  line-height:1.5;
+}
+.bookstore-epub-checkout__preferences .bookstore-epub-checkout__preference-note{
+  margin:.08rem 0 0;
+  color:var(--text-faint);
+  font-size:.65rem;
+  line-height:1.45;
+}
+.bookstore-epub-checkout__field input:focus-visible,
+.bookstore-epub-checkout__preferences input:focus-visible,
+.bookstore-epub-checkout__newsletter-links a:focus-visible,
+.bookstore-epub-checkout__newsletter-privacy a:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:2px;
+}
 .bookstore-epub-checkout .bookstore-direct-offer__action,
 .bookstore-physical-checkout .bookstore-direct-offer__action{
   cursor:pointer;
@@ -4689,6 +4745,41 @@ body.cartoon-lightbox-open{
   font-size:.62rem;
   font-weight:800;
   letter-spacing:.12em;
+}
+.newsletter-signup--home-ribbon .newsletter-signup__details{
+  grid-column:1 / -1;
+  grid-template-columns:auto 1fr;
+  gap:.24rem .9rem;
+  max-width:none;
+  margin-top:.12rem;
+  padding-top:.58rem;
+  border-top-color:rgba(42,34,25,.2);
+}
+.newsletter-signup--home-ribbon .newsletter-signup__price{
+  color:#201a15;
+}
+.newsletter-signup--home-ribbon .newsletter-signup__privacy{
+  grid-column:1 / -1;
+}
+.newsletter-signup--home-ribbon .newsletter-signup__links,
+.newsletter-signup--home-ribbon .newsletter-signup__privacy{
+  color:#5a4938;
+}
+.newsletter-signup--home-ribbon .newsletter-signup__links a,
+.newsletter-signup--home-ribbon .newsletter-signup__privacy a{
+  color:#284f63;
+  text-decoration-color:rgba(40,79,99,.55);
+}
+.newsletter-signup--home-ribbon .newsletter-signup__links a:hover,
+.newsletter-signup--home-ribbon .newsletter-signup__privacy a:hover{
+  color:#201a15;
+  text-decoration-color:currentColor;
+}
+.newsletter-signup--home-ribbon .newsletter-signup__links a:focus-visible,
+.newsletter-signup--home-ribbon .newsletter-signup__privacy a:focus-visible,
+.newsletter-signup--home-ribbon .newsletter-signup__input:focus-visible,
+.newsletter-signup--home-ribbon .newsletter-signup__button:focus-visible{
+  outline-color:#284f63;
 }
 
 .home-browse__grid{
@@ -6709,6 +6800,61 @@ h2{ margin-top:34px; }
   line-height:1.6;
   text-transform:uppercase;
 }
+.newsletter-signup__details{
+  display:grid;
+  gap:.3rem;
+  max-width:38rem;
+  margin-top:.85rem;
+  padding-top:.72rem;
+  border-top:1px solid var(--oip-rule-faint);
+  font-family:var(--font-ui);
+  text-transform:none;
+}
+.newsletter-signup__price,
+.newsletter-signup__links,
+.newsletter-signup__privacy{
+  margin:0;
+  letter-spacing:0;
+  text-transform:none;
+}
+.newsletter-signup__price{
+  color:var(--text-secondary);
+  font-size:.78rem;
+  font-weight:700;
+  line-height:1.5;
+}
+.newsletter-signup__links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.2rem .42rem;
+  color:var(--text-faint);
+  font-size:.74rem;
+  line-height:1.5;
+}
+.newsletter-signup__links a,
+.newsletter-signup__privacy a{
+  color:var(--accent-hover);
+  font-weight:650;
+  text-decoration-color:rgba(153,173,191,.62);
+  text-underline-offset:.18em;
+}
+.newsletter-signup__links a:hover,
+.newsletter-signup__privacy a:hover{
+  color:var(--text-primary);
+  text-decoration-color:currentColor;
+}
+.newsletter-signup__privacy{
+  color:var(--text-muted);
+  font-size:.71rem;
+  line-height:1.55;
+}
+.newsletter-signup__input:focus-visible,
+.newsletter-signup__button:focus-visible,
+.newsletter-signup__links a:focus-visible,
+.newsletter-signup__privacy a:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:2px;
+}
 .imprint-header{
   margin:0 0 1rem;
   padding:14px 16px 13px;
@@ -7331,6 +7477,19 @@ h2{ margin-top:34px; }
   }
   .newsletter-signup--home-ribbon .newsletter-signup__note{
     grid-column:1;
+  }
+  .newsletter-signup--home-ribbon .newsletter-signup__details{
+    grid-column:1;
+    grid-template-columns:1fr;
+    width:100%;
+    margin-top:0;
+  }
+  .newsletter-signup--home-ribbon .newsletter-signup__privacy{
+    grid-column:1;
+  }
+  .newsletter-signup__links,
+  .bookstore-epub-checkout__newsletter-links{
+    gap:.18rem .36rem;
   }
   .journey-links__items{
     gap:8px;

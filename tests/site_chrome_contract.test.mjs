@@ -29,6 +29,10 @@ function cssRule(source, selector) {
 
 const masthead = fs.readFileSync(path.resolve("layouts/partials/masthead.html"), "utf8");
 const homepage = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
+const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
+const newsletterSignup = fs.readFileSync(path.resolve("layouts/partials/newsletter_signup.html"), "utf8");
+const hugoConfig = fs.readFileSync(path.resolve("hugo.toml"), "utf8");
+const privacyPolicy = fs.readFileSync(path.resolve("content/privacy/index.md"), "utf8");
 const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
 const notFound = fs.readFileSync(path.resolve("layouts/404.html"), "utf8");
 const themeBootstrap = fs.readFileSync(path.resolve("layouts/partials/theme_bootstrap.html"), "utf8");
@@ -135,7 +139,9 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(directOffers, /type="email"[\s\S]*name="email"[\s\S]*required/);
   assert.match(directOffers, /type="checkbox" name="weekly_email"/);
   assert.match(directOffers, /type="checkbox" name="publication_notifications"/);
-  assert.match(directOffers, /Optional\. Not required to buy\. Unsubscribe anytime\./);
+  assert.match(directOffers, /\$newsletterCheckoutLabel/);
+  assert.match(directOffers, /bookstore-epub-checkout__newsletter-details/);
+  assert.match(directOffers, /Optional\. Not required to buy\./);
   assert.doesNotMatch(directOffers, /fallback_(?:url|label)|amazon/i);
 
   assert.match(kindleButton, /\$promoteKindle := and \(gt \(len \$epubOffers\) 0\) \(eq \(len \$liveEpubOffers\) 0\)/);
@@ -177,6 +183,54 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
     analyticsScript,
     /track\("external_link_click", mergeProps\(datasetProps\(anchor\), currentPageProps\(\)\)\)/
   );
+});
+
+test("Bob's Almanack proposition is canonical across signup and checkout surfaces", () => {
+  for (const expected of [
+    'cadence = "Every Saturday"',
+    'title = "Bob\'s Almanack"',
+    'contents = "Each Saturday\'s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting."',
+    'price_promise = "Bob\'s Almanack will remain free. No ads, ever."',
+    'button_label = "Subscribe free"',
+    'checkout_label = "Send me Bob\'s Almanack every Saturday. It will remain free. No ads, ever."',
+    'sample_url = "/almanack/2026-07-25/"',
+    'sample_label = "Read a sample issue"',
+    'privacy_promise = "Your email goes to Buttondown to deliver and manage Bob\'s Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
+    'privacy_url = "/privacy/"',
+    'privacy_label = "Privacy details"'
+  ]) {
+    assert.match(hugoConfig, new RegExp(escapeRegex(expected)));
+  }
+
+  for (const expected of [
+    'newsletter-signup__details',
+    'newsletter-signup__price',
+    'newsletter-signup__links',
+    'newsletter-signup__privacy',
+    '$newsletter.cadence',
+    '$newsletter.contents',
+    '$newsletter.price_promise',
+    '$newsletter.sample_url',
+    '$newsletter.privacy_promise',
+    'data-analytics-event="internal_promo_click"',
+    'data-analytics-source-slot="{{ $sampleSourceSlot }}"'
+  ]) {
+    assert.match(newsletterSignup, new RegExp(escapeRegex(expected)));
+  }
+  assert.match(newsletterSignup, /aria-describedby="\{\{ \$dekID \}\} \{\{ \$priceID \}\} \{\{ \$privacyID \}\}"/);
+  assert.match(homepage, /newsletter-signup--home-ribbon/);
+  assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
+  assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
+  assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
+
+  assert.match(privacyPolicy, /effective_date: "August 31, 2026"/);
+  assert.match(privacyPolicy, /standalone Bob's Almanack signup form/);
+  assert.match(privacyPolicy, /IP address, browser or device information, and referring page/);
+  assert.match(privacyPolicy, /email-client, browser, device, IP-address, or referrer metadata/);
+  assert.match(privacyPolicy, /Unsubscribing stops the selected emails but is not the same as deleting subscription records\./);
+
+  const propositionSources = [hugoConfig, homepage, articleSingle, newsletterSignup, directOffers].join("\n");
+  assert.doesNotMatch(propositionSources, /Limited time|launch window|No spam|Easy to leave/i);
 });
 
 test("filtered dialogue archive stays wired through the live discovery surfaces", () => {
@@ -336,8 +390,7 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('class="home-browse'));
   assert.match(homepage, /newsletter-signup--home-ribbon/);
   assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
-  assert.match(homepage, /"title" "Free subscription to Bob's Almanack"/);
-  assert.match(homepage, /"eyebrow" "Limited time"/);
+  assert.doesNotMatch(homepage, /"(?:eyebrow|title|dek|buttonLabel|note)"/);
   assert.match(css, /\.home-bookstore__grid\{[^}]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);[^}]*\}/);
   assert.match(css, /@media \(max-width:900px\)\{\s*\.home-bookstore__grid\{[^}]*grid-template-columns:1fr;[^}]*\}\s*\.home-bookstore__card\{[^}]*grid-template-columns:8rem minmax\(0, 1fr\);[^}]*\}\s*\}/);
   assert.match(css, /@media \(max-width:420px\)\{\s*\.home-bookstore__card\{[^}]*grid-template-columns:5\.75rem minmax\(0, 1fr\);[^}]*\}\s*\.home-bookstore__cta\{[^}]*width:100%;[^}]*\}\s*\}/);

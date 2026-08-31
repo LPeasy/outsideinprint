@@ -25,6 +25,9 @@ foreach ($requiredSnippet in @(
   'partial "collections/reading-path.html" .',
   'class="article-publication-record"',
   'Cite this',
+  'partial "newsletter_signup.html"',
+  '"class" "newsletter-signup--article-exit"',
+  '"sourceSlot" "article_exit_newsletter"',
   '"class" "journey-links--article-exit"',
   '"eyebrow" "Article paths"',
   '(dict "href" ("archive/" | absURL) "label" "Archive")',
@@ -53,12 +56,12 @@ if ($articleSingle -match [regex]::Escape('partial "authors/card.html"')) {
   throw 'Did not expect layouts/_default/single.html to render the retired aftermatter author card.'
 }
 
-if ($articleSingle -match [regex]::Escape('partial "newsletter_signup.html"')) {
-  throw 'Did not expect layouts/_default/single.html to render the full newsletter signup in article aftermatter.'
-}
-
-if ($articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.StringComparison]::Ordinal) -ge $articleSingle.IndexOf('"class" "journey-links--article-exit"', [System.StringComparison]::Ordinal)) {
-  throw 'Expected layouts/_default/single.html to place the reading-path partial before the article-exit links.'
+$readingPathIndex = $articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.StringComparison]::Ordinal)
+$newsletterIndex = $articleSingle.IndexOf('partial "newsletter_signup.html"', [System.StringComparison]::Ordinal)
+$journeyIndex = $articleSingle.IndexOf('"class" "journey-links--article-exit"', [System.StringComparison]::Ordinal)
+if ($readingPathIndex -lt 0 -or $newsletterIndex -lt 0 -or $journeyIndex -lt 0 -or
+    $readingPathIndex -ge $newsletterIndex -or $newsletterIndex -ge $journeyIndex) {
+  throw 'Expected layouts/_default/single.html to place the reading path, full newsletter signup, and article-exit links in that order.'
 }
 
 $collectionSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw

@@ -25,7 +25,9 @@ test("article single includes the reading-path partial and shared progress scrip
   assert.match(articleSingle, /\$showCollectionContinuation := false/);
   assert.match(articleSingle, /partial "collections\/reading-path\.html" \./);
   assert.doesNotMatch(articleSingle, /partial "read_next\.html" \./);
-  assert.doesNotMatch(articleSingle, /partial "newsletter_signup\.html"/);
+  assert.match(articleSingle, /partial "newsletter_signup\.html"/);
+  assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
+  assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
   assert.doesNotMatch(articleSingle, /partial "authors\/card\.html"/);
   assert.match(articleSingle, /class="article-publication-record"/);
   assert.match(articleSingle, /"class" "journey-links--article-exit"/);
@@ -38,7 +40,8 @@ test("article single includes the reading-path partial and shared progress scrip
   assert.match(articleSingle, /\{\{ if \$showCollectionContinuation \}\}/);
   assert.doesNotMatch(articleSingle, /partial "collections\/page-membership-block\.html" \./);
   assert.ok(articleSingle.indexOf('class="article-publication-record"') < articleSingle.indexOf('partial "collections/reading-path.html" .'));
-  assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('"class" "journey-links--article-exit"'));
+  assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('partial "newsletter_signup.html"'));
+  assert.ok(articleSingle.indexOf('partial "newsletter_signup.html"') < articleSingle.indexOf('"class" "journey-links--article-exit"'));
   assert.match(articleSingle, /partial "collections\/reading-progress-script\.html" \./);
 });
 

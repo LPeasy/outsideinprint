@@ -176,8 +176,19 @@ foreach ($requiredConfig in @(
   '[params.commerce]',
   'api_base = "https://downloads.outsideinprint.org"',
   'support_checkout_enabled = true',
-  'custom_monthly_enabled = false'
-  'publication_tag = "new-publications"'
+  'custom_monthly_enabled = false',
+  'publication_tag = "new-publications"',
+  'cadence = "Every Saturday"',
+  'title = "Bob''s Almanack"',
+  'contents = "Each Saturday''s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting."',
+  'price_promise = "Bob''s Almanack will remain free. No ads, ever."',
+  'button_label = "Subscribe free"',
+  'checkout_label = "Send me Bob''s Almanack every Saturday. It will remain free. No ads, ever."',
+  'sample_url = "/almanack/2026-07-25/"',
+  'sample_label = "Read a sample issue"',
+  'privacy_promise = "Your email goes to Buttondown to deliver and manage Bob''s Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
+  'privacy_url = "/privacy/"',
+  'privacy_label = "Privacy details"'
 )) {
   Assert-Contains -Text $hugoConfig -Expected $requiredConfig -Context 'Hugo commerce configuration'
 }
@@ -198,7 +209,18 @@ foreach ($requiredTemplateText in @(
   'name="email"',
   'name="weekly_email"',
   'name="publication_notifications"',
-  'Optional. Not required to buy. Unsubscribe anytime.',
+  '$newsletterCheckoutLabel',
+  '$newsletterContents',
+  '$newsletterSampleURL',
+  '$newsletterSampleLabel',
+  '$newsletterPrivacyPromise',
+  '$newsletterPrivacyURL',
+  '$newsletterPrivacyLabel',
+  'class="bookstore-epub-checkout__newsletter-details"',
+  'Optional. Not required to buy.',
+  'aria-describedby="{{ $preferencesID }}"',
+  'data-analytics-event="internal_promo_click"',
+  'data-analytics-source-slot="{{ $newsletterSampleSourceSlot }}"',
   'data-buttondown-endpoint="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"',
   'https://square.link/',
   'https://checkout.square.site/',
@@ -595,6 +617,29 @@ if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?weekly_email(?:"|'''')?', 'Ig
 if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?publication_notifications(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
   throw 'Every live EPUB checkout must expose the optional new-publication choice.'
 }
+$marketingCheckboxes = @([regex]::Matches($shopOutput, '(?is)<input\b[^>]*\bname=(?:"|'''')?(?:weekly_email|publication_notifications)(?:"|'''')?[^>]*>'))
+if ($marketingCheckboxes.Count -ne 12 -or @($marketingCheckboxes | Where-Object { $_.Value -match '\bchecked(?:\s*=|\s|>)' }).Count -ne 0) {
+  throw 'All weekly-email and new-publication preferences must render unchecked and remain optional.'
+}
+foreach ($requiredNewsletterText in @(
+  'Send me Bob''s Almanack every Saturday. It will remain free. No ads, ever.',
+  'Each Saturday''s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting.',
+  'Read a sample issue',
+  'Privacy details',
+  'Your email goes to Buttondown to deliver and manage Bob''s Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime.',
+  'Optional. Not required to buy.'
+)) {
+  Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($shopOutput)) -Expected $requiredNewsletterText -Context 'Built bookstore Bob''s Almanack opt-in'
+}
+if ($shopOutput -notmatch '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*data-analytics-event=(?:"|'''')?internal_promo_click(?:"|'''')?[^>]*data-analytics-source-slot=(?:"|'''')?(?:bookstore_index_direct|bookstore_detail_direct)_sample_issue(?:"|'''')?') {
+  throw 'Built bookstore sample links must use the existing internal-promotion event and derived direct-offer source slot.'
+}
+if ($shopOutput -notmatch '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/privacy/(?:"|'''')?[^>]*>\s*Privacy details\s*</a>') {
+  throw 'Built bookstore newsletter opt-ins must link the privacy details.'
+}
+if ($shopOutput -match '(?i)Limited time|launch window|No spam|Easy to leave') {
+  throw 'Built bookstore retained retired temporary or vague newsletter trust copy.'
+}
 if ($shopOutput -match '(?i)OIP-(?:AN|PS|WC)-PB|data-physical|bookstore-physical|/api/books/physical|USPS Media Mail|Shipping &amp; returns') {
   throw 'Built shop output exposed physical-commerce UI during the EPUB-first launch.'
 }
@@ -627,6 +672,20 @@ foreach ($surface in $shopSurfaceExpectations) {
   if ($kindleCount -ne $surface.KindleCount) {
     throw "Built storefront $($surface.Path) expected $($surface.KindleCount) compact Kindle button(s); found $kindleCount."
   }
+}
+
+$privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
+foreach ($requiredPrivacyText in @(
+  'Effective August 31, 2026',
+  'standalone Bob''s Almanack signup form',
+  'IP address, browser or device information, and referring page',
+  'selected preference tags',
+  'message-open or link-click information',
+  'email-client, browser, device, IP-address, or referrer metadata',
+  'Outside In Print does not sell or rent personal information.',
+  'Unsubscribing stops the selected emails but is not the same as deleting subscription records.'
+)) {
+  Assert-Contains -Text $privacyOutput -Expected $requiredPrivacyText -Context 'Built privacy policy'
 }
 
 $orderedOffers = @(

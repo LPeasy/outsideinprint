@@ -1,22 +1,34 @@
 {{ $page := .page }}
 {{ $newsletter := $page.Site.Params.newsletter }}
 {{ $provider := lower (default "" $newsletter.provider) }}
-{{ $eyebrow := default "Newsletter" .eyebrow }}
-{{ $title := default "Get the weekly letter" .title }}
-{{ $dek := default "New writing, notes, and selected work from Outside In Print. One email a week. Free." .dek }}
-{{ $buttonLabel := default "Subscribe" .buttonLabel }}
-{{ $note := default "New work and occasional notes. No spam." .note }}
-{{ $inputID := printf "bd-email-%s" (replace (replace ($page.RelPermalink | default "newsletter") "/" "-") "--" "-") }}
-{{ $noteID := printf "%s-note" $inputID }}
 {{ $sourceSlot := default "newsletter_module" .sourceSlot }}
+{{ $cadence := $newsletter.cadence }}
+{{ $title := $newsletter.title }}
+{{ $contents := $newsletter.contents }}
+{{ $pricePromise := $newsletter.price_promise }}
+{{ $buttonLabel := $newsletter.button_label }}
+{{ $sampleURL := $newsletter.sample_url }}
+{{ $sampleLabel := $newsletter.sample_label }}
+{{ $privacyPromise := $newsletter.privacy_promise }}
+{{ $privacyURL := $newsletter.privacy_url }}
+{{ $privacyLabel := $newsletter.privacy_label }}
+{{ $class := .class }}
+{{ $sampleSourceSlot := printf "%s_sample_issue" $sourceSlot }}
+{{ $pageKey := replace (replace ($page.RelPermalink | default "newsletter") "/" "-") "--" "-" }}
+{{ $sourceKey := replaceRE "[^a-zA-Z0-9_-]+" "-" $sourceSlot }}
+{{ $inputID := printf "bd-email-%s-%s" $pageKey $sourceKey }}
+{{ $titleID := printf "%s-title" $inputID }}
+{{ $dekID := printf "%s-contents" $inputID }}
+{{ $priceID := printf "%s-price" $inputID }}
+{{ $privacyID := printf "%s-privacy" $inputID }}
 
 {{ with $newsletter.buttondown_username }}
   {{ if eq $provider "buttondown" }}
-    <section class="newsletter-signup{{ with $.class }} {{ . }}{{ end }}" aria-labelledby="newsletter-signup-title">
+    <section class="newsletter-signup{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $titleID }}">
       <div class="newsletter-signup__inner">
-        <p class="newsletter-signup__eyebrow">{{ $eyebrow }}</p>
-        <h2 id="newsletter-signup-title" class="newsletter-signup__title">{{ $title }}</h2>
-        <p class="newsletter-signup__dek">{{ $dek }}</p>
+        <p class="newsletter-signup__eyebrow">{{ $cadence }}</p>
+        <h2 id="{{ $titleID }}" class="newsletter-signup__title">{{ $title }}</h2>
+        <p id="{{ $dekID }}" class="newsletter-signup__dek">{{ $contents }}</p>
 
         <form
           action="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"
@@ -36,7 +48,7 @@
             autocapitalize="off"
             inputmode="email"
             spellcheck="false"
-            aria-describedby="{{ $noteID }}"
+            aria-describedby="{{ $dekID }} {{ $priceID }} {{ $privacyID }}"
             required
           />
           <input type="hidden" name="embed" value="1" />
@@ -46,7 +58,23 @@
           <button type="submit" class="newsletter-signup__button">{{ $buttonLabel }}</button>
         </form>
 
-        <p id="{{ $noteID }}" class="newsletter-signup__note">{{ $note }}</p>
+        <div class="newsletter-signup__details">
+          <p id="{{ $priceID }}" class="newsletter-signup__price">{{ $pricePromise }}</p>
+          <p class="newsletter-signup__links">
+            <a
+              href="{{ $sampleURL | relURL }}"
+              data-analytics-event="internal_promo_click"
+              data-analytics-source-slot="{{ $sampleSourceSlot }}"
+              data-analytics-slug="bobs-almanack-sample"
+              data-analytics-title="{{ $sampleLabel }}"
+              data-analytics-section="Newsletter"
+              data-analytics-path="{{ $sampleURL }}"
+            >{{ $sampleLabel }}</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="{{ $privacyURL | relURL }}">{{ $privacyLabel }}</a>
+          </p>
+          <p id="{{ $privacyID }}" class="newsletter-signup__privacy">{{ $privacyPromise }}</p>
+        </div>
       </div>
     </section>
   {{ end }}
