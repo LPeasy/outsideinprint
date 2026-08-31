@@ -175,9 +175,11 @@ foreach ($chrome in @($masthead, $footer)) {
   Assert-Matches $chrome 'site\.GetPage\s+"/apps"' 'Site chrome must resolve the published Apps section.'
   Assert-Matches $chrome '\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)' 'Site chrome must gate Apps on the published section.'
   Assert-Omits $chrome '\$showApps\s*:=[^\r\n]*hugo\.IsServer' 'Apps navigation must not acquire a server-only draft alternative.'
-  Assert-Matches $chrome '>Apps\s*&amp;\s*Tools<' 'Apps navigation must retain its label.'
 }
+Assert-Matches $masthead '"label"\s+"Apps & Tools"' 'The masthead destination model must retain the Apps & Tools label.'
+Assert-Matches $footer '>Apps\s*&amp;\s*Tools<' 'Footer navigation must retain the Apps & Tools label.'
 Assert-Matches $masthead '\$isApps\s*:=\s*eq\s+\.Section\s+"apps"' 'The masthead must retain Apps aria-current routing.'
+Assert-Matches $masthead '"current"\s+\$isApps' 'The masthead destination model must bind Apps & Tools to its exact current state.'
 
 $appsMarkup = $appsList + "`n" + $appsSingle + "`n" + $sampleDownloads + "`n" + $companion
 foreach ($family in @(
