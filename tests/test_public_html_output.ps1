@@ -1039,7 +1039,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/collections/bobs-almanack/index.html' = @{
     Title = 'Bob''s Almanack'
-    Description = 'Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, editorial cartoons, compact notices, and archive pieces worth reprinting.'
+    Description = 'Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, editorial cartoons, compact notices, and one piece worth reprinting.'
     Canonical = 'https://outsideinprint.org/collections/bobs-almanack/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -2354,6 +2354,11 @@ $requiredUxChecks = @(
     Path = 'public/index.html'
     Pattern = '(?s)<h1[^>]*>\s*Outside In Print\s*</h1>.*?<section[^>]*class=(?:"[^"]*\bhome-front-page__stories\b[^"]*"|''[^'']*\bhome-front-page__stories\b[^'']*''|[^>]*\bhome-front-page__stories\b[^>]*)[^>]*aria-labelledby=(?:"home-front-page-stories-title"|home-front-page-stories-title)[^>]*>\s*<h2[^>]*id=(?:"home-front-page-stories-title"|home-front-page-stories-title)[^>]*class=(?:"[^"]*\bvisually-hidden\b[^"]*"|''[^'']*\bvisually-hidden\b[^'']*''|[^>]*\bvisually-hidden\b[^>]*)[^>]*>\s*Front page stories\s*</h2>.*?<h3[^>]*class=(?:"[^"]*\bhome-front-page__lead-title\b[^"]*"|''[^'']*\bhome-front-page__lead-title\b[^'']*''|[^>]*\bhome-front-page__lead-title\b[^>]*)'
     Message = 'expected the homepage story area to expose a visually hidden h2 before its story h3 headings'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<h1[^>]*>\s*Outside In Print\s*</h1>.*?<p[^>]*class=(?:"[^"]*\bhome-front-page__orientation\b[^"]*"|''[^'']*\bhome-front-page__orientation\b[^'']*''|[^>]*\bhome-front-page__orientation\b[^>]*)[^>]*>\s*Independent essays, selected writings, and original books by Robert V\. Ussley\s*</p>.*?home-front-page__stories'
+    Message = 'expected the homepage orientation line to appear before the story grid'
   },
   @{
     Path = 'public/index.html'

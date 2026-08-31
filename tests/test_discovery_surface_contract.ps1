@@ -139,6 +139,7 @@ foreach ($snippet in $homepageOrder) {
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
+  '<p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V. Ussley</p>',
   'id="home-front-page-title"',
   'data-home-front-page-region="lead"',
   'data-home-front-page-region="secondary"',
@@ -156,6 +157,7 @@ foreach ($requiredSnippet in @(
 
 $homepageOrder = @(
   'id="home-front-page-title"',
+  'class="home-front-page__orientation"',
   'class="home-front-page__stories"'
 )
 

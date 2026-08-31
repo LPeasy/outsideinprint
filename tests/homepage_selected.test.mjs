@@ -190,7 +190,9 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.doesNotMatch(frontPageSource, /Front Page Essay/);
   assert.match(frontPageSource, /range \$secondary/);
   assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
+  assert.match(frontPageSource, /<p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V\. Ussley<\/p>/);
   assert.match(frontPageSource, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
+  assert.ok(frontPageSource.indexOf('class="home-front-page__orientation"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.ok(frontPageSource.indexOf('>Front page stories</h2>') < frontPageSource.indexOf('<h3 class="home-front-page__lead-title">'));
   assert.doesNotMatch(frontPageSource, />Front Page</);
   assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
@@ -358,6 +360,7 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
   assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-front-page__stories"'));
+  assert.ok(frontPageSource.indexOf('class="home-front-page__orientation"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$hero/);
   assert.match(partialSource, /"secondary" \$secondary/);
   assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_bookstore_spotlight.html"'));

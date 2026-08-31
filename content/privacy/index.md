@@ -7,8 +7,6 @@ draft: false
 show_citation: false
 ---
 
-This policy explains how Outside In Print handles information connected to this website, email subscriptions, Steam storefront access, EPUB delivery, and reader support.
-
 ## Information involved
 
 When you check out through Square, Square collects the payment and contact information needed to process the transaction. Outside In Print does not receive your full card number or card-security code.

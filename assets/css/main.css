@@ -1665,6 +1665,15 @@ html[data-theme="light"] .paper-route-toggle{
 .home-front-page{
   margin-top:0.15rem;
 }
+.home-front-page__orientation{
+  max-width:52rem;
+  margin:0 auto 1.15rem;
+  color:var(--text-secondary);
+  font-size:clamp(.94rem, .9rem + .18vw, 1.04rem);
+  line-height:1.55;
+  text-align:center;
+  text-wrap:balance;
+}
 .home-front-page__stories{
   display:grid;
   grid-template-columns:minmax(0, 1.65fr) minmax(0, 1fr);
@@ -3910,6 +3919,13 @@ html[data-theme="light"] .paper-route-toggle{
   list-style:none;
 }
 .essays-front__year-link{
+  display:inline-flex;
+  box-sizing:border-box;
+  min-width:44px;
+  min-height:44px;
+  align-items:center;
+  justify-content:center;
+  padding:.5rem .65rem;
   color:rgba(219,206,183,.74);
   font-family:var(--font-ui);
   font-size:.74rem;
@@ -4040,7 +4056,7 @@ html[data-theme="light"] .paper-route-toggle{
     padding-top:.6rem;
   }
   .essays-front__year-jumps{
-    gap:.35rem .8rem;
+    gap:.25rem .45rem;
   }
   .essays-front__month{
     padding-top:1.05rem;

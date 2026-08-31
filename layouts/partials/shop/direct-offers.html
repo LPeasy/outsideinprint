@@ -4,6 +4,7 @@
 {{- $sourceSlot := .sourceSlot | default "bookstore_direct_offer" -}}
 {{- $compact := .compact | default false -}}
 {{- $collapseCheckout := .collapseCheckout | default false -}}
+{{- $headingLevel := .headingLevel | default 2 -}}
 {{- $productSlug := index $product "suggested_slug" | default (index $product "key" | default "book") -}}
 {{- $productTitle := index $product "title" | default "Book" -}}
 {{- $offerHeading := index $product "direct_offers_heading" | default "Outside In Print EPUB" -}}
@@ -33,7 +34,7 @@
   {{- $helperID := printf "%s-helper-%s" $sourceSlot $productSlug -}}
   <section class="bookstore-direct-offers{{ if $compact }} bookstore-direct-offers--compact{{ end }}{{ if $allUnavailable }} bookstore-direct-offers--unavailable{{ end }}" aria-labelledby="{{ $headingID }}">
     <header class="bookstore-direct-offers__header">
-      {{ if $compact }}
+      {{ if eq $headingLevel 3 }}
         <h3 id="{{ $headingID }}">{{ $offerHeading }}</h3>
       {{ else }}
         <h2 id="{{ $headingID }}">{{ $offerHeading }}</h2>
@@ -184,8 +185,6 @@
               <summary>Release status</summary>
               <p class="bookstore-direct-offer__gate">{{ index $offer "gate_note" }}</p>
             </details>
-          {{- else -}}
-            <p class="bookstore-direct-offer__gate">{{ index $offer "gate_note" }}</p>
           {{- end -}}
         </article>
       {{- end -}}

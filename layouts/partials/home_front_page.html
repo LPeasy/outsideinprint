@@ -30,6 +30,7 @@
 {{ end }}
 <section class="home-front-page" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
+  <p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V. Ussley</p>
   {{ with $lead }}
     {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
     {{ $leadCopy := partial "home_front_page_copy.html" . }}

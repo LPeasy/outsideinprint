@@ -178,6 +178,9 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(directOffers, /\$newsletterCheckoutLabel/);
   assert.match(directOffers, /bookstore-epub-checkout__newsletter-details/);
   assert.match(directOffers, /\$collapseCheckout := \.collapseCheckout \| default false/);
+  assert.match(directOffers, /\$headingLevel := \.headingLevel \| default 2/);
+  assert.match(directOffers, /if eq \$headingLevel 3/);
+  assert.equal((directOffers.match(/bookstore-direct-offer__gate/g) || []).length, 1);
   assert.match(directOffers, /<details class="bookstore-epub-checkout-disclosure" data-bookstore-checkout-disclosure>/);
   assert.match(directOffers, /<summary aria-label="\{\{ \$checkoutSummaryLabel \}\}: \{\{ \$productTitle \}\}">/);
   assert.match(directOffers, /Optional\. Not required to buy\./);
@@ -197,10 +200,12 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.ok(shopSingle.indexOf('partial "shop/direct-offers.html"') < shopSingle.indexOf('partial "shop/kindle-button.html"'));
   assert.match(shopList, /bookstore_index_direct/);
   assert.match(shopList, /"collapseCheckout" true/);
+  assert.match(shopList, /"headingLevel" 3/);
   assert.match(shopList, /bookstore_index_kindle/);
   assert.match(shopSingle, /bookstore_detail_direct/);
   assert.match(shopSingle, /bookstore_detail_kindle/);
   assert.doesNotMatch(shopSingle, /collapseCheckout/);
+  assert.doesNotMatch(shopSingle, /headingLevel/);
   assert.doesNotMatch(shopList, /bookstore-secondary-channel|checkout-actions/);
   assert.doesNotMatch(shopSingle, /bookstore-panel|Other formats and channels|checkout-actions/);
 
@@ -208,6 +213,7 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(bookstoreData, /checkout_note: "Secure checkout through Square\. EPUB delivered by email\."/);
   assert.match(bookstoreData, /kindle_label: "Kindle on Amazon · \$4\.99"/);
   assert.doesNotMatch(bookstoreData, /^\s+(?:purchase_url|fallback_url|fallback_label):/m);
+  assert.doesNotMatch(privacyPolicy, /This policy explains how Outside In Print handles information connected to this website/);
 
   assert.match(epubCheckoutScript, /"Idempotency-Key": idempotencyKey/);
   assert.match(epubCheckoutScript, /JSON\.stringify\(\{ sku: sku, country_code: "US", email: email \}\)/);
@@ -375,6 +381,7 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.ok(homeFrontPage.indexOf('data-home-cartoon-recent') < homeFrontPage.indexOf('home-almanack-divider'));
   assert.ok(homeFrontPage.indexOf('home-almanack--lead') < homeFrontPage.indexOf('data-home-front-page-region="secondary"'));
   assert.match(homeFrontPage, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
+  assert.match(homeFrontPage, /<p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V\. Ussley<\/p>/);
   assert.match(homeFrontPage, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
   assert.ok(homeFrontPage.indexOf('>Front page stories</h2>') < homeFrontPage.indexOf('<h3 class="home-front-page__lead-title">'));
   assert.match(homeFrontPage, /<p id="home-cartoon-lightbox-title" class="cartoon-lightbox__title" data-home-cartoon-lightbox-title><\/p>/);
@@ -528,6 +535,9 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.newsletter-signup--home-ribbon \.newsletter-signup__inner\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) minmax\(18rem, \.86fr\);[\s\S]*background:/);
   assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-front-page__stories\{\s*display:grid;\s*grid-template-columns:minmax\(0, 1\.65fr\) minmax\(0, 1fr\);/);
+  assert.match(cssRule(css, ".home-front-page__orientation"), /max-width:52rem;/);
+  assert.match(cssRule(css, ".essays-front__year-link"), /min-width:44px;/);
+  assert.match(cssRule(css, ".essays-front__year-link"), /min-height:44px;/);
   assert.match(css, /\.home-front-page__lead\{[\s\S]*border-right:1px solid var\(--oip-rule-standard\);/);
   assert.match(css, /\.home-front-page__secondary-item\{[\s\S]*border-top:1px solid var\(--oip-rule-faint\);/);
   assert.match(css, /\.item\{[\s\S]*border-bottom:1px solid var\(--oip-rule-list\);/);

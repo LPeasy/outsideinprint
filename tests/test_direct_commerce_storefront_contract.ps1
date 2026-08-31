@@ -203,6 +203,8 @@ foreach ($requiredTemplateText in @(
   'must not expose checkout_url or checkout_endpoint while disabled',
   'index $product "direct_offers_heading" | default "Outside In Print EPUB"',
   'index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. EPUB delivered by email.")',
+  '$headingLevel := .headingLevel | default 2',
+  'if eq $headingLevel 3',
   'index $product "checkout_label" | default "Buy EPUB"',
   'index $product "checkout_unavailable_label" | default "EPUB coming soon"',
   'epub_checkout_api',
@@ -276,6 +278,7 @@ foreach ($requiredDigitalFirstText in @(
   'partial "shop/kindle-button.html"',
   '"sourceSlot" "bookstore_index_direct"',
   '"collapseCheckout" true',
+  '"headingLevel" 3',
   '"sourceSlot" "bookstore_index_kindle"',
   'resources.Get "js/epub-checkout.js"'
 )) {
@@ -305,6 +308,9 @@ if ([regex]::Matches($shopSingleTemplate, 'partial\s+"shop/kindle-button\.html"'
 Assert-Ordered -Text $shopSingleTemplate -First 'partial "shop/direct-offers.html"' -Second 'partial "shop/kindle-button.html"' -Context 'Bookstore detail purchase order'
 if ($shopSingleTemplate -match 'collapseCheckout') {
   throw 'Book detail pages must keep the direct EPUB checkout form expanded.'
+}
+if ($shopSingleTemplate -match 'headingLevel') {
+  throw 'Book detail pages must retain the direct-offer partial default H2 hierarchy.'
 }
 if ($shopListTemplate -match '(?i)bookstore-secondary-channel|checkout-actions' -or
     $shopSingleTemplate -match '(?i)bookstore-panel|Other formats and channels|checkout-actions') {
@@ -716,6 +722,24 @@ foreach ($surface in $shopSurfaceExpectations) {
   }
 }
 
+$shopIndexHtml = [Net.WebUtility]::HtmlDecode([string]$output['shop/index.html'])
+if ([regex]::Matches($shopIndexHtml, '<h3\b[^>]*>\s*Outside In Print EPUB\s*</h3>', 'IgnoreCase').Count -ne 3) {
+  throw 'Built bookstore index must nest each direct EPUB offer under its book H2 with an H3.'
+}
+foreach ($detailPath in @(
+  'shop/the-american-nightmare-keep-dreaming-kid/index.html',
+  'shop/the-parable-of-the-sheep/index.html',
+  'shop/the-water-cycle/index.html'
+)) {
+  $detailHtml = [Net.WebUtility]::HtmlDecode([string]$output[$detailPath])
+  if ([regex]::Matches($detailHtml, '<h2\b[^>]*>\s*Outside In Print EPUB\s*</h2>', 'IgnoreCase').Count -ne 1) {
+    throw "Built bookstore detail $detailPath must retain one direct EPUB H2."
+  }
+}
+if ([regex]::Matches($shopOutput, 'Secure checkout through Square\. EPUB delivered by email after payment is confirmed\.', 'IgnoreCase').Count -ne 0) {
+  throw 'Built bookstore must not repeat the live Square and delivery helper beneath each direct offer.'
+}
+
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
   'Effective August 31, 2026',
@@ -728,6 +752,9 @@ foreach ($requiredPrivacyText in @(
   'Unsubscribing stops the selected emails but is not the same as deleting subscription records.'
 )) {
   Assert-Contains -Text $privacyOutput -Expected $requiredPrivacyText -Context 'Built privacy policy'
+}
+if ($privacyOutput -match [regex]::Escape('This policy explains how Outside In Print handles information connected to this website')) {
+  throw 'Built privacy policy must not repeat its scope in a second opening paragraph.'
 }
 
 $orderedOffers = @(
