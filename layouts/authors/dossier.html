@@ -1,6 +1,11 @@
 {{ define "main" }}
   {{ $portraitPath := .Params.portrait | default "Bobviously_Portrait_v1.png" }}
   {{ $portrait := .Resources.GetMatch $portraitPath }}
+  {{ $bookstore := site.GetPage "/shop" }}
+  {{ $publishedBooks := slice }}
+  {{ with $bookstore }}
+    {{ $publishedBooks = sort .RegularPages "Weight" "asc" }}
+  {{ end }}
 
   <article class="author-route">
     <div class="section-front section-front--author">
@@ -29,6 +34,17 @@
             {{ with .Params.header_bio }}
               <p class="author-route__bio">{{ . }}</p>
             {{ end }}
+            {{ with .Params.role_line }}
+              <p class="author-route__role">{{ . }}</p>
+            {{ end }}
+            {{ if gt (len $publishedBooks) 0 }}
+              {{ $bookCountLabel := cond (eq (len $publishedBooks) 3) "three" (printf "%d" (len $publishedBooks)) }}
+              <p class="author-route__books">
+                Robert V. Ussley is the author of {{ $bookCountLabel }} books published by Outside In Print: {{ range $index, $book := $publishedBooks -}}
+                  {{- if gt $index 0 }}{{ if eq $index (sub (len $publishedBooks) 1) }}, and {{ else }}, {{ end }}{{ end -}}
+                  <a href="{{ $book.RelPermalink }}"><cite>{{ $book.Title }}</cite></a>{{ end }}.
+              </p>
+            {{ end }}
           </div>
         </section>
       </div>
@@ -47,6 +63,7 @@
           (dict "href" ("archive/" | absURL) "label" "Browse archive")
           (dict "href" ("collections/" | absURL) "label" "Browse collections")
           (dict "href" ("library/" | absURL) "label" "Search the library")
+          (dict "href" ("shop/" | absURL) "label" "Visit the Bookstore")
           (dict "href" ("about/" | absURL) "label" "About the imprint")
         )
       ) }}

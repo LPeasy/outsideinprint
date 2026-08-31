@@ -3,6 +3,7 @@
 {{- $offers := where $allOffers "format" "EPUB" -}}
 {{- $sourceSlot := .sourceSlot | default "bookstore_direct_offer" -}}
 {{- $compact := .compact | default false -}}
+{{- $collapseCheckout := .collapseCheckout | default false -}}
 {{- $productSlug := index $product "suggested_slug" | default (index $product "key" | default "book") -}}
 {{- $productTitle := index $product "title" | default "Book" -}}
 {{- $offerHeading := index $product "direct_offers_heading" | default "Outside In Print EPUB" -}}
@@ -77,6 +78,7 @@
         {{- $emailID := printf "%s-email-%s" $sourceSlot $productSlug -}}
         {{- $emailNoteID := printf "%s-email-note-%s" $sourceSlot $productSlug -}}
         {{- $preferencesID := printf "%s-email-preferences-%s" $sourceSlot $productSlug -}}
+        {{- $checkoutSummaryLabel := printf "Buy direct EPUB — %s" (index $offer "price_display") -}}
         <article class="bookstore-direct-offer" data-direct-offer data-direct-offer-sku="{{ $sku }}" data-direct-offer-status="{{ $status }}">
           <p class="bookstore-direct-offer__price">
             {{- if eq $status "disabled" }}<span>Planned price</span>{{ end -}}
@@ -85,6 +87,13 @@
 
           {{- if eq $status "live" -}}
             {{- if $isEpubApi -}}
+              {{- if $collapseCheckout }}
+              <details class="bookstore-epub-checkout-disclosure" data-bookstore-checkout-disclosure>
+                <summary aria-label="{{ $checkoutSummaryLabel }}: {{ $productTitle }}">
+                  <span>{{ $checkoutSummaryLabel }}</span>
+                </summary>
+                <div class="bookstore-epub-checkout-disclosure__body">
+              {{- end }}
               <form
                 class="bookstore-epub-checkout"
                 action="{{ $checkoutEndpoint }}"
@@ -147,6 +156,10 @@
                 <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
                 <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>
               </form>
+              {{- if $collapseCheckout }}
+                </div>
+              </details>
+              {{- end }}
             {{- else -}}
               <a
                 class="shop-cta bookstore-direct-offer__action"

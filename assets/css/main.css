@@ -3009,6 +3009,56 @@ html[data-theme="light"] .paper-route-toggle{
   background:rgba(236,231,223,.025);
   color:var(--text-muted);
 }
+.bookstore-epub-checkout-disclosure{
+  margin-top:.78rem;
+}
+.bookstore-epub-checkout-disclosure > summary{
+  box-sizing:border-box;
+  display:flex;
+  width:100%;
+  min-height:3.2rem;
+  padding:.72rem 1rem;
+  justify-content:space-between;
+  gap:.75rem;
+  align-items:center;
+  border:1px solid var(--accent-hover);
+  border-radius:var(--radius-ui);
+  background:var(--accent);
+  color:var(--bg-page);
+  cursor:pointer;
+  font-family:var(--font-ui);
+  font-size:.84rem;
+  font-weight:750;
+  letter-spacing:.045em;
+  line-height:1.35;
+  list-style:none;
+}
+.bookstore-epub-checkout-disclosure > summary::-webkit-details-marker{
+  display:none;
+}
+.bookstore-epub-checkout-disclosure > summary::after{
+  content:"+";
+  flex:0 0 auto;
+  font-size:1.15rem;
+  font-weight:500;
+  line-height:1;
+}
+.bookstore-epub-checkout-disclosure[open] > summary::after{
+  content:"−";
+}
+.bookstore-epub-checkout-disclosure > summary:hover,
+.bookstore-epub-checkout-disclosure > summary:focus-visible{
+  border-color:var(--text-primary);
+  background:var(--accent-hover);
+  color:var(--bg-page);
+}
+.bookstore-epub-checkout-disclosure > summary:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:2px;
+}
+.bookstore-epub-checkout-disclosure__body{
+  padding-top:.1rem;
+}
 .bookstore-epub-checkout,
 .bookstore-physical-checkout{
   margin:0;
@@ -4324,7 +4374,8 @@ body.cartoon-lightbox-open{
   font-family:var(--font-ui);
   line-height:1.35;
 }
-.cartoon-lightbox__caption h2{
+.cartoon-lightbox__caption h2,
+.cartoon-lightbox__title{
   margin:0;
   color:var(--text-primary);
   font-family:var(--font-display);
@@ -5314,6 +5365,31 @@ body.cartoon-lightbox-open{
   position:relative;
   padding-top:1.15rem;
   border-top:1px solid var(--oip-rule-engraved);
+}
+.author-route__role{
+  margin:1.15rem 0 0;
+  color:var(--text-primary);
+  font-family:var(--font-ui);
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:.035em;
+  line-height:1.55;
+}
+.author-route__books{
+  margin:.72rem 0 0;
+  color:var(--text-secondary);
+  font-size:.98rem;
+  line-height:1.72;
+}
+.author-route__books a{
+  color:var(--accent-hover);
+  text-decoration-color:rgba(153,173,191,.55);
+  text-underline-offset:.16em;
+}
+.author-route__books a:hover,
+.author-route__books a:focus-visible{
+  color:var(--text-primary);
+  text-decoration-color:currentColor;
 }
 .author-route__reading-map-header{
   max-width:34rem;
@@ -7615,7 +7691,8 @@ h2{ margin-top:34px; }
     align-items:flex-start;
     gap:.45rem;
   }
-  .cartoon-lightbox__caption h2{
+  .cartoon-lightbox__caption h2,
+  .cartoon-lightbox__title{
     font-size:1.18rem;
   }
   .item__title-row,

@@ -221,6 +221,10 @@ foreach ($requiredTemplateText in @(
   'aria-describedby="{{ $preferencesID }}"',
   'data-analytics-event="internal_promo_click"',
   'data-analytics-source-slot="{{ $newsletterSampleSourceSlot }}"',
+  '$collapseCheckout := .collapseCheckout | default false',
+  'class="bookstore-epub-checkout-disclosure"',
+  'data-bookstore-checkout-disclosure',
+  '<summary aria-label="{{ $checkoutSummaryLabel }}: {{ $productTitle }}">',
   'data-buttondown-endpoint="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"',
   'https://square.link/',
   'https://checkout.square.site/',
@@ -267,6 +271,7 @@ foreach ($requiredDigitalFirstText in @(
   'partial "shop/direct-offers.html"',
   'partial "shop/kindle-button.html"',
   '"sourceSlot" "bookstore_index_direct"',
+  '"collapseCheckout" true',
   '"sourceSlot" "bookstore_index_kindle"',
   'resources.Get "js/epub-checkout.js"'
 )) {
@@ -293,6 +298,9 @@ if ([regex]::Matches($shopSingleTemplate, 'partial\s+"shop/kindle-button\.html"'
   throw 'Bookstore detail must render the shared compact Kindle partial exactly once.'
 }
 Assert-Ordered -Text $shopSingleTemplate -First 'partial "shop/direct-offers.html"' -Second 'partial "shop/kindle-button.html"' -Context 'Bookstore detail purchase order'
+if ($shopSingleTemplate -match 'collapseCheckout') {
+  throw 'Book detail pages must keep the direct EPUB checkout form expanded.'
+}
 if ($shopListTemplate -match '(?i)bookstore-secondary-channel|checkout-actions' -or
     $shopSingleTemplate -match '(?i)bookstore-panel|Other formats and channels|checkout-actions') {
   throw 'Bookstore templates must not retain the legacy secondary-channel block, sidebar panel, or checkout-actions partial.'
@@ -588,6 +596,28 @@ $shopOutput = @(
   $output['shop/the-parable-of-the-sheep/index.html'],
   $output['shop/the-water-cycle/index.html']
 ) -join "`n"
+$shopIndexOutput = [string]$output['shop/index.html']
+$shopDetailOutput = @(
+  $output['shop/the-american-nightmare-keep-dreaming-kid/index.html'],
+  $output['shop/the-parable-of-the-sheep/index.html'],
+  $output['shop/the-water-cycle/index.html']
+) -join "`n"
+$catalogDisclosures = @([regex]::Matches($shopIndexOutput, '<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>)', 'IgnoreCase'))
+if ($catalogDisclosures.Count -ne 3) {
+  throw "Bookstore index must render exactly three direct-EPUB checkout disclosures; found $($catalogDisclosures.Count)."
+}
+if ($shopIndexOutput -match '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure[^>]*\bopen(?:\s*=|\s|>)') {
+  throw 'Bookstore index direct-EPUB checkout disclosures must be closed by default.'
+}
+if ([regex]::Matches([Net.WebUtility]::HtmlDecode($shopIndexOutput), '<summary\b[^>]*\baria-label="Buy direct EPUB — \$9\.99: [^"]+"[^>]*>\s*<span>Buy direct EPUB — \$9\.99</span>\s*</summary>', 'IgnoreCase').Count -ne 3) {
+  throw 'Every bookstore index checkout disclosure must show the $9.99 direct-EPUB label and include the book title in its accessible name.'
+}
+if ([regex]::Matches($shopIndexOutput, '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>).*?<form\b[^>]*\bdata-epub-checkout(?:=|\s|>).*?</form>\s*</div>\s*</details>').Count -ne 3) {
+  throw 'Every bookstore index disclosure must contain its complete EPUB checkout form.'
+}
+if ($shopDetailOutput -match '\bdata-bookstore-checkout-disclosure(?:=|\s|>)') {
+  throw 'Book detail pages must render their EPUB checkout forms without the catalog disclosure.'
+}
 foreach ($sku in $publicEpubSkus) {
   if ($shopOutput -notmatch ('data-direct-offer-sku=(?:"|'''')?' + [regex]::Escape($sku) + '(?:"|'''')?')) {
     throw "Built shop output does not expose the gated catalog record for $sku."

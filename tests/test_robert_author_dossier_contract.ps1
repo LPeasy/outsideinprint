@@ -23,7 +23,8 @@ foreach ($requiredPattern in @(
   'layout:\s*"?dossier"?',
   'description:\s*".+?"',
   'portrait:\s*"?Bobviously_Portrait_v1\.png"?',
-  'header_bio:\s*".+?"'
+  'header_bio:\s*".+?"',
+  'role_line:\s*"Author, designer, developer, and publisher of Outside In Print\."'
 )) {
   if ($authorPage -notmatch $requiredPattern) {
     throw "Expected content/authors/robert-v-ussley/index.md to match '$requiredPattern'."
@@ -50,7 +51,10 @@ foreach ($requiredSnippet in @(
   'Browse archive',
   'Browse collections',
   'Search the library',
-  'About the imprint'
+  'About the imprint',
+  'author-route__role',
+  'author-route__books',
+  'Visit the Bookstore'
 )) {
   if ($layoutTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/authors/dossier.html to include '$requiredSnippet'."
@@ -93,6 +97,11 @@ try {
     'Browse collections',
     'Search the library',
     'About the imprint',
+    'Author, designer, developer, and publisher of Outside In Print.',
+    'The American Nightmare: Keep Dreaming, Kid',
+    'The Parable of the Sheep',
+    'The Water Cycle: Risk, Infrastructure, and Public Memory',
+    'Visit the Bookstore',
     'journey-links--page author-route__journey'
   )) {
     if ($builtPage -notmatch [regex]::Escape($requiredSnippet)) {

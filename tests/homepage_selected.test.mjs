@@ -173,6 +173,9 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(frontPageSource, /data-home-cartoon-lightbox-image-button/);
   assert.doesNotMatch(frontPageSource, /data-home-cartoon-lightbox-image\s+src=""/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
+  assert.match(frontPageSource, /<p id="home-cartoon-lightbox-title" class="cartoon-lightbox__title" data-home-cartoon-lightbox-title><\/p>/);
+  assert.doesNotMatch(frontPageSource, /<h2 id="home-cartoon-lightbox-title"/);
+  assert.match(frontPageSource, /aria-labelledby="home-cartoon-lightbox-title"/);
   assert.match(frontPageSource, /querySelectorAll\("\[data-home-cartoon-lightbox-trigger\]"\)/);
   assert.match(frontPageSource, /triggers\.forEach\(function \(trigger\)/);
   assert.doesNotMatch(frontPageSource, /var trigger = document\.querySelector\("\[data-home-cartoon-lightbox-trigger\]"\)/);

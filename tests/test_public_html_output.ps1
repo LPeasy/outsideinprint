@@ -2472,6 +2472,17 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = '<p id=(?:"home-cartoon-lightbox-title"|home-cartoon-lightbox-title) class=(?:"cartoon-lightbox__title"|cartoon-lightbox__title) data-home-cartoon-lightbox-title(?:="")?></p>'
+    Message = 'expected the homepage lightbox to use a non-heading dialog label'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<h2 id=(?:"home-cartoon-lightbox-title"|home-cartoon-lightbox-title)'
+    Message = 'expected the homepage lightbox not to emit an empty heading'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = 'data-home-cartoon-lightbox-trigger'
     Message = 'expected the homepage cartoon image to open the fullscreen lightbox'
   },
@@ -3194,7 +3205,17 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = '(?s)Browse archive.*?Browse collections.*?Search the library.*?About the imprint'
+    Pattern = 'Author, designer, developer, and publisher of Outside In Print\.'
+    Message = 'expected the author page to state Robert V. Ussley''s professional role'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = '(?s)author of three books published by Outside In Print.*?The American Nightmare: Keep Dreaming, Kid.*?The Parable of the Sheep.*?The Water Cycle: Risk, Infrastructure, and Public Memory'
+    Message = 'expected the author page to name and link all three published books'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = '(?s)Browse archive.*?Browse collections.*?Search the library.*?Visit the Bookstore.*?About the imprint'
     Message = 'expected the refined author page to expose the compact route-based reading map'
   },
   @{

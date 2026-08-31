@@ -155,6 +155,8 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__panel\{[\s\S]*?grid-row:2;/);
   assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2\.5rem, 12vw, 2\.75rem\)/);
   assert.match(css, /html\[data-theme="light"\] \.masthead--compressed\{[\s\S]*background:transparent;/);
+  assert.match(css, /\.bookstore-epub-checkout-disclosure > summary\{[\s\S]*min-height:3\.2rem;/);
+  assert.match(css, /\.bookstore-epub-checkout-disclosure > summary:focus-visible\{[\s\S]*outline:2px solid var\(--focus-ring\);/);
   assert.match(css, /\/\* Light-mode paper edition \*\//);
   assert.match(css, /html\[data-theme="light"\] \.card,[\s\S]*background:var\(--paper-surface-wash\), var\(--bg-surface\)/);
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
@@ -170,6 +172,9 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(directOffers, /type="checkbox" name="publication_notifications"/);
   assert.match(directOffers, /\$newsletterCheckoutLabel/);
   assert.match(directOffers, /bookstore-epub-checkout__newsletter-details/);
+  assert.match(directOffers, /\$collapseCheckout := \.collapseCheckout \| default false/);
+  assert.match(directOffers, /<details class="bookstore-epub-checkout-disclosure" data-bookstore-checkout-disclosure>/);
+  assert.match(directOffers, /<summary aria-label="\{\{ \$checkoutSummaryLabel \}\}: \{\{ \$productTitle \}\}">/);
   assert.match(directOffers, /Optional\. Not required to buy\./);
   assert.doesNotMatch(directOffers, /fallback_(?:url|label)|amazon/i);
 
@@ -186,9 +191,11 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.ok(shopList.indexOf('partial "shop/direct-offers.html"') < shopList.indexOf('partial "shop/kindle-button.html"'));
   assert.ok(shopSingle.indexOf('partial "shop/direct-offers.html"') < shopSingle.indexOf('partial "shop/kindle-button.html"'));
   assert.match(shopList, /bookstore_index_direct/);
+  assert.match(shopList, /"collapseCheckout" true/);
   assert.match(shopList, /bookstore_index_kindle/);
   assert.match(shopSingle, /bookstore_detail_direct/);
   assert.match(shopSingle, /bookstore_detail_kindle/);
+  assert.doesNotMatch(shopSingle, /collapseCheckout/);
   assert.doesNotMatch(shopList, /bookstore-secondary-channel|checkout-actions/);
   assert.doesNotMatch(shopSingle, /bookstore-panel|Other formats and channels|checkout-actions/);
 
