@@ -1,10 +1,13 @@
 {{- $item := .item -}}
 {{- $class := .class | default "nav-disclosure__link" -}}
 {{- $showDescription := .showDescription | default false -}}
+{{- $currentPage := $item.currentPage | default false -}}
+{{- $currentSection := $item.currentSection | default false -}}
+{{- $currentSectionOnly := and $currentSection (not $currentPage) -}}
 <a
-  class="{{ $class }}"
+  class="{{ $class }}{{ if $currentSectionOnly }} nav-link--current-section{{ end }}"
   href="{{ $item.href }}"
-  {{- if $item.current }} aria-current="page"{{ end }}
+  {{- if $currentPage }} aria-current="page"{{ end }}
   {{- with $item.analyticsEvent }} data-analytics-event="{{ . }}"{{ end }}
   {{- with $item.analyticsSourceSlot }} data-analytics-source-slot="{{ . }}"{{ end }}
   {{- with $item.analyticsSlug }} data-analytics-slug="{{ . }}"{{ end }}
@@ -16,4 +19,5 @@
   {{- if and $showDescription $item.description }}
     <span class="nav-link__description">{{ $item.description }}</span>
   {{- end }}
+  {{- if $currentSectionOnly }}<span class="visually-hidden">, current section</span>{{ end }}
 </a>

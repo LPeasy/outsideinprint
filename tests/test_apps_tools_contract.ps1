@@ -178,8 +178,10 @@ foreach ($chrome in @($masthead, $footer)) {
 }
 Assert-Matches $masthead '"label"\s+"Apps & Tools"' 'The masthead destination model must retain the Apps & Tools label.'
 Assert-Matches $footer '>Apps\s*&amp;\s*Tools<' 'Footer navigation must retain the Apps & Tools label.'
-Assert-Matches $masthead '\$isApps\s*:=\s*eq\s+\.Section\s+"apps"' 'The masthead must retain Apps aria-current routing.'
-Assert-Matches $masthead '"current"\s+\$isApps' 'The masthead destination model must bind Apps & Tools to its exact current state.'
+Assert-Matches $masthead '\$isAppsPage\s*:=\s*and\s+\$appsPage\s+\(eq\s+\$currentPath\s+\$appsPage\.RelPermalink\)' 'The masthead must identify the exact Apps landing page.'
+Assert-Matches $masthead '\$inAppsSection\s*:=\s*or\s+\$isAppsPage\s+\(eq\s+\.Section\s+"apps"\)' 'The masthead must combine exact Apps landing-page and descendant state.'
+Assert-Matches $masthead '"currentPage"\s+\$isAppsPage' 'The masthead destination model must bind Apps & Tools to its exact-page state.'
+Assert-Matches $masthead '"currentSection"\s+\$inAppsSection' 'The masthead destination model must bind Apps & Tools to its section state.'
 
 $appsMarkup = $appsList + "`n" + $appsSingle + "`n" + $sampleDownloads + "`n" + $companion
 foreach ($family in @(

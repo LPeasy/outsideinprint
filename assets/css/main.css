@@ -610,13 +610,15 @@ html[data-theme="dark"] .theme-toggle__icon--moon{
 }
 .nav-disclosure__link:hover,
 .nav-disclosure__link:focus-visible,
-.nav-disclosure__link[aria-current="page"]{
+.nav-disclosure__link[aria-current="page"],
+.nav-disclosure__link.nav-link--current-section{
   background:rgba(236,231,223,.055);
   text-decoration:none;
 }
 .nav a:hover,
 .nav a:focus-visible,
 .nav a[aria-current="page"],
+.nav a.nav-link--current-section,
 .nav summary:hover,
 .nav summary:focus-visible,
 .nav-disclosure[open] > .nav-disclosure__summary,
@@ -713,6 +715,7 @@ html[data-theme="light"] .masthead--compressed .nav summary{
 html[data-theme="light"] .masthead--compressed .nav a:hover,
 html[data-theme="light"] .masthead--compressed .nav a:focus-visible,
 html[data-theme="light"] .masthead--compressed .nav a[aria-current="page"],
+html[data-theme="light"] .masthead--compressed .nav a.nav-link--current-section,
 html[data-theme="light"] .masthead--compressed .nav summary:hover,
 html[data-theme="light"] .masthead--compressed .nav summary:focus-visible,
 html[data-theme="light"] .masthead--compressed .nav-disclosure[open] > .nav-disclosure__summary,
@@ -732,9 +735,11 @@ html[data-theme="light"] .nav-mobile-menu__panel{
 html[data-theme="light"] .nav-disclosure__link:hover,
 html[data-theme="light"] .nav-disclosure__link:focus-visible,
 html[data-theme="light"] .nav-disclosure__link[aria-current="page"],
+html[data-theme="light"] .nav-disclosure__link.nav-link--current-section,
 html[data-theme="light"] .nav-mobile-menu__group a:hover,
 html[data-theme="light"] .nav-mobile-menu__group a:focus-visible,
-html[data-theme="light"] .nav-mobile-menu__group a[aria-current="page"]{
+html[data-theme="light"] .nav-mobile-menu__group a[aria-current="page"],
+html[data-theme="light"] .nav-mobile-menu__group a.nav-link--current-section{
   background:rgba(46,83,99,.07);
 }
 html[data-theme="light"] .nav-link__description,
@@ -979,7 +984,8 @@ html[data-theme="light"] .paper-route-toggle{
   }
   .nav-mobile-menu__group a:hover,
   .nav-mobile-menu__group a:focus-visible,
-  .nav-mobile-menu__group a[aria-current="page"]{
+  .nav-mobile-menu__group a[aria-current="page"],
+  .nav-mobile-menu__group a.nav-link--current-section{
     background:rgba(236,231,223,.055);
     text-decoration:none;
   }

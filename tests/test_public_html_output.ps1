@@ -184,6 +184,59 @@ function Test-TagHasClass {
   return $classes -contains $ClassName
 }
 
+function Get-PrimaryNavHtml {
+  param([string]$Html)
+
+  $match = [regex]::Match($Html, '(?is)<nav\b(?=[^>]*aria-label\s*=\s*(?:"Primary"|''Primary''|Primary))[^>]*>.*?</nav>')
+  if (-not $match.Success) {
+    return $null
+  }
+
+  return $match.Value
+}
+
+function Get-PublicRoutePath {
+  param([string]$RelativePath)
+
+  $normalized = $RelativePath.Replace('\', '/')
+  if ($normalized -ceq 'public/index.html') {
+    return '/'
+  }
+  if ($normalized -match '^public/(.+)/index\.html$') {
+    return '/' + $Matches[1] + '/'
+  }
+  if ($normalized -match '^public/(.+\.html)$') {
+    return '/' + $Matches[1]
+  }
+
+  return $null
+}
+
+function Get-SitePathFromHref {
+  param([string]$Href)
+
+  if ([string]::IsNullOrWhiteSpace($Href)) {
+    return $null
+  }
+
+  $decodedHref = [System.Net.WebUtility]::HtmlDecode($Href.Trim())
+  if ($decodedHref.StartsWith('/')) {
+    $path = ($decodedHref -split '[?#]', 2)[0]
+    return [Uri]::UnescapeDataString($path)
+  }
+
+  $absoluteUri = $null
+  if ([Uri]::TryCreate($decodedHref, [UriKind]::Absolute, [ref]$absoluteUri)) {
+    if ($absoluteUri.Host -cne 'outsideinprint.org') {
+      return $null
+    }
+
+    return [Uri]::UnescapeDataString($absoluteUri.AbsolutePath)
+  }
+
+  return $null
+}
+
 function Get-HeadingLevels {
   param([string]$Html)
 
@@ -1587,6 +1640,7 @@ $requiredUxPages = @(
   'public/shop/the-parable-of-the-sheep/index.html',
   'public/shop/the-water-cycle/index.html',
   'public/games/index.html',
+  'public/games/idle-times/index.html',
   'public/random/index.html',
   'public/collections/the-ledger/index.html',
   'public/collections/syd-and-oliver-dialogues/index.html',
@@ -1660,6 +1714,27 @@ $requiredLegacyCleanupPages = @(
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Path $file.FullName -Raw
   $relativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $file.FullName
+  $primaryNavHtml = Get-PrimaryNavHtml -Html $content
+  if (-not [string]::IsNullOrWhiteSpace($primaryNavHtml)) {
+    $routePath = Get-PublicRoutePath -RelativePath $relativePath
+    foreach ($anchor in (Get-OpenTags -Html $primaryNavHtml -TagName 'a')) {
+      $ariaCurrent = Get-AttributeValue -Tag $anchor -Name 'aria-current'
+      if ($null -eq $ariaCurrent) {
+        continue
+      }
+
+      if ($ariaCurrent -cne 'page') {
+        $uxIssues.Add("$relativePath => primary navigation uses unsupported aria-current='$ariaCurrent'")
+        continue
+      }
+
+      $href = Get-AttributeValue -Tag $anchor -Name 'href'
+      $hrefPath = Get-SitePathFromHref -Href $href
+      if ([string]::IsNullOrWhiteSpace($routePath) -or $hrefPath -cne $routePath) {
+        $uxIssues.Add("$relativePath => aria-current='page' points to '$hrefPath' instead of the rendered route '$routePath'")
+      }
+    }
+  }
   $isArticleContentPage = (
     $relativePath -match '^public/(?:essays|syd-and-oliver)/[^/]+/index\.html$' -and
     $content -match '<article\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece\b[^"]*"|''[^'']*\bpiece\b[^'']*''|[^\s>]*\bpiece\b[^\s>]*)'
@@ -3115,8 +3190,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/the-water-cycle/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/shop/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>\s*Bookstore\s*</span>'
-    Message = 'expected bookstore detail pages to mark Bookstore as the current primary destination'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?<a[^>]*class=(?:"[^"]*\bnav-link--current-section\b[^"]*"|''[^'']*\bnav-link--current-section\b[^'']*''|[^\s>]*\bnav-link--current-section\b[^\s>]*)[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/"|(?:https://outsideinprint\.org)?/shop/)[^>]*>.*?Bookstore.*?current section.*?</a>'
+    Message = 'expected bookstore detail pages to expose Bookstore as the current section without claiming it is the current page'
+  },
+  @{
+    Path = 'public/shop/the-water-cycle/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?<a(?=[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/"|(?:https://outsideinprint\.org)?/shop/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>'
+    Message = 'expected bookstore detail pages not to mark the Bookstore landing URL as the current page'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/shop/index.html'
@@ -3984,8 +4065,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>\s*Archive\s*</span>'
-    Message = 'expected article pages to expose the Archive masthead link'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?<a[^>]*class=(?:"[^"]*\bnav-link--current-section\b[^"]*"|''[^'']*\bnav-link--current-section\b[^'']*''|[^\s>]*\bnav-link--current-section\b[^\s>]*)[^>]*href=(?:"(?:https://outsideinprint\.org)?/archive/"|(?:https://outsideinprint\.org)?/archive/)[^>]*>.*?Archive.*?current section.*?</a>'
+    Message = 'expected article pages to expose Archive as the current section'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?<a(?=[^>]*href=(?:"(?:https://outsideinprint\.org)?/archive/"|(?:https://outsideinprint\.org)?/archive/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>'
+    Message = 'expected article pages not to mark the Archive landing URL as the current page'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
@@ -4200,6 +4287,134 @@ foreach ($check in $requiredUxChecks) {
   }
 }
 
+$exactPrimaryNavExpectations = @(
+  @{ Path = 'public/index.html'; Destination = '/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true },
+  @{ Path = 'public/archive/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
+  @{ Path = 'public/collections/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
+  @{ Path = 'public/library/index.html'; Destination = '/library/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true },
+  @{ Path = 'public/gallery/index.html'; Destination = '/gallery/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
+  @{ Path = 'public/apps/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
+  @{ Path = 'public/games/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
+  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
+  @{ Path = 'public/about/index.html'; Destination = '/about/'; GroupClass = $null; MenuCurrent = $true },
+  @{ Path = 'public/support/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true },
+  @{ Path = 'public/random/index.html'; Destination = '/random/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true }
+)
+
+foreach ($expectation in $exactPrimaryNavExpectations) {
+  $relativePath = [string]$expectation.Path
+  $destinationPath = [string]$expectation.Destination
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $uxIssues.Add("$relativePath => missing exact-destination primary-navigation coverage")
+    continue
+  }
+
+  $primaryNavHtml = Get-PrimaryNavHtml -Html ([string]$targetPageHtml[$relativePath])
+  $destinationAnchors = @(
+    Get-OpenTags -Html $primaryNavHtml -TagName 'a' |
+      Where-Object { (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq $destinationPath }
+  )
+  if ($destinationAnchors.Count -ne 2) {
+    $uxIssues.Add("$relativePath => expected two responsive links for exact destination '$destinationPath', found $($destinationAnchors.Count)")
+    continue
+  }
+
+  foreach ($destinationAnchor in $destinationAnchors) {
+    if ((Get-AttributeValue -Tag $destinationAnchor -Name 'aria-current') -cne 'page') {
+      $uxIssues.Add("$relativePath => exact destination '$destinationPath' must carry aria-current='page'")
+    }
+    if (Test-TagHasClass -Tag $destinationAnchor -ClassName 'nav-link--current-section') {
+      $uxIssues.Add("$relativePath => exact destination '$destinationPath' must not use the descendant-only current-section class")
+    }
+  }
+
+  $groupClass = [string]$expectation.GroupClass
+  if (-not [string]::IsNullOrWhiteSpace($groupClass)) {
+    $currentGroup = @(
+      Get-OpenTags -Html $primaryNavHtml -TagName 'details' |
+        Where-Object {
+          (Test-TagHasClass -Tag $_ -ClassName $groupClass) -and
+          (Test-TagHasClass -Tag $_ -ClassName 'nav-disclosure--current')
+        }
+    )
+    if ($currentGroup.Count -ne 1) {
+      $uxIssues.Add("$relativePath => exact destination '$destinationPath' must activate $groupClass")
+    }
+  }
+
+  $mobileMenuCurrent = @(
+    Get-OpenTags -Html $primaryNavHtml -TagName 'details' |
+      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'nav-mobile-menu--current' }
+  ).Count -eq 1
+  if ($mobileMenuCurrent -ne [bool]$expectation.MenuCurrent) {
+    $uxIssues.Add("$relativePath => mobile Menu current-section state did not match the exact destination placement")
+  }
+}
+
+$descendantPrimaryNavExpectations = @(
+  @{ Path = 'public/essays/the-risk-management-buffet/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
+  @{ Path = 'public/collections/the-ledger/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
+  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
+  @{ Path = 'public/apps/bucks-machine/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
+  @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
+  @{ Path = 'public/support/cancellation-refunds/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true }
+)
+
+foreach ($expectation in $descendantPrimaryNavExpectations) {
+  $relativePath = [string]$expectation.Path
+  $destinationPath = [string]$expectation.Destination
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $uxIssues.Add("$relativePath => missing descendant primary-navigation coverage")
+    continue
+  }
+
+  $primaryNavHtml = Get-PrimaryNavHtml -Html ([string]$targetPageHtml[$relativePath])
+  $destinationAnchors = @(
+    Get-OpenTags -Html $primaryNavHtml -TagName 'a' |
+      Where-Object { (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq $destinationPath }
+  )
+  if ($destinationAnchors.Count -ne 2) {
+    $uxIssues.Add("$relativePath => expected two responsive section links for '$destinationPath', found $($destinationAnchors.Count)")
+  }
+  foreach ($destinationAnchor in $destinationAnchors) {
+    if (-not (Test-TagHasClass -Tag $destinationAnchor -ClassName 'nav-link--current-section')) {
+      $uxIssues.Add("$relativePath => descendant destination '$destinationPath' must carry the current-section class")
+    }
+    if ($null -ne (Get-AttributeValue -Tag $destinationAnchor -Name 'aria-current')) {
+      $uxIssues.Add("$relativePath => descendant destination '$destinationPath' must not carry aria-current")
+    }
+  }
+
+  $groupClass = [string]$expectation.GroupClass
+  if (-not [string]::IsNullOrWhiteSpace($groupClass)) {
+    $currentGroup = @(
+      Get-OpenTags -Html $primaryNavHtml -TagName 'details' |
+        Where-Object {
+          (Test-TagHasClass -Tag $_ -ClassName $groupClass) -and
+          (Test-TagHasClass -Tag $_ -ClassName 'nav-disclosure--current')
+        }
+    )
+    if ($currentGroup.Count -ne 1) {
+      $uxIssues.Add("$relativePath => expected $groupClass to expose the current-section state")
+    }
+  }
+
+  $mobileMenuCurrent = @(
+    Get-OpenTags -Html $primaryNavHtml -TagName 'details' |
+      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'nav-mobile-menu--current' }
+  ).Count -eq 1
+  if ($mobileMenuCurrent -ne [bool]$expectation.MenuCurrent) {
+    $uxIssues.Add("$relativePath => mobile Menu current-section state did not match the location of the active destination")
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/404.html')) {
+  $notFoundPrimaryNav = Get-PrimaryNavHtml -Html ([string]$targetPageHtml['public/404.html'])
+  if ($notFoundPrimaryNav -match 'aria-current\s*=|nav-link--current-section|nav-disclosure--current|nav-mobile-menu--current') {
+    $uxIssues.Add('public/404.html => primary navigation must not claim an exact page or current section')
+  }
+}
+
 foreach ($forbiddenPath in @(
   'public/almanack/index.html',
   'public/shipping-returns/index.html'
@@ -4396,9 +4611,21 @@ foreach ($surface in @(
     }
 
     if (-not $surface.Path) {
-      $primaryNavMatch = [regex]::Match($surfaceHtml, '(?is)<nav\b(?=[^>]*aria-label\s*=\s*(?:"Primary"|''Primary''|Primary))[^>]*>.*?</nav>')
-      if (-not $primaryNavMatch.Success -or $primaryNavMatch.Value -notmatch '(?is)<a\b(?=[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/"|(?:https://outsideinprint\.org)?/shop/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*<span[^>]*>\s*Bookstore\s*</span>\s*</a>') {
-        $uxIssues.Add("$surfacePath => expected Bookstore to be the current primary-navigation destination")
+      $primaryNavHtml = Get-PrimaryNavHtml -Html $surfaceHtml
+      $bookstoreNavAnchors = @(
+        Get-OpenTags -Html $primaryNavHtml -TagName 'a' |
+          Where-Object { (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq '/shop/' }
+      )
+      if ($bookstoreNavAnchors.Count -ne 2) {
+        $uxIssues.Add("$surfacePath => expected two responsive Bookstore navigation links, found $($bookstoreNavAnchors.Count)")
+      }
+      foreach ($bookstoreNavAnchor in $bookstoreNavAnchors) {
+        if (-not (Test-TagHasClass -Tag $bookstoreNavAnchor -ClassName 'nav-link--current-section')) {
+          $uxIssues.Add("$surfacePath => expected Bookstore to carry the current-section cue")
+        }
+        if ($null -ne (Get-AttributeValue -Tag $bookstoreNavAnchor -Name 'aria-current')) {
+          $uxIssues.Add("$surfacePath => Bookstore detail page must not mark /shop/ as aria-current")
+        }
       }
     }
   }

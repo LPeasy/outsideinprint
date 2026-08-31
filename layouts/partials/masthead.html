@@ -1,19 +1,30 @@
 {{ $stickyMasthead := and .IsPage (not (in (slice "collections" "random") .Section)) }}
 {{ $isHomeMasthead := .IsHome }}
-{{ $isArchive := or (eq .Section "archive") (eq .Section "essays") (eq .Section "syd-and-oliver") }}
-{{ $isCollections := eq .Section "collections" }}
-{{ $isLibrary := or (eq .RelPermalink "/library/") (eq .Section "library") }}
-{{ $isBookstore := or (eq .Section "shop") (eq .RelPermalink "/shop/") }}
-{{ $isSupport := eq .Section "support" }}
-{{ $isAbout := or (eq .Section "about") (eq .RelPermalink "/about/") }}
-{{ $isApps := eq .Section "apps" }}
-{{ $isGames := eq .Section "games" }}
-{{ $isGallery := eq .Section "gallery" }}
-{{ $isRandom := eq .Section "random" }}
+{{ $currentPath := .RelPermalink }}
 {{ $appsPage := site.GetPage "/apps" }}
 {{ $showApps := and $appsPage (not $appsPage.Draft) }}
 {{ $gamesPage := site.GetPage "/games" }}
 {{ $showGames := and $gamesPage (or (not $gamesPage.Draft) hugo.IsServer) }}
+{{ $isArchivePage := eq $currentPath "/archive/" }}
+{{ $inArchiveSection := or $isArchivePage (eq .Section "archive") (eq .Section "essays") (eq .Section "syd-and-oliver") }}
+{{ $isCollectionsPage := eq $currentPath "/collections/" }}
+{{ $inCollectionsSection := or $isCollectionsPage (eq .Section "collections") }}
+{{ $isLibraryPage := eq $currentPath "/library/" }}
+{{ $inLibrarySection := or $isLibraryPage (eq .Section "library") }}
+{{ $isBookstorePage := eq $currentPath "/shop/" }}
+{{ $inBookstoreSection := or $isBookstorePage (eq .Section "shop") }}
+{{ $isSupportPage := eq $currentPath "/support/" }}
+{{ $inSupportSection := or $isSupportPage (eq .Section "support") }}
+{{ $isAboutPage := eq $currentPath "/about/" }}
+{{ $inAboutSection := or $isAboutPage (eq .Section "about") }}
+{{ $isAppsPage := and $appsPage (eq $currentPath $appsPage.RelPermalink) }}
+{{ $inAppsSection := or $isAppsPage (eq .Section "apps") }}
+{{ $isGamesPage := and $gamesPage (eq $currentPath $gamesPage.RelPermalink) }}
+{{ $inGamesSection := or $isGamesPage (eq .Section "games") }}
+{{ $isGalleryPage := eq $currentPath "/gallery/" }}
+{{ $inGallerySection := or $isGalleryPage (eq .Section "gallery") }}
+{{ $isRandomPage := eq $currentPath "/random/" }}
+{{ $inRandomSection := or $isRandomPage (eq .Section "random") }}
 {{ $mastheadVariant := cond $isHomeMasthead "masthead--full" "masthead--compressed" }}
 {{ $paperRoute := site.Params.paper_route | default dict }}
 {{ $paperRouteEnabled := and $isHomeMasthead (ne ($paperRoute.enabled | default true) false) }}
@@ -24,7 +35,8 @@
     "href" ("" | absURL)
     "description" "Front page"
     "group" "read"
-    "current" $isHomeMasthead
+    "currentPage" $isHomeMasthead
+    "currentSection" $isHomeMasthead
     "mobilePrimary" false
   )
   (dict
@@ -33,7 +45,8 @@
     "href" ("archive/" | absURL)
     "description" "By date"
     "group" "read"
-    "current" $isArchive
+    "currentPage" $isArchivePage
+    "currentSection" $inArchiveSection
     "mobilePrimary" true
   )
   (dict
@@ -42,7 +55,8 @@
     "href" ("collections/" | absURL)
     "description" "By topic"
     "group" "read"
-    "current" $isCollections
+    "currentPage" $isCollectionsPage
+    "currentSection" $inCollectionsSection
     "mobilePrimary" true
   )
   (dict
@@ -51,7 +65,8 @@
     "href" ("library/" | absURL)
     "description" "Search all"
     "group" "read"
-    "current" $isLibrary
+    "currentPage" $isLibraryPage
+    "currentSection" $inLibrarySection
     "mobilePrimary" false
   )
   (dict
@@ -60,7 +75,8 @@
     "href" ("random/" | absURL)
     "description" "Surprise me"
     "group" "read"
-    "current" $isRandom
+    "currentPage" $isRandomPage
+    "currentSection" $inRandomSection
     "mobilePrimary" false
   )
   (dict
@@ -69,7 +85,8 @@
     "href" ("gallery/" | absURL)
     "description" "Editorial art"
     "group" "explore"
-    "current" $isGallery
+    "currentPage" $isGalleryPage
+    "currentSection" $inGallerySection
     "mobilePrimary" false
   )
 }}
@@ -80,7 +97,8 @@
     "href" $appsPage.RelPermalink
     "description" "Digital experiments"
     "group" "explore"
-    "current" $isApps
+    "currentPage" $isAppsPage
+    "currentSection" $inAppsSection
     "mobilePrimary" false
   ) }}
 {{ end }}
@@ -91,7 +109,8 @@
     "href" $gamesPage.RelPermalink
     "description" "Playable work"
     "group" "explore"
-    "current" $isGames
+    "currentPage" $isGamesPage
+    "currentSection" $inGamesSection
     "mobilePrimary" false
   ) }}
 {{ end }}
@@ -101,7 +120,8 @@
     "label" "Bookstore"
     "href" ("shop/" | absURL)
     "group" "direct"
-    "current" $isBookstore
+    "currentPage" $isBookstorePage
+    "currentSection" $inBookstoreSection
     "mobilePrimary" true
     "analyticsEvent" "internal_promo_click"
     "analyticsSourceSlot" "primary_nav_bookstore"
@@ -115,7 +135,8 @@
     "label" "About"
     "href" ("about/" | absURL)
     "group" "direct"
-    "current" $isAbout
+    "currentPage" $isAboutPage
+    "currentSection" $inAboutSection
     "mobilePrimary" false
   )
   (dict
@@ -123,7 +144,8 @@
     "label" "Support"
     "href" ("support/" | absURL)
     "group" "direct"
-    "current" $isSupport
+    "currentPage" $isSupportPage
+    "currentSection" $inSupportSection
     "mobilePrimary" false
     "analyticsEvent" "internal_promo_click"
     "analyticsSourceSlot" "primary_nav_support"
@@ -137,9 +159,10 @@
 {{ $exploreItems := where $navItems "group" "explore" }}
 {{ $directItems := where $navItems "group" "direct" }}
 {{ $mobilePrimaryItems := where $navItems "mobilePrimary" true }}
-{{ $readCurrent := gt (len (where $readItems "current" true)) 0 }}
-{{ $exploreCurrent := gt (len (where $exploreItems "current" true)) 0 }}
-{{ $mobileMenuCurrent := or $isHomeMasthead $isLibrary $isRandom $exploreCurrent $isAbout $isSupport }}
+{{ $mobileMenuItems := where $navItems "mobilePrimary" false }}
+{{ $readCurrent := gt (len (where $readItems "currentSection" true)) 0 }}
+{{ $exploreCurrent := gt (len (where $exploreItems "currentSection" true)) 0 }}
+{{ $mobileMenuCurrent := gt (len (where $mobileMenuItems "currentSection" true)) 0 }}
 <header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>

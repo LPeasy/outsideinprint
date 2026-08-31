@@ -218,8 +218,10 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
   }
   assert.match(masthead, /"label" "Apps & Tools"[\s\S]*?"group" "explore"/);
   assert.match(footer, />Apps\s*&amp;\s*Tools</);
-  assert.match(masthead, /\$isApps\s*:=\s*eq\s+\.Section\s+"apps"/);
-  assert.match(masthead, /"current" \$isApps/);
+  assert.match(masthead, /\$isAppsPage\s*:=\s*and\s+\$appsPage\s+\(eq\s+\$currentPath\s+\$appsPage\.RelPermalink\)/);
+  assert.match(masthead, /\$inAppsSection\s*:=\s*or\s+\$isAppsPage\s+\(eq\s+\.Section\s+"apps"\)/);
+  assert.match(masthead, /"currentPage" \$isAppsPage/);
+  assert.match(masthead, /"currentSection" \$inAppsSection/);
   assert.ok(appsCssMatch, "expected a bounded Apps & Tools CSS section");
   assert.match(appsCssMatch[1], /@media\s*\(max-width:640px\)/);
   assert.match(appsCssMatch[1], /:focus-visible/);

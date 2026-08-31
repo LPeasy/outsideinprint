@@ -244,7 +244,10 @@ test("Games templates fail closed around Steam and expose the released storefron
   }
   assert.match(masthead, /"label" "Games"[\s\S]*?"group" "explore"/);
   assert.match(footer, />Games</);
-  assert.match(masthead, /\$isGames := eq \.Section "games"/);
+  assert.match(masthead, /\$isGamesPage := and \$gamesPage \(eq \$currentPath \$gamesPage\.RelPermalink\)/);
+  assert.match(masthead, /\$inGamesSection := or \$isGamesPage \(eq \.Section "games"\)/);
+  assert.match(masthead, /"currentPage" \$isGamesPage/);
+  assert.match(masthead, /"currentSection" \$inGamesSection/);
   assert.match(masthead, /"label" "Apps & Tools"[\s\S]*?"label" "Games"[\s\S]*?"label" "Bookstore"/);
   assert.match(schema, /\(slice "apps" "games"\)/, "Games index must remain generic WebPage metadata");
 
