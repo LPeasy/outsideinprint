@@ -1,16 +1,19 @@
 ---
-title: "RCP8.5 Bibliometrics: Methods, Data, and Limits"
-subtitle: "A public audit record for the metadata search and provisional title-and-abstract screening considered in The Scenario That Ate the Future."
-description: "Public methods, downloadable data, provisional classifications, and limits for Outside In Print's RCP8.5 bibliometric work."
+title: "RCP8.5 Bibliometrics: Audit Appendix"
+subtitle: "Methods, limits, and compact outputs for the metadata search and provisional title-and-abstract screening considered in The Scenario That Ate the Future."
+description: "An unlisted audit appendix documenting methods, compact outputs, and limits for Outside In Print's RCP8.5 bibliometric work."
 date: 2026-08-30
 draft: false
 slug: "rcp85-bibliometrics-methods-and-tables"
-section_label: "Working Paper"
+section_label: "Audit Appendix"
 version: "1.0"
 edition: "First web edition"
 author_id: "robert-v-ussley"
+noindex: true
+build:
+  list: never
 image_exempt: true
-image_exempt_reason: "This methods-and-data companion does not require an editorial illustration."
+image_exempt_reason: "This methods-and-limits appendix does not require an editorial illustration."
 tags:
   - "climate"
   - "bibliometrics"
@@ -18,12 +21,12 @@ tags:
   - "research methods"
 ---
 
-This working paper publishes a methods-and-output record for two bibliometric exercises considered during revision of [The Scenario That Ate the Future](/essays/the-scenario-that-ate-the-future/). It separates exercises that answer different questions and have different validation status:
+This audit appendix records two bibliometric exercises considered during revision of [The Scenario That Ate the Future](/essays/the-scenario-that-ate-the-future/). Its purpose is to explain why the provisional results are not used as evidence in the essay. It is not proof of the essay's thesis. The exercises answer different questions and have different validation status:
 
 1. a broad OpenAlex metadata search, with Crossref used as a limited metadata check; and
 2. a narrower, provisional deterministic screening of title-and-abstract framing in a defined climate-policy and climate-risk journal corpus.
 
-The broad search measures what the index returned under stated queries. It does not establish how every paper used RCP8.5. The narrower classifier generated a fixed public review queue, but its category assignments have not received the manual review required for publication-grade conclusions.
+The broad search measures what the index returned under stated queries. It does not establish how every paper used RCP8.5. The narrower classifier generated a fixed review queue, but its category assignments have not received the manual review required for publication-grade conclusions.
 
 ## Bottom line
 
@@ -58,7 +61,7 @@ Records were deduplicated in this order:
 3. publication year plus first author plus venue; and
 4. source-database record identifier.
 
-The downloadable deduplicated table omits author lists and abstract text. It retains stable record identifiers, titles, dates, venues, public URLs, matched search terms, scenario-family labels, classification buckets, and raw-record counts. These fields allow readers to inspect the search without republishing copied abstracts.
+The full search and deduplication records, including the deduplicated export and raw-to-deduplicated map, are retained by OIP and [available on request](/contact/). They are omitted from this site package to keep the appendix compact. The shareable deduplicated export omits author lists and abstract text.
 
 ## Framing corpus
 
@@ -93,9 +96,9 @@ Baseline or business-as-usual language included explicit terms such as *business
 
 The precedence rule matters. A record containing both baseline and high-emissions language was classified as baseline or business-as-usual. The table also retains non-exclusive signal columns so readers can inspect overlapping language. Rule precedence is not validation: it cannot ensure that a trigger phrase describes RCP8.5 rather than another subject in the same abstract.
 
-## What the current output can support
+## What the compact output can support
 
-The current output supports inspection of the stated rules, recalculation of the automated counts, and selection of records for manual review. The public package does not include the classifier code, frozen 52,710-record source corpus, or copied abstract context, so it does not reproduce the original classification run. Until manual review is completed, it does not support a substantive statement about how often authors framed RCP8.5 in any category.
+The compact download package supports inspection of the stated queries and classifier rules, recalculation of the provisional automated counts, and selection of the 367 flagged records for manual review. It does not reproduce either original exercise: it excludes the full search and deduplication records, classifier code, frozen 52,710-record source corpus, and copied abstract context. Until manual review is completed, it does not support a substantive statement about how often authors framed RCP8.5 in any category.
 
 It cannot determine:
 
@@ -105,16 +108,14 @@ It cannot determine:
 - author, editor, journalist, or institution intent; or
 - the frequency of RCP8.5 use across all climate scholarship.
 
-## Data downloads
+## Compact audit downloads
 
 - [Exact query log](/data/rcp85-bibliometrics/query-log.csv)
-- [Sanitized deduplicated records](/data/rcp85-bibliometrics/deduped-records.csv)
-- [Raw-to-deduplicated record map](/data/rcp85-bibliometrics/duplicate-map.csv)
 - [Provisional automated framing classifications](/data/rcp85-bibliometrics/framing-classifications.csv)
 - [Provisional automated framing summary](/data/rcp85-bibliometrics/framing-summary.csv)
 - [SHA-256 checksums](/data/rcp85-bibliometrics/checksums.sha256)
 
-The public framing-classification file omits the copied abstract-context field used during analysis. It retains public identifiers, titles, journals, years, provisional categories, matched-rule names, signal flags, and review fields. Every row is marked `not_reviewed`. The public deduplicated table likewise omits abstract text and author lists.
+The public framing-classification file omits the copied abstract-context field used during analysis. It retains public identifiers, titles, journals, years, provisional categories, matched-rule names, signal flags, and review fields. Every row is marked `not_reviewed`.
 
 ## Interpretation standard
 

@@ -11,5 +11,6 @@ import "./oip_commerce_provisioning_order.test.mjs";
 import "./paper_route_contract.test.mjs";
 import "./paper_route_rules.test.mjs";
 import "./responsive_image_contract.test.mjs";
+import "./rcp85_audit_appendix_contract.test.mjs";
 import "./site_chrome_contract.test.mjs";
 import "./web_publishing_direction.test.mjs";

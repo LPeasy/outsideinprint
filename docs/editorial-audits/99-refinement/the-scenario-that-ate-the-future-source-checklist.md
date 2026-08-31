@@ -111,7 +111,7 @@ Media Framing Audit: PASS
 | `03_backmatter/the-scenario-source-backmatter.md` | Updated | Preserves source tests, claim logic, and publication status |
 | `03_backmatter/oip-rcp85-bibliometrics-methods-and-tables.md` | Created | Public method note for OIP metadata-index and title/abstract framing counts |
 | `03_backmatter/live-source-audit-2026-05-28.md` | Created | Publication-day audit for current metrics and date-sensitive sources |
-| `03_backmatter/bibliometrics_tables/` | Created | Public CSV exports, query log, deduped/raw tables, duplicate map, and framing classifications |
+| `03_backmatter/bibliometrics_tables/` | Created | Retained source archive for the query log, deduped/raw tables, duplicate map, and framing classifications; the site serves only the compact audit subset |
 | `03_backmatter/bibliometrics_charts/bibliometrics-framing-counts.png` | Created | Main essay figure from strict title/abstract framing classifier |
 | `03_backmatter/bibliometrics_charts/bibliometrics-annual-volume.png` | Retained in backmatter | Supporting annual-volume figure |
 | `03_backmatter/bibliometrics-agent-brief.md` | Retained | Provenance brief for the separate bibliometrics replication task |
