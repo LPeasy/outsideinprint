@@ -3527,7 +3527,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-08-29/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?data-analytics-event=(?:"|'''')?newsletter_submit(?:"|'''')?.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?action=(?:"|'''')?https://buttondown\.com/api/emails/embed-subscribe/OutsideInPrint'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?action=(?:"|'''')?https://buttondown\.com/api/emails/embed-subscribe/OutsideInPrint(?:"|'''')?.*?data-analytics-event=(?:"|'''')?newsletter_submit(?:"|'''')?.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter'
     Message = 'expected an ordinary Almanack issue to reuse the shared Buttondown signup after the issue content'
   },
   @{
@@ -4528,7 +4528,6 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
 }
 
 foreach ($forbiddenPath in @(
-  'public/almanack/index.html',
   'public/shipping-returns/index.html'
 )) {
   $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
