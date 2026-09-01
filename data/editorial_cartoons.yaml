@@ -1,4 +1,4 @@
-current: the-open-morning
+current: beyond-the-bend
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -930,5 +930,14 @@ cartoons:
     image: "editorial/the-open-morning"
     essay: "/essays/mantra-2/"
     alt: "Golden sunrise fills an empty brick market street between open iron gates, striped awnings, a glowing bakery window, and wooden crates of oranges."
+    width: 1672
+    height: 941
+  - slug: beyond-the-bend
+    title: "Beyond the Bend"
+    date: "2026-09-01"
+    publishDate: "2026-09-01T13:00:07-04:00"
+    image: "editorial/beyond-the-bend"
+    essay: "/essays/mantra-3/"
+    alt: "Golden sunrise lights an empty riverside path curving beneath sycamores toward a wooden footbridge, calm water, and distant blue hills."
     width: 1672
     height: 941
