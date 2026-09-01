@@ -2819,6 +2819,13 @@ html[data-theme="light"] .paper-route-toggle{
   line-height:1.4;
   text-transform:uppercase;
 }
+.bookstore-product__checkout-restriction{
+  max-width:44rem;
+  margin:0;
+  color:var(--text-secondary);
+  font-size:.88rem;
+  line-height:1.55;
+}
 .bookstore-product__purchase .bookstore-direct-offers{
   margin-top:0;
 }
@@ -4398,7 +4405,7 @@ body.cartoon-lightbox-open{
   letter-spacing:.14em;
   text-transform:uppercase;
 }
-.article-plate-lightbox__caption p{
+.article-plate-lightbox__caption [data-article-plate-lightbox-caption]{
   max-width:72ch;
   margin:.45rem 0 0;
   color:var(--text-muted);
@@ -9807,6 +9814,9 @@ html[data-theme="light"] .paper-route-card--failure{
   }
 }
 @media (prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
   .paper-route-toggle,
   .paper-route-dialog__button,
   .paper-route-dialog__close,

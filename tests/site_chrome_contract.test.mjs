@@ -56,6 +56,10 @@ const footer = fs.readFileSync(path.resolve("layouts/partials/footer.html"), "ut
 const randomTemplate = fs.readFileSync(path.resolve("layouts/random/single.html"), "utf8");
 const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
+const almanackIssue = fs.readFileSync(path.resolve("layouts/almanack/single.html"), "utf8");
+const almanackCollection = fs.readFileSync(path.resolve("layouts/collections/bobs-almanack.html"), "utf8");
+const collectionsData = fs.readFileSync(path.resolve("data/collections.yaml"), "utf8");
+const supportTerms = fs.readFileSync(path.resolve("content/support/cancellation-refunds.md"), "utf8");
 const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
 const cartoonLookupPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-for-page.html"), "utf8");
 const cartoonLinkPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-gallery-link.html"), "utf8");
@@ -166,6 +170,8 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(mastheadNavigationScript, /document\.addEventListener\("pointerdown"/);
   assert.match(mastheadNavigationScript, /matchMedia\("\(max-width: 768px\)"\)/);
   assert.match(css, /html\[data-theme="light"\]\{[\s\S]*--bg-page:var\(--oip-paper\);[\s\S]*--accent:var\(--oip-link\);/);
+  assert.match(css, /html\{\s*font-size:100%;\s*scroll-behavior:smooth;\s*\}/);
+  assert.match(css, /@media \(prefers-reduced-motion:reduce\)\{\s*html\{\s*scroll-behavior:auto;\s*\}/);
   assert.match(css, /\.theme-toggle\{[\s\S]*display:none;[\s\S]*\}/);
   assert.match(css, /html\.theme-enabled \.theme-toggle\{[\s\S]*display:inline-flex;[\s\S]*\}/);
   assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(1\.75rem, 3vw, 2\.35rem\)/);
@@ -228,6 +234,16 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(shopSingle, /bookstore_detail_kindle/);
   assert.doesNotMatch(shopSingle, /collapseCheckout/);
   assert.doesNotMatch(shopSingle, /headingLevel/);
+  const purchaseTitle = shopSingle.indexOf('class="bookstore-product__purchase-title"');
+  const checkoutRestrictionGate = shopSingle.indexOf('{{ if gt (len $liveEpubOffers) 0 }}', purchaseTitle);
+  const checkoutRestriction = shopSingle.indexOf("Direct EPUB checkout is currently available to U.S. customers only.", purchaseTitle);
+  const detailDirectOffers = shopSingle.indexOf('partial "shop/direct-offers.html"', purchaseTitle);
+  assert.ok(purchaseTitle >= 0);
+  assert.ok(purchaseTitle < checkoutRestrictionGate);
+  assert.ok(checkoutRestrictionGate < checkoutRestriction);
+  assert.ok(checkoutRestriction < detailDirectOffers);
+  assert.match(shopSingle, /<p class="bookstore-product__checkout-restriction">Direct EPUB checkout is currently available to U\.S\. customers only\.<\/p>/);
+  assert.match(cssRule(css, ".bookstore-product__checkout-restriction"), /font-size:\.88rem;[\s\S]*line-height:1\.55;/);
   assert.doesNotMatch(shopList, /bookstore-secondary-channel|checkout-actions/);
   assert.doesNotMatch(shopSingle, /bookstore-panel|Other formats and channels|checkout-actions/);
 
@@ -320,9 +336,12 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(footer, /\$showApps := and \$appsPage \(not \$appsPage\.Draft\)/);
   assert.doesNotMatch(footer, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
   assert.match(footer, /href="\{\{ \$appsPage\.RelPermalink \}\}"[\s\S]*?>Apps &amp; Tools</);
+  assert.match(footer, /href="\{\{ \$appsPage\.RelPermalink \}\}"\{\{ if eq \.RelPermalink \$appsPage\.RelPermalink \}\} aria-current="page"\{\{ end \}\}>Apps &amp; Tools/);
   assert.match(footer, /\$gamesPage := site\.GetPage "\/games"/);
   assert.match(footer, /\$showGames := and \$gamesPage \(or \(not \$gamesPage\.Draft\) hugo\.IsServer\)/);
   assert.match(footer, /href="\{\{ \$gamesPage\.RelPermalink \}\}"[\s\S]*?>Games</);
+  assert.match(footer, /href="\{\{ \$gamesPage\.RelPermalink \}\}"\{\{ if eq \.RelPermalink \$gamesPage\.RelPermalink \}\} aria-current="page"\{\{ end \}\}>Games/);
+  assert.doesNotMatch(footer, /if eq \.Section "(?:apps|games)"/);
   assert.match(footer, />Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?>Bookstore</);
   assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}"[\s\S]*?data-analytics-source-slot="footer_bookstore"[\s\S]*?>Bookstore</);
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
@@ -347,6 +366,23 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.doesNotMatch(randomTemplate, /data-random-route-refresh/);
   assert.doesNotMatch(randomTemplate, /data-analytics-source-slot", "random_choice"/);
   assert.match(randomTemplate, /Open the Library/);
+});
+
+test("commerce terms and Almanack templates keep their public copy and landmarks accurate", () => {
+  assert.match(supportTerms, /^effective_date: "August 31, 2026"$/m);
+  assert.match(supportTerms, /- one-time support in a whole-dollar amount from \$5 to \$500; and\s+- fixed support of \$5 per month\./);
+  assert.doesNotMatch(supportTerms, /custom monthly support|recurring-price validation/i);
+
+  assert.match(almanackIssue, /<div class="almanack-main">/);
+  assert.doesNotMatch(almanackIssue, /<\/?main\b/);
+  assert.match(almanackCollection, /<div class="almanack-collection__principal">/);
+  assert.doesNotMatch(almanackCollection, /<\/?main\b|aria-label="Bob's Almanack lead sheet"/);
+
+  assert.match(
+    collectionsData,
+    /description: Weekly Outside In Print issues from Robert V\. Ussley, gathering new essays, cartoons, compact notices, and one piece worth reprinting\./
+  );
+  assert.doesNotMatch(collectionsData, /compact notices, and worth reprinting/i);
 });
 
 test("homepage browse band stays curated and replaces Welcome with Library", () => {
@@ -481,6 +517,11 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
   assert.match(galleryTemplate, /data-cartoon-slug/);
   assert.match(galleryTemplate, /data-cartoon-lightbox-essay/);
+  assert.match(galleryTemplate, /<p id="cartoon-lightbox-title" class="cartoon-lightbox__title" data-cartoon-lightbox-title><\/p>/);
+  assert.doesNotMatch(galleryTemplate, /<h2 id="cartoon-lightbox-title"/);
+  assert.match(galleryTemplate, /aria-labelledby="cartoon-lightbox-title"/);
+  assert.match(css, /\.article-plate-lightbox__caption \[data-article-plate-lightbox-caption\]\{/);
+  assert.doesNotMatch(css, /\.article-plate-lightbox__caption p\{/);
   assert.match(galleryTemplate, /window\.location\.href = activeEssay/);
   assert.match(galleryTemplate, /getRequestedCartoonSlug/);
   assert.match(galleryTemplate, /openLightbox\(requestedTrigger\)/);

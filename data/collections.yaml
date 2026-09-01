@@ -9,7 +9,7 @@ collections:
     featured: false
     weight: 9
     start_here: ""
-    description: Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, cartoons, compact notices, and worth reprinting.
+    description: Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, cartoons, compact notices, and one piece worth reprinting.
     room_theme: ledger-editorial-desk
     metadata:
       - label: Format

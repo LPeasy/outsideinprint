@@ -195,6 +195,17 @@ function Get-PrimaryNavHtml {
   return $match.Value
 }
 
+function Get-FooterNavHtml {
+  param([string]$Html)
+
+  $match = [regex]::Match($Html, '(?is)<nav\b(?=[^>]*aria-label\s*=\s*(?:"Footer"|''Footer''|Footer))[^>]*>.*?</nav>')
+  if (-not $match.Success) {
+    return $null
+  }
+
+  return $match.Value
+}
+
 function Get-PublicRoutePath {
   param([string]$RelativePath)
 
@@ -1735,6 +1746,26 @@ foreach ($file in $htmlFiles) {
       }
     }
   }
+  $footerNavHtml = Get-FooterNavHtml -Html $content
+  if (-not [string]::IsNullOrWhiteSpace($footerNavHtml)) {
+    $routePath = Get-PublicRoutePath -RelativePath $relativePath
+    foreach ($anchor in (Get-OpenTags -Html $footerNavHtml -TagName 'a')) {
+      $ariaCurrent = Get-AttributeValue -Tag $anchor -Name 'aria-current'
+      if ($null -eq $ariaCurrent) {
+        continue
+      }
+
+      if ($ariaCurrent -cne 'page') {
+        $uxIssues.Add("$relativePath => footer navigation uses unsupported aria-current='$ariaCurrent'")
+        continue
+      }
+
+      $hrefPath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $anchor -Name 'href')
+      if ([string]::IsNullOrWhiteSpace($routePath) -or $hrefPath -cne $routePath) {
+        $uxIssues.Add("$relativePath => footer aria-current='page' points to '$hrefPath' instead of the rendered route '$routePath'")
+      }
+    }
+  }
   $isArticleContentPage = (
     $relativePath -match '^public/(?:essays|syd-and-oliver)/[^/]+/index\.html$' -and
     $content -match '<article\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece\b[^"]*"|''[^'']*\bpiece\b[^'']*''|[^\s>]*\bpiece\b[^\s>]*)'
@@ -1744,6 +1775,18 @@ foreach ($file in $htmlFiles) {
     $articleLightboxContainerCount = [regex]::Matches($content, '<div\b(?=[^>]*\bdata-article-plate-lightbox\b)[^>]*>', 'IgnoreCase').Count
     if ($articleLightboxContainerCount -ne 1) {
       $articleLightboxIssues.Add("$relativePath => expected exactly one article image lightbox container, found $articleLightboxContainerCount")
+    }
+
+    $articleLightboxTitleCount = [regex]::Matches(
+      $content,
+      '<p\b(?=[^>]*\bid\s*=\s*(?:"article-plate-lightbox-title"|''article-plate-lightbox-title''|article-plate-lightbox-title))(?=[^>]*\bclass\s*=\s*(?:"[^"]*\bcartoon-lightbox__title\b[^"]*"|''[^'']*\bcartoon-lightbox__title\b[^'']*''|[^\s>]*\bcartoon-lightbox__title\b[^\s>]*))(?=[^>]*\bdata-article-plate-lightbox-title(?:=|\s|>))[^>]*>\s*</p>',
+      'IgnoreCase'
+    ).Count
+    if ($articleLightboxTitleCount -ne 1) {
+      $articleLightboxIssues.Add("$relativePath => expected one non-heading article lightbox dialog label, found $articleLightboxTitleCount")
+    }
+    if ($content -match '(?is)<h[1-6]\b[^>]*\bdata-article-plate-lightbox-title(?:=|\s|>)') {
+      $articleLightboxIssues.Add("$relativePath => article lightbox title hook must not render as an empty heading")
     }
 
     $pieceBodyMatch = [regex]::Match(
@@ -1839,6 +1882,21 @@ foreach ($file in $htmlFiles) {
     $retiredRouteIssues.Add("$relativePath => retired merch route leaked into generated HTML")
   }
 
+}
+
+$almanackLandmarkPaths = @(
+  $targetPageHtml.Keys |
+    Where-Object { $_ -eq 'public/collections/bobs-almanack/index.html' -or $_ -match '^public/almanack/\d{4}-\d{2}-\d{2}/index\.html$' }
+)
+foreach ($relativePath in $almanackLandmarkPaths) {
+  $mainTags = @(Get-OpenTags -Html ([string]$targetPageHtml[$relativePath]) -TagName 'main')
+  if ($mainTags.Count -ne 1) {
+    $semanticIssues.Add("$relativePath => expected exactly one <main>, found $($mainTags.Count)")
+    continue
+  }
+  if ((Get-AttributeValue -Tag $mainTags[0] -Name 'id') -ne 'main-content') {
+    $semanticIssues.Add("$relativePath => expected the sole main landmark to be <main id=""main-content"">")
+  }
 }
 
 foreach ($requiredOutput in @(
@@ -3159,9 +3217,19 @@ $requiredUxChecks = @(
     Message = 'expected Apps & Tools to be the exact current destination and Explore to be the current group'
   },
   @{
+    Path = 'public/apps/index.html'
+    Pattern = '(?s)aria-label="?Footer"?[^>]*>.*?<a(?=[^>]*href=(?:"/apps/"|/apps/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*Apps &amp; Tools\s*</a>'
+    Message = 'expected the Apps footer link to claim the current page only on the Apps landing route'
+  },
+  @{
     Path = 'public/games/index.html'
     Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?nav-disclosure--explore[^>]*nav-disclosure--current.*?(?:https://outsideinprint\.org)?/games/[^>]*aria-current=(?:"page"|page)[^>]*>\s*<span[^>]*>Games</span>'
     Message = 'expected Games to be the exact current destination and Explore to be the current group'
+  },
+  @{
+    Path = 'public/games/index.html'
+    Pattern = '(?s)aria-label="?Footer"?[^>]*>.*?<a(?=[^>]*href=(?:"/games/"|/games/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*Games\s*</a>'
+    Message = 'expected the Games footer link to claim the current page only on the Games landing route'
   },
   @{
     Path = 'public/about/index.html'
@@ -3415,9 +3483,31 @@ $requiredUxChecks = @(
     Message = 'expected the public collections index to point to the Bob''s Almanack collection page'
   },
   @{
+    Path = 'public/collections/index.html'
+    Pattern = 'compact notices, and one piece worth reprinting\.'
+    Message = 'expected the collections index to use the complete Bob''s Almanack proposition'
+  },
+  @{
+    Path = 'public/collections/index.html'
+    Pattern = 'compact notices, and worth reprinting\.'
+    Message = 'expected the collections index not to retain the incomplete Bob''s Almanack proposition'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/collections/bobs-almanack/index.html'
     Pattern = "Bob(?:'|&#39;)s Almanack"
     Message = 'expected the Bob''s Almanack collection page to render its bespoke nameplate'
+  },
+  @{
+    Path = 'public/collections/bobs-almanack/index.html'
+    Pattern = 'compact notices, and one piece worth reprinting\.'
+    Message = 'expected the Bob''s Almanack collection page to use the complete proposition'
+  },
+  @{
+    Path = 'public/collections/bobs-almanack/index.html'
+    Pattern = 'compact notices, and worth reprinting\.'
+    Message = 'expected the Bob''s Almanack collection page not to retain the incomplete proposition'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
@@ -3884,6 +3974,17 @@ $requiredUxChecks = @(
     Path = 'public/gallery/index.html'
     Pattern = 'data-cartoon-lightbox'
     Message = 'expected the gallery page to include the fullscreen cartoon lightbox'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = '<p id=(?:"cartoon-lightbox-title"|cartoon-lightbox-title) class=(?:"cartoon-lightbox__title"|cartoon-lightbox__title) data-cartoon-lightbox-title(?:="")?>\s*</p>'
+    Message = 'expected the Gallery lightbox to use a non-heading dialog label'
+  },
+  @{
+    Path = 'public/gallery/index.html'
+    Pattern = '<h[1-6]\b[^>]*data-cartoon-lightbox-title(?:=|\s|>)'
+    Message = 'expected the Gallery lightbox title hook not to render as an empty heading'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/gallery/index.html'

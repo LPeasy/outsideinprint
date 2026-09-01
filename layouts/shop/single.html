@@ -38,6 +38,9 @@
 
         <section class="bookstore-product__purchase" aria-labelledby="bookstore-purchase-title">
           <p id="bookstore-purchase-title" class="bookstore-product__purchase-title">Choose an edition</p>
+          {{ if gt (len $liveEpubOffers) 0 }}
+            <p class="bookstore-product__checkout-restriction">Direct EPUB checkout is currently available to U.S. customers only.</p>
+          {{ end }}
 
           {{ partial "shop/direct-offers.html" (dict
             "product" $product

@@ -83,6 +83,9 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(articlePlateLightbox, /data-article-plate-lightbox/);
   assert.match(articlePlateLightbox, /data-article-plate-lightbox-image-button/);
   assert.doesNotMatch(articlePlateLightbox, /data-article-plate-lightbox-image\s+src=""/);
+  assert.match(articlePlateLightbox, /<p id="article-plate-lightbox-title" class="cartoon-lightbox__title" data-article-plate-lightbox-title><\/p>/);
+  assert.doesNotMatch(articlePlateLightbox, /<h2 id="article-plate-lightbox-title"/);
+  assert.match(articlePlateLightbox, /aria-labelledby="article-plate-lightbox-title"/);
   assert.match(articlePlateLightbox, /document\.addEventListener\("click"/);
   assert.match(articlePlateLightbox, /closest\("\[data-article-plate-lightbox-trigger\]"\)/);
   assert.match(articlePlateLightbox, /bodyImageSelector = "\.piece-body img"/);

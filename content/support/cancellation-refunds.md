@@ -1,7 +1,7 @@
 ---
 title: "Reader Support Cancellation and Refund Terms"
 description: "Renewal, cancellation, and refund terms for one-time and monthly reader support."
-effective_date: "August 13, 2026"
+effective_date: "August 31, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -13,9 +13,8 @@ These terms apply to voluntary reader-support payments made through Outside In P
 
 The storefront may offer:
 
-- one-time support in a whole-dollar amount from $5 to $500;
-- fixed support of $5 per month; and
-- custom monthly support in a whole-dollar amount from $5 to $500 after recurring-price validation is complete.
+- one-time support in a whole-dollar amount from $5 to $500; and
+- fixed support of $5 per month.
 
 Support does not include a book, membership benefit, editorial influence, or special access. Book purchases use separate checkout pages.
 

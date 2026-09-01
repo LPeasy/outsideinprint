@@ -298,7 +298,9 @@ foreach ($requiredDetailText in @(
   'partial "shop/direct-offers.html"',
   'partial "shop/kindle-button.html"',
   '"sourceSlot" "bookstore_detail_direct"',
-  '"sourceSlot" "bookstore_detail_kindle"'
+  '"sourceSlot" "bookstore_detail_kindle"',
+  $usCheckoutRestriction,
+  'if gt (len $liveEpubOffers) 0'
 )) {
   Assert-Contains -Text $shopSingleTemplate -Expected $requiredDetailText -Context 'Square-first shop detail'
 }
@@ -306,6 +308,7 @@ if ([regex]::Matches($shopSingleTemplate, 'partial\s+"shop/kindle-button\.html"'
   throw 'Bookstore detail must render the shared compact Kindle partial exactly once.'
 }
 Assert-Ordered -Text $shopSingleTemplate -First 'partial "shop/direct-offers.html"' -Second 'partial "shop/kindle-button.html"' -Context 'Bookstore detail purchase order'
+Assert-Ordered -Text $shopSingleTemplate -First $usCheckoutRestriction -Second 'partial "shop/direct-offers.html"' -Context 'Bookstore detail geographic checkout notice placement'
 if ($shopSingleTemplate -match 'collapseCheckout') {
   throw 'Book detail pages must keep the direct EPUB checkout form expanded.'
 }
@@ -525,6 +528,17 @@ foreach ($relativePath in $requiredPolicySources) {
   Assert-Contains -Text $policy -Expected 'draft: false' -Context $relativePath
   Assert-Contains -Text $policy -Expected 'support@outsideinprint.org' -Context $relativePath
 }
+$supportTermsSource = Get-RequiredText -RelativePath 'content/support/cancellation-refunds.md'
+foreach ($requiredSupportTermsText in @(
+  'effective_date: "August 31, 2026"',
+  'one-time support in a whole-dollar amount from $5 to $500;',
+  'fixed support of $5 per month.'
+)) {
+  Assert-Contains -Text $supportTermsSource -Expected $requiredSupportTermsText -Context 'Reader Support Cancellation and Refund Terms'
+}
+if ($supportTermsSource -match '(?i)custom monthly support|recurring-price validation') {
+  throw 'Reader Support Cancellation and Refund Terms must not promise unavailable custom monthly support.'
+}
 $shippingPolicy = Get-RequiredText -RelativePath 'content/shipping-returns/index.md'
 Assert-Contains -Text $shippingPolicy -Expected 'draft: true' -Context 'Deferred shipping policy'
 if ($footerTemplate -match '(?i)shipping-returns|Shipping &amp; returns') {
@@ -635,6 +649,21 @@ if ([regex]::Matches($shopIndexOutput, '(?is)<details\b[^>]*\bdata-bookstore-che
 }
 if ($shopDetailOutput -match '\bdata-bookstore-checkout-disclosure(?:=|\s|>)') {
   throw 'Book detail pages must render their EPUB checkout forms without the catalog disclosure.'
+}
+foreach ($detailPath in @(
+  'shop/the-american-nightmare-keep-dreaming-kid/index.html',
+  'shop/the-parable-of-the-sheep/index.html',
+  'shop/the-water-cycle/index.html'
+)) {
+  $detailHtml = [Net.WebUtility]::HtmlDecode([string]$output[$detailPath])
+  if ([regex]::Matches($detailHtml, [regex]::Escape($usCheckoutRestriction), 'IgnoreCase').Count -ne 1) {
+    throw "Built bookstore detail $detailPath must expose the U.S.-only direct EPUB notice exactly once."
+  }
+  $detailRestrictionIndex = $detailHtml.IndexOf($usCheckoutRestriction, [StringComparison]::Ordinal)
+  $detailCheckoutIndex = $detailHtml.IndexOf('data-direct-offer', [StringComparison]::Ordinal)
+  if ($detailRestrictionIndex -lt 0 -or $detailCheckoutIndex -lt 0 -or $detailRestrictionIndex -ge $detailCheckoutIndex) {
+    throw "Built bookstore detail $detailPath must place the U.S.-only notice before direct checkout."
+  }
 }
 foreach ($sku in $publicEpubSkus) {
   if ($shopOutput -notmatch ('data-direct-offer-sku=(?:"|'''')?' + [regex]::Escape($sku) + '(?:"|'''')?')) {
@@ -804,6 +833,18 @@ if ($supportOutput -match '(?i)data-analytics-(?:amount|order|email|address)') {
 }
 if ($supportOutput -match '(?i)data-analytics-(?:customer|payment|subscription|transaction)') {
   throw 'Built support analytics attributes exposed customer or processor identifiers.'
+}
+
+$supportTermsOutput = [Net.WebUtility]::HtmlDecode([string]$output['support/cancellation-refunds/index.html'])
+foreach ($requiredSupportTermsOutput in @(
+  'Effective August 31, 2026',
+  'one-time support in a whole-dollar amount from $5 to $500;',
+  'fixed support of $5 per month.'
+)) {
+  Assert-Contains -Text $supportTermsOutput -Expected $requiredSupportTermsOutput -Context 'Built reader support terms'
+}
+if ($supportTermsOutput -match '(?i)custom monthly support|recurring-price validation') {
+  throw 'Built reader support terms must not promise unavailable custom monthly support.'
 }
 
 $thanksOutput = [Net.WebUtility]::HtmlDecode([string]$output['support/thanks/index.html'])

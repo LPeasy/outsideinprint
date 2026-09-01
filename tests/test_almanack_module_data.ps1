@@ -68,6 +68,21 @@ foreach ($retiredIssueCopy in @('opening_note', 'A Note from Robert V. Ussley'))
   }
 }
 
+foreach ($requiredLayoutContainer in @(
+  @{ Source = $issueTemplate; Pattern = '<div class="almanack-main">'; Context = 'Almanack issue primary column' },
+  @{ Source = $template; Pattern = '<div class="almanack-collection__principal">'; Context = 'Bob''s Almanack collection primary column' }
+)) {
+  if ($requiredLayoutContainer.Source -notmatch [regex]::Escape($requiredLayoutContainer.Pattern)) {
+    throw "$($requiredLayoutContainer.Context) must use a layout-only div inside the shared main landmark."
+  }
+}
+if ($issueTemplate -match '<main\b' -or $template -match '<main\b') {
+  throw 'Almanack templates must not nest a second main landmark inside the shared base layout.'
+}
+if ($template -match 'almanack-collection__principal"\s+aria-label=') {
+  throw 'The layout-only Almanack collection primary column must not retain a landmark label.'
+}
+
 if ($issueTemplate -match 'class="almanack-read-link"[^>]*>\s*Read\s*</a>') {
   throw 'Bob''s Almanack story cards and Worth Reprinting must not render separate Read labels.'
 }

@@ -568,6 +568,14 @@ foreach ($requiredSnippet in @(
   }
 }
 
+$correctedAlmanackDescription = 'description: Weekly Outside In Print issues from Robert V. Ussley, gathering new essays, cartoons, compact notices, and one piece worth reprinting.'
+if ($collectionsData -notmatch [regex]::Escape($correctedAlmanackDescription)) {
+  throw 'Expected data/collections.yaml to use the corrected Bob''s Almanack proposition.'
+}
+if ($collectionsData -match 'compact notices, and worth reprinting\.') {
+  throw 'Expected data/collections.yaml not to retain the incomplete Bob''s Almanack sentence.'
+}
+
 if ($collectionsData -match '(?s)- slug: civic-institutions-and-public-power.*?room_theme:') {
   throw 'Expected non-live collection civic-institutions-and-public-power not to define room_theme yet.'
 }
