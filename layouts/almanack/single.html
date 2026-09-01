@@ -208,4 +208,10 @@
       <p>Color over the lines. Read beyond the feed. Think for yourself.</p>
     </footer>
   </article>
+
+  {{ partial "newsletter_signup.html" (dict
+    "page" .
+    "class" "newsletter-signup--article-exit page-shell page-shell--wide"
+    "sourceSlot" "almanack_issue_exit_newsletter"
+  ) }}
 {{ end }}

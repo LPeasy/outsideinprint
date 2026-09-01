@@ -84,6 +84,7 @@ foreach ($requiredPath in @(
   'apps/index.html',
   'apps/bucks-machine/index.html',
   'apps/baseball-upside-risk/index.html',
+  'almanack/index.html',
   'almanack/2026-05-02/index.html',
   'almanack/2026-05-09/index.html',
   'almanack/2026-05-16/index.html',
@@ -120,7 +121,6 @@ foreach ($requiredPath in @(
 }
 
 foreach ($forbiddenPath in @(
-  'almanack/index.html',
   'shipping-returns/index.html',
   'shop/long-shots-in-the-big-league/index.html'
 )) {
@@ -128,6 +128,21 @@ foreach ($forbiddenPath in @(
   if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
     throw "Expected excluded route not to be emitted: $forbiddenPath"
   }
+}
+
+$almanackFrontDoorHtml = Get-RequiredPageHtml -RelativePath 'almanack/index.html'
+$almanackFrontDoorCanonical = Get-LinkHrefByRel -Html $almanackFrontDoorHtml -Rel 'canonical'
+if ($almanackFrontDoorCanonical -ne 'https://outsideinprint.org/collections/bobs-almanack/') {
+  throw "Expected /almanack/ to canonicalize to the Bob's Almanack collection, found '$almanackFrontDoorCanonical'."
+}
+if ($almanackFrontDoorHtml -notmatch '<meta\s+name=(?:"robots"|robots)\s+content=(?:"noindex, follow"|noindex,\s*follow)' -or
+    $almanackFrontDoorHtml -notmatch '<meta\s+http-equiv=(?:"refresh"|refresh)\s+content=(?:"0; url=/collections/bobs-almanack/"|0;\s*url=/collections/bobs-almanack/)' -or
+    $almanackFrontDoorHtml -notmatch 'window\.location\.replace\("/collections/bobs-almanack/"\)' -or
+    $almanackFrontDoorHtml -notmatch 'href="/collections/bobs-almanack/">Bob''s Almanack</a>') {
+  throw 'Expected /almanack/ to be a noindex canonical redirect with a visible fallback link to the existing Bob''s Almanack register.'
+}
+if ($almanackFrontDoorHtml -match 'almanack-collection__register|newsletter-signup') {
+  throw 'Expected /almanack/ not to duplicate the collection register or newsletter form.'
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot

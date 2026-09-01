@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting to Bob's Almanack</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="{{ "collections/bobs-almanack/" | absURL }}" />
+  <meta http-equiv="refresh" content="0; url={{ "collections/bobs-almanack/" | relURL }}" />
+  <script>
+    window.location.replace("{{ "collections/bobs-almanack/" | relURL }}");
+  </script>
+</head>
+<body>
+  <p>Redirecting to <a href="{{ "collections/bobs-almanack/" | relURL }}">Bob's Almanack</a>.</p>
+</body>
+</html>

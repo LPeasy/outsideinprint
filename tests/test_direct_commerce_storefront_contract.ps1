@@ -134,12 +134,12 @@ foreach ($sku in $publicEpubSkus) {
 $parableProductPattern = '(?ms)^  parable_of_the_sheep:\s*$(?<body>.*?)(?=^  the_water_cycle:|\z)'
 $parableProduct = [regex]::Match($bookstoreData, $parableProductPattern).Value
 Assert-Contains -Text $parableProduct -Expected 'price_display: "$9.99"' -Context 'Parable direct EPUB price'
-Assert-Contains -Text $parableProduct -Expected 'kindle_price_display: "$4.99"' -Context 'Parable secondary Kindle price'
-Assert-Contains -Text $parableProduct -Expected 'kindle_label: "Kindle on Amazon · $4.99"' -Context 'Parable compact Kindle label'
+Assert-Contains -Text $parableProduct -Expected 'kindle_price_display: "$9.99"' -Context 'Parable secondary Kindle price'
+Assert-Contains -Text $parableProduct -Expected 'kindle_label: "Kindle on Amazon · $9.99"' -Context 'Parable compact Kindle label'
 
 $productExpectations = @(
   @{ Key = 'american_nightmare'; Next = 'parable_of_the_sheep'; Kindle = 'Kindle on Amazon · $9.99' },
-  @{ Key = 'parable_of_the_sheep'; Next = 'the_water_cycle'; Kindle = 'Kindle on Amazon · $4.99' },
+  @{ Key = 'parable_of_the_sheep'; Next = 'the_water_cycle'; Kindle = 'Kindle on Amazon · $9.99' },
   @{ Key = 'the_water_cycle'; Next = ''; Kindle = 'Kindle on Amazon · $9.99' }
 )
 foreach ($expectation in $productExpectations) {
@@ -727,17 +727,17 @@ if ([regex]::Matches($shopOutput, 'data-bookstore-kindle-button(?:=|\s|>)', 'Ign
   throw 'Built bookstore must render exactly one compact Kindle button per title on the index and detail surfaces.'
 }
 $decodedShopOutput = [Net.WebUtility]::HtmlDecode($shopOutput)
-if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$9\.99</a>', 'IgnoreCase').Count -ne 4) {
-  throw 'American Nightmare and Water Cycle must each show the exact $9.99 compact Kindle label on index and detail pages.'
+if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$9\.99</a>', 'IgnoreCase').Count -ne 6) {
+  throw 'All three titles must show the exact $9.99 compact Kindle label on index and detail pages.'
 }
-if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$4\.99</a>', 'IgnoreCase').Count -ne 2) {
-  throw 'Parable must show the exact $4.99 compact Kindle label on index and detail pages.'
+if ($decodedShopOutput -match '>Kindle on Amazon · \$4\.99</a>') {
+  throw 'Built bookstore retained the stale Parable $4.99 Kindle label.'
 }
 
 $shopSurfaceExpectations = @(
   @{ Path = 'shop/index.html'; KindleCount = 3; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print') },
   @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
-  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $4.99') },
+  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
   @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
 )
 foreach ($surface in $shopSurfaceExpectations) {
@@ -788,10 +788,10 @@ if ($privacyOutput -match [regex]::Escape('This policy explains how Outside In P
 
 $orderedOffers = @(
   @{ Path = 'shop/index.html'; Sku = 'OIP-AN-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
-  @{ Path = 'shop/index.html'; Sku = 'OIP-PS-EPUB'; Kindle = 'Kindle on Amazon · $4.99' },
+  @{ Path = 'shop/index.html'; Sku = 'OIP-PS-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
   @{ Path = 'shop/index.html'; Sku = 'OIP-WC-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
   @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; Sku = 'OIP-AN-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
-  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; Sku = 'OIP-PS-EPUB'; Kindle = 'Kindle on Amazon · $4.99' },
+  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; Sku = 'OIP-PS-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
   @{ Path = 'shop/the-water-cycle/index.html'; Sku = 'OIP-WC-EPUB'; Kindle = 'Kindle on Amazon · $9.99' }
 )
 foreach ($offer in $orderedOffers) {

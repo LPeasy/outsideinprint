@@ -1572,6 +1572,7 @@ $requiredSitemapExclusions = @(
   'https://outsideinprint.org/authors/',
   'https://outsideinprint.org/random/',
   'https://outsideinprint.org/start-here/',
+  'https://outsideinprint.org/almanack/',
   'https://outsideinprint.org/essays/',
   'https://outsideinprint.org/working-papers/',
   'https://outsideinprint.org/literature/'
@@ -3284,7 +3285,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$4\.99.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected the bookstore index to render each $9.99 direct EPUB offer before its single compact Kindle button'
   },
   @{
@@ -3294,8 +3295,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$4\.99'
-    Message = 'expected the bookstore index to expose Parable live at $9.99 before its compact $4.99 Kindle button'
+    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Message = 'expected the bookstore index to expose Parable live at $9.99 before its compact $9.99 Kindle button'
   },
   @{
     Path = 'public/shop/index.html'
@@ -3338,8 +3339,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/the-parable-of-the-sheep/index.html'
-    Pattern = '(?s)Book.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$4\.99'
-    Message = 'expected Parable page to place its live $9.99 direct EPUB offer before one compact $4.99 Kindle button'
+    Pattern = '(?s)Book.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Message = 'expected Parable page to place its live $9.99 direct EPUB offer before one compact $9.99 Kindle button'
   },
   @{
     Path = 'public/shop/the-parable-of-the-sheep/index.html'
@@ -3518,6 +3519,16 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-05-02/index.html'
     Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?Issue 1.*?A public cost does not disappear because someone learned to price it\.'
     Message = 'expected the May 2 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
+  },
+  @{
+    Path = 'public/almanack/2026-07-25/index.html'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown'
+    Message = 'expected the sample Almanack issue to end with the canonical signup proposition and issue-exit analytics slot'
+  },
+  @{
+    Path = 'public/almanack/2026-08-29/index.html'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?data-analytics-event=(?:"|'''')?newsletter_submit(?:"|'''')?.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?action=(?:"|'''')?https://buttondown\.com/api/emails/embed-subscribe/OutsideInPrint'
+    Message = 'expected an ordinary Almanack issue to reuse the shared Buttondown signup after the issue content'
   },
   @{
     Path = 'public/almanack/2026-05-09/index.html'

@@ -56,6 +56,8 @@ const footer = fs.readFileSync(path.resolve("layouts/partials/footer.html"), "ut
 const randomTemplate = fs.readFileSync(path.resolve("layouts/random/single.html"), "utf8");
 const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
 const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
+const almanackIndex = fs.readFileSync(path.resolve("content/almanack/_index.md"), "utf8");
+const almanackIndexTemplate = fs.readFileSync(path.resolve("layouts/almanack/list.html"), "utf8");
 const almanackIssue = fs.readFileSync(path.resolve("layouts/almanack/single.html"), "utf8");
 const almanackCollection = fs.readFileSync(path.resolve("layouts/collections/bobs-almanack.html"), "utf8");
 const collectionsData = fs.readFileSync(path.resolve("data/collections.yaml"), "utf8");
@@ -249,7 +251,8 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
 
   assert.match(bookstoreData, /checkout_label: "Buy EPUB — \$9\.99"/);
   assert.match(bookstoreData, /checkout_note: "Secure checkout through Square\. EPUB delivered by email\."/);
-  assert.match(bookstoreData, /kindle_label: "Kindle on Amazon · \$4\.99"/);
+  assert.equal((bookstoreData.match(/kindle_label: "Kindle on Amazon · \$9\.99"/g) || []).length, 3);
+  assert.doesNotMatch(bookstoreData, /kindle_label: "Kindle on Amazon · \$4\.99"/);
   assert.doesNotMatch(bookstoreData, /^\s+(?:purchase_url|fallback_url|fallback_label):/m);
   assert.doesNotMatch(privacyPolicy, /This policy explains how Outside In Print handles information connected to this website/);
 
@@ -307,6 +310,15 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
   assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
+  assert.match(almanackIndex, /noindex: true\s+build:\s+render: always\s+list: never/);
+  assert.match(almanackIndexTemplate, /<meta name="robots" content="noindex, follow" \/>/);
+  assert.match(almanackIndexTemplate, /<link rel="canonical" href="\{\{ "collections\/bobs-almanack\/" \| absURL \}\}" \/>/);
+  assert.match(almanackIndexTemplate, /window\.location\.replace\("\{\{ "collections\/bobs-almanack\/" \| relURL \}\}"\)/);
+  assert.match(almanackIssue, /partial "newsletter_signup\.html"/);
+  assert.match(almanackIssue, /"class" "newsletter-signup--article-exit page-shell page-shell--wide"/);
+  assert.match(almanackIssue, /"sourceSlot" "almanack_issue_exit_newsletter"/);
+  assert.equal((almanackIssue.match(/partial "newsletter_signup\.html"/g) || []).length, 1);
+  assert.ok(almanackIssue.lastIndexOf("</article>") < almanackIssue.indexOf('partial "newsletter_signup.html"'));
 
   assert.match(privacyPolicy, /effective_date: "August 31, 2026"/);
   assert.match(privacyPolicy, /standalone Bob's Almanack signup form/);
