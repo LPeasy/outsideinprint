@@ -112,6 +112,7 @@ foreach ($requiredPath in @(
   'shop/the-parable-of-the-sheep/index.html',
   'shop/thanks/index.html',
   'shop/the-water-cycle/index.html',
+  'studio/index.html',
   'support/index.html',
   'support/cancellation-refunds/index.html',
   'support/thanks/index.html',
@@ -183,6 +184,7 @@ foreach ($sampleRelativePath in @(
 $appsHtml = Get-RequiredPageHtml -RelativePath 'apps/index.html'
 $bucksHtml = Get-RequiredPageHtml -RelativePath 'apps/bucks-machine/index.html'
 $baseballHtml = Get-RequiredPageHtml -RelativePath 'apps/baseball-upside-risk/index.html'
+$studioHtml = Get-RequiredPageHtml -RelativePath 'studio/index.html'
 
 if ($appsHtml -notmatch '<h1\b[^>]*>Apps (?:&amp;|&) Tools</h1>') {
   throw 'Expected the public Apps & Tools route to render its single H1.'
@@ -192,6 +194,10 @@ if ($bucksHtml -notmatch '<h1\b[^>]*>Bucks Machine</h1>') {
 }
 if ($baseballHtml -notmatch '<h1\b[^>]*>Baseball Upside Risk</h1>') {
   throw 'Expected the public Baseball Upside Risk route to render its single H1.'
+}
+$studioHeadings = @([regex]::Matches($studioHtml, '<h1\b[^>]*>\s*You have the material\. We make it publishable\.\s*</h1>', 'IgnoreCase'))
+if ($studioHeadings.Count -ne 1) {
+  throw 'Expected the public Studio route to render one approved H1.'
 }
 if ($appsHtml.IndexOf('Bucks Machine', [StringComparison]::Ordinal) -ge $appsHtml.IndexOf('Baseball Upside Risk', [StringComparison]::Ordinal)) {
   throw 'Expected Bucks Machine to remain the first Apps card and Baseball Upside Risk to remain second.'

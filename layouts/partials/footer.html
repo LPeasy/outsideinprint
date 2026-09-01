@@ -18,6 +18,15 @@
       {{ if $showApps }}<a href="{{ $appsPage.RelPermalink }}"{{ if eq .RelPermalink $appsPage.RelPermalink }} aria-current="page"{{ end }}>Apps &amp; Tools</a>{{ end }}
       {{ if $showGames }}<a href="{{ $gamesPage.RelPermalink }}"{{ if eq .RelPermalink $gamesPage.RelPermalink }} aria-current="page"{{ end }}>Games</a>{{ end }}
       <a
+        href="{{ "studio/" | absURL }}"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="footer_studio"
+        data-analytics-slug="studio"
+        data-analytics-title="Outside In Print Studio"
+        data-analytics-section="Studio"
+        data-analytics-path="{{ "studio/" | relURL }}"
+      >Studio</a>
+      <a
         href="{{ "shop/" | absURL }}"
         data-analytics-event="internal_promo_click"
         data-analytics-source-slot="footer_bookstore"

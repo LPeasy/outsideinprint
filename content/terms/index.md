@@ -1,13 +1,13 @@
 ---
-title: "Terms of Sale"
-description: "Terms governing direct book orders, EPUB delivery, and reader support through Outside In Print."
-effective_date: "August 13, 2026"
+title: "Terms of Sale and Studio Services"
+description: "Terms governing direct book orders, EPUB delivery, reader support, and Studio inquiries and services through Outside In Print."
+effective_date: "September 1, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
 ---
 
-These terms govern direct purchases and reader-support payments made through Outside In Print. The public imprint is Outside In Print; the business operating the checkout and fulfilling direct orders is Outside In Print LLC.
+These terms govern direct purchases, reader-support payments, and Studio inquiries and services through Outside In Print. The public imprint is Outside In Print; the business operating the checkout, fulfilling direct orders, and providing accepted Studio services is Outside In Print LLC.
 
 ## Checkout and order acceptance
 
@@ -24,6 +24,14 @@ An EPUB purchase grants a personal-use license, not ownership of the copyright. 
 ## Reader support
 
 Reader support does not include a book, membership benefit, editorial influence, or special access. Monthly support is charged when started and then renews each month until canceled. Cancellation and refund rules are stated in the [Reader Support Cancellation and Refund Terms](/support/cancellation-refunds/).
+
+## Studio inquiries and services
+
+Preparing or sending a Studio inquiry email is not acceptance of a project and does not create a client relationship. A production slot is reserved only after the written scope is approved and the deposit is paid.
+
+The separate written scope or service agreement governs the accepted project's scope, schedule, rights, revisions, and payment terms. Public Studio pricing describes the fixed base sprint; additional interviews, research, source volume, revisions, or other added work are quoted separately.
+
+Do not send confidential, classified, privileged, export-controlled, or restricted source material before Outside In Print requests it and approves a transfer method.
 
 ## Refunds and disputes
 

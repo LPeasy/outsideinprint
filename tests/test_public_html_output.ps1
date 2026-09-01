@@ -638,6 +638,24 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$studioDataSource = Get-Content -LiteralPath (Join-Path $repoRoot 'data\studio.yaml') -Raw
+$studioEnabledMatch = [regex]::Match($studioDataSource, '(?m)^enabled:[ \t]*(true|false)[ \t]*$')
+$studioInquiryEnabledMatch = [regex]::Match($studioDataSource, '(?m)^inquiry:[ \t]*\r?\n[ \t]+enabled:[ \t]*(true|false)[ \t]*$')
+$studioFoundingActiveMatch = [regex]::Match($studioDataSource, '(?m)^\s*founding_offer_active:\s*(true|false)\s*$')
+$studioFoundingPriceMatch = [regex]::Match($studioDataSource, '(?m)^\s*founding_price_display:\s*"([^"]+)"\s*$')
+$studioStandardPriceMatch = [regex]::Match($studioDataSource, '(?m)^\s*standard_price_display:\s*"([^"]+)"\s*$')
+if (-not $studioEnabledMatch.Success -or -not $studioInquiryEnabledMatch.Success -or -not $studioFoundingActiveMatch.Success -or -not $studioFoundingPriceMatch.Success -or -not $studioStandardPriceMatch.Success) {
+  throw 'Unable to resolve the Studio feature and pricing configuration from data/studio.yaml.'
+}
+$studioEnabled = $studioEnabledMatch.Groups[1].Value -ceq 'true'
+$studioInquiryEnabled = $studioInquiryEnabledMatch.Groups[1].Value -ceq 'true'
+$studioComposerEnabled = $studioEnabled -and $studioInquiryEnabled
+$studioFoundingOfferActive = $studioFoundingActiveMatch.Groups[1].Value -ceq 'true'
+$studioFoundingPrice = $studioFoundingPriceMatch.Groups[1].Value
+$studioStandardPrice = $studioStandardPriceMatch.Groups[1].Value
+$studioActivePrice = if ($studioFoundingOfferActive) { $studioFoundingPrice } else { $studioStandardPrice }
+$studioActiveRateLabel = if ($studioFoundingOfferActive) { 'Founding-client rate' } else { 'Standard rate' }
+$studioActiveRateText = "$studioActiveRateLabel $studioActivePrice"
 $imageManifestPath = Join-Path $repoRoot 'data\image-assets.json'
 if (-not (Test-Path -LiteralPath $imageManifestPath -PathType Leaf)) {
   throw "Responsive image manifest not found: $imageManifestPath"
@@ -706,6 +724,7 @@ $requiredSemanticPages = [ordered]@{
   'public/shop/the-parable-of-the-sheep/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
   'public/shop/thanks/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $false }
   'public/shop/the-water-cycle/index.html' = @{ ExpectedH1Class = 'shop-title'; RequireSecondaryHeading = $true }
+  'public/studio/index.html' = @{ ExpectedH1Class = 'studio-hero__title'; RequireSecondaryHeading = $true }
   'public/support/index.html' = @{ ExpectedH1Class = 'support-page__title'; RequireSecondaryHeading = $true }
   'public/support/cancellation-refunds/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $true }
   'public/support/thanks/index.html' = @{ ExpectedH1Class = 'commerce-policy__title'; RequireSecondaryHeading = $false }
@@ -942,6 +961,16 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
+  }
+  'public/studio/index.html' = @{
+    Title = 'Outside In Print Studio'
+    Description = 'Turn one recording, transcript, draft, or source packet into a clear, bylined essay through a fixed-scope publication sprint.'
+    Canonical = 'https://outsideinprint.org/studio/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
+    ExpectedImageAlt = 'Outside In Print Studio'
   }
   'public/archive/index.html' = @{
     Title = 'Archive'
@@ -1450,6 +1479,10 @@ $requiredIndexationPages = [ordered]@{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
+  'public/studio/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
   'public/apps/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
@@ -1566,6 +1599,7 @@ $requiredSitemapInclusions = @(
   'https://outsideinprint.org/apps/',
   'https://outsideinprint.org/apps/bucks-machine/',
   'https://outsideinprint.org/apps/baseball-upside-risk/'
+  'https://outsideinprint.org/studio/'
 )
 
 $requiredSitemapExclusions = @(
@@ -1651,6 +1685,7 @@ $requiredUxPages = @(
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
   'public/shop/the-water-cycle/index.html',
+  'public/studio/index.html',
   'public/games/index.html',
   'public/games/idle-times/index.html',
   'public/random/index.html',
@@ -1883,6 +1918,178 @@ foreach ($file in $htmlFiles) {
     $retiredRouteIssues.Add("$relativePath => retired merch route leaked into generated HTML")
   }
 
+  $allStudioScriptTags = @(
+    Get-OpenTags -Html $content -TagName 'script' |
+      Where-Object {
+        $scriptSrc = Get-AttributeValue -Tag $_ -Name 'src'
+        $scriptSrc -match '(?i)studio-inquiry'
+      }
+  )
+  if ($relativePath -eq 'public/studio/index.html') {
+    if ($studioComposerEnabled) {
+      $fingerprintedStudioScriptTags = @(
+        $allStudioScriptTags |
+          Where-Object {
+            $scriptSrc = Get-AttributeValue -Tag $_ -Name 'src'
+            $scriptSrc -match '(?i)/js/studio-inquiry(?:\.min)?\.[a-f0-9]{16,}\.js(?:[?#].*)?$'
+          }
+      )
+      if ($allStudioScriptTags.Count -ne 1 -or $fingerprintedStudioScriptTags.Count -ne 1) {
+        $uxIssues.Add("$relativePath => expected exactly one fingerprinted Studio inquiry script, found $($allStudioScriptTags.Count) Studio-named and $($fingerprintedStudioScriptTags.Count) fingerprinted")
+      }
+    }
+    elseif ($allStudioScriptTags.Count -ne 0) {
+      $uxIssues.Add("$relativePath => disabled Studio composer must omit the inquiry script")
+    }
+  }
+  elseif ($allStudioScriptTags.Count -ne 0) {
+    $uxIssues.Add("$relativePath => Studio-only inquiry script leaked onto another route")
+  }
+
+}
+
+if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
+  $studioHtml = [string]$targetPageHtml['public/studio/index.html']
+  $studioVisibleText = Convert-HtmlFragmentToText -Html $studioHtml
+
+  foreach ($requiredText in @(
+    'You have the material. We make it publishable.',
+    $studioActiveRateText,
+    '50% deposit to reserve production',
+    '50% final balance before final delivery',
+    '90 minutes',
+    '15,000 words',
+    '25 pages',
+    '1,500–2,000-word bylined essay',
+    '7-business-day production window',
+    'Additional interviews',
+    'Extensive original research beyond supplied material and basic verification',
+    'Custom illustration',
+    'Website design or development',
+    'Ongoing social-media management or content calendars',
+    'Book-length work',
+    'More than one revision round',
+    'Guaranteed publication on Outside In Print',
+    'These are Outside In Print editorial examples, not client testimonials.',
+    'There is no public checkout. Every project is reviewed and scoped in writing before payment.'
+  )) {
+    if ($studioVisibleText.IndexOf($requiredText, [System.StringComparison]::Ordinal) -lt 0) {
+      $uxIssues.Add("public/studio/index.html => expected approved Studio text: $requiredText")
+    }
+  }
+
+  $studioForms = @(
+    Get-OpenTags -Html $studioHtml -TagName 'form' |
+      Where-Object { $null -ne (Get-AttributeValue -Tag $_ -Name 'data-studio-email-form') -or $_ -match '\bdata-studio-email-form(?:\s|>)' }
+  )
+  if ($studioComposerEnabled) {
+    if ($studioForms.Count -ne 1) {
+      $uxIssues.Add("public/studio/index.html => expected one guided Studio inquiry form, found $($studioForms.Count)")
+    }
+    else {
+      $studioFormTag = $studioForms[0]
+      foreach ($attributeExpectation in @(
+        @{ Name = 'action'; Value = '/studio/#studio-inquiry' },
+        @{ Name = 'method'; Value = 'post' },
+        @{ Name = 'data-inquiry-email'; Value = 'support@outsideinprint.org' },
+        @{ Name = 'data-inquiry-subject-prefix'; Value = 'Outside In Print Studio Inquiry' },
+        @{ Name = 'data-current-rate'; Value = $studioActivePrice },
+        @{ Name = 'data-offer-code'; Value = 'OIP-STUDIO-EXPERT-ESSAY' },
+        @{ Name = 'data-source-page'; Value = 'https://outsideinprint.org/studio/' },
+        @{ Name = 'data-analytics-event'; Value = 'studio_inquiry_email_prepare' },
+        @{ Name = 'data-analytics-product'; Value = 'OIP-STUDIO-EXPERT-ESSAY' },
+        @{ Name = 'data-analytics-format'; Value = 'service_inquiry_email' },
+        @{ Name = 'data-analytics-source-slot'; Value = 'studio_inquiry_form' },
+        @{ Name = 'data-analytics-slug'; Value = 'studio' }
+      )) {
+        $actualValue = Get-AttributeValue -Tag $studioFormTag -Name $attributeExpectation.Name
+        if ($actualValue -cne $attributeExpectation.Value) {
+          $uxIssues.Add("public/studio/index.html => Studio form $($attributeExpectation.Name) expected '$($attributeExpectation.Value)', found '$actualValue'")
+        }
+      }
+    }
+
+    $studioFieldExpectations = @(
+      @{ Name = 'name'; Tag = 'input'; Type = 'text'; MaxLength = '100'; Required = $true },
+      @{ Name = 'email'; Tag = 'input'; Type = 'email'; MaxLength = '254'; Required = $true },
+      @{ Name = 'website'; Tag = 'input'; Type = 'url'; MaxLength = '300'; Required = $false },
+      @{ Name = 'role'; Tag = 'select'; Required = $true },
+      @{ Name = 'source_material'; Tag = 'select'; Required = $true },
+      @{ Name = 'project_subject'; Tag = 'input'; Type = 'text'; MaxLength = '160'; Required = $true },
+      @{ Name = 'desired_outcome'; Tag = 'textarea'; MaxLength = '800'; Required = $true },
+      @{ Name = 'timeline'; Tag = 'select'; Required = $true },
+      @{ Name = 'commercial_acknowledgement'; Tag = 'input'; Type = 'checkbox'; Required = $true }
+    )
+    foreach ($fieldExpectation in $studioFieldExpectations) {
+      $fieldTags = @(
+        Get-OpenTags -Html $studioHtml -TagName ([string]$fieldExpectation.Tag) |
+          Where-Object { (Get-AttributeValue -Tag $_ -Name 'name') -ceq [string]$fieldExpectation.Name }
+      )
+      if ($fieldTags.Count -ne 1) {
+        $uxIssues.Add("public/studio/index.html => expected one '$($fieldExpectation.Name)' field, found $($fieldTags.Count)")
+        continue
+      }
+      $fieldTag = $fieldTags[0]
+      if ($fieldExpectation.ContainsKey('Type') -and (Get-AttributeValue -Tag $fieldTag -Name 'type') -cne [string]$fieldExpectation.Type) {
+        $uxIssues.Add("public/studio/index.html => field '$($fieldExpectation.Name)' has the wrong type")
+      }
+      if ($fieldExpectation.ContainsKey('MaxLength') -and (Get-AttributeValue -Tag $fieldTag -Name 'maxlength') -cne [string]$fieldExpectation.MaxLength) {
+        $uxIssues.Add("public/studio/index.html => field '$($fieldExpectation.Name)' has the wrong maxlength")
+      }
+      $fieldIsRequired = $fieldTag -match '\brequired(?:\s|>)'
+      if ($fieldIsRequired -ne [bool]$fieldExpectation.Required) {
+        $uxIssues.Add("public/studio/index.html => field '$($fieldExpectation.Name)' required state is incorrect")
+      }
+    }
+
+    $studioSubmitButtons = @(
+      Get-OpenTags -Html $studioHtml -TagName 'button' |
+        Where-Object { (Get-AttributeValue -Tag $_ -Name 'type') -ceq 'submit' }
+    )
+    if ($studioSubmitButtons.Count -ne 1 -or $studioSubmitButtons[0] -notmatch '\bdisabled(?:\s|>)') {
+      $uxIssues.Add('public/studio/index.html => inquiry submit button must render disabled in source HTML')
+    }
+    if ($studioHtml -notmatch '<p\b(?=[^>]*\brole=(?:"status"|status))(?=[^>]*\baria-live=(?:"polite"|polite))[^>]*>') {
+      $uxIssues.Add('public/studio/index.html => inquiry form must expose a polite live status element')
+    }
+  }
+  elseif ($studioForms.Count -ne 0) {
+    $uxIssues.Add("public/studio/index.html => disabled Studio composer must omit the guided form")
+  }
+
+  if ($studioHtml -match '<input\b[^>]*type=(?:"file"|file)') {
+    $uxIssues.Add('public/studio/index.html => inquiry form must not contain a file input')
+  }
+  if ($studioHtml -notmatch 'href=(?:"/privacy/"|/privacy/)>Privacy Policy</a>') {
+    $uxIssues.Add('public/studio/index.html => Studio inquiry section must link to the Privacy Policy')
+  }
+
+  $directEmailAnchors = @(
+    Get-OpenTags -Html $studioHtml -TagName 'a' |
+      Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-event') -ceq 'studio_inquiry_direct_email' }
+  )
+  if ($directEmailAnchors.Count -ne 1) {
+    $uxIssues.Add("public/studio/index.html => expected one tracked direct-email fallback, found $($directEmailAnchors.Count)")
+  }
+  else {
+    $directEmailHref = [System.Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $directEmailAnchors[0] -Name 'href'))
+    if ($directEmailHref -notmatch '^mailto:support@outsideinprint\.org\?') {
+      $uxIssues.Add('public/studio/index.html => direct-email fallback must use the configured support address')
+    }
+    if ($directEmailHref -match '\+' -or $directEmailHref -notmatch '%20' -or $directEmailHref -notmatch '(?i)%0D%0A') {
+      $uxIssues.Add('public/studio/index.html => direct-email fallback must encode spaces and CRLF for mailto compatibility')
+    }
+    foreach ($attributeExpectation in @(
+      @{ Name = 'data-analytics-source-slot'; Value = 'studio_inquiry_fallback' },
+      @{ Name = 'data-analytics-product'; Value = 'OIP-STUDIO-EXPERT-ESSAY' },
+      @{ Name = 'data-analytics-format'; Value = 'direct_email' },
+      @{ Name = 'data-analytics-slug'; Value = 'studio' }
+    )) {
+      if ((Get-AttributeValue -Tag $directEmailAnchors[0] -Name $attributeExpectation.Name) -cne $attributeExpectation.Value) {
+        $uxIssues.Add("public/studio/index.html => direct-email fallback has incorrect $($attributeExpectation.Name)")
+      }
+    }
+  }
 }
 
 $almanackLandmarkPaths = @(
@@ -2478,6 +2685,31 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
   }
 }
 
+$studioHomepageOrderPattern = if ($studioEnabled) {
+  '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-studio-offer.*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup--home-ribbon.*?home-browse'
+}
+else {
+  '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup--home-ribbon.*?home-browse'
+}
+$studioHomepageOrderMessage = if ($studioEnabled) {
+  'expected the homepage to place Studio after the story grid and before the bookstore, manifesto, and lower-page signoff'
+}
+else {
+  'expected disabled Studio configuration to preserve the homepage story, bookstore, manifesto, and lower-page order'
+}
+$studioHomepageModulePattern = if ($studioEnabled) {
+  '(?s)<section[^>]*class=(?:"[^"]*\bhome-studio-offer\b[^"]*"|''[^'']*\bhome-studio-offer\b[^'']*''|[^>]*\bhome-studio-offer\b[^>]*)[^>]*>.*?You have the material\. We make it publishable\..*?' + [regex]::Escape($studioActiveRateLabel) + '.*?' + [regex]::Escape($studioActivePrice) + '.*?href=(?:"/studio/"|/studio/)[^>]*data-analytics-source-slot=(?:"homepage_studio_offer"|homepage_studio_offer)[^>]*>.*?Start a Publication Sprint.*?</section>'
+}
+else {
+  '\bhome-studio-offer\b'
+}
+$studioHomepageModuleMessage = if ($studioEnabled) {
+  'expected the homepage Studio module to expose the approved promise, active rate, CTA, and analytics slot'
+}
+else {
+  'expected disabled Studio configuration to omit the homepage Studio module'
+}
+
 $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
@@ -2502,8 +2734,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup--home-ribbon.*?home-browse'
-    Message = 'expected the homepage to place the bookstore shelf after the story grid and before the manifesto and lower-page signoff'
+    Pattern = $studioHomepageOrderPattern
+    Message = $studioHomepageOrderMessage
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = $studioHomepageModulePattern
+    Message = $studioHomepageModuleMessage
+    ShouldNotMatch = -not $studioEnabled
   },
   @{
     Path = 'public/index.html'
@@ -2762,12 +3000,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Read</span>.*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*data-analytics-source-slot=(?:"primary_nav_support"|primary_nav_support)[^>]*>\s*<span[^>]*>Support</span>'
-    Message = 'expected the homepage desktop ribbon to expose Read, Explore, Bookstore, About, and Support in order'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Read</span>.*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/studio/[^>]*data-analytics-source-slot=(?:"primary_nav_studio"|primary_nav_studio)[^>]*>\s*<span[^>]*>Studio</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*data-analytics-source-slot=(?:"primary_nav_support"|primary_nav_support)[^>]*>\s*<span[^>]*>Support</span>'
+    Message = 'expected the homepage desktop ribbon to expose Read, Explore, Studio, Bookstore, About, and Support in order'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?class=(?:"nav-mobile-menu__summary"|nav-mobile-menu__summary)[^>]*>.*?<span>Menu</span>.*?mobile-nav-read-heading.*?<span[^>]*>Latest</span>.*?<span[^>]*>Library</span>.*?<span[^>]*>Feeling curious\?</span>.*?mobile-nav-explore-heading.*?<span[^>]*>Gallery</span>.*?<span[^>]*>Apps & Tools</span>.*?<span[^>]*>Games</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>'
+    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/studio/[^>]*>\s*<span[^>]*>Studio</span>.*?class=(?:"nav-mobile-menu__summary"|nav-mobile-menu__summary)[^>]*>.*?<span>Menu</span>.*?mobile-nav-read-heading.*?<span[^>]*>Latest</span>.*?<span[^>]*>Library</span>.*?<span[^>]*>Feeling curious\?</span>.*?mobile-nav-explore-heading.*?<span[^>]*>Gallery</span>.*?<span[^>]*>Apps & Tools</span>.*?<span[^>]*>Games</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>'
     Message = 'expected the homepage mobile ribbon and Menu to expose the approved responsive hierarchy'
   },
   @{
@@ -2931,7 +3169,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/404.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>.*?class=(?:"nav__mobile"|nav__mobile).*?<span[^>]*>Archive</span>.*?<span[^>]*>Collections</span>.*?<span[^>]*>Bookstore</span>.*?<span>Menu</span>'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>.*?class=(?:"nav__mobile"|nav__mobile).*?<span[^>]*>Archive</span>.*?<span[^>]*>Collections</span>.*?<span[^>]*>Studio</span>.*?<span>Menu</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>Bookstore</span>'
     Message = 'expected the 404 page to use the same grouped desktop and mobile Primary navigation'
   },
   @{
@@ -3287,6 +3525,11 @@ $requiredUxChecks = @(
     Path = 'public/shop/the-water-cycle/index.html'
     Pattern = '(?s)data-bookstore-kindle-button.*?data-analytics-source-slot=(?:"bookstore_detail_kindle"|bookstore_detail_kindle).*?data-analytics-slug=(?:"the-water-cycle"|the-water-cycle).*?data-analytics-path=(?:"https://www\.amazon\.com/dp/B0H46WMGJQ"|https://www\.amazon\.com/dp/B0H46WMGJQ)'
     Message = 'expected the compact Kindle button on bookstore detail pages to carry per-book analytics metadata'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)aria-label="?Footer"?[^>]*>.*?(?:https://outsideinprint\.org)?/studio/[^>]*data-analytics-source-slot=(?:"footer_studio"|footer_studio)[^>]*>\s*Studio\s*<'
+    Message = 'expected the footer Studio link to emit its dedicated analytics source slot'
   },
   @{
     Path = 'public/index.html'
@@ -4450,7 +4693,8 @@ $exactPrimaryNavExpectations = @(
   @{ Path = 'public/gallery/index.html'; Destination = '/gallery/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/apps/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/games/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
-  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
+  @{ Path = 'public/studio/index.html'; Destination = '/studio/'; GroupClass = $null; MenuCurrent = $false },
+  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $true },
   @{ Path = 'public/about/index.html'; Destination = '/about/'; GroupClass = $null; MenuCurrent = $true },
   @{ Path = 'public/support/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true },
   @{ Path = 'public/random/index.html'; Destination = '/random/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true }
@@ -4509,7 +4753,7 @@ foreach ($expectation in $exactPrimaryNavExpectations) {
 $descendantPrimaryNavExpectations = @(
   @{ Path = 'public/essays/the-risk-management-buffet/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
   @{ Path = 'public/collections/the-ledger/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
-  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
+  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $true },
   @{ Path = 'public/apps/bucks-machine/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/support/cancellation-refunds/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true }

@@ -6,7 +6,8 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $requiredFiles = @(
   'layouts/partials/metadata/policy.html',
   'layouts/sitemap.xml',
-  'layouts/robots.txt'
+  'layouts/robots.txt',
+  'content/studio/index.md'
 )
 
 foreach ($relativePath in $requiredFiles) {
@@ -14,6 +15,11 @@ foreach ($relativePath in $requiredFiles) {
   if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
     throw "Missing required indexation-policy file: $relativePath"
   }
+}
+
+$studioSectionIndex = Join-Path $repoRoot 'content/studio/_index.md'
+if (Test-Path -LiteralPath $studioSectionIndex -PathType Leaf) {
+  throw 'Expected /studio/ to be a regular leaf page, not an empty section-list route.'
 }
 
 $policyPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/policy.html') -Raw
@@ -40,6 +46,10 @@ foreach ($requiredSnippet in @(
   if ($routeHelper -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected metadata/route.html to contain: $requiredSnippet"
   }
+}
+
+if ($routeHelper -match '(?i)studio' -or $policyPartial -match '(?i)studio') {
+  throw 'Expected Studio indexation to use the unchanged global metadata route and policy defaults.'
 }
 
 $pageMetaPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/page.html') -Raw

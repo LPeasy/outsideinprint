@@ -11,6 +11,8 @@
 {{ $inCollectionsSection := or $isCollectionsPage (eq .Section "collections") }}
 {{ $isLibraryPage := eq $currentPath "/library/" }}
 {{ $inLibrarySection := or $isLibraryPage (eq .Section "library") }}
+{{ $isStudioPage := eq $currentPath "/studio/" }}
+{{ $inStudioSection := or $isStudioPage (eq .Section "studio") }}
 {{ $isBookstorePage := eq $currentPath "/shop/" }}
 {{ $inBookstoreSection := or $isBookstorePage (eq .Section "shop") }}
 {{ $isSupportPage := eq $currentPath "/support/" }}
@@ -116,13 +118,28 @@
 {{ end }}
 {{ $navItems = $navItems | append
   (dict
+    "key" "studio"
+    "label" "Studio"
+    "href" ("studio/" | absURL)
+    "group" "direct"
+    "currentPage" $isStudioPage
+    "currentSection" $inStudioSection
+    "mobilePrimary" true
+    "analyticsEvent" "internal_promo_click"
+    "analyticsSourceSlot" "primary_nav_studio"
+    "analyticsSlug" "studio"
+    "analyticsTitle" "Outside In Print Studio"
+    "analyticsSection" "Studio"
+    "analyticsPath" ("studio/" | relURL)
+  )
+  (dict
     "key" "bookstore"
     "label" "Bookstore"
     "href" ("shop/" | absURL)
     "group" "direct"
     "currentPage" $isBookstorePage
     "currentSection" $inBookstoreSection
-    "mobilePrimary" true
+    "mobilePrimary" false
     "analyticsEvent" "internal_promo_click"
     "analyticsSourceSlot" "primary_nav_bookstore"
     "analyticsSlug" "bookstore"

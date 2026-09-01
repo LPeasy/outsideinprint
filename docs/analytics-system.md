@@ -36,6 +36,8 @@ What gets tracked:
 - `internal_promo_click`
 - `collection_click`
 - `external_link_click`
+- `studio_inquiry_email_prepare`
+- `studio_inquiry_direct_email`
 
 The client code keeps the current lightweight behavior:
 
@@ -61,6 +63,21 @@ Bookstore discovery and Amazon exits use these source slots:
 Homepage cards and calls to action remain internal links. Amazon exits rely on the existing automatic `external_link_click` event and carry the book slug, full title, Bookstore section, source slot, and destination URL.
 
 For `collection_click`, the current source-slot contract includes the article-header context slot `article_collection_context` in addition to homepage, collection-page, and article-continuation collection surfaces.
+
+### Studio funnel measurement
+
+Studio entry and inquiry surfaces use these source slots:
+
+- `primary_nav_studio`
+- `homepage_studio_offer`
+- `footer_studio`
+- `studio_hero_to_form`
+- `studio_inquiry_form`
+- `studio_inquiry_fallback`
+
+GoatCounter `/studio/` pageviews measure Studio visits. `studio_inquiry_email_prepare` measures browser-valid attempts to prepare an email draft, and `studio_inquiry_direct_email` measures clicks on the visible direct-email fallback. Neither event proves that a visitor sent a message or that Outside In Print received one.
+
+The `support@outsideinprint.org` inbox is the source of truth for received inquiries. Manual review is the source of truth for qualified inquiries and scopes sent. Square is the source of truth for deposits and final payments. Inquiry-field values are not analytics metadata.
 
 ## Read Tracking Rules
 

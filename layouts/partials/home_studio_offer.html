@@ -1,0 +1,30 @@
+{{- $studio := hugo.Data.studio | default dict -}}
+{{- $enabled := index $studio "enabled" | default false -}}
+{{- if $enabled -}}
+  {{- $pricing := index $studio "pricing" | default dict -}}
+  {{- $foundingActive := index $pricing "founding_offer_active" | default false -}}
+  {{- $activePrice := cond $foundingActive (index $pricing "founding_price_display") (index $pricing "standard_price_display") -}}
+  {{- $offerCode := index $studio "offer_code" -}}
+  <section class="home-studio-offer page-shell page-shell--wide" aria-labelledby="home-studio-offer-title">
+    <div class="home-studio-offer__copy">
+      <p class="home-studio-offer__eyebrow">Outside In Print Studio</p>
+      <h2 id="home-studio-offer-title">You have the material. We make it publishable.</h2>
+      <p class="home-studio-offer__dek">Turn one recorded conversation, transcript, presentation, working draft, or source packet into a clear, bylined essay.</p>
+    </div>
+    <div class="home-studio-offer__action">
+      <p class="home-studio-offer__price">
+        <span>{{ if $foundingActive }}Founding-client rate{{ else }}Standard rate{{ end }}</span>
+        {{ $activePrice }}
+      </p>
+      <a
+        class="home-studio-offer__cta"
+        href="{{ "studio/" | relURL }}"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="homepage_studio_offer"
+        data-analytics-product="{{ $offerCode }}"
+        data-analytics-format="service_offer"
+        data-analytics-path="{{ "studio/" | relURL }}"
+      >Start a Publication Sprint <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+{{- end -}}

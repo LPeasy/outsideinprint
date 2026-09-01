@@ -33,6 +33,8 @@ $requiredFiles = @(
   'layouts/library/list.html',
   'layouts/apps/list.html',
   'layouts/apps/single.html',
+  'layouts/studio/single.html',
+  'layouts/partials/home_studio_offer.html',
   'layouts/partials/archive/longform-kind.html',
   'layouts/partials/archive/lane-label.html',
   'layouts/partials/archive/resolve-pages.html',
@@ -48,6 +50,9 @@ $requiredFiles = @(
   'layouts/partials/discovery/collection-card.html',
   'layouts/partials/schema/significant-links.html',
   'layouts/partials/legacy_host_redirect.html',
+  'assets/js/studio-inquiry.js',
+  'content/studio/index.md',
+  'data/studio.yaml',
   'static/start-here/index.html',
   'static/llms.txt',
   'static/llms-full.txt'
@@ -87,6 +92,7 @@ foreach ($relativePath in $requiredImageFrontMatterFiles) {
 $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "home_front_page.html"',
+  'partial "home_studio_offer.html"',
   'partial "home_bookstore_spotlight.html"',
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
@@ -115,6 +121,7 @@ foreach ($retiredSnippet in @(
 
 $homepageOrder = @(
   'partial "home_front_page.html"',
+  'partial "home_studio_offer.html"',
   'partial "home_bookstore_spotlight.html"',
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
@@ -316,6 +323,132 @@ foreach ($forbiddenSnippet in @(
   if ($homeBookstoreTemplate -match [regex]::Escape($forbiddenSnippet)) {
     throw "Expected the homepage bookstore spotlight to omit: $forbiddenSnippet"
   }
+}
+
+$homeStudioTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_studio_offer.html') -Raw
+foreach ($requiredSnippet in @(
+  'hugo.Data.studio',
+  'if $enabled',
+  'founding_offer_active',
+  'You have the material. We make it publishable.',
+  'data-analytics-source-slot="homepage_studio_offer"',
+  'data-analytics-path="{{ "studio/" | relURL }}"'
+)) {
+  if ($homeStudioTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/home_studio_offer.html to contain: $requiredSnippet"
+  }
+}
+
+$studioData = Get-Content -Path (Join-Path $repoRoot 'data/studio.yaml') -Raw
+foreach ($requiredSnippet in @(
+  'offer_code: "OIP-STUDIO-EXPERT-ESSAY"',
+  'founding_price_display: "$1,250"',
+  'standard_price_display: "$1,500"',
+  'deposit_percent: 50',
+  'turnaround_business_days: 7',
+  'recording_limit_minutes: 90',
+  'transcript_limit_words: 15000',
+  'source_packet_limit_pages: 25',
+  'output_word_minimum: 1500',
+  'output_word_maximum: 2000',
+  'email: "support@outsideinprint.org"',
+  'subject_prefix: "Outside In Print Studio Inquiry"'
+)) {
+  if ($studioData -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected data/studio.yaml to contain: $requiredSnippet"
+  }
+}
+
+if ($studioData -notmatch '(?m)^\s*founding_offer_active:\s*(?:true|false)\s*$') {
+  throw 'Expected data/studio.yaml to expose a boolean pricing.founding_offer_active switch.'
+}
+
+$studioTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/studio/single.html') -Raw
+foreach ($requiredSnippet in @(
+  'errorf "Studio inquiry configuration requires inquiry.email',
+  'errorf "Studio inquiry configuration requires inquiry.subject_prefix',
+  '$composerEnabled := and $enabled $inquiryEnabled',
+  'action="/studio/#studio-inquiry"',
+  'method="post"',
+  'data-studio-email-form',
+  'data-inquiry-email="{{ $email }}"',
+  'data-inquiry-subject-prefix="{{ $subjectPrefix }}"',
+  'data-current-rate="{{ $activePrice }}"',
+  'data-offer-code="{{ $offerCode }}"',
+  'data-source-page="{{ $sourcePage }}"',
+  'data-analytics-event="studio_inquiry_email_prepare"',
+  'data-analytics-source-slot="studio_inquiry_form"',
+  'data-analytics-slug="studio"',
+  'name="role"',
+  'name="source_material"',
+  'name="timeline"',
+  'name="commercial_acknowledgement"',
+  'type="submit" disabled>Prepare inquiry email',
+  'role="status" aria-live="polite"',
+  'data-analytics-event="studio_inquiry_direct_email"',
+  'data-analytics-source-slot="studio_inquiry_fallback"',
+  'href="/privacy/">Privacy Policy',
+  'resources.Get "js/studio-inquiry.js" | resources.Minify | resources.Fingerprint'
+)) {
+  if ($studioTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/studio/single.html to contain: $requiredSnippet"
+  }
+}
+
+foreach ($field in @(
+  @{ Name = 'name'; MaxLength = 100 },
+  @{ Name = 'email'; MaxLength = 254 },
+  @{ Name = 'website'; MaxLength = 300 },
+  @{ Name = 'project_subject'; MaxLength = 160 },
+  @{ Name = 'desired_outcome'; MaxLength = 800 }
+)) {
+  $pattern = '(?s)name="{0}"[^>]*maxlength="{1}"' -f [regex]::Escape($field.Name), $field.MaxLength
+  if ($studioTemplate -notmatch $pattern) {
+    throw "Expected Studio field '$($field.Name)' to use maxlength '$($field.MaxLength)'."
+  }
+}
+
+if ($studioTemplate -match 'type="file"') {
+  throw 'Expected the Studio inquiry form not to expose a file input.'
+}
+
+if ($studioTemplate -notmatch '(?s)\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end).)*?<form.*?data-studio-email-form.*?</form>\s*\{\{-?\s*end\s*-?\}\}\s*<p id="studio-inquiry-direct-email" class="studio-form__fallback">') {
+  throw 'Expected inquiry.enabled=false to omit the guided form while preserving the direct-email fallback.'
+}
+
+if ($studioTemplate -notmatch '(?s)\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end).)*?resources\.Get "js/studio-inquiry\.js".*?<script defer.*?</script>\s*\{\{-?\s*end\s*-?\}\}') {
+  throw 'Expected inquiry.enabled=false to omit the Studio composer script.'
+}
+
+$studioScript = Get-Content -Path (Join-Path $repoRoot 'assets/js/studio-inquiry.js') -Raw
+foreach ($requiredSnippet in @(
+  'new FormData(form)',
+  '"mailto:" + recipient',
+  'encodeURIComponent(subject)',
+  'encodeURIComponent(body)',
+  'event.preventDefault()',
+  'window.location.href = mailtoUri',
+  '.join("\n").replace(/\n/g, "\r\n")',
+  '\u007F-\u009F',
+  'Outside In Print has not received your inquiry until the email is sent.'
+)) {
+  if ($studioScript -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected assets/js/studio-inquiry.js to contain: $requiredSnippet"
+  }
+}
+
+$listenerIndex = $studioScript.IndexOf('form.addEventListener("submit", prepareInquiry)', [System.StringComparison]::Ordinal)
+$enableIndex = $studioScript.IndexOf('submitButton.disabled = false', [System.StringComparison]::Ordinal)
+if ($listenerIndex -lt 0 -or $enableIndex -le $listenerIndex) {
+  throw 'Expected the Studio script to attach its submit listener before enabling the submit button.'
+}
+
+if ($studioScript -match 'fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|document\.cookie|localStorage|sessionStorage|navigator\.clipboard') {
+  throw 'Expected the Studio script to avoid network, cookie, storage, and clipboard APIs.'
+}
+
+if ($studioScript -match '(?i)delivery confirmed|successfully sent|inquiry received') {
+  throw 'Expected the Studio script not to claim delivery or receipt.'
 }
 
 if ($mainCss -notmatch '(?s)\.home-bookstore__grid\{[^}]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);[^}]*\}') {
@@ -895,7 +1028,7 @@ if ($mastheadPartial -notmatch '(?s)nav-disclosure--read.*<span>Read</span>.*nav
 }
 
 if ($mastheadPartial -notmatch '(?s)class="nav__mobile".*range \$mobilePrimaryItems.*<span>Menu</span>') {
-  throw 'Expected layouts/partials/masthead.html to render the Archive, Collections, and Bookstore mobile-primary items before Menu.'
+  throw 'Expected layouts/partials/masthead.html to render the Archive, Collections, and Studio mobile-primary items before Menu.'
 }
 
 foreach ($requiredNavigationSnippet in @(
@@ -911,6 +1044,7 @@ foreach ($requiredNavigationSnippet in @(
   '"description" "Surprise me"',
   '"label" "Gallery"',
   '"description" "Editorial art"',
+  '"label" "Studio"',
   '"label" "Bookstore"',
   '"label" "About"',
   '"label" "Support"',
@@ -945,6 +1079,22 @@ if ($mastheadPartial -match '\$showApps\s*:=[^\r\n]*hugo\.IsServer') {
 
 if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_bookstore"') {
   throw 'Expected the primary Bookstore destination to retain its analytics source slot.'
+}
+
+if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_studio"') {
+  throw 'Expected the primary Studio destination to expose its analytics source slot.'
+}
+
+$studioNavIndex = $mastheadPartial.IndexOf('"label" "Studio"', [System.StringComparison]::Ordinal)
+$bookstoreNavIndex = $mastheadPartial.IndexOf('"label" "Bookstore"', [System.StringComparison]::Ordinal)
+$aboutNavIndex = $mastheadPartial.IndexOf('"label" "About"', [System.StringComparison]::Ordinal)
+$supportNavIndex = $mastheadPartial.IndexOf('"label" "Support"', [System.StringComparison]::Ordinal)
+if ($studioNavIndex -lt 0 -or $bookstoreNavIndex -le $studioNavIndex -or $aboutNavIndex -le $bookstoreNavIndex -or $supportNavIndex -le $aboutNavIndex) {
+  throw 'Expected direct desktop navigation order to be Studio, Bookstore, About, Support.'
+}
+
+if ($mastheadPartial -notmatch '(?s)"label" "Studio".*?"mobilePrimary" true' -or $mastheadPartial -notmatch '(?s)"label" "Bookstore".*?"mobilePrimary" false') {
+  throw 'Expected Studio to own the closed mobile slot while Bookstore remains in the expanded Menu.'
 }
 
 if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_support"') {

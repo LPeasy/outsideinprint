@@ -209,7 +209,9 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(indexSource, /"label" "Library"/);
   assert.doesNotMatch(indexSource, /"label" "Welcome"/);
   assert.doesNotMatch(indexSource, /"label" "Feeling curious\?"/);
-  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_bookstore_spotlight.html"'));
+  assert.match(indexSource, /partial "home_studio_offer\.html"/);
+  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "home_studio_offer.html"'));
+  assert.ok(indexSource.indexOf('partial "home_studio_offer.html"') < indexSource.indexOf('partial "home_bookstore_spotlight.html"'));
   assert.ok(indexSource.indexOf('partial "home_bookstore_spotlight.html"') < indexSource.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(indexSource.indexOf('partial "home_imprint_statement.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
   assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
@@ -368,7 +370,9 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.ok(frontPageSource.indexOf('class="home-front-page__orientation"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.match(partialSource, /"lead" \$hero/);
   assert.match(partialSource, /"secondary" \$secondary/);
-  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_bookstore_spotlight.html"'));
+  assert.match(source, /partial "home_studio_offer\.html"/);
+  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "home_studio_offer.html"'));
+  assert.ok(source.indexOf('partial "home_studio_offer.html"') < source.indexOf('partial "home_bookstore_spotlight.html"'));
   assert.ok(source.indexOf('partial "home_bookstore_spotlight.html"') < source.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(source.indexOf('partial "home_imprint_statement.html"') < source.indexOf('partial "home_selected_collections.html"'));
   assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('partial "newsletter_signup.html"'));

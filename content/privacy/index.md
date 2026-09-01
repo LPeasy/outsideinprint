@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
-description: "How Outside In Print handles information connected to site use, email subscriptions, Steam storefront visits, orders, EPUB delivery, and reader support."
-effective_date: "August 31, 2026"
+description: "How Outside In Print handles information connected to site use, Studio inquiry emails, email subscriptions, Steam storefront visits, orders, EPUB delivery, and reader support."
+effective_date: "September 1, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -19,15 +19,20 @@ Before EPUB checkout, you may separately choose to receive Bob's Almanack, new-p
 
 For reader support, Outside In Print receives transaction identifiers, amount, status, and subscription status needed for reconciliation, cancellation support, and refunds. No reader-support amount is sent to site analytics.
 
+When you enter information in the Studio inquiry form, the information remains in your browser. The page uses a local script to prepare a `mailto:` draft in your email application; entering information or preparing the draft does not transmit it to Outside In Print or a hosted form provider. The information is transmitted only when you send the message through your email application and provider to `support@outsideinprint.org`. The public Studio page does not accept uploaded source files.
+
 ## Site analytics
 
-Outside In Print uses GoatCounter to understand aggregate site use and events such as a bookstore visit or checkout start. Analytics events may include a page, product SKU, format, and source position. They do not include an order identifier, payment amount, email address, street address, or card information.
+Outside In Print uses privacy-focused site analytics to understand aggregate site use and events such as a bookstore visit or checkout start. Analytics events may include a page, product SKU, format, and source position. They do not include an order identifier, payment amount, email address, street address, or card information.
+
+For Studio use, site analytics may receive the Studio page path, offer code, source slot, format, and a draft-prepare or direct-email event. They do not receive the inquiry name, reply email, website, project subject, or written answer. A draft-prepare or direct-email event does not prove that a message was sent or received.
 
 ## How information is used
 
 Information is used to:
 
 - process, fulfill, and support transactions;
+- review and respond to Studio inquiries, screen for conflicts, and prepare a possible written scope;
 - deliver EPUBs and control download links;
 - calculate, reconcile, file, and document taxes;
 - maintain accounting records;
@@ -36,7 +41,7 @@ Information is used to:
 
 ## Service providers and disclosure
 
-Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. Buttondown receives and manages optional Bob's Almanack and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. GitHub Pages hosts the public website, and GoatCounter provides site analytics.
+Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. Buttondown receives and manages optional Bob's Almanack and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. GitHub Pages hosts the public website, and a privacy-focused service provides aggregate site analytics.
 
 The Games pages link to Steam storefront pages and may load a Steam store widget. Following a Steam link or loading the widget sends a request to Valve's Steam services, which receives the technical information ordinarily sent with a web request. Steam may also set or read cookies according to your Steam settings and Valve's own privacy practices.
 
@@ -46,7 +51,7 @@ Outside In Print does not sell or rent personal information. Information may be 
 
 ## Retention and security
 
-Download links expire after 14 days and five successful downloads. Transaction, refund, accounting, and tax evidence may be retained for up to seven years. Other operational records are kept only as long as reasonably needed for fulfillment, support, security, or legal obligations.
+Download links expire after 14 days and five successful downloads. Transaction, refund, accounting, and tax evidence may be retained for up to seven years. Received Studio inquiries and other business correspondence are kept only as long as reasonably needed for review, response, scope preparation, recordkeeping, security, or legal obligations. Other operational records are kept only as long as reasonably needed for fulfillment, support, security, or legal obligations.
 
 Outside In Print limits access to commerce records and keeps payment credentials and service secrets outside the public website repository. No internet service can guarantee absolute security.
 

@@ -44,7 +44,11 @@ const themeBootstrap = fs.readFileSync(path.resolve("layouts/partials/theme_boot
 const themeToggleScript = fs.readFileSync(path.resolve("layouts/partials/theme_toggle_script.html"), "utf8");
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
 const homeFrontPageCopy = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
+const homeStudioOffer = fs.readFileSync(path.resolve("layouts/partials/home_studio_offer.html"), "utf8");
 const homeBookstore = fs.readFileSync(path.resolve("layouts/partials/home_bookstore_spotlight.html"), "utf8");
+const studioData = fs.readFileSync(path.resolve("data/studio.yaml"), "utf8");
+const studioTemplate = fs.readFileSync(path.resolve("layouts/studio/single.html"), "utf8");
+const studioScript = fs.readFileSync(path.resolve("assets/js/studio-inquiry.js"), "utf8");
 const directOffers = fs.readFileSync(path.resolve("layouts/partials/shop/direct-offers.html"), "utf8");
 const kindleButton = fs.readFileSync(path.resolve("layouts/partials/shop/kindle-button.html"), "utf8");
 const shopList = fs.readFileSync(path.resolve("layouts/shop/list.html"), "utf8");
@@ -109,18 +113,22 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$isGamesPage := and \$gamesPage \(eq \$currentPath \$gamesPage\.RelPermalink\)/);
   assert.match(masthead, /\$inGamesSection := or \$isGamesPage \(eq \.Section "games"\)/);
 
-  assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
+  assert.match(masthead, /"label" "Studio"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true[\s\S]*?"analyticsSourceSlot" "primary_nav_studio"/);
+  assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
+  assert.ok(masthead.indexOf('"label" "Studio"') < masthead.indexOf('"label" "Bookstore"'));
   assert.match(masthead, /"label" "About"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
   assert.match(masthead, /"label" "Support"[\s\S]*?"group" "direct"[\s\S]*?"analyticsSourceSlot" "primary_nav_support"/);
   assert.match(masthead, /\$currentPath := \.RelPermalink/);
   assert.match(masthead, /\$isArchivePage := eq \$currentPath "\/archive\/"/);
   assert.match(masthead, /\$inArchiveSection := or \$isArchivePage \(eq \.Section "archive"\) \(eq \.Section "essays"\) \(eq \.Section "syd-and-oliver"\)/);
+  assert.match(masthead, /\$isStudioPage := eq \$currentPath "\/studio\/"/);
+  assert.match(masthead, /\$inStudioSection := or \$isStudioPage \(eq \.Section "studio"\)/);
   assert.match(masthead, /\$isBookstorePage := eq \$currentPath "\/shop\/"/);
   assert.match(masthead, /\$inBookstoreSection := or \$isBookstorePage \(eq \.Section "shop"\)/);
   assert.match(masthead, /\$inAboutSection := or \$isAboutPage \(eq \.Section "about"\)/);
   assert.match(masthead, /\$inRandomSection := or \$isRandomPage \(eq \.Section "random"\)/);
-  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 11);
-  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 11);
+  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 12);
+  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 12);
   assert.doesNotMatch(masthead, /"current"/);
   assert.match(masthead, /<nav class="nav nav--section-rail" aria-label="Primary" data-primary-nav>/);
   assert.equal((masthead.match(/aria-label="Primary"/g) || []).length, 1);
@@ -190,7 +198,7 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.75rem;[\s\S]*?letter-spacing:0;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:(?:repeat\(4,\s*minmax\(0,\s*1fr\)\)|(?:minmax\(0,\s*(?:\d*\.?\d+)fr\)\s*){4});/);
   assert.match(css, /--nav-mobile-gap:clamp\(2px, 1vw, 4px\);/);
-  assert.match(css, /\.nav__mobile-link--archive::after,[\s\S]*?\.nav__mobile-link--collections::after,[\s\S]*?\.nav__mobile-link--bookstore::after/);
+  assert.match(css, /\.nav__mobile-link--archive::after,[\s\S]*?\.nav__mobile-link--collections::after,[\s\S]*?\.nav__mobile-link--studio::after/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link\{[\s\S]*?min-height:44px;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?justify-self:end;[\s\S]*?gap:\.25rem;/);
   assert.doesNotMatch(css, /\.nav-mobile-menu\{(?:(?!\n\s*\}).)*grid-template-columns/s);
@@ -356,7 +364,7 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
   assert.equal((almanackIssue.match(/partial "newsletter_signup\.html"/g) || []).length, 1);
   assert.ok(almanackIssue.lastIndexOf("</article>") < almanackIssue.indexOf('partial "newsletter_signup.html"'));
 
-  assert.match(privacyPolicy, /effective_date: "August 31, 2026"/);
+  assert.match(privacyPolicy, /effective_date: "September 1, 2026"/);
   assert.match(privacyPolicy, /standalone Bob's Almanack signup form/);
   assert.match(privacyPolicy, /IP address, browser or device information, and referring page/);
   assert.match(privacyPolicy, /email-client, browser, device, IP-address, or referrer metadata/);
@@ -399,7 +407,8 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(footer, /href="\{\{ \$gamesPage\.RelPermalink \}\}"[\s\S]*?>Games</);
   assert.match(footer, /href="\{\{ \$gamesPage\.RelPermalink \}\}"\{\{ if eq \.RelPermalink \$gamesPage\.RelPermalink \}\} aria-current="page"\{\{ end \}\}>Games/);
   assert.doesNotMatch(footer, /if eq \.Section "(?:apps|games)"/);
-  assert.match(footer, />Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?>Bookstore</);
+  assert.match(footer, />Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?>Studio<[\s\S]*?>Bookstore</);
+  assert.match(footer, /href="\{\{ "studio\/" \| absURL \}\}"[\s\S]*?data-analytics-source-slot="footer_studio"[\s\S]*?>Studio</);
   assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}"[\s\S]*?data-analytics-source-slot="footer_bookstore"[\s\S]*?>Bookstore</);
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
 
@@ -462,7 +471,7 @@ test("homepage browse band stays curated and replaces Welcome with Library", () 
   assert.match(css, /\.home-browse__item-title\{[\s\S]*font-size:14px;[\s\S]*line-height:1\.45;/);
 });
 
-test("homepage composition keeps the bookstore, motto, collections, signup ribbon, and archive navigation in order", () => {
+test("homepage composition keeps Studio, the bookstore, motto, collections, signup ribbon, and archive navigation in order", () => {
   assert.match(homeFrontPage, /id="home-front-page-title"/);
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
   assert.match(homeFrontPage, /home_front_page_copy\.html/);
@@ -550,7 +559,11 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.doesNotMatch(entryThreads, /Browse all collections/);
   assert.doesNotMatch(entryThreads, /showArchiveLink/);
 
-  assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_bookstore_spotlight.html"'));
+  assert.match(homeStudioOffer, /hugo\.Data\.studio/);
+  assert.match(homeStudioOffer, /You have the material\. We make it publishable\./);
+  assert.match(homeStudioOffer, /data-analytics-source-slot="homepage_studio_offer"/);
+  assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_studio_offer.html"'));
+  assert.ok(homepage.indexOf('partial "home_studio_offer.html"') < homepage.indexOf('partial "home_bookstore_spotlight.html"'));
   assert.ok(homepage.indexOf('partial "home_bookstore_spotlight.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(homepage.indexOf('partial "home_imprint_statement.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
   assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
@@ -604,6 +617,76 @@ test("homepage composition keeps the bookstore, motto, collections, signup ribbo
   assert.doesNotMatch(thinkOutsideEntry, /essay:/);
   assert.match(cartoonData, new RegExp(`current: ${escapeRegex(currentCartoonSlug)}`));
   assert.match(cartoonData, new RegExp(`slug: ${escapeRegex(currentCartoonSlug)}`));
+});
+
+test("Studio funnel keeps pricing, scope, inquiry configuration, and mail composition data-driven", () => {
+  for (const snippet of [
+    'offer_code: "OIP-STUDIO-EXPERT-ESSAY"',
+    'founding_price_display: "$1,250"',
+    'standard_price_display: "$1,500"',
+    'deposit_percent: 50',
+    'turnaround_business_days: 7',
+    'recording_limit_minutes: 90',
+    'transcript_limit_words: 15000',
+    'source_packet_limit_pages: 25',
+    'output_word_minimum: 1500',
+    'output_word_maximum: 2000',
+    'email: "support@outsideinprint.org"',
+    'subject_prefix: "Outside In Print Studio Inquiry"'
+  ]) {
+    assert.match(studioData, new RegExp(escapeRegex(snippet)));
+  }
+  assert.match(studioData, /^\s*founding_offer_active:\s*(?:true|false)\s*$/m);
+
+  assert.match(studioTemplate, /errorf "Studio inquiry configuration requires inquiry\.email/);
+  assert.match(studioTemplate, /errorf "Studio inquiry configuration requires inquiry\.subject_prefix/);
+  assert.match(studioTemplate, /\$composerEnabled := and \$enabled \$inquiryEnabled/);
+  assert.match(studioTemplate, /action="\/studio\/#studio-inquiry"[\s\S]*?method="post"/);
+  assert.match(studioTemplate, /data-studio-email-form/);
+  for (const attribute of [
+    "data-inquiry-email",
+    "data-inquiry-subject-prefix",
+    "data-current-rate",
+    "data-offer-code",
+    "data-source-page",
+    'data-analytics-event="studio_inquiry_email_prepare"',
+    'data-analytics-source-slot="studio_inquiry_form"',
+    'data-analytics-slug="studio"'
+  ]) {
+    assert.match(studioTemplate, new RegExp(escapeRegex(attribute)));
+  }
+  for (const [name, maxLength] of [
+    ["name", 100],
+    ["email", 254],
+    ["website", 300],
+    ["project_subject", 160],
+    ["desired_outcome", 800]
+  ]) {
+    assert.match(studioTemplate, new RegExp(`name="${name}"[\\s\\S]*?maxlength="${maxLength}"`));
+  }
+  for (const name of ["role", "source_material", "timeline", "commercial_acknowledgement"]) {
+    assert.match(studioTemplate, new RegExp(`name="${name}"`));
+  }
+  assert.match(studioTemplate, /type="submit" disabled>Prepare inquiry email/);
+  assert.match(studioTemplate, /role="status" aria-live="polite"/);
+  assert.match(studioTemplate, /data-analytics-event="studio_inquiry_direct_email"/);
+  assert.match(studioTemplate, />Email directly: \{\{ \$email \}\}<\/a>/);
+  assert.match(studioTemplate, /href="\/privacy\/">Privacy Policy<\/a>/);
+  assert.doesNotMatch(studioTemplate, /type="file"/);
+  assert.match(studioTemplate, /\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end)[\s\S])*?<form[\s\S]*?data-studio-email-form[\s\S]*?<\/form>\s*\{\{-?\s*end\s*-?\}\}\s*<p id="studio-inquiry-direct-email" class="studio-form__fallback">/);
+  assert.match(studioTemplate, /\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end)[\s\S])*?resources\.Get "js\/studio-inquiry\.js"[\s\S]*?<script defer[\s\S]*?<\/script>\s*\{\{-?\s*end\s*-?\}\}/);
+
+  assert.match(studioScript, /new FormData\(form\)/);
+  assert.match(studioScript, /"mailto:" \+ recipient/);
+  assert.match(studioScript, /encodeURIComponent\(subject\)/);
+  assert.match(studioScript, /encodeURIComponent\(body\)/);
+  assert.match(studioScript, /event\.preventDefault\(\)/);
+  assert.match(studioScript, /\.join\("\\n"\)\.replace\(\/\\n\/g, "\\r\\n"\)/);
+  assert.match(studioScript, /\\u007F-\\u009F/);
+  assert.match(studioScript, /Outside In Print has not received your inquiry until the email is sent\./);
+  assert.ok(studioScript.indexOf('form.addEventListener("submit", prepareInquiry)') < studioScript.indexOf("submitButton.disabled = false"));
+  assert.doesNotMatch(studioScript, /fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|document\.cookie|localStorage|sessionStorage|navigator\.clipboard/);
+  assert.doesNotMatch(studioScript, /delivery confirmed|successfully sent|inquiry received/i);
 });
 
 test("homepage editorial layout uses the new manifesto namespace and drops dead start-here hooks", () => {

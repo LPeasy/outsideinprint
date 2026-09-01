@@ -1,0 +1,24 @@
+enabled: true
+offer_code: "OIP-STUDIO-EXPERT-ESSAY"
+offer_name: "Expert-to-Essay Publication Sprint"
+
+pricing:
+  founding_offer_active: true
+  founding_price_display: "$1,250"
+  standard_price_display: "$1,500"
+  founding_client_limit: 2
+  deposit_percent: 50
+
+service:
+  reply_business_days: 2
+  turnaround_business_days: 7
+  recording_limit_minutes: 90
+  transcript_limit_words: 15000
+  source_packet_limit_pages: 25
+  output_word_minimum: 1500
+  output_word_maximum: 2000
+
+inquiry:
+  enabled: true
+  email: "support@outsideinprint.org"
+  subject_prefix: "Outside In Print Studio Inquiry"
