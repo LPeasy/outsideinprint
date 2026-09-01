@@ -784,7 +784,7 @@ if ([regex]::Matches($shopOutput, 'Secure checkout through Square\. EPUB deliver
 
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
-  'Effective August 31, 2026',
+  'Effective September 1, 2026',
   'standalone Bob''s Almanack signup form',
   'IP address, browser or device information, and referring page',
   'selected preference tags',
