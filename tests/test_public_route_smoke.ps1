@@ -138,7 +138,7 @@ if ($almanackFrontDoorCanonical -ne 'https://outsideinprint.org/collections/bobs
 if ($almanackFrontDoorHtml -notmatch '<meta\s+name=(?:"robots"|robots)\s+content=(?:"noindex, follow"|noindex,\s*follow)' -or
     $almanackFrontDoorHtml -notmatch '<meta\s+http-equiv=(?:"refresh"|refresh)\s+content=(?:"0; url=/collections/bobs-almanack/"|0;\s*url=/collections/bobs-almanack/)' -or
     $almanackFrontDoorHtml -notmatch 'window\.location\.replace\("/collections/bobs-almanack/"\)' -or
-    $almanackFrontDoorHtml -notmatch 'href="/collections/bobs-almanack/">Bob''s Almanack</a>') {
+    $almanackFrontDoorHtml -notmatch 'href=(?:"/collections/bobs-almanack/"|/collections/bobs-almanack/)>\s*Bob(?:''|&#39;)s Almanack\s*</a>') {
   throw 'Expected /almanack/ to be a noindex canonical redirect with a visible fallback link to the existing Bob''s Almanack register.'
 }
 if ($almanackFrontDoorHtml -match 'almanack-collection__register|newsletter-signup') {
