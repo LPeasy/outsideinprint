@@ -3218,7 +3218,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/apps/index.html'
-    Pattern = '(?s)aria-label="?Footer"?[^>]*>.*?<a(?=[^>]*href=(?:"/apps/"|/apps/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*Apps &amp; Tools\s*</a>'
+    Pattern = '(?s)aria-label="?Footer"?[^>]*>.*?<a(?=[^>]*href=(?:"/apps/"|/apps/))(?=[^>]*aria-current=(?:"page"|page))[^>]*>\s*Apps (?:&amp;|&) Tools\s*</a>'
     Message = 'expected the Apps footer link to claim the current page only on the Apps landing route'
   },
   @{
