@@ -1093,7 +1093,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/collections/civic-institutions-and-public-power/index.html' = @{
     Title = 'Civic Institutions and Public Power'
-    Description = 'Essays on courts, federalism, public institutions, and civic power once the body of work is coherent enough to publish.'
+    Description = 'Essays on courts, federalism, public institutions, and the exercise of public power.'
     Canonical = 'https://outsideinprint.org/collections/civic-institutions-and-public-power/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
