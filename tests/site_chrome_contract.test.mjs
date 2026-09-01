@@ -64,6 +64,7 @@ const almanackIndexTemplate = fs.readFileSync(path.resolve("layouts/almanack/lis
 const almanackIssue = fs.readFileSync(path.resolve("layouts/almanack/single.html"), "utf8");
 const almanackCollection = fs.readFileSync(path.resolve("layouts/collections/bobs-almanack.html"), "utf8");
 const collectionsData = fs.readFileSync(path.resolve("data/collections.yaml"), "utf8");
+const civicCollectionContent = fs.readFileSync(path.resolve("content/collections/civic-institutions-and-public-power.md"), "utf8");
 const supportTerms = fs.readFileSync(path.resolve("content/support/cancellation-refunds.md"), "utf8");
 const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
 const cartoonLookupPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-for-page.html"), "utf8");
@@ -370,7 +371,8 @@ test("contact, bookstore, and Civic Institutions expose the repaired public copy
   assert.match(shopContent, /Each is available directly as an Outside In Print EPUB through secure Square checkout\./);
   assert.doesNotMatch(shopContent, /Buy all three directly/);
   assert.match(collectionsData, /description: Essays on courts, federalism, public institutions, and the exercise of public power\./);
-  assert.doesNotMatch(collectionsData, /A staged lane/);
+  assert.match(civicCollectionContent, /description: "Essays on courts, federalism, public institutions, and the exercise of public power\."/);
+  assert.doesNotMatch(`${collectionsData}\n${civicCollectionContent}`, /A staged lane|once the body of work is coherent enough to publish/i);
 });
 
 test("filtered dialogue archive stays wired through the live discovery surfaces", () => {
