@@ -33,8 +33,11 @@ const mastheadNavigationScript = fs.readFileSync(path.resolve("layouts/partials/
 const homepage = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
 const newsletterSignup = fs.readFileSync(path.resolve("layouts/partials/newsletter_signup.html"), "utf8");
+const newsletterPrompt = fs.readFileSync(path.resolve("layouts/partials/newsletter_prompt.html"), "utf8");
 const hugoConfig = fs.readFileSync(path.resolve("hugo.toml"), "utf8");
 const privacyPolicy = fs.readFileSync(path.resolve("content/privacy/index.md"), "utf8");
+const contactContent = fs.readFileSync(path.resolve("content/contact/index.md"), "utf8");
+const shopContent = fs.readFileSync(path.resolve("content/shop/_index.md"), "utf8");
 const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
 const notFound = fs.readFileSync(path.resolve("layouts/404.html"), "utf8");
 const themeBootstrap = fs.readFileSync(path.resolve("layouts/partials/theme_bootstrap.html"), "utf8");
@@ -175,6 +178,8 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /html\{\s*font-size:100%;\s*scroll-behavior:smooth;\s*\}/);
   assert.match(css, /@media \(prefers-reduced-motion:reduce\)\{\s*html\{\s*scroll-behavior:auto;\s*\}/);
   assert.match(css, /\.theme-toggle\{[\s\S]*display:none;[\s\S]*\}/);
+  assert.match(cssRule(css, ".theme-toggle"), /width:44px;[\s\S]*height:44px;/);
+  assert.match(cssRule(css, ".paper-route-toggle"), /min-height:44px;[\s\S]*height:44px;/);
   assert.match(css, /html\.theme-enabled \.theme-toggle\{[\s\S]*display:inline-flex;[\s\S]*\}/);
   assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(1\.75rem, 3vw, 2\.35rem\)/);
   assert.match(css, /\.nav__direct-link,[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?min-height:44px;/);
@@ -183,12 +188,16 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /\.nav-disclosure__link\[aria-current="page"\],[\s\S]*?\.nav-disclosure__link\.nav-link--current-section/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.75rem;[\s\S]*?letter-spacing:0;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:(?:repeat\(4,\s*minmax\(0,\s*1fr\)\)|(?:minmax\(0,\s*(?:\d*\.?\d+)fr\)\s*){4});/);
+  assert.match(css, /--nav-mobile-gap:clamp\(2px, 1vw, 4px\);/);
+  assert.match(css, /\.nav__mobile-link--archive::after,[\s\S]*?\.nav__mobile-link--collections::after,[\s\S]*?\.nav__mobile-link--bookstore::after/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link\{[\s\S]*?min-height:44px;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?justify-self:end;[\s\S]*?gap:\.25rem;/);
   assert.doesNotMatch(css, /\.nav-mobile-menu\{(?:(?!\n\s*\}).)*grid-template-columns/s);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__panel\{[\s\S]*?grid-row:2;/);
   assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2\.5rem, 12vw, 2\.75rem\)/);
   assert.doesNotMatch(css, /@media \(max-width:360px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.6rem;/);
+  assert.doesNotMatch(css, /@media \(max-width:420px\)\{[\s\S]*?\.theme-toggle\{[\s\S]*?(?:width|height):1\.85rem;/);
+  assert.doesNotMatch(css, /@media \(max-width:420px\)\{[\s\S]*?\.paper-route-toggle\{[\s\S]*?height:1\.85rem;/);
   assert.match(css, /html\[data-theme="light"\] \.masthead--compressed\{[\s\S]*background:transparent;/);
   assert.match(css, /\.bookstore-epub-checkout-disclosure > summary\{[\s\S]*min-height:3\.2rem;/);
   assert.match(css, /\.bookstore-epub-checkout-disclosure > summary:focus-visible\{[\s\S]*outline:2px solid var\(--focus-ring\);/);
@@ -215,6 +224,15 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(directOffers, /<summary aria-label="\{\{ \$checkoutSummaryLabel \}\}: \{\{ \$productTitle \}\}">/);
   assert.match(directOffers, /Optional\. Not required to buy\./);
   assert.doesNotMatch(directOffers, /fallback_(?:url|label)|amazon/i);
+
+  const checkoutField = directOffers.indexOf('class="bookstore-epub-checkout__field"');
+  const checkoutSubmit = directOffers.indexOf('type="submit"', checkoutField);
+  const checkoutStatus = directOffers.indexOf('data-epub-checkout-status', checkoutSubmit);
+  const checkoutPreferences = directOffers.indexOf('class="bookstore-epub-checkout__preferences"', checkoutStatus);
+  assert.ok(checkoutField >= 0);
+  assert.ok(checkoutSubmit > checkoutField);
+  assert.ok(checkoutStatus > checkoutSubmit);
+  assert.ok(checkoutPreferences > checkoutStatus);
 
   assert.match(kindleButton, /\$promoteKindle := and \(gt \(len \$epubOffers\) 0\) \(eq \(len \$liveEpubOffers\) 0\)/);
   assert.match(kindleButton, /class="bookstore-kindle-button\{\{ if \$promoteKindle \}\} bookstore-kindle-button--available-primary/);
@@ -280,6 +298,7 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
     'contents = "Each Saturday\'s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting."',
     'price_promise = "Bob\'s Almanack will remain free. No ads, ever."',
     'button_label = "Subscribe free"',
+    'prompt_label = "Get Bob\'s Almanack every Saturday — free, no ads."',
     'checkout_label = "Send me Bob\'s Almanack every Saturday. It will remain free. No ads, ever."',
     'sample_url = "/almanack/2026-07-25/"',
     'sample_label = "Read a sample issue"',
@@ -306,10 +325,26 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
     assert.match(newsletterSignup, new RegExp(escapeRegex(expected)));
   }
   assert.match(newsletterSignup, /aria-describedby="\{\{ \$dekID \}\} \{\{ \$priceID \}\} \{\{ \$privacyID \}\}"/);
+  assert.match(newsletterSignup, /\$anchorID := \.anchorID \| default ""/);
+  assert.match(newsletterSignup, /\$isSamplePage := eq \$page\.RelPermalink \$samplePath/);
+  assert.match(newsletterSignup, /You&rsquo;re reading the sample issue\./);
+  assert.match(newsletterSignup, /if \$isSamplePage[\s\S]*?<span>You&rsquo;re reading the sample issue\.<\/span>[\s\S]*?else[\s\S]*?data-analytics-source-slot="\{\{ \$sampleSourceSlot \}\}"/);
+  assert.match(newsletterPrompt, /href="#\{\{ \$targetID \}\}"/);
+  assert.match(newsletterPrompt, /data-analytics-event="internal_promo_click"/);
+  assert.match(newsletterPrompt, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);
+  assert.match(newsletterPrompt, /data-analytics-slug="bobs-almanack-signup"/);
+  assert.match(homeFrontPage, /home-front-page__lead-action[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?with \$currentCartoon/);
+  assert.match(homeFrontPage, /"sourceSlot" "homepage_bobs_almanack_prompt"/);
   assert.match(homepage, /newsletter-signup--home-ribbon/);
   assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
+  assert.match(homepage, /"anchorID" "bobs-almanack-signup"/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
+  assert.match(articleSingle, /if \$showCollectionContinuation[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?"sourceSlot" "article_exit_newsletter_prompt"/);
+  assert.match(articleSingle, /"anchorID" "bobs-almanack-signup"/);
+  assert.ok(articleSingle.indexOf('partial "newsletter_prompt.html"') < articleSingle.indexOf('partial "collections/reading-path.html"'));
+  assert.match(cssRule(css, ".newsletter-prompt a"), /min-height:44px;/);
+  assert.match(cssRule(css, ".newsletter-signup[id]"), /scroll-margin-top:6rem;/);
   assert.match(almanackIndex, /noindex: true\s+build:\s+render: always\s+list: never/);
   assert.match(almanackIndexTemplate, /<meta name="robots" content="noindex, follow" \/>/);
   assert.match(almanackIndexTemplate, /<link rel="canonical" href="\{\{ "collections\/bobs-almanack\/" \| absURL \}\}" \/>/);
@@ -328,6 +363,14 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
 
   const propositionSources = [hugoConfig, homepage, articleSingle, newsletterSignup, directOffers].join("\n");
   assert.doesNotMatch(propositionSources, /Limited time|launch window|No spam|Easy to leave/i);
+});
+
+test("contact, bookstore, and Civic Institutions expose the repaired public copy", () => {
+  assert.match(contactContent, /For factual corrections, editorial questions, rights inquiries, or reprint requests, email \[support@outsideinprint\.org\]/);
+  assert.match(shopContent, /Each is available directly as an Outside In Print EPUB through secure Square checkout\./);
+  assert.doesNotMatch(shopContent, /Buy all three directly/);
+  assert.match(collectionsData, /description: Essays on courts, federalism, public institutions, and the exercise of public power\./);
+  assert.doesNotMatch(collectionsData, /A staged lane/);
 });
 
 test("filtered dialogue archive stays wired through the live discovery surfaces", () => {

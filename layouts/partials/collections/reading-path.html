@@ -11,10 +11,14 @@
     {{ $itemPaths := slice }}
     {{ $itemTitles := slice }}
     {{ $remainingMinutes := 0 }}
+    {{ $hasCuratedOrder := false }}
 
     {{ range $index, $item := $items }}
       {{ $itemPaths = $itemPaths | append $item.RelPermalink }}
       {{ $itemTitles = $itemTitles | append $item.Title }}
+      {{ if isset $item.Params "collection_weight" }}
+        {{ $hasCuratedOrder = true }}
+      {{ end }}
       {{ if eq $item.RelPermalink $currentPath }}
         {{ $currentIndex = $index }}
       {{ end }}
@@ -32,6 +36,7 @@
 
       {{ $position := add $currentIndex 1 }}
       {{ $remainingPieces := sub $itemCount $position }}
+      {{ $orderLabel := cond $hasCuratedOrder "Curated position" "Newest-first position" }}
       {{ $collectionUrl := printf "collections/%s/" $primary.collection.slug | absURL }}
       {{ with $primary.page }}
         {{ $collectionUrl = .RelPermalink }}
@@ -88,14 +93,14 @@
             data-analytics-section="Collections"
             data-analytics-path="{{ $collectionPath }}"
           >{{ $primary.collection.title }}</a></h2>
-          <p class="reading-path__meta">Piece {{ $position }} of {{ $itemCount }}</p>
-          <p class="reading-path__status" data-reading-path-progress>Visited 1 of {{ $itemCount }} in this browser.</p>
-          <p class="reading-path__meta">Remaining after this piece: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min</p>
+          <p class="reading-path__meta">{{ $orderLabel }} {{ $position }} of {{ $itemCount }}</p>
+          <p class="reading-path__status" data-reading-path-progress>Reading progress on this device: 1 of {{ $itemCount }} pieces.</p>
+          <p class="reading-path__meta">After this position: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min</p>
         </div>
         {{ if and $startHere (eq $currentPath $startHere.RelPermalink) }}
-          <p class="reading-path__status">Entry Point</p>
+          <p class="reading-path__status">Recommended starting point</p>
         {{ else if $startHere }}
-          <p class="reading-path__status">New to this thread? Start at <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.</p>
+          <p class="reading-path__status">Recommended starting point: <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.</p>
         {{ end }}
         <div class="reading-path__actions" aria-label="Collection continuation actions">
           {{ with $next }}
@@ -163,7 +168,7 @@
             {{ range $previewItems }}
               {{ $previewPage := .page }}
               <article class="reading-path__preview-item">
-                <p class="reading-path__meta">Piece {{ .position }}{{ with $previewPage.ReadingTime }} | {{ . }} min{{ end }}</p>
+                <p class="reading-path__meta">Position {{ .position }}{{ with $previewPage.ReadingTime }} | {{ . }} min{{ end }}</p>
                 <h3 class="reading-path__title"><a href="{{ $previewPage.RelPermalink }}">{{ $previewPage.Title }}</a></h3>
               </article>
             {{ end }}

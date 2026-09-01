@@ -83,6 +83,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 ### Article pages
 
 - A collection-member article renders exactly one article-exit continuation zone.
+- After the publication record, collection-member articles render one compact Bob's Almanack jump link before the continuation zone; its target remains the full canonical signup below that zone. Non-collection articles omit the compact prompt because the full signup already follows their publication record directly.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
 - Eligible collection-member articles also render compact collection links in the article record rail keyed to that same first public match.
 - When an article has two public explicit collections, the article record rail lists both collection names in front matter order. The first public match still controls the continuation module.
@@ -95,11 +96,11 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - The continuation zone shows:
   - `Continue This Collection`
   - linked collection title
-  - `Piece N of M`
-  - `Visited X of M in this browser.`
-  - `Remaining after this piece: X pieces | Y min`
-  - `Entry Point` when the current page is the collection entry point
-  - `New to this thread? Start at <link>.` when the collection defines `start_here` and the current page is not it
+  - `Newest-first position N of M` for date-ordered collections, or `Curated position N of M` when any item uses `collection_weight`
+  - `Reading progress on this device: X of M pieces.`
+  - `After this position: X pieces | Y min`
+  - `Recommended starting point` when the current page is the configured entry point
+  - `Recommended starting point: <link>.` when the collection defines `start_here` and the current page is not it
   - a fixed action row:
     - mid-collection: `Continue to <next title>`, `View Collection`, and `Previous piece` when available
     - end-of-collection: `View Collection`, `Start Again with <title>`, and `Previous piece` when available

@@ -85,11 +85,13 @@ test("reading-path partial uses the first public collection match and fixed cont
     'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',
     'index $matches 0',
     'Continue This Collection',
-    'Piece {{ $position }} of {{ $itemCount }}',
-    'Visited 1 of {{ $itemCount }} in this browser.',
-    'Remaining after this piece: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min',
-    'Entry Point',
-    'New to this thread? Start at <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.',
+    'isset $item.Params "collection_weight"',
+    'cond $hasCuratedOrder "Curated position" "Newest-first position"',
+    '{{ $orderLabel }} {{ $position }} of {{ $itemCount }}',
+    'Reading progress on this device: 1 of {{ $itemCount }} pieces.',
+    'After this position: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min',
+    'Recommended starting point',
+    'Recommended starting point: <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.',
     'Continue to {{ .Title }}',
     'View Collection',
     'Start Again with {{ .Title }}',
@@ -110,7 +112,7 @@ test("reading-path partial uses the first public collection match and fixed cont
 test("collection-progress partial exposes deterministic resume hooks", () => {
   for (const snippet of [
     'Reading Progress',
-    'Visited 0 of {{ len $items }} pieces in this browser.',
+    'Reading progress on this device: 0 of {{ len $items }} pieces.',
     'data-collection-progress-root',
     'data-item-paths="{{ $itemPaths | jsonify | htmlEscape }}"',
     'data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"',
@@ -118,7 +120,7 @@ test("collection-progress partial exposes deterministic resume hooks", () => {
     'data-start-here-title="{{ $startHereTitle }}"',
     'data-collection-progress-summary',
     'data-collection-progress-resume',
-    'Progress is stored only in this browser.'
+    'Progress is stored only on this device in your browser.'
   ]) {
     assert.match(collectionProgress, new RegExp(escapeRegex(snippet)));
   }
@@ -129,8 +131,8 @@ test("progress script uses the fixed storage key and resume labels", () => {
     'oip-reading-progress:v1:',
     'data-reading-path-root',
     'data-collection-progress-root',
-    '"Visited " + countVisited(itemPaths, state.visited || nextState) + " of " + itemPaths.length + " in this browser."',
-    '"Visited " + visitedCount + " of " + itemPaths.length + " pieces in this browser."',
+    '"Reading progress on this device: " + countVisited(itemPaths, state.visited || nextState) + " of " + itemPaths.length + " pieces."',
+    '"Reading progress on this device: " + visitedCount + " of " + itemPaths.length + " pieces."',
     'return { available: false, visited: [], updatedAt: "" };',
     "return null;",
     'Start with ',
@@ -141,6 +143,8 @@ test("progress script uses the fixed storage key and resume labels", () => {
   ]) {
     assert.match(progressScript, new RegExp(escapeRegex(snippet)));
   }
+
+  assert.doesNotMatch([readingPath, collectionProgress, progressScript].join("\n"), /Visited .* in this browser/);
 });
 
 test("css owns the new reading-path continuation selectors", () => {

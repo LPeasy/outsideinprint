@@ -122,7 +122,7 @@
           state = writeProgress(slug, nextState) || { visited: nextState };
         }
 
-        progressNode.textContent = "Visited " + countVisited(itemPaths, state.visited || nextState) + " of " + itemPaths.length + " in this browser.";
+        progressNode.textContent = "Reading progress on this device: " + countVisited(itemPaths, state.visited || nextState) + " of " + itemPaths.length + " pieces.";
       });
     }
 
@@ -192,7 +192,7 @@
         }
 
         visitedCount = countVisited(itemPaths, state.visited);
-        summary.textContent = "Visited " + visitedCount + " of " + itemPaths.length + " pieces in this browser.";
+        summary.textContent = "Reading progress on this device: " + visitedCount + " of " + itemPaths.length + " pieces.";
 
         resumeTarget = findResumeTarget(itemPaths, itemTitles, state.visited, startHerePath, startHereTitle);
         if (resumeTarget) {

@@ -194,6 +194,15 @@
       {{ end }}
 
       {{ if $showCollectionContinuation }}
+        {{ partial "newsletter_prompt.html" (dict
+          "page" .
+          "class" "newsletter-prompt--article-exit"
+          "sourceSlot" "article_exit_newsletter_prompt"
+          "targetID" "bobs-almanack-signup"
+        ) }}
+      {{ end }}
+
+      {{ if $showCollectionContinuation }}
         {{ partial "collections/reading-path.html" . }}
       {{ end }}
 
@@ -201,6 +210,7 @@
         "page" .
         "class" "newsletter-signup--article-exit"
         "sourceSlot" "article_exit_newsletter"
+        "anchorID" "bobs-almanack-signup"
       ) }}
 
       {{ partial "journey_links.html" (dict

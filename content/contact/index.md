@@ -1,6 +1,6 @@
 ---
 title: "Contact Outside In Print"
-description: "Contact Outside In Print about orders, EPUB delivery, reader support, privacy, or storefront policies."
+description: "Contact Outside In Print about orders, EPUB delivery, reader support, privacy, factual corrections, editorial questions, rights, or reprints."
 effective_date: "August 13, 2026"
 type: "commerce-policy"
 draft: false
@@ -8,6 +8,8 @@ show_citation: false
 ---
 
 Email [support@outsideinprint.org](mailto:support@outsideinprint.org) for help with EPUB delivery, reader support, a refund, cancellation, privacy request, or storefront policy.
+
+For factual corrections, editorial questions, rights inquiries, or reprint requests, email [support@outsideinprint.org](mailto:support@outsideinprint.org).
 
 ## What to include
 

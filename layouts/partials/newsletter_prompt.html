@@ -1,0 +1,24 @@
+{{- $page := .page -}}
+{{- $newsletter := $page.Site.Params.newsletter -}}
+{{- $provider := lower (default "" $newsletter.provider) -}}
+{{- $promptLabel := $newsletter.prompt_label | default "" -}}
+{{- $sourceSlot := .sourceSlot | default "newsletter_prompt" -}}
+{{- $targetID := .targetID | default "bobs-almanack-signup" -}}
+{{- $class := .class | default "" -}}
+{{- $targetPath := printf "%s#%s" $page.RelPermalink $targetID -}}
+
+{{- with $newsletter.buttondown_username -}}
+  {{- if and (eq $provider "buttondown") $promptLabel $targetID -}}
+    <p class="newsletter-prompt{{ with $class }} {{ . }}{{ end }}">
+      <a
+        href="#{{ $targetID }}"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="{{ $sourceSlot }}"
+        data-analytics-slug="bobs-almanack-signup"
+        data-analytics-title="{{ $promptLabel }}"
+        data-analytics-section="Newsletter"
+        data-analytics-path="{{ $targetPath }}"
+      >{{ $promptLabel }}</a>
+    </p>
+  {{- end -}}
+{{- end -}}

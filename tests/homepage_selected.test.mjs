@@ -348,6 +348,11 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.match(frontPageSource, /data-home-cartoon-recent-trigger/);
   assert.doesNotMatch(frontPageSource, /Also on the front page/);
   assert.match(frontPageSource, /\{\{ \$leadReadLabel \}\} &rarr;/);
+  assert.match(frontPageSource, /partial "newsletter_prompt\.html"/);
+  assert.match(frontPageSource, /"sourceSlot" "homepage_bobs_almanack_prompt"/);
+  const newsletterPromptIndex = frontPageSource.indexOf('partial "newsletter_prompt.html"');
+  assert.ok(frontPageSource.indexOf('home-front-page__lead-action') < newsletterPromptIndex);
+  assert.ok(newsletterPromptIndex < frontPageSource.indexOf('with $currentCartoon', newsletterPromptIndex));
   assert.match(frontPageSource, /\{\{ \$readLabel \}\} &rarr;/);
   assert.match(frontPageSource, /View gallery/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
@@ -368,6 +373,7 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.ok(source.indexOf('partial "home_imprint_statement.html"') < source.indexOf('partial "home_selected_collections.html"'));
   assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('partial "newsletter_signup.html"'));
   assert.ok(source.indexOf('partial "newsletter_signup.html"') < source.indexOf('class="home-browse'));
+  assert.match(source, /"anchorID" "bobs-almanack-signup"/);
 });
 
 test("homepage bookstore spotlight stays weighted, data-driven, and internal-first", () => {

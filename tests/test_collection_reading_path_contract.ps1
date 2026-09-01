@@ -96,10 +96,12 @@ foreach ($retiredSnippet in @(
 $readingPath = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/reading-path.html') -Raw
 foreach ($requiredSnippet in @(
   'Continue This Collection',
-  'Piece {{ $position }} of {{ $itemCount }}',
-  'Visited 1 of {{ $itemCount }} in this browser.',
-  'Remaining after this piece: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min',
-  'New to this thread? Start at <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.',
+  'isset $item.Params "collection_weight"',
+  'cond $hasCuratedOrder "Curated position" "Newest-first position"',
+  '{{ $orderLabel }} {{ $position }} of {{ $itemCount }}',
+  'Reading progress on this device: 1 of {{ $itemCount }} pieces.',
+  'After this position: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min',
+  'Recommended starting point: <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.',
   'Previous piece',
   'Start Again with {{ .Title }}',
   'Up Next',
@@ -123,11 +125,11 @@ foreach ($requiredSnippet in @(
 $collectionProgress = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/collection-progress.html') -Raw
 foreach ($requiredSnippet in @(
   'Reading Progress',
-  'Visited 0 of {{ len $items }} pieces in this browser.',
+  'Reading progress on this device: 0 of {{ len $items }} pieces.',
   'data-collection-progress-root',
   'data-collection-progress-summary',
   'data-collection-progress-resume',
-  'Progress is stored only in this browser.'
+  'Progress is stored only on this device in your browser.'
 )) {
   if ($collectionProgress -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected collection-progress partial to contain: $requiredSnippet"
@@ -147,6 +149,11 @@ foreach ($requiredSnippet in @(
   if ($progressScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected reading-progress script to contain: $requiredSnippet"
   }
+}
+
+$progressSurfaces = $readingPath + "`n" + $collectionProgress + "`n" + $progressScript
+if ($progressSurfaces -match 'Visited .* in this browser') {
+  throw 'Expected collection progress surfaces to omit the retired browser-visit phrasing.'
 }
 
 $docs = Get-Content -Path (Join-Path $repoRoot 'docs/collections-system.md') -Raw

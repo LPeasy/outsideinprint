@@ -131,6 +131,8 @@
                   />
                   <p id="{{ $emailNoteID }}">Your secure EPUB link will be sent here.</p>
                 </div>
+                <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
+                <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>
                 <fieldset class="bookstore-epub-checkout__preferences" aria-describedby="{{ $preferencesID }}">
                   <legend>Email updates (optional)</legend>
                   <label><input type="checkbox" name="weekly_email" /> {{ $newsletterCheckoutLabel }}</label>
@@ -154,8 +156,6 @@
                     <p class="bookstore-epub-checkout__preference-note">Optional. Not required to buy.</p>
                   </div>
                 </fieldset>
-                <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
-                <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>
               </form>
               {{- if $collapseCheckout }}
                 </div>

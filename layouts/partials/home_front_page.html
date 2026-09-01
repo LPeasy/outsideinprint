@@ -60,6 +60,12 @@
           {{ with .ReadingTime }} | {{ . }} min read{{ end }}
         </div>
         <p class="m home-front-page__lead-action"><a href="{{ .RelPermalink }}">{{ $leadReadLabel }} &rarr;</a></p>
+        {{ partial "newsletter_prompt.html" (dict
+          "page" $
+          "class" "newsletter-prompt--home"
+          "sourceSlot" "homepage_bobs_almanack_prompt"
+          "targetID" "bobs-almanack-signup"
+        ) }}
         {{ with $currentCartoon }}
           <figure class="editorial-cartoon">
             <button

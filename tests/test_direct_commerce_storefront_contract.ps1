@@ -248,6 +248,9 @@ Assert-Contains -Text $directOffersTemplate -Expected '$offers := where $allOffe
 if ($directOffersTemplate -match '(?i)fallback_(?:url|label)|amazon') {
   throw 'Direct-offer template must not contain an Amazon fallback field or redirect.'
 }
+Assert-Ordered -Text $directOffersTemplate -First 'bookstore-epub-checkout__field' -Second 'bookstore-direct-offer__action' -Context 'Direct EPUB checkout source order'
+Assert-Ordered -Text $directOffersTemplate -First 'bookstore-direct-offer__action' -Second 'data-epub-checkout-status' -Context 'Direct EPUB checkout source order'
+Assert-Ordered -Text $directOffersTemplate -First 'data-epub-checkout-status' -Second 'bookstore-epub-checkout__preferences' -Context 'Direct EPUB checkout source order'
 
 $legacyCheckoutActions = Join-Path $repoRoot 'layouts/partials/shop/checkout-actions.html'
 if (Test-Path -LiteralPath $legacyCheckoutActions) {
@@ -681,6 +684,16 @@ if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?disabled(
 }
 if ([regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 6) {
   throw 'Expected six rendered checkout forms for the three live EPUB offers.'
+}
+$renderedCheckoutForms = @([regex]::Matches($shopOutput, '(?is)<form\b[^>]*\bdata-epub-checkout(?:\s|>).*?</form>'))
+if ($renderedCheckoutForms.Count -ne 6) {
+  throw "Expected six complete rendered checkout forms for order validation; found $($renderedCheckoutForms.Count)."
+}
+foreach ($renderedCheckoutForm in $renderedCheckoutForms) {
+  $checkoutHtml = $renderedCheckoutForm.Value
+  Assert-Ordered -Text $checkoutHtml -First 'bookstore-epub-checkout__field' -Second 'bookstore-direct-offer__action' -Context 'Rendered direct EPUB checkout order'
+  Assert-Ordered -Text $checkoutHtml -First 'bookstore-direct-offer__action' -Second 'data-epub-checkout-status' -Context 'Rendered direct EPUB checkout order'
+  Assert-Ordered -Text $checkoutHtml -First 'data-epub-checkout-status' -Second 'bookstore-epub-checkout__preferences' -Context 'Rendered direct EPUB checkout order'
 }
 if ([regex]::Matches($shopOutput, 'action=(?:"|'''')?https://downloads\.outsideinprint\.org/api/books/epub(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
   throw 'Expected the approved production endpoint on all live EPUB index and detail forms.'

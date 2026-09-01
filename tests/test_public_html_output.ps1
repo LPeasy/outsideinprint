@@ -2712,6 +2712,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = '(?s)home-front-page__lead-action.*?newsletter-prompt--home.*?href=(?:"|'''')?#bobs-almanack-signup(?:"|'''')?.*?data-analytics-source-slot=(?:"|'''')?homepage_bobs_almanack_prompt(?:"|'''')?.*?Get Bob(?:''|&#39;)s Almanack every Saturday — free, no ads\.'
+    Message = 'expected the homepage lead to expose one quiet tracked jump to the full Bob''s Almanack signup'
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*data-analytics-event=(?:"|'''')?internal_promo_click(?:"|'''')?[^>]*data-analytics-source-slot=(?:"|'''')?homepage_bobs_almanack_offer_sample_issue(?:"|'''')?'
     Message = 'expected the homepage sample issue link to use the existing internal-promotion event and derived newsletter source slot'
   },
@@ -3233,6 +3238,11 @@ $requiredUxChecks = @(
     Message = 'expected the Games footer link to claim the current page only on the Games landing route'
   },
   @{
+    Path = 'public/contact/index.html'
+    Pattern = 'For factual corrections, editorial questions, rights inquiries, or reprint requests, email'
+    Message = 'expected Contact to expose the editorial, correction, rights, and reprint channel'
+  },
+  @{
     Path = 'public/about/index.html'
     Pattern = 'Imprint Record'
     Message = 'expected the about page to expose the imprint-record opening surface'
@@ -3302,6 +3312,17 @@ $requiredUxChecks = @(
     Path = 'public/shop/index.html'
     Pattern = 'bookstore-record'
     Message = 'expected the bookstore index to render reusable OIP book records'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = 'Each is available directly as an Outside In Print EPUB through secure Square checkout\.'
+    Message = 'expected the bookstore introduction to describe individual direct editions without implying a bundle'
+  },
+  @{
+    Path = 'public/shop/index.html'
+    Pattern = 'Buy all three directly'
+    Message = 'expected the bookstore introduction to omit the ambiguous three-book purchase wording'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/shop/index.html'
@@ -3522,8 +3543,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?You(?:&rsquo;|&#8217;|’)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown'
     Message = 'expected the sample Almanack issue to end with the canonical signup proposition and issue-exit analytics slot'
+  },
+  @{
+    Path = 'public/almanack/2026-07-25/index.html'
+    Pattern = '(?s)newsletter-signup--article-exit.*?<a[^>]*href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*>\s*Read a sample issue\s*</a>'
+    Message = 'expected the configured sample issue signup not to link back to itself'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/almanack/2026-08-29/index.html'
@@ -4063,6 +4090,17 @@ $requiredUxChecks = @(
     Message = 'expected collection detail ledgers to keep metadata values after dropping labels'
   },
   @{
+    Path = 'public/collections/civic-institutions-and-public-power/index.html'
+    Pattern = 'Essays on courts, federalism, public institutions, and the exercise of public power\.'
+    Message = 'expected the public Civic Institutions collection to use reader-facing published-lane copy'
+  },
+  @{
+    Path = 'public/collections/civic-institutions-and-public-power/index.html'
+    Pattern = 'A staged lane'
+    Message = 'expected the public Civic Institutions collection to omit obsolete staging copy'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/collections/risk-uncertainty/index.html'
     Pattern = '(?s)collection-section__lead.*?<h2[^>]*>Start Here</h2>'
     Message = 'expected collection detail pages to promote the marked entry point in a Start Here section'
@@ -4174,6 +4212,11 @@ $requiredUxChecks = @(
     Path = 'public/essays/the-risk-management-buffet/index.html'
     Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected article aftermatter to place the full canonical Bob''s Almanack signup and article paths after the publication record'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = '(?s)article-publication-record.*?newsletter-prompt--article-exit.*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter_prompt(?:"|'''')?.*?reading-path.*?Curated position\s+\d+\s+of\s+\d+.*?Reading progress on this device:\s+\d+\s+of\s+\d+\s+pieces\..*?newsletter-signup--article-exit'
+    Message = 'expected a curated collection essay to expose the early newsletter jump and reader-facing device progress before the full signup'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'

@@ -404,7 +404,7 @@ collections:
     featured: false
     weight: 90
     start_here: ""
-    description: A staged lane for essays on courts, federalism, and public institutions once the body of work is coherent enough to publish.
+    description: Essays on courts, federalism, public institutions, and the exercise of public power.
     metadata:
       - label: Format
         value: Essays

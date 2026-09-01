@@ -13,7 +13,10 @@
 {{ $privacyURL := $newsletter.privacy_url }}
 {{ $privacyLabel := $newsletter.privacy_label }}
 {{ $class := .class }}
+{{ $anchorID := .anchorID | default "" }}
 {{ $sampleSourceSlot := printf "%s_sample_issue" $sourceSlot }}
+{{ $samplePath := $sampleURL | relURL }}
+{{ $isSamplePage := eq $page.RelPermalink $samplePath }}
 {{ $pageKey := replace (replace ($page.RelPermalink | default "newsletter") "/" "-") "--" "-" }}
 {{ $sourceKey := replaceRE "[^a-zA-Z0-9_-]+" "-" $sourceSlot }}
 {{ $inputID := printf "bd-email-%s-%s" $pageKey $sourceKey }}
@@ -24,7 +27,7 @@
 
 {{ with $newsletter.buttondown_username }}
   {{ if eq $provider "buttondown" }}
-    <section class="newsletter-signup{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $titleID }}">
+    <section{{ with $anchorID }} id="{{ . }}"{{ end }} class="newsletter-signup{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $titleID }}">
       <div class="newsletter-signup__inner">
         <p class="newsletter-signup__eyebrow">{{ $cadence }}</p>
         <h2 id="{{ $titleID }}" class="newsletter-signup__title">{{ $title }}</h2>
@@ -61,15 +64,19 @@
         <div class="newsletter-signup__details">
           <p id="{{ $priceID }}" class="newsletter-signup__price">{{ $pricePromise }}</p>
           <p class="newsletter-signup__links">
-            <a
-              href="{{ $sampleURL | relURL }}"
-              data-analytics-event="internal_promo_click"
-              data-analytics-source-slot="{{ $sampleSourceSlot }}"
-              data-analytics-slug="bobs-almanack-sample"
-              data-analytics-title="{{ $sampleLabel }}"
-              data-analytics-section="Newsletter"
-              data-analytics-path="{{ $sampleURL }}"
-            >{{ $sampleLabel }}</a>
+            {{ if $isSamplePage }}
+              <span>You&rsquo;re reading the sample issue.</span>
+            {{ else }}
+              <a
+                href="{{ $samplePath }}"
+                data-analytics-event="internal_promo_click"
+                data-analytics-source-slot="{{ $sampleSourceSlot }}"
+                data-analytics-slug="bobs-almanack-sample"
+                data-analytics-title="{{ $sampleLabel }}"
+                data-analytics-section="Newsletter"
+                data-analytics-path="{{ $sampleURL }}"
+              >{{ $sampleLabel }}</a>
+            {{ end }}
             <span aria-hidden="true">&middot;</span>
             <a href="{{ $privacyURL | relURL }}">{{ $privacyLabel }}</a>
           </p>

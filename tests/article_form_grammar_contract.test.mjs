@@ -185,6 +185,9 @@ test("article aftermatter is one publication record plus controlled exits", () =
   assert.match(articleSingle, /partial "newsletter_signup\.html"/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
+  assert.match(articleSingle, /partial "newsletter_prompt\.html"/);
+  assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter_prompt"/);
+  assert.match(articleSingle, /"anchorID" "bobs-almanack-signup"/);
   assert.doesNotMatch(articleSingle, /partial "authors\/card\.html"/);
   assert.match(homepage, /partial "newsletter_signup\.html"/);
 
@@ -193,7 +196,8 @@ test("article aftermatter is one publication record plus controlled exits", () =
   const publicationRecord = articleSingle.indexOf('class="article-publication-record"', aftermatter);
   const citation = articleSingle.indexOf("article-publication-record__section--citation", publicationRecord);
   const revisions = articleSingle.indexOf("article-publication-record__section--revisions", publicationRecord);
-  const continuation = articleSingle.indexOf('partial "collections/reading-path.html" .', publicationRecord);
+  const newsletterPrompt = articleSingle.indexOf('partial "newsletter_prompt.html"', publicationRecord);
+  const continuation = articleSingle.indexOf('partial "collections/reading-path.html" .', newsletterPrompt);
   const newsletterExit = articleSingle.indexOf('"class" "newsletter-signup--article-exit"', continuation);
   const exitLinks = articleSingle.indexOf('"class" "journey-links--article-exit"', newsletterExit);
   assert.ok(byline >= 0);
@@ -201,7 +205,8 @@ test("article aftermatter is one publication record plus controlled exits", () =
   assert.ok(publicationRecord > aftermatter);
   assert.ok(citation > publicationRecord);
   assert.ok(revisions > citation);
-  assert.ok(continuation > publicationRecord);
+  assert.ok(newsletterPrompt > publicationRecord);
+  assert.ok(continuation > newsletterPrompt);
   assert.ok(newsletterExit > continuation);
   assert.ok(exitLinks > newsletterExit);
 
