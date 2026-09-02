@@ -37,7 +37,7 @@
   {{- $sourcePage := .Permalink -}}
   {{- $composerEnabled := and $enabled $inquiryEnabled -}}
   {{- $fallbackSubject := printf "%s — Publication Sprint inquiry" $subjectPrefix -}}
-  {{- $fallbackBody := printf "%s\r\n\r\nName:\r\nBest reply email:\r\nWebsite or profile:\r\nRole:\r\nSource material:\r\nProposed essay:\r\nDesired outcome:\r\nPreferred start:\r\nCurrent base rate acknowledged: %s\r\n\r\nI have not attached confidential or restricted source material. I understand that this inquiry does not reserve a production slot or create a client relationship." $subjectPrefix $activePrice -}}
+  {{- $fallbackBody := printf "%s\r\n\r\nName:\r\nBest reply email:\r\nWebsite or profile:\r\nRole:\r\nSource material:\r\nSource size:\r\nIntended reader:\r\nProposed essay:\r\nDesired outcome:\r\nPreferred start:\r\nCurrent base rate acknowledged: %s\r\n\r\nSafety reminder: Do not attach or paste restricted source material. Wait for Outside In Print to request source files and approve a transfer method.\r\n\r\nThis inquiry does not reserve a production slot or create a client relationship." $subjectPrefix $activePrice -}}
   {{- $fallbackSubjectQuery := replace (urlquery $fallbackSubject) "+" "%20" -}}
   {{- $fallbackBodyQuery := replace (urlquery $fallbackBody) "+" "%20" -}}
   {{- $fallbackHref := printf "mailto:%s?subject=%s&body=%s" $email $fallbackSubjectQuery $fallbackBodyQuery -}}
@@ -47,7 +47,7 @@
       <p class="studio-hero__eyebrow">Outside In Print Studio</p>
       <h1 id="studio-page-title" class="studio-hero__title">You have the material. We make it publishable.</h1>
       <p class="studio-hero__deck">Bring one recorded conversation, transcript, presentation, working draft, or source packet. Outside In Print turns it into a clear, bylined essay built to represent your thinking for the long term.</p>
-      <p class="studio-hero__trust">Fixed scope <span aria-hidden="true">&middot;</span> {{ $turnaroundDays }} business days <span aria-hidden="true">&middot;</span> One revision</p>
+      <p class="studio-hero__trust">Fixed scope <span aria-hidden="true">&middot;</span> First draft in {{ $turnaroundDays }} business days <span aria-hidden="true">&middot;</span> One revision</p>
       <p class="studio-hero__price"><span>{{ if $foundingActive }}Founding-client rate{{ else }}Standard rate{{ end }}</span> {{ $activePrice }}</p>
       <div class="studio-hero__actions">
         <a
@@ -118,7 +118,7 @@
         </li>
         <li>
           <h3>Receive the first draft.</h3>
-          <p>The {{ $turnaroundDays }}-business-day production window begins after the scope, deposit, and complete source material are received.</p>
+          <p>The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received.</p>
         </li>
         <li>
           <h3>Revise and finish.</h3>
@@ -297,6 +297,15 @@
                 <option>Other</option>
               </select>
             </label>
+            <label class="studio-form__field" for="studio-inquiry-source-size">
+              <span>Approximately how much source material is there?</span>
+              <input id="studio-inquiry-source-size" name="source_size" type="text" maxlength="80" aria-describedby="studio-inquiry-source-size-note" required>
+              <small id="studio-inquiry-source-size-note">Give a duration, page count, or approximate word count—for example, 45 minutes, 20 pages, or 8,000 words.</small>
+            </label>
+            <label class="studio-form__field" for="studio-inquiry-intended-reader">
+              <span>Who is the intended reader?</span>
+              <input id="studio-inquiry-intended-reader" name="intended_reader" type="text" maxlength="160" required>
+            </label>
             <label class="studio-form__field studio-form__field--wide" for="studio-inquiry-project-subject">
               <span>What is the proposed essay about?</span>
               <input id="studio-inquiry-project-subject" name="project_subject" type="text" maxlength="160" required>
@@ -316,6 +325,11 @@
               </select>
             </label>
           </div>
+
+          <label class="studio-form__acknowledgement">
+            <input name="source_safety_acknowledgement" type="checkbox" value="acknowledged" required>
+            <span>I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any.</span>
+          </label>
 
           <label class="studio-form__acknowledgement">
             <input name="commercial_acknowledgement" type="checkbox" value="acknowledged" required>
@@ -339,7 +353,7 @@
         >Email directly: {{ $email }}</a>
       </p>
       <noscript><p class="studio-form__noscript">The guided form requires JavaScript to prepare a draft. Use the <a href="{{ $fallbackHref }}">direct email link</a> instead.</p></noscript>
-      <p id="studio-inquiry-privacy" class="studio-form__privacy">Your answers remain on your device until you open and send the email through your email application. Outside In Print receives the information only when the message reaches {{ $email }}. The form does not send your answers to site analytics. Read the <a href="/privacy/">Privacy Policy</a>.</p>
+      <p id="studio-inquiry-privacy" class="studio-form__privacy">The Studio form does not send your answers to Outside In Print or site analytics. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches {{ $email }}. Read the <a href="/privacy/">Privacy Policy</a>.</p>
     </section>
   </article>
 

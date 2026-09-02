@@ -52,6 +52,7 @@ $requiredFiles = @(
   'layouts/partials/legacy_host_redirect.html',
   'assets/js/studio-inquiry.js',
   'content/studio/index.md',
+  'content/privacy/index.md',
   'data/studio.yaml',
   'static/start-here/index.html',
   'static/llms.txt',
@@ -364,6 +365,7 @@ if ($studioData -notmatch '(?m)^\s*founding_offer_active:\s*(?:true|false)\s*$')
 }
 
 $studioTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/studio/single.html') -Raw
+$privacyPolicy = Get-Content -Path (Join-Path $repoRoot 'content/privacy/index.md') -Raw
 foreach ($requiredSnippet in @(
   'errorf "Studio inquiry configuration requires inquiry.email',
   'errorf "Studio inquiry configuration requires inquiry.subject_prefix',
@@ -379,10 +381,19 @@ foreach ($requiredSnippet in @(
   'data-analytics-event="studio_inquiry_email_prepare"',
   'data-analytics-source-slot="studio_inquiry_form"',
   'data-analytics-slug="studio"',
+  'Fixed scope <span aria-hidden="true">&middot;</span> First draft in {{ $turnaroundDays }} business days <span aria-hidden="true">&middot;</span> One revision',
+  'The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received.',
+  'The Studio form does not send your answers to Outside In Print or site analytics. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches {{ $email }}.',
   'name="role"',
   'name="source_material"',
+  'name="source_size"',
+  'name="intended_reader"',
   'name="timeline"',
+  'name="source_safety_acknowledgement"',
   'name="commercial_acknowledgement"',
+  'Source size:\r\n',
+  'Intended reader:\r\n',
+  'Safety reminder: Do not attach or paste restricted source material. Wait for Outside In Print to request source files and approve a transfer method.',
   'type="submit" disabled>Prepare inquiry email',
   'role="status" aria-live="polite"',
   'data-analytics-event="studio_inquiry_direct_email"',
@@ -399,12 +410,78 @@ foreach ($field in @(
   @{ Name = 'name'; MaxLength = 100 },
   @{ Name = 'email'; MaxLength = 254 },
   @{ Name = 'website'; MaxLength = 300 },
+  @{ Name = 'source_size'; MaxLength = 80 },
+  @{ Name = 'intended_reader'; MaxLength = 160 },
   @{ Name = 'project_subject'; MaxLength = 160 },
   @{ Name = 'desired_outcome'; MaxLength = 800 }
 )) {
   $pattern = '(?s)name="{0}"[^>]*maxlength="{1}"' -f [regex]::Escape($field.Name), $field.MaxLength
   if ($studioTemplate -notmatch $pattern) {
     throw "Expected Studio field '$($field.Name)' to use maxlength '$($field.MaxLength)'."
+  }
+}
+
+if ($studioTemplate -notmatch 'name="source_size" type="text" maxlength="80"[^>]* required>') {
+  throw "Expected Studio field 'source_size' to be a required text input with maxlength '80'."
+}
+
+if ($studioTemplate -notmatch 'name="intended_reader" type="text" maxlength="160" required>') {
+  throw "Expected Studio field 'intended_reader' to be a required text input with maxlength '160'."
+}
+
+if ($studioTemplate -notmatch 'name="source_safety_acknowledgement" type="checkbox" value="acknowledged" required>') {
+  throw "Expected Studio field 'source_safety_acknowledgement' to be a required acknowledged checkbox."
+}
+
+$previousStudioFieldIndex = -1
+foreach ($orderedFieldSnippet in @(
+  'name="source_material"',
+  'name="source_size"',
+  'name="intended_reader"',
+  'name="project_subject"'
+)) {
+  $currentStudioFieldIndex = $studioTemplate.IndexOf($orderedFieldSnippet, [System.StringComparison]::Ordinal)
+  if ($currentStudioFieldIndex -le $previousStudioFieldIndex) {
+    throw "Expected Studio qualification field order to include '$orderedFieldSnippet' after the preceding field."
+  }
+  $previousStudioFieldIndex = $currentStudioFieldIndex
+}
+
+if ($studioTemplate -match 'Your answers remain on your device until you open and send') {
+  throw 'Expected the Studio template to remove the obsolete on-device-until-send privacy claim.'
+}
+
+$fallbackBodyMatch = [regex]::Match($studioTemplate, '\$fallbackBody := printf "(?<body>[^"]+)"')
+if (-not $fallbackBodyMatch.Success) {
+  throw 'Expected the Studio template to define a direct-email fallback body.'
+}
+if ($fallbackBodyMatch.Groups['body'].Value -match 'I have not attached') {
+  throw 'Expected the direct-email fallback to use a non-assertive safety reminder.'
+}
+$fallbackBodySource = $fallbackBodyMatch.Groups['body'].Value
+$previousFallbackPromptIndex = -1
+foreach ($orderedFallbackPrompt in @('Source material:', 'Source size:', 'Intended reader:', 'Proposed essay:')) {
+  $currentFallbackPromptIndex = $fallbackBodySource.IndexOf($orderedFallbackPrompt, [System.StringComparison]::Ordinal)
+  if ($currentFallbackPromptIndex -le $previousFallbackPromptIndex) {
+    throw "Expected direct-email fallback prompt order to include '$orderedFallbackPrompt' after the preceding prompt."
+  }
+  $previousFallbackPromptIndex = $currentFallbackPromptIndex
+}
+if ($fallbackBodySource -match '(?:Offer code|Source page):') {
+  throw 'Expected the direct-email fallback not to expose removed internal offer-code or source-page fields.'
+}
+
+$requiredPrivacyPolicyText = 'When you enter information in the Studio inquiry form, the form does not send the inquiry-field contents to Outside In Print, a hosted form provider, or site analytics. Selecting “Prepare inquiry email” passes those contents to your configured email application or provider through a `mailto:` draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches `support@outsideinprint.org`.'
+if ($privacyPolicy.IndexOf($requiredPrivacyPolicyText, [System.StringComparison]::Ordinal) -lt 0) {
+  throw 'Expected the Privacy Policy to describe mailto draft handoff, provider storage or sync, and receipt only after delivery.'
+}
+foreach ($obsoletePrivacyClaim in @(
+  'remains in your browser',
+  'preparing the draft does not transmit',
+  'The information is transmitted only when you send'
+)) {
+  if ($privacyPolicy.IndexOf($obsoletePrivacyClaim, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+    throw "Expected the Privacy Policy to remove obsolete claim: $obsoletePrivacyClaim"
   }
 }
 
@@ -430,11 +507,32 @@ foreach ($requiredSnippet in @(
   'window.location.href = mailtoUri',
   '.join("\n").replace(/\n/g, "\r\n")',
   '\u007F-\u009F',
+  '"Source size: " + value(data, "source_size")',
+  '"Intended reader: " + value(data, "intended_reader")',
+  '"Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any."',
   'Outside In Print has not received your inquiry until the email is sent.'
 )) {
   if ($studioScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected assets/js/studio-inquiry.js to contain: $requiredSnippet"
   }
+}
+
+$previousGuidedBodyIndex = -1
+foreach ($orderedGuidedBodySnippet in @(
+  '"Source material: " + value(data, "source_material")',
+  '"Source size: " + value(data, "source_size")',
+  '"Intended reader: " + value(data, "intended_reader")',
+  '"Proposed essay: " + value(data, "project_subject")'
+)) {
+  $currentGuidedBodyIndex = $studioScript.IndexOf($orderedGuidedBodySnippet, [System.StringComparison]::Ordinal)
+  if ($currentGuidedBodyIndex -le $previousGuidedBodyIndex) {
+    throw "Expected guided-email field order to include '$orderedGuidedBodySnippet' after the preceding field."
+  }
+  $previousGuidedBodyIndex = $currentGuidedBodyIndex
+}
+
+if ($studioScript -match '"(?:Offer code|Source page): "') {
+  throw 'Expected the guided email not to expose removed internal offer-code or source-page fields.'
 }
 
 $listenerIndex = $studioScript.IndexOf('form.addEventListener("submit", prepareInquiry)', [System.StringComparison]::Ordinal)

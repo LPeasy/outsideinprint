@@ -19,7 +19,7 @@ Before EPUB checkout, you may separately choose to receive Bob's Almanack, new-p
 
 For reader support, Outside In Print receives transaction identifiers, amount, status, and subscription status needed for reconciliation, cancellation support, and refunds. No reader-support amount is sent to site analytics.
 
-When you enter information in the Studio inquiry form, the information remains in your browser. The page uses a local script to prepare a `mailto:` draft in your email application; entering information or preparing the draft does not transmit it to Outside In Print or a hosted form provider. The information is transmitted only when you send the message through your email application and provider to `support@outsideinprint.org`. The public Studio page does not accept uploaded source files.
+When you enter information in the Studio inquiry form, the form does not send the inquiry-field contents to Outside In Print, a hosted form provider, or site analytics. Selecting “Prepare inquiry email” passes those contents to your configured email application or provider through a `mailto:` draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches `support@outsideinprint.org`. The public Studio page does not accept uploaded source files.
 
 ## Site analytics
 

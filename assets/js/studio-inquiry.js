@@ -11,9 +11,12 @@
     "website",
     "role",
     "source_material",
+    "source_size",
+    "intended_reader",
     "project_subject",
     "desired_outcome",
     "timeline",
+    "source_safety_acknowledgement",
     "commercial_acknowledgement"
   ];
 
@@ -69,12 +72,15 @@
       "Website or profile: " + (value(data, "website") || "Not provided"),
       "Role: " + value(data, "role"),
       "Source material: " + value(data, "source_material"),
+      "Source size: " + value(data, "source_size"),
+      "Intended reader: " + value(data, "intended_reader"),
       "Proposed essay: " + value(data, "project_subject"),
       "Desired outcome: " + value(data, "desired_outcome"),
       "Preferred start: " + value(data, "timeline"),
       "Current base rate acknowledged: " + clean(form.dataset.currentRate),
       "",
-      "I have not attached confidential or restricted source material. I understand that this inquiry does not reserve a production slot or create a client relationship."
+      "Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any.",
+      "This inquiry does not reserve a production slot or create a client relationship."
     ].join("\n").replace(/\n/g, "\r\n");
 
     status.textContent = "Your email application should open with a prepared draft. Review and send it. Outside In Print has not received your inquiry until the email is sent.";

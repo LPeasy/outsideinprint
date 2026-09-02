@@ -1954,6 +1954,7 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
 
   foreach ($requiredText in @(
     'You have the material. We make it publishable.',
+    'Fixed scope · First draft in 7 business days · One revision',
     $studioActiveRateText,
     '50% deposit to reserve production',
     '50% final balance before final delivery',
@@ -1961,7 +1962,11 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
     '15,000 words',
     '25 pages',
     '1,500–2,000-word bylined essay',
-    '7-business-day production window',
+    'The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received.',
+    'Approximately how much source material is there?',
+    'Who is the intended reader?',
+    'I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any.',
+    'The Studio form does not send your answers to Outside In Print or site analytics. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches support@outsideinprint.org.',
     'Additional interviews',
     'Extensive original research beyond supplied material and basic verification',
     'Custom illustration',
@@ -1975,6 +1980,16 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
   )) {
     if ($studioVisibleText.IndexOf($requiredText, [System.StringComparison]::Ordinal) -lt 0) {
       $uxIssues.Add("public/studio/index.html => expected approved Studio text: $requiredText")
+    }
+  }
+
+  foreach ($obsoleteText in @(
+    'Fixed scope · 7 business days · One revision',
+    '7-business-day production window',
+    'Your answers remain on your device until you open and send'
+  )) {
+    if ($studioVisibleText.IndexOf($obsoleteText, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+      $uxIssues.Add("public/studio/index.html => obsolete Studio claim remains: $obsoleteText")
     }
   }
 
@@ -2015,9 +2030,12 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
       @{ Name = 'website'; Tag = 'input'; Type = 'url'; MaxLength = '300'; Required = $false },
       @{ Name = 'role'; Tag = 'select'; Required = $true },
       @{ Name = 'source_material'; Tag = 'select'; Required = $true },
+      @{ Name = 'source_size'; Tag = 'input'; Type = 'text'; MaxLength = '80'; Required = $true },
+      @{ Name = 'intended_reader'; Tag = 'input'; Type = 'text'; MaxLength = '160'; Required = $true },
       @{ Name = 'project_subject'; Tag = 'input'; Type = 'text'; MaxLength = '160'; Required = $true },
       @{ Name = 'desired_outcome'; Tag = 'textarea'; MaxLength = '800'; Required = $true },
       @{ Name = 'timeline'; Tag = 'select'; Required = $true },
+      @{ Name = 'source_safety_acknowledgement'; Tag = 'input'; Type = 'checkbox'; Required = $true },
       @{ Name = 'commercial_acknowledgement'; Tag = 'input'; Type = 'checkbox'; Required = $true }
     )
     foreach ($fieldExpectation in $studioFieldExpectations) {
@@ -2040,6 +2058,11 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
       if ($fieldIsRequired -ne [bool]$fieldExpectation.Required) {
         $uxIssues.Add("public/studio/index.html => field '$($fieldExpectation.Name)' required state is incorrect")
       }
+    }
+
+    $studioQualificationFieldOrderPattern = '(?s)name=(?:"source_material"|source_material)(?:\s|>).*?name=(?:"source_size"|source_size)(?:\s|>).*?name=(?:"intended_reader"|intended_reader)(?:\s|>).*?name=(?:"project_subject"|project_subject)(?:\s|>)'
+    if ($studioHtml -notmatch $studioQualificationFieldOrderPattern) {
+      $uxIssues.Add('public/studio/index.html => qualification fields must render in Source material, Source size, Intended reader, Proposed essay order')
     }
 
     $studioSubmitButtons = @(
@@ -2079,6 +2102,36 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
     if ($directEmailHref -match '\+' -or $directEmailHref -notmatch '%20' -or $directEmailHref -notmatch '(?i)%0D%0A') {
       $uxIssues.Add('public/studio/index.html => direct-email fallback must encode spaces and CRLF for mailto compatibility')
     }
+    $directEmailBodyMatch = [regex]::Match($directEmailHref, '(?:\?|&)body=([^&]*)', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    if (-not $directEmailBodyMatch.Success) {
+      $uxIssues.Add('public/studio/index.html => direct-email fallback must include an encoded body')
+    }
+    else {
+      $directEmailBody = [Uri]::UnescapeDataString($directEmailBodyMatch.Groups[1].Value)
+      foreach ($requiredBodyText in @(
+        'Source size:',
+        'Intended reader:',
+        'Safety reminder: Do not attach or paste restricted source material. Wait for Outside In Print to request source files and approve a transfer method.'
+      )) {
+        if ($directEmailBody.IndexOf($requiredBodyText, [System.StringComparison]::Ordinal) -lt 0) {
+          $uxIssues.Add("public/studio/index.html => direct-email fallback body must include: $requiredBodyText")
+        }
+      }
+      $previousDirectEmailPromptIndex = -1
+      foreach ($orderedDirectEmailPrompt in @('Source material:', 'Source size:', 'Intended reader:', 'Proposed essay:')) {
+        $currentDirectEmailPromptIndex = $directEmailBody.IndexOf($orderedDirectEmailPrompt, [System.StringComparison]::Ordinal)
+        if ($currentDirectEmailPromptIndex -le $previousDirectEmailPromptIndex) {
+          $uxIssues.Add("public/studio/index.html => direct-email fallback prompt '$orderedDirectEmailPrompt' is missing or out of order")
+        }
+        $previousDirectEmailPromptIndex = $currentDirectEmailPromptIndex
+      }
+      if ($directEmailBody.IndexOf('I have not attached', [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+        $uxIssues.Add('public/studio/index.html => direct-email fallback must use a non-assertive safety reminder')
+      }
+      if ($directEmailBody -match '(?:Offer code|Source page):') {
+        $uxIssues.Add('public/studio/index.html => direct-email fallback must not expose removed internal offer-code or source-page fields')
+      }
+    }
     foreach ($attributeExpectation in @(
       @{ Name = 'data-analytics-source-slot'; Value = 'studio_inquiry_fallback' },
       @{ Name = 'data-analytics-product'; Value = 'OIP-STUDIO-EXPERT-ESSAY' },
@@ -2088,6 +2141,23 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
       if ((Get-AttributeValue -Tag $directEmailAnchors[0] -Name $attributeExpectation.Name) -cne $attributeExpectation.Value) {
         $uxIssues.Add("public/studio/index.html => direct-email fallback has incorrect $($attributeExpectation.Name)")
       }
+    }
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/privacy/index.html')) {
+  $privacyVisibleText = Convert-HtmlFragmentToText -Html ([string]$targetPageHtml['public/privacy/index.html'])
+  $requiredPrivacyText = 'When you enter information in the Studio inquiry form, the form does not send the inquiry-field contents to Outside In Print, a hosted form provider, or site analytics. Selecting “Prepare inquiry email” passes those contents to your configured email application or provider through a mailto: draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches support@outsideinprint.org.'
+  if ($privacyVisibleText.IndexOf($requiredPrivacyText, [System.StringComparison]::Ordinal) -lt 0) {
+    $uxIssues.Add('public/privacy/index.html => expected corrected Studio mailto and email-provider privacy disclosure')
+  }
+  foreach ($obsoletePrivacyText in @(
+    'remains in your browser',
+    'preparing the draft does not transmit',
+    'The information is transmitted only when you send'
+  )) {
+    if ($privacyVisibleText.IndexOf($obsoletePrivacyText, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+      $uxIssues.Add("public/privacy/index.html => obsolete Studio privacy claim remains: $obsoletePrivacyText")
     }
   }
 }

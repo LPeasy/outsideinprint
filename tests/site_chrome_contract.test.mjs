@@ -659,14 +659,29 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
     ["name", 100],
     ["email", 254],
     ["website", 300],
+    ["source_size", 80],
+    ["intended_reader", 160],
     ["project_subject", 160],
     ["desired_outcome", 800]
   ]) {
     assert.match(studioTemplate, new RegExp(`name="${name}"[\\s\\S]*?maxlength="${maxLength}"`));
   }
-  for (const name of ["role", "source_material", "timeline", "commercial_acknowledgement"]) {
+  for (const name of ["role", "source_material", "timeline", "source_safety_acknowledgement", "commercial_acknowledgement"]) {
     assert.match(studioTemplate, new RegExp(`name="${name}"`));
   }
+  assert.match(studioTemplate, /name="source_size" type="text" maxlength="80"[^>]* required>/);
+  assert.match(studioTemplate, /name="intended_reader" type="text" maxlength="160" required>/);
+  assert.match(studioTemplate, /name="source_safety_acknowledgement" type="checkbox" value="acknowledged" required>/);
+  assert.match(studioTemplate, /Approximately how much source material is there\?/);
+  assert.match(studioTemplate, /Who is the intended reader\?/);
+  const studioFieldOrder = ["source_material", "source_size", "intended_reader", "project_subject"]
+    .map((name) => studioTemplate.indexOf(`name="${name}"`));
+  assert.ok(studioFieldOrder.every((index) => index >= 0), "expected all ordered Studio qualification fields");
+  assert.deepEqual(studioFieldOrder, [...studioFieldOrder].sort((left, right) => left - right));
+  assert.match(studioTemplate, /Fixed scope <span aria-hidden="true">&middot;<\/span> First draft in \{\{ \$turnaroundDays \}\} business days <span aria-hidden="true">&middot;<\/span> One revision/);
+  assert.match(studioTemplate, /The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received\./);
+  assert.match(studioTemplate, /The Studio form does not send your answers to Outside In Print or site analytics\. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices\. Outside In Print receives the information only if you send the message and it reaches \{\{ \$email \}\}\./);
+  assert.doesNotMatch(studioTemplate, /Your answers remain on your device until you open and send/);
   assert.match(studioTemplate, /type="submit" disabled>Prepare inquiry email/);
   assert.match(studioTemplate, /role="status" aria-live="polite"/);
   assert.match(studioTemplate, /data-analytics-event="studio_inquiry_direct_email"/);
@@ -683,10 +698,39 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioScript, /event\.preventDefault\(\)/);
   assert.match(studioScript, /\.join\("\\n"\)\.replace\(\/\\n\/g, "\\r\\n"\)/);
   assert.match(studioScript, /\\u007F-\\u009F/);
+  assert.match(studioScript, /"Source size: " \+ value\(data, "source_size"\)/);
+  assert.match(studioScript, /"Intended reader: " \+ value\(data, "intended_reader"\)/);
+  assert.match(studioScript, /"Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any\."/);
+  const guidedBodyOrder = [
+    '"Source material: " + value(data, "source_material")',
+    '"Source size: " + value(data, "source_size")',
+    '"Intended reader: " + value(data, "intended_reader")',
+    '"Proposed essay: " + value(data, "project_subject")'
+  ].map((snippet) => studioScript.indexOf(snippet));
+  assert.ok(guidedBodyOrder.every((index) => index >= 0), "expected all ordered guided-email fields");
+  assert.deepEqual(guidedBodyOrder, [...guidedBodyOrder].sort((left, right) => left - right));
+  assert.doesNotMatch(studioScript, /"(?:Offer code|Source page): "/);
   assert.match(studioScript, /Outside In Print has not received your inquiry until the email is sent\./);
   assert.ok(studioScript.indexOf('form.addEventListener("submit", prepareInquiry)') < studioScript.indexOf("submitButton.disabled = false"));
   assert.doesNotMatch(studioScript, /fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|document\.cookie|localStorage|sessionStorage|navigator\.clipboard/);
   assert.doesNotMatch(studioScript, /delivery confirmed|successfully sent|inquiry received/i);
+
+  const fallbackBodyMatch = studioTemplate.match(/\$fallbackBody := printf "([^"]+)"/);
+  assert.ok(fallbackBodyMatch, "expected the Studio template to define a direct-email fallback body");
+  assert.match(fallbackBodyMatch[1], /Source size:\\r\\n/);
+  assert.match(fallbackBodyMatch[1], /Intended reader:\\r\\n/);
+  assert.match(fallbackBodyMatch[1], /Safety reminder: Do not attach or paste restricted source material\. Wait for Outside In Print to request source files and approve a transfer method\./);
+  const fallbackBodyOrder = ["Source material:", "Source size:", "Intended reader:", "Proposed essay:"]
+    .map((snippet) => fallbackBodyMatch[1].indexOf(snippet));
+  assert.ok(fallbackBodyOrder.every((index) => index >= 0), "expected all ordered fallback-email prompts");
+  assert.deepEqual(fallbackBodyOrder, [...fallbackBodyOrder].sort((left, right) => left - right));
+  assert.doesNotMatch(fallbackBodyMatch[1], /I have not attached/);
+  assert.doesNotMatch(fallbackBodyMatch[1], /(?:Offer code|Source page):/);
+
+  assert.match(privacyPolicy, /When you enter information in the Studio inquiry form, the form does not send the inquiry-field contents to Outside In Print, a hosted form provider, or site analytics\. Selecting “Prepare inquiry email” passes those contents to your configured email application or provider through a `mailto:` draft; that application or provider may store or sync the draft under its own privacy practices\. Outside In Print receives the information only if you send the message and it reaches `support@outsideinprint\.org`\./);
+  assert.doesNotMatch(privacyPolicy, /remains in your browser/);
+  assert.doesNotMatch(privacyPolicy, /preparing the draft does not transmit/);
+  assert.doesNotMatch(privacyPolicy, /The information is transmitted only when you send/);
 });
 
 test("homepage editorial layout uses the new manifesto namespace and drops dead start-here hooks", () => {
