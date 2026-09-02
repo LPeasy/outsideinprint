@@ -1,4 +1,4 @@
-current: beyond-the-bend
+current: two-paths-one-morning
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -939,5 +939,14 @@ cartoons:
     image: "editorial/beyond-the-bend"
     essay: "/essays/mantra-3/"
     alt: "Golden sunrise lights an empty riverside path curving beneath sycamores toward a wooden footbridge, calm water, and distant blue hills."
+    width: 1672
+    height: 941
+  - slug: two-paths-one-morning
+    title: "Two Paths, One Morning"
+    date: "2026-09-02"
+    publishDate: "2026-09-02T08:40:28-04:00"
+    image: "editorial/two-paths-one-morning"
+    essay: "/essays/mantra-4/"
+    alt: "Two separate paths curve through a sunlit riverside meadow beneath the same golden sunrise."
     width: 1672
     height: 941
