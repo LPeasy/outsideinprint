@@ -1,0 +1,48 @@
+{
+  "schema": "oip-bookstore-reading-sample-visual-review-v1",
+  "review_date": "2026-09-01",
+  "book": "The Water Cycle: Risk, Infrastructure, and Public Memory",
+  "source_revision": "published-r2",
+  "scope": "reading-sample responsive figures",
+  "reviewer": "Codex-assisted visual review",
+  "methods": [
+    "original-resolution visual inspection",
+    "native-dimension confirmation",
+    "published alt-text and caption parity",
+    "responsive browser inspection at 1440x1000 and 390x844"
+  ],
+  "status": "pass",
+  "assets": [
+    {
+      "id": "essays/the-water-cycle/sample/v01-water-city-plate",
+      "source_revision": "published-r2",
+      "source_sha256": "fb16bb79e18311afbb31ce29abcf8fb94b92d7a6a6eb867f1242a95cc8105c97",
+      "width": 1600,
+      "height": 1067,
+      "result": "pass",
+      "responsive_result": "pass",
+      "observation": "Settlement, waterway, agriculture, transport, trade, power, and defense remain clear with no visible clipping, overlay, or artifact."
+    },
+    {
+      "id": "essays/the-water-cycle/sample/v02-waterway-rail-shift",
+      "source_revision": "published-r2",
+      "source_sha256": "157a3b2c094942cb0183df4bd06f5b75b9523e97ad1b4907532c8c44b9ad64a8",
+      "width": 1600,
+      "height": 1120,
+      "result": "pass",
+      "responsive_result": "pass",
+      "observation": "Title, legend, corridor distinction, map frame, and source caveat remain legible with no visible clipping or overlap."
+    },
+    {
+      "id": "essays/the-water-cycle/sample/v03-idaho-nfip-claim-records",
+      "source_revision": "published-r2",
+      "source_sha256": "52a424c536795bfe91f8830ad2e8ee954da7e1f3e61eda84ed049877d8586a36",
+      "width": 1600,
+      "height": 1385,
+      "result": "pass",
+      "responsive_result": "pass",
+      "observation": "County map, proportional symbols, statewide counts, ranked bars, Ada callout, and source caveat remain legible with no visible clipping or overlap."
+    }
+  ],
+  "release_note": "This evidence covers responsive rendering of the three Water Cycle figures only. Publication authority remains governed by the release packet and owner approval."
+}

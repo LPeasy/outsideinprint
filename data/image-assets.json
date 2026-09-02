@@ -17,6 +17,48 @@
     "social_max_width": 1200
   },
   "assets": {
+    "essays/the-water-cycle/sample/v01-water-city-plate": {
+      "id": "essays/the-water-cycle/sample/v01-water-city-plate",
+      "source": "images/originals/essays/the-water-cycle/sample/v01-water-city-plate.png",
+      "sha256": "fb16bb79e18311afbb31ce29abcf8fb94b92d7a6a6eb867f1242a95cc8105c97",
+      "width": 1600,
+      "height": 1067,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/the-water-cycle/sample/v02-waterway-rail-shift": {
+      "id": "essays/the-water-cycle/sample/v02-waterway-rail-shift",
+      "source": "images/originals/essays/the-water-cycle/sample/v02-waterway-rail-shift.png",
+      "sha256": "157a3b2c094942cb0183df4bd06f5b75b9523e97ad1b4907532c8c44b9ad64a8",
+      "width": 1600,
+      "height": 1120,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/the-water-cycle/sample/v03-idaho-nfip-claim-records": {
+      "id": "essays/the-water-cycle/sample/v03-idaho-nfip-claim-records",
+      "source": "images/originals/essays/the-water-cycle/sample/v03-idaho-nfip-claim-records.png",
+      "sha256": "52a424c536795bfe91f8830ad2e8ee954da7e1f3e61eda84ed049877d8586a36",
+      "width": 1600,
+      "height": 1385,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/after-the-tone": {
       "id": "editorial/after-the-tone",
       "source": "images/originals/editorial/after-the-tone.png",
@@ -7103,6 +7145,9 @@
     }
   },
   "aliases": {
+    "/images/essays/the-water-cycle/sample/v01-water-city-plate.png": "essays/the-water-cycle/sample/v01-water-city-plate",
+    "/images/essays/the-water-cycle/sample/v02-waterway-rail-shift.png": "essays/the-water-cycle/sample/v02-waterway-rail-shift",
+    "/images/essays/the-water-cycle/sample/v03-idaho-nfip-claim-records.png": "essays/the-water-cycle/sample/v03-idaho-nfip-claim-records",
     "/images/editorial/after-the-tone.png": "editorial/after-the-tone",
     "/images/editorial/algae-fueled-fever-dreams.png": "editorial/algae-fueled-fever-dreams",
     "/images/editorial/at-the-worktable.png": "editorial/at-the-worktable",

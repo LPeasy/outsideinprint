@@ -73,6 +73,12 @@
                     "sourceSlot" "bookstore_index_kindle"
                   ) }}
                 </div>
+
+                {{ partial "shop/sample-link.html" (dict
+                  "page" $book
+                  "product" $product
+                  "sourceSlot" "bookstore_index_sample"
+                ) }}
               </div>
 
               {{ with index $product "deck" }}<p class="bookstore-record__deck">{{ . }}</p>{{ end }}
