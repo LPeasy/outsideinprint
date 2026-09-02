@@ -1,0 +1,52 @@
+{{- $page := .page -}}
+{{- $product := .product | default dict -}}
+{{- $sample := partial "shop/resolve-reading-sample.html" (dict "page" $page) -}}
+
+{{- with $sample -}}
+  {{- $readingTime := int .ReadingTime -}}
+  {{- if lt $readingTime 1 -}}
+    {{- $readingTime = 1 -}}
+  {{- end -}}
+  {{- $epubOffers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" -}}
+  {{- $liveEpubOffers := where $epubOffers "availability_status" "live" -}}
+  {{- $kindleURL := index $product "kindle_url" | default "" -}}
+  <section
+    id="reading-sample"
+    class="bookstore-reading-sample"
+    aria-labelledby="reading-sample-title"
+    tabindex="-1"
+  >
+    <header class="bookstore-reading-sample__header">
+      <p class="bookstore-reading-sample__eyebrow">Read before you buy</p>
+      <h2 id="reading-sample-title">{{ .Title | default "Reading sample" }}</h2>
+      <p class="bookstore-reading-sample__meta">About {{ $readingTime }} min read</p>
+    </header>
+
+    <div class="bookstore-reading-sample__body">
+      {{ .Content }}
+    </div>
+
+    <footer class="bookstore-reading-sample__footer">
+      <p class="bookstore-reading-sample__end"><span>End of sample</span></p>
+      <div class="bookstore-reading-sample__continue" aria-labelledby="bookstore-sample-continue-title">
+        <h3 id="bookstore-sample-continue-title">Continue reading</h3>
+        {{- if gt (len $liveEpubOffers) 0 -}}
+          {{ partial "shop/direct-offers.html" (dict
+            "product" $product
+            "sourceSlot" "bookstore_sample_direct"
+            "compact" true
+            "collapseCheckout" true
+            "headingLevel" 3
+          ) }}
+        {{- else if $kindleURL -}}
+          {{ partial "shop/kindle-button.html" (dict
+            "product" $product
+            "sourceSlot" "bookstore_sample_kindle"
+          ) }}
+        {{- else -}}
+          <p class="bookstore-reading-sample__unavailable">Purchase options are still being prepared.</p>
+        {{- end -}}
+      </div>
+    </footer>
+  </section>
+{{- end -}}

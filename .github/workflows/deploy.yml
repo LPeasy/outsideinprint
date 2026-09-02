@@ -47,6 +47,11 @@ jobs:
         run: |
           ./tests/test_responsive_image_source_contract.ps1
 
+      - name: Test Bookstore Reading Sample Source Contract
+        shell: pwsh
+        run: |
+          ./tests/test_bookstore_reading_sample_contract.ps1 -SourceOnly
+
       - name: Test Focused Legacy Image Migration Contract
         shell: pwsh
         run: |
@@ -241,6 +246,11 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_public_route_smoke.ps1
+
+      - name: Test Bookstore Reading Sample Output Contract
+        shell: pwsh
+        run: |
+          ./tests/test_bookstore_reading_sample_contract.ps1 -SiteDir public
 
       - name: Test Public HTML Output
         shell: pwsh

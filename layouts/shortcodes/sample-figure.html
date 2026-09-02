@@ -1,0 +1,36 @@
+{{- $asset := strings.TrimSpace (.Get "asset") -}}
+{{- $alt := strings.TrimSpace (.Get "alt") -}}
+{{- $caption := strings.TrimSpace (.Get "caption") -}}
+{{- $figureID := strings.TrimSpace (.Get "id") -}}
+
+{{- if not $asset -}}
+  {{- errorf "sample-figure shortcode on %s requires a managed asset ID" .Page.File.Path -}}
+{{- end -}}
+{{- if not $alt -}}
+  {{- errorf "sample-figure shortcode for %q on %s requires nonempty alt text" $asset .Page.File.Path -}}
+{{- end -}}
+{{- if not $caption -}}
+  {{- errorf "sample-figure shortcode for %q on %s requires a caption" $asset .Page.File.Path -}}
+{{- end -}}
+{{- if and $figureID (not (findRE `^[A-Za-z][A-Za-z0-9_-]*$` $figureID)) -}}
+  {{- errorf "sample-figure shortcode for %q on %s uses invalid id %q" $asset .Page.File.Path $figureID -}}
+{{- end -}}
+
+{{- $model := partial "images/model.html" (dict
+  "page" .Page
+  "ref" (printf "oip-image:%s" $asset)
+  "display" true
+) -}}
+{{- if or (not $model.managed) (ne $model.review_state "approved") -}}
+  {{- errorf "sample-figure asset %q on %s must be a registered, approved responsive image" $asset .Page.File.Path -}}
+{{- end -}}
+
+<figure class="bookstore-reading-sample__figure"{{ with $figureID }} id="sample-figure-{{ lower . }}"{{ end }}>
+  {{ partial "images/picture.html" (dict
+    "model" $model
+    "alt" $alt
+    "loading" "lazy"
+    "sizes" "(min-width: 60rem) 42rem, calc(100vw - 2rem)"
+  ) }}
+  <figcaption>{{ $caption }}</figcaption>
+</figure>

@@ -639,8 +639,8 @@ function Get-SemanticPageIssues {
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $studioDataSource = Get-Content -LiteralPath (Join-Path $repoRoot 'data\studio.yaml') -Raw
-$studioEnabledMatch = [regex]::Match($studioDataSource, '(?m)^enabled:[ \t]*(true|false)[ \t]*$')
-$studioInquiryEnabledMatch = [regex]::Match($studioDataSource, '(?m)^inquiry:[ \t]*\r?\n[ \t]+enabled:[ \t]*(true|false)[ \t]*$')
+$studioEnabledMatch = [regex]::Match($studioDataSource, '(?m)^enabled:[ \t]*(true|false)[ \t]*\r?$')
+$studioInquiryEnabledMatch = [regex]::Match($studioDataSource, '(?m)^inquiry:[ \t]*\r?\n[ \t]+enabled:[ \t]*(true|false)[ \t]*\r?$')
 $studioFoundingActiveMatch = [regex]::Match($studioDataSource, '(?m)^\s*founding_offer_active:\s*(true|false)\s*$')
 $studioFoundingPriceMatch = [regex]::Match($studioDataSource, '(?m)^\s*founding_price_display:\s*"([^"]+)"\s*$')
 $studioStandardPriceMatch = [regex]::Match($studioDataSource, '(?m)^\s*standard_price_display:\s*"([^"]+)"\s*$')

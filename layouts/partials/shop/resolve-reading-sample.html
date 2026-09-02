@@ -1,0 +1,23 @@
+{{- $page := .page | default . -}}
+{{- $sample := false -}}
+
+{{- with $page.Resources.GetMatch "sample.md" -}}
+  {{- $state := lower (strings.TrimSpace (printf "%v" (.Params.sample_release_status | default ""))) -}}
+  {{- if eq $state "ready" -}}
+    {{- if .Draft -}}
+      {{- errorf "Ready reading sample %s must not remain a draft" .File.Path -}}
+    {{- end -}}
+    {{- $sample = . -}}
+  {{- else if eq $state "local_draft" -}}
+    {{- if not .Draft -}}
+      {{- errorf "Local-draft reading sample %s must remain draft:true" .File.Path -}}
+    {{- end -}}
+    {{- if hugo.IsServer -}}
+      {{- $sample = . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- errorf "Reading sample %s uses unsupported release status %q" .File.Path $state -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $sample -}}

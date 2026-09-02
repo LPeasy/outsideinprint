@@ -55,12 +55,24 @@
             ) }}
           </div>
 
+          {{ partial "shop/sample-link.html" (dict
+            "page" .
+            "product" $product
+            "sourceSlot" "bookstore_detail_sample"
+            "fragmentOnly" true
+          ) }}
+
           <p class="bookstore-product__purchase-help"><a href="{{ "epub-license-refunds/" | relURL }}">Read the direct EPUB delivery and refund terms</a></p>
         </section>
 
         <div class="bookstore-product__copy">
           {{ .Content }}
         </div>
+
+        {{ partial "shop/reading-sample.html" (dict
+          "page" .
+          "product" $product
+        ) }}
 
         {{ with index $product "formats" }}
           <section class="bookstore-format-ledger" aria-labelledby="bookstore-format-title">

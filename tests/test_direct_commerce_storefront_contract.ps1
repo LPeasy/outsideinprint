@@ -51,7 +51,7 @@ $bookstoreIndexContent = Get-RequiredText -RelativePath 'content/shop/_index.md'
 $usCheckoutRestriction = 'Direct EPUB checkout is currently available to U.S. customers only.'
 Assert-Contains -Text $bookstoreIndexContent -Expected $usCheckoutRestriction -Context 'Bookstore geographic checkout notice'
 Assert-Ordered -Text $bookstoreIndexContent -First $usCheckoutRestriction -Second '[Reader support](/support/) uses a separate checkout.' -Context 'Bookstore geographic checkout notice'
-$americanNightmarePage = Get-RequiredText -RelativePath 'content/shop/the-american-nightmare-keep-dreaming-kid.md'
+$americanNightmarePage = Get-RequiredText -RelativePath 'content/shop/the-american-nightmare-keep-dreaming-kid/index.md'
 if ([regex]::Matches($americanNightmarePage, '(?m)^date: 2026-08-21\s*$').Count -ne 1) {
   throw 'The American Nightmare site edition metadata must bind the owner-accepted 2026-08-21 publication date exactly once.'
 }
@@ -650,15 +650,20 @@ if ([regex]::Matches([Net.WebUtility]::HtmlDecode($shopIndexOutput), '<summary\b
 if ([regex]::Matches($shopIndexOutput, '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>).*?<form\b[^>]*\bdata-epub-checkout(?:=|\s|>).*?</form>\s*</div>\s*</details>').Count -ne 3) {
   throw 'Every bookstore index disclosure must contain its complete EPUB checkout form.'
 }
-if ($shopDetailOutput -match '\bdata-bookstore-checkout-disclosure(?:=|\s|>)') {
-  throw 'Book detail pages must render their EPUB checkout forms without the catalog disclosure.'
+$detailDisclosures = @([regex]::Matches($shopDetailOutput, '<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>)', 'IgnoreCase'))
+if ($detailDisclosures.Count -ne 3) {
+  throw "Book detail pages must render exactly one collapsed post-sample checkout disclosure per title; found $($detailDisclosures.Count)."
+}
+if ($shopDetailOutput -match '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure[^>]*\bopen(?:\s*=|\s|>)') {
+  throw 'Book detail post-sample checkout disclosures must be closed by default.'
 }
 foreach ($detailPath in @(
   'shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'shop/the-parable-of-the-sheep/index.html',
   'shop/the-water-cycle/index.html'
 )) {
-  $detailHtml = [Net.WebUtility]::HtmlDecode([string]$output[$detailPath])
+  $detailRawHtml = [string]$output[$detailPath]
+  $detailHtml = [Net.WebUtility]::HtmlDecode($detailRawHtml)
   if ([regex]::Matches($detailHtml, [regex]::Escape($usCheckoutRestriction), 'IgnoreCase').Count -ne 1) {
     throw "Built bookstore detail $detailPath must expose the U.S.-only direct EPUB notice exactly once."
   }
@@ -666,6 +671,15 @@ foreach ($detailPath in @(
   $detailCheckoutIndex = $detailHtml.IndexOf('data-direct-offer', [StringComparison]::Ordinal)
   if ($detailRestrictionIndex -lt 0 -or $detailCheckoutIndex -lt 0 -or $detailRestrictionIndex -ge $detailCheckoutIndex) {
     throw "Built bookstore detail $detailPath must place the U.S.-only notice before direct checkout."
+  }
+  if ([regex]::Matches($detailRawHtml, 'data-analytics-source-slot=(?:"|'''')?bookstore_detail_direct(?:"|'''')?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
+    throw "Built bookstore detail $detailPath must retain one expanded primary EPUB checkout."
+  }
+  if ([regex]::Matches($detailRawHtml, 'data-analytics-source-slot=(?:"|'''')?bookstore_sample_direct(?:"|'''')?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
+    throw "Built bookstore detail $detailPath must contain one post-sample EPUB continuation checkout."
+  }
+  if ([regex]::Matches($detailRawHtml, '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>).*?<form\b[^>]*\bdata-epub-checkout(?:=|\s|>)[^>]*\bdata-analytics-source-slot=(?:"|'''')?bookstore_sample_direct(?:"|'''')?(?=\s|>).*?</form>\s*</div>\s*</details>').Count -ne 1) {
+    throw "Built bookstore detail $detailPath must keep the complete post-sample checkout inside its closed disclosure."
   }
 }
 foreach ($sku in $publicEpubSkus) {
@@ -676,18 +690,18 @@ foreach ($sku in $publicEpubSkus) {
 if ($shopOutput -match '(?is)<a\b[^>]*bookstore-direct-offer__action') {
   throw 'The API-based EPUB launch must not expose a hosted direct-offer checkout link.'
 }
-if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?live(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
-  throw 'Expected all three live EPUB offers on the index and their detail pages.'
+if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?live(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
+  throw 'Expected three catalog, three primary detail, and three post-sample live EPUB offers.'
 }
 if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?disabled(?:"|'''')?', 'IgnoreCase').Count -ne 0) {
   throw 'No closed EPUB offer may remain on the storefront.'
 }
-if ([regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 6) {
-  throw 'Expected six rendered checkout forms for the three live EPUB offers.'
+if ([regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 9) {
+  throw 'Expected nine rendered checkout forms across catalog, primary detail, and post-sample offers.'
 }
 $renderedCheckoutForms = @([regex]::Matches($shopOutput, '(?is)<form\b[^>]*\bdata-epub-checkout(?:\s|>).*?</form>'))
-if ($renderedCheckoutForms.Count -ne 6) {
-  throw "Expected six complete rendered checkout forms for order validation; found $($renderedCheckoutForms.Count)."
+if ($renderedCheckoutForms.Count -ne 9) {
+  throw "Expected nine complete rendered checkout forms for order validation; found $($renderedCheckoutForms.Count)."
 }
 foreach ($renderedCheckoutForm in $renderedCheckoutForms) {
   $checkoutHtml = $renderedCheckoutForm.Value
@@ -695,20 +709,20 @@ foreach ($renderedCheckoutForm in $renderedCheckoutForms) {
   Assert-Ordered -Text $checkoutHtml -First 'bookstore-direct-offer__action' -Second 'data-epub-checkout-status' -Context 'Rendered direct EPUB checkout order'
   Assert-Ordered -Text $checkoutHtml -First 'data-epub-checkout-status' -Second 'bookstore-epub-checkout__preferences' -Context 'Rendered direct EPUB checkout order'
 }
-if ([regex]::Matches($shopOutput, 'action=(?:"|'''')?https://downloads\.outsideinprint\.org/api/books/epub(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
-  throw 'Expected the approved production endpoint on all live EPUB index and detail forms.'
+if ([regex]::Matches($shopOutput, 'action=(?:"|'''')?https://downloads\.outsideinprint\.org/api/books/epub(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
+  throw 'Expected the approved production endpoint on all catalog, detail, and post-sample EPUB forms.'
 }
-if ([regex]::Matches($shopOutput, 'type=(?:"|'''')?email(?:"|'''')?', 'IgnoreCase').Count -lt 6) {
+if ([regex]::Matches($shopOutput, 'type=(?:"|'''')?email(?:"|'''')?', 'IgnoreCase').Count -lt 9) {
   throw 'Every live EPUB checkout must require a delivery email field.'
 }
-if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?weekly_email(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
+if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?weekly_email(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
   throw 'Every live EPUB checkout must expose the optional weekly-email choice.'
 }
-if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?publication_notifications(?:"|'''')?', 'IgnoreCase').Count -ne 6) {
+if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?publication_notifications(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
   throw 'Every live EPUB checkout must expose the optional new-publication choice.'
 }
 $marketingCheckboxes = @([regex]::Matches($shopOutput, '(?is)<input\b[^>]*\bname=(?:"|'''')?(?:weekly_email|publication_notifications)(?:"|'''')?[^>]*>'))
-if ($marketingCheckboxes.Count -ne 12 -or @($marketingCheckboxes | Where-Object { $_.Value -match '\bchecked(?:\s*=|\s|>)' }).Count -ne 0) {
+if ($marketingCheckboxes.Count -ne 18 -or @($marketingCheckboxes | Where-Object { $_.Value -match '\bchecked(?:\s*=|\s|>)' }).Count -ne 0) {
   throw 'All weekly-email and new-publication preferences must render unchecked and remain optional.'
 }
 foreach ($requiredNewsletterText in @(

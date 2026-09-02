@@ -32,6 +32,7 @@ $responsiveImageSourceContractPath = Join-Path $repoRoot "tests/test_responsive_
 $responsiveImageOutputContractPath = Join-Path $repoRoot "tests/test_responsive_image_output_contract.ps1"
 $responsiveImageNodeContractPath = Join-Path $repoRoot "tests/responsive_image_contract.test.mjs"
 $responsiveImageGuidePath = Join-Path $repoRoot "docs/responsive-image-pipeline.md"
+$bookstoreReadingSampleContractPath = Join-Path $repoRoot "tests/test_bookstore_reading_sample_contract.ps1"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
   throw "AGENTS.md is required for repo-local publishing session guidance."
@@ -79,6 +80,7 @@ foreach ($requiredValidationPath in @(
   $responsiveImageOutputContractPath,
   $responsiveImageNodeContractPath,
   $responsiveImageGuidePath,
+  $bookstoreReadingSampleContractPath,
   $seoMetadataAuditPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
@@ -495,6 +497,16 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_legacy_render_contract\.ps1") {
   throw "deploy.yml must run the legacy render contract test."
 }
 
+$readingSampleSourceInvocationPattern = '(?m)^\s*\./tests/test_bookstore_reading_sample_contract\.ps1\s+-SourceOnly\s*$'
+if ([regex]::Matches($contractsJobBlock, $readingSampleSourceInvocationPattern).Count -ne 1) {
+  throw "deploy.yml must run the bookstore reading-sample source contract exactly once in the contracts job."
+}
+
+$readingSampleOutputInvocationPattern = '(?m)^\s*\./tests/test_bookstore_reading_sample_contract\.ps1\s+-SiteDir\s+public\s*$'
+if ([regex]::Matches($buildJobBlock, $readingSampleOutputInvocationPattern).Count -ne 1) {
+  throw "deploy.yml must run the bookstore reading-sample output contract exactly once in the build job."
+}
+
 if ($deployWorkflow -notmatch "\.\/scripts\/audit_essay_images\.ps1\s+-FailOnIssues") {
   throw "deploy.yml must run the essay image audit before building the site."
 }
@@ -532,9 +544,14 @@ if ($deployWorkflow -match '(?m)^\s*run:\s*hugo\s+--gc\s+--minify\s+--buildFutur
 }
 
 $publicRouteSmokeIndex = $deployWorkflow.IndexOf("./tests/test_public_route_smoke.ps1")
+$readingSampleOutputIndex = $deployWorkflow.IndexOf("./tests/test_bookstore_reading_sample_contract.ps1 -SiteDir public")
 $publicHtmlOutputIndex = $deployWorkflow.IndexOf("./tests/test_public_html_output.ps1 -RequireFreshBuild")
-if ($publicRouteSmokeIndex -lt 0 -or $publicHtmlOutputIndex -lt 0 -or $publicRouteSmokeIndex -gt $publicHtmlOutputIndex) {
-  throw "deploy.yml must run the public route smoke test before the full generated-output regression test."
+if ($publicRouteSmokeIndex -lt 0 -or
+    $readingSampleOutputIndex -lt 0 -or
+    $publicHtmlOutputIndex -lt 0 -or
+    $publicRouteSmokeIndex -gt $readingSampleOutputIndex -or
+    $readingSampleOutputIndex -gt $publicHtmlOutputIndex) {
+  throw "deploy.yml must run route smoke, bookstore reading-sample output, then the full generated-output regression test."
 }
 
 if ($deployWorkflow -notmatch "\.\/tests\/show_public_route_debug\.ps1") {

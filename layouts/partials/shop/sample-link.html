@@ -1,0 +1,32 @@
+{{- $page := .page -}}
+{{- $product := .product | default dict -}}
+{{- $sample := partial "shop/resolve-reading-sample.html" (dict "page" $page) -}}
+{{- $sourceSlot := .sourceSlot | default "bookstore_detail_sample" -}}
+{{- $fragmentOnly := .fragmentOnly | default false -}}
+{{- $class := strings.TrimSpace (printf "bookstore-sample-link %s" (.class | default "")) -}}
+
+{{- with $sample -}}
+  {{- $productSlug := index $product "suggested_slug" | default ($page.Params.slug | default $page.File.BaseFileName) -}}
+  {{- $productTitle := index $product "title" | default $page.Title -}}
+  {{- $sampleURL := printf "%s#reading-sample" $page.RelPermalink -}}
+  {{- if $fragmentOnly -}}
+    {{- $sampleURL = "#reading-sample" -}}
+  {{- end -}}
+  {{- $readingTime := int .ReadingTime -}}
+  {{- if lt $readingTime 1 -}}
+    {{- $readingTime = 1 -}}
+  {{- end -}}
+  <p class="{{ $class }}">
+    <a
+      class="bookstore-sample-link__anchor"
+      href="{{ $sampleURL }}"
+      data-analytics-event="book_sample_open"
+      data-analytics-source-slot="{{ $sourceSlot }}"
+      data-analytics-slug="{{ $productSlug }}"
+      data-analytics-title="{{ $productTitle }}"
+      data-analytics-section="Bookstore"
+      data-analytics-path="{{ $page.RelPermalink }}"
+    >Read a free sample <span aria-hidden="true">&darr;</span></a>
+    <span class="bookstore-sample-link__meta">{{ $readingTime }} min read</span>
+  </p>
+{{- end -}}
