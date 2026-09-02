@@ -8,11 +8,11 @@ series: ["ModernBios"]
 collections: ["modern-bios"]
 subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
 featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b41234f692c761a11f33e202a31bb366b4c2c8e31b07a3ac2b8856187.jpeg"
-featured_image_caption: "Jack Stratton on stage \\\\| Source: Michelle Shiers"
-featured_image_alt: "Jack Stratton on stage \\\\"
+featured_image_caption: "Jack Stratton on stage | Source: Michelle Shiers"
+featured_image_alt: "Jack Stratton on stage"
 description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-15"
@@ -20,6 +20,9 @@ revision_history:
   - version: "1.2"
     date: "2026-07-05"
     note: "Recovered and localized body images from Medium import archive; no substantive text change."
+  - version: "1.3"
+    date: "2026-09-01"
+    note: "Restored the complete localized visual sequence from the original Medium edition; no substantive text change."
 pdf: "/pdfs/jack-stratton-and-the-vulfpeck-model.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/jack-stratton-and-the-vulfpeck-model-00813f3ac8bf"
@@ -58,7 +61,7 @@ music.
 
 #### Jack Stratton's Early Life and Musical Education
 
-![Jack and His Dad, Bert \](/images/medium/jack-stratton-and-the-vulfpeck-model/2c3762584e6a4b03acaf71a5ca668741cc0c78e9cd714f4238aef65d56c37c7b.jpeg)
+![Jack and His Dad, Bert](/images/medium/jack-stratton-and-the-vulfpeck-model/2c3762584e6a4b03acaf71a5ca668741cc0c78e9cd714f4238aef65d56c37c7b.jpeg)
 
 *Jack and His Dad, Bert \| [Source: Bert Stratton](https://www.cleveland.com/entertainment/2022/06/vulfpecks-jack-stratton-and-his-dad-yiddishe-cups-bert-stratton-talk-cleveland-klezmer-music-qa.html?outputType=amp)*
 
@@ -90,7 +93,7 @@ influences**, laid the foundation for a group that would blend
 
 #### How Vulfpeck Was Formed: The Origins of the Band
 
-![Cory Wong, Jack, and Joe Dart \](/images/medium/jack-stratton-and-the-vulfpeck-model/3a73bf5eef98b4652561ecd257f3a7a2a22726d60f3a5d8f6d30549cfe507aa2.jpeg)
+![Cory Wong, Jack, and Joe Dart](/images/medium/jack-stratton-and-the-vulfpeck-model/3a73bf5eef98b4652561ecd257f3a7a2a22726d60f3a5d8f6d30549cfe507aa2.jpeg)
 
 *Cory Wong, Jack, and Joe Dart \| [Source: StubHub](https://www.stubhub.com/vulfpeck-tickets/performer/1501197)*
 
@@ -123,7 +126,7 @@ band**'s operations.
 
 #### Jack Stratton's Role in Vulfpeck as Bandleader and Producer
 
-![Vulfpeck \](/images/medium/jack-stratton-and-the-vulfpeck-model/552e548f82e4a9edd9b3ab53f9354751fecc3c03c5f74518fb15a8d45af58242.jpeg)
+![Vulfpeck](/images/medium/jack-stratton-and-the-vulfpeck-model/552e548f82e4a9edd9b3ab53f9354751fecc3c03c5f74518fb15a8d45af58242.jpeg)
 
 *Vulfpeck \| [Source: Last.fm](https://www.last.fm/music/Vulfpeck/+wiki)*
 
@@ -152,9 +155,9 @@ scientist.***
 
 #### Inside Jack Stratton's Production Style and Sound Philosophy
 
-![Jack’s Mixing Masterclass \](/images/medium/jack-stratton-and-the-vulfpeck-model/f36a6e470efd2fd38b93abfd2d8056a951f956e6f1f61d698ce43edc4f73d4f6.jpeg)
+![Jack's Mixing Masterclass](/images/medium/jack-stratton-and-the-vulfpeck-model/f36a6e470efd2fd38b93abfd2d8056a951f956e6f1f61d698ce43edc4f73d4f6.jpeg)
 
-*Jack’s Mixing Masterclass \| [Source: Music Radar](https://www.musicradar.com/news/jack-stratton-mixing-masterclass)*
+*Jack's Mixing Masterclass \| [Source: Music Radar](https://www.musicradar.com/news/jack-stratton-mixing-masterclass)*
 
 
 Stratton's approach to mixing emphasizes **warmth, clarity, and
@@ -179,7 +182,7 @@ is ***perfect for live shows.***
 
 #### Vulfpeck Albums and Live Performances: From MSG to the Mainstream
 
-![Vulfpeck at MSG \](/images/medium/jack-stratton-and-the-vulfpeck-model/4e545f452e9f1601fc923051b9bcfa772947549b4592a059c8e598d3259d050c.jpeg)
+![Vulfpeck at MSG](/images/medium/jack-stratton-and-the-vulfpeck-model/4e545f452e9f1601fc923051b9bcfa772947549b4592a059c8e598d3259d050c.jpeg)
 
 *Vulfpeck at MSG \| [Source: Jambase](https://www.jambase.com/article/vulfpeck-madison-square-garden-chris-thile-dave-koz)*
 
@@ -210,7 +213,7 @@ world's biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
 
 #### Clarity of Cal: A Career-Defining Live Album and Film
 
-![Clarity of Cal Album Images \](/images/medium/jack-stratton-and-the-vulfpeck-model/e4ba5e54a975b44557c9a40bf259fa87c4bd6c5ee0f0ea2d99486d083acc3ea5.jpeg)
+![Clarity of Cal Album Images](/images/medium/jack-stratton-and-the-vulfpeck-model/e4ba5e54a975b44557c9a40bf259fa87c4bd6c5ee0f0ea2d99486d083acc3ea5.jpeg)
 
 *Clarity of Cal Album Images \| [Source: Vulfpeck](https://preview.redd.it/vkcd7763xkhe1.png?width=944&format=png&auto=webp&s=c4db621337eff49d5729ebfea066f76193238085&app_web_view=ios)*
 
@@ -236,7 +239,9 @@ playful experimentation**, with **"*Tender Defender*"** highlighting
 **Theo Katzman's** *impassioned vocals* and **"New Beastly"** delivering
 *a modern twist on a timeless sound.*
 
-- [Embedded media](https://www.youtube.com/embed/8bLinctYcno?feature=oembed)
+![Vulfpeck's Clarity of Cal concert film](/images/article-media/jack-stratton-and-the-vulfpeck-model/97337aed41250cd4d04217fb2cb2485dea733d71fecbae5684362779c6bf1d12.jpg)
+
+*Clarity of Cal concert film | [Watch on YouTube](https://www.youtube.com/watch?v=8bLinctYcno)*
 
 > Accompanying the album is a concert film directed and edited by
 > *Carter Knopik*, offering fans **an immersive experience of the live
@@ -257,6 +262,10 @@ of Cal"*** was a phrase his father often repeated, originating from a
 > Wind & Fire / CHIC vibes. More gospel-y in general, which I'm all
 > about!"***
 
+![Clarity of Cal documentary trailer title card](/images/article-media/jack-stratton-and-the-vulfpeck-model/3eebf467f71ac2479bf14032516dedf69768b753f762f4e0bc24cac9689b74ad.jpeg)
+
+*Documentary Trailer | [Source: Vulf on YouTube](https://youtu.be/py-HPosf8s8?si=sMv_N5Dve4LfSjGS)*
+
 The live recording captures ***the essence of Vulfpeck's
 performances,*** making listeners feel as though they're *part of the
 audience.*
@@ -276,6 +285,10 @@ longtime fans and newcomers to experience ***the infectious groove***
 continents.***
 
 #### Jack Stratton's Side Projects and Vulfpeck Collaborators
+
+![The Fearless Flyers performing](/images/article-media/jack-stratton-and-the-vulfpeck-model/9064a56cc18deb31888bcf508a36ea371b034c27c6c8e3b9cca7f63c46028d71.jpeg)
+
+*The Fearless Flyers | [Source: Dervon Douglas](https://liveforlivemusic.com/features/the-fearless-flyers-iv-vulfpeck-interview-2024/)*
 
 Stratton also produces for ***The Fearless Flyers***, a Vulf Records
 offshoot featuring *Cory Wong and Nate Smith*, and releases **solo
@@ -301,6 +314,10 @@ shine.**
 
 #### Jack Stratton's Musical Influences and Songwriting Approach
 
+![Jack Stratton and Cory Wong performing on guitar](/images/article-media/jack-stratton-and-the-vulfpeck-model/950149cea33f580c4a00ce8a602f6b3248b1fc61121c0ea5940038a4d293ca69.jpeg)
+
+*Jack and Cory Wong | [Source: Brandon Well](https://liveforlivemusic.com/news/vulfpeck-you-got-to-be-you-on-wongs-cafe/)*
+
 > Stratton has long cited ***Bernard Purdie*** as a foundational
 > influence.
 
@@ -321,6 +338,10 @@ His evolving creative interests have also shaped **how he engages with
 the industry at large.**
 
 #### Jack Stratton on Music Industry Business Models and Artist Control
+
+![Vulfpeck Sleepify silent album artwork](/images/article-media/jack-stratton-and-the-vulfpeck-model/c120d4582d9ed24545009806966a4df4ec01d1dcc2d725d2fc1d19b4d847af50.jpeg)
+
+*Vulfpeck's Silent Album | [Source: WNYC Media](https://www.wnycstudios.org/podcasts/otm/articles/vulfpeck-made-serious-bank-sleepify)*
 
 Stratton is a **vocal critic of opaque music industry systems**,
 especially in streaming and ticketing.
@@ -346,6 +367,10 @@ His business decisions reflect the same philosophy as his music:
 > sleep through.
 
 #### What's Next for Jack Stratton and Vulfpeck in 2025
+
+![Vulfpeck performing live on stage](/images/article-media/jack-stratton-and-the-vulfpeck-model/18ff47191c4b5d441d9ab279a7e997f5c6150c85143fc857194f40e9c858a14d.jpeg)
+
+*Vulf on stage | [Source](https://bluefunkymamma.wordpress.com/2018/01/13/vulfpeck-banda/)*
 
 Stratton continues to guide Vulfpeck's creative output, manage its
 independent label, and develop new collaborative projects.

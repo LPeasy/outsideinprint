@@ -1851,7 +1851,8 @@ foreach ($file in $htmlFiles) {
     ($requiredLegacyHostRedirectPages -contains $relativePath) -or
     ($requiredLegacyCleanupPages -contains $relativePath) -or
     ($requiredUxPages -contains $relativePath) -or
-    ($requiredEssayHeroPages -contains $relativePath)
+    ($requiredEssayHeroPages -contains $relativePath) -or
+    ($relativePath -ceq 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html')
   ) {
     $targetPageHtml[$relativePath] = $content
   }
@@ -2514,6 +2515,96 @@ foreach ($check in $essayHeroChecks) {
   else {
     if ($heroMatch.Success) {
       $metadataIssues.Add("$relativePath => expected essays without a promoted hero candidate to omit the visible piece hero")
+    }
+  }
+}
+
+$jackStrattonPath = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
+if (-not $targetPageHtml.ContainsKey($jackStrattonPath)) {
+  $metadataIssues.Add("Missing generated page required for Jack Stratton visual-sequence coverage: $jackStrattonPath")
+}
+else {
+  $jackStrattonHtml = [string]$targetPageHtml[$jackStrattonPath]
+  $jackStrattonBodyMatch = [regex]::Match(
+    $jackStrattonHtml,
+    '(?is)<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-body\b[^"]*"|''[^'']*\bpiece-body\b[^'']*''|[^\s>]*\bpiece-body\b[^\s>]*)[^>]*>(.*?)</div>\s*<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|''[^'']*\bpiece-aftermatter\b[^'']*''|[^\s>]*\bpiece-aftermatter\b[^\s>]*)'
+  )
+
+  if (-not $jackStrattonBodyMatch.Success) {
+    $metadataIssues.Add("$jackStrattonPath => expected a piece-body region for restored visual-sequence coverage")
+  }
+  else {
+    $jackStrattonBodyHtml = $jackStrattonBodyMatch.Groups[1].Value
+    $expectedJackStrattonImages = @(
+      '/images/medium/jack-stratton-and-the-vulfpeck-model/2c3762584e6a4b03acaf71a5ca668741cc0c78e9cd714f4238aef65d56c37c7b.jpeg',
+      '/images/medium/jack-stratton-and-the-vulfpeck-model/3a73bf5eef98b4652561ecd257f3a7a2a22726d60f3a5d8f6d30549cfe507aa2.jpeg',
+      '/images/medium/jack-stratton-and-the-vulfpeck-model/552e548f82e4a9edd9b3ab53f9354751fecc3c03c5f74518fb15a8d45af58242.jpeg',
+      '/images/medium/jack-stratton-and-the-vulfpeck-model/f36a6e470efd2fd38b93abfd2d8056a951f956e6f1f61d698ce43edc4f73d4f6.jpeg',
+      '/images/medium/jack-stratton-and-the-vulfpeck-model/4e545f452e9f1601fc923051b9bcfa772947549b4592a059c8e598d3259d050c.jpeg',
+      '/images/medium/jack-stratton-and-the-vulfpeck-model/e4ba5e54a975b44557c9a40bf259fa87c4bd6c5ee0f0ea2d99486d083acc3ea5.jpeg',
+      '/images/article-media/jack-stratton-and-the-vulfpeck-model/97337aed41250cd4d04217fb2cb2485dea733d71fecbae5684362779c6bf1d12.jpg',
+      '/images/article-media/jack-stratton-and-the-vulfpeck-model/3eebf467f71ac2479bf14032516dedf69768b753f762f4e0bc24cac9689b74ad.jpeg',
+      '/images/article-media/jack-stratton-and-the-vulfpeck-model/9064a56cc18deb31888bcf508a36ea371b034c27c6c8e3b9cca7f63c46028d71.jpeg',
+      '/images/article-media/jack-stratton-and-the-vulfpeck-model/950149cea33f580c4a00ce8a602f6b3248b1fc61121c0ea5940038a4d293ca69.jpeg',
+      '/images/article-media/jack-stratton-and-the-vulfpeck-model/c120d4582d9ed24545009806966a4df4ec01d1dcc2d725d2fc1d19b4d847af50.jpeg',
+      '/images/article-media/jack-stratton-and-the-vulfpeck-model/18ff47191c4b5d441d9ab279a7e997f5c6150c85143fc857194f40e9c858a14d.jpeg'
+    )
+    $jackStrattonImageTags = @(Get-OpenTags -Html $jackStrattonBodyHtml -TagName 'img')
+
+    if ($jackStrattonImageTags.Count -ne $expectedJackStrattonImages.Count) {
+      $metadataIssues.Add("$jackStrattonPath => expected exactly 12 restored body images, found $($jackStrattonImageTags.Count)")
+    }
+
+    for ($imageIndex = 0; $imageIndex -lt [Math]::Min($jackStrattonImageTags.Count, $expectedJackStrattonImages.Count); $imageIndex++) {
+      $imageTag = $jackStrattonImageTags[$imageIndex]
+      $imagePath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $imageTag -Name 'src')
+      if ($imagePath -cne $expectedJackStrattonImages[$imageIndex]) {
+        $metadataIssues.Add("$jackStrattonPath => restored image $($imageIndex + 1) expected '$($expectedJackStrattonImages[$imageIndex])', found '$imagePath'")
+      }
+
+      $alt = Get-AttributeValue -Tag $imageTag -Name 'alt'
+      if ([string]::IsNullOrWhiteSpace($alt)) {
+        $metadataIssues.Add("$jackStrattonPath => restored image $($imageIndex + 1) requires nonempty alt text")
+      }
+      if ((Get-AttributeValue -Tag $imageTag -Name 'loading') -cne 'lazy') {
+        $metadataIssues.Add("$jackStrattonPath => restored image $($imageIndex + 1) must use lazy loading")
+      }
+      if ((Get-AttributeValue -Tag $imageTag -Name 'decoding') -cne 'async') {
+        $metadataIssues.Add("$jackStrattonPath => restored image $($imageIndex + 1) must use async decoding")
+      }
+
+      $imageWidth = 0
+      $imageHeight = 0
+      if (-not [int]::TryParse((Get-AttributeValue -Tag $imageTag -Name 'width'), [ref]$imageWidth) -or $imageWidth -le 0) {
+        $metadataIssues.Add("$jackStrattonPath => restored image $($imageIndex + 1) requires a positive width")
+      }
+      if (-not [int]::TryParse((Get-AttributeValue -Tag $imageTag -Name 'height'), [ref]$imageHeight) -or $imageHeight -le 0) {
+        $metadataIssues.Add("$jackStrattonPath => restored image $($imageIndex + 1) requires a positive height")
+      }
+    }
+
+    $concertPosterPath = $expectedJackStrattonImages[6]
+    $concertPosterFigure = [regex]::Match(
+      $jackStrattonBodyHtml,
+      '(?is)<figure\b[^>]*>.*?' + [regex]::Escape($concertPosterPath) + '.*?</figure>'
+    )
+    $concertWatchUrl = 'https://www.youtube.com/watch?v=8bLinctYcno'
+    $concertWatchLinks = @()
+    if ($concertPosterFigure.Success) {
+      $concertWatchLinks = @(
+        Get-OpenTags -Html $concertPosterFigure.Value -TagName 'a' |
+          Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq $concertWatchUrl }
+      )
+    }
+    if ($concertWatchLinks.Count -ne 1) {
+      $metadataIssues.Add("$jackStrattonPath => expected the localized concert-film poster caption to link once to '$concertWatchUrl'")
+    }
+
+    if ($jackStrattonBodyHtml -match '!\[' -or $jackStrattonBodyHtml -match 'Embedded media') {
+      $metadataIssues.Add("$jackStrattonPath => literal Markdown or the retired embedded-media fallback remains in the restored article body")
+    }
+    if ($jackStrattonBodyHtml -match 'cdn-images-1\.medium\.com|miro\.medium\.com') {
+      $metadataIssues.Add("$jackStrattonPath => remote Medium image dependencies remain in the restored article body")
     }
   }
 }

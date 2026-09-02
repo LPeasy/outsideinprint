@@ -49,6 +49,10 @@ const homeBookstore = fs.readFileSync(path.resolve("layouts/partials/home_bookst
 const studioData = fs.readFileSync(path.resolve("data/studio.yaml"), "utf8");
 const studioTemplate = fs.readFileSync(path.resolve("layouts/studio/single.html"), "utf8");
 const studioScript = fs.readFileSync(path.resolve("assets/js/studio-inquiry.js"), "utf8");
+const jackStrattonEssay = fs.readFileSync(
+  path.resolve("content/essays/jack-stratton-and-the-vulfpeck-model.md"),
+  "utf8"
+);
 const directOffers = fs.readFileSync(path.resolve("layouts/partials/shop/direct-offers.html"), "utf8");
 const kindleButton = fs.readFileSync(path.resolve("layouts/partials/shop/kindle-button.html"), "utf8");
 const shopList = fs.readFileSync(path.resolve("layouts/shop/list.html"), "utf8");
@@ -213,6 +217,44 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /\/\* Light-mode paper edition \*\//);
   assert.match(css, /html\[data-theme="light"\] \.card,[\s\S]*background:var\(--paper-surface-wash\), var\(--bg-surface\)/);
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
+});
+
+test("Jack Stratton modern bio preserves the complete localized visual sequence", () => {
+  assert.match(jackStrattonEssay, /^version: "1\.3"$/m);
+  assert.match(jackStrattonEssay, /^edition: "Fourth web edition"$/m);
+  assert.match(jackStrattonEssay, /^featured_image_caption: "Jack Stratton on stage \| Source: Michelle Shiers"$/m);
+  assert.match(jackStrattonEssay, /^featured_image_alt: "Jack Stratton on stage"$/m);
+  assert.doesNotMatch(jackStrattonEssay, /!\[[^\]\r\n]*\\\]\(/);
+  assert.doesNotMatch(jackStrattonEssay, /cdn-images-1\.medium\.com|miro\.medium\.com/);
+
+  const expectedBodyImages = [
+    "/images/medium/jack-stratton-and-the-vulfpeck-model/2c3762584e6a4b03acaf71a5ca668741cc0c78e9cd714f4238aef65d56c37c7b.jpeg",
+    "/images/medium/jack-stratton-and-the-vulfpeck-model/3a73bf5eef98b4652561ecd257f3a7a2a22726d60f3a5d8f6d30549cfe507aa2.jpeg",
+    "/images/medium/jack-stratton-and-the-vulfpeck-model/552e548f82e4a9edd9b3ab53f9354751fecc3c03c5f74518fb15a8d45af58242.jpeg",
+    "/images/medium/jack-stratton-and-the-vulfpeck-model/f36a6e470efd2fd38b93abfd2d8056a951f956e6f1f61d698ce43edc4f73d4f6.jpeg",
+    "/images/medium/jack-stratton-and-the-vulfpeck-model/4e545f452e9f1601fc923051b9bcfa772947549b4592a059c8e598d3259d050c.jpeg",
+    "/images/medium/jack-stratton-and-the-vulfpeck-model/e4ba5e54a975b44557c9a40bf259fa87c4bd6c5ee0f0ea2d99486d083acc3ea5.jpeg",
+    "/images/article-media/jack-stratton-and-the-vulfpeck-model/97337aed41250cd4d04217fb2cb2485dea733d71fecbae5684362779c6bf1d12.jpg",
+    "/images/article-media/jack-stratton-and-the-vulfpeck-model/3eebf467f71ac2479bf14032516dedf69768b753f762f4e0bc24cac9689b74ad.jpeg",
+    "/images/article-media/jack-stratton-and-the-vulfpeck-model/9064a56cc18deb31888bcf508a36ea371b034c27c6c8e3b9cca7f63c46028d71.jpeg",
+    "/images/article-media/jack-stratton-and-the-vulfpeck-model/950149cea33f580c4a00ce8a602f6b3248b1fc61121c0ea5940038a4d293ca69.jpeg",
+    "/images/article-media/jack-stratton-and-the-vulfpeck-model/c120d4582d9ed24545009806966a4df4ec01d1dcc2d725d2fc1d19b4d847af50.jpeg",
+    "/images/article-media/jack-stratton-and-the-vulfpeck-model/18ff47191c4b5d441d9ab279a7e997f5c6150c85143fc857194f40e9c858a14d.jpeg",
+  ];
+  const bodyImages = [...jackStrattonEssay.matchAll(/^!\[[^\]\r\n]+\]\((\/images\/[^)]+)\)$/gm)].map(
+    (match) => match[1]
+  );
+
+  assert.deepEqual(bodyImages, expectedBodyImages);
+  for (const imagePath of bodyImages) {
+    assert.equal(
+      fs.existsSync(path.resolve("static", imagePath.slice(1))),
+      true,
+      `expected localized Jack Stratton visual: ${imagePath}`
+    );
+  }
+  assert.match(jackStrattonEssay, /\[Watch on YouTube\]\(https:\/\/www\.youtube\.com\/watch\?v=8bLinctYcno\)/);
+  assert.match(jackStrattonEssay, /\[Source: Vulf on YouTube\]\(https:\/\/youtu\.be\/py-HPosf8s8/);
 });
 
 test("Square-first bookstore requires delivery email and keeps marketing consent optional", () => {
