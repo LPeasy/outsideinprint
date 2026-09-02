@@ -1009,17 +1009,11 @@ $baselineBlobPaths = @(
   $reportedOrphans | ForEach-Object { [string]$_.legacy_path }
 )
 $baselineBlobMap = Get-OipBaselineBlobMap -Commit ([string]$migrationReport.baseline_commit) -RelativePaths $baselineBlobPaths
-$currentCommit = (& git -C $rootPath rev-parse HEAD).Trim()
-if ($LASTEXITCODE -ne 0 -or $currentCommit -cnotmatch '^[0-9a-f]{40}$') {
-  throw 'Unable to resolve the current commit for rewritten-content Git-blob parity.'
-}
-$currentContentBlobMap = Get-OipBaselineBlobMap -Commit $currentCommit -RelativePaths @(
-  $migrationReport.modified_reference_files | ForEach-Object { [string]$_.path }
-)
 Assert-Equal -Actual $baselineBlobMap.Count -Expected 507 -Message 'Baseline Git-blob batch must bind the 32 rewritten content files, 105 Medium PNGs, four Syd heroes, 316 retained Medium JPEG/JPG files, and 50 removed orphans.'
-Assert-Equal -Actual $currentContentBlobMap.Count -Expected 32 -Message 'Current Git-blob batch must bind all 32 rewritten content files.'
 Assert-Equal -Actual (Get-OipEvidenceInventoryDigest -Rows @(@($reportedMediumMigrations) + @($reportedRetainedMedium) + @($reportedOrphans))) -Expected ([string]$migrationReport.baseline.medium_inventory_sha256) -Message 'Reported Medium rows do not reproduce the frozen canonical path/actual-SHA digest.'
 Assert-Equal -Actual (Get-OipEvidenceInventoryDigest -Rows @($reportedSydMigrations)) -Expected ([string]$migrationReport.baseline.syd_inventory_sha256) -Message 'Reported Syd rows do not reproduce the frozen canonical path/actual-SHA digest.'
+# The after hashes bind the one-time migration output, not the essays' permanent live state.
+# The focused migration fixture regenerates and verifies those historical output hashes.
 $reportedModifiedPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
 foreach ($item in @($migrationReport.modified_reference_files)) {
   $relativePath = [string]$item.path
@@ -1027,16 +1021,16 @@ foreach ($item in @($migrationReport.modified_reference_files)) {
     throw "Focused-cleanup report contains a duplicate or out-of-scope rewritten content path: $relativePath"
   }
   $fullPath = Join-Path $rootPath $relativePath
-  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf) -or
-    (Get-OipPortableTextFileSha256 -Path $fullPath -Label "Rewritten content '$relativePath'") -cne [string]$item.after_sha256) {
-    throw "Focused-cleanup rewritten-content hash is stale: $relativePath"
+  if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+    throw "Focused-cleanup rewritten content no longer exists: $relativePath"
   }
-  if ([string]$item.before_sha256 -ceq [string]$item.after_sha256 -or [int]$item.replacement_count -lt 1) {
+  if ([string]$item.after_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+    [string]$item.before_sha256 -ceq [string]$item.after_sha256 -or
+    [int]$item.replacement_count -lt 1) {
     throw "Focused-cleanup rewritten-content evidence lacks a real bounded replacement: $relativePath"
   }
   $baselineBlobBytes = [byte[]]$baselineBlobMap[$relativePath]
   Assert-Equal -Actual ([string]$item.before_sha256) -Expected (Get-OipPortableTextSha256ForBytes -Bytes $baselineBlobBytes -Label "Baseline Git blob '$relativePath'") -Message "Focused-cleanup before-content portable hash differs from the exact baseline Git blob: $relativePath"
-  Assert-Equal -Actual ([string]$item.after_sha256) -Expected (Get-OipPortableTextSha256ForBytes -Bytes ([byte[]]$currentContentBlobMap[$relativePath]) -Label "Current Git blob '$relativePath'") -Message "Focused-cleanup after-content portable hash differs between the fresh Git blob and checkout: $relativePath"
 }
 
 $reportedMigrationIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)

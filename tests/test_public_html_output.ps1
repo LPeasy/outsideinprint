@@ -2609,6 +2609,129 @@ else {
   }
 }
 
+$campMysticPath = 'public/essays/what-happened-at-camp-mystic/index.html'
+if (-not $targetPageHtml.ContainsKey($campMysticPath)) {
+  $metadataIssues.Add("Missing generated page required for Camp Mystic timeline and visual-sequence coverage: $campMysticPath")
+}
+else {
+  $campMysticHtml = [string]$targetPageHtml[$campMysticPath]
+  $campMysticBodyMatch = [regex]::Match(
+    $campMysticHtml,
+    '(?is)<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-body\b[^"]*"|''[^'']*\bpiece-body\b[^'']*''|[^\s>]*\bpiece-body\b[^\s>]*)[^>]*>(.*?)</div>\s*<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|''[^'']*\bpiece-aftermatter\b[^'']*''|[^\s>]*\bpiece-aftermatter\b[^\s>]*)'
+  )
+
+  if (-not $campMysticBodyMatch.Success) {
+    $metadataIssues.Add("$campMysticPath => expected a piece-body region for timeline and restored visual-sequence coverage")
+  }
+  else {
+    $campMysticBodyHtml = $campMysticBodyMatch.Groups[1].Value
+    $campMysticTimelineMatches = @(
+      [regex]::Matches(
+        $campMysticBodyHtml,
+        '(?is)<(?<tag>[a-z][a-z0-9:-]*)\b(?=[^>]*\bclass\s*=\s*(?:"[^"]*\barticle-timeline\b[^"]*"|''[^'']*\barticle-timeline\b[^'']*''|[^\s>]*\barticle-timeline\b[^\s>]*))[^>]*>(?<body>.*?)</\k<tag>>'
+      )
+    )
+
+    if ($campMysticTimelineMatches.Count -ne 1) {
+      $metadataIssues.Add("$campMysticPath => expected exactly one article-timeline, found $($campMysticTimelineMatches.Count)")
+    }
+    else {
+      $campMysticTimelineHtml = $campMysticTimelineMatches[0].Groups['body'].Value
+      $campMysticTimelineTagName = $campMysticTimelineMatches[0].Groups['tag'].Value
+      $campMysticTimelineListBody = $null
+      if ($campMysticTimelineTagName -ieq 'ol') {
+        $campMysticTimelineListBody = $campMysticTimelineHtml
+      }
+      else {
+        $campMysticTimelineLists = @([regex]::Matches($campMysticTimelineHtml, '(?is)<ol\b[^>]*>(?<body>.*?)</ol>'))
+        if ($campMysticTimelineLists.Count -ne 1) {
+          $metadataIssues.Add("$campMysticPath => expected the article-timeline to contain exactly one ordered list, found $($campMysticTimelineLists.Count)")
+        }
+        else {
+          $campMysticTimelineListBody = $campMysticTimelineLists[0].Groups['body'].Value
+        }
+      }
+
+      if ($null -ne $campMysticTimelineListBody) {
+        $campMysticTimelineItems = @([regex]::Matches($campMysticTimelineListBody, '(?is)<li\b[^>]*>(.*?)</li>'))
+        $expectedCampMysticTimes = @(
+          '1:14 a.m.',
+          '1:20 a.m.',
+          '1:51 to 2:01 a.m.',
+          '2:20 to 2:30 a.m.',
+          'around 3:00 a.m.',
+          '3:23 a.m.'
+        )
+
+        if ($campMysticTimelineItems.Count -ne $expectedCampMysticTimes.Count) {
+          $metadataIssues.Add("$campMysticPath => expected exactly six ordered timeline items, found $($campMysticTimelineItems.Count)")
+        }
+
+        for ($timelineIndex = 0; $timelineIndex -lt [Math]::Min($campMysticTimelineItems.Count, $expectedCampMysticTimes.Count); $timelineIndex++) {
+          $timelineItemText = [regex]::Replace(
+            (Convert-HtmlFragmentToText -Html $campMysticTimelineItems[$timelineIndex].Groups[1].Value),
+            '\s+',
+            ' '
+          )
+          $expectedTime = $expectedCampMysticTimes[$timelineIndex]
+          if (-not $timelineItemText.Contains($expectedTime, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $metadataIssues.Add("$campMysticPath => timeline item $($timelineIndex + 1) expected visible time '$expectedTime', found '$timelineItemText'")
+          }
+        }
+      }
+    }
+
+    $expectedCampMysticImageIds = @(
+      'medium/a920fa69779c6bdb1900f3bb4221da3835781decd2517f6d5449ec61eaaef7d3',
+      'medium/41eed8f56249fdadda5c9bf6714146ebac1841b1a5f956a41c8369f729333c1f',
+      'medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49'
+    )
+    $campMysticManagedImageTags = @(
+      Get-OpenTags -Html $campMysticBodyHtml -TagName 'img' |
+        Where-Object { $expectedCampMysticImageIds -ccontains (Get-AttributeValue -Tag $_ -Name 'data-oip-image-id') }
+    )
+
+    if ($campMysticManagedImageTags.Count -ne $expectedCampMysticImageIds.Count) {
+      $metadataIssues.Add("$campMysticPath => expected each of the three restored managed body images exactly once, found $($campMysticManagedImageTags.Count) matching occurrences")
+    }
+
+    for ($imageIndex = 0; $imageIndex -lt [Math]::Min($campMysticManagedImageTags.Count, $expectedCampMysticImageIds.Count); $imageIndex++) {
+      $imageTag = $campMysticManagedImageTags[$imageIndex]
+      $imageId = Get-AttributeValue -Tag $imageTag -Name 'data-oip-image-id'
+      if ($imageId -cne $expectedCampMysticImageIds[$imageIndex]) {
+        $metadataIssues.Add("$campMysticPath => restored managed image $($imageIndex + 1) expected '$($expectedCampMysticImageIds[$imageIndex])', found '$imageId'")
+      }
+
+      $alt = [System.Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $imageTag -Name 'alt'))
+      if ([string]::IsNullOrWhiteSpace($alt)) {
+        $metadataIssues.Add("$campMysticPath => restored managed image $($imageIndex + 1) requires nonempty alt text")
+      }
+      if ((Get-AttributeValue -Tag $imageTag -Name 'loading') -cne 'lazy') {
+        $metadataIssues.Add("$campMysticPath => restored managed image $($imageIndex + 1) must use lazy loading")
+      }
+      if ((Get-AttributeValue -Tag $imageTag -Name 'decoding') -cne 'async') {
+        $metadataIssues.Add("$campMysticPath => restored managed image $($imageIndex + 1) must use async decoding")
+      }
+
+      $imageWidth = 0
+      $imageHeight = 0
+      if (-not [int]::TryParse((Get-AttributeValue -Tag $imageTag -Name 'width'), [ref]$imageWidth) -or $imageWidth -le 0) {
+        $metadataIssues.Add("$campMysticPath => restored managed image $($imageIndex + 1) requires a positive width")
+      }
+      if (-not [int]::TryParse((Get-AttributeValue -Tag $imageTag -Name 'height'), [ref]$imageHeight) -or $imageHeight -le 0) {
+        $metadataIssues.Add("$campMysticPath => restored managed image $($imageIndex + 1) requires a positive height")
+      }
+    }
+
+    if ($campMysticBodyHtml -match '!\[') {
+      $metadataIssues.Add("$campMysticPath => literal Markdown remains in the revised article body")
+    }
+    if ($campMysticBodyHtml -match 'cdn-images-\d+\.medium\.com|miro\.medium\.com') {
+      $metadataIssues.Add("$campMysticPath => remote Medium image dependencies remain in the revised article body")
+    }
+  }
+}
+
 foreach ($relativePath in $requiredStructuredDataPages.Keys) {
   if (-not $targetPageHtml.ContainsKey($relativePath)) {
     $structuredDataIssues.Add("Missing generated page required for structured-data regression coverage: $relativePath")

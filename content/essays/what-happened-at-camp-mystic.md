@@ -9,8 +9,8 @@ featured_image: "medium/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5d
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 revision_history:
   - version: "1.2"
     date: "2026-06-21"
@@ -21,6 +21,9 @@ revision_history:
   - version: "1.3"
     date: "2026-07-05"
     note: "Recovered and localized body images from Medium import archive; no substantive text change."
+  - version: "2.0"
+    date: "2026-09-02"
+    note: "Rebuilt the flood timeline as accessible text using the June 2026 Texas legislative record, added localized USGS terrain visuals, and corrected the warning-to-evacuation framing."
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
 featured: false
 
@@ -83,10 +86,24 @@ It was a warning ~ and next time, the water may rise somewhere else.
 
 ### **Combined Full Timeline**
 
-#### **July 1 to 5 Texas Flood & Camp Mystic Tragedy**
+#### **July 4: Warning, Rising Water, and Evacuation**
 
-**Sources:** CNN, USA TODAY, KSAT, NWS, Floodbase, TDEM, USGS, and local
-reporting
+The [Texas Legislature's June 2026 investigative report](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026)
+reconstructs the critical sequence this way (pp. 76-83):
+
+{{< article-timeline label="Camp Mystic warning and evacuation timeline" kicker="Three hours before the flood reached its worst" >}}
+1. **1:14 a.m. · Action-level warning.** The National Weather Service issued a Flash Flood Warning for central Kerr County, including Hunt. Its "considerable" damage-threat tag triggered a Wireless Emergency Alert.
+
+2. **By 1:20 a.m. · Warning known at camp.** Camp personnel were aware of the Flash Flood Warning within minutes of its issuance.
+
+3. **1:51 to 2:01 a.m. · Local alert read; route cut off.** Edward Eastland read Kerr County's CodeRED alert at 1:51. Ten minutes later, he sent video showing Edmunson Creek had become impassable.
+
+4. **2:20 to 2:30 a.m. · Water reaches cabins.** Water entered Look Inn on the Flats. Counselors from river-adjacent cabins ran through the storm to the front office for help.
+
+5. **Around 3:00 a.m. · Evacuation begins.** Dick Eastland decided to begin evacuating the cabins closest to the river, starting with Bug House.
+
+6. **3:23 a.m. · Campers move uphill.** A camp photograph showed campers walking from the Flats toward the office and Rec Hall in heavy rain as water pooled around them.
+{{< /article-timeline >}}
 
 > The Guadalupe River rose more than 25 feet in under 90 minutes.
 
@@ -109,6 +126,18 @@ of rain in 48 hours**.
 > *The terrain was primed for disaster: steep slopes, limestone bedrock,
 > and poor soil absorption gave the water nowhere to go but down.*
 
+{{< article-visual-pair
+  label="Camp Mystic terrain map and elevation profile"
+  left_asset="medium/a920fa69779c6bdb1900f3bb4221da3835781decd2517f6d5449ec61eaaef7d3"
+  left_alt="USGS topographic map showing the South Fork of the Guadalupe River, the Camp Mystic Flats, and a traced cross-section."
+  left_caption="Topographic view with a cross-section traced from the South Fork through the Camp Mystic Flats."
+  right_asset="medium/41eed8f56249fdadda5c9bf6714146ebac1841b1a5f956a41c8369f729333c1f"
+  right_alt="USGS elevation profile corresponding to the cross-section through Camp Mystic."
+  right_caption="Elevation profile corresponding to the trace shown on the map."
+  source_label="USGS National Map"
+  source_url="https://apps.nationalmap.gov/viewer/"
+>}}
+
 > **Camp Mystic was built inside a mapped flood hazard zone.**
 
 In fact, several buildings sat directly inside a ***regulatory
@@ -121,19 +150,10 @@ floodway*.**
 
 > Geography only tells part of the story.
 
-![Guadalupe River Inundation Curve](oip-image:medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49)
+![Guadalupe River inundation curve](oip-image:medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49 "Guadalupe River inundation curve. Source: CNN.")
 
-*Guadalupe River Inundation Curve: Source | CNN*
-
-
-By the time the first official **Flash Flood Warning** was issued at
-**1:14 a.m.**, the rain had already intensified.
-
-A **full Flash Flood Emergency** wasn't declared until **4:03 a.m.** ~
-by then, the flood was already moving through the river corridor.
-
-The warning existed. The failure was turning that warning into fast,
-cabin-by-cabin evacuation in darkness, heavy rain, and rising water.
+The warning existed. The failure was turning an action-level alert into
+fast, cabin-by-cabin evacuation in darkness, heavy rain, and rising water.
 
 > **Camp Mystic lost power before dawn.**
 

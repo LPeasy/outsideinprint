@@ -1,0 +1,22 @@
+{{- $label := strings.TrimSpace (.Get "label") -}}
+{{- $kicker := strings.TrimSpace (.Get "kicker") -}}
+{{- if not $label -}}
+  {{- errorf "article-timeline shortcode on %s requires an accessible label" .Page.File.Path -}}
+{{- end -}}
+{{- $content := strings.TrimSpace .Inner -}}
+{{- if not $content -}}
+  {{- errorf "article-timeline shortcode on %s requires timeline content" .Page.File.Path -}}
+{{- end -}}
+{{- $rendered := .Page.RenderString (dict "display" "block") $content -}}
+{{- if not (findRE `(?i)<ol(?:\s|>)` $rendered) -}}
+  {{- errorf "article-timeline shortcode on %s requires an ordered Markdown list" .Page.File.Path -}}
+{{- end -}}
+
+<section class="article-timeline" aria-label="{{ $label }}">
+  {{- with $kicker }}
+    <p class="article-timeline__kicker">{{ . }}</p>
+  {{- end }}
+  <div class="article-timeline__content">
+    {{ $rendered }}
+  </div>
+</section>

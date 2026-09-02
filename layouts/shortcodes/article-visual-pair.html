@@ -1,0 +1,71 @@
+{{- $leftAsset := strings.TrimSpace (.Get "left_asset") -}}
+{{- $leftAlt := strings.TrimSpace (.Get "left_alt") -}}
+{{- $leftCaption := strings.TrimSpace (.Get "left_caption") -}}
+{{- $rightAsset := strings.TrimSpace (.Get "right_asset") -}}
+{{- $rightAlt := strings.TrimSpace (.Get "right_alt") -}}
+{{- $rightCaption := strings.TrimSpace (.Get "right_caption") -}}
+{{- $label := strings.TrimSpace (.Get "label") -}}
+{{- $sourceLabel := strings.TrimSpace (.Get "source_label") -}}
+{{- $sourceURL := strings.TrimSpace (.Get "source_url") -}}
+
+{{- range $field := slice
+  (dict "name" "left_asset" "value" $leftAsset)
+  (dict "name" "left_alt" "value" $leftAlt)
+  (dict "name" "left_caption" "value" $leftCaption)
+  (dict "name" "right_asset" "value" $rightAsset)
+  (dict "name" "right_alt" "value" $rightAlt)
+  (dict "name" "right_caption" "value" $rightCaption)
+  (dict "name" "label" "value" $label)
+  (dict "name" "source_label" "value" $sourceLabel)
+  (dict "name" "source_url" "value" $sourceURL)
+-}}
+  {{- if not $field.value -}}
+    {{- errorf "article-visual-pair shortcode on %s requires %s" $.Page.File.Path $field.name -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $leftModel := partial "images/model.html" (dict
+  "page" .Page
+  "ref" (printf "oip-image:%s" $leftAsset)
+  "display" true
+) -}}
+{{- $rightModel := partial "images/model.html" (dict
+  "page" .Page
+  "ref" (printf "oip-image:%s" $rightAsset)
+  "display" true
+) -}}
+{{- range $model := slice $leftModel $rightModel -}}
+  {{- if or (not $model.managed) (ne $model.review_state "approved") -}}
+    {{- errorf "article-visual-pair asset %q on %s must be a registered, approved responsive image" $model.id $.Page.File.Path -}}
+  {{- end -}}
+{{- end -}}
+
+<section class="article-visual-pair" aria-label="{{ $label }}">
+  <figure class="article-visual-pair__figure">
+    <div class="article-visual-pair__media">
+      {{ partial "images/picture.html" (dict
+        "model" $leftModel
+        "alt" $leftAlt
+        "loading" "lazy"
+        "sizes" "(min-width: 60rem) 25rem, (min-width: 40rem) 48vw, calc(100vw - 3rem)"
+        "lightbox" true
+        "imgClass" "article-lightbox-image"
+      ) }}
+    </div>
+    <figcaption>{{ $leftCaption }}</figcaption>
+  </figure>
+  <figure class="article-visual-pair__figure">
+    <div class="article-visual-pair__media">
+      {{ partial "images/picture.html" (dict
+        "model" $rightModel
+        "alt" $rightAlt
+        "loading" "lazy"
+        "sizes" "(min-width: 60rem) 20rem, (min-width: 40rem) 42vw, calc(100vw - 3rem)"
+        "lightbox" true
+        "imgClass" "article-lightbox-image"
+      ) }}
+    </div>
+    <figcaption>{{ $rightCaption }}</figcaption>
+  </figure>
+  <p class="article-visual-pair__source">Source: <a href="{{ $sourceURL }}">{{ $sourceLabel }}</a>.</p>
+</section>
