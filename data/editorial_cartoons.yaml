@@ -1,4 +1,4 @@
-current: two-paths-one-morning
+current: the-river-keeps-its-name
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -948,5 +948,14 @@ cartoons:
     image: "editorial/two-paths-one-morning"
     essay: "/essays/mantra-4/"
     alt: "Two separate paths curve through a sunlit riverside meadow beneath the same golden sunrise."
+    width: 1672
+    height: 941
+  - slug: the-river-keeps-its-name
+    title: "Sycamore Sunrise"
+    date: "2026-09-03"
+    publishDate: "2026-09-03T10:15:53-04:00"
+    image: "editorial/the-river-keeps-its-name"
+    essay: "/essays/mantra-5/"
+    alt: "A golden sun rises above a river bending in a broad S through a green meadow, with a split-trunk sycamore on one bank and distant blue hills beyond."
     width: 1672
     height: 941
