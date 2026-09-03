@@ -1,0 +1,39 @@
+{{- $page := .page -}}
+{{- $sample := .sample | default dict -}}
+{{- $input := trim (printf "%v" (index $sample "input" | default "")) " \t\r\n" -}}
+{{- $work := trim (printf "%v" (index $sample "work" | default "")) " \t\r\n" -}}
+{{- $proof := trim (printf "%v" (index $sample "proof" | default "")) " \t\r\n" -}}
+{{- $studio := hugo.Data.studio | default dict -}}
+{{- $offerCode := index $studio "offer_code" | default "" -}}
+
+{{- if or (eq $input "") (eq $work "") (eq $proof "") -}}
+  {{- errorf "Studio sample %q requires non-empty studio_sample.input, studio_sample.work, and studio_sample.proof values" $page.RelPermalink -}}
+{{- end -}}
+
+<aside class="studio-sample-exit" aria-label="Studio sample">
+  <p class="studio-sample-exit__eyebrow">Studio sample</p>
+  <dl class="studio-sample-exit__details">
+    <div class="studio-sample-exit__detail">
+      <dt>Input</dt>
+      <dd>{{ $input }}</dd>
+    </div>
+    <div class="studio-sample-exit__detail">
+      <dt>Work performed</dt>
+      <dd>{{ $work }}</dd>
+    </div>
+    <div class="studio-sample-exit__detail">
+      <dt>What this proves</dt>
+      <dd>{{ $proof }}</dd>
+    </div>
+  </dl>
+  <a
+    class="studio-sample-exit__cta"
+    href="/studio/#studio-inquiry"
+    data-analytics-event="internal_promo_click"
+    data-analytics-source-slot="studio_sample_exit"
+    data-analytics-slug="studio"
+    data-analytics-product="{{ $offerCode }}"
+    data-analytics-format="service_inquiry_email"
+    data-analytics-path="/studio/#studio-inquiry"
+  >Start a Publication Sprint</a>
+</aside>

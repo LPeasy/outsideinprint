@@ -193,32 +193,36 @@
         </aside>
       {{ end }}
 
-      {{ if $showCollectionContinuation }}
-        {{ partial "newsletter_prompt.html" (dict
+      {{ with .Params.studio_sample }}
+        {{ partial "article/studio-sample-exit.html" (dict "page" $ "sample" .) }}
+      {{ else }}
+        {{ if $showCollectionContinuation }}
+          {{ partial "newsletter_prompt.html" (dict
+            "page" .
+            "class" "newsletter-prompt--article-exit"
+            "sourceSlot" "article_exit_newsletter_prompt"
+            "targetID" "bobs-almanack-signup"
+          ) }}
+        {{ end }}
+
+        {{ if $showCollectionContinuation }}
+          {{ partial "collections/reading-path.html" . }}
+        {{ end }}
+
+        {{ partial "newsletter_signup.html" (dict
           "page" .
-          "class" "newsletter-prompt--article-exit"
-          "sourceSlot" "article_exit_newsletter_prompt"
-          "targetID" "bobs-almanack-signup"
+          "class" "newsletter-signup--article-exit"
+          "sourceSlot" "article_exit_newsletter"
+          "anchorID" "bobs-almanack-signup"
+        ) }}
+
+        {{ partial "journey_links.html" (dict
+          "class" "journey-links--article-exit"
+          "eyebrow" "Article paths"
+          "sourceSlot" "article_exit_paths"
+          "links" $journeyLinks
         ) }}
       {{ end }}
-
-      {{ if $showCollectionContinuation }}
-        {{ partial "collections/reading-path.html" . }}
-      {{ end }}
-
-      {{ partial "newsletter_signup.html" (dict
-        "page" .
-        "class" "newsletter-signup--article-exit"
-        "sourceSlot" "article_exit_newsletter"
-        "anchorID" "bobs-almanack-signup"
-      ) }}
-
-      {{ partial "journey_links.html" (dict
-        "class" "journey-links--article-exit"
-        "eyebrow" "Article paths"
-        "sourceSlot" "article_exit_paths"
-        "links" $journeyLinks
-      ) }}
     </div>
   </article>
   {{ partial "article/plate-lightbox.html" . }}

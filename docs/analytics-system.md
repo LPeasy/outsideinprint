@@ -72,10 +72,13 @@ Studio entry and inquiry surfaces use these source slots:
 - `homepage_studio_offer`
 - `footer_studio`
 - `studio_hero_to_form`
+- `studio_sample_exit`
 - `studio_inquiry_form`
 - `studio_inquiry_fallback`
 
 GoatCounter `/studio/` pageviews measure Studio visits. `studio_inquiry_email_prepare` measures browser-valid attempts to prepare an email draft, and `studio_inquiry_direct_email` measures clicks on the visible direct-email fallback. Neither event proves that a visitor sent a message or that Outside In Print received one.
+
+`studio_sample_exit` is the `internal_promo_click` source slot for the three marked Studio sample article exits. It measures a reader moving from a finished sample to `/studio/#studio-inquiry`; it does not indicate that the reader prepared a draft, sent a message, or completed an inquiry.
 
 The `support@outsideinprint.org` inbox is the source of truth for received inquiries. Manual review is the source of truth for qualified inquiries and scopes sent. Square is the source of truth for deposits and final payments. Inquiry-field values are not analytics metadata.
 

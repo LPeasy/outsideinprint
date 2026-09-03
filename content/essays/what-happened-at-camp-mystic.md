@@ -9,8 +9,8 @@ featured_image: "medium/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5d
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
-version: "2.1"
-edition: "Sixth web edition"
+version: "2.2"
+edition: "Seventh web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-17"
@@ -27,8 +27,15 @@ revision_history:
   - version: "2.1"
     date: "2026-09-03"
     note: "Updated the introduction and closing section, corrected minor text issues, and removed outdated preview language."
+  - version: "2.2"
+    date: "2026-09-03"
+    note: "Added the Studio sample production note and direct inquiry path; no substantive essay text change."
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
 featured: false
+studio_sample:
+  input: "Public records, maps, and a complex warning timeline."
+  work: "Source review, fact-checking, timeline reconstruction, and visual explanation."
+  proof: "Dense evidence can become a clear explainer for general readers."
 
 collections:
   - floods-water-built-environment

@@ -366,6 +366,7 @@ if ($studioData -notmatch '(?m)^\s*founding_offer_active:\s*(?:true|false)\s*$')
 
 $studioTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/studio/single.html') -Raw
 $privacyPolicy = Get-Content -Path (Join-Path $repoRoot 'content/privacy/index.md') -Raw
+$studioTerms = Get-Content -Path (Join-Path $repoRoot 'content/terms/index.md') -Raw
 foreach ($requiredSnippet in @(
   'errorf "Studio inquiry configuration requires inquiry.email',
   'errorf "Studio inquiry configuration requires inquiry.subject_prefix',
@@ -385,8 +386,15 @@ foreach ($requiredSnippet in @(
   'You have the material. We make it ready to publish.',
   'Fixed scope <span aria-hidden="true">&middot;</span> First draft in {{ $turnaroundDays }} business days <span aria-hidden="true">&middot;</span> One revision',
   'The {{ $turnaroundDays }}-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material.',
-  'We give you a complete finished file set. Outside In Print reserves the right to publish the essay on outsideinprint.org.',
-  'Outside In Print keeps the right to publish the finished essay on outsideinprint.org.',
+  'A standard visual layout and image treatment, tailored to your preferences',
+  'class="studio-operator"',
+  'Your writer and editor',
+  'Each Publication Sprint is handled by ',
+  'Robert V. Ussley',
+  ', the writer and editor behind Outside In Print. He produces reported essays and literary analysis on risk, institutions, technology, and public life.',
+  "These are examples of our own editorial work, not client testimonials. Their visuals represent the standard deliverable and can be tailored to the client’s preferences.",
+  'You receive the complete finished file set and own the finished work exclusively. Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed.',
+  'After full payment, you own the finished work exclusively. Outside In Print retains no publication right unless you give written permission.',
   'This form does not send your answers to Outside In Print or site analytics. When you select “Prepare inquiry email,” your answers go to your email app or provider to make a draft. That app or provider may save or sync the draft under its own privacy rules. Outside In Print gets your answers only if you send the email and it reaches {{ $email }}.',
   'name="role"',
   'name="source_material"',
@@ -408,6 +416,30 @@ foreach ($requiredSnippet in @(
   if ($studioTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/studio/single.html to contain: $requiredSnippet"
   }
+}
+
+foreach ($obsoletePublicationClaim in @(
+  'We give you a complete finished file set. Outside In Print reserves the right to publish the essay on outsideinprint.org.',
+  'Outside In Print keeps the right to publish the finished essay on outsideinprint.org.',
+  'Outside In Print publishes it only if you ask us to and approve publication.'
+)) {
+  if ($studioTemplate.IndexOf($obsoletePublicationClaim, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+    throw "Expected the Studio template to remove obsolete automatic publication-right claim: $obsoletePublicationClaim"
+  }
+}
+if ($studioTemplate -match '(?i)publication is guaranteed|guarantee(?:d|s)? publication') {
+  throw 'Expected the Studio template not to guarantee publication.'
+}
+
+$requiredStudioTermsText = "After full payment, the client owns the finished deliverable exclusively. Pre-existing client materials and identified third-party materials are not included in that transfer. Outside In Print may publish the finished work only with the client’s written permission."
+if ($studioTerms -notmatch '(?m)^effective_date: "September 3, 2026"$') {
+  throw 'Expected the Studio Terms effective date to match the September 3, 2026 ownership revision.'
+}
+if ($studioTerms.IndexOf($requiredStudioTermsText, [System.StringComparison]::Ordinal) -lt 0) {
+  throw 'Expected the Studio Terms to grant exclusive ownership after payment and require written permission for Outside In Print publication.'
+}
+if ($studioTerms -match '(?i)reserves the right to publish|keeps the right to publish') {
+  throw 'Expected the Studio Terms to omit obsolete automatic publication-right language.'
 }
 
 foreach ($field in @(
@@ -839,7 +871,8 @@ foreach ($requiredSnippet in @(
 
 $analyticsDoc = Get-Content -Path (Join-Path $repoRoot 'docs/analytics-system.md') -Raw
 foreach ($requiredSnippet in @(
-  'article_collection_context'
+  'article_collection_context',
+  'studio_sample_exit'
 )) {
   if ($analyticsDoc -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected docs/analytics-system.md to contain: $requiredSnippet"

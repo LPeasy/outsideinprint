@@ -10,6 +10,7 @@ function read(relativePath) {
 const articleSingle = read("layouts/_default/single.html");
 const homepage = read("layouts/index.html");
 const articlePlateLightbox = read("layouts/partials/article/plate-lightbox.html");
+const studioSampleExit = read("layouts/partials/article/studio-sample-exit.html");
 const variantKey = read("layouts/partials/article/variant-key.html");
 const renderArticleBody = read("layouts/partials/render_article_body.html");
 const css = read("assets/css/main.css");
@@ -181,7 +182,7 @@ test("dialogue variant derives from library_type and transforms speaker labels o
   assert.doesNotMatch(css, /chat-bubble|message-bubble|left-right|dialogue-bubble/);
 });
 
-test("article aftermatter is one publication record plus controlled exits", () => {
+test("article aftermatter keeps its publication record and selects one controlled exit stack", () => {
   assert.match(articleSingle, /partial "newsletter_signup\.html"/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
@@ -196,6 +197,9 @@ test("article aftermatter is one publication record plus controlled exits", () =
   const publicationRecord = articleSingle.indexOf('class="article-publication-record"', aftermatter);
   const citation = articleSingle.indexOf("article-publication-record__section--citation", publicationRecord);
   const revisions = articleSingle.indexOf("article-publication-record__section--revisions", publicationRecord);
+  const studioSampleGate = articleSingle.indexOf("{{ with .Params.studio_sample }}", revisions);
+  const studioSamplePartial = articleSingle.indexOf('partial "article/studio-sample-exit.html" (dict "page" $ "sample" .)', studioSampleGate);
+  const standardExitBranch = articleSingle.indexOf("{{ else }}", studioSamplePartial);
   const newsletterPrompt = articleSingle.indexOf('partial "newsletter_prompt.html"', publicationRecord);
   const continuation = articleSingle.indexOf('partial "collections/reading-path.html" .', newsletterPrompt);
   const newsletterExit = articleSingle.indexOf('"class" "newsletter-signup--article-exit"', continuation);
@@ -205,7 +209,10 @@ test("article aftermatter is one publication record plus controlled exits", () =
   assert.ok(publicationRecord > aftermatter);
   assert.ok(citation > publicationRecord);
   assert.ok(revisions > citation);
-  assert.ok(newsletterPrompt > publicationRecord);
+  assert.ok(studioSampleGate > publicationRecord);
+  assert.ok(studioSamplePartial > studioSampleGate);
+  assert.ok(standardExitBranch > studioSamplePartial);
+  assert.ok(newsletterPrompt > standardExitBranch);
   assert.ok(continuation > newsletterPrompt);
   assert.ok(newsletterExit > continuation);
   assert.ok(exitLinks > newsletterExit);
@@ -222,8 +229,40 @@ test("article aftermatter is one publication record plus controlled exits", () =
   assert.match(articleSingle, /\{\{ with \.Params\.revision_history \}\}/);
   assert.match(articleSingle, /article-publication-record__section--revisions/);
   assert.match(articleSingle, /"class" "journey-links--article-exit"/);
+  assert.match(
+    articleSingle,
+    /\{\{ with \.Params\.studio_sample \}\}\s*\{\{ partial "article\/studio-sample-exit\.html" \(dict "page" \$ "sample" \.\) \}\}\s*\{\{ else \}\}[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?partial "collections\/reading-path\.html"[\s\S]*?partial "newsletter_signup\.html"[\s\S]*?partial "journey_links\.html"[\s\S]*?\{\{ end \}\}/
+  );
+
+  assert.match(studioSampleExit, /<aside class="studio-sample-exit" aria-label="Studio sample">/);
+  assert.match(studioSampleExit, /<p class="studio-sample-exit__eyebrow">Studio sample<\/p>/);
+  assert.match(studioSampleExit, /<dl class="studio-sample-exit__details">/);
+  for (const [key, label] of [
+    ["input", "Input"],
+    ["work", "Work performed"],
+    ["proof", "What this proves"],
+  ]) {
+    assert.match(studioSampleExit, new RegExp(`index \\$sample "${key}"`));
+    assert.match(studioSampleExit, new RegExp(`<dt>${label}<\\/dt>`));
+  }
+  assert.match(studioSampleExit, /errorf "Studio sample %q requires non-empty studio_sample\.input, studio_sample\.work, and studio_sample\.proof values"/);
+  assert.match(studioSampleExit, /class="studio-sample-exit__cta"/);
+  assert.match(studioSampleExit, /href="\/studio\/#studio-inquiry"/);
+  assert.match(studioSampleExit, /data-analytics-event="internal_promo_click"/);
+  assert.match(studioSampleExit, /data-analytics-source-slot="studio_sample_exit"/);
+  assert.match(studioSampleExit, /data-analytics-path="\/studio\/#studio-inquiry"/);
+  assert.match(studioSampleExit, />Start a Publication Sprint<\/a>/);
   assert.match(css, /\.article-publication-record\{/);
   assert.match(css, /\.journey-links--article-exit\{/);
+  for (const selector of [
+    ".studio-sample-exit",
+    ".studio-sample-exit__eyebrow",
+    ".studio-sample-exit__details",
+    ".studio-sample-exit__detail",
+    ".studio-sample-exit__cta",
+  ]) {
+    assert.match(css, new RegExp(`${selector.replace(".", "\\.")}\\{`));
+  }
 
   const archive = articleSingle.indexOf('"label" "Archive"');
   const collections = articleSingle.indexOf('"label" "Collections"', archive);

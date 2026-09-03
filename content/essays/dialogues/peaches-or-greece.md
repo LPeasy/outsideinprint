@@ -7,14 +7,21 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
-version: '1.1'
-edition: 'Second web edition'
+version: '1.2'
+edition: 'Third web edition'
 revision_history:
   - version: '1.1'
     date: '2026-09-03'
     note: 'Corrected spelling and punctuation; no substantive text change.'
+  - version: '1.2'
+    date: '2026-09-03'
+    note: 'Added the Studio sample production note and direct inquiry path; no substantive essay text change.'
 pdf: '/pdfs/peaches-or-greece.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/peaches-or-greece/'
+studio_sample:
+  input: 'A recorded conversation.'
+  work: 'Dialogue shaping, pacing, voice preservation, and line editing.'
+  proof: 'Natural conversation can become a polished literary dialogue.'
 ---
 
 *16 February 2026*

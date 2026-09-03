@@ -11,8 +11,8 @@ featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b412
 featured_image_caption: "Jack Stratton on stage | Source: Michelle Shiers"
 featured_image_alt: "Jack Stratton on stage"
 description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
-version: "1.4"
-edition: "Fifth web edition"
+version: "1.5"
+edition: "Sixth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-15"
@@ -26,8 +26,15 @@ revision_history:
   - version: "1.4"
     date: "2026-09-03"
     note: "Corrected formatting, completed an image-source caption, and removed expired tour-date language."
+  - version: "1.5"
+    date: "2026-09-03"
+    note: "Added the Studio sample production note and direct inquiry path; no substantive essay text change."
 pdf: "/pdfs/jack-stratton-and-the-vulfpeck-model.pdf"
 featured: false
+studio_sample:
+  input: "Interviews, public sources, and archival images."
+  work: "Research synthesis, narrative structure, source cleanup, and visual sequencing."
+  proof: "Scattered material can become a coherent, engaging profile."
 medium_source_url: "https://medium.com/@lawtonperret/jack-stratton-and-the-vulfpeck-model-00813f3ac8bf"
 ---
 

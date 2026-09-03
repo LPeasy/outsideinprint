@@ -1964,6 +1964,7 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
     '15,000 words',
     '25 pages',
     'One finished essay with your byline, 1,500–2,000 words',
+    'A standard visual layout and image treatment, tailored to your preferences',
     'The 7-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material.',
     'How much source material do you have?',
     'Who should read the essay?',
@@ -1977,9 +1978,11 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
     'Book-length projects',
     'More than one revision round',
     'A promise that Outside In Print will publish the essay',
-    'These are examples of our own editorial work. They are not client testimonials.',
-    'We give you a complete finished file set. Outside In Print reserves the right to publish the essay on outsideinprint.org.',
-    'The written scope states which rights transfer to you after full payment. Outside In Print keeps the right to publish the finished essay on outsideinprint.org.',
+    'Your writer and editor',
+    'Each Publication Sprint is handled by Robert V. Ussley, the writer and editor behind Outside In Print. He produces reported essays and literary analysis on risk, institutions, technology, and public life.',
+    "These are examples of our own editorial work, not client testimonials. Their visuals represent the standard deliverable and can be tailored to the client’s preferences.",
+    'You receive the complete finished file set and own the finished work exclusively. Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed.',
+    'After full payment, you own the finished work exclusively. Outside In Print retains no publication right unless you give written permission.',
     'We will reply within 2 business days with either a fit decision or a request for more details.',
     'You cannot pay on this page. We review each project and agree on the written scope before you pay.'
   )) {
@@ -1991,11 +1994,17 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
   foreach ($obsoleteText in @(
     'Fixed scope · 7 business days · One revision',
     '7-business-day production window',
-    'Your answers remain on your device until you open and send'
+    'Your answers remain on your device until you open and send',
+    'We give you a complete finished file set. Outside In Print reserves the right to publish the essay on outsideinprint.org.',
+    'Outside In Print keeps the right to publish the finished essay on outsideinprint.org.',
+    'Outside In Print publishes it only if you ask us to and approve publication.'
   )) {
     if ($studioVisibleText.IndexOf($obsoleteText, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
       $uxIssues.Add("public/studio/index.html => obsolete Studio claim remains: $obsoleteText")
     }
+  }
+  if ($studioVisibleText -match '(?i)publication is guaranteed|guarantee(?:d|s)? publication') {
+    $uxIssues.Add('public/studio/index.html => Studio copy must not guarantee publication')
   }
 
   $studioForms = @(
@@ -2168,6 +2177,25 @@ if ($targetPageHtml.ContainsKey('public/privacy/index.html')) {
   )) {
     if ($privacyVisibleText.IndexOf($obsoletePrivacyText, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
       $uxIssues.Add("public/privacy/index.html => obsolete Studio privacy claim remains: $obsoletePrivacyText")
+    }
+  }
+}
+
+if ($targetPageHtml.ContainsKey('public/terms/index.html')) {
+  $termsVisibleText = Convert-HtmlFragmentToText -Html ([string]$targetPageHtml['public/terms/index.html'])
+  if ($termsVisibleText.IndexOf('Effective September 3, 2026', [System.StringComparison]::Ordinal) -lt 0) {
+    $uxIssues.Add('public/terms/index.html => expected the September 3, 2026 effective date for the ownership revision')
+  }
+  $requiredStudioTermsText = "After full payment, the client owns the finished deliverable exclusively. Pre-existing client materials and identified third-party materials are not included in that transfer. Outside In Print may publish the finished work only with the client’s written permission."
+  if ($termsVisibleText.IndexOf($requiredStudioTermsText, [System.StringComparison]::Ordinal) -lt 0) {
+    $uxIssues.Add('public/terms/index.html => expected exclusive client ownership and written-permission publication terms')
+  }
+  foreach ($obsoletePublicationText in @(
+    'reserves the right to publish',
+    'keeps the right to publish'
+  )) {
+    if ($termsVisibleText.IndexOf($obsoletePublicationText, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+      $uxIssues.Add("public/terms/index.html => obsolete automatic publication-right claim remains: $obsoletePublicationText")
     }
   }
 }
@@ -4778,6 +4806,12 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'studio-sample-exit|studio_sample_exit'
+    Message = 'expected an ordinary curated essay to retain the standard exit stack without Studio sample promotion markup'
+    ShouldNotMatch = $true
+  },
+  @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'piece--collection-accent'
     Message = 'expected non-collection essays to remain unaccented'
@@ -4828,6 +4862,12 @@ $requiredUxChecks = @(
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'newsletter-signup--article-exit'
     Message = 'expected non-collection essays to render the full canonical Bob''s Almanack signup'
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'studio-sample-exit|studio_sample_exit'
+    Message = 'expected a normal essay to retain the standard exit stack without Studio sample promotion markup'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
@@ -4919,8 +4959,13 @@ $requiredUxChecks += @(
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
-    Pattern = '(?s)Sixth web edition.*?July 4: Warning, Rising Water, and Evacuation.*?Further Reading.*?The Water.s Rising: What the Data Really Says About Extreme Weather'
+    Pattern = "(?s)Seventh web edition.*?July 4: Warning, Rising Water, and Evacuation.*?Further Reading.*?The Water(?:&rsquo;|&#39;|'|’)s\s+Rising:\s+What\s+the\s+Data\s+Really\s+Says\s+About\s+Extreme\s+Weather"
     Message = 'expected the Camp Mystic essay to render its revised edition, consolidated timeline heading, and finished further-reading close'
+  },
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = '(?s)article-publication-record.*?Version 2\.2'
+    Message = 'expected the Camp Mystic publication record to render version 2.2'
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
@@ -4936,8 +4981,13 @@ $requiredUxChecks += @(
   },
   @{
     Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
-    Pattern = '(?s)Fifth web edition.*?What(?:&rsquo;|&#39;|'')s Next for Jack Stratton and Vulfpeck.*?Source: Blue Funky Mamma'
+    Pattern = '(?s)Sixth web edition.*?What(?:&rsquo;|&#39;|'')s Next for Jack Stratton and Vulfpeck.*?Source: Blue Funky Mamma'
     Message = 'expected the Jack Stratton bio to render its revised edition, completed source label, and evergreen closing heading'
+  },
+  @{
+    Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
+    Pattern = '(?s)article-publication-record.*?Version 1\.5'
+    Message = 'expected the Jack Stratton publication record to render version 1.5'
   },
   @{
     Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
@@ -4947,8 +4997,13 @@ $requiredUxChecks += @(
   },
   @{
     Path = 'public/syd-and-oliver/peaches-or-greece/index.html'
-    Pattern = '(?s)Second web edition.*?Athens, Georgia, and Athens, Greece\..*?Oliver repeated the word\..*?Manufactured global citizenship\..*?romanticizing stale potato chips'
+    Pattern = '(?s)Third web edition.*?Athens, Georgia, and Athens, Greece\..*?Oliver repeated the word\..*?Manufactured global citizenship\..*?romanticizing stale potato chips'
     Message = 'expected Peaches or Greece to render the corrected dialogue and revised edition'
+  },
+  @{
+    Path = 'public/syd-and-oliver/peaches-or-greece/index.html'
+    Pattern = '(?s)article-publication-record.*?Version 1\.2'
+    Message = 'expected Peaches or Greece publication record to render version 1.2'
   },
   @{
     Path = 'public/syd-and-oliver/peaches-or-greece/index.html'
@@ -4957,6 +5012,107 @@ $requiredUxChecks += @(
     ShouldNotMatch = $true
   }
 )
+
+$studioSamplePageExpectations = @(
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Input = 'Public records, maps, and a complex warning timeline.'
+    Work = 'Source review, fact-checking, timeline reconstruction, and visual explanation.'
+    Proof = 'Dense evidence can become a clear explainer for general readers.'
+  },
+  @{
+    Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
+    Input = 'Interviews, public sources, and archival images.'
+    Work = 'Research synthesis, narrative structure, source cleanup, and visual sequencing.'
+    Proof = 'Scattered material can become a coherent, engaging profile.'
+  },
+  @{
+    Path = 'public/syd-and-oliver/peaches-or-greece/index.html'
+    Input = 'A recorded conversation.'
+    Work = 'Dialogue shaping, pacing, voice preservation, and line editing.'
+    Proof = 'Natural conversation can become a polished literary dialogue.'
+  }
+)
+
+foreach ($samplePage in $studioSamplePageExpectations) {
+  $samplePath = [string]$samplePage.Path
+  if (-not $targetPageHtml.ContainsKey($samplePath)) {
+    $uxIssues.Add("Missing generated page required for Studio sample-exit coverage: $samplePath")
+    continue
+  }
+
+  $sampleArticleHtml = [string]$targetPageHtml[$samplePath]
+  $sampleExitMatches = @([regex]::Matches(
+    $sampleArticleHtml,
+    '(?is)<aside\b(?=[^>]*\bclass=(?:"[^"]*\bstudio-sample-exit\b[^"]*"|''[^'']*\bstudio-sample-exit\b[^'']*''|[^\s>]*\bstudio-sample-exit\b[^\s>]*))[^>]*>.*?</aside>'
+  ))
+  if ($sampleExitMatches.Count -ne 1) {
+    $uxIssues.Add("$samplePath => expected exactly one Studio sample exit, found $($sampleExitMatches.Count)")
+    continue
+  }
+
+  $sampleExitHtml = $sampleExitMatches[0].Value
+  $sampleExitText = Convert-HtmlFragmentToText -Html $sampleExitHtml
+  foreach ($requiredSampleText in @(
+    'Studio sample',
+    'Input',
+    [string]$samplePage.Input,
+    'Work performed',
+    [string]$samplePage.Work,
+    'What this proves',
+    [string]$samplePage.Proof,
+    'Start a Publication Sprint'
+  )) {
+    if ($sampleExitText.IndexOf($requiredSampleText, [System.StringComparison]::Ordinal) -lt 0) {
+      $uxIssues.Add("$samplePath => Studio sample exit is missing approved text: $requiredSampleText")
+    }
+  }
+
+  $sampleCtas = @(
+    Get-OpenTags -Html $sampleExitHtml -TagName 'a' |
+      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'studio-sample-exit__cta' }
+  )
+  if ($sampleCtas.Count -ne 1) {
+    $uxIssues.Add("$samplePath => expected exactly one Studio sample CTA, found $($sampleCtas.Count)")
+  }
+  else {
+    foreach ($attributeExpectation in @(
+      @{ Name = 'href'; Value = '/studio/#studio-inquiry' },
+      @{ Name = 'data-analytics-event'; Value = 'internal_promo_click' },
+      @{ Name = 'data-analytics-source-slot'; Value = 'studio_sample_exit' },
+      @{ Name = 'data-analytics-slug'; Value = 'studio' },
+      @{ Name = 'data-analytics-product'; Value = 'OIP-STUDIO-EXPERT-ESSAY' },
+      @{ Name = 'data-analytics-format'; Value = 'service_inquiry_email' },
+      @{ Name = 'data-analytics-path'; Value = '/studio/#studio-inquiry' }
+    )) {
+      $actualValue = Get-AttributeValue -Tag $sampleCtas[0] -Name $attributeExpectation.Name
+      if ($actualValue -cne $attributeExpectation.Value) {
+        $uxIssues.Add("$samplePath => Studio sample CTA $($attributeExpectation.Name) expected '$($attributeExpectation.Value)', found '$actualValue'")
+      }
+    }
+  }
+
+  $publicationRecordIndex = $sampleArticleHtml.IndexOf('article-publication-record', [System.StringComparison]::Ordinal)
+  $sampleExitIndex = $sampleArticleHtml.IndexOf('studio-sample-exit', [System.StringComparison]::Ordinal)
+  if ($publicationRecordIndex -lt 0 -or $sampleExitIndex -le $publicationRecordIndex) {
+    $uxIssues.Add("$samplePath => expected the Studio sample exit after the publication record")
+  }
+
+  foreach ($suppressedModule in @(
+    @{ Tag = 'p'; ClassName = 'newsletter-prompt--article-exit' },
+    @{ Tag = 'aside'; ClassName = 'reading-path' },
+    @{ Tag = 'section'; ClassName = 'newsletter-signup--article-exit' },
+    @{ Tag = 'nav'; ClassName = 'journey-links--article-exit' }
+  )) {
+    $suppressedTags = @(
+      Get-OpenTags -Html $sampleArticleHtml -TagName ([string]$suppressedModule.Tag) |
+        Where-Object { Test-TagHasClass -Tag $_ -ClassName ([string]$suppressedModule.ClassName) }
+    )
+    if ($suppressedTags.Count -ne 0) {
+      $uxIssues.Add("$samplePath => Studio sample must suppress standard article-exit module '$($suppressedModule.ClassName)'")
+    }
+  }
+}
 
 foreach ($entry in $collectionRoomExpectations.GetEnumerator()) {
   $relativePath = [string]$entry.Key

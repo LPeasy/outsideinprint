@@ -262,6 +262,7 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(articleSingle, /partial "newsletter_signup\.html"/);
   assert.match(articleSingle, /newsletter-signup--article-exit/);
   assert.match(articleSingle, /article_exit_newsletter/);
+  assert.match(articleSingle, /\{\{ with \.Params\.studio_sample \}\}[\s\S]*?partial "article\/studio-sample-exit\.html"[\s\S]*?\{\{ else \}\}/);
   assert.doesNotMatch(articleSingle, /partial "running_header\.html"/);
   assert.doesNotMatch(articleSingle, /From the Collection/);
   assert.match(articleSingle, /journey-links--article-exit/);
@@ -282,6 +283,13 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(articlePlateLightbox, /normalizeCaptionText\(captionText \|\| elementText\(sourceCaption\)\)/);
   assert.match(articlePlateLightbox, /captionText === normalizeCaptionText\(imageTitle\)/);
   assert.doesNotMatch(articlePlateLightbox, /captionText \|\| elementText\(sourceCaption\) \|\| imageTitle/);
+  for (const snippet of [
+    "`studio_sample` front matter",
+    "`layouts/partials/article/studio-sample-exit.html`",
+    "replace the standard newsletter, reading-path, signup, and journey-link exit stack",
+  ]) {
+    assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));
+  }
   assert.doesNotMatch(articleSingle, /single-page/);
   assert.doesNotMatch(articleSingle, /single-content/);
   assert.match(css, /\.piece-title-block\{/);

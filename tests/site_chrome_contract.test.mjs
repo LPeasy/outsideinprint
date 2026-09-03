@@ -27,15 +27,43 @@ function cssRule(source, selector) {
   return ruleMatch[0];
 }
 
+function frontMatter(source, label) {
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  assert.ok(match, `expected YAML front matter in ${label}`);
+  return match[1];
+}
+
+function markdownFilesUnder(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      return markdownFilesUnder(entryPath);
+    }
+    return entry.isFile() && path.extname(entry.name).toLowerCase() === ".md" ? [entryPath] : [];
+  });
+}
+
+function studioSampleValues(source, label) {
+  const sourceFrontMatter = frontMatter(source, label);
+  const objectMatch = sourceFrontMatter.match(/^studio_sample:\s*\r?\n((?: {2}[^\r\n]+(?:\r?\n|$))+)/m);
+  assert.ok(objectMatch, `expected ${label} to define a studio_sample object`);
+  const entries = [...objectMatch[1].matchAll(/^ {2}([a-z_]+):\s*(?:"([^"]*)"|'([^']*)'|([^\r\n]+))\s*$/gm)]
+    .map((match) => [match[1], match[2] ?? match[3] ?? match[4].trim()]);
+  assert.deepEqual(entries.map(([key]) => key), ["input", "work", "proof"], `${label} studio_sample must contain only input, work, and proof in order`);
+  return Object.fromEntries(entries);
+}
+
 const masthead = fs.readFileSync(path.resolve("layouts/partials/masthead.html"), "utf8");
 const mastheadNavLink = fs.readFileSync(path.resolve("layouts/partials/masthead_nav_link.html"), "utf8");
 const mastheadNavigationScript = fs.readFileSync(path.resolve("layouts/partials/masthead_navigation_script.html"), "utf8");
 const homepage = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
+const studioSampleExit = fs.readFileSync(path.resolve("layouts/partials/article/studio-sample-exit.html"), "utf8");
 const newsletterSignup = fs.readFileSync(path.resolve("layouts/partials/newsletter_signup.html"), "utf8");
 const newsletterPrompt = fs.readFileSync(path.resolve("layouts/partials/newsletter_prompt.html"), "utf8");
 const hugoConfig = fs.readFileSync(path.resolve("hugo.toml"), "utf8");
 const privacyPolicy = fs.readFileSync(path.resolve("content/privacy/index.md"), "utf8");
+const studioTerms = fs.readFileSync(path.resolve("content/terms/index.md"), "utf8");
 const contactContent = fs.readFileSync(path.resolve("content/contact/index.md"), "utf8");
 const shopContent = fs.readFileSync(path.resolve("content/shop/_index.md"), "utf8");
 const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
@@ -68,6 +96,7 @@ const shopSingle = fs.readFileSync(path.resolve("layouts/shop/single.html"), "ut
 const epubCheckoutScript = fs.readFileSync(path.resolve("assets/js/epub-checkout.js"), "utf8");
 const bookstoreData = fs.readFileSync(path.resolve("data/bookstore.yaml"), "utf8");
 const analyticsScript = fs.readFileSync(path.resolve("assets/js/analytics.js"), "utf8");
+const analyticsDoc = fs.readFileSync(path.resolve("docs/analytics-system.md"), "utf8");
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
 const entryThreads = fs.readFileSync(path.resolve("layouts/partials/entry_threads.html"), "utf8");
@@ -228,8 +257,8 @@ test("shared masthead exposes the public light and dark theme selector", () => {
 });
 
 test("Jack Stratton modern bio preserves the complete localized visual sequence", () => {
-  assert.match(jackStrattonEssay, /^version: "1\.4"$/m);
-  assert.match(jackStrattonEssay, /^edition: "Fifth web edition"$/m);
+  assert.match(jackStrattonEssay, /^version: "1\.5"$/m);
+  assert.match(jackStrattonEssay, /^edition: "Sixth web edition"$/m);
   assert.match(jackStrattonEssay, /^featured_image_caption: "Jack Stratton on stage \| Source: Michelle Shiers"$/m);
   assert.match(jackStrattonEssay, /^featured_image_alt: "Jack Stratton on stage"$/m);
   assert.doesNotMatch(jackStrattonEssay, /!\[[^\]\r\n]*\\\]\(/);
@@ -266,8 +295,9 @@ test("Jack Stratton modern bio preserves the complete localized visual sequence"
 });
 
 test("Studio samples retain reader-ready copy and public revision records", () => {
-  assert.match(campMysticEssay, /^version: "2\.1"$/m);
-  assert.match(campMysticEssay, /^edition: "Sixth web edition"$/m);
+  assert.match(campMysticEssay, /^version: "2\.2"$/m);
+  assert.match(campMysticEssay, /^edition: "Seventh web edition"$/m);
+  assert.match(campMysticEssay, /^  - version: "2\.2"$/m);
   assert.match(campMysticEssay, /^### July 4: Warning, Rising Water, and Evacuation$/m);
   assert.match(campMysticEssay, /^### Further Reading$/m);
   assert.match(campMysticEssay, /or all\s*> of the above\?/);
@@ -277,6 +307,7 @@ test("Studio samples retain reader-ready copy and public revision records", () =
   );
 
   assert.match(jackStrattonEssay, /^#### What's Next for Jack Stratton and Vulfpeck$/m);
+  assert.match(jackStrattonEssay, /^  - version: "1\.5"$/m);
   assert.match(jackStrattonEssay, /Source: Blue Funky Mamma/);
   assert.match(jackStrattonEssay, /\*\*\*Theo Katzman, Woody Goss, and Joe Dart\*\*\*\./);
   assert.match(jackStrattonEssay, /\*\*\*Sleepify\*\*\*,\s+a\s+silent Spotify album/);
@@ -285,11 +316,66 @@ test("Studio samples retain reader-ready copy and public revision records", () =
     /back-archive review|Recovered and localized|localized visual sequence|What's Next for Jack Stratton and Vulfpeck in 2025|At publication, the band had|more\s*> recently/i
   );
 
-  assert.match(peachesOrGreeceDialogue, /^version: '1\.1'$/m);
-  assert.match(peachesOrGreeceDialogue, /^edition: 'Second web edition'$/m);
+  assert.match(peachesOrGreeceDialogue, /^version: '1\.2'$/m);
+  assert.match(peachesOrGreeceDialogue, /^edition: 'Third web edition'$/m);
+  assert.match(peachesOrGreeceDialogue, /^  - version: '1\.2'$/m);
   assert.match(peachesOrGreeceDialogue, /Athens, Georgia, and Athens, Greece\./);
   assert.match(peachesOrGreeceDialogue, /Oliver repeated the word\./);
   assert.doesNotMatch(peachesOrGreeceDialogue, /intersting|citezenship|romaticizing|Perhaps, both/);
+});
+
+test("Studio sample metadata is structured, complete, and limited to the three approved examples", () => {
+  const contentRoot = path.resolve("content");
+  const markedContentPaths = markdownFilesUnder(contentRoot)
+    .filter((filePath) => {
+      const source = fs.readFileSync(filePath, "utf8");
+      const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+      return match ? /^studio_sample:\s*$/m.test(match[1]) : false;
+    })
+    .map((filePath) => path.relative(contentRoot, filePath).split(path.sep).join("/"))
+    .sort();
+
+  assert.deepEqual(markedContentPaths, [
+    "essays/dialogues/peaches-or-greece.md",
+    "essays/jack-stratton-and-the-vulfpeck-model.md",
+    "essays/what-happened-at-camp-mystic.md",
+  ]);
+
+  const expectedSamples = [
+    {
+      label: "Camp Mystic",
+      source: campMysticEssay,
+      values: {
+        input: "Public records, maps, and a complex warning timeline.",
+        work: "Source review, fact-checking, timeline reconstruction, and visual explanation.",
+        proof: "Dense evidence can become a clear explainer for general readers.",
+      },
+    },
+    {
+      label: "Jack Stratton",
+      source: jackStrattonEssay,
+      values: {
+        input: "Interviews, public sources, and archival images.",
+        work: "Research synthesis, narrative structure, source cleanup, and visual sequencing.",
+        proof: "Scattered material can become a coherent, engaging profile.",
+      },
+    },
+    {
+      label: "Peaches or Greece",
+      source: peachesOrGreeceDialogue,
+      values: {
+        input: "A recorded conversation.",
+        work: "Dialogue shaping, pacing, voice preservation, and line editing.",
+        proof: "Natural conversation can become a polished literary dialogue.",
+      },
+    },
+  ];
+
+  for (const sample of expectedSamples) {
+    const sampleFrontMatter = frontMatter(sample.source, sample.label);
+    assert.equal((sampleFrontMatter.match(/^studio_sample:\s*$/gm) || []).length, 1);
+    assert.deepEqual(studioSampleValues(sample.source, sample.label), sample.values);
+  }
 });
 
 test("Square-first bookstore requires delivery email and keeps marketing consent optional", () => {
@@ -759,8 +845,17 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioTemplate, /You have the material\. We make it ready to publish\./);
   assert.match(studioTemplate, /Fixed scope <span aria-hidden="true">&middot;<\/span> First draft in \{\{ \$turnaroundDays \}\} business days <span aria-hidden="true">&middot;<\/span> One revision/);
   assert.match(studioTemplate, /The \{\{ \$turnaroundDays \}\}-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material\./);
-  assert.match(studioTemplate, /We give you a complete finished file set\. Outside In Print reserves the right to publish the essay on outsideinprint\.org\./);
-  assert.match(studioTemplate, /Outside In Print keeps the right to publish the finished essay on outsideinprint\.org\./);
+  assert.match(studioTemplate, /A standard visual layout and image treatment, tailored to your preferences/);
+  assert.match(studioTemplate, /<p(?=[^>]*\bid="studio-operator-title")(?=[^>]*\bclass="[^"]*\bstudio-operator__eyebrow\b[^"]*")[^>]*>Your writer and editor<\/p>/);
+  assert.match(studioTemplate, /Each Publication Sprint is handled by <a href="\/authors\/robert-v-ussley\/">Robert V\. Ussley<\/a>, the writer and editor behind Outside In Print\. He produces reported essays and literary analysis on risk, institutions, technology, and public life\./);
+  assert.match(studioTemplate, /These are examples of our own editorial work, not client testimonials\. Their visuals represent the standard deliverable and can be tailored to the client’s preferences\./);
+  assert.match(studioTemplate, /You receive the complete finished file set and own the finished work exclusively\. Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed\./);
+  assert.match(studioTemplate, /After full payment, you own the finished work exclusively\. Outside In Print retains no publication right unless you give written permission\./);
+  assert.doesNotMatch(studioTemplate, /Outside In Print reserves the right to publish the essay on outsideinprint\.org\./);
+  assert.doesNotMatch(studioTemplate, /Outside In Print keeps the right to publish the finished essay on outsideinprint\.org\./);
+  assert.doesNotMatch(studioTemplate, /Outside In Print publishes it only if you ask us to and approve publication\./);
+  assert.doesNotMatch(studioTemplate, /publication is guaranteed|guarantee(?:d|s)? publication/i);
+  assert.match(css, /@media print\{[\s\S]*?\.studio-operator\{[\s\S]*?border-color:#bbb;[\s\S]*?background:none;[\s\S]*?box-shadow:none;[\s\S]*?\.studio-operator__body,[\s\S]*?\.studio-operator__body a\{[\s\S]*?color:#111;/);
   assert.match(studioTemplate, /This form does not send your answers to Outside In Print or site analytics\. When you select “Prepare inquiry email,” your answers go to your email app or provider to make a draft\. That app or provider may save or sync the draft under its own privacy rules\. Outside In Print gets your answers only if you send the email and it reaches \{\{ \$email \}\}\./);
   assert.doesNotMatch(studioTemplate, /Your answers remain on your device until you open and send/);
   assert.match(studioTemplate, /type="submit" disabled>Prepare inquiry email/);
@@ -816,6 +911,16 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.doesNotMatch(privacyPolicy, /remains in your browser/);
   assert.doesNotMatch(privacyPolicy, /preparing the draft does not transmit/);
   assert.doesNotMatch(privacyPolicy, /The information is transmitted only when you send/);
+
+  assert.match(studioTerms, /^effective_date: "September 3, 2026"$/m);
+  assert.match(studioTerms, /After full payment, the client owns the finished deliverable exclusively\. Pre-existing client materials and identified third-party materials are not included in that transfer\. Outside In Print may publish the finished work only with the client’s written permission\./);
+  assert.doesNotMatch(studioTerms, /reserves the right to publish|keeps the right to publish/i);
+
+  assert.match(studioSampleExit, /href="\/studio\/#studio-inquiry"/);
+  assert.match(studioSampleExit, /data-analytics-event="internal_promo_click"/);
+  assert.match(studioSampleExit, /data-analytics-source-slot="studio_sample_exit"/);
+  assert.match(studioSampleExit, />Start a Publication Sprint<\/a>/);
+  assert.match(analyticsDoc, /`studio_sample_exit` is the `internal_promo_click` source slot for the three marked Studio sample article exits\./);
 });
 
 test("homepage editorial layout uses the new manifesto namespace and drops dead start-here hooks", () => {
