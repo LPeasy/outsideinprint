@@ -215,6 +215,10 @@ test("article aftermatter is one publication record plus controlled exits", () =
   assert.match(articleSingle, /\{\{ if ne \.Params\.show_citation false \}\}/);
   assert.match(articleSingle, /article-publication-record__section--citation/);
   assert.match(articleSingle, /<code>[\s\S]*Outside In Print[\s\S]*\.Permalink[\s\S]*<\/code>/);
+  assert.match(articleSingle, /strings\.HasSuffix \.Title "\."/);
+  assert.match(articleSingle, /strings\.HasSuffix \.Title "\?"/);
+  assert.match(articleSingle, /strings\.HasSuffix \.Title "!"/);
+  assert.doesNotMatch(articleSingle, /"\{\{ \.Title \}\}\."/);
   assert.match(articleSingle, /\{\{ with \.Params\.revision_history \}\}/);
   assert.match(articleSingle, /article-publication-record__section--revisions/);
   assert.match(articleSingle, /"class" "journey-links--article-exit"/);

@@ -53,6 +53,14 @@ const jackStrattonEssay = fs.readFileSync(
   path.resolve("content/essays/jack-stratton-and-the-vulfpeck-model.md"),
   "utf8"
 );
+const campMysticEssay = fs.readFileSync(
+  path.resolve("content/essays/what-happened-at-camp-mystic.md"),
+  "utf8"
+);
+const peachesOrGreeceDialogue = fs.readFileSync(
+  path.resolve("content/essays/dialogues/peaches-or-greece.md"),
+  "utf8"
+);
 const directOffers = fs.readFileSync(path.resolve("layouts/partials/shop/direct-offers.html"), "utf8");
 const kindleButton = fs.readFileSync(path.resolve("layouts/partials/shop/kindle-button.html"), "utf8");
 const shopList = fs.readFileSync(path.resolve("layouts/shop/list.html"), "utf8");
@@ -220,8 +228,8 @@ test("shared masthead exposes the public light and dark theme selector", () => {
 });
 
 test("Jack Stratton modern bio preserves the complete localized visual sequence", () => {
-  assert.match(jackStrattonEssay, /^version: "1\.3"$/m);
-  assert.match(jackStrattonEssay, /^edition: "Fourth web edition"$/m);
+  assert.match(jackStrattonEssay, /^version: "1\.4"$/m);
+  assert.match(jackStrattonEssay, /^edition: "Fifth web edition"$/m);
   assert.match(jackStrattonEssay, /^featured_image_caption: "Jack Stratton on stage \| Source: Michelle Shiers"$/m);
   assert.match(jackStrattonEssay, /^featured_image_alt: "Jack Stratton on stage"$/m);
   assert.doesNotMatch(jackStrattonEssay, /!\[[^\]\r\n]*\\\]\(/);
@@ -255,6 +263,33 @@ test("Jack Stratton modern bio preserves the complete localized visual sequence"
   }
   assert.match(jackStrattonEssay, /\[Watch on YouTube\]\(https:\/\/www\.youtube\.com\/watch\?v=8bLinctYcno\)/);
   assert.match(jackStrattonEssay, /\[Source: Vulf on YouTube\]\(https:\/\/youtu\.be\/py-HPosf8s8/);
+});
+
+test("Studio samples retain reader-ready copy and public revision records", () => {
+  assert.match(campMysticEssay, /^version: "2\.1"$/m);
+  assert.match(campMysticEssay, /^edition: "Sixth web edition"$/m);
+  assert.match(campMysticEssay, /^### July 4: Warning, Rising Water, and Evacuation$/m);
+  assert.match(campMysticEssay, /^### Further Reading$/m);
+  assert.match(campMysticEssay, /or all\s*> of the above\?/);
+  assert.doesNotMatch(
+    campMysticEssay,
+    /COA2|back-archive review|Medium import residue|Recovered and localized|Deep Dive Teaser|Combined Full Timeline|upcoming piece|Thanks for reading!/i
+  );
+
+  assert.match(jackStrattonEssay, /^#### What's Next for Jack Stratton and Vulfpeck$/m);
+  assert.match(jackStrattonEssay, /Source: Blue Funky Mamma/);
+  assert.match(jackStrattonEssay, /\*\*\*Theo Katzman, Woody Goss, and Joe Dart\*\*\*\./);
+  assert.match(jackStrattonEssay, /\*\*\*Sleepify\*\*\*,\s+a\s+silent Spotify album/);
+  assert.doesNotMatch(
+    jackStrattonEssay,
+    /back-archive review|Recovered and localized|localized visual sequence|What's Next for Jack Stratton and Vulfpeck in 2025|At publication, the band had|more\s*> recently/i
+  );
+
+  assert.match(peachesOrGreeceDialogue, /^version: '1\.1'$/m);
+  assert.match(peachesOrGreeceDialogue, /^edition: 'Second web edition'$/m);
+  assert.match(peachesOrGreeceDialogue, /Athens, Georgia, and Athens, Greece\./);
+  assert.match(peachesOrGreeceDialogue, /Oliver repeated the word\./);
+  assert.doesNotMatch(peachesOrGreeceDialogue, /intersting|citezenship|romaticizing|Perhaps, both/);
 });
 
 test("Square-first bookstore requires delivery email and keeps marketing consent optional", () => {

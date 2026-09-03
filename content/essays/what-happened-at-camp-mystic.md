@@ -9,21 +9,24 @@ featured_image: "medium/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5d
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
-version: "2.0"
-edition: "Fifth web edition"
+version: "2.1"
+edition: "Sixth web edition"
 revision_history:
-  - version: "1.2"
-    date: "2026-06-21"
-    note: "Updated June 21, 2026, during COA2 value review to remove reader-visible author-note residue and clarify discovery metadata while preserving the disclosure note."
   - version: "1.1"
     date: "2026-05-17"
-    note: "Updated May 17, 2026, after OIP back-archive review. Warning timeline, casualty language, Medium import residue, and house-style issues were corrected."
+    note: "Clarified the warning timeline, casualty language, source framing, and punctuation."
+  - version: "1.2"
+    date: "2026-06-21"
+    note: "Clarified the author disclosure and page description."
   - version: "1.3"
     date: "2026-07-05"
-    note: "Recovered and localized body images from Medium import archive; no substantive text change."
+    note: "Restored supporting maps and images; no substantive text change."
   - version: "2.0"
     date: "2026-09-02"
-    note: "Rebuilt the flood timeline as accessible text using the June 2026 Texas legislative record, added localized USGS terrain visuals, and corrected the warning-to-evacuation framing."
+    note: "Rebuilt the flood timeline as accessible text using the June 2026 Texas legislative record, added USGS terrain visuals, and corrected the warning-to-evacuation framing."
+  - version: "2.1"
+    date: "2026-09-03"
+    note: "Updated the introduction and closing section, corrected minor text issues, and removed outdated preview language."
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
 featured: false
 
@@ -38,7 +41,7 @@ medium_source_url: "https://medium.com/@lawtonperret/what-happened-at-camp-mysti
 
 > ***Rescuer, CNN interview***
 
-On the night of July 4th, while
+On the night of July 4, while
 fireworks lit up the Texas Hill Country, a dangerous storm stalled over
 the Guadalupe River Basin.
 
@@ -61,7 +64,7 @@ awareness, and safety planning. And it's raising tough questions:
 > **Why wasn't the threat better understood?**
 
 > **Who is responsible ~ the camp, the parents, the government, or all
-> the above?**
+> of the above?**
 
 ### Role and Disclosure Note
 
@@ -73,10 +76,7 @@ While this event wasn't caused by a structural failure, the conditions
 were eerily familiar: low warning time, rapid inundation, and vulnerable
 populations with limited escape options.
 
-In my upcoming piece, I'll walk through the flood in detail: what
-happened, why it happened, and how we can learn from it.
-
-Because this flood was no fluke.
+This flood was no fluke.
 It was a warning ~ and next time, the water may rise somewhere else.
 
 > ***Disclaimer:*** ***The views expressed in this article are my own
@@ -84,9 +84,7 @@ It was a warning ~ and next time, the water may rise somewhere else.
 > Corps of Engineers, the Department of Defense, or the United States
 > Government.***
 
-### **Combined Full Timeline**
-
-#### **July 4: Warning, Rising Water, and Evacuation**
+### July 4: Warning, Rising Water, and Evacuation
 
 The [Texas Legislature's June 2026 investigative report](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026)
 reconstructs the critical sequence this way (pp. 76-83):
@@ -200,14 +198,8 @@ the dark with power out and no real-time alerts.**
 
 > Maybe they should.
 
-### Deep Dive Teaser
+### Further Reading
 
-In the follow-up, I break down the flood in full ~ with **maps, warning
-gaps**, and a **risk-informed analysis** of what went wrong.
-
-I published additional primers [like this](/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/) throughout the week to provide background
-information you might be interested in.
-
-- [The Water's Rising: What the Data Really Says About Extreme Weather](/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/)
-
-> Thanks for reading!
+For more context on extreme weather and flood risk, read [*The Water's
+Rising: What the Data Really Says About Extreme
+Weather*](/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/).

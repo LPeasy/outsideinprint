@@ -174,7 +174,7 @@
           {{ if ne .Params.show_citation false }}
             <div class="article-publication-record__section article-publication-record__section--citation">
               <p class="article-publication-record__label">Cite this</p>
-              <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}." <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+              <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}{{ if not (or (strings.HasSuffix .Title ".") (strings.HasSuffix .Title "?") (strings.HasSuffix .Title "!")) }}.{{ end }}" <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
             </div>
           {{ end }}
           {{ with .Params.revision_history }}

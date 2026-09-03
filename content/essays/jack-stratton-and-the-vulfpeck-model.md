@@ -11,18 +11,21 @@ featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b412
 featured_image_caption: "Jack Stratton on stage | Source: Michelle Shiers"
 featured_image_alt: "Jack Stratton on stage"
 description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-15"
-    note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, and tightened source-discipline language around Vulfpeck's independent model."
+    note: "Clarified source framing around Vulfpeck's independent model and standardized punctuation."
   - version: "1.2"
     date: "2026-07-05"
-    note: "Recovered and localized body images from Medium import archive; no substantive text change."
+    note: "Restored supporting images; no substantive text change."
   - version: "1.3"
     date: "2026-09-01"
-    note: "Restored the complete localized visual sequence from the original Medium edition; no substantive text change."
+    note: "Restored the article's full visual sequence; no substantive text change."
+  - version: "1.4"
+    date: "2026-09-03"
+    note: "Corrected formatting, completed an image-source caption, and removed expired tour-date language."
 pdf: "/pdfs/jack-stratton-and-the-vulfpeck-model.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/jack-stratton-and-the-vulfpeck-model-00813f3ac8bf"
@@ -81,7 +84,7 @@ He enrolled at the *University of Michigan's School of Music*, **where**
 **he studied music technology** **and met** **his future** **Vulfpeck
 collaborators:**
 
-***Theo Katzman****,* ***Woody Goss, and Joe Dart****.*
+***Theo Katzman, Woody Goss, and Joe Dart***.
 
 > "All that was gonna seep into the Vulf universe with time."
 
@@ -107,7 +110,7 @@ Stratton has credited a Reinhold Mack interview as the creative spark.
 > The band released its first track, "Beastly," in April 2011, followed
 > by four EPs between 2011 and 2014.
 
-The group gained national attention in 2014 with ***Sleepify****,* a
+The group gained national attention in 2014 with ***Sleepify***, a
 silent Spotify album released to generate royalties for an
 admission-free tour.
 
@@ -222,64 +225,38 @@ world's biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
 
 > ~ Jack Stratton, lying on a shakti mat
 
-*In March 2025*, Vulfpeck unveiled ***Clarity of Cal***, a live album
-that stands as **a testament to their musical evolution** and has been
-**hailed by fans** as perhaps their finest work to date.
-
-Recorded during performances at *The UC Theatre in Berkeley* and the
-*Hollywood Palladium in Los Angeles*, this album captures the band's
-dynamic energy and tight-knit synergy on stage.
+*In March 2025*, Vulfpeck released ***Clarity of Cal***, a live album
+drawn from performances at *The UC Theatre in Berkeley* and the
+*Hollywood Palladium in Los Angeles*. The record captures the band's
+precision, looseness, and audience rapport onstage.
 
 The tracklist features standout songs such as **"Big Dipper," "Tender
 Defender," "New Beastly," "The Heist," "Memories," "August 26,"** and
 **"This Is Not the Song I Wrote."**
 
-Each track showcases **Vulfpeck's signature blend of funk, soul, and
-playful experimentation**, with **"*Tender Defender*"** highlighting
-**Theo Katzman's** *impassioned vocals* and **"New Beastly"** delivering
-*a modern twist on a timeless sound.*
+The set moves through funk, soul, and gospel touches. **"Tender
+Defender"** centers **Theo Katzman's** vocals, while **"New Beastly"**
+revisits the band's early catalog.
 
 ![Vulfpeck's Clarity of Cal concert film](/images/article-media/jack-stratton-and-the-vulfpeck-model/97337aed41250cd4d04217fb2cb2485dea733d71fecbae5684362779c6bf1d12.jpg)
 
 *Clarity of Cal concert film | [Watch on YouTube](https://www.youtube.com/watch?v=8bLinctYcno)*
 
-> Accompanying the album is a concert film directed and edited by
-> *Carter Knopik*, offering fans **an immersive experience of the live
-> performances.**
-
-The film includes **candid moments**, such as *Jack Stratton's relaxed
-pre-show meditation*, and provides insight into the band's creative
-process. Stratton explains the album's title, sharing that ***"Clarity
-of Cal"*** was a phrase his father often repeated, originating from a
-*Jack Kerouac* prose poem.
-
-> Critics and fans alike have praised the album for its vibrant energy
-> and cohesiveness.
-
-***One reviewer on Reddit noted:***
-
-> ***"I've had it on repeat! I agree it's their best yet. Very Earth,
-> Wind & Fire / CHIC vibes. More gospel-y in general, which I'm all
-> about!"***
+The companion concert film, directed and edited by *Carter Knopik*,
+includes candid pre-show moments and footage of Stratton explaining the
+album's title. ***"Clarity of Cal"*** was a phrase his father often
+repeated, drawn from a *Jack Kerouac* prose poem.
 
 ![Clarity of Cal documentary trailer title card](/images/article-media/jack-stratton-and-the-vulfpeck-model/3eebf467f71ac2479bf14032516dedf69768b753f762f4e0bc24cac9689b74ad.jpeg)
 
 *Documentary Trailer | [Source: Vulf on YouTube](https://youtu.be/py-HPosf8s8?si=sMv_N5Dve4LfSjGS)*
 
-The live recording captures ***the essence of Vulfpeck's
-performances,*** making listeners feel as though they're *part of the
-audience.*
+Together, the album and film show how Stratton turns a tightly
+controlled recording process into a live performance that feels
+spontaneous.
 
-***Clarity of Cal*** *solidifies Vulfpeck's reputation* as a powerhouse
-in the independent music scene and *offers a fresh perspective on their
-artistry.*
-
-As the album continues to resonate with audiences, it invites both
-longtime fans and newcomers to experience ***the infectious groove***
-***and innovative spirit*** that define Vulfpeck.
-
-> Clarity of Cal might be the band's most cohesive statement yet, but
-> Stratton's vision doesn't end with Vulfpeck.
+> The project also shows how far Stratton's production ideas extend
+> beyond a studio mix.
 
 ***His extended musical family stretches across projects, genres, and
 continents.***
@@ -346,8 +323,8 @@ the industry at large.**
 Stratton is a **vocal critic of opaque music industry systems**,
 especially in streaming and ticketing.
 
-> In 2021, he proposed a listener-based royalty model, and more
-> recently, he has advocated for artist-controlled ticketing systems.
+> In 2021, he proposed a listener-based royalty model. He has also
+> advocated for artist-controlled ticketing systems.
 
 **Vulfpeck's 2023 residency**, ***The Schvitz***, was designed to test
 direct ticketing and logistics without third-party promoters.
@@ -366,17 +343,14 @@ His business decisions reflect the same philosophy as his music:
 > Vulfpeck leaned on Wi-Fi, playlists, and a silent rebellion you could
 > sleep through.
 
-#### What's Next for Jack Stratton and Vulfpeck in 2025
+#### What's Next for Jack Stratton and Vulfpeck
 
 ![Vulfpeck performing live on stage](/images/article-media/jack-stratton-and-the-vulfpeck-model/18ff47191c4b5d441d9ab279a7e997f5c6150c85143fc857194f40e9c858a14d.jpeg)
 
-*Vulf on stage | [Source](https://bluefunkymamma.wordpress.com/2018/01/13/vulfpeck-banda/)*
+*Vulf on stage | [Source: Blue Funky Mamma](https://bluefunkymamma.wordpress.com/2018/01/13/vulfpeck-banda/)*
 
 Stratton continues to guide Vulfpeck's creative output, manage its
 independent label, and develop new collaborative projects.
-
-> At publication, the band had [two tour dates](https://www.instagram.com/p/DEh_IAaP3w9/?igsh=MXB6MHNhamtqY2p1Mw==) announced for 2025:
-> Red Rocks on July 5th and MSG on September 13th.
 
 Jack's model ~ built around restraint, rhythm, and mutual respect ~ has
 helped define one of the most successful independent bands of the

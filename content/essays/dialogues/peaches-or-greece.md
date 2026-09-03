@@ -7,8 +7,12 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
-version: '1.0'
-edition: 'First web edition'
+version: '1.1'
+edition: 'Second web edition'
+revision_history:
+  - version: '1.1'
+    date: '2026-09-03'
+    note: 'Corrected spelling and punctuation; no substantive text change.'
 pdf: '/pdfs/peaches-or-greece.pdf'
 source_url: 'https://syd-and-oliver.ghost.io/peaches-or-greece/'
 ---
@@ -58,7 +62,7 @@ Oliver’s expression did not change.
 
 **Syd:** Between what?
 
-**Oliver:** Athens, Georgia and Athens, Greece.
+**Oliver:** Athens, Georgia, and Athens, Greece.
 
 Syd smiled faintly.
 
@@ -66,7 +70,7 @@ Syd smiled faintly.
 
 Oliver nodded.
 
-**Oliver:** Perhaps, both do have a Parthenon.
+**Oliver:** Perhaps both do have a Parthenon.
 
 They drank.
 
@@ -80,13 +84,13 @@ Syd’s fingers traced the edge of the label.
 
 **Oliver:** Controlled.
 
-Oliver repeated.
+Oliver repeated the word.
 
 **Syd:** Yes. You don’t travel to discover yourself. You travel to misplace yourself.
 
 Oliver watched a dart strike the wall just outside the board.
 
-**Oliver:** You know, you have an intersting point. You could misplace a lot.
+**Oliver:** You know, you have an interesting point. You could misplace a lot.
 
 **Syd:** You think I’ll lose my passport?
 
@@ -96,7 +100,7 @@ The jukebox shifted to the blues, screeched, whirled, and then started playing L
 
 Syd lifted his bottle.
 
-**Syd:** Most travel now is curated contrast. The right neighborhood. The right photograph. Manufactured global citezenship. It's beautiful.
+**Syd:** Most travel now is curated contrast. The right neighborhood. The right photograph. Manufactured global citizenship. It's beautiful.
 
 **Oliver:** Oh, yes, quite, although, I would say that if you go even a seemingly insignificant distance further than the average bear, the experience is exponentially more beautiful. And the further you go, the higher the return for each additional mile.
 
@@ -112,7 +116,7 @@ Syd smiled faintly.
 
 **Syd:** You’re romantic about it.
 
-**Oliver:** No, you're romaticizing stale potato chips.
+**Oliver:** No, you're romanticizing stale potato chips.
 
 Oliver set his bottle down.
 
@@ -205,4 +209,3 @@ Syd laughed as they approached the curb.
 
 They parted at the street ~ walking in opposite directions.   
 Neither man hurrying nor looking back.
-

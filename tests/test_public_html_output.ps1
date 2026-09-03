@@ -1721,6 +1721,7 @@ $requiredUxPages = @(
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
   'public/essays/what-happened-at-camp-mystic/index.html',
+  'public/syd-and-oliver/peaches-or-greece/index.html',
   'public/essays/save-some-air-for-the-fishies/index.html',
   'public/essays/the-easement-under-the-lake/index.html',
   'public/essays/multiple-shmultiple/index.html',
@@ -4914,6 +4915,45 @@ $requiredUxChecks += @(
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
     Pattern = 'piece--collection-accent--reported-case-studies-evidence-room'
     Message = 'expected dual-membership essays not to blend the secondary collection skin hook into article pages'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = '(?s)Sixth web edition.*?July 4: Warning, Rising Water, and Evacuation.*?Further Reading.*?The Water.s Rising: What the Data Really Says About Extreme Weather'
+    Message = 'expected the Camp Mystic essay to render its revised edition, consolidated timeline heading, and finished further-reading close'
+  },
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = 'Deep Dive Teaser|Combined Full Timeline|upcoming piece|Thanks for reading!|COA2|back-archive review|Medium import residue|Recovered and localized|localized USGS terrain visuals'
+    Message = 'expected the Camp Mystic page to omit stale preview and internal production language'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/what-happened-at-camp-mystic/index.html'
+    Pattern = 'What Happened at Camp Mystic\?\.'
+    Message = 'expected terminal punctuation in the Camp Mystic citation not to receive a duplicate period'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
+    Pattern = '(?s)Fifth web edition.*?What(?:&rsquo;|&#39;|'')s Next for Jack Stratton and Vulfpeck.*?Source: Blue Funky Mamma'
+    Message = 'expected the Jack Stratton bio to render its revised edition, completed source label, and evergreen closing heading'
+  },
+  @{
+    Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
+    Pattern = 'back-archive review|Recovered and localized|localized visual sequence|What(?:&rsquo;|&#39;|'')s Next for Jack Stratton and Vulfpeck in 2025|At publication, the band had|more recently'
+    Message = 'expected the Jack Stratton page to omit stale and internal production language'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/syd-and-oliver/peaches-or-greece/index.html'
+    Pattern = '(?s)Second web edition.*?Athens, Georgia, and Athens, Greece\..*?Oliver repeated the word\..*?Manufactured global citizenship\..*?romanticizing stale potato chips'
+    Message = 'expected Peaches or Greece to render the corrected dialogue and revised edition'
+  },
+  @{
+    Path = 'public/syd-and-oliver/peaches-or-greece/index.html'
+    Pattern = 'intersting|citezenship|romaticizing|Perhaps, both'
+    Message = 'expected Peaches or Greece to omit the repaired spelling and punctuation errors'
     ShouldNotMatch = $true
   }
 )
