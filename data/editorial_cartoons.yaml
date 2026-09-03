@@ -1,4 +1,4 @@
-current: the-river-keeps-its-name
+current: marsh-sunrise
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -957,5 +957,14 @@ cartoons:
     image: "editorial/the-river-keeps-its-name"
     essay: "/essays/mantra-5/"
     alt: "A golden sun rises above a river bending in a broad S through a green meadow, with a split-trunk sycamore on one bank and distant blue hills beyond."
+    width: 1672
+    height: 941
+  - slug: marsh-sunrise
+    title: "Marsh Sunrise"
+    date: "2026-09-04"
+    publishDate: "2026-09-04T09:00:00-04:00"
+    image: "editorial/marsh-sunrise"
+    essay: "/essays/mantra-6/"
+    alt: "Golden sunrise lights a tidal marsh crossed by an empty wooden boardwalk, with reflective water, green cordgrass, and distant pines beneath a clear sky."
     width: 1672
     height: 941
