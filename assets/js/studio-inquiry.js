@@ -42,6 +42,7 @@
       subjectPrefix.length > 0 &&
       subjectPrefix.length <= 100 &&
       clean(form.dataset.currentRate).length > 0 &&
+      clean(form.dataset.depositPercent).length > 0 &&
       clean(form.dataset.offerCode).length > 0 &&
       clean(form.dataset.sourcePage).length > 0;
   }
@@ -77,13 +78,13 @@
       "Proposed essay: " + value(data, "project_subject"),
       "Desired outcome: " + value(data, "desired_outcome"),
       "Preferred start: " + value(data, "timeline"),
-      "Current base rate acknowledged: " + clean(form.dataset.currentRate),
+      "Price acknowledgment: I understand that the current rate is " + clean(form.dataset.currentRate) + ". A " + clean(form.dataset.depositPercent) + "% deposit is required to book the project.",
       "",
-      "Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any.",
+      "Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material. I will wait for Outside In Print to ask for source files and tell me what it can accept and how to send it.",
       "This inquiry does not reserve a production slot or create a client relationship."
     ].join("\n").replace(/\n/g, "\r\n");
 
-    status.textContent = "Your email application should open with a prepared draft. Review and send it. Outside In Print has not received your inquiry until the email is sent.";
+    status.textContent = "Your email app should open with a draft. Review it before you send it. Outside In Print will receive your inquiry only if you send the email and it reaches us.";
     mailtoUri = "mailto:" + recipient + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     window.location.href = mailtoUri;
   }

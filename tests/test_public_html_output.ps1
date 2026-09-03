@@ -1954,30 +1954,33 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
   $studioVisibleText = Convert-HtmlFragmentToText -Html $studioHtml
 
   foreach ($requiredText in @(
-    'You have the material. We make it publishable.',
+    'You have the material. We make it ready to publish.',
     'Fixed scope · First draft in 7 business days · One revision',
     $studioActiveRateText,
-    '50% deposit to reserve production',
-    '50% final balance before final delivery',
+    '50% deposit to book the project',
+    'Final 50% due before we release the final files',
     '90 minutes',
     '15,000 words',
     '25 pages',
-    '1,500–2,000-word bylined essay',
-    'The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received.',
-    'Approximately how much source material is there?',
-    'Who is the intended reader?',
-    'I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any.',
-    'The Studio form does not send your answers to Outside In Print or site analytics. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches support@outsideinprint.org.',
-    'Additional interviews',
-    'Extensive original research beyond supplied material and basic verification',
-    'Custom illustration',
-    'Website design or development',
-    'Ongoing social-media management or content calendars',
-    'Book-length work',
+    'One finished essay with your byline, 1,500–2,000 words',
+    'The 7-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material.',
+    'How much source material do you have?',
+    'Who should read the essay?',
+    'I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material. I will wait for Outside In Print to ask for source files and tell me what it can accept and how to send it.',
+    'This form does not send your answers to Outside In Print or site analytics. When you select “Prepare inquiry email,” your answers go to your email app or provider to make a draft. That app or provider may save or sync the draft under its own privacy rules. Outside In Print gets your answers only if you send the email and it reaches support@outsideinprint.org.',
+    'More interviews',
+    'Major new research beyond your material and basic fact-checking',
+    'Custom artwork',
+    'Website design or coding',
+    'Long-term social media work or content plans',
+    'Book-length projects',
     'More than one revision round',
-    'Guaranteed publication on Outside In Print',
-    'These are Outside In Print editorial examples, not client testimonials.',
-    'There is no public checkout. Every project is reviewed and scoped in writing before payment.'
+    'A promise that Outside In Print will publish the essay',
+    'These are examples of our own editorial work. They are not client testimonials.',
+    'We give you a complete finished file set. Outside In Print reserves the right to publish the essay on outsideinprint.org.',
+    'The written scope states which rights transfer to you after full payment. Outside In Print keeps the right to publish the finished essay on outsideinprint.org.',
+    'We will reply within 2 business days with either a fit decision or a request for more details.',
+    'You cannot pay on this page. We review each project and agree on the written scope before you pay.'
   )) {
     if ($studioVisibleText.IndexOf($requiredText, [System.StringComparison]::Ordinal) -lt 0) {
       $uxIssues.Add("public/studio/index.html => expected approved Studio text: $requiredText")
@@ -2010,6 +2013,7 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
         @{ Name = 'data-inquiry-email'; Value = 'support@outsideinprint.org' },
         @{ Name = 'data-inquiry-subject-prefix'; Value = 'Outside In Print Studio Inquiry' },
         @{ Name = 'data-current-rate'; Value = $studioActivePrice },
+        @{ Name = 'data-deposit-percent'; Value = '50' },
         @{ Name = 'data-offer-code'; Value = 'OIP-STUDIO-EXPERT-ESSAY' },
         @{ Name = 'data-source-page'; Value = 'https://outsideinprint.org/studio/' },
         @{ Name = 'data-analytics-event'; Value = 'studio_inquiry_email_prepare' },
@@ -2112,7 +2116,8 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
       foreach ($requiredBodyText in @(
         'Source size:',
         'Intended reader:',
-        'Safety reminder: Do not attach or paste restricted source material. Wait for Outside In Print to request source files and approve a transfer method.'
+        'Current base rate: $1,250. A 50% deposit is required to book the project.',
+        'Safety reminder: Do not attach or paste confidential, classified, privileged, export-controlled, or restricted source material. Wait for Outside In Print to tell you what it can accept and how to send it.'
       )) {
         if ($directEmailBody.IndexOf($requiredBodyText, [System.StringComparison]::Ordinal) -lt 0) {
           $uxIssues.Add("public/studio/index.html => direct-email fallback body must include: $requiredBodyText")
@@ -2128,6 +2133,9 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
       }
       if ($directEmailBody.IndexOf('I have not attached', [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
         $uxIssues.Add('public/studio/index.html => direct-email fallback must use a non-assertive safety reminder')
+      }
+      if ($directEmailBody.IndexOf('acknowledged', [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+        $uxIssues.Add('public/studio/index.html => direct-email fallback must not claim an unchecked commercial acknowledgment')
       }
       if ($directEmailBody -match '(?:Offer code|Source page):') {
         $uxIssues.Add('public/studio/index.html => direct-email fallback must not expose removed internal offer-code or source-page fields')

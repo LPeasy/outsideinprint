@@ -195,7 +195,7 @@ if ($bucksHtml -notmatch '<h1\b[^>]*>Bucks Machine</h1>') {
 if ($baseballHtml -notmatch '<h1\b[^>]*>Baseball Upside Risk</h1>') {
   throw 'Expected the public Baseball Upside Risk route to render its single H1.'
 }
-$studioHeadings = @([regex]::Matches($studioHtml, '<h1\b[^>]*>\s*You have the material\. We make it publishable\.\s*</h1>', 'IgnoreCase'))
+$studioHeadings = @([regex]::Matches($studioHtml, '<h1\b[^>]*>\s*You have the material\. We make it ready to publish\.\s*</h1>', 'IgnoreCase'))
 if ($studioHeadings.Count -ne 1) {
   throw 'Expected the public Studio route to render one approved H1.'
 }

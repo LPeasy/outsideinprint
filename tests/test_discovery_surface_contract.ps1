@@ -376,14 +376,18 @@ foreach ($requiredSnippet in @(
   'data-inquiry-email="{{ $email }}"',
   'data-inquiry-subject-prefix="{{ $subjectPrefix }}"',
   'data-current-rate="{{ $activePrice }}"',
+  'data-deposit-percent="{{ $depositPercent }}"',
   'data-offer-code="{{ $offerCode }}"',
   'data-source-page="{{ $sourcePage }}"',
   'data-analytics-event="studio_inquiry_email_prepare"',
   'data-analytics-source-slot="studio_inquiry_form"',
   'data-analytics-slug="studio"',
+  'You have the material. We make it ready to publish.',
   'Fixed scope <span aria-hidden="true">&middot;</span> First draft in {{ $turnaroundDays }} business days <span aria-hidden="true">&middot;</span> One revision',
-  'The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received.',
-  'The Studio form does not send your answers to Outside In Print or site analytics. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches {{ $email }}.',
+  'The {{ $turnaroundDays }}-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material.',
+  'We give you a complete finished file set. Outside In Print reserves the right to publish the essay on outsideinprint.org.',
+  'Outside In Print keeps the right to publish the finished essay on outsideinprint.org.',
+  'This form does not send your answers to Outside In Print or site analytics. When you select “Prepare inquiry email,” your answers go to your email app or provider to make a draft. That app or provider may save or sync the draft under its own privacy rules. Outside In Print gets your answers only if you send the email and it reaches {{ $email }}.',
   'name="role"',
   'name="source_material"',
   'name="source_size"',
@@ -393,7 +397,7 @@ foreach ($requiredSnippet in @(
   'name="commercial_acknowledgement"',
   'Source size:\r\n',
   'Intended reader:\r\n',
-  'Safety reminder: Do not attach or paste restricted source material. Wait for Outside In Print to request source files and approve a transfer method.',
+  'Safety reminder: Do not attach or paste confidential, classified, privileged, export-controlled, or restricted source material. Wait for Outside In Print to tell you what it can accept and how to send it.',
   'type="submit" disabled>Prepare inquiry email',
   'role="status" aria-live="polite"',
   'data-analytics-event="studio_inquiry_direct_email"',
@@ -459,6 +463,12 @@ if ($fallbackBodyMatch.Groups['body'].Value -match 'I have not attached') {
   throw 'Expected the direct-email fallback to use a non-assertive safety reminder.'
 }
 $fallbackBodySource = $fallbackBodyMatch.Groups['body'].Value
+if ($fallbackBodySource -match '(?i)acknowledged') {
+  throw 'Expected the direct-email fallback not to claim an unchecked commercial acknowledgment.'
+}
+if ($fallbackBodySource -notmatch [regex]::Escape('Current base rate: %s. A %d%% deposit is required to book the project.')) {
+  throw 'Expected the direct-email fallback to state the current rate and deposit without claiming acknowledgment.'
+}
 $previousFallbackPromptIndex = -1
 foreach ($orderedFallbackPrompt in @('Source material:', 'Source size:', 'Intended reader:', 'Proposed essay:')) {
   $currentFallbackPromptIndex = $fallbackBodySource.IndexOf($orderedFallbackPrompt, [System.StringComparison]::Ordinal)
@@ -509,8 +519,10 @@ foreach ($requiredSnippet in @(
   '\u007F-\u009F',
   '"Source size: " + value(data, "source_size")',
   '"Intended reader: " + value(data, "intended_reader")',
-  '"Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any."',
-  'Outside In Print has not received your inquiry until the email is sent.'
+  'clean(form.dataset.depositPercent).length > 0',
+  '"Price acknowledgment: I understand that the current rate is " + clean(form.dataset.currentRate) + ". A " + clean(form.dataset.depositPercent) + "% deposit is required to book the project."',
+  '"Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material. I will wait for Outside In Print to ask for source files and tell me what it can accept and how to send it."',
+  'Outside In Print will receive your inquiry only if you send the email and it reaches us.'
 )) {
   if ($studioScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected assets/js/studio-inquiry.js to contain: $requiredSnippet"

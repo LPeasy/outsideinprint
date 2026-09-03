@@ -689,6 +689,7 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
     "data-inquiry-email",
     "data-inquiry-subject-prefix",
     "data-current-rate",
+    "data-deposit-percent",
     "data-offer-code",
     "data-source-page",
     'data-analytics-event="studio_inquiry_email_prepare"',
@@ -714,20 +715,23 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioTemplate, /name="source_size" type="text" maxlength="80"[^>]* required>/);
   assert.match(studioTemplate, /name="intended_reader" type="text" maxlength="160" required>/);
   assert.match(studioTemplate, /name="source_safety_acknowledgement" type="checkbox" value="acknowledged" required>/);
-  assert.match(studioTemplate, /Approximately how much source material is there\?/);
-  assert.match(studioTemplate, /Who is the intended reader\?/);
+  assert.match(studioTemplate, /How much source material do you have\?/);
+  assert.match(studioTemplate, /Who should read the essay\?/);
   const studioFieldOrder = ["source_material", "source_size", "intended_reader", "project_subject"]
     .map((name) => studioTemplate.indexOf(`name="${name}"`));
   assert.ok(studioFieldOrder.every((index) => index >= 0), "expected all ordered Studio qualification fields");
   assert.deepEqual(studioFieldOrder, [...studioFieldOrder].sort((left, right) => left - right));
+  assert.match(studioTemplate, /You have the material\. We make it ready to publish\./);
   assert.match(studioTemplate, /Fixed scope <span aria-hidden="true">&middot;<\/span> First draft in \{\{ \$turnaroundDays \}\} business days <span aria-hidden="true">&middot;<\/span> One revision/);
-  assert.match(studioTemplate, /The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received\./);
-  assert.match(studioTemplate, /The Studio form does not send your answers to Outside In Print or site analytics\. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices\. Outside In Print receives the information only if you send the message and it reaches \{\{ \$email \}\}\./);
+  assert.match(studioTemplate, /The \{\{ \$turnaroundDays \}\}-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material\./);
+  assert.match(studioTemplate, /We give you a complete finished file set\. Outside In Print reserves the right to publish the essay on outsideinprint\.org\./);
+  assert.match(studioTemplate, /Outside In Print keeps the right to publish the finished essay on outsideinprint\.org\./);
+  assert.match(studioTemplate, /This form does not send your answers to Outside In Print or site analytics\. When you select “Prepare inquiry email,” your answers go to your email app or provider to make a draft\. That app or provider may save or sync the draft under its own privacy rules\. Outside In Print gets your answers only if you send the email and it reaches \{\{ \$email \}\}\./);
   assert.doesNotMatch(studioTemplate, /Your answers remain on your device until you open and send/);
   assert.match(studioTemplate, /type="submit" disabled>Prepare inquiry email/);
   assert.match(studioTemplate, /role="status" aria-live="polite"/);
   assert.match(studioTemplate, /data-analytics-event="studio_inquiry_direct_email"/);
-  assert.match(studioTemplate, />Email directly: \{\{ \$email \}\}<\/a>/);
+  assert.match(studioTemplate, />Email \{\{ \$email \}\} directly<\/a>/);
   assert.match(studioTemplate, /href="\/privacy\/">Privacy Policy<\/a>/);
   assert.doesNotMatch(studioTemplate, /type="file"/);
   assert.match(studioTemplate, /\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end)[\s\S])*?<form[\s\S]*?data-studio-email-form[\s\S]*?<\/form>\s*\{\{-?\s*end\s*-?\}\}\s*<p id="studio-inquiry-direct-email" class="studio-form__fallback">/);
@@ -742,7 +746,9 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioScript, /\\u007F-\\u009F/);
   assert.match(studioScript, /"Source size: " \+ value\(data, "source_size"\)/);
   assert.match(studioScript, /"Intended reader: " \+ value\(data, "intended_reader"\)/);
-  assert.match(studioScript, /"Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any\."/);
+  assert.match(studioScript, /clean\(form\.dataset\.depositPercent\)\.length > 0/);
+  assert.match(studioScript, /"Price acknowledgment: I understand that the current rate is " \+ clean\(form\.dataset\.currentRate\) \+ "\. A " \+ clean\(form\.dataset\.depositPercent\) \+ "% deposit is required to book the project\."/);
+  assert.match(studioScript, /"Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material\. I will wait for Outside In Print to ask for source files and tell me what it can accept and how to send it\."/);
   const guidedBodyOrder = [
     '"Source material: " + value(data, "source_material")',
     '"Source size: " + value(data, "source_size")',
@@ -752,7 +758,7 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.ok(guidedBodyOrder.every((index) => index >= 0), "expected all ordered guided-email fields");
   assert.deepEqual(guidedBodyOrder, [...guidedBodyOrder].sort((left, right) => left - right));
   assert.doesNotMatch(studioScript, /"(?:Offer code|Source page): "/);
-  assert.match(studioScript, /Outside In Print has not received your inquiry until the email is sent\./);
+  assert.match(studioScript, /Outside In Print will receive your inquiry only if you send the email and it reaches us\./);
   assert.ok(studioScript.indexOf('form.addEventListener("submit", prepareInquiry)') < studioScript.indexOf("submitButton.disabled = false"));
   assert.doesNotMatch(studioScript, /fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|document\.cookie|localStorage|sessionStorage|navigator\.clipboard/);
   assert.doesNotMatch(studioScript, /delivery confirmed|successfully sent|inquiry received/i);
@@ -761,12 +767,14 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.ok(fallbackBodyMatch, "expected the Studio template to define a direct-email fallback body");
   assert.match(fallbackBodyMatch[1], /Source size:\\r\\n/);
   assert.match(fallbackBodyMatch[1], /Intended reader:\\r\\n/);
-  assert.match(fallbackBodyMatch[1], /Safety reminder: Do not attach or paste restricted source material\. Wait for Outside In Print to request source files and approve a transfer method\./);
+  assert.match(fallbackBodyMatch[1], /Current base rate: %s\. A %d%% deposit is required to book the project\./);
+  assert.match(fallbackBodyMatch[1], /Safety reminder: Do not attach or paste confidential, classified, privileged, export-controlled, or restricted source material\. Wait for Outside In Print to tell you what it can accept and how to send it\./);
   const fallbackBodyOrder = ["Source material:", "Source size:", "Intended reader:", "Proposed essay:"]
     .map((snippet) => fallbackBodyMatch[1].indexOf(snippet));
   assert.ok(fallbackBodyOrder.every((index) => index >= 0), "expected all ordered fallback-email prompts");
   assert.deepEqual(fallbackBodyOrder, [...fallbackBodyOrder].sort((left, right) => left - right));
   assert.doesNotMatch(fallbackBodyMatch[1], /I have not attached/);
+  assert.doesNotMatch(fallbackBodyMatch[1], /acknowledged/i);
   assert.doesNotMatch(fallbackBodyMatch[1], /(?:Offer code|Source page):/);
 
   assert.match(privacyPolicy, /When you enter information in the Studio inquiry form, the form does not send the inquiry-field contents to Outside In Print, a hosted form provider, or site analytics\. Selecting “Prepare inquiry email” passes those contents to your configured email application or provider through a `mailto:` draft; that application or provider may store or sync the draft under its own privacy practices\. Outside In Print receives the information only if you send the message and it reaches `support@outsideinprint\.org`\./);

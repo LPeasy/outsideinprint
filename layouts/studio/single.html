@@ -37,7 +37,7 @@
   {{- $sourcePage := .Permalink -}}
   {{- $composerEnabled := and $enabled $inquiryEnabled -}}
   {{- $fallbackSubject := printf "%s — Publication Sprint inquiry" $subjectPrefix -}}
-  {{- $fallbackBody := printf "%s\r\n\r\nName:\r\nBest reply email:\r\nWebsite or profile:\r\nRole:\r\nSource material:\r\nSource size:\r\nIntended reader:\r\nProposed essay:\r\nDesired outcome:\r\nPreferred start:\r\nCurrent base rate acknowledged: %s\r\n\r\nSafety reminder: Do not attach or paste restricted source material. Wait for Outside In Print to request source files and approve a transfer method.\r\n\r\nThis inquiry does not reserve a production slot or create a client relationship." $subjectPrefix $activePrice -}}
+  {{- $fallbackBody := printf "%s\r\n\r\nName:\r\nBest reply email:\r\nWebsite or profile:\r\nRole:\r\nSource material:\r\nSource size:\r\nIntended reader:\r\nProposed essay:\r\nDesired outcome:\r\nPreferred start:\r\nCurrent base rate: %s. A %d%% deposit is required to book the project.\r\n\r\nSafety reminder: Do not attach or paste confidential, classified, privileged, export-controlled, or restricted source material. Wait for Outside In Print to tell you what it can accept and how to send it.\r\n\r\nThis inquiry does not reserve a production slot or create a client relationship." $subjectPrefix $activePrice $depositPercent -}}
   {{- $fallbackSubjectQuery := replace (urlquery $fallbackSubject) "+" "%20" -}}
   {{- $fallbackBodyQuery := replace (urlquery $fallbackBody) "+" "%20" -}}
   {{- $fallbackHref := printf "mailto:%s?subject=%s&body=%s" $email $fallbackSubjectQuery $fallbackBodyQuery -}}
@@ -45,8 +45,8 @@
   <article class="studio-page page-shell page-shell--wide" aria-labelledby="studio-page-title">
     <header class="studio-hero">
       <p class="studio-hero__eyebrow">Outside In Print Studio</p>
-      <h1 id="studio-page-title" class="studio-hero__title">You have the material. We make it publishable.</h1>
-      <p class="studio-hero__deck">Bring one recorded conversation, transcript, presentation, working draft, or source packet. Outside In Print turns it into a clear, bylined essay built to represent your thinking for the long term.</p>
+      <h1 id="studio-page-title" class="studio-hero__title">You have the material. We make it ready to publish.</h1>
+      <p class="studio-hero__deck">Bring us one recording, transcript, presentation, draft, or source packet. We turn it into a clear essay with your byline. It will share your ideas in your voice and hold up over time.</p>
       <p class="studio-hero__trust">Fixed scope <span aria-hidden="true">&middot;</span> First draft in {{ $turnaroundDays }} business days <span aria-hidden="true">&middot;</span> One revision</p>
       <p class="studio-hero__price"><span>{{ if $foundingActive }}Founding-client rate{{ else }}Standard rate{{ end }}</span> {{ $activePrice }}</p>
       <div class="studio-hero__actions">
@@ -60,21 +60,21 @@
           data-analytics-format="service_inquiry_email"
           data-analytics-path="/studio/#studio-inquiry"
         >Start a Publication Sprint</a>
-        <a class="studio-cta studio-cta--secondary" href="#studio-scope">Review the exact scope</a>
+        <a class="studio-cta studio-cta--secondary" href="#studio-scope">See what’s included</a>
       </div>
     </header>
 
     <section class="studio-section studio-problem" aria-labelledby="studio-problem-title">
-      <p class="studio-section__number">The argument</p>
+      <p class="studio-section__number">Why it works</p>
       <div class="studio-section__body">
         <h2 id="studio-problem-title">The idea is already there.</h2>
-        <p>You do not need more content. You need the strongest ideas in your existing material shaped into one finished piece. The {{ $offerName }} finds the argument, builds the structure, checks the record, and delivers a publication-ready essay in your voice.</p>
+        <p>You do not need more content. Your best ideas are already in the material you have. We find the main point, put the ideas in order, check key facts, and write one finished essay in your voice.</p>
       </div>
     </section>
 
     <section id="studio-scope" class="studio-section studio-scope" aria-labelledby="studio-scope-title">
       <header class="studio-section__header">
-        <p class="studio-section__number">The scope</p>
+        <p class="studio-section__number">What’s included</p>
         <h2 id="studio-scope-title">One source set. One finished essay.</h2>
       </header>
       <div class="studio-scope__grid">
@@ -83,20 +83,20 @@
           <ul>
             <li>One recording, interview, or presentation up to {{ $recordingLimit }} minutes</li>
             <li>One transcript up to {{ lang.FormatNumber 0 $transcriptLimit }} words</li>
-            <li>One substantial working draft</li>
+            <li>One working draft that fits the written scope</li>
             <li>Or one source packet up to {{ $packetLimit }} pages</li>
           </ul>
-          <p class="studio-scope__note">Choose one primary source set. Additional material can be scoped separately.</p>
+          <p class="studio-scope__note">Choose one main source set. We can price extra material as separate work.</p>
         </section>
         <section class="studio-scope__column" aria-labelledby="studio-deliverables-title">
           <h3 id="studio-deliverables-title">What you receive</h3>
           <ul>
-            <li>One finished {{ lang.FormatNumber 0 $outputMinimum }}–{{ lang.FormatNumber 0 $outputMaximum }}-word bylined essay</li>
+            <li>One finished essay with your byline, {{ lang.FormatNumber 0 $outputMinimum }}–{{ lang.FormatNumber 0 $outputMaximum }} words</li>
             <li>A clear title and subtitle</li>
-            <li>An editable document and web-ready copy</li>
-            <li>A compact source and fact-check record</li>
-            <li>Three short promotional excerpts</li>
-            <li>One consolidated revision round</li>
+            <li>An editable file and copy ready for the web</li>
+            <li>A short record of sources and fact checks</li>
+            <li>Three short excerpts you can use to promote the essay</li>
+            <li>One revision round for all your changes</li>
           </ul>
         </section>
       </div>
@@ -104,139 +104,139 @@
 
     <section class="studio-section studio-process" aria-labelledby="studio-process-title">
       <header class="studio-section__header">
-        <p class="studio-section__number">The process</p>
-        <h2 id="studio-process-title">From raw material to finished publication.</h2>
+        <p class="studio-section__number">How it works</p>
+        <h2 id="studio-process-title">From source material to a finished essay.</h2>
       </header>
       <ol class="studio-process__steps">
         <li>
           <h3>Send the inquiry.</h3>
-          <p>Describe the source material, intended reader, and result you need. Do not upload source files yet.</p>
+          <p>Tell us what you have, who should read the essay, and what you want it to do. Do not send source files yet.</p>
         </li>
         <li>
-          <h3>Confirm scope and reserve the sprint.</h3>
-          <p>Outside In Print confirms fit, sends a one-page scope, and issues a Square invoice for the {{ $depositPercent }}% deposit.</p>
+          <h3>Agree on the work and book your sprint.</h3>
+          <p>We decide whether the project is a good fit. If it is, we send a one-page work plan called the written scope. We also send a Square invoice for the {{ $depositPercent }}% deposit.</p>
         </li>
         <li>
-          <h3>Receive the first draft.</h3>
-          <p>The first-draft production window begins after the written scope is approved, the deposit is paid, and complete source material is received.</p>
+          <h3>Get your first draft.</h3>
+          <p>The {{ $turnaroundDays }}-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material.</p>
         </li>
         <li>
           <h3>Revise and finish.</h3>
-          <p>Send one consolidated revision. The final balance is due before release of the final files.</p>
+          <p>Send all your changes together for the one included revision. Pay the final {{ $finalPercent }}% before we release the final files.</p>
         </li>
       </ol>
     </section>
 
     <section class="studio-section studio-proof" aria-labelledby="studio-proof-title">
       <header class="studio-section__header">
-        <p class="studio-section__number">Editorial proof</p>
-        <h2 id="studio-proof-title">The method is already in print.</h2>
-        <p>Outside In Print has used the same editorial discipline across reported primers, source-driven profiles, and finished dialogues.</p>
+        <p class="studio-section__number">See the work</p>
+        <h2 id="studio-proof-title">See how the method works.</h2>
+        <p>These published pieces show the same method at work: careful research, clear structure, and clean writing.</p>
       </header>
       <div class="studio-proof__grid">
         <article class="studio-proof__card">
-          <p class="studio-proof__type">Record &rarr; Primer</p>
+          <p class="studio-proof__type">Records &rarr; Explainer</p>
           <h3><a href="/essays/what-happened-at-camp-mystic/">What Happened at Camp Mystic?</a></h3>
-          <p>Public records and a complex timeline shaped into a clear account for general readers.</p>
+          <p>Public records and a hard-to-follow timeline became a clear account for general readers.</p>
         </article>
         <article class="studio-proof__card">
           <p class="studio-proof__type">Interviews &rarr; Profile</p>
           <h3><a href="/essays/jack-stratton-and-the-vulfpeck-model/">How Jack Stratton Hacked the Music Industry with Funk, Friends, and Irresistible Groove</a></h3>
-          <p>Scattered interviews and public material shaped into a coherent narrative profile.</p>
+          <p>Interviews and public sources became one clear profile.</p>
         </article>
         <article class="studio-proof__card">
           <p class="studio-proof__type">Conversation &rarr; Dialogue</p>
           <h3><a href="/syd-and-oliver/peaches-or-greece/">Peaches or Greece</a></h3>
-          <p>Recorded conversation shaped into a finished literary dialogue.</p>
+          <p>A recorded conversation became a finished dialogue.</p>
         </article>
       </div>
-      <p class="studio-proof__disclosure">These are Outside In Print editorial examples, not client testimonials.</p>
+      <p class="studio-proof__disclosure">These are examples of our own editorial work. They are not client testimonials.</p>
     </section>
 
     <section class="studio-section studio-pricing" aria-labelledby="studio-pricing-title">
       <header class="studio-section__header">
-        <p class="studio-section__number">The terms</p>
-        <h2 id="studio-pricing-title">The founding offer.</h2>
+        <p class="studio-section__number">Price and payment</p>
+        <h2 id="studio-pricing-title">{{ if $foundingActive }}Founding-client price{{ else }}Standard price{{ end }}</h2>
       </header>
       <div class="studio-pricing__panel">
         <p class="studio-pricing__amount">{{ $activePrice }}</p>
         <ul>
           {{- if $foundingActive }}
-            <li>{{ $foundingPrice }} for each of the first {{ $foundingLimit }} engagements</li>
-            <li>{{ $standardPrice }} standard rate after the founding engagements</li>
+            <li>{{ $foundingPrice }} for each of the first {{ $foundingLimit }} accepted Studio projects</li>
+            <li>{{ $standardPrice }} standard rate after the first {{ $foundingLimit }} projects</li>
           {{- else }}
             <li>{{ $standardPrice }} fixed base rate</li>
           {{- end }}
-          <li>{{ $depositPercent }}% deposit to reserve production</li>
-          <li>{{ $finalPercent }}% final balance before final delivery</li>
-          <li>Additional scope quoted separately</li>
+          <li>{{ $depositPercent }}% deposit to book the project</li>
+          <li>Final {{ $finalPercent }}% due before we release the final files</li>
+          <li>We quote extra work separately</li>
         </ul>
       </div>
-      <p class="studio-pricing__note">There is no public checkout. Every project is reviewed and scoped in writing before payment.</p>
+      <p class="studio-pricing__note">You cannot pay on this page. We review each project and agree on the written scope before you pay.</p>
     </section>
 
     <section class="studio-section studio-exclusions" aria-labelledby="studio-exclusions-title">
       <header class="studio-section__header">
-        <p class="studio-section__number">The boundary</p>
-        <h2 id="studio-exclusions-title">What the sprint does not include.</h2>
+        <p class="studio-section__number">Not included</p>
+        <h2 id="studio-exclusions-title">What the sprint does not include</h2>
       </header>
       <ul class="studio-exclusions__list">
-        <li>Additional interviews</li>
-        <li>Extensive original research beyond supplied material and basic verification</li>
-        <li>Custom illustration</li>
-        <li>Website design or development</li>
-        <li>Ongoing social-media management or content calendars</li>
-        <li>Book-length work</li>
+        <li>More interviews</li>
+        <li>Major new research beyond your material and basic fact-checking</li>
+        <li>Custom artwork</li>
+        <li>Website design or coding</li>
+        <li>Long-term social media work or content plans</li>
+        <li>Book-length projects</li>
         <li>More than one revision round</li>
-        <li>Guaranteed publication on Outside In Print</li>
+        <li>A promise that Outside In Print will publish the essay</li>
       </ul>
-      <p class="studio-exclusions__safety"><strong>Do not send confidential, classified, privileged, export-controlled, or restricted source material through the public inquiry form.</strong></p>
+      <p class="studio-exclusions__safety"><strong>Do not paste or attach confidential, classified, privileged, export-controlled, or restricted material. Outside In Print will tell you what source files it can accept and how to send them.</strong></p>
     </section>
 
     <section class="studio-section studio-faq" aria-labelledby="studio-faq-title">
       <header class="studio-section__header">
         <p class="studio-section__number">Questions</p>
-        <h2 id="studio-faq-title">Before you inquire.</h2>
+        <h2 id="studio-faq-title">Before you send an inquiry</h2>
       </header>
       <div class="studio-faq__list">
         <section>
-          <h3>Can Outside In Print write in my voice?</h3>
-          <p>Yes. The source material anchors the vocabulary, tone, and point of view. The final work remains clear enough for the intended reader.</p>
+          <h3>Can you write in my voice?</h3>
+          <p>Yes. We use your source material to match your words, tone, and point of view. We also make the essay clear for the people you want to reach.</p>
         </section>
         <section>
           <h3>Who publishes the essay?</h3>
-          <p>Outside In Print delivers publication-ready files for your use. Publication on outsideinprint.org is a separate editorial decision and is not part of the sprint.</p>
+          <p>We give you a complete finished file set. Outside In Print reserves the right to publish the essay on outsideinprint.org.</p>
         </section>
         <section>
           <h3>What happens to ownership?</h3>
-          <p>The written scope states the rights transferred after full payment. Outside In Print will not use the work as a public example without permission.</p>
+          <p>The written scope states which rights transfer to you after full payment. Outside In Print keeps the right to publish the finished essay on outsideinprint.org.</p>
         </section>
         <section>
           <h3>What if the project needs more research or another interview?</h3>
-          <p>Outside In Print identifies the added work before the project begins and quotes it separately.</p>
+          <p>We tell you about the extra work before the project starts and price it separately.</p>
         </section>
         <section>
-          <h3>Does preparing or sending the inquiry email reserve a production slot?</h3>
-          <p>No. A slot is reserved only when the written scope is accepted and the deposit is paid.</p>
+          <h3>Does this inquiry reserve a work slot?</h3>
+          <p>No. We reserve a slot only after you accept the written scope and pay the deposit.</p>
         </section>
       </div>
     </section>
 
     <section class="studio-section studio-conversion" aria-labelledby="studio-conversion-title">
       <div>
-        <p class="studio-section__number">The next step</p>
-        <h2 id="studio-conversion-title">Turn the material into the piece.</h2>
-        <p>Prepare a short inquiry email. Review it, send it, and Outside In Print will reply within {{ $replyDays }} business days with a fit decision and the next step.</p>
+        <p class="studio-section__number">Next step</p>
+        <h2 id="studio-conversion-title">Ready to turn your material into an essay?</h2>
+        <p>Use the form to prepare a short email. Review it and send it. We will reply within {{ $replyDays }} business days with either a fit decision or a request for more details. Then we will tell you what comes next.</p>
       </div>
       <a class="studio-cta" href="#studio-inquiry">Start a Publication Sprint</a>
     </section>
 
     <section id="studio-inquiry" class="studio-section studio-form" aria-labelledby="studio-inquiry-title">
       <header class="studio-form__header">
-        <p class="studio-section__number">Qualified inquiry</p>
+        <p class="studio-section__number">Inquiry form</p>
         <h2 id="studio-inquiry-title">Start a Publication Sprint</h2>
         {{- if $composerEnabled }}
-          <p id="studio-inquiry-intro">Describe the material and the result you need. The form prepares a structured email in your email application. It does not send anything by itself, and you should not attach or paste source files yet.</p>
+          <p id="studio-inquiry-intro">Tell us what you have and what you need. The form uses your answers to make a draft in your email app. It does not send the email for you. Do not attach or paste source files yet.</p>
         {{- else }}
           <p>The guided email composer is not available. Use the direct-email option below and do not attach or paste source files yet.</p>
         {{- end }}
@@ -252,6 +252,7 @@
           data-inquiry-email="{{ $email }}"
           data-inquiry-subject-prefix="{{ $subjectPrefix }}"
           data-current-rate="{{ $activePrice }}"
+          data-deposit-percent="{{ $depositPercent }}"
           data-offer-code="{{ $offerCode }}"
           data-source-page="{{ $sourcePage }}"
           data-analytics-event="studio_inquiry_email_prepare"
@@ -262,19 +263,20 @@
         >
           <div class="studio-form__grid">
             <label class="studio-form__field" for="studio-inquiry-name">
-              <span>Full name</span>
+              <span>Your full name</span>
               <input id="studio-inquiry-name" name="name" type="text" autocomplete="name" maxlength="100" required>
             </label>
             <label class="studio-form__field" for="studio-inquiry-email">
-              <span>Best reply email</span>
+              <span>Best email for a reply</span>
               <input id="studio-inquiry-email" name="email" type="email" autocomplete="email" maxlength="254" inputmode="email" autocapitalize="off" spellcheck="false" required>
             </label>
             <label class="studio-form__field studio-form__field--wide" for="studio-inquiry-website">
-              <span>Website or professional profile <small>Optional</small></span>
-              <input id="studio-inquiry-website" name="website" type="url" autocomplete="url" maxlength="300" inputmode="url" autocapitalize="off" spellcheck="false">
+              <span>Website or work profile <small>Optional</small></span>
+              <input id="studio-inquiry-website" name="website" type="url" autocomplete="url" maxlength="300" inputmode="url" autocapitalize="off" spellcheck="false" aria-describedby="studio-inquiry-website-note">
+              <small id="studio-inquiry-website-note">Include https:// at the start.</small>
             </label>
             <label class="studio-form__field" for="studio-inquiry-role">
-              <span>Which best describes you?</span>
+              <span>Which option best describes you?</span>
               <select id="studio-inquiry-role" name="role" required>
                 <option value="" selected disabled>Select one</option>
                 <option>Independent expert</option>
@@ -286,7 +288,7 @@
               </select>
             </label>
             <label class="studio-form__field" for="studio-inquiry-source-material">
-              <span>What material do you have?</span>
+              <span>What source material do you have?</span>
               <select id="studio-inquiry-source-material" name="source_material" required>
                 <option value="" selected disabled>Select one</option>
                 <option>Recorded interview or conversation</option>
@@ -298,42 +300,42 @@
               </select>
             </label>
             <label class="studio-form__field" for="studio-inquiry-source-size">
-              <span>Approximately how much source material is there?</span>
+              <span>How much source material do you have?</span>
               <input id="studio-inquiry-source-size" name="source_size" type="text" maxlength="80" aria-describedby="studio-inquiry-source-size-note" required>
-              <small id="studio-inquiry-source-size-note">Give a duration, page count, or approximate word count—for example, 45 minutes, 20 pages, or 8,000 words.</small>
+              <small id="studio-inquiry-source-size-note">Give the time, page count, or rough word count. For example: 45 minutes, 20 pages, or 8,000 words.</small>
             </label>
             <label class="studio-form__field" for="studio-inquiry-intended-reader">
-              <span>Who is the intended reader?</span>
+              <span>Who should read the essay?</span>
               <input id="studio-inquiry-intended-reader" name="intended_reader" type="text" maxlength="160" required>
             </label>
             <label class="studio-form__field studio-form__field--wide" for="studio-inquiry-project-subject">
-              <span>What is the proposed essay about?</span>
+              <span>What will the essay be about?</span>
               <input id="studio-inquiry-project-subject" name="project_subject" type="text" maxlength="160" required>
             </label>
             <label class="studio-form__field studio-form__field--wide" for="studio-inquiry-outcome">
-              <span>What should the finished essay help you do?</span>
+              <span>What do you want the essay to help you do?</span>
               <textarea id="studio-inquiry-outcome" name="desired_outcome" maxlength="800" rows="5" aria-describedby="studio-inquiry-outcome-note" required></textarea>
               <small id="studio-inquiry-outcome-note">Keep this answer short. Do not paste source material.</small>
             </label>
             <label class="studio-form__field studio-form__field--wide" for="studio-inquiry-timeline">
-              <span>When would you like to begin?</span>
+              <span>When do you want to start?</span>
               <select id="studio-inquiry-timeline" name="timeline" required>
                 <option value="" selected disabled>Select one</option>
                 <option>As soon as possible</option>
                 <option>Within 30 days</option>
-                <option>Later / exploring</option>
+                <option>Later / still planning</option>
               </select>
             </label>
           </div>
 
           <label class="studio-form__acknowledgement">
             <input name="source_safety_acknowledgement" type="checkbox" value="acknowledged" required>
-            <span>I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material, and I will wait for Outside In Print to request it and approve a transfer method before sending any.</span>
+            <span>I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material. I will wait for Outside In Print to ask for source files and tell me what it can accept and how to send it.</span>
           </label>
 
           <label class="studio-form__acknowledgement">
             <input name="commercial_acknowledgement" type="checkbox" value="acknowledged" required>
-            <span>I understand the {{ if $foundingActive }}founding-client{{ else }}standard{{ end }} rate is {{ $activePrice }}, a {{ $depositPercent }}% deposit is required to schedule, and sending an inquiry does not create a client relationship.</span>
+            <span>I understand that the {{ if $foundingActive }}founding-client{{ else }}standard{{ end }} rate is {{ $activePrice }}. A {{ $depositPercent }}% deposit is required to book the project. Sending an inquiry does not create a client relationship.</span>
           </label>
 
           <button class="studio-form__submit" type="submit" disabled>Prepare inquiry email</button>
@@ -350,10 +352,10 @@
           data-analytics-format="direct_email"
           data-analytics-slug="studio"
           data-analytics-path="/studio/"
-        >Email directly: {{ $email }}</a>
+        >Email {{ $email }} directly</a>
       </p>
       <noscript><p class="studio-form__noscript">The guided form requires JavaScript to prepare a draft. Use the <a href="{{ $fallbackHref }}">direct email link</a> instead.</p></noscript>
-      <p id="studio-inquiry-privacy" class="studio-form__privacy">The Studio form does not send your answers to Outside In Print or site analytics. Selecting “Prepare inquiry email” passes your answers to your configured email application or provider to create a draft; that application or provider may store or sync the draft under its own privacy practices. Outside In Print receives the information only if you send the message and it reaches {{ $email }}. Read the <a href="/privacy/">Privacy Policy</a>.</p>
+      <p id="studio-inquiry-privacy" class="studio-form__privacy">This form does not send your answers to Outside In Print or site analytics. When you select “Prepare inquiry email,” your answers go to your email app or provider to make a draft. That app or provider may save or sync the draft under its own privacy rules. Outside In Print gets your answers only if you send the email and it reaches {{ $email }}. Read the <a href="/privacy/">Privacy Policy</a>.</p>
     </section>
   </article>
 
