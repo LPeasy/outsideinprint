@@ -467,7 +467,7 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
   for (const expected of [
     'cadence = "Every Saturday"',
     'title = "Bob\'s Almanack"',
-    'contents = "Each Saturday\'s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting."',
+    'contents = "One compact Saturday email with new essays, original visuals, plus some cold hard facts. Free. No ads."',
     'price_promise = "Bob\'s Almanack will remain free. No ads, ever."',
     'button_label = "Subscribe free"',
     'prompt_label = "Get Bob\'s Almanack every Saturday — free, no ads."',

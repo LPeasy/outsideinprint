@@ -3261,7 +3261,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)newsletter-signup--home-ribbon.*?Every Saturday.*?Bob(?:''|&#39;)s Almanack.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting\..*?Subscribe free.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage Bob(?:''|&#39;)s Almanack\. Outside In Print does not sell or rent subscriber information\. Unsubscribe anytime\.'
+    Pattern = '(?s)newsletter-signup--home-ribbon.*?Every Saturday.*?Bob(?:''|&#39;)s Almanack.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?Subscribe free.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage Bob(?:''|&#39;)s Almanack\. Outside In Print does not sell or rent subscriber information\. Unsubscribe anytime\.'
     Message = 'expected the homepage Bob''s Almanack ribbon to state the canonical cadence, contents, permanent-free promise, sample, and privacy promise'
   },
   @{
@@ -4107,7 +4107,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?You(?:&rsquo;|&#8217;|\u2019)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?You(?:&rsquo;|&#8217;|\u2019)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown'
     Message = 'expected the sample Almanack issue to end with the canonical signup proposition and issue-exit analytics slot'
   },
   @{
@@ -4774,7 +4774,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
     Message = 'expected article aftermatter to place the full canonical Bob''s Almanack signup and article paths after the publication record'
   },
   @{
@@ -5537,7 +5537,7 @@ foreach ($articlePath in @(
     $uxIssues.Add("$articlePath => expected publication record, full Bob's Almanack signup, and article paths in that order")
   }
 
-  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?Each Saturday(?:''|&#39;)s issue usually brings four new essays or notes with cartoons.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown') {
+  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown') {
     $uxIssues.Add("$articlePath => expected the canonical Bob's Almanack cadence, contents, permanent-free, sample, and privacy proposition")
   }
 

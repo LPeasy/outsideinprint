@@ -184,7 +184,7 @@ foreach ($requiredConfig in @(
   'publication_tag = "new-publications"',
   'cadence = "Every Saturday"',
   'title = "Bob''s Almanack"',
-  'contents = "Each Saturday''s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting."',
+  'contents = "One compact Saturday email with new essays, original visuals, plus some cold hard facts. Free. No ads."',
   'price_promise = "Bob''s Almanack will remain free. No ads, ever."',
   'button_label = "Subscribe free"',
   'checkout_label = "Send me Bob''s Almanack every Saturday. It will remain free. No ads, ever."',
@@ -727,7 +727,7 @@ if ($marketingCheckboxes.Count -ne 18 -or @($marketingCheckboxes | Where-Object 
 }
 foreach ($requiredNewsletterText in @(
   'Send me Bob''s Almanack every Saturday. It will remain free. No ads, ever.',
-  'Each Saturday''s issue usually brings four new essays or notes with cartoons, a weekly virtue, one number, one public document, results, records, final bows, obituaries, and one piece worth reprinting.',
+  'One compact Saturday email with new essays, original visuals, plus some cold hard facts. Free. No ads.',
   'Read a sample issue',
   'Privacy details',
   'Your email goes to Buttondown to deliver and manage Bob''s Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime.',
