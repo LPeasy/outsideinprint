@@ -634,7 +634,7 @@ test("homepage browse band stays curated and replaces Welcome with Library", () 
   assert.match(css, /\.home-browse__item-title\{[\s\S]*font-size:14px;[\s\S]*line-height:1\.45;/);
 });
 
-test("homepage composition keeps Studio, the bookstore, motto, collections, signup ribbon, and archive navigation in order", () => {
+test("homepage composition leads from the Almanack signup into the bookstore, motto, collections, and archive navigation", () => {
   assert.match(homeFrontPage, /id="home-front-page-title"/);
   assert.match(homeFrontPage, /partial "home_selected\.html"/);
   assert.match(homeFrontPage, /home_front_page_copy\.html/);
@@ -722,15 +722,12 @@ test("homepage composition keeps Studio, the bookstore, motto, collections, sign
   assert.doesNotMatch(entryThreads, /Browse all collections/);
   assert.doesNotMatch(entryThreads, /showArchiveLink/);
 
-  assert.match(homeStudioOffer, /hugo\.Data\.studio/);
-  assert.match(homeStudioOffer, /You have the material\. We make it publishable\./);
-  assert.match(homeStudioOffer, /data-analytics-source-slot="homepage_studio_offer"/);
-  assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "home_studio_offer.html"'));
-  assert.ok(homepage.indexOf('partial "home_studio_offer.html"') < homepage.indexOf('partial "home_bookstore_spotlight.html"'));
+  assert.doesNotMatch(homepage, /partial "home_studio_offer\.html"/);
+  assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
+  assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('partial "home_bookstore_spotlight.html"'));
   assert.ok(homepage.indexOf('partial "home_bookstore_spotlight.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
   assert.ok(homepage.indexOf('partial "home_imprint_statement.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
-  assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
-  assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('class="home-browse'));
+  assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('class="home-browse'));
   assert.match(homepage, /newsletter-signup--home-ribbon/);
   assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
   assert.doesNotMatch(homepage, /"(?:eyebrow|title|dek|buttonLabel|note)"/);

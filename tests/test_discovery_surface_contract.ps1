@@ -93,7 +93,6 @@ foreach ($relativePath in $requiredImageFrontMatterFiles) {
 $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -Raw
 foreach ($requiredSnippet in @(
   'partial "home_front_page.html"',
-  'partial "home_studio_offer.html"',
   'partial "home_bookstore_spotlight.html"',
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
@@ -109,6 +108,7 @@ foreach ($requiredSnippet in @(
 }
 
 foreach ($retiredSnippet in @(
+  'partial "home_studio_offer.html"',
   'site.GetPage "/start-here"',
   'site.GetPage "/syd-and-oliver"',
   '"Feeling curious?"',
@@ -122,11 +122,10 @@ foreach ($retiredSnippet in @(
 
 $homepageOrder = @(
   'partial "home_front_page.html"',
-  'partial "home_studio_offer.html"',
+  'partial "newsletter_signup.html"',
   'partial "home_bookstore_spotlight.html"',
   'partial "home_imprint_statement.html"',
   'partial "home_selected_collections.html"',
-  'partial "newsletter_signup.html"',
   'class="home-browse'
 )
 

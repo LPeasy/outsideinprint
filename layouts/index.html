@@ -6,10 +6,6 @@
     (dict "page" (site.GetPage "/library") "label" "Library")
   }}
   {{ partial "home_front_page.html" . }}
-  {{ partial "home_studio_offer.html" . }}
-  {{ partial "home_bookstore_spotlight.html" . }}
-  {{ partial "home_imprint_statement.html" . }}
-  {{ partial "home_selected_collections.html" . }}
 
   {{ partial "newsletter_signup.html" (dict
     "page" .
@@ -17,6 +13,10 @@
     "sourceSlot" "homepage_bobs_almanack_offer"
     "anchorID" "bobs-almanack-signup"
   ) }}
+
+  {{ partial "home_bookstore_spotlight.html" . }}
+  {{ partial "home_imprint_statement.html" . }}
+  {{ partial "home_selected_collections.html" . }}
 
   <section class="home-browse home-browse--utility home-browse--home-curated page-shell page-shell--wide" aria-label="Archive navigation">
     <div class="home-browse__list">

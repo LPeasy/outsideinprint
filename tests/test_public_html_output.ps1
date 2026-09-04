@@ -3006,30 +3006,10 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
   }
 }
 
-$studioHomepageOrderPattern = if ($studioEnabled) {
-  '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-studio-offer.*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup--home-ribbon.*?home-browse'
-}
-else {
-  '(?s)data-home-front-page-region=(?:"lead"|lead).*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?newsletter-signup--home-ribbon.*?home-browse'
-}
-$studioHomepageOrderMessage = if ($studioEnabled) {
-  'expected the homepage to place Studio after the story grid and before the bookstore, manifesto, and lower-page signoff'
-}
-else {
-  'expected disabled Studio configuration to preserve the homepage story, bookstore, manifesto, and lower-page order'
-}
-$studioHomepageModulePattern = if ($studioEnabled) {
-  '(?s)<section[^>]*class=(?:"[^"]*\bhome-studio-offer\b[^"]*"|''[^'']*\bhome-studio-offer\b[^'']*''|[^>]*\bhome-studio-offer\b[^>]*)[^>]*>.*?You have the material\. We make it publishable\..*?' + [regex]::Escape($studioActiveRateLabel) + '.*?' + [regex]::Escape($studioActivePrice) + '.*?href=(?:"/studio/"|/studio/)[^>]*data-analytics-source-slot=(?:"homepage_studio_offer"|homepage_studio_offer)[^>]*>.*?Start a Publication Sprint.*?</section>'
-}
-else {
-  '\bhome-studio-offer\b'
-}
-$studioHomepageModuleMessage = if ($studioEnabled) {
-  'expected the homepage Studio module to expose the approved promise, active rate, CTA, and analytics slot'
-}
-else {
-  'expected disabled Studio configuration to omit the homepage Studio module'
-}
+$studioHomepageOrderPattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?newsletter-signup--home-ribbon.*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?home-browse'
+$studioHomepageOrderMessage = 'expected the homepage to place the Almanack signup after the story grid and before the bookstore, manifesto, collections, and archive navigation'
+$studioHomepageModulePattern = '\bhome-studio-offer\b'
+$studioHomepageModuleMessage = 'expected the retired Studio module to be absent from the homepage'
 
 $requiredUxChecks = @(
   @{
@@ -3062,7 +3042,7 @@ $requiredUxChecks = @(
     Path = 'public/index.html'
     Pattern = $studioHomepageModulePattern
     Message = $studioHomepageModuleMessage
-    ShouldNotMatch = -not $studioEnabled
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
