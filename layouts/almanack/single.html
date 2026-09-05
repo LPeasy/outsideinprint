@@ -15,6 +15,7 @@
   {{ $records := index $margin "records" | default (slice) }}
   {{ $finalBows := index $margin "final_bows" | default (slice) }}
   {{ $obituaries := index $margin "obituaries" | default (slice) }}
+  {{ $campaign := .Params.campaign | default (dict) }}
 
   <article class="almanack-issue page-shell page-shell--wide" aria-labelledby="almanack-title">
     <header class="almanack-masthead">
@@ -31,6 +32,24 @@
       <blockquote>{{ .Params.opening_quote }}</blockquote>
       <figcaption>~ {{ .Params.opening_quote_attribution }}</figcaption>
     </figure>
+
+    {{ with $campaign }}
+      <section class="almanack-campaign" aria-labelledby="almanack-campaign-title">
+        <p class="almanack-section-label">{{ .label | default "September campaign" }}</p>
+        <h2 id="almanack-campaign-title">{{ .headline }}</h2>
+        <p>{{ .message }}</p>
+        {{ with .cta_url }}
+          <p class="almanack-campaign__action"><a href="{{ . }}">{{ $campaign.cta_label | default "Join Bob's Almanack" }} &rarr;</a></p>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ with .Params.bob_note }}
+      <section class="almanack-note" aria-labelledby="almanack-note-title">
+        <p class="almanack-section-label" id="almanack-note-title">Note from Bob</p>
+        <p>{{ . }}</p>
+      </section>
+    {{ end }}
 
     <div class="almanack-columns">
       <div class="almanack-main">
@@ -195,7 +214,8 @@
         {{ $worthHref = $worthURL | relURL }}
       {{ end }}
       <h2><a href="{{ $worthHref }}">{{ $worth.title }}</a></h2>
-      <p>{{ $worth.description }}</p>
+      <p class="almanack-worth__deck">{{ $worth.description }}</p>
+      {{ with $worth.blurb }}<p class="almanack-worth__blurb">{{ . }}</p>{{ end }}
     </section>
 
     <figure class="almanack-quote almanack-quote--closing">

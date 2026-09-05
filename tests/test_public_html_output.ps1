@@ -4250,7 +4250,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?August 29, 2026.*?In the Margins.*?Number.*?Document.*?Navy Readiness: Actions Needed to Address Costly Attack Submarine Maintenance Challenges.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?September 5, 2026.*?In the Margins.*?Number.*?Document.*?DHS Contracts: Reported Potential Cost Avoidance from Terminations Will Not Fully Materialize.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{

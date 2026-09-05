@@ -8828,6 +8828,35 @@ html[data-theme="dark"] body.layout-bobs-almanack .site-footer__description{
   font-size:1.08rem;
   line-height:1.72;
 }
+.almanack-campaign{
+  max-width:58rem;
+  margin:0 auto 1.7rem;
+  padding:1.15rem 1.25rem 1.2rem;
+  border:1px solid rgba(23,21,19,.28);
+  border-top:4px double rgba(23,21,19,.58);
+  background:#eee3d4;
+  text-align:center;
+}
+.almanack-campaign h2{
+  margin:.35rem 0 0;
+  color:#171513;
+  font-family:var(--font-display);
+  font-size:2rem;
+  line-height:1.12;
+}
+.almanack-campaign > p:not(.almanack-section-label):not(.almanack-campaign__action){
+  max-width:42rem;
+  margin:.6rem auto 0;
+  color:#342f2a;
+  line-height:1.62;
+}
+.almanack-campaign__action{
+  margin:.8rem 0 0;
+  font-family:var(--font-ui);
+  font-size:.82rem;
+  font-weight:800;
+  text-transform:uppercase;
+}
 .almanack-columns{
   display:grid;
   grid-template-columns:minmax(0, 1fr) 18rem;
@@ -8907,6 +8936,11 @@ html[data-theme="dark"] body.layout-bobs-almanack .site-footer__description{
   margin:.55rem 0 0;
   color:#3a342f;
   line-height:1.66;
+}
+.almanack-worth__blurb{
+  max-width:48rem;
+  margin-top:1rem !important;
+  font-size:1.03rem;
 }
 .almanack-read-link{
   display:inline-block;
@@ -9105,6 +9139,7 @@ html[data-theme="dark"] .almanack-margin h3{
   color:#d5be96;
 }
 html[data-theme="dark"] .almanack-masthead h1,
+html[data-theme="dark"] .almanack-campaign h2,
 html[data-theme="dark"] .almanack-lead__body h2,
 html[data-theme="dark"] .almanack-secondary-card h3,
 html[data-theme="dark"] .almanack-worth h2,
@@ -9116,6 +9151,7 @@ html[data-theme="dark"] .almanack-margin__figure{
 html[data-theme="dark"] .almanack-subtitle,
 html[data-theme="dark"] .almanack-masthead__meta,
 html[data-theme="dark"] .almanack-note p:last-child,
+html[data-theme="dark"] .almanack-campaign > p:not(.almanack-section-label):not(.almanack-campaign__action),
 html[data-theme="dark"] .almanack-lead__body p,
 html[data-theme="dark"] .almanack-secondary-card p,
 html[data-theme="dark"] .almanack-worth p,
@@ -9139,6 +9175,7 @@ html[data-theme="dark"] .almanack-quote figcaption{
   color:#d5be96;
 }
 html[data-theme="dark"] .almanack-secondary-card,
+html[data-theme="dark"] .almanack-campaign,
 html[data-theme="dark"] .almanack-margin{
   border-color:var(--border-soft);
   background:var(--bg-surface);
