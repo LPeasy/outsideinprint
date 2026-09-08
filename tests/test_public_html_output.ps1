@@ -1074,7 +1074,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
-    Description = "I’m Robert V. Ussley, author, designer, developer, and publisher of Outside In Print. I publish independent essays, dialogues, reported analysis, and original books here."
+    Description = "I’m Robert V. Ussley, author, designer, developer, and publisher of Outside In Print. I publish independent essays, dialogues, reported analysis, and original books …"
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
