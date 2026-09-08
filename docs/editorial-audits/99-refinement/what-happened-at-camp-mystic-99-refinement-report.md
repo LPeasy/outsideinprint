@@ -77,3 +77,26 @@ Decision: PASS
 - Version, edition, and revision-history update specified: Clear.
 
 Final state: `99_READY`
+
+## September 8, 2026 Correction Review
+
+Revision: `2.3` / `Eighth web edition`
+
+Decision: PASS
+
+Scope: Two factual corrections, their public revision-history entry, and this follow-up record. The original publication date, timeline, images, disclosure, and Studio sample note are unchanged. This is a targeted follow-up to the review above, not a new full-essay source audit.
+
+- Correct the opening to overnight July 3–4, 2025. The linked Texas legislative report identifies the July 3–4 storm and the 1:14 a.m. July 4 warning (p. 105, findings C-8 through C-12); its detailed chronology remains linked in the essay. Remove the unsupported fireworks scene rather than relocate it to another date.
+- Replace the absolute floodway prohibition with the conditional development standard in [44 CFR 60.3(d)(3)–(4), official 2025 CFR, p. 138](https://www.govinfo.gov/content/pkg/CFR-2025-title44-vol1/pdf/CFR-2025-title44-vol1-sec60-3.pdf#page=5). Retain the geographic qualifier for the no-rise analysis and the separate FEMA-approved conditional revision path. Do not infer whether any Camp Mystic structure complied with permitting requirements.
+
+| Test | Result | Evidence |
+| --- | --- | --- |
+| Evidence | PASS | The corrected dates follow the legislative record; the development conditions link directly to the federal rule. |
+| Logic | PASS | The opening now precedes the pre-dawn timeline, and floodway designation no longer implies that all construction is prohibited. |
+| Incentives | PASS | The corrections do not invent private motives or alter the existing warning-to-action analysis. |
+| Tradeoffs | PASS | The explanation preserves floodway protection while acknowledging conditional development and permitting. |
+| Consequences | PASS | Flood-carrying capacity remains the mechanism; the no-rise condition identifies the downstream water-level concern. |
+| Uncertainty | PASS | The unverified fireworks scene is removed; the rule explanation makes no site-specific compliance finding. |
+| Institutional Behavior | PASS | Federal review and community permitting are distinguished, while the existing camp-response analysis and author disclosure remain unchanged. |
+
+Final state for this correction: `99_READY`

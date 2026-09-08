@@ -9,8 +9,8 @@ featured_image: "medium/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5d
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
-version: "2.2"
-edition: "Seventh web edition"
+version: "2.3"
+edition: "Eighth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-17"
@@ -30,6 +30,9 @@ revision_history:
   - version: "2.2"
     date: "2026-09-03"
     note: "Added the Studio sample production note and direct inquiry path; no substantive essay text change."
+  - version: "2.3"
+    date: "2026-09-08"
+    note: "Corrected the opening to overnight July 3–4, removed the unsupported fireworks detail, and clarified that federal floodway rules restrict development rather than prohibit all construction."
 pdf: "/pdfs/what-happened-at-camp-mystic.pdf"
 featured: false
 studio_sample:
@@ -48,9 +51,8 @@ medium_source_url: "https://medium.com/@lawtonperret/what-happened-at-camp-mysti
 
 > ***Rescuer, CNN interview***
 
-On the night of July 4, while
-fireworks lit up the Texas Hill Country, a dangerous storm stalled over
-the Guadalupe River Basin.
+Overnight on July 3–4, 2025, a dangerous storm stalled over the Guadalupe
+River Basin.
 
 > By sunrise, it turned deadly.
 
@@ -148,10 +150,14 @@ of rain in 48 hours**.
 In fact, several buildings sat directly inside a ***regulatory
 floodway*.**
 
-> **(A regulatory floodway is a no-build zone next to a river where
-> water needs room to flow during a flood ~ putting anything there, like
-> cabins or roads, can make floods worse and more dangerous for everyone
-> nearby.)**
+> **(A regulatory floodway is reserved to carry floodwater. Under
+> [federal rules](https://www.govinfo.gov/content/pkg/CFR-2025-title44-vol1/pdf/CFR-2025-title44-vol1-sec60-3.pdf#page=5),
+> new construction, fill, and other development generally require
+> hydrologic and hydraulic analysis showing no increase in base-flood
+> levels within the community, along with applicable permits. Development
+> that would raise those levels requires a separate, FEMA-approved
+> conditional map and floodway revision before the community may permit
+> it.)**
 
 > Geography only tells part of the story.
 
