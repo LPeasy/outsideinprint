@@ -5387,7 +5387,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     if ((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $imageTag -Name 'src')) -cne $expectedSource) {
       $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must use its existing featured_image '$featuredImage'")
     }
-    if ((Get-AttributeValue -Tag $imageTag -Name 'alt') -cne '' -or
+    if ($imageTag -notmatch '(?i)\salt(?:\s|=|/?>)' -or
+        -not [string]::IsNullOrEmpty((Get-AttributeValue -Tag $imageTag -Name 'alt')) -or
         (Get-AttributeValue -Tag $imageTag -Name 'loading') -cne 'lazy' -or
         (Get-AttributeValue -Tag $imageTag -Name 'decoding') -cne 'async') {
       $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must use empty alt text, lazy loading, and async decoding")
