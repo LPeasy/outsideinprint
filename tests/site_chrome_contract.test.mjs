@@ -295,9 +295,9 @@ test("Jack Stratton modern bio preserves the complete localized visual sequence"
 });
 
 test("Studio samples retain reader-ready copy and public revision records", () => {
-  assert.match(campMysticEssay, /^version: "2\.2"$/m);
-  assert.match(campMysticEssay, /^edition: "Seventh web edition"$/m);
-  assert.match(campMysticEssay, /^  - version: "2\.2"$/m);
+  assert.match(campMysticEssay, /^version: "2\.3"$/m);
+  assert.match(campMysticEssay, /^edition: "Eighth web edition"$/m);
+  assert.match(campMysticEssay, /^  - version: "2\.3"$/m);
   assert.match(campMysticEssay, /^### July 4: Warning, Rising Water, and Evacuation$/m);
   assert.match(campMysticEssay, /^### Further Reading$/m);
   assert.match(campMysticEssay, /or all\s*> of the above\?/);
