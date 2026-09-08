@@ -143,6 +143,23 @@ foreach ($snippet in $homepageOrder) {
   $lastIndex = $currentIndex
 }
 
+$homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_selected.html') -Raw -Encoding utf8
+foreach ($requiredSnippet in @(
+  'sort (sort $frontPagePages "Title" "asc") "Date" "desc"',
+  '$hero := $latest',
+  '"/essays/jack-stratton-and-the-vulfpeck-model/"',
+  '"/essays/what-is-risk-a-four-part-framework/"',
+  '"syd-and-oliver-dialogues"',
+  'not (in $selectedKeys $candidate.RelPermalink)'
+)) {
+  if ($homeSelectionTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected the homepage editorial selection contract to preserve: $requiredSnippet"
+  }
+}
+if ($homeSelectionTemplate -match 'Lastmod|lt \(len \$secondary\) 4') {
+  throw 'Expected homepage selection to use publication dates and the three editorial slots, not revision dates or four recent fallback cards.'
+}
+
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',

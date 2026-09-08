@@ -55,8 +55,11 @@ function selectHomepageLongform(pages) {
   }
 
   const secondary = [];
-  for (const candidate of frontPagePages) {
-    if (secondary.length >= 4 || seen.has(candidate.relPermalink)) continue;
+  const profile = frontPagePages.find((page) => page.relPermalink === "/essays/jack-stratton-and-the-vulfpeck-model/");
+  const dialogue = frontPagePages.find((page) => page.kind === "dialogue" && page.collections?.includes("syd-and-oliver-dialogues") && !seen.has(page.relPermalink));
+  const risk = frontPagePages.find((page) => page.relPermalink === "/essays/what-is-risk-a-four-part-framework/");
+  for (const candidate of [profile, dialogue, risk]) {
+    if (!candidate || seen.has(candidate.relPermalink)) continue;
     secondary.push(candidate);
     selected.push(candidate);
     seen.add(candidate.relPermalink);
@@ -100,7 +103,7 @@ function parseFrontMatter(filePath) {
   return data;
 }
 
-test("homepage partial keeps one lead and fills the right rail with newest essays, affirmations, and dialogues", () => {
+test("homepage partial keeps the newest lead with the profile, dialogue, and risk supporting selections", () => {
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const frontPageCopySource = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
@@ -121,10 +124,14 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.match(source, /\{\{ \$kind := partial "archive\/longform-kind\.html" \. \}\}/);
   assert.match(source, /\{\{ if in \(slice "essay" "affirmation" "dialogue"\) \$kind \}\}/);
   assert.match(source, /sort \(sort \$frontPagePages "Title" "asc"\) "Date" "desc"/);
+  assert.doesNotMatch(source, /Lastmod/);
   assert.match(source, /\{\{ \$hero := \$latest \}\}/);
   assert.match(source, /\{\{ \$showLatestSlot := false \}\}/);
   assert.match(source, /range \$candidate := \$frontPagePages/);
-  assert.match(source, /lt \(len \$secondary\) 4/);
+  assert.match(source, /\/essays\/jack-stratton-and-the-vulfpeck-model\//);
+  assert.match(source, /\/essays\/what-is-risk-a-four-part-framework\//);
+  assert.match(source, /syd-and-oliver-dialogues/);
+  assert.doesNotMatch(source, /lt \(len \$secondary\) 4/);
   assert.match(source, /home_selected_keys/);
   assert.match(source, /"pages" \$selectedPages/);
   assert.match(source, /"keys" \$selectedKeys/);
@@ -262,18 +269,16 @@ test("homepage partial keeps one lead and fills the right rail with newest essay
   assert.doesNotMatch(thinkOutsideEntry, /essay:/);
 });
 
-test("latest essay, affirmation, or dialogue leads while the right rail uses the next newest longform pages", () => {
+test("the latest publication leads and supporting selections keep the approved order", () => {
   const pages = [
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") },
-    { relPermalink: "/essays/hero/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
-    { relPermalink: "/essays/expired/", kind: "essay", draft: false, date: new Date("2026-02-25"), homepage_featured: true, homepage_featured_until: "2026-04-01" },
-    { relPermalink: "/essays/core-a/", kind: "essay", draft: false, date: new Date("2026-02-20") },
-    { relPermalink: "/essays/core-b/", kind: "essay", draft: false, date: new Date("2026-02-10") },
-    { relPermalink: "/essays/core-c/", kind: "essay", draft: false, date: new Date("2026-02-05") },
-    { relPermalink: "/essays/core-d/", kind: "essay", draft: false, date: new Date("2026-02-01") },
-    { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", draft: false, date: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/what-is-risk-a-four-part-framework/", kind: "essay", draft: false, date: new Date("2025-08-29") },
+    { relPermalink: "/essays/jack-stratton-and-the-vulfpeck-model/", kind: "essay", draft: false, date: new Date("2025-05-28") },
+    { relPermalink: "/syd-and-oliver/older-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-03-20") },
+    { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-01") },
+    { relPermalink: "/essays/another-dialogue/", kind: "dialogue", collections: ["another-collection"], draft: false, date: new Date("2026-04-01T12:00:00Z") },
     { relPermalink: "/essays/i-do-what-i-say/", kind: "affirmation", draft: false, date: new Date("2026-04-02") },
-    { relPermalink: "/essays/draft/", kind: "essay", draft: true, date: new Date("2026-04-02"), homepage_featured: true, homepage_featured_until: "2026-04-30" }
+    { relPermalink: "/syd-and-oliver/draft/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: true, date: new Date("2026-04-03") }
   ];
 
   const result = selectHomepageLongform(pages);
@@ -281,48 +286,53 @@ test("latest essay, affirmation, or dialogue leads while the right rail uses the
   assert.equal(result.hero?.relPermalink, "/essays/i-do-what-i-say/");
   assert.equal(result.latest?.relPermalink, "/essays/i-do-what-i-say/");
   assert.equal(result.showLatestSlot, false);
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/syd-and-oliver/latest-dialogue/", "/essays/latest/", "/essays/expired/", "/essays/core-a/"]);
-  assert.equal(result.secondary.length, 4);
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
+    "/essays/jack-stratton-and-the-vulfpeck-model/",
+    "/syd-and-oliver/latest-dialogue/",
+    "/essays/what-is-risk-a-four-part-framework/"
+  ]);
+  assert.equal(result.secondary.length, 3);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
 });
 
-test("current cartoon essay does not override the latest essay lead", () => {
+test("a dialogue lead advances the supporting dialogue to the next publication without duplication", () => {
   const pages = [
-    { relPermalink: "/essays/the-easement-under-the-lake/", kind: "essay", draft: false, date: new Date("2026-05-22") },
-    { relPermalink: "/essays/id-required/", kind: "essay", draft: false, date: new Date("2026-05-19") },
-    { relPermalink: "/essays/consent-from-permission-to-sanctity/", kind: "essay", draft: false, date: new Date("2026-05-18"), homepage_featured: true, homepage_featured_until: "2026-05-31" },
-    { relPermalink: "/essays/from-variety-to-virtue/", kind: "essay", draft: false, date: new Date("2026-05-17") },
-    { relPermalink: "/essays/the-ash-pond-under-the-cloud/", kind: "essay", draft: false, date: new Date("2026-05-16") }
+    { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-03") },
+    { relPermalink: "/syd-and-oliver/previous-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-01") },
+    { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-04-02") },
+    { relPermalink: "/essays/what-is-risk-a-four-part-framework/", kind: "essay", draft: false, date: new Date("2025-08-29") },
+    { relPermalink: "/essays/jack-stratton-and-the-vulfpeck-model/", kind: "essay", draft: false, date: new Date("2025-05-28") }
   ];
 
-  const result = selectHomepageLongform(pages, "2026-05-20", "/essays/id-required/");
+  const result = selectHomepageLongform(pages);
 
-  assert.equal(result.hero?.relPermalink, "/essays/the-easement-under-the-lake/");
-  assert.equal(result.latest?.relPermalink, "/essays/the-easement-under-the-lake/");
+  assert.equal(result.hero?.relPermalink, "/syd-and-oliver/latest-dialogue/");
+  assert.equal(result.latest?.relPermalink, "/syd-and-oliver/latest-dialogue/");
   assert.equal(result.showLatestSlot, false);
   assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
-    "/essays/id-required/",
-    "/essays/consent-from-permission-to-sanctity/",
-    "/essays/from-variety-to-virtue/",
-    "/essays/the-ash-pond-under-the-cloud/"
+    "/essays/jack-stratton-and-the-vulfpeck-model/",
+    "/syd-and-oliver/previous-dialogue/",
+    "/essays/what-is-risk-a-four-part-framework/"
   ]);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
 });
 
-test("active feature flags do not override newest essay lead", () => {
+test("revision dates and feature flags do not override original publication order", () => {
   const pages = [
-    { relPermalink: "/essays/older/", kind: "essay", draft: false, date: new Date("2026-01-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
-    { relPermalink: "/essays/newer/", kind: "essay", draft: false, date: new Date("2026-02-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/essays/older/", kind: "essay", draft: false, date: new Date("2026-01-01"), lastmod: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
+    { relPermalink: "/syd-and-oliver/older/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-01-01"), lastmod: new Date("2026-04-01") },
+    { relPermalink: "/syd-and-oliver/newer/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-02-01") },
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") }
   ];
 
   const result = selectHomepageLongform(pages);
 
-  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/latest/", "/essays/newer/", "/essays/older/"]);
+  assert.equal(result.hero?.relPermalink, "/essays/latest/");
+  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/syd-and-oliver/newer/"]);
 });
 
-test("recent fallback remains stable when no active feature exists", () => {
+test("unavailable supporting selections stay absent instead of becoming unrelated recent pieces", () => {
   const pages = [
     { relPermalink: "/essays/a/", kind: "essay", draft: false, date: new Date("2026-03-03"), homepage_featured: true, homepage_featured_until: "2026-03-31" },
     { relPermalink: "/essays/b/", kind: "essay", draft: false, date: new Date("2026-03-02") },
@@ -332,7 +342,8 @@ test("recent fallback remains stable when no active feature exists", () => {
 
   const result = selectHomepageLongform(pages);
 
-  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/a/", "/essays/b/", "/essays/c/", "/essays/d/"]);
+  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/a/"]);
+  assert.deepEqual(result.secondary, []);
 });
 
 test("front page stays structurally primary to collections and newsletter follow-up", () => {

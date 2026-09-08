@@ -30,14 +30,26 @@
   {{ $selectedKeys = $selectedKeys | append $latest.RelPermalink }}
 {{ end }}
 
-{{ range $candidate := $frontPagePages }}
-  {{ if lt (len $secondary) 4 }}
-    {{ $key := $candidate.RelPermalink }}
-    {{ if not (in $selectedKeys $key) }}
-      {{ $secondary = $secondary | append $candidate }}
-      {{ $selectedPages = $selectedPages | append $candidate }}
-      {{ $selectedKeys = $selectedKeys | append $key }}
+{{/* Keep the latest publication as the lead; select the supporting reading in editorial order. */}}
+{{ range $slot := slice "/essays/jack-stratton-and-the-vulfpeck-model/" "latest-syd-and-oliver" "/essays/what-is-risk-a-four-part-framework/" }}
+  {{ $choice := false }}
+  {{ range $candidate := $frontPagePages }}
+    {{ if and (not $choice) (not (in $selectedKeys $candidate.RelPermalink)) }}
+      {{ if eq $slot "latest-syd-and-oliver" }}
+        {{ $kind := partial "archive/longform-kind.html" $candidate }}
+        {{ $collections := partial "collections/normalize-values.html" (dict "value" $candidate.Params.collections) }}
+        {{ if and (eq $kind "dialogue") (in $collections "syd-and-oliver-dialogues") }}
+          {{ $choice = $candidate }}
+        {{ end }}
+      {{ else if eq $candidate.RelPermalink ($slot | relURL) }}
+        {{ $choice = $candidate }}
+      {{ end }}
     {{ end }}
+  {{ end }}
+  {{ with $choice }}
+    {{ $secondary = $secondary | append . }}
+    {{ $selectedPages = $selectedPages | append . }}
+    {{ $selectedKeys = $selectedKeys | append .RelPermalink }}
   {{ end }}
 {{ end }}
 

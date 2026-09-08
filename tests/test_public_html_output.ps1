@@ -3187,11 +3187,6 @@ $requiredUxChecks = @(
 
   @{
     Path = 'public/index.html'
-    Pattern = 'essay-cartoon-thumb'
-    Message = 'expected linked homepage essay cards to expose cartoon thumbnail links'
-  },
-  @{
-    Path = 'public/index.html'
     Pattern = 'data-essay-cartoon-lightbox'
     Message = 'expected essay cartoon thumbnails to mount the shared fullscreen lightbox'
   },
@@ -3208,20 +3203,10 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'data-essay-cartoon-lightbox-trigger'
-    Message = 'expected essay cartoon thumbnails to open in-page fullscreen instead of navigating directly'
-  },
-  @{
-    Path = 'public/index.html'
     Pattern = '(?s)data-essay-cartoon-lightbox-gallery.*?View in gallery'
     Message = 'expected the essay cartoon fullscreen lightbox to expose a View in gallery action'
   },
 
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)data-analytics-source-slot="?homepage_selected_core"?.*?\bessay-cartoon-thumb--home\b.*?data-essay-cartoon-lightbox-trigger.*?data-cartoon-slug="?[^"\s>]+"?.*?data-gallery="?https://outsideinprint\.org/gallery/\?cartoon=[^"\s>]+"?'
-    Message = 'expected a homepage essay-card cartoon thumbnail to open the matching gallery-backed lightbox'
-  },
   @{
     Path = 'public/index.html'
     Pattern = 'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below\.'
@@ -5300,6 +5285,50 @@ $homeBookstoreTargets = @(
 
 if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeIndexHtml = [string]$targetPageHtml['public/index.html']
+  $homeAnchors = @(Get-OpenTags -Html $homeIndexHtml -TagName 'a')
+  $homeLeadPaths = @($homeAnchors | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_selected_hero'
+  } | ForEach-Object { Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href') })
+  $homeSupportingPaths = @($homeAnchors | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_selected_core'
+  } | ForEach-Object { Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href') })
+  if ($homeLeadPaths.Count -ne 1) {
+    $uxIssues.Add("public/index.html => expected one latest-publication lead, found $($homeLeadPaths.Count)")
+  }
+
+  $publishedDialogues = @(foreach ($dialogueFile in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/essays/dialogues') -File -Filter '*.md') {
+    $dialoguePath = Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'url'
+    if ([string]::IsNullOrWhiteSpace($dialoguePath) -or $homeLeadPaths -contains $dialoguePath) { continue }
+    if (-not (Test-Path -LiteralPath (Join-Path $SiteDir ($dialoguePath.Trim('/') + '/index.html')) -PathType Leaf)) { continue }
+    if ((Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'draft') -ceq 'true') { continue }
+    [pscustomobject]@{
+      Path = $dialoguePath
+      Date = ConvertTo-OipDateTimeOffset -Value (Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'date')
+      Title = Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'title'
+    }
+  })
+  $latestSupportingDialogue = @($publishedDialogues | Sort-Object @{ Expression = { $_.Date }; Descending = $true }, @{ Expression = { $_.Title }; Ascending = $true } | Select-Object -First 1)
+  $expectedSupportingPaths = @(
+    '/essays/jack-stratton-and-the-vulfpeck-model/'
+    if ($latestSupportingDialogue.Count -gt 0) { $latestSupportingDialogue[0].Path }
+    '/essays/what-is-risk-a-four-part-framework/'
+  ) | Where-Object { $homeLeadPaths -notcontains $_ }
+  if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
+    $uxIssues.Add("public/index.html => expected profile, latest available dialogue, and risk framework in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
+  }
+  $homeStoryPaths = @($homeLeadPaths) + @($homeSupportingPaths)
+  if (@($homeStoryPaths | Select-Object -Unique).Count -ne $homeStoryPaths.Count) {
+    $uxIssues.Add('public/index.html => the lead and supporting selections must not repeat a piece')
+  }
+  $selectedCartoons = @(Get-PublishedCartoonEntries -RepoRoot $repoRoot | Where-Object {
+    ($_.PSObject.Properties.Name -contains 'essay') -and $homeSupportingPaths -contains $_.essay
+  })
+  foreach ($selectedCartoon in $selectedCartoons) {
+    $thumbnailPattern = '<button\b(?=[^>]*\bdata-essay-cartoon-lightbox-trigger\b)(?=[^>]*data-cartoon-slug=(?:"' + [regex]::Escape($selectedCartoon.slug) + '"|' + [regex]::Escape($selectedCartoon.slug) + ')(?:\s|>))[^>]*>'
+    if ($homeIndexHtml -notmatch $thumbnailPattern) {
+      $uxIssues.Add("public/index.html => selected story with cartoon '$($selectedCartoon.slug)' must retain its lightbox thumbnail")
+    }
+  }
   $bookstoreSectionMatch = [regex]::Match($homeIndexHtml, '(?is)<section\b(?=[^>]*\bhome-bookstore\b)[^>]*>.*?</section>')
   if (-not $bookstoreSectionMatch.Success) {
     $uxIssues.Add('public/index.html => expected a rendered homepage bookstore section')
