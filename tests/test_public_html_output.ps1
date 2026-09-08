@@ -1074,7 +1074,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
-    Description = 'A digital imprint for disciplined public judgment: essays, dialogues, reports, and working papers built from evidence, incentives, tradeoffs, and consequences.'
+    Description = "I’m Robert V. Ussley, author, designer, developer, and publisher of Outside In Print. I publish independent essays, dialogues, reported analysis, and original books here."
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -3124,6 +3124,11 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
+    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?editorial-cartoon__trigger.*?</article>\s*<div\b[^>]*data-home-front-page-region=(?:"secondary"|secondary).*?data-home-front-page-region=(?:"extras"|extras).*?data-home-cartoon-recent.*?home-almanack-divider.*?home-almanack--lead'
+    Message = 'expected homepage document order to keep the lead illustration before the supporting stories, recent illustrations, and Almanack'
+  },
+  @{
+    Path = 'public/index.html'
     Pattern = 'home-recent-work'
     Message = 'expected the homepage not to render the retired Recent Work module'
     ShouldNotMatch = $true
@@ -3768,8 +3773,24 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = 'Imprint Record'
-    Message = 'expected the about page to expose the imprint-record opening surface'
+    Pattern = '(?s)Behind Outside In Print.*?<h2\b[^>]*>Independent writing, made and published by one person\.</h2>.*?I(?:\u2019|&rsquo;|&#8217;)m Robert V\. Ussley, author, designer, developer, and publisher of Outside In Print\. I publish independent essays, dialogues, reported analysis, and original books here\.'
+    Message = 'expected About to open with the approved personal introduction and one-person publication context'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = '(?s)Explore <a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>my writing</a> or <a\b[^>]*href="?(?:https://outsideinprint\.org)?/shop/"?[^>]*>browse the books</a>\..*?<h3\b[^>]*>At a glance</h3>.*?<dt\b[^>]*>Author</dt>'
+    Message = 'expected About to offer direct writing and bookstore links before the plain-language publication record'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = '(?s)I built Outside In Print for writing worth returning to\. Published pieces remain available in a searchable archive, with dated editions and revision notes when they change\..*?Outside In Print is my independent imprint\. I write, design, develop, and publish the site myself\.'
+    Message = 'expected About body copy to explain the durable archive and sole ownership in first person'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = 'Imprint Record|Current File|Principal Byline|principal authorial byline|essay corpus|without pretending to be a large editorial institution'
+    Message = 'expected About to omit the retired institutional opening and ownership wording'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/about/index.html'
@@ -5285,6 +5306,12 @@ $homeBookstoreTargets = @(
 
 if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeIndexHtml = [string]$targetPageHtml['public/index.html']
+  $homeRegions = @([regex]::Matches($homeIndexHtml, '<(?:article|div)\b[^>]*\bdata-home-front-page-region\s*=[^>]*>', 'IgnoreCase') | ForEach-Object {
+    Get-AttributeValue -Tag $_.Value -Name 'data-home-front-page-region'
+  })
+  if (($homeRegions -join '|') -cne 'lead|secondary|extras') {
+    $uxIssues.Add("public/index.html => expected exactly one lead, secondary, and extras region in document order; found '$($homeRegions -join ', ')'")
+  }
   $homeAnchors = @(Get-OpenTags -Html $homeIndexHtml -TagName 'a')
   $homeLeadPaths = @($homeAnchors | Where-Object {
     (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_selected_hero'

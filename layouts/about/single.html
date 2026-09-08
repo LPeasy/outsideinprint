@@ -9,20 +9,21 @@
       <div class="section-front__body page-shell page-shell--wide">
         <section class="about-route__artifact" aria-labelledby="about-imprint-record-title">
           <div class="about-route__artifact-panel">
-            <p class="about-route__artifact-kicker">Imprint Record</p>
-            <h2 id="about-imprint-record-title" class="about-route__artifact-title">A digital imprint built for durable reading on the open web.</h2>
+            <p class="about-route__artifact-kicker">Behind Outside In Print</p>
+            <h2 id="about-imprint-record-title" class="about-route__artifact-title">Independent writing, made and published by one person.</h2>
             {{ with .Params.description }}<p class="about-route__artifact-dek">{{ . }}</p>{{ end }}
+            <p class="about-route__artifact-dek">Explore <a href="{{ "authors/robert-v-ussley/" | absURL }}">my writing</a> or <a href="{{ "shop/" | absURL }}">browse the books</a>.</p>
           </div>
 
           <section class="about-route__record" aria-labelledby="about-current-file-title">
-            <h3 id="about-current-file-title" class="about-route__record-title">Current File</h3>
+            <h3 id="about-current-file-title" class="about-route__record-title">At a glance</h3>
             <dl class="about-route__record-rows">
               <div class="about-route__record-row">
                 <dt class="about-route__record-label">Publisher</dt>
                 <dd class="about-route__record-value">Outside In Print</dd>
               </div>
               <div class="about-route__record-row">
-                <dt class="about-route__record-label">Principal Byline</dt>
+                <dt class="about-route__record-label">Author</dt>
                 <dd class="about-route__record-value"><a href="{{ "authors/robert-v-ussley/" | absURL }}">Robert V. Ussley</a></dd>
               </div>
               <div class="about-route__record-row">

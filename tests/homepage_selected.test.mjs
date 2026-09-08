@@ -173,8 +173,25 @@ test("homepage partial keeps the newest lead with the profile, dialogue, and ris
   assert.match(frontPageSource, /home-almanack__ledger/);
   assert.match(frontPageSource, /home-almanack__ledger-row--number/);
   assert.match(frontPageSource, /home-almanack__ledger-row--virtue/);
-  assert.ok(frontPageSource.indexOf('data-home-cartoon-recent') < frontPageSource.indexOf('home-almanack-divider'));
-  assert.ok(frontPageSource.indexOf('home-almanack--lead') < frontPageSource.indexOf('data-home-front-page-region="secondary"'));
+  const orderedRegions = [
+    'data-home-front-page-region="lead"',
+    'class="editorial-cartoon__trigger"',
+    'data-home-front-page-region="secondary"',
+    'data-home-front-page-region="extras"',
+    'data-home-cartoon-recent',
+    'home-almanack-divider',
+    'home-almanack--lead',
+  ];
+  let previousRegionIndex = -1;
+  for (const marker of orderedRegions) {
+    const markerIndex = frontPageSource.indexOf(marker);
+    assert.ok(markerIndex > previousRegionIndex, `${marker} must follow the preceding homepage region in document order`);
+    previousRegionIndex = markerIndex;
+  }
+  for (const region of ["lead", "secondary", "extras"]) {
+    assert.equal((frontPageSource.match(new RegExp(`data-home-front-page-region="${region}"`, "g")) || []).length, 1);
+  }
+  assert.match(frontPageSource, /<article\b[^>]*data-home-front-page-region="lead"[^>]*>(?:(?!<\/article>)[\s\S])*class="editorial-cartoon__trigger"(?:(?!<\/article>)[\s\S])*<\/article>[\s\S]*?<div\b[^>]*data-home-front-page-region="secondary"/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-image-button/);

@@ -64,7 +64,7 @@ Use these discovery controls deliberately:
 - Supporting cards appear in this order: the Jack Stratton profile, the latest Syd & Oliver dialogue, and *What Is Risk? A Four-Part Framework*. Selection lives in `layouts/partials/home_selected.html`; no per-essay featured flags or ranks are needed.
 - A piece appears only once in the featured stories. If the lead is the newest Syd & Oliver dialogue, its supporting slot uses the next newest eligible dialogue. A pinned piece already used as the lead, or an unavailable selection, is omitted from the supporting cards.
 - Homepage supporting-card thumbnails prefer a linked published front-page/Gallery illustration. When none exists, `home_card_image.html` reuses the piece's `featured_image` hero as a lazy-loaded link to the piece; without either image, the card remains text-only. Hero fallbacks do not create Gallery entries or change article images.
-- The Almanack teaser retains its existing selection and placement.
+- At 900px and below, the homepage reads in document order: latest lead and current illustration, supporting cards, recent illustrations, then the Almanack teaser. Desktop keeps the lead, recent illustrations, and Almanack in the left column and supporting cards in the right column. The Almanack selection is unchanged.
 - `collections` for explicit membership in curated reading lanes
 - `collection_weight` when you want controlled ordering inside a collection
 

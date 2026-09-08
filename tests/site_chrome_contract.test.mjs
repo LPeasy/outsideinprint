@@ -659,6 +659,7 @@ test("homepage composition leads from the Almanack signup into the bookstore, mo
   assert.doesNotMatch(homeFrontPage, /cartoon-think-outside-the-box\.png/);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="lead"/g) || []).length, 1);
   assert.equal((homeFrontPage.match(/data-home-front-page-region="secondary"/g) || []).length, 1);
+  assert.equal((homeFrontPage.match(/data-home-front-page-region="extras"/g) || []).length, 1);
   assert.match(homeFrontPage, /home-front-page__secondary-item/);
   assert.match(homeFrontPage, /home-almanack-divider/);
   assert.match(homeFrontPage, /class="home-almanack home-almanack--lead"/);
@@ -666,7 +667,9 @@ test("homepage composition leads from the Almanack signup into the bookstore, mo
   assert.match(homeFrontPage, /home-almanack__ledger-row--number/);
   assert.match(homeFrontPage, /home-almanack__ledger-row--virtue/);
   assert.ok(homeFrontPage.indexOf('data-home-cartoon-recent') < homeFrontPage.indexOf('home-almanack-divider'));
-  assert.ok(homeFrontPage.indexOf('home-almanack--lead') < homeFrontPage.indexOf('data-home-front-page-region="secondary"'));
+  assert.ok(homeFrontPage.indexOf('class="editorial-cartoon__trigger"') < homeFrontPage.indexOf('data-home-front-page-region="secondary"'));
+  assert.ok(homeFrontPage.indexOf('data-home-front-page-region="secondary"') < homeFrontPage.indexOf('data-home-front-page-region="extras"'));
+  assert.ok(homeFrontPage.indexOf('data-home-front-page-region="extras"') < homeFrontPage.indexOf('data-home-cartoon-recent'));
   assert.match(homeFrontPage, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
   assert.match(homeFrontPage, /<p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V\. Ussley<\/p>/);
   assert.match(homeFrontPage, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
@@ -969,6 +972,12 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.newsletter-signup--home-ribbon \.newsletter-signup__inner\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) minmax\(18rem, \.86fr\);[\s\S]*background:/);
   assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-front-page__stories\{\s*display:grid;\s*grid-template-columns:minmax\(0, 1\.65fr\) minmax\(0, 1fr\);/);
+  assert.match(cssRule(css, ".home-front-page__stories"), /grid-template-areas:\s*"lead secondary"\s*"extras secondary";/);
+  for (const region of ["lead", "secondary", "extras"]) {
+    assert.match(cssRule(css, `.home-front-page__${region}`), new RegExp(`grid-area:${region};`));
+  }
+  assert.match(css, /@media \(max-width:900px\)\{\s*\.home-front-page__stories\{[^}]*grid-template-columns:1fr;[^}]*grid-template-areas:\s*"lead"\s*"secondary"\s*"extras";[^}]*\}/);
+  assert.doesNotMatch(css, /\.home-front-page__(?:lead|secondary|extras)\s*\{[^}]*\border\s*:/);
   assert.match(cssRule(css, ".home-front-page__orientation"), /max-width:52rem;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-width:44px;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-height:44px;/);

@@ -167,6 +167,7 @@ foreach ($requiredSnippet in @(
   'id="home-front-page-title"',
   'data-home-front-page-region="lead"',
   'data-home-front-page-region="secondary"',
+  'data-home-front-page-region="extras"',
   '$almanackIssues := where site.RegularPages "Section" "almanack"',
   '<aside class="home-almanack home-almanack--lead" aria-labelledby="home-almanack-title">',
   'home-almanack-divider',
@@ -182,7 +183,14 @@ foreach ($requiredSnippet in @(
 $homepageOrder = @(
   'id="home-front-page-title"',
   'class="home-front-page__orientation"',
-  'class="home-front-page__stories"'
+  'class="home-front-page__stories"',
+  'data-home-front-page-region="lead"',
+  'class="editorial-cartoon__trigger"',
+  'data-home-front-page-region="secondary"',
+  'data-home-front-page-region="extras"',
+  'data-home-cartoon-recent',
+  'home-almanack-divider',
+  'home-almanack--lead'
 )
 
 $lastManifestoIndex = -1
@@ -193,7 +201,7 @@ foreach ($snippet in $homepageOrder) {
   }
 
   if ($currentIndex -le $lastManifestoIndex) {
-    throw "Expected the hidden homepage heading to remain above the homepage story grid in layouts/partials/home_front_page.html."
+    throw "Expected homepage document order to keep the heading and orientation above the lead illustration, supporting stories, recent illustrations, and Almanack."
   }
 
   $lastManifestoIndex = $currentIndex

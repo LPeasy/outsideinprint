@@ -43,7 +43,8 @@ Dashboard publishing is paused and the dashboard build surface has been removed 
 - `/essays/` is now a legacy redirect-only alias rather than an archive shell.
 - Collections, Gallery, and Library now share a shallow `section-front*` opening shell that borrows the Archive route's smoked-paper framing without inheriting archive-specific month/year structure.
 - Collections now own their inner structure explicitly through the `collections-broadsheet*` directory, neutral `collection-record*` rows, and the collection-detail `collection-section*` namespace. The visible collection pages no longer mount the old `collection-progress*` panel, visited-row hooks, card-grid directory, or per-collection room skin.
-- `/about/` now owns an imprint-first route shell through `section-front--about` and `about-route*`, while still reusing shared `journey_links` navigation and `piece-body` typography for the reading map and prose body.
+- `/about/` owns a first-person author-and-publisher introduction through `section-front--about` and `about-route*`, with direct author and Bookstore links. It reuses shared `journey_links` navigation and `piece-body` typography for the reading map and prose body.
+- The homepage stories grid owns three sibling regions: `home-front-page__lead`, `home-front-page__secondary`, and `home-front-page__extras`. At 900px and below, document and visual order are lead/current illustration, supporting cards, then recent illustrations/Almanack. Desktop grid areas keep the supporting cards beside the left-column lead and extras without duplicated content or script-driven reordering.
 - `/authors/robert-v-ussley/` now owns a portrait-led author shell through `section-front--author` and `author-route*`, while still reusing shared `journey_links` navigation for the route-based reading map.
 - `/apps/`, `/apps/bucks-machine/`, and `/apps/baseball-upside-risk/` are public development-preview routes. They own a restrained product interface through the `apps-index`, `apps-card`, `apps-product`, `apps-status`, `apps-packet-preview`, `apps-interpretation`, `apps-snapshot`, `apps-workflow`, `apps-deliverables`, `apps-samples`, `apps-limitations`, `apps-companion`, and `apps-identity` namespaces while retaining the global OIP masthead, footer, theme, and page shells.
 - `/shop/` and its three book-detail routes own an editorial storefront through the `bookstore-index`, `bookstore-record*`, `bookstore-product*`, and status-aware offer namespaces. Kindle becomes the emphasized available offer only while every direct EPUB offer remains unavailable; the existing Square data and gating stay intact for later activation.
@@ -83,7 +84,6 @@ These hooks were removed rather than left behind as decorative aliases:
 
 These hooks still exist in live markup but do not yet carry strong explicit layout ownership:
 
-- `home-front-page__secondary`
 - `home-front-page__secondary-item`
 - `home-front-page__secondary-dek`
 - `home-front-page__secondary-action`

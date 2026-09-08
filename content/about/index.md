@@ -1,6 +1,6 @@
 ---
 title: "About Outside In Print"
-description: "A digital imprint for disciplined public judgment: essays, dialogues, reports, and working papers built from evidence, incentives, tradeoffs, and consequences."
+description: "I’m Robert V. Ussley, author, designer, developer, and publisher of Outside In Print. I publish independent essays, dialogues, reported analysis, and original books here."
 image: "/images/social/oip-about.png"
 image_alt: "Outside In Print social card for the About page."
 draft: false
@@ -8,7 +8,7 @@ show_citation: false
 section_label: "About the Imprint"
 ---
 
-Outside In Print is a web-native imprint built for durable reading. It publishes essays, dialogues, reported analysis, and working papers as stable editions rather than disposable feed posts.
+I built Outside In Print for writing worth returning to. Published pieces remain available in a searchable archive, with dated editions and revision notes when they change.
 
 ## Mission
 
@@ -38,7 +38,7 @@ Color over the lines. Read beyond the feed. Think for yourself.
 
 ## Author and Publisher
 
-Outside In Print is the publisher and imprint for the site as a whole. Robert V. Ussley is the principal authorial byline attached to the essay corpus published here. The site is meant to read as a publication without pretending to be a large editorial institution.
+Outside In Print is my independent imprint. I write, design, develop, and publish the site myself.
 
 ## How to Read the Site
 

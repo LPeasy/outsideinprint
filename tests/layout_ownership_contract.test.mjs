@@ -5,6 +5,7 @@ import path from "node:path";
 
 const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
 const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
+const aboutContent = fs.readFileSync(path.resolve("content/about/index.md"), "utf8");
 const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/directory.html"), "utf8");
 const authorDossier = fs.readFileSync(path.resolve("layouts/authors/dossier.html"), "utf8");
 const authorList = fs.readFileSync(path.resolve("layouts/authors/list.html"), "utf8");
@@ -315,6 +316,17 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(aboutSingle, /Reading Map/);
   assert.match(aboutSingle, /"label" "Home"/);
   assert.match(aboutSingle, /"label" "Meet the author"/);
+  assert.match(aboutSingle, /<p class="about-route__artifact-kicker">Behind Outside In Print<\/p>/);
+  assert.match(aboutSingle, /<h2 id="about-imprint-record-title" class="about-route__artifact-title">Independent writing, made and published by one person\.<\/h2>/);
+  assert.match(aboutSingle, /with \.Params\.description[\s\S]*?class="about-route__artifact-dek"/);
+  assert.match(aboutSingle, /Explore <a href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">my writing<\/a> or <a href="\{\{ "shop\/" \| absURL \}\}">browse the books<\/a>\./);
+  assert.match(aboutSingle, /<h3[^>]*>At a glance<\/h3>/);
+  assert.match(aboutSingle, /<dt class="about-route__record-label">Author<\/dt>/);
+  assert.doesNotMatch(aboutSingle, />Imprint Record<|>Current File<|>Principal Byline</);
+  assert.match(aboutContent, /description: "I’m Robert V\. Ussley, author, designer, developer, and publisher of Outside In Print\. I publish independent essays, dialogues, reported analysis, and original books here\."/);
+  assert.match(aboutContent, /I built Outside In Print for writing worth returning to\. Published pieces remain available in a searchable archive, with dated editions and revision notes when they change\./);
+  assert.match(aboutContent, /## Author and Publisher\s+Outside In Print is my independent imprint\. I write, design, develop, and publish the site myself\./);
+  assert.doesNotMatch(aboutContent, /principal authorial byline|essay corpus|without pretending to be a large editorial institution/);
   assert.match(authorList, /partial "authors\/directory\.html" \./);
   assert.match(authorSection, /partial "authors\/directory\.html" \./);
   assert.match(authorDirectory, /class="profile-page profile-page--authors"/);
