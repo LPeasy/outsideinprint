@@ -652,7 +652,7 @@ test("homepage composition leads from the Almanack signup into the bookstore, mo
   assert.match(homeFrontPage, /querySelectorAll\("\[data-home-cartoon-lightbox-trigger\]"\)/);
   assert.match(homeFrontPage, /triggers\.forEach\(function \(trigger\)/);
   assert.match(homeFrontPage, /editorial\/cartoon-for-page\.html/);
-  assert.match(homeFrontPage, /editorial\/cartoon-gallery-link\.html/);
+  assert.match(homeFrontPage, /home_card_image\.html/);
   assert.doesNotMatch(homeFrontPage, /var trigger = document\.querySelector\("\[data-home-cartoon-lightbox-trigger\]"\)/);
   assert.match(homeFrontPage, /imageButton\.addEventListener\("click", closeLightbox\)/);
   assert.doesNotMatch(homeFrontPage, /window\.location\.href/);

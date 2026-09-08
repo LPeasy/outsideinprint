@@ -1662,7 +1662,8 @@ html[data-theme="light"] .paper-route-toggle{
   text-decoration:none;
   text-transform:uppercase;
 }
-.essay-cartoon-thumb img{
+.essay-cartoon-thumb img,
+.home-hero-thumb img{
   display:block;
   width:100%;
   aspect-ratio:16 / 9;
@@ -1680,7 +1681,9 @@ html[data-theme="light"] .paper-route-toggle{
   text-decoration:none;
 }
 .essay-cartoon-thumb:hover img,
-.essay-cartoon-thumb:focus-visible img{
+.essay-cartoon-thumb:focus-visible img,
+.home-hero-thumb:hover img,
+.home-hero-thumb:focus-visible img{
   border-color:rgba(153,173,191,.6);
   transform:translateY(-1px);
 }
@@ -4449,8 +4452,21 @@ html[data-theme="light"] .paper-route-toggle{
 .home-front-page__secondary-title-row .home-front-page__secondary-title{
   min-width:0;
 }
-.essay-cartoon-thumb--home{
+.essay-cartoon-thumb--home,
+.home-hero-thumb{
   width:5.75rem;
+}
+.home-hero-thumb{
+  flex:0 0 auto;
+  display:block;
+  min-height:44px;
+}
+.home-hero-thumb img{
+  object-fit:contain;
+}
+.home-hero-thumb:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:3px;
 }
 .home-front-page__secondary-dek{
   margin-top:.58rem;
@@ -8356,7 +8372,8 @@ h2{ margin-top:34px; }
     gap:.75rem;
   }
   .essay-cartoon-thumb,
-  .essay-cartoon-thumb--home{
+  .essay-cartoon-thumb--home,
+  .home-hero-thumb{
     width:4.7rem;
     font-size:.56rem;
   }

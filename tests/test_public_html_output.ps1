@@ -5303,6 +5303,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     if ((Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'draft') -ceq 'true') { continue }
     [pscustomobject]@{
       Path = $dialoguePath
+      SourcePath = $dialogueFile.FullName
       Date = ConvertTo-OipDateTimeOffset -Value (Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'date')
       Title = Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'title'
     }
@@ -5327,6 +5328,74 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     $thumbnailPattern = '<button\b(?=[^>]*\bdata-essay-cartoon-lightbox-trigger\b)(?=[^>]*data-cartoon-slug=(?:"' + [regex]::Escape($selectedCartoon.slug) + '"|' + [regex]::Escape($selectedCartoon.slug) + ')(?:\s|>))[^>]*>'
     if ($homeIndexHtml -notmatch $thumbnailPattern) {
       $uxIssues.Add("public/index.html => selected story with cartoon '$($selectedCartoon.slug)' must retain its lightbox thumbnail")
+    }
+  }
+  $supportingSourcePaths = @{
+    '/essays/jack-stratton-and-the-vulfpeck-model/' = Join-Path $repoRoot 'content/essays/jack-stratton-and-the-vulfpeck-model.md'
+    '/essays/what-is-risk-a-four-part-framework/' = Join-Path $repoRoot 'content/essays/what-is-risk-a-four-part-framework.md'
+  }
+  if ($latestSupportingDialogue.Count -gt 0) {
+    $supportingSourcePaths[$latestSupportingDialogue[0].Path] = $latestSupportingDialogue[0].SourcePath
+  }
+  $heroThumbnailMatches = @([regex]::Matches($homeIndexHtml, '(?is)<a\b(?=[^>]*\bhome-hero-thumb\b)[^>]*>.*?</a>'))
+  foreach ($supportingPath in $homeSupportingPaths) {
+    $heroThumbnails = @($heroThumbnailMatches | Where-Object {
+      (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_.Value -Name 'href')) -ceq $supportingPath
+    })
+    $hasPublishedCartoon = @($selectedCartoons | Where-Object { $_.essay -ceq $supportingPath }).Count -gt 0
+    $sourcePath = $supportingSourcePaths[$supportingPath]
+    $featuredImage = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image'
+    $expectsHeroThumbnail = -not $hasPublishedCartoon -and -not [string]::IsNullOrWhiteSpace($featuredImage)
+    $expectedThumbnailCount = if ($expectsHeroThumbnail) { 1 } else { 0 }
+    if ($heroThumbnails.Count -ne $expectedThumbnailCount) {
+      $uxIssues.Add("public/index.html => supporting story '$supportingPath' expected $expectedThumbnailCount hero fallback links, found $($heroThumbnails.Count)")
+    }
+    if (-not $expectsHeroThumbnail -or $heroThumbnails.Count -ne 1) { continue }
+
+    $thumbnailHtml = $heroThumbnails[0].Value
+    $title = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'title'
+    $actualLabel = [System.Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $thumbnailHtml -Name 'aria-label'))
+    if ($actualLabel -cne "Read $title") {
+      $uxIssues.Add("public/index.html => hero thumbnail for '$supportingPath' must identify its reading destination")
+    }
+    if ($thumbnailHtml -match 'data-gallery|data-essay-cartoon-lightbox-trigger|data-cartoon-slug') {
+      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must not claim Gallery or lightbox behavior")
+    }
+    $thumbnailImages = @(Get-OpenTags -Html $thumbnailHtml -TagName 'img')
+    if ($thumbnailImages.Count -ne 1) {
+      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must contain exactly one image")
+      continue
+    }
+    $imageTag = $thumbnailImages[0]
+    $lookupRef = ($featuredImage -replace '^oip-image:', '').Trim()
+    $imageLookupKeys = @($lookupRef, $lookupRef.TrimStart('/'))
+    if ($lookupRef.StartsWith('images/')) { $imageLookupKeys += "/$lookupRef" }
+    $managedHeroId = ''
+    foreach ($imageLookupKey in $imageLookupKeys) {
+      if ($imageManifest.assets.ContainsKey($imageLookupKey)) {
+        $managedHeroId = $imageLookupKey
+        break
+      }
+      if ($imageManifest.aliases.ContainsKey($imageLookupKey)) {
+        $managedHeroId = [string]$imageManifest.aliases[$imageLookupKey]
+        break
+      }
+    }
+    $expectedSource = if ($managedHeroId) {
+      Get-ManagedVisibleImagePath -Manifest $imageManifest -AssetId $managedHeroId
+    } else { $featuredImage }
+    if ((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $imageTag -Name 'src')) -cne $expectedSource) {
+      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must use its existing featured_image '$featuredImage'")
+    }
+    if ((Get-AttributeValue -Tag $imageTag -Name 'alt') -cne '' -or
+        (Get-AttributeValue -Tag $imageTag -Name 'loading') -cne 'lazy' -or
+        (Get-AttributeValue -Tag $imageTag -Name 'decoding') -cne 'async') {
+      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must use empty alt text, lazy loading, and async decoding")
+    }
+    foreach ($dimension in @('width', 'height')) {
+      if ((Get-AttributeValue -Tag $imageTag -Name $dimension) -notmatch '^[1-9]\d*$') {
+        $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must reserve its intrinsic $dimension")
+      }
     }
   }
   $bookstoreSectionMatch = [regex]::Match($homeIndexHtml, '(?is)<section\b(?=[^>]*\bhome-bookstore\b)[^>]*>.*?</section>')

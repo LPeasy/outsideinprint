@@ -237,9 +237,7 @@
                     data-analytics-path="{{ $latest.RelPermalink }}"
                   >{{ $latest.Title }}</a>
                 </h3>
-                {{- with $latestCartoon }}
-                  {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $latest "cartoon" . "class" "essay-cartoon-thumb--home") -}}
-                {{- end }}
+                {{- partial "home_card_image.html" (dict "page" $latest "cartoon" $latestCartoon) -}}
               </div>
               {{ with (partial "discovery/page-summary.html" $latest) }}
                 <div class="d home-front-page__secondary-dek">{{ . }}</div>
@@ -272,9 +270,7 @@
                     data-analytics-path="{{ .RelPermalink }}"
                   >{{ .Title }}</a>
                 </h3>
-                {{- if $linkedCartoon }}
-                  {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $secondaryPage "cartoon" $linkedCartoon "class" "essay-cartoon-thumb--home") -}}
-                {{- end }}
+                {{- partial "home_card_image.html" (dict "page" $secondaryPage "cartoon" $linkedCartoon) -}}
               </div>
               {{ with (partial "discovery/page-summary.html" .) }}
                 <div class="d home-front-page__secondary-dek">{{ . }}</div>

@@ -1,0 +1,16 @@
+{{- $page := .page -}}
+{{- if .cartoon -}}
+  {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $page "cartoon" .cartoon "class" "essay-cartoon-thumb--home") -}}
+{{- else -}}
+  {{- with $page.Params.featured_image -}}
+    {{- $imageModel := partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
+    <a class="home-hero-thumb" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+      {{- partial "images/picture.html" (dict
+        "model" $imageModel
+        "alt" ""
+        "loading" "lazy"
+        "sizes" "(max-width: 640px) 4.7rem, 5.75rem"
+      ) -}}
+    </a>
+  {{- end -}}
+{{- end -}}

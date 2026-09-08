@@ -188,7 +188,7 @@ test("homepage partial keeps the newest lead with the profile, dialogue, and ris
   assert.doesNotMatch(frontPageSource, /var trigger = document\.querySelector\("\[data-home-cartoon-lightbox-trigger\]"\)/);
   assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
   assert.match(frontPageSource, /editorial\/cartoon-for-page\.html/);
-  assert.match(frontPageSource, /editorial\/cartoon-gallery-link\.html/);
+  assert.match(frontPageSource, /home_card_image\.html/);
   assert.doesNotMatch(frontPageSource, /window\.location\.href/);
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
   assert.match(frontPageSource, /data-home-front-page-region="lead"/);
@@ -267,6 +267,25 @@ test("homepage partial keeps the newest lead with the profile, dialogue, and ris
   assert.match(cartoonData, /essay: "\/essays\/the-warning-label-in-the-weeds\/"/);
   const thinkOutsideEntry = cartoonData.match(/  - slug: think-outside-the-box[\s\S]*?(?=\n  - slug:|\n?$)/)?.[0] || "";
   assert.doesNotMatch(thinkOutsideEntry, /essay:/);
+});
+
+test("homepage supporting images prefer published editorial art and otherwise link the existing hero to the piece", () => {
+  const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
+  const imagePartial = fs.readFileSync(path.resolve("layouts/partials/home_card_image.html"), "utf8");
+
+  assert.equal((frontPageSource.match(/partial "home_card_image\.html"/g) || []).length, 2,
+    "the supporting cards and latent latest slot must share the fallback renderer");
+  assert.equal((frontPageSource.match(/partial "editorial\/cartoon-for-page\.html"/g) || []).length, 2);
+  assert.match(imagePartial, /if \.cartoon[\s\S]*partial "editorial\/cartoon-gallery-link\.html"[\s\S]*else[\s\S]*with \$page\.Params\.featured_image/);
+  assert.match(imagePartial, /partial "images\/model\.html"/);
+  assert.match(imagePartial, /partial "images\/picture\.html"/);
+  assert.match(imagePartial, /class="home-hero-thumb"/);
+  assert.match(imagePartial, /href="\{\{ \$page\.RelPermalink \}\}"/);
+  assert.match(imagePartial, /aria-label="Read \{\{ \$page\.Title \}\}"/);
+  assert.match(imagePartial, /"alt" ""/);
+  assert.match(imagePartial, /"loading" "lazy"/);
+  assert.match(imagePartial, /"sizes"/);
+  assert.doesNotMatch(imagePartial, /<img\b|data-gallery|data-essay-cartoon-lightbox-trigger|data-cartoon-slug/);
 });
 
 test("the latest publication leads and supporting selections keep the approved order", () => {
@@ -349,6 +368,7 @@ test("unavailable supporting selections stay absent instead of becoming unrelate
 test("front page stays structurally primary to collections and newsletter follow-up", () => {
   const source = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
+  const imagePartial = fs.readFileSync(path.resolve("layouts/partials/home_card_image.html"), "utf8");
   const partialSource = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
 
   assert.match(frontPageSource, /id="home-front-page-title"/);
@@ -370,8 +390,8 @@ test("front page stays structurally primary to collections and newsletter follow
   assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
   assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
   assert.match(frontPageSource, /querySelectorAll\("\[data-home-cartoon-lightbox-trigger\]"\)/);
-  assert.match(frontPageSource, /essay-cartoon-thumb--home/);
-  assert.match(frontPageSource, /editorial\/cartoon-gallery-link\.html/);
+  assert.match(imagePartial, /essay-cartoon-thumb--home/);
+  assert.match(imagePartial, /editorial\/cartoon-gallery-link\.html/);
   assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
   assert.doesNotMatch(frontPageSource, /window\.location\.href/);
   assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
