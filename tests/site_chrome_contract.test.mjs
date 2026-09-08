@@ -1003,7 +1003,10 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.editorial-cartoon-recent__item:nth-child\(odd\):not\(:last-child\)::after\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
   assert.match(css, /\.editorial-cartoon::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.editorial-cartoon-recent__trigger\{[\s\S]*aspect-ratio:16 \/ 9;/);
-  assert.match(css, /\.essay-cartoon-thumb img\{[\s\S]*aspect-ratio:16 \/ 9;/);
+  assert.match(css, /\.essay-cartoon-thumb img,\s*\.home-hero-thumb img\{[^}]*aspect-ratio:16 \/ 9;/);
+  assert.match(css, /\.home-hero-thumb\{[^}]*min-height:44px;/);
+  assert.match(css, /\.home-hero-thumb img\{\s*object-fit:contain;/);
+  assert.match(css, /\.home-hero-thumb:focus-visible\{[^}]*outline:2px solid var\(--focus-ring\);/);
   assert.match(css, /\.home-front-page__secondary-title-row\{[\s\S]*justify-content:space-between;/);
   assert.match(css, /\.cartoon-gallery-spotlight\{[\s\S]*grid-template-columns:minmax\(12rem, \.38fr\) minmax\(0, 1fr\);/);
   assert.match(css, /\.cartoon-gallery\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
