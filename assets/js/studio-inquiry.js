@@ -84,7 +84,7 @@
       "This inquiry does not reserve a production slot or create a client relationship."
     ].join("\n").replace(/\n/g, "\r\n");
 
-    status.textContent = "Your email app should open with a draft. Review it before you send it. Outside In Print will receive your inquiry only if you send the email and it reaches us.";
+    status.textContent = "Your email app should open with a draft. Review it before you send it. I will receive your inquiry only if you send the email and it reaches me.";
     mailtoUri = "mailto:" + recipient + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     window.location.href = mailtoUri;
   }

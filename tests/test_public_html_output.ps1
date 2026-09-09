@@ -1955,16 +1955,19 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
   $studioVisibleText = Convert-HtmlFragmentToText -Html $studioHtml
 
   foreach ($requiredText in @(
-    'You have the material. We make it ready to publish.',
+    'You have the material. I make it ready to publish.',
+    'I turn one recording, transcript, presentation, draft, or source packet into a clear, 1,500–2,000-word essay in your voice, with your byline.',
+    "You’ll work directly with Robert V. Ussley.",
     'Fixed scope · First draft in 7 business days · One revision',
     $studioActiveRateText,
-    '50% deposit to book the project',
-    'Final 50% due before we release the final files',
+    'A 50% deposit is required to book the project.',
+    'The final 50% is due before I release the final files.',
     '90 minutes',
     '15,000 words',
     '25 pages',
-    'One finished essay with your byline, 1,500–2,000 words',
-    'A standard visual layout and image treatment, tailored to your preferences',
+    'The finished essay, a clear title and subtitle, and editable and web-ready files.',
+    'A standard visual layout and image treatment tailored to your preferences, plus a short record of sources and fact checks.',
+    'Three short promotional excerpts and one consolidated revision round for all your changes.',
     'The 7-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material.',
     'How much source material do you have?',
     'Who should read the essay?',
@@ -1979,12 +1982,13 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
     'More than one revision round',
     'A promise that Outside In Print will publish the essay',
     'Your writer and editor',
-    'Each Publication Sprint is handled by Robert V. Ussley, the writer and editor behind Outside In Print. He produces reported essays and literary analysis on risk, institutions, technology, and public life.',
-    "These are examples of our own editorial work, not client testimonials. Their visuals represent the standard deliverable and can be tailored to the client’s preferences.",
-    'You receive the complete finished file set and own the finished work exclusively. Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed.',
-    'After full payment, you own the finished work exclusively. Outside In Print retains no publication right unless you give written permission.',
-    'We will reply within 2 business days with either a fit decision or a request for more details.',
-    'You cannot pay on this page. We review each project and agree on the written scope before you pay.'
+    "I’m Robert V. Ussley, the writer and editor behind Outside In Print. I handle each Publication Sprint directly and produce reported essays and literary analysis on risk, institutions, technology, and public life.",
+    "These are examples of my own editorial work, not client testimonials. Their visuals represent the standard deliverable and can be tailored to the client’s preferences.",
+    'Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed.',
+    'After full payment, you receive the complete finished file set and own the finished work exclusively. Outside In Print retains no publication right unless you give written permission.',
+    'Tell me about your project. This form prepares an email draft; you review and send it yourself.',
+    'I will reply within 2 business days after I receive your email with either a fit decision or a request for more details.',
+    'You cannot pay on this page. I review each project and agree on the written scope with you before you pay.'
   )) {
     if ($studioVisibleText.IndexOf($requiredText, [System.StringComparison]::Ordinal) -lt 0) {
       $uxIssues.Add("public/studio/index.html => expected approved Studio text: $requiredText")
@@ -2007,11 +2011,60 @@ if ($targetPageHtml.ContainsKey('public/studio/index.html')) {
     $uxIssues.Add('public/studio/index.html => Studio copy must not guarantee publication')
   }
 
+  $studioSectionTags = @([regex]::Matches($studioHtml, '<(?:header|section)\b[^>]*>') | ForEach-Object { $_.Value } | Where-Object { $null -ne (Get-AttributeValue -Tag $_ -Name 'data-studio-section') })
+  $studioSectionOrder = @($studioSectionTags | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'data-studio-section' })
+  if (($studioSectionOrder -join ',') -cne 'offer,scope,proof,details,inquiry') {
+    $uxIssues.Add('public/studio/index.html => expected exactly five streamlined Studio sections in order')
+  }
+  $studioDetailMatches = @([regex]::Matches($studioHtml, '(?s)<details\b(?<attributes>[^>]*)>(?<body>.*?)</details>') | Where-Object { Test-TagHasClass -Tag ('<details ' + $_.Groups['attributes'].Value + '>') -ClassName 'studio-details__item' })
+  $studioDetailLabels = @($studioDetailMatches | ForEach-Object {
+    $summary = [regex]::Match($_.Groups['body'].Value, '(?s)<summary[^>]*>(.*?)</summary>')
+    Convert-HtmlFragmentToText -Html $summary.Groups[1].Value
+  })
+  if (($studioDetailLabels -join ',') -cne 'Source limits and exclusions,How the sprint works,Common questions') {
+    $uxIssues.Add('public/studio/index.html => expected the three approved native disclosure summaries')
+  }
+  foreach ($studioDetail in $studioDetailMatches) {
+    if ($studioDetail.Groups['attributes'].Value -match '\bopen(?:\s|=|$)' -or $studioDetail.Value -match '<form\b|<fieldset\b|name=(?:"?(?:commercial|source_safety)_acknowledgement"?)(?:\s|>)') {
+      $uxIssues.Add('public/studio/index.html => native details must start closed and must not hide inquiry controls')
+    }
+  }
+  $studioVisibleOutsideDetails = Convert-HtmlFragmentToText -Html ([regex]::Replace($studioHtml, '(?s)<details\b[^>]*>.*?</details>', ''))
+  foreach ($visibleTerm in @('Choose one main source set.', 'A 50% deposit is required to book the project.', 'The final 50% is due before I release the final files.', 'After full payment, you receive the complete finished file set and own the finished work exclusively.', 'publication is not guaranteed.')) {
+    if (-not $studioVisibleOutsideDetails.Contains($visibleTerm)) {
+      $uxIssues.Add("public/studio/index.html => essential Studio term must remain visible outside disclosures: $visibleTerm")
+    }
+  }
+  $studioPrimaryCtas = @(Get-OpenTags -Html $studioHtml -TagName 'a' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq '#studio-inquiry' })
+  if ($studioPrimaryCtas.Count -ne 1 -or (Get-AttributeValue -Tag $studioPrimaryCtas[0] -Name 'data-analytics-source-slot') -cne 'studio_hero_to_form') {
+    $uxIssues.Add('public/studio/index.html => expected one tracked primary hero-to-inquiry CTA')
+  }
+  if ($studioHtml -notmatch '(?s)class=(?:"studio-hero__deck"|studio-hero__deck).*?class=(?:"studio-hero__identity"|studio-hero__identity)[^>]*>.*?<a href=(?:"/authors/robert-v-ussley/"|/authors/robert-v-ussley/)>Robert V\. Ussley</a>.*?class=(?:"studio-hero__trust"|studio-hero__trust)') {
+    $uxIssues.Add('public/studio/index.html => expected the linked personal identity immediately after the offer introduction')
+  }
+  foreach ($proofHref in @('/essays/what-happened-at-camp-mystic/', '/essays/jack-stratton-and-the-vulfpeck-model/', '/syd-and-oliver/peaches-or-greece/')) {
+    $proofLinks = @(Get-OpenTags -Html $studioHtml -TagName 'a' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq $proofHref })
+    if ($proofLinks.Count -ne 1) {
+      $uxIssues.Add("public/studio/index.html => expected one retained editorial example link: $proofHref")
+    }
+  }
+  if ($studioHtml -match '\bstudio-(?:problem|conversion|pricing__panel|proof__card|cta--secondary)\b') {
+    $uxIssues.Add('public/studio/index.html => retired Studio panels or duplicate conversion treatment remain')
+  }
+
   $studioForms = @(
     Get-OpenTags -Html $studioHtml -TagName 'form' |
       Where-Object { $null -ne (Get-AttributeValue -Tag $_ -Name 'data-studio-email-form') -or $_ -match '\bdata-studio-email-form(?:\s|>)' }
   )
   if ($studioComposerEnabled) {
+    $studioFieldsetMatches = @([regex]::Matches($studioHtml, '(?s)<fieldset\b[^>]*>(?<body>.*?)</fieldset>'))
+    $studioLegendLabels = @($studioFieldsetMatches | ForEach-Object {
+      $legend = [regex]::Match($_.Groups['body'].Value, '(?s)<legend[^>]*>(.*?)</legend>')
+      Convert-HtmlFragmentToText -Html $legend.Groups[1].Value
+    })
+    if (($studioLegendLabels -join ',') -cne 'About you,Source material,Your essay') {
+      $uxIssues.Add('public/studio/index.html => inquiry must use three meaningful fieldsets')
+    }
     if ($studioForms.Count -ne 1) {
       $uxIssues.Add("public/studio/index.html => expected one guided Studio inquiry form, found $($studioForms.Count)")
     }
@@ -3291,12 +3344,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Read</span>.*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/studio/[^>]*data-analytics-source-slot=(?:"primary_nav_studio"|primary_nav_studio)[^>]*>\s*<span[^>]*>Studio</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*data-analytics-source-slot=(?:"primary_nav_support"|primary_nav_support)[^>]*>\s*<span[^>]*>Support</span>'
-    Message = 'expected the homepage desktop ribbon to expose Read, Explore, Studio, Bookstore, About, and Support in order'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Read</span>.*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/studio/[^>]*data-analytics-source-slot=(?:"primary_nav_studio"|primary_nav_studio)[^>]*>\s*<span[^>]*>Studio</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*data-analytics-source-slot=(?:"primary_nav_support"|primary_nav_support)[^>]*>\s*<span[^>]*>Support</span>'
+    Message = 'expected the homepage desktop ribbon to expose Read, Explore, Bookstore, About, Studio, and Support in order'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/studio/[^>]*>\s*<span[^>]*>Studio</span>.*?class=(?:"nav-mobile-menu__summary"|nav-mobile-menu__summary)[^>]*>.*?<span>Menu</span>.*?mobile-nav-read-heading.*?<span[^>]*>Latest</span>.*?<span[^>]*>Library</span>.*?<span[^>]*>Feeling curious\?</span>.*?mobile-nav-explore-heading.*?<span[^>]*>Gallery</span>.*?<span[^>]*>Apps & Tools</span>.*?<span[^>]*>Games</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>'
+    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?class=(?:"nav-mobile-menu__summary"|nav-mobile-menu__summary)[^>]*>.*?<span>Menu</span>.*?mobile-nav-read-heading.*?<span[^>]*>Latest</span>.*?<span[^>]*>Library</span>.*?<span[^>]*>Feeling curious\?</span>.*?mobile-nav-explore-heading.*?<span[^>]*>Gallery</span>.*?<span[^>]*>Apps & Tools</span>.*?<span[^>]*>Games</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>About</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Support</span>'
     Message = 'expected the homepage mobile ribbon and Menu to expose the approved responsive hierarchy'
   },
   @{
@@ -3460,7 +3513,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/404.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Support</span>.*?class=(?:"nav__mobile"|nav__mobile).*?<span[^>]*>Archive</span>.*?<span[^>]*>Collections</span>.*?<span[^>]*>Studio</span>.*?<span>Menu</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>Bookstore</span>'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Support</span>.*?class=(?:"nav__mobile"|nav__mobile).*?<span[^>]*>Archive</span>.*?<span[^>]*>Collections</span>.*?<span[^>]*>Bookstore</span>.*?<span>Menu</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>About</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Support</span>'
     Message = 'expected the 404 page to use the same grouped desktop and mobile Primary navigation'
   },
   @{
@@ -5167,8 +5220,8 @@ $exactPrimaryNavExpectations = @(
   @{ Path = 'public/gallery/index.html'; Destination = '/gallery/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/apps/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/games/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
-  @{ Path = 'public/studio/index.html'; Destination = '/studio/'; GroupClass = $null; MenuCurrent = $false },
-  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $true },
+  @{ Path = 'public/studio/index.html'; Destination = '/studio/'; GroupClass = $null; MenuCurrent = $true },
+  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
   @{ Path = 'public/about/index.html'; Destination = '/about/'; GroupClass = $null; MenuCurrent = $true },
   @{ Path = 'public/support/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true },
   @{ Path = 'public/random/index.html'; Destination = '/random/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true }
@@ -5227,7 +5280,7 @@ foreach ($expectation in $exactPrimaryNavExpectations) {
 $descendantPrimaryNavExpectations = @(
   @{ Path = 'public/essays/the-risk-management-buffet/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
   @{ Path = 'public/collections/the-ledger/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
-  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $true },
+  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
   @{ Path = 'public/apps/bucks-machine/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
   @{ Path = 'public/support/cancellation-refunds/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true }

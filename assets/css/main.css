@@ -923,12 +923,12 @@ html[data-theme="light"] .paper-route-toggle{
   .nav__mobile-link--collections{
     grid-column:2;
   }
-  .nav__mobile-link--studio{
+  .nav__mobile-link--bookstore{
     grid-column:3;
   }
   .nav__mobile-link--archive::after,
   .nav__mobile-link--collections::after,
-  .nav__mobile-link--studio::after{
+  .nav__mobile-link--bookstore::after{
     position:absolute;
     top:50%;
     right:calc(0px - var(--nav-mobile-half-gap));
@@ -12239,6 +12239,7 @@ section.games-facts dd,
 
 .studio-page{
   min-width:0;
+  max-width:54rem;
   padding-top:.7rem;
   padding-bottom:3rem;
 }
@@ -12258,14 +12259,14 @@ section.games-facts dd,
   background:var(--oip-rule-engraved-gradient);
 }
 .studio-hero h1{
-  max-width:17ch;
+  max-width:25ch;
   margin:.45rem 0 0;
   color:var(--text-primary);
   font-family:var(--font-display);
-  font-size:clamp(2.65rem, 2rem + 3vw, 5rem);
+  font-size:clamp(2rem, 1.7rem + 1.5vw, 3rem);
   font-weight:620;
   letter-spacing:-.04em;
-  line-height:.96;
+  line-height:1.08;
   text-wrap:balance;
 }
 .studio-hero__deck{
@@ -12274,6 +12275,11 @@ section.games-facts dd,
   color:var(--text-secondary);
   font-size:clamp(1rem, .96rem + .2vw, 1.13rem);
   line-height:1.68;
+}
+.studio-hero__identity{
+  margin:.8rem 0 0;
+  color:var(--text-secondary);
+  line-height:1.65;
 }
 .studio-hero__trust{
   display:flex;
@@ -12306,23 +12312,19 @@ section.games-facts dd,
 .studio-hero__actions{
   display:flex;
   flex-wrap:wrap;
-  gap:.7rem;
+  align-items:center;
+  gap:.7rem 1.2rem;
   margin-top:1.35rem;
 }
-.studio-cta--secondary{
-  border-color:var(--border-soft);
-  background:transparent;
-  color:var(--text-primary);
-}
-.studio-cta--secondary:hover,
-.studio-cta--secondary:focus-visible{
-  border-color:var(--accent-hover);
-  background:var(--accent-soft);
-  color:var(--text-primary);
+.studio-hero__scope-link{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  font-size:.9rem;
 }
 .studio-section{
   min-width:0;
-  padding:clamp(2rem, 4vw, 3.4rem) 0;
+  padding:clamp(1.8rem, 3vw, 2.5rem) 0;
   border-bottom:1px solid var(--oip-rule-standard);
   scroll-margin-top:5rem;
 }
@@ -12335,48 +12337,22 @@ section.games-facts dd,
   margin:.35rem 0 0;
   color:var(--text-primary);
   font-family:var(--font-display);
-  font-size:clamp(1.85rem, 1.45rem + 1.4vw, 2.8rem);
+  font-size:clamp(1.6rem, 1.35rem + 1vw, 2.1rem);
   font-weight:620;
   letter-spacing:-.02em;
   line-height:1.05;
   text-wrap:balance;
 }
 .studio-section__header > p:not(.studio-section__number),
-.studio-section__body > p,
-.studio-conversion > div > p:not(.studio-section__number),
 .studio-form__header > p:not(.studio-section__number){
   max-width:68ch;
   margin:.75rem 0 0;
   color:var(--text-secondary);
   line-height:1.72;
 }
-.studio-problem{
-  display:grid;
-  grid-template-columns:minmax(8rem, .42fr) minmax(0, 1.58fr);
-  gap:1rem 2.5rem;
-  align-items:start;
-}
-.studio-problem .studio-section__number{
-  padding-top:.35rem;
-}
-.studio-scope__grid{
-  display:grid;
-  grid-template-columns:repeat(2, minmax(0, 1fr));
-  gap:1rem;
-}
-.studio-scope__column,
-.studio-proof__card,
-.studio-pricing__panel{
-  min-width:0;
-  padding:clamp(1rem, 2vw, 1.35rem);
-  border:1px solid var(--border-soft);
-  border-radius:var(--radius-soft);
-  background:var(--paper-surface-wash), var(--bg-surface);
-  box-shadow:var(--paper-shadow);
-}
-.studio-scope__column h3,
+.studio-details__body h3,
 .studio-process__steps h3,
-.studio-proof__card h3,
+.studio-proof__item h3,
 .studio-faq__list h3{
   margin:0;
   color:var(--text-primary);
@@ -12385,26 +12361,51 @@ section.games-facts dd,
   font-weight:650;
   line-height:1.2;
 }
-.studio-scope__column ul,
-.studio-pricing__panel ul,
+.studio-scope__deliverables,
+.studio-details__body > ul,
 .studio-exclusions__list{
   margin:.85rem 0 0;
   padding-left:1.15rem;
   color:var(--text-secondary);
   line-height:1.65;
 }
-.studio-scope__column li + li,
-.studio-pricing__panel li + li,
+.studio-scope__deliverables li + li,
+.studio-details__body > ul > li + li,
 .studio-exclusions__list li + li{
   margin-top:.4rem;
 }
-.studio-scope__note{
-  margin:.9rem 0 0;
-  padding-top:.75rem;
+.studio-scope__terms{
+  margin:1.2rem 0 0;
+  padding-top:.5rem;
   border-top:1px solid var(--border-subtle);
-  color:var(--text-muted);
-  font-size:.83rem;
-  line-height:1.6;
+  color:var(--text-secondary);
+  font-size:.92rem;
+  line-height:1.65;
+}
+.studio-scope__terms p{
+  margin:.7rem 0 0;
+}
+.studio-details__item{
+  border-top:1px solid var(--oip-rule-standard);
+}
+.studio-details__item > summary{
+  min-height:44px;
+  padding:.75rem .2rem;
+  color:var(--text-primary);
+  font-family:var(--font-ui);
+  font-weight:650;
+  line-height:1.5;
+  cursor:pointer;
+}
+.studio-details__item > summary:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
+}
+.studio-details__body{
+  padding:.5rem 0 1.2rem;
+}
+.studio-details__body > ul + h3{
+  margin-top:1.2rem;
 }
 .studio-process__steps{
   display:grid;
@@ -12434,7 +12435,7 @@ section.games-facts dd,
   letter-spacing:.12em;
 }
 .studio-process__steps p,
-.studio-proof__card > p:not(.studio-proof__type),
+.studio-proof__item > p:not(.studio-proof__type),
 .studio-faq__list p{
   margin:.55rem 0 0;
   color:var(--text-secondary);
@@ -12446,12 +12447,8 @@ section.games-facts dd,
   grid-template-columns:minmax(8rem, .42fr) minmax(0, 1.58fr);
   gap:.6rem 2.5rem;
   align-items:start;
-  margin-top:1.15rem;
-  padding:1rem 1.05rem;
-  border:1px solid var(--border-soft);
-  border-radius:var(--radius-soft);
-  background:var(--paper-surface-wash), var(--bg-surface);
-  box-shadow:var(--paper-shadow);
+  margin:1.15rem 0;
+  padding:.25rem 0 1rem;
 }
 .studio-operator__eyebrow{
   padding-top:.12rem;
@@ -12462,61 +12459,54 @@ section.games-facts dd,
   font-size:.9rem;
   line-height:1.68;
 }
-.studio-operator__body a{
+.studio-operator__body a,
+.studio-hero__identity a,
+.studio-hero__scope-link{
   color:var(--accent-hover);
   font-weight:700;
   text-decoration-color:rgba(153,173,191,.62);
   text-underline-offset:.18em;
 }
-.studio-operator__body a:hover{
+.studio-operator__body a:hover,
+.studio-hero__identity a:hover,
+.studio-hero__scope-link:hover{
   color:var(--text-primary);
   text-decoration-color:currentColor;
 }
-.studio-operator__body a:focus-visible{
+.studio-operator__body a:focus-visible,
+.studio-hero__identity a:focus-visible,
+.studio-hero__scope-link:focus-visible{
   outline:2px solid var(--focus-ring);
   outline-offset:2px;
 }
-.studio-proof__grid{
+.studio-proof__list{
   display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:.8rem;
+  grid-template-columns:minmax(0, 1fr);
 }
-.studio-proof__card h3{
+.studio-proof__item{
+  min-width:0;
+  padding:1rem 0;
+  border-top:1px solid var(--oip-rule-standard);
+}
+.studio-proof__item h3{
   margin-top:.48rem;
   font-size:1.08rem;
 }
-.studio-proof__card h3 a{
+.studio-proof__item h3 a{
   color:inherit;
   text-decoration:none;
 }
-.studio-proof__card h3 a:hover,
-.studio-proof__card h3 a:focus-visible{
+.studio-proof__item h3 a:hover,
+.studio-proof__item h3 a:focus-visible{
   color:var(--accent-hover);
   text-decoration:underline;
 }
 .studio-proof__disclosure,
-.studio-pricing__note{
+.studio-hero__price-note{
   margin:.85rem 0 0;
   color:var(--text-muted);
-  font-size:.79rem;
+  font-size:.85rem;
   line-height:1.6;
-}
-.studio-pricing__panel{
-  display:grid;
-  grid-template-columns:minmax(9rem, .45fr) minmax(0, 1.55fr);
-  gap:1rem 2rem;
-  align-items:start;
-}
-.studio-pricing__amount{
-  margin:0;
-  color:var(--text-primary);
-  font-family:var(--font-display);
-  font-size:clamp(2.2rem, 4vw, 3.35rem);
-  font-weight:650;
-  line-height:1;
-}
-.studio-pricing__panel ul{
-  margin-top:0;
 }
 .studio-exclusions__list{
   columns:2;
@@ -12538,22 +12528,12 @@ section.games-facts dd,
 }
 .studio-faq__list{
   display:grid;
-  grid-template-columns:repeat(2, minmax(0, 1fr));
-  gap:0 2rem;
+  grid-template-columns:minmax(0, 1fr);
 }
 .studio-faq__list section{
   min-width:0;
   padding:1rem 0;
   border-top:1px solid var(--oip-rule-standard);
-}
-.studio-conversion{
-  display:grid;
-  grid-template-columns:minmax(0, 1fr) auto;
-  gap:1.25rem 2rem;
-  align-items:end;
-}
-.studio-conversion .studio-cta{
-  min-width:13rem;
 }
 .studio-form{
   border-bottom:0;
@@ -12564,12 +12544,26 @@ section.games-facts dd,
 }
 .studio-form form{
   display:grid;
-  gap:1rem;
-  padding:clamp(1rem, 2.5vw, 1.5rem);
-  border:1px solid var(--border-soft);
-  border-radius:var(--radius-soft);
-  background:var(--paper-surface-wash), var(--bg-surface);
-  box-shadow:var(--paper-shadow);
+  gap:1.2rem;
+}
+.studio-form__group{
+  min-width:0;
+  margin:0;
+  padding:0;
+  border:0;
+}
+.studio-form__group + .studio-form__group{
+  margin-top:.5rem;
+}
+.studio-form__group > legend{
+  width:100%;
+  margin-bottom:1rem;
+  padding:0 0 .6rem;
+  border-bottom:1px solid var(--oip-rule-standard);
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:1.25rem;
+  font-weight:650;
 }
 .studio-form__grid{
   display:grid;
@@ -12684,16 +12678,10 @@ section.games-facts dd,
   line-height:1.62;
 }
 
-@media (max-width:760px){
+@media (max-width:768px){
   .home-studio-offer,
-  .studio-problem,
   .studio-operator,
-  .studio-scope__grid,
   .studio-process__steps,
-  .studio-proof__grid,
-  .studio-pricing__panel,
-  .studio-faq__list,
-  .studio-conversion,
   .studio-form__grid{
     grid-template-columns:1fr;
   }
@@ -12703,29 +12691,14 @@ section.games-facts dd,
   .home-studio-offer__action{
     justify-items:start;
   }
-  .studio-problem{
-    gap:.35rem;
-  }
   .studio-operator{
     gap:.45rem;
-  }
-  .studio-problem .studio-section__number{
-    padding-top:0;
   }
   .studio-process__steps{
     gap:0;
   }
-  .studio-pricing__panel{
-    gap:.85rem;
-  }
   .studio-exclusions__list{
     columns:1;
-  }
-  .studio-conversion{
-    align-items:start;
-  }
-  .studio-conversion .studio-cta{
-    justify-self:start;
   }
   .studio-form__field--wide{
     grid-column:1;
@@ -12738,8 +12711,7 @@ section.games-facts dd,
   }
   .home-studio-offer__cta,
   .studio-hero__actions,
-  .studio-hero__actions .studio-cta,
-  .studio-conversion .studio-cta{
+  .studio-hero__actions .studio-cta{
     width:100%;
   }
   .studio-hero__trust{
@@ -12750,13 +12722,6 @@ section.games-facts dd,
   }
   .studio-section{
     padding:1.8rem 0;
-  }
-  .studio-operator,
-  .studio-scope__column,
-  .studio-proof__card,
-  .studio-pricing__panel,
-  .studio-form form{
-    padding:.9rem;
   }
 }
 

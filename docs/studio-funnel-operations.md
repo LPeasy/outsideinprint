@@ -2,6 +2,36 @@
 
 Keep prospect messages, attachments, and private notes out of the public repository. Filter Studio messages with the current `inquiry.subject_prefix` value in `data/studio.yaml`.
 
+## Public page and service voice
+
+Studio is Robert V. Ussley's personal service. Use “I/me/my” for the provider,
+and distinguish Robert's actions from scope agreements made with the client.
+Keep “Outside In Print” in organizational ownership, privacy, safety, and
+consent language. The opening links Robert's name to his author page; the
+fuller “Your writer and editor” note remains with the editorial examples.
+
+The page has five primary sections, in document order:
+
+1. Opening offer: configured output range, first-draft turnaround, revision,
+   active price and founding-price conditions, and “Discuss your project.”
+2. What you receive: three deliverable bullets and visible scope, payment,
+   exclusive-ownership, and publication-permission terms.
+3. See the work: the writer/editor note and three editorial examples presented
+   as simple entries, explicitly not client testimonials.
+4. Details before you inquire: three initially closed native disclosures for
+   source limits/exclusions, the process, and common questions. The safety
+   warning remains visible outside the disclosures.
+5. Inquiry: all existing fields grouped under About you, Source material, and
+   Your essay; both required acknowledgments, privacy notice, and direct-email
+   fallback remain visible. No fields are collapsed.
+
+The inquiry prepares an email draft; it does not send or submit the inquiry.
+The response-time commitment starts when the email is received. First-draft
+turnaround starts only after scope approval, the deposit, and all agreed
+source material are received. Prices and limits remain owned by
+`data/studio.yaml`; the public page does not accept payment. The dormant
+homepage promotion uses the same first-person voice but stays disabled.
+
 ## Funnel stages
 
 1. Received in the support inbox

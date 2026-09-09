@@ -355,7 +355,7 @@ foreach ($requiredSnippet in @(
   'hugo.Data.studio',
   'if $enabled',
   'founding_offer_active',
-  'You have the material. We make it publishable.',
+  'You have the material. I make it publishable.',
   'data-analytics-source-slot="homepage_studio_offer"',
   'data-analytics-path="{{ "studio/" | relURL }}"'
 )) {
@@ -407,18 +407,18 @@ foreach ($requiredSnippet in @(
   'data-analytics-event="studio_inquiry_email_prepare"',
   'data-analytics-source-slot="studio_inquiry_form"',
   'data-analytics-slug="studio"',
-  'You have the material. We make it ready to publish.',
+  'You have the material. I make it ready to publish.',
   'Fixed scope <span aria-hidden="true">&middot;</span> First draft in {{ $turnaroundDays }} business days <span aria-hidden="true">&middot;</span> One revision',
   'The {{ $turnaroundDays }}-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material.',
-  'A standard visual layout and image treatment, tailored to your preferences',
+  'A standard visual layout and image treatment tailored to your preferences',
   'class="studio-operator"',
   'Your writer and editor',
-  'Each Publication Sprint is handled by ',
+  'I handle each Publication Sprint directly',
   'Robert V. Ussley',
-  ', the writer and editor behind Outside In Print. He produces reported essays and literary analysis on risk, institutions, technology, and public life.',
-  "These are examples of our own editorial work, not client testimonials. Their visuals represent the standard deliverable and can be tailored to the client’s preferences.",
-  'You receive the complete finished file set and own the finished work exclusively. Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed.',
-  'After full payment, you own the finished work exclusively. Outside In Print retains no publication right unless you give written permission.',
+  ', the writer and editor behind Outside In Print. I handle each Publication Sprint directly and produce reported essays and literary analysis on risk, institutions, technology, and public life.',
+  "These are examples of my own editorial work, not client testimonials. Their visuals represent the standard deliverable and can be tailored to the client’s preferences.",
+  'Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed.',
+  'After full payment, you receive the complete finished file set and own the finished work exclusively. Outside In Print retains no publication right unless you give written permission.',
   'This form does not send your answers to Outside In Print or site analytics. When you select “Prepare inquiry email,” your answers go to your email app or provider to make a draft. That app or provider may save or sync the draft under its own privacy rules. Outside In Print gets your answers only if you send the email and it reaches {{ $email }}.',
   'name="role"',
   'name="source_material"',
@@ -440,6 +440,42 @@ foreach ($requiredSnippet in @(
   if ($studioTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/studio/single.html to contain: $requiredSnippet"
   }
+}
+
+$studioSectionOrder = @([regex]::Matches($studioTemplate, 'data-studio-section="([^"]+)"') | ForEach-Object { $_.Groups[1].Value })
+if (($studioSectionOrder -join ',') -cne 'offer,scope,proof,details,inquiry') {
+  throw 'Expected Studio to contain exactly five offer, scope, proof, details, and inquiry sections in order.'
+}
+$studioDisclosures = @([regex]::Matches($studioTemplate, '(?s)<details\b(?<attributes>[^>]*)>.*?<summary[^>]*>(?<label>[^<]+)</summary>.*?</details>'))
+if ((@($studioDisclosures | ForEach-Object { $_.Groups['label'].Value }) -join ',') -cne 'Source limits and exclusions,How the sprint works,Common questions') {
+  throw 'Expected three approved native Studio disclosures in order.'
+}
+foreach ($studioDisclosure in $studioDisclosures) {
+  if ($studioDisclosure.Groups['attributes'].Value -match '\bopen(?:\s|=|$)' -or $studioDisclosure.Value -match '<form\b|<fieldset\b|name="(?:commercial|source_safety)_acknowledgement"') {
+    throw 'Expected secondary Studio details to start closed and never contain inquiry fields or acknowledgments.'
+  }
+}
+$studioLegends = @([regex]::Matches($studioTemplate, '<legend[^>]*>([^<]+)</legend>') | ForEach-Object { $_.Groups[1].Value })
+if (($studioLegends -join ',') -cne 'About you,Source material,Your essay') {
+  throw 'Expected three Studio form fieldsets with meaningful legends.'
+}
+foreach ($requiredSnippet in @(
+  'I turn one recording, transcript, presentation, draft, or source packet into a clear, {{ lang.FormatNumber 0 $outputMinimum }}–{{ lang.FormatNumber 0 $outputMaximum }}-word essay in your voice, with your byline.',
+  "You’ll work directly with <a href=`"/authors/robert-v-ussley/`">Robert V. Ussley</a>.",
+  '>Discuss your project</a>',
+  'Tell me about your project. This form prepares an email draft; you review and send it yourself.',
+  'I will reply within {{ $replyDays }} business days after I receive your email',
+  'I review each project and agree on the written scope with you before you pay.'
+)) {
+  if (-not $studioTemplate.Contains($requiredSnippet)) {
+    throw "Expected the streamlined Studio offer to contain: $requiredSnippet"
+  }
+}
+if ([regex]::Matches($studioTemplate, 'href="#studio-inquiry"').Count -ne 1) {
+  throw 'Expected one primary Studio hero-to-inquiry CTA without a duplicate conversion block.'
+}
+if ($studioTemplate -match 'studio-problem|studio-conversion|studio-pricing__panel|studio-proof__card|studio-cta--secondary') {
+  throw 'Expected the Studio template to omit retired panels and competing calls to action.'
 }
 
 foreach ($obsoletePublicationClaim in @(
@@ -578,7 +614,7 @@ foreach ($requiredSnippet in @(
   'clean(form.dataset.depositPercent).length > 0',
   '"Price acknowledgment: I understand that the current rate is " + clean(form.dataset.currentRate) + ". A " + clean(form.dataset.depositPercent) + "% deposit is required to book the project."',
   '"Safety acknowledgment: I have not attached or pasted confidential, classified, privileged, export-controlled, or restricted source material. I will wait for Outside In Print to ask for source files and tell me what it can accept and how to send it."',
-  'Outside In Print will receive your inquiry only if you send the email and it reaches us.'
+  'I will receive your inquiry only if you send the email and it reaches me.'
 )) {
   if ($studioScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected assets/js/studio-inquiry.js to contain: $requiredSnippet"
@@ -1195,7 +1231,7 @@ if ($mastheadPartial -notmatch '(?s)nav-disclosure--read.*<span>Read</span>.*nav
 }
 
 if ($mastheadPartial -notmatch '(?s)class="nav__mobile".*range \$mobilePrimaryItems.*<span>Menu</span>') {
-  throw 'Expected layouts/partials/masthead.html to render the Archive, Collections, and Studio mobile-primary items before Menu.'
+  throw 'Expected layouts/partials/masthead.html to render the Archive, Collections, and Bookstore mobile-primary items before Menu.'
 }
 
 foreach ($requiredNavigationSnippet in @(
@@ -1256,12 +1292,12 @@ $studioNavIndex = $mastheadPartial.IndexOf('"label" "Studio"', [System.StringCom
 $bookstoreNavIndex = $mastheadPartial.IndexOf('"label" "Bookstore"', [System.StringComparison]::Ordinal)
 $aboutNavIndex = $mastheadPartial.IndexOf('"label" "About"', [System.StringComparison]::Ordinal)
 $supportNavIndex = $mastheadPartial.IndexOf('"label" "Support"', [System.StringComparison]::Ordinal)
-if ($studioNavIndex -lt 0 -or $bookstoreNavIndex -le $studioNavIndex -or $aboutNavIndex -le $bookstoreNavIndex -or $supportNavIndex -le $aboutNavIndex) {
-  throw 'Expected direct desktop navigation order to be Studio, Bookstore, About, Support.'
+if ($bookstoreNavIndex -lt 0 -or $aboutNavIndex -le $bookstoreNavIndex -or $studioNavIndex -le $aboutNavIndex -or $supportNavIndex -le $studioNavIndex) {
+  throw 'Expected direct desktop navigation order to be Bookstore, About, Studio, Support.'
 }
 
-if ($mastheadPartial -notmatch '(?s)"label" "Studio".*?"mobilePrimary" true' -or $mastheadPartial -notmatch '(?s)"label" "Bookstore".*?"mobilePrimary" false') {
-  throw 'Expected Studio to own the closed mobile slot while Bookstore remains in the expanded Menu.'
+if ($mastheadPartial -notmatch '(?s)"label" "Studio".*?"mobilePrimary" false' -or $mastheadPartial -notmatch '(?s)"label" "Bookstore".*?"mobilePrimary" true') {
+  throw 'Expected Bookstore to own the closed mobile slot while Studio follows About in the expanded Menu.'
 }
 
 if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_support"') {

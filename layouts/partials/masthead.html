@@ -118,28 +118,13 @@
 {{ end }}
 {{ $navItems = $navItems | append
   (dict
-    "key" "studio"
-    "label" "Studio"
-    "href" ("studio/" | absURL)
-    "group" "direct"
-    "currentPage" $isStudioPage
-    "currentSection" $inStudioSection
-    "mobilePrimary" true
-    "analyticsEvent" "internal_promo_click"
-    "analyticsSourceSlot" "primary_nav_studio"
-    "analyticsSlug" "studio"
-    "analyticsTitle" "Outside In Print Studio"
-    "analyticsSection" "Studio"
-    "analyticsPath" ("studio/" | relURL)
-  )
-  (dict
     "key" "bookstore"
     "label" "Bookstore"
     "href" ("shop/" | absURL)
     "group" "direct"
     "currentPage" $isBookstorePage
     "currentSection" $inBookstoreSection
-    "mobilePrimary" false
+    "mobilePrimary" true
     "analyticsEvent" "internal_promo_click"
     "analyticsSourceSlot" "primary_nav_bookstore"
     "analyticsSlug" "bookstore"
@@ -155,6 +140,21 @@
     "currentPage" $isAboutPage
     "currentSection" $inAboutSection
     "mobilePrimary" false
+  )
+  (dict
+    "key" "studio"
+    "label" "Studio"
+    "href" ("studio/" | absURL)
+    "group" "direct"
+    "currentPage" $isStudioPage
+    "currentSection" $inStudioSection
+    "mobilePrimary" false
+    "analyticsEvent" "internal_promo_click"
+    "analyticsSourceSlot" "primary_nav_studio"
+    "analyticsSlug" "studio"
+    "analyticsTitle" "Outside In Print Studio"
+    "analyticsSection" "Studio"
+    "analyticsPath" ("studio/" | relURL)
   )
   (dict
     "key" "support"

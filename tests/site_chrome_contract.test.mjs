@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
 
 function escapeRegex(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -154,9 +155,11 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$isGamesPage := and \$gamesPage \(eq \$currentPath \$gamesPage\.RelPermalink\)/);
   assert.match(masthead, /\$inGamesSection := or \$isGamesPage \(eq \.Section "games"\)/);
 
-  assert.match(masthead, /"label" "Studio"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true[\s\S]*?"analyticsSourceSlot" "primary_nav_studio"/);
-  assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
-  assert.ok(masthead.indexOf('"label" "Studio"') < masthead.indexOf('"label" "Bookstore"'));
+  assert.match(masthead, /"label" "Studio"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false[\s\S]*?"analyticsSourceSlot" "primary_nav_studio"/);
+  assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
+  const directNavOrder = ["Bookstore", "About", "Studio", "Support"].map((label) => masthead.indexOf(`"label" "${label}"`));
+  assert.ok(directNavOrder.every((index) => index >= 0));
+  assert.deepEqual(directNavOrder, [...directNavOrder].sort((left, right) => left - right));
   assert.match(masthead, /"label" "About"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
   assert.match(masthead, /"label" "Support"[\s\S]*?"group" "direct"[\s\S]*?"analyticsSourceSlot" "primary_nav_support"/);
   assert.match(masthead, /\$currentPath := \.RelPermalink/);
@@ -239,7 +242,7 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.75rem;[\s\S]*?letter-spacing:0;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:(?:repeat\(4,\s*minmax\(0,\s*1fr\)\)|(?:minmax\(0,\s*(?:\d*\.?\d+)fr\)\s*){4});/);
   assert.match(css, /--nav-mobile-gap:clamp\(2px, 1vw, 4px\);/);
-  assert.match(css, /\.nav__mobile-link--archive::after,[\s\S]*?\.nav__mobile-link--collections::after,[\s\S]*?\.nav__mobile-link--studio::after/);
+  assert.match(css, /\.nav__mobile-link--archive::after,[\s\S]*?\.nav__mobile-link--collections::after,[\s\S]*?\.nav__mobile-link--bookstore::after/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link\{[\s\S]*?min-height:44px;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?justify-self:end;[\s\S]*?gap:\.25rem;/);
   assert.doesNotMatch(css, /\.nav-mobile-menu\{(?:(?!\n\s*\}).)*grid-template-columns/s);
@@ -782,6 +785,51 @@ test("homepage composition leads from the Almanack signup into the bookstore, mo
   assert.match(cartoonData, new RegExp(`slug: ${escapeRegex(currentCartoonSlug)}`));
 });
 
+test("Studio presents five focused sections with visible terms and native secondary details", () => {
+  assert.deepEqual([...studioTemplate.matchAll(/data-studio-section="([^"]+)"/g)].map((match) => match[1]), ["offer", "scope", "proof", "details", "inquiry"]);
+  const studioDisclosures = [...studioTemplate.matchAll(/<details\b([^>]*)>[\s\S]*?<summary[^>]*>([^<]+)<\/summary>[\s\S]*?<\/details>/g)];
+  assert.deepEqual(studioDisclosures.map((match) => match[2]), ["Source limits and exclusions", "How the sprint works", "Common questions"]);
+  for (const disclosure of studioDisclosures) {
+    assert.doesNotMatch(disclosure[1], /\bopen(?:\s|=|$)/);
+    assert.doesNotMatch(disclosure[0], /<form\b|<fieldset\b|name="(?:commercial|source_safety)_acknowledgement"/);
+  }
+  assert.doesNotMatch(studioTemplate, /studio-problem|studio-pricing__panel|studio-conversion|studio-proof__card|studio-cta--secondary|role="(?:menu|menuitem)"/);
+  assert.match(studioTemplate, /I turn one recording, transcript, presentation, draft, or source packet into a clear, \{\{ lang\.FormatNumber 0 \$outputMinimum \}\}–\{\{ lang\.FormatNumber 0 \$outputMaximum \}\}-word essay in your voice, with your byline\./);
+  const identityIndex = studioTemplate.indexOf('You’ll work directly with <a href="/authors/robert-v-ussley/">Robert V. Ussley</a>.');
+  assert.ok(identityIndex > studioTemplate.indexOf('class="studio-hero__deck"'));
+  assert.ok(identityIndex < studioTemplate.indexOf('class="studio-hero__trust"'));
+  const hero = studioTemplate.slice(studioTemplate.indexOf('data-studio-section="offer"'), studioTemplate.indexOf('data-studio-section="scope"'));
+  assert.match(hero, /data-analytics-source-slot="studio_hero_to_form"[\s\S]*?>Discuss your project<\/a>/);
+  assert.equal((studioTemplate.match(/href="#studio-inquiry"/g) || []).length, 1);
+  assert.match(hero, /href="#studio-scope">See what’s included<\/a>/);
+  assert.match(hero, /\$foundingPrice[\s\S]*?\$foundingLimit[\s\S]*?\$standardPrice/);
+  const scope = studioTemplate.slice(studioTemplate.indexOf('data-studio-section="scope"'), studioTemplate.indexOf('data-studio-section="proof"'));
+  assert.doesNotMatch(scope, /<details\b/);
+  for (const text of ["Choose one main source set.", "I review each project and agree on the written scope with you before you pay.", "After full payment, you receive the complete finished file set and own the finished work exclusively.", "Outside In Print retains no publication right unless you give written permission.", "publication is not guaranteed"]) {
+    assert.ok(scope.includes(text), `essential Studio term must remain visible: ${text}`);
+  }
+  assert.match(scope, /\$depositPercent/);
+  assert.match(scope, /\$finalPercent/);
+  assert.deepEqual([...studioTemplate.matchAll(/<legend[^>]*>([^<]+)<\/legend>/g)].map((match) => match[1]), ["About you", "Source material", "Your essay"]);
+  assert.match(studioTemplate, /Tell me about your project\. This form prepares an email draft; you review and send it yourself\./);
+  assert.match(homeStudioOffer, /You have the material\. I make it publishable\./);
+  assert.doesNotMatch(homepage, /partial "home_studio_offer\.html"/);
+  assert.match(cssRule(css, ".studio-page"), /max-width:54rem;/);
+  assert.match(cssRule(css, ".studio-hero h1"), /font-size:clamp\(2rem, 1\.7rem \+ 1\.5vw, 3rem\);/);
+  assert.match(cssRule(css, ".studio-details__item > summary"), /min-height:44px;/);
+  assert.match(cssRule(css, ".studio-details__item > summary:focus-visible"), /outline:3px solid var\(--focus-ring\);/);
+  assert.match(cssRule(css, ".studio-form__grid"), /grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /@media \(max-width:768px\)\{[^}]*?\.studio-form__grid\{\s*grid-template-columns:1fr;/);
+  for (const [href, description] of [
+    ["/essays/what-happened-at-camp-mystic/", "Public records and a hard-to-follow timeline became a clear account for general readers."],
+    ["/essays/jack-stratton-and-the-vulfpeck-model/", "Interviews and public sources became one clear profile."],
+    ["/syd-and-oliver/peaches-or-greece/", "A recorded conversation became a finished dialogue."],
+  ]) {
+    assert.equal(studioTemplate.split(`href="${href}"`).length - 1, 1);
+    assert.ok(studioTemplate.includes(description));
+  }
+});
+
 test("Studio funnel keeps pricing, scope, inquiry configuration, and mail composition data-driven", () => {
   for (const snippet of [
     'offer_code: "OIP-STUDIO-EXPERT-ESSAY"',
@@ -838,19 +886,19 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioTemplate, /name="source_safety_acknowledgement" type="checkbox" value="acknowledged" required>/);
   assert.match(studioTemplate, /How much source material do you have\?/);
   assert.match(studioTemplate, /Who should read the essay\?/);
-  const studioFieldOrder = ["source_material", "source_size", "intended_reader", "project_subject"]
+  const studioFieldOrder = ["name", "email", "website", "role", "source_material", "source_size", "intended_reader", "project_subject", "desired_outcome", "timeline", "source_safety_acknowledgement", "commercial_acknowledgement"]
     .map((name) => studioTemplate.indexOf(`name="${name}"`));
   assert.ok(studioFieldOrder.every((index) => index >= 0), "expected all ordered Studio qualification fields");
   assert.deepEqual(studioFieldOrder, [...studioFieldOrder].sort((left, right) => left - right));
-  assert.match(studioTemplate, /You have the material\. We make it ready to publish\./);
+  assert.match(studioTemplate, /You have the material\. I make it ready to publish\./);
   assert.match(studioTemplate, /Fixed scope <span aria-hidden="true">&middot;<\/span> First draft in \{\{ \$turnaroundDays \}\} business days <span aria-hidden="true">&middot;<\/span> One revision/);
   assert.match(studioTemplate, /The \{\{ \$turnaroundDays \}\}-business-day clock starts after three things happen: you approve the written scope, pay the deposit, and send all agreed source material\./);
-  assert.match(studioTemplate, /A standard visual layout and image treatment, tailored to your preferences/);
+  assert.match(studioTemplate, /standard visual layout and image treatment tailored to your preferences/);
   assert.match(studioTemplate, /<p(?=[^>]*\bid="studio-operator-title")(?=[^>]*\bclass="[^"]*\bstudio-operator__eyebrow\b[^"]*")[^>]*>Your writer and editor<\/p>/);
-  assert.match(studioTemplate, /Each Publication Sprint is handled by <a href="\/authors\/robert-v-ussley\/">Robert V\. Ussley<\/a>, the writer and editor behind Outside In Print\. He produces reported essays and literary analysis on risk, institutions, technology, and public life\./);
-  assert.match(studioTemplate, /These are examples of our own editorial work, not client testimonials\. Their visuals represent the standard deliverable and can be tailored to the client’s preferences\./);
-  assert.match(studioTemplate, /You receive the complete finished file set and own the finished work exclusively\. Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed\./);
-  assert.match(studioTemplate, /After full payment, you own the finished work exclusively\. Outside In Print retains no publication right unless you give written permission\./);
+  assert.match(studioTemplate, /I’m <a href="\/authors\/robert-v-ussley\/">Robert V\. Ussley<\/a>, the writer and editor behind Outside In Print\. I handle each Publication Sprint directly and produce reported essays and literary analysis on risk, institutions, technology, and public life\./);
+  assert.match(studioTemplate, /These are examples of my own editorial work, not client testimonials\. Their visuals represent the standard deliverable and can be tailored to the client’s preferences\./);
+  assert.match(studioTemplate, /Outside In Print may publish it at your request, with your written approval, but publication is not guaranteed\./);
+  assert.match(studioTemplate, /After full payment, you receive the complete finished file set and own the finished work exclusively\. Outside In Print retains no publication right unless you give written permission\./);
   assert.doesNotMatch(studioTemplate, /Outside In Print reserves the right to publish the essay on outsideinprint\.org\./);
   assert.doesNotMatch(studioTemplate, /Outside In Print keeps the right to publish the finished essay on outsideinprint\.org\./);
   assert.doesNotMatch(studioTemplate, /Outside In Print publishes it only if you ask us to and approve publication\./);
@@ -888,7 +936,7 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.ok(guidedBodyOrder.every((index) => index >= 0), "expected all ordered guided-email fields");
   assert.deepEqual(guidedBodyOrder, [...guidedBodyOrder].sort((left, right) => left - right));
   assert.doesNotMatch(studioScript, /"(?:Offer code|Source page): "/);
-  assert.match(studioScript, /Outside In Print will receive your inquiry only if you send the email and it reaches us\./);
+  assert.match(studioScript, /I will receive your inquiry only if you send the email and it reaches me\./);
   assert.ok(studioScript.indexOf('form.addEventListener("submit", prepareInquiry)') < studioScript.indexOf("submitButton.disabled = false"));
   assert.doesNotMatch(studioScript, /fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|document\.cookie|localStorage|sessionStorage|navigator\.clipboard/);
   assert.doesNotMatch(studioScript, /delivery confirmed|successfully sent|inquiry received/i);
@@ -921,6 +969,83 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioSampleExit, /data-analytics-source-slot="studio_sample_exit"/);
   assert.match(studioSampleExit, />Start a Publication Sprint<\/a>/);
   assert.match(analyticsDoc, /`studio_sample_exit` is the `internal_promo_click` source slot for the three marked Studio sample article exits\./);
+});
+
+function runStudioComposerMock({ missingField = "", datasetOverride = {} } = {}) {
+  const values = {
+    name: "Alex Reader",
+    email: "alex@example.test",
+    website: "",
+    role: "Independent expert",
+    source_material: "Transcript",
+    source_size: "8,000 words",
+    intended_reader: "General readers",
+    project_subject: "Risk & choices?",
+    desired_outcome: "Explain the tradeoffs.\r\nOffer a useful next step.",
+    timeline: "Within 30 days",
+    source_safety_acknowledgement: "acknowledged",
+    commercial_acknowledgement: "acknowledged",
+  };
+  const button = { disabled: true };
+  const status = { textContent: "" };
+  let submit;
+  const form = {
+    dataset: {
+      inquiryEmail: "support@outsideinprint.org",
+      inquirySubjectPrefix: "Outside In Print Studio Inquiry",
+      currentRate: "$1,250",
+      depositPercent: "50",
+      offerCode: "OIP-STUDIO-EXPERT-ESSAY",
+      sourcePage: "https://outsideinprint.org/studio/",
+      ...datasetOverride,
+    },
+    elements: { namedItem: (name) => name === missingField ? null : { name } },
+    querySelector: (selector) => selector === 'button[type="submit"]' ? button : status,
+    addEventListener: (event, listener) => {
+      assert.equal(event, "submit");
+      assert.equal(button.disabled, true, "attach the handler before enabling email preparation");
+      submit = listener;
+    },
+  };
+  const window = { location: { href: "" } };
+  vm.runInNewContext(studioScript, {
+    document: { querySelector: () => form },
+    window,
+    FormData: class { get(name) { return values[name] ?? null; } },
+  });
+  return { button, status, window, submit };
+}
+
+test("Studio email preparation creates a reviewable encoded draft without sending an inquiry", () => {
+  const composer = runStudioComposerMock();
+  assert.equal(composer.button.disabled, false);
+  assert.equal(composer.window.location.href, "");
+  let prevented = false;
+  composer.submit({ preventDefault() { prevented = true; } });
+  assert.equal(prevented, true);
+  const mailto = new URL(composer.window.location.href);
+  assert.equal(mailto.protocol, "mailto:");
+  assert.equal(mailto.pathname, "support@outsideinprint.org");
+  assert.equal(mailto.searchParams.get("subject"), "Outside In Print Studio Inquiry — Risk & choices?");
+  const body = mailto.searchParams.get("body");
+  assert.match(body, /Website or profile: Not provided/);
+  assert.match(body, /Source material: Transcript\r\nSource size: 8,000 words\r\nIntended reader: General readers\r\nProposed essay: Risk & choices\?/);
+  assert.match(body, /Desired outcome: Explain the tradeoffs\.\r\nOffer a useful next step\./);
+  assert.match(body, /current rate is \$1,250\. A 50% deposit is required/);
+  assert.match(body, /Safety acknowledgment: I have not attached or pasted/);
+  assert.doesNotMatch(body, /(?:Offer code|Source page):/);
+  assert.match(composer.window.location.href, /%20|%0D%0A/);
+  assert.match(composer.status.textContent, /Review it before you send it\./);
+  assert.match(composer.status.textContent, /only if you send the email and it reaches me\./);
+});
+
+test("Studio keeps email preparation disabled when required fields or configuration are unavailable", () => {
+  for (const options of [{ missingField: "commercial_acknowledgement" }, { datasetOverride: { inquiryEmail: "not-an-email" } }]) {
+    const composer = runStudioComposerMock(options);
+    assert.equal(composer.button.disabled, true);
+    assert.equal(composer.submit, undefined);
+    assert.equal(composer.window.location.href, "");
+  }
 });
 
 test("homepage editorial layout uses the new manifesto namespace and drops dead start-here hooks", () => {
