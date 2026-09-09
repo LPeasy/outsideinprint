@@ -80,6 +80,8 @@ GoatCounter `/studio/` pageviews measure Studio visits. `studio_inquiry_email_pr
 
 `studio_sample_exit` is the `internal_promo_click` source slot for the three marked Studio sample article exits. It measures a reader moving from a finished sample to `/studio/#studio-inquiry`; it does not indicate that the reader prepared a draft, sent a message, or completed an inquiry.
 
+On the Jack Stratton profile, that same inquiry link now lives in the focused reading-and-Studio exit; the production note does not duplicate it. The focused exits on *A Thousand Brick Walls* and *What Is Risk?* use the existing `article_exit_paths` slot for their Studio links. Each of these three exits has one hand-selected reading link in `article_continuation_primary`; the two retained collection destinations use `collection_click`, while the manually selected Franklin biography uses `internal_promo_click`. No new event, tracking field, or inquiry-submission claim is added.
+
 The `support@outsideinprint.org` inbox is the source of truth for received inquiries. Manual review is the source of truth for qualified inquiries and scopes sent. Square is the source of truth for deposits and final payments. Inquiry-field values are not analytics metadata.
 
 ## Read Tracking Rules

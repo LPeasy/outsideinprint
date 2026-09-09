@@ -82,6 +82,10 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 ### Article pages
 
+- Three manually selected homepage-featured pieces have a focused exit instead of the full collection continuation: the Jack Stratton profile, *A Thousand Brick Walls*, and *What Is Risk? A Four-Part Framework*. `data/featured_continuations.json` owns one existing reading route and two connection sentences per source page. `article/featured-continuation.html` renders one reading link and one Studio inquiry link; it does not rank or discover recommendations. The reading route must resolve to a published page. These route-bound choices do not automatically move when the homepage's latest dialogue changes.
+- The two existing collection continuations retain their `article_continuation_primary` / `collection_click` metadata and collection slugs. Jack's manually selected Benjamin Franklin recommendation uses `internal_promo_click` in that same primary slot. Studio links retain `studio_sample_exit` for Jack and use the existing `article_exit_paths` slot on the other two pieces; no new analytics event is introduced.
+- Jack's Studio production note remains, but its standalone inquiry CTA is suppressed when the focused exit supplies that link. Other Studio sample exits stay unchanged. Existing newsletter prompts, forms, and final archive links are unchanged; no signup block is added. These are navigation-only changes, not revisions to the article bodies or citation records.
+
 - A collection-member article renders exactly one article-exit continuation zone.
 - After the publication record, collection-member articles render one compact Bob's Almanack jump link before the continuation zone; its target remains the full canonical signup below that zone. Non-collection articles omit the compact prompt because the full signup already follows their publication record directly.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.

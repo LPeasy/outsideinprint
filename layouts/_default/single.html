@@ -3,6 +3,7 @@
   {{ $meta := partial "metadata/page.html" . }}
   {{ $sectionPage := .CurrentSection }}
   {{ $articleVariant := partial "article/variant-key.html" . }}
+  {{ $featuredContinuation := index (hugo.Data.featured_continuations | default dict) .RelPermalink }}
   {{ $articleClasses := slice "piece" }}
   {{ with .Params.style_variant }}
     {{ $articleClasses = $articleClasses | append (printf "style-variant-%s" (urlize (printf "%v" .))) }}
@@ -194,7 +195,10 @@
       {{ end }}
 
       {{ with .Params.studio_sample }}
-        {{ partial "article/studio-sample-exit.html" (dict "page" $ "sample" .) }}
+        {{ partial "article/studio-sample-exit.html" (dict "page" $ "sample" . "hideCTA" (not (not $featuredContinuation))) }}
+        {{ with $featuredContinuation }}
+          {{ partial "article/featured-continuation.html" (dict "page" $ "entry" .) }}
+        {{ end }}
       {{ else }}
         {{ if $showCollectionContinuation }}
           {{ partial "newsletter_prompt.html" (dict
@@ -205,7 +209,9 @@
           ) }}
         {{ end }}
 
-        {{ if $showCollectionContinuation }}
+        {{ if $featuredContinuation }}
+          {{ partial "article/featured-continuation.html" (dict "page" . "entry" $featuredContinuation) }}
+        {{ else if $showCollectionContinuation }}
           {{ partial "collections/reading-path.html" . }}
         {{ end }}
 

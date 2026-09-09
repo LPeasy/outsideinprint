@@ -198,7 +198,7 @@ test("article aftermatter keeps its publication record and selects one controlle
   const citation = articleSingle.indexOf("article-publication-record__section--citation", publicationRecord);
   const revisions = articleSingle.indexOf("article-publication-record__section--revisions", publicationRecord);
   const studioSampleGate = articleSingle.indexOf("{{ with .Params.studio_sample }}", revisions);
-  const studioSamplePartial = articleSingle.indexOf('partial "article/studio-sample-exit.html" (dict "page" $ "sample" .)', studioSampleGate);
+  const studioSamplePartial = articleSingle.indexOf('partial "article/studio-sample-exit.html" (dict "page" $ "sample" . "hideCTA" (not (not $featuredContinuation)))', studioSampleGate);
   const standardExitBranch = articleSingle.indexOf("{{ else }}", studioSamplePartial);
   const newsletterPrompt = articleSingle.indexOf('partial "newsletter_prompt.html"', publicationRecord);
   const continuation = articleSingle.indexOf('partial "collections/reading-path.html" .', newsletterPrompt);
@@ -231,7 +231,7 @@ test("article aftermatter keeps its publication record and selects one controlle
   assert.match(articleSingle, /"class" "journey-links--article-exit"/);
   assert.match(
     articleSingle,
-    /\{\{ with \.Params\.studio_sample \}\}\s*\{\{ partial "article\/studio-sample-exit\.html" \(dict "page" \$ "sample" \.\) \}\}\s*\{\{ else \}\}[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?partial "collections\/reading-path\.html"[\s\S]*?partial "newsletter_signup\.html"[\s\S]*?partial "journey_links\.html"[\s\S]*?\{\{ end \}\}/
+    /\{\{ with \.Params\.studio_sample \}\}\s*\{\{ partial "article\/studio-sample-exit\.html" \(dict "page" \$ "sample" \. "hideCTA" \(not \(not \$featuredContinuation\)\)\) \}\}\s*\{\{ with \$featuredContinuation \}\}\s*\{\{ partial "article\/featured-continuation\.html"[\s\S]*?\{\{ end \}\}\s*\{\{ else \}\}[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?partial "collections\/reading-path\.html"[\s\S]*?partial "newsletter_signup\.html"[\s\S]*?partial "journey_links\.html"[\s\S]*?\{\{ end \}\}/
   );
 
   assert.match(studioSampleExit, /<aside class="studio-sample-exit" aria-label="Studio sample">/);

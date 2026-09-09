@@ -1,0 +1,49 @@
+{{- $page := .page -}}
+{{- $entry := .entry -}}
+{{- $target := false -}}
+{{- range site.RegularPages -}}
+  {{- if eq .RelPermalink ($entry.reading_path | relURL) -}}
+    {{- $target = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $target -}}
+  {{- errorf "Featured continuation on %q requires a published reading destination: %q" $page.RelPermalink $entry.reading_path -}}
+{{- end -}}
+{{- if or (not $entry.reading_connection) (not $entry.studio_connection) -}}
+  {{- errorf "Featured continuation on %q requires both connection sentences" $page.RelPermalink -}}
+{{- end -}}
+{{- $readingEvent := cond (not (not $entry.reading_collection)) "collection_click" "internal_promo_click" -}}
+{{- $studioSlot := cond (not (not $page.Params.studio_sample)) "studio_sample_exit" "article_exit_paths" -}}
+{{- $offerCode := hugo.Data.studio.offer_code | default "" -}}
+
+{{- with $target }}
+  <aside class="featured-continuation" aria-label="Reading and Studio next steps">
+    <section class="featured-continuation__item" aria-labelledby="featured-reading-title">
+      <h2 id="featured-reading-title">Read next</h2>
+      <p id="featured-reading-connection">{{ $entry.reading_connection }}</p>
+      <a class="featured-continuation__link" href="{{ .RelPermalink }}"
+        aria-describedby="featured-reading-connection"
+        data-analytics-event="{{ $readingEvent }}"
+        data-analytics-source-slot="article_continuation_primary"
+        {{ with $entry.reading_collection }}data-analytics-collection="{{ . }}"{{ end }}
+        data-analytics-slug="{{ .Params.slug | default .File.BaseFileName }}"
+        data-analytics-title="{{ .Title }}"
+        data-analytics-section="{{ .Params.section_label | default (humanize .Section) }}"
+        data-analytics-path="{{ .RelPermalink }}"
+      >{{ .Title }}</a>
+    </section>
+    <section class="featured-continuation__item" aria-labelledby="featured-studio-title">
+      <h2 id="featured-studio-title">Work with me</h2>
+      <p id="featured-studio-connection">{{ $entry.studio_connection }}</p>
+      <a class="featured-continuation__link" href="/studio/#studio-inquiry"
+        aria-describedby="featured-studio-connection"
+        data-analytics-event="internal_promo_click"
+        data-analytics-source-slot="{{ $studioSlot }}"
+        data-analytics-slug="studio"
+        data-analytics-product="{{ $offerCode }}"
+        data-analytics-format="service_inquiry_email"
+        data-analytics-path="/studio/#studio-inquiry"
+      >Discuss your project with Studio</a>
+    </section>
+  </aside>
+{{- end -}}

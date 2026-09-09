@@ -1721,6 +1721,9 @@ $requiredUxPages = @(
   'public/essays/the-ledger-vol-2/index.html',
   'public/essays/the-ledger-vol-3/index.html',
   'public/essays/what-happened-at-camp-mystic/index.html',
+  'public/essays/jack-stratton-and-the-vulfpeck-model/index.html',
+  'public/essays/what-is-risk-a-four-part-framework/index.html',
+  'public/syd-and-oliver/a-thousand-brick-walls/index.html',
   'public/syd-and-oliver/peaches-or-greece/index.html',
   'public/essays/save-some-air-for-the-fishies/index.html',
   'public/essays/the-easement-under-the-lake/index.html',
@@ -5092,6 +5095,7 @@ foreach ($samplePage in $studioSamplePageExpectations) {
 
   $sampleExitHtml = $sampleExitMatches[0].Value
   $sampleExitText = Convert-HtmlFragmentToText -Html $sampleExitHtml
+  $sampleHasFeaturedContinuation = $samplePath -ceq 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
   foreach ($requiredSampleText in @(
     'Studio sample',
     'Input',
@@ -5099,8 +5103,7 @@ foreach ($samplePage in $studioSamplePageExpectations) {
     'Work performed',
     [string]$samplePage.Work,
     'What this proves',
-    [string]$samplePage.Proof,
-    'Start a Publication Sprint'
+    [string]$samplePage.Proof
   )) {
     if ($sampleExitText.IndexOf($requiredSampleText, [System.StringComparison]::Ordinal) -lt 0) {
       $uxIssues.Add("$samplePath => Studio sample exit is missing approved text: $requiredSampleText")
@@ -5111,10 +5114,18 @@ foreach ($samplePage in $studioSamplePageExpectations) {
     Get-OpenTags -Html $sampleExitHtml -TagName 'a' |
       Where-Object { Test-TagHasClass -Tag $_ -ClassName 'studio-sample-exit__cta' }
   )
-  if ($sampleCtas.Count -ne 1) {
+  if ($sampleHasFeaturedContinuation) {
+    if ($sampleCtas.Count -ne 0) {
+      $uxIssues.Add("$samplePath => the production note must defer its CTA to the featured continuation")
+    }
+  }
+  elseif ($sampleCtas.Count -ne 1) {
     $uxIssues.Add("$samplePath => expected exactly one Studio sample CTA, found $($sampleCtas.Count)")
   }
   else {
+    if ($sampleExitText.IndexOf('Start a Publication Sprint', [System.StringComparison]::Ordinal) -lt 0) {
+      $uxIssues.Add("$samplePath => expected the original Studio sample CTA label")
+    }
     foreach ($attributeExpectation in @(
       @{ Name = 'href'; Value = '/studio/#studio-inquiry' },
       @{ Name = 'data-analytics-event'; Value = 'internal_promo_click' },
@@ -5150,6 +5161,145 @@ foreach ($samplePage in $studioSamplePageExpectations) {
     if ($suppressedTags.Count -ne 0) {
       $uxIssues.Add("$samplePath => Studio sample must suppress standard article-exit module '$($suppressedModule.ClassName)'")
     }
+  }
+}
+
+$featuredContinuationData = Get-Content -Path (Join-Path $repoRoot 'data/featured_continuations.json') -Raw | ConvertFrom-Json -AsHashtable
+$featuredContinuationExpectations = @(
+  @{
+    Route = '/essays/jack-stratton-and-the-vulfpeck-model/'
+    ReadingPath = '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/'
+    ReadingEvent = 'internal_promo_click'
+    ReadingCollection = $null
+    StudioSlot = 'studio_sample_exit'
+    HasStandardNewsletter = $false
+  },
+  @{
+    Route = '/syd-and-oliver/a-thousand-brick-walls/'
+    ReadingPath = '/syd-and-oliver/pressure-makes-pearls/'
+    ReadingEvent = 'collection_click'
+    ReadingCollection = 'syd-and-oliver-dialogues'
+    StudioSlot = 'article_exit_paths'
+    HasStandardNewsletter = $true
+  },
+  @{
+    Route = '/essays/what-is-risk-a-four-part-framework/'
+    ReadingPath = '/essays/risk-management-vs-risk-analysis-whats-the-difference/'
+    ReadingEvent = 'collection_click'
+    ReadingCollection = 'risk-uncertainty'
+    StudioSlot = 'article_exit_paths'
+    HasStandardNewsletter = $true
+  }
+)
+
+foreach ($continuation in $featuredContinuationExpectations) {
+  $route = [string]$continuation.Route
+  $relativePath = 'public' + $route + 'index.html'
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $uxIssues.Add("Missing generated page required for featured-continuation coverage: $relativePath")
+    continue
+  }
+  $html = [string]$targetPageHtml[$relativePath]
+  $exitMatches = @([regex]::Matches($html, '(?is)<aside\b(?=[^>]*\bclass=(?:"[^"]*\bfeatured-continuation\b[^"]*"|''[^'']*\bfeatured-continuation\b[^'']*''|[^\s>]*\bfeatured-continuation\b[^\s>]*))[^>]*>.*?</aside>'))
+  if ($exitMatches.Count -ne 1) {
+    $uxIssues.Add("$relativePath => expected exactly one featured continuation, found $($exitMatches.Count)")
+    continue
+  }
+  $exitHtml = $exitMatches[0].Value
+  $exitLinks = @(Get-OpenTags -Html $exitHtml -TagName 'a')
+  if ($exitLinks.Count -ne 2) {
+    $uxIssues.Add("$relativePath => featured continuation must contain only one reading and one Studio link")
+  }
+  if ($exitHtml -match '<(?:form|input|script)\b') {
+    $uxIssues.Add("$relativePath => featured continuation must not add forms, fields, or scripts")
+  }
+
+  $entry = $featuredContinuationData[$route]
+  foreach ($kind in @('reading', 'studio')) {
+    $descriptionId = "featured-$kind-connection"
+    $descriptionMatches = @([regex]::Matches($exitHtml, '(?is)<p\b[^>]*>.*?</p>') | Where-Object {
+      (Get-AttributeValue -Tag $_.Value -Name 'id') -ceq $descriptionId
+    })
+    if ($descriptionMatches.Count -ne 1) {
+      $uxIssues.Add("$relativePath => expected one connection sentence with id '$descriptionId'")
+    }
+    elseif ((Convert-HtmlFragmentToText -Html $descriptionMatches[0].Value) -cne [string]$entry["${kind}_connection"]) {
+      $uxIssues.Add("$relativePath => $kind connection does not match its approved editorial copy")
+    }
+    $idTags = @(Get-OpenTags -Html $html -TagName 'p' | Where-Object {
+      (Get-AttributeValue -Tag $_ -Name 'id') -ceq $descriptionId
+    })
+    if ($idTags.Count -ne 1) {
+      $uxIssues.Add("$relativePath => '$descriptionId' must be unique on the page")
+    }
+  }
+
+  $linkExpectations = @(
+    @{
+      'href' = [string]$continuation.ReadingPath
+      'aria-describedby' = 'featured-reading-connection'
+      'data-analytics-event' = [string]$continuation.ReadingEvent
+      'data-analytics-source-slot' = 'article_continuation_primary'
+      'data-analytics-path' = [string]$continuation.ReadingPath
+      'data-analytics-collection' = $continuation.ReadingCollection
+    },
+    @{
+      'href' = '/studio/#studio-inquiry'
+      'aria-describedby' = 'featured-studio-connection'
+      'data-analytics-event' = 'internal_promo_click'
+      'data-analytics-source-slot' = [string]$continuation.StudioSlot
+      'data-analytics-path' = '/studio/#studio-inquiry'
+      'data-analytics-slug' = 'studio'
+      'data-analytics-product' = 'OIP-STUDIO-EXPERT-ESSAY'
+      'data-analytics-format' = 'service_inquiry_email'
+    }
+  )
+  foreach ($linkExpectation in $linkExpectations) {
+    $matchingLinks = @($exitLinks | Where-Object {
+      (Get-AttributeValue -Tag $_ -Name 'href') -ceq $linkExpectation['href']
+    })
+    if ($matchingLinks.Count -ne 1) {
+      $uxIssues.Add("$relativePath => expected one featured link to '$($linkExpectation['href'])'")
+      continue
+    }
+    foreach ($attribute in $linkExpectation.GetEnumerator()) {
+      if ((Get-AttributeValue -Tag $matchingLinks[0] -Name ([string]$attribute.Key)) -cne $attribute.Value) {
+        $uxIssues.Add("$relativePath => featured link '$($linkExpectation['href'])' has incorrect '$($attribute.Key)'")
+      }
+    }
+  }
+  $studioLinks = @(Get-OpenTags -Html $html -TagName 'a' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'href') -ceq '/studio/#studio-inquiry'
+  })
+  if ($studioLinks.Count -ne 1) {
+    $uxIssues.Add("$relativePath => expected exactly one Studio inquiry link across the article page")
+  }
+  $readingPaths = @(Get-OpenTags -Html $html -TagName 'aside' | Where-Object {
+    Test-TagHasClass -Tag $_ -ClassName 'reading-path'
+  })
+  if ($readingPaths.Count -ne 0) {
+    $uxIssues.Add("$relativePath => featured continuation must replace, not duplicate, the collection reading path")
+  }
+  $publicationRecordIndex = $html.IndexOf('article-publication-record', [System.StringComparison]::Ordinal)
+  if ($publicationRecordIndex -lt 0 -or $exitMatches[0].Index -le $publicationRecordIndex) {
+    $uxIssues.Add("$relativePath => featured continuation must follow the publication record")
+  }
+  foreach ($module in @(
+    @{ Tag = 'p'; ClassName = 'newsletter-prompt--article-exit' },
+    @{ Tag = 'section'; ClassName = 'newsletter-signup--article-exit' },
+    @{ Tag = 'nav'; ClassName = 'journey-links--article-exit' }
+  )) {
+    $moduleTags = @(Get-OpenTags -Html $html -TagName ([string]$module.Tag) | Where-Object {
+      Test-TagHasClass -Tag $_ -ClassName ([string]$module.ClassName)
+    })
+    $expectedCount = if ($continuation.HasStandardNewsletter) { 1 } else { 0 }
+    if ($moduleTags.Count -ne $expectedCount) {
+      $uxIssues.Add("$relativePath => must preserve its existing '$($module.ClassName)' count of $expectedCount")
+    }
+  }
+  $destinationFile = Join-Path $SiteDir ($continuation.ReadingPath.TrimStart('/') + 'index.html')
+  if (-not (Test-Path -LiteralPath $destinationFile -PathType Leaf)) {
+    $uxIssues.Add("$relativePath => recommended reading destination must exist in the public build")
   }
 }
 

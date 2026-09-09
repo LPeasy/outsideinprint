@@ -26,6 +26,7 @@
       <dd>{{ $proof }}</dd>
     </div>
   </dl>
+  {{ if not .hideCTA }}
   <a
     class="studio-sample-exit__cta"
     href="/studio/#studio-inquiry"
@@ -36,4 +37,5 @@
     data-analytics-format="service_inquiry_email"
     data-analytics-path="/studio/#studio-inquiry"
   >Start a Publication Sprint</a>
+  {{ end }}
 </aside>
