@@ -1038,12 +1038,12 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/shop/index.html' = @{
     Title = 'Bookstore'
-    Description = 'Digital books from Outside In Print, including The American Nightmare: Keep Dreaming, Kid, The Parable of the Sheep, and The Water Cycle.'
+    Description = 'Independent fiction and nonfiction from Outside In Print. Browse the books, read a free sample, and choose a direct EPUB edition.'
     Canonical = 'https://outsideinprint.org/shop/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg'
+    ExpectedManagedImageId = 'books/2045/cover'
   }
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{
     Title = 'The American Nightmare: Keep Dreaming, Kid'
@@ -3099,8 +3099,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Three Outside In Print EPUB editions at \$9\.99 each, prepared for secure digital delivery\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Outside In Print EPUB.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Outside In Print EPUB.*?\$9\.99.*?the-water-cycle-cover-v2\.0\.jpg.*?Robert V\. Ussley.*?The Water Cycle.*?Outside In Print EPUB.*?\$9\.99.*?</section>'
-    Message = 'expected the homepage bookstore shelf to present three $9.99 Outside In Print EPUB records with the canonical author and publisher data'
+    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Independent fiction and nonfiction\. EPUB editions direct from Outside In Print\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Outside In Print EPUB.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Outside In Print EPUB.*?\$9\.99.*?the-water-cycle-cover-v2\.0\.jpg.*?Robert V\. Ussley.*?The Water Cycle.*?Outside In Print EPUB.*?\$9\.99.*?</section>'
+    Message = 'expected the homepage bookstore shelf to retain the established $9.99 EPUB records alongside any new release'
   },
   @{
     Path = 'public/index.html'
@@ -3918,7 +3918,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = 'Each is available directly as an Outside In Print EPUB through secure Square checkout\.'
+    Pattern = 'choose an Outside In Print EPUB through secure Square checkout\.'
     Message = 'expected the bookstore introduction to describe individual direct editions without implying a bundle'
   },
   @{
@@ -4005,8 +4005,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = '(?s)author of three books published by Outside In Print.*?The American Nightmare: Keep Dreaming, Kid.*?The Parable of the Sheep.*?The Water Cycle: Risk, Infrastructure, and Public Memory'
-    Message = 'expected the author page to name and link all three published books'
+    Pattern = '(?s)writes fiction and nonfiction for Outside In Print\. Books include:.*?The American Nightmare: Keep Dreaming, Kid.*?The Parable of the Sheep.*?The Water Cycle: Risk, Infrastructure, and Public Memory'
+    Message = 'expected the author page to retain the established books alongside any new release'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
@@ -5350,12 +5350,24 @@ foreach ($forbiddenPath in @(
   }
 }
 
+$home2045ProductDraft = Get-FrontMatterScalarFromMarkdownFile -Path (Join-Path $repoRoot 'content/shop/2045/_index.md') -Key 'draft'
+$home2045SampleDraft = Get-FrontMatterScalarFromMarkdownFile -Path (Join-Path $repoRoot 'content/shop/2045/sample.md') -Key 'draft'
+if ($home2045ProductDraft -cne $home2045SampleDraft) {
+  $uxIssues.Add('2045 product and sample draft states must move together for homepage bookstore discovery.')
+}
+$home2045Published = $home2045ProductDraft -ceq 'false' -and $home2045SampleDraft -ceq 'false'
 $homeBookstoreTargets = @(
   @{ Href = '/shop/'; Slug = 'bookstore'; Title = 'The Bookstore'; Count = 1 },
   @{ Href = '/shop/the-american-nightmare-keep-dreaming-kid/'; Slug = 'the-american-nightmare-keep-dreaming-kid'; Title = 'The American Nightmare: Keep Dreaming, Kid'; Count = 2 },
   @{ Href = '/shop/the-parable-of-the-sheep/'; Slug = 'the-parable-of-the-sheep'; Title = 'The Parable of the Sheep'; Count = 2 },
   @{ Href = '/shop/the-water-cycle/'; Slug = 'the-water-cycle'; Title = 'The Water Cycle: Risk, Infrastructure, and Public Memory'; Count = 2 }
 )
+
+if ($home2045Published) {
+  $homeBookstoreTargets += @{ Href = '/shop/2045/'; Slug = '2045'; Title = '2045'; Count = 2 }
+}
+$expectedHomeBookstoreLinkCount = ($homeBookstoreTargets | Measure-Object -Property Count -Sum).Sum
+$expectedHomeBookstoreCardCount = $homeBookstoreTargets.Count - 1
 
 if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeIndexHtml = [string]$targetPageHtml['public/index.html']
@@ -5485,8 +5497,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
   else {
     $bookstoreAnchors = @(Get-OpenTags -Html $bookstoreSectionMatch.Value -TagName 'a')
-    if ($bookstoreAnchors.Count -ne 7) {
-      $uxIssues.Add("public/index.html => expected exactly 7 homepage bookstore links, found $($bookstoreAnchors.Count)")
+    if ($bookstoreAnchors.Count -ne $expectedHomeBookstoreLinkCount) {
+      $uxIssues.Add("public/index.html => expected exactly $expectedHomeBookstoreLinkCount homepage bookstore links, found $($bookstoreAnchors.Count)")
     }
 
     foreach ($anchor in $bookstoreAnchors) {
@@ -5521,8 +5533,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
 
   $bookstoreCardCount = [regex]::Matches($homeIndexHtml, '\bdata-home-bookstore-card(?:[=\s>])', 'IgnoreCase').Count
-  if ($bookstoreCardCount -ne 3) {
-    $uxIssues.Add("public/index.html => expected exactly 3 homepage bookstore cards, found $bookstoreCardCount")
+  if ($bookstoreCardCount -ne $expectedHomeBookstoreCardCount) {
+    $uxIssues.Add("public/index.html => expected exactly $expectedHomeBookstoreCardCount homepage bookstore cards, found $bookstoreCardCount")
   }
 
   $currentSlugPattern = 'data-cartoon-slug=(?:"' + [regex]::Escape($currentCartoonSlug) + '"|' + [regex]::Escape($currentCartoonSlug) + ')'

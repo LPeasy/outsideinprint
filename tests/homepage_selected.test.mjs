@@ -432,7 +432,9 @@ test("homepage bookstore spotlight stays weighted, data-driven, and internal-fir
 
   assert.match(source, /partial "home_bookstore_spotlight\.html"/);
   assert.match(spotlight, /site\.GetPage "\/shop"/);
-  assert.match(spotlight, /first 3 \(sort \.RegularPages "Weight" "asc"\)/);
+  assert.match(spotlight, /sort \(where \.Pages "Params\.book_key" "!=" nil\) "Weight" "asc"/);
+  assert.doesNotMatch(spotlight, /first 3/);
+  assert.match(spotlight, /partial "images\/picture\.html"/);
   assert.match(spotlight, /if gt \(len \$books\) 0/);
   assert.match(spotlight, /partial "shop\/product-data\.html"/);
   assert.match(spotlight, /index \$product "display_title"/);
@@ -441,7 +443,7 @@ test("homepage bookstore spotlight stays weighted, data-driven, and internal-fir
   assert.match(spotlight, /index \$product "price_display"/);
   assert.match(spotlight, /data-home-bookstore-card/);
   assert.match(spotlight, /data-analytics-source-slot="homepage_bookstore_promo"/);
-  assert.match(spotlight, /Three Outside In Print EPUB editions at \$9\.99 each, prepared for secure digital delivery\./);
+  assert.match(spotlight, /Independent fiction and nonfiction\. EPUB editions direct from Outside In Print\./);
   assert.doesNotMatch(spotlight, /amazon|kindle|purchase_url|kindle_url|kindle-button|checkout-actions|carousel|autoplay/i);
 });
 

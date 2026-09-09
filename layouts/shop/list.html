@@ -1,33 +1,47 @@
 {{ define "main" }}
-  {{ $shopPages := sort .RegularPages "Weight" "asc" }}
+  {{ $shopPages := sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc" }}
+  {{ $featuredBooks := first 1 (where $shopPages "Params.book_key" (.Params.featured_book | default "")) }}
+  {{ $catalogPages := $shopPages }}
+  {{ range $featuredBooks }}
+    {{ $catalogPages = where $shopPages "Params.book_key" "!=" .Params.book_key }}
+  {{ end }}
+  {{ $liveCount := 0 }}
+  {{ range $shopPages }}
+    {{ $product := partial "shop/product-data.html" (dict "key" .Params.book_key "page" .) }}
+    {{ $offers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" }}
+    {{ if gt (len (where $offers "availability_status" "live")) 0 }}{{ $liveCount = add $liveCount 1 }}{{ end }}
+  {{ end }}
 
-  <section class="bookstore-index page-shell page-shell--wide" aria-labelledby="page-title">
+  <section class="bookstore-index{{ if gt (len $featuredBooks) 0 }} bookstore-index--featured{{ end }} page-shell page-shell--wide" aria-labelledby="page-title">
     <header class="bookstore-index__header">
       <div class="bookstore-index__heading">
         <p class="bookstore-index__eyebrow">Outside In Print books</p>
         <h1 id="page-title" class="list-title">{{ .Title }}</h1>
-        {{ with .Content }}<div class="bookstore-index__intro">{{ . }}</div>{{ end }}
+        {{ if eq (len $featuredBooks) 0 }}
+          {{ with .Content }}<div class="bookstore-index__intro">{{ . }}</div>{{ end }}
+        {{ end }}
       </div>
 
-      <dl class="bookstore-index__guide" aria-label="Bookstore at a glance">
-        <div>
-          <dt>Catalog</dt>
-          <dd>{{ len $shopPages }} titles</dd>
-        </div>
-        <div>
-          <dt>Buy now</dt>
-          <dd>Direct OIP EPUB and Kindle</dd>
-        </div>
-        <div>
-          <dt>Direct editions</dt>
-          <dd>Three EPUBs available now</dd>
-        </div>
-      </dl>
+      {{ if eq (len $featuredBooks) 0 }}
+        {{ partial "shop/catalog-guide.html" (dict "total" (len $shopPages) "live" $liveCount) }}
+      {{ end }}
     </header>
 
     {{ if gt (len $shopPages) 0 }}
+      {{ range $featuredBooks }}
+        {{ partial "shop/featured-book.html" (dict "page" . "product" (partial "shop/product-data.html" (dict "key" .Params.book_key "page" .))) }}
+      {{ end }}
+      {{ if gt (len $featuredBooks) 0 }}
+        <div class="bookstore-index__context">
+          {{ with .Content }}<div class="bookstore-index__intro">{{ . }}</div>{{ end }}
+          {{ partial "shop/catalog-guide.html" (dict "total" (len $shopPages) "live" $liveCount) }}
+        </div>
+      {{ end }}
+      {{ if and (gt (len $featuredBooks) 0) (gt (len $catalogPages) 0) }}
+        <h2 class="bookstore-catalog-title">More from Outside In Print</h2>
+      {{ end }}
       <div id="bookstore-catalog" class="bookstore-records" aria-label="Available Outside In Print books">
-        {{ range $index, $book := $shopPages }}
+        {{ range $index, $book := $catalogPages }}
           {{ $productKey := $book.Params.book_key | default ($book.Params.slug | default $book.File.BaseFileName) }}
           {{ $product := partial "shop/product-data.html" (dict "key" $productKey "page" $book) }}
           {{ $cover := index $product "cover_image" | default $book.Params.image }}
@@ -43,14 +57,14 @@
                 "page" $book
                 "ref" $cover
                 "alt" $coverAlt
-                "loading" (cond (eq $index 0) "eager" "lazy")
-                "fetchpriority" (cond (eq $index 0) "high" "low")
+                "loading" (cond (and (eq $index 0) (eq (len $featuredBooks) 0)) "eager" "lazy")
+                "fetchpriority" (cond (and (eq $index 0) (eq (len $featuredBooks) 0)) "high" "low")
                 "sizes" "(min-width: 64rem) 18rem, (min-width: 45rem) 13rem, 11.5rem"
               ) }}
             </a>
 
             <div class="bookstore-record__body">
-              <p class="bookstore-record__eyebrow">Independent book</p>
+              <p class="bookstore-record__eyebrow">{{ index $product "positioning_label" | default "Independent book" }}</p>
               <h2 id="{{ $recordID }}" class="bookstore-record__title"><a href="{{ $book.RelPermalink }}">{{ $displayTitle }}</a></h2>
               <p class="bookstore-record__meta">
                 {{ with index $product "author" }}<span>By <a href="{{ "authors/robert-v-ussley/" | relURL }}">{{ . }}</a></span>{{ end }}

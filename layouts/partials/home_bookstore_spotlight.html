@@ -1,13 +1,13 @@
 {{- $shopPage := site.GetPage "/shop" -}}
 {{- with $shopPage -}}
-  {{- $books := first 3 (sort .RegularPages "Weight" "asc") -}}
+  {{- $books := sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc" -}}
   {{- if gt (len $books) 0 -}}
     <section class="home-bookstore page-shell page-shell--wide" aria-labelledby="home-bookstore-title">
       <header class="home-bookstore__header">
         <div class="home-bookstore__heading">
           <p class="list-title home-bookstore__eyebrow">Books from Outside In Print</p>
           <h2 id="home-bookstore-title" class="home-bookstore__title">The Bookstore</h2>
-          <p class="home-bookstore__dek">Three Outside In Print EPUB editions at $9.99 each, prepared for secure digital delivery.</p>
+          <p class="home-bookstore__dek">Independent fiction and nonfiction. EPUB editions direct from Outside In Print.</p>
         </div>
         <a
           class="home-bookstore__cta"
@@ -21,7 +21,7 @@
         >Browse the bookstore <span aria-hidden="true">&rarr;</span></a>
       </header>
 
-      <div class="home-bookstore__grid">
+      <div class="home-bookstore__grid{{ if gt (len $books) 3 }} home-bookstore__grid--expanded{{ end }}">
         {{- range $books -}}
           {{- $productKey := .Params.book_key | default (.Params.slug | default .File.BaseFileName) -}}
           {{- $product := partial "shop/product-data.html" (dict "key" $productKey "page" .) -}}
@@ -42,9 +42,12 @@
               data-analytics-section="Bookstore"
               data-analytics-path="{{ .RelPermalink }}"
             >
-              <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" width="1600" height="2560" loading="lazy" decoding="async">
+              {{ partial "images/picture.html" (dict "page" . "ref" $cover "alt" $coverAlt "loading" "lazy" "sizes" "(max-width: 420px) 5.75rem, 8rem") }}
             </a>
             <div class="home-bookstore__body">
+              {{- with index $product "positioning_label" -}}
+                <p class="bookstore-record__eyebrow">{{ . }}</p>
+              {{- end -}}
               {{- with index $product "author" -}}
                 <p class="home-bookstore__author">{{ . }}</p>
               {{- end -}}

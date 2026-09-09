@@ -322,11 +322,11 @@ foreach ($retiredSnippet in @(
 $homeBookstoreTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_bookstore_spotlight.html') -Raw
 foreach ($requiredSnippet in @(
   'site.GetPage "/shop"',
-  'first 3 (sort .RegularPages "Weight" "asc")',
+  'sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc"',
   'if gt (len $books) 0',
   'partial "shop/product-data.html"',
   'Books from Outside In Print',
-  'Three Outside In Print EPUB editions at $9.99 each, prepared for secure digital delivery.',
+  'Independent fiction and nonfiction. EPUB editions direct from Outside In Print.',
   'Browse the bookstore',
   'data-home-bookstore-card',
   'data-analytics-source-slot="homepage_bookstore_promo"'

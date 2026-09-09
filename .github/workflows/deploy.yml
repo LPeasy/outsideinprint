@@ -51,6 +51,7 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_bookstore_reading_sample_contract.ps1 -SourceOnly
+          ./tests/test_2045_storefront.ps1 -SourceOnly
 
       - name: Test Focused Legacy Image Migration Contract
         shell: pwsh
@@ -251,6 +252,7 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_bookstore_reading_sample_contract.ps1 -SiteDir public
+          ./tests/test_2045_storefront.ps1 -SiteDir public
 
       - name: Test Public HTML Output
         shell: pwsh

@@ -17,6 +17,20 @@
     "social_max_width": 1200
   },
   "assets": {
+    "books/2045/cover": {
+      "id": "books/2045/cover",
+      "source": "images/originals/books/2045/cover.jpg",
+      "sha256": "755d21b812d9215c580570bb8707be95ce0a54b034706f41159b73cd90ed63a7",
+      "width": 1650,
+      "height": 2550,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/after-the-tone": {
       "id": "editorial/after-the-tone",
       "source": "images/originals/editorial/after-the-tone.png",
@@ -7229,6 +7243,7 @@
     }
   },
   "aliases": {
+    "/images/books/2045/cover.jpg": "books/2045/cover",
     "/images/editorial/after-the-tone.png": "editorial/after-the-tone",
     "/images/editorial/algae-fueled-fever-dreams.png": "editorial/algae-fueled-fever-dreams",
     "/images/editorial/at-the-worktable.png": "editorial/at-the-worktable",

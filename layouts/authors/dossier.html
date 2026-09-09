@@ -4,7 +4,7 @@
   {{ $bookstore := site.GetPage "/shop" }}
   {{ $publishedBooks := slice }}
   {{ with $bookstore }}
-    {{ $publishedBooks = sort .RegularPages "Weight" "asc" }}
+    {{ $publishedBooks = sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc" }}
   {{ end }}
 
   <article class="author-route">
@@ -38,9 +38,8 @@
               <p class="author-route__role">{{ . }}</p>
             {{ end }}
             {{ if gt (len $publishedBooks) 0 }}
-              {{ $bookCountLabel := cond (eq (len $publishedBooks) 3) "three" (printf "%d" (len $publishedBooks)) }}
               <p class="author-route__books">
-                Robert V. Ussley is the author of {{ $bookCountLabel }} books published by Outside In Print: {{ range $index, $book := $publishedBooks -}}
+                Robert V. Ussley writes fiction and nonfiction for Outside In Print. Books include: {{ range $index, $book := $publishedBooks -}}
                   {{- if gt $index 0 }}{{ if eq $index (sub (len $publishedBooks) 1) }}, and {{ else }}, {{ end }}{{ end -}}
                   <a href="{{ $book.RelPermalink }}"><cite>{{ $book.Title }}</cite></a>{{ end }}.
               </p>

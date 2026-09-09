@@ -131,6 +131,7 @@
         (hasPrefix $lookupRef "editorial/")
         (hasPrefix $lookupRef "essays/")
         (hasPrefix $lookupRef "medium/")
+        (hasPrefix $lookupRef "books/")
       -}}
       {{- if or $explicitManaged $managedNamespace $managedID -}}
         {{- errorf "Managed responsive image reference %q is not declared in data/image-assets.json" $rawRef -}}

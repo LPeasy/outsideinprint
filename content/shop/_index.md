@@ -1,12 +1,14 @@
 ---
 title: "Bookstore"
-description: "Digital books from Outside In Print, including The American Nightmare: Keep Dreaming, Kid, The Parable of the Sheep, and The Water Cycle."
-image: "/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg"
+description: "Independent fiction and nonfiction from Outside In Print. Browse the books, read a free sample, and choose a direct EPUB edition."
+image: "books/2045/cover"
+image_alt: "Black cover for 2045 with a small OIP Exclusive mark, an oversized ivory scanline eye, a blue radial iris with red and ivory circles, a grid of pale squares, large ivory numerals, binary digits, the subtitle Ten Dark Fables from the Machine Age, and Robert V. Ussley’s name."
+featured_book: "2045"
 draft: false
 show_citation: false
 ---
 
-Three independent books on the American Dream, public infrastructure, and the stories societies tell themselves. Each is available directly as an Outside In Print EPUB through secure Square checkout. Kindle editions remain available.
+Independent fiction and nonfiction on the systems we build and the stories we tell ourselves. Read a free sample, then choose an Outside In Print EPUB through secure Square checkout. Selected titles also have Kindle editions.
 
 Direct EPUB checkout is currently available to U.S. customers only.
 

@@ -485,7 +485,7 @@ foreach ($htmlFile in $htmlFiles) {
     throw "Generated HTML retains a retired raw Syd-and-Oliver hero URL: $relativeHtmlPath"
   }
 
-  $socialUrlMatches = @([regex]::Matches($html, '(?i)(?:https?://[^"''<>\s]+)?/images/rendered/(?:editorial/[a-z0-9-]+|essays/[a-z0-9/-]+|medium/[0-9a-f]{64})/[0-9a-f]{8,64}/social-[1-9][0-9]*w\.jpg'))
+  $socialUrlMatches = @([regex]::Matches($html, '(?i)(?:https?://[^"''<>\s]+)?/images/rendered/(?:editorial/[a-z0-9-]+|essays/[a-z0-9/-]+|medium/[0-9a-f]{64}|books/[a-z0-9-]+/cover)/[0-9a-f]{8,64}/social-[1-9][0-9]*w\.jpg'))
   if ($socialUrlMatches.Count -gt 0) {
     $uniqueSocialUrls = @($socialUrlMatches | ForEach-Object { Get-RenderedRelativePath -Url $_.Value } | Sort-Object -Unique)
     if ($uniqueSocialUrls.Count -ne 1) {

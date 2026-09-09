@@ -1,0 +1,22 @@
+{{ define "main" }}
+  {{ $book := .Parent }}
+  {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}
+  <article class="page-shell bookstore-sample-page" aria-labelledby="page-title">
+    <section class="bookstore-reading-sample bookstore-reading-sample--standalone" aria-labelledby="page-title">
+      <header class="bookstore-reading-sample__header">
+        <p class="bookstore-reading-sample__eyebrow">A complete story from <a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a> · OIP Exclusive</p>
+        <h1 id="page-title">{{ .Title }}</h1>
+        <p class="bookstore-reading-sample__meta">By {{ index $product "author" }} · About {{ .ReadingTime }} min read</p>
+      </header>
+      <div class="bookstore-reading-sample__body">{{ .Content }}</div>
+      <footer class="bookstore-reading-sample__footer">
+        <p class="bookstore-reading-sample__end"><span>End of sample</span></p>
+        <div class="bookstore-reading-sample__continue">
+          <h2>Ten dark fables. One machine age.</h2>
+          <p>Continue with <em>2045: Ten Dark Fables from the Machine Age</em>, a DRM-free EPUB from Outside In Print.</p>
+          <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_continue" data-analytics-slug="2045" data-analytics-title="2045" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">Explore 2045 · {{ index $product "price_display" }} <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </footer>
+    </section>
+  </article>
+{{ end }}

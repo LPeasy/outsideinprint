@@ -27,6 +27,7 @@ The manifest and its three tracked review/build evidence files use one cross-pla
 Use logical references instead of source paths:
 
 - Front matter and data: `editorial/example-slug`, `essays/example-slug/hero`, or `medium/<sha256>`.
+- New approved book covers use `books/<book-slug>/cover`, with one matching source at `assets/images/originals/books/<book-slug>/cover.<ext>` and one `/images/books/<book-slug>/cover.<ext>` resolver alias. Existing static book-cover assets are preserved.
 - Markdown: `![Alternative text](oip-image:essays/example-slug/hero)`.
 - External and explicitly nonmanaged static images retain normal URL behavior.
 

@@ -68,7 +68,7 @@
   {{- $name = "utility" -}}
 {{- end -}}
 
-{{- if and (eq $name "page") .IsSection $section -}}
+{{- if and (eq $name "page") .IsSection $section (not .Params.book_key) -}}
   {{- $name = "section-list" -}}
 {{- end -}}
 

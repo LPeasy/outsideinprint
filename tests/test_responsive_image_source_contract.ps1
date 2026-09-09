@@ -234,7 +234,7 @@ $classCounts = @{}
 $usageCounts = @{}
 
 foreach ($assetId in $assetIds) {
-  if ($assetId -cnotmatch '^(?:editorial/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium/[0-9a-f]{64})$') {
+  if ($assetId -cnotmatch '^(?:editorial/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium/[0-9a-f]{64}|books/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/cover)$') {
     throw "Invalid stable image asset ID: $assetId"
   }
 
@@ -243,13 +243,16 @@ foreach ($assetId in $assetIds) {
   Assert-Equal -Actual ([string]$asset.id) -Expected $assetId -Message "Asset key/id mismatch for '$assetId'."
 
   $source = ([string]$asset.source).Replace('\','/')
-  if ($source -cnotmatch '^images/originals/(?:editorial|essays|medium)/[^/].*\.(?:png|jpe?g)$') {
+  if ($source -cnotmatch '^images/originals/(?:editorial|essays|medium|books)/[^/].*\.(?:png|jpe?g)$') {
     throw "Asset '$assetId' has an invalid managed source path: $source"
   }
   if ($source.Contains('../', [System.StringComparison]::Ordinal) -or $source.StartsWith('/', [System.StringComparison]::Ordinal)) {
     throw "Asset '$assetId' source must be asset-relative and traversal-free: $source"
   }
   $assetIdParts = $assetId.Split('/')
+  if ($assetIdParts[0] -ceq 'books' -and $source -cnotmatch ('^images/originals/' + [regex]::Escape($assetId) + '\.(?:png|jpe?g)$')) {
+    throw "Book cover '$assetId' source does not match its stable ID."
+  }
   if ($assetIdParts[0] -ceq 'editorial') {
     $expectedSourcePattern = '^images/originals/editorial/' + [regex]::Escape($assetIdParts[1]) + '\.(?:png|jpe?g)$'
     if ($source -cnotmatch $expectedSourcePattern) {
@@ -490,7 +493,7 @@ function Resolve-OipAlias {
 }
 
 foreach ($alias in $aliasNames) {
-  if ($alias -cnotmatch '^/images/(?:editorial|essays|medium|syd-and-oliver)/.+\.(?:png|jpe?g)$') {
+  if ($alias -cnotmatch '^/images/(?:(?:editorial|essays|medium|syd-and-oliver)/.+|books/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/cover)\.(?:png|jpe?g)$') {
     throw "Managed alias must be an exact former public image URL: $alias"
   }
   if ($alias.Contains('/originals/', [System.StringComparison]::Ordinal)) {

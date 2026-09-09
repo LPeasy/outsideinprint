@@ -542,7 +542,7 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
 
 test("contact, bookstore, and Civic Institutions expose the repaired public copy", () => {
   assert.match(contactContent, /For factual corrections, editorial questions, rights inquiries, or reprint requests, email \[support@outsideinprint\.org\]/);
-  assert.match(shopContent, /Each is available directly as an Outside In Print EPUB through secure Square checkout\./);
+  assert.match(shopContent, /choose an Outside In Print EPUB through secure Square checkout\./);
   assert.doesNotMatch(shopContent, /Buy all three directly/);
   assert.match(collectionsData, /description: Essays on courts, federalism, public institutions, and the exercise of public power\./);
   assert.match(civicCollectionContent, /description: "Essays on courts, federalism, public institutions, and the exercise of public power\."/);
@@ -694,11 +694,11 @@ test("homepage composition leads from the Almanack signup into the bookstore, mo
   assert.match(homeFrontPageCopy, /Read dialogue/);
 
   assert.match(homeBookstore, /site\.GetPage "\/shop"/);
-  assert.match(homeBookstore, /first 3 \(sort \.RegularPages "Weight" "asc"\)/);
+  assert.match(homeBookstore, /sort \(where \.Pages "Params\.book_key" "!=" nil\) "Weight" "asc"/);
   assert.match(homeBookstore, /if gt \(len \$books\) 0/);
   assert.match(homeBookstore, /partial "shop\/product-data\.html"/);
   assert.match(homeBookstore, /Books from Outside In Print/);
-  assert.match(homeBookstore, /Three Outside In Print EPUB editions at \$9\.99 each, prepared for secure digital delivery\./);
+  assert.match(homeBookstore, /Independent fiction and nonfiction\. EPUB editions direct from Outside In Print\./);
   assert.match(homeBookstore, /Browse the bookstore/);
   assert.match(homeBookstore, /data-analytics-source-slot="homepage_bookstore_promo"/);
   assert.doesNotMatch(homeBookstore, /amazon|kindle|purchase_url|kindle_url|kindle-button|checkout-actions|carousel|autoplay/i);

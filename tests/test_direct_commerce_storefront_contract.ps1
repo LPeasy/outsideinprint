@@ -56,6 +56,7 @@ if ([regex]::Matches($americanNightmarePage, '(?m)^date: 2026-08-21\s*$').Count 
   throw 'The American Nightmare site edition metadata must bind the owner-accepted 2026-08-21 publication date exactly once.'
 }
 $catalogSkus = @(
+  'OIP-TD-EPUB',
   'OIP-AN-EPUB',
   'OIP-AN-PB',
   'OIP-PS-EPUB',
@@ -65,7 +66,7 @@ $catalogSkus = @(
 )
 $publicEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
 $liveEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
-$disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB')
+$disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB', 'OIP-TD-EPUB')
 
 foreach ($requiredCatalogText in @(
   'product_type: "Outside In Print EPUB"',
@@ -162,8 +163,8 @@ if ($bookstoreData -match '(?im)^\s+checkout_note:\s+"[^"]*Amazon') {
 if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne 3) {
   throw 'All three direct EPUB offers must be live.'
 }
-if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 3) {
-  throw 'All three paperback offers must remain disabled.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 4) {
+  throw 'The three paperback offers and prepared 2045 EPUB must remain disabled.'
 }
 if ($bookstoreData -match '(?im)^\s+checkout_url:\s+"https?://') {
   throw 'The API-based direct EPUB launch must not expose a hosted checkout URL.'

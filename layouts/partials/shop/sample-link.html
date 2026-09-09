@@ -1,6 +1,9 @@
 {{- $page := .page -}}
 {{- $product := .product | default dict -}}
 {{- $sample := partial "shop/resolve-reading-sample.html" (dict "page" $page) -}}
+{{- with $page.Params.sample_page -}}
+  {{- $sample = site.GetPage . -}}
+{{- end -}}
 {{- $sourceSlot := .sourceSlot | default "bookstore_detail_sample" -}}
 {{- $fragmentOnly := .fragmentOnly | default false -}}
 {{- $class := strings.TrimSpace (printf "bookstore-sample-link %s" (.class | default "")) -}}
@@ -11,6 +14,9 @@
   {{- $sampleURL := printf "%s#reading-sample" $page.RelPermalink -}}
   {{- if $fragmentOnly -}}
     {{- $sampleURL = "#reading-sample" -}}
+  {{- end -}}
+  {{- if $page.Params.sample_page -}}
+    {{- $sampleURL = .RelPermalink -}}
   {{- end -}}
   {{- $readingTime := int .ReadingTime -}}
   {{- if lt $readingTime 1 -}}

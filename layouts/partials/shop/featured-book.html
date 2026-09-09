@@ -1,0 +1,53 @@
+{{- $book := .page -}}
+{{- $product := .product -}}
+{{- $offers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" -}}
+{{- $liveOffers := where $offers "availability_status" "live" -}}
+{{- $available := gt (len $liveOffers) 0 -}}
+{{- $sample := false -}}
+{{- with $book.Params.sample_page }}{{ $sample = site.GetPage . }}{{ end -}}
+<section class="bookstore-feature" aria-labelledby="bookstore-feature-title">
+  <a class="bookstore-feature__cover" href="{{ $book.RelPermalink }}" aria-label="Read about {{ $book.Title }}">
+    {{ partial "images/picture.html" (dict
+      "page" $book
+      "ref" (index $product "cover_image")
+      "alt" (index $product "cover_alt")
+      "loading" "eager"
+      "fetchpriority" "high"
+      "sizes" "(min-width: 60rem) 21rem, (min-width: 45rem) 17rem, 13rem"
+    ) }}
+  </a>
+  <div class="bookstore-feature__body">
+    <p class="bookstore-feature__eyebrow">Featured book <span aria-hidden="true">/</span> <span class="bookstore-feature__exclusive">{{ index $product "positioning_label" }}</span></p>
+    <h2 id="bookstore-feature-title" class="bookstore-feature__title"><a href="{{ $book.RelPermalink }}">{{ index $product "display_title" | default $book.Title }}</a></h2>
+    {{ with index $product "subtitle" }}<p class="bookstore-feature__subtitle">{{ . }}</p>{{ end }}
+    {{ with index $product "author" }}<p class="bookstore-feature__author">By <a href="{{ "authors/robert-v-ussley/" | relURL }}">{{ . }}</a></p>{{ end }}
+    {{ with index $product "deck" }}<p class="bookstore-feature__deck">{{ . }}</p>{{ end }}
+    <p class="bookstore-feature__edition"><strong>{{ index $product "price_display" }}</strong><span>{{ index $product "product_type" }}</span></p>
+    <div class="bookstore-feature__actions">
+      {{ if $available }}
+        <a class="shop-cta bookstore-feature__buy" href="{{ $book.RelPermalink }}#bookstore-purchase"
+          data-analytics-event="internal_promo_click"
+          data-analytics-source-slot="bookstore_feature_buy"
+          data-analytics-slug="{{ $book.Params.book_key }}"
+          data-analytics-title="{{ index $product "title" }}"
+          data-analytics-section="Bookstore"
+          data-analytics-path="{{ $book.RelPermalink }}"
+        >Buy EPUB</a>
+      {{ else }}
+        <button class="shop-cta bookstore-feature__buy" type="button" disabled aria-describedby="bookstore-feature-status">Buy EPUB</button>
+      {{ end }}
+      {{ with $sample }}
+        <a class="shop-cta bookstore-feature__sample" href="{{ .RelPermalink }}"
+          data-analytics-event="book_sample_open"
+          data-analytics-source-slot="bookstore_feature_sample"
+          data-analytics-slug="{{ $book.Params.book_key }}"
+          data-analytics-title="{{ index $product "title" }}"
+          data-analytics-section="Bookstore"
+          data-analytics-path="{{ $book.RelPermalink }}"
+        >Read a free sample</a>
+      {{ end }}
+    </div>
+    <p id="bookstore-feature-status" class="bookstore-feature__status">{{ if $available }}Secure checkout through Square. Download link delivered by email.{{ else }}{{ index $product "checkout_unavailable_label" }}. Checkout opens when the edition is ready.{{ end }}</p>
+    <p class="bookstore-feature__terms">U.S. customers only · Personal-use edition</p>
+  </div>
+</section>

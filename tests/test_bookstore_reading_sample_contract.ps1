@@ -247,6 +247,7 @@ $expectedSamplePaths = @(
 $samplePaths = @(
   Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/shop') -Recurse -File -Filter 'sample.md' |
     ForEach-Object { [IO.Path]::GetRelativePath($repoRoot, $_.FullName).Replace('\', '/') } |
+    Where-Object { $_ -ne 'content/shop/2045/sample.md' } |
     Sort-Object
 )
 if (($samplePaths -join '|') -cne ($expectedSamplePaths -join '|')) {
@@ -660,8 +661,12 @@ if ($homeHtml -match '(?i)book_sample_open|#reading-sample|bookstore_(?:index|de
   throw 'Reading-sample links or expanded excerpts leaked into production homepage output.'
 }
 
+$standalone2045 = Test-Path -LiteralPath (Join-Path $SiteDir 'shop/2045/sample/index.html') -PathType Leaf
 if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_index_sample"?', 'IgnoreCase').Count -ne 3) {
-  throw 'Built bookstore catalog must expose exactly three reading-sample links.'
+  throw 'Built bookstore catalog must expose exactly three shelf reading-sample links.'
+}
+if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_feature_sample"?', 'IgnoreCase').Count -ne [int]$standalone2045) {
+  throw 'Built bookstore catalog must expose exactly one featured reading-sample link when the 2045 sample is published, otherwise none.'
 }
 if ([regex]::Matches($combinedDetails, 'data-analytics-source-slot="?bookstore_detail_sample"?(?=\s|>)', 'IgnoreCase').Count -ne 3) {
   throw 'Built bookstore details must expose exactly three reading-sample fragment links.'
@@ -748,7 +753,8 @@ foreach ($spec in $sampleSpecs) {
 
 $sampleArtifacts = @(
   Get-ChildItem -LiteralPath (Join-Path $SiteDir 'shop') -Recurse -File |
-    Where-Object { $_.Name -match '^sample(?:\.|$)' -or $_.DirectoryName -match '[\\/]sample$' }
+    Where-Object { $_.Name -match '^sample(?:\.|$)' -or $_.DirectoryName -match '[\\/]sample$' } |
+    Where-Object { [IO.Path]::GetRelativePath($SiteDir, $_.FullName).Replace('\', '/') -ne 'shop/2045/sample/index.html' }
 )
 if ($sampleArtifacts.Count -gt 0) {
   throw "Standalone sample artifacts were generated: $($sampleArtifacts.FullName -join ', ')"
@@ -757,7 +763,7 @@ foreach ($routeIndex in @('sitemap.xml', 'index.xml', 'shop/index.xml')) {
   $path = Join-Path $SiteDir $routeIndex
   if (Test-Path -LiteralPath $path -PathType Leaf) {
     $text = Get-Content -LiteralPath $path -Raw -Encoding utf8
-    if ($text -match '(?i)/shop/[^<"'']+/sample(?:/|\.|<|"|''|$)') {
+    if ($text -match '(?i)/shop/(?!2045/sample/)[^<"'']+/sample(?:/|\.|<|"|''|$)') {
       throw "Standalone reading-sample route leaked into public/$routeIndex."
     }
   }

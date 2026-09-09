@@ -21,7 +21,7 @@
 
       <div class="bookstore-product__content">
         <header class="bookstore-product__header">
-          <p class="bookstore-product__eyebrow">An Outside In Print book</p>
+          <p class="bookstore-product__eyebrow">{{ index $product "positioning_label" | default "An Outside In Print book" }}</p>
           <h1 id="page-title" class="shop-title">{{ .Title }}</h1>
           <p class="bookstore-record__meta">
             {{ with index $product "author" }}<span>By <a href="{{ "authors/robert-v-ussley/" | relURL }}">{{ . }}</a></span>{{ end }}
@@ -36,7 +36,7 @@
           {{ end }}
         </header>
 
-        <section class="bookstore-product__purchase" aria-labelledby="bookstore-purchase-title">
+        <section id="bookstore-purchase" class="bookstore-product__purchase" aria-labelledby="bookstore-purchase-title">
           <p id="bookstore-purchase-title" class="bookstore-product__purchase-title">Choose an edition</p>
           {{ if gt (len $liveEpubOffers) 0 }}
             <p class="bookstore-product__checkout-restriction">Direct EPUB checkout is currently available to U.S. customers only.</p>
@@ -84,7 +84,7 @@
         {{ end }}
 
         <aside class="bookstore-product__author-note" aria-label="About the author">
-          <p><strong>Robert V. Ussley</strong> is the author of all three books in the Outside In Print catalog.</p>
+          <p><strong>Robert V. Ussley</strong> writes fiction and nonfiction for Outside In Print.</p>
           <a href="{{ "authors/robert-v-ussley/" | relURL }}">Meet the author <span aria-hidden="true">&rarr;</span></a>
         </aside>
 
