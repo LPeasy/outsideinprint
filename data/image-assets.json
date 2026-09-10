@@ -1991,6 +1991,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/dialogues/everyone-knows-the-words/hero": {
+      "id": "essays/dialogues/everyone-knows-the-words/hero",
+      "source": "images/originals/essays/dialogues/everyone-knows-the-words/hero.png",
+      "sha256": "2674bedb13b66d230cbe3e4d0bd74d573eb1b77703d59c10e7641a6c4dd9249e",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/dialogues/infinite-incontent/hero": {
       "id": "essays/dialogues/infinite-incontent/hero",
       "source": "images/originals/essays/dialogues/infinite-incontent/hero.png",
@@ -7798,6 +7812,7 @@
     "/images/syd-and-oliver/a-thousand-brick-walls/hero.png": "essays/dialogues/a-thousand-brick-walls/hero",
     "/images/syd-and-oliver/bobanonymous/hero.png": "essays/dialogues/bobanonymous/hero",
     "/images/syd-and-oliver/broke-rich/hero.png": "essays/dialogues/broke-rich/hero",
+    "/images/syd-and-oliver/everyone-knows-the-words/hero.png": "essays/dialogues/everyone-knows-the-words/hero",
     "/images/syd-and-oliver/infinite-incontent/hero.png": "essays/dialogues/infinite-incontent/hero",
     "/images/syd-and-oliver/pressure-makes-pearls/hero.png": "essays/dialogues/pressure-makes-pearls/hero"
   }
