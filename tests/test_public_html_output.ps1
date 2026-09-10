@@ -3080,8 +3080,9 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<h1[^>]*>\s*Outside In Print\s*</h1>.*?<p[^>]*class=(?:"[^"]*\bhome-front-page__orientation\b[^"]*"|''[^'']*\bhome-front-page__orientation\b[^'']*''|[^>]*\bhome-front-page__orientation\b[^>]*)[^>]*>\s*Independent essays, selected writings, and original books by Robert V\. Ussley\s*</p>.*?home-front-page__stories'
-    Message = 'expected the homepage orientation line to appear before the story grid'
+    Pattern = 'Independent essays, selected writings, and original books by Robert V\. Ussley'
+    Message = 'expected the homepage to omit the retired orientation tagline'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -5521,6 +5522,46 @@ $expectedHomeBookstoreCardCount = $homeBookstoreTargets.Count - 1
 
 if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeIndexHtml = [string]$targetPageHtml['public/index.html']
+  $homeWelcomeOpenings = @([regex]::Matches($homeIndexHtml, '<div\b[^>]*>', 'IgnoreCase') | Where-Object {
+    Test-TagHasClass -Tag $_.Value -ClassName 'home-front-page__orientation'
+  })
+  if ($homeWelcomeOpenings.Count -ne 1) {
+    $uxIssues.Add("public/index.html => expected exactly one signed welcome, found $($homeWelcomeOpenings.Count)")
+  }
+  else {
+    $homeWelcome = [regex]::Match($homeIndexHtml.Substring($homeWelcomeOpenings[0].Index), '(?is)^<div\b[^>]*>.*?</div>')
+    $homeWelcomeParts = @([regex]::Matches($homeWelcome.Value, '(?is)<p\b[^>]*>.*?(?:</p>|(?=<p\b|</div>))'))
+    $homeWelcomeExpectedParts = @(
+      @{ ClassName = 'home-front-page__welcome-label'; Text = 'A note to the reader' },
+      @{ ClassName = 'home-front-page__welcome-copy'; Text = "I’m Robert. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to. Pick something that catches your eye. I’m glad you’re here." },
+      @{ ClassName = 'home-front-page__welcome-signature'; Text = '— Robert V. Ussley' }
+    )
+    if ($homeWelcomeParts.Count -ne $homeWelcomeExpectedParts.Count) {
+      $uxIssues.Add('public/index.html => signed welcome must contain only its label, approved copy, and signature paragraphs')
+    }
+    else {
+      for ($partIndex = 0; $partIndex -lt $homeWelcomeExpectedParts.Count; $partIndex++) {
+        $expectedPart = $homeWelcomeExpectedParts[$partIndex]
+        $actualPart = $homeWelcomeParts[$partIndex].Value
+        $actualText = [regex]::Replace((Convert-HtmlFragmentToText -Html $actualPart), '\s+', ' ')
+        if (-not (Test-TagHasClass -Tag $actualPart -ClassName $expectedPart.ClassName) -or $actualText -cne $expectedPart.Text) {
+          $uxIssues.Add("public/index.html => signed welcome paragraph '$($expectedPart.ClassName)' must retain its approved order and text")
+        }
+      }
+      $signatureLinks = @(Get-OpenTags -Html $homeWelcomeParts[2].Value -TagName 'a')
+      $expectedAboutPath = $ExpectedHomePath.TrimEnd('/') + '/about/'
+      if ($signatureLinks.Count -ne 1 -or (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $signatureLinks[0] -Name 'href')) -cne $expectedAboutPath) {
+        $uxIssues.Add("public/index.html => welcome signature must link Robert V. Ussley to '$expectedAboutPath'")
+      }
+    }
+    $homeTitle = [regex]::Match($homeIndexHtml, '(?is)<h1\b[^>]*>.*?</h1>')
+    $homeStories = @([regex]::Matches($homeIndexHtml, '<section\b[^>]*>', 'IgnoreCase') | Where-Object {
+      Test-TagHasClass -Tag $_.Value -ClassName 'home-front-page__stories'
+    })
+    if (-not $homeTitle.Success -or $homeWelcomeOpenings[0].Index -lt ($homeTitle.Index + $homeTitle.Length) -or $homeStories.Count -ne 1 -or ($homeWelcomeOpenings[0].Index + $homeWelcome.Length) -gt $homeStories[0].Index) {
+      $uxIssues.Add('public/index.html => signed welcome must follow the site h1 and finish before the story grid')
+    }
+  }
   $homeRegions = @([regex]::Matches($homeIndexHtml, '<(?:article|div)\b[^>]*\bdata-home-front-page-region\s*=[^>]*>', 'IgnoreCase') | ForEach-Object {
     Get-AttributeValue -Tag $_.Value -Name 'data-home-front-page-region'
   })

@@ -30,7 +30,11 @@
 {{ end }}
 <section class="home-front-page" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
-  <p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V. Ussley</p>
+  <div class="home-front-page__orientation">
+    <p class="home-front-page__welcome-label">A note to the reader</p>
+    <p class="home-front-page__welcome-copy">I’m Robert. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to. Pick something that catches your eye. I’m glad you’re here.</p>
+    <p class="home-front-page__welcome-signature">&mdash; <a href="{{ "about/" | relURL }}">Robert V. Ussley</a></p>
+  </div>
   {{ with $lead }}
     {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
     {{ $leadCopy := partial "home_front_page_copy.html" . }}

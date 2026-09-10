@@ -163,7 +163,10 @@ if ($homeSelectionTemplate -match 'Lastmod|lt \(len \$secondary\) 4') {
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
-  '<p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V. Ussley</p>',
+  '<div class="home-front-page__orientation">',
+  '<p class="home-front-page__welcome-label">A note to the reader</p>',
+  ('<p class="home-front-page__welcome-copy">' + "I’m Robert. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to. Pick something that catches your eye. I’m glad you’re here." + '</p>'),
+  '<p class="home-front-page__welcome-signature">&mdash; <a href="{{ "about/" | relURL }}">Robert V. Ussley</a></p>',
   'id="home-front-page-title"',
   'data-home-front-page-region="lead"',
   'data-home-front-page-region="secondary"',
@@ -183,6 +186,9 @@ foreach ($requiredSnippet in @(
 $homepageOrder = @(
   'id="home-front-page-title"',
   'class="home-front-page__orientation"',
+  'class="home-front-page__welcome-label"',
+  'class="home-front-page__welcome-copy"',
+  'class="home-front-page__welcome-signature"',
   'class="home-front-page__stories"',
   'data-home-front-page-region="lead"',
   'class="editorial-cartoon__trigger"',
@@ -209,6 +215,7 @@ foreach ($snippet in $homepageOrder) {
 
 foreach ($retiredSnippet in @(
   '>Front Page<',
+  'Independent essays, selected writings, and original books by Robert V. Ussley',
   'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below.',
   'class="home-manifesto"',
   'A digital imprint of essays, reports, dialogues, and literature.',

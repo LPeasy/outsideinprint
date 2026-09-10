@@ -214,7 +214,9 @@ test("homepage partial keeps the newest lead with the profile, dialogue, and ris
   assert.doesNotMatch(frontPageSource, /Front Page Essay/);
   assert.match(frontPageSource, /range \$secondary/);
   assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
-  assert.match(frontPageSource, /<p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V\. Ussley<\/p>/);
+  assert.match(frontPageSource, /<div class="home-front-page__orientation">\s*<p class="home-front-page__welcome-label">A note to the reader<\/p>\s*<p class="home-front-page__welcome-copy">I’m Robert\. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to\. Pick something that catches your eye\. I’m glad you’re here\.<\/p>\s*<p class="home-front-page__welcome-signature">&mdash; <a href="\{\{ "about\/" \| relURL \}\}">Robert V\. Ussley<\/a><\/p>\s*<\/div>/);
+  assert.equal((frontPageSource.match(/class="home-front-page__orientation"/g) || []).length, 1);
+  assert.doesNotMatch(frontPageSource, /Independent essays, selected writings, and original books by Robert V\. Ussley/);
   assert.match(frontPageSource, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
   assert.ok(frontPageSource.indexOf('class="home-front-page__orientation"') < frontPageSource.indexOf('class="home-front-page__stories"'));
   assert.ok(frontPageSource.indexOf('>Front page stories</h2>') < frontPageSource.indexOf('<h3 class="home-front-page__lead-title">'));

@@ -674,7 +674,11 @@ test("homepage composition leads from the Almanack signup into the bookstore, mo
   assert.ok(homeFrontPage.indexOf('data-home-front-page-region="secondary"') < homeFrontPage.indexOf('data-home-front-page-region="extras"'));
   assert.ok(homeFrontPage.indexOf('data-home-front-page-region="extras"') < homeFrontPage.indexOf('data-home-cartoon-recent'));
   assert.match(homeFrontPage, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
-  assert.match(homeFrontPage, /<p class="home-front-page__orientation">Independent essays, selected writings, and original books by Robert V\. Ussley<\/p>/);
+  assert.match(homeFrontPage, /<div class="home-front-page__orientation">\s*<p class="home-front-page__welcome-label">A note to the reader<\/p>\s*<p class="home-front-page__welcome-copy">I’m Robert\. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to\. Pick something that catches your eye\. I’m glad you’re here\.<\/p>\s*<p class="home-front-page__welcome-signature">&mdash; <a href="\{\{ "about\/" \| relURL \}\}">Robert V\. Ussley<\/a><\/p>\s*<\/div>/);
+  assert.equal((homeFrontPage.match(/class="home-front-page__orientation"/g) || []).length, 1);
+  assert.doesNotMatch(homeFrontPage, /Independent essays, selected writings, and original books by Robert V\. Ussley/);
+  assert.ok(homeFrontPage.indexOf('id="home-front-page-title"') < homeFrontPage.indexOf('class="home-front-page__orientation"'));
+  assert.ok(homeFrontPage.indexOf('class="home-front-page__welcome-signature"') < homeFrontPage.indexOf('class="home-front-page__stories"'));
   assert.match(homeFrontPage, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
   assert.ok(homeFrontPage.indexOf('>Front page stories</h2>') < homeFrontPage.indexOf('<h3 class="home-front-page__lead-title">'));
   assert.match(homeFrontPage, /<p id="home-cartoon-lightbox-title" class="cartoon-lightbox__title" data-home-cartoon-lightbox-title><\/p>/);
@@ -1104,6 +1108,13 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /@media \(max-width:900px\)\{\s*\.home-front-page__stories\{[^}]*grid-template-columns:1fr;[^}]*grid-template-areas:\s*"lead"\s*"secondary"\s*"extras";[^}]*\}/);
   assert.doesNotMatch(css, /\.home-front-page__(?:lead|secondary|extras)\s*\{[^}]*\border\s*:/);
   assert.match(cssRule(css, ".home-front-page__orientation"), /max-width:52rem;/);
+  for (const selector of [".home-front-page__welcome-label", ".home-front-page__welcome-copy", ".home-front-page__welcome-signature"]) {
+    cssRule(css, selector);
+  }
+  assert.match(cssRule(css, ".home-front-page__welcome-signature a"), /display:inline-flex;/);
+  assert.match(cssRule(css, ".home-front-page__welcome-signature a"), /min-height:44px;/);
+  assert.match(cssRule(css, ".home-front-page__welcome-signature a:focus-visible"), /outline:3px solid var\(--focus-ring\);/);
+  assert.match(cssRule(css, ".home-front-page__welcome-signature a:focus-visible"), /outline-offset:3px;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-width:44px;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-height:44px;/);
   assert.match(css, /\.home-front-page__lead\{[\s\S]*border-right:1px solid var\(--oip-rule-standard\);/);

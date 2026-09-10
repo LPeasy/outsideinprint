@@ -1695,11 +1695,43 @@ html[data-theme="light"] .paper-route-toggle{
 .home-front-page__orientation{
   max-width:52rem;
   margin:0 auto 1.15rem;
+  padding-bottom:.65rem;
+  border-bottom:1px solid var(--oip-rule-standard);
   color:var(--text-secondary);
-  font-size:clamp(.94rem, .9rem + .18vw, 1.04rem);
+  font-size:1rem;
   line-height:1.55;
-  text-align:center;
-  text-wrap:balance;
+  text-align:left;
+}
+.home-front-page__welcome-label{
+  margin:0 0 .35rem;
+  font-family:var(--sans);
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.home-front-page__welcome-copy{
+  margin:0;
+}
+.home-front-page__welcome-signature{
+  margin:.15rem 0 0;
+  font-style:italic;
+}
+.home-front-page__welcome-signature a{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  max-width:100%;
+  color:var(--accent);
+  text-decoration:underline;
+  text-underline-offset:.18em;
+}
+.home-front-page__welcome-signature a:hover{
+  color:var(--accent-hover);
+}
+.home-front-page__welcome-signature a:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
 }
 .home-front-page__stories{
   display:grid;
