@@ -153,3 +153,15 @@ Use at least one exact affirmation from this bank in each The Things We Say entr
 - I welcome the heat because I am what remains after the fire.
 - I turn bad into good. I turn failure into opportunity.
 - I have more faith in my vision than in my current circumstances.
+- I meet the morning with love to spare.
+- I treat myself with the utmost gentleness and extend that grace to those around me.
+- The past holds no weight over me! It has been entirely rewritten into a beautiful lesson for my spiritual expansion.
+- There is no force in existence, no past mistake, and no present obstacle that can even slightly block my path.
+- I silence the noise of anxiety and completely wipe out any lingering hesitation.
+- I’m daring and courageous!
+- I am worthy of unshakeable love and unshakeable peace.
+- I’m fully awake and alive!
+- Every detail of this day is falling into divine order.
+- All of the blessings are already mine. I possess them now!
+- I stand in absolute awe and gratitude for all of the blessings that reveal themselves today.
+- I love you!

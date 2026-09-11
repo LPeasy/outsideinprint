@@ -59,6 +59,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/already-mine-morning-walk": {
+      "id": "editorial/already-mine-morning-walk",
+      "source": "images/originals/editorial/already-mine-morning-walk.png",
+      "sha256": "4d466fcc63474f4884981228ed6ce503bc8fd861a012d8610fe65f9f2363d61a",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": "",
+      "quality_override": null
+    },
     "editorial/at-the-worktable": {
       "id": "editorial/at-the-worktable",
       "source": "images/originals/editorial/at-the-worktable.png",
@@ -7260,6 +7274,7 @@
     "/images/books/2045/cover.jpg": "books/2045/cover",
     "/images/editorial/after-the-tone.png": "editorial/after-the-tone",
     "/images/editorial/algae-fueled-fever-dreams.png": "editorial/algae-fueled-fever-dreams",
+    "/images/editorial/already-mine-morning-walk.png": "editorial/already-mine-morning-walk",
     "/images/editorial/at-the-worktable.png": "editorial/at-the-worktable",
     "/images/editorial/beneficial-use.png": "editorial/beneficial-use",
     "/images/editorial/beyond-the-bend.png": "editorial/beyond-the-bend",
