@@ -70,7 +70,7 @@
       "review_state": "approved",
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
-      "processing_note": "",
+      "processing_note": null,
       "quality_override": null
     },
     "editorial/at-the-worktable": {
