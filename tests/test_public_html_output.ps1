@@ -1681,6 +1681,7 @@ $requiredUxPages = @(
   'public/almanack/2026-08-15/index.html',
   'public/almanack/2026-08-22/index.html',
   'public/almanack/2026-08-29/index.html',
+  'public/almanack/2026-09-12/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -4313,8 +4314,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?September 5, 2026.*?In the Margins.*?Number.*?Document.*?DHS Contracts: Reported Potential Cost Avoidance from Terminations Will Not Fully Materialize.*?Virtue.*?Read issue'
+    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?September 12, 2026.*?In the Margins.*?Number.*?Document.*?Disaster Risk: Improvements Needed to Enhance FEMA(?:\u2019|&#39;|&rsquo;)s National Risk Index.*?Virtue.*?Read issue'
     Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
+  },
+  @{
+    Path = 'public/almanack/2026-09-12/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?September 12, 2026.*?Issue 19'
+    Message = 'expected the September 12 Almanack issue page to render its nameplate, date, and issue number'
   },
   @{
     Path = 'public/almanack/2026-07-04/index.html'
