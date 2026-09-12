@@ -3,6 +3,7 @@ import { timingSafeEqual as nodeTimingSafeEqual } from "node:crypto";
 import test from "node:test";
 
 import { requireCloudflareAccessAdmin } from "../src/access.js";
+import { productForSku } from "../src/catalog.js";
 import {
   constantTimeEqual,
   deriveDownloadToken,
@@ -614,6 +615,197 @@ function epubPaymentLinkResponse({
     },
   };
 }
+
+// One local integration group for the 2045 addition. Provider responses, D1,
+// Queue transport and R2 are fakes; this is not a Square sandbox purchase.
+test("2045 launch commerce readiness (mock integration)", async (t) => {
+  const mapping = {
+    "OIP-TD-EPUB": "variation-td",
+    "OIP-AN-EPUB": "variation-an",
+    "OIP-PS-EPUB": "variation-ps",
+    "OIP-WC-EPUB": "variation-wc",
+  };
+  const books = [
+    ["OIP-TD-EPUB", "2045: Ten Dark Fables from the Machine Age", "epubs/oip-td.epub", "2045-ten-dark-fables.epub", 1999],
+    ["OIP-AN-EPUB", "The American Nightmare: Keep Dreaming, Kid", "epubs/oip-an.epub", "the-american-nightmare.epub", 999],
+    ["OIP-PS-EPUB", "The Parable of the Sheep", "epubs/oip-ps.epub", "the-parable-of-the-sheep.epub", 999],
+    ["OIP-WC-EPUB", "The Water Cycle: Risk, Infrastructure, and Public Memory", "epubs/oip-wc.epub", "the-water-cycle.epub", 999],
+  ];
+  const configuredEnv = (overrides = {}) => baseEnv({
+    EPUB_ENABLED_SKUS: Object.keys(mapping).join(","),
+    SQUARE_EPUB_CATALOG_VARIATION_IDS: JSON.stringify(mapping),
+    REQUIRE_EPUB_US_COUNTRY_PROOF: "true",
+    ...overrides,
+  });
+
+  await t.test("2045 stays closed and validates email/country before provider work", async () => {
+    const cases = [
+      [{ sku: "OIP-TD-EPUB", country_code: "US" }, { EPUB_ENABLED_SKUS: "OIP-AN-EPUB,OIP-PS-EPUB,OIP-WC-EPUB" }, {}, 409, "EPUB_NOT_AVAILABLE"],
+      [{ sku: "OIP-ZZ-EPUB", country_code: "US" }, {}, {}, 404, "EPUB_SKU_NOT_FOUND"],
+      [{ sku: "OIP-TD-EPUB", country_code: "US", email: undefined }, {}, {}, 400, "INVALID_BUYER_EMAIL"],
+      [{ sku: "OIP-TD-EPUB", country_code: "US", email: "bad email" }, {}, {}, 400, "INVALID_BUYER_EMAIL"],
+      [{ sku: "OIP-TD-EPUB", country_code: "CA" }, {}, {}, 403, "EPUB_US_ONLY"],
+      [{ sku: "OIP-TD-EPUB", country_code: "US" }, {}, { "cf-ipcountry": "CA" }, 403, "EPUB_US_COUNTRY_NOT_PROVEN"],
+      [{ sku: "OIP-TD-EPUB", country_code: "US" }, { SQUARE_EPUB_CATALOG_VARIATION_IDS: "{}" }, {}, 503, "EPUB_CATALOG_NOT_CONFIGURED"],
+    ];
+    for (const [selection, overrides, headers, status, code] of cases) {
+      let providerCalls = 0;
+      const env = configuredEnv({
+        ...overrides,
+        __testFetch: async () => { providerCalls += 1; throw new Error("unexpected provider request"); },
+      });
+      const response = await handleRequest(epubRequest(selection, {
+        "idempotency-key": "2045-rejected-intent-123", ...headers,
+      }), env);
+      assert.equal(response.status, status, code);
+      assert.equal((await response.json()).error.code, code);
+      assert.equal(providerCalls, 0);
+    }
+  });
+
+  await t.test("2045 rejects the obsolete $9.99 provider price", async () => {
+    let providerCalls = 0;
+    const env = configuredEnv({
+      __testFetch: async (url) => {
+        providerCalls += 1;
+        assert.equal(new URL(url).pathname, "/v2/catalog/object/variation-td");
+        return Response.json(epubVariation("variation-td", "OIP-TD-EPUB", 999));
+      },
+    });
+    const response = await handleRequest(epubRequest(
+      { sku: "OIP-TD-EPUB", country_code: "US" },
+      { "idempotency-key": "2045-wrong-price-123" },
+    ), env);
+    assert.equal(response.status, 502);
+    assert.equal((await response.json()).error.code, "CHECKOUT_PROVIDER_ERROR");
+    assert.equal(providerCalls, 1);
+  });
+
+  for (const [sku, title, r2Key, downloadFilename, priceCents] of books) {
+    await t.test(`${sku}: checkout, paid webhook, one email and private download`, async () => {
+      assert.deepEqual(productForSku(sku), { sku, title, priceCents, r2Key, downloadFilename });
+      const variationId = mapping[sku];
+      let order;
+      let checkoutCalls = 0;
+      const emails = [];
+      const objectReads = [];
+      let objectAvailable = true;
+      const env = configuredEnv({
+        EPUB_BUCKET: { get: async (key) => {
+          objectReads.push(key);
+          return objectAvailable && key === r2Key ? { body: `EPUB-FIXTURE:${sku}` } : null;
+        } },
+        __testFetch: async (url, options = {}) => {
+          if (new URL(url).pathname === `/v2/catalog/object/${variationId}`) {
+            return Response.json(epubVariation(variationId, sku, priceCents));
+          }
+          if (url.endsWith("/v2/online-checkout/payment-links")) {
+            checkoutCalls += 1;
+            const body = JSON.parse(options.body);
+            assert.deepEqual(body.order.line_items, [{ quantity: "1", catalog_object_id: variationId }]);
+            assert.deepEqual(body.pre_populated_data, { buyer_email: "reader@example.com" });
+            assert.equal(body.checkout_options.ask_for_shipping_address, false);
+            assert.equal(body.checkout_options.allow_tipping, false);
+            assert.equal(body.checkout_options.enable_coupon, false);
+            const link = epubPaymentLinkResponse({
+              variationId, sku, priceCents, referenceId: body.order.reference_id,
+              buyerEmail: body.pre_populated_data.buyer_email,
+            });
+            order = link.related_resources.orders[0];
+            assert.equal(order.total_money.amount, priceCents);
+            assert.equal(order.total_money.currency, "USD");
+            return Response.json(link);
+          }
+          if (url.endsWith("/v2/payments/payment-2045-proof")) {
+            return Response.json({ payment: {
+              id: "payment-2045-proof", status: "COMPLETED", order_id: order.id,
+              location_id: "location-1", amount_money: { amount: priceCents, currency: "USD" },
+              refunded_money: { amount: 0, currency: "USD" },
+              buyer_email_address: "reader@example.com", billing_address: { country: "US" },
+            } });
+          }
+          if (url.endsWith(`/v2/orders/${order?.id}`)) return Response.json({ order });
+          if (url === "https://api.resend.com/emails") {
+            emails.push({ body: JSON.parse(options.body), key: options.headers["idempotency-key"] });
+            return Response.json({ id: "email-2045-proof" });
+          }
+          throw new Error("unexpected provider request");
+        },
+      });
+      const checkoutRequest = () => epubRequest(
+        { sku, country_code: "US", email: " Reader@Example.com " },
+        { "idempotency-key": `2045-proof-${sku}` },
+      );
+      const checkout = await handleRequest(checkoutRequest(), env);
+      assert.equal(checkout.status, 201);
+      assert.equal((await checkout.json()).checkout_url, "https://square.link/u/epub");
+      assert.equal((await handleRequest(checkoutRequest(), env)).status, 200);
+      assert.equal(checkoutCalls, 1);
+
+      const event = {
+        event_id: `proof-2045-${sku}`, type: "payment.updated",
+        data: { object: { payment: { id: "payment-2045-proof" } } },
+      };
+      const rawBody = JSON.stringify(event);
+      const signature = await hmacSha256Base64(
+        env.SQUARE_WEBHOOK_SIGNATURE_KEY, env.SQUARE_WEBHOOK_NOTIFICATION_URL + rawBody,
+      );
+      const webhook = () => new Request(env.SQUARE_WEBHOOK_NOTIFICATION_URL, {
+        method: "POST", headers: { "x-square-hmacsha256-signature": signature }, body: rawBody,
+      });
+      assert.equal((await handleRequest(webhook(), env)).status, 200);
+      assert.equal(emails.length, 0, "webhook ingress must not perform email delivery");
+      assert.equal((await (await handleRequest(webhook(), env)).json()).duplicate, true);
+      assert.equal(env.WEBHOOK_QUEUE.sent.length, 1);
+      let acknowledgements = 0;
+      const message = {
+        body: env.WEBHOOK_QUEUE.sent[0],
+        ack: () => { acknowledgements += 1; },
+        retry: () => assert.fail("eligible payment should not retry"),
+      };
+      assert.equal((await processQueueMessage(message, env)).state, "PROCESSED");
+      assert.equal((await processQueueMessage(message, env)).state, "DUPLICATE");
+      assert.equal(acknowledgements, 2);
+      assert.equal(env.DB.fulfillments.size, 1);
+      assert.equal(emails.length, 1);
+      const row = [...env.DB.fulfillments.values()][0];
+      assert.equal(row.sku, sku);
+      assert.equal(row.status, "ACTIVE");
+      assert.equal(row.email_delivery_status, "SENT");
+      assert.equal(row.max_downloads, 5);
+      assert.equal(row.expires_at - row.created_at, 14 * 86400);
+      assert.equal(row.buyer_email_sha256, await sha256Hex("test-email-pepper:reader@example.com"));
+      assert.equal(emails[0].key, `oip-email-${row.fulfillment_id}-g1`);
+      assert.ok(emails[0].body.text.includes(title));
+      const downloadUrl = emails[0].body.text.split("\n").find((line) => line.startsWith("https://downloads."));
+      assert.ok(downloadUrl);
+      assert.equal(row.token_sha256, await sha256Hex(downloadUrl.split("/").at(-1)));
+      const download = await handleRequest(new Request(downloadUrl), env);
+      assert.equal(download.status, 200);
+      assert.equal(download.headers.get("content-type"), "application/epub+zip");
+      assert.equal(download.headers.get("content-disposition"), `attachment; filename="${downloadFilename}"`);
+      assert.equal(download.headers.get("cache-control"), "private, no-store, max-age=0");
+      assert.equal(await download.text(), `EPUB-FIXTURE:${sku}`);
+      assert.deepEqual(objectReads, [r2Key]);
+      assert.equal(row.download_count, 1);
+
+      if (sku === "OIP-TD-EPUB") {
+        objectAvailable = false;
+        const missing = await handleRequest(new Request(downloadUrl), env);
+        assert.equal(missing.status, 503);
+        assert.equal((await missing.json()).error.code, "DOWNLOAD_TEMPORARILY_UNAVAILABLE");
+        assert.equal(row.download_count, 1, "missing object must not consume a download");
+        objectAvailable = true;
+        row.expires_at = Math.floor(Date.now() / 1000) - 1;
+        assert.equal((await handleRequest(new Request(downloadUrl), env)).status, 404);
+        assert.equal((await handleRequest(new Request(`${env.DOWNLOAD_BASE_URL}/download/invalid`), env)).status, 404);
+        assert.equal((await handleRequest(new Request(`${env.DOWNLOAD_BASE_URL}/download/${"A".repeat(43)}`), env)).status, 404);
+        assert.equal(row.download_count, 1);
+        assert.equal(objectReads.length, 2, "unavailable tokens must not reach private storage");
+      }
+    });
+  }
+});
 
 function base64Url(value) {
   const bytes = typeof value === "string" ? new TextEncoder().encode(value) : new Uint8Array(value);

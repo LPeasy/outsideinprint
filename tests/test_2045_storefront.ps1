@@ -77,6 +77,13 @@ Assert-True ((Read-Source 'layouts/shop/single.html') -match '<section\b[^>]*id=
 $isDraft = $productSource -match '(?m)^draft: true\r?$'
 $sampleDraft = $sampleSource -match '(?m)^draft: true\r?$'
 Assert-True ($isDraft -eq $sampleDraft) 'Product and sample draft states must move together.'
+$isLiveOffer = $product -match 'availability_status: "live"'
+if ($isLiveOffer) {
+  Assert-True (-not $isDraft) 'Live 2045 must be published.'
+  Assert-True ($product -match 'availability_label: "Available now"' -and $product -match 'isbn_status: "Assigned"') 'Live 2045 must have assigned metadata and current availability.'
+  Assert-True ($product -match 'checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"' -and $product -match 'checkout_url: ""') 'Live 2045 must use only the approved production checkout API.'
+  Assert-True ($product -notmatch 'Pending assignment|coming September|Coming September|being prepared') 'Live 2045 must not retain prelaunch status copy.'
+}
 if ($isDraft) {
   Assert-True ($product -match 'availability_status: "disabled"') 'Draft 2045 must not enable checkout.'
   Assert-True ($product -match 'checkout_endpoint: ""' -and $product -match 'checkout_url: ""') 'Draft 2045 must not expose checkout destinations.'
@@ -160,10 +167,18 @@ $featureLinks = @([regex]::Matches($featureHtml, '(?is)<a\b[^>]*>'))
 $sampleLinks = @($featureLinks | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/sample/' })
 Assert-True ($sampleLinks.Count -eq 1 -and (Html-Attribute $sampleLinks[0].Value 'data-analytics-event') -eq 'book_sample_open') 'The feature needs one free sample link with normal sample analytics.'
 Assert-True ($featureHtml -notmatch '<form\b|data-epub-checkout|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The feature must not activate provider checkout itself.'
-$isLiveOffer = $product -match 'availability_status: "live"'
 if ($isLiveOffer) {
   $buyLinks = @($featureLinks | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/#bookstore-purchase' })
   Assert-True ($buyLinks.Count -eq 1 -and $featureHtml -notmatch '<button\b[^>]*\bdisabled\b') 'The live feature must link to the product purchase section, not a provider.'
+  $checkoutForms = @([regex]::Matches($detailHtml, '(?is)<form\b[^>]*\bdata-epub-checkout(?:\s|>).*?</form>'))
+  Assert-True ($checkoutForms.Count -eq 1) 'Live 2045 requires one primary checkout form; its free sample is on a separate page.'
+  foreach ($form in $checkoutForms) {
+    $formTag = [regex]::Match($form.Value, '(?is)<form\b[^>]*>').Value
+    Assert-True ((Html-Attribute $formTag 'action') -ceq 'https://downloads.outsideinprint.org/api/books/epub') '2045 checkout must use the production endpoint.'
+    Assert-True ($form.Value -match 'OIP-TD-EPUB' -and (Plain-Text $form.Value) -match '\$19\.99') '2045 checkout must bind its SKU and approved price.'
+    $emailInputs = @([regex]::Matches($form.Value, '(?is)<input\b[^>]*>') | Where-Object { (Html-Attribute $_.Value 'type') -eq 'email' })
+    Assert-True ($emailInputs.Count -eq 1 -and $emailInputs[0].Value -match '\brequired(?:\s|=|>)') 'Each 2045 checkout must require a delivery email.'
+  }
 } else {
   $disabledBuy = [regex]::Match($featureHtml, '(?is)<button\b(?=[^>]*\sdisabled(?:\s|=|>))[^>]*>.*?</button>').Value
   $describedBy = Html-Attribute ([regex]::Match($disabledBuy, '(?is)<button\b[^>]*>').Value) 'aria-describedby'

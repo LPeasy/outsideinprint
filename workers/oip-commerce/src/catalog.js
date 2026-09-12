@@ -1,6 +1,13 @@
 import { HttpError } from "./http.js";
 
 export const EPUB_PRODUCTS = Object.freeze({
+  "OIP-TD-EPUB": Object.freeze({
+    sku: "OIP-TD-EPUB",
+    title: "2045: Ten Dark Fables from the Machine Age",
+    priceCents: 1999,
+    r2Key: "epubs/oip-td.epub",
+    downloadFilename: "2045-ten-dark-fables.epub",
+  }),
   "OIP-AN-EPUB": Object.freeze({
     sku: "OIP-AN-EPUB",
     title: "The American Nightmare: Keep Dreaming, Kid",

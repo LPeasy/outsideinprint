@@ -65,8 +65,8 @@ $catalogSkus = @(
   'OIP-WC-PB'
 )
 $publicEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
-$liveEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
-$disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB', 'OIP-TD-EPUB')
+$liveEpubSkus = @('OIP-TD-EPUB', 'OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
+$disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB')
 
 foreach ($requiredCatalogText in @(
   'product_type: "Outside In Print EPUB"',
@@ -160,17 +160,17 @@ if ($bookstoreData -match '(?im)^\s+checkout_note:\s+"[^"]*Amazon') {
   throw 'Bookstore data must not retain an Amazon checkout note.'
 }
 
-if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne 3) {
-  throw 'All three direct EPUB offers must be live.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne 4) {
+  throw 'All four direct EPUB offers must be live.'
 }
-if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 4) {
-  throw 'The three paperback offers and prepared 2045 EPUB must remain disabled.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 3) {
+  throw 'The three paperback offers must remain disabled.'
 }
 if ($bookstoreData -match '(?im)^\s+checkout_url:\s+"https?://') {
   throw 'The API-based direct EPUB launch must not expose a hosted checkout URL.'
 }
-if ([regex]::Matches($bookstoreData, '(?m)^\s+checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"\s*$').Count -ne 3) {
-  throw 'All three direct EPUB offers must expose the approved production endpoint.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"\s*$').Count -ne 4) {
+  throw 'All four direct EPUB offers must expose the approved production endpoint.'
 }
 if ($bookstoreData -match '(?i)stripe') {
   throw 'The Square-only catalog must not contain Stripe configuration.'

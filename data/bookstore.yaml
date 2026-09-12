@@ -28,7 +28,7 @@ products:
     price_display: "$19.99"
     checkout_label: "Buy EPUB — $19.99"
     checkout_note: "DRM-free EPUB for personal use. Secure checkout through Square, with a download link delivered by email after payment confirmation."
-    checkout_unavailable_label: "EPUB coming September 12"
+    checkout_unavailable_label: "EPUB temporarily unavailable"
     cover_image: "books/2045/cover"
     cover_alt: "Black cover for 2045 with a small OIP Exclusive mark, an oversized ivory scanline eye, a blue radial iris with red and ivory circles, a grid of pale squares, large ivory numerals, binary digits, the subtitle Ten Dark Fables from the Machine Age, and Robert V. Ussley’s name."
     suggested_slug: "2045"
@@ -37,9 +37,9 @@ products:
     direct_offers:
       - sku: "OIP-TD-EPUB"
         format: "EPUB"
-        availability_status: "disabled"
-        availability_label: "Coming September 12, 2026"
-        isbn_status: "Pending assignment"
+        availability_status: "live"
+        availability_label: "Available now"
+        isbn_status: "Assigned"
         price_display: "$19.99"
         price_cents: 1999
         currency: "USD"
@@ -48,8 +48,8 @@ products:
         fulfillment_type: "secure_epub_download"
         checkout_action: "epub_checkout_api"
         checkout_url: ""
-        checkout_endpoint: ""
-        gate_note: "The Outside In Print EPUB edition is being prepared for September 12, 2026."
+        checkout_endpoint: "https://downloads.outsideinprint.org/api/books/epub"
+        gate_note: "Secure checkout through Square. EPUB delivered by email after payment is confirmed."
     tags:
       - "speculative fiction"
       - "artificial intelligence"
