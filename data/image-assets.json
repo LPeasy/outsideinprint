@@ -2047,6 +2047,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/dialogues/the-morning-after/hero": {
+      "id": "essays/dialogues/the-morning-after/hero",
+      "source": "images/originals/essays/dialogues/the-morning-after/hero.jpg",
+      "sha256": "a70caed145c4432d688c9482c505b886872716c01bafac6583d273d2243230b9",
+      "width": 1280,
+      "height": 720,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero": {
       "id": "essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero",
       "source": "images/originals/essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero.png",
@@ -7829,6 +7843,7 @@
     "/images/syd-and-oliver/broke-rich/hero.png": "essays/dialogues/broke-rich/hero",
     "/images/syd-and-oliver/everyone-knows-the-words/hero.png": "essays/dialogues/everyone-knows-the-words/hero",
     "/images/syd-and-oliver/infinite-incontent/hero.png": "essays/dialogues/infinite-incontent/hero",
-    "/images/syd-and-oliver/pressure-makes-pearls/hero.png": "essays/dialogues/pressure-makes-pearls/hero"
+    "/images/syd-and-oliver/pressure-makes-pearls/hero.png": "essays/dialogues/pressure-makes-pearls/hero",
+    "/images/syd-and-oliver/the-morning-after/hero.jpg": "essays/dialogues/the-morning-after/hero"
   }
 }
