@@ -21,13 +21,19 @@ param(
   [ValidatePattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]
   [string]$LinkExistingSlug,
 
+  [Parameter(Mandatory = $true, ParameterSetName = 'Dialogue')]
+  [ValidatePattern('^/syd-and-oliver/[a-z0-9]+(?:-[a-z0-9]+)*/$')]
+  [string]$DialoguePath,
+
   [Parameter(ParameterSetName = 'Publish')]
   [switch]$NoEssayLink,
 
   [Parameter(ParameterSetName = 'Publish')]
+  [Parameter(ParameterSetName = 'Dialogue')]
   [string]$Date = (Get-Date -Format 'yyyy-MM-dd'),
 
   [Parameter(ParameterSetName = 'Publish')]
+  [Parameter(ParameterSetName = 'Dialogue')]
   [string]$PublishDate,
 
   [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -61,7 +67,9 @@ function Unquote-YamlValue {
 
   $trimmed = $Value.Trim()
   if (($trimmed.StartsWith('"') -and $trimmed.EndsWith('"')) -or ($trimmed.StartsWith("'") -and $trimmed.EndsWith("'"))) {
-    return $trimmed.Substring(1, $trimmed.Length - 2)
+    $inner = $trimmed.Substring(1, $trimmed.Length - 2)
+    if ($trimmed.StartsWith('"')) { return $inner.Replace('\"', '"') }
+    return $inner.Replace("''", "'")
   }
 
   return $trimmed
@@ -639,6 +647,122 @@ function Write-CartoonData {
 }
 
 $resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $Root).Path)
+
+if ($PSCmdlet.ParameterSetName -eq 'Dialogue') {
+  # Reuse the dialogue's approved managed hero. This branch never copies art,
+  # registers an asset, infers an essay, or invokes an essay editorial gate.
+  $dialogueSlug = ($DialoguePath.Trim('/') -split '/')[-1]
+  $markdownPath = Join-Path $resolvedRoot "content/essays/dialogues/$dialogueSlug.md"
+  if (-not (Test-Path -LiteralPath $markdownPath -PathType Leaf)) {
+    throw "Dialogue source not found: $DialoguePath"
+  }
+  $frontMatter = Read-MarkdownFrontMatter -Path $markdownPath
+  if ([string]$frontMatter['library_type'] -cne 'dialogue' -or
+      [string]$frontMatter['url'] -cne $DialoguePath -or
+      [string]$frontMatter['collections'] -cnotmatch '^\s*\[\s*["'']?syd-and-oliver-dialogues["'']?\s*\]\s*$') {
+    throw "Dialogue must declare library_type: dialogue, the Syd and Oliver collection, and its canonical URL: $DialoguePath"
+  }
+  if ([string]$frontMatter['draft'] -ine 'false') {
+    throw "Dialogue must explicitly declare draft:false before Gallery publication: $DialoguePath"
+  }
+  foreach ($field in @('title', 'date', 'featured_image', 'featured_image_alt')) {
+    if ([string]::IsNullOrWhiteSpace([string]$frontMatter[$field])) {
+      throw "Dialogue $DialoguePath is missing $field."
+    }
+  }
+  $dialogueReleaseAt = ConvertTo-OipDateTimeOffset -Value $frontMatter['date'] -Label 'Dialogue date'
+  if (-not [string]::IsNullOrWhiteSpace([string]$frontMatter['publishdate'])) {
+    $dialoguePublishAt = ConvertTo-OipDateTimeOffset -Value $frontMatter['publishdate'] -Label 'Dialogue publishDate'
+    if ($dialoguePublishAt -gt $dialogueReleaseAt) { $dialogueReleaseAt = $dialoguePublishAt }
+  }
+
+  $manifest = Read-OipImageAssetManifest -Root $resolvedRoot
+  $assetId = [string]$frontMatter['featured_image']
+  if (-not $manifest.assets.Contains($assetId)) {
+    throw "Dialogue featured_image must be a registered bare managed asset ID: $assetId"
+  }
+  $asset = $manifest.assets[$assetId]
+  if ([string]$asset.review_state -cne 'approved' -or
+      [string]$asset.processing_state -cne 'derivative_capable' -or
+      [string]$asset.usage_state -cne 'referenced') {
+    throw "Dialogue hero must be approved, referenced, and derivative_capable: $assetId"
+  }
+  $resolvedAsset = Resolve-OipImageAsset -Root $resolvedRoot -Reference $assetId -Manifest $manifest
+  Assert-OipManagedImageFile -Path $resolvedAsset.Path -ExpectedExtension ([IO.Path]::GetExtension($resolvedAsset.Path)) -Label 'Dialogue hero' | Out-Null
+  $dimensions = Get-OipImageNativeDimensions -Path $resolvedAsset.Path
+  $sourceHash = (Get-FileHash -LiteralPath $resolvedAsset.Path -Algorithm SHA256).Hash.ToLowerInvariant()
+  if ($sourceHash -cne [string]$asset.sha256 -or $dimensions.Width -ne [int]$asset.width -or $dimensions.Height -ne [int]$asset.height) {
+    throw "Dialogue hero source hash or dimensions differ from its manifest: $assetId"
+  }
+
+  $dataPath = Join-Path $resolvedRoot 'data/editorial_cartoons.yaml'
+  $data = Read-CartoonData -Path $dataPath
+  $existing = @($data.cartoons | Where-Object { $_.slug -ceq $dialogueSlug })
+  if ($existing.Count -gt 1) { throw "Duplicate Gallery slug: $dialogueSlug" }
+  foreach ($cartoon in @($data.cartoons)) {
+    if ($cartoon.slug -ceq $dialogueSlug) {
+      if ([string]$cartoon.image -cne $assetId -or ($cartoon.Contains('essay') -and [string]$cartoon.essay -cne $DialoguePath)) {
+        throw "Gallery slug already belongs to different artwork or a different piece: $dialogueSlug"
+      }
+    }
+    elseif ([string]$cartoon.image -ceq $assetId -or ($cartoon.Contains('essay') -and [string]$cartoon.essay -ceq $DialoguePath)) {
+      throw "Dialogue artwork or route already has a different Gallery entry: $($cartoon.slug)"
+    }
+  }
+
+  # Keep an existing release unchanged on repeat invocations. For a new entry,
+  # derive the full article release instant so same-day art cannot precede it.
+  $galleryDate = if ($PSBoundParameters.ContainsKey('Date')) { $Date }
+    elseif ($existing.Count -eq 1) { [string]$existing[0].date }
+    else { ([string]$frontMatter['date']).Substring(0, 10) }
+  if ($galleryDate -notmatch '^\d{4}-\d{2}-\d{2}$') { throw "Date must use yyyy-MM-dd format. Received: $galleryDate" }
+  $galleryPublishDate = if ($PSBoundParameters.ContainsKey('PublishDate')) { $PublishDate }
+    elseif ($PSBoundParameters.ContainsKey('Date')) { '' }
+    elseif ($existing.Count -eq 1 -and $existing[0].Contains('publishDate')) { [string]$existing[0].publishDate }
+    elseif ($existing.Count -eq 0) { $dialogueReleaseAt.ToString('o') }
+    else { '' }
+  $galleryReleaseValue = if ([string]::IsNullOrWhiteSpace($galleryPublishDate)) { $galleryDate } else { $galleryPublishDate }
+  $galleryReleaseAt = ConvertTo-OipDateTimeOffset -Value $galleryReleaseValue -Label 'Dialogue Gallery release'
+  if ($galleryReleaseAt -lt $dialogueReleaseAt) {
+    throw "Gallery release is earlier than linked dialogue release $($dialogueReleaseAt.ToString('o')). Set -PublishDate at or after the dialogue release."
+  }
+  $isQueuedPublish = $galleryReleaseAt -gt (Get-CurrentEasternTime)
+  if ($isQueuedPublish -and -not ($PSBoundParameters.ContainsKey('Date') -or $PSBoundParameters.ContainsKey('PublishDate')) -and $existing.Count -eq 0) {
+    throw 'Future dialogue Gallery publication requires an explicit -Date or -PublishDate schedule.'
+  }
+  if ($isQueuedPublish -and ([string]::IsNullOrWhiteSpace([string]$data.current) -or @($data.cartoons | Where-Object { $_.slug -ceq [string]$data.current }).Count -ne 1)) {
+    throw 'Queued dialogue art requires an existing current Gallery entry.'
+  }
+
+  $entry = [ordered]@{}
+  if ($existing.Count -eq 1) {
+    foreach ($property in $existing[0].GetEnumerator()) { $entry[$property.Key] = $property.Value }
+  }
+  $entry.slug = $dialogueSlug
+  $entry.title = [string]$frontMatter['title']
+  $entry.date = $galleryDate
+  if (-not [string]::IsNullOrWhiteSpace($galleryPublishDate)) { $entry.publishDate = $galleryPublishDate }
+  elseif ($entry.Contains('publishDate')) { $entry.Remove('publishDate') }
+  $entry.image = $assetId
+  $entry.essay = $DialoguePath
+  $entry.alt = [string]$frontMatter['featured_image_alt']
+  $entry.width = $dimensions.Width
+  $entry.height = $dimensions.Height
+  $cartoons = @(foreach ($cartoon in @($data.cartoons)) {
+    if ($cartoon.slug -ceq $dialogueSlug) { $entry } else { $cartoon }
+  })
+  if ($existing.Count -eq 0) { $cartoons += $entry }
+  # The current selector falls back to eligible art while this entry is future,
+  # then selects this slug automatically on the first build after its release.
+  $current = $dialogueSlug
+  Write-CartoonData -Path $dataPath -Current $current -Cartoons $cartoons
+  Write-Host "Updated dialogue Gallery illustration: $($entry.title)"
+  Write-Host "Reused managed image: $assetId"
+  Write-Host "Dialogue: $DialoguePath"
+  Write-Host "Current front page illustration: $current"
+  if ($isQueuedPublish) { Write-Host "Queued release: $galleryPublishDate" }
+  return
+}
 
 if ($PSCmdlet.ParameterSetName -eq 'LinkExisting') {
   $resolvedEssayPath = Normalize-EssayPath -Value $EssayPath

@@ -127,6 +127,20 @@ function Get-CartoonEntries {
 function Resolve-EssayMarkdownPath {
   param([string]$EssayPath)
 
+  if ($EssayPath -cmatch '^/syd-and-oliver/([a-z0-9]+(?:-[a-z0-9]+)*)/$') {
+    $dialoguePath = Join-Path $essayDir "dialogues/$($Matches[1]).md"
+    if (-not (Test-Path -LiteralPath $dialoguePath -PathType Leaf)) {
+      throw "Gallery dialogue path does not resolve to a dialogue markdown file: $EssayPath"
+    }
+    $frontMatter = Read-FrontMatter -Path $dialoguePath
+    if ([string]$frontMatter['library_type'] -cne 'dialogue' -or
+        [string]$frontMatter['url'] -cne $EssayPath -or
+        [string]$frontMatter['collections'] -cnotmatch '^\s*\[\s*["'']?syd-and-oliver-dialogues["'']?\s*\]\s*$') {
+      throw "Gallery dialogue must declare its dialogue type, collection, and canonical URL: $EssayPath"
+    }
+    return $dialoguePath
+  }
+
   if ($EssayPath -notmatch '^/essays/([^/]+)/$') {
     throw "Cartoon essay path must use /essays/<slug>/ format. Received: $EssayPath"
   }
@@ -161,6 +175,9 @@ function Get-EssayReleaseDate {
   if ($frontMatter.ContainsKey('draft') -and [string]$frontMatter['draft'] -eq 'true') {
     throw "Linked essay $EssayPath is draft:true."
   }
+  if ($EssayPath.StartsWith('/syd-and-oliver/', [StringComparison]::Ordinal) -and [string]$frontMatter['draft'] -ine 'false') {
+    throw "Linked dialogue $EssayPath must explicitly declare draft:false."
+  }
 
   $releaseValue = if ($frontMatter.ContainsKey('publishdate') -and -not [string]::IsNullOrWhiteSpace([string]$frontMatter['publishdate'])) {
     [string]$frontMatter['publishdate']
@@ -169,7 +186,12 @@ function Get-EssayReleaseDate {
     [string]$frontMatter['date']
   }
 
-  return ConvertTo-OipDateTimeOffset -Value $releaseValue -Label "Linked essay release date for $EssayPath"
+  $releaseAt = ConvertTo-OipDateTimeOffset -Value $releaseValue -Label "Linked essay release date for $EssayPath"
+  if ($EssayPath.StartsWith('/syd-and-oliver/', [StringComparison]::Ordinal)) {
+    $articleDate = ConvertTo-OipDateTimeOffset -Value ([string]$frontMatter['date']) -Label "Linked dialogue date for $EssayPath"
+    if ($articleDate -gt $releaseAt) { $releaseAt = $articleDate }
+  }
+  return $releaseAt
 }
 
 function Test-AssociationOnlyUpdate {
@@ -546,7 +568,7 @@ foreach ($cartoon in @($cartoonData.Entries)) {
   $essayMarkdownPath = Resolve-EssayMarkdownPath -EssayPath $essayPath
   $essayRelease = Get-EssayReleaseDate -MarkdownPath $essayMarkdownPath -EssayPath $essayPath
 
-  if ($isFutureCartoon -and $cartoonRelease -lt $essayRelease) {
+  if (($isFutureCartoon -or $essayPath.StartsWith('/syd-and-oliver/', [StringComparison]::Ordinal)) -and $cartoonRelease -lt $essayRelease) {
     throw ("Cartoon '{0}' releases at {1}, before its linked essay {2} releases at {3}." -f $cartoon.slug, $cartoonRelease.ToString('o'), $essayPath, $essayRelease.ToString('o'))
   }
 }
@@ -557,6 +579,7 @@ if (-not $currentExists) {
 
 Test-AssociationOnlyUpdate
 Test-ExplicitPublishSlug
+& (Join-Path $PSScriptRoot 'test_dialogue_gallery_publish.ps1')
 
 Write-Host "Editorial cartoon schedule contract passed."
 $global:LASTEXITCODE = 0

@@ -1,4 +1,4 @@
-current: already-mine-morning-walk
+current: the-morning-after
 cartoons:
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
@@ -977,3 +977,12 @@ cartoons:
     alt: "An anonymous walker seen from behind follows a rain-washed sidewalk into golden morning light as a small bird lifts from the hedge beside the path."
     width: 1672
     height: 941
+  - slug: the-morning-after
+    title: "The Morning After"
+    date: "2026-09-13"
+    publishDate: "2026-09-13T16:14:45.0000000+00:00"
+    image: "essays/dialogues/the-morning-after/hero"
+    essay: "/syd-and-oliver/the-morning-after/"
+    alt: "A painterly café scene shows two men touching coffee mugs over breakfast in warm window light, with a young couple talking at a nearby table."
+    width: 1280
+    height: 720

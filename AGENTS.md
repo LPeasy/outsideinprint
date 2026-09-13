@@ -27,6 +27,7 @@ Merch order automation is not implemented yet. Before proposing or building orde
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public`
 - Do not run local npm or npx commands as a required OIP publishing gate. GitHub Actions owns public-site contracts and analytics snapshot coverage.
+- At each new Syd & Oliver publication, register its existing hero in the Gallery and promote it as the front-page illustration using `scripts/update_front_page_cartoon.ps1 -DialoguePath '/syd-and-oliver/<slug>/'`; include the Gallery data change in that release. See `docs/publishing-workflow.md` for draft and scheduling behavior.
 - Treat `main` as the publish action. The site goes live through `.github/workflows/deploy.yml` after push or merge to `main`.
 
 ## Important exceptions

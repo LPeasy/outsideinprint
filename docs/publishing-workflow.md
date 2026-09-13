@@ -133,11 +133,25 @@ Every new Syd & Oliver dialogue package must include:
 
 - a Markdown source file under `content/essays/dialogues/<slug>.md`, with its canonical `/syd-and-oliver/<slug>/` URL;
 - `library_type: 'dialogue'`, `collections: ['syd-and-oliver-dialogues']`, a concise `description`, `version`, and `edition`;
-- a scene-matched hero depicting Syd and Oliver as two anonymous silhouettes, registered once at `assets/images/originals/essays/dialogues/<slug>/hero.<ext>` under the stable ID `essays/dialogues/<slug>/hero`, with that bare ID referenced by `featured_image`;
+- a scene-matched hero, using owner-supplied artwork when provided or anonymous silhouettes by default for generated art, registered once at `assets/images/originals/essays/dialogues/<slug>/hero.<ext>` under the stable ID `essays/dialogues/<slug>/hero`, with that bare ID referenced by `featured_image`;
 - precise `featured_image_alt` text that describes the actual scene without identifying either man; and
 - `draft: true` by default. Change it only when the user explicitly asks for a publication-ready package or publication.
 
-Use `scripts/register_managed_image_asset.ps1` to hash, validate, and register the source; never copy the original into `static/`. Use a landscape hero that remains legible as the site's narrow desktop side plate and as a full-width mobile image. Do not put a duplicate hero image in the body. Inspect generated or supplied art before use; do not use visible faces, readable text, logos, watermarks, or unrelated focal subjects.
+Use `scripts/register_managed_image_asset.ps1` to hash, validate, and register the source; never copy the original into `static/`. Use a landscape hero that remains legible as the site's narrow desktop side plate and as a full-width mobile image. Do not put a duplicate hero image in the body. Inspect generated or supplied art before use. Generated art should avoid visible faces, readable text, logos, watermarks, and unrelated focal subjects; explicit owner choices govern supplied artwork.
+
+Starting with **The Morning After**, every new Syd & Oliver publication also adds its hero to the Gallery and promotes it as the current front-page illustration. Reuse the same approved managed asset, title, and alt text. Link the Gallery item to the canonical `/syd-and-oliver/<slug>/` route. Older Gallery entries remain available when the next illustration becomes current; this policy does not require retroactive changes to older dialogues.
+
+At authorized publication, after setting the dialogue to `draft: false`, run:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\update_front_page_cartoon.ps1 -DialoguePath '/syd-and-oliver/<slug>/'
+```
+
+This updates `data/editorial_cartoons.yaml` from the dialogue's metadata and existing managed asset. It does not copy the image, add a second manifest entry, or impose the essay Editorial Philosophy Audit. Publish the Gallery data change together with the dialogue and any newly registered hero. Ordinary draft packaging does not change the live current illustration.
+
+For a queued dialogue, explicitly supply `-PublishDate` at or after its exact release timestamp. The new Gallery entry and its current selection remain hidden until eligible, using the same fallback behavior as other queued illustrations. If an intervening publication replaces `current`, rerun the `-DialoguePath` command at the authorized release to restore the intended front-page selection. Verify the Gallery item, linked dialogue, current front-page illustration, responsive output, and `tests/test_editorial_cartoon_schedule_contract.ps1` with the normal publication gate.
+
+These are character dialogues. Do not append sourcing apparatus or factual-review notes to a dialogue package unless the owner requests that work. A hero registered as the Gallery pairing is eligible for the same paired-art surfaces, including Bob's Almanack cards.
 
 ## Local preview and publish validation
 
@@ -233,7 +247,7 @@ Future-dated front-page cartoons use the same daily rebuild, but the source of t
 
 The public homepage, gallery, home metadata image, and essay-card cartoon thumbnails ignore future cartoon entries until `publishDate` or `date` is eligible. The current-cartoon selector falls back to the newest eligible cartoon when `current` points to a future queued entry, so multiple queued cartoons can sit on `main`.
 
-Queued cartoons must name the intended essay with `essay: "/essays/<slug>/"`. The cartoon schedule contract verifies that linked essays exist, are not drafts, and publish no later than the cartoon. If a cartoon is intentionally standalone, do not future-queue it without explicit editorial approval.
+Queued illustrations must name the intended piece with `essay: "/essays/<slug>/"` or, for Syd & Oliver, `essay: "/syd-and-oliver/<slug>/"`. The cartoon schedule contract verifies that linked essays exist, are not drafts, and publish no later than the cartoon. If a cartoon is intentionally standalone, do not future-queue it without explicit editorial approval.
 
 For a local preview of future queued cartoons, set the explicit preview environment variable before the Hugo command:
 
