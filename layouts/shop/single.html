@@ -29,6 +29,9 @@
           </p>
           {{ with index $product "subtitle" }}<p class="bookstore-product__subtitle">{{ . }}</p>{{ end }}
           {{ with index $product "deck" }}<p class="bookstore-product__deck">{{ . }}</p>{{ end }}
+          {{ if eq $productKey "2045" }}
+            {{ partial "shop/sample-link.html" (dict "page" . "product" $product "sourceSlot" "bookstore_detail_sample" "class" "bookstore-sample-link--complete") }}
+          {{ end }}
           {{ with index $product "tags" }}
             <ul class="bookstore-record__topics bookstore-record__topics--detail" aria-label="Book topics">
               {{ range . }}<li>{{ . }}</li>{{ end }}
@@ -55,12 +58,14 @@
             ) }}
           </div>
 
+          {{ if ne $productKey "2045" }}
           {{ partial "shop/sample-link.html" (dict
             "page" .
             "product" $product
             "sourceSlot" "bookstore_detail_sample"
             "fragmentOnly" true
           ) }}
+          {{ end }}
 
           <p class="bookstore-product__purchase-help"><a href="{{ "epub-license-refunds/" | relURL }}">Read the direct EPUB delivery and refund terms</a></p>
         </section>

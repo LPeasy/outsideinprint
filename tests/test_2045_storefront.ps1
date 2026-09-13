@@ -101,6 +101,23 @@ $assets = Read-Source 'data/image-assets.json' | ConvertFrom-Json -AsHashtable
 $cover = $assets.assets['books/2045/cover']
 Assert-True ($cover.width -eq 1650 -and $cover.height -eq 2550 -and $cover.review_state -eq 'approved') '2045 cover is not the approved portrait asset.'
 
+$issueSource = Read-Source 'content/almanack/2026-09-12.md'
+$launchMessage = "A grieving father enters a memory world with his children—and finds that the dead may remember him back. 2045 collects ten dark fables about artificial intelligence, grief, ambition, faith, and the ways people seek meaning. By Robert V. Ussley. The EPUB is `$19.99, sold directly by Outside In Print to U.S. readers, with a private download link delivered by email."
+$launchNote = "Today I’m publishing 2045, ten dark fables from the machine age. In the free opening story, a man whose machines do everything for him struggles to find something worth doing himself."
+$launchLabel = 'Read “The Cracked Pot” — a complete story · 7 minutes'
+$datedFed = 'https://www.federalreserve.gov/releases/z1/20260911/recent_developments.htm'
+foreach ($copy in @($launchMessage, $launchNote, $launchLabel, $datedFed)) {
+  Assert-True ([regex]::Matches($issueSource, [regex]::Escape($copy)).Count -eq 2) 'Launch copy must agree in issue data and Markdown.'
+}
+Assert-True ($issueSource -match 'version: "0.3"' -and $issueSource -notmatch '/z1/current/|We can lose our footing') 'Issue revision or retired copy is wrong.'
+$campaignTemplate = Read-Source 'layouts/almanack/single.html'
+Assert-True ($campaignTemplate.Contains('.image_link_url | default $campaignHref')) 'Campaign cover must fall back to the primary CTA.'
+$detailTemplate = Read-Source 'layouts/shop/single.html'
+Assert-True ($detailTemplate.IndexOf('"class" "bookstore-sample-link--complete"') -lt $detailTemplate.IndexOf('index $product "tags"')) '2045 sample invitation must precede topics.'
+foreach ($template in @($featureTemplate, (Read-Source 'layouts/partials/shop/sample-link.html'))) {
+  Assert-True ($template.Contains('.Title') -and $template.Contains('.ReadingTime') -and $template.Contains('a complete story')) 'Sample invitation must derive title and reading time.'
+}
+
 if ($SourceOnly) {
   Write-Host '2045 storefront source contract passed.'
   exit 0
@@ -144,6 +161,19 @@ foreach ($html in @($homeHtml, $shopHtml, $authorHtml)) {
 }
 Assert-True ($features.Count -eq 1) 'Published or preview 2045 must have exactly one bookstore feature.'
 $featureHtml = $features[0].Value
+$issueHtml = Read-Output 'almanack/2026-09-12/index.html'
+foreach ($html in @($featureHtml, $detailHtml, $issueHtml)) {
+  $invitations = @([regex]::Matches($html, '(?is)<a\b[^>]*>.*?</a>') | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/sample/' })
+  Assert-True ($invitations.Count -eq 1 -and (Plain-Text $invitations[0].Value) -ceq $launchLabel) 'Each launch surface needs one complete-story invitation.'
+}
+$detailSample = [regex]::Matches($detailHtml, '(?is)<a\b[^>]*>.*?</a>') | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/sample/' }
+Assert-True ($detailSample.Index -lt $detailHtml.IndexOf('id=bookstore-purchase') -or $detailSample.Index -lt $detailHtml.IndexOf('id="bookstore-purchase"')) 'The sample invitation must precede checkout in DOM order.'
+foreach ($copy in @($launchMessage, $launchNote)) {
+  Assert-True ((Plain-Text $issueHtml).Contains($copy)) 'Rendered launch copy differs from approved text.'
+}
+$campaignCover = @([regex]::Matches($issueHtml, '(?is)<a\b[^>]*>') | Where-Object { (Html-Attribute $_.Value 'class') -eq 'almanack-campaign__cover' })
+Assert-True ($campaignCover.Count -eq 1 -and (Html-Attribute $campaignCover[0].Value 'href') -eq '/shop/2045/') 'Campaign cover must lead to the book overview.'
+Assert-True ($issueHtml.Contains('/shop/2045/#bookstore-purchase') -and $issueHtml.Contains($datedFed) -and $issueHtml -notmatch '/z1/current/') 'Issue must use the purchase anchor and dated citation.'
 Assert-True ($features[0].Index -lt $catalogMatch.Index -and $featureHtml -match 'id="?bookstore-feature-title"?') 'The named 2045 feature must precede the ordinary catalog.'
 Assert-True ($catalogRecords.Count -eq 3 -and $catalogHtml -notmatch '/shop/2045/|OIP-TD-EPUB') '2045 must not be duplicated among the three remaining shelf books.'
 foreach ($slug in @('the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle')) {

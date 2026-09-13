@@ -43,12 +43,16 @@
 
     {{ with $campaign }}
       {{ $campaignHref := .cta_url | default "#" }}
+      {{ $campaignImageHref := .image_link_url | default $campaignHref }}
+      {{ if not (hasPrefix $campaignImageHref "http") }}
+        {{ $campaignImageHref = $campaignImageHref | relURL }}
+      {{ end }}
       {{ if not (hasPrefix $campaignHref "http") }}
         {{ $campaignHref = $campaignHref | relURL }}
       {{ end }}
       <section class="almanack-campaign{{ if $campaignImageModel }} almanack-campaign--illustrated{{ end }}" aria-labelledby="almanack-campaign-title">
         {{ if $campaignImageModel }}
-          <a class="almanack-campaign__cover" href="{{ $campaignHref }}">
+          <a class="almanack-campaign__cover" href="{{ $campaignImageHref }}">
             {{ partial "images/picture.html" (dict
               "model" $campaignImageModel
               "alt" .image_alt
@@ -71,7 +75,7 @@
                 {{ if not (hasPrefix $secondaryHref "http") }}
                   {{ $secondaryHref = $secondaryHref | relURL }}
                 {{ end }}
-                <a href="{{ $secondaryHref }}">{{ $campaign.secondary_cta_label }} &rarr;</a>
+                <a{{ if eq $campaign.secondary_cta_url "/shop/2045/sample/" }} class="almanack-campaign__complete-story"{{ end }} href="{{ $secondaryHref }}">{{ $campaign.secondary_cta_label }}{{ if ne $campaign.secondary_cta_url "/shop/2045/sample/" }} &rarr;{{ end }}</a>
               {{ end }}
             </p>
           {{ end }}

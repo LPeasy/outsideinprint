@@ -3130,6 +3130,28 @@ html[data-theme="light"] .paper-route-toggle{
   letter-spacing:.025em;
   line-height:1.4;
 }
+.bookstore-sample-link--complete .bookstore-sample-link__anchor,
+.bookstore-feature__actions .bookstore-feature__sample--complete,
+.almanack-campaign__action .almanack-campaign__complete-story{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  max-width:100%;
+  box-sizing:border-box;
+  white-space:normal;
+  text-transform:none;
+  letter-spacing:normal;
+  font-size:.95rem;
+  line-height:1.5;
+}
+.bookstore-sample-link--complete .bookstore-sample-link__anchor:focus-visible,
+.almanack-campaign__complete-story:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:4px;
+}
+.bookstore-product:has(.bookstore-sample-link--complete) #bookstore-purchase{
+  scroll-margin-top:6rem;
+}
 .bookstore-record .bookstore-sample-link{
   padding:.12rem .1rem 0;
 }
