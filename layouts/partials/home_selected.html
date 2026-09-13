@@ -31,7 +31,7 @@
 {{ end }}
 
 {{/* Keep the latest publication as the lead; select the supporting reading in editorial order. */}}
-{{ range $slot := slice "/essays/jack-stratton-and-the-vulfpeck-model/" "latest-syd-and-oliver" "/essays/what-is-risk-a-four-part-framework/" }}
+{{ range $slot := slice "/essays/jack-stratton-and-the-vulfpeck-model/" "latest-syd-and-oliver" "/essays/what-is-risk-a-four-part-framework/" "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/" }}
   {{ $choice := false }}
   {{ range $candidate := $frontPagePages }}
     {{ if and (not $choice) (not (in $selectedKeys $candidate.RelPermalink)) }}

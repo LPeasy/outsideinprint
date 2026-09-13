@@ -5,13 +5,16 @@ draft: false
 slug: "uncrustables-the-billion-dollar-peanut-butter-empire"
 section_label: "Essay"
 subtitle: "No Crust, No Fuss, No Limits: The Unstoppable Rise of Uncrustables"
-featured_image: "/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/fc80734f9875292b718dcdf753b8ee19fa6bfb010a7fa92750eb15755b49b296.jpeg"
-featured_image_caption: "Image source: J.M. Smucker, 2025."
-featured_image_alt: "Uncrustables: The Billion-Dollar Peanut Butter Empire"
+featured_image: "essays/uncrustables-the-billion-dollar-peanut-butter-empire/hero"
+featured_image_caption: "The Simple Lunch ~ original editorial illustration for Outside In Print."
+featured_image_alt: "Round, crimped crustless peanut butter and jelly sandwiches sit on a blue plate beside a glass of milk and a paper lunch bag in golden kitchen window light."
 description: "Uncrustables turned a crustless PB&J into a frozen-food growth engine, but the real story is distribution, factory investment, and disciplined brand expansion."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-13"
+    note: "Added The Simple Lunch as the original OIP impressionist chiaroscuro hero and Gallery artwork; removed one redundant transition sentence. Original publication date and argument are unchanged."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, promotional residue, spacing, and source-sensitive business claims were cleaned while preserving the original publication frame."
@@ -88,7 +91,7 @@ Demand made Uncrustables a production story.
 
 Smucker's built a bakery in Scottsville, Kentucky, then added a plant in Longmont, Colorado. The company later committed major capital to a large McCalla, Alabama, facility to support the brand's next stage.
 
-That investment matters. A frozen PB&J can look simple on the shelf, but the business depends on industrial baking, freezing, packaging, cold-chain logistics, retail relationships, and enough capacity to keep freezers stocked.
+A frozen PB&J can look simple on the shelf, but the business depends on industrial baking, freezing, packaging, cold-chain logistics, retail relationships, and enough capacity to keep freezers stocked.
 
 The incentives are clear. If Smucker's can scale a branded product that consumers buy repeatedly, the company gets a dependable growth engine in a grocery category where many items struggle to stand out.
 

@@ -58,7 +58,8 @@ function selectHomepageLongform(pages) {
   const profile = frontPagePages.find((page) => page.relPermalink === "/essays/jack-stratton-and-the-vulfpeck-model/");
   const dialogue = frontPagePages.find((page) => page.kind === "dialogue" && page.collections?.includes("syd-and-oliver-dialogues") && !seen.has(page.relPermalink));
   const risk = frontPagePages.find((page) => page.relPermalink === "/essays/what-is-risk-a-four-part-framework/");
-  for (const candidate of [profile, dialogue, risk]) {
+  const uncrustables = frontPagePages.find((page) => page.relPermalink === "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/");
+  for (const candidate of [profile, dialogue, risk, uncrustables]) {
     if (!candidate || seen.has(candidate.relPermalink)) continue;
     secondary.push(candidate);
     selected.push(candidate);
@@ -103,7 +104,7 @@ function parseFrontMatter(filePath) {
   return data;
 }
 
-test("homepage partial keeps the newest lead with the profile, dialogue, and risk supporting selections", () => {
+test("homepage partial keeps the newest lead with the profile, dialogue, risk, and Uncrustables supporting selections", () => {
   const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
   const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
   const frontPageCopySource = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
@@ -130,6 +131,7 @@ test("homepage partial keeps the newest lead with the profile, dialogue, and ris
   assert.match(source, /range \$candidate := \$frontPagePages/);
   assert.match(source, /\/essays\/jack-stratton-and-the-vulfpeck-model\//);
   assert.match(source, /\/essays\/what-is-risk-a-four-part-framework\//);
+  assert.match(source, /\/essays\/uncrustables-the-billion-dollar-peanut-butter-empire\//);
   assert.match(source, /syd-and-oliver-dialogues/);
   assert.doesNotMatch(source, /lt \(len \$secondary\) 4/);
   assert.match(source, /home_selected_keys/);
@@ -310,6 +312,7 @@ test("homepage supporting images prefer published editorial art and otherwise li
 test("the latest publication leads and supporting selections keep the approved order", () => {
   const pages = [
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") },
+    { relPermalink: "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/", kind: "essay", draft: false, date: new Date("2025-05-23") },
     { relPermalink: "/essays/what-is-risk-a-four-part-framework/", kind: "essay", draft: false, date: new Date("2025-08-29") },
     { relPermalink: "/essays/jack-stratton-and-the-vulfpeck-model/", kind: "essay", draft: false, date: new Date("2025-05-28") },
     { relPermalink: "/syd-and-oliver/older-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-03-20") },
@@ -327,9 +330,10 @@ test("the latest publication leads and supporting selections keep the approved o
   assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
     "/essays/jack-stratton-and-the-vulfpeck-model/",
     "/syd-and-oliver/latest-dialogue/",
-    "/essays/what-is-risk-a-four-part-framework/"
+    "/essays/what-is-risk-a-four-part-framework/",
+    "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/"
   ]);
-  assert.equal(result.secondary.length, 3);
+  assert.equal(result.secondary.length, 4);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
   assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
 });
@@ -337,6 +341,7 @@ test("the latest publication leads and supporting selections keep the approved o
 test("a dialogue lead advances the supporting dialogue to the next publication without duplication", () => {
   const pages = [
     { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-03") },
+    { relPermalink: "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/", kind: "essay", draft: false, date: new Date("2025-05-23") },
     { relPermalink: "/syd-and-oliver/previous-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-01") },
     { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-04-02") },
     { relPermalink: "/essays/what-is-risk-a-four-part-framework/", kind: "essay", draft: false, date: new Date("2025-08-29") },
@@ -351,7 +356,8 @@ test("a dialogue lead advances the supporting dialogue to the next publication w
   assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
     "/essays/jack-stratton-and-the-vulfpeck-model/",
     "/syd-and-oliver/previous-dialogue/",
-    "/essays/what-is-risk-a-four-part-framework/"
+    "/essays/what-is-risk-a-four-part-framework/",
+    "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/"
   ]);
   assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
 });

@@ -149,6 +149,7 @@ foreach ($requiredSnippet in @(
   '$hero := $latest',
   '"/essays/jack-stratton-and-the-vulfpeck-model/"',
   '"/essays/what-is-risk-a-four-part-framework/"',
+  '"/essays/uncrustables-the-billion-dollar-peanut-butter-empire/"',
   '"syd-and-oliver-dialogues"',
   'not (in $selectedKeys $candidate.RelPermalink)'
 )) {
@@ -157,7 +158,7 @@ foreach ($requiredSnippet in @(
   }
 }
 if ($homeSelectionTemplate -match 'Lastmod|lt \(len \$secondary\) 4') {
-  throw 'Expected homepage selection to use publication dates and the three editorial slots, not revision dates or four recent fallback cards.'
+  throw 'Expected homepage selection to use publication dates and the four editorial slots, not revision dates or recent fallback cards.'
 }
 
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8

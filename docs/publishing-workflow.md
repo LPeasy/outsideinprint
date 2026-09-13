@@ -61,7 +61,7 @@ For non-draft public pieces, complete the core publication metadata:
 Use these discovery controls deliberately:
 
 - The homepage lead is the latest eligible essay, affirmation, or dialogue by original `date`, not revision date or `lastmod`.
-- Supporting cards appear in this order: the Jack Stratton profile, the latest Syd & Oliver dialogue, and *What Is Risk? A Four-Part Framework*. Selection lives in `layouts/partials/home_selected.html`; no per-essay featured flags or ranks are needed.
+- Supporting cards appear in this order: the Jack Stratton profile, the latest Syd & Oliver dialogue, *What Is Risk? A Four-Part Framework*, and *Uncrustables: The Billion-Dollar Peanut Butter Empire*. Selection lives in `layouts/partials/home_selected.html`; no per-essay featured flags or ranks are needed.
 - A piece appears only once in the featured stories. If the lead is the newest Syd & Oliver dialogue, its supporting slot uses the next newest eligible dialogue. A pinned piece already used as the lead, or an unavailable selection, is omitted from the supporting cards.
 - Homepage supporting-card thumbnails prefer a linked published front-page/Gallery illustration. When none exists, `home_card_image.html` reuses the piece's `featured_image` hero as a lazy-loaded link to the piece; without either image, the card remains text-only. Hero fallbacks do not create Gallery entries or change article images.
 - At 900px and below, the homepage reads in document order: latest lead and current illustration, supporting cards, recent illustrations, then the Almanack teaser. Desktop keeps the lead, recent illustrations, and Almanack in the left column and supporting cards in the right column. The Almanack selection is unchanged.

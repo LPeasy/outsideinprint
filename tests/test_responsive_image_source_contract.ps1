@@ -529,7 +529,7 @@ if (-not (Test-Path -LiteralPath $staticMediumRoot -PathType Container)) {
   throw 'Focused cleanup must retain the referenced compact Medium JPEG/JPG fleet under static/images/medium.'
 }
 $staticMediumFiles = @(Get-ChildItem -LiteralPath $staticMediumRoot -File -Recurse)
-Assert-Equal -Actual $staticMediumFiles.Count -Expected 316 -Message 'Focused cleanup must retain exactly 316 referenced Medium JPEG/JPG files.'
+Assert-Equal -Actual $staticMediumFiles.Count -Expected 316 -Message 'Focused cleanup must retain all 316 baseline Medium JPEG/JPG files, including explicitly retired heroes.'
 $unsupportedStaticMediumFiles = @($staticMediumFiles | Where-Object { $_.Extension.ToLowerInvariant() -notin @('.jpg','.jpeg') })
 if ($unsupportedStaticMediumFiles.Count -gt 0) {
   $sample = @($unsupportedStaticMediumFiles | Select-Object -First 8 | ForEach-Object { $_.FullName.Substring($rootPath.Length + 1).Replace('\','/') })
@@ -767,12 +767,46 @@ foreach ($referenceFile in $referenceFiles) {
   }
 }
 
-Assert-Equal -Actual $rawMediumReferences.Count -Expected 316 -Message 'Content/data must retain exactly the 316 compact Medium JPEG/JPG references.'
-$expectedRawMediumReferences = @(
+# One owner-authorized hero replacement; the historical 316-file inventory and
+# byte/hash checks below remain unchanged. Do not retire other references implicitly.
+# Evidence: docs/editorial-audits/image-revisions/uncrustables-legacy-hero-retirement-20260913.md
+$retiredMediumHeroes = @(
+  @{
+    url = '/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/fc80734f9875292b718dcdf753b8ee19fa6bfb010a7fa92750eb15755b49b296.jpeg'
+    sha256 = 'fc80734f9875292b718dcdf753b8ee19fa6bfb010a7fa92750eb15755b49b296'
+    essay = 'content/essays/uncrustables-the-billion-dollar-peanut-butter-empire.md'
+    replacement = 'essays/uncrustables-the-billion-dollar-peanut-butter-empire/hero'
+  }
+)
+$retiredMediumUrls = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+$retainedRawMediumUrls = @(
   $staticMediumFiles |
     ForEach-Object { '/' + $_.FullName.Substring($staticRoot.Length + 1).Replace('\','/') } |
     Sort-Object
 )
+foreach ($retiredHero in $retiredMediumHeroes) {
+  if (-not $retiredMediumUrls.Add($retiredHero.url) -or $retainedRawMediumUrls -cnotcontains $retiredHero.url) {
+    throw "Retired Medium hero must identify one unique retained baseline file: $($retiredHero.url)"
+  }
+  $retiredHeroPath = Join-Path $staticRoot $retiredHero.url.TrimStart('/')
+  Assert-Equal -Actual (Get-OipSha256 -Path $retiredHeroPath) -Expected $retiredHero.sha256 -Message "Retired Medium hero bytes changed: $($retiredHero.url)"
+  if ($rawMediumReferences.Contains($retiredHero.url)) {
+    throw "Retired Medium hero must not remain referenced in content/data: $($retiredHero.url)"
+  }
+  if ($assetIds -cnotcontains $retiredHero.replacement -or
+      [string]$manifest.assets.($retiredHero.replacement).review_state -cne 'approved' -or
+      [string]$manifest.assets.($retiredHero.replacement).usage_state -cne 'referenced') {
+    throw "Retired Medium hero replacement must resolve to an approved, referenced managed asset: $($retiredHero.replacement)"
+  }
+  $retiredEssayPath = Join-Path $rootPath $retiredHero.essay
+  $retiredEssayFrontMatter = [regex]::Match([string]$referenceTextByPath[$retiredEssayPath], '(?s)\A---\r?\n(?<yaml>.*?)\r?\n---').Groups['yaml'].Value
+  $replacementHeroPattern = '(?m)^featured_image:\s*["'']?' + [regex]::Escape($retiredHero.replacement) + '["'']?\s*$'
+  if (-not [regex]::IsMatch($retiredEssayFrontMatter, $replacementHeroPattern)) {
+    throw "Retired Medium hero essay must select the recorded managed replacement: $($retiredHero.essay)"
+  }
+}
+Assert-Equal -Actual $rawMediumReferences.Count -Expected (316 - $retiredMediumUrls.Count) -Message 'Content/data must retain every baseline compact Medium reference except explicitly replaced heroes.'
+$expectedRawMediumReferences = @($retainedRawMediumUrls | Where-Object { -not $retiredMediumUrls.Contains($_) })
 $actualRawMediumReferences = @($rawMediumReferences | Sort-Object)
 if (($actualRawMediumReferences -join "`n") -cne ($expectedRawMediumReferences -join "`n")) {
   $missingStaticFiles = @($actualRawMediumReferences | Where-Object { $expectedRawMediumReferences -cnotcontains $_ })

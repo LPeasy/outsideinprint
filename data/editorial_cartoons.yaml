@@ -1,5 +1,15 @@
 current: the-morning-after
 cartoons:
+  - slug: the-simple-lunch
+    title: "The Simple Lunch"
+    date: "2026-09-13"
+    publishDate: "2026-09-13T14:37:31-04:00"
+    image: "essays/uncrustables-the-billion-dollar-peanut-butter-empire/hero"
+    essay: "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/"
+    alt: "Round, crimped crustless peanut butter and jelly sandwiches sit on a blue plate beside a glass of milk and a paper lunch bag in golden kitchen window light."
+    caption: "The Simple Lunch ~ original editorial illustration for Outside In Print."
+    width: 1672
+    height: 941
   - slug: the-sewer-under-the-sidewalk
     title: "The Sewer Under the Sidewalk"
     date: "2026-04-22"

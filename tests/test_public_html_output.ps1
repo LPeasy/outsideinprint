@@ -5602,9 +5602,10 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     '/essays/jack-stratton-and-the-vulfpeck-model/'
     if ($latestSupportingDialogue.Count -gt 0) { $latestSupportingDialogue[0].Path }
     '/essays/what-is-risk-a-four-part-framework/'
+    '/essays/uncrustables-the-billion-dollar-peanut-butter-empire/'
   ) | Where-Object { $homeLeadPaths -notcontains $_ }
   if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
-    $uxIssues.Add("public/index.html => expected profile, latest available dialogue, and risk framework in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
+    $uxIssues.Add("public/index.html => expected profile, latest available dialogue, risk framework, and Uncrustables in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
   }
   $homeStoryPaths = @($homeLeadPaths) + @($homeSupportingPaths)
   if (@($homeStoryPaths | Select-Object -Unique).Count -ne $homeStoryPaths.Count) {
@@ -5622,6 +5623,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $supportingSourcePaths = @{
     '/essays/jack-stratton-and-the-vulfpeck-model/' = Join-Path $repoRoot 'content/essays/jack-stratton-and-the-vulfpeck-model.md'
     '/essays/what-is-risk-a-four-part-framework/' = Join-Path $repoRoot 'content/essays/what-is-risk-a-four-part-framework.md'
+    '/essays/uncrustables-the-billion-dollar-peanut-butter-empire/' = Join-Path $repoRoot 'content/essays/uncrustables-the-billion-dollar-peanut-butter-empire.md'
   }
   if ($latestSupportingDialogue.Count -gt 0) {
     $supportingSourcePaths[$latestSupportingDialogue[0].Path] = $latestSupportingDialogue[0].SourcePath
