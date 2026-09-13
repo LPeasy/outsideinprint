@@ -113,7 +113,7 @@ Assert-True ($issueSource -match 'version: "0.3"' -and $issueSource -notmatch '/
 $campaignTemplate = Read-Source 'layouts/almanack/single.html'
 Assert-True ($campaignTemplate.Contains('.image_link_url | default $campaignHref')) 'Campaign cover must fall back to the primary CTA.'
 $detailTemplate = Read-Source 'layouts/shop/single.html'
-Assert-True ($detailTemplate.IndexOf('"class" "bookstore-sample-link--complete"') -lt $detailTemplate.IndexOf('index $product "tags"')) '2045 sample invitation must precede topics.'
+Assert-True ($detailTemplate.IndexOf('{{ $sampleLink }}') -gt 0 -and $detailTemplate.IndexOf('{{ $sampleLink }}') -lt $detailTemplate.IndexOf('index $product "tags"')) '2045 sample invitation must precede topics.'
 foreach ($template in @($featureTemplate, (Read-Source 'layouts/partials/shop/sample-link.html'))) {
   Assert-True ($template.Contains('.Title') -and $template.Contains('.ReadingTime') -and $template.Contains('a complete story')) 'Sample invitation must derive title and reading time.'
 }
