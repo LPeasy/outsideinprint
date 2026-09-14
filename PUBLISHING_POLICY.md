@@ -105,6 +105,8 @@ Current CI must fail when:
 2. The Hugo build fails.
 3. The generated public HTML fails regression checks.
 
+Ref-to-ref changes limited to explicitly allowlisted non-editorial front matter may skip the Editorial Philosophy re-audit only when all remaining front matter and body text are unchanged after line-ending normalization.
+
 ## Local author workflow
 
 1. Create a draft with `.\tools\bin\custom\new-essay.cmd --title "My Title"` or edit an existing content Markdown file.

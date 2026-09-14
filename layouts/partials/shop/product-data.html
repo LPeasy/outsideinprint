@@ -26,5 +26,53 @@
   {{- end -}}
 {{- end -}}
 
+{{- $storyTitles := index $result "story_titles" | default (slice) -}}
+{{- $hasStoryCount := isset $result "story_count" -}}
+{{- $hasStoryTitles := isset $result "story_titles" -}}
+{{- if or $hasStoryCount $hasStoryTitles -}}
+  {{- if not (and $hasStoryCount $hasStoryTitles) -}}
+    {{- errorf "Bookstore product %s must define story_count and story_titles together" $key -}}
+  {{- end -}}
+  {{- $storyCount := int (index $result "story_count") -}}
+  {{- if ne $storyCount (len $storyTitles) -}}
+    {{- errorf "Bookstore product %s declares %d stories but provides %d story titles" $key $storyCount (len $storyTitles) -}}
+  {{- end -}}
+  {{- if and (eq $key "2045") (ne $storyCount 10) -}}
+    {{- errorf "Bookstore product 2045 must contain exactly ten EPUB story titles" -}}
+  {{- end -}}
+  {{- $wordCount := int (index $result "word_count" | default 0) -}}
+  {{- if le $wordCount 0 -}}
+    {{- errorf "Bookstore product %s must provide a positive word_count when story data is present" $key -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $offerIndex, $offer := (index $result "direct_offers" | default (slice)) -}}
+  {{- if not (isset $offer "availability_status") -}}
+    {{- errorf "Bookstore offer %s[%d] is missing availability_status" $key $offerIndex -}}
+  {{- end -}}
+  {{- if eq (lower (printf "%v" (index $offer "availability_status"))) "live" -}}
+    {{- range (slice "sku" "price_cents" "currency") -}}
+      {{- if not (isset $offer .) -}}
+        {{- errorf "Live bookstore offer %s[%d] is missing %s" $key $offerIndex . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $sku := strings.TrimSpace (printf "%v" (index $offer "sku")) -}}
+    {{- $currency := upper (strings.TrimSpace (printf "%v" (index $offer "currency"))) -}}
+    {{- $priceCents := index $offer "price_cents" -}}
+    {{- $numericType := findRE `^(?:u?int(?:8|16|32|64)?|float(?:32|64))$` (printf "%T" $priceCents) -}}
+    {{- if not $sku -}}
+      {{- errorf "Live bookstore offer %s[%d] has an empty SKU" $key $offerIndex -}}
+    {{- end -}}
+    {{- if ne (len (findRE `^[A-Z]{3}$` $currency)) 1 -}}
+      {{- errorf "Live bookstore offer %s[%d] must use a three-letter currency code" $key $offerIndex -}}
+    {{- end -}}
+    {{- if eq (len $numericType) 0 -}}
+      {{- errorf "Live bookstore offer %s[%d] must use numeric price_cents" $key $offerIndex -}}
+    {{- else if le (float $priceCents) 0 -}}
+      {{- errorf "Live bookstore offer %s[%d] must use positive price_cents" $key $offerIndex -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 {{- $result = merge (dict "key" $key) $result -}}
 {{- return $result -}}

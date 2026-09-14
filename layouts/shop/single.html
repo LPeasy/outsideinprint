@@ -5,12 +5,23 @@
   {{ $coverAlt := index $product "cover_alt" | default .Title }}
   {{ $epubOffers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" }}
   {{ $liveEpubOffers := where $epubOffers "availability_status" "live" }}
+  {{ $storyTitles := index $product "story_titles" | default (slice) }}
+  {{ $storyCount := int (index $product "story_count" | default 0) }}
+  {{ $wordCount := int (index $product "word_count" | default 0) }}
+  {{ if or (isset $product "story_count") (isset $product "story_titles") }}
+    {{ if ne $storyCount (len $storyTitles) }}
+      {{ errorf "Bookstore product %s declares %d stories but provides %d story titles" $productKey $storyCount (len $storyTitles) }}
+    {{ end }}
+    {{ if le $wordCount 0 }}
+      {{ errorf "Bookstore product %s must provide a positive word_count when story data is present" $productKey }}
+    {{ end }}
+  {{ end }}
   {{ $sampleClass := "" }}
   {{ if eq $productKey "2045" }}{{ $sampleClass = "bookstore-sample-link--complete" }}{{ end }}
   {{ $sampleLink := partial "shop/sample-link.html" (dict
     "page" .
     "product" $product
-    "sourceSlot" "bookstore_detail_sample"
+    "sourceSlot" (cond (eq $productKey "2045") "bookstore_detail_early_sample" "bookstore_detail_sample")
     "fragmentOnly" true
     "class" $sampleClass
   ) }}
@@ -37,10 +48,27 @@
             {{ with index $product "publisher" }}<span>{{ . }}</span>{{ end }}
           </p>
           {{ with index $product "subtitle" }}<p class="bookstore-product__subtitle">{{ . }}</p>{{ end }}
-          {{ with index $product "deck" }}<p class="bookstore-product__deck">{{ . }}</p>{{ end }}
-          {{ if eq $productKey "2045" }}
-            {{ $sampleLink }}
+          {{ if and (eq $productKey "2045") (eq $storyCount 10) (gt $wordCount 0) (gt (len $liveEpubOffers) 0) }}
+            {{ $roundedWordCount := mul (div (add $wordCount 50) 100) 100 }}
+            <aside class="bookstore-product__decision" aria-label="2045 edition and purchase details" data-bookstore-early-decision>
+              <p class="bookstore-product__proof">{{ $storyCount }} stories <span aria-hidden="true">&middot;</span> About {{ lang.FormatNumber 0 $roundedWordCount }} words <span aria-hidden="true">&middot;</span> DRM-free EPUB</p>
+              {{ with index $product "exclusive_note" }}<p class="bookstore-product__exclusive-note">{{ . }}</p>{{ end }}
+              <div class="bookstore-product__decision-actions">
+                {{ $sampleLink }}
+                <a
+                  class="shop-cta bookstore-product__early-buy"
+                  href="#bookstore-purchase"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="bookstore_detail_early_buy"
+                  data-analytics-slug="2045"
+                  data-analytics-title="2045"
+                  data-analytics-section="Bookstore"
+                  data-analytics-path="{{ .RelPermalink }}"
+                >{{ index $product "checkout_label" }}</a>
+              </div>
+            </aside>
           {{ end }}
+          {{ with index $product "deck" }}<p class="bookstore-product__deck">{{ . }}</p>{{ end }}
           {{ with index $product "tags" }}
             <ul class="bookstore-record__topics bookstore-record__topics--detail" aria-label="Book topics">
               {{ range . }}<li>{{ . }}</li>{{ end }}
@@ -73,6 +101,16 @@
 
           <p class="bookstore-product__purchase-help"><a href="{{ "epub-license-refunds/" | relURL }}">Read the direct EPUB delivery and refund terms</a></p>
         </section>
+
+        {{ if and (eq $productKey "2045") (eq $storyCount 10) }}
+          <section class="bookstore-product__inside" aria-labelledby="bookstore-inside-title" data-bookstore-story-list>
+            <p class="bookstore-product__inside-eyebrow">Complete contents</p>
+            <h2 id="bookstore-inside-title">Inside 2045</h2>
+            <ol>
+              {{ range $storyTitles }}<li>{{ . }}</li>{{ end }}
+            </ol>
+          </section>
+        {{ end }}
 
         <div class="bookstore-product__copy">
           {{ .Content }}

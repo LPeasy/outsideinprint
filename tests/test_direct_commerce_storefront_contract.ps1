@@ -46,6 +46,39 @@ function Assert-Ordered {
   }
 }
 
+function Get-HtmlAttribute {
+  param(
+    [string]$Tag,
+    [string]$Name
+  )
+
+  $pattern = '(?i)(?<![\w:-])' + [regex]::Escape($Name) + '\s*=\s*(?:"(?<double>[^"]*)"|''(?<single>[^'']*)''|(?<bare>[^\s>]+))'
+  $attribute = [regex]::Match($Tag, $pattern)
+  foreach ($group in @('double', 'single', 'bare')) {
+    if ($attribute.Groups[$group].Success) {
+      return [Net.WebUtility]::HtmlDecode($attribute.Groups[$group].Value)
+    }
+  }
+
+  return ''
+}
+
+function Get-MetaContent {
+  param(
+    [string]$Html,
+    [string]$Name
+  )
+
+  foreach ($tag in [regex]::Matches($Html, '(?is)<meta\b[^>]*>')) {
+    if ((Get-HtmlAttribute -Tag $tag.Value -Name 'property') -eq $Name -or
+        (Get-HtmlAttribute -Tag $tag.Value -Name 'name') -eq $Name) {
+      return Get-HtmlAttribute -Tag $tag.Value -Name 'content'
+    }
+  }
+
+  return ''
+}
+
 $bookstoreData = Get-RequiredText -RelativePath 'data/bookstore.yaml'
 $bookstoreIndexContent = Get-RequiredText -RelativePath 'content/shop/_index.md'
 $usCheckoutRestriction = 'Direct EPUB checkout is currently available to U.S. customers only.'
@@ -598,6 +631,7 @@ if ($SourceOnly) {
 
 $requiredOutputFiles = @(
   'shop/index.html',
+  'shop/2045/index.html',
   'shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'shop/the-parable-of-the-sheep/index.html',
   'shop/thanks/index.html',
@@ -617,6 +651,81 @@ foreach ($relativePath in $requiredOutputFiles) {
     throw "Missing built direct-commerce route: $relativePath"
   }
   $output[$relativePath] = Get-Content -LiteralPath $fullPath -Raw -Encoding utf8
+}
+
+$productSchemaExpectations = @(
+  @{ Path = 'shop/2045/index.html'; Url = 'https://outsideinprint.org/shop/2045/'; Sku = 'OIP-TD-EPUB'; Price = '19.99'; ReleaseDate = '2026-09-12' },
+  @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; Url = 'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'; Sku = 'OIP-AN-EPUB'; Price = '9.99' },
+  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; Url = 'https://outsideinprint.org/shop/the-parable-of-the-sheep/'; Sku = 'OIP-PS-EPUB'; Price = '9.99' },
+  @{ Path = 'shop/the-water-cycle/index.html'; Url = 'https://outsideinprint.org/shop/the-water-cycle/'; Sku = 'OIP-WC-EPUB'; Price = '9.99' }
+)
+foreach ($expectation in $productSchemaExpectations) {
+  $rawHtml = [string]$output[$expectation.Path]
+  $titleMatch = [regex]::Match($rawHtml, '(?is)<title\b[^>]*>(?<title>.*?)</title>')
+  $documentTitle = [Net.WebUtility]::HtmlDecode($titleMatch.Groups['title'].Value).Trim()
+  $openGraphTitle = Get-MetaContent -Html $rawHtml -Name 'og:title'
+  $twitterTitle = Get-MetaContent -Html $rawHtml -Name 'twitter:title'
+  if (-not $openGraphTitle -or $twitterTitle -cne $openGraphTitle) {
+    throw "Built shop product $($expectation.Path) must share its metadata title across Open Graph and Twitter."
+  }
+  if ($documentTitle -cne "$openGraphTitle | Robert V. Ussley") {
+    throw "Built shop product $($expectation.Path) must suffix only its browser title with the author."
+  }
+
+  $jsonLdScripts = @([regex]::Matches($rawHtml, '(?is)<script\b[^>]*\btype\s*=\s*(?:"application/ld\+json"|''application/ld\+json''|application/ld\+json)[^>]*>(?<json>.*?)</script>'))
+  if ($jsonLdScripts.Count -ne 1) {
+    throw "Built shop product $($expectation.Path) must emit exactly one JSON-LD graph script."
+  }
+  $schema = $jsonLdScripts[0].Groups['json'].Value | ConvertFrom-Json
+  $graph = @($schema.'@graph')
+  $webPages = @($graph | Where-Object { @($_.'@type') -contains 'WebPage' })
+  $bookProducts = @($graph | Where-Object {
+    $types = @($_.'@type')
+    $types.Count -eq 2 -and $types -contains 'Book' -and $types -contains 'Product'
+  })
+  if ($webPages.Count -ne 1 -or $bookProducts.Count -ne 1) {
+    throw "Built shop product $($expectation.Path) must connect one WebPage to one combined Book/Product graph node."
+  }
+
+  $webPage = $webPages[0]
+  $bookProduct = $bookProducts[0]
+  $primaryEntityId = "$($expectation.Url)#primaryentity"
+  $webPageId = "$($expectation.Url)#webpage"
+  if ($webPage.mainEntity.'@id' -cne $primaryEntityId -or
+      $bookProduct.'@id' -cne $primaryEntityId -or
+      $bookProduct.mainEntityOfPage.'@id' -cne $webPageId) {
+    throw "Built shop product $($expectation.Path) has a disconnected WebPage or primary entity."
+  }
+  if ($bookProduct.name -cne $openGraphTitle -or
+      $bookProduct.url -cne $expectation.Url -or
+      $bookProduct.bookFormat -cne 'https://schema.org/EBook' -or
+      $bookProduct.brand.'@type' -cne 'Brand' -or
+      $bookProduct.brand.name -cne 'Outside In Print' -or
+      -not $bookProduct.keywords -or
+      @($bookProduct.genre).Count -lt 1) {
+    throw "Built shop product $($expectation.Path) is missing canonical Book/Product metadata."
+  }
+  if ($expectation.ContainsKey('ReleaseDate') -and $bookProduct.datePublished -cne $expectation.ReleaseDate) {
+    throw "Built shop product $($expectation.Path) exposes an incorrect release date."
+  }
+
+  $offers = @($bookProduct.offers)
+  if ($offers.Count -ne 1) {
+    throw "Built shop product $($expectation.Path) must expose only its one live numeric direct offer."
+  }
+  $offer = $offers[0]
+  if ($offer.price -is [string] -or
+      $offer.sku -cne $expectation.Sku -or
+      "$($offer.price)" -cne $expectation.Price -or
+      $offer.priceCurrency -cne 'USD' -or
+      $offer.availability -cne 'https://schema.org/InStock' -or
+      $offer.url -cne $expectation.Url -or
+      $bookProduct.sku -cne $expectation.Sku) {
+    throw "Built shop product $($expectation.Path) exposes incorrect Offer metadata."
+  }
+  if ($jsonLdScripts[0].Groups['json'].Value -match 'downloads\.outsideinprint\.org|checkout_(?:url|endpoint)') {
+    throw "Built shop product $($expectation.Path) leaked a private checkout destination into JSON-LD."
+  }
 }
 
 $shopOutput = @(

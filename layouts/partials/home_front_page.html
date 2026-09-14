@@ -35,6 +35,7 @@
     <p class="home-front-page__welcome-copy">I’m Robert. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to. Pick something that catches your eye. I’m glad you’re here.</p>
     <p class="home-front-page__welcome-signature">&mdash; <a href="{{ "about/" | relURL }}">Robert V. Ussley</a></p>
   </div>
+  {{ partial "home_2045_launch.html" . }}
   {{ with $lead }}
     {{ $leadSlug := .Params.slug | default .File.BaseFileName }}
     {{ $leadCopy := partial "home_front_page_copy.html" . }}

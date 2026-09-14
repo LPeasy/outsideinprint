@@ -1046,7 +1046,7 @@ $requiredMetadataPages = [ordered]@{
     ExpectedManagedImageId = 'books/2045/cover'
   }
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html' = @{
-    Title = 'The American Nightmare: Keep Dreaming, Kid'
+    Title = 'The American Nightmare: Keep Dreaming, Kid | Robert V. Ussley'
     Description = 'An OIP digital book on how the American Dream became a global slogan just as the American good life came apart at home.'
     Canonical = 'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'
     OgType = 'website'
@@ -1055,7 +1055,7 @@ $requiredMetadataPages = [ordered]@{
     ExpectedImage = 'https://outsideinprint.org/images/books/american-nightmare/american-nightmare-cover-v1.6.jpg'
   }
   'public/shop/the-parable-of-the-sheep/index.html' = @{
-    Title = 'The Parable of the Sheep'
+    Title = 'The Parable of the Sheep | Robert V. Ussley'
     Description = 'A compact allegorical fiction about a flock, a vanished shepherd, and the predators that return when memory fails.'
     Canonical = 'https://outsideinprint.org/shop/the-parable-of-the-sheep/'
     OgType = 'website'
@@ -1064,7 +1064,7 @@ $requiredMetadataPages = [ordered]@{
     ExpectedImage = 'https://outsideinprint.org/images/books/parable-of-the-sheep/parable-of-the-sheep-cover-v1.0.jpg'
   }
   'public/shop/the-water-cycle/index.html' = @{
-    Title = 'The Water Cycle: Risk, Infrastructure, and Public Memory'
+    Title = 'The Water Cycle: Risk, Infrastructure, and Public Memory | Robert V. Ussley'
     Description = 'A compact OIP book about water risk, infrastructure, public memory, and the records that connect communities to the water cycle.'
     Canonical = 'https://outsideinprint.org/shop/the-water-cycle/'
     OgType = 'website'

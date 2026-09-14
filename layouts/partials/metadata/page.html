@@ -9,6 +9,14 @@
   {{- $collection = partial "collections/lookup-definition.html" $slug -}}
 {{- end -}}
 
+{{- $product := false -}}
+{{- if eq $route.name "shop-product" -}}
+  {{- $product = partial "shop/product-data.html" (dict
+    "key" .Params.book_key
+    "page" .
+  ) -}}
+{{- end -}}
+
 {{- $policy := partial "metadata/policy.html" (dict
   "page" .
   "route" $route
@@ -21,8 +29,21 @@
     {{- $title = . -}}
   {{- end -}}
 {{- end -}}
+{{- with .Params.metadata_title -}}
+  {{- $title = . -}}
+{{- end -}}
+{{- with $product -}}
+  {{- with index . "metadata_title" -}}
+    {{- $title = . -}}
+  {{- end -}}
+{{- end -}}
 
 {{- $fullTitle := $title -}}
+{{- if eq $route.name "shop-product" -}}
+  {{- with index $product "author" -}}
+    {{- $fullTitle = printf "%s | %s" $title . -}}
+  {{- end -}}
+{{- end -}}
 
 {{- $description := partial "metadata_description.html" . -}}
 {{- $image := partial "metadata_image.html" . -}}
@@ -42,6 +63,7 @@
   "route" $route
   "policy" $policy
   "collection" $collection
+  "product" $product
   "title" $title
   "full_title" $fullTitle
   "description" $description

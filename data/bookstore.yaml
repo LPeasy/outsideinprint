@@ -1,3 +1,8 @@
+launch_promotion:
+  book_key: "2045"
+  starts_at: "2026-09-12T00:00:00-04:00"
+  ends_at: "2026-09-27T00:00:00-04:00"
+
 defaults:
   type_label: "Book"
   product_type: "Outside In Print EPUB"
@@ -19,11 +24,27 @@ products:
   "2045":
     title: "2045"
     display_title: "2045"
+    metadata_title: "2045: Ten Dark Fables from the Machine Age"
     subtitle: "Ten Dark Fables from the Machine Age"
     author: "Robert V. Ussley"
     publisher: "Outside In Print"
     product_type: "EPUB"
     positioning_label: "OIP Exclusive"
+    exclusive_note: "Available only from Outside In Print."
+    release_date: "2026-09-12"
+    story_count: 10
+    word_count: 26749
+    story_titles:
+      - "The Cracked Pot"
+      - "Memory Lane"
+      - "Chicago ’96 / Tomorrow"
+      - "Zero Sum"
+      - "The Fair Advertising Tax Reform Act"
+      - "The Infinite Meeting / Tenebris"
+      - "Veritas Lex"
+      - "The Last Human Artist"
+      - "The Habeas Court"
+      - "Deus Machina"
     deck: "Ten dark fables about artificial intelligence, grief, ambition, faith, and the strange, stubborn ways people keep reaching for meaning."
     price_display: "$19.99"
     checkout_label: "Buy EPUB — $19.99"

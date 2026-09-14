@@ -40,9 +40,18 @@ function Meta-Content([string]$Html, [string]$Name) {
 
 $productSource = Read-Source 'content/shop/2045/_index.md'
 $sampleSource = Read-Source 'content/shop/2045/sample.md'
+$legacyStorySource = Read-Source 'content/essays/the-cracked-pot.md'
 $shopSource = Read-Source 'content/shop/_index.md'
 $shopTemplate = Read-Source 'layouts/shop/list.html'
 $featureTemplate = Read-Source 'layouts/partials/shop/featured-book.html'
+$detailTemplate = Read-Source 'layouts/shop/single.html'
+$productDataTemplate = Read-Source 'layouts/partials/shop/product-data.html'
+$launchTemplate = Read-Source 'layouts/partials/home_2045_launch.html'
+$homeFrontTemplate = Read-Source 'layouts/partials/home_front_page.html'
+$articleTemplate = Read-Source 'layouts/_default/single.html'
+$sampleTemplate = Read-Source 'layouts/shop/sample.html'
+$editionRelationshipTemplate = Read-Source 'layouts/partials/edition-relationship.html'
+$siteCss = Read-Source 'assets/css/main.css'
 $catalog = Read-Source 'data/bookstore.yaml'
 $product = [regex]::Match($catalog, '(?ms)^  "2045":\r?\n(?<product>.*?)(?=^  [a-z_]+:)').Groups['product'].Value
 Assert-True ($product.Length -gt 0) 'Missing 2045 catalog entry.'
@@ -52,7 +61,6 @@ Assert-True ($product -match 'sku: "OIP-TD-EPUB"' -and $product -match '(?m)^\s+
 Assert-True ([regex]::Matches($product, '(?m)^\s+price_display: "\$19\.99"\r?$').Count -eq 2) '2045 product and offer must display the approved $19.99 price.'
 Assert-True ($product -match '(?m)^\s+checkout_label: "Buy EPUB — \$19\.99"\r?$') '2045 must override the shared checkout label with its approved price.'
 Assert-True ($product -notmatch '\$9\.99|price_cents: 999\b') '2045 retains the obsolete price.'
-$sampleTemplate = Read-Source 'layouts/shop/sample.html'
 Assert-True ($sampleTemplate.Contains('Explore 2045 · {{ index $product "price_display" }}', [StringComparison]::Ordinal)) '2045 sample CTA must read the canonical product price.'
 Assert-True ((Read-Source 'layouts/partials/home_bookstore_spotlight.html') -notmatch '\$9\.99 each') 'Homepage must not claim every book has the same price.'
 Assert-True ($product -notmatch '(?i)amazon|kindle|asin|paperback|urn:isbn|\b97[89]\d{10}\b') '2045 contains excluded metadata or an exact ISBN.'
@@ -73,7 +81,142 @@ foreach ($field in @('images/picture.html', 'price_display', 'positioning_label'
 }
 Assert-True ($featureTemplate -match '#bookstore-purchase' -and $featureTemplate -match '<button\b[^>]*\bdisabled\b') 'The feature must distinguish a product purchase link from a native disabled buy button.'
 Assert-True ($featureTemplate -notmatch '<form\b|data-epub-checkout|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The feature must not submit or open provider checkout directly.'
-Assert-True ((Read-Source 'layouts/shop/single.html') -match '<section\b[^>]*id="bookstore-purchase"') 'The product purchase section needs the feature target anchor.'
+Assert-True ($detailTemplate -match '<section\b[^>]*id="bookstore-purchase"') 'The product purchase section needs the feature target anchor.'
+
+$expectedStoryTitles = @(
+  "The Cracked Pot",
+  "Memory Lane",
+  "Chicago ’96 / Tomorrow",
+  "Zero Sum",
+  "The Fair Advertising Tax Reform Act",
+  "The Infinite Meeting / Tenebris",
+  "Veritas Lex",
+  "The Last Human Artist",
+  "The Habeas Court",
+  "Deus Machina"
+)
+foreach ($requiredCatalogValue in @(
+  'metadata_title: "2045: Ten Dark Fables from the Machine Age"',
+  'exclusive_note: "Available only from Outside In Print."',
+  'release_date: "2026-09-12"',
+  'story_count: 10',
+  'word_count: 26749'
+)) {
+  Assert-True ($product.Contains($requiredCatalogValue, [StringComparison]::Ordinal)) "2045 catalog evidence must contain: $requiredCatalogValue"
+}
+$storyTitleBlock = [regex]::Match($product, '(?ms)^    story_titles:\r?\n(?<titles>(?:      - "[^"]+"\r?\n?)+)').Groups['titles'].Value
+$actualStoryTitles = @([regex]::Matches($storyTitleBlock, '(?m)^      - "(?<title>[^"]+)"\r?$') | ForEach-Object { $_.Groups['title'].Value })
+Assert-True ($actualStoryTitles.Count -eq 10) 'The canonical 2045 catalog must contain exactly ten EPUB story titles.'
+Assert-True ([string]::Join("`n", $actualStoryTitles) -ceq [string]::Join("`n", $expectedStoryTitles)) 'The canonical 2045 story titles are not in authoritative EPUB order.'
+foreach ($requiredValidation in @(
+  'must define story_count and story_titles together',
+  'must contain exactly ten EPUB story titles',
+  'must provide a positive word_count',
+  '(slice "sku" "price_cents" "currency")',
+  'is missing availability_status',
+  'must use numeric price_cents'
+)) {
+  Assert-True ($productDataTemplate.Contains($requiredValidation, [StringComparison]::Ordinal)) "Canonical bookstore validation must contain: $requiredValidation"
+}
+
+$launchConfig = [regex]::Match($catalog, '(?ms)^launch_promotion:\r?\n(?<launch>(?:  [^\r\n]+\r?\n)+)').Groups['launch'].Value
+foreach ($requiredLaunchValue in @(
+  '  book_key: "2045"',
+  '  starts_at: "2026-09-12T00:00:00-04:00"',
+  '  ends_at: "2026-09-27T00:00:00-04:00"'
+)) {
+  Assert-True ($launchConfig.Contains($requiredLaunchValue, [StringComparison]::Ordinal)) "2045 launch configuration must contain: $requiredLaunchValue"
+}
+$launchPartialIndex = $homeFrontTemplate.IndexOf('partial "home_2045_launch.html" .', [StringComparison]::Ordinal)
+Assert-True ($launchPartialIndex -gt $homeFrontTemplate.IndexOf('class="home-front-page__orientation"', [StringComparison]::Ordinal) -and $launchPartialIndex -lt $homeFrontTemplate.IndexOf('class="home-front-page__stories"', [StringComparison]::Ordinal)) 'The launch strip must render below the reader note and above the editorial grid.'
+foreach ($requiredLaunchTemplateValue in @(
+  'if not $book.Draft',
+  'where $epubOffers "availability_status" "live"',
+  'New: 2045 — Ten Dark Fables from the Machine Age',
+  'Read a complete story',
+  'Buy EPUB — $19.99',
+  'DRM-free EPUB · U.S. customers only.',
+  'homepage_2045_launch_headline',
+  'homepage_2045_launch_sample',
+  'homepage_2045_launch_buy'
+)) {
+  Assert-True ($launchTemplate.Contains($requiredLaunchTemplateValue, [StringComparison]::Ordinal)) "2045 launch strip must contain: $requiredLaunchTemplateValue"
+}
+Assert-True ($launchTemplate.IndexOf('Read a complete story', [StringComparison]::Ordinal) -lt $launchTemplate.IndexOf('Buy EPUB — $19.99', [StringComparison]::Ordinal)) 'The launch strip must keep the complete-story CTA first.'
+Assert-True ($launchTemplate -notmatch '<form\b|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The launch strip must remain internal and never invoke checkout directly.'
+
+$subtitleIndex = $detailTemplate.IndexOf('bookstore-product__subtitle', [StringComparison]::Ordinal)
+$decisionIndex = $detailTemplate.IndexOf('data-bookstore-early-decision', [StringComparison]::Ordinal)
+$deckIndex = $detailTemplate.IndexOf('bookstore-product__deck', [StringComparison]::Ordinal)
+Assert-True ($subtitleIndex -ge 0 -and $decisionIndex -gt $subtitleIndex -and $deckIndex -gt $decisionIndex) 'The early 2045 decision module must sit after the subtitle and before the deck.'
+Assert-True ($detailTemplate.Contains('About {{ lang.FormatNumber 0 $roundedWordCount }} words', [StringComparison]::Ordinal) -and $detailTemplate.Contains('data-analytics-source-slot="bookstore_detail_early_buy"', [StringComparison]::Ordinal)) 'The early decision module must render rounded proof and a tracked internal buy anchor.'
+Assert-True ($detailTemplate.IndexOf('{{ $sampleLink }}', $decisionIndex, [StringComparison]::Ordinal) -lt $detailTemplate.IndexOf('class="shop-cta bookstore-product__early-buy"', $decisionIndex, [StringComparison]::Ordinal)) 'The early decision module must keep the sample before the buy anchor.'
+Assert-True ($detailTemplate.Contains('data-bookstore-story-list', [StringComparison]::Ordinal) -and $detailTemplate.Contains('Inside 2045', [StringComparison]::Ordinal)) 'The product detail must render an Inside 2045 section from canonical story data.'
+Assert-True ($siteCss -match '(?s)@media \(max-width:720px\).*?\.bookstore-product__cover\{\s*max-width:9\.5rem;' -and $siteCss -match '(?s)\.bookstore-product__early-buy\{.*?min-height:44px;') 'The mobile 2045 cover and early CTA sizing contract is missing.'
+
+$legacyRelationship = [ordered]@{
+  Label = 'Earlier web edition.'
+  Text = 'This page preserves the 2025 web edition of “The Cracked Pot.” The revised book edition appears as the complete opening story in *2045*.'
+  Href = '/shop/2045/sample/'
+  Cta = 'Read the 2045 edition →'
+}
+$sampleRelationship = [ordered]@{
+  Label = '2045 EPUB edition.'
+  Text = 'This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*. The earlier 2025 web edition remains available in the archive.'
+  Href = '/essays/the-cracked-pot/'
+  Cta = 'Read the earlier web edition →'
+}
+foreach ($expected in @(
+  'metadata_title: "The Cracked Pot — Earlier Web Edition"',
+  'date: 2025-01-18',
+  'version: "1.1"',
+  'edition: "Second web edition"',
+  'noindex: true',
+  'edition_relationship:',
+  ('  label: "' + $legacyRelationship.Label + '"'),
+  ('  text: "' + $legacyRelationship.Text + '"'),
+  ('  href: "' + $legacyRelationship.Href + '"'),
+  ('  cta_label: "' + $legacyRelationship.Cta + '"')
+)) {
+  Assert-True ($legacyStorySource.Contains($expected, [StringComparison]::Ordinal)) "Legacy Cracked Pot metadata must contain: $expected"
+}
+Assert-True ($legacyStorySource -match '(?m)^build:\r?\n\s{2}list: never\r?$') 'The earlier web edition must remain readable while staying out of Hugo page collections.'
+foreach ($expected in @(
+  'metadata_title: "The Cracked Pot — Complete Story from 2045"',
+  'date: 2026-09-12',
+  'edition: "2045 EPUB edition"',
+  'edition_relationship:',
+  ('  label: "' + $sampleRelationship.Label + '"'),
+  ('  text: "' + $sampleRelationship.Text + '"'),
+  ('  href: "' + $sampleRelationship.Href + '"'),
+  ('  cta_label: "' + $sampleRelationship.Cta + '"')
+)) {
+  Assert-True ($sampleSource.Contains($expected, [StringComparison]::Ordinal)) "2045 Cracked Pot metadata must contain: $expected"
+}
+foreach ($required in @(
+  '.Params.edition_relationship',
+  '.label',
+  '.text',
+  '.href',
+  '.cta_label',
+  'markdownify',
+  'class="edition-relationship"',
+  'class="edition-relationship__label"',
+  'class="edition-relationship__text"',
+  'class="edition-relationship__cta"',
+  'data-edition-relationship'
+)) {
+  Assert-True ($editionRelationshipTemplate.Contains($required, [StringComparison]::Ordinal)) "Edition relationship partial must contain: $required"
+}
+$articleNoticeIndex = $articleTemplate.IndexOf('partial "edition-relationship.html" .', [StringComparison]::Ordinal)
+$articleBodyIndex = $articleTemplate.IndexOf('<div class="piece-body">', [StringComparison]::Ordinal)
+Assert-True ($articleNoticeIndex -ge 0 -and $articleBodyIndex -gt $articleNoticeIndex) 'Generic articles must render the edition relationship immediately before the article body.'
+$sampleNoticeIndex = $sampleTemplate.IndexOf('partial "edition-relationship.html" .', [StringComparison]::Ordinal)
+$sampleBodyIndex = $sampleTemplate.IndexOf('<div class="bookstore-reading-sample__body">', [StringComparison]::Ordinal)
+Assert-True ($sampleNoticeIndex -ge 0 -and $sampleBodyIndex -gt $sampleNoticeIndex) 'The standalone 2045 page must render the edition relationship above the locked story body.'
+foreach ($selector in @('.edition-relationship{', '.edition-relationship__label{', '.edition-relationship__text{', '.edition-relationship__cta{')) {
+  Assert-True ($siteCss.Contains($selector, [StringComparison]::Ordinal)) "Edition relationship CSS must define $selector"
+}
 $isDraft = $productSource -match '(?m)^draft: true\r?$'
 $sampleDraft = $sampleSource -match '(?m)^draft: true\r?$'
 Assert-True ($isDraft -eq $sampleDraft) 'Product and sample draft states must move together.'
@@ -92,6 +235,8 @@ if ($isDraft) {
 $body = [regex]::Match($sampleSource, '(?s)\A---\r?\n.*?\r?\n---\r?\n(?<body>.*)\z').Groups['body'].Value.Trim()
 $paragraphs = @([regex]::Split($body, '\r?\n\s*\r?\n'))
 Assert-True ($paragraphs.Count -eq 30) 'The Cracked Pot must retain its 30 prose paragraphs.'
+$bodyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($body))).ToLowerInvariant()
+Assert-True ($bodyHash -ceq 'a4a21a46551e5554287c170e405eab42f07102d4a1a86a7022592fb7db2f843a') 'The locked 2045 EPUB story text changed.'
 Assert-True ($body.StartsWith("Morning light filtered through the apartment’s automatic blinds, right on time.")) 'Wrong story opening.'
 $ending = 'The Optimus stood motionless. He hesitated, his fingers tight around the pot while his gaze lingered on the box.'
 Assert-True ($body.EndsWith($ending)) 'The complete story ending is missing.'
@@ -112,7 +257,6 @@ foreach ($copy in @($launchMessage, $launchNote, $launchLabel, $datedFed)) {
 Assert-True ($issueSource -match 'version: "0.3"' -and $issueSource -notmatch '/z1/current/|We can lose our footing') 'Issue revision or retired copy is wrong.'
 $campaignTemplate = Read-Source 'layouts/almanack/single.html'
 Assert-True ($campaignTemplate.Contains('.image_link_url | default $campaignHref')) 'Campaign cover must fall back to the primary CTA.'
-$detailTemplate = Read-Source 'layouts/shop/single.html'
 Assert-True ($detailTemplate.IndexOf('{{ $sampleLink }}') -gt 0 -and $detailTemplate.IndexOf('{{ $sampleLink }}') -lt $detailTemplate.IndexOf('index $product "tags"')) '2045 sample invitation must precede topics.'
 foreach ($template in @($featureTemplate, (Read-Source 'layouts/partials/shop/sample-link.html'))) {
   Assert-True ($template.Contains('.Title') -and $template.Contains('.ReadingTime') -and $template.Contains('a complete story')) 'Sample invitation must derive title and reading time.'
@@ -154,6 +298,62 @@ if ($isDraft -and -not $Preview) {
 
 $detailHtml = Read-Output 'shop/2045/index.html'
 $sampleHtml = Read-Output 'shop/2045/sample/index.html'
+$legacyStoryHtml = Read-Output 'essays/the-cracked-pot/index.html'
+$detailTitleMatch = [regex]::Match($detailHtml, '(?is)<title\b[^>]*>(?<title>.*?)</title>')
+$detailBrowserTitle = [Net.WebUtility]::HtmlDecode($detailTitleMatch.Groups['title'].Value).Trim()
+Assert-True ($detailBrowserTitle -ceq '2045: Ten Dark Fables from the Machine Age | Robert V. Ussley') '2045 must use the approved disambiguated browser title.'
+Assert-True ((Meta-Content $detailHtml 'og:title') -ceq '2045: Ten Dark Fables from the Machine Age') '2045 must use the approved Open Graph title.'
+Assert-True ((Meta-Content $detailHtml 'twitter:title') -ceq '2045: Ten Dark Fables from the Machine Age') '2045 must use the approved Twitter title.'
+
+$decisionModule = [regex]::Match($detailHtml, '(?is)<aside\b[^>]*\bdata-bookstore-early-decision(?:=|\s|>).*?</aside>')
+Assert-True ($decisionModule.Success) '2045 must render the early decision module.'
+$decisionText = Plain-Text $decisionModule.Value
+foreach ($proof in @('10 stories', 'About 26,700 words', 'DRM-free EPUB', 'Available only from Outside In Print.')) {
+  Assert-True ($decisionText.Contains($proof, [StringComparison]::Ordinal)) "The early decision module is missing proof: $proof"
+}
+$decisionLinks = @([regex]::Matches($decisionModule.Value, '(?is)<a\b[^>]*>.*?</a>'))
+Assert-True ($decisionLinks.Count -eq 2) 'The early decision module must contain only its sample and internal buy links.'
+Assert-True ((Html-Attribute $decisionLinks[0].Value 'href') -eq '/shop/2045/sample/' -and (Html-Attribute $decisionLinks[0].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_sample') 'The early decision module must put the tracked complete-story sample first.'
+Assert-True ((Html-Attribute $decisionLinks[1].Value 'href') -eq '#bookstore-purchase' -and (Html-Attribute $decisionLinks[1].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_buy' -and (Plain-Text $decisionLinks[1].Value) -ceq 'Buy EPUB — $19.99') 'The early buy control must be a tracked internal anchor to the existing form.'
+Assert-True ($decisionModule.Value -notmatch '<form\b|downloads\.outsideinprint\.org|square\.link|checkout\.square\.site') 'The early decision module must not duplicate or invoke checkout.'
+$purchaseIndex = $detailHtml.IndexOf('id=bookstore-purchase', [StringComparison]::Ordinal)
+if ($purchaseIndex -lt 0) { $purchaseIndex = $detailHtml.IndexOf('id="bookstore-purchase"', [StringComparison]::Ordinal) }
+Assert-True ($decisionModule.Index -lt $purchaseIndex) 'The early decision module must precede the checkout form.'
+
+$inside2045 = [regex]::Match($detailHtml, '(?is)<section\b[^>]*\bdata-bookstore-story-list(?:=|\s|>).*?</section>')
+Assert-True ($inside2045.Success -and (Plain-Text $inside2045.Value).Contains('Inside 2045', [StringComparison]::Ordinal)) '2045 must render its complete contents section.'
+$renderedStoryTitles = @([regex]::Matches($inside2045.Value, '(?is)<li\b[^>]*>(?<title>.*?)</li>') | ForEach-Object { Plain-Text $_.Groups['title'].Value })
+Assert-True ($renderedStoryTitles.Count -eq 10) 'Inside 2045 must render exactly ten story titles.'
+Assert-True ([string]::Join("`n", $renderedStoryTitles) -ceq [string]::Join("`n", $expectedStoryTitles)) 'Inside 2045 does not match authoritative EPUB order.'
+
+$launchStrip = [regex]::Match($homeHtml, '(?is)<section\b[^>]*\bdata-home-2045-launch(?:=|\s|>).*?</section>')
+Assert-True ($launchStrip.Success) 'The active launch window must render one homepage 2045 strip.'
+$launchText = Plain-Text $launchStrip.Value
+foreach ($launchCopy in @('New: 2045 — Ten Dark Fables from the Machine Age', 'Read a complete story', 'Buy EPUB — $19.99', 'DRM-free EPUB · U.S. customers only.')) {
+  Assert-True ($launchText.Contains($launchCopy, [StringComparison]::Ordinal)) "The homepage launch strip is missing: $launchCopy"
+}
+$launchLinks = @([regex]::Matches($launchStrip.Value, '(?is)<a\b[^>]*>.*?</a>'))
+$launchSlots = @($launchLinks | ForEach-Object { Html-Attribute $_.Value 'data-analytics-source-slot' })
+Assert-True ($launchLinks.Count -eq 3 -and [string]::Join('|', $launchSlots) -ceq 'homepage_2045_launch_headline|homepage_2045_launch_sample|homepage_2045_launch_buy') 'The launch headline, sample, and buy links need distinct analytics slots in that order.'
+Assert-True ((Html-Attribute $launchLinks[0].Value 'href') -eq '/shop/2045/' -and (Html-Attribute $launchLinks[1].Value 'href') -eq '/shop/2045/sample/' -and (Html-Attribute $launchLinks[2].Value 'href') -eq '/shop/2045/#bookstore-purchase') 'The launch strip must use only the canonical internal product, sample, and purchase-anchor URLs.'
+Assert-True ($launchStrip.Value -notmatch '<form\b|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The launch strip exposed a provider or direct checkout.'
+$orientationIndex = $homeHtml.IndexOf('class=home-front-page__orientation', [StringComparison]::Ordinal)
+if ($orientationIndex -lt 0) { $orientationIndex = $homeHtml.IndexOf('class="home-front-page__orientation"', [StringComparison]::Ordinal) }
+$storyGridIndex = $homeHtml.IndexOf('class=home-front-page__stories', [StringComparison]::Ordinal)
+if ($storyGridIndex -lt 0) { $storyGridIndex = $homeHtml.IndexOf('class="home-front-page__stories"', [StringComparison]::Ordinal) }
+Assert-True ($orientationIndex -ge 0 -and $launchStrip.Index -gt $orientationIndex -and $storyGridIndex -gt $launchStrip.Index) 'The launch strip must stay between the reader note and editorial story grid.'
+
+$editionMetadataCases = @(
+  @{ Html = $legacyStoryHtml; Title = 'The Cracked Pot — Earlier Web Edition' },
+  @{ Html = $sampleHtml; Title = 'The Cracked Pot — Complete Story from 2045' }
+)
+foreach ($metadataCase in $editionMetadataCases) {
+  $titleMatch = [regex]::Match([string]$metadataCase.Html, '(?is)<title\b[^>]*>(?<title>.*?)</title>')
+  $browserTitle = [Net.WebUtility]::HtmlDecode($titleMatch.Groups['title'].Value).Trim()
+  Assert-True ($browserTitle -ceq $metadataCase.Title) "Edition browser title must be '$($metadataCase.Title)'."
+  Assert-True ((Meta-Content $metadataCase.Html 'og:title') -ceq $metadataCase.Title) "Edition Open Graph title must be '$($metadataCase.Title)'."
+  Assert-True ((Meta-Content $metadataCase.Html 'twitter:title') -ceq $metadataCase.Title) "Edition Twitter title must be '$($metadataCase.Title)'."
+}
 foreach ($html in @($homeHtml, $shopHtml, $authorHtml)) {
   foreach ($slug in @('2045', 'the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle')) {
     Assert-True ($html -match ('href="?(?:https://outsideinprint\.org)?/shop/' + $slug + '/')) "Book $slug is missing from a discovery surface."
@@ -224,10 +424,69 @@ Assert-True ($detailHtml -match 'href="?/shop/2045/sample/' -and $sampleHtml -ma
 Assert-True ($detailHtml -match '\$19\.99' -and $sampleHtml -match 'Explore 2045\s*(?:·|&middot;|&#183;)\s*\$19\.99') '2045 product and sample must display the approved $19.99 price.'
 Assert-True ($detailHtml -notmatch 'data-bookstore-kindle-button|data-bookstore-kindle-role') '2045 has a Kindle purchase offer.'
 Assert-True ($detailHtml -match '"@type"\s*:\s*"WebPage"' -and $detailHtml -notmatch '"@type"\s*:\s*"CollectionPage"') '2045 must use product-page WebPage metadata.'
+$jsonLdMatch = [regex]::Match($detailHtml, '(?is)<script\b[^>]*\btype=(?:"application/ld\+json"|''application/ld\+json''|application/ld\+json)[^>]*>(?<json>.*?)</script>')
+Assert-True ($jsonLdMatch.Success) '2045 must emit one connected JSON-LD graph.'
+$jsonLdText = $jsonLdMatch.Groups['json'].Value
+$jsonLd = $jsonLdText | ConvertFrom-Json
+$graph = @($jsonLd.'@graph')
+$bookProducts = @($graph | Where-Object { @($_.'@type') -contains 'Book' -and @($_.'@type') -contains 'Product' })
+$webPages = @($graph | Where-Object { @($_.'@type') -contains 'WebPage' })
+Assert-True ($bookProducts.Count -eq 1 -and $webPages.Count -eq 1 -and $webPages[0].mainEntity.'@id' -ceq $bookProducts[0].'@id') '2045 must connect one WebPage to one combined Book/Product entity.'
+$bookOffer = @($bookProducts[0].offers)
+Assert-True ($bookOffer.Count -eq 1 -and $bookOffer[0].price -isnot [string] -and "$($bookOffer[0].price)" -ceq '19.99' -and $bookOffer[0].priceCurrency -ceq 'USD' -and $bookOffer[0].availability -ceq 'https://schema.org/InStock' -and $bookOffer[0].sku -ceq 'OIP-TD-EPUB' -and $bookOffer[0].url -ceq 'https://outsideinprint.org/shop/2045/') '2045 must expose its numeric canonical live Offer.'
+Assert-True ($bookProducts[0].bookFormat -ceq 'https://schema.org/EBook' -and $bookProducts[0].author -and $bookProducts[0].publisher -and $bookProducts[0].brand -and $bookProducts[0].image) '2045 Book/Product schema is missing its EPUB, author, publisher, brand, or managed-cover evidence.'
+Assert-True ($jsonLdText -notmatch '(?i)downloads\.outsideinprint\.org|checkout_(?:url|endpoint)|aggregateRating|review|isbn') '2045 schema must not expose private checkout, fabricated reviews, ratings, or an unstored ISBN.'
 foreach ($html in @($detailHtml, $sampleHtml)) {
   $decoded = [Net.WebUtility]::HtmlDecode($html)
   Assert-True ($decoded.Contains($approvedAlt, [StringComparison]::Ordinal)) '2045 output lost the approved cover alt.'
 }
+
+$legacyNotice = [regex]::Match($legacyStoryHtml, '(?is)<aside\b[^>]*\bdata-edition-relationship(?:=|\s|>).*?</aside>')
+$sampleNotice = [regex]::Match($sampleHtml, '(?is)<aside\b[^>]*\bdata-edition-relationship(?:=|\s|>).*?</aside>')
+Assert-True ($legacyNotice.Success -and $sampleNotice.Success) 'Both Cracked Pot editions must render one shared edition relationship notice.'
+foreach ($noticeCase in @(
+  @{ Html = $legacyNotice.Value; Relationship = $legacyRelationship },
+  @{ Html = $sampleNotice.Value; Relationship = $sampleRelationship }
+)) {
+  $relationship = $noticeCase.Relationship
+  $noticeHtml = [string]$noticeCase.Html
+  $noticeText = Plain-Text $noticeHtml
+  Assert-True ($noticeText.Contains($relationship.Label, [StringComparison]::Ordinal)) "Edition notice lost label: $($relationship.Label)"
+  $renderedRelationshipText = $relationship.Text.Replace('*2045*', '<em>2045</em>')
+  Assert-True ($noticeHtml.Contains($renderedRelationshipText, [StringComparison]::Ordinal)) "Edition notice lost text: $($relationship.Text)"
+  $cta = @([regex]::Matches($noticeHtml, '(?is)<a\b[^>]*>.*?</a>'))
+  Assert-True ($cta.Count -eq 1 -and (Html-Attribute $cta[0].Value 'href') -eq $relationship.Href -and (Plain-Text $cta[0].Value) -ceq $relationship.Cta) 'Edition notice CTA differs from its front matter contract.'
+  Assert-True ($noticeHtml -match '<em>2045</em>') 'Edition relationship copy must render the book title with Markdown emphasis.'
+}
+$legacyBodyTag = [regex]::Match($legacyStoryHtml, '(?is)<div\b[^>]*\bclass="?piece-body"?(?:\s|>)')
+$renderedSampleBodyTag = [regex]::Match($sampleHtml, '(?is)<div\b[^>]*\bclass="?bookstore-reading-sample__body"?(?:\s|>)')
+Assert-True ($legacyBodyTag.Success -and $legacyNotice.Index -lt $legacyBodyTag.Index) 'Earlier-edition notice must precede the legacy story body.'
+Assert-True ($renderedSampleBodyTag.Success -and $sampleNotice.Index -lt $renderedSampleBodyTag.Index) '2045-edition notice must precede the locked story body.'
+Assert-True ((Meta-Content $legacyStoryHtml 'robots') -ceq 'noindex, follow') 'The earlier web edition must render noindex, follow.'
+Assert-True ((Meta-Content $sampleHtml 'robots') -ceq 'index, follow, max-image-preview:large') 'The 2045 edition must remain indexable.'
+Assert-True ($legacyStoryHtml -match '(?is)<link\b(?=[^>]*\brel="?canonical"?(?:\s|>))(?=[^>]*\bhref="?https://outsideinprint\.org/essays/the-cracked-pot/"?(?:\s|>))[^>]*>') 'The earlier web edition must retain its self-canonical URL.'
+Assert-True ($sampleHtml -match '(?is)<link\b(?=[^>]*\brel="?canonical"?(?:\s|>))(?=[^>]*\bhref="?https://outsideinprint\.org/shop/2045/sample/"?(?:\s|>))[^>]*>') 'The 2045 edition must retain its self-canonical URL.'
+$legacyDocumentTitle = [Net.WebUtility]::HtmlDecode([regex]::Match($legacyStoryHtml, '(?is)<title>(?<title>.*?)</title>').Groups['title'].Value).Trim()
+$sampleDocumentTitle = [Net.WebUtility]::HtmlDecode([regex]::Match($sampleHtml, '(?is)<title>(?<title>.*?)</title>').Groups['title'].Value).Trim()
+Assert-True ($legacyDocumentTitle -ceq 'The Cracked Pot — Earlier Web Edition') 'The earlier web edition must render its disambiguated metadata title.'
+Assert-True ($sampleDocumentTitle -ceq 'The Cracked Pot — Complete Story from 2045') 'The 2045 edition must render its disambiguated metadata title.'
+
+$legacyUrl = 'https://outsideinprint.org/essays/the-cracked-pot/'
+$sampleUrl = 'https://outsideinprint.org/shop/2045/sample/'
+$sitemapXml = Read-Output 'sitemap.xml'
+$libraryHtml = Read-Output 'library/index.html'
+$archiveHtml = Read-Output 'archive/index.html'
+$randomHtml = Read-Output 'random/index.html'
+$siteFeed = Read-Output 'index.xml'
+$essayFeed = Read-Output 'essays/index.xml'
+$archiveFeed = Read-Output 'archive/index.xml'
+Assert-True (-not $sitemapXml.Contains($legacyUrl, [StringComparison]::Ordinal) -and $sitemapXml.Contains($sampleUrl, [StringComparison]::Ordinal)) 'Sitemap must exclude the earlier web edition and retain the 2045 edition.'
+foreach ($surface in @($libraryHtml, $archiveHtml, $randomHtml, $siteFeed, $essayFeed, $archiveFeed)) {
+  Assert-True (-not $surface.Contains($legacyUrl, [StringComparison]::Ordinal) -and $surface -notmatch 'href="?/essays/the-cracked-pot/') 'The earlier web edition leaked into a discovery collection or feed.'
+}
+Assert-True ($siteFeed.Contains($sampleUrl, [StringComparison]::Ordinal)) 'The dated 2045 story must remain in the site feed.'
+$sampleFeedItems = @([regex]::Matches($siteFeed, '(?is)<item>.*?</item>') | Where-Object { $_.Value.Contains($sampleUrl, [StringComparison]::Ordinal) })
+Assert-True ($sampleFeedItems.Count -eq 1 -and $sampleFeedItems[0].Value -notmatch '0001' -and $sampleFeedItems[0].Value -match '12 Sep 2026') 'The 2045 story feed entry must use its real publication date, never year 0001.'
 if ($isDraft) {
   Assert-True ($detailHtml -notmatch '<form[^>]*data-epub-checkout') 'Preview exposes a live 2045 checkout.'
 }

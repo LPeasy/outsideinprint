@@ -686,8 +686,10 @@ function Remove-GuardrailExemptFrontMatterFields {
 
   $allowedKeys = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
   foreach ($key in @(
+    'build',
     'collections',
     'collection_weight',
+    'edition_relationship',
     'featured_image',
     'featured_image_alt',
     'featured_image_caption',
@@ -697,6 +699,8 @@ function Remove-GuardrailExemptFrontMatterFields {
     'image_exempt',
     'image_exempt_reason',
     'images',
+    'metadata_title',
+    'noindex',
     'series',
     'tags',
     'topics'
@@ -1146,7 +1150,7 @@ if (
 }
 
 if ($metadataOnlyPaths.Count -gt 0) {
-  Write-Host ("Essay guardrails: skipped {0} taxonomy/image-only front matter change(s)." -f $metadataOnlyPaths.Count) -ForegroundColor Yellow
+  Write-Host ("Essay guardrails: skipped {0} allowlisted front matter-only change(s)." -f $metadataOnlyPaths.Count) -ForegroundColor Yellow
   foreach ($metadataPath in $metadataOnlyPaths) {
     Write-Host "  - $metadataPath" -ForegroundColor Yellow
   }

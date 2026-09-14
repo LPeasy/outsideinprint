@@ -986,7 +986,7 @@ The warning came in â€œlate.â€
   $taxonomyOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $taxonomyBase -HeadRef $taxonomyHead -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $taxonomyOnlyExit = $LASTEXITCODE
   Assert-True ($taxonomyOnlyExit -eq 0) "Expected taxonomy-only collection metadata diffs to skip legacy cleanup and philosophy audit gates."
-  Assert-True ($taxonomyOnlyOutput.Contains("taxonomy/image-only front matter change")) "Expected taxonomy-only guardrail output to report the explicit skip."
+  Assert-True ($taxonomyOnlyOutput.Contains("allowlisted front matter-only change")) "Expected taxonomy-only guardrail output to report the explicit skip."
   Assert-True (-not $taxonomyOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected taxonomy-only guardrail output not to require philosophy audit evidence."
   Assert-True (-not $taxonomyOnlyOutput.Contains("Legacy import preflight summary")) "Expected taxonomy-only guardrail output not to scan legacy body residue."
 
@@ -1021,7 +1021,7 @@ The warning came in â€œlate.â€
   $imageMetadataOnlyOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $taxonomyHead -HeadRef $imageMetadataHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $imageMetadataOnlyExit = $LASTEXITCODE
   Assert-True ($imageMetadataOnlyExit -eq 0) "Expected image-only metadata diffs to skip legacy cleanup and philosophy audit gates."
-  Assert-True ($imageMetadataOnlyOutput.Contains("taxonomy/image-only front matter change")) "Expected image-only metadata guardrail output to report the explicit skip."
+  Assert-True ($imageMetadataOnlyOutput.Contains("allowlisted front matter-only change")) "Expected image-only metadata guardrail output to report the explicit skip."
   Assert-True (-not $imageMetadataOnlyOutput.Contains("missing_editorial_philosophy_audit")) "Expected image-only metadata guardrail output not to require philosophy audit evidence."
   Assert-True (-not $imageMetadataOnlyOutput.Contains("Legacy import preflight summary")) "Expected image-only metadata guardrail output not to scan legacy body residue."
 
@@ -1162,6 +1162,49 @@ This prose changed and should keep the essay under guardrail review.
   $imageRecoveryWithProseExit = $LASTEXITCODE
   Assert-True ($imageRecoveryWithProseExit -ne 0) "Expected Medium image recovery plus prose changes to remain under legacy cleanup gates."
   Assert-True ($imageRecoveryWithProseOutput.Contains("Legacy import preflight summary")) "Expected prose-changing recovery output to run the legacy scan."
+
+  $discoveryMetadataBlock = @'
+metadata_title: "Legacy Taxonomy Only — Earlier Edition"
+noindex: true
+build:
+  list: never
+edition_relationship:
+  label: "Earlier web edition."
+  text: "This page preserves an earlier edition."
+  href: "/shop/example/sample/"
+  cta_label: "Read the revised edition →"
+'@
+  $discoveryMetadataSource = Get-Content -LiteralPath $taxonomyEssayPath -Raw
+  $discoveryMetadataSource = $discoveryMetadataSource -replace '(?m)^featured: false\r?$', ($discoveryMetadataBlock + "`r`nfeatured: false")
+  Set-Content -LiteralPath $taxonomyEssayPath -Value $discoveryMetadataSource -Encoding UTF8
+
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add edition discovery metadata" | Out-Null
+  $discoveryMetadataHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  $discoveryMetadataOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageRecoveryWithProseHead -HeadRef $discoveryMetadataHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $discoveryMetadataExit = $LASTEXITCODE
+  Assert-True ($discoveryMetadataExit -eq 0) "Expected title/indexation/edition relationship metadata-only diffs to skip legacy cleanup and philosophy audit gates."
+  Assert-True ($discoveryMetadataOutput.Contains("allowlisted front matter-only change")) "Expected discovery metadata-only guardrail output to report the explicit skip."
+  Assert-True (-not $discoveryMetadataOutput.Contains("missing_editorial_philosophy_audit")) "Expected discovery metadata-only output not to require philosophy audit evidence."
+  Assert-True (-not $discoveryMetadataOutput.Contains("Legacy import preflight summary")) "Expected discovery metadata-only output not to scan legacy body residue."
+
+  $discoveryBodyEditSource = Get-Content -LiteralPath $taxonomyEssayPath -Raw
+  $discoveryBodyEditSource = $discoveryBodyEditSource.Replace(
+    'This prose changed and should keep the essay under guardrail review.',
+    'This prose changed again and should keep the essay under guardrail review.'
+  )
+  Set-Content -LiteralPath $taxonomyEssayPath -Value $discoveryBodyEditSource -Encoding UTF8
+
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "change prose after edition discovery metadata" | Out-Null
+  $discoveryBodyEditHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+
+  $discoveryBodyEditOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $discoveryMetadataHead -HeadRef $discoveryBodyEditHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  $discoveryBodyEditExit = $LASTEXITCODE
+  Assert-True ($discoveryBodyEditExit -ne 0) "Expected body edits retaining discovery metadata to remain under the full guardrail gate."
+  Assert-True (-not $discoveryBodyEditOutput.Contains("allowlisted front matter-only change")) "Expected a body edit to prevent the allowlisted front matter-only skip."
+  Assert-True ($discoveryBodyEditOutput.Contains("missing_editorial_philosophy_audit")) "Expected a body edit retaining discovery metadata to require Editorial Philosophy Audit evidence."
 }
 finally {
   if (Test-Path $tempRoot) {

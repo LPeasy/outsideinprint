@@ -64,6 +64,10 @@
   {{- $name = "author" -}}
 {{- end -}}
 
+{{- if and (eq $name "page") (eq $section "shop") .Params.book_key -}}
+  {{- $name = "shop-product" -}}
+{{- end -}}
+
 {{- if and (eq $name "page") $isRandomRoute -}}
   {{- $name = "utility" -}}
 {{- end -}}

@@ -16,7 +16,8 @@ $requiredFiles = @(
   'layouts/partials/schema/breadcrumbs.html',
   'layouts/partials/schema/significant-links.html',
   'layouts/partials/schema/webpage.html',
-  'layouts/partials/schema/creative-work.html'
+  'layouts/partials/schema/creative-work.html',
+  'layouts/partials/schema/book-product.html'
 )
 
 foreach ($relativePath in $requiredFiles) {
@@ -41,7 +42,8 @@ foreach ($requiredHelper in @(
   'partial "schema/image.html"',
   'partial "schema/breadcrumbs.html"',
   'partial "schema/resolve-author.html"',
-  'partial "schema/creative-work.html"'
+  'partial "schema/creative-work.html"',
+  'partial "schema/book-product.html"'
 )) {
   if ($schemaPartial -notmatch [regex]::Escape($requiredHelper)) {
     throw "Expected schema partial to reference helper: $requiredHelper"
@@ -104,6 +106,29 @@ if ($routeHelper -notmatch '\^/authors/\[\^/\]\+/\$') {
   throw 'Expected the route helper to classify author profile URLs explicitly for schema routing.'
 }
 
+foreach ($requiredSnippet in @(
+  '(eq $section "shop")',
+  '.Params.book_key',
+  '$name = "shop-product"'
+)) {
+  if ($routeHelper -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected the route helper to classify every shop page with book_key as shop-product via: $requiredSnippet"
+  }
+}
+
+$metadataPageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/page.html') -Raw
+foreach ($requiredSnippet in @(
+  'partial "shop/product-data.html"',
+  '.Params.metadata_title',
+  'index . "metadata_title"',
+  '$fullTitle = printf "%s | %s" $title .',
+  '"product" $product'
+)) {
+  if ($metadataPageHelper -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected metadata/page.html to expose shop-product metadata via: $requiredSnippet"
+  }
+}
+
 $websiteHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/website.html') -Raw
 if ($websiteHelper -notmatch 'SearchAction') {
   throw 'Expected schema/website.html to emit SearchAction metadata for the library route.'
@@ -138,6 +163,33 @@ foreach ($pageType in @('AboutPage', 'ProfilePage')) {
   }
 }
 
+if ($webpageHelper -notmatch [regex]::Escape('(eq $meta.route.name "shop-product")')) {
+  throw 'Expected schema/webpage.html to connect each shop-product WebPage to its primary entity.'
+}
+
+$bookProductHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/book-product.html') -Raw
+foreach ($requiredSnippet in @(
+  '(slice "Book" "Product")',
+  '"mainEntityOfPage"',
+  'index $product "release_date"',
+  'index $product "publisher"',
+  'index $product "tags"',
+  'index $product "direct_offers"',
+  'index $offer "price_cents"',
+  '(eq $status "live")',
+  '"url" $meta.canonical',
+  '"availability" "https://schema.org/InStock"',
+  '"brand" (dict "@type" "Brand" "name" $brandName)',
+  '"seller" $organizationRef'
+)) {
+  if ($bookProductHelper -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected schema/book-product.html to emit connected book commerce metadata via: $requiredSnippet"
+  }
+}
+if ($bookProductHelper -match 'checkout_(?:url|endpoint)') {
+  throw 'Product Offer schema must use the canonical page URL, never a private checkout field.'
+}
+
 $breadcrumbHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/breadcrumbs.html') -Raw
 foreach ($routeName in @('"about"', '"author"')) {
   if ($breadcrumbHelper -notmatch [regex]::Escape($routeName)) {
@@ -146,6 +198,7 @@ foreach ($routeName in @('"about"', '"author"')) {
 }
 
 $schemaReturnFiles = @(
+  'layouts/partials/schema/book-product.html',
   'layouts/partials/schema/breadcrumbs.html',
   'layouts/partials/schema/creative-work.html',
   'layouts/partials/schema/image.html',

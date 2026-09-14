@@ -455,6 +455,46 @@ test("homepage bookstore spotlight stays weighted, data-driven, and internal-fir
   assert.doesNotMatch(spotlight, /amazon|kindle|purchase_url|kindle_url|kindle-button|checkout-actions|carousel|autoplay/i);
 });
 
+test("homepage 2045 launch strip is timed, available-only, and sample-first", () => {
+  const frontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
+  const launch = fs.readFileSync(path.resolve("layouts/partials/home_2045_launch.html"), "utf8");
+  const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
+
+  assert.match(frontPage, /partial "home_2045_launch\.html"/);
+  assert.ok(frontPage.indexOf('class="home-front-page__orientation"') < frontPage.indexOf('partial "home_2045_launch.html"'));
+  assert.ok(frontPage.indexOf('partial "home_2045_launch.html"') < frontPage.indexOf('class="home-front-page__stories"'));
+  assert.match(launch, /hugo\.Data\.bookstore\.launch_promotion/);
+  assert.match(launch, /\$promotion\.book_key/);
+  assert.match(launch, /\$promotion\.starts_at/);
+  assert.match(launch, /\$promotion\.ends_at/);
+  assert.match(launch, /time\.AsTime \$startsAt/);
+  assert.match(launch, /time\.AsTime \$endsAt/);
+  assert.match(launch, /le \$startsAtTime\.Unix now\.Unix/);
+  assert.match(launch, /gt \$endsAtTime\.Unix now\.Unix/);
+  assert.match(launch, /site\.GetPage \(printf "\/shop\/%s" \$bookKey\)/);
+  assert.match(launch, /if not \$book\.Draft/);
+  assert.match(launch, /partial "shop\/product-data\.html"/);
+  assert.match(launch, /where .*"format" "EPUB"/);
+  assert.match(launch, /where \$epubOffers "availability_status" "live"/);
+  assert.match(launch, /\$book\.Params\.sample_page/);
+  assert.match(launch, /New: 2045 — Ten Dark Fables from the Machine Age/);
+  assert.match(launch, /Read a complete story/);
+  assert.match(launch, /Buy EPUB — \$19\.99/);
+  assert.match(launch, /DRM-free EPUB · U\.S\. customers only\./);
+  assert.ok(launch.indexOf('>Read a complete story</a>') < launch.indexOf('>Buy EPUB — $19.99</a>'));
+  assert.match(launch, /data-analytics-source-slot="homepage_2045_launch_headline"/);
+  assert.match(launch, /data-analytics-source-slot="homepage_2045_launch_sample"/);
+  assert.match(launch, /data-analytics-source-slot="homepage_2045_launch_buy"/);
+  assert.equal((launch.match(/data-analytics-source-slot="homepage_2045_launch_(?:headline|sample|buy)"/g) || []).length, 3);
+  assert.match(launch, /href="\{\{ \$book\.RelPermalink \}\}#bookstore-purchase"/);
+  assert.doesNotMatch(launch, /images\/picture|cover_image|https?:\/\/|checkout\.square|square\.link|downloads\.outsideinprint/i);
+  assert.match(css, /\.home-2045-launch\{/);
+  assert.match(css, /\.home-2045-launch__action--buy\{/);
+  assert.match(css, /\.home-2045-launch__title a\{[\s\S]*?min-height:44px;/);
+  assert.match(css, /\.home-2045-launch__action\{[\s\S]*?min-height:44px;/);
+  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*?\.home-2045-launch__actions\{[\s\S]*?grid-template-columns:1fr;/);
+});
+
 test("homepage lead control ignores expiring essay feature front matter", () => {
   const essayDir = path.resolve("content/essays");
   const essays = fs

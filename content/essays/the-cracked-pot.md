@@ -1,7 +1,11 @@
 ---
 title: "The Cracked Pot"
+metadata_title: "The Cracked Pot — Earlier Web Edition"
 date: 2025-01-18
 draft: false
+noindex: true
+build:
+  list: never
 slug: "the-cracked-pot"
 section_label: "Essay"
 subtitle: ""
@@ -18,6 +22,11 @@ featured_image: "essays/the-cracked-pot/hero"
 featured_image_alt: "Abstract editorial hero image for The Cracked Pot."
 featured_image_caption: "Replacement hero image for the legacy web edition."
 medium_source_url: "https://medium.com/@lawtonperret/the-cracked-pot-bf4f0a13419e"
+edition_relationship:
+  label: "Earlier web edition."
+  text: "This page preserves the 2025 web edition of “The Cracked Pot.” The revised book edition appears as the complete opening story in *2045*."
+  href: "/shop/2045/sample/"
+  cta_label: "Read the 2045 edition →"
 ---
 The morning light filtered through the apartment’s automatic blinds, timed perfectly to match his circadian rhythm. An Optimus hummed softly as it blended his favorite smoothie. He didn’t even like smoothies anymore.
 

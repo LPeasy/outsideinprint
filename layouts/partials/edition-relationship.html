@@ -1,0 +1,14 @@
+{{- with .Params.edition_relationship -}}
+  {{- $label := strings.TrimSpace (printf "%v" .label) -}}
+  {{- $text := strings.TrimSpace (printf "%v" .text) -}}
+  {{- $href := strings.TrimSpace (printf "%v" .href) -}}
+  {{- $ctaLabel := strings.TrimSpace (printf "%v" .cta_label) -}}
+  {{- if or (not $label) (not $text) (not $href) (not $ctaLabel) -}}
+    {{- errorf "Edition relationship for %q requires label, text, href, and cta_label" $.RelPermalink -}}
+  {{- end -}}
+  <aside class="edition-relationship" role="note" aria-label="{{ $label }}" data-edition-relationship>
+    <p class="edition-relationship__label">{{ $label }}</p>
+    <p class="edition-relationship__text">{{ $text | markdownify }}</p>
+    <a class="edition-relationship__cta" href="{{ $href }}">{{ $ctaLabel }}</a>
+  </aside>
+{{- end -}}

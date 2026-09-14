@@ -8,6 +8,7 @@
         <h1 id="page-title">{{ .Title }}</h1>
         <p class="bookstore-reading-sample__meta">By {{ index $product "author" }} · About {{ .ReadingTime }} min read</p>
       </header>
+      {{ partial "edition-relationship.html" . }}
       <div class="bookstore-reading-sample__body">{{ .Content }}</div>
       <footer class="bookstore-reading-sample__footer">
         <p class="bookstore-reading-sample__end"><span>End of sample</span></p>

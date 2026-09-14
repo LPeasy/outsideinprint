@@ -1733,6 +1733,93 @@ html[data-theme="light"] .paper-route-toggle{
   outline:3px solid var(--focus-ring);
   outline-offset:3px;
 }
+.home-2045-launch{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:.55rem 1.25rem;
+  max-width:52rem;
+  margin:0 auto 1.35rem;
+  padding:.82rem 1rem;
+  border:1px solid var(--oip-rule-engraved);
+  border-radius:var(--radius-ui);
+  background:var(--paper-surface-wash), var(--bg-raised);
+  box-shadow:var(--paper-shadow);
+}
+.home-2045-launch__title{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:clamp(1.08rem, 2vw, 1.34rem);
+  font-weight:650;
+  line-height:1.3;
+}
+.home-2045-launch__title a{
+  display:inline-flex;
+  min-height:44px;
+  align-items:center;
+  color:var(--text-primary);
+  text-decoration-color:rgba(153,173,191,.48);
+  text-underline-offset:.18em;
+}
+.home-2045-launch__title a:hover,
+.home-2045-launch__title a:focus-visible{
+  color:var(--accent-hover);
+  text-decoration-color:currentColor;
+}
+.home-2045-launch__title a:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
+}
+.home-2045-launch__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem .65rem;
+  align-items:center;
+  justify-content:flex-end;
+}
+.home-2045-launch__action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:.52rem .72rem;
+  border:1px solid rgba(127,147,166,.42);
+  border-radius:var(--radius-ui);
+  color:var(--accent-hover);
+  font-family:var(--font-ui);
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.075em;
+  line-height:1.2;
+  text-align:center;
+  text-decoration:none;
+  text-transform:uppercase;
+}
+.home-2045-launch__action:hover,
+.home-2045-launch__action:focus-visible{
+  border-color:rgba(153,173,191,.68);
+  background:var(--accent-soft);
+  color:var(--text-primary);
+}
+.home-2045-launch__action:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
+}
+.home-2045-launch__action--buy{
+  border-color:rgba(213,190,150,.48);
+  background:rgba(213,190,150,.12);
+  color:var(--oip-paper-light);
+}
+.home-2045-launch__terms{
+  grid-column:1 / -1;
+  margin:0;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  line-height:1.45;
+  text-transform:uppercase;
+}
 .home-front-page__stories{
   display:grid;
   grid-template-columns:minmax(0, 1.65fr) minmax(0, 1fr);
@@ -3051,6 +3138,51 @@ html[data-theme="light"] .paper-route-toggle{
   font-size:.98rem;
   line-height:1.7;
 }
+.bookstore-product__decision{
+  display:grid;
+  gap:.38rem;
+  max-width:44rem;
+  margin:.85rem 0 0;
+  padding:.78rem 0;
+  border-top:1px solid var(--oip-rule-engraved);
+  border-bottom:1px solid var(--oip-rule-standard);
+}
+.bookstore-product__proof,
+.bookstore-product__exclusive-note{
+  margin:0;
+}
+.bookstore-product__proof{
+  color:var(--text-primary);
+  font-family:var(--font-ui);
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.035em;
+  line-height:1.5;
+}
+.bookstore-product__proof span{
+  margin-inline:.16em;
+  color:var(--text-muted);
+}
+.bookstore-product__exclusive-note{
+  color:var(--text-secondary);
+  font-size:.86rem;
+  line-height:1.55;
+}
+.bookstore-product__decision-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem .72rem;
+  align-items:center;
+  margin-top:.12rem;
+}
+.bookstore-product__decision-actions .bookstore-sample-link{
+  flex:1 1 20rem;
+}
+.bookstore-product__early-buy{
+  flex:0 0 auto;
+  min-height:44px;
+  padding:.68rem .9rem;
+}
 .bookstore-product__purchase{
   display:grid;
   gap:.72rem;
@@ -3090,6 +3222,52 @@ html[data-theme="light"] .paper-route-toggle{
 .bookstore-product__purchase-help a{
   color:inherit;
   text-decoration-color:rgba(127,147,166,.42);
+}
+.bookstore-product__inside{
+  max-width:var(--measure-reading);
+  margin:1.65rem 0 0;
+  padding:1rem 1.1rem 1.1rem;
+  border:1px solid var(--oip-rule-standard);
+  border-radius:6px;
+  background:linear-gradient(145deg, rgba(127,147,166,.07), rgba(236,231,223,.012));
+}
+.bookstore-product__inside-eyebrow{
+  margin:0;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.64rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  line-height:1.4;
+  text-transform:uppercase;
+}
+.bookstore-product__inside h2{
+  margin:.22rem 0 .75rem;
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:1.42rem;
+  font-weight:600;
+  line-height:1.2;
+}
+.bookstore-product__inside ol{
+  columns:2 15rem;
+  column-gap:2rem;
+  margin:0;
+  padding-left:1.45rem;
+}
+.bookstore-product__inside li{
+  break-inside:avoid;
+  margin:0 0 .48rem;
+  padding-left:.18rem;
+  color:var(--text-secondary);
+  font-size:.86rem;
+  line-height:1.48;
+}
+.bookstore-product__inside li::marker{
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:700;
 }
 .bookstore-sample-link{
   display:flex;
@@ -3250,6 +3428,59 @@ html[data-theme="light"] .paper-route-toggle{
   font-weight:600;
   letter-spacing:.035em;
   line-height:1.4;
+}
+.edition-relationship{
+  position:relative;
+  width:100%;
+  max-width:var(--measure-reading);
+  box-sizing:border-box;
+  margin:1.35rem auto 0;
+  padding:.9rem 1rem .95rem;
+  border:1px solid var(--oip-rule-standard);
+  border-left:3px solid rgba(153,173,191,.62);
+  border-radius:var(--radius-soft);
+  background:linear-gradient(105deg, rgba(127,147,166,.1), rgba(236,231,223,.018));
+  color:var(--text-secondary);
+  box-shadow:var(--paper-inset);
+}
+.edition-relationship__label{
+  margin:0;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  line-height:1.4;
+  text-transform:uppercase;
+}
+.edition-relationship__text{
+  margin:.42rem 0 0;
+  font-size:.9rem;
+  line-height:1.62;
+}
+.edition-relationship__cta{
+  display:inline-flex;
+  min-height:44px;
+  align-items:center;
+  margin-top:.42rem;
+  color:var(--accent-hover);
+  font-family:var(--font-ui);
+  font-size:.78rem;
+  font-weight:700;
+  line-height:1.45;
+  text-decoration-color:rgba(153,173,191,.62);
+  text-underline-offset:.2em;
+}
+.edition-relationship__cta:hover{
+  color:var(--text-primary);
+  text-decoration-color:currentColor;
+}
+.edition-relationship__cta:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:2px;
+}
+.bookstore-reading-sample .edition-relationship{
+  max-width:none;
 }
 .bookstore-reading-sample__body{
   margin-top:1.35rem;
@@ -4150,9 +4381,11 @@ html[data-theme="light"] .paper-route-toggle{
   .bookstore-record{
     padding:1.05rem;
   }
-  .bookstore-record__cover,
-  .bookstore-product__cover{
+  .bookstore-record__cover{
     max-width:14rem;
+  }
+  .bookstore-product__cover{
+    max-width:9.5rem;
   }
   .bookstore-record__cover{
     width:min(13rem, 68%);
@@ -6163,6 +6396,12 @@ body.cartoon-lightbox-open{
   .home-front-page__extras{
     padding:0;
     border-right:none;
+  }
+  .home-2045-launch{
+    grid-template-columns:1fr;
+  }
+  .home-2045-launch__actions{
+    justify-content:flex-start;
   }
   .cartoon-gallery-spotlight{
     grid-template-columns:1fr;
@@ -8520,12 +8759,36 @@ h2{ margin-top:34px; }
   text-transform:uppercase;
 }
 @media (max-width:640px){
+  .home-2045-launch__actions{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+  }
+  .home-2045-launch__action{
+    width:100%;
+  }
+  .bookstore-product__decision-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .bookstore-product__decision-actions .bookstore-sample-link,
+  .bookstore-product__early-buy{
+    width:100%;
+  }
+  .bookstore-product__decision-actions .bookstore-sample-link__anchor{
+    width:100%;
+  }
+  .bookstore-product__inside ol{
+    columns:1;
+  }
   .bookstore-record{
     padding:1rem;
   }
-  .bookstore-record__cover,
-  .bookstore-product__cover{
+  .bookstore-record__cover{
     max-width:12.25rem;
+  }
+  .bookstore-product__cover{
+    max-width:9.5rem;
   }
   .bookstore-record__actions .shop-cta-grid{
     min-width:0;

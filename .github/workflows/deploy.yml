@@ -232,6 +232,11 @@ jobs:
             exit 1
           fi
 
+      - name: Test 2045 Launch Window
+        shell: pwsh
+        run: |
+          ./tests/test_2045_launch_window.ps1
+
       - name: Remove public PDF artifacts
         shell: bash
         run: |

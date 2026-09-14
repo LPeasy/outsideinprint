@@ -26,7 +26,7 @@
   "inLanguage" ($page.Site.Language.Locale | default "en-US")
 -}}
 
-{{- if $meta.route.is_article_like -}}
+{{- if or $meta.route.is_article_like (eq $meta.route.name "shop-product") -}}
   {{- $node = merge $node (dict "mainEntity" (dict
     "@id" (printf "%s#primaryentity" $meta.canonical)
   )) -}}

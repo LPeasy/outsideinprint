@@ -33,6 +33,7 @@ $responsiveImageOutputContractPath = Join-Path $repoRoot "tests/test_responsive_
 $responsiveImageNodeContractPath = Join-Path $repoRoot "tests/responsive_image_contract.test.mjs"
 $responsiveImageGuidePath = Join-Path $repoRoot "docs/responsive-image-pipeline.md"
 $bookstoreReadingSampleContractPath = Join-Path $repoRoot "tests/test_bookstore_reading_sample_contract.ps1"
+$bookstoreLaunchWindowContractPath = Join-Path $repoRoot "tests/test_2045_launch_window.ps1"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
   throw "AGENTS.md is required for repo-local publishing session guidance."
@@ -81,6 +82,7 @@ foreach ($requiredValidationPath in @(
   $responsiveImageNodeContractPath,
   $responsiveImageGuidePath,
   $bookstoreReadingSampleContractPath,
+  $bookstoreLaunchWindowContractPath,
   $seoMetadataAuditPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
@@ -403,6 +405,20 @@ foreach ($requiredBuildSnippet in @(
   if (-not $hugoBuildStep.Contains($requiredBuildSnippet, [System.StringComparison]::Ordinal)) {
     throw "Build Hugo must enforce cold/restored-cache timing through: $requiredBuildSnippet"
   }
+}
+
+$launchWindowStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $deployWorkflow `
+  -StepName "Test 2045 Launch Window"
+if ($launchWindowStep -notmatch '(?m)^\s*\.\/tests\/test_2045_launch_window\.ps1\s*$') {
+  throw "deploy.yml must run the controlled-clock 2045 launch-window contract after building."
+}
+$hugoBuildStepIndex = $buildJobBlock.IndexOf('- name: Build Hugo', [StringComparison]::Ordinal)
+$launchWindowStepIndex = $buildJobBlock.IndexOf('- name: Test 2045 Launch Window', [StringComparison]::Ordinal)
+$removePdfStepIndex = $buildJobBlock.IndexOf('- name: Remove public PDF artifacts', [StringComparison]::Ordinal)
+if ($hugoBuildStepIndex -lt 0 -or $launchWindowStepIndex -le $hugoBuildStepIndex -or $removePdfStepIndex -le $launchWindowStepIndex) {
+  throw "The controlled-clock 2045 launch-window contract must run after Hugo and before public artifact cleanup."
 }
 
 foreach ($budgetContract in @(

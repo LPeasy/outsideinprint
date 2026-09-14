@@ -657,8 +657,20 @@ $catalogHtml = [string]$output['shop/index.html']
 $detailHtmlValues = @($sampleSpecs | ForEach-Object { [string]$output[$_.OutputPath] })
 $combinedDetails = $detailHtmlValues -join [Environment]::NewLine
 
-if ($homeHtml -match '(?i)book_sample_open|#reading-sample|bookstore_(?:index|detail)_sample|bookstore-reading-sample') {
-  throw 'Reading-sample links or expanded excerpts leaked into production homepage output.'
+$homeLaunchStrips = @([regex]::Matches($homeHtml, '(?is)<section\b[^>]*\bdata-home-2045-launch(?:=|\s|>).*?</section>'))
+if ($homeLaunchStrips.Count -gt 1) {
+  throw 'The homepage rendered more than one 2045 launch strip.'
+}
+$homeWithoutLaunchStrip = $homeHtml
+if ($homeLaunchStrips.Count -eq 1) {
+  $launchStrip = $homeLaunchStrips[0]
+  if ($launchStrip.Value -notmatch '(?is)<a\b(?=[^>]*\bhref="?/shop/2045/sample/"?)(?=[^>]*\bdata-analytics-event="?book_sample_open"?)(?=[^>]*\bdata-analytics-source-slot="?homepage_2045_launch_sample"?)[^>]*>\s*Read a complete story\s*</a>') {
+    throw 'The temporary 2045 launch strip must contain its one approved complete-story link.'
+  }
+  $homeWithoutLaunchStrip = $homeHtml.Remove($launchStrip.Index, $launchStrip.Length)
+}
+if ($homeWithoutLaunchStrip -match '(?i)book_sample_open|#reading-sample|bookstore_(?:index|detail)_sample|bookstore-reading-sample') {
+  throw 'Reading-sample links or expanded excerpts leaked into the production homepage outside the temporary 2045 launch strip.'
 }
 
 $standalone2045 = Test-Path -LiteralPath (Join-Path $SiteDir 'shop/2045/sample/index.html') -PathType Leaf

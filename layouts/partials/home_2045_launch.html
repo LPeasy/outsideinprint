@@ -1,0 +1,60 @@
+{{- $promotion := hugo.Data.bookstore.launch_promotion | default dict -}}
+{{- $bookKey := printf "%v" ($promotion.book_key | default "") -}}
+{{- $startsAt := $promotion.starts_at | default "" -}}
+{{- $endsAt := $promotion.ends_at | default "" -}}
+{{- if and $bookKey $startsAt $endsAt -}}
+  {{- $startsAtTime := time.AsTime $startsAt -}}
+  {{- $endsAtTime := time.AsTime $endsAt -}}
+  {{- if and (le $startsAtTime.Unix now.Unix) (gt $endsAtTime.Unix now.Unix) -}}
+    {{- with site.GetPage (printf "/shop/%s" $bookKey) -}}
+      {{- $book := . -}}
+      {{- if not $book.Draft -}}
+        {{- $product := partial "shop/product-data.html" (dict "key" $bookKey "page" $book) -}}
+        {{- $epubOffers := where (index $product "direct_offers" | default (slice)) "format" "EPUB" -}}
+        {{- $liveEpubOffers := where $epubOffers "availability_status" "live" -}}
+        {{- $samplePage := false -}}
+        {{- with $book.Params.sample_page -}}{{ $samplePage = site.GetPage . }}{{- end -}}
+        {{- if gt (len $liveEpubOffers) 0 -}}
+          <section class="home-2045-launch" aria-labelledby="home-2045-launch-title" data-home-2045-launch>
+            <h2 id="home-2045-launch-title" class="home-2045-launch__title">
+              <a
+                href="{{ $book.RelPermalink }}"
+                data-analytics-event="internal_promo_click"
+                data-analytics-source-slot="homepage_2045_launch_headline"
+                data-analytics-slug="2045"
+                data-analytics-title="2045"
+                data-analytics-section="Bookstore"
+                data-analytics-path="{{ $book.RelPermalink }}"
+              >New: 2045 — Ten Dark Fables from the Machine Age</a>
+            </h2>
+            <div class="home-2045-launch__actions">
+              {{- with $samplePage -}}
+                <a
+                  class="home-2045-launch__action"
+                  href="{{ .RelPermalink }}"
+                  data-analytics-event="book_sample_open"
+                  data-analytics-source-slot="homepage_2045_launch_sample"
+                  data-analytics-slug="2045"
+                  data-analytics-title="2045"
+                  data-analytics-section="Bookstore"
+                  data-analytics-path="{{ .RelPermalink }}"
+                >Read a complete story</a>
+              {{- end -}}
+              <a
+                class="home-2045-launch__action home-2045-launch__action--buy"
+                href="{{ $book.RelPermalink }}#bookstore-purchase"
+                data-analytics-event="internal_promo_click"
+                data-analytics-source-slot="homepage_2045_launch_buy"
+                data-analytics-slug="2045"
+                data-analytics-title="2045"
+                data-analytics-section="Bookstore"
+                data-analytics-path="{{ $book.RelPermalink }}"
+              >Buy EPUB — $19.99</a>
+            </div>
+            <p class="home-2045-launch__terms">DRM-free EPUB · U.S. customers only.</p>
+          </section>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
