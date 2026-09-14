@@ -1,4 +1,4 @@
-current: the-morning-after
+current: what-i-had
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -996,3 +996,12 @@ cartoons:
     alt: "A painterly café scene shows two men touching coffee mugs over breakfast in warm window light, with a young couple talking at a nearby table."
     width: 1280
     height: 720
+  - slug: what-i-had
+    title: "What I Had"
+    date: "2026-09-14"
+    publishDate: "2026-09-14T17:19:38.0000000+00:00"
+    image: "essays/dialogues/what-i-had/hero"
+    essay: "/syd-and-oliver/what-i-had/"
+    alt: "A painterly dusk scene shows two men eating pizza at a picnic table beside a gas station, with rolling papers on the table, a man at a pump, and a dog resting nearby."
+    width: 1672
+    height: 941
