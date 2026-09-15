@@ -465,25 +465,106 @@ test("invalid share origins remain hidden", async () => {
   }
 });
 
-test("share fallback fits a 390 by 844 viewport with 44-pixel targets", async () => {
+test("closed Share aligns with each byline at mobile and desktop, and mobile fallback stays usable", async () => {
+  const variants = [
+    {
+      route: "/essays/jack-stratton-and-the-vulfpeck-model/",
+      byline: ".piece-byline"
+    },
+    {
+      route: "/shop/2045/sample/",
+      byline: ".bookstore-reading-sample__meta"
+    },
+    {
+      route: "/almanack/2026-09-12/",
+      byline: ".almanack-masthead__meta"
+    }
+  ];
+
+  for (const viewport of [{ width: 390, height: 844 }, { width: 1280, height: 900 }]) {
+    const { context, page } = await createPage({
+      viewport,
+      initScript: () => {
+        Object.defineProperty(navigator, "share", { configurable: true, value: undefined });
+      }
+    });
+
+    try {
+      for (const variant of variants) {
+        await page.goto(`${siteOrigin}${variant.route}`, { waitUntil: "load" });
+        const row = page.locator(".piece-byline-row");
+        const wrapper = row.locator("[data-piece-share]");
+        await wrapper.waitFor({ state: "visible" });
+
+        const geometry = await row.evaluate((node, bylineSelector) => {
+          const byline = node.querySelector(bylineSelector);
+          const share = node.querySelector("[data-share-trigger]");
+          const panel = node.querySelector("[data-share-panel]");
+          if (!byline || !share || !panel) {
+            return null;
+          }
+
+          const rowRect = node.getBoundingClientRect();
+          const bylineRect = byline.getBoundingClientRect();
+          const shareRect = share.getBoundingClientRect();
+          return {
+            bylineCenter: bylineRect.top + (bylineRect.height / 2),
+            bylineParentIsRow: byline.parentElement === node,
+            bylineRight: bylineRect.right,
+            clientWidth: document.documentElement.clientWidth,
+            expanded: share.getAttribute("aria-expanded"),
+            panelHidden: panel.hidden,
+            rowLeft: rowRect.left,
+            rowRight: rowRect.right,
+            scrollWidth: document.documentElement.scrollWidth,
+            shareCenter: shareRect.top + (shareRect.height / 2),
+            shareLeft: shareRect.left,
+            shareParentIsRow: share.closest("[data-piece-share]").parentElement === node,
+            viewportWidth: window.innerWidth
+          };
+        }, variant.byline);
+
+        assert.ok(geometry, `${variant.route} is missing its shared byline-row members.`);
+        assert.equal(geometry.viewportWidth, viewport.width);
+        assert.equal(geometry.bylineParentIsRow, true, variant.route);
+        assert.equal(geometry.shareParentIsRow, true, variant.route);
+        assert.equal(geometry.panelHidden, true, variant.route);
+        assert.equal(geometry.expanded, "false", variant.route);
+        assert.ok(Math.abs(geometry.bylineCenter - geometry.shareCenter) <= 2, JSON.stringify({ variant, viewport, geometry }));
+        assert.ok(geometry.shareLeft >= geometry.bylineRight - 1, JSON.stringify({ variant, viewport, geometry }));
+        assert.ok(geometry.rowLeft >= 0 && geometry.rowRight <= geometry.viewportWidth, JSON.stringify({ variant, viewport, geometry }));
+        assert.ok(geometry.scrollWidth <= geometry.clientWidth, JSON.stringify({ variant, viewport, geometry }));
+
+        if (variant.route === "/shop/2045/sample/") {
+          assert.doesNotMatch(await row.textContent(), /About \d+ min read/);
+          assert.equal(
+            await page.locator(".bookstore-reading-sample__header > .bookstore-reading-sample__meta", { hasText: /About \d+ min read/ }).count(),
+            1,
+            "Sample reading time must remain outside the author-and-Share row."
+          );
+        }
+      }
+    } finally {
+      await context.close();
+    }
+  }
+
   const { context, page } = await createPage({
     viewport: { width: 390, height: 844 },
     initScript: () => {
       Object.defineProperty(navigator, "share", { configurable: true, value: undefined });
-      Object.defineProperty(navigator, "clipboard", {
-        configurable: true,
-        value: { writeText: () => Promise.resolve() }
-      });
+      Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined });
     }
   });
 
   try {
     const wrapper = await loadEligible(page);
     await wrapper.locator("[data-share-trigger]").click();
-    await wrapper.locator("[data-share-panel]").waitFor({ state: "visible" });
+    const panel = wrapper.locator("[data-share-panel]");
+    await panel.waitFor({ state: "visible" });
 
-    const geometry = await wrapper.evaluate((node) => {
-      const panel = node.querySelector("[data-share-panel]").getBoundingClientRect();
+    const buttonGeometry = await wrapper.evaluate((node) => {
+      const panelRect = node.querySelector("[data-share-panel]").getBoundingClientRect();
       const buttons = Array.from(node.querySelectorAll("button:not([hidden])"), (button) => {
         const rect = button.getBoundingClientRect();
         return { height: rect.height, width: rect.width };
@@ -491,20 +572,44 @@ test("share fallback fits a 390 by 844 viewport with 44-pixel targets", async ()
       return {
         buttons,
         clientWidth: document.documentElement.clientWidth,
-        panelLeft: panel.left,
-        panelRight: panel.right,
+        panelLeft: panelRect.left,
+        panelRight: panelRect.right,
         scrollWidth: document.documentElement.scrollWidth,
         viewportWidth: window.innerWidth
       };
     });
 
-    assert.equal(geometry.viewportWidth, 390);
-    assert.ok(geometry.scrollWidth <= geometry.clientWidth, JSON.stringify(geometry));
-    assert.ok(geometry.panelLeft >= 0 && geometry.panelRight <= geometry.viewportWidth, JSON.stringify(geometry));
-    assert.ok(geometry.buttons.length >= 3);
-    for (const button of geometry.buttons) {
+    assert.equal(buttonGeometry.viewportWidth, 390);
+    assert.ok(buttonGeometry.scrollWidth <= buttonGeometry.clientWidth, JSON.stringify(buttonGeometry));
+    assert.ok(buttonGeometry.panelLeft >= 0 && buttonGeometry.panelRight <= buttonGeometry.viewportWidth, JSON.stringify(buttonGeometry));
+    assert.ok(buttonGeometry.buttons.length >= 3);
+    for (const button of buttonGeometry.buttons) {
       assert.ok(button.width >= 44 && button.height >= 44, JSON.stringify(button));
     }
+
+    await wrapper.locator("[data-share-copy]").click();
+    const manual = wrapper.locator("[data-share-manual]");
+    await manual.waitFor({ state: "visible" });
+    const manualGeometry = await wrapper.evaluate((node) => {
+      const panelRect = node.querySelector("[data-share-panel]").getBoundingClientRect();
+      const inputRect = node.querySelector("[data-share-input]").getBoundingClientRect();
+      return {
+        clientWidth: document.documentElement.clientWidth,
+        inputHeight: inputRect.height,
+        inputLeft: inputRect.left,
+        inputRight: inputRect.right,
+        panelLeft: panelRect.left,
+        panelRight: panelRect.right,
+        scrollWidth: document.documentElement.scrollWidth,
+        viewportWidth: window.innerWidth
+      };
+    });
+
+    assert.ok(manualGeometry.scrollWidth <= manualGeometry.clientWidth, JSON.stringify(manualGeometry));
+    assert.ok(manualGeometry.inputHeight >= 44, JSON.stringify(manualGeometry));
+    assert.ok(manualGeometry.inputLeft >= manualGeometry.panelLeft, JSON.stringify(manualGeometry));
+    assert.ok(manualGeometry.inputRight <= manualGeometry.panelRight, JSON.stringify(manualGeometry));
+    assert.ok(manualGeometry.inputLeft >= 0 && manualGeometry.inputRight <= manualGeometry.viewportWidth, JSON.stringify(manualGeometry));
   } finally {
     await context.close();
   }

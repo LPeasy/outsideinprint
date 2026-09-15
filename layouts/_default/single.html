@@ -93,13 +93,15 @@
       <div class="piece-header-composition">
         <div class="piece-title-block">
           <h1>{{ .Title }}</h1>
-          {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
+          <div class="piece-byline-row">
+            {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
+            {{ partial "article/share.html" . }}
+          </div>
           {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
           {{ if eq $articleVariant "modernbio" }}
             {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
             {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
           {{ end }}
-          {{ partial "article/share.html" . }}
         </div>
 
         {{ if $plateImage }}

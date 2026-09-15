@@ -6536,8 +6536,27 @@ body.cartoon-lightbox-open{
   min-width:0;
   margin:0;
 }
+.piece-byline-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.35rem .75rem;
+}
+.piece-title-block > .piece-byline-row{
+  margin:-.1rem 0 .9rem;
+}
+.piece-byline-row > .piece-byline,
+.piece-byline-row > .bookstore-reading-sample__meta,
+.piece-byline-row > .almanack-masthead__meta{
+  margin:0;
+}
+.bookstore-reading-sample__header .piece-byline-row{
+  margin-top:.42rem;
+}
 .piece-share{
-  margin-top:1rem;
+  min-width:0;
+  max-width:100%;
+  margin:0;
   font-family:var(--font-ui);
   font-size:.85rem;
   font-weight:400;
@@ -6619,11 +6638,9 @@ body.cartoon-lightbox-open{
 .piece-share__status:not(:empty){
   margin-top:.5rem;
 }
-.almanack-masthead .piece-share{
-  width:fit-content;
-  max-width:100%;
-  margin-right:auto;
-  margin-left:auto;
+.almanack-masthead .piece-byline-row{
+  justify-content:center;
+  margin-top:.78rem;
 }
 .piece-title-block h1{
   max-width:18ch;
