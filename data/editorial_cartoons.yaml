@@ -1,4 +1,4 @@
-current: what-i-had
+current: the-plunge
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -1003,5 +1003,14 @@ cartoons:
     image: "essays/dialogues/what-i-had/hero"
     essay: "/syd-and-oliver/what-i-had/"
     alt: "A painterly dusk scene shows two men eating pizza at a picnic table beside a gas station, with rolling papers on the table, a man at a pump, and a dog resting nearby."
+    width: 1672
+    height: 941
+  - slug: the-plunge
+    title: "The Plunge"
+    date: "2026-09-15"
+    publishDate: "2026-09-15T11:17:06-04:00"
+    image: "editorial/the-plunge"
+    essay: "/essays/we-dont-miss/"
+    alt: "A wet brown songbird bathes in rippling water beside stone steps as a pink-and-gold sunrise reflects across the surface."
     width: 1672
     height: 941
