@@ -103,8 +103,8 @@ test("responsive image manifest keeps the frozen baseline and processing default
         sourceStem === assetStem.slice(0, -4);
       assert.ok(sourceStem === assetStem || explicitJpegCollision);
     } else if (idParts[0] === "books") {
-      assert.deepEqual(sourceParts.slice(0, -1), ["images", "originals", "books", idParts[1]]);
-      assert.equal(sourceStem, "cover");
+      assert.deepEqual(sourceParts.slice(0, -1), ["images", "originals", ...idParts.slice(0, -1)]);
+      assert.equal(sourceStem, idParts.at(-1));
     } else {
       assert.deepEqual(sourceParts.slice(0, -1), ["images", "originals", "medium"]);
       assert.equal(sourceStem, idParts[1]);
