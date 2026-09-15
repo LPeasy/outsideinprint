@@ -160,7 +160,7 @@ test("gallery and library use the shared section-front top-zone shell while arch
   assert.match(libraryList, /section-front section-front--library/);
   assert.match(libraryList, /section-front__header/);
   assert.match(libraryList, /section-front__body/);
-  assert.match(libraryList, /Search the archive by title, type, collection, or version\./);
+  assert.match(libraryList, /Search published work by title, topic, tag, type, year, or collection\./);
   assert.doesNotMatch(libraryList, /partial "journey_links\.html"/);
 
   for (const selector of [
@@ -174,7 +174,7 @@ test("gallery and library use the shared section-front top-zone shell while arch
   }
 });
 
-test("archive shell owns the long-form list routes while /essays/ becomes a redirect alias", () => {
+test("archive shell owns /archive/ while section compatibility routes redirect", () => {
   for (const snippet of [
     'partial "archive/resolve-pages.html"',
     '"mode" "archive"',
@@ -212,12 +212,22 @@ test("archive shell owns the long-form list routes while /essays/ becomes a redi
   }
 
   for (const snippet of [
+    'Redirecting to Syd and Oliver Dialogues',
+    'noindex, follow',
+    '.Params.redirect_to',
+    '<link rel="canonical" href="{{ $target | absURL }}" />',
+    '.OutputFormats.Get "RSS"',
+    'window.location.replace("{{ $target | relURL }}");'
+  ]) {
+    assert.match(dialoguesList, new RegExp(escapeRegex(snippet)));
+  }
+
+  for (const retiredSnippet of [
     'partial "archive/resolve-pages.html"',
-    '"mode" "dialogue"',
     'partial "archive/render-list.html"',
     '"idPrefix" "dialogues"'
   ]) {
-    assert.match(dialoguesList, new RegExp(escapeRegex(snippet)));
+    assert.doesNotMatch(dialoguesList, new RegExp(escapeRegex(retiredSnippet)));
   }
 
   for (const snippet of [
@@ -454,8 +464,8 @@ test("layout ownership matrix tracks archive, Apps, and lifecycle-controlled Gam
     "`reading-path__actions`",
     "`reading-path__preview`",
     "`reading-path__archive-links`",
-    "| Archive shell | `/archive/`, `/syd-and-oliver/`",
-    "| Essays redirect alias | `/essays/`",
+    "| Archive shell | `/archive/`",
+    "| Section compatibility redirects | `/essays/`, `/syd-and-oliver/`",
     "## Removed Layout Hooks"
   ]) {
     assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));

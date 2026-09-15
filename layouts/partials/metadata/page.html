@@ -24,6 +24,7 @@
 ) -}}
 
 {{- $title := cond .IsHome site.Title .Title -}}
+{{- $canonical := .Permalink -}}
 {{- with $collection -}}
   {{- with .title -}}
     {{- $title = . -}}
@@ -37,6 +38,18 @@
     {{- $title = . -}}
   {{- end -}}
 {{- end -}}
+{{- if and .IsSection (eq .Section "archive") -}}
+  {{- $archivePages := partial "archive/resolve-pages.html" (dict "site" site "mode" "archive") -}}
+  {{- $archivePaginator := .Paginate $archivePages 50 -}}
+  {{- .Scratch.Set "oip_archive_page_number" $archivePaginator.PageNumber -}}
+  {{- if gt $archivePaginator.PageNumber 1 -}}
+    {{- $title = printf "Archive — Page %d" $archivePaginator.PageNumber -}}
+    {{- $canonical = $archivePaginator.URL | absURL -}}
+  {{- else -}}
+    {{- $title = "Archive" -}}
+    {{- $canonical = "archive/" | absURL -}}
+  {{- end -}}
+{{- end -}}
 
 {{- $fullTitle := $title -}}
 {{- if eq $route.name "shop-product" -}}
@@ -47,6 +60,11 @@
 
 {{- $description := partial "metadata_description.html" . -}}
 {{- $image := partial "metadata_image.html" . -}}
+{{- $imageDetails := .Scratch.Get "oip_metadata_image_details" | default dict -}}
+{{- $imageWidth := int ($imageDetails.width | default 0) -}}
+{{- $imageHeight := int ($imageDetails.height | default 0) -}}
+{{- $imageType := $imageDetails.type | default "" -}}
+{{- $dates := partial "metadata/dates.html" . -}}
 {{- $imageAlt := .Params.image_alt | default .Params.featured_image_alt | default .Params.portrait_alt | default $title -}}
 {{- $author := partial "authors/resolve.html" (dict
   "page" .
@@ -68,8 +86,12 @@
   "full_title" $fullTitle
   "description" $description
   "image" $image
+  "image_width" $imageWidth
+  "image_height" $imageHeight
+  "image_type" $imageType
+  "dates" $dates
   "image_alt" $imageAlt
-  "canonical" .Permalink
+  "canonical" $canonical
   "robots" $policy.robots
   "author" $author
   "author_name" $authorName

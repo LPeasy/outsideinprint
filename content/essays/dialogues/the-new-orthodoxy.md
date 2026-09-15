@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'Syd and Oliver use the Stanford Prison Experiment to ask how moral certainty, institutional power, and social orthodoxy can make cruelty feel righteous.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-new-orthodoxy.pdf'
@@ -218,4 +219,3 @@ Oliver waited.
 Syd walked toward the door.
 
 He nodded to the doorman, donned his cap, and shouldered his way into the cold, bitter night.
-

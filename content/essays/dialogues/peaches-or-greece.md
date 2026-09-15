@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'Over beers, Syd and Oliver compare travel, escape, and return as a joke about Athens turns into a question about why people leave home.'
 version: '1.2'
 edition: 'Third web edition'
 revision_history:

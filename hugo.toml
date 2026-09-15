@@ -6,6 +6,20 @@ timeZone = "America/New_York"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
+[mediaTypes."application/json"]
+suffixes = ["json"]
+
+[outputFormats.LibraryIndex]
+mediaType = "application/json"
+baseName = "index"
+isPlainText = true
+notAlternative = true
+
+[outputs]
+home = ["HTML", "RSS"]
+page = ["HTML"]
+section = ["HTML"]
+
 [permalinks]
 essays = "/essays/:slug/"
 syd-and-oliver = "/syd-and-oliver/:slug/"

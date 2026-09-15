@@ -31,6 +31,14 @@
   {{- with $entry.description -}}
     {{- $node = merge $node (dict "description" .) -}}
   {{- end -}}
+  {{- with $entry.knows_about -}}
+    {{- if gt (len .) 0 -}}
+      {{- $node = merge $node (dict "knowsAbout" .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if eq $entry.type "Person" -}}
+    {{- $node = merge $node (dict "affiliation" (dict "@id" (index $organization "@id"))) -}}
+  {{- end -}}
   {{- if and (eq $entry.type "Organization") $entry.parent_organization -}}
     {{- $node = merge $node (dict "parentOrganization" (dict "@id" (index $organization "@id"))) -}}
   {{- end -}}

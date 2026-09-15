@@ -84,6 +84,7 @@ products:
     author: "Robert V. Ussley"
     publisher: "Outside In Print"
     product_type: "Outside In Print EPUB"
+    release_date: "2026-08-21"
     deck: "An OIP digital book about timing, symbolism, political economy, citizenship, and the difference between a door and a house."
     price_display: "$9.99"
     price_label: "EPUB price"

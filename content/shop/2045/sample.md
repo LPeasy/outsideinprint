@@ -9,6 +9,8 @@ image_alt: "Black cover for 2045 with a small OIP Exclusive mark, an oversized i
 draft: false
 show_citation: false
 layout: "sample"
+sample_of_book_key: "2045"
+sample_work_type: "short-story"
 sample_source: "locked_2045_epub"
 sample_source_checked: "2026-09-07"
 sample_boundary: "Complete The Cracked Pot; stop before Memory Lane"

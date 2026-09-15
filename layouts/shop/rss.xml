@@ -1,0 +1,2 @@
+{{- $entries := partial "feeds/resolve-entries.html" (dict "site" site "mode" "shop") -}}
+{{- partial "feeds/render-rss.xml" (dict "page" . "entries" $entries) -}}

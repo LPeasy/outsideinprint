@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'In a smoke-filled bar, Syd and Oliver argue about objective truth, moral judgment, and whether trust can survive without shared reality.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/smoke-and-brass.pdf'

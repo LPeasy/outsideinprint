@@ -1,0 +1,90 @@
+{{- $libraryTypes := slice
+  (dict "key" "essay" "title" "Essays" "description" "Essays on economics, risk, culture, technology, and public life from Outside In Print.")
+  (dict "key" "affirmation" "title" "Affirmations" "description" "Source-free reflections from The Things We Say, each built around one affirmation.")
+  (dict "key" "dialogue" "title" "Dialogues" "description" "Dialogues and fiction from the recurring world of Syd and Oliver, where power, obligation, money, intimacy, and moral pressure are worked out in conversation.")
+  (dict "key" "working-paper" "title" "Working Papers" "description" "Working papers and developing pieces from Outside In Print.")
+-}}
+{{- $sourcePages := sort (where site.RegularPages "Section" "in" (slice "essays" "working-papers")) "Date" "desc" -}}
+{{- $groups := slice -}}
+{{- $entries := slice -}}
+{{- $availableYears := slice -}}
+{{- $availableCollectionSlugs := slice -}}
+
+{{- range $type := $libraryTypes -}}
+  {{- $typeKey := index $type "key" -}}
+  {{- $typeEntries := slice -}}
+  {{- range $sourcePages -}}
+    {{- $page := . -}}
+    {{- $resolvedType := partial "archive/longform-kind.html" $page -}}
+    {{- $policy := partial "metadata/policy.html" (dict "page" $page) -}}
+    {{- if and (eq $resolvedType $typeKey) $policy.indexable (not $page.Date.IsZero) -}}
+      {{- $matches := partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) -}}
+      {{- $collectionSlugs := slice -}}
+      {{- $collectionTitles := slice -}}
+      {{- $collectionModels := slice -}}
+      {{- range $matches -}}
+        {{- $collectionSlug := lower (printf "%v" .collection.slug) -}}
+        {{- $collectionTitle := printf "%v" .collection.title -}}
+        {{- $collectionSlugs = $collectionSlugs | append $collectionSlug -}}
+        {{- $collectionTitles = $collectionTitles | append $collectionTitle -}}
+        {{- with .page -}}
+          {{- $collectionModels = $collectionModels | append (dict "slug" $collectionSlug "title" $collectionTitle "url" .RelPermalink) -}}
+        {{- else -}}
+          {{- $collectionModels = $collectionModels | append (dict "slug" $collectionSlug "title" $collectionTitle "url" "") -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $seriesTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.series) -}}
+      {{- $tagTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.tags) -}}
+      {{- $topicTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.topics) -}}
+      {{- $summary := partial "discovery/page-summary.html" $page -}}
+      {{- $searchText := printf "%s %s %s %s %s %s %s %s %s %s %s" $page.Title (index $type "title") ($page.Params.section_label | default "") ($page.Params.version | default "") (delimit $collectionTitles " ") $summary ($page.Params.person_name | default "") (delimit $seriesTerms " ") ($page.Params.article_variant | default "") (delimit $tagTerms " ") (delimit $topicTerms " ") -}}
+      {{- $year := $page.Date.Format "2006" -}}
+      {{- $entry := dict
+        "page" $page
+        "id" $page.RelPermalink
+        "url" $page.RelPermalink
+        "type_key" $typeKey
+        "type_title" (index $type "title")
+        "year" $year
+        "date" ($page.Date.Format "2006-01-02")
+        "title" $page.Title
+        "title_lower" (lower $page.Title)
+        "section_label" ($page.Params.section_label | default "")
+        "version" (printf "%v" ($page.Params.version | default ""))
+        "reading_time" $page.ReadingTime
+        "collections" $collectionModels
+        "collection_slugs" $collectionSlugs
+        "collection_titles" $collectionTitles
+        "tags" $tagTerms
+        "topics" $topicTerms
+        "summary" $summary
+        "search_text" (lower (plainify $searchText))
+      -}}
+      {{- $entries = $entries | append $entry -}}
+      {{- $typeEntries = $typeEntries | append $entry -}}
+      {{- $availableYears = $availableYears | append $year -}}
+      {{- range $collectionSlugs -}}
+        {{- $availableCollectionSlugs = $availableCollectionSlugs | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt (len $typeEntries) 0 -}}
+    {{- $groups = $groups | append (merge $type (dict "count" (len $typeEntries) "entries" $typeEntries)) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $collectionOptions := slice -}}
+{{- $matchedCollectionSlugs := uniq $availableCollectionSlugs -}}
+{{- range (hugo.Data.collections.collections | default (slice)) -}}
+  {{- $slug := lower (printf "%v" .slug) -}}
+  {{- if and .public (in $matchedCollectionSlugs $slug) -}}
+    {{- $collectionOptions = $collectionOptions | append (dict "slug" $slug "title" .title) -}}
+  {{- end -}}
+{{- end -}}
+
+{{ return (dict
+  "groups" $groups
+  "entries" $entries
+  "years" (sort (uniq $availableYears))
+  "collections" $collectionOptions
+) }}

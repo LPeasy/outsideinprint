@@ -924,11 +924,23 @@ Institutional Behavior: PASS
   $taxonomyRoot = Join-Path $tempRoot "taxonomy-only-repo"
   $taxonomyScriptRoot = Join-Path $taxonomyRoot "scripts"
   $taxonomyEssayRoot = Join-Path $taxonomyRoot "content/essays"
+  $taxonomyDataRoot = Join-Path $taxonomyRoot "data"
   New-Item -Path $taxonomyScriptRoot -ItemType Directory -Force | Out-Null
   New-Item -Path $taxonomyEssayRoot -ItemType Directory -Force | Out-Null
+  New-Item -Path $taxonomyDataRoot -ItemType Directory -Force | Out-Null
   Copy-Item (Join-Path $repoRoot "scripts/audit_legacy_essays.ps1") $taxonomyScriptRoot
   Copy-Item (Join-Path $repoRoot "scripts/check_essay_guardrails.ps1") $taxonomyScriptRoot
   Copy-Item (Join-Path $repoRoot "scripts/check_legacy_import_preflight.ps1") $taxonomyScriptRoot
+
+  @'
+collections:
+  - slug: test-public
+    title: Test Public
+    public: true
+  - slug: test-private
+    title: Test Private
+    public: false
+'@ | Set-Content -Path (Join-Path $taxonomyDataRoot "collections.yaml") -Encoding UTF8
 
   $taxonomyEssayPath = Join-Path $taxonomyEssayRoot "legacy-taxonomy-only.md"
   @'
@@ -1175,6 +1187,10 @@ edition_relationship:
   cta_label: "Read the revised edition →"
 '@
   $discoveryMetadataSource = Get-Content -LiteralPath $taxonomyEssayPath -Raw
+  $discoveryMetadataSource = $discoveryMetadataSource.Replace(
+    'description: "A legacy essay fixture with old body residue."',
+    'description: "A revised search description that leaves the preserved essay body unchanged."'
+  )
   $discoveryMetadataSource = $discoveryMetadataSource -replace '(?m)^featured: false\r?$', ($discoveryMetadataBlock + "`r`nfeatured: false")
   Set-Content -LiteralPath $taxonomyEssayPath -Value $discoveryMetadataSource -Encoding UTF8
 
@@ -1184,7 +1200,7 @@ edition_relationship:
 
   $discoveryMetadataOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $imageRecoveryWithProseHead -HeadRef $discoveryMetadataHead -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit 2>&1 | Out-String
   $discoveryMetadataExit = $LASTEXITCODE
-  Assert-True ($discoveryMetadataExit -eq 0) "Expected title/indexation/edition relationship metadata-only diffs to skip legacy cleanup and philosophy audit gates."
+  Assert-True ($discoveryMetadataExit -eq 0) "Expected title/description/indexation/edition relationship metadata-only diffs to skip legacy cleanup and philosophy audit gates."
   Assert-True ($discoveryMetadataOutput.Contains("allowlisted front matter-only change")) "Expected discovery metadata-only guardrail output to report the explicit skip."
   Assert-True (-not $discoveryMetadataOutput.Contains("missing_editorial_philosophy_audit")) "Expected discovery metadata-only output not to require philosophy audit evidence."
   Assert-True (-not $discoveryMetadataOutput.Contains("Legacy import preflight summary")) "Expected discovery metadata-only output not to scan legacy body residue."
@@ -1205,6 +1221,123 @@ edition_relationship:
   Assert-True ($discoveryBodyEditExit -ne 0) "Expected body edits retaining discovery metadata to remain under the full guardrail gate."
   Assert-True (-not $discoveryBodyEditOutput.Contains("allowlisted front matter-only change")) "Expected a body edit to prevent the allowlisted front matter-only skip."
   Assert-True ($discoveryBodyEditOutput.Contains("missing_editorial_philosophy_audit")) "Expected a body edit retaining discovery metadata to require Editorial Philosophy Audit evidence."
+
+  $newDraftBase = $discoveryBodyEditHead
+  $newDraftPath = Join-Path $taxonomyEssayRoot "new-draft.md"
+  @'
+---
+title: "New Draft"
+date: 2026-09-15
+draft: true
+slug: "new-draft"
+section_label: "Essay"
+description: "A draft discovery fixture."
+---
+
+## Draft
+
+This draft is not yet a published discovery target.
+'@ | Set-Content -Path $newDraftPath -Encoding UTF8
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add draft discovery fixture" | Out-Null
+  $newDraftHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+  $newDraftOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $newDraftBase -HeadRef $newDraftHead 2>&1 | Out-String
+  Assert-True ($LASTEXITCODE -eq 0) "Expected a newly added draft to remain outside the discovery route requirement."
+  Assert-True (-not $newDraftOutput.Contains("missing_discovery_route")) "Expected a draft not to report missing_discovery_route."
+
+  $publicCollectionPath = Join-Path $taxonomyEssayRoot "new-public-collection.md"
+  @'
+---
+title: "New Public Collection Essay"
+date: 2026-09-15
+draft: false
+slug: "new-public-collection"
+section_label: "Essay"
+description: "A published discovery fixture in a public collection."
+collections: ["test-public"]
+---
+
+## Public Route
+
+This published piece has a public collection route.
+'@ | Set-Content -Path $publicCollectionPath -Encoding UTF8
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add public collection discovery fixture" | Out-Null
+  $publicCollectionHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+  $publicCollectionOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $newDraftHead -HeadRef $publicCollectionHead 2>&1 | Out-String
+  Assert-True ($LASTEXITCODE -eq 0) "Expected a new published piece assigned to a public collection to pass the discovery guard."
+  Assert-True (-not $publicCollectionOutput.Contains("missing_discovery_route")) "Expected a public collection assignment to satisfy discovery."
+
+  $privateCollectionPath = Join-Path $taxonomyEssayRoot "new-private-collection.md"
+  @'
+---
+title: "New Private Collection Essay"
+date: 2026-09-15
+draft: false
+slug: "new-private-collection"
+section_label: "Essay"
+description: "A published discovery fixture in a private collection only."
+collections:
+  - test-private
+---
+
+## Private Route
+
+This published piece lacks a public collection route.
+'@ | Set-Content -Path $privateCollectionPath -Encoding UTF8
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add private collection discovery fixture" | Out-Null
+  $privateCollectionHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+  $privateCollectionOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $publicCollectionHead -HeadRef $privateCollectionHead 2>&1 | Out-String
+  Assert-True ($LASTEXITCODE -eq 1) "Expected a new published piece assigned only to a private collection to fail discovery."
+  Assert-True ($privateCollectionOutput.Contains("missing_discovery_route")) "Expected a private-only collection assignment to report missing_discovery_route."
+
+  $exemptPath = Join-Path $taxonomyEssayRoot "new-discovery-exempt.md"
+  @'
+---
+title: "New Discovery Exempt Essay"
+date: 2026-09-15
+draft: false
+slug: "new-discovery-exempt"
+section_label: "Essay"
+description: "A published discovery fixture with a documented exception."
+discovery_exempt_reason: "Temporary standalone publication with a scheduled collection review."
+---
+
+## Documented Exception
+
+This published piece records why it has no public collection yet.
+'@ | Set-Content -Path $exemptPath -Encoding UTF8
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add exempt discovery fixture" | Out-Null
+  $exemptHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+  $exemptOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $privateCollectionHead -HeadRef $exemptHead 2>&1 | Out-String
+  Assert-True ($LASTEXITCODE -eq 0) "Expected a nonempty discovery_exempt_reason to satisfy the new-content discovery guard."
+  Assert-True (-not $exemptOutput.Contains("missing_discovery_route")) "Expected a documented discovery exemption not to report missing_discovery_route."
+
+  $dialogueRoot = Join-Path $taxonomyEssayRoot "dialogues"
+  New-Item -Path $dialogueRoot -ItemType Directory -Force | Out-Null
+  $dialoguePath = Join-Path $dialogueRoot "new-dialogue.md"
+  @'
+---
+title: "New Dialogue"
+date: 2026-09-15
+draft: false
+slug: "new-dialogue"
+section_label: "Dialogue"
+library_type: "dialogue"
+description: "A dialogue fixture without a public collection."
+---
+
+Syd and Oliver test the discovery route requirement.
+'@ | Set-Content -Path $dialoguePath -Encoding UTF8
+  & git -C $taxonomyRoot add . | Out-Null
+  & git -C $taxonomyRoot commit -m "add dialogue discovery fixture" | Out-Null
+  $dialogueHead = (& git -C $taxonomyRoot rev-parse HEAD).Trim()
+  $dialogueOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $taxonomyGuardrailScript -Root $taxonomyRoot -BaseRef $exemptHead -HeadRef $dialogueHead -RequireEditorialPhilosophyAudit 2>&1 | Out-String
+  Assert-True ($LASTEXITCODE -eq 1) "Expected a new published dialogue without a public collection to fail discovery."
+  Assert-True ($dialogueOutput.Contains("missing_discovery_route")) "Expected the discovery guard to include dialogue longform."
+  Assert-True (-not $dialogueOutput.Contains("missing_editorial_philosophy_audit")) "Expected dialogue longform to remain excluded from the editorial philosophy audit."
 }
 finally {
   if (Test-Path $tempRoot) {

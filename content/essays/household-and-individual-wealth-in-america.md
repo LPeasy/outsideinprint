@@ -4,6 +4,7 @@ date: 2024-12-14
 draft: false
 slug: "household-and-individual-wealth-in-america"
 section_label: "Essay"
+collections: ["household-economy-work-and-cost"]
 subtitle: "Dec. 14th, 2024"
 description: "Household and Personal Income Trends in the United States. I. Introduction: Income Trends as a Reflection of Economic Transformation"
 version: "1.1"

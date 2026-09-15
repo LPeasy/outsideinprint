@@ -16,6 +16,13 @@
     <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Title }} RSS Feed" href="{{ .Permalink }}" />
       {{- end }}
     {{- end }}
+    {{- if eq $meta.route.name "collection" }}
+      {{- with $meta.collection }}
+        {{- with .feed_path }}
+    <link rel="alternate" type="application/rss+xml" title="{{ $meta.title }} RSS Feed" href="{{ . | absURL }}" />
+        {{- end }}
+      {{- end }}
+    {{- end }}
 
     <meta name="description" content="{{ $meta.description }}" />
     <meta name="color-scheme" content="dark light" />

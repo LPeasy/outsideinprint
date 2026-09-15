@@ -1,11 +1,12 @@
 ---
 title: "Explaining Mutually Exclusive and Collectively Exhaustive ~ Where Did My Paycheck Go?"
+metadata_title: "MECE Explained: Where Did My Paycheck Go?"
 date: 2025-12-01
 draft: false
 slug: "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go"
 section_label: "Essay"
 subtitle: "How your monthly budget can explain two core ideas from probability, risk, and economics ~"
-description: "Created by Author with GPT-4o. Then your rent payment drops, credit cards auto-draft, a couple of deliveries arrive at your doorstep, and by the time you che..."
+description: "A practical guide to mutually exclusive and collectively exhaustive thinking, using a household budget to show how categories prevent overlap and omission."
 version: "1.1"
 edition: "Second web edition"
 revision_history:
@@ -342,4 +343,3 @@ just textbook phrases ~ they're habits of mind:
 And the next time you pull up your bank app and wonder where your
 paycheck went, you'll have more than just a shrug. You'll have a clearly
 carved pie and a better shot at being honest with yourself.
-

@@ -6,8 +6,17 @@
 {{- $result := false -}}
 
 {{- if $meta.route.is_article_like -}}
-  {{- $workType := cond (eq $meta.route.section "syd-and-oliver") "CreativeWork" "Article" -}}
+  {{- $workType := "Article" -}}
+  {{- if eq $meta.route.name "dialogue" -}}
+    {{- $workType = "ShortStory" -}}
+  {{- else if eq $meta.route.name "shop-sample" -}}
+    {{- $sampleWorkType := lower (strings.TrimSpace (printf "%v" ($page.Params.sample_work_type | default ""))) -}}
+    {{- if eq $sampleWorkType "short-story" -}}
+      {{- $workType = "ShortStory" -}}
+    {{- end -}}
+  {{- end -}}
   {{- $topicNames := slice -}}
+  {{- $topicKeys := slice -}}
   {{- $node := dict
     "@id" (printf "%s#primaryentity" $meta.canonical)
     "@type" $workType
@@ -22,23 +31,49 @@
 
   {{- if eq $workType "Article" -}}
     {{- with $meta.route.section_label -}}
-      {{- $node = merge $node (dict "articleSection" .) -}}
-      {{- $topicNames = $topicNames | append . -}}
+      {{- $sectionName := strings.TrimSpace (printf "%v" .) -}}
+      {{- $sectionKey := lower $sectionName -}}
+      {{- $node = merge $node (dict "articleSection" $sectionName) -}}
+      {{- if and $sectionKey (not (in $topicKeys $sectionKey)) -}}
+        {{- $topicNames = $topicNames | append $sectionName -}}
+        {{- $topicKeys = $topicKeys | append $sectionKey -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if eq $meta.route.name "dialogue" -}}
+    {{- with site.GetPage "/collections/syd-and-oliver-dialogues" -}}
+      {{- $node = merge $node (dict
+        "genre" "Literary dialogue"
+        "isPartOf" (dict "@id" (printf "%s#series" .Permalink))
+      ) -}}
+    {{- else -}}
+      {{- errorf "Dialogue schema requires the Syd and Oliver collection page" -}}
+    {{- end -}}
+  {{- else if eq $meta.route.name "shop-sample" -}}
+    {{- $productPage := partial "schema/resolve-product-page.html" (dict "key" $page.Params.sample_of_book_key) -}}
+    {{- with $productPage -}}
+      {{- $node = merge $node (dict
+        "isPartOf" (dict "@id" (printf "%s#primaryentity" .Permalink))
+      ) -}}
     {{- end -}}
   {{- end -}}
 
   {{- with $page.Params.section_label -}}
-    {{- if not (in $topicNames .) -}}
-      {{- $topicNames = $topicNames | append . -}}
+    {{- $sectionName := strings.TrimSpace (printf "%v" .) -}}
+    {{- $sectionKey := lower $sectionName -}}
+    {{- if and $sectionKey (not (in $topicKeys $sectionKey)) -}}
+      {{- $topicNames = $topicNames | append $sectionName -}}
+      {{- $topicKeys = $topicKeys | append $sectionKey -}}
     {{- end -}}
   {{- end -}}
 
-  {{- with $page.Date -}}
-    {{- $node = merge $node (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- with $meta.dates.published_iso -}}
+    {{- $node = merge $node (dict "datePublished" .) -}}
   {{- end -}}
 
-  {{- with $page.Lastmod -}}
-    {{- $node = merge $node (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- with $meta.dates.modified_iso -}}
+    {{- $node = merge $node (dict "dateModified" .) -}}
   {{- end -}}
 
   {{- with $page.Params.version -}}
@@ -55,8 +90,22 @@
 
   {{- $collectionMatches := partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) -}}
   {{- range $collectionMatches -}}
-    {{- if not (in $topicNames .collection.title) -}}
-      {{- $topicNames = $topicNames | append .collection.title -}}
+    {{- $collectionName := strings.TrimSpace (printf "%v" .collection.title) -}}
+    {{- $collectionKey := lower $collectionName -}}
+    {{- if and $collectionKey (not (in $topicKeys $collectionKey)) -}}
+      {{- $topicNames = $topicNames | append $collectionName -}}
+      {{- $topicKeys = $topicKeys | append $collectionKey -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $tagTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.tags) -}}
+  {{- $subjectTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.topics) -}}
+  {{- range (append $tagTerms $subjectTerms) -}}
+    {{- $topicName := strings.TrimSpace (printf "%v" .) -}}
+    {{- $topicKey := lower $topicName -}}
+    {{- if and $topicKey (not (in $topicKeys $topicKey)) -}}
+      {{- $topicNames = $topicNames | append $topicName -}}
+      {{- $topicKeys = $topicKeys | append $topicKey -}}
     {{- end -}}
   {{- end -}}
 
@@ -68,8 +117,10 @@
     {{- $node = merge $node (dict
       "about" $aboutTopics
       "keywords" (delimit $topicNames ", ")
-      "genre" (index $topicNames 0)
     ) -}}
+    {{- if not (isset $node "genre") -}}
+      {{- $node = merge $node (dict "genre" (index $topicNames 0)) -}}
+    {{- end -}}
   {{- end -}}
 
   {{- $authorRefs := $author.refs | default (slice) -}}

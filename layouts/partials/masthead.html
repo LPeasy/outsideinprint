@@ -5,7 +5,8 @@
 {{ $showApps := and $appsPage (not $appsPage.Draft) }}
 {{ $gamesPage := site.GetPage "/games" }}
 {{ $showGames := and $gamesPage (or (not $gamesPage.Draft) hugo.IsServer) }}
-{{ $isArchivePage := eq $currentPath "/archive/" }}
+{{ $archivePageNumber := int (.Scratch.Get "oip_archive_page_number" | default 1) }}
+{{ $isArchivePage := and (eq $currentPath "/archive/") (eq $archivePageNumber 1) }}
 {{ $inArchiveSection := or $isArchivePage (eq .Section "archive") (eq .Section "essays") (eq .Section "syd-and-oliver") }}
 {{ $isCollectionsPage := eq $currentPath "/collections/" }}
 {{ $inCollectionsSection := or $isCollectionsPage (eq .Section "collections") }}

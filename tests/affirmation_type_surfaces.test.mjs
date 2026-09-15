@@ -32,6 +32,7 @@ test("affirmations require the exact The Things We Say content contract", () => 
 test("affirmations are visible in the archive, library, and homepage", () => {
   const resolvePages = read("layouts/partials/archive/resolve-pages.html");
   const library = read("layouts/library/list.html");
+  const libraryResolver = read("layouts/partials/library/resolve-entries.html");
   const homeSelected = read("layouts/partials/home_selected.html");
   const homeCopy = read("layouts/partials/home_front_page_copy.html");
 
@@ -39,8 +40,9 @@ test("affirmations are visible in the archive, library, and homepage", () => {
   assert.match(resolvePages, /eq \$mode "affirmation"/);
   assert.match(resolvePages, /eq \$kind "affirmation"/);
 
-  assert.match(library, /"key" "affirmation" "title" "Affirmations"/);
-  assert.match(library, /Source-free reflections from The Things We Say, each built around one affirmation/);
+  assert.match(library, /partial "library\/resolve-entries\.html"/);
+  assert.match(libraryResolver, /"key" "affirmation" "title" "Affirmations"/);
+  assert.match(libraryResolver, /Source-free reflections from The Things We Say, each built around one affirmation/);
 
   assert.match(homeSelected, /slice "essay" "affirmation" "dialogue"/);
   assert.match(homeCopy, /eq \$kind "affirmation"/);

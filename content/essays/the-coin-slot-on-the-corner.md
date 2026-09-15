@@ -6,6 +6,7 @@ date: 2026-06-27
 draft: false
 slug: "the-coin-slot-on-the-corner"
 section_label: "Essay"
+collections: ["civic-institutions-and-public-power"]
 version: "1.0"
 edition: "First web edition"
 featured: false

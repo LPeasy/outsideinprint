@@ -13,5 +13,8 @@ import "./paper_route_contract.test.mjs";
 import "./paper_route_rules.test.mjs";
 import "./responsive_image_contract.test.mjs";
 import "./rcp85_audit_appendix_contract.test.mjs";
+import "./release_a_metadata_contract.test.mjs";
+import "./release_b_discovery_contract.test.mjs";
+import "./seo_route_schema_contract.test.mjs";
 import "./site_chrome_contract.test.mjs";
 import "./web_publishing_direction.test.mjs";

@@ -135,6 +135,9 @@ collections:
     weight: 20
     start_here: without-a-word
     description: A conversational archive of pieces on truth, power, money, obligation, and meaning.
+    legacy_path: /syd-and-oliver/
+    feed_path: /syd-and-oliver/index.xml
+    schema_type: CreativeWorkSeries
     room_theme: syd-and-oliver-smoky-lounge
     metadata:
       - label: Format
@@ -403,7 +406,7 @@ collections:
     explicit_only: true
     featured: false
     weight: 90
-    start_here: ""
+    start_here: the-meter-at-the-curb
     description: Essays on courts, federalism, public institutions, and the exercise of public power.
     metadata:
       - label: Format
@@ -419,4 +422,26 @@ collections:
       tags:
         - governance
         - institutions
+      sections: []
+
+  - slug: household-economy-work-and-cost
+    title: Household Economy, Work, and Cost
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 95
+    start_here: standard-of-living-vs-quality-of-life-what-the-numbers-miss
+    description: Essays on income, work, prices, debt, compensation, and the economic pressures carried by American households.
+    metadata:
+      - label: Format
+        value: Essays
+      - label: Scope
+        value: Income, work, prices, debt, and household security
+    fallback:
+      series: []
+      topics: []
+      tags: []
       sections: []

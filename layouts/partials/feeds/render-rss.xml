@@ -1,0 +1,35 @@
+{{- $page := .page -}}
+{{- $entries := .entries | default (slice) -}}
+{{- $channelTitle := $page.Title -}}
+{{- if not $page.IsHome -}}
+  {{- $channelTitle = printf "%s | %s" $page.Title site.Title -}}
+{{- end -}}
+{{- $channelDescription := partial "metadata_description.html" $page -}}
+{{- $channelURL := .channelURL | default $page.Permalink -}}
+{{- $selfURL := "" -}}
+{{- with $page.OutputFormats.Get "RSS" -}}
+  {{- $selfURL = .Permalink -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML -}}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ $channelTitle | htmlUnescape | transform.XMLEscape | safeHTML }}</title>
+    <link>{{ $channelURL | transform.XMLEscape | safeHTML }}</link>
+    <description>{{ $channelDescription | htmlUnescape | transform.XMLEscape | safeHTML }}</description>
+    <language>{{ site.Language.Locale | default "en-US" | transform.XMLEscape | safeHTML }}</language>
+    <generator>Hugo</generator>
+    <atom:link href="{{ $selfURL }}" rel="self" type="application/rss+xml" />
+    {{- with index $entries 0 }}
+    <lastBuildDate>{{ .date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastBuildDate>
+    {{- end }}
+    {{- range $entries }}
+    <item>
+      <title>{{ .title | htmlUnescape | transform.XMLEscape | safeHTML }}</title>
+      <link>{{ .permalink | transform.XMLEscape | safeHTML }}</link>
+      <guid isPermaLink="true">{{ .permalink | transform.XMLEscape | safeHTML }}</guid>
+      <pubDate>{{ .date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+      <description>{{ .description | htmlUnescape | transform.XMLEscape | safeHTML }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

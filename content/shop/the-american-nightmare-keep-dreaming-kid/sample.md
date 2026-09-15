@@ -1,6 +1,8 @@
 ---
 title: "Reading sample"
+metadata_title: "The American Nightmare — Reading Sample"
 draft: false
+sample_of_book_key: "american_nightmare"
 sample_source: "final_epub"
 sample_source_id: "B0H37W2JK8"
 sample_source_checked: "2026-09-02"

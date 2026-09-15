@@ -1,0 +1,18 @@
+{{- $key := lower (strings.TrimSpace (printf "%v" (.key | default ""))) -}}
+{{- $productPage := false -}}
+
+{{- if $key -}}
+  {{- with site.GetPage "/shop" -}}
+    {{- range .Pages -}}
+      {{- if eq (lower (strings.TrimSpace (printf "%v" (.Params.book_key | default "")))) $key -}}
+        {{- $productPage = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and $key (not $productPage) -}}
+  {{- errorf "Schema could not resolve bookstore page for sample_of_book_key %q" $key -}}
+{{- end -}}
+
+{{ return $productPage }}

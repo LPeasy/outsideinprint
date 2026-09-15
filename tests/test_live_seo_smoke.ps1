@@ -49,8 +49,9 @@ function Get-Page {
 $homePage = Get-Page '/'
 Assert-Canonical -Content $homePage -ExpectedUrl 'https://outsideinprint.org/' -Message 'Expected the homepage canonical URL to point to outsideinprint.org.'
 Assert-Robots -Content $homePage -ExpectedRobots 'index, follow, max-image-preview:large' -Message 'Expected the homepage robots policy to allow indexation with large image previews.'
-Assert-Match -Content $homePage -Pattern 'SearchAction' -Message 'Expected the homepage WebSite schema to expose SearchAction.'
-Assert-Match -Content $homePage -Pattern '/library/\?q=\{search_term_string\}' -Message 'Expected SearchAction to target the library query route.'
+if ($homePage -match 'SearchAction|search_term_string') {
+  throw 'Expected the homepage WebSite schema to omit retired sitelinks SearchAction markup.'
+}
 Assert-Match -Content $homePage -Pattern '<meta\s+property=(?:"og:image"|og:image)\s+content=' -Message 'Expected the homepage to emit og:image.'
 Assert-Match -Content $homePage -Pattern '<meta\s+name=(?:"twitter:image"|twitter:image)\s+content=' -Message 'Expected the homepage to emit twitter:image.'
 Assert-Match -Content $homePage -Pattern '<link\b[^>]*rel=(?:"alternate"|alternate)[^>]*type=(?:"application/rss\+xml"|application/rss\+xml)[^>]*href=(?:"https://outsideinprint\.org/index\.xml"|https://outsideinprint\.org/index\.xml)' -Message 'Expected the homepage to expose RSS autodiscovery.'

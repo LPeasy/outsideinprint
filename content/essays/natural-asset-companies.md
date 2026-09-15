@@ -1,11 +1,12 @@
 ---
 title: "Natural Asset Companies"
+metadata_title: "What Is a Natural Asset Company? A Critical Guide"
 date: 2024-12-12
 draft: false
 slug: "natural-asset-companies"
 section_label: "Essay"
 subtitle: "A Critique"
-description: "I. Introduction: A Paradoxical Model of Conservation. Natural Asset Companies (NACs) represent an ambitious innovation in conservation finance, aiming to pro..."
+description: "A critical guide to Natural Asset Companies: how the model values ecosystems, who controls the assets, and the risks for conservation and public accountability."
 version: "1.1"
 edition: "Second web edition"
 revision_history:

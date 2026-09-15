@@ -4,6 +4,7 @@ date: 2024-12-25
 draft: false
 slug: "generation-inflation"
 section_label: "Essay"
+collections: ["household-economy-work-and-cost"]
 subtitle: "An Exploration"
 featured_image: "/images/medium/generation-inflation/04bd9395c74d1ab1388648acde9ead9cf1bd9a7b1573c15a8d943dacf6fe2784.jpeg"
 featured_image_alt: "Generation Inflation"

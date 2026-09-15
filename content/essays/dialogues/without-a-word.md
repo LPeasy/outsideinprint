@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'Listening to half-spoken conversations around a bar, Syd and Oliver observe how silence, implication, and evasive language erode trust.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/without-a-word.pdf'
@@ -114,5 +115,4 @@ They stepped onto the sidewalk together. At the corner, they paused.
 Oliver looked down the street. Syd looked the other way.
 
 They departed without a word.
-
 

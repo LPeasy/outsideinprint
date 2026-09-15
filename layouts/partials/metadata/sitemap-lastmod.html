@@ -1,0 +1,52 @@
+{{- $page := . -}}
+{{- $dates := partial "metadata/dates.html" $page -}}
+{{- $latestISO := $dates.sitemap_lastmod_iso -}}
+{{- $latestUnix := -1 -}}
+{{- with $latestISO -}}
+  {{- $latestTime := time.AsTime . -}}
+  {{- $latestUnix = $latestTime.Unix -}}
+{{- end -}}
+
+{{- $route := partial "metadata/route.html" $page -}}
+{{- $candidates := slice -}}
+{{- if $page.IsHome -}}
+  {{- $candidates = site.RegularPages -}}
+{{- else if eq $route.name "collection" -}}
+  {{- $slug := "" -}}
+  {{- with $page.File -}}
+    {{- $slug = $page.Params.slug | default .BaseFileName -}}
+  {{- end -}}
+  {{- with partial "collections/lookup-definition.html" $slug -}}
+    {{- $candidates = partial "collections/resolve-items.html" (dict "collection" .) -}}
+  {{- end -}}
+{{- else if $page.IsSection -}}
+  {{- if eq $page.Section "archive" -}}
+    {{- $candidates = partial "archive/resolve-pages.html" (dict "site" site "mode" "archive") -}}
+  {{- else if eq $page.Section "library" -}}
+    {{- $candidates = where site.RegularPages "Section" "in" (slice "essays" "working-papers") -}}
+  {{- else if eq $page.Section "collections" -}}
+    {{- range partial "collections/get-public-entries.html" $page -}}
+      {{- range .items -}}
+        {{- $candidates = $candidates | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $candidates = $page.RegularPagesRecursive | default (slice) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $candidates -}}
+  {{- $candidatePolicy := partial "metadata/policy.html" (dict "page" .) -}}
+  {{- if $candidatePolicy.in_sitemap -}}
+    {{- $candidateDates := partial "metadata/dates.html" . -}}
+    {{- with $candidateDates.sitemap_lastmod_iso -}}
+      {{- $candidateTime := time.AsTime . -}}
+      {{- if gt $candidateTime.Unix $latestUnix -}}
+        {{- $latestUnix = $candidateTime.Unix -}}
+        {{- $latestISO = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ return $latestISO }}

@@ -4,10 +4,11 @@ date: 2025-08-19
 draft: false
 slug: "public-vs-private-pay-who-really-earns-more"
 section_label: "Essay"
+collections: ["household-economy-work-and-cost"]
 subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
 featured_image: "medium/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce"
 featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
-description: "The custodian at your local public school probably makes more per hour, with benefits than the guy who just cleaned your hotel room"
+description: "Public-sector compensation combines wages, benefits, pensions, and job security differently across occupations. This guide explains why simple averages mislead."
 version: "1.2"
 edition: "Third web edition"
 revision_history:

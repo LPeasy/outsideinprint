@@ -6,6 +6,12 @@
   <title>Redirecting to Bob's Almanack</title>
   <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="{{ "collections/bobs-almanack/" | absURL }}" />
+  {{- with site.Home.OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ site.Title }} RSS Feed" href="{{ .Permalink }}" />
+  {{- end }}
+  {{- with .OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="{{ .MediaType.Type }}" title="Bob's Almanack RSS Feed" href="{{ .Permalink }}" />
+  {{- end }}
   <meta http-equiv="refresh" content="0; url={{ "collections/bobs-almanack/" | relURL }}" />
   <script>
     window.location.replace("{{ "collections/bobs-almanack/" | relURL }}");

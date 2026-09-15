@@ -6,6 +6,20 @@ authors:
     description: Robert V. Ussley writes essays for Outside In Print on risk, institutions, technology, and the moral weather of public life.
     focus: Essays on risk, public institutions, technology, culture, and the habits of judgment required by modern life.
     bio: Robert V. Ussley writes reported essays and literary analysis for Outside In Print, following the pressure points where institutions, belief, technology, and civic life meet.
+    featured_work:
+      - /essays/what-is-risk-a-four-part-framework/
+      - /essays/the-world-is-back-at-the-poker-table/
+      - /essays/what-happened-at-camp-mystic/
+      - /essays/synthetic-reasoning/
+      - /essays/in-the-image-of-god/
+      - /essays/jack-stratton-and-the-vulfpeck-model/
+    latest_limit: 6
+    knows_about:
+      - Risk and uncertainty
+      - Public institutions
+      - Artificial intelligence and technology
+      - Water infrastructure
+      - Culture and moral philosophy
   editorial:
     type: Organization
     name: Outside In Print Editorial

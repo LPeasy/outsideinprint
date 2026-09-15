@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'Syd and Oliver examine promises, obligation, and why sincerity cannot sustain trust when truth changes with interest and mood.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-weight-of-promises.pdf'

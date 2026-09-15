@@ -1,0 +1,92 @@
+{{- $site := .site | default site -}}
+{{- $mode := .mode | default "root" -}}
+{{- $nowUnix := now.Unix -}}
+{{- $entries := slice -}}
+
+{{- if in (slice "root" "longform" "dialogue" "almanack") $mode -}}
+  {{- range $site.RegularPages -}}
+    {{- $page := . -}}
+    {{- $layout := lower (strings.TrimSpace (printf "%v" ($page.Params.layout | default ""))) -}}
+    {{- $isSample := or (eq $layout "sample") (strings.HasSuffix $page.RelPermalink "/sample/") -}}
+    {{- $isPublicDated := and (not $page.Draft) (not ($page.Params.noindex | default false)) (not ($page.Params.redirect_to | default false)) (not $page.Date.IsZero) (le $page.Date.Unix $nowUnix) -}}
+    {{- $kind := partial "archive/longform-kind.html" $page -}}
+    {{- $isLongform := in (slice "essay" "dialogue" "affirmation") $kind -}}
+    {{- $include := false -}}
+
+    {{- if eq $mode "root" -}}
+      {{- $include = or $isLongform (eq $page.Section "almanack") -}}
+    {{- else if eq $mode "longform" -}}
+      {{- $include = $isLongform -}}
+    {{- else if eq $mode "dialogue" -}}
+      {{- $include = eq $kind "dialogue" -}}
+    {{- else if eq $mode "almanack" -}}
+      {{- $include = eq $page.Section "almanack" -}}
+    {{- end -}}
+
+    {{- if and $include $isPublicDated (not $isSample) -}}
+      {{- $title := strings.TrimSpace (printf "%v" ($page.Params.metadata_title | default $page.Title)) -}}
+      {{- $entries = $entries | append (dict
+        "date" $page.Date
+        "description" (partial "metadata_description.html" $page)
+        "kind" $kind
+        "permalink" $page.Permalink
+        "title" $title
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if in (slice "root" "shop") $mode -}}
+  {{- with $site.GetPage "/shop" -}}
+    {{- range .Pages -}}
+      {{- $page := . -}}
+      {{- $bookKey := strings.TrimSpace (printf "%v" ($page.Params.book_key | default "")) -}}
+      {{- $layout := lower (strings.TrimSpace (printf "%v" ($page.Params.layout | default ""))) -}}
+      {{- $isSample := or (eq $layout "sample") (strings.HasSuffix $page.RelPermalink "/sample/") -}}
+      {{- if and $bookKey (not $page.Draft) (not ($page.Params.noindex | default false)) (not ($page.Params.redirect_to | default false)) (not $isSample) -}}
+        {{- $product := partial "shop/product-data.html" (dict "key" $bookKey "page" $page) -}}
+        {{- $releaseValue := strings.TrimSpace (printf "%v" (index $product "release_date" | default "")) -}}
+        {{- $hasLiveNumericOffer := false -}}
+        {{- range (index $product "direct_offers" | default (slice)) -}}
+          {{- $status := lower (strings.TrimSpace (printf "%v" (index . "availability_status" | default ""))) -}}
+          {{- $priceCents := index . "price_cents" -}}
+          {{- $currency := upper (strings.TrimSpace (printf "%v" (index . "currency" | default ""))) -}}
+          {{- $numericType := findRE `^(?:u?int(?:8|16|32|64)?|float(?:32|64))$` (printf "%T" $priceCents) -}}
+          {{- if and (eq $status "live") (eq (len $numericType) 1) (gt (float $priceCents) 0) (eq (len (findRE `^[A-Z]{3}$` $currency)) 1) -}}
+            {{- $hasLiveNumericOffer = true -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- if and $releaseValue $hasLiveNumericOffer -}}
+          {{- $releaseDate := time.AsTime $releaseValue -}}
+          {{- if and (not $releaseDate.IsZero) (le $releaseDate.Unix $nowUnix) -}}
+            {{- $title := strings.TrimSpace (printf "%v" (index $product "metadata_title" | default "")) -}}
+            {{- if not $title -}}
+              {{- $title = strings.TrimSpace (printf "%v" ($page.Params.metadata_title | default "")) -}}
+            {{- end -}}
+            {{- if not $title -}}
+              {{- $title = strings.TrimSpace (printf "%v" (index $product "title" | default $page.Title)) -}}
+            {{- end -}}
+            {{- $description := partial "metadata_description.html" $page -}}
+            {{- if not $description -}}
+              {{- $description = strings.TrimSpace (printf "%v" (index $product "deck" | default "")) -}}
+            {{- end -}}
+            {{- $entries = $entries | append (dict
+              "date" $releaseDate
+              "description" $description
+              "kind" "product"
+              "permalink" $page.Permalink
+              "title" $title
+            ) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $entries = sort (sort $entries "permalink" "asc") "date" "desc" -}}
+{{- if in (slice "root" "longform") $mode -}}
+  {{- $entries = first 50 $entries -}}
+{{- end -}}
+{{ return $entries }}

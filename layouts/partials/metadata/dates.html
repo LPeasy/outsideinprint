@@ -1,0 +1,111 @@
+{{- $page := . -}}
+{{- $path := $page.RelPermalink | default "unknown page" -}}
+{{- with $page.File -}}
+  {{- $path = .Path -}}
+{{- end -}}
+
+{{- $published := $page.Date -}}
+{{- $modified := false -}}
+{{- $source := "" -}}
+
+{{- if and $published.IsZero (eq $page.Section "shop") $page.Params.book_key -}}
+  {{- $product := partial "shop/product-data.html" (dict "key" $page.Params.book_key "page" $page) -}}
+  {{- with index $product "release_date" -}}
+    {{- $published = time.AsTime . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $explicitModifiedValue := "" -}}
+{{- if isset $page.Params "modified" -}}
+  {{- $explicitModifiedValue = $page.Params.modified -}}
+{{- else if isset $page.Params "lastmod" -}}
+  {{- $explicitModifiedValue = $page.Params.lastmod -}}
+{{- end -}}
+{{- $hasExplicitModified := false -}}
+{{- if strings.TrimSpace (printf "%v" $explicitModifiedValue) -}}
+  {{- $explicitModified := time.AsTime $explicitModifiedValue -}}
+  {{- $isPublishedFallback := and (not $published.IsZero) (eq $explicitModified.Unix $published.Unix) -}}
+  {{- if not $isPublishedFallback -}}
+    {{- $hasExplicitModified = true -}}
+    {{- if and (not $published.IsZero) (lt $explicitModified.Unix $published.Unix) -}}
+      {{- errorf "Explicit modified date for %s precedes publication" $path -}}
+    {{- end -}}
+    {{- $modified = $explicitModified -}}
+    {{- $source = "frontmatter" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $page.Params.revision_history -}}
+  {{- if not (reflect.IsSlice .) -}}
+    {{- errorf "Revision history for %s must be a sequence" $path -}}
+  {{- else if $published.IsZero -}}
+    {{- errorf "Revision history for %s requires a publication date" $path -}}
+  {{- else -}}
+    {{- $latestRevision := $published -}}
+    {{- range $index, $revision := . -}}
+      {{- if not (reflect.IsMap $revision) -}}
+        {{- errorf "Revision history for %s contains a non-map entry at index %d" $path $index -}}
+      {{- else -}}
+        {{- $version := index $revision "version" | default "" -}}
+        {{- $dateValue := index $revision "date" | default "" -}}
+        {{- $note := index $revision "note" | default "" -}}
+        {{- $validEntry := true -}}
+        {{- if not (strings.TrimSpace (printf "%v" $version)) -}}
+          {{- errorf "Revision history for %s is missing version at index %d" $path $index -}}
+          {{- $validEntry = false -}}
+        {{- end -}}
+        {{- if not (strings.TrimSpace (printf "%v" $dateValue)) -}}
+          {{- errorf "Revision history for %s is missing date at index %d" $path $index -}}
+          {{- $validEntry = false -}}
+        {{- end -}}
+        {{- if not (strings.TrimSpace (printf "%v" $note)) -}}
+          {{- errorf "Revision history for %s is missing note at index %d" $path $index -}}
+          {{- $validEntry = false -}}
+        {{- end -}}
+
+        {{- if $validEntry -}}
+          {{- $revisionDate := time.AsTime $dateValue -}}
+          {{- if lt $revisionDate.Unix $published.Unix -}}
+            {{- errorf "Revision history for %s contains date %s before publication" $path ($revisionDate.Format "2006-01-02") -}}
+          {{- end -}}
+          {{- if gt $revisionDate.Unix $latestRevision.Unix -}}
+            {{- $latestRevision = $revisionDate -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- with $latestRevision -}}
+      {{- if $hasExplicitModified -}}
+        {{- $explicitDate := time.AsTime $explicitModifiedValue -}}
+        {{- if ne ($explicitDate.Format "2006-01-02") (.Format "2006-01-02") -}}
+          {{- errorf "Versioned page %s has conflicting modified date %s and latest revision date %s" $path ($explicitDate.Format "2006-01-02") (.Format "2006-01-02") -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $modified = . -}}
+      {{- $source = "revision_history" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $publishedISO := "" -}}
+{{- if not $published.IsZero -}}
+  {{- $publishedISO = $published.Format "2006-01-02T15:04:05Z07:00" -}}
+{{- end -}}
+{{- $modifiedISO := "" -}}
+{{- $modifiedDate := "" -}}
+{{- with $modified -}}
+  {{- $modifiedISO = .Format "2006-01-02T15:04:05Z07:00" -}}
+  {{- $modifiedDate = .Format "2006-01-02" -}}
+{{- end -}}
+{{- $sitemapLastmodISO := $modifiedISO | default $publishedISO -}}
+
+{{ return (dict
+  "published" $published
+  "modified" $modified
+  "published_iso" $publishedISO
+  "modified_iso" $modifiedISO
+  "modified_date" $modifiedDate
+  "sitemap_lastmod_iso" $sitemapLastmodISO
+  "source" $source
+) }}

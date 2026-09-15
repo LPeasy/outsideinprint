@@ -1,8 +1,11 @@
 {{ define "main" }}
   {{ $pages := partial "archive/resolve-pages.html" (dict "site" site "mode" "archive") }}
+  {{ $paginator := .Paginate $pages 50 }}
   {{ partial "archive/render-list.html" (dict
     "page" .
-    "pages" $pages
+    "pages" $paginator.Pages
+    "totalCount" (len $pages)
+    "paginator" $paginator
     "idPrefix" "archive"
   ) }}
 {{ end }}

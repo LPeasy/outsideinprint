@@ -5,6 +5,8 @@
 {{- $isArticleLike := false -}}
 {{- $sectionLabel := "" -}}
 {{- $isRandomRoute := false -}}
+{{- $libraryType := lower (printf "%v" (.Params.library_type | default "")) -}}
+{{- $isDialogue := and .IsPage (or (eq $libraryType "dialogue") (gt (len (findRE "^/syd-and-oliver/[^/]+/$" $relPermalink)) 0)) -}}
 
 {{- if .Params.section_label -}}
   {{- $sectionLabel = .Params.section_label -}}
@@ -32,6 +34,13 @@
 
 {{- if and (eq $name "page") (findRE "^/authors/[^/]+/$" $relPermalink) -}}
   {{- $name = "author" -}}
+{{- end -}}
+
+{{- if and (eq $name "page") $isDialogue -}}
+  {{- $name = "dialogue" -}}
+  {{- $socialType = "article" -}}
+  {{- $isArticleLike = true -}}
+  {{- $sectionLabel = "Dialogue" -}}
 {{- end -}}
 
 {{- if and (eq $name "page") .IsPage (in (slice "essays" "syd-and-oliver" "working-papers") $section) -}}
@@ -66,6 +75,15 @@
 
 {{- if and (eq $name "page") (eq $section "shop") .Params.book_key -}}
   {{- $name = "shop-product" -}}
+{{- end -}}
+
+{{- if and (eq $name "page") .IsPage (eq $section "shop") .Params.sample_of_book_key -}}
+  {{- $name = "shop-sample" -}}
+  {{- $sectionLabel = "Book sample" -}}
+  {{- if eq (lower (strings.TrimSpace (printf "%v" (.Params.sample_work_type | default "")))) "short-story" -}}
+    {{- $socialType = "article" -}}
+    {{- $isArticleLike = true -}}
+  {{- end -}}
 {{- end -}}
 
 {{- if and (eq $name "page") $isRandomRoute -}}

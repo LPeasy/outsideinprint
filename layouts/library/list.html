@@ -1,138 +1,49 @@
 {{ define "main" }}
-  {{ $libraryTypes := slice
-    (dict "key" "essay" "title" "Essays" "description" "Essays on economics, risk, culture, technology, and public life from Outside In Print.")
-    (dict "key" "affirmation" "title" "Affirmations" "description" "Source-free reflections from The Things We Say, each built around one affirmation.")
-    (dict "key" "dialogue" "title" "Dialogues" "description" "Dialogues and fiction from the recurring world of Syd and Oliver, where power, obligation, money, intimacy, and moral pressure are worked out in conversation.")
-    (dict "key" "working-paper" "title" "Working Papers" "description" "Working papers and developing pieces from Outside In Print.")
-  }}
-  {{ $sourceSections := slice "essays" "working-papers" }}
-  {{ $sourcePages := sort (where site.RegularPages "Section" "in" $sourceSections) "Date" "desc" }}
-  {{ $libraryGroups := slice }}
-  {{ $libraryEntries := slice }}
-  {{ $availableYears := slice }}
-  {{ $availableCollectionSlugs := slice }}
-  {{ $collectionDefinitions := default (slice) hugo.Data.collections.collections }}
-  {{ $totalPages := 0 }}
-
-  {{ range $type := $libraryTypes }}
-    {{ $typeKey := index $type "key" }}
-    {{ $typeTitle := index $type "title" }}
-    {{ $typeDescription := index $type "description" }}
-    {{ $pages := slice }}
-
-    {{ range $sourcePages }}
-      {{ $page := . }}
-      {{ $resolvedType := partial "archive/longform-kind.html" $page }}
-      {{ if eq $resolvedType $typeKey }}
-        {{ $pages = $pages | append $page }}
-      {{ end }}
-    {{ end }}
-
-    {{ if gt (len $pages) 0 }}
-      {{ $libraryGroups = $libraryGroups | append (dict
-        "key" $typeKey
-        "title" $typeTitle
-        "description" $typeDescription
-        "count" (len $pages)
-      ) }}
-      {{ $totalPages = add $totalPages (len $pages) }}
-
-      {{ range $pages }}
-        {{ $page := . }}
-        {{ $matches := partial "collections/resolve-page-collections.html" (dict "page" $page "publicOnly" true) }}
-        {{ $collectionSlugs := slice }}
-        {{ $collectionTitles := slice }}
-        {{ range $matches }}
-          {{ $collectionSlugs = $collectionSlugs | append (lower (printf "%v" .collection.slug)) }}
-          {{ $collectionTitles = $collectionTitles | append .collection.title }}
-        {{ end }}
-        {{ $seriesTerms := partial "collections/normalize-values.html" (dict "value" $page.Params.series) }}
-        {{ $searchText := printf "%s %s %s %s %s %s %s %s %s" $page.Title $typeTitle ($page.Params.section_label | default "") ($page.Params.version | default "") (delimit $collectionTitles " ") (partial "discovery/page-summary.html" $page) ($page.Params.person_name | default "") (delimit $seriesTerms " ") ($page.Params.article_variant | default "") }}
-        {{ $year := $page.Date.Format "2006" }}
-        {{ $dateIso := $page.Date.Format "2006-01-02" }}
-        {{ $title := $page.Title }}
-        {{ $titleLower := lower $title }}
-        {{ $entryId := $page.RelPermalink }}
-
-        {{ $libraryEntries = $libraryEntries | append (dict
-          "id" $entryId
-          "page" $page
-          "typeKey" $typeKey
-          "year" $year
-          "dateIso" $dateIso
-          "title" $title
-          "titleLower" $titleLower
-          "collections" $matches
-          "collectionSlugs" $collectionSlugs
-          "collectionTitles" $collectionTitles
-          "searchText" (lower (plainify $searchText))
-        ) }}
-
-        {{ $availableYears = $availableYears | append $year }}
-        {{ range $collectionSlugs }}
-          {{ $availableCollectionSlugs = $availableCollectionSlugs | append . }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
+  {{ $catalog := partial "library/resolve-entries.html" . }}
+  {{ $initialLimit := 12 }}
+  {{ $initialCount := 0 }}
+  {{ range $catalog.groups }}
+    {{ $initialCount = add $initialCount (len (first $initialLimit .entries)) }}
   {{ end }}
-
-  {{ $yearOptions := sort (uniq $availableYears) }}
-  {{ $matchedCollectionSlugs := uniq $availableCollectionSlugs }}
-  {{ $collectionOptions := slice }}
-  {{ range $collectionDefinitions }}
-    {{ $slug := lower (printf "%v" .slug) }}
-    {{ if and .public (in $matchedCollectionSlugs $slug) }}
-      {{ $collectionOptions = $collectionOptions | append (dict
-        "slug" $slug
-        "title" .title
-      ) }}
-    {{ end }}
+  {{ $indexURL := "/library/index.json" }}
+  {{ with .OutputFormats.Get "LibraryIndex" }}
+    {{ $indexURL = .RelPermalink }}
   {{ end }}
 
   <div class="section-front section-front--library">
     <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
       <h1 id="library-title" class="list-title">Library</h1>
-      <p class="page-intro">Search the archive by title, type, collection, or version.</p>
+      <p class="page-intro">Search published work by title, topic, tag, type, year, or collection.</p>
     </header>
 
     <div class="section-front__body">
-      <div class="library-search library-search--filters page-shell page-shell--wide" data-library-controls>
+      <div class="library-search library-search--filters page-shell page-shell--wide" data-library-controls hidden>
         <div class="library-filter-grid">
           <div class="library-filter library-filter--search">
             <label class="library-search-label" for="library-search">Search the library</label>
-            <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, types, collections, and versions" autocomplete="off" spellcheck="false" />
+            <input id="library-search" class="library-search-input" type="search" placeholder="Search titles, topics, tags, types, years, and collections" autocomplete="off" spellcheck="false" />
           </div>
-
           <div class="library-filter">
             <label class="library-search-label" for="library-type">Type</label>
             <select id="library-type" class="library-search-input">
               <option value="">All types</option>
-              {{ range $libraryGroups }}
-                <option value="{{ index . "key" }}">{{ index . "title" }}</option>
-              {{ end }}
+              {{ range $catalog.groups }}<option value="{{ .key }}">{{ .title }}</option>{{ end }}
             </select>
           </div>
-
           <div class="library-filter">
             <label class="library-search-label" for="library-year">Year</label>
             <select id="library-year" class="library-search-input">
               <option value="">All years</option>
-              {{ range collections.Reverse $yearOptions }}
-                <option value="{{ . }}">{{ . }}</option>
-              {{ end }}
+              {{ range collections.Reverse $catalog.years }}<option value="{{ . }}">{{ . }}</option>{{ end }}
             </select>
           </div>
-
           <div class="library-filter">
             <label class="library-search-label" for="library-collection">Collection</label>
             <select id="library-collection" class="library-search-input">
               <option value="">All collections</option>
-              {{ range $collectionOptions }}
-                <option value="{{ index . "slug" }}">{{ index . "title" }}</option>
-              {{ end }}
+              {{ range $catalog.collections }}<option value="{{ .slug }}">{{ .title }}</option>{{ end }}
             </select>
           </div>
-
           <div class="library-filter">
             <label class="library-search-label" for="library-sort">Sort</label>
             <select id="library-sort" class="library-search-input">
@@ -141,82 +52,43 @@
               <option value="title">Title A-Z</option>
             </select>
           </div>
-
           <div class="library-filter library-filter--action">
             <button id="library-reset" class="library-reset" type="button">Reset filters</button>
           </div>
         </div>
       </div>
 
-      <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide">Showing all {{ $totalPages }} pieces</p>
-      <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or return <a href="{{ "" | absURL }}">Home</a>.</div>
+      <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide">Showing {{ $initialCount }} recent selections from {{ len $catalog.entries }} published pieces. Use search for the complete catalog.</p>
+      <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or open the <a href="{{ "archive/" | absURL }}">Archive</a>.</div>
+      <div id="library-search-error" class="library-empty page-shell page-shell--wide" hidden>The complete search index could not be loaded. The recent selections and <a href="{{ "archive/" | absURL }}">Archive</a> remain available.</div>
+      <noscript><p class="library-results-summary page-shell page-shell--wide">JavaScript is required for complete catalog search. Recent selections remain below; use the <a href="{{ "archive/" | absURL }}">Archive</a> for the full essay, dialogue, and affirmation record.</p></noscript>
     </div>
   </div>
 
   <div id="library-grouped-results">
-    {{ range $group := $libraryGroups }}
-      {{ $groupKey := index $group "key" }}
-      {{ $groupTitle := index $group "title" }}
-      {{ $groupDescription := index $group "description" }}
-      {{ $groupEntries := where $libraryEntries "typeKey" $groupKey }}
-
-      {{ if gt (len $groupEntries) 0 }}
-        <section class="library-group page-shell page-shell--reading" data-library-group data-library-group-key="{{ $groupKey }}" aria-labelledby="library-group-{{ $groupKey }}">
-          <h2 id="library-group-{{ $groupKey }}" class="list-title" style="margin-top:22px;">{{ $groupTitle }}</h2>
-          {{ with $groupDescription }}<p class="page-intro">{{ . }}</p>{{ end }}
-          <p class="m"><span data-library-group-count>{{ len $groupEntries }}</span> pieces in this type.</p>
-          {{ range $groupEntries }}
-            <div
-              data-library-item
-              data-library-surface="grouped"
-              data-entry-id="{{ index . "id" }}"
-              data-type="{{ index . "typeKey" }}"
-              data-year="{{ index . "year" }}"
-              data-date="{{ index . "dateIso" }}"
-              data-title="{{ index . "title" | htmlEscape }}"
-              data-collections="{{ delimit (index . "collectionSlugs") " " }}"
-              data-search="{{ index . "searchText" | htmlEscape }}"
-            >
-              {{ partial "discovery/page-list-item.html" (dict
-                "page" (index . "page")
-                "showCollections" true
-                "showSectionLabel" false
-              ) }}
-            </div>
-          {{ end }}
-        </section>
-      {{ end }}
+    {{ range $group := $catalog.groups }}
+      {{ $initialEntries := first $initialLimit $group.entries }}
+      <section class="library-group page-shell page-shell--reading" data-library-group data-library-group-key="{{ $group.key }}" aria-labelledby="library-group-{{ $group.key }}">
+        <h2 id="library-group-{{ $group.key }}" class="list-title" style="margin-top:22px;">{{ $group.title }}</h2>
+        <p class="page-intro">{{ $group.description }}</p>
+        <p class="m">Showing {{ len $initialEntries }} of {{ $group.count }} pieces in this type.</p>
+        {{ range $initialEntries }}
+          <div data-library-item data-library-surface="grouped" data-entry-id="{{ .id }}">
+            {{ partial "discovery/page-list-item.html" (dict "page" .page "showCollections" true "showSectionLabel" false) }}
+          </div>
+        {{ end }}
+      </section>
     {{ end }}
   </div>
 
   <section id="library-flat-results" class="library-results page-shell page-shell--reading" aria-labelledby="library-results-title" hidden>
     <h2 id="library-results-title" class="list-title" style="margin-top:22px;">Results</h2>
-    <div id="library-results-list" class="library-results__list">
-      {{ range $libraryEntries }}
-        <div
-          data-library-item
-          data-library-surface="results"
-          data-entry-id="{{ index . "id" }}"
-          data-type="{{ index . "typeKey" }}"
-          data-year="{{ index . "year" }}"
-          data-date="{{ index . "dateIso" }}"
-          data-title="{{ index . "title" | htmlEscape }}"
-          data-collections="{{ delimit (index . "collectionSlugs") " " }}"
-          data-search="{{ index . "searchText" | htmlEscape }}"
-          hidden
-        >
-          {{ partial "discovery/page-list-item.html" (dict
-            "page" (index . "page")
-            "showCollections" true
-            "showSectionLabel" false
-          ) }}
-        </div>
-      {{ end }}
-    </div>
+    <div id="library-results-list" class="library-results__list"></div>
   </section>
 
   <script>
     (function () {
+      var controls = document.querySelector('[data-library-controls]');
       var searchInput = document.getElementById('library-search');
       var typeSelect = document.getElementById('library-type');
       var yearSelect = document.getElementById('library-year');
@@ -225,49 +97,50 @@
       var resetButton = document.getElementById('library-reset');
       var summary = document.getElementById('library-results-summary');
       var empty = document.getElementById('library-search-empty');
+      var error = document.getElementById('library-search-error');
       var groupedRoot = document.getElementById('library-grouped-results');
       var flatSection = document.getElementById('library-flat-results');
       var flatList = document.getElementById('library-results-list');
-      if (!searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !summary || !empty || !groupedRoot || !flatSection || !flatList) return;
-
-      var groupedItems = Array.prototype.slice.call(document.querySelectorAll('[data-library-item][data-library-surface="grouped"]'));
-      var resultItems = Array.prototype.slice.call(document.querySelectorAll('[data-library-item][data-library-surface="results"]'));
-      var groups = Array.prototype.slice.call(document.querySelectorAll('[data-library-group]'));
-      var totalCount = groupedItems.length;
+      var indexUrl = {{ $indexURL | jsonify | safeJS }};
+      var initialCount = {{ $initialCount }};
+      var totalCount = {{ len $catalog.entries }};
+      var catalogPromise = null;
+      var activeRequest = 0;
+      var inputTimer = 0;
       var supportsUrl = typeof URL === 'function' && typeof window.history.replaceState === 'function';
 
+      if (!controls || !searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !summary || !empty || !error || !groupedRoot || !flatSection || !flatList) return;
+      controls.hidden = false;
+
       function hasOption(select, value) {
-        return Array.prototype.some.call(select.options, function (option) {
-          return option.value === value;
-        });
+        return Array.prototype.some.call(select.options, function (option) { return option.value === value; });
       }
 
-      function readStateFromUrl() {
+      function stateFromUrl() {
         var state = { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest' };
         if (!supportsUrl) return state;
-
         try {
           var url = new URL(window.location.href);
-          var query = (url.searchParams.get('q') || '').trim();
+          state.q = (url.searchParams.get('q') || '').trim();
+          state.qLower = state.q.toLowerCase();
           var type = (url.searchParams.get('type') || url.searchParams.get('section') || '').trim();
           var year = (url.searchParams.get('year') || '').trim();
           var collection = (url.searchParams.get('collection') || '').trim();
           var sort = (url.searchParams.get('sort') || '').trim();
-
-          state.q = query;
-          state.qLower = query.toLowerCase();
           state.type = hasOption(typeSelect, type) ? type : '';
           state.year = hasOption(yearSelect, year) ? year : '';
           state.collection = hasOption(collectionSelect, collection) ? collection : '';
           state.sort = hasOption(sortSelect, sort) ? sort : 'newest';
-        } catch (error) {
-          return state;
-        }
-
+        } catch (ignored) {}
         return state;
       }
 
-      function writeStateToControls(state) {
+      function stateFromControls() {
+        var q = searchInput.value.trim();
+        return { q: q, qLower: q.toLowerCase(), type: typeSelect.value, year: yearSelect.value, collection: collectionSelect.value, sort: sortSelect.value || 'newest' };
+      }
+
+      function setControls(state) {
         searchInput.value = state.q;
         typeSelect.value = state.type;
         yearSelect.value = state.year;
@@ -275,175 +148,187 @@
         sortSelect.value = state.sort;
       }
 
-      function readStateFromControls() {
-        var query = searchInput.value.trim();
-        return {
-          q: query,
-          qLower: query.toLowerCase(),
-          type: typeSelect.value,
-          year: yearSelect.value,
-          collection: collectionSelect.value,
-          sort: sortSelect.value || 'newest'
-        };
+      function isDefault(state) {
+        return !state.q && !state.type && !state.year && !state.collection && state.sort === 'newest';
       }
 
       function syncUrl(state) {
         if (!supportsUrl) return;
-
         try {
           var url = new URL(window.location.href);
-          if (state.q) {
-            url.searchParams.set('q', state.q);
-          } else {
-            url.searchParams.delete('q');
-          }
-          if (state.type) {
-            url.searchParams.set('type', state.type);
-          } else {
-            url.searchParams.delete('type');
-          }
+          [['q', state.q], ['type', state.type], ['year', state.year], ['collection', state.collection]].forEach(function (pair) {
+            if (pair[1]) url.searchParams.set(pair[0], pair[1]); else url.searchParams.delete(pair[0]);
+          });
           url.searchParams.delete('section');
-          if (state.year) {
-            url.searchParams.set('year', state.year);
-          } else {
-            url.searchParams.delete('year');
-          }
-          if (state.collection) {
-            url.searchParams.set('collection', state.collection);
-          } else {
-            url.searchParams.delete('collection');
-          }
-          if (state.sort && state.sort !== 'newest') {
-            url.searchParams.set('sort', state.sort);
-          } else {
-            url.searchParams.delete('sort');
-          }
+          if (state.sort !== 'newest') url.searchParams.set('sort', state.sort); else url.searchParams.delete('sort');
           window.history.replaceState({}, '', url.toString());
-        } catch (error) {
-          return;
+        } catch (ignored) {}
+      }
+
+      function loadCatalog() {
+        if (!catalogPromise) {
+          catalogPromise = fetch(indexUrl, { credentials: 'same-origin' }).then(function (response) {
+            if (!response.ok) throw new Error('Library index request failed');
+            return response.json();
+          }).then(function (payload) {
+            if (!payload || payload.version !== 1 || !Array.isArray(payload.items)) throw new Error('Library index payload is invalid');
+            return payload.items;
+          });
         }
+        return catalogPromise;
       }
 
-      function isDefaultState(state) {
-        return !state.q && !state.type && !state.year && !state.collection && state.sort === 'newest';
+      function matches(item, state) {
+        var collectionSlugs = Array.isArray(item.collectionSlugs) ? item.collectionSlugs : [];
+        return (!state.qLower || String(item.searchText || '').toLowerCase().indexOf(state.qLower) !== -1) &&
+          (!state.type || item.type === state.type) && (!state.year || item.year === state.year) &&
+          (!state.collection || collectionSlugs.indexOf(state.collection) !== -1);
       }
 
-      function itemMatches(item, state) {
-        var haystack = (item.getAttribute('data-search') || '').toLowerCase();
-        var type = item.getAttribute('data-type') || '';
-        var year = item.getAttribute('data-year') || '';
-        var collections = item.getAttribute('data-collections') || '';
-        var queryMatch = !state.qLower || haystack.indexOf(state.qLower) !== -1;
-        var typeMatch = !state.type || type === state.type;
-        var yearMatch = !state.year || year === state.year;
-        var collectionMatch = !state.collection || (' ' + collections + ' ').indexOf(' ' + state.collection + ' ') !== -1;
-        return queryMatch && typeMatch && yearMatch && collectionMatch;
+      function compare(a, b, sort) {
+        var dateOrder = String(a.date || '').localeCompare(String(b.date || ''));
+        var titleOrder = String(a.title || '').localeCompare(String(b.title || ''));
+        if (sort === 'oldest') return dateOrder || titleOrder;
+        if (sort === 'title') return titleOrder || -dateOrder;
+        return -dateOrder || titleOrder;
       }
 
-      function compareItems(a, b, sortValue) {
-        var aDate = a.getAttribute('data-date') || '';
-        var bDate = b.getAttribute('data-date') || '';
-        var aTitle = (a.getAttribute('data-title') || '').toLowerCase();
-        var bTitle = (b.getAttribute('data-title') || '').toLowerCase();
+      function appendText(parent, className, value) {
+        if (!value) return;
+        var node = document.createElement('div');
+        node.className = className;
+        node.textContent = value;
+        parent.appendChild(node);
+      }
 
-        if (sortValue === 'oldest') {
-          if (aDate !== bDate) return aDate > bDate ? 1 : -1;
-          if (aTitle !== bTitle) return aTitle > bTitle ? 1 : -1;
-          return 0;
+      function renderItem(item) {
+        var wrapper = document.createElement('div');
+        wrapper.setAttribute('data-library-item', '');
+        wrapper.setAttribute('data-library-surface', 'results');
+        wrapper.setAttribute('data-entry-id', item.id || item.url || '');
+        var article = document.createElement('article');
+        article.className = 'item';
+        var titleRow = document.createElement('div');
+        titleRow.className = 'item__title-row';
+        var title = document.createElement('div');
+        title.className = 't';
+        var link = document.createElement('a');
+        link.href = item.url;
+        link.textContent = item.title;
+        link.setAttribute('data-analytics-event', 'internal_promo_click');
+        link.setAttribute('data-analytics-source-slot', 'library_search');
+        link.setAttribute('data-analytics-path', item.url);
+        title.appendChild(link);
+        titleRow.appendChild(title);
+        article.appendChild(titleRow);
+
+        var meta = [];
+        if (item.sectionLabel) meta.push(item.sectionLabel);
+        if (item.date) meta.push(item.date);
+        if (item.version) meta.push('v' + item.version);
+        if (item.readingTime) meta.push(item.readingTime + ' min read');
+        appendText(article, 'm', meta.join(' | '));
+
+        if (Array.isArray(item.collections) && item.collections.length) {
+          var collectionLine = document.createElement('div');
+          collectionLine.className = 'd';
+          item.collections.forEach(function (collection, index) {
+            if (index) collectionLine.appendChild(document.createTextNode(' · '));
+            if (collection.url) {
+              var collectionLink = document.createElement('a');
+              collectionLink.href = collection.url;
+              collectionLink.textContent = collection.title;
+              collectionLine.appendChild(collectionLink);
+            } else {
+              collectionLine.appendChild(document.createTextNode(collection.title));
+            }
+          });
+          article.appendChild(collectionLine);
         }
-
-        if (sortValue === 'title') {
-          if (aTitle !== bTitle) return aTitle > bTitle ? 1 : -1;
-          if (aDate !== bDate) return aDate < bDate ? 1 : -1;
-          return 0;
-        }
-
-        if (aDate !== bDate) return aDate < bDate ? 1 : -1;
-        if (aTitle !== bTitle) return aTitle > bTitle ? 1 : -1;
-        return 0;
+        appendText(article, 'd', item.summary);
+        wrapper.appendChild(article);
+        return wrapper;
       }
 
-      function updateGroupedCounts() {
-        groups.forEach(function (group) {
-          var count = group.querySelectorAll('[data-library-item][data-library-surface="grouped"]:not([hidden])').length;
-          var countNode = group.querySelector('[data-library-group-count]');
-          if (countNode) {
-            countNode.textContent = count;
-          }
-          group.hidden = count === 0;
-        });
+      function clearResults() {
+        while (flatList.firstChild) flatList.removeChild(flatList.firstChild);
       }
 
-      function renderFlatResults(visibleItems, state) {
-        resultItems.forEach(function (item) {
-          item.hidden = true;
-        });
+      function attachGroupedResults() {
+        if (!groupedRoot.parentNode && flatSection.parentNode) flatSection.parentNode.insertBefore(groupedRoot, flatSection);
+        groupedRoot.hidden = false;
+      }
 
-        visibleItems.sort(function (a, b) {
-          return compareItems(a, b, state.sort);
-        });
+      function detachGroupedResults() {
+        if (groupedRoot.parentNode) groupedRoot.parentNode.removeChild(groupedRoot);
+      }
 
-        visibleItems.forEach(function (item) {
-          item.hidden = false;
-          flatList.appendChild(item);
-        });
+      function showDefault() {
+        activeRequest += 1;
+        attachGroupedResults();
+        flatSection.hidden = true;
+        empty.hidden = true;
+        error.hidden = true;
+        clearResults();
+        summary.textContent = 'Showing ' + initialCount + ' recent selections from ' + totalCount + ' published pieces. Use search for the complete catalog.';
       }
 
       function applyState(state, options) {
         var config = options || {};
-        var filteredMode = !isDefaultState(state);
+        if (!config.skipUrl) syncUrl(state);
+        if (isDefault(state)) { showDefault(); return; }
 
-        groupedItems.forEach(function (item) {
-          var match = itemMatches(item, state);
-          item.hidden = !match;
+        var requestId = ++activeRequest;
+        detachGroupedResults();
+        flatSection.hidden = true;
+        empty.hidden = true;
+        error.hidden = true;
+        summary.textContent = 'Loading the complete catalog…';
+
+        loadCatalog().then(function (items) {
+          if (requestId !== activeRequest) return;
+          var results = items.filter(function (item) { return matches(item, state); });
+          results.sort(function (a, b) { return compare(a, b, state.sort); });
+          clearResults();
+          results.forEach(function (item) { flatList.appendChild(renderItem(item)); });
+          totalCount = items.length;
+          summary.textContent = 'Showing ' + results.length + ' of ' + totalCount + ' pieces';
+          flatSection.hidden = results.length === 0;
+          empty.hidden = results.length !== 0;
+        }).catch(function () {
+          if (requestId !== activeRequest) return;
+          clearResults();
+          attachGroupedResults();
+          flatSection.hidden = true;
+          empty.hidden = true;
+          summary.textContent = 'Showing ' + initialCount + ' recent selections from ' + totalCount + ' published pieces.';
+          error.hidden = false;
         });
-
-        updateGroupedCounts();
-
-        var visibleResults = resultItems.filter(function (item) {
-          return itemMatches(item, state);
-        });
-
-        renderFlatResults(visibleResults, state);
-
-        groupedRoot.hidden = filteredMode;
-        flatSection.hidden = !filteredMode || visibleResults.length === 0;
-        empty.hidden = isDefaultState(state) || visibleResults.length > 0;
-
-        if (filteredMode) {
-          summary.textContent = 'Showing ' + visibleResults.length + ' of ' + totalCount + ' pieces';
-        } else {
-          summary.textContent = 'Showing all ' + totalCount + ' pieces';
-        }
-
-        if (!config.skipUrlSync) {
-          syncUrl(state);
-        }
       }
 
-      function handleControlChange() {
-        applyState(readStateFromControls());
-      }
-
-      writeStateToControls(readStateFromUrl());
-      applyState(readStateFromControls(), { skipUrlSync: true });
-
-      searchInput.addEventListener('input', handleControlChange);
-      typeSelect.addEventListener('change', handleControlChange);
-      yearSelect.addEventListener('change', handleControlChange);
-      collectionSelect.addEventListener('change', handleControlChange);
-      sortSelect.addEventListener('change', handleControlChange);
-
+      function handleChange() { applyState(stateFromControls()); }
+      searchInput.addEventListener('input', function () {
+        window.clearTimeout(inputTimer);
+        inputTimer = window.setTimeout(handleChange, 120);
+      });
+      typeSelect.addEventListener('change', handleChange);
+      yearSelect.addEventListener('change', handleChange);
+      collectionSelect.addEventListener('change', handleChange);
+      sortSelect.addEventListener('change', handleChange);
       resetButton.addEventListener('click', function () {
-        var defaultState = { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest' };
-        writeStateToControls(defaultState);
-        applyState(defaultState);
+        var state = { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest' };
+        setControls(state);
+        applyState(state);
+      });
+      window.addEventListener('popstate', function () {
+        var state = stateFromUrl();
+        setControls(state);
+        applyState(state, { skipUrl: true });
       });
 
-      window.addEventListener('popstate', function () {
-        writeStateToControls(readStateFromUrl());
-        applyState(readStateFromControls(), { skipUrlSync: true });
-      });
+      var initialState = stateFromUrl();
+      setControls(initialState);
+      applyState(initialState, { skipUrl: true });
     }());
   </script>
 {{ end }}

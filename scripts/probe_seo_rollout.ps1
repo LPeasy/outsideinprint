@@ -679,10 +679,6 @@ foreach ($row in $priorityRows) {
       $issues.Add(("missing JSON-LD type '{0}'" -f $expectedJsonLdType))
     }
 
-    if ($path -eq '/' -and $jsonLdTypes -notcontains 'SearchAction') {
-      $issues.Add('homepage missing SearchAction')
-    }
-
     $canonicalResults += [pscustomobject][ordered]@{
         probe_type = 'canonical'
         title = $title

@@ -7,7 +7,7 @@ section_label: "Essay"
 subtitle: "The Dawn of Self-Evolving AI"
 featured_image: "/images/medium/synthetic-reasoning/07c57a8f208c2fc53fc2c10e5deb4e365b94b9d37089dde7e1612013d373b9e0.jpeg"
 featured_image_alt: "Synthetic Reasoning"
-description: "The race to build the most powerful artificial intelligence is accelerating, and with it, the uneasy question of whether AI will remain aligned with human va..."
+description: "An early look at DeepSeek-R1, reinforcement-trained reasoning, reward hacking, and the challenge of keeping increasingly capable AI aligned."
 version: "1.1"
 edition: "Second web edition"
 revision_history:

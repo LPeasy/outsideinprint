@@ -163,7 +163,8 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /"label" "About"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
   assert.match(masthead, /"label" "Support"[\s\S]*?"group" "direct"[\s\S]*?"analyticsSourceSlot" "primary_nav_support"/);
   assert.match(masthead, /\$currentPath := \.RelPermalink/);
-  assert.match(masthead, /\$isArchivePage := eq \$currentPath "\/archive\/"/);
+  assert.match(masthead, /\$archivePageNumber := int \(\.Scratch\.Get "oip_archive_page_number" \| default 1\)/);
+  assert.match(masthead, /\$isArchivePage := and \(eq \$currentPath "\/archive\/"\) \(eq \$archivePageNumber 1\)/);
   assert.match(masthead, /\$inArchiveSection := or \$isArchivePage \(eq \.Section "archive"\) \(eq \.Section "essays"\) \(eq \.Section "syd-and-oliver"\)/);
   assert.match(masthead, /\$isStudioPage := eq \$currentPath "\/studio\/"/);
   assert.match(masthead, /\$inStudioSection := or \$isStudioPage \(eq \.Section "studio"\)/);
@@ -520,7 +521,9 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
   assert.ok(articleSingle.indexOf('partial "newsletter_prompt.html"') < articleSingle.indexOf('partial "collections/reading-path.html"'));
   assert.match(cssRule(css, ".newsletter-prompt a"), /min-height:44px;/);
   assert.match(cssRule(css, ".newsletter-signup[id]"), /scroll-margin-top:6rem;/);
-  assert.match(almanackIndex, /noindex: true\s+build:\s+render: always\s+list: never/);
+  assert.match(almanackIndex, /^noindex: true$/m);
+  assert.match(almanackIndex, /^outputs:\s+  - HTML\s+  - RSS$/m);
+  assert.match(almanackIndex, /^build:\s+  render: always\s+  list: never$/m);
   assert.match(almanackIndexTemplate, /<meta name="robots" content="noindex, follow" \/>/);
   assert.match(almanackIndexTemplate, /<link rel="canonical" href="\{\{ "collections\/bobs-almanack\/" \| absURL \}\}" \/>/);
   assert.match(almanackIndexTemplate, /window\.location\.replace\("\{\{ "collections\/bobs-almanack\/" \| relURL \}\}"\)/);

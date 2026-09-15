@@ -90,6 +90,8 @@
 {{- end -}}
 
 {{- $gamesSocialImage := "" -}}
+{{- $gamesSocialWidthResolved := 0 -}}
+{{- $gamesSocialHeightResolved := 0 -}}
 {{- if and $image (eq .Section "games") -}}
   {{- $gamesResource := .Resources.GetMatch $image -}}
   {{- if not $gamesResource -}}
@@ -104,6 +106,8 @@
     {{- $gamesSocial := $gamesResource.Resize (printf "%dx jpeg q85 lanczos #f7eed8" $gamesSocialWidth) -}}
     {{- $gamesSocial = resources.Copy (printf "images/games/%s/social-%dw.jpg" $slug $gamesSocialWidth) $gamesSocial -}}
     {{- $gamesSocialImage = $gamesSocial.Permalink -}}
+    {{- $gamesSocialWidthResolved = $gamesSocial.Width -}}
+    {{- $gamesSocialHeightResolved = $gamesSocial.Height -}}
   {{- end -}}
 {{- end -}}
 
@@ -112,6 +116,11 @@
 {{- end -}}
 
 {{- if $gamesSocialImage -}}
+  {{- .Scratch.Set "oip_metadata_image_details" (dict
+    "width" $gamesSocialWidthResolved
+    "height" $gamesSocialHeightResolved
+    "type" "image/jpeg"
+  ) -}}
   {{- $gamesSocialImage -}}
 {{- else if $image -}}
   {{- $imageModel := partial "images/model.html" (dict
@@ -119,6 +128,30 @@
     "ref" $image
     "display" false
     "social" true
+  ) -}}
+  {{- $imageType := "" -}}
+  {{- if $imageModel.managed -}}
+    {{- $imageType = "image/jpeg" -}}
+  {{- else if $imageModel.resource -}}
+    {{- $imageType = $imageModel.resource.MediaType.Type -}}
+  {{- else if not $imageModel.external -}}
+    {{- $imagePath := lower $imageModel.social_url -}}
+    {{- if findRE `\.jpe?g$` $imagePath -}}
+      {{- $imageType = "image/jpeg" -}}
+    {{- else if strings.HasSuffix $imagePath ".png" -}}
+      {{- $imageType = "image/png" -}}
+    {{- else if strings.HasSuffix $imagePath ".webp" -}}
+      {{- $imageType = "image/webp" -}}
+    {{- else if strings.HasSuffix $imagePath ".gif" -}}
+      {{- $imageType = "image/gif" -}}
+    {{- else if strings.HasSuffix $imagePath ".svg" -}}
+      {{- $imageType = "image/svg+xml" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- .Scratch.Set "oip_metadata_image_details" (dict
+    "width" ($imageModel.social_width | default 0)
+    "height" ($imageModel.social_height | default 0)
+    "type" $imageType
   ) -}}
   {{- $imageModel.social_permalink -}}
 {{- end -}}

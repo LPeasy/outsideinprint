@@ -34,6 +34,7 @@ $responsiveImageNodeContractPath = Join-Path $repoRoot "tests/responsive_image_c
 $responsiveImageGuidePath = Join-Path $repoRoot "docs/responsive-image-pipeline.md"
 $bookstoreReadingSampleContractPath = Join-Path $repoRoot "tests/test_bookstore_reading_sample_contract.ps1"
 $bookstoreLaunchWindowContractPath = Join-Path $repoRoot "tests/test_2045_launch_window.ps1"
+$feedPolicyContractPath = Join-Path $repoRoot "tests/test_feed_policy_contract.ps1"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
   throw "AGENTS.md is required for repo-local publishing session guidance."
@@ -83,6 +84,7 @@ foreach ($requiredValidationPath in @(
   $responsiveImageGuidePath,
   $bookstoreReadingSampleContractPath,
   $bookstoreLaunchWindowContractPath,
+  $feedPolicyContractPath,
   $seoMetadataAuditPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
@@ -497,6 +499,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_discovery_surface_contract\.ps1")
   throw "deploy.yml must run the discovery surface contract test."
 }
 
+if ($deployWorkflow -notmatch "\.\/tests\/test_feed_policy_contract\.ps1\s+-SourceOnly") {
+  throw "deploy.yml must run the feed source policy contract before the build."
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_almanack_module_data\.ps1") {
   throw "deploy.yml must run the Almanack module data contract test."
 }
@@ -537,6 +543,10 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_public_route_smoke\.ps1") {
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_public_html_output\.ps1\s+-RequireFreshBuild") {
   throw "deploy.yml must run the generated-output regression test with -RequireFreshBuild."
+}
+
+if ($deployWorkflow -notmatch "\.\/tests\/test_feed_policy_contract\.ps1\s+-SiteDir\s+public") {
+  throw "deploy.yml must run the rendered feed policy contract after Hugo builds."
 }
 
 if ($deployWorkflow -notmatch "\.\/tests\/test_games_catalog_contract\.ps1\s+-SiteDir\s+public\s+-Mode\s+Production") {

@@ -250,7 +250,7 @@ function Get-ImageValues {
 function Test-PossibleEncodingDamage {
   param([string]$Text)
 
-  return [regex]::IsMatch($Text, 'â|Ã|Â|�|â€™|â€œ|â€|â€“|â€”|â€¦')
+  return [regex]::IsMatch($Text, 'â|Ã|Â|�|â€™|â€œ|â€|â€“|â€”|â€¦|&amp;(?:rsquo|lsquo|rdquo|ldquo);')
 }
 
 if (-not (Test-Path -LiteralPath $ContentDir -PathType Container)) {
@@ -268,7 +268,9 @@ $rows = foreach ($file in $markdownFiles) {
   $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
   $parts = Get-FrontMatterParts -Content $content
   $frontMatter = ConvertFrom-FrontMatter -FrontMatter $parts.front_matter
-  $title = Normalize-Text -Value (Get-FrontMatterValue -Map $frontMatter -Key 'title')
+  $contentTitle = Normalize-Text -Value (Get-FrontMatterValue -Map $frontMatter -Key 'title')
+  $metadataTitle = Normalize-Text -Value (Get-FrontMatterValue -Map $frontMatter -Key 'metadata_title')
+  $title = if ([string]::IsNullOrWhiteSpace($metadataTitle)) { $contentTitle } else { $metadataTitle }
   $description = Normalize-Text -Value (Get-FrontMatterValue -Map $frontMatter -Key 'description')
   $images = @(Get-ImageValues -FrontMatter $frontMatter)
   $section = Get-ContentSection -ContentRoot $ContentDir -MarkdownPath $file.FullName
@@ -291,6 +293,8 @@ $rows = foreach ($file in $markdownFiles) {
     section = $section
     canonical_url = Join-CanonicalUrl -BaseUrl $CanonicalBaseUrl -Path $canonicalPath
     title = $title
+    content_title = $contentTitle
+    metadata_title = $metadataTitle
     description = $description
     description_length = $description.Length
     draft = Get-FrontMatterValue -Map $frontMatter -Key 'draft'

@@ -1,6 +1,10 @@
 {{- $page := .page -}}
 {{- $meta := .meta -}}
-{{- $locale := replace ($page.Site.Language.Locale | default "en-US") "-" "_" | lower -}}
+{{- $localeParts := split (replace ($page.Site.Language.Locale | default "en-US") "-" "_") "_" -}}
+{{- $locale := lower (index $localeParts 0) -}}
+{{- if gt (len $localeParts) 1 -}}
+  {{- $locale = printf "%s_%s" $locale (upper (index $localeParts 1)) -}}
+{{- end -}}
 <meta property="og:url" content="{{ $meta.canonical }}">
 <meta property="og:site_name" content="{{ site.Title }}">
 <meta property="og:title" content="{{ $meta.title }}">
@@ -13,14 +17,23 @@
 {{- with $meta.image_alt }}
 <meta property="og:image:alt" content="{{ . }}">
 {{- end }}
+{{- if gt $meta.image_width 0 }}
+<meta property="og:image:width" content="{{ $meta.image_width }}">
+{{- end }}
+{{- if gt $meta.image_height 0 }}
+<meta property="og:image:height" content="{{ $meta.image_height }}">
+{{- end }}
+{{- with $meta.image_type }}
+<meta property="og:image:type" content="{{ . }}">
+{{- end }}
 {{- if $meta.route.is_article_like }}
   {{- with $meta.route.section_label }}
 <meta property="article:section" content="{{ . }}">
   {{- end }}
-  {{- with $page.Date }}
-<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- with $meta.dates.published_iso }}
+<meta property="article:published_time" content="{{ . }}">
   {{- end }}
-  {{- with $page.Lastmod }}
-<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- with $meta.dates.modified_iso }}
+<meta property="article:modified_time" content="{{ . }}">
   {{- end }}
 {{- end }}

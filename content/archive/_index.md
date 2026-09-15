@@ -4,4 +4,7 @@ description: "The full Outside In Print long-form archive, gathering essays, dia
 image: "/images/social/oip-archive.png"
 image_alt: "Outside In Print social card for the long-form archive."
 draft: false
+outputs:
+  - HTML
+  - RSS
 ---

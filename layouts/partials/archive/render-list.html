@@ -1,6 +1,14 @@
 {{- $page := .page -}}
 {{- $pages := .pages | default (slice) -}}
 {{- $idPrefix := .idPrefix | default "archive" -}}
+{{- $totalCount := .totalCount | default (len $pages) -}}
+{{- $paginator := .paginator | default false -}}
+{{- $displayTitle := $page.Title -}}
+{{- with $paginator -}}
+  {{- if gt .PageNumber 1 -}}
+    {{- $displayTitle = printf "%s — Page %d" $page.Title .PageNumber -}}
+  {{- end -}}
+{{- end -}}
 
 {{- $archiveGroups := slice -}}
 {{- $currentMonthTitle := "" -}}
@@ -38,9 +46,9 @@
 
 <div class="essays-front">
   <header class="page-header page-header--section-centered page-shell page-shell--reading essays-front__masthead">
-    <h1 id="page-title" class="list-title">{{ $page.Title }}</h1>
+    <h1 id="page-title" class="list-title">{{ $displayTitle }}</h1>
     {{ if gt (len $pages) 0 }}
-      <p class="page-intro essays-front__stats">{{ len $pages }} published pieces{{ with index $pages 0 }} &middot; Latest: {{ .Date.Format "Jan 2, 2006" }}{{ end }}</p>
+      <p class="page-intro essays-front__stats">{{ $totalCount }} published pieces{{ with index $pages 0 }} &middot; This page begins {{ .Date.Format "Jan 2, 2006" }}{{ end }}</p>
     {{ end }}
     {{ if gt (len $yearJumps) 0 }}
       <nav class="essays-front__year-nav" aria-label="Jump by year">
@@ -71,6 +79,15 @@
         </section>
       {{ end }}
     </div>
+    {{ with $paginator }}
+      {{ if gt .TotalPages 1 }}
+        <nav class="archive-pagination page-shell page-shell--reading" aria-label="Archive pages">
+          {{ if .HasPrev }}<a rel="prev" href="{{ .Prev.URL }}">← Newer</a>{{ else }}<span aria-hidden="true"></span>{{ end }}
+          <span>Page {{ .PageNumber }} of {{ .TotalPages }}</span>
+          {{ if .HasNext }}<a rel="next" href="{{ .Next.URL }}">Older →</a>{{ else }}<span aria-hidden="true"></span>{{ end }}
+        </nav>
+      {{ end }}
+    {{ end }}
   {{ else }}
     <section class="page-shell page-shell--reading essays-front__archive" aria-labelledby="page-title">
       <div class="item">

@@ -107,6 +107,7 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_discovery_surface_contract.ps1
+          ./tests/test_feed_policy_contract.ps1 -SourceOnly
 
       - name: Test Almanack Module Data Contract
         shell: pwsh
@@ -262,7 +263,11 @@ jobs:
       - name: Test Public HTML Output
         shell: pwsh
         run: |
+          ./tests/test_feed_policy_contract.ps1 -SiteDir public
           ./tests/test_public_html_output.ps1 -RequireFreshBuild
+
+      - name: Test Release A Metadata Output
+        run: node --test tests/release_a_metadata_output.test.mjs
 
       - name: Test Games Catalog Output
         shell: pwsh

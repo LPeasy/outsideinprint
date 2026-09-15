@@ -1,0 +1,23 @@
+{{- $catalog := partial "library/resolve-entries.html" . -}}
+{{- $items := slice -}}
+{{- range $catalog.entries -}}
+  {{- $items = $items | append (dict
+    "id" .id
+    "url" .url
+    "type" .type_key
+    "typeTitle" .type_title
+    "year" .year
+    "date" .date
+    "title" .title
+    "sectionLabel" .section_label
+    "version" .version
+    "readingTime" .reading_time
+    "collections" .collections
+    "collectionSlugs" .collection_slugs
+    "tags" .tags
+    "topics" .topics
+    "summary" .summary
+    "searchText" .search_text
+  ) -}}
+{{- end -}}
+{{- dict "version" 1 "count" (len $items) "items" $items | jsonify -}}

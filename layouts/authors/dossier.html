@@ -1,10 +1,48 @@
 {{ define "main" }}
   {{ $portraitPath := .Params.portrait | default "Bobviously_Portrait_v1.png" }}
   {{ $portrait := .Resources.GetMatch $portraitPath }}
+  {{ $resolvedAuthor := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) }}
+  {{ $author := $resolvedAuthor.primary }}
   {{ $bookstore := site.GetPage "/shop" }}
   {{ $publishedBooks := slice }}
   {{ with $bookstore }}
     {{ $publishedBooks = sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc" }}
+  {{ end }}
+
+  {{ $selectedWorks := slice }}
+  {{ $selectedPaths := dict }}
+  {{ range ($author.featured_work | default (slice)) }}
+    {{ $configuredPath := printf "%v" . }}
+    {{ with site.GetPage $configuredPath }}
+      {{ $selectedPage := . }}
+      {{ $policy := partial "metadata/policy.html" (dict "page" $selectedPage) }}
+      {{ $selectedAuthor := partial "authors/resolve.html" (dict "page" $selectedPage "fallbackDefault" true) }}
+      {{ if not $policy.indexable }}
+        {{ errorf "Author featured work %s is not indexable" $configuredPath }}
+      {{ else if or (not $selectedAuthor.primary) (ne $selectedAuthor.primary.key $author.key) }}
+        {{ errorf "Author featured work %s is not attributed to %s" $configuredPath $author.key }}
+      {{ else if isset $selectedPaths $selectedPage.RelPermalink }}
+        {{ errorf "Author featured work is configured more than once: %s" $configuredPath }}
+      {{ else }}
+        {{ $selectedWorks = $selectedWorks | append $selectedPage }}
+        {{ $selectedPaths = merge $selectedPaths (dict $selectedPage.RelPermalink true) }}
+      {{ end }}
+    {{ else }}
+      {{ errorf "Author featured work does not resolve: %s" $configuredPath }}
+    {{ end }}
+  {{ end }}
+
+  {{ $recentWorks := slice }}
+  {{ $latestLimit := $author.latest_limit | default 6 }}
+  {{ range partial "archive/resolve-pages.html" (dict "site" site "mode" "archive") }}
+    {{ if lt (len $recentWorks) $latestLimit }}
+      {{ $candidate := . }}
+      {{ $candidateAuthor := partial "authors/resolve.html" (dict "page" $candidate "fallbackDefault" true) }}
+      {{ $candidatePolicy := partial "metadata/policy.html" (dict "page" $candidate) }}
+      {{ if and $candidatePolicy.indexable $candidateAuthor.primary (eq $candidateAuthor.primary.key $author.key) (not (isset $selectedPaths $candidate.RelPermalink)) }}
+        {{ $recentWorks = $recentWorks | append $candidate }}
+      {{ end }}
+    {{ end }}
   {{ end }}
 
   <article class="author-route">
@@ -37,17 +75,53 @@
             {{ with .Params.role_line }}
               <p class="author-route__role">{{ . }}</p>
             {{ end }}
-            {{ if gt (len $publishedBooks) 0 }}
-              <p class="author-route__books">
-                Robert V. Ussley writes fiction and nonfiction for Outside In Print. Books include: {{ range $index, $book := $publishedBooks -}}
-                  {{- if gt $index 0 }}{{ if eq $index (sub (len $publishedBooks) 1) }}, and {{ else }}, {{ end }}{{ end -}}
-                  <a href="{{ $book.RelPermalink }}"><cite>{{ $book.Title }}</cite></a>{{ end }}.
-              </p>
-            {{ end }}
+            <p class="author-route__books">Robert V. Ussley writes fiction and nonfiction for Outside In Print.</p>
           </div>
         </section>
       </div>
     </div>
+
+    {{ if gt (len $publishedBooks) 0 }}
+      <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-books-title">
+        <h2 id="author-books-title" class="list-title">Books</h2>
+        {{ range $publishedBooks }}
+          {{ $book := . }}
+          {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}
+          <article class="item">
+            <div class="t"><a href="{{ $book.RelPermalink }}"><cite>{{ index $product "title" | default $book.Title }}</cite></a></div>
+            {{ with index $product "deck" }}<div class="d">{{ . }}</div>{{ end }}
+          </article>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ if gt (len $selectedWorks) 0 }}
+      <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-selected-title">
+        <h2 id="author-selected-title" class="list-title">Selected Writing</h2>
+        {{ range $selectedWorks }}
+          {{ partial "discovery/page-list-item.html" (dict
+            "page" .
+            "showCollections" true
+            "showSectionLabel" true
+            "analyticsSourceSlot" "author_selected"
+          ) }}
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ if gt (len $recentWorks) 0 }}
+      <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-recent-title">
+        <h2 id="author-recent-title" class="list-title">Recent Writing</h2>
+        {{ range $recentWorks }}
+          {{ partial "discovery/page-list-item.html" (dict
+            "page" .
+            "showCollections" true
+            "showSectionLabel" true
+            "analyticsSourceSlot" "author_recent"
+          ) }}
+        {{ end }}
+      </section>
+    {{ end }}
 
     <section class="author-route__reading-map page-shell page-shell--wide" aria-labelledby="author-reading-map-title">
       <div class="author-route__reading-map-header">

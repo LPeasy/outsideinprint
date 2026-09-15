@@ -715,7 +715,6 @@ $targetPageHtml = @{}
 $requiredSemanticPages = [ordered]@{
   'public/index.html' = @{ ExpectedH1Class = 'title'; RequireSecondaryHeading = $true }
   'public/archive/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
-  'public/syd-and-oliver/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/library/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/gallery/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
   'public/collections/index.html' = @{ ExpectedH1Class = 'list-title'; RequireSecondaryHeading = $true }
@@ -981,14 +980,6 @@ $requiredMetadataPages = [ordered]@{
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/social/oip-archive.png'
     ExpectedImageAlt = 'Outside In Print social card for the long-form archive.'
-  }
-  'public/syd-and-oliver/index.html' = @{
-    Title = 'Syd and Oliver Dialogues'
-    Description = 'Dialogue pieces from the recurring world of Syd and Oliver, where power, obligation, money, intimacy, and moral pressure are worked out in conversation.'
-    Canonical = 'https://outsideinprint.org/syd-and-oliver/'
-    OgType = 'website'
-    TwitterCard = 'summary_large_image'
-    RequireImage = $true
   }
   'public/library/index.html' = @{
     Title = 'Library'
@@ -1380,7 +1371,6 @@ $requiredStructuredDataPages = [ordered]@{
     RequiredTypes = @('Organization', 'WebSite', 'WebPage', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork', 'CollectionPage')
     RequirePublisherNode = $true
-    RequireSearchAction = $true
     RequirePublisherImage = $true
   }
   'public/apps/index.html' = @{
@@ -1406,21 +1396,12 @@ $requiredStructuredDataPages = [ordered]@{
     ForbiddenTypes = @('Article', 'CreativeWork')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
-    RequireSearchAction = $true
-  }
-  'public/syd-and-oliver/index.html' = @{
-    RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
-    ForbiddenTypes = @('Article', 'CreativeWork')
-    RequirePublisherNode = $true
-    RequireBreadcrumb = $true
-    RequireSearchAction = $true
   }
   'public/library/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
     ForbiddenTypes = @('Article', 'CreativeWork')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
-    RequireSearchAction = $true
   }
   'public/gallery/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'CollectionPage', 'BreadcrumbList', 'ImageObject')
@@ -1433,7 +1414,6 @@ $requiredStructuredDataPages = [ordered]@{
     ForbiddenTypes = @('Article', 'CreativeWork')
     RequirePublisherNode = $true
     RequireBreadcrumb = $true
-    RequireSearchAction = $true
   }
   'public/about/index.html' = @{
     RequiredTypes = @('Organization', 'WebSite', 'AboutPage', 'BreadcrumbList', 'ImageObject')
@@ -1525,7 +1505,7 @@ $requiredIndexationPages = [ordered]@{
   }
   'public/syd-and-oliver/index.html' = @{
     ExpectRobotsMeta = $true
-    Robots = 'index, follow, max-image-preview:large'
+    Robots = 'noindex, follow'
   }
   'public/authors/robert-v-ussley/index.html' = @{
     ExpectRobotsMeta = $true
@@ -1592,7 +1572,6 @@ $requiredSitemapInclusions = @(
   'https://outsideinprint.org/authors/robert-v-ussley/',
   'https://outsideinprint.org/archive/',
   'https://outsideinprint.org/essays/the-risk-management-buffet/',
-  'https://outsideinprint.org/syd-and-oliver/',
   'https://outsideinprint.org/collections/',
   'https://outsideinprint.org/collections/risk-uncertainty/',
   'https://outsideinprint.org/library/',
@@ -1608,6 +1587,7 @@ $requiredSitemapExclusions = @(
   'https://outsideinprint.org/start-here/',
   'https://outsideinprint.org/almanack/',
   'https://outsideinprint.org/essays/',
+  'https://outsideinprint.org/syd-and-oliver/',
   'https://outsideinprint.org/working-papers/',
   'https://outsideinprint.org/literature/'
 )
@@ -1856,6 +1836,7 @@ foreach ($file in $htmlFiles) {
     ($requiredLegacyHostRedirectPages -contains $relativePath) -or
     ($requiredLegacyCleanupPages -contains $relativePath) -or
     ($requiredUxPages -contains $relativePath) -or
+    ($relativePath -match '^public/archive(?:/page/\d+)?/index\.html$') -or
     ($requiredEssayHeroPages -contains $relativePath) -or
     ($relativePath -ceq 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html')
   ) {
@@ -2885,29 +2866,9 @@ foreach ($relativePath in $requiredStructuredDataPages.Keys) {
     }
   }
 
-  if (Test-ExpectedFlag -Entry $expected -Key 'RequireSearchAction') {
-    $websiteNode = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'WebSite') | Select-Object -First 1
-    if ($null -eq $websiteNode -or $null -eq $websiteNode.potentialAction) {
-      $structuredDataIssues.Add("$relativePath => expected WebSite JSON-LD to expose SearchAction")
-    } else {
-      $action = $websiteNode.potentialAction
-      if ($action.'@type' -ne 'SearchAction') {
-        $structuredDataIssues.Add("$relativePath => expected WebSite potentialAction to be SearchAction")
-      }
-
-      $targetTemplate = $null
-      if ($null -ne $action.target) {
-        if ($action.target.urlTemplate) {
-          $targetTemplate = [string]$action.target.urlTemplate
-        } elseif ($action.target -is [string]) {
-          $targetTemplate = [string]$action.target
-        }
-      }
-
-      if ($targetTemplate -ne 'https://outsideinprint.org/library/?q={search_term_string}') {
-        $structuredDataIssues.Add("$relativePath => expected SearchAction target to point at the library query route")
-      }
-    }
+  $websiteNode = @(Get-JsonLdNodesByType -Nodes $nodes -Type 'WebSite') | Select-Object -First 1
+  if ($null -ne $websiteNode -and ($websiteNode.PSObject.Properties.Name -contains 'potentialAction')) {
+    $structuredDataIssues.Add("$relativePath => expected WebSite JSON-LD to omit retired sitelinks SearchAction markup")
   }
 
   $workNode = @(
@@ -3570,7 +3531,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '\d+\s+published pieces.*?Latest:\s*[A-Z][a-z]{2}\s+\d{1,2},\s+\d{4}'
+    Pattern = '\d+\s+published pieces.*?This page begins\s+[A-Z][a-z]{2}\s+\d{1,2},\s+\d{4}'
     Message = 'expected the archive landing page to collapse to a compact archive stats line'
   },
   @{
@@ -3604,23 +3565,28 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)href=(?:"?#archive-month-20\d{2}-(?:0[1-9]|1[0-2])"?).*?>20\d{2}<.*?href=(?:"?#archive-month-20\d{2}-(?:0[1-9]|1[0-2])"?).*?>20\d{2}<'
+    Pattern = 'href=(?:"?#archive-month-20\d{2}-(?:0[1-9]|1[0-2])"?).*?>20\d{2}<'
     Message = 'expected the archive landing page to expose inline year jumps keyed to archive month anchors'
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)May 2026.*?April 2026.*?March 2026.*?February 2026.*?January 2026'
+    Pattern = '(?s)September 2026.*?August 2026.*?July 2026'
     Message = 'expected the archive to group entries by descending month-year bands'
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)/essays/hindsight-2026-d4vd-alleged-romantic-homicide/.*?/essays/the-world-is-back-at-the-poker-table/.*?/essays/1929-2029-americas-century-of-humiliation/'
+    Pattern = '(?s)/syd-and-oliver/what-i-had/.*?/syd-and-oliver/the-morning-after/.*?/essays/already-mine/'
     Message = 'expected the archive landing page to keep the newest stories in descending chronological order'
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '/syd-and-oliver/without-a-word/'
+    Pattern = '/syd-and-oliver/what-i-had/'
     Message = 'expected the merged archive to include representative dialogue pieces alongside essays'
+  },
+  @{
+    Path = 'public/archive/index.html'
+    Pattern = '(?s)archive-pagination.*?Page 1 of \d+.*?rel=(?:"next"|next).*?/archive/page/2/'
+    Message = 'expected the archive landing page to expose bounded pagination to older work'
   },
   @{
     Path = 'public/archive/index.html'
@@ -3658,8 +3624,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = 'Search the archive by title, type, collection, or version\.'
-    Message = 'expected the library page to render the new utility line under the title'
+    Pattern = 'Search published work by title, topic, tag, type, year, or collection\.'
+    Message = 'expected the library page to render the complete search utility line under the title'
   },
   @{
     Path = 'public/library/index.html'
@@ -3678,8 +3644,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = 'Search titles, types, collections, and versions'
-    Message = 'expected the library page search placeholder to reflect type-based grouping'
+    Pattern = 'Search titles, topics, tags, types, years, and collections'
+    Message = 'expected the library search placeholder to name every searchable dimension'
   },
   @{
     Path = 'public/library/index.html'
@@ -3710,34 +3676,18 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/syd-and-oliver/index.html'
-    Pattern = '(?s)<h1[^>]*>\s*Syd and Oliver Dialogues\s*</h1>'
-    Message = 'expected the /syd-and-oliver/ route to render the filtered dialogue archive title'
+    Pattern = '(?s)<meta\s+name=(?:"robots"|robots)\s+content=(?:"noindex, follow"|noindex,\s*follow).*?<link\s+rel=(?:"canonical"|canonical)\s+href=(?:"https://outsideinprint\.org/collections/syd-and-oliver-dialogues/"|https://outsideinprint\.org/collections/syd-and-oliver-dialogues/).*?<meta\s+http-equiv=(?:"refresh"|refresh)\s+content=(?:"0; url=/collections/syd-and-oliver-dialogues/"|0;\s*url=/collections/syd-and-oliver-dialogues/).*?window\.location\.replace\("/collections/syd-and-oliver-dialogues/"\)'
+    Message = 'expected /syd-and-oliver/ to be a noindex compatibility redirect to the canonical collection'
   },
   @{
     Path = 'public/syd-and-oliver/index.html'
-    Pattern = 'page-header--section-centered'
-    Message = 'expected /syd-and-oliver/ to emit the centered section-header hook'
+    Pattern = '>Syd and Oliver Dialogues</a>'
+    Message = 'expected /syd-and-oliver/ to expose a visible canonical-collection fallback link'
   },
   @{
     Path = 'public/syd-and-oliver/index.html'
-    Pattern = 'Current Edition|essays-front__lead|essays-front__rail|essays-front__cartoon'
-    Message = 'expected /syd-and-oliver/ to avoid the retired front-page-style edition structure'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/syd-and-oliver/index.html'
-    Pattern = 'essays-front__year-nav'
-    Message = 'expected /syd-and-oliver/ to reuse the filtered archive shell with year-jump navigation'
-  },
-  @{
-    Path = 'public/syd-and-oliver/index.html'
-    Pattern = '/syd-and-oliver/without-a-word/'
-    Message = 'expected /syd-and-oliver/ to list representative dialogue pieces'
-  },
-  @{
-    Path = 'public/syd-and-oliver/index.html'
-    Pattern = '/essays/the-risk-management-buffet/'
-    Message = 'expected /syd-and-oliver/ not to mix essay-only pieces into the filtered dialogue archive'
+    Pattern = 'essays-front__year-nav|archive/render-list|/syd-and-oliver/without-a-word/'
+    Message = 'expected /syd-and-oliver/ not to render or list the retired filtered archive shell'
     ShouldNotMatch = $true
   },
   @{
@@ -3795,7 +3745,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = '(?s)searchParams\.get\((?:"q"|''q'')\).*searchParams\.set\((?:"q"|''q''),\s*[^)]+\).*replaceState'
+    Pattern = '(?s)searchParams\.get\((?:"q"|''q'')\).*?\[\[(?:"q"|''q''),.*?\],\[(?:"type"|''type''),.*?\],\[(?:"year"|''year''),.*?\],\[(?:"collection"|''collection''),.*?\]\]\.forEach.*?searchParams\.set\(.*?replaceState'
     Message = 'expected the library page to sync the search input with the q query parameter'
   },
   @{
@@ -4010,7 +3960,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = '(?s)writes fiction and nonfiction for Outside In Print\. Books include:.*?The American Nightmare: Keep Dreaming, Kid.*?The Parable of the Sheep.*?The Water Cycle: Risk, Infrastructure, and Public Memory'
+    Pattern = '(?s)id=(?:"author-books-title"|author-books-title).*?>Books<.*?/shop/2045/.*?/shop/the-american-nightmare-keep-dreaming-kid/.*?/shop/the-parable-of-the-sheep/.*?/shop/the-water-cycle/'
     Message = 'expected the author page to retain the established books alongside any new release'
   },
   @{
@@ -6007,8 +5957,8 @@ if ($targetPageHtml.ContainsKey('public/archive/index.html')) {
   }
 
   $yearJumpCount = [regex]::Matches($archiveIndexHtml, 'class=(?:"[^"]*\bessays-front__year-link\b[^"]*"|''[^'']*\bessays-front__year-link\b[^'']*''|[^\s>]*\bessays-front__year-link\b[^\s>]*)', 'IgnoreCase').Count
-  if ($yearJumpCount -lt 2) {
-    $uxIssues.Add("public/archive/index.html => expected at least 2 year-jump links, found $yearJumpCount")
+  if ($yearJumpCount -lt 1) {
+    $uxIssues.Add("public/archive/index.html => expected at least one year-jump link, found $yearJumpCount")
   }
 
   if (-not [string]::IsNullOrWhiteSpace($currentCartoonCaption) -and $archiveIndexHtml -match [regex]::Escape($currentCartoonCaption)) {
@@ -6040,11 +5990,22 @@ foreach ($slug in $focusedSydHeroPages.Keys) {
   }
 }
 
-$modernBioSharedRowPages = @(
-  'public/archive/index.html',
-  'public/library/index.html',
-  'public/collections/modern-bios/index.html'
-)
+$modernBioArchivePath = @(
+  $targetPageHtml.Keys |
+    Where-Object {
+      $_ -match '^public/archive(?:/page/\d+)?/index\.html$' -and
+      [string]$targetPageHtml[$_] -match 'Modern Bios'
+    } |
+    Sort-Object
+) | Select-Object -First 1
+
+$modernBioSharedRowPages = @('public/collections/modern-bios/index.html')
+if ($null -eq $modernBioArchivePath) {
+  $uxIssues.Add('Archive pagination => expected at least one rendered archive page to retain the Modern Bios text kicker')
+}
+else {
+  $modernBioSharedRowPages += $modernBioArchivePath
+}
 
 foreach ($relativePath in $modernBioSharedRowPages) {
   if (-not $targetPageHtml.ContainsKey($relativePath)) {

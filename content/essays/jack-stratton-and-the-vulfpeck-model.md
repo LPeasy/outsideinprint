@@ -1,5 +1,6 @@
 ---
 title: "How Jack Stratton Hacked the Music Industry with Funk, Friends, and Irresistible Groove"
+metadata_title: "Jack Stratton and Vulfpeck’s Independent Music Model"
 date: 2025-05-28
 draft: false
 slug: "jack-stratton-and-the-vulfpeck-model"
@@ -10,7 +11,7 @@ subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the Syst
 featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b41234f692c761a11f33e202a31bb366b4c2c8e31b07a3ac2b8856187.jpeg"
 featured_image_caption: "Jack Stratton on stage | Source: Michelle Shiers"
 featured_image_alt: "Jack Stratton on stage"
-description: "From silent albums to sold-out arenas: The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
+description: "A profile of Jack Stratton and Vulfpeck’s independent model, from Sleepify and Madison Square Garden to fan-first releases and creative control."
 version: "1.5"
 edition: "Sixth web edition"
 revision_history:

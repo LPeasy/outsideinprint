@@ -1,14 +1,16 @@
 ---
 title: "Standard of Living vs. Quality of Life: What the Numbers Miss"
+metadata_title: "Standard of Living vs. Quality of Life: What GDP Misses"
 date: 2025-05-12
 draft: false
 slug: "standard-of-living-vs-quality-of-life-what-the-numbers-miss"
 section_label: "Essay"
+collections: ["household-economy-work-and-cost"]
 subtitle: "GDP is UP… So Why Does Life Still Feel So Hard?"
 featured_image: "/images/medium/standard-of-living-vs-quality-of-life-what-the-numbers-miss/0f2b5ab93973a8f53632b41ba12cfaaf0e21b0a75f2ab06b643fdd9ad3dbe04c.jpg"
 featured_image_caption: "Photo by Mathieu Stern on Unsplash"
 featured_image_alt: "Standard of Living vs. Quality of Life: What the Numbers Miss"
-description: "“Raising the standard of living” might be the most recycled promise in modern American politics"
+description: "Standard of living measures income and material conditions; quality of life also includes health, time, security, community, and meaning. Here is what GDP misses."
 version: "1.2"
 edition: "Third web edition"
 revision_history:

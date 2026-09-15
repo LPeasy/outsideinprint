@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'In a crowded bar, Syd and Oliver ask whether modern ignorance comes from missing facts or refusing the implications that might change us.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/willful-ignorance.pdf'

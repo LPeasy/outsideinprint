@@ -1,6 +1,8 @@
 ---
 title: "Reading sample"
+metadata_title: "The Water Cycle — Reading Sample"
 draft: false
+sample_of_book_key: "the_water_cycle"
 sample_source: "final_epub"
 sample_source_id: "B0H46WMGJQ"
 sample_source_checked: "2026-09-02"

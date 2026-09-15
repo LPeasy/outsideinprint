@@ -280,7 +280,7 @@ foreach ($requiredSnippet in @(
   'https://outsideinprint.org/about/',
   'https://outsideinprint.org/authors/robert-v-ussley/',
   'https://outsideinprint.org/archive/',
-  'https://outsideinprint.org/syd-and-oliver/',
+  'https://outsideinprint.org/collections/syd-and-oliver-dialogues/',
   'https://outsideinprint.org/collections/',
   'https://outsideinprint.org/library/',
   'https://outsideinprint.org/index.xml'
@@ -295,12 +295,20 @@ foreach ($requiredSnippet in @(
   'Canonical policy:',
   'https://outsideinprint.org/sitemap.xml',
   'https://outsideinprint.org/index.xml',
+  'https://outsideinprint.org/collections/syd-and-oliver-dialogues/',
+  'https://outsideinprint.org/syd-and-oliver/index.xml',
   'https://outsideinprint.org/about/',
   'https://outsideinprint.org/authors/robert-v-ussley/',
   'Legacy GitHub Pages URLs are not canonical.'
 )) {
   if ($llmsFull -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected static/llms-full.txt to contain discovery guidance snippet: $requiredSnippet"
+  }
+}
+
+foreach ($llmsDocument in @($llms, $llmsFull)) {
+  if ($llmsDocument -match '(?m)^- Syd and Oliver Dialogues:\s+https://outsideinprint\.org/syd-and-oliver/\s*$') {
+    throw 'Expected LLM discovery documents not to advertise the noindex Syd compatibility hub.'
   }
 }
 
@@ -953,23 +961,56 @@ foreach ($requiredSnippet in @(
   'section-front__header',
   'section-front__body',
   'page-header--section-centered',
-  'Search the archive by title, type, collection, or version.',
+  'Search published work by title, topic, tag, type, year, or collection.',
+  'partial "library/resolve-entries.html"',
+  '$initialLimit := 12',
+  'Search titles, topics, tags, types, years, and collections',
+  'for="library-type">Type</label>',
+  '<option value="">All types</option>',
+  'for="library-year">Year</label>',
+  'for="library-collection">Collection</label>',
+  'for="library-sort">Sort</label>',
+  'data-library-group-key="{{ $group.key }}"',
+  "url.searchParams.get('type')",
+  "url.searchParams.get('year')",
+  "url.searchParams.get('collection')",
+  "url.searchParams.delete('section')",
+  'fetch(indexUrl',
+  'node.textContent = value',
+  'partial "discovery/page-list-item.html"'
+)) {
+  if ($libraryTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/library/list.html to contain: $requiredSnippet"
+  }
+}
+
+$libraryResolver = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/library/resolve-entries.html') -Raw
+foreach ($requiredSnippet in @(
   'partial "archive/longform-kind.html"',
   '"title" "Essays"',
   '"title" "Affirmations"',
   '"title" "Dialogues"',
   '"title" "Working Papers"',
-  'Search titles, types, collections, and versions',
-  'for="library-type">Type</label>',
-  '<option value="">All types</option>',
-  'data-type="{{ index . "typeKey" }}"',
-  "url.searchParams.get('type')",
-  "url.searchParams.delete('section')",
   'partial "collections/resolve-page-collections.html"',
-  'partial "discovery/page-list-item.html"'
+  '"tags" $tagTerms',
+  '"topics" $topicTerms',
+  '"search_text"'
 )) {
-  if ($libraryTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/library/list.html to contain: $requiredSnippet"
+  if ($libraryResolver -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/partials/library/resolve-entries.html to contain: $requiredSnippet"
+  }
+}
+
+$libraryIndexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/library/list.libraryindex.json') -Raw
+foreach ($requiredSnippet in @(
+  'partial "library/resolve-entries.html"',
+  '"version" 1',
+  '"count" (len $items)',
+  '"items" $items',
+  '| jsonify'
+)) {
+  if ($libraryIndexTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected layouts/library/list.libraryindex.json to contain: $requiredSnippet"
   }
 }
 
@@ -1101,10 +1142,13 @@ foreach ($retiredSnippet in @(
 
 $dialoguesListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/syd-and-oliver/list.html') -Raw
 foreach ($requiredSnippet in @(
-  'partial "archive/resolve-pages.html"',
-  '"mode" "dialogue"',
-  'partial "archive/render-list.html"',
-  '"idPrefix" "dialogues"'
+  'Redirecting to Syd and Oliver Dialogues',
+  'noindex, follow',
+  '.Params.redirect_to',
+  '<link rel="canonical" href="{{ $target | absURL }}" />',
+  '.OutputFormats.Get "RSS"',
+  '<meta http-equiv="refresh" content="0; url={{ $target | relURL }}" />',
+  'window.location.replace("{{ $target | relURL }}");'
 )) {
   if ($dialoguesListTemplate -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/syd-and-oliver/list.html to contain: $requiredSnippet"
@@ -1112,12 +1156,47 @@ foreach ($requiredSnippet in @(
 }
 
 foreach ($retiredSnippet in @(
+  'define "main"',
+  'partial "archive/resolve-pages.html"',
+  'partial "archive/render-list.html"',
   'partial "journey_links.html"',
   'Current Edition',
   'No published pieces are listed here yet.'
 )) {
   if ($dialoguesListTemplate -match [regex]::Escape($retiredSnippet)) {
-    throw "Expected layouts/syd-and-oliver/list.html to use the shared filtered archive shell cleanly: $retiredSnippet"
+    throw "Expected layouts/syd-and-oliver/list.html to remain a compatibility redirect: $retiredSnippet"
+  }
+}
+
+$dialoguesSectionSource = Get-Content -Path (Join-Path $repoRoot 'content/syd-and-oliver/_index.md') -Raw
+foreach ($requiredSnippet in @(
+  'noindex: true',
+  'redirect_to: "/collections/syd-and-oliver-dialogues/"',
+  'outputs: ["HTML", "RSS"]'
+)) {
+  if ($dialoguesSectionSource -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected the legacy dialogue hub to declare: $requiredSnippet"
+  }
+}
+
+foreach ($requiredSnippet in @(
+  'legacy_path: /syd-and-oliver/',
+  'feed_path: /syd-and-oliver/index.xml'
+)) {
+  if ($collectionsData -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected the canonical Syd collection definition to declare: $requiredSnippet"
+  }
+}
+
+$baseTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/baseof.html') -Raw
+foreach ($requiredSnippet in @(
+  'with $meta.collection',
+  'with .feed_path',
+  'type="application/rss+xml"',
+  '{{ . | absURL }}'
+)) {
+  if ($baseTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected canonical collection feed autodiscovery via: $requiredSnippet"
   }
 }
 

@@ -7,6 +7,7 @@ publishDate: 2026-06-07T00:00:00-04:00
 draft: false
 slug: "the-meter-at-the-curb"
 section_label: "Essay"
+collections: ["civic-institutions-and-public-power"]
 version: "1.1"
 edition: "Second web edition"
 revision_history:

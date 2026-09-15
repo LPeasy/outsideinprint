@@ -4,6 +4,7 @@ date: 2025-03-16
 draft: false
 slug: "the-national-debt-is-screwing-you-heres-how"
 section_label: "Essay"
+collections: ["household-economy-work-and-cost"]
 subtitle: "America maxed out its credit card — and left you to pay for it."
 featured_image: "/images/medium/the-national-debt-is-screwing-you-heres-how/0a38cb7ce16106abac5e6818c097159c0c7e758e5b7a1a6af19de9d88e0cd8d4.jpeg"
 featured_image_caption: "Photo by Jp Valery on Unsplash"

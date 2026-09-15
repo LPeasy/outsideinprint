@@ -625,6 +625,171 @@ function Expand-EssayPaths {
   return $results.ToArray()
 }
 
+function Expand-DiscoveryLongformPaths {
+  param(
+    [string]$RepoRoot,
+    [string[]]$ContentPaths
+  )
+
+  $expanded = New-Object System.Collections.Generic.List[string]
+  foreach ($contentPath in $ContentPaths) {
+    if (Test-Path $contentPath -PathType Container) {
+      Get-ChildItem -Path $contentPath -File -Filter '*.md' -Recurse |
+        Where-Object { $_.Name -ne '_index.md' } |
+        ForEach-Object {
+          if (-not [string]::IsNullOrWhiteSpace((Get-PhilosophyContentKind -RepoRoot $RepoRoot -PathValue $_.FullName))) {
+            $expanded.Add($_.FullName)
+          }
+        }
+      continue
+    }
+
+    if (
+      ([System.IO.Path]::GetFileName($contentPath) -ne '_index.md') -and
+      (-not [string]::IsNullOrWhiteSpace((Get-PhilosophyContentKind -RepoRoot $RepoRoot -PathValue $contentPath)))
+    ) {
+      $expanded.Add($contentPath)
+    }
+  }
+
+  $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  $results = New-Object System.Collections.Generic.List[string]
+  foreach ($candidate in $expanded) {
+    if ($seen.Add($candidate)) {
+      $results.Add($candidate)
+    }
+  }
+
+  return $results.ToArray()
+}
+
+function ConvertFrom-SimpleYamlScalar {
+  param([string]$Value)
+
+  $normalized = ([string]$Value).Trim()
+  if (
+    $normalized.Length -ge 2 -and
+    (($normalized.StartsWith('"') -and $normalized.EndsWith('"')) -or ($normalized.StartsWith("'") -and $normalized.EndsWith("'")))
+  ) {
+    $normalized = $normalized.Substring(1, $normalized.Length - 2)
+  }
+  return $normalized.Trim()
+}
+
+function Get-FrontMatterListValues {
+  param(
+    [string]$Path,
+    [string]$Key
+  )
+
+  $values = New-Object System.Collections.Generic.List[string]
+  if (-not (Test-Path $Path -PathType Leaf)) {
+    return $values.ToArray()
+  }
+
+  $content = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
+  $frontMatterMatch = [regex]::Match(
+    (($content -replace "`r`n", "`n") -replace "`r", "`n"),
+    '\A---\s*\n(?<front>.*?)\n---\s*(?:\n|$)',
+    [System.Text.RegularExpressions.RegexOptions]::Singleline
+  )
+  if (-not $frontMatterMatch.Success) {
+    return $values.ToArray()
+  }
+
+  $collecting = $false
+  $escapedKey = [regex]::Escape($Key)
+  foreach ($line in @([regex]::Split([string]$frontMatterMatch.Groups['front'].Value, "`n"))) {
+    if ($line -match ("^\s*" + $escapedKey + "\s*:\s*(.*?)\s*$")) {
+      $collecting = $true
+      $inlineValue = ([string]$Matches[1]).Trim()
+      if (-not [string]::IsNullOrWhiteSpace($inlineValue)) {
+        $collecting = $false
+        $inlineValue = $inlineValue.TrimStart('[').TrimEnd(']')
+        foreach ($item in @($inlineValue -split ',')) {
+          $normalized = ConvertFrom-SimpleYamlScalar -Value $item
+          if (-not [string]::IsNullOrWhiteSpace($normalized)) {
+            $values.Add($normalized)
+          }
+        }
+      }
+      continue
+    }
+
+    if (-not $collecting) {
+      continue
+    }
+
+    if ($line -match '^\s+-\s*(.*?)\s*$') {
+      $normalized = ConvertFrom-SimpleYamlScalar -Value ([string]$Matches[1])
+      if (-not [string]::IsNullOrWhiteSpace($normalized)) {
+        $values.Add($normalized)
+      }
+      continue
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($line)) {
+      $collecting = $false
+    }
+  }
+
+  return @($values.ToArray() | Sort-Object -Unique)
+}
+
+function Get-PublicCollectionSlugs {
+  param([string]$RepoRoot)
+
+  $slugs = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  $collectionsPath = Join-Path $RepoRoot 'data\collections.yaml'
+  if (-not (Test-Path $collectionsPath -PathType Leaf)) {
+    return ,$slugs
+  }
+
+  $content = [System.IO.File]::ReadAllText($collectionsPath, [System.Text.Encoding]::UTF8)
+  $matches = [regex]::Matches(
+    (($content -replace "`r`n", "`n") -replace "`r", "`n"),
+    '(?ms)^  - slug:\s*(?<slug>[^\n#]+?)\s*\n(?<body>.*?)(?=^  - slug:|\z)'
+  )
+  foreach ($match in $matches) {
+    if ([regex]::IsMatch([string]$match.Groups['body'].Value, '(?m)^    public:\s*true\s*$')) {
+      $slug = ConvertFrom-SimpleYamlScalar -Value ([string]$match.Groups['slug'].Value)
+      if (-not [string]::IsNullOrWhiteSpace($slug)) {
+        [void]$slugs.Add($slug)
+      }
+    }
+  }
+
+  return ,$slugs
+}
+
+function Test-IsGitRepositoryRoot {
+  param([string]$RepoRoot)
+
+  $topLevelOutput = @(& git -C $RepoRoot rev-parse --show-toplevel 2>$null)
+  if ($LASTEXITCODE -ne 0 -or $topLevelOutput.Count -eq 0) {
+    return $false
+  }
+
+  $topLevel = [System.IO.Path]::GetFullPath(([string]($topLevelOutput -join '')).Trim()).TrimEnd('\', '/')
+  $resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $RepoRoot).Path).TrimEnd('\', '/')
+  return $topLevel.Equals($resolvedRoot, [System.StringComparison]::OrdinalIgnoreCase)
+}
+
+function Test-GitRefContainsPath {
+  param(
+    [string]$RepoRoot,
+    [string]$Ref,
+    [string]$RelativePath
+  )
+
+  if ([string]::IsNullOrWhiteSpace($Ref) -or ($Ref -match '^0+$')) {
+    return $false
+  }
+
+  & git -C $RepoRoot cat-file -e "$Ref`:$RelativePath" 2>$null
+  return ($LASTEXITCODE -eq 0)
+}
+
 function Get-WorkingTreeEssayPaths {
   param([string]$RepoRoot)
 
@@ -689,6 +854,8 @@ function Remove-GuardrailExemptFrontMatterFields {
     'build',
     'collections',
     'collection_weight',
+    'description',
+    'discovery_exempt_reason',
     'edition_relationship',
     'featured_image',
     'featured_image_alt',
@@ -1113,14 +1280,57 @@ function Invoke-LegacyImportPreflight {
   return $preflightExitCode
 }
 
-$targetPaths = Resolve-TargetEssayPaths `
+$resolvedTargetPaths = Resolve-TargetEssayPaths `
   -RepoRoot $Root `
   -ExplicitPaths $Paths `
   -FromRef $BaseRef `
   -ToRef $HeadRef `
   -ScanAll:$AllEssays
 
-$targetPaths = @(Expand-EssayPaths -EssayPaths $targetPaths)
+$discoveryPublishedTargetCount = 0
+$discoveryBlockingResults = New-Object System.Collections.Generic.List[object]
+if (Test-IsGitRepositoryRoot -RepoRoot $Root) {
+  $discoveryBaselineRef = if ((-not [string]::IsNullOrWhiteSpace($BaseRef)) -and ($BaseRef -notmatch '^0+$')) { $BaseRef } else { 'HEAD' }
+  $publicCollectionSlugs = Get-PublicCollectionSlugs -RepoRoot $Root
+  $discoveryTargetPaths = @(Expand-DiscoveryLongformPaths -RepoRoot $Root -ContentPaths $resolvedTargetPaths)
+
+  foreach ($discoveryTargetPath in $discoveryTargetPaths) {
+    $relativePath = Get-RepoRelativePath -RepoRoot $Root -PathValue $discoveryTargetPath
+    if (Test-GitRefContainsPath -RepoRoot $Root -Ref $discoveryBaselineRef -RelativePath $relativePath) {
+      continue
+    }
+
+    $frontMatter = Get-FrontMatterMap -Path $discoveryTargetPath
+    $isDraft = $frontMatter.ContainsKey('draft') -and ([string]$frontMatter['draft']).Trim() -match '^(?i:true|yes|1)$'
+    if ($isDraft) {
+      continue
+    }
+
+    $discoveryPublishedTargetCount++
+    $hasExemption = $frontMatter.ContainsKey('discovery_exempt_reason') -and (-not [string]::IsNullOrWhiteSpace([string]$frontMatter['discovery_exempt_reason']))
+    $hasPublicCollection = $false
+    foreach ($collectionSlug in @(Get-FrontMatterListValues -Path $discoveryTargetPath -Key 'collections')) {
+      if ($publicCollectionSlugs.Contains($collectionSlug)) {
+        $hasPublicCollection = $true
+        break
+      }
+    }
+
+    if (-not $hasPublicCollection -and -not $hasExemption) {
+      $displayPath = if ($relativePath.StartsWith('content/', [System.StringComparison]::OrdinalIgnoreCase)) {
+        $relativePath.Substring('content/'.Length)
+      } else {
+        $relativePath
+      }
+      $discoveryBlockingResults.Add([pscustomobject]@{
+        Path = $displayPath
+        Issues = @('missing_discovery_route')
+      })
+    }
+  }
+}
+
+$targetPaths = @(Expand-EssayPaths -EssayPaths $resolvedTargetPaths)
 
 $metadataOnlyPaths = New-Object System.Collections.Generic.List[string]
 $imageRecoveryOnlyPaths = New-Object System.Collections.Generic.List[string]
@@ -1164,6 +1374,20 @@ if ($imageRecoveryOnlyPaths.Count -gt 0) {
 }
 
 if ($targetPaths.Count -eq 0) {
+  if ($discoveryBlockingResults.Count -gt 0) {
+    Write-Host 'Essay guardrails summary' -ForegroundColor Cyan
+    Write-Host "  New published longform targets: $discoveryPublishedTargetCount"
+    Write-Host "  Discovery blocking files: $($discoveryBlockingResults.Count)"
+    foreach ($item in $discoveryBlockingResults) {
+      Write-Host ''
+      Write-Host "BLOCKER $($item.Path)" -ForegroundColor Red
+      foreach ($issue in $item.Issues) {
+        Write-Host "  - $issue" -ForegroundColor Red
+      }
+    }
+    Write-Host "`nEssay guardrails FAILED." -ForegroundColor Red
+    exit 1
+  }
   Write-Host 'Essay guardrails: no target files to check.' -ForegroundColor Yellow
   exit 0
 }
@@ -1334,6 +1558,8 @@ if ($RequireEditorialPhilosophyAudit) {
 }
 
 Write-Host 'Essay guardrails summary' -ForegroundColor Cyan
+Write-Host "  New published longform targets: $discoveryPublishedTargetCount"
+Write-Host "  Discovery blocking files: $($discoveryBlockingResults.Count)"
 Write-Host "  Essay cleanup targets: $($rows.Count)"
 Write-Host "  Philosophy audit targets: $($philosophyAuditSubjects.Count)"
 Write-Host "  Source-free Musing audit exemptions: $(@($philosophyAuditSubjects | Where-Object { [bool]$_.SourceFreeMusing }).Count)"
@@ -1346,6 +1572,14 @@ Write-Host "  Adverbial still construction hits: $($stillConstructionResults.Cou
 Write-Host "  Audit report: $($ReportBasePath).json"
 
 foreach ($item in $blockingResults) {
+  Write-Host ''
+  Write-Host "BLOCKER $($item.Path)" -ForegroundColor Red
+  foreach ($issue in $item.Issues) {
+    Write-Host "  - $issue" -ForegroundColor Red
+  }
+}
+
+foreach ($item in $discoveryBlockingResults) {
   Write-Host ''
   Write-Host "BLOCKER $($item.Path)" -ForegroundColor Red
   foreach ($issue in $item.Issues) {
@@ -1387,7 +1621,7 @@ $legacyPreflightExitCode = Invoke-LegacyImportPreflight `
   -GuardrailReportBasePath $ReportBasePath `
   -FailOnWarnings:$StrictWarnings
 
-if ($blockingResults.Count -gt 0 -or $philosophyAuditResults.Count -gt 0 -or $legacyPreflightExitCode -ne 0) {
+if ($discoveryBlockingResults.Count -gt 0 -or $blockingResults.Count -gt 0 -or $philosophyAuditResults.Count -gt 0 -or $legacyPreflightExitCode -ne 0) {
   Write-Host "`nEssay guardrails FAILED." -ForegroundColor Red
   exit 1
 }

@@ -6,6 +6,9 @@ image_alt: "Black cover for 2045 with a small OIP Exclusive mark, an oversized i
 featured_book: "2045"
 draft: false
 show_citation: false
+outputs:
+  - HTML
+  - RSS
 ---
 
 Independent fiction and nonfiction on the systems we build and the stories we tell ourselves. Read a free sample, then choose an Outside In Print EPUB through secure Square checkout. Selected titles also have Kindle editions.

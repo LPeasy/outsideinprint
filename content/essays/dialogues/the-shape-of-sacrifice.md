@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'Inside a former church turned karaoke bar, Syd and Oliver confront sacrifice, comfort, faith, and what truth demands when it costs something.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-shape-of-sacrifice.pdf'

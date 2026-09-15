@@ -4,6 +4,9 @@ description: "Weekly Outside In Print almanack issues from Robert V. Ussley, gat
 image: "/images/social/oip-almanack.png"
 image_alt: "Outside In Print social card for Bob's Almanack."
 noindex: true
+outputs:
+  - HTML
+  - RSS
 build:
   render: always
   list: never

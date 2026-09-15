@@ -30,6 +30,10 @@
   {{- $node = merge $node (dict "mainEntity" (dict
     "@id" (printf "%s#primaryentity" $meta.canonical)
   )) -}}
+{{- else if and (eq $meta.route.name "collection") $meta.collection (eq (printf "%v" ($meta.collection.schema_type | default "")) "CreativeWorkSeries") -}}
+  {{- $node = merge $node (dict "mainEntity" (dict
+    "@id" (printf "%s#series" $meta.canonical)
+  )) -}}
 {{- else if and (eq $meta.route.name "author") $author.primary -}}
   {{- $node = merge $node (dict "mainEntity" (dict
     "@id" $author.primary.node_id

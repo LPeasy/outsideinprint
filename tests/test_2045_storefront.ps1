@@ -484,9 +484,9 @@ Assert-True (-not $sitemapXml.Contains($legacyUrl, [StringComparison]::Ordinal) 
 foreach ($surface in @($libraryHtml, $archiveHtml, $randomHtml, $siteFeed, $essayFeed, $archiveFeed)) {
   Assert-True (-not $surface.Contains($legacyUrl, [StringComparison]::Ordinal) -and $surface -notmatch 'href="?/essays/the-cracked-pot/') 'The earlier web edition leaked into a discovery collection or feed.'
 }
-Assert-True ($siteFeed.Contains($sampleUrl, [StringComparison]::Ordinal)) 'The dated 2045 story must remain in the site feed.'
-$sampleFeedItems = @([regex]::Matches($siteFeed, '(?is)<item>.*?</item>') | Where-Object { $_.Value.Contains($sampleUrl, [StringComparison]::Ordinal) })
-Assert-True ($sampleFeedItems.Count -eq 1 -and $sampleFeedItems[0].Value -notmatch '0001' -and $sampleFeedItems[0].Value -match '12 Sep 2026') 'The 2045 story feed entry must use its real publication date, never year 0001.'
+foreach ($feed in @($siteFeed, $essayFeed, $archiveFeed)) {
+  Assert-True (-not $feed.Contains($sampleUrl, [StringComparison]::Ordinal)) 'Book samples must remain outside publication feeds.'
+}
 if ($isDraft) {
   Assert-True ($detailHtml -notmatch '<form[^>]*data-epub-checkout') 'Preview exposes a live 2045 checkout.'
 }

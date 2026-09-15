@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'Syd and Oliver debate demographic change, diversity, truth, and whether a society can treat cultural transformation as a free lunch.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/the-free-lunch.pdf'

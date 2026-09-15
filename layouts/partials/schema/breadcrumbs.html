@@ -7,15 +7,48 @@
     "name" site.Title
     "url" site.Home.Permalink
   ) -}}
+  {{- $leafName := $page.Title | default $meta.title -}}
 
-  {{- if eq $meta.route.name "article" -}}
-    {{- with $page.CurrentSection -}}
+  {{- if eq $meta.route.name "dialogue" -}}
+    {{- with site.GetPage "/collections/syd-and-oliver-dialogues" -}}
+      {{- $definition := partial "collections/lookup-definition.html" "syd-and-oliver-dialogues" -}}
+      {{- $parentName := .Title -}}
+      {{- with $definition -}}
+        {{- $parentName = .title | default $parentName -}}
+      {{- end -}}
+      {{- $items = $items | append (dict
+        "name" $parentName
+        "url" .Permalink
+      ) -}}
+    {{- end -}}
+  {{- else if eq $meta.route.name "article" -}}
+    {{- with site.GetPage "/archive" -}}
       {{- $items = $items | append (dict
         "name" .Title
         "url" .Permalink
       ) -}}
     {{- end -}}
-    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
+  {{- else if eq $meta.route.name "shop-product" -}}
+    {{- with site.GetPage "/shop" -}}
+      {{- $items = $items | append (dict
+        "name" .Title
+        "url" .Permalink
+      ) -}}
+    {{- end -}}
+  {{- else if eq $meta.route.name "shop-sample" -}}
+    {{- with site.GetPage "/shop" -}}
+      {{- $items = $items | append (dict
+        "name" .Title
+        "url" .Permalink
+      ) -}}
+    {{- end -}}
+    {{- $productPage := partial "schema/resolve-product-page.html" (dict "key" $page.Params.sample_of_book_key) -}}
+    {{- with $productPage -}}
+      {{- $items = $items | append (dict
+        "name" .Title
+        "url" .Permalink
+      ) -}}
+    {{- end -}}
   {{- else if eq $meta.route.name "collection" -}}
     {{- with site.GetPage "/collections" -}}
       {{- $items = $items | append (dict
@@ -23,7 +56,7 @@
         "url" .Permalink
       ) -}}
     {{- end -}}
-    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
+    {{- $leafName = $meta.title -}}
   {{- else if eq $meta.route.name "author" -}}
     {{- with site.GetPage "/authors" -}}
       {{- $items = $items | append (dict
@@ -31,10 +64,9 @@
         "url" .Permalink
       ) -}}
     {{- end -}}
-    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
-  {{- else if or (eq $meta.route.name "about") (eq $meta.route.name "collection-list") (eq $meta.route.name "library") (eq $meta.route.name "gallery") (eq $meta.route.name "utility") (eq $meta.route.name "section-list") (eq $meta.route.name "page") -}}
-    {{- $items = $items | append (dict "name" $meta.title "url" $meta.canonical) -}}
   {{- end -}}
+
+  {{- $items = $items | append (dict "name" $leafName "url" $meta.canonical) -}}
 
   {{- if gt (len $items) 1 -}}
     {{- $listItems := slice -}}

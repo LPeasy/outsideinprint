@@ -7,6 +7,7 @@ image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'Syd and Oliver test local truth against history, causality, and the objective structures people rely on even when they deny them.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/history-pushes-back.pdf'
@@ -210,4 +211,3 @@ But as Syd walked away, Oliver noticed something he hadn’t before ~ how easily
 History, Oliver thought, does not forget.
 
 Neither, he knew, would he.
-

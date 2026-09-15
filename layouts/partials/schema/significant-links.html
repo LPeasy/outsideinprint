@@ -38,7 +38,7 @@
     {{- $links = $links | append .Permalink -}}
   {{- end -}}
 {{- else if eq $meta.route.name "library" -}}
-  {{- range (slice "/" "/collections" "/essays" "/syd-and-oliver") -}}
+  {{- range (slice "/" "/collections" "/archive" "/collections/syd-and-oliver-dialogues") -}}
     {{- with site.GetPage . -}}
       {{- $links = $links | append .Permalink -}}
     {{- end -}}

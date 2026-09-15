@@ -2,11 +2,13 @@
 title: 'All Time Highs'
 date: 2026-02-14T06:31:48Z
 url: '/syd-and-oliver/all-ti/'
+aliases: ['/syd-and-oliver/all-time-highs/']
 draft: false
 image_exempt: true
 image_exempt_reason: 'Syd and Oliver dialogue pages are intentionally text-only unless separately illustrated.'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
+description: 'At a dim bar, Syd and Oliver argue over record stock prices, the real economy, and whether a rising market proves that the system works.'
 version: '1.0'
 edition: 'First web edition'
 pdf: '/pdfs/all-ti.pdf'
@@ -226,4 +228,3 @@ Oliver paused.
 He stepped out into the night. The door closed with a whoosh, and the room resumed its low hum. 
 
 On Syd's phone, the green line was still climbing toward the upper right.
-

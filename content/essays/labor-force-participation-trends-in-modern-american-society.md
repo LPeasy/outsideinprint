@@ -4,6 +4,7 @@ date: 2024-12-11
 draft: false
 slug: "labor-force-participation-trends-in-modern-american-society"
 section_label: "Essay"
+collections: ["household-economy-work-and-cost"]
 subtitle: "2000-2025"
 description: "Labor Force Participation in the United States: Trends and Drivers (2000-Present). Over the past two decades, the U.S. labor force participation rate (LFPR..."
 version: "1.1"

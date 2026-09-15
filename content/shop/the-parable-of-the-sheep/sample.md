@@ -1,6 +1,8 @@
 ---
 title: "Reading sample"
+metadata_title: "The Parable of the Sheep — Reading Sample"
 draft: false
+sample_of_book_key: "parable_of_the_sheep"
 sample_source: "final_epub"
 sample_source_id: "B0GN18LLWB"
 sample_source_checked: "2026-09-02"

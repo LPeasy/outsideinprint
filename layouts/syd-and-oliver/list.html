@@ -1,8 +1,24 @@
-{{ define "main" }}
-  {{ $pages := partial "archive/resolve-pages.html" (dict "site" site "mode" "dialogue") }}
-  {{ partial "archive/render-list.html" (dict
-    "page" .
-    "pages" $pages
-    "idPrefix" "dialogues"
-  ) }}
-{{ end }}
+{{- $target := .Params.redirect_to | default "/collections/syd-and-oliver-dialogues/" -}}
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "en" }}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting to Syd and Oliver Dialogues</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="{{ $target | absURL }}" />
+  {{- with site.Home.OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ site.Title }} RSS Feed" href="{{ .Permalink }}" />
+  {{- end }}
+  {{- with .OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="{{ .MediaType.Type }}" title="Syd and Oliver Dialogues RSS Feed" href="{{ .Permalink }}" />
+  {{- end }}
+  <meta http-equiv="refresh" content="0; url={{ $target | relURL }}" />
+  <script>
+    window.location.replace("{{ $target | relURL }}");
+  </script>
+</head>
+<body>
+  <p>Redirecting to <a href="{{ $target | relURL }}">Syd and Oliver Dialogues</a>.</p>
+</body>
+</html>

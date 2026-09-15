@@ -43,6 +43,9 @@
   {{- $bio := "" -}}
   {{- $image := "" -}}
   {{- $parentOrganization := false -}}
+  {{- $featuredWork := slice -}}
+  {{- $latestLimit := 0 -}}
+  {{- $knowsAbout := slice -}}
   {{- $authorPage := false -}}
 
   {{- if $entry -}}
@@ -52,6 +55,9 @@
     {{- $focus = $entry.focus | default "" -}}
     {{- $bio = $entry.bio | default "" -}}
     {{- $parentOrganization = $entry.parent_organization | default false -}}
+    {{- $featuredWork = $entry.featured_work | default (slice) -}}
+    {{- $latestLimit = int ($entry.latest_limit | default 0) -}}
+    {{- $knowsAbout = $entry.knows_about | default (slice) -}}
 
     {{- with $entry.same_as -}}
       {{- $sameAs = . -}}
@@ -118,6 +124,9 @@
     "bio" $bio
     "image" $image
     "parent_organization" $parentOrganization
+    "featured_work" $featuredWork
+    "latest_limit" $latestLimit
+    "knows_about" $knowsAbout
   ) -}}
 {{- end -}}
 
