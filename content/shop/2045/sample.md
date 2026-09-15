@@ -22,7 +22,11 @@ sample_edition_notice:
   text: "This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*."
 ---
 
-Morning light filtered through the apartment’s automatic blinds, right on time. An Optimus hummed as it blended his favorite smoothie. He didn’t like smoothies anymore. “Good morning,” the bot chirped, handing him the drink. Its fingers were delicate and nimble. The synthetic voice grated on him—too cheerful, too perfect. He stared at the smoothie for a moment before setting it on the counter. He wouldn’t drink it. Across the room, another bot neatly folded his laundry. It pressed each shirt with mechanical precision before stacking them in a perfect tower. “Is there anything else I can optimize for you today?” the Optimus asked. He waved it off, sinking into the couch. The apartment was spotless, the air subtly perfumed with lavender—a scent calibrated to reduce stress. He remembered how his mother used to leave the windows open, letting in the smell of cut grass and the sound of distant lawnmowers. Nothing perfumed. Nothing optimized. The purifier ran on.
+Morning light filtered through the apartment’s automatic blinds, right on time. An Optimus hummed as it blended his favorite smoothie. He didn’t like smoothies anymore. “Good morning,” the bot chirped, handing him the drink. Its fingers were delicate and nimble. The synthetic voice grated on him—too cheerful, too perfect. He stared at the smoothie for a moment before setting it on the counter. He wouldn’t drink it.
+
+Across the room, another bot neatly folded his laundry. It pressed each shirt with mechanical precision before stacking them in a perfect tower. “Is there anything else I can optimize for you today?” the Optimus asked. He waved it off, sinking into the couch.
+
+The apartment was spotless, the air subtly perfumed with lavender—a scent calibrated to reduce stress. He remembered how his mother used to leave the windows open, letting in the smell of cut grass and the sound of distant lawnmowers. Nothing perfumed. Nothing optimized. The purifier ran on.
 
 At lunch, Jenna waved at him from their table at the cafe. Lucas and Tom were sitting there chomping at the bit and chopping it up like professional chefs. “Zero Sum says humanity’s won 4,000 consecutive victories this week,” Tom quipped. “Hard not to win when the scoreboard’s just a looped gif of fireworks,” Lucas snickered.
 

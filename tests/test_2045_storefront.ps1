@@ -231,9 +231,22 @@ if ($isDraft) {
 
 $body = [regex]::Match($sampleSource, '(?s)\A---\r?\n.*?\r?\n---\r?\n(?<body>.*)\z').Groups['body'].Value.Trim()
 $paragraphs = @([regex]::Split($body, '\r?\n\s*\r?\n'))
-Assert-True ($paragraphs.Count -eq 30) 'The Cracked Pot must retain its 30 prose paragraphs.'
-$bodyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($body))).ToLowerInvariant()
-Assert-True ($bodyHash -ceq 'a4a21a46551e5554287c170e405eab42f07102d4a1a86a7022592fb7db2f843a') 'The locked 2045 EPUB story text changed.'
+Assert-True ($paragraphs.Count -eq 32) 'The Cracked Pot must have exactly 32 prose paragraphs after the two approved opening breaks.'
+# Reverse only the owner's two exact opening breaks; preserve every other byte.
+$approvedOpeningStarts = @(
+  'Across the room, another bot neatly folded his laundry.',
+  'The apartment was spotless, the air subtly perfumed with lavender—a scent calibrated to reduce stress.'
+)
+$restoredBody = $body
+for ($i = 0; $i -lt $approvedOpeningStarts.Count; $i++) {
+  $start = $approvedOpeningStarts[$i]
+  Assert-True ($paragraphs[$i + 1].StartsWith($start, [StringComparison]::Ordinal)) 'An approved opening paragraph break moved.'
+  $boundary = "`n`n" + $start
+  Assert-True ([regex]::Matches($body, [regex]::Escape($boundary)).Count -eq 1) 'Each approved opening break must occur exactly once with canonical LF spacing.'
+  $restoredBody = $restoredBody.Replace($boundary, ' ' + $start, [StringComparison]::Ordinal)
+}
+$bodyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($restoredBody))).ToLowerInvariant()
+Assert-True ($bodyHash -ceq 'a4a21a46551e5554287c170e405eab42f07102d4a1a86a7022592fb7db2f843a') 'Joining only the two approved opening breaks must restore the frozen 30-paragraph story bytes.'
 Assert-True ($body.StartsWith("Morning light filtered through the apartment’s automatic blinds, right on time.")) 'Wrong story opening.'
 $ending = 'The Optimus stood motionless. He hesitated, his fingers tight around the pot while his gaze lingered on the box.'
 Assert-True ($body.EndsWith($ending)) 'The complete story ending is missing.'
@@ -521,7 +534,11 @@ if ($isDraft) {
   Assert-True ($detailHtml -notmatch '<form[^>]*data-epub-checkout') 'Preview exposes a live 2045 checkout.'
 }
 $sampleBody = [regex]::Match($sampleHtml, '(?s)<div[^>]*class="?bookstore-reading-sample__body"?[^>]*>(?<body>.*?)</div>').Groups['body'].Value
-Assert-True ([regex]::Matches($sampleBody, '<p(?:\s|>)').Count -eq 30) 'Rendered sample paragraph count changed.'
+$renderedParagraphs = @([regex]::Matches($sampleBody, '(?s)<p(?:\s[^>]*)?>(?<text>.*?)</p>'))
+Assert-True ($renderedParagraphs.Count -eq 32) 'Rendered sample must contain exactly 32 paragraphs.'
+for ($i = 0; $i -lt $approvedOpeningStarts.Count; $i++) {
+  Assert-True ((Plain-Text $renderedParagraphs[$i + 1].Groups['text'].Value).StartsWith($approvedOpeningStarts[$i], [StringComparison]::Ordinal)) 'Rendered sample opening paragraph break moved.'
+}
 Assert-True ([regex]::Matches($sampleBody, '<em(?:\s|>)').Count -eq 2) 'Rendered sample italic runs changed.'
 # Markdown escapes prevent Goldmark typography from changing locked literal dots.
 $expectedText = [regex]::Replace($body.Replace('*', '').Replace('\.', '.'), '\s+', ' ').Trim()
