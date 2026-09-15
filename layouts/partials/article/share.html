@@ -1,0 +1,17 @@
+{{- if partial "article/share-eligible.html" . -}}
+  {{- $meta := partial "metadata/page.html" . -}}
+  <div class="piece-share" data-piece-share data-share-title="{{ $meta.title }}" data-share-url="{{ $meta.canonical }}" hidden>
+    <button class="piece-share__button" type="button" data-share-trigger aria-expanded="false" aria-controls="piece-share-options">Share</button>
+    <div class="piece-share__panel" data-share-panel id="piece-share-options" hidden>
+      <div class="piece-share__actions">
+        <button class="piece-share__button" type="button" data-share-copy>Copy link</button>
+        <button class="piece-share__button" type="button" data-share-close>Close</button>
+      </div>
+      <div class="piece-share__manual" data-share-manual hidden>
+        <label for="piece-share-link">Link to this piece</label>
+        <input id="piece-share-link" type="text" data-share-input value="{{ $meta.canonical }}" readonly spellcheck="false" aria-describedby="piece-share-status">
+      </div>
+    </div>
+    <p class="piece-share__status" data-share-status id="piece-share-status" role="status" aria-live="polite" aria-atomic="true"></p>
+  </div>
+{{- end -}}

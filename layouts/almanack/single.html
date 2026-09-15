@@ -34,6 +34,7 @@
         {{ with .Params.issue_number }}<span>Issue {{ . }}</span>{{ end }}
       </div>
       {{ with .Params.subtitle }}<p class="almanack-subtitle">{{ . }}</p>{{ end }}
+      {{ partial "article/share.html" . }}
     </header>
 
     <figure class="almanack-quote almanack-quote--opening">

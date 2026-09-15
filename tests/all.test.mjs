@@ -11,6 +11,7 @@ import "./layout_ownership_contract.test.mjs";
 import "./oip_commerce_provisioning_order.test.mjs";
 import "./paper_route_contract.test.mjs";
 import "./paper_route_rules.test.mjs";
+import "./piece_share.test.mjs";
 import "./responsive_image_contract.test.mjs";
 import "./rcp85_audit_appendix_contract.test.mjs";
 import "./release_a_metadata_contract.test.mjs";

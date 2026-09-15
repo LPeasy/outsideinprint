@@ -6536,6 +6536,95 @@ body.cartoon-lightbox-open{
   min-width:0;
   margin:0;
 }
+.piece-share{
+  margin-top:1rem;
+  font-family:var(--font-ui);
+  font-size:.85rem;
+  font-weight:400;
+  line-height:1.5;
+  letter-spacing:0;
+  text-align:left;
+}
+.piece-share[hidden],
+.piece-share [hidden]{
+  display:none !important;
+}
+.piece-share__button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  min-height:44px;
+  padding:.45rem .85rem;
+  border:1px solid var(--oip-rule-standard);
+  border-radius:var(--radius-ui);
+  background:var(--bg-page);
+  color:var(--text-primary);
+  font:inherit;
+  cursor:pointer;
+}
+.piece-share__button:hover{
+  border-color:var(--oip-rule-clear);
+  background:var(--bg-raised);
+}
+.piece-share__button:focus-visible,
+.piece-share__manual input:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:3px;
+}
+.piece-share__button:disabled{
+  opacity:.65;
+  cursor:wait;
+}
+.piece-share__panel{
+  max-width:32rem;
+  margin-top:.5rem;
+  padding:.75rem;
+  border:1px solid var(--oip-rule-standard);
+  border-radius:var(--radius-ui);
+  background:var(--bg-surface);
+}
+.piece-share__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+.piece-share__manual{
+  margin-top:.75rem;
+}
+.piece-share__manual label{
+  display:block;
+  margin-bottom:.35rem;
+  color:var(--text-secondary);
+}
+.piece-share__manual input{
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  min-height:44px;
+  padding:.5rem;
+  border:1px solid var(--oip-rule-clear);
+  border-radius:var(--radius-ui);
+  background:var(--bg-page);
+  color:var(--text-primary);
+  font-family:var(--font-ui);
+  font-size:1rem;
+}
+.piece-share__status{
+  margin:0;
+  color:var(--text-secondary);
+}
+.piece-share__status:not(:empty){
+  margin-top:.5rem;
+}
+.almanack-masthead .piece-share{
+  width:fit-content;
+  max-width:100%;
+  margin-right:auto;
+  margin-left:auto;
+}
 .piece-title-block h1{
   max-width:18ch;
   margin-top:0;
@@ -13379,6 +13468,7 @@ section.games-facts dd,
   .collection-progress,
   .journey-links--article-exit,
   .collection-membership,
+  .piece-share,
   .paper-route-overlay{
     display:none !important;
   }

@@ -236,15 +236,13 @@ jobs:
         run: |
           ./tests/test_2045_launch_window.ps1
 
-      - name: Setup Node for analytics browser tests
-        if: env.ANALYTICS_ENABLED == 'true'
+      - name: Setup Node for browser tests
         uses: actions/setup-node@v6
         with:
           node-version: "20.20.2"
           package-manager-cache: false
 
-      - name: Install analytics browser test dependencies
-        if: env.ANALYTICS_ENABLED == 'true'
+      - name: Install browser test dependencies
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
           npx playwright install --with-deps chromium
@@ -252,6 +250,9 @@ jobs:
       - name: Test Hosted Analytics Network Privacy
         if: env.ANALYTICS_ENABLED == 'true'
         run: node --test --test-concurrency=1 tests/hosted_analytics_browser.test.mjs
+
+      - name: Test Piece Sharing
+        run: node --test --test-concurrency=1 tests/piece_share_browser.test.mjs
 
       - name: Remove public PDF artifacts
         shell: bash

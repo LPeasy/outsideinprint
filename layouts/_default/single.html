@@ -99,6 +99,7 @@
             {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
             {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
           {{ end }}
+          {{ partial "article/share.html" . }}
         </div>
 
         {{ if $plateImage }}

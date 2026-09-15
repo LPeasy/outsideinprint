@@ -7,6 +7,7 @@
         <p class="bookstore-reading-sample__eyebrow">A complete story from <a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a> · OIP Exclusive</p>
         <h1 id="page-title">{{ .Title }}</h1>
         <p class="bookstore-reading-sample__meta">By {{ index $product "author" }} · About {{ .ReadingTime }} min read</p>
+        {{ partial "article/share.html" . }}
       </header>
       {{ partial "edition-relationship.html" . }}
       <div class="bookstore-reading-sample__body">{{ .Content }}</div>

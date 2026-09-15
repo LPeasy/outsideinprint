@@ -36,6 +36,7 @@ $bookstoreReadingSampleContractPath = Join-Path $repoRoot "tests/test_bookstore_
 $bookstoreLaunchWindowContractPath = Join-Path $repoRoot "tests/test_2045_launch_window.ps1"
 $feedPolicyContractPath = Join-Path $repoRoot "tests/test_feed_policy_contract.ps1"
 $hostedAnalyticsBrowserContractPath = Join-Path $repoRoot "tests/hosted_analytics_browser.test.mjs"
+$pieceShareBrowserContractPath = Join-Path $repoRoot "tests/piece_share_browser.test.mjs"
 $packageLockPath = Join-Path $repoRoot "package-lock.json"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
@@ -88,6 +89,7 @@ foreach ($requiredValidationPath in @(
   $bookstoreLaunchWindowContractPath,
   $feedPolicyContractPath,
   $hostedAnalyticsBrowserContractPath,
+  $pieceShareBrowserContractPath,
   $packageLockPath,
   $seoMetadataAuditPath
 )) {
@@ -427,32 +429,34 @@ if ($hugoBuildStepIndex -lt 0 -or $launchWindowStepIndex -le $hugoBuildStepIndex
   throw "The controlled-clock 2045 launch-window contract must run after Hugo and before public artifact cleanup."
 }
 
-$analyticsSetupNodeStep = Get-WorkflowStepBlock `
+$browserSetupNodeStep = Get-WorkflowStepBlock `
   -WorkflowName "deploy.yml" `
   -WorkflowText $buildJobBlock `
-  -StepName "Setup Node for analytics browser tests"
-if ($analyticsSetupNodeStep -notmatch '(?m)^\s*uses:\s*actions/setup-node@v6\s*$' -or
-    $analyticsSetupNodeStep -notmatch '(?m)^\s*node-version:\s*"20\.20\.2"\s*$' -or
-    $analyticsSetupNodeStep -notmatch '(?m)^\s*package-manager-cache:\s*false\s*$') {
-  throw "Analytics browser tests must use the pinned Node 20.20.2 runtime without a package-manager cache."
+  -StepName "Setup Node for browser tests"
+if ($browserSetupNodeStep -notmatch '(?m)^\s*uses:\s*actions/setup-node@v6\s*$' -or
+    $browserSetupNodeStep -notmatch '(?m)^\s*node-version:\s*"20\.20\.2"\s*$' -or
+    $browserSetupNodeStep -notmatch '(?m)^\s*package-manager-cache:\s*false\s*$') {
+  throw "Browser tests must use the pinned Node 20.20.2 runtime without a package-manager cache."
 }
-$analyticsDependencyStep = Get-WorkflowStepBlock `
+$browserDependencyStep = Get-WorkflowStepBlock `
   -WorkflowName "deploy.yml" `
   -WorkflowText $buildJobBlock `
-  -StepName "Install analytics browser test dependencies"
-if ($analyticsDependencyStep -notmatch '(?m)^\s*npm ci --ignore-scripts --no-audit --no-fund\s*$' -or
-    $analyticsDependencyStep -notmatch '(?m)^\s*npx playwright install --with-deps chromium\s*$' -or
+  -StepName "Install browser test dependencies"
+if ($browserDependencyStep -notmatch '(?m)^\s*npm ci --ignore-scripts --no-audit --no-fund\s*$' -or
+    $browserDependencyStep -notmatch '(?m)^\s*npx playwright install --with-deps chromium\s*$' -or
     $packageJson -notmatch '"playwright"\s*:\s*"1\.53\.1"') {
-  throw "Analytics browser tests must install the locked Playwright 1.53.1 dependency and its matching Chromium in CI."
+  throw "Browser tests must install the locked Playwright 1.53.1 dependency and its matching Chromium in CI."
+}
+if ([regex]::Matches($buildJobBlock, '(?m)^\s*npm ci --ignore-scripts --no-audit --no-fund\s*$').Count -ne 1 -or
+    [regex]::Matches($buildJobBlock, '(?m)^\s*npx playwright install --with-deps chromium\s*$').Count -ne 1) {
+  throw "All browser suites must share one dependency and Chromium installation per Hugo build."
 }
 $analyticsBrowserStep = Get-WorkflowStepBlock `
   -WorkflowName "deploy.yml" `
   -WorkflowText $buildJobBlock `
   -StepName "Test Hosted Analytics Network Privacy"
-foreach ($enabledAnalyticsStep in @($analyticsSetupNodeStep, $analyticsDependencyStep, $analyticsBrowserStep)) {
-  if (-not $enabledAnalyticsStep.Contains("if: env.ANALYTICS_ENABLED == 'true'", [StringComparison]::Ordinal)) {
-    throw "Analytics browser setup and execution must be limited to enabled production builds so the analytics kill switch remains deployable."
-  }
+if (-not $analyticsBrowserStep.Contains("if: env.ANALYTICS_ENABLED == 'true'", [StringComparison]::Ordinal)) {
+  throw "The analytics browser suite must remain limited to enabled production builds so the analytics kill switch is deployable."
 }
 $analyticsBrowserCommand = 'node --test --test-concurrency=1 tests/hosted_analytics_browser.test.mjs'
 if (-not $analyticsBrowserStep.Contains($analyticsBrowserCommand, [StringComparison]::Ordinal) -or
@@ -460,15 +464,33 @@ if (-not $analyticsBrowserStep.Contains($analyticsBrowserCommand, [StringCompari
     $contractsJobBlock -match 'hosted_analytics_browser\.test\.mjs') {
   throw "The hosted analytics browser suite must run once in the Hugo build job, separate from source-only contracts."
 }
-$analyticsSetupIndex = $buildJobBlock.IndexOf('- name: Setup Node for analytics browser tests', [StringComparison]::Ordinal)
-$analyticsDependencyIndex = $buildJobBlock.IndexOf('- name: Install analytics browser test dependencies', [StringComparison]::Ordinal)
+$pieceShareBrowserStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $buildJobBlock `
+  -StepName "Test Piece Sharing"
+$pieceShareBrowserCommand = 'node --test --test-concurrency=1 tests/piece_share_browser.test.mjs'
+if (-not $pieceShareBrowserStep.Contains($pieceShareBrowserCommand, [StringComparison]::Ordinal) -or
+    [regex]::Matches($deployWorkflow, [regex]::Escape($pieceShareBrowserCommand)).Count -ne 1 -or
+    $contractsJobBlock -match 'piece_share_browser\.test\.mjs') {
+  throw "Piece sharing must be tested once against Hugo output, separate from source-only contracts."
+}
+foreach ($unconditionalBrowserStep in @($browserSetupNodeStep, $browserDependencyStep, $pieceShareBrowserStep)) {
+  if ($unconditionalBrowserStep -match '(?m)^\s*if:') {
+    throw "Shared browser dependencies and piece sharing tests must run even when analytics is disabled."
+  }
+}
+$browserSetupIndex = $buildJobBlock.IndexOf('- name: Setup Node for browser tests', [StringComparison]::Ordinal)
+$browserDependencyIndex = $buildJobBlock.IndexOf('- name: Install browser test dependencies', [StringComparison]::Ordinal)
 $analyticsBrowserIndex = $buildJobBlock.IndexOf('- name: Test Hosted Analytics Network Privacy', [StringComparison]::Ordinal)
+$pieceShareBrowserIndex = $buildJobBlock.IndexOf('- name: Test Piece Sharing', [StringComparison]::Ordinal)
 $pagesUploadIndex = $buildJobBlock.IndexOf('- name: Upload artifact', [StringComparison]::Ordinal)
-if ($analyticsSetupIndex -le $hugoBuildStepIndex -or
-    $analyticsDependencyIndex -le $analyticsSetupIndex -or
-    $analyticsBrowserIndex -le $analyticsDependencyIndex -or
-    $pagesUploadIndex -le $analyticsBrowserIndex) {
-  throw "Hosted analytics network privacy must be tested against the actual Hugo output before the Pages artifact is uploaded."
+if ($browserSetupIndex -le $hugoBuildStepIndex -or
+    $browserDependencyIndex -le $browserSetupIndex -or
+    $analyticsBrowserIndex -le $browserDependencyIndex -or
+    $pieceShareBrowserIndex -le $browserDependencyIndex -or
+    $pagesUploadIndex -le $analyticsBrowserIndex -or
+    $pagesUploadIndex -le $pieceShareBrowserIndex) {
+  throw "Browser suites must test the actual Hugo output before the Pages artifact is uploaded."
 }
 if ($deployWorkflow -match 'GOATCOUNTER_(?:SITE_URL|SCRIPT_SRC)') {
   throw "deploy.yml must not override the pinned analytics endpoint or local vendor script."

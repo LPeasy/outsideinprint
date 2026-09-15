@@ -1,0 +1,4 @@
+{{- if partial "article/share-eligible.html" . -}}
+  {{- $script := resources.Get "js/piece-share.js" | resources.Minify | resources.Fingerprint -}}
+  <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{- end -}}

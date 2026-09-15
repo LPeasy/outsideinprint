@@ -1,0 +1,8 @@
+{{- $eligible := false -}}
+{{- $now := now -}}
+{{- if and .IsPage (not .Draft) (le .Date.Unix $now.Unix) (le .PublishDate.Unix $now.Unix) -}}
+  {{- $meta := partial "metadata/page.html" . -}}
+  {{- $readingSection := in (slice "essays" "syd-and-oliver" "reports" "working-papers" "almanack") .Section -}}
+  {{- $eligible = and $meta.policy.indexable (or $readingSection (eq $meta.route.name "shop-sample")) -}}
+{{- end -}}
+{{ return $eligible }}
