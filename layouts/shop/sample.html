@@ -21,7 +21,19 @@
           {{ partial "images/picture.html" (dict "page" $ "ref" . "alt" $illustrationAlt "sizes" "(max-width: 36rem) calc(100vw - 3rem), 32rem" "loading" "eager" "fetchpriority" "high") }}
         </div>
       {{ end }}
-      {{ partial "edition-relationship.html" . }}
+      {{ with .Params.sample_edition_notice }}
+        {{ $label := strings.TrimSpace (printf "%v" (.label | default "")) }}
+        {{ $text := strings.TrimSpace (printf "%v" (.text | default "")) }}
+        {{ if or (not $label) (not $text) }}
+          {{ errorf "Sample edition notice for %q requires label and text" $.RelPermalink }}
+        {{ end }}
+        <aside class="edition-relationship" role="note" aria-label="{{ $label }}" data-sample-edition-notice>
+          <p class="edition-relationship__label">{{ $label }}</p>
+          <p class="edition-relationship__text">{{ $text | markdownify }}</p>
+        </aside>
+      {{ else }}
+        {{ partial "edition-relationship.html" . }}
+      {{ end }}
       <div class="bookstore-reading-sample__body">{{ .Content }}</div>
       <footer class="bookstore-reading-sample__footer">
         <p class="bookstore-reading-sample__end"><span>End of sample</span></p>

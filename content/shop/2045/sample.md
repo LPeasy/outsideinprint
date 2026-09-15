@@ -17,11 +17,9 @@ sample_boundary: "Complete The Cracked Pot; stop before Memory Lane"
 sample_release_status: "published"
 sample_illustration: "books/2045/stories/the-cracked-pot"
 sample_illustration_alt: "A hand rests on a cracked handmade pot while a robotic hand offers a neatly wrapped gift beside an apartment window overlooking the city."
-edition_relationship:
+sample_edition_notice:
   label: "2045 EPUB edition."
-  text: "This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*. The earlier 2025 web edition remains available in the archive."
-  href: "/essays/the-cracked-pot/"
-  cta_label: "Read the earlier web edition →"
+  text: "This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*."
 ---
 
 Morning light filtered through the apartment’s automatic blinds, right on time. An Optimus hummed as it blended his favorite smoothie. He didn’t like smoothies anymore. “Good morning,” the bot chirped, handing him the drink. Its fingers were delicate and nimble. The synthetic voice grated on him—too cheerful, too perfect. He stared at the smoothie for a moment before setting it on the counter. He wouldn’t drink it. Across the room, another bot neatly folded his laundry. It pressed each shirt with mechanical precision before stacking them in a perfect tower. “Is there anything else I can optimize for you today?” the Optimus asked. He waved it off, sinking into the couch. The apartment was spotless, the air subtly perfumed with lavender—a scent calibrated to reduce stress. He remembered how his mother used to leave the windows open, letting in the smell of cut grass and the sound of distant lawnmowers. Nothing perfumed. Nothing optimized. The purifier ran on.

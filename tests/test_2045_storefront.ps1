@@ -162,9 +162,7 @@ $legacyRelationship = [ordered]@{
 }
 $sampleRelationship = [ordered]@{
   Label = '2045 EPUB edition.'
-  Text = 'This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*. The earlier 2025 web edition remains available in the archive.'
-  Href = '/essays/the-cracked-pot/'
-  Cta = 'Read the earlier web edition →'
+  Text = 'This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*.'
 }
 foreach ($expected in @(
   'metadata_title: "The Cracked Pot — Earlier Web Edition"',
@@ -185,14 +183,13 @@ foreach ($expected in @(
   'metadata_title: "The Cracked Pot — Complete Story from 2045"',
   'date: 2026-09-12',
   'edition: "2045 EPUB edition"',
-  'edition_relationship:',
+  'sample_edition_notice:',
   ('  label: "' + $sampleRelationship.Label + '"'),
-  ('  text: "' + $sampleRelationship.Text + '"'),
-  ('  href: "' + $sampleRelationship.Href + '"'),
-  ('  cta_label: "' + $sampleRelationship.Cta + '"')
+  ('  text: "' + $sampleRelationship.Text + '"')
 )) {
   Assert-True ($sampleSource.Contains($expected, [StringComparison]::Ordinal)) "2045 Cracked Pot metadata must contain: $expected"
 }
+Assert-True ($sampleSource -notmatch '(?im)^edition_relationship:|/essays/the-cracked-pot/|earlier (?:2025 )?web edition') 'The sample must not reference or promote the earlier web edition.'
 foreach ($required in @(
   '.Params.edition_relationship',
   '.label',
@@ -211,9 +208,9 @@ foreach ($required in @(
 $articleNoticeIndex = $articleTemplate.IndexOf('partial "edition-relationship.html" .', [StringComparison]::Ordinal)
 $articleBodyIndex = $articleTemplate.IndexOf('<div class="piece-body">', [StringComparison]::Ordinal)
 Assert-True ($articleNoticeIndex -ge 0 -and $articleBodyIndex -gt $articleNoticeIndex) 'Generic articles must render the edition relationship immediately before the article body.'
-$sampleNoticeIndex = $sampleTemplate.IndexOf('partial "edition-relationship.html" .', [StringComparison]::Ordinal)
+$sampleNoticeIndex = $sampleTemplate.IndexOf('data-sample-edition-notice', [StringComparison]::Ordinal)
 $sampleBodyIndex = $sampleTemplate.IndexOf('<div class="bookstore-reading-sample__body">', [StringComparison]::Ordinal)
-Assert-True ($sampleNoticeIndex -ge 0 -and $sampleBodyIndex -gt $sampleNoticeIndex) 'The standalone 2045 page must render the edition relationship above the locked story body.'
+Assert-True ($sampleNoticeIndex -ge 0 -and $sampleBodyIndex -gt $sampleNoticeIndex) 'The standalone 2045 page must render its current-edition notice above the locked story body.'
 foreach ($selector in @('.edition-relationship{', '.edition-relationship__label{', '.edition-relationship__text{', '.edition-relationship__cta{')) {
   Assert-True ($siteCss.Contains($selector, [StringComparison]::Ordinal)) "Edition relationship CSS must define $selector"
 }
@@ -457,8 +454,8 @@ foreach ($html in @($detailHtml, $sampleHtml)) {
 }
 
 $legacyNotice = [regex]::Match($legacyStoryHtml, '(?is)<aside\b[^>]*\bdata-edition-relationship(?:=|\s|>).*?</aside>')
-$sampleNotice = [regex]::Match($sampleHtml, '(?is)<aside\b[^>]*\bdata-edition-relationship(?:=|\s|>).*?</aside>')
-Assert-True ($legacyNotice.Success -and $sampleNotice.Success) 'Both Cracked Pot editions must render one shared edition relationship notice.'
+$sampleNotice = [regex]::Match($sampleHtml, '(?is)<aside\b[^>]*\bdata-sample-edition-notice(?:=|\s|>).*?</aside>')
+Assert-True ($legacyNotice.Success -and $sampleNotice.Success) 'The legacy page must retain its relationship notice and the sample must display its current-edition notice.'
 foreach ($noticeCase in @(
   @{ Html = $legacyNotice.Value; Relationship = $legacyRelationship },
   @{ Html = $sampleNotice.Value; Relationship = $sampleRelationship }
@@ -470,7 +467,11 @@ foreach ($noticeCase in @(
   $renderedRelationshipText = $relationship.Text.Replace('*2045*', '<em>2045</em>')
   Assert-True ($noticeHtml.Contains($renderedRelationshipText, [StringComparison]::Ordinal)) "Edition notice lost text: $($relationship.Text)"
   $cta = @([regex]::Matches($noticeHtml, '(?is)<a\b[^>]*>.*?</a>'))
-  Assert-True ($cta.Count -eq 1 -and (Html-Attribute $cta[0].Value 'href') -eq $relationship.Href -and (Plain-Text $cta[0].Value) -ceq $relationship.Cta) 'Edition notice CTA differs from its front matter contract.'
+  if ($relationship.Contains('Href')) {
+    Assert-True ($cta.Count -eq 1 -and (Html-Attribute $cta[0].Value 'href') -eq $relationship.Href -and (Plain-Text $cta[0].Value) -ceq $relationship.Cta) 'Edition notice CTA differs from its front matter contract.'
+  } else {
+    Assert-True ($cta.Count -eq 0) 'The current-edition sample notice must contain no outbound links.'
+  }
   Assert-True ($noticeHtml -match '<em>2045</em>') 'Edition relationship copy must render the book title with Markdown emphasis.'
 }
 $legacyBodyTag = [regex]::Match($legacyStoryHtml, '(?is)<div\b[^>]*\bclass="?piece-body"?(?:\s|>)')
@@ -490,6 +491,7 @@ Assert-True ((Meta-Content $sampleHtml 'og:image') -match '/books/2045/cover/' -
 foreach ($untouchedSurface in @($homeHtml, $legacyStoryHtml, (Read-Output 'gallery/index.html'))) {
   Assert-True (-not $untouchedSurface.Contains($sampleArtId, [StringComparison]::Ordinal)) 'Story illustration leaked onto the homepage, Gallery, or earlier web edition.'
 }
+Assert-True ($sampleHtml -notmatch '(?i)/essays/the-cracked-pot/|earlier (?:2025 )?web edition|data-edition-relationship(?:=|\s|>)') 'The sample output, including structured metadata, must not reference or promote the earlier edition.'
 Assert-True ((Meta-Content $legacyStoryHtml 'robots') -ceq 'noindex, follow') 'The earlier web edition must render noindex, follow.'
 Assert-True ((Meta-Content $sampleHtml 'robots') -ceq 'index, follow, max-image-preview:large') 'The 2045 edition must remain indexable.'
 Assert-True ($legacyStoryHtml -match '(?is)<link\b(?=[^>]*\brel="?canonical"?(?:\s|>))(?=[^>]*\bhref="?https://outsideinprint\.org/essays/the-cracked-pot/"?(?:\s|>))[^>]*>') 'The earlier web edition must retain its self-canonical URL.'
