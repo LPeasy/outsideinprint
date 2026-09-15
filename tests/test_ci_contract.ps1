@@ -35,6 +35,8 @@ $responsiveImageGuidePath = Join-Path $repoRoot "docs/responsive-image-pipeline.
 $bookstoreReadingSampleContractPath = Join-Path $repoRoot "tests/test_bookstore_reading_sample_contract.ps1"
 $bookstoreLaunchWindowContractPath = Join-Path $repoRoot "tests/test_2045_launch_window.ps1"
 $feedPolicyContractPath = Join-Path $repoRoot "tests/test_feed_policy_contract.ps1"
+$hostedAnalyticsBrowserContractPath = Join-Path $repoRoot "tests/hosted_analytics_browser.test.mjs"
+$packageLockPath = Join-Path $repoRoot "package-lock.json"
 
 if (-not (Test-Path $agentsPath -PathType Leaf)) {
   throw "AGENTS.md is required for repo-local publishing session guidance."
@@ -85,6 +87,8 @@ foreach ($requiredValidationPath in @(
   $bookstoreReadingSampleContractPath,
   $bookstoreLaunchWindowContractPath,
   $feedPolicyContractPath,
+  $hostedAnalyticsBrowserContractPath,
+  $packageLockPath,
   $seoMetadataAuditPath
 )) {
   if (-not (Test-Path $requiredValidationPath -PathType Leaf)) {
@@ -423,6 +427,57 @@ if ($hugoBuildStepIndex -lt 0 -or $launchWindowStepIndex -le $hugoBuildStepIndex
   throw "The controlled-clock 2045 launch-window contract must run after Hugo and before public artifact cleanup."
 }
 
+$analyticsSetupNodeStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $buildJobBlock `
+  -StepName "Setup Node for analytics browser tests"
+if ($analyticsSetupNodeStep -notmatch '(?m)^\s*uses:\s*actions/setup-node@v6\s*$' -or
+    $analyticsSetupNodeStep -notmatch '(?m)^\s*node-version:\s*"20\.20\.2"\s*$' -or
+    $analyticsSetupNodeStep -notmatch '(?m)^\s*package-manager-cache:\s*false\s*$') {
+  throw "Analytics browser tests must use the pinned Node 20.20.2 runtime without a package-manager cache."
+}
+$analyticsDependencyStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $buildJobBlock `
+  -StepName "Install analytics browser test dependencies"
+if ($analyticsDependencyStep -notmatch '(?m)^\s*npm ci --ignore-scripts --no-audit --no-fund\s*$' -or
+    $analyticsDependencyStep -notmatch '(?m)^\s*npx playwright install --with-deps chromium\s*$' -or
+    $packageJson -notmatch '"playwright"\s*:\s*"1\.53\.1"') {
+  throw "Analytics browser tests must install the locked Playwright 1.53.1 dependency and its matching Chromium in CI."
+}
+$analyticsBrowserStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $buildJobBlock `
+  -StepName "Test Hosted Analytics Network Privacy"
+foreach ($enabledAnalyticsStep in @($analyticsSetupNodeStep, $analyticsDependencyStep, $analyticsBrowserStep)) {
+  if (-not $enabledAnalyticsStep.Contains("if: env.ANALYTICS_ENABLED == 'true'", [StringComparison]::Ordinal)) {
+    throw "Analytics browser setup and execution must be limited to enabled production builds so the analytics kill switch remains deployable."
+  }
+}
+$analyticsBrowserCommand = 'node --test --test-concurrency=1 tests/hosted_analytics_browser.test.mjs'
+if (-not $analyticsBrowserStep.Contains($analyticsBrowserCommand, [StringComparison]::Ordinal) -or
+    [regex]::Matches($deployWorkflow, [regex]::Escape($analyticsBrowserCommand)).Count -ne 1 -or
+    $contractsJobBlock -match 'hosted_analytics_browser\.test\.mjs') {
+  throw "The hosted analytics browser suite must run once in the Hugo build job, separate from source-only contracts."
+}
+$analyticsSetupIndex = $buildJobBlock.IndexOf('- name: Setup Node for analytics browser tests', [StringComparison]::Ordinal)
+$analyticsDependencyIndex = $buildJobBlock.IndexOf('- name: Install analytics browser test dependencies', [StringComparison]::Ordinal)
+$analyticsBrowserIndex = $buildJobBlock.IndexOf('- name: Test Hosted Analytics Network Privacy', [StringComparison]::Ordinal)
+$pagesUploadIndex = $buildJobBlock.IndexOf('- name: Upload artifact', [StringComparison]::Ordinal)
+if ($analyticsSetupIndex -le $hugoBuildStepIndex -or
+    $analyticsDependencyIndex -le $analyticsSetupIndex -or
+    $analyticsBrowserIndex -le $analyticsDependencyIndex -or
+    $pagesUploadIndex -le $analyticsBrowserIndex) {
+  throw "Hosted analytics network privacy must be tested against the actual Hugo output before the Pages artifact is uploaded."
+}
+if ($deployWorkflow -match 'GOATCOUNTER_(?:SITE_URL|SCRIPT_SRC)') {
+  throw "deploy.yml must not override the pinned analytics endpoint or local vendor script."
+}
+if ($refreshWorkflow -match '(?m)^\s+schedule:\s*$|^\s+-\s+cron:' -or
+    $refreshWorkflow -notmatch '(?m)^\s+workflow_dispatch:\s*$') {
+  throw "Historical analytics refresh must remain manual-only with no scheduled trigger."
+}
+
 foreach ($budgetContract in @(
   @{ Pattern = '(?m)^\$maxArtifactBytes\s*=\s*900MB\s*$'; Name = '900 MiB Pages artifact' },
   @{ Pattern = '(?m)^\$maxPublicImageBytes\s*=\s*800MB\s*$'; Name = '800 MiB public/images' },
@@ -440,7 +495,7 @@ Assert-WorkflowActionReferences `
   -WorkflowText $deployWorkflow `
   -ExpectedReferences @{
     'actions/checkout@v7' = 4
-    'actions/setup-node@v6' = 1
+    'actions/setup-node@v6' = 2
     'actions/cache@v5' = 1
     'actions/configure-pages@v6' = 1
     'actions/deploy-pages@v5' = 1

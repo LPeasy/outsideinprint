@@ -515,22 +515,37 @@ foreach ($requiredAnalyticsText in @(
 )) {
   Assert-Contains -Text $analyticsScript -Expected $requiredAnalyticsText -Context 'Analytics script'
 }
-if ($analyticsScript -match '(?i)analyticsAmount|order[_-]?id|payment[_-]?id|customer[_-]?(?:id|email)|shipping[_-]?address|document\.referrer|location\.(?:search|hash)|URLSearchParams|get_query') {
-  throw 'Analytics code must not collect checkout amounts, processor IDs, customer data, URL query data, fragments, or raw referrers.'
+if ($analyticsScript -match '(?i)analyticsAmount|order[_-]?id|payment[_-]?id|customer[_-]?(?:id|email)|shipping[_-]?address') {
+  throw 'Analytics code must not collect checkout amounts, processor IDs, or customer data.'
+}
+foreach ($requiredAdapterPrivacyText in @(
+  'props.path = internalPath(props.path);',
+  'return parsed.pathname || "/";',
+  'window.goatcounter.referrer = window.oipAnalyticsEventReferrer;',
+  'return "direct_unknown";',
+  'campaign === "2045-launch"'
+)) {
+  Assert-Contains -Text $analyticsScript -Expected $requiredAdapterPrivacyText -Context 'Analytics path and fixed-source adapter'
 }
 
 $analyticsTemplate = Get-RequiredText -RelativePath 'layouts/partials/analytics.html'
 foreach ($requiredAnalyticsPrivacyText in @(
-  'window.oipAnalyticsEventReferrer = function ()',
-  'window.goatcounter.path = function ()',
-  'return window.location.pathname || "/";',
-  'window.goatcounter.referrer = function ()',
-  'return "";'
+  'window.goatcounter = {',
+  'path: function () { return null; },',
+  'referrer: "",',
+  'no_events: true,',
+  'resources.Get "js/vendor/goatcounter.v5.js" | resources.Minify | resources.Fingerprint',
+  'data-goatcounter="https://outsideinprint.goatcounter.com/count"'
 )) {
   Assert-Contains -Text $analyticsTemplate -Expected $requiredAnalyticsPrivacyText -Context 'Analytics privacy boundary'
 }
-if ($analyticsTemplate -match '(?i)URLSearchParams|location\.(?:search|hash)|document\.referrer|oipAnalyticsCampaignReferrer|get_query|order[_-]?id|payment[_-]?id|customer[_-]?(?:id|email)|shipping[_-]?address') {
-  throw 'Analytics template must expose only the current pathname and must suppress query data, fragments, campaign values, processor IDs, customer data, and raw referrers.'
+Assert-Ordered -Text $analyticsTemplate -First 'resources.Get "js/analytics.js"' -Second 'resources.Get "js/vendor/goatcounter.v5.js"' -Context 'Analytics adapter must load before the vendor client'
+if ($analyticsTemplate -match '(?i)GOATCOUNTER_SCRIPT_SRC|GOATCOUNTER_SITE_URL|order[_-]?id|payment[_-]?id|customer[_-]?(?:id|email)|shipping[_-]?address') {
+  throw 'Analytics template must pin its client and endpoint and exclude processor IDs and customer data.'
+}
+$analyticsVendor = Get-RequiredText -RelativePath 'assets/js/vendor/goatcounter.v5.js'
+if ($analyticsVendor -notmatch '(?m)^\s*q:\s*''''\s*,?\s*$') {
+  throw 'The vendored GoatCounter client must leave the independently transmitted query field empty.'
 }
 
 $mastheadTemplate = Get-RequiredText -RelativePath 'layouts/partials/masthead.html'
@@ -908,7 +923,7 @@ if ([regex]::Matches($shopOutput, 'Secure checkout through Square\. EPUB deliver
 
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
-  'Effective September 1, 2026',
+  'Effective September 15, 2026',
   'standalone Bob''s Almanack signup form',
   'IP address, browser or device information, and referring page',
   'selected preference tags',
@@ -1027,18 +1042,44 @@ foreach ($commercePage in @($shopOutput, $supportOutput, $thanksOutput, $epubTha
 
   $analyticsBootstrap = [regex]::Match(
     $commercePage,
-    '(?is)<script\b[^>]*>(?<body>(?:(?!</script>).)*window\.oipAnalyticsEventReferrer(?:(?!</script>).)*)</script>'
+    '(?is)<script\b[^>]*>(?<body>(?:(?!</script>).)*window\.oipAnalytics=(?:(?!</script>).)*)</script>'
   )
   if (-not $analyticsBootstrap.Success) {
     throw 'An analytics-enabled commerce route is missing the fail-closed analytics bootstrap.'
   }
 
   $analyticsBody = $analyticsBootstrap.Groups['body'].Value
-  if ($analyticsBody -notmatch '(?i)location\.pathname') {
-    throw 'Analytics-enabled commerce routes must reduce automatic pageview paths to the current pathname.'
+  if ($analyticsBody -notmatch '(?i)path:\s*function\s*\(\)\s*\{\s*return null\s*;?\s*\}' -or
+      $analyticsBody -notmatch '(?i)referrer:\s*(?:""|'''')' -or
+      $analyticsBody -notmatch '(?i)no_events:\s*(?:!0|true)') {
+    throw 'Analytics-enabled commerce routes must suppress counting until the privacy adapter has loaded.'
   }
-  if ($analyticsBody -match '(?i)URLSearchParams|location\.(?:search|hash)|document\.referrer|oipAnalyticsCampaignReferrer|get_query|order[_-]?id|payment[_-]?id|customer[_-]?(?:id|email)|shipping[_-]?address') {
-    throw 'Built commerce analytics must not expose query parsing, fragments, processor IDs, customer data, campaign values, or raw referrers.'
+  if ($analyticsBody -match '(?i)order[_-]?id|payment[_-]?id|customer[_-]?(?:id|email)|shipping[_-]?address') {
+    throw 'Built commerce analytics configuration must not expose processor IDs or customer data.'
+  }
+
+  $adapterTag = $null
+  $vendorTag = $null
+  foreach ($scriptTag in [regex]::Matches($commercePage, '(?is)<script\b[^>]*>')) {
+    $source = Get-HtmlAttribute -Tag $scriptTag.Value -Name 'src'
+    if ($source -match '^/js/analytics(?:\.min)?\.[0-9a-f]+\.js$') {
+      $adapterTag = $scriptTag
+    }
+    if ($source -match '^/js/vendor/goatcounter\.v5(?:\.min)?\.[0-9a-f]+\.js$') {
+      $vendorTag = $scriptTag
+    }
+  }
+  if ($null -eq $adapterTag -or $null -eq $vendorTag -or $adapterTag.Index -ge $vendorTag.Index) {
+    throw 'Analytics-enabled commerce routes must load the local fingerprinted adapter before the local fingerprinted GoatCounter client.'
+  }
+  foreach ($scriptTag in @($adapterTag, $vendorTag)) {
+    if ($scriptTag.Value -notmatch '(?i)\sdefer(?:\s|=|>)' -or
+        (Get-HtmlAttribute -Tag $scriptTag.Value -Name 'integrity') -notmatch '^sha(?:256|384|512)-') {
+      throw 'Both analytics assets must use deferred execution and fingerprint integrity.'
+    }
+  }
+  if ((Get-HtmlAttribute -Tag $vendorTag.Value -Name 'data-goatcounter') -ne 'https://outsideinprint.goatcounter.com/count') {
+    throw 'Built commerce analytics must use the pinned GoatCounter endpoint.'
   }
 }
 

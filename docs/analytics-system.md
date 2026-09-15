@@ -1,247 +1,68 @@
 # Analytics System
 
-Outside In Print uses a static, privacy-friendly analytics pipeline built around GoatCounter.
+## Weekly email is the main report
 
-- Public site tracking goes to `https://outsideinprint.goatcounter.com`.
-- Raw analytics are fetched into a temporary working folder.
-- `scripts/import_analytics.ps1` normalizes raw rows into `data/analytics/*.json`.
-- Refreshed snapshots are committed for reporting, SEO rollout measurement, and future analysis.
-- No separate analytics renderer is published from this repo.
+Outside In Print has selected GoatCounter's hosted weekly email for routine traffic review. The hosted dashboard at <https://outsideinprint.goatcounter.com> is optional for closer inspection. Use Google Search Console occasionally to check search impressions, clicks, and indexing; site analytics cannot measure search exposure before someone visits.
 
-SEO rollout operations are documented separately in `docs/seo-rollout.md`.
+The selected reporting format is GoatCounter's native weekly email: ten leading pages, per-page changes, and referrers. Its top-pages list can include custom events. Do not describe that email as a pageviews-only report, a custom scorecard, or a sales report.
 
-## Architecture
+**Account setup status:** sign-in is still required to enable weekly email, make the dashboard private, confirm `America/New_York`, and exclude events from the dashboard traffic total. Record the verification date and saved settings here after checking the signed-in GoatCounter account. Do not treat this guide as evidence that delivery or private access is enabled.
 
-The analytics path is:
+On September 15, 2026, Search Console showed verified ownership of `sc-domain:outsideinprint.org` and a successful submission of `https://outsideinprint.org/sitemap.xml`. Its displayed last-read date was May 30 with 200 discovered pages; that older result does not establish that the current sitemap has been recrawled.
 
-1. The public Hugo site emits GoatCounter pageviews plus lightweight custom events.
-2. `.github/workflows/refresh-analytics.yml` runs on a schedule or manual dispatch.
-3. `scripts/fetch_analytics_goatcounter.ps1` requests a GoatCounter export and writes raw files into `./.analytics-refresh/raw`.
-4. `scripts/import_analytics.ps1` transforms that raw export into `data/analytics/*.json`.
-5. The workflow validates the snapshot contract and commits changed snapshot files to `main`.
+For a weekly review:
 
-The public reading site still builds without GoatCounter configuration. The refresh workflow requires `GOATCOUNTER_API_KEY` only when fetching fresh data.
+1. Check which pages and source labels received recorded visits.
+2. Compare the per-page changes with the previous period and note recently published or promoted work.
+3. Use the hosted dashboard to inspect a page or an event when the email raises a useful question.
+4. Treat low counts and one-week changes as preliminary evidence. Make editorial changes after a pattern persists.
 
-## Public Tracking
+GoatCounter visits are not a count of identifiable people. Reloads and repeat visits can be grouped by GoatCounter's temporary session logic. Events are separate activity records and must not be added to page visits as traffic.
 
-Tracking lives in `layouts/partials/analytics.html` and `assets/js/analytics.js`.
+## Public collection and attribution
 
-What gets tracked:
+Public tracking is controlled by `ANALYTICS_ENABLED=true`; `hugo.toml` keeps tracking disabled by default. The locally hosted, pinned GoatCounter client sends only to `https://outsideinprint.goatcounter.com/count`. There are no provider URL or script overrides. Local previews do not send analytics unless deliberately enabled for testing.
 
-- GoatCounter pageviews
-- `essay_read_start`
-- `essay_read`
-- `pdf_download`
-- `newsletter_submit`
-- `internal_promo_click`
-- `collection_click`
-- `external_link_click`
-- `studio_inquiry_email_prepare`
-- `studio_inquiry_direct_email`
+The client sends page paths, public page titles, and the existing events below. It removes URL query strings and fragments from analytics page paths and prevents the GoatCounter client from sending the current URL query separately. Referrers are reduced to these fixed labels:
 
-The client code keeps the current lightweight behavior:
+- `google`, `bing`, `newsletter`, `social`, `ai_referral`, `other`, `internal`, `direct_unknown`
+- `newsletter-2045-launch` and `social-2045-launch` for the approved campaign
 
-- no cookies
-- no backend
-- no runtime analytics API calls
-- no cookie banner logic
-- delegated click handling
-- read-progress tracking based on active time and scroll depth
+Same-site navigation is classified as `internal` first. The only campaign identifier accepted is the exact value `2045-launch`: `utm_source=buttondown` maps to the newsletter campaign label, and `facebook`, `instagram`, `linkedin`, or `x` map to the social campaign label. Other campaign values fall back to the referring site's classification. Full external referrer URLs, arbitrary campaign text, and query values are not analytics fields.
 
-Custom events are encoded into GoatCounter event names with stable metadata such as target path, slug, section, source slot, collection, and format. That metadata is parsed later during normalization.
+Use the approved campaign only on distributed links, for example:
 
-Bookstore discovery and Amazon exits use these source slots:
-
-- `primary_nav_bookstore`
-- `homepage_bookstore_promo`
-- `footer_bookstore`
-- `bookstore_index_direct`
-- `bookstore_detail_direct`
-- `bookstore_index_kindle`
-- `bookstore_detail_kindle`
-
-Homepage cards and calls to action remain internal links. Amazon exits rely on the existing automatic `external_link_click` event and carry the book slug, full title, Bookstore section, source slot, and destination URL.
-
-For `collection_click`, the current source-slot contract includes the article-header context slot `article_collection_context` in addition to homepage, collection-page, and article-continuation collection surfaces.
-
-### Studio funnel measurement
-
-Studio entry and inquiry surfaces use these source slots:
-
-- `primary_nav_studio`
-- `homepage_studio_offer`
-- `footer_studio`
-- `studio_hero_to_form`
-- `studio_sample_exit`
-- `studio_inquiry_form`
-- `studio_inquiry_fallback`
-
-GoatCounter `/studio/` pageviews measure Studio visits. `studio_inquiry_email_prepare` measures browser-valid attempts to prepare an email draft, and `studio_inquiry_direct_email` measures clicks on the visible direct-email fallback. Neither event proves that a visitor sent a message or that Outside In Print received one.
-
-`studio_sample_exit` is the `internal_promo_click` source slot for the three marked Studio sample article exits. It measures a reader moving from a finished sample to `/studio/#studio-inquiry`; it does not indicate that the reader prepared a draft, sent a message, or completed an inquiry.
-
-On the Jack Stratton profile, that same inquiry link now lives in the focused reading-and-Studio exit; the production note does not duplicate it. The focused exits on *A Thousand Brick Walls* and *What Is Risk?* use the existing `article_exit_paths` slot for their Studio links. Each of these three exits has one hand-selected reading link in `article_continuation_primary`; the two retained collection destinations use `collection_click`, while the manually selected Franklin biography uses `internal_promo_click`. No new event, tracking field, or inquiry-submission claim is added.
-
-The `support@outsideinprint.org` inbox is the source of truth for received inquiries. Manual review is the source of truth for qualified inquiries and scopes sent. Square is the source of truth for deposits and final payments. Inquiry-field values are not analytics metadata.
-
-## Read Tracking Rules
-
-`essay_read_start` fires once per eligible page load after 15 seconds of active time.
-
-`essay_read` fires once per eligible page load after 90 seconds of active time and at least 75 percent scroll depth. Active time pauses while the tab is hidden.
-
-Read tracking is limited to essays, Syd and Oliver, and working papers. It does not run for homepage, collections list pages, library, random, or Start Here.
-
-## Snapshot Files
-
-`scripts/import_analytics.ps1` writes:
-
-- `overview.json`
-- `essays.json`
-- `sources.json`
-- `modules.json`
-- `periods.json`
-- `timeseries_daily.json`
-- `sections.json`
-- `essays_timeseries.json`
-- `journeys.json`
-- `journey_by_source.json`
-- `journey_by_collection.json`
-- `journey_by_essay.json`
-- `sources_timeseries.json`
-
-Snapshot rules:
-
-- Files must stay valid JSON.
-- Files must not contain `NaN` or `undefined`.
-- Section taxonomy is canonicalized during import so legacy drift such as `Essay` vs `Essays` collapses into the current labels.
-- Downstream journey fields remain explicitly approximate when inferred from same-session order.
-- No fields are fabricated. If GoatCounter does not provide or preserve something directly, the importer either leaves it blank or derives it explicitly from exported rows.
-
-## Validation
-
-Run these checks for analytics pipeline work:
-
-```powershell
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_analytics_import.ps1
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_analytics_snapshot_contract.ps1
+```text
+https://outsideinprint.org/shop/2045/?utm_source=buttondown&utm_campaign=2045-launch
 ```
 
-The public publish gate remains Hugo plus PowerShell public-output checks, as documented in `docs/local-validation-policy.md`.
+The source label describes the information available for that request. Browser privacy controls and absent referrers can produce `direct_unknown`; the label does not prove how a reader originally found the site.
 
-## Required Configuration
+## Existing events and their limits
 
-### Public Site Build
+The site retains `essay_read_start`, `essay_read`, `pdf_download`, `newsletter_submit`, `internal_promo_click`, `collection_click`, `external_link_click`, `game_store_click`, `book_sample_open`, `checkout_start`, `studio_inquiry_email_prepare`, and `studio_inquiry_direct_email`.
 
-Required for live tracking:
+Reading events are secondary engagement signals. On eligible reading pages, `essay_read_start` fires after 15 seconds of active time; `essay_read` requires 90 seconds and at least 75 percent scroll depth. Hidden-tab time is excluded. These thresholds are a proxy for reading, not proof that someone read or understood the piece.
 
-- repository variable: `ANALYTICS_ENABLED=true`
+`book_sample_open` records a sample-link click. `checkout_start` records an attempt to begin checkout, not a completed purchase. `newsletter_submit` records a form submission attempt, not a confirmed subscriber. Studio events record preparation of a draft or a direct-email click, not a sent or received inquiry.
 
-Optional:
+Event metadata can include the public page, product code, format, collection, and link position. It excludes inquiry answers, email addresses, order identifiers, payment amounts, and other customer information. Existing commerce and newsletter providers remain the authorities for completed transactions and confirmed subscriptions.
 
-- repository variable: `GOATCOUNTER_SITE_URL`
-  Default: `https://outsideinprint.goatcounter.com`
-- repository variable: `GOATCOUNTER_SCRIPT_SRC`
-  Default: `https://gc.zgo.at/count.v5.js`
-- repository variable: `GOATCOUNTER_SCRIPT_INTEGRITY`
-  Default: GoatCounter v5 SRI hash from the official docs
-- repository variable: `GOATCOUNTER_SCRIPT_CROSSORIGIN`
-  Default: `anonymous`
-- repository variable: `ANALYTICS_ALLOW_LOCAL=true`
-  Only for deliberate local tracking tests
+Existing discovery slots include `article_collection_context` for article collection links and `studio_sample_exit` for marked Studio links. Slot labels identify where a click occurred; they do not establish a later inquiry or sale.
 
-Static config lives in `hugo.toml`.
+## Historical files are not current reporting
 
-### Refresh Workflow
+The committed `data/analytics/*.json` snapshots last contain data dated **April 14, 2026**. The import/export scripts, fixtures, and SEO rollout reports are retained as historical tools. Do not use them as current traffic reports or refresh them as part of this reporting setup.
 
-Required:
+The GitHub analytics refresh workflow remains disabled. Its scheduled trigger has been removed from source; `workflow_dispatch` is retained only for deliberate historical-tool use. Running that tool can commit refreshed snapshots, so it is not part of the weekly reporting operation.
 
-- repository secret: `GOATCOUNTER_API_KEY`
+For interpreting the preserved importer only: `GOATCOUNTER_PUBLIC_SITE_URL` Default: `https://outsideinprint.org/`.
 
-Optional:
+There is no active custom dashboard, analytics export pipeline, local reporting service, or additional reporting schedule to configure. Native weekly email delivery is managed in GoatCounter.
 
-- repository variable: `GOATCOUNTER_SITE_URL`
-  Use this only if the analytics site URL changes from the default.
-- repository variable: `GOATCOUNTER_API_URL`
-  Default: `<GOATCOUNTER_SITE_URL>/api/v0`
-  Use this only if GoatCounter tracking and the authenticated export API live on different hosts or base paths.
-- repository variable: `GOATCOUNTER_SITE_BASE_PATH`
-  Default: `/outsideinprint`
-  Use this only if the deployed public site moves to a different GitHub Pages base path.
-- repository variable: `GOATCOUNTER_PUBLIC_SITE_URL`
-  Default: `https://outsideinprint.org/`
-  Use this only if the public site origin changes and you still want internal referrers grouped as `internal / <path>`.
+## References
 
-The refresh workflow is `.github/workflows/refresh-analytics.yml`.
-
-## Local Usage
-
-Public site only:
-
-```powershell
-.\tools\bin\generated\hugo.cmd server -D
-```
-
-Local public-site tracking test:
-
-```powershell
-$env:ANALYTICS_ENABLED = "true"
-$env:ANALYTICS_ALLOW_LOCAL = "true"
-$env:GOATCOUNTER_SITE_URL = "https://outsideinprint.goatcounter.com"
-.\tools\bin\generated\hugo.cmd server -D
-```
-
-Clear those environment variables afterward if you do not want future local sessions to emit analytics.
-
-Local refresh test:
-
-```powershell
-$env:GOATCOUNTER_API_KEY = "replace-me"
-$env:GOATCOUNTER_SITE_URL = "https://outsideinprint.goatcounter.com"
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\fetch_analytics_goatcounter.ps1 -OutputDir .\.analytics-refresh\raw
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\import_analytics.ps1 -InputPath .\.analytics-refresh\raw
-```
-
-## Refresh Workflow
-
-`.github/workflows/refresh-analytics.yml` keeps these triggers:
-
-- scheduled daily run
-- `workflow_dispatch`
-
-It also preserves:
-
-- step-summary reporting
-- cleanup of temporary working folders
-- no-op commits when `data/analytics` has not changed
-- minimum required workflow permissions for committing refreshed snapshots
-- SEO rollout measurement reporting from the refreshed snapshot
-
-What it does:
-
-1. Verifies `GOATCOUNTER_API_KEY`.
-2. Fetches a GoatCounter export into `./.analytics-refresh/raw`.
-3. Runs `scripts/import_analytics.ps1`.
-4. Validates `data/analytics` with `tests/test_analytics_snapshot_contract.ps1`.
-5. Commits `data/analytics` only when the normalized files changed.
-
-If configuration is missing, the workflow fails with an actionable message in both logs and the step summary.
-
-## Troubleshooting
-
-Missing GoatCounter secret:
-
-- If the refresh workflow fails with `GOATCOUNTER_API_KEY is not configured`, add that repository secret in `LPeasy/outsideinprint` under `Settings -> Secrets and variables -> Actions`.
-
-Export fetch failure:
-
-- Confirm the API key belongs to the correct GoatCounter site.
-- Confirm the site URL is correct if you overrode `GOATCOUNTER_SITE_URL`.
-- If the request fails with `404` on `/api/v0/export`, set `GOATCOUNTER_API_URL` to the authenticated GoatCounter API host or base instead of assuming it matches the public tracking URL.
-- Retry transient failures; the fetch script already uses retry/backoff for 429 and common 5xx/network issues.
-
-Unexpectedly empty analytics data:
-
-- Check that `goatcounter-export.csv` was written during the fetch step.
-- Confirm the public site is sending GoatCounter pageviews and events.
-- If pageviews exist but some source fields are blank, that usually means GoatCounter only had a plain referrer and no campaign tags for those visits.
+- [GoatCounter sessions and visitors](https://www.goatcounter.com/help/sessions)
+- [GoatCounter events](https://www.goatcounter.com/help/events)
+- [Google Search Console performance](https://support.google.com/webmasters/answer/7042828?hl=en)
+- [SEO account checks](seo-admin-checklist.md)

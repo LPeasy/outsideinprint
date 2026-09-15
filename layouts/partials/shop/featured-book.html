@@ -43,7 +43,7 @@
           data-analytics-slug="{{ $book.Params.book_key }}"
           data-analytics-title="{{ index $product "title" }}"
           data-analytics-section="Bookstore"
-          data-analytics-path="{{ $book.RelPermalink }}"
+          data-analytics-path="{{ .RelPermalink }}"
         >{{ if eq $book.Params.book_key "2045" }}Read “{{ .Title }}” — a complete story · {{ math.Max 1 .ReadingTime }} minutes{{ else }}Read a free sample{{ end }}</a>
       {{ end }}
     </div>

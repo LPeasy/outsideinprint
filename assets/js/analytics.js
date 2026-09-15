@@ -3,6 +3,109 @@
   var pageContext = config.page || {};
   var pendingCounts = [];
   var flushTimer = 0;
+  var readinessDeadline = 0;
+  var queueExpired = false;
+  var hostname = window.location.hostname.toLowerCase();
+  var localHost = /^(localhost|127(?:\.[0-9]{1,3}){3}|\[::1\])$/.test(hostname);
+  var allowedHost = (hostname === "outsideinprint.org" && window.location.protocol === "https:") ||
+    (config.allowLocal === true && localHost && /^https?:$/.test(window.location.protocol));
+  var sourceLabel = classifySource();
+
+  config.enabled = config.enabled === true && allowedHost;
+  window.oipAnalyticsEventReferrer = function () {
+    return sourceLabel;
+  };
+  window.goatcounter = window.goatcounter || {};
+  window.goatcounter.no_events = true;
+  window.goatcounter.allow_local = config.allowLocal === true;
+  window.goatcounter.path = function () {
+    return config.enabled ? internalPath(pageContext.path) || null : null;
+  };
+  window.goatcounter.referrer = window.oipAnalyticsEventReferrer;
+
+  if (!config.enabled) {
+    return;
+  }
+
+  function matchesHost(host, domains) {
+    return domains.some(function (domain) {
+      return host === domain || host.slice(-(domain.length + 1)) === "." + domain;
+    });
+  }
+
+  function classifySource() {
+    var referrer;
+    var referrerHost = "";
+    var params;
+    var campaign;
+    var source;
+
+    try {
+      referrer = new URL(document.referrer);
+      if (/^https?:$/.test(referrer.protocol)) {
+        referrerHost = referrer.hostname.toLowerCase();
+      }
+    } catch (error) {
+      referrerHost = "";
+    }
+
+    if (referrerHost && referrer.origin === window.location.origin) {
+      return "internal";
+    }
+
+    try {
+      params = new URLSearchParams(window.location.search);
+      if (params.getAll("utm_campaign").length === 1 && params.getAll("utm_source").length === 1) {
+        campaign = params.get("utm_campaign");
+        source = params.get("utm_source");
+        if (campaign === "2045-launch") {
+          if (source === "buttondown") {
+            return "newsletter-2045-launch";
+          }
+          if (["facebook", "instagram", "linkedin", "x"].indexOf(source) !== -1) {
+            return "social-2045-launch";
+          }
+        }
+      }
+    } catch (error) {
+      // Unrecognized query values never leave the browser.
+    }
+
+    if (!referrerHost) {
+      return "direct_unknown";
+    }
+    if (matchesHost(referrerHost, ["chatgpt.com", "chat.openai.com", "perplexity.ai", "claude.ai", "copilot.microsoft.com", "gemini.google.com"])) {
+      return "ai_referral";
+    }
+    if (matchesHost(referrerHost, ["google.com", "google.co.uk", "google.ca", "google.com.au"])) {
+      return "google";
+    }
+    if (matchesHost(referrerHost, ["bing.com"])) {
+      return "bing";
+    }
+    if (matchesHost(referrerHost, ["buttondown.com", "buttondown.email"])) {
+      return "newsletter";
+    }
+    if (matchesHost(referrerHost, ["facebook.com", "instagram.com", "linkedin.com", "x.com", "twitter.com", "t.co"])) {
+      return "social";
+    }
+    return "other";
+  }
+
+  function internalPath(value) {
+    var parsed;
+    if (!value) {
+      return "";
+    }
+    parsed = parseUrl(String(value));
+    if (!parsed || !/^https?:$/.test(parsed.protocol)) {
+      return "";
+    }
+    if (parsed.origin !== "https://outsideinprint.org" && !(localHost && config.allowLocal === true && parsed.origin === window.location.origin)) {
+      return "";
+    }
+    return parsed.pathname || "/";
+  }
 
   function cleanProps(input) {
     var props = {};
@@ -36,10 +139,14 @@
     }
 
     if (isGoatCounterReady()) {
+      flushPendingCounts();
       window.goatcounter.count(payload);
       return;
     }
 
+    if (queueExpired || pendingCounts.length >= 40) {
+      return;
+    }
     pendingCounts.push(payload);
     ensureFlushTimer();
   }
@@ -57,7 +164,7 @@
       slug: pageContext.slug,
       title: pageContext.title,
       section: pageContext.section,
-      path: pageContext.path
+      path: internalPath(pageContext.path)
     });
   }
 
@@ -68,6 +175,8 @@
   function buildEventPath(eventName, props) {
     var keys = ["path", "slug", "section", "source_slot", "collection", "product", "format"];
     var parts = ["oip:" + eventName];
+
+    props.path = internalPath(props.path);
 
     keys.forEach(function (key) {
       if (!props[key]) {
@@ -106,6 +215,15 @@
   function flushPendingCounts() {
     var payload;
 
+    if (readinessDeadline && Date.now() >= readinessDeadline) {
+      pendingCounts.length = 0;
+      queueExpired = true;
+      window.clearInterval(flushTimer);
+      flushTimer = 0;
+      readinessDeadline = 0;
+      return;
+    }
+
     if (!isGoatCounterReady()) {
       return;
     }
@@ -119,6 +237,7 @@
       window.clearInterval(flushTimer);
       flushTimer = 0;
     }
+    readinessDeadline = 0;
   }
 
   function ensureFlushTimer() {
@@ -126,6 +245,7 @@
       return;
     }
 
+    readinessDeadline = Date.now() + 10000;
     flushTimer = window.setInterval(flushPendingCounts, 250);
   }
 

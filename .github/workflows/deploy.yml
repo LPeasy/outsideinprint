@@ -171,8 +171,6 @@ jobs:
       TZ: America/New_York
       ANALYTICS_ENABLED: ${{ vars.ANALYTICS_ENABLED }}
       ANALYTICS_ALLOW_LOCAL: ${{ vars.ANALYTICS_ALLOW_LOCAL }}
-      GOATCOUNTER_SITE_URL: ${{ vars.GOATCOUNTER_SITE_URL }}
-      GOATCOUNTER_SCRIPT_SRC: ${{ vars.GOATCOUNTER_SCRIPT_SRC }}
 
     steps:
       - name: Checkout
@@ -237,6 +235,23 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_2045_launch_window.ps1
+
+      - name: Setup Node for analytics browser tests
+        if: env.ANALYTICS_ENABLED == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: "20.20.2"
+          package-manager-cache: false
+
+      - name: Install analytics browser test dependencies
+        if: env.ANALYTICS_ENABLED == 'true'
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Test Hosted Analytics Network Privacy
+        if: env.ANALYTICS_ENABLED == 'true'
+        run: node --test --test-concurrency=1 tests/hosted_analytics_browser.test.mjs
 
       - name: Remove public PDF artifacts
         shell: bash

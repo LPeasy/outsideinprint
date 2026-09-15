@@ -533,7 +533,7 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
   assert.equal((almanackIssue.match(/partial "newsletter_signup\.html"/g) || []).length, 1);
   assert.ok(almanackIssue.lastIndexOf("</article>") < almanackIssue.indexOf('partial "newsletter_signup.html"'));
 
-  assert.match(privacyPolicy, /effective_date: "September 1, 2026"/);
+  assert.match(privacyPolicy, /effective_date: "September 15, 2026"/);
   assert.match(privacyPolicy, /standalone Bob's Almanack signup form/);
   assert.match(privacyPolicy, /IP address, browser or device information, and referring page/);
   assert.match(privacyPolicy, /email-client, browser, device, IP-address, or referrer metadata/);
@@ -975,7 +975,8 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioSampleExit, /data-analytics-event="internal_promo_click"/);
   assert.match(studioSampleExit, /data-analytics-source-slot="studio_sample_exit"/);
   assert.match(studioSampleExit, />Start a Publication Sprint<\/a>/);
-  assert.match(analyticsDoc, /`studio_sample_exit` is the `internal_promo_click` source slot for the three marked Studio sample article exits\./);
+  assert.match(analyticsDoc, /Existing discovery slots include `article_collection_context` for article collection links and `studio_sample_exit` for marked Studio links\./);
+  assert.match(analyticsDoc, /Slot labels identify where a click occurred; they do not establish a later inquiry or sale\./);
 });
 
 function runStudioComposerMock({ missingField = "", datasetOverride = {} } = {}) {

@@ -1,8 +1,9 @@
-name: Refresh Analytics Data
+name: Historical Analytics Snapshot Refresh (Manual Only)
+
+# Retained historical tool. Hosted GoatCounter weekly email is the selected reporting path.
+# Keep this workflow disabled in GitHub; it is not part of ongoing site measurement.
 
 on:
-  schedule:
-    - cron: "17 6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -29,6 +30,11 @@ jobs:
       GOATCOUNTER_PUBLIC_SITE_URL: ${{ vars.GOATCOUNTER_PUBLIC_SITE_URL || 'https://outsideinprint.org/' }}
 
     steps:
+      - name: Historical Tool Warning
+        shell: bash
+        run: |
+          echo "::warning::This historical tool can commit analytics snapshots. It is not the hosted weekly email reporting operation."
+
       - name: Checkout Repo
         uses: actions/checkout@v7
         with:
@@ -146,4 +152,4 @@ jobs:
           api_url="${GOATCOUNTER_API_URL:-$site_url/api/v0}"
           echo "Analytics refresh finished for ${site_url}." >> "$GITHUB_STEP_SUMMARY"
           echo "GoatCounter API base used: ${api_url}." >> "$GITHUB_STEP_SUMMARY"
-          echo "Analytics snapshots remain available for public-site reporting and SEO rollout measurement." >> "$GITHUB_STEP_SUMMARY"
+          echo "This historical snapshot operation is separate from hosted GoatCounter weekly email reporting." >> "$GITHUB_STEP_SUMMARY"

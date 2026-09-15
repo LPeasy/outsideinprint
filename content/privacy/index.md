@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "How Outside In Print handles information connected to site use, Studio inquiry emails, email subscriptions, Steam storefront visits, orders, EPUB delivery, and reader support."
-effective_date: "September 1, 2026"
+effective_date: "September 15, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -23,7 +23,9 @@ When you enter information in the Studio inquiry form, the form does not send th
 
 ## Site analytics
 
-Outside In Print uses privacy-focused site analytics to understand aggregate site use and events such as a bookstore visit or checkout start. Analytics events may include a page, product SKU, format, and source position. They do not include an order identifier, payment amount, email address, street address, or card information.
+Outside In Print uses GoatCounter to understand aggregate site use and events such as a bookstore visit, sample-link click, or checkout start. Analytics may include a page path and title, product SKU, format, source position, and a broad referral label such as search, newsletter, social, or internal navigation. A fixed label can also identify an approved 2045 launch campaign. The site removes URL query strings and fragments from analytics page paths and does not send complete external referrer URLs or arbitrary campaign values. Analytics events do not include an order identifier, payment amount, email address, street address, or card information.
+
+Reading events use active time and scroll depth as an approximate engagement signal. A checkout-start event does not confirm a purchase, and a newsletter-submit event does not confirm a subscription.
 
 For Studio use, site analytics may receive the Studio page path, offer code, source slot, format, and a draft-prepare or direct-email event. They do not receive the inquiry name, reply email, website, project subject, or written answer. A draft-prepare or direct-email event does not prove that a message was sent or received.
 
@@ -41,7 +43,7 @@ Information is used to:
 
 ## Service providers and disclosure
 
-Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. Buttondown receives and manages optional Bob's Almanack and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. GitHub Pages hosts the public website, and a privacy-focused service provides aggregate site analytics.
+Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. Buttondown receives and manages optional Bob's Almanack and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. GitHub Pages hosts the public website, and GoatCounter provides aggregate site analytics.
 
 The Games pages link to Steam storefront pages and may load a Steam store widget. Following a Steam link or loading the widget sends a request to Valve's Steam services, which receives the technical information ordinarily sent with a web request. Steam may also set or read cookies according to your Steam settings and Valve's own privacy practices.
 

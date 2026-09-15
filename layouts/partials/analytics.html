@@ -1,50 +1,6 @@
 {{ $analytics := site.Params.analytics | default (dict) }}
-{{ $goatcounter := dict }}
-{{ if isset $analytics "goatcounter" }}
-  {{ $goatcounter = index $analytics "goatcounter" }}
-{{ end }}
-
-{{ $enabled := false }}
-{{ if isset $analytics "enabled" }}
-  {{ $enabled = index $analytics "enabled" }}
-{{ end }}
-
-{{ $allowLocal := false }}
-{{ if isset $analytics "allow_local" }}
-  {{ $allowLocal = index $analytics "allow_local" }}
-{{ end }}
-
-{{ $siteURL := "" }}
-{{ if isset $goatcounter "site_url" }}
-  {{ $siteURL = index $goatcounter "site_url" }}
-{{ end }}
-{{ with getenv "GOATCOUNTER_SITE_URL" }}
-  {{ $siteURL = . }}
-{{ end }}
-
-{{ $scriptSrc := "https://gc.zgo.at/count.js" }}
-{{ if isset $goatcounter "script_src" }}
-  {{ $scriptSrc = index $goatcounter "script_src" }}
-{{ end }}
-{{ with getenv "GOATCOUNTER_SCRIPT_SRC" }}
-  {{ $scriptSrc = . }}
-{{ end }}
-
-{{ $scriptIntegrity := "" }}
-{{ if isset $goatcounter "script_integrity" }}
-  {{ $scriptIntegrity = index $goatcounter "script_integrity" }}
-{{ end }}
-{{ with getenv "GOATCOUNTER_SCRIPT_INTEGRITY" }}
-  {{ $scriptIntegrity = . }}
-{{ end }}
-
-{{ $scriptCrossorigin := "" }}
-{{ if isset $goatcounter "script_crossorigin" }}
-  {{ $scriptCrossorigin = index $goatcounter "script_crossorigin" }}
-{{ end }}
-{{ with getenv "GOATCOUNTER_SCRIPT_CROSSORIGIN" }}
-  {{ $scriptCrossorigin = . }}
-{{ end }}
+{{ $enabled := eq (index $analytics "enabled") true }}
+{{ $allowLocal := eq (index $analytics "allow_local") true }}
 
 {{ $envEnabled := lower (trim (getenv "ANALYTICS_ENABLED") " ") }}
 {{ if eq $envEnabled "true" }}
@@ -70,16 +26,10 @@
   {{ $pageSection = .Params.section_label | default (humanize .Section) }}
 {{ end }}
 
-{{ $siteURL = strings.TrimSuffix "/" $siteURL }}
-{{ $countURL := "" }}
-{{ if ne $siteURL "" }}
-  {{ $countURL = printf "%s/count" $siteURL }}
-{{ end }}
-
-{{ $active := and $enabled (ne $countURL "") (or (eq hugo.Environment "production") $allowLocal) }}
+{{ $active := and $enabled (or (eq hugo.Environment "production") $allowLocal) }}
 {{ $config := dict
   "enabled" $active
-  "siteUrl" $siteURL
+  "allowLocal" $allowLocal
   "page" (dict
     "kind" .Kind
     "isPage" .IsPage
@@ -91,31 +41,23 @@
   )
 }}
 
-{{ if $active }}
-  <script>
-    window.oipAnalyticsEventReferrer = function () {
-      return "";
-    };
-
-    window.goatcounter = window.goatcounter || {};
-    window.goatcounter.no_events = true;
-    window.goatcounter.allow_local = {{ $allowLocal | jsonify }};
-    window.goatcounter.path = function () {
-      return window.location.pathname || "/";
-    };
-    window.goatcounter.referrer = function () {
-      return "";
-    };
-  </script>
-  <script
-    async
-    data-goatcounter="{{ $countURL }}"
-    {{ with $scriptCrossorigin }}crossorigin="{{ . }}"{{ end }}
-    {{ with $scriptIntegrity }}integrity="{{ . }}"{{ end }}
-    src="{{ $scriptSrc }}"
-  ></script>
-{{ end }}
-
-<script>window.oipAnalytics={{ $config | jsonify | safeJS }};</script>
+<script>
+  window.oipAnalytics={{ $config | jsonify | safeJS }};
+  window.goatcounter = {
+    path: function () { return null; },
+    referrer: "",
+    no_events: true,
+    allow_local: false
+  };
+</script>
 {{ $analyticsScript := resources.Get "js/analytics.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $analyticsScript.RelPermalink }}" integrity="{{ $analyticsScript.Data.Integrity }}"></script>
+{{ if $active }}
+  {{ $goatcounterScript := resources.Get "js/vendor/goatcounter.v5.js" | resources.Minify | resources.Fingerprint }}
+  <script
+    defer
+    data-goatcounter="https://outsideinprint.goatcounter.com/count"
+    src="{{ $goatcounterScript.RelPermalink }}"
+    integrity="{{ $goatcounterScript.Data.Integrity }}"
+  ></script>
+{{ end }}

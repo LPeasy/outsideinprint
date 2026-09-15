@@ -71,19 +71,7 @@ Local OIP publish work does not force npm or npx checks; CI owns public-site con
 - Maintainer guide: `docs/analytics-system.md`
 - SEO rollout guide: `docs/seo-rollout.md`
 - SEO admin checklist: `docs/seo-admin-checklist.md`
-- Import command:
-  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\import_analytics.ps1 -InputPath .\imports\analytics`
 
-- Automated refresh secret:
-  Save `GOATCOUNTER_API_KEY` in `LPeasy/outsideinprint` if you want scheduled analytics snapshot refreshes.
-- Optional public-site variable:
-  Use `GOATCOUNTER_SITE_URL` only if you need to override the default `https://outsideinprint.goatcounter.com`.
-- Optional public-site variables:
-  `GOATCOUNTER_SCRIPT_SRC`, `GOATCOUNTER_SCRIPT_INTEGRITY`, and `GOATCOUNTER_SCRIPT_CROSSORIGIN` let you override the default GoatCounter v5 script + SRI settings from the official docs.
-- Optional refresh/import variable:
-  Use `GOATCOUNTER_SITE_BASE_PATH` only if the public site ever moves away from the current `/outsideinprint` GitHub Pages base path.
-- Optional refresh/import variable:
-  Use `GOATCOUNTER_PUBLIC_SITE_URL` only if the public site origin ever moves away from `https://outsideinprint.org/` and you still want same-site referrers normalized as internal traffic.
+GoatCounter's hosted weekly email is the selected traffic report; its hosted dashboard is optional for closer inspection. Use Google Search Console occasionally for search exposure and indexing. Weekly email activation must be verified in the account before it is described as enabled.
 
-- Dashboard note:
-  Dashboard publishing is paused and its workflow, config, templates, JavaScript, and tests have been removed from this repo. Public analytics tracking and refreshed JSON snapshots remain available for reporting and SEO rollout measurement.
+The committed analytics snapshots last contain data dated April 14, 2026. They and the import/export scripts are historical. The GitHub refresh workflow remains disabled and has no scheduled trigger. This setup requires no custom dashboard, analytics API secret, local collector, or additional reporting schedule.
