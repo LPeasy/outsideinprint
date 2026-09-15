@@ -28,6 +28,8 @@ Use logical references instead of source paths:
 
 - Front matter and data: `editorial/example-slug`, `essays/example-slug/hero`, or `medium/<sha256>`.
 - New approved book covers use `books/<book-slug>/cover`, with one matching source at `assets/images/originals/books/<book-slug>/cover.<ext>` and one `/images/books/<book-slug>/cover.<ext>` resolver alias. Existing static book-cover assets are preserved.
+- Book story illustrations use `books/<book-slug>/stories/<story-slug>`, a matching source under `assets/images/originals/`, and one `/images/books/<book-slug>/stories/<story-slug>.<ext>` alias. Standalone samples may set `sample_illustration` and descriptive `sample_illustration_alt` to display the art below the byline; their cover sharing metadata remains independent.
+- The 2045 sample uses `sample_edition_notice` with `label` and `text` for its current-edition note. It does not set `edition_relationship` or link to the earlier web edition. The earlier page and other book samples keep their existing behavior.
 - Markdown: `![Alternative text](oip-image:essays/example-slug/hero)`.
 - External and explicitly nonmanaged static images retain normal URL behavior.
 

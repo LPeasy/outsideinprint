@@ -3578,6 +3578,17 @@ html[data-theme="light"] .paper-route-toggle{
   background:rgba(236,231,223,.018);
   scroll-margin-top:1.5rem;
 }
+.bookstore-reading-sample__illustration{
+  width:100%;
+  max-width:32rem;
+  margin:1.65rem auto;
+}
+.bookstore-reading-sample__illustration picture,
+.bookstore-reading-sample__illustration img{
+  display:block;
+  width:100%;
+  height:auto;
+}
 .bookstore-reading-sample__figure picture,
 .bookstore-reading-sample__figure img{
   display:block;
