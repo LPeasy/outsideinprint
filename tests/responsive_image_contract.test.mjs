@@ -82,7 +82,7 @@ test("responsive image manifest keeps the frozen baseline and processing default
     assert.equal(asset.id, id);
     assert.match(
       id,
-      /^(?:editorial\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium\/[0-9a-f]{64}|books\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\/(?:cover|stories\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))$/,
+      /^(?:editorial\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium\/[0-9a-f]{64}|books\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\/cover)$/,
     );
     assert.match(asset.source, /^images\/originals\/(?:editorial|essays|medium|books)\/.+\.(?:png|jpe?g)$/);
     if (id.startsWith("books/")) {
@@ -171,7 +171,7 @@ test("responsive image manifest keeps the frozen baseline and processing default
     "routine managed artwork must add exactly one resolver alias per new canonical asset",
   );
   for (const [alias, target] of Object.entries(manifest.aliases)) {
-    assert.match(alias, /^\/images\/(?:(?:editorial|essays|medium|syd-and-oliver)\/.+|books\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\/(?:cover|stories\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))\.(?:png|jpe?g)$/);
+    assert.match(alias, /^\/images\/(?:(?:editorial|essays|medium|syd-and-oliver)\/.+|books\/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\/cover)\.(?:png|jpe?g)$/);
     assert.ok(Object.hasOwn(manifest.assets, target), `${alias} must resolve directly to a canonical asset`);
   }
   assert.equal(

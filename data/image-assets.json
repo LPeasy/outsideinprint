@@ -31,23 +31,6 @@
       "processing_note": null,
       "quality_override": null
     },
-    "books/2045/stories/the-cracked-pot": {
-      "id": "books/2045/stories/the-cracked-pot",
-      "source": "images/originals/books/2045/stories/the-cracked-pot.png",
-      "sha256": "553b9eeea8d8d8f25f2b91f95fd14a5137fc11c023ca20513d82a1077c177682",
-      "width": 1275,
-      "height": 1665,
-      "image_class": "essay_illustration",
-      "processing_hint": "drawing",
-      "review_state": "approved",
-      "usage_state": "referenced",
-      "processing_state": "derivative_capable",
-      "processing_note": null,
-      "quality_override": {
-        "webp_quality": 90,
-        "avif_quality": 70
-      }
-    },
     "editorial/after-the-tone": {
       "id": "editorial/after-the-tone",
       "source": "images/originals/editorial/after-the-tone.png",
@@ -7345,7 +7328,6 @@
   },
   "aliases": {
     "/images/books/2045/cover.jpg": "books/2045/cover",
-    "/images/books/2045/stories/the-cracked-pot.png": "books/2045/stories/the-cracked-pot",
     "/images/editorial/after-the-tone.png": "editorial/after-the-tone",
     "/images/editorial/algae-fueled-fever-dreams.png": "editorial/algae-fueled-fever-dreams",
     "/images/editorial/already-mine-morning-walk.png": "editorial/already-mine-morning-walk",

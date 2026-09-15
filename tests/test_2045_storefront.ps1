@@ -162,7 +162,9 @@ $legacyRelationship = [ordered]@{
 }
 $sampleRelationship = [ordered]@{
   Label = '2045 EPUB edition.'
-  Text = 'This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*.'
+  Text = 'This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*. The earlier 2025 web edition remains available in the archive.'
+  Href = '/essays/the-cracked-pot/'
+  Cta = 'Read the earlier web edition →'
 }
 foreach ($expected in @(
   'metadata_title: "The Cracked Pot — Earlier Web Edition"',
@@ -183,13 +185,14 @@ foreach ($expected in @(
   'metadata_title: "The Cracked Pot — Complete Story from 2045"',
   'date: 2026-09-12',
   'edition: "2045 EPUB edition"',
-  'sample_edition_notice:',
+  'edition_relationship:',
   ('  label: "' + $sampleRelationship.Label + '"'),
-  ('  text: "' + $sampleRelationship.Text + '"')
+  ('  text: "' + $sampleRelationship.Text + '"'),
+  ('  href: "' + $sampleRelationship.Href + '"'),
+  ('  cta_label: "' + $sampleRelationship.Cta + '"')
 )) {
   Assert-True ($sampleSource.Contains($expected, [StringComparison]::Ordinal)) "2045 Cracked Pot metadata must contain: $expected"
 }
-Assert-True ($sampleSource -notmatch '(?im)^edition_relationship:|/essays/the-cracked-pot/|earlier (?:2025 )?web edition') 'The sample must not reference or promote the earlier web edition.'
 foreach ($required in @(
   '.Params.edition_relationship',
   '.label',
@@ -208,9 +211,9 @@ foreach ($required in @(
 $articleNoticeIndex = $articleTemplate.IndexOf('partial "edition-relationship.html" .', [StringComparison]::Ordinal)
 $articleBodyIndex = $articleTemplate.IndexOf('<div class="piece-body">', [StringComparison]::Ordinal)
 Assert-True ($articleNoticeIndex -ge 0 -and $articleBodyIndex -gt $articleNoticeIndex) 'Generic articles must render the edition relationship immediately before the article body.'
-$sampleNoticeIndex = $sampleTemplate.IndexOf('data-sample-edition-notice', [StringComparison]::Ordinal)
+$sampleNoticeIndex = $sampleTemplate.IndexOf('partial "edition-relationship.html" .', [StringComparison]::Ordinal)
 $sampleBodyIndex = $sampleTemplate.IndexOf('<div class="bookstore-reading-sample__body">', [StringComparison]::Ordinal)
-Assert-True ($sampleNoticeIndex -ge 0 -and $sampleBodyIndex -gt $sampleNoticeIndex) 'The standalone 2045 page must render its current-edition notice above the locked story body.'
+Assert-True ($sampleNoticeIndex -ge 0 -and $sampleBodyIndex -gt $sampleNoticeIndex) 'The standalone 2045 page must render the edition relationship above the locked story body.'
 foreach ($selector in @('.edition-relationship{', '.edition-relationship__label{', '.edition-relationship__text{', '.edition-relationship__cta{')) {
   Assert-True ($siteCss.Contains($selector, [StringComparison]::Ordinal)) "Edition relationship CSS must define $selector"
 }
@@ -231,22 +234,9 @@ if ($isDraft) {
 
 $body = [regex]::Match($sampleSource, '(?s)\A---\r?\n.*?\r?\n---\r?\n(?<body>.*)\z').Groups['body'].Value.Trim()
 $paragraphs = @([regex]::Split($body, '\r?\n\s*\r?\n'))
-Assert-True ($paragraphs.Count -eq 32) 'The Cracked Pot must have exactly 32 prose paragraphs after the two approved opening breaks.'
-# Reverse only the owner's two exact opening breaks; preserve every other byte.
-$approvedOpeningStarts = @(
-  'Across the room, another bot neatly folded his laundry.',
-  'The apartment was spotless, the air subtly perfumed with lavender—a scent calibrated to reduce stress.'
-)
-$restoredBody = $body
-for ($i = 0; $i -lt $approvedOpeningStarts.Count; $i++) {
-  $start = $approvedOpeningStarts[$i]
-  Assert-True ($paragraphs[$i + 1].StartsWith($start, [StringComparison]::Ordinal)) 'An approved opening paragraph break moved.'
-  $boundary = "`n`n" + $start
-  Assert-True ([regex]::Matches($body, [regex]::Escape($boundary)).Count -eq 1) 'Each approved opening break must occur exactly once with canonical LF spacing.'
-  $restoredBody = $restoredBody.Replace($boundary, ' ' + $start, [StringComparison]::Ordinal)
-}
-$bodyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($restoredBody))).ToLowerInvariant()
-Assert-True ($bodyHash -ceq 'a4a21a46551e5554287c170e405eab42f07102d4a1a86a7022592fb7db2f843a') 'Joining only the two approved opening breaks must restore the frozen 30-paragraph story bytes.'
+Assert-True ($paragraphs.Count -eq 30) 'The Cracked Pot must retain its 30 prose paragraphs.'
+$bodyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($body))).ToLowerInvariant()
+Assert-True ($bodyHash -ceq 'a4a21a46551e5554287c170e405eab42f07102d4a1a86a7022592fb7db2f843a') 'The locked 2045 EPUB story text changed.'
 Assert-True ($body.StartsWith("Morning light filtered through the apartment’s automatic blinds, right on time.")) 'Wrong story opening.'
 $ending = 'The Optimus stood motionless. He hesitated, his fingers tight around the pot while his gaze lingered on the box.'
 Assert-True ($body.EndsWith($ending)) 'The complete story ending is missing.'
@@ -255,21 +245,6 @@ Assert-True ($body -notmatch '(?m)^#{1,6} |Memory Lane|V:\\|urn:isbn|\uFFFD') 'S
 $assets = Read-Source 'data/image-assets.json' | ConvertFrom-Json -AsHashtable
 $cover = $assets.assets['books/2045/cover']
 Assert-True ($cover.width -eq 1650 -and $cover.height -eq 2550 -and $cover.review_state -eq 'approved') '2045 cover is not the approved portrait asset.'
-$sampleArtId = 'books/2045/stories/the-cracked-pot'
-$sampleArt = $assets.assets[$sampleArtId]
-$sampleArtAlt = 'A hand rests on a cracked handmade pot while a robotic hand offers a neatly wrapped gift beside an apartment window overlooking the city.'
-Assert-True ($sampleSource.Contains(('sample_illustration: "' + $sampleArtId + '"'), [StringComparison]::Ordinal)) '2045 sample must reference its matching story illustration.'
-Assert-True ($sampleSource.Contains(('sample_illustration_alt: "' + $sampleArtAlt + '"'), [StringComparison]::Ordinal)) '2045 sample must retain its reviewed descriptive alternative.'
-Assert-True ($sampleArt.sha256 -ceq '553b9eeea8d8d8f25f2b91f95fd14a5137fc11c023ca20513d82a1077c177682' -and $sampleArt.width -eq 1275 -and $sampleArt.height -eq 1665 -and $sampleArt.review_state -eq 'approved') 'The sample must use the approved title-free production illustration bytes.'
-Assert-True ($sampleArt.quality_override.webp_quality -eq 90 -and $sampleArt.quality_override.avif_quality -eq 70) 'Fine hatching requires the approved detail-quality derivatives.'
-$sampleArtIndex = $sampleTemplate.IndexOf('data-sample-illustration', [StringComparison]::Ordinal)
-Assert-True ($sampleArtIndex -gt $sampleTemplate.IndexOf('</header>', [StringComparison]::Ordinal) -and $sampleArtIndex -lt $sampleNoticeIndex) 'Sample illustration must sit between its title/byline and edition notice.'
-Assert-True ($sampleTemplate.Contains('with .Params.sample_illustration', [StringComparison]::Ordinal) -and $sampleTemplate.Contains('images/picture.html', [StringComparison]::Ordinal)) 'Optional sample illustrations must use the shared responsive pipeline.'
-Assert-True ($siteCss -match '(?s)\.bookstore-reading-sample__illustration\{\s*width:100%;\s*max-width:32rem;\s*margin:1\.65rem auto;') 'Sample illustration must be centered and bounded at 32rem.'
-foreach ($otherSample in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/shop') -Recurse -Filter 'sample.md') {
-  if ($otherSample.FullName -eq (Join-Path $repoRoot 'content/shop/2045/sample.md')) { continue }
-  Assert-True ((Get-Content -LiteralPath $otherSample.FullName -Raw) -notmatch '(?m)^sample_illustration:') 'Other existing samples must remain unchanged.'
-}
 
 $issueSource = Read-Source 'content/almanack/2026-09-12.md'
 $launchMessage = "A grieving father enters a memory world with his children—and finds that the dead may remember him back. 2045 collects ten dark fables about artificial intelligence, grief, ambition, faith, and the ways people seek meaning. By Robert V. Ussley. The EPUB is `$19.99, sold directly by Outside In Print to U.S. readers, with a private download link delivered by email."
@@ -467,8 +442,8 @@ foreach ($html in @($detailHtml, $sampleHtml)) {
 }
 
 $legacyNotice = [regex]::Match($legacyStoryHtml, '(?is)<aside\b[^>]*\bdata-edition-relationship(?:=|\s|>).*?</aside>')
-$sampleNotice = [regex]::Match($sampleHtml, '(?is)<aside\b[^>]*\bdata-sample-edition-notice(?:=|\s|>).*?</aside>')
-Assert-True ($legacyNotice.Success -and $sampleNotice.Success) 'The legacy page must retain its relationship notice and the sample must display its current-edition notice.'
+$sampleNotice = [regex]::Match($sampleHtml, '(?is)<aside\b[^>]*\bdata-edition-relationship(?:=|\s|>).*?</aside>')
+Assert-True ($legacyNotice.Success -and $sampleNotice.Success) 'Both Cracked Pot editions must render one shared edition relationship notice.'
 foreach ($noticeCase in @(
   @{ Html = $legacyNotice.Value; Relationship = $legacyRelationship },
   @{ Html = $sampleNotice.Value; Relationship = $sampleRelationship }
@@ -480,31 +455,13 @@ foreach ($noticeCase in @(
   $renderedRelationshipText = $relationship.Text.Replace('*2045*', '<em>2045</em>')
   Assert-True ($noticeHtml.Contains($renderedRelationshipText, [StringComparison]::Ordinal)) "Edition notice lost text: $($relationship.Text)"
   $cta = @([regex]::Matches($noticeHtml, '(?is)<a\b[^>]*>.*?</a>'))
-  if ($relationship.Contains('Href')) {
-    Assert-True ($cta.Count -eq 1 -and (Html-Attribute $cta[0].Value 'href') -eq $relationship.Href -and (Plain-Text $cta[0].Value) -ceq $relationship.Cta) 'Edition notice CTA differs from its front matter contract.'
-  } else {
-    Assert-True ($cta.Count -eq 0) 'The current-edition sample notice must contain no outbound links.'
-  }
+  Assert-True ($cta.Count -eq 1 -and (Html-Attribute $cta[0].Value 'href') -eq $relationship.Href -and (Plain-Text $cta[0].Value) -ceq $relationship.Cta) 'Edition notice CTA differs from its front matter contract.'
   Assert-True ($noticeHtml -match '<em>2045</em>') 'Edition relationship copy must render the book title with Markdown emphasis.'
 }
 $legacyBodyTag = [regex]::Match($legacyStoryHtml, '(?is)<div\b[^>]*\bclass="?piece-body"?(?:\s|>)')
 $renderedSampleBodyTag = [regex]::Match($sampleHtml, '(?is)<div\b[^>]*\bclass="?bookstore-reading-sample__body"?(?:\s|>)')
 Assert-True ($legacyBodyTag.Success -and $legacyNotice.Index -lt $legacyBodyTag.Index) 'Earlier-edition notice must precede the legacy story body.'
 Assert-True ($renderedSampleBodyTag.Success -and $sampleNotice.Index -lt $renderedSampleBodyTag.Index) '2045-edition notice must precede the locked story body.'
-$sampleArtBlock = [regex]::Match($sampleHtml, '(?is)<div\b[^>]*\bdata-sample-illustration(?:=|\s|>).*?</div>')
-Assert-True ($sampleArtBlock.Success -and $sampleArtBlock.Index -lt $sampleNotice.Index) 'The illustration must render before the edition notice and outside the story body.'
-$sampleArtImages = @([regex]::Matches($sampleArtBlock.Value, '(?is)<img\b[^>]*>'))
-Assert-True ($sampleArtImages.Count -eq 1) 'The sample must render exactly one story illustration.'
-$sampleArtImage = $sampleArtImages[0].Value
-Assert-True ((Html-Attribute $sampleArtImage 'data-oip-image-id') -ceq $sampleArtId -and (Html-Attribute $sampleArtImage 'alt') -ceq $sampleArtAlt) 'Rendered story artwork or alternative differs from its source.'
-Assert-True ((Html-Attribute $sampleArtImage 'width') -eq '1275' -and (Html-Attribute $sampleArtImage 'height') -eq '1665') 'Story artwork must preserve intrinsic portrait proportions.'
-Assert-True ($sampleArtBlock.Value -match 'image/avif' -and $sampleArtBlock.Value -match 'image/webp' -and (Html-Attribute $sampleArtImage 'loading') -eq 'eager') 'Story artwork must have responsive AVIF/WebP resources and explicit loading.'
-Assert-True ([regex]::Matches($sampleHtml, '(?is)<h1\b[^>]*>').Count -eq 1) 'The sample must retain one live title.'
-Assert-True ((Meta-Content $sampleHtml 'og:image') -match '/books/2045/cover/' -and (Meta-Content $sampleHtml 'twitter:image') -match '/books/2045/cover/') 'The story illustration must not replace cover sharing metadata.'
-foreach ($untouchedSurface in @($homeHtml, $legacyStoryHtml, (Read-Output 'gallery/index.html'))) {
-  Assert-True (-not $untouchedSurface.Contains($sampleArtId, [StringComparison]::Ordinal)) 'Story illustration leaked onto the homepage, Gallery, or earlier web edition.'
-}
-Assert-True ($sampleHtml -notmatch '(?i)/essays/the-cracked-pot/|earlier (?:2025 )?web edition|data-edition-relationship(?:=|\s|>)') 'The sample output, including structured metadata, must not reference or promote the earlier edition.'
 Assert-True ((Meta-Content $legacyStoryHtml 'robots') -ceq 'noindex, follow') 'The earlier web edition must render noindex, follow.'
 Assert-True ((Meta-Content $sampleHtml 'robots') -ceq 'index, follow, max-image-preview:large') 'The 2045 edition must remain indexable.'
 Assert-True ($legacyStoryHtml -match '(?is)<link\b(?=[^>]*\brel="?canonical"?(?:\s|>))(?=[^>]*\bhref="?https://outsideinprint\.org/essays/the-cracked-pot/"?(?:\s|>))[^>]*>') 'The earlier web edition must retain its self-canonical URL.'
@@ -534,11 +491,7 @@ if ($isDraft) {
   Assert-True ($detailHtml -notmatch '<form[^>]*data-epub-checkout') 'Preview exposes a live 2045 checkout.'
 }
 $sampleBody = [regex]::Match($sampleHtml, '(?s)<div[^>]*class="?bookstore-reading-sample__body"?[^>]*>(?<body>.*?)</div>').Groups['body'].Value
-$renderedParagraphs = @([regex]::Matches($sampleBody, '(?s)<p(?:\s[^>]*)?>(?<text>.*?)</p>'))
-Assert-True ($renderedParagraphs.Count -eq 32) 'Rendered sample must contain exactly 32 paragraphs.'
-for ($i = 0; $i -lt $approvedOpeningStarts.Count; $i++) {
-  Assert-True ((Plain-Text $renderedParagraphs[$i + 1].Groups['text'].Value).StartsWith($approvedOpeningStarts[$i], [StringComparison]::Ordinal)) 'Rendered sample opening paragraph break moved.'
-}
+Assert-True ([regex]::Matches($sampleBody, '<p(?:\s|>)').Count -eq 30) 'Rendered sample paragraph count changed.'
 Assert-True ([regex]::Matches($sampleBody, '<em(?:\s|>)').Count -eq 2) 'Rendered sample italic runs changed.'
 # Markdown escapes prevent Goldmark typography from changing locked literal dots.
 $expectedText = [regex]::Replace($body.Replace('*', '').Replace('\.', '.'), '\s+', ' ').Trim()
