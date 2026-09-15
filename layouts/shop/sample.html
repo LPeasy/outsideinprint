@@ -12,6 +12,15 @@
         </div>
         <p class="bookstore-reading-sample__meta">About {{ .ReadingTime }} min read</p>
       </header>
+      {{ with .Params.sample_illustration }}
+        {{ $illustrationAlt := $.Params.sample_illustration_alt | default "" }}
+        {{ if not (strings.TrimSpace $illustrationAlt) }}
+          {{ errorf "Sample illustration requires descriptive sample_illustration_alt: %s" $.RelPermalink }}
+        {{ end }}
+        <div class="bookstore-reading-sample__illustration" data-sample-illustration>
+          {{ partial "images/picture.html" (dict "page" $ "ref" . "alt" $illustrationAlt "sizes" "(max-width: 36rem) calc(100vw - 3rem), 32rem" "loading" "eager" "fetchpriority" "high") }}
+        </div>
+      {{ end }}
       {{ partial "edition-relationship.html" . }}
       <div class="bookstore-reading-sample__body">{{ .Content }}</div>
       <footer class="bookstore-reading-sample__footer">

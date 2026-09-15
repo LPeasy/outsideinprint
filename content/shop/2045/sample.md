@@ -15,6 +15,8 @@ sample_source: "locked_2045_epub"
 sample_source_checked: "2026-09-07"
 sample_boundary: "Complete The Cracked Pot; stop before Memory Lane"
 sample_release_status: "published"
+sample_illustration: "books/2045/stories/the-cracked-pot"
+sample_illustration_alt: "A hand rests on a cracked handmade pot while a robotic hand offers a neatly wrapped gift beside an apartment window overlooking the city."
 edition_relationship:
   label: "2045 EPUB edition."
   text: "This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*. The earlier 2025 web edition remains available in the archive."

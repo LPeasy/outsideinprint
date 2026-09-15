@@ -234,7 +234,7 @@ $classCounts = @{}
 $usageCounts = @{}
 
 foreach ($assetId in $assetIds) {
-  if ($assetId -cnotmatch '^(?:editorial/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium/[0-9a-f]{64}|books/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/cover)$') {
+  if ($assetId -cnotmatch '^(?:editorial/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|essays(?:/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?){2,3}|medium/[0-9a-f]{64}|books/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/(?:cover|stories/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))$') {
     throw "Invalid stable image asset ID: $assetId"
   }
 
@@ -251,7 +251,7 @@ foreach ($assetId in $assetIds) {
   }
   $assetIdParts = $assetId.Split('/')
   if ($assetIdParts[0] -ceq 'books' -and $source -cnotmatch ('^images/originals/' + [regex]::Escape($assetId) + '\.(?:png|jpe?g)$')) {
-    throw "Book cover '$assetId' source does not match its stable ID."
+    throw "Book image '$assetId' source does not match its stable ID."
   }
   if ($assetIdParts[0] -ceq 'editorial') {
     $expectedSourcePattern = '^images/originals/editorial/' + [regex]::Escape($assetIdParts[1]) + '\.(?:png|jpe?g)$'
@@ -493,7 +493,7 @@ function Resolve-OipAlias {
 }
 
 foreach ($alias in $aliasNames) {
-  if ($alias -cnotmatch '^/images/(?:(?:editorial|essays|medium|syd-and-oliver)/.+|books/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/cover)\.(?:png|jpe?g)$') {
+  if ($alias -cnotmatch '^/images/(?:(?:editorial|essays|medium|syd-and-oliver)/.+|books/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/(?:cover|stories/[a-z0-9](?:[a-z0-9-]*[a-z0-9])?))\.(?:png|jpe?g)$') {
     throw "Managed alias must be an exact former public image URL: $alias"
   }
   if ($alias.Contains('/originals/', [System.StringComparison]::Ordinal)) {

@@ -245,6 +245,21 @@ Assert-True ($body -notmatch '(?m)^#{1,6} |Memory Lane|V:\\|urn:isbn|\uFFFD') 'S
 $assets = Read-Source 'data/image-assets.json' | ConvertFrom-Json -AsHashtable
 $cover = $assets.assets['books/2045/cover']
 Assert-True ($cover.width -eq 1650 -and $cover.height -eq 2550 -and $cover.review_state -eq 'approved') '2045 cover is not the approved portrait asset.'
+$sampleArtId = 'books/2045/stories/the-cracked-pot'
+$sampleArt = $assets.assets[$sampleArtId]
+$sampleArtAlt = 'A hand rests on a cracked handmade pot while a robotic hand offers a neatly wrapped gift beside an apartment window overlooking the city.'
+Assert-True ($sampleSource.Contains(('sample_illustration: "' + $sampleArtId + '"'), [StringComparison]::Ordinal)) '2045 sample must reference its matching story illustration.'
+Assert-True ($sampleSource.Contains(('sample_illustration_alt: "' + $sampleArtAlt + '"'), [StringComparison]::Ordinal)) '2045 sample must retain its reviewed descriptive alternative.'
+Assert-True ($sampleArt.sha256 -ceq '553b9eeea8d8d8f25f2b91f95fd14a5137fc11c023ca20513d82a1077c177682' -and $sampleArt.width -eq 1275 -and $sampleArt.height -eq 1665 -and $sampleArt.review_state -eq 'approved') 'The sample must use the approved title-free production illustration bytes.'
+Assert-True ($sampleArt.quality_override.webp_quality -eq 90 -and $sampleArt.quality_override.avif_quality -eq 70) 'Fine hatching requires the approved detail-quality derivatives.'
+$sampleArtIndex = $sampleTemplate.IndexOf('data-sample-illustration', [StringComparison]::Ordinal)
+Assert-True ($sampleArtIndex -gt $sampleTemplate.IndexOf('</header>', [StringComparison]::Ordinal) -and $sampleArtIndex -lt $sampleNoticeIndex) 'Sample illustration must sit between its title/byline and edition notice.'
+Assert-True ($sampleTemplate.Contains('with .Params.sample_illustration', [StringComparison]::Ordinal) -and $sampleTemplate.Contains('images/picture.html', [StringComparison]::Ordinal)) 'Optional sample illustrations must use the shared responsive pipeline.'
+Assert-True ($siteCss -match '(?s)\.bookstore-reading-sample__illustration\{\s*width:100%;\s*max-width:32rem;\s*margin:1\.65rem auto;') 'Sample illustration must be centered and bounded at 32rem.'
+foreach ($otherSample in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/shop') -Recurse -Filter 'sample.md') {
+  if ($otherSample.FullName -eq (Join-Path $repoRoot 'content/shop/2045/sample.md')) { continue }
+  Assert-True ((Get-Content -LiteralPath $otherSample.FullName -Raw) -notmatch '(?m)^sample_illustration:') 'Other existing samples must remain unchanged.'
+}
 
 $issueSource = Read-Source 'content/almanack/2026-09-12.md'
 $launchMessage = "A grieving father enters a memory world with his children—and finds that the dead may remember him back. 2045 collects ten dark fables about artificial intelligence, grief, ambition, faith, and the ways people seek meaning. By Robert V. Ussley. The EPUB is `$19.99, sold directly by Outside In Print to U.S. readers, with a private download link delivered by email."
@@ -462,6 +477,19 @@ $legacyBodyTag = [regex]::Match($legacyStoryHtml, '(?is)<div\b[^>]*\bclass="?pie
 $renderedSampleBodyTag = [regex]::Match($sampleHtml, '(?is)<div\b[^>]*\bclass="?bookstore-reading-sample__body"?(?:\s|>)')
 Assert-True ($legacyBodyTag.Success -and $legacyNotice.Index -lt $legacyBodyTag.Index) 'Earlier-edition notice must precede the legacy story body.'
 Assert-True ($renderedSampleBodyTag.Success -and $sampleNotice.Index -lt $renderedSampleBodyTag.Index) '2045-edition notice must precede the locked story body.'
+$sampleArtBlock = [regex]::Match($sampleHtml, '(?is)<div\b[^>]*\bdata-sample-illustration(?:=|\s|>).*?</div>')
+Assert-True ($sampleArtBlock.Success -and $sampleArtBlock.Index -lt $sampleNotice.Index) 'The illustration must render before the edition notice and outside the story body.'
+$sampleArtImages = @([regex]::Matches($sampleArtBlock.Value, '(?is)<img\b[^>]*>'))
+Assert-True ($sampleArtImages.Count -eq 1) 'The sample must render exactly one story illustration.'
+$sampleArtImage = $sampleArtImages[0].Value
+Assert-True ((Html-Attribute $sampleArtImage 'data-oip-image-id') -ceq $sampleArtId -and (Html-Attribute $sampleArtImage 'alt') -ceq $sampleArtAlt) 'Rendered story artwork or alternative differs from its source.'
+Assert-True ((Html-Attribute $sampleArtImage 'width') -eq '1275' -and (Html-Attribute $sampleArtImage 'height') -eq '1665') 'Story artwork must preserve intrinsic portrait proportions.'
+Assert-True ($sampleArtBlock.Value -match 'image/avif' -and $sampleArtBlock.Value -match 'image/webp' -and (Html-Attribute $sampleArtImage 'loading') -eq 'eager') 'Story artwork must have responsive AVIF/WebP resources and explicit loading.'
+Assert-True ([regex]::Matches($sampleHtml, '(?is)<h1\b[^>]*>').Count -eq 1) 'The sample must retain one live title.'
+Assert-True ((Meta-Content $sampleHtml 'og:image') -match '/books/2045/cover/' -and (Meta-Content $sampleHtml 'twitter:image') -match '/books/2045/cover/') 'The story illustration must not replace cover sharing metadata.'
+foreach ($untouchedSurface in @($homeHtml, $legacyStoryHtml, (Read-Output 'gallery/index.html'))) {
+  Assert-True (-not $untouchedSurface.Contains($sampleArtId, [StringComparison]::Ordinal)) 'Story illustration leaked onto the homepage, Gallery, or earlier web edition.'
+}
 Assert-True ((Meta-Content $legacyStoryHtml 'robots') -ceq 'noindex, follow') 'The earlier web edition must render noindex, follow.'
 Assert-True ((Meta-Content $sampleHtml 'robots') -ceq 'index, follow, max-image-preview:large') 'The 2045 edition must remain indexable.'
 Assert-True ($legacyStoryHtml -match '(?is)<link\b(?=[^>]*\brel="?canonical"?(?:\s|>))(?=[^>]*\bhref="?https://outsideinprint\.org/essays/the-cracked-pot/"?(?:\s|>))[^>]*>') 'The earlier web edition must retain its self-canonical URL.'
