@@ -1805,9 +1805,15 @@ html[data-theme="light"] .paper-route-toggle{
   outline-offset:3px;
 }
 .home-2045-launch__action--buy{
-  border-color:rgba(213,190,150,.48);
-  background:rgba(213,190,150,.12);
-  color:var(--oip-paper-light);
+  border-color:#9c702f;
+  background:#d8ad63;
+  color:var(--oip-ink);
+}
+.home-2045-launch__action--buy:hover,
+.home-2045-launch__action--buy:focus-visible{
+  border-color:#9c702f;
+  background:#e7c183;
+  color:var(--oip-ink);
 }
 .home-2045-launch__terms{
   grid-column:1 / -1;
