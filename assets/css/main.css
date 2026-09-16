@@ -6553,10 +6553,6 @@ body.cartoon-lightbox-open{
   align-items:center;
   gap:.35rem .75rem;
 }
-.piece-title-block > .piece-byline-row{
-  margin:-.1rem 0 .9rem;
-}
-.piece-byline-row > .piece-byline,
 .piece-byline-row > .bookstore-reading-sample__meta,
 .piece-byline-row > .almanack-masthead__meta{
   margin:0;
@@ -7089,6 +7085,38 @@ h2{ margin-top:34px; }
   color:var(--text-faint);
   font-family:var(--font-ui);
   font-size:.8em;
+}
+.piece-record-rail > .piece-share{
+  margin-left:auto;
+  font:inherit;
+  letter-spacing:inherit;
+  text-transform:none;
+}
+.piece-record-rail [data-share-trigger]{
+  padding:0;
+  border:0;
+  border-radius:3px;
+  background:transparent;
+  color:inherit;
+  letter-spacing:inherit;
+  text-transform:uppercase;
+}
+.piece-record-rail .piece-share__label{
+  padding:.23rem .5rem;
+  border:1px solid var(--oip-rule-standard);
+  border-radius:3px;
+  line-height:1.2;
+}
+.piece-record-rail [data-share-trigger]:hover .piece-share__label{
+  border-color:var(--oip-rule-clear);
+  background:var(--bg-raised);
+}
+.piece-record-rail .piece-share__panel,
+.piece-record-rail .piece-share__status{
+  font-size:.85rem;
+  font-weight:400;
+  letter-spacing:normal;
+  text-transform:none;
 }
 .article-variant-dialogue .piece-body{
   max-width:72ch;

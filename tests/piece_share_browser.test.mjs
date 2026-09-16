@@ -465,12 +465,8 @@ test("invalid share origins remain hidden", async () => {
   }
 });
 
-test("closed Share aligns with each byline at mobile and desktop, and mobile fallback stays usable", async () => {
+test("article Share sits in its publication rail while other byline rows and mobile fallback stay usable", async () => {
   const variants = [
-    {
-      route: "/essays/jack-stratton-and-the-vulfpeck-model/",
-      byline: ".piece-byline"
-    },
     {
       route: "/shop/2045/sample/",
       byline: ".bookstore-reading-sample__meta"
@@ -490,6 +486,68 @@ test("closed Share aligns with each byline at mobile and desktop, and mobile fal
     });
 
     try {
+      const articleRoute = "/essays/jack-stratton-and-the-vulfpeck-model/";
+      await page.goto(`${siteOrigin}${articleRoute}`, { waitUntil: "load" });
+      const rail = page.locator(".piece-record-rail");
+      const articleShare = rail.locator(":scope > [data-piece-share]");
+      await articleShare.waitFor({ state: "visible" });
+
+      const railGeometry = await rail.evaluate((node) => {
+        const composition = node.previousElementSibling;
+        const shareWrapper = node.querySelector(":scope > [data-piece-share]");
+        const trigger = shareWrapper && shareWrapper.querySelector("[data-share-trigger]");
+        const label = trigger && trigger.querySelector(".piece-share__label");
+        const panel = shareWrapper && shareWrapper.querySelector("[data-share-panel]");
+        const metadata = Array.from(node.querySelectorAll(":scope > .piece-record-rail__item"));
+        if (!composition || !shareWrapper || !trigger || !label || !panel || metadata.length === 0) {
+          return null;
+        }
+
+        const railRect = node.getBoundingClientRect();
+        const triggerRect = trigger.getBoundingClientRect();
+        const labelRect = label.getBoundingClientRect();
+        const children = Array.from(node.children);
+        const shareIndex = children.indexOf(shareWrapper);
+        return {
+          clientWidth: document.documentElement.clientWidth,
+          collectionBeforeShare: metadata.some((item) => item.classList.contains("piece-record-rail__item--collection")) &&
+            metadata.every((item) => children.indexOf(item) < shareIndex),
+          compositionClass: composition.classList.contains("piece-header-composition"),
+          expanded: trigger.getAttribute("aria-expanded"),
+          labelHeight: labelRect.height,
+          panelHidden: panel.hidden,
+          railLeft: railRect.left,
+          railRight: railRect.right,
+          scrollWidth: document.documentElement.scrollWidth,
+          shareIsLast: shareIndex === children.length - 1,
+          shareParentIsRail: shareWrapper.parentElement === node,
+          titleBlockContainsShare: Boolean(document.querySelector(".piece-title-block [data-piece-share]")),
+          titleBlockHasByline: Boolean(document.querySelector(".piece-title-block > .piece-byline")),
+          titleBlockHasBylineRow: Boolean(document.querySelector(".piece-title-block > .piece-byline-row")),
+          triggerHeight: triggerRect.height,
+          triggerLeft: triggerRect.left,
+          triggerRight: triggerRect.right,
+          viewportWidth: window.innerWidth
+        };
+      });
+
+      assert.ok(railGeometry, `${articleRoute} is missing its publication-rail Share structure.`);
+      assert.equal(railGeometry.viewportWidth, viewport.width);
+      assert.equal(railGeometry.compositionClass, true, "Publication rail must immediately follow the hero/header composition.");
+      assert.equal(railGeometry.shareParentIsRail, true);
+      assert.equal(railGeometry.shareIsLast, true, "Share must follow publication metadata in the rail.");
+      assert.equal(railGeometry.collectionBeforeShare, true, "Collection-bearing metadata must remain before Share.");
+      assert.equal(railGeometry.titleBlockContainsShare, false);
+      assert.equal(railGeometry.titleBlockHasByline, true);
+      assert.equal(railGeometry.titleBlockHasBylineRow, false);
+      assert.equal(railGeometry.panelHidden, true);
+      assert.equal(railGeometry.expanded, "false");
+      assert.ok(railGeometry.labelHeight > 0 && railGeometry.labelHeight < 32, JSON.stringify({ viewport, railGeometry }));
+      assert.ok(railGeometry.triggerHeight >= 44, JSON.stringify({ viewport, railGeometry }));
+      assert.ok(railGeometry.railLeft >= 0 && railGeometry.railRight <= railGeometry.viewportWidth, JSON.stringify({ viewport, railGeometry }));
+      assert.ok(railGeometry.triggerLeft >= 0 && railGeometry.triggerRight <= railGeometry.viewportWidth, JSON.stringify({ viewport, railGeometry }));
+      assert.ok(railGeometry.scrollWidth <= railGeometry.clientWidth, JSON.stringify({ viewport, railGeometry }));
+
       for (const variant of variants) {
         await page.goto(`${siteOrigin}${variant.route}`, { waitUntil: "load" });
         const row = page.locator(".piece-byline-row");
