@@ -15,6 +15,7 @@
 {{- $inSitemap := true -}}
 {{- $robots := slice -}}
 {{- $reason := "indexable-canonical" -}}
+{{- $safeMode := site.Params.v2.safe_mode | default false -}}
 
 {{- $explicitNoindex := false -}}
 {{- with $page.Params.noindex -}}
@@ -34,7 +35,11 @@
   {{- end -}}
 {{- end -}}
 
-{{- if $explicitNoindex -}}
+{{- if $safeMode -}}
+  {{- $inSitemap = false -}}
+  {{- $robots = slice "noindex" "nofollow" "noarchive" -}}
+  {{- $reason = "v2-safe-mode" -}}
+{{- else if $explicitNoindex -}}
   {{- $indexable = false -}}
   {{- $inSitemap = false -}}
   {{- $robots = slice "noindex" "follow" -}}

@@ -72,9 +72,9 @@ const notFound = fs.readFileSync(path.resolve("layouts/404.html"), "utf8");
 const themeBootstrap = fs.readFileSync(path.resolve("layouts/partials/theme_bootstrap.html"), "utf8");
 const themeToggleScript = fs.readFileSync(path.resolve("layouts/partials/theme_toggle_script.html"), "utf8");
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
-const homeFrontPageCopy = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
+const homeV2FrontPage = fs.readFileSync(path.resolve("layouts/partials/home_v2_front_page.html"), "utf8");
+const homeReaderBanner = fs.readFileSync(path.resolve("layouts/partials/home_reader_banner.html"), "utf8");
 const homeStudioOffer = fs.readFileSync(path.resolve("layouts/partials/home_studio_offer.html"), "utf8");
-const homeBookstore = fs.readFileSync(path.resolve("layouts/partials/home_bookstore_spotlight.html"), "utf8");
 const studioData = fs.readFileSync(path.resolve("data/studio.yaml"), "utf8");
 const studioTemplate = fs.readFileSync(path.resolve("layouts/studio/single.html"), "utf8");
 const studioScript = fs.readFileSync(path.resolve("assets/js/studio-inquiry.js"), "utf8");
@@ -98,9 +98,6 @@ const epubCheckoutScript = fs.readFileSync(path.resolve("assets/js/epub-checkout
 const bookstoreData = fs.readFileSync(path.resolve("data/bookstore.yaml"), "utf8");
 const analyticsScript = fs.readFileSync(path.resolve("assets/js/analytics.js"), "utf8");
 const analyticsDoc = fs.readFileSync(path.resolve("docs/analytics-system.md"), "utf8");
-const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
-const homeSelectedCollections = fs.readFileSync(path.resolve("layouts/partials/home_selected_collections.html"), "utf8");
-const entryThreads = fs.readFileSync(path.resolve("layouts/partials/entry_threads.html"), "utf8");
 const footer = fs.readFileSync(path.resolve("layouts/partials/footer.html"), "utf8");
 const randomTemplate = fs.readFileSync(path.resolve("layouts/random/single.html"), "utf8");
 const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
@@ -121,6 +118,7 @@ const currentCartoonSlug = readCurrentCartoonSlug(cartoonData);
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
 const styleThemeWorkflow = fs.readFileSync(path.resolve("docs/style-theme-workflow.md"), "utf8");
+const readerNoteCopy = "However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.";
 
 test("masthead defines the grouped desktop and mobile navigation from one destination model", () => {
   assert.doesNotMatch(masthead, />Welcome</);
@@ -142,6 +140,10 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
     assert.equal((masthead.match(new RegExp(`"label" "${escapeRegex(label)}"`, "g")) || []).length, 1, `${label} should be defined once`);
     assert.match(masthead, new RegExp(`"label" "${escapeRegex(label)}"[\\s\\S]*?"href" \\(${escapeRegex(route)}\\)[\\s\\S]*?"description" "${escapeRegex(description)}"[\\s\\S]*?"group" "${group}"`));
   }
+  const readOrder = ["Latest", "Archive", "Collections", "Library", "Feeling curious?"]
+    .map((label) => masthead.indexOf(`"label" "${label}"`));
+  assert.ok(readOrder.every((position) => position >= 0), "every Read destination should exist");
+  assert.ok(readOrder.every((position, index) => index === 0 || readOrder[index - 1] < position), "Read destinations should keep the requested order");
 
   assert.match(masthead, /\$appsPage := site\.GetPage "\/apps"/);
   assert.match(masthead, /\$showApps := and \$appsPage \(not \$appsPage\.Draft\)/);
@@ -155,37 +157,42 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$isGamesPage := and \$gamesPage \(eq \$currentPath \$gamesPage\.RelPermalink\)/);
   assert.match(masthead, /\$inGamesSection := or \$isGamesPage \(eq \.Section "games"\)/);
 
-  assert.match(masthead, /"label" "Studio"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false[\s\S]*?"analyticsSourceSlot" "primary_nav_studio"/);
-  assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
-  const directNavOrder = ["Bookstore", "About", "Studio", "Support"].map((label) => masthead.indexOf(`"label" "${label}"`));
-  assert.ok(directNavOrder.every((index) => index >= 0));
-  assert.deepEqual(directNavOrder, [...directNavOrder].sort((left, right) => left - right));
-  assert.match(masthead, /"label" "About"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
-  assert.match(masthead, /"label" "Support"[\s\S]*?"group" "direct"[\s\S]*?"analyticsSourceSlot" "primary_nav_support"/);
+  assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
+  assert.match(masthead, /range \$directKey := slice "about" "bookstore" "contribute"/);
+  assert.match(masthead, /range \$mobileKey := slice "about"/);
+  assert.match(masthead, /"label" "Archive"[\s\S]*?"group" "read"[\s\S]*?"mobilePrimary" false/);
+  assert.match(masthead, /"label" "About"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true/);
+  assert.match(masthead, /"label" "Contribute"[\s\S]*?"href" \("contribute\/" \| absURL\)[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
+  assert.doesNotMatch(masthead, /"label" "(?:Studio|Support)"[\s\S]*?"group" "direct"/);
   assert.match(masthead, /\$currentPath := \.RelPermalink/);
   assert.match(masthead, /\$archivePageNumber := int \(\.Scratch\.Get "oip_archive_page_number" \| default 1\)/);
   assert.match(masthead, /\$isArchivePage := and \(eq \$currentPath "\/archive\/"\) \(eq \$archivePageNumber 1\)/);
   assert.match(masthead, /\$inArchiveSection := or \$isArchivePage \(eq \.Section "archive"\) \(eq \.Section "essays"\) \(eq \.Section "syd-and-oliver"\)/);
-  assert.match(masthead, /\$isStudioPage := eq \$currentPath "\/studio\/"/);
-  assert.match(masthead, /\$inStudioSection := or \$isStudioPage \(eq \.Section "studio"\)/);
   assert.match(masthead, /\$isBookstorePage := eq \$currentPath "\/shop\/"/);
   assert.match(masthead, /\$inBookstoreSection := or \$isBookstorePage \(eq \.Section "shop"\)/);
   assert.match(masthead, /\$inAboutSection := or \$isAboutPage \(eq \.Section "about"\)/);
+  assert.match(masthead, /\$inContributeSection := or \$isContributePage \(eq \.Section "contribute"\)/);
   assert.match(masthead, /\$inRandomSection := or \$isRandomPage \(eq \.Section "random"\)/);
-  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 12);
-  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 12);
+  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 11);
+  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 11);
   assert.doesNotMatch(masthead, /"current"/);
   assert.match(masthead, /<nav class="nav nav--section-rail" aria-label="Primary" data-primary-nav>/);
   assert.equal((masthead.match(/aria-label="Primary"/g) || []).length, 1);
   assert.match(masthead, /class="nav__desktop"[\s\S]*?>\s*<span>Read<\/span>[\s\S]*?>\s*<span>Explore<\/span>[\s\S]*?range \$directItems/);
-  assert.match(masthead, /class="nav__mobile"[\s\S]*?range \$mobilePrimaryItems[\s\S]*?<span>Menu<\/span>/);
-  assert.match(masthead, /mobile-nav-read-heading[\s\S]*?mobile-nav-explore-heading[\s\S]*?mobile-nav-imprint-heading/);
-  assert.match(masthead, /\$mobileMenuItems := where \$navItems "mobilePrimary" false/);
+  assert.match(masthead, /<span>EST\. 2023<\/span>/);
+  assert.doesNotMatch(masthead, /<span>EST\. 2025<\/span>/);
+  assert.match(masthead, /class="nav__mobile"[\s\S]*?<span>Read<\/span>[\s\S]*?<span>Explore<\/span>[\s\S]*?range \$mobilePrimaryItems/);
+  assert.doesNotMatch(masthead, /<span>Menu<\/span>/);
+  assert.match(masthead, /\$mobileReadItems := slice[\s\S]*?range \$readItems[\s\S]*?\$mobileReadItems = \$mobileReadItems \| append \.[\s\S]*?"key" "bookstore"[\s\S]*?\$mobileReadItems = \$mobileReadItems \| append \./);
+  assert.match(masthead, /\$mobileExploreItems := slice[\s\S]*?range \$exploreItems[\s\S]*?\$mobileExploreItems = \$mobileExploreItems \| append \.[\s\S]*?"key" "contribute"[\s\S]*?\$mobileExploreItems = \$mobileExploreItems \| append \./);
+  assert.match(masthead, /class="nav__mobile"[\s\S]*?range \$mobileReadItems[\s\S]*?range \$mobileExploreItems[\s\S]*?range \$mobilePrimaryItems/);
+  assert.doesNotMatch(masthead, /range \$mobileKey := slice[^\n]*"bookstore"/);
   assert.match(masthead, /\$readCurrent := gt \(len \(where \$readItems "currentSection" true\)\) 0/);
   assert.match(masthead, /\$exploreCurrent := gt \(len \(where \$exploreItems "currentSection" true\)\) 0/);
-  assert.match(masthead, /\$mobileMenuCurrent := gt \(len \(where \$mobileMenuItems "currentSection" true\)\) 0/);
+  assert.match(masthead, /\$mobileReadCurrent := gt \(len \(where \$mobileReadItems "currentSection" true\)\) 0/);
+  assert.match(masthead, /\$mobileExploreCurrent := gt \(len \(where \$mobileExploreItems "currentSection" true\)\) 0/);
   assert.match(masthead, /<span class="visually-hidden">, current section<\/span>/);
-  assert.match(masthead, /<span class="visually-hidden">, contains current section<\/span>/);
+  assert.doesNotMatch(masthead, /contains current section/);
 
   assert.match(mastheadNavLink, /\$currentPage := \$item\.currentPage \| default false/);
   assert.match(mastheadNavLink, /\$currentSection := \$item\.currentSection \| default false/);
@@ -205,9 +212,14 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(masthead, /aria-pressed="true"/);
   assert.match(masthead, /theme-toggle__icon--sun/);
   assert.match(masthead, /theme-toggle__icon--moon/);
-  assert.match(masthead, /<nav class="nav nav--section-rail"[\s\S]*nav-disclosure--read[\s\S]*nav-disclosure--explore[\s\S]*nav-mobile-menu/);
+  assert.match(masthead, /<nav class="nav nav--section-rail"[\s\S]*nav-disclosure--read[\s\S]*nav-disclosure--explore[\s\S]*nav__mobile/);
   assert.match(masthead, /\$mastheadVariant := cond \$isHomeMasthead "masthead--full" "masthead--compressed"/);
   assert.match(masthead, /\{\{ if \$isHomeMasthead \}\}[\s\S]*masthead-side-deck--left/);
+  const homeLeftDeck = masthead.match(/<div class="masthead-side-deck masthead-side-deck--left"[\s\S]*?<\/div>/)?.[0] || "";
+  assert.deepEqual(
+    Array.from(homeLeftDeck.matchAll(/<span>([^<]+)<\/span>/g), ([, label]) => label),
+    ["ESSAYS", "REPORTS", "LITERATURE"]
+  );
   assert.doesNotMatch(
     masthead.match(/<nav class="nav nav--section-rail"[\s\S]*?<\/nav>/)?.[0] || "",
     /data-theme-toggle/
@@ -233,22 +245,35 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /@media \(prefers-reduced-motion:reduce\)\{\s*html\{\s*scroll-behavior:auto;\s*\}/);
   assert.match(css, /\.theme-toggle\{[\s\S]*display:none;[\s\S]*\}/);
   assert.match(cssRule(css, ".theme-toggle"), /width:44px;[\s\S]*height:44px;/);
-  assert.match(cssRule(css, ".paper-route-toggle"), /min-height:44px;[\s\S]*height:44px;/);
+  assert.match(cssRule(css, ".paper-route-toggle"), /width:44px;[\s\S]*min-width:44px;[\s\S]*min-height:44px;[\s\S]*height:44px;/);
+  assert.match(masthead, /class="masthead-controls"[\s\S]*data-paper-route-launch[\s\S]*data-theme-toggle[\s\S]*class="title"/);
+  assert.match(css, /@media \(max-width:768px\)[\s\S]*\.masthead--full \.masthead-controls > button\{[^}]*position:static;[^}]*width:44px;[^}]*height:44px;/);
   assert.match(css, /html\.theme-enabled \.theme-toggle\{[\s\S]*display:inline-flex;[\s\S]*\}/);
   assert.match(css, /\.masthead--compressed \.title\{[\s\S]*font-size:clamp\(1\.75rem, 3vw, 2\.35rem\)/);
-  assert.match(css, /\.nav__direct-link,[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?min-height:44px;/);
+  assert.match(css, /\.nav__direct-link,[\s\S]*?\.nav-mobile-disclosure__summary\{[\s\S]*?min-height:44px;/);
   assert.match(css, /\.nav-disclosure__panel\{[\s\S]*?position:absolute;/);
   assert.match(css, /\.nav a\[aria-current="page"\],[\s\S]*?\.nav a\.nav-link--current-section,/);
   assert.match(css, /\.nav-disclosure__link\[aria-current="page"\],[\s\S]*?\.nav-disclosure__link\.nav-link--current-section/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.75rem;[\s\S]*?letter-spacing:0;/);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:(?:repeat\(4,\s*minmax\(0,\s*1fr\)\)|(?:minmax\(0,\s*(?:\d*\.?\d+)fr\)\s*){4});/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile\{[\s\S]*?grid-template-columns:(?:repeat\(3,\s*minmax\(0,\s*1fr\)\)|(?:minmax\(0,\s*(?:\d*\.?\d+)fr\)\s*){3});/);
   assert.match(css, /--nav-mobile-gap:clamp\(2px, 1vw, 4px\);/);
-  assert.match(css, /\.nav__mobile-link--archive::after,[\s\S]*?\.nav__mobile-link--collections::after,[\s\S]*?\.nav__mobile-link--bookstore::after/);
+  assert.match(css, /\.nav-mobile-disclosure--read > \.nav-mobile-disclosure__summary::after,[\s\S]*?\.nav-mobile-disclosure--explore > \.nav-mobile-disclosure__summary::after/);
+  assert.doesNotMatch(css, /\.nav__mobile-link--bookstore(?:\{|::after)/);
+  assert.doesNotMatch(css, /\.nav__mobile-link--archive(?:\{|::after)/);
+  assert.doesNotMatch(css, /\.nav__mobile-link--collections(?:\{|::after)/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link\{[\s\S]*?min-height:44px;/);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__summary\{[\s\S]*?justify-self:end;[\s\S]*?gap:\.25rem;/);
-  assert.doesNotMatch(css, /\.nav-mobile-menu\{(?:(?!\n\s*\}).)*grid-template-columns/s);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-menu__panel\{[\s\S]*?grid-row:2;/);
-  assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2\.5rem, 12vw, 2\.75rem\)/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-disclosure__summary\{[\s\S]*?justify-self:stretch;[\s\S]*?gap:\.25rem;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-disclosure--read\{\s*grid-column:1;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-disclosure--explore\{\s*grid-column:2;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link--about\{\s*grid-column:3;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-disclosure__panel\{[\s\S]*?position:absolute;[\s\S]*?top:44px;[\s\S]*?right:0;[\s\S]*?left:0;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead-nameplate__top-ornament\{\s*display:none;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.title\{[\s\S]*?font-size:clamp\(2\.55rem, 11vw, 3\.1rem\);[\s\S]*?line-height:\.96;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.subtitle\{\s*display:none;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead-theme-toggle\{[\s\S]*?right:max\(12px, env\(safe-area-inset-right\)\);/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead-paper-route-toggle\{[\s\S]*?left:max\(12px, env\(safe-area-inset-left\)\);/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.masthead-nameplate__divider\{[\s\S]*?height:10px;[\s\S]*?margin:10px 0 6px;/);
+  assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2rem, 10vw, 2\.25rem\)/);
   assert.doesNotMatch(css, /@media \(max-width:360px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.6rem;/);
   assert.doesNotMatch(css, /@media \(max-width:420px\)\{[\s\S]*?\.theme-toggle\{[\s\S]*?(?:width|height):1\.85rem;/);
   assert.doesNotMatch(css, /@media \(max-width:420px\)\{[\s\S]*?\.paper-route-toggle\{[\s\S]*?height:1\.85rem;/);
@@ -467,18 +492,18 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   );
 });
 
-test("Bob's Almanack proposition is canonical across signup and checkout surfaces", () => {
+test("newsletter proposition is plain-language across signup and checkout surfaces", () => {
   for (const expected of [
     'cadence = "Every Saturday"',
-    'title = "Bob\'s Almanack"',
-    'contents = "One compact Saturday email with new essays, original visuals, plus some cold hard facts. Free. No ads."',
-    'price_promise = "Bob\'s Almanack will remain free. No ads, ever."',
-    'button_label = "Subscribe free"',
-    'prompt_label = "Get Bob\'s Almanack every Saturday — free, no ads."',
-    'checkout_label = "Send me Bob\'s Almanack every Saturday. It will remain free. No ads, ever."',
+    'title = "The weekly newsletter"',
+    'contents = "New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week."',
+    'price_promise = "Free. No spam ever. Unsubscribe anytime."',
+    'button_label = "Join the newsletter"',
+    'prompt_label = "Join the weekly Outside In Print newsletter."',
+    'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
     'sample_url = "/almanack/2026-07-25/"',
     'sample_label = "Read a sample issue"',
-    'privacy_promise = "Your email goes to Buttondown to deliver and manage Bob\'s Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
+    'privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
     'privacy_url = "/privacy/"',
     'privacy_label = "Privacy details"'
   ]) {
@@ -509,11 +534,11 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
   assert.match(newsletterPrompt, /data-analytics-event="internal_promo_click"/);
   assert.match(newsletterPrompt, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);
   assert.match(newsletterPrompt, /data-analytics-slug="bobs-almanack-signup"/);
-  assert.match(homeFrontPage, /home-front-page__lead-action[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?with \$currentCartoon/);
-  assert.match(homeFrontPage, /"sourceSlot" "homepage_bobs_almanack_prompt"/);
-  assert.match(homepage, /newsletter-signup--home-ribbon/);
-  assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
-  assert.match(homepage, /"anchorID" "bobs-almanack-signup"/);
+  assert.match(homeV2FrontPage, /partial "home_reader_banner\.html"/);
+  assert.match(homeReaderBanner, /One thoughtful letter each week\./);
+  assert.match(homeReaderBanner, /No spam ever\. Unsubscribe anytime\./);
+  assert.match(homeReaderBanner, /data-analytics-source-slot="homepage_reader_banner"/);
+  assert.doesNotMatch(homeV2FrontPage, /Bob(?:'|’)s Almanack|home-almanack/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
   assert.match(articleSingle, /if \$showCollectionContinuation[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?"sourceSlot" "article_exit_newsletter_prompt"/);
@@ -540,7 +565,8 @@ test("Bob's Almanack proposition is canonical across signup and checkout surface
   assert.match(privacyPolicy, /Unsubscribing stops the selected emails but is not the same as deleting subscription records\./);
 
   const propositionSources = [hugoConfig, homepage, articleSingle, newsletterSignup, directOffers].join("\n");
-  assert.doesNotMatch(propositionSources, /Limited time|launch window|No spam|Easy to leave/i);
+  assert.doesNotMatch(propositionSources, /Limited time|launch window|Easy to leave/i);
+  assert.match(propositionSources, /No spam ever/);
 });
 
 test("contact, bookstore, and Civic Institutions expose the repaired public copy", () => {
@@ -620,133 +646,57 @@ test("commerce terms and Almanack templates keep their public copy and landmarks
   assert.doesNotMatch(collectionsData, /compact notices, and worth reprinting/i);
 });
 
-test("homepage browse band stays curated and replaces Welcome with Library", () => {
-  assert.doesNotMatch(homepage, /<div class="k">(Start|Section|Index|Explore)<\/div>/);
-  assert.doesNotMatch(homepage, /card-center/);
-  const homeBrowseClasses = classTokensForElement(homepage, /<section\b[^>]*aria-label="Archive navigation"[^>]*>/, "homepage browse");
-  for (const token of ["home-browse", "home-browse--utility", "home-browse--home-curated", "page-shell", "page-shell--wide"]) {
-    assert.ok(homeBrowseClasses.has(token), `expected homepage browse class token: ${token}`);
+test("homepage offers a compact archive path and contributor lane", () => {
+  const nextClasses = classTokensForElement(homeV2FrontPage, /<section\b[^>]*aria-label="Keep reading or contribute"[^>]*>/, "homepage next steps");
+  for (const token of ["home-v2-next", "page-shell", "page-shell--wide"]) {
+    assert.ok(nextClasses.has(token), `expected homepage next-step class token: ${token}`);
   }
-  assert.match(homepage, /"page" \(site\.GetPage "\/library"\) "label" "Library"/);
-  assert.match(homepage, /"page" \(site\.GetPage "\/gallery"\) "label" "Gallery"/);
-  assert.doesNotMatch(homepage, /"label" "Welcome"/);
-  assert.doesNotMatch(homepage, /"label" "Feeling curious\?"/);
-  assert.match(homepage, /class="home-browse__list"/);
-  assert.match(homepage, /home-browse__item-title">\{\{ \$title \}\}<\/div>/);
-  assert.doesNotMatch(homepage, /Browse the Archive/);
-  assert.doesNotMatch(homepage, /Use Archive, Gallery, Collections, or Library when you want to move beyond the front page\./);
-  assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
-  assert.doesNotMatch(css, /\.card-center\{/);
-  assert.match(css, /\.home-browse__item-title\{[\s\S]*font-size:14px;[\s\S]*line-height:1\.45;/);
+  assert.match(homeV2FrontPage, /Find your next question\./);
+  assert.match(homeV2FrontPage, /Browse the archive/);
+  assert.match(homeV2FrontPage, /Search the library/);
+  assert.match(homeV2FrontPage, /Surprise me/);
+  assert.match(homeV2FrontPage, /Write for Outside In Print\./);
+  assert.match(homeV2FrontPage, /Become a contributor/);
+  assert.doesNotMatch(homeV2FrontPage, /Gallery|Collections|home-browse/);
+  assert.match(css, /\.home-v2-next\{[\s\S]*grid-template-columns:minmax\(0, 1\.2fr\) minmax\(19rem, \.8fr\);/);
+  assert.match(cssRule(css, ".home-v2-next__cta"), /min-height:44px;/);
 });
 
-test("homepage composition leads from the Almanack signup into the bookstore, motto, collections, and archive navigation", () => {
-  assert.match(homeFrontPage, /id="home-front-page-title"/);
-  assert.match(homeFrontPage, /partial "home_selected\.html"/);
-  assert.match(homeFrontPage, /home_front_page_copy\.html/);
-  assert.match(homeFrontPage, /hugo\.Data\.editorial_cartoons/);
-  assert.match(homeFrontPage, /\$orderedCartoons := sort \(sort \$cartoons "slug" "asc"\) "date" "desc"/);
-  assert.match(homeFrontPage, /\$recentCartoons := slice/);
-  assert.match(homeFrontPage, /lt \(len \$recentCartoons\) 2/);
-  assert.match(homeFrontPage, /View gallery/);
-  assert.match(homeFrontPage, /data-home-cartoon-recent/);
-  assert.match(homeFrontPage, /data-home-cartoon-recent-card/);
-  assert.match(homeFrontPage, /data-home-cartoon-recent-trigger/);
-  assert.match(homeFrontPage, /data-home-cartoon-lightbox-trigger/);
-  assert.match(homeFrontPage, /data-home-cartoon-lightbox/);
-  assert.match(homeFrontPage, /data-home-cartoon-lightbox-essay/);
-  assert.match(homeFrontPage, /querySelectorAll\("\[data-home-cartoon-lightbox-trigger\]"\)/);
-  assert.match(homeFrontPage, /triggers\.forEach\(function \(trigger\)/);
-  assert.match(homeFrontPage, /editorial\/cartoon-for-page\.html/);
-  assert.match(homeFrontPage, /home_card_image\.html/);
-  assert.doesNotMatch(homeFrontPage, /var trigger = document\.querySelector\("\[data-home-cartoon-lightbox-trigger\]"\)/);
-  assert.match(homeFrontPage, /imageButton\.addEventListener\("click", closeLightbox\)/);
-  assert.doesNotMatch(homeFrontPage, /window\.location\.href/);
-  assert.doesNotMatch(homeFrontPage, /cartoon-think-outside-the-box\.png/);
-  assert.equal((homeFrontPage.match(/data-home-front-page-region="lead"/g) || []).length, 1);
-  assert.equal((homeFrontPage.match(/data-home-front-page-region="secondary"/g) || []).length, 1);
-  assert.equal((homeFrontPage.match(/data-home-front-page-region="extras"/g) || []).length, 1);
-  assert.match(homeFrontPage, /home-front-page__secondary-item/);
-  assert.match(homeFrontPage, /home-almanack-divider/);
-  assert.match(homeFrontPage, /class="home-almanack home-almanack--lead"/);
-  assert.match(homeFrontPage, /home-almanack__ledger/);
-  assert.match(homeFrontPage, /home-almanack__ledger-row--number/);
-  assert.match(homeFrontPage, /home-almanack__ledger-row--virtue/);
-  assert.ok(homeFrontPage.indexOf('data-home-cartoon-recent') < homeFrontPage.indexOf('home-almanack-divider'));
-  assert.ok(homeFrontPage.indexOf('class="editorial-cartoon__trigger"') < homeFrontPage.indexOf('data-home-front-page-region="secondary"'));
-  assert.ok(homeFrontPage.indexOf('data-home-front-page-region="secondary"') < homeFrontPage.indexOf('data-home-front-page-region="extras"'));
-  assert.ok(homeFrontPage.indexOf('data-home-front-page-region="extras"') < homeFrontPage.indexOf('data-home-cartoon-recent'));
-  assert.match(homeFrontPage, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
-  assert.match(homeFrontPage, /<div class="home-front-page__orientation">\s*<p class="home-front-page__welcome-label">A note to the reader<\/p>\s*<p class="home-front-page__welcome-copy">I’m Robert\. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to\. Pick something that catches your eye\. I’m glad you’re here\.<\/p>\s*<p class="home-front-page__welcome-signature">&mdash; <a href="\{\{ "about\/" \| relURL \}\}">Robert V\. Ussley<\/a><\/p>\s*<\/div>/);
-  assert.equal((homeFrontPage.match(/class="home-front-page__orientation"/g) || []).length, 1);
-  assert.doesNotMatch(homeFrontPage, /Independent essays, selected writings, and original books by Robert V\. Ussley/);
-  assert.ok(homeFrontPage.indexOf('id="home-front-page-title"') < homeFrontPage.indexOf('class="home-front-page__orientation"'));
-  assert.ok(homeFrontPage.indexOf('class="home-front-page__welcome-signature"') < homeFrontPage.indexOf('class="home-front-page__stories"'));
-  assert.match(homeFrontPage, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
-  assert.ok(homeFrontPage.indexOf('>Front page stories</h2>') < homeFrontPage.indexOf('<h3 class="home-front-page__lead-title">'));
-  assert.match(homeFrontPage, /<p id="home-cartoon-lightbox-title" class="cartoon-lightbox__title" data-home-cartoon-lightbox-title><\/p>/);
-  assert.doesNotMatch(homeFrontPage, /<h2 id="home-cartoon-lightbox-title"/);
-  assert.doesNotMatch(homeFrontPage, />Front Page</);
-  assert.doesNotMatch(homeFrontPage, /A curated front page from Outside In Print/);
-  assert.doesNotMatch(homeFrontPage, /class="home-manifesto"/);
-  assert.doesNotMatch(homeFrontPage, /A digital imprint of essays, reports, dialogues, and literature\./);
-  assert.doesNotMatch(homeFrontPage, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
-  assert.match(homeFrontPage, /\{\{ \$leadReadLabel \}\} &rarr;/);
-  assert.match(homeFrontPage, /\{\{ \$readLabel \}\} &rarr;/);
-  assert.match(homeFrontPageCopy, /Latest Essay/);
-  assert.match(homeFrontPageCopy, /Latest Affirmation/);
-  assert.match(homeFrontPageCopy, /Latest Dialogue/);
-  assert.match(homeFrontPageCopy, /Read essay/);
-  assert.match(homeFrontPageCopy, /Read affirmation/);
-  assert.match(homeFrontPageCopy, /Read dialogue/);
+test("homepage composition prioritizes proof, newsletter, featured reading, and contribution", () => {
+  assert.match(homepage, /partial "home_front_page\.html"/);
+  assert.match(homeFrontPage, /partial "home_v2_front_page\.html"/);
+  assert.match(homeV2FrontPage, /id="home-front-page-title"/);
+  assert.equal((homeV2FrontPage.match(/<h1\b/g) || []).length, 1);
+  assert.match(homeV2FrontPage, /partial "home_reader_banner\.html"/);
+  assert.match(homeV2FrontPage, /A note to the reader/);
+  const welcomeCopyParagraphs = Array.from(homeV2FrontPage.matchAll(/<p class="home-front-page__welcome-copy">([\s\S]*?)<\/p>/g));
+  assert.equal(welcomeCopyParagraphs.length, 1);
+  assert.equal(welcomeCopyParagraphs[0][1].replace(/<[^>]+>/g, "").trim(), readerNoteCopy);
+  assert.match(
+    homeV2FrontPage,
+    /<p class="home-front-page__welcome-links"><a href="\{\{ "about\/" \| relURL \}\}">About the imprint<\/a><a href="\{\{ "authors\/robert-v-ussley\/" \| relURL \}\}">About the author<\/a><\/p>/,
+  );
+  assert.doesNotMatch(homeV2FrontPage, /<p class="home-front-page__welcome-links">[\s\S]*?Start reading[\s\S]*?<\/p>/);
+  assert.match(homeV2FrontPage, /Featured Reading/);
+  assert.match(homeV2FrontPage, /homepage_v2_featured_lead/);
+  assert.match(homeV2FrontPage, /homepage_v2_featured_supporting/);
+  assert.match(homeV2FrontPage, /Become a contributor/);
+  assert.doesNotMatch(homeV2FrontPage, /home_bookstore|home-almanack|home-selected-collections|home_2045_launch|home_imprint_statement|home-manifesto/);
+  assert.doesNotMatch(homepage, /home_bookstore_spotlight|home_selected_collections|home_2045_launch|newsletter_signup/);
 
-  assert.match(homeBookstore, /site\.GetPage "\/shop"/);
-  assert.match(homeBookstore, /sort \(where \.Pages "Params\.book_key" "!=" nil\) "Weight" "asc"/);
-  assert.match(homeBookstore, /if gt \(len \$books\) 0/);
-  assert.match(homeBookstore, /partial "shop\/product-data\.html"/);
-  assert.match(homeBookstore, /Books from Outside In Print/);
-  assert.match(homeBookstore, /Independent fiction and nonfiction\. EPUB editions direct from Outside In Print\./);
-  assert.match(homeBookstore, /Browse the bookstore/);
-  assert.match(homeBookstore, /data-analytics-source-slot="homepage_bookstore_promo"/);
-  assert.doesNotMatch(homeBookstore, /amazon|kindle|purchase_url|kindle_url|kindle-button|checkout-actions|carousel|autoplay/i);
+  const compositionOrder = [
+    'partial "home_reader_banner.html"',
+    'class="home-front-page__orientation"',
+    'class="home-v2-featured',
+    'class="home-v2-next',
+  ].map((marker) => homeV2FrontPage.indexOf(marker));
+  assert.ok(compositionOrder.every((index) => index >= 0));
+  assert.deepEqual(compositionOrder, [...compositionOrder].sort((left, right) => left - right));
 
-  assert.match(homeImprintStatement, /class="home-manifesto"/);
-  assert.match(homeImprintStatement, /home-manifesto__inner/);
-  assert.match(homeImprintStatement, /class="home-manifesto__line"/);
-  assert.match(homeImprintStatement, /Ask for the evidence\. Read past the headlines\. Think for yourself\./);
-  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--primary/);
-  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--secondary/);
-  assert.doesNotMatch(homeImprintStatement, /A digital imprint of essays, reports, dialogues, and literature\./);
-  assert.doesNotMatch(homeImprintStatement, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
-
-  assert.match(homeSelectedCollections, /partial "entry_threads\.html" \./);
-  assert.doesNotMatch(homeSelectedCollections, /showArchiveLink/);
-  assert.doesNotMatch(homeSelectedCollections, /"source" "homepage"/);
-
-  assert.doesNotMatch(entryThreads, /Start Reading/);
-  assert.doesNotMatch(entryThreads, /Check out the collections below\./);
-  assert.match(entryThreads, /aria-label="Selected collections"/);
-  assert.match(entryThreads, /floods-water-built-environment/);
-  assert.match(entryThreads, /modern-bios/);
-  assert.match(entryThreads, /moral-religious-philosophical-essays/);
-  assert.match(entryThreads, /homepage_entry_thread_start/);
-  assert.match(entryThreads, /homepage_entry_thread_collection/);
-  assert.doesNotMatch(entryThreads, /start_here_entry_thread_/);
-  assert.doesNotMatch(entryThreads, /Browse all collections/);
-  assert.doesNotMatch(entryThreads, /showArchiveLink/);
-
-  assert.doesNotMatch(homepage, /partial "home_studio_offer\.html"/);
-  assert.ok(homepage.indexOf('partial "home_front_page.html"') < homepage.indexOf('partial "newsletter_signup.html"'));
-  assert.ok(homepage.indexOf('partial "newsletter_signup.html"') < homepage.indexOf('partial "home_bookstore_spotlight.html"'));
-  assert.ok(homepage.indexOf('partial "home_bookstore_spotlight.html"') < homepage.indexOf('partial "home_imprint_statement.html"'));
-  assert.ok(homepage.indexOf('partial "home_imprint_statement.html"') < homepage.indexOf('partial "home_selected_collections.html"'));
-  assert.ok(homepage.indexOf('partial "home_selected_collections.html"') < homepage.indexOf('class="home-browse'));
-  assert.match(homepage, /newsletter-signup--home-ribbon/);
-  assert.match(homepage, /"sourceSlot" "homepage_bobs_almanack_offer"/);
-  assert.doesNotMatch(homepage, /"(?:eyebrow|title|dek|buttonLabel|note)"/);
-  assert.match(css, /\.home-bookstore__grid\{[^}]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);[^}]*\}/);
-  assert.match(css, /@media \(max-width:900px\)\{\s*\.home-bookstore__grid\{[^}]*grid-template-columns:1fr;[^}]*\}\s*\.home-bookstore__card\{[^}]*grid-template-columns:8rem minmax\(0, 1fr\);[^}]*\}\s*\}/);
-  assert.match(css, /@media \(max-width:420px\)\{\s*\.home-bookstore__card\{[^}]*grid-template-columns:5\.75rem minmax\(0, 1fr\);[^}]*\}\s*\.home-bookstore__cta\{[^}]*width:100%;[^}]*\}\s*\}/);
+  assert.match(homeReaderBanner, /Join the newsletter/);
+  assert.match(homeReaderBanner, /hugo\.Data\.homepage_metrics/);
+  assert.match(homeV2FrontPage, /hugo\.Data\.homepage_metrics/);
+  assert.doesNotMatch(homeV2FrontPage, /Medium reads/i);
 
   assert.match(galleryContent, /title: "Gallery"/);
   assert.match(galleryContent, /digital gallery/i);
@@ -1056,7 +1006,7 @@ test("Studio keeps email preparation disabled when required fields or configurat
   }
 });
 
-test("homepage editorial layout uses the new manifesto namespace and drops dead start-here hooks", () => {
+test("homepage editorial layout keeps the reader note compact and drops retired hooks", () => {
   assert.match(css, /:root\{[\s\S]*--bg-page:#121212;[\s\S]*--font-display:"Source Serif 4", Georgia, serif;[\s\S]*--measure-reading:68ch;/);
   assert.match(css, /:root,\s*\.oip-theme-rules-print-20260429-161813\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.06\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.17\);[\s\S]*--oip-rule-engraved:rgba\(213,190,150,.22\);[\s\S]*--oip-rule-engraved-strong:rgba\(213,190,150,.34\);[\s\S]*\}/);
   assert.match(css, /\.oip-theme-rules-clear-20260429-115754\{[\s\S]*--oip-rule-hairline:rgba\(236,231,223,.055\);[\s\S]*--oip-rule-clear:rgba\(236,231,223,.155\);[\s\S]*--oip-rule-engraved-strong:rgba\(213,190,150,.24\);[\s\S]*\}/);
@@ -1089,40 +1039,41 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(styleThemeWorkflow, /localStorage\["oip-theme"\]/);
   assert.match(css, /#main-content\{\s*scroll-margin-top:56px;\s*\}/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?#main-content\{\s*scroll-margin-top:0;\s*\}/);
-  for (const selector of ["body", ".home-manifesto", ".home-manifesto__inner"]) {
-    assert.doesNotMatch(cssRule(css, selector), /repeating-linear-gradient/);
-  }
-  assert.match(css, /\.home-manifesto\{\s*margin-top:2\.35rem;\s*\}/);
-  assert.match(css, /\.home-manifesto__inner\{[\s\S]*padding:1\.08rem 0 1\.02rem;[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);[\s\S]*border-bottom:1px solid var\(--oip-rule-engraved\);/);
-  assert.match(css, /\.home-manifesto__inner::before,\s*\.home-manifesto__inner::after\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(css, /\.home-manifesto__copy\{[\s\S]*max-width:54rem;[\s\S]*text-align:center;/);
-  assert.match(css, /\.home-manifesto__line\{[\s\S]*font-size:1\.48rem;[\s\S]*letter-spacing:0;/);
-  assert.doesNotMatch(css, /\.home-manifesto__line--primary\{/);
-  assert.doesNotMatch(css, /\.home-manifesto__line--secondary\{/);
-  assert.match(css, /\.entry-threads__grid\{\s*display:grid;/);
-  assert.match(css, /\.entry-threads--home \.entry-threads__grid\{\s*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
-  assert.match(css, /\.newsletter-signup--home-ribbon\{[\s\S]*margin-top:2\.15rem;[\s\S]*border-top:0;/);
-  assert.match(css, /\.newsletter-signup--home-ribbon \.newsletter-signup__inner\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) minmax\(18rem, \.86fr\);[\s\S]*background:/);
-  assert.match(css, /\.home-browse__list\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
-  assert.match(css, /\.home-front-page__stories\{\s*display:grid;\s*grid-template-columns:minmax\(0, 1\.65fr\) minmax\(0, 1fr\);/);
-  assert.match(cssRule(css, ".home-front-page__stories"), /grid-template-areas:\s*"lead secondary"\s*"extras secondary";/);
-  for (const region of ["lead", "secondary", "extras"]) {
-    assert.match(cssRule(css, `.home-front-page__${region}`), new RegExp(`grid-area:${region};`));
-  }
-  assert.match(css, /@media \(max-width:900px\)\{\s*\.home-front-page__stories\{[^}]*grid-template-columns:1fr;[^}]*grid-template-areas:\s*"lead"\s*"secondary"\s*"extras";[^}]*\}/);
-  assert.doesNotMatch(css, /\.home-front-page__(?:lead|secondary|extras)\s*\{[^}]*\border\s*:/);
-  assert.match(cssRule(css, ".home-front-page__orientation"), /max-width:52rem;/);
-  for (const selector of [".home-front-page__welcome-label", ".home-front-page__welcome-copy", ".home-front-page__welcome-signature"]) {
-    cssRule(css, selector);
-  }
-  assert.match(cssRule(css, ".home-front-page__welcome-signature a"), /display:inline-flex;/);
-  assert.match(cssRule(css, ".home-front-page__welcome-signature a"), /min-height:44px;/);
-  assert.match(cssRule(css, ".home-front-page__welcome-signature a:focus-visible"), /outline:3px solid var\(--focus-ring\);/);
-  assert.match(cssRule(css, ".home-front-page__welcome-signature a:focus-visible"), /outline-offset:3px;/);
+  assert.doesNotMatch(cssRule(css, "body"), /repeating-linear-gradient/);
+  assert.doesNotMatch(css, /\.home-manifesto(?:__[a-z-]+)?\s*\{/);
+  assert.match(cssRule(css, ".home-reader-banner"), /border-top:4px double var\(--oip-rule-engraved-strong\);/);
+  assert.match(cssRule(css, ".home-reader-banner.page-shell--wide"), /max-width:70rem;/);
+  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(cssRule(css, ".home-reader-banner__proof"), /grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(cssRule(css, ".home-reader-banner__proof-item"), /padding:\.5rem \.75rem \.48rem;/);
+  assert.match(cssRule(css, ".home-reader-banner__signup"), /gap:\.75rem 1\.4rem;[\s\S]*padding:\.72rem \.9rem \.78rem;/);
+  assert.match(cssRule(css, ".home-reader-banner__form"), /grid-template-columns:minmax\(0, 1fr\) auto;/);
+  assert.match(cssRule(css, ".home-reader-banner__controls button"), /min-height:2\.75rem;/);
+  const orientationRule = cssRule(css, ".home-front-page__orientation");
+  assert.match(orientationRule, /display:grid;/);
+  assert.match(orientationRule, /grid-template-columns:minmax\(0, 1fr\);/);
+  assert.match(orientationRule, /grid-template-areas:\s*"label"\s*"copy"\s*"links";/);
+  assert.match(orientationRule, /gap:\.12rem 1\.5rem;/);
+  assert.match(orientationRule, /max-width:70rem;/);
+  assert.match(orientationRule, /margin:0 auto 1rem;/);
+  assert.match(orientationRule, /padding:0 0 \.7rem;/);
+  assert.doesNotMatch(orientationRule, /max-width:52rem;/);
+  assert.match(cssRule(css, ".home-front-page__welcome-label"), /font-size:\.8125rem;[\s\S]*letter-spacing:\.1em;/);
+  assert.match(cssRule(css, ".home-front-page__welcome-copy"), /margin:0;[\s\S]*font-size:\.94rem;[\s\S]*line-height:1\.42;/);
+  cssRule(css, ".home-front-page__welcome-links");
+  assert.match(cssRule(css, ".home-front-page__welcome-links a"), /min-height:44px;/);
+  assert.match(cssRule(css, ".home-front-page__welcome-links a:focus-visible"), /outline:3px solid var\(--focus-ring\);/);
+  assert.match(cssRule(css, ".home-v2-featured__grid"), /grid-template-columns:minmax\(0, 1\.45fr\) minmax\(18rem, \.8fr\);/);
+  assert.match(cssRule(css, ".home-v2-featured__lead"), /border-right:1px solid var\(--oip-rule-standard\);/);
+  assert.match(cssRule(css, ".home-v2-featured__lead-media img"), /aspect-ratio:16 \/ 9;/);
+  assert.match(cssRule(css, ".home-v2-featured__supporting"), /padding:1\.25rem 0 1\.1rem 1\.5rem;/);
+  assert.match(cssRule(css, ".home-v2-next"), /border-top:4px double var\(--oip-rule-engraved-strong\);/);
+  assert.match(cssRule(css, ".home-v2-next__cta"), /min-height:44px;/);
+  assert.match(css, /@media \(max-width:900px\)\{[\s\S]*\.home-v2-featured__grid,[\s\S]*\.home-v2-next\{[\s\S]*grid-template-columns:1fr;/);
+  assert.match(css, /@media \(max-width:520px\)\{[\s\S]*\.home-v2-featured__supporting\{\s*display:block;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-width:44px;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-height:44px;/);
-  assert.match(css, /\.home-front-page__lead\{[\s\S]*border-right:1px solid var\(--oip-rule-standard\);/);
-  assert.match(css, /\.home-front-page__secondary-item\{[\s\S]*border-top:1px solid var\(--oip-rule-faint\);/);
+
   assert.match(css, /\.item\{[\s\S]*border-bottom:1px solid var\(--oip-rule-list\);/);
   assert.match(css, /\.author-route__reading-map\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
   assert.match(css, /\.about-route__reading-map::before,\s*\.author-route__reading-map::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
@@ -1145,18 +1096,10 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(css, /\.essays-front__month::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
   assert.match(css, /\.essays-front__month-list \.item\{[\s\S]*border-bottom-color:var\(--oip-rule-faint\);/);
   assert.match(css, /\.essays-front__month-list \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
-  assert.match(css, /\.home-almanack-divider\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(css, /\.home-almanack__ledger\{[\s\S]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
-  assert.match(css, /\.home-almanack__ledger-row\{[\s\S]*grid-template-columns:1fr;[\s\S]*border-left:1px solid rgba\(32,26,21,\.16\);/);
-  assert.match(css, /\.editorial-cartoon-recent\{[\s\S]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);/);
-  assert.match(css, /\.editorial-cartoon-recent__item:nth-child\(odd\):not\(:last-child\)::after\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
-  assert.match(css, /\.editorial-cartoon::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
-  assert.match(css, /\.editorial-cartoon-recent__trigger\{[\s\S]*aspect-ratio:16 \/ 9;/);
-  assert.match(css, /\.essay-cartoon-thumb img,\s*\.home-hero-thumb img\{[^}]*aspect-ratio:16 \/ 9;/);
-  assert.match(css, /\.home-hero-thumb\{[^}]*min-height:44px;/);
-  assert.match(css, /\.home-hero-thumb img\{\s*object-fit:contain;/);
-  assert.match(css, /\.home-hero-thumb:focus-visible\{[^}]*outline:2px solid var\(--focus-ring\);/);
-  assert.match(css, /\.home-front-page__secondary-title-row\{[\s\S]*justify-content:space-between;/);
+  assert.match(cssRule(css, ".home-v2-featured__meta"), /font:700 \.8125rem\/1\.4 var\(--font-ui\);/);
+  assert.match(cssRule(css, ".home-v2-featured__item + .home-v2-featured__item"), /border-top:1px solid var\(--oip-rule-standard\);/);
+  assert.match(cssRule(css, ".home-v2-next__contribute"), /border-left:1px solid var\(--oip-rule-standard\);/);
+
   assert.match(css, /\.cartoon-gallery-spotlight\{[\s\S]*grid-template-columns:minmax\(12rem, \.38fr\) minmax\(0, 1fr\);/);
   assert.match(css, /\.cartoon-gallery\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
   assert.match(css, /\.cartoon-gallery::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
@@ -1176,10 +1119,11 @@ test("homepage editorial layout uses the new manifesto namespace and drops dead 
   assert.match(cssRule(css, ".bookstore-direct-offers--unavailable"), /border:1px solid var\(--oip-rule-faint\);/);
   assert.match(cssRule(css, ".shop-cta"), /background:var\(--accent-soft\);/);
   assert.doesNotMatch(css, /bookstore-woodgrain-v1\.6|#7f1f1c|#9a2a24/);
-  assert.match(css, /@media \(max-width:420px\)\{[\s\S]*\.editorial-cartoon-recent\{\s*grid-template-columns:1fr;/);
-  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-almanack__ledger\{\s*grid-template-columns:1fr;/);
-  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.home-manifesto__inner\{\s*padding:\.9rem 0 \.85rem;/);
-  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*\.newsletter-signup--home-ribbon \.newsletter-signup__inner\{\s*grid-template-columns:1fr;/);
+  assert.match(css, /@media \(max-width:520px\)\{[\s\S]*?\.home-reader-banner\{[\s\S]*?width:calc\(100% - \.75rem\);[\s\S]*?margin-bottom:1\.15rem;/);
+  assert.match(css, /@media \(max-width:520px\)\{[\s\S]*?\.home-reader-banner__signup\{[\s\S]*?gap:\.55rem;[\s\S]*?padding:\.65rem \.7rem \.72rem;/);
+  assert.match(css, /@media \(max-width:520px\)\{[\s\S]*?\.home-reader-banner__controls\{[\s\S]*?grid-template-columns:minmax\(0, 1fr\) auto;/);
+  assert.match(css, /@media \(max-width:520px\)\{[\s\S]*?\.home-reader-banner__controls input,[\s\S]*?\.home-reader-banner__controls button\{[\s\S]*?min-height:2\.75rem;/);
+  assert.match(css, /@media \(max-width:360px\)\{[\s\S]*?\.home-reader-banner__controls\{\s*grid-template-columns:1fr;/);
   assert.doesNotMatch(css, /\.entry-thread__archive\{/);
   assert.doesNotMatch(css, /\.start-here-page\{/);
   assert.doesNotMatch(css, /\.newsletter-signup--start-here/);

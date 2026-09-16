@@ -1,6 +1,6 @@
 ---
 title: "About Outside In Print"
-description: "I’m Robert V. Ussley, author, designer, developer, and publisher of Outside In Print. I publish independent essays, dialogues, reported analysis, and original books here."
+description: "Independent writing on history, economics, culture, and public life. Follow a question, consider the evidence, and think for yourself."
 image: "/images/social/oip-about.png"
 image_alt: "Outside In Print social card for the About page."
 draft: false
@@ -8,38 +8,26 @@ show_citation: false
 section_label: "About the Imprint"
 ---
 
-I built Outside In Print for writing worth returning to. Published pieces remain available in a searchable archive, with dated editions and revision notes when they change.
+However you arrived here, you do not have to hurry to the next thing. Outside In Print is for readers who want to stay with an idea, look beyond a headline, and follow a question a little farther.
 
-## Mission
+## What You Will Find
 
-The site exists to make serious writing legible, citable, and revisitable on the open web. Each piece is published to stand on its own, remain easy to reference later, and accumulate into a durable archive rather than vanish into a timeline.
+Essays and reported analysis explore history, economics, culture, and public life: how institutions work, what people believe, and how decisions shape the world we share. Dialogues, fiction, and original illustrations approach experience from another direction. Some questions need an argument; others need a story or a conversation.
 
-## What the Imprint Publishes
+Read what catches your eye. The work stays here in an archive you can return to, whether you want to revisit a piece or follow a subject over time.
 
-Outside In Print publishes essays, dialogues, reported analysis, narrative experiments, and working papers. Some pieces move as single interventions. Others gather into public collections that let a reader stay with one question, institution, pressure, or theme over time.
+## Independent and Open to Questions
 
-## Editorial Model
+The aim is to understand, not to enlist you in a side. Public claims should earn your trust through evidence and clear reasoning, not party loyalty or borrowed certainty.
 
-The imprint is built around direct publication to the web. Essays carry a publication date, version number, and canonical URL. The archive is organized two ways at once: through collections for guided entry and through the library for full-catalog access.
+That means looking at what a system rewards, what a choice costs, who holds power, and who lives with the consequences. When the evidence is mixed or the record is incomplete, the writing should say so. Independence does not mean refusing to judge; it means doing the work before reaching a judgment.
 
-## Editorial Philosophy
-
-Outside In Print is built around a simple editorial discipline: begin with evidence, reason carefully, and resist the pressure to turn public life into tribal theater.
-
-OIP is anti-radical, anti-partisan, and anti-ideological. That does not mean indifferent, bloodless, or unwilling to judge. It means judgment has to be earned. Claims should be tied to records, incentives, tradeoffs, institutions, and downstream consequences. When the evidence is mixed, the writing should say so. When certainty is unavailable, the prose should not pretend otherwise.
-
-We are skeptical of any politics that asks reality to obey theory. That includes racial politics, class politics, party politics, technocratic certainty, market utopianism, bureaucratic self-protection, activist moralism, and elite consensus. The question is not which side benefits from a claim. The question is whether the claim survives contact with evidence and logic.
-
-OIP is interested in outcomes: what systems reward, what policies produce, what institutions hide, what incentives distort, and what ordinary people inherit once abstract ideas become rules, maps, prices, platforms, permits, debts, borders, schools, courts, or machines.
-
-The aim is not neutrality as performance. The aim is disciplined independence.
-
-Color over the lines. Read beyond the feed. Think for yourself.
+You do not have to agree with a piece to belong here. Bring your own questions, test the reasoning, and make up your own mind.
 
 ## Author and Publisher
 
-Outside In Print is my independent imprint. I write, design, develop, and publish the site myself.
+I’m Robert V. Ussley, the writer and publisher behind Outside In Print. I built this independent imprint for writing worth returning to. [Read more about me and explore my work](/authors/robert-v-ussley/).
 
-## How to Read the Site
+## Add Your Voice
 
-Begin at [Home](/) if you want the current front door. Move through [Collections](/collections/) if you want guided reading lanes. Use the [Library](/library/) if you want the full catalog. Follow [Feeling curious?](/random/) if you want chance to choose the next piece. Visit the [author archive](/authors/robert-v-ussley/) if you want the work gathered under a single byline.
+Have an original essay or reported article that belongs here? [Start with a pitch](/contribute/). We welcome clear, independent work that gives readers something worth their attention.

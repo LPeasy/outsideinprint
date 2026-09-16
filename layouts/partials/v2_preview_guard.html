@@ -1,0 +1,63 @@
+{{- $safeMode := site.Params.v2.safe_mode | default false -}}
+{{- if $safeMode -}}
+  {{- $label := site.Params.v2.label | default "V2 development preview" -}}
+<div class="v2-preview-notice" data-v2-preview-notice role="status" aria-live="polite">
+  <strong>{{ $label }}</strong>
+  <span>Production submissions and checkout links are disabled.</span>
+</div>
+<script>
+(function () {
+  "use strict";
+
+  var notice = document.querySelector("[data-v2-preview-notice]");
+  var blockedHosts = [
+    "buttondown.com",
+    "downloads.outsideinprint.org",
+    "square.link",
+    "checkout.square.site"
+  ];
+
+  function showBlockedMessage() {
+    if (!notice) {
+      return;
+    }
+    notice.querySelector("span").textContent = "Preview safety blocked a production action.";
+  }
+
+  function isBlockedUrl(rawUrl) {
+    if (!rawUrl) {
+      return false;
+    }
+
+    try {
+      var url = new URL(rawUrl, window.location.href);
+      return url.protocol === "mailto:" || blockedHosts.indexOf(url.hostname) !== -1;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  document.addEventListener("submit", function (event) {
+    var form = event.target;
+    if (!(form instanceof HTMLFormElement) || !isBlockedUrl(form.getAttribute("action"))) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    showBlockedMessage();
+  }, true);
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest("a[href]");
+    if (!link || !isBlockedUrl(link.getAttribute("href"))) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    showBlockedMessage();
+  }, true);
+}());
+</script>
+{{- end -}}

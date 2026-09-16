@@ -1,0 +1,97 @@
+# Homepage display figures and their internal provenance.
+# "Readers" is the banner label; article badges use "reads".
+# Neither public label changes the source metric into deduplicated people.
+reader_threshold: 1000
+audience_limitation: "The inherited Medium figures measure lifetime views. Neither those figures nor the owner-supplied audience total establish unique people or accounts."
+
+banner:
+  articles:
+    value: 250
+    display_label: "250+"
+    unit_label: "Articles"
+    source: "Hugo 0.164.0 published reading-page inventory"
+    metric_definition: "A lower-bound count of published regular reading pages in essays, reports, working-papers, or syd-and-oliver; includes essays, reported analysis, dialogues, affirmations, and musings. Excludes drafts, future releases, expired content, landing pages, shop products, and newsletter issues."
+    period: "Published inventory as of 2026-09-16"
+    observed_at: "2026-09-16"
+    evidence_ref: "docs/homepage-metrics.md#published-reading-page-validation"
+    verification_status: "verified_threshold"
+    recorded_at: "2026-09-16"
+    observed_value: 259
+    observed_forms:
+      essays_and_reported_analysis: 195
+      affirmations: 34
+      dialogues: 19
+      musings: 11
+  audience:
+    value: 10000
+    display_label: "10,000+"
+    unit_label: "Readers"
+    source: "Owner-supplied homepage audience claim"
+    metric_definition: "Inherited audience claim; the aggregation basis, covered platforms, overlap, and unique-reader definition have not been verified."
+    period: null
+    observed_at: null
+    evidence_ref: null
+    verification_status: "owner_supplied_unverified_aggregation"
+    recorded_at: "2026-09-16"
+
+articles:
+  "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/":
+    value: 3400
+    display_label: "3.4K reads"
+    source: "Medium story statistics; inherited homepage lifetime-views snapshot"
+    metric_definition: "Lifetime story views, not deduplicated readers or accounts. Inherited display precision is preserved."
+    period: "Lifetime through an unknown observation date"
+    observed_at: null
+    evidence_ref: null
+    verification_status: "inherited_unverified_snapshot"
+    recorded_at: "2026-09-16"
+  "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/":
+    value: 1950
+    display_label: "1.95K reads"
+    source: "Medium story statistics; inherited homepage lifetime-views snapshot"
+    metric_definition: "Lifetime story views, not deduplicated readers or accounts. Inherited display precision is preserved."
+    period: "Lifetime through an unknown observation date"
+    observed_at: null
+    evidence_ref: null
+    verification_status: "inherited_unverified_snapshot"
+    recorded_at: "2026-09-16"
+  "/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/":
+    value: 1800
+    display_label: "1.8K reads"
+    source: "Medium story statistics; inherited homepage lifetime-views snapshot"
+    metric_definition: "Lifetime story views, not deduplicated readers or accounts. Inherited display precision is preserved."
+    period: "Lifetime through an unknown observation date"
+    observed_at: null
+    evidence_ref: null
+    verification_status: "inherited_unverified_snapshot"
+    recorded_at: "2026-09-16"
+  "/essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again/":
+    value: 1400
+    display_label: "1.4K reads"
+    source: "Medium story statistics; inherited homepage lifetime-views snapshot"
+    metric_definition: "Lifetime story views, not deduplicated readers or accounts. Inherited display precision is preserved."
+    period: "Lifetime through an unknown observation date"
+    observed_at: null
+    evidence_ref: null
+    verification_status: "inherited_unverified_snapshot"
+    recorded_at: "2026-09-16"
+  "/essays/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion/":
+    value: 1100
+    display_label: "1.1K reads"
+    source: "Medium story statistics; inherited homepage lifetime-views snapshot"
+    metric_definition: "Lifetime story views, not deduplicated readers or accounts. Inherited display precision is preserved."
+    period: "Lifetime through an unknown observation date"
+    observed_at: null
+    evidence_ref: null
+    verification_status: "inherited_unverified_snapshot"
+    recorded_at: "2026-09-16"
+  "/essays/what-is-risk-a-four-part-framework/":
+    value: 25
+    display_label: "25 reads"
+    source: "Medium story statistics; inherited homepage lifetime-views snapshot"
+    metric_definition: "Lifetime story views, not deduplicated readers or accounts. Inherited display precision is preserved."
+    period: "Lifetime through an unknown observation date"
+    observed_at: null
+    evidence_ref: null
+    verification_status: "inherited_unverified_snapshot"
+    recorded_at: "2026-09-16"

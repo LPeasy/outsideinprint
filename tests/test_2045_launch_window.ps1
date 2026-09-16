@@ -11,8 +11,8 @@ $hugoCommand = Get-Command $HugoPath -ErrorAction Stop
 $resolvedHugoPath = [string]$hugoCommand.Source
 $tempRoot = Join-Path ([IO.Path]::GetTempPath()) ("oip-2045-launch-window-{0}" -f [Guid]::NewGuid().ToString('N'))
 $cases = @(
-  @{ Name = 'before-expiry'; Clock = '2026-09-26T23:59:59-04:00'; ExpectPromotion = $true },
-  @{ Name = 'at-expiry'; Clock = '2026-09-27T00:00:00-04:00'; ExpectPromotion = $false }
+  @{ Name = 'before-expiry'; Clock = '2026-09-26T23:59:59-04:00' },
+  @{ Name = 'at-expiry'; Clock = '2026-09-27T00:00:00-04:00' }
 )
 
 New-Item -ItemType Directory -Path $tempRoot | Out-Null
@@ -36,22 +36,13 @@ try {
       throw "Hugo did not render the homepage for the 2045 launch-window case '$($case.Name)'."
     }
     $homeHtml = Get-Content -LiteralPath $homePath -Raw -Encoding utf8
-    $promotionCount = [regex]::Matches($homeHtml, '\bdata-home-2045-launch(?:[=\s>])', 'IgnoreCase').Count
-    $expectedCount = if ($case.ExpectPromotion) { 1 } else { 0 }
-    if ($promotionCount -ne $expectedCount) {
-      throw "The 2045 launch strip count at $($case.Clock) was $promotionCount; expected $expectedCount."
-    }
-
-    if ($case.ExpectPromotion) {
-      $strip = [regex]::Match($homeHtml, '(?is)<section\b[^>]*\bdata-home-2045-launch(?:=|\s|>).*?</section>').Value
-      $sampleIndex = $strip.IndexOf('Read a complete story', [StringComparison]::Ordinal)
-      $buyIndex = $strip.IndexOf('Buy EPUB — $19.99', [StringComparison]::Ordinal)
-      if ($sampleIndex -lt 0 -or $buyIndex -le $sampleIndex -or $strip -notmatch 'DRM-free EPUB\s*(?:·|&middot;|&#183;)\s*U\.S\. customers only\.') {
-        throw 'The pre-expiry launch strip lost its sample-first CTA order or U.S. EPUB restriction.'
-      }
-      if ($strip -match '<form\b|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') {
-        throw 'The pre-expiry launch strip exposed a provider or direct checkout.'
-      }
+    $promotionCount = [regex]::Matches(
+      $homeHtml,
+      '\bdata-home-2045-launch(?:[=\s>])|homepage_2045_launch_(?:headline|sample|buy)|href="?(?:https://outsideinprint\.org)?/shop/2045/',
+      'IgnoreCase'
+    ).Count
+    if ($promotionCount -ne 0) {
+      throw "The Coleman V2 homepage exposed $promotionCount 2045 launch strips at $($case.Clock); expected none."
     }
   }
 }
@@ -62,4 +53,4 @@ finally {
   }
 }
 
-Write-Host '2045 launch-window boundary contract passed.'
+Write-Host '2045 homepage-exclusion clock-boundary contract passed.'

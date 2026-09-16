@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
   </head>
   <body>
+    {{ partial "v2_preview_guard.html" . }}
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="wrap">
       {{ partial "masthead.html" . }}

@@ -3,7 +3,9 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
-const homeImprintStatement = fs.readFileSync(path.resolve("layouts/partials/home_imprint_statement.html"), "utf8");
+const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
+const homeV2FrontPage = fs.readFileSync(path.resolve("layouts/partials/home_v2_front_page.html"), "utf8");
+const homeReaderBanner = fs.readFileSync(path.resolve("layouts/partials/home_reader_banner.html"), "utf8");
 const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
 const aboutContent = fs.readFileSync(path.resolve("content/about/index.md"), "utf8");
 const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/directory.html"), "utf8");
@@ -27,26 +29,14 @@ function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-test("homepage manifesto owns deliberate route-level hooks and drops dead start-here selectors", () => {
-  assert.match(homeImprintStatement, /class="home-manifesto"/);
-  assert.match(homeImprintStatement, /class="home-manifesto__inner page-shell page-shell--wide"/);
-  assert.match(homeImprintStatement, /class="home-manifesto__copy"/);
-  assert.match(homeImprintStatement, /class="home-manifesto__line"/);
-  assert.match(homeImprintStatement, /Ask for the evidence\. Read past the headlines\. Think for yourself\./);
-  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--primary/);
-  assert.doesNotMatch(homeImprintStatement, /home-manifesto__line--secondary/);
-  assert.doesNotMatch(homeImprintStatement, /A digital imprint of essays, reports, dialogues, and literature\./);
+test("retired homepage manifesto and start-here selectors stay absent", () => {
+  assert.equal(fs.existsSync(path.resolve("layouts/partials/home_imprint_statement.html")), false);
 
-  for (const selector of [
+  for (const retiredSelector of [
     ".home-manifesto{",
     ".home-manifesto__inner{",
     ".home-manifesto__copy{",
-    ".home-manifesto__line{"
-  ]) {
-    assert.match(css, new RegExp(escapeRegex(selector)));
-  }
-
-  for (const retiredSelector of [
+    ".home-manifesto__line{",
     ".home-manifesto__line--primary{",
     ".home-manifesto__line--secondary{"
   ]) {
@@ -65,6 +55,63 @@ test("homepage manifesto owns deliberate route-level hooks and drops dead start-
   ]) {
     assert.doesNotMatch(css, new RegExp(escapeRegex(deadSelector)));
   }
+});
+
+test("homepage V2 owns its proof, featured-reading, and contributor layout hooks", () => {
+  assert.match(homeFrontPage, /partial "home_v2_front_page\.html" \./);
+  assert.doesNotMatch(homeFrontPage, /home_bookstore_spotlight|home_selected_collections|newsletter_signup|home_2045_launch/);
+
+  for (const snippet of [
+    'partial "home_reader_banner.html" .',
+    'class="home-front-page__orientation"',
+    'class="home-v2-featured page-shell page-shell--wide"',
+    'class="home-v2-featured__grid"',
+    'class="home-v2-featured__lead"',
+    'class="home-v2-featured__supporting"',
+    'class="home-v2-next page-shell page-shell--wide"',
+    'class="home-v2-next__contribute"',
+    'class="home-v2-next__cta"'
+  ]) {
+    assert.match(homeV2FrontPage, new RegExp(escapeRegex(snippet)));
+  }
+  assert.doesNotMatch(homeV2FrontPage, /home-bookstore|home-almanack|entry-threads--home|newsletter-signup--home-ribbon|home_imprint_statement|home-manifesto/);
+
+  for (const snippet of [
+    'class="home-reader-banner page-shell page-shell--wide"',
+    'class="home-reader-banner__proof"',
+    'class="home-reader-banner__signup"',
+    'class="home-reader-banner__controls"',
+    'data-analytics-source-slot="homepage_reader_banner"'
+  ]) {
+    assert.match(homeReaderBanner, new RegExp(escapeRegex(snippet)));
+  }
+
+  for (const selector of [
+    ".home-reader-banner{",
+    ".home-reader-banner__proof{",
+    ".home-reader-banner__signup{",
+    ".home-reader-banner__controls{",
+    ".home-front-page__orientation{",
+    ".home-front-page__welcome-label{",
+    ".home-front-page__welcome-copy{",
+    ".home-front-page__welcome-links{",
+    ".home-v2{",
+    ".home-v2-featured{",
+    ".home-v2-featured__grid{",
+    ".home-v2-featured__lead{",
+    ".home-v2-featured__supporting{",
+    ".home-v2-next{",
+    ".home-v2-next__contribute{",
+    ".home-v2-next__cta{"
+  ]) {
+    assert.match(css, new RegExp(escapeRegex(selector)));
+  }
+
+  assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-front-page__welcome-label\{[^}]*font-size:\.8125rem;[^}]*letter-spacing:\.1em;/);
+  assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
 });
 
 test("collection detail section-front hooks have explicit inner-structure styling", () => {
@@ -324,18 +371,20 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(aboutSingle, /about-route__artifact/);
   assert.match(aboutSingle, /about-route__record/);
   assert.match(aboutSingle, /Reading Map/);
-  assert.match(aboutSingle, /"label" "Home"/);
+  assert.match(aboutSingle, /"label" "Featured reading"/);
   assert.match(aboutSingle, /"label" "Meet the author"/);
   assert.match(aboutSingle, /<p class="about-route__artifact-kicker">Behind Outside In Print<\/p>/);
-  assert.match(aboutSingle, /<h2 id="about-imprint-record-title" class="about-route__artifact-title">Independent writing, made and published by one person\.<\/h2>/);
+  assert.match(aboutSingle, /<h2 id="about-imprint-record-title" class="about-route__artifact-title">[^<]+<\/h2>/);
   assert.match(aboutSingle, /with \.Params\.description[\s\S]*?class="about-route__artifact-dek"/);
-  assert.match(aboutSingle, /Explore <a href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">my writing<\/a> or <a href="\{\{ "shop\/" \| absURL \}\}">browse the books<\/a>\./);
+  assert.match(aboutSingle, /class="about-route__actions"[\s\S]*?<a href="#about-newsletter">[^<]*newsletter<\/a>[\s\S]*?#home-v2-featured-title/);
+  assert.match(aboutSingle, /partial "newsletter_signup\.html"[\s\S]*?"sourceSlot" "about_newsletter"[\s\S]*?"anchorID" "about-newsletter"/);
+  assert.doesNotMatch(aboutSingle, /"shop\/"/);
   assert.match(aboutSingle, /<h3[^>]*>At a glance<\/h3>/);
   assert.match(aboutSingle, /<dt class="about-route__record-label">Author<\/dt>/);
   assert.doesNotMatch(aboutSingle, />Imprint Record<|>Current File<|>Principal Byline</);
-  assert.match(aboutContent, /description: "I’m Robert V\. Ussley, author, designer, developer, and publisher of Outside In Print\. I publish independent essays, dialogues, reported analysis, and original books here\."/);
-  assert.match(aboutContent, /I built Outside In Print for writing worth returning to\. Published pieces remain available in a searchable archive, with dated editions and revision notes when they change\./);
-  assert.match(aboutContent, /## Author and Publisher\s+Outside In Print is my independent imprint\. I write, design, develop, and publish the site myself\./);
+  assert.match(aboutContent, /description: "Independent writing on history, economics, culture, and public life\./);
+  assert.match(aboutContent, /## Author and Publisher[\s\S]*?\]\(\/authors\/robert-v-ussley\/\)/);
+  assert.match(aboutContent, /\]\(\/contribute\/\)/);
   assert.doesNotMatch(aboutContent, /principal authorial byline|essay corpus|without pretending to be a large editorial institution/);
   assert.match(authorList, /partial "authors\/directory\.html" \./);
   assert.match(authorSection, /partial "authors\/directory\.html" \./);
@@ -348,6 +397,8 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(authorDossier, /author-route__portrait/);
   assert.match(authorDossier, /author-route__summary/);
   assert.match(authorDossier, /author-route__bio/);
+  assert.match(authorDossier, /author-route__invitation/);
+  assert.match(authorDossier, /author-route__actions/);
   assert.match(authorDossier, /author-route__reading-map/);
   assert.match(authorDossier, /journey-links--page author-route__journey/);
   assert.doesNotMatch(authorDossier, /Author Dossier/);
@@ -378,17 +429,26 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
   }
+  for (const selector of [".about-route__actions", ".author-route__actions"]) {
+    assert.match(css, new RegExp(`${escapeRegex(selector)}\\s*[,\\{]`));
+  }
 });
 
-test("layout ownership matrix tracks archive, Apps, and lifecycle-controlled Games routes", () => {
+test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, and Games routes", () => {
   for (const snippet of [
-    "`home-manifesto`",
-    "`home-manifesto__inner`",
-    "`home-manifesto__copy`",
-    "`home-manifesto__line`",
-    "`home-almanack`",
-    "`home-almanack__ledger`",
-    "`newsletter-signup--home-ribbon`",
+    "`.home-reader-banner`",
+    "`.home-reader-banner__proof`",
+    "`.home-reader-banner__signup`",
+    "`.home-reader-banner__controls`",
+    "`.home-front-page__orientation`",
+    "`.home-v2-featured`",
+    "`.home-v2-featured__grid`",
+    "`.home-v2-featured__lead`",
+    "`.home-v2-featured__supporting`",
+    "`.home-v2-next`",
+    "`.home-v2-next__contribute`",
+    "`.home-v2-next__cta`",
+    "| Contributor route | `/contribute/`",
     "| About route | `/about/`",
     "`section-front--about`",
     "`about-route`",
@@ -474,10 +534,19 @@ test("layout ownership matrix tracks archive, Apps, and lifecycle-controlled Gam
   for (const stalePhrase of [
     "`start-here-page`",
     "`newsletter-signup--start-here`",
+    "`home-manifesto`",
+    "`home-manifesto__inner`",
+    "`home-manifesto__copy`",
+    "`home-manifesto__line`",
     "`home-manifesto__line--primary`",
     "`home-manifesto__line--secondary`",
     "`collection-room`",
     "`collections-directory__guide*`",
+    "`home-almanack`",
+    "`newsletter-signup--home-ribbon`",
+    "`home-bookstore`",
+    "`home-front-page__stories`",
+    "`entry-threads`",
     "| Essays front | `/essays/`",
     "| Section landing family | `/syd-and-oliver/`,",
     "Start Here | `/start-here/`",

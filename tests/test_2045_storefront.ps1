@@ -46,7 +46,6 @@ $shopTemplate = Read-Source 'layouts/shop/list.html'
 $featureTemplate = Read-Source 'layouts/partials/shop/featured-book.html'
 $detailTemplate = Read-Source 'layouts/shop/single.html'
 $productDataTemplate = Read-Source 'layouts/partials/shop/product-data.html'
-$launchTemplate = Read-Source 'layouts/partials/home_2045_launch.html'
 $homeFrontTemplate = Read-Source 'layouts/partials/home_front_page.html'
 $articleTemplate = Read-Source 'layouts/_default/single.html'
 $sampleTemplate = Read-Source 'layouts/shop/sample.html'
@@ -62,7 +61,6 @@ Assert-True ([regex]::Matches($product, '(?m)^\s+price_display: "\$19\.99"\r?$')
 Assert-True ($product -match '(?m)^\s+checkout_label: "Buy EPUB — \$19\.99"\r?$') '2045 must override the shared checkout label with its approved price.'
 Assert-True ($product -notmatch '\$9\.99|price_cents: 999\b') '2045 retains the obsolete price.'
 Assert-True ($sampleTemplate.Contains('Explore 2045 · {{ index $product "price_display" }}', [StringComparison]::Ordinal)) '2045 sample CTA must read the canonical product price.'
-Assert-True ((Read-Source 'layouts/partials/home_bookstore_spotlight.html') -notmatch '\$9\.99 each') 'Homepage must not claim every book has the same price.'
 Assert-True ($product -notmatch '(?i)amazon|kindle|asin|paperback|urn:isbn|\b97[89]\d{10}\b') '2045 contains excluded metadata or an exact ISBN.'
 $approvedAlt = [regex]::Match($product, '(?m)^\s+cover_alt: "(?<alt>[^"]+)"\r?$').Groups['alt'].Value
 foreach ($source in @($productSource, $sampleSource, $shopSource)) {
@@ -119,31 +117,8 @@ foreach ($requiredValidation in @(
   Assert-True ($productDataTemplate.Contains($requiredValidation, [StringComparison]::Ordinal)) "Canonical bookstore validation must contain: $requiredValidation"
 }
 
-$launchConfig = [regex]::Match($catalog, '(?ms)^launch_promotion:\r?\n(?<launch>(?:  [^\r\n]+\r?\n)+)').Groups['launch'].Value
-foreach ($requiredLaunchValue in @(
-  '  book_key: "2045"',
-  '  starts_at: "2026-09-12T00:00:00-04:00"',
-  '  ends_at: "2026-09-27T00:00:00-04:00"'
-)) {
-  Assert-True ($launchConfig.Contains($requiredLaunchValue, [StringComparison]::Ordinal)) "2045 launch configuration must contain: $requiredLaunchValue"
-}
-$launchPartialIndex = $homeFrontTemplate.IndexOf('partial "home_2045_launch.html" .', [StringComparison]::Ordinal)
-Assert-True ($launchPartialIndex -gt $homeFrontTemplate.IndexOf('class="home-front-page__orientation"', [StringComparison]::Ordinal) -and $launchPartialIndex -lt $homeFrontTemplate.IndexOf('class="home-front-page__stories"', [StringComparison]::Ordinal)) 'The launch strip must render below the reader note and above the editorial grid.'
-foreach ($requiredLaunchTemplateValue in @(
-  'if not $book.Draft',
-  'where $epubOffers "availability_status" "live"',
-  'New: 2045 — Ten Dark Fables from the Machine Age',
-  'Read a complete story',
-  'Buy EPUB — $19.99',
-  'DRM-free EPUB · U.S. customers only.',
-  'homepage_2045_launch_headline',
-  'homepage_2045_launch_sample',
-  'homepage_2045_launch_buy'
-)) {
-  Assert-True ($launchTemplate.Contains($requiredLaunchTemplateValue, [StringComparison]::Ordinal)) "2045 launch strip must contain: $requiredLaunchTemplateValue"
-}
-Assert-True ($launchTemplate.IndexOf('Read a complete story', [StringComparison]::Ordinal) -lt $launchTemplate.IndexOf('Buy EPUB — $19.99', [StringComparison]::Ordinal)) 'The launch strip must keep the complete-story CTA first.'
-Assert-True ($launchTemplate -notmatch '<form\b|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The launch strip must remain internal and never invoke checkout directly.'
+Assert-True ($homeFrontTemplate.Contains('partial "home_v2_front_page.html" .', [StringComparison]::Ordinal)) 'The homepage wrapper must delegate to the Coleman V2 front page.'
+Assert-True ($homeFrontTemplate -notmatch 'home_2045_launch|home_bookstore_spotlight|/shop/2045/') 'The Coleman V2 homepage wrapper must not invoke a 2045 or bookstore promotion.'
 
 $subtitleIndex = $detailTemplate.IndexOf('bookstore-product__subtitle', [StringComparison]::Ordinal)
 $decisionIndex = $detailTemplate.IndexOf('data-bookstore-early-decision', [StringComparison]::Ordinal)
@@ -351,22 +326,7 @@ $renderedStoryTitles = @([regex]::Matches($inside2045.Value, '(?is)<li\b[^>]*>(?
 Assert-True ($renderedStoryTitles.Count -eq 10) 'Inside 2045 must render exactly ten story titles.'
 Assert-True ([string]::Join("`n", $renderedStoryTitles) -ceq [string]::Join("`n", $expectedStoryTitles)) 'Inside 2045 does not match authoritative EPUB order.'
 
-$launchStrip = [regex]::Match($homeHtml, '(?is)<section\b[^>]*\bdata-home-2045-launch(?:=|\s|>).*?</section>')
-Assert-True ($launchStrip.Success) 'The active launch window must render one homepage 2045 strip.'
-$launchText = Plain-Text $launchStrip.Value
-foreach ($launchCopy in @('New: 2045 — Ten Dark Fables from the Machine Age', 'Read a complete story', 'Buy EPUB — $19.99', 'DRM-free EPUB · U.S. customers only.')) {
-  Assert-True ($launchText.Contains($launchCopy, [StringComparison]::Ordinal)) "The homepage launch strip is missing: $launchCopy"
-}
-$launchLinks = @([regex]::Matches($launchStrip.Value, '(?is)<a\b[^>]*>.*?</a>'))
-$launchSlots = @($launchLinks | ForEach-Object { Html-Attribute $_.Value 'data-analytics-source-slot' })
-Assert-True ($launchLinks.Count -eq 3 -and [string]::Join('|', $launchSlots) -ceq 'homepage_2045_launch_headline|homepage_2045_launch_sample|homepage_2045_launch_buy') 'The launch headline, sample, and buy links need distinct analytics slots in that order.'
-Assert-True ((Html-Attribute $launchLinks[0].Value 'href') -eq '/shop/2045/' -and (Html-Attribute $launchLinks[1].Value 'href') -eq '/shop/2045/sample/' -and (Html-Attribute $launchLinks[2].Value 'href') -eq '/shop/2045/#bookstore-purchase') 'The launch strip must use only the canonical internal product, sample, and purchase-anchor URLs.'
-Assert-True ($launchStrip.Value -notmatch '<form\b|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The launch strip exposed a provider or direct checkout.'
-$orientationIndex = $homeHtml.IndexOf('class=home-front-page__orientation', [StringComparison]::Ordinal)
-if ($orientationIndex -lt 0) { $orientationIndex = $homeHtml.IndexOf('class="home-front-page__orientation"', [StringComparison]::Ordinal) }
-$storyGridIndex = $homeHtml.IndexOf('class=home-front-page__stories', [StringComparison]::Ordinal)
-if ($storyGridIndex -lt 0) { $storyGridIndex = $homeHtml.IndexOf('class="home-front-page__stories"', [StringComparison]::Ordinal) }
-Assert-True ($orientationIndex -ge 0 -and $launchStrip.Index -gt $orientationIndex -and $storyGridIndex -gt $launchStrip.Index) 'The launch strip must stay between the reader note and editorial story grid.'
+Assert-True ($homeHtml -notmatch 'data-home-2045-launch|homepage_2045_launch_(?:headline|sample|buy)|href="?(?:https://outsideinprint\.org)?/shop/2045/') 'The Coleman V2 homepage must not expose the 2045 launch strip or product links.'
 
 $editionMetadataCases = @(
   @{ Html = $legacyStoryHtml; Title = 'The Cracked Pot — Earlier Web Edition' },
@@ -379,7 +339,7 @@ foreach ($metadataCase in $editionMetadataCases) {
   Assert-True ((Meta-Content $metadataCase.Html 'og:title') -ceq $metadataCase.Title) "Edition Open Graph title must be '$($metadataCase.Title)'."
   Assert-True ((Meta-Content $metadataCase.Html 'twitter:title') -ceq $metadataCase.Title) "Edition Twitter title must be '$($metadataCase.Title)'."
 }
-foreach ($html in @($homeHtml, $shopHtml, $authorHtml)) {
+foreach ($html in @($shopHtml, $authorHtml)) {
   foreach ($slug in @('2045', 'the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle')) {
     Assert-True ($html -match ('href="?(?:https://outsideinprint\.org)?/shop/' + $slug + '/')) "Book $slug is missing from a discovery surface."
   }

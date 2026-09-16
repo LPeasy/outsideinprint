@@ -31,12 +31,12 @@ function readPngMetadata(filePath) {
 test("Paper-Bob launcher stays homepage-only and outside primary navigation", () => {
   assert.match(config, /\[params\.paper_route\][\s\S]*enabled = true/);
   assert.match(masthead, /\$paperRouteEnabled := and \$isHomeMasthead/);
-  assert.match(masthead, /resources\.Get "images\/paper-route\/paper-bob-logo\.png"/);
+  assert.match(masthead, /resources\.Get "images\/paper-route\/sprites\/bob\/ui-ui-bob-front-hat-tip\.png"/);
   assert.match(masthead, /data-paper-route-launch/);
   assert.match(masthead, /aria-haspopup="dialog"/);
   assert.match(masthead, /aria-controls="paper-route-arcade"/);
   assert.match(masthead, /Launch Paper-Bob arcade/);
-  assert.match(masthead, /paper-route-toggle__logo/);
+  assert.match(masthead, /paper-route-toggle__icon/);
   assert.doesNotMatch(masthead, /paper-route-toggle__mark/);
   assert.doesNotMatch(masthead, /Paper\s+Route/);
   assert.doesNotMatch(
@@ -879,7 +879,8 @@ test("Paper-Bob visual shell has balanced masthead and accessible overlay styles
   assert.match(css, /\.masthead-paper-route-toggle\{[\s\S]*left:max\(24px, env\(safe-area-inset-left\)\);/);
   assert.match(css, /\.masthead-theme-toggle\{[\s\S]*right:max\(24px, env\(safe-area-inset-right\)\);/);
   assert.match(css, /html\.theme-enabled \.paper-route-toggle\{[\s\S]*display:inline-flex;/);
-  assert.match(css, /\.paper-route-toggle__logo\{[\s\S]*object-fit:contain;/);
+  assert.match(css, /\.paper-route-toggle\{[\s\S]*width:44px;[\s\S]*height:44px;[\s\S]*border-radius:999px;/);
+  assert.match(css, /\.paper-route-toggle__icon\{[\s\S]*width:2rem;[\s\S]*height:2rem;[\s\S]*object-fit:contain;/);
   assert.match(css, /\.paper-route-overlay\{[\s\S]*position:fixed;[\s\S]*z-index:2000;/);
   assert.match(css, /body\.paper-route-open\{[\s\S]*overflow:hidden;/);
   assert.match(css, /\.paper-route-scorebar\{[\s\S]*grid-template-columns:repeat\(4, minmax\(0, 1fr\)\);/);

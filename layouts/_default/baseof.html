@@ -62,6 +62,7 @@
     {{- end -}}
   {{- end -}}
   <body{{ if gt (len $bodyClasses) 0 }} class="{{ delimit $bodyClasses " " }}"{{ end }}>
+    {{ partial "v2_preview_guard.html" . }}
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="wrap">
       {{ partial "masthead.html" . }}

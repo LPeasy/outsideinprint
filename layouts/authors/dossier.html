@@ -72,32 +72,25 @@
             {{ with .Params.header_bio }}
               <p class="author-route__bio">{{ . }}</p>
             {{ end }}
+            {{ with .Params.reader_note }}
+              <p class="author-route__invitation">{{ . }}</p>
+            {{ end }}
             {{ with .Params.role_line }}
               <p class="author-route__role">{{ . }}</p>
             {{ end }}
-            <p class="author-route__books">Robert V. Ussley writes fiction and nonfiction for Outside In Print.</p>
+            <div class="author-route__actions">
+              {{ if gt (len $selectedWorks) 0 }}<a href="#author-selected-title">Find a first piece</a>{{ else }}<a href="{{ "archive/" | relURL }}">Explore the writing</a>{{ end }}
+              <a href="#author-newsletter">Join the weekly newsletter</a>
+            </div>
           </div>
         </section>
       </div>
     </div>
 
-    {{ if gt (len $publishedBooks) 0 }}
-      <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-books-title">
-        <h2 id="author-books-title" class="list-title">Books</h2>
-        {{ range $publishedBooks }}
-          {{ $book := . }}
-          {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}
-          <article class="item">
-            <div class="t"><a href="{{ $book.RelPermalink }}"><cite>{{ index $product "title" | default $book.Title }}</cite></a></div>
-            {{ with index $product "deck" }}<div class="d">{{ . }}</div>{{ end }}
-          </article>
-        {{ end }}
-      </section>
-    {{ end }}
-
     {{ if gt (len $selectedWorks) 0 }}
       <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-selected-title">
         <h2 id="author-selected-title" class="list-title">Selected Writing</h2>
+        <p class="author-route__section-intro">If you’re new here, these essays are a few places to begin.</p>
         {{ range $selectedWorks }}
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
@@ -108,6 +101,15 @@
         {{ end }}
       </section>
     {{ end }}
+
+    <div class="page-shell page-shell--reading">
+      {{ partial "newsletter_signup.html" (dict
+        "page" .
+        "class" "newsletter-signup--page"
+        "sourceSlot" "author_newsletter"
+        "anchorID" "author-newsletter"
+      ) }}
+    </div>
 
     {{ if gt (len $recentWorks) 0 }}
       <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-recent-title">
@@ -123,10 +125,25 @@
       </section>
     {{ end }}
 
+    {{ if gt (len $publishedBooks) 0 }}
+      <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-books-title">
+        <h2 id="author-books-title" class="list-title">Books</h2>
+        <p class="author-route__section-intro">Longer works, when you want to stay with a question or a story.</p>
+        {{ range $publishedBooks }}
+          {{ $book := . }}
+          {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}
+          <article class="item">
+            <div class="t"><a href="{{ $book.RelPermalink }}"><cite>{{ index $product "title" | default $book.Title }}</cite></a></div>
+            {{ with index $product "deck" }}<div class="d">{{ . }}</div>{{ end }}
+          </article>
+        {{ end }}
+      </section>
+    {{ end }}
+
     <section class="author-route__reading-map page-shell page-shell--wide" aria-labelledby="author-reading-map-title">
       <div class="author-route__reading-map-header">
         <h2 id="author-reading-map-title" class="list-title">Reading Map</h2>
-        <p class="author-route__reading-map-copy">Continue through the archive by route rather than by chronology.</p>
+        <p class="author-route__reading-map-copy">Follow a subject, find another story, or learn more about the imprint.</p>
       </div>
 
       {{ partial "journey_links.html" (dict

@@ -31,6 +31,20 @@ test("author hub resolves six unique selected works, six distinct recent works, 
   assert.match(dossier, />Selected Writing</);
   assert.match(dossier, />Recent Writing</);
   assert.equal(walk("content/shop").filter((file) => /(?:index|_index)\.md$/.test(file) && /^book_key:/m.test(read(file))).length, 4);
+
+  const sectionPositions = [
+    'id="author-selected-title"',
+    'partial "newsletter_signup.html"',
+    'id="author-recent-title"',
+    'id="author-books-title"',
+  ].map((marker) => dossier.indexOf(marker));
+  assert.ok(sectionPositions.every((position, index) => position >= 0 && (!index || position > sectionPositions[index - 1])), "reading and newsletter discovery must precede the books");
+  assert.match(dossier, /href="#author-selected-title"/);
+  assert.match(dossier, /href="#author-newsletter"/);
+  assert.match(dossier, /partial "newsletter_signup\.html"[\s\S]*?"sourceSlot" "author_newsletter"[\s\S]*?"anchorID" "author-newsletter"/);
+  assert.match(dossier, /\.Params\.reader_note[\s\S]*?author-route__invitation/);
+  assert.match(dossier, /if gt \(len \$selectedWorks\) 0[\s\S]*?href="#author-selected-title"[\s\S]*?else[\s\S]*?"archive\/" \| relURL/);
+  assert.doesNotMatch(dossier, /author-route__books/);
 });
 
 test("collection cleanup adds the household route and keeps memberships intentional", () => {

@@ -1,0 +1,10 @@
+baseURL = "http://127.0.0.1:1314/"
+enableRobotsTXT = false
+
+[params.v2]
+safe_mode = true
+label = "V2 development preview"
+
+[params.analytics]
+enabled = false
+allow_local = false

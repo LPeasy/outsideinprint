@@ -24,6 +24,7 @@ foreach ($requiredPattern in @(
   'description:\s*".+?"',
   'portrait:\s*"?Bobviously_Portrait_v1\.png"?',
   'header_bio:\s*".+?"',
+  'reader_note:\s*".+?"',
   'role_line:\s*"Author, designer, developer, and publisher of Outside In Print\."'
 )) {
   if ($authorPage -notmatch $requiredPattern) {
@@ -53,7 +54,13 @@ foreach ($requiredSnippet in @(
   'Search the library',
   'About the imprint',
   'author-route__role',
-  'author-route__books',
+  'author-route__invitation',
+  'author-route__actions',
+  'href="#author-selected-title"',
+  'href="#author-newsletter"',
+  'partial "newsletter_signup.html"',
+  '"sourceSlot" "author_newsletter"',
+  '"anchorID" "author-newsletter"',
   'Visit the Bookstore'
 )) {
   if ($layoutTemplate -notmatch [regex]::Escape($requiredSnippet)) {
@@ -67,7 +74,8 @@ foreach ($forbiddenSnippet in @(
   'Themes',
   'From the Archive',
   'style-variant-literary-dossier',
-  'author-dossier__'
+  'author-dossier__',
+  'author-route__books'
 )) {
   if ($layoutTemplate -match [regex]::Escape($forbiddenSnippet)) {
     throw "Expected layouts/authors/dossier.html to omit '$forbiddenSnippet'."
@@ -110,6 +118,9 @@ try {
   }
 
   foreach ($requiredPattern in @(
+    'href=(?:"#author-selected-title"|#author-selected-title)',
+    'href=(?:"#author-newsletter"|#author-newsletter)',
+    '(?s)<section[^>]*id=(?:"author-newsletter"|author-newsletter)[^>]*>.*?<form[^>]*action=(?:"https://buttondown\.com/api/emails/embed-subscribe/[^"]+"|https://buttondown\.com/api/emails/embed-subscribe/[^\s>]+)[^>]*data-analytics-event=(?:"newsletter_submit"|newsletter_submit)[^>]*data-analytics-source-slot=(?:"author_newsletter"|author_newsletter)',
     'class=(?:"author-route"|author-route)',
     'class=(?:"author-route__profile"|author-route__profile)',
     'class=(?:"author-route__portrait"|author-route__portrait)',
@@ -120,6 +131,34 @@ try {
     if ($builtPage -notmatch $requiredPattern) {
       throw "Expected rendered Robert dossier page to match '$requiredPattern'."
     }
+  }
+
+  $sectionOrder = [regex]::Matches($builtPage, '\bid=(?:"(author-selected-title|author-newsletter|author-recent-title|author-books-title)"|(author-selected-title|author-newsletter|author-recent-title|author-books-title)(?=[\s>]))') | ForEach-Object {
+    if ($_.Groups[1].Success) { $_.Groups[1].Value } else { $_.Groups[2].Value }
+  }
+  if (($sectionOrder -join ',') -cne 'author-selected-title,author-newsletter,author-recent-title,author-books-title') {
+    throw 'Expected Selected Writing, Newsletter, Recent Writing, then Books exactly once in the rendered author page.'
+  }
+
+  $workPaths = @()
+  foreach ($slot in @('author_selected', 'author_recent')) {
+    $links = [regex]::Matches($builtPage, ('<a\b[^>]*data-analytics-source-slot=(?:"' + $slot + '"|' + $slot + '(?=[\s>]))[^>]*>'))
+    if ($links.Count -ne 6) {
+      throw "Expected six rendered $slot writing links; found $($links.Count)."
+    }
+    foreach ($link in $links) {
+      $href = [regex]::Match($link.Value, '\bhref=(?:"([^"]+)"|([^\s>]+))')
+      $workPaths += if ($href.Groups[1].Success) { $href.Groups[1].Value } else { $href.Groups[2].Value }
+    }
+  }
+  if (@($workPaths | Select-Object -Unique).Count -ne 12) {
+    throw 'Expected selected and recent writing destinations to remain duplicate-free.'
+  }
+
+  $booksSection = [regex]::Match($builtPage, '(?s)<section[^>]*aria-labelledby=(?:"author-books-title"|author-books-title)[^>]*>(.*?)</section>').Value
+  $bookLinks = [regex]::Matches($booksSection, '<a\b[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/[^"]+/"|(?:https://outsideinprint\.org)?/shop/[^\s>]+/)[^>]*>')
+  if ($bookLinks.Count -ne 4) {
+    throw "Expected all four books in the author page; found $($bookLinks.Count)."
   }
 
   foreach ($forbiddenSnippet in @(

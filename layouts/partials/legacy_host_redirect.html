@@ -1,3 +1,4 @@
+{{- if not (site.Params.v2.safe_mode | default false) -}}
 <script>
 (function () {
   var legacyHost = "lpeasy.github.io";
@@ -14,3 +15,4 @@
   window.location.replace(canonicalHost + canonicalPath + window.location.search + window.location.hash);
 }());
 </script>
+{{- end -}}

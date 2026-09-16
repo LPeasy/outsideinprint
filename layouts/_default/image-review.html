@@ -22,8 +22,8 @@
 
   {{- $manifest := index hugo.Data "image-assets" | default dict -}}
   {{- $assets := $manifest.assets | default dict -}}
-  {{- if ne (len $assets) 459 -}}
-    {{- errorf "The responsive image review surface requires exactly 459 canonical assets, got %d" (len $assets) -}}
+  {{- if lt (len $assets) 459 -}}
+    {{- errorf "The responsive image review surface requires at least 459 canonical assets, got %d" (len $assets) -}}
   {{- end -}}
 
   <article class="image-review" aria-labelledby="image-review-title">

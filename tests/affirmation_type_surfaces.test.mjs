@@ -29,12 +29,11 @@ test("affirmations require the exact The Things We Say content contract", () => 
   assert.ok(affirmationBranch >= 0 && affirmationBranch < essayBranch);
 });
 
-test("affirmations are visible in the archive, library, and homepage", () => {
+test("affirmations are visible in the archive and library and remain eligible for homepage fallback", () => {
   const resolvePages = read("layouts/partials/archive/resolve-pages.html");
   const library = read("layouts/library/list.html");
   const libraryResolver = read("layouts/partials/library/resolve-entries.html");
-  const homeSelected = read("layouts/partials/home_selected.html");
-  const homeCopy = read("layouts/partials/home_front_page_copy.html");
+  const homeSelected = read("layouts/partials/home_v2_selected.html");
 
   assert.match(resolvePages, /slice "essay" "dialogue" "affirmation"/);
   assert.match(resolvePages, /eq \$mode "affirmation"/);
@@ -45,8 +44,5 @@ test("affirmations are visible in the archive, library, and homepage", () => {
   assert.match(libraryResolver, /Source-free reflections from The Things We Say, each built around one affirmation/);
 
   assert.match(homeSelected, /slice "essay" "affirmation" "dialogue"/);
-  assert.match(homeCopy, /eq \$kind "affirmation"/);
-  assert.match(homeCopy, /\$sectionLabel = "Affirmation"/);
-  assert.match(homeCopy, /\$latestLabel = "Latest Affirmation"/);
-  assert.match(homeCopy, /\$readLabel = "Read affirmation"/);
+  assert.match(homeSelected, /not \(in \$selectedPaths \.RelPermalink\)/);
 });

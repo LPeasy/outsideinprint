@@ -26,11 +26,11 @@ Each collection in `data/collections.yaml` supports these fields:
 - `force_public`: optional override that allows a public collection to stay listed before it reaches `min_items`.
 - `min_items`: minimum resolved piece count before public listing.
 - `explicit_only`: disables fallback matching when true.
-- `featured`: allows the collection to appear in featured strips such as the homepage; `/collections/` does not use this field for ordering or presentation.
+- `featured`: legacy featured-surface metadata retained for compatibility; the active homepage and `/collections/` directory do not use it for ordering or presentation.
 - `weight`: ordering control for collection listings.
 - `start_here`: optional page slug that gets a dedicated callout.
 - `room_theme`: legacy metadata retained for compatibility. Current collection index and detail pages do not consume it for presentation.
-- `description`: short editorial framing used on index, detail, and homepage strips.
+- `description`: short editorial framing used on collection index and detail surfaces.
 - `metadata`: optional reader-facing label/value pairs.
 - `fallback`: legacy matching fields (`series`, `topics`, `tags`, `sections`).
 
@@ -82,7 +82,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 ### Article pages
 
-- Three manually selected homepage-featured pieces have a focused exit instead of the full collection continuation: the Jack Stratton profile, *A Thousand Brick Walls*, and *What Is Risk? A Four-Part Framework*. `data/featured_continuations.json` owns one existing reading route and two connection sentences per source page. `article/featured-continuation.html` renders one reading link and one Studio inquiry link; it does not rank or discover recommendations. The reading route must resolve to a published page. These route-bound choices do not automatically move when the homepage's latest dialogue changes.
+- Three manually selected pieces have a focused exit instead of the full collection continuation: the Jack Stratton profile, *A Thousand Brick Walls*, and *What Is Risk? A Four-Part Framework*. `data/featured_continuations.json` owns one existing reading route and two connection sentences per source page. `article/featured-continuation.html` renders one reading link and one Studio inquiry link; it does not rank or discover recommendations. The reading route must resolve to a published page. These route-bound choices are independent of the homepage selection.
 - The two existing collection continuations retain their `article_continuation_primary` / `collection_click` metadata and collection slugs. Jack's manually selected Benjamin Franklin recommendation uses `internal_promo_click` in that same primary slot. Studio links retain `studio_sample_exit` for Jack and use the existing `article_exit_paths` slot on the other two pieces; no new analytics event is introduced.
 - Jack's Studio production note remains, but its standalone inquiry CTA is suppressed when the focused exit supplies that link. Other Studio sample exits stay unchanged. Existing newsletter prompts, forms, and final archive links are unchanged; no signup block is added. These are navigation-only changes, not revisions to the article bodies or citation records.
 
@@ -116,7 +116,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - The `/collections/` route renders a ruled broadsheet directory, not a dominant card grid.
 - The directory has one page title/deck and two editorial columns: `Series` and `Topics`.
 - Each visible collection appears as a compact `collection-record` row with kind, title, description, piece count, scope metadata, and a quiet `Start here` link when present.
-- The index ignores `featured`; homepage and other existing featured surfaces may still use that field.
+- The index ignores `featured`; the field remains compatibility metadata and is not consumed by the active homepage.
 - Individual collection pages render as newspaper section fronts with the actual collection title as the H1.
 - Bob's Almanack uses a bespoke collection layout and may be listed publicly only when its collection page and at least one issue are published in the same build.
 - Bob's Almanack collection-page modules are fed only by committed Hugo data under `data/almanack/`; Hugo templates must not call live APIs during a build.

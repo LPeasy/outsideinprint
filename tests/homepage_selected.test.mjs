@@ -3,508 +3,181 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
-function escapeRegex(value) {
-  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+const read = (file) => fs.readFileSync(path.resolve(file), "utf8");
 
-function readCurrentCartoonRecord(source) {
-  const currentMatch = source.match(/^current:\s*(.+)$/m);
-  assert.ok(currentMatch, "expected editorial cartoons data to define a current slug");
+const homepage = read("layouts/index.html");
+const homeFrontPage = read("layouts/partials/home_front_page.html");
+const homeV2 = read("layouts/partials/home_v2_front_page.html");
+const selected = read("layouts/partials/home_v2_selected.html");
+const readerBanner = read("layouts/partials/home_reader_banner.html");
+const metrics = read("data/homepage_metrics.yaml");
+const config = read("hugo.toml");
+const contributor = read("content/contribute/index.md");
+const css = read("assets/css/main.css");
+const readerNoteCopy = "However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.";
 
-  const currentSlug = currentMatch[1].trim();
-  const entryPattern = new RegExp(
-    `^\\s*-\\s+slug:\\s+${escapeRegex(currentSlug)}\\s*\\r?\\n([\\s\\S]*?)(?=^\\s*-\\s+slug:|(?![\\s\\S]))`,
-    "m"
+test("homepage delegates to the focused v2 composition", () => {
+  assert.match(homepage, /partial "home_front_page\.html"/);
+  assert.match(homeFrontPage, /partial "home_v2_front_page\.html"/);
+  assert.doesNotMatch(homepage, /home_bookstore_spotlight|home_selected_collections|home_2045_launch|newsletter_signup/);
+  assert.doesNotMatch(homeFrontPage, /home_bookstore_spotlight|home_selected_collections|home_2045_launch|newsletter_signup/);
+});
+
+test("reader banner leads with the owner-provided proof and a plain-language newsletter offer", () => {
+  assert.doesNotMatch(config, /article_count_label|reader_count_label/);
+  assert.match(readerBanner, /hugo\.Data\.homepage_metrics/);
+  assert.match(metrics, /250\+/);
+  assert.match(metrics, /10,000\+/);
+  assert.match(readerBanner, /<strong>Weekly<\/strong>\s*<span>Newsletter<\/span>/);
+  assert.match(readerBanner, /From the imprint/);
+  assert.doesNotMatch(readerBanner, /beyond the feed/);
+  assert.match(readerBanner, /Independent writing on history, economics, culture, and public life\./);
+  assert.match(readerBanner, /One thoughtful letter each week\./);
+  assert.match(readerBanner, /No spam ever\. Unsubscribe anytime\./);
+  assert.match(readerBanner, /Join the newsletter/);
+  assert.match(readerBanner, /eq \$provider "buttondown"/);
+  assert.match(readerBanner, /data-analytics-event="newsletter_submit"/);
+  assert.match(readerBanner, /data-analytics-source-slot="homepage_reader_banner"/);
+  assert.doesNotMatch(readerBanner, /Bob(?:'|’)s Almanack|No ads ever/);
+});
+
+test("featured reading leads with the latest publication and keeps four ordered editorial supports", () => {
+  const routes = [
+    "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "/syd-and-oliver/what-i-had/",
+    "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/",
+    "/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/",
+  ];
+  const indexes = routes.map((route) => selected.indexOf(`"${route}"`));
+  assert.ok(indexes.every((index) => index >= 0));
+  assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
+  assert.doesNotMatch(selected, /what-happened-at-camp-mystic/);
+  assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
+  assert.match(selected, /range first 1 \$eligible/);
+  assert.ok(selected.indexOf("range first 1 $eligible") < selected.indexOf("range $route := $supportingRoutes"));
+  assert.match(selected, /partial "archive\/longform-kind\.html"/);
+  assert.match(selected, /not \(in \$selectedPaths \.RelPermalink\)/);
+  assert.match(selected, /first \(sub 5 \(len \$featured\)\) \$fallback/);
+
+  for (const label of ["3.4K reads", "1.95K reads", "1.8K reads", "1.4K reads", "1.1K reads", "25 reads"]) {
+    assert.ok(metrics.includes(label), `retain inherited metric ${label}`);
+    assert.ok(!homeV2.includes(label), "metric values belong in the internal data record");
+  }
+  assert.match(homeV2, /hugo\.Data\.homepage_metrics/);
+  assert.match(homeV2, /The latest publication, alongside reader favorites and defining work\./);
+  assert.match(homeV2, /Read the piece/);
+  assert.doesNotMatch(homeV2, /Read the essay/);
+  assert.doesNotMatch(metrics, /\d(?:K)? readers/);
+  assert.doesNotMatch(homeV2, /Medium reads/i);
+});
+
+test("internal metric records retain provenance and disclose unverified inherited observations", () => {
+  const figures = [...metrics.matchAll(/^ {4}value: (\d+)$/gm)].map((match) => Number(match[1]));
+  assert.equal(figures.length, 8, "retain the two banner claims and six inherited article figures");
+  for (const field of ["display_label", "source", "metric_definition", "period", "observed_at", "evidence_ref", "verification_status", "recorded_at"]) {
+    assert.equal((metrics.match(new RegExp(`^ {4}${field}:`, "gm")) || []).length, figures.length, `every figure needs ${field}`);
+  }
+  assert.match(metrics, /^reader_threshold: 1000$/m);
+  assert.equal((metrics.match(/^ {4}observed_at: null$/gm) || []).length, 7);
+  assert.equal((metrics.match(/^ {4}evidence_ref: null$/gm) || []).length, 7);
+  assert.match(metrics, /owner_supplied_unverified_aggregation/);
+  assert.equal((metrics.match(/verification_status: "inherited_unverified_snapshot"/g) || []).length, 6);
+  assert.match(metrics, /do not establish unique people or accounts|neither[^\n]*establish unique people or accounts/i);
+  assert.doesNotMatch(metrics, /^ {2}"\/(?:essays\/what-happened-at-camp-mystic|syd-and-oliver\/what-i-had)\/":/m);
+  assert.match(homeV2, /if ge \.value \$readerThreshold/);
+  assert.match(homeV2, /index \$readerMetrics \$page\.RelPermalink/);
+});
+
+test("featured eligibility excludes drafts, future and expired work before choosing a duplicate-free fallback", () => {
+  assert.match(selected, /not \.Draft/);
+  assert.match(selected, /le \.PublishDate\.Unix \$now\.Unix/);
+  assert.match(selected, /le \.Date\.Unix \$now\.Unix/);
+  assert.match(selected, /or \.ExpiryDate\.IsZero \(gt \.ExpiryDate\.Unix \$now\.Unix\)/);
+  assert.match(selected, /range where \$eligible "RelPermalink" \$route/);
+  assert.match(selected, /\$fallbackPaths := \$selectedPaths/);
+  assert.match(selected, /not \(in \$fallbackPaths \.RelPermalink\)/);
+  assert.match(homeV2, /partial "archive\/longform-kind\.html" \$page\) "dialogue"/);
+  assert.doesNotMatch(homeV2, /what-happened-at-camp-mystic|\$sectionLabel = "Reported analysis"/);
+  const campSource = read("content/essays/what-happened-at-camp-mystic.md");
+  assert.doesNotMatch(campSource, /^section_label: ["']?Reported analysis/m, "homepage curation must not reclassify the canonical essay");
+});
+
+test("homepage follows the reader-to-newsletter-to-reading-to-contributor sequence", () => {
+  assert.equal((homeV2.match(/<h1\b/g) || []).length, 1);
+  assert.match(homeV2, /<h1 id="home-front-page-title" class="title visually-hidden">/);
+  assert.match(homeV2, /partial "home_reader_banner\.html"/);
+  assert.match(homeV2, /A note to the reader/);
+  const welcomeCopyParagraphs = Array.from(homeV2.matchAll(/<p class="home-front-page__welcome-copy">([\s\S]*?)<\/p>/g));
+  assert.equal(welcomeCopyParagraphs.length, 1);
+  assert.equal(welcomeCopyParagraphs[0][1].replace(/<[^>]+>/g, "").trim(), readerNoteCopy);
+  assert.match(
+    homeV2,
+    /<p class="home-front-page__welcome-links"><a href="\{\{ "about\/" \| relURL \}\}">About the imprint<\/a><a href="\{\{ "authors\/robert-v-ussley\/" \| relURL \}\}">About the author<\/a><\/p>/,
   );
-  const entryMatch = source.match(entryPattern);
-  assert.ok(entryMatch, `expected editorial cartoons data to include the current slug entry: ${currentSlug}`);
+  assert.doesNotMatch(homeV2, /<p class="home-front-page__welcome-links">[\s\S]*?Start reading[\s\S]*?<\/p>/);
+  assert.match(homeV2, /<h2 id="home-v2-featured-title">Featured Reading<\/h2>/);
+  assert.match(homeV2, /homepage_v2_featured_lead/);
+  assert.match(homeV2, /homepage_v2_featured_supporting/);
+  assert.match(homeV2, /Find your next question\./);
+  assert.match(homeV2, /Browse the archive/);
+  assert.match(homeV2, /Search the library/);
+  assert.match(homeV2, /Become a contributor/);
+  assert.doesNotMatch(homeV2, /home_imprint_statement|home-manifesto/);
 
-  const imageMatch = entryMatch[1].match(/^\s+image:\s+"([^"]+)"$/m);
-  assert.ok(imageMatch, `expected editorial cartoons data to include an image for current slug: ${currentSlug}`);
+  const order = [
+    'partial "home_reader_banner.html"',
+    'class="home-front-page__orientation"',
+    'class="home-v2-featured',
+    'class="home-v2-next',
+  ].map((marker) => homeV2.indexOf(marker));
+  assert.ok(order.every((index) => index >= 0));
+  assert.deepEqual(order, [...order].sort((left, right) => left - right));
 
-  return {
-    slug: currentSlug,
-    image: imageMatch[1]
-  };
-}
+  assert.doesNotMatch(homeV2, /home-bookstore|home-almanack|home-selected-collections|home_2045_launch|Bob(?:'|’)s Almanack/);
+});
 
-function normalizeDateString(value) {
-  const match = String(value ?? "").match(/\d{4}-\d{2}-\d{2}/);
-  return match?.[0] ?? null;
-}
+test("featured lead reuses a published image and responsive rendering", () => {
+  assert.match(homeV2, /with \$page\.Params\.featured_image/);
+  assert.match(homeV2, /partial "images\/model\.html"/);
+  assert.match(homeV2, /partial "images\/picture\.html"/);
+  assert.match(homeV2, /"loading" "eager"/);
+  assert.match(homeV2, /"fetchpriority" "high"/);
+  assert.doesNotMatch(homeV2, /<img\b/);
+});
 
-function selectHomepageLongform(pages) {
-  const frontPagePages = pages
-    .filter((page) => ["essay", "affirmation", "dialogue"].includes(page.kind) && page.draft !== true)
-    .sort((left, right) => right.date - left.date);
+test("contributor lane is public, specific, and linked from the homepage", () => {
+  assert.match(contributor, /^title: "Write for Outside In Print"$/m);
+  assert.match(contributor, /original essays and reported articles/);
+  assert.match(contributor, /## What Fits/);
+  assert.match(contributor, /## Start With a Pitch/);
+  assert.match(contributor, /support@outsideinprint\.org/);
+  assert.match(contributor, /Sending a pitch does not guarantee publication\./);
+  assert.match(homeV2, /href="\{\{ "contribute\/" \| relURL \}\}">Become a contributor<\/a>/);
+});
 
-  const latest = frontPagePages[0] ?? null;
-  const hero = latest ?? null;
-  const showLatestSlot = false;
-  const selected = [];
-  const seen = new Set();
-
-  if (hero) {
-    selected.push(hero);
-    seen.add(hero.relPermalink);
+test("new homepage system has responsive, keyboard-visible editorial styling", () => {
+  for (const selector of [
+    ".home-reader-banner",
+    ".home-v2-featured",
+    ".home-v2-featured__grid",
+    ".home-v2-featured__lead",
+    ".home-v2-featured__supporting",
+    ".home-v2-next",
+    ".home-v2-next__cta",
+  ]) {
+    assert.match(css, new RegExp(`\\${selector}\\{`), `missing CSS rule for ${selector}`);
   }
-
-  if (showLatestSlot && latest) {
-    selected.push(latest);
-    seen.add(latest.relPermalink);
-  }
-
-  const secondary = [];
-  const profile = frontPagePages.find((page) => page.relPermalink === "/essays/jack-stratton-and-the-vulfpeck-model/");
-  const dialogue = frontPagePages.find((page) => page.kind === "dialogue" && page.collections?.includes("syd-and-oliver-dialogues") && !seen.has(page.relPermalink));
-  const risk = frontPagePages.find((page) => page.relPermalink === "/essays/what-is-risk-a-four-part-framework/");
-  const uncrustables = frontPagePages.find((page) => page.relPermalink === "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/");
-  for (const candidate of [profile, dialogue, risk, uncrustables]) {
-    if (!candidate || seen.has(candidate.relPermalink)) continue;
-    secondary.push(candidate);
-    selected.push(candidate);
-    seen.add(candidate.relPermalink);
-  }
-
-  return {
-    hero,
-    lead: hero,
-    latest,
-    showLatestSlot,
-    secondary,
-    selected,
-    keys: selected.map((page) => page.relPermalink)
-  };
-}
-
-function parseFrontMatter(filePath) {
-  const source = fs.readFileSync(filePath, "utf8");
-  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  assert.ok(match, `expected front matter in ${filePath}`);
-
-  const data = {};
-  for (const rawLine of match[1].split(/\r?\n/)) {
-    if (!rawLine || /^\s/.test(rawLine)) continue;
-    const separator = rawLine.indexOf(":");
-    if (separator === -1) continue;
-
-    const key = rawLine.slice(0, separator).trim();
-    let value = rawLine.slice(separator + 1).trim();
-    value = value.replace(/^['"]|['"]$/g, "");
-
-    if (value === "true" || value === "false") {
-      data[key] = value === "true";
-    } else if (/^[1-9]\d*$/.test(value)) {
-      data[key] = Number(value);
-    } else {
-      data[key] = value;
-    }
-  }
-
-  return data;
-}
-
-test("homepage partial keeps the newest lead with the profile, dialogue, risk, and Uncrustables supporting selections", () => {
-  const source = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
-  const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
-  const frontPageCopySource = fs.readFileSync(path.resolve("layouts/partials/home_front_page_copy.html"), "utf8");
-  const indexSource = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
-  const baseLayout = fs.readFileSync(path.resolve("layouts/_default/baseof.html"), "utf8");
-  const cartoonData = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
-  const currentCartoon = readCurrentCartoonRecord(cartoonData);
-  const galleryContent = fs.readFileSync(path.resolve("content/gallery/_index.md"), "utf8");
-  const galleryTemplate = fs.readFileSync(path.resolve("layouts/gallery/list.html"), "utf8");
-  const cartoonLookupPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-for-page.html"), "utf8");
-  const cartoonLinkPartial = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-gallery-link.html"), "utf8");
-  const cartoonThumbnailLightbox = fs.readFileSync(path.resolve("layouts/partials/editorial/cartoon-thumbnail-lightbox.html"), "utf8");
-  const pageListItem = fs.readFileSync(path.resolve("layouts/partials/discovery/page-list-item.html"), "utf8");
-
-  assert.match(source, /partial "archive\/longform-kind\.html"/);
-  assert.match(source, /Homepage selection follows the archive longform model for essays, affirmations, and dialogues/);
-  assert.match(source, /\{\{ range site\.RegularPages \}\}/);
-  assert.match(source, /\{\{ \$kind := partial "archive\/longform-kind\.html" \. \}\}/);
-  assert.match(source, /\{\{ if in \(slice "essay" "affirmation" "dialogue"\) \$kind \}\}/);
-  assert.match(source, /sort \(sort \$frontPagePages "Title" "asc"\) "Date" "desc"/);
-  assert.doesNotMatch(source, /Lastmod/);
-  assert.match(source, /\{\{ \$hero := \$latest \}\}/);
-  assert.match(source, /\{\{ \$showLatestSlot := false \}\}/);
-  assert.match(source, /range \$candidate := \$frontPagePages/);
-  assert.match(source, /\/essays\/jack-stratton-and-the-vulfpeck-model\//);
-  assert.match(source, /\/essays\/what-is-risk-a-four-part-framework\//);
-  assert.match(source, /\/essays\/uncrustables-the-billion-dollar-peanut-butter-empire\//);
-  assert.match(source, /syd-and-oliver-dialogues/);
-  assert.doesNotMatch(source, /lt \(len \$secondary\) 4/);
-  assert.match(source, /home_selected_keys/);
-  assert.match(source, /"pages" \$selectedPages/);
-  assert.match(source, /"keys" \$selectedKeys/);
-  assert.match(source, /return \(dict/);
-  assert.doesNotMatch(source, /Params\.featured/);
-  assert.doesNotMatch(source, /Params\.homepage_featured/);
-  assert.doesNotMatch(source, /Params\.homepage_featured_until/);
-  assert.doesNotMatch(source, /currentCartoonPage/);
-  assert.doesNotMatch(source, /findRE "\\\\d\{4\}-\\\\d\{2\}-\\\\d\{2\}"/);
-  assert.doesNotMatch(source, /where site\.RegularPages "Section" "essays"/);
-  assert.doesNotMatch(source, /Read Essay/);
-  assert.doesNotMatch(source, /Download PDF/);
-  assert.match(frontPageSource, /home_selected\.html/);
-  assert.match(frontPageSource, /home_front_page_copy\.html/);
-  assert.match(frontPageSource, /\{\{ \$leadReadLabel \}\} &rarr;/);
-  assert.match(frontPageSource, /\{\{ \$latestReadLabel \}\} &rarr;/);
-  assert.match(frontPageSource, /\{\{ \$readLabel \}\} &rarr;/);
-  assert.match(frontPageCopySource, /partial "archive\/longform-kind\.html"/);
-  assert.match(frontPageCopySource, /Latest Essay/);
-  assert.match(frontPageCopySource, /Latest Affirmation/);
-  assert.match(frontPageCopySource, /Latest Dialogue/);
-  assert.match(frontPageCopySource, /Read essay/);
-  assert.match(frontPageCopySource, /Read affirmation/);
-  assert.match(frontPageCopySource, /Read dialogue/);
-  assert.match(frontPageCopySource, /\$sectionLabel = "Affirmation"/);
-  assert.match(frontPageCopySource, /Dialogues/);
-  assert.match(frontPageSource, /hugo\.Data\.editorial_cartoons/);
-  assert.match(frontPageSource, /currentCartoonSlug/);
-  assert.match(frontPageSource, /\$orderedCartoons := sort \(sort \$cartoons "slug" "asc"\) "date" "desc"/);
-  assert.match(frontPageSource, /\$recentCartoons := slice/);
-  assert.match(frontPageSource, /lt \(len \$recentCartoons\) 2/);
-  assert.match(frontPageSource, /View gallery/);
-  assert.match(frontPageSource, /"gallery\/" \| absURL/);
-  assert.match(frontPageSource, /data-home-cartoon-recent/);
-  assert.match(frontPageSource, /data-home-cartoon-recent-card/);
-  assert.match(frontPageSource, /data-home-cartoon-recent-trigger/);
-  assert.match(frontPageSource, /home-almanack-divider/);
-  assert.match(frontPageSource, /class="home-almanack home-almanack--lead"/);
-  assert.match(frontPageSource, /home-almanack__ledger/);
-  assert.match(frontPageSource, /home-almanack__ledger-row--number/);
-  assert.match(frontPageSource, /home-almanack__ledger-row--virtue/);
-  const orderedRegions = [
-    'data-home-front-page-region="lead"',
-    'class="editorial-cartoon__trigger"',
-    'data-home-front-page-region="secondary"',
-    'data-home-front-page-region="extras"',
-    'data-home-cartoon-recent',
-    'home-almanack-divider',
-    'home-almanack--lead',
-  ];
-  let previousRegionIndex = -1;
-  for (const marker of orderedRegions) {
-    const markerIndex = frontPageSource.indexOf(marker);
-    assert.ok(markerIndex > previousRegionIndex, `${marker} must follow the preceding homepage region in document order`);
-    previousRegionIndex = markerIndex;
-  }
-  for (const region of ["lead", "secondary", "extras"]) {
-    assert.equal((frontPageSource.match(new RegExp(`data-home-front-page-region="${region}"`, "g")) || []).length, 1);
-  }
-  assert.match(frontPageSource, /<article\b[^>]*data-home-front-page-region="lead"[^>]*>(?:(?!<\/article>)[\s\S])*class="editorial-cartoon__trigger"(?:(?!<\/article>)[\s\S])*<\/article>[\s\S]*?<div\b[^>]*data-home-front-page-region="secondary"/);
-  assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
-  assert.match(frontPageSource, /data-home-cartoon-lightbox/);
-  assert.match(frontPageSource, /data-home-cartoon-lightbox-image-button/);
-  assert.doesNotMatch(frontPageSource, /data-home-cartoon-lightbox-image\s+src=""/);
-  assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
-  assert.match(frontPageSource, /<p id="home-cartoon-lightbox-title" class="cartoon-lightbox__title" data-home-cartoon-lightbox-title><\/p>/);
-  assert.doesNotMatch(frontPageSource, /<h2 id="home-cartoon-lightbox-title"/);
-  assert.match(frontPageSource, /aria-labelledby="home-cartoon-lightbox-title"/);
-  assert.match(frontPageSource, /querySelectorAll\("\[data-home-cartoon-lightbox-trigger\]"\)/);
-  assert.match(frontPageSource, /triggers\.forEach\(function \(trigger\)/);
-  assert.doesNotMatch(frontPageSource, /var trigger = document\.querySelector\("\[data-home-cartoon-lightbox-trigger\]"\)/);
-  assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
-  assert.match(frontPageSource, /editorial\/cartoon-for-page\.html/);
-  assert.match(frontPageSource, /home_card_image\.html/);
-  assert.doesNotMatch(frontPageSource, /window\.location\.href/);
-  assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
-  assert.match(frontPageSource, /data-home-front-page-region="lead"/);
-  assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
-  assert.doesNotMatch(frontPageSource, /Featured Essay/);
-  assert.doesNotMatch(frontPageSource, /Front Page Essay/);
-  assert.match(frontPageSource, /range \$secondary/);
-  assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
-  assert.match(frontPageSource, /<div class="home-front-page__orientation">\s*<p class="home-front-page__welcome-label">A note to the reader<\/p>\s*<p class="home-front-page__welcome-copy">I’m Robert\. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to\. Pick something that catches your eye\. I’m glad you’re here\.<\/p>\s*<p class="home-front-page__welcome-signature">&mdash; <a href="\{\{ "about\/" \| relURL \}\}">Robert V\. Ussley<\/a><\/p>\s*<\/div>/);
-  assert.equal((frontPageSource.match(/class="home-front-page__orientation"/g) || []).length, 1);
-  assert.doesNotMatch(frontPageSource, /Independent essays, selected writings, and original books by Robert V\. Ussley/);
-  assert.match(frontPageSource, /<section class="home-front-page__stories" aria-labelledby="home-front-page-stories-title">\s*<h2 id="home-front-page-stories-title" class="visually-hidden">Front page stories<\/h2>/);
-  assert.ok(frontPageSource.indexOf('class="home-front-page__orientation"') < frontPageSource.indexOf('class="home-front-page__stories"'));
-  assert.ok(frontPageSource.indexOf('>Front page stories</h2>') < frontPageSource.indexOf('<h3 class="home-front-page__lead-title">'));
-  assert.doesNotMatch(frontPageSource, />Front Page</);
-  assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
-  assert.doesNotMatch(frontPageSource, /class="home-manifesto"/);
-  assert.doesNotMatch(frontPageSource, /A digital imprint of essays, reports, dialogues, and literature\./);
-  assert.doesNotMatch(frontPageSource, /Color over the lines\. Read beyond the feed\. Think for yourself\./);
-  assert.doesNotMatch(frontPageSource, /Support independent journalism/);
-  assert.doesNotMatch(frontPageSource, /home-front-page__secondary-label/);
-  assert.doesNotMatch(frontPageSource, /Read by guided path/);
-  assert.match(indexSource, /home_front_page\.html/);
-  assert.doesNotMatch(indexSource, /home_recent_work\.html/);
-  assert.match(indexSource, /partial "home_imprint_statement\.html"/);
-  assert.match(indexSource, /"label" "Gallery"/);
-  assert.match(indexSource, /"label" "Library"/);
-  assert.doesNotMatch(indexSource, /"label" "Welcome"/);
-  assert.doesNotMatch(indexSource, /"label" "Feeling curious\?"/);
-  assert.doesNotMatch(indexSource, /partial "home_studio_offer\.html"/);
-  assert.ok(indexSource.indexOf('partial "home_front_page.html"') < indexSource.indexOf('partial "newsletter_signup.html"'));
-  assert.ok(indexSource.indexOf('partial "newsletter_signup.html"') < indexSource.indexOf('partial "home_bookstore_spotlight.html"'));
-  assert.ok(indexSource.indexOf('partial "home_bookstore_spotlight.html"') < indexSource.indexOf('partial "home_imprint_statement.html"'));
-  assert.ok(indexSource.indexOf('partial "home_imprint_statement.html"') < indexSource.indexOf('partial "home_selected_collections.html"'));
-  assert.ok(indexSource.indexOf('partial "home_selected_collections.html"') < indexSource.indexOf('class="home-browse'));
-  assert.match(cartoonData, /slug: think-outside-the-box/);
-  assert.match(cartoonData, new RegExp(`current: ${escapeRegex(currentCartoon.slug)}`));
-  assert.match(cartoonData, new RegExp(`slug: ${escapeRegex(currentCartoon.slug)}`));
-  assert.match(cartoonData, new RegExp(`image: "${escapeRegex(currentCartoon.image)}"`));
-  assert.match(galleryContent, /title: "Gallery"/);
-  assert.match(galleryTemplate, /cartoon-gallery-spotlight/);
-  assert.match(galleryTemplate, /cartoon-gallery__grid/);
-  assert.match(galleryTemplate, /\$archiveCartoons := slice/);
-  assert.match(galleryTemplate, /if ne \.slug \$currentSlug/);
-  assert.match(galleryTemplate, /\$archiveCartoons = \$archiveCartoons \| append \./);
-  assert.match(galleryTemplate, /range \$archiveCartoons/);
-  assert.doesNotMatch(galleryTemplate, /cartoon-gallery__item--current/);
-  assert.match(galleryTemplate, /data-cartoon-lightbox-trigger/);
-  assert.match(galleryTemplate, /data-cartoon-slug/);
-  assert.match(galleryTemplate, /data-cartoon-lightbox-image-button/);
-  assert.doesNotMatch(galleryTemplate, /data-cartoon-lightbox-image\s+src=""/);
-  assert.match(galleryTemplate, /data-cartoon-lightbox-essay/);
-  assert.match(galleryTemplate, /getRequestedCartoonSlug/);
-  assert.match(galleryTemplate, /URLSearchParams\(window\.location\.search/);
-  assert.match(galleryTemplate, /openLightbox\(requestedTrigger\)/);
-  assert.match(cartoonLookupPartial, /hugo\.Data\.editorial_cartoons/);
-  assert.match(cartoonLookupPartial, /\.essay/);
-  assert.match(cartoonLinkPartial, /gallery\/\?cartoon=%s/);
-  assert.match(cartoonLinkPartial, /essay-cartoon-thumb/);
-  assert.match(cartoonLinkPartial, /<button/);
-  assert.match(cartoonLinkPartial, /data-essay-cartoon-lightbox-trigger/);
-  assert.match(cartoonLinkPartial, /data-gallery/);
-  assert.match(cartoonLinkPartial, /partial "images\/model\.html"/);
-  assert.match(cartoonLinkPartial, /partial "images\/picture\.html"/);
-  assert.doesNotMatch(cartoonLinkPartial, /<img/);
-  assert.doesNotMatch(cartoonLinkPartial, /<a class="essay-cartoon-thumb/);
-  assert.match(baseLayout, /editorial\/cartoon-thumbnail-lightbox\.html/);
-  assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox/);
-  assert.doesNotMatch(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-image\s+src=""/);
-  assert.match(cartoonThumbnailLightbox, /<p id="essay-cartoon-lightbox-title" class="cartoon-lightbox__title" data-essay-cartoon-lightbox-title><\/p>/);
-  assert.doesNotMatch(cartoonThumbnailLightbox, /<h2 id="essay-cartoon-lightbox-title"/);
-  assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-gallery/);
-  assert.match(cartoonThumbnailLightbox, /View in gallery/);
-  assert.match(cartoonThumbnailLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
-  assert.doesNotMatch(cartoonThumbnailLightbox, /window\.location\.href/);
-  assert.match(pageListItem, /editorial\/cartoon-for-page\.html/);
-  assert.match(pageListItem, /editorial\/cartoon-gallery-link\.html/);
-  assert.match(cartoonData, /essay: "\/essays\/the-warning-label-in-the-weeds\/"/);
-  const thinkOutsideEntry = cartoonData.match(/  - slug: think-outside-the-box[\s\S]*?(?=\n  - slug:|\n?$)/)?.[0] || "";
-  assert.doesNotMatch(thinkOutsideEntry, /essay:/);
-});
-
-test("homepage supporting images prefer published editorial art and otherwise link the existing hero to the piece", () => {
-  const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
-  const imagePartial = fs.readFileSync(path.resolve("layouts/partials/home_card_image.html"), "utf8");
-
-  assert.equal((frontPageSource.match(/partial "home_card_image\.html"/g) || []).length, 2,
-    "the supporting cards and latent latest slot must share the fallback renderer");
-  assert.equal((frontPageSource.match(/partial "editorial\/cartoon-for-page\.html"/g) || []).length, 2);
-  assert.match(imagePartial, /if \.cartoon[\s\S]*partial "editorial\/cartoon-gallery-link\.html"[\s\S]*else[\s\S]*with \$page\.Params\.featured_image/);
-  assert.match(imagePartial, /partial "images\/model\.html"/);
-  assert.match(imagePartial, /partial "images\/picture\.html"/);
-  assert.match(imagePartial, /class="home-hero-thumb"/);
-  assert.match(imagePartial, /href="\{\{ \$page\.RelPermalink \}\}"/);
-  assert.match(imagePartial, /aria-label="Read \{\{ \$page\.Title \}\}"/);
-  assert.match(imagePartial, /"alt" ""/);
-  assert.match(imagePartial, /"loading" "lazy"/);
-  assert.match(imagePartial, /"sizes"/);
-  assert.doesNotMatch(imagePartial, /<img\b|data-gallery|data-essay-cartoon-lightbox-trigger|data-cartoon-slug/);
-});
-
-test("the latest publication leads and supporting selections keep the approved order", () => {
-  const pages = [
-    { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") },
-    { relPermalink: "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/", kind: "essay", draft: false, date: new Date("2025-05-23") },
-    { relPermalink: "/essays/what-is-risk-a-four-part-framework/", kind: "essay", draft: false, date: new Date("2025-08-29") },
-    { relPermalink: "/essays/jack-stratton-and-the-vulfpeck-model/", kind: "essay", draft: false, date: new Date("2025-05-28") },
-    { relPermalink: "/syd-and-oliver/older-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-03-20") },
-    { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-01") },
-    { relPermalink: "/essays/another-dialogue/", kind: "dialogue", collections: ["another-collection"], draft: false, date: new Date("2026-04-01T12:00:00Z") },
-    { relPermalink: "/essays/i-do-what-i-say/", kind: "affirmation", draft: false, date: new Date("2026-04-02") },
-    { relPermalink: "/syd-and-oliver/draft/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: true, date: new Date("2026-04-03") }
-  ];
-
-  const result = selectHomepageLongform(pages);
-
-  assert.equal(result.hero?.relPermalink, "/essays/i-do-what-i-say/");
-  assert.equal(result.latest?.relPermalink, "/essays/i-do-what-i-say/");
-  assert.equal(result.showLatestSlot, false);
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
-    "/essays/jack-stratton-and-the-vulfpeck-model/",
-    "/syd-and-oliver/latest-dialogue/",
-    "/essays/what-is-risk-a-four-part-framework/",
-    "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/"
-  ]);
-  assert.equal(result.secondary.length, 4);
-  assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
-  assert.deepEqual(result.keys, result.selected.map((page) => page.relPermalink));
-});
-
-test("a dialogue lead advances the supporting dialogue to the next publication without duplication", () => {
-  const pages = [
-    { relPermalink: "/syd-and-oliver/latest-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-03") },
-    { relPermalink: "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/", kind: "essay", draft: false, date: new Date("2025-05-23") },
-    { relPermalink: "/syd-and-oliver/previous-dialogue/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-04-01") },
-    { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-04-02") },
-    { relPermalink: "/essays/what-is-risk-a-four-part-framework/", kind: "essay", draft: false, date: new Date("2025-08-29") },
-    { relPermalink: "/essays/jack-stratton-and-the-vulfpeck-model/", kind: "essay", draft: false, date: new Date("2025-05-28") }
-  ];
-
-  const result = selectHomepageLongform(pages);
-
-  assert.equal(result.hero?.relPermalink, "/syd-and-oliver/latest-dialogue/");
-  assert.equal(result.latest?.relPermalink, "/syd-and-oliver/latest-dialogue/");
-  assert.equal(result.showLatestSlot, false);
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), [
-    "/essays/jack-stratton-and-the-vulfpeck-model/",
-    "/syd-and-oliver/previous-dialogue/",
-    "/essays/what-is-risk-a-four-part-framework/",
-    "/essays/uncrustables-the-billion-dollar-peanut-butter-empire/"
-  ]);
-  assert.equal(new Set(result.selected.map((page) => page.relPermalink)).size, result.selected.length);
-});
-
-test("revision dates and feature flags do not override original publication order", () => {
-  const pages = [
-    { relPermalink: "/essays/older/", kind: "essay", draft: false, date: new Date("2026-01-01"), lastmod: new Date("2026-04-01"), homepage_featured: true, homepage_featured_until: "2026-04-30" },
-    { relPermalink: "/syd-and-oliver/older/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-01-01"), lastmod: new Date("2026-04-01") },
-    { relPermalink: "/syd-and-oliver/newer/", kind: "dialogue", collections: ["syd-and-oliver-dialogues"], draft: false, date: new Date("2026-02-01") },
-    { relPermalink: "/essays/latest/", kind: "essay", draft: false, date: new Date("2026-03-01") }
-  ];
-
-  const result = selectHomepageLongform(pages);
-
-  assert.equal(result.hero?.relPermalink, "/essays/latest/");
-  assert.deepEqual(result.secondary.map((page) => page.relPermalink), ["/syd-and-oliver/newer/"]);
-});
-
-test("unavailable supporting selections stay absent instead of becoming unrelated recent pieces", () => {
-  const pages = [
-    { relPermalink: "/essays/a/", kind: "essay", draft: false, date: new Date("2026-03-03"), homepage_featured: true, homepage_featured_until: "2026-03-31" },
-    { relPermalink: "/essays/b/", kind: "essay", draft: false, date: new Date("2026-03-02") },
-    { relPermalink: "/essays/c/", kind: "essay", draft: false, date: new Date("2026-03-01") },
-    { relPermalink: "/essays/d/", kind: "essay", draft: false, date: new Date("2026-02-28") }
-  ];
-
-  const result = selectHomepageLongform(pages);
-
-  assert.deepEqual(result.selected.map((page) => page.relPermalink), ["/essays/a/"]);
-  assert.deepEqual(result.secondary, []);
-});
-
-test("front page stays structurally primary to collections and newsletter follow-up", () => {
-  const source = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
-  const frontPageSource = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
-  const imagePartial = fs.readFileSync(path.resolve("layouts/partials/home_card_image.html"), "utf8");
-  const partialSource = fs.readFileSync(path.resolve("layouts/partials/home_selected.html"), "utf8");
-
-  assert.match(frontPageSource, /id="home-front-page-title"/);
-  assert.match(frontPageSource, /<h1 id="home-front-page-title" class="title visually-hidden">\{\{ site\.Title \}\}<\/h1>/);
-  assert.match(frontPageSource, /data-home-front-page-region="lead"/);
-  assert.match(frontPageSource, /data-home-front-page-region="secondary"/);
-  assert.match(frontPageSource, /hugo\.Data\.editorial_cartoons/);
-  assert.match(frontPageSource, /data-home-cartoon-recent/);
-  assert.match(frontPageSource, /data-home-cartoon-recent-trigger/);
-  assert.doesNotMatch(frontPageSource, /Also on the front page/);
-  assert.match(frontPageSource, /\{\{ \$leadReadLabel \}\} &rarr;/);
-  assert.match(frontPageSource, /partial "newsletter_prompt\.html"/);
-  assert.match(frontPageSource, /"sourceSlot" "homepage_bobs_almanack_prompt"/);
-  const newsletterPromptIndex = frontPageSource.indexOf('partial "newsletter_prompt.html"');
-  assert.ok(frontPageSource.indexOf('home-front-page__lead-action') < newsletterPromptIndex);
-  assert.ok(newsletterPromptIndex < frontPageSource.indexOf('with $currentCartoon', newsletterPromptIndex));
-  assert.match(frontPageSource, /\{\{ \$readLabel \}\} &rarr;/);
-  assert.match(frontPageSource, /View gallery/);
-  assert.match(frontPageSource, /data-home-cartoon-lightbox-trigger/);
-  assert.match(frontPageSource, /data-home-cartoon-lightbox-essay/);
-  assert.match(frontPageSource, /querySelectorAll\("\[data-home-cartoon-lightbox-trigger\]"\)/);
-  assert.match(imagePartial, /essay-cartoon-thumb--home/);
-  assert.match(imagePartial, /editorial\/cartoon-gallery-link\.html/);
-  assert.match(frontPageSource, /imageButton\.addEventListener\("click", closeLightbox\)/);
-  assert.doesNotMatch(frontPageSource, /window\.location\.href/);
-  assert.doesNotMatch(frontPageSource, /cartoon-think-outside-the-box\.png/);
-  assert.doesNotMatch(frontPageSource, /A curated front page from Outside In Print/);
-  assert.ok(frontPageSource.indexOf('id="home-front-page-title"') < frontPageSource.indexOf('class="home-front-page__stories"'));
-  assert.ok(frontPageSource.indexOf('class="home-front-page__orientation"') < frontPageSource.indexOf('class="home-front-page__stories"'));
-  assert.match(partialSource, /"lead" \$hero/);
-  assert.match(partialSource, /"secondary" \$secondary/);
-  assert.doesNotMatch(source, /partial "home_studio_offer\.html"/);
-  assert.ok(source.indexOf('partial "home_front_page.html"') < source.indexOf('partial "newsletter_signup.html"'));
-  assert.ok(source.indexOf('partial "newsletter_signup.html"') < source.indexOf('partial "home_bookstore_spotlight.html"'));
-  assert.ok(source.indexOf('partial "home_bookstore_spotlight.html"') < source.indexOf('partial "home_imprint_statement.html"'));
-  assert.ok(source.indexOf('partial "home_imprint_statement.html"') < source.indexOf('partial "home_selected_collections.html"'));
-  assert.ok(source.indexOf('partial "home_selected_collections.html"') < source.indexOf('class="home-browse'));
-  assert.match(source, /"anchorID" "bobs-almanack-signup"/);
-});
-
-test("homepage bookstore spotlight stays weighted, data-driven, and internal-first", () => {
-  const source = fs.readFileSync(path.resolve("layouts/index.html"), "utf8");
-  const spotlight = fs.readFileSync(path.resolve("layouts/partials/home_bookstore_spotlight.html"), "utf8");
-
-  assert.match(source, /partial "home_bookstore_spotlight\.html"/);
-  assert.match(spotlight, /site\.GetPage "\/shop"/);
-  assert.match(spotlight, /sort \(where \.Pages "Params\.book_key" "!=" nil\) "Weight" "asc"/);
-  assert.doesNotMatch(spotlight, /first 3/);
-  assert.match(spotlight, /partial "images\/picture\.html"/);
-  assert.match(spotlight, /if gt \(len \$books\) 0/);
-  assert.match(spotlight, /partial "shop\/product-data\.html"/);
-  assert.match(spotlight, /index \$product "display_title"/);
-  assert.match(spotlight, /index \$product "author"/);
-  assert.match(spotlight, /index \$product "product_type"/);
-  assert.match(spotlight, /index \$product "price_display"/);
-  assert.match(spotlight, /data-home-bookstore-card/);
-  assert.match(spotlight, /data-analytics-source-slot="homepage_bookstore_promo"/);
-  assert.match(spotlight, /Independent fiction and nonfiction\. EPUB editions direct from Outside In Print\./);
-  assert.doesNotMatch(spotlight, /amazon|kindle|purchase_url|kindle_url|kindle-button|checkout-actions|carousel|autoplay/i);
-});
-
-test("homepage 2045 launch strip is timed, available-only, and sample-first", () => {
-  const frontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
-  const launch = fs.readFileSync(path.resolve("layouts/partials/home_2045_launch.html"), "utf8");
-  const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
-
-  assert.match(frontPage, /partial "home_2045_launch\.html"/);
-  assert.ok(frontPage.indexOf('class="home-front-page__orientation"') < frontPage.indexOf('partial "home_2045_launch.html"'));
-  assert.ok(frontPage.indexOf('partial "home_2045_launch.html"') < frontPage.indexOf('class="home-front-page__stories"'));
-  assert.match(launch, /hugo\.Data\.bookstore\.launch_promotion/);
-  assert.match(launch, /\$promotion\.book_key/);
-  assert.match(launch, /\$promotion\.starts_at/);
-  assert.match(launch, /\$promotion\.ends_at/);
-  assert.match(launch, /time\.AsTime \$startsAt/);
-  assert.match(launch, /time\.AsTime \$endsAt/);
-  assert.match(launch, /le \$startsAtTime\.Unix now\.Unix/);
-  assert.match(launch, /gt \$endsAtTime\.Unix now\.Unix/);
-  assert.match(launch, /site\.GetPage \(printf "\/shop\/%s" \$bookKey\)/);
-  assert.match(launch, /if not \$book\.Draft/);
-  assert.match(launch, /partial "shop\/product-data\.html"/);
-  assert.match(launch, /where .*"format" "EPUB"/);
-  assert.match(launch, /where \$epubOffers "availability_status" "live"/);
-  assert.match(launch, /\$book\.Params\.sample_page/);
-  assert.match(launch, /New: 2045 — Ten Dark Fables from the Machine Age/);
-  assert.match(launch, /Read a complete story/);
-  assert.match(launch, /Buy EPUB — \$19\.99/);
-  assert.match(launch, /DRM-free EPUB · U\.S\. customers only\./);
-  assert.ok(launch.indexOf('>Read a complete story</a>') < launch.indexOf('>Buy EPUB — $19.99</a>'));
-  assert.match(launch, /data-analytics-source-slot="homepage_2045_launch_headline"/);
-  assert.match(launch, /data-analytics-source-slot="homepage_2045_launch_sample"/);
-  assert.match(launch, /data-analytics-source-slot="homepage_2045_launch_buy"/);
-  assert.equal((launch.match(/data-analytics-source-slot="homepage_2045_launch_(?:headline|sample|buy)"/g) || []).length, 3);
-  assert.match(launch, /href="\{\{ \$book\.RelPermalink \}\}#bookstore-purchase"/);
-  assert.doesNotMatch(launch, /images\/picture|cover_image|https?:\/\/|checkout\.square|square\.link|downloads\.outsideinprint/i);
-  assert.match(css, /\.home-2045-launch\{/);
-  assert.match(css, /\.home-2045-launch__action--buy\{/);
-  assert.match(css, /\.home-2045-launch__title a\{[\s\S]*?min-height:44px;/);
-  assert.match(css, /\.home-2045-launch__action\{[\s\S]*?min-height:44px;/);
-  assert.match(css, /@media \(max-width:640px\)\{[\s\S]*?\.home-2045-launch__actions\{[\s\S]*?grid-template-columns:1fr;/);
-});
-
-test("homepage lead control ignores expiring essay feature front matter", () => {
-  const essayDir = path.resolve("content/essays");
-  const essays = fs
-    .readdirSync(essayDir)
-    .filter((name) => name.endsWith(".md") && name !== "_index.md")
-    .map((name) => ({
-      name,
-      frontMatter: parseFrontMatter(path.join(essayDir, name))
-    }));
-
-  assert.equal(essays.length >= 1, true);
-  assert.equal(essays.some(({ frontMatter }) => Object.hasOwn(frontMatter, "homepage_rank")), false);
+  assert.match(css, /\.home-v2-featured h3 a:focus-visible,[\s\S]*outline:3px solid var\(--focus-ring\)/);
+  assert.match(css, /\.home-v2-next__links a,[\s\S]*min-height:44px/);
+  assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
+  assert.match(css, /@media \(max-width:900px\)[\s\S]*\.home-v2-featured__grid,[\s\S]*grid-template-columns:1fr/);
+  assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-v2-featured__supporting\{\s*display:block/);
+  assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__proof-item\{[\s\S]*padding:\.45rem \.3rem \.42rem/);
+  assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__controls\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) auto/);
+  assert.match(css, /@media \(max-width:360px\)[\s\S]*\.home-reader-banner__controls\{\s*grid-template-columns:1fr/);
+  assert.match(css, /@media \(max-width:720px\)[\s\S]*\.home-front-page__welcome-links\{[^}]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(max-width:360px\)[\s\S]*\.home-v2-featured__meta span \+ span::before\{[^}]*content:none;/);
 });

@@ -669,13 +669,6 @@ $currentCartoonImagePattern = [regex]::Escape($currentCartoonImagePath)
 $currentCartoonEssayPath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'essay')) { [string]$currentCartoon.essay } else { '' }
 $currentCartoonEssayPattern = 'data-essay=(?:"' + [regex]::Escape($currentCartoonEssayPath) + '"|' + [regex]::Escape($currentCartoonEssayPath) + ')'
 $currentCartoonCaption = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'caption')) { [string]$currentCartoon.caption } else { '' }
-$recentHomeCartoons = @(
-  Get-PublishedCartoonEntries -RepoRoot $repoRoot |
-    Where-Object { $_.slug -ne $currentCartoonSlug } |
-    Sort-Object @{ Expression = { $_.date }; Descending = $true }, @{ Expression = { $_.slug }; Ascending = $true } |
-    Select-Object -First 4
-)
-$recentHomeCartoonSlugs = @($recentHomeCartoons | ForEach-Object { $_.slug })
 $freshness = Test-PublicBuildFreshness -RepoRoot $repoRoot -SiteDir $SiteDir
 if (-not $freshness.IsFresh) {
   $message = "Generated-output regression test requires a fresh Hugo build. $($freshness.Reason)"
@@ -930,7 +923,7 @@ $essayHeroChecks = @(
 $requiredMetadataPages = [ordered]@{
   'public/index.html' = @{
     Title = 'Outside In Print'
-    Description = 'Outside In Print is a digital imprint for essays, fiction, dialogues, and working papers published for the web with stable URLs and versioned records.'
+    Description = 'Independent essays and reported analysis for readers who want to move beyond the feed, follow the evidence, and think for themselves.'
     Canonical = 'https://outsideinprint.org/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -1065,13 +1058,23 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
-    Description = "I’m Robert V. Ussley, author, designer, developer, and publisher of Outside In Print. I publish independent essays, dialogues, reported analysis, and original books …"
+    Description = 'Independent writing on history, economics, culture, and public life. Follow a question, consider the evidence, and think for yourself.'
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
     ExpectedImage = 'https://outsideinprint.org/images/social/oip-about.png'
     ExpectedImageAlt = 'Outside In Print social card for the About page.'
+  }
+  'public/contribute/index.html' = @{
+    Title = 'Write for Outside In Print'
+    Description = 'Pitch an original essay or article for publication by Outside In Print.'
+    Canonical = 'https://outsideinprint.org/contribute/'
+    OgType = 'website'
+    TwitterCard = 'summary_large_image'
+    RequireImage = $true
+    ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
+    ExpectedImageAlt = 'Write for Outside In Print'
   }
   'public/authors/index.html' = @{
     Title = 'Authors'
@@ -1085,7 +1088,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/authors/robert-v-ussley/index.html' = @{
     Title = 'Robert V. Ussley'
-    Description = 'Essays and reported writing by Robert V. Ussley on risk, institutions, technology, law, religion, and public life.'
+    Description = 'Independent essays and stories on history, economics, culture, and public life.'
     Canonical = 'https://outsideinprint.org/authors/robert-v-ussley/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -1495,6 +1498,10 @@ $requiredIndexationPages = [ordered]@{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
   }
+  'public/contribute/index.html' = @{
+    ExpectRobotsMeta = $true
+    Robots = 'index, follow, max-image-preview:large'
+  }
   'public/archive/index.html' = @{
     ExpectRobotsMeta = $true
     Robots = 'index, follow, max-image-preview:large'
@@ -1569,6 +1576,7 @@ $requiredFeedPages = [ordered]@{
 $requiredSitemapInclusions = @(
   'https://outsideinprint.org/',
   'https://outsideinprint.org/about/',
+  'https://outsideinprint.org/contribute/',
   'https://outsideinprint.org/authors/robert-v-ussley/',
   'https://outsideinprint.org/archive/',
   'https://outsideinprint.org/essays/the-risk-management-buffet/',
@@ -1632,6 +1640,7 @@ $requiredUxPages = @(
   'public/index.html',
   'public/start-here/index.html',
   'public/about/index.html',
+  'public/contribute/index.html',
   'public/authors/robert-v-ussley/index.html',
   'public/archive/index.html',
   'public/essays/index.html',
@@ -1745,7 +1754,7 @@ $requiredLegacyCleanupPages = @(
 
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Path $file.FullName -Raw
-  $relativePath = Get-RepoRelativePath -RepoRoot $repoRoot -Path $file.FullName
+  $relativePath = 'public/' + (Get-RepoRelativePath -RepoRoot $SiteDir -Path $file.FullName)
   $primaryNavHtml = Get-PrimaryNavHtml -Html $content
   if (-not [string]::IsNullOrWhiteSpace($primaryNavHtml)) {
     $routePath = Get-PublicRoutePath -RelativePath $relativePath
@@ -3024,54 +3033,91 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
   }
 }
 
-$studioHomepageOrderPattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?newsletter-signup--home-ribbon.*?home-bookstore.*?home-manifesto.*?entry-threads--home.*?home-browse'
-$studioHomepageOrderMessage = 'expected the homepage to place the Almanack signup after the story grid and before the bookstore, manifesto, collections, and archive navigation'
-$studioHomepageModulePattern = '\bhome-studio-offer\b'
-$studioHomepageModuleMessage = 'expected the retired Studio module to be absent from the homepage'
+$expectedHomeReaderNote = 'However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.'
 
 $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
     Pattern = '(?s)<h1[^>]*class=(?:"[^"]*\btitle\b[^"]*"|''[^'']*\btitle\b[^'']*''|[^>]*\btitle\b[^>]*)[^>]*>\s*Outside In Print\s*</h1>'
-    Message = 'expected the homepage to expose a semantic h1 for the site title'
+    Message = 'expected the homepage to expose one semantic h1 for the site title'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<h1[^>]*>\s*Outside In Print\s*</h1>.*?<section[^>]*class=(?:"[^"]*\bhome-front-page__stories\b[^"]*"|''[^'']*\bhome-front-page__stories\b[^'']*''|[^>]*\bhome-front-page__stories\b[^>]*)[^>]*aria-labelledby=(?:"home-front-page-stories-title"|home-front-page-stories-title)[^>]*>\s*<h2[^>]*id=(?:"home-front-page-stories-title"|home-front-page-stories-title)[^>]*class=(?:"[^"]*\bvisually-hidden\b[^"]*"|''[^'']*\bvisually-hidden\b[^'']*''|[^>]*\bvisually-hidden\b[^>]*)[^>]*>\s*Front page stories\s*</h2>.*?<h3[^>]*class=(?:"[^"]*\bhome-front-page__lead-title\b[^"]*"|''[^'']*\bhome-front-page__lead-title\b[^'']*''|[^>]*\bhome-front-page__lead-title\b[^>]*)'
-    Message = 'expected the homepage story area to expose a visually hidden h2 before its story h3 headings'
+    Pattern = '(?s)<h2[^>]*id=(?:"home-v2-featured-title"|home-v2-featured-title)[^>]*>\s*Featured Reading\s*</h2>.*?<h3'
+    Message = 'expected the Featured Reading h2 to precede article h3 headings'
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'Independent essays, selected writings, and original books by Robert V\. Ussley'
-    Message = 'expected the homepage to omit the retired orientation tagline'
+    Pattern = '(?s)home-reader-banner.*?home-front-page__orientation.*?home-v2-featured.*?home-v2-next'
+    Message = 'expected homepage order to move from proof and newsletter through reader note, featured reading, and next steps'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-reader-banner__proof.*?250(?:\+|&#43;).*?Articles.*?10,000(?:\+|&#43;).*?Readers.*?Weekly.*?Newsletter'
+    Message = 'expected the homepage proof strip to show the publication, owner-provided reader, and newsletter proof points'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?One thoughtful letter each week\..*?Independent writing on history, economics, culture, and public life\..*?No spam ever\. Unsubscribe anytime\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Join the newsletter'
+    Message = 'expected the homepage to expose a plain-language tracked newsletter signup above the reading surface'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-front-page__welcome-copy[^>]*>However you found this site.*?headline to headline\.<span id=(?:"home-reader-note-rest"|home-reader-note-rest)> Step outside the feed.*?Come back when you want something worth your attention\.</span></p>'
+    Message = 'expected the complete note to remain visible in server-rendered markup, with only its later sentences inside the expandable span'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<button\b(?=[^>]*data-reader-note-toggle)(?=[^>]*aria-controls=(?:"home-reader-note-rest"|home-reader-note-rest))(?=[^>]*aria-expanded=(?:"true"|true))(?=[^>]*\bhidden\b)[^>]*>Read the full note</button>'
+    Message = 'expected the reader-note button to be initially hidden with a valid expanded-state and target for progressive enhancement'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)<p[^>]*class=(?:"[^"]*\bhome-front-page__welcome-links\b[^"]*"|''[^'']*\bhome-front-page__welcome-links\b[^'']*''|[^\s>]*\bhome-front-page__welcome-links\b[^\s>]*)[^>]*>\s*<a\b[^>]*href="?(?:https://outsideinprint\.org)?/about/"?[^>]*>\s*About the imprint\s*</a>\s*<a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>\s*About the author\s*</a>\s*</p>'
+    Message = 'expected reader-note links to show About the imprint first and About the author second'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-front-page__welcome-links.*?Start reading'
+    Message = 'expected the reader note to replace Start reading with About the author'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<p[^>]*class=(?:"[^"]*\blist-title\b[^"]*"|''[^'']*\blist-title\b[^'']*''|[^>]*\blist-title\b[^>]*)[^>]*>\s*Front Page\s*</p>'
-    Message = 'expected the homepage not to retain the retired visible Front Page label block'
+    Pattern = '(?s)The latest publication, alongside reader favorites and defining work\..*?home-v2-featured__lead.*?Read the piece.*?home-v2-featured__supporting'
+    Message = 'expected featured reading to explain the latest-publication lead and use a form-neutral reading action'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '25 reads'
+    Message = 'expected featured reading to hide counts below the 1,000 display threshold'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
-    Pattern = $studioHomepageOrderPattern
-    Message = $studioHomepageOrderMessage
+    Pattern = 'data-analytics-source-slot=(?:"homepage_v2_featured_lead"|homepage_v2_featured_lead)'
+    Message = 'expected the featured lead to expose its analytics source slot'
   },
   @{
     Path = 'public/index.html'
-    Pattern = $studioHomepageModulePattern
-    Message = $studioHomepageModuleMessage
+    Pattern = 'data-analytics-source-slot=(?:"homepage_v2_featured_supporting"|homepage_v2_featured_supporting)'
+    Message = 'expected supporting featured stories to expose their analytics source slot'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-v2-next__browse.*?Browse the archive.*?Search the library.*?Surprise me.*?home-v2-next__contribute.*?Write for Outside In Print\..*?href=(?:"|'''')?(?:https://outsideinprint\.org)?/contribute/(?:"|'''')?[^>]*>\s*Become a contributor'
+    Message = 'expected the lower homepage to provide compact reading paths and a prominent contributor call to action'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?i)\bhome-manifesto\b|Ask for the evidence\. Read past the headlines\. Think for yourself\.'
+    Message = 'expected the homepage to omit the retired imprint manifesto and closing motto'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?Books from Outside In Print.*?The Bookstore.*?Independent fiction and nonfiction\. EPUB editions direct from Outside In Print\..*?Browse the bookstore.*?american-nightmare-cover-v1\.6\.jpg.*?Robert V\. Ussley.*?The American Nightmare.*?Outside In Print EPUB.*?\$9\.99.*?parable-of-the-sheep-cover-v1\.0\.jpg.*?Robert V\. Ussley.*?The Parable of the Sheep.*?Outside In Print EPUB.*?\$9\.99.*?the-water-cycle-cover-v2\.0\.jpg.*?Robert V\. Ussley.*?The Water Cycle.*?Outside In Print EPUB.*?\$9\.99.*?</section>'
-    Message = 'expected the homepage bookstore shelf to retain the established $9.99 EPUB records alongside any new release'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?is)<section[^>]*class=(?:"[^"]*\bhome-bookstore\b[^"]*"|''[^'']*\bhome-bookstore\b[^'']*''|[^>]*\bhome-bookstore\b[^>]*)[^>]*>.*?(?:\bshop-cta\b|carousel|autoplay|direct bundle|stripe).*?</section>'
-    Message = 'expected the homepage bookstore shelf to remain internal-first and free of direct-buy, carousel, and stale checkout presentation'
+    Pattern = '(?i)\bhome-bookstore\b|\bdata-home-bookstore-card\b|\bentry-threads--home\b|\bhome-almanack\b|\bnewsletter-signup--home-ribbon\b|homepage_bobs_almanack|/shop/2045/'
+    Message = 'expected the homepage to omit the bookstore, collections, Almanack, and 2045 promotional modules'
     ShouldNotMatch = $true
   },
   @{
@@ -3082,247 +3128,30 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-bookstore.*?data-analytics-source-slot=(?:"homepage_bookstore_promo"|homepage_bookstore_promo).*?Browse the bookstore.*?/shop/the-american-nightmare-keep-dreaming-kid/.*?/shop/the-parable-of-the-sheep/.*?/shop/the-water-cycle/'
-    Message = 'expected homepage bookstore links to use the shared promotion source slot and internal OIP routes'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?nav-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/[^>]*>\s*<span[^>]*>Latest</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?nav-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>'
+    Message = 'expected desktop navigation to place Archive in Read and expose direct About, Bookstore, and Contribute links'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '"significantLink":\[[^\]]*"https://outsideinprint\.org/shop/"'
-    Message = 'expected homepage structured data to include the bookstore as a significant link'
+    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/[^>]*>\s*<span[^>]*>Latest</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>'
+    Message = 'expected the mobile ribbon to be Read, Explore, About with Archive and Bookstore under Read and Contribute under Explore'
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'Start Reading'
-    Message = 'expected the homepage not to render the retired curated Start Reading module label'
+    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?<span>Menu</span>'
+    Message = 'expected the mobile ribbon not to expose a generic Menu control'
     ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Check out the collections below\.'
-    Message = 'expected the homepage not to render the retired collection helper sentence'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Browse the Archive|Use Archive, Gallery, Collections, or Library when you want to move beyond the front page\.'
-    Message = 'expected the homepage not to render the retired archive navigation heading or helper copy'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?Essays.*?Gallery.*?Collections.*?Library.*?</section>'
-    Message = 'expected the homepage browse band to render the curated route set in editorial order'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bhome-browse\b[^"]*"|''[^'']*\bhome-browse\b[^'']*''|[^>]*\bhome-browse\b[^>]*)[^>]*>.*?home-browse__item-title>(?:Welcome|Dialogues|Feeling curious\?)<.*?</section>'
-    Message = 'expected the homepage browse band to omit retired Welcome, Dialogues, and Feeling curious? browse items'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)<section[^>]*class=(?:"[^"]*\bentry-threads--home\b[^"]*"|''[^'']*\bentry-threads--home\b[^'']*''|[^>]*\bentry-threads--home\b[^>]*)[^>]*>.*?Browse all collections.*?</section>'
-    Message = 'expected the homepage Start Reading module not to render the archive footer link'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'home-imprint-statement'
-    Message = 'expected the homepage generated output not to include the retired homepage imprint module'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-home-front-page-region=(?:"lead"|lead)'
-    Message = 'expected the homepage to render a dedicated lead-story region'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-home-front-page-region=(?:"secondary"|secondary)'
-    Message = 'expected the homepage to render a secondary editorial rail'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)data-home-front-page-region=(?:"lead"|lead).*?editorial-cartoon__trigger.*?</article>\s*<div\b[^>]*data-home-front-page-region=(?:"secondary"|secondary).*?data-home-front-page-region=(?:"extras"|extras).*?data-home-cartoon-recent.*?home-almanack-divider.*?home-almanack--lead'
-    Message = 'expected homepage document order to keep the lead illustration before the supporting stories, recent illustrations, and Almanack'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'home-recent-work'
-    Message = 'expected the homepage not to render the retired Recent Work module'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = $currentCartoonImagePattern
-    Message = 'expected the homepage generated output to include the current editorial cartoon image block'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-home-cartoon-recent'
-    Message = 'expected the homepage generated output to include the recent editorial cartoon grid'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-home-cartoon-recent-trigger'
-    Message = 'expected homepage recent cartoon cards to open the shared fullscreen lightbox'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)editorial-cartoon.*?View gallery'
-    Message = 'expected the homepage editorial cartoon block to link to the gallery'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-home-cartoon-lightbox'
-    Message = 'expected the homepage to include the fullscreen cartoon lightbox'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '<p id=(?:"home-cartoon-lightbox-title"|home-cartoon-lightbox-title) class=(?:"cartoon-lightbox__title"|cartoon-lightbox__title) data-home-cartoon-lightbox-title(?:="")?></p>'
-    Message = 'expected the homepage lightbox to use a non-heading dialog label'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '<h2 id=(?:"home-cartoon-lightbox-title"|home-cartoon-lightbox-title)'
-    Message = 'expected the homepage lightbox not to emit an empty heading'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-home-cartoon-lightbox-trigger'
-    Message = 'expected the homepage cartoon image to open the fullscreen lightbox'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-home-cartoon-lightbox-essay'
-    Message = 'expected the homepage fullscreen cartoon lightbox to expose a Read essay link'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = $currentCartoonEssayPattern
-    Message = 'expected the homepage cartoon trigger to carry the associated essay path'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-lightbox.*?data-home-cartoon-lightbox-image-button.*?addEventListener\("click",[A-Za-z_$][A-Za-z0-9_$]*\)'
-    Message = 'expected a second click on the fullscreen homepage cartoon image to close the lightbox'
-  },
-
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-essay-cartoon-lightbox'
-    Message = 'expected essay cartoon thumbnails to mount the shared fullscreen lightbox'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '<p id=(?:"essay-cartoon-lightbox-title"|essay-cartoon-lightbox-title) class=(?:"cartoon-lightbox__title"|cartoon-lightbox__title) data-essay-cartoon-lightbox-title(?:="")?></p>'
-    Message = 'expected the shared essay cartoon lightbox to use a non-heading dialog label'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '<h2 id=(?:"essay-cartoon-lightbox-title"|essay-cartoon-lightbox-title)'
-    Message = 'expected the shared essay cartoon lightbox not to emit an empty heading'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)data-essay-cartoon-lightbox-gallery.*?View in gallery'
-    Message = 'expected the essay cartoon fullscreen lightbox to expose a View in gallery action'
-  },
-
-  @{
-    Path = 'public/index.html'
-    Pattern = 'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below\.'
-    Message = 'expected the homepage not to retain the retired front-page intro blurb'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Ask for the evidence\. Read past the headlines\. Think for yourself\.'
-    Message = 'expected the homepage to carry the typeset manifesto motto above selected collections'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'A digital imprint of essays, reports, dialogues, and literature\.|Color over the lines\. Read beyond the feed\. Think for yourself\.'
-    Message = 'expected the homepage not to carry the retired imprint and manifesto copy'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)newsletter-signup--home-ribbon.*?Every Saturday.*?Bob(?:''|&#39;)s Almanack.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?Subscribe free.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage Bob(?:''|&#39;)s Almanack\. Outside In Print does not sell or rent subscriber information\. Unsubscribe anytime\.'
-    Message = 'expected the homepage Bob''s Almanack ribbon to state the canonical cadence, contents, permanent-free promise, sample, and privacy promise'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'data-analytics-source-slot="?homepage_bobs_almanack_offer"?'
-    Message = 'expected the homepage signup form to preserve the Bob''s Almanack analytics source slot'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)home-front-page__lead-action.*?newsletter-prompt--home.*?href=(?:"|'''')?#bobs-almanack-signup(?:"|'''')?.*?data-analytics-source-slot=(?:"|'''')?homepage_bobs_almanack_prompt(?:"|'''')?.*?Get Bob(?:''|&#39;)s Almanack every Saturday — free, no ads\.'
-    Message = 'expected the homepage lead to expose one quiet tracked jump to the full Bob''s Almanack signup'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*data-analytics-event=(?:"|'''')?internal_promo_click(?:"|'''')?[^>]*data-analytics-source-slot=(?:"|'''')?homepage_bobs_almanack_offer_sample_issue(?:"|'''')?'
-    Message = 'expected the homepage sample issue link to use the existing internal-promotion event and derived newsletter source slot'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?is)<section\b(?=[^>]*newsletter-signup--home-ribbon)[^>]*>.*?(?:Limited time|launch window|No spam|Easy to leave).*?</section>'
-    Message = 'expected the homepage newsletter proposition to omit retired temporary and vague trust copy'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Support independent journalism'
-    Message = 'expected the homepage not to retain the moved manifesto support line'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Also on the front page'
-    Message = 'expected the homepage not to retain the explicit front-page rail label'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Feeling curious\?'
-    Message = 'expected the homepage to expose the renamed exploratory route label'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'Read by Path'
-    Message = 'expected the homepage not to retain the retired path-chooser heading'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = 'journey-links'
-    Message = 'expected the homepage not to retain the old browse-next journey-links module'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>\s*Archive\s*</span>'
-    Message = 'expected the homepage masthead to expose the Archive label'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Read</span>.*?class=(?:"nav-disclosure[^>]*"|nav-disclosure[^\s>]*).*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/studio/[^>]*data-analytics-source-slot=(?:"primary_nav_studio"|primary_nav_studio)[^>]*>\s*<span[^>]*>Studio</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*data-analytics-source-slot=(?:"primary_nav_support"|primary_nav_support)[^>]*>\s*<span[^>]*>Support</span>'
-    Message = 'expected the homepage desktop ribbon to expose Read, Explore, Bookstore, About, Studio, and Support in order'
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?class=(?:"nav-mobile-menu__summary"|nav-mobile-menu__summary)[^>]*>.*?<span>Menu</span>.*?mobile-nav-read-heading.*?<span[^>]*>Latest</span>.*?<span[^>]*>Library</span>.*?<span[^>]*>Feeling curious\?</span>.*?mobile-nav-explore-heading.*?<span[^>]*>Gallery</span>.*?<span[^>]*>Apps & Tools</span>.*?<span[^>]*>Games</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>About</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Support</span>'
-    Message = 'expected the homepage mobile ribbon and Menu to expose the approved responsive hierarchy'
   },
   @{
     Path = 'public/index.html'
     Pattern = '(?s)aria-label="?Primary"?[^>]*>.*?(?:https://outsideinprint\.org)?/literature/'
     Message = 'expected the homepage masthead not to expose the retired literature section'
     ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/contribute/index.html'
+    Pattern = '(?s)<h1[^>]*>\s*Write for Outside In Print\s*</h1>.*?<h2[^>]*>\s*What Fits\s*</h2>.*?<h2[^>]*>\s*Start With a Pitch\s*</h2>.*?mailto:support@outsideinprint\.org\?subject=Contributor%20pitch%20for%20Outside%20In%20Print.*?Sending a pitch does not guarantee publication\.'
+    Message = 'expected the contributor page to explain editorial fit, pitch requirements, the contact path, and the publication caveat'
   },
   @{
     Path = 'public/index.html'
@@ -3479,8 +3308,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/404.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Support</span>.*?class=(?:"nav__mobile"|nav__mobile).*?<span[^>]*>Archive</span>.*?<span[^>]*>Collections</span>.*?<span[^>]*>Bookstore</span>.*?<span>Menu</span>.*?mobile-nav-imprint-heading.*?<span[^>]*>About</span>.*?<span[^>]*>Studio</span>.*?<span[^>]*>Support</span>'
-    Message = 'expected the 404 page to use the same grouped desktop and mobile Primary navigation'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>Contribute</span>.*?class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?<span[^>]*>Archive</span>.*?<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?<span[^>]*>Contribute</span>.*?<span[^>]*>About</span>'
+    Message = 'expected the 404 page to use the same grouped desktop and Read, Explore, About mobile navigation'
   },
   @{
     Path = 'public/start-here/index.html'
@@ -3781,18 +3610,23 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)Behind Outside In Print.*?<h2\b[^>]*>Independent writing, made and published by one person\.</h2>.*?I(?:\u2019|&rsquo;|&#8217;)m Robert V\. Ussley, author, designer, developer, and publisher of Outside In Print\. I publish independent essays, dialogues, reported analysis, and original books here\.'
-    Message = 'expected About to open with the approved personal introduction and one-person publication context'
+    Pattern = '(?s)Behind Outside In Print.*?<h2\b[^>]*>A place to stay with an idea\.</h2>.*?Independent writing on history, economics, culture, and public life\.'
+    Message = 'expected About to introduce the reader-focused purpose and subject territory'
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)Explore <a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>my writing</a> or <a\b[^>]*href="?(?:https://outsideinprint\.org)?/shop/"?[^>]*>browse the books</a>\..*?<h3\b[^>]*>At a glance</h3>.*?<dt\b[^>]*>Author</dt>'
-    Message = 'expected About to offer direct writing and bookstore links before the plain-language publication record'
+    Pattern = '(?s)<a\b[^>]*href="?#about-newsletter"?[^>]*>Join the weekly newsletter</a>.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/#home-v2-featured-title"?[^>]*>Explore the writing</a>.*?<h3\b[^>]*>At a glance</h3>.*?<dt\b[^>]*>Author</dt>'
+    Message = 'expected About to prioritize newsletter signup and featured writing before the publication record'
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)I built Outside In Print for writing worth returning to\. Published pieces remain available in a searchable archive, with dated editions and revision notes when they change\..*?Outside In Print is my independent imprint\. I write, design, develop, and publish the site myself\.'
-    Message = 'expected About body copy to explain the durable archive and sole ownership in first person'
+    Pattern = '(?s)Author and Publisher.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>.*?</a>.*?Add Your Voice.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/contribute/"?[^>]*>'
+    Message = 'expected About to connect readers with the author and invite contributor pitches'
+  },
+  @{
+    Path = 'public/about/index.html'
+    Pattern = '(?s)<section\b[^>]*id="?about-newsletter"?[^>]*>.*?<form\b[^>]*data-analytics-event="?newsletter_submit"?[^>]*data-analytics-source-slot="?about_newsletter"?[^>]*>.*?<input\b[^>]*type="?email"?'
+    Message = 'expected the About newsletter anchor to resolve to a tracked email signup form'
   },
   @{
     Path = 'public/about/index.html'
@@ -3812,8 +3646,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)Reading Map.*?Home.*?Browse collections.*?Search the library.*?Meet the author'
-    Message = 'expected the about page to keep a calm reading map into Home, Collections, Library, and the author archive'
+    Pattern = '(?s)Reading Map.*?Featured reading.*?Browse collections.*?Search the library.*?Meet the author'
+    Message = 'expected the about page to offer a reading map into featured work, collections, the library, and the author archive'
   },
   @{
     Path = 'public/shop/index.html'
@@ -3965,6 +3799,16 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = '(?s)href=(?:"#author-selected-title"|#author-selected-title).*?href=(?:"#author-newsletter"|#author-newsletter).*?id=(?:"author-selected-title"|author-selected-title).*?id=(?:"author-newsletter"|author-newsletter).*?id=(?:"author-recent-title"|author-recent-title).*?id=(?:"author-books-title"|author-books-title)'
+    Message = 'expected author profile links to reach Selected Writing and Newsletter, with writing and signup before books'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
+    Pattern = '(?s)<section[^>]*id=(?:"author-newsletter"|author-newsletter)[^>]*>.*?<form[^>]*action=(?:"https://buttondown\.com/api/emails/embed-subscribe/[^"]+"|https://buttondown\.com/api/emails/embed-subscribe/[^\s>]+)[^>]*data-analytics-event=(?:"newsletter_submit"|newsletter_submit)[^>]*data-analytics-source-slot=(?:"author_newsletter"|author_newsletter)'
+    Message = 'expected the author page to use the shared tracked newsletter signup form'
+  },
+  @{
+    Path = 'public/authors/robert-v-ussley/index.html'
     Pattern = '(?s)Browse archive.*?Browse collections.*?Search the library.*?Visit the Bookstore.*?About the imprint'
     Message = 'expected the refined author page to expose the compact route-based reading map'
   },
@@ -4101,8 +3945,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?You(?:&rsquo;|&#8217;|\u2019)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown'
-    Message = 'expected the sample Almanack issue to end with the canonical signup proposition and issue-exit analytics slot'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. No spam ever\. Unsubscribe anytime\..*?You(?:&rsquo;|&#8217;|\u2019)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Message = 'expected the sample Almanack issue to end with the plain-language weekly newsletter proposition and issue-exit analytics slot'
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
@@ -4261,11 +4105,6 @@ $requiredUxChecks = @(
     Pattern = '/images/essays/(the-bars-on-the-gum|the-cone-in-the-lane|the-seal-around-the-cap|the-curb-cut-at-the-corner)/hero\.png'
     Message = 'expected the June 27 Almanack issue not to use essay hero images for essay cards'
     ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)data-home-cartoon-recent.*?home-almanack.*?Bob(?:''|&#39;)s Almanack.*?September 12, 2026.*?In the Margins.*?Number.*?Document.*?Disaster Risk: Improvements Needed to Enhance FEMA(?:\u2019|&#39;|&rsquo;)s National Risk Index.*?Virtue.*?Read issue'
-    Message = 'expected the homepage Almanack insert to sit below recent cartoons and feature the compact margin ledger'
   },
   @{
     Path = 'public/almanack/2026-09-12/index.html'
@@ -4503,12 +4342,6 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-08-29/index.html'
     Pattern = 'class="almanack-read-link"[^>]*>Read<|class="almanack-read-link"[^>]*>Read\s*<'
     Message = 'expected the August 29 story cards and Worth Reprinting to omit separate Read labels'
-    ShouldNotMatch = $true
-  },
-  @{
-    Path = 'public/index.html'
-    Pattern = '(?s)<aside\b(?=[^>]*\bhome-almanack\b)[^>]*>.*?Collection.*?</aside>'
-    Message = 'expected the homepage Almanack insert not to render a generic collection label'
     ShouldNotMatch = $true
   },
   @{
@@ -4773,8 +4606,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown.*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected article aftermatter to place the full canonical Bob''s Almanack signup and article paths after the publication record'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\..*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
+    Message = 'expected article aftermatter to place the full weekly newsletter signup and article paths after the publication record'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
@@ -4860,7 +4693,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'newsletter-signup--article-exit'
-    Message = 'expected non-collection essays to render the full canonical Bob''s Almanack signup'
+    Message = 'expected non-collection essays to render the full weekly newsletter signup'
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
@@ -4870,7 +4703,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
-    Pattern = '(?is)<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?(?:Limited time|launch window|No spam|Easy to leave).*?</section>'
+    Pattern = '(?is)<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?(?:Limited time|launch window|Easy to leave).*?</section>'
     Message = 'expected article newsletter propositions to omit retired temporary and vague trust copy'
     ShouldNotMatch = $true
   }
@@ -5320,18 +5153,17 @@ foreach ($check in $requiredUxChecks) {
 }
 
 $exactPrimaryNavExpectations = @(
-  @{ Path = 'public/index.html'; Destination = '/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true },
-  @{ Path = 'public/archive/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
-  @{ Path = 'public/collections/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
-  @{ Path = 'public/library/index.html'; Destination = '/library/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true },
-  @{ Path = 'public/gallery/index.html'; Destination = '/gallery/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
-  @{ Path = 'public/apps/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
-  @{ Path = 'public/games/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
-  @{ Path = 'public/studio/index.html'; Destination = '/studio/'; GroupClass = $null; MenuCurrent = $true },
-  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
-  @{ Path = 'public/about/index.html'; Destination = '/about/'; GroupClass = $null; MenuCurrent = $true },
-  @{ Path = 'public/support/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true },
-  @{ Path = 'public/random/index.html'; Destination = '/random/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $true }
+  @{ Path = 'public/index.html'; Destination = '/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/archive/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/collections/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/library/index.html'; Destination = '/library/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/gallery/index.html'; Destination = '/gallery/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
+  @{ Path = 'public/apps/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
+  @{ Path = 'public/games/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
+  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/about/index.html'; Destination = '/about/'; GroupClass = $null; MobileGroupClass = $null },
+  @{ Path = 'public/contribute/index.html'; Destination = '/contribute/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--explore' },
+  @{ Path = 'public/random/index.html'; Destination = '/random/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' }
 )
 
 foreach ($expectation in $exactPrimaryNavExpectations) {
@@ -5375,22 +5207,33 @@ foreach ($expectation in $exactPrimaryNavExpectations) {
     }
   }
 
-  $mobileMenuCurrent = @(
+  $mobileGroupClass = [string]$expectation.MobileGroupClass
+  $currentMobileGroups = @(
     Get-OpenTags -Html $primaryNavHtml -TagName 'details' |
-      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'nav-mobile-menu--current' }
-  ).Count -eq 1
-  if ($mobileMenuCurrent -ne [bool]$expectation.MenuCurrent) {
-    $uxIssues.Add("$relativePath => mobile Menu current-section state did not match the exact destination placement")
+      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'nav-mobile-disclosure--current' }
+  )
+  if ([string]::IsNullOrWhiteSpace($mobileGroupClass)) {
+    if ($currentMobileGroups.Count -ne 0) {
+      $uxIssues.Add("$relativePath => direct exact destination '$destinationPath' must not activate a mobile disclosure")
+    }
+  }
+  else {
+    $matchingMobileGroups = @(
+      $currentMobileGroups |
+        Where-Object { Test-TagHasClass -Tag $_ -ClassName $mobileGroupClass }
+    )
+    if ($matchingMobileGroups.Count -ne 1 -or $currentMobileGroups.Count -ne 1) {
+      $uxIssues.Add("$relativePath => exact destination '$destinationPath' must activate only $mobileGroupClass on mobile")
+    }
   }
 }
 
 $descendantPrimaryNavExpectations = @(
-  @{ Path = 'public/essays/the-risk-management-buffet/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
-  @{ Path = 'public/collections/the-ledger/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MenuCurrent = $false },
-  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MenuCurrent = $false },
-  @{ Path = 'public/apps/bucks-machine/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
-  @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MenuCurrent = $true },
-  @{ Path = 'public/support/cancellation-refunds/index.html'; Destination = '/support/'; GroupClass = $null; MenuCurrent = $true }
+  @{ Path = 'public/essays/the-risk-management-buffet/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/collections/the-ledger/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/apps/bucks-machine/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
+  @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' }
 )
 
 foreach ($expectation in $descendantPrimaryNavExpectations) {
@@ -5432,18 +5275,30 @@ foreach ($expectation in $descendantPrimaryNavExpectations) {
     }
   }
 
-  $mobileMenuCurrent = @(
+  $mobileGroupClass = [string]$expectation.MobileGroupClass
+  $currentMobileGroups = @(
     Get-OpenTags -Html $primaryNavHtml -TagName 'details' |
-      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'nav-mobile-menu--current' }
-  ).Count -eq 1
-  if ($mobileMenuCurrent -ne [bool]$expectation.MenuCurrent) {
-    $uxIssues.Add("$relativePath => mobile Menu current-section state did not match the location of the active destination")
+      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'nav-mobile-disclosure--current' }
+  )
+  if ([string]::IsNullOrWhiteSpace($mobileGroupClass)) {
+    if ($currentMobileGroups.Count -ne 0) {
+      $uxIssues.Add("$relativePath => direct descendant destination '$destinationPath' must not activate a mobile disclosure")
+    }
+  }
+  else {
+    $matchingMobileGroups = @(
+      $currentMobileGroups |
+        Where-Object { Test-TagHasClass -Tag $_ -ClassName $mobileGroupClass }
+    )
+    if ($matchingMobileGroups.Count -ne 1 -or $currentMobileGroups.Count -ne 1) {
+      $uxIssues.Add("$relativePath => descendant destination '$destinationPath' must activate only $mobileGroupClass on mobile")
+    }
   }
 }
 
 if ($targetPageHtml.ContainsKey('public/404.html')) {
   $notFoundPrimaryNav = Get-PrimaryNavHtml -Html ([string]$targetPageHtml['public/404.html'])
-  if ($notFoundPrimaryNav -match 'aria-current\s*=|nav-link--current-section|nav-disclosure--current|nav-mobile-menu--current') {
+  if ($notFoundPrimaryNav -match 'aria-current\s*=|nav-link--current-section|nav-disclosure--current|nav-mobile-disclosure--current') {
     $uxIssues.Add('public/404.html => primary navigation must not claim an exact page or current section')
   }
 }
@@ -5451,274 +5306,105 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
 foreach ($forbiddenPath in @(
   'public/shipping-returns/index.html'
 )) {
-  $fullForbiddenPath = Join-Path $repoRoot $forbiddenPath
+  $fullForbiddenPath = Join-Path $SiteDir ($forbiddenPath -replace '^public/', '')
   if (Test-Path -LiteralPath $fullForbiddenPath -PathType Leaf) {
     $uxIssues.Add("$forbiddenPath => expected excluded route to remain absent")
   }
 }
 
-$home2045ProductDraft = Get-FrontMatterScalarFromMarkdownFile -Path (Join-Path $repoRoot 'content/shop/2045/_index.md') -Key 'draft'
-$home2045SampleDraft = Get-FrontMatterScalarFromMarkdownFile -Path (Join-Path $repoRoot 'content/shop/2045/sample.md') -Key 'draft'
-if ($home2045ProductDraft -cne $home2045SampleDraft) {
-  $uxIssues.Add('2045 product and sample draft states must move together for homepage bookstore discovery.')
-}
-$home2045Published = $home2045ProductDraft -ceq 'false' -and $home2045SampleDraft -ceq 'false'
-$homeBookstoreTargets = @(
-  @{ Href = '/shop/'; Slug = 'bookstore'; Title = 'The Bookstore'; Count = 1 },
-  @{ Href = '/shop/the-american-nightmare-keep-dreaming-kid/'; Slug = 'the-american-nightmare-keep-dreaming-kid'; Title = 'The American Nightmare: Keep Dreaming, Kid'; Count = 2 },
-  @{ Href = '/shop/the-parable-of-the-sheep/'; Slug = 'the-parable-of-the-sheep'; Title = 'The Parable of the Sheep'; Count = 2 },
-  @{ Href = '/shop/the-water-cycle/'; Slug = 'the-water-cycle'; Title = 'The Water Cycle: Risk, Infrastructure, and Public Memory'; Count = 2 }
-)
-
-if ($home2045Published) {
-  $homeBookstoreTargets += @{ Href = '/shop/2045/'; Slug = '2045'; Title = '2045'; Count = 2 }
-}
-$expectedHomeBookstoreLinkCount = ($homeBookstoreTargets | Measure-Object -Property Count -Sum).Sum
-$expectedHomeBookstoreCardCount = $homeBookstoreTargets.Count - 1
-
 if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeIndexHtml = [string]$targetPageHtml['public/index.html']
-  $homeWelcomeOpenings = @([regex]::Matches($homeIndexHtml, '<div\b[^>]*>', 'IgnoreCase') | Where-Object {
-    Test-TagHasClass -Tag $_.Value -ClassName 'home-front-page__orientation'
-  })
-  if ($homeWelcomeOpenings.Count -ne 1) {
-    $uxIssues.Add("public/index.html => expected exactly one signed welcome, found $($homeWelcomeOpenings.Count)")
+  $homeArticles = @(Get-OpenTags -Html $homeIndexHtml -TagName 'article')
+  $homeLeadCards = @($homeArticles | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__lead' })
+  $homeSupportingCards = @($homeArticles | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__item' })
+  if ($homeLeadCards.Count -ne 1) {
+    $uxIssues.Add("public/index.html => expected exactly one featured lead card, found $($homeLeadCards.Count)")
   }
-  else {
-    $homeWelcome = [regex]::Match($homeIndexHtml.Substring($homeWelcomeOpenings[0].Index), '(?is)^<div\b[^>]*>.*?</div>')
-    $homeWelcomeParts = @([regex]::Matches($homeWelcome.Value, '(?is)<p\b[^>]*>.*?(?:</p>|(?=<p\b|</div>))'))
-    $homeWelcomeExpectedParts = @(
-      @{ ClassName = 'home-front-page__welcome-label'; Text = 'A note to the reader' },
-      @{ ClassName = 'home-front-page__welcome-copy'; Text = "I’m Robert. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to. Pick something that catches your eye. I’m glad you’re here." },
-      @{ ClassName = 'home-front-page__welcome-signature'; Text = '— Robert V. Ussley' }
-    )
-    if ($homeWelcomeParts.Count -ne $homeWelcomeExpectedParts.Count) {
-      $uxIssues.Add('public/index.html => signed welcome must contain only its label, approved copy, and signature paragraphs')
-    }
-    else {
-      for ($partIndex = 0; $partIndex -lt $homeWelcomeExpectedParts.Count; $partIndex++) {
-        $expectedPart = $homeWelcomeExpectedParts[$partIndex]
-        $actualPart = $homeWelcomeParts[$partIndex].Value
-        $actualText = [regex]::Replace((Convert-HtmlFragmentToText -Html $actualPart), '\s+', ' ')
-        if (-not (Test-TagHasClass -Tag $actualPart -ClassName $expectedPart.ClassName) -or $actualText -cne $expectedPart.Text) {
-          $uxIssues.Add("public/index.html => signed welcome paragraph '$($expectedPart.ClassName)' must retain its approved order and text")
-        }
-      }
-      $signatureLinks = @(Get-OpenTags -Html $homeWelcomeParts[2].Value -TagName 'a')
-      $expectedAboutPath = $ExpectedHomePath.TrimEnd('/') + '/about/'
-      if ($signatureLinks.Count -ne 1 -or (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $signatureLinks[0] -Name 'href')) -cne $expectedAboutPath) {
-        $uxIssues.Add("public/index.html => welcome signature must link Robert V. Ussley to '$expectedAboutPath'")
-      }
-    }
-    $homeTitle = [regex]::Match($homeIndexHtml, '(?is)<h1\b[^>]*>.*?</h1>')
-    $homeStories = @([regex]::Matches($homeIndexHtml, '<section\b[^>]*>', 'IgnoreCase') | Where-Object {
-      Test-TagHasClass -Tag $_.Value -ClassName 'home-front-page__stories'
-    })
-    if (-not $homeTitle.Success -or $homeWelcomeOpenings[0].Index -lt ($homeTitle.Index + $homeTitle.Length) -or $homeStories.Count -ne 1 -or ($homeWelcomeOpenings[0].Index + $homeWelcome.Length) -gt $homeStories[0].Index) {
-      $uxIssues.Add('public/index.html => signed welcome must follow the site h1 and finish before the story grid')
-    }
+  if ($homeSupportingCards.Count -ne 4) {
+    $uxIssues.Add("public/index.html => expected exactly four supporting featured cards, found $($homeSupportingCards.Count)")
   }
-  $homeRegions = @([regex]::Matches($homeIndexHtml, '<(?:article|div)\b[^>]*\bdata-home-front-page-region\s*=[^>]*>', 'IgnoreCase') | ForEach-Object {
-    Get-AttributeValue -Tag $_.Value -Name 'data-home-front-page-region'
-  })
-  if (($homeRegions -join '|') -cne 'lead|secondary|extras') {
-    $uxIssues.Add("public/index.html => expected exactly one lead, secondary, and extras region in document order; found '$($homeRegions -join ', ')'")
-  }
+
   $homeAnchors = @(Get-OpenTags -Html $homeIndexHtml -TagName 'a')
   $homeLeadPaths = @($homeAnchors | Where-Object {
-    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_selected_hero'
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_v2_featured_lead'
   } | ForEach-Object { Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href') })
   $homeSupportingPaths = @($homeAnchors | Where-Object {
-    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_selected_core'
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_v2_featured_supporting'
   } | ForEach-Object { Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href') })
-  if ($homeLeadPaths.Count -ne 1) {
-    $uxIssues.Add("public/index.html => expected one latest-publication lead, found $($homeLeadPaths.Count)")
-  }
-
-  $publishedDialogues = @(foreach ($dialogueFile in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/essays/dialogues') -File -Filter '*.md') {
-    $dialoguePath = Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'url'
-    if ([string]::IsNullOrWhiteSpace($dialoguePath) -or $homeLeadPaths -contains $dialoguePath) { continue }
-    if (-not (Test-Path -LiteralPath (Join-Path $SiteDir ($dialoguePath.Trim('/') + '/index.html')) -PathType Leaf)) { continue }
-    if ((Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'draft') -ceq 'true') { continue }
-    [pscustomobject]@{
-      Path = $dialoguePath
-      SourcePath = $dialogueFile.FullName
-      Date = ConvertTo-OipDateTimeOffset -Value (Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'date')
-      Title = Get-FrontMatterScalarFromMarkdownFile -Path $dialogueFile.FullName -Key 'title'
+  # Archive membership supplies the published reading forms; Hugo owns actual release timestamps.
+  $archiveReadingPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+  foreach ($archiveFile in @(Get-ChildItem -LiteralPath (Join-Path $SiteDir 'archive') -Filter 'index.html' -File -Recurse)) {
+    $archiveHtml = Get-Content -LiteralPath $archiveFile.FullName -Raw -Encoding utf8
+    foreach ($match in [regex]::Matches($archiveHtml, '<div\b[^>]*class=(?:"t"|t)[^>]*>\s*(?<anchor><a\b[^>]*>)')) {
+      [void]$archiveReadingPaths.Add((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $match.Groups['anchor'].Value -Name 'href')))
     }
-  })
-  $latestSupportingDialogue = @($publishedDialogues | Sort-Object @{ Expression = { $_.Date }; Descending = $true }, @{ Expression = { $_.Title }; Ascending = $true } | Select-Object -First 1)
-  $expectedSupportingPaths = @(
-    '/essays/jack-stratton-and-the-vulfpeck-model/'
-    if ($latestSupportingDialogue.Count -gt 0) { $latestSupportingDialogue[0].Path }
-    '/essays/what-is-risk-a-four-part-framework/'
-    '/essays/uncrustables-the-billion-dollar-peanut-butter-empire/'
-  ) | Where-Object { $homeLeadPaths -notcontains $_ }
+  }
+  $selectionHugo = Resolve-PinnedHugo -RepoRoot $repoRoot
+  $selectionConfig = if ($env:OIP_HUGO_CONFIG) { $env:OIP_HUGO_CONFIG } else { 'hugo.toml' }
+  $publishedInventory = & $selectionHugo.Command list published --source $repoRoot --config $selectionConfig
+  if ($LASTEXITCODE -ne 0) { throw 'Hugo published inventory failed during homepage selection validation.' }
+  $selectionObservationTime = [DateTimeOffset]::UtcNow
+  $publishedReadingPaths = @($publishedInventory | ConvertFrom-Csv | Where-Object {
+    $_.kind -ceq 'page' -and $archiveReadingPaths.Contains((Get-SitePathFromHref -Href $_.permalink)) -and
+    [DateTimeOffset]::Parse($_.date) -le $selectionObservationTime -and
+    [DateTimeOffset]::Parse($_.publishDate) -le $selectionObservationTime
+  } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title |
+    ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
+  $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
+  $preferredSupportingPaths = @(
+    '/essays/why-a-return-to-the-gold-standard-would-break-the-economy/',
+    '/syd-and-oliver/what-i-had/',
+    '/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/',
+    '/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/'
+  )
+  $expectedSupportingPaths = @(@($preferredSupportingPaths + $publishedReadingPaths) | Where-Object {
+    $_ -notin $expectedLeadPaths -and $_ -in $publishedReadingPaths
+  } | Select-Object -Unique | Select-Object -First 4)
+  if (($homeLeadPaths -join '|') -cne ($expectedLeadPaths -join '|')) {
+    $uxIssues.Add("public/index.html => expected newest published reading piece '$($expectedLeadPaths -join ', ')' as the sole lead, found '$($homeLeadPaths -join ', ')'")
+  }
   if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
-    $uxIssues.Add("public/index.html => expected profile, latest available dialogue, risk framework, and Uncrustables in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
+    $uxIssues.Add("public/index.html => expected the four approved supporting pieces in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
   }
-  $homeStoryPaths = @($homeLeadPaths) + @($homeSupportingPaths)
-  if (@($homeStoryPaths | Select-Object -Unique).Count -ne $homeStoryPaths.Count) {
-    $uxIssues.Add('public/index.html => the lead and supporting selections must not repeat a piece')
+
+  $metricYaml = Get-Content -LiteralPath (Join-Path $repoRoot 'data/homepage_metrics.yaml') -Raw -Encoding utf8
+  $badgeThreshold = [int]([regex]::Match($metricYaml, '(?m)^reader_threshold: (\d+)$').Groups[1].Value)
+  $expectedBadgeCount = 0
+  foreach ($metricMatch in [regex]::Matches($metricYaml, '(?ms)^  "(?<route>[^"]+)":\r?\n(?<record>.*?)(?=^  "|\z)')) {
+    $metricValue = [int]([regex]::Match($metricMatch.Groups['record'].Value, '(?m)^    value: (\d+)\r?$').Groups[1].Value)
+    if ($metricValue -ge $badgeThreshold -and $metricMatch.Groups['route'].Value -in @($expectedLeadPaths + $expectedSupportingPaths)) {
+      $expectedBadgeCount++
+    }
   }
-  $selectedCartoons = @(Get-PublishedCartoonEntries -RepoRoot $repoRoot | Where-Object {
-    ($_.PSObject.Properties.Name -contains 'essay') -and $homeSupportingPaths -contains $_.essay
+  $readerBadges = [regex]::Matches($homeIndexHtml, '\d+(?:\.\d+)?K? reads', 'IgnoreCase').Count
+  if ($readerBadges -ne $expectedBadgeCount) {
+    $uxIssues.Add("public/index.html => expected $expectedBadgeCount qualifying source-backed reads badges, found $readerBadges")
+  }
+  $homeNoteMatch = [regex]::Match($homeIndexHtml, '(?s)<p[^>]*class=(?:"home-front-page__welcome-copy"|home-front-page__welcome-copy)[^>]*>(?<copy>.*?)</p>')
+  if (-not $homeNoteMatch.Success -or [System.Net.WebUtility]::HtmlDecode([regex]::Replace($homeNoteMatch.Groups['copy'].Value, '<[^>]+>', '')).Trim() -cne $expectedHomeReaderNote) {
+    $uxIssues.Add('public/index.html => the full original note must remain in the rendered paragraph without wording changes')
+  }
+  if ($homeIndexHtml -match 'Medium reads') {
+    $uxIssues.Add('public/index.html => featured reader badges should omit the Medium label')
+  }
+
+  $contributorCtas = @($homeAnchors | Where-Object {
+    (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq '/contribute/' -and
+    (Test-TagHasClass -Tag $_ -ClassName 'home-v2-next__cta')
   })
-  foreach ($selectedCartoon in $selectedCartoons) {
-    $thumbnailPattern = '<button\b(?=[^>]*\bdata-essay-cartoon-lightbox-trigger\b)(?=[^>]*data-cartoon-slug=(?:"' + [regex]::Escape($selectedCartoon.slug) + '"|' + [regex]::Escape($selectedCartoon.slug) + ')(?:\s|>))[^>]*>'
-    if ($homeIndexHtml -notmatch $thumbnailPattern) {
-      $uxIssues.Add("public/index.html => selected story with cartoon '$($selectedCartoon.slug)' must retain its lightbox thumbnail")
-    }
-  }
-  $supportingSourcePaths = @{
-    '/essays/jack-stratton-and-the-vulfpeck-model/' = Join-Path $repoRoot 'content/essays/jack-stratton-and-the-vulfpeck-model.md'
-    '/essays/what-is-risk-a-four-part-framework/' = Join-Path $repoRoot 'content/essays/what-is-risk-a-four-part-framework.md'
-    '/essays/uncrustables-the-billion-dollar-peanut-butter-empire/' = Join-Path $repoRoot 'content/essays/uncrustables-the-billion-dollar-peanut-butter-empire.md'
-  }
-  if ($latestSupportingDialogue.Count -gt 0) {
-    $supportingSourcePaths[$latestSupportingDialogue[0].Path] = $latestSupportingDialogue[0].SourcePath
-  }
-  $heroThumbnailMatches = @([regex]::Matches($homeIndexHtml, '(?is)<a\b(?=[^>]*\bhome-hero-thumb\b)[^>]*>.*?</a>'))
-  foreach ($supportingPath in $homeSupportingPaths) {
-    $heroThumbnails = @($heroThumbnailMatches | Where-Object {
-      (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_.Value -Name 'href')) -ceq $supportingPath
-    })
-    $hasPublishedCartoon = @($selectedCartoons | Where-Object { $_.essay -ceq $supportingPath }).Count -gt 0
-    $sourcePath = $supportingSourcePaths[$supportingPath]
-    $featuredImage = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image'
-    $expectsHeroThumbnail = -not $hasPublishedCartoon -and -not [string]::IsNullOrWhiteSpace($featuredImage)
-    $expectedThumbnailCount = if ($expectsHeroThumbnail) { 1 } else { 0 }
-    if ($heroThumbnails.Count -ne $expectedThumbnailCount) {
-      $uxIssues.Add("public/index.html => supporting story '$supportingPath' expected $expectedThumbnailCount hero fallback links, found $($heroThumbnails.Count)")
-    }
-    if (-not $expectsHeroThumbnail -or $heroThumbnails.Count -ne 1) { continue }
-
-    $thumbnailHtml = $heroThumbnails[0].Value
-    $title = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'title'
-    $actualLabel = [System.Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $thumbnailHtml -Name 'aria-label'))
-    if ($actualLabel -cne "Read $title") {
-      $uxIssues.Add("public/index.html => hero thumbnail for '$supportingPath' must identify its reading destination")
-    }
-    if ($thumbnailHtml -match 'data-gallery|data-essay-cartoon-lightbox-trigger|data-cartoon-slug') {
-      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must not claim Gallery or lightbox behavior")
-    }
-    $thumbnailImages = @(Get-OpenTags -Html $thumbnailHtml -TagName 'img')
-    if ($thumbnailImages.Count -ne 1) {
-      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must contain exactly one image")
-      continue
-    }
-    $imageTag = $thumbnailImages[0]
-    $lookupRef = ($featuredImage -replace '^oip-image:', '').Trim()
-    $imageLookupKeys = @($lookupRef, $lookupRef.TrimStart('/'))
-    if ($lookupRef.StartsWith('images/')) { $imageLookupKeys += "/$lookupRef" }
-    $managedHeroId = ''
-    foreach ($imageLookupKey in $imageLookupKeys) {
-      if ($imageManifest.assets.ContainsKey($imageLookupKey)) {
-        $managedHeroId = $imageLookupKey
-        break
-      }
-      if ($imageManifest.aliases.ContainsKey($imageLookupKey)) {
-        $managedHeroId = [string]$imageManifest.aliases[$imageLookupKey]
-        break
-      }
-    }
-    $expectedSource = if ($managedHeroId) {
-      Get-ManagedVisibleImagePath -Manifest $imageManifest -AssetId $managedHeroId
-    } else { $featuredImage }
-    if ((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $imageTag -Name 'src')) -cne $expectedSource) {
-      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must use its existing featured_image '$featuredImage'")
-    }
-    if ($imageTag -notmatch '(?i)\salt(?:\s|=|/?>)' -or
-        -not [string]::IsNullOrEmpty((Get-AttributeValue -Tag $imageTag -Name 'alt')) -or
-        (Get-AttributeValue -Tag $imageTag -Name 'loading') -cne 'lazy' -or
-        (Get-AttributeValue -Tag $imageTag -Name 'decoding') -cne 'async') {
-      $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must use empty alt text, lazy loading, and async decoding")
-    }
-    foreach ($dimension in @('width', 'height')) {
-      if ((Get-AttributeValue -Tag $imageTag -Name $dimension) -notmatch '^[1-9]\d*$') {
-        $uxIssues.Add("public/index.html => hero fallback for '$supportingPath' must reserve its intrinsic $dimension")
-      }
-    }
-  }
-  $bookstoreSectionMatch = [regex]::Match($homeIndexHtml, '(?is)<section\b(?=[^>]*\bhome-bookstore\b)[^>]*>.*?</section>')
-  if (-not $bookstoreSectionMatch.Success) {
-    $uxIssues.Add('public/index.html => expected a rendered homepage bookstore section')
-  }
-  else {
-    $bookstoreAnchors = @(Get-OpenTags -Html $bookstoreSectionMatch.Value -TagName 'a')
-    if ($bookstoreAnchors.Count -ne $expectedHomeBookstoreLinkCount) {
-      $uxIssues.Add("public/index.html => expected exactly $expectedHomeBookstoreLinkCount homepage bookstore links, found $($bookstoreAnchors.Count)")
-    }
-
-    foreach ($anchor in $bookstoreAnchors) {
-      $href = Get-AttributeValue -Tag $anchor -Name 'href'
-      $target = @($homeBookstoreTargets | Where-Object { $_.Href -ceq $href }) | Select-Object -First 1
-      if (-not $target) {
-        $uxIssues.Add("public/index.html => unexpected homepage bookstore destination '$href'")
-        continue
-      }
-
-      foreach ($attributeExpectation in @(
-        @{ Name = 'data-analytics-event'; Value = 'internal_promo_click' },
-        @{ Name = 'data-analytics-source-slot'; Value = 'homepage_bookstore_promo' },
-        @{ Name = 'data-analytics-slug'; Value = $target.Slug },
-        @{ Name = 'data-analytics-title'; Value = $target.Title },
-        @{ Name = 'data-analytics-section'; Value = 'Bookstore' },
-        @{ Name = 'data-analytics-path'; Value = $target.Href }
-      )) {
-        $actualValue = Get-AttributeValue -Tag $anchor -Name $attributeExpectation.Name
-        if ($actualValue -cne $attributeExpectation.Value) {
-          $uxIssues.Add("public/index.html => homepage bookstore link '$href' expected $($attributeExpectation.Name)='$($attributeExpectation.Value)', found '$actualValue'")
-        }
-      }
-    }
-
-    foreach ($target in $homeBookstoreTargets) {
-      $matchingAnchorCount = @($bookstoreAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq $target.Href }).Count
-      if ($matchingAnchorCount -ne $target.Count) {
-        $uxIssues.Add("public/index.html => expected $($target.Count) homepage bookstore links to '$($target.Href)', found $matchingAnchorCount")
-      }
-    }
+  if ($contributorCtas.Count -ne 1) {
+    $uxIssues.Add("public/index.html => expected exactly one featured contributor CTA, found $($contributorCtas.Count)")
   }
 
-  $bookstoreCardCount = [regex]::Matches($homeIndexHtml, '\bdata-home-bookstore-card(?:[=\s>])', 'IgnoreCase').Count
-  if ($bookstoreCardCount -ne $expectedHomeBookstoreCardCount) {
-    $uxIssues.Add("public/index.html => expected exactly $expectedHomeBookstoreCardCount homepage bookstore cards, found $bookstoreCardCount")
-  }
-
-  $currentSlugPattern = 'data-cartoon-slug=(?:"' + [regex]::Escape($currentCartoonSlug) + '"|' + [regex]::Escape($currentCartoonSlug) + ')'
-  $currentTriggerMatch = [regex]::Match($homeIndexHtml, '<button\b(?=[^>]*\beditorial-cartoon__trigger\b)(?=[^>]*' + $currentSlugPattern + ')[^>]*>', 'IgnoreCase')
-  $recentGridIndex = $homeIndexHtml.IndexOf('data-home-cartoon-recent', [System.StringComparison]::Ordinal)
-
-  if (-not $currentTriggerMatch.Success) {
-    $uxIssues.Add('public/index.html => expected the current homepage cartoon trigger to keep the current data slug')
-  }
-  elseif ($recentGridIndex -lt 0 -or $currentTriggerMatch.Index -gt $recentGridIndex) {
-    $uxIssues.Add('public/index.html => expected the current cartoon block to render before the recent cartoon grid')
-  }
-
-  $recentMatches = @([regex]::Matches($homeIndexHtml, '<figure\b(?=[^>]*\beditorial-cartoon-recent__item\b)(?=[^>]*\bdata-home-cartoon-recent-card\b)[^>]*data-cartoon-slug=(?:"([^">]+)"|([^\s>]+))', 'IgnoreCase'))
-  if ($recentMatches.Count -ne [Math]::Min(2, $recentHomeCartoonSlugs.Count)) {
-    $uxIssues.Add("public/index.html => expected exactly $([Math]::Min(2, $recentHomeCartoonSlugs.Count)) recent homepage cartoon cards, found $($recentMatches.Count)")
-  }
-  else {
-    $actualRecentSlugs = @($recentMatches | ForEach-Object {
-      if ($_.Groups[1].Success) { $_.Groups[1].Value } else { $_.Groups[2].Value }
-    })
-    $expectedRecentSlugs = @($recentHomeCartoonSlugs | Select-Object -First $recentMatches.Count)
-    if (($actualRecentSlugs -join '|') -ne ($expectedRecentSlugs -join '|')) {
-      $uxIssues.Add("public/index.html => expected recent homepage cartoons in date order '$($expectedRecentSlugs -join ', ')', found '$($actualRecentSlugs -join ', ')'")
-    }
-  }
-
-  if ($currentCartoonSlug -eq 'lines-of-fire' -and $homeIndexHtml -notmatch 'data-title=(?:"Lines of Fire"|Lines\ of\ Fire)') {
-    $uxIssues.Add('public/index.html => expected Lines of Fire to remain the current homepage cartoon')
-  }
-  if (($recentHomeCartoonSlugs | Select-Object -First 1) -eq 'cloched-for-business' -and $homeIndexHtml -notmatch '<figure\b(?=[^>]*\beditorial-cartoon-recent__item\b)(?=[^>]*data-cartoon-slug=(?:"cloched-for-business"|cloched-for-business))(?s).*?<figcaption><span>Cloched for Business</span></figcaption>') {
-    $uxIssues.Add('public/index.html => expected Cloched for Business to be the first recent homepage cartoon card')
+  $retiredHomepageModules = [regex]::Matches(
+    $homeIndexHtml,
+    '\b(?:home-bookstore|home-almanack|entry-threads--home|newsletter-signup--home-ribbon|data-home-cartoon-recent)\b',
+    'IgnoreCase'
+  ).Count
+  if ($retiredHomepageModules -ne 0) {
+    $uxIssues.Add("public/index.html => expected no retired homepage commerce, Almanack, collections, or cartoon modules; found $retiredHomepageModules markers")
   }
 }
-
 $bookstoreProducts = @(
   @{
     DetailPath = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
@@ -5854,14 +5540,14 @@ foreach ($articlePath in @(
   $journeyIndex = $articleHtml.IndexOf('journey-links--article-exit', [System.StringComparison]::Ordinal)
   if ($recordIndex -lt 0 -or $newsletterIndex -lt 0 -or $journeyIndex -lt 0 -or
       $recordIndex -ge $newsletterIndex -or $newsletterIndex -ge $journeyIndex) {
-    $uxIssues.Add("$articlePath => expected publication record, full Bob's Almanack signup, and article paths in that order")
+    $uxIssues.Add("$articlePath => expected publication record, full weekly newsletter signup, and article paths in that order")
   }
 
-  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?One compact Saturday email with new essays, original visuals, plus some cold hard facts\. Free\. No ads\..*?Bob(?:''|&#39;)s Almanack will remain free\. No ads, ever\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown') {
-    $uxIssues.Add("$articlePath => expected the canonical Bob's Almanack cadence, contents, permanent-free, sample, and privacy proposition")
+  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
+    $uxIssues.Add("$articlePath => expected the weekly newsletter cadence, contents, no-spam promise, sample, and privacy proposition")
   }
 
-  if ($newsletterHtml -match '(?i)Limited time|launch window|No spam|Easy to leave') {
+  if ($newsletterHtml -match '(?i)Limited time|launch window|Easy to leave') {
     $uxIssues.Add("$articlePath => retained retired newsletter trust copy")
   }
 

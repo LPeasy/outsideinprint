@@ -24,7 +24,7 @@ For a selected daily back-archive batch, run the focused import preflight before
 
 The preflight targets the recurring Medium residue from the April 2026 daily runs: smart punctuation/mojibake and dash artifacts, remote Medium body images, imported discussion/read-more prompts, and ambiguous pseudo-heading or list formatting. It fails on concrete publish blockers and leaves ambiguous structural formatting as warnings unless `-StrictWarnings` is supplied.
 
-2. Start with `batch_1` pieces that are also surfaced on the homepage, homepage reading threads, or featured collections.
+2. Start with `batch_1` pieces that are also surfaced in the active homepage Featured Reading routes, focused article continuations, or public collections.
 
 3. Apply safe structural cleanup first.
 
@@ -63,8 +63,8 @@ The essay guardrail wrapper also runs the focused legacy import preflight for th
 
 The audit ranks pieces with these repo-local signals:
 
-- `featured: true` for homepage-selected essays
-- direct links from homepage editorial surfaces
+- legacy `featured: true` metadata as a historical prominence signal
+- direct links from the active homepage Featured Reading surface
 - `start_here` essays from featured collections
 - membership in featured collections
 - membership in any collection

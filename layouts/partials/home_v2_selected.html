@@ -1,0 +1,50 @@
+{{- $supportingRoutes := slice
+  "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/"
+  "/syd-and-oliver/what-i-had/"
+  "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/"
+  "/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/"
+-}}
+{{- $now := now -}}
+{{- $eligible := slice -}}
+{{- range site.RegularPages -}}
+  {{- $kind := partial "archive/longform-kind.html" . -}}
+  {{- $published := and (not .Draft) (le .Date.Unix $now.Unix) (le .PublishDate.Unix $now.Unix) -}}
+  {{- $unexpired := or .ExpiryDate.IsZero (gt .ExpiryDate.Unix $now.Unix) -}}
+  {{- if and $published $unexpired (in (slice "essay" "affirmation" "dialogue") $kind) -}}
+    {{- $eligible = $eligible | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc" -}}
+{{- $featured := slice -}}
+{{- $selectedPaths := slice -}}
+
+{{- range first 1 $eligible -}}
+  {{- $featured = $featured | append . -}}
+  {{- $selectedPaths = $selectedPaths | append .RelPermalink -}}
+{{- end -}}
+
+{{- range $route := $supportingRoutes -}}
+  {{- range where $eligible "RelPermalink" $route -}}
+    {{- if not (in $selectedPaths .RelPermalink) -}}
+      {{- $featured = $featured | append . -}}
+      {{- $selectedPaths = $selectedPaths | append .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if lt (len $featured) 5 -}}
+  {{- $fallback := slice -}}
+  {{- $fallbackPaths := $selectedPaths -}}
+  {{- range $eligible -}}
+    {{- if not (in $fallbackPaths .RelPermalink) -}}
+      {{- $fallback = $fallback | append . -}}
+      {{- $fallbackPaths = $fallbackPaths | append .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $fallback = sort (sort $fallback "Title" "asc") "PublishDate" "desc" -}}
+  {{- range first (sub 5 (len $featured)) $fallback -}}
+    {{- $featured = $featured | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $featured -}}

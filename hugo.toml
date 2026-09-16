@@ -34,8 +34,11 @@ games = "/games/:slug/"
       unsafe = true
 
 [security]
-  [security.funcs]
+[security.funcs]
     getenv = ['^HUGO_', '^CI$', '^ANALYTICS_', '^GOATCOUNTER_']
+
+[params]
+description = "Independent essays and reported analysis for readers who want to move beyond the feed, follow the evidence, and think for themselves."
 
 [params.homepage]
 imprint_statement = "Outside In Print publishes essays, dialogues, reported case studies, and working papers in stable, citable web editions organized by collections, archive lanes, and the full library."
@@ -47,15 +50,15 @@ buttondown_username = "OutsideInPrint"
 tag = "outside-in-print"
 publication_tag = "new-publications"
 cadence = "Every Saturday"
-title = "Bob's Almanack"
-contents = "One compact Saturday email with new essays, original visuals, plus some cold hard facts. Free. No ads."
-price_promise = "Bob's Almanack will remain free. No ads, ever."
-button_label = "Subscribe free"
-prompt_label = "Get Bob's Almanack every Saturday — free, no ads."
-checkout_label = "Send me Bob's Almanack every Saturday. It will remain free. No ads, ever."
+title = "The weekly newsletter"
+contents = "New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week."
+price_promise = "Free. No spam ever. Unsubscribe anytime."
+button_label = "Join the newsletter"
+prompt_label = "Join the weekly Outside In Print newsletter."
+checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."
 sample_url = "/almanack/2026-07-25/"
 sample_label = "Read a sample issue"
-privacy_promise = "Your email goes to Buttondown to deliver and manage Bob's Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."
+privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."
 privacy_url = "/privacy/"
 privacy_label = "Privacy details"
 

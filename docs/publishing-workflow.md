@@ -46,6 +46,16 @@ The default publishing path is essay-first.
 
 The essay scaffold is the preferred path because it creates the expected metadata block, slug, and starter structure.
 
+## Newsletter subscriber handoff
+
+Keep every public signup prompt plain: call the product the Outside In Print newsletter. Introduce the editorial name only after signup, in Buttondown's welcome email under **Settings > Subscribing > Welcome**.
+
+- Subject: `Welcome to Bob’s Almanack`
+- Opening: `Welcome to Bob’s Almanack, the weekly newsletter from Outside In Print.`
+- Follow with: `Each Saturday, you'll receive new essays, original visuals, and selected work from the archive. No spam ever. Unsubscribe anytime.`
+
+Do not promise an ad-free publication. After changing the Buttondown copy, confirm the full handoff with a test subscription: public newsletter form, confirmation step, then Bob’s Almanack welcome email.
+
 ## Metadata and discovery decisions
 
 For non-draft public pieces, complete the core publication metadata:
@@ -60,11 +70,12 @@ For non-draft public pieces, complete the core publication metadata:
 
 Use these discovery controls deliberately:
 
-- The homepage lead is the latest eligible essay, affirmation, or dialogue by original `date`, not revision date or `lastmod`.
-- Supporting cards appear in this order: the Jack Stratton profile, the latest Syd & Oliver dialogue, *What Is Risk? A Four-Part Framework*, and *Uncrustables: The Billion-Dollar Peanut Butter Empire*. Selection lives in `layouts/partials/home_selected.html`; no per-essay featured flags or ranks are needed.
-- A piece appears only once in the featured stories. If the lead is the newest Syd & Oliver dialogue, its supporting slot uses the next newest eligible dialogue. A pinned piece already used as the lead, or an unavailable selection, is omitted from the supporting cards.
-- Homepage supporting-card thumbnails prefer a linked published front-page/Gallery illustration. When none exists, `home_card_image.html` reuses the piece's `featured_image` hero as a lazy-loaded link to the piece; without either image, the card remains text-only. Hero fallbacks do not create Gallery entries or change article images.
-- At 900px and below, the homepage reads in document order: latest lead and current illustration, supporting cards, recent illustrations, then the Almanack teaser. Desktop keeps the lead, recent illustrations, and Almanack in the left column and supporting cards in the right column. The Almanack selection is unchanged.
+- Homepage selection lives in `layouts/partials/home_v2_selected.html`. The lead automatically becomes the newest eligible published reading piece by Hugo's `PublishDate` (the explicit `publishDate`, falling back to `date`), with equal publication times ordered by title. The supporting editorial order is *Returning to the Gold Standard Will Break the Economy*, *What I Had*, *The Little Prince: 10 Powerful Quotes That Will Change How You See Life*, then *Russia’s Slow Surrender*. Camp Mystic is no longer a pinned homepage selection. Dialogue labels follow the existing content metadata; other forms retain their section labels.
+- When a supporting route is the current lead, unavailable, draft, future-dated, or expired, the selector skips it and fills remaining slots with the newest other eligible essays, affirmations, or dialogues, breaking equal dates by title, until the surface contains five unique pieces. The existing reading-kind resolver also includes Musings stored under essays. Canonical published URLs determine selection, including dialogues whose source paths differ from their public URLs. Draft, future-date, future-`publishDate`, and expiry guards apply even when a preview enables those pages; landing pages are not eligible.
+- The first selected piece renders as the lead with its existing responsive `featured_image`; the remaining four render as text-led supporting cards. A new publication takes the lead on the next Hugo rebuild; changing only an older piece's modification time does not promote it. Editorial fit determines the supporting order; audience figures do not sort this selection. Verify the lead against the `publishDate` column from Hugo's published inventory, supporting picks stay unique, and missing picks receive newest-first fallbacks. The archive sorts by article `date`, so its first entry is not a reliable publication-time oracle when explicit release times differ.
+- `data/homepage_metrics.yaml` is the sole source of banner figures and article audience figures. Article badges use the public label `reads` and render only at the recorded threshold of 1,000 or more. A missing record has no badge, including newly published leads and What I Had; add figures only with source evidence. The audience banner retains `Readers`.
+- Maintain source, definition, measurement period, observation date, evidence reference, verification status, and record-creation date for every figure. The inherited article figures are Medium lifetime views, and the 10,000+ audience claim has an unverified owner-supplied aggregation basis; neither establishes unique people or accounts. Do not describe these entries as a current verified snapshot. See [Homepage metric maintenance](homepage-metrics.md) for the inventory validation and refresh process.
+- The homepage no longer contains a bookstore module, Almanack teaser, collections strip, or illustration grid. Book discovery remains on `/shop/`; collection discovery remains on `/collections/` and article continuation surfaces.
 - `collections` for explicit membership in curated reading lanes
 - `collection_weight` when you want controlled ordering inside a collection
 

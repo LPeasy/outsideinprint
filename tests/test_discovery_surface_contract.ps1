@@ -40,8 +40,12 @@ $requiredFiles = @(
   'layouts/partials/archive/resolve-pages.html',
   'layouts/partials/archive/render-list.html',
   'layouts/partials/home_front_page.html',
+  'layouts/partials/home_v2_front_page.html',
+  'layouts/partials/home_v2_selected.html',
+  'layouts/partials/home_reader_banner.html',
+  'assets/js/home-reader-note.js',
+  'data/homepage_metrics.yaml',
   'layouts/partials/home_bookstore_spotlight.html',
-  'layouts/partials/home_imprint_statement.html',
   'layouts/partials/home_selected_collections.html',
   'layouts/partials/entry_threads.html',
   'layouts/partials/home_recent_work.html',
@@ -53,6 +57,7 @@ $requiredFiles = @(
   'assets/js/studio-inquiry.js',
   'content/studio/index.md',
   'content/privacy/index.md',
+  'content/contribute/index.md',
   'data/studio.yaml',
   'static/start-here/index.html',
   'static/llms.txt',
@@ -91,144 +96,155 @@ foreach ($relativePath in $requiredImageFrontMatterFiles) {
 }
 
 $indexTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/index.html') -Raw
-foreach ($requiredSnippet in @(
-  'partial "home_front_page.html"',
-  'partial "home_bookstore_spotlight.html"',
-  'partial "home_imprint_statement.html"',
-  'partial "home_selected_collections.html"',
-  'partial "newsletter_signup.html"',
-  'site.GetPage "/archive"',
-  'site.GetPage "/gallery"',
-  'site.GetPage "/collections"',
-  'site.GetPage "/library"'
-)) {
-  if ($indexTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/index.html to contain: $requiredSnippet"
-  }
+if ($indexTemplate -notmatch [regex]::Escape('partial "home_front_page.html"')) {
+  throw 'Expected layouts/index.html to delegate to the homepage composition partial.'
 }
-
 foreach ($retiredSnippet in @(
+  'partial "newsletter_signup.html"',
+  'partial "home_bookstore_spotlight.html"',
+  'partial "home_selected_collections.html"',
+  'partial "home_2045_launch.html"',
   'partial "home_studio_offer.html"',
-  'site.GetPage "/start-here"',
-  'site.GetPage "/syd-and-oliver"',
-  '"Feeling curious?"',
-  'data-analytics-source-slot="random_link"',
-  'data-analytics-path="/random/"'
+  'class="home-browse'
 )) {
   if ($indexTemplate -match [regex]::Escape($retiredSnippet)) {
-    throw "Expected layouts/index.html to omit the retired homepage browse route: $retiredSnippet"
+    throw "Expected layouts/index.html to omit retired homepage module: $retiredSnippet"
   }
-}
-
-$homepageOrder = @(
-  'partial "home_front_page.html"',
-  'partial "newsletter_signup.html"',
-  'partial "home_bookstore_spotlight.html"',
-  'partial "home_imprint_statement.html"',
-  'partial "home_selected_collections.html"',
-  'class="home-browse'
-)
-
-$lastIndex = -1
-foreach ($snippet in $homepageOrder) {
-  $currentIndex = $indexTemplate.IndexOf($snippet, [System.StringComparison]::Ordinal)
-  if ($currentIndex -lt 0) {
-    throw "Expected layouts/index.html to contain ordered homepage snippet: $snippet"
-  }
-
-  if ($currentIndex -le $lastIndex) {
-    throw "Expected homepage composition in layouts/index.html to preserve editorial order through: $snippet"
-  }
-
-  $lastIndex = $currentIndex
-}
-
-$homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_selected.html') -Raw -Encoding utf8
-foreach ($requiredSnippet in @(
-  'sort (sort $frontPagePages "Title" "asc") "Date" "desc"',
-  '$hero := $latest',
-  '"/essays/jack-stratton-and-the-vulfpeck-model/"',
-  '"/essays/what-is-risk-a-four-part-framework/"',
-  '"/essays/uncrustables-the-billion-dollar-peanut-butter-empire/"',
-  '"syd-and-oliver-dialogues"',
-  'not (in $selectedKeys $candidate.RelPermalink)'
-)) {
-  if ($homeSelectionTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected the homepage editorial selection contract to preserve: $requiredSnippet"
-  }
-}
-if ($homeSelectionTemplate -match 'Lastmod|lt \(len \$secondary\) 4') {
-  throw 'Expected homepage selection to use publication dates and the four editorial slots, not revision dates or recent fallback cards.'
 }
 
 $homeFrontPageTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_front_page.html') -Raw -Encoding utf8
+if ($homeFrontPageTemplate -notmatch [regex]::Escape('partial "home_v2_front_page.html"')) {
+  throw 'Expected home_front_page.html to delegate to the focused V2 composition.'
+}
+
+$homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_selected.html') -Raw -Encoding utf8
+$featuredRoutes = @(
+  '"/essays/why-a-return-to-the-gold-standard-would-break-the-economy/"',
+  '"/syd-and-oliver/what-i-had/"',
+  '"/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/"',
+  '"/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/"'
+)
+$previousFeaturedIndex = -1
+foreach ($route in $featuredRoutes) {
+  $routeIndex = $homeSelectionTemplate.IndexOf($route, [System.StringComparison]::Ordinal)
+  if ($routeIndex -le $previousFeaturedIndex) {
+    throw "Expected homepage featured route order to include $route after the preceding route."
+  }
+  $previousFeaturedIndex = $routeIndex
+}
+foreach ($requiredSnippet in @(
+  'partial "archive/longform-kind.html"',
+  '$eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc"',
+  'range first 1 $eligible',
+  'not (in $selectedPaths .RelPermalink)',
+  'first (sub 5 (len $featured)) $fallback',
+  'return $featured'
+)) {
+  if ($homeSelectionTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected homepage V2 selection fallback to contain: $requiredSnippet"
+  }
+}
+
+$homeV2Template = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_front_page.html') -Raw -Encoding utf8
+$homeReaderBanner = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_reader_banner.html') -Raw -Encoding utf8
+foreach ($requiredSnippet in @(
+  'hugo.Data.homepage_metrics',
+  '<strong>Weekly</strong>',
+  '<span>Newsletter</span>',
+  'From the imprint',
+  'Independent writing on history, economics, culture, and public life.',
+  'One thoughtful letter each week.',
+  'No spam ever. Unsubscribe anytime.',
+  'Join the newsletter',
+  'data-analytics-source-slot="homepage_reader_banner"',
+  'eq $provider "buttondown"'
+)) {
+  if ($homeReaderBanner -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected homepage reader banner to contain: $requiredSnippet"
+  }
+}
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
-  '<div class="home-front-page__orientation">',
-  '<p class="home-front-page__welcome-label">A note to the reader</p>',
-  ('<p class="home-front-page__welcome-copy">' + "I’m Robert. I built Outside In Print for ideas worth following, stories worth telling, and writing worth returning to. Pick something that catches your eye. I’m glad you’re here." + '</p>'),
-  '<p class="home-front-page__welcome-signature">&mdash; <a href="{{ "about/" | relURL }}">Robert V. Ussley</a></p>',
-  'id="home-front-page-title"',
-  'data-home-front-page-region="lead"',
-  'data-home-front-page-region="secondary"',
-  'data-home-front-page-region="extras"',
-  '$almanackIssues := where site.RegularPages "Section" "almanack"',
-  '<aside class="home-almanack home-almanack--lead" aria-labelledby="home-almanack-title">',
-  'home-almanack-divider',
-  'home-almanack__ledger-row--number',
-  'home-almanack__ledger-row--virtue',
-  '<a href="{{ .RelPermalink }}">Read issue &rarr;</a>'
+  'partial "home_reader_banner.html"',
+  'A note to the reader',
+  '<h2 id="home-v2-featured-title">Featured Reading</h2>',
+  'homepage_v2_featured_lead',
+  'homepage_v2_featured_supporting',
+  'hugo.Data.homepage_metrics',
+  'The latest publication, alongside reader favorites and defining work.',
+  'Read the piece',
+  'Browse the archive',
+  'Search the library',
+  'Surprise me',
+  'Become a contributor'
 )) {
-  if ($homeFrontPageTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/home_front_page.html to contain: $requiredSnippet"
+  if ($homeV2Template -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected focused homepage composition to contain: $requiredSnippet"
   }
+}
+
+$expectedHomeReaderNote = 'However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.'
+$homeReaderNoteMatches = [regex]::Matches($homeV2Template, '(?s)<p class="home-front-page__welcome-copy">(?<copy>.*?)</p>')
+if ($homeReaderNoteMatches.Count -ne 1 -or ([regex]::Replace($homeReaderNoteMatches[0].Groups['copy'].Value, '<[^>]+>', '').Trim()) -cne $expectedHomeReaderNote) {
+  throw 'Expected the focused homepage composition to keep the full reader note in one home-front-page__welcome-copy paragraph.'
+}
+
+$homeReaderLinks = '<p class="home-front-page__welcome-links"><a href="{{ "about/" | relURL }}">About the imprint</a><a href="{{ "authors/robert-v-ussley/" | relURL }}">About the author</a></p>'
+if (-not $homeV2Template.Contains($homeReaderLinks, [System.StringComparison]::Ordinal)) {
+  throw 'Expected the reader note links to show About the imprint first and About the author second, with their canonical destinations.'
+}
+if ($homeV2Template -match '(?s)<p class="home-front-page__welcome-links">.*?Start reading.*?</p>') {
+  throw 'Expected the reader note links to replace Start reading with About the author.'
+}
+
+if ($homeV2Template -match 'Medium reads') {
+  throw 'Expected featured reader badges to omit the Medium label.'
 }
 
 $homepageOrder = @(
-  'id="home-front-page-title"',
+  'partial "home_reader_banner.html"',
   'class="home-front-page__orientation"',
-  'class="home-front-page__welcome-label"',
-  'class="home-front-page__welcome-copy"',
-  'class="home-front-page__welcome-signature"',
-  'class="home-front-page__stories"',
-  'data-home-front-page-region="lead"',
-  'class="editorial-cartoon__trigger"',
-  'data-home-front-page-region="secondary"',
-  'data-home-front-page-region="extras"',
-  'data-home-cartoon-recent',
-  'home-almanack-divider',
-  'home-almanack--lead'
+  'class="home-v2-featured',
+  'class="home-v2-next'
 )
-
-$lastManifestoIndex = -1
+$lastIndex = -1
 foreach ($snippet in $homepageOrder) {
-  $currentIndex = $homeFrontPageTemplate.IndexOf($snippet, [System.StringComparison]::Ordinal)
-  if ($currentIndex -lt 0) {
-    throw "Expected layouts/partials/home_front_page.html to contain ordered homepage snippet: $snippet"
+  $currentIndex = $homeV2Template.IndexOf($snippet, [System.StringComparison]::Ordinal)
+  if ($currentIndex -le $lastIndex) {
+    throw "Expected focused homepage document order to preserve: $snippet"
   }
-
-  if ($currentIndex -le $lastManifestoIndex) {
-    throw "Expected homepage document order to keep the heading and orientation above the lead illustration, supporting stories, recent illustrations, and Almanack."
-  }
-
-  $lastManifestoIndex = $currentIndex
+  $lastIndex = $currentIndex
 }
 
 foreach ($retiredSnippet in @(
-  '>Front Page<',
-  'Independent essays, selected writings, and original books by Robert V. Ussley',
-  'A curated front page from Outside In Print, with selected collections, recent work, and archive paths below.',
-  'class="home-manifesto"',
-  'A digital imprint of essays, reports, dialogues, and literature.',
-  'Color over the lines. Read beyond the feed. Think for yourself.',
-  'Support independent journalism',
-  'Also on the front page'
+  'home_bookstore',
+  'home-almanack',
+  'home_selected_collections',
+  'home_2045_launch',
+  'Bob''s Almanack',
+  'newsletter-signup--home-ribbon',
+  'home_imprint_statement.html',
+  'home-manifesto',
+  'Ask for the evidence. Read past the headlines. Think for yourself.'
 )) {
-  if ($homeFrontPageTemplate -match [regex]::Escape($retiredSnippet)) {
-    throw "Expected layouts/partials/home_front_page.html to remove the retired visible front-page intro block snippet: $retiredSnippet"
+  if ($homeV2Template -match [regex]::Escape($retiredSnippet)) {
+    throw "Expected focused homepage composition to omit retired module: $retiredSnippet"
   }
 }
 
+$contributorContent = Get-Content -Path (Join-Path $repoRoot 'content/contribute/index.md') -Raw -Encoding utf8
+foreach ($requiredSnippet in @(
+  'title: "Write for Outside In Print"',
+  'original essays and reported articles',
+  '## What Fits',
+  '## Start With a Pitch',
+  'support@outsideinprint.org',
+  'Sending a pitch does not guarantee publication.'
+)) {
+  if ($contributorContent -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected contributor route content to contain: $requiredSnippet"
+  }
+}
 $baseTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/baseof.html') -Raw
 foreach ($requiredSnippet in @(
   'site.Home.OutputFormats.Get "RSS"',
@@ -312,57 +328,59 @@ foreach ($llmsDocument in @($llms, $llmsFull)) {
   }
 }
 
-$homeImprintTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_imprint_statement.html') -Raw
-foreach ($requiredSnippet in @(
-  'class="home-manifesto"',
-  'class="home-manifesto__line"',
-  'Ask for the evidence. Read past the headlines. Think for yourself.'
-)) {
-  if ($homeImprintTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/home_imprint_statement.html to contain: $requiredSnippet"
+$homeReaderBannerCssChecks = @(
+  '.home-reader-banner__proof{',
+  '.home-v2-featured__grid{',
+  '.home-v2-next{',
+  '.home-v2-next__cta{'
+)
+foreach ($selector in $homeReaderBannerCssChecks) {
+  if ($mainCss -notmatch [regex]::Escape($selector)) {
+    throw "Expected assets/css/main.css to own the focused homepage selector: $selector"
   }
 }
 
-foreach ($retiredSnippet in @(
-  'id="home-manifesto-title"',
-  'home-manifesto__line--primary',
-  'home-manifesto__line--secondary',
-  'A digital imprint of essays, reports, dialogues, and literature.',
-  'Color over the lines. Read beyond the feed. Think for yourself.'
-)) {
-  if ($homeImprintTemplate -match [regex]::Escape($retiredSnippet)) {
-    throw "Expected layouts/partials/home_imprint_statement.html to remove: $retiredSnippet"
-  }
+$homeReaderBannerWideOverrideCss = [regex]::Match($mainCss, '(?s)\.home-reader-banner\.page-shell--wide\{(?<rules>.*?)\}')
+if (-not $homeReaderBannerWideOverrideCss.Success -or $homeReaderBannerWideOverrideCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
+  throw 'Expected the combined home-reader-banner page-shell--wide override to align the banner at 70rem.'
 }
 
-$homeBookstoreTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_bookstore_spotlight.html') -Raw
-foreach ($requiredSnippet in @(
-  'site.GetPage "/shop"',
-  'sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc"',
-  'if gt (len $books) 0',
-  'partial "shop/product-data.html"',
-  'Books from Outside In Print',
-  'Independent fiction and nonfiction. EPUB editions direct from Outside In Print.',
-  'Browse the bookstore',
-  'data-home-bookstore-card',
-  'data-analytics-source-slot="homepage_bookstore_promo"'
-)) {
-  if ($homeBookstoreTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/home_bookstore_spotlight.html to contain: $requiredSnippet"
-  }
+$homeV2ContentWidthCss = [regex]::Match($mainCss, '(?s)\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{(?<rules>.*?)\}')
+if (-not $homeV2ContentWidthCss.Success -or $homeV2ContentWidthCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
+  throw 'Expected Featured Reading and the homepage closing section to share the banner and reader-note 70rem width.'
 }
 
-foreach ($forbiddenSnippet in @(
-  'https://www.amazon.com',
-  'Amazon',
-  'Kindle',
-  'purchase_url',
-  'checkout-actions',
-  'carousel',
-  'autoplay'
+$homeOrientationCss = [regex]::Match($mainCss, '(?s)\.home-front-page__orientation\{(?<rules>.*?)\}')
+if (-not $homeOrientationCss.Success) {
+  throw 'Expected assets/css/main.css to style the compact homepage reader note.'
+}
+foreach ($requiredRule in @(
+  'display:grid;',
+  'grid-template-columns:minmax(0, 1fr);',
+  'grid-template-areas:',
+  '"label"',
+  '"copy"',
+  '"links";',
+  'gap:.12rem 1.5rem;',
+  'max-width:70rem;',
+  'margin:0 auto 1rem;',
+  'padding:0 0 .7rem;'
 )) {
-  if ($homeBookstoreTemplate -match [regex]::Escape($forbiddenSnippet)) {
-    throw "Expected the homepage bookstore spotlight to omit: $forbiddenSnippet"
+  if ($homeOrientationCss.Groups['rules'].Value -notmatch [regex]::Escape($requiredRule)) {
+    throw "Expected the compact homepage reader note CSS to contain: $requiredRule"
+  }
+}
+if ($homeOrientationCss.Groups['rules'].Value -match [regex]::Escape('max-width:52rem;')) {
+  throw 'Expected the compact homepage reader note to use the 70rem orientation width instead of the retired 52rem measure.'
+}
+
+$homeWelcomeCopyCss = [regex]::Match($mainCss, '(?s)\.home-front-page__welcome-copy\{(?<rules>.*?)\}')
+if (-not $homeWelcomeCopyCss.Success) {
+  throw 'Expected assets/css/main.css to style the compact homepage reader-note copy.'
+}
+foreach ($requiredRule in @('margin:0;', 'font-size:.94rem;', 'line-height:1.42;')) {
+  if ($homeWelcomeCopyCss.Groups['rules'].Value -notmatch [regex]::Escape($requiredRule)) {
+    throw "Expected the compact homepage reader-note type CSS to contain: $requiredRule"
   }
 }
 
@@ -669,18 +687,27 @@ if ($studioScript -match '(?i)delivery confirmed|successfully sent|inquiry recei
   throw 'Expected the Studio script not to claim delivery or receipt.'
 }
 
-if ($mainCss -notmatch '(?s)\.home-bookstore__grid\{[^}]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);[^}]*\}') {
-  throw 'Expected the homepage bookstore grid to use three columns above 900px.'
+if ($mainCss -notmatch '(?s)\.home-reader-banner__proof\{[^}]*grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);') {
+  throw 'Expected the homepage proof strip to retain three compact proof cells.'
 }
-
-if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{\s*\.home-bookstore__grid\{[^}]*grid-template-columns:1fr;[^}]*\}\s*\.home-bookstore__card\{[^}]*grid-template-columns:8rem minmax\(0, 1fr\);[^}]*\}\s*\}') {
-  throw 'Expected the homepage bookstore to use compact horizontal single-column records at 900px and below.'
+if ($mainCss -notmatch '(?s)\.home-v2-featured__grid\{[^}]*grid-template-columns:minmax\(0, 1\.45fr\) minmax\(18rem, \.8fr\);') {
+  throw 'Expected the featured-reading surface to use a lead-and-supporting desktop grid.'
 }
-
-if ($mainCss -notmatch '(?s)@media \(max-width:420px\)\{\s*\.home-bookstore__card\{[^}]*grid-template-columns:5\.75rem minmax\(0, 1fr\);[^}]*\}\s*\.home-bookstore__cta\{[^}]*width:100%;[^}]*\}\s*\}') {
-  throw 'Expected the homepage bookstore to shrink the cover column and use a full-width CTA at 420px and below.'
+if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{.*?\.home-v2-featured__grid,\s*\.home-v2-next\{[^}]*grid-template-columns:1fr;') {
+  throw 'Expected the focused homepage grids to collapse at 900px.'
 }
-
+if ($mainCss -notmatch '(?s)@media \(max-width:520px\)\{.*?\.home-v2-featured__supporting\{\s*display:block;') {
+  throw 'Expected supporting featured stories to stack at 520px.'
+}
+if ($mainCss -notmatch '(?s)@media \(max-width:520px\)\{.*?\.home-reader-banner\{[^}]*width:calc\(100% - \.75rem\);[^}]*margin-bottom:1\.15rem;') {
+  throw 'Expected the mobile homepage reader banner to use the compact inset footprint.'
+}
+if ($mainCss -notmatch '(?s)@media \(max-width:520px\)\{.*?\.home-reader-banner__controls\{[^}]*grid-template-columns:minmax\(0, 1fr\) auto;') {
+  throw 'Expected the newsletter controls to remain on one compact row on standard mobile widths.'
+}
+if ($mainCss -notmatch '(?s)@media \(max-width:360px\)\{.*?\.home-reader-banner__controls\{\s*grid-template-columns:1fr;') {
+  throw 'Expected the newsletter controls to stack only on the narrowest supported mobile width.'
+}
 $significantLinksTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/significant-links.html') -Raw
 if ($significantLinksTemplate -notmatch [regex]::Escape('"/shop"')) {
   throw 'Expected homepage significant links to include /shop.'
@@ -732,25 +759,6 @@ foreach ($requiredSnippet in @(
 foreach ($requiredSlot in @('bookstore_detail_direct', 'bookstore_detail_kindle')) {
   if ($shopSingleTemplate -notmatch [regex]::Escape($requiredSlot)) {
     throw "Expected layouts/shop/single.html to include analytics source slot: $requiredSlot"
-  }
-}
-
-$homeSelectedCollectionsTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_selected_collections.html') -Raw
-foreach ($requiredSnippet in @(
-  'partial "entry_threads.html" .'
-)) {
-  if ($homeSelectedCollectionsTemplate -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected layouts/partials/home_selected_collections.html to contain: $requiredSnippet"
-  }
-}
-
-foreach ($retiredSnippet in @(
-  'collections/get-public-entries.html',
-  '.collection.featured',
-  'homepage_featured_collection'
-)) {
-  if ($homeSelectedCollectionsTemplate -match [regex]::Escape($retiredSnippet)) {
-    throw "Expected layouts/partials/home_selected_collections.html to ignore the retired featured-collection selection path: $retiredSnippet"
   }
 }
 
@@ -1313,12 +1321,20 @@ if ($mastheadPartial -notmatch '<div class="title">') {
   throw 'Expected layouts/partials/masthead.html to keep the shared non-heading title container for the editorial brand.'
 }
 
+if ($mastheadPartial -notmatch '(?s)<div class="masthead-side-deck masthead-side-deck--left"[^>]*>\s*<span>ESSAYS</span>\s*<span>REPORTS</span>\s*<span>LITERATURE</span>\s*</div>') {
+  throw 'Expected the homepage masthead left deck to contain only Essays, Reports, and Literature.'
+}
+
 if ($mastheadPartial -notmatch '(?s)nav-disclosure--read.*<span>Read</span>.*nav-disclosure--explore.*<span>Explore</span>.*range \$directItems') {
   throw 'Expected layouts/partials/masthead.html to render grouped Read and Explore disclosures before the direct desktop links.'
 }
 
-if ($mastheadPartial -notmatch '(?s)class="nav__mobile".*range \$mobilePrimaryItems.*<span>Menu</span>') {
-  throw 'Expected layouts/partials/masthead.html to render the Archive, Collections, and Bookstore mobile-primary items before Menu.'
+if ($mastheadPartial -notmatch '(?s)class="nav__mobile".*nav-mobile-disclosure--read.*<span>Read</span>.*nav-mobile-disclosure--explore.*<span>Explore</span>.*range \$mobilePrimaryItems') {
+  throw 'Expected layouts/partials/masthead.html to render the mobile ribbon as Read, Explore, and About.'
+}
+
+if ($mastheadPartial -match '(?s)class="nav__mobile".*?<span>Menu</span>') {
+  throw 'Expected the mobile navigation to use separate Read and Explore controls instead of a generic Menu control.'
 }
 
 foreach ($requiredNavigationSnippet in @(
@@ -1334,18 +1350,24 @@ foreach ($requiredNavigationSnippet in @(
   '"description" "Surprise me"',
   '"label" "Gallery"',
   '"description" "Editorial art"',
-  '"label" "Studio"',
   '"label" "Bookstore"',
   '"label" "About"',
-  '"label" "Support"',
+  '"label" "Contribute"',
   'aria-label="Primary" data-primary-nav',
-  'mobile-nav-read-heading',
-  'mobile-nav-explore-heading',
-  'mobile-nav-imprint-heading'
+  'nav-mobile-disclosure--read',
+  'nav-mobile-disclosure--explore'
 )) {
   if ($mastheadPartial -notmatch [regex]::Escape($requiredNavigationSnippet)) {
     throw "Expected grouped primary navigation contract to contain: $requiredNavigationSnippet"
   }
+}
+
+if ($mastheadPartial -notmatch '(?s)"label" "Latest".*?"label" "Archive".*?"label" "Collections".*?"label" "Library".*?"label" "Feeling curious\?"') {
+  throw 'Expected the Read destinations to remain ordered Latest, Archive, Collections, Library, Feeling curious?.'
+}
+
+if ($mastheadPartial -match '"label" "(?:Studio|Support)"|primary_nav_(?:studio|support)') {
+  throw 'Expected Studio and Support to remain footer destinations rather than primary-navigation items.'
 }
 
 foreach ($requiredAppsNavigationSnippet in @(
@@ -1371,24 +1393,35 @@ if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_bookstore"') 
   throw 'Expected the primary Bookstore destination to retain its analytics source slot.'
 }
 
-if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_studio"') {
-  throw 'Expected the primary Studio destination to expose its analytics source slot.'
+if ($mastheadPartial -notmatch [regex]::Escape('range $directKey := slice "about" "bookstore" "contribute"')) {
+  throw 'Expected direct desktop navigation order to be About, Bookstore, Contribute.'
 }
-
-$studioNavIndex = $mastheadPartial.IndexOf('"label" "Studio"', [System.StringComparison]::Ordinal)
-$bookstoreNavIndex = $mastheadPartial.IndexOf('"label" "Bookstore"', [System.StringComparison]::Ordinal)
-$aboutNavIndex = $mastheadPartial.IndexOf('"label" "About"', [System.StringComparison]::Ordinal)
-$supportNavIndex = $mastheadPartial.IndexOf('"label" "Support"', [System.StringComparison]::Ordinal)
-if ($bookstoreNavIndex -lt 0 -or $aboutNavIndex -le $bookstoreNavIndex -or $studioNavIndex -le $aboutNavIndex -or $supportNavIndex -le $studioNavIndex) {
-  throw 'Expected direct desktop navigation order to be Bookstore, About, Studio, Support.'
+if ($mastheadPartial -notmatch [regex]::Escape('range $mobileKey := slice "about"')) {
+  throw 'Expected About to be the only direct mobile-primary link after the Read and Explore controls.'
 }
-
-if ($mastheadPartial -notmatch '(?s)"label" "Studio".*?"mobilePrimary" false' -or $mastheadPartial -notmatch '(?s)"label" "Bookstore".*?"mobilePrimary" true') {
-  throw 'Expected Bookstore to own the closed mobile slot while Studio follows About in the expanded Menu.'
+if ($mastheadPartial -notmatch '(?s)"label" "Archive".*?"group" "read".*?"mobilePrimary" false') {
+  throw 'Expected Archive to move into the Read disclosure instead of remaining a direct mobile-primary destination.'
 }
-
-if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_support"') {
-  throw 'Expected the primary Support destination to retain its analytics source slot.'
+if ($mastheadPartial -notmatch '(?s)"label" "About".*?"group" "direct".*?"mobilePrimary" true') {
+  throw 'Expected About to be a direct mobile-primary destination.'
+}
+if ($mastheadPartial -notmatch '(?s)"label" "Contribute".*?"group" "direct".*?"mobilePrimary" false') {
+  throw 'Expected Contribute to appear in desktop navigation and the mobile Explore disclosure.'
+}
+if ($mastheadPartial -notmatch '(?s)nav-mobile-disclosure--read.*range \$mobileReadItems.*nav-mobile-disclosure--explore.*range \$mobileExploreItems') {
+  throw 'Expected mobile Read and Explore disclosures to expose their dedicated destination lists.'
+}
+if ($mastheadPartial -notmatch '(?s)\$mobileReadItems := slice.*?range \$readItems.*?"key" "bookstore"') {
+  throw 'Expected Bookstore to remain accessible after the standard mobile Read destinations.'
+}
+if ($mastheadPartial -notmatch '\$mobileReadCurrent := gt \(len \(where \$mobileReadItems "currentSection" true\)\) 0') {
+  throw 'Expected the mobile Read disclosure to expose current-section state for Bookstore as well as reading destinations.'
+}
+if ($mastheadPartial -notmatch '(?s)\$mobileExploreItems := slice.*?range \$exploreItems.*?"key" "contribute"') {
+  throw 'Expected Contribute to remain accessible alongside the mobile Explore destinations.'
+}
+if ($mastheadPartial -notmatch '(?s)"label" "Bookstore".*?"group" "direct".*?"mobilePrimary" false') {
+  throw 'Expected Bookstore to leave the visible mobile row and move into the Read disclosure.'
 }
 
 $collectionCardPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/discovery/collection-card.html') -Raw

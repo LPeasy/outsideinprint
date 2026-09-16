@@ -217,14 +217,15 @@ foreach ($requiredConfig in @(
   'custom_monthly_enabled = false',
   'publication_tag = "new-publications"',
   'cadence = "Every Saturday"',
-  'title = "Bob''s Almanack"',
-  'contents = "One compact Saturday email with new essays, original visuals, plus some cold hard facts. Free. No ads."',
-  'price_promise = "Bob''s Almanack will remain free. No ads, ever."',
-  'button_label = "Subscribe free"',
-  'checkout_label = "Send me Bob''s Almanack every Saturday. It will remain free. No ads, ever."',
+  'title = "The weekly newsletter"',
+  'contents = "New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week."',
+  'price_promise = "Free. No spam ever. Unsubscribe anytime."',
+  'button_label = "Join the newsletter"',
+  'prompt_label = "Join the weekly Outside In Print newsletter."',
+  'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
   'sample_url = "/almanack/2026-07-25/"',
   'sample_label = "Read a sample issue"',
-  'privacy_promise = "Your email goes to Buttondown to deliver and manage Bob''s Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
+  'privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
   'privacy_url = "/privacy/"',
   'privacy_label = "Privacy details"'
 )) {
@@ -550,11 +551,8 @@ if ($analyticsVendor -notmatch '(?m)^\s*q:\s*''''\s*,?\s*$') {
 
 $mastheadTemplate = Get-RequiredText -RelativePath 'layouts/partials/masthead.html'
 $footerTemplate = Get-RequiredText -RelativePath 'layouts/partials/footer.html'
-foreach ($requiredNavigationText in @(
-  'primary_nav_support',
-  'Support Outside In Print'
-)) {
-  Assert-Contains -Text $mastheadTemplate -Expected $requiredNavigationText -Context 'Primary navigation'
+if ($mastheadTemplate -match 'primary_nav_support|"label" "Support"') {
+  throw 'Support must remain available in the footer without crowding the focused primary navigation.'
 }
 foreach ($requiredFooterRoute in @(
   'support/',
@@ -851,14 +849,14 @@ if ($marketingCheckboxes.Count -ne 18 -or @($marketingCheckboxes | Where-Object 
   throw 'All weekly-email and new-publication preferences must render unchecked and remain optional.'
 }
 foreach ($requiredNewsletterText in @(
-  'Send me Bob''s Almanack every Saturday. It will remain free. No ads, ever.',
-  'One compact Saturday email with new essays, original visuals, plus some cold hard facts. Free. No ads.',
+  'Send me the weekly Outside In Print newsletter. Free. No spam ever.',
+  'New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week.',
   'Read a sample issue',
   'Privacy details',
-  'Your email goes to Buttondown to deliver and manage Bob''s Almanack. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime.',
+  'Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime.',
   'Optional. Not required to buy.'
 )) {
-  Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($shopOutput)) -Expected $requiredNewsletterText -Context 'Built bookstore Bob''s Almanack opt-in'
+  Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($shopOutput)) -Expected $requiredNewsletterText -Context 'Built bookstore newsletter opt-in'
 }
 if ($shopOutput -notmatch '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*data-analytics-event=(?:"|'''')?internal_promo_click(?:"|'''')?[^>]*data-analytics-source-slot=(?:"|'''')?(?:bookstore_index_direct|bookstore_detail_direct)_sample_issue(?:"|'''')?') {
   throw 'Built bookstore sample links must use the existing internal-promotion event and derived direct-offer source slot.'
@@ -866,7 +864,7 @@ if ($shopOutput -notmatch '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?
 if ($shopOutput -notmatch '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/privacy/(?:"|'''')?[^>]*>\s*Privacy details\s*</a>') {
   throw 'Built bookstore newsletter opt-ins must link the privacy details.'
 }
-if ($shopOutput -match '(?i)Limited time|launch window|No spam|Easy to leave') {
+if ($shopOutput -match '(?i)Limited time|launch window|No ads|Easy to leave') {
   throw 'Built bookstore retained retired temporary or vague newsletter trust copy.'
 }
 if ($shopOutput -match '(?i)OIP-(?:AN|PS|WC)-PB|data-physical|bookstore-physical|/api/books/physical|USPS Media Mail|Shipping &amp; returns') {

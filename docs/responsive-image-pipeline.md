@@ -57,7 +57,7 @@ The migration deliberately excludes compact Medium JPEG/JPG files, books, social
 
 ## Rendering contract
 
-The shared resolver, model, and picture partials serve article heroes, body figures, homepage cartoons, gallery and Almanack images, cards, lightboxes, and managed metadata images.
+The shared resolver, model, and picture partials serve article heroes, body figures, the homepage Featured Reading lead, Gallery and Almanack images, cards, lightboxes, and managed metadata images.
 
 - Candidate widths are 320, 640, 960, 1280, and 1600 pixels, plus a terminal native width when it is smaller than 1600 and not already in that set. No derivative may upscale its source.
 - Standard illustrations use WebP quality 82 and AVIF quality 60 with the drawing hint and Lanczos resampling.

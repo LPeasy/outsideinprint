@@ -1,13 +1,14 @@
 ---
 title: "Robert V. Ussley"
-description: "Essays and reported writing by Robert V. Ussley on risk, institutions, technology, law, religion, and public life."
+description: "Independent essays and stories on history, economics, culture, and public life."
 image: "Bobviously_Portrait_v1.png"
 draft: false
 show_citation: false
 section_label: "Author"
 author_id: "robert-v-ussley"
 layout: "dossier"
-header_bio: "Robert V. Ussley writes about institutions under strain, technologies that rearrange ordinary life, and the moral weather that settles over public life when judgment gives way to performance. His work moves through risk, law, religion, culture, and civic memory without mistaking public life for content."
+header_bio: "I’m Robert. I write about how we got here, what our institutions reward, and what happens when ideas become decisions people have to live with. My work moves between essays, reported analysis, dialogue, and fiction."
+reader_note: "I built Outside In Print to give those questions room. Start with whatever catches your eye. You don’t have to share my conclusions to be part of the conversation."
 portrait: "Bobviously_Portrait_v1.png"
 portrait_alt: "Charcoal portrait of Robert V. Ussley with round glasses, unruly hair, and a faint, knowing expression."
 role_line: "Author, designer, developer, and publisher of Outside In Print."

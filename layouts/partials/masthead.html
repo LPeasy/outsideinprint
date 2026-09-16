@@ -12,14 +12,12 @@
 {{ $inCollectionsSection := or $isCollectionsPage (eq .Section "collections") }}
 {{ $isLibraryPage := eq $currentPath "/library/" }}
 {{ $inLibrarySection := or $isLibraryPage (eq .Section "library") }}
-{{ $isStudioPage := eq $currentPath "/studio/" }}
-{{ $inStudioSection := or $isStudioPage (eq .Section "studio") }}
 {{ $isBookstorePage := eq $currentPath "/shop/" }}
 {{ $inBookstoreSection := or $isBookstorePage (eq .Section "shop") }}
-{{ $isSupportPage := eq $currentPath "/support/" }}
-{{ $inSupportSection := or $isSupportPage (eq .Section "support") }}
 {{ $isAboutPage := eq $currentPath "/about/" }}
 {{ $inAboutSection := or $isAboutPage (eq .Section "about") }}
+{{ $isContributePage := eq $currentPath "/contribute/" }}
+{{ $inContributeSection := or $isContributePage (eq .Section "contribute") }}
 {{ $isAppsPage := and $appsPage (eq $currentPath $appsPage.RelPermalink) }}
 {{ $inAppsSection := or $isAppsPage (eq .Section "apps") }}
 {{ $isGamesPage := and $gamesPage (eq $currentPath $gamesPage.RelPermalink) }}
@@ -50,7 +48,7 @@
     "group" "read"
     "currentPage" $isArchivePage
     "currentSection" $inArchiveSection
-    "mobilePrimary" true
+    "mobilePrimary" false
   )
   (dict
     "key" "collections"
@@ -60,7 +58,7 @@
     "group" "read"
     "currentPage" $isCollectionsPage
     "currentSection" $inCollectionsSection
-    "mobilePrimary" true
+    "mobilePrimary" false
   )
   (dict
     "key" "library"
@@ -125,7 +123,7 @@
     "group" "direct"
     "currentPage" $isBookstorePage
     "currentSection" $inBookstoreSection
-    "mobilePrimary" true
+    "mobilePrimary" false
     "analyticsEvent" "internal_promo_click"
     "analyticsSourceSlot" "primary_nav_bookstore"
     "analyticsSlug" "bookstore"
@@ -140,55 +138,59 @@
     "group" "direct"
     "currentPage" $isAboutPage
     "currentSection" $inAboutSection
-    "mobilePrimary" false
+    "mobilePrimary" true
   )
   (dict
-    "key" "studio"
-    "label" "Studio"
-    "href" ("studio/" | absURL)
+    "key" "contribute"
+    "label" "Contribute"
+    "href" ("contribute/" | absURL)
     "group" "direct"
-    "currentPage" $isStudioPage
-    "currentSection" $inStudioSection
+    "currentPage" $isContributePage
+    "currentSection" $inContributeSection
     "mobilePrimary" false
-    "analyticsEvent" "internal_promo_click"
-    "analyticsSourceSlot" "primary_nav_studio"
-    "analyticsSlug" "studio"
-    "analyticsTitle" "Outside In Print Studio"
-    "analyticsSection" "Studio"
-    "analyticsPath" ("studio/" | relURL)
-  )
-  (dict
-    "key" "support"
-    "label" "Support"
-    "href" ("support/" | absURL)
-    "group" "direct"
-    "currentPage" $isSupportPage
-    "currentSection" $inSupportSection
-    "mobilePrimary" false
-    "analyticsEvent" "internal_promo_click"
-    "analyticsSourceSlot" "primary_nav_support"
-    "analyticsSlug" "support"
-    "analyticsTitle" "Support Outside In Print"
-    "analyticsSection" "Support"
-    "analyticsPath" ("support/" | relURL)
   )
 }}
 {{ $readItems := where $navItems "group" "read" }}
 {{ $exploreItems := where $navItems "group" "explore" }}
-{{ $directItems := where $navItems "group" "direct" }}
-{{ $mobilePrimaryItems := where $navItems "mobilePrimary" true }}
-{{ $mobileMenuItems := where $navItems "mobilePrimary" false }}
+{{ $directItems := slice }}
+{{ range $directKey := slice "about" "bookstore" "contribute" }}
+  {{ range where $navItems "key" $directKey }}
+    {{ $directItems = $directItems | append . }}
+  {{ end }}
+{{ end }}
+{{ $mobilePrimaryItems := slice }}
+{{ range $mobileKey := slice "about" }}
+  {{ range where $navItems "key" $mobileKey }}
+    {{ $mobilePrimaryItems = $mobilePrimaryItems | append . }}
+  {{ end }}
+{{ end }}
+{{ $mobileReadItems := slice }}
+{{ range $readItems }}
+  {{ $mobileReadItems = $mobileReadItems | append . }}
+{{ end }}
+{{ range where $directItems "key" "bookstore" }}
+  {{ $mobileReadItems = $mobileReadItems | append . }}
+{{ end }}
+{{ $mobileExploreItems := slice }}
+{{ range $exploreItems }}
+  {{ $mobileExploreItems = $mobileExploreItems | append . }}
+{{ end }}
+{{ range where $directItems "key" "contribute" }}
+  {{ $mobileExploreItems = $mobileExploreItems | append . }}
+{{ end }}
 {{ $readCurrent := gt (len (where $readItems "currentSection" true)) 0 }}
 {{ $exploreCurrent := gt (len (where $exploreItems "currentSection" true)) 0 }}
-{{ $mobileMenuCurrent := gt (len (where $mobileMenuItems "currentSection" true)) 0 }}
+{{ $mobileReadCurrent := gt (len (where $mobileReadItems "currentSection" true)) 0 }}
+{{ $mobileExploreCurrent := gt (len (where $mobileExploreItems "currentSection" true)) 0 }}
 <header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
     <div class="masthead-nameplate__top-ornament" aria-hidden="true"></div>
+    <div class="masthead-controls">
     {{ if $paperRouteEnabled }}
-      {{ $paperBobLogo := resources.Get "images/paper-route/paper-bob-logo.png" }}
-      {{ $paperBobLogo1x := $paperBobLogo.Resize "136x webp q82" }}
-      {{ $paperBobLogo2x := $paperBobLogo.Resize "272x webp q82" }}
+      {{ $paperBobIcon := resources.Get "images/paper-route/sprites/bob/ui-ui-bob-front-hat-tip.png" }}
+      {{ $paperBobIcon1x := $paperBobIcon.Resize "64x webp q82" }}
+      {{ $paperBobIcon2x := $paperBobIcon.Resize "128x webp q82" }}
       <button
         class="paper-route-toggle masthead-paper-route-toggle"
         type="button"
@@ -198,12 +200,12 @@
         title="Launch Paper-Bob"
       >
         <img
-          class="paper-route-toggle__logo"
-          src="{{ $paperBobLogo1x.RelPermalink }}"
-          srcset="{{ $paperBobLogo1x.RelPermalink }} 136w, {{ $paperBobLogo2x.RelPermalink }} 272w"
-          sizes="(max-width: 420px) 88px, 112px"
-          width="{{ $paperBobLogo1x.Width }}"
-          height="{{ $paperBobLogo1x.Height }}"
+          class="paper-route-toggle__icon"
+          src="{{ $paperBobIcon1x.RelPermalink }}"
+          srcset="{{ $paperBobIcon1x.RelPermalink }} 64w, {{ $paperBobIcon2x.RelPermalink }} 128w"
+          sizes="32px"
+          width="{{ $paperBobIcon1x.Width }}"
+          height="{{ $paperBobIcon1x.Height }}"
           alt=""
           aria-hidden="true"
           decoding="async"
@@ -221,10 +223,10 @@
       </svg>
       <span class="visually-hidden">Dark mode</span>
     </button>
+    </div>
     <div class="masthead-nameplate__body">
       {{ if $isHomeMasthead }}
         <div class="masthead-side-deck masthead-side-deck--left" aria-hidden="true">
-          <span>ARCHIVE</span>
           <span>ESSAYS</span>
           <span>REPORTS</span>
           <span>LITERATURE</span>
@@ -241,7 +243,7 @@
         <div class="masthead-side-deck masthead-side-deck--right" aria-hidden="true">
           <span>CURATED</span>
           <span>ARCHIVE</span>
-          <span>EST. 2025</span>
+          <span>EST. 2023</span>
         </div>
       {{ end }}
     </div>
@@ -286,43 +288,45 @@
     </div>
 
     <div class="nav__mobile">
-      {{ range $mobilePrimaryItems }}
-        {{ partial "masthead_nav_link.html" (dict "item" . "class" (printf "nav__mobile-link nav__mobile-link--%s" .key)) }}
-      {{ end }}
-
-      <details class="nav-mobile-menu{{ if $mobileMenuCurrent }} nav-mobile-menu--current{{ end }}" data-primary-nav-disclosure>
-        <summary class="nav-mobile-menu__summary">
-          <span>Menu</span>
-          {{ if $mobileMenuCurrent }}<span class="visually-hidden">, contains current section</span>{{ end }}
+      <details class="nav-mobile-disclosure nav-mobile-disclosure--read{{ if $mobileReadCurrent }} nav-mobile-disclosure--current{{ end }}" data-primary-nav-disclosure>
+        <summary class="nav-mobile-disclosure__summary">
+          <span>Read</span>
+          {{ if $mobileReadCurrent }}<span class="visually-hidden">, current section</span>{{ end }}
           <span class="nav-disclosure__chevron" aria-hidden="true"></span>
         </summary>
-        <div class="nav-mobile-menu__panel">
-          <section class="nav-mobile-menu__group" aria-labelledby="mobile-nav-read-heading">
+        <div class="nav-mobile-disclosure__panel">
+          <section class="nav-mobile-disclosure__group" aria-labelledby="mobile-nav-read-heading">
             <p id="mobile-nav-read-heading">Read</p>
             <ul>
-              {{ range where $readItems "mobilePrimary" false }}
-                <li>{{ partial "masthead_nav_link.html" (dict "item" .) }}</li>
-              {{ end }}
-            </ul>
-          </section>
-          <section class="nav-mobile-menu__group" aria-labelledby="mobile-nav-explore-heading">
-            <p id="mobile-nav-explore-heading">Explore</p>
-            <ul>
-              {{ range $exploreItems }}
-                <li>{{ partial "masthead_nav_link.html" (dict "item" .) }}</li>
-              {{ end }}
-            </ul>
-          </section>
-          <section class="nav-mobile-menu__group nav-mobile-menu__group--imprint" aria-labelledby="mobile-nav-imprint-heading">
-            <p id="mobile-nav-imprint-heading">Outside In Print</p>
-            <ul>
-              {{ range where $directItems "mobilePrimary" false }}
+              {{ range $mobileReadItems }}
                 <li>{{ partial "masthead_nav_link.html" (dict "item" .) }}</li>
               {{ end }}
             </ul>
           </section>
         </div>
       </details>
+
+      <details class="nav-mobile-disclosure nav-mobile-disclosure--explore{{ if $mobileExploreCurrent }} nav-mobile-disclosure--current{{ end }}" data-primary-nav-disclosure>
+        <summary class="nav-mobile-disclosure__summary">
+          <span>Explore</span>
+          {{ if $mobileExploreCurrent }}<span class="visually-hidden">, current section</span>{{ end }}
+          <span class="nav-disclosure__chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="nav-mobile-disclosure__panel">
+          <section class="nav-mobile-disclosure__group" aria-labelledby="mobile-nav-explore-heading">
+            <p id="mobile-nav-explore-heading">Explore</p>
+            <ul>
+              {{ range $mobileExploreItems }}
+                <li>{{ partial "masthead_nav_link.html" (dict "item" .) }}</li>
+              {{ end }}
+            </ul>
+          </section>
+        </div>
+      </details>
+
+      {{ range $mobilePrimaryItems }}
+        {{ partial "masthead_nav_link.html" (dict "item" . "class" (printf "nav__mobile-link nav__mobile-link--%s" .key)) }}
+      {{ end }}
     </div>
   </nav>
 </header>

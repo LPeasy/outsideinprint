@@ -190,7 +190,7 @@ test("article aftermatter keeps its publication record and selects one controlle
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter_prompt"/);
   assert.match(articleSingle, /"anchorID" "bobs-almanack-signup"/);
   assert.doesNotMatch(articleSingle, /partial "authors\/card\.html"/);
-  assert.match(homepage, /partial "newsletter_signup\.html"/);
+  assert.match(homepage, /partial "home_front_page\.html"/);
 
   const byline = articleSingle.indexOf('partial "authors/byline.html"');
   const aftermatter = articleSingle.indexOf('class="piece-aftermatter"');
