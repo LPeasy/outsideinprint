@@ -167,7 +167,7 @@ foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
   'partial "home_reader_banner.html"',
   'A note to the reader',
-  '<h2 id="home-v2-featured-title">Featured Reading</h2>',
+  '<h2 id="home-v2-featured-title">Featured Articles</h2>',
   'homepage_v2_featured_lead',
   'homepage_v2_featured_supporting',
   'hugo.Data.homepage_metrics',
@@ -347,7 +347,7 @@ if (-not $homeReaderBannerWideOverrideCss.Success -or $homeReaderBannerWideOverr
 
 $homeV2ContentWidthCss = [regex]::Match($mainCss, '(?s)\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{(?<rules>.*?)\}')
 if (-not $homeV2ContentWidthCss.Success -or $homeV2ContentWidthCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
-  throw 'Expected Featured Reading and the homepage closing section to share the banner and reader-note 70rem width.'
+  throw 'Expected Featured Articles and the homepage closing section to share the banner and reader-note 70rem width.'
 }
 
 $homeOrientationCss = [regex]::Match($mainCss, '(?s)\.home-front-page__orientation\{(?<rules>.*?)\}')

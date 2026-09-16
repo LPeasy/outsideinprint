@@ -677,7 +677,7 @@ test("homepage composition prioritizes proof, newsletter, featured reading, and 
     /<p class="home-front-page__welcome-links"><a href="\{\{ "about\/" \| relURL \}\}">About the imprint<\/a><a href="\{\{ "authors\/robert-v-ussley\/" \| relURL \}\}">About the author<\/a><\/p>/,
   );
   assert.doesNotMatch(homeV2FrontPage, /<p class="home-front-page__welcome-links">[\s\S]*?Start reading[\s\S]*?<\/p>/);
-  assert.match(homeV2FrontPage, /Featured Reading/);
+  assert.match(homeV2FrontPage, /Featured Articles/);
   assert.match(homeV2FrontPage, /homepage_v2_featured_lead/);
   assert.match(homeV2FrontPage, /homepage_v2_featured_supporting/);
   assert.match(homeV2FrontPage, /Become a contributor/);

@@ -3043,8 +3043,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<h2[^>]*id=(?:"home-v2-featured-title"|home-v2-featured-title)[^>]*>\s*Featured Reading\s*</h2>.*?<h3'
-    Message = 'expected the Featured Reading h2 to precede article h3 headings'
+    Pattern = '(?s)<h2[^>]*id=(?:"home-v2-featured-title"|home-v2-featured-title)[^>]*>\s*Featured Articles\s*</h2>.*?<h3'
+    Message = 'expected the Featured Articles h2 to precede article h3 headings'
   },
   @{
     Path = 'public/index.html'

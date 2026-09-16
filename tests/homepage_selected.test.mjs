@@ -115,7 +115,8 @@ test("homepage follows the reader-to-newsletter-to-reading-to-contributor sequen
     /<p class="home-front-page__welcome-links"><a href="\{\{ "about\/" \| relURL \}\}">About the imprint<\/a><a href="\{\{ "authors\/robert-v-ussley\/" \| relURL \}\}">About the author<\/a><\/p>/,
   );
   assert.doesNotMatch(homeV2, /<p class="home-front-page__welcome-links">[\s\S]*?Start reading[\s\S]*?<\/p>/);
-  assert.match(homeV2, /<h2 id="home-v2-featured-title">Featured Reading<\/h2>/);
+  assert.match(homeV2, /<h2 id="home-v2-featured-title">Featured Articles<\/h2>/);
+  assert.doesNotMatch(homeV2, /Where to begin/);
   assert.match(homeV2, /homepage_v2_featured_lead/);
   assert.match(homeV2, /homepage_v2_featured_supporting/);
   assert.match(homeV2, /Find your next question\./);
