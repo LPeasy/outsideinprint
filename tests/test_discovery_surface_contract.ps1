@@ -254,10 +254,13 @@ foreach ($partial in @('home_reader_banner.html', 'home_reader_newsletter.html')
 if ($homeV2Template -match '<form\b') {
   throw 'Expected the homepage newsletter form to remain owned by its single signup partial.'
 }
-$homeSubjects = 'Independent writing on history, economics, culture, and public life.'
-if ([regex]::Matches(($homeV2Template + $homeReaderBanner + $homeReaderNewsletter), [regex]::Escape($homeSubjects)).Count -ne 1 -or
-    -not $homeV2Template.Contains('<p class="home-v2__subjects page-shell page-shell--wide">' + $homeSubjects + '</p>', [System.StringComparison]::Ordinal)) {
-  throw 'Expected the subject description once in the homepage introduction, not repeated in the newsletter.'
+$homeSupportLabel = 'Support Independent Media'
+if ([regex]::Matches(($homeV2Template + $homeReaderBanner + $homeReaderNewsletter), [regex]::Escape($homeSupportLabel)).Count -ne 1 -or
+    -not $homeV2Template.Contains('<p class="home-v2__support page-shell page-shell--wide"><a href="{{ "support/" | relURL }}">Support Independent Media</a></p>', [System.StringComparison]::Ordinal)) {
+  throw 'Expected one native Support Independent Media link to support/ in the homepage introduction.'
+}
+if ($homeV2Template -match 'home-v2__subjects|Independent writing on history, economics, culture, and public life\.') {
+  throw 'Expected the homepage support link to replace the former homepage subject sentence.'
 }
 $homeLeadSummary = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_lead_summary.html') -Raw -Encoding utf8
 if ($homeLeadSummary -notmatch '(?s)strings\.TrimSpace.*?\.Params\.description.*?plainify' -or
@@ -333,7 +336,7 @@ if ($homeV2Template -match 'Medium reads') {
 }
 
 $homepageOrder = @(
-  'class="home-v2__subjects ',
+  'class="home-v2__support ',
   'partial "home_reader_banner.html"',
   'class="home-front-page__orientation"',
   'class="home-v2-featured',
@@ -485,11 +488,15 @@ $homeReaderBannerWideOverrideCss = [regex]::Match($mainCss, '(?s)\.home-reader-b
 if (-not $homeReaderBannerWideOverrideCss.Success -or $homeReaderBannerWideOverrideCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
   throw 'Expected the home-reader-banner page-shell--wide override to align the separate stats and newsletter regions at 70rem.'
 }
-$homeSubjectsCss = [regex]::Match($mainCss, '(?s)\.home-v2__subjects\.page-shell--wide\{(?<rules>.*?)\}').Groups['rules'].Value
-foreach ($rule in @('max-width:70rem;', 'font-size:1rem;', 'line-height:1.4;')) {
-  if (-not $homeSubjectsCss.Contains($rule, [System.StringComparison]::Ordinal)) {
-    throw "Expected the homepage subject introduction to preserve its compact wide-shell type rule: $rule"
+$homeSupportCss = [regex]::Match($mainCss, '(?s)\.home-v2__support\.page-shell--wide\{(?<rules>.*?)\}').Groups['rules'].Value
+foreach ($rule in @('max-width:70rem;', 'font-size:1rem;', 'line-height:1.4;', 'text-align:center;')) {
+  if (-not $homeSupportCss.Contains($rule, [System.StringComparison]::Ordinal)) {
+    throw "Expected the homepage support link to preserve its centered compact wide-shell type rule: $rule"
   }
+}
+if ($mainCss -notmatch '(?s)\.home-v2__support a\{[^}]*min-height:44px;' -or
+    $mainCss -notmatch '(?s)\.home-v2__support a:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);') {
+  throw 'Expected the homepage support link to have a 44px target and visible keyboard focus.'
 }
 if ($mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link\{[^}]*min-height:44px;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;' -or

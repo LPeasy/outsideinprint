@@ -53,14 +53,20 @@ const metricRecords = new Map([...metricsSource.matchAll(/^ {2}"([^"]+)":\n([\s\
     label: match[2].match(/^ {4}display_label: "([^"]+)"$/m)?.[1],
   }]));
 
-test("rendered subject description precedes the stats and the newsletter cell reaches its focusable heading", () => {
-  const subjects = "Independent writing on history, economics, culture, and public life.";
-  assert.equal(html.split(subjects).length - 1, 1);
-  const subjectTag = [...html.matchAll(/<p\b[^>]*>/g)].map((match) => match[0])
-    .find((tag) => attribute(tag, "class").split(/\s+/).includes("home-v2__subjects"));
-  assert.ok(subjectTag);
-  assert.ok(html.indexOf(subjectTag) < html.indexOf('aria-label="Outside In Print at a glance"'));
-  assert.ok(html.indexOf(subjectTag) > html.indexOf("</nav>"), "the subject description follows primary navigation");
+test("rendered support link precedes the stats and the newsletter cell reaches its focusable heading", () => {
+  const supportParagraphs = [...html.matchAll(/(<p\b[^>]*>)([\s\S]*?)<\/p>/g)]
+    .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2__support"));
+  assert.equal(supportParagraphs.length, 1);
+  const support = supportParagraphs[0];
+  const supportLinks = [...support[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)];
+  assert.equal(supportLinks.length, 1);
+  assert.equal(attribute(supportLinks[0][1], "href"), "/support/");
+  assert.equal(text(supportLinks[0][2]), "Support Independent Media");
+  assert.equal(html.split("Support Independent Media").length - 1, 1);
+  assert.doesNotMatch(supportLinks[0][1], /\bonclick=|\brole=|\btabindex=/, "support uses a native link");
+  assert.ok(fs.existsSync(path.join(siteDir, "support/index.html")), "support destination must render");
+  assert.ok(html.indexOf(support[1]) < html.indexOf('aria-label="Outside In Print at a glance"'));
+  assert.ok(html.indexOf(support[1]) > html.indexOf("</nav>"), "the support link follows primary navigation");
   const newsletterLinks = [...html.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
     .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-reader-banner__newsletter-link"));
   assert.equal(newsletterLinks.length, 1);
@@ -205,7 +211,7 @@ test("rendered homepage has complete no-JavaScript note, hidden native control, 
   assert.ok(fs.existsSync(path.join(siteDir, attribute(script, "src"))));
   const gallery = fs.readFileSync(path.join(siteDir, "gallery/index.html"), "utf8");
   assert.doesNotMatch(gallery, /home-reader-note(?:\.min)?\./);
-  assert.match(html, /Independent writing on history, economics, culture, and public life\./);
+  assert.doesNotMatch(html, /home-v2__subjects|Independent writing on history, economics, culture, and public life\./);
   assert.match(html, /250(?:\+|&#43;)<\/strong>\s*<span>Articles<\/span>/);
   assert.match(html, /10,000(?:\+|&#43;)<\/strong>\s*<span>Readers<\/span>/);
 });

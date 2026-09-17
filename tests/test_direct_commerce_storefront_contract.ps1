@@ -472,6 +472,16 @@ if ($physicalCheckoutScript -match '(?i)analyticsAmount|order_id|customer_email|
   throw 'Physical checkout script must not expose amounts, order IDs, customer email, or payment IDs to analytics.'
 }
 
+$supportIntroSource = Get-RequiredText -RelativePath 'content/support/_index.md'
+foreach ($requiredSupportPurpose in @(
+  "Your support helps fund Robert’s work building this website, writing stories, and doing research.",
+  'It also helps keep ads off the site.'
+)) {
+  Assert-Contains -Text $supportIntroSource -Expected $requiredSupportPurpose -Context 'Support purpose copy'
+}
+if ($supportIntroSource -match '(?i)no ads ever|always ad-free|never (?:run|show|have) ads') {
+  throw 'Support purpose copy must not introduce a permanent no-ads promise.'
+}
 $supportTemplate = Get-RequiredText -RelativePath 'layouts/support/list.html'
 foreach ($requiredSupportText in @(
   'support_checkout_enabled',
@@ -958,7 +968,8 @@ if ($shopOutput -match '(?i)data-analytics-(?:amount|order|email|address|custome
 $supportOutput = [Net.WebUtility]::HtmlDecode([string]$output['support/index.html'])
 foreach ($requiredSupportOutput in @(
   'Support Outside In Print',
-  'If you value the work, you can support Outside In Print directly.',
+  "Your support helps fund Robert’s work building this website, writing stories, and doing research.",
+  'It also helps keep ads off the site.',
   'Support once',
   'Support $5 monthly',
   'Monthly support is charged today and renews each month until canceled. Cancel anytime through the link in your Square receipt email.',

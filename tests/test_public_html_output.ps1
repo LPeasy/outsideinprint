@@ -5440,12 +5440,25 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     }
   }
   $homeTags = @([regex]::Matches($homeIndexHtml, '<[a-z][^>]*>', 'IgnoreCase') | ForEach-Object { $_.Value })
-  $subjectSentence = 'Independent writing on history, economics, culture, and public life.'
-  $subjectTags = @($homeTags | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2__subjects' })
-  if ([regex]::Matches($homeIndexHtml, [regex]::Escape($subjectSentence)).Count -ne 1 -or $subjectTags.Count -ne 1) {
-    $uxIssues.Add('public/index.html => expected one subject description in the homepage introduction')
-  } elseif ($homeProofSections.Count -eq 1 -and $homeIndexHtml.IndexOf($subjectTags[0], [System.StringComparison]::Ordinal) -ge $homeIndexHtml.IndexOf($homeProofSections[0], [System.StringComparison]::Ordinal)) {
-    $uxIssues.Add('public/index.html => the subject description must precede the stats banner')
+  $supportParagraphs = @([regex]::Matches($homeIndexHtml, '(?is)<p\b[^>]*>.*?</p>') | Where-Object { Test-TagHasClass -Tag $_.Value -ClassName 'home-v2__support' })
+  if ($supportParagraphs.Count -ne 1 -or [regex]::Matches($homeIndexHtml, 'Support Independent Media').Count -ne 1) {
+    $uxIssues.Add('public/index.html => expected one Support Independent Media introduction link')
+  } else {
+    $supportParagraph = $supportParagraphs[0]
+    $supportLinks = @(Get-OpenTags -Html $supportParagraph.Value -TagName 'a')
+    if ($supportLinks.Count -ne 1 -or (Get-AttributeValue -Tag $supportLinks[0] -Name 'href') -cne '/support/' -or
+        (Convert-HtmlFragmentToText -Html $supportParagraph.Value) -cne 'Support Independent Media') {
+      $uxIssues.Add('public/index.html => expected the exact Support Independent Media label linked natively to /support/')
+    }
+    if ($homeProofSections.Count -eq 1 -and $supportParagraph.Index -ge $homeIndexHtml.IndexOf($homeProofSections[0], [System.StringComparison]::Ordinal)) {
+      $uxIssues.Add('public/index.html => the support link must precede the stats banner')
+    }
+    if ($supportParagraph.Index -le $homeIndexHtml.IndexOf('</nav>', [System.StringComparison]::Ordinal)) {
+      $uxIssues.Add('public/index.html => the support link must follow primary navigation')
+    }
+  }
+  if ($homeIndexHtml -match 'home-v2__subjects|Independent writing on history, economics, culture, and public life\.') {
+    $uxIssues.Add('public/index.html => expected the support link to replace the former homepage subject sentence')
   }
   $newsletterJumpLinks = @(Get-OpenTags -Html $homeIndexHtml -TagName 'a' | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-reader-banner__newsletter-link' })
   if ($newsletterJumpLinks.Count -ne 1 -or (Get-AttributeValue -Tag $newsletterJumpLinks[0] -Name 'href') -cne '#home-reader-banner-title') {

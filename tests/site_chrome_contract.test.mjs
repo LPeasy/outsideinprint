@@ -269,12 +269,16 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav__mobile-link--about\{\s*grid-column:3;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.nav-mobile-disclosure__panel\{[\s\S]*?position:absolute;[\s\S]*?top:44px;[\s\S]*?right:0;[\s\S]*?left:0;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead-nameplate__top-ornament\{\s*display:none;/);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.title\{[\s\S]*?font-size:clamp\(2\.55rem, 11vw, 3\.1rem\);[\s\S]*?line-height:\.96;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.title\{[\s\S]*?font-size:clamp\(2\.04rem, 8\.8vw, 2\.48rem\);[\s\S]*?line-height:\.96;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.subtitle\{\s*display:none;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead-theme-toggle\{[\s\S]*?right:max\(12px, env\(safe-area-inset-right\)\);/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead-paper-route-toggle\{[\s\S]*?left:max\(12px, env\(safe-area-inset-left\)\);/);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.masthead-nameplate__divider\{[\s\S]*?height:10px;[\s\S]*?margin:10px 0 6px;/);
-  assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(2rem, 10vw, 2\.25rem\)/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.masthead-nameplate__divider\{[\s\S]*?height:8px;[\s\S]*?margin:0;/);
+  assert.match(css, /@media \(max-width:360px\)\{[\s\S]*\.masthead--full \.title\{[\s\S]*font-size:clamp\(1\.6rem, 8vw, 1\.8rem\)/);
+  assert.match(css, /\.masthead--full \.masthead-nameplate__top-rule\{\s*margin-bottom:4px;/);
+  assert.match(css, /\.masthead--full \.masthead-nameplate__top-ornament\{\s*margin-bottom:4px;/);
+  assert.match(css, /\.masthead--full \.masthead-nameplate__divider\{\s*height:10px;\s*margin:8px 0 6px;/);
+  assert.match(css, /\.masthead--full \.nav--section-rail\{[^}]*padding-block:0;/);
   assert.doesNotMatch(css, /@media \(max-width:360px\)\{[\s\S]*?\.masthead--editorial \.nav--section-rail\{[\s\S]*?font-size:\.6rem;/);
   assert.doesNotMatch(css, /@media \(max-width:420px\)\{[\s\S]*?\.theme-toggle\{[\s\S]*?(?:width|height):1\.85rem;/);
   assert.doesNotMatch(css, /@media \(max-width:420px\)\{[\s\S]*?\.paper-route-toggle\{[\s\S]*?height:1\.85rem;/);
@@ -284,6 +288,17 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(css, /\/\* Light-mode paper edition \*\//);
   assert.match(css, /html\[data-theme="light"\] \.card,[\s\S]*background:var\(--paper-surface-wash\), var\(--bg-surface\)/);
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
+});
+
+test("homepage nav-to-support spacing stays compact without shrinking the support target", () => {
+  assert.match(cssRule(css, ".masthead.masthead--full"), /margin-bottom:6px;/);
+  assert.match(cssRule(css, ".masthead--full .nav--section-rail"), /margin-bottom:6px;/);
+  const fullNavMargins = [...css.matchAll(/(?:^|\n)\s*\.masthead--full \.nav--section-rail\s*\{([^}]*)\}/g)]
+    .map((match) => match[1]).filter((rules) => /margin-bottom:/.test(rules));
+  assert.equal(fullNavMargins.length, 2, "desktop and mobile own the homepage navigation gap");
+  for (const rules of fullNavMargins) assert.match(rules, /margin-bottom:6px;/);
+  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.nav--section-rail\{\s*margin-bottom:6px;/);
+  assert.match(cssRule(css, ".home-v2__support a"), /min-height:44px;/);
 });
 
 test("Jack Stratton modern bio preserves the complete localized visual sequence", () => {
