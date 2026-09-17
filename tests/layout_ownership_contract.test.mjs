@@ -72,7 +72,7 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
     'class="home-v2-library home-v2-next__links page-shell page-shell--wide"',
     'partial "home_reader_newsletter.html" .',
     'class="home-v2-next page-shell page-shell--wide"',
-    'class="home-v2-next__contribute"',
+    'aria-label="Become a contributor"',
     'class="home-v2-next__cta"'
   ]) {
     assert.match(homeV2FrontPage, new RegExp(escapeRegex(snippet)));
@@ -113,7 +113,6 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
     ".home-v2-featured__supporting{",
     ".home-v2-library.home-v2-next__links{",
     ".home-v2-next{",
-    ".home-v2-next__contribute{",
     ".home-v2-next__cta{"
   ]) {
     assert.match(css, new RegExp(escapeRegex(selector)));
@@ -124,6 +123,8 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
   assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-label\{[^}]*font-size:\.8125rem;[^}]*letter-spacing:\.1em;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
+  assert.doesNotMatch(`${homeV2FrontPage}\n${css}`, /home-v2-next__contribute/);
+  assert.match(css, /\.home-v2-next\{[^}]*display:flex;[^}]*justify-content:center;/);
 });
 
 test("collection detail section-front hooks have explicit inner-structure styling", () => {
@@ -461,7 +462,6 @@ test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, an
     "`.home-v2-featured__supporting`",
     "`.home-v2-library`",
     "`.home-v2-next`",
-    "`.home-v2-next__contribute`",
     "`.home-v2-next__cta`",
     "| Contributor route | `/contribute/`",
     "| About route | `/about/`",

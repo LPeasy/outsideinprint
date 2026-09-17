@@ -264,7 +264,7 @@ foreach ($requiredSnippet in @(
   'Read the piece',
   'Browse the library',
   'Surprise me',
-  '<section class="home-v2-next page-shell page-shell--wide" aria-label="Publish with us">',
+  '<section class="home-v2-next page-shell page-shell--wide" aria-label="Become a contributor">',
   'Become a contributor'
 )) {
   if ($homeV2Template -notmatch [regex]::Escape($requiredSnippet)) {
@@ -291,9 +291,13 @@ if (-not [string]::IsNullOrWhiteSpace($homeLibraryLinks)) {
   throw 'Expected the homepage library navigation to contain only its two reading links, without a heading or description.'
 }
 
-$homeContribution = [regex]::Match($homeV2Template, '(?s)<section class="home-v2-next page-shell page-shell--wide" aria-label="Publish with us">(?<body>.*?)</section>')
-if (-not $homeContribution.Success -or [regex]::Matches($homeContribution.Groups['body'].Value, '<article\b').Count -ne 1 -or $homeContribution.Groups['body'].Value -notmatch [regex]::Escape('class="home-v2-next__contribute"')) {
-  throw 'Expected Publish with us to contain only the contributor article.'
+$homeContribution = [regex]::Match($homeV2Template, '(?s)<section class="home-v2-next page-shell page-shell--wide" aria-label="Become a contributor">(?<body>.*?)</section>')
+$homeContributorButton = '<a class="home-v2-next__cta" href="{{ "contribute/" | relURL }}">Become a contributor</a>'
+if (-not $homeContribution.Success -or $homeContribution.Groups['body'].Value.Trim() -cne $homeContributorButton) {
+  throw 'Expected the final homepage region to contain only the Become a contributor button link.'
+}
+if ($homeV2Template -match 'home-v2-next__contribute|Publish with us|Write for Outside In Print\.|Have an original article or essay') {
+  throw 'Expected the homepage to omit the retired contributor box and its copy.'
 }
 
 $expectedHomeReaderNote = 'However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.'
@@ -473,12 +477,17 @@ if (-not $homeV2ContentWidthCss.Success -or $homeV2ContentWidthCss.Groups['rules
 }
 
 $homeContributionCss = [regex]::Match($mainCss, '(?s)\.home-v2-next\{(?<rules>.*?)\}')
-if (-not $homeContributionCss.Success -or $homeContributionCss.Groups['rules'].Value -match 'display\s*:\s*grid|grid-template-columns\s*:') {
-  throw 'Expected the homepage contribution region to use one natural block column rather than the retired two-column grid.'
+if (-not $homeContributionCss.Success -or $homeContributionCss.Groups['rules'].Value -notmatch 'display:flex;' -or
+    $homeContributionCss.Groups['rules'].Value -notmatch 'justify-content:center;' -or
+    $homeContributionCss.Groups['rules'].Value -notmatch 'margin-top:\.5rem;' -or
+    $homeContributionCss.Groups['rules'].Value -match 'border|background|grid-template-columns') {
+  throw 'Expected the homepage contributor button to be centered in a borderless wrapper directly below the newsletter.'
 }
-$homeContributionArticleCss = [regex]::Match($mainCss, '(?s)\.home-v2-next__contribute\{(?<rules>.*?)\}')
-if (-not $homeContributionArticleCss.Success -or $homeContributionArticleCss.Groups['rules'].Value -match 'border-left\s*:') {
-  throw 'Expected the homepage contributor article to omit its retired left border.'
+if ($mainCss -match '\.home-v2-next__contribute\{|\.home-v2-next > article\{') {
+  throw 'Expected obsolete contributor article styling to remain absent.'
+}
+if ($mainCss -notmatch '(?s)\.home-v2-next__cta\{[^}]*margin-top:0;[^}]*max-width:100%;[^}]*justify-content:center;[^}]*text-align:center;') {
+  throw 'Expected the contributor button to retain centered text and fit narrow screens without an extra top gap.'
 }
 if ($mainCss -notmatch '(?s)\.home-v2-next__links a,\s*\.home-v2-next__cta\{[^}]*min-height:44px;') {
   throw 'Expected the library links and contribution control to retain 44px interaction targets.'

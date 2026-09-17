@@ -171,14 +171,21 @@ test("rendered homepage has complete no-JavaScript note, hidden native control, 
   assert.match(html, /10,000(?:\+|&#43;)<\/strong>\s*<span>Readers<\/span>/);
 });
 
-test("rendered homepage puts two reading links before one newsletter signup and the contributor callout", () => {
+test("rendered homepage puts two reading links before one newsletter signup and a contributor button", () => {
   const sections = [...html.matchAll(/<section\b[^>]*>/g)].map((match) => match[0]);
   const proofTag = sections.find((tag) => attribute(tag, "aria-label") === "Outside In Print at a glance");
   const newsletterTag = sections.find((tag) => attribute(tag, "class").split(/\s+/).includes("home-reader-newsletter"));
-  const contributionTag = sections.find((tag) => attribute(tag, "aria-label") === "Publish with us");
+  const contributionTag = sections.find((tag) => attribute(tag, "aria-label") === "Become a contributor");
   assert.ok(proofTag);
   assert.ok(newsletterTag);
   assert.ok(contributionTag);
+  const contributionStart = html.indexOf(contributionTag) + contributionTag.length;
+  const contributionBody = html.slice(contributionStart, html.indexOf("</section>", contributionStart));
+  assert.match(contributionBody, /^\s*<a\b[^>]*>Become a contributor<\/a>\s*$/);
+  assert.doesNotMatch(contributionBody, /<article\b|<h[1-6]\b|<p\b|home-v2-next__contribute/);
+  const contributionLink = contributionBody.match(/<a\b[^>]*>/)?.[0];
+  assert.equal(attribute(contributionLink, "class"), "home-v2-next__cta");
+  assert.equal(new URL(attribute(contributionLink, "href"), "https://outsideinprint.org").pathname, "/contribute/");
   assert.equal(attribute(newsletterTag, "aria-labelledby"), "home-reader-banner-title");
 
   const library = [...html.matchAll(/(<nav\b[^>]*>)([\s\S]*?)<\/nav>/g)]

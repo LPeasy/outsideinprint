@@ -3048,7 +3048,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-reader-banner__proof.*?home-front-page__orientation.*?home-v2-featured.*?home-v2-library.*?home-reader-newsletter.*?home-v2-next__contribute'
+    Pattern = '(?s)home-reader-banner__proof.*?home-front-page__orientation.*?home-v2-featured.*?home-v2-library.*?home-reader-newsletter.*?home-v2-next__cta'
     Message = 'expected homepage order to move through proof, reader note, featured reading, library links, newsletter, and contribution'
   },
   @{
@@ -3115,13 +3115,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-v2-library.*?Browse the library.*?Surprise me.*?home-reader-newsletter.*?home-v2-next__contribute.*?Write for Outside In Print\..*?href=(?:"|'''')?(?:https://outsideinprint\.org)?/contribute/(?:"|'''')?[^>]*>\s*Become a contributor'
-    Message = 'expected library links before the newsletter and a separate contributor call to action'
+    Pattern = '(?s)home-v2-library.*?Browse the library.*?Surprise me.*?home-reader-newsletter.*?home-v2-next__cta[^>]*href=(?:"|'''')?(?:https://outsideinprint\.org)?/contribute/(?:"|'''')?[^>]*>\s*Become a contributor'
+    Message = 'expected library links before the newsletter and its final contributor button'
   },
   @{
     Path = 'public/index.html'
-    Pattern = 'The full imprint|Find your next question|home-v2-next__browse|Browse the archive|Search the library'
-    Message = 'expected the homepage to omit the retired browse module and archive body CTA'
+    Pattern = 'The full imprint|Find your next question|home-v2-next__browse|Browse the archive|Search the library|home-v2-next__contribute|Publish with us|Write for Outside In Print\.|Have an original article or essay'
+    Message = 'expected the homepage to omit retired browse and contributor boxes and their copy'
     ShouldNotMatch = $true
   },
   @{
@@ -5333,9 +5333,16 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeSections = @(Get-OpenTags -Html $homeIndexHtml -TagName 'section')
   $homeProofSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Outside In Print at a glance' })
   $homeNewsletterSections = @($homeSections | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-reader-newsletter' })
-  $homeContributorSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Publish with us' })
+  $homeContributorSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Become a contributor' })
   if ($homeProofSections.Count -ne 1 -or $homeNewsletterSections.Count -ne 1 -or $homeContributorSections.Count -ne 1) {
-    $uxIssues.Add('public/index.html => expected one named proof region, one newsletter region, and one Publish with us region')
+    $uxIssues.Add('public/index.html => expected one named proof region, one newsletter region, and one Become a contributor button region')
+  }
+  if ($homeContributorSections.Count -eq 1) {
+    $contributorStart = $homeIndexHtml.IndexOf($homeContributorSections[0], [System.StringComparison]::Ordinal) + $homeContributorSections[0].Length
+    $contributorEnd = $homeIndexHtml.IndexOf('</section>', $contributorStart, [System.StringComparison]::Ordinal)
+    if ($contributorEnd -lt 0 -or $homeIndexHtml.Substring($contributorStart, $contributorEnd - $contributorStart) -notmatch '^\s*<a\b[^>]*>Become a contributor</a>\s*$') {
+      $uxIssues.Add('public/index.html => the final contributor region must contain only its button link, without article wrapper, heading, or descriptive copy')
+    }
   }
   if ($homeNewsletterSections.Count -eq 1 -and (Get-AttributeValue -Tag $homeNewsletterSections[0] -Name 'aria-labelledby') -cne 'home-reader-banner-title') {
     $uxIssues.Add('public/index.html => expected the separate newsletter region to retain its existing heading label')

@@ -147,7 +147,7 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
   ]);
   assert.equal((library.match(/<a\b/g) || []).length, 2);
   assert.match(homeV2, /aria-label="Keep reading"/);
-  assert.match(homeV2, /aria-label="Publish with us"/);
+  assert.match(homeV2, /aria-label="Become a contributor"/);
   assert.doesNotMatch(homeV2, /The full imprint|Find your next question|Browse the archive|Search the library|home-v2-next__browse|"archive\/"/);
   assert.match(homeV2, /Become a contributor/);
   assert.doesNotMatch(homeV2, /home_imprint_statement|home-manifesto/);
@@ -215,6 +215,10 @@ test("contributor lane is public, specific, and linked from the homepage", () =>
   assert.match(contributor, /support@outsideinprint\.org/);
   assert.match(contributor, /Sending a pitch does not guarantee publication\./);
   assert.match(homeV2, /href="\{\{ "contribute\/" \| relURL \}\}">Become a contributor<\/a>/);
+  assert.match(homeV2, /partial "home_reader_newsletter\.html"[^]*?<section class="home-v2-next page-shell page-shell--wide" aria-label="Become a contributor">\s*<a class="home-v2-next__cta" href="\{\{ "contribute\/" \| relURL \}\}">Become a contributor<\/a>\s*<\/section>/);
+  assert.doesNotMatch(homeV2, /home-v2-next__contribute|Publish with us|Write for Outside In Print\.|Have an original article or essay/);
+  assert.match(css, /\.home-v2-next\{[^}]*display:flex;[^}]*justify-content:center;[^}]*margin-top:\.5rem;/);
+  assert.doesNotMatch(css.match(/\.home-v2-next\{([^}]*)\}/)?.[1] || "", /border|background/);
 });
 
 test("new homepage system has responsive, keyboard-visible editorial styling", () => {

@@ -647,22 +647,23 @@ test("commerce terms and Almanack templates keep their public copy and landmarks
   assert.doesNotMatch(collectionsData, /compact notices, and worth reprinting/i);
 });
 
-test("homepage offers separate library navigation and contributor lane", () => {
+test("homepage offers separate library navigation and a centered contributor button", () => {
   const libraryClasses = classTokensForElement(homeV2FrontPage, /<nav\b[^>]*aria-label="Keep reading"[^>]*>/, "homepage library navigation");
   for (const token of ["home-v2-library", "home-v2-next__links", "page-shell", "page-shell--wide"]) {
     assert.ok(libraryClasses.has(token), `expected homepage library class token: ${token}`);
   }
-  const nextClasses = classTokensForElement(homeV2FrontPage, /<section\b[^>]*aria-label="Publish with us"[^>]*>/, "homepage contribution");
+  const nextClasses = classTokensForElement(homeV2FrontPage, /<section\b[^>]*aria-label="Become a contributor"[^>]*>/, "homepage contribution");
   for (const token of ["home-v2-next", "page-shell", "page-shell--wide"]) {
     assert.ok(nextClasses.has(token), `expected homepage next-step class token: ${token}`);
   }
   assert.match(homeV2FrontPage, /Browse the library/);
   assert.match(homeV2FrontPage, /Surprise me/);
-  assert.match(homeV2FrontPage, /Write for Outside In Print\./);
+  assert.doesNotMatch(homeV2FrontPage, /Publish with us|Write for Outside In Print\.|Have an original article or essay/);
   assert.match(homeV2FrontPage, /Become a contributor/);
   assert.doesNotMatch(homeV2FrontPage, /Gallery|Collections|home-browse|home-v2-next__browse|The full imprint|Find your next question|Browse the archive|Search the library/);
-  assert.doesNotMatch(cssRule(css, ".home-v2-next"), /display:grid|grid-template-columns/);
-  assert.doesNotMatch(cssRule(css, ".home-v2-next__contribute"), /border-left/);
+  assert.match(cssRule(css, ".home-v2-next"), /display:flex;[\s\S]*justify-content:center;/);
+  assert.doesNotMatch(cssRule(css, ".home-v2-next"), /border|background|grid-template-columns/);
+  assert.doesNotMatch(css, /\.home-v2-next__contribute\{|\.home-v2-next > article\{/);
   assert.match(cssRule(css, ".home-v2-next__cta"), /min-height:44px;/);
 });
 
@@ -1074,7 +1075,8 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(cssRule(css, ".home-v2-featured__lead"), /border-right:1px solid var\(--oip-rule-standard\);/);
   assert.match(cssRule(css, ".home-v2-featured__lead-media img"), /aspect-ratio:16 \/ 9;/);
   assert.match(cssRule(css, ".home-v2-featured__supporting"), /padding:1\.25rem 0 1\.1rem 1\.5rem;/);
-  assert.match(cssRule(css, ".home-v2-next"), /border-top:4px double var\(--oip-rule-engraved-strong\);/);
+  assert.match(cssRule(css, ".home-v2-next"), /display:flex;[\s\S]*justify-content:center;/);
+  assert.doesNotMatch(cssRule(css, ".home-v2-next"), /border|background/);
   assert.match(cssRule(css, ".home-v2-next__cta"), /min-height:44px;/);
   assert.match(css, /@media \(max-width:900px\)\{[\s\S]*\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr;/);
   assert.match(css, /@media \(max-width:520px\)\{[\s\S]*\.home-v2-featured__supporting\{\s*display:block;/);
@@ -1105,7 +1107,7 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(css, /\.essays-front__month-list \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
   assert.match(cssRule(css, ".home-v2-featured__meta"), /font:700 \.8125rem\/1\.4 var\(--font-ui\);/);
   assert.match(cssRule(css, ".home-v2-featured__item + .home-v2-featured__item"), /border-top:1px solid var\(--oip-rule-standard\);/);
-  assert.doesNotMatch(cssRule(css, ".home-v2-next__contribute"), /border-left/);
+  assert.doesNotMatch(css, /\.home-v2-next__contribute\{/);
 
   assert.match(css, /\.cartoon-gallery-spotlight\{[\s\S]*grid-template-columns:minmax\(12rem, \.38fr\) minmax\(0, 1fr\);/);
   assert.match(css, /\.cartoon-gallery\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
