@@ -5,6 +5,8 @@
 <section class="home-v2" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
 
+  <p class="home-v2__subjects page-shell page-shell--wide">Independent writing on history, economics, culture, and public life.</p>
+
   {{ partial "home_reader_banner.html" . }}
 
   <section class="home-front-page__orientation" aria-labelledby="home-reader-note-title">
@@ -59,7 +61,7 @@
                   data-analytics-section="{{ $sectionLabel }}"
                   data-analytics-path="{{ $page.RelPermalink }}"
                 >{{ $page.Title }}</a></h3>
-                {{- with (partial "discovery/page-summary.html" $page) }}<p class="home-v2-featured__dek">{{ . }}</p>{{ end }}
+                {{- with (partial "home_lead_summary.html" $page) }}<p class="home-v2-featured__dek">{{ . }}</p>{{ end }}
                 <p class="home-v2-featured__action"><a href="{{ $page.RelPermalink }}">Read the piece <span aria-hidden="true">&rarr;</span></a></p>
               </div>
             </article>

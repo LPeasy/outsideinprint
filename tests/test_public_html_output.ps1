@@ -3058,7 +3058,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?One thoughtful letter each week\..*?Independent writing on history, economics, culture, and public life\..*?No spam ever\. Unsubscribe anytime\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Join the newsletter'
+    Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?One thoughtful letter each week\..*?No spam ever\. Unsubscribe anytime\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Join the newsletter'
     Message = 'expected the homepage to retain the plain-language tracked newsletter signup below the reading surface'
   },
   @{
@@ -5397,6 +5397,21 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     }
   }
   $homeTags = @([regex]::Matches($homeIndexHtml, '<[a-z][^>]*>', 'IgnoreCase') | ForEach-Object { $_.Value })
+  $subjectSentence = 'Independent writing on history, economics, culture, and public life.'
+  $subjectTags = @($homeTags | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2__subjects' })
+  if ([regex]::Matches($homeIndexHtml, [regex]::Escape($subjectSentence)).Count -ne 1 -or $subjectTags.Count -ne 1) {
+    $uxIssues.Add('public/index.html => expected one subject description in the homepage introduction')
+  } elseif ($homeProofSections.Count -eq 1 -and $homeIndexHtml.IndexOf($subjectTags[0], [System.StringComparison]::Ordinal) -ge $homeIndexHtml.IndexOf($homeProofSections[0], [System.StringComparison]::Ordinal)) {
+    $uxIssues.Add('public/index.html => the subject description must precede the stats banner')
+  }
+  $newsletterJumpLinks = @(Get-OpenTags -Html $homeIndexHtml -TagName 'a' | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-reader-banner__newsletter-link' })
+  if ($newsletterJumpLinks.Count -ne 1 -or (Get-AttributeValue -Tag $newsletterJumpLinks[0] -Name 'href') -cne '#home-reader-banner-title') {
+    $uxIssues.Add('public/index.html => expected the Weekly Newsletter cell to link to the signup heading')
+  }
+  $newsletterHeadings = @(Get-OpenTags -Html $homeIndexHtml -TagName 'h2' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'id') -ceq 'home-reader-banner-title' })
+  if ($newsletterHeadings.Count -ne 1 -or (Get-AttributeValue -Tag $newsletterHeadings[0] -Name 'tabindex') -cne '-1') {
+    $uxIssues.Add('public/index.html => expected a focusable native newsletter fragment destination')
+  }
   foreach ($signupId in @('home-reader-email', 'home-reader-banner-title')) {
     $signupIdCount = @($homeTags | Where-Object { (Get-AttributeValue -Tag $_ -Name 'id') -ceq $signupId }).Count
     if ($signupIdCount -ne 1) {

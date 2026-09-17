@@ -44,6 +44,7 @@ $requiredFiles = @(
   'layouts/partials/home_v2_selected.html',
   'layouts/partials/home_reader_banner.html',
   'layouts/partials/home_reader_newsletter.html',
+  'layouts/partials/home_lead_summary.html',
   'layouts/partials/home_featured_image_button.html',
   'layouts/partials/home_featured_image_dialog.html',
   'assets/js/home-featured-image.js',
@@ -203,6 +204,7 @@ if ($mainCss -notmatch '(?s)\.home-v2-featured__image-toggle\{[^}]*aspect-ratio:
 foreach ($requiredSnippet in @(
   '<section class="home-reader-banner page-shell page-shell--wide" aria-label="Outside In Print at a glance">',
   'hugo.Data.homepage_metrics',
+  '<a class="home-reader-banner__proof-item home-reader-banner__newsletter-link" href="#home-reader-banner-title">',
   '<strong>Weekly</strong>',
   '<span>Newsletter</span>'
 )) {
@@ -216,7 +218,7 @@ if ($homeReaderBanner -match '<form\b|home-reader-banner__signup|home-reader-ema
 foreach ($requiredSnippet in @(
   '<section class="home-reader-banner home-reader-newsletter page-shell page-shell--wide" aria-labelledby="home-reader-banner-title">',
   'From the imprint',
-  'Independent writing on history, economics, culture, and public life.',
+  '<h2 id="home-reader-banner-title" tabindex="-1">',
   'One thoughtful letter each week.',
   'No spam ever. Unsubscribe anytime.',
   'Join the newsletter',
@@ -251,6 +253,18 @@ foreach ($partial in @('home_reader_banner.html', 'home_reader_newsletter.html')
 }
 if ($homeV2Template -match '<form\b') {
   throw 'Expected the homepage newsletter form to remain owned by its single signup partial.'
+}
+$homeSubjects = 'Independent writing on history, economics, culture, and public life.'
+if ([regex]::Matches(($homeV2Template + $homeReaderBanner + $homeReaderNewsletter), [regex]::Escape($homeSubjects)).Count -ne 1 -or
+    -not $homeV2Template.Contains('<p class="home-v2__subjects page-shell page-shell--wide">' + $homeSubjects + '</p>', [System.StringComparison]::Ordinal)) {
+  throw 'Expected the subject description once in the homepage introduction, not repeated in the newsletter.'
+}
+$homeLeadSummary = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_lead_summary.html') -Raw -Encoding utf8
+if ($homeLeadSummary -notmatch '(?s)strings\.TrimSpace.*?\.Params\.description.*?plainify' -or
+    $homeLeadSummary -notmatch '(?s)if not \$summary.*?partial "discovery/page-summary\.html"' -or
+    [regex]::Matches($homeV2Template, 'partial "home_lead_summary\.html" \$page').Count -ne 1 -or
+    [regex]::Matches($homeV2Template, 'partial "discovery/page-summary\.html" \$page').Count -ne 1) {
+  throw 'Expected a plain-text description-first lead summary with the shared fallback and unchanged supporting resolver.'
 }
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
@@ -319,6 +333,7 @@ if ($homeV2Template -match 'Medium reads') {
 }
 
 $homepageOrder = @(
+  'class="home-v2__subjects ',
   'partial "home_reader_banner.html"',
   'class="home-front-page__orientation"',
   'class="home-v2-featured',
@@ -469,6 +484,19 @@ foreach ($selector in $homeReaderBannerCssChecks) {
 $homeReaderBannerWideOverrideCss = [regex]::Match($mainCss, '(?s)\.home-reader-banner\.page-shell--wide\{(?<rules>.*?)\}')
 if (-not $homeReaderBannerWideOverrideCss.Success -or $homeReaderBannerWideOverrideCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
   throw 'Expected the home-reader-banner page-shell--wide override to align the separate stats and newsletter regions at 70rem.'
+}
+$homeSubjectsCss = [regex]::Match($mainCss, '(?s)\.home-v2__subjects\.page-shell--wide\{(?<rules>.*?)\}').Groups['rules'].Value
+foreach ($rule in @('max-width:70rem;', 'font-size:1rem;', 'line-height:1.4;')) {
+  if (-not $homeSubjectsCss.Contains($rule, [System.StringComparison]::Ordinal)) {
+    throw "Expected the homepage subject introduction to preserve its compact wide-shell type rule: $rule"
+  }
+}
+if ($mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link\{[^}]*min-height:44px;' -or
+    $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;' -or
+    $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured\{[^}]*margin-top:1\.25rem;' -or
+    $mainCss -notmatch '(?s)@media \(max-width:520px\).*?\.home-v2-featured\{[^}]*margin-top:1rem;') {
+  throw 'Expected an underlined, keyboard-visible 44px newsletter link and the approved compact Featured Articles spacing.'
 }
 
 $homeV2ContentWidthCss = [regex]::Match($mainCss, '(?s)\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{(?<rules>.*?)\}')

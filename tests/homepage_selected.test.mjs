@@ -11,6 +11,7 @@ const homeV2 = read("layouts/partials/home_v2_front_page.html");
 const selected = read("layouts/partials/home_v2_selected.html");
 const readerBanner = read("layouts/partials/home_reader_banner.html");
 const readerNewsletter = read("layouts/partials/home_reader_newsletter.html");
+const leadSummary = read("layouts/partials/home_lead_summary.html");
 const featuredImageButton = read("layouts/partials/home_featured_image_button.html");
 const featuredImageDialog = read("layouts/partials/home_featured_image_dialog.html");
 const metrics = read("data/homepage_metrics.yaml");
@@ -33,11 +34,13 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.match(metrics, /10,000\+/);
   assert.match(readerBanner, /<strong>Weekly<\/strong>\s*<span>Newsletter<\/span>/);
   assert.match(readerBanner, /aria-label="Outside In Print at a glance"/);
-  assert.doesNotMatch(readerBanner, /<form\b|home-reader-banner__signup|home-reader-email|home-reader-banner-title/);
+  assert.doesNotMatch(readerBanner, /<form\b|home-reader-banner__signup|home-reader-email|id="home-reader-banner-title"/);
+  assert.match(readerBanner, /<a class="home-reader-banner__proof-item home-reader-banner__newsletter-link" href="#home-reader-banner-title">\s*<strong>Weekly<\/strong>\s*<span>Newsletter<\/span>\s*<\/a>/);
   assert.match(readerNewsletter, /class="home-reader-banner home-reader-newsletter page-shell page-shell--wide"/);
   assert.match(readerNewsletter, /aria-labelledby="home-reader-banner-title"/);
   assert.match(readerNewsletter, /From the imprint/);
-  assert.match(readerNewsletter, /Independent writing on history, economics, culture, and public life\./);
+  assert.doesNotMatch(readerNewsletter, /Independent writing on history, economics, culture, and public life\./);
+  assert.match(readerNewsletter, /<h2 id="home-reader-banner-title" tabindex="-1">/);
   assert.match(readerNewsletter, /One thoughtful letter each week\./);
   assert.match(readerNewsletter, /No spam ever\. Unsubscribe anytime\./);
   assert.match(readerNewsletter, /Join the newsletter/);
@@ -53,6 +56,20 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.equal((composition.match(/id="home-reader-banner-title"/g) || []).length, 1);
   assert.equal((homeV2.match(/partial "home_reader_newsletter\.html"/g) || []).length, 1);
   assert.doesNotMatch(readerNewsletter, /home-reader-banner__proof|Bob(?:'|’)s Almanack|No ads ever|beyond the feed/);
+});
+
+test("subject territory appears once before the proof strip and lead summaries do not change supporting precedence", () => {
+  const subjects = "Independent writing on history, economics, culture, and public life.";
+  assert.match(homeV2, /<p class="home-v2__subjects page-shell page-shell--wide">Independent writing on history, economics, culture, and public life\.<\/p>/);
+  assert.equal(`${homeV2}\n${readerBanner}\n${readerNewsletter}`.split(subjects).length - 1, 1);
+  assert.ok(homeV2.indexOf(subjects) < homeV2.indexOf('partial "home_reader_banner.html"'));
+  assert.match(leadSummary, /strings\.TrimSpace[\s\S]*\.Params\.description[\s\S]*plainify/);
+  assert.match(leadSummary, /if not \$summary[\s\S]*partial "discovery\/page-summary\.html"/);
+  const lead = homeV2.slice(homeV2.indexOf('<article class="home-v2-featured__lead">'), homeV2.indexOf("{{- else }}", homeV2.indexOf('<article class="home-v2-featured__lead">')));
+  assert.match(lead, /partial "home_lead_summary\.html" \$page/);
+  assert.doesNotMatch(lead, /partial "discovery\/page-summary\.html"/);
+  assert.equal((homeV2.match(/partial "home_lead_summary\.html"/g) || []).length, 1);
+  assert.equal((homeV2.match(/partial "discovery\/page-summary\.html"/g) || []).length, 1);
 });
 
 test("featured reading leads with the latest publication and keeps four ordered editorial supports", () => {
@@ -153,6 +170,7 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
   assert.doesNotMatch(homeV2, /home_imprint_statement|home-manifesto/);
 
   const order = [
+    'class="home-v2__subjects ',
     'partial "home_reader_banner.html"',
     'class="home-front-page__orientation"',
     'class="home-v2-featured',
@@ -237,6 +255,15 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
   assert.match(css, /\.home-v2-featured h3 a:focus-visible,[\s\S]*outline:3px solid var\(--focus-ring\)/);
   assert.match(css, /\.home-v2-next__links a,[\s\S]*min-height:44px/);
   assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
+  const subjectsCss = css.match(/\.home-v2__subjects\.page-shell--wide\{([^}]*)\}/)?.[1] || "";
+  assert.match(subjectsCss, /max-width:70rem;/);
+  assert.match(subjectsCss, /font-size:1rem;/);
+  assert.match(subjectsCss, /line-height:1\.4;/);
+  assert.match(css, /\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;/);
+  assert.match(css, /\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);/);
+  assert.match(css, /\.home-reader-banner__newsletter-link\{[^}]*min-height:44px;/);
+  assert.match(css, /\.home-v2-featured\{[^}]*margin-top:1\.25rem;/);
+  assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-v2-featured\{[^}]*margin-top:1rem;/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);

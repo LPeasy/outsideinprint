@@ -12,7 +12,7 @@ const dialogue = "/syd-and-oliver/what-i-had/";
 const owner = "/essays/default-owner/";
 const origami = "/essays/reverse-origami/";
 
-function renderSelection(t, overrides = {}) {
+function renderSelection(t, overrides = {}, summaries = false) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-home-selection-"));
   t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
@@ -21,10 +21,12 @@ function renderSelection(t, overrides = {}) {
     fs.writeFileSync(path.join(fixture, file), content);
   };
   write("hugo.toml", 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
-  for (const partial of ["home_v2_selected.html", "archive/longform-kind.html", "collections/normalize-values.html"]) {
+  for (const partial of ["home_v2_selected.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
-  write("layouts/index.html", '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $paths | jsonify | safeHTML }}');
+  write("layouts/index.html", summaries
+    ? '{{ $results := dict }}{{ range site.RegularPages }}{{ $results = merge $results (dict .File.BaseFileName (dict "lead" (partial "home_lead_summary.html" .) "discovery" (partial "discovery/page-summary.html" .))) }}{{ end }}{{ $results | jsonify | safeHTML }}'
+    : '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $paths | jsonify | safeHTML }}');
   write("layouts/_default/single.html", "{{ .Title }}");
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
@@ -63,4 +65,21 @@ test("a pinned latest lead stays unique and missing supporting work receives new
   });
   assert.deepEqual(selection, [dolphin, owner, origami, "/essays/latest/", "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
+});
+
+test("lead descriptions are trimmed and plain text while blank descriptions retain shared fallbacks", (t) => {
+  const common = { title: "Summary fixture", date: "2020-01-01", subtitle: "Existing subtitle." };
+  const summaries = renderSelection(t, {
+    described: { ...common, description: "  <strong>Concrete invitation.</strong>  ", dek: "Existing dek." },
+    missing: { ...common },
+    empty: { ...common, description: "" },
+    whitespace: { ...common, description: " \t\n " },
+    emptyMarkup: { ...common, description: "  <span> </span> " },
+    bodyFallback: { title: "Body fixture", date: "2020-01-01" },
+  }, true);
+  assert.deepEqual(summaries.described, { lead: "Concrete invitation.", discovery: "Existing dek." });
+  for (const slug of ["missing", "empty", "whitespace", "emptyMarkup"]) {
+    assert.deepEqual(summaries[slug], { lead: "Existing subtitle.", discovery: "Existing subtitle." }, slug);
+  }
+  assert.deepEqual(summaries.bodyFallback, { lead: "Fixture.", discovery: "Fixture." });
 });

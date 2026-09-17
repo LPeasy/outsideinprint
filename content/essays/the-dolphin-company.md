@@ -9,9 +9,12 @@ description: "A Gulf World dolphin death, bankruptcy filings, and The Dolphin Co
 featured_image: "/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg"
 featured_image_caption: "Art by author."
 featured_image_alt: "The Dolphin Company"
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-17"
+    note: "Corrected the account of Lolita's care, the Gulf World search-warrant date and attribution, and an incomplete sentence in the introduction. Replaced unsupported opening scene details with attributed inspection findings. Qualified the corporate-listing, Mexican insolvency, animal-transfer, and collateral claims to distinguish documented facts from unresolved details and interpretation."
   - version: "1.2"
     date: "2026-06-22"
     note: "Updated June 22, 2026, for COA2 public-surface review: source-card residue, pseudo-heading fragments, and discovery metadata were cleaned up."
@@ -31,29 +34,20 @@ medium_source_url: "https://medium.com/@lawtonperret/the-dolphin-company-47f1945
 
 ### A Tragedy and a Filing
 
-> **"Jett, a 14-year-old bottlenose dolphin, died from acute head trauma
-> in March 2025."**
->  - USDA inspection report, quoted in Panama City News Herald
+On March 1, 2025, Jett, a bottlenose dolphin at Gulf World Marine Park
+in Panama City Beach, Florida, died after a maneuver during a public
+show. [FOX 35's account of the March 4 USDA inspection](https://www.fox35orlando.com/news/gulf-world-marine-park-florida-dolphin-deaths)
+reported that he did not resurface and that algae-obscured water delayed
+the trainers' response.
 
-On a beautiful spring afternoon in 2025, families gathered at Gulf World
-Marine Park in Panama City Beach, Florida, expecting a classic
-spectacle. Trainers clapped, music swelled, and Jett ~ a 14-year-old
-bottlenose dolphin ~ soared through the air.
-
-He misjudged the landing, struck the shallow end, and never recovered.
-
-#### [March 4th USDA inspection](https://www.fox35orlando.com/news/gulf-world-marine-park-florida-dolphin-deaths?utm_source=chatgpt.com)
-
-According to a March 4th USDA inspection, the tank where he died was so
-clouded with algae that ***"it was difficult to see the dolphins if they
-are approximately three feet below the water."***
-
-USDA described the cause of death as ***"blunt force trauma to his
-rostrum and skull."***
+The inspection recorded preliminary necropsy findings of
+***"blunt force trauma to his rostrum and skull."*** A veterinarian
+theorized that he had struck a shallow shelf. The report did not
+establish that the trainers had seen the impact.
 
 > It was the fourth dolphin death at Gulf World in a year.
 
-#### On March 27th, 2025, Florida agents raided the park.
+#### On March 27, 2025, Florida agents searched the park.
 
 Days later, the park's parent company filed for Chapter 11 bankruptcy in
 Delaware. **The Dolphin Company**, a Mexico-based conglomerate that once
@@ -63,9 +57,8 @@ of collapse with **more than \$200 million in liabilities.**
 **The collapse wasn't just about mistreatment of dolphins ~**
 
 This is what can happen when a business built for leveraged-debt scale
-collides with a public record it cannot outrun.
-
-and then collides with changing social norms and economic reality.
+collides with a public record it cannot outrun, changing social norms,
+and economic reality.
 
 #### You can think of this story as three major forces colliding ~
 
@@ -156,9 +149,13 @@ mid-2010s the company had facilities in multiple countries and was
 adding properties through acquisition. In 2015 it bought Gulf World in
 Florida; in 2019 it acquired Marineland in St. Augustine.
 
-The company listed shares on the Mexican stock exchange in 2016 under
-the name Grupo Dolphin and rebranded itself globally as
-[The Dolphin Company.](https://thedolphinco.com/)
+The claim that Grupo Dolphin listed shares on the Mexican stock
+exchange in 2016 remains unconfirmed. The documented public listing
+belongs to its Jamaican affiliate, [Dolphin Cove, whose shares began
+trading in December 2010](https://www.jamstockex.com/wp-content/uploads/2024/04/Annual-Report-2023-Final-Dolphin-Cove.pdf),
+before World of Dolphins acquired control in 2015. The wider group
+subsequently used [The Dolphin Company](https://thedolphinco.com/) as its
+global brand.
 
 ![The Dolphin Company World Map ~ Source](oip-image:medium/4f31029a1c1552ee315750ba6fd54eabfc201c43c3b889388ad8777ec7b649d7)
 
@@ -187,9 +184,12 @@ By early 2025, the company owed about \$200 million to lenders including
 Prudential and Cigna. To keep things moving, money was shuffled between
 affiliates ~ one park helping to cover another.
 
-That worked for a while, but it also masked growing stress across the
-group. In Jamaica, for instance, Dolphin Cove's stock traded on promises
-that were underwritten by the parent company's support.
+That arrangement could also spread financial stress across the group.
+In Jamaica, [Dolphin Cove disclosed that its parent's controlling
+shareholding had been pledged for Controladora's debt](https://cdn.jamstockex.com/pd/2025/04/2024-December-31-DCOVE-Audited-Financial-Statements.pdf).
+The affiliate said it had not itself guaranteed those obligations.
+Exposure through ownership was different from a direct guarantee by the
+park operator.
 
 Bringing Marineland under the brand in 2019 was a triumphant moment for
 the company ~ an iconic American oceanarium joining the portfolio.
@@ -246,8 +246,11 @@ to protect the company's legacy.
 
 Those words contrasted sharply with growing criticism and public outcry.
 
-Activists called on him personally to address the plight of [**Lolita, the orca at the Seaquarium**](https://people.com/beloved-whale-lolita-dies-ahead-of-release-back-into-natural-habitat-7693254), while lenders in a Delaware bankruptcy court
-moved to strip him of control.
+In March 2023, Albor joined an [announcement of a plan to return Lolita,
+the orca at Miami Seaquarium, to her home waters](https://thedolphinco.com/join-forces-to-return-lolita-to-her-home-waters/).
+[She died that August](https://www.fisheries.noaa.gov/west-coast/endangered-species-conservation/southern-resident-killer-whales-questions-and-answers).
+By 2025, lenders in a Delaware bankruptcy court were moving to strip
+him of control.
 
 ![Lolita the Orca ~ Source](oip-image:medium/1dec43fe52564d486342253d92440108031027b3d9025379dc461fbfb128db1d)
 
@@ -274,8 +277,7 @@ ultimately trapped between a dream and shifting cultural landscapes.**
 **By the mid-2010s, cracks in the business started to show.**
 
 After the 2013 documentary [Blackfish](https://www.rottentomatoes.com/m/blackfish_2013), marine parks around the world faced sharper scrutiny.
-The Dolphin Company didn't house killer whales, but the tide was
-shifting ~ concrete pools with performing animals began to seem less
+Concrete pools with performing animals began to seem less
 and less humane for a growing share of the public.
 
 #### The Blackfish Effect
@@ -287,9 +289,11 @@ and less humane for a growing share of the public.
 > at parks dropped, lawmakers pushed for tighter regulation, and
 > activists found a louder voice.
 
-**The Dolphin Company never kept orcas. Even so, it operated in the
-shadows of the cultural shift that came as a result of the film's
-overwhelming popularity.**
+**The Dolphin Company later became directly responsible for an orca's
+care.** Its subsidiary MS Leisure [took over Miami Seaquarium on
+March 4, 2022](https://thedolphinco.com/the-dolphin-company-welcomes-miami-seaquarium-to-their-family-of-parks/),
+while Lolita, also known as Tokitae, lived there. [She died at the
+Seaquarium on August 18, 2023](https://www.fisheries.noaa.gov/west-coast/endangered-species-conservation/southern-resident-killer-whales-questions-and-answers).
 
 #### This is the "[social license](https://www.sciencedirect.com/science/article/pii/S0301420725000303)" problem.
 
@@ -313,16 +317,18 @@ the 2015 takeover.
 In [October 2024, three bottlenose dolphins died](https://www.newsherald.com/story/news/local/2024/10/28/how-did-three-dolphins-die-at-pcbs-gulf-world-marine-park/75716261007/) in quick succession ~ Gus, Turk, and Nate. Activists flew
 drones over the park, posting video of murky pools and sluggish animals.
 
-Then, **Jett died during a live show in March 2025**, and it was the
+Then, **Jett died during a live show on March 1, 2025**, and it was the
 most visible and horrific death yet. The spectacle itself became
 evidence.
 
-#### **Markets reacted to the news almost immediately.**
+#### **Investors were already watching the parent company's debt.**
 
 The Dolphin Company's listed affiliate in Jamaica,
-[Dolphin Cove](https://www.dolphincoveja.com/), saw selling pressure mount as
-stakeholders began to demand information about the parent company's debt
-and exposure.
+[Dolphin Cove](https://www.dolphincoveja.com/), had experienced sharp
+share-price declines in February 2025, [as the Jamaica Observer later
+reported](https://www.jamaicaobserver.com/2025/05/14/dolphin-cove-profits-drop-40-per-cent-lower-arrivals/).
+Investors' concern preceded the March search and U.S. bankruptcy filing;
+the cause of each price move is harder to isolate.
 
 **When the news broke about the company's U.S. bankruptcy filings, the
 narrative became clearer than, well, than the dolphin tanks at Gulf
@@ -331,8 +337,8 @@ World.**
 ### Breaking Point ~ Dolphin Deaths + Bankruptcy
 
 > **"Today, at my direction, FDLE and FWC executed a search warrant at
-> Gulf World Marine Park."**
->  - Florida Attorney General Ashley Moody, press release, March 2025
+> the Gulf World Marine Park in Panama City Beach."**
+>  - Florida Attorney General James Uthmeier, March 27, 2025, [statement quoted in a federal court order](https://www.aclufl.org/app/uploads/2025/04/2025-04-29_order_dckt_67_0.pdf), pages 39-40
 
 #### The collapse came fast and hard.
 
@@ -340,12 +346,12 @@ In less than a year, Gulf World went from a struggling tourist park to a
 police-taped investigation site.
 
 **In October 2024 the park lost three dolphins** ~ Gus, Turk, and Nate.
-**In March 2025, Jett died mid-show** after striking the pool wall.
+**On March 1, 2025, Jett died during a public show.** The USDA inspection
+described head trauma; a veterinarian theorized that he struck a shallow
+shelf.
 
-**On March 28, 2025,** the Attorney General's Office, Fish & Wildlife,
-and state investigators executed a search warrant after the park refused
-wellness checks. Agents reported algae-clogged pools, broken pumps, and
-inadequate staffing.
+**On March 27, 2025,** Attorney General James Uthmeier announced that
+FDLE and FWC had executed a search warrant at Gulf World Marine Park.
 
 **On March 31st, The Dolphin Company filed for Chapter 11** in Delaware,
 the form of bankruptcy that allows a business to keep operating while it
@@ -372,14 +378,17 @@ dozen animals.
 **[Gulf World shut its gates to the public in May of 2025 after 55
 years.](https://www.wjhg.com/2025/07/08/gulf-world-marine-park-may-be-permanently-closed-its-website-has-been-deleted/)**
 
-To many onlookers, the transfers looked less like rescue and more like a
-reshuffling of pieces on an overleveraged board.
+Transfers within the company could look like a reshuffling of pieces
+on an overleveraged board. The actual destinations require a distinction:
+seven bottlenose dolphins went to two Dolphin Company parks, while four
+rough-toothed dolphins went to the nonprofit Clearwater Marine Aquarium.
+The resulting map combined internal relocation and nonprofit rescue.
 
-When the park closed, the surviving animals didn't just vanish ~ they
-were quickly moved to other facilities owned by The Dolphin Company.
-
-Under the law, captive marine mammals are both living beings and
-transferable, depreciable assets just like a car or a tractor.
+Commercially held dolphins can appear as depreciable assets in accounts,
+as [Dolphin Cove's financial statements show](https://cdn.jamstockex.com/pd/2025/04/2024-December-31-DCOVE-Audited-Financial-Statements.pdf).
+But a living animal's move involves more than the accounting entry for
+a car or a tractor. Care, ownership, and permission to transfer are
+separate questions.
 
 #### What should happen to these intelligent creatures?
 
@@ -411,18 +420,25 @@ Once the Delaware court recognized new leadership for the U.S.
 restructuring, regulators signed off on moving the remaining Gulf World
 animals.
 
-Seven bottlenose dolphins were cleared for transfer to
-[***Marineland Dolphin Adventure and Dolphin Connection***](https://www.marineland.net/) in Florida. Four rough-toothed dolphins
-were later moved to [Clearwater Marine Aquarium](https://www.cmaquarium.org/) under a state order.
+According to [the company's June 16, 2025 announcement](https://www.prnewswire.com/news-releases/marineland-dolphin-adventure-and-dolphin-connection-receive-a-total-of-seven-bottlenose-dolphins-from-gulf-world-marine-park-302483129.html),
+four bottlenose dolphins moved to Marineland Dolphin Adventure on June 10
+and three to Dolphin Connection on June 11. [Clearwater Marine Aquarium
+had received four rough-toothed dolphins on June 4](https://mission.cmaquarium.org/news/four-rough-toothed-dolphins-welcomed-to-clearwater-marine-aquarium/).
+CMA described them as rescued animals deemed nonreleasable by NOAA.
+Their placement addressed a care need; ownership and creditor rights
+were separate legal questions.
 
-The U.S. Chapter 11 filing sat beside a parallel Mexican process ~ a
-[***"quiebra"***](https://hmhlegal.com/blog/mexican-bankruptcy-guide/)
-reorganization initiated in late February 2025 grouped dozens of
-subsidiaries under court oversight. Reports described a footprint of 30
-dolphinariums across eight countries.
+The U.S. Chapter 11 filing sat beside a Mexican insolvency process.
+[Dolphin Cove's audited statements](https://cdn.jamstockex.com/pd/2025/04/2024-December-31-DCOVE-Audited-Financial-Statements.pdf)
+date Controladora Dolphin's voluntary *concurso mercantil* proceedings
+to January 29, 2025, describing an initial conciliation phase.
+That is different from *quiebra*, the liquidation stage. The company's
+stated footprint of 30 parks and dolphin habitats in eight countries
+shows the scale of the operating network around that financial dispute.
 
-The paperwork and creditor updates reveal a blunt reality: the animals
-themselves appear on the balance sheet.
+The paperwork reveals a blunt reality: commercially held animals can
+appear on a balance sheet. Which animals can secure or satisfy a debt
+depends on ownership, creditor rights, and applicable restrictions.
 
 ### Collision Course ~ Finance Meets Ethics
 
@@ -437,58 +453,66 @@ In court-supervised restructuring, the animals are handled through
 property, custody, and transfer paperwork ~ the same institutional
 language used for land, pumps, and machinery.
 
-**On paper, they're assets** ~ assets that will be used to satisfy \$200
-million in claims backed by institutional lenders like Prudential and
-Cigna.
+**On paper, commercially held animals can be assets** ~ part of a
+business facing roughly \$200 million in claims associated with lenders
+including Prudential and Cigna. Ownership and security interests
+determine which assets creditors can reach.
 
-**In the real world, they're living animals** ~ intelligent beings used
-as collateral in a multinational restructuring of a failed business
-empire.
+**In the real world, they're living animals** ~ intelligent beings whose
+care can be affected by a multinational restructuring, whether or not a
+particular animal is legally available as collateral.
 
 #### You can see both sides in the paperwork.
 
 Debtor-in-possession credit keeps the lights on and pays the staff, and
-it preserves "value" for creditors. Regulators signed off on transfers
-to Marineland, Dolphin Connection, and Clearwater. Those moves kept the
-animals inside the same corporate network ~ a solution that made sense
-for operational continuity but reads like balance-sheet shuffling to
-critics.
+it preserves "value" for creditors. The moves to Marineland and Dolphin
+Connection kept seven dolphins in company parks; the four sent to
+Clearwater went to a nonprofit rescue center. Within a distressed
+company, creditor demands may continue to influence operating budgets
+after an internal transfer. A nonprofit placement creates a different
+institutional setting. Immediate care needs and creditor interests can
+overlap without being identical.
 
 #### The Dolphin Company's collapse was bigger than any single park.
 
-The Mexican quiebra rolled dozens of subsidiaries into one process
-across eight countries, which meant every decision about care, custody,
-and sale reverberated across a far-flung portfolio.
+Debt and ownership links could carry consequences across a far-flung
+portfolio. The extent to which the Mexican proceeding brought dozens
+of subsidiaries across eight countries under one court remains
+unconfirmed; the group's international reach does not establish that
+legal scope. Care, custody, and sale decisions depended on the entities
+and jurisdictions involved.
 
 The language used in the legal dispute reminds us why tempers run so hot
 when it comes to marine mammals ~
 
 > Under existing law, animals are property.
 
-> They're treated like any other asset ~
+> They can carry an asset value alongside obligations for their care ~
 
 > "Things" not "People"
 
 #### The Mexican Quiebra Process
 
-> Alongside the U.S. Chapter 11 filing, The Dolphin Company entered a
-> "quiebra" proceeding in Mexico. Quiebra is the Mexican legal framework
-> for corporate insolvency, similar to Chapter 11 but run under local
-> courts.\
-> It let the company group dozens of subsidiaries into one process, from
-> Cancún resorts to dolphinariums abroad.\
-> In effect, The Dolphin Company was fighting the same battle on two
-> fronts ~ Delaware and Mexico City ~ with creditors and regulators
-> watching closely.
+> Mexico's [commercial insolvency law, articles 2 and 3](https://www.diputados.gob.mx/LeyesBiblio/pdf/LCM.pdf),
+> distinguishes *conciliación*, which seeks an agreement to preserve the
+> business, from *quiebra*, which involves selling the business or its
+> assets to pay recognized creditors. The broader process is *concurso
+> mercantil*, not simply a Mexican name for Chapter 11.\
+> The contemporaneous financial statements described Controladora's
+> proceeding as beginning with conciliation. Whether and when particular
+> entities later entered quiebra remains unconfirmed here.\
+> The group faced related financial pressures in Mexico and Delaware,
+> through distinct legal processes with different entities and creditor
+> rights at issue.
 
-**Once a living creature is treated as property inside a distressed
-capital structure, every "care" decision becomes a "value" decision.**
+**When animal care depends on a distressed business, financial pressure
+can reach decisions that ought to begin with welfare.**
 
 ### Aftermath and Legacy
 
-> **"Seven bottlenose dolphins... received at Marineland Dolphin Adventure
-> and Dolphin Connection."**
->  - Florida Fish & Wildlife Commission statement
+> **Seven bottlenose dolphins moved to Marineland Dolphin Adventure
+> and Dolphin Connection in June 2025.**
+>  - Transfer summary from [The Dolphin Company's June 16 announcement](https://www.prnewswire.com/news-releases/marineland-dolphin-adventure-and-dolphin-connection-receive-a-total-of-seven-bottlenose-dolphins-from-gulf-world-marine-park-302483129.html)
 
 #### Gulf World closed its gates on May 27, 2025, ending a 55-year run in Panama City Beach.
 

@@ -1,0 +1,5 @@
+{{- $summary := strings.TrimSpace ((.Params.description | default "") | plainify) -}}
+{{- if not $summary -}}
+  {{- $summary = partial "discovery/page-summary.html" . -}}
+{{- end -}}
+{{- return $summary -}}

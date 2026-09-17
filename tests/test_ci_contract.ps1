@@ -438,6 +438,24 @@ if ($browserSetupNodeStep -notmatch '(?m)^\s*uses:\s*actions/setup-node@v6\s*$' 
     $browserSetupNodeStep -notmatch '(?m)^\s*package-manager-cache:\s*false\s*$') {
   throw "Browser tests must use the pinned Node 20.20.2 runtime without a package-manager cache."
 }
+$homepageOutputStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $buildJobBlock `
+  -StepName "Test Homepage Output and Selection"
+foreach ($requiredHomepageSnippet in @(
+  'OIP_HUGO_CONFIG: hugo.toml',
+  'OIP_SITE_DIR: public',
+  'OIP_HUGO_BIN: hugo',
+  'run: node --test tests/homepage_output.test.mjs tests/homepage_selection_behavior.test.mjs'
+)) {
+  if (-not $homepageOutputStep.Contains($requiredHomepageSnippet, [StringComparison]::Ordinal)) {
+    throw "Homepage output and selection coverage must use the production build and pinned Hugo: $requiredHomepageSnippet"
+  }
+}
+$homepageOutputIndex = $buildJobBlock.IndexOf('- name: Test Homepage Output and Selection', [StringComparison]::Ordinal)
+if ($homepageOutputIndex -le $hugoBuildStepIndex -or $homepageOutputIndex -le $buildJobBlock.IndexOf('- name: Setup Node for browser tests', [StringComparison]::Ordinal)) {
+  throw 'Homepage output and selection coverage must run after the Hugo build and pinned Node setup.'
+}
 $browserDependencyStep = Get-WorkflowStepBlock `
   -WorkflowName "deploy.yml" `
   -WorkflowText $buildJobBlock `

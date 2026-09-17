@@ -53,6 +53,45 @@ const metricRecords = new Map([...metricsSource.matchAll(/^ {2}"([^"]+)":\n([\s\
     label: match[2].match(/^ {4}display_label: "([^"]+)"$/m)?.[1],
   }]));
 
+test("rendered subject description precedes the stats and the newsletter cell reaches its focusable heading", () => {
+  const subjects = "Independent writing on history, economics, culture, and public life.";
+  assert.equal(html.split(subjects).length - 1, 1);
+  const subjectTag = [...html.matchAll(/<p\b[^>]*>/g)].map((match) => match[0])
+    .find((tag) => attribute(tag, "class").split(/\s+/).includes("home-v2__subjects"));
+  assert.ok(subjectTag);
+  assert.ok(html.indexOf(subjectTag) < html.indexOf('aria-label="Outside In Print at a glance"'));
+  assert.ok(html.indexOf(subjectTag) > html.indexOf("</nav>"), "the subject description follows primary navigation");
+  const newsletterLinks = [...html.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
+    .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-reader-banner__newsletter-link"));
+  assert.equal(newsletterLinks.length, 1);
+  assert.equal(attribute(newsletterLinks[0][1], "href"), "#home-reader-banner-title");
+  assert.match(newsletterLinks[0][2], /^\s*<strong>Weekly<\/strong>\s*<span>Newsletter<\/span>\s*$/);
+  assert.doesNotMatch(newsletterLinks[0][1], /\bonclick=|\brole=|\btabindex=/, "use a native link, not a scripted control");
+  const heading = [...html.matchAll(/<h2\b[^>]*>/g)].map((match) => match[0])
+    .find((tag) => attribute(tag, "id") === "home-reader-banner-title");
+  assert.ok(heading);
+  assert.equal(attribute(heading, "tabindex"), "-1");
+  assert.ok(html.indexOf(newsletterLinks[0][1]) < html.indexOf(heading));
+});
+
+test("Dolphin correction retains the original publication date and renders a consistent new edition record", () => {
+  const dolphinHtml = fs.readFileSync(path.join(siteDir, "essays/the-dolphin-company/index.html"), "utf8");
+  const source = fs.readFileSync(path.resolve("content/essays/the-dolphin-company.md"), "utf8");
+  assert.match(source, /^date: 2026-01-16\r?$/m);
+  assert.match(source, /^version: "2\.0"\r?$/m);
+  assert.match(source, /^edition: "Fifth web edition"\r?$/m);
+  assert.match(dolphinHtml, /Fifth web edition/);
+  const citation = [...dolphinHtml.matchAll(/<code\b[^>]*>([\s\S]*?)<\/code>/g)]
+    .map((match) => text(match[1])).find((value) => value.includes("Version 2.0."));
+  assert.ok(citation);
+  assert.match(citation, /Outside In Print, 2026-01-16\. Version 2\.0\. https:\/\/outsideinprint\.org\/essays\/the-dolphin-company\//);
+  const currentRevision = source.match(/revision_history:\s*\n\s+- version: "2\.0"\s*\n\s+date: "([^"]+)"\s*\n\s+note: "([^"]+)"/);
+  assert.ok(currentRevision);
+  assert.match(text(dolphinHtml), new RegExp(`Version 2\\.0 \\| ${currentRevision[1]}`));
+  assert.ok(text(dolphinHtml).includes(currentRevision[2].replaceAll("'", "&#39;"))
+    || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
+});
+
 test("rendered homepage leads with the newest publishDate and preserves unique editorial supports", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
