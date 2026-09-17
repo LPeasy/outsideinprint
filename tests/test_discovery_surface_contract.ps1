@@ -175,16 +175,30 @@ if ($dolphinSource -notmatch '(?m)^section_label: "Essay"\r?$') {
   throw 'Expected the homepage-only Case study label to preserve the Dolphin Company canonical Essay classification.'
 }
 if ($homeImageButton -notmatch '(?s)<button\b[^>]*type="button"[^>]*data-home-featured-image-trigger[^>]*aria-haspopup="dialog"[^>]*aria-controls="home-featured-image-dialog" hidden>' -or
-    $homeImageButton -notmatch '(?s)<a\b[^>]*data-home-featured-image-fallback[^>]*href="\{\{ \$model.lightbox_url \}\}"[^>]*>Image</a>') {
-  throw 'Expected a native mobile image button, initially hidden, and a working image-link fallback without JavaScript.'
+    $homeImageButton -notmatch '(?s)<a\b[^>]*data-home-featured-image-fallback[^>]*href="\{\{ \$model.lightbox_url \}\}"') {
+  throw 'Expected native mobile artwork to open the dialog, with a working artwork-link fallback without JavaScript.'
+}
+foreach ($tag in @('button', 'a')) {
+  $mobileArtwork = [regex]::Match($homeImageButton, '(?s)<' + $tag + '\b[^>]*>(?<body>.*?)</' + $tag + '>').Groups['body'].Value
+  if ($mobileArtwork -notmatch 'partial "images/picture\.html"' -or $mobileArtwork -notmatch '"loading" "lazy"' -or
+      $mobileArtwork -notmatch '"sizes" "120px"' -or $mobileArtwork -match '<svg\b|\bImage\b') {
+    throw 'Expected the mobile trigger and fallback to show the existing responsive illustration without an Image text/icon control.'
+  }
+}
+$mobileArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', [System.StringComparison]::Ordinal)
+if ($mobileArtworkIndex -le $homeV2Template.IndexOf('class="home-v2-featured__item-media"', [System.StringComparison]::Ordinal) -or
+    $mobileArtworkIndex -ge $homeV2Template.IndexOf('class="home-v2-featured__item-copy"', [System.StringComparison]::Ordinal) -or
+    $homeV2Template -match 'home-v2-featured__meta[^\r\n]*partial "home_featured_image_button\.html"') {
+  throw 'Expected the mobile artwork beside the supporting copy, outside the metadata paragraph.'
 }
 if ($homeImageDialog -notmatch '<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"' -or
     $homeImageDialog -notmatch '<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"') {
   throw 'Expected one labelled native image dialog with an image click-to-close control.'
 }
-if ($mainCss -notmatch '(?s)\.home-v2-featured__item-media\{[^}]*aspect-ratio:1;' -or
-    $mainCss -notmatch '(?s)@media \(max-width:768px\)\{\s*\.home-v2-featured__item--illustrated\{[^}]*display:block;[^}]*\}\s*\.home-v2-featured__item-media\{[^}]*display:none;[^}]*\}\s*\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:inline-flex;') {
-  throw 'Expected supporting square illustrations on desktop and compact image controls through 768px.'
+if ($mainCss -notmatch '(?s)\.home-v2-featured__image-toggle\{[^}]*aspect-ratio:1;' -or
+    $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);' -or
+    $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:block;') {
+  throw 'Expected square supporting artwork beside the copy on both desktop and mobile through 768px.'
 }
 foreach ($requiredSnippet in @(
   '<section class="home-reader-banner page-shell page-shell--wide" aria-label="Outside In Print at a glance">',

@@ -5472,7 +5472,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $supportingImageTriggers = @(Get-OpenTags -Html $homeIndexHtml -TagName 'button' | Where-Object { $_ -match '\bdata-home-featured-image-trigger\b' })
   $supportingImageFallbacks = @($homeAnchors | Where-Object { $_ -match '\bdata-home-featured-image-fallback\b' })
   if ($supportingImageTriggers.Count -ne $supportingImageLinks.Count -or $supportingImageFallbacks.Count -ne $supportingImageLinks.Count) {
-    $uxIssues.Add('public/index.html => every supporting illustration must have one mobile image control and one no-JavaScript fallback')
+    $uxIssues.Add('public/index.html => every supporting illustration must have one mobile artwork trigger and one no-JavaScript artwork fallback')
   }
   foreach ($imageLink in $supportingImageLinks) {
     if ((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $imageLink -Name 'href')) -notin $expectedSupportingPaths) {
@@ -5484,11 +5484,23 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     if (-not $imageUrl -or (Get-AttributeValue -Tag $trigger -Name 'type') -cne 'button' -or
         (Get-AttributeValue -Tag $trigger -Name 'aria-controls') -cne 'home-featured-image-dialog' -or
         $trigger -notmatch '\bhidden(?:\s|>)') {
-      $uxIssues.Add('public/index.html => mobile Image controls must start hidden with a real image target and native dialog relationship')
+      $uxIssues.Add('public/index.html => mobile artwork triggers must start hidden with a real image target and native dialog relationship')
     }
     if ($imageUrl -notin @($supportingImageFallbacks | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'href' })) {
-      $uxIssues.Add('public/index.html => mobile Image controls must retain a matching image-link fallback')
+      $uxIssues.Add('public/index.html => mobile artwork triggers must retain a matching image-link fallback')
     }
+  }
+  foreach ($mobileArt in @([regex]::Matches($homeIndexHtml, '(?s)<(?:button|a)\b[^>]*data-home-featured-image-(?:trigger|fallback)[^>]*>(?<body>.*?)</(?:button|a)>'))) {
+    $artwork = $mobileArt.Groups['body'].Value
+    $artworkImages = @(Get-OpenTags -Html $artwork -TagName 'img')
+    if ($artworkImages.Count -ne 1 -or (Get-AttributeValue -Tag $artworkImages[0] -Name 'loading') -cne 'lazy' -or
+        -not (Get-AttributeValue -Tag $artworkImages[0] -Name 'src') -or $artwork -match '<svg\b' -or
+        [regex]::Replace($artwork, '<[^>]+>', '').Trim()) {
+      $uxIssues.Add('public/index.html => mobile trigger and fallback must contain lazy artwork without an Image text/icon control')
+    }
+  }
+  if ($homeIndexHtml -match '(?s)<p\b[^>]*class=(?:"home-v2-featured__meta"|home-v2-featured__meta)[^>]*>(?:(?!</p>).)*data-home-featured-image-(?:trigger|fallback)') {
+    $uxIssues.Add('public/index.html => mobile artwork must sit outside the featured metadata paragraph')
   }
 
   $metricYaml = Get-Content -LiteralPath (Join-Path $repoRoot 'data/homepage_metrics.yaml') -Raw -Encoding utf8

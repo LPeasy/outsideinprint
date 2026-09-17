@@ -101,10 +101,23 @@ test("rendered homepage leads with the newest publishDate and preserves unique e
         assert.ok(illustration);
         assert.equal(attribute(illustration, "loading"), "lazy");
         assert.ok(attribute(illustration, "src"), "managed derivatives and legacy static images both need a real source");
-        const trigger = meta.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
-        const fallback = meta.match(/<a\b[^>]*data-home-featured-image-fallback[^>]*>/)?.[0];
-        assert.ok(trigger, "the mobile Image button belongs beside supporting metadata");
+        const triggerMarkup = card[2].match(/(<button\b[^>]*data-home-featured-image-trigger[^>]*>)([\s\S]*?)<\/button>/);
+        const fallbackMarkup = card[2].match(/(<a\b[^>]*data-home-featured-image-fallback[^>]*>)([\s\S]*?)<\/a>/);
+        const trigger = triggerMarkup?.[1];
+        const fallback = fallbackMarkup?.[1];
+        assert.ok(trigger, "the mobile square artwork opens the image dialog");
         assert.ok(fallback, "an image link must work without JavaScript");
+        assert.doesNotMatch(meta, /data-home-featured-image-trigger|data-home-featured-image-fallback/);
+        assert.ok(card[2].indexOf(trigger) < card[2].indexOf("home-v2-featured__item-copy"));
+        for (const artwork of [triggerMarkup[2], fallbackMarkup[2]]) {
+          const mobileImage = artwork.match(/<img\b[^>]*>/)?.[0];
+          assert.ok(mobileImage, "mobile trigger and fallback must display the actual illustration");
+          assert.equal(attribute(mobileImage, "src"), attribute(illustration, "src"));
+          assert.equal(attribute(mobileImage, "alt"), attribute(illustration, "alt"));
+          assert.equal(attribute(mobileImage, "loading"), "lazy");
+          assert.equal(text(artwork), "");
+          assert.doesNotMatch(artwork, /<svg\b/);
+        }
         assert.equal(attribute(trigger, "type"), "button");
         assert.equal(attribute(trigger, "aria-controls"), "home-featured-image-dialog");
         assert.equal(attribute(trigger, "aria-haspopup"), "dialog");

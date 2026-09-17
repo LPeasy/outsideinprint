@@ -79,9 +79,10 @@
                     "sizes" "120px"
                   ) -}}
                 </a>
+                {{ partial "home_featured_image_button.html" (dict "page" $page "model" .) }}
               {{- end }}
               <div class="home-v2-featured__item-copy">
-              <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}{{ with $imageModel }}{{ partial "home_featured_image_button.html" (dict "page" $page "model" .) }}{{ end }}</p>
+              <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
               <h3><a href="{{ $page.RelPermalink }}"
                 data-analytics-event="internal_promo_click"
                 data-analytics-source-slot="homepage_v2_featured_supporting"

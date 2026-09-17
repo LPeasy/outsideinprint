@@ -175,24 +175,36 @@ test("featured lead reuses a published image and responsive rendering", () => {
   assert.doesNotMatch(homeV2, /<img\b/);
 });
 
-test("supporting illustrations use linked squares and a mobile dialog with an image-link fallback", () => {
+test("supporting illustrations stay square on mobile with a dialog and an artwork-link fallback", () => {
   assert.match(homeV2, /home-v2-featured__item\{\{ if \$imageModel \}\} home-v2-featured__item--illustrated/);
   assert.match(homeV2, /class="home-v2-featured__item-media" href="\{\{ \$page\.RelPermalink \}\}"/);
   assert.match(homeV2, /class="home-v2-featured__item-copy"/);
   assert.match(homeV2, /"loading" "lazy"[\s\S]*?"sizes" "120px"/);
-  assert.match(homeV2, /home-v2-featured__meta[^\n]*partial "home_featured_image_button\.html"/);
+  const mobileArtIndex = homeV2.indexOf('partial "home_featured_image_button.html"');
+  assert.ok(mobileArtIndex > homeV2.indexOf('class="home-v2-featured__item-media"'));
+  assert.ok(mobileArtIndex < homeV2.indexOf('class="home-v2-featured__item-copy"'));
+  assert.doesNotMatch(homeV2, /home-v2-featured__meta[^\n]*partial "home_featured_image_button\.html"/);
   assert.equal((homeV2.match(/partial "home_featured_image_dialog\.html"/g) || []).length, 1);
   assert.match(homeV2, /resources\.Get "js\/home-featured-image\.js" \| minify \| fingerprint "sha384"/);
   assert.match(featuredImageButton, /<button\b[^>]*type="button"[^>]*data-home-featured-image-trigger[^>]*aria-haspopup="dialog"[^>]*aria-controls="home-featured-image-dialog" hidden>/);
   assert.match(featuredImageButton, /data-image="\{\{ \$model\.lightbox_url \}\}"/);
   assert.match(featuredImageButton, /data-alt="\{\{ \$page\.Params\.featured_image_alt/);
-  assert.match(featuredImageButton, /<a\b[^>]*data-home-featured-image-fallback[^>]*href="\{\{ \$model\.lightbox_url \}\}"[^>]*>Image<\/a>/);
+  assert.match(featuredImageButton, /<a\b[^>]*data-home-featured-image-fallback[^>]*href="\{\{ \$model\.lightbox_url \}\}"/);
+  for (const tag of ["button", "a"]) {
+    const artwork = featuredImageButton.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`))?.[1];
+    assert.ok(artwork);
+    assert.match(artwork, /partial "images\/picture\.html"/);
+    assert.match(artwork, /"loading" "lazy"/);
+    assert.match(artwork, /"sizes" "120px"/);
+    assert.doesNotMatch(artwork, /<svg\b|\bImage\b/);
+  }
   assert.match(featuredImageDialog, /<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"/);
   assert.match(featuredImageDialog, /<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"/);
-  assert.match(css, /\.home-v2-featured__item-media\{[^}]*aspect-ratio:1;/);
-  assert.match(css, /\.home-v2-featured__item-media img\{[^}]*object-fit:cover;/);
-  assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*display:none;[^}]*min-height:44px;/);
-  assert.match(css, /@media \(max-width:768px\)\{\s*\.home-v2-featured__item--illustrated\{[^}]*display:block;[^}]*\}\s*\.home-v2-featured__item-media\{[^}]*display:none;[^}]*\}\s*\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:inline-flex;/);
+  assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*aspect-ratio:1;/);
+  assert.match(css, /\.home-v2-featured__image-toggle img\{[^}]*object-fit:cover;/);
+  assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*display:none;/);
+  assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);/);
+  assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:block;/);
 });
 
 test("contributor lane is public, specific, and linked from the homepage", () => {
