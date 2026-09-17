@@ -40,6 +40,7 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
       "article/variant-key.html": '{{ return "" }}',
       "authors/byline.html": "", "article/share.html": "", "edition-relationship.html": "", "article/plate-lightbox.html": "",
       "render_article_body.html": "{{ .Content }}",
+      "article/contents.html": "",
       "newsletter_prompt.html": '<p class="{{ .class }}">Newsletter prompt</p>',
       "newsletter_signup.html": '<form class="{{ .class }}">Newsletter signup</form>',
       "journey_links.html": '<nav class="{{ .class }}">{{ .eyebrow }}</nav>',

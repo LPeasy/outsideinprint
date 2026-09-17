@@ -1,0 +1,9 @@
+{{- $subject := "Contributor pitch for Outside In Print" -}}
+{{- $body := "Working title:\r\n\r\nQuestion or argument (two or three sentences):\r\n\r\nDraft or brief outline:\r\n\r\nShort bio and why you want to write it:\r\n" -}}
+{{- $subjectQuery := replace (urlquery $subject) "+" "%20" -}}
+{{- $bodyQuery := replace (urlquery $body) "+" "%20" -}}
+{{- $mailto := printf "mailto:support@outsideinprint.org?subject=%s&body=%s" $subjectQuery $bodyQuery -}}
+<div class="contributor-pitch">
+  <p class="contributor-pitch__action"><a class="contributor-pitch__button" href="{{ $mailto | safeURL }}" aria-describedby="contributor-pitch-help">Draft your pitch</a></p>
+  <p id="contributor-pitch-help" class="contributor-pitch__help">Opens a draft in your email app with these four prompts. Nothing is sent automatically.</p>
+</div>

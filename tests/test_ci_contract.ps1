@@ -466,7 +466,10 @@ foreach ($requiredReaderSnippet in @(
   'tests/reader_refinements_output.test.mjs',
   'tests/gallery_reading_behavior.test.mjs',
   'tests/bookstore_ebook_labels.test.mjs',
-  'tests/collection_reading_path_behavior.test.mjs'
+  'tests/collection_reading_path_behavior.test.mjs',
+  'tests/article_contents.test.mjs',
+  'tests/reader_actions_output.test.mjs',
+  'tests/contributor_pitch.test.mjs'
 )) {
   if (-not $browserDependencyStep.Contains($requiredReaderSnippet, [StringComparison]::Ordinal)) {
     throw "Reader refinement tests must use the production output and pinned Hugo: $requiredReaderSnippet"

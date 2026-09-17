@@ -140,6 +140,11 @@ These hooks still exist in live markup but do not yet carry strong explicit layo
 - Confirm reading-path ownership:
   - Compare `layouts/_default/single.html` and `layouts/partials/collections/reading-path.html` against `assets/css/main.css`.
   - Verify `reading-path`, `reading-path__header`, `reading-path__eyebrow`, `reading-path__title`, `reading-path__summary`, `reading-path__meta`, and `reading-path__collection-link` all have explicit CSS owners. The card has one linked next-article title, its existing description/summary and reading time, and one secondary collection link; a collection with no other eligible member has only the collection link.
+- Confirm native reader-action ownership:
+  - `layouts/partials/article/contents.html` owns `.piece-contents`; the single-article template passes its final rendered body without changing that body or the publication record. Shared CSS supplies reading-column width, 44px summary/link targets, focus outlines, wrapping, and heading scroll margin.
+  - `layouts/collections/bobs-almanack.html` owns `.almanack-collection__signup-link` and mounts the existing newsletter partial with `.newsletter-signup--almanack-collection`; its form stacks within the narrow principal column.
+  - `layouts/shop/sample.html` owns `.bookstore-sample-actions` and `.bookstore-sample-buy`, reusing the existing shop and secondary-link styles.
+  - `layouts/shortcodes/contributor-pitch.html` owns `.contributor-pitch`, `.contributor-pitch__action`, `.contributor-pitch__button`, and `.contributor-pitch__help`. It is a native mailto action with an unchanged plain-email fallback, not a submission form.
 - Confirm article record-rail ownership:
   - Compare `layouts/_default/single.html` against `assets/css/main.css`.
   - Verify `piece-fleuron`, `piece-title-block`, `piece-media-plate`, `piece-media-plate__trigger`, `piece-record-rail`, and `piece-record-rail__item--collection` all have explicit CSS owners.

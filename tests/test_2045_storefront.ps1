@@ -60,7 +60,7 @@ Assert-True ($product -match 'sku: "OIP-TD-EPUB"' -and $product -match '(?m)^\s+
 Assert-True ([regex]::Matches($product, '(?m)^\s+price_display: "\$19\.99"\r?$').Count -eq 2) '2045 product and offer must display the approved $19.99 price.'
 Assert-True ($product -match '(?m)^\s+checkout_label: "Buy e-book — \$19\.99"\r?$') '2045 must override the shared checkout label with its approved price.'
 Assert-True ($product -notmatch '\$9\.99|price_cents: 999\b') '2045 retains the obsolete price.'
-Assert-True ($sampleTemplate.Contains('Explore 2045 · {{ index $product "price_display" }}', [StringComparison]::Ordinal)) '2045 sample CTA must read the canonical product price.'
+Assert-True ($sampleTemplate.Contains('Get the full e-book — {{ index $product "price_display" }}', [StringComparison]::Ordinal)) '2045 sample CTA must read the canonical product price.'
 Assert-True ($product -notmatch '(?i)amazon|kindle|asin|paperback|urn:isbn|\b97[89]\d{10}\b') '2045 contains excluded metadata or an exact ISBN.'
 $approvedAlt = [regex]::Match($product, '(?m)^\s+cover_alt: "(?<alt>[^"]+)"\r?$').Groups['alt'].Value
 foreach ($source in @($productSource, $sampleSource, $shopSource)) {
@@ -406,7 +406,7 @@ if ($isLiveOffer) {
 }
 Assert-True ($detailHtml -match 'books/2045/cover' -and $detailHtml -match 'image/avif' -and $detailHtml -match 'OIP Exclusive') '2045 product is missing managed artwork or exclusive positioning.'
 Assert-True ($detailHtml -match 'href="?/shop/2045/sample/' -and $sampleHtml -match 'href="?/shop/2045/') 'Product and standalone sample do not link to one another.'
-Assert-True ($detailHtml -match '\$19\.99' -and $sampleHtml -match 'Explore 2045\s*(?:·|&middot;|&#183;)\s*\$19\.99') '2045 product and sample must display the approved $19.99 price.'
+Assert-True ($detailHtml -match '\$19\.99' -and $sampleHtml -match 'Get the full e-book\s*(?:—|&mdash;|&#8212;)\s*\$19\.99') '2045 product and sample must display the approved $19.99 price.'
 Assert-True ($detailHtml -notmatch 'data-bookstore-kindle-button|data-bookstore-kindle-role') '2045 has a Kindle purchase offer.'
 Assert-True ($detailHtml -match '"@type"\s*:\s*"WebPage"' -and $detailHtml -notmatch '"@type"\s*:\s*"CollectionPage"') '2045 must use product-page WebPage metadata.'
 $jsonLdMatch = [regex]::Match($detailHtml, '(?is)<script\b[^>]*\btype=(?:"application/ld\+json"|''application/ld\+json''|application/ld\+json)[^>]*>(?<json>.*?)</script>')

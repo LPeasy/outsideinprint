@@ -40,7 +40,10 @@
         <div class="bookstore-reading-sample__continue">
           <h2>Ten dark fables. One machine age.</h2>
           <p>Continue with <em>2045: Ten Dark Fables from the Machine Age</em>, an e-book from Outside In Print.</p>
-          <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_continue" data-analytics-slug="2045" data-analytics-title="2045" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">Explore 2045 · {{ index $product "price_display" }} <span aria-hidden="true">&rarr;</span></a>
+          <div class="bookstore-sample-actions">
+            <a class="shop-cta bookstore-sample-buy" href="{{ $book.RelPermalink }}#bookstore-purchase" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_buy" data-analytics-slug="2045" data-analytics-title="2045" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">Get the full e-book — {{ index $product "price_display" }}</a>
+            <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_continue" data-analytics-slug="2045" data-analytics-title="2045" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">About the book <span aria-hidden="true">&rarr;</span></a>
+          </div>
           {{ partial "shop/ebook-help.html" . }}
         </div>
       </footer>

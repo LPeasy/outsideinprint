@@ -23,6 +23,8 @@ Send a short introduction with:
 - a draft or a brief outline; and
 - a short note about who you are and why you want to write it.
 
+{{< contributor-pitch >}}
+
 Email [support@outsideinprint.org](mailto:support@outsideinprint.org?subject=Contributor%20pitch%20for%20Outside%20In%20Print) with the subject line **Contributor pitch for Outside In Print**.
 
 Every accepted piece is edited for clarity, sourcing, and fit with the imprint. Sending a pitch does not guarantee publication.

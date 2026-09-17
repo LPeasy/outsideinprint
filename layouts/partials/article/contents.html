@@ -1,0 +1,38 @@
+{{- $page := .page -}}
+{{- $body := .body -}}
+{{- $kind := lower (printf "%v" ($page.Params.library_type | default "")) -}}
+{{- $label := lower (printf "%v" ($page.Params.section_label | default "")) -}}
+{{- $excluded := slice "dialogue" "fiction" "short-story" "short story" "musing" "affirmation" -}}
+{{- $eligible := and $page.IsPage (in (slice "essays" "reports" "working-papers") $page.Section) (ge $page.ReadingTime 8) (ne $page.Params.article_contents false) -}}
+{{- $eligible = and $eligible (not (in $excluded $kind)) (not (in $excluded $label)) (ne (partial "article/variant-key.html" $page) "dialogue") (ne (upper (printf "%v" ($page.Params.source_mode | default ""))) "SOURCE_FREE") -}}
+{{- if $eligible -}}
+  {{- /* Read the final rendered body, not raw Markdown: legacy cleanup can remove headings. */ -}}
+  {{- $headings := slice -}}
+  {{- $level := 4 -}}
+  {{- $seen := dict -}}
+  {{- range findRESubmatch `(?s)<h([23])\b[^>]*\bid="([^"]+)"[^>]*>(.*?)</h[23]>` $body -}}
+    {{- $headingLevel := int (index . 1) -}}
+    {{- $id := htmlUnescape (index . 2) -}}
+    {{- $title := strings.TrimSpace (htmlUnescape ((index . 3) | plainify)) -}}
+    {{- $recordTitle := replaceRE "['’]" "" (lower $title) -}}
+    {{- $recordHeading := in (slice "works cited" "references" "sources" "sources checked" "source note" "source ledger" "bibliography" "note from the author" "author note" "authors note" "notes" "footnotes" "version note" "series note") $recordTitle -}}
+    {{- if and $title (not $recordHeading) (not (isset $seen $id)) -}}
+      {{- $seen = merge $seen (dict $id true) -}}
+      {{- $level = math.Min $level $headingLevel -}}
+      {{- $headings = $headings | append (dict "level" $headingLevel "id" $id "title" $title) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $majorHeadings := where $headings "level" (int $level) -}}
+  {{- if ge (len $majorHeadings) 3 }}
+    <details class="piece-contents">
+      <summary>In this article</summary>
+      <nav aria-label="Article sections">
+        <ol>
+          {{- range $majorHeadings }}
+            <li><a href="#{{ .id }}">{{ .title }}</a></li>
+          {{- end }}
+        </ol>
+      </nav>
+    </details>
+  {{- end -}}
+{{- end -}}

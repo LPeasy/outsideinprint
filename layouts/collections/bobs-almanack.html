@@ -28,6 +28,9 @@
         </div>
         <h1 id="almanack-collection-title">Bob's Almanack</h1>
         <p>{{ $definition.description }}</p>
+        {{ if $latest }}
+          <a class="almanack-collection__signup-link" href="#almanack-collection-newsletter">Get the weekly newsletter</a>
+        {{ end }}
       </header>
 
       {{ if $latest }}
@@ -215,6 +218,13 @@
               {{ end }}
               <a class="almanack-read-link" href="{{ $latest.RelPermalink }}">Read issue</a>
             </section>
+
+            {{ partial "newsletter_signup.html" (dict
+              "page" .
+              "class" "newsletter-signup--almanack-collection"
+              "sourceSlot" "almanack_collection_newsletter"
+              "anchorID" "almanack-collection-newsletter"
+            ) }}
 
             <section class="almanack-collection__contents" aria-labelledby="almanack-collection-contents-title">
               <div class="almanack-collection__section-heading">
