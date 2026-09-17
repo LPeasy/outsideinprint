@@ -3048,8 +3048,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-reader-banner.*?home-front-page__orientation.*?home-v2-featured.*?home-v2-next'
-    Message = 'expected homepage order to move from proof and newsletter through reader note, featured reading, and next steps'
+    Pattern = '(?s)home-reader-banner__proof.*?home-front-page__orientation.*?home-v2-featured.*?home-v2-library.*?home-reader-newsletter.*?home-v2-next__contribute'
+    Message = 'expected homepage order to move through proof, reader note, featured reading, library links, newsletter, and contribution'
   },
   @{
     Path = 'public/index.html'
@@ -3059,7 +3059,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
     Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?One thoughtful letter each week\..*?Independent writing on history, economics, culture, and public life\..*?No spam ever\. Unsubscribe anytime\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Join the newsletter'
-    Message = 'expected the homepage to expose a plain-language tracked newsletter signup above the reading surface'
+    Message = 'expected the homepage to retain the plain-language tracked newsletter signup below the reading surface'
   },
   @{
     Path = 'public/index.html'
@@ -3084,7 +3084,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)The latest publication, alongside reader favorites and defining work\..*?home-v2-featured__lead.*?Read the piece.*?home-v2-featured__supporting'
+    Pattern = '(?s)The latest publication, reader favorites, and defining work\..*?home-v2-featured__lead.*?Read the piece.*?home-v2-featured__supporting'
     Message = 'expected featured reading to explain the latest-publication lead and use a form-neutral reading action'
   },
   @{
@@ -3105,8 +3105,24 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-v2-next__browse.*?Browse the archive.*?Search the library.*?Surprise me.*?home-v2-next__contribute.*?Write for Outside In Print\..*?href=(?:"|'''')?(?:https://outsideinprint\.org)?/contribute/(?:"|'''')?[^>]*>\s*Become a contributor'
-    Message = 'expected the lower homepage to provide compact reading paths and a prominent contributor call to action'
+    Pattern = '<dialog\b(?=[^>]*id=(?:"home-featured-image-dialog"|home-featured-image-dialog))(?=[^>]*aria-labelledby=(?:"home-featured-image-title"|home-featured-image-title))[^>]*>'
+    Message = 'expected the supporting image controls to share a labelled native dialog'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '<script\b(?=[^>]*home-featured-image)(?=[^>]*integrity=(?:"sha384-|sha384-))(?=[^>]*\bdefer\b)[^>]*>'
+    Message = 'expected the homepage image dialog enhancement to use a deferred fingerprinted script'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = '(?s)home-v2-library.*?Browse the library.*?Surprise me.*?home-reader-newsletter.*?home-v2-next__contribute.*?Write for Outside In Print\..*?href=(?:"|'''')?(?:https://outsideinprint\.org)?/contribute/(?:"|'''')?[^>]*>\s*Become a contributor'
+    Message = 'expected library links before the newsletter and a separate contributor call to action'
+  },
+  @{
+    Path = 'public/index.html'
+    Pattern = 'The full imprint|Find your next question|home-v2-next__browse|Browse the archive|Search the library'
+    Message = 'expected the homepage to omit the retired browse module and archive body CTA'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -5314,6 +5330,79 @@ foreach ($forbiddenPath in @(
 
 if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeIndexHtml = [string]$targetPageHtml['public/index.html']
+  $homeSections = @(Get-OpenTags -Html $homeIndexHtml -TagName 'section')
+  $homeProofSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Outside In Print at a glance' })
+  $homeNewsletterSections = @($homeSections | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-reader-newsletter' })
+  $homeContributorSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Publish with us' })
+  if ($homeProofSections.Count -ne 1 -or $homeNewsletterSections.Count -ne 1 -or $homeContributorSections.Count -ne 1) {
+    $uxIssues.Add('public/index.html => expected one named proof region, one newsletter region, and one Publish with us region')
+  }
+  if ($homeNewsletterSections.Count -eq 1 -and (Get-AttributeValue -Tag $homeNewsletterSections[0] -Name 'aria-labelledby') -cne 'home-reader-banner-title') {
+    $uxIssues.Add('public/index.html => expected the separate newsletter region to retain its existing heading label')
+  }
+  if ($homeProofSections.Count -eq 1) {
+    $proofStart = $homeIndexHtml.IndexOf($homeProofSections[0], [System.StringComparison]::Ordinal)
+    $proofEnd = $homeIndexHtml.IndexOf('</section>', $proofStart, [System.StringComparison]::Ordinal)
+    if ($proofEnd -lt 0 -or $homeIndexHtml.Substring($proofStart, $proofEnd - $proofStart) -match '<form\b|home-reader-banner__signup') {
+      $uxIssues.Add('public/index.html => expected the opening proof region to contain no newsletter form')
+    }
+  }
+
+  $homeLibraryNavs = @([regex]::Matches($homeIndexHtml, '(?s)(?<tag><nav\b[^>]*>)(?<body>.*?)</nav>') | Where-Object {
+    Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'home-v2-library'
+  })
+  if ($homeLibraryNavs.Count -ne 1) {
+    $uxIssues.Add("public/index.html => expected exactly one library navigation region, found $($homeLibraryNavs.Count)")
+  } else {
+    $libraryNav = $homeLibraryNavs[0]
+    if ((Get-AttributeValue -Tag $libraryNav.Groups['tag'].Value -Name 'aria-label') -cne 'Keep reading') {
+      $uxIssues.Add('public/index.html => expected library navigation to be named Keep reading')
+    }
+    $libraryLinks = @([regex]::Matches($libraryNav.Groups['body'].Value, '(?s)(?<tag><a\b[^>]*>)(?<label>.*?)</a>'))
+    $libraryTargets = @($libraryLinks | ForEach-Object { Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_.Groups['tag'].Value -Name 'href') })
+    $libraryLabels = @($libraryLinks | ForEach-Object { [System.Net.WebUtility]::HtmlDecode([regex]::Replace($_.Groups['label'].Value, '<[^>]+>', '')).Trim() })
+    if (($libraryTargets -join '|') -cne '/library/|/random/' -or ($libraryLabels -join '|') -cne 'Browse the library|Surprise me') {
+      $uxIssues.Add('public/index.html => expected only Browse the library (/library/) and Surprise me (/random/) in library navigation')
+    }
+  }
+
+  $homeNewsletterForms = @(Get-OpenTags -Html $homeIndexHtml -TagName 'form' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-event') -ceq 'newsletter_submit' -or
+    (Get-AttributeValue -Tag $_ -Name 'action') -match '^https://buttondown\.com/api/emails/embed-subscribe/'
+  })
+  if ($homeNewsletterForms.Count -ne 1) {
+    $uxIssues.Add("public/index.html => expected exactly one newsletter form, found $($homeNewsletterForms.Count)")
+  } else {
+    $newsletterForm = $homeNewsletterForms[0]
+    if ((Get-AttributeValue -Tag $newsletterForm -Name 'data-analytics-source-slot') -cne 'homepage_reader_banner' -or
+        (Get-AttributeValue -Tag $newsletterForm -Name 'method') -cne 'post' -or
+        (Get-AttributeValue -Tag $newsletterForm -Name 'action') -notmatch '^https://buttondown\.com/api/emails/embed-subscribe/[^/]+$') {
+      $uxIssues.Add('public/index.html => expected the newsletter form to retain its Buttondown POST action and homepage_reader_banner analytics source')
+    }
+    if ($homeLibraryNavs.Count -eq 1 -and $homeNewsletterSections.Count -eq 1 -and $homeContributorSections.Count -eq 1) {
+      $libraryIndex = $homeLibraryNavs[0].Index
+      $newsletterIndex = $homeIndexHtml.IndexOf($homeNewsletterSections[0], [System.StringComparison]::Ordinal)
+      $formIndex = $homeIndexHtml.IndexOf($newsletterForm, [System.StringComparison]::Ordinal)
+      $contributorIndex = $homeIndexHtml.IndexOf($homeContributorSections[0], [System.StringComparison]::Ordinal)
+      if (-not ($libraryIndex -lt $newsletterIndex -and $newsletterIndex -lt $formIndex -and $formIndex -lt $contributorIndex)) {
+        $uxIssues.Add('public/index.html => expected library navigation, newsletter region and form, then contribution in document order')
+      }
+    }
+  }
+  $homeTags = @([regex]::Matches($homeIndexHtml, '<[a-z][^>]*>', 'IgnoreCase') | ForEach-Object { $_.Value })
+  foreach ($signupId in @('home-reader-email', 'home-reader-banner-title')) {
+    $signupIdCount = @($homeTags | Where-Object { (Get-AttributeValue -Tag $_ -Name 'id') -ceq $signupId }).Count
+    if ($signupIdCount -ne 1) {
+      $uxIssues.Add("public/index.html => expected unique newsletter id '$signupId', found $signupIdCount")
+    }
+  }
+  $homeContent = [regex]::Match($homeIndexHtml, '(?s)<main\b[^>]*>(?<body>.*?)</main>').Groups['body'].Value
+  $homeArchiveLinks = @(Get-OpenTags -Html $homeContent -TagName 'a' | Where-Object {
+    (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq '/archive/'
+  })
+  if ($homeArchiveLinks.Count -ne 0) {
+    $uxIssues.Add('public/index.html => expected archive discovery to remain in navigation without a homepage body archive CTA')
+  }
   $homeArticles = @(Get-OpenTags -Html $homeIndexHtml -TagName 'article')
   $homeLeadCards = @($homeArticles | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__lead' })
   $homeSupportingCards = @($homeArticles | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__item' })
@@ -5352,10 +5441,10 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   $preferredSupportingPaths = @(
-    '/essays/why-a-return-to-the-gold-standard-would-break-the-economy/',
+    '/essays/the-dolphin-company/',
     '/syd-and-oliver/what-i-had/',
-    '/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/',
-    '/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/'
+    '/essays/default-owner/',
+    '/essays/reverse-origami/'
   )
   $expectedSupportingPaths = @(@($preferredSupportingPaths + $publishedReadingPaths) | Where-Object {
     $_ -notin $expectedLeadPaths -and $_ -in $publishedReadingPaths
@@ -5365,6 +5454,41 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
   if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
     $uxIssues.Add("public/index.html => expected the four approved supporting pieces in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
+  }
+
+  $featuredLabelOverrides = @{
+    '/essays/the-dolphin-company/' = 'Case study'
+    '/syd-and-oliver/what-i-had/' = 'Dialogue'
+    '/essays/default-owner/' = 'Essay'
+    '/essays/reverse-origami/' = 'Musing'
+  }
+  foreach ($promo in @($homeAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -in @('homepage_v2_featured_lead', 'homepage_v2_featured_supporting') })) {
+    $promoPath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $promo -Name 'href')
+    if ($featuredLabelOverrides.ContainsKey($promoPath) -and (Get-AttributeValue -Tag $promo -Name 'data-analytics-section') -cne $featuredLabelOverrides[$promoPath]) {
+      $uxIssues.Add("public/index.html => expected homepage label '$($featuredLabelOverrides[$promoPath])' for '$promoPath'")
+    }
+  }
+  $supportingImageLinks = @($homeAnchors | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__item-media' })
+  $supportingImageTriggers = @(Get-OpenTags -Html $homeIndexHtml -TagName 'button' | Where-Object { $_ -match '\bdata-home-featured-image-trigger\b' })
+  $supportingImageFallbacks = @($homeAnchors | Where-Object { $_ -match '\bdata-home-featured-image-fallback\b' })
+  if ($supportingImageTriggers.Count -ne $supportingImageLinks.Count -or $supportingImageFallbacks.Count -ne $supportingImageLinks.Count) {
+    $uxIssues.Add('public/index.html => every supporting illustration must have one mobile image control and one no-JavaScript fallback')
+  }
+  foreach ($imageLink in $supportingImageLinks) {
+    if ((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $imageLink -Name 'href')) -notin $expectedSupportingPaths) {
+      $uxIssues.Add('public/index.html => supporting illustration links must lead to their featured articles')
+    }
+  }
+  foreach ($trigger in $supportingImageTriggers) {
+    $imageUrl = Get-AttributeValue -Tag $trigger -Name 'data-image'
+    if (-not $imageUrl -or (Get-AttributeValue -Tag $trigger -Name 'type') -cne 'button' -or
+        (Get-AttributeValue -Tag $trigger -Name 'aria-controls') -cne 'home-featured-image-dialog' -or
+        $trigger -notmatch '\bhidden(?:\s|>)') {
+      $uxIssues.Add('public/index.html => mobile Image controls must start hidden with a real image target and native dialog relationship')
+    }
+    if ($imageUrl -notin @($supportingImageFallbacks | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'href' })) {
+      $uxIssues.Add('public/index.html => mobile Image controls must retain a matching image-link fallback')
+    }
   }
 
   $metricYaml = Get-Content -LiteralPath (Join-Path $repoRoot 'data/homepage_metrics.yaml') -Raw -Encoding utf8

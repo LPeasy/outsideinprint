@@ -1,0 +1,16 @@
+{{- $page := .page -}}
+{{- $model := .model -}}
+<button class="home-v2-featured__image-toggle" type="button"
+  data-home-featured-image-trigger
+  data-image="{{ $model.lightbox_url }}"
+  data-alt="{{ $page.Params.featured_image_alt | default "" }}"
+  data-title="{{ $page.Title }}"
+  data-width="{{ $model.lightbox_width }}"
+  data-height="{{ $model.lightbox_height }}"
+  aria-label="View illustration for {{ $page.Title }}"
+  aria-haspopup="dialog" aria-controls="home-featured-image-dialog" hidden>
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg>
+  Image
+</button>
+<a class="home-v2-featured__image-toggle" data-home-featured-image-fallback
+  href="{{ $model.lightbox_url }}" aria-label="View illustration for {{ $page.Title }}">Image</a>

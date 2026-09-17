@@ -40,10 +40,10 @@ const publishedRoutes = rows.map((row) => Object.fromEntries(columns.map((column
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title))
   .map((row) => row.route);
 const pinnedRoutes = [
-  "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+  "/essays/the-dolphin-company/",
   "/syd-and-oliver/what-i-had/",
-  "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/",
-  "/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/",
+  "/essays/default-owner/",
+  "/essays/reverse-origami/",
 ];
 const metricsSource = fs.readFileSync(path.resolve("data/homepage_metrics.yaml"), "utf8");
 const threshold = Number(metricsSource.match(/^reader_threshold: (\d+)$/m)?.[1]);
@@ -65,8 +65,11 @@ test("rendered homepage leads with the newest publishDate and preserves unique e
     const destination = fs.readFileSync(path.join(siteDir, route, "index.html"), "utf8");
     const sectionMeta = [...destination.matchAll(/<meta\b[^>]*>/g)]
       .find((match) => attribute(match[0], "property") === "article:section")?.[0];
-    const kind = route.startsWith("/syd-and-oliver/") ? "Dialogue" : attribute(sectionMeta || "", "content");
-    assert.ok(kind, `${route} must have a canonical form label`);
+    const canonicalKind = route.startsWith("/syd-and-oliver/") ? "Dialogue" : attribute(sectionMeta || "", "content");
+    assert.ok(canonicalKind, `${route} must have a canonical form label`);
+    const kind = route === "/essays/the-dolphin-company/" ? "Case study" : canonicalKind;
+    if (route === "/essays/the-dolphin-company/") assert.equal(canonicalKind, "Essay", "Dolphin's homepage label must not reclassify its destination");
+    if (route === "/essays/reverse-origami/") assert.equal(canonicalKind, "Musing");
     const metric = metricRecords.get(route);
     const badge = metric?.value >= threshold ? metric.label : "";
     const promoLink = card[2].match(/<a\b[^>]*data-analytics-source-slot=[^>]*>/)?.[0];
@@ -80,10 +83,55 @@ test("rendered homepage leads with the newest publishDate and preserves unique e
     assert.equal(labels[0], kind);
     assert.match(labels[1], /^\d+ min read$/);
     assert.deepEqual(labels.slice(2), badge ? [badge] : []);
+    if (index === 0) {
+      assert.doesNotMatch(card[2], /home-v2-featured__item-media|data-home-featured-image-trigger/);
+      const leadImage = card[2].match(/<img\b[^>]*>/)?.[0];
+      if (leadImage) {
+        assert.equal(attribute(leadImage, "loading"), "eager");
+        assert.equal(attribute(leadImage, "fetchpriority"), "high");
+      }
+    } else {
+      const media = [...card[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
+        .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-featured__item-media"));
+      if (pinnedRoutes.includes(route)) assert.equal(media.length, 1, `${route} must reuse its existing illustration`);
+      if (media.length) {
+        assert.equal(media.length, 1);
+        assert.equal(attribute(media[0][1], "href"), route);
+        const illustration = media[0][2].match(/<img\b[^>]*>/)?.[0];
+        assert.ok(illustration);
+        assert.equal(attribute(illustration, "loading"), "lazy");
+        assert.ok(attribute(illustration, "src"), "managed derivatives and legacy static images both need a real source");
+        const trigger = meta.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
+        const fallback = meta.match(/<a\b[^>]*data-home-featured-image-fallback[^>]*>/)?.[0];
+        assert.ok(trigger, "the mobile Image button belongs beside supporting metadata");
+        assert.ok(fallback, "an image link must work without JavaScript");
+        assert.equal(attribute(trigger, "type"), "button");
+        assert.equal(attribute(trigger, "aria-controls"), "home-featured-image-dialog");
+        assert.equal(attribute(trigger, "aria-haspopup"), "dialog");
+        assert.match(trigger, /\bhidden(?:\s|>)/);
+        assert.ok(attribute(trigger, "data-image"));
+        assert.equal(attribute(trigger, "data-image"), attribute(fallback, "href"));
+        assert.equal(attribute(trigger, "data-alt"), attribute(illustration, "alt"));
+        assert.ok(fs.existsSync(path.join(siteDir, new URL(attribute(trigger, "data-image"), "https://outsideinprint.org").pathname)));
+      }
+    }
   }
-  assert.match(html, /The latest publication, alongside reader favorites and defining work\./);
+  assert.match(html, /The latest publication, reader favorites, and defining work\./);
   assert.match(html, /Read the piece/);
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
+});
+
+test("supporting image enhancement has one native dialog and is loaded only on the homepage", () => {
+  const dialogs = [...html.matchAll(/<dialog\b[^>]*>/g)].filter((match) => attribute(match[0], "id") === "home-featured-image-dialog");
+  assert.equal(dialogs.length, 1);
+  assert.equal(attribute(dialogs[0][0], "aria-labelledby"), "home-featured-image-title");
+  assert.match(html, /<button\b[^>]*data-home-featured-image-close[^>]*>/);
+  const script = html.match(/<script\b[^>]*home-featured-image[^>]*>/)?.[0];
+  assert.ok(script);
+  assert.match(script, /\bdefer(?:\s|>)/);
+  assert.match(attribute(script, "integrity"), /^sha384-/);
+  assert.ok(fs.existsSync(path.join(siteDir, attribute(script, "src"))));
+  assert.doesNotMatch(fs.readFileSync(path.join(siteDir, "gallery/index.html"), "utf8"), /home-featured-image(?:\.min)?\./);
 });
 
 test("rendered homepage has complete no-JavaScript note, hidden native control, and homepage-only enhancement", () => {
@@ -108,4 +156,46 @@ test("rendered homepage has complete no-JavaScript note, hidden native control, 
   assert.match(html, /Independent writing on history, economics, culture, and public life\./);
   assert.match(html, /250(?:\+|&#43;)<\/strong>\s*<span>Articles<\/span>/);
   assert.match(html, /10,000(?:\+|&#43;)<\/strong>\s*<span>Readers<\/span>/);
+});
+
+test("rendered homepage puts two reading links before one newsletter signup and the contributor callout", () => {
+  const sections = [...html.matchAll(/<section\b[^>]*>/g)].map((match) => match[0]);
+  const proofTag = sections.find((tag) => attribute(tag, "aria-label") === "Outside In Print at a glance");
+  const newsletterTag = sections.find((tag) => attribute(tag, "class").split(/\s+/).includes("home-reader-newsletter"));
+  const contributionTag = sections.find((tag) => attribute(tag, "aria-label") === "Publish with us");
+  assert.ok(proofTag);
+  assert.ok(newsletterTag);
+  assert.ok(contributionTag);
+  assert.equal(attribute(newsletterTag, "aria-labelledby"), "home-reader-banner-title");
+
+  const library = [...html.matchAll(/(<nav\b[^>]*>)([\s\S]*?)<\/nav>/g)]
+    .find((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-library"));
+  assert.ok(library);
+  assert.equal(attribute(library[1], "aria-label"), "Keep reading");
+  const links = [...library[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
+    .map((match) => [new URL(attribute(match[1], "href"), "https://outsideinprint.org").pathname, text(match[2])]);
+  assert.deepEqual(links, [["/library/", "Browse the library"], ["/random/", "Surprise me"]]);
+  const order = [proofTag, "home-front-page__orientation", "home-v2-featured", library[1], newsletterTag, contributionTag]
+    .map((marker) => html.indexOf(marker));
+  assert.ok(order.every((index) => index >= 0));
+  assert.deepEqual(order, [...order].sort((left, right) => left - right));
+  const proof = html.slice(html.indexOf(proofTag), html.indexOf("</section>", html.indexOf(proofTag)));
+  assert.doesNotMatch(proof, /<form\b|home-reader-banner__signup/);
+
+  const forms = [...html.matchAll(/(<form\b[^>]*>)([\s\S]*?)<\/form>/g)]
+    .filter((match) => attribute(match[1], "data-analytics-event") === "newsletter_submit"
+      || attribute(match[1], "action").startsWith("https://buttondown.com/api/emails/embed-subscribe/"));
+  assert.equal(forms.length, 1, "render exactly one newsletter form");
+  assert.equal(attribute(forms[0][1], "data-analytics-source-slot"), "homepage_reader_banner");
+  assert.equal(attribute(forms[0][1], "method"), "post");
+  assert.match(attribute(forms[0][1], "action"), /^https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/[^/]+$/);
+  assert.ok(html.indexOf(forms[0][0]) > html.indexOf(newsletterTag));
+  assert.ok(html.indexOf(forms[0][0]) < html.indexOf(contributionTag));
+  const tags = [...html.matchAll(/<[a-z][^>]*>/gi)].map((match) => match[0]);
+  for (const id of ["home-reader-email", "home-reader-banner-title"]) {
+    assert.equal(tags.filter((tag) => attribute(tag, "id") === id).length, 1, `${id} must remain unique`);
+  }
+  const homeBody = html.slice(html.indexOf(proofTag), html.indexOf(contributionTag));
+  assert.doesNotMatch(homeBody, /href=(?:["'])?(?:https:\/\/outsideinprint\.org)?\/archive\//);
+  assert.doesNotMatch(html, /The full imprint|Find your next question|home-v2-next__browse|Browse the archive|Search the library/);
 });

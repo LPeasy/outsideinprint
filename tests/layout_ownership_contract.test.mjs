@@ -6,6 +6,7 @@ import path from "node:path";
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
 const homeV2FrontPage = fs.readFileSync(path.resolve("layouts/partials/home_v2_front_page.html"), "utf8");
 const homeReaderBanner = fs.readFileSync(path.resolve("layouts/partials/home_reader_banner.html"), "utf8");
+const homeReaderNewsletter = fs.readFileSync(path.resolve("layouts/partials/home_reader_newsletter.html"), "utf8");
 const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
 const aboutContent = fs.readFileSync(path.resolve("content/about/index.md"), "utf8");
 const authorDirectory = fs.readFileSync(path.resolve("layouts/partials/authors/directory.html"), "utf8");
@@ -57,7 +58,7 @@ test("retired homepage manifesto and start-here selectors stay absent", () => {
   }
 });
 
-test("homepage V2 owns its proof, featured-reading, and contributor layout hooks", () => {
+test("homepage V2 owns separate proof, featured-reading, library, newsletter, and contributor hooks", () => {
   assert.match(homeFrontPage, /partial "home_v2_front_page\.html" \./);
   assert.doesNotMatch(homeFrontPage, /home_bookstore_spotlight|home_selected_collections|newsletter_signup|home_2045_launch/);
 
@@ -68,6 +69,8 @@ test("homepage V2 owns its proof, featured-reading, and contributor layout hooks
     'class="home-v2-featured__grid"',
     'class="home-v2-featured__lead"',
     'class="home-v2-featured__supporting"',
+    'class="home-v2-library home-v2-next__links page-shell page-shell--wide"',
+    'partial "home_reader_newsletter.html" .',
     'class="home-v2-next page-shell page-shell--wide"',
     'class="home-v2-next__contribute"',
     'class="home-v2-next__cta"'
@@ -79,11 +82,19 @@ test("homepage V2 owns its proof, featured-reading, and contributor layout hooks
   for (const snippet of [
     'class="home-reader-banner page-shell page-shell--wide"',
     'class="home-reader-banner__proof"',
+    'aria-label="Outside In Print at a glance"'
+  ]) {
+    assert.match(homeReaderBanner, new RegExp(escapeRegex(snippet)));
+  }
+  assert.doesNotMatch(homeReaderBanner, /<form\b|home-reader-banner__signup/);
+
+  for (const snippet of [
+    'class="home-reader-banner home-reader-newsletter page-shell page-shell--wide"',
     'class="home-reader-banner__signup"',
     'class="home-reader-banner__controls"',
     'data-analytics-source-slot="homepage_reader_banner"'
   ]) {
-    assert.match(homeReaderBanner, new RegExp(escapeRegex(snippet)));
+    assert.match(homeReaderNewsletter, new RegExp(escapeRegex(snippet)));
   }
 
   for (const selector of [
@@ -100,6 +111,7 @@ test("homepage V2 owns its proof, featured-reading, and contributor layout hooks
     ".home-v2-featured__grid{",
     ".home-v2-featured__lead{",
     ".home-v2-featured__supporting{",
+    ".home-v2-library.home-v2-next__links{",
     ".home-v2-next{",
     ".home-v2-next__contribute{",
     ".home-v2-next__cta{"
@@ -108,7 +120,7 @@ test("homepage V2 owns its proof, featured-reading, and contributor layout hooks
   }
 
   assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
-  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-label\{[^}]*font-size:\.8125rem;[^}]*letter-spacing:\.1em;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
@@ -438,6 +450,8 @@ test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, an
   for (const snippet of [
     "`.home-reader-banner`",
     "`.home-reader-banner__proof`",
+    "`layouts/partials/home_reader_newsletter.html`",
+    "`.home-reader-newsletter`",
     "`.home-reader-banner__signup`",
     "`.home-reader-banner__controls`",
     "`.home-front-page__orientation`",
@@ -445,6 +459,7 @@ test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, an
     "`.home-v2-featured__grid`",
     "`.home-v2-featured__lead`",
     "`.home-v2-featured__supporting`",
+    "`.home-v2-library`",
     "`.home-v2-next`",
     "`.home-v2-next__contribute`",
     "`.home-v2-next__cta`",

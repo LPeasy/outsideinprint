@@ -1,0 +1,44 @@
+{{- $newsletter := site.Params.newsletter | default dict -}}
+{{- $provider := index $newsletter "provider" | default "" -}}
+{{- $buttondownUsername := index $newsletter "buttondown_username" | default "" -}}
+{{- $tag := index $newsletter "tag" | default "outside-in-print" -}}
+
+<section class="home-reader-banner home-reader-newsletter page-shell page-shell--wide" aria-labelledby="home-reader-banner-title">
+  <div class="home-reader-banner__signup">
+    <div class="home-reader-banner__pitch">
+      <p class="home-reader-banner__eyebrow">From the imprint</p>
+      <h2 id="home-reader-banner-title">One thoughtful letter each week.</h2>
+      <p class="home-reader-banner__subjects">Independent writing on history, economics, culture, and public life.</p>
+      <p>No spam ever. Unsubscribe anytime.</p>
+    </div>
+
+    {{- if and (eq $provider "buttondown") $buttondownUsername }}
+      <form
+        class="home-reader-banner__form"
+        action="https://buttondown.com/api/emails/embed-subscribe/{{ $buttondownUsername }}"
+        method="post"
+        data-analytics-event="newsletter_submit"
+        data-analytics-source-slot="homepage_reader_banner"
+      >
+        <label for="home-reader-email">Email address</label>
+        <div class="home-reader-banner__controls">
+          <input
+            id="home-reader-email"
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            autocapitalize="off"
+            inputmode="email"
+            spellcheck="false"
+            required
+          >
+          <button type="submit">Join the newsletter</button>
+        </div>
+        <input type="hidden" name="embed" value="1">
+        {{- with $tag }}<input type="hidden" name="tag" value="{{ . }}">{{ end }}
+        <p><a href="{{ "privacy/" | relURL }}">Privacy details</a></p>
+      </form>
+    {{- end }}
+  </div>
+</section>

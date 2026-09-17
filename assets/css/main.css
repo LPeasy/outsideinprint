@@ -1752,7 +1752,6 @@ html[data-theme="light"] .paper-route-toggle{
 .home-reader-banner__proof{
   display:grid;
   grid-template-columns:repeat(3, minmax(0, 1fr));
-  border-bottom:1px solid var(--oip-rule-standard);
 }
 .home-reader-banner__proof-item{
   display:grid;
@@ -2073,6 +2072,7 @@ html[data-theme="light"] .paper-route-toggle{
 }
 .home-v2-featured h3 a:focus-visible,
 .home-v2-featured__action a:focus-visible,
+.home-v2-library a:focus-visible,
 .home-v2-next a:focus-visible{
   outline:3px solid var(--focus-ring);
   outline-offset:3px;
@@ -2105,6 +2105,122 @@ html[data-theme="light"] .paper-route-toggle{
 .home-v2-featured__item{
   padding:0 0 1rem;
 }
+.home-v2-featured__item--illustrated{
+  display:grid;
+  grid-template-columns:clamp(5.5rem, 8.8vw, 7.5rem) minmax(0, 1fr);
+  gap:.85rem;
+  align-items:start;
+}
+.home-v2-featured__item-media{
+  display:block;
+  aspect-ratio:1;
+  overflow:hidden;
+  border:1px solid var(--oip-rule-standard);
+  background:var(--bg-raised);
+  box-shadow:var(--paper-shadow);
+}
+.home-v2-featured__item-media picture{
+  display:block;
+  width:100%;
+  height:100%;
+}
+.home-v2-featured__item-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.home-v2-featured__item-copy{
+  min-width:0;
+}
+.home-v2-featured__image-toggle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:.35rem;
+  min-width:44px;
+  min-height:44px;
+  padding:.3rem .55rem;
+  border:1px solid var(--oip-rule-standard);
+  border-radius:3px;
+  background:var(--bg-raised);
+  color:var(--text-primary);
+  font:inherit;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+}
+.home-v2-featured__image-toggle[hidden]{
+  display:none;
+}
+.home-v2-featured__item-media:focus-visible,
+.home-v2-featured__image-toggle:focus-visible,
+.home-featured-image-dialog button:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
+}
+.home-featured-image-open{
+  overflow:hidden;
+}
+.home-featured-image-dialog{
+  box-sizing:border-box;
+  width:min(94vw, 70rem);
+  max-width:none;
+  max-height:94vh;
+  max-height:94dvh;
+  margin:auto;
+  padding:.7rem;
+  border:1px solid var(--oip-rule-standard);
+  background:var(--bg-raised);
+  color:var(--text-primary);
+  box-shadow:var(--paper-shadow);
+}
+.home-featured-image-dialog::backdrop{
+  background:rgba(0,0,0,.82);
+}
+.home-featured-image-dialog__header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  margin-bottom:.5rem;
+}
+.home-featured-image-dialog__header p{
+  margin:0;
+  font:700 1rem/1.35 var(--font-ui);
+}
+.home-featured-image-dialog__header button{
+  flex:0 0 44px;
+  min-height:44px;
+  border:1px solid var(--oip-rule-standard);
+  background:transparent;
+  color:inherit;
+  font-size:1.6rem;
+  cursor:pointer;
+}
+.home-featured-image-dialog__art{
+  display:block;
+  width:100%;
+  padding:0;
+  border:0;
+  background:transparent;
+  cursor:zoom-out;
+}
+.home-featured-image-dialog__art img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:72vh;
+  max-height:72dvh;
+  object-fit:contain;
+}
+.home-featured-image-dialog__hint{
+  margin:.5rem 0 0;
+  color:var(--text-muted);
+  font:.8125rem/1.4 var(--font-ui);
+  text-align:center;
+}
 .home-v2-featured__item + .home-v2-featured__item{
   padding-top:1rem;
   border-top:1px solid var(--oip-rule-standard);
@@ -2115,7 +2231,7 @@ html[data-theme="light"] .paper-route-toggle{
 .home-v2-featured__item h3{
   font-size:clamp(1.2rem, 2vw, 1.52rem);
 }
-.home-v2-featured__item > p:last-child{
+.home-v2-featured__item-copy > p:last-child:not(.home-v2-featured__meta){
   display:-webkit-box;
   overflow:hidden;
   margin:.48rem 0 0;
@@ -2126,21 +2242,15 @@ html[data-theme="light"] .paper-route-toggle{
   -webkit-line-clamp:3;
 }
 .home-v2-next{
-  display:grid;
-  grid-template-columns:minmax(0, 1.2fr) minmax(19rem, .8fr);
-  gap:0;
-  margin-top:2.35rem;
+  margin-top:1.35rem;
   margin-bottom:2.35rem;
   border-top:4px double var(--oip-rule-engraved-strong);
   border-bottom:4px double var(--oip-rule-engraved-strong);
 }
 .home-v2-next > article{
-  padding:1.35rem 1.5rem 1.45rem 0;
+  padding:1.35rem 1.5rem 1.45rem;
 }
 .home-v2-next__contribute{
-  padding-right:0 !important;
-  padding-left:1.5rem !important;
-  border-left:1px solid var(--oip-rule-standard);
   background:var(--paper-surface-wash);
 }
 .home-v2-next h2{
@@ -2157,6 +2267,9 @@ html[data-theme="light"] .paper-route-toggle{
   flex-wrap:wrap;
   gap:.25rem 1.2rem;
   margin:.7rem 0 0;
+}
+.home-v2-library.home-v2-next__links{
+  margin:.7rem auto 1.35rem;
 }
 .home-v2-next__links a,
 .home-v2-next__cta{
@@ -2218,8 +2331,7 @@ html[data-theme="light"] .paper-route-toggle{
   }
 }
 @media (max-width:900px){
-  .home-v2-featured__grid,
-  .home-v2-next{
+  .home-v2-featured__grid{
     grid-template-columns:1fr;
   }
   .home-v2-featured__lead{
@@ -2241,13 +2353,20 @@ html[data-theme="light"] .paper-route-toggle{
     padding-left:1.25rem;
     border-left:1px solid var(--oip-rule-standard);
   }
-  .home-v2-next > article{
-    padding-right:0;
+}
+@media (max-width:768px){
+  .home-v2-featured__item--illustrated{
+    display:block;
   }
-  .home-v2-next__contribute{
-    padding-left:0 !important;
-    border-top:1px solid var(--oip-rule-standard);
-    border-left:0;
+  .home-v2-featured__item-media{
+    display:none;
+  }
+  .home-v2-featured__image-toggle:not([hidden]){
+    display:inline-flex;
+  }
+  .home-v2-featured__item .home-v2-featured__meta{
+    align-items:center;
+    column-gap:.55rem;
   }
 }
 @media (max-width:520px){
@@ -2340,8 +2459,11 @@ html[data-theme="light"] .paper-route-toggle{
     font-size:clamp(1.5rem, 8vw, 2.08rem);
   }
   .home-v2-next{
-    margin-top:1.7rem;
+    margin-top:1.15rem;
     margin-bottom:1.7rem;
+  }
+  .home-v2-next > article{
+    padding:1rem .7rem 1.1rem;
   }
 }
 @media (max-width:360px){
@@ -6486,6 +6608,7 @@ body.cartoon-lightbox-open{
   max-width:70rem;
 }
 .home-v2-featured.page-shell--wide,
+.home-v2-library.page-shell--wide,
 .home-v2-next.page-shell--wide{
   max-width:70rem;
 }

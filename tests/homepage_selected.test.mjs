@@ -10,6 +10,9 @@ const homeFrontPage = read("layouts/partials/home_front_page.html");
 const homeV2 = read("layouts/partials/home_v2_front_page.html");
 const selected = read("layouts/partials/home_v2_selected.html");
 const readerBanner = read("layouts/partials/home_reader_banner.html");
+const readerNewsletter = read("layouts/partials/home_reader_newsletter.html");
+const featuredImageButton = read("layouts/partials/home_featured_image_button.html");
+const featuredImageDialog = read("layouts/partials/home_featured_image_dialog.html");
 const metrics = read("data/homepage_metrics.yaml");
 const config = read("hugo.toml");
 const contributor = read("content/contribute/index.md");
@@ -23,35 +26,46 @@ test("homepage delegates to the focused v2 composition", () => {
   assert.doesNotMatch(homeFrontPage, /home_bookstore_spotlight|home_selected_collections|home_2045_launch|newsletter_signup/);
 });
 
-test("reader banner leads with the owner-provided proof and a plain-language newsletter offer", () => {
+test("reader banner contains only owner-provided proof and the newsletter offer has one separate form", () => {
   assert.doesNotMatch(config, /article_count_label|reader_count_label/);
   assert.match(readerBanner, /hugo\.Data\.homepage_metrics/);
   assert.match(metrics, /250\+/);
   assert.match(metrics, /10,000\+/);
   assert.match(readerBanner, /<strong>Weekly<\/strong>\s*<span>Newsletter<\/span>/);
-  assert.match(readerBanner, /From the imprint/);
-  assert.doesNotMatch(readerBanner, /beyond the feed/);
-  assert.match(readerBanner, /Independent writing on history, economics, culture, and public life\./);
-  assert.match(readerBanner, /One thoughtful letter each week\./);
-  assert.match(readerBanner, /No spam ever\. Unsubscribe anytime\./);
-  assert.match(readerBanner, /Join the newsletter/);
-  assert.match(readerBanner, /eq \$provider "buttondown"/);
-  assert.match(readerBanner, /data-analytics-event="newsletter_submit"/);
-  assert.match(readerBanner, /data-analytics-source-slot="homepage_reader_banner"/);
-  assert.doesNotMatch(readerBanner, /Bob(?:'|’)s Almanack|No ads ever/);
+  assert.match(readerBanner, /aria-label="Outside In Print at a glance"/);
+  assert.doesNotMatch(readerBanner, /<form\b|home-reader-banner__signup|home-reader-email|home-reader-banner-title/);
+  assert.match(readerNewsletter, /class="home-reader-banner home-reader-newsletter page-shell page-shell--wide"/);
+  assert.match(readerNewsletter, /aria-labelledby="home-reader-banner-title"/);
+  assert.match(readerNewsletter, /From the imprint/);
+  assert.match(readerNewsletter, /Independent writing on history, economics, culture, and public life\./);
+  assert.match(readerNewsletter, /One thoughtful letter each week\./);
+  assert.match(readerNewsletter, /No spam ever\. Unsubscribe anytime\./);
+  assert.match(readerNewsletter, /Join the newsletter/);
+  assert.match(readerNewsletter, /eq \$provider "buttondown"/);
+  assert.match(readerNewsletter, /data-analytics-event="newsletter_submit"/);
+  assert.match(readerNewsletter, /data-analytics-source-slot="homepage_reader_banner"/);
+  assert.match(readerNewsletter, /action="https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/\{\{ \$buttondownUsername \}\}"/);
+  assert.match(readerNewsletter, /method="post"/);
+  assert.match(readerNewsletter, /<label for="home-reader-email">Email address<\/label>/);
+  const composition = `${homeV2}\n${readerBanner}\n${readerNewsletter}`;
+  assert.equal((composition.match(/<form\b/g) || []).length, 1);
+  assert.equal((composition.match(/id="home-reader-email"/g) || []).length, 1);
+  assert.equal((composition.match(/id="home-reader-banner-title"/g) || []).length, 1);
+  assert.equal((homeV2.match(/partial "home_reader_newsletter\.html"/g) || []).length, 1);
+  assert.doesNotMatch(readerNewsletter, /home-reader-banner__proof|Bob(?:'|’)s Almanack|No ads ever|beyond the feed/);
 });
 
 test("featured reading leads with the latest publication and keeps four ordered editorial supports", () => {
   const routes = [
-    "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/",
+    "/essays/the-dolphin-company/",
     "/syd-and-oliver/what-i-had/",
-    "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/",
-    "/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/",
+    "/essays/default-owner/",
+    "/essays/reverse-origami/",
   ];
   const indexes = routes.map((route) => selected.indexOf(`"${route}"`));
   assert.ok(indexes.every((index) => index >= 0));
   assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
-  assert.doesNotMatch(selected, /what-happened-at-camp-mystic/);
+  assert.doesNotMatch(selected, /what-happened-at-camp-mystic|why-a-return-to-the-gold-standard|the-little-prince|russias-slow-surrender/);
   assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
   assert.match(selected, /range first 1 \$eligible/);
   assert.ok(selected.indexOf("range first 1 $eligible") < selected.indexOf("range $route := $supportingRoutes"));
@@ -64,7 +78,7 @@ test("featured reading leads with the latest publication and keeps four ordered 
     assert.ok(!homeV2.includes(label), "metric values belong in the internal data record");
   }
   assert.match(homeV2, /hugo\.Data\.homepage_metrics/);
-  assert.match(homeV2, /The latest publication, alongside reader favorites and defining work\./);
+  assert.match(homeV2, /The latest publication, reader favorites, and defining work\./);
   assert.match(homeV2, /Read the piece/);
   assert.doesNotMatch(homeV2, /Read the essay/);
   assert.doesNotMatch(metrics, /\d(?:K)? readers/);
@@ -97,12 +111,18 @@ test("featured eligibility excludes drafts, future and expired work before choos
   assert.match(selected, /\$fallbackPaths := \$selectedPaths/);
   assert.match(selected, /not \(in \$fallbackPaths \.RelPermalink\)/);
   assert.match(homeV2, /partial "archive\/longform-kind\.html" \$page\) "dialogue"/);
+  assert.match(homeV2, /\$page\.Params\.section_label \| default "Essay"/);
+  assert.match(homeV2, /eq \$page\.RelPermalink "\/essays\/the-dolphin-company\/"/);
+  assert.match(homeV2, /\$sectionLabel = "Case study"/);
   assert.doesNotMatch(homeV2, /what-happened-at-camp-mystic|\$sectionLabel = "Reported analysis"/);
   const campSource = read("content/essays/what-happened-at-camp-mystic.md");
   assert.doesNotMatch(campSource, /^section_label: ["']?Reported analysis/m, "homepage curation must not reclassify the canonical essay");
+  assert.match(read("content/essays/the-dolphin-company.md"), /^section_label: "Essay"\r?$/m, "Case study is a homepage label, not a canonical classification change");
+  assert.match(read("content/essays/musings/reverse-origami.md"), /^section_label: "Musing"\r?$/m);
+  assert.match(read("content/essays/dialogues/what-i-had.md"), /^section_label: 'Dialogue'\r?$/m);
 });
 
-test("homepage follows the reader-to-newsletter-to-reading-to-contributor sequence", () => {
+test("homepage follows the proof, note, featured reading, library, newsletter, contributor sequence", () => {
   assert.equal((homeV2.match(/<h1\b/g) || []).length, 1);
   assert.match(homeV2, /<h1 id="home-front-page-title" class="title visually-hidden">/);
   assert.match(homeV2, /partial "home_reader_banner\.html"/);
@@ -119,9 +139,16 @@ test("homepage follows the reader-to-newsletter-to-reading-to-contributor sequen
   assert.doesNotMatch(homeV2, /Where to begin/);
   assert.match(homeV2, /homepage_v2_featured_lead/);
   assert.match(homeV2, /homepage_v2_featured_supporting/);
-  assert.match(homeV2, /Find your next question\./);
-  assert.match(homeV2, /Browse the archive/);
-  assert.match(homeV2, /Search the library/);
+  const library = homeV2.match(/<nav\b[^>]*class="home-v2-library [^"]*"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+  assert.ok(library, "the reading links need their own navigation region");
+  assert.deepEqual([...library.matchAll(/<a href="\{\{ "([^"]+)" \| relURL \}\}">([^<]+)<\/a>/g)].map((match) => match.slice(1)), [
+    ["library/", "Browse the library"],
+    ["random/", "Surprise me"],
+  ]);
+  assert.equal((library.match(/<a\b/g) || []).length, 2);
+  assert.match(homeV2, /aria-label="Keep reading"/);
+  assert.match(homeV2, /aria-label="Publish with us"/);
+  assert.doesNotMatch(homeV2, /The full imprint|Find your next question|Browse the archive|Search the library|home-v2-next__browse|"archive\/"/);
   assert.match(homeV2, /Become a contributor/);
   assert.doesNotMatch(homeV2, /home_imprint_statement|home-manifesto/);
 
@@ -129,6 +156,8 @@ test("homepage follows the reader-to-newsletter-to-reading-to-contributor sequen
     'partial "home_reader_banner.html"',
     'class="home-front-page__orientation"',
     'class="home-v2-featured',
+    'class="home-v2-library',
+    'partial "home_reader_newsletter.html"',
     'class="home-v2-next',
   ].map((marker) => homeV2.indexOf(marker));
   assert.ok(order.every((index) => index >= 0));
@@ -144,6 +173,26 @@ test("featured lead reuses a published image and responsive rendering", () => {
   assert.match(homeV2, /"loading" "eager"/);
   assert.match(homeV2, /"fetchpriority" "high"/);
   assert.doesNotMatch(homeV2, /<img\b/);
+});
+
+test("supporting illustrations use linked squares and a mobile dialog with an image-link fallback", () => {
+  assert.match(homeV2, /home-v2-featured__item\{\{ if \$imageModel \}\} home-v2-featured__item--illustrated/);
+  assert.match(homeV2, /class="home-v2-featured__item-media" href="\{\{ \$page\.RelPermalink \}\}"/);
+  assert.match(homeV2, /class="home-v2-featured__item-copy"/);
+  assert.match(homeV2, /"loading" "lazy"[\s\S]*?"sizes" "120px"/);
+  assert.match(homeV2, /home-v2-featured__meta[^\n]*partial "home_featured_image_button\.html"/);
+  assert.equal((homeV2.match(/partial "home_featured_image_dialog\.html"/g) || []).length, 1);
+  assert.match(homeV2, /resources\.Get "js\/home-featured-image\.js" \| minify \| fingerprint "sha384"/);
+  assert.match(featuredImageButton, /<button\b[^>]*type="button"[^>]*data-home-featured-image-trigger[^>]*aria-haspopup="dialog"[^>]*aria-controls="home-featured-image-dialog" hidden>/);
+  assert.match(featuredImageButton, /data-image="\{\{ \$model\.lightbox_url \}\}"/);
+  assert.match(featuredImageButton, /data-alt="\{\{ \$page\.Params\.featured_image_alt/);
+  assert.match(featuredImageButton, /<a\b[^>]*data-home-featured-image-fallback[^>]*href="\{\{ \$model\.lightbox_url \}\}"[^>]*>Image<\/a>/);
+  assert.match(featuredImageDialog, /<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"/);
+  assert.match(featuredImageDialog, /<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"/);
+  assert.match(css, /\.home-v2-featured__item-media\{[^}]*aspect-ratio:1;/);
+  assert.match(css, /\.home-v2-featured__item-media img\{[^}]*object-fit:cover;/);
+  assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*display:none;[^}]*min-height:44px;/);
+  assert.match(css, /@media \(max-width:768px\)\{\s*\.home-v2-featured__item--illustrated\{[^}]*display:block;[^}]*\}\s*\.home-v2-featured__item-media\{[^}]*display:none;[^}]*\}\s*\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:inline-flex;/);
 });
 
 test("contributor lane is public, specific, and linked from the homepage", () => {
@@ -163,6 +212,7 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
     ".home-v2-featured__grid",
     ".home-v2-featured__lead",
     ".home-v2-featured__supporting",
+    ".home-v2-library.home-v2-next__links",
     ".home-v2-next",
     ".home-v2-next__cta",
   ]) {
@@ -171,10 +221,10 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
   assert.match(css, /\.home-v2-featured h3 a:focus-visible,[\s\S]*outline:3px solid var\(--focus-ring\)/);
   assert.match(css, /\.home-v2-next__links a,[\s\S]*min-height:44px/);
   assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
-  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
-  assert.match(css, /@media \(max-width:900px\)[\s\S]*\.home-v2-featured__grid,[\s\S]*grid-template-columns:1fr/);
+  assert.match(css, /@media \(max-width:900px\)[\s\S]*\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-v2-featured__supporting\{\s*display:block/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__proof-item\{[\s\S]*padding:\.45rem \.3rem \.42rem/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__controls\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) auto/);

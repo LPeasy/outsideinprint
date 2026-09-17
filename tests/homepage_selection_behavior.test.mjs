@@ -7,10 +7,10 @@ import { execFileSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hugo")
   ? path.resolve(".tools/hugo-0.164.0/hugo") : "hugo");
-const gold = "/essays/why-a-return-to-the-gold-standard-would-break-the-economy/";
+const dolphin = "/essays/the-dolphin-company/";
 const dialogue = "/syd-and-oliver/what-i-had/";
-const prince = "/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/";
-const russia = "/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/";
+const owner = "/essays/default-owner/";
+const origami = "/essays/reverse-origami/";
 
 function renderSelection(t, overrides = {}) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
@@ -28,10 +28,10 @@ function renderSelection(t, overrides = {}) {
   write("layouts/_default/single.html", "{{ .Title }}");
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
-    gold: { title: "Gold", url: gold, date: "2020-01-01" },
+    dolphin: { title: "The Dolphin Company", url: dolphin, date: "2020-01-01", section_label: "Essay" },
     dialogue: { title: "What I Had", url: dialogue, date: "2020-01-01", library_type: "dialogue" },
-    prince: { title: "Prince", url: prince, date: "2020-01-01" },
-    russia: { title: "Russia", url: russia, date: "2020-01-01" },
+    owner: { title: "Default Owner", url: owner, date: "2020-01-01", section_label: "Essay" },
+    origami: { title: "Reverse Origami", url: origami, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
     earlier: { title: "A earlier release", date: "2020-06-01", publishDate: "2020-06-01T09:00:00Z" },
     latest: { title: "Z later release", date: "2020-06-01", publishDate: "2020-06-01T12:00:00Z" },
     draft: { title: "Draft", date: "2020-07-01", draft: true },
@@ -53,14 +53,14 @@ function renderSelection(t, overrides = {}) {
 }
 
 test("latest lead uses actual release time and excludes non-public work even with preview flags", (t) => {
-  assert.deepEqual(renderSelection(t), ["/essays/latest/", gold, dialogue, prince, russia]);
+  assert.deepEqual(renderSelection(t), ["/essays/latest/", dolphin, dialogue, owner, origami]);
 });
 
 test("a pinned latest lead stays unique and missing supporting work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
-    gold: { title: "Gold", url: gold, date: "2020-06-01", publishDate: "2020-07-01" },
+    dolphin: { title: "The Dolphin Company", url: dolphin, date: "2020-06-01", publishDate: "2020-07-01" },
     dialogue: null,
   });
-  assert.deepEqual(selection, [gold, prince, russia, "/essays/latest/", "/essays/earlier/"]);
+  assert.deepEqual(selection, [dolphin, owner, origami, "/essays/latest/", "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });

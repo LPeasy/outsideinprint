@@ -43,6 +43,10 @@ $requiredFiles = @(
   'layouts/partials/home_v2_front_page.html',
   'layouts/partials/home_v2_selected.html',
   'layouts/partials/home_reader_banner.html',
+  'layouts/partials/home_reader_newsletter.html',
+  'layouts/partials/home_featured_image_button.html',
+  'layouts/partials/home_featured_image_dialog.html',
+  'assets/js/home-featured-image.js',
   'assets/js/home-reader-note.js',
   'data/homepage_metrics.yaml',
   'layouts/partials/home_bookstore_spotlight.html',
@@ -119,10 +123,10 @@ if ($homeFrontPageTemplate -notmatch [regex]::Escape('partial "home_v2_front_pag
 
 $homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_selected.html') -Raw -Encoding utf8
 $featuredRoutes = @(
-  '"/essays/why-a-return-to-the-gold-standard-would-break-the-economy/"',
+  '"/essays/the-dolphin-company/"',
   '"/syd-and-oliver/what-i-had/"',
-  '"/essays/the-little-prince-10-powerful-quotes-that-will-change-how-you-see-life/"',
-  '"/essays/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play/"'
+  '"/essays/default-owner/"',
+  '"/essays/reverse-origami/"'
 )
 $previousFeaturedIndex = -1
 foreach ($route in $featuredRoutes) {
@@ -147,21 +151,92 @@ foreach ($requiredSnippet in @(
 
 $homeV2Template = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_front_page.html') -Raw -Encoding utf8
 $homeReaderBanner = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_reader_banner.html') -Raw -Encoding utf8
+$homeReaderNewsletter = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_reader_newsletter.html') -Raw -Encoding utf8
+$homeImageButton = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_featured_image_button.html') -Raw -Encoding utf8
+$homeImageDialog = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_featured_image_dialog.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
+  'eq $page.RelPermalink "/essays/the-dolphin-company/"',
+  '$sectionLabel = "Case study"',
+  'home-v2-featured__item--illustrated',
+  'class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}"',
+  'class="home-v2-featured__item-copy"',
+  '"loading" "lazy"',
+  '"sizes" "120px"',
+  'partial "home_featured_image_button.html"',
+  'partial "home_featured_image_dialog.html"',
+  'resources.Get "js/home-featured-image.js" | minify | fingerprint "sha384"'
+)) {
+  if (-not $homeV2Template.Contains($requiredSnippet, [System.StringComparison]::Ordinal)) {
+    throw "Expected homepage supporting illustrations and labels to contain: $requiredSnippet"
+  }
+}
+$dolphinSource = Get-Content -Path (Join-Path $repoRoot 'content/essays/the-dolphin-company.md') -Raw -Encoding utf8
+if ($dolphinSource -notmatch '(?m)^section_label: "Essay"\r?$') {
+  throw 'Expected the homepage-only Case study label to preserve the Dolphin Company canonical Essay classification.'
+}
+if ($homeImageButton -notmatch '(?s)<button\b[^>]*type="button"[^>]*data-home-featured-image-trigger[^>]*aria-haspopup="dialog"[^>]*aria-controls="home-featured-image-dialog" hidden>' -or
+    $homeImageButton -notmatch '(?s)<a\b[^>]*data-home-featured-image-fallback[^>]*href="\{\{ \$model.lightbox_url \}\}"[^>]*>Image</a>') {
+  throw 'Expected a native mobile image button, initially hidden, and a working image-link fallback without JavaScript.'
+}
+if ($homeImageDialog -notmatch '<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"' -or
+    $homeImageDialog -notmatch '<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"') {
+  throw 'Expected one labelled native image dialog with an image click-to-close control.'
+}
+if ($mainCss -notmatch '(?s)\.home-v2-featured__item-media\{[^}]*aspect-ratio:1;' -or
+    $mainCss -notmatch '(?s)@media \(max-width:768px\)\{\s*\.home-v2-featured__item--illustrated\{[^}]*display:block;[^}]*\}\s*\.home-v2-featured__item-media\{[^}]*display:none;[^}]*\}\s*\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:inline-flex;') {
+  throw 'Expected supporting square illustrations on desktop and compact image controls through 768px.'
+}
+foreach ($requiredSnippet in @(
+  '<section class="home-reader-banner page-shell page-shell--wide" aria-label="Outside In Print at a glance">',
   'hugo.Data.homepage_metrics',
   '<strong>Weekly</strong>',
-  '<span>Newsletter</span>',
+  '<span>Newsletter</span>'
+)) {
+  if ($homeReaderBanner -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected homepage stats banner to contain: $requiredSnippet"
+  }
+}
+if ($homeReaderBanner -match '<form\b|home-reader-banner__signup|home-reader-email|homepage_reader_banner') {
+  throw 'Expected the homepage stats banner to contain no signup form, email field, or signup analytics.'
+}
+foreach ($requiredSnippet in @(
+  '<section class="home-reader-banner home-reader-newsletter page-shell page-shell--wide" aria-labelledby="home-reader-banner-title">',
   'From the imprint',
   'Independent writing on history, economics, culture, and public life.',
   'One thoughtful letter each week.',
   'No spam ever. Unsubscribe anytime.',
   'Join the newsletter',
+  'class="home-reader-banner__form"',
+  'action="https://buttondown.com/api/emails/embed-subscribe/{{ $buttondownUsername }}"',
+  'method="post"',
+  'data-analytics-event="newsletter_submit"',
   'data-analytics-source-slot="homepage_reader_banner"',
+  '<label for="home-reader-email">Email address</label>',
+  'name="email"',
+  '<input type="hidden" name="embed" value="1">',
+  '<input type="hidden" name="tag" value="{{ . }}">',
+  '<a href="{{ "privacy/" | relURL }}">Privacy details</a>',
   'eq $provider "buttondown"'
 )) {
-  if ($homeReaderBanner -notmatch [regex]::Escape($requiredSnippet)) {
-    throw "Expected homepage reader banner to contain: $requiredSnippet"
+  if ($homeReaderNewsletter -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected homepage newsletter partial to contain: $requiredSnippet"
   }
+}
+foreach ($singlePattern in @('<form\b', 'id="home-reader-banner-title"', 'id="home-reader-email"')) {
+  if ([regex]::Matches($homeReaderNewsletter, $singlePattern).Count -ne 1) {
+    throw "Expected one homepage newsletter form and one of each retained ID: $singlePattern"
+  }
+}
+if ($homeReaderNewsletter -match 'home-reader-banner__proof') {
+  throw 'Expected the separate homepage newsletter partial to omit the opening proof strip.'
+}
+foreach ($partial in @('home_reader_banner.html', 'home_reader_newsletter.html')) {
+  if ([regex]::Matches($homeV2Template, [regex]::Escape('partial "' + $partial + '"')).Count -ne 1) {
+    throw "Expected exactly one homepage invocation of $partial."
+  }
+}
+if ($homeV2Template -match '<form\b') {
+  throw 'Expected the homepage newsletter form to remain owned by its single signup partial.'
 }
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
@@ -171,16 +246,40 @@ foreach ($requiredSnippet in @(
   'homepage_v2_featured_lead',
   'homepage_v2_featured_supporting',
   'hugo.Data.homepage_metrics',
-  'The latest publication, alongside reader favorites and defining work.',
+  'The latest publication, reader favorites, and defining work.',
   'Read the piece',
-  'Browse the archive',
-  'Search the library',
+  'Browse the library',
   'Surprise me',
+  '<section class="home-v2-next page-shell page-shell--wide" aria-label="Publish with us">',
   'Become a contributor'
 )) {
   if ($homeV2Template -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected focused homepage composition to contain: $requiredSnippet"
   }
+}
+
+$homeLibraryNavigation = [regex]::Matches($homeV2Template, '(?s)<nav class="home-v2-library home-v2-next__links page-shell page-shell--wide" aria-label="Keep reading">(?<links>.*?)</nav>')
+if ($homeLibraryNavigation.Count -ne 1) {
+  throw 'Expected one standalone Keep reading navigation with the shared wide page shell.'
+}
+$homeLibraryLinks = $homeLibraryNavigation[0].Groups['links'].Value
+$expectedHomeLibraryLinks = @(
+  '<a href="{{ "library/" | relURL }}">Browse the library</a>',
+  '<a href="{{ "random/" | relURL }}">Surprise me</a>'
+)
+foreach ($expectedLink in $expectedHomeLibraryLinks) {
+  if ([regex]::Matches($homeLibraryLinks, [regex]::Escape($expectedLink)).Count -ne 1) {
+    throw "Expected the homepage library navigation to contain exactly one canonical link: $expectedLink"
+  }
+  $homeLibraryLinks = $homeLibraryLinks.Replace($expectedLink, '')
+}
+if (-not [string]::IsNullOrWhiteSpace($homeLibraryLinks)) {
+  throw 'Expected the homepage library navigation to contain only its two reading links, without a heading or description.'
+}
+
+$homeContribution = [regex]::Match($homeV2Template, '(?s)<section class="home-v2-next page-shell page-shell--wide" aria-label="Publish with us">(?<body>.*?)</section>')
+if (-not $homeContribution.Success -or [regex]::Matches($homeContribution.Groups['body'].Value, '<article\b').Count -ne 1 -or $homeContribution.Groups['body'].Value -notmatch [regex]::Escape('class="home-v2-next__contribute"')) {
+  throw 'Expected Publish with us to contain only the contributor article.'
 }
 
 $expectedHomeReaderNote = 'However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.'
@@ -205,7 +304,9 @@ $homepageOrder = @(
   'partial "home_reader_banner.html"',
   'class="home-front-page__orientation"',
   'class="home-v2-featured',
-  'class="home-v2-next'
+  'class="home-v2-library ',
+  'partial "home_reader_newsletter.html"',
+  'class="home-v2-next '
 )
 $lastIndex = -1
 foreach ($snippet in $homepageOrder) {
@@ -225,6 +326,12 @@ foreach ($retiredSnippet in @(
   'newsletter-signup--home-ribbon',
   'home_imprint_statement.html',
   'home-manifesto',
+  'home-v2-next__browse',
+  'The full imprint',
+  'Find your next question',
+  'Browse the archive',
+  'Search the library',
+  '"archive/" | relURL',
   'Ask for the evidence. Read past the headlines. Think for yourself.'
 )) {
   if ($homeV2Template -match [regex]::Escape($retiredSnippet)) {
@@ -331,6 +438,7 @@ foreach ($llmsDocument in @($llms, $llmsFull)) {
 $homeReaderBannerCssChecks = @(
   '.home-reader-banner__proof{',
   '.home-v2-featured__grid{',
+  '.home-v2-library.home-v2-next__links{',
   '.home-v2-next{',
   '.home-v2-next__cta{'
 )
@@ -342,12 +450,24 @@ foreach ($selector in $homeReaderBannerCssChecks) {
 
 $homeReaderBannerWideOverrideCss = [regex]::Match($mainCss, '(?s)\.home-reader-banner\.page-shell--wide\{(?<rules>.*?)\}')
 if (-not $homeReaderBannerWideOverrideCss.Success -or $homeReaderBannerWideOverrideCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
-  throw 'Expected the combined home-reader-banner page-shell--wide override to align the banner at 70rem.'
+  throw 'Expected the home-reader-banner page-shell--wide override to align the separate stats and newsletter regions at 70rem.'
 }
 
-$homeV2ContentWidthCss = [regex]::Match($mainCss, '(?s)\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{(?<rules>.*?)\}')
+$homeV2ContentWidthCss = [regex]::Match($mainCss, '(?s)\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{(?<rules>.*?)\}')
 if (-not $homeV2ContentWidthCss.Success -or $homeV2ContentWidthCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
-  throw 'Expected Featured Articles and the homepage closing section to share the banner and reader-note 70rem width.'
+  throw 'Expected Featured Articles, library navigation, and contribution to share the stats, newsletter, and reader-note 70rem width.'
+}
+
+$homeContributionCss = [regex]::Match($mainCss, '(?s)\.home-v2-next\{(?<rules>.*?)\}')
+if (-not $homeContributionCss.Success -or $homeContributionCss.Groups['rules'].Value -match 'display\s*:\s*grid|grid-template-columns\s*:') {
+  throw 'Expected the homepage contribution region to use one natural block column rather than the retired two-column grid.'
+}
+$homeContributionArticleCss = [regex]::Match($mainCss, '(?s)\.home-v2-next__contribute\{(?<rules>.*?)\}')
+if (-not $homeContributionArticleCss.Success -or $homeContributionArticleCss.Groups['rules'].Value -match 'border-left\s*:') {
+  throw 'Expected the homepage contributor article to omit its retired left border.'
+}
+if ($mainCss -notmatch '(?s)\.home-v2-next__links a,\s*\.home-v2-next__cta\{[^}]*min-height:44px;') {
+  throw 'Expected the library links and contribution control to retain 44px interaction targets.'
 }
 
 $homeOrientationCss = [regex]::Match($mainCss, '(?s)\.home-front-page__orientation\{(?<rules>.*?)\}')
@@ -693,8 +813,8 @@ if ($mainCss -notmatch '(?s)\.home-reader-banner__proof\{[^}]*grid-template-colu
 if ($mainCss -notmatch '(?s)\.home-v2-featured__grid\{[^}]*grid-template-columns:minmax\(0, 1\.45fr\) minmax\(18rem, \.8fr\);') {
   throw 'Expected the featured-reading surface to use a lead-and-supporting desktop grid.'
 }
-if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{.*?\.home-v2-featured__grid,\s*\.home-v2-next\{[^}]*grid-template-columns:1fr;') {
-  throw 'Expected the focused homepage grids to collapse at 900px.'
+if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{.*?\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr;') {
+  throw 'Expected the featured-reading grid to collapse at 900px.'
 }
 if ($mainCss -notmatch '(?s)@media \(max-width:520px\)\{.*?\.home-v2-featured__supporting\{\s*display:block;') {
   throw 'Expected supporting featured stories to stack at 520px.'

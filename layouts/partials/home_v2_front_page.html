@@ -22,7 +22,7 @@
         <div>
           <h2 id="home-v2-featured-title">Featured Articles</h2>
         </div>
-        <p>The latest publication, alongside reader favorites and defining work.</p>
+        <p>The latest publication, reader favorites, and defining work.</p>
       </header>
 
       <div class="home-v2-featured__grid">
@@ -31,6 +31,9 @@
           {{- $sectionLabel := $page.Params.section_label | default "Essay" -}}
           {{- if eq (partial "archive/longform-kind.html" $page) "dialogue" -}}
             {{- $sectionLabel = "Dialogue" -}}
+          {{- end -}}
+          {{- if eq $page.RelPermalink "/essays/the-dolphin-company/" -}}
+            {{- $sectionLabel = "Case study" -}}
           {{- end -}}
           {{- if eq $index 0 }}
             <article class="home-v2-featured__lead">
@@ -62,8 +65,23 @@
             </article>
           {{- else }}
             {{- if eq $index 1 }}<div class="home-v2-featured__supporting" aria-label="More featured reading">{{ end }}
-            <article class="home-v2-featured__item">
-              <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
+            {{- $imageModel := false -}}
+            {{- with $page.Params.featured_image -}}
+              {{- $imageModel = partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
+            {{- end -}}
+            <article class="home-v2-featured__item{{ if $imageModel }} home-v2-featured__item--illustrated{{ end }}">
+              {{- with $imageModel }}
+                <a class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+                  {{- partial "images/picture.html" (dict
+                    "model" .
+                    "alt" ($page.Params.featured_image_alt | default "")
+                    "loading" "lazy"
+                    "sizes" "120px"
+                  ) -}}
+                </a>
+              {{- end }}
+              <div class="home-v2-featured__item-copy">
+              <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}{{ with $imageModel }}{{ partial "home_featured_image_button.html" (dict "page" $page "model" .) }}{{ end }}</p>
               <h3><a href="{{ $page.RelPermalink }}"
                 data-analytics-event="internal_promo_click"
                 data-analytics-source-slot="homepage_v2_featured_supporting"
@@ -73,6 +91,7 @@
                 data-analytics-path="{{ $page.RelPermalink }}"
               >{{ $page.Title }}</a></h3>
               {{- with (partial "discovery/page-summary.html" $page) }}<p>{{ . }}</p>{{ end }}
+              </div>
             </article>
             {{- if eq $index (sub (len $featured) 1) }}</div>{{ end }}
           {{- end }}
@@ -81,17 +100,14 @@
     </section>
   {{- end }}
 
-  <section class="home-v2-next page-shell page-shell--wide" aria-label="Keep reading or contribute">
-    <article class="home-v2-next__browse">
-      <p class="home-v2-eyebrow">The full imprint</p>
-      <h2>Find your next question.</h2>
-      <p>Browse every publication by date, or search the complete library by subject and type.</p>
-      <div class="home-v2-next__links">
-        <a href="{{ "archive/" | relURL }}">Browse the archive</a>
-        <a href="{{ "library/" | relURL }}">Search the library</a>
-        <a href="{{ "random/" | relURL }}">Surprise me</a>
-      </div>
-    </article>
+  <nav class="home-v2-library home-v2-next__links page-shell page-shell--wide" aria-label="Keep reading">
+    <a href="{{ "library/" | relURL }}">Browse the library</a>
+    <a href="{{ "random/" | relURL }}">Surprise me</a>
+  </nav>
+
+  {{ partial "home_reader_newsletter.html" . }}
+
+  <section class="home-v2-next page-shell page-shell--wide" aria-label="Publish with us">
     <article class="home-v2-next__contribute">
       <p class="home-v2-eyebrow">Publish with us</p>
       <h2>Write for Outside In Print.</h2>
@@ -100,6 +116,10 @@
     </article>
   </section>
 </section>
+{{ partial "home_featured_image_dialog.html" . }}
+{{- with resources.Get "js/home-featured-image.js" | minify | fingerprint "sha384" }}
+  <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+{{- end }}
 {{- with resources.Get "js/home-reader-note.js" | minify | fingerprint "sha384" }}
   <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
 {{- end }}

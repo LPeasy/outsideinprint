@@ -74,6 +74,7 @@ const themeToggleScript = fs.readFileSync(path.resolve("layouts/partials/theme_t
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
 const homeV2FrontPage = fs.readFileSync(path.resolve("layouts/partials/home_v2_front_page.html"), "utf8");
 const homeReaderBanner = fs.readFileSync(path.resolve("layouts/partials/home_reader_banner.html"), "utf8");
+const homeReaderNewsletter = fs.readFileSync(path.resolve("layouts/partials/home_reader_newsletter.html"), "utf8");
 const homeStudioOffer = fs.readFileSync(path.resolve("layouts/partials/home_studio_offer.html"), "utf8");
 const studioData = fs.readFileSync(path.resolve("data/studio.yaml"), "utf8");
 const studioTemplate = fs.readFileSync(path.resolve("layouts/studio/single.html"), "utf8");
@@ -534,10 +535,10 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.match(newsletterPrompt, /data-analytics-event="internal_promo_click"/);
   assert.match(newsletterPrompt, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);
   assert.match(newsletterPrompt, /data-analytics-slug="bobs-almanack-signup"/);
-  assert.match(homeV2FrontPage, /partial "home_reader_banner\.html"/);
-  assert.match(homeReaderBanner, /One thoughtful letter each week\./);
-  assert.match(homeReaderBanner, /No spam ever\. Unsubscribe anytime\./);
-  assert.match(homeReaderBanner, /data-analytics-source-slot="homepage_reader_banner"/);
+  assert.match(homeV2FrontPage, /partial "home_reader_newsletter\.html"/);
+  assert.match(homeReaderNewsletter, /One thoughtful letter each week\./);
+  assert.match(homeReaderNewsletter, /No spam ever\. Unsubscribe anytime\./);
+  assert.match(homeReaderNewsletter, /data-analytics-source-slot="homepage_reader_banner"/);
   assert.doesNotMatch(homeV2FrontPage, /Bob(?:'|’)s Almanack|home-almanack/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
@@ -646,23 +647,26 @@ test("commerce terms and Almanack templates keep their public copy and landmarks
   assert.doesNotMatch(collectionsData, /compact notices, and worth reprinting/i);
 });
 
-test("homepage offers a compact archive path and contributor lane", () => {
-  const nextClasses = classTokensForElement(homeV2FrontPage, /<section\b[^>]*aria-label="Keep reading or contribute"[^>]*>/, "homepage next steps");
+test("homepage offers separate library navigation and contributor lane", () => {
+  const libraryClasses = classTokensForElement(homeV2FrontPage, /<nav\b[^>]*aria-label="Keep reading"[^>]*>/, "homepage library navigation");
+  for (const token of ["home-v2-library", "home-v2-next__links", "page-shell", "page-shell--wide"]) {
+    assert.ok(libraryClasses.has(token), `expected homepage library class token: ${token}`);
+  }
+  const nextClasses = classTokensForElement(homeV2FrontPage, /<section\b[^>]*aria-label="Publish with us"[^>]*>/, "homepage contribution");
   for (const token of ["home-v2-next", "page-shell", "page-shell--wide"]) {
     assert.ok(nextClasses.has(token), `expected homepage next-step class token: ${token}`);
   }
-  assert.match(homeV2FrontPage, /Find your next question\./);
-  assert.match(homeV2FrontPage, /Browse the archive/);
-  assert.match(homeV2FrontPage, /Search the library/);
+  assert.match(homeV2FrontPage, /Browse the library/);
   assert.match(homeV2FrontPage, /Surprise me/);
   assert.match(homeV2FrontPage, /Write for Outside In Print\./);
   assert.match(homeV2FrontPage, /Become a contributor/);
-  assert.doesNotMatch(homeV2FrontPage, /Gallery|Collections|home-browse/);
-  assert.match(css, /\.home-v2-next\{[\s\S]*grid-template-columns:minmax\(0, 1\.2fr\) minmax\(19rem, \.8fr\);/);
+  assert.doesNotMatch(homeV2FrontPage, /Gallery|Collections|home-browse|home-v2-next__browse|The full imprint|Find your next question|Browse the archive|Search the library/);
+  assert.doesNotMatch(cssRule(css, ".home-v2-next"), /display:grid|grid-template-columns/);
+  assert.doesNotMatch(cssRule(css, ".home-v2-next__contribute"), /border-left/);
   assert.match(cssRule(css, ".home-v2-next__cta"), /min-height:44px;/);
 });
 
-test("homepage composition prioritizes proof, newsletter, featured reading, and contribution", () => {
+test("homepage composition puts reading before newsletter and contribution", () => {
   assert.match(homepage, /partial "home_front_page\.html"/);
   assert.match(homeFrontPage, /partial "home_v2_front_page\.html"/);
   assert.match(homeV2FrontPage, /id="home-front-page-title"/);
@@ -688,12 +692,15 @@ test("homepage composition prioritizes proof, newsletter, featured reading, and 
     'partial "home_reader_banner.html"',
     'class="home-front-page__orientation"',
     'class="home-v2-featured',
+    'class="home-v2-library',
+    'partial "home_reader_newsletter.html"',
     'class="home-v2-next',
   ].map((marker) => homeV2FrontPage.indexOf(marker));
   assert.ok(compositionOrder.every((index) => index >= 0));
   assert.deepEqual(compositionOrder, [...compositionOrder].sort((left, right) => left - right));
 
-  assert.match(homeReaderBanner, /Join the newsletter/);
+  assert.match(homeReaderNewsletter, /Join the newsletter/);
+  assert.doesNotMatch(homeReaderBanner, /<form\b|home-reader-banner__signup/);
   assert.match(homeReaderBanner, /hugo\.Data\.homepage_metrics/);
   assert.match(homeV2FrontPage, /hugo\.Data\.homepage_metrics/);
   assert.doesNotMatch(homeV2FrontPage, /Medium reads/i);
@@ -1043,7 +1050,7 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.doesNotMatch(css, /\.home-manifesto(?:__[a-z-]+)?\s*\{/);
   assert.match(cssRule(css, ".home-reader-banner"), /border-top:4px double var\(--oip-rule-engraved-strong\);/);
   assert.match(cssRule(css, ".home-reader-banner.page-shell--wide"), /max-width:70rem;/);
-  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(cssRule(css, ".home-reader-banner__proof"), /grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(cssRule(css, ".home-reader-banner__proof-item"), /padding:\.5rem \.75rem \.48rem;/);
   assert.match(cssRule(css, ".home-reader-banner__signup"), /gap:\.75rem 1\.4rem;[\s\S]*padding:\.72rem \.9rem \.78rem;/);
@@ -1069,7 +1076,7 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(cssRule(css, ".home-v2-featured__supporting"), /padding:1\.25rem 0 1\.1rem 1\.5rem;/);
   assert.match(cssRule(css, ".home-v2-next"), /border-top:4px double var\(--oip-rule-engraved-strong\);/);
   assert.match(cssRule(css, ".home-v2-next__cta"), /min-height:44px;/);
-  assert.match(css, /@media \(max-width:900px\)\{[\s\S]*\.home-v2-featured__grid,[\s\S]*\.home-v2-next\{[\s\S]*grid-template-columns:1fr;/);
+  assert.match(css, /@media \(max-width:900px\)\{[\s\S]*\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr;/);
   assert.match(css, /@media \(max-width:520px\)\{[\s\S]*\.home-v2-featured__supporting\{\s*display:block;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-width:44px;/);
   assert.match(cssRule(css, ".essays-front__year-link"), /min-height:44px;/);
@@ -1098,7 +1105,7 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(css, /\.essays-front__month-list \.item::before\{[\s\S]*background:var\(--oip-rule-engraved-rail\);/);
   assert.match(cssRule(css, ".home-v2-featured__meta"), /font:700 \.8125rem\/1\.4 var\(--font-ui\);/);
   assert.match(cssRule(css, ".home-v2-featured__item + .home-v2-featured__item"), /border-top:1px solid var\(--oip-rule-standard\);/);
-  assert.match(cssRule(css, ".home-v2-next__contribute"), /border-left:1px solid var\(--oip-rule-standard\);/);
+  assert.doesNotMatch(cssRule(css, ".home-v2-next__contribute"), /border-left/);
 
   assert.match(css, /\.cartoon-gallery-spotlight\{[\s\S]*grid-template-columns:minmax\(12rem, \.38fr\) minmax\(0, 1fr\);/);
   assert.match(css, /\.cartoon-gallery\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
