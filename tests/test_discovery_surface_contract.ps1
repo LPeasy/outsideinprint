@@ -486,8 +486,10 @@ if (-not $homeContributionCss.Success -or $homeContributionCss.Groups['rules'].V
 if ($mainCss -match '\.home-v2-next__contribute\{|\.home-v2-next > article\{') {
   throw 'Expected obsolete contributor article styling to remain absent.'
 }
-if ($mainCss -notmatch '(?s)\.home-v2-next__cta\{[^}]*margin-top:0;[^}]*max-width:100%;[^}]*justify-content:center;[^}]*text-align:center;') {
-  throw 'Expected the contributor button to retain centered text and fit narrow screens without an extra top gap.'
+foreach ($requiredRule in @('margin-top:0;', 'max-width:100%;', 'justify-content:center;', 'text-align:center;')) {
+  if ($mainCss -notmatch ('(?s)\.home-v2-next__cta\{[^}]*' + [regex]::Escape($requiredRule))) {
+    throw "Expected the contributor button to retain its layout rule: $requiredRule"
+  }
 }
 if ($mainCss -notmatch '(?s)\.home-v2-next__links a,\s*\.home-v2-next__cta\{[^}]*min-height:44px;') {
   throw 'Expected the library links and contribution control to retain 44px interaction targets.'
