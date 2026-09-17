@@ -4632,6 +4632,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
+    Scope = 'article-aftermatter'
     Pattern = 'newsletter-prompt--article-exit|journey-links--article-exit|Curated position|Reading progress on this device|Recommended starting point|Up Next'
     Message = 'expected standard collection aftermatter to omit redundant prompts, progress counters, and competing next steps'
     ShouldNotMatch = $true
@@ -4668,37 +4669,37 @@ $requiredUxChecks = @(
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'piece--collection-accent'
-    Message = 'expected non-collection essays to remain unaccented'
+    Message = 'expected collection essays to retain the neutral article shell'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'piece-collection-context'
-    Message = 'expected non-collection essays not to render the collection context block'
+    Message = 'expected collection essays not to render the retired standalone collection context block'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'data-piece-collection-room-theme='
-    Message = 'expected non-collection essays not to emit collection room-theme data attributes'
+    Message = 'expected collection essays not to emit retired collection room-theme data attributes'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'class=(?:"read-next"|read-next)\b'
-    Message = 'expected non-collection essays not to render the retired read-next module'
+    Message = 'expected collection essays not to render the retired read-next module'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
-    Pattern = 'read-next-title|Read Next'
-    Message = 'expected non-collection essays not to render retired Read Next title markup'
+    Pattern = '\bid=(?:"read-next-title"|''read-next-title''|read-next-title)(?=[\s>])'
+    Message = 'expected collection essays not to render the retired read-next-title ID while allowing the new Read next card'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'data-analytics-source-slot=(?:"related_content"|related_content)'
-    Message = 'expected non-collection essays not to render related_content analytics links from Read Next'
+    Message = 'expected collection essays not to render retired related_content analytics links'
     ShouldNotMatch = $true
   },
   @{
@@ -4709,13 +4710,39 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
-    Pattern = 'journey-links--article-exit'
-    Message = 'expected non-collection essays to render the article-exit Keep Reading links'
+    Scope = 'article-aftermatter'
+    Pattern = 'newsletter-prompt--article-exit|journey-links--article-exit|Curated position|Reading progress on this device|Recommended starting point|Up Next'
+    Message = 'expected the Poker collection essay to omit redundant prompts, progress counters, and competing article paths'
+    ShouldNotMatch = $true
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Scope = 'article-aftermatter'
+    Pattern = '(?s)article-publication-record.*?reading-path.*?Read next.*?reading-path__summary.*?reading-path__meta.*?min read.*?View collection.*?newsletter-signup--article-exit'
+    Message = 'expected the Poker collection essay to render a compact next-reading card followed by the existing newsletter signup'
+  },
+  @{
+    Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
+    Pattern = 'data-piece-collection-slug=(?:"geopolitics-trade-global-power"|geopolitics-trade-global-power)(?=[\s>])'
+    Message = 'expected the Poker essay to use its published geopolitics collection rather than act as a non-collection fixture'
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-3/index.html'
+    Scope = 'article-aftermatter'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?journey-links--article-exit.*?Article paths'
+    Message = 'expected an article with no public collection to retain its newsletter signup and Article paths navigation'
+  },
+  @{
+    Path = 'public/essays/the-ledger-vol-3/index.html'
+    Scope = 'article-aftermatter'
+    Pattern = 'data-reading-path-root|newsletter-prompt--article-exit'
+    Message = 'expected an article whose only collection is hidden to omit the standard collection card and redundant newsletter prompt'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = 'newsletter-signup--article-exit'
-    Message = 'expected non-collection essays to render the full weekly newsletter signup'
+    Message = 'expected the Poker collection essay to retain the full weekly newsletter signup'
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
@@ -5167,7 +5194,17 @@ foreach ($check in $requiredUxChecks) {
   }
   else {
     $isNegative = [bool]($check.ContainsKey('ShouldNotMatch') -and $check.ShouldNotMatch)
-    $matches = $targetPageHtml[$relativePath] -match ([string]$check.Pattern)
+    $checkHtml = [string]$targetPageHtml[$relativePath]
+    if ($check.ContainsKey('Scope') -and $check.Scope -eq 'article-aftermatter') {
+      # Presentation assertions must not match the retained progress script after </article>.
+      $aftermatter = [regex]::Match($checkHtml, '(?is)<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|''[^'']*\bpiece-aftermatter\b[^'']*''|[^\s>]*\bpiece-aftermatter\b[^\s>]*)[^>]*>(.*?)</article>')
+      if (-not $aftermatter.Success) {
+        $uxIssues.Add("$relativePath => expected article aftermatter for scoped UX regression coverage")
+        continue
+      }
+      $checkHtml = [regex]::Replace($aftermatter.Groups[1].Value, '(?is)<script\b[^>]*>.*?</script>', '')
+    }
+    $matches = $checkHtml -match ([string]$check.Pattern)
     if (($isNegative -and $matches) -or (-not $isNegative -and -not $matches)) {
       $uxIssues.Add("$relativePath => $($check.Message)")
     }

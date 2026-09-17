@@ -10,6 +10,11 @@ const attr = (tag, name) => {
   return match?.[1] ?? match?.[2] ?? match?.[3] ?? "";
 };
 const links = (html) => [...html.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)];
+const articleAftermatter = (html) => {
+  const fragment = html.match(/<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|'[^']*\bpiece-aftermatter\b[^']*'|[^\s>]*\bpiece-aftermatter\b[^\s>]*)[^>]*>([\s\S]*?)<\/article>/i)?.[1];
+  assert.ok(fragment, "article aftermatter must exist before scoped assertions run");
+  return fragment.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+};
 
 test("rendered Library offers catalog browsing and retains a no-script fallback", () => {
   const html = read("library");
@@ -20,7 +25,7 @@ test("rendered Library offers catalog browsing and retains a no-script fallback"
 });
 
 test("standard article endings have one next piece, one collection link, and one newsletter", () => {
-  for (const route of ["essays/default-owner", "essays/the-dolphin-company", "syd-and-oliver/what-i-had"]) {
+  for (const route of ["essays/default-owner", "essays/the-dolphin-company", "syd-and-oliver/what-i-had", "essays/the-risk-management-buffet", "essays/the-world-is-back-at-the-poker-table"]) {
     const html = read(route);
     const card = html.match(/<aside\b[^>]*class=(?:"reading-path"|reading-path)[\s\S]*?<\/aside>/)?.[0];
     assert.ok(card, route);
@@ -35,10 +40,28 @@ test("standard article endings have one next piece, one collection link, and one
     }
     assert.doesNotMatch(card, /Reading progress|Newest-first position|Curated position|Up Next|Previous piece|Recommended starting point/);
     assert.doesNotMatch(html, /newsletter-prompt--article-exit|journey-links--article-exit/);
+    assert.doesNotMatch(articleAftermatter(html), /Reading progress on this device|Curated position|Newest-first position|Up Next|Previous piece|Recommended starting point/);
+    assert.doesNotMatch(html, /\bid=(?:"read-next-title"|'read-next-title'|read-next-title)(?=[\s>])/i);
     assert.equal((html.match(/data-analytics-source-slot=(?:"article_exit_newsletter"|article_exit_newsletter)(?=[\s>])/g) || []).length, 1);
     assert.ok(html.indexOf("article-publication-record") < html.indexOf(card));
     assert.ok(html.indexOf(card) < html.indexOf("newsletter-signup--article-exit"));
   }
+});
+
+test("retained progress-script strings do not count as visible article progress", () => {
+  const html = read("essays/the-risk-management-buffet");
+  assert.match(html, /Reading progress on this device/);
+  assert.doesNotMatch(articleAftermatter(html), /Reading progress on this device/);
+  const injectedVisibleCounter = html.replace(/(<div\b[^>]*class=(?:"piece-aftermatter"|piece-aftermatter)[^>]*>)/, "$1<p>Reading progress on this device: 1 of 3 pieces.</p>");
+  assert.match(articleAftermatter(injectedVisibleCounter), /Reading progress on this device/);
+});
+
+test("hidden-only collection membership preserves the no-public-collection exit", () => {
+  const html = read("essays/the-ledger-vol-3");
+  const aftermatter = articleAftermatter(html);
+  assert.match(aftermatter, /article-publication-record[\s\S]*newsletter-signup--article-exit[\s\S]*journey-links--article-exit[\s\S]*Article paths/);
+  assert.doesNotMatch(aftermatter, /data-reading-path-root|newsletter-prompt--article-exit/);
+  assert.doesNotMatch(html, /data-piece-collection-slug=/);
 });
 
 test("Gallery exposes titled reading links outside the lightbox, including a differently named illustration", () => {
