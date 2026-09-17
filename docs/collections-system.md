@@ -84,32 +84,23 @@ Collections now support two reader-facing sequence layers that reuse the existin
 
 - Three manually selected pieces have a focused exit instead of the full collection continuation: the Jack Stratton profile, *A Thousand Brick Walls*, and *What Is Risk? A Four-Part Framework*. `data/featured_continuations.json` owns one existing reading route and two connection sentences per source page. `article/featured-continuation.html` renders one reading link and one Studio inquiry link; it does not rank or discover recommendations. The reading route must resolve to a published page. These route-bound choices are independent of the homepage selection.
 - The two existing collection continuations retain their `article_continuation_primary` / `collection_click` metadata and collection slugs. Jack's manually selected Benjamin Franklin recommendation uses `internal_promo_click` in that same primary slot. Studio links retain `studio_sample_exit` for Jack and use the existing `article_exit_paths` slot on the other two pieces; no new analytics event is introduced.
-- Jack's Studio production note remains, but its standalone inquiry CTA is suppressed when the focused exit supplies that link. Other Studio sample exits stay unchanged. Existing newsletter prompts, forms, and final archive links are unchanged; no signup block is added. These are navigation-only changes, not revisions to the article bodies or citation records.
+- Jack's Studio production note remains, but its standalone inquiry CTA is suppressed when the focused exit supplies that link. Other Studio sample exits stay unchanged. On these explicitly featured routes, existing newsletter prompts, forms, and final archive links are unchanged; no signup block is added. These are navigation-only changes, not revisions to the article bodies or citation records.
 
 - A collection-member article renders exactly one article-exit continuation zone.
-- After the publication record, collection-member articles render one compact Bob's Almanack jump link before the continuation zone; its target remains the full canonical signup below that zone. Non-collection articles omit the compact prompt because the full signup already follows their publication record directly.
+- Standard collection-member articles render the continuation immediately after the publication record, followed by the existing canonical newsletter signup. They omit the redundant compact newsletter prompt above the card and the `Article paths` row below the signup. Explicitly featured continuations, Studio samples, and articles without a public collection retain their existing exit paths.
 - The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
 - Eligible collection-member articles also render compact collection links in the article record rail keyed to that same first public match.
 - When an article has two public explicit collections, the article record rail lists both collection names in front matter order. The first public match still controls the continuation module.
 - Collections influence article pages only through compact boundary modules:
   - the header record rail collection boundary
   - the continuation module
-- The article body, hero, publication record, final article links, and editorial form variants remain neutral.
+- The article body, hero, publication record, citations, revision history, and editorial form variants remain unchanged.
 - The separate mounted collection-membership block is no longer part of the article-member flow.
-- Standalone articles use the same quiet final article links as collection-member articles.
-- The continuation zone shows:
-  - `Continue This Collection`
-  - linked collection title
-  - `Newest-first position N of M` for date-ordered collections, or `Curated position N of M` when any item uses `collection_weight`
-  - `Reading progress on this device: X of M pieces.`
-  - `After this position: X pieces | Y min`
-  - `Recommended starting point` when the current page is the configured entry point
-  - `Recommended starting point: <link>.` when the collection defines `start_here` and the current page is not it
-  - a fixed action row:
-    - mid-collection: `Continue to <next title>`, `View Collection`, and `Previous piece` when available
-    - end-of-collection: `View Collection`, `Start Again with <title>`, and `Previous piece` when available
-  - an `Up Next` preview row showing the next one or two pieces in order with sequence number and reading time
-  - `Browse collections` and `Search the library` as archive exits
+- Standalone articles retain their quiet final article links.
+- The standard continuation zone contains one `Read next` card: one linked article title, its existing plain-text description (or shared summary fallback), its reading time, and a secondary `View collection` link. The title uses `article_continuation_primary`; the collection link uses `article_continuation_secondary`. Both retain `collection_click` and the primary collection slug.
+- The next article is the next eligible member in the existing collection order. At the end, use the designated `start_here` article if it is eligible and not the current article; otherwise use the first other eligible member. A missing, draft, future-dated, future-release, or expired member cannot become the target, including in a preview build.
+- When no other eligible member exists, render only `View collection`; never recommend the current article to itself.
+- Article pages no longer display positions, progress counts, remaining pieces or minutes, previous/start actions, a duplicate `Up Next` list, or extra archive/library exits inside this card. Browser-local visit recording remains active without a visible progress node.
 
 ### Collection pages
 
@@ -148,7 +139,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 }
 ```
 
-The active reader-facing use is the article continuation module. Collection pages no longer expose a progress or resume interface.
+The article continuation module records visits using its existing data attributes without exposing a progress label. Collection pages no longer expose a progress or resume interface; their retained status/resume helpers and storage format remain compatible.
 
 ### Legacy resume logic
 
@@ -173,6 +164,8 @@ Resume labels are also fixed:
 5. Run `.\tools\bin\generated\hugo.cmd --gc --minify` and verify `/collections/`, the collection page, and at least one member page.
 
 ## Auditing
+
+`tests/collection_reading_path_behavior.test.mjs` exercises the production Hugo partial with temporary fixtures: primary-collection ordering, next and end-of-collection targets, unavailable or self-referential starts, single-member collections, unpublished/expired exclusions, and description fallback. It also runs the shared progress script without a visible article progress label and checks retained collection status/resume behavior. The dedicated Node and PowerShell reading-path contracts cover markup, analytics, and the standard-versus-featured/Studio exit boundary. GitHub runs the Node checks; local publishing gates remain Hugo/PowerShell as documented in `docs/local-validation-policy.md`.
 
 Use the audit script to review collection health and candidate assignments:
 

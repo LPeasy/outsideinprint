@@ -459,6 +459,25 @@ if ($homepageOutputIndex -le $hugoBuildStepIndex -or $homepageOutputIndex -le $b
 $browserDependencyStep = Get-WorkflowStepBlock `
   -WorkflowName "deploy.yml" `
   -WorkflowText $buildJobBlock `
+  -StepName "Test Reader Refinements"
+foreach ($requiredReaderSnippet in @(
+  'OIP_SITE_DIR: public',
+  'OIP_HUGO_BIN: hugo',
+  'tests/reader_refinements_output.test.mjs',
+  'tests/gallery_reading_behavior.test.mjs',
+  'tests/bookstore_ebook_labels.test.mjs',
+  'tests/collection_reading_path_behavior.test.mjs'
+)) {
+  if (-not $browserDependencyStep.Contains($requiredReaderSnippet, [StringComparison]::Ordinal)) {
+    throw "Reader refinement tests must use the production output and pinned Hugo: $requiredReaderSnippet"
+  }
+}
+if ($buildJobBlock.IndexOf('- name: Test Reader Refinements', [StringComparison]::Ordinal) -le $homepageOutputIndex) {
+  throw 'Reader refinement coverage must follow the existing production homepage checks.'
+}
+$browserDependencyStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $buildJobBlock `
   -StepName "Install browser test dependencies"
 if ($browserDependencyStep -notmatch '(?m)^\s*npm ci --ignore-scripts --no-audit --no-fund\s*$' -or
     $browserDependencyStep -notmatch '(?m)^\s*npx playwright install --with-deps chromium\s*$' -or

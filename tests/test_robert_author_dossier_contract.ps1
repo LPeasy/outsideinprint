@@ -56,6 +56,7 @@ foreach ($requiredSnippet in @(
   'author-route__role',
   'author-route__invitation',
   'author-route__actions',
+  'these pieces are a few places to begin.',
   'href="#author-selected-title"',
   'href="#author-newsletter"',
   'partial "newsletter_signup.html"',
@@ -153,6 +154,13 @@ try {
   }
   if (@($workPaths | Select-Object -Unique).Count -ne 12) {
     throw 'Expected selected and recent writing destinations to remain duplicate-free.'
+  }
+  if ($workPaths[3] -cne '/syd-and-oliver/what-i-had/') {
+    throw 'Expected What I Had in the fourth selected slot, using its canonical dialogue URL.'
+  }
+  $selectedSection = [regex]::Match($builtPage, '(?s)<section[^>]*aria-labelledby=(?:"author-selected-title"|author-selected-title)[^>]*>(.*?)</section>').Value
+  if ($selectedSection -notmatch 'Dialogue' -or $selectedSection -match '/essays/synthetic-reasoning/') {
+    throw 'Selected Writing must demonstrate dialogue work in place of Synthetic Reasoning.'
   }
 
   $booksSection = [regex]::Match($builtPage, '(?s)<section[^>]*aria-labelledby=(?:"author-books-title"|author-books-title)[^>]*>(.*?)</section>').Value

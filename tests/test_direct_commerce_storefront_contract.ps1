@@ -81,7 +81,7 @@ function Get-MetaContent {
 
 $bookstoreData = Get-RequiredText -RelativePath 'data/bookstore.yaml'
 $bookstoreIndexContent = Get-RequiredText -RelativePath 'content/shop/_index.md'
-$usCheckoutRestriction = 'Direct EPUB checkout is currently available to U.S. customers only.'
+$usCheckoutRestriction = 'Direct e-book checkout is currently available to U.S. customers only.'
 Assert-Contains -Text $bookstoreIndexContent -Expected $usCheckoutRestriction -Context 'Bookstore geographic checkout notice'
 Assert-Ordered -Text $bookstoreIndexContent -First $usCheckoutRestriction -Second '[Reader support](/support/) uses a separate checkout.' -Context 'Bookstore geographic checkout notice'
 $americanNightmarePage = Get-RequiredText -RelativePath 'content/shop/the-american-nightmare-keep-dreaming-kid/index.md'
@@ -102,12 +102,12 @@ $liveEpubSkus = @('OIP-TD-EPUB', 'OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
 $disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB')
 
 foreach ($requiredCatalogText in @(
-  'product_type: "Outside In Print EPUB"',
-  'checkout_label: "Buy EPUB — $9.99"',
-  'checkout_unavailable_label: "EPUB coming soon"',
-  'checkout_note: "Secure checkout through Square. EPUB delivered by email."',
-  'direct_offers_heading: "Outside In Print EPUB"',
-  'direct_offers_note: "Secure checkout through Square. EPUB delivered by email."'
+  'product_type: "Outside In Print e-book"',
+  'checkout_label: "Buy e-book — $9.99"',
+  'checkout_unavailable_label: "E-book coming soon"',
+  'checkout_note: "Secure checkout through Square. E-book delivered by email."',
+  'direct_offers_heading: "Outside In Print e-book"',
+  'direct_offers_note: "Secure checkout through Square. E-book delivered by email."'
 )) {
   Assert-Contains -Text $bookstoreData -Expected $requiredCatalogText -Context 'Square-first bookstore defaults'
 }
@@ -236,12 +236,12 @@ $directOffersTemplate = Get-RequiredText -RelativePath 'layouts/partials/shop/di
 foreach ($requiredTemplateText in @(
   'availability_status',
   'must not expose checkout_url or checkout_endpoint while disabled',
-  'index $product "direct_offers_heading" | default "Outside In Print EPUB"',
-  'index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. EPUB delivered by email.")',
+  'index $product "direct_offers_heading" | default "Outside In Print e-book"',
+  'index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. E-book delivered by email.")',
   '$headingLevel := .headingLevel | default 2',
   'if eq $headingLevel 3',
-  'index $product "checkout_label" | default "Buy EPUB"',
-  'index $product "checkout_unavailable_label" | default "EPUB coming soon"',
+  'index $product "checkout_label" | default "Buy e-book"',
+  'index $product "checkout_unavailable_label" | default "E-book coming soon"',
   'epub_checkout_api',
   'https://downloads.outsideinprint.org/api/books/epub',
   'data-epub-checkout',
@@ -625,7 +625,7 @@ foreach ($requiredEpubThanksText in @(
   'draft: false',
   'noindex: true',
   'list: never',
-  'Expect your secure EPUB download link at the delivery email address you entered during checkout.',
+  'Expect your secure e-book download link at the delivery email address you entered during checkout.',
   'Square is confirming your payment.',
   'does not confirm that payment succeeded',
   '[contact Outside In Print](/contact/)',
@@ -767,7 +767,7 @@ if ($restrictionIndex -lt 0 -or $firstDisclosureIndex -lt 0 -or $restrictionInde
 if ($shopIndexOutput -match '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure[^>]*\bopen(?:\s*=|\s|>)') {
   throw 'Bookstore index direct-EPUB checkout disclosures must be closed by default.'
 }
-if ([regex]::Matches([Net.WebUtility]::HtmlDecode($shopIndexOutput), '<summary\b[^>]*\baria-label="Buy direct EPUB — \$9\.99: [^"]+"[^>]*>\s*<span>Buy direct EPUB — \$9\.99</span>\s*</summary>', 'IgnoreCase').Count -ne 3) {
+if ([regex]::Matches([Net.WebUtility]::HtmlDecode($shopIndexOutput), '<summary\b[^>]*\baria-label="Buy direct e-book — \$9\.99: [^"]+"[^>]*>\s*<span>Buy direct e-book — \$9\.99</span>\s*</summary>', 'IgnoreCase').Count -ne 3) {
   throw 'Every bookstore index checkout disclosure must show the $9.99 direct-EPUB label and include the book title in its accessible name.'
 }
 if ([regex]::Matches($shopIndexOutput, '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>).*?<form\b[^>]*\bdata-epub-checkout(?:=|\s|>).*?</form>\s*</div>\s*</details>').Count -ne 3) {
@@ -885,10 +885,10 @@ if ($decodedShopOutput -match '>Kindle on Amazon · \$4\.99</a>') {
 }
 
 $shopSurfaceExpectations = @(
-  @{ Path = 'shop/index.html'; KindleCount = 3; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print') },
-  @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
-  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
-  @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print EPUB', 'Secure checkout through Square. EPUB delivered by email.', 'Buy EPUB — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
+  @{ Path = 'shop/index.html'; KindleCount = 3; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print') },
+  @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
+  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
+  @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
 )
 foreach ($surface in $shopSurfaceExpectations) {
   $surfaceHtml = [Net.WebUtility]::HtmlDecode([string]$output[$surface.Path])
@@ -902,7 +902,7 @@ foreach ($surface in $shopSurfaceExpectations) {
 }
 
 $shopIndexHtml = [Net.WebUtility]::HtmlDecode([string]$output['shop/index.html'])
-if ([regex]::Matches($shopIndexHtml, '<h3\b[^>]*>\s*Outside In Print EPUB\s*</h3>', 'IgnoreCase').Count -ne 3) {
+if ([regex]::Matches($shopIndexHtml, '<h3\b[^>]*>\s*Outside In Print e-book\s*</h3>', 'IgnoreCase').Count -ne 3) {
   throw 'Built bookstore index must nest each direct EPUB offer under its book H2 with an H3.'
 }
 foreach ($detailPath in @(
@@ -911,11 +911,11 @@ foreach ($detailPath in @(
   'shop/the-water-cycle/index.html'
 )) {
   $detailHtml = [Net.WebUtility]::HtmlDecode([string]$output[$detailPath])
-  if ([regex]::Matches($detailHtml, '<h2\b[^>]*>\s*Outside In Print EPUB\s*</h2>', 'IgnoreCase').Count -ne 1) {
+  if ([regex]::Matches($detailHtml, '<h2\b[^>]*>\s*Outside In Print e-book\s*</h2>', 'IgnoreCase').Count -ne 1) {
     throw "Built bookstore detail $detailPath must retain one direct EPUB H2."
   }
 }
-if ([regex]::Matches($shopOutput, 'Secure checkout through Square\. EPUB delivered by email after payment is confirmed\.', 'IgnoreCase').Count -ne 0) {
+if ([regex]::Matches($shopOutput, 'Secure checkout through Square\. E-book delivered by email after payment is confirmed\.', 'IgnoreCase').Count -ne 0) {
   throw 'Built bookstore must not repeat the live Square and delivery helper beneath each direct offer.'
 }
 
@@ -1021,7 +1021,7 @@ $epubThanksOutput = [Net.WebUtility]::HtmlDecode([string]$output['shop/thanks/in
 foreach ($requiredEpubThanksOutput in @(
   'Order confirmation',
   'Thanks for your purchase',
-  'Expect your secure EPUB download link at the delivery email address you entered during checkout.',
+  'Expect your secure e-book download link at the delivery email address you entered during checkout.',
   'Square is confirming your payment.',
   'does not confirm that payment succeeded',
   'href=/contact/',

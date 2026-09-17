@@ -51,7 +51,7 @@
           {{ if and (eq $productKey "2045") (eq $storyCount 10) (gt $wordCount 0) (gt (len $liveEpubOffers) 0) }}
             {{ $roundedWordCount := mul (div (add $wordCount 50) 100) 100 }}
             <aside class="bookstore-product__decision" aria-label="2045 edition and purchase details" data-bookstore-early-decision>
-              <p class="bookstore-product__proof">{{ $storyCount }} stories <span aria-hidden="true">&middot;</span> About {{ lang.FormatNumber 0 $roundedWordCount }} words <span aria-hidden="true">&middot;</span> DRM-free EPUB</p>
+              <p class="bookstore-product__proof">{{ $storyCount }} stories <span aria-hidden="true">&middot;</span> About {{ lang.FormatNumber 0 $roundedWordCount }} words <span aria-hidden="true">&middot;</span> E-book</p>
               {{ with index $product "exclusive_note" }}<p class="bookstore-product__exclusive-note">{{ . }}</p>{{ end }}
               <div class="bookstore-product__decision-actions">
                 {{ $sampleLink }}
@@ -66,6 +66,7 @@
                   data-analytics-path="{{ .RelPermalink }}"
                 >{{ index $product "checkout_label" }}</a>
               </div>
+              {{ partial "shop/ebook-help.html" . }}
             </aside>
           {{ end }}
           {{ with index $product "deck" }}<p class="bookstore-product__deck">{{ . }}</p>{{ end }}
@@ -79,13 +80,14 @@
         <section id="bookstore-purchase" class="bookstore-product__purchase" aria-labelledby="bookstore-purchase-title">
           <p id="bookstore-purchase-title" class="bookstore-product__purchase-title">Choose an edition</p>
           {{ if gt (len $liveEpubOffers) 0 }}
-            <p class="bookstore-product__checkout-restriction">Direct EPUB checkout is currently available to U.S. customers only.</p>
+            <p class="bookstore-product__checkout-restriction">Direct e-book checkout is currently available to U.S. customers only.</p>
           {{ end }}
 
           {{ partial "shop/direct-offers.html" (dict
             "product" $product
             "sourceSlot" "bookstore_detail_direct"
             "compact" (eq (len $liveEpubOffers) 0)
+            "omitReadingHelp" (and (eq $productKey "2045") (eq $storyCount 10) (gt $wordCount 0) (gt (len $liveEpubOffers) 0))
           ) }}
 
           <div class="bookstore-product__kindle">
@@ -125,7 +127,7 @@
           <section class="bookstore-format-ledger" aria-labelledby="bookstore-format-title">
             <h2 id="bookstore-format-title">{{ index $product "formats_heading" | default "Direct formats" }}</h2>
             <ul class="bookstore-formats">
-              {{ range . }}<li>{{ . }}</li>{{ end }}
+              {{ range . }}<li>{{ if in (lower .) "epub" }}E-book{{ else }}{{ . }}{{ end }}</li>{{ end }}
             </ul>
           </section>
         {{ end }}

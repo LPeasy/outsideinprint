@@ -32,9 +32,9 @@
           data-analytics-title="{{ index $product "title" }}"
           data-analytics-section="Bookstore"
           data-analytics-path="{{ $book.RelPermalink }}"
-        >Buy EPUB</a>
+        >Buy e-book</a>
       {{ else }}
-        <button class="shop-cta bookstore-feature__buy" type="button" disabled aria-describedby="bookstore-feature-status">Buy EPUB</button>
+        <button class="shop-cta bookstore-feature__buy" type="button" disabled aria-describedby="bookstore-feature-status">Buy e-book</button>
       {{ end }}
       {{ with $sample }}
         <a class="shop-cta bookstore-feature__sample{{ if eq $book.Params.book_key "2045" }} bookstore-feature__sample--complete{{ end }}" href="{{ .RelPermalink }}"
@@ -47,6 +47,7 @@
         >{{ if eq $book.Params.book_key "2045" }}Read “{{ .Title }}” — a complete story · {{ math.Max 1 .ReadingTime }} minutes{{ else }}Read a free sample{{ end }}</a>
       {{ end }}
     </div>
+    {{ partial "shop/ebook-help.html" . }}
     <p id="bookstore-feature-status" class="bookstore-feature__status">{{ if $available }}Secure checkout through Square. Download link delivered by email.{{ else }}{{ index $product "checkout_unavailable_label" }}. Checkout opens when the edition is ready.{{ end }}</p>
     <p class="bookstore-feature__terms">U.S. customers only · Personal-use edition</p>
   </div>

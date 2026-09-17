@@ -8,6 +8,7 @@ $requiredFiles = @(
   'layouts/partials/collections/collection-progress.html',
   'layouts/partials/collections/reading-progress-script.html',
   'tests/collection_reading_path_contract.test.mjs',
+  'tests/collection_reading_path_behavior.test.mjs',
   'tests/test_collection_reading_path_contract.ps1'
 )
 
@@ -22,6 +23,9 @@ $articleSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/single
 foreach ($requiredSnippet in @(
   'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',
   '$showCollectionContinuation := false',
+  '$standardCollectionContinuation := and $showCollectionContinuation (not $featuredContinuation) (not .Params.studio_sample)',
+  '{{ if and $showCollectionContinuation (not $standardCollectionContinuation) }}',
+  '{{ if not $standardCollectionContinuation }}',
   'partial "collections/reading-path.html" .',
   'class="article-publication-record"',
   'Cite this',
@@ -95,31 +99,25 @@ foreach ($retiredSnippet in @(
 
 $readingPath = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/reading-path.html') -Raw
 foreach ($requiredSnippet in @(
-  'Continue This Collection',
-  'isset $item.Params "collection_weight"',
-  'cond $hasCuratedOrder "Curated position" "Newest-first position"',
-  '{{ $orderLabel }} {{ $position }} of {{ $itemCount }}',
-  'Reading progress on this device: 1 of {{ $itemCount }} pieces.',
-  'After this position: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min',
-  'Recommended starting point: <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.',
-  'Previous piece',
-  'Start Again with {{ .Title }}',
-  'Up Next',
-  'You&rsquo;re at the end of this collection.',
-  'Browse collections',
-  'Search the library',
+  'Read next',
+  'View collection',
+  'class="reading-path__summary"',
+  '{{ .ReadingTime }} min read',
+  'strings.TrimSpace ((.Params.description | default "") | plainify)',
+  'partial "discovery/page-summary.html" .',
   'data-reading-path-root',
   'data-analytics-source-slot="article_continuation_primary"',
   'data-analytics-source-slot="article_continuation_secondary"',
-  'data-analytics-source-slot="article_continuation_previous"',
-  'data-analytics-source-slot="article_continuation_restart"',
-  'data-analytics-source-slot="article_continuation_archive"',
   'data-item-paths="{{ $itemPaths | jsonify | htmlEscape }}"',
   'data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"'
 )) {
   if ($readingPath -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected reading-path partial to contain: $requiredSnippet"
   }
+}
+
+if ($readingPath -match 'Continue This Collection|Curated position|Newest-first position|Reading progress|After this position|Recommended starting point|Previous piece|Start Again|Up Next|Browse collections|Search the library|data-reading-path-progress|article_continuation_(previous|restart|archive)') {
+  throw 'Expected one Read next card without visible progress, positions, duplicate recommendations, or competing navigation.'
 }
 
 $collectionProgress = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/collection-progress.html') -Raw
@@ -144,11 +142,16 @@ foreach ($requiredSnippet in @(
   'Start with ',
   'Resume with ',
   'Start Again with ',
-  'collection-pill--visited'
+  'collection-pill--visited',
+  'if (progressNode) {'
 )) {
   if ($progressScript -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected reading-progress script to contain: $requiredSnippet"
   }
+}
+
+if ($progressScript -match [regex]::Escape('if (!slug || !currentPath || !itemPaths.length || !progressNode)')) {
+  throw 'Article progress recording must not depend on a visible progress label.'
 }
 
 $progressSurfaces = $readingPath + "`n" + $collectionProgress + "`n" + $progressScript
@@ -165,9 +168,8 @@ $layoutMatrix = Get-Content -Path (Join-Path $repoRoot 'docs/layout-ownership-ma
 foreach ($requiredSnippet in @(
   '`reading-path`',
   '`reading-path__header`',
-  '`reading-path__actions`',
-  '`reading-path__preview`',
-  '`reading-path__archive-links`'
+  '`reading-path__summary`',
+  '`reading-path__collection-link`'
 )) {
   if ($layoutMatrix -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected docs/layout-ownership-matrix.md to contain: $requiredSnippet"

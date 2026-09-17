@@ -536,9 +536,8 @@ test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, an
     "`piece-record-rail__item--collection`",
     "`.article-lightbox-image`",
     "`reading-path__header`",
-    "`reading-path__actions`",
-    "`reading-path__preview`",
-    "`reading-path__archive-links`",
+    "`reading-path__summary`",
+    "`reading-path__collection-link`",
     "| Archive shell | `/archive/`",
     "| Section compatibility redirects | `/essays/`, `/syd-and-oliver/`",
     "## Removed Layout Hooks"

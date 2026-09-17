@@ -1,0 +1,15 @@
+{{- /* Gallery associations use canonical URLs, not necessarily content paths. */ -}}
+{{- $route := .essay | default "" -}}
+{{- $target := false -}}
+{{- $now := now -}}
+{{- with $route -}}
+  {{- range where site.RegularPages "RelPermalink" (. | relURL) -}}
+    {{- $published := and (not .Draft) (le .Date.Unix $now.Unix) (le .PublishDate.Unix $now.Unix) -}}
+    {{- $unexpired := or .ExpiryDate.IsZero (gt .ExpiryDate.Unix $now.Unix) -}}
+    {{- $policy := partial "metadata/policy.html" (dict "page" .) -}}
+    {{- if and $published $unexpired $policy.indexable -}}
+      {{- $target = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $target -}}

@@ -2,7 +2,7 @@
 title: "The Cracked Pot"
 metadata_title: "The Cracked Pot — Complete Story from 2045"
 date: 2026-09-12
-edition: "2045 EPUB edition"
+edition: "2045 e-book edition"
 description: "Read a complete story from 2045: Ten Dark Fables from the Machine Age by Robert V. Ussley."
 image: "books/2045/cover"
 image_alt: "Black cover for 2045 with a small OIP Exclusive mark, an oversized ivory scanline eye, a blue radial iris with red and ivory circles, a grid of pale squares, large ivory numerals, binary digits, the subtitle Ten Dark Fables from the Machine Age, and Robert V. Ussley’s name."
@@ -18,7 +18,7 @@ sample_release_status: "published"
 sample_illustration: "books/2045/stories/the-cracked-pot"
 sample_illustration_alt: "A hand rests on a cracked handmade pot while a robotic hand offers a neatly wrapped gift beside an apartment window overlooking the city."
 sample_edition_notice:
-  label: "2045 EPUB edition."
+  label: "2045 e-book edition."
   text: "This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*."
 ---
 

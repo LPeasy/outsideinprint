@@ -110,6 +110,14 @@ If a piece belongs in an existing collection, add explicit `collections` front m
 
 Essays are the first-class publishing workflow. Reports and working papers can still be published manually and must pass the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces do not use this hard gate unless a specific piece is explicitly treated as public-judgment work.
 
+## Reader discovery and e-book labels
+
+- The Library opens with recent selections grouped by type, newest within each type. **Browse all [count] pieces** opens the complete catalog across types, newest first, with 24 results per page. `view=all` and `page` retain the view alongside existing search/filter/sort parameters; filtering resets page one, and Reset filters restores the grouped landing view. Keep the JSON index schema unchanged. JavaScript failure or absence preserves grouped selections and the Archive fallback.
+- Standard collection article endings show one **Read next** recommendation and **View collection**, followed by the existing newsletter form. The recommendation follows the primary collection's existing order; the last piece points to its designated starting piece or first other eligible piece. A one-piece collection has no self-recommendation. Explicit Studio/sample continuations and no-collection pages retain their separate behavior. Article visit recording continues without visible progress counters; do not erase saved reading progress.
+- Gallery captions expose a native link to their associated published article using its canonical URL and article title. Resolve the existing `essay` association; do not infer associations from artwork names. Missing, draft, future, expired, or nonindexable reading targets receive no link. Artwork and lightbox behavior remain unchanged.
+- Robert's Selected Writing retains six ordered pieces, with **What I Had** replacing **Synthetic Reasoning** in the fourth slot. Canonical dialogue URLs can differ from Hugo content paths; maintain resolution and duplicate-free Recent Writing.
+- Public bookstore sales labels, buttons, badges, descriptions, promotions, and delivery/status copy use **e-book**, never **DRM-free EPUB**. A nearby **How to read it** disclosure identifies the actual EPUB download format and compatible reading apps. Retain EPUB in technical offer formats, SKUs, API paths, analytics identifiers, schema/MIME values, file names, and format instructions. Keep legal terms, prices, geographic limits, Kindle branding, checkout, and delivery behavior unchanged. Do not globally replace technical EPUB identifiers.
+
 ## Musings
 
 Musings are short source-free reflections, not ordinary evidence-driven essays. Create them under content/essays/musings/ with section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", and external_factual_claims: "none".

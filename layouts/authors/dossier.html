@@ -13,7 +13,13 @@
   {{ $selectedPaths := dict }}
   {{ range ($author.featured_work | default (slice)) }}
     {{ $configuredPath := printf "%v" . }}
-    {{ with site.GetPage $configuredPath }}
+    {{ $configuredPage := site.GetPage $configuredPath }}
+    {{ if not $configuredPage }}
+      {{ range where site.RegularPages "RelPermalink" ($configuredPath | relURL) }}
+        {{ $configuredPage = . }}
+      {{ end }}
+    {{ end }}
+    {{ with $configuredPage }}
       {{ $selectedPage := . }}
       {{ $policy := partial "metadata/policy.html" (dict "page" $selectedPage) }}
       {{ $selectedAuthor := partial "authors/resolve.html" (dict "page" $selectedPage "fallbackDefault" true) }}
@@ -90,7 +96,7 @@
     {{ if gt (len $selectedWorks) 0 }}
       <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-selected-title">
         <h2 id="author-selected-title" class="list-title">Selected Writing</h2>
-        <p class="author-route__section-intro">If you’re new here, these essays are a few places to begin.</p>
+        <p class="author-route__section-intro">If you’re new here, these pieces are a few places to begin.</p>
         {{ range $selectedWorks }}
           {{ partial "discovery/page-list-item.html" (dict
             "page" .

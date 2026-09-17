@@ -1,6 +1,6 @@
 ---
 title: "2045"
-description: "Ten Dark Fables from the Machine Age by Robert V. Ussley. An OIP-exclusive, DRM-free EPUB about artificial intelligence, grief, ambition, and faith."
+description: "Ten Dark Fables from the Machine Age by Robert V. Ussley. An OIP-exclusive e-book about artificial intelligence, grief, ambition, and faith."
 image: "books/2045/cover"
 image_alt: "Black cover for 2045 with a small OIP Exclusive mark, an oversized ivory scanline eye, a blue radial iris with red and ivory circles, a grid of pale squares, large ivory numerals, binary digits, the subtitle Ten Dark Fables from the Machine Age, and Robert V. Ussley’s name."
 draft: false
@@ -22,8 +22,8 @@ These are ten dark fables about artificial intelligence, grief, ambition, faith,
 
 ## Your Outside In Print edition
 
-First Outside In Print EPUB edition · September 12, 2026 · English
+First Outside In Print e-book edition · September 12, 2026 · English
 
-A reflowable, DRM-free EPUB for personal use, with a navigable table of contents and structured headings. Read it in an EPUB-compatible app such as Thorium or calibre. Your secure download link arrives by email after payment is confirmed. Direct checkout is available to U.S. customers only.
+An e-book for personal use, with adjustable text, a navigable table of contents, and structured headings. Your secure download link arrives by email after payment is confirmed. Direct checkout is available to U.S. customers only.
 
 Copyright © 2026 Robert V. Ussley. All rights reserved.

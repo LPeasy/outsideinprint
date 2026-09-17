@@ -1204,6 +1204,19 @@ html[data-theme="light"] .paper-route-toggle{
   gap:0;
   margin-top:.25rem;
 }
+.library-browse{ margin-top:1rem; }
+.library-pagination{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.75rem;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:1.5rem;
+}
+.library-pagination[hidden]{ display:none; }
+.library-pagination .library-reset{ width:auto; min-width:6.5rem; }
+.library-reset:disabled{ opacity:.45; cursor:default; }
+.library-pagination__status{ min-width:0; }
 /* Lists */
 .list-title{
   font-family:var(--font-ui);
@@ -5840,6 +5853,7 @@ html[data-theme="light"] .paper-route-toggle{
 }
 .cartoon-gallery__item figcaption{
   display:flex;
+  flex-wrap:wrap;
   justify-content:space-between;
   gap:.9rem;
   margin-top:.72rem;
@@ -5856,6 +5870,24 @@ html[data-theme="light"] .paper-route-toggle{
 .cartoon-gallery__item figcaption span{
   color:var(--text-secondary);
 }
+.cartoon-gallery__reading-link{
+  display:flex;
+  align-items:center;
+  gap:.35em;
+  min-height:44px;
+  max-width:100%;
+  color:var(--text-secondary);
+  font-family:var(--font-body);
+  font-size:.95rem;
+  font-weight:400;
+  letter-spacing:normal;
+  line-height:1.4;
+  text-transform:none;
+  overflow-wrap:anywhere;
+  text-underline-offset:.2em;
+}
+.cartoon-gallery__item figcaption .cartoon-gallery__reading-link{ flex-basis:100%; }
+.cartoon-gallery__reading-link:focus-visible{ outline:2px solid var(--accent-hover); outline-offset:3px; }
 .cartoon-gallery__item--current figcaption span::after{
   content:"Current";
   display:inline-block;
@@ -9510,6 +9542,37 @@ h2{ margin-top:34px; }
 .reading-path__archive-links{
   padding-top:.9rem;
   border-top:1px solid var(--oip-rule-faint);
+}
+.reading-path__summary{
+  margin:.65rem 0;
+  color:var(--text-secondary);
+  line-height:1.6;
+}
+.reading-path__collection-link{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  margin-top:.4rem;
+  color:var(--text-secondary);
+  text-underline-offset:.2em;
+}
+.reading-path__collection-link:focus-visible{
+  outline:2px solid var(--accent-hover);
+  outline-offset:3px;
+}
+.bookstore-ebook-help{ margin:.65rem 0; color:var(--text-secondary); }
+.bookstore-ebook-help p{ margin:.4rem 0; }
+.bookstore-ebook-help__disclosure summary{
+  min-height:44px;
+  padding:.6rem 0;
+  cursor:pointer;
+  color:var(--text-secondary);
+  text-decoration:underline;
+  text-underline-offset:.2em;
+}
+.bookstore-ebook-help__disclosure summary:focus-visible{
+  outline:2px solid var(--accent-hover);
+  outline-offset:3px;
 }
 .reading-path__actions{
   display:flex;

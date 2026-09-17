@@ -21,6 +21,7 @@
     </header>
 
     {{ with $current }}
+      {{ $readingPage := partial "editorial/linked-reading-page.html" . }}
       {{ $currentImage := partial "images/model.html" (dict
         "page" $
         "ref" .image
@@ -32,6 +33,7 @@
             <p class="list-title">Current Illustration</p>
             <h2 id="current-cartoon-title">{{ .title }}</h2>
             <p class="m">{{ time.Format "Jan 2, 2006" .date }}</p>
+            {{ partial "editorial/gallery-reading-link.html" $readingPage }}
           </div>
           <figure class="cartoon-gallery-spotlight__figure">
             <button
@@ -46,7 +48,7 @@
               data-alt="{{ .alt }}"
               data-width="{{ $currentImage.lightbox_width }}"
               data-height="{{ $currentImage.lightbox_height }}"
-              {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
+              {{ with $readingPage }}data-essay="{{ .RelPermalink }}"{{ end }}
               aria-label="Open {{ .title }} fullscreen"
             >
               {{ partial "images/picture.html" (dict
@@ -69,6 +71,7 @@
     {{ if gt (len $archiveCartoons) 0 }}
       <div class="cartoon-gallery__grid">
         {{ range $archiveCartoons }}
+          {{ $readingPage := partial "editorial/linked-reading-page.html" . }}
           {{ $archiveImage := partial "images/model.html" (dict
             "page" $
             "ref" .image
@@ -88,7 +91,7 @@
                 data-alt="{{ .alt }}"
                 data-width="{{ $archiveImage.lightbox_width }}"
                 data-height="{{ $archiveImage.lightbox_height }}"
-                {{ with .essay }}data-essay="{{ . | relURL }}"{{ end }}
+                {{ with $readingPage }}data-essay="{{ .RelPermalink }}"{{ end }}
                 aria-label="Open {{ .title }} fullscreen"
               >
                 {{ partial "images/picture.html" (dict
@@ -102,6 +105,7 @@
               <figcaption>
                 <span>{{ .title }}</span>
                 <time datetime="{{ .date }}">{{ time.Format "Jan 2, 2006" .date }}</time>
+                {{ partial "editorial/gallery-reading-link.html" $readingPage }}
               </figcaption>
             </figure>
           </article>

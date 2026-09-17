@@ -37,7 +37,9 @@ test("article single includes the reading-path partial and shared progress scrip
   assert.match(articleSingle, /"label" "Library"/);
   assert.match(articleSingle, /"label" "Newsletter"/);
   assert.doesNotMatch(articleSingle, /"class" "journey-links--article"/);
-  assert.match(articleSingle, /\{\{ if \$showCollectionContinuation \}\}/);
+  assert.match(articleSingle, /\$standardCollectionContinuation := and \$showCollectionContinuation \(not \$featuredContinuation\) \(not \.Params\.studio_sample\)/);
+  assert.match(articleSingle, /\{\{ if and \$showCollectionContinuation \(not \$standardCollectionContinuation\) \}\}[\s\S]*?partial "newsletter_prompt\.html"/);
+  assert.match(articleSingle, /\{\{ if not \$standardCollectionContinuation \}\}\s*\{\{ partial "journey_links\.html"/);
   assert.doesNotMatch(articleSingle, /partial "collections\/page-membership-block\.html" \./);
   assert.ok(articleSingle.indexOf('class="article-publication-record"') < articleSingle.indexOf('partial "collections/reading-path.html" .'));
   assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('partial "newsletter_signup.html"'));
@@ -80,26 +82,16 @@ test("collection single frames the section front, contents, and related terrain 
   }
 });
 
-test("reading-path partial uses the first public collection match and fixed continuation copy", () => {
+test("reading-path uses the first public collection and one descriptive next-piece card", () => {
   for (const snippet of [
     'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',
     'index $matches 0',
-    'Continue This Collection',
-    'isset $item.Params "collection_weight"',
-    'cond $hasCuratedOrder "Curated position" "Newest-first position"',
-    '{{ $orderLabel }} {{ $position }} of {{ $itemCount }}',
-    'Reading progress on this device: 1 of {{ $itemCount }} pieces.',
-    'After this position: {{ $remainingPieces }} pieces | {{ $remainingMinutes }} min',
-    'Recommended starting point',
-    'Recommended starting point: <a href="{{ $startHere.RelPermalink }}">{{ $startHere.Title }}</a>.',
-    'Continue to {{ .Title }}',
-    'View Collection',
-    'Start Again with {{ .Title }}',
-    'Previous piece',
-    'Up Next',
-    'You&rsquo;re at the end of this collection.',
-    'Browse collections',
-    'Search the library',
+    'Read next',
+    'View collection',
+    'class="reading-path__summary"',
+    '{{ .ReadingTime }} min read',
+    'strings.TrimSpace ((.Params.description | default "") | plainify)',
+    'partial "discovery/page-summary.html" .',
     'data-reading-path-root',
     'data-item-paths="{{ $itemPaths | jsonify | htmlEscape }}"',
     'data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"',
@@ -107,6 +99,9 @@ test("reading-path partial uses the first public collection match and fixed cont
   ]) {
     assert.match(readingPath, new RegExp(escapeRegex(snippet)));
   }
+  assert.doesNotMatch(readingPath, /Continue This Collection|Curated position|Newest-first position|Reading progress|After this position|Recommended starting point|Previous piece|Start Again|Up Next|Browse collections|Search the library|data-reading-path-progress/);
+  assert.equal((readingPath.match(/<a\b/g) || []).length, 2);
+  assert.match(readingPath, /\(not \.Draft\).*?\(le \.Date now\).*?\(le \.PublishDate now\).*?\.ExpiryDate\.IsZero/);
 });
 
 test("collection-progress partial exposes deterministic resume hooks", () => {
@@ -145,6 +140,8 @@ test("progress script uses the fixed storage key and resume labels", () => {
   }
 
   assert.doesNotMatch([readingPath, collectionProgress, progressScript].join("\n"), /Visited .* in this browser/);
+  assert.doesNotMatch(progressScript, /if \(!slug \|\| !currentPath \|\| !itemPaths\.length \|\| !progressNode\)/);
+  assert.match(progressScript, /if \(progressNode\) \{/);
 });
 
 test("css owns the new reading-path continuation selectors", () => {
@@ -153,13 +150,9 @@ test("css owns the new reading-path continuation selectors", () => {
     ".reading-path__header{",
     ".reading-path__eyebrow{",
     ".reading-path__title{",
-    ".reading-path__meta,",
-    ".reading-path__status{",
-    ".reading-path__actions,",
-    ".reading-path__preview,",
-    ".reading-path__archive-links{",
-    ".reading-path__preview-item{",
-    ".reading-path__archive-links a{",
+    ".reading-path__meta",
+    ".reading-path__summary",
+    ".reading-path__collection-link",
     ".collection-progress{",
     ".collection-progress__summary,",
     ".collection-progress__actions{",
@@ -172,7 +165,7 @@ test("css owns the new reading-path continuation selectors", () => {
 test("documentation records the article-exit continuation model and storage contract", () => {
   for (const snippet of [
     "article-exit continuation zone",
-    "Continue This Collection",
+    "Read next",
     "first public match",
     "The separate mounted collection-membership block is no longer part of the article-member flow.",
     "`oip-reading-progress:v1:<collection-slug>`",
@@ -186,9 +179,8 @@ test("documentation records the article-exit continuation model and storage cont
   for (const snippet of [
     "`reading-path`",
     "`reading-path__header`",
-    "`reading-path__actions`",
-    "`reading-path__preview`",
-    "`reading-path__archive-links`",
+    "`reading-path__summary`",
+    "`reading-path__collection-link`",
     "article-exit continuation zone"
   ]) {
     assert.match(layoutMatrix, new RegExp(escapeRegex(snippet)));
@@ -200,11 +192,8 @@ test("reading-path partial uses the fixed continuation analytics source slots", 
     'data-analytics-event="collection_click"',
     'data-analytics-source-slot="article_continuation_primary"',
     'data-analytics-source-slot="article_continuation_secondary"',
-    'data-analytics-source-slot="article_continuation_previous"',
-    'data-analytics-source-slot="article_continuation_restart"',
-    'data-analytics-event="internal_promo_click"',
-    'data-analytics-source-slot="article_continuation_archive"'
   ]) {
     assert.match(readingPath, new RegExp(escapeRegex(snippet)));
   }
+  assert.doesNotMatch(readingPath, /article_continuation_(?:previous|restart|archive)/);
 });

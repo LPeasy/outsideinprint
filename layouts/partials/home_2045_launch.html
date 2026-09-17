@@ -49,9 +49,10 @@
                 data-analytics-title="2045"
                 data-analytics-section="Bookstore"
                 data-analytics-path="{{ $book.RelPermalink }}"
-              >Buy EPUB — $19.99</a>
+              >Buy e-book — $19.99</a>
             </div>
-            <p class="home-2045-launch__terms">DRM-free EPUB · U.S. customers only.</p>
+            {{ partial "shop/ebook-help.html" . }}
+            <p class="home-2045-launch__terms">E-book · U.S. customers only.</p>
           </section>
         {{- end -}}
       {{- end -}}

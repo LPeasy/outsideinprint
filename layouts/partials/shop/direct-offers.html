@@ -7,10 +7,10 @@
 {{- $headingLevel := .headingLevel | default 2 -}}
 {{- $productSlug := index $product "suggested_slug" | default (index $product "key" | default "book") -}}
 {{- $productTitle := index $product "title" | default "Book" -}}
-{{- $offerHeading := index $product "direct_offers_heading" | default "Outside In Print EPUB" -}}
-{{- $offerHelper := index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. EPUB delivered by email.") -}}
-{{- $buyLabel := index $product "checkout_label" | default "Buy EPUB" -}}
-{{- $disabledLabel := index $product "checkout_unavailable_label" | default "EPUB coming soon" -}}
+{{- $offerHeading := index $product "direct_offers_heading" | default "Outside In Print e-book" -}}
+{{- $offerHelper := index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. E-book delivered by email.") -}}
+{{- $buyLabel := index $product "checkout_label" | default "Buy e-book" -}}
+{{- $disabledLabel := index $product "checkout_unavailable_label" | default "E-book coming soon" -}}
 {{- $newsletter := site.Params.newsletter -}}
 {{- $buttondownUsername := index $newsletter "buttondown_username" | default "" -}}
 {{- $weeklyTag := index $newsletter "tag" | default "outside-in-print" -}}
@@ -40,6 +40,9 @@
         <h2 id="{{ $headingID }}">{{ $offerHeading }}</h2>
       {{ end }}
       <p id="{{ $helperID }}">{{ $offerHelper }}</p>
+      {{ if not (.omitReadingHelp | default false) }}
+        {{ partial "shop/ebook-help.html" . }}
+      {{ end }}
     </header>
 
     <div class="bookstore-direct-offers__grid">
@@ -79,7 +82,7 @@
         {{- $emailID := printf "%s-email-%s" $sourceSlot $productSlug -}}
         {{- $emailNoteID := printf "%s-email-note-%s" $sourceSlot $productSlug -}}
         {{- $preferencesID := printf "%s-email-preferences-%s" $sourceSlot $productSlug -}}
-        {{- $checkoutSummaryLabel := printf "Buy direct EPUB — %s" (index $offer "price_display") -}}
+        {{- $checkoutSummaryLabel := printf "Buy direct e-book — %s" (index $offer "price_display") -}}
         <article class="bookstore-direct-offer" data-direct-offer data-direct-offer-sku="{{ $sku }}" data-direct-offer-status="{{ $status }}">
           <p class="bookstore-direct-offer__price">
             {{- if eq $status "disabled" }}<span>Planned price</span>{{ end -}}
@@ -129,7 +132,7 @@
                     aria-describedby="{{ $emailNoteID }}"
                     required
                   />
-                  <p id="{{ $emailNoteID }}">Your secure EPUB link will be sent here.</p>
+                  <p id="{{ $emailNoteID }}">Your secure e-book link will be sent here.</p>
                 </div>
                 <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
                 <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>

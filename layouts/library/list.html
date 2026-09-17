@@ -47,7 +47,7 @@
           <div class="library-filter">
             <label class="library-search-label" for="library-sort">Sort</label>
             <select id="library-sort" class="library-search-input">
-              <option value="newest">Newest first</option>
+              <option value="newest">Newest by type</option>
               <option value="oldest">Oldest first</option>
               <option value="title">Title A-Z</option>
             </select>
@@ -56,9 +56,10 @@
             <button id="library-reset" class="library-reset" type="button">Reset filters</button>
           </div>
         </div>
+        <button id="library-browse-all" class="library-reset library-browse" type="button">Browse all {{ len $catalog.entries }} pieces</button>
       </div>
 
-      <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide">Showing {{ $initialCount }} recent selections from {{ len $catalog.entries }} published pieces. Use search for the complete catalog.</p>
+      <p id="library-results-summary" class="library-results-summary page-shell page-shell--wide" role="status" aria-live="polite">Showing {{ $initialCount }} recent selections from {{ len $catalog.entries }} published pieces, newest within each type.</p>
       <div id="library-search-empty" class="library-empty page-shell page-shell--wide" hidden>No matching pieces found. Try a broader term, browse <a href="{{ "collections/" | absURL }}">Collections</a>, or open the <a href="{{ "archive/" | absURL }}">Archive</a>.</div>
       <div id="library-search-error" class="library-empty page-shell page-shell--wide" hidden>The complete search index could not be loaded. The recent selections and <a href="{{ "archive/" | absURL }}">Archive</a> remain available.</div>
       <noscript><p class="library-results-summary page-shell page-shell--wide">JavaScript is required for complete catalog search. Recent selections remain below; use the <a href="{{ "archive/" | absURL }}">Archive</a> for the full essay, dialogue, and affirmation record.</p></noscript>
@@ -82,8 +83,13 @@
   </div>
 
   <section id="library-flat-results" class="library-results page-shell page-shell--reading" aria-labelledby="library-results-title" hidden>
-    <h2 id="library-results-title" class="list-title" style="margin-top:22px;">Results</h2>
+    <h2 id="library-results-title" class="list-title" style="margin-top:22px;" tabindex="-1">Results</h2>
     <div id="library-results-list" class="library-results__list"></div>
+    <nav id="library-pagination" class="library-pagination" aria-label="Library result pages" hidden>
+      <button id="library-previous" class="library-reset" type="button">Previous</button>
+      <span id="library-page-status" class="library-pagination__status"></span>
+      <button id="library-next" class="library-reset" type="button">Next</button>
+    </nav>
   </section>
 
   <script>
@@ -95,29 +101,50 @@
       var collectionSelect = document.getElementById('library-collection');
       var sortSelect = document.getElementById('library-sort');
       var resetButton = document.getElementById('library-reset');
+      var browseButton = document.getElementById('library-browse-all');
       var summary = document.getElementById('library-results-summary');
       var empty = document.getElementById('library-search-empty');
       var error = document.getElementById('library-search-error');
       var groupedRoot = document.getElementById('library-grouped-results');
       var flatSection = document.getElementById('library-flat-results');
       var flatList = document.getElementById('library-results-list');
+      var resultsTitle = document.getElementById('library-results-title');
+      var pagination = document.getElementById('library-pagination');
+      var previousButton = document.getElementById('library-previous');
+      var nextButton = document.getElementById('library-next');
+      var pageStatus = document.getElementById('library-page-status');
       var indexUrl = {{ $indexURL | jsonify | safeJS }};
       var initialCount = {{ $initialCount }};
       var totalCount = {{ len $catalog.entries }};
       var catalogPromise = null;
       var activeRequest = 0;
       var inputTimer = 0;
-      var supportsUrl = typeof URL === 'function' && typeof window.history.replaceState === 'function';
+      var pageSize = 24;
+      var currentState = null;
+      var supportsUrl = typeof URL === 'function' && typeof window.history.replaceState === 'function' && typeof window.history.pushState === 'function';
 
-      if (!controls || !searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !summary || !empty || !error || !groupedRoot || !flatSection || !flatList) return;
+      if (!controls || !searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !browseButton || !summary || !empty || !error || !groupedRoot || !flatSection || !flatList || !resultsTitle || !pagination || !previousButton || !nextButton || !pageStatus || typeof fetch !== 'function') return;
       controls.hidden = false;
+
+      function defaultState() {
+        return { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest', view: 'grouped', page: 1 };
+      }
+
+      function hasFilters(state) {
+        return !!(state.q || state.type || state.year || state.collection || state.sort !== 'newest');
+      }
+
+      function validPage(value) {
+        var page = Number(value);
+        return /^\d+$/.test(String(value)) && page > 0 && page <= 9007199254740991 ? page : 1;
+      }
 
       function hasOption(select, value) {
         return Array.prototype.some.call(select.options, function (option) { return option.value === value; });
       }
 
       function stateFromUrl() {
-        var state = { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest' };
+        var state = defaultState();
         if (!supportsUrl) return state;
         try {
           var url = new URL(window.location.href);
@@ -131,13 +158,15 @@
           state.year = hasOption(yearSelect, year) ? year : '';
           state.collection = hasOption(collectionSelect, collection) ? collection : '';
           state.sort = hasOption(sortSelect, sort) ? sort : 'newest';
+          state.view = url.searchParams.get('view') === 'all' || hasFilters(state) ? 'all' : 'grouped';
+          state.page = state.view === 'all' ? validPage(url.searchParams.get('page')) : 1;
         } catch (ignored) {}
         return state;
       }
 
       function stateFromControls() {
         var q = searchInput.value.trim();
-        return { q: q, qLower: q.toLowerCase(), type: typeSelect.value, year: yearSelect.value, collection: collectionSelect.value, sort: sortSelect.value || 'newest' };
+        return { q: q, qLower: q.toLowerCase(), type: typeSelect.value, year: yearSelect.value, collection: collectionSelect.value, sort: sortSelect.value || 'newest', view: 'all', page: 1 };
       }
 
       function setControls(state) {
@@ -149,10 +178,10 @@
       }
 
       function isDefault(state) {
-        return !state.q && !state.type && !state.year && !state.collection && state.sort === 'newest';
+        return state.view !== 'all' && !hasFilters(state);
       }
 
-      function syncUrl(state) {
+      function syncUrl(state, replace) {
         if (!supportsUrl) return;
         try {
           var url = new URL(window.location.href);
@@ -161,7 +190,17 @@
           });
           url.searchParams.delete('section');
           if (state.sort !== 'newest') url.searchParams.set('sort', state.sort); else url.searchParams.delete('sort');
-          window.history.replaceState({}, '', url.toString());
+          if (state.view === 'all') {
+            url.searchParams.set('view', 'all');
+            url.searchParams.set('page', String(state.page));
+          } else {
+            url.searchParams.delete('view');
+            url.searchParams.delete('page');
+          }
+          if (url.toString() !== window.location.href) {
+            if (replace) window.history.replaceState({}, '', url.toString());
+            else window.history.pushState({}, '', url.toString());
+          }
         } catch (ignored) {}
       }
 
@@ -173,6 +212,9 @@
           }).then(function (payload) {
             if (!payload || payload.version !== 1 || !Array.isArray(payload.items)) throw new Error('Library index payload is invalid');
             return payload.items;
+          }).catch(function (failure) {
+            catalogPromise = null;
+            throw failure;
           });
         }
         return catalogPromise;
@@ -270,17 +312,23 @@
         empty.hidden = true;
         error.hidden = true;
         clearResults();
-        summary.textContent = 'Showing ' + initialCount + ' recent selections from ' + totalCount + ' published pieces. Use search for the complete catalog.';
+        pagination.hidden = true;
+        sortSelect.options[0].textContent = 'Newest by type';
+        summary.textContent = 'Showing ' + initialCount + ' recent selections from ' + totalCount + ' published pieces, newest within each type.';
       }
 
       function applyState(state, options) {
         var config = options || {};
-        if (!config.skipUrl) syncUrl(state);
+        window.clearTimeout(inputTimer);
+        currentState = state;
+        syncUrl(state, config.replaceUrl);
         if (isDefault(state)) { showDefault(); return; }
 
         var requestId = ++activeRequest;
+        sortSelect.options[0].textContent = 'Newest first';
         detachGroupedResults();
         flatSection.hidden = true;
+        pagination.hidden = true;
         empty.hidden = true;
         error.hidden = true;
         summary.textContent = 'Loading the complete catalog…';
@@ -289,19 +337,31 @@
           if (requestId !== activeRequest) return;
           var results = items.filter(function (item) { return matches(item, state); });
           results.sort(function (a, b) { return compare(a, b, state.sort); });
+          var pageCount = Math.max(1, Math.ceil(results.length / pageSize));
+          state.page = Math.min(validPage(state.page), pageCount);
+          syncUrl(state, true);
+          var offset = (state.page - 1) * pageSize;
+          var pageItems = results.slice(offset, offset + pageSize);
           clearResults();
-          results.forEach(function (item) { flatList.appendChild(renderItem(item)); });
+          pageItems.forEach(function (item) { flatList.appendChild(renderItem(item)); });
           totalCount = items.length;
-          summary.textContent = 'Showing ' + results.length + ' of ' + totalCount + ' pieces';
+          browseButton.textContent = 'Browse all ' + totalCount + ' pieces';
+          summary.textContent = results.length ? 'Showing ' + (offset + 1) + '–' + (offset + pageItems.length) + ' of ' + results.length + ' pieces' + (results.length !== totalCount ? ' (' + totalCount + ' in the full library)' : '') + '.' : 'No matching pieces in the ' + totalCount + '-piece library.';
+          pageStatus.textContent = 'Page ' + state.page + ' of ' + pageCount;
+          previousButton.disabled = state.page <= 1;
+          nextButton.disabled = state.page >= pageCount;
+          pagination.hidden = pageCount <= 1;
           flatSection.hidden = results.length === 0;
           empty.hidden = results.length !== 0;
+          if (config.focusResults && results.length) resultsTitle.focus();
         }).catch(function () {
           if (requestId !== activeRequest) return;
           clearResults();
           attachGroupedResults();
           flatSection.hidden = true;
           empty.hidden = true;
-          summary.textContent = 'Showing ' + initialCount + ' recent selections from ' + totalCount + ' published pieces.';
+          sortSelect.options[0].textContent = 'Newest by type';
+          summary.textContent = 'Showing ' + initialCount + ' recent selections from ' + totalCount + ' published pieces, newest within each type.';
           error.hidden = false;
         });
       }
@@ -309,6 +369,7 @@
       function handleChange() { applyState(stateFromControls()); }
       searchInput.addEventListener('input', function () {
         window.clearTimeout(inputTimer);
+        activeRequest += 1;
         inputTimer = window.setTimeout(handleChange, 120);
       });
       typeSelect.addEventListener('change', handleChange);
@@ -316,19 +377,34 @@
       collectionSelect.addEventListener('change', handleChange);
       sortSelect.addEventListener('change', handleChange);
       resetButton.addEventListener('click', function () {
-        var state = { q: '', qLower: '', type: '', year: '', collection: '', sort: 'newest' };
+        var state = defaultState();
         setControls(state);
         applyState(state);
       });
+      browseButton.addEventListener('click', function () {
+        var state = defaultState();
+        state.view = 'all';
+        setControls(state);
+        applyState(state, { focusResults: true });
+      });
+      function turnPage(delta) {
+        if (!currentState || pagination.hidden) return;
+        if (delta < 0 && previousButton.disabled || delta > 0 && nextButton.disabled) return;
+        var state = stateFromControls();
+        state.page = currentState.page + delta;
+        applyState(state, { focusResults: true });
+      }
+      previousButton.addEventListener('click', function () { turnPage(-1); });
+      nextButton.addEventListener('click', function () { turnPage(1); });
       window.addEventListener('popstate', function () {
         var state = stateFromUrl();
         setControls(state);
-        applyState(state, { skipUrl: true });
+        applyState(state, { replaceUrl: true });
       });
 
       var initialState = stateFromUrl();
       setControls(initialState);
-      applyState(initialState, { skipUrl: true });
+      applyState(initialState, { replaceUrl: true });
     }());
   </script>
 {{ end }}

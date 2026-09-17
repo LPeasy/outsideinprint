@@ -58,7 +58,7 @@ Assert-True ($productSource -match '(?m)^book_key: "2045"\r?$') '2045 must use i
 Assert-True ($productSource -match '(?m)^weight: 5\r?$') '2045 must lead the weighted catalog.'
 Assert-True ($product -match 'sku: "OIP-TD-EPUB"' -and $product -match '(?m)^\s+price_cents: 1999\r?$') 'Wrong 2045 SKU or price.'
 Assert-True ([regex]::Matches($product, '(?m)^\s+price_display: "\$19\.99"\r?$').Count -eq 2) '2045 product and offer must display the approved $19.99 price.'
-Assert-True ($product -match '(?m)^\s+checkout_label: "Buy EPUB — \$19\.99"\r?$') '2045 must override the shared checkout label with its approved price.'
+Assert-True ($product -match '(?m)^\s+checkout_label: "Buy e-book — \$19\.99"\r?$') '2045 must override the shared checkout label with its approved price.'
 Assert-True ($product -notmatch '\$9\.99|price_cents: 999\b') '2045 retains the obsolete price.'
 Assert-True ($sampleTemplate.Contains('Explore 2045 · {{ index $product "price_display" }}', [StringComparison]::Ordinal)) '2045 sample CTA must read the canonical product price.'
 Assert-True ($product -notmatch '(?i)amazon|kindle|asin|paperback|urn:isbn|\b97[89]\d{10}\b') '2045 contains excluded metadata or an exact ISBN.'
@@ -136,7 +136,7 @@ $legacyRelationship = [ordered]@{
   Cta = 'Read the 2045 edition →'
 }
 $sampleRelationship = [ordered]@{
-  Label = '2045 EPUB edition.'
+  Label = '2045 e-book edition.'
   Text = 'This is the revised book edition of “The Cracked Pot,” the complete opening story in *2045*.'
 }
 foreach ($expected in @(
@@ -157,7 +157,7 @@ Assert-True ($legacyStorySource -match '(?m)^build:\r?\n\s{2}list: never\r?$') '
 foreach ($expected in @(
   'metadata_title: "The Cracked Pot — Complete Story from 2045"',
   'date: 2026-09-12',
-  'edition: "2045 EPUB edition"',
+  'edition: "2045 e-book edition"',
   'sample_edition_notice:',
   ('  label: "' + $sampleRelationship.Label + '"'),
   ('  text: "' + $sampleRelationship.Text + '"')
@@ -247,7 +247,7 @@ foreach ($otherSample in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'conten
 }
 
 $issueSource = Read-Source 'content/almanack/2026-09-12.md'
-$launchMessage = "A grieving father enters a memory world with his children—and finds that the dead may remember him back. 2045 collects ten dark fables about artificial intelligence, grief, ambition, faith, and the ways people seek meaning. By Robert V. Ussley. The EPUB is `$19.99, sold directly by Outside In Print to U.S. readers, with a private download link delivered by email."
+$launchMessage = "A grieving father enters a memory world with his children—and finds that the dead may remember him back. 2045 collects ten dark fables about artificial intelligence, grief, ambition, faith, and the ways people seek meaning. By Robert V. Ussley. The e-book is `$19.99, sold directly by Outside In Print to U.S. readers, with a private download link delivered by email."
 $launchNote = "Today I’m publishing 2045, ten dark fables from the machine age. In the free opening story, a man whose machines do everything for him struggles to find something worth doing himself."
 $launchLabel = 'Read “The Cracked Pot” — a complete story · 7 minutes'
 $datedFed = 'https://www.federalreserve.gov/releases/z1/20260911/recent_developments.htm'
@@ -308,13 +308,13 @@ Assert-True ((Meta-Content $detailHtml 'twitter:title') -ceq '2045: Ten Dark Fab
 $decisionModule = [regex]::Match($detailHtml, '(?is)<aside\b[^>]*\bdata-bookstore-early-decision(?:=|\s|>).*?</aside>')
 Assert-True ($decisionModule.Success) '2045 must render the early decision module.'
 $decisionText = Plain-Text $decisionModule.Value
-foreach ($proof in @('10 stories', 'About 26,700 words', 'DRM-free EPUB', 'Available only from Outside In Print.')) {
+foreach ($proof in @('10 stories', 'About 26,700 words', 'E-book', 'Available only from Outside In Print.')) {
   Assert-True ($decisionText.Contains($proof, [StringComparison]::Ordinal)) "The early decision module is missing proof: $proof"
 }
 $decisionLinks = @([regex]::Matches($decisionModule.Value, '(?is)<a\b[^>]*>.*?</a>'))
 Assert-True ($decisionLinks.Count -eq 2) 'The early decision module must contain only its sample and internal buy links.'
 Assert-True ((Html-Attribute $decisionLinks[0].Value 'href') -eq '/shop/2045/sample/' -and (Html-Attribute $decisionLinks[0].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_sample') 'The early decision module must put the tracked complete-story sample first.'
-Assert-True ((Html-Attribute $decisionLinks[1].Value 'href') -eq '#bookstore-purchase' -and (Html-Attribute $decisionLinks[1].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_buy' -and (Plain-Text $decisionLinks[1].Value) -ceq 'Buy EPUB — $19.99') 'The early buy control must be a tracked internal anchor to the existing form.'
+Assert-True ((Html-Attribute $decisionLinks[1].Value 'href') -eq '#bookstore-purchase' -and (Html-Attribute $decisionLinks[1].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_buy' -and (Plain-Text $decisionLinks[1].Value) -ceq 'Buy e-book — $19.99') 'The early buy control must be a tracked internal anchor to the existing form.'
 Assert-True ($decisionModule.Value -notmatch '<form\b|downloads\.outsideinprint\.org|square\.link|checkout\.square\.site') 'The early decision module must not duplicate or invoke checkout.'
 $purchaseIndex = $detailHtml.IndexOf('id=bookstore-purchase', [StringComparison]::Ordinal)
 if ($purchaseIndex -lt 0) { $purchaseIndex = $detailHtml.IndexOf('id="bookstore-purchase"', [StringComparison]::Ordinal) }
@@ -397,7 +397,7 @@ if ($isLiveOffer) {
 } else {
   $disabledBuy = [regex]::Match($featureHtml, '(?is)<button\b(?=[^>]*\sdisabled(?:\s|=|>))[^>]*>.*?</button>').Value
   $describedBy = Html-Attribute ([regex]::Match($disabledBuy, '(?is)<button\b[^>]*>').Value) 'aria-describedby'
-  Assert-True ($disabledBuy -match 'Buy EPUB' -and $describedBy.Length -gt 0) 'An unavailable feature needs a native disabled Buy EPUB button and release-status description.'
+  Assert-True ($disabledBuy -match 'Buy e-book' -and $describedBy.Length -gt 0) 'An unavailable feature needs a native disabled Buy e-book button and release-status description.'
   foreach ($statusID in ($describedBy -split '\s+')) {
     Assert-True ($featureHtml -match ('\bid="?' + [regex]::Escape($statusID) + '"?(?:\s|>)')) 'The disabled buy button must reference a real release-status description.'
   }

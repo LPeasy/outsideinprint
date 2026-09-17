@@ -1022,7 +1022,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/shop/index.html' = @{
     Title = 'Bookstore'
-    Description = 'Independent fiction and nonfiction from Outside In Print. Browse the books, read a free sample, and choose a direct EPUB edition.'
+    Description = 'Independent fiction and nonfiction from Outside In Print. Browse the books, read a free sample, and choose a direct e-book edition.'
     Canonical = 'https://outsideinprint.org/shop/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -3703,17 +3703,17 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)Bookstore.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected the bookstore index to render each $9.99 direct EPUB offer before its single compact Kindle button'
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)/shop/the-american-nightmare-keep-dreaming-kid/.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected the bookstore index to expose The American Nightmare live direct EPUB before its compact Kindle button'
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)/shop/the-parable-of-the-sheep/.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected the bookstore index to expose Parable live at $9.99 before its compact $9.99 Kindle button'
   },
   @{
@@ -3723,7 +3723,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = 'choose an Outside In Print EPUB through secure Square checkout\.'
+    Pattern = 'choose an Outside In Print e-book through secure Square checkout\.'
     Message = 'expected the bookstore introduction to describe individual direct editions without implying a bundle'
   },
   @{
@@ -3757,7 +3757,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/the-american-nightmare-keep-dreaming-kid/index.html'
-    Pattern = '(?s)Book.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)Book.*?The American Nightmare: Keep Dreaming, Kid.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-AN-EPUB"|OIP-AN-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H37W2JK8.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected The American Nightmare page to place its live $9.99 direct EPUB offer before one compact Kindle button'
   },
   @{
@@ -3768,7 +3768,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/the-parable-of-the-sheep/index.html'
-    Pattern = '(?s)Book.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)Book.*?The Parable of the Sheep.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-PS-EPUB"|OIP-PS-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0GN18LLWB.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected Parable page to place its live $9.99 direct EPUB offer before one compact $9.99 Kindle button'
   },
   @{
@@ -3779,12 +3779,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/shop/index.html'
-    Pattern = '(?s)/shop/the-water-cycle/.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)/shop/the-water-cycle/.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected the bookstore index to expose The Water Cycle live direct EPUB before its compact Kindle button'
   },
   @{
     Path = 'public/shop/the-water-cycle/index.html'
-    Pattern = '(?s)Book.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print EPUB.*?Secure checkout through Square\. EPUB delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
+    Pattern = '(?s)Book.*?The Water Cycle: Risk, Infrastructure, and Public Memory.*?Robert V\. Ussley.*?Outside In Print.*?Outside In Print e-book.*?Secure checkout through Square\. E-book delivered by email\..*?data-direct-offer-sku=(?:"OIP-WC-EPUB"|OIP-WC-EPUB).*?data-direct-offer-status=(?:"live"|live).*?\$9\.99.*?action=(?:"https://downloads\.outsideinprint\.org/api/books/epub"|https://downloads\.outsideinprint\.org/api/books/epub).*?data-epub-checkout.*?https://www\.amazon\.com/dp/B0H46WMGJQ.*?data-bookstore-kindle-button.*?Kindle on Amazon\s*(?:·|&middot;|&#183;)\s*\$9\.99'
     Message = 'expected The Water Cycle page to place its live $9.99 direct EPUB offer before one compact Kindle button with canonical author and publisher data'
   },
   @{
@@ -4622,13 +4622,19 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\..*?journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/'
-    Message = 'expected article aftermatter to place the full weekly newsletter signup and article paths after the publication record'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Message = 'expected article aftermatter to place the full weekly newsletter signup after the publication record'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-prompt--article-exit.*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter_prompt(?:"|'''')?.*?reading-path.*?Curated position\s+\d+\s+of\s+\d+.*?Reading progress on this device:\s+\d+\s+of\s+\d+\s+pieces\..*?newsletter-signup--article-exit'
-    Message = 'expected a curated collection essay to expose the early newsletter jump and reader-facing device progress before the full signup'
+    Pattern = '(?s)article-publication-record.*?reading-path.*?Read next.*?reading-path__summary.*?reading-path__meta.*?min read.*?View collection.*?newsletter-signup--article-exit'
+    Message = 'expected a curated collection essay to show one compact next-reading card before the full signup'
+  },
+  @{
+    Path = 'public/essays/the-risk-management-buffet/index.html'
+    Pattern = 'newsletter-prompt--article-exit|journey-links--article-exit|Curated position|Reading progress on this device|Recommended starting point|Up Next'
+    Message = 'expected standard collection aftermatter to omit redundant prompts, progress counters, and competing next steps'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
@@ -5696,9 +5702,23 @@ foreach ($articlePath in @(
   $recordIndex = $articleHtml.IndexOf('article-publication-record', [System.StringComparison]::Ordinal)
   $newsletterIndex = $articleHtml.IndexOf('newsletter-signup--article-exit', [System.StringComparison]::Ordinal)
   $journeyIndex = $articleHtml.IndexOf('journey-links--article-exit', [System.StringComparison]::Ordinal)
-  if ($recordIndex -lt 0 -or $newsletterIndex -lt 0 -or $journeyIndex -lt 0 -or
+  $standardReadingPaths = @(
+    Get-OpenTags -Html $articleHtml -TagName 'aside' |
+      Where-Object { Test-TagHasClass -Tag $_ -ClassName 'reading-path' }
+  )
+  if ($standardReadingPaths.Count -gt 0) {
+    $readingPathIndex = $articleHtml.IndexOf($standardReadingPaths[0], [System.StringComparison]::Ordinal)
+    if ($standardReadingPaths.Count -ne 1 -or $recordIndex -lt 0 -or $newsletterIndex -lt 0 -or
+        $recordIndex -ge $readingPathIndex -or $readingPathIndex -ge $newsletterIndex) {
+      $uxIssues.Add("$articlePath => expected publication record, one standard reading card, and full weekly newsletter signup in that order")
+    }
+    if ($journeyIndex -ge 0 -or $articleHtml.Contains('newsletter-prompt--article-exit', [System.StringComparison]::Ordinal)) {
+      $uxIssues.Add("$articlePath => standard collection articles must omit redundant newsletter prompts and article paths")
+    }
+  }
+  elseif ($recordIndex -lt 0 -or $newsletterIndex -lt 0 -or $journeyIndex -lt 0 -or
       $recordIndex -ge $newsletterIndex -or $newsletterIndex -ge $journeyIndex) {
-    $uxIssues.Add("$articlePath => expected publication record, full weekly newsletter signup, and article paths in that order")
+    $uxIssues.Add("$articlePath => non-collection or explicitly featured articles must retain publication record, full weekly newsletter signup, and article paths in that order")
   }
 
   if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
@@ -5709,7 +5729,7 @@ foreach ($articlePath in @(
     $uxIssues.Add("$articlePath => retained retired newsletter trust copy")
   }
 
-  if ($articleHtml -notmatch '(?s)journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<') {
+  if ($standardReadingPaths.Count -eq 0 -and $articleHtml -notmatch '(?s)journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<') {
     $uxIssues.Add("$articlePath => expected article-exit links to include Archive, Collections, Library, and Newsletter")
   }
 }

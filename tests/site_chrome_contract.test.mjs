@@ -410,8 +410,8 @@ test("Studio sample metadata is structured, complete, and limited to the three a
 
 test("Square-first bookstore requires delivery email and keeps marketing consent optional", () => {
   assert.equal(fs.existsSync(path.resolve("layouts/partials/shop/checkout-actions.html")), false);
-  assert.match(directOffers, /direct_offers_heading" \| default "Outside In Print EPUB"/);
-  assert.match(directOffers, /checkout_unavailable_label" \| default "EPUB coming soon"/);
+  assert.match(directOffers, /direct_offers_heading" \| default "Outside In Print e-book"/);
+  assert.match(directOffers, /checkout_unavailable_label" \| default "E-book coming soon"/);
   assert.match(directOffers, /data-analytics-event="checkout_start"/);
   assert.match(directOffers, /type="email"[\s\S]*name="email"[\s\S]*required/);
   assert.match(directOffers, /type="checkbox" name="weekly_email"/);
@@ -458,19 +458,19 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.doesNotMatch(shopSingle, /headingLevel/);
   const purchaseTitle = shopSingle.indexOf('class="bookstore-product__purchase-title"');
   const checkoutRestrictionGate = shopSingle.indexOf('{{ if gt (len $liveEpubOffers) 0 }}', purchaseTitle);
-  const checkoutRestriction = shopSingle.indexOf("Direct EPUB checkout is currently available to U.S. customers only.", purchaseTitle);
+  const checkoutRestriction = shopSingle.indexOf("Direct e-book checkout is currently available to U.S. customers only.", purchaseTitle);
   const detailDirectOffers = shopSingle.indexOf('partial "shop/direct-offers.html"', purchaseTitle);
   assert.ok(purchaseTitle >= 0);
   assert.ok(purchaseTitle < checkoutRestrictionGate);
   assert.ok(checkoutRestrictionGate < checkoutRestriction);
   assert.ok(checkoutRestriction < detailDirectOffers);
-  assert.match(shopSingle, /<p class="bookstore-product__checkout-restriction">Direct EPUB checkout is currently available to U\.S\. customers only\.<\/p>/);
+  assert.match(shopSingle, /<p class="bookstore-product__checkout-restriction">Direct e-book checkout is currently available to U\.S\. customers only\.<\/p>/);
   assert.match(cssRule(css, ".bookstore-product__checkout-restriction"), /font-size:\.88rem;[\s\S]*line-height:1\.55;/);
   assert.doesNotMatch(shopList, /bookstore-secondary-channel|checkout-actions/);
   assert.doesNotMatch(shopSingle, /bookstore-panel|Other formats and channels|checkout-actions/);
 
-  assert.match(bookstoreData, /checkout_label: "Buy EPUB — \$9\.99"/);
-  assert.match(bookstoreData, /checkout_note: "Secure checkout through Square\. EPUB delivered by email\."/);
+  assert.match(bookstoreData, /checkout_label: "Buy e-book — \$9\.99"/);
+  assert.match(bookstoreData, /checkout_note: "Secure checkout through Square\. E-book delivered by email\."/);
   assert.equal((bookstoreData.match(/kindle_label: "Kindle on Amazon · \$9\.99"/g) || []).length, 3);
   assert.doesNotMatch(bookstoreData, /kindle_label: "Kindle on Amazon · \$4\.99"/);
   assert.doesNotMatch(bookstoreData, /^\s+(?:purchase_url|fallback_url|fallback_label):/m);
@@ -542,7 +542,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.doesNotMatch(homeV2FrontPage, /Bob(?:'|’)s Almanack|home-almanack/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
-  assert.match(articleSingle, /if \$showCollectionContinuation[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?"sourceSlot" "article_exit_newsletter_prompt"/);
+  assert.match(articleSingle, /if and \$showCollectionContinuation \(not \$standardCollectionContinuation\)[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?"sourceSlot" "article_exit_newsletter_prompt"/);
   assert.match(articleSingle, /"anchorID" "bobs-almanack-signup"/);
   assert.ok(articleSingle.indexOf('partial "newsletter_prompt.html"') < articleSingle.indexOf('partial "collections/reading-path.html"'));
   assert.match(cssRule(css, ".newsletter-prompt a"), /min-height:44px;/);
@@ -572,7 +572,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
 
 test("contact, bookstore, and Civic Institutions expose the repaired public copy", () => {
   assert.match(contactContent, /For factual corrections, editorial questions, rights inquiries, or reprint requests, email \[support@outsideinprint\.org\]/);
-  assert.match(shopContent, /choose an Outside In Print EPUB through secure Square checkout\./);
+  assert.match(shopContent, /choose an Outside In Print e-book through secure Square checkout\./);
   assert.doesNotMatch(shopContent, /Buy all three directly/);
   assert.match(collectionsData, /description: Essays on courts, federalism, public institutions, and the exercise of public power\./);
   assert.match(civicCollectionContent, /description: "Essays on courts, federalism, public institutions, and the exercise of public power\."/);

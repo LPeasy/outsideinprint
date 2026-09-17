@@ -1291,6 +1291,8 @@ foreach ($requiredSnippet in @(
   'section-front__body',
   'page-header--section-centered',
   'cartoon-gallery-spotlight',
+  'partial "editorial/linked-reading-page.html"',
+  'partial "editorial/gallery-reading-link.html"',
   'cartoon-gallery-title'
 )) {
   if ($galleryListTemplate -notmatch [regex]::Escape($requiredSnippet)) {

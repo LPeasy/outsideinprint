@@ -27,6 +27,8 @@
     {{ end }}
   {{ end }}
 
+  {{ $standardCollectionContinuation := and $showCollectionContinuation (not $featuredContinuation) (not .Params.studio_sample) }}
+
   {{ $plateImage := "" }}
   {{ $plateImageAlt := .Title }}
   {{ $plateImageCaption := "" }}
@@ -203,7 +205,7 @@
           {{ partial "article/featured-continuation.html" (dict "page" $ "entry" .) }}
         {{ end }}
       {{ else }}
-        {{ if $showCollectionContinuation }}
+        {{ if and $showCollectionContinuation (not $standardCollectionContinuation) }}
           {{ partial "newsletter_prompt.html" (dict
             "page" .
             "class" "newsletter-prompt--article-exit"
@@ -225,12 +227,14 @@
           "anchorID" "bobs-almanack-signup"
         ) }}
 
-        {{ partial "journey_links.html" (dict
-          "class" "journey-links--article-exit"
-          "eyebrow" "Article paths"
-          "sourceSlot" "article_exit_paths"
-          "links" $journeyLinks
-        ) }}
+        {{ if not $standardCollectionContinuation }}
+          {{ partial "journey_links.html" (dict
+            "class" "journey-links--article-exit"
+            "eyebrow" "Article paths"
+            "sourceSlot" "article_exit_paths"
+            "links" $journeyLinks
+          ) }}
+        {{ end }}
       {{ end }}
     </div>
   </article>

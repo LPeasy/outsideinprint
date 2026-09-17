@@ -20,7 +20,7 @@ function collectionSlugs(source) {
 test("author hub resolves six unique selected works, six distinct recent works, and every book", () => {
   const authorData = read("data/authors.yaml");
   const dossier = read("layouts/authors/dossier.html");
-  const featured = [...authorData.matchAll(/^\s{6}- (\/essays\/[^\s]+\/)$/gm)].map((match) => match[1]);
+  const featured = [...authorData.matchAll(/^\s{6}- (\/(?:essays|syd-and-oliver)\/[^\s]+\/)$/gm)].map((match) => match[1]);
   assert.equal(featured.length, 6);
   assert.equal(new Set(featured).size, 6);
   assert.match(authorData, /^\s{4}latest_limit: 6$/m);
@@ -85,9 +85,13 @@ test("Library progressively loads one complete JSON catalog without duplicate li
   assert.match(list, /attachGroupedResults\(\)/);
   assert.match(list, /groupedRoot\.parentNode.*insertBefore\(groupedRoot, flatSection\)/);
   assert.match(list, /error\.hidden = false/);
+  assert.match(list, /var pageSize = 24/);
+  assert.match(list, /results\.slice\(offset, offset \+ pageSize\)/);
+  assert.match(list, /window\.history\.pushState/);
+  assert.match(list, /Browse all \{\{ len \$catalog.entries \}\} pieces/);
   assert.doesNotMatch(resolver, /"title" \.Title/);
   for (const field of ["tags", "topics", "searchText", "collectionSlugs", "summary"]) assert.ok(json.includes(`"${field}"`));
-  assert.ok(Buffer.byteLength(list) < 20000);
+  assert.ok(Buffer.byteLength(list) < 24000, "the complete inline browse and pagination enhancement remains bounded");
   assert.ok(Buffer.byteLength(resolver) < 8000);
   assert.ok(Buffer.byteLength(json) < 2000);
 });
