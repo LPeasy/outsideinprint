@@ -1,4 +1,4 @@
-current: the-plunge
+current: nine-driveways-sunrise
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -1012,5 +1012,14 @@ cartoons:
     image: "editorial/the-plunge"
     essay: "/essays/we-dont-miss/"
     alt: "A wet brown songbird bathes in rippling water beside stone steps as a pink-and-gold sunrise reflects across the surface."
+    width: 1672
+    height: 941
+  - slug: nine-driveways-sunrise
+    title: "Nine Driveways at Sunrise"
+    date: "2026-09-18"
+    publishDate: "2026-09-18T00:17:34-04:00"
+    image: "editorial/nine-driveways-sunrise"
+    essay: "/essays/nine-driveways/"
+    alt: "From the top of a steep neighborhood hill, nine driveways descend past a blue mailbox toward a sunlit valley at sunrise."
     width: 1672
     height: 941

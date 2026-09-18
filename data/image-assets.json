@@ -748,6 +748,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/nine-driveways-sunrise": {
+      "id": "editorial/nine-driveways-sunrise",
+      "source": "images/originals/editorial/nine-driveways-sunrise.png",
+      "sha256": "edd86f8f55f9e312585d99224c7f68ada2624f3de9d6e868423c018f760d560e",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/no-receipt": {
       "id": "editorial/no-receipt",
       "source": "images/originals/editorial/no-receipt.png",
@@ -7396,6 +7410,7 @@
     "/images/editorial/minimum-door.png": "editorial/minimum-door",
     "/images/editorial/modern-prometheus.png": "editorial/modern-prometheus",
     "/images/editorial/net-zero-prosperity.png": "editorial/net-zero-prosperity",
+    "/images/editorial/nine-driveways-sunrise.png": "editorial/nine-driveways-sunrise",
     "/images/editorial/no-receipt.png": "editorial/no-receipt",
     "/images/editorial/not-mine-to-carry.png": "editorial/not-mine-to-carry",
     "/images/editorial/not-my-river-not-my-problem.png": "editorial/not-my-river-not-my-problem",
