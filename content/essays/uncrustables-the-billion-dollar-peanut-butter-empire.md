@@ -3,6 +3,7 @@ title: "Uncrustables: The Billion-Dollar Peanut Butter Empire"
 date: 2025-03-20
 draft: false
 slug: "uncrustables-the-billion-dollar-peanut-butter-empire"
+collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
 subtitle: "No Crust, No Fuss, No Limits: The Unstoppable Rise of Uncrustables"
 featured_image: "essays/uncrustables-the-billion-dollar-peanut-butter-empire/hero"

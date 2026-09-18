@@ -27,7 +27,7 @@
     {{ end }}
   {{ end }}
 
-  {{ $standardCollectionContinuation := and $showCollectionContinuation (not $featuredContinuation) (not .Params.studio_sample) }}
+  {{ $isStandardReadingPage := and .IsPage (in (slice "essays" "syd-and-oliver" "reports" "working-papers") .Section) (not $featuredContinuation) (not .Params.studio_sample) }}
 
   {{ $plateImage := "" }}
   {{ $plateImageAlt := .Title }}
@@ -172,6 +172,9 @@
     </div>
 
     <div class="piece-aftermatter">
+      {{ if $isStandardReadingPage }}
+        {{ partial "collections/reading-path.html" . }}
+      {{ end }}
       {{ if eq $articleVariant "modernbio" }}
         {{ partial "article/modernbio-record.html" . }}
       {{ end }}
@@ -207,7 +210,7 @@
           {{ partial "article/featured-continuation.html" (dict "page" $ "entry" .) }}
         {{ end }}
       {{ else }}
-        {{ if and $showCollectionContinuation (not $standardCollectionContinuation) }}
+        {{ if and $showCollectionContinuation (not $isStandardReadingPage) }}
           {{ partial "newsletter_prompt.html" (dict
             "page" .
             "class" "newsletter-prompt--article-exit"
@@ -218,8 +221,6 @@
 
         {{ if $featuredContinuation }}
           {{ partial "article/featured-continuation.html" (dict "page" . "entry" $featuredContinuation) }}
-        {{ else if $showCollectionContinuation }}
-          {{ partial "collections/reading-path.html" . }}
         {{ end }}
 
         {{ partial "newsletter_signup.html" (dict
@@ -229,7 +230,7 @@
           "anchorID" "bobs-almanack-signup"
         ) }}
 
-        {{ if not $standardCollectionContinuation }}
+        {{ if not $isStandardReadingPage }}
           {{ partial "journey_links.html" (dict
             "class" "journey-links--article-exit"
             "eyebrow" "Article paths"

@@ -3,6 +3,7 @@ title: "Wealth and Governance in Modern American Society"
 date: 2024-12-09
 draft: false
 slug: "the-structure-of-modern-american-society"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "A Commentary"
 description: "Modern American society is characterized by a capitalist economic framework and a democratic political system. However, the interplay between wealth and gove..."

@@ -3,6 +3,7 @@ title: "You Can’t Outrun the Calculator"
 date: 2025-02-12
 draft: false
 slug: "you-cant-outrun-the-calculator"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "SuperHuman Coding Agents in 2025? Altman’s Law in real time"
 featured_image: "/images/medium/you-cant-outrun-the-calculator/664e2a13dae8e16d03f09387d1dd13a4883bf046dae2231f77b3ef1e5a38500a.jpg"

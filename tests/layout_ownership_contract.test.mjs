@@ -141,7 +141,7 @@ test("collection detail section-front hooks have explicit inner-structure stylin
   assert.match(collectionSingle, /<h1>\{\{ \$definition\.title \}\}<\/h1>/);
   assert.match(collectionSingle, /<h2 id="collection-start-here-title">Start Here<\/h2>/);
   assert.match(collectionSingle, /\{\{ if not \(and \$startHere \$isStartHere\) \}\}/);
-  assert.doesNotMatch(collectionSingle, /\$definition\.description/);
+  assert.match(collectionSingle, /\$definition\.description[\s\S]*?collection-section__description/);
   assert.doesNotMatch(collectionSingle, /collection-room/);
   assert.doesNotMatch(collectionSingle, /data-collection-room-theme/);
   assert.doesNotMatch(collectionSingle, /partial "collections\/collection-progress\.html"/);
@@ -535,7 +535,7 @@ test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, an
     "`piece-record-rail`",
     "`piece-record-rail__item--collection`",
     "`.article-lightbox-image`",
-    "`reading-path__header`",
+    "`reading-path__title`",
     "`reading-path__summary`",
     "`reading-path__collection-link`",
     "| Archive shell | `/archive/`",

@@ -5,6 +5,7 @@ description: "A time clock turned labor into evidence, making wage law depend on
 date: 2026-06-30
 draft: false
 slug: "the-clock-by-the-door"
+collections: ["household-economy-work-and-cost"]
 section_label: "Essay"
 version: "1.1"
 edition: "Second web edition"

@@ -3,6 +3,7 @@ title: "How American Farm Labor is Set to Evolve…"
 date: 2025-01-11
 draft: false
 slug: "how-american-farm-labor-is-set-to-evolve"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "Again"
 featured_image: "/images/medium/how-american-farm-labor-is-set-to-evolve/dff114a907fa929b6f43c06c5643b2f9f242465875c39b6eaef5edffbcf6be33.jpeg"

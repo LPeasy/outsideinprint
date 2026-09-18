@@ -5,6 +5,7 @@ description: "How the traffic cone became a small public technology for temporar
 date: 2026-06-25
 draft: false
 slug: "the-cone-in-the-lane"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 version: "1.0"
 edition: "First web edition"

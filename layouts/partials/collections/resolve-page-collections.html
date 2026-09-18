@@ -9,11 +9,11 @@
     {{ range $definitions }}
       {{ $slug := lower (printf "%v" .slug) }}
       {{ if eq $explicitSlug $slug }}
-        {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+        {{ $items := partial "collections/resolve-items.html" (dict "collection" . "publishedOnly" $publicOnly) }}
         {{ $state := partial "collections/get-state.html" (dict "collection" . "items" $items) }}
         {{ $collectionPage := site.GetPage (printf "/collections/%s" .slug) }}
         {{ if $publicOnly }}
-          {{ if and $state.visible $collectionPage }}
+          {{ if and $state.visible $collectionPage (partial "collections/is-published.html" $collectionPage) }}
             {{ $matches = $matches | append (dict
               "collection" .
               "items" $items
@@ -35,11 +35,11 @@
 {{ else }}
   {{ range $definitions }}
     {{ if partial "collections/fallback-match.html" (dict "page" $page "collection" .) }}
-      {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+      {{ $items := partial "collections/resolve-items.html" (dict "collection" . "publishedOnly" $publicOnly) }}
       {{ $state := partial "collections/get-state.html" (dict "collection" . "items" $items) }}
       {{ $collectionPage := site.GetPage (printf "/collections/%s" .slug) }}
       {{ if $publicOnly }}
-        {{ if and $state.visible $collectionPage }}
+        {{ if and $state.visible $collectionPage (partial "collections/is-published.html" $collectionPage) }}
           {{ $matches = $matches | append (dict
             "collection" .
             "items" $items

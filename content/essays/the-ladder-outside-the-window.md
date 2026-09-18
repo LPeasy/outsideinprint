@@ -5,6 +5,7 @@ description: "A flagship Outside In Print essay on the New York fire escape as a
 date: 2026-06-15
 draft: false
 slug: "the-ladder-outside-the-window"
+collections: ["risk-uncertainty"]
 section_label: "Essay"
 version: "1.1"
 edition: "Second web edition"

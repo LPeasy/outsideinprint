@@ -3,6 +3,7 @@ title: "You Paid For That CT Scan."
 date: 2025-12-02
 draft: false
 slug: "you-paid-for-that-ct-scan"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "You Should Be Able To See It… Right?"
 featured_image: "/images/medium/you-paid-for-that-ct-scan/c726f9cdfc914b7f1c2e01abf0819a58f23c143da6d5776a1527cd77b6690497.jpg"

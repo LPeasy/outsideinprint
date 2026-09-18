@@ -5,6 +5,7 @@ description: "A rural mailbox opens into Benjamin Franklin's postal logic, Rural
 date: 2026-06-03
 draft: false
 slug: "the-mailbox-at-the-edge-of-the-road"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 version: "1.1"
 edition: "Second web edition"

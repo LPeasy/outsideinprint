@@ -3,6 +3,7 @@ title: "Are We Alone?"
 date: 2025-02-14
 draft: false
 slug: "are-we-alone"
+collections: ["moral-religious-philosophical-essays"]
 section_label: "Essay"
 subtitle: "The psychological connection between belief in evolution and aliens"
 featured_image: "/images/medium/are-we-alone/1ce3cc8b74c5eaf2a0c196b0336516bcb69d3d1d42136c3b9004a643582074e6.jpeg"

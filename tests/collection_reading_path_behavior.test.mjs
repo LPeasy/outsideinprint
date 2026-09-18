@@ -11,7 +11,7 @@ const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hug
 const progressScript = fs.readFileSync("layouts/partials/collections/reading-progress-script.html", "utf8")
   .replace(/^\s*<script>\s*/, "").replace(/\s*<\/script>\s*$/, "");
 
-function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false } = {}) {
+function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false, landings = {}, collectionShell = false, outputRoute, indexTemplate, section = "essays" } = {}) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-reading-path-"));
   t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
@@ -20,16 +20,13 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
     fs.writeFileSync(path.join(fixture, file), content);
   };
   write("hugo.toml", 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
+  fs.cpSync("layouts/partials/collections", path.join(fixture, "layouts/partials/collections"), { recursive: true });
   for (const partial of [
-    "collections/reading-path.html", "collections/resolve-page-collections.html",
-    "collections/resolve-items.html", "collections/sort-items.html", "collections/get-state.html",
-    "collections/normalize-values.html", "collections/fallback-match.html",
     "discovery/page-summary.html", "metadata_description.html", "metadata/route.html",
-    "collections/lookup-definition.html"
   ]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
-  write("layouts/index.html", '{{ with site.GetPage "essays/' + current + '" }}{{ partial "collections/reading-path.html" . }}{{ end }}');
+  write("layouts/index.html", indexTemplate || '{{ with site.GetPage "' + section + '/' + current + '" }}{{ partial "collections/reading-path.html" . }}{{ end }}');
   write("layouts/_default/single.html", "{{ .Title }}");
   write("layouts/_default/list.html", "{{ .Title }}");
   if (articleShell) {
@@ -50,13 +47,22 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
     })) write(`layouts/partials/${partial}`, content);
     if (featured) write("data/featured_continuations.json", JSON.stringify({ [`/essays/${current}/`]: { reading_path: "/essays/b/" } }));
   }
+  if (collectionShell) {
+    write("layouts/_default/baseof.html", '{{ block "main" . }}{{ end }}');
+    write("layouts/collections/single.html", fs.readFileSync("layouts/collections/single.html", "utf8"));
+    write("layouts/partials/discovery/page-list-item.html", '<a class="fixture-collection-item" href="{{ .page.RelPermalink }}">{{ .page.Title }}</a>');
+    write("layouts/partials/discovery/collection-card.html", '<a class="fixture-related-collection" href="{{ .entry.page.RelPermalink }}">{{ .entry.collection.title }}</a>');
+    write("layouts/partials/journey_links.html", '');
+  }
   const definitions = collections || [
-    { slug: "alpha", title: "Alpha collection", weight: 1, start_here: startHere, public: true, force_public: true, explicit_only: true },
-    { slug: "beta", title: "Beta collection", weight: 2, public: true, force_public: true, explicit_only: true },
+    { slug: "alpha", title: "Alpha collection", description: "A focused collection description.", kind: "topic", weight: 1, start_here: startHere, public: true, force_public: true, explicit_only: true },
+    { slug: "beta", title: "Beta collection", description: "A series description.", kind: "series", weight: 2, public: true, force_public: true, explicit_only: true },
   ];
   write("data/collections.json", JSON.stringify({ collections: definitions }));
   for (const definition of definitions) {
-    write(`content/collections/${definition.slug}.md`, `---\ntitle: ${JSON.stringify(definition.title)}\n---\n`);
+    if (landings[definition.slug] === null) continue;
+    const metadata = { title: definition.title, date: "2020-01-01", ...landings[definition.slug] };
+    write(`content/collections/${definition.slug}.md`, `---\n${Object.entries(metadata).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n")}\n---\n`);
   }
   const pages = {
     a: { title: "Article A", date: "2020-01-01", collections: ["alpha", "beta"], collection_weight: 1 },
@@ -67,10 +73,10 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
   for (const [slug, metadata] of Object.entries(pages)) {
     if (metadata === null) continue;
     const frontMatter = Object.entries(metadata).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n");
-    write(`content/essays/${slug}.md`, `---\n${frontMatter}\n---\nExisting article body.\n`);
+    write(`content/${slug === current ? section : "essays"}/${slug}.md`, `---\n${frontMatter}\n---\nExisting article body.\n`);
   }
   execFileSync(hugo, ["--source", fixture, "--clock", "2020-09-01T12:00:00Z", "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
-  return fs.readFileSync(path.join(fixture, articleShell ? `public/essays/${current}/index.html` : "public/index.html"), "utf8");
+  return fs.readFileSync(path.join(fixture, "public", outputRoute || (articleShell ? `${section}/${current}` : ""), "index.html"), "utf8");
 }
 
 function primaryDestination(html) {
@@ -78,47 +84,46 @@ function primaryDestination(html) {
   return anchor?.match(/href="([^"]+)"/)?.[1];
 }
 
-test("one next card uses primary collection order, existing description, and reading time", (t) => {
+function decodedAttribute(html, attribute) {
+  const value = html.match(new RegExp(`${attribute}="([^"]*)"`))?.[1];
+  assert.notEqual(value, undefined, `${attribute} must be rendered`);
+  // Exactly one HTML-parser decoding pass: double-escaped JSON must fail below.
+  return value.replace(/&(?:amp|quot|apos|lt|gt|#\d+|#x[\da-f]+);/gi, (entity) => {
+    const named = { "&amp;": "&", "&quot;": '"', "&apos;": "'", "&lt;": "<", "&gt;": ">" };
+    return named[entity] ?? String.fromCodePoint(entity.startsWith("&#x") ? parseInt(entity.slice(3, -1), 16) : Number(entity.slice(2, -1)));
+  });
+}
+
+test("collection-first card is a native collection link with its description and published count", (t) => {
   const html = renderPath(t);
-  assert.equal(primaryDestination(html), "/essays/b/");
-  assert.equal((html.match(/<a\b/g) || []).length, 2);
+  assert.equal(primaryDestination(html), "/collections/alpha/");
+  assert.equal((html.match(/<a\b/g) || []).length, 1);
   assert.match(html, /data-collection-slug="alpha"/);
-  assert.match(html, /<h2[^>]*>Read next<\/h2>/);
-  assert.match(html, /class="reading-path__summary">An existing invitation\.<\/p>/);
-  assert.match(html, /class="reading-path__meta">1 min read<\/p>/);
-  assert.match(html, /href="\/collections\/alpha\/"[\s\S]*?>View collection<\/a>/);
-  assert.doesNotMatch(html, /Curated position|Reading progress|After this position|Up Next|Previous piece|Recommended starting point|Start Again/);
+  assert.match(html, /<h2[^>]*>More on Alpha collection<\/h2>/);
+  assert.match(html, /class="reading-path__summary">A focused collection description\.<\/p>/);
+  assert.match(html, />Explore all 3 pieces (?:→|&#8594;)<\/a>/);
+  assert.doesNotMatch(html, /Read next|View collection|min read|Curated position|Reading progress|Up Next|<script|onclick/);
 });
 
-test("next card uses existing summary when description is absent", (t) => {
-  const html = renderPath(t, { current: "b" });
-  assert.equal(primaryDestination(html), "/essays/c/");
-  assert.match(html, /class="reading-path__summary">Existing summary fallback\.<\/p>/);
+test("rendered progress attributes decode to JSON once, including escaped article titles", (t) => {
+  const title = 'Article "A" & <the first>';
+  const html = renderPath(t, { entries: { a: { title, date: "2020-01-01", collections: ["alpha"], collection_weight: 1 } } });
+  assert.deepEqual(JSON.parse(decodedAttribute(html, "data-item-paths")), ["/essays/a/", "/essays/b/", "/essays/c/"]);
+  assert.deepEqual(JSON.parse(decodedAttribute(html, "data-item-titles")), [title, "Article B", "Article C"]);
 });
 
-test("end of collection returns to its eligible designated starting piece", (t) => {
-  assert.equal(primaryDestination(renderPath(t, { current: "c" })), "/essays/b/");
-});
-
-test("missing, unavailable, or self-referential start falls back to first other eligible piece", (t) => {
-  for (const startHere of ["", "missing", "c", "draft"]) {
-    assert.equal(primaryDestination(renderPath(t, {
-      current: "c", startHere,
-      entries: { draft: { title: "Draft", date: "2020-01-01", draft: true, collections: ["alpha"], collection_weight: 0 } },
-    })), "/essays/a/", startHere);
-  }
-});
-
-test("single eligible piece offers only the collection link, never itself", (t) => {
+test("forced-public singletons fall back to Library instead of recommending themselves", (t) => {
   const html = renderPath(t, { startHere: "a", entries: { b: null, c: null } });
   assert.equal(primaryDestination(html), undefined);
   assert.equal((html.match(/<a\b/g) || []).length, 1);
-  assert.match(html, />View collection<\/a>/);
-  assert.doesNotMatch(html, /Read next|href="\/essays\/a\/"|reading-path__summary|reading-path__meta/);
-  assert.match(html, /data-reading-path-root/);
+  assert.match(html, /href="\/library\/"/);
+  assert.match(html, />Browse the library (?:→|&#8594;)<\/a>/);
+  assert.match(html, /data-analytics-event="internal_promo_click"/);
+  assert.match(html, /data-analytics-source-slot="article_exit_paths"/);
+  assert.doesNotMatch(html, /href="\/essays\/a\/"|data-reading-path-root/);
 });
 
-test("drafts, future dates/releases, and expired pieces never become recommendations, even in previews", (t) => {
+test("preview-only members never inflate collection links, counts, or stored item paths", (t) => {
   const entries = {};
   for (const [slug, metadata] of Object.entries({
     draft: { draft: true }, future: { date: "2030-01-01" },
@@ -127,39 +132,114 @@ test("drafts, future dates/releases, and expired pieces never become recommendat
     entries[slug] = { title: slug, date: "2020-01-01", collections: ["alpha"], collection_weight: 1.5, ...metadata };
   }
   const html = renderPath(t, { entries });
-  assert.equal(primaryDestination(html), "/essays/b/");
+  assert.equal(primaryDestination(html), "/collections/alpha/");
+  assert.match(html, /Explore all 3 pieces/);
   for (const slug of Object.keys(entries)) assert.doesNotMatch(html, new RegExp(`/essays/${slug}/`));
 });
 
-test("explicit collection preference wins over definition weight", (t) => {
+test("topics win over earlier series without changing the article header order", (t) => {
   const html = renderPath(t, {
+    articleShell: true,
     entries: { a: { title: "Article A", date: "2020-01-01", collections: ["beta", "alpha"], collection_weight: 1 } },
   });
-  assert.equal(primaryDestination(html), "/essays/c/");
-  assert.match(html, /data-collection-slug="beta"/);
+  assert.equal(primaryDestination(html), "/collections/alpha/");
+  const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
+  assert.ok(header.indexOf('/collections/beta/') < header.indexOf('/collections/alpha/'));
+  assert.match(html, /data-piece-collection-slug="beta"/);
 });
 
-test("unweighted collection retains newest-first order", (t) => {
-  const entries = Object.fromEntries(["a", "b", "c"].map((slug, index) => [slug, {
-    title: `Article ${slug}`, date: `2020-0${index + 1}-01`, collections: ["alpha"],
-  }]));
-  assert.equal(primaryDestination(renderPath(t, { entries, current: "c" })), "/essays/b/");
+test("same-kind preference follows front matter rather than definition weight", (t) => {
+  const html = renderPath(t, {
+    collections: [
+      { slug: "alpha", title: "Alpha", kind: "topic", weight: 1, public: true, force_public: true, explicit_only: true },
+      { slug: "beta", title: "Beta", kind: "topic", weight: 99, public: true, force_public: true, explicit_only: true },
+    ],
+    entries: { a: { title: "Article A", date: "2020-01-01", collections: ["beta", "alpha"] } },
+  });
+  assert.equal(primaryDestination(html), "/collections/beta/");
 });
 
-test("standard collection exit retains body and publication record, then only card and newsletter", (t) => {
+test("series provides the next step when no eligible topic remains", (t) => {
+  const html = renderPath(t, { landings: { alpha: null } });
+  assert.equal(primaryDestination(html), "/collections/beta/");
+  assert.match(html, /More from Beta collection/);
+  assert.match(html, /Explore all 2 pieces/);
+});
+
+test("missing, private, and unpublished landing pages cannot be continuation destinations", (t) => {
+  for (const landing of [null, { draft: true }, { date: "2030-01-01" }, { publishDate: "2030-01-01" }, { expiryDate: "2020-08-01" }]) {
+    const html = renderPath(t, { landings: { alpha: landing } });
+    assert.equal(primaryDestination(html), "/collections/beta/", JSON.stringify(landing));
+    assert.doesNotMatch(html, /\/collections\/alpha\//);
+  }
+  const html = renderPath(t, { collections: [
+    { slug: "alpha", title: "Private", kind: "topic", public: false, force_public: true, explicit_only: true },
+  ] });
+  assert.match(html, /Browse the library/);
+  assert.doesNotMatch(html, /\/collections\/alpha\//);
+});
+
+test("minimum size counts only published members and force-public still requires another piece", (t) => {
+  for (const force of [false, true]) {
+    const html = renderPath(t, {
+      collections: [{ slug: "alpha", title: "Alpha", kind: "topic", public: true, min_items: 4, force_public: force, explicit_only: true }],
+      entries: { draft: { title: "Draft", date: "2020-01-01", collections: ["alpha"], draft: true } },
+    });
+    assert.equal(primaryDestination(html), force ? "/collections/alpha/" : undefined);
+    assert.match(html, force ? /Explore all 3 pieces/ : /Browse the library/);
+  }
+});
+
+test("unpublished current pages and nonmembers cannot claim a continuation collection", (t) => {
+  for (const metadata of [{ draft: true }, { date: "2030-01-01" }, { publishDate: "2030-01-01" }, { expiryDate: "2020-08-01" }, { collections: ["unknown"] }]) {
+    const html = renderPath(t, { entries: { a: { title: "Article A", date: "2020-01-01", collections: ["alpha"], ...metadata } } });
+    assert.equal(primaryDestination(html), undefined);
+    assert.match(html, /Browse the library/);
+  }
+});
+
+test("public listing and detail share eligible membership while raw resolver retains preview inventory", (t) => {
+  const entries = Object.fromEntries(Object.entries({
+    draft: { draft: true }, future: { date: "2030-01-01" }, queued: { publishDate: "2030-01-01" }, expired: { expiryDate: "2020-08-01" },
+  }).map(([slug, metadata]) => [slug, { title: slug, date: "2020-01-01", collections: ["alpha"], ...metadata }]));
+  const probe = renderPath(t, { entries, indexTemplate: '{{ $def := partial "collections/lookup-definition.html" "alpha" }}raw={{ len (partial "collections/resolve-items.html" (dict "collection" $def)) }};published={{ len (partial "collections/resolve-items.html" (dict "collection" $def "publishedOnly" true)) }};{{ range partial "collections/get-public-entries.html" . }}{{ .collection.slug }}={{ .state.count }};{{ end }}' });
+  assert.match(probe, /raw=7;published=3;alpha=3;beta=2;/);
+  const html = renderPath(t, { entries, collectionShell: true, outputRoute: "collections/alpha" });
+  assert.match(html, /A focused collection description\./);
+  assert.match(html, /3 published pieces/);
+  assert.match(html, /Start Here[\s\S]*Article B/);
+  for (const slug of ["a", "b", "c"]) assert.equal((html.match(new RegExp(`href="/essays/${slug}/"`, "g")) || []).length, 1);
+  for (const slug of Object.keys(entries)) assert.doesNotMatch(html, new RegExp(`/essays/${slug}/`));
+  const privateList = renderPath(t, { landings: { beta: { draft: true } }, indexTemplate: '{{ range partial "collections/get-public-entries.html" . }}{{ .collection.slug }};{{ end }}' });
+  assert.equal(privateList.trim(), "alpha;");
+});
+
+test("collection pages preserve curated ordering and newest-first unweighted ordering", (t) => {
+  const curated = renderPath(t, { collectionShell: true, outputRoute: "collections/alpha", startHere: "missing" });
+  assert.ok(curated.indexOf('/essays/a/') < curated.indexOf('/essays/b/'));
+  assert.ok(curated.indexOf('/essays/b/') < curated.indexOf('/essays/c/'));
+  const entries = Object.fromEntries(["a", "b", "c"].map((slug, index) => [slug, { title: slug, date: `2020-0${index + 1}-01`, collections: ["alpha"] }]));
+  const newest = renderPath(t, { entries, collectionShell: true, outputRoute: "collections/alpha", startHere: "missing" });
+  assert.ok(newest.indexOf('/essays/c/') < newest.indexOf('/essays/b/'));
+  assert.ok(newest.indexOf('/essays/b/') < newest.indexOf('/essays/a/'));
+});
+
+test("standard reading exit retains body, then one continuation, record, and newsletter", (t) => {
   const html = renderPath(t, { articleShell: true });
   assert.match(html, /class="piece-body">\s*<p>Existing article body\.<\/p>/);
-  assert.match(html, /article-publication-record[\s\S]*Cite this[\s\S]*reading-path[\s\S]*<\/aside>\s*<form class="newsletter-signup--article-exit">/);
+  assert.match(html, /piece-body[\s\S]*Existing article body\.[\s\S]*reading-path[\s\S]*<\/aside>[\s\S]*article-publication-record[\s\S]*Cite this[\s\S]*<form class="newsletter-signup--article-exit">/);
+  assert.equal((html.match(/<aside class="reading-path"/g) || []).length, 1);
+  assert.equal((html.match(/<form class="newsletter-signup--article-exit"/g) || []).length, 1);
   assert.doesNotMatch(html, /newsletter-prompt--article-exit|journey-links--article-exit|Article paths/);
 });
 
-test("non-collection, explicitly featured, and Studio exits preserve their existing branches", (t) => {
+test("no-collection reading pages get a Library fallback while custom and Studio exits are unchanged", (t) => {
   const noCollection = renderPath(t, {
     articleShell: true,
     entries: { a: { title: "Standalone", date: "2020-01-01", collections: ["unlisted"] } },
   });
-  assert.match(noCollection, /newsletter-signup--article-exit[\s\S]*journey-links--article-exit/);
-  assert.doesNotMatch(noCollection, /class="reading-path"|newsletter-prompt--article-exit/);
+  assert.match(noCollection, /Browse the library[\s\S]*article-publication-record[\s\S]*newsletter-signup--article-exit/);
+  assert.doesNotMatch(noCollection, /data-reading-path-root|newsletter-prompt--article-exit|journey-links--article-exit/);
   const featured = renderPath(t, { articleShell: true, featured: true });
   assert.match(featured, /newsletter-prompt--article-exit[\s\S]*featured-continuation[\s\S]*newsletter-signup--article-exit[\s\S]*journey-links--article-exit/);
   assert.doesNotMatch(featured, /class="reading-path"/);
@@ -172,6 +252,11 @@ test("non-collection, explicitly featured, and Studio exits preserve their exist
     assert.equal(studio.includes('class="featured-continuation"'), withFeatured);
     assert.doesNotMatch(studio, /class="reading-path"|newsletter-prompt--article-exit|newsletter-signup--article-exit|journey-links--article-exit/);
   }
+});
+
+test("informational pages never mount the standard reading continuation", (t) => {
+  const html = renderPath(t, { articleShell: true, section: "about" });
+  assert.doesNotMatch(html, /class="reading-path|Browse the library|Explore all/);
 });
 
 function node(attributes, children = {}) {

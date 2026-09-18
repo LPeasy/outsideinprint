@@ -945,7 +945,8 @@ foreach ($requiredSlot in @('bookstore_detail_direct', 'bookstore_detail_kindle'
 $publicCollectionEntriesPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/get-public-entries.html') -Raw
 foreach ($requiredSnippet in @(
   '{{ $page := site.GetPage (printf "/collections/%s" .slug) }}',
-  '{{ if and $state.visible $page }}'
+  '{{ if and $state.visible $page (partial "collections/is-published.html" $page) }}',
+  '"publishedOnly" true'
 )) {
   if ($publicCollectionEntriesPartial -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected layouts/partials/collections/get-public-entries.html to require a rendered collection page before emitting a public entry: $requiredSnippet"
@@ -1122,7 +1123,8 @@ if ($collectionsData -match '(?s)- slug: civic-institutions-and-public-power.*?r
 $collectionsDoc = Get-Content -Path (Join-Path $repoRoot 'docs/collections-system.md') -Raw
 foreach ($requiredSnippet in @(
   'article record rail',
-  'first public match',
+  'first public header match',
+  'first eligible topic collection',
   'compact collection boundary',
   'legacy metadata retained for compatibility',
   'broadsheet directory',

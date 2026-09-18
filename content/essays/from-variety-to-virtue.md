@@ -5,6 +5,7 @@ description: "How diversification moved from practical risk management into mora
 date: 2026-05-17
 draft: false
 slug: "from-variety-to-virtue"
+collections: ["moral-religious-philosophical-essays"]
 section_label: "Essay"
 version: "1.3"
 edition: "Fourth web edition"

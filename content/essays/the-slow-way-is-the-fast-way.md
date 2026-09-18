@@ -3,6 +3,7 @@ title: "The Slow Way is the Fast Way"
 date: 2025-04-23
 draft: false
 slug: "the-slow-way-is-the-fast-way"
+collections: ["risk-uncertainty"]
 section_label: "Essay"
 subtitle: "When we rush through life's big decisions, we often find ourselves circling back to where we started."
 featured_image: "/images/medium/the-slow-way-is-the-fast-way/f3fa7e6605d8194326ea09f55cf0eedc6b6ef10c8d44155f1e51a2644089872c.jpg"

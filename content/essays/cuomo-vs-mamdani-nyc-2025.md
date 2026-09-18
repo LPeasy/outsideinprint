@@ -3,6 +3,7 @@ title: "The 2025 New York City Democratic Mayoral Primary"
 date: 2025-06-24
 draft: false
 slug: "cuomo-vs-mamdani-nyc-2025"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Andrew Cuomo vs. Zohran Mamdani — What’s at Stake?"
 featured_image: "/images/medium/cuomo-vs-mamdani-nyc-2025/791f85e62d84073354870f23d6a2372b73eef587b3bb21ff9bd13e2a21ad422a.jpeg"

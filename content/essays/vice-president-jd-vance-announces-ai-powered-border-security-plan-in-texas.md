@@ -3,6 +3,7 @@ title: "Vice President JD Vance Announces AI-Powered Border Security Plan in Tex
 date: 2025-03-06
 draft: false
 slug: "vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "Vance unveils AI-driven surveillance strategy to track illegal crossings, enhance national security, and reinforce U.S. border enforcement."
 featured_image: "/images/medium/vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas/bf25f1f0c9533475f927fab2deb266ed6ad2f8c778d215b925ee95e92648d690.jpeg"

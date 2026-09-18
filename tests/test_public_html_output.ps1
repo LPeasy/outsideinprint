@@ -4627,8 +4627,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?reading-path.*?Read next.*?reading-path__summary.*?reading-path__meta.*?min read.*?View collection.*?newsletter-signup--article-exit'
-    Message = 'expected a curated collection essay to show one compact next-reading card before the full signup'
+    Pattern = '(?s)reading-path.*?More on Risk, Uncertainty, and Decision-Making.*?reading-path__summary.*?Explore all \d+ pieces.*?article-publication-record.*?newsletter-signup--article-exit'
+    Message = 'expected a curated collection essay to show collection-first continuation before records and signup'
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
@@ -4693,7 +4693,7 @@ $requiredUxChecks = @(
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Pattern = '\bid=(?:"read-next-title"|''read-next-title''|read-next-title)(?=[\s>])'
-    Message = 'expected collection essays not to render the retired read-next-title ID while allowing the new Read next card'
+    Message = 'expected collection essays not to render the retired read-next-title ID'
     ShouldNotMatch = $true
   },
   @{
@@ -4718,8 +4718,8 @@ $requiredUxChecks = @(
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
     Scope = 'article-aftermatter'
-    Pattern = '(?s)article-publication-record.*?reading-path.*?Read next.*?reading-path__summary.*?reading-path__meta.*?min read.*?View collection.*?newsletter-signup--article-exit'
-    Message = 'expected the Poker collection essay to render a compact next-reading card followed by the existing newsletter signup'
+    Pattern = '(?s)reading-path.*?More on Geopolitics, Trade, and Global Power.*?reading-path__summary.*?Explore all \d+ pieces.*?article-publication-record.*?newsletter-signup--article-exit'
+    Message = 'expected the Poker collection essay to render collection-first continuation before records and signup'
   },
   @{
     Path = 'public/essays/the-world-is-back-at-the-poker-table/index.html'
@@ -4729,14 +4729,14 @@ $requiredUxChecks = @(
   @{
     Path = 'public/essays/the-ledger-vol-3/index.html'
     Scope = 'article-aftermatter'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?journey-links--article-exit.*?Article paths'
-    Message = 'expected an article with no public collection to retain its newsletter signup and Article paths navigation'
+    Pattern = '(?s)reading-path--library.*?Browse the library.*?article-publication-record.*?newsletter-signup--article-exit'
+    Message = 'expected an article with no public collection to show a Library fallback before records and newsletter'
   },
   @{
     Path = 'public/essays/the-ledger-vol-3/index.html'
     Scope = 'article-aftermatter'
-    Pattern = 'data-reading-path-root|newsletter-prompt--article-exit'
-    Message = 'expected an article whose only collection is hidden to omit the standard collection card and redundant newsletter prompt'
+    Pattern = 'data-reading-path-root|newsletter-prompt--article-exit|journey-links--article-exit'
+    Message = 'expected hidden-only membership to omit collection tracking and redundant article exit navigation'
     ShouldNotMatch = $true
   },
   @{
@@ -5759,16 +5759,15 @@ foreach ($articlePath in @(
   if ($standardReadingPaths.Count -gt 0) {
     $readingPathIndex = $articleHtml.IndexOf($standardReadingPaths[0], [System.StringComparison]::Ordinal)
     if ($standardReadingPaths.Count -ne 1 -or $recordIndex -lt 0 -or $newsletterIndex -lt 0 -or
-        $recordIndex -ge $readingPathIndex -or $readingPathIndex -ge $newsletterIndex) {
-      $uxIssues.Add("$articlePath => expected publication record, one standard reading card, and full weekly newsletter signup in that order")
+        $readingPathIndex -ge $recordIndex -or $recordIndex -ge $newsletterIndex) {
+      $uxIssues.Add("$articlePath => expected one collection-first continuation, publication record, and full weekly newsletter signup in that order")
     }
     if ($journeyIndex -ge 0 -or $articleHtml.Contains('newsletter-prompt--article-exit', [System.StringComparison]::Ordinal)) {
       $uxIssues.Add("$articlePath => standard collection articles must omit redundant newsletter prompts and article paths")
     }
   }
-  elseif ($recordIndex -lt 0 -or $newsletterIndex -lt 0 -or $journeyIndex -lt 0 -or
-      $recordIndex -ge $newsletterIndex -or $newsletterIndex -ge $journeyIndex) {
-    $uxIssues.Add("$articlePath => non-collection or explicitly featured articles must retain publication record, full weekly newsletter signup, and article paths in that order")
+  else {
+    $uxIssues.Add("$articlePath => expected exactly one standard reading continuation, not the retired article-paths exit")
   }
 
   if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
@@ -5779,9 +5778,6 @@ foreach ($articlePath in @(
     $uxIssues.Add("$articlePath => retained retired newsletter trust copy")
   }
 
-  if ($standardReadingPaths.Count -eq 0 -and $articleHtml -notmatch '(?s)journey-links--article-exit.*?(?:https://outsideinprint\.org)?/archive/.*?(?:https://outsideinprint\.org)?/collections/.*?(?:https://outsideinprint\.org)?/library/.*?https://buttondown\.com/OutsideInPrint[^>]*>\s*Newsletter\s*<') {
-    $uxIssues.Add("$articlePath => expected article-exit links to include Archive, Collections, Library, and Newsletter")
-  }
 }
 
 $affirmationCollectionPath = 'public/collections/the-things-we-say/index.html'

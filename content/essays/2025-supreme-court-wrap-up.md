@@ -3,6 +3,7 @@ title: "2025 Supreme Court Wrap-Up"
 date: 2025-07-01
 draft: false
 slug: "2025-supreme-court-wrap-up"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Final Rulings from the 2025 Term"
 description: "The U.S. Supreme Court ended its term with rulings and procedural orders touching judicial power, online access, education, and redistricting."

@@ -5,6 +5,7 @@ description: "Chinese porcelain traveled from Jingdezhen kilns into European cab
 date: 2026-05-12
 draft: false
 slug: "fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet"
+collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
 version: "1.1"
 edition: "Second web edition"

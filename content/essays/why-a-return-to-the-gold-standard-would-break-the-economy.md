@@ -3,6 +3,7 @@ title: "Returning to the Gold Standard Will Break the Economy"
 date: 2025-03-23
 draft: false
 slug: "why-a-return-to-the-gold-standard-would-break-the-economy"
+collections: ["money-banking-inflation"]
 section_label: "Essay"
 subtitle: "What Glitters Isn't Always Gold"
 description: "A gold standard sounds like discipline, but the arithmetic points toward monetary rigidity, deflation risk, and a weaker crisis response."

@@ -3,6 +3,7 @@ title: "It’s Hard to Condemn what DOGE is Doing"
 date: 2025-02-13
 draft: false
 slug: "its-hard-to-condemn-what-doge-is-doing"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "The Wrecking Ball We Deserve?"
 featured_image: "/images/medium/its-hard-to-condemn-what-doge-is-doing/d0e770bbe36eaacb02b0485d21c33b388d5975eb34ddcb15f38b678658bb506e.jpeg"

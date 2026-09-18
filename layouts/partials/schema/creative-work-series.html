@@ -35,7 +35,7 @@
   {{- end -}}
 
   {{- $hasPart := slice -}}
-  {{- range (partial "collections/resolve-items.html" (dict "collection" $meta.collection)) -}}
+  {{- range (partial "collections/resolve-items.html" (dict "collection" $meta.collection "publishedOnly" true)) -}}
     {{- $hasPart = $hasPart | append (dict "@id" (printf "%s#primaryentity" .Permalink)) -}}
   {{- end -}}
   {{- if gt (len $hasPart) 0 -}}

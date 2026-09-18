@@ -3,6 +3,7 @@ title: "The Privacy Paradox: Why Americans Feel Powerless Over Their Personal Da
 date: 2025-02-23
 draft: false
 slug: "the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "Your Data Is Everywhere, and Nobody Cares (Especially Not You)"
 featured_image: "/images/medium/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data/fde6a7eb2bba3033ba76dde29376f6135046b96a3618a20bdf0f9570f8b572d1.jpeg"

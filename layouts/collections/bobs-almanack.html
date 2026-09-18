@@ -11,7 +11,7 @@
       </div>
     </div>
   {{ else }}
-    {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition) }}
+    {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition "publishedOnly" true) }}
     {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
     {{ $latest := false }}
     {{ with first 1 $items }}

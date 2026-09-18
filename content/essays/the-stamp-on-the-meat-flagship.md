@@ -5,6 +5,7 @@ description: "The USDA meat inspection stamp began as a public answer to hidden 
 date: 2026-06-18
 draft: false
 slug: "the-stamp-on-the-meat-flagship"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 version: "1.1"
 edition: "Second web edition"

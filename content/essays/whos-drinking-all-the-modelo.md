@@ -3,6 +3,7 @@ title: "Who’s Drinking All the Modelo?"
 date: 2025-05-13
 draft: false
 slug: "whos-drinking-all-the-modelo"
+collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
 subtitle: "Especial Report"
 featured_image: "/images/medium/whos-drinking-all-the-modelo/645c97bb67718c4a25f3e5346039652a55d3a68b8dcd233530934b530f8e41a4.jpg"

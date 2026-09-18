@@ -17,7 +17,7 @@
     {{- $slug = $page.Params.slug | default .BaseFileName -}}
   {{- end -}}
   {{- with partial "collections/lookup-definition.html" $slug -}}
-    {{- $candidates = partial "collections/resolve-items.html" (dict "collection" .) -}}
+    {{- $candidates = partial "collections/resolve-items.html" (dict "collection" . "publishedOnly" true) -}}
   {{- end -}}
 {{- else if $page.IsSection -}}
   {{- if eq $page.Section "archive" -}}

@@ -24,14 +24,14 @@ test("rendered Library offers catalog browsing and retains a no-script fallback"
   assert.match(html, /<noscript>.*?Archive/s);
 });
 
-test("standard article endings have one next piece, one collection link, and one newsletter", () => {
+test("standard article endings have one collection link before records and one newsletter", () => {
   for (const route of ["essays/default-owner", "essays/the-dolphin-company", "syd-and-oliver/what-i-had", "essays/the-risk-management-buffet", "essays/the-world-is-back-at-the-poker-table"]) {
     const html = read(route);
     const card = html.match(/<aside\b[^>]*class=(?:"reading-path"|reading-path)[\s\S]*?<\/aside>/)?.[0];
     assert.ok(card, route);
-    assert.match(card, /Read next/);
-    assert.equal(links(card).length, 2, route);
-    assert.match(card, /\d+ min read/);
+    assert.match(card, /More (?:on|from) /);
+    assert.equal(links(card).length, 1, route);
+    assert.match(card, /Explore all \d+ pieces/);
     assert.match(card, /reading-path__summary/);
     for (const link of links(card)) {
       const target = new URL(attr(link[1], "href"), "https://outsideinprint.org").pathname;
@@ -43,7 +43,7 @@ test("standard article endings have one next piece, one collection link, and one
     assert.doesNotMatch(articleAftermatter(html), /Reading progress on this device|Curated position|Newest-first position|Up Next|Previous piece|Recommended starting point/);
     assert.doesNotMatch(html, /\bid=(?:"read-next-title"|'read-next-title'|read-next-title)(?=[\s>])/i);
     assert.equal((html.match(/data-analytics-source-slot=(?:"article_exit_newsletter"|article_exit_newsletter)(?=[\s>])/g) || []).length, 1);
-    assert.ok(html.indexOf("article-publication-record") < html.indexOf(card));
+    assert.ok(html.indexOf(card) < html.indexOf("article-publication-record"));
     assert.ok(html.indexOf(card) < html.indexOf("newsletter-signup--article-exit"));
   }
 });
@@ -59,8 +59,8 @@ test("retained progress-script strings do not count as visible article progress"
 test("hidden-only collection membership preserves the no-public-collection exit", () => {
   const html = read("essays/the-ledger-vol-3");
   const aftermatter = articleAftermatter(html);
-  assert.match(aftermatter, /article-publication-record[\s\S]*newsletter-signup--article-exit[\s\S]*journey-links--article-exit[\s\S]*Article paths/);
-  assert.doesNotMatch(aftermatter, /data-reading-path-root|newsletter-prompt--article-exit/);
+  assert.match(aftermatter, /reading-path--library[\s\S]*Browse the library[\s\S]*article-publication-record[\s\S]*newsletter-signup--article-exit/);
+  assert.doesNotMatch(aftermatter, /data-reading-path-root|newsletter-prompt--article-exit|journey-links--article-exit/);
   assert.doesNotMatch(html, /data-piece-collection-slug=/);
 });
 

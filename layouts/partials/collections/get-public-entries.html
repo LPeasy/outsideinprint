@@ -2,10 +2,10 @@
 {{ $entries := slice }}
 
 {{ range $definitions }}
-  {{ $items := partial "collections/resolve-items.html" (dict "collection" .) }}
+  {{ $items := partial "collections/resolve-items.html" (dict "collection" . "publishedOnly" true) }}
   {{ $state := partial "collections/get-state.html" (dict "collection" . "items" $items) }}
   {{ $page := site.GetPage (printf "/collections/%s" .slug) }}
-  {{ if and $state.visible $page }}
+  {{ if and $state.visible $page (partial "collections/is-published.html" $page) }}
     {{ $entries = $entries | append (dict
       "collection" .
       "items" $items

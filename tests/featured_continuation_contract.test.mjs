@@ -56,7 +56,8 @@ test("featured exit offers only one reading link and one described Studio inquir
   assert.doesNotMatch(template, /<form\b|<input\b|<script\b|newsletter_signup|newsletter_prompt/);
   assert.match(articleSingle, /featured_continuations/);
   assert.match(articleSingle, /partial "article\/featured-continuation\.html"/);
-  assert.match(articleSingle, /\{\{ if \$featuredContinuation \}\}[\s\S]*?partial "article\/featured-continuation\.html"[\s\S]*?\{\{ else if \$showCollectionContinuation \}\}\s*\{\{ partial "collections\/reading-path\.html" \./);
+  assert.match(articleSingle, /\{\{ if \$featuredContinuation \}\}[\s\S]*?partial "article\/featured-continuation\.html"/);
+  assert.match(articleSingle, /\$isStandardReadingPage :=[^\n]*\(not \$featuredContinuation\)/);
   assert.match(articleSingle, /"hideCTA" \(not \(not \$featuredContinuation\)\)/);
   assert.match(sampleExit, /hideCTA/);
   assert.match(template, /errorf "Featured continuation on %q requires a published reading destination/);

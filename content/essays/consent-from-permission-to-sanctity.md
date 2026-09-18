@@ -3,6 +3,7 @@ title: "Consent: From Permission to Sanctity"
 subtitle: "When a society treats permission as purity, it risks mistaking procedure for virtue ~ and paperwork for wisdom."
 description: "An Outside In Print evergreen essay on consent's movement out of legal procedure and into civic sanctity in modern American moral and political life."
 slug: "consent-from-permission-to-sanctity"
+collections: ["moral-religious-philosophical-essays"]
 date: 2026-05-18
 draft: false
 section_label: "Essay"

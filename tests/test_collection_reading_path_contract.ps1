@@ -23,9 +23,9 @@ $articleSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/_default/single
 foreach ($requiredSnippet in @(
   'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',
   '$showCollectionContinuation := false',
-  '$standardCollectionContinuation := and $showCollectionContinuation (not $featuredContinuation) (not .Params.studio_sample)',
-  '{{ if and $showCollectionContinuation (not $standardCollectionContinuation) }}',
-  '{{ if not $standardCollectionContinuation }}',
+  '$isStandardReadingPage :=',
+  '{{ if $isStandardReadingPage }}',
+  '{{ if not $isStandardReadingPage }}',
   'partial "collections/reading-path.html" .',
   'class="article-publication-record"',
   'Cite this',
@@ -61,11 +61,13 @@ if ($articleSingle -match [regex]::Escape('partial "authors/card.html"')) {
 }
 
 $readingPathIndex = $articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.StringComparison]::Ordinal)
+$aftermatterIndex = $articleSingle.IndexOf('class="piece-aftermatter"', [System.StringComparison]::Ordinal)
+$recordIndex = $articleSingle.IndexOf('class="article-publication-record"', [System.StringComparison]::Ordinal)
 $newsletterIndex = $articleSingle.IndexOf('partial "newsletter_signup.html"', [System.StringComparison]::Ordinal)
 $journeyIndex = $articleSingle.IndexOf('"class" "journey-links--article-exit"', [System.StringComparison]::Ordinal)
-if ($readingPathIndex -lt 0 -or $newsletterIndex -lt 0 -or $journeyIndex -lt 0 -or
-    $readingPathIndex -ge $newsletterIndex -or $newsletterIndex -ge $journeyIndex) {
-  throw 'Expected layouts/_default/single.html to place the reading path, full newsletter signup, and article-exit links in that order.'
+if ($aftermatterIndex -lt 0 -or $readingPathIndex -le $aftermatterIndex -or $recordIndex -le $readingPathIndex -or
+    $newsletterIndex -le $recordIndex -or $journeyIndex -le $newsletterIndex) {
+  throw 'Expected the reading path immediately in aftermatter, before publication records and newsletter; exceptional exit links remain after signup.'
 }
 
 $collectionSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
@@ -99,25 +101,32 @@ foreach ($retiredSnippet in @(
 
 $readingPath = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/reading-path.html') -Raw
 foreach ($requiredSnippet in @(
-  'Read next',
-  'View collection',
+  'More on',
+  'More from',
+  'Explore all',
+  'Browse the library',
   'class="reading-path__summary"',
-  '{{ .ReadingTime }} min read',
-  'strings.TrimSpace ((.Params.description | default "") | plainify)',
-  'partial "discovery/page-summary.html" .',
   'data-reading-path-root',
   'data-analytics-source-slot="article_continuation_primary"',
-  'data-analytics-source-slot="article_continuation_secondary"',
-  'data-item-paths="{{ $itemPaths | jsonify | htmlEscape }}"',
-  'data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"'
+  'data-analytics-event="internal_promo_click"',
+  'data-analytics-source-slot="article_exit_paths"',
+  'data-item-paths="{{ $itemPaths | jsonify }}"',
+  'data-item-titles="{{ $itemTitles | jsonify }}"'
 )) {
   if ($readingPath -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected reading-path partial to contain: $requiredSnippet"
   }
 }
 
-if ($readingPath -match 'Continue This Collection|Curated position|Newest-first position|Reading progress|After this position|Recommended starting point|Previous piece|Start Again|Up Next|Browse collections|Search the library|data-reading-path-progress|article_continuation_(previous|restart|archive)') {
-  throw 'Expected one Read next card without visible progress, positions, duplicate recommendations, or competing navigation.'
+if ($readingPath -match 'Read next|View collection|ReadingTime|Curated position|Newest-first position|Reading progress|After this position|Recommended starting point|Previous piece|Start Again|Up Next|Browse collections|Search the library|data-reading-path-progress|article_continuation_(previous|restart|archive|secondary)|<script|onclick') {
+  throw 'Expected a native collection continuation or Library fallback without essay recommendations, visible progress, or new JavaScript.'
+}
+
+$publishedPredicate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/is-published.html') -Raw
+foreach ($requiredSnippet in @('.Draft', '.Date', '.PublishDate', '.ExpiryDate', 'now')) {
+  if ($publishedPredicate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected the shared publication predicate to check $requiredSnippet"
+  }
 }
 
 $collectionProgress = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/collection-progress.html') -Raw
@@ -167,7 +176,7 @@ if ($docs -notmatch [regex]::Escape('`oip-reading-progress:v1:<collection-slug>`
 $layoutMatrix = Get-Content -Path (Join-Path $repoRoot 'docs/layout-ownership-matrix.md') -Raw
 foreach ($requiredSnippet in @(
   '`reading-path`',
-  '`reading-path__header`',
+  '`reading-path__title`',
   '`reading-path__summary`',
   '`reading-path__collection-link`'
 )) {

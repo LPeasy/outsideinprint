@@ -14,6 +14,8 @@ For a ready-to-run Codex implementation brief and follow-up prompt sequence for 
 - One piece should belong to at most 2 collections.
 - Explicit front matter membership is authoritative.
 - Fallback matching exists only for legacy support.
+- New pieces need at most one strong collection choice, with a second only when it genuinely fits. A piece without a suitable collection keeps the Library fallback; do not create essay-to-essay recommendation pairs.
+- The September 2026 coverage pass, exact assignments, deliberate exclusions, and separate editorial follow-ups are recorded in [Collection continuation audit](collection-continuation-audit.md).
 
 ## Data model
 
@@ -63,22 +65,22 @@ Resolution rules:
 1. If a page has `collections`, only those explicit memberships count, and their front matter order is preserved.
 2. If a page has no `collections`, fallback matching may be used.
 3. If a collection has `explicit_only: true`, fallback is never used for that collection.
-4. Public listings require `public: true`, either `count >= min_items` or `force_public: true`, and a rendered `content/collections/<slug>.md` page.
+4. Public listings require `public: true`, either `count >= min_items` or `force_public: true`, and an eligible published `content/collections/<slug>.md` page. Counts include only published members: not draft, article date and release date no later than the build clock, and no elapsed expiry date. This also applies to public navigation in preview builds.
 5. Collection item order is `collection_weight` ascending, then date descending.
+6. `resolve-items.html` retains raw resolution by default for editorial audits; `publishedOnly: true` filters it through `collections/is-published.html`. Public article resolution, directory entries, collection details, and collection schema use filtered membership.
 
 ## Templates touched by the system
 
 - `layouts/collections/list.html`: broadsheet directory grouped into `Series` and `Topics`, with compact ruled rows rather than a card grid.
 - `layouts/collections/single.html`: individual collection page rendered as a newspaper section front.
-- `layouts/index.html`: featured collections strip.
-- `layouts/_default/single.html`: article header and aftermatter, including the compact collection boundary in the article record rail, the article-exit continuation zone for collection-member pages, and quiet final article links.
-- `layouts/partials/collections/reading-path.html`: server-rendered article continuation zone for the first public collection match only.
+- `layouts/_default/single.html`: article header and aftermatter, including the compact collection boundary in the article record rail and the standard reading continuation before publication records.
+- `layouts/partials/collections/reading-path.html`: server-rendered collection-first continuation with a Library fallback. The homepage retains Library discovery, not a collections strip.
 - `layouts/partials/collections/collection-progress.html`: legacy browser-local progress panel partial retained for compatibility, but not mounted by collection pages.
 - `layouts/partials/collections/reading-progress-script.html`: client-only progress enhancer for article continuation modules.
 
 ## Reading path and progress
 
-Collections now support two reader-facing sequence layers that reuse the existing resolver and ordering rules.
+Collections provide subject or series continuation at article endings and centrally maintained starting points on collection pages.
 
 ### Article pages
 
@@ -86,20 +88,18 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - The two existing collection continuations retain their `article_continuation_primary` / `collection_click` metadata and collection slugs. Jack's manually selected Benjamin Franklin recommendation uses `internal_promo_click` in that same primary slot. Studio links retain `studio_sample_exit` for Jack and use the existing `article_exit_paths` slot on the other two pieces; no new analytics event is introduced.
 - Jack's Studio production note remains, but its standalone inquiry CTA is suppressed when the focused exit supplies that link. Other Studio sample exits stay unchanged. On these explicitly featured routes, existing newsletter prompts, forms, and final archive links are unchanged; no signup block is added. These are navigation-only changes, not revisions to the article bodies or citation records.
 
-- A collection-member article renders exactly one article-exit continuation zone.
-- Standard collection-member articles render the continuation immediately after the publication record, followed by the existing canonical newsletter signup. They omit the redundant compact newsletter prompt above the card and the `Article paths` row below the signup. Explicitly featured continuations, Studio samples, and articles without a public collection retain their existing exit paths.
-- The module always uses the first public match from `layouts/partials/collections/resolve-page-collections.html`.
-- Eligible collection-member articles also render compact collection links in the article record rail keyed to that same first public match.
-- When an article has two public explicit collections, the article record rail lists both collection names in front matter order. The first public match still controls the continuation module.
+- Standard reading pages render exactly one continuation immediately after the body, before the Modern Bios record, publication record, and existing canonical newsletter signup. Standard means a single page in essays, syd-and-oliver, reports, or working-papers without a custom featured continuation or Studio sample. Informational and shop pages are excluded.
+- Standard pages omit the redundant compact newsletter prompt and `Article paths` row. Explicitly featured continuations and Studio samples retain their existing endings.
+- Select the first eligible topic collection, otherwise the first eligible series. Within a kind, preserve front-matter preference order. Eligibility requires a public published collection, its configured minimum or existing override, the current article, and at least one other published member.
+- Header collection links remain in front-matter order, independently of topic preference in the continuation. The header's primary collection metadata therefore continues to describe the first public header match.
 - Collections influence article pages only through compact boundary modules:
   - the header record rail collection boundary
   - the continuation module
 - The article body, hero, publication record, citations, revision history, and editorial form variants remain unchanged.
 - The separate mounted collection-membership block is no longer part of the article-member flow.
-- Standalone articles retain their quiet final article links.
-- The standard continuation zone contains one `Read next` card: one linked article title, its existing plain-text description (or shared summary fallback), its reading time, and a secondary `View collection` link. The title uses `article_continuation_primary`; the collection link uses `article_continuation_secondary`. Both retain `collection_click` and the primary collection slug.
-- The next article is the next eligible member in the existing collection order. At the end, use the designated `start_here` article if it is eligible and not the current article; otherwise use the first other eligible member. A missing, draft, future-dated, future-release, or expired member cannot become the target, including in a preview build.
-- When no other eligible member exists, render only `View collection`; never recommend the current article to itself.
+- The standard continuation displays `More on [title]` for topics or `More from [title]` for series, the collection's plain-text description, and exactly one native `Explore all [N] pieces →` link. The count includes the current article. There is no automatic next-essay recommendation or secondary collection link.
+- Without an eligible collection, including forced-public singletons, show only `Browse the library →`. This fallback uses `internal_promo_click` and `article_exit_paths` with the actual Library destination.
+- The collection CTA retains `collection_click` and `article_continuation_primary`, with the actual collection slug and canonical destination. At the September 2026 release cutover, standard primary-slot clicks change from article destinations to collection destinations; preserved custom continuations still lead to articles. Historical secondary-slot events remain historical data; do not rewrite analytics snapshots.
 - Article pages no longer display positions, progress counts, remaining pieces or minutes, previous/start actions, a duplicate `Up Next` list, or extra archive/library exits inside this card. Browser-local visit recording remains active without a visible progress node.
 
 ### Collection pages
@@ -108,7 +108,7 @@ Collections now support two reader-facing sequence layers that reuse the existin
 - The directory has one page title/deck and two editorial columns: `Series` and `Topics`.
 - Each visible collection appears as a compact `collection-record` row with kind, title, description, piece count, scope metadata, and a quiet `Start here` link when present.
 - The index ignores `featured`; the field remains compatibility metadata and is not consumed by the active homepage.
-- Individual collection pages render as newspaper section fronts with the actual collection title as the H1.
+- Individual collection pages render as newspaper section fronts with the actual collection title as the H1 and its description immediately below. Dated analysis retains publication dates; collection promotion does not imply current reporting.
 - Bob's Almanack uses a bespoke collection layout and may be listed publicly only when its collection page and at least one issue are published in the same build.
 - Bob's Almanack collection-page modules are fed only by committed Hugo data under `data/almanack/`; Hugo templates must not call live APIs during a build.
 - The collection page uses:
@@ -165,7 +165,9 @@ Resume labels are also fixed:
 
 ## Auditing
 
-`tests/collection_reading_path_behavior.test.mjs` exercises the production Hugo partial with temporary fixtures: primary-collection ordering, next and end-of-collection targets, unavailable or self-referential starts, single-member collections, unpublished/expired exclusions, and description fallback. It also runs the shared progress script without a visible article progress label and checks retained collection status/resume behavior. The dedicated Node and PowerShell reading-path contracts cover markup, analytics, and the standard-versus-featured/Studio exit boundary. GitHub runs the Node checks; local publishing gates remain Hugo/PowerShell as documented in `docs/local-validation-policy.md`.
+`tests/collection_reading_path_behavior.test.mjs` exercises the production Hugo partial with temporary fixtures: topic preference, stable within-kind ordering, series and Library fallbacks, unpublished landings and members, minimum counts, preview exclusions, and current membership. It also checks collection descriptions, duplicate-free Start Here rendering, raw audit resolution, the unchanged progress storage contract, and the standard-versus-featured/Studio exit boundary. Node and PowerShell contracts cover markup and analytics. GitHub runs the Node checks; local publishing gates remain Hugo/PowerShell as documented in `docs/local-validation-policy.md`.
+
+Membership-only maintenance must preserve all article text and unrelated metadata. The documented publishing-policy exemption applies only to verified ref-to-ref allowlisted front-matter-only diffs; run the actual committed base/head guardrail. An explicit full-content audit can reveal separate legacy findings, but this release neither repairs them silently nor creates audit PASS records. Maintain `start_here` and descriptions in the collection definition; additional per-article ranking work is not required.
 
 Use the audit script to review collection health and candidate assignments:
 

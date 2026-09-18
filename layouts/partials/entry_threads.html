@@ -12,8 +12,8 @@
   {{ $definition := partial "collections/lookup-definition.html" $slug }}
   {{ if and $definition $definition.public }}
     {{ $collectionPage := site.GetPage (printf "/collections/%s" $slug) }}
-    {{ if $collectionPage }}
-      {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition) }}
+    {{ if and $collectionPage (partial "collections/is-published.html" $collectionPage) }}
+      {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition "publishedOnly" true) }}
       {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
       {{ $startHereSlug := lower (printf "%v" ($definition.start_here | default "")) }}
       {{ $startHere := false }}
@@ -24,7 +24,7 @@
           {{ end }}
         {{ end }}
       {{ end }}
-      {{ if $startHere }}
+      {{ if and $state.visible $startHere }}
         {{ $entries = $entries | append (dict
           "definition" $definition
           "page" $collectionPage

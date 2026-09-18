@@ -3,6 +3,7 @@ title: "Is DOGE Legal?"
 date: 2025-02-17
 draft: false
 slug: "is-doge-legal"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Trump, Musk, and the Constitutional Fight Over Executive Power"
 featured_image: "/images/medium/is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg"

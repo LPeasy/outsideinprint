@@ -3,6 +3,7 @@ title: "Why More People Are Choosing Chili’s Over McDonald’s in 2025"
 date: 2025-05-21
 draft: false
 slug: "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025"
+collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
 subtitle: "Chili’s isn’t just competing with fast food ~ it’s eating their lunch."
 featured_image: "/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg"

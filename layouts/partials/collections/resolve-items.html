@@ -1,4 +1,5 @@
 {{ $collection := .collection }}
+{{ $publishedOnly := default false .publishedOnly }}
 {{ $slug := lower (printf "%v" $collection.slug) }}
 {{ $items := slice }}
 
@@ -12,7 +13,7 @@
     {{ $include = partial "collections/fallback-match.html" (dict "page" . "collection" $collection) }}
   {{ end }}
 
-  {{ if $include }}
+  {{ if and $include (or (not $publishedOnly) (partial "collections/is-published.html" .)) }}
     {{ $items = $items | append . }}
   {{ end }}
 {{ end }}

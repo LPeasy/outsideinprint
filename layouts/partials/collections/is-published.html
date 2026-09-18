@@ -1,0 +1,5 @@
+{{- $published := false -}}
+{{- with . -}}
+  {{- $published = and (not .Draft) (le .Date now) (le .PublishDate now) (or .ExpiryDate.IsZero (gt .ExpiryDate now)) -}}
+{{- end -}}
+{{- return $published -}}

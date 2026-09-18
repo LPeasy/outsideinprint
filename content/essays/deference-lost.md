@@ -3,6 +3,7 @@ title: "Deference Lost"
 date: 2025-02-15
 draft: false
 slug: "deference-lost"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Why Loper Bright Slowed Down Agency Responsiveness"
 featured_image: "/images/medium/deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg"

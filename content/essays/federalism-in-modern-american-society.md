@@ -3,6 +3,7 @@ title: "Federalism in Modern American Society"
 date: 2024-12-09
 draft: false
 slug: "federalism-in-modern-american-society"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "An exploration"
 description: "American federalism ~ the distribution of authority between national and state governments ~ has been a defining feature of governance in the United States s..."

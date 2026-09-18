@@ -4,6 +4,7 @@ metadata_title: "MECE Explained: Where Did My Paycheck Go?"
 date: 2025-12-01
 draft: false
 slug: "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go"
+collections: ["risk-uncertainty"]
 section_label: "Essay"
 subtitle: "How your monthly budget can explain two core ideas from probability, risk, and economics ~"
 description: "A practical guide to mutually exclusive and collectively exhaustive thinking, using a household budget to show how categories prevent overlap and omission."

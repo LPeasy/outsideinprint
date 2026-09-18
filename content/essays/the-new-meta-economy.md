@@ -3,6 +3,7 @@ title: "The New Meta Economy"
 date: 2025-05-01
 draft: false
 slug: "the-new-meta-economy"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "Ads, Bots, and the End of Work: Meta’s Q1 Earnings Report Explained"
 featured_image: "/images/medium/the-new-meta-economy/bcb3e2d1414e3aa992a7e91e09e04b5d51c9948d0210d90268c473b870857999.jpg"

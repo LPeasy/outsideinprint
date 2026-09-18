@@ -3,6 +3,7 @@ title: "The Three Enemies of Positive Outcomes"
 date: 2025-04-17
 draft: false
 slug: "the-three-enemies-of-positive-outcomes"
+collections: ["moral-religious-philosophical-essays"]
 section_label: "Essay"
 subtitle: "Things fail for a reason. It's usually one of these."
 featured_image: "medium/502c9af7d38343926679b4000c07f7938a7bb2ffb2de34fd307939daa7c4523a"

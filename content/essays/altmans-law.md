@@ -3,6 +3,7 @@ title: "Altman’s Law"
 date: 2025-02-10
 draft: false
 slug: "altmans-law"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "The Super-Exponential Acceleration of AI Advancement"
 featured_image: "/images/medium/altmans-law/c294e8d769c14dca54d5f71366a7f665406be3eac44117aab1579e78cd8cfd27.jpg"

@@ -11,7 +11,7 @@
       </div>
     </div>
   {{ else }}
-    {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition) }}
+    {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition "publishedOnly" true) }}
     {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
     {{ $startHereSlug := lower (printf "%v" ($definition.start_here | default "")) }}
     {{ $startHere := false }}
@@ -39,6 +39,7 @@
     <article class="collection-section">
       <header class="page-shell page-shell--grid collection-section__header">
         <h1>{{ $definition.title }}</h1>
+        {{ with $definition.description }}<p class="page-intro collection-section__description">{{ . }}</p>{{ end }}
         <ul class="collection-section__ledger" aria-label="Collection details">
           <li>{{ title $state.kind }} collection</li>
           <li>{{ $state.count }} published pieces</li>

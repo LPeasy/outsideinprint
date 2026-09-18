@@ -3,6 +3,7 @@ title: "A Really Boring Topic"
 date: 2025-01-14
 draft: false
 slug: "a-really-boring-topic"
+collections: ["technology-ai-machine-future"]
 section_label: "Essay"
 subtitle: "Tunneling Machines"
 featured_image: "/images/medium/a-really-boring-topic/21d0ba8af1bb61e16314860a6882761060c73a13546554cb1749d975d65bea8e.jpeg"

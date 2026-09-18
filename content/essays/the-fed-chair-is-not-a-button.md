@@ -13,8 +13,7 @@ revision_history:
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
 featured: false
-collections:
-  - "civic-institutions-and-public-power"
+collections: ["money-banking-inflation","civic-institutions-and-public-power"]
 featured_image: "essays/the-fed-chair-is-not-a-button/hero"
 featured_image_alt: "An empty central bank chair at the head of a long committee table, with a locked interest-rate lever and inflation charts in the background."
 featured_image_caption: "Politics wants one person to move the lever. Monetary policy has to pass through a table."

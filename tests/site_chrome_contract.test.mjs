@@ -557,9 +557,9 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.doesNotMatch(homeV2FrontPage, /Bob(?:'|’)s Almanack|home-almanack/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
-  assert.match(articleSingle, /if and \$showCollectionContinuation \(not \$standardCollectionContinuation\)[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?"sourceSlot" "article_exit_newsletter_prompt"/);
+  assert.match(articleSingle, /if and \$showCollectionContinuation \(not \$isStandardReadingPage\)[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?"sourceSlot" "article_exit_newsletter_prompt"/);
   assert.match(articleSingle, /"anchorID" "bobs-almanack-signup"/);
-  assert.ok(articleSingle.indexOf('partial "newsletter_prompt.html"') < articleSingle.indexOf('partial "collections/reading-path.html"'));
+  assert.ok(articleSingle.indexOf('partial "collections/reading-path.html"') < articleSingle.indexOf('class="article-publication-record"'));
   assert.match(cssRule(css, ".newsletter-prompt a"), /min-height:44px;/);
   assert.match(cssRule(css, ".newsletter-signup[id]"), /scroll-margin-top:6rem;/);
   assert.match(almanackIndex, /^noindex: true$/m);

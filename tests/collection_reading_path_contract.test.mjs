@@ -37,11 +37,12 @@ test("article single includes the reading-path partial and shared progress scrip
   assert.match(articleSingle, /"label" "Library"/);
   assert.match(articleSingle, /"label" "Newsletter"/);
   assert.doesNotMatch(articleSingle, /"class" "journey-links--article"/);
-  assert.match(articleSingle, /\$standardCollectionContinuation := and \$showCollectionContinuation \(not \$featuredContinuation\) \(not \.Params\.studio_sample\)/);
-  assert.match(articleSingle, /\{\{ if and \$showCollectionContinuation \(not \$standardCollectionContinuation\) \}\}[\s\S]*?partial "newsletter_prompt\.html"/);
-  assert.match(articleSingle, /\{\{ if not \$standardCollectionContinuation \}\}\s*\{\{ partial "journey_links\.html"/);
+  assert.match(articleSingle, /\$isStandardReadingPage :=/);
+  assert.match(articleSingle, /\{\{ if \$isStandardReadingPage \}\}\s*\{\{ partial "collections\/reading-path\.html" \./);
+  assert.match(articleSingle, /\{\{ if not \$isStandardReadingPage \}\}\s*\{\{ partial "journey_links\.html"/);
   assert.doesNotMatch(articleSingle, /partial "collections\/page-membership-block\.html" \./);
-  assert.ok(articleSingle.indexOf('class="article-publication-record"') < articleSingle.indexOf('partial "collections/reading-path.html" .'));
+  assert.ok(articleSingle.indexOf('class="piece-aftermatter"') < articleSingle.indexOf('partial "collections/reading-path.html" .'));
+  assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('class="article-publication-record"'));
   assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('partial "newsletter_signup.html"'));
   assert.ok(articleSingle.indexOf('partial "newsletter_signup.html"') < articleSingle.indexOf('"class" "journey-links--article-exit"'));
   assert.match(articleSingle, /partial "collections\/reading-progress-script\.html" \./);
@@ -82,26 +83,23 @@ test("collection single frames the section front, contents, and related terrain 
   }
 });
 
-test("reading-path uses the first public collection and one descriptive next-piece card", () => {
+test("reading-path exposes native collection-first continuation and a Library fallback", () => {
   for (const snippet of [
     'partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true)',
-    'index $matches 0',
-    'Read next',
-    'View collection',
+    'More on',
+    'More from',
+    'Explore all',
+    'Browse the library',
     'class="reading-path__summary"',
-    '{{ .ReadingTime }} min read',
-    'strings.TrimSpace ((.Params.description | default "") | plainify)',
-    'partial "discovery/page-summary.html" .',
     'data-reading-path-root',
-    'data-item-paths="{{ $itemPaths | jsonify | htmlEscape }}"',
-    'data-item-titles="{{ $itemTitles | jsonify | htmlEscape }}"',
+    'data-item-paths="{{ $itemPaths | jsonify }}"',
+    'data-item-titles="{{ $itemTitles | jsonify }}"',
     'data-start-here-path="{{ $startHerePath }}"'
   ]) {
     assert.match(readingPath, new RegExp(escapeRegex(snippet)));
   }
-  assert.doesNotMatch(readingPath, /Continue This Collection|Curated position|Newest-first position|Reading progress|After this position|Recommended starting point|Previous piece|Start Again|Up Next|Browse collections|Search the library|data-reading-path-progress/);
+  assert.doesNotMatch(readingPath, /Read next|View collection|ReadingTime|Curated position|Newest-first position|Reading progress|After this position|Recommended starting point|Previous piece|Start Again|Up Next|Browse collections|Search the library|data-reading-path-progress|<script|onclick/);
   assert.equal((readingPath.match(/<a\b/g) || []).length, 2);
-  assert.match(readingPath, /\(not \.Draft\).*?\(le \.Date now\).*?\(le \.PublishDate now\).*?\.ExpiryDate\.IsZero/);
 });
 
 test("collection-progress partial exposes deterministic resume hooks", () => {
@@ -150,7 +148,6 @@ test("css owns the new reading-path continuation selectors", () => {
     ".reading-path__header{",
     ".reading-path__eyebrow{",
     ".reading-path__title{",
-    ".reading-path__meta",
     ".reading-path__summary",
     ".reading-path__collection-link",
     ".collection-progress{",
@@ -164,10 +161,9 @@ test("css owns the new reading-path continuation selectors", () => {
 
 test("documentation records the article-exit continuation model and storage contract", () => {
   for (const snippet of [
-    "article-exit continuation zone",
-    "Read next",
-    "first public match",
-    "The separate mounted collection-membership block is no longer part of the article-member flow.",
+    "More on",
+    "More from",
+    "Browse the library",
     "`oip-reading-progress:v1:<collection-slug>`",
     "Start with <title>",
     "Resume with <title>",
@@ -178,7 +174,7 @@ test("documentation records the article-exit continuation model and storage cont
 
   for (const snippet of [
     "`reading-path`",
-    "`reading-path__header`",
+    "`reading-path__title`",
     "`reading-path__summary`",
     "`reading-path__collection-link`",
     "article-exit continuation zone"
@@ -191,9 +187,10 @@ test("reading-path partial uses the fixed continuation analytics source slots", 
   for (const snippet of [
     'data-analytics-event="collection_click"',
     'data-analytics-source-slot="article_continuation_primary"',
-    'data-analytics-source-slot="article_continuation_secondary"',
+    'data-analytics-event="internal_promo_click"',
+    'data-analytics-source-slot="article_exit_paths"',
   ]) {
     assert.match(readingPath, new RegExp(escapeRegex(snippet)));
   }
-  assert.doesNotMatch(readingPath, /article_continuation_(?:previous|restart|archive)/);
+  assert.doesNotMatch(readingPath, /article_continuation_(?:previous|restart|archive|secondary)/);
 });

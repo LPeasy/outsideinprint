@@ -445,3 +445,47 @@ collections:
       topics: []
       tags: []
       sections: []
+
+  - slug: money-banking-inflation
+    title: Money, Banking, and Inflation
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 100
+    start_here: why-a-return-to-the-gold-standard-would-break-the-economy
+    description: Archive essays on monetary systems, central banks, credit, and inflation.
+    metadata:
+      - label: Format
+        value: Archive essays
+      - label: Scope
+        value: Monetary systems, central banks, credit, and inflation
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
+  - slug: brands-business-consumer-choice
+    title: Brands, Business, and Consumer Choice
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 105
+    start_here: whos-drinking-all-the-modelo
+    description: Business case studies on brands, pricing, distribution, and consumer choice.
+    metadata:
+      - label: Format
+        value: Business case studies
+      - label: Scope
+        value: Brands, pricing, distribution, and consumer choice
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []

@@ -3,6 +3,7 @@ title: "June 27, 2025 — SCOTUS Set to Close Its Term with Major Decisions"
 date: 2025-06-27
 draft: false
 slug: "june-27-2025-scotus-set-to-close-its-term-with-major-decisions"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "What to Watch as the Supreme Court Wraps Its Term"
 description: "On June 27, 2025, the Supreme Court was set to release final opinions of the term, with major disputes pending."

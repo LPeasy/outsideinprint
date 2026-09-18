@@ -3,6 +3,7 @@ title: "Building for Centuries Not Election Cycles"
 date: 2025-02-24
 draft: false
 slug: "building-for-centuries-not-election-cycles"
+collections: ["floods-water-built-environment"]
 section_label: "Essay"
 subtitle: "The Case for Slow, Steady, and Smart Federal Infrastructure Planning"
 description: "Why USACE Takes Its Time: Infrastructure Built to Last. The U.S. Army Corps of Engineers (USACE) is often called America’s construction company"

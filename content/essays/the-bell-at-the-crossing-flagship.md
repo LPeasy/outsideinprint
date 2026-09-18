@@ -5,6 +5,7 @@ description: "A flagship Outside In Print essay on how a railroad crossing bell 
 date: 2026-06-04
 draft: false
 slug: "the-bell-at-the-crossing-flagship"
+collections: ["risk-uncertainty"]
 section_label: "Essay"
 version: "1.2"
 edition: "Third web edition"

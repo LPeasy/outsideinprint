@@ -3,6 +3,7 @@ title: "Why Obergefell will not be Overturned"
 date: 2025-01-14
 draft: false
 slug: "why-oberfell-will-not-be-overturned"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Marriage is a Fundamental Right"
 featured_image: "/images/medium/why-oberfell-will-not-be-overturned/642b3a0d97b101a5a53bac29390f2ee60d1274d06a06a073c3b77717181a160c.jpeg"

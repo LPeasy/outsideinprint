@@ -3,6 +3,7 @@ title: "Declaring Equality?"
 date: 2025-01-18
 draft: false
 slug: "declaring-equality"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Biden claims that the ERA is the law of the land."
 description: "President Joe Biden’s recent declaration of the Equal Rights Amendment (ERA) as “the law of the land” has ignited a profound debate at the crossroads of cons..."

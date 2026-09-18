@@ -3,6 +3,7 @@ title: "Rational Ignorance in the U.S. Presidential Electorate"
 date: 2024-12-09
 draft: false
 slug: "rational-ignorance-in-the-u-s-presidential-electorate"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "An Exploration"
 description: "The Rationality of Willful Ignorance in Presidential Elections: A Theoretical and Structural Exploration"

@@ -3,6 +3,7 @@ title: "1929-2029: America's Century of Humiliation"
 date: 2026-04-14
 draft: false
 slug: "1929-2029-americas-century-of-humiliation"
+collections: ["household-economy-work-and-cost"]
 section_label: "Essay"
 description: "A short essay arguing that the United States became world-historically successful while leaving millions of citizens to experience that success as humiliation, attrition, and spectatorship."
 version: "1.2"

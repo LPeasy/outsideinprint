@@ -5,6 +5,7 @@ description: "A nineteenth-century patent model opens into the public bargain be
 date: 2026-06-28
 draft: false
 slug: "the-little-machine-in-the-glass-case"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 version: "1.0"
 edition: "First web edition"

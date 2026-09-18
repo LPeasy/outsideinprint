@@ -3,6 +3,7 @@ title: "8 Big Questions Everyone Has About Pope Leo XIV"
 date: 2025-07-10
 draft: false
 slug: "8-big-questions-everyone-has-about-pope-leo-xiv"
+collections: ["moral-religious-philosophical-essays"]
 section_label: "Essay"
 subtitle: "AI, gender, tradition, power ~ how will he lead?"
 featured_image: "/images/medium/8-big-questions-everyone-has-about-pope-leo-xiv/01d9124061df2074cc801a8c98cc8e9a3c44109e0dfa7405dc763bea63374476.jpeg"

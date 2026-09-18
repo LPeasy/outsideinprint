@@ -3,6 +3,7 @@ title: "The ROI of Caring"
 date: 2025-04-20
 draft: false
 slug: "the-roi-of-caring"
+collections: ["moral-religious-philosophical-essays"]
 section_label: "Essay"
 subtitle: "A logical case for why giving a damn makes everything better"
 featured_image: "/images/medium/the-roi-of-caring/3d9c7e2c965f02f4865656d236d78d7ee750001dab77cedab7e8cb3c437e2639.jpeg"

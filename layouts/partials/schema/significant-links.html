@@ -17,7 +17,7 @@
 {{- else if eq $meta.route.name "collection" -}}
   {{- $items := slice -}}
   {{- with $meta.collection -}}
-    {{- $items = partial "collections/resolve-items.html" (dict "collection" .) -}}
+    {{- $items = partial "collections/resolve-items.html" (dict "collection" . "publishedOnly" true) -}}
   {{- end -}}
   {{- range (slice "/collections" "/library") -}}
     {{- with site.GetPage . -}}

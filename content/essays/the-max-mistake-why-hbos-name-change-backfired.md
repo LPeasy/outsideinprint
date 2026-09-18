@@ -3,6 +3,7 @@ title: "The Max Mistake: Why HBO’s Name Change Backfired"
 date: 2025-06-02
 draft: false
 slug: "the-max-mistake-why-hbos-name-change-backfired"
+collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
 subtitle: "A corporate identity crisis in real time, brought to you by the people who forgot what “Home Box Office” really means"
 featured_image: "/images/medium/the-max-mistake-why-hbos-name-change-backfired/9d6aa7e31089220539d97cc526c31b6cae1ae73620269399d1bf1dee8e24fdb1.jpeg"

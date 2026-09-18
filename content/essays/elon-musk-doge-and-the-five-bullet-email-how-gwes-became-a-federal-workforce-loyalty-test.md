@@ -3,6 +3,7 @@ title: "Elon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Wo
 date: 2025-02-25
 draft: false
 slug: "elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Musk’s Management Tactics Hit the Federal Workforce"
 featured_image: "/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test/2d433a21e7918178f206a92811e962715a2dbeadd26881223a179ff09b346b67.jpeg"

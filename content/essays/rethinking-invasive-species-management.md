@@ -3,6 +3,7 @@ title: "Rethinking Invasive Species Management in Florida"
 date: 2025-05-15
 draft: false
 slug: "rethinking-invasive-species-management"
+collections: ["risk-uncertainty"]
 section_label: "Essay"
 subtitle: "Why Florida keeps spending millions managing invasives without much to show for it"
 featured_image: "essays/rethinking-invasive-species-management/hero-python"

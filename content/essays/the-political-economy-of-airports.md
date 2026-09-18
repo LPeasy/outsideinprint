@@ -3,6 +3,7 @@ title: "The Political Economy of Airports"
 date: 2025-01-27
 draft: false
 slug: "the-political-economy-of-airports"
+collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
 subtitle: "Why is everything so expensive??"
 featured_image: "/images/medium/the-political-economy-of-airports/03d81147c17634b1515b9c1a51b387d29d7c88fda18a07195e6bd5aa69fd593c.jpeg"

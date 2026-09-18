@@ -201,7 +201,7 @@ test("article aftermatter keeps its publication record and selects one controlle
   const studioSamplePartial = articleSingle.indexOf('partial "article/studio-sample-exit.html" (dict "page" $ "sample" . "hideCTA" (not (not $featuredContinuation)))', studioSampleGate);
   const standardExitBranch = articleSingle.indexOf("{{ else }}", studioSamplePartial);
   const newsletterPrompt = articleSingle.indexOf('partial "newsletter_prompt.html"', publicationRecord);
-  const continuation = articleSingle.indexOf('partial "collections/reading-path.html" .', newsletterPrompt);
+  const continuation = articleSingle.indexOf('partial "collections/reading-path.html" .', aftermatter);
   const newsletterExit = articleSingle.indexOf('"class" "newsletter-signup--article-exit"', continuation);
   const exitLinks = articleSingle.indexOf('"class" "journey-links--article-exit"', newsletterExit);
   assert.ok(byline >= 0);
@@ -213,7 +213,7 @@ test("article aftermatter keeps its publication record and selects one controlle
   assert.ok(studioSamplePartial > studioSampleGate);
   assert.ok(standardExitBranch > studioSamplePartial);
   assert.ok(newsletterPrompt > standardExitBranch);
-  assert.ok(continuation > newsletterPrompt);
+  assert.ok(continuation > aftermatter && continuation < publicationRecord);
   assert.ok(newsletterExit > continuation);
   assert.ok(exitLinks > newsletterExit);
 
@@ -231,7 +231,7 @@ test("article aftermatter keeps its publication record and selects one controlle
   assert.match(articleSingle, /"class" "journey-links--article-exit"/);
   assert.match(
     articleSingle,
-    /\{\{ with \.Params\.studio_sample \}\}\s*\{\{ partial "article\/studio-sample-exit\.html" \(dict "page" \$ "sample" \. "hideCTA" \(not \(not \$featuredContinuation\)\)\) \}\}\s*\{\{ with \$featuredContinuation \}\}\s*\{\{ partial "article\/featured-continuation\.html"[\s\S]*?\{\{ end \}\}\s*\{\{ else \}\}[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?partial "collections\/reading-path\.html"[\s\S]*?partial "newsletter_signup\.html"[\s\S]*?partial "journey_links\.html"[\s\S]*?\{\{ end \}\}/
+    /\{\{ with \.Params\.studio_sample \}\}\s*\{\{ partial "article\/studio-sample-exit\.html" \(dict "page" \$ "sample" \. "hideCTA" \(not \(not \$featuredContinuation\)\)\) \}\}\s*\{\{ with \$featuredContinuation \}\}\s*\{\{ partial "article\/featured-continuation\.html"[\s\S]*?\{\{ end \}\}\s*\{\{ else \}\}[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?partial "newsletter_signup\.html"[\s\S]*?partial "journey_links\.html"[\s\S]*?\{\{ end \}\}/
   );
 
   assert.match(studioSampleExit, /<aside class="studio-sample-exit" aria-label="Studio sample">/);

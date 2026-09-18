@@ -3,6 +3,7 @@ title: "Biter"
 date: 2025-05-09
 draft: false
 slug: "biter-the-slang-word-that-hits"
+collections: ["moral-religious-philosophical-essays"]
 section_label: "Essay"
 subtitle: "A word to describe artistic thieves"
 featured_image: "essays/biter-the-slang-word-that-hits/hero-cassette"

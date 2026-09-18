@@ -3,6 +3,7 @@ title: "Life Is a Bull Market"
 date: 2026-02-16
 draft: false
 slug: "life-is-a-bull-market"
+collections: ["moral-religious-philosophical-essays"]
 section_label: "Essay"
 subtitle: "Why Panic Selling Your Own Life Is a Bad Trade"
 featured_image: "/images/medium/life-is-a-bull-market/df53bd86e1b4ab0886a4b5346bb4fb1d3213d35de23e09436064bf85cca64a77.jpeg"

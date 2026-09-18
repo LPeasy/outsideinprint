@@ -54,14 +54,17 @@ test("collection cleanup adds the household route and keeps memberships intentio
   assert.match(collections, /^\s{4}start_here: the-meter-at-the-curb$/m);
 
   const expectedHousehold = [
+    "1929-2029-americas-century-of-humiliation.md",
     "american-household-debt.md",
     "cpi-report-economic-analysis.md",
     "generation-inflation.md",
     "household-and-individual-wealth-in-america.md",
     "labor-force-participation-trends-in-modern-american-society.md",
+    "let-it-crash-the-opportunity-of-a-lifetime.md",
     "public-vs-private-pay-who-really-earns-more.md",
     "standard-of-living-vs-quality-of-life-what-the-numbers-miss.md",
     "the-national-debt-is-screwing-you-heres-how.md",
+    "the-clock-by-the-door.md",
   ];
   const householdMembers = walk("content/essays").filter((file) => collectionSlugs(read(file)).includes("household-economy-work-and-cost")).map((file) => path.basename(file)).sort();
   assert.deepEqual(householdMembers, expectedHousehold.sort());

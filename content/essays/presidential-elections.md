@@ -3,6 +3,7 @@ title: "Presidential Elections"
 date: 2024-12-09
 draft: false
 slug: "presidential-elections"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "A Circus"
 description: "The Presidential Election as a Circus. Wealth, Policy, and Power in Modern American Society"

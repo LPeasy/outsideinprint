@@ -3,6 +3,7 @@ title: "The Undead State"
 date: 2025-02-16
 draft: false
 slug: "the-undead-state"
+collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "Why Bureaucracy Refuses to Die"
 featured_image: "/images/medium/the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg"

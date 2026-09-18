@@ -92,7 +92,7 @@ test("collection detail template renders a newspaper section front", () => {
     assert.doesNotMatch(collectionSingle, new RegExp(escapeRegex(retiredSnippet)));
   }
 
-  assert.doesNotMatch(collectionSingle, /\$definition\.description/);
+  assert.match(collectionSingle, /\$definition\.description[\s\S]*?collection-section__description/);
 });
 
 test("collections index renders a ruled broadsheet directory", () => {

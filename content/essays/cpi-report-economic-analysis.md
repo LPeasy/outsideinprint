@@ -4,7 +4,7 @@ date: 2024-12-11
 draft: false
 slug: "cpi-report-economic-analysis"
 section_label: "Essay"
-collections: ["household-economy-work-and-cost"]
+collections: ["money-banking-inflation","household-economy-work-and-cost"]
 subtitle: "December 11th, 2024"
 description: "Inflation in Transition: A Macroeconomic Analysis of the November 2024 CPI Report. I. Introduction: The Complex Landscape of Inflation"
 version: "1.1"

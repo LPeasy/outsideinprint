@@ -3,6 +3,7 @@ title: "Let It Crash: The Opportunity of a Lifetime"
 date: 2025-04-16
 draft: false
 slug: "let-it-crash-the-opportunity-of-a-lifetime"
+collections: ["household-economy-work-and-cost"]
 section_label: "Essay"
 subtitle: "If your income is stable and your balance sheet is clean, a downturn can change the price of ownership."
 featured_image: "/images/medium/let-it-crash-the-opportunity-of-a-lifetime/87fb7d2db379f7a2f8248d860fc4efb83cd681423ba62f2fb45e6f9a98eba8cf.jpeg"
