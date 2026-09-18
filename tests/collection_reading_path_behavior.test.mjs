@@ -11,7 +11,7 @@ const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hug
 const progressScript = fs.readFileSync("layouts/partials/collections/reading-progress-script.html", "utf8")
   .replace(/^\s*<script>\s*/, "").replace(/\s*<\/script>\s*$/, "");
 
-function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false, landings = {}, collectionShell = false, outputRoute, indexTemplate, section = "essays" } = {}) {
+function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false, landings = {}, collectionShell = false, collectionDirectory = false, outputRoute, indexTemplate, section = "essays" } = {}) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-reading-path-"));
   t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
@@ -53,6 +53,12 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
     write("layouts/partials/discovery/page-list-item.html", '<a class="fixture-collection-item" href="{{ .page.RelPermalink }}">{{ .page.Title }}</a>');
     write("layouts/partials/discovery/collection-card.html", '<a class="fixture-related-collection" href="{{ .entry.page.RelPermalink }}">{{ .entry.collection.title }}</a>');
     write("layouts/partials/journey_links.html", '');
+  }
+  if (collectionDirectory) {
+    write("layouts/_default/baseof.html", '{{ block "main" . }}{{ end }}');
+    write("layouts/collections/list.html", fs.readFileSync("layouts/collections/list.html", "utf8"));
+    write("layouts/partials/discovery/collection-card.html", fs.readFileSync("layouts/partials/discovery/collection-card.html", "utf8"));
+    write("content/collections/_index.md", '---\ntitle: Collections\n---\n');
   }
   const definitions = collections || [
     { slug: "alpha", title: "Alpha collection", description: "A focused collection description.", kind: "topic", weight: 1, start_here: startHere, public: true, force_public: true, explicit_only: true },
@@ -212,6 +218,64 @@ test("public listing and detail share eligible membership while raw resolver ret
   for (const slug of Object.keys(entries)) assert.doesNotMatch(html, new RegExp(`/essays/${slug}/`));
   const privateList = renderPath(t, { landings: { beta: { draft: true } }, indexTemplate: '{{ range partial "collections/get-public-entries.html" . }}{{ .collection.slug }};{{ end }}' });
   assert.equal(privateList.trim(), "alpha;");
+});
+
+function directoryCounts(html) {
+  const summary = html.match(/class="collections-broadsheet__summary">(\d+) public collections &middot; (\d+) published pieces/);
+  assert.ok(summary, "the actual directory summary must render");
+  const groups = Object.fromEntries([...html.matchAll(/<section[^>]*aria-labelledby="collections-group-([^"]+)">([\s\S]*?)<\/section>/g)].map(([, kind, section]) => {
+    const meta = section.match(/class="collections-broadsheet__section-meta">(\d+) collections &middot; (\d+) pieces/);
+    assert.ok(meta, `${kind} directory totals must render`);
+    return [kind, { collections: Number(meta[1]), pieces: Number(meta[2]) }];
+  }));
+  const cards = Object.fromEntries([...html.matchAll(/<article class="collection-record">([\s\S]*?)<\/article>/g)].map(([, card]) => {
+    const slug = card.match(/data-analytics-collection="([^"]+)"/)?.[1];
+    const count = card.match(/<span>(\d+) pieces<\/span>/)?.[1];
+    assert.ok(slug && count, "the actual collection card must retain its member count");
+    return [slug, Number(count)];
+  }));
+  return { collections: Number(summary[1]), pieces: Number(summary[2]), groups, cards };
+}
+
+test("collection directory deduplicates overall and per-kind pieces without changing individual card counts", (t) => {
+  const collections = ["alpha", "beta", "gamma", "delta"].map((slug, index) => ({
+    slug, title: slug, kind: index < 2 ? "topic" : "series", weight: index,
+    public: true, force_public: true, explicit_only: true,
+  }));
+  const memberships = { a: ["alpha", "beta"], b: ["alpha", "gamma"], c: ["gamma", "delta"], d: ["beta"], e: ["delta"] };
+  const entries = Object.fromEntries(Object.entries(memberships).map(([slug, memberOf]) => [slug, {
+    title: "Shared display title", date: "2020-01-01", collections: memberOf,
+    ...(slug === "a" ? { url: "/canonical/article-a/" } : {}),
+  }]));
+  const html = renderPath(t, { collections, entries, collectionDirectory: true, outputRoute: "collections" });
+  assert.deepEqual(directoryCounts(html), {
+    collections: 4, pieces: 5,
+    groups: { series: { collections: 2, pieces: 3 }, topic: { collections: 2, pieces: 3 } },
+    cards: { alpha: 2, beta: 2, gamma: 2, delta: 2 },
+  });
+});
+
+test("collection directory totals exclude unpublished members and ineligible collection entries", (t) => {
+  const unavailableLandings = {
+    missing: null, draft: { draft: true }, future: { date: "2030-01-01" },
+    queued: { publishDate: "2030-01-01" }, expired: { expiryDate: "2020-08-01" },
+  };
+  const collections = ["alpha", "beta", "private", "small", ...Object.keys(unavailableLandings)].map((slug) => ({
+    slug, title: slug, kind: slug === "beta" ? "series" : "topic", public: slug !== "private",
+    force_public: slug !== "small", min_items: 2, explicit_only: true,
+  }));
+  const entries = Object.fromEntries(["private", "small", ...Object.keys(unavailableLandings), "unassigned"].map((slug) => [slug, {
+    title: slug, date: "2020-01-01", collections: [slug],
+  }]));
+  for (const [slug, metadata] of Object.entries(unavailableLandings)) {
+    if (metadata) entries[`member-${slug}`] = { title: slug, date: "2020-01-01", collections: ["alpha", "beta"], ...metadata };
+  }
+  const html = renderPath(t, { collections, entries, landings: unavailableLandings, collectionDirectory: true, outputRoute: "collections" });
+  assert.deepEqual(directoryCounts(html), {
+    collections: 2, pieces: 3,
+    groups: { series: { collections: 1, pieces: 2 }, topic: { collections: 1, pieces: 3 } },
+    cards: { alpha: 3, beta: 2 },
+  });
 });
 
 test("collection pages preserve curated ordering and newest-first unweighted ordering", (t) => {

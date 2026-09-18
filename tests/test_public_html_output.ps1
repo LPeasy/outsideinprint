@@ -2683,6 +2683,137 @@ foreach ($check in $essayHeroChecks) {
   }
 }
 
+$polishArticleChecks = [ordered]@{
+  'togetherness' = @{ Version = '1.1'; Edition = 'Second web edition'; Date = '2026-07-15' }
+  'what-i-learned-from-writing-100-essays-on-medium-in-2025' = @{ Version = '1.4'; Edition = 'Fifth web edition'; Date = '2025-09-09' }
+  'the-national-flood-insurance-program' = @{ Version = '1.2'; Edition = 'Third web edition'; Date = '2024-12-15' }
+  'who-is-pascal-siakam' = @{ Version = '1.4'; Edition = 'Fifth web edition'; Date = '2025-05-28' }
+  'tiktok-the-trojan-horse-of-global-influence' = @{
+    Version = '2.0'; Edition = 'Third web edition'; Date = '2025-01-23'
+    Teaser = "A 2025 essay weighing TikTok's creative and economic benefits against risks involving data, algorithms, and political influence."
+    Collection = 'geopolitics-trade-global-power'
+  }
+  'metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis' = @{
+    Version = '2.0'; Edition = 'Third web edition'; Date = '2025-02-01'
+    Teaser = "A 2025 essay on Meta's AI expansion, open models, personalized assistants, and whether safety can keep pace with scale."
+    Collection = 'technology-ai-machine-future'
+  }
+}
+$polishArticleBodies = @{}
+$polishLibraryPath = Join-Path $SiteDir 'library/index.json'
+$polishLibraryItems = @()
+if (-not (Test-Path -LiteralPath $polishLibraryPath -PathType Leaf)) {
+  $metadataIssues.Add('public/library/index.json => missing discovery output for article-polish coverage')
+}
+else {
+  $polishLibraryItems = @((Get-Content -LiteralPath $polishLibraryPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable).items)
+}
+foreach ($slug in $polishArticleChecks.Keys) {
+  $relativePath = "public/essays/$slug/index.html"
+  $pagePath = Join-Path $SiteDir "essays/$slug/index.html"
+  if (-not (Test-Path -LiteralPath $pagePath -PathType Leaf)) {
+    $metadataIssues.Add("$relativePath => missing article-polish regression page")
+    continue
+  }
+  $html = Get-Content -LiteralPath $pagePath -Raw -Encoding utf8
+  $expected = $polishArticleChecks[$slug]
+  $polishArticleBodies[$slug] = Get-PieceBodyHtml -Html $html
+  $spans = @([regex]::Matches($html, '(?is)(?<tag><span\b[^>]*>)(?<text>.*?)</span>'))
+  $railValues = @($spans | Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'piece-record-rail__item' } |
+    ForEach-Object { Convert-HtmlFragmentToText -Html $_.Groups['text'].Value })
+  foreach ($value in @($expected.Date, ('V' + $expected.Version), $expected.Edition)) {
+    if ($railValues -cnotcontains $value) {
+      $metadataIssues.Add("$relativePath => publication rail must retain '$value'")
+    }
+  }
+  $revisionValues = @($spans | Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'revision-history__meta' } |
+    ForEach-Object { Convert-HtmlFragmentToText -Html $_.Groups['text'].Value })
+  if ($revisionValues -cnotcontains ('Version ' + $expected.Version + ' | 2026-09-18')) {
+    $metadataIssues.Add("$relativePath => missing the dated revision entry for version $($expected.Version)")
+  }
+  $libraryEntries = @($polishLibraryItems | Where-Object { $_.url -ceq "/essays/$slug/" })
+  if ($libraryEntries.Count -ne 1 -or $libraryEntries[0].date -cne $expected.Date -or $libraryEntries[0].version -cne $expected.Version) {
+    $metadataIssues.Add("$relativePath => Library must retain one canonical entry with the original publication date and updated version")
+  }
+  if ($expected.ContainsKey('Teaser')) {
+    $subtitles = @([regex]::Matches($html, '(?is)(?<tag><p\b[^>]*>)(?<text>.*?)</p>') |
+      Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'subtitle' } |
+      ForEach-Object { Convert-HtmlFragmentToText -Html $_.Groups['text'].Value })
+    if ($subtitles.Count -ne 1 -or $subtitles[0] -cne $expected.Teaser) {
+      $metadataIssues.Add("$relativePath => expected the complete approved archive-context subtitle")
+    }
+    foreach ($meta in @(
+      @{ Attribute = 'name'; Value = 'description' },
+      @{ Attribute = 'property'; Value = 'og:description' },
+      @{ Attribute = 'name'; Value = 'twitter:description' }
+    )) {
+      $description = [Net.WebUtility]::HtmlDecode((Get-MetaContent -Html $html -AttributeName $meta.Attribute -AttributeValue $meta.Value))
+      if ($description -cne $expected.Teaser) {
+        $metadataIssues.Add("$relativePath => $($meta.Value) must use the complete approved description without truncation")
+      }
+    }
+    if ($libraryEntries.Count -eq 1 -and $libraryEntries[0].summary -cne $expected.Teaser) {
+      $metadataIssues.Add("$relativePath => Library discovery must use the complete approved teaser")
+    }
+    $collectionPath = Join-Path $SiteDir "collections/$($expected.Collection)/index.html"
+    $collectionRows = @()
+    if (Test-Path -LiteralPath $collectionPath -PathType Leaf) {
+      $collectionHtml = Get-Content -LiteralPath $collectionPath -Raw -Encoding utf8
+      $collectionRows = @([regex]::Matches($collectionHtml, '(?is)<article\b(?=[^>]*\bitem\b)[^>]*>.*?</article>') | Where-Object {
+        @(Get-OpenTags -Html $_.Value -TagName 'a' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-slug') -ceq $slug }).Count -gt 0
+      })
+    }
+    if ($collectionRows.Count -ne 1 -or -not (Convert-HtmlFragmentToText -Html $collectionRows[0].Value).Contains($expected.Teaser, [StringComparison]::Ordinal)) {
+      $metadataIssues.Add("$relativePath => its collection reading row must display the complete approved teaser")
+    }
+  }
+}
+
+if ($polishArticleBodies.ContainsKey('metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis')) {
+  $bodyText = [regex]::Replace((Convert-HtmlFragmentToText -Html $polishArticleBodies['metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis']), '\s+', ' ')
+  foreach ($phrase in @(
+    'total capital expenditures of $60 to $65 billion for 2025',
+    'This was not an AI-only budget.',
+    'The January 29 earnings materials did not separately identify spending on AI safety and alignment;',
+    'that absence does not establish how much Meta spends on safety research, nor can capital expenditures alone measure it.'
+  )) {
+    if (-not $bodyText.Contains($phrase, [StringComparison]::Ordinal)) { $legacyCleanupIssues.Add("Meta AI => missing the source-bounded correction '$phrase'") }
+  }
+  if ($bodyText.Contains('planned for AI infrastructure in 2025', [StringComparison]::Ordinal)) {
+    $legacyCleanupIssues.Add('Meta AI => retained the superseded AI-only budget claim')
+  }
+}
+if ($polishArticleBodies.ContainsKey('togetherness')) {
+  $bodyText = [regex]::Replace((Convert-HtmlFragmentToText -Html $polishArticleBodies['togetherness']), '\s+', ' ')
+  foreach ($phrase in @('Separated and desperately attached', 'be a part of it', 'receive that which is returned')) {
+    if (-not $bodyText.Contains($phrase, [StringComparison]::Ordinal)) { $legacyCleanupIssues.Add("Togetherness => missing corrected phrase '$phrase'") }
+  }
+  if ($bodyText -match '\bSeperated\b|\brecieve\b|\bbe apart of it\b') {
+    $legacyCleanupIssues.Add('Togetherness => retained one of the three corrected spelling/spacing errors')
+  }
+}
+if ($polishArticleBodies.ContainsKey('what-i-learned-from-writing-100-essays-on-medium-in-2025')) {
+  $bodyHtml = $polishArticleBodies['what-i-learned-from-writing-100-essays-on-medium-in-2025']
+  $chartImages = @(Get-OpenTags -Html $bodyHtml -TagName 'img' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-oip-image-id') -ceq 'medium/6303f2fc0491959708bd7643240384b5bdc2252ce12471c08de09c80e3cd6c83'
+  })
+  if ($chartImages.Count -ne 1 -or (Get-AttributeValue -Tag $chartImages[0] -Name 'alt') -cne 'Average reads by topic for stories with at least 10 views') {
+    $importedMediaIssues.Add('Writing 100 Essays => expected corrected alt text on the original average-reads chart')
+  }
+  $bodyText = Convert-HtmlFragmentToText -Html $bodyHtml
+  if ($bodyText -match '\batleast\b' -or -not $bodyText.Contains('Average reads by topic for stories with at least 10 views. (Other is everything else.)', [StringComparison]::Ordinal)) {
+    $legacyCleanupIssues.Add('Writing 100 Essays => expected the corrected at least caption without changing its wording or figures')
+  }
+}
+if ($polishArticleBodies.ContainsKey('the-national-flood-insurance-program')) {
+  $chartImages = @(Get-OpenTags -Html $polishArticleBodies['the-national-flood-insurance-program'] -TagName 'img' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'src') -ceq '/images/medium/the-national-flood-insurance-program/25e17e40f081ee4becda9817ad98b4bdaeea5632c7d1ca7e560e9ac416c0b676.jpeg'
+  })
+  if ($chartImages.Count -ne 1 -or (Get-AttributeValue -Tag $chartImages[0] -Name 'alt') -cne 'NFIP premiums earned and losses paid from 1998 to 2018, with loss spikes in the years of Hurricanes Katrina, Sandy, and Harvey.') {
+    $importedMediaIssues.Add('National Flood Insurance Program => expected the approved descriptive alt on the original loss chart, not the hero')
+  }
+}
+
 $hboPath = 'public/essays/the-max-mistake-why-hbos-name-change-backfired/index.html'
 if ($targetPageHtml.ContainsKey($hboPath)) {
   $hboBody = [regex]::Match(
@@ -2741,7 +2872,7 @@ $recoveredImageSequences = [ordered]@{
     @{ Alt = 'Photo by Markus Spiske on Unsplash'; File = '60a77f1af32af2f92c0ca05a3a44265333994130440334bc1a93181ac6438314.jpeg' }
   )
   'who-is-pascal-siakam' = @(
-    @{ Alt = ''; File = 'd4f3b8c59285252bb4007663892e623eba03ae3ed49b6c61eb9b57fcc5106af5.jpeg' },
+    @{ Alt = 'Map of Africa with Cameroon highlighted in red.'; File = 'd4f3b8c59285252bb4007663892e623eba03ae3ed49b6c61eb9b57fcc5106af5.jpeg' },
     @{ Alt = ''; File = 'd7666f62aa210ece447ba1ba241625a6f3a8438bd3d17d458e8ad39b8628a04f.jpeg' },
     @{ Alt = ''; File = 'dd9cc428ee11261c9f6c53472a19960aa623c76faf9e816e2a672b661e1bc2ad.jpeg' },
     @{ Alt = ''; File = 'e33383ae1ff9d63b790c6ad072c7d52c4b999c26c27f997e0d31ad63d4531f9d.jpeg' },
@@ -5991,6 +6122,75 @@ foreach ($articlePath in @(
 # Reuse Hugo's validated source inventory so expected membership and order come
 # from real front matter, publication rules, and the existing item resolver.
 $collectionInventory = & (Join-Path $PSScriptRoot 'test_collection_organization_contract.ps1') -PassThru
+$directoryHtml = [string]$targetPageHtml['public/collections/index.html']
+$directoryDefinitions = @($collectionInventory.collections | Where-Object { $collectionInventory.public_collection_slugs -ccontains $_.slug })
+$directoryAllPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+$directoryKindPaths = @{
+  series = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+  topic = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+}
+$directoryKindCounts = @{ series = 0; topic = 0 }
+$directoryMemberCounts = @{}
+foreach ($definition in $directoryDefinitions) {
+  $slug = [string]$definition.slug
+  $kind = if ($definition.ContainsKey('kind') -and $definition.kind) { ([string]$definition.kind).ToLowerInvariant() } else { 'topic' }
+  $publishedMembers = @($collectionInventory.members[$slug] | Where-Object { $_.published })
+  $directoryMemberCounts[$slug] = $publishedMembers.Count
+  $directoryKindCounts[$kind]++
+  foreach ($member in $publishedMembers) {
+    [void]$directoryAllPaths.Add([string]$member.url)
+    [void]$directoryKindPaths[$kind].Add([string]$member.url)
+  }
+}
+$directorySummary = @([regex]::Matches($directoryHtml, '(?is)(?<tag><p\b[^>]*>)(?<text>.*?)</p>') |
+  Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'collections-broadsheet__summary' } |
+  ForEach-Object { Convert-HtmlFragmentToText -Html $_.Groups['text'].Value })
+$expectedSummary = "$($directoryDefinitions.Count) public collections · $($directoryAllPaths.Count) published pieces"
+if ($directorySummary.Count -ne 1 -or $directorySummary[0] -cne $expectedSummary) {
+  $uxIssues.Add("Collections directory => expected unique canonical published destinations across eligible public collections: '$expectedSummary'")
+}
+$directoryGroups = @([regex]::Matches($directoryHtml, '(?is)(?<tag><section\b(?=[^>]*collections-group-(?:series|topic))[^>]*>)(?<body>.*?)</section>'))
+foreach ($kind in @('series', 'topic')) {
+  $groups = @($directoryGroups | Where-Object { (Get-AttributeValue -Tag $_.Groups['tag'].Value -Name 'aria-labelledby') -ceq "collections-group-$kind" })
+  if ($directoryKindCounts[$kind] -eq 0) {
+    if ($groups.Count -gt 0) { $uxIssues.Add("Collections directory => empty $kind group must remain omitted") }
+    continue
+  }
+  if ($groups.Count -ne 1) {
+    $uxIssues.Add("Collections directory => expected exactly one populated $kind group")
+    continue
+  }
+  $groupMeta = @([regex]::Matches($groups[0].Groups['body'].Value, '(?is)(?<tag><p\b[^>]*>)(?<text>.*?)</p>') |
+    Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'collections-broadsheet__section-meta' } |
+    ForEach-Object { Convert-HtmlFragmentToText -Html $_.Groups['text'].Value })
+  $expectedMeta = "$($directoryKindCounts[$kind]) collections · $($directoryKindPaths[$kind].Count) pieces"
+  if ($groupMeta.Count -ne 1 -or $groupMeta[0] -cne $expectedMeta) {
+    $uxIssues.Add("Collections directory => $kind count must deduplicate canonical destinations within that kind: '$expectedMeta'")
+  }
+}
+$directoryCards = @([regex]::Matches($directoryHtml, '(?is)(?<tag><article\b[^>]*>)(?<body>.*?)</article>') |
+  Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'collection-record' })
+$directoryCardSlugs = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+foreach ($card in $directoryCards) {
+  $primaryLinks = @(Get-OpenTags -Html $card.Value -TagName 'a' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collections_directory'
+  })
+  if ($primaryLinks.Count -ne 1) {
+    $uxIssues.Add('Collections directory => each card must retain exactly one tracked collection destination')
+    continue
+  }
+  $slug = [string](Get-AttributeValue -Tag $primaryLinks[0] -Name 'data-analytics-collection')
+  if (-not $directoryMemberCounts.ContainsKey($slug) -or -not $directoryCardSlugs.Add($slug)) {
+    $uxIssues.Add("Collections directory => unexpected, unavailable, or repeated collection card '$slug'")
+    continue
+  }
+  if ($card.Value -notmatch ('<span\b[^>]*>' + $directoryMemberCounts[$slug] + ' pieces</span>')) {
+    $uxIssues.Add("Collections directory => '$slug' card must preserve its own $($directoryMemberCounts[$slug]) published-member count")
+  }
+}
+if ($directoryCardSlugs.Count -ne $directoryDefinitions.Count) {
+  $uxIssues.Add('Collections directory => visible cards must match the complete eligible public collection inventory')
+}
 $standardCollectionDefinitions = @($collectionInventory.collections | Where-Object { $_.public -and $_.slug -cne 'bobs-almanack' })
 if ($standardCollectionDefinitions.Count -ne 16) {
   $uxIssues.Add("Collection organization => expected 16 public standard collection definitions, found $($standardCollectionDefinitions.Count)")

@@ -11,9 +11,12 @@ featured_image: "/images/medium/who-is-pascal-siakam/fc07487bf85147720fa1d0b703e
 featured_image_caption: "Pascal Siakam | Source: Basketball Wiki"
 featured_image_alt: "Pascal Siakam"
 description: "Pascal Siakam's path from Cameroon to NBA champion and Pacers playoff leader, told through career records and sourced quotes."
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-09-18"
+    note: "Added descriptive alternative text to the Cameroon map; artwork, captions, and article text are unchanged."
   - version: "1.3"
     date: "2026-09-18"
     note: "Repaired malformed Markdown for two body images; images, captions, and article text are unchanged."
@@ -42,7 +45,7 @@ pivotal role in Indiana's 2025 playoff run, ***in his own words.***
 
 #### Pascal Siakam Early Life in Cameroon
 
-![](/images/medium/who-is-pascal-siakam/d4f3b8c59285252bb4007663892e623eba03ae3ed49b6c61eb9b57fcc5106af5.jpeg)
+![Map of Africa with Cameroon highlighted in red.](/images/medium/who-is-pascal-siakam/d4f3b8c59285252bb4007663892e623eba03ae3ed49b6c61eb9b57fcc5106af5.jpeg)
 
 > Cameroon \| Source: Wikimedia Commons
 

@@ -34,7 +34,7 @@
       data-analytics-title="{{ $productTitle }}"
       data-analytics-section="Bookstore"
       data-analytics-path="{{ $samplePath }}"
-    >{{ if eq $page.Params.book_key "2045" }}Read “{{ .Title }}” — a complete story · {{ $readingTime }} minutes{{ else }}Read a free sample <span aria-hidden="true">&darr;</span>{{ end }}</a>
+    >{{ if eq $page.Params.book_key "2045" }}Read “{{ .Title }}” — a complete story · {{ $readingTime }} minutes{{ else }}Read a free sample <span aria-hidden="true">{{ if hasPrefix $sampleURL "#" }}&darr;{{ else }}&rarr;{{ end }}</span>{{ end }}</a>
     {{ if ne $page.Params.book_key "2045" }}<span class="bookstore-sample-link__meta">{{ $readingTime }} min read</span>{{ end }}
   </p>
 {{- end -}}

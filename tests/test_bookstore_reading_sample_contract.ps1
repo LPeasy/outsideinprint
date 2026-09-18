@@ -121,6 +121,68 @@ function Get-SampleDocument {
   }
 }
 
+function Test-SampleLinkDirectionFixtures {
+  # This small Hugo fixture runs only with output checks, after CI installs Hugo.
+  # It renders the real link partial without processing production assets.
+  $hugoPath = $env:OIP_HUGO_BIN
+  if (-not $hugoPath) {
+    $localHugo = Join-Path $repoRoot '.tools/hugo-0.164.0/hugo'
+    $hugoPath = if (Test-Path -LiteralPath $localHugo -PathType Leaf) { $localHugo } else { 'hugo' }
+  }
+  $fixture = Join-Path ([IO.Path]::GetTempPath()) ('oip-sample-directions-' + [guid]::NewGuid().ToString('N'))
+  [void](New-Item -ItemType Directory -Path $fixture)
+  try {
+    foreach ($directory in @('layouts/partials/shop', 'layouts/_default', 'content/shop')) {
+      [void](New-Item -ItemType Directory -Path (Join-Path $fixture $directory) -Force)
+    }
+    [IO.File]::WriteAllText((Join-Path $fixture 'hugo.toml'), 'baseURL = "https://fixture.invalid/"' + "`n" + 'disableKinds = ["taxonomy", "term", "RSS", "sitemap"]')
+    Copy-Item -LiteralPath (Join-Path $repoRoot 'layouts/partials/shop/sample-link.html') -Destination (Join-Path $fixture 'layouts/partials/shop/sample-link.html')
+    [IO.File]::WriteAllText((Join-Path $fixture 'layouts/partials/shop/resolve-reading-sample.html'), '{{ return (site.GetPage "/fixture-sample") }}')
+    [IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/single.html'), '{{ .Title }}')
+    [IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/list.html'), '{{ .Title }}')
+    [IO.File]::WriteAllText((Join-Path $fixture 'content/fixture-sample.md'), "---`ntitle: Fixture story`n---`nA short fixture story.")
+    foreach ($page in @(
+      @{ Slug = 'inline'; Fields = 'book_key: fixture' },
+      @{ Slug = 'standalone'; Fields = "book_key: fixture`nsample_page: /fixture-sample" },
+      @{ Slug = '2045'; Fields = "book_key: `"2045`"`nsample_page: /fixture-sample" }
+    )) {
+      [IO.File]::WriteAllText((Join-Path $fixture "content/shop/$($page.Slug).md"), "---`ntitle: Fixture book`n$($page.Fields)`n---`n")
+    }
+    $cases = @(
+      @{ Name = 'catalog'; Page = 'inline'; Fragment = 'false'; Href = '/shop/inline/#reading-sample'; Arrow = '→'; Path = '/shop/inline/' },
+      @{ Name = 'detail'; Page = 'inline'; Fragment = 'true'; Href = '#reading-sample'; Arrow = '↓'; Path = '/shop/inline/' },
+      @{ Name = 'standalone-override'; Page = 'standalone'; Fragment = 'true'; Href = '/fixture-sample/'; Arrow = '→'; Path = '/fixture-sample/' },
+      @{ Name = '2045-unchanged'; Page = '2045'; Fragment = 'true'; Href = '/fixture-sample/'; Arrow = ''; Path = '/fixture-sample/' }
+    )
+    $template = foreach ($case in $cases) {
+      '<section id="' + $case.Name + '">{{ partial "shop/sample-link.html" (dict "page" (site.GetPage "/shop/' + $case.Page + '") "fragmentOnly" ' + $case.Fragment + ' "sourceSlot" "' + $case.Name + '") }}</section>'
+    }
+    [IO.File]::WriteAllText((Join-Path $fixture 'layouts/index.html'), ($template -join "`n"))
+    $buildOutput = & $hugoPath --source $fixture --panicOnWarning 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "Sample-link fixture failed:`n$($buildOutput -join "`n")" }
+    $html = Get-Content -LiteralPath (Join-Path $fixture 'public/index.html') -Raw -Encoding utf8
+    foreach ($case in $cases) {
+      $region = [regex]::Match($html, '(?s)<section id="' + $case.Name + '">(?<body>.*?)</section>').Groups['body'].Value
+      foreach ($attribute in @(
+        ('href="' + $case.Href + '"'),
+        ('data-analytics-path="' + $case.Path + '"'),
+        ('data-analytics-source-slot="' + $case.Name + '"')
+      )) {
+        Assert-Contains -Text $region -Expected $attribute -Context "Sample-link fixture $($case.Name)"
+      }
+      if ($case.Arrow) {
+        Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($region)) -Expected ('<span aria-hidden="true">' + $case.Arrow + '</span>') -Context "Sample-link fixture $($case.Name)"
+      }
+      elseif ((Get-NormalizedHtmlText -Html $region) -cne 'Read “Fixture story” — a complete story · 1 minutes' -or $region -match 'aria-hidden') {
+        throw 'The 2045 sample override must retain its existing complete-story wording without adding an arrow.'
+      }
+    }
+  }
+  finally {
+    if (Test-Path -LiteralPath $fixture -PathType Container) { Remove-Item -LiteralPath $fixture -Recurse -Force }
+  }
+}
+
 $waterNoteDefinition = '[^1]: **Maya drought caution**. NASA Earth Observatory summarizes research indicating that deforestation may have amplified naturally occurring drought. The source does not support a single-cause explanation of Maya collapse. [NASA Earth Observatory, *Mayan Deforestation and Drought*, February 1, 2012](https://science.nasa.gov/earth/earth-observatory/mayan-deforestation-and-drought-77060/). Accessed 2026-05-29. Use as narrow historical caution, not as a direct analogy to modern U.S. settlement.'
 
 $sampleSpecs = @(
@@ -543,10 +605,12 @@ foreach ($required in @(
   '#reading-sample',
   'data-analytics-event="book_sample_open"',
   'data-analytics-source-slot="{{ $sourceSlot }}"',
-  'Read a free sample'
+  'Read a free sample',
+  '<span aria-hidden="true">{{ if hasPrefix $sampleURL "#" }}&darr;{{ else }}&rarr;{{ end }}</span>'
 )) {
   Assert-Contains -Text $sampleLink -Expected $required -Context 'Reading-sample link'
 }
+Assert-Ordered -Text $sampleLink -First '$sampleURL = .RelPermalink' -Second 'if hasPrefix $sampleURL "#"' -Context 'Sample-link direction after standalone destination override'
 if ($sampleLink -match '(?i)sample\.RelPermalink|href\s*=\s*["''][^"'']*/sample(?:/|\.|["''])') {
   throw 'Reading-sample links must target the product-page fragment, never a sample route.'
 }
@@ -641,6 +705,7 @@ if ($SourceOnly) {
 if (-not (Test-Path -LiteralPath $SiteDir -PathType Container)) {
   throw "Reading-sample output validation requires a built site at $SiteDir."
 }
+Test-SampleLinkDirectionFixtures
 
 $outputPaths = @('index.html', 'shop/index.html') + @($sampleSpecs | ForEach-Object { $_.OutputPath })
 $output = [ordered]@{}
@@ -699,11 +764,19 @@ foreach ($spec in $sampleSpecs) {
   if ([regex]::Matches($catalogHtml, $catalogAnchorPattern).Count -ne 1) {
     throw "Built catalog sample link is missing or duplicated for $($spec.Slug)."
   }
+  $catalogAnchor = [regex]::Match($catalogHtml, $catalogAnchorPattern + '.*?</a>').Value
+  if ([Net.WebUtility]::HtmlDecode($catalogAnchor) -notmatch '<span\b[^>]*aria-hidden="?true"?[^>]*>→</span>') {
+    throw "Built catalog sample link for $($spec.Slug) must use an aria-hidden right arrow for navigation to another page."
+  }
 
   $detailHtml = [string]$output[$spec.OutputPath]
   $detailAnchorPattern = '(?is)<a(?=[^>]*\bhref="?#reading-sample"?)(?=[^>]*data-analytics-event="?book_sample_open"?)(?=[^>]*data-analytics-source-slot="?bookstore_detail_sample"?)(?=[^>]*data-analytics-slug="?' + $slug + '"?)[^>]*>'
   if ([regex]::Matches($detailHtml, $detailAnchorPattern).Count -ne 1) {
     throw "Built detail sample link is missing or duplicated for $($spec.Slug)."
+  }
+  $detailAnchor = [regex]::Match($detailHtml, $detailAnchorPattern + '.*?</a>').Value
+  if ([Net.WebUtility]::HtmlDecode($detailAnchor) -notmatch '<span\b[^>]*aria-hidden="?true"?[^>]*>↓</span>') {
+    throw "Built detail sample link for $($spec.Slug) must retain an aria-hidden down arrow for its same-page fragment."
   }
   if ([regex]::Matches($detailHtml, '\bid="?reading-sample"?(?:\s|>)', 'IgnoreCase').Count -ne 1) {
     throw "Built detail must contain one expanded reading sample for $($spec.Slug)."

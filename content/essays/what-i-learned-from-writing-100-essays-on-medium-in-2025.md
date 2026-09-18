@@ -8,9 +8,12 @@ subtitle: "From zero followers to breakout stories ~ one writer’s honest exper
 featured_image: "medium/85db9a233bbe2b8ce8b37bf2cffb170d82db88760fa0ebb3fb2e14a0e881e798"
 featured_image_alt: "Writing 100 Essays on Medium"
 description: "The internet is noisy with hot takes and thin on verifiable facts. Sometime around December of 2024, I realized that quickly answering a question on the inte..."
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-09-18"
+    note: "Corrected 'at least' in one chart caption and its alternative text; the chart and reported figures are unchanged."
   - version: "1.3"
     date: "2026-09-18"
     note: "Repaired escaped emphasis in three passages and normalized imported quote characters in two chart captions; article wording, figures, and sources are unchanged."
@@ -198,9 +201,9 @@ out."
 > ***Looking at a few broad categories, it became clear which kinds of
 > essays drew the strongest response. For me, it was current events.***
 
-![Average reads by topic for stories with atleast 10 views](oip-image:medium/6303f2fc0491959708bd7643240384b5bdc2252ce12471c08de09c80e3cd6c83)
+![Average reads by topic for stories with at least 10 views](oip-image:medium/6303f2fc0491959708bd7643240384b5bdc2252ce12471c08de09c80e3cd6c83)
 
-*Average reads by topic for stories with atleast 10 views. (Other is everything else.)*
+*Average reads by topic for stories with at least 10 views. (Other is everything else.)*
 
 
 

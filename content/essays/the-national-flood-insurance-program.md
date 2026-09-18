@@ -9,9 +9,12 @@ featured_image: "/images/medium/the-national-flood-insurance-program/a17c72f621f
 featured_image_caption: "Source: Peter G. Peterson Foundation"
 featured_image_alt: "The National Flood Insurance Program"
 description: "A Precarious Future Amid Rising Costs. Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-18"
+    note: "Added descriptive alternative text to the hurricane-loss chart; artwork, captions, and article text are unchanged."
   - version: "1.1"
     date: "2026-04-28"
     note: "Updated April 28, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -39,7 +42,7 @@ The NFIP currently insures 4.7 million properties, with the average insured home
 
 Outdated FEMA flood maps, which determine premiums and risk zones, are a major culprit. These inaccuracies result in underpriced policies that leave the NFIP chronically underfunded. Subsidized premiums for high-risk properties further exacerbate this funding gap, perpetuating the program's reliance on taxpayer bailouts.
 
-![](/images/medium/the-national-flood-insurance-program/25e17e40f081ee4becda9817ad98b4bdaeea5632c7d1ca7e560e9ac416c0b676.jpeg)
+![NFIP premiums earned and losses paid from 1998 to 2018, with loss spikes in the years of Hurricanes Katrina, Sandy, and Harvey.](/images/medium/the-national-flood-insurance-program/25e17e40f081ee4becda9817ad98b4bdaeea5632c7d1ca7e560e9ac416c0b676.jpeg)
 
 Source: Peter G. Peterson Foundation
 

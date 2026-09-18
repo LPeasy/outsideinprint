@@ -4,16 +4,19 @@ date: 2025-02-01
 draft: false
 slug: "metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis"
 section_label: "Essay"
-subtitle: "Mark Zuckerberg’s latest earnings call was more than a routine financial update: it was a declaration of intent. Meta is staking its claim…"
+subtitle: "A 2025 essay on Meta's AI expansion, open models, personalized assistants, and whether safety can keep pace with scale."
 featured_image: "/images/medium/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis/7b4ca45a4df03206d711d7ec13bfaf7fbb948f3b7d170e5723df179e749f1b83.jpeg"
 featured_image_alt: "Meta’s AI Ambitions: The Future of Intelligence or an Alignment Crisis?"
-description: "Mark Zuckerberg’s latest earnings call was more than a routine financial update: it was a declaration of intent. Meta is staking its claim as a leader in ar..."
-version: "1.1"
-edition: "Second web edition"
+description: "A 2025 essay on Meta's AI expansion, open models, personalized assistants, and whether safety can keep pace with scale."
+version: "2.0"
+edition: "Third web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium punctuation and call-to-comment residue were cleaned up; source, metadata, and rendering were checked."
+  - version: "2.0"
+    date: "2026-09-18"
+    note: "Corrected the scope of Meta's 2025 capital-expenditure guidance, clarified source attribution and limits on AI capability and safety claims, and replaced truncated discovery copy. The original 2025 publication frame is preserved."
 pdf: "/pdfs/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis.pdf"
 featured: false
 
@@ -22,7 +25,7 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis-3b932edd509e"
 ---
 
-Mark Zuckerberg's latest earnings call was more than a routine financial update: it was a declaration of intent. Meta is staking its claim as a leader in artificial intelligence, with ambitions in open-source AI and AI-powered infrastructure that could redefine the tech landscape. The announcements covered ambitious goals: a personalized AI assistant reaching a billion users, the development of Llama 4 as the world's leading open-source AI model, AI-powered software engineers capable of mid-level coding, and an AI infrastructure buildout that rivals entire city grids in power consumption.
+Mark Zuckerberg's [January 29, 2025 earnings call](https://s21.q4cdn.com/399680738/files/doc_financials/2024/q4/META-Q4-2024-Earnings-Call-Transcript.pdf) was more than a routine financial update: it was a declaration of intent. Meta is staking its claim as a leader in artificial intelligence, with ambitions in open-source AI and AI-powered infrastructure that could redefine the tech landscape. The announcements covered ambitious goals: a personalized AI assistant reaching a billion users, the development of Llama 4 as the world's leading open-source AI model, AI-powered software engineers capable of mid-level coding, and an AI infrastructure buildout including a planned data center of at least two gigawatts.
 
 The vision is grand, but the implications are equally vast. If Meta succeeds, it will fundamentally alter how humans interact with AI, how AI is developed, and who controls the future of artificial intelligence. But amid the excitement, one critical question remains unanswered: Is AI alignment keeping pace with AI advancement?
 
@@ -44,14 +47,14 @@ The Llama 4 Revolution: Open-Source AI at the Forefront
 
 Perhaps the most consequential part of Meta's announcement was its commitment to making open-source AI models competitive with, and eventually superior to, closed-source alternatives. Zuckerberg sees Llama 4 as a fundamental shift in AI accessibility:
 
-"I think this very well could be the year when Llama and open source become the most advanced and widely used AI models as well. … Our goal with Llama 3 was to make open source competitive with closed models, and our goal for Llama 4 is to lead."
+In that call, Zuckerberg set a goal of making Llama 4 a leading model, after Llama 3 had aimed to make open models competitive with closed alternatives. This was an ambition for the coming year, not an established result.
 
-Unlike proprietary AI models from OpenAI or Google, Llama 4 will be "natively multimodal" and possess "agentic capabilities," allowing it to process and generate different forms of content while autonomously performing complex tasks.
+He described the planned Llama 4 as natively multimodal and capable of agentic tasks. These were not capabilities unique to open models: [Google had already announced multimodal output and agentic features for Gemini 2.0](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/google-gemini-ai-update-december-2024/) in December 2024. The distinction here is access to the models, not whether closed systems can offer those capabilities.
 
 The open-source AI movement is built on the idea that transparency and accessibility lead to faster innovation and broader benefits. But democratization is not without risks:
 
-- Open-source models, while fostering innovation, have already been exploited for deepfake generation, automated disinformation campaigns, and AI-powered cyberattacks. Meta's Llama 4 could supercharge both the benefits and risks of freely available AI.
-- Unlike closed AI systems, which have strict oversight, Meta cannot easily control how its open-source models are used once released.
+- Open models can be adapted for useful applications or harmful purposes. Meta's Llama 4 could expand both the benefits and misuse risks of widely available AI.
+- Hosted-model providers can restrict access to their services; distributing model weights leaves more control with downstream operators. Neither arrangement guarantees safety. [Meta's own safety argument](https://about.fb.com/news/2024/07/open-source-ai-is-the-path-forward/) emphasizes testing and community scrutiny, while acknowledging intentional and unintentional harms.
 - If Llama 4 surpasses proprietary models, it may accelerate AI development at a pace that outstrips safety research.
 
 While Meta's commitment to open-source AI is a challenge to proprietary tech monopolies, it also raises an uncomfortable question: Is making AI freely available the same as making it safe?
@@ -62,21 +65,21 @@ One of Zuckerberg's boldest predictions was that AI agents capable of mid-level 
 
 "I also expect that 2025 will be the year when it becomes possible to build an AI engineering agent that has coding and problem-solving abilities of around a good mid-level engineer."
 
-AI-assisted coding is not new. Tools like GitHub Copilot already help developers streamline tasks. However, Meta's vision extends beyond assistance: it envisions AI agents that function as independent mid-level engineers, capable of end-to-end problem-solving with minimal human oversight. If this prediction holds true, industries far beyond tech could experience an unprecedented surge in innovation and efficiency. However, the rise of AI engineers also introduces a self-improvement dilemma:
+AI-assisted coding is not new. Tools like GitHub Copilot already help developers streamline tasks. Meta's prediction points toward agents taking on more engineering work, but coding ability alone does not establish reliable end-to-end autonomy or show how much human oversight would be required. If this prediction holds true, industries far beyond tech could experience an unprecedented surge in innovation and efficiency. However, the rise of AI engineers also introduces a self-improvement dilemma:
 
-- AI systems that can write, debug, and optimize code might modify themselves in unexpected ways.
+- AI systems that can write, debug, and optimize code might make unexpected changes if given permission to modify their own software.
 - Once AI becomes proficient at software development, how does Meta ensure it remains under human control rather than optimizing toward goals that deviate from intended behavior?
 
 Is Meta Doing Enough for AI Safety and Alignment?
 
-Meta's investment in AI is staggering, with $60 to $65 billion planned for AI infrastructure in 2025, including data centers and GPUs to power its next-generation models. However, the company has not disclosed how much of this budget is dedicated to AI safety and alignment, leaving an open question about its priorities.
+Meta projected [total capital expenditures of $60 to $65 billion for 2025](https://investor.atmeta.com/investor-news/press-release-details/2025/Meta-Reports-Fourth-Quarter-and-Full-Year-2024-Results/), supporting both generative AI and its core business, with the majority directed toward the core business. This was not an AI-only budget. The January 29 earnings materials did not separately identify spending on AI safety and alignment; that absence does not establish how much Meta spends on safety research, nor can capital expenditures alone measure it.
 
-Meta argues that open-source AI, combined with research-driven safeguards, enhances safety by allowing a wider community to identify and address risks. It has promoted responsible AI development through the AI Alliance and pioneered techniques like instruction backtranslation to improve model behavior. However, the company has not disclosed how much of its AI budget is dedicated to safety, raising questions about whether its safeguards are keeping pace with its ambitions.
+Meta argues that open-source AI, combined with research-driven safeguards, enhances safety by allowing a wider community to identify and address risks. It has promoted responsible AI development through the [AI Alliance](https://ai.meta.com/blog/ai-alliance/) and published [instruction-backtranslation research](https://arxiv.org/abs/2308.06259) aimed at improving instruction following. Those efforts do not by themselves establish whether safeguards will keep pace with more autonomous systems.
 
-To its credit, Meta has invested over $8 billion since 2019 to overhaul privacy and data protection practices, demonstrating a commitment to ethical technology development. However, privacy and alignment are not the same. While these efforts reflect a focus on regulatory compliance and user protection, they do not necessarily address the deeper challenges of AI alignment, such as preventing bias amplification, unintended behaviors, and emergent risks from increasingly autonomous AI models.
+In January 2025, [Meta reported investing over $8 billion since 2019](https://about.fb.com/news/2025/01/meta-8-billion-investment-privacy/) to overhaul privacy and data protection practices. However, privacy and alignment are not the same. While these efforts reflect a focus on regulatory compliance and user protection, they do not necessarily address the deeper challenges of AI alignment, such as preventing bias amplification, unintended behaviors, and emergent risks from increasingly autonomous AI models.
 
 The Alignment Problem: Is AI Advancing Faster Than We Can Control It?
 
-Zuckerberg's vision is compelling: AI assistants tailored to individuals, open-source models leading the industry, AI engineers automating software development, and limitless AI infrastructure. But at no point in his earnings call did he address the critical challenge of alignment: ensuring AI remains beneficial, ethical, and safe. Meta has proven it can build advanced AI systems, but can it control them?
+Zuckerberg's vision is compelling: AI assistants tailored to individuals, open-source models leading the industry, AI engineers automating software development, and vast AI infrastructure. Those ambitions leave a question the earnings discussion does not settle: how will increasingly autonomous systems remain aligned with human intentions? Meta has proven it can build advanced AI systems, but can it control them?
 
-As AI systems become more autonomous, the lines between tools and decision-makers blur. If AI reaches a point where it independently refines its own code, sets objectives, and optimizes without human intervention, will we still be in control? The risk isn't just in AI making errors. It's in AI making decisions that align with its own evolving logic rather than human oversight.
+As AI systems become more autonomous, the lines between tools and decision-makers blur. If AI reaches a point where it independently refines its own code, sets objectives, and optimizes without human intervention, will we remain in control? The risk isn't just in AI making errors. It's in AI making decisions that align with its own evolving logic rather than human oversight.

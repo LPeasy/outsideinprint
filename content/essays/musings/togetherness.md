@@ -16,8 +16,12 @@ description: "A short reflection on presence, connection, and making room for an
 featured_image: "essays/togetherness/hero"
 featured_image_alt: "An anonymous adult sets a blank mask and folded notebook on a porch rail while three adults make room on a long swing held by faded ochre-yellow ropes."
 featured_image_caption: "Room on the Swing."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-09-18"
+    note: "Corrected three spelling and spacing errors; the reflection is otherwise unchanged."
 featured: false
 ---
 
@@ -34,9 +38,9 @@ You want connection, so you reach for a better line, think of a smarter answer, 
 
 Listen closely, and you just might find the other person extremely interesting. Say you don't know what to say when you don't. Silence can leave more room for closeness than a polished reply.
 
-Frequency attunement. It's shared peace and attention. Two people are meant for each other, and they will agree about what comes next. Two people can stop long enough to notice the vibrations. Let the silence sit and just exist. Exist, together. Seperated and desperately attached, or firmly rooted and growing together towards the sun.
+Frequency attunement. It's shared peace and attention. Two people are meant for each other, and they will agree about what comes next. Two people can stop long enough to notice the vibrations. Let the silence sit and just exist. Exist, together. Separated and desperately attached, or firmly rooted and growing together towards the sun.
 
-You can be open and keep a boundary. You can say no. You can be yourself and be apart of it. You can feel the whole or just a part. Shared attention has room for two real people, not one person the other feels on demand. Paradoxically, you can only recieve that which is returned after having already been offered by and given to you ad infinitum.
+You can be open and keep a boundary. You can say no. You can be yourself and be a part of it. You can feel the whole or just a part. Shared attention has room for two real people, not one person the other feels on demand. Paradoxically, you can only receive that which is returned after having already been offered by and given to you ad infinitum.
 
 A calm room won't settle you down. A hard talk is easier than a long walk. Long walks are best kept for good talks, and walks are good. You can't make another person relax, trust you, or meet you where you are. Focus only on the things that you can control, and accept them as they are. 
 
