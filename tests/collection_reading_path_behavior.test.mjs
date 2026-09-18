@@ -4,7 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import vm from "node:vm";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hugo")
   ? path.resolve(".tools/hugo-0.164.0/hugo") : "hugo");
@@ -222,6 +222,135 @@ test("collection pages preserve curated ordering and newest-first unweighted ord
   const newest = renderPath(t, { entries, collectionShell: true, outputRoute: "collections/alpha", startHere: "missing" });
   assert.ok(newest.indexOf('/essays/c/') < newest.indexOf('/essays/b/'));
   assert.ok(newest.indexOf('/essays/b/') < newest.indexOf('/essays/a/'));
+});
+
+const organizationCollection = (values = {}) => ({
+  slug: "alpha", title: "Alpha collection", kind: "topic", public: true,
+  force_public: true, explicit_only: true, start_here: "b", ...values,
+});
+const sectionProbe = '{{ $definition := partial "collections/lookup-definition.html" "alpha" }}{{ $items := partial "collections/resolve-items.html" (dict "collection" $definition "publishedOnly" true) }}{{ range partial "collections/resolve-sections.html" (dict "collection" $definition "items" $items "startHereSlug" $definition.start_here) }}{{ .id }}|{{ .title }}={{ range .items }}{{ .File.BaseFileName }},{{ end }};{{ end }}';
+const relatedProbe = 'related={{ $definition := partial "collections/lookup-definition.html" "alpha" }}{{ range partial "collections/resolve-related.html" (dict "collection" $definition) }}{{ .collection.slug }};{{ end }}';
+
+test("section organization preserves resolved item order and omits the promoted starter and empty sections", (t) => {
+  const html = renderPath(t, {
+    collections: [organizationCollection({ sections: [
+      { id: "starter-only", title: "Starter only", items: ["b"] },
+      { id: "second-topic", title: "Second topic", items: ["c", "a"] },
+      { id: "unavailable", title: "Unavailable", items: ["missing"] },
+    ] })],
+    indexTemplate: sectionProbe,
+  });
+  assert.equal(html.trim(), "second-topic|Second topic=a,c,;");
+});
+
+test("grouped collection pages render published members once while previews omit unavailable groups", (t) => {
+  const entries = Object.fromEntries(Object.entries({
+    draft: { draft: true }, future: { date: "2030-01-01" },
+    queued: { publishDate: "2030-01-01" }, expired: { expiryDate: "2020-08-01" },
+  }).map(([slug, metadata]) => [slug, { title: slug, date: "2020-01-01", collections: ["alpha"], ...metadata }]));
+  const collections = [organizationCollection({ sections: [
+    { id: "later-topic", title: "Later topic", items: ["c", "b"] },
+    { id: "earlier-topic", title: "Earlier topic", items: ["a"] },
+    { id: "preview-only", title: "Preview only", items: Object.keys(entries) },
+  ] })];
+  const probe = renderPath(t, { entries, collections, indexTemplate: sectionProbe });
+  assert.equal(probe.trim(), "later-topic|Later topic=c,;earlier-topic|Earlier topic=a,;");
+  const html = renderPath(t, { entries, collections, collectionShell: true, outputRoute: "collections/alpha" });
+  const paths = [...html.matchAll(/class="fixture-collection-item" href="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(paths, ["/essays/b/", "/essays/c/", "/essays/a/"]);
+  assert.match(html, /3 published pieces/);
+  assert.match(html, /Later topic/);
+  assert.match(html, /Earlier topic/);
+  assert.doesNotMatch(html, /Preview only|preview-only/);
+  for (const slug of Object.keys(entries)) assert.doesNotMatch(html, new RegExp(`/essays/${slug}/`));
+});
+
+test("related collections follow explicit editorial order instead of kind or definition weight", (t) => {
+  const collections = [
+    organizationCollection({ related_collections: ["gamma", "beta"] }),
+    organizationCollection({ slug: "beta", title: "Beta", weight: 1 }),
+    organizationCollection({ slug: "gamma", title: "Gamma", kind: "series", weight: 99 }),
+  ];
+  assert.equal(renderPath(t, { collections, indexTemplate: relatedProbe }).trim(), "related=gamma;beta;");
+  const html = renderPath(t, { collections, collectionShell: true, outputRoute: "collections/alpha" });
+  const paths = [...html.matchAll(/class="fixture-related-collection" href="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(paths, ["/collections/gamma/", "/collections/beta/"]);
+});
+
+test("related collections omit unavailable targets without substituting other public collections", (t) => {
+  for (const scenario of [
+    { definition: { public: false } },
+    { definition: { min_items: 99, force_public: false } },
+    { landing: null }, { landing: { draft: true } }, { landing: { date: "2030-01-01" } },
+    { landing: { publishDate: "2030-01-01" } }, { landing: { expiryDate: "2020-08-01" } },
+  ]) {
+    const collections = [
+      organizationCollection({ related_collections: ["beta", "missing"] }),
+      organizationCollection({ slug: "beta", title: "Beta", ...scenario.definition }),
+      organizationCollection({ slug: "other", title: "Other available collection" }),
+    ];
+    const landings = Object.hasOwn(scenario, "landing") ? { beta: scenario.landing } : {};
+    assert.equal(renderPath(t, { collections, landings, indexTemplate: relatedProbe }).trim(), "related=");
+    const html = renderPath(t, { collections, landings, collectionShell: true, outputRoute: "collections/alpha" });
+    assert.doesNotMatch(html, /Related Collections|fixture-related-collection/);
+  }
+});
+
+test("collections without related metadata do not manufacture recommendations", (t) => {
+  assert.equal(renderPath(t, { indexTemplate: relatedProbe }).trim(), "related=");
+});
+
+test("source organization validation rejects incomplete or invalid assignments and related maps", (t) => {
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-organization-contract-"));
+  t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(fixture, "data"));
+  fs.mkdirSync(path.join(fixture, "content", "essays"), { recursive: true });
+  const definitions = [
+    organizationCollection({ related_collections: ["beta", "gamma"], sections: [
+      { id: "first", title: "First", items: ["a", "b"] },
+      { id: "scheduled", title: "Scheduled", items: ["queued", "expired"] },
+    ] }),
+    organizationCollection({ slug: "beta", related_collections: ["alpha", "gamma"] }),
+    organizationCollection({ slug: "gamma", related_collections: ["alpha", "beta"] }),
+  ];
+  for (const [slug, overrides] of Object.entries({
+    a: {}, b: {}, queued: { publishDate: "2099-01-01" }, expired: { expiryDate: "2020-01-02" }, outsider: { collections: ["beta"] }, draft: { draft: true },
+  })) {
+    const metadata = { title: slug, date: "2020-01-01", collections: ["alpha"], ...overrides };
+    fs.writeFileSync(path.join(fixture, "content", "essays", `${slug}.md`), `${JSON.stringify(metadata)}\n\nFixture body.\n`);
+  }
+  const run = (collections) => {
+    // JSON is valid YAML; use Hugo's parser through the source validator.
+    fs.writeFileSync(path.join(fixture, "data", "collections.yaml"), JSON.stringify({ collections }));
+    const result = spawnSync(process.env.OIP_PWSH_BIN || "pwsh", [
+      "-NoLogo", "-NoProfile", "-File", path.resolve("tests/test_collection_organization_contract.ps1"),
+      "-Root", fixture, "-HugoPath", hugo,
+    ], { encoding: "utf8" });
+    assert.ifError(result.error);
+    return { status: result.status, output: `${result.stdout}\n${result.stderr}`.replace(/\u001b\[[0-9;]*m/g, "").replace(/\r?\n\s*\|/g, " ").replace(/\s+/g, " ") };
+  };
+  const valid = run(definitions);
+  assert.equal(valid.status, 0, valid.output);
+  for (const [label, mutate, expected] of [
+    ["duplicate ID", (defs) => { defs[0].sections[1].id = "first"; }, /duplicate section ID/],
+    ["invalid ID", (defs) => { defs[0].sections[0].id = "Bad ID"; }, /invalid section ID/],
+    ["missing title", (defs) => { defs[0].sections[0].title = ""; }, /section title is required/],
+    ["duplicate assignment", (defs) => { defs[0].sections[1].items.push("a"); }, /duplicate section assignment/],
+    ["unknown article", (defs) => { defs[0].sections[0].items.push("missing"); }, /unknown canonical article slug/],
+    ["nonmember", (defs) => { defs[0].sections[0].items.push("outsider"); }, /sections cannot grant membership/],
+    ["omitted queued member", (defs) => { defs[0].sections[1].items = ["expired"]; }, /non-draft member 'queued' has no section assignment/],
+    ["omitted expired member", (defs) => { defs[0].sections[1].items = ["queued"]; }, /non-draft member 'expired' has no section assignment/],
+    ["self relation", (defs) => { defs[0].related_collections = ["alpha", "beta"]; }, /related destination must not be itself/],
+    ["duplicate relation", (defs) => { defs[0].related_collections = ["beta", "beta"]; }, /duplicate related destination/],
+    ["unknown relation", (defs) => { defs[0].related_collections = ["beta", "missing"]; }, /unknown related destination/],
+    ["private relation", (defs) => { defs[2].public = false; delete defs[2].related_collections; }, /private related destination/],
+  ]) {
+    const changed = structuredClone(definitions);
+    mutate(changed);
+    const invalid = run(changed);
+    assert.notEqual(invalid.status, 0, `${label} must fail`);
+    assert.match(invalid.output, expected, label);
+  }
 });
 
 test("standard reading exit retains body, then one continuation, record, and newsletter", (t) => {

@@ -81,6 +81,8 @@ Use these discovery controls deliberately:
 - `collections` for explicit membership in curated reading lanes
 - `collection_weight` when you want controlled ordering inside a collection
 
+When assigning a piece to Civic Institutions and Public Power, Risk, Uncertainty, and Decision-Making, or Technology, AI, and the Machine Future, also choose exactly one subject section for it in that collection's `sections` array in `data/collections.yaml`. Add the canonical article slug to the chosen section's `items`; section choice is central collection data, not a new front-matter field. Every non-draft member needs an assignment, including scheduled articles, expired articles, and the separately promoted Start Here member. Choose the section before marking a draft ready for publication. Missing, duplicate, unknown, or nonmember assignments fail the collection organization contract; there is no generic `More` fallback. Preserve existing article weights and dates: they continue to control order within each section. See [Collections system](collections-system.md#subject-sections-and-related-collections).
+
 If an essay uses a lead image, treat front matter as the canonical source:
 
 - set `featured_image` to the stable ID from `data/image-assets.json`
@@ -100,13 +102,15 @@ If a piece belongs in an existing collection, add explicit `collections` front m
 1. Add it to `data/collections.yaml`.
 2. Create `content/collections/<slug>.md` if it should have a public page.
 3. Add explicit collection membership to the relevant pieces.
-4. Run:
+4. Choose two or three `related_collections` in deliberate reading order for a standard public collection page. If the collection's approved design includes subject sections, map each non-draft member exactly once in its central `sections` definitions. Keep the starter mapped even though it renders separately.
+5. Run:
 
    ```powershell
    .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\audit_collections.ps1
+   .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_collection_organization_contract.ps1
    ```
 
-5. Verify `/collections/`, the collection page, and member pages in a local build.
+6. Verify `/collections/`, the collection page, and member pages in a local build. Related destinations must be explicitly declared and publicly eligible; unavailable links are omitted without automatic replacement.
 
 Essays are the first-class publishing workflow. Reports and working papers can still be published manually and must pass the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces do not use this hard gate unless a specific piece is explicitly treated as public-judgment work.
 
@@ -204,6 +208,7 @@ Before publishing, run the normal local publish gate:
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_collection_organization_contract.ps1
 .\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
@@ -218,6 +223,7 @@ What this gate is meant to catch:
 - forbidden `that matters` phrasing and discouraged adverbial `still` constructions in changed public prose
 - hero/frontmatter conflicts such as placeholder heroes, missing heroes with real early lead images, and duplicate hero/body lead images
 - broken public routes
+- incomplete or invalid subject-section assignments and invalid related-collection references
 - generated HTML regressions
 - CI-only Node/browser regressions remain delegated to GitHub Actions and are not forced through local npm.
 
@@ -234,6 +240,8 @@ There is no separate manual publish step after `main` is updated. `main` is the 
 ## Future-dated publishing
 
 Future-dated essays can be committed to `main` before release. Keep `draft: false`, set `date` to the public article date, set `publishDate` to the intended release time, and leave the production Hugo build as `hugo --gc --minify --panicOnWarning` without `--buildFuture`. Hugo excludes future-dated content from the public build until the release time has passed.
+
+If a queued essay belongs to a collection with subject sections, commit its required section assignment in `data/collections.yaml` with the essay. The organization contract checks non-draft future members before their release date. The public section remains filtered by the existing publication rules, so the assignment does not expose the queued piece early.
 
 Use explicit Eastern-time timestamps for timed releases:
 

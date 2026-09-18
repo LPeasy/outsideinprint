@@ -35,6 +35,10 @@ collections:
     featured: false
     weight: 12
     start_here: colored-glasses-the-lens-of-race
+    related_collections:
+      - moral-religious-philosophical-essays
+      - syd-and-oliver-dialogues
+      - musings
     description: Short logical arguments that test a public claim by following its own premises.
     metadata:
       - label: Format
@@ -59,6 +63,10 @@ collections:
     featured: false
     weight: 13
     start_here: ""
+    related_collections:
+      - the-things-we-say
+      - simple-logic
+      - syd-and-oliver-dialogues
     sort: date_desc
     description: Short source-free reflections on attention, ordinary life, and questions that remain open.
     metadata:
@@ -84,6 +92,9 @@ collections:
     featured: false
     weight: 14
     start_here: i-do-what-i-say
+    related_collections:
+      - musings
+      - simple-logic
     sort: date_desc
     description: Plain personal reflections built around the words we choose and the lives we practice.
     metadata:
@@ -134,6 +145,10 @@ collections:
     featured: true
     weight: 20
     start_here: without-a-word
+    related_collections:
+      - moral-religious-philosophical-essays
+      - simple-logic
+      - household-economy-work-and-cost
     description: A conversational archive of pieces on truth, power, money, obligation, and meaning.
     legacy_path: /syd-and-oliver/
     feed_path: /syd-and-oliver/index.xml
@@ -162,6 +177,9 @@ collections:
     featured: false
     weight: 25
     start_here: jack-stratton-and-the-vulfpeck-model
+    related_collections:
+      - civic-institutions-and-public-power
+      - moral-religious-philosophical-essays
     description: Archival civic biographies of recent public figures, written as restrained record-driven essays for the imprint.
     room_theme: modern-bios-records-archive
     metadata:
@@ -191,6 +209,9 @@ collections:
     featured: false
     weight: 27
     start_here: the-three-body-problem-a-sci-fi-epic-that-redefines-civilizations-place-in-the-universe
+    related_collections:
+      - moral-religious-philosophical-essays
+      - syd-and-oliver-dialogues
     room_theme: lit-review-lamplit-shelf
     description: Reviews and close readings of books and narrative works that stay with theme, structure, and why a story endures.
     metadata:
@@ -216,6 +237,47 @@ collections:
     featured: true
     weight: 30
     start_here: what-is-risk-a-four-part-framework
+    related_collections:
+      - floods-water-built-environment
+      - reported-case-studies
+      - civic-institutions-and-public-power
+    sections:
+      - id: risk-frameworks-decisions
+        title: Risk frameworks and decisions
+        items:
+          - what-is-risk-a-four-part-framework
+          - risk-management-vs-risk-analysis-whats-the-difference
+          - its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events
+          - uncertainty-is-not-a-technical-problem
+          - the-risk-management-buffet
+          - the-scenario-that-ate-the-future
+          - explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go
+          - the-slow-way-is-the-fast-way
+      - id: warnings-safety-public-health
+        title: Warnings, safety, and public health
+        items:
+          - the-bolt-beside-the-gas-tank
+          - the-warning-reached-the-bridge
+          - the-siren-on-the-pole
+          - the-seal-around-the-cap
+          - the-ladder-outside-the-window
+          - the-bell-at-the-crossing-flagship
+          - nothing-to-see-here
+          - the-warning-label-in-the-weeds
+      - id: infrastructure-environmental-risk
+        title: Infrastructure and environmental risk
+        items:
+          - the-map-that-priced-the-fire
+          - the-sunset-date-in-the-code
+          - the-tank-at-the-fence-line
+          - the-sewer-under-the-sidewalk
+          - rethinking-invasive-species-management
+      - id: markets-geopolitical-risk
+        title: Markets and geopolitical risk
+        items:
+          - the-war-premium-at-the-auction
+          - the-strait-that-holds-the-price
+          - the-blockade-has-a-phone-number
     description: Essays about uncertainty, tradeoffs, risk framing, and decision-making under imperfect information.
     room_theme: risk-systems-notebook
     metadata:
@@ -246,6 +308,10 @@ collections:
     featured: true
     weight: 35
     start_here: the-world-is-back-at-the-poker-table
+    related_collections:
+      - technology-ai-machine-future
+      - risk-uncertainty
+      - civic-institutions-and-public-power
     description: Essays on foreign policy, trade, energy chokepoints, strategic technology, and the hard machinery of global power.
     metadata:
       - label: Format
@@ -278,6 +344,10 @@ collections:
     featured: true
     weight: 40
     start_here: what-happened-at-camp-mystic
+    related_collections:
+      - risk-uncertainty
+      - reported-case-studies
+      - civic-institutions-and-public-power
     description: Reporting and essays on flood risk, water systems, riverine disasters, and the places we keep building anyway.
     room_theme: floods-survey-table
     metadata:
@@ -311,6 +381,44 @@ collections:
     featured: true
     weight: 50
     start_here: synthetic-reasoning
+    related_collections:
+      - geopolitics-trade-global-power
+      - civic-institutions-and-public-power
+      - household-economy-work-and-cost
+    sections:
+      - id: ai-capabilities-computing-limits
+        title: AI capabilities and computing limits
+        items:
+          - synthetic-reasoning
+          - altmans-law
+          - deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants
+          - beyond-moores-law
+          - the-death-of-moores-law
+      - id: work-education
+        title: Work and education
+        items:
+          - ai-in-education-is-a-wicked-problem
+          - the-new-meta-economy
+          - the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now
+          - you-cant-outrun-the-calculator
+          - how-american-farm-labor-is-set-to-evolve
+      - id: governance-privacy-data
+        title: Governance, privacy, and data
+        items:
+          - the-model-that-could-not-leave
+          - you-paid-for-that-ct-scan
+          - why-superintelligence-strategy-gets-ai-governance-wrong
+          - vice-president-jd-vance-announces-ai-powered-border-security-plan-in-texas
+          - the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data
+          - metas-ai-ambitions-the-future-of-intelligence-or-an-alignment-crisis
+      - id: energy-physical-infrastructure
+        title: Energy and physical infrastructure
+        items:
+          - the-ash-pond-under-the-cloud
+          - modern-prometheus
+          - smokestack-spreadsheets
+          - the-ai-data-center-wants-its-own-power-plant
+          - a-really-boring-topic
     description: Essays on artificial intelligence, compute, machine systems, and the social future they are dragging into view.
     room_theme: ai-screen-glow-archive
     metadata:
@@ -343,6 +451,10 @@ collections:
     featured: false
     weight: 60
     start_here: in-the-image-of-god
+    related_collections:
+      - syd-and-oliver-dialogues
+      - simple-logic
+      - modern-bios
     description: Essays on moral formation, religion, conscience, and the philosophical habits needed to see clearly.
     room_theme: moral-chapel-library
     metadata:
@@ -375,6 +487,10 @@ collections:
     featured: false
     weight: 70
     start_here: what-happened-at-camp-mystic
+    related_collections:
+      - risk-uncertainty
+      - civic-institutions-and-public-power
+      - floods-water-built-environment
     description: Tightly reported case studies that stay with one event, institution, or failure long enough to learn something durable.
     room_theme: reported-case-studies-evidence-room
     metadata:
@@ -407,6 +523,59 @@ collections:
     featured: false
     weight: 90
     start_here: the-meter-at-the-curb
+    related_collections:
+      - reported-case-studies
+      - risk-uncertainty
+      - geopolitics-trade-global-power
+    sections:
+      - id: public-services-civic-systems
+        title: Public services and civic systems
+        items:
+          - the-meter-at-the-curb
+          - the-little-machine-in-the-glass-case
+          - the-coin-slot-on-the-corner
+          - the-cone-in-the-lane
+          - the-brass-disk-in-the-sidewalk
+          - the-card-in-the-catalog
+          - the-curb-cut-at-the-corner
+          - the-stamp-on-the-meat-flagship
+          - the-mailbox-at-the-edge-of-the-road
+          - the-blue-pool-at-the-memorial
+      - id: courts-rights-federalism
+        title: Courts, rights, and federalism
+        items:
+          - the-mailbox-at-the-clinic-door
+          - can-you-pass-the-pepper-please
+          - 2025-supreme-court-wrap-up
+          - june-27-2025-scotus-set-to-close-its-term-with-major-decisions
+          - is-doge-legal
+          - deference-lost
+          - declaring-equality
+          - why-oberfell-will-not-be-overturned
+          - federalism-in-modern-american-society
+      - id: elections-representation
+        title: Elections and representation
+        items:
+          - the-ballot-list-at-the-mailroom
+          - id-required
+          - when-can-states-draw-race-based-congressional-districts
+          - cuomo-vs-mamdani-nyc-2025
+          - presidential-elections
+          - rational-ignorance-in-the-u-s-presidential-electorate
+      - id: government-oversight-accountability
+        title: Government, oversight, and accountability
+        items:
+          - the-examiners-red-pencil
+          - the-courthouse-that-ate-the-republic
+          - the-text-message-in-the-archive-box
+          - canvas-fails-finals-week
+          - the-factory-in-the-footnote
+          - the-bet-slip-in-the-briefing-room
+          - the-fed-chair-is-not-a-button
+          - elon-musk-doge-and-the-five-bullet-email-how-gwes-became-a-federal-workforce-loyalty-test
+          - the-undead-state
+          - its-hard-to-condemn-what-doge-is-doing
+          - the-structure-of-modern-american-society
     description: Essays on courts, federalism, public institutions, and the exercise of public power.
     metadata:
       - label: Format
@@ -434,6 +603,10 @@ collections:
     featured: false
     weight: 95
     start_here: standard-of-living-vs-quality-of-life-what-the-numbers-miss
+    related_collections:
+      - money-banking-inflation
+      - brands-business-consumer-choice
+      - technology-ai-machine-future
     description: Essays on income, work, prices, debt, compensation, and the economic pressures carried by American households.
     metadata:
       - label: Format
@@ -456,6 +629,9 @@ collections:
     featured: false
     weight: 100
     start_here: why-a-return-to-the-gold-standard-would-break-the-economy
+    related_collections:
+      - household-economy-work-and-cost
+      - civic-institutions-and-public-power
     description: Archive essays on monetary systems, central banks, credit, and inflation.
     metadata:
       - label: Format
@@ -478,6 +654,10 @@ collections:
     featured: false
     weight: 105
     start_here: whos-drinking-all-the-modelo
+    related_collections:
+      - household-economy-work-and-cost
+      - reported-case-studies
+      - technology-ai-machine-future
     description: Business case studies on brands, pricing, distribution, and consumer choice.
     metadata:
       - label: Format

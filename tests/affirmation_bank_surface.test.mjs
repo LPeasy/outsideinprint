@@ -46,13 +46,18 @@ test("The Things We Say alone mounts the canonical affirmation bank", () => {
 
   const startHere = collectionSingle.indexOf("collection-section__lead");
   const bankInclude = collectionSingle.indexOf('partial "collections/affirmation-bank.html"');
-  const contents = collectionSingle.indexOf('collection-section__contents');
+  const jumpLinks = collectionSingle.indexOf('aria-label="Browse reflections and affirmations"');
+  const contents = collectionSingle.indexOf('collection-section__contents"');
   const publishedReflections = collectionSingle.indexOf("Published Reflections", contents);
+  const bankHeading = collectionSingle.indexOf("<h2>Daily affirmations</h2>", publishedReflections);
   const related = collectionSingle.indexOf('collection-section__related', contents);
-  assert.ok(startHere >= 0 && bankInclude > startHere, "bank must follow Start Here");
-  assert.ok(contents > bankInclude, "Published Reflections must follow the bank");
+  assert.ok(jumpLinks >= 0 && jumpLinks < startHere, "native jump links must precede Start Here");
+  assert.ok(startHere >= 0 && contents > startHere, "Published Reflections must follow Start Here");
   assert.ok(publishedReflections > contents, "remaining entries need a visible Published Reflections heading");
-  assert.ok(related > publishedReflections, "Related Collections must follow Published Reflections");
+  assert.ok(bankHeading > publishedReflections && bankInclude > bankHeading, "Daily affirmations and the unchanged bank must follow Published Reflections");
+  assert.ok(related > bankInclude, "Related Collections must follow the bank");
+  assert.match(collectionSingle, /href="#collection-published-reflections-title"/);
+  assert.match(collectionSingle, /href="#the-words-we-say"/);
 
   assert.equal(
     (collectionSingle.match(/partial "collections\/affirmation-bank\.html"/g) || []).length,

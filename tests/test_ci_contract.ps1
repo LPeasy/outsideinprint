@@ -423,6 +423,18 @@ if ($launchWindowStep -notmatch '(?m)^\s*\.\/tests\/test_2045_launch_window\.ps1
   throw "deploy.yml must run the controlled-clock 2045 launch-window contract after building."
 }
 $hugoBuildStepIndex = $buildJobBlock.IndexOf('- name: Build Hugo', [StringComparison]::Ordinal)
+$collectionOrganizationStep = Get-WorkflowStepBlock `
+  -WorkflowName "deploy.yml" `
+  -WorkflowText $buildJobBlock `
+  -StepName "Test Collection Organization Source Contract"
+$collectionOrganizationStepIndex = $buildJobBlock.IndexOf('- name: Test Collection Organization Source Contract', [StringComparison]::Ordinal)
+$verifyToolchainStepIndex = $buildJobBlock.IndexOf('- name: Verify Toolchain', [StringComparison]::Ordinal)
+if ($collectionOrganizationStep -notmatch 'shell: pwsh' -or
+    $collectionOrganizationStep -notmatch '\./tests/test_collection_organization_contract\.ps1' -or
+    $collectionOrganizationStepIndex -le $verifyToolchainStepIndex -or
+    $collectionOrganizationStepIndex -ge $hugoBuildStepIndex) {
+  throw "Collection organization must validate all source members after Hugo setup and before the production build."
+}
 $launchWindowStepIndex = $buildJobBlock.IndexOf('- name: Test 2045 Launch Window', [StringComparison]::Ordinal)
 $removePdfStepIndex = $buildJobBlock.IndexOf('- name: Remove public PDF artifacts', [StringComparison]::Ordinal)
 if ($hugoBuildStepIndex -lt 0 -or $launchWindowStepIndex -le $hugoBuildStepIndex -or $removePdfStepIndex -le $launchWindowStepIndex) {

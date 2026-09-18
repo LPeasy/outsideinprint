@@ -72,7 +72,7 @@ if ($aftermatterIndex -lt 0 -or $readingPathIndex -le $aftermatterIndex -or $rec
 
 $collectionSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
 foreach ($requiredSnippet in @(
-  '<article class="collection-section">',
+  '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">',
   '<h2 id="collection-start-here-title">Start Here</h2>',
   'class="collection-section__ledger"',
   '<ol class="collection-section__items">',

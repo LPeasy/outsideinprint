@@ -56,7 +56,7 @@ test("legacy room_theme metadata remains data-only and no longer drives presenta
 
 test("collection detail template renders a newspaper section front", () => {
   for (const snippet of [
-    '<article class="collection-section">',
+    '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">',
     'class="page-shell page-shell--grid collection-section__header"',
     '<h1>{{ $definition.title }}</h1>',
     'class="collection-section__ledger"',

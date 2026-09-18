@@ -212,6 +212,10 @@ jobs:
           set -euo pipefail
           hugo version
 
+      - name: Test Collection Organization Source Contract
+        shell: pwsh
+        run: ./tests/test_collection_organization_contract.ps1
+
       - name: Build Hugo
         shell: bash
         run: |

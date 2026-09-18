@@ -23,20 +23,33 @@
       {{ end }}
     {{ end }}
 
-    {{ $primaryRelatedCollections := slice }}
-    {{ $secondaryRelatedCollections := slice }}
-    {{ range partial "collections/get-public-entries.html" . }}
-      {{ if ne .collection.slug $definition.slug }}
-        {{ if eq .state.kind $state.kind }}
-          {{ $primaryRelatedCollections = $primaryRelatedCollections | append . }}
-        {{ else }}
-          {{ $secondaryRelatedCollections = $secondaryRelatedCollections | append . }}
+    {{ $hasSections := and $state.public (gt (len ($definition.sections | default (slice))) 0) }}
+    {{ $sections := slice }}
+    {{ if $hasSections }}
+      {{ $promotedSlug := "" }}
+      {{ if $startHere }}{{ $promotedSlug = $startHereSlug }}{{ end }}
+      {{ $sections = partial "collections/resolve-sections.html" (dict "collection" $definition "items" $items "startHereSlug" $promotedSlug) }}
+    {{ end }}
+    {{ $relatedCollections := slice }}
+    {{ if $state.public }}
+      {{ $relatedCollections = partial "collections/resolve-related.html" (dict "collection" $definition) }}
+    {{ else }}
+      {{/* Preserve the private Ledger's existing discovery behavior. */}}
+      {{ $primaryRelatedCollections := slice }}
+      {{ $secondaryRelatedCollections := slice }}
+      {{ range partial "collections/get-public-entries.html" . }}
+        {{ if ne .collection.slug $definition.slug }}
+          {{ if eq .state.kind $state.kind }}
+            {{ $primaryRelatedCollections = $primaryRelatedCollections | append . }}
+          {{ else }}
+            {{ $secondaryRelatedCollections = $secondaryRelatedCollections | append . }}
+          {{ end }}
         {{ end }}
       {{ end }}
+      {{ $relatedCollections = first 3 (append $primaryRelatedCollections $secondaryRelatedCollections) }}
     {{ end }}
-    {{ $relatedCollections := first 3 (append $primaryRelatedCollections $secondaryRelatedCollections) }}
 
-    <article class="collection-section">
+    <article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">
       <header class="page-shell page-shell--grid collection-section__header">
         <h1>{{ $definition.title }}</h1>
         {{ with $definition.description }}<p class="page-intro collection-section__description">{{ . }}</p>{{ end }}
@@ -46,16 +59,23 @@
           {{ range ($definition.metadata | default (slice)) }}
             {{ $label := lower (printf "%v" (.label | default "")) }}
             {{ $value := printf "%v" (.value | default "") }}
-            {{ if and $value (ne $label "lane") }}<li>{{ $value }}</li>{{ end }}
+            {{ if and $value (ne $label "lane") }}<li{{ if $state.public }} class="collection-section__ledger-detail"{{ end }}>{{ $value }}</li>{{ end }}
           {{ end }}
         </ul>
       </header>
+
+      {{ if $isTheThingsWeSay }}
+        <nav class="page-shell page-shell--grid collection-section__jump-links" aria-label="Browse reflections and affirmations">
+          <a href="#collection-published-reflections-title">Published reflections</a>
+          <a href="#the-words-we-say">Daily affirmations</a>
+        </nav>
+      {{ end }}
 
       {{ with $startHere }}
         <section class="page-shell page-shell--grid collection-section__lead" aria-labelledby="collection-start-here-title">
           <div class="collection-section__heading">
             <h2 id="collection-start-here-title">Start Here</h2>
-            <p>Begin here if this is your first visit to the collection.</p>
+            {{ if not $state.public }}<p>Begin here if this is your first visit to the collection.</p>{{ end }}
           </div>
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
@@ -68,14 +88,37 @@
         </section>
       {{ end }}
 
-      {{ if $isTheThingsWeSay }}
-        {{ partial "collections/affirmation-bank.html" . }}
-      {{ end }}
-
+      {{ if $hasSections }}
+        {{ if gt (len $sections) 0 }}
+          <nav class="page-shell page-shell--grid collection-section__jump-links" aria-label="On this page">
+            <span class="collection-section__jump-label">On this page</span>
+            {{ range $sections }}<a href="#section-{{ .id }}">{{ .title }}</a>{{ end }}
+          </nav>
+        {{ end }}
+        {{ range $sections }}
+          <section class="page-shell page-shell--grid collection-section__contents collection-section__subject" aria-labelledby="section-{{ .id }}">
+            <h2 id="section-{{ .id }}" tabindex="-1">{{ .title }}</h2>
+            <ul class="collection-section__items">
+              {{ range .items }}
+                <li class="collection-section__item">
+                  {{ partial "discovery/page-list-item.html" (dict
+                    "page" .
+                    "analyticsEvent" "collection_click"
+                    "analyticsSourceSlot" "collection_page"
+                    "analyticsCollection" $definition.slug
+                    "showCollections" false
+                    "class" "collection-section__record"
+                  ) }}
+                </li>
+              {{ end }}
+            </ul>
+          </section>
+        {{ end }}
+      {{ else }}
       <section class="page-shell page-shell--grid collection-section__contents"{{ if $isTheThingsWeSay }} aria-labelledby="collection-published-reflections-title"{{ else }} aria-label="Collection pieces"{{ end }}>
         {{ if $isTheThingsWeSay }}
           <div class="collection-section__heading collection-section__published-heading">
-            <h2 id="collection-published-reflections-title">Published Reflections</h2>
+            <h2 id="collection-published-reflections-title" tabindex="-1">Published Reflections</h2>
           </div>
         {{ end }}
         {{ if gt (len $items) 0 }}
@@ -104,6 +147,14 @@
           </div>
         {{ end }}
       </section>
+      {{ end }}
+
+      {{ if $isTheThingsWeSay }}
+        <div class="page-shell page-shell--grid collection-section__heading">
+          <h2>Daily affirmations</h2>
+        </div>
+        {{ partial "collections/affirmation-bank.html" . }}
+      {{ end }}
 
       {{ if gt (len $relatedCollections) 0 }}
         <section class="page-shell page-shell--grid collection-section__related" aria-labelledby="related-collections-title">

@@ -50,7 +50,7 @@ test("article single includes the reading-path partial and shared progress scrip
 
 test("collection single promotes Start Here without visible progress hooks", () => {
   for (const snippet of [
-    '<article class="collection-section">',
+    '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">',
     '<h2 id="collection-start-here-title">Start Here</h2>',
     'class="collection-section__ledger"',
     '<ol class="collection-section__items">',
@@ -81,6 +81,11 @@ test("collection single frames the section front, contents, and related terrain 
   ]) {
     assert.match(collectionSingle, new RegExp(escapeRegex(snippet)));
   }
+  assert.match(collectionSingle, /\{\{ if not \$state\.public \}\}<p>Begin here if this is your first visit to the collection\.<\/p>\{\{ end \}\}/);
+  assert.match(collectionSingle, /partial "collections\/resolve-sections\.html"/);
+  assert.match(collectionSingle, /partial "collections\/resolve-related\.html"/);
+  assert.match(collectionSingle, /<h2 id="section-\{\{ \.id \}\}" tabindex="-1">/);
+  assert.match(collectionSingle, /href="#section-\{\{ \.id \}\}"/);
 });
 
 test("reading-path exposes native collection-first continuation and a Library fallback", () => {

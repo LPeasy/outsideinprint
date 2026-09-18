@@ -4475,7 +4475,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/risk-uncertainty/index.html'
-    Pattern = '(?s)collection-section__header.*?<h1>Risk, Uncertainty, and Decision-Making</h1>.*?<li>Essays</li>.*?<li>Risk, uncertainty, and decisions</li>'
+    Pattern = '(?s)collection-section__header.*?<h1>Risk, Uncertainty, and Decision-Making</h1>.*?<li\b[^>]*>Essays</li>.*?<li\b[^>]*>Risk, uncertainty, and decisions</li>'
     Message = 'expected collection detail pages to use the actual collection title and a compact label-free ledger'
   },
   @{
@@ -4498,7 +4498,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/civic-institutions-and-public-power/index.html'
-    Pattern = '(?s)<li>Essays</li>.*?<li>Courts, institutions, and public power</li>'
+    Pattern = '(?s)<li\b[^>]*>Essays</li>.*?<li\b[^>]*>Courts, institutions, and public power</li>'
     Message = 'expected collection detail ledgers to keep metadata values after dropping labels'
   },
   @{
@@ -5780,6 +5780,102 @@ foreach ($articlePath in @(
 
 }
 
+# Reuse Hugo's validated source inventory so expected membership and order come
+# from real front matter, publication rules, and the existing item resolver.
+$collectionInventory = & (Join-Path $PSScriptRoot 'test_collection_organization_contract.ps1') -PassThru
+$standardCollectionDefinitions = @($collectionInventory.collections | Where-Object { $_.public -and $_.slug -cne 'bobs-almanack' })
+if ($standardCollectionDefinitions.Count -ne 16) {
+  $uxIssues.Add("Collection organization => expected 16 public standard collection definitions, found $($standardCollectionDefinitions.Count)")
+}
+foreach ($definition in $standardCollectionDefinitions) {
+  $slug = [string]$definition.slug
+  $relativePath = "public/collections/$slug/index.html"
+  $pagePath = Join-Path $SiteDir "collections/$slug/index.html"
+  if (-not (Test-Path -LiteralPath $pagePath -PathType Leaf)) {
+    $uxIssues.Add("Missing generated standard collection: $relativePath")
+    continue
+  }
+  $html = Get-Content -LiteralPath $pagePath -Raw
+  $publishedMembers = @($collectionInventory.members[$slug] | Where-Object { $_.published })
+  $starter = @($publishedMembers | Where-Object { $_.slug -ceq [string]$definition.start_here })
+  $promotedSlug = if ($starter.Count -gt 0) { [string]$starter[0].slug } else { '' }
+  $expectedSlugs = [System.Collections.Generic.List[string]]::new()
+  if ($promotedSlug) { $expectedSlugs.Add($promotedSlug) }
+  $expectedSections = [System.Collections.Generic.List[object]]::new()
+  if ($definition.ContainsKey('sections')) {
+    foreach ($section in $definition.sections) {
+      $sectionMembers = @($publishedMembers | Where-Object { $_.slug -cne $promotedSlug -and $section.items -ccontains $_.slug })
+      if ($sectionMembers.Count -eq 0) { continue }
+      $expectedSections.Add(@{ id = [string]$section.id; title = [string]$section.title; members = $sectionMembers })
+      foreach ($member in $sectionMembers) { $expectedSlugs.Add([string]$member.slug) }
+    }
+  } else {
+    foreach ($member in $publishedMembers) {
+      if ($member.slug -cne $promotedSlug) { $expectedSlugs.Add([string]$member.slug) }
+    }
+  }
+  $itemLinks = @(Get-OpenTags -Html $html -TagName 'a' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collection_page' -and
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-collection') -ceq $slug
+  })
+  $actualSlugs = @($itemLinks | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'data-analytics-slug' })
+  if (($actualSlugs -join '|') -cne ($expectedSlugs -join '|')) {
+    $uxIssues.Add("$relativePath => expected each published member once in collection/section order, with Start Here promoted; expected [$($expectedSlugs -join ', ')], found [$($actualSlugs -join ', ')]")
+  }
+  if ($html -notmatch ('<li\b[^>]*>' + $publishedMembers.Count + ' published pieces</li>')) {
+    $uxIssues.Add("$relativePath => published count must match the $($publishedMembers.Count) eligible source members")
+  }
+  if ($html.Contains('Begin here if this is your first visit to the collection.', [System.StringComparison]::Ordinal)) {
+    $uxIssues.Add("$relativePath => public collections must omit the redundant generic Start Here sentence")
+  }
+
+  $renderedSections = @([regex]::Matches($html, '(?is)<section\b(?=[^>]*\bclass=(?:"[^"]*\bcollection-section__subject\b[^"]*"|''[^'']*\bcollection-section__subject\b[^'']*''|[^\s>]*\bcollection-section__subject\b[^\s>]*))[^>]*>(?<body>.*?)</section>'))
+  if ($renderedSections.Count -ne $expectedSections.Count) {
+    $uxIssues.Add("$relativePath => expected $($expectedSections.Count) nonempty subject sections, found $($renderedSections.Count)")
+  }
+  for ($sectionIndex = 0; $sectionIndex -lt [Math]::Min($renderedSections.Count, $expectedSections.Count); $sectionIndex++) {
+    $expected = $expectedSections[$sectionIndex]
+    $sectionHtml = $renderedSections[$sectionIndex].Value
+    $heading = [regex]::Match($sectionHtml, '(?is)(?<tag><h2\b[^>]*>)(?<text>.*?)</h2>')
+    $headingID = "section-$($expected.id)"
+    if (-not $heading.Success -or (Get-AttributeValue -Tag $heading.Groups['tag'].Value -Name 'id') -cne $headingID -or
+        (Convert-HtmlFragmentToText -Html $heading.Groups['text'].Value) -cne $expected.title) {
+      $uxIssues.Add("$relativePath => section $($sectionIndex + 1) must have H2 #$headingID titled '$($expected.title)'")
+    }
+    $jumps = @(Get-OpenTags -Html $html -TagName 'a' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq "#$headingID" })
+    if ($jumps.Count -ne 1) { $uxIssues.Add("$relativePath => expected one native jump link to #$headingID") }
+    $sectionSlugs = @(Get-OpenTags -Html $sectionHtml -TagName 'a' | Where-Object {
+      (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collection_page'
+    } | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'data-analytics-slug' })
+    $expectedSectionSlugs = @($expected.members | ForEach-Object { $_.slug })
+    if (($sectionSlugs -join '|') -cne ($expectedSectionSlugs -join '|')) {
+      $uxIssues.Add("$relativePath => #$headingID must contain its exact eligible members in their existing resolved order")
+    }
+    if ($sectionHtml -notmatch '<ul\b[^>]*class=(?:"collection-section__items"|''collection-section__items''|collection-section__items)') {
+      $uxIssues.Add("$relativePath => #$headingID must use an unnumbered list without implying reading sequence")
+    }
+  }
+
+  $expectedRelated = @($definition.related_collections | Where-Object { $collectionInventory.public_collection_slugs -ccontains $_ })
+  $actualRelated = @(Get-OpenTags -Html $html -TagName 'a' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collection_related'
+  } | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'data-analytics-collection' })
+  if (($actualRelated -join '|') -cne ($expectedRelated -join '|')) {
+    $uxIssues.Add("$relativePath => related links must match the declared eligible order [$($expectedRelated -join ', ')], found [$($actualRelated -join ', ')]")
+  }
+}
+
+$almanackCollectionPath = Join-Path $SiteDir 'collections/bobs-almanack/index.html'
+if (Test-Path -LiteralPath $almanackCollectionPath -PathType Leaf) {
+  $almanackHtml = Get-Content -LiteralPath $almanackCollectionPath -Raw
+  $principalIndex = $almanackHtml.IndexOf('almanack-collection__principal', [System.StringComparison]::Ordinal)
+  foreach ($rail in @('almanack-collection__rail--left', 'almanack-collection__rail--right')) {
+    if ($principalIndex -lt 0 -or $almanackHtml.IndexOf($rail, [System.StringComparison]::Ordinal) -le $principalIndex) {
+      $uxIssues.Add("public/collections/bobs-almanack/index.html => principal content must precede $rail in DOM order")
+    }
+  }
+}
+
 $affirmationCollectionPath = 'public/collections/the-things-we-say/index.html'
 if (-not $targetPageHtml.ContainsKey($affirmationCollectionPath)) {
   $uxIssues.Add("Missing generated page required for affirmation-bank coverage: $affirmationCollectionPath")
@@ -5843,11 +5939,19 @@ else {
   }
 
   $startHereIndex = $affirmationCollectionHtml.IndexOf('collection-section__lead', [System.StringComparison]::Ordinal)
-  $bankIndex = $affirmationCollectionHtml.IndexOf('id=the-words-we-say', [System.StringComparison]::Ordinal)
-  $publishedIndex = $affirmationCollectionHtml.IndexOf('collection-published-reflections-title', [System.StringComparison]::Ordinal)
+  $bankIndex = $bankSectionMatch.Index
+  $publishedHeading = [regex]::Match($affirmationCollectionHtml, '<h2\b[^>]*\bid=(?:"collection-published-reflections-title"|''collection-published-reflections-title''|collection-published-reflections-title)[^>]*>', 'IgnoreCase')
+  $publishedIndex = if ($publishedHeading.Success) { $publishedHeading.Index } else { -1 }
+  $jumpIndex = $affirmationCollectionHtml.IndexOf('Browse reflections and affirmations', [System.StringComparison]::Ordinal)
+  $dailyHeading = [regex]::Match($affirmationCollectionHtml, '<h2\b[^>]*>Daily affirmations</h2>', 'IgnoreCase')
   $relatedIndex = $affirmationCollectionHtml.IndexOf('collection-section__related', [System.StringComparison]::Ordinal)
-  if ($startHereIndex -lt 0 -or $bankIndex -le $startHereIndex -or $publishedIndex -le $bankIndex -or ($relatedIndex -ge 0 -and $relatedIndex -le $publishedIndex)) {
-    $uxIssues.Add("$affirmationCollectionPath => expected Start Here, bank, Published Reflections, then Related Collections")
+  if ($jumpIndex -lt 0 -or $startHereIndex -le $jumpIndex -or $publishedIndex -le $startHereIndex -or -not $dailyHeading.Success -or
+      $dailyHeading.Index -le $publishedIndex -or $bankIndex -le $dailyHeading.Index -or ($relatedIndex -ge 0 -and $relatedIndex -le $bankIndex)) {
+    $uxIssues.Add("$affirmationCollectionPath => expected jump links, Start Here, Published Reflections, Daily affirmations, unchanged bank, then Related Collections")
+  }
+  foreach ($target in @('collection-published-reflections-title', 'the-words-we-say')) {
+    $jumpLinks = @(Get-OpenTags -Html $affirmationCollectionHtml -TagName 'a' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq "#$target" })
+    if ($jumpLinks.Count -ne 1) { $uxIssues.Add("$affirmationCollectionPath => expected one native jump link to #$target") }
   }
 }
 

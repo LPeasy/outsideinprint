@@ -8302,6 +8302,56 @@ h2{ margin-top:34px; }
 .collection-section__contents{
   grid-template-columns:minmax(0, 1fr);
 }
+.collection-section__jump-links{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.25rem .8rem;
+}
+.collection-section__jump-label{
+  flex-basis:100%;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.collection-section__jump-links a{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  max-width:100%;
+  padding:.35rem .5rem;
+  color:var(--text-primary);
+  line-height:1.35;
+}
+.collection-section__jump-links a:focus-visible,
+.collection-section__subject h2:focus-visible,
+#collection-published-reflections-title:focus-visible,
+#the-words-we-say:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
+}
+.collection-section__subject h2{
+  margin:0;
+  color:var(--text-primary);
+  font-family:var(--font-display);
+  font-size:1.35rem;
+  line-height:1.25;
+}
+.collection-section__subject h2,
+#collection-published-reflections-title,
+#the-words-we-say{
+  scroll-margin-top:8rem;
+}
+.collection-section--grouped .collection-section__item{
+  counter-increment:none;
+  padding-left:0;
+}
+.collection-section--grouped .collection-section__item::before{
+  content:none;
+}
 .collection-section__heading{
   position:relative;
   padding-top:.85rem;
@@ -8597,6 +8647,7 @@ h2{ margin-top:34px; }
 .almanack-collection__sheet{
   display:grid;
   grid-template-columns:13rem minmax(0, 1fr) 17rem;
+  grid-template-areas:"left principal right";
   gap:1.15rem;
   align-items:start;
   margin-top:1.05rem;
@@ -8604,6 +8655,15 @@ h2{ margin-top:34px; }
 .almanack-collection__rail,
 .almanack-collection__principal{
   min-width:0;
+}
+.almanack-collection__principal{
+  grid-area:principal;
+}
+.almanack-collection__rail--left{
+  grid-area:left;
+}
+.almanack-collection__rail--right{
+  grid-area:right;
 }
 .almanack-collection__signup-link{
   display:inline-flex;
@@ -9994,6 +10054,22 @@ h2{ margin-top:34px; }
   .collection-section__item--entry::after{
     left:1.32rem;
   }
+  .collection-section--public{
+    gap:1.25rem;
+  }
+  .collection-section--public .collection-section__header{
+    padding:.75rem 0;
+  }
+  .collection-section--public .collection-section__header h1{
+    font-size:clamp(1.75rem, 7.5vw, 2rem);
+    line-height:1.08;
+  }
+  .collection-section--public .collection-section__ledger-detail{
+    display:none;
+  }
+  .collection-section--public .collection-section__lead{
+    gap:.5rem;
+  }
   .piece-primary-note{
     padding:.85rem .9rem .8rem;
   }
@@ -11066,6 +11142,7 @@ html[data-theme="dark"] .almanack-footer{
   }
   .almanack-collection__sheet{
     grid-template-columns:1fr;
+    grid-template-areas:"principal" "left" "right";
   }
   .almanack-collection__rail--left,
   .almanack-collection__rail--right{

@@ -20,6 +20,8 @@ test("Almanack archive reuses one newsletter module after its latest preview", (
   const signup = archive.indexOf('partial "newsletter_signup.html"', readIssue);
   const contents = archive.indexOf('class="almanack-collection__contents"', signup);
   assert.ok(principal >= 0 && principal < latest && latest < readIssue && readIssue < signup && signup < contents);
+  assert.ok(principal < archive.indexOf('almanack-collection__rail--left'), "mobile DOM order must place the latest issue before archive marginalia");
+  assert.ok(principal < archive.indexOf('almanack-collection__rail--right'), "issue notes must follow the principal column in DOM order");
   assert.ok(archive.includes('"page" .'));
   assert.ok(archive.includes('"sourceSlot" "almanack_collection_newsletter"'));
   assert.ok(archive.includes(`"anchorID" "${archiveID}"`));
@@ -63,6 +65,8 @@ test("built newsletter archive has one correctly placed signup and a real native
   const signup = html.indexOf(signupSections[0]);
   const contents = html.indexOf("almanack-collection__contents");
   assert.ok(latest < signup && signup < contents);
+  assert.ok(contents < html.indexOf("almanack-collection__rail--left"));
+  assert.ok(contents < html.indexOf("almanack-collection__rail--right"));
   const forms = [...html.matchAll(/<form\b[^>]*>/g)].map((m) => m[0]);
   assert.equal(forms.length, 1);
   assert.equal(attr(forms[0], "action"), "https://buttondown.com/api/emails/embed-subscribe/OutsideInPrint");

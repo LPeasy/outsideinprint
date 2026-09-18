@@ -1,0 +1,18 @@
+{{ $collection := .collection }}
+{{ $publicEntries := partial "collections/get-public-entries.html" site }}
+{{ $related := slice }}
+{{ $seen := slice }}
+
+{{ range ($collection.related_collections | default (slice)) }}
+  {{ $slug := . }}
+  {{ if and (ne $slug $collection.slug) (not (in $seen $slug)) }}
+    {{ range $publicEntries }}
+      {{ if eq .collection.slug $slug }}
+        {{ $related = $related | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $seen = $seen | append $slug }}
+  {{ end }}
+{{ end }}
+
+{{ return $related }}

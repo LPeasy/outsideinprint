@@ -1,0 +1,44 @@
+{{ $collection := .collection }}
+{{ $items := .items | default (slice) }}
+{{ $startHereSlug := .startHereSlug | default "" }}
+{{ $sections := slice }}
+{{ $seenIDs := slice }}
+{{ $assignedSlugs := slice }}
+
+{{ range ($collection.sections | default (slice)) }}
+  {{ $id := .id | default "" }}
+  {{ $title := .title | default "" }}
+  {{ $slugs := .items | default (slice) }}
+  {{ if or (not $id) (not $title) (in $seenIDs $id) }}
+    {{ errorf "Collection %s has an empty or duplicate section ID/title: %s" $collection.slug $id }}
+  {{ end }}
+  {{ $seenIDs = $seenIDs | append $id }}
+  {{ range $slugs }}
+    {{ if in $assignedSlugs . }}
+      {{ errorf "Collection %s assigns %s to more than one section position" $collection.slug . }}
+    {{ end }}
+    {{ $assignedSlugs = $assignedSlugs | append . }}
+  {{ end }}
+
+  {{ $sectionItems := slice }}
+  {{ range $items }}
+    {{ $itemSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
+    {{ if and (in $slugs $itemSlug) (ne $itemSlug $startHereSlug) }}
+      {{ $sectionItems = $sectionItems | append . }}
+    {{ end }}
+  {{ end }}
+  {{ if gt (len $sectionItems) 0 }}
+    {{ $sections = $sections | append (dict "id" $id "title" $title "items" $sectionItems) }}
+  {{ end }}
+{{ end }}
+
+{{ if $collection.sections }}
+  {{ range $items }}
+    {{ $itemSlug := lower (printf "%v" (.Params.slug | default .File.BaseFileName)) }}
+    {{ if not (in $assignedSlugs $itemSlug) }}
+      {{ errorf "Collection %s has an unassigned published member: %s" $collection.slug $itemSlug }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $sections }}

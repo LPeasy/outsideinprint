@@ -123,82 +123,6 @@
         </section>
 
         <div class="almanack-collection__sheet">
-          <aside class="almanack-collection__rail almanack-collection__rail--left" aria-label="Issue marginalia">
-            <section class="almanack-collection__rail-section">
-              <h2>Register</h2>
-              <dl class="almanack-collection__facts">
-                <div>
-                  <dt>Issues</dt>
-                  <dd>{{ $state.count }}</dd>
-                </div>
-                <div>
-                  <dt>Latest</dt>
-                  <dd><time datetime="{{ $latest.Date.Format "2006-01-02" }}">{{ $latest.Date.Format "Jan 2" }}</time></dd>
-                </div>
-                {{ range ($definition.metadata | default (slice)) }}
-                  {{ $label := printf "%v" (.label | default "") }}
-                  {{ $value := printf "%v" (.value | default "") }}
-                  {{ if and $value (or (eq $label "Format") (eq $label "Lane")) }}
-                    <div>
-                      <dt>{{ $label }}</dt>
-                      <dd>{{ $value }}</dd>
-                    </div>
-                  {{ end }}
-                {{ end }}
-              </dl>
-            </section>
-
-            <section class="almanack-collection__rail-section">
-              <h2>Aphorism Slots</h2>
-              <ol class="almanack-collection__aphorisms">
-                {{ with $latest.Params.opening_quote }}<li>{{ . }}</li>{{ end }}
-                {{ with $latest.Params.middle_quote }}<li>{{ . }}</li>{{ end }}
-                {{ with $latest.Params.closing_quote }}<li>{{ . }}</li>{{ end }}
-              </ol>
-            </section>
-
-            {{ if gt (len $onThisDayEvents) 0 }}
-              <section class="almanack-collection__rail-section">
-                <h2>This Day in History</h2>
-                {{ with (index $onThisDay "label") }}<p class="almanack-collection__rail-note">{{ . }}</p>{{ end }}
-                <ol class="almanack-collection__day-list">
-                  {{ range first 2 $onThisDayEvents }}
-                    <li>
-                      <span class="almanack-collection__day-year">{{ .year }}</span>
-                      <span>{{ .text }}</span>
-                      {{ with .source_url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}
-                    </li>
-                  {{ end }}
-                </ol>
-              </section>
-            {{ end }}
-
-            {{ if gt (len $archiveMarginalLinks) 0 }}
-              <nav class="almanack-collection__rail-section" aria-label="From the archive">
-                <h2>From the Archive</h2>
-                <ul class="almanack-collection__see-also">
-                  {{ range first 6 $archiveMarginalLinks }}
-                    <li>
-                      <span>{{ .label }}</span>
-                      <a href="{{ .page.RelPermalink }}">{{ .page.Title }}</a>
-                    </li>
-                  {{ end }}
-                </ul>
-              </nav>
-            {{ end }}
-
-            <nav class="almanack-collection__rail-section" aria-label="Archive signposts">
-              <h2>Signposts</h2>
-              <ul class="almanack-collection__signposts">
-                <li><a href="{{ $latest.RelPermalink }}">Latest issue</a></li>
-                {{ with first 1 $pastIssues }}
-                  {{ range . }}<li><a href="{{ .RelPermalink }}">Previous issue</a></li>{{ end }}
-                {{ end }}
-                <li><a href="{{ "collections/" | relURL }}">All collections</a></li>
-              </ul>
-            </nav>
-          </aside>
-
           <div class="almanack-collection__principal">
             <section class="almanack-collection__latest" aria-labelledby="almanack-collection-latest-title">
               <div class="almanack-collection__latest-rule">
@@ -295,6 +219,82 @@
               </ol>
             </section>
           </div>
+
+          <aside class="almanack-collection__rail almanack-collection__rail--left" aria-label="Issue marginalia">
+            <section class="almanack-collection__rail-section">
+              <h2>Register</h2>
+              <dl class="almanack-collection__facts">
+                <div>
+                  <dt>Issues</dt>
+                  <dd>{{ $state.count }}</dd>
+                </div>
+                <div>
+                  <dt>Latest</dt>
+                  <dd><time datetime="{{ $latest.Date.Format "2006-01-02" }}">{{ $latest.Date.Format "Jan 2" }}</time></dd>
+                </div>
+                {{ range ($definition.metadata | default (slice)) }}
+                  {{ $label := printf "%v" (.label | default "") }}
+                  {{ $value := printf "%v" (.value | default "") }}
+                  {{ if and $value (or (eq $label "Format") (eq $label "Lane")) }}
+                    <div>
+                      <dt>{{ $label }}</dt>
+                      <dd>{{ $value }}</dd>
+                    </div>
+                  {{ end }}
+                {{ end }}
+              </dl>
+            </section>
+
+            <section class="almanack-collection__rail-section">
+              <h2>Aphorism Slots</h2>
+              <ol class="almanack-collection__aphorisms">
+                {{ with $latest.Params.opening_quote }}<li>{{ . }}</li>{{ end }}
+                {{ with $latest.Params.middle_quote }}<li>{{ . }}</li>{{ end }}
+                {{ with $latest.Params.closing_quote }}<li>{{ . }}</li>{{ end }}
+              </ol>
+            </section>
+
+            {{ if gt (len $onThisDayEvents) 0 }}
+              <section class="almanack-collection__rail-section">
+                <h2>This Day in History</h2>
+                {{ with (index $onThisDay "label") }}<p class="almanack-collection__rail-note">{{ . }}</p>{{ end }}
+                <ol class="almanack-collection__day-list">
+                  {{ range first 2 $onThisDayEvents }}
+                    <li>
+                      <span class="almanack-collection__day-year">{{ .year }}</span>
+                      <span>{{ .text }}</span>
+                      {{ with .source_url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}
+                    </li>
+                  {{ end }}
+                </ol>
+              </section>
+            {{ end }}
+
+            {{ if gt (len $archiveMarginalLinks) 0 }}
+              <nav class="almanack-collection__rail-section" aria-label="From the archive">
+                <h2>From the Archive</h2>
+                <ul class="almanack-collection__see-also">
+                  {{ range first 6 $archiveMarginalLinks }}
+                    <li>
+                      <span>{{ .label }}</span>
+                      <a href="{{ .page.RelPermalink }}">{{ .page.Title }}</a>
+                    </li>
+                  {{ end }}
+                </ul>
+              </nav>
+            {{ end }}
+
+            <nav class="almanack-collection__rail-section" aria-label="Archive signposts">
+              <h2>Signposts</h2>
+              <ul class="almanack-collection__signposts">
+                <li><a href="{{ $latest.RelPermalink }}">Latest issue</a></li>
+                {{ with first 1 $pastIssues }}
+                  {{ range . }}<li><a href="{{ .RelPermalink }}">Previous issue</a></li>{{ end }}
+                {{ end }}
+                <li><a href="{{ "collections/" | relURL }}">All collections</a></li>
+              </ul>
+            </nav>
+          </aside>
 
           <aside class="almanack-collection__rail almanack-collection__rail--right" aria-label="Latest issue notes">
             <section class="almanack-collection__rail-section almanack-collection__rail-section--rubric">
