@@ -10296,6 +10296,92 @@ html[data-theme="light"] .section-front::before{
     linear-gradient(180deg, rgba(107,84,60,.10), rgba(107,84,60,0) 12rem),
     repeating-linear-gradient(0deg, rgba(26,23,18,.018) 0, rgba(26,23,18,.018) 1px, transparent 1px, transparent 8px);
 }
+/* Compact article openings only; the homepage and other routes keep their mastheads. */
+@media (max-width:768px){
+  .article-reading-page .wrap{
+    padding-top:14px;
+  }
+  .article-reading-page .masthead--compressed{
+    margin-top:0;
+    margin-bottom:12px;
+  }
+  .article-reading-page .masthead--compressed .masthead-nameplate{
+    padding-top:4px;
+    padding-bottom:0;
+  }
+  .article-reading-page .masthead-nameplate__top-rule{
+    margin-bottom:4px;
+  }
+  .article-reading-page .masthead--compressed .brand-link{
+    width:100%;
+    max-width:calc(100% - 104px);
+  }
+  .article-reading-page .masthead--compressed .title{
+    font-size:clamp(1.25rem, 6.5vw, 1.75rem);
+    letter-spacing:.1em;
+    line-height:1.02;
+  }
+  .article-reading-page .masthead--compressed .subtitle{
+    margin-top:2px;
+    margin-bottom:0;
+    line-height:1.4;
+  }
+  .article-reading-page .masthead--compressed .masthead-nameplate__divider{
+    height:4px;
+    margin:6px 0 4px;
+  }
+  .article-reading-page .masthead--compressed .masthead-theme-toggle{
+    top:8px;
+  }
+  .article-reading-page .masthead--compressed .nav--section-rail{
+    margin-bottom:0;
+    padding-block:0;
+  }
+  .article-reading-page .piece-fleuron{
+    display:none;
+  }
+  .article-reading-page .piece-header-composition{
+    grid-template-columns:minmax(0, 1fr);
+    gap:12px;
+  }
+  .article-reading-page .piece-title-block h1{
+    max-width:none;
+    margin-bottom:6px;
+    font-size:clamp(1.875rem, 4.2vw, 2rem);
+    line-height:1.12;
+  }
+  .article-reading-page .piece-byline{
+    margin-top:0;
+    margin-bottom:8px;
+  }
+  .article-reading-page .piece-title-block .subtitle{
+    margin-bottom:0;
+  }
+  .article-reading-page .piece-media-plate--side{
+    width:100%;
+    max-width:min(100%, 20rem);
+    justify-self:center;
+    padding:6px;
+  }
+  .article-reading-page .piece-media-plate img{
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:180px;
+    margin-inline:auto;
+    object-fit:contain;
+  }
+  .article-reading-page .piece-media-plate figcaption{
+    margin-top:6px;
+    padding-top:4px;
+  }
+  .article-reading-page .piece-record-rail{
+    margin-top:10px;
+    padding-top:6px;
+    gap:.24rem .54rem;
+  }
+}
+
 html[data-theme="light"] .essays-front::after,
 html[data-theme="light"] .section-front::after{
   background:linear-gradient(90deg, rgba(107,84,60,.04), transparent 18%, transparent 82%, rgba(107,84,60,.04));

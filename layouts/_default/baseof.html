@@ -47,6 +47,9 @@
   </head>
   {{- $bodyClasses := slice -}}
   {{- if .IsPage -}}
+    {{- if in (slice "essays" "syd-and-oliver" "reports" "working-papers") .Section -}}
+      {{- $bodyClasses = $bodyClasses | append "article-reading-page" -}}
+    {{- end -}}
     {{- with .Section -}}
       {{- $bodyClasses = $bodyClasses | append (printf "section-%s" .) -}}
     {{- end -}}
