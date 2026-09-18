@@ -1,4 +1,4 @@
-current: nine-driveways-sunrise
+current: life-is-a-controlled-fall
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -1021,5 +1021,14 @@ cartoons:
     image: "editorial/nine-driveways-sunrise"
     essay: "/essays/nine-driveways/"
     alt: "From the top of a steep neighborhood hill, nine driveways descend past a blue mailbox toward a sunlit valley at sunrise."
+    width: 1672
+    height: 941
+  - slug: life-is-a-controlled-fall
+    title: "Life Is a Controlled Fall"
+    date: "2026-09-18"
+    publishDate: "2026-09-18T12:55:50-04:00"
+    image: "editorial/life-is-a-controlled-fall"
+    essay: "/essays/life-is-a-controlled-fall/"
+    alt: "A person reaches for a golden foothold as a mountain path curls above a misty valley, painted in deep blue-violet shadow and luminous morning light."
     width: 1672
     height: 941
